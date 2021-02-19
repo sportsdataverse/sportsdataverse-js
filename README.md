@@ -169,6 +169,7 @@ const result = await sdv.cbbRecruiting.getSchoolCommits('floridastate', 2020);
 ## Women's College Basketball
 
 <details><summary> Examples </summary>
+
 ### WBB Games
 
 ```js
