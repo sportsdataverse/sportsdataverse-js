@@ -1,0 +1,76 @@
+{
+  "name": "sportsdataverse",
+  "version": "1.0.0",
+  "description": "Retrieves sports data from a popular sports website as well as from the ncaa website, with support for men's and women's college basketball, NBA, and WNBA.",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chai": "^4.3.0",
+    "cheerio": "^1.0.0-rc.5"
+  },
+  "devDependencies": {
+    "mocha": "^8.3.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saiemgilani/sportsdataverse.git"
+  },
+  "keywords": [
+    "sports",
+    "basketball",
+    "cbb",
+    "mbb",
+    "hoops",
+    "college",
+    "basketball",
+    "womens",
+    "basketball",
+    "mens",
+    "basketball",
+    "ncaa-w",
+    "basketball",
+    "women",
+    "soccer-men",
+    "soccer-women",
+    "field",
+    "hockey",
+    "volleyball",
+    "women",
+    "ice",
+    "hockey",
+    "men",
+    "ice",
+    "hockey",
+    "woemen",
+    "baseball",
+    "beach",
+    "volleyball",
+    "lacrosse",
+    "men",
+    "lacrosse",
+    "women",
+    "volleyball",
+    "men",
+    "statistics",
+    "football",
+    "college football",
+    "cfb",
+    "nfl",
+    "ncaa",
+    "ncaaf",
+    "ncaam"
+  ],
+  "author": "Saiem Gilani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saiemgilani/sportsdataverse/issues"
+  },
+  "homepage": "https://github.com/saiemgilani/sportsdataverse#readme"
+}
