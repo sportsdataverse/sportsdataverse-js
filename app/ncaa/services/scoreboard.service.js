@@ -11,13 +11,8 @@ exports.getNcaaScoreboard = async ({
     month = null,
     day = null
 }) => {
-    const baseUrl = `https://data.ncaa.com/casablanca/scoreboard/${sport}/${division}/`;
-    const params = {
-        dates: year+"/"+month+"/"+day
-    };
+    const baseUrl = `https://data.ncaa.com/casablanca/scoreboard/${sport}/${division}/${year}/${month}/${day}/scoreboard.json`;
 
-    const res = await axios.get(baseUrl, {
-        params
-    });
+    const res = await axios.get(baseUrl);
     return res.data;
 }
