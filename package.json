@@ -1,6 +1,6 @@
 {
   "name": "sportsdataverse",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Retrieves sports data from a popular sports website as well as from the ncaa website, with support for men's and women's college basketball, NBA, WNBA, NFL and CFB.",
   "main": "server.js",
   "directories": {
