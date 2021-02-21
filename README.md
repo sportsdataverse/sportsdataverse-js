@@ -11,6 +11,7 @@ Support for the following data from ESPN's endpoints and recruiting data from 24
 Recruiting data from 247Sports available for:
 
 - men's college basketball
+- college football
 
 The following sports are available from ESPN:
 
@@ -270,13 +271,9 @@ const result = await sdv.wbbStandings.getStandings(inputs);
 //  'lacrosse-men', 'lacrosse-women']
 // get ncaa scoreboard data for sport from above list
 // (default: 'basketball-men')
-const result = await sdv.ncaaScoreboard.getNcaaScoreboard({
-    sport = 'basketball-men',
-    division = 'd1', // 'fbs' for football
-    year = 2020,
-    month = null,
-    day = null
-})
+const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
+    sport = 'basketball-men', division = 'd1', year = 2020, month = 02, day = 15
+)
 ```
 
 ### NCAA Games
@@ -291,11 +288,11 @@ const result = await sdv.ncaaGame.getNcaaBoxScore(5764053);
 // NCAA play-by-play for a given game id
 const result = await sdv.ncaaGame.getNcaaPlayByPlay(5764053);
 
-// NCAA game team stats for a given game
-const result = await sdv.ncaaGame.getNcaaTeamStats(5764053);
+// NCAA game team stats for a given game (appears to only exist for football)
+const result = await sdv.ncaaGame.getNcaaTeamStats(5772253);
 
-// NCAA game scoring summary for a given game
-const result = await sdv.ncaaGame.getNcaaScoringSummary(5764053);
+// NCAA game scoring summary for a given game (appears to only exist for football)
+const result = await sdv.ncaaGame.getNcaaScoringSummary(5772253);
 ```
 
 </details>
