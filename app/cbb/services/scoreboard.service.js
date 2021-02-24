@@ -9,7 +9,7 @@ exports.getScoreboard = async ({
     limit = 1000}) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard';
     const params = {
-        dates: year+""+month+""+day,
+        dates: year+""+month.padStart(2,'0')+""+day.padStart(2,'0'),
         groups: group,
         seasontype: seasontype||2,
         limit

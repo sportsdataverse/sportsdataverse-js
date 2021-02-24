@@ -9,7 +9,7 @@ const getSchedule = async ({
 }) => {
     const baseUrl = 'http://cdn.espn.com/core/nba/schedule';
     const params = {
-        dates: year+""+month+""+day,
+        dates: year+""+month.padStart(2,'0')+""+day.padStart(2,'0'),
         groups: groups,
         seasontype: seasontype,
         xhr: 1
