@@ -4,14 +4,14 @@ exports.getScoreboard = async ({
     year = null,
     month = null,
     day = null,
-    group = 50,
+    groups = 80,
     seasontype = 2,
     limit = 300
 }) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard';
     const params = {
         dates: year+""+month+""+day,
-        group: group,
+        groups: groups,
         seasontype,
         limit
     };

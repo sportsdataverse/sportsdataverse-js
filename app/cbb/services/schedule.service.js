@@ -10,7 +10,7 @@ const getSchedule = async ({
     const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/schedule';
     const params = {
         dates: year+""+month+""+day,
-        group: group,
+        groups: group,
         seasontype: seasontype,
         xhr: 1
     };
