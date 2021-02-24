@@ -11,7 +11,7 @@ exports.getScoreboard = async ({
     const params = {
         dates: year+""+month+""+day,
         group: group,
-        seasontype,
+        seasontype: seasontype||2,
         limit
     };
 
