@@ -87,7 +87,7 @@ const result = await sdv.cbbScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    group: 50, // all Div-I games
+    groups: 50, // all Div-I games
     year: 2020,
     month: 12,
     day: 02
@@ -201,7 +201,7 @@ const result = await sdv.wbbScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    group: 50, // all Div-I games
+    groups: 50, // all Div-I games
     year: 2020,
     month: 12,
     day: 02
@@ -335,7 +335,7 @@ const result = await sdv.nbaScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    group: 46, // nba group code
+    groups: 46, // nba group code
     year: 2020,
     month: 12,
     day: 02
@@ -411,7 +411,7 @@ const result = await sdv.wnbaScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    group: 59, // wnba group code
+    groups: 59, // wnba group code
     year: 2020,
     month: 12,
     day: 02
@@ -491,7 +491,7 @@ const result = await sdv.nflScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    group: 20, // nfl group code
+    groups: 20, // nfl group code
     year: 2021,
     month: 02,
     day: 07
@@ -529,6 +529,124 @@ const inputs = {
 };
 
 const result = await sdv.nflStandings.getStandings(inputs);
+```
+
+</details>
+
+## College Football
+
+<details><summary> Examples </summary>
+
+### CFB Games
+
+```js
+const gameId = 401256194;
+
+// get detailed play-by-play data for a game
+const result = await sdv.cfbGames.getPlayByPlay(gameId);
+
+// get box score
+const result = await sdv.cfbGames.getBoxScore(gameId);
+
+// get game all game data
+const summary = await sdv.cfbGames.getSummary(gameId);
+
+// get all game pickcenter data
+const picks = await sdv.cfbGames.getPicks(gameId);
+
+```
+
+### CFB Scores
+
+```js
+const inputs = {
+    year: 2021,
+    month: 12,
+    day: 15
+};
+const result = await sdv.cfbScoreboard.getScoreboard(inputs);
+```
+
+### CFB Schedules
+
+```js
+const inputs = {
+    groups: 80, // all Div-I games
+    year: 2020,
+    month: 12,
+    day: 02
+};
+
+const result = await sdv.cfbSchedule.getSchedule(inputs);
+```
+
+### CFB Conferences
+
+```js
+const results = await sdv.cfbScoreboard.getConferences();
+```
+
+## CFB Teams
+
+```js
+// get list of teams
+const result = await sdv.cfbTeams.getTeamList();
+
+// get individual team data
+const teamId = 52;
+const result = await sdv.cfbTeams.getTeamInfo(teamId);
+
+// get team roster data
+const result = await sdv.cfbTeams.getTeamPlayers(teamId);
+```
+
+## CFB Rankings
+
+```js
+// get rankings
+const inputs = {
+    year: 2020,
+    week: 12
+};
+
+const result = await sdv.cfbRankings.getRankings(inputs);
+```
+
+## CFB Standings
+
+```js
+// get standings
+const inputs = {
+    year: 2020
+};
+
+const result = await sdv.cfbStandings.getStandings(inputs);
+```
+
+## CFB Recruiting
+
+```js
+// get recruiting data from 247Composite
+// get player rankings
+const result = await sdv.cfbRecruiting.getPlayerRankings({
+                    year: 2016
+                });
+
+const result = await sdv.cfbRecruiting.getPlayerRankings({
+                    year: 2021,
+                    position: "DT"
+                });
+
+const result = await sdv.cfbRecruiting.getPlayerRankings({
+                    year: 2020,
+                    group: "JuniorCollege"
+                });
+
+// get school rankings
+const result = await sdv.cfbRecruiting.getSchoolRankings(2021);
+
+// get a school's commit list
+const result = await sdv.cfbRecruiting.getSchoolCommits('floridastate', 2020);
 ```
 
 </details>

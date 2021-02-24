@@ -4,14 +4,14 @@ exports.getScoreboard = async ({
     year = null,
     month = null,
     day = null,
-    group = 46,
+    groups = 46,
     seasontype = 2,
     limit = 300
 }) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
     const params = {
         dates: year+""+month+""+day,
-        group: group,
+        groups: groups,
         seasontype,
         limit
     };
