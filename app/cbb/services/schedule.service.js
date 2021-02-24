@@ -7,9 +7,8 @@ const getSchedule = async ({
     group = 50,
     seasontype = 2
 }) => {
-    const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/schedule';
+    const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + month : month}${parseInt(day) <= 9 ? "0" + day : day}`;
     const params = {
-        dates: year+""+month.padStart(2,'0')+""+day.padStart(2,'0'),
         groups: group,
         seasontype: seasontype,
         xhr: 1

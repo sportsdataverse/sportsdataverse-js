@@ -8,9 +8,8 @@ exports.getScoreboard = async ({
     seasontype = 2,
     limit = 300
 }) => {
-    const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard';
+    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + month : month}${parseInt(day) <= 9 ? "0" + day : day}`;
     const params = {
-        dates: year+""+month.padStart(2,'0')+""+day.padStart(2,'0'),
         groups: group,
         seasontype,
         limit

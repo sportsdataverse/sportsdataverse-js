@@ -7,9 +7,8 @@ exports.getScoreboard = async ({
     groups = 59,
     seasontype = 2,
     limit = 300}) => {
-    const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard';
+    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + month : month}${parseInt(day) <= 9 ? "0" + day : day}`;
     const params = {
-        dates: year+""+month.padStart(2,'0')+""+day.padStart(2,'0'),
         groups,
         seasontype,
         limit
