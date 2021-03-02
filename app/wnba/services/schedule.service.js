@@ -3,15 +3,14 @@ const axios = require('axios');
 const getSchedule = async ({
     year = null,
     month = null,
-    day = null,
-    groups = 59,
-    seasontype = 2
+    day = null
 }) => {
     const baseUrl = `http://cdn.espn.com/core/wnba/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + month : month}${parseInt(day) <= 9 ? "0" + day : day}`;
     const params = {
-        groups: groups,
-        seasontype: seasontype,
-        xhr: 1
+        xhr: 1,
+        render: false,
+        device: 'desktop',
+        userab: 18
     };
 
     const res = await axios.get(baseUrl, {

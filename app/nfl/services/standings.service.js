@@ -1,8 +1,9 @@
 const axios = require('axios');
 
 exports.getStandings = async ({
+// acceptable group names: ['league','conference','division']
     year = new Date().getFullYear(),
-    group = 20
+    group = 'league'
 }) => {
     const baseUrl = `http://cdn.espn.com/core/nfl/standings/_/season/${year}/group/${group}`;
 

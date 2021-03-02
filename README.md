@@ -10,7 +10,7 @@ Support for the following data from ESPN's endpoints and recruiting data from 24
 - scores
 - schedule
 - standings
-- rankings (not available for WNBA/NBA)
+- rankings (not available for professional sports)
 
 Recruiting data from 247Sports available for:
 
@@ -21,8 +21,11 @@ The following sports are available from ESPN:
 
 - College Basketball
 - Women's College Basketball
+- College Football
 - WNBA
 - NBA
+- NFL
+- NHL
 - All team sports on the NCAA website:
   - 'football'
   - 'basketball-men'
@@ -339,7 +342,6 @@ const result = await sdv.nbaScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    groups: 46, // nba group code
     year: 2020,
     month: 12,
     day: 02
@@ -373,7 +375,8 @@ const result = await sdv.nbaTeams.getTeamPlayers(teamId);
 ```js
 // get standings
 const inputs = {
-    year: 2020
+    year: 2020,
+    group: 'league'
 };
 
 const result = await sdv.nbaStandings.getStandings(inputs);
@@ -415,19 +418,12 @@ const result = await sdv.wnbaScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    groups: 59, // wnba group code
     year: 2020,
     month: 12,
     day: 02
 };
 
 const result = await sdv.wnbaSchedule.getSchedule(inputs);
-```
-
-### WNBA Conferences
-
-```js
-const results = await sdv.wnbaScoreboard.getConferences();
 ```
 
 ### WNBA Teams
@@ -449,7 +445,8 @@ const result = await sdv.wnbaTeams.getTeamPlayers(teamId);
 ```js
 // get standings
 const inputs = {
-    year: 2020
+    year: 2020,
+    group: 'league'
 };
 
 const result = await sdv.wnbaStandings.getStandings(inputs);
@@ -495,19 +492,12 @@ const result = await sdv.nflScoreboard.getScoreboard(inputs);
 
 ```js
 const inputs = {
-    groups: 20, // nfl group code
     year: 2021,
     month: 02,
     day: 07
 };
 
 const result = await sdv.nflSchedule.getSchedule(inputs);
-```
-
-### NFL Conferences
-
-```js
-const results = await sdv.nflScoreboard.getConferences();
 ```
 
 ### NFL Teams
@@ -528,8 +518,10 @@ const result = await sdv.nflTeams.getTeamPlayers(teamId);
 
 ```js
 // get standings
+// acceptable group names: ['league','conference','division']
 const inputs = {
-    year: 2020
+    year: 2020,
+    group: 'league'
 };
 
 const result = await sdv.nflStandings.getStandings(inputs);
@@ -564,6 +556,7 @@ const picks = await sdv.cfbGames.getPicks(gameId);
 
 ```js
 const inputs = {
+    groups: 80,  //FBS Group Code, 81 for FCS
     year: 2021,
     month: 12,
     day: 15
@@ -651,6 +644,79 @@ const result = await sdv.cfbRecruiting.getSchoolRankings(2021);
 
 // get a school's commit list
 const result = await sdv.cfbRecruiting.getSchoolCommits('floridastate', 2020);
+```
+
+</details>
+
+## NHL
+
+<details><summary> Examples </summary>
+
+### NHL Games
+
+```js
+const gameId = 401272446;
+
+// get detailed play-by-play data for a game
+const result = await sdv.nhlGames.getPlayByPlay(gameId);
+
+// get box score
+const box = await sdv.nhlGames.getBoxScore(gameId);
+
+// get all game data
+const summary = await sdv.nhlGames.getSummary(gameId);
+
+// get all game pickcenter data
+const picks = await sdv.nhlGames.getPicks(gameId);
+
+```
+
+### NHL Scores
+
+```js
+const inputs = {
+    year: 2021,
+    month: 02,
+    day: 15
+};
+const result = await sdv.nhlScoreboard.getScoreboard(inputs);
+```
+
+### NHL Schedules
+
+```js
+const inputs = {
+    year: 2021,
+    month: 02,
+    day: 15
+};
+
+const result = await sdv.nhlSchedule.getSchedule(inputs);
+```
+
+### NHL Teams
+
+```js
+// get list of teams
+const result = await sdv.nhlTeams.getTeamList();
+
+// get individual team data
+const teamId = 16;
+const result = await sdv.nhlTeams.getTeamInfo(teamId);
+
+// get team roster data
+const result = await sdv.nhlTeams.getTeamPlayers(teamId);
+```
+
+### NHL Standings
+
+```js
+// get standings
+const inputs = {
+    year: 2020
+};
+
+const result = await sdv.nhlStandings.getStandings(inputs);
 ```
 
 </details>

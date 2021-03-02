@@ -660,3 +660,124 @@ describe('WNBA Standings', () => {
             });
     });
 });
+
+
+describe('NHL Games', () => {
+
+    var gameId = 401272446;
+
+    it('should populate play by play data for the given game id', function() {
+        app.nhlGames.getPlayByPlay(gameId).then((data) => {
+            data.should.exist;
+            data.should.be.json;
+            data.should.not.be.empty;
+        });
+    });
+
+    it('should return a promise for play by play data for the given game id', function() {
+        app.nhlGames.getPlayByPlay(gameId)
+            .then((data) => {
+                data.should.exist;
+                data.should.be.json;
+                data.should.not.be.empty;
+            });
+    });
+
+    it('should populate box score data for the given game id', function() {
+        app.nhlGames.getBoxScore(gameId).then((data) => {
+            data.should.exist;
+            data.should.be.json;
+            data.id.should.exist;
+            data.should.not.be.empty;
+        });
+    });
+
+    it('should return a promise for box score data for the given game id', function() {
+        app.nhlGames.getBoxScore(gameId)
+            .then((data) => {
+                data.should.exist;
+                data.should.be.json;
+                data.should.not.be.empty;
+                data.id.should.exist;
+            });
+    });
+
+    it('should return a promise for game summary data for the given game id', function() {
+        app.nhlGames.getSummary(gameId)
+            .then((data) => {
+                data.should.exist;
+                data.should.be.json;
+                data.should.not.be.empty;
+            });
+    });
+});
+
+
+describe('NHL Scoreboard', () => {
+
+    it('should populate scoreboard data for the current week and year', function() {
+        app.nhlScoreboard.getScoreboard({}).then((data) => {
+            data.should.exist;
+            data.should.be.json;
+            data.should.not.be.empty;
+        });
+    });
+
+    it('should populate scoreboard data for the given week and year', function() {
+        app.nhlScoreboard.getScoreboard({
+            year: 2021,
+            month: 02,
+            day: 15
+        }).then((data) => {
+            data.should.exist;
+            data.should.be.json;
+            data.should.not.be.empty;
+        });
+    });
+
+    it('should return a promise for scoreboard data for the current week and year', function() {
+        app.nhlScoreboard.getScoreboard({})
+            .then((data) => {
+                data.should.exist;
+                data.should.be.json;
+                data.should.not.be.empty;
+            });
+    });
+
+    it('should return a promise for scoreboard data for the given week and year', function() {
+        app.nhlScoreboard.getScoreboard({
+                year: 2021,
+                month: 02,
+                day: 15
+            })
+            .then((data) => {
+                data.should.exist;
+                data.should.be.json;
+                data.should.not.be.empty;
+            });
+    });
+});
+
+describe('NHL Standings', () => {
+
+    it('should populate standings for the given year', function() {
+        app.nhlStandings.getStandings({
+            year: 2020
+        }).then((data) => {
+            data.should.exist;
+            data.should.be.json;
+            data.should.not.be.empty;
+        });
+    });
+
+    it('should return a promise for standings for the given year', function() {
+        app.nhlStandings.getStandings({
+                year: 2020
+            })
+            .then((data) => {
+                data.should.exist;
+                data.should.be.json;
+                data.should.not.be.empty;
+            });
+    });
+});

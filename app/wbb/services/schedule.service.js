@@ -11,7 +11,10 @@ const getSchedule = async ({
     const params = {
         groups: groups,
         seasontype: seasontype,
-        xhr: 1
+        xhr: 1,
+        render: false,
+        device: 'desktop',
+        userab: 18
     };
 
     const res = await axios.get(baseUrl, {
