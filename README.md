@@ -1,5 +1,9 @@
 # sportsdataverse
 
+[![npm](https://img.shields.io/npm/v/sportsdataverse?style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)  [![npm](https://img.shields.io/npm/dm/sportsdataverse?style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse) <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/sportsdataverse?style=for-the-badge">
+
+<a href='https://www.npmjs.com/package/sportsdataverse'>[![NPM](https://nodei.co/npm/sportsdataverse.png)](https://npmjs.org/package/sportsdataverse)</a>
+
 Support for the following data from ESPN's endpoints and recruiting data from 247Sports:
 
 - play-by-play (including shot location data when available)
@@ -280,19 +284,19 @@ const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
 
 ```js
 // NCAA game information for a given game id
-const result = await sdv.ncaaGame.getNcaaInfo(5764053);
+const result = await sdv.ncaaGames.getNcaaInfo(5764053);
 
 // NCAA box score for a given game id
-const result = await sdv.ncaaGame.getNcaaBoxScore(5764053);
+const result = await sdv.ncaaGames.getNcaaBoxScore(5764053);
 
 // NCAA play-by-play for a given game id
-const result = await sdv.ncaaGame.getNcaaPlayByPlay(5764053);
+const result = await sdv.ncaaGames.getNcaaPlayByPlay(5764053);
 
 // NCAA game team stats for a given game (appears to only exist for football)
-const result = await sdv.ncaaGame.getNcaaTeamStats(5772253);
+const result = await sdv.ncaaGames.getNcaaTeamStats(5772253);
 
 // NCAA game scoring summary for a given game (appears to only exist for football)
-const result = await sdv.ncaaGame.getNcaaScoringSummary(5772253);
+const result = await sdv.ncaaGames.getNcaaScoringSummary(5772253);
 ```
 
 </details>
