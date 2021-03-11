@@ -2,9 +2,9 @@ const axios = require('axios');
 
 exports.getNcaaRedirectUrl = async (url) => {
     const baseUrl = url;
-    const res = await axios.get(baseUrl);
+    const response = await axios.get(baseUrl);
 
-    return request.res.responseUrl;
+    return response.request.res.responseUrl;
 }
 
 exports.getNcaaInfo = async (game) => {
