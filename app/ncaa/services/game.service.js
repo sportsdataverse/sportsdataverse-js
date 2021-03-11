@@ -1,5 +1,12 @@
 const axios = require('axios');
 
+exports.getNcaaRedirectUrl = async (url) => {
+    const baseUrl = url;
+    const res = await axios.get(baseUrl);
+
+    return request.res.responseUrl;
+}
+
 exports.getNcaaInfo = async (game) => {
     const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/gameInfo.json`;
     const res = await axios.get(baseUrl);
