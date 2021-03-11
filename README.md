@@ -285,6 +285,8 @@ const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
 
 ### NCAA Games
 
+**update v1.0.17: can now use game url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard to capture redirected url for games older than the past two years with ease**
+
 ```js
 // NCAA game information for a given game id
 const result = await sdv.ncaaGames.getNcaaInfo(5764053);
