@@ -3,13 +3,13 @@ const axios = require('axios');
 exports.getNcaaRedirectUrl = async (url) => {
     const baseUrl = `https://ncaa.com/${url}`;
     const response = await axios.get(baseUrl);
-
-    return response.request.res.responseUrl;
+    const url = response.request.res.responseUrl;
+    return parseInt(url.match(/.*\/(.*)\/(.*)$/)[2])
 };
 
 exports.getNcaaInfo = async ({game = null, gameUrl = null}) => {
     if(gameUrl !== null){
-        const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
+        const gameId = await getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/gameInfo.json`;
         const res = await axios.get(baseUrl);
         return res.data
@@ -23,7 +23,7 @@ exports.getNcaaInfo = async ({game = null, gameUrl = null}) => {
 
 exports.getNcaaBoxScore = async ({game = null, gameUrl = null}) => {
     if(gameUrl !== null){
-        const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
+        const gameId = await getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/boxscore.json`;
         const res = await axios.get(baseUrl);
         return res.data
