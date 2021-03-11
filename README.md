@@ -310,9 +310,9 @@ const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
 )
 const urlGame = result["games"][16]["game"]["url"]
 
-const gameId = await getNcaaRedirectUrl(urlGame);
+const gameId = await sdv.ncaaGames.getNcaaRedirectUrl(urlGame);
 console.log(gameId);
-const res = await getNcaaBoxScore(game=gameId);
+const res = await sdv.ncaaGames.getNcaaBoxScore(game=gameId);
 
 ```
 
