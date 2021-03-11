@@ -1,5 +1,15 @@
 const axios = require('axios');
-
+/**
+ * Gets the NFL scoreboard data for a specified date if available.
+ * @param {*} year - Year (YYYY)
+ * @param {*} month - Month (MM)
+ * @param {*} day - Day (DD)
+ * @param {number} limit - Limit on the number of results @default 300
+ * @example
+ * const result = await sdv.nflScoreboard.getScoreboard(
+ * year = 2019, month = 11, day = 17
+ * )
+ */
 exports.getScoreboard = async ({
     year = null,
     month = null,

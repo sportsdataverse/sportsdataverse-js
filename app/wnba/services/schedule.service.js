@@ -1,5 +1,14 @@
 const axios = require('axios');
-
+/**
+ * Gets the WNBA schedule data for a specified date if available.
+ * @param {*} year - Year (YYYY)
+ * @param {*} month - Month (MM)
+ * @param {*} day - Day (DD)
+ * @example
+ * const result = await sdv.wnbaSchedule.getSchedule(
+ * year = 2019, month = 07, day = 15
+ * )
+ */
 const getSchedule = async ({
     year = null,
     month = null,

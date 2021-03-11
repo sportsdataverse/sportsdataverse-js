@@ -1,5 +1,10 @@
 const axios = require('axios');
-
+/**
+ * Gets the list of all NHL teams their identification info for ESPN.
+ * @example
+ * get list of teams
+ * const result = await sdv.nhlTeams.getTeamList();
+ */
 const getTeamList = async ({
 }) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams';
@@ -13,14 +18,28 @@ const getTeamList = async ({
 
     return res.data;
 }
-
+/**
+ * Gets the team info for a specific NHL team.
+ * @param {number} id - Team Id
+ * @example
+ * get individual team data
+ * const teamId = 16;
+ * const result = await sdv.nhlTeams.getTeamInfo(teamId);
+ */
 const getTeamInfo = async (id) => {
     const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/${id}`;
 
     const res = await axios.get(baseUrl);
     return res.data;
 }
-
+/**
+ * Gets the team roster information for a specific NHL team.
+ * @param {number} id - Team Id
+ * @example
+ * get team roster data
+ * const teamId = 16;
+ * const result = await sdv.nhlTeams.getTeamPlayers(teamId);
+ */
 const getTeamPlayers = async (id) => {
     const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/${id}`;
     const params = {

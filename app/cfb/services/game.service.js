@@ -1,5 +1,10 @@
 const axios = require('axios');
-
+/**
+ * Gets the College Football game play-by-play data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cfbGames.getPlayByPlay(401256194);
+ */
 exports.getPlayByPlay = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/college-football/playbyplay';
     const params = {
@@ -25,7 +30,12 @@ exports.getPlayByPlay = async (id) => {
         standings: res.data.gamepackageJSON.standings
     };
 };
-
+/**
+ * Gets the College Football game box score data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cfbGames.getBoxScore(401256194);
+ */
 exports.getBoxScore = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/college-football/boxscore';
     const params = {
@@ -45,7 +55,12 @@ exports.getBoxScore = async (id) => {
 
     return game;
 };
-
+/**
+ * Gets the College Football game summary data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cfbGames.getSummary(401256194);
+ */
 exports.getSummary = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
     const params = {
@@ -73,7 +88,12 @@ exports.getSummary = async (id) => {
         standings: res.data.standings
     };
 };
-
+/**
+ * Gets the College Football PickCenter data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cfbGames.getPicks(401256194);
+ */
 exports.getPicks = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
     const params = {

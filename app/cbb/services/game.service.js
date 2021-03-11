@@ -1,5 +1,10 @@
 const axios = require('axios');
-
+/**
+ * Gets the Men's College Basketball game play-by-play data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cbbGames.getPlayByPlay(401260281);
+ */
 exports.getPlayByPlay = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/playbyplay';
     const params = {
@@ -22,7 +27,12 @@ exports.getPlayByPlay = async (id) => {
         boxScore: res.data.gamepackageJSON.boxscore
     };
 };
-
+/**
+ * Gets the Men's College Basketball game box score data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cbbGames.getBoxScore(401260281);
+ */
 exports.getBoxScore = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/boxscore';
     const params = {
@@ -42,7 +52,12 @@ exports.getBoxScore = async (id) => {
 
     return game;
 };
-
+/**
+ * Gets the Men's College Basketball game summary data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cbbGames.getSummary(401260281);
+ */
 exports.getSummary = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
     const params = {
@@ -63,7 +78,12 @@ exports.getSummary = async (id) => {
         standings: res.data.standings
     };
 };
-
+/**
+ * Gets the Men's College Basketball game PickCenter data for a specified game.
+ * @param {number} id - Game id.
+ * @example
+ * const result = await sdv.cbbGames.getPicks(401260281);
+ */
 exports.getPicks = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
     const params = {

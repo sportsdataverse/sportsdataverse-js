@@ -1,5 +1,14 @@
 const axios = require('axios');
-
+/**
+ * Gets the NFL schedule data for a specified date if available.
+ * @param {*} year - Year (YYYY)
+ * @param {*} month - Month (MM)
+ * @param {*} day - Day (DD)
+ * @example
+ * const result = await sdv.nflSchedule.getSchedule(
+ * year = 2019, month = 11, day = 17
+ * )
+ */
 const getSchedule = async ({
     year = null,
     month = null,
