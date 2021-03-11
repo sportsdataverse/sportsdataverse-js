@@ -285,8 +285,6 @@ const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
 
 ### NCAA Games
 
-**update v1.0.17: can now use game url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard to capture redirected url for games older than the past two years with ease**
-
 ```js
 // NCAA game information for a given game id
 const result = await sdv.ncaaGames.getNcaaInfo(5764053);
@@ -302,6 +300,19 @@ const result = await sdv.ncaaGames.getNcaaTeamStats(5772253);
 
 // NCAA game scoring summary for a given game (appears to only exist for football)
 const result = await sdv.ncaaGames.getNcaaScoringSummary(5772253);
+```
+
+**update v1.0.17: can now use game url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard to capture redirected url for games older than the past two years with ease**
+
+```js
+const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
+    sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
+)
+
+const urlGame = result["games"][16]["game"][16]
+
+const second = await sdv.ncaaGames.getNcaaBoxScore(game=null, gameUrl = urlGame);
+
 ```
 
 </details>

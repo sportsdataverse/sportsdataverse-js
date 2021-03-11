@@ -7,39 +7,42 @@ exports.getNcaaRedirectUrl = async (url) => {
     return response.request.res.responseUrl;
 };
 
-exports.getNcaaInfo = async ({game, gameUrl = null}) => {
-    if(gameUrl != null){
+exports.getNcaaInfo = async ({game = null, gameUrl = null}) => {
+    if(gameUrl !== null){
         const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/gameInfo.json`;
         const res = await axios.get(baseUrl);
         return res.data
-    }else{
+    }
+    if(game !== null){
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/gameInfo.json`;
         const res = await axios.get(baseUrl);
         return res.data;
     }
 }
 
-exports.getNcaaBoxScore = async ({game, gameUrl = null}) => {
-    if(gameUrl != null){
+exports.getNcaaBoxScore = async ({game = null, gameUrl = null}) => {
+    if(gameUrl !== null){
         const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/boxscore.json`;
         const res = await axios.get(baseUrl);
         return res.data
-    }else{
+    }
+    if(game !== null){
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/boxscore.json`;
         const res = await axios.get(baseUrl);
         return res.data;
     }
 }
 
-exports.getNcaaPlayByPlay = async ({game, gameUrl = null}) => {
-    if(gameUrl != null){
+exports.getNcaaPlayByPlay = async ({game = null, gameUrl = null}) => {
+    if(gameUrl !== null){
         const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/pbp.json`;
         const res = await axios.get(baseUrl);
         return res.data
-    }else{
+    }
+    if(game !== null){
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/pbp.json`;
         const res = await axios.get(baseUrl);
         return res.data;
@@ -47,26 +50,28 @@ exports.getNcaaPlayByPlay = async ({game, gameUrl = null}) => {
 }
 
 
-exports.getNcaaTeamStats = async ({game, gameUrl = null}) => {
-    if(gameUrl != null){
+exports.getNcaaTeamStats = async ({game = null, gameUrl = null}) => {
+    if(gameUrl !== null){
         const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/teamStats.json`;
         const res = await axios.get(baseUrl);
         return res.data
-    }else{
+    }
+    if(game !== null){
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/teamStats.json`;
         const res = await axios.get(baseUrl);
         return res.data;
     }
 }
 
-exports.getNcaaScoringSummary = async ({game, gameUrl = null}) => {
-    if(gameUrl != null){
+exports.getNcaaScoringSummary = async ({game = null, gameUrl = null}) => {
+    if(gameUrl !== null){
         const gameId = await this.getNcaaRedirectUrl(url = gameUrl)
         const baseUrl = `https://data.ncaa.com/casablanca/game/${gameId}/scoringSummary.json`;
         const res = await axios.get(baseUrl);
         return res.data
-    }else{
+    }
+    if(game !== null){
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/scoringSummary.json`;
         const res = await axios.get(baseUrl);
         return res.data;
