@@ -3,8 +3,9 @@ const axios = require('axios');
 exports.getNcaaRedirectUrl = async (url) => {
     const baseUrl = `https://ncaa.com/${url}`;
     const response = await axios.get(baseUrl);
-    const url = response.request.res.responseUrl;
-    return parseInt(url.match(/.*\/(.*)\/(.*)$/)[2])
+    const gameUrl = response.request.res.responseUrl;
+    const gameId = parseInt(gameUrl.match(/.*\/(.*)\/(.*)$/)[2]);
+    return gameId;
 };
 
 exports.getNcaaInfo = async ({game = null, gameUrl = null}) => {
