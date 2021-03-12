@@ -21,6 +21,7 @@ exports.wbbSchedule = require('./wbb/services/schedule.service');
 exports.ncaaGames = require('./ncaa/services/game.service');
 exports.ncaaScoreboard = require('./ncaa/services/scoreboard.service');
 exports.ncaaSports = require('./ncaa/services/sports.service');
+exports.ncaaStats = require('./ncaa/services/statistics.service');
 exports.wnbaGames = require('./wnba/services/game.service');
 exports.wnbaStandings = require('./wnba/services/standings.service');
 exports.wnbaScoreboard = require('./wnba/services/scoreboard.service');
