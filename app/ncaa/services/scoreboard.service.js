@@ -13,6 +13,7 @@ const axios = require('axios');
  * @param {*} year - Year (YYYY)
  * @param {*} month - Month (MM)
  * @param {*} day - Day (DD)
+ * @returns json
  * @example
  * const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
  * sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15

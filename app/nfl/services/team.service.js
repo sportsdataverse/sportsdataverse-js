@@ -21,6 +21,7 @@ const getTeamList = async ({
 /**
  * Gets the team info for a specific NFL team.
  * @param {number} id - Team Id
+ * @returns json
  * @example
  * get individual team data
  * const teamId = 16;
@@ -35,6 +36,7 @@ const getTeamInfo = async (id) => {
 /**
  * Gets the team roster information for a specific NFL team.
  * @param {number} id - Team Id
+ * @returns json
  * @example
  * get team roster data
  * const teamId = 16;

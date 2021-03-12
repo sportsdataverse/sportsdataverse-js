@@ -181,7 +181,7 @@ const result = await sdv.cbbRecruiting.getSchoolCommits('floridastate', 2020);
 ### WBB Games
 
 ```js
-const gameId = 401260281;
+const gameId = 401260565;
 
 // get detailed play-by-play data for a game
 const result = await sdv.wbbGames.getPlayByPlay(gameId);

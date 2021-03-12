@@ -1,6 +1,7 @@
 const axios = require('axios');
 /**
  * Gets the list of all NBA teams their identification info for ESPN.
+ * @returns json
  * @example
  * get list of teams
  * const result = await sdv.nbaTeams.getTeamList();
@@ -21,6 +22,7 @@ const getTeamList = async ({
 /**
  * Gets the team info for a specific NBA team.
  * @param {number} id - Team Id
+ * @returns json
  * @example
  * get individual team data
  * const teamId = 16;
@@ -35,6 +37,7 @@ const getTeamInfo = async (id) => {
 /**
  * Gets the team roster information for a specific NBA team.
  * @param {number} id - Team Id
+ * @returns json
  * @example
  * get team roster data
  * const teamId = 16;

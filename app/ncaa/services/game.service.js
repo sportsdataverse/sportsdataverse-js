@@ -20,6 +20,7 @@ exports.getNcaaRedirectUrl = async (url) => {
 /**
  * Gets the gameInfo data for a specified game.
  * @param {number} game - Game id.
+ * @returns json
  * @example
  * const result = await sdv.ncaaGames.getNcaaInfo(5764053);
  */
@@ -31,6 +32,7 @@ exports.getNcaaInfo = async (game) => {
 /**
  * Gets the box score data for a specified game if available.
  * @param {number} game - Game id.
+ * @returns json
  * @example
  * const result = await sdv.ncaaGames.getNcaaBoxScore(5764053);
  */
@@ -42,6 +44,7 @@ exports.getNcaaBoxScore = async (game) => {
 /**
  * Gets the play-by-play data for a specified game if available.
  * @param {number} game - Game id.
+ * @returns json
  * @example
  * const result = await sdv.ncaaGames.getNcaaPlayByPlay(5764053);
  */
@@ -54,6 +57,7 @@ exports.getNcaaPlayByPlay = async (game) => {
 /**
  * Gets the team stats data for a specified game if available.
  * @param {number} game - Game id.
+ * @returns json
  * @example
  * const result = await sdv.ncaaGames.getNcaaTeamStats(5764053);
  */
@@ -66,6 +70,7 @@ exports.getNcaaTeamStats = async (game) => {
 /**
  * Gets the scoring summary data for a specified game if available.
  * @param {number} game - Game id.
+ * @returns json
  * @example
  * const result = await sdv.ncaaGames.getNcaaScoringSummary(5764053);
  */

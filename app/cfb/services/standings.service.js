@@ -3,6 +3,7 @@ const axios = require('axios');
  * Gets the team standings for College Football.
  * @param {number} year - Season
  * @param {number} group - Group is 80 for FBS, 81 for FCS
+ * @returns json
  * @example
  * get cfb standings
  * const yr = 2016;

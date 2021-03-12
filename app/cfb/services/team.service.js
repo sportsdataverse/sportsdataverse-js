@@ -2,6 +2,7 @@ const axios = require('axios');
 /**
  * Gets the list of all College Football teams their identification info for ESPN.
  * @param {number} group - Group is 80 for FBS, 81 for FCS
+ * @returns json
  * @example
  * get list of teams
  * const result = await sdv.cfbTeams.getTeamList(group=80);
@@ -24,6 +25,7 @@ const getTeamList = async ({
 /**
  * Gets the team info for a specific College Football team.
  * @param {number} id - Team Id
+ * @returns json
  * @example
  * get individual team data
  * const teamId = 52;

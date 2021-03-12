@@ -3,6 +3,7 @@ const axios = require('axios');
  * Gets the team standings for the WNBA.
  * @param {number} year - Season
  * @param {number} group - acceptable group names: 'league','conference','division'
+ * @returns json
  * @example
  * get WNBA standings
  * const yr = 2016;

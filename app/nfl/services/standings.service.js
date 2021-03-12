@@ -3,10 +3,11 @@ const axios = require('axios');
  * Gets the team standings for the NFL.
  * @param {number} year - Season
  * @param {number} group - acceptable group names: 'league','conference','division'
+ * @returns json
  * @example
  * get NFL standings
  * const yr = 2016;
- * const result = await sdv.nbaStandings.getStandings(year = yr);
+ * const result = await sdv.nflStandings.getStandings(year = yr);
  */
 exports.getStandings = async ({
 // acceptable group names: ['league','conference','division']

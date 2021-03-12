@@ -3,6 +3,7 @@ const axios = require('axios');
  * Gets the team standings for the NHL.
  * @param {number} year - Season
  * @param {number} group - acceptable group names: 'league','conference','division'
+ * @returns json
  * @example
  * get NHL standings
  * const yr = 2016;

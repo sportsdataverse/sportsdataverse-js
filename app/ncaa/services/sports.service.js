@@ -21,6 +21,7 @@ const extractSelectList = function ($, array, id) {
 
 /**
  * Retrieves the set of sports and their abbreviations.
+ * @returns json
  * @example
  * const result = sdv.ncaaSports.getSports();
  */
@@ -40,6 +41,7 @@ exports.getSports = async () => {
 /**
  * Retrieves the seasons for the selected sport.
  * @param {string} sport - Sport abbreviation.
+ * @returns json
  * @example
  * const result = sdv.ncaaSports.getSeasons(sport='MBB');
  */
@@ -81,6 +83,7 @@ exports.getSeasons = async (sport) => {
  * Retrieves the Divisions for the selected sport and season.
  * @param {string} sport - Sport abbreviation.
  * @param {string} season - Season for sport
+ * @returns json
  * @example
  * const result = sdv.ncaaSports.getDivisions(sport='MBB', season='2017');
  */
@@ -128,6 +131,9 @@ exports.getDivisions = async (sport, season) => {
  * @param type Individual or Team type of statistics
  * @param gameHigh logical, indicating whether the statistic desired is of the game-high variety
  * @param category Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData
+ * @returns json
+ * @example
+ * const sportDivisionData = sdv.ncaaSports.getSportDivisionData(sport='MFB',season='2016',division=12,type='team',gameHigh=true);
  */
 exports.getSportDivisionData = async(sport, season, division, type, gameHigh) => {
     if (!sport || !season || !division) {

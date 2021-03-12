@@ -1,5 +1,11 @@
 const axios = require('axios');
-
+/**
+ * Gets the NBA game play-by-play data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nbaGames.getPlayByPlay(401283399);
+ */
 exports.getPlayByPlay = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/nba/playbyplay';
     const params = {
@@ -24,7 +30,13 @@ exports.getPlayByPlay = async (id) => {
         standings: res.data.gamepackageJSON.standings
     };
 };
-
+/**
+ * Gets the NBA game box score data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nbaGames.getBoxScore(401283399);
+ */
 exports.getBoxScore = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/nba/boxscore';
     const params = {
@@ -44,7 +56,13 @@ exports.getBoxScore = async (id) => {
 
     return game;
 };
-
+/**
+ * Gets the NBA game summary data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nbaGames.getSummary(401283399);
+ */
 exports.getSummary = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
     const params = {
@@ -70,7 +88,13 @@ exports.getSummary = async (id) => {
         standings: res.data.gamepackageJSON.standings
     };
 };
-
+/**
+ * Gets the NBA game PickCenter data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nbaGames.getPicks(401283399);
+ */
 exports.getPicks = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
     const params = {

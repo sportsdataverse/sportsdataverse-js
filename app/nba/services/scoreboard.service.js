@@ -5,6 +5,7 @@ const axios = require('axios');
  * @param {*} month - Month (MM)
  * @param {*} day - Day (DD)
  * @param {number} limit - Limit on the number of results @default 300
+ * @returns json
  * @example
  * const result = await sdv.nbaScoreboard.getScoreboard(
  * year = 2019, month = 11, day = 16

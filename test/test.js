@@ -106,7 +106,7 @@ describe('CBB Scoreboard', () => {
     it('should populate scoreboard data for the given week and year', function() {
         app.cbbScoreboard.getScoreboard({
             year: 2021,
-            month: 02,
+            month: 2,
             day: 15
         }).then((data) => {
             data.should.exist;
@@ -127,7 +127,7 @@ describe('CBB Scoreboard', () => {
     it('should return a promise for scoreboard data for the given week and year', function() {
         app.cbbScoreboard.getScoreboard({
                 year: 2021,
-                month: 02,
+                month: 2,
                 day: 15
             })
             .then((data) => {
@@ -319,7 +319,7 @@ describe('WBB Scoreboard', () => {
     it('should populate scoreboard data for the given week and year', function() {
         app.wbbScoreboard.getScoreboard({
             year: 2021,
-            month: 02,
+            month: 2,
             day: 15
         }).then((data) => {
             data.should.exist;
@@ -339,7 +339,7 @@ describe('WBB Scoreboard', () => {
     it('should return a promise for scoreboard data for the given week and year', function() {
         app.wbbScoreboard.getScoreboard({
                 year: 2021,
-                month: 02,
+                month: 2,
                 day: 15
             })
             .then((data) => {
@@ -418,7 +418,7 @@ describe('NCAA Scoreboard', () => {
             sport: 'basketball-men',
             division: 'd1',
             year: 2021,
-            month: 02,
+            month: 2,
             day: 15
         })
             .then((data) => {
@@ -487,7 +487,7 @@ describe('NBA Scoreboard', () => {
     it('should populate scoreboard data for the given week and year', function() {
         app.nbaScoreboard.getScoreboard({
             year: 2021,
-            month: 02,
+            month: 2,
             day: 15
         }).then((data) => {
             data.should.exist;
@@ -507,7 +507,7 @@ describe('NBA Scoreboard', () => {
     it('should return a promise for scoreboard data for the given week and year', function() {
         app.nbaScoreboard.getScoreboard({
                 year: 2021,
-                month: 02,
+                month: 2,
                 day: 15
             })
             .then((data) => {
@@ -605,7 +605,7 @@ describe('WNBA Scoreboard', () => {
     it('should populate scoreboard data for the given week and year', function() {
         app.wnbaScoreboard.getScoreboard({
             year: 2021,
-            month: 02,
+            month: 2,
             day: 15
         }).then((data) => {
             data.should.exist;
@@ -626,7 +626,7 @@ describe('WNBA Scoreboard', () => {
     it('should return a promise for scoreboard data for the given week and year', function() {
         app.wnbaScoreboard.getScoreboard({
                 year: 2021,
-                month: 02,
+                month: 2,
                 day: 15
             })
             .then((data) => {
@@ -726,7 +726,7 @@ describe('NHL Scoreboard', () => {
     it('should populate scoreboard data for the given week and year', function() {
         app.nhlScoreboard.getScoreboard({
             year: 2021,
-            month: 02,
+            month: 2,
             day: 15
         }).then((data) => {
             data.should.exist;
@@ -747,7 +747,7 @@ describe('NHL Scoreboard', () => {
     it('should return a promise for scoreboard data for the given week and year', function() {
         app.nhlScoreboard.getScoreboard({
                 year: 2021,
-                month: 02,
+                month: 2,
                 day: 15
             })
             .then((data) => {

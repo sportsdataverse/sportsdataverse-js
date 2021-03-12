@@ -4,6 +4,7 @@ const axios = require('axios');
  * @param {*} year - Year (YYYY)
  * @param {*} month - Month (MM)
  * @param {*} day - Day (DD)
+ * @returns json
  * @example
  * const result = await sdv.nbaSchedule.getSchedule(
  * year = 2016, month = 04, day = 15

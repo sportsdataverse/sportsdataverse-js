@@ -6,6 +6,7 @@ const axios = require('axios');
  * @param {*} day - Day (DD)
  * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
  * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+ * @returns json
  * @example
  * const result = await sdv.cbbSchedule.getSchedule(
  * year = 2021, month = 02, day = 15, group=50

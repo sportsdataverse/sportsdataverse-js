@@ -1,6 +1,6 @@
 {
   "name": "sportsdataverse",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Retrieves sports data from a popular sports website as well as from the ncaa website, with support for men's and women's college basketball, NBA, WNBA, NFL, NHL and CFB.",
   "main": "server.js",
   "directories": {
@@ -10,7 +10,7 @@
     "axios": "^0.21.1",
     "chai": "^4.3.0",
     "cheerio": "^1.0.0-rc.5",
-    "decode-html": "2.0.0"
+    "tabletojson": "2.0.4"
   },
   "devDependencies": {
     "mocha": "^8.3.0"

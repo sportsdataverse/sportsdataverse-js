@@ -4,6 +4,7 @@ const axios = require('axios');
  * @param {*} year - Year (YYYY)
  * @param {*} month - Month (MM)
  * @param {*} day - Day (DD)
+ * @returns json
  * @example
  * const result = await sdv.wnbaSchedule.getSchedule(
  * year = 2019, month = 07, day = 15

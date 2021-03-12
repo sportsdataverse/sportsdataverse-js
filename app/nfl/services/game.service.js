@@ -1,5 +1,11 @@
 const axios = require('axios');
-
+/**
+ * Gets the NFL game play-by-play data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nflGames.getPlayByPlay(401220403);
+ */
 exports.getPlayByPlay = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/nfl/playbyplay';
     const params = {
@@ -25,7 +31,13 @@ exports.getPlayByPlay = async (id) => {
         standings: res.data.gamepackageJSON.standings
     };
 };
-
+/**
+ * Gets the NFL game box score data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nflGames.getBoxScore(401220403);
+ */
 exports.getBoxScore = async (id) => {
     const baseUrl = 'http://cdn.espn.com/core/nfl/boxscore';
     const params = {
@@ -45,7 +57,13 @@ exports.getBoxScore = async (id) => {
 
     return game;
 };
-
+/**
+ * Gets the NFL game summary data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nflGames.getSummary(401220403);
+ */
 exports.getSummary = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
     const params = {
@@ -73,7 +91,13 @@ exports.getSummary = async (id) => {
         standings: res.data.standings
     };
 };
-
+/**
+ * Gets the NFL PickCenter data for a specified game.
+ * @param {number} id - Game id.
+ * @returns json
+ * @example
+ * const result = await sdv.nflGames.getPicks(401220403);
+ */
 exports.getPicks = async (id) => {
     const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
     const params = {

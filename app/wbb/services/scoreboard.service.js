@@ -7,6 +7,7 @@ const axios = require('axios');
  * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
  * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
  * @param {number} limit - Limit on the number of results @default 300
+ * @returns json
  * @example
  * const result = await sdv.wbbScoreboard.getScoreboard(
  * year = 2019, month = 02, day = 15, group=50

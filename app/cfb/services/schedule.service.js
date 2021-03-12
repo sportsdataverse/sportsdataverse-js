@@ -6,6 +6,7 @@ const axios = require('axios');
  * @param {*} day - Day (DD)
  * @param {number} group - Group is 80 for FBS, 81 for FCS
  * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+ * @returns json
  * @example
  * const result = await sdv.cfbSchedule.getSchedule(
  * year = 2019, month = 11, day = 16, group=80

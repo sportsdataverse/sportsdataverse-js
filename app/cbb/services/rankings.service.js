@@ -3,6 +3,7 @@ const axios = require('axios');
  * Gets the Men's College Basketball rankings data for a specified year and week if available.
  * @param {*} year - Year (YYYY)
  * @param {*} week - Week
+ * @returns json
  * @example
  * const result = await sdv.cbbRankings.getRankings(
  * year = 2020, week = 15

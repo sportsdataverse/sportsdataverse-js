@@ -3,6 +3,7 @@ const axios = require('axios');
  * Gets the team standings for Women's College Basketball.
  * @param {number} year - Season
  * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
+ * @returns json
  * @example
  * get cbb standings
  * const yr = 2020;

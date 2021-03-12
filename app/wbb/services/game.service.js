@@ -2,6 +2,7 @@ const axios = require('axios');
 /**
  * Gets the Women's College Basketball game play-by-play data for a specified game.
  * @param {number} id - Game id.
+ * @returns json
  * @example
  * const result = await sdv.cbbGames.getPlayByPlay(401260565);
  */
@@ -30,6 +31,7 @@ exports.getPlayByPlay = async (id) => {
 /**
  * Gets the Women's College Basketball game box score data for a specified game.
  * @param {number} id - Game id.
+ * @returns json
  * @example
  * const result = await sdv.wbbGames.getBoxScore(401260565);
  */
@@ -55,6 +57,7 @@ exports.getBoxScore = async (id) => {
 /**
  * Gets the Women's College Basketball game summary data for a specified game.
  * @param {number} id - Game id.
+ * @returns json
  * @example
  * const result = await sdv.wbbGames.getSummary(401260565);
  */
