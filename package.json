@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "chai": "^4.3.0",
     "cheerio": "^1.0.0-rc.5",
+    "decode-html": "2.0.0",
     "tabletojson": "2.0.4"
   },
   "devDependencies": {
