@@ -13,7 +13,7 @@
 
   /* a keyword */
   .kwd {
-    color: #8959a8; }
+    color: #2C3E50; }
 
   /* a comment */
   .com {
@@ -76,7 +76,7 @@
     font-style: italic; }
 
   .typ {
-    color: #404;
+    color: #2C3E50;
     font-weight: bold; }
 
   .lit {
@@ -90,7 +90,7 @@
     font-weight: bold; }
 
   .atn {
-    color: #404; }
+    color: #2C3E50; }
 
   .atv {
     color: #060; } }
