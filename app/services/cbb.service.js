@@ -5,457 +5,490 @@ const cheerio = require('cheerio');
  *
  * @namespace cbb
  */
+module.exports = {
+    /**
+     * Gets the Men's College Basketball game play-by-play data for a specified game.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} id - Game id.
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getPlayByPlay(401260281);
+     */
+    getPlayByPlay: async function (id) {
+        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/playbyplay';
+        const params = {
+            gameId: id,
+            xhr: 1,
+            render: 'false',
+            userab: 18
+        };
 
-
-const cbb = module.exports = {
-    cbb: {
-        /**
-         * Gets the Men's College Basketball game play-by-play data for a specified game.
-         * @memberOf cbb
-         * @param {number} id - Game id.
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getPlayByPlay(401260281);
-         */
-        getPlayByPlay: async (id) => {
-            const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/playbyplay';
-            const params = {
-                gameId: id,
-                xhr: 1,
-                render: 'false',
-                userab: 18
-            };
-
-            const res = await axios.get(baseUrl, {
-                params
-            });
-
-            return {
-                teams: res.data.gamepackageJSON.header.competitions[0].competitors,
-                id: res.data.gamepackageJSON.header.id,
-                plays: res.data.gamepackageJSON.plays,
-                competitions: res.data.gamepackageJSON.header.competitions,
-                season: res.data.gamepackageJSON.header.season,
-                boxScore: res.data.gamepackageJSON.boxscore
-            };
-        },
-        /**
-         * Gets the Men's College Basketball game box score data for a specified game.
-         * @memberOf cbb
-         * @param {number} id - Game id.
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getBoxScore(401260281);
-         */
-        getBoxScore: async (id) => {
-            const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/boxscore';
-            const params = {
-                gameId: id,
-                xhr: 1,
-                render: false,
-                device: 'desktop',
-                userab: 18
-            };
-
-            const res = await axios.get(baseUrl, {
-                params
-            });
-
-            const game = res.data.gamepackageJSON.boxscore;
-            game.id = res.data.gameId;
-
-            return game;
-        },
-        /**
-         * Gets the Men's College Basketball game summary data for a specified game.
-         * @memberOf cbb
-         * @param {number} id - Game id.
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getSummary(401260281);
-         */
-        getSummary: async (id) => {
-            const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
-            const params = {
-                event: id
-            };
-
-            const res = await axios.get(baseUrl, {
-                params
-            });
-
-            return {
-                boxScore: res.data.boxscore,
-                gameInfo: res.data.gameInfo,
-                leaders: res.data.leaders,
-                winProbability: res.data.winprobability,
-                header: res.data.header,
-                plays: res.data.plays,
-                standings: res.data.standings
-            };
-        },
-        /**
-         * Gets the Men's College Basketball game PickCenter data for a specified game.
-         * @memberOf cbb
-         * @param {number} id - Game id.
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getPicks(401260281);
-         */
-        getPicks: async (id) => {
-            const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
-            const params = {
-                event: id
-            };
-
-            const res = await axios.get(baseUrl, {
-                params
-            });
-
-            return {
-                id: parseInt(res.data.header.id),
-                gameInfo: res.data.gameInfo,
-                leaders: res.data.leaders,
-                header: res.data.header,
-                teams: res.data.header.competitions[0].competitors,
-                competitions: res.data.header.competitions,
-                winProbability: res.data.winprobability,
-                pickcenter: res.data.winprobability,
-                againstTheSpread: res.data.againstTheSpread,
-                odds: res.data.odds,
-                season: res.data.header.season,
-                standings: res.data.standings
-            };
-        },
-
-        /**
-         * Gets the Men's College Basketball rankings data for a specified year and week if available.
-         * @memberOf cbb
-         * @param {*} year - Year (YYYY)
-         * @param {*} week - Week
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getRankings(
-         * year = 2020, week = 15
-         * )
-         */
-        getRankings: async ({year = null, week = null}) => {
-            const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/rankings?';
-            const qs = {};
-
-            if (year) {
-                qs.year = year;
-            }
-
-            if (week) {
-                qs.week = week;
-            }
-
-            const res = await axios.get(baseUrl, {
-                params: qs
-            });
-
-            return res.content.data;
-        },
-        /**
-         * Gets the Men's College Basketball Player recruiting data for a specified year, page, position and institution type if available.
-         * @memberOf cbb
-         * @param {*} year - Year (YYYY)
-         * @param {number} page - Page (50 per page)
-         * @param {"HighSchool"|"JuniorCollege"|"PrepSchool"} group - Institution Type
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getPlayerRankings({year: 2016});
-         */
-        getPlayerRankings: async ({
-            year,
-            page = 1,
-            group = "HighSchool",
-            position = null,
-            state = null
-        }) => {
-            const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
-            const params = {
-            InstitutionGroup: group,
-            Page: page,
-            Position: position,
-            State: state
-            };
-            const res = await axios.get(baseUrl, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            },
+        const res = await axios.get(baseUrl, {
             params
-            });
-            let $ = cheerio.load(res.data);
-            let players = [];
-            // Couldn't grab the rank correctly with JQuery so it's manually calculated
-            let rank = 1 + 50 * (page - 1);
-            $('ul.rankings-page__list > li.rankings-page__list-item:not(.rankings-page__list-item--header)').each(function (index) {
+        });
+
+        return {
+            teams: res.data.gamepackageJSON.header.competitions[0].competitors,
+            id: res.data.gamepackageJSON.header.id,
+            plays: res.data.gamepackageJSON.plays,
+            competitions: res.data.gamepackageJSON.header.competitions,
+            season: res.data.gamepackageJSON.header.season,
+            boxScore: res.data.gamepackageJSON.boxscore
+        };
+    },
+    /**
+     * Gets the Men's College Basketball game box score data for a specified game.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} id - Game id.
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getBoxScore(401260281);
+     */
+    getBoxScore: async function (id) {
+        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/boxscore';
+        const params = {
+            gameId: id,
+            xhr: 1,
+            render: false,
+            device: 'desktop',
+            userab: 18
+        };
+
+        const res = await axios.get(baseUrl, {
+            params
+        });
+
+        const game = res.data.gamepackageJSON.boxscore;
+        game.id = res.data.gameId;
+
+        return game;
+    },
+    /**
+     * Gets the Men's College Basketball game summary data for a specified game.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} id - Game id.
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getSummary(401260281);
+     */
+    getSummary: async function (id) {
+        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
+        const params = {
+            event: id
+        };
+
+        const res = await axios.get(baseUrl, {
+            params
+        });
+
+        return {
+            boxScore: res.data.boxscore,
+            gameInfo: res.data.gameInfo,
+            leaders: res.data.leaders,
+            winProbability: res.data.winprobability,
+            header: res.data.header,
+            plays: res.data.plays,
+            standings: res.data.standings
+        };
+    },
+    /**
+     * Gets the Men's College Basketball game PickCenter data for a specified game.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} id - Game id.
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getPicks(401260281);
+     */
+    getPicks: async function (id) {
+        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
+        const params = {
+            event: id
+        };
+
+        const res = await axios.get(baseUrl, {
+            params
+        });
+
+        return {
+            id: parseInt(res.data.header.id),
+            gameInfo: res.data.gameInfo,
+            leaders: res.data.leaders,
+            header: res.data.header,
+            teams: res.data.header.competitions[0].competitors,
+            competitions: res.data.header.competitions,
+            winProbability: res.data.winprobability,
+            pickcenter: res.data.winprobability,
+            againstTheSpread: res.data.againstTheSpread,
+            odds: res.data.odds,
+            season: res.data.header.season,
+            standings: res.data.standings
+        };
+    },
+
+    /**
+     * Gets the Men's College Basketball rankings data for a specified year and week if available.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {*} year - Year (YYYY)
+     * @param {*} week - Week
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getRankings(
+     * year = 2020, week = 15
+     * )
+     */
+    getRankings: async function ({year = null, week = null}) {
+        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/rankings?';
+        const qs = {};
+
+        if (year) {
+            qs.year = year;
+        }
+
+        if (week) {
+            qs.week = week;
+        }
+
+        const res = await axios.get(baseUrl, {
+            params: qs
+        });
+
+        return res.content.data;
+    },
+    /**
+     * Gets the Men's College Basketball Player recruiting data for a specified year, page, position and institution type if available.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {*} year - Year (YYYY)
+     * @param {number} page - Page (50 per page)
+     * @param {"HighSchool"|"JuniorCollege"|"PrepSchool"} group - Institution Type
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getPlayerRankings({year: 2016});
+     */
+    getPlayerRankings: async function({
+        year,
+        page = 1,
+        group = "HighSchool",
+        position = null,
+        state = null
+    }) {
+        const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
+        const params = {
+        InstitutionGroup: group,
+        Page: page,
+        Position: position,
+        State: state
+        };
+        const res = await axios.get(baseUrl, {
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+        },
+        params
+        });
+        let $ = cheerio.load(res.data);
+        let players = [];
+        // Couldn't grab the rank correctly with JQuery so it's manually calculated
+        let rank = 1 + 50 * (page - 1);
+        $('ul.rankings-page__list > li.rankings-page__list-item:not(.rankings-page__list-item--header)').each(function (index) {
+        let html = $(this);
+        let metrics = html.find('.metrics').text().split('/');
+        let player = {
+            ranking: rank,
+            name: html.find('.rankings-page__name-link').text().trim(),
+            highSchool: html.find('span.meta').text().trim(),
+            position: html.find('.position').text().trim(),
+            height: metrics[0],
+            weight: metrics[1],
+            stars: html.find('.rankings-page__star-and-score > .yellow').length,
+            rating: html.find('.score').text().trim().trim(),
+            college: html.find('.img-link > img').attr('title') || 'uncommitted'
+        };
+        players.push(player);
+        rank++;
+        });
+        return players;
+    },
+
+    /**
+     * Gets the Men's College Basketball School recruiting data for a specified year, page, position and institution type if available.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {*} year - Year (YYYY)
+     * @param {number} page - Page (50 per page)
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getSchoolRankings({year: 2016});
+     */
+    getSchoolRankings: async function (year, page = 1) {
+        const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
+        const res = await axios.get(baseUrl, {
+            headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+            },
+            params: {
+            Page: page
+            }
+        });
+        let $ = cheerio.load(res.data);
+        let schools = [];
+        $('.rankings-page__list-item').each(function (index) {
+            let html = $(this);
+            let school = {
+            rank: html.find('.rank-column .primary').text().trim(),
+            school: html.find('.rankings-page__name-link').text().trim(),
+            totalCommits: html.find('.total a').text().trim(),
+            fiveStars: $(html.find('ul.star-commits-list > li > div')[0]).text().replace('5: ', '').trim(),
+            fourStars: $(html.find('ul.star-commits-list > li > div')[1]).text().replace('4: ', '').trim(),
+            threeStars: $(html.find('ul.star-commits-list > li > div')[2]).text().replace('3: ', '').trim(),
+            averageRating: html.find('.avg').text().trim(),
+            points: html.find('.number').text().trim()
+            };
+            schools.push(school);
+        });
+        return schools;
+    },
+    /**
+     * Gets the Men's College Basketball School commitment data for a specified school and year.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {*} year - Year (YYYY)
+     * @param {string} school - School
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getSchoolCommits({school: 'Clemson', year: 2016});
+     */
+    getSchoolCommits: async function(school, year) {
+        const baseUrl = `http://${school}.247sports.com/Season/${year}-Basketball/Commits`;
+        const res = await axios.get(baseUrl, {
+            headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+            }
+        });
+        let $ = cheerio.load(res.data);
+        let players = [];
+        $('.ri-page__list-item').each(function (index) {
             let html = $(this);
             let metrics = html.find('.metrics').text().split('/');
             let player = {
-                ranking: rank,
-                name: html.find('.rankings-page__name-link').text().trim(),
-                highSchool: html.find('span.meta').text().trim(),
-                position: html.find('.position').text().trim(),
-                height: metrics[0],
-                weight: metrics[1],
-                stars: html.find('.rankings-page__star-and-score > .yellow').length,
-                rating: html.find('.score').text().trim().trim(),
-                college: html.find('.img-link > img').attr('title') || 'uncommitted'
+            name: html.find('.ri-page__name-link').text().trim(),
+            highSchool: html.find('span.meta').text().trim(),
+            position: $(html.find('.position')).text().trim(),
+            height: metrics[0],
+            weight: metrics[1],
+            stars: html.find('.ri-page__star-and-score .yellow').length,
+            rating: html.find('span.score').clone().children().remove().end().text().trim(),
+            nationalRank: html.find('.natrank').first().text().trim(),
+            stateRank: html.find('.sttrank').first().text().trim(),
+            positionRank: html.find('.posrank').first().text().trim()
             };
             players.push(player);
-            rank++;
-            });
-            return players;
-        },
+        });
+        // Some empty player objects were being created.  This removes them
+        const result = players.filter(
+            player => player.name !== '' && player.rating !== ''
+        );
+        return result;
+    },
 
-        /**
-         * Gets the Men's College Basketball School recruiting data for a specified year, page, position and institution type if available.
-         * @memberOf cbb
-         * @param {*} year - Year (YYYY)
-         * @param {number} page - Page (50 per page)
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getSchoolRankings({year: 2016});
-         */
-        getSchoolRankings: async (year, page = 1) => {
-            const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
-            const res = await axios.get(baseUrl, {
-                headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-                },
-                params: {
-                Page: page
-                }
-            });
-            let $ = cheerio.load(res.data);
-            let schools = [];
-            $('.rankings-page__list-item').each(function (index) {
-                let html = $(this);
-                let school = {
-                rank: html.find('.rank-column .primary').text().trim(),
-                school: html.find('.rankings-page__name-link').text().trim(),
-                totalCommits: html.find('.total a').text().trim(),
-                fiveStars: $(html.find('ul.star-commits-list > li > div')[0]).text().replace('5: ', '').trim(),
-                fourStars: $(html.find('ul.star-commits-list > li > div')[1]).text().replace('4: ', '').trim(),
-                threeStars: $(html.find('ul.star-commits-list > li > div')[2]).text().replace('3: ', '').trim(),
-                averageRating: html.find('.avg').text().trim(),
-                points: html.find('.number').text().trim()
-                };
-                schools.push(school);
-            });
-            return schools;
-        },
-        /**
-         * Gets the Men's College Basketball School commitment data for a specified school and year.
-         * @memberOf cbb
-         * @param {*} year - Year (YYYY)
-         * @param {string} school - School
-         * @returns json
-         * @example
-         * const result = await sdv.cbbRecruiting.getSchoolCommits({school: 'Clemson', year: 2016});
-         */
-        getSchoolCommits: async (school, year) => {
-            const baseUrl = `http://${school}.247sports.com/Season/${year}-Basketball/Commits`;
-            const res = await axios.get(baseUrl, {
-                headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-                }
-            });
-            let $ = cheerio.load(res.data);
-            let players = [];
-            $('.ri-page__list-item').each(function (index) {
-                let html = $(this);
-                let metrics = html.find('.metrics').text().split('/');
-                let player = {
-                name: html.find('.ri-page__name-link').text().trim(),
-                highSchool: html.find('span.meta').text().trim(),
-                position: $(html.find('.position')).text().trim(),
-                height: metrics[0],
-                weight: metrics[1],
-                stars: html.find('.ri-page__star-and-score .yellow').length,
-                rating: html.find('span.score').clone().children().remove().end().text().trim(),
-                nationalRank: html.find('.natrank').first().text().trim(),
-                stateRank: html.find('.sttrank').first().text().trim(),
-                positionRank: html.find('.posrank').first().text().trim()
-                };
-                players.push(player);
-            });
-            // Some empty player objects were being created.  This removes them
-            const result = players.filter(
-                player => player.name !== '' && player.rating !== ''
-            );
-            return result;
-        },
+    /**
+     * Gets the Men's College Basketball schedule data for a specified date if available.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {*} year - Year (YYYY)
+     * @param {*} month - Month (MM)
+     * @param {*} day - Day (DD)
+     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
+     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getSchedule(
+     * year = 2021, month = 02, day = 15, group=50
+     * )
+     */
+    getSchedule: async function({
+        year = null,
+        month = null,
+        day = null,
+        group = 50,
+        seasontype = 2
+    }) {
+        const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        const params = {
+            groups: group,
+            seasontype: seasontype,
+            xhr: 1
+        };
 
-        /**
-         * Gets the Men's College Basketball schedule data for a specified date if available.
-         * @param {*} year - Year (YYYY)
-         * @param {*} month - Month (MM)
-         * @param {*} day - Day (DD)
-         * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
-         * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getSchedule(
-         * year = 2021, month = 02, day = 15, group=50
-         * )
-         */
-        getSchedule: async ({
-            year = null,
-            month = null,
-            day = null,
-            group = 50,
-            seasontype = 2
-        }) => {
-            const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-            const params = {
-                groups: group,
-                seasontype: seasontype,
-                xhr: 1
-            };
+        const res = await axios.get(baseUrl, {
+            params
+        });
+        return res.data.content.schedule;
+    },
+    /**
+     * Gets the Men's College Basketball scoreboard data for a specified date if available.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {*} year - Year (YYYY)
+     * @param {*} month - Month (MM)
+     * @param {*} day - Day (DD)
+     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
+     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+     * @param {number} limit - Limit on the number of results @default 300
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getScoreboard(
+     * year = 2021, month = 02, day = 15, group=50
+     * )
+     */
+    getScoreboard: async function({
+        year = null,
+        month = null,
+        day = null,
+        group = 50,
+        seasontype = 2,
+        limit = 1000}) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        const params = {
+            groups: group,
+            seasontype: seasontype || 2,
+            limit
+        };
 
-            const res = await axios.get(baseUrl, {
-                params
-            });
-            return res.data.content.schedule;
-        },
-        /**
-         * Gets the Men's College Basketball scoreboard data for a specified date if available.
-         * @param {*} year - Year (YYYY)
-         * @param {*} month - Month (MM)
-         * @param {*} day - Day (DD)
-         * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
-         * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
-         * @param {number} limit - Limit on the number of results @default 300
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getScoreboard(
-         * year = 2021, month = 02, day = 15, group=50
-         * )
-         */
-        getScoreboard: async ({
-            year = null,
-            month = null,
-            day = null,
-            group = 50,
-            seasontype = 2,
-            limit = 1000}) => {
-            const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-            const params = {
-                groups: group,
-                seasontype: seasontype || 2,
-                limit
-            };
+        const res = await axios.get(baseUrl, {
+            params
+        });
 
-            const res = await axios.get(baseUrl, {
-                params
-            });
+        return res.data;
+    },
+    /**
+     * Gets the Men's College Basketball Conferences.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @returns json
+     * @example
+     * const result = await sdv.cbb.getConferences();
+     */
+    getConferences: async function () {
+        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
 
-            return res.data;
-        },
-        /**
-         * Gets the Men's College Basketball Conferences.
-         * @returns json
-         * @example
-         * const result = await sdv.cbb.getConferences();
-         */
-        getConferences: async () => {
-            const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
+        const res = await axios.get(baseUrl);
+        return res.data;
+    },
 
-            const res = await axios.get(baseUrl);
-            return res.data;
-        },
+    /**
+     * Gets the team standings for Men's College Basketball.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} year - Season
+     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
+     * @returns json
+     * @example
+     * get cbb standings
+     * const yr = 2020;
+     * const result = await sdv.cbb.getStandings(year = yr);
+     */
+    getStandings: async function ({
+        year = new Date().getFullYear(),
+        group = 50
+    }) {
+        const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/standings/_/season/${year}/group/${group}`;
 
-        /**
-         * Gets the team standings for Men's College Basketball.
-         * @param {number} year - Season
-         * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
-         * @returns json
-         * @example
-         * get cbb standings
-         * const yr = 2020;
-         * const result = await sdv.cbb.getStandings(year = yr);
-         */
-        getStandings: async ({
-            year = new Date().getFullYear(),
-            group = 50
-        }) => {
-            const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/standings/_/season/${year}/group/${group}`;
+        const params = {
+            xhr: 1,
+            render: false,
+            device: 'desktop',
+            userab: 18
+        };
 
-            const params = {
-                xhr: 1,
-                render: false,
-                device: 'desktop',
-                userab: 18
-            };
+        const res = await axios.get(baseUrl, {
+            params
+        });
 
-            const res = await axios.get(baseUrl, {
-                params
-            });
+        return res.content.standings.groups;
+    },
+    /**
+     * Gets the list of all College Football teams their identification info for ESPN.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
+     * @returns json
+     * @example
+     * get list of teams
+     * const result = await sdv.cbb.getTeamList(group=50);
+     */
+    getTeamList: async function({
+        group = 50
+    }) {
+        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams';
+        const params = {
+            group,
+            limit: 1000
+        };
 
-            return res.content.standings.groups;
-        },
-        /**
-         * Gets the list of all College Football teams their identification info for ESPN.
-         * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
-         * @returns json
-         * @example
-         * get list of teams
-         * const result = await sdv.cbb.getTeamList(group=50);
-         */
-        getTeamList: async ({
-            group = 50
-        }) => {
-            const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams';
-            const params = {
-                group,
-                limit: 1000
-            };
+        const res = await axios.get(baseUrl, {
+            params
+        });
 
-            const res = await axios.get(baseUrl, {
-                params
-            });
+        return res.data;
+    },
+    /**
+     * Gets the team info for a specific College Basketball team.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} id - Team Id
+     * @returns json
+     * @example
+     * get individual team data
+     * const teamId = 52;
+     * const result = await sdv.cbb.getTeamInfo(teamId);
+     */
+    getTeamInfo: async function (id) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
 
-            return res.data;
-        },
-        /**
-         * Gets the team info for a specific College Basketball team.
-         * @param {number} id - Team Id
-         * @returns json
-         * @example
-         * get individual team data
-         * const teamId = 52;
-         * const result = await sdv.cbb.getTeamInfo(teamId);
-         */
-        getTeamInfo: async (id) => {
-            const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
+        const res = await axios.get(baseUrl);
+        return res.data;
+    },
+    /**
+     * Gets the team roster information for a specific Men's College Basketball team.
+     * @memberOf cbb
+     * @async
+     * @function
+     * @param {number} id - Team Id
+     * @returns json
+     * @example
+     * get team roster data
+     * const teamId = 52;
+     * const result = await sdv.cbb.getTeamPlayers(teamId);
+     */
+    getTeamPlayers: async function(id) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
+        const params = {
+            enable: "roster"
+        };
 
-            const res = await axios.get(baseUrl);
-            return res.data;
-        },
-        /**
-         * Gets the team roster information for a specific Men's College Basketball team.
-         * @param {number} id - Team Id
-         * @returns json
-         * @example
-         * get team roster data
-         * const teamId = 52;
-         * const result = await sdv.cbb.getTeamPlayers(teamId);
-         */
-        getTeamPlayers: async (id) => {
-            const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
-            const params = {
-                enable: "roster"
-            };
+        const res = await axios.get(baseUrl, {
+            params
+        });
 
-            const res = await axios.get(baseUrl, {
-                params
-            });
-
-            return res.data;
-        }
+        return res.data;
     }
 }

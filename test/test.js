@@ -375,35 +375,35 @@ describe('NCAA Games', () => {
 
     var game = 5764053;
     it('should return a promise for ncaa game information for a given game', function() {
-            app.ncaa.getNcaaInfo(game)
+            app.ncaa.getInfo(game)
                 .then((data) => {
                     data.should.exist;
                     data.should.be.json;
                     data.should.not.be.empty;    })
         });
     it('should return a promise for ncaa game box score for a given game', function() {
-            app.ncaa.getNcaaBoxScore(game)
+            app.ncaa.getBoxScore(game)
                 .then((data) => {
                     data.should.exist;
                     data.should.be.json;
                     data.should.not.be.empty;    })
         });
     it('should return a promise for ncaa game play-by-play for a given game', function() {
-            app.ncaa.getNcaaPlayByPlay(game)
+            app.ncaa.getPlayByPlay(game)
                 .then((data) => {
                     data.should.exist;
                     data.should.be.json;
                     data.should.not.be.empty;    })
         });
     it('should return a promise for ncaa game team stats for a given game', function() {
-            app.ncaa.getNcaaTeamStats(game)
+            app.ncaa.getTeamStats(game)
                 .then((data) => {
                     data.should.exist;
                     data.should.be.json;
                     data.should.not.be.empty;    })
         });
     it('should return a promise for ncaa game scoring summary for a given game', function() {
-            app.ncaa.getNcaaScoringSummary(game)
+            app.ncaa.getScoringSummary(game)
                 .then((data) => {
                     data.should.exist;
                     data.should.be.json;
@@ -414,7 +414,7 @@ describe('NCAA Games', () => {
 describe('NCAA Scoreboard', () => {
 
     it('should return a promise for ncaa scoreboard data for a given date', function() {
-        app.ncaa.getNcaaScoreboard({
+        app.ncaa.getScoreboard({
             sport: 'basketball-men',
             division: 'd1',
             year: 2021,
