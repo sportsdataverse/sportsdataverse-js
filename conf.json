@@ -20,7 +20,9 @@
         "collapse": true,
         "typedefs": false,
         "removeQuotes": "none",
-        "scripts": [],
+        "scripts": [
+            "./docs/prettify-tomorrow.css"
+        ],
         "menu":{
             "Github repo": {
                 "href":"https://github.com/saiemgilani/sportsdataverse",
