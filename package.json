@@ -14,10 +14,10 @@
     "tabletojson": "2.0.4"
   },
   "devDependencies": {
-    "docdash": "^1.2.0",
-    "jsdoc": "^3.6.6",
-    "jsdoc-to-markdown": "^6.0.1",
-    "mocha": "^8.3.0",
+    "docdash": "latest",
+    "jsdoc": "latest",
+    "jsdoc-to-markdown": "latest",
+    "mocha": "latest",
     "underscore": ">=1.12.1"
   },
   "scripts": {

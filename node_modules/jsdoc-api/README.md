@@ -74,44 +74,44 @@ A programmatic interface for [jsdoc3](https://github.com/jsdoc3/jsdoc) with a fe
 ### jsdoc.cache : [<code>cache-point</code>](https://github.com/75lb/cache-point)
 The [cache-point](https://github.com/75lb/cache-point) instance used when `cache: true` is specified on `.explain()` or `.explainSync()`.
 
-**Kind**: static property of [<code>jsdoc-api</code>](#module_jsdoc-api)  
+**Kind**: static property of [<code>jsdoc-api</code>](#module_jsdoc-api)
 <a name="module_jsdoc-api.explainSync"></a>
 
 ### jsdoc.explainSync([options]) ⇒ <code>Array.&lt;object&gt;</code>
 Returns jsdoc explain output.
 
-**Kind**: static method of [<code>jsdoc-api</code>](#module_jsdoc-api)  
-**Prerequisite**: Requires node v0.12 or above  
+**Kind**: static method of [<code>jsdoc-api</code>](#module_jsdoc-api)
+**Prerequisite**: Requires node v0.12 or above
 
 | Param | Type |
 | --- | --- |
-| [options] | [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions) | 
+| [options] | [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions) |
 
 <a name="module_jsdoc-api.explain"></a>
 
 ### jsdoc.explain([options]) ⇒ <code>Promise</code>
 Returns a promise for the jsdoc explain output.
 
-**Kind**: static method of [<code>jsdoc-api</code>](#module_jsdoc-api)  
-**Fulfil**: <code>object[]</code> - jsdoc explain output  
+**Kind**: static method of [<code>jsdoc-api</code>](#module_jsdoc-api)
+**Fulfil**: <code>object[]</code> - jsdoc explain output
 
 | Param | Type |
 | --- | --- |
-| [options] | [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions) | 
+| [options] | [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions) |
 
 <a name="module_jsdoc-api.renderSync"></a>
 
 ### jsdoc.renderSync([options])
 Render jsdoc documentation.
 
-**Kind**: static method of [<code>jsdoc-api</code>](#module_jsdoc-api)  
-**Prerequisite**: Requires node v0.12 or above  
+**Kind**: static method of [<code>jsdoc-api</code>](#module_jsdoc-api)
+**Prerequisite**: Requires node v0.12 or above
 
 | Param | Type |
 | --- | --- |
-| [options] | [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions) | 
+| [options] | [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions) |
 
-**Example**  
+**Example**
 ```js
 jsdoc.renderSync({ files: 'lib/*', destination: 'api-docs' })
 ```
@@ -120,7 +120,7 @@ jsdoc.renderSync({ files: 'lib/*', destination: 'api-docs' })
 ### jsdoc-api~JsdocOptions
 The jsdoc options, common for all operations.
 
-**Kind**: inner class of [<code>jsdoc-api</code>](#module_jsdoc-api)  
+**Kind**: inner class of [<code>jsdoc-api</code>](#module_jsdoc-api)
 
 * [~JsdocOptions](#module_jsdoc-api..JsdocOptions)
     * [.files](#module_jsdoc-api..JsdocOptions+files) : <code>string</code> \| <code>Array.&lt;string&gt;</code>
@@ -144,92 +144,92 @@ The jsdoc options, common for all operations.
 #### options.files : <code>string</code> \| <code>Array.&lt;string&gt;</code>
 One or more filenames to process. Either this or `source` must be supplied.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+source"></a>
 
 #### options.source : <code>string</code>
 A string containing source code to process. Either this or `files` must be supplied.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+cache"></a>
 
 #### options.cache : <code>boolean</code>
 Set to `true` to cache the output - future invocations with the same input will return immediately.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+access"></a>
 
 #### options.access : <code>string</code>
 Only display symbols with the given access: "public", "protected", "private" or "undefined", or "all" for all access levels. Default: all except "private".
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+configure"></a>
 
 #### options.configure : <code>string</code>
 The path to the configuration file. Default: path/to/jsdoc/conf.json.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+destination"></a>
 
 #### options.destination : <code>string</code>
 The path to the output folder. Use "console" to dump data to the console. Default: ./out/.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+encoding"></a>
 
 #### options.encoding : <code>string</code>
 Assume this encoding when reading all source files. Default: utf8.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+private"></a>
 
 #### options.private : <code>boolean</code>
 Display symbols marked with the @private tag. Equivalent to "--access all". Default: false.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+package"></a>
 
 #### options.package : <code>string</code>
 The path to the project's package file. Default: path/to/sourcefiles/package.json
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+pedantic"></a>
 
 #### options.pedantic : <code>boolean</code>
 Treat errors as fatal errors, and treat warnings as errors. Default: false.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+query"></a>
 
 #### options.query : <code>string</code>
 A query string to parse and store in jsdoc.env.opts.query. Example: foo=bar&baz=true.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+recurse"></a>
 
 #### options.recurse : <code>boolean</code>
 Recurse into subdirectories when scanning for source files and tutorials.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+readme"></a>
 
 #### options.readme : <code>string</code>
 The path to the project's README file. Default: path/to/sourcefiles/README.md.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+template"></a>
 
 #### options.template : <code>string</code>
 The path to the template to use. Default: path/to/jsdoc/templates/default.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 <a name="module_jsdoc-api..JsdocOptions+tutorials"></a>
 
 #### options.tutorials : <code>string</code>
 Directory in which JSDoc should search for tutorials.
 
-**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)  
+**Kind**: instance property of [<code>JsdocOptions</code>](#module_jsdoc-api..JsdocOptions)
 
 * * *
 
-&copy; 2015-20 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2015-21 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).

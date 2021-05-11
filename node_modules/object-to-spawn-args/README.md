@@ -1,7 +1,8 @@
-[![view on npm](http://img.shields.io/npm/v/object-to-spawn-args.svg)](https://www.npmjs.org/package/object-to-spawn-args)
-[![npm module downloads](http://img.shields.io/npm/dt/object-to-spawn-args.svg)](https://www.npmjs.org/package/object-to-spawn-args)
+[![view on npm](https://badgen.net/npm/v/object-to-spawn-args)](https://www.npmjs.org/package/object-to-spawn-args)
+[![npm module downloads](https://badgen.net/npm/dt/object-to-spawn-args)](https://www.npmjs.org/package/object-to-spawn-args)
+[![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/object-to-spawn-args)](https://github.com/75lb/object-to-spawn-args/network/dependents?dependent_type=REPOSITORY)
+[![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/object-to-spawn-args)](https://github.com/75lb/object-to-spawn-args/network/dependents?dependent_type=PACKAGE)
 [![Build Status](https://travis-ci.org/75lb/object-to-spawn-args.svg?branch=master)](https://travis-ci.org/75lb/object-to-spawn-args)
-[![Dependency Status](https://badgen.net/david/dep/75lb/object-to-spawn-args)](https://david-dm.org/75lb/object-to-spawn-args)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # object-to-spawn-args
@@ -65,4 +66,4 @@ $ npm install object-to-spawn-args
 
 * * *
 
-&copy; 2014-19 Lloyd Brookes \<75pound@gmail.com\>.
+&copy; 2014-21 Lloyd Brookes \<75pound@gmail.com\>.

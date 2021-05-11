@@ -1,7 +1,8 @@
 [![view on npm](https://badgen.net/npm/v/file-set)](https://www.npmjs.org/package/file-set)
 [![npm module downloads](https://badgen.net/npm/dt/file-set)](https://www.npmjs.org/package/file-set)
+[![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/file-set)](https://github.com/75lb/file-set/network/dependents?dependent_type=REPOSITORY)
+[![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/file-set)](https://github.com/75lb/file-set/network/dependents?dependent_type=PACKAGE)
 [![Build Status](https://travis-ci.org/75lb/file-set.svg?branch=master)](https://travis-ci.org/75lb/file-set)
-[![Dependency Status](https://badgen.net/david/dep/75lb/file-set)](https://david-dm.org/75lb/file-set)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # file-set
@@ -86,4 +87,6 @@ Add file patterns to the set.
 
 * * *
 
-&copy; 2014-20 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2014-21 Lloyd Brookes \<75pound@gmail.com\>.
+
+Tested by [test-runner](https://github.com/test-runner-js/test-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).

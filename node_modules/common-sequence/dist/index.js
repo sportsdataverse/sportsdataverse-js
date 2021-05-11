@@ -1,7 +1,7 @@
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
   factory();
-}(function () { 'use strict';
+}((function () { 'use strict';
 
   /**
    * Returns an array containing the initial elements which both input arrays have in common.
@@ -9,12 +9,12 @@
    * A common use-case for this is discovering common ancestors between two file paths.
    *
    * ```js
-   * > commonSequence = require("common-sequence");
+   * > commonSequence = require('common-sequence');
    *
-   * > pathA = "/Users/lloyd/Documents/75lb/dmd".split("/");
-   * > pathB = "/Users/lloyd/Documents/75lb/array-tools".split("/");
+   * > pathA = '/Users/lloyd/Documents/75lb/dmd'.split('/');
+   * > pathB = '/Users/lloyd/Documents/75lb/array-tools'.split('/');
    *
-   * > commonSequence(pathA, pathB).join("/");
+   * > commonSequence(pathA, pathB).join('/');
    * '/Users/lloyd/Documents/75lb'
    * ```
    *
@@ -46,4 +46,4 @@
     return result
   }
 
-}));
+})));

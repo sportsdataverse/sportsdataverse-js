@@ -1,8 +1,11 @@
-[![view on npm](http://img.shields.io/npm/v/walk-back.svg)](https://www.npmjs.org/package/walk-back)
-[![npm module downloads](http://img.shields.io/npm/dt/walk-back.svg)](https://www.npmjs.org/package/walk-back)
+[![view on npm](https://badgen.net/npm/v/walk-back)](https://www.npmjs.org/package/walk-back)
+[![npm module downloads](https://badgen.net/npm/dt/walk-back)](https://www.npmjs.org/package/walk-back)
+[![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/walk-back)](https://github.com/75lb/walk-back/network/dependents?dependent_type=REPOSITORY)
+[![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/walk-back)](https://github.com/75lb/walk-back/network/dependents?dependent_type=PACKAGE)
 [![Build Status](https://travis-ci.org/75lb/walk-back.svg?branch=master)](https://travis-ci.org/75lb/walk-back)
-[![Dependency Status](https://badgen.net/david/dep/75lb/walk-back)](https://david-dm.org/75lb/walk-back)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
+
+# walk-back
 
 <a name="module_walk-back"></a>
 
@@ -45,4 +48,6 @@ null
 
 * * *
 
-&copy; 2015-19 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2015-21 Lloyd Brookes \<75pound@gmail.com\>.
+
+Tested by [test-runner](https://github.com/test-runner-js/test-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).

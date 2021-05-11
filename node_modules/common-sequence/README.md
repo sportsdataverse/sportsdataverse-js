@@ -1,7 +1,9 @@
-[![view on npm](http://img.shields.io/npm/v/common-sequence.svg)](https://www.npmjs.org/package/common-sequence)
-[![npm module downloads per month](http://img.shields.io/npm/dt/common-sequence.svg)](https://www.npmjs.org/package/common-sequence)
+[![view on npm](https://badgen.net/npm/v/common-sequence)](https://www.npmjs.org/package/common-sequence)
+[![npm module downloads](https://badgen.net/npm/dt/common-sequence)](https://www.npmjs.org/package/common-sequence)
+[![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/common-sequence)](https://github.com/75lb/common-sequence/network/dependents?dependent_type=REPOSITORY)
+[![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/common-sequence)](https://github.com/75lb/common-sequence/network/dependents?dependent_type=PACKAGE)
 [![Build Status](https://travis-ci.org/75lb/common-sequence.svg?branch=master)](https://travis-ci.org/75lb/common-sequence)
-[![Dependency Status](https://badgen.net/david/dep/75lb/common-sequence)](https://david-dm.org/75lb/common-sequence)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 <a name="module_common-sequence"></a>
 
@@ -11,12 +13,12 @@ Returns an array containing the initial elements which both input arrays have in
 A common use-case for this is discovering common ancestors between two file paths.
 
 ```js
-> commonSequence = require("common-sequence");
+> commonSequence = require('common-sequence');
 
-> pathA = "/Users/lloyd/Documents/75lb/dmd".split("/");
-> pathB = "/Users/lloyd/Documents/75lb/array-tools".split("/");
+> pathA = '/Users/lloyd/Documents/75lb/dmd'.split('/');
+> pathB = '/Users/lloyd/Documents/75lb/array-tools'.split('/');
 
-> commonSequence(pathA, pathB).join("/");
+> commonSequence(pathA, pathB).join('/');
 '/Users/lloyd/Documents/75lb'
 ```
 
@@ -46,19 +48,19 @@ This library is compatible with Node.js, the Web and any style of module loader.
 Node.js:
 
 ```js
-const arrayify = require('common-sequence')
+const commonSequence = require('common-sequence')
 ```
 
 Within Node.js with ECMAScript Module support enabled:
 
 ```js
-import arrayify from 'common-sequence'
+import commonSequence from 'common-sequence'
 ```
 
 Within an modern browser ECMAScript Module:
 
 ```js
-import arrayify from './node_modules/common-sequence/index.mjs'
+import commonSequence from './node_modules/common-sequence/index.mjs'
 ```
 
 Old browser (adds `window.commonSequence`):
@@ -69,4 +71,4 @@ Old browser (adds `window.commonSequence`):
 
 * * *
 
-&copy; 2015-19 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2015-21 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
