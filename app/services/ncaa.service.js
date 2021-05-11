@@ -174,7 +174,17 @@ module.exports = {
      * @memberOf ncaa
      * @async
      * @function
-     * @param {string} sport - Sport abbreviation.
+     * @param {string} sport - Sport abbreviation. Acceptable values:
+     * 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football,
+     * 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse',
+     * 'MSO' = Men's Soccer, 'MTE' = Men's Tennis,
+     * 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo,
+     * 'WBB' = Women's Basketball, 'WBW' = Women's Bowling,
+     * 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey,
+     * 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball,
+     * 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball,
+     * 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball,
+     * 'WWP' = Women's Water Polo
      * @returns json
      * @example
      * const result = sdv.ncaa.getSeasons(sport='MBB');
@@ -218,7 +228,17 @@ module.exports = {
      * @memberOf ncaa
      * @async
      * @function
-     * @param {string} sport - Sport abbreviation.
+     * @param {string} sport - Sport abbreviation. Acceptable values:
+     * 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football,
+     * 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse',
+     * 'MSO' = Men's Soccer, 'MTE' = Men's Tennis,
+     * 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo,
+     * 'WBB' = Women's Basketball, 'WBW' = Women's Bowling,
+     * 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey,
+     * 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball,
+     * 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball,
+     * 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball,
+     * 'WWP' = Women's Water Polo
      * @param {string} season - Season for sport
      * @returns json
      * @example
@@ -262,7 +282,17 @@ module.exports = {
      * @memberOf ncaa
      * @async
      * @function
-     * @param sport Sport abbreviation.
+     * @param sport Sport abbreviation. Acceptable values:
+     * 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football,
+     * 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse',
+     * 'MSO' = Men's Soccer, 'MTE' = Men's Tennis,
+     * 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo,
+     * 'WBB' = Women's Basketball, 'WBW' = Women's Bowling,
+     * 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey,
+     * 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball,
+     * 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball,
+     * 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball,
+     * 'WWP' = Women's Water Polo
      * @param season Season of query, value for 2016-2017 season would be 2017.
      * @param division Division, for college football: 11 for FBS, 12 for FCS,
      * otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III.
@@ -324,7 +354,17 @@ module.exports = {
      * @memberOf ncaa
      * @async
      * @function
-     * @param sport Sport abbreviation.
+     * @param sport Sport abbreviation. Acceptable values:
+     * 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football,
+     * 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse',
+     * 'MSO' = Men's Soccer, 'MTE' = Men's Tennis,
+     * 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo,
+     * 'WBB' = Women's Basketball, 'WBW' = Women's Bowling,
+     * 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey,
+     * 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball,
+     * 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball,
+     * 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball,
+     * 'WWP' = Women's Water Polo
      * @param season Season of query, value for 2016-2017 season would be 2017.
      * @param division Division, for college football: 11 for FBS, 12 for FCS,
      * otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III.
@@ -367,7 +407,17 @@ module.exports = {
      * @memberOf ncaa
      * @async
      * @function
-     * @param sport Sport abbreviation.
+     * @param sport Sport abbreviation. Acceptable values:
+     * 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football,
+     * 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse',
+     * 'MSO' = Men's Soccer, 'MTE' = Men's Tennis,
+     * 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo,
+     * 'WBB' = Women's Basketball, 'WBW' = Women's Bowling,
+     * 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey,
+     * 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball,
+     * 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball,
+     * 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball,
+     * 'WWP' = Women's Water Polo
      * @param season Season of query, value for 2016-2017 season would be 2017.
      * @param division Division, for college football: 11 for FBS, 12 for FCS,
      * otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III.

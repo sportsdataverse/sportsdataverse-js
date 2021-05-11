@@ -21,7 +21,10 @@
         "typedefs": false,
         "removeQuotes": "none",
         "scripts": [
-            "./docs/prettify-tomorrow.css"
+            "./docs/styles/jsdoc-sdv.css",
+            "./docs/styles/jsdoc-default-sdv.css",
+            "./docs/styles/prettify-sdv.css",
+            "./docs/styles/prettify-tomorrow-sdv.css"
         ],
         "menu":{
             "Github repo": {
