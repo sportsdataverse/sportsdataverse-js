@@ -3,7 +3,7 @@
  * A parser for Google Closure Compiler type expressions, powered by PEG.js.
  *
  * @author Jeff Williams <jeffrey.l.williams@gmail.com>
- * @license MIT License <http://opensource.org/licenses/mit-license.php/>
+ * @license MIT
  */
 
 const describe = require('./lib/describe');
@@ -11,17 +11,17 @@ const { parse } = require('./lib/parser');
 const stringify = require('./lib/stringify');
 
 const typeExpressionCache = {
-    normal: {},
-    jsdoc: {}
+    normal: new Map(),
+    jsdoc: new Map()
 };
 
 const parsedTypeCache = {
-    normal: {},
-    htmlSafe: {}
+    normal: new Map(),
+    htmlSafe: new Map()
 };
 
 const descriptionCache = {
-    normal: {}
+    normal: new Map()
 };
 
 function getTypeExpressionCache({useCache, jsdoc}) {
@@ -80,16 +80,16 @@ function prepareFrozenObject(obj, expr, {jsdoc}) {
 
 function cachedParse(expr, options) {
     const cache = getTypeExpressionCache(options);
-    let parsedType;
+    let parsedType = cache ? cache.get(expr) : null;
 
-    if (cache && Object.prototype.hasOwnProperty.call(cache, expr)) {
-        return cache[expr];
+    if (parsedType) {
+        return parsedType;
     } else {
         parsedType = parse(expr, options);
         parsedType = prepareFrozenObject(parsedType, expr, options);
 
         if (cache) {
-            cache[expr] = parsedType;
+            cache.set(expr, parsedType);
         }
 
         return parsedType;
@@ -98,15 +98,18 @@ function cachedParse(expr, options) {
 
 function cachedStringify(parsedType, options) {
     const cache = getParsedTypeCache(options);
-    let json;
+    let stringified;
 
     if (canReturnOriginalExpression(parsedType, options)) {
         return parsedType.typeExpression;
     } else if (cache) {
-        json = JSON.stringify(parsedType);
-        cache[json] = cache[json] || stringify(parsedType, options);
+        stringified = cache.get(parsedType);
+        if (!stringified) {
+            stringified = stringify(parsedType, options);
+            cache.set(parsedType, stringified);
+        }
 
-        return cache[json];
+        return stringified;
     } else {
         return stringify(parsedType, options);
     }
@@ -114,19 +117,19 @@ function cachedStringify(parsedType, options) {
 
 function cachedDescribe(parsedType, options) {
     const cache = getDescriptionCache(options);
-    let json;
-    let result;
+    let description = cache ? cache.get(parsedType) : null;
 
-    if (cache) {
-        json = JSON.stringify(parsedType);
-        cache[json] = cache[json] || describe(parsedType, options);
-
-        return cache[json];
+    if (description) {
+        return description;
     } else {
-        result = describe(parsedType, options);
-        result = prepareFrozenObject(result, null, options);
+        description = describe(parsedType, options);
+        description = prepareFrozenObject(description, null, options);
 
-        return result;
+        if (cache) {
+            cache.set(parsedType, description);
+        }
+
+        return description;
     }
 }
 

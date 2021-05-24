@@ -475,20 +475,38 @@ class Describer {
         return result;
     }
 
-    _addLinks(nameString) {
-        let linkClass = '';
-        const options = this._options;
+    _getHrefForString(nameString) {
+        let href = '';
+        const links = this._options.links;
 
-
-        if (options.links && Object.prototype.hasOwnProperty.call(options.links, nameString)) {
-            if (options.linkClass) {
-                linkClass = ` class="${options.linkClass}"`;
-            }
-
-            nameString = `<a href="${options.links[nameString]}"${linkClass}>${nameString}</a>`;
+        if (!links) {
+            return href;
         }
 
-        return nameString;
+        // accept a map or an object
+        if (links instanceof Map) {
+            href = links.get(nameString);
+        } else if ({}.hasOwnProperty.call(links, nameString)) {
+            href = links[nameString];
+        }
+
+        return href;
+    }
+
+    _addLinks(nameString) {
+        const href = this._getHrefForString(nameString);
+        let link = nameString;
+        let linkClass = this._options.linkClass || '';
+
+        if (href) {
+            if (linkClass) {
+                linkClass = ` class="${linkClass}"`;
+            }
+
+            link = `<a href="${href}"${linkClass}>${nameString}</a>`;
+        }
+
+        return link;
     }
 
     result(type, useLongFormat) {

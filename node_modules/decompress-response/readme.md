@@ -1,4 +1,4 @@
-# decompress-response [![Build Status](https://travis-ci.org/sindresorhus/decompress-response.svg?branch=master)](https://travis-ci.org/sindresorhus/decompress-response)
+# decompress-response [![Build Status](https://travis-ci.com/sindresorhus/decompress-response.svg?branch=master)](https://travis-ci.com/sindresorhus/decompress-response)
 
 > Decompress a HTTP response if needed
 
@@ -6,13 +6,11 @@ Decompresses the [response](https://nodejs.org/api/http.html#http_class_http_inc
 
 Used by [`got`](https://github.com/sindresorhus/got).
 
-
 ## Install
 
 ```
 $ npm install decompress-response
 ```
-
 
 ## Usage
 
@@ -25,7 +23,6 @@ http.get('https://sindresorhus.com', response => {
 });
 ```
 
-
 ## API
 
 ### decompressResponse(response)
@@ -37,7 +34,6 @@ Returns the decompressed HTTP response stream.
 Type: [`http.IncomingMessage`](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
 
 The HTTP incoming stream with compressed data.
-
 
 ---
 
