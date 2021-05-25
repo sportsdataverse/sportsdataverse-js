@@ -4,12 +4,7 @@
 name: Node.js Package
 
 on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
+  workflow_dispatch:
   release:
     types: [created]
 
