@@ -217,7 +217,6 @@ module.exports = {
      * @async
      * @function
      * @example
-     * get list of teams
      * const result = await sdv.wbb.getConferences();
      */
     getConferences: async function (){
@@ -235,7 +234,6 @@ module.exports = {
      * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
      * @returns json
      * @example
-     * get cbb standings
      * const yr = 2020;
      * const result = await sdv.wbb.getStandings(year = yr);
      */
@@ -282,7 +280,6 @@ module.exports = {
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get individual team data
      * const teamId = 52;
      * const result = await sdv.wbb.getTeamInfo(teamId);
      */
@@ -300,7 +297,6 @@ module.exports = {
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get team roster data
      * const teamId = 52;
      * const result = await sdv.wbb.getTeamPlayers(teamId);
      */

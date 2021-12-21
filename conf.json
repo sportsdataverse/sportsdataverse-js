@@ -2,7 +2,7 @@
     "source": {
         "includePattern": ".+\\.js(doc|x)?$",
         "include": ["README.md","."],
-        "exclude": ["node_modules"]
+        "exclude": ["node_modules","docs2/"]
     },
     "recurseDepth": 10,
     "opts": {

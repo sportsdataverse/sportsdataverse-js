@@ -191,7 +191,6 @@ module.exports = {
      * @param {number} group - acceptable group names: 'league','conference','division'
      * @returns json
      * @example
-     * get NBA standings
      * const yr = 2016;
      * const result = await sdv.nba.getStandings(year = yr);
      */
@@ -215,7 +214,6 @@ module.exports = {
      * @function
      * @returns json
      * @example
-     * get list of teams
      * const result = await sdv.nba.getTeamList();
      */
     getTeamList: async function (){
@@ -238,7 +236,6 @@ module.exports = {
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get individual team data
      * const teamId = 16;
      * const result = await sdv.nba.getTeamInfo(teamId);
      */
@@ -256,7 +253,6 @@ module.exports = {
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get team roster data
      * const teamId = 16;
      * const result = await sdv.nba.getTeamPlayers(teamId);
      */

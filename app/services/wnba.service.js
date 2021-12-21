@@ -164,7 +164,6 @@ const axios = require('axios');
      * @param {number} group - acceptable group names: 'league','conference','division'
      * @returns json
      * @example
-     * get WNBA standings
      * const yr = 2016;
      * const result = await sdv.wnba.getStandings(year = yr);
      */
@@ -188,7 +187,6 @@ const axios = require('axios');
      * @function
      * @returns json
      * @example
-     * get list of teams
      * const result = await sdv.wnba.getTeamList();
      */
     getTeamList: async function ({}){
@@ -209,7 +207,6 @@ const axios = require('axios');
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get individual team data
      * const teamId = 16;
      * const result = await sdv.wnba.getTeamInfo(teamId);
      */
@@ -227,7 +224,6 @@ const axios = require('axios');
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get team roster data
      * const teamId = 16;
      * const result = await sdv.wnba.getTeamPlayers(teamId);
      */

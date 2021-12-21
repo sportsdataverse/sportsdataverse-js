@@ -404,7 +404,6 @@ module.exports = {
      * @function
      * @returns json
      * @example
-     * get list of teams
      * const result = await sdv.cfb.getConferences();
      */
     getConferences: async function() {
@@ -422,7 +421,6 @@ module.exports = {
      * @param {number} group - Group is 80 for FBS, 81 for FCS
      * @returns json
      * @example
-     * get cfb standings
      * const yr = 2016;
      * const result = await sdv.cfb.getStandings(year = yr);
      */
@@ -450,7 +448,6 @@ module.exports = {
      * @param {number} group - Group is 80 for FBS, 81 for FCS
      * @returns json
      * @example
-     * get list of teams
      * const result = await sdv.cfb.getTeamList(group=80);
      */
     getTeamList: async function ({group = 80}) {
@@ -474,7 +471,6 @@ module.exports = {
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get individual team data
      * const teamId = 52;
      * const result = await sdv.cfb.getTeamInfo(teamId);
      */
@@ -491,7 +487,6 @@ module.exports = {
      * @function
      * @param {number} id - Team Id
      * @example
-     * get team roster data
      * const teamId = 52;
      * const result = await sdv.cfb.getTeamPlayers(teamId);
      */
