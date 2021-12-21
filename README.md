@@ -1,3 +1,4 @@
+# **sportsdataverse** <a href='https://saiemgilani.github.io/sportsdataverse/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse/master/docs2/static/img/logo.png' align="right" width="20%" min-width="100px"/></a>
 <!-- badges: start -->
 ![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)
 ![Contributors](https://img.shields.io/github/contributors/saiemgilani/sportsdataverse?style=for-the-badge)
@@ -5,8 +6,6 @@
 <a href='https://www.npmjs.com/package/sportsdataverse'>[![NPM](https://nodei.co/npm/sportsdataverse.png)](https://npmjs.org/package/sportsdataverse)</a>
 [![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse) [![Twitter Follow](https://img.shields.io/twitter/follow/saiemgilani?color=blue&label=%40saiemgilani&logo=twitter&style=for-the-badge)](https://twitter.com/saiemgilani)
 <!-- badges: end -->
-
-# **sportsdataverse** <a href='https://saiemgilani.github.io/sportsdataverse/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse/master/docs2/static/img/logo.png' align="right" width="20%" min-width="100px"/></a>
 
 ## **Installation**
 
