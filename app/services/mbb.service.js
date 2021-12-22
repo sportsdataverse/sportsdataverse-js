@@ -3,18 +3,18 @@ const cheerio = require('cheerio');
 /**
  * Operations for Men's College Basketball.
  *
- * @namespace cbb
+ * @namespace mbb
  */
 module.exports = {
     /**
      * Gets the Men's College Basketball game play-by-play data for a specified game.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} id - Game id.
      * @returns json
      * @example
-     * const result = await sdv.cbb.getPlayByPlay(401260281);
+     * const result = await sdv.mbb.getPlayByPlay(401260281);
      */
     getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/playbyplay';
@@ -40,13 +40,13 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball game box score data for a specified game.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} id - Game id.
      * @returns json
      * @example
-     * const result = await sdv.cbb.getBoxScore(401260281);
+     * const result = await sdv.mbb.getBoxScore(401260281);
      */
     getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/boxscore';
@@ -69,13 +69,13 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball game summary data for a specified game.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} id - Game id.
      * @returns json
      * @example
-     * const result = await sdv.cbb.getSummary(401260281);
+     * const result = await sdv.mbb.getSummary(401260281);
      */
     getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
@@ -99,13 +99,13 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball game PickCenter data for a specified game.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} id - Game id.
      * @returns json
      * @example
-     * const result = await sdv.cbb.getPicks(401260281);
+     * const result = await sdv.mbb.getPicks(401260281);
      */
     getPicks: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
@@ -135,14 +135,14 @@ module.exports = {
 
     /**
      * Gets the Men's College Basketball rankings data for a specified year and week if available.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {*} year - Year (YYYY)
      * @param {*} week - Week
      * @returns json
      * @example
-     * const result = await sdv.cbb.getRankings(
+     * const result = await sdv.mbb.getRankings(
      * year = 2020, week = 15
      * )
      */
@@ -166,7 +166,7 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball Player recruiting data for a specified year, page, position and institution type if available.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {*} year - Year (YYYY)
@@ -174,7 +174,7 @@ module.exports = {
      * @param {"HighSchool"|"JuniorCollege"|"PrepSchool"} group - Institution Type
      * @returns json
      * @example
-     * const result = await sdv.cbb.getPlayerRankings({year: 2016});
+     * const result = await sdv.mbb.getPlayerRankings({year: 2016});
      */
     getPlayerRankings: async function({
         year,
@@ -222,14 +222,14 @@ module.exports = {
 
     /**
      * Gets the Men's College Basketball School recruiting data for a specified year, page, position and institution type if available.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {*} year - Year (YYYY)
      * @param {number} page - Page (50 per page)
      * @returns json
      * @example
-     * const result = await sdv.cbb.getSchoolRankings({year: 2016});
+     * const result = await sdv.mbb.getSchoolRankings({year: 2016});
      */
     getSchoolRankings: async function (year, page = 1) {
         const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
@@ -261,14 +261,14 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball School commitment data for a specified school and year.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {*} year - Year (YYYY)
      * @param {string} school - School
      * @returns json
      * @example
-     * const result = await sdv.cbb.getSchoolCommits({school: 'Clemson', year: 2016});
+     * const result = await sdv.mbb.getSchoolCommits({school: 'Clemson', year: 2016});
      */
     getSchoolCommits: async function(school, year) {
         const baseUrl = `http://${school}.247sports.com/Season/${year}-Basketball/Commits`;
@@ -305,7 +305,7 @@ module.exports = {
 
     /**
      * Gets the Men's College Basketball schedule data for a specified date if available.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {*} year - Year (YYYY)
@@ -315,7 +315,7 @@ module.exports = {
      * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
      * @returns json
      * @example
-     * const result = await sdv.cbb.getSchedule(
+     * const result = await sdv.mbb.getSchedule(
      * year = 2021, month = 02, day = 15, group=50
      * )
      */
@@ -340,7 +340,7 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball scoreboard data for a specified date if available.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {*} year - Year (YYYY)
@@ -351,7 +351,7 @@ module.exports = {
      * @param {number} limit - Limit on the number of results @default 300
      * @returns json
      * @example
-     * const result = await sdv.cbb.getScoreboard(
+     * const result = await sdv.mbb.getScoreboard(
      * year = 2021, month = 02, day = 15, group=50
      * )
      */
@@ -377,12 +377,12 @@ module.exports = {
     },
     /**
      * Gets the Men's College Basketball Conferences.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @returns json
      * @example
-     * const result = await sdv.cbb.getConferences();
+     * const result = await sdv.mbb.getConferences();
      */
     getConferences: async function () {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
@@ -393,16 +393,15 @@ module.exports = {
 
     /**
      * Gets the team standings for Men's College Basketball.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} year - Season
      * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
      * @returns json
      * @example
-     * get cbb standings
      * const yr = 2020;
-     * const result = await sdv.cbb.getStandings(year = yr);
+     * const result = await sdv.mbb.getStandings(year = yr);
      */
     getStandings: async function ({
         year = new Date().getFullYear(),
@@ -425,14 +424,13 @@ module.exports = {
     },
     /**
      * Gets the list of all College Football teams their identification info for ESPN.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
      * @returns json
      * @example
-     * get list of teams
-     * const result = await sdv.cbb.getTeamList(group=50);
+     * const result = await sdv.mbb.getTeamList(group=50);
      */
     getTeamList: async function({
         group = 50
@@ -451,15 +449,14 @@ module.exports = {
     },
     /**
      * Gets the team info for a specific College Basketball team.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get individual team data
      * const teamId = 52;
-     * const result = await sdv.cbb.getTeamInfo(teamId);
+     * const result = await sdv.mbb.getTeamInfo(teamId);
      */
     getTeamInfo: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
@@ -469,15 +466,14 @@ module.exports = {
     },
     /**
      * Gets the team roster information for a specific Men's College Basketball team.
-     * @memberOf cbb
+     * @memberOf mbb
      * @async
      * @function
      * @param {number} id - Team Id
      * @returns json
      * @example
-     * get team roster data
      * const teamId = 52;
-     * const result = await sdv.cbb.getTeamPlayers(teamId);
+     * const result = await sdv.mbb.getTeamPlayers(teamId);
      */
     getTeamPlayers: async function(id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
