@@ -124,11 +124,11 @@ module.exports = {
             },
             {
               label: 'Node.js Packages',
-              href: 'https://saiemgilani.github.io/sportsdataverse/',
+              href: 'https://js.sportsdataverse.org/',
             },
             {
               label: 'sportsdataverse.js',
-              href: 'https://saiemgilani.github.io/sportsdataverse/',
+              href: 'https://js.sportsdataverse.org/',
               target: '_self',
             },
             {
