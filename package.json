@@ -1,6 +1,6 @@
 {
   "name": "sportsdataverse",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Node.js client which retrieves sports data from the ESPN API as well as from the NCAA website, with support for NBA, NFL, NHL, WNBA, men's and women's college basketball, and college football.",
   "main": "server.js",
   "directories": {
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saiemgilani/sportsdataverse.git"
+    "url": "git+https://github.com/saiemgilani/sportsdataverse-js.git"
   },
   "keywords": [
     "sports",
@@ -123,7 +123,7 @@
   "author": "Saiem Gilani",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/saiemgilani/sportsdataverse/issues"
+    "url": "https://github.com/saiemgilani/sportsdataverse-js/issues"
   },
-  "homepage": "https://saiemgilani.github.io/sportsdataverse/"
+  "homepage": "https://js.sportsdataverse.org/"
 }
