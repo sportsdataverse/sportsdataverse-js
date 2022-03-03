@@ -1,5 +1,9 @@
-<a name="sportsdataverse"></a>
-## **sportsdataverse**
+<h1 title="Getting Started" sidebar-label="Getting Started" sidebar-position=1>Getting Started</h1>
+
+
+
+## **sportsdataverse-js**
+
 <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse/master/docs2/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
 
 ![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)
