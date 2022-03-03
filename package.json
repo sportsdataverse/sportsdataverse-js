@@ -15,9 +15,9 @@
   },
   "devDependencies": {
     "docdash": "latest",
-    "jsdoc": ">=3.6.7",
+    "jsdoc": "^3.6.10",
     "jsdoc-to-markdown": "^7.1.0",
-    "mocha": "latest",
+    "mocha": "^9.2.1",
     "underscore": ">=1.12.1"
   },
   "scripts": {
