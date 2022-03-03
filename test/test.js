@@ -2,11 +2,11 @@ var chai = require('chai');
 var app = require('../app/app');
 var should = chai.should();
 
-describe('CBB Games', function() {
+describe('MBB Games', function() {
     var gameId = 401260281;
 
     it('should populate play by play data for the given game id', function()  {
-        app.cbb.getPlayByPlay(gameId).then((data) => {
+        app.mbb.getPlayByPlay(gameId).then((data) => {
             data.should.exist;
             data.should.be.json;
             data.should.not.be.empty;
@@ -14,7 +14,7 @@ describe('CBB Games', function() {
     })
 
     it('should return a promise for play by play data for the given game id', function() {
-        app.cbb.getPlayByPlay(gameId)
+        app.mbb.getPlayByPlay(gameId)
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;
@@ -23,7 +23,7 @@ describe('CBB Games', function() {
     });
 
     it('should populate box score data for the given game id', function() {
-        app.cbb.getBoxScore(gameId).then((data) => {
+        app.mbb.getBoxScore(gameId).then((data) => {
             data.should.exist;
             data.should.be.json;
             data.id.should.exist;
@@ -32,7 +32,7 @@ describe('CBB Games', function() {
     });
 
     it('should return a promise for box score data for the given game id', function() {
-        app.cbb.getBoxScore(gameId)
+        app.mbb.getBoxScore(gameId)
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;
@@ -42,7 +42,7 @@ describe('CBB Games', function() {
     });
 
     it('should return a promise for game summary data for the given game id', function() {
-        app.cbb.getSummary(gameId)
+        app.mbb.getSummary(gameId)
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;
@@ -51,9 +51,9 @@ describe('CBB Games', function() {
     });
 });
 
-describe('CBB Rankings', () => {
+describe('MBB Rankings', () => {
     it('should populate rankings for the current week and year', function() {
-        app.cbb.getRankings({}).then((data) => {
+        app.mbb.getRankings({}).then((data) => {
             data.should.exist;
             data.should.be.json;
             data.should.not.be.empty;
@@ -61,7 +61,7 @@ describe('CBB Rankings', () => {
     });
 
     it('should populate rankings for the given week and year', function() {
-        app.cbb.getRankings({
+        app.mbb.getRankings({
             year: 2020,
             week: 9
         }).then((data) => {
@@ -72,7 +72,7 @@ describe('CBB Rankings', () => {
     });
 
     it('should return a promise for rankings for the current week and year', function() {
-        app.cbb.getRankings({})
+        app.mbb.getRankings({})
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;
@@ -81,7 +81,7 @@ describe('CBB Rankings', () => {
     });
 
     it('should return a promise for rankings for the given week and year', function() {
-        app.cbb.getRankings({
+        app.mbb.getRankings({
                 year: 2020,
                 week: 9
             })
@@ -93,10 +93,10 @@ describe('CBB Rankings', () => {
     });
 });
 
-describe('CBB Scoreboard', () => {
+describe('MBB Scoreboard', () => {
 
     it('should populate scoreboard data for the current week and year', function() {
-        app.cbb.getScoreboard({}).then((data) => {
+        app.mbb.getScoreboard({}).then((data) => {
             data.should.exist;
             data.should.be.json;
             data.should.not.be.empty;
@@ -104,7 +104,7 @@ describe('CBB Scoreboard', () => {
     });
 
     it('should populate scoreboard data for the given week and year', function() {
-        app.cbb.getScoreboard({
+        app.mbb.getScoreboard({
             year: 2021,
             month: 2,
             day: 15
@@ -116,7 +116,7 @@ describe('CBB Scoreboard', () => {
     });
 
     it('should return a promise for scoreboard data for the current week and year', function() {
-        app.cbb.getScoreboard({})
+        app.mbb.getScoreboard({})
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;
@@ -125,7 +125,7 @@ describe('CBB Scoreboard', () => {
     });
 
     it('should return a promise for scoreboard data for the given week and year', function() {
-        app.cbb.getScoreboard({
+        app.mbb.getScoreboard({
                 year: 2021,
                 month: 2,
                 day: 15
@@ -138,10 +138,10 @@ describe('CBB Scoreboard', () => {
     });
 });
 
-describe('CBB Standings', () => {
+describe('MBB Standings', () => {
 
     it('should populate standings for the given year', function() {
-        app.cbb.getStandings({
+        app.mbb.getStandings({
             year: 2020
         }).then((data) => {
             data.should.exist;
@@ -151,7 +151,7 @@ describe('CBB Standings', () => {
     });
 
     it('should return a promise for standings for the given year', function() {
-        app.cbb.getStandings({
+        app.mbb.getStandings({
                 year: 2020
             })
             .then((data) => {
@@ -161,10 +161,10 @@ describe('CBB Standings', () => {
             });
     });
 });
-describe('CBB Recruiting', () => {
+describe('MBB Recruiting', () => {
 
     it('should return a promise for a list of individual rankings for the given year', function() {
-        app.cbb.getPlayerRankings({
+        app.mbb.getPlayerRankings({
                 year: 2021
             })
             .then((data) => {
@@ -175,7 +175,7 @@ describe('CBB Recruiting', () => {
     });
 
     it('should return a promise for a list of individual rankings for the given year and position', function() {
-        app.cbb.getPlayerRankings({
+        app.mbb.getPlayerRankings({
                 year: 2021,
                 position: "C"
             })
@@ -187,7 +187,7 @@ describe('CBB Recruiting', () => {
     });
 
     it('should return a promise for a list of individual rankings for the given year and group', function() {
-        app.cbb.getPlayerRankings({
+        app.mbb.getPlayerRankings({
                 year: 2021,
                 group: "JuniorCollege"
             })
@@ -199,7 +199,7 @@ describe('CBB Recruiting', () => {
     });
 
     it('should return a promise for a list of school rankings for the given year', function() {
-        app.cbb.getSchoolRankings(2021)
+        app.mbb.getSchoolRankings(2021)
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;
@@ -208,7 +208,7 @@ describe('CBB Recruiting', () => {
     });
 
     it('should return a promise for a school\'s commit list for a given year', function() {
-        app.cbb.getSchoolCommits('floridastate', 2021)
+        app.mbb.getSchoolCommits('floridastate', 2021)
             .then((data) => {
                 data.should.exist;
                 data.should.be.json;

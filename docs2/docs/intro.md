@@ -35,6 +35,7 @@ For more information on the package and function reference, please see the [spor
 ## **Our Authors**
 
 -   [Saiem Gilani](https://twitter.com/saiemgilani)
+
 <a href="https://twitter.com/saiemgilani" target="blank"><img src="https://img.shields.io/twitter/follow/saiemgilani?color=blue&label=%40saiemgilani&logo=twitter&style=for-the-badge" alt="@saiemgilani" /></a>
 <a href="https://github.com/saiemgilani" target="blank"><img src="https://img.shields.io/github/followers/saiemgilani?color=eee&logo=Github&style=for-the-badge" alt="@saiemgilani" /></a>
 
@@ -289,7 +290,9 @@ Gets the College Football scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.cfb.getScoreboard(year = 2019, month = 11, day = 16, group=80)
+const result = await sdv.cfb.getScoreboard(
+year = 2019, month = 11, day = 16, group=80
+)
 ```
 <a name="cfb.getConferences"></a>
 
@@ -317,7 +320,8 @@ Gets the team standings for College Football.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.cfb.getStandings(year = yr);
+const yr = 2020;
+const result = await sdv.cfb.getStandings(year = yr);
 ```
 <a name="cfb.getTeamList"></a>
 
@@ -349,7 +353,8 @@ Gets the team info for a specific College Football team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.cfb.getTeamInfo(teamId);
+const teamId = 52;
+const result = await sdv.cfb.getTeamInfo(teamId);
 ```
 <a name="cfb.getTeamPlayers"></a>
 
@@ -364,7 +369,8 @@ Gets the team roster information for a specific College Football team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.cfb.getTeamPlayers(teamId);
+const teamId = 52;
+const result = await sdv.cfb.getTeamPlayers(teamId);
 ```
 
 Operations for Men's College Basketball.
@@ -382,7 +388,7 @@ Operations for Men's College Basketball.
     * [.getSchoolCommits(year, school)](#mbb.getSchoolCommits) ⇒
     * [.getSchedule(year, month, day, group, seasontype)](#mbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#mbb.getScoreboard) ⇒
-    * [.getConferences()](#mbb.getConferences) ⇒
+    * [.getConferences(year, group)](#mbb.getConferences) ⇒
     * [.getStandings(year, group)](#mbb.getStandings) ⇒
     * [.getTeamList(group)](#mbb.getTeamList) ⇒
     * [.getTeamInfo(id)](#mbb.getTeamInfo) ⇒
@@ -467,7 +473,9 @@ Gets the Men's College Basketball rankings data for a specified year and week if
 
 **Example**  
 ```js
-const result = await sdv.mbb.getRankings(year = 2020, week = 15)
+const result = await sdv.mbb.getRankings(
+year = 2020, week = 15
+)
 ```
 <a name="mbb.getPlayerRankings"></a>
 
@@ -539,7 +547,9 @@ Gets the Men's College Basketball schedule data for a specified date if availabl
 
 **Example**  
 ```js
-const result = await sdv.mbb.getSchedule(year = 2021, month = 02, day = 15, group=50)
+const result = await sdv.mbb.getSchedule(
+year = 2021, month = 02, day = 15, group=50
+)
 ```
 <a name="mbb.getScoreboard"></a>
 
@@ -560,18 +570,27 @@ Gets the Men's College Basketball scoreboard data for a specified date if availa
 
 **Example**  
 ```js
-const result = await sdv.mbb.getScoreboard(year = 2021, month = 02, day = 15, group=50)
+const result = await sdv.mbb.getScoreboard(
+year = 2021, month = 02, day = 15, group=50
+)
 ```
 <a name="mbb.getConferences"></a>
 
-### mbb.getConferences() ⇒
+### mbb.getConferences(year, group) ⇒
 Gets the Men's College Basketball Conferences.
 
 **Kind**: static method of [<code>mbb</code>](#mbb)  
 **Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+
 **Example**  
 ```js
-const result = await sdv.mbb.getConferences();
+const yr = 2021;
+const result = await sdv.mbb.getConferences(year = yr, group = 50);
 ```
 <a name="mbb.getStandings"></a>
 
@@ -584,11 +603,12 @@ Gets the team standings for Men's College Basketball.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III, see wbb.getConferences() for more info |
 
 **Example**  
 ```js
-const yr = 2020;const result = await sdv.mbb.getStandings(year = yr);
+const yr = 2020;
+const result = await sdv.mbb.getStandings(year = yr);
 ```
 <a name="mbb.getTeamList"></a>
 
@@ -620,7 +640,8 @@ Gets the team info for a specific College Basketball team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.mbb.getTeamInfo(teamId);
+const teamId = 52;
+const result = await sdv.mbb.getTeamInfo(teamId);
 ```
 <a name="mbb.getTeamPlayers"></a>
 
@@ -636,7 +657,8 @@ Gets the team roster information for a specific Men's College Basketball team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.mbb.getTeamPlayers(teamId);
+const teamId = 52;
+const result = await sdv.mbb.getTeamPlayers(teamId);
 ```
 
 Operations for NBA.
@@ -735,7 +757,9 @@ Gets the NBA schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nba.getSchedule(year = 2016, month = 04, day = 15)
+const result = await sdv.nba.getSchedule(
+year = 2016, month = 04, day = 15
+)
 ```
 <a name="nba.getScoreboard"></a>
 
@@ -754,7 +778,9 @@ Gets the NBA scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nba.getScoreboard(year = 2019, month = 11, day = 16)
+const result = await sdv.nba.getScoreboard(
+year = 2019, month = 11, day = 16
+)
 ```
 <a name="nba.getStandings"></a>
 
@@ -771,7 +797,8 @@ Gets the team standings for the NBA.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nba.getStandings(year = yr);
+const yr = 2016;
+const result = await sdv.nba.getStandings(year = yr);
 ```
 <a name="nba.getTeamList"></a>
 
@@ -798,7 +825,8 @@ Gets the team info for a specific NBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nba.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.nba.getTeamInfo(teamId);
 ```
 <a name="nba.getTeamPlayers"></a>
 
@@ -814,7 +842,8 @@ Gets the team roster information for a specific NBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nba.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.nba.getTeamPlayers(teamId);
 ```
 
 Operations for NCAA Sports.
@@ -839,7 +868,8 @@ Operations for NCAA Sports.
 <a name="ncaa.getRedirectUrl"></a>
 
 ### ncaa.getRedirectUrl(url) ⇒
-Gets the gameId for older games whose url redirects to the current url pattern using thegame url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard
+Gets the gameId for older games whose url redirects to the current url pattern using the
+game url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard
 
 **Kind**: static method of [<code>ncaa</code>](#ncaa)  
 **Returns**: json  
@@ -850,7 +880,11 @@ Gets the gameId for older games whose url redirects to the current url pattern u
 
 **Example**  
 ```js
-const result = await sdv.ncaaScoreboard.getNcaaScoreboard(sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15)const urlGame = result["games"][16]["game"]["url"]const gameId = await sdv.ncaa.getRedirectUrl(url=urlGame);
+const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
+sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
+)
+const urlGame = result["games"][16]["game"]["url"]
+const gameId = await sdv.ncaa.getRedirectUrl(url=urlGame);
 ```
 <a name="ncaa.getInfo"></a>
 
@@ -950,7 +984,9 @@ Gets the scoreboard data for a specified date and team sport if available.
 
 **Example**  
 ```js
-const result = await sdv.ncaa.getScoreboard(sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15)
+const result = await sdv.ncaa.getScoreboard(
+sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
+)
 ```
 <a name="ncaa.getSports"></a>
 
@@ -1157,7 +1193,9 @@ Gets the NFL schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nfl.getSchedule(year = 2019, month = 11, day = 17)
+const result = await sdv.nfl.getSchedule(
+year = 2019, month = 11, day = 17
+)
 ```
 <a name="nfl.getScoreboard"></a>
 
@@ -1176,7 +1214,9 @@ Gets the NFL scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nfl.getScoreboard(year = 2019, month = 11, day = 17)
+const result = await sdv.nfl.getScoreboard(
+year = 2019, month = 11, day = 17
+)
 ```
 <a name="nfl.getStandings"></a>
 
@@ -1193,7 +1233,8 @@ Gets the team standings for the NFL.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nfl.getStandings(year = yr);
+const yr = 2021;
+const result = await sdv.nfl.getStandings(year = yr);
 ```
 <a name="nfl.getTeamList"></a>
 
@@ -1219,7 +1260,8 @@ Gets the team info for a specific NFL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nfl.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.nfl.getTeamInfo(teamId);
 ```
 <a name="nfl.getTeamPlayers"></a>
 
@@ -1235,7 +1277,8 @@ Gets the team roster information for a specific NFL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nfl.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.nfl.getTeamPlayers(teamId);
 ```
 
 Operations for NHL.
@@ -1334,7 +1377,9 @@ Gets the NHL schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nhl.getSchedule(year = 2019, month = 11, day = 17)
+const result = await sdv.nhl.getSchedule(
+year = 2019, month = 11, day = 17
+)
 ```
 <a name="nhl.getScoreboard"></a>
 
@@ -1353,7 +1398,9 @@ Gets the NHL scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nhl.getScoreboard(year = 2019, month = 11, day = 16)
+const result = await sdv.nhl.getScoreboard(
+year = 2019, month = 11, day = 16
+)
 ```
 <a name="nhl.getStandings"></a>
 
@@ -1370,7 +1417,8 @@ Gets the team standings for the NHL.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nhl.getStandings(year = yr);
+const yr = 2016;
+const result = await sdv.nhl.getStandings(year = yr);
 ```
 <a name="nhl.getTeamList"></a>
 
@@ -1396,7 +1444,8 @@ Gets the team info for a specific NHL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nhl.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.nhl.getTeamInfo(teamId);
 ```
 <a name="nhl.getTeamPlayers"></a>
 
@@ -1412,7 +1461,8 @@ Gets the team roster information for a specific NHL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nhl.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.nhl.getTeamPlayers(teamId);
 ```
 
 Operations for WBB.
@@ -1426,7 +1476,7 @@ Operations for WBB.
     * [.getRankings(year, week)](#wbb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype, limit)](#wbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#wbb.getScoreboard) ⇒
-    * [.getConferences()](#wbb.getConferences)
+    * [.getConferences(year, group)](#wbb.getConferences) ⇒
     * [.getStandings(year, group)](#wbb.getStandings) ⇒
     * [.getTeamList(group)](#wbb.getTeamList) ⇒
     * [.getTeamInfo(id)](#wbb.getTeamInfo) ⇒
@@ -1495,7 +1545,9 @@ Gets the WBB rankings data for a specified year and week if available.
 
 **Example**  
 ```js
-const result = await sdv.wbb.getRankings(year = 2021, week = 4)
+const result = await sdv.wbb.getRankings(
+year = 2021, week = 4
+)
 ```
 <a name="wbb.getSchedule"></a>
 
@@ -1516,7 +1568,9 @@ Gets the Women's College Basketball schedule data for a specified date if availa
 
 **Example**  
 ```js
-const result = await sdv.wbb.getSchedule(year = 2021, month = 02, day = 15, group=50)
+const result = await sdv.wbb.getSchedule(
+year = 2021, month = 02, day = 15, group=50
+)
 ```
 <a name="wbb.getScoreboard"></a>
 
@@ -1537,17 +1591,27 @@ Gets the Women's College Basketball scoreboard data for a specified date if avai
 
 **Example**  
 ```js
-const result = await sdv.wbb.getScoreboard(year = 2019, month = 02, day = 15, group=50)
+const result = await sdv.wbb.getScoreboard(
+year = 2019, month = 02, day = 15, group=50
+)
 ```
 <a name="wbb.getConferences"></a>
 
-### wbb.getConferences()
+### wbb.getConferences(year, group) ⇒
 Gets the list of all Women's College Basketball conferences and their identification info for ESPN.
 
 **Kind**: static method of [<code>wbb</code>](#wbb)  
+**Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+
 **Example**  
 ```js
-const result = await sdv.wbb.getConferences();
+const yr = 2021;
+const result = await sdv.wbb.getConferences(year = yr, group = 50);
 ```
 <a name="wbb.getStandings"></a>
 
@@ -1560,11 +1624,12 @@ Gets the team standings for Women's College Basketball.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III, see wbb.getConferences() for more info |
 
 **Example**  
 ```js
-const yr = 2020;const result = await sdv.wbb.getStandings(year = yr);
+const yr = 2020;
+const result = await sdv.wbb.getStandings(year = yr);
 ```
 <a name="wbb.getTeamList"></a>
 
@@ -1580,7 +1645,8 @@ Gets the list of all Women's College Basketball teams their identification info 
 
 **Example**  
 ```js
-get list of teamsconst result = await sdv.wbb.getTeamList(group=50);
+get list of teams
+const result = await sdv.wbb.getTeamList(group=50);
 ```
 <a name="wbb.getTeamInfo"></a>
 
@@ -1596,7 +1662,8 @@ Gets the team info for a specific WBB team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.wbb.getTeamInfo(teamId);
+const teamId = 52;
+const result = await sdv.wbb.getTeamInfo(teamId);
 ```
 <a name="wbb.getTeamPlayers"></a>
 
@@ -1612,7 +1679,8 @@ Gets the team roster information for a specific WBB team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.wbb.getTeamPlayers(teamId);
+const teamId = 52;
+const result = await sdv.wbb.getTeamPlayers(teamId);
 ```
 
 Operations for WNBA.
@@ -1694,7 +1762,9 @@ Gets the WNBA schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.wnba.getSchedule(year = 2019, month = 07, day = 15)
+const result = await sdv.wnba.getSchedule(
+year = 2019, month = 07, day = 15
+)
 ```
 <a name="wnba.getScoreboard"></a>
 
@@ -1713,7 +1783,9 @@ Gets the WNBA scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.wnba.getScoreboard(year = 2019, month = 07, day = 15)
+const result = await sdv.wnba.getScoreboard(
+year = 2019, month = 07, day = 15
+)
 ```
 <a name="wnba.getStandings"></a>
 
@@ -1726,11 +1798,12 @@ Gets the team standings for the WNBA.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference','division' |
+| group | <code>number</code> | acceptable group names: 'league','conference' |
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.wnba.getStandings(year = yr);
+const yr = 2016;
+const result = await sdv.wnba.getStandings(year = yr);
 ```
 <a name="wnba.getTeamList"></a>
 
@@ -1757,7 +1830,8 @@ Gets the team info for a specific WNBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.wnba.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.wnba.getTeamInfo(teamId);
 ```
 <a name="wnba.getTeamPlayers"></a>
 
@@ -1773,7 +1847,8 @@ Gets the team roster information for a specific WNBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.wnba.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.wnba.getTeamPlayers(teamId);
 ```
 
 * * *

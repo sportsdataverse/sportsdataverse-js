@@ -161,24 +161,27 @@ const axios = require('axios');
      * @async
      * @function
      * @param {number} year - Season
-     * @param {number} group - acceptable group names: 'league','conference','division'
+     * @param {number} group - acceptable group names: 'league','conference'
      * @returns json
      * @example
      * const yr = 2016;
      * const result = await sdv.wnba.getStandings(year = yr);
      */
     getStandings: async function ({year = new Date().getFullYear(), group = 'league'}){
-        const baseUrl = `http://cdn.espn.com/core/wnba/standings/_/season/${year}/group/${group}`;
+        const groupId = group === 'league' ? 1 : 2;
+        const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/wnba/standings`;
         const params = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
+            region: 'us',
+            lang: 'en',
+            contentorigin: 'espn',
+            season: year,
+            type: 0,
+            level: groupId
         };
         const res = await axios.get(baseUrl, {
             params
         });
-        return res.content.standings.groups;
+        return res.content.standings.entries;
     },
     /**
      * Gets the list of all WNBA teams their identification info for ESPN.

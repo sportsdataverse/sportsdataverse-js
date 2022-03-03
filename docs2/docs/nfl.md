@@ -133,7 +133,7 @@ Gets the team standings for the NFL.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nfl.getStandings(year = yr);
+const yr = 2021;const result = await sdv.nfl.getStandings(year = yr);
 ```
 <a name="nfl.getTeamList"></a>
 

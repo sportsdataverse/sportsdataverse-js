@@ -223,7 +223,7 @@ Gets the team standings for College Football.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.cfb.getStandings(year = yr);
+const yr = 2020;const result = await sdv.cfb.getStandings(year = yr);
 ```
 <a name="cfb.getTeamList"></a>
 

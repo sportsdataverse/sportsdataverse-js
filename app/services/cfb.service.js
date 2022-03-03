@@ -421,24 +421,27 @@ module.exports = {
      * @param {number} group - Group is 80 for FBS, 81 for FCS
      * @returns json
      * @example
-     * const yr = 2016;
+     * const yr = 2020;
      * const result = await sdv.cfb.getStandings(year = yr);
      */
-    getStandings: async function({year = new Date().getFullYear(), group = 80}) {
-        const baseUrl = `http://cdn.espn.com/core/college-football/standings/_/season/${year}/group/${group}`;
-
+    getStandings: async function ({year = new Date().getFullYear(), group = 80}){
+        const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/football/college-football/standings`;
         const params = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
+            region: 'us',
+            lang: 'en',
+            contentorigin: 'espn',
+            season: year,
+            group: group,
+            type: 0,
+            level: 1,
+            sort: 'winpercent:desc,leaguewinpercent:desc,vsconf_winpercent:desc,'+
+            'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,'+
+            'losses:desc,playoffseed:asc,alpha:asc'
         };
-
         const res = await axios.get(baseUrl, {
             params
         });
-
-        return res.content.standings.groups;
+        return res.content.standings.entries;
     },
     /**
      * Gets the list of all College Football teams their identification info for ESPN.

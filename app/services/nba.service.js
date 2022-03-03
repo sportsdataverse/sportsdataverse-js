@@ -195,17 +195,20 @@ module.exports = {
      * const result = await sdv.nba.getStandings(year = yr);
      */
     getStandings: async function ({year = new Date().getFullYear(), group = 'league'}){
-        const baseUrl = `http://cdn.espn.com/core/nba/standings/_/season/${year}/group/${group}`;
+        const groupId = group === 'league' ? 1 : group === 'conference' ? 2 : 3;
+        const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings`;
         const params = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
+            region: 'us',
+            lang: 'en',
+            contentorigin: 'espn',
+            season: year,
+            type: 1,
+            level: groupId
         };
         const res = await axios.get(baseUrl, {
             params
         });
-        return res.content.standings.groups;
+        return res.content.standings.entries;
     },
     /**
      * Gets the list of all NBA teams their identification info for ESPN.
