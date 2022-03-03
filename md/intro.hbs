@@ -1,8 +1,8 @@
-
-|title | sidebar_label | sidebar_position |
-|:------|:------------------|:------|
-| "Getting Started" | "Getting Started" | 1 |
-
+---
+title: Getting Started
+sidebar_label: Getting Started
+sidebar_position: 1
+---
 ## **sportsdataverse-js**
 
 <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse/master/docs2/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
