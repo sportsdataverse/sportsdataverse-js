@@ -16,7 +16,7 @@ Operations for College Football.
     * [.getRankings(year, week)](#cfb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype)](#cfb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#cfb.getScoreboard) ⇒
-    * [.getConferences()](#cfb.getConferences) ⇒
+    * [.getConferences(year, group)](#cfb.getConferences) ⇒
     * [.getStandings(year, group)](#cfb.getStandings) ⇒
     * [.getTeamList(group)](#cfb.getTeamList) ⇒
     * [.getTeamInfo(id)](#cfb.getTeamInfo) ⇒
@@ -199,14 +199,20 @@ const result = await sdv.cfb.getScoreboard(year = 2019, month = 11, day = 16, g
 ```
 <a name="cfb.getConferences"></a>
 
-### cfb.getConferences() ⇒
+### cfb.getConferences(year, group) ⇒
 Gets the list of all College Football conferences and their identification info for ESPN.
 
 **Kind**: static method of [<code>cfb</code>](#cfb)  
 **Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 80 for FBS, 81 for FCS |
+
 **Example**  
 ```js
-const result = await sdv.cfb.getConferences();
+const yr = 2021;const result = await sdv.cfb.getConferences(year = yr, group = 80);
 ```
 <a name="cfb.getStandings"></a>
 

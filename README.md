@@ -105,7 +105,7 @@ Operations for College Football.
     * [.getRankings(year, week)](#cfb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype)](#cfb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#cfb.getScoreboard) ⇒
-    * [.getConferences()](#cfb.getConferences) ⇒
+    * [.getConferences(year, group)](#cfb.getConferences) ⇒
     * [.getStandings(year, group)](#cfb.getStandings) ⇒
     * [.getTeamList(group)](#cfb.getTeamList) ⇒
     * [.getTeamInfo(id)](#cfb.getTeamInfo) ⇒
@@ -288,14 +288,20 @@ const result = await sdv.cfb.getScoreboard(year = 2019, month = 11, day = 16, g
 ```
 <a name="cfb.getConferences"></a>
 
-### cfb.getConferences() ⇒
+### cfb.getConferences(year, group) ⇒
 Gets the list of all College Football conferences and their identification info for ESPN.
 
 **Kind**: static method of [<code>cfb</code>](#cfb)  
 **Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 80 for FBS, 81 for FCS |
+
 **Example**  
 ```js
-const result = await sdv.cfb.getConferences();
+const yr = 2021;const result = await sdv.cfb.getConferences(year = yr, group = 80);
 ```
 <a name="cfb.getStandings"></a>
 
@@ -768,7 +774,7 @@ Gets the team standings for the NBA.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference','division' |
+| group | <code>string</code> | acceptable group names: 'league','conference','division' |
 
 **Example**  
 ```js
@@ -1010,10 +1016,10 @@ Request the data from the NCAA Stats website.
 | sport | Sport abbreviation. Acceptable values: 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football, 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse', 'MSO' = Men's Soccer, 'MTE' = Men's Tennis, 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo, 'WBB' = Women's Basketball, 'WBW' = Women's Bowling, 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey, 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball, 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball, 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball, 'WWP' = Women's Water Polo |
 | season | Season of query, value for 2016-2017 season would be 2017. |
 | division | Division, for college football: 11 for FBS, 12 for FCS, otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III. |
-| rankingPeriod | Integer value indicating the ranking period, options can be found from using the @function ncaaSports.getSportDivisionData function. |
+| rankingPeriod | Integer value indicating the ranking period, options can be found from using the @function ncaa.getSportDivisionData function. |
 | type | Individual or Team type of statistics |
 | gameHigh | logical, indicating whether the statistic desired is of the game-high variety |
-| category | Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData |
+| category | Value for the stat category, can also be found using the @function ncaa.getSportDivisionData |
 
 **Example**  
 ```js
@@ -1032,9 +1038,9 @@ Get the Player Data from the NCAA Stats website.
 | sport |  | Sport abbreviation. Acceptable values: 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football, 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse', 'MSO' = Men's Soccer, 'MTE' = Men's Tennis, 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo, 'WBB' = Women's Basketball, 'WBW' = Women's Bowling, 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey, 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball, 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball, 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball, 'WWP' = Women's Water Polo |
 | season |  | Season of query, value for 2016-2017 season would be 2017. |
 | division |  | Division, for college football: 11 for FBS, 12 for FCS, otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III. |
-| rankingPeriod |  | Integer value indicating the ranking period, options can be found from using the @function ncaaSports.getSportDivisionData function. |
+| rankingPeriod |  | Integer value indicating the ranking period, options can be found from using the @function ncaa.getSportDivisionData function. |
 | gameHigh | <code>&#x27;Y&#x27;</code> \| <code>&#x27;N&#x27;</code> | logical, indicating whether the statistic desired is of the game-high variety |
-| category |  | Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData |
+| category |  | Value for the stat category, can also be found using the @function ncaa.getSportDivisionData |
 
 **Example**  
 ```js
@@ -1190,7 +1196,7 @@ Gets the team standings for the NFL.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference','division' |
+| group | <code>string</code> | acceptable group names: 'league','conference','division' |
 
 **Example**  
 ```js
@@ -1367,7 +1373,7 @@ Gets the team standings for the NHL.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference','division' |
+| group | <code>string</code> | acceptable group names: 'league','conference','division' |
 
 **Example**  
 ```js
@@ -1734,7 +1740,7 @@ Gets the team standings for the WNBA.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference' |
+| group | <code>string</code> | acceptable group names: 'league','conference' |
 
 **Example**  
 ```js

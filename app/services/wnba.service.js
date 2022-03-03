@@ -161,7 +161,7 @@ const axios = require('axios');
      * @async
      * @function
      * @param {number} year - Season
-     * @param {number} group - acceptable group names: 'league','conference'
+     * @param {string} group - acceptable group names: 'league','conference'
      * @returns json
      * @example
      * const yr = 2016;

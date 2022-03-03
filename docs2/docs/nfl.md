@@ -129,7 +129,7 @@ Gets the team standings for the NFL.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference','division' |
+| group | <code>string</code> | acceptable group names: 'league','conference','division' |
 
 **Example**  
 ```js

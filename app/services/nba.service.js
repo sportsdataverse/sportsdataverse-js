@@ -188,7 +188,7 @@ module.exports = {
      * @async
      * @function
      * @param {number} year - Season
-     * @param {number} group - acceptable group names: 'league','conference','division'
+     * @param {string} group - acceptable group names: 'league','conference','division'
      * @returns json
      * @example
      * const yr = 2016;

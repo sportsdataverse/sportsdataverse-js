@@ -297,10 +297,10 @@ module.exports = {
      * @param division Division, for college football: 11 for FBS, 12 for FCS,
      * otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III.
      * @param rankingPeriod Integer value indicating the ranking period, options can be
-     * found from using the @function ncaaSports.getSportDivisionData function.
+     * found from using the @function ncaa.getSportDivisionData function.
      * @param type Individual or Team type of statistics
      * @param gameHigh logical, indicating whether the statistic desired is of the game-high variety
-     * @param category Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData
+     * @param category Value for the stat category, can also be found using the @function ncaa.getSportDivisionData
      * @returns json
      * @example
      * const sportDivisionData = sdv.ncaa.getSportDivisionData(sport='MFB',season='2016',division=12,type='team',gameHigh=true);
@@ -369,9 +369,9 @@ module.exports = {
      * @param division Division, for college football: 11 for FBS, 12 for FCS,
      * otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III.
      * @param rankingPeriod Integer value indicating the ranking period, options can be
-     * found from using the @function ncaaSports.getSportDivisionData function.
+     * found from using the @function ncaa.getSportDivisionData function.
      * @param {'Y'|'N'} gameHigh logical, indicating whether the statistic desired is of the game-high variety
-     * @param category Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData
+     * @param category Value for the stat category, can also be found using the @function ncaa.getSportDivisionData
      * @returns json
      * @example
      * const players =  await sdv.ncaa.getPlayerData(sport = 'MFB', year = '2017', division = '11',rankingPeriod = '52', gameHigh='N', category = '20')

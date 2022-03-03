@@ -402,14 +402,23 @@ module.exports = {
      * @memberOf cfb
      * @async
      * @function
+     * @param {number} year - Season
+     * @param {number} group - Group is 80 for FBS, 81 for FCS
      * @returns json
      * @example
-     * const result = await sdv.cfb.getConferences();
+     * const yr = 2021;
+     * const result = await sdv.cfb.getConferences(year = yr, group = 80);
      */
-    getConferences: async function() {
+    getConferences: async function ({year = new Date().getFullYear(), group = 80}){
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard/conferences';
 
-        const res = await axios.get(baseUrl);
+        const params = {
+            season: year,
+            group: group
+        };
+        const res = await axios.get(baseUrl, {
+            params
+        });
         return res.data;
     },
     /**

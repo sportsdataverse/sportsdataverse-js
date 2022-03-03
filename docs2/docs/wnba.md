@@ -112,7 +112,7 @@ Gets the team standings for the WNBA.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference' |
+| group | <code>string</code> | acceptable group names: 'league','conference' |
 
 **Example**  
 ```js

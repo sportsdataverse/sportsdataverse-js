@@ -193,10 +193,10 @@ Request the data from the NCAA Stats website.
 | sport | Sport abbreviation. Acceptable values: 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football, 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse', 'MSO' = Men's Soccer, 'MTE' = Men's Tennis, 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo, 'WBB' = Women's Basketball, 'WBW' = Women's Bowling, 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey, 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball, 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball, 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball, 'WWP' = Women's Water Polo |
 | season | Season of query, value for 2016-2017 season would be 2017. |
 | division | Division, for college football: 11 for FBS, 12 for FCS, otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III. |
-| rankingPeriod | Integer value indicating the ranking period, options can be found from using the @function ncaaSports.getSportDivisionData function. |
+| rankingPeriod | Integer value indicating the ranking period, options can be found from using the @function ncaa.getSportDivisionData function. |
 | type | Individual or Team type of statistics |
 | gameHigh | logical, indicating whether the statistic desired is of the game-high variety |
-| category | Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData |
+| category | Value for the stat category, can also be found using the @function ncaa.getSportDivisionData |
 
 **Example**  
 ```js
@@ -215,9 +215,9 @@ Get the Player Data from the NCAA Stats website.
 | sport |  | Sport abbreviation. Acceptable values: 'MBA' = Baseball, 'MBB' = Men's basketball, 'MFB' = Men's Football, 'MIH' = Men's Ice-hockey, 'MLA' = Men's Lacrosse', 'MSO' = Men's Soccer, 'MTE' = Men's Tennis, 'MVB' = Men's Volleyball, 'MWP' = Men's Water Polo, 'WBB' = Women's Basketball, 'WBW' = Women's Bowling, 'WFH' = Field Hockey, 'WIH' = Women's Ice-Hockey, 'WLA' = Women's Lacrosse, 'WSB' = Women's Softball, 'WSO' = Women's Soccer, 'WSV' = Women's Beach Volleyball, 'WTE' = Women's Tennis, 'WVB' = Women's Volleyball, 'WWP' = Women's Water Polo |
 | season |  | Season of query, value for 2016-2017 season would be 2017. |
 | division |  | Division, for college football: 11 for FBS, 12 for FCS, otherwise 1 for Division-I, 2 for Division-II, 3 for Division-III. |
-| rankingPeriod |  | Integer value indicating the ranking period, options can be found from using the @function ncaaSports.getSportDivisionData function. |
+| rankingPeriod |  | Integer value indicating the ranking period, options can be found from using the @function ncaa.getSportDivisionData function. |
 | gameHigh | <code>&#x27;Y&#x27;</code> \| <code>&#x27;N&#x27;</code> | logical, indicating whether the statistic desired is of the game-high variety |
-| category |  | Value for the stat category, can also be found using the @function ncaaSports.getSportDivisionData |
+| category |  | Value for the stat category, can also be found using the @function ncaa.getSportDivisionData |
 
 **Example**  
 ```js
