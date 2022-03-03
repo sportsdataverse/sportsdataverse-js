@@ -380,14 +380,23 @@ module.exports = {
      * @memberOf mbb
      * @async
      * @function
+     * @param {number} year - Season
+     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
      * @returns json
      * @example
-     * const result = await sdv.mbb.getConferences();
+     * const yr = 2021;
+     * const result = await sdv.mbb.getConferences(year = yr, group = 50);
      */
-    getConferences: async function () {
+    getConferences: async function ({year = new Date().getFullYear(), group = 50}){
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
 
-        const res = await axios.get(baseUrl);
+        const params = {
+            season: year,
+            group: group
+        };
+        const res = await axios.get(baseUrl, {
+            params
+        });
         return res.data;
     },
 
@@ -397,30 +406,30 @@ module.exports = {
      * @async
      * @function
      * @param {number} year - Season
-     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
+     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III, see wbb.getConferences() for more info
      * @returns json
      * @example
      * const yr = 2020;
      * const result = await sdv.mbb.getStandings(year = yr);
      */
-    getStandings: async function ({
-        year = new Date().getFullYear(),
-        group = 50
-    }) {
-        const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/standings/_/season/${year}/group/${group}`;
-
+    getStandings: async function ({year = new Date().getFullYear(), group = 50}){
+        const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/mens-college-basketball/standings`;
         const params = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
+            region: 'us',
+            lang: 'en',
+            contentorigin: 'espn',
+            season: year,
+            group: group,
+            type: 0,
+            level: 1,
+            sort: 'leaguewinpercent:desc,vsconf_winpercent:desc,'+
+            'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,'+
+            'losses:desc,playoffseed:asc,alpha:asc'
         };
-
         const res = await axios.get(baseUrl, {
             params
         });
-
-        return res.content.standings.groups;
+        return res.content.standings.entries;
     },
     /**
      * Gets the list of all College Football teams their identification info for ESPN.

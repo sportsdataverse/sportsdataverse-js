@@ -312,7 +312,7 @@ Gets the team standings for College Football.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.cfb.getStandings(year = yr);
+const yr = 2020;const result = await sdv.cfb.getStandings(year = yr);
 ```
 <a name="cfb.getTeamList"></a>
 
@@ -377,7 +377,7 @@ Operations for Men's College Basketball.
     * [.getSchoolCommits(year, school)](#mbb.getSchoolCommits) ⇒
     * [.getSchedule(year, month, day, group, seasontype)](#mbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#mbb.getScoreboard) ⇒
-    * [.getConferences()](#mbb.getConferences) ⇒
+    * [.getConferences(year, group)](#mbb.getConferences) ⇒
     * [.getStandings(year, group)](#mbb.getStandings) ⇒
     * [.getTeamList(group)](#mbb.getTeamList) ⇒
     * [.getTeamInfo(id)](#mbb.getTeamInfo) ⇒
@@ -559,14 +559,20 @@ const result = await sdv.mbb.getScoreboard(year = 2021, month = 02, day = 15, g
 ```
 <a name="mbb.getConferences"></a>
 
-### mbb.getConferences() ⇒
+### mbb.getConferences(year, group) ⇒
 Gets the Men's College Basketball Conferences.
 
 **Kind**: static method of [<code>mbb</code>](#mbb)  
 **Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+
 **Example**  
 ```js
-const result = await sdv.mbb.getConferences();
+const yr = 2021;const result = await sdv.mbb.getConferences(year = yr, group = 50);
 ```
 <a name="mbb.getStandings"></a>
 
@@ -579,7 +585,7 @@ Gets the team standings for Men's College Basketball.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III, see wbb.getConferences() for more info |
 
 **Example**  
 ```js
@@ -1188,7 +1194,7 @@ Gets the team standings for the NFL.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nfl.getStandings(year = yr);
+const yr = 2021;const result = await sdv.nfl.getStandings(year = yr);
 ```
 <a name="nfl.getTeamList"></a>
 
@@ -1421,7 +1427,7 @@ Operations for WBB.
     * [.getRankings(year, week)](#wbb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype, limit)](#wbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#wbb.getScoreboard) ⇒
-    * [.getConferences()](#wbb.getConferences)
+    * [.getConferences(year, group)](#wbb.getConferences) ⇒
     * [.getStandings(year, group)](#wbb.getStandings) ⇒
     * [.getTeamList(group)](#wbb.getTeamList) ⇒
     * [.getTeamInfo(id)](#wbb.getTeamInfo) ⇒
@@ -1536,13 +1542,20 @@ const result = await sdv.wbb.getScoreboard(year = 2019, month = 02, day = 15, g
 ```
 <a name="wbb.getConferences"></a>
 
-### wbb.getConferences()
+### wbb.getConferences(year, group) ⇒
 Gets the list of all Women's College Basketball conferences and their identification info for ESPN.
 
 **Kind**: static method of [<code>wbb</code>](#wbb)  
+**Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+
 **Example**  
 ```js
-const result = await sdv.wbb.getConferences();
+const yr = 2021;const result = await sdv.wbb.getConferences(year = yr, group = 50);
 ```
 <a name="wbb.getStandings"></a>
 
@@ -1555,7 +1568,7 @@ Gets the team standings for Women's College Basketball.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III, see wbb.getConferences() for more info |
 
 **Example**  
 ```js
@@ -1721,7 +1734,7 @@ Gets the team standings for the WNBA.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | acceptable group names: 'league','conference','division' |
+| group | <code>number</code> | acceptable group names: 'league','conference' |
 
 **Example**  
 ```js

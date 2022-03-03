@@ -12,7 +12,7 @@ Operations for WBB.
     * [.getRankings(year, week)](#wbb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype, limit)](#wbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#wbb.getScoreboard) ⇒
-    * [.getConferences()](#wbb.getConferences)
+    * [.getConferences(year, group)](#wbb.getConferences) ⇒
     * [.getStandings(year, group)](#wbb.getStandings) ⇒
     * [.getTeamList(group)](#wbb.getTeamList) ⇒
     * [.getTeamInfo(id)](#wbb.getTeamInfo) ⇒
@@ -127,13 +127,20 @@ const result = await sdv.wbb.getScoreboard(year = 2019, month = 02, day = 15, g
 ```
 <a name="wbb.getConferences"></a>
 
-### wbb.getConferences()
+### wbb.getConferences(year, group) ⇒
 Gets the list of all Women's College Basketball conferences and their identification info for ESPN.
 
 **Kind**: static method of [<code>wbb</code>](#wbb)  
+**Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| year | <code>number</code> | Season |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+
 **Example**  
 ```js
-const result = await sdv.wbb.getConferences();
+const yr = 2021;const result = await sdv.wbb.getConferences(year = yr, group = 50);
 ```
 <a name="wbb.getStandings"></a>
 
@@ -146,7 +153,7 @@ Gets the team standings for Women's College Basketball.
 | Param | Type | Description |
 | --- | --- | --- |
 | year | <code>number</code> | Season |
-| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III |
+| group | <code>number</code> | Group is 50 for Division-I, 51 for Division-II, 52 for Division-III, see wbb.getConferences() for more info |
 
 **Example**  
 ```js
