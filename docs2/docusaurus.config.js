@@ -11,7 +11,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'SportsDataverse', // Usually your GitHub org/user name.
-  projectName: 'sportsdataverse-js', // Usually your repo name.
+  projectName: 'sportsdataverse', // Usually your repo name.
   themeConfig: {
     hideableSidebar: true,
     colorMode: {
@@ -195,7 +195,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/saiemgilani/sportsdataverse/edit/master/docs/',
+            'https://github.com/saiemgilani/sportsdataverse-js/edit/master/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

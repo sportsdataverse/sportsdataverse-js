@@ -1,4 +1,6 @@
-# **sportsdataverse** <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse/master/docs2/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
+<a name="sportsdataverse"></a>
+## **sportsdataverse**
+<a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse/master/docs2/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
 
 ![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)
 ![Contributors](https://img.shields.io/github/contributors/saiemgilani/sportsdataverse?style=for-the-badge)
@@ -11,41 +13,6 @@
 
 ```bash
 npm install sportsdataverse
-```
-## **Documentation**
-
-For more information on the package and function reference, please see the [sportsdataverse node.js documentation website](https://js.sportsdataverse.org/)
-
-## **Breaking Changes**
-
-[**Full News on Releases**](https://js.sportsdataverse.org/CHANGELOG)
-
-## Follow the [SportsDataverse](https://twitter.com/SportsDataverse) on Twitter and star this repo
-
-[![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse) 
-
-[![GitHub stars](https://img.shields.io/github/stars/saiemgilani/sportsdataverse.svg?color=eee&logo=github&style=for-the-badge&label=Star%20sportsdataverse&maxAge=2592000)](https://github.com/saiemgilani/sportsdataverse/stargazers/)
-
-## **Our Authors**
-
--   [Saiem Gilani](https://twitter.com/saiemgilani)
-
-<a href="https://twitter.com/saiemgilani" target="blank"><img src="https://img.shields.io/twitter/follow/saiemgilani?color=blue&label=%40saiemgilani&logo=twitter&style=for-the-badge" alt="@saiemgilani" /></a>
-<a href="https://github.com/saiemgilani" target="blank"><img src="https://img.shields.io/github/followers/saiemgilani?color=eee&logo=Github&style=for-the-badge" alt="@saiemgilani" /></a>
-
-
-## **Citations**
-
-To cite the [**`sportsdataverse`**](https://js.sportsdataverse.org) Node.js package in publications, use:
-
-BibTex Citation
-```bibtex
-@misc{gilani_2021_sportsdataverse_js,
-  author = {Gilani, Saiem},
-  title = {sportsdataverse-js: The SportsDataverse's Node.js Package for Sports Data.},
-  url = {https://js.sportsdataverse.org},
-  year = {2021}
-}
 ```
 
 ## **Overview of Services**
@@ -1790,6 +1757,42 @@ Gets the team roster information for a specific WNBA team.
 const teamId = 16;const result = await sdv.wnba.getTeamPlayers(teamId);
 ```
 
+
+## **Documentation**
+
+For more information on the package and function reference, please see the [sportsdataverse node.js documentation website](https://js.sportsdataverse.org/)
+
+## **Breaking Changes**
+
+[**Full News on Releases**](https://js.sportsdataverse.org/CHANGELOG)
+
+## Follow the [SportsDataverse](https://twitter.com/SportsDataverse) on Twitter and star this repo
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse) 
+
+[![GitHub stars](https://img.shields.io/github/stars/saiemgilani/sportsdataverse.svg?color=eee&logo=github&style=for-the-badge&label=Star%20sportsdataverse&maxAge=2592000)](https://github.com/saiemgilani/sportsdataverse/stargazers/)
+
+## **Our Authors**
+
+-   [Saiem Gilani](https://twitter.com/saiemgilani)
+
+<a href="https://twitter.com/saiemgilani" target="blank"><img src="https://img.shields.io/twitter/follow/saiemgilani?color=blue&label=%40saiemgilani&logo=twitter&style=for-the-badge" alt="@saiemgilani" /></a>
+<a href="https://github.com/saiemgilani" target="blank"><img src="https://img.shields.io/github/followers/saiemgilani?color=eee&logo=Github&style=for-the-badge" alt="@saiemgilani" /></a>
+
+
+## **Citations**
+
+To cite the [**`sportsdataverse`**](https://js.sportsdataverse.org) Node.js package in publications, use:
+
+BibTex Citation
+```bibtex
+@misc{gilani_2021_sportsdataverse_js,
+  author = {Gilani, Saiem},
+  title = {sportsdataverse-js: The SportsDataverse's Node.js Package for Sports Data.},
+  url = {https://js.sportsdataverse.org},
+  year = {2021}
+}
+```
 * * *
 
 &copy; 2020-21 <a href="https://js.sportsdataverse.org/">sportsdataverse.js</a>, developed by <a href='https://twitter.com/saiemgilani'>Saiem Gilani</a>, part of the <a href='https://sportsdataverse.org'>SportsDataverse</a>

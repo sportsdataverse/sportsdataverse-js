@@ -1,5 +1,5 @@
 # ChangeLog
-## **V1.2.0**
+## **V1.2.0-1**
 - Updated standings functions to be able to provide league-wide, conference and division for each applicable existing sport from ESPN.
 
 ## **V1.1.0**
