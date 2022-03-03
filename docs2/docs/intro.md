@@ -1,6 +1,7 @@
-<h1 title="Getting Started" sidebar-label="Getting Started" sidebar-position=1>Getting Started</h1>
 
-
+|title | sidebar_label | sidebar_position |
+|:------|:------------------|:------|
+| "Getting Started" | "Getting Started" | 1 |
 
 ## **sportsdataverse-js**
 
