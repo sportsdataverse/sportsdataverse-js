@@ -214,7 +214,7 @@ module.exports = {
         const res = await axios.get(baseUrl, {
             params
         });
-        return res.content.standings.entries;
+        return res.data;
     },
     /**
      * Gets the list of all NHL teams their identification info for ESPN.

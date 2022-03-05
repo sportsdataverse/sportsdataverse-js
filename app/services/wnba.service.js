@@ -181,7 +181,7 @@ const axios = require('axios');
         const res = await axios.get(baseUrl, {
             params
         });
-        return res.content.standings.entries;
+        return res.data;
     },
     /**
      * Gets the list of all WNBA teams their identification info for ESPN.
