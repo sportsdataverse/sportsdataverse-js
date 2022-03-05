@@ -22,7 +22,7 @@ module.exports = {
     image: 'img/Sportsdataverse_gh.png',
     navbar: {
       hideOnScroll: true,
-      title: 'sportsdataverse',
+      title: 'sdv.js',
       logo: {
         alt: 'sportsdataverse-js Logo',
         src: 'img/logo.png',

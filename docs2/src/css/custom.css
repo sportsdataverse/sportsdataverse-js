@@ -77,10 +77,10 @@ h3, h4, h5, h6, .h3, .h4{
 }
 .navbar__item.navbar__link,.navbar__link.navbar__link--active.navbar__link--active{
   font-family: "Fira Mono";
-  letter-spacing: 0.6px;
+  letter-spacing: 0.1px;
   line-height: 1.8rem; /* increases, so wrapping headers don't overlap */
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 pre, code {
