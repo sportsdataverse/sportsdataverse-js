@@ -195,7 +195,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/saiemgilani/sportsdataverse-js/edit/master/docs/',
+            'https://github.com/saiemgilani/sportsdataverse-js/edit/main/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
