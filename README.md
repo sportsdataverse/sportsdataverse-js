@@ -1,5 +1,6 @@
 # **sportsdataverse** <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse-js/main/docs2/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
 
+
 ![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)
 ![Contributors](https://img.shields.io/github/contributors/saiemgilani/sportsdataverse-js?style=for-the-badge)
 [![npm](https://img.shields.io/npm/v/sportsdataverse?style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)  [![npm](https://img.shields.io/npm/dm/sportsdataverse?style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)
