@@ -90,15 +90,15 @@ const axios = require('axios');
             boxScore: res.data.boxscore,
             gameInfo: res.data.gameInfo,
             header: res.data.header,
-            teams: res.data.gamepackageJSON.header.competitions[0].competitors,
-            id: res.data.gamepackageJSON.header.id,
-            plays: res.data.gamepackageJSON.plays,
+            teams: res.data.header.competitions[0].competitors,
+            id: res.data.header.id,
+            plays: res.data.plays,
             winProbability: res.data.winprobability,
             leaders: res.data.leaders,
-            competitions: res.data.gamepackageJSON.header.competitions,
-            season: res.data.gamepackageJSON.header.season,
-            seasonSeries: res.data.gamepackageJSON.seasonseries,
-            standings: res.data.gamepackageJSON.standings
+            competitions: res.data.header.competitions,
+            season: res.data.header.season,
+            seasonSeries: res.data.seasonseries,
+            standings: res.data.standings
         };
     },
 
