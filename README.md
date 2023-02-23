@@ -1,8 +1,8 @@
-# **sportsdataverse** <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/saiemgilani/sportsdataverse-js/main/docs2/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
+# **sportsdataverse** <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/main/docs/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
 
 
 ![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)
-![Contributors](https://img.shields.io/github/contributors/saiemgilani/sportsdataverse-js?style=for-the-badge)
+![Contributors](https://img.shields.io/github/contributors/sportsdataverse/sportsdataverse-js?style=for-the-badge)
 [![npm](https://img.shields.io/npm/v/sportsdataverse?style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)  [![npm](https://img.shields.io/npm/dm/sportsdataverse?style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)
 [![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse) [![Twitter Follow](https://img.shields.io/twitter/follow/SaiemGilani?color=blue&label=%40SaiemGilani&logo=twitter&style=for-the-badge)](https://twitter.com/SaiemGilani)
 [![NPM](https://nodei.co/npm/sportsdataverse.png)](https://npmjs.org/package/sportsdataverse)
@@ -25,7 +25,7 @@ For more information on the package and function reference, please see the [spor
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse)
 
-[![GitHub stars](https://img.shields.io/github/stars/saiemgilani/sportsdataverse-js.svg?color=eee&logo=github&style=for-the-badge&label=Star%20sportsdataverse-js&maxAge=2592000)](https://github.com/saiemgilani/sportsdataverse-js/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/sportsdataverse/sportsdataverse-js.svg?color=eee&logo=github&style=for-the-badge&label=Star%20sportsdataverse-js&maxAge=2592000)](https://github.com/sportsdataverse/sportsdataverse-js/stargazers/)
 
 ## **Our Authors**
 
