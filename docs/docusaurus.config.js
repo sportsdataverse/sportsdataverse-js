@@ -227,7 +227,7 @@ module.exports = {
       darkTheme: darkCodeTheme,
     },
   },
-  scripts: [{src: 'https://plausible.io/js/script.js', defer: true, 'data-domain': 'py.sportsdataverse.org'}],
+  scripts: [{src: 'https://plausible.io/js/script.js', defer: true, 'data-domain': 'js.sportsdataverse.org'}],
   presets: [
     [
       '@docusaurus/preset-classic',
