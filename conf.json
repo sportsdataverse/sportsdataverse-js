@@ -37,7 +37,17 @@
     },
     "templates": {
         "default": {
-            "useLongnameInNav": true
+            "useLongnameInNav": true,
+            "layoutFile": "./md/intro.hbs"
+        },
+        "intro": {
+            "useLongnameInNav": "Introduction",
+            "layoutFile": "./md/intro.hbs"
+
+        },
+        "readme": {
+            "useLongnameInNav": "Readme",
+            "layoutFile": "./md/readme.hbs"
         }
     }
 }

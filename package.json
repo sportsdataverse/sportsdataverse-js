@@ -1,6 +1,6 @@
 {
   "name": "sportsdataverse",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Node.js client which retrieves sports data from the ESPN API as well as from the NCAA website, with support for NBA, NFL, NHL, MLB, WNBA, men's and women's college basketball, and college football.",
   "main": "server.js",
   "directories": {
@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "docdash": "latest",
-    "jsdoc": "^3.6.10",
-    "jsdoc-to-markdown": "^7.1.0",
+    "jsdoc": "^4.0.2",
+    "jsdoc-to-markdown": "^8.0.0",
     "mocha": "^9.2.1",
     "underscore": ">=1.12.1"
   },
@@ -26,8 +26,8 @@
     "document": "npm run md-all && npm run md-readme && npm run readme",
     "jsdoc-build": "jsdoc app -r -c conf.json -d docs",
     "jsdoc2md": "node_modules/.bin/jsdoc2md",
-    "readme": "jsdoc2md -t md/README.hbs app/services/cfb.service.js app/services/mbb.service.js app/services/mlb.service.js app/services/nba.service.js app/services/ncaa.service.js app/services/nfl.service.js app/services/nhl.service.js app/services/wbb.service.js app/services/wnba.service.js > README.md",
-    "md-readme": "jsdoc2md -t md/intro.hbs app/services/cfb.service.js app/services/mbb.service.js app/services/mlb.service.js app/services/nba.service.js app/services/ncaa.service.js app/services/nfl.service.js app/services/nhl.service.js app/services/wbb.service.js app/services/wnba.service.js > docs/docs/intro.md",
+    "readme": "jsdoc2md --template md/README.hbs --files app/services/cfb.service.js app/services/mbb.service.js app/services/mlb.service.js app/services/nba.service.js app/services/ncaa.service.js app/services/nfl.service.js app/services/nhl.service.js app/services/wbb.service.js app/services/wnba.service.js > README.md",
+    "md-readme": "jsdoc2md --template md/intro.hbs --files app/services/cfb.service.js app/services/mbb.service.js app/services/mlb.service.js app/services/nba.service.js app/services/ncaa.service.js app/services/nfl.service.js app/services/nhl.service.js app/services/wbb.service.js app/services/wnba.service.js > docs/docs/intro.md",
     "md-cfb": "jsdoc2md app/services/cfb.service.js > docs/docs/cfb.md",
     "md-mbb": "jsdoc2md app/services/mbb.service.js > docs/docs/mbb.md",
     "md-mlb": "jsdoc2md app/services/mlb.service.js > docs/docs/mlb.md",

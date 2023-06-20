@@ -97,9 +97,7 @@ Gets the MLB schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.mlb.getSchedule(
-year = 2016, month = 04, day = 15
-)
+const result = await sdv.mlb.getSchedule(year = 2016, month = 04, day = 15)
 ```
 <a name="mlb.getScoreboard"></a>
 
@@ -118,9 +116,7 @@ Gets the MLB scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.mlb.getScoreboard(
-year = 2019, month = 11, day = 16
-)
+const result = await sdv.mlb.getScoreboard(year = 2019, month = 11, day = 16)
 ```
 <a name="mlb.getStandings"></a>
 
@@ -137,8 +133,7 @@ Gets the team standings for the MLB.
 
 **Example**  
 ```js
-const yr = 2016;
-const result = await sdv.mlb.getStandings(year = yr);
+const yr = 2016;const result = await sdv.mlb.getStandings(year = yr);
 ```
 <a name="mlb.getTeamList"></a>
 
@@ -165,8 +160,7 @@ Gets the team info for a specific MLB team.
 
 **Example**  
 ```js
-const teamId = 16;
-const result = await sdv.mlb.getTeamInfo(teamId);
+const teamId = 16;const result = await sdv.mlb.getTeamInfo(teamId);
 ```
 <a name="mlb.getTeamPlayers"></a>
 
@@ -182,6 +176,5 @@ Gets the team roster information for a specific MLB team.
 
 **Example**  
 ```js
-const teamId = 16;
-const result = await sdv.mlb.getTeamPlayers(teamId);
+const teamId = 16;const result = await sdv.mlb.getTeamPlayers(teamId);
 ```
