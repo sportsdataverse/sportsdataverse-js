@@ -1,4 +1,7 @@
 # ChangeLog
+
+## **V1.2.4**
+- MLB functionality added by @unmonk (very grateful for the contribution!)
 ## **V1.2.0-2**
 - Updated standings functions to be able to provide league-wide, conference and division for each applicable existing sport from ESPN.
 
