@@ -1,6 +1,7 @@
 
 module.exports.cfb = require('./services/cfb.service');
 module.exports.mbb = require('./services/mbb.service');
+module.exports.mlb = require('./services/mlb.service');
 module.exports.nba = require('./services/nba.service');
 module.exports.ncaa = require('./services/ncaa.service');
 module.exports.nfl = require('./services/nfl.service');
