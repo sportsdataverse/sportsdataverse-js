@@ -18,11 +18,12 @@
     "jsdoc": "^4.0.2",
     "jsdoc-to-markdown": "^8.0.0",
     "mocha": "^9.2.2",
+    "mochawesome": "^7.1.3",
     "should": "^13.2.3",
     "underscore": ">=1.12.1"
   },
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "mocha --timeout 10000 --reporter mochawesome",
     "start": "node server.js",
     "document": "npm run md-all && npm run md-readme && npm run readme",
     "jsdoc-build": "jsdoc app -r -c conf.json -d docs",
