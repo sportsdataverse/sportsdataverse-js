@@ -17,7 +17,8 @@
     "docdash": "latest",
     "jsdoc": "^4.0.2",
     "jsdoc-to-markdown": "^8.0.0",
-    "mocha": "^9.2.1",
+    "mocha": "^9.2.2",
+    "should": "^13.2.3",
     "underscore": ">=1.12.1"
   },
   "scripts": {
@@ -35,9 +36,10 @@
     "md-ncaa": "jsdoc2md app/services/ncaa.service.js > docs/docs/ncaa.md",
     "md-nfl": "jsdoc2md app/services/nfl.service.js > docs/docs/nfl.md",
     "md-nhl": "jsdoc2md app/services/nhl.service.js > docs/docs/nhl.md",
+    "md-tnns": "jsdoc2md app/services/tnns.service.js > docs/docs/tnns.md",
     "md-wbb": "jsdoc2md app/services/wbb.service.js > docs/docs/wbb.md",
     "md-wnba": "jsdoc2md app/services/wnba.service.js > docs/docs/wnba.md",
-    "md-all": "npm run md-cfb && npm run md-mbb && npm run md-nba && npm run md-ncaa && npm run md-nfl && npm run md-nhl && npm run md-wbb && npm run md-wnba && npm run md-mlb"
+    "md-all": "npm run md-cfb && npm run md-mbb && npm run md-nba && npm run md-ncaa && npm run md-nfl && npm run md-nhl && npm run md-wbb && npm run md-wnba && npm run md-mlb && npm run md-tnns"
   },
   "repository": {
     "type": "git",

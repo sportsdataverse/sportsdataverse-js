@@ -23,7 +23,7 @@ module.exports = {
      * const urlGame = result["games"][16]["game"]["url"]
      * const gameId = await sdv.ncaa.getRedirectUrl(url=urlGame);
      */
-    getRedirectUrl: async function (url){
+    getRedirectUrl: async function (url) {
         const baseUrl = `https://ncaa.com/${url}`;
         const response = await axios.get(baseUrl);
         const gameUrl = response.request.res.responseUrl;
@@ -40,7 +40,7 @@ module.exports = {
      * @example
      * const result = await sdv.ncaa.getInfo(5764053);
      */
-    getInfo: async function (game){
+    getInfo: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/gameInfo.json`;
         const res = await axios.get(baseUrl);
         return res.data;
@@ -55,7 +55,7 @@ module.exports = {
      * @example
      * const result = await sdv.ncaa.getBoxScore(5764053);
      */
-    getBoxScore: async function (game){
+    getBoxScore: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/boxscore.json`;
         const res = await axios.get(baseUrl);
         return res.data;
@@ -70,7 +70,7 @@ module.exports = {
      * @example
      * const result = await sdv.ncaa.getPlayByPlay(5764053);
      */
-    getPlayByPlay: async function (game){
+    getPlayByPlay: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/pbp.json`;
         const res = await axios.get(baseUrl);
         return res.data;
@@ -85,7 +85,7 @@ module.exports = {
      * @example
      * const result = await sdv.ncaa.getTeamStats(5764053);
      */
-    getTeamStats: async function (game){
+    getTeamStats: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/teamStats.json`;
         const res = await axios.get(baseUrl);
         return res.data;
@@ -100,7 +100,7 @@ module.exports = {
      * @example
      * const result = await sdv.ncaa.getScoringSummary(5764053);
      */
-    getScoringSummary: async function (game){
+    getScoringSummary: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/scoringSummary.json`;
         const res = await axios.get(baseUrl);
         return res.data;
@@ -128,9 +128,8 @@ module.exports = {
      * sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
      * )
      */
-    getScoreboard: async function (sport,division,year,month ,day){
+    getScoreboard: async function ({ sport, division, year, month, day }) {
         const baseUrl = `https://data.ncaa.com/casablanca/scoreboard/${sport}/${division}/${year}/${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}/${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}/scoreboard.json`;
-
         const res = await axios.get(baseUrl);
         return res.data;
     },
@@ -156,7 +155,7 @@ module.exports = {
      * @example
      * const result = sdv.ncaa.getSports();
      */
-    getSports: async function (){
+    getSports: async function () {
         const baseUrl = 'http://stats.ncaa.org/';
 
         const res = await axios.get(baseUrl)
@@ -189,7 +188,7 @@ module.exports = {
      * @example
      * const result = sdv.ncaa.getSeasons(sport='MBB');
      */
-    getSeasons: async function (sport){
+    getSeasons: async function (sport) {
         if (!sport) {
             return;
         }
@@ -244,7 +243,7 @@ module.exports = {
      * @example
      * const result = sdv.ncaa.getDivisions(sport='MBB', season='2017');
      */
-    getDivisions: async function (sport, season){
+    getDivisions: async function (sport, season) {
         if (!sport || !season) {
             return;
         }
@@ -305,7 +304,7 @@ module.exports = {
      * @example
      * const sportDivisionData = sdv.ncaa.getSportDivisionData(sport='MFB',season='2016',division=12,type='team',gameHigh=true);
      */
-    getSportDivisionData: async function(sport, season, division, type, gameHigh){
+    getSportDivisionData: async function (sport, season, division, type, gameHigh) {
         if (!sport || !season || !division) {
             return;
         }
@@ -376,7 +375,7 @@ module.exports = {
      * @example
      * const players =  await sdv.ncaa.getPlayerData(sport = 'MFB', year = '2017', division = '11',rankingPeriod = '52', gameHigh='N', category = '20')
      */
-    getPlayerData: async function (sport, season, division, rankingPeriod, gameHigh, category){
+    getPlayerData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
         const params = {
             "sport_code": sport,
@@ -393,7 +392,7 @@ module.exports = {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl,{
+        const res = await axios.get(baseUrl, {
             params
         });
 
@@ -429,7 +428,7 @@ module.exports = {
      * @example
      * const teams =  await sdv.ncaa.getTeamData(sport = 'MFB', year = '2017', division = '11', rankingPeriod = '52', gameHigh='N', category = '20')
      */
-    getTeamData: async function (sport, season, division, rankingPeriod, gameHigh, category){
+    getTeamData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
         const params = {
             "sport_code": sport,
@@ -446,7 +445,7 @@ module.exports = {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl,{
+        const res = await axios.get(baseUrl, {
             params
         });
 

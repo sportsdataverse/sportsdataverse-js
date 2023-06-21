@@ -15,7 +15,7 @@ module.exports = {
      * @example
      * const result = await sdv.nba.getPlayByPlay(401283399);
      */
-    getPlayByPlay: async function (id){
+    getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/nba/playbyplay';
         const params = {
             gameId: id,
@@ -47,7 +47,7 @@ module.exports = {
      * @example
      * const result = await sdv.nba.getBoxScore(401283399);
      */
-    getBoxScore: async function (id){
+    getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/nba/boxscore';
         const params = {
             gameId: id,
@@ -73,7 +73,7 @@ module.exports = {
      * @example
      * const result = await sdv.nba.getSummary(401283399);
      */
-    getSummary: async function (id){
+    getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
         const params = {
             event: id
@@ -85,15 +85,15 @@ module.exports = {
             boxScore: res.data.boxscore,
             gameInfo: res.data.gameInfo,
             header: res.data.header,
-            teams: res.data.gamepackageJSON.header.competitions[0].competitors,
-            id: res.data.gamepackageJSON.header.id,
-            plays: res.data.gamepackageJSON.plays,
+            teams: res.data.gamepackageJSON?.header?.competitions[0].competitors,
+            id: res.data.gamepackageJSON?.header?.id,
+            plays: res.data.gamepackageJSON?.plays,
             winProbability: res.data.winprobability,
             leaders: res.data.leaders,
-            competitions: res.data.gamepackageJSON.header.competitions,
-            season: res.data.gamepackageJSON.header.season,
-            seasonSeries: res.data.gamepackageJSON.seasonseries,
-            standings: res.data.gamepackageJSON.standings
+            competitions: res.data.gamepackageJSON?.header?.competitions,
+            season: res.data.gamepackageJSON?.header?.season,
+            seasonSeries: res.data.gamepackageJSON?.seasonseries,
+            standings: res.data.gamepackageJSON?.standings
         };
     },
     /**
@@ -106,7 +106,7 @@ module.exports = {
      * @example
      * const result = await sdv.nba.getPicks(401283399);
      */
-    getPicks: async function (id){
+    getPicks: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary';
         const params = {
             event: id
@@ -144,7 +144,7 @@ module.exports = {
      * year = 2016, month = 04, day = 15
      * )
      */
-    getSchedule: async function ({year = null, month = null, day = null}){
+    getSchedule: async function ({ year = null, month = null, day = null }) {
         const baseUrl = `http://cdn.espn.com/core/nba/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         const params = {
             xhr: 1,
@@ -172,11 +172,14 @@ module.exports = {
      * year = 2019, month = 11, day = 16
      * )
      */
-    getScoreboard: async function ({year = null, month = null, day = null, limit = 300}){
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard`;
         const params = {
             limit
         };
+        if (year && month && day) {
+            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        }
         const res = await axios.get(baseUrl, {
             params
         });
@@ -194,7 +197,7 @@ module.exports = {
      * const yr = 2016;
      * const result = await sdv.nba.getStandings(year = yr);
      */
-    getStandings: async function ({year = new Date().getFullYear(), group = 'league'}){
+    getStandings: async function ({ year = new Date().getFullYear(), group = 'league' }) {
         const groupId = group === 'league' ? 1 : group === 'conference' ? 2 : 3;
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings`;
         const params = {
@@ -219,7 +222,7 @@ module.exports = {
      * @example
      * const result = await sdv.nba.getTeamList();
      */
-    getTeamList: async function (){
+    getTeamList: async function () {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams';
         const params = {
             limit: 1000
@@ -242,7 +245,7 @@ module.exports = {
      * const teamId = 16;
      * const result = await sdv.nba.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id){
+    getTeamInfo: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${id}`;
 
         const res = await axios.get(baseUrl);
@@ -259,7 +262,7 @@ module.exports = {
      * const teamId = 16;
      * const result = await sdv.nba.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id){
+    getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${id}`;
         const params = {
             enable: "roster"

@@ -4,7 +4,7 @@ const axios = require('axios');
  *
  * @namespace wnba
  */
- module.exports = {
+module.exports = {
     /**
      * Gets the WNBA game play-by-play data for a specified game.
      * @memberOf wnba
@@ -15,7 +15,7 @@ const axios = require('axios');
      * @example
      * const result = await sdv.wnba.getPlayByPlay(401244185);
      */
-    getPlayByPlay: async function (id){
+    getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/wnba/playbyplay';
         const params = {
             gameId: id,
@@ -49,7 +49,7 @@ const axios = require('axios');
      * @example
      * const result = await sdv.wnba.getBoxScore(401244185);
      */
-    getBoxScore: async function (id){
+    getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/wnba/boxscore';
         const params = {
             gameId: id,
@@ -78,7 +78,7 @@ const axios = require('axios');
      * @example
      * const result = await sdv.wnba.getSummary(401244185);
      */
-    getSummary: async function (id){
+    getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary';
         const params = {
             event: id
@@ -116,7 +116,7 @@ const axios = require('axios');
      * year = 2019, month = 07, day = 15
      * )
      */
-    getSchedule: async function ({year = null, month = null, day = null}){
+    getSchedule: async function ({ year = null, month = null, day = null }) {
         const baseUrl = `http://cdn.espn.com/core/wnba/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         const params = {
             xhr: 1,
@@ -145,11 +145,14 @@ const axios = require('axios');
      * year = 2019, month = 07, day = 15
      * )
      */
-    getScoreboard: async function ({year = null, month = null, day = null, limit = 300}){
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard`;
         const params = {
             limit
         };
+        if (year && month && day) {
+            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        }
         const res = await axios.get(baseUrl, {
             params
         });
@@ -167,7 +170,7 @@ const axios = require('axios');
      * const yr = 2016;
      * const result = await sdv.wnba.getStandings(year = yr);
      */
-    getStandings: async function ({year = new Date().getFullYear(), group = 'league'}){
+    getStandings: async function ({ year = new Date().getFullYear(), group = 'league' }) {
         const groupId = group === 'league' ? 1 : 2;
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/wnba/standings`;
         const params = {
@@ -192,7 +195,7 @@ const axios = require('axios');
      * @example
      * const result = await sdv.wnba.getTeamList();
      */
-    getTeamList: async function ({}){
+    getTeamList: async function ({ }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams';
         const params = {
             limit: 1000
@@ -213,7 +216,7 @@ const axios = require('axios');
      * const teamId = 16;
      * const result = await sdv.wnba.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id){
+    getTeamInfo: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/${id}`;
 
         const res = await axios.get(baseUrl);
@@ -230,7 +233,7 @@ const axios = require('axios');
      * const teamId = 16;
      * const result = await sdv.wnba.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id){
+    getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/${id}`;
         const params = {
             enable: "roster"
