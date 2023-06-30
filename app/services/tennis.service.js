@@ -2,12 +2,12 @@ const axios = require('axios');
 /**
  * Operations for Tennis.
  *
- * @namespace tnns
+ * @namespace tennis
  */
 module.exports = {
     /**
      * Gets the scoreboard data for a specified date and league if available.
-     * @memberOf tnns
+     * @memberOf tennis
      * @async
      * @function
      * @param {string} league - Tennis league desired. Default 'atp' Acceptable values:
@@ -17,7 +17,7 @@ module.exports = {
      * @param {*} day - Day (DD)
      * @returns json
      * @example
-     * const result = await sdv.tnns.getScoreboard({
+     * const result = await sdv.tennis.getScoreboard({
      * league = 'wta', year = 2023, month = 06, day = 20
      * })
      */
