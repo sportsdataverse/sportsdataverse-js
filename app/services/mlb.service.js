@@ -86,15 +86,15 @@ module.exports = {
       boxScore: res.data.boxscore,
       gameInfo: res.data.gameInfo,
       header: res.data.header,
-      teams: res.data.gamepackageJSON.header.competitions[0].competitors,
-      id: res.data.gamepackageJSON.header.id,
-      plays: res.data.gamepackageJSON.plays,
+      teams: res.data.gamepackageJSON?.header.competitions[0].competitors,
+      id: res.data.gamepackageJSON?.header.id,
+      plays: res.data.gamepackageJSON?.plays,
       winProbability: res.data.winprobability,
       leaders: res.data.leaders,
-      competitions: res.data.gamepackageJSON.header.competitions,
-      season: res.data.gamepackageJSON.header.season,
-      seasonSeries: res.data.gamepackageJSON.seasonseries,
-      standings: res.data.gamepackageJSON.standings,
+      competitions: res.data.gamepackageJSON?.header.competitions,
+      season: res.data.gamepackageJSON?.header.season,
+      seasonSeries: res.data.gamepackageJSON?.seasonseries,
+      standings: res.data.gamepackageJSON?.standings,
     };
   },
   /**
@@ -146,16 +146,18 @@ module.exports = {
    * year = 2016, month = 04, day = 15
    * )
    */
-  getSchedule: async function ({ year = null, month = null, day = null }) {
-    const baseUrl = `http://cdn.espn.com/core/mlb/schedule?dates=${year}${
-      parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)
-    }${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+  getSchedule: async function ({ year, month, day }) {
+    const baseUrl = `http://cdn.espn.com/core/mlb/schedule`;
+
     const params = {
       xhr: 1,
       render: false,
       device: "desktop",
       userab: 18,
     };
+    if (year && month && day) {
+      params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    }
     const res = await axios.get(baseUrl, {
       params,
     });
@@ -177,17 +179,18 @@ module.exports = {
    * )
    */
   getScoreboard: async function ({
-    year = null,
-    month = null,
-    day = null,
+    year,
+    month,
+    day,
     limit = 300,
   }) {
-    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard?dates=${year}${
-      parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)
-    }${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard`;
     const params = {
       limit,
     };
+    if (year && month && day) {
+      params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    }
     const res = await axios.get(baseUrl, {
       params,
     });

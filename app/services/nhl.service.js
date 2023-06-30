@@ -15,7 +15,7 @@ module.exports = {
      * @example
      * const result = await sdv.nhl.getPlayByPlay(401272446);
      */
-    getPlayByPlay: async function (id){
+    getPlayByPlay: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params = {
             event: id
@@ -47,7 +47,7 @@ module.exports = {
      * @example
      * const result = await sdv.nhl.getBoxScore(401272446);
      */
-    getBoxScore: async function (id){
+    getBoxScore: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params = {
             event: id
@@ -72,7 +72,7 @@ module.exports = {
      * @example
      * const result = await sdv.nhl.getSummary(401272446);
      */
-    getSummary: async function (id){
+    getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params = {
             event: id
@@ -107,7 +107,7 @@ module.exports = {
      * @example
      * const result = await sdv.nhl.getPicks(401272446);
      */
-    getPicks: async function (id){
+    getPicks: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary';
         const params = {
             event: id
@@ -146,7 +146,7 @@ module.exports = {
      * year = 2019, month = 11, day = 17
      * )
      */
-    getSchedule: async function ({year = null, month = null, day = null}){
+    getSchedule: async function ({ year = null, month = null, day = null }) {
         const baseUrl = `http://cdn.espn.com/core/nhl/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         const params = {
             xhr: 1,
@@ -175,11 +175,14 @@ module.exports = {
      * year = 2019, month = 11, day = 16
      * )
      */
-    getScoreboard: async function ({year = null, month = null, day = null, limit = 300}){
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    getScoreboard: async function ({ year, month, day, limit = 300 }) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard`;
         const params = {
             limit
         };
+        if (year && month && day) {
+            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        }
 
         const res = await axios.get(baseUrl, {
             params
@@ -199,7 +202,7 @@ module.exports = {
      * const yr = 2016;
      * const result = await sdv.nhl.getStandings(year = yr);
      */
-    getStandings: async function ({year = new Date().getFullYear(), group = 'league'}){
+    getStandings: async function ({ year = new Date().getFullYear(), group = 'league' }) {
         const groupId = group === 'league' ? 1 : group === 'conference' ? 2 : 3;
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/hockey/nhl/standings`;
         const params = {
@@ -224,7 +227,7 @@ module.exports = {
      * @example
      * const result = await sdv.nhl.getTeamList();
      */
-    getTeamList: async function (){
+    getTeamList: async function () {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams';
         const params = {
             limit: 1000
@@ -247,7 +250,7 @@ module.exports = {
      * const teamId = 16;
      * const result = await sdv.nhl.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id){
+    getTeamInfo: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/${id}`;
 
         const res = await axios.get(baseUrl);
@@ -264,7 +267,7 @@ module.exports = {
      * const teamId = 16;
      * const result = await sdv.nhl.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id){
+    getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/${id}`;
         const params = {
             enable: "roster"

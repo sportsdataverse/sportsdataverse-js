@@ -15,7 +15,7 @@ module.exports = {
      * @example
      * const result = await sdv.wbb.getPlayByPlay(401260565);
      */
-    getPlayByPlay: async function (id){
+    getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/playbyplay';
         const params = {
             gameId: id,
@@ -47,7 +47,7 @@ module.exports = {
      * @example
      * const result = await sdv.wbb.getBoxScore(401260565);
      */
-    getBoxScore: async function (id){
+    getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/boxscore';
         const params = {
             gameId: id,
@@ -76,7 +76,7 @@ module.exports = {
      * @example
      * const result = await sdv.wbb.getSummary(401260565);
      */
-    getSummary: async function (id){
+    getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/summary';
         const params = {
             event: id
@@ -111,25 +111,25 @@ module.exports = {
      * )
      */
     getRankings: async function ({
-        year = null,
-        week = null
-    }){
-        const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/rankings?';
-        const qs = {};
+        year,
+        week
+    }) {
+        const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/rankings';
+        const params = {};
 
         if (year) {
-            qs.year = year;
+            params.year = year;
         }
 
         if (week) {
-            qs.week = week;
+            params.week = week;
         }
 
         const res = await axios.get(baseUrl, {
-            params: qs
+            params
         });
 
-        return res.content.data;
+        return res.data;
     },
 
     /**
@@ -150,14 +150,17 @@ module.exports = {
      * )
      */
     getSchedule: async function ({
-        year = null,
-        month = null,
-        day = null,
+        year,
+        month,
+        day,
         groups = 50,
         seasontype = 2,
-        limit=300
-    }){
-        const baseUrl = `http://cdn.espn.com/core/womens-college-basketball/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        limit = 300
+    }) {
+        const baseUrl = `http://cdn.espn.com/core/womens-college-basketball/schedule`;
+        if (year && month && day) {
+            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        }
         const params = {
             groups: groups,
             seasontype: seasontype,
@@ -191,20 +194,22 @@ module.exports = {
      * )
      */
     getScoreboard: async function ({
-        year = null,
-        month = null,
-        day = null,
+        year,
+        month,
+        day,
         group = 50,
         seasontype = 2,
         limit = 300
-    }){
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+    }) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/scoreboard`;
         const params = {
             groups: group,
             seasontype: seasontype,
             limit
         };
-
+        if (year && month && day) {
+            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        }
         const res = await axios.get(baseUrl, {
             params
         });
@@ -223,7 +228,7 @@ module.exports = {
      * const yr = 2021;
      * const result = await sdv.wbb.getConferences(year = yr, group = 50);
      */
-    getConferences: async function ({year = new Date().getFullYear(), group = 50}){
+    getConferences: async function ({ year = new Date().getFullYear(), group = 50 }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/scoreboard/conferences';
 
         const params = {
@@ -247,7 +252,7 @@ module.exports = {
      * const yr = 2020;
      * const result = await sdv.wbb.getStandings(year = yr);
      */
-    getStandings: async function ({year = new Date().getFullYear(), group = 50}){
+    getStandings: async function ({ year = new Date().getFullYear(), group = 50 }) {
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings`;
         const params = {
             region: 'us',
@@ -257,9 +262,9 @@ module.exports = {
             group: group,
             type: 0,
             level: 1,
-            sort: 'leaguewinpercent:desc,vsconf_winpercent:desc,'+
-            'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,'+
-            'losses:desc,playoffseed:asc,alpha:asc'
+            sort: 'leaguewinpercent:desc,vsconf_winpercent:desc,' +
+                'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,' +
+                'losses:desc,playoffseed:asc,alpha:asc'
         };
         const res = await axios.get(baseUrl, {
             params
@@ -277,7 +282,7 @@ module.exports = {
      * get list of teams
      * const result = await sdv.wbb.getTeamList(group=50);
      */
-    getTeamList: async function ({group = 50}){
+    getTeamList: async function ({ group = 50 }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams';
         const params = {
             group,
@@ -299,7 +304,7 @@ module.exports = {
      * const teamId = 52;
      * const result = await sdv.wbb.getTeamInfo(teamId);
      */
-    getTeamInfo: async function (id){
+    getTeamInfo: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/${id}`;
 
         const res = await axios.get(baseUrl);
@@ -316,7 +321,7 @@ module.exports = {
      * const teamId = 52;
      * const result = await sdv.wbb.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function (id){
+    getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/${id}`;
         const params = {
             enable: "roster"

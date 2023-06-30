@@ -146,23 +146,23 @@ module.exports = {
      * year = 2020, week = 15
      * )
      */
-    getRankings: async function ({year = null, week = null}) {
-        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/rankings?';
-        const qs = {};
+    getRankings: async function ({ year, week }) {
+        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/rankings';
+        const params = {};
 
         if (year) {
-            qs.year = year;
+            params.year = year;
         }
 
         if (week) {
-            qs.week = week;
+            params.week = week;
         }
 
         const res = await axios.get(baseUrl, {
-            params: qs
+            params
         });
 
-        return res.content.data;
+        return res.data;
     },
     /**
      * Gets the Men's College Basketball Player recruiting data for a specified year, page, position and institution type if available.
@@ -176,7 +176,7 @@ module.exports = {
      * @example
      * const result = await sdv.mbb.getPlayerRankings({year: 2016});
      */
-    getPlayerRankings: async function({
+    getPlayerRankings: async function ({
         year,
         page = 1,
         group = "HighSchool",
@@ -185,37 +185,37 @@ module.exports = {
     }) {
         const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
         const params = {
-        InstitutionGroup: group,
-        Page: page,
-        Position: position,
-        State: state
+            InstitutionGroup: group,
+            Page: page,
+            Position: position,
+            State: state
         };
         const res = await axios.get(baseUrl, {
-        headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-        },
-        params
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+            },
+            params
         });
         let $ = cheerio.load(res.data);
         let players = [];
         // Couldn't grab the rank correctly with JQuery so it's manually calculated
         let rank = 1 + 50 * (page - 1);
         $('ul.rankings-page__list > li.rankings-page__list-item:not(.rankings-page__list-item--header)').each(function (index) {
-        let html = $(this);
-        let metrics = html.find('.metrics').text().split('/');
-        let player = {
-            ranking: rank,
-            name: html.find('.rankings-page__name-link').text().trim(),
-            highSchool: html.find('span.meta').text().trim(),
-            position: html.find('.position').text().trim(),
-            height: metrics[0],
-            weight: metrics[1],
-            stars: html.find('.rankings-page__star-and-score > .yellow').length,
-            rating: html.find('.score').text().trim().trim(),
-            college: html.find('.img-link > img').attr('title') || 'uncommitted'
-        };
-        players.push(player);
-        rank++;
+            let html = $(this);
+            let metrics = html.find('.metrics').text().split('/');
+            let player = {
+                ranking: rank,
+                name: html.find('.rankings-page__name-link').text().trim(),
+                highSchool: html.find('span.meta').text().trim(),
+                position: html.find('.position').text().trim(),
+                height: metrics[0],
+                weight: metrics[1],
+                stars: html.find('.rankings-page__star-and-score > .yellow').length,
+                rating: html.find('.score').text().trim().trim(),
+                college: html.find('.img-link > img').attr('title') || 'uncommitted'
+            };
+            players.push(player);
+            rank++;
         });
         return players;
     },
@@ -235,10 +235,10 @@ module.exports = {
         const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
         const res = await axios.get(baseUrl, {
             headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
             },
             params: {
-            Page: page
+                Page: page
             }
         });
         let $ = cheerio.load(res.data);
@@ -246,14 +246,14 @@ module.exports = {
         $('.rankings-page__list-item').each(function (index) {
             let html = $(this);
             let school = {
-            rank: html.find('.rank-column .primary').text().trim(),
-            school: html.find('.rankings-page__name-link').text().trim(),
-            totalCommits: html.find('.total a').text().trim(),
-            fiveStars: $(html.find('ul.star-commits-list > li > div')[0]).text().replace('5: ', '').trim(),
-            fourStars: $(html.find('ul.star-commits-list > li > div')[1]).text().replace('4: ', '').trim(),
-            threeStars: $(html.find('ul.star-commits-list > li > div')[2]).text().replace('3: ', '').trim(),
-            averageRating: html.find('.avg').text().trim(),
-            points: html.find('.number').text().trim()
+                rank: html.find('.rank-column .primary').text().trim(),
+                school: html.find('.rankings-page__name-link').text().trim(),
+                totalCommits: html.find('.total a').text().trim(),
+                fiveStars: $(html.find('ul.star-commits-list > li > div')[0]).text().replace('5: ', '').trim(),
+                fourStars: $(html.find('ul.star-commits-list > li > div')[1]).text().replace('4: ', '').trim(),
+                threeStars: $(html.find('ul.star-commits-list > li > div')[2]).text().replace('3: ', '').trim(),
+                averageRating: html.find('.avg').text().trim(),
+                points: html.find('.number').text().trim()
             };
             schools.push(school);
         });
@@ -270,11 +270,11 @@ module.exports = {
      * @example
      * const result = await sdv.mbb.getSchoolCommits({school: 'Clemson', year: 2016});
      */
-    getSchoolCommits: async function(school, year) {
+    getSchoolCommits: async function (school, year) {
         const baseUrl = `http://${school}.247sports.com/Season/${year}-Basketball/Commits`;
         const res = await axios.get(baseUrl, {
             headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
             }
         });
         let $ = cheerio.load(res.data);
@@ -283,16 +283,16 @@ module.exports = {
             let html = $(this);
             let metrics = html.find('.metrics').text().split('/');
             let player = {
-            name: html.find('.ri-page__name-link').text().trim(),
-            highSchool: html.find('span.meta').text().trim(),
-            position: $(html.find('.position')).text().trim(),
-            height: metrics[0],
-            weight: metrics[1],
-            stars: html.find('.ri-page__star-and-score .yellow').length,
-            rating: html.find('span.score').clone().children().remove().end().text().trim(),
-            nationalRank: html.find('.natrank').first().text().trim(),
-            stateRank: html.find('.sttrank').first().text().trim(),
-            positionRank: html.find('.posrank').first().text().trim()
+                name: html.find('.ri-page__name-link').text().trim(),
+                highSchool: html.find('span.meta').text().trim(),
+                position: $(html.find('.position')).text().trim(),
+                height: metrics[0],
+                weight: metrics[1],
+                stars: html.find('.ri-page__star-and-score .yellow').length,
+                rating: html.find('span.score').clone().children().remove().end().text().trim(),
+                nationalRank: html.find('.natrank').first().text().trim(),
+                stateRank: html.find('.sttrank').first().text().trim(),
+                positionRank: html.find('.posrank').first().text().trim()
             };
             players.push(player);
         });
@@ -319,7 +319,7 @@ module.exports = {
      * year = 2021, month = 02, day = 15, group=50
      * )
      */
-    getSchedule: async function({
+    getSchedule: async function ({
         year = null,
         month = null,
         day = null,
@@ -355,20 +355,22 @@ module.exports = {
      * year = 2021, month = 02, day = 15, group=50
      * )
      */
-    getScoreboard: async function({
-        year = null,
-        month = null,
-        day = null,
+    getScoreboard: async function ({
+        year,
+        month,
+        day,
         group = 50,
         seasontype = 2,
-        limit = 1000}) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        limit = 1000 }) {
+        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard`;
         const params = {
             groups: group,
             seasontype: seasontype || 2,
             limit
         };
-
+        if (year && month && day) {
+            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
+        }
         const res = await axios.get(baseUrl, {
             params
         });
@@ -387,7 +389,7 @@ module.exports = {
      * const yr = 2021;
      * const result = await sdv.mbb.getConferences(year = yr, group = 50);
      */
-    getConferences: async function ({year = new Date().getFullYear(), group = 50}){
+    getConferences: async function ({ year = new Date().getFullYear(), group = 50 }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
 
         const params = {
@@ -412,7 +414,7 @@ module.exports = {
      * const yr = 2020;
      * const result = await sdv.mbb.getStandings(year = yr);
      */
-    getStandings: async function ({year = new Date().getFullYear(), group = 50}){
+    getStandings: async function ({ year = new Date().getFullYear(), group = 50 }) {
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/mens-college-basketball/standings`;
         const params = {
             region: 'us',
@@ -422,9 +424,9 @@ module.exports = {
             group: group,
             type: 0,
             level: 1,
-            sort: 'leaguewinpercent:desc,vsconf_winpercent:desc,'+
-            'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,'+
-            'losses:desc,playoffseed:asc,alpha:asc'
+            sort: 'leaguewinpercent:desc,vsconf_winpercent:desc,' +
+                'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,' +
+                'losses:desc,playoffseed:asc,alpha:asc'
         };
         const res = await axios.get(baseUrl, {
             params
@@ -441,7 +443,7 @@ module.exports = {
      * @example
      * const result = await sdv.mbb.getTeamList(group=50);
      */
-    getTeamList: async function({
+    getTeamList: async function ({
         group = 50
     }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams';
@@ -484,7 +486,7 @@ module.exports = {
      * const teamId = 52;
      * const result = await sdv.mbb.getTeamPlayers(teamId);
      */
-    getTeamPlayers: async function(id) {
+    getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
         const params = {
             enable: "roster"
