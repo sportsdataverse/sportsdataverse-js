@@ -1,5 +1,6 @@
 # ChangeLog
-
+## **V1.2.5**
+- NFL getWeeklySchedule function added by @unmonk
 ## **V1.2.4**
 - MLB functionality added by @unmonk (very grateful for the contribution!)
 ## **V1.2.0-2**
