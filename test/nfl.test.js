@@ -101,6 +101,46 @@ describe('NFL Scoreboard', () => {
     });
 });
 
+describe('NFL Weekly Schedule', () => {
+
+    it('should populate schedule data for the first week of regular season for the current year', async () => {
+        const data = await app.nfl.getWeeklySchedule({})
+        should(data).exist;
+        should(data).be.json;
+        should(data).not.be.empty;
+
+    });
+
+    it('should populate schedule data for the given week and year and seasonType', async () => {
+        const data = await app.nfl.getWeeklySchedule({
+            week: 2,
+            year: 2023,
+            seasonType: 2
+        })
+        should(data).exist;
+        should(data).be.json;
+        should(data).not.be.empty;
+    });
+
+        it('should populate schedule data for the given week and year and default seasonType to Regular Season', async () => {
+        const data = await app.nfl.getWeeklySchedule({
+            week: 2,
+            year: 2023,
+        })
+        const data2 = await app.nfl.getWeeklySchedule({
+            week: 2,
+            year: 2023,
+            seasonType: 2
+        })
+        should(data).exist;
+        should(data).be.json;
+        should(data).not.be.empty;
+        should(data).eql(data2);
+    });
+
+  
+});
+
 describe('NFL Standings', () => {
 
     it('should populate standings for the given year', async () => {
