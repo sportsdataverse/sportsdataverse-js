@@ -11,6 +11,7 @@ Operations for NFL.
     * [.getSummary(id)](#nfl.getSummary) ⇒
     * [.getPicks(id)](#nfl.getPicks) ⇒
     * [.getSchedule(year, month, day)](#nfl.getSchedule) ⇒
+    * [.getWeeklySchedule(week, year, seasonType)](#nfl.getWeeklySchedule) ⇒
     * [.getScoreboard(year, month, day, limit)](#nfl.getScoreboard) ⇒
     * [.getStandings(year, group)](#nfl.getStandings) ⇒
     * [.getTeamList()](#nfl.getTeamList)
@@ -97,7 +98,29 @@ Gets the NFL schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nfl.getSchedule(year = 2019, month = 11, day = 17)
+const result = await sdv.nfl.getSchedule(
+year = 2019, month = 11, day = 17
+)
+```
+<a name="nfl.getWeeklySchedule"></a>
+
+### nfl.getWeeklySchedule(week, year, seasonType) ⇒
+Gets the NFL Weekly Schedule data for a specified season type.
+
+**Kind**: static method of [<code>nfl</code>](#nfl)  
+**Returns**: json  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| week | <code>\*</code> | Week (1-17) Default is 1 |
+| year | <code>\*</code> | Year (YYYY) Default is current year |
+| seasonType | <code>\*</code> | Season Type (1 = Preseason, 2 = Regular Season, 3 = Postseason) Default is 2 |
+
+**Example**  
+```js
+const result = await sdv.nfl.getWeeklySchedule(
+week = 1, year = 2023, seasonType = 2
+)
 ```
 <a name="nfl.getScoreboard"></a>
 
@@ -116,7 +139,9 @@ Gets the NFL scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nfl.getScoreboard(year = 2019, month = 11, day = 17)
+const result = await sdv.nfl.getScoreboard(
+year = 2019, month = 11, day = 17
+)
 ```
 <a name="nfl.getStandings"></a>
 
@@ -133,7 +158,8 @@ Gets the team standings for the NFL.
 
 **Example**  
 ```js
-const yr = 2021;const result = await sdv.nfl.getStandings(year = yr);
+const yr = 2021;
+const result = await sdv.nfl.getStandings(year = yr);
 ```
 <a name="nfl.getTeamList"></a>
 
@@ -159,7 +185,8 @@ Gets the team info for a specific NFL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nfl.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.nfl.getTeamInfo(teamId);
 ```
 <a name="nfl.getTeamPlayers"></a>
 
@@ -175,5 +202,6 @@ Gets the team roster information for a specific NFL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nfl.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.nfl.getTeamPlayers(teamId);
 ```
