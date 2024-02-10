@@ -10,7 +10,6 @@ Operations for Men's College Basketball.
     * [.getBoxScore(id)](#mbb.getBoxScore) ⇒
     * [.getSummary(id)](#mbb.getSummary) ⇒
     * [.getPicks(id)](#mbb.getPicks) ⇒
-    * [.getRankings(year, week)](#mbb.getRankings) ⇒
     * [.getPlayerRankings(year, page, group)](#mbb.getPlayerRankings) ⇒
     * [.getSchoolRankings(year, page)](#mbb.getSchoolRankings) ⇒
     * [.getSchoolCommits(year, school)](#mbb.getSchoolCommits) ⇒
@@ -86,23 +85,6 @@ Gets the Men's College Basketball game PickCenter data for a specified game.
 ```js
 const result = await sdv.mbb.getPicks(401260281);
 ```
-<a name="mbb.getRankings"></a>
-
-### mbb.getRankings(year, week) ⇒
-Gets the Men's College Basketball rankings data for a specified year and week if available.
-
-**Kind**: static method of [<code>mbb</code>](#mbb)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| year | <code>\*</code> | Year (YYYY) |
-| week | <code>\*</code> | Week |
-
-**Example**  
-```js
-const result = await sdv.mbb.getRankings(year = 2020, week = 15)
-```
 <a name="mbb.getPlayerRankings"></a>
 
 ### mbb.getPlayerRankings(year, page, group) ⇒
@@ -173,7 +155,9 @@ Gets the Men's College Basketball schedule data for a specified date if availabl
 
 **Example**  
 ```js
-const result = await sdv.mbb.getSchedule(year = 2021, month = 02, day = 15, group=50)
+const result = await sdv.mbb.getSchedule(
+year = 2021, month = 02, day = 15, group=50
+)
 ```
 <a name="mbb.getScoreboard"></a>
 
@@ -194,7 +178,9 @@ Gets the Men's College Basketball scoreboard data for a specified date if availa
 
 **Example**  
 ```js
-const result = await sdv.mbb.getScoreboard(year = 2021, month = 02, day = 15, group=50)
+const result = await sdv.mbb.getScoreboard(
+year = 2021, month = 02, day = 15, group=50
+)
 ```
 <a name="mbb.getConferences"></a>
 
@@ -211,7 +197,8 @@ Gets the Men's College Basketball Conferences.
 
 **Example**  
 ```js
-const yr = 2021;const result = await sdv.mbb.getConferences(year = yr, group = 50);
+const yr = 2021;
+const result = await sdv.mbb.getConferences(year = yr, group = 50);
 ```
 <a name="mbb.getStandings"></a>
 
@@ -228,7 +215,8 @@ Gets the team standings for Men's College Basketball.
 
 **Example**  
 ```js
-const yr = 2020;const result = await sdv.mbb.getStandings(year = yr);
+const yr = 2020;
+const result = await sdv.mbb.getStandings(year = yr);
 ```
 <a name="mbb.getTeamList"></a>
 
@@ -260,7 +248,8 @@ Gets the team info for a specific College Basketball team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.mbb.getTeamInfo(teamId);
+const teamId = 52;
+const result = await sdv.mbb.getTeamInfo(teamId);
 ```
 <a name="mbb.getTeamPlayers"></a>
 
@@ -276,5 +265,6 @@ Gets the team roster information for a specific Men's College Basketball team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.mbb.getTeamPlayers(teamId);
+const teamId = 52;
+const result = await sdv.mbb.getTeamPlayers(teamId);
 ```

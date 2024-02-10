@@ -1,6 +1,5 @@
-'use strict';
-const should = require('should');
-const app = require('../app/app');
+import should from 'should';
+import app from '../app/app.js';
 
 describe('NCAA Games', () => {
 
@@ -21,20 +20,6 @@ describe('NCAA Games', () => {
     });
     it('should return a promise for ncaa game play-by-play for a given game', async () => {
         const data = await app.ncaa.getPlayByPlay(game)
-        should(data).exist;
-        should(data).be.json;
-        should(data).not.be.empty;
-
-    });
-    it('should return a promise for ncaa game team stats for a given game', async () => {
-        const data = await app.ncaa.getTeamStats(game)
-        should(data).exist;
-        should(data).be.json;
-        should(data).not.be.empty;
-
-    });
-    it('should return a promise for ncaa game scoring summary for a given game', async () => {
-        const data = await app.ncaa.getScoringSummary(game)
         should(data).exist;
         should(data).be.json;
         should(data).not.be.empty;

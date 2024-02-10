@@ -1,10 +1,10 @@
-const axios = require("axios");
+import axios from 'axios';
 /**
  * Operations for MLB.
  *
  * @namespace mlb
  */
-module.exports = {
+export default {
   /**
    * Gets the MLB game play-by-play data for a specified game.
    * @memberOf mlb

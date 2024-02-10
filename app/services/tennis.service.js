@@ -1,10 +1,10 @@
-const axios = require('axios');
+import axios from 'axios';
 /**
  * Operations for Tennis.
  *
  * @namespace tennis
  */
-module.exports = {
+export default {
     /**
      * Gets the scoreboard data for a specified date and league if available.
      * @memberOf tennis

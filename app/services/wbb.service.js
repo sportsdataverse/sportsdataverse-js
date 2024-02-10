@@ -1,10 +1,10 @@
-const axios = require('axios');
+import axios from 'axios';
 /**
  * Operations for WBB.
  *
  * @namespace wbb
  */
-module.exports = {
+export default {
     /**
      * Gets the Women's College Basketball game play-by-play data for a specified game.
      * @memberOf wbb
@@ -97,41 +97,6 @@ module.exports = {
 
         };
     },
-    /**
-     * Gets the WBB rankings data for a specified year and week if available.
-     * @memberOf wbb
-     * @async
-     * @function
-     * @param {*} year - Year (YYYY)
-     * @param {*} week - Week
-     * @returns json
-     * @example
-     * const result = await sdv.wbb.getRankings(
-     * year = 2021, week = 4
-     * )
-     */
-    getRankings: async function ({
-        year,
-        week
-    }) {
-        const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/rankings';
-        const params = {};
-
-        if (year) {
-            params.year = year;
-        }
-
-        if (week) {
-            params.week = week;
-        }
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
-
-        return res.data;
-    },
-
     /**
      * Gets the Women's College Basketball schedule data for a specified date if available.
      * @memberOf wbb

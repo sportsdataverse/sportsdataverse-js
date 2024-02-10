@@ -10,8 +10,6 @@ Operations for NCAA Sports.
     * [.getInfo(game)](#ncaa.getInfo) ⇒
     * [.getBoxScore(game)](#ncaa.getBoxScore) ⇒
     * [.getPlayByPlay(game)](#ncaa.getPlayByPlay) ⇒
-    * [.getTeamStats(game)](#ncaa.getTeamStats) ⇒
-    * [.getScoringSummary(game)](#ncaa.getScoringSummary) ⇒
     * [.getScoreboard(sport, division, year, month, day)](#ncaa.getScoreboard) ⇒
     * [.getSports()](#ncaa.getSports) ⇒
     * [.getSeasons(sport)](#ncaa.getSeasons) ⇒
@@ -23,7 +21,8 @@ Operations for NCAA Sports.
 <a name="ncaa.getRedirectUrl"></a>
 
 ### ncaa.getRedirectUrl(url) ⇒
-Gets the gameId for older games whose url redirects to the current url pattern using thegame url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard
+Gets the gameId for older games whose url redirects to the current url pattern using the
+game url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard
 
 **Kind**: static method of [<code>ncaa</code>](#ncaa)  
 **Returns**: json  
@@ -34,7 +33,11 @@ Gets the gameId for older games whose url redirects to the current url pattern u
 
 **Example**  
 ```js
-const result = await sdv.ncaaScoreboard.getNcaaScoreboard(sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15)const urlGame = result["games"][16]["game"]["url"]const gameId = await sdv.ncaa.getRedirectUrl(url=urlGame);
+const result = await sdv.ncaaScoreboard.getNcaaScoreboard(
+sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
+)
+const urlGame = result["games"][16]["game"]["url"]
+const gameId = await sdv.ncaa.getRedirectUrl(url=urlGame);
 ```
 <a name="ncaa.getInfo"></a>
 
@@ -84,38 +87,6 @@ Gets the play-by-play data for a specified game if available.
 ```js
 const result = await sdv.ncaa.getPlayByPlay(5764053);
 ```
-<a name="ncaa.getTeamStats"></a>
-
-### ncaa.getTeamStats(game) ⇒
-Gets the team stats data for a specified game if available.
-
-**Kind**: static method of [<code>ncaa</code>](#ncaa)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| game | <code>number</code> | Game id. |
-
-**Example**  
-```js
-const result = await sdv.ncaa.getTeamStats(5764053);
-```
-<a name="ncaa.getScoringSummary"></a>
-
-### ncaa.getScoringSummary(game) ⇒
-Gets the scoring summary data for a specified game if available.
-
-**Kind**: static method of [<code>ncaa</code>](#ncaa)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| game | <code>number</code> | Game id. |
-
-**Example**  
-```js
-const result = await sdv.ncaa.getScoringSummary(5764053);
-```
 <a name="ncaa.getScoreboard"></a>
 
 ### ncaa.getScoreboard(sport, division, year, month, day) ⇒
@@ -134,7 +105,9 @@ Gets the scoreboard data for a specified date and team sport if available.
 
 **Example**  
 ```js
-const result = await sdv.ncaa.getScoreboard(sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15)
+const result = await sdv.ncaa.getScoreboard(
+sport = 'basketball-men', division = 'd3', year = 2019, month = 02, day = 15
+)
 ```
 <a name="ncaa.getSports"></a>
 

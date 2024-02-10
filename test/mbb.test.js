@@ -1,6 +1,5 @@
-'use strict';
-const should = require('should');
-const app = require('../app/app');
+import should from 'should';
+import app from '../app/app.js';
 
 describe('MBB Games', () => {
     var gameId = 401260281;
@@ -49,46 +48,6 @@ describe('MBB Games', () => {
 
     it('should return a promise for game picks data for the given game id', async () => {
         const data = await app.mbb.getPicks(gameId)
-        should(data).exist;
-        should(data).be.json;
-        should(data).not.be.empty;
-
-    });
-});
-
-describe('MBB Rankings', () => {
-    it('should populate rankings for the current week and year', async () => {
-        const data = await app.mbb.getRankings({})
-        should(data).exist;
-        should(data).be.json;
-        should(data).not.be.empty;
-
-    });
-
-    it('should populate rankings for the given week and year', async () => {
-        const data = await app.mbb.getRankings({
-            year: 2020,
-            week: 9
-        })
-        should(data).exist;
-        should(data).be.json;
-        should(data).not.be.empty;
-
-    });
-
-    it('should return a promise for rankings for the current week and year', async () => {
-        const data = await app.mbb.getRankings({})
-        should(data).exist;
-        should(data).be.json;
-        should(data).not.be.empty;
-
-    });
-
-    it('should return a promise for rankings for the given week and year', async () => {
-        const data = await app.mbb.getRankings({
-            year: 2020,
-            week: 9
-        })
         should(data).exist;
         should(data).be.json;
         should(data).not.be.empty;

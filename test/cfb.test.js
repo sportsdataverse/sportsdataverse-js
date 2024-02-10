@@ -1,7 +1,5 @@
-'use strict';
-const should = require('should');
-const app = require('../app/app');
-const fs = require('fs');
+import should from 'should';
+import app from '../app/app.js';
 
 describe('CFB Games', () => {
     var gameId = 401256194;

@@ -1,10 +1,10 @@
-const axios = require('axios');
+import axios from 'axios';
 /**
  * Operations for WNBA.
  *
  * @namespace wnba
  */
-module.exports = {
+export default {
     /**
      * Gets the WNBA game play-by-play data for a specified game.
      * @memberOf wnba

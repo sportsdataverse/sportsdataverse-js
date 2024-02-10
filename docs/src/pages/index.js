@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: "Men's College Basketball",
-    // Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
         It provides users with the capability to access the ESPN API’s
@@ -20,7 +19,6 @@ const FeatureList = [
   },
   {
     title: "College Football",
-    // Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
         It provides users with the capability to access the ESPN API’s
@@ -31,7 +29,6 @@ const FeatureList = [
   },
   {
     title: 'EPA and WPA',
-    // Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         It provides users with the capability to access the cfbfastR team's
@@ -41,7 +38,6 @@ const FeatureList = [
   },
   {
     title: 'NFL',
-    // Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         It provides users with the capability to access the nflfastR team's
@@ -53,7 +49,6 @@ const FeatureList = [
   },
   {
     title: 'NHL',
-    // Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         It provides users with the capability to access ESPN's NHL endpoints for
