@@ -1,5 +1,3 @@
-'use strict';
+import sdv from './app/app.js';
 
-const sdv = require('./app/app');
-
-module.exports = sdv;
+export default sdv;

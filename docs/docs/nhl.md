@@ -97,7 +97,9 @@ Gets the NHL schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nhl.getSchedule(year = 2019, month = 11, day = 17)
+const result = await sdv.nhl.getSchedule(
+year = 2019, month = 11, day = 17
+)
 ```
 <a name="nhl.getScoreboard"></a>
 
@@ -116,7 +118,9 @@ Gets the NHL scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nhl.getScoreboard(year = 2019, month = 11, day = 16)
+const result = await sdv.nhl.getScoreboard(
+year = 2019, month = 11, day = 16
+)
 ```
 <a name="nhl.getStandings"></a>
 
@@ -133,7 +137,8 @@ Gets the team standings for the NHL.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nhl.getStandings(year = yr);
+const yr = 2016;
+const result = await sdv.nhl.getStandings(year = yr);
 ```
 <a name="nhl.getTeamList"></a>
 
@@ -159,7 +164,8 @@ Gets the team info for a specific NHL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nhl.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.nhl.getTeamInfo(teamId);
 ```
 <a name="nhl.getTeamPlayers"></a>
 
@@ -175,5 +181,6 @@ Gets the team roster information for a specific NHL team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nhl.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.nhl.getTeamPlayers(teamId);
 ```

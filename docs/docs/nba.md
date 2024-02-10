@@ -97,7 +97,9 @@ Gets the NBA schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nba.getSchedule(year = 2016, month = 04, day = 15)
+const result = await sdv.nba.getSchedule(
+year = 2016, month = 04, day = 15
+)
 ```
 <a name="nba.getScoreboard"></a>
 
@@ -116,7 +118,9 @@ Gets the NBA scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.nba.getScoreboard(year = 2019, month = 11, day = 16)
+const result = await sdv.nba.getScoreboard(
+year = 2019, month = 11, day = 16
+)
 ```
 <a name="nba.getStandings"></a>
 
@@ -133,7 +137,8 @@ Gets the team standings for the NBA.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.nba.getStandings(year = yr);
+const yr = 2016;
+const result = await sdv.nba.getStandings(year = yr);
 ```
 <a name="nba.getTeamList"></a>
 
@@ -160,7 +165,8 @@ Gets the team info for a specific NBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nba.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.nba.getTeamInfo(teamId);
 ```
 <a name="nba.getTeamPlayers"></a>
 
@@ -176,5 +182,6 @@ Gets the team roster information for a specific NBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.nba.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.nba.getTeamPlayers(teamId);
 ```

@@ -195,7 +195,9 @@ Gets the College Football scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.cfb.getScoreboard(year = 2019, month = 11, day = 16, group=80)
+const result = await sdv.cfb.getScoreboard(
+year = 2019, month = 11, day = 16, group=80
+)
 ```
 <a name="cfb.getConferences"></a>
 
@@ -212,7 +214,8 @@ Gets the list of all College Football conferences and their identification info 
 
 **Example**  
 ```js
-const yr = 2021;const result = await sdv.cfb.getConferences(year = yr, group = 80);
+const yr = 2021;
+const result = await sdv.cfb.getConferences(year = yr, group = 80);
 ```
 <a name="cfb.getStandings"></a>
 
@@ -229,7 +232,8 @@ Gets the team standings for College Football.
 
 **Example**  
 ```js
-const yr = 2020;const result = await sdv.cfb.getStandings(year = yr);
+const yr = 2020;
+const result = await sdv.cfb.getStandings(year = yr);
 ```
 <a name="cfb.getTeamList"></a>
 
@@ -261,7 +265,8 @@ Gets the team info for a specific College Football team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.cfb.getTeamInfo(teamId);
+const teamId = 52;
+const result = await sdv.cfb.getTeamInfo(teamId);
 ```
 <a name="cfb.getTeamPlayers"></a>
 
@@ -276,5 +281,6 @@ Gets the team roster information for a specific College Football team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.cfb.getTeamPlayers(teamId);
+const teamId = 52;
+const result = await sdv.cfb.getTeamPlayers(teamId);
 ```

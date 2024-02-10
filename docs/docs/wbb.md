@@ -9,7 +9,6 @@ Operations for WBB.
     * [.getPlayByPlay(id)](#wbb.getPlayByPlay) ⇒
     * [.getBoxScore(id)](#wbb.getBoxScore) ⇒
     * [.getSummary(id)](#wbb.getSummary) ⇒
-    * [.getRankings(year, week)](#wbb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype, limit)](#wbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#wbb.getScoreboard) ⇒
     * [.getConferences(year, group)](#wbb.getConferences) ⇒
@@ -66,23 +65,6 @@ Gets the Women's College Basketball game summary data for a specified game.
 ```js
 const result = await sdv.wbb.getSummary(401260565);
 ```
-<a name="wbb.getRankings"></a>
-
-### wbb.getRankings(year, week) ⇒
-Gets the WBB rankings data for a specified year and week if available.
-
-**Kind**: static method of [<code>wbb</code>](#wbb)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| year | <code>\*</code> | Year (YYYY) |
-| week | <code>\*</code> | Week |
-
-**Example**  
-```js
-const result = await sdv.wbb.getRankings(year = 2021, week = 4)
-```
 <a name="wbb.getSchedule"></a>
 
 ### wbb.getSchedule(year, month, day, group, seasontype, limit) ⇒
@@ -102,7 +84,9 @@ Gets the Women's College Basketball schedule data for a specified date if availa
 
 **Example**  
 ```js
-const result = await sdv.wbb.getSchedule(year = 2021, month = 02, day = 15, group=50)
+const result = await sdv.wbb.getSchedule(
+year = 2021, month = 02, day = 15, group=50
+)
 ```
 <a name="wbb.getScoreboard"></a>
 
@@ -123,7 +107,9 @@ Gets the Women's College Basketball scoreboard data for a specified date if avai
 
 **Example**  
 ```js
-const result = await sdv.wbb.getScoreboard(year = 2019, month = 02, day = 15, group=50)
+const result = await sdv.wbb.getScoreboard(
+year = 2019, month = 02, day = 15, group=50
+)
 ```
 <a name="wbb.getConferences"></a>
 
@@ -140,7 +126,8 @@ Gets the list of all Women's College Basketball conferences and their identifica
 
 **Example**  
 ```js
-const yr = 2021;const result = await sdv.wbb.getConferences(year = yr, group = 50);
+const yr = 2021;
+const result = await sdv.wbb.getConferences(year = yr, group = 50);
 ```
 <a name="wbb.getStandings"></a>
 
@@ -157,7 +144,8 @@ Gets the team standings for Women's College Basketball.
 
 **Example**  
 ```js
-const yr = 2020;const result = await sdv.wbb.getStandings(year = yr);
+const yr = 2020;
+const result = await sdv.wbb.getStandings(year = yr);
 ```
 <a name="wbb.getTeamList"></a>
 
@@ -173,7 +161,8 @@ Gets the list of all Women's College Basketball teams their identification info 
 
 **Example**  
 ```js
-get list of teamsconst result = await sdv.wbb.getTeamList(group=50);
+get list of teams
+const result = await sdv.wbb.getTeamList(group=50);
 ```
 <a name="wbb.getTeamInfo"></a>
 
@@ -189,7 +178,8 @@ Gets the team info for a specific WBB team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.wbb.getTeamInfo(teamId);
+const teamId = 52;
+const result = await sdv.wbb.getTeamInfo(teamId);
 ```
 <a name="wbb.getTeamPlayers"></a>
 
@@ -205,5 +195,6 @@ Gets the team roster information for a specific WBB team.
 
 **Example**  
 ```js
-const teamId = 52;const result = await sdv.wbb.getTeamPlayers(teamId);
+const teamId = 52;
+const result = await sdv.wbb.getTeamPlayers(teamId);
 ```

@@ -1,11 +1,11 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+import axios from 'axios';
+import cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
  *
  * @namespace mbb
  */
-module.exports = {
+export default {
     /**
      * Gets the Men's College Basketball game play-by-play data for a specified game.
      * @memberOf mbb
@@ -131,38 +131,6 @@ module.exports = {
             season: res.data.header.season,
             standings: res.data.standings
         };
-    },
-
-    /**
-     * Gets the Men's College Basketball rankings data for a specified year and week if available.
-     * @memberOf mbb
-     * @async
-     * @function
-     * @param {*} year - Year (YYYY)
-     * @param {*} week - Week
-     * @returns json
-     * @example
-     * const result = await sdv.mbb.getRankings(
-     * year = 2020, week = 15
-     * )
-     */
-    getRankings: async function ({ year, week }) {
-        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/rankings';
-        const params = {};
-
-        if (year) {
-            params.year = year;
-        }
-
-        if (week) {
-            params.week = week;
-        }
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
-
-        return res.data;
     },
     /**
      * Gets the Men's College Basketball Player recruiting data for a specified year, page, position and institution type if available.

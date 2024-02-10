@@ -1,6 +1,5 @@
-'use strict';
-const should = require('should');
-const app = require('../app/app');
+import should from 'should';
+import app from '../app/app.js';
 
 
 describe('TNNS Scoreboard', () => {

@@ -80,7 +80,9 @@ Gets the WNBA schedule data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.wnba.getSchedule(year = 2019, month = 07, day = 15)
+const result = await sdv.wnba.getSchedule(
+year = 2019, month = 07, day = 15
+)
 ```
 <a name="wnba.getScoreboard"></a>
 
@@ -99,7 +101,9 @@ Gets the WNBA scoreboard data for a specified date if available.
 
 **Example**  
 ```js
-const result = await sdv.wnba.getScoreboard(year = 2019, month = 07, day = 15)
+const result = await sdv.wnba.getScoreboard(
+year = 2019, month = 07, day = 15
+)
 ```
 <a name="wnba.getStandings"></a>
 
@@ -116,7 +120,8 @@ Gets the team standings for the WNBA.
 
 **Example**  
 ```js
-const yr = 2016;const result = await sdv.wnba.getStandings(year = yr);
+const yr = 2016;
+const result = await sdv.wnba.getStandings(year = yr);
 ```
 <a name="wnba.getTeamList"></a>
 
@@ -143,7 +148,8 @@ Gets the team info for a specific WNBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.wnba.getTeamInfo(teamId);
+const teamId = 16;
+const result = await sdv.wnba.getTeamInfo(teamId);
 ```
 <a name="wnba.getTeamPlayers"></a>
 
@@ -159,5 +165,6 @@ Gets the team roster information for a specific WNBA team.
 
 **Example**  
 ```js
-const teamId = 16;const result = await sdv.wnba.getTeamPlayers(teamId);
+const teamId = 16;
+const result = await sdv.wnba.getTeamPlayers(teamId);
 ```

@@ -1,13 +1,13 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
-const decode = require('decode-html');
-const tabletojson = require("tabletojson").Tabletojson;
+import axios from 'axios';
+import cheerio from 'cheerio';
+import decode from 'decode-html';
+import { Tabletojson as tabletojson } from 'tabletojson';
 /**
  * Operations for NCAA Sports.
  *
  * @namespace ncaa
  */
-module.exports = {
+export default {
     /**
      * Gets the gameId for older games whose url redirects to the current url pattern using the
      * game url fragment (relative to [https://ncaa.com](https://ncaa.com)) pulled from ncaaScoreboard
@@ -72,36 +72,6 @@ module.exports = {
      */
     getPlayByPlay: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/pbp.json`;
-        const res = await axios.get(baseUrl);
-        return res.data;
-    },
-    /**
-     * Gets the team stats data for a specified game if available.
-     * @memberOf ncaa
-     * @async
-     * @function
-     * @param {number} game - Game id.
-     * @returns json
-     * @example
-     * const result = await sdv.ncaa.getTeamStats(5764053);
-     */
-    getTeamStats: async function (game) {
-        const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/teamStats.json`;
-        const res = await axios.get(baseUrl);
-        return res.data;
-    },
-    /**
-     * Gets the scoring summary data for a specified game if available.
-     * @memberOf ncaa
-     * @async
-     * @function
-     * @param {number} game - Game id.
-     * @returns json
-     * @example
-     * const result = await sdv.ncaa.getScoringSummary(5764053);
-     */
-    getScoringSummary: async function (game) {
-        const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/scoringSummary.json`;
         const res = await axios.get(baseUrl);
         return res.data;
     },

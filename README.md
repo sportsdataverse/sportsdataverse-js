@@ -384,7 +384,6 @@ Operations for Men's College Basketball.
     * [.getBoxScore(id)](#mbb.getBoxScore) ⇒
     * [.getSummary(id)](#mbb.getSummary) ⇒
     * [.getPicks(id)](#mbb.getPicks) ⇒
-    * [.getRankings(year, week)](#mbb.getRankings) ⇒
     * [.getPlayerRankings(year, page, group)](#mbb.getPlayerRankings) ⇒
     * [.getSchoolRankings(year, page)](#mbb.getSchoolRankings) ⇒
     * [.getSchoolCommits(year, school)](#mbb.getSchoolCommits) ⇒
@@ -459,25 +458,6 @@ Gets the Men's College Basketball game PickCenter data for a specified game.
 **Example**  
 ```js
 const result = await sdv.mbb.getPicks(401260281);
-```
-<a name="mbb.getRankings"></a>
-
-### mbb.getRankings(year, week) ⇒
-Gets the Men's College Basketball rankings data for a specified year and week if available.
-
-**Kind**: static method of [<code>mbb</code>](#mbb)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| year | <code>\*</code> | Year (YYYY) |
-| week | <code>\*</code> | Week |
-
-**Example**  
-```js
-const result = await sdv.mbb.getRankings(
-year = 2020, week = 15
-)
 ```
 <a name="mbb.getPlayerRankings"></a>
 
@@ -1042,8 +1022,6 @@ Operations for NCAA Sports.
     * [.getInfo(game)](#ncaa.getInfo) ⇒
     * [.getBoxScore(game)](#ncaa.getBoxScore) ⇒
     * [.getPlayByPlay(game)](#ncaa.getPlayByPlay) ⇒
-    * [.getTeamStats(game)](#ncaa.getTeamStats) ⇒
-    * [.getScoringSummary(game)](#ncaa.getScoringSummary) ⇒
     * [.getScoreboard(sport, division, year, month, day)](#ncaa.getScoreboard) ⇒
     * [.getSports()](#ncaa.getSports) ⇒
     * [.getSeasons(sport)](#ncaa.getSeasons) ⇒
@@ -1120,38 +1098,6 @@ Gets the play-by-play data for a specified game if available.
 **Example**  
 ```js
 const result = await sdv.ncaa.getPlayByPlay(5764053);
-```
-<a name="ncaa.getTeamStats"></a>
-
-### ncaa.getTeamStats(game) ⇒
-Gets the team stats data for a specified game if available.
-
-**Kind**: static method of [<code>ncaa</code>](#ncaa)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| game | <code>number</code> | Game id. |
-
-**Example**  
-```js
-const result = await sdv.ncaa.getTeamStats(5764053);
-```
-<a name="ncaa.getScoringSummary"></a>
-
-### ncaa.getScoringSummary(game) ⇒
-Gets the scoring summary data for a specified game if available.
-
-**Kind**: static method of [<code>ncaa</code>](#ncaa)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| game | <code>number</code> | Game id. |
-
-**Example**  
-```js
-const result = await sdv.ncaa.getScoringSummary(5764053);
 ```
 <a name="ncaa.getScoreboard"></a>
 
@@ -1682,7 +1628,6 @@ Operations for WBB.
     * [.getPlayByPlay(id)](#wbb.getPlayByPlay) ⇒
     * [.getBoxScore(id)](#wbb.getBoxScore) ⇒
     * [.getSummary(id)](#wbb.getSummary) ⇒
-    * [.getRankings(year, week)](#wbb.getRankings) ⇒
     * [.getSchedule(year, month, day, group, seasontype, limit)](#wbb.getSchedule) ⇒
     * [.getScoreboard(year, month, day, group, seasontype, limit)](#wbb.getScoreboard) ⇒
     * [.getConferences(year, group)](#wbb.getConferences) ⇒
@@ -1738,25 +1683,6 @@ Gets the Women's College Basketball game summary data for a specified game.
 **Example**  
 ```js
 const result = await sdv.wbb.getSummary(401260565);
-```
-<a name="wbb.getRankings"></a>
-
-### wbb.getRankings(year, week) ⇒
-Gets the WBB rankings data for a specified year and week if available.
-
-**Kind**: static method of [<code>wbb</code>](#wbb)  
-**Returns**: json  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| year | <code>\*</code> | Year (YYYY) |
-| week | <code>\*</code> | Week |
-
-**Example**  
-```js
-const result = await sdv.wbb.getRankings(
-year = 2021, week = 4
-)
 ```
 <a name="wbb.getSchedule"></a>
 

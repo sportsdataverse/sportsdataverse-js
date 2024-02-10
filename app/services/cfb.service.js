@@ -1,11 +1,11 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+import axios from 'axios';
+import cheerio from 'cheerio';
 /**
  * Operations for College Football.
  *
  * @namespace cfb
  */
-module.exports = {
+export default {
     /**
      * Gets the College Football game play-by-play data for a specified game.
      * @memberOf cfb
