@@ -73,11 +73,6 @@ module.exports = {
               target: '_self',
             },
             {
-              label: 'recruitR-py',
-              href: 'https://github.com/sportsdataverse/recruitR-py/',
-              target: '_self',
-            },
-            {
               label: 'R Packages',
               href: 'https://r.sportsdataverse.org/',
             },
@@ -107,8 +102,28 @@ module.exports = {
               target: '_self',
             },
             {
-              label: 'worldfootballR',
-              href: 'https://jaseziv.github.io/worldfootballR/',
+              label: 'ggshakeR',
+              href: 'https://abhiamishra.github.io/ggshakeR/',
+              target: '_self',
+            },
+            {
+              label: 'usfootballR',
+              href: 'https://usfootballR.sportsdataverse.org/',
+              target: '_self',
+            },
+            {
+              label: 'soccerAnimate',
+              href: 'https://github.com/Dato-Futbol/soccerAnimate/',
+              target: '_self',
+            },
+            {
+              label: 'oddsapiR',
+              href: 'https://oddsapiR.sportsdataverse.org/',
+              target: '_self',
+            },
+            {
+              label: 'sportyR',
+              href: 'https://sportyR.sportsdataverse.org/',
               target: '_self',
             },
             {
@@ -149,11 +164,6 @@ module.exports = {
             {
               label: 'recruitR',
               href: 'https://recruitR.sportsdataverse.org/',
-              target: '_self',
-            },
-            {
-              label: 'gamezoneR',
-              href: 'https://jacklich10.github.io/gamezoneR/',
               target: '_self',
             },
             {
