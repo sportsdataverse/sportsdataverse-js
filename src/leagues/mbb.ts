@@ -5,5 +5,5 @@ export default makeLeagueModule({
   prefix: "mbb",
   sport: "basketball",
   league: "mens-college-basketball",
-  scopes: ["universal"],
+  scopes: ["universal", "ncaa"],
 });

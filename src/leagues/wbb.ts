@@ -5,5 +5,5 @@ export default makeLeagueModule({
   prefix: "wbb",
   sport: "basketball",
   league: "womens-college-basketball",
-  scopes: ["universal"],
+  scopes: ["universal", "ncaa"],
 });

@@ -17,14 +17,18 @@ const client = axios.create({
   },
 });
 
-/** Build a `{host}/{sport}/{league}{path}` URL for an ESPN family. */
+/**
+ * Build an ESPN URL for a family. The Core API (`core_v2`) nests the league
+ * under `/leagues/{league}`; the Site/Web families use `/{league}` directly.
+ */
 export function familyUrl(
   family: EspnFamily,
   sport: string,
   league: string,
   path = ""
 ): string {
-  return `${HOSTS[family]}/${sport}/${league}${path}`;
+  const leagueSeg = family === "core_v2" ? `leagues/${league}` : league;
+  return `${HOSTS[family]}/${sport}/${leagueSeg}${path}`;
 }
 
 /** GET an ESPN URL and return the raw JSON body. */

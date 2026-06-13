@@ -33,4 +33,19 @@ describe('ESPN cross-league core (basketball vertical slice)', () => {
         Object.keys(mod).length.should.be.above(0);
         Object.keys(mod).every((k) => k.startsWith('espn_test_')).should.be.true();
     });
+
+    it('exposes core_v2 wrappers (seasons / franchises / athletes / venues)', () => {
+        (typeof sdv.nba.espn_nba_seasons).should.equal('function');
+        (typeof sdv.nba.espn_nba_franchises).should.equal('function');
+        (typeof sdv.nba.espn_nba_athletes).should.equal('function');
+        (typeof sdv.nba.espn_nba_venues).should.equal('function');
+    });
+
+    it('applies scope tables: ncaa `rankings` on college leagues only', () => {
+        // mbb/wbb carry the ncaa scope -> rankings
+        (typeof sdv.mbb.espn_mbb_rankings).should.equal('function');
+        (typeof sdv.wbb.espn_wbb_rankings).should.equal('function');
+        // nba is universal-only -> no rankings wrapper
+        (typeof sdv.nba.espn_nba_rankings).should.equal('undefined');
+    });
 });
