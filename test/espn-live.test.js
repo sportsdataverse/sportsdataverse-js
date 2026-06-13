@@ -7,7 +7,7 @@ import sdv, { LEAGUES } from '../dist/index.js';
 // dead at ESPN.
 //
 //   SDV_LIVE=1 npm test
-const run = process.env.SDV_LIVE ? describe : describe.skip;
+const run = ['1', 'true', 'yes'].includes(process.env.SDV_LIVE) ? describe : describe.skip;
 
 run('ESPN live smoke (all leagues)', function () {
     this.timeout(30000);

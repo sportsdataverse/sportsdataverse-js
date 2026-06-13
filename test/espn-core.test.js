@@ -1,5 +1,7 @@
 import should from 'should';
 import sdv, { makeLeagueModule, LEAGUES, WRAPPERS } from '../dist/index.js';
+// deep import (not part of the public API) — exercises request building w/o network
+import { resolveRequest } from '../dist/core/espn.js';
 
 // Structural (no-network) tests for the generated cross-league ESPN surface.
 describe('ESPN cross-league core (generated from YAML)', () => {
@@ -48,5 +50,41 @@ describe('ESPN cross-league core (generated from YAML)', () => {
         families.has('site_v2').should.be.true();
         families.has('core_v2').should.be.true();
         families.has('site_v2_alt').should.be.true();
+    });
+
+    it('resolves params by snake_case or camelCase alias (+ default_from)', () => {
+        const def = {
+            short: 'event_competition',
+            family: 'core_v2',
+            scope: 'universal',
+            path: '/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}',
+            pathParams: [{ name: 'event_id' }, { name: 'cid', defaultFrom: 'event_id' }],
+            queryParams: [{ name: 'season_type', queryKey: 'seasontype' }],
+        };
+        const cfg = { prefix: 'nfl', sport: 'football', league: 'nfl', scopes: ['universal'] };
+
+        const snake = resolveRequest(def, cfg, { event_id: 5, season_type: 2 });
+        const camel = resolveRequest(def, cfg, { eventId: 5, seasonType: 2 });
+
+        // both spellings produce the identical request
+        snake.url.should.equal(camel.url);
+        JSON.stringify(snake.query).should.equal(JSON.stringify(camel.query));
+        // cid defaulted from event_id; query key mapped to ESPN's `seasontype`
+        snake.url.should.endWith('/events/5/competitions/5');
+        snake.query.seasontype.should.equal(2);
+    });
+
+    it('only honours a league override for leagueParam leagues', () => {
+        const def = {
+            short: 'scoreboard', family: 'site_v2', scope: 'universal',
+            path: '/{sport}/{league}/scoreboard', pathParams: [], queryParams: [],
+        };
+        const pro = { prefix: 'nba', sport: 'basketball', league: 'nba', scopes: ['universal'] };
+        const soccer = { prefix: 'soccer', sport: 'soccer', league: 'eng.1', scopes: ['universal'], leagueParam: true };
+
+        // pro league ignores the override
+        resolveRequest(def, pro, { league: 'mens-college-basketball' }).url.should.endWith('/basketball/nba/scoreboard');
+        // leagueParam league honours it
+        resolveRequest(def, soccer, { league: 'esp.1' }).url.should.endWith('/soccer/esp.1/scoreboard');
     });
 });
