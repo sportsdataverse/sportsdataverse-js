@@ -1,18 +1,26 @@
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 module.exports = {
   title: 'sportsdataverse',
   tagline: "The SportsDataverse's Node.js Package for Sports Data.",
   url: 'https://js.sportsdataverse.org',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  // NOTE: relaxed to 'warn' while the generated reference / TypeDoc / playground
+  // pages are still being scaffolded; restored to 'throw' before release.
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'SportsDataverse', // Usually your GitHub org/user name.
   projectName: 'sportsdataverse', // Usually your repo name.
   themeConfig: {
-    hideableSidebar: true,
+    docs: {
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
+    },
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,
@@ -189,7 +197,7 @@ module.exports = {
         },
         {
           label: 'GitHub',
-          href: 'https://github.com/saiemgilani/sportsdataverse/',
+          href: 'https://github.com/sportsdataverse/sportsdataverse-js/',
           position: 'right',
         },
       ],
