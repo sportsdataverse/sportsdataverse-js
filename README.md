@@ -100,7 +100,7 @@ Operations for College Football.
     * [.getBoxScore(id)](#cfb.getBoxScore) ⇒
     * [.getSummary(id)](#cfb.getSummary) ⇒
     * [.getPicks(id)](#cfb.getPicks) ⇒
-    * [.getPlayerRankings(year, page, group, state)](#cfb.getPlayerRankings) ⇒
+    * [.getPlayerRankings(year, page, group, rankingsType, state)](#cfb.getPlayerRankings) ⇒
     * [.getSchoolRankings(year, page)](#cfb.getSchoolRankings) ⇒
     * [.getSchoolCommits(year, school)](#cfb.getSchoolCommits) ⇒
     * [.getRankings(year, week)](#cfb.getRankings) ⇒
@@ -178,7 +178,7 @@ const result = await sdv.cfb.getPicks(401256194);
 ```
 <a name="cfb.getPlayerRankings"></a>
 
-### cfb.getPlayerRankings(year, page, group, state) ⇒
+### cfb.getPlayerRankings(year, page, group, rankingsType, state) ⇒
 Gets the College Football Player recruiting data for a specified year, page, position, state and institution type if available.
 
 **Kind**: static method of [<code>cfb</code>](#cfb)  
@@ -189,11 +189,15 @@ Gets the College Football Player recruiting data for a specified year, page, pos
 | year | <code>\*</code> | Year (YYYY) |
 | page | <code>number</code> | Page (50 per page) |
 | group | <code>&quot;HighSchool&quot;</code> \| <code>&quot;JuniorCollege&quot;</code> \| <code>&quot;PrepSchool&quot;</code> | Institution Type |
+| rankingsType | <code>&quot;Composite&quot;</code> \| <code>&quot;247&quot;</code> | Ranking Type (defaults to "Composite") |
 | state | <code>string</code> | State of recruit |
 
 **Example**  
 ```js
 const result = await sdv.cfb.getPlayerRankings({year: 2016});
+
+// pull the raw 247Sports rankings instead of the Composite
+const result = await sdv.cfb.getPlayerRankings({year: 2016, rankingsType: "247"});
 ```
 <a name="cfb.getSchoolRankings"></a>
 
