@@ -97,12 +97,70 @@ export const UNIVERSAL_WRAPPERS: WrapperDef[] = [
     scope: "universal",
     build: (p) => ({ path: "/news", query: { limit: p.limit } }),
   },
+  {
+    short: "athletes",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({
+      path: "/athletes",
+      query: { limit: p.limit ?? 50, page: p.page },
+    }),
+  },
+  {
+    short: "athlete",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({ path: `/athletes/${p.athlete ?? p.id}` }),
+  },
+  {
+    short: "seasons",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({ path: "/seasons", query: { limit: p.limit } }),
+  },
+  {
+    short: "season",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({ path: `/seasons/${p.season}` }),
+  },
+  {
+    short: "franchises",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({ path: "/franchises", query: { limit: p.limit ?? 100 } }),
+  },
+  {
+    short: "venues",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({ path: "/venues", query: { limit: p.limit ?? 100 } }),
+  },
+  {
+    short: "positions",
+    family: "core_v2",
+    scope: "universal",
+    build: (p) => ({ path: "/positions", query: { limit: p.limit ?? 100 } }),
+  },
 ];
 
-/** Tables keyed by scope (universal today; ncaa/football/mlb land with codegen). */
+/** Wrappers that only make sense for NCAA leagues (polls, etc.). */
+export const NCAA_WRAPPERS: WrapperDef[] = [
+  {
+    short: "rankings",
+    family: "site_v2",
+    scope: "ncaa",
+    build: (p) => ({
+      path: "/rankings",
+      query: { week: p.week, seasontype: p.seasontype },
+    }),
+  },
+];
+
+/** Tables keyed by scope (football/mlb land with codegen). */
 export const WRAPPER_TABLES: Record<Scope, WrapperDef[]> = {
   universal: UNIVERSAL_WRAPPERS,
-  ncaa: [],
+  ncaa: NCAA_WRAPPERS,
   football: [],
   mlb: [],
 };
