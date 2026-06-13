@@ -17,7 +17,7 @@ export default {
    */
   getPlayByPlay: async function (id) {
     const baseUrl = "http://cdn.espn.com/core/mlb/playbyplay";
-    const params = {
+    const params: Record<string, any> = {
       gameId: id,
       xhr: 1,
       render: "false",
@@ -49,7 +49,7 @@ export default {
    */
   getBoxScore: async function (id) {
     const baseUrl = "http://cdn.espn.com/core/mlb/boxscore";
-    const params = {
+    const params: Record<string, any> = {
       gameId: id,
       xhr: 1,
       render: false,
@@ -76,7 +76,7 @@ export default {
   getSummary: async function (id) {
     const baseUrl =
       "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
-    const params = {
+    const params: Record<string, any> = {
       event: id,
     };
     const res = await axios.get(baseUrl, {
@@ -110,7 +110,7 @@ export default {
   getPicks: async function (id) {
     const baseUrl =
       "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
-    const params = {
+    const params: Record<string, any> = {
       event: id,
     };
     const res = await axios.get(baseUrl, {
@@ -149,7 +149,7 @@ export default {
   getSchedule: async function ({ year, month, day }) {
     const baseUrl = `http://cdn.espn.com/core/mlb/schedule`;
 
-    const params = {
+    const params: Record<string, any> = {
       xhr: 1,
       render: false,
       device: "desktop",
@@ -185,7 +185,7 @@ export default {
     limit = 300,
   }) {
     const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard`;
-    const params = {
+    const params: Record<string, any> = {
       limit,
     };
     if (year && month && day) {
@@ -214,7 +214,7 @@ export default {
   }) {
     const groupId = group === "league" ? 1 : group === "conference" ? 2 : 3;
     const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/baseball/mlb/standings`;
-    const params = {
+    const params: Record<string, any> = {
       region: "us",
       lang: "en",
       contentorigin: "espn",
@@ -239,7 +239,7 @@ export default {
   getTeamList: async function () {
     const baseUrl =
       "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams";
-    const params = {
+    const params: Record<string, any> = {
       limit: 1000,
     };
 
@@ -279,7 +279,7 @@ export default {
    */
   getTeamPlayers: async function (id) {
     const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
-    const params = {
+    const params: Record<string, any> = {
       enable: "roster",
     };
     const res = await axios.get(baseUrl, {

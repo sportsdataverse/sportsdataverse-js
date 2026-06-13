@@ -23,7 +23,7 @@ export default {
      */
     getScoreboard: async function ({ league = 'atp', year, month, day }) {
         const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/tennis/${league}/scoreboard`;
-        const params = {};
+        const params: Record<string, any> = {};
         if (year && month && day) {
             params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         }

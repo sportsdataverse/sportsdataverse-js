@@ -2,3 +2,5 @@ node_modules
 .vscode
 examples
 mochawesome-report
+dist/
+docs/api/

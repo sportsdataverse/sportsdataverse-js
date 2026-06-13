@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    /* Pragmatic first-pass migration: the service methods return dynamic ESPN
+       JSON and use untyped destructured params, so implicit `any` is allowed.
+       Declarations are still emitted (dist/*.d.ts) so signatures can be
+       tightened incrementally without breaking consumers. */
+    "strict": false,
+    "noImplicitAny": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "test"]
+}
