@@ -1,2 +1,12 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Source + config are always checked out as LF (overriding core.autocrlf on
+# Windows) so the codegen drift gate (`npm run codegen:check`) is deterministic
+# across platforms — the generator in tools/codegen always emits LF.
+*.ts   text eol=lf
+*.js   text eol=lf
+*.mjs  text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
