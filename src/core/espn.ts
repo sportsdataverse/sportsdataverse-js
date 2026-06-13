@@ -2,6 +2,24 @@ import { HOSTS, get } from "./client.js";
 import type { LeagueConfig, Scope, WrapperDef } from "./types.js";
 import { WRAPPERS } from "../generated/wrappers.js";
 
+/** snake_case -> camelCase (e.g. `event_id` -> `eventId`). */
+function toCamel(s: string): string {
+  return s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
+}
+
+/**
+ * Look a param up by its canonical (snake_case) name OR a camelCase alias, so
+ * callers can pass either `{ event_id }` or `{ eventId }`.
+ */
+function lookup(params: Record<string, any>, name: string): any {
+  if (params[name] !== undefined && params[name] !== null) return params[name];
+  const camel = toCamel(name);
+  if (camel !== name && params[camel] !== undefined && params[camel] !== null) {
+    return params[camel];
+  }
+  return undefined;
+}
+
 /** Drop undefined/null query values so we don't send `?dates=undefined`. */
 function cleanQuery(
   def: WrapperDef,
@@ -9,7 +27,7 @@ function cleanQuery(
 ): Record<string, any> | undefined {
   const out: Record<string, any> = {};
   for (const qp of def.queryParams) {
-    const v = params[qp.name] ?? qp.default;
+    const v = lookup(params, qp.name) ?? qp.default;
     if (v !== undefined && v !== null) out[qp.queryKey] = v;
   }
   return Object.keys(out).length ? out : undefined;
@@ -25,15 +43,19 @@ function buildPath(
   params: Record<string, any>
 ): string {
   // Only league-parameterized leagues (soccer/cricket) honour a `league` override.
-  const league = cfg.leagueParam && params.league ? params.league : cfg.league;
+  const override = cfg.leagueParam ? lookup(params, "league") : undefined;
+  const league = override != null ? override : cfg.league;
   const byName = new Map(def.pathParams.map((p) => [p.name, p]));
 
-  // Resolve a path token: explicit param -> `defaultFrom` param -> `default`.
+  // Resolve a path token: explicit param -> `defaultFrom` param -> `default`
+  // (each lookup accepts the snake_case name or a camelCase alias).
   const resolve = (name: string): any => {
-    if (params[name] !== undefined && params[name] !== null) return params[name];
+    const v = lookup(params, name);
+    if (v !== undefined && v !== null) return v;
     const pp = byName.get(name);
-    if (pp?.defaultFrom != null && params[pp.defaultFrom] != null) {
-      return params[pp.defaultFrom];
+    if (pp?.defaultFrom != null) {
+      const from = lookup(params, pp.defaultFrom);
+      if (from !== undefined && from !== null) return from;
     }
     return pp?.default;
   };
@@ -70,14 +92,30 @@ function buildPath(
   return path;
 }
 
+/**
+ * Build the full request (URL + query) for a wrapper without fetching. Exported
+ * so the param resolution (camelCase aliases, defaults, path substitution) is
+ * unit-testable without network.
+ */
+export function resolveRequest(
+  def: WrapperDef,
+  cfg: LeagueConfig,
+  params: Record<string, any> = {}
+): { url: string; query?: Record<string, any> } {
+  return {
+    url: `${HOSTS[def.family]}${buildPath(def, cfg, params)}`,
+    query: cleanQuery(def, params),
+  };
+}
+
 /** Resolve a wrapper for a league and fetch the raw ESPN JSON. */
 export function callWrapper(
   def: WrapperDef,
   cfg: LeagueConfig,
   params: Record<string, any> = {}
 ): Promise<any> {
-  const path = buildPath(def, cfg, params);
-  return get(`${HOSTS[def.family]}${path}`, { params: cleanQuery(def, params) });
+  const { url, query } = resolveRequest(def, cfg, params);
+  return get(url, { params: query });
 }
 
 /** All wrappers grouped by scope (built from the generated table). */
