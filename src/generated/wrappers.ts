@@ -129,7 +129,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -139,7 +141,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/roster",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -149,7 +153,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/schedule",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": [
       {
@@ -164,7 +170,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/record",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -174,7 +182,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/depthcharts",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -184,7 +194,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/injuries",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -194,7 +206,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/transactions",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -204,7 +218,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/history",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -214,7 +230,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/news",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": [
       {
@@ -230,7 +248,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/teams/{team_id}/leaders",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -240,7 +260,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -250,7 +272,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -260,7 +284,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/news",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -329,7 +355,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -339,7 +367,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -349,8 +379,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}",
     "pathParams": [
-      "season",
-      "season_type"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      }
     ],
     "queryParams": []
   },
@@ -360,9 +394,15 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}",
     "pathParams": [
-      "season",
-      "season_type",
-      "group_id"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "group_id"
+      }
     ],
     "queryParams": []
   },
@@ -372,8 +412,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups",
     "pathParams": [
-      "season",
-      "season_type"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      }
     ],
     "queryParams": []
   },
@@ -383,9 +427,15 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams",
     "pathParams": [
-      "season",
-      "season_type",
-      "group_id"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "group_id"
+      }
     ],
     "queryParams": [
       {
@@ -401,9 +451,15 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children",
     "pathParams": [
-      "season",
-      "season_type",
-      "group_id"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "group_id"
+      }
     ],
     "queryParams": []
   },
@@ -413,8 +469,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/leaders",
     "pathParams": [
-      "season",
-      "season_type"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      }
     ],
     "queryParams": []
   },
@@ -424,8 +484,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/corrections",
     "pathParams": [
-      "season",
-      "season_type"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      }
     ],
     "queryParams": []
   },
@@ -435,8 +499,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks",
     "pathParams": [
-      "season",
-      "season_type"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      }
     ],
     "queryParams": []
   },
@@ -446,9 +514,15 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}",
     "pathParams": [
-      "season",
-      "season_type",
-      "week"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "week"
+      }
     ],
     "queryParams": []
   },
@@ -458,9 +532,15 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
     "pathParams": [
-      "season",
-      "season_type",
-      "week"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "week"
+      }
     ],
     "queryParams": [
       {
@@ -476,7 +556,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/teams",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": [
       {
@@ -492,8 +574,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/teams/{team_id}",
     "pathParams": [
-      "season",
-      "team_id"
+      {
+        "name": "season"
+      },
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -503,7 +589,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": [
       {
@@ -524,7 +612,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/coaches",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": [
       {
@@ -540,7 +630,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/draft",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -550,8 +642,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks",
     "pathParams": [
-      "season",
-      "round_num"
+      {
+        "name": "season"
+      },
+      {
+        "name": "round_num"
+      }
     ],
     "queryParams": []
   },
@@ -561,7 +657,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/futures",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -571,7 +669,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/freeagents",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -581,8 +681,13 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex[/{team_id}]",
     "pathParams": [
-      "season",
-      "team_id"
+      {
+        "name": "season"
+      },
+      {
+        "name": "team_id",
+        "required": false
+      }
     ],
     "queryParams": []
   },
@@ -592,7 +697,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex/leaders",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -602,7 +709,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/awards",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -636,7 +745,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -646,8 +757,13 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
     "pathParams": [
-      "athlete_id",
-      "stat_type"
+      {
+        "name": "athlete_id"
+      },
+      {
+        "name": "stat_type",
+        "required": false
+      }
     ],
     "queryParams": []
   },
@@ -657,7 +773,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -667,7 +785,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -677,7 +797,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -687,7 +809,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -697,7 +821,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -707,7 +833,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -717,7 +845,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -727,7 +857,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -737,8 +869,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
     "pathParams": [
-      "athlete_id",
-      "opp_id"
+      {
+        "name": "athlete_id"
+      },
+      {
+        "name": "opp_id"
+      }
     ],
     "queryParams": []
   },
@@ -766,7 +902,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}",
     "pathParams": [
-      "event_id"
+      {
+        "name": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -776,8 +914,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -787,8 +931,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -798,9 +948,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
     "pathParams": [
-      "event_id",
-      "team_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -810,9 +968,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
     "pathParams": [
-      "event_id",
-      "team_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -822,9 +988,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
     "pathParams": [
-      "event_id",
-      "team_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -834,9 +1008,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
     "pathParams": [
-      "event_id",
-      "team_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -846,9 +1028,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
     "pathParams": [
-      "event_id",
-      "team_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -858,9 +1048,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
     "pathParams": [
-      "event_id",
-      "team_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -870,8 +1068,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -881,8 +1085,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": [
       {
@@ -898,8 +1108,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": [
       {
@@ -915,9 +1131,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
     "pathParams": [
-      "event_id",
-      "play_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "play_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -927,9 +1151,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
     "pathParams": [
-      "event_id",
-      "play_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "play_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -939,8 +1171,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -950,8 +1188,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -961,8 +1205,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -972,8 +1222,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -983,8 +1239,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -994,8 +1256,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -1005,8 +1273,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -1016,8 +1290,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -1027,8 +1307,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
     "pathParams": [
-      "event_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -1038,9 +1324,17 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
     "pathParams": [
-      "event_id",
-      "official_id",
-      "cid"
+      {
+        "name": "event_id"
+      },
+      {
+        "name": "official_id"
+      },
+      {
+        "name": "cid",
+        "required": false,
+        "defaultFrom": "event_id"
+      }
     ],
     "queryParams": []
   },
@@ -1064,7 +1358,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/teams/{team_id}",
     "pathParams": [
-      "team_id"
+      {
+        "name": "team_id"
+      }
     ],
     "queryParams": []
   },
@@ -1088,7 +1384,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/venues/{venue_id}",
     "pathParams": [
-      "venue_id"
+      {
+        "name": "venue_id"
+      }
     ],
     "queryParams": []
   },
@@ -1112,7 +1410,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/franchises/{franchise_id}",
     "pathParams": [
-      "franchise_id"
+      {
+        "name": "franchise_id"
+      }
     ],
     "queryParams": []
   },
@@ -1122,7 +1422,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/coaches/{coach_id}",
     "pathParams": [
-      "coach_id"
+      {
+        "name": "coach_id"
+      }
     ],
     "queryParams": []
   },
@@ -1132,8 +1434,14 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/coaches/{coach_id}/record/{record_type}",
     "pathParams": [
-      "coach_id",
-      "record_type"
+      {
+        "name": "coach_id"
+      },
+      {
+        "name": "record_type",
+        "required": false,
+        "default": 0
+      }
     ],
     "queryParams": []
   },
@@ -1143,8 +1451,12 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/coaches/{coach_id}/seasons/{season}",
     "pathParams": [
-      "coach_id",
-      "season"
+      {
+        "name": "coach_id"
+      },
+      {
+        "name": "season"
+      }
     ],
     "queryParams": []
   },
@@ -1162,7 +1474,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/positions/{position_id}",
     "pathParams": [
-      "position_id"
+      {
+        "name": "position_id"
+      }
     ],
     "queryParams": []
   },
@@ -1188,7 +1502,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/awards/{award_id}",
     "pathParams": [
-      "award_id"
+      {
+        "name": "award_id"
+      }
     ],
     "queryParams": []
   },
@@ -1230,7 +1546,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "ncaa",
     "path": "/{sport}/leagues/{league}/seasons/{season}/recruits",
     "pathParams": [
-      "season"
+      {
+        "name": "season"
+      }
     ],
     "queryParams": [
       {
@@ -1246,9 +1564,15 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "ncaa",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/rankings",
     "pathParams": [
-      "season",
-      "season_type",
-      "week"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "week"
+      }
     ],
     "queryParams": []
   },
@@ -1258,10 +1582,23 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "football",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}[/groups/{group_id}]/qbr/{split}",
     "pathParams": [
-      "season",
-      "season_type",
-      "group_id",
-      "split"
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type",
+        "required": false,
+        "default": 2
+      },
+      {
+        "name": "group_id",
+        "required": false
+      },
+      {
+        "name": "split",
+        "required": false,
+        "default": 0
+      }
     ],
     "queryParams": []
   },
@@ -1271,10 +1608,22 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "football",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/qbr/{split}",
     "pathParams": [
-      "season",
-      "week",
-      "season_type",
-      "split"
+      {
+        "name": "season"
+      },
+      {
+        "name": "week"
+      },
+      {
+        "name": "season_type",
+        "required": false,
+        "default": 2
+      },
+      {
+        "name": "split",
+        "required": false,
+        "default": 0
+      }
     ],
     "queryParams": []
   },
@@ -1284,7 +1633,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "mlb",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/hotzones",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -1294,7 +1645,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": []
   },
@@ -1304,7 +1657,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": [
       {
@@ -1319,7 +1674,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": [
       {
@@ -1334,7 +1691,9 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
     "pathParams": [
-      "athlete_id"
+      {
+        "name": "athlete_id"
+      }
     ],
     "queryParams": [
       {

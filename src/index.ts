@@ -40,4 +40,5 @@ export type {
   WrapperFn,
   WrapperDef,
   QueryParam,
+  PathParam,
 } from './core/types.js';

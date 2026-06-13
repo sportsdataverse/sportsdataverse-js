@@ -24,22 +24,42 @@ function buildPath(
   cfg: LeagueConfig,
   params: Record<string, any>
 ): string {
-  const league = params.league ?? cfg.league;
+  // Only league-parameterized leagues (soccer/cricket) honour a `league` override.
+  const league = cfg.leagueParam && params.league ? params.league : cfg.league;
+  const byName = new Map(def.pathParams.map((p) => [p.name, p]));
+
+  // Resolve a path token: explicit param -> `defaultFrom` param -> `default`.
+  const resolve = (name: string): any => {
+    if (params[name] !== undefined && params[name] !== null) return params[name];
+    const pp = byName.get(name);
+    if (pp?.defaultFrom != null && params[pp.defaultFrom] != null) {
+      return params[pp.defaultFrom];
+    }
+    return pp?.default;
+  };
+
   let path = def.path
     .replace("{sport}", cfg.sport)
     .replace("{league}", league);
 
-  // optional segments: include `/{value}` only when the param is supplied
-  path = path.replace(/\[\/\{(\w+)\}\]/g, (_m, name: string) =>
-    params[name] !== undefined && params[name] !== null
-      ? `/${params[name]}`
-      : ""
-  );
+  // Optional segments `[...]` (literals + tokens): include only when every
+  // token inside resolves; otherwise drop the whole segment.
+  path = path.replace(/\[([^\]]*)\]/g, (_m, inner: string) => {
+    const tokens = [...inner.matchAll(/\{(\w+)\}/g)].map((t) => t[1]);
+    const vals = tokens.map(resolve);
+    if (vals.some((v) => v === undefined || v === null)) return "";
+    let seg = inner;
+    tokens.forEach((t, i) => {
+      seg = seg.replace(`{${t}}`, String(vals[i]));
+    });
+    return seg;
+  });
 
-  // required path params
+  // Remaining required tokens.
   path = path.replace(/\{(\w+)\}/g, (_m, name: string) => {
-    const v = params[name];
+    const v = resolve(name);
     if (v === undefined || v === null) {
+      if (byName.get(name)?.required === false) return "";
       throw new Error(
         `espn_${cfg.prefix}_${def.short}: missing required path parameter "${name}"`
       );

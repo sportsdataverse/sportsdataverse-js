@@ -25,17 +25,30 @@ export interface QueryParam {
 }
 
 /**
+ * A `{token}` in a path template. `required` defaults to true; a missing value
+ * falls back to `default`, then to the value of another param (`defaultFrom`,
+ * e.g. a competition id that defaults from the event id).
+ */
+export interface PathParam {
+  name: string;
+  required?: boolean;
+  default?: string | number;
+  defaultFrom?: string;
+}
+
+/**
  * A wrapper definition (data-driven; generated from the ESPN endpoint YAML).
  * `path` is the full host-relative template, e.g. `/{sport}/{league}/scoreboard`
- * (site) or `/{sport}/leagues/{league}/seasons/{season}` (core), with optional
- * segments written `[/{token}]`.
+ * (site) or `/{sport}/leagues/{league}/seasons/{season}` (core). Optional
+ * segments are bracketed and may contain literals + tokens — e.g. `[/{token}]`
+ * or `[/groups/{group_id}]` — and are dropped when their token(s) don't resolve.
  */
 export interface WrapperDef {
   short: string;
   family: EspnFamily;
   scope: Scope;
   path: string;
-  pathParams: string[];
+  pathParams: PathParam[];
   queryParams: QueryParam[];
 }
 

@@ -26,7 +26,12 @@ function loadWrappers() {
         family: ep.host ?? fileHost, // per-endpoint host override (e.g. standings)
         scope: ep.scope ?? "universal",
         path: ep.path,
-        pathParams: (ep.path_params ?? []).map((p) => p.name),
+        pathParams: (ep.path_params ?? []).map((p) => ({
+          name: p.name,
+          ...(p.required === false ? { required: false } : {}),
+          ...(p.default !== undefined ? { default: p.default } : {}),
+          ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
+        })),
         queryParams: (ep.extra_params ?? []).map((p) => ({
           name: p.name,
           queryKey: p.query_key,
