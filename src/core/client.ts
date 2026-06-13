@@ -1,7 +1,11 @@
 import axios, { type AxiosRequestConfig } from "axios";
 import type { EspnFamily } from "./types.js";
 
-/** Base hosts for each ESPN URL family. */
+/**
+ * Base hosts for each ESPN URL family. Wrapper `path` templates are
+ * host-relative and already include the league nesting (`/{sport}/{league}/...`
+ * for the site families, `/{sport}/leagues/{league}/...` for the Core API).
+ */
 export const HOSTS: Record<EspnFamily, string> = {
   site_v2: "https://site.api.espn.com/apis/site/v2/sports",
   site_v2_alt: "https://site.api.espn.com/apis/v2/sports",
@@ -16,20 +20,6 @@ const client = axios.create({
       "Mozilla/5.0 (compatible; sportsdataverse-js/3.x; +https://js.sportsdataverse.org/)",
   },
 });
-
-/**
- * Build an ESPN URL for a family. The Core API (`core_v2`) nests the league
- * under `/leagues/{league}`; the Site/Web families use `/{league}` directly.
- */
-export function familyUrl(
-  family: EspnFamily,
-  sport: string,
-  league: string,
-  path = ""
-): string {
-  const leagueSeg = family === "core_v2" ? `leagues/${league}` : league;
-  return `${HOSTS[family]}/${sport}/${leagueSeg}${path}`;
-}
 
 /** GET an ESPN URL and return the raw JSON body. */
 export async function get(

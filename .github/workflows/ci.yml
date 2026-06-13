@@ -22,7 +22,10 @@ jobs:
           cache: npm
       # `npm ci` runs the `prepare` script, which compiles src -> dist via tsc
       - run: npm ci
+      - name: Codegen drift check
+        run: npm run codegen:check
       - name: Type-check
         run: npm run typecheck
       - name: Verify the build output exists
-        run: node -e "import('./dist/index.js').then(m => { const s = Object.keys(m.default); if (s.length !== 10) { throw new Error('expected 10 services, got ' + s.length); } console.log('OK:', s.join(', ')); })"
+        run: |
+          node -e "import('./dist/index.js').then(m => { const s = Object.keys(m.default); if (s.length < 29 || !s.includes('nba') || !s.includes('soccer')) { throw new Error('unexpected namespaces ' + s.length); } console.log('OK', s.length, 'namespaces'); })"
