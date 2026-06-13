@@ -17,7 +17,7 @@ export default {
      */
     getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/wnba/playbyplay';
-        const params = {
+        const params: Record<string, any> = {
             gameId: id,
             xhr: 1,
             render: 'false',
@@ -51,7 +51,7 @@ export default {
      */
     getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/wnba/boxscore';
-        const params = {
+        const params: Record<string, any> = {
             gameId: id,
             xhr: 1,
             render: false,
@@ -80,7 +80,7 @@ export default {
      */
     getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary';
-        const params = {
+        const params: Record<string, any> = {
             event: id
         };
         const res = await axios.get(baseUrl, {
@@ -118,7 +118,7 @@ export default {
      */
     getSchedule: async function ({ year = null, month = null, day = null }) {
         const baseUrl = `http://cdn.espn.com/core/wnba/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        const params = {
+        const params: Record<string, any> = {
             xhr: 1,
             render: false,
             device: 'desktop',
@@ -147,7 +147,7 @@ export default {
      */
     getScoreboard: async function ({ year, month, day, limit = 300 }) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard`;
-        const params = {
+        const params: Record<string, any> = {
             limit
         };
         if (year && month && day) {
@@ -173,7 +173,7 @@ export default {
     getStandings: async function ({ year = new Date().getFullYear(), group = 'league' }) {
         const groupId = group === 'league' ? 1 : 2;
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/wnba/standings`;
-        const params = {
+        const params: Record<string, any> = {
             region: 'us',
             lang: 'en',
             contentorigin: 'espn',
@@ -197,7 +197,7 @@ export default {
      */
     getTeamList: async function ({ }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams';
-        const params = {
+        const params: Record<string, any> = {
             limit: 1000
         };
         const res = await axios.get(baseUrl, {
@@ -235,7 +235,7 @@ export default {
      */
     getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/${id}`;
-        const params = {
+        const params: Record<string, any> = {
             enable: "roster"
         };
 

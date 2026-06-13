@@ -1,7 +1,20 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import decode from 'decode-html';
 import { Tabletojson as tabletojson } from 'tabletojson';
+
+/** Internal helper: scrape an HTML `<select>` (by id) into {value, name} pairs. */
+function extractSelectList($: any, array: any[], id: string) {
+    const selector = '#' + id + ' option';
+    $(selector).each(function (this: any) {
+        const value = $(this).prop('value');
+        const name = decode($(this).html());
+        if (value) {
+            array.push({ value: value, name: name });
+        }
+    });
+}
+
 /**
  * Operations for NCAA Sports.
  *
@@ -103,20 +116,7 @@ export default {
         const res = await axios.get(baseUrl);
         return res.data;
     },
-    extractSelectList: function ($, array, id) {
-        var selector = '#' + id + ' option';
-        $(selector).each(function () {
-            var value = $(this).prop('value');
-            var name = decode($(this).html());
-
-            if (value) {
-                array.push({
-                    value: value,
-                    name: name
-                });
-            }
-        });
-    },
+    extractSelectList,
 
     /**
      * Retrieves the set of sports and their abbreviations.
@@ -164,7 +164,7 @@ export default {
         }
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
 
-        const params = {
+        const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": "",
             "division": "",
@@ -219,7 +219,7 @@ export default {
         }
 
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
-        const params = {
+        const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season,
             "division": "",
@@ -285,7 +285,7 @@ export default {
         const isGameHigh = (gameHigh == 'true') ? 'Y' : 'N';
 
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
-        const params = {
+        const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season,
             "division": division,
@@ -347,7 +347,7 @@ export default {
      */
     getPlayerData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
-        const params = {
+        const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season || '',
             "division": division || '',
@@ -400,7 +400,7 @@ export default {
      */
     getTeamData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
-        const params = {
+        const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season || '',
             "division": division || '',

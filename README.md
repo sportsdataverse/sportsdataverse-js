@@ -12,6 +12,19 @@
 ```bash
 npm install sportsdataverse
 ```
+
+## **Usage**
+
+`sportsdataverse` is an ES module written in TypeScript (it ships type
+declarations). Import the default export and call any sport's methods:
+
+```js
+import sdv from "sportsdataverse";
+
+const pbp = await sdv.cfb.getPlayByPlay(401256194);
+const scoreboard = await sdv.nba.getScoreboard({ year: 2024, month: 1, day: 15 });
+```
+
 ## **Documentation**
 
 For more information on the package and function reference, please see the [sportsdataverse node.js documentation website](https://js.sportsdataverse.org/)

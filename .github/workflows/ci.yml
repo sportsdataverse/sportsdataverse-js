@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: build + typecheck (node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      # `npm ci` runs the `prepare` script, which compiles src -> dist via tsc
+      - run: npm ci
+      - name: Type-check
+        run: npm run typecheck
+      - name: Verify the build output exists
+        run: node -e "import('./dist/index.js').then(m => { const s = Object.keys(m.default); if (s.length !== 10) { throw new Error('expected 10 services, got ' + s.length); } console.log('OK:', s.join(', ')); })"

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/api",
+  "name": "sportsdataverse",
+  "readme": "none",
+  "excludePrivate": true,
+  "skipErrorChecking": true
+}

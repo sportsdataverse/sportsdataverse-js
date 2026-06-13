@@ -1,5 +1,5 @@
 import should from 'should';
-import app from '../app/app.js';
+import app from '../dist/index.js';
 
 describe('CFB Games', () => {
     var gameId = 401256194;

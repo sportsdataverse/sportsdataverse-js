@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
  *
@@ -18,7 +18,7 @@ export default {
      */
     getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/playbyplay';
-        const params = {
+        const params: Record<string, any> = {
             gameId: id,
             xhr: 1,
             render: 'false',
@@ -50,7 +50,7 @@ export default {
      */
     getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/boxscore';
-        const params = {
+        const params: Record<string, any> = {
             gameId: id,
             xhr: 1,
             render: false,
@@ -79,7 +79,7 @@ export default {
      */
     getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
-        const params = {
+        const params: Record<string, any> = {
             event: id
         };
 
@@ -109,7 +109,7 @@ export default {
      */
     getPicks: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
-        const params = {
+        const params: Record<string, any> = {
             event: id
         };
 
@@ -152,7 +152,7 @@ export default {
         state = null
     }) {
         const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
-        const params = {
+        const params: Record<string, any> = {
             InstitutionGroup: group,
             Page: page,
             Position: position,
@@ -295,7 +295,7 @@ export default {
         seasontype = 2
     }) {
         const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        const params = {
+        const params: Record<string, any> = {
             groups: group,
             seasontype: seasontype,
             xhr: 1
@@ -331,7 +331,7 @@ export default {
         seasontype = 2,
         limit = 1000 }) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard`;
-        const params = {
+        const params: Record<string, any> = {
             groups: group,
             seasontype: seasontype || 2,
             limit
@@ -360,7 +360,7 @@ export default {
     getConferences: async function ({ year = new Date().getFullYear(), group = 50 }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
 
-        const params = {
+        const params: Record<string, any> = {
             season: year,
             group: group
         };
@@ -384,7 +384,7 @@ export default {
      */
     getStandings: async function ({ year = new Date().getFullYear(), group = 50 }) {
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/basketball/mens-college-basketball/standings`;
-        const params = {
+        const params: Record<string, any> = {
             region: 'us',
             lang: 'en',
             contentorigin: 'espn',
@@ -415,7 +415,7 @@ export default {
         group = 50
     }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams';
-        const params = {
+        const params: Record<string, any> = {
             group,
             limit: 1000
         };
@@ -456,7 +456,7 @@ export default {
      */
     getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
-        const params = {
+        const params: Record<string, any> = {
             enable: "roster"
         };
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 /**
  * Operations for College Football.
  *
@@ -18,7 +18,7 @@ export default {
      */
     getPlayByPlay: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/college-football/playbyplay';
-        const params = {
+        const params: Record<string, any> = {
             gameId: id,
             xhr: 1,
             render: 'false',
@@ -53,7 +53,7 @@ export default {
      */
     getBoxScore: async function (id) {
         const baseUrl = 'http://cdn.espn.com/core/college-football/boxscore';
-        const params = {
+        const params: Record<string, any> = {
             gameId: id,
             xhr: 1,
             render: false,
@@ -82,7 +82,7 @@ export default {
      */
     getSummary: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
-        const params = {
+        const params: Record<string, any> = {
             event: id
         };
 
@@ -100,7 +100,6 @@ export default {
             teams: res.data.header.competitions[0].competitors,
             scoringPlays: res.data.scoringPlays,
             winProbability: res.data.winprobability,
-            leaders: res.data.leaders,
             competitions: res.data.header.competitions,
             season: res.data.header.season,
             week: res.data.header.week,
@@ -119,7 +118,7 @@ export default {
      */
     getPicks: async function (id) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
-        const params = {
+        const params: Record<string, any> = {
             event: id
         };
 
@@ -166,7 +165,7 @@ export default {
         state = null,
         rankingsType = "Composite"
     }) {
-        const params = {
+        const params: Record<string, any> = {
             InstitutionGroup: group,
             Page: page,
             Position: position,
@@ -329,7 +328,7 @@ export default {
      */
     getRankings: async function ({ year, week }) {
         const baseUrl = 'http://cdn.espn.com/core/college-football/rankings';
-        const params = {};
+        const params: Record<string, any> = {};
 
         if (year) {
             params.year = year;
@@ -360,7 +359,7 @@ export default {
      */
     getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2 }) {
         const baseUrl = `http://cdn.espn.com/core/college-football/schedule`;
-        const params = {
+        const params: Record<string, any> = {
             groups: groups,
             seasontype: seasontype,
             xhr: 1,
@@ -397,7 +396,7 @@ export default {
     getScoreboard: async function ({ year, month, day, groups = 80, seasontype = 2, limit = 300 }) {
 
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard`;
-        const params = {
+        const params: Record<string, any> = {
             groups: groups,
             seasontype,
             limit
@@ -427,7 +426,7 @@ export default {
     getConferences: async function ({ year = new Date().getFullYear(), group = 80 }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard/conferences';
 
-        const params = {
+        const params: Record<string, any> = {
             season: year,
             group: group
         };
@@ -450,7 +449,7 @@ export default {
      */
     getStandings: async function ({ year = new Date().getFullYear(), group = 80 }) {
         const baseUrl = `https://site.web.api.espn.com/apis/v2/sports/football/college-football/standings`;
-        const params = {
+        const params: Record<string, any> = {
             region: 'us',
             lang: 'en',
             contentorigin: 'espn',
@@ -479,7 +478,7 @@ export default {
      */
     getTeamList: async function ({ group = 80 }) {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/teams';
-        const params = {
+        const params: Record<string, any> = {
             group,
             limit: 1000
         };
@@ -519,7 +518,7 @@ export default {
      */
     getTeamPlayers: async function (id) {
         const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
-        const params = {
+        const params: Record<string, any> = {
             enable: "roster"
         };
 
