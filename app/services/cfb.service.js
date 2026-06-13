@@ -152,6 +152,7 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {number} page - Page (50 per page)
      * @param {"HighSchool"|"JuniorCollege"|"PrepSchool"} group - Institution Type
+     * @param {"Composite"|"247"} rankingsType - Ranking Type
      * @param {string} state - State of recruit
      * @returns json
      * @example
@@ -162,15 +163,24 @@ export default {
         page = 1,
         group = "HighSchool",
         position = null,
-        state = null
+        state = null,
+        rankingsType = "Composite"
     }) {
-        const baseUrl = `http://247sports.com/Season/${year}-Football/CompositeRecruitRankings`;
         const params = {
             InstitutionGroup: group,
             Page: page,
             Position: position,
             State: state
         };
+
+        let baseUrl;
+        if (rankingsType === 'Composite') {
+            baseUrl = `http://247sports.com/Season/${year}-Football/CompositeRecruitRankings`;
+        } else if (rankingsType === '247') {
+            baseUrl = `http://247sports.com/Season/${year}-Football/recruitrankings`;
+        } else {
+            throw new Error("Invalid rankings type");
+        }
 
         const res = await axios.get(baseUrl, {
             headers: {
