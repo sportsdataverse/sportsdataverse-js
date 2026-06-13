@@ -18,7 +18,9 @@ run('ESPN live smoke (all leagues)', function () {
         // Use it with a real `{ league }`; skip the default-slug smoke here.
         const test = cfg.prefix === 'cricket' ? it.skip : it;
         test(`espn_${cfg.prefix}_scoreboard returns data`, async () => {
-            const fn = sdv[cfg.prefix][`espn_${cfg.prefix}_scoreboard`];
+            const ns = sdv[cfg.prefix];
+            should(ns).be.an.Object();
+            const fn = ns[`espn_${cfg.prefix}_scoreboard`];
             (typeof fn).should.equal('function');
             const data = await fn({});
             should(data).be.an.Object();
