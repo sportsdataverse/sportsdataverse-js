@@ -1,0 +1,37 @@
+hosts:
+  site_v2: "https://site.api.espn.com/apis/site/v2/sports"
+  site_v2_alt: "https://site.api.espn.com/apis/v2/sports"
+  web_v3: "https://site.web.api.espn.com/apis/common/v3/sports"
+  core_v2: "https://sports.core.api.espn.com/v2/sports"
+leagues:
+  - {prefix: nba, sport: basketball, league: nba, scopes: [universal]}
+  - {prefix: wnba, sport: basketball, league: wnba, scopes: [universal]}
+  - {prefix: mbb, sport: basketball, league: mens-college-basketball, scopes: [universal, ncaa]}
+  - {prefix: wbb, sport: basketball, league: womens-college-basketball, scopes: [universal, ncaa]}
+  - {prefix: cfb, sport: football, league: college-football, scopes: [universal, ncaa, football]}
+  - {prefix: nfl, sport: football, league: nfl, scopes: [universal, football]}
+  - {prefix: mlb, sport: baseball, league: mlb, scopes: [universal, mlb]}
+  - {prefix: nhl, sport: hockey, league: nhl, scopes: [universal]}
+  - {prefix: mch, sport: hockey, league: mens-college-hockey, scopes: [universal, ncaa]}
+  - {prefix: wch, sport: hockey, league: womens-college-hockey, scopes: [universal, ncaa]}
+  - {prefix: college_baseball, sport: baseball, league: college-baseball, scopes: [universal, ncaa]}
+  - {prefix: college_softball, sport: baseball, league: college-softball, scopes: [universal, ncaa]}
+  - {prefix: ufl, sport: football, league: ufl, scopes: [universal]}
+  - {prefix: xfl, sport: football, league: xfl, scopes: [universal]}
+  - {prefix: cfl, sport: football, league: cfl, scopes: [universal]}
+  # --- Soccer: one league-parameterized catch-all family + curated headline aliases ---
+  - {prefix: soccer, sport: soccer, league: eng.1, league_param: true, scopes: [universal]}
+  - {prefix: epl, sport: soccer, league: eng.1, scopes: [universal]}
+  - {prefix: laliga, sport: soccer, league: esp.1, scopes: [universal]}
+  - {prefix: bundesliga, sport: soccer, league: ger.1, scopes: [universal]}
+  - {prefix: seriea, sport: soccer, league: ita.1, scopes: [universal]}
+  - {prefix: ligue1, sport: soccer, league: fra.1, scopes: [universal]}
+  - {prefix: mls, sport: soccer, league: usa.1, scopes: [universal]}
+  - {prefix: ligamx, sport: soccer, league: mex.1, scopes: [universal]}
+  - {prefix: ucl, sport: soccer, league: uefa.champions, scopes: [universal]}
+  - {prefix: uel, sport: soccer, league: uefa.europa, scopes: [universal]}
+  - {prefix: nwsl, sport: soccer, league: usa.nwsl, scopes: [universal]}
+  - {prefix: wwc, sport: soccer, league: fifa.wwc, scopes: [universal]}
+  - {prefix: wc, sport: soccer, league: fifa.world, scopes: [universal]}
+  # --- Cricket: param-mode catch-all (headline cricket aliases land later after slug discovery) ---
+  - {prefix: cricket, sport: cricket, league: eng.1, league_param: true, scopes: [universal]}

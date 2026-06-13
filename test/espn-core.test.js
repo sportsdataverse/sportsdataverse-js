@@ -1,29 +1,37 @@
 import should from 'should';
-import sdv, { makeLeagueModule, nbaEspn } from '../dist/index.js';
+import sdv, { makeLeagueModule, LEAGUES, WRAPPERS } from '../dist/index.js';
 
-// Structural (no-network) tests for the cross-league ESPN core + league binder.
-describe('ESPN cross-league core (basketball vertical slice)', () => {
-    it('generates espn_<prefix>_<short> wrappers for a league module', () => {
-        const keys = Object.keys(nbaEspn);
-        keys.should.containEql('espn_nba_scoreboard');
-        keys.should.containEql('espn_nba_teams');
-        keys.should.containEql('espn_nba_team_roster');
+// Structural (no-network) tests for the generated cross-league ESPN surface.
+describe('ESPN cross-league core (generated from YAML)', () => {
+    it('generates a namespace for every league in the matrix', () => {
+        LEAGUES.length.should.be.above(20);
+        for (const cfg of LEAGUES) {
+            sdv.should.have.property(cfg.prefix);
+        }
+        // includes the non-core families
+        sdv.should.have.properties(['epl', 'soccer', 'cricket', 'ufl', 'mch']);
     });
 
-    it('merges wrappers onto the legacy namespace without clobbering it', () => {
-        // legacy method still present
+    it('merges espn_<prefix>_* wrappers onto legacy namespaces without clobbering them', () => {
+        // legacy method preserved
         (typeof sdv.nba.getPlayByPlay).should.equal('function');
-        // new cross-league wrapper added alongside it
+        // generated wrappers added alongside it
         (typeof sdv.nba.espn_nba_scoreboard).should.equal('function');
+        (typeof sdv.nba.espn_nba_summary).should.equal('function');
+        Object.keys(sdv.nba).filter((k) => k.startsWith('espn_nba_')).length.should.be.above(50);
     });
 
-    it('binds (sport, league) for each basketball league', () => {
-        (typeof sdv.wbb.espn_wbb_teams).should.equal('function');
-        (typeof sdv.mbb.espn_mbb_standings).should.equal('function');
-        (typeof sdv.wnba.espn_wnba_summary).should.equal('function');
+    it('applies scope tables: ncaa/football wrappers only where scoped', () => {
+        // cfb carries [universal, ncaa, football] -> more wrappers than universal-only nba
+        const cfbCount = Object.keys(sdv.cfb).filter((k) => k.startsWith('espn_cfb_')).length;
+        const nbaCount = Object.keys(sdv.nba).filter((k) => k.startsWith('espn_nba_')).length;
+        cfbCount.should.be.above(nbaCount);
+        // ncaa-scope rankings on college, not on the pro league
+        (typeof sdv.mbb.espn_mbb_rankings).should.equal('function');
+        (typeof sdv.nba.espn_nba_rankings).should.equal('undefined');
     });
 
-    it('makeLeagueModule produces the universal wrapper set', () => {
+    it('makeLeagueModule binds (sport, league) and prefixes every wrapper', () => {
         const mod = makeLeagueModule({
             prefix: 'test',
             sport: 'basketball',
@@ -34,18 +42,11 @@ describe('ESPN cross-league core (basketball vertical slice)', () => {
         Object.keys(mod).every((k) => k.startsWith('espn_test_')).should.be.true();
     });
 
-    it('exposes core_v2 wrappers (seasons / franchises / athletes / venues)', () => {
-        (typeof sdv.nba.espn_nba_seasons).should.equal('function');
-        (typeof sdv.nba.espn_nba_franchises).should.equal('function');
-        (typeof sdv.nba.espn_nba_athletes).should.equal('function');
-        (typeof sdv.nba.espn_nba_venues).should.equal('function');
-    });
-
-    it('applies scope tables: ncaa `rankings` on college leagues only', () => {
-        // mbb/wbb carry the ncaa scope -> rankings
-        (typeof sdv.mbb.espn_mbb_rankings).should.equal('function');
-        (typeof sdv.wbb.espn_wbb_rankings).should.equal('function');
-        // nba is universal-only -> no rankings wrapper
-        (typeof sdv.nba.espn_nba_rankings).should.equal('undefined');
+    it('exposes the full generated wrapper table + families', () => {
+        WRAPPERS.length.should.be.above(100);
+        const families = new Set(WRAPPERS.map((w) => w.family));
+        families.has('site_v2').should.be.true();
+        families.has('core_v2').should.be.true();
+        families.has('site_v2_alt').should.be.true();
     });
 });

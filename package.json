@@ -30,7 +30,8 @@
     "should": "^13.2.3",
     "tsx": "^4.22.4",
     "typedoc": "^0.28.19",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "yaml": "^2.9.0"
   },
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
@@ -40,7 +41,9 @@
     "prepare": "npm run build",
     "pretest": "npm run build",
     "test": "mocha --timeout 15000 \"test/**/*.test.js\"",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "codegen": "node tools/codegen/generate.mjs",
+    "codegen:check": "node tools/codegen/generate.mjs --check"
   },
   "repository": {
     "type": "git",

@@ -22,6 +22,8 @@ jobs:
           cache: npm
       # `npm ci` runs the `prepare` script, which compiles src -> dist via tsc
       - run: npm ci
+      - name: Codegen drift check
+        run: npm run codegen:check
       - name: Type-check
         run: npm run typecheck
       - name: Verify the build output exists
