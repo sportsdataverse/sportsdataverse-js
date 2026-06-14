@@ -8,6 +8,11 @@
 .docusaurus
 .cache-loader
 
+# TypeDoc API reference (docusaurus-plugin-typedoc) — regenerated on every build,
+# except the committed _category_.json that labels the sidebar section.
+/docs/api/*
+!/docs/api/_category_.json
+
 # Misc
 .DS_Store
 .env.local

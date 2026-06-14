@@ -3,4 +3,7 @@ node_modules
 examples
 mochawesome-report
 dist/
-docs/api/
+# Local-only TypeDoc HTML (`npm run docs`). The DEPLOYED API reference is
+# generated into the Docusaurus site by docusaurus-plugin-typedoc instead.
+typedoc-build/
+# docs/api/ is the docs site's Vercel serverless functions dir (playground proxy).

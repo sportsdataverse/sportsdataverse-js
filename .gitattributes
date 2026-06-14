@@ -10,3 +10,9 @@
 *.json text eol=lf
 *.yml  text eol=lf
 *.yaml text eol=lf
+
+# Generated docs reference is emitted with LF by tools/codegen/generate.mjs; pin
+# it to LF so `npm run codegen:check` is deterministic on Windows — WITHOUT
+# forcing every hand-written .md (intro, tutorials) to LF.
+docs/docs/reference/*.md   text eol=lf
+docs/src/playground/*.json text eol=lf

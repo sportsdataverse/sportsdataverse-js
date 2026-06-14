@@ -1,5 +1,6 @@
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 module.exports = {
   title: 'sportsdataverse',
@@ -7,12 +8,42 @@ module.exports = {
   url: 'https://js.sportsdataverse.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   favicon: 'img/favicon.ico',
   organizationName: 'SportsDataverse', // Usually your GitHub org/user name.
   projectName: 'sportsdataverse', // Usually your repo name.
+  plugins: [
+    // Generate the TypeScript API reference (TypeDoc -> Markdown) into the docs
+    // content tree at build time, so it ships with the deployed site. The old
+    // root `npm run docs` HTML output was local-only and never reached the web.
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        entryPoints: ['../src/index.ts'],
+        tsconfig: '../tsconfig.json',
+        out: 'docs/api',
+        readme: 'none',
+        skipErrorChecking: true,
+        excludePrivate: true,
+        excludeInternal: true,
+        // Keep the committed docs/api/_category_.json (which labels the sidebar
+        // section) across rebuilds — TypeDoc would otherwise wipe the out dir.
+        cleanOutputDir: false,
+        sidebar: { pretty: true },
+      },
+    ],
+  ],
   themeConfig: {
-    hideableSidebar: true,
+    docs: {
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
+    },
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,
@@ -189,7 +220,7 @@ module.exports = {
         },
         {
           label: 'GitHub',
-          href: 'https://github.com/saiemgilani/sportsdataverse/',
+          href: 'https://github.com/sportsdataverse/sportsdataverse-js/',
           position: 'right',
         },
       ],
