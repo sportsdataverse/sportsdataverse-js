@@ -100,16 +100,29 @@ describe('path-param resolution rules', () => {
     (() => resolveRequest(def, league, base)).should.throw(/missing required path parameter/);
   });
 
-  it('honours camelCase aliases for path + query params', () => {
+  it('honours camelCase aliases for path params', () => {
     const def = WRAPPERS.find(
       (w) => (w.pathParams || []).some((p) => p.name.includes('_'))
     );
     should(def).be.ok();
     const league = LEAGUES.find((l) => l.scopes.includes(def.scope) && !l.leagueParam);
     const snakeKey = def.pathParams.find((p) => p.name.includes('_')).name;
-    const camelKey = toCamel(snakeKey);
     const a = resolveRequest(def, league, { [snakeKey]: 7 }).url;
-    const b = resolveRequest(def, league, { [camelKey]: 7 }).url;
+    const b = resolveRequest(def, league, { [toCamel(snakeKey)]: 7 }).url;
     a.should.equal(b);
+  });
+
+  it('honours camelCase aliases for query params (and maps to the ESPN key)', () => {
+    const def = WRAPPERS.find(
+      (w) => (w.queryParams || []).some((p) => p.name.includes('_'))
+    );
+    should(def).be.ok();
+    const league = LEAGUES.find((l) => l.scopes.includes(def.scope) && !l.leagueParam);
+    const qp = def.queryParams.find((p) => p.name.includes('_'));
+    const snakeQuery = resolveRequest(def, league, { [qp.name]: 2 }).query;
+    const camelQuery = resolveRequest(def, league, { [toCamel(qp.name)]: 2 }).query;
+    JSON.stringify(snakeQuery).should.equal(JSON.stringify(camelQuery));
+    // resolved under the ESPN query key, not the call-param name
+    snakeQuery[qp.queryKey].should.equal(2);
   });
 });
