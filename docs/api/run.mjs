@@ -9,7 +9,9 @@
 //
 // Runs on Vercel only (or `vercel dev`); during plain `docusaurus start` the
 // /api/run route does not exist and the playground surfaces a friendly error.
-import endpoints from '../src/playground/endpoints.json';
+// Native ESM (Vercel traces rather than bundles this function) requires an
+// explicit import attribute for JSON — without it the module fails to load.
+import endpoints from '../src/playground/endpoints.json' with { type: 'json' };
 import { resolveRequest } from '../src/playground/resolve.mjs';
 
 const ALLOWED_HOSTS = new Set(
