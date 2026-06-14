@@ -14,125 +14,125 @@ sidebar_position: 16
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.soccer.espn_soccer_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.soccer.espnSoccer<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_soccer_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.soccer.espn_soccer_scoreboard({ league: 'eng.1' });
+await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_soccer_athlete_awards` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_soccer_athlete_bio` | `site_v2` `/soccer/{league}/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_soccer_athlete_career_stats` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_soccer_athlete_contracts` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_soccer_athlete_core` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_soccer_athlete_eventlog` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_soccer_athlete_gamelog` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_soccer_athlete_info` | `site_v2` `/soccer/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_soccer_athlete_injuries` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_soccer_athlete_news` | `site_v2` `/soccer/{league}/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_soccer_athlete_notes` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_soccer_athlete_overview` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_soccer_athlete_records` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_soccer_athlete_seasons` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_soccer_athlete_splits` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_soccer_athlete_statisticslog` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_soccer_athlete_stats` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_soccer_athlete_vs_athlete` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_soccer_athletes_index` | `core_v2` `/soccer/leagues/{league}/athletes` | — | `active`, `limit`, `page` |
-| `espn_soccer_award` | `core_v2` `/soccer/leagues/{league}/awards/{award_id}` | `award_id`\* | — |
-| `espn_soccer_awards` | `core_v2` `/soccer/leagues/{league}/awards` | — | — |
-| `espn_soccer_calendar` | `site_v2` `/soccer/{league}/calendar` | — | — |
-| `espn_soccer_coach` | `core_v2` `/soccer/leagues/{league}/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_soccer_coach_record` | `core_v2` `/soccer/leagues/{league}/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_soccer_coach_season` | `core_v2` `/soccer/leagues/{league}/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_soccer_conferences` | `site_v2` `/soccer/{league}/groups` | — | — |
-| `espn_soccer_draft` | `site_v2` `/soccer/{league}/draft` | — | — |
-| `espn_soccer_event` | `core_v2` `/soccer/leagues/{league}/events/{event_id}` | `event_id`\* | — |
-| `espn_soccer_event_broadcasts` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_competition` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_competitor` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_soccer_event_competitor_leaders` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_soccer_event_competitor_linescores` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_soccer_event_competitor_record` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_soccer_event_competitor_roster` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_soccer_event_competitor_statistics` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_soccer_event_competitors` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_leaders` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_odds` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_official_detail` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_soccer_event_officials` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_play` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_soccer_event_play_personnel` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_soccer_event_plays` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_soccer_event_powerindex` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_predictor` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_probabilities` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_soccer_event_propbets` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_scoringplays` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_situation` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_soccer_event_status` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_soccer_events` | `core_v2` `/soccer/leagues/{league}/events` | — | `dates`, `limit` |
-| `espn_soccer_franchise` | `core_v2` `/soccer/leagues/{league}/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_soccer_franchises` | `core_v2` `/soccer/leagues/{league}/franchises` | — | `limit` |
-| `espn_soccer_injuries` | `site_v2` `/soccer/{league}/injuries` | — | — |
-| `espn_soccer_leaders` | `web_v3` `/soccer/{league}/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_soccer_leaders_core` | `core_v2` `/soccer/leagues/{league}/leaders` | — | — |
-| `espn_soccer_league_notes` | `core_v2` `/soccer/leagues/{league}/notes` | — | — |
-| `espn_soccer_league_root` | `core_v2` `/soccer/leagues/{league}` | — | — |
-| `espn_soccer_news` | `site_v2` `/soccer/{league}/news` | — | `limit` |
-| `espn_soccer_position` | `core_v2` `/soccer/leagues/{league}/positions/{position_id}` | `position_id`\* | — |
-| `espn_soccer_positions` | `core_v2` `/soccer/leagues/{league}/positions` | — | — |
-| `espn_soccer_scoreboard` | `site_v2` `/soccer/{league}/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_soccer_season_athletes` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_soccer_season_awards` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/awards` | `season`\* | — |
-| `espn_soccer_season_coaches` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_soccer_season_draft` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/draft` | `season`\* | — |
-| `espn_soccer_season_draft_round_picks` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_soccer_season_freeagents` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_soccer_season_futures` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/futures` | `season`\* | — |
-| `espn_soccer_season_group` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_soccer_season_group_children` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_soccer_season_group_teams` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_soccer_season_groups` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_soccer_season_info` | `core_v2` `/soccer/leagues/{league}/seasons/{season}` | `season`\* | — |
-| `espn_soccer_season_pointer` | `core_v2` `/soccer/leagues/{league}/season` | — | — |
-| `espn_soccer_season_powerindex` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_soccer_season_powerindex_leaders` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_soccer_season_team` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_soccer_season_teams` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_soccer_season_type` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_soccer_season_type_corrections` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_soccer_season_type_leaders` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_soccer_season_types` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types` | `season`\* | — |
-| `espn_soccer_season_week` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_soccer_season_week_events` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_soccer_season_weeks` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_soccer_seasons` | `core_v2` `/soccer/leagues/{league}/seasons` | — | `limit` |
-| `espn_soccer_standings` | `site_v2_alt` `/soccer/{league}/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_soccer_standings_core` | `core_v2` `/soccer/leagues/{league}/standings` | — | — |
-| `espn_soccer_statistics_league` | `site_v2` `/soccer/{league}/statistics` | — | — |
-| `espn_soccer_summary` | `site_v2` `/soccer/{league}/summary` | — | `event_id` → `event` |
-| `espn_soccer_talentpicks` | `core_v2` `/soccer/leagues/{league}/talentpicks` | — | — |
-| `espn_soccer_team` | `site_v2` `/soccer/{league}/teams/{team_id}` | `team_id`\* | — |
-| `espn_soccer_team_core` | `core_v2` `/soccer/leagues/{league}/teams/{team_id}` | `team_id`\* | — |
-| `espn_soccer_team_depthcharts` | `site_v2` `/soccer/{league}/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_soccer_team_history` | `site_v2` `/soccer/{league}/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_soccer_team_injuries` | `site_v2` `/soccer/{league}/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_soccer_team_leaders` | `site_v2` `/soccer/{league}/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_soccer_team_news` | `site_v2` `/soccer/{league}/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_soccer_team_record` | `site_v2` `/soccer/{league}/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_soccer_team_roster` | `site_v2` `/soccer/{league}/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_soccer_team_schedule` | `site_v2` `/soccer/{league}/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_soccer_team_transactions` | `site_v2` `/soccer/{league}/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_soccer_teams_core` | `core_v2` `/soccer/leagues/{league}/teams` | — | `limit` |
-| `espn_soccer_teams_site` | `site_v2` `/soccer/{league}/teams` | — | `limit` |
-| `espn_soccer_tournaments` | `core_v2` `/soccer/leagues/{league}/tournaments` | — | — |
-| `espn_soccer_transactions` | `site_v2` `/soccer/{league}/transactions` | — | — |
-| `espn_soccer_venue` | `core_v2` `/soccer/leagues/{league}/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_soccer_venues` | `core_v2` `/soccer/leagues/{league}/venues` | — | `limit` |
+| `espnSoccerAthleteAwards` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnSoccerAthleteBio` | `site_v2` `/soccer/{league}/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnSoccerAthleteCareerStats` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnSoccerAthleteContracts` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnSoccerAthleteCore` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnSoccerAthleteEventlog` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnSoccerAthleteGamelog` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnSoccerAthleteInfo` | `site_v2` `/soccer/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnSoccerAthleteInjuries` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnSoccerAthleteNews` | `site_v2` `/soccer/{league}/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnSoccerAthleteNotes` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnSoccerAthleteOverview` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnSoccerAthleteRecords` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnSoccerAthleteSeasons` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnSoccerAthleteSplits` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnSoccerAthleteStatisticslog` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnSoccerAthleteStats` | `web_v3` `/soccer/{league}/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnSoccerAthleteVsAthlete` | `core_v2` `/soccer/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnSoccerAthletesIndex` | `core_v2` `/soccer/leagues/{league}/athletes` | — | `active`, `limit`, `page` |
+| `espnSoccerAward` | `core_v2` `/soccer/leagues/{league}/awards/{award_id}` | `award_id`\* | — |
+| `espnSoccerAwards` | `core_v2` `/soccer/leagues/{league}/awards` | — | — |
+| `espnSoccerCalendar` | `site_v2` `/soccer/{league}/calendar` | — | — |
+| `espnSoccerCoach` | `core_v2` `/soccer/leagues/{league}/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnSoccerCoachRecord` | `core_v2` `/soccer/leagues/{league}/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnSoccerCoachSeason` | `core_v2` `/soccer/leagues/{league}/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnSoccerConferences` | `site_v2` `/soccer/{league}/groups` | — | — |
+| `espnSoccerDraft` | `site_v2` `/soccer/{league}/draft` | — | — |
+| `espnSoccerEvent` | `core_v2` `/soccer/leagues/{league}/events/{event_id}` | `event_id`\* | — |
+| `espnSoccerEventBroadcasts` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnSoccerEventCompetition` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnSoccerEventCompetitor` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnSoccerEventCompetitorLeaders` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnSoccerEventCompetitorLinescores` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnSoccerEventCompetitorRecord` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnSoccerEventCompetitorRoster` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnSoccerEventCompetitorStatistics` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnSoccerEventCompetitors` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnSoccerEventLeaders` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnSoccerEventOdds` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnSoccerEventOfficialDetail` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnSoccerEventOfficials` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnSoccerEventPlay` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnSoccerEventPlayPersonnel` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnSoccerEventPlays` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnSoccerEventPowerindex` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnSoccerEventPredictor` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnSoccerEventProbabilities` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnSoccerEventPropbets` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnSoccerEventScoringplays` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnSoccerEventSituation` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnSoccerEventStatus` | `core_v2` `/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnSoccerEvents` | `core_v2` `/soccer/leagues/{league}/events` | — | `dates`, `limit` |
+| `espnSoccerFranchise` | `core_v2` `/soccer/leagues/{league}/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnSoccerFranchises` | `core_v2` `/soccer/leagues/{league}/franchises` | — | `limit` |
+| `espnSoccerInjuries` | `site_v2` `/soccer/{league}/injuries` | — | — |
+| `espnSoccerLeaders` | `web_v3` `/soccer/{league}/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnSoccerLeadersCore` | `core_v2` `/soccer/leagues/{league}/leaders` | — | — |
+| `espnSoccerLeagueNotes` | `core_v2` `/soccer/leagues/{league}/notes` | — | — |
+| `espnSoccerLeagueRoot` | `core_v2` `/soccer/leagues/{league}` | — | — |
+| `espnSoccerNews` | `site_v2` `/soccer/{league}/news` | — | `limit` |
+| `espnSoccerPosition` | `core_v2` `/soccer/leagues/{league}/positions/{position_id}` | `position_id`\* | — |
+| `espnSoccerPositions` | `core_v2` `/soccer/leagues/{league}/positions` | — | — |
+| `espnSoccerScoreboard` | `site_v2` `/soccer/{league}/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnSoccerSeasonAthletes` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnSoccerSeasonAwards` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/awards` | `season`\* | — |
+| `espnSoccerSeasonCoaches` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnSoccerSeasonDraft` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/draft` | `season`\* | — |
+| `espnSoccerSeasonDraftRoundPicks` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnSoccerSeasonFreeagents` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/freeagents` | `season`\* | — |
+| `espnSoccerSeasonFutures` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/futures` | `season`\* | — |
+| `espnSoccerSeasonGroup` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnSoccerSeasonGroupChildren` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnSoccerSeasonGroupTeams` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnSoccerSeasonGroups` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnSoccerSeasonInfo` | `core_v2` `/soccer/leagues/{league}/seasons/{season}` | `season`\* | — |
+| `espnSoccerSeasonPointer` | `core_v2` `/soccer/leagues/{league}/season` | — | — |
+| `espnSoccerSeasonPowerindex` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnSoccerSeasonPowerindexLeaders` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnSoccerSeasonTeam` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnSoccerSeasonTeams` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnSoccerSeasonType` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnSoccerSeasonTypeCorrections` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnSoccerSeasonTypeLeaders` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnSoccerSeasonTypes` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types` | `season`\* | — |
+| `espnSoccerSeasonWeek` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnSoccerSeasonWeekEvents` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnSoccerSeasonWeeks` | `core_v2` `/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnSoccerSeasons` | `core_v2` `/soccer/leagues/{league}/seasons` | — | `limit` |
+| `espnSoccerStandings` | `site_v2_alt` `/soccer/{league}/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnSoccerStandingsCore` | `core_v2` `/soccer/leagues/{league}/standings` | — | — |
+| `espnSoccerStatisticsLeague` | `site_v2` `/soccer/{league}/statistics` | — | — |
+| `espnSoccerSummary` | `site_v2` `/soccer/{league}/summary` | — | `event_id` → `event` |
+| `espnSoccerTalentpicks` | `core_v2` `/soccer/leagues/{league}/talentpicks` | — | — |
+| `espnSoccerTeam` | `site_v2` `/soccer/{league}/teams/{team_id}` | `team_id`\* | — |
+| `espnSoccerTeamCore` | `core_v2` `/soccer/leagues/{league}/teams/{team_id}` | `team_id`\* | — |
+| `espnSoccerTeamDepthcharts` | `site_v2` `/soccer/{league}/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnSoccerTeamHistory` | `site_v2` `/soccer/{league}/teams/{team_id}/history` | `team_id`\* | — |
+| `espnSoccerTeamInjuries` | `site_v2` `/soccer/{league}/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnSoccerTeamLeaders` | `site_v2` `/soccer/{league}/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnSoccerTeamNews` | `site_v2` `/soccer/{league}/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnSoccerTeamRecord` | `site_v2` `/soccer/{league}/teams/{team_id}/record` | `team_id`\* | — |
+| `espnSoccerTeamRoster` | `site_v2` `/soccer/{league}/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnSoccerTeamSchedule` | `site_v2` `/soccer/{league}/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnSoccerTeamTransactions` | `site_v2` `/soccer/{league}/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnSoccerTeamsCore` | `core_v2` `/soccer/leagues/{league}/teams` | — | `limit` |
+| `espnSoccerTeamsSite` | `site_v2` `/soccer/{league}/teams` | — | `limit` |
+| `espnSoccerTournaments` | `core_v2` `/soccer/leagues/{league}/tournaments` | — | — |
+| `espnSoccerTransactions` | `site_v2` `/soccer/{league}/transactions` | — | — |
+| `espnSoccerVenue` | `core_v2` `/soccer/leagues/{league}/venues/{venue_id}` | `venue_id`\* | — |
+| `espnSoccerVenues` | `core_v2` `/soccer/leagues/{league}/venues` | — | `limit` |

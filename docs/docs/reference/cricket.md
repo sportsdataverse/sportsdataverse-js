@@ -14,125 +14,125 @@ sidebar_position: 29
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.cricket.espn_cricket_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.cricket.espnCricket<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_cricket_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.cricket.espn_cricket_scoreboard({ league: 'eng.1' });
+await sdv.cricket.espnCricketScoreboard({ league: 'eng.1' });
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_cricket_athlete_awards` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_cricket_athlete_bio` | `site_v2` `/cricket/{league}/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_cricket_athlete_career_stats` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_cricket_athlete_contracts` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_cricket_athlete_core` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_cricket_athlete_eventlog` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_cricket_athlete_gamelog` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_cricket_athlete_info` | `site_v2` `/cricket/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_cricket_athlete_injuries` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_cricket_athlete_news` | `site_v2` `/cricket/{league}/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_cricket_athlete_notes` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_cricket_athlete_overview` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_cricket_athlete_records` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_cricket_athlete_seasons` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_cricket_athlete_splits` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_cricket_athlete_statisticslog` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_cricket_athlete_stats` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_cricket_athlete_vs_athlete` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_cricket_athletes_index` | `core_v2` `/cricket/leagues/{league}/athletes` | — | `active`, `limit`, `page` |
-| `espn_cricket_award` | `core_v2` `/cricket/leagues/{league}/awards/{award_id}` | `award_id`\* | — |
-| `espn_cricket_awards` | `core_v2` `/cricket/leagues/{league}/awards` | — | — |
-| `espn_cricket_calendar` | `site_v2` `/cricket/{league}/calendar` | — | — |
-| `espn_cricket_coach` | `core_v2` `/cricket/leagues/{league}/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_cricket_coach_record` | `core_v2` `/cricket/leagues/{league}/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_cricket_coach_season` | `core_v2` `/cricket/leagues/{league}/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_cricket_conferences` | `site_v2` `/cricket/{league}/groups` | — | — |
-| `espn_cricket_draft` | `site_v2` `/cricket/{league}/draft` | — | — |
-| `espn_cricket_event` | `core_v2` `/cricket/leagues/{league}/events/{event_id}` | `event_id`\* | — |
-| `espn_cricket_event_broadcasts` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_competition` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_competitor` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_cricket_event_competitor_leaders` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_cricket_event_competitor_linescores` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_cricket_event_competitor_record` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_cricket_event_competitor_roster` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_cricket_event_competitor_statistics` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_cricket_event_competitors` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_leaders` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_odds` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_official_detail` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_cricket_event_officials` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_play` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_cricket_event_play_personnel` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_cricket_event_plays` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_cricket_event_powerindex` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_predictor` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_probabilities` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_cricket_event_propbets` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_scoringplays` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_situation` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_cricket_event_status` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_cricket_events` | `core_v2` `/cricket/leagues/{league}/events` | — | `dates`, `limit` |
-| `espn_cricket_franchise` | `core_v2` `/cricket/leagues/{league}/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_cricket_franchises` | `core_v2` `/cricket/leagues/{league}/franchises` | — | `limit` |
-| `espn_cricket_injuries` | `site_v2` `/cricket/{league}/injuries` | — | — |
-| `espn_cricket_leaders` | `web_v3` `/cricket/{league}/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_cricket_leaders_core` | `core_v2` `/cricket/leagues/{league}/leaders` | — | — |
-| `espn_cricket_league_notes` | `core_v2` `/cricket/leagues/{league}/notes` | — | — |
-| `espn_cricket_league_root` | `core_v2` `/cricket/leagues/{league}` | — | — |
-| `espn_cricket_news` | `site_v2` `/cricket/{league}/news` | — | `limit` |
-| `espn_cricket_position` | `core_v2` `/cricket/leagues/{league}/positions/{position_id}` | `position_id`\* | — |
-| `espn_cricket_positions` | `core_v2` `/cricket/leagues/{league}/positions` | — | — |
-| `espn_cricket_scoreboard` | `site_v2` `/cricket/{league}/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_cricket_season_athletes` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_cricket_season_awards` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/awards` | `season`\* | — |
-| `espn_cricket_season_coaches` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_cricket_season_draft` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/draft` | `season`\* | — |
-| `espn_cricket_season_draft_round_picks` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_cricket_season_freeagents` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_cricket_season_futures` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/futures` | `season`\* | — |
-| `espn_cricket_season_group` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_cricket_season_group_children` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_cricket_season_group_teams` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_cricket_season_groups` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_cricket_season_info` | `core_v2` `/cricket/leagues/{league}/seasons/{season}` | `season`\* | — |
-| `espn_cricket_season_pointer` | `core_v2` `/cricket/leagues/{league}/season` | — | — |
-| `espn_cricket_season_powerindex` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_cricket_season_powerindex_leaders` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_cricket_season_team` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_cricket_season_teams` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_cricket_season_type` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_cricket_season_type_corrections` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_cricket_season_type_leaders` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_cricket_season_types` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types` | `season`\* | — |
-| `espn_cricket_season_week` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_cricket_season_week_events` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_cricket_season_weeks` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_cricket_seasons` | `core_v2` `/cricket/leagues/{league}/seasons` | — | `limit` |
-| `espn_cricket_standings` | `site_v2_alt` `/cricket/{league}/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_cricket_standings_core` | `core_v2` `/cricket/leagues/{league}/standings` | — | — |
-| `espn_cricket_statistics_league` | `site_v2` `/cricket/{league}/statistics` | — | — |
-| `espn_cricket_summary` | `site_v2` `/cricket/{league}/summary` | — | `event_id` → `event` |
-| `espn_cricket_talentpicks` | `core_v2` `/cricket/leagues/{league}/talentpicks` | — | — |
-| `espn_cricket_team` | `site_v2` `/cricket/{league}/teams/{team_id}` | `team_id`\* | — |
-| `espn_cricket_team_core` | `core_v2` `/cricket/leagues/{league}/teams/{team_id}` | `team_id`\* | — |
-| `espn_cricket_team_depthcharts` | `site_v2` `/cricket/{league}/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_cricket_team_history` | `site_v2` `/cricket/{league}/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_cricket_team_injuries` | `site_v2` `/cricket/{league}/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_cricket_team_leaders` | `site_v2` `/cricket/{league}/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_cricket_team_news` | `site_v2` `/cricket/{league}/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_cricket_team_record` | `site_v2` `/cricket/{league}/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_cricket_team_roster` | `site_v2` `/cricket/{league}/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_cricket_team_schedule` | `site_v2` `/cricket/{league}/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_cricket_team_transactions` | `site_v2` `/cricket/{league}/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_cricket_teams_core` | `core_v2` `/cricket/leagues/{league}/teams` | — | `limit` |
-| `espn_cricket_teams_site` | `site_v2` `/cricket/{league}/teams` | — | `limit` |
-| `espn_cricket_tournaments` | `core_v2` `/cricket/leagues/{league}/tournaments` | — | — |
-| `espn_cricket_transactions` | `site_v2` `/cricket/{league}/transactions` | — | — |
-| `espn_cricket_venue` | `core_v2` `/cricket/leagues/{league}/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_cricket_venues` | `core_v2` `/cricket/leagues/{league}/venues` | — | `limit` |
+| `espnCricketAthleteAwards` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnCricketAthleteBio` | `site_v2` `/cricket/{league}/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnCricketAthleteCareerStats` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnCricketAthleteContracts` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnCricketAthleteCore` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnCricketAthleteEventlog` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnCricketAthleteGamelog` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnCricketAthleteInfo` | `site_v2` `/cricket/{league}/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnCricketAthleteInjuries` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnCricketAthleteNews` | `site_v2` `/cricket/{league}/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnCricketAthleteNotes` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnCricketAthleteOverview` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnCricketAthleteRecords` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnCricketAthleteSeasons` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnCricketAthleteSplits` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnCricketAthleteStatisticslog` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnCricketAthleteStats` | `web_v3` `/cricket/{league}/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnCricketAthleteVsAthlete` | `core_v2` `/cricket/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnCricketAthletesIndex` | `core_v2` `/cricket/leagues/{league}/athletes` | — | `active`, `limit`, `page` |
+| `espnCricketAward` | `core_v2` `/cricket/leagues/{league}/awards/{award_id}` | `award_id`\* | — |
+| `espnCricketAwards` | `core_v2` `/cricket/leagues/{league}/awards` | — | — |
+| `espnCricketCalendar` | `site_v2` `/cricket/{league}/calendar` | — | — |
+| `espnCricketCoach` | `core_v2` `/cricket/leagues/{league}/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnCricketCoachRecord` | `core_v2` `/cricket/leagues/{league}/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnCricketCoachSeason` | `core_v2` `/cricket/leagues/{league}/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnCricketConferences` | `site_v2` `/cricket/{league}/groups` | — | — |
+| `espnCricketDraft` | `site_v2` `/cricket/{league}/draft` | — | — |
+| `espnCricketEvent` | `core_v2` `/cricket/leagues/{league}/events/{event_id}` | `event_id`\* | — |
+| `espnCricketEventBroadcasts` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnCricketEventCompetition` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnCricketEventCompetitor` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCricketEventCompetitorLeaders` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCricketEventCompetitorLinescores` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCricketEventCompetitorRecord` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCricketEventCompetitorRoster` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCricketEventCompetitorStatistics` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCricketEventCompetitors` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnCricketEventLeaders` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnCricketEventOdds` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnCricketEventOfficialDetail` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnCricketEventOfficials` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnCricketEventPlay` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnCricketEventPlayPersonnel` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnCricketEventPlays` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnCricketEventPowerindex` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnCricketEventPredictor` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnCricketEventProbabilities` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnCricketEventPropbets` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnCricketEventScoringplays` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnCricketEventSituation` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnCricketEventStatus` | `core_v2` `/cricket/leagues/{league}/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnCricketEvents` | `core_v2` `/cricket/leagues/{league}/events` | — | `dates`, `limit` |
+| `espnCricketFranchise` | `core_v2` `/cricket/leagues/{league}/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnCricketFranchises` | `core_v2` `/cricket/leagues/{league}/franchises` | — | `limit` |
+| `espnCricketInjuries` | `site_v2` `/cricket/{league}/injuries` | — | — |
+| `espnCricketLeaders` | `web_v3` `/cricket/{league}/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnCricketLeadersCore` | `core_v2` `/cricket/leagues/{league}/leaders` | — | — |
+| `espnCricketLeagueNotes` | `core_v2` `/cricket/leagues/{league}/notes` | — | — |
+| `espnCricketLeagueRoot` | `core_v2` `/cricket/leagues/{league}` | — | — |
+| `espnCricketNews` | `site_v2` `/cricket/{league}/news` | — | `limit` |
+| `espnCricketPosition` | `core_v2` `/cricket/leagues/{league}/positions/{position_id}` | `position_id`\* | — |
+| `espnCricketPositions` | `core_v2` `/cricket/leagues/{league}/positions` | — | — |
+| `espnCricketScoreboard` | `site_v2` `/cricket/{league}/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnCricketSeasonAthletes` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnCricketSeasonAwards` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/awards` | `season`\* | — |
+| `espnCricketSeasonCoaches` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnCricketSeasonDraft` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/draft` | `season`\* | — |
+| `espnCricketSeasonDraftRoundPicks` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnCricketSeasonFreeagents` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/freeagents` | `season`\* | — |
+| `espnCricketSeasonFutures` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/futures` | `season`\* | — |
+| `espnCricketSeasonGroup` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnCricketSeasonGroupChildren` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnCricketSeasonGroupTeams` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnCricketSeasonGroups` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnCricketSeasonInfo` | `core_v2` `/cricket/leagues/{league}/seasons/{season}` | `season`\* | — |
+| `espnCricketSeasonPointer` | `core_v2` `/cricket/leagues/{league}/season` | — | — |
+| `espnCricketSeasonPowerindex` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnCricketSeasonPowerindexLeaders` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnCricketSeasonTeam` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnCricketSeasonTeams` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnCricketSeasonType` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnCricketSeasonTypeCorrections` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnCricketSeasonTypeLeaders` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnCricketSeasonTypes` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types` | `season`\* | — |
+| `espnCricketSeasonWeek` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnCricketSeasonWeekEvents` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnCricketSeasonWeeks` | `core_v2` `/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnCricketSeasons` | `core_v2` `/cricket/leagues/{league}/seasons` | — | `limit` |
+| `espnCricketStandings` | `site_v2_alt` `/cricket/{league}/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnCricketStandingsCore` | `core_v2` `/cricket/leagues/{league}/standings` | — | — |
+| `espnCricketStatisticsLeague` | `site_v2` `/cricket/{league}/statistics` | — | — |
+| `espnCricketSummary` | `site_v2` `/cricket/{league}/summary` | — | `event_id` → `event` |
+| `espnCricketTalentpicks` | `core_v2` `/cricket/leagues/{league}/talentpicks` | — | — |
+| `espnCricketTeam` | `site_v2` `/cricket/{league}/teams/{team_id}` | `team_id`\* | — |
+| `espnCricketTeamCore` | `core_v2` `/cricket/leagues/{league}/teams/{team_id}` | `team_id`\* | — |
+| `espnCricketTeamDepthcharts` | `site_v2` `/cricket/{league}/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnCricketTeamHistory` | `site_v2` `/cricket/{league}/teams/{team_id}/history` | `team_id`\* | — |
+| `espnCricketTeamInjuries` | `site_v2` `/cricket/{league}/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnCricketTeamLeaders` | `site_v2` `/cricket/{league}/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnCricketTeamNews` | `site_v2` `/cricket/{league}/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnCricketTeamRecord` | `site_v2` `/cricket/{league}/teams/{team_id}/record` | `team_id`\* | — |
+| `espnCricketTeamRoster` | `site_v2` `/cricket/{league}/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnCricketTeamSchedule` | `site_v2` `/cricket/{league}/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnCricketTeamTransactions` | `site_v2` `/cricket/{league}/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnCricketTeamsCore` | `core_v2` `/cricket/leagues/{league}/teams` | — | `limit` |
+| `espnCricketTeamsSite` | `site_v2` `/cricket/{league}/teams` | — | `limit` |
+| `espnCricketTournaments` | `core_v2` `/cricket/leagues/{league}/tournaments` | — | — |
+| `espnCricketTransactions` | `site_v2` `/cricket/{league}/transactions` | — | — |
+| `espnCricketVenue` | `core_v2` `/cricket/leagues/{league}/venues/{venue_id}` | `venue_id`\* | — |
+| `espnCricketVenues` | `core_v2` `/cricket/leagues/{league}/venues` | — | `limit` |

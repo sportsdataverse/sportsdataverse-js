@@ -27,7 +27,7 @@ Create `demo.js`:
 ```js
 import sdv from "sportsdataverse";
 
-const board = await sdv.nba.espn_nba_scoreboard({});
+const board = await sdv.nba.espnNbaScoreboard({});
 console.log(`${board.events?.length ?? 0} NBA games on the board today`);
 ```
 
@@ -40,26 +40,27 @@ it however you like (or hand it straight to your own parser).
 
 ## 3. The one naming rule
 
-Cross-league endpoints are always **`espn_<league>_<endpoint>`** on the league's
-namespace:
+Cross-league endpoints are always **`espn<League><Endpoint>`** (camelCase) on the
+league's namespace:
 
 ```js
-await sdv.nba.espn_nba_scoreboard({});
-await sdv.nfl.espn_nfl_summary({ event_id: 401671789 });
-await sdv.nhl.espn_nhl_team_roster({ team_id: 10 });
+await sdv.nba.espnNbaScoreboard({});
+await sdv.nfl.espnNflSummary({ event_id: 401671789 });
+await sdv.nhl.espnNhlTeamRoster({ team_id: 10 });
 ```
 
-`<league>` is the namespace (`nba`, `nfl`, `nhl`, `mlb`, `wnba`, `mbb`, `wbb`,
-`cfb`, plus soccer/cricket/UFL and more). `<endpoint>` is the data you want
-(`scoreboard`, `summary`, `team_roster`, `standings`, …).
+`<League>` is the namespace (`nba`, `nfl`, `nhl`, `mlb`, `wnba`, `mbb`, `wbb`,
+`cfb`, plus soccer/cricket/UFL and more). `<Endpoint>` is the data you want
+(`Scoreboard`, `Summary`, `TeamRoster`, `Standings`, …). Every method also has a
+snake_case alias (`espn_nfl_summary`) for parity with the Python / R packages.
 
 ## 4. Parameters
 
 Pass parameters as a single object. Both **snake_case and camelCase** work:
 
 ```js
-await sdv.nfl.espn_nfl_team_schedule({ team_id: 12, season: 2024 });
-await sdv.nfl.espn_nfl_team_schedule({ teamId: 12, season: 2024 });  // identical
+await sdv.nfl.espnNflTeamSchedule({ team_id: 12, season: 2024 });
+await sdv.nfl.espnNflTeamSchedule({ teamId: 12, season: 2024 });  // identical
 ```
 
 Required path parameters (like `team_id` above) throw a clear error if missing;

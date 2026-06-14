@@ -14,133 +14,133 @@ sidebar_position: 12
 - **scopes:** `universal`, `ncaa`
 - **wrappers:** 113
 
-Every endpoint is called as `sdv.college_softball.espn_college_softball_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.college_softball.espnCollegeSoftball<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_college_softball_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.college_softball.espn_college_softball_scoreboard({});
+await sdv.college_softball.espnCollegeSoftballScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_college_softball_athlete_awards` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_bio` | `site_v2` `/baseball/college-softball/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_career_stats` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_college_softball_athlete_contracts` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_core` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_eventlog` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_gamelog` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_college_softball_athlete_info` | `site_v2` `/baseball/college-softball/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_injuries` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_news` | `site_v2` `/baseball/college-softball/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_notes` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_overview` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_records` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_seasons` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_splits` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_college_softball_athlete_statisticslog` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_college_softball_athlete_stats` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_college_softball_athlete_vs_athlete` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_college_softball_athletes_index` | `core_v2` `/baseball/leagues/college-softball/athletes` | — | `active`, `limit`, `page` |
-| `espn_college_softball_award` | `core_v2` `/baseball/leagues/college-softball/awards/{award_id}` | `award_id`\* | — |
-| `espn_college_softball_awards` | `core_v2` `/baseball/leagues/college-softball/awards` | — | — |
-| `espn_college_softball_calendar` | `site_v2` `/baseball/college-softball/calendar` | — | — |
-| `espn_college_softball_coach` | `core_v2` `/baseball/leagues/college-softball/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_college_softball_coach_record` | `core_v2` `/baseball/leagues/college-softball/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_college_softball_coach_season` | `core_v2` `/baseball/leagues/college-softball/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_college_softball_conferences` | `site_v2` `/baseball/college-softball/groups` | — | — |
-| `espn_college_softball_draft` | `site_v2` `/baseball/college-softball/draft` | — | — |
-| `espn_college_softball_event` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}` | `event_id`\* | — |
-| `espn_college_softball_event_broadcasts` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_competition` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_competitor` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_college_softball_event_competitor_leaders` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_college_softball_event_competitor_linescores` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_college_softball_event_competitor_record` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_college_softball_event_competitor_roster` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_college_softball_event_competitor_statistics` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_college_softball_event_competitors` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_leaders` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_odds` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_official_detail` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_college_softball_event_officials` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_play` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_college_softball_event_play_personnel` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_college_softball_event_plays` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_college_softball_event_powerindex` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_predictor` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_probabilities` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_college_softball_event_propbets` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_scoringplays` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_situation` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_college_softball_event_status` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_college_softball_events` | `core_v2` `/baseball/leagues/college-softball/events` | — | `dates`, `limit` |
-| `espn_college_softball_franchise` | `core_v2` `/baseball/leagues/college-softball/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_college_softball_franchises` | `core_v2` `/baseball/leagues/college-softball/franchises` | — | `limit` |
-| `espn_college_softball_injuries` | `site_v2` `/baseball/college-softball/injuries` | — | — |
-| `espn_college_softball_leaders` | `web_v3` `/baseball/college-softball/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_college_softball_leaders_core` | `core_v2` `/baseball/leagues/college-softball/leaders` | — | — |
-| `espn_college_softball_league_notes` | `core_v2` `/baseball/leagues/college-softball/notes` | — | — |
-| `espn_college_softball_league_root` | `core_v2` `/baseball/leagues/college-softball` | — | — |
-| `espn_college_softball_news` | `site_v2` `/baseball/college-softball/news` | — | `limit` |
-| `espn_college_softball_position` | `core_v2` `/baseball/leagues/college-softball/positions/{position_id}` | `position_id`\* | — |
-| `espn_college_softball_positions` | `core_v2` `/baseball/leagues/college-softball/positions` | — | — |
-| `espn_college_softball_scoreboard` | `site_v2` `/baseball/college-softball/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_college_softball_season_athletes` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_college_softball_season_awards` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/awards` | `season`\* | — |
-| `espn_college_softball_season_coaches` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_college_softball_season_draft` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/draft` | `season`\* | — |
-| `espn_college_softball_season_draft_round_picks` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_college_softball_season_freeagents` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_college_softball_season_futures` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/futures` | `season`\* | — |
-| `espn_college_softball_season_group` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_college_softball_season_group_children` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_college_softball_season_group_teams` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_college_softball_season_groups` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_college_softball_season_info` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}` | `season`\* | — |
-| `espn_college_softball_season_pointer` | `core_v2` `/baseball/leagues/college-softball/season` | — | — |
-| `espn_college_softball_season_powerindex` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_college_softball_season_powerindex_leaders` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_college_softball_season_team` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_college_softball_season_teams` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_college_softball_season_type` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_college_softball_season_type_corrections` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_college_softball_season_type_leaders` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_college_softball_season_types` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types` | `season`\* | — |
-| `espn_college_softball_season_week` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_college_softball_season_week_events` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_college_softball_season_weeks` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_college_softball_seasons` | `core_v2` `/baseball/leagues/college-softball/seasons` | — | `limit` |
-| `espn_college_softball_standings` | `site_v2_alt` `/baseball/college-softball/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_college_softball_standings_core` | `core_v2` `/baseball/leagues/college-softball/standings` | — | — |
-| `espn_college_softball_statistics_league` | `site_v2` `/baseball/college-softball/statistics` | — | — |
-| `espn_college_softball_summary` | `site_v2` `/baseball/college-softball/summary` | — | `event_id` → `event` |
-| `espn_college_softball_talentpicks` | `core_v2` `/baseball/leagues/college-softball/talentpicks` | — | — |
-| `espn_college_softball_team` | `site_v2` `/baseball/college-softball/teams/{team_id}` | `team_id`\* | — |
-| `espn_college_softball_team_core` | `core_v2` `/baseball/leagues/college-softball/teams/{team_id}` | `team_id`\* | — |
-| `espn_college_softball_team_depthcharts` | `site_v2` `/baseball/college-softball/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_college_softball_team_history` | `site_v2` `/baseball/college-softball/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_college_softball_team_injuries` | `site_v2` `/baseball/college-softball/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_college_softball_team_leaders` | `site_v2` `/baseball/college-softball/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_college_softball_team_news` | `site_v2` `/baseball/college-softball/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_college_softball_team_record` | `site_v2` `/baseball/college-softball/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_college_softball_team_roster` | `site_v2` `/baseball/college-softball/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_college_softball_team_schedule` | `site_v2` `/baseball/college-softball/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_college_softball_team_transactions` | `site_v2` `/baseball/college-softball/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_college_softball_teams_core` | `core_v2` `/baseball/leagues/college-softball/teams` | — | `limit` |
-| `espn_college_softball_teams_site` | `site_v2` `/baseball/college-softball/teams` | — | `limit` |
-| `espn_college_softball_tournaments` | `core_v2` `/baseball/leagues/college-softball/tournaments` | — | — |
-| `espn_college_softball_transactions` | `site_v2` `/baseball/college-softball/transactions` | — | — |
-| `espn_college_softball_venue` | `core_v2` `/baseball/leagues/college-softball/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_college_softball_venues` | `core_v2` `/baseball/leagues/college-softball/venues` | — | `limit` |
+| `espnCollegeSoftballAthleteAwards` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteBio` | `site_v2` `/baseball/college-softball/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteCareerStats` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnCollegeSoftballAthleteContracts` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteCore` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteEventlog` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteGamelog` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnCollegeSoftballAthleteInfo` | `site_v2` `/baseball/college-softball/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteInjuries` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteNews` | `site_v2` `/baseball/college-softball/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteNotes` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteOverview` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteRecords` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteSeasons` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteSplits` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnCollegeSoftballAthleteStatisticslog` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnCollegeSoftballAthleteStats` | `web_v3` `/baseball/college-softball/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnCollegeSoftballAthleteVsAthlete` | `core_v2` `/baseball/leagues/college-softball/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnCollegeSoftballAthletesIndex` | `core_v2` `/baseball/leagues/college-softball/athletes` | — | `active`, `limit`, `page` |
+| `espnCollegeSoftballAward` | `core_v2` `/baseball/leagues/college-softball/awards/{award_id}` | `award_id`\* | — |
+| `espnCollegeSoftballAwards` | `core_v2` `/baseball/leagues/college-softball/awards` | — | — |
+| `espnCollegeSoftballCalendar` | `site_v2` `/baseball/college-softball/calendar` | — | — |
+| `espnCollegeSoftballCoach` | `core_v2` `/baseball/leagues/college-softball/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnCollegeSoftballCoachRecord` | `core_v2` `/baseball/leagues/college-softball/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnCollegeSoftballCoachSeason` | `core_v2` `/baseball/leagues/college-softball/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnCollegeSoftballConferences` | `site_v2` `/baseball/college-softball/groups` | — | — |
+| `espnCollegeSoftballDraft` | `site_v2` `/baseball/college-softball/draft` | — | — |
+| `espnCollegeSoftballEvent` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}` | `event_id`\* | — |
+| `espnCollegeSoftballEventBroadcasts` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetition` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitor` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitorLeaders` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitorLinescores` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitorRecord` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitorRoster` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitorStatistics` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnCollegeSoftballEventCompetitors` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventLeaders` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventOdds` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventOfficialDetail` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnCollegeSoftballEventOfficials` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventPlay` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnCollegeSoftballEventPlayPersonnel` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnCollegeSoftballEventPlays` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnCollegeSoftballEventPowerindex` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventPredictor` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventProbabilities` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnCollegeSoftballEventPropbets` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventScoringplays` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventSituation` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEventStatus` | `core_v2` `/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnCollegeSoftballEvents` | `core_v2` `/baseball/leagues/college-softball/events` | — | `dates`, `limit` |
+| `espnCollegeSoftballFranchise` | `core_v2` `/baseball/leagues/college-softball/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnCollegeSoftballFranchises` | `core_v2` `/baseball/leagues/college-softball/franchises` | — | `limit` |
+| `espnCollegeSoftballInjuries` | `site_v2` `/baseball/college-softball/injuries` | — | — |
+| `espnCollegeSoftballLeaders` | `web_v3` `/baseball/college-softball/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnCollegeSoftballLeadersCore` | `core_v2` `/baseball/leagues/college-softball/leaders` | — | — |
+| `espnCollegeSoftballLeagueNotes` | `core_v2` `/baseball/leagues/college-softball/notes` | — | — |
+| `espnCollegeSoftballLeagueRoot` | `core_v2` `/baseball/leagues/college-softball` | — | — |
+| `espnCollegeSoftballNews` | `site_v2` `/baseball/college-softball/news` | — | `limit` |
+| `espnCollegeSoftballPosition` | `core_v2` `/baseball/leagues/college-softball/positions/{position_id}` | `position_id`\* | — |
+| `espnCollegeSoftballPositions` | `core_v2` `/baseball/leagues/college-softball/positions` | — | — |
+| `espnCollegeSoftballScoreboard` | `site_v2` `/baseball/college-softball/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnCollegeSoftballSeasonAthletes` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnCollegeSoftballSeasonAwards` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/awards` | `season`\* | — |
+| `espnCollegeSoftballSeasonCoaches` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnCollegeSoftballSeasonDraft` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/draft` | `season`\* | — |
+| `espnCollegeSoftballSeasonDraftRoundPicks` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnCollegeSoftballSeasonFreeagents` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/freeagents` | `season`\* | — |
+| `espnCollegeSoftballSeasonFutures` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/futures` | `season`\* | — |
+| `espnCollegeSoftballSeasonGroup` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnCollegeSoftballSeasonGroupChildren` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnCollegeSoftballSeasonGroupTeams` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnCollegeSoftballSeasonGroups` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnCollegeSoftballSeasonInfo` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}` | `season`\* | — |
+| `espnCollegeSoftballSeasonPointer` | `core_v2` `/baseball/leagues/college-softball/season` | — | — |
+| `espnCollegeSoftballSeasonPowerindex` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnCollegeSoftballSeasonPowerindexLeaders` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnCollegeSoftballSeasonTeam` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnCollegeSoftballSeasonTeams` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnCollegeSoftballSeasonType` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnCollegeSoftballSeasonTypeCorrections` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnCollegeSoftballSeasonTypeLeaders` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnCollegeSoftballSeasonTypes` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types` | `season`\* | — |
+| `espnCollegeSoftballSeasonWeek` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnCollegeSoftballSeasonWeekEvents` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnCollegeSoftballSeasonWeeks` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnCollegeSoftballSeasons` | `core_v2` `/baseball/leagues/college-softball/seasons` | — | `limit` |
+| `espnCollegeSoftballStandings` | `site_v2_alt` `/baseball/college-softball/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnCollegeSoftballStandingsCore` | `core_v2` `/baseball/leagues/college-softball/standings` | — | — |
+| `espnCollegeSoftballStatisticsLeague` | `site_v2` `/baseball/college-softball/statistics` | — | — |
+| `espnCollegeSoftballSummary` | `site_v2` `/baseball/college-softball/summary` | — | `event_id` → `event` |
+| `espnCollegeSoftballTalentpicks` | `core_v2` `/baseball/leagues/college-softball/talentpicks` | — | — |
+| `espnCollegeSoftballTeam` | `site_v2` `/baseball/college-softball/teams/{team_id}` | `team_id`\* | — |
+| `espnCollegeSoftballTeamCore` | `core_v2` `/baseball/leagues/college-softball/teams/{team_id}` | `team_id`\* | — |
+| `espnCollegeSoftballTeamDepthcharts` | `site_v2` `/baseball/college-softball/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnCollegeSoftballTeamHistory` | `site_v2` `/baseball/college-softball/teams/{team_id}/history` | `team_id`\* | — |
+| `espnCollegeSoftballTeamInjuries` | `site_v2` `/baseball/college-softball/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnCollegeSoftballTeamLeaders` | `site_v2` `/baseball/college-softball/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnCollegeSoftballTeamNews` | `site_v2` `/baseball/college-softball/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnCollegeSoftballTeamRecord` | `site_v2` `/baseball/college-softball/teams/{team_id}/record` | `team_id`\* | — |
+| `espnCollegeSoftballTeamRoster` | `site_v2` `/baseball/college-softball/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnCollegeSoftballTeamSchedule` | `site_v2` `/baseball/college-softball/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnCollegeSoftballTeamTransactions` | `site_v2` `/baseball/college-softball/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnCollegeSoftballTeamsCore` | `core_v2` `/baseball/leagues/college-softball/teams` | — | `limit` |
+| `espnCollegeSoftballTeamsSite` | `site_v2` `/baseball/college-softball/teams` | — | `limit` |
+| `espnCollegeSoftballTournaments` | `core_v2` `/baseball/leagues/college-softball/tournaments` | — | — |
+| `espnCollegeSoftballTransactions` | `site_v2` `/baseball/college-softball/transactions` | — | — |
+| `espnCollegeSoftballVenue` | `core_v2` `/baseball/leagues/college-softball/venues/{venue_id}` | `venue_id`\* | — |
+| `espnCollegeSoftballVenues` | `core_v2` `/baseball/leagues/college-softball/venues` | — | `limit` |
 
 ## NCAA endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_college_softball_rankings` | `site_v2` `/baseball/college-softball/rankings` | — | — |
-| `espn_college_softball_season_recruits` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/recruits` | `season`\* | `limit` |
-| `espn_college_softball_season_week_rankings` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnCollegeSoftballRankings` | `site_v2` `/baseball/college-softball/rankings` | — | — |
+| `espnCollegeSoftballSeasonRecruits` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/recruits` | `season`\* | `limit` |
+| `espnCollegeSoftballSeasonWeekRankings` | `core_v2` `/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |

@@ -14,125 +14,125 @@ sidebar_position: 19
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.bundesliga.espn_bundesliga_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.bundesliga.espnBundesliga<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_bundesliga_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.bundesliga.espn_bundesliga_scoreboard({});
+await sdv.bundesliga.espnBundesligaScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_bundesliga_athlete_awards` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_bio` | `site_v2` `/soccer/ger.1/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_career_stats` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_bundesliga_athlete_contracts` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_core` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_eventlog` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_gamelog` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_bundesliga_athlete_info` | `site_v2` `/soccer/ger.1/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_injuries` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_news` | `site_v2` `/soccer/ger.1/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_notes` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_overview` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_records` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_seasons` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_splits` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_bundesliga_athlete_statisticslog` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_bundesliga_athlete_stats` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_bundesliga_athlete_vs_athlete` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_bundesliga_athletes_index` | `core_v2` `/soccer/leagues/ger.1/athletes` | — | `active`, `limit`, `page` |
-| `espn_bundesliga_award` | `core_v2` `/soccer/leagues/ger.1/awards/{award_id}` | `award_id`\* | — |
-| `espn_bundesliga_awards` | `core_v2` `/soccer/leagues/ger.1/awards` | — | — |
-| `espn_bundesliga_calendar` | `site_v2` `/soccer/ger.1/calendar` | — | — |
-| `espn_bundesliga_coach` | `core_v2` `/soccer/leagues/ger.1/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_bundesliga_coach_record` | `core_v2` `/soccer/leagues/ger.1/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_bundesliga_coach_season` | `core_v2` `/soccer/leagues/ger.1/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_bundesliga_conferences` | `site_v2` `/soccer/ger.1/groups` | — | — |
-| `espn_bundesliga_draft` | `site_v2` `/soccer/ger.1/draft` | — | — |
-| `espn_bundesliga_event` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}` | `event_id`\* | — |
-| `espn_bundesliga_event_broadcasts` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_competition` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitor` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitor_leaders` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitor_linescores` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitor_record` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitor_roster` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitor_statistics` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_bundesliga_event_competitors` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_leaders` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_odds` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_official_detail` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_bundesliga_event_officials` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_play` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_bundesliga_event_play_personnel` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_bundesliga_event_plays` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_bundesliga_event_powerindex` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_predictor` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_probabilities` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_bundesliga_event_propbets` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_scoringplays` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_situation` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_event_status` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_bundesliga_events` | `core_v2` `/soccer/leagues/ger.1/events` | — | `dates`, `limit` |
-| `espn_bundesliga_franchise` | `core_v2` `/soccer/leagues/ger.1/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_bundesliga_franchises` | `core_v2` `/soccer/leagues/ger.1/franchises` | — | `limit` |
-| `espn_bundesliga_injuries` | `site_v2` `/soccer/ger.1/injuries` | — | — |
-| `espn_bundesliga_leaders` | `web_v3` `/soccer/ger.1/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_bundesliga_leaders_core` | `core_v2` `/soccer/leagues/ger.1/leaders` | — | — |
-| `espn_bundesliga_league_notes` | `core_v2` `/soccer/leagues/ger.1/notes` | — | — |
-| `espn_bundesliga_league_root` | `core_v2` `/soccer/leagues/ger.1` | — | — |
-| `espn_bundesliga_news` | `site_v2` `/soccer/ger.1/news` | — | `limit` |
-| `espn_bundesliga_position` | `core_v2` `/soccer/leagues/ger.1/positions/{position_id}` | `position_id`\* | — |
-| `espn_bundesliga_positions` | `core_v2` `/soccer/leagues/ger.1/positions` | — | — |
-| `espn_bundesliga_scoreboard` | `site_v2` `/soccer/ger.1/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_bundesliga_season_athletes` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_bundesliga_season_awards` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/awards` | `season`\* | — |
-| `espn_bundesliga_season_coaches` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_bundesliga_season_draft` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/draft` | `season`\* | — |
-| `espn_bundesliga_season_draft_round_picks` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_bundesliga_season_freeagents` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_bundesliga_season_futures` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/futures` | `season`\* | — |
-| `espn_bundesliga_season_group` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_bundesliga_season_group_children` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_bundesliga_season_group_teams` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_bundesliga_season_groups` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_bundesliga_season_info` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}` | `season`\* | — |
-| `espn_bundesliga_season_pointer` | `core_v2` `/soccer/leagues/ger.1/season` | — | — |
-| `espn_bundesliga_season_powerindex` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_bundesliga_season_powerindex_leaders` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_bundesliga_season_team` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_bundesliga_season_teams` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_bundesliga_season_type` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_bundesliga_season_type_corrections` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_bundesliga_season_type_leaders` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_bundesliga_season_types` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types` | `season`\* | — |
-| `espn_bundesliga_season_week` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_bundesliga_season_week_events` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_bundesliga_season_weeks` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_bundesliga_seasons` | `core_v2` `/soccer/leagues/ger.1/seasons` | — | `limit` |
-| `espn_bundesliga_standings` | `site_v2_alt` `/soccer/ger.1/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_bundesliga_standings_core` | `core_v2` `/soccer/leagues/ger.1/standings` | — | — |
-| `espn_bundesliga_statistics_league` | `site_v2` `/soccer/ger.1/statistics` | — | — |
-| `espn_bundesliga_summary` | `site_v2` `/soccer/ger.1/summary` | — | `event_id` → `event` |
-| `espn_bundesliga_talentpicks` | `core_v2` `/soccer/leagues/ger.1/talentpicks` | — | — |
-| `espn_bundesliga_team` | `site_v2` `/soccer/ger.1/teams/{team_id}` | `team_id`\* | — |
-| `espn_bundesliga_team_core` | `core_v2` `/soccer/leagues/ger.1/teams/{team_id}` | `team_id`\* | — |
-| `espn_bundesliga_team_depthcharts` | `site_v2` `/soccer/ger.1/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_bundesliga_team_history` | `site_v2` `/soccer/ger.1/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_bundesliga_team_injuries` | `site_v2` `/soccer/ger.1/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_bundesliga_team_leaders` | `site_v2` `/soccer/ger.1/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_bundesliga_team_news` | `site_v2` `/soccer/ger.1/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_bundesliga_team_record` | `site_v2` `/soccer/ger.1/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_bundesliga_team_roster` | `site_v2` `/soccer/ger.1/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_bundesliga_team_schedule` | `site_v2` `/soccer/ger.1/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_bundesliga_team_transactions` | `site_v2` `/soccer/ger.1/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_bundesliga_teams_core` | `core_v2` `/soccer/leagues/ger.1/teams` | — | `limit` |
-| `espn_bundesliga_teams_site` | `site_v2` `/soccer/ger.1/teams` | — | `limit` |
-| `espn_bundesliga_tournaments` | `core_v2` `/soccer/leagues/ger.1/tournaments` | — | — |
-| `espn_bundesliga_transactions` | `site_v2` `/soccer/ger.1/transactions` | — | — |
-| `espn_bundesliga_venue` | `core_v2` `/soccer/leagues/ger.1/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_bundesliga_venues` | `core_v2` `/soccer/leagues/ger.1/venues` | — | `limit` |
+| `espnBundesligaAthleteAwards` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnBundesligaAthleteBio` | `site_v2` `/soccer/ger.1/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnBundesligaAthleteCareerStats` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnBundesligaAthleteContracts` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnBundesligaAthleteCore` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnBundesligaAthleteEventlog` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnBundesligaAthleteGamelog` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnBundesligaAthleteInfo` | `site_v2` `/soccer/ger.1/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnBundesligaAthleteInjuries` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnBundesligaAthleteNews` | `site_v2` `/soccer/ger.1/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnBundesligaAthleteNotes` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnBundesligaAthleteOverview` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnBundesligaAthleteRecords` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnBundesligaAthleteSeasons` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnBundesligaAthleteSplits` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnBundesligaAthleteStatisticslog` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnBundesligaAthleteStats` | `web_v3` `/soccer/ger.1/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnBundesligaAthleteVsAthlete` | `core_v2` `/soccer/leagues/ger.1/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnBundesligaAthletesIndex` | `core_v2` `/soccer/leagues/ger.1/athletes` | — | `active`, `limit`, `page` |
+| `espnBundesligaAward` | `core_v2` `/soccer/leagues/ger.1/awards/{award_id}` | `award_id`\* | — |
+| `espnBundesligaAwards` | `core_v2` `/soccer/leagues/ger.1/awards` | — | — |
+| `espnBundesligaCalendar` | `site_v2` `/soccer/ger.1/calendar` | — | — |
+| `espnBundesligaCoach` | `core_v2` `/soccer/leagues/ger.1/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnBundesligaCoachRecord` | `core_v2` `/soccer/leagues/ger.1/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnBundesligaCoachSeason` | `core_v2` `/soccer/leagues/ger.1/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnBundesligaConferences` | `site_v2` `/soccer/ger.1/groups` | — | — |
+| `espnBundesligaDraft` | `site_v2` `/soccer/ger.1/draft` | — | — |
+| `espnBundesligaEvent` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}` | `event_id`\* | — |
+| `espnBundesligaEventBroadcasts` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventCompetition` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitor` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitorLeaders` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitorLinescores` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitorRecord` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitorRoster` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitorStatistics` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnBundesligaEventCompetitors` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventLeaders` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventOdds` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventOfficialDetail` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnBundesligaEventOfficials` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventPlay` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnBundesligaEventPlayPersonnel` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnBundesligaEventPlays` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnBundesligaEventPowerindex` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventPredictor` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventProbabilities` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnBundesligaEventPropbets` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventScoringplays` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventSituation` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnBundesligaEventStatus` | `core_v2` `/soccer/leagues/ger.1/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnBundesligaEvents` | `core_v2` `/soccer/leagues/ger.1/events` | — | `dates`, `limit` |
+| `espnBundesligaFranchise` | `core_v2` `/soccer/leagues/ger.1/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnBundesligaFranchises` | `core_v2` `/soccer/leagues/ger.1/franchises` | — | `limit` |
+| `espnBundesligaInjuries` | `site_v2` `/soccer/ger.1/injuries` | — | — |
+| `espnBundesligaLeaders` | `web_v3` `/soccer/ger.1/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnBundesligaLeadersCore` | `core_v2` `/soccer/leagues/ger.1/leaders` | — | — |
+| `espnBundesligaLeagueNotes` | `core_v2` `/soccer/leagues/ger.1/notes` | — | — |
+| `espnBundesligaLeagueRoot` | `core_v2` `/soccer/leagues/ger.1` | — | — |
+| `espnBundesligaNews` | `site_v2` `/soccer/ger.1/news` | — | `limit` |
+| `espnBundesligaPosition` | `core_v2` `/soccer/leagues/ger.1/positions/{position_id}` | `position_id`\* | — |
+| `espnBundesligaPositions` | `core_v2` `/soccer/leagues/ger.1/positions` | — | — |
+| `espnBundesligaScoreboard` | `site_v2` `/soccer/ger.1/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnBundesligaSeasonAthletes` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnBundesligaSeasonAwards` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/awards` | `season`\* | — |
+| `espnBundesligaSeasonCoaches` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnBundesligaSeasonDraft` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/draft` | `season`\* | — |
+| `espnBundesligaSeasonDraftRoundPicks` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnBundesligaSeasonFreeagents` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/freeagents` | `season`\* | — |
+| `espnBundesligaSeasonFutures` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/futures` | `season`\* | — |
+| `espnBundesligaSeasonGroup` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnBundesligaSeasonGroupChildren` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnBundesligaSeasonGroupTeams` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnBundesligaSeasonGroups` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnBundesligaSeasonInfo` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}` | `season`\* | — |
+| `espnBundesligaSeasonPointer` | `core_v2` `/soccer/leagues/ger.1/season` | — | — |
+| `espnBundesligaSeasonPowerindex` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnBundesligaSeasonPowerindexLeaders` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnBundesligaSeasonTeam` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnBundesligaSeasonTeams` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnBundesligaSeasonType` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnBundesligaSeasonTypeCorrections` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnBundesligaSeasonTypeLeaders` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnBundesligaSeasonTypes` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types` | `season`\* | — |
+| `espnBundesligaSeasonWeek` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnBundesligaSeasonWeekEvents` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnBundesligaSeasonWeeks` | `core_v2` `/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnBundesligaSeasons` | `core_v2` `/soccer/leagues/ger.1/seasons` | — | `limit` |
+| `espnBundesligaStandings` | `site_v2_alt` `/soccer/ger.1/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnBundesligaStandingsCore` | `core_v2` `/soccer/leagues/ger.1/standings` | — | — |
+| `espnBundesligaStatisticsLeague` | `site_v2` `/soccer/ger.1/statistics` | — | — |
+| `espnBundesligaSummary` | `site_v2` `/soccer/ger.1/summary` | — | `event_id` → `event` |
+| `espnBundesligaTalentpicks` | `core_v2` `/soccer/leagues/ger.1/talentpicks` | — | — |
+| `espnBundesligaTeam` | `site_v2` `/soccer/ger.1/teams/{team_id}` | `team_id`\* | — |
+| `espnBundesligaTeamCore` | `core_v2` `/soccer/leagues/ger.1/teams/{team_id}` | `team_id`\* | — |
+| `espnBundesligaTeamDepthcharts` | `site_v2` `/soccer/ger.1/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnBundesligaTeamHistory` | `site_v2` `/soccer/ger.1/teams/{team_id}/history` | `team_id`\* | — |
+| `espnBundesligaTeamInjuries` | `site_v2` `/soccer/ger.1/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnBundesligaTeamLeaders` | `site_v2` `/soccer/ger.1/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnBundesligaTeamNews` | `site_v2` `/soccer/ger.1/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnBundesligaTeamRecord` | `site_v2` `/soccer/ger.1/teams/{team_id}/record` | `team_id`\* | — |
+| `espnBundesligaTeamRoster` | `site_v2` `/soccer/ger.1/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnBundesligaTeamSchedule` | `site_v2` `/soccer/ger.1/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnBundesligaTeamTransactions` | `site_v2` `/soccer/ger.1/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnBundesligaTeamsCore` | `core_v2` `/soccer/leagues/ger.1/teams` | — | `limit` |
+| `espnBundesligaTeamsSite` | `site_v2` `/soccer/ger.1/teams` | — | `limit` |
+| `espnBundesligaTournaments` | `core_v2` `/soccer/leagues/ger.1/tournaments` | — | — |
+| `espnBundesligaTransactions` | `site_v2` `/soccer/ger.1/transactions` | — | — |
+| `espnBundesligaVenue` | `core_v2` `/soccer/leagues/ger.1/venues/{venue_id}` | `venue_id`\* | — |
+| `espnBundesligaVenues` | `core_v2` `/soccer/leagues/ger.1/venues` | — | `limit` |

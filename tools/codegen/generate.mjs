@@ -137,11 +137,17 @@ function queryParamsCell(wrapper) {
     .join(", ");
 }
 
+/** Canonical camelCase wrapper name (espn_nba_scoreboard -> espnNbaScoreboard). */
+function wrapperName(prefix, short) {
+  return `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+}
+
 function renderLeaguePage(league, wrappers, position) {
   const applicable = wrappersForLeague(league, wrappers);
+  const scoreboard = wrapperName(league.prefix, "scoreboard");
   const callExample = league.leagueParam
-    ? `await sdv.${league.prefix}.espn_${league.prefix}_scoreboard({ league: '${league.league}' });`
-    : `await sdv.${league.prefix}.espn_${league.prefix}_scoreboard({});`;
+    ? `await sdv.${league.prefix}.${scoreboard}({ league: '${league.league}' });`
+    : `await sdv.${league.prefix}.${scoreboard}({});`;
 
   let body =
     `---\n` +
@@ -155,7 +161,9 @@ function renderLeaguePage(league, wrappers, position) {
     `- **league slug:** \`${league.league}\`${league.leagueParam ? " *(default; override with a `league` param)*" : ""}\n` +
     `- **scopes:** ${league.scopes.map((s) => `\`${s}\``).join(", ")}\n` +
     `- **wrappers:** ${applicable.length}\n\n` +
-    `Every endpoint is called as \`sdv.${league.prefix}.espn_${league.prefix}_<endpoint>(params)\`. ` +
+    `Every endpoint is called as \`sdv.${league.prefix}.${scoreboard.replace("Scoreboard", "<Endpoint>")}(params)\`. ` +
+    `Each method is also available under its snake_case name ` +
+    `(\`espn_${league.prefix}_<endpoint>\`) for parity with the Python / R packages. ` +
     `Parameters accept snake_case or camelCase. Required path params are marked \\*.\n\n` +
     "```js\n" +
     `import sdv from 'sportsdataverse';\n\n` +
@@ -170,7 +178,7 @@ function renderLeaguePage(league, wrappers, position) {
     body += `| Method | HTTP | Path params | Query params |\n`;
     body += `|---|---|---|---|\n`;
     for (const w of rows.sort((a, b) => a.short.localeCompare(b.short))) {
-      const method = `\`espn_${league.prefix}_${w.short}\``;
+      const method = `\`${wrapperName(league.prefix, w.short)}\``;
       const http = `\`${w.family}\` \`${displayPath(w, league)}\``;
       body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} |\n`;
     }
@@ -188,9 +196,11 @@ function renderReferenceIndex(leagues, wrappers) {
     `---\n\n` +
     DOCS_NOTE +
     `\n# ESPN cross-league reference\n\n` +
-    `Every league below exposes the same generated \`espn_<league>_<endpoint>\` ` +
-    `surface, bound from a single YAML source of truth. Pick a league for its full ` +
-    `endpoint table, or try any call live in the [playground](/playground).\n\n` +
+    `Every league below exposes the same generated \`espn<League><Endpoint>\` ` +
+    `surface (e.g. \`espnNbaScoreboard\`), bound from a single YAML source of truth. ` +
+    `Each method is also available under its snake_case name (\`espn_nba_scoreboard\`) ` +
+    `for parity with the Python / R packages. Pick a league for its full endpoint ` +
+    `table, or try any call live in the [playground](/playground).\n\n` +
     `| League | sport | ESPN slug | scopes | wrappers |\n` +
     `|---|---|---|---|---:|\n`;
   for (const l of leagues) {
@@ -201,9 +211,9 @@ function renderReferenceIndex(leagues, wrappers) {
   body +=
     `\n:::tip Same call, every league\n` +
     "```js\n" +
-    `await sdv.nba.espn_nba_scoreboard({});\n` +
-    `await sdv.nfl.espn_nfl_scoreboard({ week: 1, season_type: 2 });\n` +
-    `await sdv.soccer.espn_soccer_scoreboard({ league: 'eng.1' });\n` +
+    `await sdv.nba.espnNbaScoreboard({});\n` +
+    `await sdv.nfl.espnNflScoreboard({ week: 1, seasonType: 2 });\n` +
+    `await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });\n` +
     "```\n" +
     `:::\n`;
   return body;

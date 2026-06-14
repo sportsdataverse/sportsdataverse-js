@@ -14,133 +14,133 @@ sidebar_position: 4
 - **scopes:** `universal`, `ncaa`
 - **wrappers:** 113
 
-Every endpoint is called as `sdv.wbb.espn_wbb_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.wbb.espnWbb<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_wbb_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.wbb.espn_wbb_scoreboard({});
+await sdv.wbb.espnWbbScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_wbb_athlete_awards` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_wbb_athlete_bio` | `site_v2` `/basketball/womens-college-basketball/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_wbb_athlete_career_stats` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_wbb_athlete_contracts` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_wbb_athlete_core` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_wbb_athlete_eventlog` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_wbb_athlete_gamelog` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_wbb_athlete_info` | `site_v2` `/basketball/womens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_wbb_athlete_injuries` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_wbb_athlete_news` | `site_v2` `/basketball/womens-college-basketball/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_wbb_athlete_notes` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_wbb_athlete_overview` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_wbb_athlete_records` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_wbb_athlete_seasons` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_wbb_athlete_splits` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_wbb_athlete_statisticslog` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_wbb_athlete_stats` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_wbb_athlete_vs_athlete` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_wbb_athletes_index` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes` | — | `active`, `limit`, `page` |
-| `espn_wbb_award` | `core_v2` `/basketball/leagues/womens-college-basketball/awards/{award_id}` | `award_id`\* | — |
-| `espn_wbb_awards` | `core_v2` `/basketball/leagues/womens-college-basketball/awards` | — | — |
-| `espn_wbb_calendar` | `site_v2` `/basketball/womens-college-basketball/calendar` | — | — |
-| `espn_wbb_coach` | `core_v2` `/basketball/leagues/womens-college-basketball/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_wbb_coach_record` | `core_v2` `/basketball/leagues/womens-college-basketball/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_wbb_coach_season` | `core_v2` `/basketball/leagues/womens-college-basketball/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_wbb_conferences` | `site_v2` `/basketball/womens-college-basketball/groups` | — | — |
-| `espn_wbb_draft` | `site_v2` `/basketball/womens-college-basketball/draft` | — | — |
-| `espn_wbb_event` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}` | `event_id`\* | — |
-| `espn_wbb_event_broadcasts` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_competition` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_competitor` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wbb_event_competitor_leaders` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wbb_event_competitor_linescores` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wbb_event_competitor_record` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wbb_event_competitor_roster` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wbb_event_competitor_statistics` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wbb_event_competitors` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_leaders` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_odds` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_official_detail` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_wbb_event_officials` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_play` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_wbb_event_play_personnel` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_wbb_event_plays` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_wbb_event_powerindex` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_predictor` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_probabilities` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_wbb_event_propbets` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_scoringplays` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_situation` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_wbb_event_status` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_wbb_events` | `core_v2` `/basketball/leagues/womens-college-basketball/events` | — | `dates`, `limit` |
-| `espn_wbb_franchise` | `core_v2` `/basketball/leagues/womens-college-basketball/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_wbb_franchises` | `core_v2` `/basketball/leagues/womens-college-basketball/franchises` | — | `limit` |
-| `espn_wbb_injuries` | `site_v2` `/basketball/womens-college-basketball/injuries` | — | — |
-| `espn_wbb_leaders` | `web_v3` `/basketball/womens-college-basketball/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_wbb_leaders_core` | `core_v2` `/basketball/leagues/womens-college-basketball/leaders` | — | — |
-| `espn_wbb_league_notes` | `core_v2` `/basketball/leagues/womens-college-basketball/notes` | — | — |
-| `espn_wbb_league_root` | `core_v2` `/basketball/leagues/womens-college-basketball` | — | — |
-| `espn_wbb_news` | `site_v2` `/basketball/womens-college-basketball/news` | — | `limit` |
-| `espn_wbb_position` | `core_v2` `/basketball/leagues/womens-college-basketball/positions/{position_id}` | `position_id`\* | — |
-| `espn_wbb_positions` | `core_v2` `/basketball/leagues/womens-college-basketball/positions` | — | — |
-| `espn_wbb_scoreboard` | `site_v2` `/basketball/womens-college-basketball/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_wbb_season_athletes` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_wbb_season_awards` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/awards` | `season`\* | — |
-| `espn_wbb_season_coaches` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_wbb_season_draft` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/draft` | `season`\* | — |
-| `espn_wbb_season_draft_round_picks` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_wbb_season_freeagents` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_wbb_season_futures` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/futures` | `season`\* | — |
-| `espn_wbb_season_group` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_wbb_season_group_children` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_wbb_season_group_teams` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_wbb_season_groups` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_wbb_season_info` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}` | `season`\* | — |
-| `espn_wbb_season_pointer` | `core_v2` `/basketball/leagues/womens-college-basketball/season` | — | — |
-| `espn_wbb_season_powerindex` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_wbb_season_powerindex_leaders` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_wbb_season_team` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_wbb_season_teams` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_wbb_season_type` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_wbb_season_type_corrections` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_wbb_season_type_leaders` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_wbb_season_types` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types` | `season`\* | — |
-| `espn_wbb_season_week` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_wbb_season_week_events` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_wbb_season_weeks` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_wbb_seasons` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons` | — | `limit` |
-| `espn_wbb_standings` | `site_v2_alt` `/basketball/womens-college-basketball/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_wbb_standings_core` | `core_v2` `/basketball/leagues/womens-college-basketball/standings` | — | — |
-| `espn_wbb_statistics_league` | `site_v2` `/basketball/womens-college-basketball/statistics` | — | — |
-| `espn_wbb_summary` | `site_v2` `/basketball/womens-college-basketball/summary` | — | `event_id` → `event` |
-| `espn_wbb_talentpicks` | `core_v2` `/basketball/leagues/womens-college-basketball/talentpicks` | — | — |
-| `espn_wbb_team` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}` | `team_id`\* | — |
-| `espn_wbb_team_core` | `core_v2` `/basketball/leagues/womens-college-basketball/teams/{team_id}` | `team_id`\* | — |
-| `espn_wbb_team_depthcharts` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_wbb_team_history` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_wbb_team_injuries` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_wbb_team_leaders` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_wbb_team_news` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_wbb_team_record` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_wbb_team_roster` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_wbb_team_schedule` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_wbb_team_transactions` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_wbb_teams_core` | `core_v2` `/basketball/leagues/womens-college-basketball/teams` | — | `limit` |
-| `espn_wbb_teams_site` | `site_v2` `/basketball/womens-college-basketball/teams` | — | `limit` |
-| `espn_wbb_tournaments` | `core_v2` `/basketball/leagues/womens-college-basketball/tournaments` | — | — |
-| `espn_wbb_transactions` | `site_v2` `/basketball/womens-college-basketball/transactions` | — | — |
-| `espn_wbb_venue` | `core_v2` `/basketball/leagues/womens-college-basketball/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_wbb_venues` | `core_v2` `/basketball/leagues/womens-college-basketball/venues` | — | `limit` |
+| `espnWbbAthleteAwards` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnWbbAthleteBio` | `site_v2` `/basketball/womens-college-basketball/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnWbbAthleteCareerStats` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnWbbAthleteContracts` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnWbbAthleteCore` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnWbbAthleteEventlog` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnWbbAthleteGamelog` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnWbbAthleteInfo` | `site_v2` `/basketball/womens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnWbbAthleteInjuries` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnWbbAthleteNews` | `site_v2` `/basketball/womens-college-basketball/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnWbbAthleteNotes` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnWbbAthleteOverview` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnWbbAthleteRecords` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnWbbAthleteSeasons` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnWbbAthleteSplits` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnWbbAthleteStatisticslog` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnWbbAthleteStats` | `web_v3` `/basketball/womens-college-basketball/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnWbbAthleteVsAthlete` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnWbbAthletesIndex` | `core_v2` `/basketball/leagues/womens-college-basketball/athletes` | — | `active`, `limit`, `page` |
+| `espnWbbAward` | `core_v2` `/basketball/leagues/womens-college-basketball/awards/{award_id}` | `award_id`\* | — |
+| `espnWbbAwards` | `core_v2` `/basketball/leagues/womens-college-basketball/awards` | — | — |
+| `espnWbbCalendar` | `site_v2` `/basketball/womens-college-basketball/calendar` | — | — |
+| `espnWbbCoach` | `core_v2` `/basketball/leagues/womens-college-basketball/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnWbbCoachRecord` | `core_v2` `/basketball/leagues/womens-college-basketball/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnWbbCoachSeason` | `core_v2` `/basketball/leagues/womens-college-basketball/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnWbbConferences` | `site_v2` `/basketball/womens-college-basketball/groups` | — | — |
+| `espnWbbDraft` | `site_v2` `/basketball/womens-college-basketball/draft` | — | — |
+| `espnWbbEvent` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}` | `event_id`\* | — |
+| `espnWbbEventBroadcasts` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnWbbEventCompetition` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnWbbEventCompetitor` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWbbEventCompetitorLeaders` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWbbEventCompetitorLinescores` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWbbEventCompetitorRecord` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWbbEventCompetitorRoster` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWbbEventCompetitorStatistics` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWbbEventCompetitors` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnWbbEventLeaders` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnWbbEventOdds` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnWbbEventOfficialDetail` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnWbbEventOfficials` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnWbbEventPlay` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnWbbEventPlayPersonnel` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnWbbEventPlays` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnWbbEventPowerindex` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnWbbEventPredictor` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnWbbEventProbabilities` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnWbbEventPropbets` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnWbbEventScoringplays` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnWbbEventSituation` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnWbbEventStatus` | `core_v2` `/basketball/leagues/womens-college-basketball/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnWbbEvents` | `core_v2` `/basketball/leagues/womens-college-basketball/events` | — | `dates`, `limit` |
+| `espnWbbFranchise` | `core_v2` `/basketball/leagues/womens-college-basketball/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnWbbFranchises` | `core_v2` `/basketball/leagues/womens-college-basketball/franchises` | — | `limit` |
+| `espnWbbInjuries` | `site_v2` `/basketball/womens-college-basketball/injuries` | — | — |
+| `espnWbbLeaders` | `web_v3` `/basketball/womens-college-basketball/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnWbbLeadersCore` | `core_v2` `/basketball/leagues/womens-college-basketball/leaders` | — | — |
+| `espnWbbLeagueNotes` | `core_v2` `/basketball/leagues/womens-college-basketball/notes` | — | — |
+| `espnWbbLeagueRoot` | `core_v2` `/basketball/leagues/womens-college-basketball` | — | — |
+| `espnWbbNews` | `site_v2` `/basketball/womens-college-basketball/news` | — | `limit` |
+| `espnWbbPosition` | `core_v2` `/basketball/leagues/womens-college-basketball/positions/{position_id}` | `position_id`\* | — |
+| `espnWbbPositions` | `core_v2` `/basketball/leagues/womens-college-basketball/positions` | — | — |
+| `espnWbbScoreboard` | `site_v2` `/basketball/womens-college-basketball/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnWbbSeasonAthletes` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnWbbSeasonAwards` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/awards` | `season`\* | — |
+| `espnWbbSeasonCoaches` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnWbbSeasonDraft` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/draft` | `season`\* | — |
+| `espnWbbSeasonDraftRoundPicks` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnWbbSeasonFreeagents` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/freeagents` | `season`\* | — |
+| `espnWbbSeasonFutures` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/futures` | `season`\* | — |
+| `espnWbbSeasonGroup` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnWbbSeasonGroupChildren` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnWbbSeasonGroupTeams` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnWbbSeasonGroups` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnWbbSeasonInfo` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}` | `season`\* | — |
+| `espnWbbSeasonPointer` | `core_v2` `/basketball/leagues/womens-college-basketball/season` | — | — |
+| `espnWbbSeasonPowerindex` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnWbbSeasonPowerindexLeaders` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnWbbSeasonTeam` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnWbbSeasonTeams` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnWbbSeasonType` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnWbbSeasonTypeCorrections` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnWbbSeasonTypeLeaders` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnWbbSeasonTypes` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types` | `season`\* | — |
+| `espnWbbSeasonWeek` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnWbbSeasonWeekEvents` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnWbbSeasonWeeks` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnWbbSeasons` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons` | — | `limit` |
+| `espnWbbStandings` | `site_v2_alt` `/basketball/womens-college-basketball/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnWbbStandingsCore` | `core_v2` `/basketball/leagues/womens-college-basketball/standings` | — | — |
+| `espnWbbStatisticsLeague` | `site_v2` `/basketball/womens-college-basketball/statistics` | — | — |
+| `espnWbbSummary` | `site_v2` `/basketball/womens-college-basketball/summary` | — | `event_id` → `event` |
+| `espnWbbTalentpicks` | `core_v2` `/basketball/leagues/womens-college-basketball/talentpicks` | — | — |
+| `espnWbbTeam` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}` | `team_id`\* | — |
+| `espnWbbTeamCore` | `core_v2` `/basketball/leagues/womens-college-basketball/teams/{team_id}` | `team_id`\* | — |
+| `espnWbbTeamDepthcharts` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnWbbTeamHistory` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/history` | `team_id`\* | — |
+| `espnWbbTeamInjuries` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnWbbTeamLeaders` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnWbbTeamNews` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnWbbTeamRecord` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/record` | `team_id`\* | — |
+| `espnWbbTeamRoster` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnWbbTeamSchedule` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnWbbTeamTransactions` | `site_v2` `/basketball/womens-college-basketball/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnWbbTeamsCore` | `core_v2` `/basketball/leagues/womens-college-basketball/teams` | — | `limit` |
+| `espnWbbTeamsSite` | `site_v2` `/basketball/womens-college-basketball/teams` | — | `limit` |
+| `espnWbbTournaments` | `core_v2` `/basketball/leagues/womens-college-basketball/tournaments` | — | — |
+| `espnWbbTransactions` | `site_v2` `/basketball/womens-college-basketball/transactions` | — | — |
+| `espnWbbVenue` | `core_v2` `/basketball/leagues/womens-college-basketball/venues/{venue_id}` | `venue_id`\* | — |
+| `espnWbbVenues` | `core_v2` `/basketball/leagues/womens-college-basketball/venues` | — | `limit` |
 
 ## NCAA endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_wbb_rankings` | `site_v2` `/basketball/womens-college-basketball/rankings` | — | — |
-| `espn_wbb_season_recruits` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/recruits` | `season`\* | `limit` |
-| `espn_wbb_season_week_rankings` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnWbbRankings` | `site_v2` `/basketball/womens-college-basketball/rankings` | — | — |
+| `espnWbbSeasonRecruits` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/recruits` | `season`\* | `limit` |
+| `espnWbbSeasonWeekRankings` | `core_v2` `/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |

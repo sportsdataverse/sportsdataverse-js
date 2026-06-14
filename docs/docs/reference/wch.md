@@ -14,133 +14,133 @@ sidebar_position: 10
 - **scopes:** `universal`, `ncaa`
 - **wrappers:** 113
 
-Every endpoint is called as `sdv.wch.espn_wch_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.wch.espnWch<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_wch_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.wch.espn_wch_scoreboard({});
+await sdv.wch.espnWchScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_wch_athlete_awards` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_wch_athlete_bio` | `site_v2` `/hockey/womens-college-hockey/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_wch_athlete_career_stats` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_wch_athlete_contracts` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_wch_athlete_core` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_wch_athlete_eventlog` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_wch_athlete_gamelog` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_wch_athlete_info` | `site_v2` `/hockey/womens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_wch_athlete_injuries` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_wch_athlete_news` | `site_v2` `/hockey/womens-college-hockey/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_wch_athlete_notes` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_wch_athlete_overview` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_wch_athlete_records` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_wch_athlete_seasons` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_wch_athlete_splits` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_wch_athlete_statisticslog` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_wch_athlete_stats` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_wch_athlete_vs_athlete` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_wch_athletes_index` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes` | — | `active`, `limit`, `page` |
-| `espn_wch_award` | `core_v2` `/hockey/leagues/womens-college-hockey/awards/{award_id}` | `award_id`\* | — |
-| `espn_wch_awards` | `core_v2` `/hockey/leagues/womens-college-hockey/awards` | — | — |
-| `espn_wch_calendar` | `site_v2` `/hockey/womens-college-hockey/calendar` | — | — |
-| `espn_wch_coach` | `core_v2` `/hockey/leagues/womens-college-hockey/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_wch_coach_record` | `core_v2` `/hockey/leagues/womens-college-hockey/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_wch_coach_season` | `core_v2` `/hockey/leagues/womens-college-hockey/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_wch_conferences` | `site_v2` `/hockey/womens-college-hockey/groups` | — | — |
-| `espn_wch_draft` | `site_v2` `/hockey/womens-college-hockey/draft` | — | — |
-| `espn_wch_event` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}` | `event_id`\* | — |
-| `espn_wch_event_broadcasts` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_wch_event_competition` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_wch_event_competitor` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wch_event_competitor_leaders` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wch_event_competitor_linescores` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wch_event_competitor_record` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wch_event_competitor_roster` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wch_event_competitor_statistics` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_wch_event_competitors` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_wch_event_leaders` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_wch_event_odds` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_wch_event_official_detail` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_wch_event_officials` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_wch_event_play` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_wch_event_play_personnel` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_wch_event_plays` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_wch_event_powerindex` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_wch_event_predictor` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_wch_event_probabilities` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_wch_event_propbets` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_wch_event_scoringplays` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_wch_event_situation` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_wch_event_status` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_wch_events` | `core_v2` `/hockey/leagues/womens-college-hockey/events` | — | `dates`, `limit` |
-| `espn_wch_franchise` | `core_v2` `/hockey/leagues/womens-college-hockey/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_wch_franchises` | `core_v2` `/hockey/leagues/womens-college-hockey/franchises` | — | `limit` |
-| `espn_wch_injuries` | `site_v2` `/hockey/womens-college-hockey/injuries` | — | — |
-| `espn_wch_leaders` | `web_v3` `/hockey/womens-college-hockey/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_wch_leaders_core` | `core_v2` `/hockey/leagues/womens-college-hockey/leaders` | — | — |
-| `espn_wch_league_notes` | `core_v2` `/hockey/leagues/womens-college-hockey/notes` | — | — |
-| `espn_wch_league_root` | `core_v2` `/hockey/leagues/womens-college-hockey` | — | — |
-| `espn_wch_news` | `site_v2` `/hockey/womens-college-hockey/news` | — | `limit` |
-| `espn_wch_position` | `core_v2` `/hockey/leagues/womens-college-hockey/positions/{position_id}` | `position_id`\* | — |
-| `espn_wch_positions` | `core_v2` `/hockey/leagues/womens-college-hockey/positions` | — | — |
-| `espn_wch_scoreboard` | `site_v2` `/hockey/womens-college-hockey/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_wch_season_athletes` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_wch_season_awards` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/awards` | `season`\* | — |
-| `espn_wch_season_coaches` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_wch_season_draft` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/draft` | `season`\* | — |
-| `espn_wch_season_draft_round_picks` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_wch_season_freeagents` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_wch_season_futures` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/futures` | `season`\* | — |
-| `espn_wch_season_group` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_wch_season_group_children` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_wch_season_group_teams` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_wch_season_groups` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_wch_season_info` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}` | `season`\* | — |
-| `espn_wch_season_pointer` | `core_v2` `/hockey/leagues/womens-college-hockey/season` | — | — |
-| `espn_wch_season_powerindex` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_wch_season_powerindex_leaders` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_wch_season_team` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_wch_season_teams` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_wch_season_type` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_wch_season_type_corrections` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_wch_season_type_leaders` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_wch_season_types` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types` | `season`\* | — |
-| `espn_wch_season_week` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_wch_season_week_events` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_wch_season_weeks` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_wch_seasons` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons` | — | `limit` |
-| `espn_wch_standings` | `site_v2_alt` `/hockey/womens-college-hockey/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_wch_standings_core` | `core_v2` `/hockey/leagues/womens-college-hockey/standings` | — | — |
-| `espn_wch_statistics_league` | `site_v2` `/hockey/womens-college-hockey/statistics` | — | — |
-| `espn_wch_summary` | `site_v2` `/hockey/womens-college-hockey/summary` | — | `event_id` → `event` |
-| `espn_wch_talentpicks` | `core_v2` `/hockey/leagues/womens-college-hockey/talentpicks` | — | — |
-| `espn_wch_team` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}` | `team_id`\* | — |
-| `espn_wch_team_core` | `core_v2` `/hockey/leagues/womens-college-hockey/teams/{team_id}` | `team_id`\* | — |
-| `espn_wch_team_depthcharts` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_wch_team_history` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_wch_team_injuries` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_wch_team_leaders` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_wch_team_news` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_wch_team_record` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_wch_team_roster` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_wch_team_schedule` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_wch_team_transactions` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_wch_teams_core` | `core_v2` `/hockey/leagues/womens-college-hockey/teams` | — | `limit` |
-| `espn_wch_teams_site` | `site_v2` `/hockey/womens-college-hockey/teams` | — | `limit` |
-| `espn_wch_tournaments` | `core_v2` `/hockey/leagues/womens-college-hockey/tournaments` | — | — |
-| `espn_wch_transactions` | `site_v2` `/hockey/womens-college-hockey/transactions` | — | — |
-| `espn_wch_venue` | `core_v2` `/hockey/leagues/womens-college-hockey/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_wch_venues` | `core_v2` `/hockey/leagues/womens-college-hockey/venues` | — | `limit` |
+| `espnWchAthleteAwards` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnWchAthleteBio` | `site_v2` `/hockey/womens-college-hockey/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnWchAthleteCareerStats` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnWchAthleteContracts` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnWchAthleteCore` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnWchAthleteEventlog` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnWchAthleteGamelog` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnWchAthleteInfo` | `site_v2` `/hockey/womens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnWchAthleteInjuries` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnWchAthleteNews` | `site_v2` `/hockey/womens-college-hockey/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnWchAthleteNotes` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnWchAthleteOverview` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnWchAthleteRecords` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnWchAthleteSeasons` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnWchAthleteSplits` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnWchAthleteStatisticslog` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnWchAthleteStats` | `web_v3` `/hockey/womens-college-hockey/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnWchAthleteVsAthlete` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnWchAthletesIndex` | `core_v2` `/hockey/leagues/womens-college-hockey/athletes` | — | `active`, `limit`, `page` |
+| `espnWchAward` | `core_v2` `/hockey/leagues/womens-college-hockey/awards/{award_id}` | `award_id`\* | — |
+| `espnWchAwards` | `core_v2` `/hockey/leagues/womens-college-hockey/awards` | — | — |
+| `espnWchCalendar` | `site_v2` `/hockey/womens-college-hockey/calendar` | — | — |
+| `espnWchCoach` | `core_v2` `/hockey/leagues/womens-college-hockey/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnWchCoachRecord` | `core_v2` `/hockey/leagues/womens-college-hockey/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnWchCoachSeason` | `core_v2` `/hockey/leagues/womens-college-hockey/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnWchConferences` | `site_v2` `/hockey/womens-college-hockey/groups` | — | — |
+| `espnWchDraft` | `site_v2` `/hockey/womens-college-hockey/draft` | — | — |
+| `espnWchEvent` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}` | `event_id`\* | — |
+| `espnWchEventBroadcasts` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnWchEventCompetition` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnWchEventCompetitor` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWchEventCompetitorLeaders` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWchEventCompetitorLinescores` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWchEventCompetitorRecord` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWchEventCompetitorRoster` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWchEventCompetitorStatistics` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnWchEventCompetitors` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnWchEventLeaders` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnWchEventOdds` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnWchEventOfficialDetail` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnWchEventOfficials` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnWchEventPlay` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnWchEventPlayPersonnel` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnWchEventPlays` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnWchEventPowerindex` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnWchEventPredictor` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnWchEventProbabilities` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnWchEventPropbets` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnWchEventScoringplays` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnWchEventSituation` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnWchEventStatus` | `core_v2` `/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnWchEvents` | `core_v2` `/hockey/leagues/womens-college-hockey/events` | — | `dates`, `limit` |
+| `espnWchFranchise` | `core_v2` `/hockey/leagues/womens-college-hockey/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnWchFranchises` | `core_v2` `/hockey/leagues/womens-college-hockey/franchises` | — | `limit` |
+| `espnWchInjuries` | `site_v2` `/hockey/womens-college-hockey/injuries` | — | — |
+| `espnWchLeaders` | `web_v3` `/hockey/womens-college-hockey/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnWchLeadersCore` | `core_v2` `/hockey/leagues/womens-college-hockey/leaders` | — | — |
+| `espnWchLeagueNotes` | `core_v2` `/hockey/leagues/womens-college-hockey/notes` | — | — |
+| `espnWchLeagueRoot` | `core_v2` `/hockey/leagues/womens-college-hockey` | — | — |
+| `espnWchNews` | `site_v2` `/hockey/womens-college-hockey/news` | — | `limit` |
+| `espnWchPosition` | `core_v2` `/hockey/leagues/womens-college-hockey/positions/{position_id}` | `position_id`\* | — |
+| `espnWchPositions` | `core_v2` `/hockey/leagues/womens-college-hockey/positions` | — | — |
+| `espnWchScoreboard` | `site_v2` `/hockey/womens-college-hockey/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnWchSeasonAthletes` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnWchSeasonAwards` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/awards` | `season`\* | — |
+| `espnWchSeasonCoaches` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnWchSeasonDraft` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/draft` | `season`\* | — |
+| `espnWchSeasonDraftRoundPicks` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnWchSeasonFreeagents` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/freeagents` | `season`\* | — |
+| `espnWchSeasonFutures` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/futures` | `season`\* | — |
+| `espnWchSeasonGroup` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnWchSeasonGroupChildren` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnWchSeasonGroupTeams` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnWchSeasonGroups` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnWchSeasonInfo` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}` | `season`\* | — |
+| `espnWchSeasonPointer` | `core_v2` `/hockey/leagues/womens-college-hockey/season` | — | — |
+| `espnWchSeasonPowerindex` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnWchSeasonPowerindexLeaders` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnWchSeasonTeam` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnWchSeasonTeams` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnWchSeasonType` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnWchSeasonTypeCorrections` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnWchSeasonTypeLeaders` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnWchSeasonTypes` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types` | `season`\* | — |
+| `espnWchSeasonWeek` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnWchSeasonWeekEvents` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnWchSeasonWeeks` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnWchSeasons` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons` | — | `limit` |
+| `espnWchStandings` | `site_v2_alt` `/hockey/womens-college-hockey/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnWchStandingsCore` | `core_v2` `/hockey/leagues/womens-college-hockey/standings` | — | — |
+| `espnWchStatisticsLeague` | `site_v2` `/hockey/womens-college-hockey/statistics` | — | — |
+| `espnWchSummary` | `site_v2` `/hockey/womens-college-hockey/summary` | — | `event_id` → `event` |
+| `espnWchTalentpicks` | `core_v2` `/hockey/leagues/womens-college-hockey/talentpicks` | — | — |
+| `espnWchTeam` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}` | `team_id`\* | — |
+| `espnWchTeamCore` | `core_v2` `/hockey/leagues/womens-college-hockey/teams/{team_id}` | `team_id`\* | — |
+| `espnWchTeamDepthcharts` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnWchTeamHistory` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/history` | `team_id`\* | — |
+| `espnWchTeamInjuries` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnWchTeamLeaders` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnWchTeamNews` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnWchTeamRecord` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/record` | `team_id`\* | — |
+| `espnWchTeamRoster` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnWchTeamSchedule` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnWchTeamTransactions` | `site_v2` `/hockey/womens-college-hockey/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnWchTeamsCore` | `core_v2` `/hockey/leagues/womens-college-hockey/teams` | — | `limit` |
+| `espnWchTeamsSite` | `site_v2` `/hockey/womens-college-hockey/teams` | — | `limit` |
+| `espnWchTournaments` | `core_v2` `/hockey/leagues/womens-college-hockey/tournaments` | — | — |
+| `espnWchTransactions` | `site_v2` `/hockey/womens-college-hockey/transactions` | — | — |
+| `espnWchVenue` | `core_v2` `/hockey/leagues/womens-college-hockey/venues/{venue_id}` | `venue_id`\* | — |
+| `espnWchVenues` | `core_v2` `/hockey/leagues/womens-college-hockey/venues` | — | `limit` |
 
 ## NCAA endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_wch_rankings` | `site_v2` `/hockey/womens-college-hockey/rankings` | — | — |
-| `espn_wch_season_recruits` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/recruits` | `season`\* | `limit` |
-| `espn_wch_season_week_rankings` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnWchRankings` | `site_v2` `/hockey/womens-college-hockey/rankings` | — | — |
+| `espnWchSeasonRecruits` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/recruits` | `season`\* | `limit` |
+| `espnWchSeasonWeekRankings` | `core_v2` `/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |

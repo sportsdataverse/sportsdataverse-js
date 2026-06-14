@@ -14,125 +14,125 @@ sidebar_position: 8
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.nhl.espn_nhl_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.nhl.espnNhl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_nhl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.nhl.espn_nhl_scoreboard({});
+await sdv.nhl.espnNhlScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_nhl_athlete_awards` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_nhl_athlete_bio` | `site_v2` `/hockey/nhl/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_nhl_athlete_career_stats` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_nhl_athlete_contracts` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_nhl_athlete_core` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_nhl_athlete_eventlog` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_nhl_athlete_gamelog` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_nhl_athlete_info` | `site_v2` `/hockey/nhl/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_nhl_athlete_injuries` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_nhl_athlete_news` | `site_v2` `/hockey/nhl/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_nhl_athlete_notes` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_nhl_athlete_overview` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_nhl_athlete_records` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_nhl_athlete_seasons` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_nhl_athlete_splits` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_nhl_athlete_statisticslog` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_nhl_athlete_stats` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_nhl_athlete_vs_athlete` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_nhl_athletes_index` | `core_v2` `/hockey/leagues/nhl/athletes` | — | `active`, `limit`, `page` |
-| `espn_nhl_award` | `core_v2` `/hockey/leagues/nhl/awards/{award_id}` | `award_id`\* | — |
-| `espn_nhl_awards` | `core_v2` `/hockey/leagues/nhl/awards` | — | — |
-| `espn_nhl_calendar` | `site_v2` `/hockey/nhl/calendar` | — | — |
-| `espn_nhl_coach` | `core_v2` `/hockey/leagues/nhl/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_nhl_coach_record` | `core_v2` `/hockey/leagues/nhl/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_nhl_coach_season` | `core_v2` `/hockey/leagues/nhl/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_nhl_conferences` | `site_v2` `/hockey/nhl/groups` | — | — |
-| `espn_nhl_draft` | `site_v2` `/hockey/nhl/draft` | — | — |
-| `espn_nhl_event` | `core_v2` `/hockey/leagues/nhl/events/{event_id}` | `event_id`\* | — |
-| `espn_nhl_event_broadcasts` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_competition` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_competitor` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nhl_event_competitor_leaders` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nhl_event_competitor_linescores` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nhl_event_competitor_record` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nhl_event_competitor_roster` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nhl_event_competitor_statistics` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nhl_event_competitors` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_leaders` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_odds` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_official_detail` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_nhl_event_officials` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_play` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_nhl_event_play_personnel` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_nhl_event_plays` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_nhl_event_powerindex` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_predictor` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_probabilities` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_nhl_event_propbets` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_scoringplays` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_situation` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_nhl_event_status` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_nhl_events` | `core_v2` `/hockey/leagues/nhl/events` | — | `dates`, `limit` |
-| `espn_nhl_franchise` | `core_v2` `/hockey/leagues/nhl/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_nhl_franchises` | `core_v2` `/hockey/leagues/nhl/franchises` | — | `limit` |
-| `espn_nhl_injuries` | `site_v2` `/hockey/nhl/injuries` | — | — |
-| `espn_nhl_leaders` | `web_v3` `/hockey/nhl/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_nhl_leaders_core` | `core_v2` `/hockey/leagues/nhl/leaders` | — | — |
-| `espn_nhl_league_notes` | `core_v2` `/hockey/leagues/nhl/notes` | — | — |
-| `espn_nhl_league_root` | `core_v2` `/hockey/leagues/nhl` | — | — |
-| `espn_nhl_news` | `site_v2` `/hockey/nhl/news` | — | `limit` |
-| `espn_nhl_position` | `core_v2` `/hockey/leagues/nhl/positions/{position_id}` | `position_id`\* | — |
-| `espn_nhl_positions` | `core_v2` `/hockey/leagues/nhl/positions` | — | — |
-| `espn_nhl_scoreboard` | `site_v2` `/hockey/nhl/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_nhl_season_athletes` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_nhl_season_awards` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/awards` | `season`\* | — |
-| `espn_nhl_season_coaches` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_nhl_season_draft` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/draft` | `season`\* | — |
-| `espn_nhl_season_draft_round_picks` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_nhl_season_freeagents` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_nhl_season_futures` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/futures` | `season`\* | — |
-| `espn_nhl_season_group` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_nhl_season_group_children` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_nhl_season_group_teams` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_nhl_season_groups` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_nhl_season_info` | `core_v2` `/hockey/leagues/nhl/seasons/{season}` | `season`\* | — |
-| `espn_nhl_season_pointer` | `core_v2` `/hockey/leagues/nhl/season` | — | — |
-| `espn_nhl_season_powerindex` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_nhl_season_powerindex_leaders` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_nhl_season_team` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_nhl_season_teams` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_nhl_season_type` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_nhl_season_type_corrections` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_nhl_season_type_leaders` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_nhl_season_types` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types` | `season`\* | — |
-| `espn_nhl_season_week` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_nhl_season_week_events` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_nhl_season_weeks` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_nhl_seasons` | `core_v2` `/hockey/leagues/nhl/seasons` | — | `limit` |
-| `espn_nhl_standings` | `site_v2_alt` `/hockey/nhl/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_nhl_standings_core` | `core_v2` `/hockey/leagues/nhl/standings` | — | — |
-| `espn_nhl_statistics_league` | `site_v2` `/hockey/nhl/statistics` | — | — |
-| `espn_nhl_summary` | `site_v2` `/hockey/nhl/summary` | — | `event_id` → `event` |
-| `espn_nhl_talentpicks` | `core_v2` `/hockey/leagues/nhl/talentpicks` | — | — |
-| `espn_nhl_team` | `site_v2` `/hockey/nhl/teams/{team_id}` | `team_id`\* | — |
-| `espn_nhl_team_core` | `core_v2` `/hockey/leagues/nhl/teams/{team_id}` | `team_id`\* | — |
-| `espn_nhl_team_depthcharts` | `site_v2` `/hockey/nhl/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_nhl_team_history` | `site_v2` `/hockey/nhl/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_nhl_team_injuries` | `site_v2` `/hockey/nhl/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_nhl_team_leaders` | `site_v2` `/hockey/nhl/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_nhl_team_news` | `site_v2` `/hockey/nhl/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_nhl_team_record` | `site_v2` `/hockey/nhl/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_nhl_team_roster` | `site_v2` `/hockey/nhl/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_nhl_team_schedule` | `site_v2` `/hockey/nhl/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_nhl_team_transactions` | `site_v2` `/hockey/nhl/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_nhl_teams_core` | `core_v2` `/hockey/leagues/nhl/teams` | — | `limit` |
-| `espn_nhl_teams_site` | `site_v2` `/hockey/nhl/teams` | — | `limit` |
-| `espn_nhl_tournaments` | `core_v2` `/hockey/leagues/nhl/tournaments` | — | — |
-| `espn_nhl_transactions` | `site_v2` `/hockey/nhl/transactions` | — | — |
-| `espn_nhl_venue` | `core_v2` `/hockey/leagues/nhl/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_nhl_venues` | `core_v2` `/hockey/leagues/nhl/venues` | — | `limit` |
+| `espnNhlAthleteAwards` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnNhlAthleteBio` | `site_v2` `/hockey/nhl/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnNhlAthleteCareerStats` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnNhlAthleteContracts` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnNhlAthleteCore` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnNhlAthleteEventlog` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnNhlAthleteGamelog` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnNhlAthleteInfo` | `site_v2` `/hockey/nhl/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnNhlAthleteInjuries` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnNhlAthleteNews` | `site_v2` `/hockey/nhl/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnNhlAthleteNotes` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnNhlAthleteOverview` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnNhlAthleteRecords` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnNhlAthleteSeasons` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnNhlAthleteSplits` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnNhlAthleteStatisticslog` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnNhlAthleteStats` | `web_v3` `/hockey/nhl/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnNhlAthleteVsAthlete` | `core_v2` `/hockey/leagues/nhl/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnNhlAthletesIndex` | `core_v2` `/hockey/leagues/nhl/athletes` | — | `active`, `limit`, `page` |
+| `espnNhlAward` | `core_v2` `/hockey/leagues/nhl/awards/{award_id}` | `award_id`\* | — |
+| `espnNhlAwards` | `core_v2` `/hockey/leagues/nhl/awards` | — | — |
+| `espnNhlCalendar` | `site_v2` `/hockey/nhl/calendar` | — | — |
+| `espnNhlCoach` | `core_v2` `/hockey/leagues/nhl/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnNhlCoachRecord` | `core_v2` `/hockey/leagues/nhl/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnNhlCoachSeason` | `core_v2` `/hockey/leagues/nhl/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnNhlConferences` | `site_v2` `/hockey/nhl/groups` | — | — |
+| `espnNhlDraft` | `site_v2` `/hockey/nhl/draft` | — | — |
+| `espnNhlEvent` | `core_v2` `/hockey/leagues/nhl/events/{event_id}` | `event_id`\* | — |
+| `espnNhlEventBroadcasts` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnNhlEventCompetition` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnNhlEventCompetitor` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNhlEventCompetitorLeaders` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNhlEventCompetitorLinescores` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNhlEventCompetitorRecord` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNhlEventCompetitorRoster` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNhlEventCompetitorStatistics` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNhlEventCompetitors` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnNhlEventLeaders` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnNhlEventOdds` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnNhlEventOfficialDetail` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnNhlEventOfficials` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnNhlEventPlay` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnNhlEventPlayPersonnel` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnNhlEventPlays` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnNhlEventPowerindex` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnNhlEventPredictor` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnNhlEventProbabilities` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnNhlEventPropbets` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnNhlEventScoringplays` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnNhlEventSituation` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnNhlEventStatus` | `core_v2` `/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnNhlEvents` | `core_v2` `/hockey/leagues/nhl/events` | — | `dates`, `limit` |
+| `espnNhlFranchise` | `core_v2` `/hockey/leagues/nhl/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnNhlFranchises` | `core_v2` `/hockey/leagues/nhl/franchises` | — | `limit` |
+| `espnNhlInjuries` | `site_v2` `/hockey/nhl/injuries` | — | — |
+| `espnNhlLeaders` | `web_v3` `/hockey/nhl/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnNhlLeadersCore` | `core_v2` `/hockey/leagues/nhl/leaders` | — | — |
+| `espnNhlLeagueNotes` | `core_v2` `/hockey/leagues/nhl/notes` | — | — |
+| `espnNhlLeagueRoot` | `core_v2` `/hockey/leagues/nhl` | — | — |
+| `espnNhlNews` | `site_v2` `/hockey/nhl/news` | — | `limit` |
+| `espnNhlPosition` | `core_v2` `/hockey/leagues/nhl/positions/{position_id}` | `position_id`\* | — |
+| `espnNhlPositions` | `core_v2` `/hockey/leagues/nhl/positions` | — | — |
+| `espnNhlScoreboard` | `site_v2` `/hockey/nhl/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnNhlSeasonAthletes` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnNhlSeasonAwards` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/awards` | `season`\* | — |
+| `espnNhlSeasonCoaches` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnNhlSeasonDraft` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/draft` | `season`\* | — |
+| `espnNhlSeasonDraftRoundPicks` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnNhlSeasonFreeagents` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/freeagents` | `season`\* | — |
+| `espnNhlSeasonFutures` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/futures` | `season`\* | — |
+| `espnNhlSeasonGroup` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnNhlSeasonGroupChildren` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnNhlSeasonGroupTeams` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnNhlSeasonGroups` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnNhlSeasonInfo` | `core_v2` `/hockey/leagues/nhl/seasons/{season}` | `season`\* | — |
+| `espnNhlSeasonPointer` | `core_v2` `/hockey/leagues/nhl/season` | — | — |
+| `espnNhlSeasonPowerindex` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnNhlSeasonPowerindexLeaders` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnNhlSeasonTeam` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnNhlSeasonTeams` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnNhlSeasonType` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnNhlSeasonTypeCorrections` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnNhlSeasonTypeLeaders` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnNhlSeasonTypes` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types` | `season`\* | — |
+| `espnNhlSeasonWeek` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnNhlSeasonWeekEvents` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnNhlSeasonWeeks` | `core_v2` `/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnNhlSeasons` | `core_v2` `/hockey/leagues/nhl/seasons` | — | `limit` |
+| `espnNhlStandings` | `site_v2_alt` `/hockey/nhl/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnNhlStandingsCore` | `core_v2` `/hockey/leagues/nhl/standings` | — | — |
+| `espnNhlStatisticsLeague` | `site_v2` `/hockey/nhl/statistics` | — | — |
+| `espnNhlSummary` | `site_v2` `/hockey/nhl/summary` | — | `event_id` → `event` |
+| `espnNhlTalentpicks` | `core_v2` `/hockey/leagues/nhl/talentpicks` | — | — |
+| `espnNhlTeam` | `site_v2` `/hockey/nhl/teams/{team_id}` | `team_id`\* | — |
+| `espnNhlTeamCore` | `core_v2` `/hockey/leagues/nhl/teams/{team_id}` | `team_id`\* | — |
+| `espnNhlTeamDepthcharts` | `site_v2` `/hockey/nhl/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnNhlTeamHistory` | `site_v2` `/hockey/nhl/teams/{team_id}/history` | `team_id`\* | — |
+| `espnNhlTeamInjuries` | `site_v2` `/hockey/nhl/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnNhlTeamLeaders` | `site_v2` `/hockey/nhl/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnNhlTeamNews` | `site_v2` `/hockey/nhl/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnNhlTeamRecord` | `site_v2` `/hockey/nhl/teams/{team_id}/record` | `team_id`\* | — |
+| `espnNhlTeamRoster` | `site_v2` `/hockey/nhl/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnNhlTeamSchedule` | `site_v2` `/hockey/nhl/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnNhlTeamTransactions` | `site_v2` `/hockey/nhl/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnNhlTeamsCore` | `core_v2` `/hockey/leagues/nhl/teams` | — | `limit` |
+| `espnNhlTeamsSite` | `site_v2` `/hockey/nhl/teams` | — | `limit` |
+| `espnNhlTournaments` | `core_v2` `/hockey/leagues/nhl/tournaments` | — | — |
+| `espnNhlTransactions` | `site_v2` `/hockey/nhl/transactions` | — | — |
+| `espnNhlVenue` | `core_v2` `/hockey/leagues/nhl/venues/{venue_id}` | `venue_id`\* | — |
+| `espnNhlVenues` | `core_v2` `/hockey/leagues/nhl/venues` | — | `limit` |

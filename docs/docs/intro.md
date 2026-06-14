@@ -41,38 +41,40 @@ import sdv from 'sportsdataverse';
 ## Quick start
 
 Every league is a namespace on the default export. The cross-league ESPN
-endpoints follow one naming rule — **`espn_<league>_<endpoint>`**:
+endpoints follow one naming rule — **`espn<League><Endpoint>`** (camelCase). Every
+method also has a snake_case alias (`espn_nba_scoreboard`) for parity with the
+Python / R packages:
 
 ```js
 import sdv from 'sportsdataverse';
 
 // Today's NBA scoreboard
-const board = await sdv.nba.espn_nba_scoreboard({});
+const board = await sdv.nba.espnNbaScoreboard({});
 
 // A single game summary (box score + plays + win probability + ...)
-const game = await sdv.nba.espn_nba_summary({ event_id: 401584793 });
+const game = await sdv.nba.espnNbaSummary({ event_id: 401584793 });
 
 // A team's roster
-const roster = await sdv.nfl.espn_nfl_team_roster({ team_id: 12 });
+const roster = await sdv.nfl.espnNflTeamRoster({ team_id: 12 });
 ```
 
 The same methods exist on **every** league, so switching sports is a one-token
 change:
 
 ```js
-await sdv.nfl.espn_nfl_scoreboard({ week: 1, season_type: 2 });
-await sdv.nhl.espn_nhl_scoreboard({});
-await sdv.cfb.espn_cfb_rankings({});          // NCAA-scoped endpoint
-await sdv.wnba.espn_wnba_standings({ season: 2024 });
+await sdv.nfl.espnNflScoreboard({ week: 1, season_type: 2 });
+await sdv.nhl.espnNhlScoreboard({});
+await sdv.cfb.espnCfbRankings({});          // NCAA-scoped endpoint
+await sdv.wnba.espnWnbaStandings({ season: 2024 });
 ```
 
 Multi-league sports (soccer, cricket) take an extra `league` slug:
 
 ```js
 // English Premier League scoreboard
-await sdv.soccer.espn_soccer_scoreboard({ league: 'eng.1' });
+await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });
 // La Liga, same call
-await sdv.soccer.espn_soccer_scoreboard({ league: 'esp.1' });
+await sdv.soccer.espnSoccerScoreboard({ league: 'esp.1' });
 ```
 
 ### Parameters: snake_case **or** camelCase
@@ -81,8 +83,8 @@ Every wrapper accepts either spelling, so it reads naturally from JS or matches
 the Python/R sister packages:
 
 ```js
-await sdv.nfl.espn_nfl_team_schedule({ team_id: 12, season: 2024 });
-await sdv.nfl.espn_nfl_team_schedule({ teamId: 12, season: 2024 });  // identical
+await sdv.nfl.espnNflTeamSchedule({ team_id: 12, season: 2024 });
+await sdv.nfl.espnNflTeamSchedule({ teamId: 12, season: 2024 });  // identical
 ```
 
 ### Legacy methods still work
@@ -116,13 +118,13 @@ import sdv, { LEAGUES, WRAPPERS } from 'sportsdataverse';
 
 LEAGUES.map((l) => l.prefix);            // ['nba','nfl','nhl',...,'soccer','cricket','ufl',...]
 WRAPPERS.length;                          // 116 endpoint definitions
-Object.keys(sdv.nba).filter((k) => k.startsWith('espn_nba_'));  // every NBA wrapper
+Object.keys(sdv.nba).filter((k) => k.startsWith('espnNba'));  // every NBA wrapper
 ```
 
 ## Where to next
 
 - **[Tutorials](./tutorials/quickstart)** — guided, copy-pasteable walkthroughs.
-- **[Reference](./reference/)** — every `espn_<league>_<endpoint>` wrapper, by league.
+- **[Reference](./reference/)** — every `espn<League><Endpoint>` wrapper, by league.
 - **[Playground](/playground)** — run live ESPN calls in your browser.
 - **[API (TypeDoc)](./api/)** — the full typed module surface.
 
