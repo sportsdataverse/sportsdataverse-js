@@ -1,0 +1,168 @@
+.playground {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: var(--ifm-background-surface-color);
+  margin: 1.5rem 0;
+}
+
+.controls,
+.params {
+  display: grid;
+  gap: 0.9rem 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.params {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--ifm-color-emphasis-200);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.req {
+  color: var(--ifm-color-danger);
+  font-weight: 700;
+}
+
+.kind {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ifm-color-emphasis-500);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  padding: 0 0.35rem;
+}
+
+.select,
+.input {
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.select:focus,
+.input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+.codeBlock {
+  margin-top: 1.1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+  overflow-x: auto;
+}
+
+.codeBlock code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  white-space: pre;
+}
+
+.requestRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.requestLabel {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: var(--ifm-color-success);
+  border-radius: 5px;
+  padding: 0.15rem 0.45rem;
+}
+
+.requestUrl,
+.requestErr {
+  flex: 1 1 320px;
+  min-width: 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  word-break: break-all;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.requestErr {
+  color: var(--ifm-color-danger);
+}
+
+.runBtn {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.output {
+  margin-top: 1.1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.errorBox {
+  padding: 0.75rem 0.9rem;
+  color: var(--ifm-color-danger-darker);
+  background: var(--ifm-color-danger-contrast-background);
+  border-color: var(--ifm-color-danger-dark);
+  font-size: 0.85rem;
+}
+
+.outputHead {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  background: var(--ifm-color-emphasis-100);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.statusPill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ifm-color-primary);
+  border-radius: 5px;
+  padding: 0.1rem 0.45rem;
+}
+
+.bytes {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.json {
+  margin: 0;
+  max-height: 460px;
+  overflow: auto;
+  font-size: 0.78rem;
+  border-radius: 0;
+}
