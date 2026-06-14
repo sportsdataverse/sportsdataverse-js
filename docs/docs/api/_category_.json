@@ -1,0 +1,10 @@
+{
+  "label": "API Reference",
+  "position": 4,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "api/index"
+  }
+}
