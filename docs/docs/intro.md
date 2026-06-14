@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # sportsdataverse-js
 
-<a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/main/docs/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
+<a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/main/docs/static/img/sdv-js-logo.png' alt="sportsdataverse-js logo" align="right" width="20%" min-width="100px"/></a>
 
 [![npm](https://img.shields.io/npm/v/sportsdataverse?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/sportsdataverse)
 [![npm downloads](https://img.shields.io/npm/dm/sportsdataverse?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/sportsdataverse)

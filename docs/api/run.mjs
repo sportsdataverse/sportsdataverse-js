@@ -19,12 +19,20 @@ const LEAGUE = Object.fromEntries(endpoints.leagues.map((l) => [l.prefix, l]));
 const ENDPOINT = Object.fromEntries(endpoints.endpoints.map((e) => [e.short, e]));
 
 export default async function handler(req, res) {
-  const body =
-    req.method === 'POST'
-      ? typeof req.body === 'string'
-        ? JSON.parse(req.body || '{}')
-        : req.body || {}
-      : req.query || {};
+  // POST-only: this triggers an upstream fetch, so don't expose it over GET.
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    res.status(405).json({ error: 'Method not allowed — use POST.' });
+    return;
+  }
+
+  let body;
+  try {
+    body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
+  } catch {
+    res.status(400).json({ error: 'Invalid JSON body.' });
+    return;
+  }
 
   const prefix = body.league;
   const short = body.endpoint;
@@ -58,9 +66,13 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Bound the upstream call so a hung ESPN request can't hang the function.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12000);
   try {
     const espn = await fetch(target.toString(), {
       headers: { 'User-Agent': 'sportsdataverse-js docs playground' },
+      signal: controller.signal,
     });
     const text = await espn.text();
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -70,6 +82,15 @@ export default async function handler(req, res) {
     }
     res.status(espn.status).send(text);
   } catch (err) {
-    res.status(502).json({ error: `Upstream fetch failed: ${String((err && err.message) || err)}` });
+    const timedOut = err && err.name === 'AbortError';
+    res
+      .status(timedOut ? 504 : 502)
+      .json({
+        error: timedOut
+          ? 'Upstream request timed out.'
+          : `Upstream fetch failed: ${String((err && err.message) || err)}`,
+      });
+  } finally {
+    clearTimeout(timer);
   }
 }

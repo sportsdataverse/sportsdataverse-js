@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: build + typecheck (node ${{ matrix.node-version }})
@@ -39,7 +42,11 @@ jobs:
         with:
           node-version: 20.x
           cache: npm
-          cache-dependency-path: docs/package-lock.json
+          # Both installs run in this job (root for TypeDoc's src resolution, docs
+          # for Docusaurus), so key the cache on both lockfiles.
+          cache-dependency-path: |
+            package-lock.json
+            docs/package-lock.json
       # Root deps so docusaurus-plugin-typedoc can resolve the package's src imports.
       - run: npm ci
       - run: npm ci

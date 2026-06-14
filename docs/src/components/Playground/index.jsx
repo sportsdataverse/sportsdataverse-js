@@ -19,7 +19,8 @@ function fieldsFor(league, def) {
   if (!def) return [];
   const fields = [];
   if (league.leagueParam) {
-    fields.push({ name: 'league', kind: 'league', required: true, def: league.league });
+    // Optional: clearing it falls back to the league's default slug.
+    fields.push({ name: 'league', kind: 'league', required: false, def: league.league });
   }
   for (const p of def.pathParams || []) {
     fields.push({ name: p.name, kind: 'path', required: p.required !== false, def: p.default });
