@@ -32,6 +32,11 @@ jobs:
       - name: Verify the build output exists
         run: |
           node -e "import('./dist/index.js').then(m => { const s = Object.keys(m.default); if (s.length < 29 || !s.includes('nba') || !s.includes('soccer')) { throw new Error('unexpected namespaces ' + s.length); } console.log('OK', s.length, 'namespaces'); })"
+      # No-network suite: contract tests for every generated wrapper + core +
+      # legacy surface + playground resolver/proxy. Live-API suites are gated
+      # behind SDV_LIVE (not set here), so this stays deterministic.
+      - name: Test
+        run: npm test
 
   docs:
     name: docs build (Docusaurus + TypeDoc)

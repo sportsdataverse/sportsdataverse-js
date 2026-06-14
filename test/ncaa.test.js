@@ -1,7 +1,8 @@
+import { live } from "./helpers/live.mjs";
 import should from 'should';
 import app from '../dist/index.js';
 
-describe('NCAA Games', () => {
+live('NCAA Games', () => {
 
     var game = 5764053;
     it('should return a promise for ncaa game information for a given game', async () => {
@@ -27,7 +28,7 @@ describe('NCAA Games', () => {
     });
 });
 
-describe('NCAA Scoreboard', () => {
+live('NCAA Scoreboard', () => {
 
     it('should return a promise for ncaa scoreboard data for a given date', async () => {
         const data = await app.ncaa.getScoreboard({

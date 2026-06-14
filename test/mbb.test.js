@@ -1,7 +1,8 @@
+import { live } from "./helpers/live.mjs";
 import should from 'should';
 import app from '../dist/index.js';
 
-describe('MBB Games', () => {
+live('MBB Games', () => {
     var gameId = 401260281;
 
     it('should populate play by play data for the given game id', async () => {
@@ -55,7 +56,7 @@ describe('MBB Games', () => {
     });
 });
 
-describe('MBB Scoreboard', () => {
+live('MBB Scoreboard', () => {
 
     it('should populate scoreboard data for the current week and year', async () => {
         const data = await app.mbb.getScoreboard({})
@@ -98,7 +99,7 @@ describe('MBB Scoreboard', () => {
     });
 });
 
-describe('MBB Standings', () => {
+live('MBB Standings', () => {
 
     it('should populate standings for the given year', async () => {
         const data = await app.mbb.getStandings({
@@ -120,7 +121,7 @@ describe('MBB Standings', () => {
 
     });
 });
-describe('MBB Teams', () => {
+live('MBB Teams', () => {
 
     it('should populate a teams list', async () => {
         const data = await app.mbb.getTeamList({})
@@ -146,7 +147,7 @@ describe('MBB Teams', () => {
 
     });
 });
-describe('MBB Recruiting', () => {
+live('MBB Recruiting', () => {
 
     it('should return a promise for a list of individual rankings for the given year', async () => {
         const data = await app.mbb.getPlayerRankings({
