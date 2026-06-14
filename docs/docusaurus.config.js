@@ -7,10 +7,12 @@ module.exports = {
   tagline: "The SportsDataverse's Node.js Package for Sports Data.",
   url: 'https://js.sportsdataverse.org',
   baseUrl: '/',
-  // NOTE: relaxed to 'warn' while the generated reference / TypeDoc / playground
-  // pages are still being scaffolded; restored to 'throw' before release.
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   favicon: 'img/favicon.ico',
   organizationName: 'SportsDataverse', // Usually your GitHub org/user name.
   projectName: 'sportsdataverse', // Usually your repo name.

@@ -1,0 +1,11 @@
+{
+  "label": "Tutorials",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Tutorials",
+    "description": "Guided, copy-pasteable walkthroughs for sportsdataverse-js — from your first call to a real analysis."
+  }
+}
