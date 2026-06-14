@@ -1,7 +1,8 @@
+import { live } from "./helpers/live.mjs";
 import should from 'should';
 import app from '../dist/index.js';
 
-describe('NBA Games', () => {
+live('NBA Games', () => {
 
     var gameId = 401283399;
 
@@ -56,7 +57,7 @@ describe('NBA Games', () => {
     });
 });
 
-describe('NBA Scoreboard', () => {
+live('NBA Scoreboard', () => {
 
     it('should populate scoreboard data for the current week and year', async () => {
         const data = await app.nba.getScoreboard({})
@@ -99,7 +100,7 @@ describe('NBA Scoreboard', () => {
     });
 });
 
-describe('NBA Standings', () => {
+live('NBA Standings', () => {
 
     it('should populate standings for the given year', async () => {
         const data = await app.nba.getStandings({
@@ -122,7 +123,7 @@ describe('NBA Standings', () => {
     });
 });
 
-describe('NBA Teams', () => {
+live('NBA Teams', () => {
 
     it('should populate a teams list', async () => {
         const data = await app.nba.getTeamList({})

@@ -1,7 +1,8 @@
+import { live } from "./helpers/live.mjs";
 import should from 'should';
 import app from '../dist/index.js';
 
-describe('CFB Games', () => {
+live('CFB Games', () => {
     var gameId = 401256194;
 
     it('should populate play by play data for the given game id', async () => {
@@ -55,7 +56,7 @@ describe('CFB Games', () => {
     });
 });
 
-describe('CFB Rankings', () => {
+live('CFB Rankings', () => {
     it('should populate rankings for the current week and year', async () => {
         const data = await app.cfb.getRankings({})
         should(data).exist;
@@ -95,7 +96,7 @@ describe('CFB Rankings', () => {
     });
 });
 
-describe('CFB Scoreboard', () => {
+live('CFB Scoreboard', () => {
 
     it('should populate scoreboard data for the current week and year', async () => {
         const data = await app.cfb.getScoreboard({})
@@ -139,7 +140,7 @@ describe('CFB Scoreboard', () => {
     });
 });
 
-describe('CFB Standings', () => {
+live('CFB Standings', () => {
 
     it('should populate standings for the given year', async () => {
         const data = await app.cfb.getStandings({
@@ -161,7 +162,7 @@ describe('CFB Standings', () => {
 
     });
 });
-describe('CFB Teams', () => {
+live('CFB Teams', () => {
 
     it('should populate a teams list', async () => {
         const data = await app.cfb.getTeamList({})
@@ -188,7 +189,7 @@ describe('CFB Teams', () => {
 
     });
 });
-describe('CFB Recruiting', () => {
+live('CFB Recruiting', () => {
 
     it('should return a promise for a list of individual rankings for the given year', async () => {
         const data = await app.cfb.getPlayerRankings({

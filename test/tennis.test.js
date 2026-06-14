@@ -1,8 +1,9 @@
+import { live } from "./helpers/live.mjs";
 import should from 'should';
 import app from '../dist/index.js';
 
 
-describe('TNNS Scoreboard', () => {
+live('TNNS Scoreboard', () => {
 
     it('should populate scoreboard data for the current week and year', async () => {
         const data = await app.tennis.getScoreboard({});
