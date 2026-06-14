@@ -6,6 +6,10 @@ import styles from './styles.module.css';
 
 const LEAGUES = [...endpoints.leagues].sort((a, b) => a.prefix.localeCompare(b.prefix));
 
+/** Canonical camelCase method name (espn_nba_scoreboard -> espnNbaScoreboard). */
+const methodName = (prefix, short) =>
+  `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+
 /** Endpoints applicable to a league = those whose scope is in the league's scopes. */
 function endpointsFor(league) {
   const scopes = new Set(league.scopes);
@@ -83,7 +87,7 @@ export default function Playground() {
       .filter(([, v]) => v !== '' && v != null)
       .map(([k, v]) => `${k}: ${/^\d+$/.test(v) ? v : `'${v}'`}`)
       .join(', ');
-    return `await sdv.${prefix}.espn_${prefix}_${short}({ ${args} });`;
+    return `await sdv.${prefix}.${methodName(prefix, short)}({ ${args} });`;
   }, [prefix, short, params]);
 
   async function run() {
@@ -134,7 +138,7 @@ export default function Playground() {
           <select value={short} onChange={(e) => setShort(e.target.value)} className={styles.select}>
             {applicable.map((e) => (
               <option key={e.short} value={e.short}>
-                espn_{prefix}_{e.short}
+                {methodName(prefix, e.short)}
               </option>
             ))}
           </select>

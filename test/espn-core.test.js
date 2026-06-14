@@ -14,26 +14,31 @@ describe('ESPN cross-league core (generated from YAML)', () => {
         sdv.should.have.properties(['epl', 'soccer', 'cricket', 'ufl', 'mch']);
     });
 
-    it('merges espn_<prefix>_* wrappers onto legacy namespaces without clobbering them', () => {
+    it('exposes each wrapper as camelCase canonical + snake_case alias (same fn) without clobbering legacy', () => {
         // legacy method preserved
         (typeof sdv.nba.getPlayByPlay).should.equal('function');
-        // generated wrappers added alongside it
+        // generated wrappers added alongside it — camelCase canonical name
+        (typeof sdv.nba.espnNbaScoreboard).should.equal('function');
+        (typeof sdv.nba.espnNbaSummary).should.equal('function');
+        // snake_case alias (py/R parity) exists and is the SAME function
         (typeof sdv.nba.espn_nba_scoreboard).should.equal('function');
-        (typeof sdv.nba.espn_nba_summary).should.equal('function');
-        Object.keys(sdv.nba).filter((k) => k.startsWith('espn_nba_')).length.should.be.above(50);
+        sdv.nba.espnNbaScoreboard.should.equal(sdv.nba.espn_nba_scoreboard);
+        Object.keys(sdv.nba).filter((k) => k.startsWith('espnNba')).length.should.be.above(50);
     });
 
     it('applies scope tables: ncaa/football wrappers only where scoped', () => {
         // cfb carries [universal, ncaa, football] -> more wrappers than universal-only nba
-        const cfbCount = Object.keys(sdv.cfb).filter((k) => k.startsWith('espn_cfb_')).length;
-        const nbaCount = Object.keys(sdv.nba).filter((k) => k.startsWith('espn_nba_')).length;
+        const cfbCount = Object.keys(sdv.cfb).filter((k) => k.startsWith('espnCfb')).length;
+        const nbaCount = Object.keys(sdv.nba).filter((k) => k.startsWith('espnNba')).length;
         cfbCount.should.be.above(nbaCount);
-        // ncaa-scope rankings on college, not on the pro league
+        // ncaa-scope rankings on college, not on the pro league (both name styles)
+        (typeof sdv.mbb.espnMbbRankings).should.equal('function');
         (typeof sdv.mbb.espn_mbb_rankings).should.equal('function');
+        (typeof sdv.nba.espnNbaRankings).should.equal('undefined');
         (typeof sdv.nba.espn_nba_rankings).should.equal('undefined');
     });
 
-    it('makeLeagueModule binds (sport, league) and prefixes every wrapper', () => {
+    it('makeLeagueModule binds (sport, league) and exposes both name styles', () => {
         const mod = makeLeagueModule({
             prefix: 'test',
             sport: 'basketball',
@@ -41,7 +46,10 @@ describe('ESPN cross-league core (generated from YAML)', () => {
             scopes: ['universal']
         });
         Object.keys(mod).length.should.be.above(0);
-        Object.keys(mod).every((k) => k.startsWith('espn_test_')).should.be.true();
+        // every key is an espn wrapper (camelCase canonical or snake_case alias)
+        Object.keys(mod).every((k) => k.startsWith('espn')).should.be.true();
+        (typeof mod.espnTestScoreboard).should.equal('function');
+        (typeof mod.espn_test_scoreboard).should.equal('function');
     });
 
     it('exposes the full generated wrapper table + families', () => {

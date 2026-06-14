@@ -14,125 +14,125 @@ sidebar_position: 14
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.xfl.espn_xfl_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.xfl.espnXfl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_xfl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.xfl.espn_xfl_scoreboard({});
+await sdv.xfl.espnXflScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_xfl_athlete_awards` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_xfl_athlete_bio` | `site_v2` `/football/xfl/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_xfl_athlete_career_stats` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_xfl_athlete_contracts` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_xfl_athlete_core` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_xfl_athlete_eventlog` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_xfl_athlete_gamelog` | `web_v3` `/football/xfl/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_xfl_athlete_info` | `site_v2` `/football/xfl/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_xfl_athlete_injuries` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_xfl_athlete_news` | `site_v2` `/football/xfl/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_xfl_athlete_notes` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_xfl_athlete_overview` | `web_v3` `/football/xfl/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_xfl_athlete_records` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_xfl_athlete_seasons` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_xfl_athlete_splits` | `web_v3` `/football/xfl/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_xfl_athlete_statisticslog` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_xfl_athlete_stats` | `web_v3` `/football/xfl/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_xfl_athlete_vs_athlete` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_xfl_athletes_index` | `core_v2` `/football/leagues/xfl/athletes` | — | `active`, `limit`, `page` |
-| `espn_xfl_award` | `core_v2` `/football/leagues/xfl/awards/{award_id}` | `award_id`\* | — |
-| `espn_xfl_awards` | `core_v2` `/football/leagues/xfl/awards` | — | — |
-| `espn_xfl_calendar` | `site_v2` `/football/xfl/calendar` | — | — |
-| `espn_xfl_coach` | `core_v2` `/football/leagues/xfl/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_xfl_coach_record` | `core_v2` `/football/leagues/xfl/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_xfl_coach_season` | `core_v2` `/football/leagues/xfl/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_xfl_conferences` | `site_v2` `/football/xfl/groups` | — | — |
-| `espn_xfl_draft` | `site_v2` `/football/xfl/draft` | — | — |
-| `espn_xfl_event` | `core_v2` `/football/leagues/xfl/events/{event_id}` | `event_id`\* | — |
-| `espn_xfl_event_broadcasts` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_competition` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_competitor` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_xfl_event_competitor_leaders` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_xfl_event_competitor_linescores` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_xfl_event_competitor_record` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_xfl_event_competitor_roster` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_xfl_event_competitor_statistics` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_xfl_event_competitors` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_leaders` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_odds` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_official_detail` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_xfl_event_officials` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_play` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_xfl_event_play_personnel` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_xfl_event_plays` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_xfl_event_powerindex` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_predictor` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_probabilities` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_xfl_event_propbets` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_scoringplays` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_situation` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_xfl_event_status` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_xfl_events` | `core_v2` `/football/leagues/xfl/events` | — | `dates`, `limit` |
-| `espn_xfl_franchise` | `core_v2` `/football/leagues/xfl/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_xfl_franchises` | `core_v2` `/football/leagues/xfl/franchises` | — | `limit` |
-| `espn_xfl_injuries` | `site_v2` `/football/xfl/injuries` | — | — |
-| `espn_xfl_leaders` | `web_v3` `/football/xfl/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_xfl_leaders_core` | `core_v2` `/football/leagues/xfl/leaders` | — | — |
-| `espn_xfl_league_notes` | `core_v2` `/football/leagues/xfl/notes` | — | — |
-| `espn_xfl_league_root` | `core_v2` `/football/leagues/xfl` | — | — |
-| `espn_xfl_news` | `site_v2` `/football/xfl/news` | — | `limit` |
-| `espn_xfl_position` | `core_v2` `/football/leagues/xfl/positions/{position_id}` | `position_id`\* | — |
-| `espn_xfl_positions` | `core_v2` `/football/leagues/xfl/positions` | — | — |
-| `espn_xfl_scoreboard` | `site_v2` `/football/xfl/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_xfl_season_athletes` | `core_v2` `/football/leagues/xfl/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_xfl_season_awards` | `core_v2` `/football/leagues/xfl/seasons/{season}/awards` | `season`\* | — |
-| `espn_xfl_season_coaches` | `core_v2` `/football/leagues/xfl/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_xfl_season_draft` | `core_v2` `/football/leagues/xfl/seasons/{season}/draft` | `season`\* | — |
-| `espn_xfl_season_draft_round_picks` | `core_v2` `/football/leagues/xfl/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_xfl_season_freeagents` | `core_v2` `/football/leagues/xfl/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_xfl_season_futures` | `core_v2` `/football/leagues/xfl/seasons/{season}/futures` | `season`\* | — |
-| `espn_xfl_season_group` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_xfl_season_group_children` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_xfl_season_group_teams` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_xfl_season_groups` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_xfl_season_info` | `core_v2` `/football/leagues/xfl/seasons/{season}` | `season`\* | — |
-| `espn_xfl_season_pointer` | `core_v2` `/football/leagues/xfl/season` | — | — |
-| `espn_xfl_season_powerindex` | `core_v2` `/football/leagues/xfl/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_xfl_season_powerindex_leaders` | `core_v2` `/football/leagues/xfl/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_xfl_season_team` | `core_v2` `/football/leagues/xfl/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_xfl_season_teams` | `core_v2` `/football/leagues/xfl/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_xfl_season_type` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_xfl_season_type_corrections` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_xfl_season_type_leaders` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_xfl_season_types` | `core_v2` `/football/leagues/xfl/seasons/{season}/types` | `season`\* | — |
-| `espn_xfl_season_week` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_xfl_season_week_events` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_xfl_season_weeks` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_xfl_seasons` | `core_v2` `/football/leagues/xfl/seasons` | — | `limit` |
-| `espn_xfl_standings` | `site_v2_alt` `/football/xfl/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_xfl_standings_core` | `core_v2` `/football/leagues/xfl/standings` | — | — |
-| `espn_xfl_statistics_league` | `site_v2` `/football/xfl/statistics` | — | — |
-| `espn_xfl_summary` | `site_v2` `/football/xfl/summary` | — | `event_id` → `event` |
-| `espn_xfl_talentpicks` | `core_v2` `/football/leagues/xfl/talentpicks` | — | — |
-| `espn_xfl_team` | `site_v2` `/football/xfl/teams/{team_id}` | `team_id`\* | — |
-| `espn_xfl_team_core` | `core_v2` `/football/leagues/xfl/teams/{team_id}` | `team_id`\* | — |
-| `espn_xfl_team_depthcharts` | `site_v2` `/football/xfl/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_xfl_team_history` | `site_v2` `/football/xfl/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_xfl_team_injuries` | `site_v2` `/football/xfl/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_xfl_team_leaders` | `site_v2` `/football/xfl/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_xfl_team_news` | `site_v2` `/football/xfl/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_xfl_team_record` | `site_v2` `/football/xfl/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_xfl_team_roster` | `site_v2` `/football/xfl/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_xfl_team_schedule` | `site_v2` `/football/xfl/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_xfl_team_transactions` | `site_v2` `/football/xfl/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_xfl_teams_core` | `core_v2` `/football/leagues/xfl/teams` | — | `limit` |
-| `espn_xfl_teams_site` | `site_v2` `/football/xfl/teams` | — | `limit` |
-| `espn_xfl_tournaments` | `core_v2` `/football/leagues/xfl/tournaments` | — | — |
-| `espn_xfl_transactions` | `site_v2` `/football/xfl/transactions` | — | — |
-| `espn_xfl_venue` | `core_v2` `/football/leagues/xfl/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_xfl_venues` | `core_v2` `/football/leagues/xfl/venues` | — | `limit` |
+| `espnXflAthleteAwards` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnXflAthleteBio` | `site_v2` `/football/xfl/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnXflAthleteCareerStats` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnXflAthleteContracts` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnXflAthleteCore` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnXflAthleteEventlog` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnXflAthleteGamelog` | `web_v3` `/football/xfl/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnXflAthleteInfo` | `site_v2` `/football/xfl/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnXflAthleteInjuries` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnXflAthleteNews` | `site_v2` `/football/xfl/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnXflAthleteNotes` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnXflAthleteOverview` | `web_v3` `/football/xfl/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnXflAthleteRecords` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnXflAthleteSeasons` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnXflAthleteSplits` | `web_v3` `/football/xfl/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnXflAthleteStatisticslog` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnXflAthleteStats` | `web_v3` `/football/xfl/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnXflAthleteVsAthlete` | `core_v2` `/football/leagues/xfl/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnXflAthletesIndex` | `core_v2` `/football/leagues/xfl/athletes` | — | `active`, `limit`, `page` |
+| `espnXflAward` | `core_v2` `/football/leagues/xfl/awards/{award_id}` | `award_id`\* | — |
+| `espnXflAwards` | `core_v2` `/football/leagues/xfl/awards` | — | — |
+| `espnXflCalendar` | `site_v2` `/football/xfl/calendar` | — | — |
+| `espnXflCoach` | `core_v2` `/football/leagues/xfl/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnXflCoachRecord` | `core_v2` `/football/leagues/xfl/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnXflCoachSeason` | `core_v2` `/football/leagues/xfl/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnXflConferences` | `site_v2` `/football/xfl/groups` | — | — |
+| `espnXflDraft` | `site_v2` `/football/xfl/draft` | — | — |
+| `espnXflEvent` | `core_v2` `/football/leagues/xfl/events/{event_id}` | `event_id`\* | — |
+| `espnXflEventBroadcasts` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnXflEventCompetition` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnXflEventCompetitor` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnXflEventCompetitorLeaders` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnXflEventCompetitorLinescores` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnXflEventCompetitorRecord` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnXflEventCompetitorRoster` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnXflEventCompetitorStatistics` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnXflEventCompetitors` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnXflEventLeaders` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnXflEventOdds` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnXflEventOfficialDetail` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnXflEventOfficials` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnXflEventPlay` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnXflEventPlayPersonnel` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnXflEventPlays` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnXflEventPowerindex` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnXflEventPredictor` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnXflEventProbabilities` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnXflEventPropbets` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnXflEventScoringplays` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnXflEventSituation` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnXflEventStatus` | `core_v2` `/football/leagues/xfl/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnXflEvents` | `core_v2` `/football/leagues/xfl/events` | — | `dates`, `limit` |
+| `espnXflFranchise` | `core_v2` `/football/leagues/xfl/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnXflFranchises` | `core_v2` `/football/leagues/xfl/franchises` | — | `limit` |
+| `espnXflInjuries` | `site_v2` `/football/xfl/injuries` | — | — |
+| `espnXflLeaders` | `web_v3` `/football/xfl/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnXflLeadersCore` | `core_v2` `/football/leagues/xfl/leaders` | — | — |
+| `espnXflLeagueNotes` | `core_v2` `/football/leagues/xfl/notes` | — | — |
+| `espnXflLeagueRoot` | `core_v2` `/football/leagues/xfl` | — | — |
+| `espnXflNews` | `site_v2` `/football/xfl/news` | — | `limit` |
+| `espnXflPosition` | `core_v2` `/football/leagues/xfl/positions/{position_id}` | `position_id`\* | — |
+| `espnXflPositions` | `core_v2` `/football/leagues/xfl/positions` | — | — |
+| `espnXflScoreboard` | `site_v2` `/football/xfl/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnXflSeasonAthletes` | `core_v2` `/football/leagues/xfl/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnXflSeasonAwards` | `core_v2` `/football/leagues/xfl/seasons/{season}/awards` | `season`\* | — |
+| `espnXflSeasonCoaches` | `core_v2` `/football/leagues/xfl/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnXflSeasonDraft` | `core_v2` `/football/leagues/xfl/seasons/{season}/draft` | `season`\* | — |
+| `espnXflSeasonDraftRoundPicks` | `core_v2` `/football/leagues/xfl/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnXflSeasonFreeagents` | `core_v2` `/football/leagues/xfl/seasons/{season}/freeagents` | `season`\* | — |
+| `espnXflSeasonFutures` | `core_v2` `/football/leagues/xfl/seasons/{season}/futures` | `season`\* | — |
+| `espnXflSeasonGroup` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnXflSeasonGroupChildren` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnXflSeasonGroupTeams` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnXflSeasonGroups` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnXflSeasonInfo` | `core_v2` `/football/leagues/xfl/seasons/{season}` | `season`\* | — |
+| `espnXflSeasonPointer` | `core_v2` `/football/leagues/xfl/season` | — | — |
+| `espnXflSeasonPowerindex` | `core_v2` `/football/leagues/xfl/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnXflSeasonPowerindexLeaders` | `core_v2` `/football/leagues/xfl/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnXflSeasonTeam` | `core_v2` `/football/leagues/xfl/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnXflSeasonTeams` | `core_v2` `/football/leagues/xfl/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnXflSeasonType` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnXflSeasonTypeCorrections` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnXflSeasonTypeLeaders` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnXflSeasonTypes` | `core_v2` `/football/leagues/xfl/seasons/{season}/types` | `season`\* | — |
+| `espnXflSeasonWeek` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnXflSeasonWeekEvents` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnXflSeasonWeeks` | `core_v2` `/football/leagues/xfl/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnXflSeasons` | `core_v2` `/football/leagues/xfl/seasons` | — | `limit` |
+| `espnXflStandings` | `site_v2_alt` `/football/xfl/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnXflStandingsCore` | `core_v2` `/football/leagues/xfl/standings` | — | — |
+| `espnXflStatisticsLeague` | `site_v2` `/football/xfl/statistics` | — | — |
+| `espnXflSummary` | `site_v2` `/football/xfl/summary` | — | `event_id` → `event` |
+| `espnXflTalentpicks` | `core_v2` `/football/leagues/xfl/talentpicks` | — | — |
+| `espnXflTeam` | `site_v2` `/football/xfl/teams/{team_id}` | `team_id`\* | — |
+| `espnXflTeamCore` | `core_v2` `/football/leagues/xfl/teams/{team_id}` | `team_id`\* | — |
+| `espnXflTeamDepthcharts` | `site_v2` `/football/xfl/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnXflTeamHistory` | `site_v2` `/football/xfl/teams/{team_id}/history` | `team_id`\* | — |
+| `espnXflTeamInjuries` | `site_v2` `/football/xfl/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnXflTeamLeaders` | `site_v2` `/football/xfl/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnXflTeamNews` | `site_v2` `/football/xfl/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnXflTeamRecord` | `site_v2` `/football/xfl/teams/{team_id}/record` | `team_id`\* | — |
+| `espnXflTeamRoster` | `site_v2` `/football/xfl/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnXflTeamSchedule` | `site_v2` `/football/xfl/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnXflTeamTransactions` | `site_v2` `/football/xfl/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnXflTeamsCore` | `core_v2` `/football/leagues/xfl/teams` | — | `limit` |
+| `espnXflTeamsSite` | `site_v2` `/football/xfl/teams` | — | `limit` |
+| `espnXflTournaments` | `core_v2` `/football/leagues/xfl/tournaments` | — | — |
+| `espnXflTransactions` | `site_v2` `/football/xfl/transactions` | — | — |
+| `espnXflVenue` | `core_v2` `/football/leagues/xfl/venues/{venue_id}` | `venue_id`\* | — |
+| `espnXflVenues` | `core_v2` `/football/leagues/xfl/venues` | — | `limit` |

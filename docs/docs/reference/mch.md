@@ -14,133 +14,133 @@ sidebar_position: 9
 - **scopes:** `universal`, `ncaa`
 - **wrappers:** 113
 
-Every endpoint is called as `sdv.mch.espn_mch_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.mch.espnMch<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_mch_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.mch.espn_mch_scoreboard({});
+await sdv.mch.espnMchScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_mch_athlete_awards` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_mch_athlete_bio` | `site_v2` `/hockey/mens-college-hockey/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_mch_athlete_career_stats` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_mch_athlete_contracts` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_mch_athlete_core` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_mch_athlete_eventlog` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_mch_athlete_gamelog` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_mch_athlete_info` | `site_v2` `/hockey/mens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_mch_athlete_injuries` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_mch_athlete_news` | `site_v2` `/hockey/mens-college-hockey/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_mch_athlete_notes` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_mch_athlete_overview` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_mch_athlete_records` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_mch_athlete_seasons` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_mch_athlete_splits` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_mch_athlete_statisticslog` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_mch_athlete_stats` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_mch_athlete_vs_athlete` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_mch_athletes_index` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes` | — | `active`, `limit`, `page` |
-| `espn_mch_award` | `core_v2` `/hockey/leagues/mens-college-hockey/awards/{award_id}` | `award_id`\* | — |
-| `espn_mch_awards` | `core_v2` `/hockey/leagues/mens-college-hockey/awards` | — | — |
-| `espn_mch_calendar` | `site_v2` `/hockey/mens-college-hockey/calendar` | — | — |
-| `espn_mch_coach` | `core_v2` `/hockey/leagues/mens-college-hockey/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_mch_coach_record` | `core_v2` `/hockey/leagues/mens-college-hockey/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_mch_coach_season` | `core_v2` `/hockey/leagues/mens-college-hockey/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_mch_conferences` | `site_v2` `/hockey/mens-college-hockey/groups` | — | — |
-| `espn_mch_draft` | `site_v2` `/hockey/mens-college-hockey/draft` | — | — |
-| `espn_mch_event` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}` | `event_id`\* | — |
-| `espn_mch_event_broadcasts` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_mch_event_competition` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_mch_event_competitor` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mch_event_competitor_leaders` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mch_event_competitor_linescores` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mch_event_competitor_record` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mch_event_competitor_roster` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mch_event_competitor_statistics` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mch_event_competitors` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_mch_event_leaders` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_mch_event_odds` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_mch_event_official_detail` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_mch_event_officials` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_mch_event_play` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_mch_event_play_personnel` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_mch_event_plays` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_mch_event_powerindex` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_mch_event_predictor` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_mch_event_probabilities` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_mch_event_propbets` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_mch_event_scoringplays` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_mch_event_situation` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_mch_event_status` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_mch_events` | `core_v2` `/hockey/leagues/mens-college-hockey/events` | — | `dates`, `limit` |
-| `espn_mch_franchise` | `core_v2` `/hockey/leagues/mens-college-hockey/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_mch_franchises` | `core_v2` `/hockey/leagues/mens-college-hockey/franchises` | — | `limit` |
-| `espn_mch_injuries` | `site_v2` `/hockey/mens-college-hockey/injuries` | — | — |
-| `espn_mch_leaders` | `web_v3` `/hockey/mens-college-hockey/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_mch_leaders_core` | `core_v2` `/hockey/leagues/mens-college-hockey/leaders` | — | — |
-| `espn_mch_league_notes` | `core_v2` `/hockey/leagues/mens-college-hockey/notes` | — | — |
-| `espn_mch_league_root` | `core_v2` `/hockey/leagues/mens-college-hockey` | — | — |
-| `espn_mch_news` | `site_v2` `/hockey/mens-college-hockey/news` | — | `limit` |
-| `espn_mch_position` | `core_v2` `/hockey/leagues/mens-college-hockey/positions/{position_id}` | `position_id`\* | — |
-| `espn_mch_positions` | `core_v2` `/hockey/leagues/mens-college-hockey/positions` | — | — |
-| `espn_mch_scoreboard` | `site_v2` `/hockey/mens-college-hockey/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_mch_season_athletes` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_mch_season_awards` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/awards` | `season`\* | — |
-| `espn_mch_season_coaches` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_mch_season_draft` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/draft` | `season`\* | — |
-| `espn_mch_season_draft_round_picks` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_mch_season_freeagents` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_mch_season_futures` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/futures` | `season`\* | — |
-| `espn_mch_season_group` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_mch_season_group_children` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_mch_season_group_teams` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_mch_season_groups` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_mch_season_info` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}` | `season`\* | — |
-| `espn_mch_season_pointer` | `core_v2` `/hockey/leagues/mens-college-hockey/season` | — | — |
-| `espn_mch_season_powerindex` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_mch_season_powerindex_leaders` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_mch_season_team` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_mch_season_teams` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_mch_season_type` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_mch_season_type_corrections` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_mch_season_type_leaders` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_mch_season_types` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types` | `season`\* | — |
-| `espn_mch_season_week` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_mch_season_week_events` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_mch_season_weeks` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_mch_seasons` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons` | — | `limit` |
-| `espn_mch_standings` | `site_v2_alt` `/hockey/mens-college-hockey/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_mch_standings_core` | `core_v2` `/hockey/leagues/mens-college-hockey/standings` | — | — |
-| `espn_mch_statistics_league` | `site_v2` `/hockey/mens-college-hockey/statistics` | — | — |
-| `espn_mch_summary` | `site_v2` `/hockey/mens-college-hockey/summary` | — | `event_id` → `event` |
-| `espn_mch_talentpicks` | `core_v2` `/hockey/leagues/mens-college-hockey/talentpicks` | — | — |
-| `espn_mch_team` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}` | `team_id`\* | — |
-| `espn_mch_team_core` | `core_v2` `/hockey/leagues/mens-college-hockey/teams/{team_id}` | `team_id`\* | — |
-| `espn_mch_team_depthcharts` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_mch_team_history` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_mch_team_injuries` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_mch_team_leaders` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_mch_team_news` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_mch_team_record` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_mch_team_roster` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_mch_team_schedule` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_mch_team_transactions` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_mch_teams_core` | `core_v2` `/hockey/leagues/mens-college-hockey/teams` | — | `limit` |
-| `espn_mch_teams_site` | `site_v2` `/hockey/mens-college-hockey/teams` | — | `limit` |
-| `espn_mch_tournaments` | `core_v2` `/hockey/leagues/mens-college-hockey/tournaments` | — | — |
-| `espn_mch_transactions` | `site_v2` `/hockey/mens-college-hockey/transactions` | — | — |
-| `espn_mch_venue` | `core_v2` `/hockey/leagues/mens-college-hockey/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_mch_venues` | `core_v2` `/hockey/leagues/mens-college-hockey/venues` | — | `limit` |
+| `espnMchAthleteAwards` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnMchAthleteBio` | `site_v2` `/hockey/mens-college-hockey/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnMchAthleteCareerStats` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnMchAthleteContracts` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnMchAthleteCore` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnMchAthleteEventlog` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnMchAthleteGamelog` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnMchAthleteInfo` | `site_v2` `/hockey/mens-college-hockey/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnMchAthleteInjuries` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnMchAthleteNews` | `site_v2` `/hockey/mens-college-hockey/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnMchAthleteNotes` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnMchAthleteOverview` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnMchAthleteRecords` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnMchAthleteSeasons` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnMchAthleteSplits` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnMchAthleteStatisticslog` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnMchAthleteStats` | `web_v3` `/hockey/mens-college-hockey/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnMchAthleteVsAthlete` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnMchAthletesIndex` | `core_v2` `/hockey/leagues/mens-college-hockey/athletes` | — | `active`, `limit`, `page` |
+| `espnMchAward` | `core_v2` `/hockey/leagues/mens-college-hockey/awards/{award_id}` | `award_id`\* | — |
+| `espnMchAwards` | `core_v2` `/hockey/leagues/mens-college-hockey/awards` | — | — |
+| `espnMchCalendar` | `site_v2` `/hockey/mens-college-hockey/calendar` | — | — |
+| `espnMchCoach` | `core_v2` `/hockey/leagues/mens-college-hockey/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnMchCoachRecord` | `core_v2` `/hockey/leagues/mens-college-hockey/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnMchCoachSeason` | `core_v2` `/hockey/leagues/mens-college-hockey/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnMchConferences` | `site_v2` `/hockey/mens-college-hockey/groups` | — | — |
+| `espnMchDraft` | `site_v2` `/hockey/mens-college-hockey/draft` | — | — |
+| `espnMchEvent` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}` | `event_id`\* | — |
+| `espnMchEventBroadcasts` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnMchEventCompetition` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnMchEventCompetitor` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMchEventCompetitorLeaders` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMchEventCompetitorLinescores` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMchEventCompetitorRecord` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMchEventCompetitorRoster` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMchEventCompetitorStatistics` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMchEventCompetitors` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnMchEventLeaders` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnMchEventOdds` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnMchEventOfficialDetail` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnMchEventOfficials` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnMchEventPlay` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnMchEventPlayPersonnel` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnMchEventPlays` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnMchEventPowerindex` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnMchEventPredictor` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnMchEventProbabilities` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnMchEventPropbets` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnMchEventScoringplays` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnMchEventSituation` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnMchEventStatus` | `core_v2` `/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnMchEvents` | `core_v2` `/hockey/leagues/mens-college-hockey/events` | — | `dates`, `limit` |
+| `espnMchFranchise` | `core_v2` `/hockey/leagues/mens-college-hockey/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnMchFranchises` | `core_v2` `/hockey/leagues/mens-college-hockey/franchises` | — | `limit` |
+| `espnMchInjuries` | `site_v2` `/hockey/mens-college-hockey/injuries` | — | — |
+| `espnMchLeaders` | `web_v3` `/hockey/mens-college-hockey/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnMchLeadersCore` | `core_v2` `/hockey/leagues/mens-college-hockey/leaders` | — | — |
+| `espnMchLeagueNotes` | `core_v2` `/hockey/leagues/mens-college-hockey/notes` | — | — |
+| `espnMchLeagueRoot` | `core_v2` `/hockey/leagues/mens-college-hockey` | — | — |
+| `espnMchNews` | `site_v2` `/hockey/mens-college-hockey/news` | — | `limit` |
+| `espnMchPosition` | `core_v2` `/hockey/leagues/mens-college-hockey/positions/{position_id}` | `position_id`\* | — |
+| `espnMchPositions` | `core_v2` `/hockey/leagues/mens-college-hockey/positions` | — | — |
+| `espnMchScoreboard` | `site_v2` `/hockey/mens-college-hockey/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnMchSeasonAthletes` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnMchSeasonAwards` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/awards` | `season`\* | — |
+| `espnMchSeasonCoaches` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnMchSeasonDraft` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/draft` | `season`\* | — |
+| `espnMchSeasonDraftRoundPicks` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnMchSeasonFreeagents` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/freeagents` | `season`\* | — |
+| `espnMchSeasonFutures` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/futures` | `season`\* | — |
+| `espnMchSeasonGroup` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnMchSeasonGroupChildren` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnMchSeasonGroupTeams` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnMchSeasonGroups` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnMchSeasonInfo` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}` | `season`\* | — |
+| `espnMchSeasonPointer` | `core_v2` `/hockey/leagues/mens-college-hockey/season` | — | — |
+| `espnMchSeasonPowerindex` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnMchSeasonPowerindexLeaders` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnMchSeasonTeam` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnMchSeasonTeams` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnMchSeasonType` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnMchSeasonTypeCorrections` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnMchSeasonTypeLeaders` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnMchSeasonTypes` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types` | `season`\* | — |
+| `espnMchSeasonWeek` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnMchSeasonWeekEvents` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnMchSeasonWeeks` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnMchSeasons` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons` | — | `limit` |
+| `espnMchStandings` | `site_v2_alt` `/hockey/mens-college-hockey/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnMchStandingsCore` | `core_v2` `/hockey/leagues/mens-college-hockey/standings` | — | — |
+| `espnMchStatisticsLeague` | `site_v2` `/hockey/mens-college-hockey/statistics` | — | — |
+| `espnMchSummary` | `site_v2` `/hockey/mens-college-hockey/summary` | — | `event_id` → `event` |
+| `espnMchTalentpicks` | `core_v2` `/hockey/leagues/mens-college-hockey/talentpicks` | — | — |
+| `espnMchTeam` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}` | `team_id`\* | — |
+| `espnMchTeamCore` | `core_v2` `/hockey/leagues/mens-college-hockey/teams/{team_id}` | `team_id`\* | — |
+| `espnMchTeamDepthcharts` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnMchTeamHistory` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/history` | `team_id`\* | — |
+| `espnMchTeamInjuries` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnMchTeamLeaders` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnMchTeamNews` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnMchTeamRecord` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/record` | `team_id`\* | — |
+| `espnMchTeamRoster` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnMchTeamSchedule` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnMchTeamTransactions` | `site_v2` `/hockey/mens-college-hockey/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnMchTeamsCore` | `core_v2` `/hockey/leagues/mens-college-hockey/teams` | — | `limit` |
+| `espnMchTeamsSite` | `site_v2` `/hockey/mens-college-hockey/teams` | — | `limit` |
+| `espnMchTournaments` | `core_v2` `/hockey/leagues/mens-college-hockey/tournaments` | — | — |
+| `espnMchTransactions` | `site_v2` `/hockey/mens-college-hockey/transactions` | — | — |
+| `espnMchVenue` | `core_v2` `/hockey/leagues/mens-college-hockey/venues/{venue_id}` | `venue_id`\* | — |
+| `espnMchVenues` | `core_v2` `/hockey/leagues/mens-college-hockey/venues` | — | `limit` |
 
 ## NCAA endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_mch_rankings` | `site_v2` `/hockey/mens-college-hockey/rankings` | — | — |
-| `espn_mch_season_recruits` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/recruits` | `season`\* | `limit` |
-| `espn_mch_season_week_rankings` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnMchRankings` | `site_v2` `/hockey/mens-college-hockey/rankings` | — | — |
+| `espnMchSeasonRecruits` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/recruits` | `season`\* | `limit` |
+| `espnMchSeasonWeekRankings` | `core_v2` `/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |

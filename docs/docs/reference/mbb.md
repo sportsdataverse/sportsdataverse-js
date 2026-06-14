@@ -14,133 +14,133 @@ sidebar_position: 3
 - **scopes:** `universal`, `ncaa`
 - **wrappers:** 113
 
-Every endpoint is called as `sdv.mbb.espn_mbb_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.mbb.espnMbb<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_mbb_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.mbb.espn_mbb_scoreboard({});
+await sdv.mbb.espnMbbScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_mbb_athlete_awards` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_mbb_athlete_bio` | `site_v2` `/basketball/mens-college-basketball/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_mbb_athlete_career_stats` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_mbb_athlete_contracts` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_mbb_athlete_core` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_mbb_athlete_eventlog` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_mbb_athlete_gamelog` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_mbb_athlete_info` | `site_v2` `/basketball/mens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_mbb_athlete_injuries` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_mbb_athlete_news` | `site_v2` `/basketball/mens-college-basketball/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_mbb_athlete_notes` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_mbb_athlete_overview` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_mbb_athlete_records` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_mbb_athlete_seasons` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_mbb_athlete_splits` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_mbb_athlete_statisticslog` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_mbb_athlete_stats` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_mbb_athlete_vs_athlete` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_mbb_athletes_index` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes` | — | `active`, `limit`, `page` |
-| `espn_mbb_award` | `core_v2` `/basketball/leagues/mens-college-basketball/awards/{award_id}` | `award_id`\* | — |
-| `espn_mbb_awards` | `core_v2` `/basketball/leagues/mens-college-basketball/awards` | — | — |
-| `espn_mbb_calendar` | `site_v2` `/basketball/mens-college-basketball/calendar` | — | — |
-| `espn_mbb_coach` | `core_v2` `/basketball/leagues/mens-college-basketball/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_mbb_coach_record` | `core_v2` `/basketball/leagues/mens-college-basketball/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_mbb_coach_season` | `core_v2` `/basketball/leagues/mens-college-basketball/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_mbb_conferences` | `site_v2` `/basketball/mens-college-basketball/groups` | — | — |
-| `espn_mbb_draft` | `site_v2` `/basketball/mens-college-basketball/draft` | — | — |
-| `espn_mbb_event` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}` | `event_id`\* | — |
-| `espn_mbb_event_broadcasts` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_competition` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_competitor` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mbb_event_competitor_leaders` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mbb_event_competitor_linescores` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mbb_event_competitor_record` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mbb_event_competitor_roster` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mbb_event_competitor_statistics` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mbb_event_competitors` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_leaders` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_odds` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_official_detail` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_mbb_event_officials` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_play` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_mbb_event_play_personnel` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_mbb_event_plays` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_mbb_event_powerindex` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_predictor` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_probabilities` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_mbb_event_propbets` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_scoringplays` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_situation` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_mbb_event_status` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_mbb_events` | `core_v2` `/basketball/leagues/mens-college-basketball/events` | — | `dates`, `limit` |
-| `espn_mbb_franchise` | `core_v2` `/basketball/leagues/mens-college-basketball/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_mbb_franchises` | `core_v2` `/basketball/leagues/mens-college-basketball/franchises` | — | `limit` |
-| `espn_mbb_injuries` | `site_v2` `/basketball/mens-college-basketball/injuries` | — | — |
-| `espn_mbb_leaders` | `web_v3` `/basketball/mens-college-basketball/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_mbb_leaders_core` | `core_v2` `/basketball/leagues/mens-college-basketball/leaders` | — | — |
-| `espn_mbb_league_notes` | `core_v2` `/basketball/leagues/mens-college-basketball/notes` | — | — |
-| `espn_mbb_league_root` | `core_v2` `/basketball/leagues/mens-college-basketball` | — | — |
-| `espn_mbb_news` | `site_v2` `/basketball/mens-college-basketball/news` | — | `limit` |
-| `espn_mbb_position` | `core_v2` `/basketball/leagues/mens-college-basketball/positions/{position_id}` | `position_id`\* | — |
-| `espn_mbb_positions` | `core_v2` `/basketball/leagues/mens-college-basketball/positions` | — | — |
-| `espn_mbb_scoreboard` | `site_v2` `/basketball/mens-college-basketball/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_mbb_season_athletes` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_mbb_season_awards` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/awards` | `season`\* | — |
-| `espn_mbb_season_coaches` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_mbb_season_draft` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/draft` | `season`\* | — |
-| `espn_mbb_season_draft_round_picks` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_mbb_season_freeagents` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_mbb_season_futures` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/futures` | `season`\* | — |
-| `espn_mbb_season_group` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_mbb_season_group_children` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_mbb_season_group_teams` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_mbb_season_groups` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_mbb_season_info` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}` | `season`\* | — |
-| `espn_mbb_season_pointer` | `core_v2` `/basketball/leagues/mens-college-basketball/season` | — | — |
-| `espn_mbb_season_powerindex` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_mbb_season_powerindex_leaders` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_mbb_season_team` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_mbb_season_teams` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_mbb_season_type` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_mbb_season_type_corrections` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_mbb_season_type_leaders` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_mbb_season_types` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types` | `season`\* | — |
-| `espn_mbb_season_week` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_mbb_season_week_events` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_mbb_season_weeks` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_mbb_seasons` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons` | — | `limit` |
-| `espn_mbb_standings` | `site_v2_alt` `/basketball/mens-college-basketball/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_mbb_standings_core` | `core_v2` `/basketball/leagues/mens-college-basketball/standings` | — | — |
-| `espn_mbb_statistics_league` | `site_v2` `/basketball/mens-college-basketball/statistics` | — | — |
-| `espn_mbb_summary` | `site_v2` `/basketball/mens-college-basketball/summary` | — | `event_id` → `event` |
-| `espn_mbb_talentpicks` | `core_v2` `/basketball/leagues/mens-college-basketball/talentpicks` | — | — |
-| `espn_mbb_team` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}` | `team_id`\* | — |
-| `espn_mbb_team_core` | `core_v2` `/basketball/leagues/mens-college-basketball/teams/{team_id}` | `team_id`\* | — |
-| `espn_mbb_team_depthcharts` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_mbb_team_history` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_mbb_team_injuries` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_mbb_team_leaders` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_mbb_team_news` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_mbb_team_record` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_mbb_team_roster` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_mbb_team_schedule` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_mbb_team_transactions` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_mbb_teams_core` | `core_v2` `/basketball/leagues/mens-college-basketball/teams` | — | `limit` |
-| `espn_mbb_teams_site` | `site_v2` `/basketball/mens-college-basketball/teams` | — | `limit` |
-| `espn_mbb_tournaments` | `core_v2` `/basketball/leagues/mens-college-basketball/tournaments` | — | — |
-| `espn_mbb_transactions` | `site_v2` `/basketball/mens-college-basketball/transactions` | — | — |
-| `espn_mbb_venue` | `core_v2` `/basketball/leagues/mens-college-basketball/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_mbb_venues` | `core_v2` `/basketball/leagues/mens-college-basketball/venues` | — | `limit` |
+| `espnMbbAthleteAwards` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnMbbAthleteBio` | `site_v2` `/basketball/mens-college-basketball/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnMbbAthleteCareerStats` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnMbbAthleteContracts` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnMbbAthleteCore` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnMbbAthleteEventlog` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnMbbAthleteGamelog` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnMbbAthleteInfo` | `site_v2` `/basketball/mens-college-basketball/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnMbbAthleteInjuries` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnMbbAthleteNews` | `site_v2` `/basketball/mens-college-basketball/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnMbbAthleteNotes` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnMbbAthleteOverview` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnMbbAthleteRecords` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnMbbAthleteSeasons` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnMbbAthleteSplits` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnMbbAthleteStatisticslog` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnMbbAthleteStats` | `web_v3` `/basketball/mens-college-basketball/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnMbbAthleteVsAthlete` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnMbbAthletesIndex` | `core_v2` `/basketball/leagues/mens-college-basketball/athletes` | — | `active`, `limit`, `page` |
+| `espnMbbAward` | `core_v2` `/basketball/leagues/mens-college-basketball/awards/{award_id}` | `award_id`\* | — |
+| `espnMbbAwards` | `core_v2` `/basketball/leagues/mens-college-basketball/awards` | — | — |
+| `espnMbbCalendar` | `site_v2` `/basketball/mens-college-basketball/calendar` | — | — |
+| `espnMbbCoach` | `core_v2` `/basketball/leagues/mens-college-basketball/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnMbbCoachRecord` | `core_v2` `/basketball/leagues/mens-college-basketball/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnMbbCoachSeason` | `core_v2` `/basketball/leagues/mens-college-basketball/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnMbbConferences` | `site_v2` `/basketball/mens-college-basketball/groups` | — | — |
+| `espnMbbDraft` | `site_v2` `/basketball/mens-college-basketball/draft` | — | — |
+| `espnMbbEvent` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}` | `event_id`\* | — |
+| `espnMbbEventBroadcasts` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnMbbEventCompetition` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnMbbEventCompetitor` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMbbEventCompetitorLeaders` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMbbEventCompetitorLinescores` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMbbEventCompetitorRecord` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMbbEventCompetitorRoster` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMbbEventCompetitorStatistics` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMbbEventCompetitors` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnMbbEventLeaders` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnMbbEventOdds` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnMbbEventOfficialDetail` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnMbbEventOfficials` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnMbbEventPlay` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnMbbEventPlayPersonnel` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnMbbEventPlays` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnMbbEventPowerindex` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnMbbEventPredictor` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnMbbEventProbabilities` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnMbbEventPropbets` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnMbbEventScoringplays` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnMbbEventSituation` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnMbbEventStatus` | `core_v2` `/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnMbbEvents` | `core_v2` `/basketball/leagues/mens-college-basketball/events` | — | `dates`, `limit` |
+| `espnMbbFranchise` | `core_v2` `/basketball/leagues/mens-college-basketball/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnMbbFranchises` | `core_v2` `/basketball/leagues/mens-college-basketball/franchises` | — | `limit` |
+| `espnMbbInjuries` | `site_v2` `/basketball/mens-college-basketball/injuries` | — | — |
+| `espnMbbLeaders` | `web_v3` `/basketball/mens-college-basketball/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnMbbLeadersCore` | `core_v2` `/basketball/leagues/mens-college-basketball/leaders` | — | — |
+| `espnMbbLeagueNotes` | `core_v2` `/basketball/leagues/mens-college-basketball/notes` | — | — |
+| `espnMbbLeagueRoot` | `core_v2` `/basketball/leagues/mens-college-basketball` | — | — |
+| `espnMbbNews` | `site_v2` `/basketball/mens-college-basketball/news` | — | `limit` |
+| `espnMbbPosition` | `core_v2` `/basketball/leagues/mens-college-basketball/positions/{position_id}` | `position_id`\* | — |
+| `espnMbbPositions` | `core_v2` `/basketball/leagues/mens-college-basketball/positions` | — | — |
+| `espnMbbScoreboard` | `site_v2` `/basketball/mens-college-basketball/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnMbbSeasonAthletes` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnMbbSeasonAwards` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/awards` | `season`\* | — |
+| `espnMbbSeasonCoaches` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnMbbSeasonDraft` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/draft` | `season`\* | — |
+| `espnMbbSeasonDraftRoundPicks` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnMbbSeasonFreeagents` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/freeagents` | `season`\* | — |
+| `espnMbbSeasonFutures` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/futures` | `season`\* | — |
+| `espnMbbSeasonGroup` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnMbbSeasonGroupChildren` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnMbbSeasonGroupTeams` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnMbbSeasonGroups` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnMbbSeasonInfo` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}` | `season`\* | — |
+| `espnMbbSeasonPointer` | `core_v2` `/basketball/leagues/mens-college-basketball/season` | — | — |
+| `espnMbbSeasonPowerindex` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnMbbSeasonPowerindexLeaders` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnMbbSeasonTeam` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnMbbSeasonTeams` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnMbbSeasonType` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnMbbSeasonTypeCorrections` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnMbbSeasonTypeLeaders` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnMbbSeasonTypes` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types` | `season`\* | — |
+| `espnMbbSeasonWeek` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnMbbSeasonWeekEvents` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnMbbSeasonWeeks` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnMbbSeasons` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons` | — | `limit` |
+| `espnMbbStandings` | `site_v2_alt` `/basketball/mens-college-basketball/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnMbbStandingsCore` | `core_v2` `/basketball/leagues/mens-college-basketball/standings` | — | — |
+| `espnMbbStatisticsLeague` | `site_v2` `/basketball/mens-college-basketball/statistics` | — | — |
+| `espnMbbSummary` | `site_v2` `/basketball/mens-college-basketball/summary` | — | `event_id` → `event` |
+| `espnMbbTalentpicks` | `core_v2` `/basketball/leagues/mens-college-basketball/talentpicks` | — | — |
+| `espnMbbTeam` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}` | `team_id`\* | — |
+| `espnMbbTeamCore` | `core_v2` `/basketball/leagues/mens-college-basketball/teams/{team_id}` | `team_id`\* | — |
+| `espnMbbTeamDepthcharts` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnMbbTeamHistory` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/history` | `team_id`\* | — |
+| `espnMbbTeamInjuries` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnMbbTeamLeaders` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnMbbTeamNews` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnMbbTeamRecord` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/record` | `team_id`\* | — |
+| `espnMbbTeamRoster` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnMbbTeamSchedule` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnMbbTeamTransactions` | `site_v2` `/basketball/mens-college-basketball/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnMbbTeamsCore` | `core_v2` `/basketball/leagues/mens-college-basketball/teams` | — | `limit` |
+| `espnMbbTeamsSite` | `site_v2` `/basketball/mens-college-basketball/teams` | — | `limit` |
+| `espnMbbTournaments` | `core_v2` `/basketball/leagues/mens-college-basketball/tournaments` | — | — |
+| `espnMbbTransactions` | `site_v2` `/basketball/mens-college-basketball/transactions` | — | — |
+| `espnMbbVenue` | `core_v2` `/basketball/leagues/mens-college-basketball/venues/{venue_id}` | `venue_id`\* | — |
+| `espnMbbVenues` | `core_v2` `/basketball/leagues/mens-college-basketball/venues` | — | `limit` |
 
 ## NCAA endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_mbb_rankings` | `site_v2` `/basketball/mens-college-basketball/rankings` | — | — |
-| `espn_mbb_season_recruits` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/recruits` | `season`\* | `limit` |
-| `espn_mbb_season_week_rankings` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnMbbRankings` | `site_v2` `/basketball/mens-college-basketball/rankings` | — | — |
+| `espnMbbSeasonRecruits` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/recruits` | `season`\* | `limit` |
+| `espnMbbSeasonWeekRankings` | `core_v2` `/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/rankings` | `season`\*, `season_type`\*, `week`\* | — |

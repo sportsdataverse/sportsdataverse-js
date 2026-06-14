@@ -17,14 +17,15 @@ the same:
 ```js
 import sdv from "sportsdataverse";
 
-await sdv.nba.espn_nba_scoreboard({});
-await sdv.nfl.espn_nfl_scoreboard({ week: 1, season_type: 2 });
-await sdv.nhl.espn_nhl_scoreboard({});
-await sdv.mlb.espn_mlb_scoreboard({});
-await sdv.wnba.espn_wnba_scoreboard({});
+await sdv.nba.espnNbaScoreboard({});
+await sdv.nfl.espnNflScoreboard({ week: 1, season_type: 2 });
+await sdv.nhl.espnNhlScoreboard({});
+await sdv.mlb.espnMlbScoreboard({});
+await sdv.wnba.espnWnbaScoreboard({});
 ```
 
-That makes it trivial to write league-agnostic helpers:
+That makes it trivial to write league-agnostic helpers. The snake_case alias is
+handy here — it composes cleanly from the league string:
 
 ```js
 async function gamesToday(league) {
@@ -49,12 +50,12 @@ league exposes an endpoint only when the scope matches:
 | `football` | NFL, CFB, UFL | drive/play detail, betting endpoints |
 | `mlb` | MLB | baseball-specific feeds |
 
-So `espn_cfb_rankings` exists (CFB carries the `ncaa` scope) but `espn_nba_rankings`
+So `espnCfbRankings` exists (CFB carries the `ncaa` scope) but `espnNbaRankings`
 does not:
 
 ```js
-typeof sdv.cfb.espn_cfb_rankings;   // 'function'
-typeof sdv.nba.espn_nba_rankings;   // 'undefined'
+typeof sdv.cfb.espnCfbRankings;   // 'function'
+typeof sdv.nba.espnNbaRankings;   // 'undefined'
 ```
 
 ## Multi-league sports: soccer & cricket
@@ -63,16 +64,16 @@ Soccer and cricket cover many competitions under one namespace, so they take an
 extra **`league`** slug:
 
 ```js
-await sdv.soccer.espn_soccer_scoreboard({ league: "eng.1" });  // Premier League
-await sdv.soccer.espn_soccer_scoreboard({ league: "esp.1" });  // La Liga
-await sdv.soccer.espn_soccer_standings({ league: "ita.1" });   // Serie A
+await sdv.soccer.espnSoccerScoreboard({ league: "eng.1" });  // Premier League
+await sdv.soccer.espnSoccerScoreboard({ league: "esp.1" });  // La Liga
+await sdv.soccer.espnSoccerStandings({ league: "ita.1" });   // Serie A
 ```
 
 There are also convenience namespaces for the big competitions (`epl`, `laliga`,
 `seriea`, `bundesliga`, `ligue1`, `ucl`, …) that pin the slug for you:
 
 ```js
-await sdv.epl.espn_epl_scoreboard({});      // same as soccer + { league: 'eng.1' }
+await sdv.epl.espnEplScoreboard({});      // same as soccer + { league: 'eng.1' }
 ```
 
 ## Introspecting the surface at runtime
@@ -89,8 +90,8 @@ LEAGUES.map((l) => ({ prefix: l.prefix, sport: l.sport, league: l.league }));
 // Every endpoint definition (116 of them)
 WRAPPERS.map((w) => w.short);
 
-// Every endpoint available on a given league
-Object.keys(sdv.nfl).filter((k) => k.startsWith("espn_nfl_"));
+// Every endpoint available on a given league (camelCase canonical names)
+Object.keys(sdv.nfl).filter((k) => k.startsWith("espnNfl"));
 ```
 
 ## Next steps

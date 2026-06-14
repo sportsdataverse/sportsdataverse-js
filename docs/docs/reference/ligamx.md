@@ -14,125 +14,125 @@ sidebar_position: 23
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.ligamx.espn_ligamx_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.ligamx.espnLigamx<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_ligamx_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.ligamx.espn_ligamx_scoreboard({});
+await sdv.ligamx.espnLigamxScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_ligamx_athlete_awards` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_bio` | `site_v2` `/soccer/mex.1/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_career_stats` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_ligamx_athlete_contracts` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_core` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_eventlog` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_gamelog` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_ligamx_athlete_info` | `site_v2` `/soccer/mex.1/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_injuries` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_news` | `site_v2` `/soccer/mex.1/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_notes` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_overview` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_records` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_seasons` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_splits` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_ligamx_athlete_statisticslog` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_ligamx_athlete_stats` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_ligamx_athlete_vs_athlete` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_ligamx_athletes_index` | `core_v2` `/soccer/leagues/mex.1/athletes` | — | `active`, `limit`, `page` |
-| `espn_ligamx_award` | `core_v2` `/soccer/leagues/mex.1/awards/{award_id}` | `award_id`\* | — |
-| `espn_ligamx_awards` | `core_v2` `/soccer/leagues/mex.1/awards` | — | — |
-| `espn_ligamx_calendar` | `site_v2` `/soccer/mex.1/calendar` | — | — |
-| `espn_ligamx_coach` | `core_v2` `/soccer/leagues/mex.1/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_ligamx_coach_record` | `core_v2` `/soccer/leagues/mex.1/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_ligamx_coach_season` | `core_v2` `/soccer/leagues/mex.1/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_ligamx_conferences` | `site_v2` `/soccer/mex.1/groups` | — | — |
-| `espn_ligamx_draft` | `site_v2` `/soccer/mex.1/draft` | — | — |
-| `espn_ligamx_event` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}` | `event_id`\* | — |
-| `espn_ligamx_event_broadcasts` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_competition` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_competitor` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_ligamx_event_competitor_leaders` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_ligamx_event_competitor_linescores` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_ligamx_event_competitor_record` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_ligamx_event_competitor_roster` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_ligamx_event_competitor_statistics` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_ligamx_event_competitors` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_leaders` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_odds` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_official_detail` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_ligamx_event_officials` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_play` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_ligamx_event_play_personnel` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_ligamx_event_plays` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_ligamx_event_powerindex` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_predictor` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_probabilities` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_ligamx_event_propbets` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_scoringplays` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_situation` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_ligamx_event_status` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_ligamx_events` | `core_v2` `/soccer/leagues/mex.1/events` | — | `dates`, `limit` |
-| `espn_ligamx_franchise` | `core_v2` `/soccer/leagues/mex.1/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_ligamx_franchises` | `core_v2` `/soccer/leagues/mex.1/franchises` | — | `limit` |
-| `espn_ligamx_injuries` | `site_v2` `/soccer/mex.1/injuries` | — | — |
-| `espn_ligamx_leaders` | `web_v3` `/soccer/mex.1/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_ligamx_leaders_core` | `core_v2` `/soccer/leagues/mex.1/leaders` | — | — |
-| `espn_ligamx_league_notes` | `core_v2` `/soccer/leagues/mex.1/notes` | — | — |
-| `espn_ligamx_league_root` | `core_v2` `/soccer/leagues/mex.1` | — | — |
-| `espn_ligamx_news` | `site_v2` `/soccer/mex.1/news` | — | `limit` |
-| `espn_ligamx_position` | `core_v2` `/soccer/leagues/mex.1/positions/{position_id}` | `position_id`\* | — |
-| `espn_ligamx_positions` | `core_v2` `/soccer/leagues/mex.1/positions` | — | — |
-| `espn_ligamx_scoreboard` | `site_v2` `/soccer/mex.1/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_ligamx_season_athletes` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_ligamx_season_awards` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/awards` | `season`\* | — |
-| `espn_ligamx_season_coaches` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_ligamx_season_draft` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/draft` | `season`\* | — |
-| `espn_ligamx_season_draft_round_picks` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_ligamx_season_freeagents` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_ligamx_season_futures` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/futures` | `season`\* | — |
-| `espn_ligamx_season_group` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_ligamx_season_group_children` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_ligamx_season_group_teams` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_ligamx_season_groups` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_ligamx_season_info` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}` | `season`\* | — |
-| `espn_ligamx_season_pointer` | `core_v2` `/soccer/leagues/mex.1/season` | — | — |
-| `espn_ligamx_season_powerindex` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_ligamx_season_powerindex_leaders` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_ligamx_season_team` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_ligamx_season_teams` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_ligamx_season_type` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_ligamx_season_type_corrections` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_ligamx_season_type_leaders` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_ligamx_season_types` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types` | `season`\* | — |
-| `espn_ligamx_season_week` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_ligamx_season_week_events` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_ligamx_season_weeks` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_ligamx_seasons` | `core_v2` `/soccer/leagues/mex.1/seasons` | — | `limit` |
-| `espn_ligamx_standings` | `site_v2_alt` `/soccer/mex.1/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_ligamx_standings_core` | `core_v2` `/soccer/leagues/mex.1/standings` | — | — |
-| `espn_ligamx_statistics_league` | `site_v2` `/soccer/mex.1/statistics` | — | — |
-| `espn_ligamx_summary` | `site_v2` `/soccer/mex.1/summary` | — | `event_id` → `event` |
-| `espn_ligamx_talentpicks` | `core_v2` `/soccer/leagues/mex.1/talentpicks` | — | — |
-| `espn_ligamx_team` | `site_v2` `/soccer/mex.1/teams/{team_id}` | `team_id`\* | — |
-| `espn_ligamx_team_core` | `core_v2` `/soccer/leagues/mex.1/teams/{team_id}` | `team_id`\* | — |
-| `espn_ligamx_team_depthcharts` | `site_v2` `/soccer/mex.1/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_ligamx_team_history` | `site_v2` `/soccer/mex.1/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_ligamx_team_injuries` | `site_v2` `/soccer/mex.1/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_ligamx_team_leaders` | `site_v2` `/soccer/mex.1/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_ligamx_team_news` | `site_v2` `/soccer/mex.1/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_ligamx_team_record` | `site_v2` `/soccer/mex.1/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_ligamx_team_roster` | `site_v2` `/soccer/mex.1/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_ligamx_team_schedule` | `site_v2` `/soccer/mex.1/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_ligamx_team_transactions` | `site_v2` `/soccer/mex.1/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_ligamx_teams_core` | `core_v2` `/soccer/leagues/mex.1/teams` | — | `limit` |
-| `espn_ligamx_teams_site` | `site_v2` `/soccer/mex.1/teams` | — | `limit` |
-| `espn_ligamx_tournaments` | `core_v2` `/soccer/leagues/mex.1/tournaments` | — | — |
-| `espn_ligamx_transactions` | `site_v2` `/soccer/mex.1/transactions` | — | — |
-| `espn_ligamx_venue` | `core_v2` `/soccer/leagues/mex.1/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_ligamx_venues` | `core_v2` `/soccer/leagues/mex.1/venues` | — | `limit` |
+| `espnLigamxAthleteAwards` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnLigamxAthleteBio` | `site_v2` `/soccer/mex.1/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnLigamxAthleteCareerStats` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnLigamxAthleteContracts` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnLigamxAthleteCore` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnLigamxAthleteEventlog` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnLigamxAthleteGamelog` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnLigamxAthleteInfo` | `site_v2` `/soccer/mex.1/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnLigamxAthleteInjuries` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnLigamxAthleteNews` | `site_v2` `/soccer/mex.1/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnLigamxAthleteNotes` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnLigamxAthleteOverview` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnLigamxAthleteRecords` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnLigamxAthleteSeasons` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnLigamxAthleteSplits` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnLigamxAthleteStatisticslog` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnLigamxAthleteStats` | `web_v3` `/soccer/mex.1/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnLigamxAthleteVsAthlete` | `core_v2` `/soccer/leagues/mex.1/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnLigamxAthletesIndex` | `core_v2` `/soccer/leagues/mex.1/athletes` | — | `active`, `limit`, `page` |
+| `espnLigamxAward` | `core_v2` `/soccer/leagues/mex.1/awards/{award_id}` | `award_id`\* | — |
+| `espnLigamxAwards` | `core_v2` `/soccer/leagues/mex.1/awards` | — | — |
+| `espnLigamxCalendar` | `site_v2` `/soccer/mex.1/calendar` | — | — |
+| `espnLigamxCoach` | `core_v2` `/soccer/leagues/mex.1/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnLigamxCoachRecord` | `core_v2` `/soccer/leagues/mex.1/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnLigamxCoachSeason` | `core_v2` `/soccer/leagues/mex.1/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnLigamxConferences` | `site_v2` `/soccer/mex.1/groups` | — | — |
+| `espnLigamxDraft` | `site_v2` `/soccer/mex.1/draft` | — | — |
+| `espnLigamxEvent` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}` | `event_id`\* | — |
+| `espnLigamxEventBroadcasts` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnLigamxEventCompetition` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnLigamxEventCompetitor` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnLigamxEventCompetitorLeaders` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnLigamxEventCompetitorLinescores` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnLigamxEventCompetitorRecord` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnLigamxEventCompetitorRoster` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnLigamxEventCompetitorStatistics` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnLigamxEventCompetitors` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnLigamxEventLeaders` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnLigamxEventOdds` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnLigamxEventOfficialDetail` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnLigamxEventOfficials` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnLigamxEventPlay` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnLigamxEventPlayPersonnel` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnLigamxEventPlays` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnLigamxEventPowerindex` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnLigamxEventPredictor` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnLigamxEventProbabilities` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnLigamxEventPropbets` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnLigamxEventScoringplays` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnLigamxEventSituation` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnLigamxEventStatus` | `core_v2` `/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnLigamxEvents` | `core_v2` `/soccer/leagues/mex.1/events` | — | `dates`, `limit` |
+| `espnLigamxFranchise` | `core_v2` `/soccer/leagues/mex.1/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnLigamxFranchises` | `core_v2` `/soccer/leagues/mex.1/franchises` | — | `limit` |
+| `espnLigamxInjuries` | `site_v2` `/soccer/mex.1/injuries` | — | — |
+| `espnLigamxLeaders` | `web_v3` `/soccer/mex.1/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnLigamxLeadersCore` | `core_v2` `/soccer/leagues/mex.1/leaders` | — | — |
+| `espnLigamxLeagueNotes` | `core_v2` `/soccer/leagues/mex.1/notes` | — | — |
+| `espnLigamxLeagueRoot` | `core_v2` `/soccer/leagues/mex.1` | — | — |
+| `espnLigamxNews` | `site_v2` `/soccer/mex.1/news` | — | `limit` |
+| `espnLigamxPosition` | `core_v2` `/soccer/leagues/mex.1/positions/{position_id}` | `position_id`\* | — |
+| `espnLigamxPositions` | `core_v2` `/soccer/leagues/mex.1/positions` | — | — |
+| `espnLigamxScoreboard` | `site_v2` `/soccer/mex.1/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnLigamxSeasonAthletes` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnLigamxSeasonAwards` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/awards` | `season`\* | — |
+| `espnLigamxSeasonCoaches` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnLigamxSeasonDraft` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/draft` | `season`\* | — |
+| `espnLigamxSeasonDraftRoundPicks` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnLigamxSeasonFreeagents` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/freeagents` | `season`\* | — |
+| `espnLigamxSeasonFutures` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/futures` | `season`\* | — |
+| `espnLigamxSeasonGroup` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnLigamxSeasonGroupChildren` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnLigamxSeasonGroupTeams` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnLigamxSeasonGroups` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnLigamxSeasonInfo` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}` | `season`\* | — |
+| `espnLigamxSeasonPointer` | `core_v2` `/soccer/leagues/mex.1/season` | — | — |
+| `espnLigamxSeasonPowerindex` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnLigamxSeasonPowerindexLeaders` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnLigamxSeasonTeam` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnLigamxSeasonTeams` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnLigamxSeasonType` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnLigamxSeasonTypeCorrections` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnLigamxSeasonTypeLeaders` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnLigamxSeasonTypes` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types` | `season`\* | — |
+| `espnLigamxSeasonWeek` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnLigamxSeasonWeekEvents` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnLigamxSeasonWeeks` | `core_v2` `/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnLigamxSeasons` | `core_v2` `/soccer/leagues/mex.1/seasons` | — | `limit` |
+| `espnLigamxStandings` | `site_v2_alt` `/soccer/mex.1/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnLigamxStandingsCore` | `core_v2` `/soccer/leagues/mex.1/standings` | — | — |
+| `espnLigamxStatisticsLeague` | `site_v2` `/soccer/mex.1/statistics` | — | — |
+| `espnLigamxSummary` | `site_v2` `/soccer/mex.1/summary` | — | `event_id` → `event` |
+| `espnLigamxTalentpicks` | `core_v2` `/soccer/leagues/mex.1/talentpicks` | — | — |
+| `espnLigamxTeam` | `site_v2` `/soccer/mex.1/teams/{team_id}` | `team_id`\* | — |
+| `espnLigamxTeamCore` | `core_v2` `/soccer/leagues/mex.1/teams/{team_id}` | `team_id`\* | — |
+| `espnLigamxTeamDepthcharts` | `site_v2` `/soccer/mex.1/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnLigamxTeamHistory` | `site_v2` `/soccer/mex.1/teams/{team_id}/history` | `team_id`\* | — |
+| `espnLigamxTeamInjuries` | `site_v2` `/soccer/mex.1/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnLigamxTeamLeaders` | `site_v2` `/soccer/mex.1/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnLigamxTeamNews` | `site_v2` `/soccer/mex.1/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnLigamxTeamRecord` | `site_v2` `/soccer/mex.1/teams/{team_id}/record` | `team_id`\* | — |
+| `espnLigamxTeamRoster` | `site_v2` `/soccer/mex.1/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnLigamxTeamSchedule` | `site_v2` `/soccer/mex.1/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnLigamxTeamTransactions` | `site_v2` `/soccer/mex.1/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnLigamxTeamsCore` | `core_v2` `/soccer/leagues/mex.1/teams` | — | `limit` |
+| `espnLigamxTeamsSite` | `site_v2` `/soccer/mex.1/teams` | — | `limit` |
+| `espnLigamxTournaments` | `core_v2` `/soccer/leagues/mex.1/tournaments` | — | — |
+| `espnLigamxTransactions` | `site_v2` `/soccer/mex.1/transactions` | — | — |
+| `espnLigamxVenue` | `core_v2` `/soccer/leagues/mex.1/venues/{venue_id}` | `venue_id`\* | — |
+| `espnLigamxVenues` | `core_v2` `/soccer/leagues/mex.1/venues` | — | `limit` |

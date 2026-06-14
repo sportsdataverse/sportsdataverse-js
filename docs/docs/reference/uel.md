@@ -14,125 +14,125 @@ sidebar_position: 25
 - **scopes:** `universal`
 - **wrappers:** 110
 
-Every endpoint is called as `sdv.uel.espn_uel_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.uel.espnUel<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_uel_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.uel.espn_uel_scoreboard({});
+await sdv.uel.espnUelScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_uel_athlete_awards` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_uel_athlete_bio` | `site_v2` `/soccer/uefa.europa/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_uel_athlete_career_stats` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_uel_athlete_contracts` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_uel_athlete_core` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_uel_athlete_eventlog` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_uel_athlete_gamelog` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_uel_athlete_info` | `site_v2` `/soccer/uefa.europa/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_uel_athlete_injuries` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_uel_athlete_news` | `site_v2` `/soccer/uefa.europa/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_uel_athlete_notes` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_uel_athlete_overview` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_uel_athlete_records` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_uel_athlete_seasons` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_uel_athlete_splits` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_uel_athlete_statisticslog` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_uel_athlete_stats` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_uel_athlete_vs_athlete` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_uel_athletes_index` | `core_v2` `/soccer/leagues/uefa.europa/athletes` | — | `active`, `limit`, `page` |
-| `espn_uel_award` | `core_v2` `/soccer/leagues/uefa.europa/awards/{award_id}` | `award_id`\* | — |
-| `espn_uel_awards` | `core_v2` `/soccer/leagues/uefa.europa/awards` | — | — |
-| `espn_uel_calendar` | `site_v2` `/soccer/uefa.europa/calendar` | — | — |
-| `espn_uel_coach` | `core_v2` `/soccer/leagues/uefa.europa/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_uel_coach_record` | `core_v2` `/soccer/leagues/uefa.europa/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_uel_coach_season` | `core_v2` `/soccer/leagues/uefa.europa/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_uel_conferences` | `site_v2` `/soccer/uefa.europa/groups` | — | — |
-| `espn_uel_draft` | `site_v2` `/soccer/uefa.europa/draft` | — | — |
-| `espn_uel_event` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}` | `event_id`\* | — |
-| `espn_uel_event_broadcasts` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_uel_event_competition` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_uel_event_competitor` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_uel_event_competitor_leaders` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_uel_event_competitor_linescores` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_uel_event_competitor_record` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_uel_event_competitor_roster` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_uel_event_competitor_statistics` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_uel_event_competitors` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_uel_event_leaders` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_uel_event_odds` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_uel_event_official_detail` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_uel_event_officials` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_uel_event_play` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_uel_event_play_personnel` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_uel_event_plays` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_uel_event_powerindex` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_uel_event_predictor` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_uel_event_probabilities` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_uel_event_propbets` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_uel_event_scoringplays` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_uel_event_situation` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_uel_event_status` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_uel_events` | `core_v2` `/soccer/leagues/uefa.europa/events` | — | `dates`, `limit` |
-| `espn_uel_franchise` | `core_v2` `/soccer/leagues/uefa.europa/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_uel_franchises` | `core_v2` `/soccer/leagues/uefa.europa/franchises` | — | `limit` |
-| `espn_uel_injuries` | `site_v2` `/soccer/uefa.europa/injuries` | — | — |
-| `espn_uel_leaders` | `web_v3` `/soccer/uefa.europa/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_uel_leaders_core` | `core_v2` `/soccer/leagues/uefa.europa/leaders` | — | — |
-| `espn_uel_league_notes` | `core_v2` `/soccer/leagues/uefa.europa/notes` | — | — |
-| `espn_uel_league_root` | `core_v2` `/soccer/leagues/uefa.europa` | — | — |
-| `espn_uel_news` | `site_v2` `/soccer/uefa.europa/news` | — | `limit` |
-| `espn_uel_position` | `core_v2` `/soccer/leagues/uefa.europa/positions/{position_id}` | `position_id`\* | — |
-| `espn_uel_positions` | `core_v2` `/soccer/leagues/uefa.europa/positions` | — | — |
-| `espn_uel_scoreboard` | `site_v2` `/soccer/uefa.europa/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_uel_season_athletes` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_uel_season_awards` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/awards` | `season`\* | — |
-| `espn_uel_season_coaches` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_uel_season_draft` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/draft` | `season`\* | — |
-| `espn_uel_season_draft_round_picks` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_uel_season_freeagents` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_uel_season_futures` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/futures` | `season`\* | — |
-| `espn_uel_season_group` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_uel_season_group_children` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_uel_season_group_teams` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_uel_season_groups` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_uel_season_info` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}` | `season`\* | — |
-| `espn_uel_season_pointer` | `core_v2` `/soccer/leagues/uefa.europa/season` | — | — |
-| `espn_uel_season_powerindex` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_uel_season_powerindex_leaders` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_uel_season_team` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_uel_season_teams` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_uel_season_type` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_uel_season_type_corrections` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_uel_season_type_leaders` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_uel_season_types` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types` | `season`\* | — |
-| `espn_uel_season_week` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_uel_season_week_events` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_uel_season_weeks` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_uel_seasons` | `core_v2` `/soccer/leagues/uefa.europa/seasons` | — | `limit` |
-| `espn_uel_standings` | `site_v2_alt` `/soccer/uefa.europa/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_uel_standings_core` | `core_v2` `/soccer/leagues/uefa.europa/standings` | — | — |
-| `espn_uel_statistics_league` | `site_v2` `/soccer/uefa.europa/statistics` | — | — |
-| `espn_uel_summary` | `site_v2` `/soccer/uefa.europa/summary` | — | `event_id` → `event` |
-| `espn_uel_talentpicks` | `core_v2` `/soccer/leagues/uefa.europa/talentpicks` | — | — |
-| `espn_uel_team` | `site_v2` `/soccer/uefa.europa/teams/{team_id}` | `team_id`\* | — |
-| `espn_uel_team_core` | `core_v2` `/soccer/leagues/uefa.europa/teams/{team_id}` | `team_id`\* | — |
-| `espn_uel_team_depthcharts` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_uel_team_history` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_uel_team_injuries` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_uel_team_leaders` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_uel_team_news` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_uel_team_record` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_uel_team_roster` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_uel_team_schedule` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_uel_team_transactions` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_uel_teams_core` | `core_v2` `/soccer/leagues/uefa.europa/teams` | — | `limit` |
-| `espn_uel_teams_site` | `site_v2` `/soccer/uefa.europa/teams` | — | `limit` |
-| `espn_uel_tournaments` | `core_v2` `/soccer/leagues/uefa.europa/tournaments` | — | — |
-| `espn_uel_transactions` | `site_v2` `/soccer/uefa.europa/transactions` | — | — |
-| `espn_uel_venue` | `core_v2` `/soccer/leagues/uefa.europa/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_uel_venues` | `core_v2` `/soccer/leagues/uefa.europa/venues` | — | `limit` |
+| `espnUelAthleteAwards` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnUelAthleteBio` | `site_v2` `/soccer/uefa.europa/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnUelAthleteCareerStats` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnUelAthleteContracts` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnUelAthleteCore` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnUelAthleteEventlog` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnUelAthleteGamelog` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnUelAthleteInfo` | `site_v2` `/soccer/uefa.europa/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnUelAthleteInjuries` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnUelAthleteNews` | `site_v2` `/soccer/uefa.europa/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnUelAthleteNotes` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnUelAthleteOverview` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnUelAthleteRecords` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnUelAthleteSeasons` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnUelAthleteSplits` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnUelAthleteStatisticslog` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnUelAthleteStats` | `web_v3` `/soccer/uefa.europa/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnUelAthleteVsAthlete` | `core_v2` `/soccer/leagues/uefa.europa/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnUelAthletesIndex` | `core_v2` `/soccer/leagues/uefa.europa/athletes` | — | `active`, `limit`, `page` |
+| `espnUelAward` | `core_v2` `/soccer/leagues/uefa.europa/awards/{award_id}` | `award_id`\* | — |
+| `espnUelAwards` | `core_v2` `/soccer/leagues/uefa.europa/awards` | — | — |
+| `espnUelCalendar` | `site_v2` `/soccer/uefa.europa/calendar` | — | — |
+| `espnUelCoach` | `core_v2` `/soccer/leagues/uefa.europa/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnUelCoachRecord` | `core_v2` `/soccer/leagues/uefa.europa/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnUelCoachSeason` | `core_v2` `/soccer/leagues/uefa.europa/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnUelConferences` | `site_v2` `/soccer/uefa.europa/groups` | — | — |
+| `espnUelDraft` | `site_v2` `/soccer/uefa.europa/draft` | — | — |
+| `espnUelEvent` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}` | `event_id`\* | — |
+| `espnUelEventBroadcasts` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnUelEventCompetition` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnUelEventCompetitor` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnUelEventCompetitorLeaders` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnUelEventCompetitorLinescores` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnUelEventCompetitorRecord` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnUelEventCompetitorRoster` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnUelEventCompetitorStatistics` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnUelEventCompetitors` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnUelEventLeaders` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnUelEventOdds` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnUelEventOfficialDetail` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnUelEventOfficials` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnUelEventPlay` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnUelEventPlayPersonnel` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnUelEventPlays` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnUelEventPowerindex` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnUelEventPredictor` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnUelEventProbabilities` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnUelEventPropbets` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnUelEventScoringplays` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnUelEventSituation` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnUelEventStatus` | `core_v2` `/soccer/leagues/uefa.europa/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnUelEvents` | `core_v2` `/soccer/leagues/uefa.europa/events` | — | `dates`, `limit` |
+| `espnUelFranchise` | `core_v2` `/soccer/leagues/uefa.europa/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnUelFranchises` | `core_v2` `/soccer/leagues/uefa.europa/franchises` | — | `limit` |
+| `espnUelInjuries` | `site_v2` `/soccer/uefa.europa/injuries` | — | — |
+| `espnUelLeaders` | `web_v3` `/soccer/uefa.europa/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnUelLeadersCore` | `core_v2` `/soccer/leagues/uefa.europa/leaders` | — | — |
+| `espnUelLeagueNotes` | `core_v2` `/soccer/leagues/uefa.europa/notes` | — | — |
+| `espnUelLeagueRoot` | `core_v2` `/soccer/leagues/uefa.europa` | — | — |
+| `espnUelNews` | `site_v2` `/soccer/uefa.europa/news` | — | `limit` |
+| `espnUelPosition` | `core_v2` `/soccer/leagues/uefa.europa/positions/{position_id}` | `position_id`\* | — |
+| `espnUelPositions` | `core_v2` `/soccer/leagues/uefa.europa/positions` | — | — |
+| `espnUelScoreboard` | `site_v2` `/soccer/uefa.europa/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnUelSeasonAthletes` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnUelSeasonAwards` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/awards` | `season`\* | — |
+| `espnUelSeasonCoaches` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnUelSeasonDraft` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/draft` | `season`\* | — |
+| `espnUelSeasonDraftRoundPicks` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnUelSeasonFreeagents` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/freeagents` | `season`\* | — |
+| `espnUelSeasonFutures` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/futures` | `season`\* | — |
+| `espnUelSeasonGroup` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnUelSeasonGroupChildren` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnUelSeasonGroupTeams` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnUelSeasonGroups` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnUelSeasonInfo` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}` | `season`\* | — |
+| `espnUelSeasonPointer` | `core_v2` `/soccer/leagues/uefa.europa/season` | — | — |
+| `espnUelSeasonPowerindex` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnUelSeasonPowerindexLeaders` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnUelSeasonTeam` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnUelSeasonTeams` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnUelSeasonType` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnUelSeasonTypeCorrections` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnUelSeasonTypeLeaders` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnUelSeasonTypes` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types` | `season`\* | — |
+| `espnUelSeasonWeek` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnUelSeasonWeekEvents` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnUelSeasonWeeks` | `core_v2` `/soccer/leagues/uefa.europa/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnUelSeasons` | `core_v2` `/soccer/leagues/uefa.europa/seasons` | — | `limit` |
+| `espnUelStandings` | `site_v2_alt` `/soccer/uefa.europa/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnUelStandingsCore` | `core_v2` `/soccer/leagues/uefa.europa/standings` | — | — |
+| `espnUelStatisticsLeague` | `site_v2` `/soccer/uefa.europa/statistics` | — | — |
+| `espnUelSummary` | `site_v2` `/soccer/uefa.europa/summary` | — | `event_id` → `event` |
+| `espnUelTalentpicks` | `core_v2` `/soccer/leagues/uefa.europa/talentpicks` | — | — |
+| `espnUelTeam` | `site_v2` `/soccer/uefa.europa/teams/{team_id}` | `team_id`\* | — |
+| `espnUelTeamCore` | `core_v2` `/soccer/leagues/uefa.europa/teams/{team_id}` | `team_id`\* | — |
+| `espnUelTeamDepthcharts` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnUelTeamHistory` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/history` | `team_id`\* | — |
+| `espnUelTeamInjuries` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnUelTeamLeaders` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnUelTeamNews` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnUelTeamRecord` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/record` | `team_id`\* | — |
+| `espnUelTeamRoster` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnUelTeamSchedule` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnUelTeamTransactions` | `site_v2` `/soccer/uefa.europa/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnUelTeamsCore` | `core_v2` `/soccer/leagues/uefa.europa/teams` | — | `limit` |
+| `espnUelTeamsSite` | `site_v2` `/soccer/uefa.europa/teams` | — | `limit` |
+| `espnUelTournaments` | `core_v2` `/soccer/leagues/uefa.europa/tournaments` | — | — |
+| `espnUelTransactions` | `site_v2` `/soccer/uefa.europa/transactions` | — | — |
+| `espnUelVenue` | `core_v2` `/soccer/leagues/uefa.europa/venues/{venue_id}` | `venue_id`\* | — |
+| `espnUelVenues` | `core_v2` `/soccer/leagues/uefa.europa/venues` | — | `limit` |

@@ -2,8 +2,8 @@ import { HOSTS, get } from "./client.js";
 import type { LeagueConfig, Scope, WrapperDef } from "./types.js";
 import { WRAPPERS } from "../generated/wrappers.js";
 
-/** snake_case -> camelCase (e.g. `event_id` -> `eventId`). */
-function toCamel(s: string): string {
+/** snake_case -> camelCase (e.g. `event_id` -> `eventId`, `espn_nba_scoreboard` -> `espnNbaScoreboard`). */
+export function toCamel(s: string): string {
   return s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
 }
 
@@ -83,7 +83,7 @@ function buildPath(
     if (v === undefined || v === null) {
       if (byName.get(name)?.required === false) return "";
       throw new Error(
-        `espn_${cfg.prefix}_${def.short}: missing required path parameter "${name}"`
+        `${toCamel(`espn_${cfg.prefix}_${def.short}`)}: missing required path parameter "${name}"`
       );
     }
     return String(v);

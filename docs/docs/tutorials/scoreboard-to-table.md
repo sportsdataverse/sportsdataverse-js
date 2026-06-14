@@ -39,7 +39,7 @@ function tidyGames(board) {
   });
 }
 
-const board = await sdv.nba.espn_nba_scoreboard({});
+const board = await sdv.nba.espnNbaScoreboard({});
 const games = tidyGames(board);
 console.table(games);
 ```
@@ -56,8 +56,8 @@ console.table(games);
 ```
 
 Because the extractor only touches `events`, the **exact same function works for
-any league** — swap `espn_nba_scoreboard` for `espn_nfl_scoreboard`,
-`espn_nhl_scoreboard`, etc.
+any league** — swap `espnNbaScoreboard` for `espnNflScoreboard`,
+`espnNhlScoreboard`, etc.
 
 ## 2. Drill into one game
 
@@ -65,7 +65,7 @@ Take an `id` from the table and pull the full game summary (box score, plays, wi
 probability, leaders, …):
 
 ```js
-const game = await sdv.nba.espn_nba_summary({ event_id: games[0].id });
+const game = await sdv.nba.espnNbaSummary({ event_id: games[0].id });
 
 // Team box-score totals
 for (const team of game.boxscore?.teams ?? []) {
@@ -84,12 +84,12 @@ Combine endpoints: get a team's schedule, then summarize each game. Be a polite
 ESPN client — these are public endpoints, so keep concurrency modest.
 
 ```js
-const schedule = await sdv.nfl.espn_nfl_team_schedule({ team_id: 12, season: 2024 });
+const schedule = await sdv.nfl.espnNflTeamSchedule({ team_id: 12, season: 2024 });
 const eventIds = (schedule.events ?? []).map((e) => e.id);
 
 const results = [];
 for (const id of eventIds) {
-  const summary = await sdv.nfl.espn_nfl_summary({ event_id: id });
+  const summary = await sdv.nfl.espnNflSummary({ event_id: id });
   const header = summary.header?.competitions?.[0]?.competitors ?? [];
   results.push({
     id,

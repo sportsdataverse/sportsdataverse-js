@@ -14,132 +14,132 @@ sidebar_position: 6
 - **scopes:** `universal`, `football`
 - **wrappers:** 112
 
-Every endpoint is called as `sdv.nfl.espn_nfl_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.nfl.espnNfl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_nfl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.nfl.espn_nfl_scoreboard({});
+await sdv.nfl.espnNflScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_nfl_athlete_awards` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_nfl_athlete_bio` | `site_v2` `/football/nfl/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_nfl_athlete_career_stats` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_nfl_athlete_contracts` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_nfl_athlete_core` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_nfl_athlete_eventlog` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_nfl_athlete_gamelog` | `web_v3` `/football/nfl/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_nfl_athlete_info` | `site_v2` `/football/nfl/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_nfl_athlete_injuries` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_nfl_athlete_news` | `site_v2` `/football/nfl/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_nfl_athlete_notes` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_nfl_athlete_overview` | `web_v3` `/football/nfl/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_nfl_athlete_records` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_nfl_athlete_seasons` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_nfl_athlete_splits` | `web_v3` `/football/nfl/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_nfl_athlete_statisticslog` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_nfl_athlete_stats` | `web_v3` `/football/nfl/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_nfl_athlete_vs_athlete` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_nfl_athletes_index` | `core_v2` `/football/leagues/nfl/athletes` | — | `active`, `limit`, `page` |
-| `espn_nfl_award` | `core_v2` `/football/leagues/nfl/awards/{award_id}` | `award_id`\* | — |
-| `espn_nfl_awards` | `core_v2` `/football/leagues/nfl/awards` | — | — |
-| `espn_nfl_calendar` | `site_v2` `/football/nfl/calendar` | — | — |
-| `espn_nfl_coach` | `core_v2` `/football/leagues/nfl/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_nfl_coach_record` | `core_v2` `/football/leagues/nfl/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_nfl_coach_season` | `core_v2` `/football/leagues/nfl/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_nfl_conferences` | `site_v2` `/football/nfl/groups` | — | — |
-| `espn_nfl_draft` | `site_v2` `/football/nfl/draft` | — | — |
-| `espn_nfl_event` | `core_v2` `/football/leagues/nfl/events/{event_id}` | `event_id`\* | — |
-| `espn_nfl_event_broadcasts` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_competition` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_competitor` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nfl_event_competitor_leaders` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nfl_event_competitor_linescores` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nfl_event_competitor_record` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nfl_event_competitor_roster` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nfl_event_competitor_statistics` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_nfl_event_competitors` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_leaders` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_odds` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_official_detail` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_nfl_event_officials` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_play` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_nfl_event_play_personnel` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_nfl_event_plays` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_nfl_event_powerindex` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_predictor` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_probabilities` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_nfl_event_propbets` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_scoringplays` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_situation` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_nfl_event_status` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_nfl_events` | `core_v2` `/football/leagues/nfl/events` | — | `dates`, `limit` |
-| `espn_nfl_franchise` | `core_v2` `/football/leagues/nfl/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_nfl_franchises` | `core_v2` `/football/leagues/nfl/franchises` | — | `limit` |
-| `espn_nfl_injuries` | `site_v2` `/football/nfl/injuries` | — | — |
-| `espn_nfl_leaders` | `web_v3` `/football/nfl/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_nfl_leaders_core` | `core_v2` `/football/leagues/nfl/leaders` | — | — |
-| `espn_nfl_league_notes` | `core_v2` `/football/leagues/nfl/notes` | — | — |
-| `espn_nfl_league_root` | `core_v2` `/football/leagues/nfl` | — | — |
-| `espn_nfl_news` | `site_v2` `/football/nfl/news` | — | `limit` |
-| `espn_nfl_position` | `core_v2` `/football/leagues/nfl/positions/{position_id}` | `position_id`\* | — |
-| `espn_nfl_positions` | `core_v2` `/football/leagues/nfl/positions` | — | — |
-| `espn_nfl_scoreboard` | `site_v2` `/football/nfl/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_nfl_season_athletes` | `core_v2` `/football/leagues/nfl/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_nfl_season_awards` | `core_v2` `/football/leagues/nfl/seasons/{season}/awards` | `season`\* | — |
-| `espn_nfl_season_coaches` | `core_v2` `/football/leagues/nfl/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_nfl_season_draft` | `core_v2` `/football/leagues/nfl/seasons/{season}/draft` | `season`\* | — |
-| `espn_nfl_season_draft_round_picks` | `core_v2` `/football/leagues/nfl/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_nfl_season_freeagents` | `core_v2` `/football/leagues/nfl/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_nfl_season_futures` | `core_v2` `/football/leagues/nfl/seasons/{season}/futures` | `season`\* | — |
-| `espn_nfl_season_group` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_nfl_season_group_children` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_nfl_season_group_teams` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_nfl_season_groups` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_nfl_season_info` | `core_v2` `/football/leagues/nfl/seasons/{season}` | `season`\* | — |
-| `espn_nfl_season_pointer` | `core_v2` `/football/leagues/nfl/season` | — | — |
-| `espn_nfl_season_powerindex` | `core_v2` `/football/leagues/nfl/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_nfl_season_powerindex_leaders` | `core_v2` `/football/leagues/nfl/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_nfl_season_team` | `core_v2` `/football/leagues/nfl/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_nfl_season_teams` | `core_v2` `/football/leagues/nfl/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_nfl_season_type` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_nfl_season_type_corrections` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_nfl_season_type_leaders` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_nfl_season_types` | `core_v2` `/football/leagues/nfl/seasons/{season}/types` | `season`\* | — |
-| `espn_nfl_season_week` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_nfl_season_week_events` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_nfl_season_weeks` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_nfl_seasons` | `core_v2` `/football/leagues/nfl/seasons` | — | `limit` |
-| `espn_nfl_standings` | `site_v2_alt` `/football/nfl/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_nfl_standings_core` | `core_v2` `/football/leagues/nfl/standings` | — | — |
-| `espn_nfl_statistics_league` | `site_v2` `/football/nfl/statistics` | — | — |
-| `espn_nfl_summary` | `site_v2` `/football/nfl/summary` | — | `event_id` → `event` |
-| `espn_nfl_talentpicks` | `core_v2` `/football/leagues/nfl/talentpicks` | — | — |
-| `espn_nfl_team` | `site_v2` `/football/nfl/teams/{team_id}` | `team_id`\* | — |
-| `espn_nfl_team_core` | `core_v2` `/football/leagues/nfl/teams/{team_id}` | `team_id`\* | — |
-| `espn_nfl_team_depthcharts` | `site_v2` `/football/nfl/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_nfl_team_history` | `site_v2` `/football/nfl/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_nfl_team_injuries` | `site_v2` `/football/nfl/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_nfl_team_leaders` | `site_v2` `/football/nfl/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_nfl_team_news` | `site_v2` `/football/nfl/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_nfl_team_record` | `site_v2` `/football/nfl/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_nfl_team_roster` | `site_v2` `/football/nfl/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_nfl_team_schedule` | `site_v2` `/football/nfl/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_nfl_team_transactions` | `site_v2` `/football/nfl/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_nfl_teams_core` | `core_v2` `/football/leagues/nfl/teams` | — | `limit` |
-| `espn_nfl_teams_site` | `site_v2` `/football/nfl/teams` | — | `limit` |
-| `espn_nfl_tournaments` | `core_v2` `/football/leagues/nfl/tournaments` | — | — |
-| `espn_nfl_transactions` | `site_v2` `/football/nfl/transactions` | — | — |
-| `espn_nfl_venue` | `core_v2` `/football/leagues/nfl/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_nfl_venues` | `core_v2` `/football/leagues/nfl/venues` | — | `limit` |
+| `espnNflAthleteAwards` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnNflAthleteBio` | `site_v2` `/football/nfl/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnNflAthleteCareerStats` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnNflAthleteContracts` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnNflAthleteCore` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnNflAthleteEventlog` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnNflAthleteGamelog` | `web_v3` `/football/nfl/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnNflAthleteInfo` | `site_v2` `/football/nfl/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnNflAthleteInjuries` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnNflAthleteNews` | `site_v2` `/football/nfl/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnNflAthleteNotes` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnNflAthleteOverview` | `web_v3` `/football/nfl/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnNflAthleteRecords` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnNflAthleteSeasons` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnNflAthleteSplits` | `web_v3` `/football/nfl/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnNflAthleteStatisticslog` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnNflAthleteStats` | `web_v3` `/football/nfl/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnNflAthleteVsAthlete` | `core_v2` `/football/leagues/nfl/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnNflAthletesIndex` | `core_v2` `/football/leagues/nfl/athletes` | — | `active`, `limit`, `page` |
+| `espnNflAward` | `core_v2` `/football/leagues/nfl/awards/{award_id}` | `award_id`\* | — |
+| `espnNflAwards` | `core_v2` `/football/leagues/nfl/awards` | — | — |
+| `espnNflCalendar` | `site_v2` `/football/nfl/calendar` | — | — |
+| `espnNflCoach` | `core_v2` `/football/leagues/nfl/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnNflCoachRecord` | `core_v2` `/football/leagues/nfl/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnNflCoachSeason` | `core_v2` `/football/leagues/nfl/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnNflConferences` | `site_v2` `/football/nfl/groups` | — | — |
+| `espnNflDraft` | `site_v2` `/football/nfl/draft` | — | — |
+| `espnNflEvent` | `core_v2` `/football/leagues/nfl/events/{event_id}` | `event_id`\* | — |
+| `espnNflEventBroadcasts` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnNflEventCompetition` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnNflEventCompetitor` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNflEventCompetitorLeaders` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNflEventCompetitorLinescores` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNflEventCompetitorRecord` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNflEventCompetitorRoster` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNflEventCompetitorStatistics` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnNflEventCompetitors` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnNflEventLeaders` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnNflEventOdds` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnNflEventOfficialDetail` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnNflEventOfficials` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnNflEventPlay` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnNflEventPlayPersonnel` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnNflEventPlays` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnNflEventPowerindex` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnNflEventPredictor` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnNflEventProbabilities` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnNflEventPropbets` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnNflEventScoringplays` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnNflEventSituation` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnNflEventStatus` | `core_v2` `/football/leagues/nfl/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnNflEvents` | `core_v2` `/football/leagues/nfl/events` | — | `dates`, `limit` |
+| `espnNflFranchise` | `core_v2` `/football/leagues/nfl/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnNflFranchises` | `core_v2` `/football/leagues/nfl/franchises` | — | `limit` |
+| `espnNflInjuries` | `site_v2` `/football/nfl/injuries` | — | — |
+| `espnNflLeaders` | `web_v3` `/football/nfl/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnNflLeadersCore` | `core_v2` `/football/leagues/nfl/leaders` | — | — |
+| `espnNflLeagueNotes` | `core_v2` `/football/leagues/nfl/notes` | — | — |
+| `espnNflLeagueRoot` | `core_v2` `/football/leagues/nfl` | — | — |
+| `espnNflNews` | `site_v2` `/football/nfl/news` | — | `limit` |
+| `espnNflPosition` | `core_v2` `/football/leagues/nfl/positions/{position_id}` | `position_id`\* | — |
+| `espnNflPositions` | `core_v2` `/football/leagues/nfl/positions` | — | — |
+| `espnNflScoreboard` | `site_v2` `/football/nfl/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnNflSeasonAthletes` | `core_v2` `/football/leagues/nfl/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnNflSeasonAwards` | `core_v2` `/football/leagues/nfl/seasons/{season}/awards` | `season`\* | — |
+| `espnNflSeasonCoaches` | `core_v2` `/football/leagues/nfl/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnNflSeasonDraft` | `core_v2` `/football/leagues/nfl/seasons/{season}/draft` | `season`\* | — |
+| `espnNflSeasonDraftRoundPicks` | `core_v2` `/football/leagues/nfl/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnNflSeasonFreeagents` | `core_v2` `/football/leagues/nfl/seasons/{season}/freeagents` | `season`\* | — |
+| `espnNflSeasonFutures` | `core_v2` `/football/leagues/nfl/seasons/{season}/futures` | `season`\* | — |
+| `espnNflSeasonGroup` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnNflSeasonGroupChildren` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnNflSeasonGroupTeams` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnNflSeasonGroups` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnNflSeasonInfo` | `core_v2` `/football/leagues/nfl/seasons/{season}` | `season`\* | — |
+| `espnNflSeasonPointer` | `core_v2` `/football/leagues/nfl/season` | — | — |
+| `espnNflSeasonPowerindex` | `core_v2` `/football/leagues/nfl/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnNflSeasonPowerindexLeaders` | `core_v2` `/football/leagues/nfl/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnNflSeasonTeam` | `core_v2` `/football/leagues/nfl/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnNflSeasonTeams` | `core_v2` `/football/leagues/nfl/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnNflSeasonType` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnNflSeasonTypeCorrections` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnNflSeasonTypeLeaders` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnNflSeasonTypes` | `core_v2` `/football/leagues/nfl/seasons/{season}/types` | `season`\* | — |
+| `espnNflSeasonWeek` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnNflSeasonWeekEvents` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnNflSeasonWeeks` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnNflSeasons` | `core_v2` `/football/leagues/nfl/seasons` | — | `limit` |
+| `espnNflStandings` | `site_v2_alt` `/football/nfl/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnNflStandingsCore` | `core_v2` `/football/leagues/nfl/standings` | — | — |
+| `espnNflStatisticsLeague` | `site_v2` `/football/nfl/statistics` | — | — |
+| `espnNflSummary` | `site_v2` `/football/nfl/summary` | — | `event_id` → `event` |
+| `espnNflTalentpicks` | `core_v2` `/football/leagues/nfl/talentpicks` | — | — |
+| `espnNflTeam` | `site_v2` `/football/nfl/teams/{team_id}` | `team_id`\* | — |
+| `espnNflTeamCore` | `core_v2` `/football/leagues/nfl/teams/{team_id}` | `team_id`\* | — |
+| `espnNflTeamDepthcharts` | `site_v2` `/football/nfl/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnNflTeamHistory` | `site_v2` `/football/nfl/teams/{team_id}/history` | `team_id`\* | — |
+| `espnNflTeamInjuries` | `site_v2` `/football/nfl/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnNflTeamLeaders` | `site_v2` `/football/nfl/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnNflTeamNews` | `site_v2` `/football/nfl/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnNflTeamRecord` | `site_v2` `/football/nfl/teams/{team_id}/record` | `team_id`\* | — |
+| `espnNflTeamRoster` | `site_v2` `/football/nfl/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnNflTeamSchedule` | `site_v2` `/football/nfl/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnNflTeamTransactions` | `site_v2` `/football/nfl/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnNflTeamsCore` | `core_v2` `/football/leagues/nfl/teams` | — | `limit` |
+| `espnNflTeamsSite` | `site_v2` `/football/nfl/teams` | — | `limit` |
+| `espnNflTournaments` | `core_v2` `/football/leagues/nfl/tournaments` | — | — |
+| `espnNflTransactions` | `site_v2` `/football/nfl/transactions` | — | — |
+| `espnNflVenue` | `core_v2` `/football/leagues/nfl/venues/{venue_id}` | `venue_id`\* | — |
+| `espnNflVenues` | `core_v2` `/football/leagues/nfl/venues` | — | `limit` |
 
 ## Football endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_nfl_season_qbr` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}[/groups/{group_id}]/qbr/{split}` | `season`\*, `season_type`, `group_id`, `split` | — |
-| `espn_nfl_season_qbr_week` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}/qbr/{split}` | `season`\*, `week`\*, `season_type`, `split` | — |
+| `espnNflSeasonQbr` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}[/groups/{group_id}]/qbr/{split}` | `season`\*, `season_type`, `group_id`, `split` | — |
+| `espnNflSeasonQbrWeek` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}/qbr/{split}` | `season`\*, `week`\*, `season_type`, `split` | — |

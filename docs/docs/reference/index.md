@@ -9,7 +9,7 @@ sidebar_position: 0
 
 # ESPN cross-league reference
 
-Every league below exposes the same generated `espn_<league>_<endpoint>` surface, bound from a single YAML source of truth. Pick a league for its full endpoint table, or try any call live in the [playground](/playground).
+Every league below exposes the same generated `espn<League><Endpoint>` surface (e.g. `espnNbaScoreboard`), bound from a single YAML source of truth. Each method is also available under its snake_case name (`espn_nba_scoreboard`) for parity with the Python / R packages. Pick a league for its full endpoint table, or try any call live in the [playground](/playground).
 
 | League | sport | ESPN slug | scopes | wrappers |
 |---|---|---|---|---:|
@@ -45,8 +45,8 @@ Every league below exposes the same generated `espn_<league>_<endpoint>` surface
 
 :::tip Same call, every league
 ```js
-await sdv.nba.espn_nba_scoreboard({});
-await sdv.nfl.espn_nfl_scoreboard({ week: 1, season_type: 2 });
-await sdv.soccer.espn_soccer_scoreboard({ league: 'eng.1' });
+await sdv.nba.espnNbaScoreboard({});
+await sdv.nfl.espnNflScoreboard({ week: 1, seasonType: 2 });
+await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });
 ```
 :::

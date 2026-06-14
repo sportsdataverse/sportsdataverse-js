@@ -14,131 +14,131 @@ sidebar_position: 7
 - **scopes:** `universal`, `mlb`
 - **wrappers:** 111
 
-Every endpoint is called as `sdv.mlb.espn_mlb_<endpoint>(params)`. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.mlb.espnMlb<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_mlb_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
 
 ```js
 import sdv from 'sportsdataverse';
 
-await sdv.mlb.espn_mlb_scoreboard({});
+await sdv.mlb.espnMlbScoreboard({});
 ```
 
 ## Universal endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_mlb_athlete_awards` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
-| `espn_mlb_athlete_bio` | `site_v2` `/baseball/mlb/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
-| `espn_mlb_athlete_career_stats` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
-| `espn_mlb_athlete_contracts` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
-| `espn_mlb_athlete_core` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_mlb_athlete_eventlog` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
-| `espn_mlb_athlete_gamelog` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
-| `espn_mlb_athlete_info` | `site_v2` `/baseball/mlb/athletes/{athlete_id}` | `athlete_id`\* | — |
-| `espn_mlb_athlete_injuries` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
-| `espn_mlb_athlete_news` | `site_v2` `/baseball/mlb/athletes/{athlete_id}/news` | `athlete_id`\* | — |
-| `espn_mlb_athlete_notes` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
-| `espn_mlb_athlete_overview` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
-| `espn_mlb_athlete_records` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/records` | `athlete_id`\* | — |
-| `espn_mlb_athlete_seasons` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
-| `espn_mlb_athlete_splits` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
-| `espn_mlb_athlete_statisticslog` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
-| `espn_mlb_athlete_stats` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
-| `espn_mlb_athlete_vs_athlete` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
-| `espn_mlb_athletes_index` | `core_v2` `/baseball/leagues/mlb/athletes` | — | `active`, `limit`, `page` |
-| `espn_mlb_award` | `core_v2` `/baseball/leagues/mlb/awards/{award_id}` | `award_id`\* | — |
-| `espn_mlb_awards` | `core_v2` `/baseball/leagues/mlb/awards` | — | — |
-| `espn_mlb_calendar` | `site_v2` `/baseball/mlb/calendar` | — | — |
-| `espn_mlb_coach` | `core_v2` `/baseball/leagues/mlb/coaches/{coach_id}` | `coach_id`\* | — |
-| `espn_mlb_coach_record` | `core_v2` `/baseball/leagues/mlb/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
-| `espn_mlb_coach_season` | `core_v2` `/baseball/leagues/mlb/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
-| `espn_mlb_conferences` | `site_v2` `/baseball/mlb/groups` | — | — |
-| `espn_mlb_draft` | `site_v2` `/baseball/mlb/draft` | — | — |
-| `espn_mlb_event` | `core_v2` `/baseball/leagues/mlb/events/{event_id}` | `event_id`\* | — |
-| `espn_mlb_event_broadcasts` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_competition` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_competitor` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mlb_event_competitor_leaders` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mlb_event_competitor_linescores` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mlb_event_competitor_record` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mlb_event_competitor_roster` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mlb_event_competitor_statistics` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
-| `espn_mlb_event_competitors` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_leaders` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_odds` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_official_detail` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
-| `espn_mlb_event_officials` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_play` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_mlb_event_play_personnel` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
-| `espn_mlb_event_plays` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
-| `espn_mlb_event_powerindex` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_predictor` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_probabilities` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
-| `espn_mlb_event_propbets` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_scoringplays` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_situation` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
-| `espn_mlb_event_status` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
-| `espn_mlb_events` | `core_v2` `/baseball/leagues/mlb/events` | — | `dates`, `limit` |
-| `espn_mlb_franchise` | `core_v2` `/baseball/leagues/mlb/franchises/{franchise_id}` | `franchise_id`\* | — |
-| `espn_mlb_franchises` | `core_v2` `/baseball/leagues/mlb/franchises` | — | `limit` |
-| `espn_mlb_injuries` | `site_v2` `/baseball/mlb/injuries` | — | — |
-| `espn_mlb_leaders` | `web_v3` `/baseball/mlb/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
-| `espn_mlb_leaders_core` | `core_v2` `/baseball/leagues/mlb/leaders` | — | — |
-| `espn_mlb_league_notes` | `core_v2` `/baseball/leagues/mlb/notes` | — | — |
-| `espn_mlb_league_root` | `core_v2` `/baseball/leagues/mlb` | — | — |
-| `espn_mlb_news` | `site_v2` `/baseball/mlb/news` | — | `limit` |
-| `espn_mlb_position` | `core_v2` `/baseball/leagues/mlb/positions/{position_id}` | `position_id`\* | — |
-| `espn_mlb_positions` | `core_v2` `/baseball/leagues/mlb/positions` | — | — |
-| `espn_mlb_scoreboard` | `site_v2` `/baseball/mlb/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
-| `espn_mlb_season_athletes` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
-| `espn_mlb_season_awards` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/awards` | `season`\* | — |
-| `espn_mlb_season_coaches` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/coaches` | `season`\* | `limit` |
-| `espn_mlb_season_draft` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/draft` | `season`\* | — |
-| `espn_mlb_season_draft_round_picks` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
-| `espn_mlb_season_freeagents` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/freeagents` | `season`\* | — |
-| `espn_mlb_season_futures` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/futures` | `season`\* | — |
-| `espn_mlb_season_group` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_mlb_season_group_children` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
-| `espn_mlb_season_group_teams` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
-| `espn_mlb_season_groups` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
-| `espn_mlb_season_info` | `core_v2` `/baseball/leagues/mlb/seasons/{season}` | `season`\* | — |
-| `espn_mlb_season_pointer` | `core_v2` `/baseball/leagues/mlb/season` | — | — |
-| `espn_mlb_season_powerindex` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
-| `espn_mlb_season_powerindex_leaders` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/powerindex/leaders` | `season`\* | — |
-| `espn_mlb_season_team` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
-| `espn_mlb_season_teams` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/teams` | `season`\* | `limit` |
-| `espn_mlb_season_type` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
-| `espn_mlb_season_type_corrections` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
-| `espn_mlb_season_type_leaders` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
-| `espn_mlb_season_types` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types` | `season`\* | — |
-| `espn_mlb_season_week` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
-| `espn_mlb_season_week_events` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
-| `espn_mlb_season_weeks` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
-| `espn_mlb_seasons` | `core_v2` `/baseball/leagues/mlb/seasons` | — | `limit` |
-| `espn_mlb_standings` | `site_v2_alt` `/baseball/mlb/standings` | — | `season`, `group`, `standings_type` → `type` |
-| `espn_mlb_standings_core` | `core_v2` `/baseball/leagues/mlb/standings` | — | — |
-| `espn_mlb_statistics_league` | `site_v2` `/baseball/mlb/statistics` | — | — |
-| `espn_mlb_summary` | `site_v2` `/baseball/mlb/summary` | — | `event_id` → `event` |
-| `espn_mlb_talentpicks` | `core_v2` `/baseball/leagues/mlb/talentpicks` | — | — |
-| `espn_mlb_team` | `site_v2` `/baseball/mlb/teams/{team_id}` | `team_id`\* | — |
-| `espn_mlb_team_core` | `core_v2` `/baseball/leagues/mlb/teams/{team_id}` | `team_id`\* | — |
-| `espn_mlb_team_depthcharts` | `site_v2` `/baseball/mlb/teams/{team_id}/depthcharts` | `team_id`\* | — |
-| `espn_mlb_team_history` | `site_v2` `/baseball/mlb/teams/{team_id}/history` | `team_id`\* | — |
-| `espn_mlb_team_injuries` | `site_v2` `/baseball/mlb/teams/{team_id}/injuries` | `team_id`\* | — |
-| `espn_mlb_team_leaders` | `site_v2` `/baseball/mlb/teams/{team_id}/leaders` | `team_id`\* | — |
-| `espn_mlb_team_news` | `site_v2` `/baseball/mlb/teams/{team_id}/news` | `team_id`\* | `limit` |
-| `espn_mlb_team_record` | `site_v2` `/baseball/mlb/teams/{team_id}/record` | `team_id`\* | — |
-| `espn_mlb_team_roster` | `site_v2` `/baseball/mlb/teams/{team_id}/roster` | `team_id`\* | — |
-| `espn_mlb_team_schedule` | `site_v2` `/baseball/mlb/teams/{team_id}/schedule` | `team_id`\* | `season` |
-| `espn_mlb_team_transactions` | `site_v2` `/baseball/mlb/teams/{team_id}/transactions` | `team_id`\* | — |
-| `espn_mlb_teams_core` | `core_v2` `/baseball/leagues/mlb/teams` | — | `limit` |
-| `espn_mlb_teams_site` | `site_v2` `/baseball/mlb/teams` | — | `limit` |
-| `espn_mlb_tournaments` | `core_v2` `/baseball/leagues/mlb/tournaments` | — | — |
-| `espn_mlb_transactions` | `site_v2` `/baseball/mlb/transactions` | — | — |
-| `espn_mlb_venue` | `core_v2` `/baseball/leagues/mlb/venues/{venue_id}` | `venue_id`\* | — |
-| `espn_mlb_venues` | `core_v2` `/baseball/leagues/mlb/venues` | — | `limit` |
+| `espnMlbAthleteAwards` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/awards` | `athlete_id`\* | — |
+| `espnMlbAthleteBio` | `site_v2` `/baseball/mlb/athletes/{athlete_id}/bio` | `athlete_id`\* | — |
+| `espnMlbAthleteCareerStats` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/statistics[/{stat_type}]` | `athlete_id`\*, `stat_type` | — |
+| `espnMlbAthleteContracts` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/contracts` | `athlete_id`\* | — |
+| `espnMlbAthleteCore` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnMlbAthleteEventlog` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/eventlog` | `athlete_id`\* | — |
+| `espnMlbAthleteGamelog` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/gamelog` | `athlete_id`\* | `season` |
+| `espnMlbAthleteInfo` | `site_v2` `/baseball/mlb/athletes/{athlete_id}` | `athlete_id`\* | — |
+| `espnMlbAthleteInjuries` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/injuries` | `athlete_id`\* | — |
+| `espnMlbAthleteNews` | `site_v2` `/baseball/mlb/athletes/{athlete_id}/news` | `athlete_id`\* | — |
+| `espnMlbAthleteNotes` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/notes` | `athlete_id`\* | — |
+| `espnMlbAthleteOverview` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/overview` | `athlete_id`\* | — |
+| `espnMlbAthleteRecords` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/records` | `athlete_id`\* | — |
+| `espnMlbAthleteSeasons` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/seasons` | `athlete_id`\* | — |
+| `espnMlbAthleteSplits` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/splits` | `athlete_id`\* | `season` |
+| `espnMlbAthleteStatisticslog` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/statisticslog` | `athlete_id`\* | — |
+| `espnMlbAthleteStats` | `web_v3` `/baseball/mlb/athletes/{athlete_id}/stats` | `athlete_id`\* | `season` |
+| `espnMlbAthleteVsAthlete` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/vsathlete/{opp_id}` | `athlete_id`\*, `opp_id`\* | — |
+| `espnMlbAthletesIndex` | `core_v2` `/baseball/leagues/mlb/athletes` | — | `active`, `limit`, `page` |
+| `espnMlbAward` | `core_v2` `/baseball/leagues/mlb/awards/{award_id}` | `award_id`\* | — |
+| `espnMlbAwards` | `core_v2` `/baseball/leagues/mlb/awards` | — | — |
+| `espnMlbCalendar` | `site_v2` `/baseball/mlb/calendar` | — | — |
+| `espnMlbCoach` | `core_v2` `/baseball/leagues/mlb/coaches/{coach_id}` | `coach_id`\* | — |
+| `espnMlbCoachRecord` | `core_v2` `/baseball/leagues/mlb/coaches/{coach_id}/record/{record_type}` | `coach_id`\*, `record_type` | — |
+| `espnMlbCoachSeason` | `core_v2` `/baseball/leagues/mlb/coaches/{coach_id}/seasons/{season}` | `coach_id`\*, `season`\* | — |
+| `espnMlbConferences` | `site_v2` `/baseball/mlb/groups` | — | — |
+| `espnMlbDraft` | `site_v2` `/baseball/mlb/draft` | — | — |
+| `espnMlbEvent` | `core_v2` `/baseball/leagues/mlb/events/{event_id}` | `event_id`\* | — |
+| `espnMlbEventBroadcasts` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/broadcasts` | `event_id`\*, `cid` | — |
+| `espnMlbEventCompetition` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}` | `event_id`\*, `cid` | — |
+| `espnMlbEventCompetitor` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMlbEventCompetitorLeaders` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMlbEventCompetitorLinescores` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMlbEventCompetitorRecord` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMlbEventCompetitorRoster` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMlbEventCompetitorStatistics` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` | `event_id`\*, `team_id`\*, `cid` | — |
+| `espnMlbEventCompetitors` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors` | `event_id`\*, `cid` | — |
+| `espnMlbEventLeaders` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/leaders` | `event_id`\*, `cid` | — |
+| `espnMlbEventOdds` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/odds` | `event_id`\*, `cid` | — |
+| `espnMlbEventOfficialDetail` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials/{official_id}` | `event_id`\*, `official_id`\*, `cid` | — |
+| `espnMlbEventOfficials` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials` | `event_id`\*, `cid` | — |
+| `espnMlbEventPlay` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnMlbEventPlayPersonnel` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` | `event_id`\*, `play_id`\*, `cid` | — |
+| `espnMlbEventPlays` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays` | `event_id`\*, `cid` | `limit` |
+| `espnMlbEventPowerindex` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/powerindex` | `event_id`\*, `cid` | — |
+| `espnMlbEventPredictor` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/predictor` | `event_id`\*, `cid` | — |
+| `espnMlbEventProbabilities` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/probabilities` | `event_id`\*, `cid` | `limit` |
+| `espnMlbEventPropbets` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/propbets` | `event_id`\*, `cid` | — |
+| `espnMlbEventScoringplays` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/scoringplays` | `event_id`\*, `cid` | — |
+| `espnMlbEventSituation` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/situation` | `event_id`\*, `cid` | — |
+| `espnMlbEventStatus` | `core_v2` `/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/status` | `event_id`\*, `cid` | — |
+| `espnMlbEvents` | `core_v2` `/baseball/leagues/mlb/events` | — | `dates`, `limit` |
+| `espnMlbFranchise` | `core_v2` `/baseball/leagues/mlb/franchises/{franchise_id}` | `franchise_id`\* | — |
+| `espnMlbFranchises` | `core_v2` `/baseball/leagues/mlb/franchises` | — | `limit` |
+| `espnMlbInjuries` | `site_v2` `/baseball/mlb/injuries` | — | — |
+| `espnMlbLeaders` | `web_v3` `/baseball/mlb/statistics/byathlete` | — | `category`, `season`, `season_type` → `seasontype`, `limit`, `page`, `sort` |
+| `espnMlbLeadersCore` | `core_v2` `/baseball/leagues/mlb/leaders` | — | — |
+| `espnMlbLeagueNotes` | `core_v2` `/baseball/leagues/mlb/notes` | — | — |
+| `espnMlbLeagueRoot` | `core_v2` `/baseball/leagues/mlb` | — | — |
+| `espnMlbNews` | `site_v2` `/baseball/mlb/news` | — | `limit` |
+| `espnMlbPosition` | `core_v2` `/baseball/leagues/mlb/positions/{position_id}` | `position_id`\* | — |
+| `espnMlbPositions` | `core_v2` `/baseball/leagues/mlb/positions` | — | — |
+| `espnMlbScoreboard` | `site_v2` `/baseball/mlb/scoreboard` | — | `dates`, `week`, `season_type` → `seasontype`, `groups`, `limit` |
+| `espnMlbSeasonAthletes` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/athletes` | `season`\* | `limit`, `page` |
+| `espnMlbSeasonAwards` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/awards` | `season`\* | — |
+| `espnMlbSeasonCoaches` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/coaches` | `season`\* | `limit` |
+| `espnMlbSeasonDraft` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/draft` | `season`\* | — |
+| `espnMlbSeasonDraftRoundPicks` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/draft/rounds/{round_num}/picks` | `season`\*, `round_num`\* | — |
+| `espnMlbSeasonFreeagents` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/freeagents` | `season`\* | — |
+| `espnMlbSeasonFutures` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/futures` | `season`\* | — |
+| `espnMlbSeasonGroup` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups/{group_id}` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnMlbSeasonGroupChildren` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups/{group_id}/children` | `season`\*, `season_type`\*, `group_id`\* | — |
+| `espnMlbSeasonGroupTeams` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups/{group_id}/teams` | `season`\*, `season_type`\*, `group_id`\* | `limit` |
+| `espnMlbSeasonGroups` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/groups` | `season`\*, `season_type`\* | — |
+| `espnMlbSeasonInfo` | `core_v2` `/baseball/leagues/mlb/seasons/{season}` | `season`\* | — |
+| `espnMlbSeasonPointer` | `core_v2` `/baseball/leagues/mlb/season` | — | — |
+| `espnMlbSeasonPowerindex` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/powerindex[/{team_id}]` | `season`\*, `team_id` | — |
+| `espnMlbSeasonPowerindexLeaders` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/powerindex/leaders` | `season`\* | — |
+| `espnMlbSeasonTeam` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/teams/{team_id}` | `season`\*, `team_id`\* | — |
+| `espnMlbSeasonTeams` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/teams` | `season`\* | `limit` |
+| `espnMlbSeasonType` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}` | `season`\*, `season_type`\* | — |
+| `espnMlbSeasonTypeCorrections` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/corrections` | `season`\*, `season_type`\* | — |
+| `espnMlbSeasonTypeLeaders` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/leaders` | `season`\*, `season_type`\* | — |
+| `espnMlbSeasonTypes` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types` | `season`\* | — |
+| `espnMlbSeasonWeek` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks/{week}` | `season`\*, `season_type`\*, `week`\* | — |
+| `espnMlbSeasonWeekEvents` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks/{week}/events` | `season`\*, `season_type`\*, `week`\* | `limit` |
+| `espnMlbSeasonWeeks` | `core_v2` `/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks` | `season`\*, `season_type`\* | — |
+| `espnMlbSeasons` | `core_v2` `/baseball/leagues/mlb/seasons` | — | `limit` |
+| `espnMlbStandings` | `site_v2_alt` `/baseball/mlb/standings` | — | `season`, `group`, `standings_type` → `type` |
+| `espnMlbStandingsCore` | `core_v2` `/baseball/leagues/mlb/standings` | — | — |
+| `espnMlbStatisticsLeague` | `site_v2` `/baseball/mlb/statistics` | — | — |
+| `espnMlbSummary` | `site_v2` `/baseball/mlb/summary` | — | `event_id` → `event` |
+| `espnMlbTalentpicks` | `core_v2` `/baseball/leagues/mlb/talentpicks` | — | — |
+| `espnMlbTeam` | `site_v2` `/baseball/mlb/teams/{team_id}` | `team_id`\* | — |
+| `espnMlbTeamCore` | `core_v2` `/baseball/leagues/mlb/teams/{team_id}` | `team_id`\* | — |
+| `espnMlbTeamDepthcharts` | `site_v2` `/baseball/mlb/teams/{team_id}/depthcharts` | `team_id`\* | — |
+| `espnMlbTeamHistory` | `site_v2` `/baseball/mlb/teams/{team_id}/history` | `team_id`\* | — |
+| `espnMlbTeamInjuries` | `site_v2` `/baseball/mlb/teams/{team_id}/injuries` | `team_id`\* | — |
+| `espnMlbTeamLeaders` | `site_v2` `/baseball/mlb/teams/{team_id}/leaders` | `team_id`\* | — |
+| `espnMlbTeamNews` | `site_v2` `/baseball/mlb/teams/{team_id}/news` | `team_id`\* | `limit` |
+| `espnMlbTeamRecord` | `site_v2` `/baseball/mlb/teams/{team_id}/record` | `team_id`\* | — |
+| `espnMlbTeamRoster` | `site_v2` `/baseball/mlb/teams/{team_id}/roster` | `team_id`\* | — |
+| `espnMlbTeamSchedule` | `site_v2` `/baseball/mlb/teams/{team_id}/schedule` | `team_id`\* | `season` |
+| `espnMlbTeamTransactions` | `site_v2` `/baseball/mlb/teams/{team_id}/transactions` | `team_id`\* | — |
+| `espnMlbTeamsCore` | `core_v2` `/baseball/leagues/mlb/teams` | — | `limit` |
+| `espnMlbTeamsSite` | `site_v2` `/baseball/mlb/teams` | — | `limit` |
+| `espnMlbTournaments` | `core_v2` `/baseball/leagues/mlb/tournaments` | — | — |
+| `espnMlbTransactions` | `site_v2` `/baseball/mlb/transactions` | — | — |
+| `espnMlbVenue` | `core_v2` `/baseball/leagues/mlb/venues/{venue_id}` | `venue_id`\* | — |
+| `espnMlbVenues` | `core_v2` `/baseball/leagues/mlb/venues` | — | `limit` |
 
 ## MLB endpoints
 
 | Method | HTTP | Path params | Query params |
 |---|---|---|---|
-| `espn_mlb_athlete_hotzones` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/hotzones` | `athlete_id`\* | — |
+| `espnMlbAthleteHotzones` | `core_v2` `/baseball/leagues/mlb/athletes/{athlete_id}/hotzones` | `athlete_id`\* | — |
