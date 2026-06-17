@@ -4041,5 +4041,2227 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "pbp",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/gamecenter/{game_id}/play-by-play",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_pbp"
+  },
+  {
+    "short": "boxscore",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/gamecenter/{game_id}/boxscore",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_boxscore"
+  },
+  {
+    "short": "landing",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/gamecenter/{game_id}/landing",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_landing"
+  },
+  {
+    "short": "right_rail",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/gamecenter/{game_id}/right-rail",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_right_rail"
+  },
+  {
+    "short": "schedule",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/schedule/{date}",
+    "pathParams": [
+      {
+        "name": "date",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_schedule"
+  },
+  {
+    "short": "score",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/score/{date}",
+    "pathParams": [
+      {
+        "name": "date",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_score"
+  },
+  {
+    "short": "schedule_calendar",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/schedule-calendar/{date}",
+    "pathParams": [
+      {
+        "name": "date",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_schedule"
+  },
+  {
+    "short": "playoff_series",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/schedule/playoff-series/{season}/{series_letter}",
+    "pathParams": [
+      {
+        "name": "season"
+      },
+      {
+        "name": "series_letter"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_playoff_series"
+  },
+  {
+    "short": "standings",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/standings/{date}",
+    "pathParams": [
+      {
+        "name": "date",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_standings"
+  },
+  {
+    "short": "standings_season",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/standings-season",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_web_standings_season"
+  },
+  {
+    "short": "club_schedule_season",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/club-schedule-season/{team}/{season}",
+    "pathParams": [
+      {
+        "name": "team"
+      },
+      {
+        "name": "season",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_club_schedule"
+  },
+  {
+    "short": "club_schedule_month",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/club-schedule/{team}/month/{month}",
+    "pathParams": [
+      {
+        "name": "team"
+      },
+      {
+        "name": "month",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_club_schedule"
+  },
+  {
+    "short": "club_schedule_week",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/club-schedule/{team}/week/{date}",
+    "pathParams": [
+      {
+        "name": "team"
+      },
+      {
+        "name": "date",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_club_schedule"
+  },
+  {
+    "short": "club_stats",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/club-stats/{team}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_club_stats"
+  },
+  {
+    "short": "club_stats_season",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/club-stats-season/{team}",
+    "pathParams": [
+      {
+        "name": "team"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_club_stats"
+  },
+  {
+    "short": "roster",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/roster/{team}/{season}",
+    "pathParams": [
+      {
+        "name": "team"
+      },
+      {
+        "name": "season",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_roster"
+  },
+  {
+    "short": "roster_season",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/roster-season/{team}",
+    "pathParams": [
+      {
+        "name": "team"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_roster"
+  },
+  {
+    "short": "player_landing",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/player/{player_id}/landing",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_player_landing"
+  },
+  {
+    "short": "player_game_log",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/player/{player_id}/game-log/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_player_game_log"
+  },
+  {
+    "short": "player_spotlight",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/player-spotlight",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_web_player_spotlight"
+  },
+  {
+    "short": "skater_leaders",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/skater-stats-leaders/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_leaders"
+  },
+  {
+    "short": "goalie_leaders",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/goalie-stats-leaders/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_leaders"
+  },
+  {
+    "short": "draft_picks",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/draft/picks/{year}/{round_}",
+    "pathParams": [
+      {
+        "name": "year"
+      },
+      {
+        "name": "round_",
+        "required": false,
+        "default": "all"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_draft_picks"
+  },
+  {
+    "short": "draft_rankings",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/draft/rankings/{year}/{category}",
+    "pathParams": [
+      {
+        "name": "year"
+      },
+      {
+        "name": "category",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_web_draft_rankings"
+  },
+  {
+    "short": "draft_picks_now",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/draft/picks/now",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_web_draft_picks"
+  },
+  {
+    "short": "draft_rankings_now",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/draft/rankings/now",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_web_draft_rankings"
+  },
+  {
+    "short": "draft_tracker_picks_now",
+    "flat": true,
+    "api": "nhl_api_web",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/draft-tracker/picks/now",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_web_draft_picks"
+  },
+  {
+    "short": "skater_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "skater_comparison",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-comparison/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "skater_shot_location_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-shot-location-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_shot_location"
+  },
+  {
+    "short": "skater_shot_location_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "position"
+      },
+      {
+        "name": "category"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "skater_shot_speed_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-shot-speed-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "skater_shot_speed_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "positions"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "skater_skating_distance_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-skating-distance-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "skater_skating_speed_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-skating-speed-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "skater_speed_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-speed-top-10/{positions}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "positions"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "skater_distance_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "positions"
+      },
+      {
+        "name": "strength"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "skater_zone_time",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-zone-time/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_zone_time"
+  },
+  {
+    "short": "skater_zone_time_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "positions"
+      },
+      {
+        "name": "strength"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "skater_landing",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/skater-landing/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "goalie_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "goalie_5v5_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-5v5-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "goalie_5v5_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-5v5-top-10/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "goalie_comparison",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-comparison/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "goalie_save_percentage_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-save-percentage-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "goalie_edge_save_pctg_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "goalie_shot_location_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-shot-location-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_shot_location"
+  },
+  {
+    "short": "goalie_shot_location_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "category"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "goalie_landing",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/goalie-landing/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "team_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-detail/{team_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "team_landing",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-landing/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "team_shot_location_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-shot-location-detail/{team_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_shot_location"
+  },
+  {
+    "short": "team_shot_location_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "position"
+      },
+      {
+        "name": "category"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "team_shot_speed_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-shot-speed-detail/{team_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "team_skating_distance_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-skating-distance-detail/{team_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": []
+  },
+  {
+    "short": "team_skating_distance_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "positions"
+      },
+      {
+        "name": "strength"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "team_skating_speed_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-skating-speed-detail/{team_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": []
+  },
+  {
+    "short": "team_skating_speed_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "positions"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "team_zone_time_details",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-zone-time-details/{team_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_zone_time"
+  },
+  {
+    "short": "team_zone_time_top_10",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/edge/team-zone-time-top-10/{strength}/{sort_by}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "strength"
+      },
+      {
+        "name": "sort_by"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_top10"
+  },
+  {
+    "short": "cat_skater_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/cat/edge/skater-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "cat_goalie_detail",
+    "flat": true,
+    "api": "nhl_edge",
+    "host": "https://api-web.nhle.com",
+    "scope": "universal",
+    "path": "/v1/cat/edge/goalie-detail/{player_id}/{season}/{game_type}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      },
+      {
+        "name": "season",
+        "required": false
+      },
+      {
+        "name": "game_type",
+        "required": false,
+        "default": 2
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_edge_detail"
+  },
+  {
+    "short": "ping",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/ping",
+    "pathParams": [],
+    "queryParams": []
+  },
+  {
+    "short": "component_season",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/componentSeason",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": []
+  },
+  {
+    "short": "config",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/config",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": []
+  },
+  {
+    "short": "content_module",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/content/module/{template_key}",
+    "pathParams": [
+      {
+        "name": "template_key"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": []
+  },
+  {
+    "short": "country",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/country",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "draft",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/draft",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "franchise",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/franchise",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "game",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/game",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "glossary",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/glossary",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "goalie_report",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/goalie/{report}",
+    "pathParams": [
+      {
+        "name": "report"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "leaders_goalies",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/leaders/goalies/{attribute}",
+    "pathParams": [
+      {
+        "name": "attribute"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "leaders_skaters",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/leaders/skaters/{attribute}",
+    "pathParams": [
+      {
+        "name": "attribute"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "milestones_goalies",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/milestones/goalies",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "milestones_skaters",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/milestones/skaters",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "players",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/players",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "season",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/season",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "shiftcharts",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/shiftcharts",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "skater_report",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/skater/{report}",
+    "pathParams": [
+      {
+        "name": "report"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "team",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/team",
+    "pathParams": [
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "team_by_id",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/team/id/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "team_report",
+    "flat": true,
+    "api": "nhl_stats_rest",
+    "host": "https://api.nhle.com/stats/rest",
+    "scope": "universal",
+    "path": "/{lang}/team/{report}",
+    "pathParams": [
+      {
+        "name": "report"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "default": "en"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_stats_rest"
+  },
+  {
+    "short": "awards",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/award-details",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "awards_by_franchise",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/award-details/{franchise_id}",
+    "pathParams": [
+      {
+        "name": "franchise_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "awards_trophy_season",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/award-details/trophy/{trophy_id}/season/{season_id}",
+    "pathParams": [
+      {
+        "name": "trophy_id"
+      },
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "coaches",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/coach",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "coach",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/coach/{coach_id}",
+    "pathParams": [
+      {
+        "name": "coach_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "coach_career",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/coach-career-records/{coach_id}",
+    "pathParams": [
+      {
+        "name": "coach_id",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "coach_career_with_playoffs",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/coach-career-records-regular-plus-playoffs",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "coach_franchise",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/coach-franchise-records/{coach_id}",
+    "pathParams": [
+      {
+        "name": "coach_id",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "coach_stanley_cup",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/coach-stanley-cup-streak",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "franchises",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/franchise",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "franchise_detail",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/franchise-detail",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "franchise_team_totals",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/franchise-team-totals",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "franchise_season_results",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/franchise-season-results",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "franchise_playoff_appearances",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/franchise-playoff-appearances",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "franchise_totals",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/franchise-totals",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "all_time_record_vs_franchise",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/all-time-record-vs-franchise",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "skater_career_stats",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/skater-career-statistics",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "skater_career_leaders",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/skater-career-leaders",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "consecutive_100pt_seasons",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/consecutive-100-point-seasons",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_career_stats",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-career-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_career_stats_with_playoffs",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie_career_stats_incl_playoffs",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_season_stats",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-season-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_win_streak",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-win-streak",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_shutout_streak",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-shutout-streak",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_win_plateaus",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-win-plateaus",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_playoff_streak",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-playoff-streak",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "goalie_undefeated_streak",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/goalie-undefeated-streak",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "draft",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/draft/{draft_id}",
+    "pathParams": [
+      {
+        "name": "draft_id",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "draft_by_team",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/draft/byTeam/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "draft_prospect",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/draft-prospect/{prospect_id}",
+    "pathParams": [
+      {
+        "name": "prospect_id",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "draft_lottery_odds",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/draft-lottery-odds",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "expansion_draft_picks",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/expansion-draft-picks",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "allstar_skater_career",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/all-star-skater-career-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "allstar_goalie_career",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/all-star-goaltender-career-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "allstar_coach_career",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/all-star-coach-career-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "allstar_skater_game",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/all-star-skater-game-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "allstar_goalie_game",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/all-star-goaltender-game-stats",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "attendance",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/attendance",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "hof_players",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/hof/players",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "hof_players_by_office",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/hof/players/{office_id}",
+    "pathParams": [
+      {
+        "name": "office_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "gm_career",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/general-manager/{gm_id}",
+    "pathParams": [
+      {
+        "name": "gm_id",
+        "required": false
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "gm_franchise",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/general-manager-franchise-records",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "home_team_record",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/home-team-record",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
+  },
+  {
+    "short": "away_team_record",
+    "flat": true,
+    "api": "nhl_records",
+    "host": "https://records.nhl.com/site/api",
+    "scope": "universal",
+    "path": "/away-team-record",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_nhl_records"
   }
 ];

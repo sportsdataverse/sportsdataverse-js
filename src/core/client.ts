@@ -22,6 +22,13 @@ export const HOSTS: Record<EspnFamily, string> = {
  */
 export const FLAT_HOSTS: Record<string, string> = {
   mlb_api: "https://statsapi.mlb.com",
+  // NHL native APIs. `nhl_api_web` and `nhl_edge` are separate `api` stems
+  // that share the same host (api-web.nhle.com); the Stats REST and Records
+  // families each have their own host.
+  nhl_api_web: "https://api-web.nhle.com",
+  nhl_edge: "https://api-web.nhle.com",
+  nhl_stats_rest: "https://api.nhle.com/stats/rest",
+  nhl_records: "https://records.nhl.com/site/api",
 };
 
 const client = axios.create({

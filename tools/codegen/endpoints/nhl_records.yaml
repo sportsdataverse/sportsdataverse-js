@@ -1,0 +1,184 @@
+# Flat (non-ESPN) API family: the NHL Records site API (records.nhl.com).
+# Faithful port of sdv-py tools/codegen/endpoints/nhl_records.yaml —
+# Python-only codegen fields dropped. Every endpoint ships its rows under the
+# same `{data: [...], total: N}` shape (identical to NHL Stats REST), so all
+# resolve to the single generic parser `parse_nhl_records`.
+api: nhl_records
+host: https://records.nhl.com/site/api
+name_pattern: nhl_records_{short}
+endpoints:
+- short: awards
+  path: /award-details
+  parser: parse_nhl_records
+- short: awards_by_franchise
+  path: /award-details/{franchise_id}
+  path_params:
+  - name: franchise_id
+    type: int
+    required: true
+  parser: parse_nhl_records
+- short: awards_trophy_season
+  path: /award-details/trophy/{trophy_id}/season/{season_id}
+  path_params:
+  - name: trophy_id
+    type: int
+    required: true
+  - name: season_id
+    type: int
+    required: true
+  parser: parse_nhl_records
+- short: coaches
+  path: /coach
+  parser: parse_nhl_records
+- short: coach
+  path: /coach/{coach_id}
+  path_params:
+  - name: coach_id
+    type: int
+    required: true
+  parser: parse_nhl_records
+- short: coach_career
+  path: /coach-career-records/{coach_id}
+  path_params:
+  - name: coach_id
+    type: int
+    required: false
+  parser: parse_nhl_records
+- short: coach_career_with_playoffs
+  path: /coach-career-records-regular-plus-playoffs
+  parser: parse_nhl_records
+- short: coach_franchise
+  path: /coach-franchise-records/{coach_id}
+  path_params:
+  - name: coach_id
+    type: int
+    required: false
+  parser: parse_nhl_records
+- short: coach_stanley_cup
+  path: /coach-stanley-cup-streak
+  parser: parse_nhl_records
+- short: franchises
+  path: /franchise
+  parser: parse_nhl_records
+- short: franchise_detail
+  path: /franchise-detail
+  parser: parse_nhl_records
+- short: franchise_team_totals
+  path: /franchise-team-totals
+  parser: parse_nhl_records
+- short: franchise_season_results
+  path: /franchise-season-results
+  parser: parse_nhl_records
+- short: franchise_playoff_appearances
+  path: /franchise-playoff-appearances
+  parser: parse_nhl_records
+- short: franchise_totals
+  path: /franchise-totals
+  parser: parse_nhl_records
+- short: all_time_record_vs_franchise
+  path: /all-time-record-vs-franchise
+  parser: parse_nhl_records
+- short: skater_career_stats
+  path: /skater-career-statistics
+  parser: parse_nhl_records
+- short: skater_career_leaders
+  path: /skater-career-leaders
+  parser: parse_nhl_records
+- short: consecutive_100pt_seasons
+  path: /consecutive-100-point-seasons
+  parser: parse_nhl_records
+- short: goalie_career_stats
+  path: /goalie-career-stats
+  parser: parse_nhl_records
+- short: goalie_career_stats_with_playoffs
+  path: /goalie_career_stats_incl_playoffs
+  parser: parse_nhl_records
+- short: goalie_season_stats
+  path: /goalie-season-stats
+  parser: parse_nhl_records
+- short: goalie_win_streak
+  path: /goalie-win-streak
+  parser: parse_nhl_records
+- short: goalie_shutout_streak
+  path: /goalie-shutout-streak
+  parser: parse_nhl_records
+- short: goalie_win_plateaus
+  path: /goalie-win-plateaus
+  parser: parse_nhl_records
+- short: goalie_playoff_streak
+  path: /goalie-playoff-streak
+  parser: parse_nhl_records
+- short: goalie_undefeated_streak
+  path: /goalie-undefeated-streak
+  parser: parse_nhl_records
+- short: draft
+  path: /draft/{draft_id}
+  path_params:
+  - name: draft_id
+    type: int
+    required: false
+  parser: parse_nhl_records
+- short: draft_by_team
+  path: /draft/byTeam/{team_id}
+  path_params:
+  - name: team_id
+    type: int
+    required: true
+  parser: parse_nhl_records
+- short: draft_prospect
+  path: /draft-prospect/{prospect_id}
+  path_params:
+  - name: prospect_id
+    type: int
+    required: false
+  parser: parse_nhl_records
+- short: draft_lottery_odds
+  path: /draft-lottery-odds
+  parser: parse_nhl_records
+- short: expansion_draft_picks
+  path: /expansion-draft-picks
+  parser: parse_nhl_records
+- short: allstar_skater_career
+  path: /all-star-skater-career-stats
+  parser: parse_nhl_records
+- short: allstar_goalie_career
+  path: /all-star-goaltender-career-stats
+  parser: parse_nhl_records
+- short: allstar_coach_career
+  path: /all-star-coach-career-stats
+  parser: parse_nhl_records
+- short: allstar_skater_game
+  path: /all-star-skater-game-stats
+  parser: parse_nhl_records
+- short: allstar_goalie_game
+  path: /all-star-goaltender-game-stats
+  parser: parse_nhl_records
+- short: attendance
+  path: /attendance
+  parser: parse_nhl_records
+- short: hof_players
+  path: /hof/players
+  parser: parse_nhl_records
+- short: hof_players_by_office
+  path: /hof/players/{office_id}
+  path_params:
+  - name: office_id
+    type: int
+    required: true
+  parser: parse_nhl_records
+- short: gm_career
+  path: /general-manager/{gm_id}
+  path_params:
+  - name: gm_id
+    type: int
+    required: false
+  parser: parse_nhl_records
+- short: gm_franchise
+  path: /general-manager-franchise-records
+  parser: parse_nhl_records
+- short: home_team_record
+  path: /home-team-record
+  parser: parse_nhl_records
+- short: away_team_record
+  path: /away-team-record
+  parser: parse_nhl_records

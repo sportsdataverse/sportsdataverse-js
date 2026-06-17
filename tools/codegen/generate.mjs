@@ -26,7 +26,13 @@ const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
 // FLAT_WRAPPERS table so the ESPN WRAPPERS table — and every invariant the ESPN
 // contract tests assert over it ({sport} present, EspnFamily, scopes) — stays
 // untouched.
-const FLAT_API_FILES = ["mlb_api"];
+const FLAT_API_FILES = [
+  "mlb_api",
+  "nhl_api_web",
+  "nhl_edge",
+  "nhl_stats_rest",
+  "nhl_records",
+];
 
 function mapPathParams(ep) {
   return (ep.path_params ?? []).map((p) => ({

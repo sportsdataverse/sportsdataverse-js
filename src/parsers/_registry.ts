@@ -18,12 +18,45 @@ import {
   parse_mlb_api_draft_latest,
   parse_mlb_api_timecodes,
 } from "./mlb_api.js";
+import {
+  parse_nhl_web_pbp,
+  parse_nhl_web_boxscore,
+  parse_nhl_web_landing,
+  parse_nhl_web_right_rail,
+  parse_nhl_web_schedule,
+  parse_nhl_web_score,
+  parse_nhl_web_club_schedule,
+  parse_nhl_web_standings,
+  parse_nhl_web_standings_season,
+  parse_nhl_web_club_stats,
+  parse_nhl_web_roster,
+  parse_nhl_web_player_landing,
+  parse_nhl_web_player_game_log,
+  parse_nhl_web_leaders,
+  parse_nhl_web_draft_picks,
+  parse_nhl_web_player_spotlight,
+  parse_nhl_web_draft_rankings,
+  parse_nhl_web_playoff_series,
+} from "./nhl_api_web.js";
+import {
+  parse_edge_top10,
+  parse_edge_detail,
+  parse_edge_shot_location,
+  parse_edge_zone_time,
+  parse_edge_sog_details,
+  parse_edge_sog_summary,
+  parse_edge_hardest_shots,
+  parse_edge_payload,
+} from "./nhl_edge.js";
+import { parse_nhl_stats_rest } from "./nhl_stats_rest.js";
+import { parse_nhl_records } from "./nhl_records.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
 
 /** Registered parsers, keyed by the `parser` name on a flat `WrapperDef`. */
 export const PARSERS: Record<string, ParserFn> = {
+  // ---- MLB Stats API ----
   // Generic list flattener (the default for most endpoints).
   parse_mlb_api_list,
   // Dedicated parsers (extra unrolling logic).
@@ -38,6 +71,37 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_mlb_api_win_probability,
   parse_mlb_api_draft_latest,
   parse_mlb_api_timecodes,
+  // ---- NHL api-web (modern game-feed) ----
+  parse_nhl_web_pbp,
+  parse_nhl_web_boxscore,
+  parse_nhl_web_landing,
+  parse_nhl_web_right_rail,
+  parse_nhl_web_schedule,
+  parse_nhl_web_score,
+  parse_nhl_web_club_schedule,
+  parse_nhl_web_standings,
+  parse_nhl_web_standings_season,
+  parse_nhl_web_club_stats,
+  parse_nhl_web_roster,
+  parse_nhl_web_player_landing,
+  parse_nhl_web_player_game_log,
+  parse_nhl_web_leaders,
+  parse_nhl_web_draft_picks,
+  parse_nhl_web_player_spotlight,
+  parse_nhl_web_draft_rankings,
+  parse_nhl_web_playoff_series,
+  // ---- NHL EDGE (player/team tracking) ----
+  parse_edge_top10,
+  parse_edge_detail,
+  parse_edge_shot_location,
+  parse_edge_zone_time,
+  parse_edge_sog_details,
+  parse_edge_sog_summary,
+  parse_edge_hardest_shots,
+  parse_edge_payload,
+  // ---- NHL Stats REST + Records (shared {data:[...]} generic) ----
+  parse_nhl_stats_rest,
+  parse_nhl_records,
 };
 
 /**

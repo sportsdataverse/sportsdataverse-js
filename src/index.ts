@@ -34,6 +34,10 @@ for (const cfg of LEAGUES) {
 // + legacy surface. Each flat family (`WrapperDef.api`) maps to a league prefix.
 const FLAT_API_NAMESPACES: Record<string, string> = {
   mlb_api: 'mlb',
+  nhl_api_web: 'nhl',
+  nhl_edge: 'nhl',
+  nhl_stats_rest: 'nhl',
+  nhl_records: 'nhl',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);
