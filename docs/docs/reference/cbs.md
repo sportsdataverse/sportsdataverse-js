@@ -110,3 +110,1849 @@ Flat (non-ESPN) wrappers for CBS Sports napi. Host: `https://api.cbssports.com`.
 | `cbs_napi_venue` / `cbsNapiVenue` | `https://api.cbssports.com/resource/venue/{venue_id}` | `venue_id`\* | `resources` | `parse_cbs_napi_list` | — |
 | `cbs_napi_venue_metadata` / `cbsNapiVenueMetadata` | `https://api.cbssports.com/resource/venue/metadata/{venue_id}` | `venue_id`\* | — | `parse_cbs_napi_list` | — |
 | `cbs_napi_weather` / `cbsNapiWeather` | `https://api.cbssports.com/resource/game/weather/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
+
+### Returns — `cbs_napi_endpoint_registry` / `cbsNapiEndpointRegistry`
+
+| col_name | type | description |
+|---|---|---|
+| `boxscore_resource_location` | character | Boxscore resource location. |
+| `boxscore_resource_route` | character | Boxscore resource route. |
+| `boxscore_resource_path` | character | Boxscore resource path. |
+| `boxscore_resource_summary` | character | Boxscore resource summary. |
+| `boxscore_resource_notes` | character | Boxscore resource notes. |
+| `boxscore_resource_versions_allowed` | character | Boxscore resource versions allowed. |
+| `boxscore_resource_versions_current` | character | Boxscore resource versions current. |
+| `boxscore_resource_methods` | character | Boxscore resource methods. |
+| `boxscore_resource_formats` | character | Boxscore resource formats. |
+| `boxscore_resource_parameters` | character | Boxscore resource parameters. |
+| `boxscore_resource_auth_settings_require_auth` | logical | Boxscore resource auth settings require auth. |
+| `boxscore_resource_auth_settings_allow_only` | character | Boxscore resource auth settings allow only. |
+| `boxscore_resource_resource_cache_ns` | character | Boxscore resource resource cache ns. |
+| `boxscore_resource_resource_cache_cache_keys` | character | Boxscore resource resource cache cache keys. |
+| `boxscore_resource_resource_cache_cache_buster` | integer | Boxscore resource resource cache cache buster. |
+| `boxscore_resource_expiration_message_object_key_name` | character | Boxscore resource expiration message object key name. |
+| `player_resource_location` | character | Player resource location. |
+| `player_resource_route` | character | Player resource route. |
+| `player_resource_path` | character | Player resource path. |
+| `player_resource_summary` | character | Player resource summary. |
+| `player_resource_notes` | character | Player resource notes. |
+| `player_resource_versions_allowed` | character | Player resource versions allowed. |
+| `player_resource_versions_current` | character | Player resource versions current. |
+| `player_resource_methods` | character | Player resource methods. |
+| `player_resource_formats` | character | Player resource formats. |
+| `player_resource_parameters` | character | Player resource parameters. |
+| `player_resource_auth_settings_require_auth` | logical | Player resource auth settings require auth. |
+| `player_resource_auth_settings_allow_only` | character | Player resource auth settings allow only. |
+| `player_resource_resource_cache_ns` | character | Player resource resource cache ns. |
+| `player_resource_resource_cache_cache_keys` | character | Player resource resource cache cache keys. |
+| `player_resource_resource_cache_cache_buster` | integer | Player resource resource cache cache buster. |
+| `player_resource_expiration_message_object_key_name` | character | Player resource expiration message object key name. |
+| `player_team_associations_resource_location` | character | Player team associations resource location. |
+| `player_team_associations_resource_route` | character | Player team associations resource route. |
+| `player_team_associations_resource_path` | character | Player team associations resource path. |
+| `player_team_associations_resource_summary` | character | Player team associations resource summary. |
+| `player_team_associations_resource_notes` | character | Player team associations resource notes. |
+| `player_team_associations_resource_versions_allowed` | character | Player team associations resource versions allowed. |
+| `player_team_associations_resource_versions_current` | character | Player team associations resource versions current. |
+| `player_team_associations_resource_methods` | character | Player team associations resource methods. |
+| `player_team_associations_resource_formats` | character | Player team associations resource formats. |
+| `player_team_associations_resource_parameters` | character | Player team associations resource parameters. |
+| `player_team_associations_resource_auth_settings_require_auth` | logical | Player team associations resource auth settings require auth. |
+| `player_team_associations_resource_auth_settings_allow_only` | character | Player team associations resource auth settings allow only. |
+| `player_team_associations_resource_resource_cache_ns` | character | Player team associations resource resource cache ns. |
+| `player_team_associations_resource_resource_cache_cache_keys` | character | Player team associations resource resource cache cache keys. |
+| `player_team_associations_resource_resource_cache_cache_buster` | integer | Player team associations resource resource cache cache buster. |
+| `player_team_associations_resource_expiration_message_object_key_name` | character | Player team associations resource expiration message object key name. |
+| `recruit_team_associations_resource_location` | character | Recruit team associations resource location. |
+| `recruit_team_associations_resource_route` | character | Recruit team associations resource route. |
+| `recruit_team_associations_resource_path` | character | Recruit team associations resource path. |
+| `recruit_team_associations_resource_summary` | character | Recruit team associations resource summary. |
+| `recruit_team_associations_resource_notes` | character | Recruit team associations resource notes. |
+| `recruit_team_associations_resource_versions_allowed` | character | Recruit team associations resource versions allowed. |
+| `recruit_team_associations_resource_versions_current` | character | Recruit team associations resource versions current. |
+| `recruit_team_associations_resource_methods` | character | Recruit team associations resource methods. |
+| `recruit_team_associations_resource_formats` | character | Recruit team associations resource formats. |
+| `recruit_team_associations_resource_parameters` | character | Recruit team associations resource parameters. |
+| `recruit_team_associations_resource_auth_settings_require_auth` | logical | Recruit team associations resource auth settings require auth. |
+| `recruit_team_associations_resource_auth_settings_allow_only` | character | Recruit team associations resource auth settings allow only. |
+| `recruit_team_associations_resource_resource_cache_ns` | character | Recruit team associations resource resource cache ns. |
+| `recruit_team_associations_resource_resource_cache_cache_keys` | character | Recruit team associations resource resource cache cache keys. |
+| `recruit_team_associations_resource_resource_cache_cache_buster` | integer | Recruit team associations resource resource cache cache buster. |
+| `recruit_team_associations_resource_expiration_message_object_key_name` | character | Recruit team associations resource expiration message object key name. |
+| `coach_team_associations_resource_location` | character | Coach team associations resource location. |
+| `coach_team_associations_resource_route` | character | Coach team associations resource route. |
+| `coach_team_associations_resource_path` | character | Coach team associations resource path. |
+| `coach_team_associations_resource_summary` | character | Coach team associations resource summary. |
+| `coach_team_associations_resource_notes` | character | Coach team associations resource notes. |
+| `coach_team_associations_resource_versions_allowed` | character | Coach team associations resource versions allowed. |
+| `coach_team_associations_resource_versions_current` | character | Coach team associations resource versions current. |
+| `coach_team_associations_resource_methods` | character | Coach team associations resource methods. |
+| `coach_team_associations_resource_formats` | character | Coach team associations resource formats. |
+| `coach_team_associations_resource_parameters` | character | Coach team associations resource parameters. |
+| `coach_team_associations_resource_auth_settings_require_auth` | logical | Coach team associations resource auth settings require auth. |
+| `coach_team_associations_resource_auth_settings_allow_only` | character | Coach team associations resource auth settings allow only. |
+| `coach_team_associations_resource_resource_cache_ns` | character | Coach team associations resource resource cache ns. |
+| `coach_team_associations_resource_resource_cache_cache_keys` | character | Coach team associations resource resource cache cache keys. |
+| `coach_team_associations_resource_resource_cache_cache_buster` | integer | Coach team associations resource resource cache cache buster. |
+| `coach_team_associations_resource_expiration_message_object_key_name` | character | Coach team associations resource expiration message object key name. |
+| `player_draft_info_resource_location` | character | Player draft info resource location. |
+| `player_draft_info_resource_route` | character | Player draft info resource route. |
+| `player_draft_info_resource_path` | character | Player draft info resource path. |
+| `player_draft_info_resource_summary` | character | Player draft info resource summary. |
+| `player_draft_info_resource_notes` | character | Player draft info resource notes. |
+| `player_draft_info_resource_versions_allowed` | character | Player draft info resource versions allowed. |
+| `player_draft_info_resource_versions_current` | character | Player draft info resource versions current. |
+| `player_draft_info_resource_methods` | character | Player draft info resource methods. |
+| `player_draft_info_resource_formats` | character | Player draft info resource formats. |
+| `player_draft_info_resource_parameters` | character | Player draft info resource parameters. |
+| `player_draft_info_resource_auth_settings_require_auth` | logical | Player draft info resource auth settings require auth. |
+| `player_draft_info_resource_auth_settings_allow_only` | character | Player draft info resource auth settings allow only. |
+| `player_draft_info_resource_resource_cache_ns` | character | Player draft info resource resource cache ns. |
+| `player_draft_info_resource_resource_cache_cache_keys` | character | Player draft info resource resource cache cache keys. |
+| `player_draft_info_resource_resource_cache_cache_buster` | integer | Player draft info resource resource cache cache buster. |
+| `player_draft_info_resource_expiration_message_object_key_name` | character | Player draft info resource expiration message object key name. |
+| `player_combine_data_resource_location` | character | Player combine data resource location. |
+| `player_combine_data_resource_route` | character | Player combine data resource route. |
+| `player_combine_data_resource_path` | character | Player combine data resource path. |
+| `player_combine_data_resource_summary` | character | Player combine data resource summary. |
+| `player_combine_data_resource_notes` | character | Player combine data resource notes. |
+| `player_combine_data_resource_versions_allowed` | character | Player combine data resource versions allowed. |
+| `player_combine_data_resource_versions_current` | character | Player combine data resource versions current. |
+| `player_combine_data_resource_methods` | character | Player combine data resource methods. |
+| `player_combine_data_resource_formats` | character | Player combine data resource formats. |
+| `player_combine_data_resource_parameters` | character | Player combine data resource parameters. |
+| `player_combine_data_resource_auth_settings_require_auth` | logical | Player combine data resource auth settings require auth. |
+| `player_combine_data_resource_auth_settings_allow_only` | character | Player combine data resource auth settings allow only. |
+| `player_combine_data_resource_resource_cache_ns` | character | Player combine data resource resource cache ns. |
+| `player_combine_data_resource_resource_cache_cache_keys` | character | Player combine data resource resource cache cache keys. |
+| `player_combine_data_resource_resource_cache_cache_buster` | integer | Player combine data resource resource cache cache buster. |
+| `player_combine_data_resource_expiration_message_object_key_name` | character | Player combine data resource expiration message object key name. |
+| `player_injuries_resource_location` | character | Player injuries resource location. |
+| `player_injuries_resource_route` | character | Player injuries resource route. |
+| `player_injuries_resource_path` | character | Player injuries resource path. |
+| `player_injuries_resource_summary` | character | Player injuries resource summary. |
+| `player_injuries_resource_notes` | character | Player injuries resource notes. |
+| `player_injuries_resource_versions_allowed` | character | Player injuries resource versions allowed. |
+| `player_injuries_resource_versions_current` | character | Player injuries resource versions current. |
+| `player_injuries_resource_methods` | character | Player injuries resource methods. |
+| `player_injuries_resource_formats` | character | Player injuries resource formats. |
+| `player_injuries_resource_parameters` | character | Player injuries resource parameters. |
+| `player_injuries_resource_auth_settings_require_auth` | logical | Player injuries resource auth settings require auth. |
+| `player_injuries_resource_auth_settings_allow_only` | character | Player injuries resource auth settings allow only. |
+| `player_injuries_resource_resource_cache_ns` | character | Player injuries resource resource cache ns. |
+| `player_injuries_resource_resource_cache_cache_keys` | character | Player injuries resource resource cache cache keys. |
+| `player_injuries_resource_resource_cache_cache_buster` | integer | Player injuries resource resource cache cache buster. |
+| `player_injuries_resource_expiration_message_object_key_name` | character | Player injuries resource expiration message object key name. |
+| `player_transactions_resource_location` | character | Player transactions resource location. |
+| `player_transactions_resource_route` | character | Player transactions resource route. |
+| `player_transactions_resource_path` | character | Player transactions resource path. |
+| `player_transactions_resource_summary` | character | Player transactions resource summary. |
+| `player_transactions_resource_notes` | character | Player transactions resource notes. |
+| `player_transactions_resource_versions_allowed` | character | Player transactions resource versions allowed. |
+| `player_transactions_resource_versions_current` | character | Player transactions resource versions current. |
+| `player_transactions_resource_methods` | character | Player transactions resource methods. |
+| `player_transactions_resource_formats` | character | Player transactions resource formats. |
+| `player_transactions_resource_parameters` | character | Player transactions resource parameters. |
+| `player_transactions_resource_auth_settings_require_auth` | logical | Player transactions resource auth settings require auth. |
+| `player_transactions_resource_auth_settings_allow_only` | character | Player transactions resource auth settings allow only. |
+| `player_transactions_resource_resource_cache_ns` | character | Player transactions resource resource cache ns. |
+| `player_transactions_resource_resource_cache_cache_keys` | character | Player transactions resource resource cache cache keys. |
+| `player_transactions_resource_resource_cache_cache_buster` | integer | Player transactions resource resource cache cache buster. |
+| `player_transactions_resource_expiration_message_object_key_name` | character | Player transactions resource expiration message object key name. |
+| `player_encyclopedia_resource_location` | character | Player encyclopedia resource location. |
+| `player_encyclopedia_resource_route` | character | Player encyclopedia resource route. |
+| `player_encyclopedia_resource_path` | character | Player encyclopedia resource path. |
+| `player_encyclopedia_resource_summary` | character | Player encyclopedia resource summary. |
+| `player_encyclopedia_resource_notes` | character | Player encyclopedia resource notes. |
+| `player_encyclopedia_resource_versions_allowed` | character | Player encyclopedia resource versions allowed. |
+| `player_encyclopedia_resource_versions_current` | character | Player encyclopedia resource versions current. |
+| `player_encyclopedia_resource_methods` | character | Player encyclopedia resource methods. |
+| `player_encyclopedia_resource_formats` | character | Player encyclopedia resource formats. |
+| `player_encyclopedia_resource_parameters` | character | Player encyclopedia resource parameters. |
+| `player_encyclopedia_resource_auth_settings_require_auth` | logical | Player encyclopedia resource auth settings require auth. |
+| `player_encyclopedia_resource_auth_settings_allow_only` | character | Player encyclopedia resource auth settings allow only. |
+| `player_encyclopedia_resource_resource_cache_ns` | character | Player encyclopedia resource resource cache ns. |
+| `player_encyclopedia_resource_resource_cache_cache_keys` | character | Player encyclopedia resource resource cache cache keys. |
+| `player_encyclopedia_resource_resource_cache_cache_buster` | integer | Player encyclopedia resource resource cache cache buster. |
+| `player_encyclopedia_resource_expiration_message_object_key_name` | character | Player encyclopedia resource expiration message object key name. |
+| `golfer_results_resource_location` | character | Golfer results resource location. |
+| `golfer_results_resource_route` | character | Golfer results resource route. |
+| `golfer_results_resource_path` | character | Golfer results resource path. |
+| `golfer_results_resource_summary` | character | Golfer results resource summary. |
+| `golfer_results_resource_notes` | character | Golfer results resource notes. |
+| `golfer_results_resource_versions_allowed` | character | Golfer results resource versions allowed. |
+| `golfer_results_resource_versions_current` | character | Golfer results resource versions current. |
+| `golfer_results_resource_methods` | character | Golfer results resource methods. |
+| `golfer_results_resource_formats` | character | Golfer results resource formats. |
+| `golfer_results_resource_parameters` | character | Golfer results resource parameters. |
+| `golfer_results_resource_auth_settings_require_auth` | logical | Golfer results resource auth settings require auth. |
+| `golfer_results_resource_auth_settings_allow_only` | character | Golfer results resource auth settings allow only. |
+| `golfer_results_resource_resource_cache_ns` | character | Golfer results resource resource cache ns. |
+| `golfer_results_resource_resource_cache_cache_keys` | character | Golfer results resource resource cache cache keys. |
+| `golfer_results_resource_resource_cache_cache_buster` | integer | Golfer results resource resource cache cache buster. |
+| `golfer_results_resource_expiration_message_object_key_name` | character | Golfer results resource expiration message object key name. |
+| `depth_charts_resource_location` | character | Depth charts resource location. |
+| `depth_charts_resource_route` | character | Depth charts resource route. |
+| `depth_charts_resource_path` | character | Depth charts resource path. |
+| `depth_charts_resource_summary` | character | Depth charts resource summary. |
+| `depth_charts_resource_notes` | character | Depth charts resource notes. |
+| `depth_charts_resource_versions_allowed` | character | Depth charts resource versions allowed. |
+| `depth_charts_resource_versions_current` | character | Depth charts resource versions current. |
+| `depth_charts_resource_methods` | character | Depth charts resource methods. |
+| `depth_charts_resource_formats` | character | Depth charts resource formats. |
+| `depth_charts_resource_parameters` | character | Depth charts resource parameters. |
+| `depth_charts_resource_auth_settings_require_auth` | logical | Depth charts resource auth settings require auth. |
+| `depth_charts_resource_auth_settings_allow_only` | character | Depth charts resource auth settings allow only. |
+| `depth_charts_resource_resource_cache_ns` | character | Depth charts resource resource cache ns. |
+| `depth_charts_resource_resource_cache_cache_keys` | character | Depth charts resource resource cache cache keys. |
+| `depth_charts_resource_resource_cache_cache_buster` | integer | Depth charts resource resource cache cache buster. |
+| `depth_charts_resource_expiration_message_object_key_name` | character | Depth charts resource expiration message object key name. |
+| `team_players_resource_location` | character | Team players resource location. |
+| `team_players_resource_route` | character | Team players resource route. |
+| `team_players_resource_path` | character | Team players resource path. |
+| `team_players_resource_summary` | character | Team players resource summary. |
+| `team_players_resource_notes` | character | Team players resource notes. |
+| `team_players_resource_versions_allowed` | character | Team players resource versions allowed. |
+| `team_players_resource_versions_current` | character | Team players resource versions current. |
+| `team_players_resource_methods` | character | Team players resource methods. |
+| `team_players_resource_formats` | character | Team players resource formats. |
+| `team_players_resource_parameters` | character | Team players resource parameters. |
+| `team_players_resource_auth_settings_require_auth` | logical | Team players resource auth settings require auth. |
+| `team_players_resource_auth_settings_allow_only` | character | Team players resource auth settings allow only. |
+| `team_players_resource_resource_cache_ns` | character | Team players resource resource cache ns. |
+| `team_players_resource_resource_cache_cache_keys` | character | Team players resource resource cache cache keys. |
+| `team_players_resource_resource_cache_cache_buster` | integer | Team players resource resource cache cache buster. |
+| `team_players_resource_expiration_message_object_key_name` | character | Team players resource expiration message object key name. |
+| `team_standings_resource_location` | character | Team standings resource location. |
+| `team_standings_resource_route` | character | Team standings resource route. |
+| `team_standings_resource_path` | character | Team standings resource path. |
+| `team_standings_resource_summary` | character | Team standings resource summary. |
+| `team_standings_resource_notes` | character | Team standings resource notes. |
+| `team_standings_resource_versions_allowed` | character | Team standings resource versions allowed. |
+| `team_standings_resource_versions_current` | character | Team standings resource versions current. |
+| `team_standings_resource_methods` | character | Team standings resource methods. |
+| `team_standings_resource_formats` | character | Team standings resource formats. |
+| `team_standings_resource_parameters` | character | Team standings resource parameters. |
+| `team_standings_resource_auth_settings_require_auth` | logical | Team standings resource auth settings require auth. |
+| `team_standings_resource_auth_settings_allow_only` | character | Team standings resource auth settings allow only. |
+| `team_standings_resource_resource_cache_ns` | character | Team standings resource resource cache ns. |
+| `team_standings_resource_resource_cache_cache_keys` | character | Team standings resource resource cache cache keys. |
+| `team_standings_resource_resource_cache_cache_buster` | integer | Team standings resource resource cache cache buster. |
+| `team_standings_resource_expiration_message_object_key_name` | character | Team standings resource expiration message object key name. |
+| `sports_line_team_standings_resource_location` | character | Sports line team standings resource location. |
+| `sports_line_team_standings_resource_route` | character | Sports line team standings resource route. |
+| `sports_line_team_standings_resource_path` | character | Sports line team standings resource path. |
+| `sports_line_team_standings_resource_summary` | character | Sports line team standings resource summary. |
+| `sports_line_team_standings_resource_notes` | character | Sports line team standings resource notes. |
+| `sports_line_team_standings_resource_versions_allowed` | character | Sports line team standings resource versions allowed. |
+| `sports_line_team_standings_resource_versions_current` | character | Sports line team standings resource versions current. |
+| `sports_line_team_standings_resource_methods` | character | Sports line team standings resource methods. |
+| `sports_line_team_standings_resource_formats` | character | Sports line team standings resource formats. |
+| `sports_line_team_standings_resource_parameters` | character | Sports line team standings resource parameters. |
+| `sports_line_team_standings_resource_auth_settings_require_auth` | logical | Sports line team standings resource auth settings require auth. |
+| `sports_line_team_standings_resource_auth_settings_allow_only` | character | Sports line team standings resource auth settings allow only. |
+| `sports_line_team_standings_resource_resource_cache_ns` | character | Sports line team standings resource resource cache ns. |
+| `sports_line_team_standings_resource_resource_cache_cache_keys` | character | Sports line team standings resource resource cache cache keys. |
+| `sports_line_team_standings_resource_resource_cache_cache_buster` | integer | Sports line team standings resource resource cache cache buster. |
+| `sports_line_team_standings_resource_expiration_message_object_key_name` | character | Sports line team standings resource expiration message object key name. |
+| `league_resource_location` | character | League resource location. |
+| `league_resource_route` | character | League resource route. |
+| `league_resource_path` | character | League resource path. |
+| `league_resource_summary` | character | League resource summary. |
+| `league_resource_notes` | character | League resource notes. |
+| `league_resource_versions_allowed` | character | League resource versions allowed. |
+| `league_resource_versions_current` | character | League resource versions current. |
+| `league_resource_methods` | character | League resource methods. |
+| `league_resource_formats` | character | League resource formats. |
+| `league_resource_parameters` | character | League resource parameters. |
+| `league_resource_auth_settings_require_auth` | logical | League resource auth settings require auth. |
+| `league_resource_auth_settings_allow_only` | character | League resource auth settings allow only. |
+| `league_resource_resource_cache_ns` | character | League resource resource cache ns. |
+| `league_resource_resource_cache_cache_keys` | character | League resource resource cache cache keys. |
+| `league_resource_resource_cache_cache_buster` | integer | League resource resource cache cache buster. |
+| `league_resource_expiration_message_object_key_name` | character | League resource expiration message object key name. |
+| `league_teams_resource_location` | character | League teams resource location. |
+| `league_teams_resource_route` | character | League teams resource route. |
+| `league_teams_resource_path` | character | League teams resource path. |
+| `league_teams_resource_summary` | character | League teams resource summary. |
+| `league_teams_resource_notes` | character | League teams resource notes. |
+| `league_teams_resource_versions_allowed` | character | League teams resource versions allowed. |
+| `league_teams_resource_versions_current` | character | League teams resource versions current. |
+| `league_teams_resource_methods` | character | League teams resource methods. |
+| `league_teams_resource_formats` | character | League teams resource formats. |
+| `league_teams_resource_parameters` | character | League teams resource parameters. |
+| `league_teams_resource_auth_settings_require_auth` | logical | League teams resource auth settings require auth. |
+| `league_teams_resource_auth_settings_allow_only` | character | League teams resource auth settings allow only. |
+| `league_teams_resource_resource_cache_ns` | character | League teams resource resource cache ns. |
+| `league_teams_resource_resource_cache_cache_keys` | character | League teams resource resource cache cache keys. |
+| `league_teams_resource_resource_cache_cache_buster` | integer | League teams resource resource cache cache buster. |
+| `league_teams_resource_expiration_message_object_key_name` | character | League teams resource expiration message object key name. |
+| `season_teams_resource_location` | character | Season teams resource location. |
+| `season_teams_resource_route` | character | Season teams resource route. |
+| `season_teams_resource_path` | character | Season teams resource path. |
+| `season_teams_resource_summary` | character | Season teams resource summary. |
+| `season_teams_resource_notes` | character | Season teams resource notes. |
+| `season_teams_resource_versions_allowed` | character | Season teams resource versions allowed. |
+| `season_teams_resource_versions_current` | character | Season teams resource versions current. |
+| `season_teams_resource_methods` | character | Season teams resource methods. |
+| `season_teams_resource_formats` | character | Season teams resource formats. |
+| `season_teams_resource_parameters` | character | Season teams resource parameters. |
+| `season_teams_resource_auth_settings_require_auth` | logical | Season teams resource auth settings require auth. |
+| `season_teams_resource_auth_settings_allow_only` | character | Season teams resource auth settings allow only. |
+| `season_teams_resource_resource_cache_ns` | character | Season teams resource resource cache ns. |
+| `season_teams_resource_resource_cache_cache_keys` | character | Season teams resource resource cache cache keys. |
+| `season_teams_resource_resource_cache_cache_buster` | integer | Season teams resource resource cache cache buster. |
+| `season_teams_resource_expiration_message_object_key_name` | character | Season teams resource expiration message object key name. |
+| `game_resource_location` | character | Game resource location. |
+| `game_resource_route` | character | Game resource route. |
+| `game_resource_path` | character | Game resource path. |
+| `game_resource_summary` | character | Game resource summary. |
+| `game_resource_notes` | character | Game resource notes. |
+| `game_resource_versions_allowed` | character | Game resource versions allowed. |
+| `game_resource_versions_current` | character | Game resource versions current. |
+| `game_resource_methods` | character | Game resource methods. |
+| `game_resource_formats` | character | Game resource formats. |
+| `game_resource_parameters` | character | Game resource parameters. |
+| `game_resource_auth_settings_require_auth` | logical | Game resource auth settings require auth. |
+| `game_resource_auth_settings_allow_only` | character | Game resource auth settings allow only. |
+| `game_resource_resource_cache_ns` | character | Game resource resource cache ns. |
+| `game_resource_resource_cache_cache_keys` | character | Game resource resource cache cache keys. |
+| `game_resource_resource_cache_cache_buster` | integer | Game resource resource cache cache buster. |
+| `game_resource_expiration_message_object_key_name` | character | Game resource expiration message object key name. |
+| `game_lineup_resource_location` | character | Game lineup resource location. |
+| `game_lineup_resource_route` | character | Game lineup resource route. |
+| `game_lineup_resource_path` | character | Game lineup resource path. |
+| `game_lineup_resource_summary` | character | Game lineup resource summary. |
+| `game_lineup_resource_notes` | character | Game lineup resource notes. |
+| `game_lineup_resource_versions_allowed` | character | Game lineup resource versions allowed. |
+| `game_lineup_resource_versions_current` | character | Game lineup resource versions current. |
+| `game_lineup_resource_methods` | character | Game lineup resource methods. |
+| `game_lineup_resource_formats` | character | Game lineup resource formats. |
+| `game_lineup_resource_parameters` | character | Game lineup resource parameters. |
+| `game_lineup_resource_auth_settings_require_auth` | logical | Game lineup resource auth settings require auth. |
+| `game_lineup_resource_auth_settings_allow_only` | character | Game lineup resource auth settings allow only. |
+| `game_lineup_resource_resource_cache_ns` | character | Game lineup resource resource cache ns. |
+| `game_lineup_resource_resource_cache_cache_keys` | character | Game lineup resource resource cache cache keys. |
+| `game_lineup_resource_resource_cache_cache_buster` | integer | Game lineup resource resource cache cache buster. |
+| `game_lineup_resource_expiration_message_object_key_name` | character | Game lineup resource expiration message object key name. |
+| `odds_resource_location` | character | Odds resource location. |
+| `odds_resource_route` | character | Odds resource route. |
+| `odds_resource_path` | character | Odds resource path. |
+| `odds_resource_summary` | character | Odds resource summary. |
+| `odds_resource_notes` | character | Odds resource notes. |
+| `odds_resource_versions_allowed` | character | Odds resource versions allowed. |
+| `odds_resource_versions_current` | character | Odds resource versions current. |
+| `odds_resource_methods` | character | Odds resource methods. |
+| `odds_resource_formats` | character | Odds resource formats. |
+| `odds_resource_parameters` | character | Odds resource parameters. |
+| `odds_resource_auth_settings_require_auth` | logical | Odds resource auth settings require auth. |
+| `odds_resource_auth_settings_allow_only` | character | Odds resource auth settings allow only. |
+| `odds_resource_resource_cache_ns` | character | Odds resource resource cache ns. |
+| `odds_resource_resource_cache_cache_keys` | character | Odds resource resource cache cache keys. |
+| `odds_resource_resource_cache_cache_buster` | integer | Odds resource resource cache cache buster. |
+| `odds_resource_expiration_message_object_key_name` | character | Odds resource expiration message object key name. |
+| `game_outcomes_resource_location` | character | Game outcomes resource location. |
+| `game_outcomes_resource_route` | character | Game outcomes resource route. |
+| `game_outcomes_resource_path` | character | Game outcomes resource path. |
+| `game_outcomes_resource_summary` | character | Game outcomes resource summary. |
+| `game_outcomes_resource_notes` | character | Game outcomes resource notes. |
+| `game_outcomes_resource_versions_allowed` | character | Game outcomes resource versions allowed. |
+| `game_outcomes_resource_versions_current` | character | Game outcomes resource versions current. |
+| `game_outcomes_resource_methods` | character | Game outcomes resource methods. |
+| `game_outcomes_resource_formats` | character | Game outcomes resource formats. |
+| `game_outcomes_resource_parameters` | character | Game outcomes resource parameters. |
+| `game_outcomes_resource_auth_settings_require_auth` | logical | Game outcomes resource auth settings require auth. |
+| `game_outcomes_resource_auth_settings_allow_only` | character | Game outcomes resource auth settings allow only. |
+| `game_outcomes_resource_resource_cache_ns` | character | Game outcomes resource resource cache ns. |
+| `game_outcomes_resource_resource_cache_cache_keys` | character | Game outcomes resource resource cache cache keys. |
+| `game_outcomes_resource_resource_cache_cache_buster` | integer | Game outcomes resource resource cache cache buster. |
+| `game_outcomes_resource_expiration_message_object_key_name` | character | Game outcomes resource expiration message object key name. |
+| `game_odds_resource_location` | character | Game odds resource location. |
+| `game_odds_resource_route` | character | Game odds resource route. |
+| `game_odds_resource_path` | character | Game odds resource path. |
+| `game_odds_resource_summary` | character | Game odds resource summary. |
+| `game_odds_resource_notes` | character | Game odds resource notes. |
+| `game_odds_resource_versions_allowed` | character | Game odds resource versions allowed. |
+| `game_odds_resource_versions_current` | character | Game odds resource versions current. |
+| `game_odds_resource_methods` | character | Game odds resource methods. |
+| `game_odds_resource_formats` | character | Game odds resource formats. |
+| `game_odds_resource_parameters` | character | Game odds resource parameters. |
+| `game_odds_resource_auth_settings_require_auth` | logical | Game odds resource auth settings require auth. |
+| `game_odds_resource_auth_settings_allow_only` | character | Game odds resource auth settings allow only. |
+| `game_odds_resource_resource_cache_ns` | character | Game odds resource resource cache ns. |
+| `game_odds_resource_resource_cache_cache_keys` | character | Game odds resource resource cache cache keys. |
+| `game_odds_resource_resource_cache_cache_buster` | integer | Game odds resource resource cache cache buster. |
+| `game_odds_resource_expiration_message_object_key_name` | character | Game odds resource expiration message object key name. |
+| `game_hq_odds_resource_location` | character | Game hq odds resource location. |
+| `game_hq_odds_resource_route` | character | Game hq odds resource route. |
+| `game_hq_odds_resource_path` | character | Game hq odds resource path. |
+| `game_hq_odds_resource_summary` | character | Game hq odds resource summary. |
+| `game_hq_odds_resource_notes` | character | Game hq odds resource notes. |
+| `game_hq_odds_resource_versions_allowed` | character | Game hq odds resource versions allowed. |
+| `game_hq_odds_resource_versions_current` | character | Game hq odds resource versions current. |
+| `game_hq_odds_resource_methods` | character | Game hq odds resource methods. |
+| `game_hq_odds_resource_formats` | character | Game hq odds resource formats. |
+| `game_hq_odds_resource_parameters` | character | Game hq odds resource parameters. |
+| `game_hq_odds_resource_auth_settings_require_auth` | logical | Game hq odds resource auth settings require auth. |
+| `game_hq_odds_resource_auth_settings_allow_only` | character | Game hq odds resource auth settings allow only. |
+| `game_hq_odds_resource_resource_cache_ns` | character | Game hq odds resource resource cache ns. |
+| `game_hq_odds_resource_resource_cache_cache_keys` | character | Game hq odds resource resource cache cache keys. |
+| `game_hq_odds_resource_resource_cache_cache_buster` | integer | Game hq odds resource resource cache cache buster. |
+| `game_hq_odds_resource_expiration_message_object_key_name` | character | Game hq odds resource expiration message object key name. |
+| `weather_resource_location` | character | Weather resource location. |
+| `weather_resource_route` | character | Weather resource route. |
+| `weather_resource_path` | character | Weather resource path. |
+| `weather_resource_summary` | character | Weather resource summary. |
+| `weather_resource_notes` | character | Weather resource notes. |
+| `weather_resource_versions_allowed` | character | Weather resource versions allowed. |
+| `weather_resource_versions_current` | character | Weather resource versions current. |
+| `weather_resource_methods` | character | Weather resource methods. |
+| `weather_resource_formats` | character | Weather resource formats. |
+| `weather_resource_parameters` | character | Weather resource parameters. |
+| `weather_resource_auth_settings_require_auth` | logical | Weather resource auth settings require auth. |
+| `weather_resource_auth_settings_allow_only` | character | Weather resource auth settings allow only. |
+| `weather_resource_resource_cache_ns` | character | Weather resource resource cache ns. |
+| `weather_resource_resource_cache_cache_keys` | character | Weather resource resource cache cache keys. |
+| `weather_resource_resource_cache_cache_buster` | integer | Weather resource resource cache cache buster. |
+| `weather_resource_expiration_message_object_key_name` | character | Weather resource expiration message object key name. |
+| `game_betting_splits_resource_location` | character | Game betting splits resource location. |
+| `game_betting_splits_resource_route` | character | Game betting splits resource route. |
+| `game_betting_splits_resource_path` | character | Game betting splits resource path. |
+| `game_betting_splits_resource_summary` | character | Game betting splits resource summary. |
+| `game_betting_splits_resource_notes` | character | Game betting splits resource notes. |
+| `game_betting_splits_resource_versions_allowed` | character | Game betting splits resource versions allowed. |
+| `game_betting_splits_resource_versions_current` | character | Game betting splits resource versions current. |
+| `game_betting_splits_resource_methods` | character | Game betting splits resource methods. |
+| `game_betting_splits_resource_formats` | character | Game betting splits resource formats. |
+| `game_betting_splits_resource_parameters` | character | Game betting splits resource parameters. |
+| `game_betting_splits_resource_auth_settings_require_auth` | logical | Game betting splits resource auth settings require auth. |
+| `game_betting_splits_resource_auth_settings_allow_only` | character | Game betting splits resource auth settings allow only. |
+| `game_betting_splits_resource_resource_cache_ns` | character | Game betting splits resource resource cache ns. |
+| `game_betting_splits_resource_resource_cache_cache_keys` | character | Game betting splits resource resource cache cache keys. |
+| `game_betting_splits_resource_resource_cache_cache_buster` | integer | Game betting splits resource resource cache cache buster. |
+| `game_betting_splits_resource_expiration_message_object_key_name` | character | Game betting splits resource expiration message object key name. |
+| `featured_game_resource_location` | character | Featured game resource location. |
+| `featured_game_resource_route` | character | Featured game resource route. |
+| `featured_game_resource_path` | character | Featured game resource path. |
+| `featured_game_resource_summary` | character | Featured game resource summary. |
+| `featured_game_resource_notes` | character | Featured game resource notes. |
+| `featured_game_resource_versions_allowed` | character | Featured game resource versions allowed. |
+| `featured_game_resource_versions_current` | character | Featured game resource versions current. |
+| `featured_game_resource_methods` | character | Featured game resource methods. |
+| `featured_game_resource_formats` | character | Featured game resource formats. |
+| `featured_game_resource_parameters` | character | Featured game resource parameters. |
+| `featured_game_resource_auth_settings_require_auth` | logical | Featured game resource auth settings require auth. |
+| `featured_game_resource_auth_settings_allow_only` | character | Featured game resource auth settings allow only. |
+| `featured_game_resource_resource_cache_ns` | character | Featured game resource resource cache ns. |
+| `featured_game_resource_resource_cache_cache_keys` | character | Featured game resource resource cache cache keys. |
+| `featured_game_resource_resource_cache_cache_buster` | integer | Featured game resource resource cache cache buster. |
+| `featured_game_resource_expiration_message_object_key_name` | character | Featured game resource expiration message object key name. |
+| `game_scoring_leaders_resource_location` | character | Game scoring leaders resource location. |
+| `game_scoring_leaders_resource_route` | character | Game scoring leaders resource route. |
+| `game_scoring_leaders_resource_path` | character | Game scoring leaders resource path. |
+| `game_scoring_leaders_resource_summary` | character | Game scoring leaders resource summary. |
+| `game_scoring_leaders_resource_notes` | character | Game scoring leaders resource notes. |
+| `game_scoring_leaders_resource_versions_allowed` | character | Game scoring leaders resource versions allowed. |
+| `game_scoring_leaders_resource_versions_current` | character | Game scoring leaders resource versions current. |
+| `game_scoring_leaders_resource_methods` | character | Game scoring leaders resource methods. |
+| `game_scoring_leaders_resource_formats` | character | Game scoring leaders resource formats. |
+| `game_scoring_leaders_resource_parameters` | character | Game scoring leaders resource parameters. |
+| `game_scoring_leaders_resource_auth_settings_require_auth` | logical | Game scoring leaders resource auth settings require auth. |
+| `game_scoring_leaders_resource_auth_settings_allow_only` | character | Game scoring leaders resource auth settings allow only. |
+| `game_scoring_leaders_resource_resource_cache_ns` | character | Game scoring leaders resource resource cache ns. |
+| `game_scoring_leaders_resource_resource_cache_cache_keys` | character | Game scoring leaders resource resource cache cache keys. |
+| `game_scoring_leaders_resource_resource_cache_cache_buster` | integer | Game scoring leaders resource resource cache cache buster. |
+| `game_scoring_leaders_resource_expiration_message_object_key_name` | character | Game scoring leaders resource expiration message object key name. |
+| `game_scoring_player_stats_resource_location` | character | Game scoring player stats resource location. |
+| `game_scoring_player_stats_resource_route` | character | Game scoring player stats resource route. |
+| `game_scoring_player_stats_resource_path` | character | Game scoring player stats resource path. |
+| `game_scoring_player_stats_resource_summary` | character | Game scoring player stats resource summary. |
+| `game_scoring_player_stats_resource_notes` | character | Game scoring player stats resource notes. |
+| `game_scoring_player_stats_resource_versions_allowed` | character | Game scoring player stats resource versions allowed. |
+| `game_scoring_player_stats_resource_versions_current` | character | Game scoring player stats resource versions current. |
+| `game_scoring_player_stats_resource_methods` | character | Game scoring player stats resource methods. |
+| `game_scoring_player_stats_resource_formats` | character | Game scoring player stats resource formats. |
+| `game_scoring_player_stats_resource_parameters` | character | Game scoring player stats resource parameters. |
+| `game_scoring_player_stats_resource_auth_settings_require_auth` | logical | Game scoring player stats resource auth settings require auth. |
+| `game_scoring_player_stats_resource_auth_settings_allow_only` | character | Game scoring player stats resource auth settings allow only. |
+| `game_scoring_player_stats_resource_resource_cache_ns` | character | Game scoring player stats resource resource cache ns. |
+| `game_scoring_player_stats_resource_resource_cache_cache_keys` | character | Game scoring player stats resource resource cache cache keys. |
+| `game_scoring_player_stats_resource_resource_cache_cache_buster` | integer | Game scoring player stats resource resource cache cache buster. |
+| `game_scoring_player_stats_resource_expiration_message_object_key_name` | character | Game scoring player stats resource expiration message object key name. |
+| `game_scoring_scoreboard_resource_location` | character | Game scoring scoreboard resource location. |
+| `game_scoring_scoreboard_resource_route` | character | Game scoring scoreboard resource route. |
+| `game_scoring_scoreboard_resource_path` | character | Game scoring scoreboard resource path. |
+| `game_scoring_scoreboard_resource_summary` | character | Game scoring scoreboard resource summary. |
+| `game_scoring_scoreboard_resource_notes` | character | Game scoring scoreboard resource notes. |
+| `game_scoring_scoreboard_resource_versions_allowed` | character | Game scoring scoreboard resource versions allowed. |
+| `game_scoring_scoreboard_resource_versions_current` | character | Game scoring scoreboard resource versions current. |
+| `game_scoring_scoreboard_resource_methods` | character | Game scoring scoreboard resource methods. |
+| `game_scoring_scoreboard_resource_formats` | character | Game scoring scoreboard resource formats. |
+| `game_scoring_scoreboard_resource_parameters` | character | Game scoring scoreboard resource parameters. |
+| `game_scoring_scoreboard_resource_auth_settings_require_auth` | logical | Game scoring scoreboard resource auth settings require auth. |
+| `game_scoring_scoreboard_resource_auth_settings_allow_only` | character | Game scoring scoreboard resource auth settings allow only. |
+| `game_scoring_scoreboard_resource_resource_cache_ns` | character | Game scoring scoreboard resource resource cache ns. |
+| `game_scoring_scoreboard_resource_resource_cache_cache_keys` | character | Game scoring scoreboard resource resource cache cache keys. |
+| `game_scoring_scoreboard_resource_resource_cache_cache_buster` | integer | Game scoring scoreboard resource resource cache cache buster. |
+| `game_scoring_scoreboard_resource_expiration_message_object_key_name` | character | Game scoring scoreboard resource expiration message object key name. |
+| `game_scoring_scores_resource_location` | character | Game scoring scores resource location. |
+| `game_scoring_scores_resource_route` | character | Game scoring scores resource route. |
+| `game_scoring_scores_resource_path` | character | Game scoring scores resource path. |
+| `game_scoring_scores_resource_summary` | character | Game scoring scores resource summary. |
+| `game_scoring_scores_resource_notes` | character | Game scoring scores resource notes. |
+| `game_scoring_scores_resource_versions_allowed` | character | Game scoring scores resource versions allowed. |
+| `game_scoring_scores_resource_versions_current` | character | Game scoring scores resource versions current. |
+| `game_scoring_scores_resource_methods` | character | Game scoring scores resource methods. |
+| `game_scoring_scores_resource_formats` | character | Game scoring scores resource formats. |
+| `game_scoring_scores_resource_parameters` | character | Game scoring scores resource parameters. |
+| `game_scoring_scores_resource_auth_settings_require_auth` | logical | Game scoring scores resource auth settings require auth. |
+| `game_scoring_scores_resource_auth_settings_allow_only` | character | Game scoring scores resource auth settings allow only. |
+| `game_scoring_scores_resource_resource_cache_ns` | character | Game scoring scores resource resource cache ns. |
+| `game_scoring_scores_resource_resource_cache_cache_keys` | character | Game scoring scores resource resource cache cache keys. |
+| `game_scoring_scores_resource_resource_cache_cache_buster` | integer | Game scoring scores resource resource cache cache buster. |
+| `game_scoring_scores_resource_expiration_message_object_key_name` | character | Game scoring scores resource expiration message object key name. |
+| `game_scoring_ytd_player_stats_resource_location` | character | Game scoring year-to-date player stats resource location. |
+| `game_scoring_ytd_player_stats_resource_route` | character | Game scoring year-to-date player stats resource route. |
+| `game_scoring_ytd_player_stats_resource_path` | character | Game scoring year-to-date player stats resource path. |
+| `game_scoring_ytd_player_stats_resource_summary` | character | Game scoring year-to-date player stats resource summary. |
+| `game_scoring_ytd_player_stats_resource_notes` | character | Game scoring year-to-date player stats resource notes. |
+| `game_scoring_ytd_player_stats_resource_versions_allowed` | character | Game scoring year-to-date player stats resource versions allowed. |
+| `game_scoring_ytd_player_stats_resource_versions_current` | character | Game scoring year-to-date player stats resource versions current. |
+| `game_scoring_ytd_player_stats_resource_methods` | character | Game scoring year-to-date player stats resource methods. |
+| `game_scoring_ytd_player_stats_resource_formats` | character | Game scoring year-to-date player stats resource formats. |
+| `game_scoring_ytd_player_stats_resource_parameters` | character | Game scoring year-to-date player stats resource parameters. |
+| `game_scoring_ytd_player_stats_resource_auth_settings_require_auth` | logical | Game scoring year-to-date player stats resource auth settings require auth. |
+| `game_scoring_ytd_player_stats_resource_auth_settings_allow_only` | character | Game scoring year-to-date player stats resource auth settings allow only. |
+| `game_scoring_ytd_player_stats_resource_resource_cache_ns` | character | Game scoring year-to-date player stats resource resource cache ns. |
+| `game_scoring_ytd_player_stats_resource_resource_cache_cache_keys` | character | Game scoring year-to-date player stats resource resource cache cache keys. |
+| `game_scoring_ytd_player_stats_resource_resource_cache_cache_buster` | integer | Game scoring year-to-date player stats resource resource cache cache buster. |
+| `game_scoring_ytd_player_stats_resource_expiration_message_object_key_name` | character | Game scoring year-to-date player stats resource expiration message object key name. |
+| `game_scoring_plays_resource_location` | character | Game scoring plays resource location. |
+| `game_scoring_plays_resource_route` | character | Game scoring plays resource route. |
+| `game_scoring_plays_resource_path` | character | Game scoring plays resource path. |
+| `game_scoring_plays_resource_summary` | character | Game scoring plays resource summary. |
+| `game_scoring_plays_resource_notes` | character | Game scoring plays resource notes. |
+| `game_scoring_plays_resource_versions_allowed` | character | Game scoring plays resource versions allowed. |
+| `game_scoring_plays_resource_versions_current` | character | Game scoring plays resource versions current. |
+| `game_scoring_plays_resource_methods` | character | Game scoring plays resource methods. |
+| `game_scoring_plays_resource_formats` | character | Game scoring plays resource formats. |
+| `game_scoring_plays_resource_parameters` | character | Game scoring plays resource parameters. |
+| `game_scoring_plays_resource_auth_settings_require_auth` | logical | Game scoring plays resource auth settings require auth. |
+| `game_scoring_plays_resource_auth_settings_allow_only` | character | Game scoring plays resource auth settings allow only. |
+| `game_scoring_plays_resource_resource_cache_ns` | character | Game scoring plays resource resource cache ns. |
+| `game_scoring_plays_resource_resource_cache_cache_keys` | character | Game scoring plays resource resource cache cache keys. |
+| `game_scoring_plays_resource_resource_cache_cache_buster` | integer | Game scoring plays resource resource cache cache buster. |
+| `game_scoring_plays_resource_expiration_message_object_key_name` | character | Game scoring plays resource expiration message object key name. |
+| `game_scoring_drives_resource_location` | character | Game scoring drives resource location. |
+| `game_scoring_drives_resource_route` | character | Game scoring drives resource route. |
+| `game_scoring_drives_resource_path` | character | Game scoring drives resource path. |
+| `game_scoring_drives_resource_summary` | character | Game scoring drives resource summary. |
+| `game_scoring_drives_resource_notes` | character | Game scoring drives resource notes. |
+| `game_scoring_drives_resource_versions_allowed` | character | Game scoring drives resource versions allowed. |
+| `game_scoring_drives_resource_versions_current` | character | Game scoring drives resource versions current. |
+| `game_scoring_drives_resource_methods` | character | Game scoring drives resource methods. |
+| `game_scoring_drives_resource_formats` | character | Game scoring drives resource formats. |
+| `game_scoring_drives_resource_parameters` | character | Game scoring drives resource parameters. |
+| `game_scoring_drives_resource_auth_settings_require_auth` | logical | Game scoring drives resource auth settings require auth. |
+| `game_scoring_drives_resource_auth_settings_allow_only` | character | Game scoring drives resource auth settings allow only. |
+| `game_scoring_drives_resource_resource_cache_ns` | character | Game scoring drives resource resource cache ns. |
+| `game_scoring_drives_resource_resource_cache_cache_keys` | character | Game scoring drives resource resource cache cache keys. |
+| `game_scoring_drives_resource_resource_cache_cache_buster` | integer | Game scoring drives resource resource cache cache buster. |
+| `game_scoring_drives_resource_expiration_message_object_key_name` | character | Game scoring drives resource expiration message object key name. |
+| `game_scoring_rosters_resource_location` | character | Game scoring rosters resource location. |
+| `game_scoring_rosters_resource_route` | character | Game scoring rosters resource route. |
+| `game_scoring_rosters_resource_path` | character | Game scoring rosters resource path. |
+| `game_scoring_rosters_resource_summary` | character | Game scoring rosters resource summary. |
+| `game_scoring_rosters_resource_notes` | character | Game scoring rosters resource notes. |
+| `game_scoring_rosters_resource_versions_allowed` | character | Game scoring rosters resource versions allowed. |
+| `game_scoring_rosters_resource_versions_current` | character | Game scoring rosters resource versions current. |
+| `game_scoring_rosters_resource_methods` | character | Game scoring rosters resource methods. |
+| `game_scoring_rosters_resource_formats` | character | Game scoring rosters resource formats. |
+| `game_scoring_rosters_resource_parameters` | character | Game scoring rosters resource parameters. |
+| `game_scoring_rosters_resource_auth_settings_require_auth` | logical | Game scoring rosters resource auth settings require auth. |
+| `game_scoring_rosters_resource_auth_settings_allow_only` | character | Game scoring rosters resource auth settings allow only. |
+| `game_scoring_rosters_resource_resource_cache_ns` | character | Game scoring rosters resource resource cache ns. |
+| `game_scoring_rosters_resource_resource_cache_cache_keys` | character | Game scoring rosters resource resource cache cache keys. |
+| `game_scoring_rosters_resource_resource_cache_cache_buster` | integer | Game scoring rosters resource resource cache cache buster. |
+| `game_scoring_rosters_resource_expiration_message_object_key_name` | character | Game scoring rosters resource expiration message object key name. |
+| `recruit_rankings_resource_location` | character | Recruit rankings resource location. |
+| `recruit_rankings_resource_route` | character | Recruit rankings resource route. |
+| `recruit_rankings_resource_path` | character | Recruit rankings resource path. |
+| `recruit_rankings_resource_summary` | character | Recruit rankings resource summary. |
+| `recruit_rankings_resource_notes` | character | Recruit rankings resource notes. |
+| `recruit_rankings_resource_versions_allowed` | character | Recruit rankings resource versions allowed. |
+| `recruit_rankings_resource_versions_current` | character | Recruit rankings resource versions current. |
+| `recruit_rankings_resource_methods` | character | Recruit rankings resource methods. |
+| `recruit_rankings_resource_formats` | character | Recruit rankings resource formats. |
+| `recruit_rankings_resource_parameters` | character | Recruit rankings resource parameters. |
+| `recruit_rankings_resource_auth_settings_require_auth` | logical | Recruit rankings resource auth settings require auth. |
+| `recruit_rankings_resource_auth_settings_allow_only` | character | Recruit rankings resource auth settings allow only. |
+| `recruit_rankings_resource_resource_cache_ns` | character | Recruit rankings resource resource cache ns. |
+| `recruit_rankings_resource_resource_cache_cache_keys` | character | Recruit rankings resource resource cache cache keys. |
+| `recruit_rankings_resource_resource_cache_cache_buster` | integer | Recruit rankings resource resource cache cache buster. |
+| `recruit_rankings_resource_expiration_message_object_key_name` | character | Recruit rankings resource expiration message object key name. |
+| `coach_rankings_resource_location` | character | Coach rankings resource location. |
+| `coach_rankings_resource_route` | character | Coach rankings resource route. |
+| `coach_rankings_resource_path` | character | Coach rankings resource path. |
+| `coach_rankings_resource_summary` | character | Coach rankings resource summary. |
+| `coach_rankings_resource_notes` | character | Coach rankings resource notes. |
+| `coach_rankings_resource_versions_allowed` | character | Coach rankings resource versions allowed. |
+| `coach_rankings_resource_versions_current` | character | Coach rankings resource versions current. |
+| `coach_rankings_resource_methods` | character | Coach rankings resource methods. |
+| `coach_rankings_resource_formats` | character | Coach rankings resource formats. |
+| `coach_rankings_resource_parameters` | character | Coach rankings resource parameters. |
+| `coach_rankings_resource_auth_settings_require_auth` | logical | Coach rankings resource auth settings require auth. |
+| `coach_rankings_resource_auth_settings_allow_only` | character | Coach rankings resource auth settings allow only. |
+| `coach_rankings_resource_resource_cache_ns` | character | Coach rankings resource resource cache ns. |
+| `coach_rankings_resource_resource_cache_cache_keys` | character | Coach rankings resource resource cache cache keys. |
+| `coach_rankings_resource_resource_cache_cache_buster` | integer | Coach rankings resource resource cache cache buster. |
+| `coach_rankings_resource_expiration_message_object_key_name` | character | Coach rankings resource expiration message object key name. |
+| `player_golf_metadata_resource_location` | character | Player golf metadata resource location. |
+| `player_golf_metadata_resource_route` | character | Player golf metadata resource route. |
+| `player_golf_metadata_resource_path` | character | Player golf metadata resource path. |
+| `player_golf_metadata_resource_summary` | character | Player golf metadata resource summary. |
+| `player_golf_metadata_resource_notes` | character | Player golf metadata resource notes. |
+| `player_golf_metadata_resource_versions_allowed` | character | Player golf metadata resource versions allowed. |
+| `player_golf_metadata_resource_versions_current` | character | Player golf metadata resource versions current. |
+| `player_golf_metadata_resource_methods` | character | Player golf metadata resource methods. |
+| `player_golf_metadata_resource_formats` | character | Player golf metadata resource formats. |
+| `player_golf_metadata_resource_parameters` | character | Player golf metadata resource parameters. |
+| `player_golf_metadata_resource_auth_settings_require_auth` | logical | Player golf metadata resource auth settings require auth. |
+| `player_golf_metadata_resource_auth_settings_allow_only` | character | Player golf metadata resource auth settings allow only. |
+| `player_golf_metadata_resource_resource_cache_ns` | character | Player golf metadata resource resource cache ns. |
+| `player_golf_metadata_resource_resource_cache_cache_keys` | character | Player golf metadata resource resource cache cache keys. |
+| `player_golf_metadata_resource_resource_cache_cache_buster` | integer | Player golf metadata resource resource cache cache buster. |
+| `player_golf_metadata_resource_expiration_message_object_key_name` | character | Player golf metadata resource expiration message object key name. |
+| `game_scoring_ytd_team_stats_resource_location` | character | Game scoring year-to-date team stats resource location. |
+| `game_scoring_ytd_team_stats_resource_route` | character | Game scoring year-to-date team stats resource route. |
+| `game_scoring_ytd_team_stats_resource_path` | character | Game scoring year-to-date team stats resource path. |
+| `game_scoring_ytd_team_stats_resource_summary` | character | Game scoring year-to-date team stats resource summary. |
+| `game_scoring_ytd_team_stats_resource_notes` | character | Game scoring year-to-date team stats resource notes. |
+| `game_scoring_ytd_team_stats_resource_versions_allowed` | character | Game scoring year-to-date team stats resource versions allowed. |
+| `game_scoring_ytd_team_stats_resource_versions_current` | character | Game scoring year-to-date team stats resource versions current. |
+| `game_scoring_ytd_team_stats_resource_methods` | character | Game scoring year-to-date team stats resource methods. |
+| `game_scoring_ytd_team_stats_resource_formats` | character | Game scoring year-to-date team stats resource formats. |
+| `game_scoring_ytd_team_stats_resource_parameters` | character | Game scoring year-to-date team stats resource parameters. |
+| `game_scoring_ytd_team_stats_resource_auth_settings_require_auth` | logical | Game scoring year-to-date team stats resource auth settings require auth. |
+| `game_scoring_ytd_team_stats_resource_auth_settings_allow_only` | character | Game scoring year-to-date team stats resource auth settings allow only. |
+| `game_scoring_ytd_team_stats_resource_resource_cache_ns` | character | Game scoring year-to-date team stats resource resource cache ns. |
+| `game_scoring_ytd_team_stats_resource_resource_cache_cache_keys` | character | Game scoring year-to-date team stats resource resource cache cache keys. |
+| `game_scoring_ytd_team_stats_resource_resource_cache_cache_buster` | integer | Game scoring year-to-date team stats resource resource cache cache buster. |
+| `game_scoring_ytd_team_stats_resource_expiration_message_object_key_name` | character | Game scoring year-to-date team stats resource expiration message object key name. |
+| `game_scoring_team_stats_resource_location` | character | Game scoring team stats resource location. |
+| `game_scoring_team_stats_resource_route` | character | Game scoring team stats resource route. |
+| `game_scoring_team_stats_resource_path` | character | Game scoring team stats resource path. |
+| `game_scoring_team_stats_resource_summary` | character | Game scoring team stats resource summary. |
+| `game_scoring_team_stats_resource_notes` | character | Game scoring team stats resource notes. |
+| `game_scoring_team_stats_resource_versions_allowed` | character | Game scoring team stats resource versions allowed. |
+| `game_scoring_team_stats_resource_versions_current` | character | Game scoring team stats resource versions current. |
+| `game_scoring_team_stats_resource_methods` | character | Game scoring team stats resource methods. |
+| `game_scoring_team_stats_resource_formats` | character | Game scoring team stats resource formats. |
+| `game_scoring_team_stats_resource_parameters` | character | Game scoring team stats resource parameters. |
+| `game_scoring_team_stats_resource_auth_settings_require_auth` | logical | Game scoring team stats resource auth settings require auth. |
+| `game_scoring_team_stats_resource_auth_settings_allow_only` | character | Game scoring team stats resource auth settings allow only. |
+| `game_scoring_team_stats_resource_resource_cache_ns` | character | Game scoring team stats resource resource cache ns. |
+| `game_scoring_team_stats_resource_resource_cache_cache_keys` | character | Game scoring team stats resource resource cache cache keys. |
+| `game_scoring_team_stats_resource_resource_cache_cache_buster` | integer | Game scoring team stats resource resource cache cache buster. |
+| `game_scoring_team_stats_resource_expiration_message_object_key_name` | character | Game scoring team stats resource expiration message object key name. |
+| `game_scoring_winprob_resource_location` | character | Game scoring winprob resource location. |
+| `game_scoring_winprob_resource_route` | character | Game scoring winprob resource route. |
+| `game_scoring_winprob_resource_path` | character | Game scoring winprob resource path. |
+| `game_scoring_winprob_resource_summary` | character | Game scoring winprob resource summary. |
+| `game_scoring_winprob_resource_notes` | character | Game scoring winprob resource notes. |
+| `game_scoring_winprob_resource_versions_allowed` | character | Game scoring winprob resource versions allowed. |
+| `game_scoring_winprob_resource_versions_current` | character | Game scoring winprob resource versions current. |
+| `game_scoring_winprob_resource_methods` | character | Game scoring winprob resource methods. |
+| `game_scoring_winprob_resource_formats` | character | Game scoring winprob resource formats. |
+| `game_scoring_winprob_resource_parameters` | character | Game scoring winprob resource parameters. |
+| `game_scoring_winprob_resource_auth_settings_require_auth` | logical | Game scoring winprob resource auth settings require auth. |
+| `game_scoring_winprob_resource_auth_settings_allow_only` | character | Game scoring winprob resource auth settings allow only. |
+| `game_scoring_winprob_resource_resource_cache_ns` | character | Game scoring winprob resource resource cache ns. |
+| `game_scoring_winprob_resource_resource_cache_cache_keys` | character | Game scoring winprob resource resource cache cache keys. |
+| `game_scoring_winprob_resource_resource_cache_cache_buster` | integer | Game scoring winprob resource resource cache cache buster. |
+| `game_scoring_winprob_resource_expiration_message_object_key_name` | character | Game scoring winprob resource expiration message object key name. |
+| `game_rtwp_resource_location` | character | Game real-time win probability resource location. |
+| `game_rtwp_resource_route` | character | Game real-time win probability resource route. |
+| `game_rtwp_resource_path` | character | Game real-time win probability resource path. |
+| `game_rtwp_resource_summary` | character | Game real-time win probability resource summary. |
+| `game_rtwp_resource_notes` | character | Game real-time win probability resource notes. |
+| `game_rtwp_resource_versions_allowed` | character | Game real-time win probability resource versions allowed. |
+| `game_rtwp_resource_versions_current` | character | Game real-time win probability resource versions current. |
+| `game_rtwp_resource_methods` | character | Game real-time win probability resource methods. |
+| `game_rtwp_resource_formats` | character | Game real-time win probability resource formats. |
+| `game_rtwp_resource_parameters` | character | Game real-time win probability resource parameters. |
+| `game_rtwp_resource_auth_settings_require_auth` | logical | Game real-time win probability resource auth settings require auth. |
+| `game_rtwp_resource_auth_settings_allow_only` | character | Game real-time win probability resource auth settings allow only. |
+| `game_rtwp_resource_resource_cache_ns` | character | Game real-time win probability resource resource cache ns. |
+| `game_rtwp_resource_resource_cache_cache_keys` | character | Game real-time win probability resource resource cache cache keys. |
+| `game_rtwp_resource_resource_cache_cache_buster` | integer | Game real-time win probability resource resource cache cache buster. |
+| `game_rtwp_resource_expiration_message_object_key_name` | character | Game real-time win probability resource expiration message object key name. |
+| `game_ticket_resource_location` | character | Game ticket resource location. |
+| `game_ticket_resource_route` | character | Game ticket resource route. |
+| `game_ticket_resource_path` | character | Game ticket resource path. |
+| `game_ticket_resource_summary` | character | Game ticket resource summary. |
+| `game_ticket_resource_notes` | character | Game ticket resource notes. |
+| `game_ticket_resource_versions_allowed` | character | Game ticket resource versions allowed. |
+| `game_ticket_resource_versions_current` | character | Game ticket resource versions current. |
+| `game_ticket_resource_methods` | character | Game ticket resource methods. |
+| `game_ticket_resource_formats` | character | Game ticket resource formats. |
+| `game_ticket_resource_parameters` | character | Game ticket resource parameters. |
+| `game_ticket_resource_auth_settings_require_auth` | logical | Game ticket resource auth settings require auth. |
+| `game_ticket_resource_auth_settings_allow_only` | character | Game ticket resource auth settings allow only. |
+| `game_ticket_resource_resource_cache_ns` | character | Game ticket resource resource cache ns. |
+| `game_ticket_resource_resource_cache_cache_keys` | character | Game ticket resource resource cache cache keys. |
+| `game_ticket_resource_resource_cache_cache_buster` | integer | Game ticket resource resource cache cache buster. |
+| `game_ticket_resource_expiration_message_object_key_name` | character | Game ticket resource expiration message object key name. |
+| `game_content_preview_resource_location` | character | Game content preview resource location. |
+| `game_content_preview_resource_route` | character | Game content preview resource route. |
+| `game_content_preview_resource_path` | character | Game content preview resource path. |
+| `game_content_preview_resource_summary` | character | Game content preview resource summary. |
+| `game_content_preview_resource_notes` | character | Game content preview resource notes. |
+| `game_content_preview_resource_versions_allowed` | character | Game content preview resource versions allowed. |
+| `game_content_preview_resource_versions_current` | character | Game content preview resource versions current. |
+| `game_content_preview_resource_methods` | character | Game content preview resource methods. |
+| `game_content_preview_resource_formats` | character | Game content preview resource formats. |
+| `game_content_preview_resource_parameters` | character | Game content preview resource parameters. |
+| `game_content_preview_resource_auth_settings_require_auth` | logical | Game content preview resource auth settings require auth. |
+| `game_content_preview_resource_auth_settings_allow_only` | character | Game content preview resource auth settings allow only. |
+| `game_content_preview_resource_resource_cache_ns` | character | Game content preview resource resource cache ns. |
+| `game_content_preview_resource_resource_cache_cache_keys` | character | Game content preview resource resource cache cache keys. |
+| `game_content_preview_resource_resource_cache_cache_buster` | integer | Game content preview resource resource cache cache buster. |
+| `game_content_preview_resource_expiration_message_object_key_name` | character | Game content preview resource expiration message object key name. |
+| `game_content_recap_resource_location` | character | Game content recap resource location. |
+| `game_content_recap_resource_route` | character | Game content recap resource route. |
+| `game_content_recap_resource_path` | character | Game content recap resource path. |
+| `game_content_recap_resource_summary` | character | Game content recap resource summary. |
+| `game_content_recap_resource_notes` | character | Game content recap resource notes. |
+| `game_content_recap_resource_versions_allowed` | character | Game content recap resource versions allowed. |
+| `game_content_recap_resource_versions_current` | character | Game content recap resource versions current. |
+| `game_content_recap_resource_methods` | character | Game content recap resource methods. |
+| `game_content_recap_resource_formats` | character | Game content recap resource formats. |
+| `game_content_recap_resource_parameters` | character | Game content recap resource parameters. |
+| `game_content_recap_resource_auth_settings_require_auth` | logical | Game content recap resource auth settings require auth. |
+| `game_content_recap_resource_auth_settings_allow_only` | character | Game content recap resource auth settings allow only. |
+| `game_content_recap_resource_resource_cache_ns` | character | Game content recap resource resource cache ns. |
+| `game_content_recap_resource_resource_cache_cache_keys` | character | Game content recap resource resource cache cache keys. |
+| `game_content_recap_resource_resource_cache_cache_buster` | integer | Game content recap resource resource cache cache buster. |
+| `game_content_recap_resource_expiration_message_object_key_name` | character | Game content recap resource expiration message object key name. |
+| `game_content_story_resource_location` | character | Game content story resource location. |
+| `game_content_story_resource_route` | character | Game content story resource route. |
+| `game_content_story_resource_path` | character | Game content story resource path. |
+| `game_content_story_resource_summary` | character | Game content story resource summary. |
+| `game_content_story_resource_notes` | character | Game content story resource notes. |
+| `game_content_story_resource_versions_allowed` | character | Game content story resource versions allowed. |
+| `game_content_story_resource_versions_current` | character | Game content story resource versions current. |
+| `game_content_story_resource_methods` | character | Game content story resource methods. |
+| `game_content_story_resource_formats` | character | Game content story resource formats. |
+| `game_content_story_resource_parameters` | character | Game content story resource parameters. |
+| `game_content_story_resource_auth_settings_require_auth` | logical | Game content story resource auth settings require auth. |
+| `game_content_story_resource_auth_settings_allow_only` | character | Game content story resource auth settings allow only. |
+| `game_content_story_resource_resource_cache_ns` | character | Game content story resource resource cache ns. |
+| `game_content_story_resource_resource_cache_cache_keys` | character | Game content story resource resource cache cache keys. |
+| `game_content_story_resource_resource_cache_cache_buster` | integer | Game content story resource resource cache cache buster. |
+| `game_content_story_resource_expiration_message_object_key_name` | character | Game content story resource expiration message object key name. |
+| `game_scoring_boxscores_resource_location` | character | Game scoring boxscores resource location. |
+| `game_scoring_boxscores_resource_route` | character | Game scoring boxscores resource route. |
+| `game_scoring_boxscores_resource_path` | character | Game scoring boxscores resource path. |
+| `game_scoring_boxscores_resource_summary` | character | Game scoring boxscores resource summary. |
+| `game_scoring_boxscores_resource_notes` | character | Game scoring boxscores resource notes. |
+| `game_scoring_boxscores_resource_versions_allowed` | character | Game scoring boxscores resource versions allowed. |
+| `game_scoring_boxscores_resource_versions_current` | character | Game scoring boxscores resource versions current. |
+| `game_scoring_boxscores_resource_methods` | character | Game scoring boxscores resource methods. |
+| `game_scoring_boxscores_resource_formats` | character | Game scoring boxscores resource formats. |
+| `game_scoring_boxscores_resource_parameters` | character | Game scoring boxscores resource parameters. |
+| `game_scoring_boxscores_resource_auth_settings_require_auth` | logical | Game scoring boxscores resource auth settings require auth. |
+| `game_scoring_boxscores_resource_auth_settings_allow_only` | character | Game scoring boxscores resource auth settings allow only. |
+| `game_scoring_boxscores_resource_resource_cache_ns` | character | Game scoring boxscores resource resource cache ns. |
+| `game_scoring_boxscores_resource_resource_cache_cache_keys` | character | Game scoring boxscores resource resource cache cache keys. |
+| `game_scoring_boxscores_resource_resource_cache_cache_buster` | integer | Game scoring boxscores resource resource cache cache buster. |
+| `game_scoring_boxscores_resource_expiration_message_object_key_name` | character | Game scoring boxscores resource expiration message object key name. |
+| `event_leaderboard_resource_location` | character | Event leaderboard resource location. |
+| `event_leaderboard_resource_route` | character | Event leaderboard resource route. |
+| `event_leaderboard_resource_path` | character | Event leaderboard resource path. |
+| `event_leaderboard_resource_summary` | character | Event leaderboard resource summary. |
+| `event_leaderboard_resource_notes` | character | Event leaderboard resource notes. |
+| `event_leaderboard_resource_versions_allowed` | character | Event leaderboard resource versions allowed. |
+| `event_leaderboard_resource_versions_current` | character | Event leaderboard resource versions current. |
+| `event_leaderboard_resource_methods` | character | Event leaderboard resource methods. |
+| `event_leaderboard_resource_formats` | character | Event leaderboard resource formats. |
+| `event_leaderboard_resource_parameters` | character | Event leaderboard resource parameters. |
+| `event_leaderboard_resource_auth_settings_require_auth` | logical | Event leaderboard resource auth settings require auth. |
+| `event_leaderboard_resource_auth_settings_allow_only` | character | Event leaderboard resource auth settings allow only. |
+| `event_leaderboard_resource_resource_cache_ns` | character | Event leaderboard resource resource cache ns. |
+| `event_leaderboard_resource_resource_cache_cache_keys` | character | Event leaderboard resource resource cache cache keys. |
+| `event_leaderboard_resource_resource_cache_cache_buster` | integer | Event leaderboard resource resource cache cache buster. |
+| `event_leaderboard_resource_expiration_message_object_key_name` | character | Event leaderboard resource expiration message object key name. |
+| `probable_players_resource_location` | character | Probable players resource location. |
+| `probable_players_resource_route` | character | Probable players resource route. |
+| `probable_players_resource_path` | character | Probable players resource path. |
+| `probable_players_resource_summary` | character | Probable players resource summary. |
+| `probable_players_resource_notes` | character | Probable players resource notes. |
+| `probable_players_resource_versions_allowed` | character | Probable players resource versions allowed. |
+| `probable_players_resource_versions_current` | character | Probable players resource versions current. |
+| `probable_players_resource_methods` | character | Probable players resource methods. |
+| `probable_players_resource_formats` | character | Probable players resource formats. |
+| `probable_players_resource_parameters` | character | Probable players resource parameters. |
+| `probable_players_resource_auth_settings_require_auth` | logical | Probable players resource auth settings require auth. |
+| `probable_players_resource_auth_settings_allow_only` | character | Probable players resource auth settings allow only. |
+| `probable_players_resource_resource_cache_ns` | character | Probable players resource resource cache ns. |
+| `probable_players_resource_resource_cache_cache_keys` | character | Probable players resource resource cache cache keys. |
+| `probable_players_resource_resource_cache_cache_buster` | integer | Probable players resource resource cache cache buster. |
+| `probable_players_resource_expiration_message_object_key_name` | character | Probable players resource expiration message object key name. |
+| `conference_resource_location` | character | Conference resource location. |
+| `conference_resource_routes` | character | Conference resource routes. |
+| `conference_resource_paths` | character | Conference resource paths. |
+| `conference_resource_summary` | character | Conference resource summary. |
+| `conference_resource_notes` | character | Conference resource notes. |
+| `conference_resource_versions_allowed` | character | Conference resource versions allowed. |
+| `conference_resource_versions_current` | character | Conference resource versions current. |
+| `conference_resource_methods` | character | Conference resource methods. |
+| `conference_resource_formats` | character | Conference resource formats. |
+| `conference_resource_parameters` | character | Conference resource parameters. |
+| `conference_resource_auth_settings_require_auth` | logical | Conference resource auth settings require auth. |
+| `conference_resource_auth_settings_allow_only` | character | Conference resource auth settings allow only. |
+| `conference_resource_resource_cache_ns` | character | Conference resource resource cache ns. |
+| `conference_resource_resource_cache_cache_keys` | character | Conference resource resource cache cache keys. |
+| `conference_resource_resource_cache_cache_buster` | integer | Conference resource resource cache cache buster. |
+| `conference_resource_expiration_message_object_key_name` | character | Conference resource expiration message object key name. |
+| `division_resource_location` | character | Division resource location. |
+| `division_resource_routes` | character | Division resource routes. |
+| `division_resource_paths` | character | Division resource paths. |
+| `division_resource_summary` | character | Division resource summary. |
+| `division_resource_notes` | character | Division resource notes. |
+| `division_resource_versions_allowed` | character | Division resource versions allowed. |
+| `division_resource_versions_current` | character | Division resource versions current. |
+| `division_resource_methods` | character | Division resource methods. |
+| `division_resource_formats` | character | Division resource formats. |
+| `division_resource_parameters` | character | Division resource parameters. |
+| `division_resource_auth_settings_require_auth` | logical | Division resource auth settings require auth. |
+| `division_resource_auth_settings_allow_only` | character | Division resource auth settings allow only. |
+| `division_resource_resource_cache_ns` | character | Division resource resource cache ns. |
+| `division_resource_resource_cache_cache_keys` | character | Division resource resource cache cache keys. |
+| `division_resource_resource_cache_cache_buster` | integer | Division resource resource cache cache buster. |
+| `division_resource_expiration_message_object_key_name` | character | Division resource expiration message object key name. |
+| `sub_divisions_resource_location` | character | Sub divisions resource location. |
+| `sub_divisions_resource_route` | character | Sub divisions resource route. |
+| `sub_divisions_resource_path` | character | Sub divisions resource path. |
+| `sub_divisions_resource_summary` | character | Sub divisions resource summary. |
+| `sub_divisions_resource_notes` | character | Sub divisions resource notes. |
+| `sub_divisions_resource_versions_allowed` | character | Sub divisions resource versions allowed. |
+| `sub_divisions_resource_versions_current` | character | Sub divisions resource versions current. |
+| `sub_divisions_resource_methods` | character | Sub divisions resource methods. |
+| `sub_divisions_resource_formats` | character | Sub divisions resource formats. |
+| `sub_divisions_resource_parameters` | character | Sub divisions resource parameters. |
+| `sub_divisions_resource_auth_settings_require_auth` | logical | Sub divisions resource auth settings require auth. |
+| `sub_divisions_resource_auth_settings_allow_only` | character | Sub divisions resource auth settings allow only. |
+| `sub_divisions_resource_resource_cache_ns` | character | Sub divisions resource resource cache ns. |
+| `sub_divisions_resource_resource_cache_cache_keys` | character | Sub divisions resource resource cache cache keys. |
+| `sub_divisions_resource_resource_cache_cache_buster` | integer | Sub divisions resource resource cache cache buster. |
+| `sub_divisions_resource_expiration_message_object_key_name` | character | Sub divisions resource expiration message object key name. |
+| `sport_resource_location` | character | Sport resource location. |
+| `sport_resource_route` | character | Sport resource route. |
+| `sport_resource_path` | character | Sport resource path. |
+| `sport_resource_summary` | character | Sport resource summary. |
+| `sport_resource_notes` | character | Sport resource notes. |
+| `sport_resource_versions_allowed` | character | Sport resource versions allowed. |
+| `sport_resource_versions_current` | character | Sport resource versions current. |
+| `sport_resource_methods` | character | Sport resource methods. |
+| `sport_resource_formats` | character | Sport resource formats. |
+| `sport_resource_parameters` | character | Sport resource parameters. |
+| `sport_resource_auth_settings_require_auth` | logical | Sport resource auth settings require auth. |
+| `sport_resource_auth_settings_allow_only` | character | Sport resource auth settings allow only. |
+| `sport_resource_resource_cache_ns` | character | Sport resource resource cache ns. |
+| `sport_resource_resource_cache_cache_keys` | character | Sport resource resource cache cache keys. |
+| `sport_resource_resource_cache_cache_buster` | integer | Sport resource resource cache cache buster. |
+| `sport_resource_expiration_message` | character | Sport resource expiration message. |
+| `sport_leagues_resource_location` | character | Sport leagues resource location. |
+| `sport_leagues_resource_route` | character | Sport leagues resource route. |
+| `sport_leagues_resource_path` | character | Sport leagues resource path. |
+| `sport_leagues_resource_summary` | character | Sport leagues resource summary. |
+| `sport_leagues_resource_notes` | character | Sport leagues resource notes. |
+| `sport_leagues_resource_versions_allowed` | character | Sport leagues resource versions allowed. |
+| `sport_leagues_resource_versions_current` | character | Sport leagues resource versions current. |
+| `sport_leagues_resource_methods` | character | Sport leagues resource methods. |
+| `sport_leagues_resource_formats` | character | Sport leagues resource formats. |
+| `sport_leagues_resource_parameters` | character | Sport leagues resource parameters. |
+| `sport_leagues_resource_auth_settings_require_auth` | logical | Sport leagues resource auth settings require auth. |
+| `sport_leagues_resource_auth_settings_allow_only` | character | Sport leagues resource auth settings allow only. |
+| `sport_leagues_resource_resource_cache_ns` | character | Sport leagues resource resource cache ns. |
+| `sport_leagues_resource_resource_cache_cache_keys` | character | Sport leagues resource resource cache cache keys. |
+| `sport_leagues_resource_resource_cache_cache_buster` | integer | Sport leagues resource resource cache cache buster. |
+| `sport_leagues_resource_expiration_message` | character | Sport leagues resource expiration message. |
+| `baseball_player_meta_resource_location` | character | Baseball player meta resource location. |
+| `baseball_player_meta_resource_route` | character | Baseball player meta resource route. |
+| `baseball_player_meta_resource_path` | character | Baseball player meta resource path. |
+| `baseball_player_meta_resource_summary` | character | Baseball player meta resource summary. |
+| `baseball_player_meta_resource_notes` | character | Baseball player meta resource notes. |
+| `baseball_player_meta_resource_versions_allowed` | character | Baseball player meta resource versions allowed. |
+| `baseball_player_meta_resource_versions_current` | character | Baseball player meta resource versions current. |
+| `baseball_player_meta_resource_methods` | character | Baseball player meta resource methods. |
+| `baseball_player_meta_resource_formats` | character | Baseball player meta resource formats. |
+| `baseball_player_meta_resource_parameters` | character | Baseball player meta resource parameters. |
+| `baseball_player_meta_resource_auth_settings_require_auth` | logical | Baseball player meta resource auth settings require auth. |
+| `baseball_player_meta_resource_auth_settings_allow_only` | character | Baseball player meta resource auth settings allow only. |
+| `baseball_player_meta_resource_resource_cache_ns` | character | Baseball player meta resource resource cache ns. |
+| `baseball_player_meta_resource_resource_cache_cache_keys` | character | Baseball player meta resource resource cache cache keys. |
+| `baseball_player_meta_resource_resource_cache_cache_buster` | integer | Baseball player meta resource resource cache cache buster. |
+| `baseball_player_meta_resource_expiration_message_object_key_name` | character | Baseball player meta resource expiration message object key name. |
+| `season_resource_location` | character | Season resource location. |
+| `season_resource_route` | character | Season resource route. |
+| `season_resource_path` | character | Season resource path. |
+| `season_resource_summary` | character | Season resource summary. |
+| `season_resource_notes` | character | Season resource notes. |
+| `season_resource_versions_allowed` | character | Season resource versions allowed. |
+| `season_resource_versions_current` | character | Season resource versions current. |
+| `season_resource_methods` | character | Season resource methods. |
+| `season_resource_formats` | character | Season resource formats. |
+| `season_resource_parameters` | character | Season resource parameters. |
+| `season_resource_auth_settings_require_auth` | logical | Season resource auth settings require auth. |
+| `season_resource_auth_settings_allow_only` | character | Season resource auth settings allow only. |
+| `season_resource_resource_cache_ns` | character | Season resource resource cache ns. |
+| `season_resource_resource_cache_cache_keys` | character | Season resource resource cache cache keys. |
+| `season_resource_resource_cache_cache_buster` | integer | Season resource resource cache cache buster. |
+| `season_resource_expiration_message_object_key_name` | character | Season resource expiration message object key name. |
+| `team_seasons_resource_location` | character | Team seasons resource location. |
+| `team_seasons_resource_route` | character | Team seasons resource route. |
+| `team_seasons_resource_path` | character | Team seasons resource path. |
+| `team_seasons_resource_summary` | character | Team seasons resource summary. |
+| `team_seasons_resource_notes` | character | Team seasons resource notes. |
+| `team_seasons_resource_versions_allowed` | character | Team seasons resource versions allowed. |
+| `team_seasons_resource_versions_current` | character | Team seasons resource versions current. |
+| `team_seasons_resource_methods` | character | Team seasons resource methods. |
+| `team_seasons_resource_formats` | character | Team seasons resource formats. |
+| `team_seasons_resource_parameters` | character | Team seasons resource parameters. |
+| `team_seasons_resource_auth_settings_require_auth` | logical | Team seasons resource auth settings require auth. |
+| `team_seasons_resource_auth_settings_allow_only` | character | Team seasons resource auth settings allow only. |
+| `team_seasons_resource_resource_cache_ns` | character | Team seasons resource resource cache ns. |
+| `team_seasons_resource_resource_cache_cache_keys` | character | Team seasons resource resource cache cache keys. |
+| `team_seasons_resource_resource_cache_cache_buster` | integer | Team seasons resource resource cache cache buster. |
+| `team_seasons_resource_expiration_message_object_key_name` | character | Team seasons resource expiration message object key name. |
+| `team_polls_resource_location` | character | Team polls resource location. |
+| `team_polls_resource_route` | character | Team polls resource route. |
+| `team_polls_resource_path` | character | Team polls resource path. |
+| `team_polls_resource_summary` | character | Team polls resource summary. |
+| `team_polls_resource_notes` | character | Team polls resource notes. |
+| `team_polls_resource_versions_allowed` | character | Team polls resource versions allowed. |
+| `team_polls_resource_versions_current` | character | Team polls resource versions current. |
+| `team_polls_resource_methods` | character | Team polls resource methods. |
+| `team_polls_resource_formats` | character | Team polls resource formats. |
+| `team_polls_resource_parameters` | character | Team polls resource parameters. |
+| `team_polls_resource_auth_settings_require_auth` | logical | Team polls resource auth settings require auth. |
+| `team_polls_resource_auth_settings_allow_only` | character | Team polls resource auth settings allow only. |
+| `team_polls_resource_resource_cache_ns` | character | Team polls resource resource cache ns. |
+| `team_polls_resource_resource_cache_cache_keys` | character | Team polls resource resource cache cache keys. |
+| `team_polls_resource_resource_cache_cache_buster` | integer | Team polls resource resource cache cache buster. |
+| `team_polls_resource_expiration_message_object_key_name` | character | Team polls resource expiration message object key name. |
+| `client_configuration_resource_location` | character | Client configuration resource location. |
+| `client_configuration_resource_route` | character | Client configuration resource route. |
+| `client_configuration_resource_path` | character | Client configuration resource path. |
+| `client_configuration_resource_summary` | character | Client configuration resource summary. |
+| `client_configuration_resource_notes` | character | Client configuration resource notes. |
+| `client_configuration_resource_versions_allowed` | character | Client configuration resource versions allowed. |
+| `client_configuration_resource_versions_current` | character | Client configuration resource versions current. |
+| `client_configuration_resource_methods` | character | Client configuration resource methods. |
+| `client_configuration_resource_formats` | character | Client configuration resource formats. |
+| `client_configuration_resource_parameters` | character | Client configuration resource parameters. |
+| `client_configuration_resource_auth_settings_require_auth` | logical | Client configuration resource auth settings require auth. |
+| `client_configuration_resource_resource_cache_ns` | character | Client configuration resource resource cache ns. |
+| `client_configuration_resource_resource_cache_cache_keys` | character | Client configuration resource resource cache cache keys. |
+| `client_configuration_resource_resource_cache_cache_buster` | integer | Client configuration resource resource cache cache buster. |
+| `client_configuration_resource_expiration_message_object_key_name` | character | Client configuration resource expiration message object key name. |
+| `player_stats_resource_location` | character | Player stats resource location. |
+| `player_stats_resource_route` | character | Player stats resource route. |
+| `player_stats_resource_path` | character | Player stats resource path. |
+| `player_stats_resource_summary` | character | Player stats resource summary. |
+| `player_stats_resource_notes` | character | Player stats resource notes. |
+| `player_stats_resource_versions_allowed` | character | Player stats resource versions allowed. |
+| `player_stats_resource_versions_current` | character | Player stats resource versions current. |
+| `player_stats_resource_methods` | character | Player stats resource methods. |
+| `player_stats_resource_formats` | character | Player stats resource formats. |
+| `player_stats_resource_parameters` | character | Player stats resource parameters. |
+| `player_stats_resource_auth_settings_require_auth` | logical | Player stats resource auth settings require auth. |
+| `player_stats_resource_auth_settings_allow_only` | character | Player stats resource auth settings allow only. |
+| `player_stats_resource_resource_cache_ns` | character | Player stats resource resource cache ns. |
+| `player_stats_resource_resource_cache_cache_keys` | character | Player stats resource resource cache cache keys. |
+| `player_stats_resource_resource_cache_cache_buster` | integer | Player stats resource resource cache cache buster. |
+| `player_stats_resource_expiration_message_object_key_name` | character | Player stats resource expiration message object key name. |
+| `team_stats_resource_location` | character | Team stats resource location. |
+| `team_stats_resource_route` | character | Team stats resource route. |
+| `team_stats_resource_path` | character | Team stats resource path. |
+| `team_stats_resource_summary` | character | Team stats resource summary. |
+| `team_stats_resource_notes` | character | Team stats resource notes. |
+| `team_stats_resource_versions_allowed` | character | Team stats resource versions allowed. |
+| `team_stats_resource_versions_current` | character | Team stats resource versions current. |
+| `team_stats_resource_methods` | character | Team stats resource methods. |
+| `team_stats_resource_formats` | character | Team stats resource formats. |
+| `team_stats_resource_parameters` | character | Team stats resource parameters. |
+| `team_stats_resource_auth_settings_require_auth` | logical | Team stats resource auth settings require auth. |
+| `team_stats_resource_auth_settings_allow_only` | character | Team stats resource auth settings allow only. |
+| `team_stats_resource_resource_cache_ns` | character | Team stats resource resource cache ns. |
+| `team_stats_resource_resource_cache_cache_keys` | character | Team stats resource resource cache cache keys. |
+| `team_stats_resource_resource_cache_cache_buster` | integer | Team stats resource resource cache cache buster. |
+| `team_stats_resource_expiration_message_object_key_name` | character | Team stats resource expiration message object key name. |
+| `team_futures_resource_location` | character | Team futures resource location. |
+| `team_futures_resource_route` | character | Team futures resource route. |
+| `team_futures_resource_path` | character | Team futures resource path. |
+| `team_futures_resource_summary` | character | Team futures resource summary. |
+| `team_futures_resource_notes` | character | Team futures resource notes. |
+| `team_futures_resource_versions_allowed` | character | Team futures resource versions allowed. |
+| `team_futures_resource_versions_current` | character | Team futures resource versions current. |
+| `team_futures_resource_methods` | character | Team futures resource methods. |
+| `team_futures_resource_formats` | character | Team futures resource formats. |
+| `team_futures_resource_parameters` | character | Team futures resource parameters. |
+| `team_futures_resource_auth_settings_require_auth` | logical | Team futures resource auth settings require auth. |
+| `team_futures_resource_auth_settings_allow_only` | character | Team futures resource auth settings allow only. |
+| `team_futures_resource_resource_cache_ns` | character | Team futures resource resource cache ns. |
+| `team_futures_resource_resource_cache_cache_keys` | character | Team futures resource resource cache cache keys. |
+| `team_futures_resource_resource_cache_cache_buster` | integer | Team futures resource resource cache cache buster. |
+| `team_futures_resource_expiration_message_object_key_name` | character | Team futures resource expiration message object key name. |
+| `player_futures_resource_location` | character | Player futures resource location. |
+| `player_futures_resource_route` | character | Player futures resource route. |
+| `player_futures_resource_path` | character | Player futures resource path. |
+| `player_futures_resource_summary` | character | Player futures resource summary. |
+| `player_futures_resource_notes` | character | Player futures resource notes. |
+| `player_futures_resource_versions_allowed` | character | Player futures resource versions allowed. |
+| `player_futures_resource_versions_current` | character | Player futures resource versions current. |
+| `player_futures_resource_methods` | character | Player futures resource methods. |
+| `player_futures_resource_formats` | character | Player futures resource formats. |
+| `player_futures_resource_parameters` | character | Player futures resource parameters. |
+| `player_futures_resource_auth_settings_require_auth` | logical | Player futures resource auth settings require auth. |
+| `player_futures_resource_auth_settings_allow_only` | character | Player futures resource auth settings allow only. |
+| `player_futures_resource_resource_cache_ns` | character | Player futures resource resource cache ns. |
+| `player_futures_resource_resource_cache_cache_keys` | character | Player futures resource resource cache cache keys. |
+| `player_futures_resource_resource_cache_cache_buster` | integer | Player futures resource resource cache cache buster. |
+| `player_futures_resource_expiration_message_object_key_name` | character | Player futures resource expiration message object key name. |
+| `game_props_resource_location` | character | Game props resource location. |
+| `game_props_resource_route` | character | Game props resource route. |
+| `game_props_resource_path` | character | Game props resource path. |
+| `game_props_resource_summary` | character | Game props resource summary. |
+| `game_props_resource_notes` | character | Game props resource notes. |
+| `game_props_resource_versions_allowed` | character | Game props resource versions allowed. |
+| `game_props_resource_versions_current` | character | Game props resource versions current. |
+| `game_props_resource_methods` | character | Game props resource methods. |
+| `game_props_resource_formats` | character | Game props resource formats. |
+| `game_props_resource_parameters` | character | Game props resource parameters. |
+| `game_props_resource_auth_settings_require_auth` | logical | Game props resource auth settings require auth. |
+| `game_props_resource_auth_settings_allow_only` | character | Game props resource auth settings allow only. |
+| `game_props_resource_resource_cache_ns` | character | Game props resource resource cache ns. |
+| `game_props_resource_resource_cache_cache_keys` | character | Game props resource resource cache cache keys. |
+| `game_props_resource_resource_cache_cache_buster` | integer | Game props resource resource cache cache buster. |
+| `game_props_resource_expiration_message_object_key_name` | character | Game props resource expiration message object key name. |
+| `player_standings_resource_location` | character | Player standings resource location. |
+| `player_standings_resource_route` | character | Player standings resource route. |
+| `player_standings_resource_path` | character | Player standings resource path. |
+| `player_standings_resource_summary` | character | Player standings resource summary. |
+| `player_standings_resource_notes` | character | Player standings resource notes. |
+| `player_standings_resource_versions_allowed` | character | Player standings resource versions allowed. |
+| `player_standings_resource_versions_current` | character | Player standings resource versions current. |
+| `player_standings_resource_methods` | character | Player standings resource methods. |
+| `player_standings_resource_formats` | character | Player standings resource formats. |
+| `player_standings_resource_parameters` | character | Player standings resource parameters. |
+| `player_standings_resource_auth_settings_require_auth` | logical | Player standings resource auth settings require auth. |
+| `player_standings_resource_auth_settings_allow_only` | character | Player standings resource auth settings allow only. |
+| `player_standings_resource_resource_cache_ns` | character | Player standings resource resource cache ns. |
+| `player_standings_resource_resource_cache_cache_keys` | character | Player standings resource resource cache cache keys. |
+| `player_standings_resource_resource_cache_cache_buster` | integer | Player standings resource resource cache cache buster. |
+| `player_standings_resource_expiration_message_object_key_name` | character | Player standings resource expiration message object key name. |
+| `golf_event_markets_resource_location` | character | Golf event markets resource location. |
+| `golf_event_markets_resource_route` | character | Golf event markets resource route. |
+| `golf_event_markets_resource_path` | character | Golf event markets resource path. |
+| `golf_event_markets_resource_summary` | character | Golf event markets resource summary. |
+| `golf_event_markets_resource_notes` | character | Golf event markets resource notes. |
+| `golf_event_markets_resource_versions_allowed` | character | Golf event markets resource versions allowed. |
+| `golf_event_markets_resource_versions_current` | character | Golf event markets resource versions current. |
+| `golf_event_markets_resource_methods` | character | Golf event markets resource methods. |
+| `golf_event_markets_resource_formats` | character | Golf event markets resource formats. |
+| `golf_event_markets_resource_parameters` | character | Golf event markets resource parameters. |
+| `golf_event_markets_resource_auth_settings_require_auth` | logical | Golf event markets resource auth settings require auth. |
+| `golf_event_markets_resource_auth_settings_allow_only` | character | Golf event markets resource auth settings allow only. |
+| `golf_event_markets_resource_resource_cache_ns` | character | Golf event markets resource resource cache ns. |
+| `golf_event_markets_resource_resource_cache_cache_keys` | character | Golf event markets resource resource cache cache keys. |
+| `golf_event_markets_resource_resource_cache_cache_buster` | integer | Golf event markets resource resource cache cache buster. |
+| `golf_event_markets_resource_expiration_message_object_key_name` | character | Golf event markets resource expiration message object key name. |
+| `golf_player_markets_resource_location` | character | Golf player markets resource location. |
+| `golf_player_markets_resource_route` | character | Golf player markets resource route. |
+| `golf_player_markets_resource_path` | character | Golf player markets resource path. |
+| `golf_player_markets_resource_summary` | character | Golf player markets resource summary. |
+| `golf_player_markets_resource_notes` | character | Golf player markets resource notes. |
+| `golf_player_markets_resource_versions_allowed` | character | Golf player markets resource versions allowed. |
+| `golf_player_markets_resource_versions_current` | character | Golf player markets resource versions current. |
+| `golf_player_markets_resource_methods` | character | Golf player markets resource methods. |
+| `golf_player_markets_resource_formats` | character | Golf player markets resource formats. |
+| `golf_player_markets_resource_parameters` | character | Golf player markets resource parameters. |
+| `golf_player_markets_resource_auth_settings_require_auth` | logical | Golf player markets resource auth settings require auth. |
+| `golf_player_markets_resource_auth_settings_allow_only` | character | Golf player markets resource auth settings allow only. |
+| `golf_player_markets_resource_resource_cache_ns` | character | Golf player markets resource resource cache ns. |
+| `golf_player_markets_resource_resource_cache_cache_keys` | character | Golf player markets resource resource cache cache keys. |
+| `golf_player_markets_resource_resource_cache_cache_buster` | integer | Golf player markets resource resource cache cache buster. |
+| `golf_player_markets_resource_expiration_message_object_key_name` | character | Golf player markets resource expiration message object key name. |
+| `bulk_resource_controller_is_active` | logical | Bulk resource controller is active. |
+| `bulk_resource_controller_location` | character | Bulk resource controller location. |
+| `bulk_resource_controller_route` | character | Bulk resource controller route. |
+| `bulk_resource_controller_path` | character | Bulk resource controller path. |
+| `bulk_resource_controller_summary` | character | Bulk resource controller summary. |
+| `bulk_resource_controller_notes` | character | Bulk resource controller notes. |
+| `bulk_resource_controller_versions_allowed` | character | Bulk resource controller versions allowed. |
+| `bulk_resource_controller_versions_current` | character | Bulk resource controller versions current. |
+| `bulk_resource_controller_methods` | character | Bulk resource controller methods. |
+| `bulk_resource_controller_formats` | character | Bulk resource controller formats. |
+| `bulk_resource_controller_parameters` | character | Bulk resource controller parameters. |
+| `bulk_resource_controller_auth_settings_require_auth` | logical | Bulk resource controller auth settings require auth. |
+| `bulk_resource_controller_auth_settings_allow_only` | character | Bulk resource controller auth settings allow only. |
+| `bulk_resource_controller_resource_cache_no_cache` | logical | Bulk resource controller resource cache no cache. |
+| `bulk_resource_controller_expiration_message` | character | Bulk resource controller expiration message. |
+| `endpoint_registry_resource_location` | character | Endpoint registry resource location. |
+| `endpoint_registry_resource_route` | character | Endpoint registry resource route. |
+| `endpoint_registry_resource_path` | character | Endpoint registry resource path. |
+| `endpoint_registry_resource_summary` | character | Endpoint registry resource summary. |
+| `endpoint_registry_resource_notes` | character | Endpoint registry resource notes. |
+| `endpoint_registry_resource_versions_allowed` | character | Endpoint registry resource versions allowed. |
+| `endpoint_registry_resource_versions_current` | character | Endpoint registry resource versions current. |
+| `endpoint_registry_resource_methods` | character | Endpoint registry resource methods. |
+| `endpoint_registry_resource_formats` | character | Endpoint registry resource formats. |
+| `endpoint_registry_resource_parameters` | character | Endpoint registry resource parameters. |
+| `endpoint_registry_resource_auth_settings_require_auth` | logical | Endpoint registry resource auth settings require auth. |
+| `endpoint_registry_resource_auth_settings_allow_only` | character | Endpoint registry resource auth settings allow only. |
+| `endpoint_registry_resource_resource_cache_no_cache` | logical | Endpoint registry resource resource cache no cache. |
+| `endpoint_registry_resource_expiration_message` | character | Endpoint registry resource expiration message. |
+| `event_resource_location` | character | Event resource location. |
+| `event_resource_route` | character | Event resource route. |
+| `event_resource_path` | character | Event resource path. |
+| `event_resource_summary` | character | Event resource summary. |
+| `event_resource_notes` | character | Event resource notes. |
+| `event_resource_versions_allowed` | character | Event resource versions allowed. |
+| `event_resource_versions_current` | character | Event resource versions current. |
+| `event_resource_methods` | character | Event resource methods. |
+| `event_resource_formats` | character | Event resource formats. |
+| `event_resource_parameters` | character | Event resource parameters. |
+| `event_resource_auth_settings_require_auth` | logical | Event resource auth settings require auth. |
+| `event_resource_auth_settings_allow_only` | character | Event resource auth settings allow only. |
+| `event_resource_resource_cache_ns` | character | Event resource resource cache ns. |
+| `event_resource_resource_cache_cache_keys` | character | Event resource resource cache cache keys. |
+| `event_resource_resource_cache_cache_buster` | integer | Event resource resource cache cache buster. |
+| `event_resource_expiration_message_object_key_name` | character | Event resource expiration message object key name. |
+| `venue_resource_location` | character | Venue resource location. |
+| `venue_resource_route` | character | Venue resource route. |
+| `venue_resource_path` | character | Venue resource path. |
+| `venue_resource_summary` | character | Venue resource summary. |
+| `venue_resource_notes` | character | Venue resource notes. |
+| `venue_resource_versions_allowed` | character | Venue resource versions allowed. |
+| `venue_resource_versions_current` | character | Venue resource versions current. |
+| `venue_resource_methods` | character | Venue resource methods. |
+| `venue_resource_formats` | character | Venue resource formats. |
+| `venue_resource_parameters` | character | Venue resource parameters. |
+| `venue_resource_auth_settings_require_auth` | logical | Venue resource auth settings require auth. |
+| `venue_resource_auth_settings_allow_only` | character | Venue resource auth settings allow only. |
+| `venue_resource_resource_cache_ns` | character | Venue resource resource cache ns. |
+| `venue_resource_resource_cache_cache_keys` | character | Venue resource resource cache cache keys. |
+| `venue_resource_resource_cache_cache_buster` | integer | Venue resource resource cache cache buster. |
+| `venue_resource_expiration_message_object_key_name` | character | Venue resource expiration message object key name. |
+| `venue_metadata_resource_location` | character | Venue metadata resource location. |
+| `venue_metadata_resource_route` | character | Venue metadata resource route. |
+| `venue_metadata_resource_path` | character | Venue metadata resource path. |
+| `venue_metadata_resource_summary` | character | Venue metadata resource summary. |
+| `venue_metadata_resource_notes` | character | Venue metadata resource notes. |
+| `venue_metadata_resource_versions_allowed` | character | Venue metadata resource versions allowed. |
+| `venue_metadata_resource_versions_current` | character | Venue metadata resource versions current. |
+| `venue_metadata_resource_methods` | character | Venue metadata resource methods. |
+| `venue_metadata_resource_formats` | character | Venue metadata resource formats. |
+| `venue_metadata_resource_parameters` | character | Venue metadata resource parameters. |
+| `venue_metadata_resource_auth_settings_require_auth` | logical | Venue metadata resource auth settings require auth. |
+| `venue_metadata_resource_auth_settings_allow_only` | character | Venue metadata resource auth settings allow only. |
+| `venue_metadata_resource_resource_cache_ns` | character | Venue metadata resource resource cache ns. |
+| `venue_metadata_resource_resource_cache_cache_keys` | character | Venue metadata resource resource cache cache keys. |
+| `venue_metadata_resource_resource_cache_cache_buster` | integer | Venue metadata resource resource cache cache buster. |
+| `venue_metadata_resource_expiration_message_object_key_name` | character | Venue metadata resource expiration message object key name. |
+| `event_entrants_resource_location` | character | Event entrants resource location. |
+| `event_entrants_resource_route` | character | Event entrants resource route. |
+| `event_entrants_resource_path` | character | Event entrants resource path. |
+| `event_entrants_resource_summary` | character | Event entrants resource summary. |
+| `event_entrants_resource_notes` | character | Event entrants resource notes. |
+| `event_entrants_resource_versions_allowed` | character | Event entrants resource versions allowed. |
+| `event_entrants_resource_versions_current` | character | Event entrants resource versions current. |
+| `event_entrants_resource_methods` | character | Event entrants resource methods. |
+| `event_entrants_resource_formats` | character | Event entrants resource formats. |
+| `event_entrants_resource_parameters` | character | Event entrants resource parameters. |
+| `event_entrants_resource_auth_settings_require_auth` | logical | Event entrants resource auth settings require auth. |
+| `event_entrants_resource_auth_settings_allow_only` | character | Event entrants resource auth settings allow only. |
+| `event_entrants_resource_resource_cache_ns` | character | Event entrants resource resource cache ns. |
+| `event_entrants_resource_resource_cache_cache_keys` | character | Event entrants resource resource cache cache keys. |
+| `event_entrants_resource_resource_cache_cache_buster` | integer | Event entrants resource resource cache cache buster. |
+| `event_seasons_resource_location` | character | Event seasons resource location. |
+| `event_seasons_resource_route` | character | Event seasons resource route. |
+| `event_seasons_resource_path` | character | Event seasons resource path. |
+| `event_seasons_resource_summary` | character | Event seasons resource summary. |
+| `event_seasons_resource_notes` | character | Event seasons resource notes. |
+| `event_seasons_resource_versions_allowed` | character | Event seasons resource versions allowed. |
+| `event_seasons_resource_versions_current` | character | Event seasons resource versions current. |
+| `event_seasons_resource_methods` | character | Event seasons resource methods. |
+| `event_seasons_resource_formats` | character | Event seasons resource formats. |
+| `event_seasons_resource_parameters` | character | Event seasons resource parameters. |
+| `event_seasons_resource_auth_settings_require_auth` | logical | Event seasons resource auth settings require auth. |
+| `event_seasons_resource_auth_settings_allow_only` | character | Event seasons resource auth settings allow only. |
+| `event_seasons_resource_resource_cache_ns` | character | Event seasons resource resource cache ns. |
+| `event_seasons_resource_resource_cache_cache_keys` | character | Event seasons resource resource cache cache keys. |
+| `event_seasons_resource_resource_cache_cache_buster` | integer | Event seasons resource resource cache cache buster. |
+| `event_venues_resource_location` | character | Event venues resource location. |
+| `event_venues_resource_route` | character | Event venues resource route. |
+| `event_venues_resource_path` | character | Event venues resource path. |
+| `event_venues_resource_summary` | character | Event venues resource summary. |
+| `event_venues_resource_notes` | character | Event venues resource notes. |
+| `event_venues_resource_versions_allowed` | character | Event venues resource versions allowed. |
+| `event_venues_resource_versions_current` | character | Event venues resource versions current. |
+| `event_venues_resource_methods` | character | Event venues resource methods. |
+| `event_venues_resource_formats` | character | Event venues resource formats. |
+| `event_venues_resource_parameters` | character | Event venues resource parameters. |
+| `event_venues_resource_auth_settings_require_auth` | logical | Event venues resource auth settings require auth. |
+| `event_venues_resource_auth_settings_allow_only` | character | Event venues resource auth settings allow only. |
+| `event_venues_resource_resource_cache_ns` | character | Event venues resource resource cache ns. |
+| `event_venues_resource_resource_cache_cache_keys` | character | Event venues resource resource cache cache keys. |
+| `event_venues_resource_resource_cache_cache_buster` | integer | Event venues resource resource cache cache buster. |
+| `event_venues_resource_expiration_message_object_key_name` | character | Event venues resource expiration message object key name. |
+| `player_rankings_resource_location` | character | Player rankings resource location. |
+| `player_rankings_resource_route` | character | Player rankings resource route. |
+| `player_rankings_resource_path` | character | Player rankings resource path. |
+| `player_rankings_resource_summary` | character | Player rankings resource summary. |
+| `player_rankings_resource_notes` | character | Player rankings resource notes. |
+| `player_rankings_resource_versions_allowed` | character | Player rankings resource versions allowed. |
+| `player_rankings_resource_versions_current` | character | Player rankings resource versions current. |
+| `player_rankings_resource_methods` | character | Player rankings resource methods. |
+| `player_rankings_resource_formats` | character | Player rankings resource formats. |
+| `player_rankings_resource_parameters` | character | Player rankings resource parameters. |
+| `player_rankings_resource_auth_settings_require_auth` | logical | Player rankings resource auth settings require auth. |
+| `player_rankings_resource_auth_settings_allow_only` | character | Player rankings resource auth settings allow only. |
+| `player_rankings_resource_resource_cache_ns` | character | Player rankings resource resource cache ns. |
+| `player_rankings_resource_resource_cache_cache_keys` | character | Player rankings resource resource cache cache keys. |
+| `player_rankings_resource_resource_cache_cache_buster` | integer | Player rankings resource resource cache cache buster. |
+| `player_rankings_resource_expiration_message_object_key_name` | character | Player rankings resource expiration message object key name. |
+| `player_outlook_resource_location` | character | Player outlook resource location. |
+| `player_outlook_resource_route` | character | Player outlook resource route. |
+| `player_outlook_resource_path` | character | Player outlook resource path. |
+| `player_outlook_resource_summary` | character | Player outlook resource summary. |
+| `player_outlook_resource_notes` | character | Player outlook resource notes. |
+| `player_outlook_resource_versions_allowed` | character | Player outlook resource versions allowed. |
+| `player_outlook_resource_versions_current` | character | Player outlook resource versions current. |
+| `player_outlook_resource_methods` | character | Player outlook resource methods. |
+| `player_outlook_resource_formats` | character | Player outlook resource formats. |
+| `player_outlook_resource_parameters` | character | Player outlook resource parameters. |
+| `player_outlook_resource_auth_settings_require_auth` | logical | Player outlook resource auth settings require auth. |
+| `player_outlook_resource_auth_settings_allow_only` | character | Player outlook resource auth settings allow only. |
+| `player_outlook_resource_resource_cache_ns` | character | Player outlook resource resource cache ns. |
+| `player_outlook_resource_resource_cache_cache_keys` | character | Player outlook resource resource cache cache keys. |
+| `player_outlook_resource_resource_cache_cache_buster` | integer | Player outlook resource resource cache cache buster. |
+| `player_outlook_resource_expiration_message_object_key_name` | character | Player outlook resource expiration message object key name. |
+| `team_rankings_resource_location` | character | Team rankings resource location. |
+| `team_rankings_resource_route` | character | Team rankings resource route. |
+| `team_rankings_resource_path` | character | Team rankings resource path. |
+| `team_rankings_resource_summary` | character | Team rankings resource summary. |
+| `team_rankings_resource_notes` | character | Team rankings resource notes. |
+| `team_rankings_resource_versions_allowed` | character | Team rankings resource versions allowed. |
+| `team_rankings_resource_versions_current` | character | Team rankings resource versions current. |
+| `team_rankings_resource_methods` | character | Team rankings resource methods. |
+| `team_rankings_resource_formats` | character | Team rankings resource formats. |
+| `team_rankings_resource_parameters` | character | Team rankings resource parameters. |
+| `team_rankings_resource_auth_settings_require_auth` | logical | Team rankings resource auth settings require auth. |
+| `team_rankings_resource_auth_settings_allow_only` | character | Team rankings resource auth settings allow only. |
+| `team_rankings_resource_resource_cache_ns` | character | Team rankings resource resource cache ns. |
+| `team_rankings_resource_resource_cache_cache_keys` | character | Team rankings resource resource cache cache keys. |
+| `team_rankings_resource_resource_cache_cache_buster` | integer | Team rankings resource resource cache cache buster. |
+| `team_rankings_resource_expiration_message_object_key_name` | character | Team rankings resource expiration message object key name. |
+| `sports_line_team_rankings_resource_location` | character | Sports line team rankings resource location. |
+| `sports_line_team_rankings_resource_route` | character | Sports line team rankings resource route. |
+| `sports_line_team_rankings_resource_path` | character | Sports line team rankings resource path. |
+| `sports_line_team_rankings_resource_summary` | character | Sports line team rankings resource summary. |
+| `sports_line_team_rankings_resource_notes` | character | Sports line team rankings resource notes. |
+| `sports_line_team_rankings_resource_versions_allowed` | character | Sports line team rankings resource versions allowed. |
+| `sports_line_team_rankings_resource_versions_current` | character | Sports line team rankings resource versions current. |
+| `sports_line_team_rankings_resource_methods` | character | Sports line team rankings resource methods. |
+| `sports_line_team_rankings_resource_formats` | character | Sports line team rankings resource formats. |
+| `sports_line_team_rankings_resource_parameters` | character | Sports line team rankings resource parameters. |
+| `sports_line_team_rankings_resource_auth_settings_require_auth` | logical | Sports line team rankings resource auth settings require auth. |
+| `sports_line_team_rankings_resource_auth_settings_allow_only` | character | Sports line team rankings resource auth settings allow only. |
+| `sports_line_team_rankings_resource_resource_cache_ns` | character | Sports line team rankings resource resource cache ns. |
+| `sports_line_team_rankings_resource_resource_cache_cache_keys` | character | Sports line team rankings resource resource cache cache keys. |
+| `sports_line_team_rankings_resource_resource_cache_cache_buster` | integer | Sports line team rankings resource resource cache cache buster. |
+| `sports_line_team_rankings_resource_expiration_message_object_key_name` | character | Sports line team rankings resource expiration message object key name. |
+| `team_metadata_resource_location` | character | Team metadata resource location. |
+| `team_metadata_resource_route` | character | Team metadata resource route. |
+| `team_metadata_resource_path` | character | Team metadata resource path. |
+| `team_metadata_resource_summary` | character | Team metadata resource summary. |
+| `team_metadata_resource_notes` | character | Team metadata resource notes. |
+| `team_metadata_resource_versions_allowed` | character | Team metadata resource versions allowed. |
+| `team_metadata_resource_versions_current` | character | Team metadata resource versions current. |
+| `team_metadata_resource_methods` | character | Team metadata resource methods. |
+| `team_metadata_resource_formats` | character | Team metadata resource formats. |
+| `team_metadata_resource_parameters` | character | Team metadata resource parameters. |
+| `team_metadata_resource_auth_settings_require_auth` | logical | Team metadata resource auth settings require auth. |
+| `team_metadata_resource_auth_settings_allow_only` | character | Team metadata resource auth settings allow only. |
+| `team_metadata_resource_resource_cache_ns` | character | Team metadata resource resource cache ns. |
+| `team_metadata_resource_resource_cache_cache_keys` | character | Team metadata resource resource cache cache keys. |
+| `team_metadata_resource_resource_cache_cache_buster` | integer | Team metadata resource resource cache cache buster. |
+| `team_resource_location` | character | Team resource location. |
+| `team_resource_routes` | character | Team resource routes. |
+| `team_resource_paths` | character | Team resource paths. |
+| `team_resource_summary` | character | Team resource summary. |
+| `team_resource_notes` | character | Team resource notes. |
+| `team_resource_versions_allowed` | character | Team resource versions allowed. |
+| `team_resource_versions_current` | character | Team resource versions current. |
+| `team_resource_methods` | character | Team resource methods. |
+| `team_resource_formats` | character | Team resource formats. |
+| `team_resource_parameters` | character | Team resource parameters. |
+| `team_resource_auth_settings_require_auth` | logical | Team resource auth settings require auth. |
+| `team_resource_auth_settings_allow_only` | character | Team resource auth settings allow only. |
+| `team_resource_resource_cache_ns` | character | Team resource resource cache ns. |
+| `team_resource_resource_cache_cache_keys` | character | Team resource resource cache cache keys. |
+| `team_resource_resource_cache_cache_buster` | integer | Team resource resource cache cache buster. |
+| `team_resource_expiration_message_object_key_name` | character | Team resource expiration message object key name. |
+| `position_rankings_resource_location` | character | Position rankings resource location. |
+| `position_rankings_resource_route` | character | Position rankings resource route. |
+| `position_rankings_resource_path` | character | Position rankings resource path. |
+| `position_rankings_resource_summary` | character | Position rankings resource summary. |
+| `position_rankings_resource_notes` | character | Position rankings resource notes. |
+| `position_rankings_resource_versions_allowed` | character | Position rankings resource versions allowed. |
+| `position_rankings_resource_versions_current` | character | Position rankings resource versions current. |
+| `position_rankings_resource_methods` | character | Position rankings resource methods. |
+| `position_rankings_resource_formats` | character | Position rankings resource formats. |
+| `position_rankings_resource_parameters` | character | Position rankings resource parameters. |
+| `position_rankings_resource_auth_settings_require_auth` | logical | Position rankings resource auth settings require auth. |
+| `position_rankings_resource_auth_settings_allow_only` | character | Position rankings resource auth settings allow only. |
+| `position_rankings_resource_resource_cache_ns` | character | Position rankings resource resource cache ns. |
+| `position_rankings_resource_resource_cache_cache_keys` | character | Position rankings resource resource cache cache keys. |
+| `position_rankings_resource_resource_cache_cache_buster` | integer | Position rankings resource resource cache cache buster. |
+| `position_rankings_resource_expiration_message_object_key_name` | character | Position rankings resource expiration message object key name. |
+| `player_game_stats_resource_location` | character | Player game stats resource location. |
+| `player_game_stats_resource_route` | character | Player game stats resource route. |
+| `player_game_stats_resource_path` | character | Player game stats resource path. |
+| `player_game_stats_resource_summary` | character | Player game stats resource summary. |
+| `player_game_stats_resource_notes` | character | Player game stats resource notes. |
+| `player_game_stats_resource_versions_allowed` | character | Player game stats resource versions allowed. |
+| `player_game_stats_resource_versions_current` | character | Player game stats resource versions current. |
+| `player_game_stats_resource_methods` | character | Player game stats resource methods. |
+| `player_game_stats_resource_formats` | character | Player game stats resource formats. |
+| `player_game_stats_resource_parameters` | character | Player game stats resource parameters. |
+| `player_game_stats_resource_auth_settings_require_auth` | logical | Player game stats resource auth settings require auth. |
+| `player_game_stats_resource_auth_settings_allow_only` | character | Player game stats resource auth settings allow only. |
+| `player_game_stats_resource_resource_cache_ns` | character | Player game stats resource resource cache ns. |
+| `player_game_stats_resource_resource_cache_cache_keys` | character | Player game stats resource resource cache cache keys. |
+| `player_game_stats_resource_resource_cache_cache_buster` | integer | Player game stats resource resource cache cache buster. |
+| `player_game_stats_resource_expiration_message_object_key_name` | character | Player game stats resource expiration message object key name. |
+| `ruwt_highlights_resource_location` | character | Ruwt highlights resource location. |
+| `ruwt_highlights_resource_route` | character | Ruwt highlights resource route. |
+| `ruwt_highlights_resource_path` | character | Ruwt highlights resource path. |
+| `ruwt_highlights_resource_summary` | character | Ruwt highlights resource summary. |
+| `ruwt_highlights_resource_notes` | character | Ruwt highlights resource notes. |
+| `ruwt_highlights_resource_versions_allowed` | character | Ruwt highlights resource versions allowed. |
+| `ruwt_highlights_resource_versions_current` | character | Ruwt highlights resource versions current. |
+| `ruwt_highlights_resource_methods` | character | Ruwt highlights resource methods. |
+| `ruwt_highlights_resource_formats` | character | Ruwt highlights resource formats. |
+| `ruwt_highlights_resource_parameters` | character | Ruwt highlights resource parameters. |
+| `ruwt_highlights_resource_auth_settings_require_auth` | logical | Ruwt highlights resource auth settings require auth. |
+| `ruwt_highlights_resource_auth_settings_allow_only` | character | Ruwt highlights resource auth settings allow only. |
+| `ruwt_highlights_resource_resource_cache_ns` | character | Ruwt highlights resource resource cache ns. |
+| `ruwt_highlights_resource_resource_cache_cache_keys` | character | Ruwt highlights resource resource cache cache keys. |
+| `ruwt_highlights_resource_resource_cache_cache_buster` | integer | Ruwt highlights resource resource cache cache buster. |
+| `ruwt_highlights_resource_expiration_message_object_key_name` | character | Ruwt highlights resource expiration message object key name. |
+| `hockey_player_meta_resource_location` | character | Hockey player meta resource location. |
+| `hockey_player_meta_resource_route` | character | Hockey player meta resource route. |
+| `hockey_player_meta_resource_path` | character | Hockey player meta resource path. |
+| `hockey_player_meta_resource_summary` | character | Hockey player meta resource summary. |
+| `hockey_player_meta_resource_notes` | character | Hockey player meta resource notes. |
+| `hockey_player_meta_resource_versions_allowed` | character | Hockey player meta resource versions allowed. |
+| `hockey_player_meta_resource_versions_current` | character | Hockey player meta resource versions current. |
+| `hockey_player_meta_resource_methods` | character | Hockey player meta resource methods. |
+| `hockey_player_meta_resource_formats` | character | Hockey player meta resource formats. |
+| `hockey_player_meta_resource_parameters` | character | Hockey player meta resource parameters. |
+| `hockey_player_meta_resource_auth_settings_require_auth` | logical | Hockey player meta resource auth settings require auth. |
+| `hockey_player_meta_resource_auth_settings_allow_only` | character | Hockey player meta resource auth settings allow only. |
+| `hockey_player_meta_resource_resource_cache_ns` | character | Hockey player meta resource resource cache ns. |
+| `hockey_player_meta_resource_resource_cache_cache_keys` | character | Hockey player meta resource resource cache cache keys. |
+| `hockey_player_meta_resource_resource_cache_cache_buster` | integer | Hockey player meta resource resource cache cache buster. |
+| `hockey_player_meta_resource_expiration_message_object_key_name` | character | Hockey player meta resource expiration message object key name. |
+
+### Returns — `cbs_napi_league` / `cbsNapiLeague`
+
+| col_name | type | description |
+|---|---|---|
+| `league_id` | integer | League ID. |
+| `league_abbr` | character | League abbreviation. |
+| `league_name` | character | League name. |
+| `sport_id` | integer | Sport ID. |
+| `league_type` | character | League type. |
+| `teams` | character | Teams. |
+| `color_primary` | character | Color primary. |
+| `color_secondary` | character | Color secondary. |
+
+### Returns — `cbs_napi_season_teams` / `cbsNapiSeasonTeams`
+
+| col_name | type | description |
+|---|---|---|
+| `team_id` | integer | Team ID. |
+| `stub_hub_team_id` | character | Stub hub team ID. |
+| `location` | character | Location. |
+| `nick_name` | character | Nick name. |
+| `medium_name` | character | Medium name. |
+| `short_name` | character | Short name. |
+| `abbrev` | character | Abbrev. |
+| `status` | character | Status. |
+| `home_venue_id` | integer | Home venue ID. |
+| `conference_id` | integer | Conference ID. |
+| `league_id` | integer | League ID. |
+| `division_id` | character | Division ID. |
+| `ticket_url` | character | Ticket URL. |
+| `color_hex_dex` | character | Color hex dex. |
+| `color_primary_hex` | character | Color primary hex. |
+| `color_secondary_hex` | character | Color secondary hex. |
+| `players` | character | Players. |
+| `league` | character | League. |
+| `standings` | character | Standings. |
+| `conference` | character | Conference. |
+| `division` | character | Division. |
+| `team_seasons` | character | Team seasons. |
+| `polls` | character | Polls. |
+| `home_venue` | character | Home venue. |
+| `sports_line_standings` | character | Sports line standings. |
+| `team_stats` | character | Team stats. |
+| `team_rankings` | character | Team rankings. |
+| `sports_line_rankings` | character | Sports line rankings. |
+| `meta_tsa_overlay` | logical | Meta tsa overlay. |
+| `meta_season_id` | integer | Meta season ID. |
+
+### Returns — `cbs_napi_team_players` / `cbsNapiTeamPlayers`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | integer | Player ID. |
+| `first_name` | character | First name. |
+| `full_first_name` | character | Full first name. |
+| `last_name` | character | Last name. |
+| `full_last_name` | character | Full last name. |
+| `nick_name` | character | Nick name. |
+| `height` | character | Height. |
+| `weight` | integer | Weight. |
+| `experience` | integer | Experience. |
+| `school` | character | School. |
+| `home_town` | character | Home town. |
+| `debut` | character | Debut. |
+| `birth_date` | character | Birth date. |
+| `birth_country` | character | Birth country. |
+| `birth_country_code` | character | Birth country code. |
+| `nationality_country` | character | Nationality country. |
+| `nationality_country_code` | character | Nationality country code. |
+| `locked` | integer | Locked. |
+| `player_team_associations` | character | Player team associations. |
+| `injuries` | character | Injuries. |
+| `transactions` | character | Transactions. |
+| `depth_charts` | character | Depth charts. |
+| `position_rankings` | character | Position rankings. |
+| `player_stats` | character | Player stats. |
+| `standings` | character | Standings. |
+| `rankings` | character | Rankings. |
+| `player_outlook` | character | Player outlook. |
+| `meta_data` | character | Meta data. |
+| `draft_info` | character | Draft info. |
+| `game_stats` | character | Game stats. |
+| `combine_data` | character | Combine data. |
+
+### Returns — `cbs_napi_team_standings` / `cbsNapiTeamStandings`
+
+| col_name | type | description |
+|---|---|---|
+| `2016_regular_wins_number` | integer | 2016 regular wins number. |
+| `2016_regular_goals_for_goals` | integer | 2016 regular goals for goals. |
+| `2016_regular_last_results_r2` | character | 2016 regular last results r2. |
+| `2016_regular_last_results_r3` | character | 2016 regular last results r3. |
+| `2016_regular_last_results_r4` | character | 2016 regular last results r4. |
+| `2016_regular_last_results_r5` | character | 2016 regular last results r5. |
+| `2016_regular_last_results_r1` | character | 2016 regular last results r1. |
+| `2016_regular_winning_percentage_percentage` | character | 2016 regular winning percentage percentage. |
+| `2016_regular_goals_against_goals` | integer | 2016 regular goals against goals. |
+| `2016_regular_streak` | character | 2016 regular streak. |
+| `2016_regular_losses_number` | integer | 2016 regular losses number. |
+| `2016_regular_points_penalty_points` | integer | 2016 regular points penalty points. |
+| `2016_regular_points_points_per_game` | number | 2016 regular points points per game. |
+| `2016_regular_points_points` | integer | 2016 regular points points. |
+| `2016_regular_ties_number` | integer | 2016 regular ties number. |
+| `2016_regular_games_played_games` | integer | 2016 regular games played games. |
+| `2016_regular_place_previous` | integer | 2016 regular place previous. |
+| `2016_regular_place_season_end_id` | character | 2016 regular place season end ID. |
+| `2016_regular_place_season_end` | character | 2016 regular place season end. |
+| `2016_regular_place_place` | integer | 2016 regular place place. |
+| `2016_regular_clinch_status_id` | integer | 2016 regular clinch status ID. |
+| `2016_regular_clinch_status_status` | character | 2016 regular clinch status status. |
+| `2016_regular_win_loss_record` | character | 2016 regular win loss record. |
+| `2016_regular_team_info_display_name` | character | 2016 regular team info display name. |
+| `2016_regular_team_info_name` | character | 2016 regular team info name. |
+| `2016_regular_team_info_alias` | character | 2016 regular team info alias. |
+| `2016_regular_team_info_location` | character | 2016 regular team info location. |
+| `2016_regular_team_info_id` | integer | 2016 regular team info ID. |
+| `2016_regular_team_info_global_id` | integer | 2016 regular team info global ID. |
+| `2016_regular_season_id` | integer | 2016 regular season ID. |
+| `2016_regular_season_season_id` | integer | 2016 regular season season ID. |
+| `2016_regular_season_sport_id` | integer | 2016 regular season sport ID. |
+| `2016_regular_season_league_id` | integer | 2016 regular season league ID. |
+| `2016_regular_season_league` | character | 2016 regular season league. |
+| `2016_regular_season_teams` | character | 2016 regular season teams. |
+| `2016_regular_season_season_year` | integer | 2016 regular season season year. |
+| `2016_regular_season_is_current` | integer | 2016 regular season is current. |
+| `2016_regular_season_season_type` | character | 2016 regular season season type. |
+| `2016_regular_season_season_type_desc` | character | 2016 regular season season type desc. |
+| `2016_regular_season_season_start_date` | character | 2016 regular season season start date. |
+| `2016_regular_season_season_end_date` | character | 2016 regular season season end date. |
+| `2017_regular_wins_number` | integer | 2017 regular wins number. |
+| `2017_regular_goals_for_goals` | integer | 2017 regular goals for goals. |
+| `2017_regular_last_results_r2` | character | 2017 regular last results r2. |
+| `2017_regular_last_results_r3` | character | 2017 regular last results r3. |
+| `2017_regular_last_results_r4` | character | 2017 regular last results r4. |
+| `2017_regular_last_results_r5` | character | 2017 regular last results r5. |
+| `2017_regular_last_results_r1` | character | 2017 regular last results r1. |
+| `2017_regular_winning_percentage_percentage` | character | 2017 regular winning percentage percentage. |
+| `2017_regular_goals_against_goals` | integer | 2017 regular goals against goals. |
+| `2017_regular_streak` | character | 2017 regular streak. |
+| `2017_regular_losses_number` | integer | 2017 regular losses number. |
+| `2017_regular_points_penalty_points` | integer | 2017 regular points penalty points. |
+| `2017_regular_points_points_per_game` | number | 2017 regular points points per game. |
+| `2017_regular_points_points` | integer | 2017 regular points points. |
+| `2017_regular_ties_number` | integer | 2017 regular ties number. |
+| `2017_regular_games_played_games` | integer | 2017 regular games played games. |
+| `2017_regular_place_previous` | integer | 2017 regular place previous. |
+| `2017_regular_place_season_end_id` | character | 2017 regular place season end ID. |
+| `2017_regular_place_place` | integer | 2017 regular place place. |
+| `2017_regular_place_season_end` | character | 2017 regular place season end. |
+| `2017_regular_win_loss_record` | character | 2017 regular win loss record. |
+| `2017_regular_team_info_display_name` | character | 2017 regular team info display name. |
+| `2017_regular_team_info_name` | character | 2017 regular team info name. |
+| `2017_regular_team_info_alias` | character | 2017 regular team info alias. |
+| `2017_regular_team_info_location` | character | 2017 regular team info location. |
+| `2017_regular_team_info_global_id` | integer | 2017 regular team info global ID. |
+| `2017_regular_team_info_id` | integer | 2017 regular team info ID. |
+| `2017_regular_season_id` | integer | 2017 regular season ID. |
+| `2017_regular_season_season_id` | integer | 2017 regular season season ID. |
+| `2017_regular_season_sport_id` | integer | 2017 regular season sport ID. |
+| `2017_regular_season_league_id` | integer | 2017 regular season league ID. |
+| `2017_regular_season_league` | character | 2017 regular season league. |
+| `2017_regular_season_teams` | character | 2017 regular season teams. |
+| `2017_regular_season_season_year` | integer | 2017 regular season season year. |
+| `2017_regular_season_is_current` | integer | 2017 regular season is current. |
+| `2017_regular_season_season_type` | character | 2017 regular season season type. |
+| `2017_regular_season_season_type_desc` | character | 2017 regular season season type desc. |
+| `2017_regular_season_season_start_date` | character | 2017 regular season season start date. |
+| `2017_regular_season_season_end_date` | character | 2017 regular season season end date. |
+| `2018_regular_wins_number` | integer | 2018 regular wins number. |
+| `2018_regular_goals_for_goals` | integer | 2018 regular goals for goals. |
+| `2018_regular_last_results_r2` | character | 2018 regular last results r2. |
+| `2018_regular_last_results_r3` | character | 2018 regular last results r3. |
+| `2018_regular_last_results_r4` | character | 2018 regular last results r4. |
+| `2018_regular_last_results_r5` | character | 2018 regular last results r5. |
+| `2018_regular_last_results_r1` | character | 2018 regular last results r1. |
+| `2018_regular_winning_percentage_percentage` | character | 2018 regular winning percentage percentage. |
+| `2018_regular_goals_against_goals` | integer | 2018 regular goals against goals. |
+| `2018_regular_streak` | character | 2018 regular streak. |
+| `2018_regular_losses_number` | integer | 2018 regular losses number. |
+| `2018_regular_points_penalty_points` | integer | 2018 regular points penalty points. |
+| `2018_regular_points_points_per_game` | number | 2018 regular points points per game. |
+| `2018_regular_points_points` | integer | 2018 regular points points. |
+| `2018_regular_ties_number` | integer | 2018 regular ties number. |
+| `2018_regular_games_played_games` | integer | 2018 regular games played games. |
+| `2018_regular_place_previous` | integer | 2018 regular place previous. |
+| `2018_regular_place_season_end_id` | integer | 2018 regular place season end ID. |
+| `2018_regular_place_place` | integer | 2018 regular place place. |
+| `2018_regular_place_season_end` | character | 2018 regular place season end. |
+| `2018_regular_clinch_status_id` | integer | 2018 regular clinch status ID. |
+| `2018_regular_clinch_status_status` | character | 2018 regular clinch status status. |
+| `2018_regular_win_loss_record` | character | 2018 regular win loss record. |
+| `2018_regular_team_info_display_name` | character | 2018 regular team info display name. |
+| `2018_regular_team_info_name` | character | 2018 regular team info name. |
+| `2018_regular_team_info_alias` | character | 2018 regular team info alias. |
+| `2018_regular_team_info_location` | character | 2018 regular team info location. |
+| `2018_regular_team_info_global_id` | integer | 2018 regular team info global ID. |
+| `2018_regular_team_info_id` | integer | 2018 regular team info ID. |
+| `2018_regular_season_id` | integer | 2018 regular season ID. |
+| `2018_regular_season_season_id` | integer | 2018 regular season season ID. |
+| `2018_regular_season_sport_id` | integer | 2018 regular season sport ID. |
+| `2018_regular_season_league_id` | integer | 2018 regular season league ID. |
+| `2018_regular_season_league` | character | 2018 regular season league. |
+| `2018_regular_season_teams` | character | 2018 regular season teams. |
+| `2018_regular_season_season_year` | integer | 2018 regular season season year. |
+| `2018_regular_season_is_current` | integer | 2018 regular season is current. |
+| `2018_regular_season_season_type` | character | 2018 regular season season type. |
+| `2018_regular_season_season_type_desc` | character | 2018 regular season season type desc. |
+| `2018_regular_season_season_start_date` | character | 2018 regular season season start date. |
+| `2018_regular_season_season_end_date` | character | 2018 regular season season end date. |
+| `2019_regular_wins_number` | integer | 2019 regular wins number. |
+| `2019_regular_goals_for_goals` | integer | 2019 regular goals for goals. |
+| `2019_regular_last_results_r2` | character | 2019 regular last results r2. |
+| `2019_regular_last_results_r3` | character | 2019 regular last results r3. |
+| `2019_regular_last_results_r4` | character | 2019 regular last results r4. |
+| `2019_regular_last_results_r5` | character | 2019 regular last results r5. |
+| `2019_regular_last_results_r1` | character | 2019 regular last results r1. |
+| `2019_regular_winning_percentage_percentage` | character | 2019 regular winning percentage percentage. |
+| `2019_regular_goals_against_goals` | integer | 2019 regular goals against goals. |
+| `2019_regular_streak` | character | 2019 regular streak. |
+| `2019_regular_losses_number` | integer | 2019 regular losses number. |
+| `2019_regular_points_penalty_points` | integer | 2019 regular points penalty points. |
+| `2019_regular_points_points_per_game` | number | 2019 regular points points per game. |
+| `2019_regular_points_points` | integer | 2019 regular points points. |
+| `2019_regular_ties_number` | integer | 2019 regular ties number. |
+| `2019_regular_games_played_games` | integer | 2019 regular games played games. |
+| `2019_regular_place_previous` | integer | 2019 regular place previous. |
+| `2019_regular_place_season_end_id` | character | 2019 regular place season end ID. |
+| `2019_regular_place_place` | integer | 2019 regular place place. |
+| `2019_regular_place_season_end` | character | 2019 regular place season end. |
+| `2019_regular_clinch_status_id` | integer | 2019 regular clinch status ID. |
+| `2019_regular_clinch_status_status` | character | 2019 regular clinch status status. |
+| `2019_regular_win_loss_record` | character | 2019 regular win loss record. |
+| `2019_regular_team_info_display_name` | character | 2019 regular team info display name. |
+| `2019_regular_team_info_name` | character | 2019 regular team info name. |
+| `2019_regular_team_info_alias` | character | 2019 regular team info alias. |
+| `2019_regular_team_info_location` | character | 2019 regular team info location. |
+| `2019_regular_team_info_global_id` | integer | 2019 regular team info global ID. |
+| `2019_regular_team_info_id` | integer | 2019 regular team info ID. |
+| `2019_regular_season_id` | integer | 2019 regular season ID. |
+| `2019_regular_season_season_id` | integer | 2019 regular season season ID. |
+| `2019_regular_season_sport_id` | integer | 2019 regular season sport ID. |
+| `2019_regular_season_league_id` | integer | 2019 regular season league ID. |
+| `2019_regular_season_league` | character | 2019 regular season league. |
+| `2019_regular_season_teams` | character | 2019 regular season teams. |
+| `2019_regular_season_season_year` | integer | 2019 regular season season year. |
+| `2019_regular_season_is_current` | integer | 2019 regular season is current. |
+| `2019_regular_season_season_type` | character | 2019 regular season season type. |
+| `2019_regular_season_season_type_desc` | character | 2019 regular season season type desc. |
+| `2019_regular_season_season_start_date` | character | 2019 regular season season start date. |
+| `2019_regular_season_season_end_date` | character | 2019 regular season season end date. |
+| `2020_regular_wins_number` | integer | 2020 regular wins number. |
+| `2020_regular_goals_for_goals` | integer | 2020 regular goals for goals. |
+| `2020_regular_last_results_r2` | character | 2020 regular last results r2. |
+| `2020_regular_last_results_r3` | character | 2020 regular last results r3. |
+| `2020_regular_last_results_r4` | character | 2020 regular last results r4. |
+| `2020_regular_last_results_r5` | character | 2020 regular last results r5. |
+| `2020_regular_last_results_r1` | character | 2020 regular last results r1. |
+| `2020_regular_winning_percentage_percentage` | character | 2020 regular winning percentage percentage. |
+| `2020_regular_goals_against_goals` | integer | 2020 regular goals against goals. |
+| `2020_regular_streak` | character | 2020 regular streak. |
+| `2020_regular_losses_number` | integer | 2020 regular losses number. |
+| `2020_regular_points_penalty_points` | integer | 2020 regular points penalty points. |
+| `2020_regular_points_points_per_game` | number | 2020 regular points points per game. |
+| `2020_regular_points_points` | integer | 2020 regular points points. |
+| `2020_regular_ties_number` | integer | 2020 regular ties number. |
+| `2020_regular_games_played_games` | integer | 2020 regular games played games. |
+| `2020_regular_place_previous` | integer | 2020 regular place previous. |
+| `2020_regular_place_season_end_id` | character | 2020 regular place season end ID. |
+| `2020_regular_place_place` | integer | 2020 regular place place. |
+| `2020_regular_place_season_end` | character | 2020 regular place season end. |
+| `2020_regular_goal_differential_differential` | integer | 2020 regular goal differential differential. |
+| `2020_regular_win_loss_record` | character | 2020 regular win loss record. |
+| `2020_regular_team_info_display_name` | character | 2020 regular team info display name. |
+| `2020_regular_team_info_name` | character | 2020 regular team info name. |
+| `2020_regular_team_info_alias` | character | 2020 regular team info alias. |
+| `2020_regular_team_info_location` | character | 2020 regular team info location. |
+| `2020_regular_team_info_global_id` | integer | 2020 regular team info global ID. |
+| `2020_regular_team_info_id` | integer | 2020 regular team info ID. |
+| `2020_regular_season_id` | integer | 2020 regular season ID. |
+| `2020_regular_season_season_id` | integer | 2020 regular season season ID. |
+| `2020_regular_season_sport_id` | integer | 2020 regular season sport ID. |
+| `2020_regular_season_league_id` | integer | 2020 regular season league ID. |
+| `2020_regular_season_league` | character | 2020 regular season league. |
+| `2020_regular_season_teams` | character | 2020 regular season teams. |
+| `2020_regular_season_season_year` | integer | 2020 regular season season year. |
+| `2020_regular_season_is_current` | integer | 2020 regular season is current. |
+| `2020_regular_season_season_type` | character | 2020 regular season season type. |
+| `2020_regular_season_season_type_desc` | character | 2020 regular season season type desc. |
+| `2020_regular_season_season_start_date` | character | 2020 regular season season start date. |
+| `2020_regular_season_season_end_date` | character | 2020 regular season season end date. |
+| `2021_regular_wins_number` | integer | 2021 regular wins number. |
+| `2021_regular_goals_for_goals` | integer | 2021 regular goals for goals. |
+| `2021_regular_last_results_r2` | character | 2021 regular last results r2. |
+| `2021_regular_last_results_r3` | character | 2021 regular last results r3. |
+| `2021_regular_last_results_r4` | character | 2021 regular last results r4. |
+| `2021_regular_last_results_r5` | character | 2021 regular last results r5. |
+| `2021_regular_last_results_r1` | character | 2021 regular last results r1. |
+| `2021_regular_winning_percentage_percentage` | character | 2021 regular winning percentage percentage. |
+| `2021_regular_goals_against_goals` | integer | 2021 regular goals against goals. |
+| `2021_regular_streak` | character | 2021 regular streak. |
+| `2021_regular_losses_number` | integer | 2021 regular losses number. |
+| `2021_regular_points_penalty_points` | integer | 2021 regular points penalty points. |
+| `2021_regular_points_points_per_game` | number | 2021 regular points points per game. |
+| `2021_regular_points_points` | integer | 2021 regular points points. |
+| `2021_regular_ties_number` | integer | 2021 regular ties number. |
+| `2021_regular_games_played_games` | integer | 2021 regular games played games. |
+| `2021_regular_place_previous` | integer | 2021 regular place previous. |
+| `2021_regular_place_season_end_id` | integer | 2021 regular place season end ID. |
+| `2021_regular_place_place` | integer | 2021 regular place place. |
+| `2021_regular_place_season_end` | character | 2021 regular place season end. |
+| `2021_regular_clinch_status_id` | integer | 2021 regular clinch status ID. |
+| `2021_regular_clinch_status_status` | character | 2021 regular clinch status status. |
+| `2021_regular_goal_differential_differential` | integer | 2021 regular goal differential differential. |
+| `2021_regular_win_loss_record` | character | 2021 regular win loss record. |
+| `2021_regular_team_info_display_name` | character | 2021 regular team info display name. |
+| `2021_regular_team_info_name` | character | 2021 regular team info name. |
+| `2021_regular_team_info_alias` | character | 2021 regular team info alias. |
+| `2021_regular_team_info_location` | character | 2021 regular team info location. |
+| `2021_regular_team_info_global_id` | integer | 2021 regular team info global ID. |
+| `2021_regular_team_info_id` | integer | 2021 regular team info ID. |
+| `2021_regular_season_id` | integer | 2021 regular season ID. |
+| `2021_regular_season_season_id` | integer | 2021 regular season season ID. |
+| `2021_regular_season_sport_id` | integer | 2021 regular season sport ID. |
+| `2021_regular_season_league_id` | integer | 2021 regular season league ID. |
+| `2021_regular_season_league` | character | 2021 regular season league. |
+| `2021_regular_season_teams` | character | 2021 regular season teams. |
+| `2021_regular_season_season_year` | integer | 2021 regular season season year. |
+| `2021_regular_season_is_current` | integer | 2021 regular season is current. |
+| `2021_regular_season_season_type` | character | 2021 regular season season type. |
+| `2021_regular_season_season_type_desc` | character | 2021 regular season season type desc. |
+| `2021_regular_season_season_start_date` | character | 2021 regular season season start date. |
+| `2021_regular_season_season_end_date` | character | 2021 regular season season end date. |
+| `2022_regular_wins_number` | integer | 2022 regular wins number. |
+| `2022_regular_goals_for_goals` | integer | 2022 regular goals for goals. |
+| `2022_regular_last_results_r2` | character | 2022 regular last results r2. |
+| `2022_regular_last_results_r3` | character | 2022 regular last results r3. |
+| `2022_regular_last_results_r4` | character | 2022 regular last results r4. |
+| `2022_regular_last_results_r5` | character | 2022 regular last results r5. |
+| `2022_regular_last_results_r1` | character | 2022 regular last results r1. |
+| `2022_regular_winning_percentage_percentage` | character | 2022 regular winning percentage percentage. |
+| `2022_regular_goals_against_goals` | integer | 2022 regular goals against goals. |
+| `2022_regular_streak` | character | 2022 regular streak. |
+| `2022_regular_losses_number` | integer | 2022 regular losses number. |
+| `2022_regular_points_penalty_points` | integer | 2022 regular points penalty points. |
+| `2022_regular_points_points_per_game` | number | 2022 regular points points per game. |
+| `2022_regular_points_points` | integer | 2022 regular points points. |
+| `2022_regular_ties_number` | integer | 2022 regular ties number. |
+| `2022_regular_games_played_games` | integer | 2022 regular games played games. |
+| `2022_regular_place_previous` | integer | 2022 regular place previous. |
+| `2022_regular_place_season_end_id` | character | 2022 regular place season end ID. |
+| `2022_regular_place_place` | integer | 2022 regular place place. |
+| `2022_regular_place_season_end` | character | 2022 regular place season end. |
+| `2022_regular_win_loss_record` | character | 2022 regular win loss record. |
+| `2022_regular_team_info_display_name` | character | 2022 regular team info display name. |
+| `2022_regular_team_info_name` | character | 2022 regular team info name. |
+| `2022_regular_team_info_alias` | character | 2022 regular team info alias. |
+| `2022_regular_team_info_location` | character | 2022 regular team info location. |
+| `2022_regular_team_info_global_id` | integer | 2022 regular team info global ID. |
+| `2022_regular_team_info_id` | integer | 2022 regular team info ID. |
+| `2022_regular_season_id` | integer | 2022 regular season ID. |
+| `2022_regular_season_season_id` | integer | 2022 regular season season ID. |
+| `2022_regular_season_sport_id` | integer | 2022 regular season sport ID. |
+| `2022_regular_season_league_id` | integer | 2022 regular season league ID. |
+| `2022_regular_season_league` | character | 2022 regular season league. |
+| `2022_regular_season_teams` | character | 2022 regular season teams. |
+| `2022_regular_season_season_year` | integer | 2022 regular season season year. |
+| `2022_regular_season_is_current` | integer | 2022 regular season is current. |
+| `2022_regular_season_season_type` | character | 2022 regular season season type. |
+| `2022_regular_season_season_type_desc` | character | 2022 regular season season type desc. |
+| `2022_regular_season_season_start_date` | character | 2022 regular season season start date. |
+| `2022_regular_season_season_end_date` | character | 2022 regular season season end date. |
+| `2023_regular_wins_number` | integer | 2023 regular wins number. |
+| `2023_regular_goals_for_goals` | integer | 2023 regular goals for goals. |
+| `2023_regular_last_results_r2` | character | 2023 regular last results r2. |
+| `2023_regular_last_results_r3` | character | 2023 regular last results r3. |
+| `2023_regular_last_results_r4` | character | 2023 regular last results r4. |
+| `2023_regular_last_results_r5` | character | 2023 regular last results r5. |
+| `2023_regular_last_results_r1` | character | 2023 regular last results r1. |
+| `2023_regular_winning_percentage_percentage` | character | 2023 regular winning percentage percentage. |
+| `2023_regular_goals_against_goals` | integer | 2023 regular goals against goals. |
+| `2023_regular_streak` | character | 2023 regular streak. |
+| `2023_regular_losses_number` | integer | 2023 regular losses number. |
+| `2023_regular_points_penalty_points` | integer | 2023 regular points penalty points. |
+| `2023_regular_points_points_per_game` | number | 2023 regular points points per game. |
+| `2023_regular_points_points` | integer | 2023 regular points points. |
+| `2023_regular_ties_number` | integer | 2023 regular ties number. |
+| `2023_regular_games_played_games` | integer | 2023 regular games played games. |
+| `2023_regular_place_previous` | integer | 2023 regular place previous. |
+| `2023_regular_place_season_end_id` | character | 2023 regular place season end ID. |
+| `2023_regular_place_place` | integer | 2023 regular place place. |
+| `2023_regular_place_season_end` | character | 2023 regular place season end. |
+| `2023_regular_goal_differential_differential` | integer | 2023 regular goal differential differential. |
+| `2023_regular_win_loss_record` | character | 2023 regular win loss record. |
+| `2023_regular_team_info_display_name` | character | 2023 regular team info display name. |
+| `2023_regular_team_info_name` | character | 2023 regular team info name. |
+| `2023_regular_team_info_alias` | character | 2023 regular team info alias. |
+| `2023_regular_team_info_location` | character | 2023 regular team info location. |
+| `2023_regular_team_info_global_id` | integer | 2023 regular team info global ID. |
+| `2023_regular_team_info_id` | integer | 2023 regular team info ID. |
+| `2023_regular_season_id` | integer | 2023 regular season ID. |
+| `2023_regular_season_season_id` | integer | 2023 regular season season ID. |
+| `2023_regular_season_sport_id` | integer | 2023 regular season sport ID. |
+| `2023_regular_season_league_id` | integer | 2023 regular season league ID. |
+| `2023_regular_season_league` | character | 2023 regular season league. |
+| `2023_regular_season_teams` | character | 2023 regular season teams. |
+| `2023_regular_season_season_year` | integer | 2023 regular season season year. |
+| `2023_regular_season_is_current` | integer | 2023 regular season is current. |
+| `2023_regular_season_season_type` | character | 2023 regular season season type. |
+| `2023_regular_season_season_type_desc` | character | 2023 regular season season type desc. |
+| `2023_regular_season_season_start_date` | character | 2023 regular season season start date. |
+| `2023_regular_season_season_end_date` | character | 2023 regular season season end date. |
+| `2024_regular_wins_number` | integer | 2024 regular wins number. |
+| `2024_regular_goals_for_goals` | integer | 2024 regular goals for goals. |
+| `2024_regular_last_results_r2` | character | 2024 regular last results r2. |
+| `2024_regular_last_results_r3` | character | 2024 regular last results r3. |
+| `2024_regular_last_results_r4` | character | 2024 regular last results r4. |
+| `2024_regular_last_results_r5` | character | 2024 regular last results r5. |
+| `2024_regular_last_results_r1` | character | 2024 regular last results r1. |
+| `2024_regular_winning_percentage_percentage` | character | 2024 regular winning percentage percentage. |
+| `2024_regular_goals_against_goals` | integer | 2024 regular goals against goals. |
+| `2024_regular_streak` | character | 2024 regular streak. |
+| `2024_regular_losses_number` | integer | 2024 regular losses number. |
+| `2024_regular_points_penalty_points` | integer | 2024 regular points penalty points. |
+| `2024_regular_points_points_per_game` | number | 2024 regular points points per game. |
+| `2024_regular_points_points` | integer | 2024 regular points points. |
+| `2024_regular_ties_number` | integer | 2024 regular ties number. |
+| `2024_regular_games_played_games` | integer | 2024 regular games played games. |
+| `2024_regular_place_previous` | integer | 2024 regular place previous. |
+| `2024_regular_place_season_end_id` | integer | 2024 regular place season end ID. |
+| `2024_regular_place_place` | integer | 2024 regular place place. |
+| `2024_regular_place_season_end` | character | 2024 regular place season end. |
+| `2024_regular_clinch_status_id` | integer | 2024 regular clinch status ID. |
+| `2024_regular_clinch_status_status` | character | 2024 regular clinch status status. |
+| `2024_regular_goal_differential_differential` | integer | 2024 regular goal differential differential. |
+| `2024_regular_win_loss_record` | character | 2024 regular win loss record. |
+| `2024_regular_team_info_display_name` | character | 2024 regular team info display name. |
+| `2024_regular_team_info_name` | character | 2024 regular team info name. |
+| `2024_regular_team_info_alias` | character | 2024 regular team info alias. |
+| `2024_regular_team_info_location` | character | 2024 regular team info location. |
+| `2024_regular_team_info_global_id` | integer | 2024 regular team info global ID. |
+| `2024_regular_team_info_id` | integer | 2024 regular team info ID. |
+| `2024_regular_season_id` | integer | 2024 regular season ID. |
+| `2024_regular_season_season_id` | integer | 2024 regular season season ID. |
+| `2024_regular_season_sport_id` | integer | 2024 regular season sport ID. |
+| `2024_regular_season_league_id` | integer | 2024 regular season league ID. |
+| `2024_regular_season_league` | character | 2024 regular season league. |
+| `2024_regular_season_teams` | character | 2024 regular season teams. |
+| `2024_regular_season_season_year` | integer | 2024 regular season season year. |
+| `2024_regular_season_is_current` | integer | 2024 regular season is current. |
+| `2024_regular_season_season_type` | character | 2024 regular season season type. |
+| `2024_regular_season_season_type_desc` | character | 2024 regular season season type desc. |
+| `2024_regular_season_season_start_date` | character | 2024 regular season season start date. |
+| `2024_regular_season_season_end_date` | character | 2024 regular season season end date. |
+| `2025_regular_wins_number` | integer | 2025 regular wins number. |
+| `2025_regular_goals_for_goals` | integer | 2025 regular goals for goals. |
+| `2025_regular_goals_against_goals` | integer | 2025 regular goals against goals. |
+| `2025_regular_goal_differential_differential` | integer | 2025 regular goal differential differential. |
+| `2025_regular_winning_percentage_percentage` | character | 2025 regular winning percentage percentage. |
+| `2025_regular_streak` | character | 2025 regular streak. |
+| `2025_regular_losses_number` | integer | 2025 regular losses number. |
+| `2025_regular_points_points` | integer | 2025 regular points points. |
+| `2025_regular_points_penalty_points` | integer | 2025 regular points penalty points. |
+| `2025_regular_points_points_per_game` | character | 2025 regular points points per game. |
+| `2025_regular_ties_number` | integer | 2025 regular ties number. |
+| `2025_regular_games_played_games` | integer | 2025 regular games played games. |
+| `2025_regular_place_place` | integer | 2025 regular place place. |
+| `2025_regular_win_loss_record` | character | 2025 regular win loss record. |
+| `2025_regular_team_info_display_name` | character | 2025 regular team info display name. |
+| `2025_regular_team_info_name` | character | 2025 regular team info name. |
+| `2025_regular_team_info_alias` | character | 2025 regular team info alias. |
+| `2025_regular_team_info_location` | character | 2025 regular team info location. |
+| `2025_regular_team_info_global_id` | integer | 2025 regular team info global ID. |
+| `2025_regular_team_info_id` | integer | 2025 regular team info ID. |
+| `2025_regular_clinch_status_id` | integer | 2025 regular clinch status ID. |
+| `2025_regular_clinch_status_status` | character | 2025 regular clinch status status. |
+| `2025_regular_season_id` | integer | 2025 regular season ID. |
+| `2025_regular_season_season_id` | integer | 2025 regular season season ID. |
+| `2025_regular_season_sport_id` | integer | 2025 regular season sport ID. |
+| `2025_regular_season_league_id` | integer | 2025 regular season league ID. |
+| `2025_regular_season_league` | character | 2025 regular season league. |
+| `2025_regular_season_teams` | character | 2025 regular season teams. |
+| `2025_regular_season_season_year` | integer | 2025 regular season season year. |
+| `2025_regular_season_is_current` | integer | 2025 regular season is current. |
+| `2025_regular_season_season_type` | character | 2025 regular season season type. |
+| `2025_regular_season_season_type_desc` | character | 2025 regular season season type desc. |
+| `2025_regular_season_season_start_date` | character | 2025 regular season season start date. |
+| `2025_regular_season_season_end_date` | character | 2025 regular season season end date. |

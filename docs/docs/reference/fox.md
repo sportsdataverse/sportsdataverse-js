@@ -84,6 +84,83 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `left_item_details` | list | Bifrost event_matchup field `leftItemDetails`. |
 | `right_item_details` | list | Bifrost event_matchup field `rightItemDetails`. |
 
+### Returns — `fox_bifrost_event_odds` / `foxBifrostEventOdds`
+
+| col_name | type | description |
+|---|---|---|
+| `modules` | character | Bifrost field `modules`: modules. |
+
+### Returns — `fox_bifrost_event_recap` / `foxBifrostEventRecap`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | character | Bifrost field `id`: ID. |
+| `type` | character | Bifrost field `type`: type. |
+| `order` | integer | Bifrost field `order`: order. |
+| `last_update` | character | Bifrost field `last_update`: last update. |
+
+### Returns — `fox_bifrost_event_standings` / `foxBifrostEventStandings`
+
+| col_name | type | description |
+|---|---|---|
+| `section_id` | character | Bifrost field `section_id`: section ID. |
+| `section_title` | character | Bifrost field `section_title`: section title. |
+| `section_metadata_parameters_standings_type` | character | Bifrost field `section_metadata_parameters_standings_type`: section metadata parameters standings type. |
+| `section_metadata_parameters_league_name` | character | Bifrost field `section_metadata_parameters_league_name`: section metadata parameters league name. |
+| `section_metadata_parameters_group_name` | character | Bifrost field `section_metadata_parameters_group_name`: section metadata parameters group name. |
+| `section_metadata_parameters_season` | character | Bifrost field `section_metadata_parameters_season`: section metadata parameters season. |
+| `template` | character | Bifrost field `template`: template. |
+| `headers` | character | Bifrost field `headers`: headers. |
+| `rows` | character | Bifrost field `rows`: rows. |
+
+### Returns — `fox_bifrost_explore_browse` / `foxBifrostExploreBrowse`
+
+| col_name | type | description |
+|---|---|---|
+| `header_title` | character | Bifrost field `header_title`: header title. |
+| `items` | character | Bifrost field `items`: items. |
+
+### Returns — `fox_bifrost_explore_odds` / `foxBifrostExploreOdds`
+
+| col_name | type | description |
+|---|---|---|
+| `modules` | character | Bifrost field `modules`: modules. |
+
+### Returns — `fox_bifrost_league_conferences` / `foxBifrostLeagueConferences`
+
+| col_name | type | description |
+|---|---|---|
+| `items` | character | Bifrost field `items`: items. |
+
+### Returns — `fox_bifrost_league_header` / `foxBifrostLeagueHeader`
+
+| col_name | type | description |
+|---|---|---|
+| `template` | character | Bifrost field `template`: template. |
+| `title` | character | Bifrost field `title`: title. |
+| `color` | character | Bifrost field `color`: color. |
+| `logo_url` | character | Bifrost field `logo_url`: logo URL. |
+| `image_type` | character | Bifrost field `image_type`: image type. |
+| `image_alt_text` | character | Bifrost field `image_alt_text`: image alt text. |
+| `content_uri` | character | Bifrost field `content_uri`: content URI. |
+| `content_type` | character | Bifrost field `content_type`: content type. |
+| `has_feature` | character | Bifrost field `has_feature`: has feature. |
+| `metadata_parameters_group` | character | Bifrost field `metadata_parameters_group`: metadata parameters group. |
+| `sponsorship_template` | character | Bifrost field `sponsorship_template`: sponsorship template. |
+| `sponsorship_secondary_template` | character | Bifrost field `sponsorship_secondary_template`: sponsorship secondary template. |
+| `sponsorship_sponsor_text` | character | Bifrost field `sponsorship_sponsor_text`: sponsorship sponsor text. |
+| `sponsorship_url` | character | Bifrost field `sponsorship_url`: sponsorship URL. |
+| `sponsorship_image_url` | character | Bifrost field `sponsorship_image_url`: sponsorship image URL. |
+| `sponsorship_image_alt_url` | character | Bifrost field `sponsorship_image_alt_url`: sponsorship image alt URL. |
+| `sponsorship_image_type` | character | Bifrost field `sponsorship_image_type`: sponsorship image type. |
+| `sponsorship_image_alt_text` | character | Bifrost field `sponsorship_image_alt_text`: sponsorship image alt text. |
+| `sponsorship_background_color` | character | Bifrost field `sponsorship_background_color`: sponsorship background color. |
+| `sponsorship_alt_background_color` | character | Bifrost field `sponsorship_alt_background_color`: sponsorship alt background color. |
+| `sponsorship_text_color` | character | Bifrost field `sponsorship_text_color`: sponsorship text color. |
+| `sponsorship_alt_text_color` | character | Bifrost field `sponsorship_alt_text_color`: sponsorship alt text color. |
+| `sponsorship_start_date` | character | Bifrost field `sponsorship_start_date`: sponsorship start date. |
+| `sponsorship_end_date` | character | Bifrost field `sponsorship_end_date`: sponsorship end date. |
+
 ### Returns — `fox_bifrost_league_odds` / `foxBifrostLeagueOdds`
 
 | col_name | type | description |
@@ -94,6 +171,38 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `web_url` | character | Bifrost league_odds field `webUrl`. |
 | `parameters` | list | Bifrost league_odds field `parameters`. |
 | `selected` | logical | Bifrost league_odds field `selected`. |
+
+### Returns — `fox_bifrost_league_playernews` / `foxBifrostLeaguePlayernews`
+
+| col_name | type | description |
+|---|---|---|
+| `image_url` | character | Bifrost field `image_url`: image URL. |
+| `image_type` | character | Bifrost field `image_type`: image type. |
+| `image_alt_text` | character | Bifrost field `image_alt_text`: image alt text. |
+| `title` | character | Bifrost field `title`: title. |
+| `subtitle` | character | Bifrost field `subtitle`: subtitle. |
+| `headline` | character | Bifrost field `headline`: headline. |
+| `description` | character | Bifrost field `description`: description. |
+| `impact_title` | character | Bifrost field `impact_title`: impact title. |
+| `impact` | character | Bifrost field `impact`: impact. |
+| `entity_link_title` | character | Bifrost field `entity_link_title`: entity link title. |
+| `entity_link_web_url` | character | Bifrost field `entity_link_web_url`: entity link web URL. |
+| `entity_link_color` | character | Bifrost field `entity_link_color`: entity link color. |
+| `entity_link_image_url` | character | Bifrost field `entity_link_image_url`: entity link image URL. |
+| `entity_link_image_type` | character | Bifrost field `entity_link_image_type`: entity link image type. |
+| `entity_link_image_alt_text` | character | Bifrost field `entity_link_image_alt_text`: entity link image alt text. |
+| `entity_link_content_uri` | character | Bifrost field `entity_link_content_uri`: entity link content URI. |
+| `entity_link_content_type` | character | Bifrost field `entity_link_content_type`: entity link content type. |
+| `entity_link_layout_path` | character | Bifrost field `entity_link_layout_path`: entity link layout path. |
+| `entity_link_layout_tokens_id` | character | Bifrost field `entity_link_layout_tokens_id`: entity link layout tokens ID. |
+| `entity_link_layout_tokens_content_uri` | character | Bifrost field `entity_link_layout_tokens_content_uri`: entity link layout tokens content URI. |
+| `entity_link_analytics_name` | character | Bifrost field `entity_link_analytics_name`: entity link analytics name. |
+| `entity_link_analytics_sport` | character | Bifrost field `entity_link_analytics_sport`: entity link analytics sport. |
+| `entity_link_type` | character | Bifrost field `entity_link_type`: entity link type. |
+| `entity_link_alternate_image_url` | character | Bifrost field `entity_link_alternate_image_url`: entity link alternate image URL. |
+| `alternate_image_url` | character | Bifrost field `alternate_image_url`: alternate image URL. |
+| `date` | character | Bifrost field `date`: date. |
+| `source` | character | Bifrost field `source`: source. |
 
 ### Returns — `fox_bifrost_league_polls` / `foxBifrostLeaguePolls`
 
@@ -127,6 +236,23 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `section_last_updated` | character | Bifrost league_standings field `lastUpdated`. |
 | `section_metadata` | list | Bifrost league_standings field `metadata`. |
 
+### Returns — `fox_bifrost_league_stats` / `foxBifrostLeagueStats`
+
+| col_name | type | description |
+|---|---|---|
+| `title` | character | Bifrost field `title`: title. |
+| `leaders` | character | Bifrost field `leaders`: leaders. |
+
+### Returns — `fox_bifrost_league_stats_con` / `foxBifrostLeagueStatsCon`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | character | Bifrost field `id`: ID. |
+| `table_template` | character | Bifrost field `table_template`: table template. |
+| `table_headers` | character | Bifrost field `table_headers`: table headers. |
+| `table_rows` | character | Bifrost field `table_rows`: table rows. |
+| `legend_details` | character | Bifrost field `legend_details`: legend details. |
+
 ### Returns — `fox_bifrost_league_teamnav` / `foxBifrostLeagueTeamnav`
 
 | col_name | type | description |
@@ -159,6 +285,12 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `title` | character | Bifrost search_entities field `title`. |
 | `components` | list | Bifrost search_entities field `components`. |
 
+### Returns — `fox_bifrost_search_popular` / `foxBifrostSearchPopular`
+
+| col_name | type | description |
+|---|---|---|
+| `components` | character | Bifrost field `components`: components. |
+
 ### Returns — `fox_bifrost_team_gamelog` / `foxBifrostTeamGamelog`
 
 | col_name | type | description |
@@ -168,12 +300,42 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `legend` | list | Bifrost team_gamelog field `legend`. |
 | `more_link` | list | Bifrost team_gamelog field `moreLink`. |
 
+### Returns — `fox_bifrost_team_header` / `foxBifrostTeamHeader`
+
+| col_name | type | description |
+|---|---|---|
+| `text` | character | Bifrost field `text`: text. |
+
 ### Returns — `fox_bifrost_team_roster` / `foxBifrostTeamRoster`
 
 | col_name | type | description |
 |---|---|---|
 | `group_template` | character | Bifrost team_roster field `template`. |
 | `group_headers` | list | Bifrost team_roster field `headers`. |
+
+### Returns — `fox_bifrost_team_standings` / `foxBifrostTeamStandings`
+
+| col_name | type | description |
+|---|---|---|
+| `section_id` | character | Bifrost field `section_id`: section ID. |
+| `section_title` | character | Bifrost field `section_title`: section title. |
+| `section_page_title` | character | Bifrost field `section_page_title`: section page title. |
+| `section_last_updated` | character | Bifrost field `section_last_updated`: section last updated. |
+| `section_legend_details` | character | Bifrost field `section_legend_details`: section legend details. |
+| `section_metadata_parameters_standings_type` | character | Bifrost field `section_metadata_parameters_standings_type`: section metadata parameters standings type. |
+| `section_metadata_parameters_league_name` | character | Bifrost field `section_metadata_parameters_league_name`: section metadata parameters league name. |
+| `section_metadata_parameters_team_name` | character | Bifrost field `section_metadata_parameters_team_name`: section metadata parameters team name. |
+| `section_metadata_parameters_season` | character | Bifrost field `section_metadata_parameters_season`: section metadata parameters season. |
+| `template` | character | Bifrost field `template`: template. |
+| `headers` | character | Bifrost field `headers`: headers. |
+| `rows` | character | Bifrost field `rows`: rows. |
+
+### Returns — `fox_bifrost_team_stats` / `foxBifrostTeamStats`
+
+| col_name | type | description |
+|---|---|---|
+| `title` | character | Bifrost field `title`: title. |
+| `leaders` | character | Bifrost field `leaders`: leaders. |
 
 ### Returns — `fox_bifrost_topevents_scoreboard_segment` / `foxBifrostTopeventsScoreboardSegment`
 
@@ -189,3 +351,33 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `title_link` | list | Bifrost topevents_scoreboard_segment field `titleLink`. |
 | `header_text` | character | Bifrost topevents_scoreboard_segment field `headerText`. |
 | `header_link` | list | Bifrost topevents_scoreboard_segment field `headerLink`. |
+
+### Returns — `fox_bifrost_trending_articles` / `foxBifrostTrendingArticles`
+
+| col_name | type | description |
+|---|---|---|
+| `data_existing_total` | integer | Bifrost field `data_existing_total`: data existing total. |
+| `data_results` | character | Bifrost field `data_results`: data results. |
+| `data_request_type` | character | Bifrost field `data_request_type`: data request type. |
+| `data_request_content_type` | character | Bifrost field `data_request_content_type`: data request content type. |
+| `data_request_internal` | logical | Bifrost field `data_request_internal`: data request internal. |
+| `data_request_platform` | character | Bifrost field `data_request_platform`: data request platform. |
+| `data_request_params` | character | Bifrost field `data_request_params`: data request params. |
+| `data_request_path_params_proxy` | character | Bifrost field `data_request_path_params_proxy`: data request path params proxy. |
+| `data_status_success` | logical | Bifrost field `data_status_success`: data status success. |
+| `data_status_code` | integer | Bifrost field `data_status_code`: data status code. |
+
+### Returns — `fox_bifrost_trending_videos` / `foxBifrostTrendingVideos`
+
+| col_name | type | description |
+|---|---|---|
+| `data_existing_total` | integer | Bifrost field `data_existing_total`: data existing total. |
+| `data_results` | character | Bifrost field `data_results`: data results. |
+| `data_request_type` | character | Bifrost field `data_request_type`: data request type. |
+| `data_request_content_type` | character | Bifrost field `data_request_content_type`: data request content type. |
+| `data_request_internal` | logical | Bifrost field `data_request_internal`: data request internal. |
+| `data_request_platform` | character | Bifrost field `data_request_platform`: data request platform. |
+| `data_request_params` | character | Bifrost field `data_request_params`: data request params. |
+| `data_request_path_params_proxy` | character | Bifrost field `data_request_path_params_proxy`: data request path params proxy. |
+| `data_status_success` | logical | Bifrost field `data_status_success`: data status success. |
+| `data_status_code` | integer | Bifrost field `data_status_code`: data status code. |
