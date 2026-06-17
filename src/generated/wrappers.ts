@@ -7532,6 +7532,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_standings",
+    "returnsSchema": "native/nfl_api/standings",
     "auth": true
   },
   {
@@ -7555,6 +7556,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_rosters",
+    "returnsSchema": "native/nfl_api/rosters",
     "auth": true
   },
   {
@@ -7578,6 +7580,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_teams_history",
+    "returnsSchema": "native/nfl_api/teams_history",
     "auth": true
   },
   {
@@ -7594,6 +7597,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_nfl_team",
+    "returnsSchema": "native/nfl_api/team",
     "auth": true
   },
   {
@@ -7617,6 +7621,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_nfl_weeks",
+    "returnsSchema": "native/nfl_api/weeks",
     "auth": true
   },
   {
@@ -7633,6 +7638,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_nfl_weeks_by_date",
+    "returnsSchema": "native/nfl_api/weeks_by_date",
     "auth": true
   },
   {
@@ -7656,6 +7662,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_combine_profiles",
+    "returnsSchema": "native/nfl_api/combine_profiles",
     "auth": true
   },
   {
@@ -7679,6 +7686,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_draft_picks",
+    "returnsSchema": "native/nfl_api/draft_picks",
     "auth": true
   },
   {
@@ -7707,6 +7715,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_injuries",
+    "returnsSchema": "native/nfl_api/injuries",
     "auth": true
   },
   {
@@ -7735,6 +7744,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_game_summaries",
+    "returnsSchema": "native/nfl_api/game_summaries",
     "auth": true
   },
   {
@@ -7783,6 +7793,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_nfl_weekly_game_details",
+    "returnsSchema": "native/nfl_api/weekly_game_details",
     "auth": true
   }
 ];

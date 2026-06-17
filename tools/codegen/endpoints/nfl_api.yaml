@@ -14,6 +14,7 @@ endpoints:
 - short: standings
   path: /football/v2/standings
   parser: parse_nfl_standings
+  returns_schema: native/nfl_api/standings
   extra_params:
   - {name: season, query_key: season, default: 2024}
   - {name: season_type, query_key: seasonType, default: REG}
@@ -22,46 +23,54 @@ endpoints:
 - short: rosters
   path: /football/v2/rosters
   parser: parse_nfl_rosters
+  returns_schema: native/nfl_api/rosters
   extra_params:
   - {name: season, query_key: season, default: 2024}
   - {name: limit, query_key: limit, default: 40}
 - short: teams_history
   path: /football/v2/teams/history
   parser: parse_nfl_teams_history
+  returns_schema: native/nfl_api/teams_history
   extra_params:
   - {name: season, query_key: season, default: 2024}
   - {name: limit, query_key: limit, default: 40}
 - short: team
   path: /football/v2/teams/{team_id}
   parser: parse_nfl_team
+  returns_schema: native/nfl_api/team
   path_params:
   - {name: team_id, required: true}
 - short: weeks
   path: /football/v2/weeks/season/{season}/seasonType/{season_type}
   parser: parse_nfl_weeks
+  returns_schema: native/nfl_api/weeks
   path_params:
   - {name: season, required: false, default: 2024}
   - {name: season_type, required: false, default: REG}
 - short: weeks_by_date
   path: /football/v2/weeks/date/{date}
   parser: parse_nfl_weeks_by_date
+  returns_schema: native/nfl_api/weeks_by_date
   path_params:
   - {name: date, required: true}
 - short: combine_profiles
   path: /football/v2/combine/profiles
   parser: parse_nfl_combine_profiles
+  returns_schema: native/nfl_api/combine_profiles
   extra_params:
   - {name: year, query_key: year, default: 2024}
   - {name: limit, query_key: limit, default: 40}
 - short: draft_picks
   path: /football/v2/draft/picks/report
   parser: parse_nfl_draft_picks
+  returns_schema: native/nfl_api/draft_picks
   extra_params:
   - {name: year, query_key: year, default: 2024}
   - {name: limit, query_key: limit, default: 40}
 - short: injuries
   path: /football/v2/injuries
   parser: parse_nfl_injuries
+  returns_schema: native/nfl_api/injuries
   extra_params:
   - {name: season, query_key: season, default: 2024}
   - {name: season_type, query_key: seasonType, default: REG}
@@ -69,6 +78,7 @@ endpoints:
 - short: game_summaries
   path: /football/v2/stats/live/game-summaries
   parser: parse_nfl_game_summaries
+  returns_schema: native/nfl_api/game_summaries
   extra_params:
   - {name: season, query_key: season, default: 2024}
   - {name: season_type, query_key: seasonType, default: REG}
@@ -76,6 +86,7 @@ endpoints:
 - short: weekly_game_details
   path: /football/v2/experience/weekly-game-details
   parser: parse_nfl_weekly_game_details
+  returns_schema: native/nfl_api/weekly_game_details
   extra_params:
   - {name: season, query_key: season, default: 2024}
   - {name: season_type, query_key: type, default: REG}
