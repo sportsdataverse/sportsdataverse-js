@@ -1,6 +1,7 @@
 import { HOSTS, get } from "./client.js";
 import type { LeagueConfig, Scope, WrapperDef } from "./types.js";
 import { WRAPPERS } from "../generated/wrappers.js";
+import { parserForEndpoint } from "../parsers/espn.js";
 
 /** snake_case -> camelCase (e.g. `event_id` -> `eventId`, `espn_nba_scoreboard` -> `espnNbaScoreboard`). */
 export function toCamel(s: string): string {
@@ -108,14 +109,33 @@ export function resolveRequest(
   };
 }
 
-/** Resolve a wrapper for a league and fetch the raw ESPN JSON. */
-export function callWrapper(
+/**
+ * Resolve a wrapper for a league, fetch the raw ESPN JSON, and — only when the
+ * caller passes `{ parsed: true }` AND a parser is registered for this endpoint's
+ * `short` name — run the payload through that parser. Omitting `parsed` returns
+ * the raw payload unchanged, so the dispatch is strictly additive (mirrors the
+ * native flat wrappers + sdv-py's `return_parsed=True`).
+ *
+ * The `summary` dispatcher additionally honours a `section` control param:
+ * `{ parsed: true, section: "boxscore_team" }` returns just that sub-frame, while
+ * `{ parsed: true }` alone returns the dict of all 21 summary sub-frames.
+ * `parsed`/`section` are control params, not declared query params, so
+ * `cleanQuery` already keeps them out of the request URL.
+ */
+export async function callWrapper(
   def: WrapperDef,
   cfg: LeagueConfig,
   params: Record<string, any> = {}
 ): Promise<any> {
   const { url, query } = resolveRequest(def, cfg, params);
-  return get(url, { params: query });
+  const raw = await get(url, { params: query });
+  if (!params.parsed) return raw;
+  const parser = parserForEndpoint(def.short);
+  if (!parser) return raw;
+  if (def.short === "summary") {
+    return (parser as (p: any, section?: string) => any)(raw, params.section);
+  }
+  return (parser as (p: any) => any)(raw);
 }
 
 /** All wrappers grouped by scope (built from the generated table). */

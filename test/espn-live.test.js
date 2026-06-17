@@ -29,3 +29,37 @@ run('ESPN live smoke (all leagues)', function () {
         });
     }
 });
+
+// Live check of the `{ parsed: true }` dispatch wired into callWrapper (the ESPN
+// analogue of the native flat parsed dispatch + sdv-py's return_parsed=True).
+// Omitting `parsed` returns the raw Dict; `{ parsed: true }` routes through the
+// parser registered for the endpoint's short name and returns tidy rows; the
+// summary dispatcher returns a dict of 21 sub-frames (or one, with `section`).
+run('ESPN parsed dispatch (NBA)', function () {
+    this.timeout(30000);
+
+    it('scoreboard: raw by default, tidy rows with { parsed: true }', async () => {
+        const raw = await sdv.nba.espn_nba_scoreboard({});
+        should(raw).be.an.Object();
+        should(raw).have.property('leagues'); // raw payload, additive
+        const rows = await sdv.nba.espn_nba_scoreboard({ parsed: true });
+        should(rows).be.an.Array(); // parser -> array of row objects
+    });
+
+    it('summary dispatcher: dict of sub-frames, or one frame with `section`', async () => {
+        const sb = await sdv.nba.espn_nba_scoreboard({});
+        const eventId = sb?.events?.[0]?.id;
+        if (!eventId) return this.skip(); // no games today -> nothing to summarise
+        const all = await sdv.nba.espn_nba_summary({ event_id: eventId, parsed: true });
+        should(all).be.an.Object();
+        should(all).not.be.an.Array(); // section omitted -> dict keyed by section
+        should(all).have.property('boxscore_team');
+        should(all).have.property('header');
+        const one = await sdv.nba.espn_nba_summary({
+            event_id: eventId,
+            parsed: true,
+            section: 'boxscore_team',
+        });
+        should(one).be.an.Array(); // a single section -> rows
+    });
+});
