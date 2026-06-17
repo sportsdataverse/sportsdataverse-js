@@ -34,6 +34,18 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
   wrappers** now accept the same `{ parsed: true }` flag — a faithful port of
   `sdv-py`'s `_common_espn_parsers` (22 parsers covering all 116 ESPN endpoints,
   incl. the 21-sub-frame `summary` dispatcher with a `section` arg).
+- **Five cross-sport provider families.** Beyond ESPN + the native league APIs,
+  five independent providers each get a standalone `sdv.<ns>.*` namespace +
+  reference page, generated from a canonical OpenAPI spec via a reusable
+  **OpenAPI→endpoint-YAML transform**:
+  - **The Odds API** (`sdv.odds.*`, 10) — odds/scores; `apiKey` query param.
+  - **247Sports** (`sdv.recruiting.*`, 25) — recruiting rankings (caller JWT).
+  - **CBS Sports** (`sdv.cbs.*`, 82) — public NAPI, keyless.
+  - **Fox Sports** (`sdv.fox.*`, 38) — Bifrost API (`{sport}`); public apikey.
+  - **Yahoo Sports** (`sdv.yahoo.*`, 107) — editorial + shangrila stats-graph.
+
+  **517 flat-API wrappers across 13 families** in total; `{ parsed: true }` works
+  for every one.
 - **Dual-case naming.** Every generated wrapper (ESPN and native) is exposed
   under BOTH its snake_case name (`mlb_api_teams`, py/R parity) and its camelCase
   canonical name (`mlbApiTeams`, idiomatic JS) — same function, either name.
@@ -44,7 +56,14 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
   with server-side token minting for NFL.com and content-type passthrough for
   Statcast CSV/HTML). A shared **ESPN parsed returns** page documents the columns
   each of the 22 ESPN parsers yields (documented once by parser, since the 116
-  endpoints share them), linked from every league page.
+  endpoints share them), linked from every league page. The playground now also
+  has a **Raw/Parsed toggle** (tidy rows render as a sortable table), **shareable
+  deep-link URLs**, and an **Examples menu** spanning ESPN, the native APIs, and
+  all five providers.
+- **Getting-started guides + RunKit notebooks.** Per-area recipe pages under
+  `/docs/guides/` (quickstart, NBA/WNBA/college-basketball/NFL/MLB/NHL/CFB/soccer,
+  providers) with runnable raw-vs-parsed snippets, "Open in playground" deep-links,
+  and embedded RunKit live notebooks.
 - **Migrated to TypeScript.** The package is authored in TypeScript and ships
   type declarations (`.d.ts`) alongside the ESM build. The compiler caught
   several latent bugs during the port.
