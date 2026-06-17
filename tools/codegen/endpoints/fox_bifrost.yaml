@@ -1,0 +1,387 @@
+# Fox Sports "Bifrost" API (api.foxsports.com) flat-API family.
+#
+# AUTO-EMITTED skeleton from sdv-swagger/foxsports-api-openapi.yaml via
+#   node tools/codegen/from-openapi.mjs <spec> --api fox_bifrost
+# then HAND-CLEANED: the transform does not resolve `$ref` parameters, so it
+# dropped every path param and emitted only one query param per endpoint. The
+# clean-up below restores the {sport}/{eventId}/{teamId}/... path params,
+# trims the verbose `get_bifrost_sport_*` operationId stems down to readable
+# `short` names (scoreboard / event_data / team_roster / ...), and surfaces the
+# query params from the spec's resolved `$ref`s.
+#
+# Merges onto the standalone `fox` namespace (sdv.fox.*) — NOT a league.
+# Methods: sdv.fox.fox_bifrost_<short> / foxBifrost<Short>.
+#
+# AUTH: Fox Bifrost is a PUBLIC apikey + api-version query pair (no account /
+# bearer token). The spec's `securitySchemes` are three apiKey-in-query schemes
+# (`dataKey` / `feedKey` — both param `apikey` — and `apiVersion` — param
+# `api-version`). So this family is NOT flagged `auth: true`; instead every
+# endpoint declares `apikey` + `api_version` (query keys `apikey` / `api-version`)
+# as extra_params WITH the spec's documented defaults, so calls work out of the
+# box. Bifrost data-tier endpoints default to the data key; the feed-tier
+# endpoints (trending / polls / fs) default to the feed key.
+#
+# RESPONSES: Fox's spec ships typed `components.schemas` inferred from captured
+# responses across 11 sports, so the returns schemas under
+# tools/codegen/schemas/native/fox_bifrost/ enumerate real columns where the
+# 200 response names a schema; the untyped (`object`) responses carry an empty
+# `columns: []` (parser snake_cases/flattens whatever the payload ships).
+# Parsers (src/parsers/fox_bifrost.ts): the generic `parse_fox_bifrost_list`
+# (unwraps the Bifrost group/section module shell and flattens the first list)
+# is the default; scoreboard / standings / event / team_roster get dedicated
+# parsers that unroll their nested-list shapes.
+api: fox_bifrost
+host: https://api.foxsports.com
+endpoints:
+# ---- scoreboard ---------------------------------------------------------
+- short: scoreboard
+  path: /bifrost/v1/{sport}/scoreboard/main
+  parser: parse_fox_bifrost_scoreboard
+  returns_schema: native/fox_bifrost/scoreboard
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: group_id, query_key: groupId}
+- short: scorechip
+  path: /bifrost/v1/{sport}/scorechip/{chip_id}
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/scorechip
+  path_params:
+  - {name: sport, required: true}
+  - {name: chip_id, required: true}  # spec token {chipId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: topevents_scoreboard_segment
+  path: /bifrost/v1/topevents/scoreboard/segment/{segment}
+  parser: parse_fox_bifrost_scoreboard
+  returns_schema: native/fox_bifrost/topevents_scoreboard_segment
+  path_params:
+  - {name: segment, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+# ---- league hub ---------------------------------------------------------
+- short: league_conferences
+  path: /bifrost/v1/{sport}/league/conferences
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/league_conferences
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_header
+  path: /bifrost/v1/{sport}/league/header
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/league_header
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_odds
+  path: /bifrost/v1/{sport}/league/odds
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/league_odds
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: group_id, query_key: groupId}
+- short: league_playernews
+  path: /bifrost/v1/{sport}/league/playernews
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/league_playernews
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_polls
+  path: /bifrost/v1/{sport}/league/polls
+  parser: parse_fox_bifrost_standings
+  returns_schema: native/fox_bifrost/league_polls
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_schedule
+  path: /bifrost/v1/{sport}/league/schedule
+  parser: parse_fox_bifrost_scoreboard
+  returns_schema: native/fox_bifrost/league_schedule
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_scores
+  path: /bifrost/v1/{sport}/league/scores
+  parser: parse_fox_bifrost_scoreboard
+  returns_schema: native/fox_bifrost/league_scores
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_scores_segment
+  path: /bifrost/v1/{sport}/league/scores-segment/{segment_id}
+  parser: parse_fox_bifrost_scoreboard
+  returns_schema: native/fox_bifrost/league_scores_segment
+  path_params:
+  - {name: sport, required: true}
+  - {name: segment_id, required: true}  # spec token {segmentId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: group_id, query_key: groupId}
+- short: league_standings
+  path: /bifrost/v1/{sport}/league/standings
+  parser: parse_fox_bifrost_standings
+  returns_schema: native/fox_bifrost/league_standings
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_stats
+  path: /bifrost/v1/{sport}/league/stats
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/league_stats
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: league_stats_con
+  path: /bifrost/v1/{sport}/league/stats-con/{who}/{category}/{page}
+  parser: parse_fox_bifrost_standings
+  returns_schema: native/fox_bifrost/league_stats_con
+  path_params:
+  - {name: sport, required: true}
+  - {name: who, required: true}
+  - {name: category, required: true}
+  - {name: page, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: group_id, query_key: groupId}
+- short: league_teamnav
+  path: /bifrost/v1/{sport}/league/teamnav
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/league_teamnav
+  path_params:
+  - {name: sport, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+# ---- event --------------------------------------------------------------
+- short: event_data
+  path: /bifrost/v1/{sport}/event/{event_id}/data
+  parser: parse_fox_bifrost_event
+  returns_schema: native/fox_bifrost/event_data
+  path_params:
+  - {name: sport, required: true}
+  - {name: event_id, required: true}  # spec token {eventId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: event_matchup
+  path: /bifrost/v1/{sport}/event/{event_id}/matchup
+  parser: parse_fox_bifrost_event
+  returns_schema: native/fox_bifrost/event_matchup
+  path_params:
+  - {name: sport, required: true}
+  - {name: event_id, required: true}  # spec token {eventId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: event_odds
+  path: /bifrost/v1/{sport}/event/{event_id}/odds
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/event_odds
+  path_params:
+  - {name: sport, required: true}
+  - {name: event_id, required: true}  # spec token {eventId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: event_recap
+  path: /bifrost/v1/{sport}/event/{event_id}/recap
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/event_recap
+  path_params:
+  - {name: sport, required: true}
+  - {name: event_id, required: true}  # spec token {eventId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: event_standings
+  path: /bifrost/v1/{sport}/event/{event_id}/standings
+  parser: parse_fox_bifrost_standings
+  returns_schema: native/fox_bifrost/event_standings
+  path_params:
+  - {name: sport, required: true}
+  - {name: event_id, required: true}  # spec token {eventId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+# ---- team ---------------------------------------------------------------
+- short: team_gamelog
+  path: /bifrost/v1/{sport}/team/{team_id}/gamelog
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/team_gamelog
+  path_params:
+  - {name: sport, required: true}
+  - {name: team_id, required: true}  # spec token {teamId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: team_header
+  path: /bifrost/v1/{sport}/team/{team_id}/header
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/team_header
+  path_params:
+  - {name: sport, required: true}
+  - {name: team_id, required: true}  # spec token {teamId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: team_roster
+  path: /bifrost/v1/{sport}/team/{team_id}/roster
+  parser: parse_fox_bifrost_team_roster
+  returns_schema: native/fox_bifrost/team_roster
+  path_params:
+  - {name: sport, required: true}
+  - {name: team_id, required: true}  # spec token {teamId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: team_standings
+  path: /bifrost/v1/{sport}/team/{team_id}/standings
+  parser: parse_fox_bifrost_standings
+  returns_schema: native/fox_bifrost/team_standings
+  path_params:
+  - {name: sport, required: true}
+  - {name: team_id, required: true}  # spec token {teamId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: team_stats
+  path: /bifrost/v1/{sport}/team/{team_id}/stats
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/team_stats
+  path_params:
+  - {name: sport, required: true}
+  - {name: team_id, required: true}  # spec token {teamId} snake-cased to match name
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+# ---- explore / search ---------------------------------------------------
+- short: explore_browse
+  path: /bifrost/v1/explore/browse/{section}/main
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/explore_browse
+  path_params:
+  - {name: section, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: explore_favorite
+  path: /bifrost/v1/explore/favorite/{section}/main
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/explore_favorite
+  path_params:
+  - {name: section, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: explore_odds
+  path: /bifrost/v1/explore/odds/main
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/explore_odds
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: search_content
+  path: /bifrost/v1/search/content
+  parser: parse_fox_bifrost_search
+  returns_schema: native/fox_bifrost/search_content
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: text, query_key: text}
+- short: search_entities
+  path: /bifrost/v1/search/entities
+  parser: parse_fox_bifrost_search
+  returns_schema: native/fox_bifrost/search_entities
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: text, query_key: text}
+- short: search_popular
+  path: /bifrost/v1/search/popular
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/search_popular
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+# ---- feed tier (trending / polls / fs) — default to the FEED key --------
+- short: trending_articles
+  path: /bifrost/v1/general/trending/articles
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/trending_articles
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: duration, query_key: duration, default: 4}
+  - {name: tags, query_key: tags}
+- short: trending_videos
+  path: /bifrost/v1/general/trending/videos
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/trending_videos
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  - {name: duration, query_key: duration, default: 4}
+  - {name: max_items, query_key: maxItems, default: 12}
+- short: foxpolls
+  path: /foxpolls/v1/polls
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/foxpolls
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: associated_entity_ids, query_key: associatedEntityIds}
+  - {name: include_answers, query_key: includeAnswers, default: true}
+- short: fs_feed
+  path: /fs/feed
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/fs_feed
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: fs_images
+  path: /fs/images
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/fs_images
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: fs_layouts
+  path: /fs/layouts
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/fs_layouts
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+- short: fs_videos
+  path: /fs/videos
+  parser: parse_fox_bifrost_list
+  returns_schema: native/fox_bifrost/fs_videos
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}

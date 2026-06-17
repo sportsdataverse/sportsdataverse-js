@@ -23,6 +23,7 @@ const FLAT_API_NAMESPACES = {
   odds_api: 'odds',
   sports247: 'recruiting',
   cbs_napi: 'cbs',
+  fox_bifrost: 'fox',
 };
 
 /** Fill every required path param so the URL fully resolves. */

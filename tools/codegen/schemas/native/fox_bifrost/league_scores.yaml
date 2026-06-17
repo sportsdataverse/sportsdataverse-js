@@ -1,0 +1,10 @@
+# Fox Sports Bifrost — generated returns schema. Columns are derived from the
+# spec's captured `components.schemas` (the item props of the list the parser
+# flattens), snake_cased to match the parser's output. Untyped (`object`)
+# responses carry `columns: []` (the parser flattens whatever the payload ships).
+schema: league_scores
+kind: dataframe
+columns:
+- name: group_title
+  type: character
+  description: Bifrost league_scores field `title`.

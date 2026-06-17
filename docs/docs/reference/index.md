@@ -56,6 +56,7 @@ Cross-sport providers that aren't tied to a single ESPN league. They get their o
 | [odds](./odds) | The Odds API | 10 |
 | [recruiting](./recruiting) | 247Sports | 25 |
 | [cbs](./cbs) | CBS Sports | 82 |
+| [fox](./fox) | Fox Sports | 38 |
 
 :::tip Same call, every league
 ```js

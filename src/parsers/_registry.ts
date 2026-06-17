@@ -95,6 +95,14 @@ import {
   parse_cbs_napi_standings,
   parse_cbs_napi_odds,
 } from "./cbs_napi.js";
+import {
+  parse_fox_bifrost_list,
+  parse_fox_bifrost_scoreboard,
+  parse_fox_bifrost_standings,
+  parse_fox_bifrost_event,
+  parse_fox_bifrost_team_roster,
+  parse_fox_bifrost_search,
+} from "./fox_bifrost.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -191,6 +199,15 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_cbs_napi_scoreboard,
   parse_cbs_napi_standings,
   parse_cbs_napi_odds,
+  // ---- Fox Sports Bifrost (api.foxsports.com/bifrost/v1) ----
+  // Generic module-shell flattener (the default for most endpoints).
+  parse_fox_bifrost_list,
+  // Dedicated parsers (nested-list unrolling logic).
+  parse_fox_bifrost_scoreboard,
+  parse_fox_bifrost_standings,
+  parse_fox_bifrost_event,
+  parse_fox_bifrost_team_roster,
+  parse_fox_bifrost_search,
 };
 
 /**

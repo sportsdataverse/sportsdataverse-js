@@ -1,0 +1,22 @@
+# Fox Sports Bifrost — generated returns schema. Columns are derived from the
+# spec's captured `components.schemas` (the item props of the list the parser
+# flattens), snake_cased to match the parser's output. Untyped (`object`)
+# responses carry `columns: []` (the parser flattens whatever the payload ships).
+schema: league_polls
+kind: dataframe
+columns:
+- name: section_id
+  type: character
+  description: Bifrost league_polls field `id`.
+- name: section_title
+  type: character
+  description: Bifrost league_polls field `title`.
+- name: section_page_title
+  type: character
+  description: Bifrost league_polls field `pageTitle`.
+- name: section_last_updated
+  type: character
+  description: Bifrost league_polls field `lastUpdated`.
+- name: section_metadata
+  type: list
+  description: Bifrost league_polls field `metadata`.
