@@ -43,6 +43,14 @@ the matching league namespace:
 - The [`@tidyjs/tidy`](https://github.com/pbeshai/tidy) toolkit is re-exported
   (`import { tidy } from 'sportsdataverse'`) so the parsed tidy arrays compose
   directly with grammar-of-data-manipulation verbs (`groupBy`, `summarize`, …).
+- **ESPN parsed dispatch.** The cross-league ESPN wrappers now accept the same
+  `{ parsed: true }` flag — a faithful port of `sportsdataverse-py`'s
+  `_common_espn_parsers` (22 parsers: scoreboard / standings / rosters / leaders /
+  athlete deep-dives / the 21-sub-frame `summary` dispatcher, plus two generics
+  for the Core v2 list + single-resource long tail). All **116** ESPN endpoints
+  route through these parsers; `summary` additionally honours a `section` arg
+  (`{ parsed: true, section: 'boxscore_team' }`). Omitting `parsed` is the
+  unchanged raw-`Dict` behavior.
 
 ### Dual-case naming
 
@@ -54,6 +62,10 @@ the matching league namespace:
 
 - Generated reference pages now include a **Native API — `<family>`** section per
   league (host, path, params, parser, auth gate).
+- A shared **ESPN parsed returns** reference page documents the `col_name | type |
+  description` columns each of the 22 ESPN parsers produces (the 116 endpoints
+  share them, so they're documented once by parser rather than repeated per
+  endpoint), with every league page linking to it.
 - The live [playground](https://js.sportsdataverse.org/playground) groups native
   endpoints under their league by family and runs them through a flat-aware
   serverless proxy — host-allowlisted (derived from the generated metadata), with

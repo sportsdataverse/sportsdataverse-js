@@ -30,7 +30,10 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
   `parsed` is the unchanged raw-response behavior, matching `sdv-py`'s
   `return_parsed=True`. The [`@tidyjs/tidy`](https://github.com/pbeshai/tidy)
   toolkit is re-exported (`import { tidy } from 'sportsdataverse'`) so the parsed
-  arrays compose directly with its grammar-of-data verbs.
+  arrays compose directly with its grammar-of-data verbs. The **cross-league ESPN
+  wrappers** now accept the same `{ parsed: true }` flag — a faithful port of
+  `sdv-py`'s `_common_espn_parsers` (22 parsers covering all 116 ESPN endpoints,
+  incl. the 21-sub-frame `summary` dispatcher with a `section` arg).
 - **Dual-case naming.** Every generated wrapper (ESPN and native) is exposed
   under BOTH its snake_case name (`mlb_api_teams`, py/R parity) and its camelCase
   canonical name (`mlbApiTeams`, idiomatic JS) — same function, either name.
@@ -39,7 +42,9 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
   the live [playground](/playground) groups native endpoints under their league by
   family and runs them through a flat-aware serverless proxy (host-allowlisted,
   with server-side token minting for NFL.com and content-type passthrough for
-  Statcast CSV/HTML).
+  Statcast CSV/HTML). A shared **ESPN parsed returns** page documents the columns
+  each of the 22 ESPN parsers yields (documented once by parser, since the 116
+  endpoints share them), linked from every league page.
 - **Migrated to TypeScript.** The package is authored in TypeScript and ships
   type declarations (`.d.ts`) alongside the ESM build. The compiler caught
   several latent bugs during the port.
