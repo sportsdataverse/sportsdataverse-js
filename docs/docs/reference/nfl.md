@@ -12,9 +12,9 @@ sidebar_position: 6
 - **sport slug:** `football`
 - **league slug:** `nfl`
 - **scopes:** `universal`, `football`
-- **wrappers:** 112
+- **wrappers:** 112 *(+ 11 native)*
 
-Every endpoint is called as `sdv.nfl.espnNfl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_nfl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.nfl.espnNfl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_nfl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*. This league also ships **11** native (non-ESPN) API wrappers — see the **Native API** sections below.
 
 ```js
 import sdv from 'sportsdataverse';
@@ -143,3 +143,21 @@ await sdv.nfl.espnNflScoreboard({});
 |---|---|---|---|
 | `espnNflSeasonQbr` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}[/groups/{group_id}]/qbr/{split}` | `season`\*, `season_type`, `group_id`, `split` | — |
 | `espnNflSeasonQbrWeek` | `core_v2` `/football/leagues/nfl/seasons/{season}/types/{season_type}/weeks/{week}/qbr/{split}` | `season`\*, `week`\*, `season_type`, `split` | — |
+
+## Native API — NFL.com Shield API
+
+Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.nfl.com`. Each method is exposed under BOTH `nfl_api_<endpoint>` (snake_case, py/R parity) and `nflApi<Endpoint>` (camelCase canonical) on `sdv.nfl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** this family mints a bearer token automatically before each call (no credentials required).
+
+| Method | HTTP | Path params | Query params | Parser | Auth |
+|---|---|---|---|---|---|
+| `nfl_api_combine_profiles` / `nflApiCombineProfiles` | `https://api.nfl.com/football/v2/combine/profiles` | — | `year`, `limit` | `parse_nfl_combine_profiles` | yes |
+| `nfl_api_draft_picks` / `nflApiDraftPicks` | `https://api.nfl.com/football/v2/draft/picks/report` | — | `year`, `limit` | `parse_nfl_draft_picks` | yes |
+| `nfl_api_game_summaries` / `nflApiGameSummaries` | `https://api.nfl.com/football/v2/stats/live/game-summaries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_game_summaries` | yes |
+| `nfl_api_injuries` / `nflApiInjuries` | `https://api.nfl.com/football/v2/injuries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_injuries` | yes |
+| `nfl_api_rosters` / `nflApiRosters` | `https://api.nfl.com/football/v2/rosters` | — | `season`, `limit` | `parse_nfl_rosters` | yes |
+| `nfl_api_standings` / `nflApiStandings` | `https://api.nfl.com/football/v2/standings` | — | `season`, `season_type` → `seasonType`, `week`, `limit` | `parse_nfl_standings` | yes |
+| `nfl_api_team` / `nflApiTeam` | `https://api.nfl.com/football/v2/teams/{team_id}` | `team_id`\* | — | `parse_nfl_team` | yes |
+| `nfl_api_teams_history` / `nflApiTeamsHistory` | `https://api.nfl.com/football/v2/teams/history` | — | `season`, `limit` | `parse_nfl_teams_history` | yes |
+| `nfl_api_weekly_game_details` / `nflApiWeeklyGameDetails` | `https://api.nfl.com/football/v2/experience/weekly-game-details` | — | `season`, `season_type` → `type`, `week`, `include_drive_chart` → `includeDriveChart`, `include_replays` → `includeReplays`, `include_standings` → `includeStandings`, `include_tagged_videos` → `includeTaggedVideos` | `parse_nfl_weekly_game_details` | yes |
+| `nfl_api_weeks` / `nflApiWeeks` | `https://api.nfl.com/football/v2/weeks/season/{season}/seasonType/{season_type}` | `season`, `season_type` | — | `parse_nfl_weeks` | yes |
+| `nfl_api_weeks_by_date` / `nflApiWeeksByDate` | `https://api.nfl.com/football/v2/weeks/date/{date}` | `date`\* | — | `parse_nfl_weeks_by_date` | yes |

@@ -1996,6 +1996,15 @@
     "nhl_records": "https://records.nhl.com/site/api",
     "nfl_api": "https://api.nfl.com"
   },
+  "flatLeagues": {
+    "mlb_api": "mlb",
+    "mlb_statcast": "mlb",
+    "nhl_api_web": "nhl",
+    "nhl_edge": "nhl",
+    "nhl_stats_rest": "nhl",
+    "nhl_records": "nhl",
+    "nfl_api": "nfl"
+  },
   "flatApis": [
     {
       "short": "teams",

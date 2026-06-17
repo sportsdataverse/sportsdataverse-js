@@ -12,9 +12,9 @@ sidebar_position: 8
 - **sport slug:** `hockey`
 - **league slug:** `nhl`
 - **scopes:** `universal`
-- **wrappers:** 110
+- **wrappers:** 110 *(+ 127 native)*
 
-Every endpoint is called as `sdv.nhl.espnNhl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_nhl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*.
+Every endpoint is called as `sdv.nhl.espnNhl<Endpoint>(params)`. Each method is also available under its snake_case name (`espn_nhl_<endpoint>`) for parity with the Python / R packages. Parameters accept snake_case or camelCase. Required path params are marked \*. This league also ships **127** native (non-ESPN) API wrappers — see the **Native API** sections below.
 
 ```js
 import sdv from 'sportsdataverse';
@@ -136,3 +136,158 @@ await sdv.nhl.espnNhlScoreboard({});
 | `espnNhlTransactions` | `site_v2` `/hockey/nhl/transactions` | — | — |
 | `espnNhlVenue` | `core_v2` `/hockey/leagues/nhl/venues/{venue_id}` | `venue_id`\* | — |
 | `espnNhlVenues` | `core_v2` `/hockey/leagues/nhl/venues` | — | `limit` |
+
+## Native API — NHL api-web (game feed)
+
+Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH `nhl_api_web_<endpoint>` (snake_case, py/R parity) and `nhlApiWeb<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+
+| Method | HTTP | Path params | Query params | Parser | Auth |
+|---|---|---|---|---|---|
+| `nhl_api_web_boxscore` / `nhlApiWebBoxscore` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/boxscore` | `game_id`\* | — | `parse_nhl_web_boxscore` | — |
+| `nhl_api_web_club_schedule_month` / `nhlApiWebClubScheduleMonth` | `https://api-web.nhle.com/v1/club-schedule/{team}/month/{month}` | `team`\*, `month` | — | `parse_nhl_web_club_schedule` | — |
+| `nhl_api_web_club_schedule_season` / `nhlApiWebClubScheduleSeason` | `https://api-web.nhle.com/v1/club-schedule-season/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_club_schedule` | — |
+| `nhl_api_web_club_schedule_week` / `nhlApiWebClubScheduleWeek` | `https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` | `team`\*, `date` | — | `parse_nhl_web_club_schedule` | — |
+| `nhl_api_web_club_stats` / `nhlApiWebClubStats` | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` | — |
+| `nhl_api_web_club_stats_season` / `nhlApiWebClubStatsSeason` | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` | — |
+| `nhl_api_web_draft_picks` / `nhlApiWebDraftPicks` | `https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` | `year`\*, `round_` | — | `parse_nhl_web_draft_picks` | — |
+| `nhl_api_web_draft_picks_now` / `nhlApiWebDraftPicksNow` | `https://api-web.nhle.com/v1/draft/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
+| `nhl_api_web_draft_rankings` / `nhlApiWebDraftRankings` | `https://api-web.nhle.com/v1/draft/rankings/{year}/{category}` | `year`\*, `category` | — | `parse_nhl_web_draft_rankings` | — |
+| `nhl_api_web_draft_rankings_now` / `nhlApiWebDraftRankingsNow` | `https://api-web.nhle.com/v1/draft/rankings/now` | — | — | `parse_nhl_web_draft_rankings` | — |
+| `nhl_api_web_draft_tracker_picks_now` / `nhlApiWebDraftTrackerPicksNow` | `https://api-web.nhle.com/v1/draft-tracker/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
+| `nhl_api_web_goalie_leaders` / `nhlApiWebGoalieLeaders` | `https://api-web.nhle.com/v1/goalie-stats-leaders/{season}/{game_type}` | `season`, `game_type` | — | `parse_nhl_web_leaders` | — |
+| `nhl_api_web_landing` / `nhlApiWebLanding` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/landing` | `game_id`\* | — | `parse_nhl_web_landing` | — |
+| `nhl_api_web_pbp` / `nhlApiWebPbp` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/play-by-play` | `game_id`\* | — | `parse_nhl_web_pbp` | — |
+| `nhl_api_web_player_game_log` / `nhlApiWebPlayerGameLog` | `https://api-web.nhle.com/v1/player/{player_id}/game-log/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_nhl_web_player_game_log` | — |
+| `nhl_api_web_player_landing` / `nhlApiWebPlayerLanding` | `https://api-web.nhle.com/v1/player/{player_id}/landing` | `player_id`\* | — | `parse_nhl_web_player_landing` | — |
+| `nhl_api_web_player_spotlight` / `nhlApiWebPlayerSpotlight` | `https://api-web.nhle.com/v1/player-spotlight` | — | — | `parse_nhl_web_player_spotlight` | — |
+| `nhl_api_web_playoff_series` / `nhlApiWebPlayoffSeries` | `https://api-web.nhle.com/v1/schedule/playoff-series/{season}/{series_letter}` | `season`\*, `series_letter`\* | — | `parse_nhl_web_playoff_series` | — |
+| `nhl_api_web_right_rail` / `nhlApiWebRightRail` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` | — |
+| `nhl_api_web_roster` / `nhlApiWebRoster` | `https://api-web.nhle.com/v1/roster/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_roster` | — |
+| `nhl_api_web_roster_season` / `nhlApiWebRosterSeason` | `https://api-web.nhle.com/v1/roster-season/{team}` | `team`\* | — | `parse_nhl_web_roster` | — |
+| `nhl_api_web_schedule` / `nhlApiWebSchedule` | `https://api-web.nhle.com/v1/schedule/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
+| `nhl_api_web_schedule_calendar` / `nhlApiWebScheduleCalendar` | `https://api-web.nhle.com/v1/schedule-calendar/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
+| `nhl_api_web_score` / `nhlApiWebScore` | `https://api-web.nhle.com/v1/score/{date}` | `date` | — | `parse_nhl_web_score` | — |
+| `nhl_api_web_skater_leaders` / `nhlApiWebSkaterLeaders` | `https://api-web.nhle.com/v1/skater-stats-leaders/{season}/{game_type}` | `season`, `game_type` | — | `parse_nhl_web_leaders` | — |
+| `nhl_api_web_standings` / `nhlApiWebStandings` | `https://api-web.nhle.com/v1/standings/{date}` | `date` | — | `parse_nhl_web_standings` | — |
+| `nhl_api_web_standings_season` / `nhlApiWebStandingsSeason` | `https://api-web.nhle.com/v1/standings-season` | — | — | `parse_nhl_web_standings_season` | — |
+
+## Native API — NHL EDGE (player tracking)
+
+Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH `nhl_edge_<endpoint>` (snake_case, py/R parity) and `nhlEdge<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+
+| Method | HTTP | Path params | Query params | Parser | Auth |
+|---|---|---|---|---|---|
+| `nhl_edge_cat_goalie_detail` / `nhlEdgeCatGoalieDetail` | `https://api-web.nhle.com/v1/cat/edge/goalie-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_cat_skater_detail` / `nhlEdgeCatSkaterDetail` | `https://api-web.nhle.com/v1/cat/edge/skater-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_goalie_5v5_detail` / `nhlEdgeGoalie5v5Detail` | `https://api-web.nhle.com/v1/edge/goalie-5v5-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_goalie_5v5_top_10` / `nhlEdgeGoalie5v5Top10` | `https://api-web.nhle.com/v1/edge/goalie-5v5-top-10/{sort_by}/{season}/{game_type}` | `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_goalie_comparison` / `nhlEdgeGoalieComparison` | `https://api-web.nhle.com/v1/edge/goalie-comparison/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_goalie_detail` / `nhlEdgeGoalieDetail` | `https://api-web.nhle.com/v1/edge/goalie-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_goalie_edge_save_pctg_top_10` / `nhlEdgeGoalieEdgeSavePctgTop10` | `https://api-web.nhle.com/v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/{season}/{game_type}` | `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_goalie_landing` / `nhlEdgeGoalieLanding` | `https://api-web.nhle.com/v1/edge/goalie-landing/{season}/{game_type}` | `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_goalie_save_percentage_detail` / `nhlEdgeGoalieSavePercentageDetail` | `https://api-web.nhle.com/v1/edge/goalie-save-percentage-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_goalie_shot_location_detail` / `nhlEdgeGoalieShotLocationDetail` | `https://api-web.nhle.com/v1/edge/goalie-shot-location-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_shot_location` | — |
+| `nhl_edge_goalie_shot_location_top_10` / `nhlEdgeGoalieShotLocationTop10` | `https://api-web.nhle.com/v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/{season}/{game_type}` | `category`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_skater_comparison` / `nhlEdgeSkaterComparison` | `https://api-web.nhle.com/v1/edge/skater-comparison/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_skater_detail` / `nhlEdgeSkaterDetail` | `https://api-web.nhle.com/v1/edge/skater-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_skater_distance_top_10` / `nhlEdgeSkaterDistanceTop10` | `https://api-web.nhle.com/v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}` | `positions`\*, `strength`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_skater_landing` / `nhlEdgeSkaterLanding` | `https://api-web.nhle.com/v1/edge/skater-landing/{season}/{game_type}` | `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_skater_shot_location_detail` / `nhlEdgeSkaterShotLocationDetail` | `https://api-web.nhle.com/v1/edge/skater-shot-location-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_shot_location` | — |
+| `nhl_edge_skater_shot_location_top_10` / `nhlEdgeSkaterShotLocationTop10` | `https://api-web.nhle.com/v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}` | `position`\*, `category`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_skater_shot_speed_detail` / `nhlEdgeSkaterShotSpeedDetail` | `https://api-web.nhle.com/v1/edge/skater-shot-speed-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_skater_shot_speed_top_10` / `nhlEdgeSkaterShotSpeedTop10` | `https://api-web.nhle.com/v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/{season}/{game_type}` | `positions`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_skater_skating_distance_detail` / `nhlEdgeSkaterSkatingDistanceDetail` | `https://api-web.nhle.com/v1/edge/skater-skating-distance-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_skater_skating_speed_detail` / `nhlEdgeSkaterSkatingSpeedDetail` | `https://api-web.nhle.com/v1/edge/skater-skating-speed-detail/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_skater_speed_top_10` / `nhlEdgeSkaterSpeedTop10` | `https://api-web.nhle.com/v1/edge/skater-speed-top-10/{positions}/{sort_by}/{season}/{game_type}` | `positions`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_skater_zone_time` / `nhlEdgeSkaterZoneTime` | `https://api-web.nhle.com/v1/edge/skater-zone-time/{player_id}/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_edge_zone_time` | — |
+| `nhl_edge_skater_zone_time_top_10` / `nhlEdgeSkaterZoneTimeTop10` | `https://api-web.nhle.com/v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}` | `positions`\*, `strength`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_team_detail` / `nhlEdgeTeamDetail` | `https://api-web.nhle.com/v1/edge/team-detail/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_team_landing` / `nhlEdgeTeamLanding` | `https://api-web.nhle.com/v1/edge/team-landing/{season}/{game_type}` | `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_team_shot_location_detail` / `nhlEdgeTeamShotLocationDetail` | `https://api-web.nhle.com/v1/edge/team-shot-location-detail/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | `parse_edge_shot_location` | — |
+| `nhl_edge_team_shot_location_top_10` / `nhlEdgeTeamShotLocationTop10` | `https://api-web.nhle.com/v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}` | `position`\*, `category`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_team_shot_speed_detail` / `nhlEdgeTeamShotSpeedDetail` | `https://api-web.nhle.com/v1/edge/team-shot-speed-detail/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | `parse_edge_detail` | — |
+| `nhl_edge_team_skating_distance_detail` / `nhlEdgeTeamSkatingDistanceDetail` | `https://api-web.nhle.com/v1/edge/team-skating-distance-detail/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | *(raw)* | — |
+| `nhl_edge_team_skating_distance_top_10` / `nhlEdgeTeamSkatingDistanceTop10` | `https://api-web.nhle.com/v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}` | `positions`\*, `strength`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_team_skating_speed_detail` / `nhlEdgeTeamSkatingSpeedDetail` | `https://api-web.nhle.com/v1/edge/team-skating-speed-detail/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | *(raw)* | — |
+| `nhl_edge_team_skating_speed_top_10` / `nhlEdgeTeamSkatingSpeedTop10` | `https://api-web.nhle.com/v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/{season}/{game_type}` | `positions`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+| `nhl_edge_team_zone_time_details` / `nhlEdgeTeamZoneTimeDetails` | `https://api-web.nhle.com/v1/edge/team-zone-time-details/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | `parse_edge_zone_time` | — |
+| `nhl_edge_team_zone_time_top_10` / `nhlEdgeTeamZoneTimeTop10` | `https://api-web.nhle.com/v1/edge/team-zone-time-top-10/{strength}/{sort_by}/{season}/{game_type}` | `strength`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
+
+## Native API — NHL Stats REST
+
+Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com/stats/rest`. Each method is exposed under BOTH `nhl_stats_rest_<endpoint>` (snake_case, py/R parity) and `nhlStatsRest<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+
+| Method | HTTP | Path params | Query params | Parser | Auth |
+|---|---|---|---|---|---|
+| `nhl_stats_rest_component_season` / `nhlStatsRestComponentSeason` | `https://api.nhle.com/stats/rest/{lang}/componentSeason` | `lang` | — | *(raw)* | — |
+| `nhl_stats_rest_config` / `nhlStatsRestConfig` | `https://api.nhle.com/stats/rest/{lang}/config` | `lang` | — | *(raw)* | — |
+| `nhl_stats_rest_content_module` / `nhlStatsRestContentModule` | `https://api.nhle.com/stats/rest/{lang}/content/module/{template_key}` | `template_key`\*, `lang` | — | *(raw)* | — |
+| `nhl_stats_rest_country` / `nhlStatsRestCountry` | `https://api.nhle.com/stats/rest/{lang}/country` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_draft` / `nhlStatsRestDraft` | `https://api.nhle.com/stats/rest/{lang}/draft` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_franchise` / `nhlStatsRestFranchise` | `https://api.nhle.com/stats/rest/{lang}/franchise` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_game` / `nhlStatsRestGame` | `https://api.nhle.com/stats/rest/{lang}/game` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_glossary` / `nhlStatsRestGlossary` | `https://api.nhle.com/stats/rest/{lang}/glossary` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_goalie_report` / `nhlStatsRestGoalieReport` | `https://api.nhle.com/stats/rest/{lang}/goalie/{report}` | `report`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_leaders_goalies` / `nhlStatsRestLeadersGoalies` | `https://api.nhle.com/stats/rest/{lang}/leaders/goalies/{attribute}` | `attribute`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_leaders_skaters` / `nhlStatsRestLeadersSkaters` | `https://api.nhle.com/stats/rest/{lang}/leaders/skaters/{attribute}` | `attribute`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_milestones_goalies` / `nhlStatsRestMilestonesGoalies` | `https://api.nhle.com/stats/rest/{lang}/milestones/goalies` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_milestones_skaters` / `nhlStatsRestMilestonesSkaters` | `https://api.nhle.com/stats/rest/{lang}/milestones/skaters` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_ping` / `nhlStatsRestPing` | `https://api.nhle.com/stats/rest/ping` | — | — | *(raw)* | — |
+| `nhl_stats_rest_players` / `nhlStatsRestPlayers` | `https://api.nhle.com/stats/rest/{lang}/players` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_season` / `nhlStatsRestSeason` | `https://api.nhle.com/stats/rest/{lang}/season` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_shiftcharts` / `nhlStatsRestShiftcharts` | `https://api.nhle.com/stats/rest/{lang}/shiftcharts` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_skater_report` / `nhlStatsRestSkaterReport` | `https://api.nhle.com/stats/rest/{lang}/skater/{report}` | `report`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_team` / `nhlStatsRestTeam` | `https://api.nhle.com/stats/rest/{lang}/team` | `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_team_by_id` / `nhlStatsRestTeamById` | `https://api.nhle.com/stats/rest/{lang}/team/id/{team_id}` | `team_id`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+| `nhl_stats_rest_team_report` / `nhlStatsRestTeamReport` | `https://api.nhle.com/stats/rest/{lang}/team/{report}` | `report`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+
+## Native API — NHL Records
+
+Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nhl.com/site/api`. Each method is exposed under BOTH `nhl_records_<endpoint>` (snake_case, py/R parity) and `nhlRecords<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+
+| Method | HTTP | Path params | Query params | Parser | Auth |
+|---|---|---|---|---|---|
+| `nhl_records_all_time_record_vs_franchise` / `nhlRecordsAllTimeRecordVsFranchise` | `https://records.nhl.com/site/api/all-time-record-vs-franchise` | — | — | `parse_nhl_records` | — |
+| `nhl_records_allstar_coach_career` / `nhlRecordsAllstarCoachCareer` | `https://records.nhl.com/site/api/all-star-coach-career-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_allstar_goalie_career` / `nhlRecordsAllstarGoalieCareer` | `https://records.nhl.com/site/api/all-star-goaltender-career-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_allstar_goalie_game` / `nhlRecordsAllstarGoalieGame` | `https://records.nhl.com/site/api/all-star-goaltender-game-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_allstar_skater_career` / `nhlRecordsAllstarSkaterCareer` | `https://records.nhl.com/site/api/all-star-skater-career-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_allstar_skater_game` / `nhlRecordsAllstarSkaterGame` | `https://records.nhl.com/site/api/all-star-skater-game-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_attendance` / `nhlRecordsAttendance` | `https://records.nhl.com/site/api/attendance` | — | — | `parse_nhl_records` | — |
+| `nhl_records_awards` / `nhlRecordsAwards` | `https://records.nhl.com/site/api/award-details` | — | — | `parse_nhl_records` | — |
+| `nhl_records_awards_by_franchise` / `nhlRecordsAwardsByFranchise` | `https://records.nhl.com/site/api/award-details/{franchise_id}` | `franchise_id`\* | — | `parse_nhl_records` | — |
+| `nhl_records_awards_trophy_season` / `nhlRecordsAwardsTrophySeason` | `https://records.nhl.com/site/api/award-details/trophy/{trophy_id}/season/{season_id}` | `trophy_id`\*, `season_id`\* | — | `parse_nhl_records` | — |
+| `nhl_records_away_team_record` / `nhlRecordsAwayTeamRecord` | `https://records.nhl.com/site/api/away-team-record` | — | — | `parse_nhl_records` | — |
+| `nhl_records_coach` / `nhlRecordsCoach` | `https://records.nhl.com/site/api/coach/{coach_id}` | `coach_id`\* | — | `parse_nhl_records` | — |
+| `nhl_records_coach_career` / `nhlRecordsCoachCareer` | `https://records.nhl.com/site/api/coach-career-records/{coach_id}` | `coach_id` | — | `parse_nhl_records` | — |
+| `nhl_records_coach_career_with_playoffs` / `nhlRecordsCoachCareerWithPlayoffs` | `https://records.nhl.com/site/api/coach-career-records-regular-plus-playoffs` | — | — | `parse_nhl_records` | — |
+| `nhl_records_coach_franchise` / `nhlRecordsCoachFranchise` | `https://records.nhl.com/site/api/coach-franchise-records/{coach_id}` | `coach_id` | — | `parse_nhl_records` | — |
+| `nhl_records_coach_stanley_cup` / `nhlRecordsCoachStanleyCup` | `https://records.nhl.com/site/api/coach-stanley-cup-streak` | — | — | `parse_nhl_records` | — |
+| `nhl_records_coaches` / `nhlRecordsCoaches` | `https://records.nhl.com/site/api/coach` | — | — | `parse_nhl_records` | — |
+| `nhl_records_consecutive_100pt_seasons` / `nhlRecordsConsecutive100ptSeasons` | `https://records.nhl.com/site/api/consecutive-100-point-seasons` | — | — | `parse_nhl_records` | — |
+| `nhl_records_draft` / `nhlRecordsDraft` | `https://records.nhl.com/site/api/draft/{draft_id}` | `draft_id` | — | `parse_nhl_records` | — |
+| `nhl_records_draft_by_team` / `nhlRecordsDraftByTeam` | `https://records.nhl.com/site/api/draft/byTeam/{team_id}` | `team_id`\* | — | `parse_nhl_records` | — |
+| `nhl_records_draft_lottery_odds` / `nhlRecordsDraftLotteryOdds` | `https://records.nhl.com/site/api/draft-lottery-odds` | — | — | `parse_nhl_records` | — |
+| `nhl_records_draft_prospect` / `nhlRecordsDraftProspect` | `https://records.nhl.com/site/api/draft-prospect/{prospect_id}` | `prospect_id` | — | `parse_nhl_records` | — |
+| `nhl_records_expansion_draft_picks` / `nhlRecordsExpansionDraftPicks` | `https://records.nhl.com/site/api/expansion-draft-picks` | — | — | `parse_nhl_records` | — |
+| `nhl_records_franchise_detail` / `nhlRecordsFranchiseDetail` | `https://records.nhl.com/site/api/franchise-detail` | — | — | `parse_nhl_records` | — |
+| `nhl_records_franchise_playoff_appearances` / `nhlRecordsFranchisePlayoffAppearances` | `https://records.nhl.com/site/api/franchise-playoff-appearances` | — | — | `parse_nhl_records` | — |
+| `nhl_records_franchise_season_results` / `nhlRecordsFranchiseSeasonResults` | `https://records.nhl.com/site/api/franchise-season-results` | — | — | `parse_nhl_records` | — |
+| `nhl_records_franchise_team_totals` / `nhlRecordsFranchiseTeamTotals` | `https://records.nhl.com/site/api/franchise-team-totals` | — | — | `parse_nhl_records` | — |
+| `nhl_records_franchise_totals` / `nhlRecordsFranchiseTotals` | `https://records.nhl.com/site/api/franchise-totals` | — | — | `parse_nhl_records` | — |
+| `nhl_records_franchises` / `nhlRecordsFranchises` | `https://records.nhl.com/site/api/franchise` | — | — | `parse_nhl_records` | — |
+| `nhl_records_gm_career` / `nhlRecordsGmCareer` | `https://records.nhl.com/site/api/general-manager/{gm_id}` | `gm_id` | — | `parse_nhl_records` | — |
+| `nhl_records_gm_franchise` / `nhlRecordsGmFranchise` | `https://records.nhl.com/site/api/general-manager-franchise-records` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_career_stats` / `nhlRecordsGoalieCareerStats` | `https://records.nhl.com/site/api/goalie-career-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_career_stats_with_playoffs` / `nhlRecordsGoalieCareerStatsWithPlayoffs` | `https://records.nhl.com/site/api/goalie_career_stats_incl_playoffs` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_playoff_streak` / `nhlRecordsGoaliePlayoffStreak` | `https://records.nhl.com/site/api/goalie-playoff-streak` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_season_stats` / `nhlRecordsGoalieSeasonStats` | `https://records.nhl.com/site/api/goalie-season-stats` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_shutout_streak` / `nhlRecordsGoalieShutoutStreak` | `https://records.nhl.com/site/api/goalie-shutout-streak` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_undefeated_streak` / `nhlRecordsGoalieUndefeatedStreak` | `https://records.nhl.com/site/api/goalie-undefeated-streak` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_win_plateaus` / `nhlRecordsGoalieWinPlateaus` | `https://records.nhl.com/site/api/goalie-win-plateaus` | — | — | `parse_nhl_records` | — |
+| `nhl_records_goalie_win_streak` / `nhlRecordsGoalieWinStreak` | `https://records.nhl.com/site/api/goalie-win-streak` | — | — | `parse_nhl_records` | — |
+| `nhl_records_hof_players` / `nhlRecordsHofPlayers` | `https://records.nhl.com/site/api/hof/players` | — | — | `parse_nhl_records` | — |
+| `nhl_records_hof_players_by_office` / `nhlRecordsHofPlayersByOffice` | `https://records.nhl.com/site/api/hof/players/{office_id}` | `office_id`\* | — | `parse_nhl_records` | — |
+| `nhl_records_home_team_record` / `nhlRecordsHomeTeamRecord` | `https://records.nhl.com/site/api/home-team-record` | — | — | `parse_nhl_records` | — |
+| `nhl_records_skater_career_leaders` / `nhlRecordsSkaterCareerLeaders` | `https://records.nhl.com/site/api/skater-career-leaders` | — | — | `parse_nhl_records` | — |
+| `nhl_records_skater_career_stats` / `nhlRecordsSkaterCareerStats` | `https://records.nhl.com/site/api/skater-career-statistics` | — | — | `parse_nhl_records` | — |

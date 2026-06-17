@@ -36,6 +36,50 @@ const FLAT_API_FILES = [
   "nfl_api",
 ];
 
+// Which league reference page each flat-API family is documented on (mirrors
+// FLAT_API_NAMESPACES in src/index.ts — keep the two in sync). The runtime
+// merges each family's wrappers onto this namespace (`sdv.<prefix>.<wrapper>`),
+// so the docs put the "Native API — <family>" section on that league's page.
+const FLAT_API_NAMESPACES = {
+  mlb_api: "mlb",
+  mlb_statcast: "mlb",
+  nhl_api_web: "nhl",
+  nhl_edge: "nhl",
+  nhl_stats_rest: "nhl",
+  nhl_records: "nhl",
+  nfl_api: "nfl",
+};
+
+// Human-facing label + upstream-source blurb per flat-API family, shown in the
+// section heading + intro line on the league reference page.
+const FLAT_API_META = {
+  mlb_api: { label: "MLB Stats API", source: "the official MLB Stats API" },
+  mlb_statcast: {
+    label: "Baseball Savant / Statcast",
+    source: "Baseball Savant (Statcast)",
+  },
+  nhl_api_web: {
+    label: "NHL api-web (game feed)",
+    source: "the modern NHL game-feed API",
+  },
+  nhl_edge: {
+    label: "NHL EDGE (player tracking)",
+    source: "NHL EDGE player/team tracking",
+  },
+  nhl_stats_rest: {
+    label: "NHL Stats REST",
+    source: "the NHL Stats REST API",
+  },
+  nhl_records: {
+    label: "NHL Records",
+    source: "the NHL Records site API",
+  },
+  nfl_api: {
+    label: "NFL.com Shield API",
+    source: 'the NFL.com "Shield" data API',
+  },
+};
+
 function mapPathParams(ep) {
   return (ep.path_params ?? []).map((p) => ({
     name: p.name,
@@ -197,12 +241,77 @@ function wrapperName(prefix, short) {
   return `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 }
 
-function renderLeaguePage(league, wrappers, position) {
+/** snake_case -> camelCase (e.g. `mlb_api_teams` -> `mlbApiTeams`). */
+function toCamel(s) {
+  return s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+}
+
+/** Flat wrappers belonging to a given league prefix (via FLAT_API_NAMESPACES). */
+function flatWrappersForLeague(prefix, flatWrappers) {
+  return flatWrappers.filter((w) => FLAT_API_NAMESPACES[w.api] === prefix);
+}
+
+/** Render the parser cell for a flat wrapper (raw JSON passthrough when none). */
+function flatParserCell(wrapper) {
+  return wrapper.parser ? `\`${wrapper.parser}\`` : "*(raw)*";
+}
+
+/**
+ * Render the "Native API — <family>" reference sections for a league. Each flat
+ * family that maps to this league prefix gets a clearly-headed section after the
+ * ESPN endpoints: an intro line (host + source + auth note) and a table of every
+ * wrapper (dual-case name, absolute host + path, path/query params, parser,
+ * auth). Returns "" when the league has no flat families.
+ */
+function renderNativeSections(league, flatWrappers) {
+  const families = FLAT_API_FILES.filter(
+    (api) => FLAT_API_NAMESPACES[api] === league.prefix
+  );
+  let body = "";
+  for (const api of families) {
+    const rows = flatWrappers.filter((w) => w.api === api);
+    if (!rows.length) continue;
+    const meta = FLAT_API_META[api] ?? { label: api, source: api };
+    const host = rows[0].host;
+    const authed = rows.some((w) => w.auth);
+    body += `\n## Native API — ${meta.label}\n\n`;
+    body +=
+      `Flat (non-ESPN) wrappers for ${meta.source}. ` +
+      `Host: \`${host}\`. ` +
+      `Each method is exposed under BOTH \`${api}_<endpoint>\` (snake_case, ` +
+      `py/R parity) and \`${toCamel(api)}<Endpoint>\` (camelCase canonical) on ` +
+      `\`sdv.${league.prefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
+      `through its tidy.js parser; omit it for the raw response.`;
+    if (authed) {
+      body +=
+        ` **Auth:** this family mints a bearer token automatically before ` +
+        `each call (no credentials required).`;
+    }
+    body += `\n\n`;
+    body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
+    body += `|---|---|---|---|---|---|\n`;
+    for (const w of rows.slice().sort((a, b) => a.short.localeCompare(b.short))) {
+      const camel = toCamel(`${api}_${w.short}`);
+      const method = `\`${api}_${w.short}\` / \`${camel}\``;
+      const http = `\`${w.host}${w.path}\``;
+      const auth = w.auth ? "yes" : "—";
+      body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
+    }
+  }
+  return body;
+}
+
+function renderLeaguePage(league, wrappers, position, flatWrappers = []) {
   const applicable = wrappersForLeague(league, wrappers);
+  const flatApplicable = flatWrappersForLeague(league.prefix, flatWrappers);
   const scoreboard = wrapperName(league.prefix, "scoreboard");
   const callExample = league.leagueParam
     ? `await sdv.${league.prefix}.${scoreboard}({ league: '${league.league}' });`
     : `await sdv.${league.prefix}.${scoreboard}({});`;
+  const nativeNote = flatApplicable.length
+    ? ` This league also ships **${flatApplicable.length}** native (non-ESPN) ` +
+      `API wrappers — see the **Native API** sections below.`
+    : "";
 
   let body =
     `---\n` +
@@ -215,11 +324,12 @@ function renderLeaguePage(league, wrappers, position) {
     `- **sport slug:** \`${league.sport}\`\n` +
     `- **league slug:** \`${league.league}\`${league.leagueParam ? " *(default; override with a `league` param)*" : ""}\n` +
     `- **scopes:** ${league.scopes.map((s) => `\`${s}\``).join(", ")}\n` +
-    `- **wrappers:** ${applicable.length}\n\n` +
+    `- **wrappers:** ${applicable.length}${flatApplicable.length ? ` *(+ ${flatApplicable.length} native)*` : ""}\n\n` +
     `Every endpoint is called as \`sdv.${league.prefix}.${scoreboard.replace("Scoreboard", "<Endpoint>")}(params)\`. ` +
     `Each method is also available under its snake_case name ` +
     `(\`espn_${league.prefix}_<endpoint>\`) for parity with the Python / R packages. ` +
-    `Parameters accept snake_case or camelCase. Required path params are marked \\*.\n\n` +
+    `Parameters accept snake_case or camelCase. Required path params are marked \\*.` +
+    `${nativeNote}\n\n` +
     "```js\n" +
     `import sdv from 'sportsdataverse';\n\n` +
     `${callExample}\n` +
@@ -239,10 +349,13 @@ function renderLeaguePage(league, wrappers, position) {
     }
   }
 
+  // Flat (non-ESPN) "Native API — <family>" sections, after the ESPN scopes.
+  body += renderNativeSections(league, flatWrappers);
+
   return body;
 }
 
-function renderReferenceIndex(leagues, wrappers) {
+function renderReferenceIndex(leagues, wrappers, flatWrappers = []) {
   let body =
     `---\n` +
     `title: ESPN Reference\n` +
@@ -256,12 +369,18 @@ function renderReferenceIndex(leagues, wrappers) {
     `Each method is also available under its snake_case name (\`espn_nba_scoreboard\`) ` +
     `for parity with the Python / R packages. Pick a league for its full endpoint ` +
     `table, or try any call live in the [playground](/playground).\n\n` +
-    `| League | sport | ESPN slug | scopes | wrappers |\n` +
-    `|---|---|---|---|---:|\n`;
+    `Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB ` +
+    `Stats API + Baseball Savant/Statcast (\`mlb\`), the four NHL native APIs ` +
+    `(\`nhl\`), and the NFL.com Shield API (\`nfl\`). They're listed in the ` +
+    `**Native API** sections of each league page; the \`native\` column below ` +
+    `counts them.\n\n` +
+    `| League | sport | ESPN slug | scopes | wrappers | native |\n` +
+    `|---|---|---|---|---:|---:|\n`;
   for (const l of leagues) {
     const count = wrappersForLeague(l, wrappers).length;
+    const native = flatWrappersForLeague(l.prefix, flatWrappers).length;
     const slug = l.leagueParam ? `${l.league} *(param)*` : l.league;
-    body += `| [${l.prefix}](./${l.prefix}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} |\n`;
+    body += `| [${l.prefix}](./${l.prefix}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} | ${native || "—"} |\n`;
   }
   body +=
     `\n:::tip Same call, every league\n` +
@@ -269,6 +388,13 @@ function renderReferenceIndex(leagues, wrappers) {
     `await sdv.nba.espnNbaScoreboard({});\n` +
     `await sdv.nfl.espnNflScoreboard({ week: 1, seasonType: 2 });\n` +
     `await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });\n` +
+    "```\n" +
+    `:::\n` +
+    `\n:::tip Native (non-ESPN) APIs\n` +
+    "```js\n" +
+    `await sdv.mlb.mlbApiSchedule({ sportId: 1, date: '2024-07-01' });\n` +
+    `await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });\n` +
+    `await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });\n` +
     "```\n" +
     `:::\n`;
   return body;
@@ -294,8 +420,13 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
         endpoints: wrappers,
         // Additive flat-API metadata — kept under its own keys so the ESPN
         // `endpoints`/`hosts`/`leagues` blocks (and the playground resolver that
-        // consumes them) are byte-for-byte unchanged.
+        // consumes them) are byte-for-byte unchanged. `flatApis` carries the
+        // full per-endpoint param metadata (api/host/path/pathParams/
+        // queryParams/parser/auth); `flatHosts` is the per-family base URL; and
+        // `flatLeagues` maps each family stem to the league prefix it's merged
+        // onto (so the playground can group flat endpoints under their league).
         flatHosts,
+        flatLeagues: FLAT_API_NAMESPACES,
         flatApis: flatWrappers,
       },
       null,
@@ -331,7 +462,7 @@ const wrappersTs =
 const outputs = {
   [join(generatedDir, "wrappers.ts")]: wrappersTs,
   [join(generatedDir, "leagues.ts")]: renderTs("LeagueConfig", "LEAGUES", leagues),
-  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers),
+  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers, flatWrappers),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
   [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
     wrappers,
@@ -345,7 +476,8 @@ leagues.forEach((league, i) => {
   outputs[join(referenceDir, `${league.prefix}.md`)] = renderLeaguePage(
     league,
     wrappers,
-    i + 1
+    i + 1,
+    flatWrappers
   );
 });
 
