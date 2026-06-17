@@ -43,157 +43,157 @@ Flat (non-ESPN) wrappers for the-odds-api.com. Host: `https://api.the-odds-api.c
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | Unique event id (echoes `event_id`). |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Event start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `bookmaker_key` | character | Bookmaker slug, e.g. `draftkings`. |
-| `bookmaker` | character | Bookmaker display title, e.g. `DraftKings`. |
-| `market_key` | character | Available market key, e.g. `player_points`. |
-| `market_last_update` | character | When this market was last seen for the bookmaker. |
+| `id` | character | A unique 32 character identifier for the event (echoes `event_id`). |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `bookmaker_key` | character | A unique slug (key) of the bookmaker, e.g. `draftkings`. |
+| `bookmaker` | character | A formatted title of the bookmaker, e.g. `DraftKings`. |
+| `market_key` | character | The unique key for an available odds market offered by the bookmaker, e.g. `player_points`. |
+| `market_last_update` | character | A timestamp of when the market's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. |
 
 ### Returns — `odds_api_event_odds` / `oddsApiEventOdds`
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | Unique event id (echoes `event_id`). |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Game start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `bookmaker_key` | character | Bookmaker slug, e.g. `draftkings`. |
-| `bookmaker` | character | Bookmaker display title, e.g. `DraftKings`. |
-| `market_key` | character | Market key, e.g. `player_points`. |
-| `market_last_update` | character | When this market's odds were last updated. |
-| `outcomes_name` | character | Outcome label (team, `Over`/`Under`, player name, etc.). |
-| `outcomes_description` | character | Outcome description (player name for props); absent for featured markets. |
-| `outcomes_price` | numeric | The price/odds for the outcome. |
-| `outcomes_point` | numeric | The handicap/total/prop line, when applicable. |
+| `id` | character | A unique 32 character identifier for the event (echoes `event_id`). |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `bookmaker_key` | character | A unique slug (key) of the bookmaker, e.g. `draftkings`. |
+| `bookmaker` | character | A formatted title of the bookmaker, e.g. `DraftKings`. |
+| `market_key` | character | The unique key for the odds market, e.g. `player_points`. |
+| `market_last_update` | character | A timestamp of when the market's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. |
+| `outcomes_name` | character | The outcome label. The value depends on the market -- for totals markets `Over`/`Under`, for team markets the team or participant name, or `Draw`. |
+| `outcomes_description` | character | Additional information about the outcome, only relevant for certain markets (for example, the player's name for player prop markets). Absent for featured markets. |
+| `outcomes_price` | numeric | The odds of the outcome. The format is determined by the `oddsFormat` query param (decimal by default). |
+| `outcomes_point` | numeric | The handicap or points of the outcome, only applicable to spreads/totals/prop markets (missing for `h2h` and outrights markets). |
 
 ### Returns — `odds_api_event_odds_history` / `oddsApiEventOddsHistory`
 
 | col_name | type | description |
 |---|---|---|
-| `timestamp` | character | Snapshot timestamp returned (closest at/before `date`). |
-| `previous_timestamp` | character | Preceding available snapshot; use as `date` to page back. |
-| `next_timestamp` | character | Next available snapshot; use as `date` to page forward. |
-| `id` | character | Unique event id (echoes `event_id`). |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Game start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `bookmaker_key` | character | Bookmaker slug, e.g. `draftkings`. |
-| `bookmaker` | character | Bookmaker display title, e.g. `DraftKings`. |
-| `bookmaker_last_update` | character | When this bookmaker's odds were last updated. |
-| `market_key` | character | Market key, e.g. `player_points`. |
-| `market_last_update` | character | When this market's odds were last updated. |
-| `outcomes_name` | character | Outcome label (team, `Over`/`Under`, player name, etc.). |
-| `outcomes_description` | character | Outcome description (player name for props); absent for featured markets. |
-| `outcomes_price` | numeric | The price/odds for the outcome. |
-| `outcomes_point` | numeric | The handicap/total/prop line, when applicable. |
+| `timestamp` | character | The timestamp of the snapshot. This will be the closest available timestamp equal to or earlier than the provided `date` parameter. |
+| `previous_timestamp` | character | The preceding available timestamp. Use as the `date` parameter in a new request to move back in time. |
+| `next_timestamp` | character | The next available timestamp. Use as the `date` parameter in a new request to move forward in time. |
+| `id` | character | A unique 32 character identifier for the event (echoes `event_id`). |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `bookmaker_key` | character | A unique slug (key) of the bookmaker, e.g. `draftkings`. |
+| `bookmaker` | character | A formatted title of the bookmaker, e.g. `DraftKings`. |
+| `bookmaker_last_update` | character | A timestamp of when the bookmaker's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. |
+| `market_key` | character | The unique key for the odds market, e.g. `player_points`. |
+| `market_last_update` | character | A timestamp of when the market's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. Prefer this over `bookmaker_last_update` to check the recency of odds. |
+| `outcomes_name` | character | The outcome label. The value depends on the market -- for totals markets `Over`/`Under`, for team markets the team or participant name, or `Draw`. |
+| `outcomes_description` | character | Additional information about the outcome, only relevant for certain markets (for example, the player's name for player prop markets). Absent for featured markets. |
+| `outcomes_price` | numeric | The odds of the outcome. The format is determined by the `oddsFormat` query param (decimal by default). |
+| `outcomes_point` | numeric | The handicap or points of the outcome, only applicable to spreads/totals/prop markets (missing for `h2h` and outrights markets). |
 
 ### Returns — `odds_api_sports` / `oddsApiSports`
 
 | col_name | type | description |
 |---|---|---|
-| `key` | character | Sport key, e.g. `americanfootball_nfl`. Use as `sport_key` elsewhere. |
-| `group` | character | Sport group / category, e.g. `American Football`. |
-| `title` | character | Human-readable sport title, e.g. `NFL`. |
-| `description` | character | Description of the sport or competition. |
-| `active` | logical | `TRUE` if the sport is currently in season. |
-| `has_outrights` | logical | `TRUE` if the sport offers outright (futures) markets. |
+| `key` | character | A unique slug (key) of the sport, e.g. `americanfootball_nfl`. Use this as the `sport_key` param in odds/events requests. |
+| `group` | character | A broader grouping for the sport, e.g. `American Football`. |
+| `title` | character | A presentable title of the sport, e.g. `NFL`. |
+| `description` | character | A brief description of the sport. Subject to change (for example, if sponsors change). |
+| `active` | logical | Indicates if the sport is in season. `TRUE` when the sport is currently in season. |
+| `has_outrights` | logical | Indicates if the sport has outrights (futures) markets. `TRUE` when outright markets are offered. |
 
 ### Returns — `odds_api_sports_events` / `oddsApiSportsEvents`
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | Unique event id. Use as `event_id` elsewhere. |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Event start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `home_rotation` | integer | Home rotation number (only when `include_rotation_numbers = TRUE`). |
-| `away_rotation` | integer | Away rotation number (only when `include_rotation_numbers = TRUE`). |
+| `id` | character | A unique 32 character identifier for the event. Use as `event_id` elsewhere. |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `home_rotation` | integer | The rotation number of the home team. Only returned when `include_rotation_numbers = TRUE`; can be null. Available in historical data from November 2025. |
+| `away_rotation` | integer | The rotation number of the away team. Only returned when `include_rotation_numbers = TRUE`; can be null. Available in historical data from November 2025. |
 
 ### Returns — `odds_api_sports_events_history` / `oddsApiSportsEventsHistory`
 
 | col_name | type | description |
 |---|---|---|
-| `timestamp` | character | Snapshot timestamp returned (closest at/before `date`). |
-| `previous_timestamp` | character | Preceding available snapshot; use as `date` to page back. |
-| `next_timestamp` | character | Next available snapshot; use as `date` to page forward. |
-| `id` | character | Unique event id. Use as `event_id` elsewhere. |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Event start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `home_rotation` | integer | Home rotation number (only when `include_rotation_numbers = TRUE`). |
-| `away_rotation` | integer | Away rotation number (only when `include_rotation_numbers = TRUE`). |
+| `timestamp` | character | The timestamp of the snapshot. This will be the closest available timestamp equal to or earlier than the provided `date` parameter. |
+| `previous_timestamp` | character | The preceding available timestamp. Use as the `date` parameter in a new request to move back in time. |
+| `next_timestamp` | character | The next available timestamp. Use as the `date` parameter in a new request to move forward in time. |
+| `id` | character | A unique 32 character identifier for the event. Use as `event_id` elsewhere. |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `home_rotation` | integer | The rotation number of the home team. Only returned when `include_rotation_numbers = TRUE`; can be null. Available in historical data from November 2025. |
+| `away_rotation` | integer | The rotation number of the away team. Only returned when `include_rotation_numbers = TRUE`; can be null. Available in historical data from November 2025. |
 
 ### Returns — `odds_api_sports_odds` / `oddsApiSportsOdds`
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | Unique event id. |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Game start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `bookmaker_key` | character | Bookmaker slug, e.g. `draftkings`. |
-| `bookmaker` | character | Bookmaker display title, e.g. `DraftKings`. |
-| `bookmaker_last_update` | character | When this bookmaker's odds were last updated. |
-| `market_key` | character | Market key, e.g. `spreads`. |
-| `market_last_update` | character | When this market's odds were last updated. |
-| `outcomes_name` | character | Outcome label (team name, `Over`/`Under`, etc.). |
-| `outcomes_price` | numeric | The price/odds for the outcome. |
-| `outcomes_point` | numeric | The handicap/total line, when applicable. |
+| `id` | character | A unique 32 character identifier for the event. |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `bookmaker_key` | character | A unique slug (key) of the bookmaker, e.g. `draftkings`. |
+| `bookmaker` | character | A formatted title of the bookmaker, e.g. `DraftKings`. |
+| `bookmaker_last_update` | character | A timestamp of when the bookmaker's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. |
+| `market_key` | character | The unique key for the odds market, e.g. `spreads`. |
+| `market_last_update` | character | A timestamp of when the market's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. Prefer this over `bookmaker_last_update` to check the recency of odds. |
+| `outcomes_name` | character | The outcome label. The value depends on the market -- for totals markets `Over`/`Under`, for team markets the team or participant name, or `Draw`. |
+| `outcomes_price` | numeric | The odds of the outcome. The format is determined by the `oddsFormat` query param (decimal by default). |
+| `outcomes_point` | numeric | The handicap or points of the outcome, only applicable to `spreads` and `totals` markets (missing for `h2h` and outrights markets). |
 
 ### Returns — `odds_api_sports_odds_history` / `oddsApiSportsOddsHistory`
 
 | col_name | type | description |
 |---|---|---|
-| `timestamp` | character | Snapshot timestamp returned (closest at/before `date`). |
-| `previous_timestamp` | character | Preceding available snapshot; use as `date` to page back. |
-| `next_timestamp` | character | Next available snapshot; use as `date` to page forward. |
-| `id` | character | Unique event id. |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Game start time (ISO 8601 string or unix seconds). |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `bookmaker_key` | character | Bookmaker slug, e.g. `draftkings`. |
-| `bookmaker` | character | Bookmaker display title, e.g. `DraftKings`. |
-| `bookmaker_last_update` | character | When this bookmaker's odds were last updated. |
-| `market_key` | character | Market key, e.g. `spreads`. |
-| `market_last_update` | character | When this market's odds were last updated. |
-| `outcomes_name` | character | Outcome label (team name, `Over`/`Under`, etc.). |
-| `outcomes_price` | numeric | The price/odds for the outcome. |
-| `outcomes_point` | numeric | The handicap/total line (`spreads`/`totals` only). |
+| `timestamp` | character | The timestamp of the snapshot. This will be the closest available timestamp equal to or earlier than the provided `date` parameter. |
+| `previous_timestamp` | character | The preceding available timestamp. Use as the `date` parameter in a new request to move back in time. |
+| `next_timestamp` | character | The next available timestamp. Use as the `date` parameter in a new request to move forward in time. |
+| `id` | character | A unique 32 character identifier for the event. |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `bookmaker_key` | character | A unique slug (key) of the bookmaker, e.g. `draftkings`. |
+| `bookmaker` | character | A formatted title of the bookmaker, e.g. `DraftKings`. |
+| `bookmaker_last_update` | character | A timestamp of when the bookmaker's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. |
+| `market_key` | character | The unique key for the odds market, e.g. `spreads`. |
+| `market_last_update` | character | A timestamp of when the market's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. Prefer this over `bookmaker_last_update` to check the recency of odds. |
+| `outcomes_name` | character | The outcome label. The value depends on the market -- for totals markets `Over`/`Under`, for team markets the team or participant name, or `Draw`. |
+| `outcomes_price` | numeric | The odds of the outcome. The format is determined by the `oddsFormat` query param (decimal by default). |
+| `outcomes_point` | numeric | The handicap or points of the outcome, only applicable to `spreads` and `totals` markets (missing for `h2h` and outrights markets). |
 
 ### Returns — `odds_api_sports_participants` / `oddsApiSportsParticipants`
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | Unique participant id, e.g. `par_01hqmkq6fdf1pvq7jgdd7hdmpf`. |
-| `full_name` | character | Participant name -- a team name or player name depending on the sport. |
+| `id` | character | A unique id of the participant, e.g. `par_01hqmkq6fdf1pvq7jgdd7hdmpf`. |
+| `full_name` | character | The participant name -- either a team name or player name depending on the sport. This endpoint does not return players on a team. |
 
 ### Returns — `odds_api_sports_scores` / `oddsApiSportsScores`
 
 | col_name | type | description |
 |---|---|---|
-| `id` | character | Unique event id. |
-| `sport_key` | character | Sport key, e.g. `basketball_nba`. |
-| `sport_title` | character | Human-readable sport title, e.g. `NBA`. |
-| `commence_time` | character | Game start time (ISO 8601 string or unix seconds). |
-| `completed` | logical | `TRUE` if the game has finished. |
-| `home_team` | character | Home team name. |
-| `away_team` | character | Away team name. |
-| `scores` | list | Per-team `name`/`score` pairs (stringified); `NULL`/`NA` before scores post. |
-| `last_update` | character | Time the scores were last updated; `NA` until a game is live. |
+| `id` | character | A unique 32 character identifier for the event. |
+| `sport_key` | character | A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests. |
+| `sport_title` | character | A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship). |
+| `commence_time` | character | The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`. |
+| `completed` | logical | `TRUE` if the event has finished, otherwise `FALSE`. |
+| `home_team` | character | The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `away_team` | character | The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events. |
+| `scores` | list | A list of teams and their scores (per-team `name`/`score` pairs, stringified). Empty / `NULL`/`NA` if the event has not started. |
+| `last_update` | character | ISO 8601 datetime of when the scores were last updated. `NA`/null until the event has started. |

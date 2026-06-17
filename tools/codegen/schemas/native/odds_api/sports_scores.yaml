@@ -3,28 +3,28 @@ kind: dataframe
 columns:
 - name: id
   type: character
-  description: Unique event id.
+  description: A unique 32 character identifier for the event.
 - name: sport_key
   type: character
-  description: Sport key, e.g. `basketball_nba`.
+  description: A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests.
 - name: sport_title
   type: character
-  description: Human-readable sport title, e.g. `NBA`.
+  description: A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship).
 - name: commence_time
   type: character
-  description: Game start time (ISO 8601 string or unix seconds).
+  description: The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`.
 - name: completed
   type: logical
-  description: '`TRUE` if the game has finished.'
+  description: '`TRUE` if the event has finished, otherwise `FALSE`.'
 - name: home_team
   type: character
-  description: Home team name.
+  description: The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events.
 - name: away_team
   type: character
-  description: Away team name.
+  description: The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events.
 - name: scores
   type: list
-  description: Per-team `name`/`score` pairs (stringified); `NULL`/`NA` before scores post.
+  description: A list of teams and their scores (per-team `name`/`score` pairs, stringified). Empty / `NULL`/`NA` if the event has not started.
 - name: last_update
   type: character
-  description: Time the scores were last updated; `NA` until a game is live.
+  description: ISO 8601 datetime of when the scores were last updated. `NA`/null until the event has started.

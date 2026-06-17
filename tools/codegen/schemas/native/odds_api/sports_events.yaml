@@ -3,25 +3,25 @@ kind: dataframe
 columns:
 - name: id
   type: character
-  description: Unique event id. Use as `event_id` elsewhere.
+  description: A unique 32 character identifier for the event. Use as `event_id` elsewhere.
 - name: sport_key
   type: character
-  description: Sport key, e.g. `basketball_nba`.
+  description: A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests.
 - name: sport_title
   type: character
-  description: Human-readable sport title, e.g. `NBA`.
+  description: A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship).
 - name: commence_time
   type: character
-  description: Event start time (ISO 8601 string or unix seconds).
+  description: The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`.
 - name: home_team
   type: character
-  description: Home team name.
+  description: The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events.
 - name: away_team
   type: character
-  description: Away team name.
+  description: The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events.
 - name: home_rotation
   type: integer
-  description: Home rotation number (only when `include_rotation_numbers = TRUE`).
+  description: The rotation number of the home team. Only returned when `include_rotation_numbers = TRUE`; can be null. Available in historical data from November 2025.
 - name: away_rotation
   type: integer
-  description: Away rotation number (only when `include_rotation_numbers = TRUE`).
+  description: The rotation number of the away team. Only returned when `include_rotation_numbers = TRUE`; can be null. Available in historical data from November 2025.
