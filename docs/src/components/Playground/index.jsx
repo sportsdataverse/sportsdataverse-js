@@ -290,7 +290,13 @@ export default function Playground() {
       if (sel.short === 'summary' && section) entries.push(['section', section]);
     }
     const args = entries
-      .map(([k, v]) => `${k}: ${v === 'true' ? 'true' : /^\d+$/.test(v) ? v : `'${v}'`}`)
+      .map(([k, v]) => {
+        // Render booleans (true/false) and numbers as literals; everything else
+        // as a quoted string — so e.g. includeReplays=false reads as `false`.
+        const isBool = v === 'true' || v === 'false';
+        const isNum = /^-?\d+(\.\d+)?$/.test(v);
+        return `${k}: ${isBool || isNum ? v : `'${v}'`}`;
+      })
       .join(', ');
     const method =
       sel.kind === 'flat' ? flatMethodName(sel.api, sel.short) : espnMethodName(prefix, sel.short);

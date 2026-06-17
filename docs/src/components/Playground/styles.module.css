@@ -25,6 +25,12 @@
   gap: 0.35rem;
 }
 
+/* The "load a preset" shortcut spans the full controls row so it reads as a
+   quick-start helper, distinct from the League/Endpoint request selectors. */
+.examplesField {
+  grid-column: 1 / -1;
+}
+
 .label {
   font-size: 0.8rem;
   font-weight: 600;

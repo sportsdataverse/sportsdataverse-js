@@ -1,7 +1,7 @@
 import React from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-// Pin the npm package RunKit cells require(). RunKit runs the PUBLISHED package,
+// Pin the npm package RunKit cells import(). RunKit runs the PUBLISHED package,
 // not this repo's working tree — so these cells light up once sportsdataverse
 // v3 ships to npm. Until then RunKit resolves the latest published major (v2),
 // which uses the older `sdv.<league>.getX()` surface; the v3 `espn*`/provider
@@ -44,14 +44,16 @@ function RunKitInner({ source, title, nodeVersion, minHeight }) {
     loadRunKit()
       .then((RunKit) => {
         if (cancelled || !RunKit || !hostRef.current) return;
-        // A `require('sportsdataverse')` in `source` resolves to whatever the
-        // preamble pins; RunKit installs it before the cell evaluates.
+        // A dynamic `import('sportsdataverse')` in `source` resolves to whatever
+        // the preamble pins; RunKit installs it before the cell evaluates. The
+        // package is ESM-only, so cells use `await import(...)`, not `require`.
         notebook = RunKit.createNotebook({
           element: hostRef.current,
           source,
           preamble: `// sportsdataverse pinned to ${PINNED_RANGE} (published npm package)`,
           packageVersionOverrides: { sportsdataverse: PINNED_RANGE },
-          nodeVersion: nodeVersion || '18.x.x',
+          // Node 20+ to match the package's engines.node (>= 20.18.1).
+          nodeVersion: nodeVersion || '20.x.x',
           onLoad: () => !cancelled && setStatus('ready'),
         });
       })
@@ -108,7 +110,7 @@ function RunKitInner({ source, title, nodeVersion, minHeight }) {
  * Props:
  *   - source       (string, required) the JS the cell runs. Top-level await ok.
  *   - title        (string)  optional heading above the cell.
- *   - nodeVersion  (string)  RunKit node runtime (default 18.x.x).
+ *   - nodeVersion  (string)  RunKit node runtime (default 20.x.x — matches engines.node).
  *   - minHeight    (number)  reserved height before the embed paints.
  */
 export default function RunKit(props) {

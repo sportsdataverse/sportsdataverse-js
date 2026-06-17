@@ -13,8 +13,8 @@ provider APIs (MLB Stats API, NHL api-web, The Odds API, CBS, Fox, Yahoo,
 247Sports). Every method takes a single options object and returns a Promise.
 
 ```js
+// ESM-only — import the default export (there is no CommonJS `require`):
 import sdv from 'sportsdataverse';
-// or: const sdv = require('sportsdataverse');
 ```
 
 The one pattern to learn: **pass `{ parsed: true }` to get tidy rows** instead
@@ -85,7 +85,7 @@ summary drill-down — right in your browser:
 
 <RunKit
   title="NBA: scoreboard → team boxscore"
-  source={`const sdv = require('sportsdataverse');
+  source={`const sdv = (await import('sportsdataverse')).default;
 
 // 1) today's NBA slate
 const sb = await sdv.nba.espnNbaScoreboard({});

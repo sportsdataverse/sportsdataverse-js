@@ -112,7 +112,7 @@ api-web family — the game feed, parsed to plays right in your browser:
 
 <RunKit
   title="NHL: api-web game feed → parsed plays"
-  source={`const sdv = require('sportsdataverse');
+  source={`const sdv = (await import('sportsdataverse')).default;
 
 // 2023030417 = a 2023 Stanley Cup Final game
 const plays = await sdv.nhl.nhlApiWebPbp({ game_id: '2023030417', parsed: true });

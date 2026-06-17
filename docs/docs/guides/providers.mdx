@@ -110,7 +110,7 @@ This cell pulls the current CFB scoreboard from Fox's public Bifrost API:
 
 <RunKit
   title="Fox Bifrost: CFB scoreboard"
-  source={`const sdv = require('sportsdataverse');
+  source={`const sdv = (await import('sportsdataverse')).default;
 
 const board = await sdv.fox.foxBifrostScoreboard({ sport: 'cfb', parsed: true });
 
