@@ -1,0 +1,21 @@
+schema: sports
+kind: dataframe
+columns:
+- name: key
+  type: character
+  description: Sport key, e.g. `americanfootball_nfl`. Use as `sport_key` elsewhere.
+- name: group
+  type: character
+  description: Sport group / category, e.g. `American Football`.
+- name: title
+  type: character
+  description: Human-readable sport title, e.g. `NFL`.
+- name: description
+  type: character
+  description: Description of the sport or competition.
+- name: active
+  type: logical
+  description: '`TRUE` if the sport is currently in season.'
+- name: has_outrights
+  type: logical
+  description: '`TRUE` if the sport offers outright (futures) markets.'

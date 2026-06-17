@@ -1,0 +1,27 @@
+schema: sports_events
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: Unique event id. Use as `event_id` elsewhere.
+- name: sport_key
+  type: character
+  description: Sport key, e.g. `basketball_nba`.
+- name: sport_title
+  type: character
+  description: Human-readable sport title, e.g. `NBA`.
+- name: commence_time
+  type: character
+  description: Event start time (ISO 8601 string or unix seconds).
+- name: home_team
+  type: character
+  description: Home team name.
+- name: away_team
+  type: character
+  description: Away team name.
+- name: home_rotation
+  type: integer
+  description: Home rotation number (only when `include_rotation_numbers = TRUE`).
+- name: away_rotation
+  type: integer
+  description: Away rotation number (only when `include_rotation_numbers = TRUE`).

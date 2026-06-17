@@ -41,6 +41,10 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   nhl_stats_rest: 'nhl',
   nhl_records: 'nhl',
   nfl_api: 'nfl',
+  // The Odds API — first cross-sport provider family. `odds` is a standalone
+  // namespace (NOT a league), so `prefix` here is its own name: the merge below
+  // creates `sdv.odds.*` from scratch (no legacy/ESPN service to merge onto).
+  odds_api: 'odds',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

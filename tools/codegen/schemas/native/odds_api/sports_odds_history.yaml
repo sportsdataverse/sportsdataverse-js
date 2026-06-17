@@ -1,0 +1,54 @@
+schema: sports_odds_history
+kind: dataframe
+columns:
+- name: timestamp
+  type: character
+  description: Snapshot timestamp returned (closest at/before `date`).
+- name: previous_timestamp
+  type: character
+  description: Preceding available snapshot; use as `date` to page back.
+- name: next_timestamp
+  type: character
+  description: Next available snapshot; use as `date` to page forward.
+- name: id
+  type: character
+  description: Unique event id.
+- name: sport_key
+  type: character
+  description: Sport key, e.g. `basketball_nba`.
+- name: sport_title
+  type: character
+  description: Human-readable sport title, e.g. `NBA`.
+- name: commence_time
+  type: character
+  description: Game start time (ISO 8601 string or unix seconds).
+- name: home_team
+  type: character
+  description: Home team name.
+- name: away_team
+  type: character
+  description: Away team name.
+- name: bookmaker_key
+  type: character
+  description: Bookmaker slug, e.g. `draftkings`.
+- name: bookmaker
+  type: character
+  description: Bookmaker display title, e.g. `DraftKings`.
+- name: bookmaker_last_update
+  type: character
+  description: When this bookmaker's odds were last updated.
+- name: market_key
+  type: character
+  description: Market key, e.g. `spreads`.
+- name: market_last_update
+  type: character
+  description: When this market's odds were last updated.
+- name: outcomes_name
+  type: character
+  description: Outcome label (team name, `Over`/`Under`, etc.).
+- name: outcomes_price
+  type: numeric
+  description: The price/odds for the outcome.
+- name: outcomes_point
+  type: numeric
+  description: The handicap/total line (`spreads`/`totals` only).

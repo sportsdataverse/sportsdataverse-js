@@ -20,6 +20,7 @@ const FLAT_API_NAMESPACES = {
   nhl_stats_rest: 'nhl',
   nhl_records: 'nhl',
   nfl_api: 'nfl',
+  odds_api: 'odds',
 };
 
 /** Fill every required path param so the URL fully resolves. */
@@ -123,6 +124,42 @@ describe('flat-API wrapper metadata invariants', () => {
       w.parser.should.startWith('parse_nfl_');
     }
   });
+
+  it('registers the odds_api family (10 endpoints) on https://api.the-odds-api.com', () => {
+    const odds = FLAT_WRAPPERS.filter((w) => w.api === 'odds_api');
+    odds.length.should.equal(10);
+    FLAT_HOSTS.odds_api.should.equal('https://api.the-odds-api.com');
+    for (const w of odds) w.host.should.equal('https://api.the-odds-api.com');
+    const shorts = odds.map((w) => w.short).sort();
+    shorts.should.deepEqual([
+      'event_markets',
+      'event_odds',
+      'event_odds_history',
+      'sports',
+      'sports_events',
+      'sports_events_history',
+      'sports_odds',
+      'sports_odds_history',
+      'sports_participants',
+      'sports_scores',
+    ]);
+  });
+
+  it('every odds_api wrapper names a registered parser, none auth', () => {
+    for (const w of FLAT_WRAPPERS.filter((x) => x.api === 'odds_api')) {
+      (typeof w.parser).should.equal('string', `parser missing on ${w.short}`);
+      w.parser.should.startWith('parse_odds_api_');
+      should(w.auth).not.be.true(`unexpected auth flag on odds_api_${w.short}`);
+    }
+  });
+
+  it('every odds_api wrapper requires apiKey as a query param (apiKey, no bearer auth)', () => {
+    for (const w of FLAT_WRAPPERS.filter((x) => x.api === 'odds_api')) {
+      const apiKey = (w.queryParams || []).find((q) => q.queryKey === 'apiKey');
+      should.exist(apiKey, `odds_api_${w.short} missing apiKey query param`);
+      apiKey.name.should.equal('api_key');
+    }
+  });
 });
 
 describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
@@ -187,6 +224,17 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
     (typeof sdv.nfl.nflApiStandings).should.equal('function'); // flat camel
     sdv.nfl.nflApiStandings.should.equal(sdv.nfl.nfl_api_standings);
     (typeof sdv.nfl.nflApiWeeklyGameDetails).should.equal('function');
+  });
+
+  it('odds_api family creates the standalone sdv.odds namespace (snake + camel)', () => {
+    // `odds` is NOT a league — there is no legacy/ESPN service, so this
+    // namespace is created from scratch by the flat merge.
+    should(sdv.odds).be.an.Object();
+    (typeof sdv.odds.odds_api_sports).should.equal('function'); // flat snake
+    (typeof sdv.odds.oddsApiSports).should.equal('function'); // flat camel
+    sdv.odds.oddsApiSports.should.equal(sdv.odds.odds_api_sports);
+    (typeof sdv.odds.oddsApiEventOdds).should.equal('function');
+    (typeof sdv.odds.oddsApiSportsOddsHistory).should.equal('function');
   });
 });
 

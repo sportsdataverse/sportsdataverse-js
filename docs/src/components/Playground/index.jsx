@@ -4,7 +4,6 @@ import endpoints from '@site/src/playground/endpoints.json';
 import { resolveUrl, resolveFlatUrl } from '@site/src/playground/resolve.mjs';
 import styles from './styles.module.css';
 
-const LEAGUES = [...endpoints.leagues].sort((a, b) => a.prefix.localeCompare(b.prefix));
 const FLAT_APIS = endpoints.flatApis || [];
 const FLAT_LEAGUES = endpoints.flatLeagues || {};
 const FLAT_HOSTS = endpoints.flatHosts || {};
@@ -18,7 +17,28 @@ const FLAT_API_LABEL = {
   nhl_stats_rest: 'NHL Stats REST',
   nhl_records: 'NHL Records',
   nfl_api: 'NFL.com Shield API',
+  odds_api: 'The Odds API',
 };
+
+// Standalone (non-league) flat namespaces — any `flatLeagues` value that isn't a
+// real ESPN league prefix (e.g. `odds`, The Odds API). They get a synthetic
+// dropdown entry (empty `scopes` => no ESPN endpoints, only the native groups)
+// so `sdv.<ns>.*` endpoints are still runnable in the playground.
+const LEAGUE_PREFIXES = new Set(endpoints.leagues.map((l) => l.prefix));
+const STANDALONE_NS = [...new Set(Object.values(FLAT_LEAGUES))]
+  .filter((ns) => !LEAGUE_PREFIXES.has(ns))
+  .sort();
+const STANDALONE_LEAGUES = STANDALONE_NS.map((ns) => ({
+  prefix: ns,
+  sport: 'provider',
+  league: ns,
+  scopes: [],
+  standalone: true,
+}));
+
+const LEAGUES = [...endpoints.leagues, ...STANDALONE_LEAGUES].sort((a, b) =>
+  a.prefix.localeCompare(b.prefix)
+);
 
 /** snake_case -> camelCase (espn_nba_scoreboard -> espnNbaScoreboard). */
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());

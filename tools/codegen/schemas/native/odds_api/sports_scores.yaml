@@ -1,0 +1,30 @@
+schema: sports_scores
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: Unique event id.
+- name: sport_key
+  type: character
+  description: Sport key, e.g. `basketball_nba`.
+- name: sport_title
+  type: character
+  description: Human-readable sport title, e.g. `NBA`.
+- name: commence_time
+  type: character
+  description: Game start time (ISO 8601 string or unix seconds).
+- name: completed
+  type: logical
+  description: '`TRUE` if the game has finished.'
+- name: home_team
+  type: character
+  description: Home team name.
+- name: away_team
+  type: character
+  description: Away team name.
+- name: scores
+  type: list
+  description: Per-team `name`/`score` pairs (stringified); `NULL`/`NA` before scores post.
+- name: last_update
+  type: character
+  description: Time the scores were last updated; `NA` until a game is live.

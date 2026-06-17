@@ -1,0 +1,142 @@
+# Flat (non-ESPN) API family: The Odds API (api.the-odds-api.com).
+#
+# The first cross-sport (non-league) provider family — it establishes the
+# standalone `odds` namespace (NOT a league). Unlike the league-scoped flat
+# families (mlb_api / nhl_* / nfl_api) this family's wrappers merge onto
+# `sdv.odds.*` rather than a sport namespace.
+#
+# Auth: The Odds API uses `apiKey` as a plain query param the CALLER supplies —
+# there is NO bearer-token machinery here (that `auth: true` path is only for
+# nfl_api). Every endpoint therefore declares `api_key` (query_key `apiKey`) as
+# a required query param. Pass it on every call: `sdv.odds.oddsApiSports({
+# api_key: '...' })`.
+#
+# Ported from the oddsapiR R package (R/toa_*.R) — paths, params, query keys,
+# and the returns tables (tools/codegen/schemas/native/odds_api/*.yaml) mirror
+# the `toa_*()` functions. {sport_key} and {event_id} are required path params.
+api: odds_api
+host: https://api.the-odds-api.com
+endpoints:
+- short: sports
+  path: /v4/sports
+  parser: parse_odds_api_sports
+  returns_schema: native/odds_api/sports
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: all, query_key: all}
+- short: sports_odds
+  path: /v4/sports/{sport_key}/odds
+  parser: parse_odds_api_sports_odds
+  returns_schema: native/odds_api/sports_odds
+  path_params:
+  - {name: sport_key, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: regions, query_key: regions, default: us}
+  - {name: markets, query_key: markets, default: spreads}
+  - {name: odds_format, query_key: oddsFormat}
+  - {name: date_format, query_key: dateFormat}
+  - {name: event_ids, query_key: eventIds}
+  - {name: bookmakers, query_key: bookmakers}
+  - {name: commence_time_from, query_key: commenceTimeFrom}
+  - {name: commence_time_to, query_key: commenceTimeTo}
+- short: sports_scores
+  path: /v4/sports/{sport_key}/scores
+  parser: parse_odds_api_sports_scores
+  returns_schema: native/odds_api/sports_scores
+  path_params:
+  - {name: sport_key, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: days_from, query_key: daysFrom}
+  - {name: date_format, query_key: dateFormat}
+  - {name: event_ids, query_key: eventIds}
+- short: sports_events
+  path: /v4/sports/{sport_key}/events
+  parser: parse_odds_api_sports_events
+  returns_schema: native/odds_api/sports_events
+  path_params:
+  - {name: sport_key, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: date_format, query_key: dateFormat}
+  - {name: event_ids, query_key: eventIds}
+  - {name: commence_time_from, query_key: commenceTimeFrom}
+  - {name: commence_time_to, query_key: commenceTimeTo}
+- short: sports_participants
+  path: /v4/sports/{sport_key}/participants
+  parser: parse_odds_api_sports_participants
+  returns_schema: native/odds_api/sports_participants
+  path_params:
+  - {name: sport_key, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+- short: event_odds
+  path: /v4/sports/{sport_key}/events/{event_id}/odds
+  parser: parse_odds_api_event_odds
+  returns_schema: native/odds_api/event_odds
+  path_params:
+  - {name: sport_key, required: true}
+  - {name: event_id, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: regions, query_key: regions, default: us}
+  - {name: markets, query_key: markets, default: h2h}
+  - {name: odds_format, query_key: oddsFormat}
+  - {name: date_format, query_key: dateFormat}
+  - {name: bookmakers, query_key: bookmakers}
+- short: event_markets
+  path: /v4/sports/{sport_key}/events/{event_id}/markets
+  parser: parse_odds_api_event_markets
+  returns_schema: native/odds_api/event_markets
+  path_params:
+  - {name: sport_key, required: true}
+  - {name: event_id, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: regions, query_key: regions, default: us}
+  - {name: bookmakers, query_key: bookmakers}
+  - {name: date_format, query_key: dateFormat}
+- short: sports_odds_history
+  path: /v4/historical/sports/{sport_key}/odds
+  parser: parse_odds_api_sports_odds_history
+  returns_schema: native/odds_api/sports_odds_history
+  path_params:
+  - {name: sport_key, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: date, query_key: date}
+  - {name: regions, query_key: regions, default: us}
+  - {name: markets, query_key: markets, default: spreads}
+  - {name: odds_format, query_key: oddsFormat}
+  - {name: date_format, query_key: dateFormat}
+  - {name: event_ids, query_key: eventIds}
+  - {name: bookmakers, query_key: bookmakers}
+- short: sports_events_history
+  path: /v4/historical/sports/{sport_key}/events
+  parser: parse_odds_api_sports_events_history
+  returns_schema: native/odds_api/sports_events_history
+  path_params:
+  - {name: sport_key, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: date, query_key: date}
+  - {name: date_format, query_key: dateFormat}
+  - {name: event_ids, query_key: eventIds}
+  - {name: commence_time_from, query_key: commenceTimeFrom}
+  - {name: commence_time_to, query_key: commenceTimeTo}
+- short: event_odds_history
+  path: /v4/historical/sports/{sport_key}/events/{event_id}/odds
+  parser: parse_odds_api_event_odds_history
+  returns_schema: native/odds_api/event_odds_history
+  path_params:
+  - {name: sport_key, required: true}
+  - {name: event_id, required: true}
+  extra_params:
+  - {name: api_key, query_key: apiKey}
+  - {name: date, query_key: date}
+  - {name: regions, query_key: regions, default: us}
+  - {name: markets, query_key: markets, default: h2h}
+  - {name: odds_format, query_key: oddsFormat}
+  - {name: date_format, query_key: dateFormat}
+  - {name: bookmakers, query_key: bookmakers}

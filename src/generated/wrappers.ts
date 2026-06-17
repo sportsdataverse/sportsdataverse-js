@@ -7795,5 +7795,397 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "parser": "parse_nfl_weekly_game_details",
     "returnsSchema": "native/nfl_api/weekly_game_details",
     "auth": true
+  },
+  {
+    "short": "sports",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "all",
+        "queryKey": "all"
+      }
+    ],
+    "parser": "parse_odds_api_sports",
+    "returnsSchema": "native/odds_api/sports"
+  },
+  {
+    "short": "sports_odds",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports/{sport_key}/odds",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "regions",
+        "queryKey": "regions",
+        "default": "us"
+      },
+      {
+        "name": "markets",
+        "queryKey": "markets",
+        "default": "spreads"
+      },
+      {
+        "name": "odds_format",
+        "queryKey": "oddsFormat"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "event_ids",
+        "queryKey": "eventIds"
+      },
+      {
+        "name": "bookmakers",
+        "queryKey": "bookmakers"
+      },
+      {
+        "name": "commence_time_from",
+        "queryKey": "commenceTimeFrom"
+      },
+      {
+        "name": "commence_time_to",
+        "queryKey": "commenceTimeTo"
+      }
+    ],
+    "parser": "parse_odds_api_sports_odds",
+    "returnsSchema": "native/odds_api/sports_odds"
+  },
+  {
+    "short": "sports_scores",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports/{sport_key}/scores",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "days_from",
+        "queryKey": "daysFrom"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "event_ids",
+        "queryKey": "eventIds"
+      }
+    ],
+    "parser": "parse_odds_api_sports_scores",
+    "returnsSchema": "native/odds_api/sports_scores"
+  },
+  {
+    "short": "sports_events",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports/{sport_key}/events",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "event_ids",
+        "queryKey": "eventIds"
+      },
+      {
+        "name": "commence_time_from",
+        "queryKey": "commenceTimeFrom"
+      },
+      {
+        "name": "commence_time_to",
+        "queryKey": "commenceTimeTo"
+      }
+    ],
+    "parser": "parse_odds_api_sports_events",
+    "returnsSchema": "native/odds_api/sports_events"
+  },
+  {
+    "short": "sports_participants",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports/{sport_key}/participants",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      }
+    ],
+    "parser": "parse_odds_api_sports_participants",
+    "returnsSchema": "native/odds_api/sports_participants"
+  },
+  {
+    "short": "event_odds",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports/{sport_key}/events/{event_id}/odds",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "regions",
+        "queryKey": "regions",
+        "default": "us"
+      },
+      {
+        "name": "markets",
+        "queryKey": "markets",
+        "default": "h2h"
+      },
+      {
+        "name": "odds_format",
+        "queryKey": "oddsFormat"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "bookmakers",
+        "queryKey": "bookmakers"
+      }
+    ],
+    "parser": "parse_odds_api_event_odds",
+    "returnsSchema": "native/odds_api/event_odds"
+  },
+  {
+    "short": "event_markets",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/sports/{sport_key}/events/{event_id}/markets",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "regions",
+        "queryKey": "regions",
+        "default": "us"
+      },
+      {
+        "name": "bookmakers",
+        "queryKey": "bookmakers"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      }
+    ],
+    "parser": "parse_odds_api_event_markets",
+    "returnsSchema": "native/odds_api/event_markets"
+  },
+  {
+    "short": "sports_odds_history",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/historical/sports/{sport_key}/odds",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "regions",
+        "queryKey": "regions",
+        "default": "us"
+      },
+      {
+        "name": "markets",
+        "queryKey": "markets",
+        "default": "spreads"
+      },
+      {
+        "name": "odds_format",
+        "queryKey": "oddsFormat"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "event_ids",
+        "queryKey": "eventIds"
+      },
+      {
+        "name": "bookmakers",
+        "queryKey": "bookmakers"
+      }
+    ],
+    "parser": "parse_odds_api_sports_odds_history",
+    "returnsSchema": "native/odds_api/sports_odds_history"
+  },
+  {
+    "short": "sports_events_history",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/historical/sports/{sport_key}/events",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "event_ids",
+        "queryKey": "eventIds"
+      },
+      {
+        "name": "commence_time_from",
+        "queryKey": "commenceTimeFrom"
+      },
+      {
+        "name": "commence_time_to",
+        "queryKey": "commenceTimeTo"
+      }
+    ],
+    "parser": "parse_odds_api_sports_events_history",
+    "returnsSchema": "native/odds_api/sports_events_history"
+  },
+  {
+    "short": "event_odds_history",
+    "flat": true,
+    "api": "odds_api",
+    "host": "https://api.the-odds-api.com",
+    "scope": "universal",
+    "path": "/v4/historical/sports/{sport_key}/events/{event_id}/odds",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "api_key",
+        "queryKey": "apiKey"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "regions",
+        "queryKey": "regions",
+        "default": "us"
+      },
+      {
+        "name": "markets",
+        "queryKey": "markets",
+        "default": "h2h"
+      },
+      {
+        "name": "odds_format",
+        "queryKey": "oddsFormat"
+      },
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "bookmakers",
+        "queryKey": "bookmakers"
+      }
+    ],
+    "parser": "parse_odds_api_event_odds_history",
+    "returnsSchema": "native/odds_api/event_odds_history"
   }
 ];

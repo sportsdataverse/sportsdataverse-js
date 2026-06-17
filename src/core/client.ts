@@ -35,6 +35,10 @@ export const FLAT_HOSTS: Record<string, string> = {
   // NFL.com "Shield" API (token-auth; the wrapper dispatch mints a WEB_DESKTOP
   // bearer token — see src/core/nfl_auth.ts).
   nfl_api: "https://api.nfl.com",
+  // The Odds API — the first cross-sport (non-league) provider family. Merges
+  // onto the standalone `odds` namespace (sdv.odds.*). No bearer auth: the
+  // caller passes `api_key` as a plain `apiKey` query param on every call.
+  odds_api: "https://api.the-odds-api.com",
 };
 
 const client = axios.create({
