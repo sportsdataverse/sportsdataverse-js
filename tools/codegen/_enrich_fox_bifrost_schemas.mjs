@@ -175,6 +175,7 @@ for (const ep of endpoints) {
   const { short, parser, returns_schema } = ep;
   const schemaFile = join(schemasDir, `${returns_schema}.yaml`);
   if (!existsSync(schemaFile)) {
+    leftEmpty++;
     emptyReasons.push(`${short}: schema file missing`);
     continue;
   }

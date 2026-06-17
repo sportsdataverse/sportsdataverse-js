@@ -162,6 +162,7 @@ for (const ep of endpoints) {
   const { short, parser, returns_schema } = ep;
   const schemaFile = join(schemasDir, `${returns_schema}.yaml`);
   if (!existsSync(schemaFile)) {
+    leftEmpty++;
     emptyReasons.push(`${short}: schema file missing (${returns_schema})`);
     continue;
   }
@@ -182,8 +183,17 @@ for (const ep of endpoints) {
     emptyReasons.push(`${short}: parser ${parser} not found`);
     continue;
   }
-  const payload = JSON.parse(readFileSync(capPath, "utf8"));
-  const rows = parseFn(payload);
+  // Guard per-capture: a malformed JSON file or a parser throwing must not abort
+  // the whole run (the corpus is external + heterogeneous) — log + skip it.
+  let rows;
+  try {
+    const payload = JSON.parse(readFileSync(capPath, "utf8"));
+    rows = parseFn(payload);
+  } catch (err) {
+    leftEmpty++;
+    emptyReasons.push(`${short}: capture parse/parser error (${err.message})`);
+    continue;
+  }
   if (!rows || rows.length === 0) {
     leftEmpty++;
     emptyReasons.push(`${short}: parser yielded 0 rows`);
