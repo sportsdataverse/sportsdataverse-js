@@ -1,0 +1,8 @@
+# CBS NAPI sports line team rankings resource (/resource/team/rankings/sportsline/{team_id}). Generic flattened frame parsed
+# by parse_cbs_napi_list.
+# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
+# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
+# live capture; the parser snake_cases + flattens whatever keys the payload ships.
+schema: sports_line_team_rankings
+kind: dataframe
+columns: []

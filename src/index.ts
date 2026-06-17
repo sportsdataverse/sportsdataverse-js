@@ -49,6 +49,10 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
   // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
   sports247: 'recruiting',
+  // CBS Sports NAPI — third standalone (non-league) provider family. `cbs` is a
+  // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
+  // the NAPI data resources are anonymously reachable).
+  cbs_napi: 'cbs',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

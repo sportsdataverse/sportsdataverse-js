@@ -46,6 +46,11 @@ export const FLAT_HOSTS: Record<string, string> = {
   // `auth: true`; the caller supplies their own token via the flat `headers`
   // arg (sdv.recruiting.sports247_rankings({ headers: { Authorization: … } })).
   sports247: "https://api.247sports.com",
+  // CBS Sports NAPI — third cross-sport (non-league) provider family. Merges
+  // onto the standalone `cbs` namespace (sdv.cbs.*). The NAPI data resources are
+  // anonymously reachable (the spec ships no securityScheme), so this family is
+  // NOT `auth: true` — no token, no required `headers`.
+  cbs_napi: "https://api.cbssports.com",
 };
 
 const client = axios.create({

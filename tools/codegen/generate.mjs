@@ -37,6 +37,7 @@ const FLAT_API_FILES = [
   "nfl_api",
   "odds_api",
   "sports247",
+  "cbs_napi",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -56,6 +57,7 @@ const FLAT_API_NAMESPACES = {
   nfl_api: "nfl",
   odds_api: "odds",
   sports247: "recruiting",
+  cbs_napi: "cbs",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -91,6 +93,7 @@ const FLAT_API_META = {
     label: "247Sports",
     source: "the 247Sports recruiting database",
   },
+  cbs_napi: { label: "CBS Sports", source: "CBS Sports napi" },
 };
 
 // Per-standalone-namespace quick-start snippet shown on the generated
@@ -106,6 +109,9 @@ const STANDALONE_NS_EXAMPLE = {
     "  sport_key: 'football', year: 2025,\n" +
     "  headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },\n" +
     "});\n",
+  cbs:
+    "// CBS Sports NAPI is an anonymously-reachable public JSON API (no token):\n" +
+    "await sdv.cbs.cbs_napi_team({ team_id: 'football-nfl-NE' });\n",
 };
 
 // The set of league prefixes (filled after the leagues doc loads) — any
