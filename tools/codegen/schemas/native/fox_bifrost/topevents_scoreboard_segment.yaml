@@ -1,0 +1,37 @@
+# Fox Sports Bifrost — generated returns schema. Columns are derived from the
+# spec's captured `components.schemas` (the item props of the list the parser
+# flattens), snake_cased to match the parser's output. Untyped (`object`)
+# responses carry `columns: []` (the parser flattens whatever the payload ships).
+schema: topevents_scoreboard_segment
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: Bifrost topevents_scoreboard_segment field `id`.
+- name: template
+  type: character
+  description: Bifrost topevents_scoreboard_segment field `template`.
+- name: title
+  type: character
+  description: Bifrost topevents_scoreboard_segment field `title`.
+- name: hide_league
+  type: logical
+  description: Bifrost topevents_scoreboard_segment field `hideLeague`.
+- name: image
+  type: list
+  description: Bifrost topevents_scoreboard_segment field `image`.
+- name: events
+  type: list
+  description: Bifrost topevents_scoreboard_segment field `events`.
+- name: uri
+  type: character
+  description: Bifrost topevents_scoreboard_segment field `uri`.
+- name: title_link
+  type: list
+  description: Bifrost topevents_scoreboard_segment field `titleLink`.
+- name: header_text
+  type: character
+  description: Bifrost topevents_scoreboard_segment field `headerText`.
+- name: header_link
+  type: list
+  description: Bifrost topevents_scoreboard_segment field `headerLink`.

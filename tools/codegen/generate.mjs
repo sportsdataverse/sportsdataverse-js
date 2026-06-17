@@ -38,6 +38,7 @@ const FLAT_API_FILES = [
   "odds_api",
   "sports247",
   "cbs_napi",
+  "fox_bifrost",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -58,6 +59,7 @@ const FLAT_API_NAMESPACES = {
   odds_api: "odds",
   sports247: "recruiting",
   cbs_napi: "cbs",
+  fox_bifrost: "fox",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -94,6 +96,7 @@ const FLAT_API_META = {
     source: "the 247Sports recruiting database",
   },
   cbs_napi: { label: "CBS Sports", source: "CBS Sports napi" },
+  fox_bifrost: { label: "Fox Sports", source: "Fox Sports Bifrost API" },
 };
 
 // Per-standalone-namespace quick-start snippet shown on the generated
@@ -112,6 +115,10 @@ const STANDALONE_NS_EXAMPLE = {
   cbs:
     "// CBS Sports NAPI is an anonymously-reachable public JSON API (no token):\n" +
     "await sdv.cbs.cbs_napi_team({ team_id: 'football-nfl-NE' });\n",
+  fox:
+    "// Fox Sports Bifrost uses a public apikey + api-version query pair\n" +
+    "// (both default out of the box — override apikey if you have your own):\n" +
+    "await sdv.fox.fox_bifrost_scoreboard({ sport: 'cfb' });\n",
 };
 
 // The set of league prefixes (filled after the leagues doc loads) — any

@@ -53,6 +53,11 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
   // the NAPI data resources are anonymously reachable).
   cbs_napi: 'cbs',
+  // Fox Sports "Bifrost" API — fourth standalone (non-league) provider family.
+  // `fox` is a cross-sport namespace; the merge creates `sdv.fox.*` from scratch.
+  // Auth is a public apikey + api-version query pair (both default in the wrapper
+  // metadata, no account/token), so it is NOT flagged auth:true.
+  fox_bifrost: 'fox',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

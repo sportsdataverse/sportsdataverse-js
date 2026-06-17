@@ -1,0 +1,16 @@
+# Fox Sports Bifrost — generated returns schema. Columns are derived from the
+# spec's captured `components.schemas` (the item props of the list the parser
+# flattens), snake_cased to match the parser's output. Untyped (`object`)
+# responses carry `columns: []` (the parser flattens whatever the payload ships).
+schema: event_matchup
+kind: dataframe
+columns:
+- name: title
+  type: character
+  description: Bifrost event_matchup field `title`.
+- name: left_item_details
+  type: list
+  description: Bifrost event_matchup field `leftItemDetails`.
+- name: right_item_details
+  type: list
+  description: Bifrost event_matchup field `rightItemDetails`.

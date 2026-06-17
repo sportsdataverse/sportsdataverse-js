@@ -1,0 +1,25 @@
+# Fox Sports Bifrost — generated returns schema. Columns are derived from the
+# spec's captured `components.schemas` (the item props of the list the parser
+# flattens), snake_cased to match the parser's output. Untyped (`object`)
+# responses carry `columns: []` (the parser flattens whatever the payload ships).
+schema: league_odds
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: Bifrost league_odds field `id`.
+- name: name
+  type: character
+  description: Bifrost league_odds field `name`.
+- name: uri
+  type: character
+  description: Bifrost league_odds field `uri`.
+- name: web_url
+  type: character
+  description: Bifrost league_odds field `webUrl`.
+- name: parameters
+  type: list
+  description: Bifrost league_odds field `parameters`.
+- name: selected
+  type: logical
+  description: Bifrost league_odds field `selected`.

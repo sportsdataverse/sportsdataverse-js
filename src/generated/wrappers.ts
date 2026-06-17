@@ -10696,5 +10696,1079 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "queryParams": [],
     "parser": "parse_cbs_napi_list",
     "returnsSchema": "native/cbs_napi/weather"
+  },
+  {
+    "short": "scoreboard",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/scoreboard/main",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "group_id",
+        "queryKey": "groupId"
+      }
+    ],
+    "parser": "parse_fox_bifrost_scoreboard",
+    "returnsSchema": "native/fox_bifrost/scoreboard"
+  },
+  {
+    "short": "scorechip",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/scorechip/{chip_id}",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "chip_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/scorechip"
+  },
+  {
+    "short": "topevents_scoreboard_segment",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/topevents/scoreboard/segment/{segment}",
+    "pathParams": [
+      {
+        "name": "segment"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_scoreboard",
+    "returnsSchema": "native/fox_bifrost/topevents_scoreboard_segment"
+  },
+  {
+    "short": "league_conferences",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/conferences",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/league_conferences"
+  },
+  {
+    "short": "league_header",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/header",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/league_header"
+  },
+  {
+    "short": "league_odds",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/odds",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "group_id",
+        "queryKey": "groupId"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/league_odds"
+  },
+  {
+    "short": "league_playernews",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/playernews",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/league_playernews"
+  },
+  {
+    "short": "league_polls",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/polls",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_standings",
+    "returnsSchema": "native/fox_bifrost/league_polls"
+  },
+  {
+    "short": "league_schedule",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/schedule",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_scoreboard",
+    "returnsSchema": "native/fox_bifrost/league_schedule"
+  },
+  {
+    "short": "league_scores",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/scores",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_scoreboard",
+    "returnsSchema": "native/fox_bifrost/league_scores"
+  },
+  {
+    "short": "league_scores_segment",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/scores-segment/{segment_id}",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "segment_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "group_id",
+        "queryKey": "groupId"
+      }
+    ],
+    "parser": "parse_fox_bifrost_scoreboard",
+    "returnsSchema": "native/fox_bifrost/league_scores_segment"
+  },
+  {
+    "short": "league_standings",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/standings",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_standings",
+    "returnsSchema": "native/fox_bifrost/league_standings"
+  },
+  {
+    "short": "league_stats",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/stats",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/league_stats"
+  },
+  {
+    "short": "league_stats_con",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/stats-con/{who}/{category}/{page}",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "who"
+      },
+      {
+        "name": "category"
+      },
+      {
+        "name": "page"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "group_id",
+        "queryKey": "groupId"
+      }
+    ],
+    "parser": "parse_fox_bifrost_standings",
+    "returnsSchema": "native/fox_bifrost/league_stats_con"
+  },
+  {
+    "short": "league_teamnav",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/league/teamnav",
+    "pathParams": [
+      {
+        "name": "sport"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/league_teamnav"
+  },
+  {
+    "short": "event_data",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/event/{event_id}/data",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_event",
+    "returnsSchema": "native/fox_bifrost/event_data"
+  },
+  {
+    "short": "event_matchup",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/event/{event_id}/matchup",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_event",
+    "returnsSchema": "native/fox_bifrost/event_matchup"
+  },
+  {
+    "short": "event_odds",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/event/{event_id}/odds",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/event_odds"
+  },
+  {
+    "short": "event_recap",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/event/{event_id}/recap",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/event_recap"
+  },
+  {
+    "short": "event_standings",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/event/{event_id}/standings",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_standings",
+    "returnsSchema": "native/fox_bifrost/event_standings"
+  },
+  {
+    "short": "team_gamelog",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/team/{team_id}/gamelog",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/team_gamelog"
+  },
+  {
+    "short": "team_header",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/team/{team_id}/header",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/team_header"
+  },
+  {
+    "short": "team_roster",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/team/{team_id}/roster",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_team_roster",
+    "returnsSchema": "native/fox_bifrost/team_roster"
+  },
+  {
+    "short": "team_standings",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/team/{team_id}/standings",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_standings",
+    "returnsSchema": "native/fox_bifrost/team_standings"
+  },
+  {
+    "short": "team_stats",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/{sport}/team/{team_id}/stats",
+    "pathParams": [
+      {
+        "name": "sport"
+      },
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/team_stats"
+  },
+  {
+    "short": "explore_browse",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/explore/browse/{section}/main",
+    "pathParams": [
+      {
+        "name": "section"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/explore_browse"
+  },
+  {
+    "short": "explore_favorite",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/explore/favorite/{section}/main",
+    "pathParams": [
+      {
+        "name": "section"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/explore_favorite"
+  },
+  {
+    "short": "explore_odds",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/explore/odds/main",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/explore_odds"
+  },
+  {
+    "short": "search_content",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/search/content",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "text",
+        "queryKey": "text"
+      }
+    ],
+    "parser": "parse_fox_bifrost_search",
+    "returnsSchema": "native/fox_bifrost/search_content"
+  },
+  {
+    "short": "search_entities",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/search/entities",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "text",
+        "queryKey": "text"
+      }
+    ],
+    "parser": "parse_fox_bifrost_search",
+    "returnsSchema": "native/fox_bifrost/search_entities"
+  },
+  {
+    "short": "search_popular",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/search/popular",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/search_popular"
+  },
+  {
+    "short": "trending_articles",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/general/trending/articles",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "duration",
+        "queryKey": "duration",
+        "default": 4
+      },
+      {
+        "name": "tags",
+        "queryKey": "tags"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/trending_articles"
+  },
+  {
+    "short": "trending_videos",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/general/trending/videos",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      },
+      {
+        "name": "duration",
+        "queryKey": "duration",
+        "default": 4
+      },
+      {
+        "name": "max_items",
+        "queryKey": "maxItems",
+        "default": 12
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/trending_videos"
+  },
+  {
+    "short": "foxpolls",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/foxpolls/v1/polls",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "associated_entity_ids",
+        "queryKey": "associatedEntityIds"
+      },
+      {
+        "name": "include_answers",
+        "queryKey": "includeAnswers",
+        "default": true
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/foxpolls"
+  },
+  {
+    "short": "fs_feed",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/fs/feed",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/fs_feed"
+  },
+  {
+    "short": "fs_images",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/fs/images",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/fs_images"
+  },
+  {
+    "short": "fs_layouts",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/fs/layouts",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/fs_layouts"
+  },
+  {
+    "short": "fs_videos",
+    "flat": true,
+    "api": "fox_bifrost",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/fs/videos",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_bifrost_list",
+    "returnsSchema": "native/fox_bifrost/fs_videos"
   }
 ];
