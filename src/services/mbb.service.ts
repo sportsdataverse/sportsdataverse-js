@@ -3,6 +3,12 @@ import * as cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
  *
+ * > **Superseded:** these hand-written `get*` methods predate the generated
+ * > cross-league ESPN surface. They remain supported for back-compat, but new
+ * > code should prefer the generated `espn_mbb_*` wrappers (e.g.
+ * > `sdv.mbb.espn_mbb_scoreboard()`), which cover far more ESPN
+ * > endpoints and share one maintained codegen pipeline.
+ *
  * @namespace mbb
  */
 export default {

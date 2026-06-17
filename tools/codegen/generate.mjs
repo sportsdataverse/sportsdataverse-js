@@ -14,12 +14,89 @@ import { parse } from "yaml";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
+const schemasDir = join(here, "schemas");
 const repoRoot = join(here, "..", "..");
 const generatedDir = join(repoRoot, "src", "generated");
 const referenceDir = join(repoRoot, "docs", "docs", "reference");
 const playgroundDir = join(repoRoot, "docs", "src", "playground");
 
 const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
+
+// Non-ESPN "flat API" families (one YAML each). These are absolute-host live
+// APIs (no {sport}/{league} nesting) and are emitted into a SEPARATE
+// FLAT_WRAPPERS table so the ESPN WRAPPERS table — and every invariant the ESPN
+// contract tests assert over it ({sport} present, EspnFamily, scopes) — stays
+// untouched.
+const FLAT_API_FILES = [
+  "mlb_api",
+  "mlb_statcast",
+  "nhl_api_web",
+  "nhl_edge",
+  "nhl_stats_rest",
+  "nhl_records",
+  "nfl_api",
+];
+
+// Which league reference page each flat-API family is documented on (mirrors
+// FLAT_API_NAMESPACES in src/index.ts — keep the two in sync). The runtime
+// merges each family's wrappers onto this namespace (`sdv.<prefix>.<wrapper>`),
+// so the docs put the "Native API — <family>" section on that league's page.
+const FLAT_API_NAMESPACES = {
+  mlb_api: "mlb",
+  mlb_statcast: "mlb",
+  nhl_api_web: "nhl",
+  nhl_edge: "nhl",
+  nhl_stats_rest: "nhl",
+  nhl_records: "nhl",
+  nfl_api: "nfl",
+};
+
+// Human-facing label + upstream-source blurb per flat-API family, shown in the
+// section heading + intro line on the league reference page.
+const FLAT_API_META = {
+  mlb_api: { label: "MLB Stats API", source: "the official MLB Stats API" },
+  mlb_statcast: {
+    label: "Baseball Savant / Statcast",
+    source: "Baseball Savant (Statcast)",
+  },
+  nhl_api_web: {
+    label: "NHL api-web (game feed)",
+    source: "the modern NHL game-feed API",
+  },
+  nhl_edge: {
+    label: "NHL EDGE (player tracking)",
+    source: "NHL EDGE player/team tracking",
+  },
+  nhl_stats_rest: {
+    label: "NHL Stats REST",
+    source: "the NHL Stats REST API",
+  },
+  nhl_records: {
+    label: "NHL Records",
+    source: "the NHL Records site API",
+  },
+  nfl_api: {
+    label: "NFL.com Shield API",
+    source: 'the NFL.com "Shield" data API',
+  },
+};
+
+function mapPathParams(ep) {
+  return (ep.path_params ?? []).map((p) => ({
+    name: p.name,
+    ...(p.required === false ? { required: false } : {}),
+    ...(p.default !== undefined ? { default: p.default } : {}),
+    ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
+  }));
+}
+
+function mapQueryParams(ep) {
+  return (ep.extra_params ?? []).map((p) => ({
+    name: p.name,
+    queryKey: p.query_key,
+    ...(p.default !== undefined ? { default: p.default } : {}),
+  }));
+}
 
 function loadWrappers() {
   const wrappers = [];
@@ -32,17 +109,41 @@ function loadWrappers() {
         family: ep.host ?? fileHost, // per-endpoint host override (e.g. standings)
         scope: ep.scope ?? "universal",
         path: ep.path,
-        pathParams: (ep.path_params ?? []).map((p) => ({
-          name: p.name,
-          ...(p.required === false ? { required: false } : {}),
-          ...(p.default !== undefined ? { default: p.default } : {}),
-          ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
-        })),
-        queryParams: (ep.extra_params ?? []).map((p) => ({
-          name: p.name,
-          queryKey: p.query_key,
-          ...(p.default !== undefined ? { default: p.default } : {}),
-        })),
+        pathParams: mapPathParams(ep),
+        queryParams: mapQueryParams(ep),
+      });
+    }
+  }
+  return wrappers;
+}
+
+/**
+ * Load the flat-API wrappers (one `WrapperDef` per endpoint across every
+ * FLAT_API_FILES YAML). Each carries `flat: true`, the family `api` stem, the
+ * absolute `host`, and its `parser` name — threaded into FLAT_WRAPPERS in
+ * src/generated/wrappers.ts.
+ */
+function loadFlatWrappers() {
+  const wrappers = [];
+  for (const stem of FLAT_API_FILES) {
+    const doc = parse(readFileSync(join(endpointsDir, `${stem}.yaml`), "utf8"));
+    // A top-level `auth: true` on the family YAML (e.g. nfl_api) flags every
+    // emitted wrapper so the flat dispatch resolves a bearer-token header set
+    // before fetching (see AUTH_HEADER_PROVIDERS in src/leagues/_make_flat.ts).
+    const auth = doc.auth === true;
+    for (const ep of doc.endpoints ?? []) {
+      wrappers.push({
+        short: ep.short,
+        flat: true,
+        api: doc.api,
+        host: doc.host,
+        scope: "universal",
+        path: ep.path,
+        pathParams: mapPathParams(ep),
+        queryParams: mapQueryParams(ep),
+        ...(ep.parser ? { parser: ep.parser } : {}),
+        ...(ep.returns_schema ? { returnsSchema: ep.returns_schema } : {}),
+        ...(auth ? { auth: true } : {}),
       });
     }
   }
@@ -142,12 +243,154 @@ function wrapperName(prefix, short) {
   return `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 }
 
-function renderLeaguePage(league, wrappers, position) {
+/** snake_case -> camelCase (e.g. `mlb_api_teams` -> `mlbApiTeams`). */
+function toCamel(s) {
+  return s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+}
+
+/** Flat wrappers belonging to a given league prefix (via FLAT_API_NAMESPACES). */
+function flatWrappersForLeague(prefix, flatWrappers) {
+  return flatWrappers.filter((w) => FLAT_API_NAMESPACES[w.api] === prefix);
+}
+
+/** Render the parser cell for a flat wrapper (raw JSON passthrough when none). */
+function flatParserCell(wrapper) {
+  return wrapper.parser ? `\`${wrapper.parser}\`` : "*(raw)*";
+}
+
+// In-process cache so each `returns_schema` YAML is read + parsed at most once.
+const _schemaCache = new Map();
+
+/**
+ * Load a returns-schema's `columns` for a `returns_schema` value (e.g.
+ * `native/mlb_api/boxscore` or `autodoc/mlb/mlb_statcast_search`), resolved
+ * under tools/codegen/schemas/. Returns the column list (`[{name, type,
+ * description}]`) or `null` when the file is missing / has no columns. The
+ * parsed result is cached so repeated lookups across pages are cheap.
+ */
+function loadReturnsColumns(returnsSchema) {
+  if (!returnsSchema) return null;
+  if (_schemaCache.has(returnsSchema)) return _schemaCache.get(returnsSchema);
+  const file = join(schemasDir, `${returnsSchema}.yaml`);
+  let columns = null;
+  if (existsSync(file)) {
+    const doc = parse(readFileSync(file, "utf8"));
+    if (Array.isArray(doc?.columns) && doc.columns.length) columns = doc.columns;
+  }
+  _schemaCache.set(returnsSchema, columns);
+  return columns;
+}
+
+/** Escape `|` (and stray backticks-balance is left as-is) for a markdown table cell. */
+function escapeCell(text) {
+  return String(text ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim();
+}
+
+/**
+ * Render a `### Returns — <label>` subsection: a `col_name | type | description`
+ * table built from a returns-schema's columns. `label` is the wrapper's
+ * display name (already backtick-wrapped by the caller). Returns "" when the
+ * schema resolves to no columns (caller then skips emitting anything).
+ */
+function renderReturnsTable(label, columns) {
+  if (!columns || !columns.length) return "";
+  let out = `\n### Returns — ${label}\n\n`;
+  out += `| col_name | type | description |\n`;
+  out += `|---|---|---|\n`;
+  for (const c of columns) {
+    const desc = c.description ? escapeCell(c.description) : "";
+    out += `| \`${escapeCell(c.name)}\` | ${escapeCell(c.type)} | ${desc} |\n`;
+  }
+  return out;
+}
+
+// Hand-written Baseball Savant / Statcast wrappers (src/leagues/
+// mlb_statcast_extra.ts) — not in any endpoint YAML, so they never reach
+// FLAT_WRAPPERS / the native table. We still document their returns frames from
+// the committed autodoc schemas. Keyed: dual-case display name -> autodoc schema.
+const STATCAST_HANDWRITTEN = [
+  { snake: "mlb_statcast_search", schema: "autodoc/mlb/mlb_statcast_search" },
+  { snake: "mlb_statcast_search_minors", schema: "autodoc/mlb/mlb_statcast_search_minors" },
+  { snake: "mlb_statcast_search_wbc", schema: "autodoc/mlb/mlb_statcast_search_wbc" },
+  { snake: "mlb_statcast_player", schema: "autodoc/mlb/mlb_statcast_player" },
+];
+
+/**
+ * Render the "Native API — <family>" reference sections for a league. Each flat
+ * family that maps to this league prefix gets a clearly-headed section after the
+ * ESPN endpoints: an intro line (host + source + auth note) and a table of every
+ * wrapper (dual-case name, absolute host + path, path/query params, parser,
+ * auth). Returns "" when the league has no flat families.
+ */
+function renderNativeSections(league, flatWrappers) {
+  const families = FLAT_API_FILES.filter(
+    (api) => FLAT_API_NAMESPACES[api] === league.prefix
+  );
+  let body = "";
+  for (const api of families) {
+    const rows = flatWrappers.filter((w) => w.api === api);
+    if (!rows.length) continue;
+    const meta = FLAT_API_META[api] ?? { label: api, source: api };
+    const host = rows[0].host;
+    const authed = rows.some((w) => w.auth);
+    body += `\n## Native API — ${meta.label}\n\n`;
+    body +=
+      `Flat (non-ESPN) wrappers for ${meta.source}. ` +
+      `Host: \`${host}\`. ` +
+      `Each method is exposed under BOTH \`${api}_<endpoint>\` (snake_case, ` +
+      `py/R parity) and \`${toCamel(api)}<Endpoint>\` (camelCase canonical) on ` +
+      `\`sdv.${league.prefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
+      `through its tidy.js parser; omit it for the raw response.`;
+    if (authed) {
+      body +=
+        ` **Auth:** this family mints a bearer token automatically before ` +
+        `each call (no credentials required).`;
+    }
+    body += `\n\n`;
+    body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
+    body += `|---|---|---|---|---|---|\n`;
+    const sorted = rows.slice().sort((a, b) => a.short.localeCompare(b.short));
+    for (const w of sorted) {
+      const camel = toCamel(`${api}_${w.short}`);
+      const method = `\`${api}_${w.short}\` / \`${camel}\``;
+      const http = `\`${w.host}${w.path}\``;
+      const auth = w.auth ? "yes" : "—";
+      body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
+    }
+    // Per-wrapper `Returns` tables (one `### Returns — <wrapper>` block per
+    // endpoint whose `returns_schema` resolves to a committed columns file).
+    // Endpoints with no schema (raw-JSON / generic-list passthroughs) emit none.
+    for (const w of sorted) {
+      const cols = loadReturnsColumns(w.returnsSchema);
+      if (!cols) continue;
+      const camel = toCamel(`${api}_${w.short}`);
+      body += renderReturnsTable(`\`${api}_${w.short}\` / \`${camel}\``, cols);
+    }
+    // The Statcast family additionally exposes hand-written search / player
+    // wrappers (not in the YAML); document their returns frames from autodoc.
+    if (api === "mlb_statcast") {
+      for (const hw of STATCAST_HANDWRITTEN) {
+        const cols = loadReturnsColumns(hw.schema);
+        if (!cols) continue;
+        const camel = toCamel(hw.snake);
+        body += renderReturnsTable(`\`${hw.snake}\` / \`${camel}\``, cols);
+      }
+    }
+  }
+  return body;
+}
+
+function renderLeaguePage(league, wrappers, position, flatWrappers = []) {
   const applicable = wrappersForLeague(league, wrappers);
+  const flatApplicable = flatWrappersForLeague(league.prefix, flatWrappers);
   const scoreboard = wrapperName(league.prefix, "scoreboard");
   const callExample = league.leagueParam
     ? `await sdv.${league.prefix}.${scoreboard}({ league: '${league.league}' });`
     : `await sdv.${league.prefix}.${scoreboard}({});`;
+  const nativeNote = flatApplicable.length
+    ? ` This league also ships **${flatApplicable.length}** native (non-ESPN) ` +
+      `API wrappers — see the **Native API** sections below.`
+    : "";
 
   let body =
     `---\n` +
@@ -160,11 +403,12 @@ function renderLeaguePage(league, wrappers, position) {
     `- **sport slug:** \`${league.sport}\`\n` +
     `- **league slug:** \`${league.league}\`${league.leagueParam ? " *(default; override with a `league` param)*" : ""}\n` +
     `- **scopes:** ${league.scopes.map((s) => `\`${s}\``).join(", ")}\n` +
-    `- **wrappers:** ${applicable.length}\n\n` +
+    `- **wrappers:** ${applicable.length}${flatApplicable.length ? ` *(+ ${flatApplicable.length} native)*` : ""}\n\n` +
     `Every endpoint is called as \`sdv.${league.prefix}.${scoreboard.replace("Scoreboard", "<Endpoint>")}(params)\`. ` +
     `Each method is also available under its snake_case name ` +
     `(\`espn_${league.prefix}_<endpoint>\`) for parity with the Python / R packages. ` +
-    `Parameters accept snake_case or camelCase. Required path params are marked \\*.\n\n` +
+    `Parameters accept snake_case or camelCase. Required path params are marked \\*.` +
+    `${nativeNote}\n\n` +
     "```js\n" +
     `import sdv from 'sportsdataverse';\n\n` +
     `${callExample}\n` +
@@ -184,10 +428,13 @@ function renderLeaguePage(league, wrappers, position) {
     }
   }
 
+  // Flat (non-ESPN) "Native API — <family>" sections, after the ESPN scopes.
+  body += renderNativeSections(league, flatWrappers);
+
   return body;
 }
 
-function renderReferenceIndex(leagues, wrappers) {
+function renderReferenceIndex(leagues, wrappers, flatWrappers = []) {
   let body =
     `---\n` +
     `title: ESPN Reference\n` +
@@ -201,12 +448,18 @@ function renderReferenceIndex(leagues, wrappers) {
     `Each method is also available under its snake_case name (\`espn_nba_scoreboard\`) ` +
     `for parity with the Python / R packages. Pick a league for its full endpoint ` +
     `table, or try any call live in the [playground](/playground).\n\n` +
-    `| League | sport | ESPN slug | scopes | wrappers |\n` +
-    `|---|---|---|---|---:|\n`;
+    `Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB ` +
+    `Stats API + Baseball Savant/Statcast (\`mlb\`), the four NHL native APIs ` +
+    `(\`nhl\`), and the NFL.com Shield API (\`nfl\`). They're listed in the ` +
+    `**Native API** sections of each league page; the \`native\` column below ` +
+    `counts them.\n\n` +
+    `| League | sport | ESPN slug | scopes | wrappers | native |\n` +
+    `|---|---|---|---|---:|---:|\n`;
   for (const l of leagues) {
     const count = wrappersForLeague(l, wrappers).length;
+    const native = flatWrappersForLeague(l.prefix, flatWrappers).length;
     const slug = l.leagueParam ? `${l.league} *(param)*` : l.league;
-    body += `| [${l.prefix}](./${l.prefix}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} |\n`;
+    body += `| [${l.prefix}](./${l.prefix}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} | ${native || "—"} |\n`;
   }
   body +=
     `\n:::tip Same call, every league\n` +
@@ -214,6 +467,13 @@ function renderReferenceIndex(leagues, wrappers) {
     `await sdv.nba.espnNbaScoreboard({});\n` +
     `await sdv.nfl.espnNflScoreboard({ week: 1, seasonType: 2 });\n` +
     `await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });\n` +
+    "```\n" +
+    `:::\n` +
+    `\n:::tip Native (non-ESPN) APIs\n` +
+    "```js\n" +
+    `await sdv.mlb.mlbApiSchedule({ sportId: 1, date: '2024-07-01' });\n` +
+    `await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });\n` +
+    `await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });\n` +
     "```\n" +
     `:::\n`;
   return body;
@@ -229,7 +489,7 @@ const REFERENCE_CATEGORY = JSON.stringify(
 // Playground metadata (consumed by the React component + serverless proxy)
 // ---------------------------------------------------------------------------
 
-function renderEndpointsJson(wrappers, leagues, hosts) {
+function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) {
   return (
     JSON.stringify(
       {
@@ -237,6 +497,16 @@ function renderEndpointsJson(wrappers, leagues, hosts) {
         hosts,
         leagues,
         endpoints: wrappers,
+        // Additive flat-API metadata — kept under its own keys so the ESPN
+        // `endpoints`/`hosts`/`leagues` blocks (and the playground resolver that
+        // consumes them) are byte-for-byte unchanged. `flatApis` carries the
+        // full per-endpoint param metadata (api/host/path/pathParams/
+        // queryParams/parser/auth); `flatHosts` is the per-family base URL; and
+        // `flatLeagues` maps each family stem to the league prefix it's merged
+        // onto (so the playground can group flat endpoints under their league).
+        flatHosts,
+        flatLeagues: FLAT_API_NAMESPACES,
+        flatApis: flatWrappers,
       },
       null,
       2
@@ -244,27 +514,49 @@ function renderEndpointsJson(wrappers, leagues, hosts) {
   );
 }
 
+/** Build the per-family flat-host map ({ mlb_api: "https://statsapi.mlb.com" }). */
+function flatHostsFrom(flatWrappers) {
+  const hosts = {};
+  for (const w of flatWrappers) hosts[w.api] = w.host;
+  return hosts;
+}
+
 // ---------------------------------------------------------------------------
 // Assemble + write/check
 // ---------------------------------------------------------------------------
 
 const wrappers = loadWrappers();
+const flatWrappers = loadFlatWrappers();
+const flatHosts = flatHostsFrom(flatWrappers);
 const leaguesDoc = loadLeaguesDoc();
 const leagues = loadLeagues(leaguesDoc);
 const hosts = leaguesDoc.hosts;
 
+// The generated wrappers module exports the ESPN `WRAPPERS` table (unchanged)
+// plus a separate `FLAT_WRAPPERS` table for the non-ESPN flat APIs.
+const wrappersTs =
+  renderTs("WrapperDef", "WRAPPERS", wrappers) +
+  `\nexport const FLAT_WRAPPERS: WrapperDef[] = ${JSON.stringify(flatWrappers, null, 2)};\n`;
+
 const outputs = {
-  [join(generatedDir, "wrappers.ts")]: renderTs("WrapperDef", "WRAPPERS", wrappers),
+  [join(generatedDir, "wrappers.ts")]: wrappersTs,
   [join(generatedDir, "leagues.ts")]: renderTs("LeagueConfig", "LEAGUES", leagues),
-  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers),
+  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers, flatWrappers),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
-  [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(wrappers, leagues, hosts),
+  [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
+    wrappers,
+    leagues,
+    hosts,
+    flatWrappers,
+    flatHosts
+  ),
 };
 leagues.forEach((league, i) => {
   outputs[join(referenceDir, `${league.prefix}.md`)] = renderLeaguePage(
     league,
     wrappers,
-    i + 1
+    i + 1,
+    flatWrappers
   );
 });
 
@@ -286,6 +578,7 @@ for (const [file, content] of Object.entries(outputs)) {
 
 console.log(
   `codegen: ${wrappers.length} wrappers across ${leagues.length} leagues ` +
+    `+ ${flatWrappers.length} flat-API wrappers (${FLAT_API_FILES.length} families) ` +
     `(+ ${leagues.length + 2} reference pages + playground metadata)`
 );
 if (check && drift) process.exit(1);

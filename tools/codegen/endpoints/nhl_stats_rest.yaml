@@ -1,0 +1,197 @@
+# Flat (non-ESPN) API family: the NHL Stats REST API (api.nhle.com/stats/rest).
+# Faithful port of sdv-py tools/codegen/endpoints/nhl_stats_rest.yaml —
+# Python-only codegen fields dropped. Every data endpoint ships its rows under
+# the same `{data: [...], total: N}` shape and resolves to the single generic
+# parser `parse_nhl_stats_rest`; the meta endpoints (ping / componentSeason /
+# config / content_module) carry no parser and return raw JSON.
+api: nhl_stats_rest
+host: https://api.nhle.com/stats/rest
+name_pattern: nhl_stats_rest_{short}
+endpoints:
+- short: ping
+  path: /ping
+- short: component_season
+  path: /{lang}/componentSeason
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+- short: config
+  path: /{lang}/config
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+- short: content_module
+  path: /{lang}/content/module/{template_key}
+  path_params:
+  - name: template_key
+    type: str
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+- short: country
+  path: /{lang}/country
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/country
+- short: draft
+  path: /{lang}/draft
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: franchise
+  path: /{lang}/franchise
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/franchise
+- short: game
+  path: /{lang}/game
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: glossary
+  path: /{lang}/glossary
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/glossary
+- short: goalie_report
+  path: /{lang}/goalie/{report}
+  path_params:
+  - name: report
+    type: str
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/goalie_report
+- short: leaders_goalies
+  path: /{lang}/leaders/goalies/{attribute}
+  path_params:
+  - name: attribute
+    type: str
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: leaders_skaters
+  path: /{lang}/leaders/skaters/{attribute}
+  path_params:
+  - name: attribute
+    type: str
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: milestones_goalies
+  path: /{lang}/milestones/goalies
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: milestones_skaters
+  path: /{lang}/milestones/skaters
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: players
+  path: /{lang}/players
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: season
+  path: /{lang}/season
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/season
+- short: shiftcharts
+  path: /{lang}/shiftcharts
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: skater_report
+  path: /{lang}/skater/{report}
+  path_params:
+  - name: report
+    type: str
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/skater_report
+- short: team
+  path: /{lang}/team
+  path_params:
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: team_by_id
+  path: /{lang}/team/id/{team_id}
+  path_params:
+  - name: team_id
+    type: int
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+- short: team_report
+  path: /{lang}/team/{report}
+  path_params:
+  - name: report
+    type: str
+    required: true
+  - name: lang
+    type: str
+    required: false
+    default: en
+  parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/team_report

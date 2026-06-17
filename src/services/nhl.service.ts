@@ -2,6 +2,12 @@ import axios from 'axios';
 /**
  * Operations for NHL.
  *
+ * > **Superseded:** these hand-written `get*` methods predate the generated
+ * > cross-league ESPN surface. They remain supported for back-compat, but new
+ * > code should prefer the generated `espn_nhl_*` wrappers (e.g.
+ * > `sdv.nhl.espn_nhl_scoreboard()`), which cover far more ESPN
+ * > endpoints and share one maintained codegen pipeline.
+ *
  * @namespace nhl
  */
 export default {

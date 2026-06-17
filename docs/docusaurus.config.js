@@ -30,6 +30,11 @@ module.exports = {
         skipErrorChecking: true,
         excludePrivate: true,
         excludeInternal: true,
+        // Don't document re-exported external deps (e.g. `export * as tidy from
+        // '@tidyjs/tidy'`) — TypeDoc would otherwise emit pages for the whole
+        // tidy.js API, one of which (`tidy/functions/rename`) has a JSDoc the MDX
+        // compiler can't parse. The runtime re-export is unaffected.
+        excludeExternals: true,
         // Keep the committed docs/api/_category_.json (which labels the sidebar
         // section) across rebuilds — TypeDoc would otherwise wipe the out dir.
         cleanOutputDir: false,

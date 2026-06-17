@@ -1,35 +1,84 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import endpoints from '@site/src/playground/endpoints.json';
-import { resolveUrl } from '@site/src/playground/resolve.mjs';
+import { resolveUrl, resolveFlatUrl } from '@site/src/playground/resolve.mjs';
 import styles from './styles.module.css';
 
 const LEAGUES = [...endpoints.leagues].sort((a, b) => a.prefix.localeCompare(b.prefix));
+const FLAT_APIS = endpoints.flatApis || [];
+const FLAT_LEAGUES = endpoints.flatLeagues || {};
+const FLAT_HOSTS = endpoints.flatHosts || {};
 
-/** Canonical camelCase method name (espn_nba_scoreboard -> espnNbaScoreboard). */
-const methodName = (prefix, short) =>
-  `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+// Human label per flat-API family stem (matches the docs section headings).
+const FLAT_API_LABEL = {
+  mlb_api: 'MLB Stats API',
+  mlb_statcast: 'Baseball Savant / Statcast',
+  nhl_api_web: 'NHL api-web (game feed)',
+  nhl_edge: 'NHL EDGE (player tracking)',
+  nhl_stats_rest: 'NHL Stats REST',
+  nhl_records: 'NHL Records',
+  nfl_api: 'NFL.com Shield API',
+};
 
-/** Endpoints applicable to a league = those whose scope is in the league's scopes. */
-function endpointsFor(league) {
+/** snake_case -> camelCase (espn_nba_scoreboard -> espnNbaScoreboard). */
+const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
+
+/** Canonical ESPN method name (espn_nba_scoreboard -> espnNbaScoreboard). */
+const espnMethodName = (prefix, short) => toCamel(`espn_${prefix}_${short}`);
+
+/** Canonical flat method name (mlb_api + teams -> mlbApiTeams). */
+const flatMethodName = (api, short) => toCamel(`${api}_${short}`);
+
+/** Stable option id so ESPN + flat endpoints that share a `short` don't collide. */
+const espnId = (short) => `espn:${short}`;
+const flatId = (api, short) => `flat:${api}:${short}`;
+
+/** ESPN endpoints applicable to a league = those whose scope is in its scopes. */
+function espnEndpointsFor(league) {
   const scopes = new Set(league.scopes);
   return endpoints.endpoints
     .filter((e) => scopes.has(e.scope))
     .sort((a, b) => a.short.localeCompare(b.short));
 }
 
-/** The editable param fields for a (league, endpoint) pair, with defaults. */
-function fieldsFor(league, def) {
-  if (!def) return [];
+/** Flat endpoints merged onto a league, grouped by family stem (in file order). */
+function flatGroupsFor(league) {
+  const groups = [];
+  for (const api of Object.keys(FLAT_HOSTS)) {
+    if (FLAT_LEAGUES[api] !== league.prefix) continue;
+    const eps = FLAT_APIS.filter((e) => e.api === api).sort((a, b) =>
+      a.short.localeCompare(b.short)
+    );
+    if (eps.length) groups.push({ api, label: FLAT_API_LABEL[api] || api, eps });
+  }
+  return groups;
+}
+
+/** Resolve a selection id to its endpoint def + kind (espn | flat). */
+function selectDef(league, id) {
+  if (!id) return null;
+  if (id.startsWith('flat:')) {
+    const [, api, short] = id.split(':');
+    const def = FLAT_APIS.find((e) => e.api === api && e.short === short);
+    return def ? { kind: 'flat', def, api, short } : null;
+  }
+  const short = id.slice('espn:'.length);
+  const def = espnEndpointsFor(league).find((e) => e.short === short);
+  return def ? { kind: 'espn', def, short } : null;
+}
+
+/** The editable param fields for a selection, with defaults. */
+function fieldsFor(league, sel) {
+  if (!sel) return [];
   const fields = [];
-  if (league.leagueParam) {
+  if (sel.kind === 'espn' && league.leagueParam) {
     // Optional: clearing it falls back to the league's default slug.
     fields.push({ name: 'league', kind: 'league', required: false, def: league.league });
   }
-  for (const p of def.pathParams || []) {
+  for (const p of sel.def.pathParams || []) {
     fields.push({ name: p.name, kind: 'path', required: p.required !== false, def: p.default });
   }
-  for (const p of def.queryParams || []) {
+  for (const p of sel.def.queryParams || []) {
     fields.push({ name: p.name, kind: 'query', required: false, def: p.default });
   }
   return fields;
@@ -44,51 +93,73 @@ function defaultParams(fields) {
 export default function Playground() {
   const [prefix, setPrefix] = useState('nba');
   const league = useMemo(() => LEAGUES.find((l) => l.prefix === prefix), [prefix]);
-  const applicable = useMemo(() => endpointsFor(league), [league]);
+  const espnApplicable = useMemo(() => espnEndpointsFor(league), [league]);
+  const flatGroups = useMemo(() => flatGroupsFor(league), [league]);
 
-  const [short, setShort] = useState('scoreboard');
-  const def = useMemo(() => applicable.find((e) => e.short === short), [applicable, short]);
+  const [selId, setSelId] = useState(espnId('scoreboard'));
+  const sel = useMemo(() => selectDef(league, selId), [league, selId]);
 
-  const fields = useMemo(() => fieldsFor(league, def), [league, def]);
-  const [params, setParams] = useState(() => defaultParams(fieldsFor(league, def)));
+  const fields = useMemo(() => fieldsFor(league, sel), [league, sel]);
+  const [params, setParams] = useState(() => defaultParams(fieldsFor(league, sel)));
 
   const [result, setResult] = useState(null);
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Reset endpoint + params whenever the league changes.
+  // Reset endpoint + params whenever the league changes. Prefer keeping the
+  // current selection if it still exists for the new league, else scoreboard /
+  // the first available endpoint.
   useEffect(() => {
-    const next = applicable.find((e) => e.short === short) ? short : applicable[0]?.short;
-    setShort(next);
+    const stillValid = selectDef(league, selId);
+    const next = stillValid
+      ? selId
+      : espnApplicable.find((e) => e.short === 'scoreboard')
+        ? espnId('scoreboard')
+        : espnApplicable[0]
+          ? espnId(espnApplicable[0].short)
+          : flatGroups[0]
+            ? flatId(flatGroups[0].api, flatGroups[0].eps[0].short)
+            : null;
+    setSelId(next);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefix]);
 
   // Reset params to defaults whenever the (league, endpoint) selection changes.
   useEffect(() => {
-    setParams(defaultParams(fieldsFor(league, def)));
+    setParams(defaultParams(fieldsFor(league, sel)));
     setResult(null);
     setError(null);
     setStatus(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prefix, short]);
+  }, [prefix, selId]);
 
-  // The exact ESPN URL the package would build for this call (no network).
+  // The exact URL the package would build for this call (no network).
   const preview = useMemo(() => {
     try {
-      return { url: resolveUrl(def, league, params, endpoints.hosts), error: null };
+      if (!sel) return { url: null, error: 'No endpoint selected.' };
+      const url =
+        sel.kind === 'flat'
+          ? resolveFlatUrl(sel.def, params, FLAT_HOSTS)
+          : resolveUrl(sel.def, league, params, endpoints.hosts);
+      return { url, error: null };
     } catch (e) {
       return { url: null, error: String(e.message || e) };
     }
-  }, [def, league, params]);
+  }, [sel, league, params]);
 
   const call = useMemo(() => {
+    if (!sel) return '';
     const args = Object.entries(params)
       .filter(([, v]) => v !== '' && v != null)
       .map(([k, v]) => `${k}: ${/^\d+$/.test(v) ? v : `'${v}'`}`)
       .join(', ');
-    return `await sdv.${prefix}.${methodName(prefix, short)}({ ${args} });`;
-  }, [prefix, short, params]);
+    const method =
+      sel.kind === 'flat'
+        ? flatMethodName(sel.api, sel.short)
+        : espnMethodName(prefix, sel.short);
+    return `await sdv.${prefix}.${method}({ ${args} });`;
+  }, [prefix, sel, params]);
 
   async function run() {
     setLoading(true);
@@ -96,19 +167,27 @@ export default function Playground() {
     setResult(null);
     setStatus(null);
     try {
+      // Flat endpoints dispatch by `api` (a flat `short` isn't unique across
+      // families); ESPN endpoints dispatch by `league`. The proxy branches on
+      // the presence of `api`.
+      const reqBody =
+        sel.kind === 'flat'
+          ? { api: sel.api, endpoint: sel.short, params }
+          : { league: prefix, endpoint: sel.short, params };
       const res = await fetch('/api/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ league: prefix, endpoint: short, params }),
+        body: JSON.stringify(reqBody),
       });
       setStatus(res.status);
       const text = await res.text();
       try {
         setResult(JSON.stringify(JSON.parse(text), null, 2));
       } catch {
+        // Non-JSON (Statcast CSV/HTML) — display the raw text as-is.
         setResult(text);
       }
-      if (!res.ok) setError(`ESPN / proxy returned ${res.status}`);
+      if (!res.ok) setError(`API / proxy returned ${res.status}`);
     } catch (e) {
       setError(
         `Request failed: ${String(e.message || e)} — the live proxy runs on the ` +
@@ -135,11 +214,24 @@ export default function Playground() {
 
         <label className={styles.field}>
           <span className={styles.label}>Endpoint</span>
-          <select value={short} onChange={(e) => setShort(e.target.value)} className={styles.select}>
-            {applicable.map((e) => (
-              <option key={e.short} value={e.short}>
-                {methodName(prefix, e.short)}
-              </option>
+          <select value={selId ?? ''} onChange={(e) => setSelId(e.target.value)} className={styles.select}>
+            {espnApplicable.length > 0 && (
+              <optgroup label="ESPN">
+                {espnApplicable.map((e) => (
+                  <option key={espnId(e.short)} value={espnId(e.short)}>
+                    {espnMethodName(prefix, e.short)}
+                  </option>
+                ))}
+              </optgroup>
+            )}
+            {flatGroups.map((g) => (
+              <optgroup key={g.api} label={`Native — ${g.label}`}>
+                {g.eps.map((e) => (
+                  <option key={flatId(g.api, e.short)} value={flatId(g.api, e.short)}>
+                    {flatMethodName(g.api, e.short)}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </label>

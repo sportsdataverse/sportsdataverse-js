@@ -95,3 +95,53 @@ export function resolveUrl(def, league, params, hosts) {
   for (const [k, v] of Object.entries(query)) u.searchParams.set(k, String(v));
   return u.toString();
 }
+
+// ---------------------------------------------------------------------------
+// Flat (non-ESPN) "flat API" resolver — dependency-free port of
+// src/core/flat.ts (resolveFlat). Used by BOTH the browser playground and the
+// /api/run proxy, exactly like resolveRequest above. There's no {sport}/{league}
+// slug nesting and no optional [...] segments; the path is host-relative with
+// bare {token} path params, and the host is absolute (looked up by `def.api` in
+// `flatHosts`, falling back to the wrapper's own `def.host`).
+// ---------------------------------------------------------------------------
+
+/** Build the flat query map from `queryParams` (+ defaults), dropping empties. */
+function cleanFlatQuery(def, params) {
+  const out = {};
+  for (const qp of def.queryParams || []) {
+    const v = lookup(params, qp.name) ?? qp.default;
+    if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;
+  }
+  return out;
+}
+
+/**
+ * Build { url, query } for a flat wrapper without fetching (mirrors
+ * src/core/flat.ts `resolveFlat`). `flatHosts` is the generated per-family
+ * base-URL map (endpoints.json `flatHosts`); the wrapper's own `def.host` is the
+ * fallback. A required `{token}` that can't be resolved throws.
+ */
+export function resolveFlat(def, params = {}, flatHosts = {}) {
+  const host = (def.api && flatHosts[def.api]) || def.host;
+  if (!host) throw new Error(`${def.short}: flat wrapper missing host`);
+  const byName = new Map((def.pathParams || []).map((p) => [p.name, p]));
+  const path = def.path.replace(/\{(\w+)\}/g, (_m, name) => {
+    const v = lookup(params, name) ?? byName.get(name)?.default;
+    if (v === undefined || v === null || v === '') {
+      const pp = byName.get(name);
+      if (pp && pp.required === false) return '';
+      const camel = toCamel(`${def.api || 'flat'}_${def.short}`);
+      throw new Error(`${camel}: missing required path parameter "${name}"`);
+    }
+    return String(v);
+  });
+  return { url: `${host}${path}`, query: cleanFlatQuery(def, params) };
+}
+
+/** Full absolute flat URL including the query string (what the proxy fetches). */
+export function resolveFlatUrl(def, params, flatHosts) {
+  const { url, query } = resolveFlat(def, params, flatHosts);
+  const u = new URL(url);
+  for (const [k, v] of Object.entries(query)) u.searchParams.set(k, String(v));
+  return u.toString();
+}

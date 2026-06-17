@@ -13,6 +13,30 @@ export const HOSTS: Record<EspnFamily, string> = {
   core_v2: "https://sports.core.api.espn.com/v2/sports",
 };
 
+/**
+ * Base hosts for the non-ESPN "flat API" families, keyed by family stem
+ * (`WrapperDef.api`). Unlike `HOSTS`, these are absolute API roots; the flat
+ * wrapper `path` templates are appended verbatim (with `{token}` substitution).
+ * Each wrapper also carries its own absolute `host` for self-containment — this
+ * map is the canonical lookup the playground / proxy can share.
+ */
+export const FLAT_HOSTS: Record<string, string> = {
+  mlb_api: "https://statsapi.mlb.com",
+  // Baseball Savant / Statcast (heterogeneous CSV/JSON/HTML — see
+  // src/core/statcast_runtime.ts for the content-type-aware getter).
+  mlb_statcast: "https://baseballsavant.mlb.com",
+  // NHL native APIs. `nhl_api_web` and `nhl_edge` are separate `api` stems
+  // that share the same host (api-web.nhle.com); the Stats REST and Records
+  // families each have their own host.
+  nhl_api_web: "https://api-web.nhle.com",
+  nhl_edge: "https://api-web.nhle.com",
+  nhl_stats_rest: "https://api.nhle.com/stats/rest",
+  nhl_records: "https://records.nhl.com/site/api",
+  // NFL.com "Shield" API (token-auth; the wrapper dispatch mints a WEB_DESKTOP
+  // bearer token — see src/core/nfl_auth.ts).
+  nfl_api: "https://api.nfl.com",
+};
+
 const client = axios.create({
   timeout: 30000,
   headers: {

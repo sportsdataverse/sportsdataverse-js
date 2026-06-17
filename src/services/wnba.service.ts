@@ -2,6 +2,12 @@ import axios from 'axios';
 /**
  * Operations for WNBA.
  *
+ * > **Superseded:** these hand-written `get*` methods predate the generated
+ * > cross-league ESPN surface. They remain supported for back-compat, but new
+ * > code should prefer the generated `espn_wnba_*` wrappers (e.g.
+ * > `sdv.wnba.espn_wnba_scoreboard()`), which cover far more ESPN
+ * > endpoints and share one maintained codegen pipeline.
+ *
  * @namespace wnba
  */
 export default {
