@@ -1,0 +1,21 @@
+schema: summary_officials
+kind: dataframe
+columns:
+- name: full_name
+  type: character
+  description: ''
+- name: display_name
+  type: character
+  description: ''
+- name: position_name
+  type: character
+  description: ''
+- name: position_display_name
+  type: character
+  description: ''
+- name: position_id
+  type: character
+  description: ''
+- name: order
+  type: integer
+  description: ''

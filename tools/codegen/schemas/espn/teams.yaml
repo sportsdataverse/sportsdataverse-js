@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of nested team objects; varies by league/payload
+schema: teams
+kind: dataframe
+columns: []

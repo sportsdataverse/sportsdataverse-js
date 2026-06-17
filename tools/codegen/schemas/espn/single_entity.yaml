@@ -1,0 +1,4 @@
+# dynamic columns — single-row passthrough of an arbitrary Core v2 entity; varies by resource
+schema: single_entity
+kind: dataframe
+columns: []

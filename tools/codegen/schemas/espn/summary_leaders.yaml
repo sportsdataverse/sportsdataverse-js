@@ -1,0 +1,39 @@
+schema: summary_leaders
+kind: dataframe
+columns:
+- name: team_id
+  type: character
+  description: 'ESPN team id'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation'
+- name: category_name
+  type: character
+  description: 'Statistic category name'
+- name: category_display_name
+  type: character
+  description: ''
+- name: athlete_id
+  type: character
+  description: 'ESPN athlete id'
+- name: athlete_display_name
+  type: character
+  description: 'Athlete display name'
+- name: athlete_position
+  type: character
+  description: 'Position abbreviation'
+- name: value
+  type: integer
+  description: ''
+- name: display_value
+  type: character
+  description: ''
+- name: main_stat_value
+  type: character
+  description: ''
+- name: main_stat_label
+  type: character
+  description: ''
+- name: summary
+  type: character
+  description: ''

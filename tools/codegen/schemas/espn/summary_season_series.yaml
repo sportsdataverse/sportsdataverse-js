@@ -1,0 +1,33 @@
+schema: summary_season_series
+kind: dataframe
+columns:
+- name: type
+  type: character
+  description: ''
+- name: title
+  type: character
+  description: ''
+- name: description
+  type: character
+  description: ''
+- name: summary
+  type: character
+  description: ''
+- name: completed
+  type: logical
+  description: ''
+- name: total_competitions
+  type: integer
+  description: ''
+- name: series_label
+  type: character
+  description: ''
+- name: series_score
+  type: character
+  description: ''
+- name: short_summary
+  type: character
+  description: ''
+- name: events
+  type: character
+  description: ''

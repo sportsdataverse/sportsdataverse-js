@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of schedule events; varies by league/payload
+schema: team_schedule
+kind: dataframe
+columns: []

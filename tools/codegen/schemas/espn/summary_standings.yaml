@@ -1,0 +1,36 @@
+schema: summary_standings
+kind: dataframe
+columns:
+- name: group_header
+  type: character
+  description: ''
+- name: conference_header
+  type: character
+  description: ''
+- name: division_header
+  type: character
+  description: ''
+- name: team_id
+  type: character
+  description: 'ESPN team id'
+- name: team_uid
+  type: character
+  description: ''
+- name: team_location
+  type: character
+  description: ''
+- name: games_behind
+  type: character
+  description: ''
+- name: losses
+  type: character
+  description: ''
+- name: streak
+  type: character
+  description: ''
+- name: win_percent
+  type: character
+  description: ''
+- name: wins
+  type: character
+  description: ''

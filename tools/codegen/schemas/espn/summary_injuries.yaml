@@ -1,0 +1,27 @@
+schema: summary_injuries
+kind: dataframe
+columns:
+- name: team_id
+  type: character
+  description: 'ESPN team id'
+- name: team_uid
+  type: character
+  description: ''
+- name: team_display_name
+  type: character
+  description: 'Team display name'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation'
+- name: team_links
+  type: character
+  description: ''
+- name: team_logo
+  type: character
+  description: ''
+- name: team_logos
+  type: character
+  description: ''
+- name: injuries
+  type: character
+  description: ''

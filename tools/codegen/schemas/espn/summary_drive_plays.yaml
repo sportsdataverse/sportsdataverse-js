@@ -1,0 +1,132 @@
+schema: summary_drive_plays
+kind: dataframe
+columns:
+- name: drive_id
+  type: character
+  description: 'Parent drive id (join key to the drives frame).'
+- name: drive_sequence
+  type: integer
+  description: '1-based index of the play within its drive.'
+- name: id
+  type: character
+  description: 'ESPN id.'
+- name: sequence_number
+  type: character
+  description: ''
+- name: type_id
+  type: character
+  description: ''
+- name: type_text
+  type: character
+  description: 'Play type label.'
+- name: text
+  type: character
+  description: 'Play description text.'
+- name: away_score
+  type: integer
+  description: 'Away score after the play.'
+- name: home_score
+  type: integer
+  description: 'Home score after the play.'
+- name: period_number
+  type: integer
+  description: 'Quarter / period number.'
+- name: clock_display_value
+  type: character
+  description: "Game clock at the play (MM:SS)."
+- name: scoring_play
+  type: logical
+  description: 'Whether the play resulted in a score.'
+- name: priority
+  type: logical
+  description: ''
+- name: modified
+  type: character
+  description: ''
+- name: wallclock
+  type: character
+  description: ''
+- name: team_participants
+  type: character
+  description: ''
+- name: is_penalty
+  type: logical
+  description: 'Whether the play was a penalty.'
+- name: stat_yardage
+  type: integer
+  description: 'Yards gained/lost on the play.'
+- name: start_down
+  type: integer
+  description: 'Down at the start of the play.'
+- name: start_distance
+  type: integer
+  description: 'Yards to go at the start of the play.'
+- name: start_yard_line
+  type: integer
+  description: 'Yard line at the start of the play.'
+- name: start_yards_to_endzone
+  type: integer
+  description: ''
+- name: start_team_id
+  type: character
+  description: ''
+- name: end_down
+  type: integer
+  description: ''
+- name: end_distance
+  type: integer
+  description: ''
+- name: end_yard_line
+  type: integer
+  description: ''
+- name: end_yards_to_endzone
+  type: integer
+  description: ''
+- name: end_team_id
+  type: character
+  description: ''
+- name: is_turnover
+  type: logical
+  description: 'Whether the play was a turnover.'
+- name: type_abbreviation
+  type: character
+  description: ''
+- name: start_down_distance_text
+  type: character
+  description: ''
+- name: start_short_down_distance_text
+  type: character
+  description: ''
+- name: start_possession_text
+  type: character
+  description: ''
+- name: end_down_distance_text
+  type: character
+  description: ''
+- name: end_short_down_distance_text
+  type: character
+  description: ''
+- name: end_possession_text
+  type: character
+  description: ''
+- name: scoring_type_name
+  type: character
+  description: ''
+- name: scoring_type_display_name
+  type: character
+  description: ''
+- name: scoring_type_abbreviation
+  type: character
+  description: ''
+- name: point_after_attempt_id
+  type: integer
+  description: ''
+- name: point_after_attempt_text
+  type: character
+  description: ''
+- name: point_after_attempt_abbreviation
+  type: character
+  description: ''
+- name: point_after_attempt_value
+  type: integer
+  description: ''

@@ -1,0 +1,6 @@
+schema: items
+kind: dataframe
+columns:
+- name: $ref
+  type: character
+  description: 'Core v2 $ref URL to the resource'

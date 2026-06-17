@@ -1,0 +1,4 @@
+# dynamic columns — flattened play objects; varies by league/payload
+schema: event_plays
+kind: dataframe
+columns: []

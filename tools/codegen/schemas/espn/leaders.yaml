@@ -1,0 +1,34 @@
+# source-inferred static columns; per-stat columns (named from category labels) are appended dynamically and vary by league/category
+schema: leaders
+kind: dataframe
+columns:
+- name: category
+  type: character
+  description: 'Stat / leader category name'
+- name: rank
+  type: integer
+  description: 'Rank within the category'
+- name: athlete_id
+  type: character
+  description: 'ESPN athlete id'
+- name: athlete_display_name
+  type: character
+  description: 'Athlete display name'
+- name: athlete_short_name
+  type: character
+  description: 'Athlete short name'
+- name: athlete_jersey
+  type: character
+  description: 'Jersey number'
+- name: athlete_position
+  type: character
+  description: 'Position abbreviation'
+- name: team_id
+  type: character
+  description: 'ESPN team id'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation'
+- name: team_display_name
+  type: character
+  description: 'Team display name'
