@@ -1,0 +1,11 @@
+{
+  "label": "Guides",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Guides & Recipes",
+    "description": "Per-area, copy-pasteable recipes for sportsdataverse-js — raw vs parsed, one runnable snippet at a time, each with an \"Open in playground\" link."
+  }
+}

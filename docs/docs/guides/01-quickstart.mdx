@@ -1,0 +1,116 @@
+---
+title: Quickstart
+sidebar_label: Quickstart
+sidebar_position: 1
+---
+
+import RunKit from '@site/src/components/RunKit';
+
+# Quickstart
+
+`sportsdataverse` is a single package that wraps ESPN plus a set of native
+provider APIs (MLB Stats API, NHL api-web, The Odds API, CBS, Fox, Yahoo,
+247Sports). Every method takes a single options object and returns a Promise.
+
+```js
+// ESM-only — import the default export (there is no CommonJS `require`):
+import sdv from 'sportsdataverse';
+```
+
+The one pattern to learn: **pass `{ parsed: true }` to get tidy rows** instead
+of the raw upstream JSON. Without it you get the provider's exact payload; with
+it you get an array of flat row objects ready for a table or a DataFrame.
+
+## Your first call — raw vs parsed
+
+Every endpoint accepts the same `{ parsed }` switch. Here is the NBA scoreboard
+both ways:
+
+```js
+import sdv from 'sportsdataverse';
+
+// Raw ESPN payload (nested events[] etc.)
+const raw = await sdv.nba.espnNbaScoreboard({});
+console.log(raw.events.length);
+```
+
+[Open in playground ▶](/playground?l=nba&e=espn%3Ascoreboard)
+
+```js
+import sdv from 'sportsdataverse';
+
+// Tidy: one flat row per game.
+const rows = await sdv.nba.espnNbaScoreboard({ parsed: true });
+console.table(rows.slice(0, 5));
+```
+
+[Open in playground ▶](/playground?l=nba&e=espn%3Ascoreboard&parsed=1)
+
+:::tip
+The same `{ parsed: true }` flag works on **every** method across every league
+and provider. See the per-area pages in this section, or the
+[ESPN reference](/docs/reference/nba) for the full method list.
+:::
+
+## A two-step workflow
+
+Most real work is "get a list, then drill into one item". Here we take a game id
+off the scoreboard and pull just the team-boxscore sub-frame from the summary
+dispatcher:
+
+```js
+import sdv from 'sportsdataverse';
+
+const sb = await sdv.nba.espnNbaScoreboard({});
+const eventId = sb.events[0].id;
+
+const teamBox = await sdv.nba.espnNbaSummary({
+  event_id: eventId,
+  parsed: true,
+  section: 'boxscore_team',
+});
+console.table(teamBox);
+```
+
+[Open in playground ▶](/playground?l=nba&e=espn%3Asummary&parsed=1&section=boxscore_team)
+
+The `summary` endpoint returns 21 sub-frames (`boxscore_team`, `boxscore_player`,
+`plays`, `leaders`, …); pass `section` to pick one, or omit it to get the whole
+dict.
+
+## Run it live
+
+The cell below runs the **published npm package** end to end — scoreboard, then a
+summary drill-down — right in your browser:
+
+<RunKit
+  title="NBA: scoreboard → team boxscore"
+  source={`const sdv = (await import('sportsdataverse')).default;
+
+// 1) today's NBA slate
+const sb = await sdv.nba.espnNbaScoreboard({});
+const id = sb.events[0].id;
+
+// 2) the team boxscore for the first game, tidied
+const teamBox = await sdv.nba.espnNbaSummary({
+  event_id: id,
+  parsed: true,
+  section: 'boxscore_team',
+});
+
+teamBox;`}
+/>
+
+:::note
+RunKit cells install `sportsdataverse` from npm, so the v3 method names above
+(`espnNbaScoreboard`, provider namespaces, the `parsed`/`section` options) light
+up once **v3 is published**. Until then the embed may resolve v2, whose surface
+differs. Copy any snippet into Node to run it against your installed version.
+:::
+
+## Where next
+
+- **[NBA](./nba)**, **[NFL](./nfl)**, **[MLB](./mlb)**, **[NHL](./nhl)**,
+  **[CFB](./cfb)** — per-sport recipes.
+- **[Providers](./providers)** — odds, CBS, Fox, Yahoo, 247Sports.
+- **[Playground](/playground)** — try any endpoint live, then copy the share link.

@@ -1,0 +1,134 @@
+---
+title: NHL recipes
+sidebar_label: NHL
+sidebar_position: 7
+---
+
+import RunKit from '@site/src/components/RunKit';
+
+# NHL recipes
+
+Hockey lives under `sdv.nhl` and spans the richest native surface in the
+package — the ESPN wrappers plus **four** NHL-operated APIs:
+
+| Family | Methods | Host | What it covers |
+|---|---|---|---|
+| ESPN | `espnNhl*` | `site.api.espn.com` | scoreboard, rosters, summary |
+| api-web | `nhlApiWeb*` | `api-web.nhle.com` | play-by-play, boxscores, standings, leaders |
+| EDGE | `nhlEdge*` | `api-web.nhle.com` | player/team puck & skating tracking |
+| Stats REST | `nhlStatsRest*` | `api.nhle.com/stats/rest` | franchises, seasons, glossary |
+| Records | `nhlRecords*` | `records.nhl.com` | all-time franchise & player records |
+
+All honor `{ parsed: true }`.
+
+## ESPN scoreboard
+
+```js
+import sdv from 'sportsdataverse';
+
+const games = await sdv.nhl.espnNhlScoreboard({ parsed: true });
+console.table(games);
+```
+
+[Open in playground ▶](/playground?l=nhl&e=espn%3Ascoreboard&parsed=1)
+
+## Full-season standings (api-web)
+
+No parameters needed — the current season's standings, tidied.
+
+```js
+import sdv from 'sportsdataverse';
+
+const standings = await sdv.nhl.nhlApiWebStandingsSeason({ parsed: true });
+console.table(standings);
+```
+
+[Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_api_web%3Astandings_season&parsed=1)
+
+## Play-by-play for one game (api-web)
+
+```js
+import sdv from 'sportsdataverse';
+
+// 2023030417 = a 2023 Stanley Cup Final game
+const plays = await sdv.nhl.nhlApiWebPbp({ game_id: '2023030417', parsed: true });
+console.table(plays.slice(0, 10));
+```
+
+[Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_api_web%3Apbp&parsed=1&game_id=2023030417)
+
+## The other native families
+
+### EDGE player tracking
+
+Skating-speed top-10 board. Pass `positions`, `sort_by`, a `season` (e.g.
+`20242025`), and `game_type` (2 = regular season).
+
+```js
+import sdv from 'sportsdataverse';
+
+const fastest = await sdv.nhl.nhlEdgeSkaterSpeedTop10({
+  positions: 'forwards',
+  sort_by: 'maxSkatingSpeed',
+  season: '20242025',
+  game_type: 2,
+  parsed: true,
+});
+console.table(fastest);
+```
+
+[Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_edge%3Askater_speed_top_10&parsed=1&positions=forwards&sort_by=maxSkatingSpeed&season=20242025&game_type=2)
+
+### Stats REST — franchises
+
+The `lang` path param defaults to `en`.
+
+```js
+import sdv from 'sportsdataverse';
+
+const franchises = await sdv.nhl.nhlStatsRestFranchise({ lang: 'en', parsed: true });
+console.table(franchises);
+```
+
+[Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_stats_rest%3Afranchise&parsed=1&lang=en)
+
+### Records — every franchise
+
+No params — every NHL franchise with its records metadata.
+
+```js
+import sdv from 'sportsdataverse';
+
+const records = await sdv.nhl.nhlRecordsFranchises({ parsed: true });
+console.table(records);
+```
+
+[Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_records%3Afranchises&parsed=1)
+
+## Run it live
+
+The cell below runs the **published npm package** end to end against the native
+api-web family — the game feed, parsed to plays right in your browser:
+
+<RunKit
+  title="NHL: api-web game feed → parsed plays"
+  source={`const sdv = (await import('sportsdataverse')).default;
+
+// 2023030417 = a 2023 Stanley Cup Final game
+const plays = await sdv.nhl.nhlApiWebPbp({ game_id: '2023030417', parsed: true });
+
+// first ten parsed play rows
+plays.slice(0, 10);`}
+/>
+
+:::note
+RunKit cells install `sportsdataverse` from npm, so the v3 method names above
+(`nhlApiWebPbp`, `nhlEdge*`, the `parsed` option) light up once **v3 is
+published**. Until then the embed may resolve v2, whose surface differs. Copy any
+snippet into Node to run it against your installed version.
+:::
+
+:::tip
+Full method + parameter tables: **[NHL reference](/docs/reference/nhl)** (ESPN,
+api-web, EDGE, Stats REST, and Records families).
+:::

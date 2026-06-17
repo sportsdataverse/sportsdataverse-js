@@ -1,0 +1,81 @@
+---
+title: College basketball recipes (MBB & WBB)
+sidebar_label: College Basketball
+sidebar_position: 4
+---
+
+# College basketball recipes (MBB & WBB)
+
+College basketball spans two namespaces that share an identical ESPN surface:
+
+- **Men's** — `sdv.mbb`, methods named `espnMbb*`
+- **Women's** — `sdv.wbb`, methods named `espnWbb*`
+
+Both carry the universal cross-league endpoints plus the NCAA extras
+(`rankings`, recruiting), so every recipe below works on either side by swapping
+the namespace. Pass `{ parsed: true }` for tidy rows, or omit it for the raw
+ESPN payload.
+
+## Scoreboard
+
+Raw first, then tidied to one row per game:
+
+```js
+import sdv from 'sportsdataverse';
+
+const raw = await sdv.mbb.espnMbbScoreboard({});
+const games = await sdv.mbb.espnMbbScoreboard({ parsed: true });
+console.table(games);
+```
+
+[Open in playground ▶](/playground?l=mbb&e=espn%3Ascoreboard&parsed=1)
+
+## Rankings (AP Top 25 & Coaches)
+
+`rankings` is an NCAA extra — available on both `mbb` and `wbb`.
+
+```js
+import sdv from 'sportsdataverse';
+
+const men = await sdv.mbb.espnMbbRankings({ parsed: true });
+const women = await sdv.wbb.espnWbbRankings({ parsed: true });
+console.table(men);
+console.table(women);
+```
+
+[Open men's in playground ▶](/playground?l=mbb&e=espn%3Arankings&parsed=1) ·
+[Open women's in playground ▶](/playground?l=wbb&e=espn%3Arankings&parsed=1)
+
+## Every team, then a roster
+
+`espnMbbTeamsSite` lists the teams (grab an `id`); `espnMbbTeamRoster` returns
+one row per player. The women's side is identical under `sdv.wbb`.
+
+```js
+import sdv from 'sportsdataverse';
+
+const teams = await sdv.mbb.espnMbbTeamsSite({ parsed: true });
+console.table(teams);
+
+// team_id 150 is Duke
+const roster = await sdv.mbb.espnMbbTeamRoster({ team_id: 150, parsed: true });
+console.table(roster);
+```
+
+[Open in playground ▶](/playground?l=mbb&e=espn%3Ateam_roster&parsed=1&team_id=150)
+
+## Women's scoreboard (same surface, different namespace)
+
+```js
+import sdv from 'sportsdataverse';
+
+const games = await sdv.wbb.espnWbbScoreboard({ parsed: true });
+console.table(games);
+```
+
+[Open in playground ▶](/playground?l=wbb&e=espn%3Ascoreboard&parsed=1)
+
+:::tip
+Full method + parameter tables: **[MBB reference](/docs/reference/mbb)** and
+**[WBB reference](/docs/reference/wbb)**.
+:::
