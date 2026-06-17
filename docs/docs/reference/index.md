@@ -47,6 +47,14 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB St
 | [wc](./wc) | `soccer` | `fifa.world` | universal | 110 | — |
 | [cricket](./cricket) | `cricket` | `eng.1 *(param)*` | universal | 110 | — |
 
+## Standalone provider namespaces
+
+Cross-sport providers that aren't tied to a single ESPN league. They get their own `sdv.<namespace>` surface and reference page.
+
+| Namespace | provider | wrappers |
+|---|---|---:|
+| [odds](./odds) | The Odds API | 10 |
+
 :::tip Same call, every league
 ```js
 await sdv.nba.espnNbaScoreboard({});

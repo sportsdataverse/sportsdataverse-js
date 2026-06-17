@@ -71,6 +71,18 @@ import {
   parse_mlb_statcast_html_leaderboard,
   parse_mlb_statcast_player,
 } from "./mlb_statcast.js";
+import {
+  parse_odds_api_sports,
+  parse_odds_api_sports_odds,
+  parse_odds_api_sports_scores,
+  parse_odds_api_sports_events,
+  parse_odds_api_sports_participants,
+  parse_odds_api_event_odds,
+  parse_odds_api_event_markets,
+  parse_odds_api_sports_odds_history,
+  parse_odds_api_sports_events_history,
+  parse_odds_api_event_odds_history,
+} from "./odds_api.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -142,6 +154,17 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_mlb_statcast_schedule,
   parse_mlb_statcast_html_leaderboard,
   parse_mlb_statcast_player,
+  // ---- The Odds API (api.the-odds-api.com) ----
+  parse_odds_api_sports,
+  parse_odds_api_sports_odds,
+  parse_odds_api_sports_scores,
+  parse_odds_api_sports_events,
+  parse_odds_api_sports_participants,
+  parse_odds_api_event_odds,
+  parse_odds_api_event_markets,
+  parse_odds_api_sports_odds_history,
+  parse_odds_api_sports_events_history,
+  parse_odds_api_event_odds_history,
 };
 
 /**

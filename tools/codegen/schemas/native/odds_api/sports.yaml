@@ -1,0 +1,21 @@
+schema: sports
+kind: dataframe
+columns:
+- name: key
+  type: character
+  description: A unique slug (key) of the sport, e.g. `americanfootball_nfl`. Use this as the `sport_key` param in odds/events requests.
+- name: group
+  type: character
+  description: A broader grouping for the sport, e.g. `American Football`.
+- name: title
+  type: character
+  description: A presentable title of the sport, e.g. `NFL`.
+- name: description
+  type: character
+  description: A brief description of the sport. Subject to change (for example, if sponsors change).
+- name: active
+  type: logical
+  description: Indicates if the sport is in season. `TRUE` when the sport is currently in season.
+- name: has_outrights
+  type: logical
+  description: Indicates if the sport has outrights (futures) markets. `TRUE` when outright markets are offered.

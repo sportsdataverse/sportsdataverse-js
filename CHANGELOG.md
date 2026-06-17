@@ -4,6 +4,30 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
+## Unreleased
+
+### The Odds API — first cross-sport provider family (`sdv.odds.*`)
+
+- **The Odds API** (`api.the-odds-api.com`) — a new flat-API family of **10
+  endpoints** under the standalone **`odds`** namespace (`sdv.odds.oddsApi*` /
+  `sdv.odds.odds_api_*`): `sports`, `sports_odds`, `sports_scores`,
+  `sports_events`, `sports_participants`, `event_odds`, `event_markets`,
+  `sports_odds_history`, `sports_events_history`, `event_odds_history`. Ported
+  from the [`oddsapiR`](https://oddsapiR.sportsdataverse.org) R package.
+- This is the **first cross-sport (non-league) provider family** — it
+  establishes standalone-namespace support: a flat family whose namespace is not
+  an ESPN league gets its own `sdv.<ns>.*` surface and its own generated
+  reference page (`/reference/odds`) instead of a "Native API" section on a
+  league page.
+- **Auth is a plain query param.** The Odds API uses `apiKey` (you supply it) —
+  every endpoint takes a required `api_key` param (query key `apiKey`); there is
+  no bearer-token machinery. `await sdv.odds.oddsApiSports({ api_key: '...' })`.
+- The odds / event-odds / history parsers **unroll** events → bookmakers →
+  markets → outcomes to **one row per outcome** (mirroring oddsapiR's
+  `tidyr::unnest` chain); pass `{ parsed: true }` for tidy rows.
+- First of a planned provider-expansion program (CBS / 247 / Yahoo / Fox to
+  follow).
+
 ## v3.0.0
 
 A major release that turns `sportsdataverse` into a **cross-league ESPN client**

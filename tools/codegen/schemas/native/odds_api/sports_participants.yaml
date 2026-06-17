@@ -1,0 +1,9 @@
+schema: sports_participants
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: A unique id of the participant, e.g. `par_01hqmkq6fdf1pvq7jgdd7hdmpf`.
+- name: full_name
+  type: character
+  description: The participant name -- either a team name or player name depending on the sport. This endpoint does not return players on a team.

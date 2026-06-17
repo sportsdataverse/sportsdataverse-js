@@ -35,12 +35,16 @@ const FLAT_API_FILES = [
   "nhl_stats_rest",
   "nhl_records",
   "nfl_api",
+  "odds_api",
 ];
 
-// Which league reference page each flat-API family is documented on (mirrors
+// Which namespace each flat-API family is documented on (mirrors
 // FLAT_API_NAMESPACES in src/index.ts — keep the two in sync). The runtime
-// merges each family's wrappers onto this namespace (`sdv.<prefix>.<wrapper>`),
-// so the docs put the "Native API — <family>" section on that league's page.
+// merges each family's wrappers onto this namespace (`sdv.<prefix>.<wrapper>`).
+// When the namespace IS a league (mlb/nhl/nfl), the docs put the "Native API —
+// <family>" section on that league's reference page. When it is NOT a league
+// (`odds` — the first cross-sport provider family), the family gets its OWN
+// standalone reference page (see STANDALONE_FLAT_NAMESPACES + renderStandaloneFlatPage).
 const FLAT_API_NAMESPACES = {
   mlb_api: "mlb",
   mlb_statcast: "mlb",
@@ -49,6 +53,7 @@ const FLAT_API_NAMESPACES = {
   nhl_stats_rest: "nhl",
   nhl_records: "nhl",
   nfl_api: "nfl",
+  odds_api: "odds",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -79,7 +84,25 @@ const FLAT_API_META = {
     label: "NFL.com Shield API",
     source: 'the NFL.com "Shield" data API',
   },
+  odds_api: { label: "The Odds API", source: "the-odds-api.com" },
 };
+
+// The set of league prefixes (filled after the leagues doc loads) — any
+// FLAT_API_NAMESPACES value NOT in this set is a STANDALONE namespace (e.g.
+// `odds`) that gets its own generated reference page instead of being attached
+// to a league page. Computed lazily by `standaloneFlatNamespaces()`.
+function standaloneFlatNamespaces(leagues) {
+  const leaguePrefixes = new Set(leagues.map((l) => l.prefix));
+  const seen = new Set();
+  const out = [];
+  for (const api of FLAT_API_FILES) {
+    const ns = FLAT_API_NAMESPACES[api];
+    if (!ns || leaguePrefixes.has(ns) || seen.has(ns)) continue;
+    seen.add(ns);
+    out.push(ns);
+  }
+  return out;
+}
 
 function mapPathParams(ep) {
   return (ep.path_params ?? []).map((p) => ({
@@ -322,6 +345,69 @@ const STATCAST_HANDWRITTEN = [
  * wrapper (dual-case name, absolute host + path, path/query params, parser,
  * auth). Returns "" when the league has no flat families.
  */
+/**
+ * Render a single "Native API — <family>" section: the intro line (host +
+ * source + auth note), the wrapper table, and per-wrapper `Returns` tables.
+ * `nsPrefix` is the `sdv.<prefix>` the family merges onto (a league prefix, or a
+ * standalone namespace like `odds`). Shared by `renderNativeSections` (league
+ * pages) and `renderStandaloneFlatPage` (the standalone `odds` page).
+ */
+function renderNativeFamilySection(api, rows, nsPrefix) {
+  if (!rows.length) return "";
+  const meta = FLAT_API_META[api] ?? { label: api, source: api };
+  const host = rows[0].host;
+  const authed = rows.some((w) => w.auth);
+  let body = `\n## Native API — ${meta.label}\n\n`;
+  body +=
+    `Flat (non-ESPN) wrappers for ${meta.source}. ` +
+    `Host: \`${host}\`. ` +
+    `Each method is exposed under BOTH \`${api}_<endpoint>\` (snake_case, ` +
+    `py/R parity) and \`${toCamel(api)}<Endpoint>\` (camelCase canonical) on ` +
+    `\`sdv.${nsPrefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
+    `through its tidy.js parser; omit it for the raw response.`;
+  if (authed) {
+    body +=
+      ` **Auth:** this family mints a bearer token automatically before ` +
+      `each call (no credentials required).`;
+  }
+  body += `\n\n`;
+  body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
+  body += `|---|---|---|---|---|---|\n`;
+  const sorted = rows.slice().sort((a, b) => a.short.localeCompare(b.short));
+  for (const w of sorted) {
+    const camel = toCamel(`${api}_${w.short}`);
+    const method = `\`${api}_${w.short}\` / \`${camel}\``;
+    const http = `\`${w.host}${w.path}\``;
+    const auth = w.auth ? "yes" : "—";
+    body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
+  }
+  // Per-wrapper `Returns` tables (one `### Returns — <wrapper>` block per
+  // endpoint whose `returns_schema` resolves to a committed columns file).
+  // Endpoints with no schema (raw-JSON / generic-list passthroughs) emit none.
+  for (const w of sorted) {
+    const cols = loadReturnsColumns(w.returnsSchema);
+    if (!cols) continue;
+    const camel = toCamel(`${api}_${w.short}`);
+    body += renderReturnsTable(`\`${api}_${w.short}\` / \`${camel}\``, cols);
+  }
+  // The Statcast family additionally exposes hand-written search / player
+  // wrappers (not in the YAML); document their returns frames from autodoc.
+  if (api === "mlb_statcast") {
+    for (const hw of STATCAST_HANDWRITTEN) {
+      const cols = loadReturnsColumns(hw.schema);
+      if (!cols) continue;
+      const camel = toCamel(hw.snake);
+      body += renderReturnsTable(`\`${hw.snake}\` / \`${camel}\``, cols);
+    }
+  }
+  return body;
+}
+
+/**
+ * Render the "Native API — <family>" reference sections for a league. Each flat
+ * family that maps to this league prefix gets a clearly-headed section after the
+ * ESPN endpoints. Returns "" when the league has no flat families.
+ */
 function renderNativeSections(league, flatWrappers) {
   const families = FLAT_API_FILES.filter(
     (api) => FLAT_API_NAMESPACES[api] === league.prefix
@@ -329,53 +415,50 @@ function renderNativeSections(league, flatWrappers) {
   let body = "";
   for (const api of families) {
     const rows = flatWrappers.filter((w) => w.api === api);
-    if (!rows.length) continue;
-    const meta = FLAT_API_META[api] ?? { label: api, source: api };
-    const host = rows[0].host;
-    const authed = rows.some((w) => w.auth);
-    body += `\n## Native API — ${meta.label}\n\n`;
-    body +=
-      `Flat (non-ESPN) wrappers for ${meta.source}. ` +
-      `Host: \`${host}\`. ` +
-      `Each method is exposed under BOTH \`${api}_<endpoint>\` (snake_case, ` +
-      `py/R parity) and \`${toCamel(api)}<Endpoint>\` (camelCase canonical) on ` +
-      `\`sdv.${league.prefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
-      `through its tidy.js parser; omit it for the raw response.`;
-    if (authed) {
-      body +=
-        ` **Auth:** this family mints a bearer token automatically before ` +
-        `each call (no credentials required).`;
-    }
-    body += `\n\n`;
-    body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
-    body += `|---|---|---|---|---|---|\n`;
-    const sorted = rows.slice().sort((a, b) => a.short.localeCompare(b.short));
-    for (const w of sorted) {
-      const camel = toCamel(`${api}_${w.short}`);
-      const method = `\`${api}_${w.short}\` / \`${camel}\``;
-      const http = `\`${w.host}${w.path}\``;
-      const auth = w.auth ? "yes" : "—";
-      body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
-    }
-    // Per-wrapper `Returns` tables (one `### Returns — <wrapper>` block per
-    // endpoint whose `returns_schema` resolves to a committed columns file).
-    // Endpoints with no schema (raw-JSON / generic-list passthroughs) emit none.
-    for (const w of sorted) {
-      const cols = loadReturnsColumns(w.returnsSchema);
-      if (!cols) continue;
-      const camel = toCamel(`${api}_${w.short}`);
-      body += renderReturnsTable(`\`${api}_${w.short}\` / \`${camel}\``, cols);
-    }
-    // The Statcast family additionally exposes hand-written search / player
-    // wrappers (not in the YAML); document their returns frames from autodoc.
-    if (api === "mlb_statcast") {
-      for (const hw of STATCAST_HANDWRITTEN) {
-        const cols = loadReturnsColumns(hw.schema);
-        if (!cols) continue;
-        const camel = toCamel(hw.snake);
-        body += renderReturnsTable(`\`${hw.snake}\` / \`${camel}\``, cols);
-      }
-    }
+    body += renderNativeFamilySection(api, rows, league.prefix);
+  }
+  return body;
+}
+
+/**
+ * Render a standalone reference page for a flat-API namespace that is NOT a
+ * league (e.g. `odds` — The Odds API, the first cross-sport provider family).
+ * Mirrors a league page's frontmatter + intro, then renders each family's
+ * "Native API" section via the shared helper. Returns the full markdown page.
+ */
+function renderStandaloneFlatPage(ns, position, flatWrappers) {
+  const families = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === ns);
+  const rowsByApi = families.map((api) => ({
+    api,
+    rows: flatWrappers.filter((w) => w.api === api),
+  }));
+  const total = rowsByApi.reduce((n, f) => n + f.rows.length, 0);
+  const labels = families.map((api) => (FLAT_API_META[api] ?? { label: api }).label);
+
+  let body =
+    `---\n` +
+    `title: ${ns}\n` +
+    `sidebar_label: ${ns}\n` +
+    `sidebar_position: ${position}\n` +
+    `---\n\n` +
+    DOCS_NOTE +
+    `\n# \`${ns}\` — native provider reference\n\n` +
+    `- **namespace:** \`sdv.${ns}\` *(standalone — not an ESPN league)*\n` +
+    `- **families:** ${labels.map((l) => `${l}`).join(", ")}\n` +
+    `- **wrappers:** ${total} native\n\n` +
+    `\`${ns}\` is a cross-sport provider namespace (no ESPN \`{sport}\`/\`{league}\` ` +
+    `nesting). Every method is exposed under BOTH its snake_case name ` +
+    `(\`<family>_<endpoint>\`, py/R parity) and a camelCase canonical name ` +
+    `(\`<family><Endpoint>\`) on \`sdv.${ns}\`. Pass \`{ parsed: true }\` to any ` +
+    `endpoint to get tidy rows instead of raw JSON.\n\n` +
+    "```js\n" +
+    `import sdv from 'sportsdataverse';\n\n` +
+    `// The Odds API uses a plain \`apiKey\` query param (you supply it):\n` +
+    `await sdv.${ns}.oddsApiSports({ api_key: process.env.ODDS_API_KEY });\n` +
+    "```\n";
+
+  for (const { api, rows } of rowsByApi) {
+    body += renderNativeFamilySection(api, rows, ns);
   }
   return body;
 }
@@ -587,7 +670,7 @@ function renderEspnParsedReturns() {
   return body;
 }
 
-function renderReferenceIndex(leagues, wrappers, flatWrappers = []) {
+function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs = []) {
   let body =
     `---\n` +
     `title: ESPN Reference\n` +
@@ -617,6 +700,27 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = []) {
     const slug = l.leagueParam ? `${l.league} *(param)*` : l.league;
     body += `| [${l.prefix}](./${l.prefix}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} | ${native || "—"} |\n`;
   }
+
+  // Standalone (non-league) provider namespaces — e.g. `odds` (The Odds API),
+  // the first cross-sport provider family. Each gets its own reference page
+  // (renderStandaloneFlatPage) rather than a "Native API" section on a league.
+  if (standaloneNs.length) {
+    body +=
+      `\n## Standalone provider namespaces\n\n` +
+      `Cross-sport providers that aren't tied to a single ESPN league. They get ` +
+      `their own \`sdv.<namespace>\` surface and reference page.\n\n` +
+      `| Namespace | provider | wrappers |\n` +
+      `|---|---|---:|\n`;
+    for (const ns of standaloneNs) {
+      const families = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === ns);
+      const count = flatWrappers.filter((w) => families.includes(w.api)).length;
+      const labels = families
+        .map((api) => (FLAT_API_META[api] ?? { label: api }).label)
+        .join(", ");
+      body += `| [${ns}](./${ns}) | ${labels} | ${count} |\n`;
+    }
+  }
+
   body +=
     `\n:::tip Same call, every league\n` +
     "```js\n" +
@@ -688,6 +792,10 @@ const leaguesDoc = loadLeaguesDoc();
 const leagues = loadLeagues(leaguesDoc);
 const hosts = leaguesDoc.hosts;
 
+// Flat-API namespaces that are NOT leagues (e.g. `odds`) get their own
+// standalone reference page instead of a "Native API" section on a league page.
+const standaloneNs = standaloneFlatNamespaces(leagues);
+
 // The generated wrappers module exports the ESPN `WRAPPERS` table (unchanged)
 // plus a separate `FLAT_WRAPPERS` table for the non-ESPN flat APIs.
 const wrappersTs =
@@ -697,7 +805,7 @@ const wrappersTs =
 const outputs = {
   [join(generatedDir, "wrappers.ts")]: wrappersTs,
   [join(generatedDir, "leagues.ts")]: renderTs("LeagueConfig", "LEAGUES", leagues),
-  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers, flatWrappers),
+  [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers, flatWrappers, standaloneNs),
   [join(referenceDir, "espn-parsed-returns.md")]: renderEspnParsedReturns(),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
   [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
@@ -715,6 +823,15 @@ leagues.forEach((league, i) => {
     league,
     wrappers,
     i + 2,
+    flatWrappers
+  );
+});
+
+// Standalone (non-league) provider pages come after the league pages.
+standaloneNs.forEach((ns, i) => {
+  outputs[join(referenceDir, `${ns}.md`)] = renderStandaloneFlatPage(
+    ns,
+    leagues.length + 2 + i,
     flatWrappers
   );
 });
@@ -738,7 +855,7 @@ for (const [file, content] of Object.entries(outputs)) {
 console.log(
   `codegen: ${wrappers.length} wrappers across ${leagues.length} leagues ` +
     `+ ${flatWrappers.length} flat-API wrappers (${FLAT_API_FILES.length} families) ` +
-    `(+ ${leagues.length + 3} reference pages + playground metadata)`
+    `(+ ${leagues.length + standaloneNs.length + 3} reference pages + playground metadata)`
 );
 if (check && drift) process.exit(1);
 if (check) console.log("codegen: generated files are up to date");

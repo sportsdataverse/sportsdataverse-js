@@ -1,0 +1,54 @@
+schema: sports_odds_history
+kind: dataframe
+columns:
+- name: timestamp
+  type: character
+  description: The timestamp of the snapshot. This will be the closest available timestamp equal to or earlier than the provided `date` parameter.
+- name: previous_timestamp
+  type: character
+  description: The preceding available timestamp. Use as the `date` parameter in a new request to move back in time.
+- name: next_timestamp
+  type: character
+  description: The next available timestamp. Use as the `date` parameter in a new request to move forward in time.
+- name: id
+  type: character
+  description: A unique 32 character identifier for the event.
+- name: sport_key
+  type: character
+  description: A unique slug for the sport, e.g. `basketball_nba`. Use this as the `sport` param in /odds requests.
+- name: sport_title
+  type: character
+  description: A presentable title of the sport, e.g. `NBA`. Occasionally this value can change (for example, if a league undergoes a name change or change in sponsorship).
+- name: commence_time
+  type: character
+  description: The match start time (ISO 8601 formatted). Will be a unix timestamp integer if the `dateFormat` query param is set to `unix`.
+- name: home_team
+  type: character
+  description: The home team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events.
+- name: away_team
+  type: character
+  description: The away team. If home/away is not applicable for the sport (such as MMA and Tennis), it will be one of the participants. Null for outrights (futures) events.
+- name: bookmaker_key
+  type: character
+  description: A unique slug (key) of the bookmaker, e.g. `draftkings`.
+- name: bookmaker
+  type: character
+  description: A formatted title of the bookmaker, e.g. `DraftKings`.
+- name: bookmaker_last_update
+  type: character
+  description: A timestamp of when the bookmaker's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string.
+- name: market_key
+  type: character
+  description: The unique key for the odds market, e.g. `spreads`.
+- name: market_last_update
+  type: character
+  description: A timestamp of when the market's odds were last read. Will be an integer if `dateFormat=unix`, otherwise a string. Prefer this over `bookmaker_last_update` to check the recency of odds.
+- name: outcomes_name
+  type: character
+  description: The outcome label. The value depends on the market -- for totals markets `Over`/`Under`, for team markets the team or participant name, or `Draw`.
+- name: outcomes_price
+  type: numeric
+  description: The odds of the outcome. The format is determined by the `oddsFormat` query param (decimal by default).
+- name: outcomes_point
+  type: numeric
+  description: The handicap or points of the outcome, only applicable to `spreads` and `totals` markets (missing for `h2h` and outrights markets).
