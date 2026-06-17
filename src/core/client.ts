@@ -22,6 +22,9 @@ export const HOSTS: Record<EspnFamily, string> = {
  */
 export const FLAT_HOSTS: Record<string, string> = {
   mlb_api: "https://statsapi.mlb.com",
+  // Baseball Savant / Statcast (heterogeneous CSV/JSON/HTML — see
+  // src/core/statcast_runtime.ts for the content-type-aware getter).
+  mlb_statcast: "https://baseballsavant.mlb.com",
   // NHL native APIs. `nhl_api_web` and `nhl_edge` are separate `api` stems
   // that share the same host (api-web.nhle.com); the Stats REST and Records
   // families each have their own host.

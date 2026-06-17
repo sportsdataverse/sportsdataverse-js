@@ -23,10 +23,12 @@
     "axios": "^1.17.0",
     "cheerio": "^1.2.0",
     "decode-html": "^2.0.0",
+    "papaparse": "^5.5.3",
     "tabletojson": "^4.1.10"
   },
   "devDependencies": {
     "@types/node": "^22.19.21",
+    "@types/papaparse": "^5.5.2",
     "mocha": "^11.7.6",
     "should": "^13.2.3",
     "tsx": "^4.22.4",

@@ -1,0 +1,664 @@
+# Flat (non-ESPN) API family: Baseball Savant / Statcast (baseballsavant.mlb.com).
+# Heterogeneous responses — CSV leaderboards (csv=true), JSON gamefeed/schedule,
+# and a couple of HTML-embedded-JSON leaderboards. `host` is an absolute base
+# URL and each endpoint `path` is appended verbatim. The `mlb_statcast` api stem
+# is keyed into GETTER_OVERRIDES (src/leagues/_make_flat.ts) so a content-type-
+# aware getter (src/core/statcast_runtime.ts) returns JSON objects for JSON
+# bodies and raw text for CSV/HTML bodies — no per-endpoint flag needed. Port of
+# sdv-py tools/codegen/endpoints/mlb_statcast.yaml (37 leaderboards incl. 2 HTML
+# ones + gamefeed + schedule = 39 endpoints). Each endpoint names a parser in
+# src/parsers/_registry.ts.
+api: mlb_statcast
+host: https://baseballsavant.mlb.com
+name_pattern: mlb_statcast_{short}
+endpoints:
+- short: leaderboard_expected_stats
+  path: /leaderboard/expected_statistics
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_percentile_rankings
+  path: /leaderboard/percentile-rankings
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_sprint_speed
+  path: /leaderboard/sprint_speed
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_running_splits
+  path: /leaderboard/running_splits
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_bat_tracking
+  path: /leaderboard/bat-tracking
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_swing_path
+  path: /leaderboard/bat-tracking/swing-path-attack-angle
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_swing_timing
+  path: /leaderboard/bat-tracking/swing-timing-miss-distance
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_swing_take
+  path: /leaderboard/swing-take
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_exit_velocity_barrels
+  path: /leaderboard/statcast
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_batted_ball
+  path: /leaderboard/batted-ball
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_home_runs
+  path: /leaderboard/home-runs
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_pitch_arsenals
+  path: /leaderboard/pitch-arsenals
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_pitch_arsenal_stats
+  path: /leaderboard/pitch-arsenal-stats
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_pitch_movement
+  path: /leaderboard/pitch-movement
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_pitch_tempo
+  path: /leaderboard/pitch-tempo
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_active_spin
+  path: /leaderboard/active-spin
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_spin_direction
+  path: /leaderboard/spin-direction-pitches
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_arm_angles
+  path: /leaderboard/pitcher-arm-angles
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_pitcher_running_game
+  path: /leaderboard/pitcher-running-game
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_outs_above_average
+  path: /leaderboard/outs_above_average
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_outfield_directional_oaa
+  path: /leaderboard/outfield_directional_outs_above_average
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_outfield_jump
+  path: /leaderboard/outfield_jump
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_catch_probability
+  path: /leaderboard/catch_probability
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_arm_strength
+  path: /leaderboard/arm-strength
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_poptime
+  path: /leaderboard/poptime
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_catcher_framing
+  path: /leaderboard/catcher-framing
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_catcher_blocking
+  path: /leaderboard/catcher-blocking
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_catcher_throwing
+  path: /leaderboard/catcher-throwing
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_catcher_stance
+  path: /leaderboard/catcher-stance
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_basestealing_run_value
+  path: /leaderboard/basestealing-run-value
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_baserunning_run_value
+  path: /leaderboard/baserunning-run-value
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_baserunning
+  path: /leaderboard/baserunning
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_year_to_year
+  path: /leaderboard/statcast-year-to-year
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_timer_infractions
+  path: /leaderboard/pitch-timer-infractions
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_custom
+  path: /leaderboard/custom
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: selections
+    query_key: selections
+    type: str
+  - name: filter
+    query_key: filter
+    type: str
+  - name: min
+    query_key: min
+    type: int|str
+  - name: sort
+    query_key: sort
+    type: str
+  - name: sort_dir
+    query_key: sortDir
+    type: str
+  - name: csv
+    query_key: csv
+    type: bool
+    default: 'true'
+  parser: parse_mlb_statcast_leaderboard
+- short: leaderboard_fielding_run_value
+  path: /leaderboard/fielding-run-value
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  parser: parse_mlb_statcast_html_leaderboard
+- short: leaderboard_park_factors
+  path: /leaderboard/statcast-park-factors
+  extra_params:
+  - name: type
+    query_key: type
+    type: str
+  - name: year
+    query_key: year
+    type: int|str
+  - name: team
+    query_key: team
+    type: str
+  parser: parse_mlb_statcast_html_leaderboard
+- short: gamefeed
+  path: /gf
+  extra_params:
+  - name: game_pk
+    query_key: game_pk
+    type: int
+  - name: at_bat_number
+    query_key: at_bat_number
+    type: int
+  parser: parse_mlb_statcast_gamefeed
+- short: schedule
+  path: /schedule
+  extra_params:
+  - name: date
+    query_key: date
+    type: str
+  parser: parse_mlb_statcast_schedule

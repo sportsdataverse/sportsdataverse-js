@@ -28,6 +28,7 @@ const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
 // untouched.
 const FLAT_API_FILES = [
   "mlb_api",
+  "mlb_statcast",
   "nhl_api_web",
   "nhl_edge",
   "nhl_stats_rest",

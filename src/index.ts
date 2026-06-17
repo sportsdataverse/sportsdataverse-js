@@ -13,6 +13,7 @@ import { LEAGUES } from './generated/leagues.js';
 import { FLAT_WRAPPERS } from './generated/wrappers.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { makeFlatModule } from './leagues/_make_flat.js';
+import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 
 // Legacy hand-written services. Their methods (e.g. `sdv.nba.getPlayByPlay`) are
 // preserved; the generated cross-league `espn_<prefix>_<short>` wrappers are
@@ -34,6 +35,7 @@ for (const cfg of LEAGUES) {
 // + legacy surface. Each flat family (`WrapperDef.api`) maps to a league prefix.
 const FLAT_API_NAMESPACES: Record<string, string> = {
   mlb_api: 'mlb',
+  mlb_statcast: 'mlb',
   nhl_api_web: 'nhl',
   nhl_edge: 'nhl',
   nhl_stats_rest: 'nhl',
@@ -45,6 +47,18 @@ for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);
 for (const [api, defs] of Object.entries(flatByApi)) {
   const prefix = FLAT_API_NAMESPACES[api] ?? api;
   sdv[prefix] = { ...(sdv[prefix] ?? {}), ...makeFlatModule(defs) };
+}
+
+// Hand-written Baseball Savant / Statcast wrappers (date-chunked search +
+// HTML-embedded player page) that aren't flat passthroughs — merged onto
+// `sdv.mlb` alongside the generated flat `mlb_statcast_*` wrappers, under BOTH
+// snake_case (export name) and camelCase (idiomatic JS) names.
+const toCamel = (s: string): string =>
+  s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
+for (const [name, fn] of Object.entries(mlbStatcastExtra)) {
+  if (typeof fn !== 'function') continue; // skip exported types/interfaces
+  sdv.mlb[name] = fn;
+  sdv.mlb[toCamel(name)] = fn;
 }
 
 export default sdv;

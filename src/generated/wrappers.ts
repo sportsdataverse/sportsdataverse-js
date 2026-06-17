@@ -4043,6 +4043,1121 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "parser": "parse_mlb_api_list"
   },
   {
+    "short": "leaderboard_expected_stats",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/expected_statistics",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_percentile_rankings",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/percentile-rankings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_sprint_speed",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/sprint_speed",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_running_splits",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/running_splits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_bat_tracking",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/bat-tracking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_swing_path",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/bat-tracking/swing-path-attack-angle",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_swing_timing",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/bat-tracking/swing-timing-miss-distance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_swing_take",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/swing-take",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_exit_velocity_barrels",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/statcast",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_batted_ball",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/batted-ball",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_home_runs",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/home-runs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_pitch_arsenals",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitch-arsenals",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_pitch_arsenal_stats",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitch-arsenal-stats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_pitch_movement",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitch-movement",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_pitch_tempo",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitch-tempo",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_active_spin",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/active-spin",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_spin_direction",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/spin-direction-pitches",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_arm_angles",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitcher-arm-angles",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_pitcher_running_game",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitcher-running-game",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_outs_above_average",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/outs_above_average",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_outfield_directional_oaa",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/outfield_directional_outs_above_average",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_outfield_jump",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/outfield_jump",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_catch_probability",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/catch_probability",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_arm_strength",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/arm-strength",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_poptime",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/poptime",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_catcher_framing",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/catcher-framing",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_catcher_blocking",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/catcher-blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_catcher_throwing",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/catcher-throwing",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_catcher_stance",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/catcher-stance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_basestealing_run_value",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/basestealing-run-value",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_baserunning_run_value",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/baserunning-run-value",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_baserunning",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/baserunning",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_year_to_year",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/statcast-year-to-year",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_timer_infractions",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/pitch-timer-infractions",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_custom",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/custom",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "selections",
+        "queryKey": "selections"
+      },
+      {
+        "name": "filter",
+        "queryKey": "filter"
+      },
+      {
+        "name": "min",
+        "queryKey": "min"
+      },
+      {
+        "name": "sort",
+        "queryKey": "sort"
+      },
+      {
+        "name": "sort_dir",
+        "queryKey": "sortDir"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": "true"
+      }
+    ],
+    "parser": "parse_mlb_statcast_leaderboard"
+  },
+  {
+    "short": "leaderboard_fielding_run_value",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/fielding-run-value",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      }
+    ],
+    "parser": "parse_mlb_statcast_html_leaderboard"
+  },
+  {
+    "short": "leaderboard_park_factors",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/leaderboard/statcast-park-factors",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "team",
+        "queryKey": "team"
+      }
+    ],
+    "parser": "parse_mlb_statcast_html_leaderboard"
+  },
+  {
+    "short": "gamefeed",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/gf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_pk",
+        "queryKey": "game_pk"
+      },
+      {
+        "name": "at_bat_number",
+        "queryKey": "at_bat_number"
+      }
+    ],
+    "parser": "parse_mlb_statcast_gamefeed"
+  },
+  {
+    "short": "schedule",
+    "flat": true,
+    "api": "mlb_statcast",
+    "host": "https://baseballsavant.mlb.com",
+    "scope": "universal",
+    "path": "/schedule",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date",
+        "queryKey": "date"
+      }
+    ],
+    "parser": "parse_mlb_statcast_schedule"
+  },
+  {
     "short": "pbp",
     "flat": true,
     "api": "nhl_api_web",

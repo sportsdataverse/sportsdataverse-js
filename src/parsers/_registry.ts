@@ -63,6 +63,14 @@ import {
   parse_nfl_game_summaries,
   parse_nfl_weekly_game_details,
 } from "./nfl_api.js";
+import {
+  parse_mlb_statcast_leaderboard,
+  parse_mlb_statcast_search,
+  parse_mlb_statcast_gamefeed,
+  parse_mlb_statcast_schedule,
+  parse_mlb_statcast_html_leaderboard,
+  parse_mlb_statcast_player,
+} from "./mlb_statcast.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -127,6 +135,13 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_nfl_injuries,
   parse_nfl_game_summaries,
   parse_nfl_weekly_game_details,
+  // ---- Baseball Savant / Statcast (baseballsavant.mlb.com) ----
+  parse_mlb_statcast_leaderboard,
+  parse_mlb_statcast_search,
+  parse_mlb_statcast_gamefeed,
+  parse_mlb_statcast_schedule,
+  parse_mlb_statcast_html_leaderboard,
+  parse_mlb_statcast_player,
 };
 
 /**

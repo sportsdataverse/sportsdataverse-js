@@ -14,6 +14,7 @@ const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 // api stem -> sdv namespace prefix (mirrors index.ts FLAT_API_NAMESPACES)
 const FLAT_API_NAMESPACES = {
   mlb_api: 'mlb',
+  mlb_statcast: 'mlb',
   nhl_api_web: 'nhl',
   nhl_edge: 'nhl',
   nhl_stats_rest: 'nhl',
@@ -81,6 +82,27 @@ describe('flat-API wrapper metadata invariants', () => {
     FLAT_HOSTS.nhl_records.should.equal('https://records.nhl.com/site/api');
   });
 
+  it('registers the mlb_statcast family (39 endpoints) on https://baseballsavant.mlb.com', () => {
+    const sc = FLAT_WRAPPERS.filter((w) => w.api === 'mlb_statcast');
+    sc.length.should.equal(39); // 35 CSV + 2 HTML leaderboards + gamefeed + schedule
+    FLAT_HOSTS.mlb_statcast.should.equal('https://baseballsavant.mlb.com');
+    for (const w of sc) w.host.should.equal('https://baseballsavant.mlb.com');
+    // the 2 HTML-embedded leaderboards + the gamefeed + schedule are present
+    const shorts = sc.map((w) => w.short);
+    shorts.should.containEql('leaderboard_fielding_run_value');
+    shorts.should.containEql('leaderboard_park_factors');
+    shorts.should.containEql('gamefeed');
+    shorts.should.containEql('schedule');
+  });
+
+  it('every mlb_statcast wrapper names a registered statcast parser, none auth', () => {
+    for (const w of FLAT_WRAPPERS.filter((x) => x.api === 'mlb_statcast')) {
+      (typeof w.parser).should.equal('string', `parser missing on ${w.short}`);
+      w.parser.should.startWith('parse_mlb_statcast_');
+      should(w.auth).not.be.true(`unexpected auth flag on mlb_statcast_${w.short}`);
+    }
+  });
+
   it('registers the nfl_api family (11 endpoints) on https://api.nfl.com', () => {
     const nfl = FLAT_WRAPPERS.filter((w) => w.api === 'nfl_api');
     nfl.length.should.equal(11);
@@ -120,7 +142,33 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
   it('flat wrappers coexist with the legacy + ESPN MLB surface (no clobbering)', () => {
     (typeof sdv.mlb.getPlayByPlay).should.equal('function'); // legacy
     (typeof sdv.mlb.espnMlbScoreboard).should.equal('function'); // ESPN
-    (typeof sdv.mlb.mlbApiTeams).should.equal('function'); // flat
+    (typeof sdv.mlb.mlbApiTeams).should.equal('function'); // mlb_api flat
+    (typeof sdv.mlb.mlbStatcastGamefeed).should.equal('function'); // mlb_statcast flat
+  });
+
+  it('mlb_statcast flat wrappers merge onto sdv.mlb (snake + camel, same fn)', () => {
+    sdv.mlb.mlbStatcastLeaderboardSprintSpeed.should.equal(
+      sdv.mlb.mlb_statcast_leaderboard_sprint_speed
+    );
+    (typeof sdv.mlb.mlb_statcast_gamefeed).should.equal('function');
+    (typeof sdv.mlb.mlbStatcastSchedule).should.equal('function');
+    (typeof sdv.mlb.mlb_statcast_leaderboard_fielding_run_value).should.equal('function');
+  });
+
+  it('hand-written statcast search/player wrappers merge onto sdv.mlb (snake + camel)', () => {
+    for (const snake of [
+      'mlb_statcast_search',
+      'mlb_statcast_search_minors',
+      'mlb_statcast_search_wbc',
+      'mlb_statcast_player',
+    ]) {
+      const camel = toCamel(snake);
+      (typeof sdv.mlb[snake]).should.equal('function', `missing ${snake}`);
+      (typeof sdv.mlb[camel]).should.equal('function', `missing ${camel}`);
+      sdv.mlb[camel].should.equal(sdv.mlb[snake], `${camel} and ${snake} differ`);
+    }
+    // these are hand-written (not in the generated FLAT_WRAPPERS table)
+    FLAT_WRAPPERS.some((w) => w.api === 'mlb_statcast' && w.short === 'search').should.be.false();
   });
 
   it('all four NHL families merge onto sdv.nhl alongside legacy + ESPN', () => {
