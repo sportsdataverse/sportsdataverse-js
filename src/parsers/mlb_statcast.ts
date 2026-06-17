@@ -66,7 +66,7 @@ function flattenRow(obj: Record<string, any>, prefix: string, out: Record<string
 }
 
 /** Apply the `underscore` column transform to every key of a row. */
-function underscoreKeys(row: Record<string, any>): Record<string, any> {
+export function underscoreKeys(row: Record<string, any>): Record<string, any> {
   const out: Record<string, any> = {};
   for (const [k, v] of Object.entries(row)) out[underscore(String(k))] = v;
   return out;
@@ -92,7 +92,7 @@ function jsonRows(rows: any[]): Record<string, any>[] {
  * returns `[]`. Headers go through `underscore` (a near no-op on Savant's
  * already-snake headers).
  */
-function csvToRows(text: any): Record<string, any>[] {
+export function csvToRowsRaw(text: any): Record<string, any>[] {
   if (typeof text !== "string" || !text.trim()) return [];
   let parsed;
   try {
@@ -106,7 +106,12 @@ function csvToRows(text: any): Record<string, any>[] {
   }
   const data = parsed?.data;
   if (!Array.isArray(data) || data.length === 0) return [];
-  return data.map((row) => underscoreKeys(row));
+  return data;
+}
+
+/** `csvToRowsRaw` + the `underscore` key transform (the tidy form). */
+function csvToRows(text: any): Record<string, any>[] {
+  return csvToRowsRaw(text).map((row) => underscoreKeys(row));
 }
 
 /**

@@ -81,6 +81,11 @@ export type { NflTokenOptions } from './core/nfl_auth.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
 export type { ParserFn } from './parsers/_registry.js';
+// Re-export the tidy.js toolkit so callers can pipe the parsed tidy arrays
+// (from `{ parsed: true }`) through grammar-of-data-manipulation verbs, e.g.
+// `import { tidy } from 'sportsdataverse';
+//  tidy.tidy(rows, tidy.groupBy('team', tidy.summarize({ n: tidy.n() })))`.
+export * as tidy from '@tidyjs/tidy';
 export type {
   LeagueConfig,
   EspnFamily,

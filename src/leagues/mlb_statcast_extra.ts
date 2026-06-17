@@ -7,7 +7,8 @@
 
 import { statcastGet } from "../core/statcast_runtime.js";
 import {
-  parse_mlb_statcast_search,
+  csvToRowsRaw,
+  underscoreKeys,
   parse_mlb_statcast_player,
 } from "../parsers/mlb_statcast.js";
 
@@ -27,6 +28,8 @@ export interface StatcastSearchOptions {
   player_type?: string;
   /** Initial date-window size in days (default 7). */
   chunk_days?: number;
+  /** Tidy (underscore-normalize) the rows; default returns the raw CSV rows. */
+  parsed?: boolean;
   /**
    * Friendly filter kwargs translated to Savant's params (see `_translateFilters`):
    * `season`, `game_type`, `pitch_type`, `at_bat_result`, `batted_ball_type`,
@@ -158,7 +161,9 @@ async function fetchChunk(
     ...translateFilters(filters),
   };
   const text = await statcastGet(baseUrl, { params });
-  return parse_mlb_statcast_search(typeof text === "string" ? text : "");
+  // Raw CSV rows (papaparse, original headers) — the tidy `underscore` pass is
+  // applied at the top level only when the caller opts in with `{ parsed: true }`.
+  return csvToRowsRaw(typeof text === "string" ? text : "");
 }
 
 /**
@@ -203,14 +208,17 @@ async function searchCore(
   return frames.flat();
 }
 
-/** Pull `player_type` / `chunk_days` out of the options bag; the rest are filters. */
+/** Pull control keys (`player_type` / `chunk_days` / `parsed`) out of the options
+ * bag; everything else is a Savant filter. `parsed` is a control key (never a
+ * filter), so it is excluded from the forwarded query. */
 function splitOptions(opts: StatcastSearchOptions): {
   playerType: string;
   chunkDays: number;
+  parsed: boolean;
   filters: Record<string, any>;
 } {
-  const { player_type = "batter", chunk_days = 7, ...filters } = opts ?? {};
-  return { playerType: player_type, chunkDays: chunk_days, filters };
+  const { player_type = "batter", chunk_days = 7, parsed = false, ...filters } = opts ?? {};
+  return { playerType: player_type, chunkDays: chunk_days, parsed, filters };
 }
 
 /**
@@ -221,17 +229,19 @@ function splitOptions(opts: StatcastSearchOptions): {
  * cap, and stitches the chunks back together.
  *
  * @param startDt / endDt `YYYY-MM-DD` (inclusive).
- * @param opts `player_type` (`"batter"`/`"pitcher"`), `chunk_days`, plus friendly
- *             filter kwargs (see {@link StatcastSearchOptions}).
- * @returns One tidy row per pitch.
+ * @param opts `player_type` (`"batter"`/`"pitcher"`), `chunk_days`, `parsed`, plus
+ *             friendly filter kwargs (see {@link StatcastSearchOptions}).
+ * @returns One **raw** CSV row per pitch by default; tidy (underscore-normalized)
+ *          rows when `{ parsed: true }`.
  */
 export async function mlb_statcast_search(
   startDt: string,
   endDt: string,
   opts: StatcastSearchOptions = {}
 ): Promise<Record<string, any>[]> {
-  const { playerType, chunkDays, filters } = splitOptions(opts);
-  return searchCore(startDt, endDt, SEARCH_URL, "mlb_statcast_search", playerType, chunkDays, filters);
+  const { playerType, chunkDays, parsed, filters } = splitOptions(opts);
+  const rows = await searchCore(startDt, endDt, SEARCH_URL, "mlb_statcast_search", playerType, chunkDays, filters);
+  return parsed ? rows.map(underscoreKeys) : rows;
 }
 
 /**
@@ -244,8 +254,8 @@ export async function mlb_statcast_search_minors(
   endDt: string,
   opts: StatcastSearchOptions = {}
 ): Promise<Record<string, any>[]> {
-  const { playerType, chunkDays, filters } = splitOptions(opts);
-  return searchCore(
+  const { playerType, chunkDays, parsed, filters } = splitOptions(opts);
+  const rows = await searchCore(
     startDt,
     endDt,
     SEARCH_URL_MINORS,
@@ -254,6 +264,7 @@ export async function mlb_statcast_search_minors(
     chunkDays,
     filters
   );
+  return parsed ? rows.map(underscoreKeys) : rows;
 }
 
 /**
@@ -266,8 +277,8 @@ export async function mlb_statcast_search_wbc(
   endDt: string,
   opts: StatcastSearchOptions = {}
 ): Promise<Record<string, any>[]> {
-  const { playerType, chunkDays, filters } = splitOptions(opts);
-  return searchCore(
+  const { playerType, chunkDays, parsed, filters } = splitOptions(opts);
+  const rows = await searchCore(
     startDt,
     endDt,
     SEARCH_URL_WBC,
@@ -276,16 +287,17 @@ export async function mlb_statcast_search_wbc(
     chunkDays,
     filters
   );
+  return parsed ? rows.map(underscoreKeys) : rows;
 }
 
 /** Options for {@link mlb_statcast_player}. */
 export interface StatcastPlayerOptions {
-  /** Which embedded `serverVals` table to flatten (default `"statcast"`). */
+  /** Which embedded `serverVals` table to flatten when `parsed` (default `"statcast"`). */
   section?: string;
   /** Optional `stats` query value to scope the embedded payload. */
   stats?: string;
-  /** Return the raw page HTML string instead of a parsed frame. */
-  raw?: boolean;
+  /** Parse the embedded `serverVals[section]` into tidy rows; default returns the raw HTML. */
+  parsed?: boolean;
 }
 
 /** Fetch the raw `/savant-player/{id}` HTML (`""` on transport failure). */
@@ -297,23 +309,23 @@ async function playerPageHtml(playerId: number | string, stats?: string): Promis
 }
 
 /**
- * GET `/savant-player/{playerId}` and parse one embedded table into tidy rows.
+ * GET `/savant-player/{playerId}`.
  *
- * Returns tidy rows **by default** (the parsed Statcast page, `section`
- * `"statcast"`); pass `{ raw: true }` to get the underlying HTML string instead
- * (the page embeds ~12 other tables — feed the HTML to
- * {@link parse_mlb_statcast_player} with a different `section`).
+ * Returns the **raw page HTML string by default** (consistent with the rest of
+ * the native surface — raw response unless you opt in); pass `{ parsed: true }`
+ * to flatten one embedded `serverVals` table into tidy rows (`section`, default
+ * `"statcast"`; the page embeds ~12 tables).
  *
  * @param playerId MLBAM player id (shared with the Stats API `personId`).
- * @param opts `section` (default `"statcast"`), `stats`, `raw`.
- * @returns Tidy rows by default; the raw HTML `string` when `{ raw: true }`.
+ * @param opts `parsed` (default `false`), `section` (default `"statcast"`), `stats`.
+ * @returns The raw HTML `string` by default; tidy rows when `{ parsed: true }`.
  */
 export async function mlb_statcast_player(
   playerId: number | string,
   opts: StatcastPlayerOptions = {}
 ): Promise<Record<string, any>[] | string> {
-  const { section = "statcast", stats, raw = false } = opts;
+  const { section = "statcast", stats, parsed = false } = opts;
   const html = await playerPageHtml(playerId, stats);
-  if (raw) return html;
+  if (!parsed) return html;
   return parse_mlb_statcast_player(html, section);
 }

@@ -35,11 +35,14 @@ the matching league namespace:
 
 ### tidy.js parser layer
 
-- Every native wrapper returns the raw JSON by default; pass `{ parsed: true }` to
-  run the payload through a registered parser that flattens it to a tidy array of
-  row objects (built on `@tidyjs/tidy` + a shared `normalize` helper). Strictly
-  additive — omitting `parsed` is the unchanged raw-response behavior, matching
-  `sportsdataverse-py`'s `return_parsed=True`.
+- Every native wrapper returns the raw response by default; pass `{ parsed: true }`
+  to run the payload through a registered parser that flattens it to a tidy array
+  of row objects via a shared in-house `normalize` helper (a `json_normalize`
+  equivalent). Strictly additive — omitting `parsed` is the unchanged raw-response
+  behavior, matching `sportsdataverse-py`'s `return_parsed=True`.
+- The [`@tidyjs/tidy`](https://github.com/pbeshai/tidy) toolkit is re-exported
+  (`import { tidy } from 'sportsdataverse'`) so the parsed tidy arrays compose
+  directly with grammar-of-data-manipulation verbs (`groupBy`, `summarize`, …).
 
 ### Dual-case naming
 

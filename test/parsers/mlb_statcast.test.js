@@ -6,6 +6,8 @@ import {
   parse_mlb_statcast_schedule,
   parse_mlb_statcast_html_leaderboard,
   parse_mlb_statcast_player,
+  csvToRowsRaw,
+  underscoreKeys,
 } from '../../dist/parsers/mlb_statcast.js';
 import {
   pipe,
@@ -52,6 +54,19 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
     rows[0].should.have.property('pitch_type', 'FF');
     rows[0].should.have.property('release_speed', '95.2');
     rows[1].should.have.property('launch_speed', '92.0');
+  });
+
+  it('csvToRowsRaw keeps original headers; underscoreKeys applies the tidy pass', () => {
+    // The hand-written search wrappers return csvToRowsRaw by default (raw) and
+    // map through underscoreKeys only when { parsed: true } — this locks the split.
+    const csv = '"last_name, first_name",xwOBA\n"Judge, Aaron",0.458';
+    const raw = csvToRowsRaw(csv);
+    raw.length.should.equal(1);
+    raw[0].should.have.property('xwOBA', '0.458'); // raw: camelCase header preserved
+    raw[0].should.have.property('last_name, first_name', 'Judge, Aaron');
+    const tidy = raw.map(underscoreKeys);
+    tidy[0].should.have.property('xw_oba', '0.458'); // tidy: underscore pass applied
+    tidy[0].should.have.property('last_name, first_name', 'Judge, Aaron'); // comma preserved
   });
 });
 

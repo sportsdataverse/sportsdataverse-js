@@ -15,11 +15,17 @@ import type { WrapperDef } from "./types.js";
  * with bare `{token}` path params. A `{token}` that resolves to nothing throws.
  */
 
-/** Look a param up by its snake_case name OR a camelCase alias. */
+/** Look a param up by its snake_case name OR a camelCase alias.
+ *
+ * Treats `""` the same as missing (blank UI inputs yield `""`) so a required
+ * path token is never satisfied by an empty string and `cleanQuery` never emits
+ * `param=` — keeping this in lockstep with the docs playground resolver. */
 function lookup(params: Record<string, any>, name: string): any {
-  if (params[name] !== undefined && params[name] !== null) return params[name];
+  if (params[name] !== undefined && params[name] !== null && params[name] !== "") {
+    return params[name];
+  }
   const camel = toCamel(name);
-  if (camel !== name && params[camel] !== undefined && params[camel] !== null) {
+  if (camel !== name && params[camel] !== undefined && params[camel] !== null && params[camel] !== "") {
     return params[camel];
   }
   return undefined;
@@ -45,7 +51,7 @@ function cleanQuery(
   const out: Record<string, any> = {};
   for (const qp of def.queryParams ?? []) {
     const v = lookup(params, qp.name) ?? qp.default;
-    if (v !== undefined && v !== null) out[qp.queryKey] = v;
+    if (v !== undefined && v !== null && v !== "") out[qp.queryKey] = v;
   }
   return out;
 }

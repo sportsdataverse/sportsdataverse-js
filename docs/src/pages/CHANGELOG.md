@@ -23,11 +23,14 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
   - **NFL.com "Shield" API** (`api.nfl.com`) — `sdv.nfl.nflApi*`, with automatic
     anonymous `WEB_DESKTOP` bearer-token minting (cached + auto-renewed; no
     credentials required).
-- **tidy.js parser layer.** Every native wrapper returns the raw JSON by default;
-  pass `{ parsed: true }` to run the payload through a registered parser that
-  flattens it to a tidy array of row objects (built on `@tidyjs/tidy` +
-  a shared `normalize` helper). Strictly additive — omitting `parsed` is the
-  unchanged raw-response behavior, matching `sdv-py`'s `return_parsed=True`.
+- **tidy.js parser layer.** Every native wrapper returns the raw response by
+  default; pass `{ parsed: true }` to run the payload through a registered parser
+  that flattens it to a tidy array of row objects via a shared in-house
+  `normalize` helper (a `json_normalize` equivalent). Strictly additive — omitting
+  `parsed` is the unchanged raw-response behavior, matching `sdv-py`'s
+  `return_parsed=True`. The [`@tidyjs/tidy`](https://github.com/pbeshai/tidy)
+  toolkit is re-exported (`import { tidy } from 'sportsdataverse'`) so the parsed
+  arrays compose directly with its grammar-of-data verbs.
 - **Dual-case naming.** Every generated wrapper (ESPN and native) is exposed
   under BOTH its snake_case name (`mlb_api_teams`, py/R parity) and its camelCase
   canonical name (`mlbApiTeams`, idiomatic JS) — same function, either name.
