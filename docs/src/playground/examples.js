@@ -16,6 +16,7 @@
 
 /** @type {Example[]} */
 export const EXAMPLES = [
+  // --- ESPN — the core cross-league surface ------------------------------
   {
     id: 'nba-scoreboard',
     sport: 'NBA',
@@ -48,6 +49,33 @@ export const EXAMPLES = [
     section: 'boxscore_team',
   },
   {
+    id: 'wnba-scoreboard',
+    sport: 'WNBA',
+    label: 'WNBA — scoreboard',
+    blurb: "Today's WNBA games, one row each.",
+    league: 'wnba',
+    endpoint: 'espn:scoreboard',
+    parsed: true,
+  },
+  {
+    id: 'nfl-scoreboard',
+    sport: 'NFL',
+    label: 'NFL — scoreboard',
+    blurb: "Every NFL game on the current slate, one tidy row per game.",
+    league: 'nfl',
+    endpoint: 'espn:scoreboard',
+    parsed: true,
+  },
+  {
+    id: 'cfb-scoreboard',
+    sport: 'CFB',
+    label: 'CFB — scoreboard',
+    blurb: 'College-football games on the current slate, parsed.',
+    league: 'cfb',
+    endpoint: 'espn:scoreboard',
+    parsed: true,
+  },
+  {
     id: 'cfb-rankings',
     sport: 'CFB',
     label: 'CFB — AP poll & rankings',
@@ -57,11 +85,20 @@ export const EXAMPLES = [
     parsed: true,
   },
   {
-    id: 'wnba-scoreboard',
-    sport: 'WNBA',
-    label: 'WNBA — scoreboard',
-    blurb: "Today's WNBA games, one row each.",
-    league: 'wnba',
+    id: 'mbb-rankings',
+    sport: 'MBB',
+    label: "MBB — AP Top 25",
+    blurb: "Current men's-college-basketball rankings, parsed.",
+    league: 'mbb',
+    endpoint: 'espn:rankings',
+    parsed: true,
+  },
+  {
+    id: 'nhl-scoreboard',
+    sport: 'NHL',
+    label: 'NHL — scoreboard',
+    blurb: "Today's NHL games via ESPN, one tidy row per game.",
+    league: 'nhl',
     endpoint: 'espn:scoreboard',
     parsed: true,
   },
@@ -73,6 +110,90 @@ export const EXAMPLES = [
     league: 'soccer',
     endpoint: 'espn:scoreboard',
     params: { league: 'eng.1' },
+    parsed: true,
+  },
+
+  // --- Native (non-ESPN) league APIs -------------------------------------
+  {
+    id: 'mlb-api-schedule',
+    sport: 'MLB',
+    label: 'MLB — Stats API schedule',
+    blurb:
+      "MLB's own statsapi.mlb.com schedule feed. Add a `date` (YYYY-MM-DD) or " +
+      '`season` param to scope it; parsed to one row per game.',
+    league: 'mlb',
+    endpoint: 'flat:mlb_api:schedule',
+    parsed: true,
+  },
+  {
+    id: 'nhl-api-standings',
+    sport: 'NHL',
+    label: 'NHL — api-web standings',
+    blurb: "The league's current full-season standings from api-web.nhle.com, parsed.",
+    league: 'nhl',
+    endpoint: 'flat:nhl_api_web:standings_season',
+    parsed: true,
+  },
+
+  // --- New provider families ---------------------------------------------
+  {
+    id: 'odds-sports',
+    sport: 'Odds',
+    label: 'Odds — list available sports',
+    blurb:
+      'The Odds API requires your own key — supply it in the api_key field ' +
+      '(get one free at the-odds-api.com). Lists every league it covers, parsed.',
+    league: 'odds',
+    endpoint: 'flat:odds_api:sports',
+    params: { api_key: 'YOUR_ODDS_API_KEY' },
+    parsed: true,
+  },
+  {
+    id: 'cbs-league',
+    sport: 'CBS',
+    label: 'CBS — league metadata (NFL)',
+    blurb:
+      "CBS Sports' public NAPI league resource. The league_id is a slug like " +
+      '`football-nfl` / `basketball-nba`; parsed to tidy rows.',
+    league: 'cbs',
+    endpoint: 'flat:cbs_napi:league',
+    params: { league_id: 'football-nfl' },
+    parsed: true,
+  },
+  {
+    id: 'fox-scoreboard',
+    sport: 'Fox',
+    label: 'Fox — Bifrost scoreboard (CFB)',
+    blurb:
+      "Fox Sports' Bifrost scoreboard. The public apikey + api-version default " +
+      'out of the box — just pass a `sport` (cfb / nfl / mlb / nba …). Parsed.',
+    league: 'fox',
+    endpoint: 'flat:fox_bifrost:scoreboard',
+    params: { sport: 'cfb' },
+    parsed: true,
+  },
+  {
+    id: 'yahoo-standings',
+    sport: 'Yahoo',
+    label: 'Yahoo — league standings (NCAAF)',
+    blurb:
+      "Yahoo's shangrila stats-graph standings. Pass a `league` slug (ncaaf / " +
+      'nfl / nba …); parsed to tidy rows.',
+    league: 'yahoo',
+    endpoint: 'flat:yahoo_shangrila:league_standings',
+    params: { league: 'ncaaf' },
+    parsed: true,
+  },
+  {
+    id: 'recruiting-rankings',
+    sport: '247',
+    label: '247 — recruiting rankings',
+    blurb:
+      "247Sports' player rankings. Scope with `year` + `sport_key` " +
+      '(e.g. 2025 / football); parsed.',
+    league: 'recruiting',
+    endpoint: 'flat:sports247:rankings',
+    params: { year: 2025, sport_key: 'football' },
     parsed: true,
   },
 ];

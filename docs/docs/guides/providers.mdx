@@ -1,0 +1,130 @@
+---
+title: Provider recipes (odds, CBS, Fox, Yahoo, 247)
+sidebar_label: Providers
+sidebar_position: 7
+---
+
+import RunKit from '@site/src/components/RunKit';
+
+# Provider recipes
+
+Beyond ESPN, `sportsdataverse` wraps five standalone provider families. Each is
+its own top-level namespace (no `{sport}`/`{league}` nesting) and every method
+honors `{ parsed: true }`:
+
+| Namespace | Provider | Notes |
+|---|---|---|
+| `sdv.odds` | The Odds API | needs **your** API key (`api_key`) |
+| `sdv.cbs` | CBS Sports NAPI | public, anonymous; league/team ids are slugs |
+| `sdv.fox` | Fox Sports Bifrost | public apikey defaults out of the box |
+| `sdv.yahoo` | Yahoo shangrila / editorial | pass a `league` slug |
+| `sdv.recruiting` | 247Sports | recruiting rankings, transfers |
+
+## Odds — The Odds API
+
+The Odds API requires a key (free tier at the-odds-api.com). Supply it via
+`api_key`. The `sports` endpoint lists every league it covers:
+
+```js
+import sdv from 'sportsdataverse';
+
+const sports = await sdv.odds.oddsApiSports({
+  api_key: process.env.ODDS_API_KEY,
+  parsed: true,
+});
+console.table(sports);
+```
+
+[Open in playground ▶](/playground?l=odds&e=flat%3Aodds_api%3Asports&parsed=1&api_key=YOUR_ODDS_API_KEY)
+
+:::note
+In the playground, replace `YOUR_ODDS_API_KEY` in the `api_key` field with a real
+key — calls without one return a 401.
+:::
+
+## CBS — league metadata
+
+CBS league ids are slugs like `football-nfl`, `basketball-nba`, `baseball-mlb`.
+
+```js
+import sdv from 'sportsdataverse';
+
+const league = await sdv.cbs.cbsNapiLeague({ league_id: 'football-nfl', parsed: true });
+console.table(league);
+```
+
+[Open in playground ▶](/playground?l=cbs&e=flat%3Acbs_napi%3Aleague&parsed=1&league_id=football-nfl)
+
+## Fox — Bifrost scoreboard
+
+The public `apikey` + `api-version` pair default automatically — just pass a
+`sport` (`cfb`, `nfl`, `mlb`, `nba`, …).
+
+```js
+import sdv from 'sportsdataverse';
+
+const board = await sdv.fox.foxBifrostScoreboard({ sport: 'cfb', parsed: true });
+console.table(board);
+```
+
+[Open in playground ▶](/playground?l=fox&e=flat%3Afox_bifrost%3Ascoreboard&parsed=1&sport=cfb)
+
+## Yahoo — league standings
+
+Yahoo's shangrila stats-graph. Pass a `league` slug (`ncaaf`, `nfl`, `nba`, …).
+Some Yahoo hosts want an `Origin`/`Referer` — pass them via `headers` if a call
+is rejected.
+
+```js
+import sdv from 'sportsdataverse';
+
+const standings = await sdv.yahoo.yahooShangrilaLeagueStandings({
+  league: 'ncaaf',
+  parsed: true,
+});
+console.table(standings);
+```
+
+[Open in playground ▶](/playground?l=yahoo&e=flat%3Ayahoo_shangrila%3Aleague_standings&parsed=1&league=ncaaf)
+
+## 247Sports — recruiting rankings
+
+Scope with `year` + `sport_key` (`football`, `basketball`).
+
+```js
+import sdv from 'sportsdataverse';
+
+const rankings = await sdv.recruiting.sports247Rankings({
+  year: 2025,
+  sport_key: 'football',
+  parsed: true,
+});
+console.table(rankings);
+```
+
+[Open in playground ▶](/playground?l=recruiting&e=flat%3Asports247%3Arankings&parsed=1&year=2025&sport_key=football)
+
+## Run it live
+
+This cell pulls the current CFB scoreboard from Fox's public Bifrost API:
+
+<RunKit
+  title="Fox Bifrost: CFB scoreboard"
+  source={`const sdv = require('sportsdataverse');
+
+const board = await sdv.fox.foxBifrostScoreboard({ sport: 'cfb', parsed: true });
+
+board.slice(0, 5);`}
+/>
+
+:::note
+RunKit cells run the **published npm package** (`sportsdataverse@^3`). The v3
+provider namespaces (`sdv.odds`, `sdv.fox`, …) activate once v3 is on npm; until
+then the embed may load v2. Copy any snippet into Node to run it locally.
+:::
+
+:::tip
+Per-provider method tables: **[odds](/docs/reference/odds)**,
+**[cbs](/docs/reference/cbs)**, **[fox](/docs/reference/fox)**,
+**[yahoo](/docs/reference/yahoo)**, **[247 / recruiting](/docs/reference/recruiting)**.
+:::
