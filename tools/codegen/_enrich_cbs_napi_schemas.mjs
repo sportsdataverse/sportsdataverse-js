@@ -29,9 +29,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const endpointsYaml = join(__dirname, "endpoints", "cbs_napi.yaml");
 const schemasDir = join(__dirname, "schemas");
 // The capture corpus lives outside the repo (the sdv-internal-refs checkout).
-// Override its root with the SDV_REFS_ROOT env var; defaults to the author's
-// local path. When the corpus is absent the script simply types nothing.
-const REFS_ROOT = process.env.SDV_REFS_ROOT || "c:/Users/saiem/Documents/sdv-internal-refs";
+// Point SDV_REFS_ROOT at it; with no default (a hard-coded path would be
+// non-portable and leak a local username). Absent the env var, there's nothing
+// to enrich — exit cleanly so the already-committed schemas are untouched.
+const REFS_ROOT = process.env.SDV_REFS_ROOT;
+if (!REFS_ROOT) {
+  console.log(
+    "SDV_REFS_ROOT is not set — set it to your sdv-internal-refs checkout to " +
+      "re-derive columns from the capture corpus. Nothing to do; exiting."
+  );
+  process.exit(0);
+}
 const capturesRoot = join(REFS_ROOT, "cbs", "captures");
 const napiDir = join(capturesRoot, "napi");
 
@@ -191,7 +199,8 @@ for (const ep of endpoints) {
     rows = parseFn(payload);
   } catch (err) {
     leftEmpty++;
-    emptyReasons.push(`${short}: capture parse/parser error (${err.message})`);
+    const msg = err instanceof Error ? err.message : String(err);
+    emptyReasons.push(`${short}: capture parse/parser error (${msg})`);
     continue;
   }
   if (!rows || rows.length === 0) {

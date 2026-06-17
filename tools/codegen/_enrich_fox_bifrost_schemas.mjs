@@ -36,10 +36,18 @@ const FOX_BIFROST_PARSERS = Object.fromEntries(
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const endpointsYaml = join(__dirname, "endpoints", "fox_bifrost.yaml");
 const schemasDir = join(__dirname, "schemas");
-// External capture corpus (the sdv-internal-refs checkout); override its root
-// with the SDV_REFS_ROOT env var. Defaults to the author's local path; when the
-// corpus is absent the script types nothing.
-const REFS_ROOT = process.env.SDV_REFS_ROOT || "c:/Users/saiem/Documents/sdv-internal-refs";
+// External capture corpus (the sdv-internal-refs checkout). Point SDV_REFS_ROOT
+// at it; no default (a hard-coded path would be non-portable + leak a local
+// username). Absent the env var there's nothing to enrich — exit cleanly so the
+// already-committed schemas are untouched.
+const REFS_ROOT = process.env.SDV_REFS_ROOT;
+if (!REFS_ROOT) {
+  console.log(
+    "SDV_REFS_ROOT is not set — set it to your sdv-internal-refs checkout to " +
+      "re-derive columns from the capture corpus. Nothing to do; exiting."
+  );
+  process.exit(0);
+}
 const capturesRoot = join(REFS_ROOT, "fox", "captures");
 const SPORT_DIRS = ["cbk", "cfb", "mlb", "nba", "nfl", "nhl", "soccer", "ufl", "wbc", "wcbk", "wnba", "_sample"];
 
