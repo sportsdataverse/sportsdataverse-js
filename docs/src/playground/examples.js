@@ -112,6 +112,27 @@ export const EXAMPLES = [
     params: { league: 'eng.1' },
     parsed: true,
   },
+  {
+    id: 'laliga-standings',
+    sport: 'Soccer',
+    label: 'Soccer — La Liga standings',
+    blurb:
+      'Switch the `league` slug to follow any competition — esp.1 = La Liga, ' +
+      'ita.1 = Serie A, ger.1 = Bundesliga, usa.1 = MLS. Standings, parsed.',
+    league: 'soccer',
+    endpoint: 'espn:standings',
+    params: { league: 'esp.1' },
+    parsed: true,
+  },
+  {
+    id: 'wbb-rankings',
+    sport: 'WBB',
+    label: 'WBB — AP Top 25',
+    blurb: "Current women's-college-basketball rankings, parsed.",
+    league: 'wbb',
+    endpoint: 'espn:rankings',
+    parsed: true,
+  },
 
   // --- Native (non-ESPN) league APIs -------------------------------------
   {
@@ -132,6 +153,65 @@ export const EXAMPLES = [
     blurb: "The league's current full-season standings from api-web.nhle.com, parsed.",
     league: 'nhl',
     endpoint: 'flat:nhl_api_web:standings_season',
+    parsed: true,
+  },
+  {
+    id: 'nfl-api-standings',
+    sport: 'NFL',
+    label: 'NFL — Shield API standings',
+    blurb:
+      "NFL.com's own Shield data API (api.nfl.com). A bearer token is minted " +
+      'automatically. Scope with season / season_type / week; parsed.',
+    league: 'nfl',
+    endpoint: 'flat:nfl_api:standings',
+    params: { season: 2024, season_type: 'REG', week: 1 },
+    parsed: true,
+  },
+  {
+    id: 'mlb-statcast-bat-tracking',
+    sport: 'MLB',
+    label: 'MLB — Statcast bat-tracking leaderboard',
+    blurb:
+      'Baseball Savant (baseballsavant.mlb.com) bat-tracking leaderboard — bat ' +
+      'speed, swing length, fast-swing rate. Scope with a `year`; parsed.',
+    league: 'mlb',
+    endpoint: 'flat:mlb_statcast:leaderboard_bat_tracking',
+    params: { year: 2024 },
+    parsed: true,
+  },
+  {
+    id: 'nhl-edge-skater-speed',
+    sport: 'NHL',
+    label: 'NHL — EDGE skater-speed top 10',
+    blurb:
+      'NHL EDGE player tracking (api-web.nhle.com). Top-10 skating-speed board; ' +
+      'pass positions (e.g. forwards), sort_by, and a season (e.g. 20242025). Parsed.',
+    league: 'nhl',
+    endpoint: 'flat:nhl_edge:skater_speed_top_10',
+    params: { positions: 'forwards', sort_by: 'maxSkatingSpeed', season: '20242025', game_type: 2 },
+    parsed: true,
+  },
+  {
+    id: 'nhl-stats-rest-franchise',
+    sport: 'NHL',
+    label: 'NHL — Stats REST franchises',
+    blurb:
+      "The league's Stats REST API (api.nhle.com/stats/rest). Every franchise, " +
+      'one tidy row each. The `lang` path param defaults to `en`. Parsed.',
+    league: 'nhl',
+    endpoint: 'flat:nhl_stats_rest:franchise',
+    params: { lang: 'en' },
+    parsed: true,
+  },
+  {
+    id: 'nhl-records-franchises',
+    sport: 'NHL',
+    label: 'NHL — Records franchises',
+    blurb:
+      'The records.nhl.com site API. No params needed — every NHL franchise ' +
+      'with its records metadata, parsed.',
+    league: 'nhl',
+    endpoint: 'flat:nhl_records:franchises',
     parsed: true,
   },
 
@@ -182,6 +262,18 @@ export const EXAMPLES = [
     league: 'yahoo',
     endpoint: 'flat:yahoo_shangrila:league_standings',
     params: { league: 'ncaaf' },
+    parsed: true,
+  },
+  {
+    id: 'yahoo-editorial-scoreboard',
+    sport: 'Yahoo',
+    label: 'Yahoo — editorial scoreboard (NFL)',
+    blurb:
+      "Yahoo's editorial scoreboard feed (api-secure.sports.yahoo.com). Pass a " +
+      '`leagues` slug (nfl / nba / mlb …); region/tz/count default out. Parsed.',
+    league: 'yahoo',
+    endpoint: 'flat:yahoo_editorial:scoreboard',
+    params: { leagues: 'nfl' },
     parsed: true,
   },
   {

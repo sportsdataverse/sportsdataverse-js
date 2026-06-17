@@ -1,14 +1,15 @@
 ---
 title: MLB recipes
 sidebar_label: MLB
-sidebar_position: 4
+sidebar_position: 6
 ---
 
 # MLB recipes
 
-Baseball lives under `sdv.mlb`, which spans **two** surfaces: the ESPN
-cross-league wrappers (`espnMlb*`) and the native **MLB Stats API**
-(`mlbApi*`, host `statsapi.mlb.com`). Both honor `{ parsed: true }`.
+Baseball lives under `sdv.mlb`, which spans **three** surfaces: the ESPN
+cross-league wrappers (`espnMlb*`), the native **MLB Stats API** (`mlbApi*`,
+host `statsapi.mlb.com`), and **Baseball Savant / Statcast** (`mlbStatcast*`,
+host `baseballsavant.mlb.com`). All honor `{ parsed: true }`.
 
 ## ESPN scoreboard
 
@@ -58,7 +59,41 @@ console.table(roster);
 
 [Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_api%3Ateam_roster&parsed=1&team_id=147)
 
+## Statcast leaderboards (Baseball Savant)
+
+`baseballsavant.mlb.com` exposes ~40 Statcast leaderboards under `mlbStatcast*`.
+Here's the bat-tracking board — bat speed, swing length, fast-swing rate. Scope
+with a `year`.
+
+```js
+import sdv from 'sportsdataverse';
+
+const batTracking = await sdv.mlb.mlbStatcastLeaderboardBatTracking({
+  year: 2024,
+  parsed: true,
+});
+console.table(batTracking.slice(0, 10));
+```
+
+[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_statcast%3Aleaderboard_bat_tracking&parsed=1&year=2024)
+
+## Statcast pitch-by-pitch search
+
+The date-chunked search pulls Statcast events. Scope it tightly (a date range,
+a team, a pitch type) so the result stays manageable.
+
+```js
+import sdv from 'sportsdataverse';
+
+const events = await sdv.mlb.mlbStatcastSearch({
+  season: 2024,
+  player_type: 'pitcher',
+  parsed: true,
+});
+console.table(events.slice(0, 10));
+```
+
 :::tip
-Full method + parameter tables: **[MLB reference](/docs/reference/mlb)** (covers both
-the ESPN and Stats API families).
+Full method + parameter tables: **[MLB reference](/docs/reference/mlb)** (covers
+the ESPN, Stats API, and Statcast / Baseball Savant families).
 :::
