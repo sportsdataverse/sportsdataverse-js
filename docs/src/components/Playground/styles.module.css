@@ -166,3 +166,132 @@
   font-size: 0.78rem;
   border-radius: 0;
 }
+
+/* Raw / Parsed segmented toggle */
+.toggle {
+  display: inline-flex;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.toggleBtn {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border: none;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+}
+
+.toggleBtn + .toggleBtn {
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.toggleOn {
+  background: var(--ifm-color-primary);
+  color: #fff;
+}
+
+/* Copy / share buttons */
+.copyBtn,
+.linkBtn {
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.copyBtn:hover,
+.linkBtn:hover,
+.toggleBtn:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.codeBlock {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.codeBlock code {
+  flex: 1 1 auto;
+}
+
+.sectionSelect {
+  font: inherit;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+/* Parsed → table view */
+.tableWrap {
+  max-height: 460px;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  font-family: var(--ifm-font-family-monospace);
+  display: table;
+}
+
+.table th,
+.table td {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--ifm-color-emphasis-200);
+  font-weight: 700;
+  z-index: 1;
+}
+
+.table tbody tr:nth-child(even) {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.rowNum {
+  color: var(--ifm-color-emphasis-500);
+  font-variant-numeric: tabular-nums;
+  text-align: right !important;
+  max-width: 3rem !important;
+}
+
+.tableMeta {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.72rem;
+  color: var(--ifm-color-emphasis-600);
+  background: var(--ifm-color-emphasis-100);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.tableEmpty {
+  padding: 0.8rem;
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-600);
+}

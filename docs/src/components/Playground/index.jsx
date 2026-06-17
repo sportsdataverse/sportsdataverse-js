@@ -1,12 +1,17 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import endpoints from '@site/src/playground/endpoints.json';
 import { resolveUrl, resolveFlatUrl } from '@site/src/playground/resolve.mjs';
+import { parseEndpoint } from '@site/src/playground/parsers.bundle.mjs';
+import { EXAMPLES, examplesBySport } from '@site/src/playground/examples.js';
 import styles from './styles.module.css';
 
 const FLAT_APIS = endpoints.flatApis || [];
 const FLAT_LEAGUES = endpoints.flatLeagues || {};
 const FLAT_HOSTS = endpoints.flatHosts || {};
+
+const MAX_TABLE_ROWS = 200;
+const MAX_TABLE_COLS = 40;
 
 // Human label per flat-API family stem (matches the docs section headings).
 const FLAT_API_LABEL = {
@@ -42,11 +47,7 @@ const LEAGUES = [...endpoints.leagues, ...STANDALONE_LEAGUES].sort((a, b) =>
 
 /** snake_case -> camelCase (espn_nba_scoreboard -> espnNbaScoreboard). */
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
-
-/** Canonical ESPN method name (espn_nba_scoreboard -> espnNbaScoreboard). */
 const espnMethodName = (prefix, short) => toCamel(`espn_${prefix}_${short}`);
-
-/** Canonical flat method name (mlb_api + teams -> mlbApiTeams). */
 const flatMethodName = (api, short) => toCamel(`${api}_${short}`);
 
 /** Stable option id so ESPN + flat endpoints that share a `short` don't collide. */
@@ -61,7 +62,7 @@ function espnEndpointsFor(league) {
     .sort((a, b) => a.short.localeCompare(b.short));
 }
 
-/** Flat endpoints merged onto a league, grouped by family stem (in file order). */
+/** Flat endpoints merged onto a league, grouped by family stem. */
 function flatGroupsFor(league) {
   const groups = [];
   for (const api of Object.keys(FLAT_HOSTS)) {
@@ -87,12 +88,17 @@ function selectDef(league, id) {
   return def ? { kind: 'espn', def, short } : null;
 }
 
+/** Does this selection have a registered parser (so `parsed` is meaningful)? */
+function selHasParser(sel) {
+  if (!sel) return false;
+  return sel.kind === 'flat' ? !!sel.def.parser : true; // every ESPN short has one
+}
+
 /** The editable param fields for a selection, with defaults. */
 function fieldsFor(league, sel) {
   if (!sel) return [];
   const fields = [];
   if (sel.kind === 'espn' && league.leagueParam) {
-    // Optional: clearing it falls back to the league's default slug.
     fields.push({ name: 'league', kind: 'league', required: false, def: league.league });
   }
   for (const p of sel.def.pathParams || []) {
@@ -110,49 +116,152 @@ function defaultParams(fields) {
   return out;
 }
 
+// --- deep-link state (querystring <-> playground) --------------------------
+
+const CONTROL_KEYS = new Set(['l', 'e', 'parsed', 'section']);
+
+/** Read initial state from the URL querystring (?l=&e=&parsed=&section=&<params>). */
+function readUrlState() {
+  if (typeof window === 'undefined') return null;
+  const q = new URLSearchParams(window.location.search);
+  if (!q.has('l') && !q.has('e')) return null;
+  const params = {};
+  for (const [k, v] of q.entries()) if (!CONTROL_KEYS.has(k)) params[k] = v;
+  return {
+    prefix: q.get('l') || 'nba',
+    selId: q.get('e') || espnId('scoreboard'),
+    parsed: q.get('parsed') === '1',
+    section: q.get('section') || null,
+    params,
+  };
+}
+
+/** Serialize current state to a shareable `/playground?...` URL. */
+function buildShareUrl({ prefix, selId, params, parsed, section }) {
+  const q = [`l=${encodeURIComponent(prefix)}`, `e=${encodeURIComponent(selId)}`];
+  if (parsed) q.push('parsed=1');
+  if (section) q.push(`section=${encodeURIComponent(section)}`);
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== '' && v != null) q.push(`${encodeURIComponent(k)}=${encodeURIComponent(v)}`);
+  }
+  return `/playground?${q.join('&')}`;
+}
+
+// --- table rendering -------------------------------------------------------
+
+function fmtCell(v) {
+  if (v == null) return '';
+  if (typeof v === 'object') return JSON.stringify(v);
+  return String(v);
+}
+
+function DataTable({ rows }) {
+  if (!Array.isArray(rows) || rows.length === 0) {
+    return <div className={styles.tableEmpty}>0 rows (empty frame).</div>;
+  }
+  const cols = [...new Set(rows.flatMap((r) => Object.keys(r)))].slice(0, MAX_TABLE_COLS);
+  const shown = rows.slice(0, MAX_TABLE_ROWS);
+  return (
+    <>
+      <div className={styles.tableWrap}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th className={styles.rowNum}>#</th>
+              {cols.map((c) => (
+                <th key={c}>{c}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {shown.map((r, i) => (
+              <tr key={i}>
+                <td className={styles.rowNum}>{i}</td>
+                {cols.map((c) => (
+                  <td key={c} title={fmtCell(r[c])}>
+                    {fmtCell(r[c])}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className={styles.tableMeta}>
+        {rows.length} rows × {[...new Set(rows.flatMap((r) => Object.keys(r)))].length} cols
+        {rows.length > MAX_TABLE_ROWS && ` — showing first ${MAX_TABLE_ROWS}`}
+        {cols.length === MAX_TABLE_COLS && ` — showing first ${MAX_TABLE_COLS} cols`}
+      </div>
+    </>
+  );
+}
+
 export default function Playground() {
-  const [prefix, setPrefix] = useState('nba');
-  const league = useMemo(() => LEAGUES.find((l) => l.prefix === prefix), [prefix]);
+  const init = useMemo(() => readUrlState(), []);
+  const [prefix, setPrefix] = useState(init?.prefix || 'nba');
+  const league = useMemo(() => LEAGUES.find((l) => l.prefix === prefix) || LEAGUES[0], [prefix]);
   const espnApplicable = useMemo(() => espnEndpointsFor(league), [league]);
   const flatGroups = useMemo(() => flatGroupsFor(league), [league]);
 
-  const [selId, setSelId] = useState(espnId('scoreboard'));
+  const [selId, setSelId] = useState(init?.selId || espnId('scoreboard'));
   const sel = useMemo(() => selectDef(league, selId), [league, selId]);
+  const hasParser = useMemo(() => selHasParser(sel), [sel]);
 
   const fields = useMemo(() => fieldsFor(league, sel), [league, sel]);
-  const [params, setParams] = useState(() => defaultParams(fieldsFor(league, sel)));
+  const [params, setParams] = useState(
+    () => init?.params && Object.keys(init.params).length
+      ? init.params
+      : defaultParams(fieldsFor(league, sel))
+  );
+  const [parsed, setParsed] = useState(init?.parsed || false);
+  const [section, setSection] = useState(init?.section || null);
 
-  const [result, setResult] = useState(null);
+  const [rawData, setRawData] = useState(null); // parsed JSON object (or raw text)
+  const [rawText, setRawText] = useState(null);
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [copied, setCopied] = useState(null);
+  const didInit = useRef(false);
 
-  // Reset endpoint + params whenever the league changes. Prefer keeping the
-  // current selection if it still exists for the new league, else scoreboard /
-  // the first available endpoint.
+  // Reset endpoint when the league changes (keep selection if still valid).
   useEffect(() => {
+    if (!didInit.current) return;
     const stillValid = selectDef(league, selId);
-    const next = stillValid
-      ? selId
-      : espnApplicable.find((e) => e.short === 'scoreboard')
-        ? espnId('scoreboard')
-        : espnApplicable[0]
-          ? espnId(espnApplicable[0].short)
-          : flatGroups[0]
-            ? flatId(flatGroups[0].api, flatGroups[0].eps[0].short)
-            : null;
-    setSelId(next);
+    setSelId(
+      stillValid
+        ? selId
+        : espnApplicable.find((e) => e.short === 'scoreboard')
+          ? espnId('scoreboard')
+          : espnApplicable[0]
+            ? espnId(espnApplicable[0].short)
+            : flatGroups[0]
+              ? flatId(flatGroups[0].api, flatGroups[0].eps[0].short)
+              : null
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefix]);
 
-  // Reset params to defaults whenever the (league, endpoint) selection changes.
+  // Reset params + clear result whenever the (league, endpoint) selection changes.
   useEffect(() => {
+    if (!didInit.current) {
+      didInit.current = true;
+      return; // preserve URL-provided params on first mount
+    }
     setParams(defaultParams(fieldsFor(league, sel)));
-    setResult(null);
+    setRawData(null);
+    setRawText(null);
     setError(null);
     setStatus(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefix, selId]);
+
+  // Keep the URL in sync (shareable) without reloading.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const url = buildShareUrl({ prefix, selId, params, parsed, section });
+    window.history.replaceState(null, '', url);
+  }, [prefix, selId, params, parsed, section]);
 
   // The exact URL the package would build for this call (no network).
   const preview = useMemo(() => {
@@ -170,26 +279,45 @@ export default function Playground() {
 
   const call = useMemo(() => {
     if (!sel) return '';
-    const args = Object.entries(params)
-      .filter(([, v]) => v !== '' && v != null)
-      .map(([k, v]) => `${k}: ${/^\d+$/.test(v) ? v : `'${v}'`}`)
+    const entries = Object.entries(params).filter(([, v]) => v !== '' && v != null);
+    if (parsed && hasParser) {
+      entries.push(['parsed', 'true']);
+      if (sel.short === 'summary' && section) entries.push(['section', section]);
+    }
+    const args = entries
+      .map(([k, v]) => `${k}: ${v === 'true' ? 'true' : /^\d+$/.test(v) ? v : `'${v}'`}`)
       .join(', ');
     const method =
-      sel.kind === 'flat'
-        ? flatMethodName(sel.api, sel.short)
-        : espnMethodName(prefix, sel.short);
-    return `await sdv.${prefix}.${method}({ ${args} });`;
-  }, [prefix, sel, params]);
+      sel.kind === 'flat' ? flatMethodName(sel.api, sel.short) : espnMethodName(prefix, sel.short);
+    return `await sdv.${prefix}.${method}(${args ? `{ ${args} }` : '{}'});`;
+  }, [prefix, sel, params, parsed, hasParser, section]);
+
+  // Parse the cached raw payload client-side (instant Raw<->Parsed toggle).
+  const parsedView = useMemo(() => {
+    if (!parsed || !hasParser || rawData == null || !sel) return null;
+    try {
+      const key = sel.kind === 'espn' ? sel.short : sel.def.parser;
+      if (sel.kind === 'espn' && sel.short === 'summary') {
+        const dict = parseEndpoint('espn', 'summary', rawData);
+        const sections = dict && typeof dict === 'object' ? Object.keys(dict) : [];
+        const active = section && sections.includes(section) ? section : sections[0];
+        return { kind: 'summary', sections, active, rows: active ? dict[active] : [] };
+      }
+      const out = parseEndpoint(sel.kind, key, rawData);
+      if (out == null) return { error: 'No parser registered for this endpoint.' };
+      return { kind: 'table', rows: out };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }, [parsed, hasParser, rawData, sel, section]);
 
   async function run() {
     setLoading(true);
     setError(null);
-    setResult(null);
+    setRawData(null);
+    setRawText(null);
     setStatus(null);
     try {
-      // Flat endpoints dispatch by `api` (a flat `short` isn't unique across
-      // families); ESPN endpoints dispatch by `league`. The proxy branches on
-      // the presence of `api`.
       const reqBody =
         sel.kind === 'flat'
           ? { api: sel.api, endpoint: sel.short, params }
@@ -201,11 +329,11 @@ export default function Playground() {
       });
       setStatus(res.status);
       const text = await res.text();
+      setRawText(text);
       try {
-        setResult(JSON.stringify(JSON.parse(text), null, 2));
+        setRawData(JSON.parse(text));
       } catch {
-        // Non-JSON (Statcast CSV/HTML) — display the raw text as-is.
-        setResult(text);
+        setRawData(null); // non-JSON (Statcast CSV/HTML) — raw text only
       }
       if (!res.ok) setError(`API / proxy returned ${res.status}`);
     } catch (e) {
@@ -217,6 +345,35 @@ export default function Playground() {
       setLoading(false);
     }
   }
+
+  function applyExample(ex) {
+    didInit.current = true; // we're explicitly setting everything; don't reset
+    setPrefix(ex.league);
+    setSelId(ex.endpoint);
+    setParams(Object.fromEntries(Object.entries(ex.params || {}).map(([k, v]) => [k, String(v)])));
+    setParsed(!!ex.parsed);
+    setSection(ex.section || null);
+    setRawData(null);
+    setRawText(null);
+    setError(null);
+    setStatus(null);
+  }
+
+  async function copy(kind, text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(kind);
+      setTimeout(() => setCopied(null), 1500);
+    } catch {
+      /* clipboard blocked — no-op */
+    }
+  }
+
+  const exampleGroups = useMemo(() => examplesBySport(), []);
+  const prettyRaw = useMemo(() => {
+    if (rawData != null) return JSON.stringify(rawData, null, 2);
+    return rawText;
+  }, [rawData, rawText]);
 
   return (
     <div className={styles.playground}>
@@ -255,6 +412,29 @@ export default function Playground() {
             ))}
           </select>
         </label>
+
+        <label className={clsx(styles.field, styles.examplesField)}>
+          <span className={styles.label}>Examples</span>
+          <select
+            className={styles.select}
+            value=""
+            onChange={(e) => {
+              const ex = EXAMPLES.find((x) => x.id === e.target.value);
+              if (ex) applyExample(ex);
+            }}
+          >
+            <option value="">Load an example…</option>
+            {Object.entries(exampleGroups).map(([sport, list]) => (
+              <optgroup key={sport} label={sport}>
+                {list.map((ex) => (
+                  <option key={ex.id} value={ex.id}>
+                    {ex.label}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+        </label>
       </div>
 
       {fields.length > 0 && (
@@ -279,6 +459,9 @@ export default function Playground() {
 
       <div className={styles.codeBlock}>
         <code>{call}</code>
+        <button className={styles.copyBtn} onClick={() => copy('call', call)} type="button">
+          {copied === 'call' ? 'Copied ✓' : 'Copy'}
+        </button>
       </div>
 
       <div className={styles.requestRow}>
@@ -288,6 +471,27 @@ export default function Playground() {
         ) : (
           <code className={styles.requestUrl}>{preview.url}</code>
         )}
+
+        {hasParser && (
+          <div className={styles.toggle} role="group" aria-label="Output format">
+            <button
+              type="button"
+              className={clsx(styles.toggleBtn, !parsed && styles.toggleOn)}
+              onClick={() => setParsed(false)}
+            >
+              Raw
+            </button>
+            <button
+              type="button"
+              className={clsx(styles.toggleBtn, parsed && styles.toggleOn)}
+              onClick={() => setParsed(true)}
+              title="Run through the registered parser → tidy rows"
+            >
+              Parsed
+            </button>
+          </div>
+        )}
+
         <button
           className={clsx('button', 'button--primary', styles.runBtn)}
           onClick={run}
@@ -295,20 +499,67 @@ export default function Playground() {
         >
           {loading ? 'Running…' : 'Run ▶'}
         </button>
+        <button
+          className={styles.linkBtn}
+          type="button"
+          onClick={() =>
+            copy('link', window.location.origin + buildShareUrl({ prefix, selId, params, parsed, section }))
+          }
+          title="Copy a shareable link to this exact call"
+        >
+          {copied === 'link' ? 'Link copied ✓' : '🔗 Share'}
+        </button>
       </div>
 
       {error && <div className={clsx(styles.output, styles.errorBox)}>{error}</div>}
 
-      {result != null && (
+      {(rawData != null || rawText != null) && (
         <div className={styles.output}>
           <div className={styles.outputHead}>
-            <span>Response</span>
+            <span>{parsed && hasParser ? 'Parsed' : 'Response'}</span>
             {status != null && <span className={styles.statusPill}>HTTP {status}</span>}
-            <span className={styles.bytes}>{(result.length / 1024).toFixed(1)} KB</span>
+            {!(parsed && hasParser) && prettyRaw != null && (
+              <span className={styles.bytes}>{(prettyRaw.length / 1024).toFixed(1)} KB</span>
+            )}
+            {parsed && hasParser && parsedView?.kind === 'summary' && (
+              <select
+                className={styles.sectionSelect}
+                value={parsedView.active || ''}
+                onChange={(e) => setSection(e.target.value)}
+              >
+                {parsedView.sections.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            )}
+            {parsed && hasParser && (
+              <button
+                className={styles.copyBtn}
+                type="button"
+                onClick={() =>
+                  copy('json', JSON.stringify(parsedView?.rows ?? parsedView ?? {}, null, 2))
+                }
+              >
+                {copied === 'json' ? 'Copied ✓' : 'Copy JSON'}
+              </button>
+            )}
           </div>
-          <pre className={styles.json}>
-            {result.length > 200000 ? result.slice(0, 200000) + '\n… (truncated)' : result}
-          </pre>
+
+          {parsed && hasParser ? (
+            parsedView?.error ? (
+              <div className={styles.errorBox}>{parsedView.error}</div>
+            ) : (
+              <DataTable rows={parsedView?.rows} />
+            )
+          ) : (
+            <pre className={styles.json}>
+              {prettyRaw && prettyRaw.length > 200000
+                ? prettyRaw.slice(0, 200000) + '\n… (truncated)'
+                : prettyRaw}
+            </pre>
+          )}
         </div>
       )}
     </div>

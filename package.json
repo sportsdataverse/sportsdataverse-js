@@ -10,6 +10,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./parsers": {
+      "types": "./dist/parsers/index.d.ts",
+      "import": "./dist/parsers/index.js"
     }
   },
   "files": [
@@ -29,6 +33,7 @@
   "devDependencies": {
     "@types/node": "^22.19.21",
     "@types/papaparse": "^5.5.2",
+    "esbuild": "^0.28.1",
     "mocha": "^11.7.6",
     "should": "^13.2.3",
     "tsx": "^4.22.4",
@@ -51,7 +56,8 @@
     "test": "mocha --timeout 15000 \"test/**/*.test.js\"",
     "docs": "typedoc",
     "codegen": "node tools/codegen/generate.mjs",
-    "codegen:check": "node tools/codegen/generate.mjs --check"
+    "codegen:check": "node tools/codegen/generate.mjs --check",
+    "bundle:parsers": "esbuild src/parsers/index.ts --bundle --format=esm --platform=browser --legal-comments=none --outfile=docs/src/playground/parsers.bundle.mjs"
   },
   "repository": {
     "type": "git",
