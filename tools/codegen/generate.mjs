@@ -36,6 +36,7 @@ const FLAT_API_FILES = [
   "nhl_records",
   "nfl_api",
   "odds_api",
+  "sports247",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -54,6 +55,7 @@ const FLAT_API_NAMESPACES = {
   nhl_records: "nhl",
   nfl_api: "nfl",
   odds_api: "odds",
+  sports247: "recruiting",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -85,6 +87,25 @@ const FLAT_API_META = {
     source: 'the NFL.com "Shield" data API',
   },
   odds_api: { label: "The Odds API", source: "the-odds-api.com" },
+  sports247: {
+    label: "247Sports",
+    source: "the 247Sports recruiting database",
+  },
+};
+
+// Per-standalone-namespace quick-start snippet shown on the generated
+// standalone reference page (each provider namespace authenticates / is called
+// differently, so the example is keyed by namespace). Fallback is a bare call.
+const STANDALONE_NS_EXAMPLE = {
+  odds:
+    "// The Odds API uses a plain `apiKey` query param (you supply it):\n" +
+    "await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY });\n",
+  recruiting:
+    "// 247Sports recruiting rankings (pass your own JWT via `headers`):\n" +
+    "await sdv.recruiting.sports247_rankings({\n" +
+    "  sport_key: 'football', year: 2025,\n" +
+    "  headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },\n" +
+    "});\n",
 };
 
 // The set of league prefixes (filled after the leagues doc loads) — any
@@ -453,8 +474,7 @@ function renderStandaloneFlatPage(ns, position, flatWrappers) {
     `endpoint to get tidy rows instead of raw JSON.\n\n` +
     "```js\n" +
     `import sdv from 'sportsdataverse';\n\n` +
-    `// The Odds API uses a plain \`apiKey\` query param (you supply it):\n` +
-    `await sdv.${ns}.oddsApiSports({ api_key: process.env.ODDS_API_KEY });\n` +
+    STANDALONE_NS_EXAMPLE[ns] +
     "```\n";
 
   for (const { api, rows } of rowsByApi) {

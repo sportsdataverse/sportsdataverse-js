@@ -1,0 +1,95 @@
+# One row per unranked recruit (NormalizedPlayerRanking shape).
+# Columns produced by the sports247 parser's snake_cased, flattened output.
+schema: unranked_recruits
+kind: dataframe
+columns:
+- name: ranking_key
+  type: numeric
+  description: "ranking key"
+- name: key
+  type: numeric
+  description: "key"
+- name: index
+  type: numeric
+  description: "index"
+- name: order
+  type: numeric
+  description: "order"
+- name: current_rating
+  type: numeric
+  description: "current rating"
+- name: rating
+  type: numeric
+  description: "rating"
+- name: current_group_rank
+  type: numeric
+  description: "current group rank"
+- name: previous_group_rank
+  type: numeric
+  description: "previous group rank"
+- name: current_group_composite_rank
+  type: numeric
+  description: "current group composite rank"
+- name: current_overall_rank
+  type: numeric
+  description: "current overall rank"
+- name: current_overall_composite_rank
+  type: numeric
+  description: "current overall composite rank"
+- name: player_sport_rating
+  type: numeric
+  description: "player sport rating"
+- name: under_evaluation
+  type: logical
+  description: "under evaluation"
+- name: first_name
+  type: character
+  description: "first name"
+- name: last_name
+  type: character
+  description: "last name"
+- name: player_key
+  type: numeric
+  description: "player key"
+- name: player_institution_key
+  type: numeric
+  description: "player institution key"
+- name: position
+  type: character
+  description: "position"
+- name: city
+  type: character
+  description: "city"
+- name: state
+  type: character
+  description: "state"
+- name: current_order
+  type: character
+  description: "current order"
+- name: has_eval
+  type: logical
+  description: "has eval"
+- name: current_star_rating
+  type: numeric
+  description: "current star rating"
+- name: star_rating
+  type: numeric
+  description: "star rating"
+- name: player_sport_star_rating
+  type: numeric
+  description: "player sport star rating"
+- name: height
+  type: numeric
+  description: "height"
+- name: weight
+  type: numeric
+  description: "weight"
+- name: move
+  type: numeric
+  description: "move"
+- name: current_temp_rank
+  type: numeric
+  description: "current temp rank"
+- name: previous_temp_rank
+  type: numeric
+  description: "previous temp rank"

@@ -8187,5 +8187,753 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_odds_api_event_odds_history",
     "returnsSchema": "native/odds_api/event_odds_history"
+  },
+  {
+    "short": "coaches",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/coaches",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 25
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/coaches"
+  },
+  {
+    "short": "rankings_transfer_portal_player_feed",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 9
+      }
+    ],
+    "parser": "parse_sports247_ranking_feed",
+    "returnsSchema": "native/sports247/ranking_feed"
+  },
+  {
+    "short": "rankings_composite_team_feed",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 9
+      }
+    ],
+    "parser": "parse_sports247_ranking_feed",
+    "returnsSchema": "native/sports247/ranking_feed"
+  },
+  {
+    "short": "rankings_transfer_portal_team_feed",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 9
+      }
+    ],
+    "parser": "parse_sports247_ranking_feed",
+    "returnsSchema": "native/sports247/ranking_feed"
+  },
+  {
+    "short": "institution_groups",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/institutionGroups",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/institution_groups"
+  },
+  {
+    "short": "institution_rankings",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/institutionrankings",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "institution_key",
+        "queryKey": "institutionKey"
+      },
+      {
+        "name": "ranking_type",
+        "queryKey": "rankingType"
+      },
+      {
+        "name": "conference_abbreviation",
+        "queryKey": "conferenceAbbreviation"
+      },
+      {
+        "name": "use_composite",
+        "queryKey": "useComposite",
+        "default": false
+      },
+      {
+        "name": "institutions",
+        "queryKey": "institutions"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize",
+        "default": 10
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      }
+    ],
+    "parser": "parse_sports247_institution_rankings",
+    "returnsSchema": "native/sports247/institution_rankings"
+  },
+  {
+    "short": "current_target_predictions",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions",
+    "pathParams": [
+      {
+        "name": "site_key"
+      },
+      {
+        "name": "year"
+      },
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 10
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/current_target_predictions"
+  },
+  {
+    "short": "player_sport_rankings",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/playerSportRankings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "state_abbreviation",
+        "queryKey": "stateAbbreviation"
+      },
+      {
+        "name": "position_abbreviation",
+        "queryKey": "positionAbbreviation"
+      },
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport",
+        "queryKey": "sport"
+      },
+      {
+        "name": "institution_group",
+        "queryKey": "institutionGroup"
+      },
+      {
+        "name": "player_sport_rating",
+        "queryKey": "playerSportRating"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/player_sport_rankings"
+  },
+  {
+    "short": "transfer_player_sport_rankings",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/transferPlayerSportRankings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "state_abbreviation",
+        "queryKey": "stateAbbreviation"
+      },
+      {
+        "name": "position_abbreviation",
+        "queryKey": "positionAbbreviation"
+      },
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport",
+        "queryKey": "sport"
+      },
+      {
+        "name": "institution_group",
+        "queryKey": "institutionGroup"
+      },
+      {
+        "name": "player_sport_rating",
+        "queryKey": "playerSportRating"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/transfer_player_sport_rankings"
+  },
+  {
+    "short": "unranked_recruits",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/unrankedRecruits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "state_abbreviation",
+        "queryKey": "stateAbbreviation"
+      },
+      {
+        "name": "position_abbreviation",
+        "queryKey": "positionAbbreviation"
+      },
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport",
+        "queryKey": "sport"
+      },
+      {
+        "name": "institution_group",
+        "queryKey": "institutionGroup"
+      },
+      {
+        "name": "player_sport_rating",
+        "queryKey": "playerSportRating"
+      },
+      {
+        "name": "list_type",
+        "queryKey": "listType"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/unranked_recruits"
+  },
+  {
+    "short": "players_under_special_evaluation",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation",
+    "pathParams": [
+      {
+        "name": "ranking_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/players_under_special_evaluation"
+  },
+  {
+    "short": "biggest_movers",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{ranking_key}/biggestMovers",
+    "pathParams": [
+      {
+        "name": "ranking_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 10
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/biggest_movers"
+  },
+  {
+    "short": "positions",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/positions",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/positions"
+  },
+  {
+    "short": "rankings",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "ranking_type",
+        "queryKey": "rankingType"
+      },
+      {
+        "name": "ranking_version",
+        "queryKey": "rankingVersion"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/rankings"
+  },
+  {
+    "short": "archived_player_rankings",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{ranking_key}/archivedPlayerRankings",
+    "pathParams": [
+      {
+        "name": "ranking_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pagesize",
+        "default": 3
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/archived_player_rankings"
+  },
+  {
+    "short": "year",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/year",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/year"
+  },
+  {
+    "short": "recruits",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/recruits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "min_date",
+        "queryKey": "minDate"
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 25
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/recruits"
+  },
+  {
+    "short": "sports",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/sports",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/sports"
+  },
+  {
+    "short": "sport_years",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/sports/{sport_key}/year",
+    "pathParams": [
+      {
+        "name": "sport_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/sport_years"
+  },
+  {
+    "short": "tags_autocomplete",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/tags/autocomplete",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "default_name",
+        "queryKey": "defaultName"
+      },
+      {
+        "name": "items",
+        "queryKey": "items",
+        "default": 100
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/tags_autocomplete"
+  },
+  {
+    "short": "tags_photos_by_key",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/tags/{prefixed_key}/photos",
+    "pathParams": [
+      {
+        "name": "prefixed_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 25
+      }
+    ],
+    "parser": "parse_sports247_paged_list",
+    "returnsSchema": "native/sports247/tags_photos"
+  },
+  {
+    "short": "tags_photos_by_type",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/tags/{type}/{key}/photos",
+    "pathParams": [
+      {
+        "name": "type"
+      },
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 25
+      }
+    ],
+    "parser": "parse_sports247_paged_list",
+    "returnsSchema": "native/sports247/tags_photos"
+  },
+  {
+    "short": "teams",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/teams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "institution_type",
+        "queryKey": "institutionType"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/teams"
+  },
+  {
+    "short": "transfers",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/transfers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "list_type",
+        "queryKey": "listType"
+      },
+      {
+        "name": "position_group_key",
+        "queryKey": "positionGroupKey"
+      },
+      {
+        "name": "position_key",
+        "queryKey": "positionKey"
+      },
+      {
+        "name": "eligibility",
+        "queryKey": "eligibility"
+      },
+      {
+        "name": "institution_key",
+        "queryKey": "institutionKey"
+      },
+      {
+        "name": "status",
+        "queryKey": "status"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/transfers"
+  },
+  {
+    "short": "unranked_transfers",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://api.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/transferrankings/{ranking_key}/unrankedtransfers",
+    "pathParams": [
+      {
+        "name": "ranking_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "state_abbreviation",
+        "queryKey": "stateAbbreviation"
+      },
+      {
+        "name": "position_abbreviation",
+        "queryKey": "positionAbbreviation"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize"
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      }
+    ],
+    "parser": "parse_sports247_list",
+    "returnsSchema": "native/sports247/unranked_transfers"
   }
 ];

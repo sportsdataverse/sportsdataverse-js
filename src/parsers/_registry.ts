@@ -83,6 +83,12 @@ import {
   parse_odds_api_sports_events_history,
   parse_odds_api_event_odds_history,
 } from "./odds_api.js";
+import {
+  parse_sports247_list,
+  parse_sports247_paged_list,
+  parse_sports247_institution_rankings,
+  parse_sports247_ranking_feed,
+} from "./sports247.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -165,6 +171,13 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_odds_api_sports_odds_history,
   parse_odds_api_sports_events_history,
   parse_odds_api_event_odds_history,
+  // ---- 247Sports Recruit Database (api.247sports.com /rdb/v1) ----
+  // Generic list flattener (the default for most endpoints).
+  parse_sports247_list,
+  // Dedicated parsers (envelope unrolling logic).
+  parse_sports247_paged_list,
+  parse_sports247_institution_rankings,
+  parse_sports247_ranking_feed,
 };
 
 /**

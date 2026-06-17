@@ -1,0 +1,32 @@
+# One row per position (Position).
+# Columns produced by the sports247 parser's snake_cased, flattened output.
+schema: positions
+kind: dataframe
+columns:
+- name: key
+  type: numeric
+  description: "key"
+- name: position_group_key
+  type: numeric
+  description: "position group key"
+- name: name
+  type: character
+  description: "name"
+- name: abbreviation
+  type: character
+  description: "abbreviation"
+- name: start_year
+  type: numeric
+  description: "start year"
+- name: end_year
+  type: numeric
+  description: "end year"
+- name: player_positions
+  type: character
+  description: "player positions"
+- name: player_sport_rankings
+  type: character
+  description: "player sport rankings"
+- name: position_group
+  type: character
+  description: "position group"
