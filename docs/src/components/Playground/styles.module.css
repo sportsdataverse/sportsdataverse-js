@@ -223,6 +223,14 @@
   color: var(--ifm-color-primary);
 }
 
+/* The ACTIVE toggle keeps white text on hover — the generic .toggleBtn:hover
+   above would otherwise make it primary text on a primary background (low
+   contrast). Must follow that rule to win on equal specificity. */
+.toggleOn:hover {
+  color: #fff;
+  background: var(--ifm-color-primary-dark);
+}
+
 .codeBlock {
   position: relative;
   display: flex;

@@ -228,6 +228,9 @@ export default function Playground() {
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(null);
   const didInit = useRef(false);
+  // An Example preset sets params/parsed/section itself, so the (prefix, selId)
+  // reset effect below must skip clobbering them exactly once after it applies.
+  const skipReset = useRef(false);
 
   // Reset endpoint when the league changes (keep selection if still valid).
   useEffect(() => {
@@ -252,6 +255,10 @@ export default function Playground() {
     if (!didInit.current) {
       didInit.current = true;
       return; // preserve URL-provided params on first mount
+    }
+    if (skipReset.current) {
+      skipReset.current = false;
+      return; // an Example just set its own params/parsed/section — keep them
     }
     setParams(defaultParams(fieldsFor(league, sel)));
     setRawData(null);
@@ -359,6 +366,7 @@ export default function Playground() {
 
   function applyExample(ex) {
     didInit.current = true; // we're explicitly setting everything; don't reset
+    skipReset.current = true; // the (prefix, selId) effect must keep our params
     setPrefix(ex.league);
     setSelId(ex.endpoint);
     setParams(Object.fromEntries(Object.entries(ex.params || {}).map(([k, v]) => [k, String(v)])));

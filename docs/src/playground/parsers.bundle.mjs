@@ -2760,3 +2760,13 @@ export {
   parserForEndpoint,
   snakeCase
 };
+/*! Bundled license information:
+
+papaparse/papaparse.min.js:
+  (* @license
+  Papa Parse
+  v5.5.3
+  https://github.com/mholt/PapaParse
+  License: MIT
+  *)
+*/
