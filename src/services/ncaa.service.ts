@@ -50,6 +50,12 @@ export default {
      * @function
      * @param {number} game - Game id.
      * @returns json
+     * @deprecated NCAA removed the casablanca per-game JSON endpoints
+     * (`data.ncaa.com/casablanca/game/{id}/gameInfo.json` now 404s for every
+     * id). Per-game data moved behind the ncaa.com web app's GraphQL backend
+     * (`sdataprod.ncaa.com`). The casablanca *scoreboard* index
+     * (`getScoreboard` / `getNcaaScoreboard`) still serves. Kept for back-compat;
+     * will surface the upstream 404 until re-ported to the GraphQL surface.
      * @example
      * const result = await sdv.ncaa.getInfo(5764053);
      */
@@ -65,6 +71,11 @@ export default {
      * @function
      * @param {number} game - Game id.
      * @returns json
+     * @deprecated NCAA removed the casablanca per-game JSON endpoints
+     * (`data.ncaa.com/casablanca/game/{id}/boxscore.json` now 404s for every
+     * id). Per-game data moved behind the ncaa.com GraphQL backend
+     * (`sdataprod.ncaa.com`). The casablanca scoreboard index still serves.
+     * Kept for back-compat; will surface the upstream 404 until re-ported.
      * @example
      * const result = await sdv.ncaa.getBoxScore(5764053);
      */
@@ -80,6 +91,11 @@ export default {
      * @function
      * @param {number} game - Game id.
      * @returns json
+     * @deprecated NCAA removed the casablanca per-game JSON endpoints
+     * (`data.ncaa.com/casablanca/game/{id}/pbp.json` now 404s for every id).
+     * Per-game data moved behind the ncaa.com GraphQL backend
+     * (`sdataprod.ncaa.com`). The casablanca scoreboard index still serves.
+     * Kept for back-compat; will surface the upstream 404 until re-ported.
      * @example
      * const result = await sdv.ncaa.getPlayByPlay(5764053);
      */

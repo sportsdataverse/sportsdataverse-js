@@ -2,6 +2,12 @@ import axios from 'axios';
 /**
  * Operations for MLB.
  *
+ * > **Superseded:** these hand-written `get*` methods predate the generated
+ * > cross-league ESPN surface. They remain supported for back-compat, but new
+ * > code should prefer the generated `espn_mlb_*` wrappers (e.g.
+ * > `sdv.mlb.espn_mlb_scoreboard()`), which cover far more ESPN
+ * > endpoints and share one maintained codegen pipeline.
+ *
  * @namespace mlb
  */
 export default {

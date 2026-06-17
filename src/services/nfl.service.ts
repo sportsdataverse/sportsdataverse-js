@@ -2,6 +2,12 @@ import axios from 'axios';
 /**
  * Operations for NFL.
  *
+ * > **Superseded:** these hand-written `get*` methods predate the generated
+ * > cross-league ESPN surface. They remain supported for back-compat, but new
+ * > code should prefer the generated `espn_nfl_*` wrappers (e.g.
+ * > `sdv.nfl.espn_nfl_scoreboard()`), which cover far more ESPN
+ * > endpoints and share one maintained codegen pipeline.
+ *
  * @namespace nfl
  */
 export default {
