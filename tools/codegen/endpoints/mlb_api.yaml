@@ -78,6 +78,7 @@ endpoints:
     query_key: hydrate
     type: str
   parser: parse_mlb_api_schedule
+  returns_schema: native/mlb_api/schedule_postseason
 - short: pbp
   path: /api/v1.1/game/{game_pk}/feed/live
   path_params:
@@ -112,6 +113,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_boxscore
+  returns_schema: native/mlb_api/boxscore
 - short: linescore
   path: /api/v1/game/{game_pk}/linescore
   path_params:
@@ -126,6 +128,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_linescore
+  returns_schema: native/mlb_api/linescore
 - short: play_by_play
   path: /api/v1/game/{game_pk}/playByPlay
   path_params:
@@ -140,6 +143,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_play_by_play
+  returns_schema: native/mlb_api/play_by_play
 - short: game_context_metrics
   path: /api/v1/game/{game_pk}/contextMetrics
   path_params:
@@ -162,6 +166,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_win_probability
+  returns_schema: native/mlb_api/win_probability
 - short: game_content
   path: /api/v1/game/{game_pk}/content
   path_params:
@@ -190,6 +195,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/team
 - short: team_roster
   path: /api/v1/teams/{team_id}/roster
   path_params:
@@ -214,6 +220,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_team_roster
+  returns_schema: native/mlb_api/team_roster
 - short: team_alumni
   path: /api/v1/teams/{team_id}/alumni
   path_params:
@@ -232,6 +239,7 @@ endpoints:
     query_key: hydrate
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/team_alumni
 - short: team_affiliates
   path: /api/v1/teams/affiliates
   extra_params:
@@ -249,6 +257,7 @@ endpoints:
     query_key: hydrate
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/team_affiliates
 - short: people
   path: /api/v1/people
   extra_params:
@@ -311,6 +320,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/sport_players
 - short: sports
   path: /api/v1/sports
   extra_params:
@@ -318,6 +328,7 @@ endpoints:
     query_key: sportId
     type: int
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/sports
 - short: leagues
   path: /api/v1/leagues
   extra_params:
@@ -332,6 +343,7 @@ endpoints:
     query_key: leagueIds
     type: int|List[int]
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/leagues
 - short: season
   path: /api/v1/seasons/{season_id}
   path_params:
@@ -344,6 +356,7 @@ endpoints:
     type: int
     default: 1
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/season
 - short: venues
   path: /api/v1/venues
   extra_params:
@@ -357,6 +370,7 @@ endpoints:
     query_key: hydrate
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/venues
 - short: venue
   path: /api/v1/venues/{venue_id}
   path_params:
@@ -371,6 +385,7 @@ endpoints:
     query_key: hydrate
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/venue
 - short: meta
   path: /api/v1/{meta_type}
   path_params:
@@ -385,6 +400,7 @@ endpoints:
     query_key: sportId
     type: int
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/awards
 - short: award_recipients
   path: /api/v1/awards/{award_id}/recipients
   path_params:
@@ -403,6 +419,7 @@ endpoints:
     query_key: hydrate
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/award_recipients
 - short: draft
   path: /api/v1/draft/{year}
   path_params:
@@ -427,6 +444,7 @@ endpoints:
 - short: umpires
   path: /api/v1/jobs/umpires
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/umpires
 - short: conferences
   path: /api/v1/conferences
   extra_params:
@@ -440,6 +458,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/conferences
 - short: conference
   path: /api/v1/conferences/{conference_id}
   path_params:
@@ -454,6 +473,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/conference
 - short: draft_latest
   path: /api/v1/draft/{year}/latest
   path_params:
@@ -461,6 +481,7 @@ endpoints:
     type: int
     required: true
   parser: parse_mlb_api_draft_latest
+  returns_schema: native/mlb_api/draft_latest
 - short: game_timestamps
   path: /api/v1.1/game/{game_pk}/feed/live/timestamps
   path_params:
@@ -468,6 +489,7 @@ endpoints:
     type: str
     required: true
   parser: parse_mlb_api_timecodes
+  returns_schema: native/mlb_api/game_timestamps
 - short: game_changes
   path: /api/v1/game/changes
   extra_params:
@@ -481,6 +503,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_schedule
+  returns_schema: native/mlb_api/game_changes
 - short: analytics_games
   path: /api/v1/game/analytics/game
   extra_params:
@@ -669,6 +692,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/game_pace
 - short: high_low
   path: /api/v1/highLow/{org_type}
   path_params:
@@ -704,6 +728,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/high_low
 - short: home_run_derby
   path: /api/v1/homeRunDerby/{game_pk}
   path_params:
@@ -715,6 +740,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/home_run_derby
 - short: home_run_derby_bracket
   path: /api/v1/homeRunDerby/{game_pk}/bracket
   path_params:
@@ -726,6 +752,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/home_run_derby_bracket
 - short: home_run_derby_pool
   path: /api/v1/homeRunDerby/{game_pk}/pool
   path_params:
@@ -737,6 +764,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/home_run_derby_pool
 - short: all_star_ballot
   path: /api/v1/league/{league_id}/allStarBallot
   path_params:
@@ -751,6 +779,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/all_star_ballot
 - short: all_star_write_ins
   path: /api/v1/league/{league_id}/allStarWriteIns
   path_params:
@@ -765,6 +794,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/all_star_write_ins
 - short: all_star_final_vote
   path: /api/v1/league/{league_id}/allStarFinalVote
   path_params:
@@ -779,6 +809,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/all_star_final_vote
 - short: free_agents
   path: /api/v1/people/freeAgents
   extra_params:
@@ -795,6 +826,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/free_agents
 - short: jobs
   path: /api/v1/jobs
   extra_params:
@@ -811,6 +843,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/jobs
 - short: datacasters
   path: /api/v1/jobs/datacasters
   extra_params:
@@ -827,6 +860,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/datacasters
 - short: official_scorers
   path: /api/v1/jobs/officialScorers
   extra_params:
@@ -843,6 +877,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/official_scorers
 - short: umpire_games
   path: /api/v1/jobs/umpires/games/{umpire_id}
   path_params:
@@ -876,6 +911,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_schedule
+  returns_schema: native/mlb_api/schedule_tied
 - short: schedule_postseason_series
   path: /api/v1/schedule/postseason/series
   extra_params:
@@ -898,6 +934,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/schedule_postseason_series
 - short: schedule_postseason_tunein
   path: /api/v1/schedule/postseason/tuneIn
   extra_params:
@@ -917,6 +954,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_schedule
+  returns_schema: native/mlb_api/schedule_postseason_tunein
 - short: seasons_all
   path: /api/v1/seasons/all
   extra_params:
@@ -936,6 +974,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/seasons_all
 - short: sport
   path: /api/v1/sports/{sport_id}
   path_params:
@@ -947,6 +986,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/sport
 - short: stats_metrics
   path: /api/v1/stats/metrics
   extra_params:
@@ -1012,6 +1052,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/teams_history
 - short: teams_stats
   path: /api/v1/teams/stats
   extra_params:
@@ -1040,6 +1081,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_person_stats
+  returns_schema: native/mlb_api/teams_stats
 - short: teams_stats_leaders
   path: /api/v1/teams/stats/leaders
   extra_params:
@@ -1080,6 +1122,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/teams_stats_leaders
 - short: team_coaches
   path: /api/v1/teams/{team_id}/coaches
   path_params:
@@ -1097,6 +1140,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/team_coaches
 - short: team_personnel
   path: /api/v1/teams/{team_id}/personnel
   path_params:
@@ -1111,6 +1155,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_list
+  returns_schema: native/mlb_api/team_personnel
 - short: team_roster_type
   path: /api/v1/teams/{team_id}/roster/{roster_type}
   path_params:
@@ -1134,6 +1179,7 @@ endpoints:
     query_key: fields
     type: str
   parser: parse_mlb_api_team_roster
+  returns_schema: native/mlb_api/team_roster_type
 - short: standings
   path: /api/v1/standings
   extra_params:

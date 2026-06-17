@@ -42,6 +42,7 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/country
 - short: draft
   path: /{lang}/draft
   path_params:
@@ -58,6 +59,7 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/franchise
 - short: game
   path: /{lang}/game
   path_params:
@@ -74,6 +76,7 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/glossary
 - short: goalie_report
   path: /{lang}/goalie/{report}
   path_params:
@@ -85,6 +88,7 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/goalie_report
 - short: leaders_goalies
   path: /{lang}/leaders/goalies/{attribute}
   path_params:
@@ -139,6 +143,7 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/season
 - short: shiftcharts
   path: /{lang}/shiftcharts
   path_params:
@@ -158,6 +163,7 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/skater_report
 - short: team
   path: /{lang}/team
   path_params:
@@ -188,3 +194,4 @@ endpoints:
     required: false
     default: en
   parser: parse_nhl_stats_rest
+  returns_schema: native/nhl_stats_rest/team_report

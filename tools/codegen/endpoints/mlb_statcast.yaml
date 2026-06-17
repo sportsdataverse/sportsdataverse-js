@@ -29,6 +29,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_expected_stats
 - short: leaderboard_percentile_rankings
   path: /leaderboard/percentile-rankings
   extra_params:
@@ -46,6 +47,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_percentile_rankings
 - short: leaderboard_sprint_speed
   path: /leaderboard/sprint_speed
   extra_params:
@@ -63,6 +65,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_sprint_speed
 - short: leaderboard_running_splits
   path: /leaderboard/running_splits
   extra_params:
@@ -80,6 +83,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_running_splits
 - short: leaderboard_bat_tracking
   path: /leaderboard/bat-tracking
   extra_params:
@@ -97,6 +101,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_bat_tracking
 - short: leaderboard_swing_path
   path: /leaderboard/bat-tracking/swing-path-attack-angle
   extra_params:
@@ -114,6 +119,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_swing_path
 - short: leaderboard_swing_timing
   path: /leaderboard/bat-tracking/swing-timing-miss-distance
   extra_params:
@@ -131,6 +137,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_swing_timing
 - short: leaderboard_swing_take
   path: /leaderboard/swing-take
   extra_params:
@@ -148,6 +155,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_swing_take
 - short: leaderboard_exit_velocity_barrels
   path: /leaderboard/statcast
   extra_params:
@@ -165,6 +173,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_exit_velocity_barrels
 - short: leaderboard_batted_ball
   path: /leaderboard/batted-ball
   extra_params:
@@ -182,6 +191,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_batted_ball
 - short: leaderboard_home_runs
   path: /leaderboard/home-runs
   extra_params:
@@ -199,6 +209,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_home_runs
 - short: leaderboard_pitch_arsenals
   path: /leaderboard/pitch-arsenals
   extra_params:
@@ -216,6 +227,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_pitch_arsenals
 - short: leaderboard_pitch_arsenal_stats
   path: /leaderboard/pitch-arsenal-stats
   extra_params:
@@ -233,6 +245,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_pitch_arsenal_stats
 - short: leaderboard_pitch_movement
   path: /leaderboard/pitch-movement
   extra_params:
@@ -250,6 +263,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_pitch_movement
 - short: leaderboard_pitch_tempo
   path: /leaderboard/pitch-tempo
   extra_params:
@@ -267,6 +281,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_pitch_tempo
 - short: leaderboard_active_spin
   path: /leaderboard/active-spin
   extra_params:
@@ -284,6 +299,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_active_spin
 - short: leaderboard_spin_direction
   path: /leaderboard/spin-direction-pitches
   extra_params:
@@ -301,6 +317,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_spin_direction
 - short: leaderboard_arm_angles
   path: /leaderboard/pitcher-arm-angles
   extra_params:
@@ -318,6 +335,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_arm_angles
 - short: leaderboard_pitcher_running_game
   path: /leaderboard/pitcher-running-game
   extra_params:
@@ -335,6 +353,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_pitcher_running_game
 - short: leaderboard_outs_above_average
   path: /leaderboard/outs_above_average
   extra_params:
@@ -352,6 +371,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_outs_above_average
 - short: leaderboard_outfield_directional_oaa
   path: /leaderboard/outfield_directional_outs_above_average
   extra_params:
@@ -369,6 +389,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_outfield_directional_oaa
 - short: leaderboard_outfield_jump
   path: /leaderboard/outfield_jump
   extra_params:
@@ -386,6 +407,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_outfield_jump
 - short: leaderboard_catch_probability
   path: /leaderboard/catch_probability
   extra_params:
@@ -403,6 +425,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_catch_probability
 - short: leaderboard_arm_strength
   path: /leaderboard/arm-strength
   extra_params:
@@ -420,6 +443,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_arm_strength
 - short: leaderboard_poptime
   path: /leaderboard/poptime
   extra_params:
@@ -437,6 +461,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_poptime
 - short: leaderboard_catcher_framing
   path: /leaderboard/catcher-framing
   extra_params:
@@ -454,6 +479,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_catcher_framing
 - short: leaderboard_catcher_blocking
   path: /leaderboard/catcher-blocking
   extra_params:
@@ -471,6 +497,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_catcher_blocking
 - short: leaderboard_catcher_throwing
   path: /leaderboard/catcher-throwing
   extra_params:
@@ -488,6 +515,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_catcher_throwing
 - short: leaderboard_catcher_stance
   path: /leaderboard/catcher-stance
   extra_params:
@@ -505,6 +533,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_catcher_stance
 - short: leaderboard_basestealing_run_value
   path: /leaderboard/basestealing-run-value
   extra_params:
@@ -522,6 +551,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_basestealing_run_value
 - short: leaderboard_baserunning_run_value
   path: /leaderboard/baserunning-run-value
   extra_params:
@@ -539,6 +569,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_baserunning_run_value
 - short: leaderboard_baserunning
   path: /leaderboard/baserunning
   extra_params:
@@ -556,6 +587,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_baserunning
 - short: leaderboard_year_to_year
   path: /leaderboard/statcast-year-to-year
   extra_params:
@@ -573,6 +605,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_year_to_year
 - short: leaderboard_timer_infractions
   path: /leaderboard/pitch-timer-infractions
   extra_params:
@@ -590,6 +623,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_timer_infractions
 - short: leaderboard_custom
   path: /leaderboard/custom
   extra_params:
@@ -619,6 +653,7 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_custom
 - short: leaderboard_fielding_run_value
   path: /leaderboard/fielding-run-value
   extra_params:
@@ -632,6 +667,7 @@ endpoints:
     query_key: team
     type: str
   parser: parse_mlb_statcast_html_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_fielding_run_value
 - short: leaderboard_park_factors
   path: /leaderboard/statcast-park-factors
   extra_params:
@@ -645,6 +681,7 @@ endpoints:
     query_key: team
     type: str
   parser: parse_mlb_statcast_html_leaderboard
+  returns_schema: native/mlb_statcast/leaderboard_park_factors
 - short: gamefeed
   path: /gf
   extra_params:
@@ -655,6 +692,7 @@ endpoints:
     query_key: at_bat_number
     type: int
   parser: parse_mlb_statcast_gamefeed
+  returns_schema: native/mlb_statcast/gamefeed
 - short: schedule
   path: /schedule
   extra_params:
@@ -662,3 +700,4 @@ endpoints:
     query_key: date
     type: str
   parser: parse_mlb_statcast_schedule
+  returns_schema: native/mlb_statcast/schedule

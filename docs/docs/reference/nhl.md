@@ -171,6 +171,833 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `nhl_api_web_standings` / `nhlApiWebStandings` | `https://api-web.nhle.com/v1/standings/{date}` | `date` | — | `parse_nhl_web_standings` | — |
 | `nhl_api_web_standings_season` / `nhlApiWebStandingsSeason` | `https://api-web.nhle.com/v1/standings-season` | — | — | `parse_nhl_web_standings_season` | — |
 
+### Returns — `nhl_api_web_boxscore` / `nhlApiWebBoxscore`
+
+| col_name | type | description |
+|---|---|---|
+| `home_away` | character |  |
+| `position_group` | character |  |
+| `player_id` | integer |  |
+| `sweater_number` | integer |  |
+| `position` | character |  |
+| `goals` | double |  |
+| `assists` | double |  |
+| `points` | double |  |
+| `plus_minus` | double |  |
+| `pim` | integer |  |
+| `hits` | double |  |
+| `power_play_goals` | double |  |
+| `sog` | double |  |
+| `faceoff_winning_pctg` | double |  |
+| `toi` | character |  |
+| `blocked_shots` | double |  |
+| `shifts` | double |  |
+| `giveaways` | double |  |
+| `takeaways` | double |  |
+| `name_default` | character |  |
+| `even_strength_shots_against` | character |  |
+| `power_play_shots_against` | character |  |
+| `shorthanded_shots_against` | character |  |
+| `save_shots_against` | character |  |
+| `even_strength_goals_against` | double |  |
+| `power_play_goals_against` | double |  |
+| `shorthanded_goals_against` | double |  |
+| `goals_against` | double |  |
+| `starter` | logical |  |
+| `shots_against` | double |  |
+| `saves` | double |  |
+| `save_pctg` | double |  |
+| `decision` | character |  |
+| `name_cs` | character |  |
+| `name_fi` | character |  |
+| `name_sk` | character |  |
+
+### Returns — `nhl_api_web_club_schedule_season` / `nhlApiWebClubScheduleSeason`
+
+| col_name | type | description |
+|---|---|---|
+| `club_previous_season` | integer |  |
+| `club_current_season` | integer |  |
+| `club_next_season` | integer |  |
+| `club_timezone` | character |  |
+| `id` | integer |  |
+| `season` | integer |  |
+| `game_type` | integer |  |
+| `game_date` | character |  |
+| `neutral_site` | logical |  |
+| `start_time_utc` | character |  |
+| `eastern_utc_offset` | character |  |
+| `venue_utc_offset` | character |  |
+| `venue_timezone` | character |  |
+| `game_state` | character |  |
+| `game_schedule_state` | character |  |
+| `tv_broadcasts` | character |  |
+| `game_center_link` | character |  |
+| `venue_default` | character |  |
+| `away_team_id` | integer |  |
+| `away_team_common_name_default` | character |  |
+| `away_team_place_name_default` | character |  |
+| `away_team_place_name_with_preposition_default` | character |  |
+| `away_team_place_name_with_preposition_fr` | character |  |
+| `away_team_abbrev` | character |  |
+| `away_team_logo` | character |  |
+| `away_team_dark_logo` | character |  |
+| `away_team_away_split_squad` | logical |  |
+| `away_team_score` | integer |  |
+| `home_team_id` | integer |  |
+| `home_team_common_name_default` | character |  |
+| `home_team_place_name_default` | character |  |
+| `home_team_place_name_with_preposition_default` | character |  |
+| `home_team_place_name_with_preposition_fr` | character |  |
+| `home_team_abbrev` | character |  |
+| `home_team_logo` | character |  |
+| `home_team_dark_logo` | character |  |
+| `home_team_home_split_squad` | logical |  |
+| `home_team_airline_link` | character |  |
+| `home_team_airline_desc` | character |  |
+| `home_team_hotel_link` | character |  |
+| `home_team_hotel_desc` | character |  |
+| `home_team_score` | integer |  |
+| `period_descriptor_period_type` | character |  |
+| `period_descriptor_max_regulation_periods` | integer |  |
+| `game_outcome_last_period_type` | character |  |
+| `winning_goalie_player_id` | integer |  |
+| `winning_goalie_first_initial_default` | character |  |
+| `winning_goalie_last_name_default` | character |  |
+| `away_team_airline_link` | character |  |
+| `away_team_airline_desc` | character |  |
+| `winning_goal_scorer_player_id` | double |  |
+| `winning_goal_scorer_first_initial_default` | character |  |
+| `winning_goal_scorer_last_name_default` | character |  |
+| `three_min_recap` | character |  |
+| `home_team_place_name_fr` | character |  |
+| `condensed_game` | character |  |
+| `venue_es` | character |  |
+| `venue_fr` | character |  |
+| `special_event_parent_id` | double |  |
+| `special_event_name_default` | character |  |
+| `special_event_name_fr` | character |  |
+| `away_team_hotel_link` | character |  |
+| `away_team_hotel_desc` | character |  |
+| `three_min_recap_fr` | character |  |
+| `winning_goalie_last_name_cs` | character |  |
+| `winning_goalie_last_name_fi` | character |  |
+| `winning_goalie_last_name_sk` | character |  |
+| `away_team_place_name_fr` | character |  |
+| `away_team_common_name_fr` | character |  |
+| `home_team_common_name_fr` | character |  |
+| `series_url` | character |  |
+| `series_status_round` | double |  |
+| `series_status_series_abbrev` | character |  |
+| `series_status_series_title` | character |  |
+| `series_status_series_letter` | character |  |
+| `series_status_needed_to_win` | double |  |
+| `series_status_top_seed_wins` | double |  |
+| `series_status_bottom_seed_wins` | double |  |
+| `series_status_game_number_of_series` | double |  |
+
+### Returns — `nhl_api_web_draft_picks` / `nhlApiWebDraftPicks`
+
+| col_name | type | description |
+|---|---|---|
+| `round` | integer |  |
+| `pick_in_round` | integer |  |
+| `overall_pick` | integer |  |
+| `team_id` | integer |  |
+| `team_abbrev` | character |  |
+| `team_logo_light` | character |  |
+| `team_logo_dark` | character |  |
+| `team_pick_history` | character |  |
+| `position_code` | character |  |
+| `country_code` | character |  |
+| `height` | integer |  |
+| `weight` | integer |  |
+| `amateur_league` | character |  |
+| `amateur_club_name` | character |  |
+| `team_name_default` | character |  |
+| `team_name_fr` | character |  |
+| `team_common_name_default` | character |  |
+| `team_place_name_with_preposition_default` | character |  |
+| `team_place_name_with_preposition_fr` | character |  |
+| `display_abbrev_default` | character |  |
+| `first_name_default` | character |  |
+| `last_name_default` | character |  |
+| `team_common_name_fr` | character |  |
+
+### Returns — `nhl_api_web_draft_rankings` / `nhlApiWebDraftRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `draft_year` | integer |  |
+| `category_id` | integer |  |
+| `category_key` | character |  |
+| `last_name` | character |  |
+| `first_name` | character |  |
+| `position_code` | character |  |
+| `shoots_catches` | character |  |
+| `height_in_inches` | integer |  |
+| `weight_in_pounds` | integer |  |
+| `last_amateur_club` | character |  |
+| `last_amateur_league` | character |  |
+| `birth_date` | character |  |
+| `birth_city` | character |  |
+| `birth_state_province` | character |  |
+| `birth_country` | character |  |
+| `midterm_rank` | double |  |
+| `final_rank` | double |  |
+
+### Returns — `nhl_api_web_draft_rankings_now` / `nhlApiWebDraftRankingsNow`
+
+| col_name | type | description |
+|---|---|---|
+| `draft_year` | integer |  |
+| `category_id` | integer |  |
+| `category_key` | character |  |
+| `last_name` | character |  |
+| `first_name` | character |  |
+| `position_code` | character |  |
+| `shoots_catches` | character |  |
+| `height_in_inches` | integer |  |
+| `weight_in_pounds` | integer |  |
+| `last_amateur_club` | character |  |
+| `last_amateur_league` | character |  |
+| `birth_date` | character |  |
+| `birth_city` | character |  |
+| `birth_state_province` | character |  |
+| `birth_country` | character |  |
+| `midterm_rank` | double |  |
+| `final_rank` | double |  |
+
+### Returns — `nhl_api_web_goalie_leaders` / `nhlApiWebGoalieLeaders`
+
+| col_name | type | description |
+|---|---|---|
+| `category` | character |  |
+| `id` | integer |  |
+| `sweater_number` | integer |  |
+| `headshot` | character |  |
+| `team_abbrev` | character |  |
+| `team_logo` | character |  |
+| `position` | character |  |
+| `value` | integer |  |
+| `first_name_default` | character |  |
+| `last_name_default` | character |  |
+| `team_name_default` | character |  |
+| `first_name_cs` | character |  |
+| `first_name_sk` | character |  |
+| `last_name_cs` | character |  |
+| `last_name_sk` | character |  |
+| `last_name_fi` | character |  |
+
+### Returns — `nhl_api_web_landing` / `nhlApiWebLanding`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `season` | integer |  |
+| `game_type` | integer |  |
+| `limited_scoring` | logical |  |
+| `game_date` | character |  |
+| `start_time_utc` | character |  |
+| `eastern_utc_offset` | character |  |
+| `venue_utc_offset` | character |  |
+| `venue_timezone` | character |  |
+| `tv_broadcasts` | character |  |
+| `game_state` | character |  |
+| `game_schedule_state` | character |  |
+| `shootout_in_use` | logical |  |
+| `reg_periods` | integer |  |
+| `ot_in_use` | logical |  |
+| `ties_in_use` | logical |  |
+| `venue_default` | character |  |
+| `venue_location_default` | character |  |
+| `period_descriptor_number` | integer |  |
+| `period_descriptor_period_type` | character |  |
+| `period_descriptor_max_regulation_periods` | integer |  |
+| `away_team_id` | integer |  |
+| `away_team_common_name_default` | character |  |
+| `away_team_abbrev` | character |  |
+| `away_team_place_name_default` | character |  |
+| `away_team_place_name_with_preposition_default` | character |  |
+| `away_team_place_name_with_preposition_fr` | character |  |
+| `away_team_score` | integer |  |
+| `away_team_sog` | integer |  |
+| `away_team_logo` | character |  |
+| `away_team_dark_logo` | character |  |
+| `home_team_id` | integer |  |
+| `home_team_common_name_default` | character |  |
+| `home_team_abbrev` | character |  |
+| `home_team_place_name_default` | character |  |
+| `home_team_place_name_fr` | character |  |
+| `home_team_place_name_with_preposition_default` | character |  |
+| `home_team_place_name_with_preposition_fr` | character |  |
+| `home_team_score` | integer |  |
+| `home_team_sog` | integer |  |
+| `home_team_logo` | character |  |
+| `home_team_dark_logo` | character |  |
+| `summary_scoring` | character |  |
+| `summary_three_stars` | character |  |
+| `summary_penalties` | character |  |
+| `clock_time_remaining` | character |  |
+| `clock_seconds_remaining` | integer |  |
+| `clock_running` | logical |  |
+| `clock_in_intermission` | logical |  |
+
+### Returns — `nhl_api_web_pbp` / `nhlApiWebPbp`
+
+| col_name | type | description |
+|---|---|---|
+| `event_id` | integer |  |
+| `time_in_period` | character |  |
+| `time_remaining` | character |  |
+| `situation_code` | character |  |
+| `home_team_defending_side` | character |  |
+| `type_code` | integer |  |
+| `type_desc_key` | character |  |
+| `sort_order` | integer |  |
+| `period_descriptor_number` | integer |  |
+| `period_descriptor_period_type` | character |  |
+| `period_descriptor_max_regulation_periods` | integer |  |
+| `details_event_owner_team_id` | double |  |
+| `details_losing_player_id` | double |  |
+| `details_winning_player_id` | double |  |
+| `details_x_coord` | double |  |
+| `details_y_coord` | double |  |
+| `details_zone_code` | character |  |
+| `details_shot_type` | character |  |
+| `details_shooting_player_id` | double |  |
+| `details_goalie_in_net_id` | double |  |
+| `details_away_sog` | double |  |
+| `details_home_sog` | double |  |
+| `details_reason` | character |  |
+| `details_blocking_player_id` | double |  |
+| `details_hitting_player_id` | double |  |
+| `details_hittee_player_id` | double |  |
+| `details_player_id` | double |  |
+| `details_type_code` | character |  |
+| `details_desc_key` | character |  |
+| `details_duration` | double |  |
+| `details_committed_by_player_id` | double |  |
+| `details_drawn_by_player_id` | double |  |
+| `ppt_replay_url` | character |  |
+| `details_scoring_player_id` | double |  |
+| `details_scoring_player_total` | double |  |
+| `details_assist1_player_id` | double |  |
+| `details_assist1_player_total` | double |  |
+| `details_assist2_player_id` | double |  |
+| `details_assist2_player_total` | double |  |
+| `details_away_score` | double |  |
+| `details_home_score` | double |  |
+| `details_highlight_clip_sharing_url` | character |  |
+| `details_highlight_clip` | double |  |
+| `details_discrete_clip` | double |  |
+| `details_discrete_clip_fr` | double |  |
+| `details_highlight_clip_sharing_url_fr` | character |  |
+| `details_highlight_clip_fr` | double |  |
+| `details_secondary_reason` | character |  |
+
+### Returns — `nhl_api_web_player_game_log` / `nhlApiWebPlayerGameLog`
+
+| col_name | type | description |
+|---|---|---|
+| `game_id` | integer |  |
+| `team_abbrev` | character |  |
+| `home_road_flag` | character |  |
+| `game_date` | character |  |
+| `goals` | integer |  |
+| `assists` | integer |  |
+| `points` | integer |  |
+| `plus_minus` | integer |  |
+| `power_play_goals` | integer |  |
+| `power_play_points` | integer |  |
+| `game_winning_goals` | integer |  |
+| `ot_goals` | integer |  |
+| `shots` | integer |  |
+| `shifts` | integer |  |
+| `shorthanded_goals` | integer |  |
+| `shorthanded_points` | integer |  |
+| `opponent_abbrev` | character |  |
+| `pim` | integer |  |
+| `toi` | character |  |
+| `common_name_default` | character |  |
+| `opponent_common_name_default` | character |  |
+| `opponent_common_name_fr` | character |  |
+
+### Returns — `nhl_api_web_player_landing` / `nhlApiWebPlayerLanding`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | integer |  |
+| `is_active` | logical |  |
+| `current_team_id` | integer |  |
+| `current_team_abbrev` | character |  |
+| `badges` | character |  |
+| `team_logo` | character |  |
+| `sweater_number` | integer |  |
+| `position` | character |  |
+| `headshot` | character |  |
+| `hero_image` | character |  |
+| `height_in_inches` | integer |  |
+| `height_in_centimeters` | integer |  |
+| `weight_in_pounds` | integer |  |
+| `weight_in_kilograms` | integer |  |
+| `birth_date` | character |  |
+| `birth_country` | character |  |
+| `shoots_catches` | character |  |
+| `player_slug` | character |  |
+| `in_top100_all_time` | integer |  |
+| `in_hhof` | integer |  |
+| `shop_link` | character |  |
+| `twitter_link` | character |  |
+| `watch_link` | character |  |
+| `last5_games` | character |  |
+| `season_totals` | character |  |
+| `awards` | character |  |
+| `current_team_roster` | character |  |
+| `full_team_name_default` | character |  |
+| `full_team_name_fr` | character |  |
+| `team_common_name_default` | character |  |
+| `team_place_name_with_preposition_default` | character |  |
+| `team_place_name_with_preposition_fr` | character |  |
+| `first_name_default` | character |  |
+| `last_name_default` | character |  |
+| `birth_city_default` | character |  |
+| `birth_state_province_default` | character |  |
+| `draft_details_year` | integer |  |
+| `draft_details_team_abbrev` | character |  |
+| `draft_details_round` | integer |  |
+| `draft_details_pick_in_round` | integer |  |
+| `draft_details_overall_pick` | integer |  |
+| `featured_stats_season` | integer |  |
+| `featured_stats_regular_season_sub_season_assists` | integer |  |
+| `featured_stats_regular_season_sub_season_game_winning_goals` | integer |  |
+| `featured_stats_regular_season_sub_season_games_played` | integer |  |
+| `featured_stats_regular_season_sub_season_goals` | integer |  |
+| `featured_stats_regular_season_sub_season_ot_goals` | integer |  |
+| `featured_stats_regular_season_sub_season_pim` | integer |  |
+| `featured_stats_regular_season_sub_season_plus_minus` | integer |  |
+| `featured_stats_regular_season_sub_season_points` | integer |  |
+| `featured_stats_regular_season_sub_season_power_play_goals` | integer |  |
+| `featured_stats_regular_season_sub_season_power_play_points` | integer |  |
+| `featured_stats_regular_season_sub_season_shooting_pctg` | double |  |
+| `featured_stats_regular_season_sub_season_shorthanded_goals` | integer |  |
+| `featured_stats_regular_season_sub_season_shorthanded_points` | integer |  |
+| `featured_stats_regular_season_sub_season_shots` | integer |  |
+| `featured_stats_regular_season_career_assists` | integer |  |
+| `featured_stats_regular_season_career_game_winning_goals` | integer |  |
+| `featured_stats_regular_season_career_games_played` | integer |  |
+| `featured_stats_regular_season_career_goals` | integer |  |
+| `featured_stats_regular_season_career_ot_goals` | integer |  |
+| `featured_stats_regular_season_career_pim` | integer |  |
+| `featured_stats_regular_season_career_plus_minus` | integer |  |
+| `featured_stats_regular_season_career_points` | integer |  |
+| `featured_stats_regular_season_career_power_play_goals` | integer |  |
+| `featured_stats_regular_season_career_power_play_points` | integer |  |
+| `featured_stats_regular_season_career_shooting_pctg` | double |  |
+| `featured_stats_regular_season_career_shorthanded_goals` | integer |  |
+| `featured_stats_regular_season_career_shorthanded_points` | integer |  |
+| `featured_stats_regular_season_career_shots` | integer |  |
+| `featured_stats_playoffs_sub_season_assists` | integer |  |
+| `featured_stats_playoffs_sub_season_game_winning_goals` | integer |  |
+| `featured_stats_playoffs_sub_season_games_played` | integer |  |
+| `featured_stats_playoffs_sub_season_goals` | integer |  |
+| `featured_stats_playoffs_sub_season_ot_goals` | integer |  |
+| `featured_stats_playoffs_sub_season_pim` | integer |  |
+| `featured_stats_playoffs_sub_season_plus_minus` | integer |  |
+| `featured_stats_playoffs_sub_season_points` | integer |  |
+| `featured_stats_playoffs_sub_season_power_play_goals` | integer |  |
+| `featured_stats_playoffs_sub_season_power_play_points` | integer |  |
+| `featured_stats_playoffs_sub_season_shooting_pctg` | double |  |
+| `featured_stats_playoffs_sub_season_shorthanded_goals` | integer |  |
+| `featured_stats_playoffs_sub_season_shorthanded_points` | integer |  |
+| `featured_stats_playoffs_sub_season_shots` | integer |  |
+| `featured_stats_playoffs_career_assists` | integer |  |
+| `featured_stats_playoffs_career_game_winning_goals` | integer |  |
+| `featured_stats_playoffs_career_games_played` | integer |  |
+| `featured_stats_playoffs_career_goals` | integer |  |
+| `featured_stats_playoffs_career_ot_goals` | integer |  |
+| `featured_stats_playoffs_career_pim` | integer |  |
+| `featured_stats_playoffs_career_plus_minus` | integer |  |
+| `featured_stats_playoffs_career_points` | integer |  |
+| `featured_stats_playoffs_career_power_play_goals` | integer |  |
+| `featured_stats_playoffs_career_power_play_points` | integer |  |
+| `featured_stats_playoffs_career_shooting_pctg` | double |  |
+| `featured_stats_playoffs_career_shorthanded_goals` | integer |  |
+| `featured_stats_playoffs_career_shorthanded_points` | integer |  |
+| `featured_stats_playoffs_career_shots` | integer |  |
+| `career_totals_regular_season_assists` | integer |  |
+| `career_totals_regular_season_avg_toi` | character |  |
+| `career_totals_regular_season_faceoff_winning_pctg` | double |  |
+| `career_totals_regular_season_game_winning_goals` | integer |  |
+| `career_totals_regular_season_games_played` | integer |  |
+| `career_totals_regular_season_goals` | integer |  |
+| `career_totals_regular_season_ot_goals` | integer |  |
+| `career_totals_regular_season_pim` | integer |  |
+| `career_totals_regular_season_plus_minus` | integer |  |
+| `career_totals_regular_season_points` | integer |  |
+| `career_totals_regular_season_power_play_goals` | integer |  |
+| `career_totals_regular_season_power_play_points` | integer |  |
+| `career_totals_regular_season_shooting_pctg` | double |  |
+| `career_totals_regular_season_shorthanded_goals` | integer |  |
+| `career_totals_regular_season_shorthanded_points` | integer |  |
+| `career_totals_regular_season_shots` | integer |  |
+| `career_totals_playoffs_assists` | integer |  |
+| `career_totals_playoffs_avg_toi` | character |  |
+| `career_totals_playoffs_faceoff_winning_pctg` | double |  |
+| `career_totals_playoffs_game_winning_goals` | integer |  |
+| `career_totals_playoffs_games_played` | integer |  |
+| `career_totals_playoffs_goals` | integer |  |
+| `career_totals_playoffs_ot_goals` | integer |  |
+| `career_totals_playoffs_pim` | integer |  |
+| `career_totals_playoffs_plus_minus` | integer |  |
+| `career_totals_playoffs_points` | integer |  |
+| `career_totals_playoffs_power_play_goals` | integer |  |
+| `career_totals_playoffs_power_play_points` | integer |  |
+| `career_totals_playoffs_shooting_pctg` | double |  |
+| `career_totals_playoffs_shorthanded_goals` | integer |  |
+| `career_totals_playoffs_shorthanded_points` | integer |  |
+| `career_totals_playoffs_shots` | integer |  |
+
+### Returns — `nhl_api_web_player_spotlight` / `nhlApiWebPlayerSpotlight`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | integer |  |
+| `player_slug` | character |  |
+| `position` | character |  |
+| `sweater_number` | integer |  |
+| `team_id` | integer |  |
+| `headshot` | character |  |
+| `team_tri_code` | character |  |
+| `team_logo` | character |  |
+| `sort_id` | integer |  |
+| `name_default` | character |  |
+| `name_cs` | character |  |
+| `name_fi` | character |  |
+| `name_sk` | character |  |
+
+### Returns — `nhl_api_web_playoff_series` / `nhlApiWebPlayoffSeries`
+
+| col_name | type | description |
+|---|---|---|
+| `round` | integer |  |
+| `series_letter` | character |  |
+| `top_seed_team_id` | integer |  |
+| `top_seed_team_abbrev` | character |  |
+| `bottom_seed_team_id` | integer |  |
+| `bottom_seed_team_abbrev` | character |  |
+| `id` | integer |  |
+| `season` | integer |  |
+| `game_type` | integer |  |
+| `game_number` | integer |  |
+| `if_necessary` | logical |  |
+| `neutral_site` | logical |  |
+| `start_time_utc` | character |  |
+| `eastern_utc_offset` | character |  |
+| `venue_utc_offset` | character |  |
+| `venue_timezone` | character |  |
+| `game_state` | character |  |
+| `game_schedule_state` | character |  |
+| `tv_broadcasts` | character |  |
+| `game_center_link` | character |  |
+| `venue_default` | character |  |
+| `away_team_id` | integer |  |
+| `away_team_common_name_default` | character |  |
+| `away_team_place_name_default` | character |  |
+| `away_team_place_name_with_preposition_default` | character |  |
+| `away_team_place_name_with_preposition_fr` | character |  |
+| `away_team_abbrev` | character |  |
+| `away_team_score` | integer |  |
+| `home_team_id` | integer |  |
+| `home_team_common_name_default` | character |  |
+| `home_team_place_name_default` | character |  |
+| `home_team_place_name_fr` | character |  |
+| `home_team_place_name_with_preposition_default` | character |  |
+| `home_team_place_name_with_preposition_fr` | character |  |
+| `home_team_abbrev` | character |  |
+| `home_team_score` | integer |  |
+| `period_descriptor_number` | integer |  |
+| `period_descriptor_period_type` | character |  |
+| `period_descriptor_max_regulation_periods` | integer |  |
+| `series_status_top_seed_wins` | integer |  |
+| `series_status_bottom_seed_wins` | integer |  |
+| `game_outcome_last_period_type` | character |  |
+| `game_outcome_ot_periods` | double |  |
+| `away_team_place_name_fr` | character |  |
+
+### Returns — `nhl_api_web_roster` / `nhlApiWebRoster`
+
+| col_name | type | description |
+|---|---|---|
+| `position_group` | character |  |
+| `id` | integer |  |
+| `headshot` | character |  |
+| `sweater_number` | integer |  |
+| `position_code` | character |  |
+| `shoots_catches` | character |  |
+| `height_in_inches` | integer |  |
+| `weight_in_pounds` | integer |  |
+| `height_in_centimeters` | integer |  |
+| `weight_in_kilograms` | integer |  |
+| `birth_date` | character |  |
+| `birth_country` | character |  |
+| `first_name_default` | character |  |
+| `last_name_default` | character |  |
+| `birth_city_default` | character |  |
+| `birth_state_province_default` | character |  |
+| `birth_city_cs` | character |  |
+| `birth_city_de` | character |  |
+| `birth_city_fi` | character |  |
+| `birth_city_sk` | character |  |
+| `birth_city_sv` | character |  |
+
+### Returns — `nhl_api_web_schedule` / `nhlApiWebSchedule`
+
+| col_name | type | description |
+|---|---|---|
+| `schedule_date` | character |  |
+| `id` | integer |  |
+| `season` | integer |  |
+| `game_type` | integer |  |
+| `neutral_site` | logical |  |
+| `start_time_utc` | character |  |
+| `eastern_utc_offset` | character |  |
+| `venue_utc_offset` | character |  |
+| `venue_timezone` | character |  |
+| `game_state` | character |  |
+| `game_schedule_state` | character |  |
+| `tv_broadcasts` | character |  |
+| `series_url` | character |  |
+| `three_min_recap` | character |  |
+| `game_center_link` | character |  |
+| `venue_default` | character |  |
+| `away_team_id` | integer |  |
+| `away_team_common_name_default` | character |  |
+| `away_team_place_name_default` | character |  |
+| `away_team_place_name_with_preposition_default` | character |  |
+| `away_team_place_name_with_preposition_fr` | character |  |
+| `away_team_abbrev` | character |  |
+| `away_team_logo` | character |  |
+| `away_team_dark_logo` | character |  |
+| `away_team_away_split_squad` | logical |  |
+| `away_team_score` | integer |  |
+| `home_team_id` | integer |  |
+| `home_team_common_name_default` | character |  |
+| `home_team_place_name_default` | character |  |
+| `home_team_place_name_fr` | character |  |
+| `home_team_place_name_with_preposition_default` | character |  |
+| `home_team_place_name_with_preposition_fr` | character |  |
+| `home_team_abbrev` | character |  |
+| `home_team_logo` | character |  |
+| `home_team_dark_logo` | character |  |
+| `home_team_home_split_squad` | logical |  |
+| `home_team_score` | integer |  |
+| `period_descriptor_number` | integer |  |
+| `period_descriptor_period_type` | character |  |
+| `period_descriptor_max_regulation_periods` | integer |  |
+| `game_outcome_last_period_type` | character |  |
+| `winning_goalie_player_id` | integer |  |
+| `winning_goalie_first_initial_default` | character |  |
+| `winning_goalie_last_name_default` | character |  |
+| `winning_goalie_last_name_cs` | character |  |
+| `winning_goalie_last_name_fi` | character |  |
+| `winning_goalie_last_name_sk` | character |  |
+| `winning_goal_scorer_player_id` | integer |  |
+| `winning_goal_scorer_first_initial_default` | character |  |
+| `winning_goal_scorer_last_name_default` | character |  |
+| `series_status_round` | integer |  |
+| `series_status_series_abbrev` | character |  |
+| `series_status_series_title` | character |  |
+| `series_status_series_letter` | character |  |
+| `series_status_needed_to_win` | integer |  |
+| `series_status_top_seed_team_abbrev` | character |  |
+| `series_status_top_seed_wins` | integer |  |
+| `series_status_bottom_seed_team_abbrev` | character |  |
+| `series_status_bottom_seed_wins` | integer |  |
+| `series_status_game_number_of_series` | integer |  |
+
+### Returns — `nhl_api_web_score` / `nhlApiWebScore`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `season` | integer |  |
+| `game_type` | integer |  |
+| `game_date` | character |  |
+| `start_time_utc` | character |  |
+| `eastern_utc_offset` | character |  |
+| `venue_utc_offset` | character |  |
+| `tv_broadcasts` | character |  |
+| `game_state` | character |  |
+| `game_schedule_state` | character |  |
+| `game_center_link` | character |  |
+| `series_url` | character |  |
+| `three_min_recap` | character |  |
+| `neutral_site` | logical |  |
+| `venue_timezone` | character |  |
+| `period` | integer |  |
+| `goals` | character |  |
+| `venue_default` | character |  |
+| `away_team_id` | integer |  |
+| `away_team_name_default` | character |  |
+| `away_team_abbrev` | character |  |
+| `away_team_score` | integer |  |
+| `away_team_sog` | integer |  |
+| `away_team_logo` | character |  |
+| `home_team_id` | integer |  |
+| `home_team_name_default` | character |  |
+| `home_team_abbrev` | character |  |
+| `home_team_score` | integer |  |
+| `home_team_sog` | integer |  |
+| `home_team_logo` | character |  |
+| `series_status_round` | integer |  |
+| `series_status_series_abbrev` | character |  |
+| `series_status_series_title` | character |  |
+| `series_status_series_letter` | character |  |
+| `series_status_needed_to_win` | integer |  |
+| `series_status_top_seed_team_abbrev` | character |  |
+| `series_status_top_seed_wins` | integer |  |
+| `series_status_bottom_seed_team_abbrev` | character |  |
+| `series_status_bottom_seed_wins` | integer |  |
+| `series_status_game_number_of_series` | integer |  |
+| `clock_time_remaining` | character |  |
+| `clock_seconds_remaining` | integer |  |
+| `clock_running` | logical |  |
+| `clock_in_intermission` | logical |  |
+| `period_descriptor_number` | integer |  |
+| `period_descriptor_period_type` | character |  |
+| `period_descriptor_max_regulation_periods` | integer |  |
+| `game_outcome_last_period_type` | character |  |
+
+### Returns — `nhl_api_web_skater_leaders` / `nhlApiWebSkaterLeaders`
+
+| col_name | type | description |
+|---|---|---|
+| `category` | character |  |
+| `id` | integer |  |
+| `sweater_number` | integer |  |
+| `headshot` | character |  |
+| `team_abbrev` | character |  |
+| `team_logo` | character |  |
+| `position` | character |  |
+| `value` | integer |  |
+| `first_name_default` | character |  |
+| `first_name_cs` | character |  |
+| `first_name_de` | character |  |
+| `first_name_es` | character |  |
+| `first_name_fi` | character |  |
+| `first_name_sk` | character |  |
+| `first_name_sv` | character |  |
+| `last_name_default` | character |  |
+| `team_name_default` | character |  |
+| `last_name_cs` | character |  |
+| `last_name_fi` | character |  |
+| `last_name_sk` | character |  |
+
+### Returns — `nhl_api_web_standings` / `nhlApiWebStandings`
+
+| col_name | type | description |
+|---|---|---|
+| `clinch_indicator` | character |  |
+| `conference_abbrev` | character |  |
+| `conference_home_sequence` | integer |  |
+| `conference_l10_sequence` | integer |  |
+| `conference_name` | character |  |
+| `conference_road_sequence` | integer |  |
+| `conference_sequence` | integer |  |
+| `date` | character |  |
+| `division_abbrev` | character |  |
+| `division_home_sequence` | integer |  |
+| `division_l10_sequence` | integer |  |
+| `division_name` | character |  |
+| `division_road_sequence` | integer |  |
+| `division_sequence` | integer |  |
+| `game_type_id` | integer |  |
+| `games_played` | integer |  |
+| `goal_differential` | integer |  |
+| `goal_differential_pctg` | double |  |
+| `goal_against` | integer |  |
+| `goal_for` | integer |  |
+| `goals_for_pctg` | double |  |
+| `home_games_played` | integer |  |
+| `home_goal_differential` | integer |  |
+| `home_goals_against` | integer |  |
+| `home_goals_for` | integer |  |
+| `home_losses` | integer |  |
+| `home_ot_losses` | integer |  |
+| `home_points` | integer |  |
+| `home_regulation_plus_ot_wins` | integer |  |
+| `home_regulation_wins` | integer |  |
+| `home_ties` | integer |  |
+| `home_wins` | integer |  |
+| `l10_games_played` | integer |  |
+| `l10_goal_differential` | integer |  |
+| `l10_goals_against` | integer |  |
+| `l10_goals_for` | integer |  |
+| `l10_losses` | integer |  |
+| `l10_ot_losses` | integer |  |
+| `l10_points` | integer |  |
+| `l10_regulation_plus_ot_wins` | integer |  |
+| `l10_regulation_wins` | integer |  |
+| `l10_ties` | integer |  |
+| `l10_wins` | integer |  |
+| `league_home_sequence` | integer |  |
+| `league_l10_sequence` | integer |  |
+| `league_road_sequence` | integer |  |
+| `league_sequence` | integer |  |
+| `losses` | integer |  |
+| `ot_losses` | integer |  |
+| `point_pctg` | double |  |
+| `points` | integer |  |
+| `regulation_plus_ot_win_pctg` | double |  |
+| `regulation_plus_ot_wins` | integer |  |
+| `regulation_win_pctg` | double |  |
+| `regulation_wins` | integer |  |
+| `road_games_played` | integer |  |
+| `road_goal_differential` | integer |  |
+| `road_goals_against` | integer |  |
+| `road_goals_for` | integer |  |
+| `road_losses` | integer |  |
+| `road_ot_losses` | integer |  |
+| `road_points` | integer |  |
+| `road_regulation_plus_ot_wins` | integer |  |
+| `road_regulation_wins` | integer |  |
+| `road_ties` | integer |  |
+| `road_wins` | integer |  |
+| `season_id` | integer |  |
+| `shootout_losses` | integer |  |
+| `shootout_wins` | integer |  |
+| `streak_code` | character |  |
+| `streak_count` | integer |  |
+| `team_logo` | character |  |
+| `ties` | integer |  |
+| `waivers_sequence` | integer |  |
+| `wildcard_sequence` | integer |  |
+| `win_pctg` | double |  |
+| `wins` | integer |  |
+| `place_name_default` | character |  |
+| `team_name_default` | character |  |
+| `team_name_fr` | character |  |
+| `team_common_name_default` | character |  |
+| `team_abbrev_default` | character |  |
+| `place_name_fr` | character |  |
+| `team_common_name_fr` | character |  |
+
+### Returns — `nhl_api_web_standings_season` / `nhlApiWebStandingsSeason`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `conferences_in_use` | logical |  |
+| `divisions_in_use` | logical |  |
+| `point_for_o_tloss_in_use` | logical |  |
+| `regulation_wins_in_use` | logical |  |
+| `row_in_use` | logical |  |
+| `standings_end` | character |  |
+| `standings_start` | character |  |
+| `ties_in_use` | logical |  |
+| `wildcard_in_use` | logical |  |
+
 ## Native API — NHL EDGE (player tracking)
 
 Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH `nhl_edge_<endpoint>` (snake_case, py/R parity) and `nhlEdge<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
@@ -213,6 +1040,316 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 | `nhl_edge_team_zone_time_details` / `nhlEdgeTeamZoneTimeDetails` | `https://api-web.nhle.com/v1/edge/team-zone-time-details/{team_id}/{season}/{game_type}` | `team_id`\*, `season`, `game_type` | — | `parse_edge_zone_time` | — |
 | `nhl_edge_team_zone_time_top_10` / `nhlEdgeTeamZoneTimeTop10` | `https://api-web.nhle.com/v1/edge/team-zone-time-top-10/{strength}/{sort_by}/{season}/{game_type}` | `strength`\*, `sort_by`\*, `season`, `game_type` | — | `parse_edge_top10` | — |
 
+### Returns — `nhl_edge_goalie_detail` / `nhlEdgeGoalieDetail`
+
+| col_name | type | description |
+|---|---|---|
+| `seasons_with_edge_stats` | character |  |
+| `shot_location_summary` | character |  |
+| `shot_location_details` | character |  |
+| `player_id` | integer |  |
+| `player_first_name_default` | character |  |
+| `player_last_name_default` | character |  |
+| `player_birth_date` | character |  |
+| `player_shoots_catches` | character |  |
+| `player_sweater_number` | integer |  |
+| `player_slug` | character |  |
+| `player_headshot` | character |  |
+| `player_wins` | integer |  |
+| `player_losses` | integer |  |
+| `player_overtime_losses` | integer |  |
+| `player_goals_against_avg` | double |  |
+| `player_save_pctg` | double |  |
+| `player_games_played` | integer |  |
+| `player_team_common_name_default` | character |  |
+| `player_team_place_name_with_preposition_default` | character |  |
+| `player_team_place_name_with_preposition_fr` | character |  |
+| `player_team_abbrev` | character |  |
+| `player_team_team_logo_light` | character |  |
+| `player_team_team_logo_dark` | character |  |
+| `stats_goals_against_avg_value` | double |  |
+| `stats_goals_against_avg_percentile` | double |  |
+| `stats_goals_against_avg_league_avg` | double |  |
+| `stats_games_above900_value` | double |  |
+| `stats_games_above900_percentile` | double |  |
+| `stats_games_above900_league_avg` | double |  |
+| `stats_goal_differential_per60_value` | double |  |
+| `stats_goal_differential_per60_percentile` | double |  |
+| `stats_goal_differential_per60_league_avg` | double |  |
+| `stats_goal_support_avg_value` | double |  |
+| `stats_goal_support_avg_percentile` | double |  |
+| `stats_goal_support_avg_league_avg` | double |  |
+| `stats_point_pctg_value` | double |  |
+| `stats_point_pctg_percentile` | double |  |
+| `stats_point_pctg_league_avg` | double |  |
+
+### Returns — `nhl_edge_goalie_shot_location_detail` / `nhlEdgeGoalieShotLocationDetail`
+
+| col_name | type | description |
+|---|---|---|
+| `area` | character |  |
+| `shots_against` | integer |  |
+| `saves` | integer |  |
+| `goals_against` | integer |  |
+| `save_pctg` | double |  |
+| `shots_against_percentile` | double |  |
+| `saves_percentile` | double |  |
+| `goals_against_percentile` | double |  |
+| `save_pctg_percentile` | double |  |
+
+### Returns — `nhl_edge_skater_detail` / `nhlEdgeSkaterDetail`
+
+| col_name | type | description |
+|---|---|---|
+| `seasons_with_edge_stats` | character |  |
+| `sog_summary` | character |  |
+| `sog_details` | character |  |
+| `player_id` | integer |  |
+| `player_first_name_default` | character |  |
+| `player_last_name_default` | character |  |
+| `player_birth_date` | character |  |
+| `player_shoots_catches` | character |  |
+| `player_sweater_number` | integer |  |
+| `player_position` | character |  |
+| `player_slug` | character |  |
+| `player_headshot` | character |  |
+| `player_goals` | integer |  |
+| `player_assists` | integer |  |
+| `player_points` | integer |  |
+| `player_games_played` | integer |  |
+| `player_team_common_name_default` | character |  |
+| `player_team_place_name_with_preposition_default` | character |  |
+| `player_team_place_name_with_preposition_fr` | character |  |
+| `player_team_abbrev` | character |  |
+| `player_team_team_logo_light` | character |  |
+| `player_team_team_logo_dark` | character |  |
+| `top_shot_speed_imperial` | double |  |
+| `top_shot_speed_metric` | double |  |
+| `top_shot_speed_percentile` | double |  |
+| `top_shot_speed_league_avg_imperial` | double |  |
+| `top_shot_speed_league_avg_metric` | double |  |
+| `top_shot_speed_overlay_player_first_name_default` | character |  |
+| `top_shot_speed_overlay_player_last_name_default` | character |  |
+| `top_shot_speed_overlay_game_date` | character |  |
+| `top_shot_speed_overlay_away_team_abbrev` | character |  |
+| `top_shot_speed_overlay_away_team_score` | integer |  |
+| `top_shot_speed_overlay_home_team_abbrev` | character |  |
+| `top_shot_speed_overlay_home_team_score` | integer |  |
+| `top_shot_speed_overlay_game_outcome_last_period_type` | character |  |
+| `top_shot_speed_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `top_shot_speed_overlay_period_descriptor_number` | integer |  |
+| `top_shot_speed_overlay_period_descriptor_period_type` | character |  |
+| `top_shot_speed_overlay_time_in_period` | character |  |
+| `top_shot_speed_overlay_game_type` | integer |  |
+| `skating_speed_speed_max_imperial` | double |  |
+| `skating_speed_speed_max_metric` | double |  |
+| `skating_speed_speed_max_percentile` | double |  |
+| `skating_speed_speed_max_league_avg_imperial` | double |  |
+| `skating_speed_speed_max_league_avg_metric` | double |  |
+| `skating_speed_speed_max_overlay_player_first_name_default` | character |  |
+| `skating_speed_speed_max_overlay_player_last_name_default` | character |  |
+| `skating_speed_speed_max_overlay_game_date` | character |  |
+| `skating_speed_speed_max_overlay_away_team_abbrev` | character |  |
+| `skating_speed_speed_max_overlay_away_team_score` | integer |  |
+| `skating_speed_speed_max_overlay_home_team_abbrev` | character |  |
+| `skating_speed_speed_max_overlay_home_team_score` | integer |  |
+| `skating_speed_speed_max_overlay_game_outcome_last_period_type` | character |  |
+| `skating_speed_speed_max_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `skating_speed_speed_max_overlay_period_descriptor_number` | integer |  |
+| `skating_speed_speed_max_overlay_period_descriptor_period_type` | character |  |
+| `skating_speed_speed_max_overlay_time_in_period` | character |  |
+| `skating_speed_speed_max_overlay_game_type` | integer |  |
+| `skating_speed_bursts_over20_value` | integer |  |
+| `skating_speed_bursts_over20_percentile` | double |  |
+| `skating_speed_bursts_over20_league_avg_value` | double |  |
+| `total_distance_skated_imperial` | double |  |
+| `total_distance_skated_metric` | double |  |
+| `total_distance_skated_percentile` | double |  |
+| `total_distance_skated_league_avg_imperial` | double |  |
+| `total_distance_skated_league_avg_metric` | double |  |
+| `distance_max_game_imperial` | double |  |
+| `distance_max_game_metric` | double |  |
+| `distance_max_game_percentile` | double |  |
+| `distance_max_game_league_avg_imperial` | double |  |
+| `distance_max_game_league_avg_metric` | double |  |
+| `distance_max_game_overlay_player_first_name_default` | character |  |
+| `distance_max_game_overlay_player_last_name_default` | character |  |
+| `distance_max_game_overlay_game_date` | character |  |
+| `distance_max_game_overlay_away_team_abbrev` | character |  |
+| `distance_max_game_overlay_away_team_score` | integer |  |
+| `distance_max_game_overlay_home_team_abbrev` | character |  |
+| `distance_max_game_overlay_home_team_score` | integer |  |
+| `distance_max_game_overlay_game_outcome_last_period_type` | character |  |
+| `distance_max_game_overlay_game_outcome_ot_periods` | integer |  |
+| `distance_max_game_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `distance_max_game_overlay_period_descriptor_number` | integer |  |
+| `distance_max_game_overlay_period_descriptor_period_type` | character |  |
+| `distance_max_game_overlay_game_type` | integer |  |
+| `zone_time_details_offensive_zone_pctg` | double |  |
+| `zone_time_details_offensive_zone_percentile` | double |  |
+| `zone_time_details_offensive_zone_league_avg` | double |  |
+| `zone_time_details_offensive_zone_ev_pctg` | double |  |
+| `zone_time_details_offensive_zone_ev_percentile` | double |  |
+| `zone_time_details_offensive_zone_ev_league_avg` | double |  |
+| `zone_time_details_neutral_zone_pctg` | double |  |
+| `zone_time_details_neutral_zone_percentile` | double |  |
+| `zone_time_details_neutral_zone_league_avg` | double |  |
+| `zone_time_details_defensive_zone_pctg` | double |  |
+| `zone_time_details_defensive_zone_percentile` | double |  |
+| `zone_time_details_defensive_zone_league_avg` | double |  |
+
+### Returns — `nhl_edge_skater_shot_speed_detail` / `nhlEdgeSkaterShotSpeedDetail`
+
+| col_name | type | description |
+|---|---|---|
+| `hardest_shots` | character |  |
+| `shot_speed_details_top_shot_speed_imperial` | double |  |
+| `shot_speed_details_top_shot_speed_metric` | double |  |
+| `shot_speed_details_top_shot_speed_percentile` | double |  |
+| `shot_speed_details_top_shot_speed_league_avg_imperial` | double |  |
+| `shot_speed_details_top_shot_speed_league_avg_metric` | double |  |
+| `shot_speed_details_top_shot_speed_overlay_player_first_name_default` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_player_last_name_default` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_game_date` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_away_team_abbrev` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_away_team_score` | integer |  |
+| `shot_speed_details_top_shot_speed_overlay_home_team_abbrev` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_home_team_score` | integer |  |
+| `shot_speed_details_top_shot_speed_overlay_game_outcome_last_period_type` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `shot_speed_details_top_shot_speed_overlay_period_descriptor_number` | integer |  |
+| `shot_speed_details_top_shot_speed_overlay_period_descriptor_period_type` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_time_in_period` | character |  |
+| `shot_speed_details_top_shot_speed_overlay_game_type` | integer |  |
+| `shot_speed_details_avg_shot_speed_imperial` | double |  |
+| `shot_speed_details_avg_shot_speed_metric` | double |  |
+| `shot_speed_details_avg_shot_speed_percentile` | double |  |
+| `shot_speed_details_avg_shot_speed_league_avg_imperial` | double |  |
+| `shot_speed_details_avg_shot_speed_league_avg_metric` | double |  |
+| `shot_speed_details_shot_attempts_over100_value` | integer |  |
+| `shot_speed_details_shot_attempts_over100_percentile` | double |  |
+| `shot_speed_details_shot_attempts_over100_league_avg` | double |  |
+| `shot_speed_details_shot_attempts90_to100_value` | integer |  |
+| `shot_speed_details_shot_attempts90_to100_percentile` | double |  |
+| `shot_speed_details_shot_attempts90_to100_league_avg` | double |  |
+| `shot_speed_details_shot_attempts80_to90_value` | integer |  |
+| `shot_speed_details_shot_attempts80_to90_percentile` | double |  |
+| `shot_speed_details_shot_attempts80_to90_league_avg` | double |  |
+| `shot_speed_details_shot_attempts70_to80_value` | integer |  |
+| `shot_speed_details_shot_attempts70_to80_percentile` | double |  |
+| `shot_speed_details_shot_attempts70_to80_league_avg` | double |  |
+
+### Returns — `nhl_edge_skater_zone_time` / `nhlEdgeSkaterZoneTime`
+
+| col_name | type | description |
+|---|---|---|
+| `strength_code` | character |  |
+| `offensive_zone_pctg` | double |  |
+| `offensive_zone_percentile` | double |  |
+| `offensive_zone_league_avg` | double |  |
+| `neutral_zone_pctg` | double |  |
+| `neutral_zone_percentile` | double |  |
+| `neutral_zone_league_avg` | double |  |
+| `defensive_zone_pctg` | double |  |
+| `defensive_zone_percentile` | double |  |
+| `defensive_zone_league_avg` | double |  |
+
+### Returns — `nhl_edge_team_detail` / `nhlEdgeTeamDetail`
+
+| col_name | type | description |
+|---|---|---|
+| `seasons_with_edge_stats` | character |  |
+| `sog_summary` | character |  |
+| `sog_details` | character |  |
+| `team_id` | integer |  |
+| `team_common_name_default` | character |  |
+| `team_place_name_with_preposition_default` | character |  |
+| `team_place_name_with_preposition_fr` | character |  |
+| `team_abbrev` | character |  |
+| `team_team_logo_light` | character |  |
+| `team_team_logo_dark` | character |  |
+| `team_slug` | character |  |
+| `team_conference` | character |  |
+| `team_division` | character |  |
+| `team_wins` | integer |  |
+| `team_losses` | integer |  |
+| `team_ot_losses` | integer |  |
+| `team_games_played` | integer |  |
+| `team_points` | integer |  |
+| `shot_speed_shot_attempts_over90_value` | integer |  |
+| `shot_speed_shot_attempts_over90_rank` | integer |  |
+| `shot_speed_top_shot_speed_imperial` | double |  |
+| `shot_speed_top_shot_speed_metric` | double |  |
+| `shot_speed_top_shot_speed_rank` | integer |  |
+| `shot_speed_top_shot_speed_league_avg_imperial` | double |  |
+| `shot_speed_top_shot_speed_league_avg_metric` | double |  |
+| `shot_speed_top_shot_speed_overlay_player_first_name_default` | character |  |
+| `shot_speed_top_shot_speed_overlay_player_last_name_default` | character |  |
+| `shot_speed_top_shot_speed_overlay_game_date` | character |  |
+| `shot_speed_top_shot_speed_overlay_away_team_abbrev` | character |  |
+| `shot_speed_top_shot_speed_overlay_away_team_score` | integer |  |
+| `shot_speed_top_shot_speed_overlay_home_team_abbrev` | character |  |
+| `shot_speed_top_shot_speed_overlay_home_team_score` | integer |  |
+| `shot_speed_top_shot_speed_overlay_game_outcome_last_period_type` | character |  |
+| `shot_speed_top_shot_speed_overlay_game_outcome_ot_periods` | integer |  |
+| `shot_speed_top_shot_speed_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `shot_speed_top_shot_speed_overlay_period_descriptor_number` | integer |  |
+| `shot_speed_top_shot_speed_overlay_period_descriptor_period_type` | character |  |
+| `shot_speed_top_shot_speed_overlay_time_in_period` | character |  |
+| `shot_speed_top_shot_speed_overlay_game_type` | integer |  |
+| `skating_speed_bursts_over22_value` | integer |  |
+| `skating_speed_bursts_over22_rank` | integer |  |
+| `skating_speed_bursts_over20_value` | integer |  |
+| `skating_speed_bursts_over20_rank` | integer |  |
+| `skating_speed_bursts_over20_league_avg_value` | integer |  |
+| `skating_speed_speed_max_imperial` | double |  |
+| `skating_speed_speed_max_metric` | double |  |
+| `skating_speed_speed_max_rank` | integer |  |
+| `skating_speed_speed_max_league_avg_imperial` | double |  |
+| `skating_speed_speed_max_league_avg_metric` | double |  |
+| `skating_speed_speed_max_overlay_player_first_name_default` | character |  |
+| `skating_speed_speed_max_overlay_player_last_name_default` | character |  |
+| `skating_speed_speed_max_overlay_game_date` | character |  |
+| `skating_speed_speed_max_overlay_away_team_abbrev` | character |  |
+| `skating_speed_speed_max_overlay_away_team_score` | integer |  |
+| `skating_speed_speed_max_overlay_home_team_abbrev` | character |  |
+| `skating_speed_speed_max_overlay_home_team_score` | integer |  |
+| `skating_speed_speed_max_overlay_game_outcome_last_period_type` | character |  |
+| `skating_speed_speed_max_overlay_period_descriptor_max_regulation_periods` | integer |  |
+| `skating_speed_speed_max_overlay_period_descriptor_number` | integer |  |
+| `skating_speed_speed_max_overlay_period_descriptor_period_type` | character |  |
+| `skating_speed_speed_max_overlay_time_in_period` | character |  |
+| `skating_speed_speed_max_overlay_game_type` | integer |  |
+| `distance_skated_total_imperial` | double |  |
+| `distance_skated_total_metric` | double |  |
+| `distance_skated_total_rank` | integer |  |
+| `distance_skated_total_league_avg_imperial` | double |  |
+| `distance_skated_total_league_avg_metric` | double |  |
+| `zone_time_details_offensive_zone_pctg` | double |  |
+| `zone_time_details_offensive_zone_rank` | integer |  |
+| `zone_time_details_offensive_zone_league_avg` | double |  |
+| `zone_time_details_offensive_zone_ev_pctg` | double |  |
+| `zone_time_details_offensive_zone_ev_rank` | integer |  |
+| `zone_time_details_offensive_zone_ev_league_avg` | double |  |
+| `zone_time_details_neutral_zone_pctg` | double |  |
+| `zone_time_details_neutral_zone_rank` | integer |  |
+| `zone_time_details_neutral_zone_league_avg` | double |  |
+| `zone_time_details_defensive_zone_pctg` | double |  |
+| `zone_time_details_defensive_zone_rank` | integer |  |
+| `zone_time_details_defensive_zone_league_avg` | double |  |
+
+### Returns — `nhl_edge_team_shot_location_detail` / `nhlEdgeTeamShotLocationDetail`
+
+| col_name | type | description |
+|---|---|---|
+| `area` | character |  |
+| `sog` | integer |  |
+| `sog_rank` | integer |  |
+| `goals` | integer |  |
+| `goals_rank` | integer |  |
+| `shooting_pctg` | double |  |
+| `shooting_pctg_rank` | integer |  |
+
 ## Native API — NHL Stats REST
 
 Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com/stats/rest`. Each method is exposed under BOTH `nhl_stats_rest_<endpoint>` (snake_case, py/R parity) and `nhlStatsRest<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
@@ -240,6 +1377,160 @@ Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com
 | `nhl_stats_rest_team` / `nhlStatsRestTeam` | `https://api.nhle.com/stats/rest/{lang}/team` | `lang` | — | `parse_nhl_stats_rest` | — |
 | `nhl_stats_rest_team_by_id` / `nhlStatsRestTeamById` | `https://api.nhle.com/stats/rest/{lang}/team/id/{team_id}` | `team_id`\*, `lang` | — | `parse_nhl_stats_rest` | — |
 | `nhl_stats_rest_team_report` / `nhlStatsRestTeamReport` | `https://api.nhle.com/stats/rest/{lang}/team/{report}` | `report`\*, `lang` | — | `parse_nhl_stats_rest` | — |
+
+### Returns — `nhl_stats_rest_country` / `nhlStatsRestCountry`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | character |  |
+| `country3_code` | character |  |
+| `country_code` | character |  |
+| `country_name` | character |  |
+| `has_player_stats` | integer |  |
+| `image_url` | character |  |
+| `ioc_code` | character |  |
+| `is_active` | integer |  |
+| `nationality_name` | character |  |
+| `olympic_url` | character |  |
+| `thumbnail_url` | character |  |
+
+### Returns — `nhl_stats_rest_franchise` / `nhlStatsRestFranchise`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `full_name` | character |  |
+| `team_common_name` | character |  |
+| `team_place_name` | character |  |
+
+### Returns — `nhl_stats_rest_glossary` / `nhlStatsRestGlossary`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `abbreviation` | character |  |
+| `definition` | character |  |
+| `first_season_for_stat` | double |  |
+| `full_name` | character |  |
+| `language_code` | character |  |
+| `last_updated` | character |  |
+
+### Returns — `nhl_stats_rest_goalie_report` / `nhlStatsRestGoalieReport`
+
+| col_name | type | description |
+|---|---|---|
+| `assists` | integer |  |
+| `games_played` | integer |  |
+| `games_started` | integer |  |
+| `goalie_full_name` | character |  |
+| `goals` | integer |  |
+| `goals_against` | integer |  |
+| `goals_against_average` | double |  |
+| `last_name` | character |  |
+| `losses` | integer |  |
+| `ot_losses` | integer |  |
+| `penalty_minutes` | integer |  |
+| `player_id` | integer |  |
+| `points` | integer |  |
+| `save_pct` | double |  |
+| `saves` | integer |  |
+| `season_id` | integer |  |
+| `shoots_catches` | character |  |
+| `shots_against` | integer |  |
+| `shutouts` | integer |  |
+| `team_abbrevs` | character |  |
+| `ties` | character |  |
+| `time_on_ice` | integer |  |
+| `wins` | integer |  |
+
+### Returns — `nhl_stats_rest_season` / `nhlStatsRestSeason`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `all_star_game_in_use` | integer |  |
+| `conferences_in_use` | integer |  |
+| `divisions_in_use` | integer |  |
+| `end_date` | character |  |
+| `entry_draft_in_use` | integer |  |
+| `formatted_season_id` | character |  |
+| `minimum_playoff_minutes_for_goalie_stats_leaders` | integer |  |
+| `minimum_regular_games_for_goalie_stats_leaders` | integer |  |
+| `nhl_stanley_cup_owner` | integer |  |
+| `number_of_games` | integer |  |
+| `olympics_participation` | integer |  |
+| `point_for_ot_loss_in_use` | integer |  |
+| `preseason_startdate` | character |  |
+| `regular_season_end_date` | character |  |
+| `row_in_use` | integer |  |
+| `season_ordinal` | integer |  |
+| `start_date` | character |  |
+| `supplemental_draft_in_use` | integer |  |
+| `ties_in_use` | integer |  |
+| `total_playoff_games` | integer |  |
+| `total_regular_season_games` | integer |  |
+| `wildcard_in_use` | integer |  |
+
+### Returns — `nhl_stats_rest_skater_report` / `nhlStatsRestSkaterReport`
+
+| col_name | type | description |
+|---|---|---|
+| `assists` | integer |  |
+| `ev_goals` | integer |  |
+| `ev_points` | integer |  |
+| `faceoff_win_pct` | double |  |
+| `game_winning_goals` | integer |  |
+| `games_played` | integer |  |
+| `goals` | integer |  |
+| `last_name` | character |  |
+| `ot_goals` | integer |  |
+| `penalty_minutes` | integer |  |
+| `player_id` | integer |  |
+| `plus_minus` | integer |  |
+| `points` | integer |  |
+| `points_per_game` | double |  |
+| `position_code` | character |  |
+| `pp_goals` | integer |  |
+| `pp_points` | integer |  |
+| `season_id` | integer |  |
+| `sh_goals` | integer |  |
+| `sh_points` | integer |  |
+| `shooting_pct` | double |  |
+| `shoots_catches` | character |  |
+| `shots` | integer |  |
+| `skater_full_name` | character |  |
+| `team_abbrevs` | character |  |
+| `time_on_ice_per_game` | double |  |
+
+### Returns — `nhl_stats_rest_team_report` / `nhlStatsRestTeamReport`
+
+| col_name | type | description |
+|---|---|---|
+| `faceoff_win_pct` | double |  |
+| `games_played` | integer |  |
+| `goals_against` | integer |  |
+| `goals_against_per_game` | double |  |
+| `goals_for` | integer |  |
+| `goals_for_per_game` | double |  |
+| `losses` | integer |  |
+| `ot_losses` | integer |  |
+| `penalty_kill_net_pct` | double |  |
+| `penalty_kill_pct` | double |  |
+| `point_pct` | double |  |
+| `points` | integer |  |
+| `power_play_net_pct` | double |  |
+| `power_play_pct` | double |  |
+| `regulation_and_ot_wins` | integer |  |
+| `season_id` | integer |  |
+| `shots_against_per_game` | double |  |
+| `shots_for_per_game` | double |  |
+| `team_full_name` | character |  |
+| `team_id` | integer |  |
+| `team_shutouts` | integer |  |
+| `ties` | character |  |
+| `wins` | integer |  |
+| `wins_in_regulation` | integer |  |
+| `wins_in_shootout` | integer |  |
 
 ## Native API — NHL Records
 
@@ -291,3 +1582,137 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `nhl_records_home_team_record` / `nhlRecordsHomeTeamRecord` | `https://records.nhl.com/site/api/home-team-record` | — | — | `parse_nhl_records` | — |
 | `nhl_records_skater_career_leaders` / `nhlRecordsSkaterCareerLeaders` | `https://records.nhl.com/site/api/skater-career-leaders` | — | — | `parse_nhl_records` | — |
 | `nhl_records_skater_career_stats` / `nhlRecordsSkaterCareerStats` | `https://records.nhl.com/site/api/skater-career-statistics` | — | — | `parse_nhl_records` | — |
+
+### Returns — `nhl_records_attendance` / `nhlRecordsAttendance`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `playoff_attendance` | double |  |
+| `regular_attendance` | double |  |
+| `season_id` | integer |  |
+| `total_attendance` | double |  |
+
+### Returns — `nhl_records_coaches` / `nhlRecordsCoaches`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `bio` | character |  |
+| `birth_city` | character |  |
+| `birth_country3code` | character |  |
+| `birth_date` | character |  |
+| `birth_state_province_code` | character |  |
+| `brief_description` | character |  |
+| `date_of_death` | character |  |
+| `deceased` | logical |  |
+| `description` | character |  |
+| `featured_image` | character |  |
+| `first_name` | character |  |
+| `full_name` | character |  |
+| `history` | character |  |
+| `hockey_hof_link` | character |  |
+| `in_hockey_hof` | logical |  |
+| `in_iihf_hockey_hof` | logical |  |
+| `in_us_hockey_hof` | logical |  |
+| `instagram` | character |  |
+| `is_active` | logical |  |
+| `last_name` | character |  |
+| `nationality_code` | character |  |
+| `player_id` | double |  |
+| `stanley_cup` | double |  |
+| `team_id` | character |  |
+| `top100_player_link` | character |  |
+| `twitter` | character |  |
+
+### Returns — `nhl_records_draft` / `nhlRecordsDraft`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `age_in_days` | character |  |
+| `age_in_days_for_year` | character |  |
+| `age_in_years` | character |  |
+| `amateur_club_name` | character |  |
+| `amateur_league` | character |  |
+| `birth_date` | character |  |
+| `birth_place` | character |  |
+| `country_code` | character |  |
+| `cs_player_id` | character |  |
+| `draft_date` | character |  |
+| `draft_master_id` | integer |  |
+| `draft_year` | integer |  |
+| `drafted_by_team_id` | character |  |
+| `first_name` | character |  |
+| `height` | character |  |
+| `last_name` | character |  |
+| `notes` | character |  |
+| `overall_pick_number` | integer |  |
+| `pick_in_round` | integer |  |
+| `player_id` | character |  |
+| `player_name` | character |  |
+| `position` | character |  |
+| `removed_outright` | character |  |
+| `removed_outright_why` | character |  |
+| `round_number` | integer |  |
+| `shoots_catches` | character |  |
+| `supplemental_draft` | character |  |
+| `team_pick_history` | character |  |
+| `tri_code` | character |  |
+| `weight` | character |  |
+
+### Returns — `nhl_records_franchise_team_totals` / `nhlRecordsFranchiseTeamTotals`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `active_franchise` | integer |  |
+| `active_team` | logical |  |
+| `cups` | integer |  |
+| `first_season_id` | integer |  |
+| `franchise_id` | integer |  |
+| `game_type_id` | integer |  |
+| `game_win_pctg` | double |  |
+| `games_played` | double |  |
+| `goals_against` | double |  |
+| `goals_for` | double |  |
+| `home_losses` | double |  |
+| `home_overtime_losses` | double |  |
+| `home_ties` | double |  |
+| `home_wins` | double |  |
+| `last_season_id` | double |  |
+| `losses` | double |  |
+| `overtime_losses` | double |  |
+| `penalty_minutes` | double |  |
+| `playoff_seasons` | double |  |
+| `point_pctg` | double |  |
+| `points` | double |  |
+| `road_losses` | double |  |
+| `road_overtime_losses` | double |  |
+| `road_ties` | double |  |
+| `road_wins` | double |  |
+| `series_losses` | integer |  |
+| `series_played` | double |  |
+| `series_win_pctg` | double |  |
+| `series_wins` | integer |  |
+| `shootout_losses` | double |  |
+| `shootout_wins` | double |  |
+| `shutouts` | double |  |
+| `team_id` | integer |  |
+| `team_name` | character |  |
+| `ties` | double |  |
+| `tri_code` | character |  |
+| `wins` | double |  |
+
+### Returns — `nhl_records_franchises` / `nhlRecordsFranchises`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `first_season_id` | integer |  |
+| `full_name` | character |  |
+| `last_season_id` | double |  |
+| `most_recent_team_id` | integer |  |
+| `team_abbrev` | character |  |
+| `team_common_name` | character |  |
+| `team_place_name` | character |  |

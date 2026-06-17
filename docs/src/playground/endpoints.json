@@ -2115,7 +2115,8 @@
           "queryKey": "hydrate"
         }
       ],
-      "parser": "parse_mlb_api_schedule"
+      "parser": "parse_mlb_api_schedule",
+      "returnsSchema": "native/mlb_api/schedule_postseason"
     },
     {
       "short": "pbp",
@@ -2171,7 +2172,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_boxscore"
+      "parser": "parse_mlb_api_boxscore",
+      "returnsSchema": "native/mlb_api/boxscore"
     },
     {
       "short": "linescore",
@@ -2195,7 +2197,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_linescore"
+      "parser": "parse_mlb_api_linescore",
+      "returnsSchema": "native/mlb_api/linescore"
     },
     {
       "short": "play_by_play",
@@ -2219,7 +2222,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_play_by_play"
+      "parser": "parse_mlb_api_play_by_play",
+      "returnsSchema": "native/mlb_api/play_by_play"
     },
     {
       "short": "game_context_metrics",
@@ -2259,7 +2263,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_win_probability"
+      "parser": "parse_mlb_api_win_probability",
+      "returnsSchema": "native/mlb_api/win_probability"
     },
     {
       "short": "game_content",
@@ -2307,7 +2312,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/team"
     },
     {
       "short": "team_roster",
@@ -2344,7 +2350,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_team_roster"
+      "parser": "parse_mlb_api_team_roster",
+      "returnsSchema": "native/mlb_api/team_roster"
     },
     {
       "short": "team_alumni",
@@ -2373,7 +2380,8 @@
           "queryKey": "hydrate"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/team_alumni"
     },
     {
       "short": "team_affiliates",
@@ -2402,7 +2410,8 @@
           "queryKey": "hydrate"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/team_affiliates"
     },
     {
       "short": "people",
@@ -2507,7 +2516,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/sport_players"
     },
     {
       "short": "sports",
@@ -2523,7 +2533,8 @@
           "queryKey": "sportId"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/sports"
     },
     {
       "short": "leagues",
@@ -2548,7 +2559,8 @@
           "queryKey": "leagueIds"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/leagues"
     },
     {
       "short": "season",
@@ -2569,7 +2581,8 @@
           "default": 1
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/season"
     },
     {
       "short": "venues",
@@ -2593,7 +2606,8 @@
           "queryKey": "hydrate"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/venues"
     },
     {
       "short": "venue",
@@ -2617,7 +2631,8 @@
           "queryKey": "hydrate"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/venue"
     },
     {
       "short": "meta",
@@ -2648,7 +2663,8 @@
           "queryKey": "sportId"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/awards"
     },
     {
       "short": "award_recipients",
@@ -2677,7 +2693,8 @@
           "queryKey": "hydrate"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/award_recipients"
     },
     {
       "short": "draft",
@@ -2721,7 +2738,8 @@
       "path": "/api/v1/jobs/umpires",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/umpires"
     },
     {
       "short": "conferences",
@@ -2745,7 +2763,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/conferences"
     },
     {
       "short": "conference",
@@ -2769,7 +2788,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/conference"
     },
     {
       "short": "draft_latest",
@@ -2784,7 +2804,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_mlb_api_draft_latest"
+      "parser": "parse_mlb_api_draft_latest",
+      "returnsSchema": "native/mlb_api/draft_latest"
     },
     {
       "short": "game_timestamps",
@@ -2799,7 +2820,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_mlb_api_timecodes"
+      "parser": "parse_mlb_api_timecodes",
+      "returnsSchema": "native/mlb_api/game_timestamps"
     },
     {
       "short": "game_changes",
@@ -2823,7 +2845,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_schedule"
+      "parser": "parse_mlb_api_schedule",
+      "returnsSchema": "native/mlb_api/game_changes"
     },
     {
       "short": "analytics_games",
@@ -3124,7 +3147,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/game_pace"
     },
     {
       "short": "high_low",
@@ -3176,7 +3200,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/high_low"
     },
     {
       "short": "home_run_derby",
@@ -3196,7 +3221,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/home_run_derby"
     },
     {
       "short": "home_run_derby_bracket",
@@ -3216,7 +3242,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/home_run_derby_bracket"
     },
     {
       "short": "home_run_derby_pool",
@@ -3236,7 +3263,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/home_run_derby_pool"
     },
     {
       "short": "all_star_ballot",
@@ -3260,7 +3288,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/all_star_ballot"
     },
     {
       "short": "all_star_write_ins",
@@ -3284,7 +3313,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/all_star_write_ins"
     },
     {
       "short": "all_star_final_vote",
@@ -3308,7 +3338,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/all_star_final_vote"
     },
     {
       "short": "free_agents",
@@ -3336,7 +3367,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/free_agents"
     },
     {
       "short": "jobs",
@@ -3364,7 +3396,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/jobs"
     },
     {
       "short": "datacasters",
@@ -3392,7 +3425,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/datacasters"
     },
     {
       "short": "official_scorers",
@@ -3420,7 +3454,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/official_scorers"
     },
     {
       "short": "umpire_games",
@@ -3476,7 +3511,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_schedule"
+      "parser": "parse_mlb_api_schedule",
+      "returnsSchema": "native/mlb_api/schedule_tied"
     },
     {
       "short": "schedule_postseason_series",
@@ -3512,7 +3548,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/schedule_postseason_series"
     },
     {
       "short": "schedule_postseason_tunein",
@@ -3544,7 +3581,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_schedule"
+      "parser": "parse_mlb_api_schedule",
+      "returnsSchema": "native/mlb_api/schedule_postseason_tunein"
     },
     {
       "short": "seasons_all",
@@ -3576,7 +3614,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/seasons_all"
     },
     {
       "short": "sport",
@@ -3596,7 +3635,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/sport"
     },
     {
       "short": "stats_metrics",
@@ -3696,7 +3736,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/teams_history"
     },
     {
       "short": "teams_stats",
@@ -3740,7 +3781,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_person_stats"
+      "parser": "parse_mlb_api_person_stats",
+      "returnsSchema": "native/mlb_api/teams_stats"
     },
     {
       "short": "teams_stats_leaders",
@@ -3800,7 +3842,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/teams_stats_leaders"
     },
     {
       "short": "team_coaches",
@@ -3828,7 +3871,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/team_coaches"
     },
     {
       "short": "team_personnel",
@@ -3852,7 +3896,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_list"
+      "parser": "parse_mlb_api_list",
+      "returnsSchema": "native/mlb_api/team_personnel"
     },
     {
       "short": "team_roster_type",
@@ -3887,7 +3932,8 @@
           "queryKey": "fields"
         }
       ],
-      "parser": "parse_mlb_api_team_roster"
+      "parser": "parse_mlb_api_team_roster",
+      "returnsSchema": "native/mlb_api/team_roster_type"
     },
     {
       "short": "standings",
@@ -4335,7 +4381,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_expected_stats"
     },
     {
       "short": "leaderboard_percentile_rankings",
@@ -4364,7 +4411,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_percentile_rankings"
     },
     {
       "short": "leaderboard_sprint_speed",
@@ -4393,7 +4441,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_sprint_speed"
     },
     {
       "short": "leaderboard_running_splits",
@@ -4422,7 +4471,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_running_splits"
     },
     {
       "short": "leaderboard_bat_tracking",
@@ -4451,7 +4501,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_bat_tracking"
     },
     {
       "short": "leaderboard_swing_path",
@@ -4480,7 +4531,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_swing_path"
     },
     {
       "short": "leaderboard_swing_timing",
@@ -4509,7 +4561,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_swing_timing"
     },
     {
       "short": "leaderboard_swing_take",
@@ -4538,7 +4591,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_swing_take"
     },
     {
       "short": "leaderboard_exit_velocity_barrels",
@@ -4567,7 +4621,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_exit_velocity_barrels"
     },
     {
       "short": "leaderboard_batted_ball",
@@ -4596,7 +4651,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_batted_ball"
     },
     {
       "short": "leaderboard_home_runs",
@@ -4625,7 +4681,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_home_runs"
     },
     {
       "short": "leaderboard_pitch_arsenals",
@@ -4654,7 +4711,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_pitch_arsenals"
     },
     {
       "short": "leaderboard_pitch_arsenal_stats",
@@ -4683,7 +4741,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_pitch_arsenal_stats"
     },
     {
       "short": "leaderboard_pitch_movement",
@@ -4712,7 +4771,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_pitch_movement"
     },
     {
       "short": "leaderboard_pitch_tempo",
@@ -4741,7 +4801,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_pitch_tempo"
     },
     {
       "short": "leaderboard_active_spin",
@@ -4770,7 +4831,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_active_spin"
     },
     {
       "short": "leaderboard_spin_direction",
@@ -4799,7 +4861,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_spin_direction"
     },
     {
       "short": "leaderboard_arm_angles",
@@ -4828,7 +4891,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_arm_angles"
     },
     {
       "short": "leaderboard_pitcher_running_game",
@@ -4857,7 +4921,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_pitcher_running_game"
     },
     {
       "short": "leaderboard_outs_above_average",
@@ -4886,7 +4951,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_outs_above_average"
     },
     {
       "short": "leaderboard_outfield_directional_oaa",
@@ -4915,7 +4981,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_outfield_directional_oaa"
     },
     {
       "short": "leaderboard_outfield_jump",
@@ -4944,7 +5011,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_outfield_jump"
     },
     {
       "short": "leaderboard_catch_probability",
@@ -4973,7 +5041,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_catch_probability"
     },
     {
       "short": "leaderboard_arm_strength",
@@ -5002,7 +5071,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_arm_strength"
     },
     {
       "short": "leaderboard_poptime",
@@ -5031,7 +5101,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_poptime"
     },
     {
       "short": "leaderboard_catcher_framing",
@@ -5060,7 +5131,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_catcher_framing"
     },
     {
       "short": "leaderboard_catcher_blocking",
@@ -5089,7 +5161,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_catcher_blocking"
     },
     {
       "short": "leaderboard_catcher_throwing",
@@ -5118,7 +5191,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_catcher_throwing"
     },
     {
       "short": "leaderboard_catcher_stance",
@@ -5147,7 +5221,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_catcher_stance"
     },
     {
       "short": "leaderboard_basestealing_run_value",
@@ -5176,7 +5251,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_basestealing_run_value"
     },
     {
       "short": "leaderboard_baserunning_run_value",
@@ -5205,7 +5281,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_baserunning_run_value"
     },
     {
       "short": "leaderboard_baserunning",
@@ -5234,7 +5311,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_baserunning"
     },
     {
       "short": "leaderboard_year_to_year",
@@ -5263,7 +5341,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_year_to_year"
     },
     {
       "short": "leaderboard_timer_infractions",
@@ -5292,7 +5371,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_timer_infractions"
     },
     {
       "short": "leaderboard_custom",
@@ -5337,7 +5417,8 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard"
+      "parser": "parse_mlb_statcast_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_custom"
     },
     {
       "short": "leaderboard_fielding_run_value",
@@ -5361,7 +5442,8 @@
           "queryKey": "team"
         }
       ],
-      "parser": "parse_mlb_statcast_html_leaderboard"
+      "parser": "parse_mlb_statcast_html_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_fielding_run_value"
     },
     {
       "short": "leaderboard_park_factors",
@@ -5385,7 +5467,8 @@
           "queryKey": "team"
         }
       ],
-      "parser": "parse_mlb_statcast_html_leaderboard"
+      "parser": "parse_mlb_statcast_html_leaderboard",
+      "returnsSchema": "native/mlb_statcast/leaderboard_park_factors"
     },
     {
       "short": "gamefeed",
@@ -5405,7 +5488,8 @@
           "queryKey": "at_bat_number"
         }
       ],
-      "parser": "parse_mlb_statcast_gamefeed"
+      "parser": "parse_mlb_statcast_gamefeed",
+      "returnsSchema": "native/mlb_statcast/gamefeed"
     },
     {
       "short": "schedule",
@@ -5421,7 +5505,8 @@
           "queryKey": "date"
         }
       ],
-      "parser": "parse_mlb_statcast_schedule"
+      "parser": "parse_mlb_statcast_schedule",
+      "returnsSchema": "native/mlb_statcast/schedule"
     },
     {
       "short": "pbp",
@@ -5436,7 +5521,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_pbp"
+      "parser": "parse_nhl_web_pbp",
+      "returnsSchema": "native/nhl_api_web/pbp"
     },
     {
       "short": "boxscore",
@@ -5451,7 +5537,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_boxscore"
+      "parser": "parse_nhl_web_boxscore",
+      "returnsSchema": "native/nhl_api_web/boxscore"
     },
     {
       "short": "landing",
@@ -5466,7 +5553,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_landing"
+      "parser": "parse_nhl_web_landing",
+      "returnsSchema": "native/nhl_api_web/landing"
     },
     {
       "short": "right_rail",
@@ -5497,7 +5585,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_schedule"
+      "parser": "parse_nhl_web_schedule",
+      "returnsSchema": "native/nhl_api_web/schedule"
     },
     {
       "short": "score",
@@ -5513,7 +5602,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_score"
+      "parser": "parse_nhl_web_score",
+      "returnsSchema": "native/nhl_api_web/score"
     },
     {
       "short": "schedule_calendar",
@@ -5547,7 +5637,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_playoff_series"
+      "parser": "parse_nhl_web_playoff_series",
+      "returnsSchema": "native/nhl_api_web/playoff_series"
     },
     {
       "short": "standings",
@@ -5563,7 +5654,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_standings"
+      "parser": "parse_nhl_web_standings",
+      "returnsSchema": "native/nhl_api_web/standings"
     },
     {
       "short": "standings_season",
@@ -5574,7 +5666,8 @@
       "path": "/v1/standings-season",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_web_standings_season"
+      "parser": "parse_nhl_web_standings_season",
+      "returnsSchema": "native/nhl_api_web/standings_season"
     },
     {
       "short": "club_schedule_season",
@@ -5593,7 +5686,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_club_schedule"
+      "parser": "parse_nhl_web_club_schedule",
+      "returnsSchema": "native/nhl_api_web/club_schedule_season"
     },
     {
       "short": "club_schedule_month",
@@ -5689,7 +5783,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_roster"
+      "parser": "parse_nhl_web_roster",
+      "returnsSchema": "native/nhl_api_web/roster"
     },
     {
       "short": "roster_season",
@@ -5719,7 +5814,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_player_landing"
+      "parser": "parse_nhl_web_player_landing",
+      "returnsSchema": "native/nhl_api_web/player_landing"
     },
     {
       "short": "player_game_log",
@@ -5743,7 +5839,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_player_game_log"
+      "parser": "parse_nhl_web_player_game_log",
+      "returnsSchema": "native/nhl_api_web/player_game_log"
     },
     {
       "short": "player_spotlight",
@@ -5754,7 +5851,8 @@
       "path": "/v1/player-spotlight",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_web_player_spotlight"
+      "parser": "parse_nhl_web_player_spotlight",
+      "returnsSchema": "native/nhl_api_web/player_spotlight"
     },
     {
       "short": "skater_leaders",
@@ -5775,7 +5873,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_leaders"
+      "parser": "parse_nhl_web_leaders",
+      "returnsSchema": "native/nhl_api_web/skater_leaders"
     },
     {
       "short": "goalie_leaders",
@@ -5796,7 +5895,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_leaders"
+      "parser": "parse_nhl_web_leaders",
+      "returnsSchema": "native/nhl_api_web/goalie_leaders"
     },
     {
       "short": "draft_picks",
@@ -5816,7 +5916,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_draft_picks"
+      "parser": "parse_nhl_web_draft_picks",
+      "returnsSchema": "native/nhl_api_web/draft_picks"
     },
     {
       "short": "draft_rankings",
@@ -5836,7 +5937,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_web_draft_rankings"
+      "parser": "parse_nhl_web_draft_rankings",
+      "returnsSchema": "native/nhl_api_web/draft_rankings"
     },
     {
       "short": "draft_picks_now",
@@ -5858,7 +5960,8 @@
       "path": "/v1/draft/rankings/now",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_web_draft_rankings"
+      "parser": "parse_nhl_web_draft_rankings",
+      "returnsSchema": "native/nhl_api_web/draft_rankings_now"
     },
     {
       "short": "draft_tracker_picks_now",
@@ -5893,7 +5996,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_detail"
+      "parser": "parse_edge_detail",
+      "returnsSchema": "native/nhl_edge/skater_detail"
     },
     {
       "short": "skater_comparison",
@@ -5995,7 +6099,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_detail"
+      "parser": "parse_edge_detail",
+      "returnsSchema": "native/nhl_edge/skater_shot_speed_detail"
     },
     {
       "short": "skater_shot_speed_top_10",
@@ -6151,7 +6256,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_zone_time"
+      "parser": "parse_edge_zone_time",
+      "returnsSchema": "native/nhl_edge/skater_zone_time"
     },
     {
       "short": "skater_zone_time_top_10",
@@ -6226,7 +6332,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_detail"
+      "parser": "parse_edge_detail",
+      "returnsSchema": "native/nhl_edge/goalie_detail"
     },
     {
       "short": "goalie_5v5_detail",
@@ -6370,7 +6477,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_shot_location"
+      "parser": "parse_edge_shot_location",
+      "returnsSchema": "native/nhl_edge/goalie_shot_location_detail"
     },
     {
       "short": "goalie_shot_location_top_10",
@@ -6442,7 +6550,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_detail"
+      "parser": "parse_edge_detail",
+      "returnsSchema": "native/nhl_edge/team_detail"
     },
     {
       "short": "team_landing",
@@ -6487,7 +6596,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_edge_shot_location"
+      "parser": "parse_edge_shot_location",
+      "returnsSchema": "native/nhl_edge/team_shot_location_detail"
     },
     {
       "short": "team_shot_location_top_10",
@@ -6821,7 +6931,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/country"
     },
     {
       "short": "draft",
@@ -6855,7 +6966,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/franchise"
     },
     {
       "short": "game",
@@ -6889,7 +7001,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/glossary"
     },
     {
       "short": "goalie_report",
@@ -6909,7 +7022,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/goalie_report"
     },
     {
       "short": "leaders_goalies",
@@ -7017,7 +7131,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/season"
     },
     {
       "short": "shiftcharts",
@@ -7054,7 +7169,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/skater_report"
     },
     {
       "short": "team",
@@ -7111,7 +7227,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_stats_rest"
+      "parser": "parse_nhl_stats_rest",
+      "returnsSchema": "native/nhl_stats_rest/team_report"
     },
     {
       "short": "awards",
@@ -7166,7 +7283,8 @@
       "path": "/coach",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_records"
+      "parser": "parse_nhl_records",
+      "returnsSchema": "native/nhl_records/coaches"
     },
     {
       "short": "coach",
@@ -7246,7 +7364,8 @@
       "path": "/franchise",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_records"
+      "parser": "parse_nhl_records",
+      "returnsSchema": "native/nhl_records/franchises"
     },
     {
       "short": "franchise_detail",
@@ -7268,7 +7387,8 @@
       "path": "/franchise-team-totals",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_records"
+      "parser": "parse_nhl_records",
+      "returnsSchema": "native/nhl_records/franchise_team_totals"
     },
     {
       "short": "franchise_season_results",
@@ -7449,7 +7569,8 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_nhl_records"
+      "parser": "parse_nhl_records",
+      "returnsSchema": "native/nhl_records/draft"
     },
     {
       "short": "draft_by_team",
@@ -7568,7 +7689,8 @@
       "path": "/attendance",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_nhl_records"
+      "parser": "parse_nhl_records",
+      "returnsSchema": "native/nhl_records/attendance"
     },
     {
       "short": "hof_players",

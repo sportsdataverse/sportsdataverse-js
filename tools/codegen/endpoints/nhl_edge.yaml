@@ -22,6 +22,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_detail
+  returns_schema: native/nhl_edge/skater_detail
 - short: skater_comparison
   path: /v1/edge/skater-comparison/{player_id}/{season}/{game_type}
   path_params:
@@ -84,6 +85,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_detail
+  returns_schema: native/nhl_edge/skater_shot_speed_detail
 - short: skater_shot_speed_top_10
   path: /v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/{season}/{game_type}
   path_params:
@@ -180,6 +182,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_zone_time
+  returns_schema: native/nhl_edge/skater_zone_time
 - short: skater_zone_time_top_10
   path: /v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}
   path_params:
@@ -225,6 +228,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_detail
+  returns_schema: native/nhl_edge/goalie_detail
 - short: goalie_5v5_detail
   path: /v1/edge/goalie-5v5-detail/{player_id}/{season}/{game_type}
   path_params:
@@ -309,6 +313,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_shot_location
+  returns_schema: native/nhl_edge/goalie_shot_location_detail
 - short: goalie_shot_location_top_10
   path: /v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/{season}/{game_type}
   path_params:
@@ -351,6 +356,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_detail
+  returns_schema: native/nhl_edge/team_detail
 - short: team_landing
   path: /v1/edge/team-landing/{season}/{game_type}
   path_params:
@@ -376,6 +382,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_edge_shot_location
+  returns_schema: native/nhl_edge/team_shot_location_detail
 - short: team_shot_location_top_10
   path: /v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}
   path_params:

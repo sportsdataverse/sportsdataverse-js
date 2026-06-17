@@ -30,6 +30,7 @@ endpoints:
 - short: coaches
   path: /coach
   parser: parse_nhl_records
+  returns_schema: native/nhl_records/coaches
 - short: coach
   path: /coach/{coach_id}
   path_params:
@@ -60,12 +61,14 @@ endpoints:
 - short: franchises
   path: /franchise
   parser: parse_nhl_records
+  returns_schema: native/nhl_records/franchises
 - short: franchise_detail
   path: /franchise-detail
   parser: parse_nhl_records
 - short: franchise_team_totals
   path: /franchise-team-totals
   parser: parse_nhl_records
+  returns_schema: native/nhl_records/franchise_team_totals
 - short: franchise_season_results
   path: /franchise-season-results
   parser: parse_nhl_records
@@ -118,6 +121,7 @@ endpoints:
     type: int
     required: false
   parser: parse_nhl_records
+  returns_schema: native/nhl_records/draft
 - short: draft_by_team
   path: /draft/byTeam/{team_id}
   path_params:
@@ -156,6 +160,7 @@ endpoints:
 - short: attendance
   path: /attendance
   parser: parse_nhl_records
+  returns_schema: native/nhl_records/attendance
 - short: hof_players
   path: /hof/players
   parser: parse_nhl_records

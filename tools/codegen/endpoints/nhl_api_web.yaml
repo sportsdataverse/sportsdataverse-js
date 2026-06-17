@@ -16,6 +16,7 @@ endpoints:
     type: int
     required: true
   parser: parse_nhl_web_pbp
+  returns_schema: native/nhl_api_web/pbp
 - short: boxscore
   path: /v1/gamecenter/{game_id}/boxscore
   path_params:
@@ -23,6 +24,7 @@ endpoints:
     type: int
     required: true
   parser: parse_nhl_web_boxscore
+  returns_schema: native/nhl_api_web/boxscore
 - short: landing
   path: /v1/gamecenter/{game_id}/landing
   path_params:
@@ -30,6 +32,7 @@ endpoints:
     type: int
     required: true
   parser: parse_nhl_web_landing
+  returns_schema: native/nhl_api_web/landing
 - short: right_rail
   path: /v1/gamecenter/{game_id}/right-rail
   path_params:
@@ -44,6 +47,7 @@ endpoints:
     type: str
     required: false
   parser: parse_nhl_web_schedule
+  returns_schema: native/nhl_api_web/schedule
 - short: score
   path: /v1/score/{date}
   path_params:
@@ -51,6 +55,7 @@ endpoints:
     type: str
     required: false
   parser: parse_nhl_web_score
+  returns_schema: native/nhl_api_web/score
 - short: schedule_calendar
   path: /v1/schedule-calendar/{date}
   path_params:
@@ -68,6 +73,7 @@ endpoints:
     type: str
     required: true
   parser: parse_nhl_web_playoff_series
+  returns_schema: native/nhl_api_web/playoff_series
 - short: standings
   path: /v1/standings/{date}
   path_params:
@@ -75,9 +81,11 @@ endpoints:
     type: str
     required: false
   parser: parse_nhl_web_standings
+  returns_schema: native/nhl_api_web/standings
 - short: standings_season
   path: /v1/standings-season
   parser: parse_nhl_web_standings_season
+  returns_schema: native/nhl_api_web/standings_season
 - short: club_schedule_season
   path: /v1/club-schedule-season/{team}/{season}
   path_params:
@@ -88,6 +96,7 @@ endpoints:
     type: int|str
     required: false
   parser: parse_nhl_web_club_schedule
+  returns_schema: native/nhl_api_web/club_schedule_season
 - short: club_schedule_month
   path: /v1/club-schedule/{team}/month/{month}
   path_params:
@@ -139,6 +148,7 @@ endpoints:
     type: int|str
     required: false
   parser: parse_nhl_web_roster
+  returns_schema: native/nhl_api_web/roster
 - short: roster_season
   path: /v1/roster-season/{team}
   path_params:
@@ -153,6 +163,7 @@ endpoints:
     type: int
     required: true
   parser: parse_nhl_web_player_landing
+  returns_schema: native/nhl_api_web/player_landing
 - short: player_game_log
   path: /v1/player/{player_id}/game-log/{season}/{game_type}
   path_params:
@@ -167,9 +178,11 @@ endpoints:
     required: false
     default: 2
   parser: parse_nhl_web_player_game_log
+  returns_schema: native/nhl_api_web/player_game_log
 - short: player_spotlight
   path: /v1/player-spotlight
   parser: parse_nhl_web_player_spotlight
+  returns_schema: native/nhl_api_web/player_spotlight
 - short: skater_leaders
   path: /v1/skater-stats-leaders/{season}/{game_type}
   path_params:
@@ -181,6 +194,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_nhl_web_leaders
+  returns_schema: native/nhl_api_web/skater_leaders
 - short: goalie_leaders
   path: /v1/goalie-stats-leaders/{season}/{game_type}
   path_params:
@@ -192,6 +206,7 @@ endpoints:
     required: false
     default: 2
   parser: parse_nhl_web_leaders
+  returns_schema: native/nhl_api_web/goalie_leaders
 - short: draft_picks
   path: /v1/draft/picks/{year}/{round_}
   path_params:
@@ -203,6 +218,7 @@ endpoints:
     required: false
     default: all
   parser: parse_nhl_web_draft_picks
+  returns_schema: native/nhl_api_web/draft_picks
 - short: draft_rankings
   path: /v1/draft/rankings/{year}/{category}
   path_params:
@@ -214,12 +230,14 @@ endpoints:
     required: false
     default: 1
   parser: parse_nhl_web_draft_rankings
+  returns_schema: native/nhl_api_web/draft_rankings
 - short: draft_picks_now
   path: /v1/draft/picks/now
   parser: parse_nhl_web_draft_picks
 - short: draft_rankings_now
   path: /v1/draft/rankings/now
   parser: parse_nhl_web_draft_rankings
+  returns_schema: native/nhl_api_web/draft_rankings_now
 - short: draft_tracker_picks_now
   path: /v1/draft-tracker/picks/now
   parser: parse_nhl_web_draft_picks

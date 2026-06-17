@@ -69,6 +69,13 @@ export interface WrapperDef {
   /** Registered parser name (resolved via `src/parsers/_registry.ts`). */
   parser?: string;
   /**
+   * Returns-schema path (docs-only metadata) for a flat-API wrapper, relative
+   * to `tools/codegen/schemas/` and without the `.yaml` suffix
+   * (e.g. `"native/mlb_api/boxscore"`). Drives the per-endpoint **Returns**
+   * tables in the generated reference docs; unused at runtime.
+   */
+  returnsSchema?: string;
+  /**
    * True for flat-API families that need a bearer token (e.g. `nfl_api`). The
    * dispatch (`src/leagues/_make_flat.ts`) resolves auth headers via the
    * `AUTH_HEADER_PROVIDERS` map for that `api` stem before fetching. Non-auth

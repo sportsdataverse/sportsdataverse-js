@@ -1849,7 +1849,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_schedule"
+    "parser": "parse_mlb_api_schedule",
+    "returnsSchema": "native/mlb_api/schedule_postseason"
   },
   {
     "short": "pbp",
@@ -1905,7 +1906,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_boxscore"
+    "parser": "parse_mlb_api_boxscore",
+    "returnsSchema": "native/mlb_api/boxscore"
   },
   {
     "short": "linescore",
@@ -1929,7 +1931,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_linescore"
+    "parser": "parse_mlb_api_linescore",
+    "returnsSchema": "native/mlb_api/linescore"
   },
   {
     "short": "play_by_play",
@@ -1953,7 +1956,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_play_by_play"
+    "parser": "parse_mlb_api_play_by_play",
+    "returnsSchema": "native/mlb_api/play_by_play"
   },
   {
     "short": "game_context_metrics",
@@ -1993,7 +1997,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_win_probability"
+    "parser": "parse_mlb_api_win_probability",
+    "returnsSchema": "native/mlb_api/win_probability"
   },
   {
     "short": "game_content",
@@ -2041,7 +2046,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/team"
   },
   {
     "short": "team_roster",
@@ -2078,7 +2084,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_team_roster"
+    "parser": "parse_mlb_api_team_roster",
+    "returnsSchema": "native/mlb_api/team_roster"
   },
   {
     "short": "team_alumni",
@@ -2107,7 +2114,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/team_alumni"
   },
   {
     "short": "team_affiliates",
@@ -2136,7 +2144,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/team_affiliates"
   },
   {
     "short": "people",
@@ -2241,7 +2250,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/sport_players"
   },
   {
     "short": "sports",
@@ -2257,7 +2267,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportId"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/sports"
   },
   {
     "short": "leagues",
@@ -2282,7 +2293,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "leagueIds"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/leagues"
   },
   {
     "short": "season",
@@ -2303,7 +2315,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 1
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/season"
   },
   {
     "short": "venues",
@@ -2327,7 +2340,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/venues"
   },
   {
     "short": "venue",
@@ -2351,7 +2365,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/venue"
   },
   {
     "short": "meta",
@@ -2382,7 +2397,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportId"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/awards"
   },
   {
     "short": "award_recipients",
@@ -2411,7 +2427,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/award_recipients"
   },
   {
     "short": "draft",
@@ -2455,7 +2472,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/api/v1/jobs/umpires",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/umpires"
   },
   {
     "short": "conferences",
@@ -2479,7 +2497,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/conferences"
   },
   {
     "short": "conference",
@@ -2503,7 +2522,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/conference"
   },
   {
     "short": "draft_latest",
@@ -2518,7 +2538,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_draft_latest"
+    "parser": "parse_mlb_api_draft_latest",
+    "returnsSchema": "native/mlb_api/draft_latest"
   },
   {
     "short": "game_timestamps",
@@ -2533,7 +2554,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_timecodes"
+    "parser": "parse_mlb_api_timecodes",
+    "returnsSchema": "native/mlb_api/game_timestamps"
   },
   {
     "short": "game_changes",
@@ -2557,7 +2579,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule"
+    "parser": "parse_mlb_api_schedule",
+    "returnsSchema": "native/mlb_api/game_changes"
   },
   {
     "short": "analytics_games",
@@ -2858,7 +2881,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/game_pace"
   },
   {
     "short": "high_low",
@@ -2910,7 +2934,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/high_low"
   },
   {
     "short": "home_run_derby",
@@ -2930,7 +2955,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/home_run_derby"
   },
   {
     "short": "home_run_derby_bracket",
@@ -2950,7 +2976,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/home_run_derby_bracket"
   },
   {
     "short": "home_run_derby_pool",
@@ -2970,7 +2997,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/home_run_derby_pool"
   },
   {
     "short": "all_star_ballot",
@@ -2994,7 +3022,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/all_star_ballot"
   },
   {
     "short": "all_star_write_ins",
@@ -3018,7 +3047,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/all_star_write_ins"
   },
   {
     "short": "all_star_final_vote",
@@ -3042,7 +3072,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/all_star_final_vote"
   },
   {
     "short": "free_agents",
@@ -3070,7 +3101,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/free_agents"
   },
   {
     "short": "jobs",
@@ -3098,7 +3130,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/jobs"
   },
   {
     "short": "datacasters",
@@ -3126,7 +3159,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/datacasters"
   },
   {
     "short": "official_scorers",
@@ -3154,7 +3188,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/official_scorers"
   },
   {
     "short": "umpire_games",
@@ -3210,7 +3245,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule"
+    "parser": "parse_mlb_api_schedule",
+    "returnsSchema": "native/mlb_api/schedule_tied"
   },
   {
     "short": "schedule_postseason_series",
@@ -3246,7 +3282,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/schedule_postseason_series"
   },
   {
     "short": "schedule_postseason_tunein",
@@ -3278,7 +3315,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule"
+    "parser": "parse_mlb_api_schedule",
+    "returnsSchema": "native/mlb_api/schedule_postseason_tunein"
   },
   {
     "short": "seasons_all",
@@ -3310,7 +3348,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/seasons_all"
   },
   {
     "short": "sport",
@@ -3330,7 +3369,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/sport"
   },
   {
     "short": "stats_metrics",
@@ -3430,7 +3470,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/teams_history"
   },
   {
     "short": "teams_stats",
@@ -3474,7 +3515,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_person_stats"
+    "parser": "parse_mlb_api_person_stats",
+    "returnsSchema": "native/mlb_api/teams_stats"
   },
   {
     "short": "teams_stats_leaders",
@@ -3534,7 +3576,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/teams_stats_leaders"
   },
   {
     "short": "team_coaches",
@@ -3562,7 +3605,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/team_coaches"
   },
   {
     "short": "team_personnel",
@@ -3586,7 +3630,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_api_list",
+    "returnsSchema": "native/mlb_api/team_personnel"
   },
   {
     "short": "team_roster_type",
@@ -3621,7 +3666,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_team_roster"
+    "parser": "parse_mlb_api_team_roster",
+    "returnsSchema": "native/mlb_api/team_roster_type"
   },
   {
     "short": "standings",
@@ -4069,7 +4115,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_expected_stats"
   },
   {
     "short": "leaderboard_percentile_rankings",
@@ -4098,7 +4145,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_percentile_rankings"
   },
   {
     "short": "leaderboard_sprint_speed",
@@ -4127,7 +4175,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_sprint_speed"
   },
   {
     "short": "leaderboard_running_splits",
@@ -4156,7 +4205,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_running_splits"
   },
   {
     "short": "leaderboard_bat_tracking",
@@ -4185,7 +4235,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_bat_tracking"
   },
   {
     "short": "leaderboard_swing_path",
@@ -4214,7 +4265,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_swing_path"
   },
   {
     "short": "leaderboard_swing_timing",
@@ -4243,7 +4295,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_swing_timing"
   },
   {
     "short": "leaderboard_swing_take",
@@ -4272,7 +4325,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_swing_take"
   },
   {
     "short": "leaderboard_exit_velocity_barrels",
@@ -4301,7 +4355,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_exit_velocity_barrels"
   },
   {
     "short": "leaderboard_batted_ball",
@@ -4330,7 +4385,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_batted_ball"
   },
   {
     "short": "leaderboard_home_runs",
@@ -4359,7 +4415,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_home_runs"
   },
   {
     "short": "leaderboard_pitch_arsenals",
@@ -4388,7 +4445,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_pitch_arsenals"
   },
   {
     "short": "leaderboard_pitch_arsenal_stats",
@@ -4417,7 +4475,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_pitch_arsenal_stats"
   },
   {
     "short": "leaderboard_pitch_movement",
@@ -4446,7 +4505,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_pitch_movement"
   },
   {
     "short": "leaderboard_pitch_tempo",
@@ -4475,7 +4535,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_pitch_tempo"
   },
   {
     "short": "leaderboard_active_spin",
@@ -4504,7 +4565,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_active_spin"
   },
   {
     "short": "leaderboard_spin_direction",
@@ -4533,7 +4595,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_spin_direction"
   },
   {
     "short": "leaderboard_arm_angles",
@@ -4562,7 +4625,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_arm_angles"
   },
   {
     "short": "leaderboard_pitcher_running_game",
@@ -4591,7 +4655,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_pitcher_running_game"
   },
   {
     "short": "leaderboard_outs_above_average",
@@ -4620,7 +4685,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_outs_above_average"
   },
   {
     "short": "leaderboard_outfield_directional_oaa",
@@ -4649,7 +4715,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_outfield_directional_oaa"
   },
   {
     "short": "leaderboard_outfield_jump",
@@ -4678,7 +4745,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_outfield_jump"
   },
   {
     "short": "leaderboard_catch_probability",
@@ -4707,7 +4775,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_catch_probability"
   },
   {
     "short": "leaderboard_arm_strength",
@@ -4736,7 +4805,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_arm_strength"
   },
   {
     "short": "leaderboard_poptime",
@@ -4765,7 +4835,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_poptime"
   },
   {
     "short": "leaderboard_catcher_framing",
@@ -4794,7 +4865,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_catcher_framing"
   },
   {
     "short": "leaderboard_catcher_blocking",
@@ -4823,7 +4895,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_catcher_blocking"
   },
   {
     "short": "leaderboard_catcher_throwing",
@@ -4852,7 +4925,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_catcher_throwing"
   },
   {
     "short": "leaderboard_catcher_stance",
@@ -4881,7 +4955,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_catcher_stance"
   },
   {
     "short": "leaderboard_basestealing_run_value",
@@ -4910,7 +4985,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_basestealing_run_value"
   },
   {
     "short": "leaderboard_baserunning_run_value",
@@ -4939,7 +5015,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_baserunning_run_value"
   },
   {
     "short": "leaderboard_baserunning",
@@ -4968,7 +5045,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_baserunning"
   },
   {
     "short": "leaderboard_year_to_year",
@@ -4997,7 +5075,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_year_to_year"
   },
   {
     "short": "leaderboard_timer_infractions",
@@ -5026,7 +5105,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_timer_infractions"
   },
   {
     "short": "leaderboard_custom",
@@ -5071,7 +5151,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "true"
       }
     ],
-    "parser": "parse_mlb_statcast_leaderboard"
+    "parser": "parse_mlb_statcast_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_custom"
   },
   {
     "short": "leaderboard_fielding_run_value",
@@ -5095,7 +5176,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "team"
       }
     ],
-    "parser": "parse_mlb_statcast_html_leaderboard"
+    "parser": "parse_mlb_statcast_html_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_fielding_run_value"
   },
   {
     "short": "leaderboard_park_factors",
@@ -5119,7 +5201,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "team"
       }
     ],
-    "parser": "parse_mlb_statcast_html_leaderboard"
+    "parser": "parse_mlb_statcast_html_leaderboard",
+    "returnsSchema": "native/mlb_statcast/leaderboard_park_factors"
   },
   {
     "short": "gamefeed",
@@ -5139,7 +5222,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "at_bat_number"
       }
     ],
-    "parser": "parse_mlb_statcast_gamefeed"
+    "parser": "parse_mlb_statcast_gamefeed",
+    "returnsSchema": "native/mlb_statcast/gamefeed"
   },
   {
     "short": "schedule",
@@ -5155,7 +5239,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "date"
       }
     ],
-    "parser": "parse_mlb_statcast_schedule"
+    "parser": "parse_mlb_statcast_schedule",
+    "returnsSchema": "native/mlb_statcast/schedule"
   },
   {
     "short": "pbp",
@@ -5170,7 +5255,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_pbp"
+    "parser": "parse_nhl_web_pbp",
+    "returnsSchema": "native/nhl_api_web/pbp"
   },
   {
     "short": "boxscore",
@@ -5185,7 +5271,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_boxscore"
+    "parser": "parse_nhl_web_boxscore",
+    "returnsSchema": "native/nhl_api_web/boxscore"
   },
   {
     "short": "landing",
@@ -5200,7 +5287,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_landing"
+    "parser": "parse_nhl_web_landing",
+    "returnsSchema": "native/nhl_api_web/landing"
   },
   {
     "short": "right_rail",
@@ -5231,7 +5319,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_schedule"
+    "parser": "parse_nhl_web_schedule",
+    "returnsSchema": "native/nhl_api_web/schedule"
   },
   {
     "short": "score",
@@ -5247,7 +5336,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_score"
+    "parser": "parse_nhl_web_score",
+    "returnsSchema": "native/nhl_api_web/score"
   },
   {
     "short": "schedule_calendar",
@@ -5281,7 +5371,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_playoff_series"
+    "parser": "parse_nhl_web_playoff_series",
+    "returnsSchema": "native/nhl_api_web/playoff_series"
   },
   {
     "short": "standings",
@@ -5297,7 +5388,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_standings"
+    "parser": "parse_nhl_web_standings",
+    "returnsSchema": "native/nhl_api_web/standings"
   },
   {
     "short": "standings_season",
@@ -5308,7 +5400,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/v1/standings-season",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_web_standings_season"
+    "parser": "parse_nhl_web_standings_season",
+    "returnsSchema": "native/nhl_api_web/standings_season"
   },
   {
     "short": "club_schedule_season",
@@ -5327,7 +5420,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_club_schedule"
+    "parser": "parse_nhl_web_club_schedule",
+    "returnsSchema": "native/nhl_api_web/club_schedule_season"
   },
   {
     "short": "club_schedule_month",
@@ -5423,7 +5517,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_roster"
+    "parser": "parse_nhl_web_roster",
+    "returnsSchema": "native/nhl_api_web/roster"
   },
   {
     "short": "roster_season",
@@ -5453,7 +5548,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_player_landing"
+    "parser": "parse_nhl_web_player_landing",
+    "returnsSchema": "native/nhl_api_web/player_landing"
   },
   {
     "short": "player_game_log",
@@ -5477,7 +5573,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_player_game_log"
+    "parser": "parse_nhl_web_player_game_log",
+    "returnsSchema": "native/nhl_api_web/player_game_log"
   },
   {
     "short": "player_spotlight",
@@ -5488,7 +5585,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/v1/player-spotlight",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_web_player_spotlight"
+    "parser": "parse_nhl_web_player_spotlight",
+    "returnsSchema": "native/nhl_api_web/player_spotlight"
   },
   {
     "short": "skater_leaders",
@@ -5509,7 +5607,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_leaders"
+    "parser": "parse_nhl_web_leaders",
+    "returnsSchema": "native/nhl_api_web/skater_leaders"
   },
   {
     "short": "goalie_leaders",
@@ -5530,7 +5629,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_leaders"
+    "parser": "parse_nhl_web_leaders",
+    "returnsSchema": "native/nhl_api_web/goalie_leaders"
   },
   {
     "short": "draft_picks",
@@ -5550,7 +5650,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_draft_picks"
+    "parser": "parse_nhl_web_draft_picks",
+    "returnsSchema": "native/nhl_api_web/draft_picks"
   },
   {
     "short": "draft_rankings",
@@ -5570,7 +5671,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_draft_rankings"
+    "parser": "parse_nhl_web_draft_rankings",
+    "returnsSchema": "native/nhl_api_web/draft_rankings"
   },
   {
     "short": "draft_picks_now",
@@ -5592,7 +5694,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/v1/draft/rankings/now",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_web_draft_rankings"
+    "parser": "parse_nhl_web_draft_rankings",
+    "returnsSchema": "native/nhl_api_web/draft_rankings_now"
   },
   {
     "short": "draft_tracker_picks_now",
@@ -5627,7 +5730,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/skater_detail"
   },
   {
     "short": "skater_comparison",
@@ -5729,7 +5833,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/skater_shot_speed_detail"
   },
   {
     "short": "skater_shot_speed_top_10",
@@ -5885,7 +5990,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_zone_time"
+    "parser": "parse_edge_zone_time",
+    "returnsSchema": "native/nhl_edge/skater_zone_time"
   },
   {
     "short": "skater_zone_time_top_10",
@@ -5960,7 +6066,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/goalie_detail"
   },
   {
     "short": "goalie_5v5_detail",
@@ -6104,7 +6211,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_shot_location"
+    "parser": "parse_edge_shot_location",
+    "returnsSchema": "native/nhl_edge/goalie_shot_location_detail"
   },
   {
     "short": "goalie_shot_location_top_10",
@@ -6176,7 +6284,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/team_detail"
   },
   {
     "short": "team_landing",
@@ -6221,7 +6330,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_shot_location"
+    "parser": "parse_edge_shot_location",
+    "returnsSchema": "native/nhl_edge/team_shot_location_detail"
   },
   {
     "short": "team_shot_location_top_10",
@@ -6555,7 +6665,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/country"
   },
   {
     "short": "draft",
@@ -6589,7 +6700,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/franchise"
   },
   {
     "short": "game",
@@ -6623,7 +6735,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/glossary"
   },
   {
     "short": "goalie_report",
@@ -6643,7 +6756,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/goalie_report"
   },
   {
     "short": "leaders_goalies",
@@ -6751,7 +6865,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/season"
   },
   {
     "short": "shiftcharts",
@@ -6788,7 +6903,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/skater_report"
   },
   {
     "short": "team",
@@ -6845,7 +6961,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/team_report"
   },
   {
     "short": "awards",
@@ -6900,7 +7017,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/coach",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/coaches"
   },
   {
     "short": "coach",
@@ -6980,7 +7098,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/franchise",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/franchises"
   },
   {
     "short": "franchise_detail",
@@ -7002,7 +7121,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/franchise-team-totals",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/franchise_team_totals"
   },
   {
     "short": "franchise_season_results",
@@ -7183,7 +7303,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/draft"
   },
   {
     "short": "draft_by_team",
@@ -7302,7 +7423,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/attendance",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/attendance"
   },
   {
     "short": "hof_players",

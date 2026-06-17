@@ -14,6 +14,7 @@ import { parse } from "yaml";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
+const schemasDir = join(here, "schemas");
 const repoRoot = join(here, "..", "..");
 const generatedDir = join(repoRoot, "src", "generated");
 const referenceDir = join(repoRoot, "docs", "docs", "reference");
@@ -141,6 +142,7 @@ function loadFlatWrappers() {
         pathParams: mapPathParams(ep),
         queryParams: mapQueryParams(ep),
         ...(ep.parser ? { parser: ep.parser } : {}),
+        ...(ep.returns_schema ? { returnsSchema: ep.returns_schema } : {}),
         ...(auth ? { auth: true } : {}),
       });
     }
@@ -256,6 +258,63 @@ function flatParserCell(wrapper) {
   return wrapper.parser ? `\`${wrapper.parser}\`` : "*(raw)*";
 }
 
+// In-process cache so each `returns_schema` YAML is read + parsed at most once.
+const _schemaCache = new Map();
+
+/**
+ * Load a returns-schema's `columns` for a `returns_schema` value (e.g.
+ * `native/mlb_api/boxscore` or `autodoc/mlb/mlb_statcast_search`), resolved
+ * under tools/codegen/schemas/. Returns the column list (`[{name, type,
+ * description}]`) or `null` when the file is missing / has no columns. The
+ * parsed result is cached so repeated lookups across pages are cheap.
+ */
+function loadReturnsColumns(returnsSchema) {
+  if (!returnsSchema) return null;
+  if (_schemaCache.has(returnsSchema)) return _schemaCache.get(returnsSchema);
+  const file = join(schemasDir, `${returnsSchema}.yaml`);
+  let columns = null;
+  if (existsSync(file)) {
+    const doc = parse(readFileSync(file, "utf8"));
+    if (Array.isArray(doc?.columns) && doc.columns.length) columns = doc.columns;
+  }
+  _schemaCache.set(returnsSchema, columns);
+  return columns;
+}
+
+/** Escape `|` (and stray backticks-balance is left as-is) for a markdown table cell. */
+function escapeCell(text) {
+  return String(text ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim();
+}
+
+/**
+ * Render a `### Returns — <label>` subsection: a `col_name | type | description`
+ * table built from a returns-schema's columns. `label` is the wrapper's
+ * display name (already backtick-wrapped by the caller). Returns "" when the
+ * schema resolves to no columns (caller then skips emitting anything).
+ */
+function renderReturnsTable(label, columns) {
+  if (!columns || !columns.length) return "";
+  let out = `\n### Returns — ${label}\n\n`;
+  out += `| col_name | type | description |\n`;
+  out += `|---|---|---|\n`;
+  for (const c of columns) {
+    const desc = c.description ? escapeCell(c.description) : "";
+    out += `| \`${escapeCell(c.name)}\` | ${escapeCell(c.type)} | ${desc} |\n`;
+  }
+  return out;
+}
+
+// Hand-written Baseball Savant / Statcast wrappers (src/leagues/
+// mlb_statcast_extra.ts) — not in any endpoint YAML, so they never reach
+// FLAT_WRAPPERS / the native table. We still document their returns frames from
+// the committed autodoc schemas. Keyed: dual-case display name -> autodoc schema.
+const STATCAST_HANDWRITTEN = [
+  { snake: "mlb_statcast_search", schema: "autodoc/mlb/mlb_statcast_search" },
+  { snake: "mlb_statcast_search_minors", schema: "autodoc/mlb/mlb_statcast_search_minors" },
+  { snake: "mlb_statcast_search_wbc", schema: "autodoc/mlb/mlb_statcast_search_wbc" },
+  { snake: "mlb_statcast_player", schema: "autodoc/mlb/mlb_statcast_player" },
+];
+
 /**
  * Render the "Native API — <family>" reference sections for a league. Each flat
  * family that maps to this league prefix gets a clearly-headed section after the
@@ -290,12 +349,32 @@ function renderNativeSections(league, flatWrappers) {
     body += `\n\n`;
     body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
     body += `|---|---|---|---|---|---|\n`;
-    for (const w of rows.slice().sort((a, b) => a.short.localeCompare(b.short))) {
+    const sorted = rows.slice().sort((a, b) => a.short.localeCompare(b.short));
+    for (const w of sorted) {
       const camel = toCamel(`${api}_${w.short}`);
       const method = `\`${api}_${w.short}\` / \`${camel}\``;
       const http = `\`${w.host}${w.path}\``;
       const auth = w.auth ? "yes" : "—";
       body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
+    }
+    // Per-wrapper `Returns` tables (one `### Returns — <wrapper>` block per
+    // endpoint whose `returns_schema` resolves to a committed columns file).
+    // Endpoints with no schema (raw-JSON / generic-list passthroughs) emit none.
+    for (const w of sorted) {
+      const cols = loadReturnsColumns(w.returnsSchema);
+      if (!cols) continue;
+      const camel = toCamel(`${api}_${w.short}`);
+      body += renderReturnsTable(`\`${api}_${w.short}\` / \`${camel}\``, cols);
+    }
+    // The Statcast family additionally exposes hand-written search / player
+    // wrappers (not in the YAML); document their returns frames from autodoc.
+    if (api === "mlb_statcast") {
+      for (const hw of STATCAST_HANDWRITTEN) {
+        const cols = loadReturnsColumns(hw.schema);
+        if (!cols) continue;
+        const camel = toCamel(hw.snake);
+        body += renderReturnsTable(`\`${hw.snake}\` / \`${camel}\``, cols);
+      }
     }
   }
   return body;
