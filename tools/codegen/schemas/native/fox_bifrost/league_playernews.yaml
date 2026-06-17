@@ -1,7 +1,90 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# Fox Sports Bifrost returns schema — columns DERIVED from a captured live
+# response run through the registered parser (parse_fox_bifrost_*). The Fox spec
+# left this response untyped (`object`), so the columns are enumerated here from
+# a representative capture. `type` is inferred from the captured JS value;
+# `description` is best-effort from the snake_cased key. Endpoints with no
+# capture remain `columns: []`.
 schema: league_playernews
 kind: dataframe
-columns: []
+columns:
+- name: image_url
+  type: character
+  description: "Bifrost field `image_url`: image URL."
+- name: image_type
+  type: character
+  description: "Bifrost field `image_type`: image type."
+- name: image_alt_text
+  type: character
+  description: "Bifrost field `image_alt_text`: image alt text."
+- name: title
+  type: character
+  description: "Bifrost field `title`: title."
+- name: subtitle
+  type: character
+  description: "Bifrost field `subtitle`: subtitle."
+- name: headline
+  type: character
+  description: "Bifrost field `headline`: headline."
+- name: description
+  type: character
+  description: "Bifrost field `description`: description."
+- name: impact_title
+  type: character
+  description: "Bifrost field `impact_title`: impact title."
+- name: impact
+  type: character
+  description: "Bifrost field `impact`: impact."
+- name: entity_link_title
+  type: character
+  description: "Bifrost field `entity_link_title`: entity link title."
+- name: entity_link_web_url
+  type: character
+  description: "Bifrost field `entity_link_web_url`: entity link web URL."
+- name: entity_link_color
+  type: character
+  description: "Bifrost field `entity_link_color`: entity link color."
+- name: entity_link_image_url
+  type: character
+  description: "Bifrost field `entity_link_image_url`: entity link image URL."
+- name: entity_link_image_type
+  type: character
+  description: "Bifrost field `entity_link_image_type`: entity link image type."
+- name: entity_link_image_alt_text
+  type: character
+  description: "Bifrost field `entity_link_image_alt_text`: entity link image alt text."
+- name: entity_link_content_uri
+  type: character
+  description: "Bifrost field `entity_link_content_uri`: entity link content URI."
+- name: entity_link_content_type
+  type: character
+  description: "Bifrost field `entity_link_content_type`: entity link content type."
+- name: entity_link_layout_path
+  type: character
+  description: "Bifrost field `entity_link_layout_path`: entity link layout path."
+- name: entity_link_layout_tokens_id
+  type: character
+  description: "Bifrost field `entity_link_layout_tokens_id`: entity link layout tokens ID."
+- name: entity_link_layout_tokens_content_uri
+  type: character
+  description: "Bifrost field `entity_link_layout_tokens_content_uri`: entity link layout tokens content URI."
+- name: entity_link_analytics_name
+  type: character
+  description: "Bifrost field `entity_link_analytics_name`: entity link analytics name."
+- name: entity_link_analytics_sport
+  type: character
+  description: "Bifrost field `entity_link_analytics_sport`: entity link analytics sport."
+- name: entity_link_type
+  type: character
+  description: "Bifrost field `entity_link_type`: entity link type."
+- name: entity_link_alternate_image_url
+  type: character
+  description: "Bifrost field `entity_link_alternate_image_url`: entity link alternate image URL."
+- name: alternate_image_url
+  type: character
+  description: "Bifrost field `alternate_image_url`: alternate image URL."
+- name: date
+  type: character
+  description: "Bifrost field `date`: date."
+- name: source
+  type: character
+  description: "Bifrost field `source`: source."

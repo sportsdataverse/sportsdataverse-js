@@ -1,7 +1,12 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# Fox Sports Bifrost returns schema — columns DERIVED from a captured live
+# response run through the registered parser (parse_fox_bifrost_*). The Fox spec
+# left this response untyped (`object`), so the columns are enumerated here from
+# a representative capture. `type` is inferred from the captured JS value;
+# `description` is best-effort from the snake_cased key. Endpoints with no
+# capture remain `columns: []`.
 schema: explore_odds
 kind: dataframe
-columns: []
+columns:
+- name: modules
+  type: character
+  description: "Bifrost field `modules`: modules."

@@ -1,7 +1,39 @@
-# Fox Sports Bifrost — generated returns schema. Columns are derived from the
-# spec's captured `components.schemas` (the item props of the list the parser
-# flattens), snake_cased to match the parser's output. Untyped (`object`)
-# responses carry `columns: []` (the parser flattens whatever the payload ships).
+# Fox Sports Bifrost returns schema — columns DERIVED from a captured live
+# response run through the registered parser (parse_fox_bifrost_*). The Fox spec
+# left this response untyped (`object`), so the columns are enumerated here from
+# a representative capture. `type` is inferred from the captured JS value;
+# `description` is best-effort from the snake_cased key. Endpoints with no
+# capture remain `columns: []`.
 schema: trending_videos
 kind: dataframe
-columns: []
+columns:
+- name: data_existing_total
+  type: integer
+  description: "Bifrost field `data_existing_total`: data existing total."
+- name: data_results
+  type: character
+  description: "Bifrost field `data_results`: data results."
+- name: data_request_type
+  type: character
+  description: "Bifrost field `data_request_type`: data request type."
+- name: data_request_content_type
+  type: character
+  description: "Bifrost field `data_request_content_type`: data request content type."
+- name: data_request_internal
+  type: logical
+  description: "Bifrost field `data_request_internal`: data request internal."
+- name: data_request_platform
+  type: character
+  description: "Bifrost field `data_request_platform`: data request platform."
+- name: data_request_params
+  type: character
+  description: "Bifrost field `data_request_params`: data request params."
+- name: data_request_path_params_proxy
+  type: character
+  description: "Bifrost field `data_request_path_params_proxy`: data request path params proxy."
+- name: data_status_success
+  type: logical
+  description: "Bifrost field `data_status_success`: data status success."
+- name: data_status_code
+  type: integer
+  description: "Bifrost field `data_status_code`: data status code."

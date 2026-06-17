@@ -1,8 +1,1206 @@
-# CBS NAPI standings resource (/resource/team/standings/{team_id}). One row per standings entry, parsed
-# by parse_cbs_napi_standings.
-# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
-# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
-# live capture; the parser snake_cases + flattens whatever keys the payload ships.
+# CBS NAPI returns schema — columns DERIVED from a captured live response run
+# through the registered parser (parse_cbs_napi_*). The CBS NAPI OpenAPI spec
+# ships no typed 200-response schema, so columns are not enumerable from the
+# spec; they are enumerated here from a representative capture. `type` is
+# inferred from the captured JS value; `description` is best-effort from the
+# snake_cased key. Endpoints with no capture remain `columns: []`.
 schema: team_standings
 kind: dataframe
-columns: []
+columns:
+- name: 2016_regular_wins_number
+  type: integer
+  description: 2016 regular wins number.
+- name: 2016_regular_goals_for_goals
+  type: integer
+  description: 2016 regular goals for goals.
+- name: 2016_regular_last_results_r2
+  type: character
+  description: 2016 regular last results r2.
+- name: 2016_regular_last_results_r3
+  type: character
+  description: 2016 regular last results r3.
+- name: 2016_regular_last_results_r4
+  type: character
+  description: 2016 regular last results r4.
+- name: 2016_regular_last_results_r5
+  type: character
+  description: 2016 regular last results r5.
+- name: 2016_regular_last_results_r1
+  type: character
+  description: 2016 regular last results r1.
+- name: 2016_regular_winning_percentage_percentage
+  type: character
+  description: 2016 regular winning percentage percentage.
+- name: 2016_regular_goals_against_goals
+  type: integer
+  description: 2016 regular goals against goals.
+- name: 2016_regular_streak
+  type: character
+  description: 2016 regular streak.
+- name: 2016_regular_losses_number
+  type: integer
+  description: 2016 regular losses number.
+- name: 2016_regular_points_penalty_points
+  type: integer
+  description: 2016 regular points penalty points.
+- name: 2016_regular_points_points_per_game
+  type: number
+  description: 2016 regular points points per game.
+- name: 2016_regular_points_points
+  type: integer
+  description: 2016 regular points points.
+- name: 2016_regular_ties_number
+  type: integer
+  description: 2016 regular ties number.
+- name: 2016_regular_games_played_games
+  type: integer
+  description: 2016 regular games played games.
+- name: 2016_regular_place_previous
+  type: integer
+  description: 2016 regular place previous.
+- name: 2016_regular_place_season_end_id
+  type: character
+  description: 2016 regular place season end ID.
+- name: 2016_regular_place_season_end
+  type: character
+  description: 2016 regular place season end.
+- name: 2016_regular_place_place
+  type: integer
+  description: 2016 regular place place.
+- name: 2016_regular_clinch_status_id
+  type: integer
+  description: 2016 regular clinch status ID.
+- name: 2016_regular_clinch_status_status
+  type: character
+  description: 2016 regular clinch status status.
+- name: 2016_regular_win_loss_record
+  type: character
+  description: 2016 regular win loss record.
+- name: 2016_regular_team_info_display_name
+  type: character
+  description: 2016 regular team info display name.
+- name: 2016_regular_team_info_name
+  type: character
+  description: 2016 regular team info name.
+- name: 2016_regular_team_info_alias
+  type: character
+  description: 2016 regular team info alias.
+- name: 2016_regular_team_info_location
+  type: character
+  description: 2016 regular team info location.
+- name: 2016_regular_team_info_id
+  type: integer
+  description: 2016 regular team info ID.
+- name: 2016_regular_team_info_global_id
+  type: integer
+  description: 2016 regular team info global ID.
+- name: 2016_regular_season_id
+  type: integer
+  description: 2016 regular season ID.
+- name: 2016_regular_season_season_id
+  type: integer
+  description: 2016 regular season season ID.
+- name: 2016_regular_season_sport_id
+  type: integer
+  description: 2016 regular season sport ID.
+- name: 2016_regular_season_league_id
+  type: integer
+  description: 2016 regular season league ID.
+- name: 2016_regular_season_league
+  type: character
+  description: 2016 regular season league.
+- name: 2016_regular_season_teams
+  type: character
+  description: 2016 regular season teams.
+- name: 2016_regular_season_season_year
+  type: integer
+  description: 2016 regular season season year.
+- name: 2016_regular_season_is_current
+  type: integer
+  description: 2016 regular season is current.
+- name: 2016_regular_season_season_type
+  type: character
+  description: 2016 regular season season type.
+- name: 2016_regular_season_season_type_desc
+  type: character
+  description: 2016 regular season season type desc.
+- name: 2016_regular_season_season_start_date
+  type: character
+  description: 2016 regular season season start date.
+- name: 2016_regular_season_season_end_date
+  type: character
+  description: 2016 regular season season end date.
+- name: 2017_regular_wins_number
+  type: integer
+  description: 2017 regular wins number.
+- name: 2017_regular_goals_for_goals
+  type: integer
+  description: 2017 regular goals for goals.
+- name: 2017_regular_last_results_r2
+  type: character
+  description: 2017 regular last results r2.
+- name: 2017_regular_last_results_r3
+  type: character
+  description: 2017 regular last results r3.
+- name: 2017_regular_last_results_r4
+  type: character
+  description: 2017 regular last results r4.
+- name: 2017_regular_last_results_r5
+  type: character
+  description: 2017 regular last results r5.
+- name: 2017_regular_last_results_r1
+  type: character
+  description: 2017 regular last results r1.
+- name: 2017_regular_winning_percentage_percentage
+  type: character
+  description: 2017 regular winning percentage percentage.
+- name: 2017_regular_goals_against_goals
+  type: integer
+  description: 2017 regular goals against goals.
+- name: 2017_regular_streak
+  type: character
+  description: 2017 regular streak.
+- name: 2017_regular_losses_number
+  type: integer
+  description: 2017 regular losses number.
+- name: 2017_regular_points_penalty_points
+  type: integer
+  description: 2017 regular points penalty points.
+- name: 2017_regular_points_points_per_game
+  type: number
+  description: 2017 regular points points per game.
+- name: 2017_regular_points_points
+  type: integer
+  description: 2017 regular points points.
+- name: 2017_regular_ties_number
+  type: integer
+  description: 2017 regular ties number.
+- name: 2017_regular_games_played_games
+  type: integer
+  description: 2017 regular games played games.
+- name: 2017_regular_place_previous
+  type: integer
+  description: 2017 regular place previous.
+- name: 2017_regular_place_season_end_id
+  type: character
+  description: 2017 regular place season end ID.
+- name: 2017_regular_place_place
+  type: integer
+  description: 2017 regular place place.
+- name: 2017_regular_place_season_end
+  type: character
+  description: 2017 regular place season end.
+- name: 2017_regular_win_loss_record
+  type: character
+  description: 2017 regular win loss record.
+- name: 2017_regular_team_info_display_name
+  type: character
+  description: 2017 regular team info display name.
+- name: 2017_regular_team_info_name
+  type: character
+  description: 2017 regular team info name.
+- name: 2017_regular_team_info_alias
+  type: character
+  description: 2017 regular team info alias.
+- name: 2017_regular_team_info_location
+  type: character
+  description: 2017 regular team info location.
+- name: 2017_regular_team_info_global_id
+  type: integer
+  description: 2017 regular team info global ID.
+- name: 2017_regular_team_info_id
+  type: integer
+  description: 2017 regular team info ID.
+- name: 2017_regular_season_id
+  type: integer
+  description: 2017 regular season ID.
+- name: 2017_regular_season_season_id
+  type: integer
+  description: 2017 regular season season ID.
+- name: 2017_regular_season_sport_id
+  type: integer
+  description: 2017 regular season sport ID.
+- name: 2017_regular_season_league_id
+  type: integer
+  description: 2017 regular season league ID.
+- name: 2017_regular_season_league
+  type: character
+  description: 2017 regular season league.
+- name: 2017_regular_season_teams
+  type: character
+  description: 2017 regular season teams.
+- name: 2017_regular_season_season_year
+  type: integer
+  description: 2017 regular season season year.
+- name: 2017_regular_season_is_current
+  type: integer
+  description: 2017 regular season is current.
+- name: 2017_regular_season_season_type
+  type: character
+  description: 2017 regular season season type.
+- name: 2017_regular_season_season_type_desc
+  type: character
+  description: 2017 regular season season type desc.
+- name: 2017_regular_season_season_start_date
+  type: character
+  description: 2017 regular season season start date.
+- name: 2017_regular_season_season_end_date
+  type: character
+  description: 2017 regular season season end date.
+- name: 2018_regular_wins_number
+  type: integer
+  description: 2018 regular wins number.
+- name: 2018_regular_goals_for_goals
+  type: integer
+  description: 2018 regular goals for goals.
+- name: 2018_regular_last_results_r2
+  type: character
+  description: 2018 regular last results r2.
+- name: 2018_regular_last_results_r3
+  type: character
+  description: 2018 regular last results r3.
+- name: 2018_regular_last_results_r4
+  type: character
+  description: 2018 regular last results r4.
+- name: 2018_regular_last_results_r5
+  type: character
+  description: 2018 regular last results r5.
+- name: 2018_regular_last_results_r1
+  type: character
+  description: 2018 regular last results r1.
+- name: 2018_regular_winning_percentage_percentage
+  type: character
+  description: 2018 regular winning percentage percentage.
+- name: 2018_regular_goals_against_goals
+  type: integer
+  description: 2018 regular goals against goals.
+- name: 2018_regular_streak
+  type: character
+  description: 2018 regular streak.
+- name: 2018_regular_losses_number
+  type: integer
+  description: 2018 regular losses number.
+- name: 2018_regular_points_penalty_points
+  type: integer
+  description: 2018 regular points penalty points.
+- name: 2018_regular_points_points_per_game
+  type: number
+  description: 2018 regular points points per game.
+- name: 2018_regular_points_points
+  type: integer
+  description: 2018 regular points points.
+- name: 2018_regular_ties_number
+  type: integer
+  description: 2018 regular ties number.
+- name: 2018_regular_games_played_games
+  type: integer
+  description: 2018 regular games played games.
+- name: 2018_regular_place_previous
+  type: integer
+  description: 2018 regular place previous.
+- name: 2018_regular_place_season_end_id
+  type: integer
+  description: 2018 regular place season end ID.
+- name: 2018_regular_place_place
+  type: integer
+  description: 2018 regular place place.
+- name: 2018_regular_place_season_end
+  type: character
+  description: 2018 regular place season end.
+- name: 2018_regular_clinch_status_id
+  type: integer
+  description: 2018 regular clinch status ID.
+- name: 2018_regular_clinch_status_status
+  type: character
+  description: 2018 regular clinch status status.
+- name: 2018_regular_win_loss_record
+  type: character
+  description: 2018 regular win loss record.
+- name: 2018_regular_team_info_display_name
+  type: character
+  description: 2018 regular team info display name.
+- name: 2018_regular_team_info_name
+  type: character
+  description: 2018 regular team info name.
+- name: 2018_regular_team_info_alias
+  type: character
+  description: 2018 regular team info alias.
+- name: 2018_regular_team_info_location
+  type: character
+  description: 2018 regular team info location.
+- name: 2018_regular_team_info_global_id
+  type: integer
+  description: 2018 regular team info global ID.
+- name: 2018_regular_team_info_id
+  type: integer
+  description: 2018 regular team info ID.
+- name: 2018_regular_season_id
+  type: integer
+  description: 2018 regular season ID.
+- name: 2018_regular_season_season_id
+  type: integer
+  description: 2018 regular season season ID.
+- name: 2018_regular_season_sport_id
+  type: integer
+  description: 2018 regular season sport ID.
+- name: 2018_regular_season_league_id
+  type: integer
+  description: 2018 regular season league ID.
+- name: 2018_regular_season_league
+  type: character
+  description: 2018 regular season league.
+- name: 2018_regular_season_teams
+  type: character
+  description: 2018 regular season teams.
+- name: 2018_regular_season_season_year
+  type: integer
+  description: 2018 regular season season year.
+- name: 2018_regular_season_is_current
+  type: integer
+  description: 2018 regular season is current.
+- name: 2018_regular_season_season_type
+  type: character
+  description: 2018 regular season season type.
+- name: 2018_regular_season_season_type_desc
+  type: character
+  description: 2018 regular season season type desc.
+- name: 2018_regular_season_season_start_date
+  type: character
+  description: 2018 regular season season start date.
+- name: 2018_regular_season_season_end_date
+  type: character
+  description: 2018 regular season season end date.
+- name: 2019_regular_wins_number
+  type: integer
+  description: 2019 regular wins number.
+- name: 2019_regular_goals_for_goals
+  type: integer
+  description: 2019 regular goals for goals.
+- name: 2019_regular_last_results_r2
+  type: character
+  description: 2019 regular last results r2.
+- name: 2019_regular_last_results_r3
+  type: character
+  description: 2019 regular last results r3.
+- name: 2019_regular_last_results_r4
+  type: character
+  description: 2019 regular last results r4.
+- name: 2019_regular_last_results_r5
+  type: character
+  description: 2019 regular last results r5.
+- name: 2019_regular_last_results_r1
+  type: character
+  description: 2019 regular last results r1.
+- name: 2019_regular_winning_percentage_percentage
+  type: character
+  description: 2019 regular winning percentage percentage.
+- name: 2019_regular_goals_against_goals
+  type: integer
+  description: 2019 regular goals against goals.
+- name: 2019_regular_streak
+  type: character
+  description: 2019 regular streak.
+- name: 2019_regular_losses_number
+  type: integer
+  description: 2019 regular losses number.
+- name: 2019_regular_points_penalty_points
+  type: integer
+  description: 2019 regular points penalty points.
+- name: 2019_regular_points_points_per_game
+  type: number
+  description: 2019 regular points points per game.
+- name: 2019_regular_points_points
+  type: integer
+  description: 2019 regular points points.
+- name: 2019_regular_ties_number
+  type: integer
+  description: 2019 regular ties number.
+- name: 2019_regular_games_played_games
+  type: integer
+  description: 2019 regular games played games.
+- name: 2019_regular_place_previous
+  type: integer
+  description: 2019 regular place previous.
+- name: 2019_regular_place_season_end_id
+  type: character
+  description: 2019 regular place season end ID.
+- name: 2019_regular_place_place
+  type: integer
+  description: 2019 regular place place.
+- name: 2019_regular_place_season_end
+  type: character
+  description: 2019 regular place season end.
+- name: 2019_regular_clinch_status_id
+  type: integer
+  description: 2019 regular clinch status ID.
+- name: 2019_regular_clinch_status_status
+  type: character
+  description: 2019 regular clinch status status.
+- name: 2019_regular_win_loss_record
+  type: character
+  description: 2019 regular win loss record.
+- name: 2019_regular_team_info_display_name
+  type: character
+  description: 2019 regular team info display name.
+- name: 2019_regular_team_info_name
+  type: character
+  description: 2019 regular team info name.
+- name: 2019_regular_team_info_alias
+  type: character
+  description: 2019 regular team info alias.
+- name: 2019_regular_team_info_location
+  type: character
+  description: 2019 regular team info location.
+- name: 2019_regular_team_info_global_id
+  type: integer
+  description: 2019 regular team info global ID.
+- name: 2019_regular_team_info_id
+  type: integer
+  description: 2019 regular team info ID.
+- name: 2019_regular_season_id
+  type: integer
+  description: 2019 regular season ID.
+- name: 2019_regular_season_season_id
+  type: integer
+  description: 2019 regular season season ID.
+- name: 2019_regular_season_sport_id
+  type: integer
+  description: 2019 regular season sport ID.
+- name: 2019_regular_season_league_id
+  type: integer
+  description: 2019 regular season league ID.
+- name: 2019_regular_season_league
+  type: character
+  description: 2019 regular season league.
+- name: 2019_regular_season_teams
+  type: character
+  description: 2019 regular season teams.
+- name: 2019_regular_season_season_year
+  type: integer
+  description: 2019 regular season season year.
+- name: 2019_regular_season_is_current
+  type: integer
+  description: 2019 regular season is current.
+- name: 2019_regular_season_season_type
+  type: character
+  description: 2019 regular season season type.
+- name: 2019_regular_season_season_type_desc
+  type: character
+  description: 2019 regular season season type desc.
+- name: 2019_regular_season_season_start_date
+  type: character
+  description: 2019 regular season season start date.
+- name: 2019_regular_season_season_end_date
+  type: character
+  description: 2019 regular season season end date.
+- name: 2020_regular_wins_number
+  type: integer
+  description: 2020 regular wins number.
+- name: 2020_regular_goals_for_goals
+  type: integer
+  description: 2020 regular goals for goals.
+- name: 2020_regular_last_results_r2
+  type: character
+  description: 2020 regular last results r2.
+- name: 2020_regular_last_results_r3
+  type: character
+  description: 2020 regular last results r3.
+- name: 2020_regular_last_results_r4
+  type: character
+  description: 2020 regular last results r4.
+- name: 2020_regular_last_results_r5
+  type: character
+  description: 2020 regular last results r5.
+- name: 2020_regular_last_results_r1
+  type: character
+  description: 2020 regular last results r1.
+- name: 2020_regular_winning_percentage_percentage
+  type: character
+  description: 2020 regular winning percentage percentage.
+- name: 2020_regular_goals_against_goals
+  type: integer
+  description: 2020 regular goals against goals.
+- name: 2020_regular_streak
+  type: character
+  description: 2020 regular streak.
+- name: 2020_regular_losses_number
+  type: integer
+  description: 2020 regular losses number.
+- name: 2020_regular_points_penalty_points
+  type: integer
+  description: 2020 regular points penalty points.
+- name: 2020_regular_points_points_per_game
+  type: number
+  description: 2020 regular points points per game.
+- name: 2020_regular_points_points
+  type: integer
+  description: 2020 regular points points.
+- name: 2020_regular_ties_number
+  type: integer
+  description: 2020 regular ties number.
+- name: 2020_regular_games_played_games
+  type: integer
+  description: 2020 regular games played games.
+- name: 2020_regular_place_previous
+  type: integer
+  description: 2020 regular place previous.
+- name: 2020_regular_place_season_end_id
+  type: character
+  description: 2020 regular place season end ID.
+- name: 2020_regular_place_place
+  type: integer
+  description: 2020 regular place place.
+- name: 2020_regular_place_season_end
+  type: character
+  description: 2020 regular place season end.
+- name: 2020_regular_goal_differential_differential
+  type: integer
+  description: 2020 regular goal differential differential.
+- name: 2020_regular_win_loss_record
+  type: character
+  description: 2020 regular win loss record.
+- name: 2020_regular_team_info_display_name
+  type: character
+  description: 2020 regular team info display name.
+- name: 2020_regular_team_info_name
+  type: character
+  description: 2020 regular team info name.
+- name: 2020_regular_team_info_alias
+  type: character
+  description: 2020 regular team info alias.
+- name: 2020_regular_team_info_location
+  type: character
+  description: 2020 regular team info location.
+- name: 2020_regular_team_info_global_id
+  type: integer
+  description: 2020 regular team info global ID.
+- name: 2020_regular_team_info_id
+  type: integer
+  description: 2020 regular team info ID.
+- name: 2020_regular_season_id
+  type: integer
+  description: 2020 regular season ID.
+- name: 2020_regular_season_season_id
+  type: integer
+  description: 2020 regular season season ID.
+- name: 2020_regular_season_sport_id
+  type: integer
+  description: 2020 regular season sport ID.
+- name: 2020_regular_season_league_id
+  type: integer
+  description: 2020 regular season league ID.
+- name: 2020_regular_season_league
+  type: character
+  description: 2020 regular season league.
+- name: 2020_regular_season_teams
+  type: character
+  description: 2020 regular season teams.
+- name: 2020_regular_season_season_year
+  type: integer
+  description: 2020 regular season season year.
+- name: 2020_regular_season_is_current
+  type: integer
+  description: 2020 regular season is current.
+- name: 2020_regular_season_season_type
+  type: character
+  description: 2020 regular season season type.
+- name: 2020_regular_season_season_type_desc
+  type: character
+  description: 2020 regular season season type desc.
+- name: 2020_regular_season_season_start_date
+  type: character
+  description: 2020 regular season season start date.
+- name: 2020_regular_season_season_end_date
+  type: character
+  description: 2020 regular season season end date.
+- name: 2021_regular_wins_number
+  type: integer
+  description: 2021 regular wins number.
+- name: 2021_regular_goals_for_goals
+  type: integer
+  description: 2021 regular goals for goals.
+- name: 2021_regular_last_results_r2
+  type: character
+  description: 2021 regular last results r2.
+- name: 2021_regular_last_results_r3
+  type: character
+  description: 2021 regular last results r3.
+- name: 2021_regular_last_results_r4
+  type: character
+  description: 2021 regular last results r4.
+- name: 2021_regular_last_results_r5
+  type: character
+  description: 2021 regular last results r5.
+- name: 2021_regular_last_results_r1
+  type: character
+  description: 2021 regular last results r1.
+- name: 2021_regular_winning_percentage_percentage
+  type: character
+  description: 2021 regular winning percentage percentage.
+- name: 2021_regular_goals_against_goals
+  type: integer
+  description: 2021 regular goals against goals.
+- name: 2021_regular_streak
+  type: character
+  description: 2021 regular streak.
+- name: 2021_regular_losses_number
+  type: integer
+  description: 2021 regular losses number.
+- name: 2021_regular_points_penalty_points
+  type: integer
+  description: 2021 regular points penalty points.
+- name: 2021_regular_points_points_per_game
+  type: number
+  description: 2021 regular points points per game.
+- name: 2021_regular_points_points
+  type: integer
+  description: 2021 regular points points.
+- name: 2021_regular_ties_number
+  type: integer
+  description: 2021 regular ties number.
+- name: 2021_regular_games_played_games
+  type: integer
+  description: 2021 regular games played games.
+- name: 2021_regular_place_previous
+  type: integer
+  description: 2021 regular place previous.
+- name: 2021_regular_place_season_end_id
+  type: integer
+  description: 2021 regular place season end ID.
+- name: 2021_regular_place_place
+  type: integer
+  description: 2021 regular place place.
+- name: 2021_regular_place_season_end
+  type: character
+  description: 2021 regular place season end.
+- name: 2021_regular_clinch_status_id
+  type: integer
+  description: 2021 regular clinch status ID.
+- name: 2021_regular_clinch_status_status
+  type: character
+  description: 2021 regular clinch status status.
+- name: 2021_regular_goal_differential_differential
+  type: integer
+  description: 2021 regular goal differential differential.
+- name: 2021_regular_win_loss_record
+  type: character
+  description: 2021 regular win loss record.
+- name: 2021_regular_team_info_display_name
+  type: character
+  description: 2021 regular team info display name.
+- name: 2021_regular_team_info_name
+  type: character
+  description: 2021 regular team info name.
+- name: 2021_regular_team_info_alias
+  type: character
+  description: 2021 regular team info alias.
+- name: 2021_regular_team_info_location
+  type: character
+  description: 2021 regular team info location.
+- name: 2021_regular_team_info_global_id
+  type: integer
+  description: 2021 regular team info global ID.
+- name: 2021_regular_team_info_id
+  type: integer
+  description: 2021 regular team info ID.
+- name: 2021_regular_season_id
+  type: integer
+  description: 2021 regular season ID.
+- name: 2021_regular_season_season_id
+  type: integer
+  description: 2021 regular season season ID.
+- name: 2021_regular_season_sport_id
+  type: integer
+  description: 2021 regular season sport ID.
+- name: 2021_regular_season_league_id
+  type: integer
+  description: 2021 regular season league ID.
+- name: 2021_regular_season_league
+  type: character
+  description: 2021 regular season league.
+- name: 2021_regular_season_teams
+  type: character
+  description: 2021 regular season teams.
+- name: 2021_regular_season_season_year
+  type: integer
+  description: 2021 regular season season year.
+- name: 2021_regular_season_is_current
+  type: integer
+  description: 2021 regular season is current.
+- name: 2021_regular_season_season_type
+  type: character
+  description: 2021 regular season season type.
+- name: 2021_regular_season_season_type_desc
+  type: character
+  description: 2021 regular season season type desc.
+- name: 2021_regular_season_season_start_date
+  type: character
+  description: 2021 regular season season start date.
+- name: 2021_regular_season_season_end_date
+  type: character
+  description: 2021 regular season season end date.
+- name: 2022_regular_wins_number
+  type: integer
+  description: 2022 regular wins number.
+- name: 2022_regular_goals_for_goals
+  type: integer
+  description: 2022 regular goals for goals.
+- name: 2022_regular_last_results_r2
+  type: character
+  description: 2022 regular last results r2.
+- name: 2022_regular_last_results_r3
+  type: character
+  description: 2022 regular last results r3.
+- name: 2022_regular_last_results_r4
+  type: character
+  description: 2022 regular last results r4.
+- name: 2022_regular_last_results_r5
+  type: character
+  description: 2022 regular last results r5.
+- name: 2022_regular_last_results_r1
+  type: character
+  description: 2022 regular last results r1.
+- name: 2022_regular_winning_percentage_percentage
+  type: character
+  description: 2022 regular winning percentage percentage.
+- name: 2022_regular_goals_against_goals
+  type: integer
+  description: 2022 regular goals against goals.
+- name: 2022_regular_streak
+  type: character
+  description: 2022 regular streak.
+- name: 2022_regular_losses_number
+  type: integer
+  description: 2022 regular losses number.
+- name: 2022_regular_points_penalty_points
+  type: integer
+  description: 2022 regular points penalty points.
+- name: 2022_regular_points_points_per_game
+  type: number
+  description: 2022 regular points points per game.
+- name: 2022_regular_points_points
+  type: integer
+  description: 2022 regular points points.
+- name: 2022_regular_ties_number
+  type: integer
+  description: 2022 regular ties number.
+- name: 2022_regular_games_played_games
+  type: integer
+  description: 2022 regular games played games.
+- name: 2022_regular_place_previous
+  type: integer
+  description: 2022 regular place previous.
+- name: 2022_regular_place_season_end_id
+  type: character
+  description: 2022 regular place season end ID.
+- name: 2022_regular_place_place
+  type: integer
+  description: 2022 regular place place.
+- name: 2022_regular_place_season_end
+  type: character
+  description: 2022 regular place season end.
+- name: 2022_regular_win_loss_record
+  type: character
+  description: 2022 regular win loss record.
+- name: 2022_regular_team_info_display_name
+  type: character
+  description: 2022 regular team info display name.
+- name: 2022_regular_team_info_name
+  type: character
+  description: 2022 regular team info name.
+- name: 2022_regular_team_info_alias
+  type: character
+  description: 2022 regular team info alias.
+- name: 2022_regular_team_info_location
+  type: character
+  description: 2022 regular team info location.
+- name: 2022_regular_team_info_global_id
+  type: integer
+  description: 2022 regular team info global ID.
+- name: 2022_regular_team_info_id
+  type: integer
+  description: 2022 regular team info ID.
+- name: 2022_regular_season_id
+  type: integer
+  description: 2022 regular season ID.
+- name: 2022_regular_season_season_id
+  type: integer
+  description: 2022 regular season season ID.
+- name: 2022_regular_season_sport_id
+  type: integer
+  description: 2022 regular season sport ID.
+- name: 2022_regular_season_league_id
+  type: integer
+  description: 2022 regular season league ID.
+- name: 2022_regular_season_league
+  type: character
+  description: 2022 regular season league.
+- name: 2022_regular_season_teams
+  type: character
+  description: 2022 regular season teams.
+- name: 2022_regular_season_season_year
+  type: integer
+  description: 2022 regular season season year.
+- name: 2022_regular_season_is_current
+  type: integer
+  description: 2022 regular season is current.
+- name: 2022_regular_season_season_type
+  type: character
+  description: 2022 regular season season type.
+- name: 2022_regular_season_season_type_desc
+  type: character
+  description: 2022 regular season season type desc.
+- name: 2022_regular_season_season_start_date
+  type: character
+  description: 2022 regular season season start date.
+- name: 2022_regular_season_season_end_date
+  type: character
+  description: 2022 regular season season end date.
+- name: 2023_regular_wins_number
+  type: integer
+  description: 2023 regular wins number.
+- name: 2023_regular_goals_for_goals
+  type: integer
+  description: 2023 regular goals for goals.
+- name: 2023_regular_last_results_r2
+  type: character
+  description: 2023 regular last results r2.
+- name: 2023_regular_last_results_r3
+  type: character
+  description: 2023 regular last results r3.
+- name: 2023_regular_last_results_r4
+  type: character
+  description: 2023 regular last results r4.
+- name: 2023_regular_last_results_r5
+  type: character
+  description: 2023 regular last results r5.
+- name: 2023_regular_last_results_r1
+  type: character
+  description: 2023 regular last results r1.
+- name: 2023_regular_winning_percentage_percentage
+  type: character
+  description: 2023 regular winning percentage percentage.
+- name: 2023_regular_goals_against_goals
+  type: integer
+  description: 2023 regular goals against goals.
+- name: 2023_regular_streak
+  type: character
+  description: 2023 regular streak.
+- name: 2023_regular_losses_number
+  type: integer
+  description: 2023 regular losses number.
+- name: 2023_regular_points_penalty_points
+  type: integer
+  description: 2023 regular points penalty points.
+- name: 2023_regular_points_points_per_game
+  type: number
+  description: 2023 regular points points per game.
+- name: 2023_regular_points_points
+  type: integer
+  description: 2023 regular points points.
+- name: 2023_regular_ties_number
+  type: integer
+  description: 2023 regular ties number.
+- name: 2023_regular_games_played_games
+  type: integer
+  description: 2023 regular games played games.
+- name: 2023_regular_place_previous
+  type: integer
+  description: 2023 regular place previous.
+- name: 2023_regular_place_season_end_id
+  type: character
+  description: 2023 regular place season end ID.
+- name: 2023_regular_place_place
+  type: integer
+  description: 2023 regular place place.
+- name: 2023_regular_place_season_end
+  type: character
+  description: 2023 regular place season end.
+- name: 2023_regular_goal_differential_differential
+  type: integer
+  description: 2023 regular goal differential differential.
+- name: 2023_regular_win_loss_record
+  type: character
+  description: 2023 regular win loss record.
+- name: 2023_regular_team_info_display_name
+  type: character
+  description: 2023 regular team info display name.
+- name: 2023_regular_team_info_name
+  type: character
+  description: 2023 regular team info name.
+- name: 2023_regular_team_info_alias
+  type: character
+  description: 2023 regular team info alias.
+- name: 2023_regular_team_info_location
+  type: character
+  description: 2023 regular team info location.
+- name: 2023_regular_team_info_global_id
+  type: integer
+  description: 2023 regular team info global ID.
+- name: 2023_regular_team_info_id
+  type: integer
+  description: 2023 regular team info ID.
+- name: 2023_regular_season_id
+  type: integer
+  description: 2023 regular season ID.
+- name: 2023_regular_season_season_id
+  type: integer
+  description: 2023 regular season season ID.
+- name: 2023_regular_season_sport_id
+  type: integer
+  description: 2023 regular season sport ID.
+- name: 2023_regular_season_league_id
+  type: integer
+  description: 2023 regular season league ID.
+- name: 2023_regular_season_league
+  type: character
+  description: 2023 regular season league.
+- name: 2023_regular_season_teams
+  type: character
+  description: 2023 regular season teams.
+- name: 2023_regular_season_season_year
+  type: integer
+  description: 2023 regular season season year.
+- name: 2023_regular_season_is_current
+  type: integer
+  description: 2023 regular season is current.
+- name: 2023_regular_season_season_type
+  type: character
+  description: 2023 regular season season type.
+- name: 2023_regular_season_season_type_desc
+  type: character
+  description: 2023 regular season season type desc.
+- name: 2023_regular_season_season_start_date
+  type: character
+  description: 2023 regular season season start date.
+- name: 2023_regular_season_season_end_date
+  type: character
+  description: 2023 regular season season end date.
+- name: 2024_regular_wins_number
+  type: integer
+  description: 2024 regular wins number.
+- name: 2024_regular_goals_for_goals
+  type: integer
+  description: 2024 regular goals for goals.
+- name: 2024_regular_last_results_r2
+  type: character
+  description: 2024 regular last results r2.
+- name: 2024_regular_last_results_r3
+  type: character
+  description: 2024 regular last results r3.
+- name: 2024_regular_last_results_r4
+  type: character
+  description: 2024 regular last results r4.
+- name: 2024_regular_last_results_r5
+  type: character
+  description: 2024 regular last results r5.
+- name: 2024_regular_last_results_r1
+  type: character
+  description: 2024 regular last results r1.
+- name: 2024_regular_winning_percentage_percentage
+  type: character
+  description: 2024 regular winning percentage percentage.
+- name: 2024_regular_goals_against_goals
+  type: integer
+  description: 2024 regular goals against goals.
+- name: 2024_regular_streak
+  type: character
+  description: 2024 regular streak.
+- name: 2024_regular_losses_number
+  type: integer
+  description: 2024 regular losses number.
+- name: 2024_regular_points_penalty_points
+  type: integer
+  description: 2024 regular points penalty points.
+- name: 2024_regular_points_points_per_game
+  type: number
+  description: 2024 regular points points per game.
+- name: 2024_regular_points_points
+  type: integer
+  description: 2024 regular points points.
+- name: 2024_regular_ties_number
+  type: integer
+  description: 2024 regular ties number.
+- name: 2024_regular_games_played_games
+  type: integer
+  description: 2024 regular games played games.
+- name: 2024_regular_place_previous
+  type: integer
+  description: 2024 regular place previous.
+- name: 2024_regular_place_season_end_id
+  type: integer
+  description: 2024 regular place season end ID.
+- name: 2024_regular_place_place
+  type: integer
+  description: 2024 regular place place.
+- name: 2024_regular_place_season_end
+  type: character
+  description: 2024 regular place season end.
+- name: 2024_regular_clinch_status_id
+  type: integer
+  description: 2024 regular clinch status ID.
+- name: 2024_regular_clinch_status_status
+  type: character
+  description: 2024 regular clinch status status.
+- name: 2024_regular_goal_differential_differential
+  type: integer
+  description: 2024 regular goal differential differential.
+- name: 2024_regular_win_loss_record
+  type: character
+  description: 2024 regular win loss record.
+- name: 2024_regular_team_info_display_name
+  type: character
+  description: 2024 regular team info display name.
+- name: 2024_regular_team_info_name
+  type: character
+  description: 2024 regular team info name.
+- name: 2024_regular_team_info_alias
+  type: character
+  description: 2024 regular team info alias.
+- name: 2024_regular_team_info_location
+  type: character
+  description: 2024 regular team info location.
+- name: 2024_regular_team_info_global_id
+  type: integer
+  description: 2024 regular team info global ID.
+- name: 2024_regular_team_info_id
+  type: integer
+  description: 2024 regular team info ID.
+- name: 2024_regular_season_id
+  type: integer
+  description: 2024 regular season ID.
+- name: 2024_regular_season_season_id
+  type: integer
+  description: 2024 regular season season ID.
+- name: 2024_regular_season_sport_id
+  type: integer
+  description: 2024 regular season sport ID.
+- name: 2024_regular_season_league_id
+  type: integer
+  description: 2024 regular season league ID.
+- name: 2024_regular_season_league
+  type: character
+  description: 2024 regular season league.
+- name: 2024_regular_season_teams
+  type: character
+  description: 2024 regular season teams.
+- name: 2024_regular_season_season_year
+  type: integer
+  description: 2024 regular season season year.
+- name: 2024_regular_season_is_current
+  type: integer
+  description: 2024 regular season is current.
+- name: 2024_regular_season_season_type
+  type: character
+  description: 2024 regular season season type.
+- name: 2024_regular_season_season_type_desc
+  type: character
+  description: 2024 regular season season type desc.
+- name: 2024_regular_season_season_start_date
+  type: character
+  description: 2024 regular season season start date.
+- name: 2024_regular_season_season_end_date
+  type: character
+  description: 2024 regular season season end date.
+- name: 2025_regular_wins_number
+  type: integer
+  description: 2025 regular wins number.
+- name: 2025_regular_goals_for_goals
+  type: integer
+  description: 2025 regular goals for goals.
+- name: 2025_regular_goals_against_goals
+  type: integer
+  description: 2025 regular goals against goals.
+- name: 2025_regular_goal_differential_differential
+  type: integer
+  description: 2025 regular goal differential differential.
+- name: 2025_regular_winning_percentage_percentage
+  type: character
+  description: 2025 regular winning percentage percentage.
+- name: 2025_regular_streak
+  type: character
+  description: 2025 regular streak.
+- name: 2025_regular_losses_number
+  type: integer
+  description: 2025 regular losses number.
+- name: 2025_regular_points_points
+  type: integer
+  description: 2025 regular points points.
+- name: 2025_regular_points_penalty_points
+  type: integer
+  description: 2025 regular points penalty points.
+- name: 2025_regular_points_points_per_game
+  type: character
+  description: 2025 regular points points per game.
+- name: 2025_regular_ties_number
+  type: integer
+  description: 2025 regular ties number.
+- name: 2025_regular_games_played_games
+  type: integer
+  description: 2025 regular games played games.
+- name: 2025_regular_place_place
+  type: integer
+  description: 2025 regular place place.
+- name: 2025_regular_win_loss_record
+  type: character
+  description: 2025 regular win loss record.
+- name: 2025_regular_team_info_display_name
+  type: character
+  description: 2025 regular team info display name.
+- name: 2025_regular_team_info_name
+  type: character
+  description: 2025 regular team info name.
+- name: 2025_regular_team_info_alias
+  type: character
+  description: 2025 regular team info alias.
+- name: 2025_regular_team_info_location
+  type: character
+  description: 2025 regular team info location.
+- name: 2025_regular_team_info_global_id
+  type: integer
+  description: 2025 regular team info global ID.
+- name: 2025_regular_team_info_id
+  type: integer
+  description: 2025 regular team info ID.
+- name: 2025_regular_clinch_status_id
+  type: integer
+  description: 2025 regular clinch status ID.
+- name: 2025_regular_clinch_status_status
+  type: character
+  description: 2025 regular clinch status status.
+- name: 2025_regular_season_id
+  type: integer
+  description: 2025 regular season ID.
+- name: 2025_regular_season_season_id
+  type: integer
+  description: 2025 regular season season ID.
+- name: 2025_regular_season_sport_id
+  type: integer
+  description: 2025 regular season sport ID.
+- name: 2025_regular_season_league_id
+  type: integer
+  description: 2025 regular season league ID.
+- name: 2025_regular_season_league
+  type: character
+  description: 2025 regular season league.
+- name: 2025_regular_season_teams
+  type: character
+  description: 2025 regular season teams.
+- name: 2025_regular_season_season_year
+  type: integer
+  description: 2025 regular season season year.
+- name: 2025_regular_season_is_current
+  type: integer
+  description: 2025 regular season is current.
+- name: 2025_regular_season_season_type
+  type: character
+  description: 2025 regular season season type.
+- name: 2025_regular_season_season_type_desc
+  type: character
+  description: 2025 regular season season type desc.
+- name: 2025_regular_season_season_start_date
+  type: character
+  description: 2025 regular season season start date.
+- name: 2025_regular_season_season_end_date
+  type: character
+  description: 2025 regular season season end date.

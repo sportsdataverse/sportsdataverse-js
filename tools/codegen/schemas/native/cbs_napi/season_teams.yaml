@@ -1,8 +1,99 @@
-# CBS NAPI season teams resource (/resource/season/teams/{season_id}). Generic flattened frame parsed
-# by parse_cbs_napi_list.
-# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
-# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
-# live capture; the parser snake_cases + flattens whatever keys the payload ships.
+# CBS NAPI returns schema — columns DERIVED from a captured live response run
+# through the registered parser (parse_cbs_napi_*). The CBS NAPI OpenAPI spec
+# ships no typed 200-response schema, so columns are not enumerable from the
+# spec; they are enumerated here from a representative capture. `type` is
+# inferred from the captured JS value; `description` is best-effort from the
+# snake_cased key. Endpoints with no capture remain `columns: []`.
 schema: season_teams
 kind: dataframe
-columns: []
+columns:
+- name: team_id
+  type: integer
+  description: Team ID.
+- name: stub_hub_team_id
+  type: character
+  description: Stub hub team ID.
+- name: location
+  type: character
+  description: Location.
+- name: nick_name
+  type: character
+  description: Nick name.
+- name: medium_name
+  type: character
+  description: Medium name.
+- name: short_name
+  type: character
+  description: Short name.
+- name: abbrev
+  type: character
+  description: Abbrev.
+- name: status
+  type: character
+  description: Status.
+- name: home_venue_id
+  type: integer
+  description: Home venue ID.
+- name: conference_id
+  type: integer
+  description: Conference ID.
+- name: league_id
+  type: integer
+  description: League ID.
+- name: division_id
+  type: character
+  description: Division ID.
+- name: ticket_url
+  type: character
+  description: Ticket URL.
+- name: color_hex_dex
+  type: character
+  description: Color hex dex.
+- name: color_primary_hex
+  type: character
+  description: Color primary hex.
+- name: color_secondary_hex
+  type: character
+  description: Color secondary hex.
+- name: players
+  type: character
+  description: Players.
+- name: league
+  type: character
+  description: League.
+- name: standings
+  type: character
+  description: Standings.
+- name: conference
+  type: character
+  description: Conference.
+- name: division
+  type: character
+  description: Division.
+- name: team_seasons
+  type: character
+  description: Team seasons.
+- name: polls
+  type: character
+  description: Polls.
+- name: home_venue
+  type: character
+  description: Home venue.
+- name: sports_line_standings
+  type: character
+  description: Sports line standings.
+- name: team_stats
+  type: character
+  description: Team stats.
+- name: team_rankings
+  type: character
+  description: Team rankings.
+- name: sports_line_rankings
+  type: character
+  description: Sports line rankings.
+- name: meta_tsa_overlay
+  type: logical
+  description: Meta tsa overlay.
+- name: meta_season_id
+  type: integer
+  description: Meta season ID.

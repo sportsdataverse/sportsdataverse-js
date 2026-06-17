@@ -1,8 +1,33 @@
-# CBS NAPI league resource (/resource/league/{league_id}). Generic flattened frame parsed
-# by parse_cbs_napi_list.
-# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
-# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
-# live capture; the parser snake_cases + flattens whatever keys the payload ships.
+# CBS NAPI returns schema — columns DERIVED from a captured live response run
+# through the registered parser (parse_cbs_napi_*). The CBS NAPI OpenAPI spec
+# ships no typed 200-response schema, so columns are not enumerable from the
+# spec; they are enumerated here from a representative capture. `type` is
+# inferred from the captured JS value; `description` is best-effort from the
+# snake_cased key. Endpoints with no capture remain `columns: []`.
 schema: league
 kind: dataframe
-columns: []
+columns:
+- name: league_id
+  type: integer
+  description: League ID.
+- name: league_abbr
+  type: character
+  description: League abbreviation.
+- name: league_name
+  type: character
+  description: League name.
+- name: sport_id
+  type: integer
+  description: Sport ID.
+- name: league_type
+  type: character
+  description: League type.
+- name: teams
+  type: character
+  description: Teams.
+- name: color_primary
+  type: character
+  description: Color primary.
+- name: color_secondary
+  type: character
+  description: Color secondary.
