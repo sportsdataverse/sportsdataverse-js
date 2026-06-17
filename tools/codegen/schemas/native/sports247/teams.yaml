@@ -1,0 +1,26 @@
+# One row per team (TeamDto).
+# Columns produced by the sports247 parser's snake_cased, flattened output.
+schema: teams
+kind: dataframe
+columns:
+- name: name
+  type: character
+  description: "Team Name"
+- name: team_id
+  type: numeric
+  description: "Primary key of the team"
+- name: institution_key
+  type: numeric
+  description: "Key of the institution"
+- name: conference
+  type: character
+  description: "Name of the team's Conference"
+- name: conference_abbreviation
+  type: character
+  description: "Abbreviation of the team's Conference"
+- name: sport
+  type: character
+  description: "Name of Sport assoicated with the specific Team PK"
+- name: type
+  type: character
+  description: "Institutution Type (College or Pro)"

@@ -45,6 +45,10 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace (NOT a league), so `prefix` here is its own name: the merge below
   // creates `sdv.odds.*` from scratch (no legacy/ESPN service to merge onto).
   odds_api: 'odds',
+  // 247Sports Recruit Database — second standalone (non-league) provider family.
+  // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
+  // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  sports247: 'recruiting',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

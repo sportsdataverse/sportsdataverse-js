@@ -1,0 +1,7 @@
+# Years available for a sport. Generic flattened frame; columns mirror the raw JSON keys.
+# The OpenAPI spec ships no typed 200-response schema for this endpoint, so
+# the generic parse_sports247_list flattener returns the provider's JSON keys
+# snake_cased. Columns are not enumerable ahead of a live capture.
+schema: sport_years
+kind: dataframe
+columns: []

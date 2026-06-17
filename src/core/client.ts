@@ -39,6 +39,13 @@ export const FLAT_HOSTS: Record<string, string> = {
   // onto the standalone `odds` namespace (sdv.odds.*). No bearer auth: the
   // caller passes `api_key` as a plain `apiKey` query param on every call.
   odds_api: "https://api.the-odds-api.com",
+  // 247Sports Recruit Database — second cross-sport (non-league) provider
+  // family. Merges onto the standalone `recruiting` namespace
+  // (sdv.recruiting.*). The spec declares a JWT `Authorization: Bearer` header
+  // but there is no public token-minting machinery, so this family is NOT
+  // `auth: true`; the caller supplies their own token via the flat `headers`
+  // arg (sdv.recruiting.sports247_rankings({ headers: { Authorization: … } })).
+  sports247: "https://api.247sports.com",
 };
 
 const client = axios.create({
