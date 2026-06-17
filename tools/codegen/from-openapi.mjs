@@ -73,6 +73,74 @@ function parseArgs(argv) {
   return args;
 }
 
+// --- $ref resolution --------------------------------------------------------
+
+/**
+ * Resolve a local JSON-pointer `$ref` (e.g. `#/components/parameters/EventId`)
+ * against the spec root. Only supports same-document refs (the only kind these
+ * specs use). Returns the referenced node, or `null` if it can't be resolved.
+ */
+function resolveRef(spec, ref) {
+  if (typeof ref !== "string" || !ref.startsWith("#/")) return null;
+  const segs = ref
+    .slice(2)
+    .split("/")
+    .map((s) => s.replace(/~1/g, "/").replace(/~0/g, "~")); // JSON-pointer unescape
+  let node = spec;
+  for (const seg of segs) {
+    if (node && typeof node === "object" && seg in node) node = node[seg];
+    else return null;
+  }
+  return node;
+}
+
+/**
+ * Resolve a single parameter object. When the parameter is a `$ref` (e.g.
+ * `{$ref: '#/components/parameters/EventId'}`), dereference it against
+ * `components.parameters` so its `in` / `name` / `schema` are visible. A nested
+ * `schema.$ref` is resolved too (for `schema.default`). Returns the resolved
+ * parameter object, or `null` if the ref dangles.
+ */
+function resolveParam(spec, param) {
+  let p = param;
+  if (p && typeof p === "object" && p.$ref) {
+    const resolved = resolveRef(spec, p.$ref);
+    if (!resolved || typeof resolved !== "object") return null;
+    p = resolved;
+  }
+  // Resolve a schema-level $ref so schema.default is reachable.
+  if (p && p.schema && typeof p.schema === "object" && p.schema.$ref) {
+    const s = resolveRef(spec, p.schema.$ref);
+    if (s && typeof s === "object") p = { ...p, schema: { ...s, ...p.schema } };
+  }
+  return p;
+}
+
+/**
+ * Resolve every parameter on an operation (merging path-item-level + operation-
+ * level params), dereferencing `$ref` entries. Dangling refs are dropped (a
+ * note is collected). Operation-level params override path-item params with the
+ * same (name, in) pair, per the OpenAPI spec.
+ */
+function resolveParams(spec, pathItemParams, opParams, notes, short) {
+  const out = [];
+  const byKey = new Map(); // `${in}:${name}` -> index in `out`
+  for (const raw of [...(pathItemParams ?? []), ...(opParams ?? [])]) {
+    const p = resolveParam(spec, raw);
+    if (!p || !p.in || !p.name) {
+      if (raw && raw.$ref && notes) notes.push(`${short}: dropped unresolvable parameter $ref "${raw.$ref}".`);
+      continue;
+    }
+    const key = `${p.in}:${p.name}`;
+    if (byKey.has(key)) out[byKey.get(key)] = p; // operation-level override
+    else {
+      byKey.set(key, out.length);
+      out.push(p);
+    }
+  }
+  return out;
+}
+
 // --- string helpers --------------------------------------------------------
 
 /**
@@ -227,7 +295,11 @@ function transform(spec, api, hostOverride) {
       seen.set(short, 1);
     }
 
-    const params = get.parameters ?? [];
+    // Resolve `$ref` parameters (against components.parameters) and merge the
+    // path-item-level `parameters` with the operation-level ones before mapping
+    // in:path / in:query. Without this, specs that use $ref-style params would
+    // emit endpoints missing their path/query params.
+    const params = resolveParams(spec, ops?.parameters, get.parameters, paramNotes, short);
 
     // Rewrite path template tokens to the snake_case param name so the codegen
     // resolver (which substitutes the token by matching `pathParam.name`) can
