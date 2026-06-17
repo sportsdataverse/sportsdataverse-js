@@ -36,7 +36,11 @@ const FOX_BIFROST_PARSERS = Object.fromEntries(
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const endpointsYaml = join(__dirname, "endpoints", "fox_bifrost.yaml");
 const schemasDir = join(__dirname, "schemas");
-const capturesRoot = "c:/Users/saiem/Documents/sdv-internal-refs/fox/captures";
+// External capture corpus (the sdv-internal-refs checkout); override its root
+// with the SDV_REFS_ROOT env var. Defaults to the author's local path; when the
+// corpus is absent the script types nothing.
+const REFS_ROOT = process.env.SDV_REFS_ROOT || "c:/Users/saiem/Documents/sdv-internal-refs";
+const capturesRoot = join(REFS_ROOT, "fox", "captures");
 const SPORT_DIRS = ["cbk", "cfb", "mlb", "nba", "nfl", "nhl", "soccer", "ufl", "wbc", "wcbk", "wnba", "_sample"];
 
 // Endpoint `short` -> a regex matched against capture BASENAMES (sport prefix
@@ -77,7 +81,9 @@ function findCaptures(re) {
     const dir = join(capturesRoot, d);
     let entries;
     try {
-      entries = readdirSync(dir);
+      // Sort for deterministic candidate ordering across platforms/filesystems
+      // (richest-candidate tie-break depends on a stable scan order).
+      entries = readdirSync(dir).sort();
     } catch {
       continue;
     }

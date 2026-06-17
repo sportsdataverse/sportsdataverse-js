@@ -26,21 +26,32 @@ import { parse } from "yaml";
 import { CBS_NAPI_PARSERS } from "../../dist/parsers/cbs_napi.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const repoRoot = join(__dirname, "..", "..");
 const endpointsYaml = join(__dirname, "endpoints", "cbs_napi.yaml");
 const schemasDir = join(__dirname, "schemas");
-const capturesRoot = "c:/Users/saiem/Documents/sdv-internal-refs/cbs/captures";
+// The capture corpus lives outside the repo (the sdv-internal-refs checkout).
+// Override its root with the SDV_REFS_ROOT env var; defaults to the author's
+// local path. When the corpus is absent the script simply types nothing.
+const REFS_ROOT = process.env.SDV_REFS_ROOT || "c:/Users/saiem/Documents/sdv-internal-refs";
+const capturesRoot = join(REFS_ROOT, "cbs", "captures");
 const napiDir = join(capturesRoot, "napi");
 
 // Endpoint `short` -> a representative capture file (absolute path). CBS only
 // captured 5 distinct resource families; everything else has no capture.
 function findNapiCapture(suffixMatcher) {
   // Walk napi/<id>/ subdirs + napi/_discovery for the first file matching.
-  for (const sub of readdirSync(napiDir)) {
+  // The capture corpus is external, so tolerate a missing directory; sort for
+  // deterministic selection across platforms/filesystems.
+  let subs;
+  try {
+    subs = readdirSync(napiDir).sort();
+  } catch {
+    return null; // no capture corpus present
+  }
+  for (const sub of subs) {
     const subPath = join(napiDir, sub);
     let entries;
     try {
-      entries = readdirSync(subPath);
+      entries = readdirSync(subPath).sort();
     } catch {
       continue; // not a directory
     }
