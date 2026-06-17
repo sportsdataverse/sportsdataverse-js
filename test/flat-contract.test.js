@@ -24,6 +24,8 @@ const FLAT_API_NAMESPACES = {
   sports247: 'recruiting',
   cbs_napi: 'cbs',
   fox_bifrost: 'fox',
+  yahoo_editorial: 'yahoo',
+  yahoo_shangrila: 'yahoo',
 };
 
 /** Fill every required path param so the URL fully resolves. */

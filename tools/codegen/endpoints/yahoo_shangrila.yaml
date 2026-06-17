@@ -1,0 +1,1428 @@
+# Yahoo Sports shangrila stats-graph (graphite-secure.sports.yahoo.com/v1/query/shangrila).
+#
+# AUTO-EMITTED skeleton from sdv-swagger/yahoo-sports-shangrila.openapi.yaml via
+#   node tools/codegen/from-openapi.mjs <spec> --api yahoo_shangrila
+# then HAND-CLEANED: trimmed the verbose `get_shangrila_*` operationId stems
+# down to the GraphQL query name (`league_standings` / `player_season_stats` /
+# `season_stats_football_passing_ncaaf` / ...). The $ref-resolving transform
+# restores every query param from the spec's `components.parameters`
+# automatically (315 `$ref` params across 105 queries — no hand-restore).
+#
+# Merges onto the standalone `yahoo` namespace (sdv.yahoo.*) — NOT a league.
+# Shares the `yahoo` namespace with the editorial host (two hosts, one
+# namespace). Methods: sdv.yahoo.yahoo_shangrila_<short> / yahooShangrila<Short>.
+#
+# SHAPE: GraphQL persisted-query backend — the last path segment is the query
+# name. Every response is the GraphQL envelope {data, extensions}; `data` has a
+# single root field (`leagues` / `games` / `players` / `teams` / `olympics`)
+# holding the rows. The generic `parse_yahoo_shangrila_list` unwraps `data`,
+# takes the first root field, and flattens it; the stats queries (leagueStats* /
+# seasonStats* / seasonTeamStats* / *StatsLeaders) route to
+# `parse_yahoo_shangrila_stats`, which unrolls the nested per-player/leader
+# stat arrays (`leagues[].{footballStats|leaders}[]`) into one row each.
+#
+# AUTH: keyless (the spec ships no securityScheme), so NOT `auth: true`. Yahoo
+# rejects requests without browser-y `Origin` / `Referer` headers, so the caller
+# supplies those via the flat `headers` arg, e.g.
+#   sdv.yahoo.yahoo_shangrila_league_standings({
+#     league: 'ncaaf',
+#     headers: { Origin: 'https://sports.yahoo.com', Referer: 'https://sports.yahoo.com/' },
+#   })
+# Legacy seasonStats* queries are football-only (NCAAF data 2013+); modern
+# generic queries cover all sports.
+api: yahoo_shangrila
+host: https://graphite-secure.sports.yahoo.com
+endpoints:
+- short: oly_medal_count
+  path: /v1/query/shangrila/OlyMedalCount
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/oly_medal_count
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: sort_method, query_key: sortMethod}
+- short: oly_seasons
+  path: /v1/query/shangrila/OlySeasons
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/oly_seasons
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: seasons, query_key: seasons}
+- short: alias
+  path: /v1/query/shangrila/alias
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/alias
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: alias, query_key: alias}
+- short: article_list_card_players
+  path: /v1/query/shangrila/articleListCardPlayers
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/article_list_card_players
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_ids, query_key: playerIds}
+- short: article_list_card_teams
+  path: /v1/query/shangrila/articleListCardTeams
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/article_list_card_teams
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_ids, query_key: teamIds}
+- short: basic_players
+  path: /v1/query/shangrila/basicPlayers
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/basic_players
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: players, query_key: players}
+- short: betting_disclaimer
+  path: /v1/query/shangrila/bettingDisclaimer
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/betting_disclaimer
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: betting_disclaimer_id, query_key: bettingDisclaimerId}
+- short: combat_event_fights
+  path: /v1/query/shangrila/combatEventFights
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/combat_event_fights
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: event_group_id, query_key: eventGroupId}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league}
+- short: combat_schedule
+  path: /v1/query/shangrila/combatSchedule
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/combat_schedule
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league}
+- short: common_pills
+  path: /v1/query/shangrila/common/pills
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/common_pills
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: add_team_logos, query_key: addTeamLogos}
+  - {name: date, query_key: date}
+  - {name: team_ids, query_key: teamIds}
+- short: consensus_rankings_php
+  path: /v1/query/shangrila/consensus-rankings.php
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/consensus_rankings_php
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: sport, query_key: sport}
+  - {name: position, query_key: position}
+  - {name: filters, query_key: filters}
+  - {name: experts, query_key: experts}
+  - {name: scoring, query_key: scoring}
+  - {name: type, query_key: type}
+- short: draft
+  path: /v1/query/shangrila/draft
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/draft
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+- short: draft_prospects
+  path: /v1/query/shangrila/draftProspects
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/draft_prospects
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+- short: driver_results
+  path: /v1/query/shangrila/driverResults
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/driver_results
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+  - {name: season, query_key: season}
+- short: driver_splits
+  path: /v1/query/shangrila/driverSplits
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/driver_splits
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+- short: featured_game_ids
+  path: /v1/query/shangrila/featuredGameIds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/featured_game_ids
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+- short: game_prop_bets
+  path: /v1/query/shangrila/gamePropBets
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/game_prop_bets
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+- short: game_stats_leaders
+  path: /v1/query/shangrila/gameStatsLeaders
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/game_stats_leaders
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: season, query_key: season}
+  - {name: season_phases, query_key: seasonPhases}
+  - {name: qualified, query_key: qualified}
+  - {name: count, query_key: count}
+  - {name: is_pregame, query_key: isPregame}
+  - {name: team_image_height, query_key: teamImageHeight}
+  - {name: team_image_width, query_key: teamImageWidth}
+  - {name: player_image_height, query_key: playerImageHeight}
+  - {name: player_image_width, query_key: playerImageWidth}
+  - {name: baseball_leader_sort_stat0, query_key: baseballLeaderSortStat0}
+  - {name: baseball_leader_sort_stat1, query_key: baseballLeaderSortStat1}
+  - {name: baseball_leader_sort_stat2, query_key: baseballLeaderSortStat2}
+  - {name: baseball_leader_sort_stat3, query_key: baseballLeaderSortStat3}
+  - {name: baseball_leader_sort_stat4, query_key: baseballLeaderSortStat4}
+  - {name: baseball_leader_stat_ids0, query_key: baseballLeaderStatIds0}
+  - {name: baseball_leader_stat_ids1, query_key: baseballLeaderStatIds1}
+  - {name: baseball_leader_stat_ids2, query_key: baseballLeaderStatIds2}
+  - {name: baseball_leader_stat_ids3, query_key: baseballLeaderStatIds3}
+  - {name: baseball_leader_stat_ids4, query_key: baseballLeaderStatIds4}
+  - {name: baseball_player_stat_ids0, query_key: baseballPlayerStatIds0}
+  - {name: baseball_player_stat_ids1, query_key: baseballPlayerStatIds1}
+  - {name: baseball_team_sort_stat0, query_key: baseballTeamSortStat0}
+  - {name: baseball_team_sort_stat1, query_key: baseballTeamSortStat1}
+  - {name: baseball_team_sort_stat2, query_key: baseballTeamSortStat2}
+  - {name: baseball_team_sort_stat3, query_key: baseballTeamSortStat3}
+  - {name: baseball_team_sort_stat4, query_key: baseballTeamSortStat4}
+  - {name: baseball_team_sort_stat5, query_key: baseballTeamSortStat5}
+  - {name: baseball_team_sort_stat6, query_key: baseballTeamSortStat6}
+  - {name: baseball_team_sort_stat7, query_key: baseballTeamSortStat7}
+  - {name: baseball_team_sort_stat8, query_key: baseballTeamSortStat8}
+  - {name: baseball_team_sort_stat9, query_key: baseballTeamSortStat9}
+  - {name: baseball_team_sort_stat10, query_key: baseballTeamSortStat10}
+  - {name: baseball_team_sort_stat11, query_key: baseballTeamSortStat11}
+  - {name: baseball_team_stat_ids0, query_key: baseballTeamStatIds0}
+  - {name: baseball_team_stat_ids1, query_key: baseballTeamStatIds1}
+  - {name: baseball_team_stat_ids2, query_key: baseballTeamStatIds2}
+  - {name: baseball_team_stat_ids3, query_key: baseballTeamStatIds3}
+  - {name: baseball_team_stat_ids4, query_key: baseballTeamStatIds4}
+  - {name: baseball_team_stat_ids5, query_key: baseballTeamStatIds5}
+  - {name: baseball_team_stat_ids6, query_key: baseballTeamStatIds6}
+  - {name: baseball_team_stat_ids7, query_key: baseballTeamStatIds7}
+  - {name: baseball_team_stat_ids8, query_key: baseballTeamStatIds8}
+  - {name: baseball_team_stat_ids9, query_key: baseballTeamStatIds9}
+  - {name: baseball_team_stat_ids10, query_key: baseballTeamStatIds10}
+  - {name: baseball_team_stat_ids11, query_key: baseballTeamStatIds11}
+  - {name: basketball_leader_sort_stat0, query_key: basketballLeaderSortStat0}
+  - {name: basketball_leader_sort_stat1, query_key: basketballLeaderSortStat1}
+  - {name: basketball_leader_sort_stat2, query_key: basketballLeaderSortStat2}
+  - {name: basketball_leader_sort_stat3, query_key: basketballLeaderSortStat3}
+  - {name: basketball_leader_sort_stat4, query_key: basketballLeaderSortStat4}
+  - {name: basketball_leader_stat_ids0, query_key: basketballLeaderStatIds0}
+  - {name: basketball_leader_stat_ids1, query_key: basketballLeaderStatIds1}
+  - {name: basketball_leader_stat_ids2, query_key: basketballLeaderStatIds2}
+  - {name: basketball_leader_stat_ids3, query_key: basketballLeaderStatIds3}
+  - {name: basketball_leader_stat_ids4, query_key: basketballLeaderStatIds4}
+  - {name: basketball_player_stat_ids0, query_key: basketballPlayerStatIds0}
+  - {name: basketball_team_sort_stat0, query_key: basketballTeamSortStat0}
+  - {name: basketball_team_sort_stat1, query_key: basketballTeamSortStat1}
+  - {name: basketball_team_sort_stat2, query_key: basketballTeamSortStat2}
+  - {name: basketball_team_sort_stat3, query_key: basketballTeamSortStat3}
+  - {name: basketball_team_sort_stat4, query_key: basketballTeamSortStat4}
+  - {name: basketball_team_sort_stat5, query_key: basketballTeamSortStat5}
+  - {name: basketball_team_sort_stat6, query_key: basketballTeamSortStat6}
+  - {name: basketball_team_sort_stat7, query_key: basketballTeamSortStat7}
+  - {name: basketball_team_sort_stat8, query_key: basketballTeamSortStat8}
+  - {name: basketball_team_sort_stat9, query_key: basketballTeamSortStat9}
+  - {name: basketball_team_stat_ids0, query_key: basketballTeamStatIds0}
+  - {name: basketball_team_stat_ids1, query_key: basketballTeamStatIds1}
+  - {name: basketball_team_stat_ids2, query_key: basketballTeamStatIds2}
+  - {name: basketball_team_stat_ids3, query_key: basketballTeamStatIds3}
+  - {name: basketball_team_stat_ids4, query_key: basketballTeamStatIds4}
+  - {name: basketball_team_stat_ids5, query_key: basketballTeamStatIds5}
+  - {name: basketball_team_stat_ids6, query_key: basketballTeamStatIds6}
+  - {name: basketball_team_stat_ids7, query_key: basketballTeamStatIds7}
+  - {name: basketball_team_stat_ids8, query_key: basketballTeamStatIds8}
+  - {name: basketball_team_stat_ids9, query_key: basketballTeamStatIds9}
+  - {name: football_leader_sort_stat0, query_key: footballLeaderSortStat0}
+  - {name: football_leader_sort_stat1, query_key: footballLeaderSortStat1}
+  - {name: football_leader_sort_stat2, query_key: footballLeaderSortStat2}
+  - {name: football_leader_sort_stat3, query_key: footballLeaderSortStat3}
+  - {name: football_leader_stat_ids0, query_key: footballLeaderStatIds0}
+  - {name: football_leader_stat_ids1, query_key: footballLeaderStatIds1}
+  - {name: football_leader_stat_ids2, query_key: footballLeaderStatIds2}
+  - {name: football_leader_stat_ids3, query_key: footballLeaderStatIds3}
+  - {name: football_player_stat_ids0, query_key: footballPlayerStatIds0}
+  - {name: football_player_stat_ids1, query_key: footballPlayerStatIds1}
+  - {name: football_player_stat_ids2, query_key: footballPlayerStatIds2}
+  - {name: football_player_stat_ids3, query_key: footballPlayerStatIds3}
+  - {name: football_player_stat_ids4, query_key: footballPlayerStatIds4}
+  - {name: football_player_stat_ids5, query_key: footballPlayerStatIds5}
+  - {name: football_player_stat_ids6, query_key: footballPlayerStatIds6}
+  - {name: football_player_stat_ids7, query_key: footballPlayerStatIds7}
+  - {name: football_team_sort_stat0, query_key: footballTeamSortStat0}
+  - {name: football_team_sort_stat1, query_key: footballTeamSortStat1}
+  - {name: football_team_sort_stat2, query_key: footballTeamSortStat2}
+  - {name: football_team_sort_stat3, query_key: footballTeamSortStat3}
+  - {name: football_team_sort_stat4, query_key: footballTeamSortStat4}
+  - {name: football_team_sort_stat5, query_key: footballTeamSortStat5}
+  - {name: football_team_sort_stat6, query_key: footballTeamSortStat6}
+  - {name: football_team_sort_stat7, query_key: footballTeamSortStat7}
+  - {name: football_team_sort_stat8, query_key: footballTeamSortStat8}
+  - {name: football_team_sort_stat9, query_key: footballTeamSortStat9}
+  - {name: football_team_sort_stat10, query_key: footballTeamSortStat10}
+  - {name: football_team_sort_stat11, query_key: footballTeamSortStat11}
+  - {name: football_team_stat_ids0, query_key: footballTeamStatIds0}
+  - {name: football_team_stat_ids1, query_key: footballTeamStatIds1}
+  - {name: football_team_stat_ids2, query_key: footballTeamStatIds2}
+  - {name: football_team_stat_ids3, query_key: footballTeamStatIds3}
+  - {name: football_team_stat_ids4, query_key: footballTeamStatIds4}
+  - {name: football_team_stat_ids5, query_key: footballTeamStatIds5}
+  - {name: football_team_stat_ids6, query_key: footballTeamStatIds6}
+  - {name: football_team_stat_ids7, query_key: footballTeamStatIds7}
+  - {name: football_team_stat_ids8, query_key: footballTeamStatIds8}
+  - {name: football_team_stat_ids9, query_key: footballTeamStatIds9}
+  - {name: football_team_stat_ids10, query_key: footballTeamStatIds10}
+  - {name: football_team_stat_ids11, query_key: footballTeamStatIds11}
+  - {name: hockey_leader_sort_stat0, query_key: hockeyLeaderSortStat0}
+  - {name: hockey_leader_sort_stat1, query_key: hockeyLeaderSortStat1}
+  - {name: hockey_leader_sort_stat2, query_key: hockeyLeaderSortStat2}
+  - {name: hockey_leader_sort_stat3, query_key: hockeyLeaderSortStat3}
+  - {name: hockey_leader_stat_ids0, query_key: hockeyLeaderStatIds0}
+  - {name: hockey_leader_stat_ids1, query_key: hockeyLeaderStatIds1}
+  - {name: hockey_leader_stat_ids2, query_key: hockeyLeaderStatIds2}
+  - {name: hockey_leader_stat_ids3, query_key: hockeyLeaderStatIds3}
+  - {name: hockey_player_stat_ids0, query_key: hockeyPlayerStatIds0}
+  - {name: hockey_player_stat_ids1, query_key: hockeyPlayerStatIds1}
+  - {name: hockey_player_stat_ids2, query_key: hockeyPlayerStatIds2}
+  - {name: hockey_team_sort_stat0, query_key: hockeyTeamSortStat0}
+  - {name: hockey_team_sort_stat1, query_key: hockeyTeamSortStat1}
+  - {name: hockey_team_sort_stat2, query_key: hockeyTeamSortStat2}
+  - {name: hockey_team_sort_stat3, query_key: hockeyTeamSortStat3}
+  - {name: hockey_team_sort_stat4, query_key: hockeyTeamSortStat4}
+  - {name: hockey_team_sort_stat5, query_key: hockeyTeamSortStat5}
+  - {name: hockey_team_sort_stat6, query_key: hockeyTeamSortStat6}
+  - {name: hockey_team_stat_ids0, query_key: hockeyTeamStatIds0}
+  - {name: hockey_team_stat_ids1, query_key: hockeyTeamStatIds1}
+  - {name: hockey_team_stat_ids2, query_key: hockeyTeamStatIds2}
+  - {name: hockey_team_stat_ids3, query_key: hockeyTeamStatIds3}
+  - {name: hockey_team_stat_ids4, query_key: hockeyTeamStatIds4}
+  - {name: hockey_team_stat_ids5, query_key: hockeyTeamStatIds5}
+  - {name: hockey_team_stat_ids6, query_key: hockeyTeamStatIds6}
+  - {name: soccer_player_stat_ids0, query_key: soccerPlayerStatIds0}
+  - {name: soccer_player_stat_ids1, query_key: soccerPlayerStatIds1}
+  - {name: soccer_player_stat_ids2, query_key: soccerPlayerStatIds2}
+  - {name: soccer_player_stat_ids3, query_key: soccerPlayerStatIds3}
+  - {name: soccer_player_stat_ids4, query_key: soccerPlayerStatIds4}
+  - {name: soccer_team_sort_stat0, query_key: soccerTeamSortStat0}
+  - {name: soccer_team_sort_stat1, query_key: soccerTeamSortStat1}
+  - {name: soccer_team_sort_stat2, query_key: soccerTeamSortStat2}
+  - {name: soccer_team_sort_stat3, query_key: soccerTeamSortStat3}
+  - {name: soccer_team_sort_stat4, query_key: soccerTeamSortStat4}
+  - {name: soccer_team_sort_stat5, query_key: soccerTeamSortStat5}
+  - {name: soccer_team_stat_ids0, query_key: soccerTeamStatIds0}
+  - {name: soccer_team_stat_ids1, query_key: soccerTeamStatIds1}
+  - {name: soccer_team_stat_ids2, query_key: soccerTeamStatIds2}
+  - {name: soccer_team_stat_ids3, query_key: soccerTeamStatIds3}
+  - {name: soccer_team_stat_ids4, query_key: soccerTeamStatIds4}
+  - {name: soccer_team_stat_ids5, query_key: soccerTeamStatIds5}
+- short: gametime_game
+  path: /v1/query/shangrila/gametimeGame
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/gametime_game
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+- short: gametime_team
+  path: /v1/query/shangrila/gametimeTeam
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/gametime_team
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+- short: golf_tournament_seasons
+  path: /v1/query/shangrila/golfTournamentSeasons
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/golf_tournament_seasons
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: event_group_id, query_key: eventGroupId}
+- short: golf_tournaments
+  path: /v1/query/shangrila/golfTournaments
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/golf_tournaments
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: association, query_key: association}
+  - {name: season, query_key: season}
+  - {name: show_defending_champs, query_key: showDefendingChamps}
+- short: golf_tournaments_basic
+  path: /v1/query/shangrila/golfTournamentsBasic
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/golf_tournaments_basic
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: event_group_id, query_key: eventGroupId}
+  - {name: association, query_key: association}
+  - {name: season, query_key: season}
+- short: league_conferences
+  path: /v1/query/shangrila/leagueConferences
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_conferences
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: division_ids, query_key: divisionIds}
+- short: league_filters_data
+  path: /v1/query/shangrila/leagueFiltersData
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_filters_data
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+  - {name: view_type, query_key: viewType}
+  - {name: include_pos_and_splits_data, query_key: includePosAndSplitsData}
+- short: league_future_odds
+  path: /v1/query/shangrila/leagueFutureOdds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_future_odds
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: bet_categories, query_key: betCategories}
+- short: league_game_ids
+  path: /v1/query/shangrila/leagueGameIds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_game_ids
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: count, query_key: count}
+  - {name: league, query_key: league}
+  - {name: week, query_key: week}
+  - {name: date, query_key: date}
+  - {name: season, query_key: season}
+  - {name: game_status_order, query_key: gameStatusOrder}
+  - {name: start_time_order, query_key: startTimeOrder}
+  - {name: date_flip_offset, query_key: dateFlipOffset}
+  - {name: season_phase, query_key: seasonPhase}
+  - {name: conference_ids, query_key: conferenceIds}
+  - {name: top25, query_key: top25}
+  - {name: game_day_query_type, query_key: gameDayQueryType}
+- short: league_game_ids_by_date
+  path: /v1/query/shangrila/leagueGameIdsByDate
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_game_ids_by_date
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+  - {name: week, query_key: week}
+  - {name: dates, query_key: dates}
+  - {name: start_range, query_key: startRange}
+  - {name: end_range, query_key: endRange}
+  - {name: season, query_key: season}
+  - {name: season_phases, query_key: seasonPhases}
+  - {name: conference_ids, query_key: conferenceIds}
+  - {name: division_ids, query_key: divisionIds}
+  - {name: top25, query_key: top25}
+  - {name: tournament_ids, query_key: tournamentIds}
+  - {name: is_tennis, query_key: isTennis}
+- short: league_games_by_round
+  path: /v1/query/shangrila/leagueGamesByRound
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_games_by_round
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: tournament_round_ids, query_key: tournamentRoundIds}
+  - {name: season, query_key: season}
+- short: league_info
+  path: /v1/query/shangrila/leagueInfo
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_info
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+- short: league_injuries
+  path: /v1/query/shangrila/leagueInjuries
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_injuries
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league_id, query_key: leagueId}
+- short: league_names
+  path: /v1/query/shangrila/leagueNames
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_names
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+- short: league_prop_odds
+  path: /v1/query/shangrila/leaguePropOdds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_prop_odds
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: count, query_key: count}
+  - {name: league, query_key: league}
+- short: league_standings
+  path: /v1/query/shangrila/leagueStandings
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_standings
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+  - {name: season_phase, query_key: seasonPhase}
+- short: league_stats_by_team
+  path: /v1/query/shangrila/leagueStatsByTeam
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/league_stats_by_team
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+  - {name: count, query_key: count}
+  - {name: season, query_key: season}
+  - {name: league_structure_id, query_key: leagueStructureId}
+  - {name: baseball_cut_type, query_key: baseballCutType}
+  - {name: basketball_cut_type, query_key: basketballCutType}
+  - {name: football_cut_type, query_key: footballCutType}
+  - {name: hockey_cut_type, query_key: hockeyCutType}
+- short: league_stats_individual
+  path: /v1/query/shangrila/leagueStatsIndividual
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/league_stats_individual
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+  - {name: count, query_key: count}
+  - {name: season, query_key: season}
+  - {name: qualified, query_key: qualified}
+  - {name: league_structure_id, query_key: leagueStructureId}
+  - {name: baseball_cut_type, query_key: baseballCutType}
+  - {name: baseball_position, query_key: baseballPosition}
+  - {name: basketball_cut_type, query_key: basketballCutType}
+  - {name: basketball_position, query_key: basketballPosition}
+  - {name: football_cut_type, query_key: footballCutType}
+  - {name: hockey_cut_type, query_key: hockeyCutType}
+  - {name: hockey_position, query_key: hockeyPosition}
+  - {name: golf_sort_stat, query_key: golfSortStat}
+  - {name: golf_stat_ids, query_key: golfStatIds}
+  - {name: motorsports_sort_stat, query_key: motorsportsSortStat}
+  - {name: motorsports_stat_ids, query_key: motorsportsStatIds}
+- short: league_stats_overview
+  path: /v1/query/shangrila/leagueStatsOverview
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/league_stats_overview
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+  - {name: count, query_key: count}
+  - {name: week, query_key: week}
+  - {name: week_season_phase, query_key: weekSeasonPhase}
+  - {name: season_phase, query_key: seasonPhase}
+  - {name: league_structure_id, query_key: leagueStructureId}
+  - {name: golf_sort_stat, query_key: golfSortStat}
+  - {name: golf_stat_ids, query_key: golfStatIds}
+  - {name: motorsports_sort_stat, query_key: motorsportsSortStat}
+  - {name: motorsports_stat_ids, query_key: motorsportsStatIds}
+- short: league_stats_weekly
+  path: /v1/query/shangrila/leagueStatsWeekly
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/league_stats_weekly
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+  - {name: count, query_key: count}
+  - {name: week, query_key: week}
+  - {name: season, query_key: season}
+  - {name: season_phase, query_key: seasonPhase}
+- short: league_team_ids
+  path: /v1/query/shangrila/leagueTeamIds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_team_ids
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: division_ids, query_key: divisionIds}
+  - {name: get_teams_by_division, query_key: getTeamsByDivision}
+- short: league_teams
+  path: /v1/query/shangrila/leagueTeams
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/league_teams
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+  - {name: division_ids, query_key: divisionIds}
+  - {name: get_teams_by_division, query_key: getTeamsByDivision}
+- short: leagues_season_states
+  path: /v1/query/shangrila/leaguesSeasonStates
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/leagues_season_states
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+- short: module_game
+  path: /v1/query/shangrila/moduleGame
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/module_game
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+- short: motorsport_standings
+  path: /v1/query/shangrila/motorsportStandings
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/motorsport_standings
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+- short: nascar_drivers
+  path: /v1/query/shangrila/nascarDrivers
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/nascar_drivers
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+- short: nav_dropdown_tray
+  path: /v1/query/shangrila/navDropdownTray
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/nav_dropdown_tray
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: get_soccer_data, query_key: getSoccerData}
+  - {name: soccer_league_ids, query_key: soccerLeagueIds}
+  - {name: soccer_team_ids, query_key: soccerTeamIds}
+- short: pick_distribution
+  path: /v1/query/shangrila/pickDistribution
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/pick_distribution
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: dates, query_key: dates}
+  - {name: count, query_key: count}
+- short: playbook_boxscore
+  path: /v1/query/shangrila/playbookBoxscore
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_boxscore
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: standings_season_phases, query_key: standingsSeasonPhases}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+  - {name: is_baseball, query_key: isBaseball}
+  - {name: is_football, query_key: isFootball}
+  - {name: is_pro_basketball, query_key: isProBasketball}
+  - {name: is_college_basketball, query_key: isCollegeBasketball}
+  - {name: is_hockey, query_key: isHockey}
+  - {name: is_soccer, query_key: isSoccer}
+  - {name: event_state, query_key: eventState}
+- short: playbook_boxscore_poll
+  path: /v1/query/shangrila/playbookBoxscorePoll
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_boxscore_poll
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: standings_season_phases, query_key: standingsSeasonPhases}
+  - {name: is_baseball, query_key: isBaseball}
+  - {name: is_football, query_key: isFootball}
+  - {name: is_pro_basketball, query_key: isProBasketball}
+  - {name: is_college_basketball, query_key: isCollegeBasketball}
+  - {name: is_hockey, query_key: isHockey}
+  - {name: is_soccer, query_key: isSoccer}
+  - {name: event_state, query_key: eventState}
+- short: playbook_boxscore_social_share
+  path: /v1/query/shangrila/playbookBoxscoreSocialShare
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_boxscore_social_share
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+- short: playbook_combat_match
+  path: /v1/query/shangrila/playbookCombatMatch
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_combat_match
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+  - {name: headshot_height, query_key: headshotHeight}
+  - {name: headshot_width, query_key: headshotWidth}
+- short: playbook_game
+  path: /v1/query/shangrila/playbookGame
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_game
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+- short: playbook_game_odds_poll
+  path: /v1/query/shangrila/playbookGameOddsPoll
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_game_odds_poll
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: event_state, query_key: eventState}
+- short: playbook_golf_tournament
+  path: /v1/query/shangrila/playbookGolfTournament
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_golf_tournament
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: season, query_key: season}
+  - {name: count, query_key: count}
+  - {name: stat_ids, query_key: statIds}
+  - {name: show_hole_results, query_key: showHoleResults}
+- short: playbook_league_odds
+  path: /v1/query/shangrila/playbookLeagueOdds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_league_odds
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: dates, query_key: dates}
+  - {name: count, query_key: count}
+  - {name: start_time_filter, query_key: startTimeFilter}
+  - {name: range_start_date, query_key: rangeStartDate}
+  - {name: range_end_date, query_key: rangeEndDate}
+- short: playbook_player
+  path: /v1/query/shangrila/playbookPlayer
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_player
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+  - {name: season_phases, query_key: seasonPhases}
+- short: playbook_player_social_share
+  path: /v1/query/shangrila/playbookPlayerSocialShare
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_player_social_share
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+- short: playbook_race
+  path: /v1/query/shangrila/playbookRace
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_race
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: player_image_height, query_key: playerImageHeight}
+  - {name: player_image_width, query_key: playerImageWidth}
+- short: playbook_team
+  path: /v1/query/shangrila/playbookTeam
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_team
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+  - {name: league_short_name, query_key: leagueShortName}
+  - {name: disable_conference, query_key: disableConference}
+  - {name: disable_division, query_key: disableDivision}
+- short: playbook_team_basic
+  path: /v1/query/shangrila/playbookTeamBasic
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_team_basic
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+- short: playbook_team_social_share
+  path: /v1/query/shangrila/playbookTeamSocialShare
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_team_social_share
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+- short: playbook_tennis_match
+  path: /v1/query/shangrila/playbookTennisMatch
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playbook_tennis_match
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+- short: player_basic
+  path: /v1/query/shangrila/playerBasic
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/player_basic
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: player_id, query_key: playerId}
+- short: player_career_stats
+  path: /v1/query/shangrila/playerCareerStats
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/player_career_stats
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+  - {name: season_phases, query_key: seasonPhases}
+  - {name: football_stat_ids, query_key: footballStatIds}
+  - {name: basketball_stat_ids, query_key: basketballStatIds}
+  - {name: baseball_stat_ids, query_key: baseballStatIds}
+  - {name: hockey_stat_ids, query_key: hockeyStatIds}
+  - {name: soccer_stat_ids, query_key: soccerStatIds}
+- short: player_game_log
+  path: /v1/query/shangrila/playerGameLog
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/player_game_log
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+  - {name: count, query_key: count}
+  - {name: seasons, query_key: seasons}
+  - {name: season_phases, query_key: seasonPhases}
+  - {name: football_stat_ids, query_key: footballStatIds}
+  - {name: basketball_stat_ids, query_key: basketballStatIds}
+  - {name: baseball_stat_ids, query_key: baseballStatIds}
+  - {name: hockey_stat_ids, query_key: hockeyStatIds}
+  - {name: soccer_stat_ids, query_key: soccerStatIds}
+- short: player_props
+  path: /v1/query/shangrila/playerProps
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/player_props
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+- short: player_search
+  path: /v1/query/shangrila/playerSearch
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/player_search
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: name, query_key: name}
+  - {name: on_active_roster_only, query_key: onActiveRosterOnly}
+  - {name: nfl_position_id, query_key: nflPositionId}
+  - {name: nba_position_id, query_key: nbaPositionId}
+  - {name: mlb_position_id, query_key: mlbPositionId}
+  - {name: nhl_position_id, query_key: nhlPositionId}
+- short: player_season_stats
+  path: /v1/query/shangrila/playerSeasonStats
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/player_season_stats
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: player_id, query_key: playerId}
+  - {name: seasons, query_key: seasons}
+  - {name: season_phases, query_key: seasonPhases}
+  - {name: football_stat_ids, query_key: footballStatIds}
+  - {name: football_cut_type_groups, query_key: footballCutTypeGroups}
+  - {name: basketball_stat_ids, query_key: basketballStatIds}
+  - {name: basketball_cut_type_groups, query_key: basketballCutTypeGroups}
+  - {name: baseball_stat_ids, query_key: baseballStatIds}
+  - {name: baseball_cut_type_groups, query_key: baseballCutTypeGroups}
+  - {name: hockey_stat_ids, query_key: hockeyStatIds}
+  - {name: hockey_cut_type_groups, query_key: hockeyCutTypeGroups}
+  - {name: group_by_season_phase, query_key: groupBySeasonPhase}
+  - {name: use_player_unique_id, query_key: usePlayerUniqueId}
+- short: playoff_bracket
+  path: /v1/query/shangrila/playoffBracket
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playoff_bracket
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+  - {name: tournament, query_key: tournament}
+  - {name: type, query_key: type}
+  - {name: playoff_rounds, query_key: playoffRounds}
+- short: playoff_series_game
+  path: /v1/query/shangrila/playoffSeriesGame
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/playoff_series_game
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+- short: polymarket_game
+  path: /v1/query/shangrila/polymarketGame
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/polymarket_game
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+- short: racing_schedule
+  path: /v1/query/shangrila/racingSchedule
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/racing_schedule
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: season, query_key: season}
+  - {name: today, query_key: today}
+  - {name: has_series, query_key: hasSeries}
+- short: scoreboard_game
+  path: /v1/query/shangrila/scoreboardGame
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/scoreboard_game
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: game_id, query_key: gameId}
+  - {name: season, query_key: season}
+  - {name: season_phase, query_key: seasonPhase}
+  - {name: stat_leader_count, query_key: statLeaderCount}
+  - {name: single_stat_leader, query_key: singleStatLeader}
+  - {name: bet_event_state, query_key: betEventState}
+- short: season_stats_football_defense_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballDefenseNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_defense_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_stats_football_kicking_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballKickingNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_kicking_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_stats_football_passing_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballPassingNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_passing_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_stats_football_punting_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballPuntingNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_punting_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_stats_football_receiving_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballReceivingNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_receiving_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_stats_football_returns_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballReturnsNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_returns_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_stats_football_rushing_ncaaf
+  path: /v1/query/shangrila/seasonStatsFootballRushingNcaaf
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_stats_football_rushing_ncaaf
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_defense
+  path: /v1/query/shangrila/seasonTeamStatsFootballDefense
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_defense
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_kicking
+  path: /v1/query/shangrila/seasonTeamStatsFootballKicking
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_kicking
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_kickoffs
+  path: /v1/query/shangrila/seasonTeamStatsFootballKickoffs
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_kickoffs
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_offense
+  path: /v1/query/shangrila/seasonTeamStatsFootballOffense
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_offense
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_passing
+  path: /v1/query/shangrila/seasonTeamStatsFootballPassing
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_passing
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_passing_defense
+  path: /v1/query/shangrila/seasonTeamStatsFootballPassingDefense
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_passing_defense
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_punting
+  path: /v1/query/shangrila/seasonTeamStatsFootballPunting
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_punting
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_receiving
+  path: /v1/query/shangrila/seasonTeamStatsFootballReceiving
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_receiving
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_receiving_defense
+  path: /v1/query/shangrila/seasonTeamStatsFootballReceivingDefense
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_receiving_defense
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_returns
+  path: /v1/query/shangrila/seasonTeamStatsFootballReturns
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_returns
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_rushing
+  path: /v1/query/shangrila/seasonTeamStatsFootballRushing
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_rushing
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: season_team_stats_football_rushing_defense
+  path: /v1/query/shangrila/seasonTeamStatsFootballRushingDefense
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/season_team_stats_football_rushing_defense
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: league, query_key: league, default: ncaaf}
+  - {name: league_structure, query_key: leagueStructure}
+  - {name: count, query_key: count}
+  - {name: sort_stat_id, query_key: sortStatId}
+- short: team_injuries
+  path: /v1/query/shangrila/teamInjuries
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/team_injuries
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+- short: team_playoff_series
+  path: /v1/query/shangrila/teamPlayoffSeries
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/team_playoff_series
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+  - {name: season, query_key: season}
+- short: team_roster
+  path: /v1/query/shangrila/teamRoster
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/team_roster
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+  - {name: player_image_height, query_key: playerImageHeight}
+  - {name: player_image_width, query_key: playerImageWidth}
+- short: team_schedule_by_season
+  path: /v1/query/shangrila/teamScheduleBySeason
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/team_schedule_by_season
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: team_id, query_key: teamId}
+- short: team_search
+  path: /v1/query/shangrila/teamSearch
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/team_search
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: name, query_key: name}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+- short: team_stats_leaders_v2
+  path: /v1/query/shangrila/teamStatsLeadersV2
+  parser: parse_yahoo_shangrila_stats
+  returns_schema: native/yahoo_shangrila/team_stats_leaders_v2
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league, query_key: league}
+  - {name: team_id, query_key: teamId}
+  - {name: count, query_key: count}
+  - {name: season, query_key: season}
+  - {name: baseball_cut_type, query_key: baseballCutType}
+  - {name: qualified, query_key: qualified}
+  - {name: include_team_stats, query_key: includeTeamStats}
+  - {name: include_player_stats, query_key: includePlayerStats}
+  - {name: is_baseball, query_key: isBaseball}
+- short: team_transactions
+  path: /v1/query/shangrila/teamTransactions
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/team_transactions
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_id, query_key: teamId}
+- short: teams_basic
+  path: /v1/query/shangrila/teamsBasic
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/teams_basic
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: team_ids, query_key: teamIds}
+  - {name: image_height, query_key: imageHeight}
+  - {name: image_width, query_key: imageWidth}
+- short: tennis_matches_by_date
+  path: /v1/query/shangrila/tennisMatchesByDate
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/tennis_matches_by_date
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: tournament_id, query_key: tournamentId}
+  - {name: season, query_key: season}
+  - {name: date, query_key: date}
+- short: tennis_tournament
+  path: /v1/query/shangrila/tennisTournament
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/tennis_tournament
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: tournament_id, query_key: tournamentId}
+  - {name: season, query_key: season}
+- short: tennis_tournaments
+  path: /v1/query/shangrila/tennisTournaments
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/tennis_tournaments
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: league_id, query_key: leagueId}
+  - {name: match_type, query_key: matchType}
+  - {name: season, query_key: season}
+- short: tennis_tournaments_by_date
+  path: /v1/query/shangrila/tennisTournamentsByDate
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/tennis_tournaments_by_date
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: season, query_key: season}
+  - {name: date, query_key: date}
+- short: trending_event_ids
+  path: /v1/query/shangrila/trendingEventIds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/trending_event_ids
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: count, query_key: count}
+  - {name: league, query_key: league}
+  - {name: date_flip_offset, query_key: dateFlipOffset}
+- short: trending_game_ids
+  path: /v1/query/shangrila/trendingGameIds
+  parser: parse_yahoo_shangrila_list
+  returns_schema: native/yahoo_shangrila/trending_game_ids
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: count, query_key: count}
+  - {name: league, query_key: league}
+  - {name: date_flip_offset, query_key: dateFlipOffset}
+  - {name: dates, query_key: dates}

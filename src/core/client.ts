@@ -56,6 +56,14 @@ export const FLAT_HOSTS: Record<string, string> = {
   // apikey + api-version query pair (both default in the wrapper metadata), so
   // this family is NOT `auth: true` — no account/token, no required `headers`.
   fox_bifrost: "https://api.foxsports.com",
+  // Yahoo Sports — fifth (and final) cross-sport (non-league) provider family.
+  // TWO api stems on TWO hosts share the standalone `yahoo` namespace
+  // (sdv.yahoo.*): editorial (api-secure.sports.yahoo.com) + shangrila
+  // stats-graph (graphite-secure.sports.yahoo.com). Keyless (the specs ship no
+  // securityScheme), so NOT `auth: true` — Yahoo rejects requests without
+  // browser-y Origin/Referer, which the caller supplies via the flat `headers`.
+  yahoo_editorial: "https://api-secure.sports.yahoo.com",
+  yahoo_shangrila: "https://graphite-secure.sports.yahoo.com",
 };
 
 const client = axios.create({

@@ -1,0 +1,57 @@
+# Yahoo Sports Editorial API (api-secure.sports.yahoo.com/v1/editorial/s).
+#
+# AUTO-EMITTED skeleton from sdv-swagger/yahoo-sports-editorial.openapi.yaml via
+#   node tools/codegen/from-openapi.mjs <spec> --api yahoo_editorial
+# then HAND-CLEANED: trimmed the verbose `get_editorial_*` operationId stems
+# down to readable `short` names (scoreboard / boxscore). The $ref-resolving
+# transform now restores the `{gameId}` path param + the lang/region/tz query
+# params from the spec's `components.parameters` automatically (no hand-restore).
+#
+# Merges onto the standalone `yahoo` namespace (sdv.yahoo.*) — NOT a league.
+# The editorial host shares the `yahoo` namespace with the shangrila stats-graph
+# host (two hosts, one namespace — like the NHL families share `nhl`).
+# Methods: sdv.yahoo.yahoo_editorial_<short> / yahooEditorial<Short>.
+#
+# AUTH: keyless. There is no account/token and the spec ships no
+# securityScheme, so this family is NOT flagged `auth: true`. Yahoo commonly
+# rejects requests without browser-y `Origin` / `Referer` headers, though, so
+# the caller supplies those via the flat `headers` arg, e.g.
+#   sdv.yahoo.yahoo_editorial_scoreboard({
+#     leagues: 'ncaaf',
+#     headers: { Origin: 'https://sports.yahoo.com', Referer: 'https://sports.yahoo.com/' },
+#   })
+#
+# RESPONSES: both endpoints wrap their payload in a `service` envelope. The
+# scoreboard returns a keyed game map (`service.scoreboard.games.<league>.g.<id>`)
+# and the boxscore a keyed player-stats map
+# (`service.boxscore.player_stats.<league>.p.<id>`); the dedicated parsers
+# unroll those maps into one row per game / player.
+api: yahoo_editorial
+host: https://api-secure.sports.yahoo.com
+endpoints:
+- short: boxscore
+  path: /v1/editorial/s/boxscore/{game_id}
+  parser: parse_yahoo_editorial_boxscore
+  returns_schema: native/yahoo_editorial/boxscore
+  path_params:
+  - {name: game_id, required: true}  # template token {gameId}
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: v, query_key: v, default: 4}
+  - {name: polling, query_key: polling}
+- short: scoreboard
+  path: /v1/editorial/s/scoreboard
+  parser: parse_yahoo_editorial_scoreboard
+  returns_schema: native/yahoo_editorial/scoreboard
+  extra_params:
+  - {name: lang, query_key: lang, default: en-US}
+  - {name: region, query_key: region, default: US}
+  - {name: tz, query_key: tz, default: America/Chicago}
+  - {name: leagues, query_key: leagues}
+  - {name: week, query_key: week}
+  - {name: season, query_key: season}
+  - {name: conferences, query_key: conferences}
+  - {name: count, query_key: count, default: 500}
+  - {name: v, query_key: v, default: 2}

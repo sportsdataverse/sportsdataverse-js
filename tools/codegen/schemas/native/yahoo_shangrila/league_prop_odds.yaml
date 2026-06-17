@@ -1,0 +1,5 @@
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_shangrila_list. The spec ships no typed list item for this query, so columns are not enumerable ahead of a live capture; the parser snake_cases + flattens whatever keys the payload ships.
+schema: league_prop_odds
+kind: dataframe
+columns: []

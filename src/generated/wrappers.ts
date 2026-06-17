@@ -11770,5 +11770,5271 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_fox_bifrost_list",
     "returnsSchema": "native/fox_bifrost/fs_videos"
+  },
+  {
+    "short": "boxscore",
+    "flat": true,
+    "api": "yahoo_editorial",
+    "host": "https://api-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/editorial/s/boxscore/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "v",
+        "queryKey": "v",
+        "default": 4
+      },
+      {
+        "name": "polling",
+        "queryKey": "polling"
+      }
+    ],
+    "parser": "parse_yahoo_editorial_boxscore",
+    "returnsSchema": "native/yahoo_editorial/boxscore"
+  },
+  {
+    "short": "scoreboard",
+    "flat": true,
+    "api": "yahoo_editorial",
+    "host": "https://api-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/editorial/s/scoreboard",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "conferences",
+        "queryKey": "conferences"
+      },
+      {
+        "name": "count",
+        "queryKey": "count",
+        "default": 500
+      },
+      {
+        "name": "v",
+        "queryKey": "v",
+        "default": 2
+      }
+    ],
+    "parser": "parse_yahoo_editorial_scoreboard",
+    "returnsSchema": "native/yahoo_editorial/scoreboard"
+  },
+  {
+    "short": "oly_medal_count",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/OlyMedalCount",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sort_method",
+        "queryKey": "sortMethod"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/oly_medal_count"
+  },
+  {
+    "short": "oly_seasons",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/OlySeasons",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "seasons",
+        "queryKey": "seasons"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/oly_seasons"
+  },
+  {
+    "short": "alias",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/alias",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "alias",
+        "queryKey": "alias"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/alias"
+  },
+  {
+    "short": "article_list_card_players",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/articleListCardPlayers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_ids",
+        "queryKey": "playerIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/article_list_card_players"
+  },
+  {
+    "short": "article_list_card_teams",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/articleListCardTeams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_ids",
+        "queryKey": "teamIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/article_list_card_teams"
+  },
+  {
+    "short": "basic_players",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/basicPlayers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "players",
+        "queryKey": "players"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/basic_players"
+  },
+  {
+    "short": "betting_disclaimer",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/bettingDisclaimer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "betting_disclaimer_id",
+        "queryKey": "bettingDisclaimerId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/betting_disclaimer"
+  },
+  {
+    "short": "combat_event_fights",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/combatEventFights",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "event_group_id",
+        "queryKey": "eventGroupId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/combat_event_fights"
+  },
+  {
+    "short": "combat_schedule",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/combatSchedule",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/combat_schedule"
+  },
+  {
+    "short": "common_pills",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/common/pills",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "add_team_logos",
+        "queryKey": "addTeamLogos"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "team_ids",
+        "queryKey": "teamIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/common_pills"
+  },
+  {
+    "short": "consensus_rankings_php",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/consensus-rankings.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "sport",
+        "queryKey": "sport"
+      },
+      {
+        "name": "position",
+        "queryKey": "position"
+      },
+      {
+        "name": "filters",
+        "queryKey": "filters"
+      },
+      {
+        "name": "experts",
+        "queryKey": "experts"
+      },
+      {
+        "name": "scoring",
+        "queryKey": "scoring"
+      },
+      {
+        "name": "type",
+        "queryKey": "type"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/consensus_rankings_php"
+  },
+  {
+    "short": "draft",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/draft",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/draft"
+  },
+  {
+    "short": "draft_prospects",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/draftProspects",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/draft_prospects"
+  },
+  {
+    "short": "driver_results",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/driverResults",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/driver_results"
+  },
+  {
+    "short": "driver_splits",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/driverSplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/driver_splits"
+  },
+  {
+    "short": "featured_game_ids",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/featuredGameIds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/featured_game_ids"
+  },
+  {
+    "short": "game_prop_bets",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/gamePropBets",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/game_prop_bets"
+  },
+  {
+    "short": "game_stats_leaders",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/gameStatsLeaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "season_phases",
+        "queryKey": "seasonPhases"
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualified"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "is_pregame",
+        "queryKey": "isPregame"
+      },
+      {
+        "name": "team_image_height",
+        "queryKey": "teamImageHeight"
+      },
+      {
+        "name": "team_image_width",
+        "queryKey": "teamImageWidth"
+      },
+      {
+        "name": "player_image_height",
+        "queryKey": "playerImageHeight"
+      },
+      {
+        "name": "player_image_width",
+        "queryKey": "playerImageWidth"
+      },
+      {
+        "name": "baseball_leader_sort_stat0",
+        "queryKey": "baseballLeaderSortStat0"
+      },
+      {
+        "name": "baseball_leader_sort_stat1",
+        "queryKey": "baseballLeaderSortStat1"
+      },
+      {
+        "name": "baseball_leader_sort_stat2",
+        "queryKey": "baseballLeaderSortStat2"
+      },
+      {
+        "name": "baseball_leader_sort_stat3",
+        "queryKey": "baseballLeaderSortStat3"
+      },
+      {
+        "name": "baseball_leader_sort_stat4",
+        "queryKey": "baseballLeaderSortStat4"
+      },
+      {
+        "name": "baseball_leader_stat_ids0",
+        "queryKey": "baseballLeaderStatIds0"
+      },
+      {
+        "name": "baseball_leader_stat_ids1",
+        "queryKey": "baseballLeaderStatIds1"
+      },
+      {
+        "name": "baseball_leader_stat_ids2",
+        "queryKey": "baseballLeaderStatIds2"
+      },
+      {
+        "name": "baseball_leader_stat_ids3",
+        "queryKey": "baseballLeaderStatIds3"
+      },
+      {
+        "name": "baseball_leader_stat_ids4",
+        "queryKey": "baseballLeaderStatIds4"
+      },
+      {
+        "name": "baseball_player_stat_ids0",
+        "queryKey": "baseballPlayerStatIds0"
+      },
+      {
+        "name": "baseball_player_stat_ids1",
+        "queryKey": "baseballPlayerStatIds1"
+      },
+      {
+        "name": "baseball_team_sort_stat0",
+        "queryKey": "baseballTeamSortStat0"
+      },
+      {
+        "name": "baseball_team_sort_stat1",
+        "queryKey": "baseballTeamSortStat1"
+      },
+      {
+        "name": "baseball_team_sort_stat2",
+        "queryKey": "baseballTeamSortStat2"
+      },
+      {
+        "name": "baseball_team_sort_stat3",
+        "queryKey": "baseballTeamSortStat3"
+      },
+      {
+        "name": "baseball_team_sort_stat4",
+        "queryKey": "baseballTeamSortStat4"
+      },
+      {
+        "name": "baseball_team_sort_stat5",
+        "queryKey": "baseballTeamSortStat5"
+      },
+      {
+        "name": "baseball_team_sort_stat6",
+        "queryKey": "baseballTeamSortStat6"
+      },
+      {
+        "name": "baseball_team_sort_stat7",
+        "queryKey": "baseballTeamSortStat7"
+      },
+      {
+        "name": "baseball_team_sort_stat8",
+        "queryKey": "baseballTeamSortStat8"
+      },
+      {
+        "name": "baseball_team_sort_stat9",
+        "queryKey": "baseballTeamSortStat9"
+      },
+      {
+        "name": "baseball_team_sort_stat10",
+        "queryKey": "baseballTeamSortStat10"
+      },
+      {
+        "name": "baseball_team_sort_stat11",
+        "queryKey": "baseballTeamSortStat11"
+      },
+      {
+        "name": "baseball_team_stat_ids0",
+        "queryKey": "baseballTeamStatIds0"
+      },
+      {
+        "name": "baseball_team_stat_ids1",
+        "queryKey": "baseballTeamStatIds1"
+      },
+      {
+        "name": "baseball_team_stat_ids2",
+        "queryKey": "baseballTeamStatIds2"
+      },
+      {
+        "name": "baseball_team_stat_ids3",
+        "queryKey": "baseballTeamStatIds3"
+      },
+      {
+        "name": "baseball_team_stat_ids4",
+        "queryKey": "baseballTeamStatIds4"
+      },
+      {
+        "name": "baseball_team_stat_ids5",
+        "queryKey": "baseballTeamStatIds5"
+      },
+      {
+        "name": "baseball_team_stat_ids6",
+        "queryKey": "baseballTeamStatIds6"
+      },
+      {
+        "name": "baseball_team_stat_ids7",
+        "queryKey": "baseballTeamStatIds7"
+      },
+      {
+        "name": "baseball_team_stat_ids8",
+        "queryKey": "baseballTeamStatIds8"
+      },
+      {
+        "name": "baseball_team_stat_ids9",
+        "queryKey": "baseballTeamStatIds9"
+      },
+      {
+        "name": "baseball_team_stat_ids10",
+        "queryKey": "baseballTeamStatIds10"
+      },
+      {
+        "name": "baseball_team_stat_ids11",
+        "queryKey": "baseballTeamStatIds11"
+      },
+      {
+        "name": "basketball_leader_sort_stat0",
+        "queryKey": "basketballLeaderSortStat0"
+      },
+      {
+        "name": "basketball_leader_sort_stat1",
+        "queryKey": "basketballLeaderSortStat1"
+      },
+      {
+        "name": "basketball_leader_sort_stat2",
+        "queryKey": "basketballLeaderSortStat2"
+      },
+      {
+        "name": "basketball_leader_sort_stat3",
+        "queryKey": "basketballLeaderSortStat3"
+      },
+      {
+        "name": "basketball_leader_sort_stat4",
+        "queryKey": "basketballLeaderSortStat4"
+      },
+      {
+        "name": "basketball_leader_stat_ids0",
+        "queryKey": "basketballLeaderStatIds0"
+      },
+      {
+        "name": "basketball_leader_stat_ids1",
+        "queryKey": "basketballLeaderStatIds1"
+      },
+      {
+        "name": "basketball_leader_stat_ids2",
+        "queryKey": "basketballLeaderStatIds2"
+      },
+      {
+        "name": "basketball_leader_stat_ids3",
+        "queryKey": "basketballLeaderStatIds3"
+      },
+      {
+        "name": "basketball_leader_stat_ids4",
+        "queryKey": "basketballLeaderStatIds4"
+      },
+      {
+        "name": "basketball_player_stat_ids0",
+        "queryKey": "basketballPlayerStatIds0"
+      },
+      {
+        "name": "basketball_team_sort_stat0",
+        "queryKey": "basketballTeamSortStat0"
+      },
+      {
+        "name": "basketball_team_sort_stat1",
+        "queryKey": "basketballTeamSortStat1"
+      },
+      {
+        "name": "basketball_team_sort_stat2",
+        "queryKey": "basketballTeamSortStat2"
+      },
+      {
+        "name": "basketball_team_sort_stat3",
+        "queryKey": "basketballTeamSortStat3"
+      },
+      {
+        "name": "basketball_team_sort_stat4",
+        "queryKey": "basketballTeamSortStat4"
+      },
+      {
+        "name": "basketball_team_sort_stat5",
+        "queryKey": "basketballTeamSortStat5"
+      },
+      {
+        "name": "basketball_team_sort_stat6",
+        "queryKey": "basketballTeamSortStat6"
+      },
+      {
+        "name": "basketball_team_sort_stat7",
+        "queryKey": "basketballTeamSortStat7"
+      },
+      {
+        "name": "basketball_team_sort_stat8",
+        "queryKey": "basketballTeamSortStat8"
+      },
+      {
+        "name": "basketball_team_sort_stat9",
+        "queryKey": "basketballTeamSortStat9"
+      },
+      {
+        "name": "basketball_team_stat_ids0",
+        "queryKey": "basketballTeamStatIds0"
+      },
+      {
+        "name": "basketball_team_stat_ids1",
+        "queryKey": "basketballTeamStatIds1"
+      },
+      {
+        "name": "basketball_team_stat_ids2",
+        "queryKey": "basketballTeamStatIds2"
+      },
+      {
+        "name": "basketball_team_stat_ids3",
+        "queryKey": "basketballTeamStatIds3"
+      },
+      {
+        "name": "basketball_team_stat_ids4",
+        "queryKey": "basketballTeamStatIds4"
+      },
+      {
+        "name": "basketball_team_stat_ids5",
+        "queryKey": "basketballTeamStatIds5"
+      },
+      {
+        "name": "basketball_team_stat_ids6",
+        "queryKey": "basketballTeamStatIds6"
+      },
+      {
+        "name": "basketball_team_stat_ids7",
+        "queryKey": "basketballTeamStatIds7"
+      },
+      {
+        "name": "basketball_team_stat_ids8",
+        "queryKey": "basketballTeamStatIds8"
+      },
+      {
+        "name": "basketball_team_stat_ids9",
+        "queryKey": "basketballTeamStatIds9"
+      },
+      {
+        "name": "football_leader_sort_stat0",
+        "queryKey": "footballLeaderSortStat0"
+      },
+      {
+        "name": "football_leader_sort_stat1",
+        "queryKey": "footballLeaderSortStat1"
+      },
+      {
+        "name": "football_leader_sort_stat2",
+        "queryKey": "footballLeaderSortStat2"
+      },
+      {
+        "name": "football_leader_sort_stat3",
+        "queryKey": "footballLeaderSortStat3"
+      },
+      {
+        "name": "football_leader_stat_ids0",
+        "queryKey": "footballLeaderStatIds0"
+      },
+      {
+        "name": "football_leader_stat_ids1",
+        "queryKey": "footballLeaderStatIds1"
+      },
+      {
+        "name": "football_leader_stat_ids2",
+        "queryKey": "footballLeaderStatIds2"
+      },
+      {
+        "name": "football_leader_stat_ids3",
+        "queryKey": "footballLeaderStatIds3"
+      },
+      {
+        "name": "football_player_stat_ids0",
+        "queryKey": "footballPlayerStatIds0"
+      },
+      {
+        "name": "football_player_stat_ids1",
+        "queryKey": "footballPlayerStatIds1"
+      },
+      {
+        "name": "football_player_stat_ids2",
+        "queryKey": "footballPlayerStatIds2"
+      },
+      {
+        "name": "football_player_stat_ids3",
+        "queryKey": "footballPlayerStatIds3"
+      },
+      {
+        "name": "football_player_stat_ids4",
+        "queryKey": "footballPlayerStatIds4"
+      },
+      {
+        "name": "football_player_stat_ids5",
+        "queryKey": "footballPlayerStatIds5"
+      },
+      {
+        "name": "football_player_stat_ids6",
+        "queryKey": "footballPlayerStatIds6"
+      },
+      {
+        "name": "football_player_stat_ids7",
+        "queryKey": "footballPlayerStatIds7"
+      },
+      {
+        "name": "football_team_sort_stat0",
+        "queryKey": "footballTeamSortStat0"
+      },
+      {
+        "name": "football_team_sort_stat1",
+        "queryKey": "footballTeamSortStat1"
+      },
+      {
+        "name": "football_team_sort_stat2",
+        "queryKey": "footballTeamSortStat2"
+      },
+      {
+        "name": "football_team_sort_stat3",
+        "queryKey": "footballTeamSortStat3"
+      },
+      {
+        "name": "football_team_sort_stat4",
+        "queryKey": "footballTeamSortStat4"
+      },
+      {
+        "name": "football_team_sort_stat5",
+        "queryKey": "footballTeamSortStat5"
+      },
+      {
+        "name": "football_team_sort_stat6",
+        "queryKey": "footballTeamSortStat6"
+      },
+      {
+        "name": "football_team_sort_stat7",
+        "queryKey": "footballTeamSortStat7"
+      },
+      {
+        "name": "football_team_sort_stat8",
+        "queryKey": "footballTeamSortStat8"
+      },
+      {
+        "name": "football_team_sort_stat9",
+        "queryKey": "footballTeamSortStat9"
+      },
+      {
+        "name": "football_team_sort_stat10",
+        "queryKey": "footballTeamSortStat10"
+      },
+      {
+        "name": "football_team_sort_stat11",
+        "queryKey": "footballTeamSortStat11"
+      },
+      {
+        "name": "football_team_stat_ids0",
+        "queryKey": "footballTeamStatIds0"
+      },
+      {
+        "name": "football_team_stat_ids1",
+        "queryKey": "footballTeamStatIds1"
+      },
+      {
+        "name": "football_team_stat_ids2",
+        "queryKey": "footballTeamStatIds2"
+      },
+      {
+        "name": "football_team_stat_ids3",
+        "queryKey": "footballTeamStatIds3"
+      },
+      {
+        "name": "football_team_stat_ids4",
+        "queryKey": "footballTeamStatIds4"
+      },
+      {
+        "name": "football_team_stat_ids5",
+        "queryKey": "footballTeamStatIds5"
+      },
+      {
+        "name": "football_team_stat_ids6",
+        "queryKey": "footballTeamStatIds6"
+      },
+      {
+        "name": "football_team_stat_ids7",
+        "queryKey": "footballTeamStatIds7"
+      },
+      {
+        "name": "football_team_stat_ids8",
+        "queryKey": "footballTeamStatIds8"
+      },
+      {
+        "name": "football_team_stat_ids9",
+        "queryKey": "footballTeamStatIds9"
+      },
+      {
+        "name": "football_team_stat_ids10",
+        "queryKey": "footballTeamStatIds10"
+      },
+      {
+        "name": "football_team_stat_ids11",
+        "queryKey": "footballTeamStatIds11"
+      },
+      {
+        "name": "hockey_leader_sort_stat0",
+        "queryKey": "hockeyLeaderSortStat0"
+      },
+      {
+        "name": "hockey_leader_sort_stat1",
+        "queryKey": "hockeyLeaderSortStat1"
+      },
+      {
+        "name": "hockey_leader_sort_stat2",
+        "queryKey": "hockeyLeaderSortStat2"
+      },
+      {
+        "name": "hockey_leader_sort_stat3",
+        "queryKey": "hockeyLeaderSortStat3"
+      },
+      {
+        "name": "hockey_leader_stat_ids0",
+        "queryKey": "hockeyLeaderStatIds0"
+      },
+      {
+        "name": "hockey_leader_stat_ids1",
+        "queryKey": "hockeyLeaderStatIds1"
+      },
+      {
+        "name": "hockey_leader_stat_ids2",
+        "queryKey": "hockeyLeaderStatIds2"
+      },
+      {
+        "name": "hockey_leader_stat_ids3",
+        "queryKey": "hockeyLeaderStatIds3"
+      },
+      {
+        "name": "hockey_player_stat_ids0",
+        "queryKey": "hockeyPlayerStatIds0"
+      },
+      {
+        "name": "hockey_player_stat_ids1",
+        "queryKey": "hockeyPlayerStatIds1"
+      },
+      {
+        "name": "hockey_player_stat_ids2",
+        "queryKey": "hockeyPlayerStatIds2"
+      },
+      {
+        "name": "hockey_team_sort_stat0",
+        "queryKey": "hockeyTeamSortStat0"
+      },
+      {
+        "name": "hockey_team_sort_stat1",
+        "queryKey": "hockeyTeamSortStat1"
+      },
+      {
+        "name": "hockey_team_sort_stat2",
+        "queryKey": "hockeyTeamSortStat2"
+      },
+      {
+        "name": "hockey_team_sort_stat3",
+        "queryKey": "hockeyTeamSortStat3"
+      },
+      {
+        "name": "hockey_team_sort_stat4",
+        "queryKey": "hockeyTeamSortStat4"
+      },
+      {
+        "name": "hockey_team_sort_stat5",
+        "queryKey": "hockeyTeamSortStat5"
+      },
+      {
+        "name": "hockey_team_sort_stat6",
+        "queryKey": "hockeyTeamSortStat6"
+      },
+      {
+        "name": "hockey_team_stat_ids0",
+        "queryKey": "hockeyTeamStatIds0"
+      },
+      {
+        "name": "hockey_team_stat_ids1",
+        "queryKey": "hockeyTeamStatIds1"
+      },
+      {
+        "name": "hockey_team_stat_ids2",
+        "queryKey": "hockeyTeamStatIds2"
+      },
+      {
+        "name": "hockey_team_stat_ids3",
+        "queryKey": "hockeyTeamStatIds3"
+      },
+      {
+        "name": "hockey_team_stat_ids4",
+        "queryKey": "hockeyTeamStatIds4"
+      },
+      {
+        "name": "hockey_team_stat_ids5",
+        "queryKey": "hockeyTeamStatIds5"
+      },
+      {
+        "name": "hockey_team_stat_ids6",
+        "queryKey": "hockeyTeamStatIds6"
+      },
+      {
+        "name": "soccer_player_stat_ids0",
+        "queryKey": "soccerPlayerStatIds0"
+      },
+      {
+        "name": "soccer_player_stat_ids1",
+        "queryKey": "soccerPlayerStatIds1"
+      },
+      {
+        "name": "soccer_player_stat_ids2",
+        "queryKey": "soccerPlayerStatIds2"
+      },
+      {
+        "name": "soccer_player_stat_ids3",
+        "queryKey": "soccerPlayerStatIds3"
+      },
+      {
+        "name": "soccer_player_stat_ids4",
+        "queryKey": "soccerPlayerStatIds4"
+      },
+      {
+        "name": "soccer_team_sort_stat0",
+        "queryKey": "soccerTeamSortStat0"
+      },
+      {
+        "name": "soccer_team_sort_stat1",
+        "queryKey": "soccerTeamSortStat1"
+      },
+      {
+        "name": "soccer_team_sort_stat2",
+        "queryKey": "soccerTeamSortStat2"
+      },
+      {
+        "name": "soccer_team_sort_stat3",
+        "queryKey": "soccerTeamSortStat3"
+      },
+      {
+        "name": "soccer_team_sort_stat4",
+        "queryKey": "soccerTeamSortStat4"
+      },
+      {
+        "name": "soccer_team_sort_stat5",
+        "queryKey": "soccerTeamSortStat5"
+      },
+      {
+        "name": "soccer_team_stat_ids0",
+        "queryKey": "soccerTeamStatIds0"
+      },
+      {
+        "name": "soccer_team_stat_ids1",
+        "queryKey": "soccerTeamStatIds1"
+      },
+      {
+        "name": "soccer_team_stat_ids2",
+        "queryKey": "soccerTeamStatIds2"
+      },
+      {
+        "name": "soccer_team_stat_ids3",
+        "queryKey": "soccerTeamStatIds3"
+      },
+      {
+        "name": "soccer_team_stat_ids4",
+        "queryKey": "soccerTeamStatIds4"
+      },
+      {
+        "name": "soccer_team_stat_ids5",
+        "queryKey": "soccerTeamStatIds5"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/game_stats_leaders"
+  },
+  {
+    "short": "gametime_game",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/gametimeGame",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/gametime_game"
+  },
+  {
+    "short": "gametime_team",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/gametimeTeam",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/gametime_team"
+  },
+  {
+    "short": "golf_tournament_seasons",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/golfTournamentSeasons",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "event_group_id",
+        "queryKey": "eventGroupId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/golf_tournament_seasons"
+  },
+  {
+    "short": "golf_tournaments",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/golfTournaments",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "association",
+        "queryKey": "association"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "show_defending_champs",
+        "queryKey": "showDefendingChamps"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/golf_tournaments"
+  },
+  {
+    "short": "golf_tournaments_basic",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/golfTournamentsBasic",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "event_group_id",
+        "queryKey": "eventGroupId"
+      },
+      {
+        "name": "association",
+        "queryKey": "association"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/golf_tournaments_basic"
+  },
+  {
+    "short": "league_conferences",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueConferences",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "division_ids",
+        "queryKey": "divisionIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_conferences"
+  },
+  {
+    "short": "league_filters_data",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueFiltersData",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "view_type",
+        "queryKey": "viewType"
+      },
+      {
+        "name": "include_pos_and_splits_data",
+        "queryKey": "includePosAndSplitsData"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_filters_data"
+  },
+  {
+    "short": "league_future_odds",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueFutureOdds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "bet_categories",
+        "queryKey": "betCategories"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_future_odds"
+  },
+  {
+    "short": "league_game_ids",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueGameIds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "game_status_order",
+        "queryKey": "gameStatusOrder"
+      },
+      {
+        "name": "start_time_order",
+        "queryKey": "startTimeOrder"
+      },
+      {
+        "name": "date_flip_offset",
+        "queryKey": "dateFlipOffset"
+      },
+      {
+        "name": "season_phase",
+        "queryKey": "seasonPhase"
+      },
+      {
+        "name": "conference_ids",
+        "queryKey": "conferenceIds"
+      },
+      {
+        "name": "top25",
+        "queryKey": "top25"
+      },
+      {
+        "name": "game_day_query_type",
+        "queryKey": "gameDayQueryType"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_game_ids"
+  },
+  {
+    "short": "league_game_ids_by_date",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueGameIdsByDate",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "dates",
+        "queryKey": "dates"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "startRange"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "endRange"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "season_phases",
+        "queryKey": "seasonPhases"
+      },
+      {
+        "name": "conference_ids",
+        "queryKey": "conferenceIds"
+      },
+      {
+        "name": "division_ids",
+        "queryKey": "divisionIds"
+      },
+      {
+        "name": "top25",
+        "queryKey": "top25"
+      },
+      {
+        "name": "tournament_ids",
+        "queryKey": "tournamentIds"
+      },
+      {
+        "name": "is_tennis",
+        "queryKey": "isTennis"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_game_ids_by_date"
+  },
+  {
+    "short": "league_games_by_round",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueGamesByRound",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "tournament_round_ids",
+        "queryKey": "tournamentRoundIds"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_games_by_round"
+  },
+  {
+    "short": "league_info",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueInfo",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_info"
+  },
+  {
+    "short": "league_injuries",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueInjuries",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_injuries"
+  },
+  {
+    "short": "league_names",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueNames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_names"
+  },
+  {
+    "short": "league_prop_odds",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leaguePropOdds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_prop_odds"
+  },
+  {
+    "short": "league_standings",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueStandings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "season_phase",
+        "queryKey": "seasonPhase"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_standings"
+  },
+  {
+    "short": "league_stats_by_team",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueStatsByTeam",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league_structure_id",
+        "queryKey": "leagueStructureId"
+      },
+      {
+        "name": "baseball_cut_type",
+        "queryKey": "baseballCutType"
+      },
+      {
+        "name": "basketball_cut_type",
+        "queryKey": "basketballCutType"
+      },
+      {
+        "name": "football_cut_type",
+        "queryKey": "footballCutType"
+      },
+      {
+        "name": "hockey_cut_type",
+        "queryKey": "hockeyCutType"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/league_stats_by_team"
+  },
+  {
+    "short": "league_stats_individual",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueStatsIndividual",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualified"
+      },
+      {
+        "name": "league_structure_id",
+        "queryKey": "leagueStructureId"
+      },
+      {
+        "name": "baseball_cut_type",
+        "queryKey": "baseballCutType"
+      },
+      {
+        "name": "baseball_position",
+        "queryKey": "baseballPosition"
+      },
+      {
+        "name": "basketball_cut_type",
+        "queryKey": "basketballCutType"
+      },
+      {
+        "name": "basketball_position",
+        "queryKey": "basketballPosition"
+      },
+      {
+        "name": "football_cut_type",
+        "queryKey": "footballCutType"
+      },
+      {
+        "name": "hockey_cut_type",
+        "queryKey": "hockeyCutType"
+      },
+      {
+        "name": "hockey_position",
+        "queryKey": "hockeyPosition"
+      },
+      {
+        "name": "golf_sort_stat",
+        "queryKey": "golfSortStat"
+      },
+      {
+        "name": "golf_stat_ids",
+        "queryKey": "golfStatIds"
+      },
+      {
+        "name": "motorsports_sort_stat",
+        "queryKey": "motorsportsSortStat"
+      },
+      {
+        "name": "motorsports_stat_ids",
+        "queryKey": "motorsportsStatIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/league_stats_individual"
+  },
+  {
+    "short": "league_stats_overview",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueStatsOverview",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "week_season_phase",
+        "queryKey": "weekSeasonPhase"
+      },
+      {
+        "name": "season_phase",
+        "queryKey": "seasonPhase"
+      },
+      {
+        "name": "league_structure_id",
+        "queryKey": "leagueStructureId"
+      },
+      {
+        "name": "golf_sort_stat",
+        "queryKey": "golfSortStat"
+      },
+      {
+        "name": "golf_stat_ids",
+        "queryKey": "golfStatIds"
+      },
+      {
+        "name": "motorsports_sort_stat",
+        "queryKey": "motorsportsSortStat"
+      },
+      {
+        "name": "motorsports_stat_ids",
+        "queryKey": "motorsportsStatIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/league_stats_overview"
+  },
+  {
+    "short": "league_stats_weekly",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueStatsWeekly",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "season_phase",
+        "queryKey": "seasonPhase"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/league_stats_weekly"
+  },
+  {
+    "short": "league_team_ids",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueTeamIds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "division_ids",
+        "queryKey": "divisionIds"
+      },
+      {
+        "name": "get_teams_by_division",
+        "queryKey": "getTeamsByDivision"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_team_ids"
+  },
+  {
+    "short": "league_teams",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leagueTeams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "division_ids",
+        "queryKey": "divisionIds"
+      },
+      {
+        "name": "get_teams_by_division",
+        "queryKey": "getTeamsByDivision"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/league_teams"
+  },
+  {
+    "short": "leagues_season_states",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/leaguesSeasonStates",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/leagues_season_states"
+  },
+  {
+    "short": "module_game",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/moduleGame",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/module_game"
+  },
+  {
+    "short": "motorsport_standings",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/motorsportStandings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/motorsport_standings"
+  },
+  {
+    "short": "nascar_drivers",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/nascarDrivers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/nascar_drivers"
+  },
+  {
+    "short": "nav_dropdown_tray",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/navDropdownTray",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "get_soccer_data",
+        "queryKey": "getSoccerData"
+      },
+      {
+        "name": "soccer_league_ids",
+        "queryKey": "soccerLeagueIds"
+      },
+      {
+        "name": "soccer_team_ids",
+        "queryKey": "soccerTeamIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/nav_dropdown_tray"
+  },
+  {
+    "short": "pick_distribution",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/pickDistribution",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "dates",
+        "queryKey": "dates"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/pick_distribution"
+  },
+  {
+    "short": "playbook_boxscore",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookBoxscore",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "standings_season_phases",
+        "queryKey": "standingsSeasonPhases"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      },
+      {
+        "name": "is_baseball",
+        "queryKey": "isBaseball"
+      },
+      {
+        "name": "is_football",
+        "queryKey": "isFootball"
+      },
+      {
+        "name": "is_pro_basketball",
+        "queryKey": "isProBasketball"
+      },
+      {
+        "name": "is_college_basketball",
+        "queryKey": "isCollegeBasketball"
+      },
+      {
+        "name": "is_hockey",
+        "queryKey": "isHockey"
+      },
+      {
+        "name": "is_soccer",
+        "queryKey": "isSoccer"
+      },
+      {
+        "name": "event_state",
+        "queryKey": "eventState"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_boxscore"
+  },
+  {
+    "short": "playbook_boxscore_poll",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookBoxscorePoll",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "standings_season_phases",
+        "queryKey": "standingsSeasonPhases"
+      },
+      {
+        "name": "is_baseball",
+        "queryKey": "isBaseball"
+      },
+      {
+        "name": "is_football",
+        "queryKey": "isFootball"
+      },
+      {
+        "name": "is_pro_basketball",
+        "queryKey": "isProBasketball"
+      },
+      {
+        "name": "is_college_basketball",
+        "queryKey": "isCollegeBasketball"
+      },
+      {
+        "name": "is_hockey",
+        "queryKey": "isHockey"
+      },
+      {
+        "name": "is_soccer",
+        "queryKey": "isSoccer"
+      },
+      {
+        "name": "event_state",
+        "queryKey": "eventState"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_boxscore_poll"
+  },
+  {
+    "short": "playbook_boxscore_social_share",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookBoxscoreSocialShare",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_boxscore_social_share"
+  },
+  {
+    "short": "playbook_combat_match",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookCombatMatch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      },
+      {
+        "name": "headshot_height",
+        "queryKey": "headshotHeight"
+      },
+      {
+        "name": "headshot_width",
+        "queryKey": "headshotWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_combat_match"
+  },
+  {
+    "short": "playbook_game",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookGame",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_game"
+  },
+  {
+    "short": "playbook_game_odds_poll",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookGameOddsPoll",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "event_state",
+        "queryKey": "eventState"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_game_odds_poll"
+  },
+  {
+    "short": "playbook_golf_tournament",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookGolfTournament",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "stat_ids",
+        "queryKey": "statIds"
+      },
+      {
+        "name": "show_hole_results",
+        "queryKey": "showHoleResults"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_golf_tournament"
+  },
+  {
+    "short": "playbook_league_odds",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookLeagueOdds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "dates",
+        "queryKey": "dates"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "start_time_filter",
+        "queryKey": "startTimeFilter"
+      },
+      {
+        "name": "range_start_date",
+        "queryKey": "rangeStartDate"
+      },
+      {
+        "name": "range_end_date",
+        "queryKey": "rangeEndDate"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_league_odds"
+  },
+  {
+    "short": "playbook_player",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookPlayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      },
+      {
+        "name": "season_phases",
+        "queryKey": "seasonPhases"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_player"
+  },
+  {
+    "short": "playbook_player_social_share",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookPlayerSocialShare",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_player_social_share"
+  },
+  {
+    "short": "playbook_race",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookRace",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "player_image_height",
+        "queryKey": "playerImageHeight"
+      },
+      {
+        "name": "player_image_width",
+        "queryKey": "playerImageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_race"
+  },
+  {
+    "short": "playbook_team",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookTeam",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      },
+      {
+        "name": "league_short_name",
+        "queryKey": "leagueShortName"
+      },
+      {
+        "name": "disable_conference",
+        "queryKey": "disableConference"
+      },
+      {
+        "name": "disable_division",
+        "queryKey": "disableDivision"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_team"
+  },
+  {
+    "short": "playbook_team_basic",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookTeamBasic",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_team_basic"
+  },
+  {
+    "short": "playbook_team_social_share",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookTeamSocialShare",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_team_social_share"
+  },
+  {
+    "short": "playbook_tennis_match",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playbookTennisMatch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playbook_tennis_match"
+  },
+  {
+    "short": "player_basic",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playerBasic",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/player_basic"
+  },
+  {
+    "short": "player_career_stats",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playerCareerStats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      },
+      {
+        "name": "season_phases",
+        "queryKey": "seasonPhases"
+      },
+      {
+        "name": "football_stat_ids",
+        "queryKey": "footballStatIds"
+      },
+      {
+        "name": "basketball_stat_ids",
+        "queryKey": "basketballStatIds"
+      },
+      {
+        "name": "baseball_stat_ids",
+        "queryKey": "baseballStatIds"
+      },
+      {
+        "name": "hockey_stat_ids",
+        "queryKey": "hockeyStatIds"
+      },
+      {
+        "name": "soccer_stat_ids",
+        "queryKey": "soccerStatIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/player_career_stats"
+  },
+  {
+    "short": "player_game_log",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playerGameLog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "seasons",
+        "queryKey": "seasons"
+      },
+      {
+        "name": "season_phases",
+        "queryKey": "seasonPhases"
+      },
+      {
+        "name": "football_stat_ids",
+        "queryKey": "footballStatIds"
+      },
+      {
+        "name": "basketball_stat_ids",
+        "queryKey": "basketballStatIds"
+      },
+      {
+        "name": "baseball_stat_ids",
+        "queryKey": "baseballStatIds"
+      },
+      {
+        "name": "hockey_stat_ids",
+        "queryKey": "hockeyStatIds"
+      },
+      {
+        "name": "soccer_stat_ids",
+        "queryKey": "soccerStatIds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/player_game_log"
+  },
+  {
+    "short": "player_props",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playerProps",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/player_props"
+  },
+  {
+    "short": "player_search",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playerSearch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "name",
+        "queryKey": "name"
+      },
+      {
+        "name": "on_active_roster_only",
+        "queryKey": "onActiveRosterOnly"
+      },
+      {
+        "name": "nfl_position_id",
+        "queryKey": "nflPositionId"
+      },
+      {
+        "name": "nba_position_id",
+        "queryKey": "nbaPositionId"
+      },
+      {
+        "name": "mlb_position_id",
+        "queryKey": "mlbPositionId"
+      },
+      {
+        "name": "nhl_position_id",
+        "queryKey": "nhlPositionId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/player_search"
+  },
+  {
+    "short": "player_season_stats",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playerSeasonStats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      },
+      {
+        "name": "seasons",
+        "queryKey": "seasons"
+      },
+      {
+        "name": "season_phases",
+        "queryKey": "seasonPhases"
+      },
+      {
+        "name": "football_stat_ids",
+        "queryKey": "footballStatIds"
+      },
+      {
+        "name": "football_cut_type_groups",
+        "queryKey": "footballCutTypeGroups"
+      },
+      {
+        "name": "basketball_stat_ids",
+        "queryKey": "basketballStatIds"
+      },
+      {
+        "name": "basketball_cut_type_groups",
+        "queryKey": "basketballCutTypeGroups"
+      },
+      {
+        "name": "baseball_stat_ids",
+        "queryKey": "baseballStatIds"
+      },
+      {
+        "name": "baseball_cut_type_groups",
+        "queryKey": "baseballCutTypeGroups"
+      },
+      {
+        "name": "hockey_stat_ids",
+        "queryKey": "hockeyStatIds"
+      },
+      {
+        "name": "hockey_cut_type_groups",
+        "queryKey": "hockeyCutTypeGroups"
+      },
+      {
+        "name": "group_by_season_phase",
+        "queryKey": "groupBySeasonPhase"
+      },
+      {
+        "name": "use_player_unique_id",
+        "queryKey": "usePlayerUniqueId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/player_season_stats"
+  },
+  {
+    "short": "playoff_bracket",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playoffBracket",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "tournament",
+        "queryKey": "tournament"
+      },
+      {
+        "name": "type",
+        "queryKey": "type"
+      },
+      {
+        "name": "playoff_rounds",
+        "queryKey": "playoffRounds"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playoff_bracket"
+  },
+  {
+    "short": "playoff_series_game",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/playoffSeriesGame",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/playoff_series_game"
+  },
+  {
+    "short": "polymarket_game",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/polymarketGame",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/polymarket_game"
+  },
+  {
+    "short": "racing_schedule",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/racingSchedule",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "today",
+        "queryKey": "today"
+      },
+      {
+        "name": "has_series",
+        "queryKey": "hasSeries"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/racing_schedule"
+  },
+  {
+    "short": "scoreboard_game",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/scoreboardGame",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "season_phase",
+        "queryKey": "seasonPhase"
+      },
+      {
+        "name": "stat_leader_count",
+        "queryKey": "statLeaderCount"
+      },
+      {
+        "name": "single_stat_leader",
+        "queryKey": "singleStatLeader"
+      },
+      {
+        "name": "bet_event_state",
+        "queryKey": "betEventState"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/scoreboard_game"
+  },
+  {
+    "short": "season_stats_football_defense_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballDefenseNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_defense_ncaaf"
+  },
+  {
+    "short": "season_stats_football_kicking_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballKickingNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_kicking_ncaaf"
+  },
+  {
+    "short": "season_stats_football_passing_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballPassingNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_passing_ncaaf"
+  },
+  {
+    "short": "season_stats_football_punting_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballPuntingNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_punting_ncaaf"
+  },
+  {
+    "short": "season_stats_football_receiving_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballReceivingNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_receiving_ncaaf"
+  },
+  {
+    "short": "season_stats_football_returns_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballReturnsNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_returns_ncaaf"
+  },
+  {
+    "short": "season_stats_football_rushing_ncaaf",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonStatsFootballRushingNcaaf",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_stats_football_rushing_ncaaf"
+  },
+  {
+    "short": "season_team_stats_football_defense",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballDefense",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_defense"
+  },
+  {
+    "short": "season_team_stats_football_kicking",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballKicking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_kicking"
+  },
+  {
+    "short": "season_team_stats_football_kickoffs",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballKickoffs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_kickoffs"
+  },
+  {
+    "short": "season_team_stats_football_offense",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballOffense",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_offense"
+  },
+  {
+    "short": "season_team_stats_football_passing",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballPassing",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_passing"
+  },
+  {
+    "short": "season_team_stats_football_passing_defense",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballPassingDefense",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_passing_defense"
+  },
+  {
+    "short": "season_team_stats_football_punting",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballPunting",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_punting"
+  },
+  {
+    "short": "season_team_stats_football_receiving",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballReceiving",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_receiving"
+  },
+  {
+    "short": "season_team_stats_football_receiving_defense",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_receiving_defense"
+  },
+  {
+    "short": "season_team_stats_football_returns",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballReturns",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_returns"
+  },
+  {
+    "short": "season_team_stats_football_rushing",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballRushing",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_rushing"
+  },
+  {
+    "short": "season_team_stats_football_rushing_defense",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/seasonTeamStatsFootballRushingDefense",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league",
+        "queryKey": "league",
+        "default": "ncaaf"
+      },
+      {
+        "name": "league_structure",
+        "queryKey": "leagueStructure"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "sort_stat_id",
+        "queryKey": "sortStatId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_rushing_defense"
+  },
+  {
+    "short": "team_injuries",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamInjuries",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/team_injuries"
+  },
+  {
+    "short": "team_playoff_series",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamPlayoffSeries",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/team_playoff_series"
+  },
+  {
+    "short": "team_roster",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamRoster",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "player_image_height",
+        "queryKey": "playerImageHeight"
+      },
+      {
+        "name": "player_image_width",
+        "queryKey": "playerImageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/team_roster"
+  },
+  {
+    "short": "team_schedule_by_season",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamScheduleBySeason",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/team_schedule_by_season"
+  },
+  {
+    "short": "team_search",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamSearch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "name",
+        "queryKey": "name"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/team_search"
+  },
+  {
+    "short": "team_stats_leaders_v2",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamStatsLeadersV2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "baseball_cut_type",
+        "queryKey": "baseballCutType"
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualified"
+      },
+      {
+        "name": "include_team_stats",
+        "queryKey": "includeTeamStats"
+      },
+      {
+        "name": "include_player_stats",
+        "queryKey": "includePlayerStats"
+      },
+      {
+        "name": "is_baseball",
+        "queryKey": "isBaseball"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_stats",
+    "returnsSchema": "native/yahoo_shangrila/team_stats_leaders_v2"
+  },
+  {
+    "short": "team_transactions",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamTransactions",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/team_transactions"
+  },
+  {
+    "short": "teams_basic",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/teamsBasic",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "team_ids",
+        "queryKey": "teamIds"
+      },
+      {
+        "name": "image_height",
+        "queryKey": "imageHeight"
+      },
+      {
+        "name": "image_width",
+        "queryKey": "imageWidth"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/teams_basic"
+  },
+  {
+    "short": "tennis_matches_by_date",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/tennisMatchesByDate",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "tournament_id",
+        "queryKey": "tournamentId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/tennis_matches_by_date"
+  },
+  {
+    "short": "tennis_tournament",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/tennisTournament",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "tournament_id",
+        "queryKey": "tournamentId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/tennis_tournament"
+  },
+  {
+    "short": "tennis_tournaments",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/tennisTournaments",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "match_type",
+        "queryKey": "matchType"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/tennis_tournaments"
+  },
+  {
+    "short": "tennis_tournaments_by_date",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/tennisTournamentsByDate",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/tennis_tournaments_by_date"
+  },
+  {
+    "short": "trending_event_ids",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/trendingEventIds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "date_flip_offset",
+        "queryKey": "dateFlipOffset"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/trending_event_ids"
+  },
+  {
+    "short": "trending_game_ids",
+    "flat": true,
+    "api": "yahoo_shangrila",
+    "host": "https://graphite-secure.sports.yahoo.com",
+    "scope": "universal",
+    "path": "/v1/query/shangrila/trendingGameIds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "lang",
+        "queryKey": "lang",
+        "default": "en-US"
+      },
+      {
+        "name": "region",
+        "queryKey": "region",
+        "default": "US"
+      },
+      {
+        "name": "tz",
+        "queryKey": "tz",
+        "default": "America/Chicago"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "date_flip_offset",
+        "queryKey": "dateFlipOffset"
+      },
+      {
+        "name": "dates",
+        "queryKey": "dates"
+      }
+    ],
+    "parser": "parse_yahoo_shangrila_list",
+    "returnsSchema": "native/yahoo_shangrila/trending_game_ids"
   }
 ];
