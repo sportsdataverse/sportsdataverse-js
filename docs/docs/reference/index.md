@@ -57,6 +57,7 @@ Cross-sport providers that aren't tied to a single ESPN league. They get their o
 | [recruiting](./recruiting) | 247Sports | 25 |
 | [cbs](./cbs) | CBS Sports | 82 |
 | [fox](./fox) | Fox Sports | 38 |
+| [yahoo](./yahoo) | Yahoo Sports (editorial), Yahoo Sports (shangrila) | 107 |
 
 :::tip Same call, every league
 ```js

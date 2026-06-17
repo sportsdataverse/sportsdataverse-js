@@ -103,6 +103,15 @@ import {
   parse_fox_bifrost_team_roster,
   parse_fox_bifrost_search,
 } from "./fox_bifrost.js";
+import {
+  parse_yahoo_editorial_list,
+  parse_yahoo_editorial_scoreboard,
+  parse_yahoo_editorial_boxscore,
+} from "./yahoo_editorial.js";
+import {
+  parse_yahoo_shangrila_list,
+  parse_yahoo_shangrila_stats,
+} from "./yahoo_shangrila.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -208,6 +217,15 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_fox_bifrost_event,
   parse_fox_bifrost_team_roster,
   parse_fox_bifrost_search,
+  // ---- Yahoo Sports editorial (api-secure.sports.yahoo.com /v1/editorial/s) ----
+  // Generic service-envelope flattener + two dedicated keyed-map unrollers.
+  parse_yahoo_editorial_list,
+  parse_yahoo_editorial_scoreboard,
+  parse_yahoo_editorial_boxscore,
+  // ---- Yahoo Sports shangrila stats-graph (graphite-secure.sports.yahoo.com) ----
+  // Generic GraphQL-envelope flattener (default) + nested stat-array unroller.
+  parse_yahoo_shangrila_list,
+  parse_yahoo_shangrila_stats,
 };
 
 /**

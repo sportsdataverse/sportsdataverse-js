@@ -39,6 +39,8 @@ const FLAT_API_FILES = [
   "sports247",
   "cbs_napi",
   "fox_bifrost",
+  "yahoo_editorial",
+  "yahoo_shangrila",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -60,6 +62,8 @@ const FLAT_API_NAMESPACES = {
   sports247: "recruiting",
   cbs_napi: "cbs",
   fox_bifrost: "fox",
+  yahoo_editorial: "yahoo",
+  yahoo_shangrila: "yahoo",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -97,6 +101,14 @@ const FLAT_API_META = {
   },
   cbs_napi: { label: "CBS Sports", source: "CBS Sports napi" },
   fox_bifrost: { label: "Fox Sports", source: "Fox Sports Bifrost API" },
+  yahoo_editorial: {
+    label: "Yahoo Sports (editorial)",
+    source: "Yahoo Sports' editorial scoreboard/boxscore feed",
+  },
+  yahoo_shangrila: {
+    label: "Yahoo Sports (shangrila)",
+    source: "Yahoo Sports' shangrila stats-graph API",
+  },
 };
 
 // Per-standalone-namespace quick-start snippet shown on the generated
@@ -119,6 +131,13 @@ const STANDALONE_NS_EXAMPLE = {
     "// Fox Sports Bifrost uses a public apikey + api-version query pair\n" +
     "// (both default out of the box — override apikey if you have your own):\n" +
     "await sdv.fox.fox_bifrost_scoreboard({ sport: 'cfb' });\n",
+  yahoo:
+    "// Yahoo Sports is keyless but rejects requests without browser-y headers —\n" +
+    "// pass Origin/Referer via `headers` (two hosts share the `yahoo` namespace):\n" +
+    "await sdv.yahoo.yahoo_shangrila_league_standings({\n" +
+    "  league: 'ncaaf',\n" +
+    "  headers: { Origin: 'https://sports.yahoo.com', Referer: 'https://sports.yahoo.com/' },\n" +
+    "});\n",
 };
 
 // The set of league prefixes (filled after the leagues doc loads) — any

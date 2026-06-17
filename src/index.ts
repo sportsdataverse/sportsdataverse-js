@@ -58,6 +58,13 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // Auth is a public apikey + api-version query pair (both default in the wrapper
   // metadata, no account/token), so it is NOT flagged auth:true.
   fox_bifrost: 'fox',
+  // Yahoo Sports — fifth (and final) standalone provider family. TWO api stems
+  // (editorial + shangrila) share ONE `yahoo` namespace (two hosts, one
+  // namespace — like the four NHL stems share `nhl`); the merge creates
+  // `sdv.yahoo.*` from scratch. Keyless (no securityScheme), so NOT auth:true —
+  // callers pass browser-y Origin/Referer via the flat `headers` arg.
+  yahoo_editorial: 'yahoo',
+  yahoo_shangrila: 'yahoo',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

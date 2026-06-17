@@ -1,0 +1,35 @@
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_shangrila_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
+schema: team_schedule_by_season
+kind: dataframe
+columns:
+- name: team_id
+  type: character
+- name: display_name
+  type: character
+- name: primary_color
+  type: character
+- name: secondary_color
+  type: character
+- name: gametime_ticket_url
+  type: character
+- name: bye_weeks
+  type: list
+- name: games
+  type: list
+- name: leagues
+  type: list
+- name: full_name
+  type: character
+- name: abbreviation
+  type: character
+- name: nickname
+  type: character
+- name: team_logo_white_url
+  type: character
+- name: team_logo_url
+  type: character
+- name: team_standings_team_record
+  type: character
+- name: alias_url
+  type: character
