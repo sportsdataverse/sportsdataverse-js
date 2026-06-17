@@ -1,0 +1,328 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [CLAUDE.md — sportsdataverse (Node.js) Development Guide](#claudemd--sportsdataverse-nodejs-development-guide)
+  - [Package Overview](#package-overview)
+  - [Commit Convention](#commit-convention)
+  - [Branches](#branches)
+  - [Build & Development Commands](#build--development-commands)
+  - [Architecture](#architecture)
+    - [Codegen pipeline (the heart of the repo)](#codegen-pipeline-the-heart-of-the-repo)
+    - [ESPN cross-league surface](#espn-cross-league-surface)
+    - [Flat-API families (native + providers)](#flat-api-families-native--providers)
+    - [OpenAPI → endpoint-YAML transform](#openapi--endpoint-yaml-transform)
+    - [Parser layer](#parser-layer)
+    - [Namespace assembly (`src/index.ts`)](#namespace-assembly-srcindexts)
+  - [Project Structure](#project-structure)
+  - [Key Coding Conventions](#key-coding-conventions)
+  - [Common Pitfalls](#common-pitfalls)
+  - [Documentation Maintenance](#documentation-maintenance)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# CLAUDE.md — sportsdataverse (Node.js) Development Guide
+
+## Package Overview
+
+`sportsdataverse` (npm) is the SportsDataverse's **Node.js / TypeScript** client and
+the sister to the Python package [`sportsdataverse-py`](https://py.sportsdataverse.org/)
+and the SportsDataverse R packages (`hoopR`, `wehoop`, `cfbfastR`, `fastRhockey`,
+`baseballr`, …). It provides tidy access to play-by-play, box score, schedule,
+roster, standings, odds, and many other surfaces across the major leagues.
+
+As of **v3.0.0** the package is a **cross-league ESPN client _plus_ a native
+(non-ESPN) live-API client** with a tidy parser layer:
+
+- **116 ESPN endpoint short names** generated for **29 leagues** (31 namespaces),
+  exposed as `espn_<league>_<short>` (snake) + `espn<League><Short>` (camelCase).
+- **517 flat-API wrappers across 13 families** — 7 native league APIs + 5 cross-sport
+  providers (see [Flat-API families](#flat-api-families-native--providers)).
+- A **parser layer** (`src/parsers/`): every wrapper returns raw JSON by default;
+  `{ parsed: true }` returns a tidy array of flat, snake_cased row objects.
+
+When this guide differs from the current repo, treat `CONTRIBUTING.md`, the endpoint
+YAML under `tools/codegen/endpoints/`, and the test suite under `test/` as
+authoritative.
+
+- **License:** MIT
+- **Author:** Saiem Gilani
+- **Default / release branch:** `main`
+- **Runtime:** Node **≥ 20.18.1**, **ESM-only** (`"type": "module"`), TypeScript
+- **Packaging:** npm (`package-lock.json` committed); ships `dist/` only
+- **Docs:** Docusaurus 3 on Vercel (`js.sportsdataverse.org`) with a live playground
+
+## Commit Convention
+
+Use [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+feat(nhl): add nhl_edge skater-tracking wrappers
+fix(parsers): handle empty boxscore in parse_summary
+docs(reference): regenerate after odds_api endpoint add
+refactor(codegen): split flat-API rendering out of generate.mjs
+chore(deps): bump esbuild + re-lock
+ci(actions): add Node 22 to the test matrix
+```
+
+Prefer scoped subjects (`feat(mlb): …`, `fix(cfb): …`). Use `type!:` or a
+`BREAKING CHANGE:` footer for breaking changes. Split unrelated work into separate
+commits.
+
+**Hard rule: never add AI/assistant co-author trailers or "Generated with …"
+lines.** Omit all `Co-Authored-By:` trailers referencing AI tools (Claude, Copilot,
+Cursor, GPT, Gemini, …) and never add a "🤖 Generated with" line to commits or PR
+bodies. The human author is the sole attributable contributor. This applies whether
+the change was generated, refactored, or reviewed with AI assistance.
+
+## Branches
+
+- **`main`** — default and release branch. The committed `src/generated/**`,
+  `docs/docs/reference/**`, and `docs/src/playground/endpoints.json` MUST be in sync
+  with `tools/codegen/endpoints/*.yaml` (the drift gate enforces this in CI).
+
+## Build & Development Commands
+
+```sh
+npm ci                  # install from the lockfile
+
+npm run build           # tsc -> dist/
+npm run typecheck       # tsc --noEmit
+npm test                # mocha suite (no network) — runs `npm run build` first via pretest
+
+npm run codegen         # regenerate src/generated + docs/docs/reference + playground JSON
+npm run codegen:check   # DRIFT GATE — fails if committed generated output is stale
+npm run bundle:parsers  # esbuild the browser parser bundle for the playground
+npm run docs            # typedoc -> the typed module reference
+```
+
+- `test` runs Mocha against `test/**/*.test.js` with no network access.
+- `prepare` / `prepublishOnly` build `dist/`; only `dist/` is published (`files:
+  ["dist"]`).
+
+## Architecture
+
+### Codegen pipeline (the heart of the repo)
+
+The library is **codegen-driven**. `tools/codegen/generate.mjs` reads the vendored
+endpoint YAML in `tools/codegen/endpoints/*.yaml` (plus return schemas under
+`tools/codegen/schemas/`) and, from that single source of truth, generates:
+
+| Output | Path | Purpose |
+|---|---|---|
+| Runtime wrapper / league tables | `src/generated/wrappers.ts`, `src/generated/leagues.ts` | the TS the package imports at runtime |
+| Per-league Markdown reference | `docs/docs/reference/*.md` (+ `_category_.json`) | the docs site reference subtree |
+| Playground metadata | `docs/src/playground/endpoints.json` | the in-browser playground endpoint list |
+
+- `npm run codegen` **writes** those outputs.
+- `npm run codegen:check` (`--check`) is the **drift gate**: it regenerates in-memory
+  and exits non-zero if any committed output differs. This runs in CI and as a
+  pre-commit hook.
+- **Never hand-edit generated files.** Every generated file carries an
+  `AUTO-GENERATED by tools/codegen/generate.mjs — do not edit by hand` header. Edit
+  the YAML (or the Jinja-style templates / renderers in `generate.mjs`) and rerun
+  `npm run codegen`; otherwise the drift gate goes red.
+
+The generator is a pure file-in / file-out renderer — it makes **no network calls**.
+
+### ESPN cross-league surface
+
+ESPN endpoints come from three family YAML files — `espn_site_v2.yaml`,
+`espn_core_v2.yaml`, `espn_web_v3.yaml` — and feed the `WRAPPERS` table in
+`src/generated/wrappers.ts`. The pattern is **one core, parameterized on
+`(sport, league)` slugs**, wrapped once per URL family.
+
+- **116 distinct short names** are exposed across **29 leagues** (`leagues.yaml`).
+- Each wrapper is registered under BOTH `espn_<prefix>_<short>` (snake, py/R parity)
+  and `espn<Prefix><Short>` (camelCase, idiomatic JS) by `makeLeagueModule`
+  (`src/leagues/_make.ts`) — both resolve to the same function.
+- Endpoints carry a **scope**: `universal` (every league), `ncaa` (college),
+  `football` (NFL / CFB / UFL), `mlb`. Each league gets exactly the endpoints in its
+  scope set, so the ESPN contract tests stay invariant.
+- The `summary` endpoint is a **dispatcher** returning 21 sub-frames; it honours a
+  `section` arg (omit → all sub-frames as a dict).
+- Multi-league sports take an extra `league` slug, e.g.
+  `sdv.soccer.espnSoccerScoreboard({ league: "eng.1" })`.
+
+### Flat-API families (native + providers)
+
+Non-ESPN, absolute-host live APIs are generated into a **separate** `FLAT_WRAPPERS`
+table (so the ESPN table stays untouched). **517 flat-API wrappers across 13
+families**:
+
+**7 native** — merged onto their league namespace:
+
+| Family (YAML stem) | Namespace | Host | Auth |
+|---|---|---|---|
+| `mlb_api` | `sdv.mlb.mlbApi*` | `statsapi.mlb.com` | keyless |
+| `mlb_statcast` | `sdv.mlb.mlbStatcast*` | `baseballsavant.mlb.com` | keyless (date-chunked search) |
+| `nhl_api_web` | `sdv.nhl.nhlApiWeb*` | `api-web.nhle.com` | keyless |
+| `nhl_edge` | `sdv.nhl.nhlEdge*` | `api-web.nhle.com/v1/edge` | keyless |
+| `nhl_stats_rest` | `sdv.nhl.nhlStatsRest*` | `api.nhle.com/stats/rest` | keyless |
+| `nhl_records` | `sdv.nhl.nhlRecords*` | `records.nhl.com` | keyless |
+| `nfl_api` | `sdv.nfl.nflApi*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
+
+**5 cross-sport providers** — standalone `sdv.<ns>.*` namespaces (NOT leagues), each
+getting its own generated reference page:
+
+| Family | Namespace | Auth |
+|---|---|---|
+| The Odds API (`odds_api`) | `sdv.odds.*` | `apiKey` query param (caller-supplied) |
+| 247Sports (`sports247`) | `sdv.recruiting.*` | caller-supplied JWT via `headers` |
+| CBS Sports (`cbs_napi`) | `sdv.cbs.*` | keyless |
+| Fox Sports (`fox_bifrost`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
+| Yahoo Sports (`yahoo_editorial` + `yahoo_shangrila`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
+
+`FLAT_API_NAMESPACES` in both `src/index.ts` and `generate.mjs` maps each stem to its
+namespace — **keep the two copies in sync**. `standaloneFlatNamespaces()` in
+`generate.mjs` decides which namespaces are providers (not leagues) and renders them
+their own standalone reference page.
+
+### OpenAPI → endpoint-YAML transform
+
+`tools/codegen/from-openapi.mjs` turns a canonical **OpenAPI 3.x** spec (the
+`sdv-swagger` collection; also handles Swagger-2 `host`+`basePath`) into a flat-API
+endpoint-YAML **skeleton** in the shape of `odds_api.yaml` / `nfl_api.yaml`. It:
+
+- emits only `GET` operations as wrappers;
+- derives a stable snake_case `short` from `operationId` (else from the path),
+  de-duplicating collisions;
+- resolves `$ref` params against `components.parameters`, merges path-item + operation
+  params, and rewrites path tokens to snake_case to match param names;
+- sets top-level `auth: true` only for bearer / header-token schemes.
+
+The output is a **skeleton**: `parser:` is a `parse_<api>_<short>` placeholder and
+`returns_schema:` a `native/<api>/<short>` placeholder. Real parsers
+(`src/parsers/<api>.ts`, registered in `_registry.ts`) and schemas
+(`tools/codegen/schemas/native/<api>/*.yaml`) are authored by hand on top. CLI:
+`node tools/codegen/from-openapi.mjs <spec.yaml> --api <stem> [--out <path>]`. This
+transform is what made the provider families largely mechanical to add.
+
+### Parser layer
+
+`src/parsers/` registers one parser per endpoint. **Contract:**
+
+- A parser is a function `(raw) => rows[]` — a tidy array of flat, snake_cased row
+  objects. Nested fields are flattened by the in-house `normalize` (the JS analog of
+  pandas `json_normalize`); keys are snake_cased via `snakeCase`.
+- Empty / malformed payloads return `[]` (or a zero-row frame), never throw — callers
+  can chain without null checks.
+- The dispatch is **strictly additive**: a wrapper returns the **raw** payload by
+  default; passing `{ parsed: true }` runs the registered parser. Omitting the kwarg
+  preserves the raw return for every existing caller. This mirrors
+  `sportsdataverse-py`'s `return_parsed=True`.
+- ESPN parsed dispatch is a port of py's `_common_espn_parsers` — **22 parsers**
+  (scoreboard / standings / rosters / leaders / athlete deep-dives / the 21-sub-frame
+  `summary` dispatcher + two generics for Core v2 list + single-resource). All 116
+  ESPN endpoints route through these; `summary` honours `section`.
+- The browser-safe public barrel is `src/parsers/index.ts`, exposed via the
+  `sportsdataverse/parsers` subpath export. It transitively imports only
+  `_normalize`, sibling parser modules, and `papaparse` (all browser-safe — no
+  node-only HTTP deps). `npm run bundle:parsers` esbuilds it into the playground so
+  parsing happens client-side. **Rebundle whenever a parser changes.**
+
+### Namespace assembly (`src/index.ts`)
+
+The default export `sdv` is assembled as:
+
+1. Start from the **legacy** hand-written services (`cfb, mbb, mlb, nba, ncaa, nfl,
+   nhl, tennis, wbb, wnba` from `src/services/`) — these preserve pre-3.0 convenience
+   methods like `sdv.nba.getPlayByPlay(...)`.
+2. Merge the generated ESPN wrappers onto each league via `makeLeagueModule(cfg)` for
+   every `cfg` in `LEAGUES`, adding new namespaces (soccer, cricket, ufl, …) where no
+   legacy service exists.
+3. Merge the flat-API wrappers via `makeFlatModule` AFTER the ESPN merge (additive,
+   never clobbering) using `FLAT_API_NAMESPACES`; provider stems land on standalone
+   namespaces.
+4. Merge `mlb_statcast_extra` (hand-written date-chunked search) onto `sdv.mlb`.
+
+Named, tree-shakeable re-exports include `LEAGUES`, `WRAPPERS`, `FLAT_WRAPPERS`,
+`makeLeagueModule`, `makeFlatModule`, `normalize`, `PARSERS` / `parserFor`, the
+NFL-auth helpers, and `export * as tidy from '@tidyjs/tidy'`.
+
+## Project Structure
+
+```
+src/
+  core/           # espn.ts (ESPN dispatch), client.ts (FLAT_HOSTS), flat.ts,
+                  # nfl_auth.ts (bearer mint), types.ts
+  generated/      # AUTO-GENERATED — wrappers.ts, leagues.ts (do NOT hand-edit)
+  leagues/        # _make.ts (ESPN league module), _make_flat.ts (flat module),
+                  # mlb_statcast_extra.ts
+  parsers/        # parser layer + index.ts barrel (sportsdataverse/parsers export)
+  services/       # legacy hand-written per-sport scrapers (preserved)
+  index.ts        # namespace assembly + default export
+tools/codegen/
+  generate.mjs    # the codegen entry point (writes generated + docs + playground)
+  from-openapi.mjs# OpenAPI 3.x spec -> endpoint-YAML skeleton
+  endpoints/*.yaml# SOURCE OF TRUTH (espn_* families + flat-API stems + leagues.yaml)
+  schemas/        # return schemas consumed by the docs renderer
+  templates/      # rendering templates
+docs/             # Docusaurus 3 site (reference subtree is generated; rest authored)
+test/             # Mocha no-network tests (test/**/*.test.js)
+examples/         # runnable example scripts
+package.json      # ESM, engines.node >= 20.18.1, scripts, exports (. and ./parsers)
+tsconfig.json, typedoc.json
+```
+
+## Key Coding Conventions
+
+- **ESM-only.** `"type": "module"`; use `import` / `export`, no `require`, and
+  include the `.js` extension in relative import specifiers (TS NodeNext). No CommonJS
+  entry point is published.
+- **Dual-case naming.** Generated wrappers are registered under snake_case (py/R
+  parity) AND camelCase (idiomatic JS canonical) — both resolve to the same function.
+  Params accept snake_case or camelCase.
+- **The drift gate must stay green.** After editing any `tools/codegen/endpoints/*.yaml`
+  (or a renderer), run `npm run codegen` and commit the regenerated
+  `src/generated/**`, `docs/docs/reference/**`, and playground JSON together.
+  `npm run codegen:check` must pass.
+- **`{ parsed: true }` is additive.** Never change a wrapper's default (raw) return.
+  Add or fix the registered parser; leave the raw path alone.
+- **Parser contract.** `(raw) => rows[]`, `[]` on empty, snake_cased flat rows via
+  `normalize`. New flat-API families: author `src/parsers/<api>.ts`, register in
+  `src/parsers/_registry.ts`, add returns schemas under
+  `tools/codegen/schemas/native/<api>/`.
+- **New flat-API family workflow.** Run `from-openapi.mjs` to get a YAML skeleton →
+  drop it in `tools/codegen/endpoints/` → add the stem to `FLAT_API_FILES` /
+  `FLAT_API_NAMESPACES` / `FLAT_API_META` in `generate.mjs` and the
+  `FLAT_API_NAMESPACES` copy in `src/index.ts` → author parsers + schemas →
+  `npm run codegen` → `npm run bundle:parsers` (if parsers are browser-relevant).
+- **Tests are no-network.** Mocha + `should`. Use captured fixtures; don't hit live
+  APIs in the default suite.
+- **Fully typed.** New modules ship param + return types; `npm run typecheck` must be
+  clean.
+
+## Common Pitfalls
+
+- **Don't hand-edit `src/generated/**` or `docs/docs/reference/**`.** They're
+  codegen-owned; the drift gate will fail and your edit will be clobbered on the next
+  `npm run codegen`. Edit the YAML / renderer instead.
+- **Rebundle parsers when they change.** The playground runs the esbuild bundle, not
+  `src/parsers` directly — `npm run bundle:parsers` after any parser edit, or the
+  browser playground serves stale parsing logic.
+- **Keep `FLAT_API_NAMESPACES` in sync** between `generate.mjs` and `src/index.ts`. A
+  mismatch routes a family's wrappers to the wrong namespace (or a missing one).
+- **Legal comments in the bundle.** `bundle:parsers` uses
+  `--legal-comments=eof`; don't strip the license footer from
+  `docs/src/playground/parsers.bundle.mjs`.
+- **Rate-limit live captures, not codegen.** `generate.mjs` makes no network calls.
+  When capturing fixtures from ESPN Core v2 / providers, keep parallelism low —
+  ESPN Core v2 in particular 403s under load.
+- **NFL.com token is auto-minted.** `sdv.nfl.nflApi*` mints an anonymous
+  `WEB_DESKTOP` bearer token (cached + auto-renewed in `src/core/nfl_auth.ts`); don't
+  add a credential requirement or re-implement the mint.
+- **The `{ parsed: true }` kwarg must never change the raw default.** Adding a parser
+  is additive; verify a raw call still returns the untouched payload.
+
+## Documentation Maintenance
+
+- The Docusaurus site lives under `docs/`. The per-league/provider reference subtree
+  (`docs/docs/reference/*.md`, `_category_.json`) and the playground metadata are
+  **generated** — never hand-edit them. Conceptual pages outside that subtree
+  (`docs/docs/intro.md`, tutorials, architecture) are hand-authored and survive
+  regeneration.
+- `CONTRIBUTING.md` is the canonical contributor onboarding file.
+- `README.md` carries Install / Quick start / Architecture and the companion-package
+  cross-links.
+- Verify the docs build with `cd docs && npx docusaurus build` before shipping
+  doc-affecting changes.

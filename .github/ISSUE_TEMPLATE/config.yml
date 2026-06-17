@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://js.sportsdataverse.org/
+    about: Guides, the per-league reference, and the live playground.
+  - name: 💬 SportsDataverse community
+    url: https://sportsdataverse.org/
+    about: The wider SportsDataverse ecosystem (Node.js, Python, and R packages).
+  - name: 🐦 Twitter / X
+    url: https://twitter.com/SportsDataverse
+    about: Questions and updates.
