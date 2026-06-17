@@ -792,7 +792,8 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs
 }
 
 const REFERENCE_CATEGORY = JSON.stringify(
-  { label: "ESPN Reference", position: 3, collapsible: true, collapsed: true },
+  // position 4: after intro(1), Guides(2), Tutorials(3); API Reference is 5.
+  { label: "ESPN Reference", position: 4, collapsible: true, collapsed: true },
   null,
   2
 ) + "\n";
