@@ -18,6 +18,7 @@ const FLAT_API_NAMESPACES = {
   nhl_edge: 'nhl',
   nhl_stats_rest: 'nhl',
   nhl_records: 'nhl',
+  nfl_api: 'nfl',
 };
 
 /** Fill every required path param so the URL fully resolves. */
@@ -79,6 +80,27 @@ describe('flat-API wrapper metadata invariants', () => {
     FLAT_HOSTS.nhl_stats_rest.should.equal('https://api.nhle.com/stats/rest');
     FLAT_HOSTS.nhl_records.should.equal('https://records.nhl.com/site/api');
   });
+
+  it('registers the nfl_api family (11 endpoints) on https://api.nfl.com', () => {
+    const nfl = FLAT_WRAPPERS.filter((w) => w.api === 'nfl_api');
+    nfl.length.should.equal(11);
+    FLAT_HOSTS.nfl_api.should.equal('https://api.nfl.com');
+    for (const w of nfl) w.host.should.equal('https://api.nfl.com');
+  });
+
+  it('flags every nfl_api wrapper auth:true (and only nfl_api so far)', () => {
+    for (const w of FLAT_WRAPPERS) {
+      if (w.api === 'nfl_api') w.auth.should.be.true(`auth flag missing on ${w.short}`);
+      else should(w.auth).not.be.true(`unexpected auth flag on ${w.api}_${w.short}`);
+    }
+  });
+
+  it('every nfl_api wrapper names a registered parser', () => {
+    for (const w of FLAT_WRAPPERS.filter((x) => x.api === 'nfl_api')) {
+      (typeof w.parser).should.equal('string', `parser missing on ${w.short}`);
+      w.parser.should.startWith('parse_nfl_');
+    }
+  });
 });
 
 describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
@@ -108,6 +130,15 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
     (typeof sdv.nhl.nhlEdgeSkaterDetail).should.equal('function'); // nhl_edge
     (typeof sdv.nhl.nhlStatsRestTeam).should.equal('function'); // nhl_stats_rest
     (typeof sdv.nhl.nhlRecordsFranchises).should.equal('function'); // nhl_records
+  });
+
+  it('nfl_api family merges onto sdv.nfl alongside legacy + ESPN (snake + camel)', () => {
+    (typeof sdv.nfl.getPlayByPlay).should.equal('function'); // legacy
+    (typeof sdv.nfl.espnNflScoreboard).should.equal('function'); // ESPN
+    (typeof sdv.nfl.nfl_api_standings).should.equal('function'); // flat snake
+    (typeof sdv.nfl.nflApiStandings).should.equal('function'); // flat camel
+    sdv.nfl.nflApiStandings.should.equal(sdv.nfl.nfl_api_standings);
+    (typeof sdv.nfl.nflApiWeeklyGameDetails).should.equal('function');
   });
 });
 
@@ -160,5 +191,36 @@ describe('every flat wrapper builds a well-formed absolute URL (no network)', ()
     const def = FLAT_WRAPPERS.find((w) => w.api === 'nhl_records' && w.short === 'franchises');
     const { url } = resolveFlat(def, {});
     url.should.equal('https://records.nhl.com/site/api/franchise');
+  });
+
+  it('nfl_api standings resolves to https://api.nfl.com with its query defaults', () => {
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'nfl_api' && w.short === 'standings');
+    should(def).be.ok();
+    const { url, query } = resolveFlat(def, {});
+    url.should.equal('https://api.nfl.com/football/v2/standings');
+    query.season.should.equal(2024);
+    query.seasonType.should.equal('REG'); // string code, not ESPN numeric
+    query.week.should.equal(1);
+    query.limit.should.equal(40);
+  });
+
+  it('nfl_api weeks substitutes the season + season_type path tokens', () => {
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'nfl_api' && w.short === 'weeks');
+    const { url } = resolveFlat(def, { season: 2023, season_type: 'POST' });
+    url.should.equal('https://api.nfl.com/football/v2/weeks/season/2023/seasonType/POST');
+  });
+
+  it('nfl_api weekly_game_details maps season_type to the `type` query key', () => {
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'nfl_api' && w.short === 'weekly_game_details');
+    const { query } = resolveFlat(def, { season_type: 'PRE' });
+    query.type.should.equal('PRE');
+    should(query.seasonType).be.undefined();
+  });
+
+  it('nfl_api control keys (headers/parsed) do NOT leak into the query string', () => {
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'nfl_api' && w.short === 'standings');
+    const { query } = resolveFlat(def, { headers: { Authorization: 'Bearer x' }, parsed: true });
+    should(query.headers).be.undefined();
+    should(query.parsed).be.undefined();
   });
 });

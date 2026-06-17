@@ -50,6 +50,19 @@ import {
 } from "./nhl_edge.js";
 import { parse_nhl_stats_rest } from "./nhl_stats_rest.js";
 import { parse_nhl_records } from "./nhl_records.js";
+import {
+  parse_nfl_standings,
+  parse_nfl_rosters,
+  parse_nfl_teams_history,
+  parse_nfl_team,
+  parse_nfl_weeks,
+  parse_nfl_weeks_by_date,
+  parse_nfl_combine_profiles,
+  parse_nfl_draft_picks,
+  parse_nfl_injuries,
+  parse_nfl_game_summaries,
+  parse_nfl_weekly_game_details,
+} from "./nfl_api.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -102,6 +115,18 @@ export const PARSERS: Record<string, ParserFn> = {
   // ---- NHL Stats REST + Records (shared {data:[...]} generic) ----
   parse_nhl_stats_rest,
   parse_nhl_records,
+  // ---- NFL.com "Shield" API (api.nfl.com /football/v2) ----
+  parse_nfl_standings,
+  parse_nfl_rosters,
+  parse_nfl_teams_history,
+  parse_nfl_team,
+  parse_nfl_weeks,
+  parse_nfl_weeks_by_date,
+  parse_nfl_combine_profiles,
+  parse_nfl_draft_picks,
+  parse_nfl_injuries,
+  parse_nfl_game_summaries,
+  parse_nfl_weekly_game_details,
 };
 
 /**

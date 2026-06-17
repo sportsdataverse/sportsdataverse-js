@@ -68,6 +68,13 @@ export interface WrapperDef {
   host?: string;
   /** Registered parser name (resolved via `src/parsers/_registry.ts`). */
   parser?: string;
+  /**
+   * True for flat-API families that need a bearer token (e.g. `nfl_api`). The
+   * dispatch (`src/leagues/_make_flat.ts`) resolves auth headers via the
+   * `AUTH_HEADER_PROVIDERS` map for that `api` stem before fetching. Non-auth
+   * families omit this and behave exactly as before.
+   */
+  auth?: boolean;
 }
 
 /** A generated cross-league wrapper: `(params?) => Promise<raw ESPN JSON>`. */

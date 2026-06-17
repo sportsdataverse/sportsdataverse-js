@@ -1992,7 +1992,8 @@
     "nhl_api_web": "https://api-web.nhle.com",
     "nhl_edge": "https://api-web.nhle.com",
     "nhl_stats_rest": "https://api.nhle.com/stats/rest",
-    "nhl_records": "https://records.nhl.com/site/api"
+    "nhl_records": "https://records.nhl.com/site/api",
+    "nfl_api": "https://api.nfl.com"
   },
   "flatApis": [
     {
@@ -6518,6 +6519,290 @@
       "pathParams": [],
       "queryParams": [],
       "parser": "parse_nhl_records"
+    },
+    {
+      "short": "standings",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/standings",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "season",
+          "queryKey": "season",
+          "default": 2024
+        },
+        {
+          "name": "season_type",
+          "queryKey": "seasonType",
+          "default": "REG"
+        },
+        {
+          "name": "week",
+          "queryKey": "week",
+          "default": 1
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 40
+        }
+      ],
+      "parser": "parse_nfl_standings",
+      "auth": true
+    },
+    {
+      "short": "rosters",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/rosters",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "season",
+          "queryKey": "season",
+          "default": 2024
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 40
+        }
+      ],
+      "parser": "parse_nfl_rosters",
+      "auth": true
+    },
+    {
+      "short": "teams_history",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/teams/history",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "season",
+          "queryKey": "season",
+          "default": 2024
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 40
+        }
+      ],
+      "parser": "parse_nfl_teams_history",
+      "auth": true
+    },
+    {
+      "short": "team",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/teams/{team_id}",
+      "pathParams": [
+        {
+          "name": "team_id"
+        }
+      ],
+      "queryParams": [],
+      "parser": "parse_nfl_team",
+      "auth": true
+    },
+    {
+      "short": "weeks",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/weeks/season/{season}/seasonType/{season_type}",
+      "pathParams": [
+        {
+          "name": "season",
+          "required": false,
+          "default": 2024
+        },
+        {
+          "name": "season_type",
+          "required": false,
+          "default": "REG"
+        }
+      ],
+      "queryParams": [],
+      "parser": "parse_nfl_weeks",
+      "auth": true
+    },
+    {
+      "short": "weeks_by_date",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/weeks/date/{date}",
+      "pathParams": [
+        {
+          "name": "date"
+        }
+      ],
+      "queryParams": [],
+      "parser": "parse_nfl_weeks_by_date",
+      "auth": true
+    },
+    {
+      "short": "combine_profiles",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/combine/profiles",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "year",
+          "queryKey": "year",
+          "default": 2024
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 40
+        }
+      ],
+      "parser": "parse_nfl_combine_profiles",
+      "auth": true
+    },
+    {
+      "short": "draft_picks",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/draft/picks/report",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "year",
+          "queryKey": "year",
+          "default": 2024
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 40
+        }
+      ],
+      "parser": "parse_nfl_draft_picks",
+      "auth": true
+    },
+    {
+      "short": "injuries",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/injuries",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "season",
+          "queryKey": "season",
+          "default": 2024
+        },
+        {
+          "name": "season_type",
+          "queryKey": "seasonType",
+          "default": "REG"
+        },
+        {
+          "name": "week",
+          "queryKey": "week",
+          "default": 1
+        }
+      ],
+      "parser": "parse_nfl_injuries",
+      "auth": true
+    },
+    {
+      "short": "game_summaries",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/stats/live/game-summaries",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "season",
+          "queryKey": "season",
+          "default": 2024
+        },
+        {
+          "name": "season_type",
+          "queryKey": "seasonType",
+          "default": "REG"
+        },
+        {
+          "name": "week",
+          "queryKey": "week",
+          "default": 1
+        }
+      ],
+      "parser": "parse_nfl_game_summaries",
+      "auth": true
+    },
+    {
+      "short": "weekly_game_details",
+      "flat": true,
+      "api": "nfl_api",
+      "host": "https://api.nfl.com",
+      "scope": "universal",
+      "path": "/football/v2/experience/weekly-game-details",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "season",
+          "queryKey": "season",
+          "default": 2024
+        },
+        {
+          "name": "season_type",
+          "queryKey": "type",
+          "default": "REG"
+        },
+        {
+          "name": "week",
+          "queryKey": "week",
+          "default": 1
+        },
+        {
+          "name": "include_drive_chart",
+          "queryKey": "includeDriveChart",
+          "default": true
+        },
+        {
+          "name": "include_replays",
+          "queryKey": "includeReplays",
+          "default": false
+        },
+        {
+          "name": "include_standings",
+          "queryKey": "includeStandings",
+          "default": false
+        },
+        {
+          "name": "include_tagged_videos",
+          "queryKey": "includeTaggedVideos",
+          "default": false
+        }
+      ],
+      "parser": "parse_nfl_weekly_game_details",
+      "auth": true
     }
   ]
 }

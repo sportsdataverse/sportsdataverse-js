@@ -38,6 +38,7 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   nhl_edge: 'nhl',
   nhl_stats_rest: 'nhl',
   nhl_records: 'nhl',
+  nfl_api: 'nfl',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);
@@ -55,6 +56,14 @@ export { makeFlatModule } from './leagues/_make_flat.js';
 export { WRAPPERS, FLAT_WRAPPERS } from './generated/wrappers.js';
 export { resolveFlat } from './core/flat.js';
 export { FLAT_HOSTS } from './core/client.js';
+export {
+  nflTokenGen,
+  nflHeadersGen,
+  nflClearTokenCache,
+  jwtExp,
+  NFL_API_HOST,
+} from './core/nfl_auth.js';
+export type { NflTokenOptions } from './core/nfl_auth.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
 export type { ParserFn } from './parsers/_registry.js';

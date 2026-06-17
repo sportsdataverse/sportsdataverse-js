@@ -29,6 +29,9 @@ export const FLAT_HOSTS: Record<string, string> = {
   nhl_edge: "https://api-web.nhle.com",
   nhl_stats_rest: "https://api.nhle.com/stats/rest",
   nhl_records: "https://records.nhl.com/site/api",
+  // NFL.com "Shield" API (token-auth; the wrapper dispatch mints a WEB_DESKTOP
+  // bearer token — see src/core/nfl_auth.ts).
+  nfl_api: "https://api.nfl.com",
 };
 
 const client = axios.create({

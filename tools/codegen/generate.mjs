@@ -32,6 +32,7 @@ const FLAT_API_FILES = [
   "nhl_edge",
   "nhl_stats_rest",
   "nhl_records",
+  "nfl_api",
 ];
 
 function mapPathParams(ep) {
@@ -80,6 +81,10 @@ function loadFlatWrappers() {
   const wrappers = [];
   for (const stem of FLAT_API_FILES) {
     const doc = parse(readFileSync(join(endpointsDir, `${stem}.yaml`), "utf8"));
+    // A top-level `auth: true` on the family YAML (e.g. nfl_api) flags every
+    // emitted wrapper so the flat dispatch resolves a bearer-token header set
+    // before fetching (see AUTH_HEADER_PROVIDERS in src/leagues/_make_flat.ts).
+    const auth = doc.auth === true;
     for (const ep of doc.endpoints ?? []) {
       wrappers.push({
         short: ep.short,
@@ -91,6 +96,7 @@ function loadFlatWrappers() {
         pathParams: mapPathParams(ep),
         queryParams: mapQueryParams(ep),
         ...(ep.parser ? { parser: ep.parser } : {}),
+        ...(auth ? { auth: true } : {}),
       });
     }
   }

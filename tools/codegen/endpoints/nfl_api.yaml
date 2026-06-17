@@ -1,0 +1,86 @@
+# Flat (non-ESPN) API family: the NFL.com "Shield" API (api.nfl.com), the modern
+# `/football/v2` surface. Unlike the other flat families this one is token-auth:
+# the top-level `auth: true` flags every emitted wrapper so the flat dispatch
+# (src/leagues/_make_flat.ts) mints/threads a public WEB_DESKTOP bearer token
+# (src/core/nfl_auth.ts) before fetching. Mirrors sdv-py's nfl_api family
+# (tools/codegen/endpoints/nfl_api.yaml + nfl/nfl_api_runtime.py). 11 endpoints.
+#
+# NOTE: api.nfl.com `season_type` uses STRING codes (PRE/REG/POST), NOT ESPN's
+# numeric 1/2/3.
+api: nfl_api
+host: https://api.nfl.com
+auth: true
+endpoints:
+- short: standings
+  path: /football/v2/standings
+  parser: parse_nfl_standings
+  extra_params:
+  - {name: season, query_key: season, default: 2024}
+  - {name: season_type, query_key: seasonType, default: REG}
+  - {name: week, query_key: week, default: 1}
+  - {name: limit, query_key: limit, default: 40}
+- short: rosters
+  path: /football/v2/rosters
+  parser: parse_nfl_rosters
+  extra_params:
+  - {name: season, query_key: season, default: 2024}
+  - {name: limit, query_key: limit, default: 40}
+- short: teams_history
+  path: /football/v2/teams/history
+  parser: parse_nfl_teams_history
+  extra_params:
+  - {name: season, query_key: season, default: 2024}
+  - {name: limit, query_key: limit, default: 40}
+- short: team
+  path: /football/v2/teams/{team_id}
+  parser: parse_nfl_team
+  path_params:
+  - {name: team_id, required: true}
+- short: weeks
+  path: /football/v2/weeks/season/{season}/seasonType/{season_type}
+  parser: parse_nfl_weeks
+  path_params:
+  - {name: season, required: false, default: 2024}
+  - {name: season_type, required: false, default: REG}
+- short: weeks_by_date
+  path: /football/v2/weeks/date/{date}
+  parser: parse_nfl_weeks_by_date
+  path_params:
+  - {name: date, required: true}
+- short: combine_profiles
+  path: /football/v2/combine/profiles
+  parser: parse_nfl_combine_profiles
+  extra_params:
+  - {name: year, query_key: year, default: 2024}
+  - {name: limit, query_key: limit, default: 40}
+- short: draft_picks
+  path: /football/v2/draft/picks/report
+  parser: parse_nfl_draft_picks
+  extra_params:
+  - {name: year, query_key: year, default: 2024}
+  - {name: limit, query_key: limit, default: 40}
+- short: injuries
+  path: /football/v2/injuries
+  parser: parse_nfl_injuries
+  extra_params:
+  - {name: season, query_key: season, default: 2024}
+  - {name: season_type, query_key: seasonType, default: REG}
+  - {name: week, query_key: week, default: 1}
+- short: game_summaries
+  path: /football/v2/stats/live/game-summaries
+  parser: parse_nfl_game_summaries
+  extra_params:
+  - {name: season, query_key: season, default: 2024}
+  - {name: season_type, query_key: seasonType, default: REG}
+  - {name: week, query_key: week, default: 1}
+- short: weekly_game_details
+  path: /football/v2/experience/weekly-game-details
+  parser: parse_nfl_weekly_game_details
+  extra_params:
+  - {name: season, query_key: season, default: 2024}
+  - {name: season_type, query_key: type, default: REG}
+  - {name: week, query_key: week, default: 1}
+  - {name: include_drive_chart, query_key: includeDriveChart, default: true}
+  - {name: include_replays, query_key: includeReplays, default: false}
+  - {name: include_standings, query_key: includeStandings, default: false}
+  - {name: include_tagged_videos, query_key: includeTaggedVideos, default: false}
