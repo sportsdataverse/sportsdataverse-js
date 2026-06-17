@@ -11,6 +11,8 @@ sidebar_position: 0
 
 Every league below exposes the same generated `espn<League><Endpoint>` surface (e.g. `espnNbaScoreboard`), bound from a single YAML source of truth. Each method is also available under its snake_case name (`espn_nba_scoreboard`) for parity with the Python / R packages. Pick a league for its full endpoint table, or try any call live in the [playground](/playground).
 
+Every endpoint also accepts `{ parsed: true }` to return tidy rows instead of raw JSON — see [**ESPN parsed returns**](./espn-parsed-returns) for the column reference (116 endpoints across 22 parsers).
+
 Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB Stats API + Baseball Savant/Statcast (`mlb`), the four NHL native APIs (`nhl`), and the NFL.com Shield API (`nfl`). They're listed in the **Native API** sections of each league page; the `native` column below counts them.
 
 | League | sport | ESPN slug | scopes | wrappers | native |

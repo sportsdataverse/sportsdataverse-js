@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of draft picks; varies by league/payload
+schema: draft
+kind: dataframe
+columns: []

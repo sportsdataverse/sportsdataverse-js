@@ -1,0 +1,40 @@
+# source-inferred static columns; per-stat columns appended dynamically from category labels/names
+schema: athlete_gamelog
+kind: dataframe
+columns:
+- name: season_type_id
+  type: character
+  description: 'Season type id (regular/post)'
+- name: season_type_name
+  type: character
+  description: 'Season type name'
+- name: category
+  type: character
+  description: 'Stat / leader category name'
+- name: event_id
+  type: character
+  description: 'ESPN event/game id'
+- name: event_date
+  type: character
+  description: 'Event date (ISO 8601)'
+- name: home_away
+  type: character
+  description: 'home or away'
+- name: score
+  type: character
+  description: 'Final score for the athlete''s team'
+- name: opponent_id
+  type: character
+  description: 'Opponent ESPN team id'
+- name: opponent_abbreviation
+  type: character
+  description: 'Opponent abbreviation'
+- name: opponent_display_name
+  type: character
+  description: 'Opponent display name'
+- name: game_result
+  type: character
+  description: 'Game result (W/L)'
+- name: game_processed
+  type: logical
+  description: 'Whether the game has been processed'

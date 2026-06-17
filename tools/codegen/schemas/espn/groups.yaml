@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of flattened group objects; varies by league/payload
+schema: groups
+kind: dataframe
+columns: []

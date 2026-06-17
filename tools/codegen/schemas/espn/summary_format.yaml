@@ -1,0 +1,24 @@
+schema: summary_format
+kind: dataframe
+columns:
+- name: regulation_periods
+  type: integer
+  description: ''
+- name: regulation_display_name
+  type: character
+  description: ''
+- name: regulation_slug
+  type: character
+  description: ''
+- name: regulation_clock
+  type: integer
+  description: ''
+- name: overtime_display_name
+  type: character
+  description: ''
+- name: overtime_slug
+  type: character
+  description: ''
+- name: overtime_clock
+  type: integer
+  description: ''

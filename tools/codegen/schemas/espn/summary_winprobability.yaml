@@ -1,0 +1,12 @@
+schema: summary_winprobability
+kind: dataframe
+columns:
+- name: home_win_percentage
+  type: number
+  description: ''
+- name: tie_percentage
+  type: integer
+  description: ''
+- name: play_id
+  type: character
+  description: ''

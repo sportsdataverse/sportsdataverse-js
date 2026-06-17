@@ -1,0 +1,25 @@
+# source-inferred long-form statistic rows (fully static columns)
+schema: event_competitor_statistics
+kind: dataframe
+columns:
+- name: split_name
+  type: character
+  description: 'Split / season-segment name'
+- name: category_name
+  type: character
+  description: 'Statistic category name'
+- name: stat_name
+  type: character
+  description: 'Statistic name'
+- name: stat_abbreviation
+  type: character
+  description: 'Statistic abbreviation'
+- name: stat_value
+  type: number
+  description: 'Numeric statistic value'
+- name: stat_display_value
+  type: character
+  description: 'Formatted statistic value'
+- name: stat_description
+  type: character
+  description: 'Statistic description'

@@ -1,0 +1,4 @@
+# empty for NBA capture (NFL/CFB-only or sparse section); zero-row shape
+schema: summary_odds
+kind: dataframe
+columns: []

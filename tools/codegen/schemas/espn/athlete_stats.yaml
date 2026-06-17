@@ -1,0 +1,16 @@
+# source-inferred static columns; per-stat columns appended dynamically from category labels/names
+schema: athlete_stats
+kind: dataframe
+columns:
+- name: category
+  type: character
+  description: 'Stat / leader category name'
+- name: split_name
+  type: character
+  description: 'Split / season-segment name'
+- name: split_category
+  type: character
+  description: 'Split category'
+- name: split_value
+  type: character
+  description: 'Split value'

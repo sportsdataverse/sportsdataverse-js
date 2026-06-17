@@ -1,0 +1,63 @@
+schema: summary_scoring_plays
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: 'ESPN id.'
+- name: type_id
+  type: character
+  description: ''
+- name: type_text
+  type: character
+  description: 'Play type label.'
+- name: type_abbreviation
+  type: character
+  description: ''
+- name: text
+  type: character
+  description: 'Play description text.'
+- name: away_score
+  type: integer
+  description: 'Away score after the play.'
+- name: home_score
+  type: integer
+  description: 'Home score after the play.'
+- name: period_number
+  type: integer
+  description: 'Quarter / period number.'
+- name: clock_value
+  type: integer
+  description: ''
+- name: clock_display_value
+  type: character
+  description: "Game clock at the play (MM:SS)."
+- name: team_id
+  type: character
+  description: 'ESPN team id.'
+- name: team_uid
+  type: character
+  description: ''
+- name: team_display_name
+  type: character
+  description: 'Team display name.'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation.'
+- name: team_links
+  type: character
+  description: ''
+- name: team_logo
+  type: character
+  description: ''
+- name: team_logos
+  type: character
+  description: ''
+- name: scoring_type_name
+  type: character
+  description: ''
+- name: scoring_type_display_name
+  type: character
+  description: ''
+- name: scoring_type_abbreviation
+  type: character
+  description: ''

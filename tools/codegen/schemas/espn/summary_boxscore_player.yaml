@@ -1,0 +1,87 @@
+schema: summary_boxscore_player
+kind: dataframe
+columns:
+- name: team_id
+  type: character
+  description: 'ESPN team id'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation'
+- name: team_display_name
+  type: character
+  description: 'Team display name'
+- name: team_location
+  type: character
+  description: ''
+- name: athlete_id
+  type: character
+  description: 'ESPN athlete id'
+- name: athlete_display_name
+  type: character
+  description: 'Athlete display name'
+- name: athlete_short_name
+  type: character
+  description: 'Athlete short name'
+- name: athlete_jersey
+  type: character
+  description: 'Jersey number'
+- name: athlete_position
+  type: character
+  description: 'Position abbreviation'
+- name: starter
+  type: logical
+  description: ''
+- name: active
+  type: logical
+  description: ''
+- name: did_not_play
+  type: logical
+  description: ''
+- name: ejected
+  type: logical
+  description: ''
+- name: reason
+  type: character
+  description: ''
+- name: minutes
+  type: character
+  description: ''
+- name: points
+  type: character
+  description: ''
+- name: field_goals_made_field_goals_attempted
+  type: character
+  description: ''
+- name: three_point_field_goals_made_three_point_field_goals_attempted
+  type: character
+  description: ''
+- name: free_throws_made_free_throws_attempted
+  type: character
+  description: ''
+- name: rebounds
+  type: character
+  description: ''
+- name: assists
+  type: character
+  description: ''
+- name: turnovers
+  type: character
+  description: ''
+- name: steals
+  type: character
+  description: ''
+- name: blocks
+  type: character
+  description: ''
+- name: offensive_rebounds
+  type: character
+  description: ''
+- name: defensive_rebounds
+  type: character
+  description: ''
+- name: fouls
+  type: character
+  description: ''
+- name: plus_minus
+  type: character
+  description: ''

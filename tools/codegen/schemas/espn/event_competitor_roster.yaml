@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of roster athletes; varies by league/payload
+schema: event_competitor_roster
+kind: dataframe
+columns: []

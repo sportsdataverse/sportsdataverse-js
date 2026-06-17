@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of coach items; varies by league/payload
+schema: coaches
+kind: dataframe
+columns: []

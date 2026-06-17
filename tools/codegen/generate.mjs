@@ -428,9 +428,162 @@ function renderLeaguePage(league, wrappers, position, flatWrappers = []) {
     }
   }
 
+  // Pointer to the shared parsed-returns reference (every endpoint above accepts
+  // `{ parsed: true }`; columns are parser-determined, documented once there).
+  body +=
+    `\n> **Parsed output:** pass \`{ parsed: true }\` to any endpoint above to get ` +
+    `tidy rows instead of raw JSON. The columns are determined by each endpoint's ` +
+    `parser — see [ESPN parsed returns](./espn-parsed-returns) for the full column ` +
+    `reference (and the \`summary\` dispatcher's 21 sub-frames).\n`;
+
   // Flat (non-ESPN) "Native API — <family>" sections, after the ESPN scopes.
   body += renderNativeSections(league, flatWrappers);
 
+  return body;
+}
+
+// ---------------------------------------------------------------------------
+// ESPN parsed-returns reference (shared page)
+// ---------------------------------------------------------------------------
+//
+// Every ESPN endpoint returns raw Dict by default; `{ parsed: true }` routes it
+// through the parser registered for its short name (src/parsers/espn.ts). The
+// 121 endpoints share just 22 parsers, so the returned columns are a property of
+// the PARSER, not the league/endpoint — we document each parser's columns once
+// here (from tools/codegen/schemas/espn/*.yaml) and point every league page at
+// this page, instead of repeating 121 tables across 29 leagues.
+
+// Display order for the per-parser sections (dedicated first, the two generics
+// last; `parse_summary` is a dispatcher rendered as a pointer to the sub-frames).
+const ESPN_PARSER_ORDER = [
+  "parse_scoreboard", "parse_teams", "parse_standings", "parse_groups",
+  "parse_athlete_overview", "parse_athlete_stats", "parse_athlete_gamelog", "parse_athlete_splits",
+  "parse_leaders", "parse_coaches", "parse_draft",
+  "parse_event_competitor_roster", "parse_event_competitor_statistics",
+  "parse_event_competitor_linescores", "parse_event_plays",
+  "parse_team_schedule", "parse_team_roster", "parse_news", "parse_injuries",
+  "parse_summary", "parse_items", "parse_single_entity",
+];
+
+// The 21 summary sub-frames in dispatcher order (SUMMARY_SECTION_PARSERS).
+const ESPN_SUMMARY_SECTIONS = [
+  "boxscore_player", "boxscore_team", "plays", "winprobability", "leaders",
+  "game_info", "officials", "header", "season_series", "against_the_spread",
+  "standings", "broadcasts", "format", "pickcenter", "odds", "article",
+  "injuries", "news", "drives", "drive_plays", "scoring_plays",
+];
+
+const ESPN_PARSER_DESC = {
+  parse_scoreboard: "One row per game on a Site v2 scoreboard (teams, score, status, odds).",
+  parse_teams: "League team catalog (Site v2 / Core v2).",
+  parse_standings: "One row per team-standings entry with its stat columns.",
+  parse_groups: "Conferences / groups (divisions) for the league.",
+  parse_athlete_overview: "Web v3 athlete overview (bio + recent splits).",
+  parse_athlete_stats: "Web v3 athlete statistics blocks.",
+  parse_athlete_gamelog: "Web v3 athlete game log (one row per game).",
+  parse_athlete_splits: "Web v3 athlete splits.",
+  parse_leaders: "League statistical leaders (one row per leader entry).",
+  parse_coaches: "Coaches catalog.",
+  parse_draft: "Draft rounds / picks.",
+  parse_event_competitor_roster: "Per-competitor roster on an event.",
+  parse_event_competitor_statistics: "Per-competitor statistics on an event.",
+  parse_event_competitor_linescores: "Per-competitor linescores on an event.",
+  parse_event_plays: "Core v2 event plays.",
+  parse_team_schedule: "A team's Site v2 schedule (one row per event).",
+  parse_team_roster: "A team's roster (one row per athlete).",
+  parse_news: "ESPN news articles (league / team / athlete scoped).",
+  parse_injuries: "Injury report rows (league / team / athlete scoped).",
+  parse_summary: "Site v2 game summary dispatcher — returns 21 sub-frames.",
+  parse_items: "Generic Core v2 paginated list — one row per item (often a `$ref` pointer).",
+  parse_single_entity: "Generic Core v2 single resource — one row for the entity.",
+};
+
+/** Load the committed ESPN short-name -> parser fn map (drift-guarded by a test). */
+function loadEspnParserMap() {
+  const doc = parse(readFileSync(join(endpointsDir, "espn_parser_map.yaml"), "utf8"));
+  return doc?.endpoints || {};
+}
+
+/** Render just the `col_name | type | description` table body (no heading). */
+function renderColumnsTable(columns) {
+  let out = `| col_name | type | description |\n|---|---|---|\n`;
+  for (const c of columns) {
+    const desc = c.description ? escapeCell(c.description) : "";
+    out += `| \`${escapeCell(c.name)}\` | ${escapeCell(c.type)} | ${desc} |\n`;
+  }
+  return out;
+}
+
+/** The shared "ESPN parsed returns" reference page (one table per parser). */
+function renderEspnParsedReturns() {
+  const map = loadEspnParserMap();
+  const byParser = {};
+  for (const [short, fn] of Object.entries(map)) (byParser[fn] ??= []).push(short);
+  const parserCount = Object.keys(byParser).length;
+
+  let body =
+    `---\n` +
+    `title: ESPN parsed returns\n` +
+    `sidebar_label: Parsed returns\n` +
+    `sidebar_position: 1\n` +
+    `---\n\n` +
+    DOCS_NOTE +
+    `\n# ESPN parsed returns\n\n` +
+    `Every ESPN endpoint returns the raw ESPN \`Dict\` by default. Pass ` +
+    `\`{ parsed: true }\` to route the payload through the parser registered for ` +
+    `that endpoint and get a tidy array of row objects instead (the JS analogue ` +
+    `of a tidy DataFrame — mirrors \`sdv-py\`'s \`return_parsed=True\`):\n\n` +
+    "```js\n" +
+    `const raw  = await sdv.nba.espnNbaScoreboard({});               // raw Dict\n` +
+    `const rows = await sdv.nba.espnNbaScoreboard({ parsed: true }); // tidy row[]\n` +
+    "```\n\n" +
+    `The **${Object.keys(map).length}** ESPN endpoints route through just ` +
+    `**${parserCount}** parsers, so the returned columns are determined by the ` +
+    `endpoint's *parser*, not the league — the same parser yields the same shape ` +
+    `across every league. Each parser's column set is documented once below; the ` +
+    `**Endpoints** line under each lists the short names that use it. Columns are ` +
+    `snake_cased and nested objects flattened with \`_\` (e.g. \`team.abbreviation\` ` +
+    `-> \`team_abbreviation\`). Generic / league-variable passthroughs show no ` +
+    `fixed table.\n`;
+
+  for (const fn of ESPN_PARSER_ORDER) {
+    const shorts = (byParser[fn] || []).slice().sort();
+    if (!shorts.length) continue;
+    body += `\n## \`${fn}\`\n\n`;
+    if (ESPN_PARSER_DESC[fn]) body += `${ESPN_PARSER_DESC[fn]}\n\n`;
+    body += `**Endpoints (${shorts.length}):** ${shorts.map((s) => `\`${s}\``).join(", ")}\n\n`;
+    if (fn === "parse_summary") {
+      body +=
+        `\`summary\` is a dispatcher: \`{ parsed: true }\` returns an object of all ` +
+        `21 sub-frames keyed by section; \`{ parsed: true, section: '<name>' }\` ` +
+        `returns just that one. See [Summary sub-frames](#summary-sub-frames) below.\n`;
+      continue;
+    }
+    const cols = loadReturnsColumns(`espn/${fn.replace(/^parse_/, "")}`);
+    if (cols) body += renderColumnsTable(cols);
+    else
+      body +=
+        `_Generic / dynamic passthrough — the column set varies by league and ` +
+        `payload (e.g. Core v2 \`$ref\` items or a league-specific catalog). Call ` +
+        `with \`{ parsed: true }\` to inspect the columns for a given league._\n`;
+  }
+
+  body +=
+    `\n## Summary sub-frames\n\n` +
+    `The \`summary\` dispatcher (\`parse_summary\`) yields these 21 sub-frames. ` +
+    `Football (NFL / CFB) games additionally populate \`drives\` / \`drive_plays\` / ` +
+    `\`scoring_plays\`; other sports return those as zero-row frames. Betting ` +
+    `sections (\`against_the_spread\` / \`pickcenter\` / \`odds\`) are sparse in ` +
+    `past-game captures.\n`;
+  for (const sec of ESPN_SUMMARY_SECTIONS) {
+    body += `\n### \`${sec}\`\n\n`;
+    const cols = loadReturnsColumns(`espn/summary_${sec}`);
+    if (cols) body += renderColumnsTable(cols);
+    else
+      body +=
+        `_Zero rows in the reference capture (football-only or sparse-in-past-games); ` +
+        `the shape populates on a live game of the relevant sport._\n`;
+  }
   return body;
 }
 
@@ -448,6 +601,9 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = []) {
     `Each method is also available under its snake_case name (\`espn_nba_scoreboard\`) ` +
     `for parity with the Python / R packages. Pick a league for its full endpoint ` +
     `table, or try any call live in the [playground](/playground).\n\n` +
+    `Every endpoint also accepts \`{ parsed: true }\` to return tidy rows instead ` +
+    `of raw JSON — see [**ESPN parsed returns**](./espn-parsed-returns) for the ` +
+    `column reference (116 endpoints across 22 parsers).\n\n` +
     `Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB ` +
     `Stats API + Baseball Savant/Statcast (\`mlb\`), the four NHL native APIs ` +
     `(\`nhl\`), and the NFL.com Shield API (\`nfl\`). They're listed in the ` +
@@ -542,6 +698,7 @@ const outputs = {
   [join(generatedDir, "wrappers.ts")]: wrappersTs,
   [join(generatedDir, "leagues.ts")]: renderTs("LeagueConfig", "LEAGUES", leagues),
   [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers, flatWrappers),
+  [join(referenceDir, "espn-parsed-returns.md")]: renderEspnParsedReturns(),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
   [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
     wrappers,
@@ -552,10 +709,12 @@ const outputs = {
   ),
 };
 leagues.forEach((league, i) => {
+  // +2: position 0 is the Overview index, position 1 is the shared parsed-returns
+  // page, so league pages start at 2.
   outputs[join(referenceDir, `${league.prefix}.md`)] = renderLeaguePage(
     league,
     wrappers,
-    i + 1,
+    i + 2,
     flatWrappers
   );
 });
@@ -579,7 +738,7 @@ for (const [file, content] of Object.entries(outputs)) {
 console.log(
   `codegen: ${wrappers.length} wrappers across ${leagues.length} leagues ` +
     `+ ${flatWrappers.length} flat-API wrappers (${FLAT_API_FILES.length} families) ` +
-    `(+ ${leagues.length + 2} reference pages + playground metadata)`
+    `(+ ${leagues.length + 3} reference pages + playground metadata)`
 );
 if (check && drift) process.exit(1);
 if (check) console.log("codegen: generated files are up to date");

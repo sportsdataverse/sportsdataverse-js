@@ -1,0 +1,4 @@
+# dynamic columns — normalize() passthrough of per-period linescores (plus a `period` index); varies by league/payload
+schema: event_competitor_linescores
+kind: dataframe
+columns: []

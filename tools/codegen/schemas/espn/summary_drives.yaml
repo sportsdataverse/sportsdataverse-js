@@ -1,0 +1,81 @@
+schema: summary_drives
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: 'ESPN id.'
+- name: description
+  type: character
+  description: 'Human-readable description.'
+- name: team_id
+  type: character
+  description: 'ESPN team id.'
+- name: team_name
+  type: character
+  description: 'Team name.'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation.'
+- name: team_display_name
+  type: character
+  description: 'Team display name.'
+- name: team_short_display_name
+  type: character
+  description: ''
+- name: team_logos
+  type: character
+  description: ''
+- name: start_period_type
+  type: character
+  description: ''
+- name: start_period_number
+  type: integer
+  description: ''
+- name: start_clock_display_value
+  type: character
+  description: ''
+- name: start_yard_line
+  type: integer
+  description: 'Yard line at the start of the play.'
+- name: start_text
+  type: character
+  description: ''
+- name: end_period_type
+  type: character
+  description: ''
+- name: end_period_number
+  type: integer
+  description: ''
+- name: end_clock_display_value
+  type: character
+  description: ''
+- name: end_yard_line
+  type: integer
+  description: ''
+- name: end_text
+  type: character
+  description: ''
+- name: time_elapsed_display_value
+  type: character
+  description: ''
+- name: yards
+  type: integer
+  description: 'Net yards on the drive.'
+- name: is_score
+  type: logical
+  description: 'Whether the drive ended in a score.'
+- name: offensive_plays
+  type: integer
+  description: 'Number of offensive plays on the drive.'
+- name: result
+  type: character
+  description: 'Drive result code.'
+- name: short_display_result
+  type: character
+  description: ''
+- name: display_result
+  type: character
+  description: 'Human-readable drive result.'
+- name: plays
+  type: character
+  description: 'JSON list of play ids on the drive (unrolled in drive_plays).'
