@@ -110,7 +110,9 @@ function inferType(v) {
   if (typeof v === "number") return Number.isInteger(v) ? "integer" : "number";
   if (typeof v === "string") return "character";
   if (v === null || v === undefined) return "character";
-  if (typeof v === "object") return "object";
+  // Non-scalar -> "list" to match the rest of the returns-schema corpus (the
+  // parsers stringify arrays/objects, so this is a rare safety branch).
+  if (typeof v === "object") return "list";
   return "character";
 }
 
