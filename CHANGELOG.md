@@ -4,30 +4,6 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
-## Unreleased
-
-### The Odds API — first cross-sport provider family (`sdv.odds.*`)
-
-- **The Odds API** (`api.the-odds-api.com`) — a new flat-API family of **10
-  endpoints** under the standalone **`odds`** namespace (`sdv.odds.oddsApi*` /
-  `sdv.odds.odds_api_*`): `sports`, `sports_odds`, `sports_scores`,
-  `sports_events`, `sports_participants`, `event_odds`, `event_markets`,
-  `sports_odds_history`, `sports_events_history`, `event_odds_history`. Ported
-  from the [`oddsapiR`](https://oddsapiR.sportsdataverse.org) R package.
-- This is the **first cross-sport (non-league) provider family** — it
-  establishes standalone-namespace support: a flat family whose namespace is not
-  an ESPN league gets its own `sdv.<ns>.*` surface and its own generated
-  reference page (`/reference/odds`) instead of a "Native API" section on a
-  league page.
-- **Auth is a plain query param.** The Odds API uses `apiKey` (you supply it) —
-  every endpoint takes a required `api_key` param (query key `apiKey`); there is
-  no bearer-token machinery. `await sdv.odds.oddsApiSports({ api_key: '...' })`.
-- The odds / event-odds / history parsers **unroll** events → bookmakers →
-  markets → outcomes to **one row per outcome** (mirroring oddsapiR's
-  `tidyr::unnest` chain); pass `{ parsed: true }` for tidy rows.
-- First of a planned provider-expansion program (CBS / 247 / Yahoo / Fox to
-  follow).
-
 ## v3.0.0
 
 A major release that turns `sportsdataverse` into a **cross-league ESPN client**
@@ -56,6 +32,34 @@ the matching league namespace:
 - **NFL.com "Shield" API** (`api.nfl.com`) — `sdv.nfl.nflApi*`, with automatic
   anonymous `WEB_DESKTOP` bearer-token minting (cached + auto-renewed; no
   credentials required).
+
+### Provider families (5 cross-sport, standalone namespaces)
+
+Beyond ESPN + the league-native APIs, v3.0.0 adds **five independent provider
+families**, each generated from a canonical OpenAPI spec (the `sdv-swagger`
+collection) via a new reusable **OpenAPI 3.x → endpoint-YAML transform**
+(`tools/codegen/from-openapi.mjs`, with path / query / `$ref` param resolution +
+auth detection). Each cross-sport family gets its own standalone `sdv.<ns>.*`
+namespace and its own generated reference page; pass `{ parsed: true }` for tidy
+rows. The transform makes adding the next provider largely mechanical.
+
+- **The Odds API** (`sdv.odds.*`, 10 endpoints) — betting odds / scores / events
+  across sports. `apiKey` is a plain query param you supply. Ported from
+  [`oddsapiR`](https://oddsapiR.sportsdataverse.org); odds / event / history
+  parsers unroll events → bookmakers → markets → outcomes to one row per outcome.
+- **247Sports** (`sdv.recruiting.*`, 25 endpoints) — recruiting rankings /
+  commits / profiles (caller-supplied JWT via `headers`). Supersedes the legacy
+  `getPlayerRankings`-style service methods (kept for back-compat).
+- **CBS Sports** (`sdv.cbs.*`, 82 endpoints) — the public NAPI (scores /
+  standings / teams / odds across sports), keyless.
+- **Fox Sports** (`sdv.fox.*`, 38 endpoints) — the Bifrost API (`{sport}` path
+  param across 11 sports); a public `apikey` + `api-version` query pair, defaulted.
+- **Yahoo Sports** (`sdv.yahoo.*`, 107 endpoints) — the editorial scoreboard /
+  boxscore feed + the shangrila stats-graph API; keyless (needs browser-y
+  `Origin` / `Referer` headers).
+
+In total: **517 flat-API wrappers across 13 families** (the 7 native + 5 provider
++ Statcast).
 
 ### tidy.js parser layer
 
@@ -95,6 +99,15 @@ the matching league namespace:
   serverless proxy — host-allowlisted (derived from the generated metadata), with
   server-side token minting for NFL.com and content-type passthrough for Statcast
   CSV/HTML so credentials never reach the browser and non-JSON bodies display raw.
+  It now also has a **Raw/Parsed toggle** (tidy rows render as a sortable table —
+  with a section selector for the 21-sub-frame `summary` dispatcher),
+  **deep-linkable URLs** (every call is shareable), and an **Examples menu** of
+  curated presets across ESPN, the native APIs, and all 5 providers. The provider
+  families each appear under their standalone namespace.
+- **Getting-started guides** (`/docs/guides/`) — per-area recipe pages (quickstart,
+  NBA/WNBA/college-basketball/NFL/MLB/NHL/CFB/soccer, providers) with runnable
+  raw-vs-parsed snippets, "Open in playground" deep-links, and embedded **RunKit**
+  live notebooks.
 
 ### Tooling / housekeeping
 
