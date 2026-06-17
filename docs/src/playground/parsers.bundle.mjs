@@ -1073,6 +1073,526 @@ function parse_mlb_statcast_player(payload, section = "statcast") {
   return jsonRows(rows);
 }
 
+// src/parsers/odds_api.ts
+function isPlainObject9(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+function unrollOutcomes(events, extra = {}) {
+  if (!Array.isArray(events)) return [];
+  const rows = [];
+  for (const ev of events) {
+    if (!isPlainObject9(ev)) continue;
+    const { bookmakers, ...eventCols } = ev;
+    for (const bm of bookmakers ?? []) {
+      if (!isPlainObject9(bm)) continue;
+      const bookmakerCols = {
+        bookmaker_key: bm.key,
+        bookmaker: bm.title,
+        bookmaker_last_update: bm.last_update
+      };
+      for (const mk of bm.markets ?? []) {
+        if (!isPlainObject9(mk)) continue;
+        const marketCols = {
+          market_key: mk.key,
+          market_last_update: mk.last_update
+        };
+        for (const oc of mk.outcomes ?? []) {
+          if (!isPlainObject9(oc)) continue;
+          const outcomeCols = {};
+          for (const [k, v] of Object.entries(oc)) outcomeCols[`outcomes_${k}`] = v;
+          rows.push({ ...extra, ...eventCols, ...bookmakerCols, ...marketCols, ...outcomeCols });
+        }
+      }
+    }
+  }
+  return normalize(rows);
+}
+function parse_odds_api_sports(raw) {
+  if (!Array.isArray(raw)) return [];
+  return normalize(raw);
+}
+function parse_odds_api_sports_odds(raw) {
+  return unrollOutcomes(raw);
+}
+function parse_odds_api_sports_scores(raw) {
+  if (!Array.isArray(raw)) return [];
+  return normalize(raw);
+}
+function parse_odds_api_sports_events(raw) {
+  if (!Array.isArray(raw)) return [];
+  return normalize(raw);
+}
+function parse_odds_api_sports_participants(raw) {
+  if (!Array.isArray(raw)) return [];
+  return normalize(raw);
+}
+function parse_odds_api_event_odds(raw) {
+  if (!isPlainObject9(raw)) return [];
+  return unrollOutcomes([raw]);
+}
+function parse_odds_api_event_markets(raw) {
+  if (!isPlainObject9(raw)) return [];
+  const { bookmakers, ...eventCols } = raw;
+  const rows = [];
+  for (const bm of bookmakers ?? []) {
+    if (!isPlainObject9(bm)) continue;
+    const bookmakerCols = {
+      bookmaker_key: bm.key,
+      bookmaker: bm.title
+    };
+    for (const mk of bm.markets ?? []) {
+      if (!isPlainObject9(mk)) continue;
+      rows.push({
+        ...eventCols,
+        ...bookmakerCols,
+        market_key: mk.key,
+        market_last_update: mk.last_update
+      });
+    }
+  }
+  return normalize(rows);
+}
+function parse_odds_api_sports_odds_history(raw) {
+  if (!isPlainObject9(raw)) return [];
+  const extra = {
+    timestamp: raw.timestamp,
+    previous_timestamp: raw.previous_timestamp,
+    next_timestamp: raw.next_timestamp
+  };
+  return unrollOutcomes(raw.data ?? [], extra);
+}
+function parse_odds_api_sports_events_history(raw) {
+  if (!isPlainObject9(raw)) return [];
+  const data = raw.data;
+  if (!Array.isArray(data)) return [];
+  const rows = data.map((ev) => ({
+    timestamp: raw.timestamp,
+    previous_timestamp: raw.previous_timestamp,
+    next_timestamp: raw.next_timestamp,
+    ...ev
+  }));
+  return normalize(rows);
+}
+function parse_odds_api_event_odds_history(raw) {
+  if (!isPlainObject9(raw)) return [];
+  const extra = {
+    timestamp: raw.timestamp,
+    previous_timestamp: raw.previous_timestamp,
+    next_timestamp: raw.next_timestamp
+  };
+  const data = raw.data;
+  const events = Array.isArray(data) ? data : isPlainObject9(data) ? [data] : [];
+  return unrollOutcomes(events, extra);
+}
+
+// src/parsers/sports247.ts
+function isPlainObject10(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+var LIST_KEYS2 = ["list", "rankings", "items", "results", "data"];
+function parse_sports247_list(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject10(raw)) return [];
+  for (const key of LIST_KEYS2) {
+    const candidate = raw[key];
+    if (Array.isArray(candidate) && candidate.length > 0 && isPlainObject10(candidate[0])) {
+      return normalize(candidate);
+    }
+  }
+  return [];
+}
+function parse_sports247_paged_list(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject10(raw)) return [];
+  return normalize(raw.list ?? []);
+}
+function parse_sports247_institution_rankings(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject10(raw)) return [];
+  const list = raw.list;
+  if (!Array.isArray(list) || list.length === 0) return [];
+  const pag = isPlainObject10(raw.pagination) ? raw.pagination : {};
+  const base = {};
+  for (const [k, v] of Object.entries(pag)) base[`pagination_${k}`] = v;
+  return normalize(list.map((row) => ({ ...base, ...isPlainObject10(row) ? row : {} })));
+}
+function parse_sports247_ranking_feed(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject10(raw)) return [];
+  return normalize(raw.rankings ?? []);
+}
+
+// src/parsers/cbs_napi.ts
+function isPlainObject11(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+var ERROR_KEYS = ["error", "errors", "warnings"];
+function unwrapData(raw) {
+  if (isPlainObject11(raw)) {
+    const obj = raw;
+    if ("data" in obj) return obj.data;
+    if (ERROR_KEYS.some((k) => k in obj)) return null;
+  }
+  return raw;
+}
+var LIST_KEYS3 = [
+  "rows",
+  "items",
+  "list",
+  "results",
+  "entries",
+  "rankings",
+  "standings",
+  "scores",
+  "games",
+  "events",
+  "players",
+  "teams",
+  "leaders",
+  "plays",
+  "odds",
+  "markets",
+  "data"
+];
+function firstListIn(obj) {
+  for (const key of LIST_KEYS3) {
+    const c = obj[key];
+    if (Array.isArray(c) && c.length > 0 && isPlainObject11(c[0])) return c;
+  }
+  for (const v of Object.values(obj)) {
+    if (Array.isArray(v) && v.length > 0 && isPlainObject11(v[0])) return v;
+  }
+  return null;
+}
+function parse_cbs_napi_list(raw) {
+  const data = unwrapData(raw);
+  if (Array.isArray(data)) return normalize(data);
+  if (!isPlainObject11(data)) return [];
+  const list = firstListIn(data);
+  if (list) return normalize(list);
+  if (Object.keys(data).length > 0) return normalize([data]);
+  return [];
+}
+function parse_cbs_napi_scoreboard(raw) {
+  const data = unwrapData(raw);
+  if (Array.isArray(data)) return normalize(data);
+  if (!isPlainObject11(data)) return [];
+  for (const key of ["games", "scoreboard", "scores", "events"]) {
+    const c = data[key];
+    if (Array.isArray(c)) return normalize(c);
+  }
+  const list = firstListIn(data);
+  if (list) return normalize(list);
+  if (Object.keys(data).length > 0) return normalize([data]);
+  return [];
+}
+function parse_cbs_napi_standings(raw) {
+  const data = unwrapData(raw);
+  if (Array.isArray(data)) return normalize(data);
+  if (!isPlainObject11(data)) return [];
+  const groups = data.groups ?? data.divisions;
+  if (Array.isArray(groups) && groups.length > 0 && isPlainObject11(groups[0])) {
+    const rows = [];
+    for (const g of groups) {
+      if (!isPlainObject11(g)) continue;
+      const { standings, rows: gRows, entries, ...groupCols } = g;
+      const inner = [standings, gRows, entries].find(
+        (x) => Array.isArray(x) && x.length > 0
+      );
+      const groupPrefixed = {};
+      for (const [k, v] of Object.entries(groupCols)) {
+        if (!isPlainObject11(v) && !Array.isArray(v)) groupPrefixed[`group_${k}`] = v;
+      }
+      for (const r of inner ?? []) {
+        if (isPlainObject11(r)) rows.push({ ...groupPrefixed, ...r });
+      }
+    }
+    if (rows.length > 0) return normalize(rows);
+  }
+  for (const key of ["standings", "rows", "entries"]) {
+    const c = data[key];
+    if (Array.isArray(c)) return normalize(c);
+  }
+  const list = firstListIn(data);
+  if (list) return normalize(list);
+  if (Object.keys(data).length > 0) return normalize([data]);
+  return [];
+}
+function parse_cbs_napi_odds(raw) {
+  const data = unwrapData(raw);
+  let markets = null;
+  if (Array.isArray(data)) {
+    markets = data;
+  } else if (isPlainObject11(data)) {
+    for (const key of ["markets", "odds", "lines"]) {
+      if (Array.isArray(data[key])) {
+        markets = data[key];
+        break;
+      }
+    }
+    if (!markets) markets = firstListIn(data);
+    if (!markets && Object.keys(data).length > 0) return normalize([data]);
+  }
+  if (!Array.isArray(markets)) return [];
+  const rows = [];
+  for (const mk of markets) {
+    if (!isPlainObject11(mk)) continue;
+    const { books, lines, quotes, ...marketCols } = mk;
+    const inner = [books, lines, quotes].find((x) => Array.isArray(x) && x.length > 0);
+    if (Array.isArray(inner)) {
+      for (const b of inner) {
+        if (isPlainObject11(b)) rows.push({ ...marketCols, ...b });
+      }
+    } else {
+      rows.push(mk);
+    }
+  }
+  return normalize(rows);
+}
+
+// src/parsers/fox_bifrost.ts
+function isPlainObject12(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+var LIST_KEYS4 = [
+  "selectionGroupList",
+  "groupList",
+  "sectionList",
+  "standingsSections",
+  "navItems",
+  "results",
+  "items",
+  "events",
+  "rows",
+  "groups",
+  "list",
+  "entries"
+];
+function firstListIn2(obj) {
+  for (const key of LIST_KEYS4) {
+    const c = obj[key];
+    if (Array.isArray(c) && c.length > 0 && isPlainObject12(c[0])) return c;
+  }
+  for (const v of Object.values(obj)) {
+    if (Array.isArray(v) && v.length > 0 && isPlainObject12(v[0])) return v;
+  }
+  return null;
+}
+function parse_fox_bifrost_list(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject12(raw)) return [];
+  const list = firstListIn2(raw);
+  if (list) return normalize(list);
+  if (Object.keys(raw).length > 0) return normalize([raw]);
+  return [];
+}
+function parse_fox_bifrost_scoreboard(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject12(raw)) return [];
+  const selectionGroups = raw.selectionGroupList;
+  if (Array.isArray(selectionGroups)) {
+    const rows = [];
+    for (const g of selectionGroups) {
+      if (!isPlainObject12(g)) continue;
+      const { selectionList, ...groupMeta } = g;
+      const list = Array.isArray(selectionList) ? selectionList : [];
+      for (const sel of list) {
+        if (!isPlainObject12(sel)) continue;
+        rows.push({ group: groupMeta, ...sel });
+      }
+    }
+    return normalize(rows);
+  }
+  for (const key of ["events", "groupList", "sectionList"]) {
+    const c = raw[key];
+    if (Array.isArray(c) && c.length > 0 && isPlainObject12(c[0])) return normalize(c);
+  }
+  return parse_fox_bifrost_list(raw);
+}
+function parse_fox_bifrost_standings(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject12(raw)) return [];
+  const sections = raw.standingsSections;
+  if (Array.isArray(sections)) {
+    const rows = [];
+    for (const s of sections) {
+      if (!isPlainObject12(s)) continue;
+      const { standings, ...sectionMeta } = s;
+      const list = Array.isArray(standings) ? standings : [];
+      for (const r of list) {
+        if (!isPlainObject12(r)) continue;
+        rows.push({ section: sectionMeta, ...r });
+      }
+    }
+    return normalize(rows);
+  }
+  return parse_fox_bifrost_list(raw);
+}
+function parse_fox_bifrost_event(raw) {
+  if (!isPlainObject12(raw)) return [];
+  const comparison = raw?.teamStatsComparison?.items ?? raw?.gameStats?.items ?? raw?.eventStatsTab?.eventStatsList;
+  if (Array.isArray(comparison) && comparison.length > 0 && isPlainObject12(comparison[0])) {
+    return normalize(comparison);
+  }
+  if (Object.keys(raw).length > 0) return normalize([raw]);
+  return [];
+}
+function parse_fox_bifrost_team_roster(raw) {
+  if (!isPlainObject12(raw)) return [];
+  const groups = raw.groups;
+  if (Array.isArray(groups)) {
+    const rows = [];
+    for (const g of groups) {
+      if (!isPlainObject12(g)) continue;
+      const { rows: groupRows, ...groupMeta } = g;
+      const list = Array.isArray(groupRows) ? groupRows : [];
+      for (const r of list) {
+        if (!isPlainObject12(r)) continue;
+        rows.push({ group: groupMeta, ...r });
+      }
+    }
+    return normalize(rows);
+  }
+  return parse_fox_bifrost_list(raw);
+}
+function parse_fox_bifrost_search(raw) {
+  if (Array.isArray(raw)) return normalize(raw);
+  if (!isPlainObject12(raw)) return [];
+  const results = raw.results;
+  if (Array.isArray(results)) return normalize(results);
+  return parse_fox_bifrost_list(raw);
+}
+
+// src/parsers/yahoo_editorial.ts
+function isPlainObject13(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+var LIST_KEYS5 = [
+  "games",
+  "events",
+  "scores",
+  "players",
+  "teams",
+  "leaders",
+  "rows",
+  "items",
+  "list",
+  "results",
+  "entries"
+];
+function firstListIn3(obj) {
+  for (const key of LIST_KEYS5) {
+    const c = obj[key];
+    if (Array.isArray(c) && c.length > 0 && isPlainObject13(c[0])) return c;
+  }
+  for (const v of Object.values(obj)) {
+    if (Array.isArray(v) && v.length > 0 && isPlainObject13(v[0])) return v;
+  }
+  return null;
+}
+function unwrapService(raw) {
+  if (isPlainObject13(raw) && isPlainObject13(raw.service)) {
+    return raw.service;
+  }
+  return raw;
+}
+function unrollKeyedMap(map) {
+  if (!isPlainObject13(map)) return [];
+  const rows = [];
+  for (const [key, val] of Object.entries(map)) {
+    if (isPlainObject13(val)) rows.push({ id: key, ...val });
+  }
+  return rows;
+}
+function parse_yahoo_editorial_list(raw) {
+  const svc = unwrapService(raw);
+  if (Array.isArray(svc)) return normalize(svc);
+  if (!isPlainObject13(svc)) return [];
+  const list = firstListIn3(svc);
+  if (list) return normalize(list);
+  if (Object.keys(svc).length > 0) return normalize([svc]);
+  return [];
+}
+function parse_yahoo_editorial_scoreboard(raw) {
+  const svc = unwrapService(raw);
+  if (!isPlainObject13(svc)) return [];
+  const games = svc.scoreboard?.games ?? svc.games;
+  if (isPlainObject13(games)) return normalize(unrollKeyedMap(games));
+  if (Array.isArray(games)) return normalize(games);
+  return parse_yahoo_editorial_list(raw);
+}
+function parse_yahoo_editorial_boxscore(raw) {
+  const svc = unwrapService(raw);
+  if (!isPlainObject13(svc)) return [];
+  const playerStats = svc.boxscore?.player_stats ?? svc.player_stats;
+  if (isPlainObject13(playerStats)) return normalize(unrollKeyedMap(playerStats));
+  if (Array.isArray(playerStats)) return normalize(playerStats);
+  return parse_yahoo_editorial_list(raw);
+}
+
+// src/parsers/yahoo_shangrila.ts
+function isPlainObject14(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+function unwrapData2(raw) {
+  if (isPlainObject14(raw) && "data" in raw) {
+    return raw.data;
+  }
+  return raw;
+}
+function firstRootList(data) {
+  for (const v of Object.values(data)) {
+    if (Array.isArray(v) && v.length > 0 && isPlainObject14(v[0])) return v;
+  }
+  return null;
+}
+var STAT_ARRAY_KEYS = [
+  "footballStats",
+  "basketballStats",
+  "baseballStats",
+  "hockeyStats",
+  "soccerStats",
+  "leaders",
+  "stats",
+  "statLeaders",
+  "players",
+  "teams"
+];
+function parse_yahoo_shangrila_list(raw) {
+  const data = unwrapData2(raw);
+  if (Array.isArray(data)) return normalize(data);
+  if (!isPlainObject14(data)) return [];
+  const list = firstRootList(data);
+  if (list) return normalize(list);
+  if (Object.keys(data).length > 0) return normalize([data]);
+  return [];
+}
+function parse_yahoo_shangrila_stats(raw) {
+  const data = unwrapData2(raw);
+  if (!isPlainObject14(data)) return [];
+  const rootList = firstRootList(data);
+  if (!rootList) return parse_yahoo_shangrila_list(raw);
+  const rows = [];
+  let sawStatArray = false;
+  for (const entry of rootList) {
+    if (!isPlainObject14(entry)) continue;
+    const statArray = STAT_ARRAY_KEYS.map((k) => entry[k]).find(
+      (x) => Array.isArray(x) && x.length > 0 && isPlainObject14(x[0])
+    );
+    if (!Array.isArray(statArray)) continue;
+    sawStatArray = true;
+    const meta = {};
+    for (const [k, v] of Object.entries(entry)) {
+      if (!isPlainObject14(v) && !Array.isArray(v)) meta[k] = v;
+    }
+    for (const rec of statArray) {
+      if (isPlainObject14(rec)) rows.push({ ...meta, ...rec });
+    }
+  }
+  if (!sawStatArray) return normalize(rootList);
+  return normalize(rows);
+}
+
 // src/parsers/_registry.ts
 var PARSERS = {
   // ---- MLB Stats API ----
@@ -1139,14 +1659,57 @@ var PARSERS = {
   parse_mlb_statcast_gamefeed,
   parse_mlb_statcast_schedule,
   parse_mlb_statcast_html_leaderboard,
-  parse_mlb_statcast_player
+  parse_mlb_statcast_player,
+  // ---- The Odds API (api.the-odds-api.com) ----
+  parse_odds_api_sports,
+  parse_odds_api_sports_odds,
+  parse_odds_api_sports_scores,
+  parse_odds_api_sports_events,
+  parse_odds_api_sports_participants,
+  parse_odds_api_event_odds,
+  parse_odds_api_event_markets,
+  parse_odds_api_sports_odds_history,
+  parse_odds_api_sports_events_history,
+  parse_odds_api_event_odds_history,
+  // ---- 247Sports Recruit Database (api.247sports.com /rdb/v1) ----
+  // Generic list flattener (the default for most endpoints).
+  parse_sports247_list,
+  // Dedicated parsers (envelope unrolling logic).
+  parse_sports247_paged_list,
+  parse_sports247_institution_rankings,
+  parse_sports247_ranking_feed,
+  // ---- CBS Sports NAPI (api.cbssports.com/napi) ----
+  // Generic list flattener (the default for most endpoints).
+  parse_cbs_napi_list,
+  // Dedicated parsers (envelope unrolling logic).
+  parse_cbs_napi_scoreboard,
+  parse_cbs_napi_standings,
+  parse_cbs_napi_odds,
+  // ---- Fox Sports Bifrost (api.foxsports.com/bifrost/v1) ----
+  // Generic module-shell flattener (the default for most endpoints).
+  parse_fox_bifrost_list,
+  // Dedicated parsers (nested-list unrolling logic).
+  parse_fox_bifrost_scoreboard,
+  parse_fox_bifrost_standings,
+  parse_fox_bifrost_event,
+  parse_fox_bifrost_team_roster,
+  parse_fox_bifrost_search,
+  // ---- Yahoo Sports editorial (api-secure.sports.yahoo.com /v1/editorial/s) ----
+  // Generic service-envelope flattener + two dedicated keyed-map unrollers.
+  parse_yahoo_editorial_list,
+  parse_yahoo_editorial_scoreboard,
+  parse_yahoo_editorial_boxscore,
+  // ---- Yahoo Sports shangrila stats-graph (graphite-secure.sports.yahoo.com) ----
+  // Generic GraphQL-envelope flattener (default) + nested stat-array unroller.
+  parse_yahoo_shangrila_list,
+  parse_yahoo_shangrila_stats
 };
 function parserFor(name) {
   return name ? PARSERS[name] : void 0;
 }
 
 // src/parsers/espn.ts
-function isPlainObject9(v) {
+function isPlainObject15(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 function isScalar(v) {
@@ -1548,7 +2111,7 @@ function flattenScalarOneDeep(item) {
   for (const [k, v] of Object.entries(item)) {
     if (isScalar(v)) {
       row[k] = v;
-    } else if (isPlainObject9(v)) {
+    } else if (isPlainObject15(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) row[`${k}_${k2}`] = v2;
       }
@@ -1658,11 +2221,11 @@ function parse_event_plays(payload) {
       if (skip.has(k)) continue;
       if (isScalar(v)) {
         row[k] = v;
-      } else if (isPlainObject9(v)) {
+      } else if (isPlainObject15(v)) {
         for (const [k2, v2] of Object.entries(v)) {
           if (isScalar(v2)) {
             row[`${k}_${k2}`] = v2;
-          } else if (isPlainObject9(v2)) {
+          } else if (isPlainObject15(v2)) {
             for (const [k3, v3] of Object.entries(v2)) {
               if (isScalar(v3)) row[`${k}_${k2}_${k3}`] = v3;
             }
@@ -1681,7 +2244,7 @@ function parse_event_plays(payload) {
 }
 var LIST_PAYLOAD_KEYS = ["items", "entries", "events", "athletes"];
 function parse_items(payload) {
-  if (!payload || !isPlainObject9(payload)) return [];
+  if (!payload || !isPlainObject15(payload)) return [];
   let rows = null;
   for (const key of LIST_PAYLOAD_KEYS) {
     const candidate = payload[key];
@@ -1694,24 +2257,24 @@ function parse_items(payload) {
   return normalize(rows);
 }
 function parse_team_schedule(payload) {
-  if (!payload || !isPlainObject9(payload)) return [];
+  if (!payload || !isPlainObject15(payload)) return [];
   const events = payload.events;
   if (!Array.isArray(events) || !events.length) return [];
   return normalize(events);
 }
 function parse_team_roster(payload) {
-  if (!payload || !isPlainObject9(payload)) return [];
+  if (!payload || !isPlainObject15(payload)) return [];
   const athletes = payload.athletes;
   if (!Array.isArray(athletes) || !athletes.length) return [];
   const first = athletes[0] || {};
-  const isGrouped = isPlainObject9(first) && "position" in first && Array.isArray(first.items);
+  const isGrouped = isPlainObject15(first) && "position" in first && Array.isArray(first.items);
   if (isGrouped) {
     const rows = [];
     for (const group of athletes) {
-      if (!isPlainObject9(group)) continue;
+      if (!isPlainObject15(group)) continue;
       const groupName = group.position;
       for (const player of group.items || []) {
-        if (!isPlainObject9(player)) continue;
+        if (!isPlainObject15(player)) continue;
         rows.push({ position_group: groupName, ...player });
       }
     }
@@ -1721,19 +2284,19 @@ function parse_team_roster(payload) {
   return normalize(athletes);
 }
 function parse_news(payload) {
-  if (!payload || !isPlainObject9(payload)) return [];
+  if (!payload || !isPlainObject15(payload)) return [];
   const articles = payload.articles;
   if (!Array.isArray(articles) || !articles.length) return [];
   return normalize(articles);
 }
 function parse_injuries(payload) {
-  if (!payload || !isPlainObject9(payload)) return [];
+  if (!payload || !isPlainObject15(payload)) return [];
   const teams = payload.injuries;
   if (!Array.isArray(teams) || !teams.length) return [];
   return normalize(teams);
 }
 function singleRow(payloadDict) {
-  if (!isPlainObject9(payloadDict) || Object.keys(payloadDict).length === 0) return [];
+  if (!isPlainObject15(payloadDict) || Object.keys(payloadDict).length === 0) return [];
   return normalize([payloadDict]);
 }
 function rowPerItem(items) {
@@ -1741,7 +2304,7 @@ function rowPerItem(items) {
   return normalize(items);
 }
 function parse_summary_boxscore_player(payload) {
-  if (!isPlainObject9(payload)) return [];
+  if (!isPlainObject15(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.players || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -1782,7 +2345,7 @@ function parse_summary_boxscore_player(payload) {
   return normalize(rows);
 }
 function parse_summary_boxscore_team(payload) {
-  if (!isPlainObject9(payload)) return [];
+  if (!isPlainObject15(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.teams || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -1810,19 +2373,19 @@ function parse_summary_boxscore_team(payload) {
   return normalize(rows);
 }
 function parse_summary_plays(payload) {
-  if (!isPlainObject9(payload)) return [];
+  if (!isPlainObject15(payload)) return [];
   const plays = payload.plays;
   if (!Array.isArray(plays) || !plays.length) return [];
   return normalize(plays);
 }
 function parse_summary_winprobability(payload) {
-  if (!isPlainObject9(payload)) return [];
+  if (!isPlainObject15(payload)) return [];
   const wp = payload.winprobability;
   if (!Array.isArray(wp) || !wp.length) return [];
   return normalize(wp);
 }
 function parse_summary_leaders(payload) {
-  if (!isPlainObject9(payload)) return [];
+  if (!isPlainObject15(payload)) return [];
   const teams = payload.leaders;
   if (!Array.isArray(teams) || !teams.length) return [];
   const rows = [];
@@ -1863,7 +2426,7 @@ function parse_summary_game_info(payload) {
   for (const [k, v] of Object.entries(venue)) {
     if (isScalar(v)) {
       flat[`venue_${k}`] = v;
-    } else if (isPlainObject9(v)) {
+    } else if (isPlainObject15(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) flat[`venue_${k}_${k2}`] = v2;
       }
@@ -1876,7 +2439,7 @@ function parse_summary_officials(payload) {
   return rowPerItem(officials);
 }
 function parse_summary_header(payload) {
-  return singleRow(isPlainObject9(payload) ? payload.header : null);
+  return singleRow(isPlainObject15(payload) ? payload.header : null);
 }
 function parse_summary_season_series(payload) {
   return rowPerItem((payload || {}).seasonseries);
@@ -1897,7 +2460,7 @@ function parse_summary_against_the_spread(payload) {
       for (const [k, v] of Object.entries(rec || {})) {
         if (isScalar(v)) {
           row[k] = v;
-        } else if (isPlainObject9(v)) {
+        } else if (isPlainObject15(v)) {
           for (const [k2, v2] of Object.entries(v)) {
             if (isScalar(v2)) row[`${k}_${k2}`] = v2;
           }
@@ -1915,7 +2478,7 @@ function parse_summary_standings(payload) {
   if (!Array.isArray(groups) || !groups.length) return [];
   const rows = [];
   for (const grp of groups) {
-    if (!isPlainObject9(grp)) continue;
+    if (!isPlainObject15(grp)) continue;
     const grpBase = {
       group_header: grp.header,
       conference_header: grp.conferenceHeader,
@@ -1927,7 +2490,7 @@ function parse_summary_standings(payload) {
       row.team_id = entry.id;
       row.team_uid = entry.uid;
       row.team_location = typeof teamField === "string" ? teamField : null;
-      if (isPlainObject9(teamField)) {
+      if (isPlainObject15(teamField)) {
         row.team_abbreviation = teamField.abbreviation;
         row.team_display_name = teamField.displayName;
       }
@@ -1945,7 +2508,7 @@ function parse_summary_broadcasts(payload) {
   return rowPerItem((payload || {}).broadcasts);
 }
 function parse_summary_format(payload) {
-  return singleRow(isPlainObject9(payload) ? payload.format : null);
+  return singleRow(isPlainObject15(payload) ? payload.format : null);
 }
 function parse_summary_pickcenter(payload) {
   return rowPerItem((payload || {}).pickcenter);
@@ -1954,7 +2517,7 @@ function parse_summary_odds(payload) {
   return rowPerItem((payload || {}).odds);
 }
 function parse_summary_article(payload) {
-  return singleRow(isPlainObject9(payload) ? payload.article : null);
+  return singleRow(isPlainObject15(payload) ? payload.article : null);
 }
 function parse_summary_injuries(payload) {
   return rowPerItem((payload || {}).injuries);
@@ -1964,11 +2527,11 @@ function parse_summary_news(payload) {
   return rowPerItem(news.articles);
 }
 function parse_single_entity(payload) {
-  return singleRow(isPlainObject9(payload) ? payload : null);
+  return singleRow(isPlainObject15(payload) ? payload : null);
 }
 function parse_summary_drives(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject9(drives) ? drives.previous : null;
+  const previous = isPlainObject15(drives) ? drives.previous : null;
   return rowPerItem(previous);
 }
 function parse_summary_scoring_plays(payload) {
@@ -1976,15 +2539,15 @@ function parse_summary_scoring_plays(payload) {
 }
 function parse_summary_drive_plays(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject9(drives) ? drives.previous : null;
+  const previous = isPlainObject15(drives) ? drives.previous : null;
   if (!Array.isArray(previous) || !previous.length) return [];
   const rows = [];
   previous.forEach((drive, idx) => {
-    if (!isPlainObject9(drive)) return;
+    if (!isPlainObject15(drive)) return;
     const driveId = drive.id;
     const driveSeq = idx + 1;
     for (const play of drive.plays || []) {
-      if (!isPlainObject9(play)) continue;
+      if (!isPlainObject15(play)) continue;
       rows.push({ drive_id: driveId, drive_sequence: driveSeq, ...play });
     }
   });

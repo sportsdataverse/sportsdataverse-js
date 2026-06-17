@@ -23,6 +23,11 @@ const FLAT_API_LABEL = {
   nhl_records: 'NHL Records',
   nfl_api: 'NFL.com Shield API',
   odds_api: 'The Odds API',
+  sports247: '247Sports (recruiting)',
+  cbs_napi: 'CBS Sports (napi)',
+  fox_bifrost: 'Fox Sports (Bifrost)',
+  yahoo_editorial: 'Yahoo Sports (editorial)',
+  yahoo_shangrila: 'Yahoo Sports (shangrila)',
 };
 
 // Standalone (non-league) flat namespaces — any `flatLeagues` value that isn't a
