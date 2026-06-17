@@ -89,6 +89,12 @@ import {
   parse_sports247_institution_rankings,
   parse_sports247_ranking_feed,
 } from "./sports247.js";
+import {
+  parse_cbs_napi_list,
+  parse_cbs_napi_scoreboard,
+  parse_cbs_napi_standings,
+  parse_cbs_napi_odds,
+} from "./cbs_napi.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -178,6 +184,13 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_sports247_paged_list,
   parse_sports247_institution_rankings,
   parse_sports247_ranking_feed,
+  // ---- CBS Sports NAPI (api.cbssports.com/napi) ----
+  // Generic list flattener (the default for most endpoints).
+  parse_cbs_napi_list,
+  // Dedicated parsers (envelope unrolling logic).
+  parse_cbs_napi_scoreboard,
+  parse_cbs_napi_standings,
+  parse_cbs_napi_odds,
 };
 
 /**

@@ -8935,5 +8935,1766 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_sports247_list",
     "returnsSchema": "native/sports247/unranked_transfers"
+  },
+  {
+    "short": "baseball_player_meta",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/meta/baseball/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/baseball_player_meta"
+  },
+  {
+    "short": "boxscore",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/boxscore/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/boxscore"
+  },
+  {
+    "short": "bulk",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/bulk",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "player_resource",
+        "queryKey": "PlayerResource"
+      },
+      {
+        "name": "team_resource",
+        "queryKey": "TeamResource"
+      },
+      {
+        "name": "game_resource",
+        "queryKey": "GameResource"
+      },
+      {
+        "name": "venue_resource",
+        "queryKey": "VenueResource"
+      },
+      {
+        "name": "event_resource",
+        "queryKey": "EventResource"
+      },
+      {
+        "name": "featured_game_resource",
+        "queryKey": "FeaturedGameResource"
+      },
+      {
+        "name": "golf_event_markets_resource",
+        "queryKey": "GolfEventMarketsResource"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/bulk"
+  },
+  {
+    "short": "client_configuration",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/client/config/{client_name}",
+    "pathParams": [
+      {
+        "name": "client_name"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "classifier",
+        "queryKey": "classifier"
+      },
+      {
+        "name": "key_name",
+        "queryKey": "keyName"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/client_configuration"
+  },
+  {
+    "short": "coach_rankings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/coach/rankings/{coach_id}",
+    "pathParams": [
+      {
+        "name": "coach_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/coach_rankings"
+  },
+  {
+    "short": "coach_team_associations",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/coach/teamAssociations/{coach_id}",
+    "pathParams": [
+      {
+        "name": "coach_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/coach_team_associations"
+  },
+  {
+    "short": "depth_charts",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/depthCharts/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "position",
+        "queryKey": "position"
+      },
+      {
+        "name": "pitch_pos",
+        "queryKey": "pitchPos"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/depth_charts"
+  },
+  {
+    "short": "endpoint_registry",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/endpoint/registry",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/endpoint_registry"
+  },
+  {
+    "short": "event_entrants",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/event/entrants/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/event_entrants"
+  },
+  {
+    "short": "event_leaderboard",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/event/leaderboard/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/event_leaderboard"
+  },
+  {
+    "short": "event",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/event/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/event"
+  },
+  {
+    "short": "event_seasons",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/event/seasons/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/event_seasons"
+  },
+  {
+    "short": "event_venues",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/event/venues/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/event_venues"
+  },
+  {
+    "short": "featured_game",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/featured/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_scoreboard",
+    "returnsSchema": "native/cbs_napi/featured_game"
+  },
+  {
+    "short": "game_betting_splits",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/bettingSplits/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_betting_splits"
+  },
+  {
+    "short": "game_content_preview",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/content/preview/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_content_preview"
+  },
+  {
+    "short": "game_content_recap",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/content/recap/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_content_recap"
+  },
+  {
+    "short": "game_content_story",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/content/story/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "game_ids_story_tags",
+        "queryKey": "gameIdsStoryTags"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_content_story"
+  },
+  {
+    "short": "game_hq_odds",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/odds/hq/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_odds",
+    "returnsSchema": "native/cbs_napi/game_hq_odds"
+  },
+  {
+    "short": "game_lineup",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/lineup/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_lineup"
+  },
+  {
+    "short": "game_odds",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/odds/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "market_ids",
+        "queryKey": "marketIds"
+      },
+      {
+        "name": "book_ids",
+        "queryKey": "bookIds"
+      },
+      {
+        "name": "state",
+        "queryKey": "state"
+      },
+      {
+        "name": "model",
+        "queryKey": "model"
+      },
+      {
+        "name": "show_hidden_odds",
+        "queryKey": "showHiddenOdds"
+      }
+    ],
+    "parser": "parse_cbs_napi_odds",
+    "returnsSchema": "native/cbs_napi/game_odds"
+  },
+  {
+    "short": "game_outcomes",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/outcomes/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_outcomes"
+  },
+  {
+    "short": "game_props",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/props/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "market_ids",
+        "queryKey": "marketIds"
+      },
+      {
+        "name": "book_ids",
+        "queryKey": "bookIds"
+      },
+      {
+        "name": "prop_bet_types",
+        "queryKey": "propBetTypes"
+      },
+      {
+        "name": "state",
+        "queryKey": "state"
+      },
+      {
+        "name": "include_inactive_markets",
+        "queryKey": "includeInactiveMarkets"
+      }
+    ],
+    "parser": "parse_cbs_napi_odds",
+    "returnsSchema": "native/cbs_napi/game_props"
+  },
+  {
+    "short": "game_rtwp",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/rtwp/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_rtwp"
+  },
+  {
+    "short": "game",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game"
+  },
+  {
+    "short": "game_scoring_boxscores",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/boxscores/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_boxscores"
+  },
+  {
+    "short": "game_scoring_drives",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/drives/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_drives"
+  },
+  {
+    "short": "game_scoring_leaders",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/leaders/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_leaders"
+  },
+  {
+    "short": "game_scoring_player_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/playerStats/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_player_stats"
+  },
+  {
+    "short": "game_scoring_plays",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/plays/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_plays"
+  },
+  {
+    "short": "game_scoring_rosters",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/rosters/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_rosters"
+  },
+  {
+    "short": "game_scoring_scoreboard",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/scoreboard/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_scoreboard",
+    "returnsSchema": "native/cbs_napi/game_scoring_scoreboard"
+  },
+  {
+    "short": "game_scoring_scores",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/scores/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_scoreboard",
+    "returnsSchema": "native/cbs_napi/game_scoring_scores"
+  },
+  {
+    "short": "game_scoring_team_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/teamStats/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_team_stats"
+  },
+  {
+    "short": "game_scoring_winprob",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/winprob/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_winprob"
+  },
+  {
+    "short": "game_scoring_ytd_player_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/ytdPlayerStats/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_ytd_player_stats"
+  },
+  {
+    "short": "game_scoring_ytd_team_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/scoring/ytdTeamStats/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_scoring_ytd_team_stats"
+  },
+  {
+    "short": "game_ticket",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/ticket/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/game_ticket"
+  },
+  {
+    "short": "golf_event_markets",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/golf/event/markets/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/golf_event_markets"
+  },
+  {
+    "short": "golf_player_markets",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/golf/player/markets/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "event_id",
+        "queryKey": "eventId"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/golf_player_markets"
+  },
+  {
+    "short": "golfer_results",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/golfer/results/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/golfer_results"
+  },
+  {
+    "short": "hockey_player_meta",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/hockey/meta/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/hockey_player_meta"
+  },
+  {
+    "short": "league",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/league/{league_id}",
+    "pathParams": [
+      {
+        "name": "league_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/league"
+  },
+  {
+    "short": "league_teams",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/league/teams/{league_id}",
+    "pathParams": [
+      {
+        "name": "league_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/league_teams"
+  },
+  {
+    "short": "odds",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/odds/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_odds",
+    "returnsSchema": "native/cbs_napi/odds"
+  },
+  {
+    "short": "player_combine_data",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/combineData/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_combine_data"
+  },
+  {
+    "short": "player_draft_info",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/draftInfo/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_draft_info"
+  },
+  {
+    "short": "player_encyclopedia",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/encyclopedia/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_encyclopedia"
+  },
+  {
+    "short": "player_futures",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/futures/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_futures"
+  },
+  {
+    "short": "player_game_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/gameStats/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "gameId"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_game_stats"
+  },
+  {
+    "short": "player_golf_metadata",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/meta/golf/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_golf_metadata"
+  },
+  {
+    "short": "player_injuries",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/injuries/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_injuries"
+  },
+  {
+    "short": "player_outlook",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/outlook/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_outlook"
+  },
+  {
+    "short": "player_rankings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/rankings/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      },
+      {
+        "name": "is_current",
+        "queryKey": "isCurrent"
+      },
+      {
+        "name": "categories",
+        "queryKey": "categories"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_rankings"
+  },
+  {
+    "short": "player",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player"
+  },
+  {
+    "short": "player_standings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/standings/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      },
+      {
+        "name": "is_current",
+        "queryKey": "isCurrent"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_standings",
+    "returnsSchema": "native/cbs_napi/player_standings"
+  },
+  {
+    "short": "player_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/stats/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      },
+      {
+        "name": "is_current",
+        "queryKey": "isCurrent"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "team_abbr",
+        "queryKey": "teamAbbr"
+      },
+      {
+        "name": "is_total",
+        "queryKey": "isTotal"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_stats"
+  },
+  {
+    "short": "player_team_associations",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/teamAssociations/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "assoc_type",
+        "queryKey": "assocType"
+      },
+      {
+        "name": "roster_status",
+        "queryKey": "rosterStatus"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_team_associations"
+  },
+  {
+    "short": "player_transactions",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/transactions/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/player_transactions"
+  },
+  {
+    "short": "position_rankings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/positionRankings/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "position",
+        "queryKey": "position"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/position_rankings"
+  },
+  {
+    "short": "probable_players",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/probablePlayers/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/probable_players"
+  },
+  {
+    "short": "recruit_rankings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/recruit/rankings/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/recruit_rankings"
+  },
+  {
+    "short": "recruit_team_associations",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/player/recruitAssociations/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/recruit_team_associations"
+  },
+  {
+    "short": "ruwt_highlights",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/ruwtHighlights/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/ruwt_highlights"
+  },
+  {
+    "short": "season",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/season/{season_id}",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/season"
+  },
+  {
+    "short": "season_teams",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/season/teams/{season_id}",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/season_teams"
+  },
+  {
+    "short": "sport_leagues",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/sport/leagues/{sport_id}",
+    "pathParams": [
+      {
+        "name": "sport_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/sport_leagues"
+  },
+  {
+    "short": "sport",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/sport/{sport_id}",
+    "pathParams": [
+      {
+        "name": "sport_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/sport"
+  },
+  {
+    "short": "sports_line_team_rankings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/rankings/sportsline/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/sports_line_team_rankings"
+  },
+  {
+    "short": "sports_line_team_standings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/standings/sportsline/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      }
+    ],
+    "parser": "parse_cbs_napi_standings",
+    "returnsSchema": "native/cbs_napi/sports_line_team_standings"
+  },
+  {
+    "short": "sub_divisions",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/division/subdivisions/{division_id}",
+    "pathParams": [
+      {
+        "name": "division_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "sub_division_id",
+        "queryKey": "subDivisionId"
+      },
+      {
+        "name": "name",
+        "queryKey": "name"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/sub_divisions"
+  },
+  {
+    "short": "team_futures",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/futures/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_futures"
+  },
+  {
+    "short": "team_metadata",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/metadata/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_metadata"
+  },
+  {
+    "short": "team_players",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/players/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_players"
+  },
+  {
+    "short": "team_polls",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/polls/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "polls",
+        "queryKey": "polls"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_polls"
+  },
+  {
+    "short": "team_rankings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/rankings/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_rankings"
+  },
+  {
+    "short": "team_seasons",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/seasons/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_seasons"
+  },
+  {
+    "short": "team_standings",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/standings/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      }
+    ],
+    "parser": "parse_cbs_napi_standings",
+    "returnsSchema": "native/cbs_napi/team_standings"
+  },
+  {
+    "short": "team_stats",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/team/stats/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_year",
+        "queryKey": "seasonYear"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "seasonId"
+      },
+      {
+        "name": "is_current",
+        "queryKey": "isCurrent"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/team_stats"
+  },
+  {
+    "short": "venue_metadata",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/venue/metadata/{venue_id}",
+    "pathParams": [
+      {
+        "name": "venue_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/venue_metadata"
+  },
+  {
+    "short": "venue",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/venue/{venue_id}",
+    "pathParams": [
+      {
+        "name": "venue_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/venue"
+  },
+  {
+    "short": "weather",
+    "flat": true,
+    "api": "cbs_napi",
+    "host": "https://api.cbssports.com",
+    "scope": "universal",
+    "path": "/resource/game/weather/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_napi_list",
+    "returnsSchema": "native/cbs_napi/weather"
   }
 ];
