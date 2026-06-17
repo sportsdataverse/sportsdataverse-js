@@ -10,7 +10,9 @@ import wbb from './services/wbb.service.js';
 import wnba from './services/wnba.service.js';
 
 import { LEAGUES } from './generated/leagues.js';
+import { FLAT_WRAPPERS } from './generated/wrappers.js';
 import { makeLeagueModule } from './leagues/_make.js';
+import { makeFlatModule } from './leagues/_make_flat.js';
 
 // Legacy hand-written services. Their methods (e.g. `sdv.nba.getPlayByPlay`) are
 // preserved; the generated cross-league `espn_<prefix>_<short>` wrappers are
@@ -27,12 +29,31 @@ for (const cfg of LEAGUES) {
   sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...makeLeagueModule(cfg) };
 }
 
+// Merge the non-ESPN "flat API" wrappers onto their target league namespace,
+// AFTER the ESPN merge so they're added alongside (never clobbering) the ESPN
+// + legacy surface. Each flat family (`WrapperDef.api`) maps to a league prefix.
+const FLAT_API_NAMESPACES: Record<string, string> = {
+  mlb_api: 'mlb',
+};
+const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
+for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);
+for (const [api, defs] of Object.entries(flatByApi)) {
+  const prefix = FLAT_API_NAMESPACES[api] ?? api;
+  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...makeFlatModule(defs) };
+}
+
 export default sdv;
 
 // Advanced / tree-shakeable use:
 export { LEAGUES };
 export { makeLeagueModule } from './leagues/_make.js';
-export { WRAPPERS } from './generated/wrappers.js';
+export { makeFlatModule } from './leagues/_make_flat.js';
+export { WRAPPERS, FLAT_WRAPPERS } from './generated/wrappers.js';
+export { resolveFlat } from './core/flat.js';
+export { FLAT_HOSTS } from './core/client.js';
+export { normalize } from './parsers/_normalize.js';
+export { PARSERS, parserFor } from './parsers/_registry.js';
+export type { ParserFn } from './parsers/_registry.js';
 export type {
   LeagueConfig,
   EspnFamily,

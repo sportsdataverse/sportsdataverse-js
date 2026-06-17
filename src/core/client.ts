@@ -13,6 +13,17 @@ export const HOSTS: Record<EspnFamily, string> = {
   core_v2: "https://sports.core.api.espn.com/v2/sports",
 };
 
+/**
+ * Base hosts for the non-ESPN "flat API" families, keyed by family stem
+ * (`WrapperDef.api`). Unlike `HOSTS`, these are absolute API roots; the flat
+ * wrapper `path` templates are appended verbatim (with `{token}` substitution).
+ * Each wrapper also carries its own absolute `host` for self-containment — this
+ * map is the canonical lookup the playground / proxy can share.
+ */
+export const FLAT_HOSTS: Record<string, string> = {
+  mlb_api: "https://statsapi.mlb.com",
+};
+
 const client = axios.create({
   timeout: 30000,
   headers: {

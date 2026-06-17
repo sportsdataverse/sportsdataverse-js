@@ -21,6 +21,30 @@ const playgroundDir = join(repoRoot, "docs", "src", "playground");
 
 const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
 
+// Non-ESPN "flat API" families (one YAML each). These are absolute-host live
+// APIs (no {sport}/{league} nesting) and are emitted into a SEPARATE
+// FLAT_WRAPPERS table so the ESPN WRAPPERS table — and every invariant the ESPN
+// contract tests assert over it ({sport} present, EspnFamily, scopes) — stays
+// untouched.
+const FLAT_API_FILES = ["mlb_api"];
+
+function mapPathParams(ep) {
+  return (ep.path_params ?? []).map((p) => ({
+    name: p.name,
+    ...(p.required === false ? { required: false } : {}),
+    ...(p.default !== undefined ? { default: p.default } : {}),
+    ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
+  }));
+}
+
+function mapQueryParams(ep) {
+  return (ep.extra_params ?? []).map((p) => ({
+    name: p.name,
+    queryKey: p.query_key,
+    ...(p.default !== undefined ? { default: p.default } : {}),
+  }));
+}
+
 function loadWrappers() {
   const wrappers = [];
   for (const stem of FAMILY_FILES) {
@@ -32,17 +56,35 @@ function loadWrappers() {
         family: ep.host ?? fileHost, // per-endpoint host override (e.g. standings)
         scope: ep.scope ?? "universal",
         path: ep.path,
-        pathParams: (ep.path_params ?? []).map((p) => ({
-          name: p.name,
-          ...(p.required === false ? { required: false } : {}),
-          ...(p.default !== undefined ? { default: p.default } : {}),
-          ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
-        })),
-        queryParams: (ep.extra_params ?? []).map((p) => ({
-          name: p.name,
-          queryKey: p.query_key,
-          ...(p.default !== undefined ? { default: p.default } : {}),
-        })),
+        pathParams: mapPathParams(ep),
+        queryParams: mapQueryParams(ep),
+      });
+    }
+  }
+  return wrappers;
+}
+
+/**
+ * Load the flat-API wrappers (one `WrapperDef` per endpoint across every
+ * FLAT_API_FILES YAML). Each carries `flat: true`, the family `api` stem, the
+ * absolute `host`, and its `parser` name — threaded into FLAT_WRAPPERS in
+ * src/generated/wrappers.ts.
+ */
+function loadFlatWrappers() {
+  const wrappers = [];
+  for (const stem of FLAT_API_FILES) {
+    const doc = parse(readFileSync(join(endpointsDir, `${stem}.yaml`), "utf8"));
+    for (const ep of doc.endpoints ?? []) {
+      wrappers.push({
+        short: ep.short,
+        flat: true,
+        api: doc.api,
+        host: doc.host,
+        scope: "universal",
+        path: ep.path,
+        pathParams: mapPathParams(ep),
+        queryParams: mapQueryParams(ep),
+        ...(ep.parser ? { parser: ep.parser } : {}),
       });
     }
   }
@@ -229,7 +271,7 @@ const REFERENCE_CATEGORY = JSON.stringify(
 // Playground metadata (consumed by the React component + serverless proxy)
 // ---------------------------------------------------------------------------
 
-function renderEndpointsJson(wrappers, leagues, hosts) {
+function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) {
   return (
     JSON.stringify(
       {
@@ -237,6 +279,11 @@ function renderEndpointsJson(wrappers, leagues, hosts) {
         hosts,
         leagues,
         endpoints: wrappers,
+        // Additive flat-API metadata — kept under its own keys so the ESPN
+        // `endpoints`/`hosts`/`leagues` blocks (and the playground resolver that
+        // consumes them) are byte-for-byte unchanged.
+        flatHosts,
+        flatApis: flatWrappers,
       },
       null,
       2
@@ -244,21 +291,42 @@ function renderEndpointsJson(wrappers, leagues, hosts) {
   );
 }
 
+/** Build the per-family flat-host map ({ mlb_api: "https://statsapi.mlb.com" }). */
+function flatHostsFrom(flatWrappers) {
+  const hosts = {};
+  for (const w of flatWrappers) hosts[w.api] = w.host;
+  return hosts;
+}
+
 // ---------------------------------------------------------------------------
 // Assemble + write/check
 // ---------------------------------------------------------------------------
 
 const wrappers = loadWrappers();
+const flatWrappers = loadFlatWrappers();
+const flatHosts = flatHostsFrom(flatWrappers);
 const leaguesDoc = loadLeaguesDoc();
 const leagues = loadLeagues(leaguesDoc);
 const hosts = leaguesDoc.hosts;
 
+// The generated wrappers module exports the ESPN `WRAPPERS` table (unchanged)
+// plus a separate `FLAT_WRAPPERS` table for the non-ESPN flat APIs.
+const wrappersTs =
+  renderTs("WrapperDef", "WRAPPERS", wrappers) +
+  `\nexport const FLAT_WRAPPERS: WrapperDef[] = ${JSON.stringify(flatWrappers, null, 2)};\n`;
+
 const outputs = {
-  [join(generatedDir, "wrappers.ts")]: renderTs("WrapperDef", "WRAPPERS", wrappers),
+  [join(generatedDir, "wrappers.ts")]: wrappersTs,
   [join(generatedDir, "leagues.ts")]: renderTs("LeagueConfig", "LEAGUES", leagues),
   [join(referenceDir, "index.md")]: renderReferenceIndex(leagues, wrappers),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
-  [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(wrappers, leagues, hosts),
+  [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
+    wrappers,
+    leagues,
+    hosts,
+    flatWrappers,
+    flatHosts
+  ),
 };
 leagues.forEach((league, i) => {
   outputs[join(referenceDir, `${league.prefix}.md`)] = renderLeaguePage(
@@ -286,6 +354,7 @@ for (const [file, content] of Object.entries(outputs)) {
 
 console.log(
   `codegen: ${wrappers.length} wrappers across ${leagues.length} leagues ` +
+    `+ ${flatWrappers.length} flat-API wrappers (${FLAT_API_FILES.length} families) ` +
     `(+ ${leagues.length + 2} reference pages + playground metadata)`
 );
 if (check && drift) process.exit(1);

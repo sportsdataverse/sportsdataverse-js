@@ -42,14 +42,32 @@ export interface PathParam {
  * (site) or `/{sport}/leagues/{league}/seasons/{season}` (core). Optional
  * segments are bracketed and may contain literals + tokens — e.g. `[/{token}]`
  * or `[/groups/{group_id}]` — and are dropped when their token(s) don't resolve.
+ *
+ * "Flat API" wrappers (non-ESPN live APIs, e.g. the MLB Stats API) reuse the
+ * same shape but set `flat: true` and carry an absolute `host` + the family
+ * `api` stem + an optional `parser` name. For flat wrappers `family` is unused
+ * (the host is absolute, not an `EspnFamily` slug) and `path` need not contain
+ * `{sport}`/`{league}` — see `src/core/flat.ts` for the resolver.
  */
 export interface WrapperDef {
   short: string;
-  family: EspnFamily;
+  /**
+   * ESPN URL family slug (keys into `HOSTS`). Present on every ESPN wrapper;
+   * omitted on flat-API wrappers (`flat: true`), which carry an absolute `host`.
+   */
+  family?: EspnFamily;
   scope: Scope;
   path: string;
   pathParams: PathParam[];
   queryParams: QueryParam[];
+  /** True for non-ESPN "flat API" wrappers (see `src/core/flat.ts`). */
+  flat?: boolean;
+  /** Flat-API family stem, e.g. `"mlb_api"`. */
+  api?: string;
+  /** Flat-API absolute base URL, e.g. `"https://statsapi.mlb.com"`. */
+  host?: string;
+  /** Registered parser name (resolved via `src/parsers/_registry.ts`). */
+  parser?: string;
 }
 
 /** A generated cross-league wrapper: `(params?) => Promise<raw ESPN JSON>`. */

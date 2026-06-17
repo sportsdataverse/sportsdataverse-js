@@ -1738,3 +1738,2308 @@ export const WRAPPERS: WrapperDef[] = [
     ]
   }
 ];
+
+export const FLAT_WRAPPERS: WrapperDef[] = [
+  {
+    "short": "teams",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league_ids",
+        "queryKey": "leagueIds"
+      },
+      {
+        "name": "active_status",
+        "queryKey": "activeStatus"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_teams"
+  },
+  {
+    "short": "schedule",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/schedule",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "startDate"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "endDate"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_schedule"
+  },
+  {
+    "short": "schedule_postseason",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/schedule/postseason",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      }
+    ],
+    "parser": "parse_mlb_api_schedule"
+  },
+  {
+    "short": "pbp",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1.1/game/{game_pk}/feed/live",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "language",
+        "queryKey": "language"
+      },
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "boxscore",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/boxscore",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_boxscore"
+  },
+  {
+    "short": "linescore",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/linescore",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_linescore"
+  },
+  {
+    "short": "play_by_play",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/playByPlay",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_play_by_play"
+  },
+  {
+    "short": "game_context_metrics",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/contextMetrics",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "win_probability",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/winProbability",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_win_probability"
+  },
+  {
+    "short": "game_content",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/content",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team_roster",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/roster",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "roster_type",
+        "queryKey": "rosterType",
+        "default": "active"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_team_roster"
+  },
+  {
+    "short": "team_alumni",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/alumni",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "group",
+        "queryKey": "group",
+        "default": "hitting"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team_affiliates",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/affiliates",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team_ids",
+        "queryKey": "teamIds"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "people",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/people",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "person_ids",
+        "queryKey": "personIds"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "person",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/people/{person_id}",
+    "pathParams": [
+      {
+        "name": "person_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "person_game_stats",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/people/{person_id}/stats/game/{game_pk}",
+    "pathParams": [
+      {
+        "name": "person_id"
+      },
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "sport_players",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/sports/{sport_id}/players",
+    "pathParams": [
+      {
+        "name": "sport_id",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "sports",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/sports",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "leagues",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/leagues",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league_ids",
+        "queryKey": "leagueIds"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "season",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/seasons/{season_id}",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "venues",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/venues",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_ids",
+        "queryKey": "sportIds"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "venue",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/venues/{venue_id}",
+    "pathParams": [
+      {
+        "name": "venue_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "meta",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/{meta_type}",
+    "pathParams": [
+      {
+        "name": "meta_type"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "awards",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/awards",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "award_recipients",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/awards/{award_id}/recipients",
+    "pathParams": [
+      {
+        "name": "award_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "draft",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/draft/{year}",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "round_",
+        "queryKey": "round"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "playerId"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 100
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "umpires",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/jobs/umpires",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "conferences",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/conferences",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_id",
+        "queryKey": "conferenceId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "conference",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/conferences/{conference_id}",
+    "pathParams": [
+      {
+        "name": "conference_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "draft_latest",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/draft/{year}/latest",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mlb_api_draft_latest"
+  },
+  {
+    "short": "game_timestamps",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1.1/game/{game_pk}/feed/live/timestamps",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mlb_api_timecodes"
+  },
+  {
+    "short": "game_changes",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/changes",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "updated_since",
+        "queryKey": "updatedSince"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_schedule"
+  },
+  {
+    "short": "analytics_games",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/analytics/game",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_mode_id",
+        "queryKey": "gameModeId"
+      },
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "sort_by",
+        "queryKey": "sortBy"
+      },
+      {
+        "name": "is_non_statcast",
+        "queryKey": "isNonStatcast"
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "analytics_guids",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/analytics/guids",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_mode_id",
+        "queryKey": "gameModeId"
+      },
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "sort_by",
+        "queryKey": "sortBy"
+      },
+      {
+        "name": "is_non_statcast",
+        "queryKey": "isNonStatcast"
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "game_guids",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/guids",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "game_mode_id",
+        "queryKey": "gameModeId"
+      },
+      {
+        "name": "updated_since",
+        "queryKey": "updatedSince"
+      },
+      {
+        "name": "is_pitch",
+        "queryKey": "isPitch"
+      },
+      {
+        "name": "is_hit",
+        "queryKey": "isHit"
+      },
+      {
+        "name": "is_pickoff",
+        "queryKey": "isPickoff"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "parsed_raw",
+        "queryKey": "parsed/raw"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "play_analytics",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/{guid}/analytics",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      },
+      {
+        "name": "guid"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "play_context_metrics_averages",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/{guid}/contextMetricsAverages",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      },
+      {
+        "name": "guid"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "game_color",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/feed/color",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "timecode",
+        "queryKey": "timecode"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "game_color_diff",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/feed/color/diffPatch",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "start_timecode",
+        "queryKey": "startTimecode"
+      },
+      {
+        "name": "end_timecode",
+        "queryKey": "endTimecode"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "game_color_timestamps",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/feed/color/timestamps",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mlb_api_timecodes"
+  },
+  {
+    "short": "game_pace",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/gamePace",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "team_ids",
+        "queryKey": "teamIds"
+      },
+      {
+        "name": "league_ids",
+        "queryKey": "leagueIds"
+      },
+      {
+        "name": "league_list_id",
+        "queryKey": "leagueListId"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "startDate"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "endDate"
+      },
+      {
+        "name": "venue_ids",
+        "queryKey": "venueIds"
+      },
+      {
+        "name": "org_type",
+        "queryKey": "orgType"
+      },
+      {
+        "name": "include_children",
+        "queryKey": "includeChildren"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "high_low",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/highLow/{org_type}",
+    "pathParams": [
+      {
+        "name": "org_type"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "stat_group",
+        "queryKey": "statGroup"
+      },
+      {
+        "name": "sort_stat",
+        "queryKey": "sortStat"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "sport_ids",
+        "queryKey": "sportIds"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "home_run_derby",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/homeRunDerby/{game_pk}",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "home_run_derby_bracket",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/homeRunDerby/{game_pk}/bracket",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "home_run_derby_pool",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/homeRunDerby/{game_pk}/pool",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "all_star_ballot",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/league/{league_id}/allStarBallot",
+    "pathParams": [
+      {
+        "name": "league_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "all_star_write_ins",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/league/{league_id}/allStarWriteIns",
+    "pathParams": [
+      {
+        "name": "league_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "all_star_final_vote",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/league/{league_id}/allStarFinalVote",
+    "pathParams": [
+      {
+        "name": "league_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "free_agents",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/people/freeAgents",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "order",
+        "queryKey": "order"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "jobs",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/jobs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "job_type",
+        "queryKey": "jobType"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "datacasters",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/jobs/datacasters",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "official_scorers",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/jobs/officialScorers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "umpire_games",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/jobs/umpires/games/{umpire_id}",
+    "pathParams": [
+      {
+        "name": "umpire_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "schedule_tied",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/schedule/games/tied",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_types",
+        "queryKey": "gameTypes"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_schedule"
+  },
+  {
+    "short": "schedule_postseason_series",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/schedule/postseason/series",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_types",
+        "queryKey": "gameTypes"
+      },
+      {
+        "name": "series_number",
+        "queryKey": "seriesNumber"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "schedule_postseason_tunein",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/schedule/postseason/tuneIn",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_schedule"
+  },
+  {
+    "short": "seasons_all",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/seasons/all",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "division_id",
+        "queryKey": "divisionId"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "with_game_type_dates",
+        "queryKey": "withGameTypeDates"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "sport",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/sports/{sport_id}",
+    "pathParams": [
+      {
+        "name": "sport_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "stats_metrics",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/stats/metrics",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "stats",
+        "queryKey": "stats"
+      },
+      {
+        "name": "group",
+        "queryKey": "group"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "startDate"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "endDate"
+      },
+      {
+        "name": "venue_id",
+        "queryKey": "venueId"
+      },
+      {
+        "name": "min_occurrences",
+        "queryKey": "minOccurrences"
+      },
+      {
+        "name": "percentile",
+        "queryKey": "percentile"
+      },
+      {
+        "name": "person_id",
+        "queryKey": "personId"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "teams_history",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/history",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team_ids",
+        "queryKey": "teamIds"
+      },
+      {
+        "name": "start_season",
+        "queryKey": "startSeason"
+      },
+      {
+        "name": "end_season",
+        "queryKey": "endSeason"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "teams_stats",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/stats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_ids",
+        "queryKey": "sportIds"
+      },
+      {
+        "name": "stat_group",
+        "queryKey": "group"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "stats",
+        "queryKey": "stats"
+      },
+      {
+        "name": "order",
+        "queryKey": "order"
+      },
+      {
+        "name": "sort_stat",
+        "queryKey": "sortStat"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_person_stats"
+  },
+  {
+    "short": "teams_stats_leaders",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/stats/leaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "leader_categories",
+        "queryKey": "leaderCategories"
+      },
+      {
+        "name": "sit_codes",
+        "queryKey": "sitCodes"
+      },
+      {
+        "name": "game_types",
+        "queryKey": "gameTypes"
+      },
+      {
+        "name": "stat_group",
+        "queryKey": "statGroup"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league_ids",
+        "queryKey": "leagueIds"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "startDate"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "endDate"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team_coaches",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/coaches",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team_personnel",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/personnel",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team_roster_type",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/roster/{roster_type}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      },
+      {
+        "name": "roster_type"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_team_roster"
+  },
+  {
+    "short": "standings",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/standings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "leagueId",
+        "default": "103,104"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "standings_types",
+        "queryKey": "standingsTypes"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_standings"
+  },
+  {
+    "short": "person_stats",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/people/{person_id}/stats",
+    "pathParams": [
+      {
+        "name": "person_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "stats",
+        "queryKey": "stats",
+        "default": "season"
+      },
+      {
+        "name": "group",
+        "queryKey": "group"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_person_stats"
+  },
+  {
+    "short": "pbp_diff",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/game/{game_pk}/feed/live/diffPatch",
+    "pathParams": [
+      {
+        "name": "game_pk"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "start_timecode",
+        "queryKey": "startTimecode"
+      },
+      {
+        "name": "end_timecode",
+        "queryKey": "endTimecode"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "team_stats",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/stats",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "stats",
+        "queryKey": "stats",
+        "default": "season"
+      },
+      {
+        "name": "group",
+        "queryKey": "group",
+        "default": "hitting"
+      },
+      {
+        "name": "sport_ids",
+        "queryKey": "sportIds"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_person_stats"
+  },
+  {
+    "short": "team_leaders",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams/{team_id}/leaders",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "leader_categories",
+        "queryKey": "leaderCategories"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "leader_game_types",
+        "queryKey": "leaderGameTypes"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 10
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "stats",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/stats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "stats",
+        "queryKey": "stats"
+      },
+      {
+        "name": "group",
+        "queryKey": "group"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "player_pool",
+        "queryKey": "playerPool"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 50
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": 0
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "stats_leaders",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/stats/leaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "leader_categories",
+        "queryKey": "leaderCategories"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "leader_game_types",
+        "queryKey": "leaderGameTypes"
+      },
+      {
+        "name": "stat_group",
+        "queryKey": "statGroup"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 10
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "stats_streaks",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/stats/streaks",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "streak_type",
+        "queryKey": "streakType"
+      },
+      {
+        "name": "streak_threshold",
+        "queryKey": "streakThreshold",
+        "default": 1
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "stat_group",
+        "queryKey": "statGroup"
+      },
+      {
+        "name": "active_streak",
+        "queryKey": "activeStreak"
+      },
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "divisions",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/divisions",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "division_id",
+        "queryKey": "divisionId"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "seasons",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/seasons",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "all_seasons",
+        "queryKey": "all"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "draft_prospects",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/draft/prospects/{year}",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "scouting_report",
+        "queryKey": "scoutingReport"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 100
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  },
+  {
+    "short": "attendance",
+    "flat": true,
+    "api": "mlb_api",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/attendance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "leagueId"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league_list_id",
+        "queryKey": "leagueListId"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      }
+    ],
+    "parser": "parse_mlb_api_list"
+  }
+];
