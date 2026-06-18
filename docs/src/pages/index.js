@@ -5,11 +5,13 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
-// Generated league/provider metadata (tools/codegen/generate.mjs). Imported
-// statically so the coverage grid below is data-driven AND SSR-safe — adding a
-// sport/league/provider (then re-running codegen) updates this page with no
-// hand edit here.
-import endpoints from '@site/src/playground/endpoints.json';
+// Small, codegen-derived coverage view-model (sport -> league prefixes +
+// provider namespace counts), built by tools/codegen/generate.mjs. Purpose-built
+// so the homepage stays data-driven AND SSR-safe WITHOUT pulling the full
+// ~17k-line endpoints.json catalog into the first-load bundle. Adding a
+// sport/league/provider (then re-running codegen) updates this page with no hand
+// edit here.
+import coverage from '@site/src/generated/coverage.json';
 
 const FeatureList = [
   {
@@ -63,9 +65,8 @@ const FeatureList = [
   },
 ];
 
-// Display order + label for the sport groups (mirrors the codegen SPORT_ORDER).
-// Any sport present in the metadata but not listed here is appended after.
-const SPORT_ORDER = ['basketball', 'football', 'baseball', 'hockey', 'soccer', 'cricket'];
+// Display labels for the sport groups (the ordering + grouping is already done
+// by the codegen and baked into coverage.json).
 const SPORT_LABEL = {
   basketball: 'Basketball',
   football: 'Football',
@@ -87,43 +88,14 @@ const PROVIDER_LABEL = {
   yahoo: 'Yahoo Sports',
 };
 
-/** Build the sport -> [league prefixes] map from the generated metadata. */
-function leaguesBySport() {
-  const groups = new Map();
-  for (const l of endpoints.leagues || []) {
-    if (!groups.has(l.sport)) groups.set(l.sport, []);
-    groups.get(l.sport).push(l.prefix);
-  }
-  const sports = [
-    ...SPORT_ORDER.filter((s) => groups.has(s)),
-    ...[...groups.keys()].filter((s) => !SPORT_ORDER.includes(s)).sort(),
-  ];
-  return sports.map((sport) => ({
-    sport,
-    prefixes: groups.get(sport).slice().sort((a, b) => a.localeCompare(b)),
-  }));
-}
-
-/**
- * Provider namespaces (cross-sport native APIs) that aren't a single ESPN
- * league — derived from flatLeagues (api stem -> namespace) minus the league
- * prefixes. Counts come from flatApis.
- */
-function providerNamespaces() {
-  const leaguePrefixes = new Set((endpoints.leagues || []).map((l) => l.prefix));
-  const flatLeagues = endpoints.flatLeagues || {};
-  const counts = {};
-  for (const w of endpoints.flatApis || []) {
-    const ns = flatLeagues[w.api];
-    if (ns) counts[ns] = (counts[ns] || 0) + 1;
-  }
-  const standalone = [...new Set(Object.values(flatLeagues))].filter(
-    (ns) => !leaguePrefixes.has(ns)
-  );
-  return standalone
-    .sort((a, b) => a.localeCompare(b))
-    .map((ns) => ({ ns, label: PROVIDER_LABEL[ns] || ns, count: counts[ns] || 0 }));
-}
+// coverage.json arrives already grouped-by-sport + ordered + sorted, so the
+// homepage just applies display labels (no client-side derivation).
+const sportGroups = coverage.sports || [];
+const providers = (coverage.providers || []).map(({ns, count}) => ({
+  ns,
+  label: PROVIDER_LABEL[ns] || ns,
+  count,
+}));
 
 function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
@@ -171,14 +143,12 @@ function HomepageHeader() {
  * endpoints.json, so new sports/leagues/providers surface automatically.
  */
 function CoverageSection() {
-  const sportGroups = leaguesBySport();
-  const providers = providerNamespaces();
   return (
     <section className={styles.coverage}>
       <div className="container">
         <h2 className="text--center">Every league, one mental model</h2>
         <p className="text--center">
-          {endpoints.leagues?.length} ESPN leagues across {sportGroups.length}{' '}
+          {coverage.leagueCount} ESPN leagues across {sportGroups.length}{' '}
           sports, plus {providers.length} native provider APIs — each call is a
           tidy <code>sdv.&lt;league&gt;.*</code> wrapper. Pick a league for its
           full endpoint table.

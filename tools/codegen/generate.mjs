@@ -875,6 +875,56 @@ function renderReferenceSidebar(leagues, standaloneNs) {
 }
 
 // ---------------------------------------------------------------------------
+// Homepage coverage metadata (small derived view-model)
+// ---------------------------------------------------------------------------
+//
+// The homepage only renders a coverage grid (sport -> league prefixes, plus
+// provider namespace -> wrapper count). Importing the full ~17k-line
+// endpoints.json there would pull the entire endpoint catalog into the
+// first-load JS bundle. This emits a purpose-built, tiny coverage.json from the
+// SAME codegen pass (so it stays drift-guarded) for docs/src/pages/index.js to
+// consume instead. Display labels/order live in index.js (a view concern).
+function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
+  const bySport = new Map();
+  for (const l of leagues) {
+    if (!bySport.has(l.sport)) bySport.set(l.sport, []);
+    bySport.get(l.sport).push(l.prefix);
+  }
+  const sportOrder = [
+    ...SPORT_ORDER.filter((s) => bySport.has(s)),
+    ...[...bySport.keys()].filter((s) => !SPORT_ORDER.includes(s)).sort(),
+  ];
+  const sports = sportOrder.map((sport) => ({
+    sport,
+    prefixes: bySport.get(sport).slice().sort((a, b) => a.localeCompare(b)),
+  }));
+
+  const counts = {};
+  for (const w of flatWrappers) {
+    const ns = FLAT_API_NAMESPACES[w.api];
+    if (ns) counts[ns] = (counts[ns] || 0) + 1;
+  }
+  const providers = standaloneNs
+    .slice()
+    .sort((a, b) => a.localeCompare(b))
+    .map((ns) => ({ ns, count: counts[ns] || 0 }));
+
+  return (
+    JSON.stringify(
+      {
+        _generated: "tools/codegen/generate.mjs — do not edit by hand",
+        leagueCount: leagues.length,
+        sportCount: sports.length,
+        sports,
+        providers,
+      },
+      null,
+      2
+    ) + "\n"
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Playground metadata (consumed by the React component + serverless proxy)
 // ---------------------------------------------------------------------------
 
@@ -938,6 +988,7 @@ const outputs = {
   [join(referenceDir, "espn-parsed-returns.md")]: renderEspnParsedReturns(),
   [join(referenceDir, "_category_.json")]: REFERENCE_CATEGORY,
   [join(docsGeneratedDir, "reference-sidebar.js")]: renderReferenceSidebar(leagues, standaloneNs),
+  [join(docsGeneratedDir, "coverage.json")]: renderCoverageJson(leagues, standaloneNs, flatWrappers),
   [join(playgroundDir, "endpoints.json")]: renderEndpointsJson(
     wrappers,
     leagues,

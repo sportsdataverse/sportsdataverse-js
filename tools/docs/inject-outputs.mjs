@@ -41,7 +41,7 @@
 // ---------------------------------------------------------------------------
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EXAMPLES } from './examples.mjs';
 
@@ -137,7 +137,9 @@ function injectBlock(doc, id, block) {
 }
 
 async function main() {
-  const parsers = await import(`file://${PARSERS.replace(/\\/g, '/')}`);
+  // pathToFileURL produces a correct, cross-platform `file:///…` specifier
+  // (manual `file://` + slash-swapping breaks on Windows drive paths).
+  const parsers = await import(pathToFileURL(PARSERS).href);
 
   // Group examples by target guide so each file is read + written once.
   const byTarget = new Map();
@@ -148,6 +150,7 @@ async function main() {
 
   let staleFiles = 0;
   let injected = 0;
+  let missingMarkers = 0;
 
   for (const [target, exs] of byTarget) {
     const path = join(GUIDES, target);
@@ -158,7 +161,11 @@ async function main() {
       const { block, count } = blockFor(parsers, ex);
       const res = injectBlock(doc, ex.id, block);
       if (!res.found) {
-        console.warn(`  ! marker not found for "${ex.id}" in ${target} — skipped`);
+        // A manifest entry pointing at a marker that isn't in the guide is
+        // broken wiring — fail (don't silently skip), since a missing marker
+        // leaves `doc === original` and would otherwise sneak past --check.
+        missingMarkers += 1;
+        console.error(`  ✗ marker not found for "${ex.id}" in ${target} — manifest ↔ guide wiring is broken`);
         continue;
       }
       doc = res.doc;
@@ -177,15 +184,24 @@ async function main() {
   }
 
   if (CHECK) {
-    if (staleFiles > 0) {
+    if (staleFiles > 0 || missingMarkers > 0) {
+      const bits = [];
+      if (staleFiles > 0) bits.push(`${staleFiles} guide(s) have stale frozen output`);
+      if (missingMarkers > 0) bits.push(`${missingMarkers} manifest entr${missingMarkers === 1 ? 'y' : 'ies'} reference a missing inject marker`);
       console.error(
-        `\n${staleFiles} guide(s) have stale frozen output. ` +
-          'Run `npm run docs:examples` and commit the result.'
+        `\n${bits.join('; ')}. ` +
+          'Run `npm run docs:examples` (and fix any broken guide wiring), then commit the result.'
       );
       process.exit(1);
     }
     console.log(`\n✓ All ${injected} injected block(s) across ${byTarget.size} guide(s) are up to date.`);
     return;
+  }
+
+  // Even in write mode, a missing marker is broken wiring — surface it as a failure.
+  if (missingMarkers > 0) {
+    console.error(`\n${missingMarkers} manifest entr${missingMarkers === 1 ? 'y' : 'ies'} reference a missing inject marker (see above).`);
+    process.exit(1);
   }
 
   console.log(`\nInjected ${injected} example(s) across ${byTarget.size} guide(s).`);
