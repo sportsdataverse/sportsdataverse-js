@@ -15,6 +15,16 @@ import { makeLeagueModule } from './leagues/_make.js';
 import { makeFlatModule } from './leagues/_make_flat.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 
+// WRITTEN ESPN source modules (phased proof — basketball only). These leagues
+// are composed from explicit, documented `export const` wrappers in
+// src/generated/espn/<prefix>.ts instead of being materialized at runtime by
+// makeLeagueModule(cfg). Every OTHER league still uses the runtime factory.
+import * as nbaEspn from './generated/espn/nba.js';
+import * as wnbaEspn from './generated/espn/wnba.js';
+import * as mbbEspn from './generated/espn/mbb.js';
+import * as wbbEspn from './generated/espn/wbb.js';
+import type { WrapperFn } from './core/types.js';
+
 // Legacy hand-written services. Their methods (e.g. `sdv.nba.getPlayByPlay`) are
 // preserved; the generated cross-league `espn_<prefix>_<short>` wrappers are
 // merged onto the matching namespace below.
@@ -22,12 +32,25 @@ const legacy: Record<string, Record<string, any>> = {
   cfb, mbb, mlb, nba, ncaa, nfl, nhl, tennis, wbb, wnba,
 };
 
+// Basketball is composed from WRITTEN source modules (phased proof). Each value
+// is the module's function exports only (the module-private CFG is not
+// exported), keyed by league prefix. The composition loop prefers this map and
+// falls back to the runtime factory for every other league.
+const WRITTEN_ESPN: Record<string, Record<string, WrapperFn>> = {
+  nba: nbaEspn,
+  wnba: wnbaEspn,
+  mbb: mbbEspn,
+  wbb: wbbEspn,
+};
+
 // Build the full surface: every league in the generated matrix gets its
 // `espn_<prefix>_*` wrappers, merged onto its legacy service when one exists
 // (and added as a new namespace otherwise — soccer, cricket, ufl, mch, ...).
+// Basketball pulls from the written modules; all other leagues use the factory.
 const sdv: Record<string, Record<string, any>> = { ...legacy };
 for (const cfg of LEAGUES) {
-  sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...makeLeagueModule(cfg) };
+  const espn = WRITTEN_ESPN[cfg.prefix] ?? makeLeagueModule(cfg);
+  sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...espn };
 }
 
 // Merge the non-ESPN "flat API" wrappers onto their target league namespace,
