@@ -1,0 +1,207 @@
+/* RunCell — a compact, single-endpoint live runner for inline use in guides.
+   A deliberately slimmed-down cousin of the full Playground styles. It reuses
+   the same CSS custom properties so it tracks the Docusaurus light/dark theme. */
+
+.cell {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--ifm-background-surface-color);
+  margin: 1.25rem 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+.params {
+  display: grid;
+  gap: 0.6rem 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-bottom: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.req {
+  color: var(--ifm-color-danger);
+  font-weight: 700;
+}
+
+.input {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 7px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+.runRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.runBtn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.4rem 0.85rem;
+  border-radius: 7px;
+  border: 1px solid var(--ifm-color-primary-dark);
+  background: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.runBtn:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+.runBtn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.method {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-700);
+  word-break: break-all;
+}
+
+/* Live summary sub-frame picker, shown next to Run for the espn:summary cell. */
+.sectionSelect {
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  margin-left: auto;
+}
+
+.urlRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.urlTag {
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: var(--ifm-color-success);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  flex: 0 0 auto;
+}
+
+.url {
+  flex: 1 1 280px;
+  min-width: 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  word-break: break-all;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.err {
+  color: var(--ifm-color-danger);
+  font-size: 0.82rem;
+  margin-top: 0.4rem;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.table {
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+}
+
+.table th,
+.table td {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.3rem 0.55rem;
+  text-align: left;
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table th {
+  background: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.rowNum {
+  color: var(--ifm-color-emphasis-500);
+  text-align: right;
+}
+
+.meta {
+  font-size: 0.72rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 0.4rem;
+}
+
+.json {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+  overflow: auto;
+  max-height: 360px;
+}
+
+.json code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.76rem;
+  white-space: pre;
+}
+
+.empty {
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 0.5rem;
+}

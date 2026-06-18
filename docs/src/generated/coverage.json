@@ -1,0 +1,88 @@
+{
+  "_generated": "tools/codegen/generate.mjs — do not edit by hand",
+  "leagueCount": 29,
+  "sportCount": 6,
+  "sports": [
+    {
+      "sport": "basketball",
+      "prefixes": [
+        "mbb",
+        "nba",
+        "wbb",
+        "wnba"
+      ]
+    },
+    {
+      "sport": "football",
+      "prefixes": [
+        "cfb",
+        "cfl",
+        "nfl",
+        "ufl",
+        "xfl"
+      ]
+    },
+    {
+      "sport": "baseball",
+      "prefixes": [
+        "college_baseball",
+        "college_softball",
+        "mlb"
+      ]
+    },
+    {
+      "sport": "hockey",
+      "prefixes": [
+        "mch",
+        "nhl",
+        "wch"
+      ]
+    },
+    {
+      "sport": "soccer",
+      "prefixes": [
+        "bundesliga",
+        "epl",
+        "laliga",
+        "ligamx",
+        "ligue1",
+        "mls",
+        "nwsl",
+        "seriea",
+        "soccer",
+        "ucl",
+        "uel",
+        "wc",
+        "wwc"
+      ]
+    },
+    {
+      "sport": "cricket",
+      "prefixes": [
+        "cricket"
+      ]
+    }
+  ],
+  "providers": [
+    {
+      "ns": "cbs",
+      "count": 82
+    },
+    {
+      "ns": "fox",
+      "count": 38
+    },
+    {
+      "ns": "odds",
+      "count": 10
+    },
+    {
+      "ns": "recruiting",
+      "count": 25
+    },
+    {
+      "ns": "yahoo",
+      "count": 107
+    }
+  ]
+}

@@ -4,6 +4,8 @@ sidebar_label: MLB
 sidebar_position: 6
 ---
 
+import RunCell from '@site/src/components/RunCell';
+
 # MLB recipes
 
 Baseball lives under `sdv.mlb`, which spans **three** surfaces: the ESPN
@@ -33,6 +35,17 @@ import sdv from 'sportsdataverse';
 const schedule = await sdv.mlb.mlbApiSchedule({ parsed: true });
 console.table(schedule);
 ```
+
+Live and inline — `statsapi.mlb.com`'s schedule, parsed to one row per game.
+Add a `date` (YYYY-MM-DD) to scope it:
+
+<RunCell
+  league="mlb"
+  endpoint="flat:mlb_api:schedule"
+  params={{ date: '2024-03-28' }}
+  parsed
+  title="MLB Stats API schedule — native, live"
+/>
 
 [Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_api%3Aschedule&parsed=1)
 
@@ -74,6 +87,17 @@ const batTracking = await sdv.mlb.mlbStatcastLeaderboardBatTracking({
 });
 console.table(batTracking.slice(0, 10));
 ```
+
+Statcast leaderboards stream **CSV** (not JSON), so the inline cell below shows
+the raw response body — the package's `mlbStatcast*` parsers turn that CSV into
+tidy rows in Node (the browser cell just surfaces it). Scope with a `year`:
+
+<RunCell
+  league="mlb"
+  endpoint="flat:mlb_statcast:leaderboard_bat_tracking"
+  params={{ year: 2024 }}
+  title="Statcast bat-tracking leaderboard — raw CSV"
+/>
 
 [Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_statcast%3Aleaderboard_bat_tracking&parsed=1&year=2024)
 

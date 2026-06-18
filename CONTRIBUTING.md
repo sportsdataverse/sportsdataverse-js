@@ -174,6 +174,42 @@ editing any parser so the playground bundle stays current.
   (`docs/src/playground/parsers.bundle.mjs`) plus a serverless proxy
   (`docs/api/run.mjs`). Rebundle with `npm run bundle:parsers` after parser changes.
 
+### Getting-started guides (`.mdx` + live RunCell)
+
+- The guides live as `.mdx` files under `docs/docs/guides/` (quickstart, per-sport,
+  providers). They're hand-authored — write prose + runnable raw-vs-parsed snippets.
+- **`<RunCell>` is embeddable inline in any guide.** Import it
+  (`import RunCell from '@site/src/components/RunCell'`) and drop a single-endpoint
+  live runner: `<RunCell league="nba" endpoint="espn:scoreboard" parsed />`. It
+  resolves the URL, **Run**s it via the `/api/run` proxy, and shows raw JSON or a
+  tidy table. It is SSR-safe and works for every endpoint kind (ESPN incl.
+  `leagueParam` leagues, the `summary` section selector, every flat family, and
+  non-JSON Statcast CSV). A live Run needs the `/api/run` proxy (the Vercel
+  function) — `npx docusaurus build` itself needs no network.
+
+### Frozen example tables (the output injector)
+
+- `tools/docs/inject-outputs.mjs` freezes **real** parsed tables into guides between
+  `<!-- inject:example:<id> -->` … `<!-- /inject -->` markers, driven by the manifest
+  `tools/docs/examples.mjs`. It runs the committed `parsers.bundle.mjs` against
+  committed fixtures (deterministic, no network).
+- **After you change `src/parsers/**` (and `npm run bundle:parsers`) or add/edit an
+  example, run `npm run docs:examples`** to refresh the tables, then commit them.
+  `npm run docs:examples:check` is a **CI drift gate** — it must stay green. Add a
+  new example by dropping a fixture + an entry in `examples.mjs` + the marker pair in
+  the target guide; `test/docs-examples.test.js` checks the manifest is consistent.
+
+### The sport-grouped reference sidebar
+
+- The ESPN reference sidebar is **grouped by sport automatically**. Codegen emits
+  `docs/src/generated/reference-sidebar.js` (nesting each league reference doc under
+  a category named for its `sport`, plus a "Providers" group), and `docs/sidebars.js`
+  consumes it. **Never hand-edit either** — to regroup a league, edit its `sport` in
+  `tools/codegen/endpoints/leagues.yaml` (or `SPORT_ORDER` in `generate.mjs`) and run
+  `npm run codegen`. The reference `.md` pages stay flat (no URL changes); the file is
+  drift-guarded by `npm run codegen:check`. A 🛝 Playground link sits near the top of
+  the sidebar, and Docs / News / Tutorials / Playground appear in the navbar + footer.
+
 ## Commit conventions
 
 Use [Conventional Commits](https://www.conventionalcommits.org/):

@@ -4,6 +4,8 @@ sidebar_label: NFL
 sidebar_position: 5
 ---
 
+import RunCell from '@site/src/components/RunCell';
+
 # NFL recipes
 
 Pro football lives under `sdv.nfl`, which spans **two** surfaces: the ESPN
@@ -21,6 +23,10 @@ import sdv from 'sportsdataverse';
 const games = await sdv.nfl.espnNflScoreboard({ parsed: true });
 console.table(games);
 ```
+
+Run it inline — edit a param and hit **Run ▶** for live, parsed rows:
+
+<RunCell league="nfl" endpoint="espn:scoreboard" parsed title="NFL scoreboard — live" />
 
 [Open in playground ▶](/playground?l=nfl&e=espn%3Ascoreboard&parsed=1)
 
@@ -73,7 +79,41 @@ const standings = await sdv.nfl.nflApiStandings({
 console.table(standings);
 ```
 
+The same call, live and inline — a native `api.nfl.com` request, parsed to one
+row per team. `season_type` is a dropdown (`REG` / `POST` / `PRE`):
+
+<RunCell
+  league="nfl"
+  endpoint="flat:nfl_api:standings"
+  params={{ season: 2024, season_type: 'REG', week: 1 }}
+  parsed
+  title="NFL.com Shield standings — native, live"
+/>
+
 [Open in playground ▶](/playground?l=nfl&e=flat%3Anfl_api%3Astandings&parsed=1&season=2024&season_type=REG&week=1)
+
+### Frozen output (real parser rows, no network)
+
+The table below is **real `parse_nfl_standings` output**, rendered at build time
+from a committed sample fixture and frozen into this page (deterministic — CI
+reproduces it exactly). Regenerate with `npm run docs:examples`.
+
+{/* Written by tools/docs/inject-outputs.mjs — do not hand-edit. */}
+
+<!-- inject:example:nfl_standings -->
+
+`sdv.nfl.nflApiStandings({ season: 2024, parsed: true })` — the native NFL.com Shield standings, one row per team (sample fixture).
+
+| team_abbreviation | team_full_name | conference | division | wins | losses |
+| --- | --- | --- | --- | --- | --- |
+| KC | Kansas City Chiefs | AFC | AFC West | 15 | 2 |
+| BUF | Buffalo Bills | AFC | AFC East | 13 | 4 |
+| DET | Detroit Lions | NFC | NFC North | 15 | 2 |
+| PHI | Philadelphia Eagles | NFC | NFC East | 14 | 3 |
+
+_4 rows, 12 cols total — first 6 shown._
+
+<!-- /inject -->
 
 ## Rosters & weekly game details (native)
 

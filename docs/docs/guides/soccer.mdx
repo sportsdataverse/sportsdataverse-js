@@ -4,6 +4,8 @@ sidebar_label: Soccer
 sidebar_position: 9
 ---
 
+import RunCell from '@site/src/components/RunCell';
+
 # Soccer recipes
 
 Soccer lives under `sdv.soccer` and exposes the ESPN cross-league surface under
@@ -37,6 +39,17 @@ const fixtures = await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1', parsed
 console.table(fixtures);
 ```
 
+Live and inline — the `league` field is the competition slug; change it to
+`esp.1`, `ger.1`, `uefa.champions`, … and re-run:
+
+<RunCell
+  league="soccer"
+  endpoint="espn:scoreboard"
+  params={{ league: 'eng.1' }}
+  parsed
+  title="Soccer scoreboard — pick a competition, live"
+/>
+
 [Open in playground ▶](/playground?l=soccer&e=espn%3Ascoreboard&parsed=1&league=eng.1)
 
 ## League table (standings)
@@ -49,6 +62,14 @@ import sdv from 'sportsdataverse';
 const table = await sdv.soccer.espnSoccerStandings({ league: 'esp.1', parsed: true });
 console.table(table);
 ```
+
+<RunCell
+  league="soccer"
+  endpoint="espn:standings"
+  params={{ league: 'esp.1' }}
+  parsed
+  title="Soccer league table — change the league slug, live"
+/>
 
 [Open in playground ▶](/playground?l=soccer&e=espn%3Astandings&parsed=1&league=esp.1)
 

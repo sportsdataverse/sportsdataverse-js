@@ -17,6 +17,11 @@ cross-sport provider families, all with a tidy parser layer.
   is the drift gate — it must stay green (CI fails otherwise).
 - New non-ESPN families come from a canonical OpenAPI spec via
   `tools/codegen/from-openapi.mjs` (OpenAPI 3.x → endpoint-YAML skeleton).
+- **The sport-grouped reference sidebar is codegen-owned — never hand-edit it.**
+  `docs/src/generated/reference-sidebar.js` (and `docs/sidebars.js`) group league
+  reference docs by `sport`. To regroup, edit `tools/codegen/endpoints/leagues.yaml`
+  or `generate.mjs` and run `npm run codegen` — the file is drift-guarded by
+  `npm run codegen:check`.
 
 ## Conventions
 
@@ -30,6 +35,13 @@ cross-sport provider families, all with a tidy parser layer.
   on empty/malformed input; never throw. `{ parsed: true }` is strictly additive
   (omitting it returns the raw payload). When you change `src/parsers/**`, re-run
   `npm run bundle:parsers` (the playground bundle) so its staleness test passes.
+- **Docs guides + live runner.** Getting-started guides are `.mdx` under
+  `docs/docs/guides/`; `<RunCell>` (`docs/src/components/RunCell`) is embeddable
+  inline in any guide for a live single-endpoint Run (via the `/api/run` proxy).
+  After changing `src/parsers/**` (and re-bundling) or the example manifest
+  `tools/docs/examples.mjs`, run `npm run docs:examples` to refresh the frozen
+  tables and keep `npm run docs:examples:check` green (a CI gate). The homepage +
+  reference sidebar are data-driven/codegen-owned — don't hand-edit them.
 - **New modules must be typed** and pass `npm run typecheck` (tsc) + `npm run build`.
 - **Tests** are Mocha, no network (inline payloads / committed fixtures);
   live/integration tests are gated behind `SDV_LIVE=1`.

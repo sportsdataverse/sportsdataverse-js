@@ -197,9 +197,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full workflow and
 
 The full reference is on the docs site: **<https://js.sportsdataverse.org/>**.
 
+- **[Guides](https://js.sportsdataverse.org/docs/guides/)** — getting-started recipes (quickstart + per-sport + providers) with **live RunCell cells** you can edit and run inline.
 - **[Tutorials](https://js.sportsdataverse.org/docs/tutorials/quickstart)** — guided walkthroughs.
-- **[Reference](https://js.sportsdataverse.org/docs/reference/)** — every wrapper, by league.
-- **[Playground](https://js.sportsdataverse.org/playground)** — run live ESPN calls in the browser.
+- **[Reference](https://js.sportsdataverse.org/docs/reference/)** — every wrapper, by league. The sidebar is **grouped by sport** (with a Providers group).
+- **[Playground](https://js.sportsdataverse.org/playground)** — run live ESPN + native-API calls in the browser.
 - **[API](https://js.sportsdataverse.org/docs/api/)** — the full typed module surface (TypeDoc).
 - **[Changelog](https://js.sportsdataverse.org/CHANGELOG)** — release notes.
 

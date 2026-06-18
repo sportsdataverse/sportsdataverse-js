@@ -4,6 +4,8 @@ sidebar_label: College Basketball
 sidebar_position: 4
 ---
 
+import RunCell from '@site/src/components/RunCell';
+
 # College basketball recipes (MBB & WBB)
 
 College basketball spans two namespaces that share an identical ESPN surface:
@@ -28,6 +30,10 @@ const games = await sdv.mbb.espnMbbScoreboard({ parsed: true });
 console.table(games);
 ```
 
+Live and inline (men's). Swap `league="wbb"` for the women's board:
+
+<RunCell league="mbb" endpoint="espn:scoreboard" parsed title="Men's CBB scoreboard — live" />
+
 [Open in playground ▶](/playground?l=mbb&e=espn%3Ascoreboard&parsed=1)
 
 ## Rankings (AP Top 25 & Coaches)
@@ -42,6 +48,10 @@ const women = await sdv.wbb.espnWbbRankings({ parsed: true });
 console.table(men);
 console.table(women);
 ```
+
+The men's AP Top 25, live and inline (swap `league="wbb"` for the women's poll):
+
+<RunCell league="mbb" endpoint="espn:rankings" parsed title="Men's CBB rankings — live" />
 
 [Open men's in playground ▶](/playground?l=mbb&e=espn%3Arankings&parsed=1) ·
 [Open women's in playground ▶](/playground?l=wbb&e=espn%3Arankings&parsed=1)

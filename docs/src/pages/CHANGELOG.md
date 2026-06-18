@@ -1,5 +1,34 @@
 # ChangeLog
 
+## **Unreleased**
+
+### Docs
+
+A docs-site overhaul that makes the guides literate and the navigation
+data-driven:
+
+- **Sport-grouped reference sidebar.** ESPN league reference docs are now nested
+  under a collapsible category named for their sport (plus a Providers group),
+  emitted by codegen into `docs/src/generated/reference-sidebar.js` and consumed
+  by `docs/sidebars.js`. It's drift-guarded (`npm run codegen:check`) and regroups
+  automatically from `leagues.yaml` — the reference pages stay flat (no URL change).
+- **Nav/footer + sidebar Playground link.** Docs / News / Tutorials / Playground
+  appear in both the navbar and the footer, and a 🛝 [Playground](/playground)
+  link sits near the top of the docs sidebar.
+- **Data-driven homepage.** The home page maps over the generated `endpoints.json`
+  (leagues by sport + provider families), so adding a sport/provider updates it on
+  `npm run codegen` — no bespoke edit.
+- **Embeddable live RunCell guides.** `<RunCell>` is a compact single-endpoint
+  live runner droppable inline in any `.mdx` guide: editable params → resolved URL
+  → Run (via the `/api/run` proxy) → raw JSON or a parsed table. It handles every
+  flat family, the `summary` section selector, enum dropdowns, and non-JSON
+  Statcast CSV, and is SSR-safe.
+- **Build-time output injector.** A build-time injector (`tools/docs/inject-outputs.mjs`
+  + the manifest `tools/docs/examples.mjs`) freezes real parsed tables into guides
+  between `<!-- inject:example:ID -->` markers — deterministic (fixture-driven, no
+  network). `npm run docs:examples` writes them; `npm run docs:examples:check` is a
+  CI drift gate.
+
 ## **V3.0.0**
 
 A major release that turns `sportsdataverse` into a **cross-league ESPN client**

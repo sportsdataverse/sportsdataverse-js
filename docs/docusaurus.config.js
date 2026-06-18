@@ -75,6 +75,16 @@ module.exports = {
           position: 'left',
         },
         {
+          label: 'Tutorials',
+          to: '/docs/tutorials/quickstart',
+          position: 'left',
+        },
+        {
+          label: 'Playground',
+          to: '/playground',
+          position: 'left',
+        },
+        {
           label: 'SDV',
           position: 'left',
           items: [
@@ -234,11 +244,23 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Explore',
           items: [
             {
               label: 'Docs',
               to: '/docs/intro',
+            },
+            {
+              label: 'News',
+              to: '/CHANGELOG',
+            },
+            {
+              label: 'Tutorials',
+              to: '/docs/tutorials/quickstart',
+            },
+            {
+              label: 'Playground',
+              to: '/playground',
             },
           ],
         },

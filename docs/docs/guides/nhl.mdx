@@ -5,6 +5,7 @@ sidebar_position: 7
 ---
 
 import RunKit from '@site/src/components/RunKit';
+import RunCell from '@site/src/components/RunCell';
 
 # NHL recipes
 
@@ -43,6 +44,15 @@ const standings = await sdv.nhl.nhlApiWebStandingsSeason({ parsed: true });
 console.table(standings);
 ```
 
+Live and inline — a native `api-web.nhle.com` request, no params:
+
+<RunCell
+  league="nhl"
+  endpoint="flat:nhl_api_web:standings_season"
+  parsed
+  title="NHL api-web full-season standings — live"
+/>
+
 [Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_api_web%3Astandings_season&parsed=1)
 
 ## Play-by-play for one game (api-web)
@@ -54,6 +64,16 @@ import sdv from 'sportsdataverse';
 const plays = await sdv.nhl.nhlApiWebPbp({ game_id: '2023030417', parsed: true });
 console.table(plays.slice(0, 10));
 ```
+
+The game feed, parsed to plays — change `game_id` and re-run:
+
+<RunCell
+  league="nhl"
+  endpoint="flat:nhl_api_web:pbp"
+  params={{ game_id: '2023030417' }}
+  parsed
+  title="NHL api-web game feed → parsed plays"
+/>
 
 [Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_api_web%3Apbp&parsed=1&game_id=2023030417)
 
