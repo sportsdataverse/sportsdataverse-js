@@ -1,6 +1,6 @@
 // CBS Sports API (api.cbssports.com/napi) flat-API parsers. Each parser turns
 // a raw API payload into tidy rectangular rows, same contract as
-// src/parsers/mlb.ts / sports247.ts:
+// src/parsers/mlb.ts / recruiting.ts:
 //
 //   - return an array of flat row objects (the JS analogue of a polars frame);
 //   - empty / malformed payloads return `[]` instead of throwing, so callers

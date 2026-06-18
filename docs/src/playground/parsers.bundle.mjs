@@ -1185,12 +1185,12 @@ function parse_odds_api_event_odds_history(raw) {
   return unrollOutcomes(events, extra);
 }
 
-// src/parsers/sports247.ts
+// src/parsers/recruiting.ts
 function isPlainObject10(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 var LIST_KEYS2 = ["list", "rankings", "items", "results", "data"];
-function parse_sports247_list(raw) {
+function parse_recruiting_list(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   for (const key of LIST_KEYS2) {
@@ -1201,12 +1201,12 @@ function parse_sports247_list(raw) {
   }
   return [];
 }
-function parse_sports247_paged_list(raw) {
+function parse_recruiting_paged_list(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   return normalize(raw.list ?? []);
 }
-function parse_sports247_institution_rankings(raw) {
+function parse_recruiting_institution_rankings(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   const list = raw.list;
@@ -1216,7 +1216,7 @@ function parse_sports247_institution_rankings(raw) {
   for (const [k, v] of Object.entries(pag)) base[`pagination_${k}`] = v;
   return normalize(list.map((row) => ({ ...base, ...isPlainObject10(row) ? row : {} })));
 }
-function parse_sports247_ranking_feed(raw) {
+function parse_recruiting_ranking_feed(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   return normalize(raw.rankings ?? []);
@@ -2026,11 +2026,11 @@ var PARSERS = {
   parse_odds_api_event_odds_history,
   // ---- 247Sports Recruit Database (api.247sports.com /rdb/v1) ----
   // Generic list flattener (the default for most endpoints).
-  parse_sports247_list,
+  parse_recruiting_list,
   // Dedicated parsers (envelope unrolling logic).
-  parse_sports247_paged_list,
-  parse_sports247_institution_rankings,
-  parse_sports247_ranking_feed,
+  parse_recruiting_paged_list,
+  parse_recruiting_institution_rankings,
+  parse_recruiting_ranking_feed,
   // ---- CBS Sports API (api.cbssports.com/napi) ----
   // Generic list flattener (the default for most endpoints).
   parse_cbs_list,

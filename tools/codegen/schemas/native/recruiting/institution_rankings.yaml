@@ -1,5 +1,5 @@
 # One row per ranked institution (InstitutionRankingDto), with pagination_* context prefixed.
-# Columns produced by the sports247 parser's snake_cased, flattened output.
+# Columns produced by the recruiting parser's snake_cased, flattened output.
 schema: institution_rankings
 kind: dataframe
 columns:

@@ -8,21 +8,23 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ### Changed (breaking) — provider method naming
 
-Dropped internal vendor API codenames from the provider method names + labels so
-they read as the product, not the vendor's internal API name. The namespaces
-(`sdv.fox` / `sdv.cbs` / `sdv.yahoo` / `sdv.mlb`) are unchanged; only the method
-prefixes were renamed:
+Dropped internal vendor API codenames (and redundant `_api` stems) from the
+provider method names + labels so they read as the product / namespace, not the
+vendor's internal API name. The namespaces (`sdv.fox` / `sdv.cbs` / `sdv.yahoo` /
+`sdv.mlb` / `sdv.recruiting`) are unchanged; only the method prefixes were renamed:
 
 - `foxBifrost*` → `fox*` (e.g. `foxBifrostScoreboard` → `foxScoreboard`)
 - `cbsNapi*` → `cbs*`
 - `yahooShangrila*` → `yahoo*`, `yahooEditorial*` → `yahooScores*`
 - `mlbApi*` → `mlb*` (e.g. `mlbApiSchedule` → `mlbSchedule`)
+- `sports247*` → `recruiting*` (matches the `sdv.recruiting` namespace; the
+  "247Sports" label is kept — it's the real product)
 
 The same rename flows through the codegen `api` stems, returns-schema paths,
 parser names, playground endpoint ids, and reference docs. Upstream URL paths
 that genuinely contain the vendor codename (Fox's `/bifrost/v1/…`, Yahoo's
 `/v1/query/shangrila/…`) are unchanged — those are the real endpoints.
-(`sports247` / `odds_api` / `mlb_statcast` / the four `nhl_*` families /
+(`odds_api` / `mlb_statcast` / the four `nhl_*` families /
 `hockeytech` / `torvik` are real product names and were left as-is.)
 
 ## v3.1.0

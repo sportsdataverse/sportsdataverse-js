@@ -48,7 +48,7 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // 247Sports Recruit Database — second standalone (non-league) provider family.
   // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
   // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
-  sports247: 'recruiting',
+  recruiting: 'recruiting',
   // CBS Sports API — third standalone (non-league) provider family. `cbs` is a
   // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
   // the API data resources are anonymously reachable).

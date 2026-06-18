@@ -1,6 +1,6 @@
-# One row per sport ranking base (SportBaseRankingDto).
-# Columns produced by the sports247 parser's snake_cased, flattened output.
-schema: sports
+# One row per ranking year (YearBaseRankingDto).
+# Columns produced by the recruiting parser's snake_cased, flattened output.
+schema: year
 kind: dataframe
 columns:
 - name: ranking_key

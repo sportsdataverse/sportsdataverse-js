@@ -138,7 +138,7 @@ Scope with `year` + `sport_key` (`football`, `basketball`).
 ```js
 import sdv from 'sportsdataverse';
 
-const rankings = await sdv.recruiting.sports247Rankings({
+const rankings = await sdv.recruiting.recruitingRankings({
   year: 2025,
   sport_key: 'football',
   parsed: true,
@@ -148,13 +148,13 @@ console.table(rankings);
 
 <RunCell
   league="recruiting"
-  endpoint="flat:sports247:rankings"
+  endpoint="flat:recruiting:rankings"
   params={{ year: 2025, sport_key: 'football' }}
   parsed
   title="247Sports recruiting rankings — live"
 />
 
-[Open in playground ▶](/playground?l=recruiting&e=flat%3Asports247%3Arankings&parsed=1&year=2025&sport_key=football)
+[Open in playground ▶](/playground?l=recruiting&e=flat%3Arecruiting%3Arankings&parsed=1&year=2025&sport_key=football)
 
 ## Run it live
 

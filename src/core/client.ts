@@ -44,8 +44,8 @@ export const FLAT_HOSTS: Record<string, string> = {
   // (sdv.recruiting.*). The spec declares a JWT `Authorization: Bearer` header
   // but there is no public token-minting machinery, so this family is NOT
   // `auth: true`; the caller supplies their own token via the flat `headers`
-  // arg (sdv.recruiting.sports247_rankings({ headers: { Authorization: … } })).
-  sports247: "https://api.247sports.com",
+  // arg (sdv.recruiting.recruiting_rankings({ headers: { Authorization: … } })).
+  recruiting: "https://api.247sports.com",
   // CBS Sports API — third cross-sport (non-league) provider family. Merges
   // onto the standalone `cbs` namespace (sdv.cbs.*). The CBS data resources are
   // anonymously reachable (the spec ships no securityScheme), so this family is

@@ -84,11 +84,11 @@ import {
   parse_odds_api_event_odds_history,
 } from "./odds_api.js";
 import {
-  parse_sports247_list,
-  parse_sports247_paged_list,
-  parse_sports247_institution_rankings,
-  parse_sports247_ranking_feed,
-} from "./sports247.js";
+  parse_recruiting_list,
+  parse_recruiting_paged_list,
+  parse_recruiting_institution_rankings,
+  parse_recruiting_ranking_feed,
+} from "./recruiting.js";
 import {
   parse_cbs_list,
   parse_cbs_scoreboard,
@@ -215,11 +215,11 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_odds_api_event_odds_history,
   // ---- 247Sports Recruit Database (api.247sports.com /rdb/v1) ----
   // Generic list flattener (the default for most endpoints).
-  parse_sports247_list,
+  parse_recruiting_list,
   // Dedicated parsers (envelope unrolling logic).
-  parse_sports247_paged_list,
-  parse_sports247_institution_rankings,
-  parse_sports247_ranking_feed,
+  parse_recruiting_paged_list,
+  parse_recruiting_institution_rankings,
+  parse_recruiting_ranking_feed,
   // ---- CBS Sports API (api.cbssports.com/napi) ----
   // Generic list flattener (the default for most endpoints).
   parse_cbs_list,

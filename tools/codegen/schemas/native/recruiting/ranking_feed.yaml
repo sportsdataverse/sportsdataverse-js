@@ -1,5 +1,5 @@
 # One row per ranking-feed item (ItemDto: player + target institution).
-# Columns produced by the sports247 parser's snake_cased, flattened output.
+# Columns produced by the recruiting parser's snake_cased, flattened output.
 schema: ranking_feed
 kind: dataframe
 columns:

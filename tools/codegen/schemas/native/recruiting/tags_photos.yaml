@@ -1,5 +1,5 @@
 # One row per tag photo (ImageDto).
-# Columns produced by the sports247 parser's snake_cased, flattened output.
+# Columns produced by the recruiting parser's snake_cased, flattened output.
 schema: tags_photos
 kind: dataframe
 columns:

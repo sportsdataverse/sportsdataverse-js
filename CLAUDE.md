@@ -168,7 +168,7 @@ getting its own generated reference page:
 | Family | Namespace | Auth |
 |---|---|---|
 | The Odds API (`odds_api`) | `sdv.odds.*` | `apiKey` query param (caller-supplied) |
-| 247Sports (`sports247`) | `sdv.recruiting.*` | caller-supplied JWT via `headers` |
+| 247Sports (`recruiting`) | `sdv.recruiting.*` | caller-supplied JWT via `headers` |
 | CBS Sports (`cbs`) | `sdv.cbs.*` | keyless |
 | Fox Sports (`fox`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
 | Yahoo Sports (`yahoo_scores` + `yahoo`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |

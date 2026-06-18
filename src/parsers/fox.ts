@@ -1,6 +1,6 @@
 // Fox Sports API (api.foxsports.com/bifrost/v1) flat-API parsers.
 // Each parser turns a raw Fox payload into tidy rectangular rows, same
-// contract as src/parsers/cbs.ts / mlb.ts / sports247.ts:
+// contract as src/parsers/cbs.ts / mlb.ts / recruiting.ts:
 //
 //   - return an array of flat row objects (the JS analogue of a polars frame);
 //   - empty / malformed payloads return `[]` instead of throwing, so callers

@@ -3,34 +3,34 @@
 # rankings, and tag/photo lookups for college recruiting.
 #
 # Generated from c:/…/sdv-swagger/247sports-recruit-database.openapi.yaml via
-# `node tools/codegen/from-openapi.mjs <spec> --api sports247 --host
+# `node tools/codegen/from-openapi.mjs <spec> --api recruiting --host
 # https://api.247sports.com`, then hand-cleaned:
 #   - dropped the redundant `rdb_` prefix every endpoint shared (the RDB silo
-#     base) so method names read `sports247_rankings` / `sports247_recruits`;
+#     base) so method names read `recruiting_rankings` / `recruiting_recruits`;
 #   - disambiguated the two `/tags/.../photos` routes (`tags_photos_by_key`
 #     vs `tags_photos_by_type`).
 #
 # Merges onto the standalone `recruiting` namespace (sdv.recruiting.*) — NOT a
-# league. Methods: sdv.recruiting.sports247_<short> / sports247<Short>.
+# league. Methods: sdv.recruiting.recruiting_<short> / recruiting<Short>.
 #
 # Auth NOTE: the spec declares a JWT `Authorization: Bearer {token}` header, but
 # unlike nfl_api there is NO public token-minting machinery for 247 — the caller
 # supplies their own JWT. So this family is NOT flagged `auth: true` (that path
 # would try to mint a bearer via AUTH_HEADER_PROVIDERS, which 247 has no entry
 # for). Pass your token per-call via the standard flat `headers` arg:
-#   sdv.recruiting.sports247_rankings({ headers: { Authorization: 'Bearer …' } }).
+#   sdv.recruiting.recruiting_rankings({ headers: { Authorization: 'Bearer …' } }).
 #
-# Parsers (src/parsers/sports247.ts) + returns schemas
-# (tools/codegen/schemas/native/sports247/*.yaml) are authored on top of this
-# skeleton. Most endpoints use the generic `parse_sports247_list` flattener;
+# Parsers (src/parsers/recruiting.ts) + returns schemas
+# (tools/codegen/schemas/native/recruiting/*.yaml) are authored on top of this
+# skeleton. Most endpoints use the generic `parse_recruiting_list` flattener;
 # rankings/feed endpoints get dedicated parsers that unroll their list payloads.
-api: sports247
+api: recruiting
 host: https://api.247sports.com
 endpoints:
 - short: coaches
   path: /rdb/v1/coaches
-  parser: parse_sports247_list
-  returns_schema: native/sports247/coaches
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/coaches
   extra_params:
   - {name: sport_key, query_key: sportKey}
   - {name: year, query_key: year}
@@ -38,8 +38,8 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 25}
 - short: rankings_transfer_portal_player_feed
   path: /rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed
-  parser: parse_sports247_ranking_feed
-  returns_schema: native/sports247/ranking_feed
+  parser: parse_recruiting_ranking_feed
+  returns_schema: native/recruiting/ranking_feed
   path_params:
   - {name: sport_key, required: true}
   - {name: year, required: true}
@@ -47,8 +47,8 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 9}
 - short: rankings_composite_team_feed
   path: /rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed
-  parser: parse_sports247_ranking_feed
-  returns_schema: native/sports247/ranking_feed
+  parser: parse_recruiting_ranking_feed
+  returns_schema: native/recruiting/ranking_feed
   path_params:
   - {name: sport_key, required: true}
   - {name: year, required: true}
@@ -56,8 +56,8 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 9}
 - short: rankings_transfer_portal_team_feed
   path: /rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed
-  parser: parse_sports247_ranking_feed
-  returns_schema: native/sports247/ranking_feed
+  parser: parse_recruiting_ranking_feed
+  returns_schema: native/recruiting/ranking_feed
   path_params:
   - {name: sport_key, required: true}
   - {name: year, required: true}
@@ -65,12 +65,12 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 9}
 - short: institution_groups
   path: /rdb/v1/institutionGroups
-  parser: parse_sports247_list
-  returns_schema: native/sports247/institution_groups
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/institution_groups
 - short: institution_rankings
   path: /rdb/v1/rankings/{sport_key}/{year}/institutionrankings
-  parser: parse_sports247_institution_rankings
-  returns_schema: native/sports247/institution_rankings
+  parser: parse_recruiting_institution_rankings
+  returns_schema: native/recruiting/institution_rankings
   path_params:
   - {name: sport_key, required: true}
   - {name: year, required: true}
@@ -84,8 +84,8 @@ endpoints:
   - {name: page, query_key: page, default: 1}
 - short: current_target_predictions
   path: /rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions
-  parser: parse_sports247_list
-  returns_schema: native/sports247/current_target_predictions
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/current_target_predictions
   path_params:
   - {name: site_key, required: true}
   - {name: year, required: true}
@@ -95,8 +95,8 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 10}
 - short: player_sport_rankings
   path: /rdb/v1/playerSportRankings
-  parser: parse_sports247_list
-  returns_schema: native/sports247/player_sport_rankings
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/player_sport_rankings
   extra_params:
   - {name: state_abbreviation, query_key: stateAbbreviation}
   - {name: position_abbreviation, query_key: positionAbbreviation}
@@ -109,8 +109,8 @@ endpoints:
   - {name: page, query_key: page}
 - short: transfer_player_sport_rankings
   path: /rdb/v1/transferPlayerSportRankings
-  parser: parse_sports247_list
-  returns_schema: native/sports247/transfer_player_sport_rankings
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/transfer_player_sport_rankings
   extra_params:
   - {name: state_abbreviation, query_key: stateAbbreviation}
   - {name: position_abbreviation, query_key: positionAbbreviation}
@@ -123,8 +123,8 @@ endpoints:
   - {name: page, query_key: page}
 - short: unranked_recruits
   path: /rdb/v1/unrankedRecruits
-  parser: parse_sports247_list
-  returns_schema: native/sports247/unranked_recruits
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/unranked_recruits
   extra_params:
   - {name: state_abbreviation, query_key: stateAbbreviation}
   - {name: position_abbreviation, query_key: positionAbbreviation}
@@ -138,30 +138,30 @@ endpoints:
   - {name: page, query_key: page}
 - short: players_under_special_evaluation
   path: /rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation
-  parser: parse_sports247_list
-  returns_schema: native/sports247/players_under_special_evaluation
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/players_under_special_evaluation
   path_params:
   - {name: ranking_key, required: true}
 - short: biggest_movers
   path: /rdb/v1/rankings/{ranking_key}/biggestMovers
-  parser: parse_sports247_list
-  returns_schema: native/sports247/biggest_movers
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/biggest_movers
   path_params:
   - {name: ranking_key, required: true}
   extra_params:
   - {name: page_size, query_key: pageSize, default: 10}
 - short: positions
   path: /rdb/v1/positions
-  parser: parse_sports247_list
-  returns_schema: native/sports247/positions
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/positions
   extra_params:
   - {name: ranking_key, query_key: rankingKey}
   - {name: sport_key, query_key: sportKey}
   - {name: year, query_key: year}
 - short: rankings
   path: /rdb/v1/rankings
-  parser: parse_sports247_list
-  returns_schema: native/sports247/rankings
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/rankings
   extra_params:
   - {name: year, query_key: year}
   - {name: sport_key, query_key: sportKey}
@@ -169,8 +169,8 @@ endpoints:
   - {name: ranking_version, query_key: rankingVersion}
 - short: archived_player_rankings
   path: /rdb/v1/rankings/{ranking_key}/archivedPlayerRankings
-  parser: parse_sports247_list
-  returns_schema: native/sports247/archived_player_rankings
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/archived_player_rankings
   path_params:
   - {name: ranking_key, required: true}
   extra_params:
@@ -178,14 +178,14 @@ endpoints:
   - {name: page, query_key: page, default: 1}
 - short: year
   path: /rdb/v1/year
-  parser: parse_sports247_list
-  returns_schema: native/sports247/year
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/year
   extra_params:
   - {name: ranking_key, query_key: rankingKey}
 - short: recruits
   path: /rdb/v1/recruits
-  parser: parse_sports247_list
-  returns_schema: native/sports247/recruits
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/recruits
   extra_params:
   - {name: sport_key, query_key: sportKey}
   - {name: year, query_key: year}
@@ -194,27 +194,27 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 25}
 - short: sports
   path: /rdb/v1/sports
-  parser: parse_sports247_list
-  returns_schema: native/sports247/sports
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/sports
   extra_params:
   - {name: ranking_key, query_key: rankingKey}
 - short: sport_years
   path: /rdb/v1/sports/{sport_key}/year
-  parser: parse_sports247_list
-  returns_schema: native/sports247/sport_years
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/sport_years
   path_params:
   - {name: sport_key, required: true}
 - short: tags_autocomplete
   path: /rdb/v1/tags/autocomplete
-  parser: parse_sports247_list
-  returns_schema: native/sports247/tags_autocomplete
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/tags_autocomplete
   extra_params:
   - {name: default_name, query_key: defaultName}
   - {name: items, query_key: items, default: 100}
 - short: tags_photos_by_key
   path: /rdb/v1/tags/{prefixed_key}/photos
-  parser: parse_sports247_paged_list
-  returns_schema: native/sports247/tags_photos
+  parser: parse_recruiting_paged_list
+  returns_schema: native/recruiting/tags_photos
   path_params:
   - {name: prefixed_key, required: true}
   extra_params:
@@ -222,8 +222,8 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 25}
 - short: tags_photos_by_type
   path: /rdb/v1/tags/{type}/{key}/photos
-  parser: parse_sports247_paged_list
-  returns_schema: native/sports247/tags_photos
+  parser: parse_recruiting_paged_list
+  returns_schema: native/recruiting/tags_photos
   path_params:
   - {name: type, required: true}
   - {name: key, required: true}
@@ -232,16 +232,16 @@ endpoints:
   - {name: page_size, query_key: pageSize, default: 25}
 - short: teams
   path: /rdb/v1/teams
-  parser: parse_sports247_list
-  returns_schema: native/sports247/teams
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/teams
   extra_params:
   - {name: sport_key, query_key: sportKey}
   - {name: year, query_key: year}
   - {name: institution_type, query_key: institutionType}
 - short: transfers
   path: /rdb/v1/transfers
-  parser: parse_sports247_list
-  returns_schema: native/sports247/transfers
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/transfers
   extra_params:
   - {name: sport_key, query_key: sportKey}
   - {name: year, query_key: year}
@@ -255,8 +255,8 @@ endpoints:
   - {name: page, query_key: page}
 - short: unranked_transfers
   path: /rdb/v1/transferrankings/{ranking_key}/unrankedtransfers
-  parser: parse_sports247_list
-  returns_schema: native/sports247/unranked_transfers
+  parser: parse_recruiting_list
+  returns_schema: native/recruiting/unranked_transfers
   path_params:
   - {name: ranking_key, required: true}
   extra_params:

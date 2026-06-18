@@ -1,6 +1,6 @@
-# One row per player under special evaluation.
-# Columns produced by the sports247 parser's snake_cased, flattened output.
-schema: players_under_special_evaluation
+# One row per ranked player (NormalizedPlayerRanking).
+# Columns produced by the recruiting parser's snake_cased, flattened output.
+schema: player_sport_rankings
 kind: dataframe
 columns:
 - name: ranking_key

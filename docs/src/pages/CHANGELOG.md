@@ -4,11 +4,13 @@
 
 ### Changed (breaking) — provider method naming
 
-Dropped internal vendor API codenames from provider method names + labels (the
-`sdv.fox`/`cbs`/`yahoo`/`mlb` namespaces are unchanged):
+Dropped internal vendor API codenames (and redundant `_api` stems) from provider
+method names + labels (the `sdv.fox`/`cbs`/`yahoo`/`mlb`/`recruiting` namespaces
+are unchanged):
 
 - `foxBifrost*` → `fox*`, `cbsNapi*` → `cbs*`, `yahooShangrila*` → `yahoo*`,
-  `yahooEditorial*` → `yahooScores*`, `mlbApi*` → `mlb*`.
+  `yahooEditorial*` → `yahooScores*`, `mlbApi*` → `mlb*`,
+  `sports247*` → `recruiting*` (label kept as "247Sports").
 
 The rename flows through the codegen stems, returns-schema paths, parser names,
 playground ids, and docs. Real upstream URL paths that contain the vendor

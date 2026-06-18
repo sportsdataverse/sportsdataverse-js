@@ -21,7 +21,7 @@ const FLAT_API_NAMESPACES = {
   nhl_records: 'nhl',
   nfl_api: 'nfl',
   odds_api: 'odds',
-  sports247: 'recruiting',
+  recruiting: 'recruiting',
   cbs: 'cbs',
   fox: 'fox',
   yahoo_scores: 'yahoo',
@@ -242,15 +242,15 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
     (typeof sdv.odds.oddsApiSportsOddsHistory).should.equal('function');
   });
 
-  it('sports247 family creates the standalone sdv.recruiting namespace (snake + camel)', () => {
+  it('recruiting family creates the standalone sdv.recruiting namespace (snake + camel)', () => {
     // `recruiting` is NOT a league — there is no legacy/ESPN service, so this
     // namespace is created from scratch by the flat merge.
     should(sdv.recruiting).be.an.Object();
-    (typeof sdv.recruiting.sports247_rankings).should.equal('function'); // flat snake
-    (typeof sdv.recruiting.sports247Rankings).should.equal('function'); // flat camel
-    sdv.recruiting.sports247Rankings.should.equal(sdv.recruiting.sports247_rankings);
-    (typeof sdv.recruiting.sports247InstitutionRankings).should.equal('function');
-    (typeof sdv.recruiting.sports247TagsPhotosByType).should.equal('function');
+    (typeof sdv.recruiting.recruiting_rankings).should.equal('function'); // flat snake
+    (typeof sdv.recruiting.recruitingRankings).should.equal('function'); // flat camel
+    sdv.recruiting.recruitingRankings.should.equal(sdv.recruiting.recruiting_rankings);
+    (typeof sdv.recruiting.recruitingInstitutionRankings).should.equal('function');
+    (typeof sdv.recruiting.recruitingTagsPhotosByType).should.equal('function');
   });
 });
 

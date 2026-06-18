@@ -1,5 +1,5 @@
 # One row per team (TeamDto).
-# Columns produced by the sports247 parser's snake_cased, flattened output.
+# Columns produced by the recruiting parser's snake_cased, flattened output.
 schema: teams
 kind: dataframe
 columns:

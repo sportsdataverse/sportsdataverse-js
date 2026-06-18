@@ -1,6 +1,6 @@
-# One row per unranked recruit (NormalizedPlayerRanking shape).
-# Columns produced by the sports247 parser's snake_cased, flattened output.
-schema: unranked_recruits
+# One row per archived player ranking snapshot.
+# Columns produced by the recruiting parser's snake_cased, flattened output.
+schema: archived_player_rankings
 kind: dataframe
 columns:
 - name: ranking_key

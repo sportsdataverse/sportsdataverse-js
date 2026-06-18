@@ -1,6 +1,6 @@
-# One row per ranked player (NormalizedPlayerRanking).
-# Columns produced by the sports247 parser's snake_cased, flattened output.
-schema: player_sport_rankings
+# One row per player among the biggest ranking movers.
+# Columns produced by the recruiting parser's snake_cased, flattened output.
+schema: biggest_movers
 kind: dataframe
 columns:
 - name: ranking_key

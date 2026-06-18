@@ -8191,7 +8191,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   {
     "short": "coaches",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/coaches",
@@ -8216,13 +8216,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 25
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/coaches"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/coaches"
   },
   {
     "short": "rankings_transfer_portal_player_feed",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed",
@@ -8241,13 +8241,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 9
       }
     ],
-    "parser": "parse_sports247_ranking_feed",
-    "returnsSchema": "native/sports247/ranking_feed"
+    "parser": "parse_recruiting_ranking_feed",
+    "returnsSchema": "native/recruiting/ranking_feed"
   },
   {
     "short": "rankings_composite_team_feed",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed",
@@ -8266,13 +8266,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 9
       }
     ],
-    "parser": "parse_sports247_ranking_feed",
-    "returnsSchema": "native/sports247/ranking_feed"
+    "parser": "parse_recruiting_ranking_feed",
+    "returnsSchema": "native/recruiting/ranking_feed"
   },
   {
     "short": "rankings_transfer_portal_team_feed",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed",
@@ -8291,25 +8291,25 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 9
       }
     ],
-    "parser": "parse_sports247_ranking_feed",
-    "returnsSchema": "native/sports247/ranking_feed"
+    "parser": "parse_recruiting_ranking_feed",
+    "returnsSchema": "native/recruiting/ranking_feed"
   },
   {
     "short": "institution_groups",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/institutionGroups",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/institution_groups"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/institution_groups"
   },
   {
     "short": "institution_rankings",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{sport_key}/{year}/institutionrankings",
@@ -8354,13 +8354,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 1
       }
     ],
-    "parser": "parse_sports247_institution_rankings",
-    "returnsSchema": "native/sports247/institution_rankings"
+    "parser": "parse_recruiting_institution_rankings",
+    "returnsSchema": "native/recruiting/institution_rankings"
   },
   {
     "short": "current_target_predictions",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions",
@@ -8387,13 +8387,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 10
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/current_target_predictions"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/current_target_predictions"
   },
   {
     "short": "player_sport_rankings",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/playerSportRankings",
@@ -8436,13 +8436,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "page"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/player_sport_rankings"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/player_sport_rankings"
   },
   {
     "short": "transfer_player_sport_rankings",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/transferPlayerSportRankings",
@@ -8485,13 +8485,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "page"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/transfer_player_sport_rankings"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/transfer_player_sport_rankings"
   },
   {
     "short": "unranked_recruits",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/unrankedRecruits",
@@ -8538,13 +8538,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "page"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/unranked_recruits"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/unranked_recruits"
   },
   {
     "short": "players_under_special_evaluation",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation",
@@ -8554,13 +8554,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/players_under_special_evaluation"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/players_under_special_evaluation"
   },
   {
     "short": "biggest_movers",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{ranking_key}/biggestMovers",
@@ -8576,13 +8576,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 10
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/biggest_movers"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/biggest_movers"
   },
   {
     "short": "positions",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/positions",
@@ -8601,13 +8601,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/positions"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/positions"
   },
   {
     "short": "rankings",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings",
@@ -8630,13 +8630,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "rankingVersion"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/rankings"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/rankings"
   },
   {
     "short": "archived_player_rankings",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/rankings/{ranking_key}/archivedPlayerRankings",
@@ -8657,13 +8657,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 1
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/archived_player_rankings"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/archived_player_rankings"
   },
   {
     "short": "year",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/year",
@@ -8674,13 +8674,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "rankingKey"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/year"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/year"
   },
   {
     "short": "recruits",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/recruits",
@@ -8709,13 +8709,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 25
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/recruits"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/recruits"
   },
   {
     "short": "sports",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/sports",
@@ -8726,13 +8726,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "rankingKey"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/sports"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/sports"
   },
   {
     "short": "sport_years",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/sports/{sport_key}/year",
@@ -8742,13 +8742,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/sport_years"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/sport_years"
   },
   {
     "short": "tags_autocomplete",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/tags/autocomplete",
@@ -8764,13 +8764,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 100
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/tags_autocomplete"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/tags_autocomplete"
   },
   {
     "short": "tags_photos_by_key",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/tags/{prefixed_key}/photos",
@@ -8791,13 +8791,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 25
       }
     ],
-    "parser": "parse_sports247_paged_list",
-    "returnsSchema": "native/sports247/tags_photos"
+    "parser": "parse_recruiting_paged_list",
+    "returnsSchema": "native/recruiting/tags_photos"
   },
   {
     "short": "tags_photos_by_type",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/tags/{type}/{key}/photos",
@@ -8821,13 +8821,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 25
       }
     ],
-    "parser": "parse_sports247_paged_list",
-    "returnsSchema": "native/sports247/tags_photos"
+    "parser": "parse_recruiting_paged_list",
+    "returnsSchema": "native/recruiting/tags_photos"
   },
   {
     "short": "teams",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/teams",
@@ -8846,13 +8846,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "institutionType"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/teams"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/teams"
   },
   {
     "short": "transfers",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/transfers",
@@ -8899,13 +8899,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "page"
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/transfers"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/transfers"
   },
   {
     "short": "unranked_transfers",
     "flat": true,
-    "api": "sports247",
+    "api": "recruiting",
     "host": "https://api.247sports.com",
     "scope": "universal",
     "path": "/rdb/v1/transferrankings/{ranking_key}/unrankedtransfers",
@@ -8933,8 +8933,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 1
       }
     ],
-    "parser": "parse_sports247_list",
-    "returnsSchema": "native/sports247/unranked_transfers"
+    "parser": "parse_recruiting_list",
+    "returnsSchema": "native/recruiting/unranked_transfers"
   },
   {
     "short": "baseball_player_meta",

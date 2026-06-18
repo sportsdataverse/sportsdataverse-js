@@ -9,15 +9,15 @@
 //
 // The RDB surface is shaped three ways:
 //   1. bare top-level JSON arrays (playerSportRankings, biggestMovers, sports,
-//      year, positions, teams, …) — `parse_sports247_list` flattens directly;
+//      year, positions, teams, …) — `parse_recruiting_list` flattens directly;
 //   2. `{ pagination, list: [...] }` paged envelopes (institutionrankings,
-//      tags/.../photos) — `parse_sports247_paged_list` flattens `list[]`,
-//      `parse_sports247_institution_rankings` additionally prefixes the
+//      tags/.../photos) — `parse_recruiting_paged_list` flattens `list[]`,
+//      `parse_recruiting_institution_rankings` additionally prefixes the
 //      `pagination_*` context onto each row;
 //   3. `{ rankings: [ItemDto] }` feed envelopes (the three ranking *feed*
-//      endpoints) — `parse_sports247_ranking_feed` flattens `rankings[]`.
+//      endpoints) — `parse_recruiting_ranking_feed` flattens `rankings[]`.
 //
-// Most endpoints use the generic `parse_sports247_list`; the dedicated parsers
+// Most endpoints use the generic `parse_recruiting_list`; the dedicated parsers
 // cover the envelope shapes that need real unrolling.
 
 import { normalize } from "./_normalize.js";
@@ -29,7 +29,7 @@ function isPlainObject(v: any): boolean {
 
 /**
  * Common top-level array keys in RDB envelope responses, tried in order.
- * `parse_sports247_list` walks these and flattens the first that resolves to a
+ * `parse_recruiting_list` walks these and flattens the first that resolves to a
  * non-empty list of objects. Mirrors the MLB parser's `_LIST_KEYS` approach.
  */
 const LIST_KEYS = ["list", "rankings", "items", "results", "data"];
@@ -41,10 +41,10 @@ const LIST_KEYS = ["list", "rankings", "items", "results", "data"];
  * `rankings`, …). Returns `[]` for empty / unrecognized payloads.
  *
  * Use a dedicated parser for envelopes that need extra context unrolled onto
- * each row (`parse_sports247_institution_rankings`,
- * `parse_sports247_ranking_feed`).
+ * each row (`parse_recruiting_institution_rankings`,
+ * `parse_recruiting_ranking_feed`).
  */
-export function parse_sports247_list(raw: any): Record<string, any>[] {
+export function parse_recruiting_list(raw: any): Record<string, any>[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   for (const key of LIST_KEYS) {
@@ -59,17 +59,17 @@ export function parse_sports247_list(raw: any): Record<string, any>[] {
 /**
  * Parse a `{ pagination, list: [...] }` paged envelope into one row per
  * `list[]` item (the `tags/.../photos` endpoints). The `pagination` block is
- * NOT prefixed — use `parse_sports247_institution_rankings` when you want the
+ * NOT prefixed — use `parse_recruiting_institution_rankings` when you want the
  * pagination context joined onto every row.
  */
-export function parse_sports247_paged_list(raw: any): Record<string, any>[] {
+export function parse_recruiting_paged_list(raw: any): Record<string, any>[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   return normalize(raw.list ?? []);
 }
 
 /**
- * Parse `sports247_institution_rankings()` into one row per institution.
+ * Parse `recruiting_institution_rankings()` into one row per institution.
  *
  * `/rdb/v1/rankings/{sportKey}/{year}/institutionrankings` returns
  * `{ pagination: {...}, list: [InstitutionRankingDto, ...] }`. Each `list[]`
@@ -77,7 +77,7 @@ export function parse_sports247_paged_list(raw: any): Record<string, any>[] {
  * prefixed onto it so a single row carries both the institution standing and
  * its paging context.
  */
-export function parse_sports247_institution_rankings(raw: any): Record<string, any>[] {
+export function parse_recruiting_institution_rankings(raw: any): Record<string, any>[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   const list = raw.list;
@@ -97,7 +97,7 @@ export function parse_sports247_institution_rankings(raw: any): Record<string, a
  * institution). Flattens `rankings[]` directly; returns `[]` when the feed is
  * empty / malformed.
  */
-export function parse_sports247_ranking_feed(raw: any): Record<string, any>[] {
+export function parse_recruiting_ranking_feed(raw: any): Record<string, any>[] {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject(raw)) return [];
   return normalize(raw.rankings ?? []);
@@ -108,9 +108,9 @@ export function parse_sports247_ranking_feed(raw: any): Record<string, any>[] {
  * the parser function name the YAML references. Registered in
  * src/parsers/_registry.ts.
  */
-export const SPORTS247_PARSERS = {
-  parse_sports247_list,
-  parse_sports247_paged_list,
-  parse_sports247_institution_rankings,
-  parse_sports247_ranking_feed,
+export const RECRUITING_PARSERS = {
+  parse_recruiting_list,
+  parse_recruiting_paged_list,
+  parse_recruiting_institution_rankings,
+  parse_recruiting_ranking_feed,
 };

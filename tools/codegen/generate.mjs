@@ -37,7 +37,7 @@ const FLAT_API_FILES = [
   "nhl_records",
   "nfl_api",
   "odds_api",
-  "sports247",
+  "recruiting",
   "cbs",
   "fox",
   "yahoo_scores",
@@ -62,7 +62,7 @@ const FLAT_API_NAMESPACES = {
   nhl_records: "nhl",
   nfl_api: "nfl",
   odds_api: "odds",
-  sports247: "recruiting",
+  recruiting: "recruiting",
   cbs: "cbs",
   fox: "fox",
   yahoo_scores: "yahoo",
@@ -104,7 +104,7 @@ const FLAT_API_META = {
     source: 'the NFL.com "Shield" data API',
   },
   odds_api: { label: "The Odds API", source: "the-odds-api.com" },
-  sports247: {
+  recruiting: {
     label: "247Sports",
     source: "the 247Sports recruiting database",
   },
@@ -137,7 +137,7 @@ const STANDALONE_NS_EXAMPLE = {
     "await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY });\n",
   recruiting:
     "// 247Sports recruiting rankings (pass your own JWT via `headers`):\n" +
-    "await sdv.recruiting.sports247_rankings({\n" +
+    "await sdv.recruiting.recruiting_rankings({\n" +
     "  sport_key: 'football', year: 2025,\n" +
     "  headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },\n" +
     "});\n",
