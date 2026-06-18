@@ -8,8 +8,12 @@
       "prefixes": [
         "mbb",
         "nba",
+        "torvik",
         "wbb",
         "wnba"
+      ],
+      "providers": [
+        "torvik"
       ]
     },
     {
@@ -20,7 +24,8 @@
         "nfl",
         "ufl",
         "xfl"
-      ]
+      ],
+      "providers": []
     },
     {
       "sport": "baseball",
@@ -28,14 +33,19 @@
         "college_baseball",
         "college_softball",
         "mlb"
-      ]
+      ],
+      "providers": []
     },
     {
       "sport": "hockey",
       "prefixes": [
+        "hockeytech",
         "mch",
         "nhl",
         "wch"
+      ],
+      "providers": [
+        "hockeytech"
       ]
     },
     {
@@ -54,13 +64,15 @@
         "uel",
         "wc",
         "wwc"
-      ]
+      ],
+      "providers": []
     },
     {
       "sport": "cricket",
       "prefixes": [
         "cricket"
-      ]
+      ],
+      "providers": []
     }
   ],
   "providers": [
@@ -73,20 +85,12 @@
       "count": 38
     },
     {
-      "ns": "hockeytech",
-      "count": 10
-    },
-    {
       "ns": "odds",
       "count": 10
     },
     {
       "ns": "recruiting",
       "count": 25
-    },
-    {
-      "ns": "torvik",
-      "count": 5
     },
     {
       "ns": "yahoo",

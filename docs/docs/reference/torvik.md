@@ -13,7 +13,7 @@ sidebar_position: 37
 - **families:** BartTorvik (T-Rank)
 - **wrappers:** 5 native
 
-`torvik` is a cross-sport provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.torvik`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
+`torvik` is a Basketball provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.torvik`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
 
 ```js
 import sdv from 'sportsdataverse';

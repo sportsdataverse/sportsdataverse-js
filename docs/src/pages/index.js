@@ -149,23 +149,31 @@ function CoverageSection() {
         <h2 className="text--center">Every league, one mental model</h2>
         <p className="text--center">
           {coverage.leagueCount} ESPN leagues across {sportGroups.length}{' '}
-          sports, plus {providers.length} native provider APIs — each call is a
-          tidy <code>sdv.&lt;league&gt;.*</code> wrapper. Pick a league for its
-          full endpoint table.
+          sports — plus sport-specific providers (BartTorvik, HockeyTech) nested
+          under their sport, and {providers.length} cross-sport provider APIs.
+          Each call is a tidy <code>sdv.&lt;namespace&gt;.*</code> wrapper.
         </p>
         <div className="row">
-          {sportGroups.map(({sport, prefixes}) => (
+          {sportGroups.map(({sport, prefixes, providers: sportProviders = []}) => (
             <div key={sport} className={clsx('col col--4', styles.coverageCol)}>
               <h3 className={styles.coverageHeading}>{sportLabel(sport)}</h3>
               <div className={styles.chipRow}>
-                {prefixes.map((p) => (
-                  <Link
-                    key={p}
-                    className={styles.chip}
-                    to={`/docs/reference/${p}`}>
-                    {p}
-                  </Link>
-                ))}
+                {prefixes.map((p) => {
+                  const isProvider = sportProviders.includes(p);
+                  return (
+                    <Link
+                      key={p}
+                      className={clsx(styles.chip, isProvider && styles.chipProvider)}
+                      to={`/docs/reference/${p}`}
+                      title={
+                        isProvider
+                          ? `${PROVIDER_LABEL[p] || p} — native provider (not an ESPN league)`
+                          : undefined
+                      }>
+                      {p}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           ))}
