@@ -1692,6 +1692,247 @@ function parse_hockeytech_game_summary(payload) {
   return normalize(goals);
 }
 
+// src/parsers/torvik.ts
+var import_papaparse2 = __toESM(require_papaparse_min(), 1);
+function cleanHeader(key) {
+  return String(key).replace(/%/g, "_percent").replace(/#/g, "_number").replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/[^A-Za-z0-9]+/g, "_").replace(/__+/g, "_").replace(/^_+|_+$/g, "").toLowerCase();
+}
+function cleanKeys(row) {
+  const out = {};
+  for (const [k, v] of Object.entries(row)) out[cleanHeader(k)] = v;
+  return out;
+}
+function parseHeaderCsv(text) {
+  if (typeof text !== "string" || !text.trim()) return [];
+  let parsed;
+  try {
+    parsed = import_papaparse2.default.parse(text, {
+      header: true,
+      dynamicTyping: false,
+      skipEmptyLines: true
+    });
+  } catch {
+    return [];
+  }
+  const data = parsed?.data;
+  if (!Array.isArray(data) || data.length === 0) return [];
+  return data.map((row) => cleanKeys(row));
+}
+function parsePositionalCsv(text, cols) {
+  if (typeof text !== "string" || !text.trim()) return [];
+  let parsed;
+  try {
+    parsed = import_papaparse2.default.parse(text, {
+      header: false,
+      dynamicTyping: false,
+      skipEmptyLines: true
+    });
+  } catch {
+    return [];
+  }
+  const data = parsed?.data;
+  if (!Array.isArray(data) || data.length === 0) return [];
+  return data.map((arr) => positionalRow(Array.isArray(arr) ? arr : [], cols));
+}
+function positionalRow(arr, cols) {
+  const out = {};
+  const n = Math.max(arr.length, cols.length);
+  for (let i = 0; i < n; i++) {
+    const name = i < cols.length ? cols[i] : `field_${i}`;
+    let v = i < arr.length ? arr[i] : null;
+    if (Array.isArray(v)) v = v.map((x) => x === null || x === void 0 ? "" : x).join(";");
+    out[name] = v;
+  }
+  return out;
+}
+function parsePositionalJson(input, cols) {
+  let rows = input;
+  if (typeof input === "string") {
+    if (!input.trim()) return [];
+    try {
+      rows = JSON.parse(input);
+    } catch {
+      return [];
+    }
+  }
+  if (!Array.isArray(rows) || rows.length === 0) return [];
+  return rows.map((arr) => positionalRow(Array.isArray(arr) ? arr : [], cols));
+}
+var GAME_STATS_COLS = [
+  "date",
+  "type",
+  "team",
+  "conf",
+  "opp",
+  "venue",
+  "result",
+  "adj_oe",
+  "adj_de",
+  "oe",
+  "off_efg",
+  "off_to",
+  "off_or",
+  "off_ftr",
+  "de",
+  "def_efg",
+  "def_to",
+  "def_or",
+  "def_ftr",
+  "game_score",
+  "opp_conf",
+  "quad",
+  "year",
+  "tempo",
+  "muid",
+  "coach",
+  "opp_coach",
+  "margin",
+  "win_prob",
+  "game_stats",
+  "overtimes"
+];
+var PLAYER_STATS_COLS = [
+  "player_name",
+  "team",
+  "conf",
+  "games",
+  "min_pct",
+  "o_rtg",
+  "usage",
+  "e_fg",
+  "ts_pct",
+  "orb_pct",
+  "drb_pct",
+  "ast_pct",
+  "to_pct",
+  "ftm",
+  "fta",
+  "ft_pct",
+  "two_pm",
+  "two_pa",
+  "two_p_pct",
+  "three_pm",
+  "three_pa",
+  "three_p_pct",
+  "blk_pct",
+  "stl_pct",
+  "ftr",
+  "class",
+  "height",
+  "number",
+  "porpag",
+  "adj_oe",
+  "pfr",
+  "year",
+  "player_id",
+  "hometown",
+  "rec_rank",
+  "ast_to",
+  "rim_made",
+  "rim_attempts",
+  "mid_made",
+  "mid_attempts",
+  "rim_pct",
+  "mid_pct",
+  "dunks_made",
+  "dunks_attempts",
+  "dunks_pct",
+  "pick",
+  "drtg",
+  "adrtg",
+  "dporpag",
+  "stops",
+  "bpm",
+  "obpm",
+  "dbpm",
+  "gbpm",
+  "minutes",
+  "ogbpm",
+  "dgbpm",
+  "oreb",
+  "dreb",
+  "treb",
+  "ast",
+  "stl",
+  "blk",
+  "pts",
+  "role",
+  "threat",
+  "recruit_date"
+];
+var GAME_SCHEDULE_COLS = [
+  "muid",
+  "date",
+  "conmatch",
+  "matchup",
+  "prediction",
+  "ttq",
+  "conf",
+  "venue",
+  "team1",
+  "t1oe",
+  "t1de",
+  "t1py",
+  "t1wp",
+  "t1propt",
+  "team2",
+  "t2oe",
+  "t2de",
+  "t2py",
+  "t2wp",
+  "t2propt",
+  "tpro",
+  "t1qual",
+  "t2qual",
+  "gp",
+  "result",
+  "tempo",
+  "possessions",
+  "t1pts",
+  "t2pts",
+  "winner",
+  "loser",
+  "t1adjt",
+  "t2adjt",
+  "t1adjo",
+  "t1adjd",
+  "t2adjo",
+  "t2adjd",
+  "gamevalue",
+  "mismatch",
+  "blowout",
+  "t1elite",
+  "t2elite",
+  "ord_date",
+  "t1ppp",
+  "t2ppp",
+  "gameppp",
+  "t1rk",
+  "t2rk",
+  "t1gs",
+  "t2gs",
+  "gamestats",
+  "overtimes",
+  "t1fun",
+  "t2fun",
+  "results"
+];
+function parse_torvik_ratings(text) {
+  return parseHeaderCsv(text);
+}
+function parse_torvik_team_factors(text) {
+  return parseHeaderCsv(text);
+}
+function parse_torvik_game_stats(input) {
+  return parsePositionalJson(input, GAME_STATS_COLS);
+}
+function parse_torvik_player_stats(text) {
+  return parsePositionalCsv(text, PLAYER_STATS_COLS);
+}
+function parse_torvik_game_schedule(input) {
+  return parsePositionalJson(input, GAME_SCHEDULE_COLS);
+}
+
 // src/parsers/_registry.ts
 var PARSERS = {
   // ---- MLB Stats API ----
@@ -1814,7 +2055,15 @@ var PARSERS = {
   parse_hockeytech_standings,
   parse_hockeytech_leaders,
   parse_hockeytech_pbp,
-  parse_hockeytech_game_summary
+  parse_hockeytech_game_summary,
+  // ---- BartTorvik / T-Rank (barttorvik.com) ----
+  // Two header-CSV parsers, one headerless-CSV (67 positional cols), two
+  // headerless-JSON (31 / 55 positional cols).
+  parse_torvik_ratings,
+  parse_torvik_team_factors,
+  parse_torvik_game_stats,
+  parse_torvik_player_stats,
+  parse_torvik_game_schedule
 };
 function parserFor(name) {
   return name ? PARSERS[name] : void 0;

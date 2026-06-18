@@ -1,0 +1,96 @@
+schema: game_stats
+kind: dataframe
+columns:
+- name: date
+  type: character
+  description: 'Game date (M/D/YY).'
+- name: type
+  type: integer
+  description: ''
+- name: team
+  type: character
+  description: 'Team name.'
+- name: conf
+  type: character
+  description: ''
+- name: opp
+  type: character
+  description: 'Opponent.'
+- name: venue
+  type: character
+  description: 'Venue (H/A/N).'
+- name: result
+  type: character
+  description: 'Result string.'
+- name: adj_oe
+  type: numeric
+  description: 'Adjusted offensive efficiency.'
+- name: adj_de
+  type: numeric
+  description: 'Adjusted defensive efficiency.'
+- name: oe
+  type: numeric
+  description: ''
+- name: off_efg
+  type: numeric
+  description: ''
+- name: off_to
+  type: numeric
+  description: ''
+- name: off_or
+  type: numeric
+  description: ''
+- name: off_ftr
+  type: numeric
+  description: ''
+- name: de
+  type: numeric
+  description: ''
+- name: def_efg
+  type: numeric
+  description: ''
+- name: def_to
+  type: numeric
+  description: ''
+- name: def_or
+  type: numeric
+  description: ''
+- name: def_ftr
+  type: numeric
+  description: ''
+- name: game_score
+  type: numeric
+  description: ''
+- name: opp_conf
+  type: character
+  description: ''
+- name: quad
+  type: integer
+  description: ''
+- name: year
+  type: integer
+  description: 'Season (4-digit ending-year).'
+- name: tempo
+  type: numeric
+  description: ''
+- name: muid
+  type: character
+  description: ''
+- name: coach
+  type: character
+  description: ''
+- name: opp_coach
+  type: character
+  description: ''
+- name: margin
+  type: numeric
+  description: ''
+- name: win_prob
+  type: numeric
+  description: 'Pre-game win probability.'
+- name: game_stats
+  type: character
+  description: 'Nested per-game stat array (;-joined).'
+- name: overtimes
+  type: integer
+  description: ''

@@ -59,6 +59,7 @@ Cross-sport providers that aren't tied to a single ESPN league. They get their o
 | [fox](./fox) | Fox Sports | 38 |
 | [yahoo](./yahoo) | Yahoo Sports (editorial), Yahoo Sports (shangrila) | 107 |
 | [hockeytech](./hockeytech) | HockeyTech / LeagueStat | 10 |
+| [torvik](./torvik) | BartTorvik (T-Rank) | 5 |
 
 :::tip Same call, every league
 ```js

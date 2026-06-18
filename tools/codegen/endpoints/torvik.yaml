@@ -1,0 +1,61 @@
+# Flat (non-ESPN) API family: BartTorvik / T-Rank (barttorvik.com) — public
+# men's college basketball analytics. Standalone `torvik` namespace (NOT an ESPN
+# league). No auth, but barttorvik.com rejects default programmatic User-Agents,
+# so the family's getter (src/core/torvik_runtime.ts, registered in
+# GETTER_OVERRIDES) sets a browser UA and returns the raw response body text;
+# each parser then handles its own format (CSV via papaparse, or headerless JSON
+# positional arrays).
+#
+# Only the five clean, self-describing data files are wrapped (the interactive
+# `.php` / `.cgi` pages sit behind a JavaScript browser check and are
+# intentionally not used). Two return CSV WITH a header row; two return
+# headerless JSON arrays whose positional column names are hardcoded in the
+# parser; one returns a headerless CSV whose positional names are hardcoded.
+# `year` is the 4-digit season ending-year (e.g. 2024 = the 2023-24 season).
+#
+# Ported from hoopR's torvik_*.R (R/torvik_ratings.R, torvik_team_factors.R,
+# torvik_game_stats.R, torvik_player_stats.R, torvik_game_schedule.R +
+# torvik_utils.R) — the positional column arrays are carried over verbatim.
+api: torvik
+host: https://barttorvik.com
+name_pattern: torvik_{short}
+endpoints:
+  - short: ratings
+    # {year}_team_results.csv — CSV WITH header; one row per team (T-Rank).
+    path: /{year}_team_results.csv
+    path_params:
+      - { name: year, type: int, required: true }
+    parser: parse_torvik_ratings
+    returns_schema: native/torvik/ratings
+  - short: team_factors
+    # {year}_fffinal.csv — CSV WITH header; one row per team (four factors).
+    path: /{year}_fffinal.csv
+    path_params:
+      - { name: year, type: int, required: true }
+    parser: parse_torvik_team_factors
+    returns_schema: native/torvik/team_factors
+  - short: game_stats
+    # getgamestats.php?year=&json=1 — headerless JSON, 31 positional fields.
+    path: /getgamestats.php
+    path_params: []
+    extra_params:
+      - { name: year, query_key: year }
+      - { name: json, query_key: json, default: 1 }
+    parser: parse_torvik_game_stats
+    returns_schema: native/torvik/game_stats
+  - short: player_stats
+    # getadvstats.php?year=&csv=1 — headerless CSV, 67 positional fields.
+    path: /getadvstats.php
+    path_params: []
+    extra_params:
+      - { name: year, query_key: year }
+      - { name: csv, query_key: csv, default: 1 }
+    parser: parse_torvik_player_stats
+    returns_schema: native/torvik/player_stats
+  - short: game_schedule
+    # {year}_super_sked.json — headerless JSON, 55 positional fields.
+    path: /{year}_super_sked.json
+    path_params:
+      - { name: year, type: int, required: true }
+    parser: parse_torvik_game_schedule
+    returns_schema: native/torvik/game_schedule

@@ -71,6 +71,10 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // call-param selects it. Responses are JSONP (stripped by the family's
   // content-type-aware getter), so it is NOT a plain-JSON passthrough.
   hockeytech: 'hockeytech',
+  // BartTorvik / T-Rank — standalone provider family. `torvik` is a cross-sport
+  // namespace; the merge creates `sdv.torvik.*` from scratch. Keyless but needs
+  // a browser User-Agent (set by the family's getter); endpoints mix CSV/JSON.
+  torvik: 'torvik',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

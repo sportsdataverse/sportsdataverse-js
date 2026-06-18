@@ -17391,5 +17391,97 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_hockeytech_game_summary",
     "returnsSchema": "native/hockeytech/game_summary"
+  },
+  {
+    "short": "ratings",
+    "flat": true,
+    "api": "torvik",
+    "host": "https://barttorvik.com",
+    "scope": "universal",
+    "path": "/{year}_team_results.csv",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_torvik_ratings",
+    "returnsSchema": "native/torvik/ratings"
+  },
+  {
+    "short": "team_factors",
+    "flat": true,
+    "api": "torvik",
+    "host": "https://barttorvik.com",
+    "scope": "universal",
+    "path": "/{year}_fffinal.csv",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_torvik_team_factors",
+    "returnsSchema": "native/torvik/team_factors"
+  },
+  {
+    "short": "game_stats",
+    "flat": true,
+    "api": "torvik",
+    "host": "https://barttorvik.com",
+    "scope": "universal",
+    "path": "/getgamestats.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "json",
+        "queryKey": "json",
+        "default": 1
+      }
+    ],
+    "parser": "parse_torvik_game_stats",
+    "returnsSchema": "native/torvik/game_stats"
+  },
+  {
+    "short": "player_stats",
+    "flat": true,
+    "api": "torvik",
+    "host": "https://barttorvik.com",
+    "scope": "universal",
+    "path": "/getadvstats.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "csv",
+        "queryKey": "csv",
+        "default": 1
+      }
+    ],
+    "parser": "parse_torvik_player_stats",
+    "returnsSchema": "native/torvik/player_stats"
+  },
+  {
+    "short": "game_schedule",
+    "flat": true,
+    "api": "torvik",
+    "host": "https://barttorvik.com",
+    "scope": "universal",
+    "path": "/{year}_super_sked.json",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_torvik_game_schedule",
+    "returnsSchema": "native/torvik/game_schedule"
   }
 ];

@@ -1,0 +1,93 @@
+schema: team_factors
+kind: dataframe
+columns:
+- name: team_name
+  type: character
+  description: 'Team name.'
+- name: e_fg_percent
+  type: numeric
+  description: 'Effective FG% (offense).'
+- name: rk
+  type: integer
+  description: ''
+- name: e_fg_percent_def
+  type: numeric
+  description: 'Effective FG% allowed (defense).'
+- name: rk_1
+  type: integer
+  description: ''
+- name: ftr
+  type: numeric
+  description: 'Free-throw rate (offense).'
+- name: rk_2
+  type: integer
+  description: ''
+- name: ftr_def
+  type: numeric
+  description: 'Free-throw rate allowed (defense).'
+- name: rk_3
+  type: integer
+  description: ''
+- name: or_percent
+  type: numeric
+  description: 'Offensive rebound %.'
+- name: rk_4
+  type: integer
+  description: ''
+- name: dr_percent
+  type: numeric
+  description: 'Defensive rebound %.'
+- name: rk_5
+  type: integer
+  description: ''
+- name: to_percent
+  type: numeric
+  description: 'Turnover % (offense).'
+- name: rk_6
+  type: integer
+  description: ''
+- name: to_percent_def
+  type: numeric
+  description: 'Turnover % forced (defense).'
+- name: rk_7
+  type: integer
+  description: ''
+- name: 3_p_percent
+  type: numeric
+  description: ''
+- name: 3p_d_percent
+  type: numeric
+  description: ''
+- name: 2p_percent
+  type: numeric
+  description: ''
+- name: 2p_percent_d
+  type: numeric
+  description: ''
+- name: ft_percent
+  type: numeric
+  description: ''
+- name: ft_percent_d
+  type: numeric
+  description: ''
+- name: 3_p_rate
+  type: numeric
+  description: ''
+- name: 3_p_rate_d
+  type: numeric
+  description: ''
+- name: arate
+  type: numeric
+  description: ''
+- name: rk_8
+  type: integer
+  description: ''
+- name: arate_d
+  type: numeric
+  description: ''
+- name: rk_9
+  type: integer
+  description: ''
+- name: parsed_extra
+  type: character
+  description: ''

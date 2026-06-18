@@ -4,6 +4,7 @@ import { toCamel } from "../core/espn.js";
 import { nflHeadersGen } from "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
+import { torvikGet } from "../core/torvik_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
@@ -39,6 +40,10 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   // the league registry — so this getter assembles the real URL from the
   // resolved query params, fetches, and strips the JSONP wrapper before parsing.
   hockeytech: hockeytechGet,
+  // BartTorvik rejects default programmatic User-Agents and serves a mix of CSV
+  // and JSON (one JSON endpoint even with a text/html content-type), so this
+  // getter sets a browser UA and returns the raw body text for the parser.
+  torvik: torvikGet,
 };
 
 /**

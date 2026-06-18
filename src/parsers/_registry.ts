@@ -124,6 +124,13 @@ import {
   parse_hockeytech_pbp,
   parse_hockeytech_game_summary,
 } from "./hockeytech.js";
+import {
+  parse_torvik_ratings,
+  parse_torvik_team_factors,
+  parse_torvik_game_stats,
+  parse_torvik_player_stats,
+  parse_torvik_game_schedule,
+} from "./torvik.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -251,6 +258,14 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_hockeytech_leaders,
   parse_hockeytech_pbp,
   parse_hockeytech_game_summary,
+  // ---- BartTorvik / T-Rank (barttorvik.com) ----
+  // Two header-CSV parsers, one headerless-CSV (67 positional cols), two
+  // headerless-JSON (31 / 55 positional cols).
+  parse_torvik_ratings,
+  parse_torvik_team_factors,
+  parse_torvik_game_stats,
+  parse_torvik_player_stats,
+  parse_torvik_game_schedule,
 };
 
 /**

@@ -71,6 +71,12 @@ export const FLAT_HOSTS: Record<string, string> = {
   // per-league. Responses are JSONP, so this family registers that getter in
   // GETTER_OVERRIDES (src/leagues/_make_flat.ts) instead of the shared `get`.
   hockeytech: "https://lscluster.hockeytech.com",
+  // BartTorvik / T-Rank — standalone `torvik` namespace (sdv.torvik.*) for
+  // men's college basketball analytics. Keyless, but barttorvik.com rejects
+  // default programmatic User-Agents, so the family's getter
+  // (src/core/torvik_runtime.ts) sets a browser UA + returns the raw body text
+  // (the endpoints mix CSV / JSON) — registered in GETTER_OVERRIDES.
+  torvik: "https://barttorvik.com",
 };
 
 const client = axios.create({

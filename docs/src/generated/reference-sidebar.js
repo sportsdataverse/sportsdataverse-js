@@ -238,6 +238,11 @@ module.exports = [
       },
       {
         "type": "doc",
+        "id": "reference/torvik",
+        "label": "torvik"
+      },
+      {
+        "type": "doc",
         "id": "reference/yahoo",
         "label": "yahoo"
       }

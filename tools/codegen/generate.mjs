@@ -43,6 +43,7 @@ const FLAT_API_FILES = [
   "yahoo_editorial",
   "yahoo_shangrila",
   "hockeytech",
+  "torvik",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
