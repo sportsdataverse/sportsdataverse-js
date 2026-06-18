@@ -23,7 +23,18 @@ module.exports = {
     [
       'docusaurus-plugin-typedoc',
       {
-        entryPoints: ['../src/index.ts'],
+        // The package entry, plus the four WRITTEN basketball ESPN modules
+        // (phased proof) so TypeDoc documents the real per-function wrappers
+        // from their JSDoc — the "both engines" requirement (codegen Markdown
+        // reference + TypeDoc API docs). The other leagues are runtime-
+        // materialized (no static source to document), so they aren't listed.
+        entryPoints: [
+          '../src/index.ts',
+          '../src/generated/espn/nba.ts',
+          '../src/generated/espn/wnba.ts',
+          '../src/generated/espn/mbb.ts',
+          '../src/generated/espn/wbb.ts',
+        ],
         tsconfig: '../tsconfig.json',
         out: 'docs/api',
         readme: 'none',

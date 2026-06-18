@@ -19,8 +19,8 @@ NBA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
-| season | `season` | no | query parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
+| `season` | `season` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_athlete_gamelog`):
@@ -55,7 +55,7 @@ NBA — athlete overview (ESPN site.web.api.espn.com (web v3)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_athlete_overview`):
@@ -87,8 +87,8 @@ NBA — athlete splits (ESPN site.web.api.espn.com (web v3)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
-| season | `season` | no | query parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
+| `season` | `season` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_athlete_splits`):
@@ -117,8 +117,8 @@ NBA — athlete stats (ESPN site.web.api.espn.com (web v3)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
-| season | `season` | no | query parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
+| `season` | `season` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_athlete_stats`):
@@ -145,12 +145,12 @@ NBA — leaders (ESPN site.web.api.espn.com (web v3)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| category | `category` | no | query parameter |
-| season | `season` | no | query parameter |
-| seasontype | `season_type` | no | query parameter |
-| limit | `limit` | no | query parameter (default `50`) |
-| page | `page` | no | query parameter (default `1`) |
-| sort | `sort` | no | query parameter |
+| `category` | `category` | no | query parameter |
+| `season` | `season` | no | query parameter |
+| `seasontype` | `season_type` | no | query parameter |
+| `limit` | `limit` | no | query parameter (default `50`) |
+| `page` | `page` | no | query parameter (default `1`) |
+| `sort` | `sort` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_leaders`):

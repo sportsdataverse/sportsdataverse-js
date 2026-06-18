@@ -42,8 +42,8 @@ WBB — season recruits (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `100`) |
+| `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `100`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -67,9 +67,9 @@ WBB — season week rankings (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
-| {week} | `week` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

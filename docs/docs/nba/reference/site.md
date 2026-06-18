@@ -19,7 +19,7 @@ NBA — athlete bio (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -39,7 +39,7 @@ NBA — athlete info (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -59,7 +59,7 @@ NBA — athlete news (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_news`):
@@ -189,7 +189,7 @@ NBA — news (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| limit | `limit` | no | query parameter (default `50`) |
+| `limit` | `limit` | no | query parameter (default `50`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_news`):
@@ -229,11 +229,11 @@ NBA — scoreboard (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| dates | `dates` | no | query parameter |
-| week | `week` | no | query parameter |
-| seasontype | `season_type` | no | query parameter |
-| groups | `groups` | no | query parameter |
-| limit | `limit` | no | query parameter (default `500`) |
+| `dates` | `dates` | no | query parameter |
+| `week` | `week` | no | query parameter |
+| `seasontype` | `season_type` | no | query parameter |
+| `groups` | `groups` | no | query parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_scoreboard`):
@@ -306,9 +306,9 @@ NBA — standings (ESPN site.api.espn.com (v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| season | `season` | no | query parameter |
-| group | `group` | no | query parameter |
-| type | `standings_type` | no | query parameter |
+| `season` | `season` | no | query parameter |
+| `group` | `group` | no | query parameter |
+| `type` | `standings_type` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_standings`):
@@ -385,7 +385,7 @@ NBA — summary (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| event | `event_id` | no | query parameter |
+| `event` | `event_id` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the `summary` dispatcher returns an object of 21 sub-frames keyed by section (`{ parsed: true, section: '<name>' }` for one); see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -405,7 +405,7 @@ NBA — team (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -425,7 +425,7 @@ NBA — team depthcharts (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -449,7 +449,7 @@ NBA — team history (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -473,7 +473,7 @@ NBA — team injuries (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_injuries`):
@@ -499,7 +499,7 @@ NBA — team leaders (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -523,8 +523,8 @@ NBA — team news (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `50`) |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `50`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_news`):
@@ -564,7 +564,7 @@ NBA — team record (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -588,7 +588,7 @@ NBA — team roster (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_team_roster`):
@@ -679,8 +679,8 @@ NBA — team schedule (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
-| season | `season` | no | query parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `season` | `season` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_team_schedule`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -700,7 +700,7 @@ NBA — team transactions (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -724,7 +724,7 @@ NBA — teams site (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| limit | `limit` | no | query parameter (default `1000`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_teams`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).

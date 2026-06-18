@@ -19,7 +19,7 @@ WBB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -43,8 +43,8 @@ WBB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
-| {stat_type} | `stat_type` | no | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
+| `{stat_type}` | `stat_type` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -68,7 +68,7 @@ WBB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -92,7 +92,7 @@ WBB — athlete core (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -112,7 +112,7 @@ WBB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -136,7 +136,7 @@ WBB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_injuries`):
@@ -162,7 +162,7 @@ WBB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -186,7 +186,7 @@ WBB — athlete records (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -210,7 +210,7 @@ WBB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -234,7 +234,7 @@ WBB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -258,8 +258,8 @@ WBB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {athlete_id} | `athlete_id` | yes | path parameter |
-| {opp_id} | `opp_id` | yes | path parameter |
+| `{athlete_id}` | `athlete_id` | yes | path parameter |
+| `{opp_id}` | `opp_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -279,9 +279,9 @@ WBB — athletes index (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| active | `active` | no | query parameter (default `true`) |
-| limit | `limit` | no | query parameter (default `100`) |
-| page | `page` | no | query parameter (default `1`) |
+| `active` | `active` | no | query parameter (default `true`) |
+| `limit` | `limit` | no | query parameter (default `100`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -305,7 +305,7 @@ WBB — award (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {award_id} | `award_id` | yes | path parameter |
+| `{award_id}` | `award_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -348,7 +348,7 @@ WBB — coach (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {coach_id} | `coach_id` | yes | path parameter |
+| `{coach_id}` | `coach_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -368,8 +368,8 @@ WBB — coach record (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {coach_id} | `coach_id` | yes | path parameter |
-| {record_type} | `record_type` | no | path parameter |
+| `{coach_id}` | `coach_id` | yes | path parameter |
+| `{record_type}` | `record_type` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -389,8 +389,8 @@ WBB — coach season (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {coach_id} | `coach_id` | yes | path parameter |
-| {season} | `season` | yes | path parameter |
+| `{coach_id}` | `coach_id` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -410,7 +410,7 @@ WBB — event (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -430,8 +430,8 @@ WBB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -455,8 +455,8 @@ WBB — event competition (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -476,9 +476,9 @@ WBB — event competitor (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -498,9 +498,9 @@ WBB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -524,9 +524,9 @@ WBB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_event_competitor_linescores`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -546,9 +546,9 @@ WBB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -568,9 +568,9 @@ WBB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_event_competitor_roster`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -590,9 +590,9 @@ WBB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_event_competitor_statistics`):
@@ -622,8 +622,8 @@ WBB — event competitors (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -647,8 +647,8 @@ WBB — event leaders (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -672,8 +672,8 @@ WBB — event odds (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -697,9 +697,9 @@ WBB — event official detail (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {official_id} | `official_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{official_id}` | `official_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -719,8 +719,8 @@ WBB — event officials (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -744,9 +744,9 @@ WBB — event play (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {play_id} | `play_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{play_id}` | `play_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -766,9 +766,9 @@ WBB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {play_id} | `play_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{play_id}` | `play_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -792,9 +792,9 @@ WBB — event plays (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
-| limit | `limit` | no | query parameter (default `1000`) |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
+| `limit` | `limit` | no | query parameter (default `1000`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_event_plays`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -814,8 +814,8 @@ WBB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -835,8 +835,8 @@ WBB — event predictor (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -856,9 +856,9 @@ WBB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
-| limit | `limit` | no | query parameter (default `300`) |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
+| `limit` | `limit` | no | query parameter (default `300`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -882,8 +882,8 @@ WBB — event propbets (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -907,8 +907,8 @@ WBB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -932,8 +932,8 @@ WBB — event situation (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -953,8 +953,8 @@ WBB — event status (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {event_id} | `event_id` | yes | path parameter |
-| {cid} | `cid` | no | path parameter |
+| `{event_id}` | `event_id` | yes | path parameter |
+| `{cid}` | `cid` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -974,8 +974,8 @@ WBB — events (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| dates | `dates` | no | query parameter |
-| limit | `limit` | no | query parameter (default `500`) |
+| `dates` | `dates` | no | query parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -999,7 +999,7 @@ WBB — franchise (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {franchise_id} | `franchise_id` | yes | path parameter |
+| `{franchise_id}` | `franchise_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1019,7 +1019,7 @@ WBB — franchises (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| limit | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1108,7 +1108,7 @@ WBB — position (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {position_id} | `position_id` | yes | path parameter |
+| `{position_id}` | `position_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1151,9 +1151,9 @@ WBB — season athletes (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `100`) |
-| page | `page` | no | query parameter (default `1`) |
+| `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `100`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1177,7 +1177,7 @@ WBB — season awards (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1201,8 +1201,8 @@ WBB — season coaches (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `200`) |
+| `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_coaches`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1222,7 +1222,7 @@ WBB — season draft (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_draft`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1242,8 +1242,8 @@ WBB — season draft round picks (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {round_num} | `round_num` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{round_num}` | `round_num` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1267,7 +1267,7 @@ WBB — season freeagents (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1291,7 +1291,7 @@ WBB — season futures (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1315,9 +1315,9 @@ WBB — season group (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
-| {group_id} | `group_id` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{group_id}` | `group_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1337,9 +1337,9 @@ WBB — season group children (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
-| {group_id} | `group_id` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{group_id}` | `group_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1363,10 +1363,10 @@ WBB — season group teams (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
-| {group_id} | `group_id` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `500`) |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{group_id}` | `group_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1390,8 +1390,8 @@ WBB — season groups (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1415,7 +1415,7 @@ WBB — season info (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1454,8 +1454,8 @@ WBB — season powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {team_id} | `team_id` | no | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{team_id}` | `team_id` | no | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1479,7 +1479,7 @@ WBB — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1503,8 +1503,8 @@ WBB — season team (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {team_id} | `team_id` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1524,8 +1524,8 @@ WBB — season teams (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `500`) |
+| `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1549,8 +1549,8 @@ WBB — season type (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1570,8 +1570,8 @@ WBB — season type corrections (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1595,8 +1595,8 @@ WBB — season type leaders (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1620,7 +1620,7 @@ WBB — season types (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1644,9 +1644,9 @@ WBB — season week (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
-| {week} | `week` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1666,10 +1666,10 @@ WBB — season week events (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
-| {week} | `week` | yes | path parameter |
-| limit | `limit` | no | query parameter (default `500`) |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1693,8 +1693,8 @@ WBB — season weeks (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {season} | `season` | yes | path parameter |
-| {season_type} | `season_type` | yes | path parameter |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1718,7 +1718,7 @@ WBB — seasons (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| limit | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1818,7 +1818,7 @@ WBB — team core (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {team_id} | `team_id` | yes | path parameter |
+| `{team_id}` | `team_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1838,7 +1838,7 @@ WBB — teams core (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| limit | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_teams`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1881,7 +1881,7 @@ WBB — venue (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| {venue_id} | `venue_id` | yes | path parameter |
+| `{venue_id}` | `venue_id` | yes | path parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_single_entity`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1901,7 +1901,7 @@ WBB — venues (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| limit | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
