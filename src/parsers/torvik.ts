@@ -36,10 +36,28 @@ function cleanHeader(key: string): string {
     .toLowerCase();
 }
 
-/** Clean every key of a row object (the tidy column transform). */
+/**
+ * Clean every key of a row object (the tidy column transform). If two distinct
+ * source headers normalize to the same snake_case key, the later ones are
+ * suffixed `_2`, `_3`, … so no column is silently dropped — matching
+ * `janitor::clean_names`' de-duplication (and PapaParse's own `Rk` -> `Rk_1`).
+ */
 function cleanKeys(row: Record<string, any>): Record<string, any> {
   const out: Record<string, any> = {};
-  for (const [k, v] of Object.entries(row)) out[cleanHeader(k)] = v;
+  const counts = new Map<string, number>();
+  for (const [k, v] of Object.entries(row)) {
+    const base = cleanHeader(k);
+    let key = base;
+    if (counts.has(base)) {
+      let n = (counts.get(base) as number) + 1;
+      while (`${base}_${n}` in out) n++;
+      key = `${base}_${n}`;
+      counts.set(base, n);
+    } else {
+      counts.set(base, 1);
+    }
+    out[key] = v;
+  }
   return out;
 }
 
@@ -69,7 +87,8 @@ function parseHeaderCsv(text: any): Record<string, any>[] {
 /**
  * Parse headerless CSV text by applying a fixed positional column-name array.
  * Rows with more cells than names keep the extras under `field_<n>`; rows with
- * fewer leave the trailing names absent. Empty input returns `[]`.
+ * fewer cells than names still emit every column name, with the missing trailing
+ * values set to `null`. Empty input returns `[]`.
  */
 function parsePositionalCsv(text: any, cols: string[]): Record<string, any>[] {
   if (typeof text !== "string" || !text.trim()) return [];
