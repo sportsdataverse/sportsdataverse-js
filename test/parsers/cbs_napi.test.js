@@ -1,10 +1,10 @@
 import should from 'should';
 import {
-  parse_cbs_napi_list,
-  parse_cbs_napi_scoreboard,
-  parse_cbs_napi_standings,
-  parse_cbs_napi_odds,
-} from '../../dist/parsers/cbs_napi.js';
+  parse_cbs_list,
+  parse_cbs_scoreboard,
+  parse_cbs_standings,
+  parse_cbs_odds,
+} from '../../dist/parsers/cbs.js';
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
 import { FLAT_WRAPPERS } from '../../dist/index.js';
 import { FLAT_HOSTS } from '../../dist/core/client.js';
@@ -15,7 +15,7 @@ import { FLAT_HOSTS } from '../../dist/core/client.js';
 // / odds unrolling), and a flat-contract metadata block asserting the family
 // registers correctly on the CBS host with no auth.
 
-describe('parsers/cbs_napi: parse_cbs_napi_list (generic flattener)', () => {
+describe('parsers/cbs: parse_cbs_list (generic flattener)', () => {
   it('unwraps the {data} envelope around a bare list', () => {
     const raw = {
       data: [
@@ -23,7 +23,7 @@ describe('parsers/cbs_napi: parse_cbs_napi_list (generic flattener)', () => {
         { playerId: 2, firstName: 'Jane', lastName: 'Roe', batsHand: 'L' },
       ],
     };
-    const rows = parse_cbs_napi_list(raw);
+    const rows = parse_cbs_list(raw);
     rows.length.should.equal(2);
     rows[0].should.have.property('player_id', 1); // playerId -> player_id
     rows[0].should.have.property('first_name', 'John');
@@ -31,40 +31,40 @@ describe('parsers/cbs_napi: parse_cbs_napi_list (generic flattener)', () => {
   });
 
   it('finds the first inner list under a known list key', () => {
-    parse_cbs_napi_list({ data: { rows: [{ teamId: 7, name: 'A' }] } })[0].should.have.property(
+    parse_cbs_list({ data: { rows: [{ teamId: 7, name: 'A' }] } })[0].should.have.property(
       'team_id',
       7
     );
-    parse_cbs_napi_list({ data: { items: [{ id: 'x' }] } })[0].should.have.property('id', 'x');
+    parse_cbs_list({ data: { items: [{ id: 'x' }] } })[0].should.have.property('id', 'x');
   });
 
   it('falls back to the first array-of-objects own property', () => {
-    const rows = parse_cbs_napi_list({ data: { players: [{ jerseyNo: 12 }] } });
+    const rows = parse_cbs_list({ data: { players: [{ jerseyNo: 12 }] } });
     rows[0].should.have.property('jersey_no', 12);
   });
 
   it('emits a single resource object (no inner list) as one row', () => {
-    const rows = parse_cbs_napi_list({ data: { teamId: 5, location: { city: 'Boston' } } });
+    const rows = parse_cbs_list({ data: { teamId: 5, location: { city: 'Boston' } } });
     rows.length.should.equal(1);
     rows[0].should.have.property('team_id', 5);
     rows[0].should.have.property('location_city', 'Boston'); // deep-flatten
   });
 
   it('also accepts an un-enveloped payload (bare array / object)', () => {
-    parse_cbs_napi_list([{ id: 9 }])[0].should.have.property('id', 9);
-    parse_cbs_napi_list({ venueId: 3 })[0].should.have.property('venue_id', 3);
+    parse_cbs_list([{ id: 9 }])[0].should.have.property('id', 9);
+    parse_cbs_list({ venueId: 3 })[0].should.have.property('venue_id', 3);
   });
 
   it('returns [] for empty / error-envelope / malformed payloads', () => {
-    parse_cbs_napi_list({ data: [] }).should.eql([]);
-    parse_cbs_napi_list({ data: {} }).should.eql([]);
-    parse_cbs_napi_list({ error: 'not found' }).should.eql([]); // error envelope -> []
-    parse_cbs_napi_list(null).should.eql([]);
-    parse_cbs_napi_list('nope').should.eql([]);
+    parse_cbs_list({ data: [] }).should.eql([]);
+    parse_cbs_list({ data: {} }).should.eql([]);
+    parse_cbs_list({ error: 'not found' }).should.eql([]); // error envelope -> []
+    parse_cbs_list(null).should.eql([]);
+    parse_cbs_list('nope').should.eql([]);
   });
 });
 
-describe('parsers/cbs_napi: parse_cbs_napi_scoreboard', () => {
+describe('parsers/cbs: parse_cbs_scoreboard', () => {
   it('unrolls a {data:{games:[...]}} scoreboard into one row per game', () => {
     const raw = {
       data: {
@@ -74,7 +74,7 @@ describe('parsers/cbs_napi: parse_cbs_napi_scoreboard', () => {
         ],
       },
     };
-    const rows = parse_cbs_napi_scoreboard(raw);
+    const rows = parse_cbs_scoreboard(raw);
     rows.length.should.equal(2);
     rows[0].should.have.property('game_id', 100);
     rows[0].should.have.property('home_abbr', 'NE'); // nested deep-flatten
@@ -82,20 +82,20 @@ describe('parsers/cbs_napi: parse_cbs_napi_scoreboard', () => {
   });
 
   it('accepts a bare array and a single-game object', () => {
-    parse_cbs_napi_scoreboard({ data: [{ gameId: 1 }] })[0].should.have.property('game_id', 1);
-    parse_cbs_napi_scoreboard({ data: { gameId: 9, status: 'final' } })[0].should.have.property(
+    parse_cbs_scoreboard({ data: [{ gameId: 1 }] })[0].should.have.property('game_id', 1);
+    parse_cbs_scoreboard({ data: { gameId: 9, status: 'final' } })[0].should.have.property(
       'game_id',
       9
     );
   });
 
   it('returns [] for empty / malformed payloads', () => {
-    parse_cbs_napi_scoreboard({ data: {} }).should.eql([]);
-    parse_cbs_napi_scoreboard(null).should.eql([]);
+    parse_cbs_scoreboard({ data: {} }).should.eql([]);
+    parse_cbs_scoreboard(null).should.eql([]);
   });
 });
 
-describe('parsers/cbs_napi: parse_cbs_napi_standings', () => {
+describe('parsers/cbs: parse_cbs_standings', () => {
   it('unrolls a {data:{standings:[...]}} table into one row per entry', () => {
     const raw = {
       data: {
@@ -105,7 +105,7 @@ describe('parsers/cbs_napi: parse_cbs_napi_standings', () => {
         ],
       },
     };
-    const rows = parse_cbs_napi_standings(raw);
+    const rows = parse_cbs_standings(raw);
     rows.length.should.equal(2);
     rows[0].should.have.property('team_abbr', 'NE');
     rows[0].should.have.property('wins', 12);
@@ -126,7 +126,7 @@ describe('parsers/cbs_napi: parse_cbs_napi_standings', () => {
         ],
       },
     };
-    const rows = parse_cbs_napi_standings(raw);
+    const rows = parse_cbs_standings(raw);
     rows.length.should.equal(2);
     rows[0].should.have.property('group_name', 'AFC East'); // group label prefixed
     rows[0].should.have.property('group_conference', 'AFC');
@@ -134,16 +134,16 @@ describe('parsers/cbs_napi: parse_cbs_napi_standings', () => {
   });
 
   it('accepts a bare array and returns [] when empty', () => {
-    parse_cbs_napi_standings({ data: [{ teamAbbr: 'NE', wins: 1 }] })[0].should.have.property(
+    parse_cbs_standings({ data: [{ teamAbbr: 'NE', wins: 1 }] })[0].should.have.property(
       'wins',
       1
     );
-    parse_cbs_napi_standings({ data: {} }).should.eql([]);
-    parse_cbs_napi_standings(null).should.eql([]);
+    parse_cbs_standings({ data: {} }).should.eql([]);
+    parse_cbs_standings(null).should.eql([]);
   });
 });
 
-describe('parsers/cbs_napi: parse_cbs_napi_odds', () => {
+describe('parsers/cbs: parse_cbs_odds', () => {
   it('unrolls markets -> books into one row per book line', () => {
     const raw = {
       data: {
@@ -158,7 +158,7 @@ describe('parsers/cbs_napi: parse_cbs_napi_odds', () => {
         ],
       },
     };
-    const rows = parse_cbs_napi_odds(raw);
+    const rows = parse_cbs_odds(raw);
     rows.length.should.equal(2);
     rows[0].should.have.property('market_id', 'spread'); // market field prefixed onto book
     rows[0].should.have.property('book_id', 'dk');
@@ -167,7 +167,7 @@ describe('parsers/cbs_napi: parse_cbs_napi_odds', () => {
   });
 
   it('flattens markets with no nested book list to one row each', () => {
-    const rows = parse_cbs_napi_odds({
+    const rows = parse_cbs_odds({
       data: { markets: [{ marketId: 'ml', overUnder: 47.5 }] },
     });
     rows.length.should.equal(1);
@@ -176,19 +176,19 @@ describe('parsers/cbs_napi: parse_cbs_napi_odds', () => {
   });
 
   it('accepts a single odds object and returns [] when empty', () => {
-    parse_cbs_napi_odds({ data: { gameId: 5, spread: -3 } })[0].should.have.property('game_id', 5);
-    parse_cbs_napi_odds({ data: {} }).should.eql([]);
-    parse_cbs_napi_odds(null).should.eql([]);
+    parse_cbs_odds({ data: { gameId: 5, spread: -3 } })[0].should.have.property('game_id', 5);
+    parse_cbs_odds({ data: {} }).should.eql([]);
+    parse_cbs_odds(null).should.eql([]);
   });
 });
 
-describe('parsers/cbs_napi: registry wiring', () => {
-  it('registers all four cbs_napi parsers by name', () => {
+describe('parsers/cbs: registry wiring', () => {
+  it('registers all four cbs parsers by name', () => {
     for (const name of [
-      'parse_cbs_napi_list',
-      'parse_cbs_napi_scoreboard',
-      'parse_cbs_napi_standings',
-      'parse_cbs_napi_odds',
+      'parse_cbs_list',
+      'parse_cbs_scoreboard',
+      'parse_cbs_standings',
+      'parse_cbs_odds',
     ]) {
       (typeof PARSERS[name]).should.equal('function', `missing ${name}`);
       should(parserFor(name)).equal(PARSERS[name]);
@@ -196,28 +196,28 @@ describe('parsers/cbs_napi: registry wiring', () => {
   });
 });
 
-describe('cbs_napi flat-API family metadata (flat-contract style)', () => {
-  const family = () => FLAT_WRAPPERS.filter((w) => w.api === 'cbs_napi');
+describe('cbs flat-API family metadata (flat-contract style)', () => {
+  const family = () => FLAT_WRAPPERS.filter((w) => w.api === 'cbs');
 
-  it('registers the cbs_napi family (82 endpoints) on https://api.cbssports.com', () => {
+  it('registers the cbs family (82 endpoints) on https://api.cbssports.com', () => {
     const rows = family();
     rows.length.should.equal(82);
-    FLAT_HOSTS.cbs_napi.should.equal('https://api.cbssports.com');
+    FLAT_HOSTS.cbs.should.equal('https://api.cbssports.com');
     for (const w of rows) w.host.should.equal('https://api.cbssports.com');
   });
 
-  it('every cbs_napi wrapper names a registered parser, none auth', () => {
+  it('every cbs wrapper names a registered parser, none auth', () => {
     for (const w of family()) {
       (typeof w.parser).should.equal('string', `parser missing on ${w.short}`);
-      w.parser.should.startWith('parse_cbs_napi_');
+      w.parser.should.startWith('parse_cbs_');
       (typeof parserFor(w.parser)).should.equal('function', `parser ${w.parser} not registered`);
-      should(w.auth).not.be.true(`unexpected auth flag on cbs_napi_${w.short}`);
+      should(w.auth).not.be.true(`unexpected auth flag on cbs_${w.short}`);
     }
   });
 
   it('uses the generic list parser as the default for most endpoints', () => {
     const rows = family();
-    const generic = rows.filter((w) => w.parser === 'parse_cbs_napi_list').length;
+    const generic = rows.filter((w) => w.parser === 'parse_cbs_list').length;
     // most endpoints use the generic flattener; the rest use dedicated parsers
     generic.should.be.above(rows.length / 2);
   });

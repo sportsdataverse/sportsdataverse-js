@@ -9,7 +9,7 @@ import RunCell from '@site/src/components/RunCell';
 # MLB recipes
 
 Baseball lives under `sdv.mlb`, which spans **three** surfaces: the ESPN
-cross-league wrappers (`espnMlb*`), the native **MLB Stats API** (`mlbApi*`,
+cross-league wrappers (`espnMlb*`), the native **MLB Stats API** (`mlb*`,
 host `statsapi.mlb.com`), and **Baseball Savant / Statcast** (`mlbStatcast*`,
 host `baseballsavant.mlb.com`). All honor `{ parsed: true }`.
 
@@ -32,7 +32,7 @@ console.table(games);
 ```js
 import sdv from 'sportsdataverse';
 
-const schedule = await sdv.mlb.mlbApiSchedule({ parsed: true });
+const schedule = await sdv.mlb.mlbSchedule({ parsed: true });
 console.table(schedule);
 ```
 
@@ -41,23 +41,23 @@ Add a `date` (YYYY-MM-DD) to scope it:
 
 <RunCell
   league="mlb"
-  endpoint="flat:mlb_api:schedule"
+  endpoint="flat:mlb:schedule"
   params={{ date: '2024-03-28' }}
   parsed
   title="MLB Stats API schedule — native, live"
 />
 
-[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_api%3Aschedule&parsed=1)
+[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb%3Aschedule&parsed=1)
 
 ```js
 import sdv from 'sportsdataverse';
 
 // scope to a single day
-const opening = await sdv.mlb.mlbApiSchedule({ date: '2024-03-28', parsed: true });
+const opening = await sdv.mlb.mlbSchedule({ date: '2024-03-28', parsed: true });
 console.table(opening);
 ```
 
-[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_api%3Aschedule&parsed=1)
+[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb%3Aschedule&parsed=1)
 
 ## Team roster (native)
 
@@ -66,11 +66,11 @@ console.table(opening);
 ```js
 import sdv from 'sportsdataverse';
 
-const roster = await sdv.mlb.mlbApiTeamRoster({ team_id: 147, parsed: true });
+const roster = await sdv.mlb.mlbTeamRoster({ team_id: 147, parsed: true });
 console.table(roster);
 ```
 
-[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb_api%3Ateam_roster&parsed=1&team_id=147)
+[Open in playground ▶](/playground?l=mlb&e=flat%3Amlb%3Ateam_roster&parsed=1&team_id=147)
 
 ## Statcast leaderboards (Baseball Savant)
 

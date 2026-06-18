@@ -21,7 +21,7 @@ export const HOSTS: Record<EspnFamily, string> = {
  * map is the canonical lookup the playground / proxy can share.
  */
 export const FLAT_HOSTS: Record<string, string> = {
-  mlb_api: "https://statsapi.mlb.com",
+  mlb: "https://statsapi.mlb.com",
   // Baseball Savant / Statcast (heterogeneous CSV/JSON/HTML — see
   // src/core/statcast_runtime.ts for the content-type-aware getter).
   mlb_statcast: "https://baseballsavant.mlb.com",
@@ -44,26 +44,26 @@ export const FLAT_HOSTS: Record<string, string> = {
   // (sdv.recruiting.*). The spec declares a JWT `Authorization: Bearer` header
   // but there is no public token-minting machinery, so this family is NOT
   // `auth: true`; the caller supplies their own token via the flat `headers`
-  // arg (sdv.recruiting.sports247_rankings({ headers: { Authorization: … } })).
-  sports247: "https://api.247sports.com",
-  // CBS Sports NAPI — third cross-sport (non-league) provider family. Merges
-  // onto the standalone `cbs` namespace (sdv.cbs.*). The NAPI data resources are
+  // arg (sdv.recruiting.recruiting_rankings({ headers: { Authorization: … } })).
+  recruiting: "https://api.247sports.com",
+  // CBS Sports API — third cross-sport (non-league) provider family. Merges
+  // onto the standalone `cbs` namespace (sdv.cbs.*). The CBS data resources are
   // anonymously reachable (the spec ships no securityScheme), so this family is
   // NOT `auth: true` — no token, no required `headers`.
-  cbs_napi: "https://api.cbssports.com",
-  // Fox Sports "Bifrost" API — fourth cross-sport (non-league) provider family.
+  cbs: "https://api.cbssports.com",
+  // Fox Sports API — fourth cross-sport (non-league) provider family.
   // Merges onto the standalone `fox` namespace (sdv.fox.*). Auth is a public
   // apikey + api-version query pair (both default in the wrapper metadata), so
   // this family is NOT `auth: true` — no account/token, no required `headers`.
-  fox_bifrost: "https://api.foxsports.com",
+  fox: "https://api.foxsports.com",
   // Yahoo Sports — fifth (and final) cross-sport (non-league) provider family.
   // TWO api stems on TWO hosts share the standalone `yahoo` namespace
-  // (sdv.yahoo.*): editorial (api-secure.sports.yahoo.com) + shangrila
-  // stats-graph (graphite-secure.sports.yahoo.com). Keyless (the specs ship no
+  // (sdv.yahoo.*): scores (api-secure.sports.yahoo.com) + stats-graph
+  // (graphite-secure.sports.yahoo.com). Keyless (the specs ship no
   // securityScheme), so NOT `auth: true` — Yahoo rejects requests without
   // browser-y Origin/Referer, which the caller supplies via the flat `headers`.
-  yahoo_editorial: "https://api-secure.sports.yahoo.com",
-  yahoo_shangrila: "https://graphite-secure.sports.yahoo.com",
+  yahoo_scores: "https://api-secure.sports.yahoo.com",
+  yahoo: "https://graphite-secure.sports.yahoo.com",
   // HockeyTech / LeagueStat — standalone `hockeytech` namespace (sdv.hockeytech.*)
   // for the PWHL + junior/minor leagues. This is the DEFAULT feed host (4 of 5
   // leagues); QMJHL is served from cluster.leaguestat.com, which the family's

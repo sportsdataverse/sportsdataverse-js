@@ -152,8 +152,8 @@ export default {
     /**
      * Gets the College Football Player recruiting data for a specified year, page, position, state and institution type if available.
      * @deprecated Superseded by the generated 247Sports recruiting family on the
-     * standalone `recruiting` namespace — `sdv.recruiting.sports247_rankings(...)`
-     * / `sports247_player_sport_rankings(...)` (api.247sports.com RDB JSON API).
+     * standalone `recruiting` namespace — `sdv.recruiting.recruiting_rankings(...)`
+     * / `recruiting_player_sport_rankings(...)` (api.247sports.com RDB JSON API).
      * This legacy method scrapes 247sports.com HTML and is kept for back-compat.
      * @memberOf cfb
      * @async
@@ -231,8 +231,8 @@ export default {
     /**
      * Gets the College Football School recruiting data for a specified year and page if available.
      * @deprecated Superseded by the generated 247Sports recruiting family —
-     * `sdv.recruiting.sports247_institution_rankings(...)` /
-     * `sports247_rankings_composite_team_feed(...)` (api.247sports.com RDB JSON
+     * `sdv.recruiting.recruiting_institution_rankings(...)` /
+     * `recruiting_rankings_composite_team_feed(...)` (api.247sports.com RDB JSON
      * API). This legacy method scrapes 247sports.com HTML; kept for back-compat.
      * @memberOf cfb
      * @async
@@ -280,7 +280,7 @@ export default {
     /**
      * Gets the College Football School commitment data for a specified school and year.
      * @deprecated Superseded by the generated 247Sports recruiting family —
-     * `sdv.recruiting.sports247_recruits(...)` / `sports247_transfers(...)`
+     * `sdv.recruiting.recruiting_recruits(...)` / `recruiting_transfers(...)`
      * (api.247sports.com RDB JSON API). This legacy method scrapes
      * 247sports.com HTML and is kept for back-compat only.
      * @memberOf cfb

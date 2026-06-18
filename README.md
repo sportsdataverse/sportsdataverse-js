@@ -107,7 +107,7 @@ to the ESPN methods. The **provider** families live on their own namespaces:
 
 ```js
 // Native — MLB Stats API + Baseball Savant / Statcast (on sdv.mlb)
-await sdv.mlb.mlbApiSchedule({ sport_id: 1, date: "2024-07-04", parsed: true });
+await sdv.mlb.mlbSchedule({ sport_id: 1, date: "2024-07-04", parsed: true });
 await sdv.mlb.mlbStatcastSearch({ season: 2024, player_type: "batter" });
 
 // Native — NHL api-web + NFL.com Shield (token minted automatically, no creds)
@@ -116,7 +116,7 @@ await sdv.nfl.nflApiWeeklyGameDetails({ season: 2024, week: 1, parsed: true });
 
 // Providers — standalone namespaces (auth varies per provider)
 await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY, parsed: true });
-await sdv.fox.fox_bifrost_scoreboard({ parsed: true });            // public apikey defaulted
+await sdv.fox.fox_scoreboard({ parsed: true });            // public apikey defaulted
 ```
 
 Browser callers can import **just** the parser layer (no node-only HTTP deps) from the

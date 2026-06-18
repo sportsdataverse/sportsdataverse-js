@@ -2,7 +2,7 @@
 #
 # The first cross-sport (non-league) provider family — it establishes the
 # standalone `odds` namespace (NOT a league). Unlike the league-scoped flat
-# families (mlb_api / nhl_* / nfl_api) this family's wrappers merge onto
+# families (mlb / nhl_* / nfl_api) this family's wrappers merge onto
 # `sdv.odds.*` rather than a sport namespace.
 #
 # Auth: The Odds API uses `apiKey` as a plain query param the CALLER supplies —

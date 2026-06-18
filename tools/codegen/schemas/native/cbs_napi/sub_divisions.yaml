@@ -1,8 +1,0 @@
-# CBS NAPI sub divisions resource (/resource/division/subdivisions/{division_id}). Generic flattened frame parsed
-# by parse_cbs_napi_list.
-# The CBS NAPI OpenAPI spec ships no typed 200-response schema (every resource is
-# a free-form {data: ...} envelope), so columns are not enumerable ahead of a
-# live capture; the parser snake_cases + flattens whatever keys the payload ships.
-schema: sub_divisions
-kind: dataframe
-columns: []

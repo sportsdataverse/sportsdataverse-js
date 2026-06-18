@@ -478,7 +478,7 @@ function normalize(rows) {
   });
 }
 
-// src/parsers/mlb_api.ts
+// src/parsers/mlb.ts
 function isPlainObject2(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
@@ -504,7 +504,7 @@ var LIST_KEYS = [
   "stats",
   "series"
 ];
-function parse_mlb_api_list(raw) {
+function parse_mlb_list(raw) {
   if (!isPlainObject2(raw)) return [];
   for (const key of LIST_KEYS) {
     const candidate = raw[key];
@@ -514,10 +514,10 @@ function parse_mlb_api_list(raw) {
   }
   return [];
 }
-function parse_mlb_api_teams(raw) {
+function parse_mlb_teams(raw) {
   return normalize(raw?.teams ?? []);
 }
-function parse_mlb_api_schedule(raw) {
+function parse_mlb_schedule(raw) {
   const dates = raw?.dates;
   if (!Array.isArray(dates) || dates.length === 0) return [];
   const rows = dates.flatMap(
@@ -525,10 +525,10 @@ function parse_mlb_api_schedule(raw) {
   );
   return normalize(rows);
 }
-function parse_mlb_api_team_roster(raw) {
+function parse_mlb_team_roster(raw) {
   return normalize(raw?.roster ?? []);
 }
-function parse_mlb_api_standings(raw) {
+function parse_mlb_standings(raw) {
   if (!isPlainObject2(raw)) return [];
   const records = raw.records;
   if (!Array.isArray(records) || records.length === 0) return [];
@@ -549,7 +549,7 @@ function parse_mlb_api_standings(raw) {
   }
   return normalize(rows);
 }
-function parse_mlb_api_person_stats(raw) {
+function parse_mlb_person_stats(raw) {
   if (!isPlainObject2(raw)) return [];
   const stats = raw.stats;
   if (!Array.isArray(stats) || stats.length === 0) return [];
@@ -566,7 +566,7 @@ function parse_mlb_api_person_stats(raw) {
   }
   return normalize(rows);
 }
-function parse_mlb_api_boxscore(raw) {
+function parse_mlb_boxscore(raw) {
   if (!isPlainObject2(raw)) return [];
   const teams = raw.teams ?? {};
   const rows = [];
@@ -581,24 +581,24 @@ function parse_mlb_api_boxscore(raw) {
   }
   return normalize(rows);
 }
-function parse_mlb_api_linescore(raw) {
+function parse_mlb_linescore(raw) {
   if (!isPlainObject2(raw)) return [];
   return normalize(raw.innings ?? []);
 }
-function parse_mlb_api_play_by_play(raw) {
+function parse_mlb_play_by_play(raw) {
   if (!isPlainObject2(raw)) return [];
   return normalize(raw.allPlays ?? []);
 }
-function parse_mlb_api_win_probability(raw) {
+function parse_mlb_win_probability(raw) {
   if (!Array.isArray(raw)) return [];
   return normalize(raw);
 }
-function parse_mlb_api_draft_latest(raw) {
+function parse_mlb_draft_latest(raw) {
   if (!isPlainObject2(raw) || Object.keys(raw).length === 0) return [];
   const { copyright, ...row } = raw;
   return normalize([row]);
 }
-function parse_mlb_api_timecodes(raw) {
+function parse_mlb_timecodes(raw) {
   if (!Array.isArray(raw) || raw.length === 0) return [];
   return normalize(raw.map((t) => ({ timecode: t })));
 }
@@ -1185,12 +1185,12 @@ function parse_odds_api_event_odds_history(raw) {
   return unrollOutcomes(events, extra);
 }
 
-// src/parsers/sports247.ts
+// src/parsers/recruiting.ts
 function isPlainObject10(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 var LIST_KEYS2 = ["list", "rankings", "items", "results", "data"];
-function parse_sports247_list(raw) {
+function parse_recruiting_list(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   for (const key of LIST_KEYS2) {
@@ -1201,12 +1201,12 @@ function parse_sports247_list(raw) {
   }
   return [];
 }
-function parse_sports247_paged_list(raw) {
+function parse_recruiting_paged_list(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   return normalize(raw.list ?? []);
 }
-function parse_sports247_institution_rankings(raw) {
+function parse_recruiting_institution_rankings(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   const list = raw.list;
@@ -1216,13 +1216,13 @@ function parse_sports247_institution_rankings(raw) {
   for (const [k, v] of Object.entries(pag)) base[`pagination_${k}`] = v;
   return normalize(list.map((row) => ({ ...base, ...isPlainObject10(row) ? row : {} })));
 }
-function parse_sports247_ranking_feed(raw) {
+function parse_recruiting_ranking_feed(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject10(raw)) return [];
   return normalize(raw.rankings ?? []);
 }
 
-// src/parsers/cbs_napi.ts
+// src/parsers/cbs.ts
 function isPlainObject11(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
@@ -1264,7 +1264,7 @@ function firstListIn(obj) {
   }
   return null;
 }
-function parse_cbs_napi_list(raw) {
+function parse_cbs_list(raw) {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject11(data)) return [];
@@ -1273,7 +1273,7 @@ function parse_cbs_napi_list(raw) {
   if (Object.keys(data).length > 0) return normalize([data]);
   return [];
 }
-function parse_cbs_napi_scoreboard(raw) {
+function parse_cbs_scoreboard(raw) {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject11(data)) return [];
@@ -1286,7 +1286,7 @@ function parse_cbs_napi_scoreboard(raw) {
   if (Object.keys(data).length > 0) return normalize([data]);
   return [];
 }
-function parse_cbs_napi_standings(raw) {
+function parse_cbs_standings(raw) {
   const data = unwrapData(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject11(data)) return [];
@@ -1318,7 +1318,7 @@ function parse_cbs_napi_standings(raw) {
   if (Object.keys(data).length > 0) return normalize([data]);
   return [];
 }
-function parse_cbs_napi_odds(raw) {
+function parse_cbs_odds(raw) {
   const data = unwrapData(raw);
   let markets = null;
   if (Array.isArray(data)) {
@@ -1350,7 +1350,7 @@ function parse_cbs_napi_odds(raw) {
   return normalize(rows);
 }
 
-// src/parsers/fox_bifrost.ts
+// src/parsers/fox.ts
 function isPlainObject12(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
@@ -1378,7 +1378,7 @@ function firstListIn2(obj) {
   }
   return null;
 }
-function parse_fox_bifrost_list(raw) {
+function parse_fox_list(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject12(raw)) return [];
   const list = firstListIn2(raw);
@@ -1386,7 +1386,7 @@ function parse_fox_bifrost_list(raw) {
   if (Object.keys(raw).length > 0) return normalize([raw]);
   return [];
 }
-function parse_fox_bifrost_scoreboard(raw) {
+function parse_fox_scoreboard(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject12(raw)) return [];
   const selectionGroups = raw.selectionGroupList;
@@ -1407,9 +1407,9 @@ function parse_fox_bifrost_scoreboard(raw) {
     const c = raw[key];
     if (Array.isArray(c) && c.length > 0 && isPlainObject12(c[0])) return normalize(c);
   }
-  return parse_fox_bifrost_list(raw);
+  return parse_fox_list(raw);
 }
-function parse_fox_bifrost_standings(raw) {
+function parse_fox_standings(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject12(raw)) return [];
   const sections = raw.standingsSections;
@@ -1426,9 +1426,9 @@ function parse_fox_bifrost_standings(raw) {
     }
     return normalize(rows);
   }
-  return parse_fox_bifrost_list(raw);
+  return parse_fox_list(raw);
 }
-function parse_fox_bifrost_event(raw) {
+function parse_fox_event(raw) {
   if (!isPlainObject12(raw)) return [];
   const comparison = raw?.teamStatsComparison?.items ?? raw?.gameStats?.items ?? raw?.eventStatsTab?.eventStatsList;
   if (Array.isArray(comparison) && comparison.length > 0 && isPlainObject12(comparison[0])) {
@@ -1437,7 +1437,7 @@ function parse_fox_bifrost_event(raw) {
   if (Object.keys(raw).length > 0) return normalize([raw]);
   return [];
 }
-function parse_fox_bifrost_team_roster(raw) {
+function parse_fox_team_roster(raw) {
   if (!isPlainObject12(raw)) return [];
   const groups = raw.groups;
   if (Array.isArray(groups)) {
@@ -1453,17 +1453,17 @@ function parse_fox_bifrost_team_roster(raw) {
     }
     return normalize(rows);
   }
-  return parse_fox_bifrost_list(raw);
+  return parse_fox_list(raw);
 }
-function parse_fox_bifrost_search(raw) {
+function parse_fox_search(raw) {
   if (Array.isArray(raw)) return normalize(raw);
   if (!isPlainObject12(raw)) return [];
   const results = raw.results;
   if (Array.isArray(results)) return normalize(results);
-  return parse_fox_bifrost_list(raw);
+  return parse_fox_list(raw);
 }
 
-// src/parsers/yahoo_editorial.ts
+// src/parsers/yahoo_scores.ts
 function isPlainObject13(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
@@ -1504,7 +1504,7 @@ function unrollKeyedMap(map) {
   }
   return rows;
 }
-function parse_yahoo_editorial_list(raw) {
+function parse_yahoo_scores_list(raw) {
   const svc = unwrapService(raw);
   if (Array.isArray(svc)) return normalize(svc);
   if (!isPlainObject13(svc)) return [];
@@ -1513,24 +1513,24 @@ function parse_yahoo_editorial_list(raw) {
   if (Object.keys(svc).length > 0) return normalize([svc]);
   return [];
 }
-function parse_yahoo_editorial_scoreboard(raw) {
+function parse_yahoo_scores_scoreboard(raw) {
   const svc = unwrapService(raw);
   if (!isPlainObject13(svc)) return [];
   const games = svc.scoreboard?.games ?? svc.games;
   if (isPlainObject13(games)) return normalize(unrollKeyedMap(games));
   if (Array.isArray(games)) return normalize(games);
-  return parse_yahoo_editorial_list(raw);
+  return parse_yahoo_scores_list(raw);
 }
-function parse_yahoo_editorial_boxscore(raw) {
+function parse_yahoo_scores_boxscore(raw) {
   const svc = unwrapService(raw);
   if (!isPlainObject13(svc)) return [];
   const playerStats = svc.boxscore?.player_stats ?? svc.player_stats;
   if (isPlainObject13(playerStats)) return normalize(unrollKeyedMap(playerStats));
   if (Array.isArray(playerStats)) return normalize(playerStats);
-  return parse_yahoo_editorial_list(raw);
+  return parse_yahoo_scores_list(raw);
 }
 
-// src/parsers/yahoo_shangrila.ts
+// src/parsers/yahoo.ts
 function isPlainObject14(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
@@ -1558,7 +1558,7 @@ var STAT_ARRAY_KEYS = [
   "players",
   "teams"
 ];
-function parse_yahoo_shangrila_list(raw) {
+function parse_yahoo_list(raw) {
   const data = unwrapData2(raw);
   if (Array.isArray(data)) return normalize(data);
   if (!isPlainObject14(data)) return [];
@@ -1567,11 +1567,11 @@ function parse_yahoo_shangrila_list(raw) {
   if (Object.keys(data).length > 0) return normalize([data]);
   return [];
 }
-function parse_yahoo_shangrila_stats(raw) {
+function parse_yahoo_stats(raw) {
   const data = unwrapData2(raw);
   if (!isPlainObject14(data)) return [];
   const rootList = firstRootList(data);
-  if (!rootList) return parse_yahoo_shangrila_list(raw);
+  if (!rootList) return parse_yahoo_list(raw);
   const rows = [];
   let sawStatArray = false;
   for (const entry of rootList) {
@@ -1699,7 +1699,20 @@ function cleanHeader(key) {
 }
 function cleanKeys(row) {
   const out = {};
-  for (const [k, v] of Object.entries(row)) out[cleanHeader(k)] = v;
+  const counts = /* @__PURE__ */ new Map();
+  for (const [k, v] of Object.entries(row)) {
+    const base = cleanHeader(k);
+    let key = base;
+    if (counts.has(base)) {
+      let n = counts.get(base) + 1;
+      while (`${base}_${n}` in out) n++;
+      key = `${base}_${n}`;
+      counts.set(base, n);
+    } else {
+      counts.set(base, 1);
+    }
+    out[key] = v;
+  }
   return out;
 }
 function parseHeaderCsv(text) {
@@ -1937,19 +1950,19 @@ function parse_torvik_game_schedule(input) {
 var PARSERS = {
   // ---- MLB Stats API ----
   // Generic list flattener (the default for most endpoints).
-  parse_mlb_api_list,
+  parse_mlb_list,
   // Dedicated parsers (extra unrolling logic).
-  parse_mlb_api_teams,
-  parse_mlb_api_schedule,
-  parse_mlb_api_team_roster,
-  parse_mlb_api_standings,
-  parse_mlb_api_person_stats,
-  parse_mlb_api_boxscore,
-  parse_mlb_api_linescore,
-  parse_mlb_api_play_by_play,
-  parse_mlb_api_win_probability,
-  parse_mlb_api_draft_latest,
-  parse_mlb_api_timecodes,
+  parse_mlb_teams,
+  parse_mlb_schedule,
+  parse_mlb_team_roster,
+  parse_mlb_standings,
+  parse_mlb_person_stats,
+  parse_mlb_boxscore,
+  parse_mlb_linescore,
+  parse_mlb_play_by_play,
+  parse_mlb_win_probability,
+  parse_mlb_draft_latest,
+  parse_mlb_timecodes,
   // ---- NHL api-web (modern game-feed) ----
   parse_nhl_web_pbp,
   parse_nhl_web_boxscore,
@@ -2013,36 +2026,36 @@ var PARSERS = {
   parse_odds_api_event_odds_history,
   // ---- 247Sports Recruit Database (api.247sports.com /rdb/v1) ----
   // Generic list flattener (the default for most endpoints).
-  parse_sports247_list,
+  parse_recruiting_list,
   // Dedicated parsers (envelope unrolling logic).
-  parse_sports247_paged_list,
-  parse_sports247_institution_rankings,
-  parse_sports247_ranking_feed,
-  // ---- CBS Sports NAPI (api.cbssports.com/napi) ----
+  parse_recruiting_paged_list,
+  parse_recruiting_institution_rankings,
+  parse_recruiting_ranking_feed,
+  // ---- CBS Sports API (api.cbssports.com/napi) ----
   // Generic list flattener (the default for most endpoints).
-  parse_cbs_napi_list,
+  parse_cbs_list,
   // Dedicated parsers (envelope unrolling logic).
-  parse_cbs_napi_scoreboard,
-  parse_cbs_napi_standings,
-  parse_cbs_napi_odds,
-  // ---- Fox Sports Bifrost (api.foxsports.com/bifrost/v1) ----
+  parse_cbs_scoreboard,
+  parse_cbs_standings,
+  parse_cbs_odds,
+  // ---- Fox Sports Fox (api.foxsports.com/bifrost/v1) ----
   // Generic module-shell flattener (the default for most endpoints).
-  parse_fox_bifrost_list,
+  parse_fox_list,
   // Dedicated parsers (nested-list unrolling logic).
-  parse_fox_bifrost_scoreboard,
-  parse_fox_bifrost_standings,
-  parse_fox_bifrost_event,
-  parse_fox_bifrost_team_roster,
-  parse_fox_bifrost_search,
-  // ---- Yahoo Sports editorial (api-secure.sports.yahoo.com /v1/editorial/s) ----
+  parse_fox_scoreboard,
+  parse_fox_standings,
+  parse_fox_event,
+  parse_fox_team_roster,
+  parse_fox_search,
+  // ---- Yahoo Sports scores (api-secure.sports.yahoo.com /v1/scores/s) ----
   // Generic service-envelope flattener + two dedicated keyed-map unrollers.
-  parse_yahoo_editorial_list,
-  parse_yahoo_editorial_scoreboard,
-  parse_yahoo_editorial_boxscore,
-  // ---- Yahoo Sports shangrila stats-graph (graphite-secure.sports.yahoo.com) ----
+  parse_yahoo_scores_list,
+  parse_yahoo_scores_scoreboard,
+  parse_yahoo_scores_boxscore,
+  // ---- Yahoo Sports stats stats-graph (graphite-secure.sports.yahoo.com) ----
   // Generic GraphQL-envelope flattener (default) + nested stat-array unroller.
-  parse_yahoo_shangrila_list,
-  parse_yahoo_shangrila_stats,
+  parse_yahoo_list,
+  parse_yahoo_stats,
   // ---- HockeyTech / LeagueStat (lscluster.hockeytech.com + cluster.leaguestat.com) ----
   // One parser per feed view (modulekit SiteKit envelopes, statviewfeed
   // standings/leaders/pbp, gc gamesummary).

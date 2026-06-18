@@ -1,6 +1,6 @@
 // Parsers for HockeyTech / LeagueStat feed payloads. Faithful port of the
 // canonical `sportsdataverse/hockeytech/_parsers.py`, adapted to the JS flat-API
-// parser contract (same shape as mlb_api.ts / nhl_api_web.ts):
+// parser contract (same shape as mlb.ts / nhl_api_web.ts):
 //
 //   - return an array of flat row objects (the JS analogue of a polars frame);
 //   - empty / malformed payloads return `[]` instead of throwing, so callers

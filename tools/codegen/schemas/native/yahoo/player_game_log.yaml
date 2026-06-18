@@ -1,0 +1,17 @@
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
+schema: player_game_log
+kind: dataframe
+columns:
+- name: player_id
+  type: character
+- name: active
+  type: logical
+- name: positions
+  type: list
+- name: team_id
+  type: character
+- name: player_game_stats
+  type: list
+- name: player_season_stats
+  type: list

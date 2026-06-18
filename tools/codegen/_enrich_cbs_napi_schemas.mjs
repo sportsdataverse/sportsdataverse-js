@@ -1,8 +1,8 @@
 // One-shot enrichment: derive returns-schema columns for the CBS NAPI
-// (`cbs_napi`) family from captured response payloads.
+// (`cbs`) family from captured response payloads.
 //
 // The CBS NAPI OpenAPI spec ships no typed 200-response schemas, so every
-// returns schema under tools/codegen/schemas/native/cbs_napi/ starts as
+// returns schema under tools/codegen/schemas/native/cbs/ starts as
 // `columns: []`. This script fills the empty schemas by:
 //
 //   1. reading the endpoint YAML (short / path / parser / returns_schema);
@@ -16,17 +16,17 @@
 //   4. OVERWRITING only the currently-empty schemas. Endpoints with no
 //      matching capture (or a 0-row parse) are LEFT as `columns: []` and logged.
 //
-// Run:  node tools/codegen/_enrich_cbs_napi_schemas.mjs
+// Run:  node tools/codegen/_enrich_cbs_schemas.mjs
 // (requires `npm run build` first — imports the compiled parsers from dist/).
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
-import { CBS_NAPI_PARSERS } from "../../dist/parsers/cbs_napi.js";
+import { CBS_NAPI_PARSERS } from "../../dist/parsers/cbs.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const endpointsYaml = join(__dirname, "endpoints", "cbs_napi.yaml");
+const endpointsYaml = join(__dirname, "endpoints", "cbs.yaml");
 const schemasDir = join(__dirname, "schemas");
 // The capture corpus lives outside the repo (the sdv-internal-refs checkout).
 // Point SDV_REFS_ROOT at it; with no default (a hard-coded path would be
@@ -135,7 +135,7 @@ function deriveColumns(rows, cap = 200) {
 }
 
 const HEADER = `# CBS NAPI returns schema — columns DERIVED from a captured live response run
-# through the registered parser (parse_cbs_napi_*). The CBS NAPI OpenAPI spec
+# through the registered parser (parse_cbs_*). The CBS NAPI OpenAPI spec
 # ships no typed 200-response schema, so columns are not enumerable from the
 # spec; they are enumerated here from a representative capture. \`type\` is
 # inferred from the captured JS value; \`description\` is best-effort from the

@@ -62,7 +62,7 @@ export interface WrapperDef {
   queryParams: QueryParam[];
   /** True for non-ESPN "flat API" wrappers (see `src/core/flat.ts`). */
   flat?: boolean;
-  /** Flat-API family stem, e.g. `"mlb_api"`. */
+  /** Flat-API family stem, e.g. `"mlb"`. */
   api?: string;
   /** Flat-API absolute base URL, e.g. `"https://statsapi.mlb.com"`. */
   host?: string;
@@ -71,7 +71,7 @@ export interface WrapperDef {
   /**
    * Returns-schema path (docs-only metadata) for a flat-API wrapper, relative
    * to `tools/codegen/schemas/` and without the `.yaml` suffix
-   * (e.g. `"native/mlb_api/boxscore"`). Drives the per-endpoint **Returns**
+   * (e.g. `"native/mlb/boxscore"`). Drives the per-endpoint **Returns**
    * tables in the generated reference docs; unused at runtime.
    */
   returnsSchema?: string;

@@ -105,8 +105,8 @@ describe('playground proxy (run.mjs) validation + allowlist', () => {
 describe('playground resolveFlat matches the package flat resolver', () => {
   const cases = [
     // [api, short, params]  — at least one per flat family, mixing path + query.
-    ['mlb_api', 'teams', { sportId: 1, season: 2024 }],
-    ['mlb_api', 'schedule', { date: '2024-07-01' }],
+    ['mlb', 'teams', { sportId: 1, season: 2024 }],
+    ['mlb', 'schedule', { date: '2024-07-01' }],
     ['mlb_statcast', 'leaderboard_expected_stats', { year: 2024, csv: 'true' }],
     ['nhl_api_web', 'pbp', { game_id: 2023030417 }],
     ['nhl_edge', 'skater_detail', { player_id: 8478402 }],
@@ -151,11 +151,11 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
 
   it('rejects an unknown native endpoint with 400', async () => {
     const res = mockRes();
-    await handler({ method: 'POST', body: { api: 'mlb_api', endpoint: 'nope', params: {} } }, res);
+    await handler({ method: 'POST', body: { api: 'mlb', endpoint: 'nope', params: {} } }, res);
     res.statusCode.should.equal(400);
   });
 
-  it('dispatches a non-auth JSON flat request (mlb_api, mocked fetch)', async () => {
+  it('dispatches a non-auth JSON flat request (mlb, mocked fetch)', async () => {
     const original = global.fetch;
     let fetched = null;
     let sentHeaders = null;
@@ -172,7 +172,7 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
     try {
       const res = mockRes();
       await handler(
-        { method: 'POST', body: { api: 'mlb_api', endpoint: 'teams', params: { sportId: 1 } } },
+        { method: 'POST', body: { api: 'mlb', endpoint: 'teams', params: { sportId: 1 } } },
         res
       );
       res.statusCode.should.equal(200);

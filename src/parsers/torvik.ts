@@ -1,6 +1,6 @@
 // Parsers for BartTorvik / T-Rank (barttorvik.com) payloads. Faithful port of
 // hoopR's torvik_*.R parsing. Universal flat-API parser contract (mirrors
-// mlb_api.ts / mlb_statcast.ts):
+// mlb.ts / mlb_statcast.ts):
 //
 //   - return an array of flat row objects (the JS analogue of a hoopR tibble);
 //   - empty / malformed payloads return `[]` instead of throwing, so callers

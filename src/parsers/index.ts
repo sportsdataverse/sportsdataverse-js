@@ -33,7 +33,7 @@ export type ParsedResult =
  *   `"summary"`); the `summary` dispatcher honours `section` (omit it to get the
  *   dict of all 21 sub-frames).
  * - `kind: "flat"` — `key` is the registered parser name (a native wrapper's
- *   `parser`, e.g. `"parse_mlb_api_schedule"`).
+ *   `parser`, e.g. `"parse_mlb_schedule"`).
  *
  * Returns `null` when no parser is registered, so callers fall back to raw.
  */

@@ -13,7 +13,7 @@ const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 
 // api stem -> sdv namespace prefix (mirrors index.ts FLAT_API_NAMESPACES)
 const FLAT_API_NAMESPACES = {
-  mlb_api: 'mlb',
+  mlb: 'mlb',
   mlb_statcast: 'mlb',
   nhl_api_web: 'nhl',
   nhl_edge: 'nhl',
@@ -21,11 +21,11 @@ const FLAT_API_NAMESPACES = {
   nhl_records: 'nhl',
   nfl_api: 'nfl',
   odds_api: 'odds',
-  sports247: 'recruiting',
-  cbs_napi: 'cbs',
-  fox_bifrost: 'fox',
-  yahoo_editorial: 'yahoo',
-  yahoo_shangrila: 'yahoo',
+  recruiting: 'recruiting',
+  cbs: 'cbs',
+  fox: 'fox',
+  yahoo_scores: 'yahoo',
+  yahoo: 'yahoo',
 };
 
 /** Fill every required path param so the URL fully resolves. */
@@ -57,8 +57,8 @@ describe('flat-API wrapper metadata invariants', () => {
     }
   });
 
-  it('includes the proof-slice mlb_api teams + schedule endpoints', () => {
-    const shorts = FLAT_WRAPPERS.filter((w) => w.api === 'mlb_api').map((w) => w.short);
+  it('includes the proof-slice mlb teams + schedule endpoints', () => {
+    const shorts = FLAT_WRAPPERS.filter((w) => w.api === 'mlb').map((w) => w.short);
     shorts.should.containEql('teams');
     shorts.should.containEql('schedule');
   });
@@ -184,7 +184,7 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
   it('flat wrappers coexist with the legacy + ESPN MLB surface (no clobbering)', () => {
     (typeof sdv.mlb.getPlayByPlay).should.equal('function'); // legacy
     (typeof sdv.mlb.espnMlbScoreboard).should.equal('function'); // ESPN
-    (typeof sdv.mlb.mlbApiTeams).should.equal('function'); // mlb_api flat
+    (typeof sdv.mlb.mlbTeams).should.equal('function'); // mlb flat
     (typeof sdv.mlb.mlbStatcastGamefeed).should.equal('function'); // mlb_statcast flat
   });
 
@@ -242,15 +242,15 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
     (typeof sdv.odds.oddsApiSportsOddsHistory).should.equal('function');
   });
 
-  it('sports247 family creates the standalone sdv.recruiting namespace (snake + camel)', () => {
+  it('recruiting family creates the standalone sdv.recruiting namespace (snake + camel)', () => {
     // `recruiting` is NOT a league — there is no legacy/ESPN service, so this
     // namespace is created from scratch by the flat merge.
     should(sdv.recruiting).be.an.Object();
-    (typeof sdv.recruiting.sports247_rankings).should.equal('function'); // flat snake
-    (typeof sdv.recruiting.sports247Rankings).should.equal('function'); // flat camel
-    sdv.recruiting.sports247Rankings.should.equal(sdv.recruiting.sports247_rankings);
-    (typeof sdv.recruiting.sports247InstitutionRankings).should.equal('function');
-    (typeof sdv.recruiting.sports247TagsPhotosByType).should.equal('function');
+    (typeof sdv.recruiting.recruiting_rankings).should.equal('function'); // flat snake
+    (typeof sdv.recruiting.recruitingRankings).should.equal('function'); // flat camel
+    sdv.recruiting.recruitingRankings.should.equal(sdv.recruiting.recruiting_rankings);
+    (typeof sdv.recruiting.recruitingInstitutionRankings).should.equal('function');
+    (typeof sdv.recruiting.recruitingTagsPhotosByType).should.equal('function');
   });
 });
 
@@ -265,8 +265,8 @@ describe('every flat wrapper builds a well-formed absolute URL (no network)', ()
     });
   }
 
-  it('mlb_api teams resolves to https://statsapi.mlb.com/api/v1/teams with default sportId', () => {
-    const def = FLAT_WRAPPERS.find((w) => w.api === 'mlb_api' && w.short === 'teams');
+  it('mlb teams resolves to https://statsapi.mlb.com/api/v1/teams with default sportId', () => {
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'mlb' && w.short === 'teams');
     should(def).be.ok();
     const { url, query } = resolveFlat(def, {});
     url.should.equal('https://statsapi.mlb.com/api/v1/teams');
@@ -274,7 +274,7 @@ describe('every flat wrapper builds a well-formed absolute URL (no network)', ()
   });
 
   it('honours camelCase + snake_case aliases for query params (mapped to the API key)', () => {
-    const def = FLAT_WRAPPERS.find((w) => w.api === 'mlb_api' && w.short === 'teams');
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'mlb' && w.short === 'teams');
     const snake = resolveFlat(def, { sport_id: 11 }).query;
     const camel = resolveFlat(def, { sportId: 11 }).query;
     JSON.stringify(snake).should.equal(JSON.stringify(camel));

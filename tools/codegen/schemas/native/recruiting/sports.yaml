@@ -1,0 +1,14 @@
+# One row per sport ranking base (SportBaseRankingDto).
+# Columns produced by the recruiting parser's snake_cased, flattened output.
+schema: sports
+kind: dataframe
+columns:
+- name: ranking_key
+  type: numeric
+  description: "ranking key"
+- name: label
+  type: character
+  description: "label"
+- name: value
+  type: character
+  description: "value"

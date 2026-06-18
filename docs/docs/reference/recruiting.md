@@ -19,7 +19,7 @@ sidebar_position: 32
 import sdv from 'sportsdataverse';
 
 // 247Sports recruiting rankings (pass your own JWT via `headers`):
-await sdv.recruiting.sports247_rankings({
+await sdv.recruiting.recruiting_rankings({
   sport_key: 'football', year: 2025,
   headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },
 });
@@ -27,72 +27,37 @@ await sdv.recruiting.sports247_rankings({
 
 ## Native API — 247Sports
 
-Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://api.247sports.com`. Each method is exposed under BOTH `sports247_<endpoint>` (snake_case, py/R parity) and `sports247<Endpoint>` (camelCase canonical) on `sdv.recruiting`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://api.247sports.com`. Each method is exposed under BOTH `recruiting_<endpoint>` (snake_case, py/R parity) and `recruiting<Endpoint>` (camelCase canonical) on `sdv.recruiting`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `sports247_archived_player_rankings` / `sports247ArchivedPlayerRankings` | `https://api.247sports.com/rdb/v1/rankings/{ranking_key}/archivedPlayerRankings` | `ranking_key`\* | `page_size` → `pagesize`, `page` | `parse_sports247_list` | — |
-| `sports247_biggest_movers` / `sports247BiggestMovers` | `https://api.247sports.com/rdb/v1/rankings/{ranking_key}/biggestMovers` | `ranking_key`\* | `page_size` → `pageSize` | `parse_sports247_list` | — |
-| `sports247_coaches` / `sports247Coaches` | `https://api.247sports.com/rdb/v1/coaches` | — | `sport_key` → `sportKey`, `year`, `page`, `page_size` → `pageSize` | `parse_sports247_list` | — |
-| `sports247_current_target_predictions` / `sports247CurrentTargetPredictions` | `https://api.247sports.com/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions` | `site_key`\*, `year`\*, `sport_key`\* | `page`, `page_size` → `pageSize` | `parse_sports247_list` | — |
-| `sports247_institution_groups` / `sports247InstitutionGroups` | `https://api.247sports.com/rdb/v1/institutionGroups` | — | — | `parse_sports247_list` | — |
-| `sports247_institution_rankings` / `sports247InstitutionRankings` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/institutionrankings` | `sport_key`\*, `year`\* | `institution_key` → `institutionKey`, `ranking_type` → `rankingType`, `conference_abbreviation` → `conferenceAbbreviation`, `use_composite` → `useComposite`, `institutions`, `page_size` → `pagesize`, `page` | `parse_sports247_institution_rankings` | — |
-| `sports247_player_sport_rankings` / `sports247PlayerSportRankings` | `https://api.247sports.com/rdb/v1/playerSportRankings` | — | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `ranking_key` → `rankingKey`, `year`, `sport`, `institution_group` → `institutionGroup`, `player_sport_rating` → `playerSportRating`, `page_size` → `pagesize`, `page` | `parse_sports247_list` | — |
-| `sports247_players_under_special_evaluation` / `sports247PlayersUnderSpecialEvaluation` | `https://api.247sports.com/rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation` | `ranking_key`\* | — | `parse_sports247_list` | — |
-| `sports247_positions` / `sports247Positions` | `https://api.247sports.com/rdb/v1/positions` | — | `ranking_key` → `rankingKey`, `sport_key` → `sportKey`, `year` | `parse_sports247_list` | — |
-| `sports247_rankings` / `sports247Rankings` | `https://api.247sports.com/rdb/v1/rankings` | — | `year`, `sport_key` → `sportKey`, `ranking_type` → `rankingType`, `ranking_version` → `rankingVersion` | `parse_sports247_list` | — |
-| `sports247_rankings_composite_team_feed` / `sports247RankingsCompositeTeamFeed` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed` | `sport_key`\*, `year`\* | `page_size` → `pageSize` | `parse_sports247_ranking_feed` | — |
-| `sports247_rankings_transfer_portal_player_feed` / `sports247RankingsTransferPortalPlayerFeed` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed` | `sport_key`\*, `year`\* | `page_size` → `pageSize` | `parse_sports247_ranking_feed` | — |
-| `sports247_rankings_transfer_portal_team_feed` / `sports247RankingsTransferPortalTeamFeed` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed` | `sport_key`\*, `year`\* | `page_size` → `pageSize` | `parse_sports247_ranking_feed` | — |
-| `sports247_recruits` / `sports247Recruits` | `https://api.247sports.com/rdb/v1/recruits` | — | `sport_key` → `sportKey`, `year`, `min_date` → `minDate`, `page`, `page_size` → `pageSize` | `parse_sports247_list` | — |
-| `sports247_sport_years` / `sports247SportYears` | `https://api.247sports.com/rdb/v1/sports/{sport_key}/year` | `sport_key`\* | — | `parse_sports247_list` | — |
-| `sports247_sports` / `sports247Sports` | `https://api.247sports.com/rdb/v1/sports` | — | `ranking_key` → `rankingKey` | `parse_sports247_list` | — |
-| `sports247_tags_autocomplete` / `sports247TagsAutocomplete` | `https://api.247sports.com/rdb/v1/tags/autocomplete` | — | `default_name` → `defaultName`, `items` | `parse_sports247_list` | — |
-| `sports247_tags_photos_by_key` / `sports247TagsPhotosByKey` | `https://api.247sports.com/rdb/v1/tags/{prefixed_key}/photos` | `prefixed_key`\* | `page`, `page_size` → `pageSize` | `parse_sports247_paged_list` | — |
-| `sports247_tags_photos_by_type` / `sports247TagsPhotosByType` | `https://api.247sports.com/rdb/v1/tags/{type}/{key}/photos` | `type`\*, `key`\* | `page`, `page_size` → `pageSize` | `parse_sports247_paged_list` | — |
-| `sports247_teams` / `sports247Teams` | `https://api.247sports.com/rdb/v1/teams` | — | `sport_key` → `sportKey`, `year`, `institution_type` → `institutionType` | `parse_sports247_list` | — |
-| `sports247_transfer_player_sport_rankings` / `sports247TransferPlayerSportRankings` | `https://api.247sports.com/rdb/v1/transferPlayerSportRankings` | — | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `ranking_key` → `rankingKey`, `year`, `sport`, `institution_group` → `institutionGroup`, `player_sport_rating` → `playerSportRating`, `page_size` → `pagesize`, `page` | `parse_sports247_list` | — |
-| `sports247_transfers` / `sports247Transfers` | `https://api.247sports.com/rdb/v1/transfers` | — | `sport_key` → `sportKey`, `year`, `list_type` → `listType`, `position_group_key` → `positionGroupKey`, `position_key` → `positionKey`, `eligibility`, `institution_key` → `institutionKey`, `status`, `page_size` → `pageSize`, `page` | `parse_sports247_list` | — |
-| `sports247_unranked_recruits` / `sports247UnrankedRecruits` | `https://api.247sports.com/rdb/v1/unrankedRecruits` | — | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `ranking_key` → `rankingKey`, `year`, `sport`, `institution_group` → `institutionGroup`, `player_sport_rating` → `playerSportRating`, `list_type` → `listType`, `page_size` → `pagesize`, `page` | `parse_sports247_list` | — |
-| `sports247_unranked_transfers` / `sports247UnrankedTransfers` | `https://api.247sports.com/rdb/v1/transferrankings/{ranking_key}/unrankedtransfers` | `ranking_key`\* | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `page_size` → `pagesize`, `page` | `parse_sports247_list` | — |
-| `sports247_year` / `sports247Year` | `https://api.247sports.com/rdb/v1/year` | — | `ranking_key` → `rankingKey` | `parse_sports247_list` | — |
+| `recruiting_archived_player_rankings` / `recruitingArchivedPlayerRankings` | `https://api.247sports.com/rdb/v1/rankings/{ranking_key}/archivedPlayerRankings` | `ranking_key`\* | `page_size` → `pagesize`, `page` | `parse_recruiting_list` | — |
+| `recruiting_biggest_movers` / `recruitingBiggestMovers` | `https://api.247sports.com/rdb/v1/rankings/{ranking_key}/biggestMovers` | `ranking_key`\* | `page_size` → `pageSize` | `parse_recruiting_list` | — |
+| `recruiting_coaches` / `recruitingCoaches` | `https://api.247sports.com/rdb/v1/coaches` | — | `sport_key` → `sportKey`, `year`, `page`, `page_size` → `pageSize` | `parse_recruiting_list` | — |
+| `recruiting_current_target_predictions` / `recruitingCurrentTargetPredictions` | `https://api.247sports.com/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions` | `site_key`\*, `year`\*, `sport_key`\* | `page`, `page_size` → `pageSize` | `parse_recruiting_list` | — |
+| `recruiting_institution_groups` / `recruitingInstitutionGroups` | `https://api.247sports.com/rdb/v1/institutionGroups` | — | — | `parse_recruiting_list` | — |
+| `recruiting_institution_rankings` / `recruitingInstitutionRankings` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/institutionrankings` | `sport_key`\*, `year`\* | `institution_key` → `institutionKey`, `ranking_type` → `rankingType`, `conference_abbreviation` → `conferenceAbbreviation`, `use_composite` → `useComposite`, `institutions`, `page_size` → `pagesize`, `page` | `parse_recruiting_institution_rankings` | — |
+| `recruiting_player_sport_rankings` / `recruitingPlayerSportRankings` | `https://api.247sports.com/rdb/v1/playerSportRankings` | — | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `ranking_key` → `rankingKey`, `year`, `sport`, `institution_group` → `institutionGroup`, `player_sport_rating` → `playerSportRating`, `page_size` → `pagesize`, `page` | `parse_recruiting_list` | — |
+| `recruiting_players_under_special_evaluation` / `recruitingPlayersUnderSpecialEvaluation` | `https://api.247sports.com/rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation` | `ranking_key`\* | — | `parse_recruiting_list` | — |
+| `recruiting_positions` / `recruitingPositions` | `https://api.247sports.com/rdb/v1/positions` | — | `ranking_key` → `rankingKey`, `sport_key` → `sportKey`, `year` | `parse_recruiting_list` | — |
+| `recruiting_rankings` / `recruitingRankings` | `https://api.247sports.com/rdb/v1/rankings` | — | `year`, `sport_key` → `sportKey`, `ranking_type` → `rankingType`, `ranking_version` → `rankingVersion` | `parse_recruiting_list` | — |
+| `recruiting_rankings_composite_team_feed` / `recruitingRankingsCompositeTeamFeed` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed` | `sport_key`\*, `year`\* | `page_size` → `pageSize` | `parse_recruiting_ranking_feed` | — |
+| `recruiting_rankings_transfer_portal_player_feed` / `recruitingRankingsTransferPortalPlayerFeed` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed` | `sport_key`\*, `year`\* | `page_size` → `pageSize` | `parse_recruiting_ranking_feed` | — |
+| `recruiting_rankings_transfer_portal_team_feed` / `recruitingRankingsTransferPortalTeamFeed` | `https://api.247sports.com/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed` | `sport_key`\*, `year`\* | `page_size` → `pageSize` | `parse_recruiting_ranking_feed` | — |
+| `recruiting_recruits` / `recruitingRecruits` | `https://api.247sports.com/rdb/v1/recruits` | — | `sport_key` → `sportKey`, `year`, `min_date` → `minDate`, `page`, `page_size` → `pageSize` | `parse_recruiting_list` | — |
+| `recruiting_sport_years` / `recruitingSportYears` | `https://api.247sports.com/rdb/v1/sports/{sport_key}/year` | `sport_key`\* | — | `parse_recruiting_list` | — |
+| `recruiting_sports` / `recruitingSports` | `https://api.247sports.com/rdb/v1/sports` | — | `ranking_key` → `rankingKey` | `parse_recruiting_list` | — |
+| `recruiting_tags_autocomplete` / `recruitingTagsAutocomplete` | `https://api.247sports.com/rdb/v1/tags/autocomplete` | — | `default_name` → `defaultName`, `items` | `parse_recruiting_list` | — |
+| `recruiting_tags_photos_by_key` / `recruitingTagsPhotosByKey` | `https://api.247sports.com/rdb/v1/tags/{prefixed_key}/photos` | `prefixed_key`\* | `page`, `page_size` → `pageSize` | `parse_recruiting_paged_list` | — |
+| `recruiting_tags_photos_by_type` / `recruitingTagsPhotosByType` | `https://api.247sports.com/rdb/v1/tags/{type}/{key}/photos` | `type`\*, `key`\* | `page`, `page_size` → `pageSize` | `parse_recruiting_paged_list` | — |
+| `recruiting_teams` / `recruitingTeams` | `https://api.247sports.com/rdb/v1/teams` | — | `sport_key` → `sportKey`, `year`, `institution_type` → `institutionType` | `parse_recruiting_list` | — |
+| `recruiting_transfer_player_sport_rankings` / `recruitingTransferPlayerSportRankings` | `https://api.247sports.com/rdb/v1/transferPlayerSportRankings` | — | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `ranking_key` → `rankingKey`, `year`, `sport`, `institution_group` → `institutionGroup`, `player_sport_rating` → `playerSportRating`, `page_size` → `pagesize`, `page` | `parse_recruiting_list` | — |
+| `recruiting_transfers` / `recruitingTransfers` | `https://api.247sports.com/rdb/v1/transfers` | — | `sport_key` → `sportKey`, `year`, `list_type` → `listType`, `position_group_key` → `positionGroupKey`, `position_key` → `positionKey`, `eligibility`, `institution_key` → `institutionKey`, `status`, `page_size` → `pageSize`, `page` | `parse_recruiting_list` | — |
+| `recruiting_unranked_recruits` / `recruitingUnrankedRecruits` | `https://api.247sports.com/rdb/v1/unrankedRecruits` | — | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `ranking_key` → `rankingKey`, `year`, `sport`, `institution_group` → `institutionGroup`, `player_sport_rating` → `playerSportRating`, `list_type` → `listType`, `page_size` → `pagesize`, `page` | `parse_recruiting_list` | — |
+| `recruiting_unranked_transfers` / `recruitingUnrankedTransfers` | `https://api.247sports.com/rdb/v1/transferrankings/{ranking_key}/unrankedtransfers` | `ranking_key`\* | `state_abbreviation` → `stateAbbreviation`, `position_abbreviation` → `positionAbbreviation`, `page_size` → `pagesize`, `page` | `parse_recruiting_list` | — |
+| `recruiting_year` / `recruitingYear` | `https://api.247sports.com/rdb/v1/year` | — | `ranking_key` → `rankingKey` | `parse_recruiting_list` | — |
 
-### Returns — `sports247_archived_player_rankings` / `sports247ArchivedPlayerRankings`
-
-| col_name | type | description |
-|---|---|---|
-| `ranking_key` | numeric | ranking key |
-| `key` | numeric | key |
-| `index` | numeric | index |
-| `order` | numeric | order |
-| `current_rating` | numeric | current rating |
-| `rating` | numeric | rating |
-| `current_group_rank` | numeric | current group rank |
-| `previous_group_rank` | numeric | previous group rank |
-| `current_group_composite_rank` | numeric | current group composite rank |
-| `current_overall_rank` | numeric | current overall rank |
-| `current_overall_composite_rank` | numeric | current overall composite rank |
-| `player_sport_rating` | numeric | player sport rating |
-| `under_evaluation` | logical | under evaluation |
-| `first_name` | character | first name |
-| `last_name` | character | last name |
-| `player_key` | numeric | player key |
-| `player_institution_key` | numeric | player institution key |
-| `position` | character | position |
-| `city` | character | city |
-| `state` | character | state |
-| `current_order` | character | current order |
-| `has_eval` | logical | has eval |
-| `current_star_rating` | numeric | current star rating |
-| `star_rating` | numeric | star rating |
-| `player_sport_star_rating` | numeric | player sport star rating |
-| `height` | numeric | height |
-| `weight` | numeric | weight |
-| `move` | numeric | move |
-| `current_temp_rank` | numeric | current temp rank |
-| `previous_temp_rank` | numeric | previous temp rank |
-
-### Returns — `sports247_biggest_movers` / `sports247BiggestMovers`
+### Returns — `recruiting_archived_player_rankings` / `recruitingArchivedPlayerRankings`
 
 | col_name | type | description |
 |---|---|---|
@@ -127,7 +92,42 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `current_temp_rank` | numeric | current temp rank |
 | `previous_temp_rank` | numeric | previous temp rank |
 
-### Returns — `sports247_institution_rankings` / `sports247InstitutionRankings`
+### Returns — `recruiting_biggest_movers` / `recruitingBiggestMovers`
+
+| col_name | type | description |
+|---|---|---|
+| `ranking_key` | numeric | ranking key |
+| `key` | numeric | key |
+| `index` | numeric | index |
+| `order` | numeric | order |
+| `current_rating` | numeric | current rating |
+| `rating` | numeric | rating |
+| `current_group_rank` | numeric | current group rank |
+| `previous_group_rank` | numeric | previous group rank |
+| `current_group_composite_rank` | numeric | current group composite rank |
+| `current_overall_rank` | numeric | current overall rank |
+| `current_overall_composite_rank` | numeric | current overall composite rank |
+| `player_sport_rating` | numeric | player sport rating |
+| `under_evaluation` | logical | under evaluation |
+| `first_name` | character | first name |
+| `last_name` | character | last name |
+| `player_key` | numeric | player key |
+| `player_institution_key` | numeric | player institution key |
+| `position` | character | position |
+| `city` | character | city |
+| `state` | character | state |
+| `current_order` | character | current order |
+| `has_eval` | logical | has eval |
+| `current_star_rating` | numeric | current star rating |
+| `star_rating` | numeric | star rating |
+| `player_sport_star_rating` | numeric | player sport star rating |
+| `height` | numeric | height |
+| `weight` | numeric | weight |
+| `move` | numeric | move |
+| `current_temp_rank` | numeric | current temp rank |
+| `previous_temp_rank` | numeric | previous temp rank |
+
+### Returns — `recruiting_institution_rankings` / `recruitingInstitutionRankings`
 
 | col_name | type | description |
 |---|---|---|
@@ -167,7 +167,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `state` | character | state |
 | `institution_ranking_url` | character | institution ranking url |
 
-### Returns — `sports247_player_sport_rankings` / `sports247PlayerSportRankings`
+### Returns — `recruiting_player_sport_rankings` / `recruitingPlayerSportRankings`
 
 | col_name | type | description |
 |---|---|---|
@@ -202,7 +202,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `current_temp_rank` | numeric | current temp rank |
 | `previous_temp_rank` | numeric | previous temp rank |
 
-### Returns — `sports247_players_under_special_evaluation` / `sports247PlayersUnderSpecialEvaluation`
+### Returns — `recruiting_players_under_special_evaluation` / `recruitingPlayersUnderSpecialEvaluation`
 
 | col_name | type | description |
 |---|---|---|
@@ -237,7 +237,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `current_temp_rank` | numeric | current temp rank |
 | `previous_temp_rank` | numeric | previous temp rank |
 
-### Returns — `sports247_positions` / `sports247Positions`
+### Returns — `recruiting_positions` / `recruitingPositions`
 
 | col_name | type | description |
 |---|---|---|
@@ -251,7 +251,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `player_sport_rankings` | character | player sport rankings |
 | `position_group` | character | position group |
 
-### Returns — `sports247_rankings_composite_team_feed` / `sports247RankingsCompositeTeamFeed`
+### Returns — `recruiting_rankings_composite_team_feed` / `recruitingRankingsCompositeTeamFeed`
 
 | col_name | type | description |
 |---|---|---|
@@ -265,7 +265,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `previous_institution_name` | character | name of the previous school |
 | `previous_institution_logo` | character | name of the previous school logo |
 
-### Returns — `sports247_rankings_transfer_portal_player_feed` / `sports247RankingsTransferPortalPlayerFeed`
+### Returns — `recruiting_rankings_transfer_portal_player_feed` / `recruitingRankingsTransferPortalPlayerFeed`
 
 | col_name | type | description |
 |---|---|---|
@@ -279,7 +279,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `previous_institution_name` | character | name of the previous school |
 | `previous_institution_logo` | character | name of the previous school logo |
 
-### Returns — `sports247_rankings_transfer_portal_team_feed` / `sports247RankingsTransferPortalTeamFeed`
+### Returns — `recruiting_rankings_transfer_portal_team_feed` / `recruitingRankingsTransferPortalTeamFeed`
 
 | col_name | type | description |
 |---|---|---|
@@ -293,7 +293,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `previous_institution_name` | character | name of the previous school |
 | `previous_institution_logo` | character | name of the previous school logo |
 
-### Returns — `sports247_sports` / `sports247Sports`
+### Returns — `recruiting_sports` / `recruitingSports`
 
 | col_name | type | description |
 |---|---|---|
@@ -301,7 +301,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `label` | character | label |
 | `value` | character | value |
 
-### Returns — `sports247_tags_autocomplete` / `sports247TagsAutocomplete`
+### Returns — `recruiting_tags_autocomplete` / `recruitingTagsAutocomplete`
 
 | col_name | type | description |
 |---|---|---|
@@ -310,7 +310,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `type` | character | type |
 | `annotation` | character | annotation |
 
-### Returns — `sports247_tags_photos_by_key` / `sports247TagsPhotosByKey`
+### Returns — `recruiting_tags_photos_by_key` / `recruitingTagsPhotosByKey`
 
 | col_name | type | description |
 |---|---|---|
@@ -327,7 +327,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `duration` | numeric | duration |
 | `url` | character | url |
 
-### Returns — `sports247_tags_photos_by_type` / `sports247TagsPhotosByType`
+### Returns — `recruiting_tags_photos_by_type` / `recruitingTagsPhotosByType`
 
 | col_name | type | description |
 |---|---|---|
@@ -344,7 +344,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `duration` | numeric | duration |
 | `url` | character | url |
 
-### Returns — `sports247_teams` / `sports247Teams`
+### Returns — `recruiting_teams` / `recruitingTeams`
 
 | col_name | type | description |
 |---|---|---|
@@ -356,7 +356,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `sport` | character | Name of Sport assoicated with the specific Team PK |
 | `type` | character | Institutution Type (College or Pro) |
 
-### Returns — `sports247_transfer_player_sport_rankings` / `sports247TransferPlayerSportRankings`
+### Returns — `recruiting_transfer_player_sport_rankings` / `recruitingTransferPlayerSportRankings`
 
 | col_name | type | description |
 |---|---|---|
@@ -394,7 +394,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `current_temp_rank` | numeric | current temp rank |
 | `previous_temp_rank` | numeric | previous temp rank |
 
-### Returns — `sports247_unranked_recruits` / `sports247UnrankedRecruits`
+### Returns — `recruiting_unranked_recruits` / `recruitingUnrankedRecruits`
 
 | col_name | type | description |
 |---|---|---|
@@ -429,7 +429,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `current_temp_rank` | numeric | current temp rank |
 | `previous_temp_rank` | numeric | previous temp rank |
 
-### Returns — `sports247_unranked_transfers` / `sports247UnrankedTransfers`
+### Returns — `recruiting_unranked_transfers` / `recruitingUnrankedTransfers`
 
 | col_name | type | description |
 |---|---|---|
@@ -467,7 +467,7 @@ Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://a
 | `current_temp_rank` | numeric | current temp rank |
 | `previous_temp_rank` | numeric | previous temp rank |
 
-### Returns — `sports247_year` / `sports247Year`
+### Returns — `recruiting_year` / `recruitingYear`
 
 | col_name | type | description |
 |---|---|---|

@@ -1,0 +1,12 @@
+# Fox Sports Bifrost returns schema — columns DERIVED from a captured live
+# response run through the registered parser (parse_fox_*). The Fox spec
+# left this response untyped (`object`), so the columns are enumerated here from
+# a representative capture. `type` is inferred from the captured JS value;
+# `description` is best-effort from the snake_cased key. Endpoints with no
+# capture remain `columns: []`.
+schema: team_header
+kind: dataframe
+columns:
+- name: text
+  type: character
+  description: "Bifrost field `text`: text."

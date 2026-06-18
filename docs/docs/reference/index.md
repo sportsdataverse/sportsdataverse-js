@@ -57,7 +57,7 @@ Native providers that aren't a single ESPN league — each gets its own `sdv.<na
 | [recruiting](./recruiting) | *cross-sport* | 247Sports | 25 |
 | [cbs](./cbs) | *cross-sport* | CBS Sports | 82 |
 | [fox](./fox) | *cross-sport* | Fox Sports | 38 |
-| [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (editorial), Yahoo Sports (shangrila) | 107 |
+| [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (scores), Yahoo Sports | 107 |
 | [hockeytech](./hockeytech) | Hockey | HockeyTech / LeagueStat | 10 |
 | [torvik](./torvik) | Basketball | BartTorvik (T-Rank) | 5 |
 
@@ -71,7 +71,7 @@ await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });
 
 :::tip Native (non-ESPN) APIs
 ```js
-await sdv.mlb.mlbApiSchedule({ sportId: 1, date: '2024-07-01' });
+await sdv.mlb.mlbSchedule({ sportId: 1, date: '2024-07-01' });
 await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });
 await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });
 ```
