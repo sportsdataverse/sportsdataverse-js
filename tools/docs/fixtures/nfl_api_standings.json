@@ -1,0 +1,64 @@
+{
+  "_note": "Tiny hand-built sample for the docs output injector. Mirrors the api.nfl.com /football/v2/standings shape (raw.weeks[].standings[]) that parse_nfl_standings consumes. NOT a captured live payload — kept minimal & deterministic so the frozen doc table never drifts. Real data has ~32 teams and many more fields.",
+  "weeks": [
+    {
+      "season": 2024,
+      "seasonType": "REG",
+      "week": 18,
+      "standings": [
+        {
+          "team": { "abbreviation": "KC", "fullName": "Kansas City Chiefs" },
+          "conference": "AFC",
+          "division": "AFC West",
+          "wins": 15,
+          "losses": 2,
+          "ties": 0,
+          "winPct": 0.882,
+          "pointsFor": 372,
+          "pointsAgainst": 326,
+          "divisionRank": 1,
+          "conferenceRank": 1
+        },
+        {
+          "team": { "abbreviation": "BUF", "fullName": "Buffalo Bills" },
+          "conference": "AFC",
+          "division": "AFC East",
+          "wins": 13,
+          "losses": 4,
+          "ties": 0,
+          "winPct": 0.765,
+          "pointsFor": 525,
+          "pointsAgainst": 368,
+          "divisionRank": 1,
+          "conferenceRank": 2
+        },
+        {
+          "team": { "abbreviation": "DET", "fullName": "Detroit Lions" },
+          "conference": "NFC",
+          "division": "NFC North",
+          "wins": 15,
+          "losses": 2,
+          "ties": 0,
+          "winPct": 0.882,
+          "pointsFor": 564,
+          "pointsAgainst": 391,
+          "divisionRank": 1,
+          "conferenceRank": 1
+        },
+        {
+          "team": { "abbreviation": "PHI", "fullName": "Philadelphia Eagles" },
+          "conference": "NFC",
+          "division": "NFC East",
+          "wins": 14,
+          "losses": 3,
+          "ties": 0,
+          "winPct": 0.824,
+          "pointsFor": 433,
+          "pointsAgainst": 303,
+          "divisionRank": 1,
+          "conferenceRank": 2
+        }
+      ]
+    }
+  ]
+}

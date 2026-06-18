@@ -4,6 +4,8 @@ sidebar_label: CFB
 sidebar_position: 8
 ---
 
+import RunCell from '@site/src/components/RunCell';
+
 # CFB recipes
 
 College football lives under `sdv.cfb`. It carries the universal ESPN surface
@@ -19,6 +21,10 @@ const games = await sdv.cfb.espnCfbScoreboard({ parsed: true });
 console.table(games);
 ```
 
+Live and inline — `week` + `groups` (80 = FBS) narrow it down:
+
+<RunCell league="cfb" endpoint="espn:scoreboard" parsed title="CFB scoreboard — live" />
+
 [Open in playground ▶](/playground?l=cfb&e=espn%3Ascoreboard&parsed=1)
 
 ## Rankings (AP poll & friends)
@@ -29,6 +35,8 @@ import sdv from 'sportsdataverse';
 const rankings = await sdv.cfb.espnCfbRankings({ parsed: true });
 console.table(rankings);
 ```
+
+<RunCell league="cfb" endpoint="espn:rankings" parsed title="CFB rankings — live" />
 
 [Open in playground ▶](/playground?l=cfb&e=espn%3Arankings&parsed=1)
 

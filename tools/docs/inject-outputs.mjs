@@ -1,70 +1,64 @@
 #!/usr/bin/env node
 // ---------------------------------------------------------------------------
-// inject-outputs.mjs — build-time "real output" injector (literate docs PoC).
+// inject-outputs.mjs — build-time "real output" injector (literate docs).
 //
-// Runs a small set of example snippets at BUILD time and freezes their real
-// parsed output into a guide page, between HTML-comment markers. This gives the
-// "literate docs" benefit (the reader sees actual rows the parser produces)
-// without any client runtime — the tables are plain markdown in the committed
-// page.
+// Runs a manifest of example snippets at BUILD time and freezes their real
+// parsed output into the guide pages, between HTML-comment markers. This gives
+// the "literate docs" benefit (the reader sees the actual rows the parser
+// produces) without any client runtime — the tables are plain markdown in the
+// committed page.
 //
 // How it works:
-//   1. Each EXAMPLE names a committed ESPN fixture + a parse target (kind/key).
-//   2. We load the fixture and run it through the SAME parser bundle the
-//      playground uses (docs/src/playground/parsers.bundle.mjs, which runs in
-//      Node as-is — it's an esbuild-bundled ESM module).
+//   1. The example set lives in tools/docs/examples.mjs (the MANIFEST) — each
+//      entry names a committed fixture + a parse target (family/key/parser/
+//      section) + the guide page + marker id where its table should land.
+//   2. We load each fixture and run it through the SAME parser bundle the
+//      playground uses (docs/src/playground/parsers.bundle.mjs, an esbuild
+//      ESM module that runs in Node as-is).
 //   3. We render the first ~8 rows × ~6 cols as a markdown table (truncation
 //      noted), then inject it into the target guide between markers, e.g.
 //         <!-- inject:example:scoreboard -->  ...  <!-- /inject -->
 //
+// Supported families (see examples.mjs for the contract):
+//   - "espn"          ESPN array-frame parser  → array of row objects.
+//   - "flat"          flat (non-ESPN) parser    → array of row objects.
+//   - "espn-summary"  ESPN summary dispatcher   → dict of frames; render one
+//                     chosen `section` sub-frame.
+//
 // It is idempotent: re-running replaces the content between each marker pair.
 // It is deterministic: fixtures are committed, so there is NO network — CI can
-// reproduce the exact same tables. (The same injector could fetch live instead;
-// the fixture path is the PoC choice for reproducibility.)
+// reproduce the exact same tables.
 //
-// Usage:  node tools/docs/inject-outputs.mjs
-//         npm run docs:examples
+// Usage:
+//   node tools/docs/inject-outputs.mjs           # write the frozen tables
+//   node tools/docs/inject-outputs.mjs --check    # CI drift gate: exit 1 if any
+//                                                 # guide is stale vs a fresh run
+//   npm run docs:examples                          # alias for the write mode
+//
+// The `--check` mode is wired into CI (.github/workflows/ci.yml, docs job) so a
+// committed guide whose frozen output no longer matches the parser fails the
+// build instead of silently drifting.
 // ---------------------------------------------------------------------------
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { EXAMPLES } from './examples.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = join(__dirname, '..', '..');
 
-const FIXTURES = join(REPO, 'test', 'fixtures', 'espn');
+const FIXTURE_DIRS = {
+  espn: join(REPO, 'test', 'fixtures', 'espn'),
+  tools: join(__dirname, 'fixtures'),
+};
 const PARSERS = join(REPO, 'docs', 'src', 'playground', 'parsers.bundle.mjs');
-const TARGET = join(REPO, 'docs', 'docs', 'guides', '01-quickstart.mdx');
+const GUIDES = join(REPO, 'docs', 'docs', 'guides');
 
 const MAX_ROWS = 8;
 const MAX_COLS = 6;
 
-// The PoC example set: id (matches the marker), fixture file, parse kind + key,
-// and a one-line caption rendered above the table.
-const EXAMPLES = [
-  {
-    id: 'scoreboard',
-    fixture: 'scoreboard_nba.json',
-    kind: 'espn',
-    key: 'scoreboard',
-    caption: '`sdv.nba.espnNbaScoreboard({ parsed: true })` — one row per game.',
-  },
-  {
-    id: 'standings',
-    fixture: 'standings_nba.json',
-    kind: 'espn',
-    key: 'standings',
-    caption: '`sdv.nba.espnNbaStandings({ parsed: true })` — one row per team.',
-  },
-  {
-    id: 'team_roster',
-    fixture: 'team_roster_nba.json',
-    kind: 'espn',
-    key: 'team_roster',
-    caption: '`sdv.nba.espnNbaTeamRoster({ team_id: 13, parsed: true })` — one row per player.',
-  },
-];
+const CHECK = process.argv.includes('--check');
 
 /** Escape a value for a markdown table cell (no raw pipes/newlines). */
 function cell(v) {
@@ -99,40 +93,102 @@ function renderTable(rows) {
   return `${header}\n${divider}\n${body}\n\n_${truncBits.join(', ')}._`;
 }
 
+/** Run one manifest entry through the parser bundle → array of rows. */
+function rowsFor(parsers, ex) {
+  const dir = FIXTURE_DIRS[ex.fixtureDir];
+  if (!dir) throw new Error(`example "${ex.id}": unknown fixtureDir "${ex.fixtureDir}"`);
+  const raw = JSON.parse(readFileSync(join(dir, ex.fixture), 'utf8'));
+
+  if (ex.family === 'espn') {
+    return parsers.parseEndpoint('espn', ex.key, raw);
+  }
+  if (ex.family === 'flat') {
+    return parsers.parseEndpoint('flat', ex.parser, raw);
+  }
+  if (ex.family === 'espn-summary') {
+    const dict = parsers.parseEndpoint('espn', 'summary', raw);
+    if (!dict || typeof dict !== 'object') return [];
+    if (!(ex.section in dict)) {
+      throw new Error(`example "${ex.id}": summary section "${ex.section}" not found`);
+    }
+    return dict[ex.section];
+  }
+  throw new Error(`example "${ex.id}": unknown family "${ex.family}"`);
+}
+
+/** Build the full injected block (caption + table) for an entry. */
+function blockFor(parsers, ex) {
+  const rows = rowsFor(parsers, ex);
+  const count = Array.isArray(rows) ? rows.length : 0;
+  return { block: `${ex.caption}\n\n${renderTable(rows)}`, count };
+}
+
 /** Replace the content between `<!-- inject:example:ID -->` and `<!-- /inject -->`. */
 function injectBlock(doc, id, block) {
   const open = `<!-- inject:example:${id} -->`;
   const close = '<!-- /inject -->';
   const start = doc.indexOf(open);
-  if (start === -1) {
-    console.warn(`  ! marker not found for "${id}" — skipped`);
-    return doc;
-  }
+  if (start === -1) return { doc, found: false };
   const end = doc.indexOf(close, start);
-  if (end === -1) {
-    console.warn(`  ! closing marker not found for "${id}" — skipped`);
-    return doc;
-  }
+  if (end === -1) return { doc, found: false };
   const before = doc.slice(0, start + open.length);
   const after = doc.slice(end);
-  return `${before}\n\n${block}\n\n${after}`;
+  return { doc: `${before}\n\n${block}\n\n${after}`, found: true };
 }
 
 async function main() {
   const parsers = await import(`file://${PARSERS.replace(/\\/g, '/')}`);
-  let doc = readFileSync(TARGET, 'utf8');
 
+  // Group examples by target guide so each file is read + written once.
+  const byTarget = new Map();
   for (const ex of EXAMPLES) {
-    const raw = JSON.parse(readFileSync(join(FIXTURES, ex.fixture), 'utf8'));
-    const rows = parsers.parseEndpoint(ex.kind, ex.key, raw);
-    const count = Array.isArray(rows) ? rows.length : 0;
-    const block = `${ex.caption}\n\n${renderTable(rows)}`;
-    doc = injectBlock(doc, ex.id, block);
-    console.log(`  ✓ ${ex.id.padEnd(12)} ${ex.fixture.padEnd(24)} ${count} rows`);
+    if (!byTarget.has(ex.target)) byTarget.set(ex.target, []);
+    byTarget.get(ex.target).push(ex);
   }
 
-  writeFileSync(TARGET, doc);
-  console.log(`\nInjected ${EXAMPLES.length} example(s) into ${TARGET}`);
+  let staleFiles = 0;
+  let injected = 0;
+
+  for (const [target, exs] of byTarget) {
+    const path = join(GUIDES, target);
+    const original = readFileSync(path, 'utf8');
+    let doc = original;
+
+    for (const ex of exs) {
+      const { block, count } = blockFor(parsers, ex);
+      const res = injectBlock(doc, ex.id, block);
+      if (!res.found) {
+        console.warn(`  ! marker not found for "${ex.id}" in ${target} — skipped`);
+        continue;
+      }
+      doc = res.doc;
+      injected += 1;
+      console.log(`  ✓ ${ex.id.padEnd(18)} ${target.padEnd(20)} ${ex.family.padEnd(13)} ${count} rows`);
+    }
+
+    if (doc !== original) {
+      if (CHECK) {
+        staleFiles += 1;
+        console.error(`  ✗ STALE: ${target} — injected output differs from a fresh run`);
+      } else {
+        writeFileSync(path, doc);
+      }
+    }
+  }
+
+  if (CHECK) {
+    if (staleFiles > 0) {
+      console.error(
+        `\n${staleFiles} guide(s) have stale frozen output. ` +
+          'Run `npm run docs:examples` and commit the result.'
+      );
+      process.exit(1);
+    }
+    console.log(`\n✓ All ${injected} injected block(s) across ${byTarget.size} guide(s) are up to date.`);
+    return;
+  }
+
+  console.log(`\nInjected ${injected} example(s) across ${byTarget.size} guide(s).`);
 }
 
 main().catch((e) => {

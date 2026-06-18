@@ -4,6 +4,8 @@ sidebar_label: WNBA
 sidebar_position: 3
 ---
 
+import RunCell from '@site/src/components/RunCell';
+
 # WNBA recipes
 
 The WNBA lives under `sdv.wnba` and exposes the full ESPN cross-league surface
@@ -23,6 +25,10 @@ const games = await sdv.wnba.espnWnbaScoreboard({ parsed: true });
 console.table(games);
 ```
 
+Live and inline — edit `dates` (YYYYMMDD) and hit **Run ▶**:
+
+<RunCell league="wnba" endpoint="espn:scoreboard" parsed title="WNBA scoreboard — live" />
+
 [Open in playground ▶](/playground?l=wnba&e=espn%3Ascoreboard&parsed=1)
 
 ## League standings
@@ -35,6 +41,8 @@ import sdv from 'sportsdataverse';
 const standings = await sdv.wnba.espnWnbaStandings({ parsed: true });
 console.table(standings);
 ```
+
+<RunCell league="wnba" endpoint="espn:standings" parsed title="WNBA standings — live" />
 
 [Open in playground ▶](/playground?l=wnba&e=espn%3Astandings&parsed=1)
 

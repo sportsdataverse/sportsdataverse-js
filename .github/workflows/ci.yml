@@ -54,6 +54,14 @@ jobs:
             docs/package-lock.json
       # Root deps so docusaurus-plugin-typedoc can resolve the package's src imports.
       - run: npm ci
+      # Drift gate: the guides carry build-time "frozen" parser-output tables
+      # (tools/docs/inject-outputs.mjs, manifest in tools/docs/examples.mjs).
+      # `--check` re-runs every example through the committed parser bundle and
+      # fails if any guide's injected block is stale vs a fresh run, so the
+      # frozen outputs can never silently drift from the parsers. Regenerate
+      # locally with `npm run docs:examples` and commit the result.
+      - name: Docs example-output drift check
+        run: npm run docs:examples:check
       - run: npm ci
         working-directory: docs
       # Builds the Docusaurus site (generates the TypeDoc API reference) and fails

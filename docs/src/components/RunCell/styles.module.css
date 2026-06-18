@@ -95,6 +95,18 @@
   word-break: break-all;
 }
 
+/* Live summary sub-frame picker, shown next to Run for the espn:summary cell. */
+.sectionSelect {
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  margin-left: auto;
+}
+
 .urlRow {
   display: flex;
   align-items: baseline;
