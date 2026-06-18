@@ -17,6 +17,7 @@
   - [Key Coding Conventions](#key-coding-conventions)
   - [Common Pitfalls](#common-pitfalls)
   - [Documentation Maintenance](#documentation-maintenance)
+    - [Docs-overhaul features (live guides, injector, grouped sidebar)](#docs-overhaul-features-live-guides-injector-grouped-sidebar)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -326,3 +327,59 @@ tsconfig.json, typedoc.json
   cross-links.
 - Verify the docs build with `cd docs && npx docusaurus build` before shipping
   doc-affecting changes.
+
+### Docs-overhaul features (live guides, injector, grouped sidebar)
+
+The docs site grew a literate-docs / live-runner layer. Five pieces, each
+**data-driven or codegen-owned** so they self-maintain:
+
+- **Sport-grouped reference sidebar is codegen-owned — never hand-edit it.**
+  `tools/codegen/generate.mjs` emits `docs/src/generated/reference-sidebar.js`,
+  which nests every ESPN league reference doc under a collapsible category named
+  for its `sport` (read from `tools/codegen/endpoints/leagues.yaml`) plus a
+  "Providers" group; `docs/sidebars.js` just `require()`s it. It carries an
+  `@generated … do not edit by hand` header and is **drift-guarded** by
+  `npm run codegen:check`. To regroup a league, edit `leagues.yaml` (its `sport`
+  field) or the `SPORT_ORDER` in `generate.mjs`, then `npm run codegen` — don't
+  touch the generated file or `sidebars.js`. The reference `.md` files stay flat
+  (no URL changes); only the sidebar nesting changes.
+
+- **`<RunCell>` is an embeddable live runner for `.mdx` guides.**
+  `docs/src/components/RunCell/index.jsx` is a compact single-endpoint slice of
+  the full `<Playground>`: editable params → resolved GET URL → **Run** (via the
+  `/api/run` proxy) → raw JSON or a tidy parsed table. It is SSR-safe and reuses
+  the playground's own `resolve.mjs` + `parsers.bundle.mjs` verbatim. It handles
+  every endpoint kind — ESPN (incl. `leagueParam` leagues like soccer), the
+  `summary` section selector, every flat family, enum dropdowns, and non-JSON
+  Statcast CSV/HTML. Drop it inline in any guide: `import RunCell from
+  '@site/src/components/RunCell'` then `<RunCell league="nba"
+  endpoint="espn:scoreboard" parsed />`.
+
+- **Build-time output injector freezes real parsed tables into guides.**
+  `tools/docs/inject-outputs.mjs` reads the manifest `tools/docs/examples.mjs`
+  and writes the first few rows × cols of each example's **real** parsed output
+  as a markdown table between `<!-- inject:example:<id> -->` …
+  `<!-- /inject -->` markers in the target guide. It runs the SAME committed
+  `parsers.bundle.mjs` the playground uses, is **deterministic** (committed
+  fixtures, no network), and covers ESPN array frames, flat families, and the
+  `summary` dispatcher (`espn` / `flat` / `espn-summary` families). Scripts:
+  `npm run docs:examples` (write) and `npm run docs:examples:check` (drift gate,
+  wired into `.github/workflows/ci.yml`). **After changing `src/parsers/**` (then
+  `npm run bundle:parsers`) or the example manifest, run `npm run docs:examples`
+  and keep `docs:examples:check` green** — it is a CI gate. A no-network
+  consistency guard lives in `test/docs-examples.test.js`.
+
+- **Programmatic homepage + Playground links are data-driven.**
+  `docs/src/pages/index.js` maps over the generated
+  `docs/src/playground/endpoints.json` (ESPN leagues grouped by `sport` + the
+  provider namespaces), so adding a sport/league/provider and re-running
+  `npm run codegen` updates the home page with no bespoke edit. The navbar and
+  footer both carry **Docs / News / Tutorials / Playground**, and the docs
+  sidebar has a 🛝 **Playground** link near the top
+  (`docs/docusaurus.config.js` + `docs/sidebars.js`).
+
+- **The `/api/run` proxy is what makes RunCell + the playground live.** It is a
+  Vercel serverless function (`docs/api/run.mjs`) — host-allowlisted, with
+  server-side NFL.com token minting and content-type passthrough. RunCell and the
+  playground are no-ops without it; locally you need the proxy running for a live
+  Run (the committed injected tables and the `build` itself need no network).
