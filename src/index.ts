@@ -65,6 +65,12 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // callers pass browser-y Origin/Referer via the flat `headers` arg.
   yahoo_editorial: 'yahoo',
   yahoo_shangrila: 'yahoo',
+  // HockeyTech / LeagueStat — standalone provider family. `hockeytech` is a
+  // cross-sport namespace; the merge creates `sdv.hockeytech.*` from scratch.
+  // One feed gateway serves every league (PWHL + junior/minor); the `league`
+  // call-param selects it. Responses are JSONP (stripped by the family's
+  // content-type-aware getter), so it is NOT a plain-JSON passthrough.
+  hockeytech: 'hockeytech',
 };
 const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
 for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);

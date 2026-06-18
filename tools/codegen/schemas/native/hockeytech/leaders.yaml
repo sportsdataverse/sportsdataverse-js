@@ -1,0 +1,54 @@
+schema: leaders
+kind: dataframe
+columns:
+- name: player_type
+  type: character
+  description: 'skaters or goalies.'
+- name: category
+  type: character
+  description: 'Leaderboard category (Points/Goals/...).'
+- name: rank
+  type: integer
+  description: 'Rank within the category.'
+- name: player_id
+  type: character
+  description: 'HockeyTech player id.'
+- name: jersey_number
+  type: character
+  description: ''
+- name: name
+  type: character
+  description: 'Player name.'
+- name: team_id
+  type: character
+  description: ''
+- name: team_name
+  type: character
+  description: ''
+- name: team_code
+  type: character
+  description: 'Team code.'
+- name: team_logo
+  type: character
+  description: ''
+- name: team_logo_small
+  type: character
+  description: ''
+- name: stat_formatted
+  type: character
+  description: ''
+- name: type_formatted
+  type: character
+  description: ''
+- name: photo
+  type: character
+  description: ''
+- name: photo_small
+  type: character
+  description: ''
+- name: position
+  type: character
+  description: ''
+- name: division
+  type: character
+  description: ''

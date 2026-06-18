@@ -3,6 +3,7 @@ import { resolveFlat } from "../core/flat.js";
 import { toCamel } from "../core/espn.js";
 import { nflHeadersGen } from "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
+import { hockeytechGet } from "../core/hockeytech_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
@@ -33,6 +34,11 @@ type GetterFn = (url: string, config?: { params?: any; headers?: any }) => Promi
  */
 const GETTER_OVERRIDES: Record<string, GetterFn> = {
   mlb_statcast: statcastGet,
+  // HockeyTech responses are JSONP (`angular.callbacks._N({...})`) and the
+  // per-league host / key / client_code / site_id all have to be injected from
+  // the league registry — so this getter assembles the real URL from the
+  // resolved query params, fetches, and strips the JSONP wrapper before parsing.
+  hockeytech: hockeytechGet,
 };
 
 /**

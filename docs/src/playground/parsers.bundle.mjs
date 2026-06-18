@@ -1593,6 +1593,105 @@ function parse_yahoo_shangrila_stats(raw) {
   return normalize(rows);
 }
 
+// src/parsers/hockeytech.ts
+function isPlainObject15(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+function siteKitRows(payload) {
+  const kit = isPlainObject15(payload) ? payload.SiteKit : void 0;
+  if (!isPlainObject15(kit)) return [];
+  for (const v of Object.values(kit)) {
+    if (Array.isArray(v)) return v;
+  }
+  return [];
+}
+function parse_hockeytech_seasons(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_schedule(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_teams(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_team_roster(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_player_stats(payload) {
+  const kit = isPlainObject15(payload) ? payload.SiteKit : void 0;
+  const player = isPlainObject15(kit) ? kit.Player : void 0;
+  if (!isPlainObject15(player)) return normalize(siteKitRows(payload));
+  const rows = [];
+  for (const [statClass, lines] of Object.entries(player)) {
+    if (!Array.isArray(lines)) continue;
+    for (const r of lines) {
+      if (isPlainObject15(r)) rows.push({ stat_class: statClass, ...r });
+    }
+  }
+  return normalize(rows);
+}
+function parse_hockeytech_game_shifts(payload) {
+  const kit = isPlainObject15(payload) ? payload.SiteKit : void 0;
+  const gs = isPlainObject15(kit) ? kit.Gameshifts : void 0;
+  if (!isPlainObject15(gs)) return [];
+  const rows = [];
+  for (const side of ["home", "visitor"]) {
+    const arr = gs[side];
+    if (Array.isArray(arr)) {
+      for (const r of arr) rows.push(isPlainObject15(r) ? { side, ...r } : { side, value: r });
+    }
+  }
+  return normalize(rows);
+}
+function parse_hockeytech_standings(payload) {
+  if (!Array.isArray(payload) || payload.length === 0) return [];
+  const rows = [];
+  for (const block of payload) {
+    const sections = isPlainObject15(block) ? block.sections : void 0;
+    if (!Array.isArray(sections)) continue;
+    for (const sec of sections) {
+      const data = isPlainObject15(sec) ? sec.data : void 0;
+      if (!Array.isArray(data)) continue;
+      for (const d of data) {
+        const row = isPlainObject15(d) ? d.row : void 0;
+        if (isPlainObject15(row)) rows.push(row);
+      }
+    }
+  }
+  return normalize(rows);
+}
+function parse_hockeytech_leaders(payload) {
+  if (!isPlainObject15(payload)) return [];
+  const rows = [];
+  for (const [playerType, group] of Object.entries(payload)) {
+    if (!isPlainObject15(group)) continue;
+    for (const [category, body] of Object.entries(group)) {
+      const results = isPlainObject15(body) ? body.results : void 0;
+      if (!Array.isArray(results)) continue;
+      for (const r of results) {
+        if (isPlainObject15(r)) rows.push({ player_type: playerType, category, ...r });
+      }
+    }
+  }
+  return normalize(rows);
+}
+function parse_hockeytech_pbp(payload) {
+  if (!Array.isArray(payload) || payload.length === 0) return [];
+  const rows = payload.map((p) => {
+    if (!isPlainObject15(p)) return { value: p };
+    const { event, details } = p;
+    return isPlainObject15(details) ? { event, ...details } : { event, details };
+  });
+  return normalize(rows);
+}
+function parse_hockeytech_game_summary(payload) {
+  const gc = isPlainObject15(payload) ? payload.GC : void 0;
+  const summary = isPlainObject15(gc) ? gc.Gamesummary : void 0;
+  const goals = isPlainObject15(summary) ? summary.goals : void 0;
+  if (!Array.isArray(goals)) return [];
+  return normalize(goals);
+}
+
 // src/parsers/_registry.ts
 var PARSERS = {
   // ---- MLB Stats API ----
@@ -1702,14 +1801,27 @@ var PARSERS = {
   // ---- Yahoo Sports shangrila stats-graph (graphite-secure.sports.yahoo.com) ----
   // Generic GraphQL-envelope flattener (default) + nested stat-array unroller.
   parse_yahoo_shangrila_list,
-  parse_yahoo_shangrila_stats
+  parse_yahoo_shangrila_stats,
+  // ---- HockeyTech / LeagueStat (lscluster.hockeytech.com + cluster.leaguestat.com) ----
+  // One parser per feed view (modulekit SiteKit envelopes, statviewfeed
+  // standings/leaders/pbp, gc gamesummary).
+  parse_hockeytech_seasons,
+  parse_hockeytech_schedule,
+  parse_hockeytech_teams,
+  parse_hockeytech_team_roster,
+  parse_hockeytech_player_stats,
+  parse_hockeytech_game_shifts,
+  parse_hockeytech_standings,
+  parse_hockeytech_leaders,
+  parse_hockeytech_pbp,
+  parse_hockeytech_game_summary
 };
 function parserFor(name) {
   return name ? PARSERS[name] : void 0;
 }
 
 // src/parsers/espn.ts
-function isPlainObject15(v) {
+function isPlainObject16(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 function isScalar(v) {
@@ -2111,7 +2223,7 @@ function flattenScalarOneDeep(item) {
   for (const [k, v] of Object.entries(item)) {
     if (isScalar(v)) {
       row[k] = v;
-    } else if (isPlainObject15(v)) {
+    } else if (isPlainObject16(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) row[`${k}_${k2}`] = v2;
       }
@@ -2221,11 +2333,11 @@ function parse_event_plays(payload) {
       if (skip.has(k)) continue;
       if (isScalar(v)) {
         row[k] = v;
-      } else if (isPlainObject15(v)) {
+      } else if (isPlainObject16(v)) {
         for (const [k2, v2] of Object.entries(v)) {
           if (isScalar(v2)) {
             row[`${k}_${k2}`] = v2;
-          } else if (isPlainObject15(v2)) {
+          } else if (isPlainObject16(v2)) {
             for (const [k3, v3] of Object.entries(v2)) {
               if (isScalar(v3)) row[`${k}_${k2}_${k3}`] = v3;
             }
@@ -2244,7 +2356,7 @@ function parse_event_plays(payload) {
 }
 var LIST_PAYLOAD_KEYS = ["items", "entries", "events", "athletes"];
 function parse_items(payload) {
-  if (!payload || !isPlainObject15(payload)) return [];
+  if (!payload || !isPlainObject16(payload)) return [];
   let rows = null;
   for (const key of LIST_PAYLOAD_KEYS) {
     const candidate = payload[key];
@@ -2257,24 +2369,24 @@ function parse_items(payload) {
   return normalize(rows);
 }
 function parse_team_schedule(payload) {
-  if (!payload || !isPlainObject15(payload)) return [];
+  if (!payload || !isPlainObject16(payload)) return [];
   const events = payload.events;
   if (!Array.isArray(events) || !events.length) return [];
   return normalize(events);
 }
 function parse_team_roster(payload) {
-  if (!payload || !isPlainObject15(payload)) return [];
+  if (!payload || !isPlainObject16(payload)) return [];
   const athletes = payload.athletes;
   if (!Array.isArray(athletes) || !athletes.length) return [];
   const first = athletes[0] || {};
-  const isGrouped = isPlainObject15(first) && "position" in first && Array.isArray(first.items);
+  const isGrouped = isPlainObject16(first) && "position" in first && Array.isArray(first.items);
   if (isGrouped) {
     const rows = [];
     for (const group of athletes) {
-      if (!isPlainObject15(group)) continue;
+      if (!isPlainObject16(group)) continue;
       const groupName = group.position;
       for (const player of group.items || []) {
-        if (!isPlainObject15(player)) continue;
+        if (!isPlainObject16(player)) continue;
         rows.push({ position_group: groupName, ...player });
       }
     }
@@ -2284,19 +2396,19 @@ function parse_team_roster(payload) {
   return normalize(athletes);
 }
 function parse_news(payload) {
-  if (!payload || !isPlainObject15(payload)) return [];
+  if (!payload || !isPlainObject16(payload)) return [];
   const articles = payload.articles;
   if (!Array.isArray(articles) || !articles.length) return [];
   return normalize(articles);
 }
 function parse_injuries(payload) {
-  if (!payload || !isPlainObject15(payload)) return [];
+  if (!payload || !isPlainObject16(payload)) return [];
   const teams = payload.injuries;
   if (!Array.isArray(teams) || !teams.length) return [];
   return normalize(teams);
 }
 function singleRow(payloadDict) {
-  if (!isPlainObject15(payloadDict) || Object.keys(payloadDict).length === 0) return [];
+  if (!isPlainObject16(payloadDict) || Object.keys(payloadDict).length === 0) return [];
   return normalize([payloadDict]);
 }
 function rowPerItem(items) {
@@ -2304,7 +2416,7 @@ function rowPerItem(items) {
   return normalize(items);
 }
 function parse_summary_boxscore_player(payload) {
-  if (!isPlainObject15(payload)) return [];
+  if (!isPlainObject16(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.players || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -2345,7 +2457,7 @@ function parse_summary_boxscore_player(payload) {
   return normalize(rows);
 }
 function parse_summary_boxscore_team(payload) {
-  if (!isPlainObject15(payload)) return [];
+  if (!isPlainObject16(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.teams || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -2373,19 +2485,19 @@ function parse_summary_boxscore_team(payload) {
   return normalize(rows);
 }
 function parse_summary_plays(payload) {
-  if (!isPlainObject15(payload)) return [];
+  if (!isPlainObject16(payload)) return [];
   const plays = payload.plays;
   if (!Array.isArray(plays) || !plays.length) return [];
   return normalize(plays);
 }
 function parse_summary_winprobability(payload) {
-  if (!isPlainObject15(payload)) return [];
+  if (!isPlainObject16(payload)) return [];
   const wp = payload.winprobability;
   if (!Array.isArray(wp) || !wp.length) return [];
   return normalize(wp);
 }
 function parse_summary_leaders(payload) {
-  if (!isPlainObject15(payload)) return [];
+  if (!isPlainObject16(payload)) return [];
   const teams = payload.leaders;
   if (!Array.isArray(teams) || !teams.length) return [];
   const rows = [];
@@ -2426,7 +2538,7 @@ function parse_summary_game_info(payload) {
   for (const [k, v] of Object.entries(venue)) {
     if (isScalar(v)) {
       flat[`venue_${k}`] = v;
-    } else if (isPlainObject15(v)) {
+    } else if (isPlainObject16(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) flat[`venue_${k}_${k2}`] = v2;
       }
@@ -2439,7 +2551,7 @@ function parse_summary_officials(payload) {
   return rowPerItem(officials);
 }
 function parse_summary_header(payload) {
-  return singleRow(isPlainObject15(payload) ? payload.header : null);
+  return singleRow(isPlainObject16(payload) ? payload.header : null);
 }
 function parse_summary_season_series(payload) {
   return rowPerItem((payload || {}).seasonseries);
@@ -2460,7 +2572,7 @@ function parse_summary_against_the_spread(payload) {
       for (const [k, v] of Object.entries(rec || {})) {
         if (isScalar(v)) {
           row[k] = v;
-        } else if (isPlainObject15(v)) {
+        } else if (isPlainObject16(v)) {
           for (const [k2, v2] of Object.entries(v)) {
             if (isScalar(v2)) row[`${k}_${k2}`] = v2;
           }
@@ -2478,7 +2590,7 @@ function parse_summary_standings(payload) {
   if (!Array.isArray(groups) || !groups.length) return [];
   const rows = [];
   for (const grp of groups) {
-    if (!isPlainObject15(grp)) continue;
+    if (!isPlainObject16(grp)) continue;
     const grpBase = {
       group_header: grp.header,
       conference_header: grp.conferenceHeader,
@@ -2490,7 +2602,7 @@ function parse_summary_standings(payload) {
       row.team_id = entry.id;
       row.team_uid = entry.uid;
       row.team_location = typeof teamField === "string" ? teamField : null;
-      if (isPlainObject15(teamField)) {
+      if (isPlainObject16(teamField)) {
         row.team_abbreviation = teamField.abbreviation;
         row.team_display_name = teamField.displayName;
       }
@@ -2508,7 +2620,7 @@ function parse_summary_broadcasts(payload) {
   return rowPerItem((payload || {}).broadcasts);
 }
 function parse_summary_format(payload) {
-  return singleRow(isPlainObject15(payload) ? payload.format : null);
+  return singleRow(isPlainObject16(payload) ? payload.format : null);
 }
 function parse_summary_pickcenter(payload) {
   return rowPerItem((payload || {}).pickcenter);
@@ -2517,7 +2629,7 @@ function parse_summary_odds(payload) {
   return rowPerItem((payload || {}).odds);
 }
 function parse_summary_article(payload) {
-  return singleRow(isPlainObject15(payload) ? payload.article : null);
+  return singleRow(isPlainObject16(payload) ? payload.article : null);
 }
 function parse_summary_injuries(payload) {
   return rowPerItem((payload || {}).injuries);
@@ -2527,11 +2639,11 @@ function parse_summary_news(payload) {
   return rowPerItem(news.articles);
 }
 function parse_single_entity(payload) {
-  return singleRow(isPlainObject15(payload) ? payload : null);
+  return singleRow(isPlainObject16(payload) ? payload : null);
 }
 function parse_summary_drives(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject15(drives) ? drives.previous : null;
+  const previous = isPlainObject16(drives) ? drives.previous : null;
   return rowPerItem(previous);
 }
 function parse_summary_scoring_plays(payload) {
@@ -2539,15 +2651,15 @@ function parse_summary_scoring_plays(payload) {
 }
 function parse_summary_drive_plays(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject15(drives) ? drives.previous : null;
+  const previous = isPlainObject16(drives) ? drives.previous : null;
   if (!Array.isArray(previous) || !previous.length) return [];
   const rows = [];
   previous.forEach((drive, idx) => {
-    if (!isPlainObject15(drive)) return;
+    if (!isPlainObject16(drive)) return;
     const driveId = drive.id;
     const driveSeq = idx + 1;
     for (const play of drive.plays || []) {
-      if (!isPlainObject15(play)) continue;
+      if (!isPlainObject16(play)) continue;
       rows.push({ drive_id: driveId, drive_sequence: driveSeq, ...play });
     }
   });

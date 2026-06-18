@@ -223,6 +223,11 @@ module.exports = [
       },
       {
         "type": "doc",
+        "id": "reference/hockeytech",
+        "label": "hockeytech"
+      },
+      {
+        "type": "doc",
         "id": "reference/odds",
         "label": "odds"
       },

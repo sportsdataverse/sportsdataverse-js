@@ -112,6 +112,18 @@ import {
   parse_yahoo_shangrila_list,
   parse_yahoo_shangrila_stats,
 } from "./yahoo_shangrila.js";
+import {
+  parse_hockeytech_seasons,
+  parse_hockeytech_schedule,
+  parse_hockeytech_teams,
+  parse_hockeytech_team_roster,
+  parse_hockeytech_player_stats,
+  parse_hockeytech_game_shifts,
+  parse_hockeytech_standings,
+  parse_hockeytech_leaders,
+  parse_hockeytech_pbp,
+  parse_hockeytech_game_summary,
+} from "./hockeytech.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -226,6 +238,19 @@ export const PARSERS: Record<string, ParserFn> = {
   // Generic GraphQL-envelope flattener (default) + nested stat-array unroller.
   parse_yahoo_shangrila_list,
   parse_yahoo_shangrila_stats,
+  // ---- HockeyTech / LeagueStat (lscluster.hockeytech.com + cluster.leaguestat.com) ----
+  // One parser per feed view (modulekit SiteKit envelopes, statviewfeed
+  // standings/leaders/pbp, gc gamesummary).
+  parse_hockeytech_seasons,
+  parse_hockeytech_schedule,
+  parse_hockeytech_teams,
+  parse_hockeytech_team_roster,
+  parse_hockeytech_player_stats,
+  parse_hockeytech_game_shifts,
+  parse_hockeytech_standings,
+  parse_hockeytech_leaders,
+  parse_hockeytech_pbp,
+  parse_hockeytech_game_summary,
 };
 
 /**
