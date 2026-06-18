@@ -1,0 +1,43 @@
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
+schema: golf_tournaments
+kind: dataframe
+columns:
+- name: alias_url
+  type: character
+- name: alias_path
+  type: character
+- name: event_group_id
+  type: character
+- name: name
+  type: character
+- name: display_name
+  type: character
+- name: start_time
+  type: character
+- name: start_date
+  type: character
+- name: end_date
+  type: character
+- name: status
+  type: character
+- name: status_display_name
+  type: character
+- name: player_tournament_stats
+  type: list
+- name: purse
+  type: character
+- name: major
+  type: logical
+- name: venue_display_name
+  type: character
+- name: venue_country
+  type: character
+- name: venue_city
+  type: character
+- name: venue_state
+  type: character
+- name: par
+  type: numeric
+- name: yardage
+  type: numeric

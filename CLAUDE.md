@@ -154,7 +154,7 @@ families**:
 
 | Family (YAML stem) | Namespace | Host | Auth |
 |---|---|---|---|
-| `mlb_api` | `sdv.mlb.mlbApi*` | `statsapi.mlb.com` | keyless |
+| `mlb` | `sdv.mlb.mlb*` | `statsapi.mlb.com` | keyless |
 | `mlb_statcast` | `sdv.mlb.mlbStatcast*` | `baseballsavant.mlb.com` | keyless (date-chunked search) |
 | `nhl_api_web` | `sdv.nhl.nhlApiWeb*` | `api-web.nhle.com` | keyless |
 | `nhl_edge` | `sdv.nhl.nhlEdge*` | `api-web.nhle.com/v1/edge` | keyless |
@@ -169,9 +169,9 @@ getting its own generated reference page:
 |---|---|---|
 | The Odds API (`odds_api`) | `sdv.odds.*` | `apiKey` query param (caller-supplied) |
 | 247Sports (`sports247`) | `sdv.recruiting.*` | caller-supplied JWT via `headers` |
-| CBS Sports (`cbs_napi`) | `sdv.cbs.*` | keyless |
-| Fox Sports (`fox_bifrost`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
-| Yahoo Sports (`yahoo_editorial` + `yahoo_shangrila`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
+| CBS Sports (`cbs`) | `sdv.cbs.*` | keyless |
+| Fox Sports (`fox`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
+| Yahoo Sports (`yahoo_scores` + `yahoo`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
 | HockeyTech / LeagueStat (`hockeytech`) | `sdv.hockeytech.*` | keyless; **league-parameterized** (`league` slug) |
 | BartTorvik / T-Rank (`torvik`) | `sdv.torvik.*` | keyless (needs a browser-like UA) |
 

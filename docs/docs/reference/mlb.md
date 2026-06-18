@@ -147,90 +147,90 @@ await sdv.mlb.espnMlbScoreboard({});
 
 ## Native API — MLB Stats API
 
-Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi.mlb.com`. Each method is exposed under BOTH `mlb_api_<endpoint>` (snake_case, py/R parity) and `mlbApi<Endpoint>` (camelCase canonical) on `sdv.mlb`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi.mlb.com`. Each method is exposed under BOTH `mlb_<endpoint>` (snake_case, py/R parity) and `mlb<Endpoint>` (camelCase canonical) on `sdv.mlb`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `mlb_api_all_star_ballot` / `mlbApiAllStarBallot` | `https://statsapi.mlb.com/api/v1/league/{league_id}/allStarBallot` | `league_id`\* | `season`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_all_star_final_vote` / `mlbApiAllStarFinalVote` | `https://statsapi.mlb.com/api/v1/league/{league_id}/allStarFinalVote` | `league_id`\* | `season`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_all_star_write_ins` / `mlbApiAllStarWriteIns` | `https://statsapi.mlb.com/api/v1/league/{league_id}/allStarWriteIns` | `league_id`\* | `season`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_analytics_games` / `mlbApiAnalyticsGames` | `https://statsapi.mlb.com/api/v1/game/analytics/game` | — | `game_mode_id` → `gameModeId`, `timecode`, `limit`, `sort_by` → `sortBy`, `is_non_statcast` → `isNonStatcast`, `offset`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_analytics_guids` / `mlbApiAnalyticsGuids` | `https://statsapi.mlb.com/api/v1/game/analytics/guids` | — | `game_mode_id` → `gameModeId`, `timecode`, `limit`, `sort_by` → `sortBy`, `is_non_statcast` → `isNonStatcast`, `offset`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_attendance` / `mlbApiAttendance` | `https://statsapi.mlb.com/api/v1/attendance` | — | `team_id` → `teamId`, `league_id` → `leagueId`, `season`, `league_list_id` → `leagueListId`, `game_type` → `gameType` | `parse_mlb_api_list` | — |
-| `mlb_api_award_recipients` / `mlbApiAwardRecipients` | `https://statsapi.mlb.com/api/v1/awards/{award_id}/recipients` | `award_id`\* | `season`, `sport_id` → `sportId`, `hydrate` | `parse_mlb_api_list` | — |
-| `mlb_api_awards` / `mlbApiAwards` | `https://statsapi.mlb.com/api/v1/awards` | — | `sport_id` → `sportId` | `parse_mlb_api_list` | — |
-| `mlb_api_boxscore` / `mlbApiBoxscore` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/boxscore` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_api_boxscore` | — |
-| `mlb_api_conference` / `mlbApiConference` | `https://statsapi.mlb.com/api/v1/conferences/{conference_id}` | `conference_id`\* | `season`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_conferences` / `mlbApiConferences` | `https://statsapi.mlb.com/api/v1/conferences` | — | `conference_id` → `conferenceId`, `season`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_datacasters` / `mlbApiDatacasters` | `https://statsapi.mlb.com/api/v1/jobs/datacasters` | — | `sport_id` → `sportId`, `date`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_divisions` / `mlbApiDivisions` | `https://statsapi.mlb.com/api/v1/divisions` | — | `sport_id` → `sportId`, `league_id` → `leagueId`, `division_id` → `divisionId` | `parse_mlb_api_list` | — |
-| `mlb_api_draft` / `mlbApiDraft` | `https://statsapi.mlb.com/api/v1/draft/{year}` | `year`\* | `round_` → `round`, `team_id` → `teamId`, `player_id` → `playerId`, `limit` | `parse_mlb_api_list` | — |
-| `mlb_api_draft_latest` / `mlbApiDraftLatest` | `https://statsapi.mlb.com/api/v1/draft/{year}/latest` | `year`\* | — | `parse_mlb_api_draft_latest` | — |
-| `mlb_api_draft_prospects` / `mlbApiDraftProspects` | `https://statsapi.mlb.com/api/v1/draft/prospects/{year}` | `year`\* | `scouting_report` → `scoutingReport`, `limit` | `parse_mlb_api_list` | — |
-| `mlb_api_free_agents` / `mlbApiFreeAgents` | `https://statsapi.mlb.com/api/v1/people/freeAgents` | — | `season`, `order`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_game_changes` / `mlbApiGameChanges` | `https://statsapi.mlb.com/api/v1/game/changes` | — | `updated_since` → `updatedSince`, `sport_id` → `sportId`, `fields` | `parse_mlb_api_schedule` | — |
-| `mlb_api_game_color` / `mlbApiGameColor` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_game_color_diff` / `mlbApiGameColorDiff` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/diffPatch` | `game_pk`\* | `start_timecode` → `startTimecode`, `end_timecode` → `endTimecode` | `parse_mlb_api_list` | — |
-| `mlb_api_game_color_timestamps` / `mlbApiGameColorTimestamps` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/timestamps` | `game_pk`\* | — | `parse_mlb_api_timecodes` | — |
-| `mlb_api_game_content` / `mlbApiGameContent` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/content` | `game_pk`\* | — | `parse_mlb_api_list` | — |
-| `mlb_api_game_context_metrics` / `mlbApiGameContextMetrics` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/contextMetrics` | `game_pk`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_game_guids` / `mlbApiGameGuids` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/guids` | `game_pk`\* | `game_mode_id` → `gameModeId`, `updated_since` → `updatedSince`, `is_pitch` → `isPitch`, `is_hit` → `isHit`, `is_pickoff` → `isPickoff`, `hydrate`, `parsed_raw` → `parsed/raw`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_game_pace` / `mlbApiGamePace` | `https://statsapi.mlb.com/api/v1/gamePace` | — | `season`, `team_ids` → `teamIds`, `league_ids` → `leagueIds`, `league_list_id` → `leagueListId`, `sport_id` → `sportId`, `game_type` → `gameType`, `start_date` → `startDate`, `end_date` → `endDate`, `venue_ids` → `venueIds`, `org_type` → `orgType`, `include_children` → `includeChildren`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_game_timestamps` / `mlbApiGameTimestamps` | `https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live/timestamps` | `game_pk`\* | — | `parse_mlb_api_timecodes` | — |
-| `mlb_api_high_low` / `mlbApiHighLow` | `https://statsapi.mlb.com/api/v1/highLow/{org_type}` | `org_type`\* | `stat_group` → `statGroup`, `sort_stat` → `sortStat`, `season`, `game_type` → `gameType`, `team_id` → `teamId`, `league_id` → `leagueId`, `sport_ids` → `sportIds`, `limit`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_home_run_derby` / `mlbApiHomeRunDerby` | `https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}` | `game_pk`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_home_run_derby_bracket` / `mlbApiHomeRunDerbyBracket` | `https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}/bracket` | `game_pk`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_home_run_derby_pool` / `mlbApiHomeRunDerbyPool` | `https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}/pool` | `game_pk`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_jobs` / `mlbApiJobs` | `https://statsapi.mlb.com/api/v1/jobs` | — | `job_type` → `jobType`, `sport_id` → `sportId`, `date`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_leagues` / `mlbApiLeagues` | `https://statsapi.mlb.com/api/v1/leagues` | — | `sport_id` → `sportId`, `season`, `league_ids` → `leagueIds` | `parse_mlb_api_list` | — |
-| `mlb_api_linescore` / `mlbApiLinescore` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/linescore` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_api_linescore` | — |
-| `mlb_api_meta` / `mlbApiMeta` | `https://statsapi.mlb.com/api/v1/{meta_type}` | `meta_type`\* | — | `parse_mlb_api_list` | — |
-| `mlb_api_official_scorers` / `mlbApiOfficialScorers` | `https://statsapi.mlb.com/api/v1/jobs/officialScorers` | — | `sport_id` → `sportId`, `date`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_pbp` / `mlbApiPbp` | `https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live` | `game_pk`\* | `language`, `timecode`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_pbp_diff` / `mlbApiPbpDiff` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/live/diffPatch` | `game_pk`\* | `start_timecode` → `startTimecode`, `end_timecode` → `endTimecode` | `parse_mlb_api_list` | — |
-| `mlb_api_people` / `mlbApiPeople` | `https://statsapi.mlb.com/api/v1/people` | — | `person_ids` → `personIds`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_person` / `mlbApiPerson` | `https://statsapi.mlb.com/api/v1/people/{person_id}` | `person_id`\* | `season`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_person_game_stats` / `mlbApiPersonGameStats` | `https://statsapi.mlb.com/api/v1/people/{person_id}/stats/game/{game_pk}` | `person_id`\*, `game_pk`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_person_stats` / `mlbApiPersonStats` | `https://statsapi.mlb.com/api/v1/people/{person_id}/stats` | `person_id`\* | `stats`, `group`, `season`, `sport_id` → `sportId`, `hydrate`, `fields` | `parse_mlb_api_person_stats` | — |
-| `mlb_api_play_analytics` / `mlbApiPlayAnalytics` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/{guid}/analytics` | `game_pk`\*, `guid`\* | `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_play_by_play` / `mlbApiPlayByPlay` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/playByPlay` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_api_play_by_play` | — |
-| `mlb_api_play_context_metrics_averages` / `mlbApiPlayContextMetricsAverages` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/{guid}/contextMetricsAverages` | `game_pk`\*, `guid`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_schedule` / `mlbApiSchedule` | `https://statsapi.mlb.com/api/v1/schedule` | — | `sport_id` → `sportId`, `date`, `season`, `team_id` → `teamId`, `start_date` → `startDate`, `end_date` → `endDate`, `game_type` → `gameType`, `hydrate`, `fields` | `parse_mlb_api_schedule` | — |
-| `mlb_api_schedule_postseason` / `mlbApiSchedulePostseason` | `https://statsapi.mlb.com/api/v1/schedule/postseason` | — | `season`, `sport_id` → `sportId`, `hydrate` | `parse_mlb_api_schedule` | — |
-| `mlb_api_schedule_postseason_series` / `mlbApiSchedulePostseasonSeries` | `https://statsapi.mlb.com/api/v1/schedule/postseason/series` | — | `game_types` → `gameTypes`, `series_number` → `seriesNumber`, `team_id` → `teamId`, `sport_id` → `sportId`, `season`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_schedule_postseason_tunein` / `mlbApiSchedulePostseasonTunein` | `https://statsapi.mlb.com/api/v1/schedule/postseason/tuneIn` | — | `team_id` → `teamId`, `sport_id` → `sportId`, `season`, `hydrate`, `fields` | `parse_mlb_api_schedule` | — |
-| `mlb_api_schedule_tied` / `mlbApiScheduleTied` | `https://statsapi.mlb.com/api/v1/schedule/games/tied` | — | `game_types` → `gameTypes`, `season`, `hydrate`, `fields` | `parse_mlb_api_schedule` | — |
-| `mlb_api_season` / `mlbApiSeason` | `https://statsapi.mlb.com/api/v1/seasons/{season_id}` | `season_id`\* | `sport_id` → `sportId` | `parse_mlb_api_list` | — |
-| `mlb_api_seasons` / `mlbApiSeasons` | `https://statsapi.mlb.com/api/v1/seasons` | — | `sport_id` → `sportId`, `season`, `all_seasons` → `all` | `parse_mlb_api_list` | — |
-| `mlb_api_seasons_all` / `mlbApiSeasonsAll` | `https://statsapi.mlb.com/api/v1/seasons/all` | — | `division_id` → `divisionId`, `league_id` → `leagueId`, `with_game_type_dates` → `withGameTypeDates`, `sport_id` → `sportId`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_sport` / `mlbApiSport` | `https://statsapi.mlb.com/api/v1/sports/{sport_id}` | `sport_id`\* | `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_sport_players` / `mlbApiSportPlayers` | `https://statsapi.mlb.com/api/v1/sports/{sport_id}/players` | `sport_id` | `season`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_sports` / `mlbApiSports` | `https://statsapi.mlb.com/api/v1/sports` | — | `sport_id` → `sportId` | `parse_mlb_api_list` | — |
-| `mlb_api_standings` / `mlbApiStandings` | `https://statsapi.mlb.com/api/v1/standings` | — | `league_id` → `leagueId`, `season`, `standings_types` → `standingsTypes`, `hydrate`, `fields` | `parse_mlb_api_standings` | — |
-| `mlb_api_stats` / `mlbApiStats` | `https://statsapi.mlb.com/api/v1/stats` | — | `stats`, `group`, `season`, `sport_id` → `sportId`, `league_id` → `leagueId`, `team_id` → `teamId`, `player_pool` → `playerPool`, `game_type` → `gameType`, `limit`, `offset`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_stats_leaders` / `mlbApiStatsLeaders` | `https://statsapi.mlb.com/api/v1/stats/leaders` | — | `leader_categories` → `leaderCategories`, `season`, `leader_game_types` → `leaderGameTypes`, `stat_group` → `statGroup`, `league_id` → `leagueId`, `sport_id` → `sportId`, `limit` | `parse_mlb_api_list` | — |
-| `mlb_api_stats_metrics` / `mlbApiStatsMetrics` | `https://statsapi.mlb.com/api/v1/stats/metrics` | — | `stats`, `group`, `game_type` → `gameType`, `season`, `start_date` → `startDate`, `end_date` → `endDate`, `venue_id` → `venueId`, `min_occurrences` → `minOccurrences`, `percentile`, `person_id` → `personId`, `team_id` → `teamId`, `limit`, `offset`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_stats_streaks` / `mlbApiStatsStreaks` | `https://statsapi.mlb.com/api/v1/stats/streaks` | — | `streak_type` → `streakType`, `streak_threshold` → `streakThreshold`, `season`, `stat_group` → `statGroup`, `active_streak` → `activeStreak`, `sport_id` → `sportId` | `parse_mlb_api_list` | — |
-| `mlb_api_team` / `mlbApiTeam` | `https://statsapi.mlb.com/api/v1/teams/{team_id}` | `team_id`\* | `season`, `sport_id` → `sportId`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_team_affiliates` / `mlbApiTeamAffiliates` | `https://statsapi.mlb.com/api/v1/teams/affiliates` | — | `team_ids` → `teamIds`, `sport_id` → `sportId`, `season`, `hydrate` | `parse_mlb_api_list` | — |
-| `mlb_api_team_alumni` / `mlbApiTeamAlumni` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/alumni` | `team_id`\* | `season`, `group`, `hydrate` | `parse_mlb_api_list` | — |
-| `mlb_api_team_coaches` / `mlbApiTeamCoaches` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/coaches` | `team_id`\* | `season`, `date`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_team_leaders` / `mlbApiTeamLeaders` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/leaders` | `team_id`\* | `leader_categories` → `leaderCategories`, `season`, `leader_game_types` → `leaderGameTypes`, `limit` | `parse_mlb_api_list` | — |
-| `mlb_api_team_personnel` / `mlbApiTeamPersonnel` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/personnel` | `team_id`\* | `date`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_team_roster` / `mlbApiTeamRoster` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/roster` | `team_id`\* | `season`, `roster_type` → `rosterType`, `date`, `hydrate`, `fields` | `parse_mlb_api_team_roster` | — |
-| `mlb_api_team_roster_type` / `mlbApiTeamRosterType` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/roster/{roster_type}` | `team_id`\*, `roster_type`\* | `season`, `date`, `hydrate`, `fields` | `parse_mlb_api_team_roster` | — |
-| `mlb_api_team_stats` / `mlbApiTeamStats` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/stats` | `team_id`\* | `season`, `stats`, `group`, `sport_ids` → `sportIds`, `game_type` → `gameType`, `fields` | `parse_mlb_api_person_stats` | — |
-| `mlb_api_teams` / `mlbApiTeams` | `https://statsapi.mlb.com/api/v1/teams` | — | `sport_id` → `sportId`, `season`, `league_ids` → `leagueIds`, `active_status` → `activeStatus`, `hydrate`, `fields` | `parse_mlb_api_teams` | — |
-| `mlb_api_teams_history` / `mlbApiTeamsHistory` | `https://statsapi.mlb.com/api/v1/teams/history` | — | `team_ids` → `teamIds`, `start_season` → `startSeason`, `end_season` → `endSeason`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_teams_stats` / `mlbApiTeamsStats` | `https://statsapi.mlb.com/api/v1/teams/stats` | — | `season`, `sport_ids` → `sportIds`, `stat_group` → `group`, `game_type` → `gameType`, `stats`, `order`, `sort_stat` → `sortStat`, `fields` | `parse_mlb_api_person_stats` | — |
-| `mlb_api_teams_stats_leaders` / `mlbApiTeamsStatsLeaders` | `https://statsapi.mlb.com/api/v1/teams/stats/leaders` | — | `leader_categories` → `leaderCategories`, `sit_codes` → `sitCodes`, `game_types` → `gameTypes`, `stat_group` → `statGroup`, `season`, `league_ids` → `leagueIds`, `start_date` → `startDate`, `end_date` → `endDate`, `sport_id` → `sportId`, `hydrate`, `limit`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_umpire_games` / `mlbApiUmpireGames` | `https://statsapi.mlb.com/api/v1/jobs/umpires/games/{umpire_id}` | `umpire_id`\* | `season`, `hydrate`, `fields` | `parse_mlb_api_list` | — |
-| `mlb_api_umpires` / `mlbApiUmpires` | `https://statsapi.mlb.com/api/v1/jobs/umpires` | — | — | `parse_mlb_api_list` | — |
-| `mlb_api_venue` / `mlbApiVenue` | `https://statsapi.mlb.com/api/v1/venues/{venue_id}` | `venue_id`\* | `season`, `hydrate` | `parse_mlb_api_list` | — |
-| `mlb_api_venues` / `mlbApiVenues` | `https://statsapi.mlb.com/api/v1/venues` | — | `season`, `sport_ids` → `sportIds`, `hydrate` | `parse_mlb_api_list` | — |
-| `mlb_api_win_probability` / `mlbApiWinProbability` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/winProbability` | `game_pk`\* | `fields` | `parse_mlb_api_win_probability` | — |
+| `mlb_all_star_ballot` / `mlbAllStarBallot` | `https://statsapi.mlb.com/api/v1/league/{league_id}/allStarBallot` | `league_id`\* | `season`, `fields` | `parse_mlb_list` | — |
+| `mlb_all_star_final_vote` / `mlbAllStarFinalVote` | `https://statsapi.mlb.com/api/v1/league/{league_id}/allStarFinalVote` | `league_id`\* | `season`, `fields` | `parse_mlb_list` | — |
+| `mlb_all_star_write_ins` / `mlbAllStarWriteIns` | `https://statsapi.mlb.com/api/v1/league/{league_id}/allStarWriteIns` | `league_id`\* | `season`, `fields` | `parse_mlb_list` | — |
+| `mlb_analytics_games` / `mlbAnalyticsGames` | `https://statsapi.mlb.com/api/v1/game/analytics/game` | — | `game_mode_id` → `gameModeId`, `timecode`, `limit`, `sort_by` → `sortBy`, `is_non_statcast` → `isNonStatcast`, `offset`, `fields` | `parse_mlb_list` | — |
+| `mlb_analytics_guids` / `mlbAnalyticsGuids` | `https://statsapi.mlb.com/api/v1/game/analytics/guids` | — | `game_mode_id` → `gameModeId`, `timecode`, `limit`, `sort_by` → `sortBy`, `is_non_statcast` → `isNonStatcast`, `offset`, `fields` | `parse_mlb_list` | — |
+| `mlb_attendance` / `mlbAttendance` | `https://statsapi.mlb.com/api/v1/attendance` | — | `team_id` → `teamId`, `league_id` → `leagueId`, `season`, `league_list_id` → `leagueListId`, `game_type` → `gameType` | `parse_mlb_list` | — |
+| `mlb_award_recipients` / `mlbAwardRecipients` | `https://statsapi.mlb.com/api/v1/awards/{award_id}/recipients` | `award_id`\* | `season`, `sport_id` → `sportId`, `hydrate` | `parse_mlb_list` | — |
+| `mlb_awards` / `mlbAwards` | `https://statsapi.mlb.com/api/v1/awards` | — | `sport_id` → `sportId` | `parse_mlb_list` | — |
+| `mlb_boxscore` / `mlbBoxscore` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/boxscore` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_boxscore` | — |
+| `mlb_conference` / `mlbConference` | `https://statsapi.mlb.com/api/v1/conferences/{conference_id}` | `conference_id`\* | `season`, `fields` | `parse_mlb_list` | — |
+| `mlb_conferences` / `mlbConferences` | `https://statsapi.mlb.com/api/v1/conferences` | — | `conference_id` → `conferenceId`, `season`, `fields` | `parse_mlb_list` | — |
+| `mlb_datacasters` / `mlbDatacasters` | `https://statsapi.mlb.com/api/v1/jobs/datacasters` | — | `sport_id` → `sportId`, `date`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_divisions` / `mlbDivisions` | `https://statsapi.mlb.com/api/v1/divisions` | — | `sport_id` → `sportId`, `league_id` → `leagueId`, `division_id` → `divisionId` | `parse_mlb_list` | — |
+| `mlb_draft` / `mlbDraft` | `https://statsapi.mlb.com/api/v1/draft/{year}` | `year`\* | `round_` → `round`, `team_id` → `teamId`, `player_id` → `playerId`, `limit` | `parse_mlb_list` | — |
+| `mlb_draft_latest` / `mlbDraftLatest` | `https://statsapi.mlb.com/api/v1/draft/{year}/latest` | `year`\* | — | `parse_mlb_draft_latest` | — |
+| `mlb_draft_prospects` / `mlbDraftProspects` | `https://statsapi.mlb.com/api/v1/draft/prospects/{year}` | `year`\* | `scouting_report` → `scoutingReport`, `limit` | `parse_mlb_list` | — |
+| `mlb_free_agents` / `mlbFreeAgents` | `https://statsapi.mlb.com/api/v1/people/freeAgents` | — | `season`, `order`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_game_changes` / `mlbGameChanges` | `https://statsapi.mlb.com/api/v1/game/changes` | — | `updated_since` → `updatedSince`, `sport_id` → `sportId`, `fields` | `parse_mlb_schedule` | — |
+| `mlb_game_color` / `mlbGameColor` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_list` | — |
+| `mlb_game_color_diff` / `mlbGameColorDiff` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/diffPatch` | `game_pk`\* | `start_timecode` → `startTimecode`, `end_timecode` → `endTimecode` | `parse_mlb_list` | — |
+| `mlb_game_color_timestamps` / `mlbGameColorTimestamps` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/timestamps` | `game_pk`\* | — | `parse_mlb_timecodes` | — |
+| `mlb_game_content` / `mlbGameContent` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/content` | `game_pk`\* | — | `parse_mlb_list` | — |
+| `mlb_game_context_metrics` / `mlbGameContextMetrics` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/contextMetrics` | `game_pk`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_game_guids` / `mlbGameGuids` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/guids` | `game_pk`\* | `game_mode_id` → `gameModeId`, `updated_since` → `updatedSince`, `is_pitch` → `isPitch`, `is_hit` → `isHit`, `is_pickoff` → `isPickoff`, `hydrate`, `parsed_raw` → `parsed/raw`, `fields` | `parse_mlb_list` | — |
+| `mlb_game_pace` / `mlbGamePace` | `https://statsapi.mlb.com/api/v1/gamePace` | — | `season`, `team_ids` → `teamIds`, `league_ids` → `leagueIds`, `league_list_id` → `leagueListId`, `sport_id` → `sportId`, `game_type` → `gameType`, `start_date` → `startDate`, `end_date` → `endDate`, `venue_ids` → `venueIds`, `org_type` → `orgType`, `include_children` → `includeChildren`, `fields` | `parse_mlb_list` | — |
+| `mlb_game_timestamps` / `mlbGameTimestamps` | `https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live/timestamps` | `game_pk`\* | — | `parse_mlb_timecodes` | — |
+| `mlb_high_low` / `mlbHighLow` | `https://statsapi.mlb.com/api/v1/highLow/{org_type}` | `org_type`\* | `stat_group` → `statGroup`, `sort_stat` → `sortStat`, `season`, `game_type` → `gameType`, `team_id` → `teamId`, `league_id` → `leagueId`, `sport_ids` → `sportIds`, `limit`, `fields` | `parse_mlb_list` | — |
+| `mlb_home_run_derby` / `mlbHomeRunDerby` | `https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}` | `game_pk`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_home_run_derby_bracket` / `mlbHomeRunDerbyBracket` | `https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}/bracket` | `game_pk`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_home_run_derby_pool` / `mlbHomeRunDerbyPool` | `https://statsapi.mlb.com/api/v1/homeRunDerby/{game_pk}/pool` | `game_pk`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_jobs` / `mlbJobs` | `https://statsapi.mlb.com/api/v1/jobs` | — | `job_type` → `jobType`, `sport_id` → `sportId`, `date`, `fields` | `parse_mlb_list` | — |
+| `mlb_leagues` / `mlbLeagues` | `https://statsapi.mlb.com/api/v1/leagues` | — | `sport_id` → `sportId`, `season`, `league_ids` → `leagueIds` | `parse_mlb_list` | — |
+| `mlb_linescore` / `mlbLinescore` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/linescore` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_linescore` | — |
+| `mlb_meta` / `mlbMeta` | `https://statsapi.mlb.com/api/v1/{meta_type}` | `meta_type`\* | — | `parse_mlb_list` | — |
+| `mlb_official_scorers` / `mlbOfficialScorers` | `https://statsapi.mlb.com/api/v1/jobs/officialScorers` | — | `sport_id` → `sportId`, `date`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_pbp` / `mlbPbp` | `https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live` | `game_pk`\* | `language`, `timecode`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_pbp_diff` / `mlbPbpDiff` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/live/diffPatch` | `game_pk`\* | `start_timecode` → `startTimecode`, `end_timecode` → `endTimecode` | `parse_mlb_list` | — |
+| `mlb_people` / `mlbPeople` | `https://statsapi.mlb.com/api/v1/people` | — | `person_ids` → `personIds`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_person` / `mlbPerson` | `https://statsapi.mlb.com/api/v1/people/{person_id}` | `person_id`\* | `season`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_person_game_stats` / `mlbPersonGameStats` | `https://statsapi.mlb.com/api/v1/people/{person_id}/stats/game/{game_pk}` | `person_id`\*, `game_pk`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_person_stats` / `mlbPersonStats` | `https://statsapi.mlb.com/api/v1/people/{person_id}/stats` | `person_id`\* | `stats`, `group`, `season`, `sport_id` → `sportId`, `hydrate`, `fields` | `parse_mlb_person_stats` | — |
+| `mlb_play_analytics` / `mlbPlayAnalytics` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/{guid}/analytics` | `game_pk`\*, `guid`\* | `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_play_by_play` / `mlbPlayByPlay` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/playByPlay` | `game_pk`\* | `timecode`, `fields` | `parse_mlb_play_by_play` | — |
+| `mlb_play_context_metrics_averages` / `mlbPlayContextMetricsAverages` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/{guid}/contextMetricsAverages` | `game_pk`\*, `guid`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_schedule` / `mlbSchedule` | `https://statsapi.mlb.com/api/v1/schedule` | — | `sport_id` → `sportId`, `date`, `season`, `team_id` → `teamId`, `start_date` → `startDate`, `end_date` → `endDate`, `game_type` → `gameType`, `hydrate`, `fields` | `parse_mlb_schedule` | — |
+| `mlb_schedule_postseason` / `mlbSchedulePostseason` | `https://statsapi.mlb.com/api/v1/schedule/postseason` | — | `season`, `sport_id` → `sportId`, `hydrate` | `parse_mlb_schedule` | — |
+| `mlb_schedule_postseason_series` / `mlbSchedulePostseasonSeries` | `https://statsapi.mlb.com/api/v1/schedule/postseason/series` | — | `game_types` → `gameTypes`, `series_number` → `seriesNumber`, `team_id` → `teamId`, `sport_id` → `sportId`, `season`, `fields` | `parse_mlb_list` | — |
+| `mlb_schedule_postseason_tunein` / `mlbSchedulePostseasonTunein` | `https://statsapi.mlb.com/api/v1/schedule/postseason/tuneIn` | — | `team_id` → `teamId`, `sport_id` → `sportId`, `season`, `hydrate`, `fields` | `parse_mlb_schedule` | — |
+| `mlb_schedule_tied` / `mlbScheduleTied` | `https://statsapi.mlb.com/api/v1/schedule/games/tied` | — | `game_types` → `gameTypes`, `season`, `hydrate`, `fields` | `parse_mlb_schedule` | — |
+| `mlb_season` / `mlbSeason` | `https://statsapi.mlb.com/api/v1/seasons/{season_id}` | `season_id`\* | `sport_id` → `sportId` | `parse_mlb_list` | — |
+| `mlb_seasons` / `mlbSeasons` | `https://statsapi.mlb.com/api/v1/seasons` | — | `sport_id` → `sportId`, `season`, `all_seasons` → `all` | `parse_mlb_list` | — |
+| `mlb_seasons_all` / `mlbSeasonsAll` | `https://statsapi.mlb.com/api/v1/seasons/all` | — | `division_id` → `divisionId`, `league_id` → `leagueId`, `with_game_type_dates` → `withGameTypeDates`, `sport_id` → `sportId`, `fields` | `parse_mlb_list` | — |
+| `mlb_sport` / `mlbSport` | `https://statsapi.mlb.com/api/v1/sports/{sport_id}` | `sport_id`\* | `fields` | `parse_mlb_list` | — |
+| `mlb_sport_players` / `mlbSportPlayers` | `https://statsapi.mlb.com/api/v1/sports/{sport_id}/players` | `sport_id` | `season`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_sports` / `mlbSports` | `https://statsapi.mlb.com/api/v1/sports` | — | `sport_id` → `sportId` | `parse_mlb_list` | — |
+| `mlb_standings` / `mlbStandings` | `https://statsapi.mlb.com/api/v1/standings` | — | `league_id` → `leagueId`, `season`, `standings_types` → `standingsTypes`, `hydrate`, `fields` | `parse_mlb_standings` | — |
+| `mlb_stats` / `mlbStats` | `https://statsapi.mlb.com/api/v1/stats` | — | `stats`, `group`, `season`, `sport_id` → `sportId`, `league_id` → `leagueId`, `team_id` → `teamId`, `player_pool` → `playerPool`, `game_type` → `gameType`, `limit`, `offset`, `fields` | `parse_mlb_list` | — |
+| `mlb_stats_leaders` / `mlbStatsLeaders` | `https://statsapi.mlb.com/api/v1/stats/leaders` | — | `leader_categories` → `leaderCategories`, `season`, `leader_game_types` → `leaderGameTypes`, `stat_group` → `statGroup`, `league_id` → `leagueId`, `sport_id` → `sportId`, `limit` | `parse_mlb_list` | — |
+| `mlb_stats_metrics` / `mlbStatsMetrics` | `https://statsapi.mlb.com/api/v1/stats/metrics` | — | `stats`, `group`, `game_type` → `gameType`, `season`, `start_date` → `startDate`, `end_date` → `endDate`, `venue_id` → `venueId`, `min_occurrences` → `minOccurrences`, `percentile`, `person_id` → `personId`, `team_id` → `teamId`, `limit`, `offset`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_stats_streaks` / `mlbStatsStreaks` | `https://statsapi.mlb.com/api/v1/stats/streaks` | — | `streak_type` → `streakType`, `streak_threshold` → `streakThreshold`, `season`, `stat_group` → `statGroup`, `active_streak` → `activeStreak`, `sport_id` → `sportId` | `parse_mlb_list` | — |
+| `mlb_team` / `mlbTeam` | `https://statsapi.mlb.com/api/v1/teams/{team_id}` | `team_id`\* | `season`, `sport_id` → `sportId`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_team_affiliates` / `mlbTeamAffiliates` | `https://statsapi.mlb.com/api/v1/teams/affiliates` | — | `team_ids` → `teamIds`, `sport_id` → `sportId`, `season`, `hydrate` | `parse_mlb_list` | — |
+| `mlb_team_alumni` / `mlbTeamAlumni` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/alumni` | `team_id`\* | `season`, `group`, `hydrate` | `parse_mlb_list` | — |
+| `mlb_team_coaches` / `mlbTeamCoaches` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/coaches` | `team_id`\* | `season`, `date`, `fields` | `parse_mlb_list` | — |
+| `mlb_team_leaders` / `mlbTeamLeaders` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/leaders` | `team_id`\* | `leader_categories` → `leaderCategories`, `season`, `leader_game_types` → `leaderGameTypes`, `limit` | `parse_mlb_list` | — |
+| `mlb_team_personnel` / `mlbTeamPersonnel` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/personnel` | `team_id`\* | `date`, `fields` | `parse_mlb_list` | — |
+| `mlb_team_roster` / `mlbTeamRoster` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/roster` | `team_id`\* | `season`, `roster_type` → `rosterType`, `date`, `hydrate`, `fields` | `parse_mlb_team_roster` | — |
+| `mlb_team_roster_type` / `mlbTeamRosterType` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/roster/{roster_type}` | `team_id`\*, `roster_type`\* | `season`, `date`, `hydrate`, `fields` | `parse_mlb_team_roster` | — |
+| `mlb_team_stats` / `mlbTeamStats` | `https://statsapi.mlb.com/api/v1/teams/{team_id}/stats` | `team_id`\* | `season`, `stats`, `group`, `sport_ids` → `sportIds`, `game_type` → `gameType`, `fields` | `parse_mlb_person_stats` | — |
+| `mlb_teams` / `mlbTeams` | `https://statsapi.mlb.com/api/v1/teams` | — | `sport_id` → `sportId`, `season`, `league_ids` → `leagueIds`, `active_status` → `activeStatus`, `hydrate`, `fields` | `parse_mlb_teams` | — |
+| `mlb_teams_history` / `mlbTeamsHistory` | `https://statsapi.mlb.com/api/v1/teams/history` | — | `team_ids` → `teamIds`, `start_season` → `startSeason`, `end_season` → `endSeason`, `fields` | `parse_mlb_list` | — |
+| `mlb_teams_stats` / `mlbTeamsStats` | `https://statsapi.mlb.com/api/v1/teams/stats` | — | `season`, `sport_ids` → `sportIds`, `stat_group` → `group`, `game_type` → `gameType`, `stats`, `order`, `sort_stat` → `sortStat`, `fields` | `parse_mlb_person_stats` | — |
+| `mlb_teams_stats_leaders` / `mlbTeamsStatsLeaders` | `https://statsapi.mlb.com/api/v1/teams/stats/leaders` | — | `leader_categories` → `leaderCategories`, `sit_codes` → `sitCodes`, `game_types` → `gameTypes`, `stat_group` → `statGroup`, `season`, `league_ids` → `leagueIds`, `start_date` → `startDate`, `end_date` → `endDate`, `sport_id` → `sportId`, `hydrate`, `limit`, `fields` | `parse_mlb_list` | — |
+| `mlb_umpire_games` / `mlbUmpireGames` | `https://statsapi.mlb.com/api/v1/jobs/umpires/games/{umpire_id}` | `umpire_id`\* | `season`, `hydrate`, `fields` | `parse_mlb_list` | — |
+| `mlb_umpires` / `mlbUmpires` | `https://statsapi.mlb.com/api/v1/jobs/umpires` | — | — | `parse_mlb_list` | — |
+| `mlb_venue` / `mlbVenue` | `https://statsapi.mlb.com/api/v1/venues/{venue_id}` | `venue_id`\* | `season`, `hydrate` | `parse_mlb_list` | — |
+| `mlb_venues` / `mlbVenues` | `https://statsapi.mlb.com/api/v1/venues` | — | `season`, `sport_ids` → `sportIds`, `hydrate` | `parse_mlb_list` | — |
+| `mlb_win_probability` / `mlbWinProbability` | `https://statsapi.mlb.com/api/v1/game/{game_pk}/winProbability` | `game_pk`\* | `fields` | `parse_mlb_win_probability` | — |
 
-### Returns — `mlb_api_all_star_ballot` / `mlbApiAllStarBallot`
+### Returns — `mlb_all_star_ballot` / `mlbAllStarBallot`
 
 | col_name | type | description |
 |---|---|---|
@@ -282,7 +282,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `name_title` | character |  |
 | `name_suffix` | character |  |
 
-### Returns — `mlb_api_all_star_final_vote` / `mlbApiAllStarFinalVote`
+### Returns — `mlb_all_star_final_vote` / `mlbAllStarFinalVote`
 
 | col_name | type | description |
 |---|---|---|
@@ -334,7 +334,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `draft_year` | double |  |
 | `last_played_date` | character |  |
 
-### Returns — `mlb_api_all_star_write_ins` / `mlbApiAllStarWriteIns`
+### Returns — `mlb_all_star_write_ins` / `mlbAllStarWriteIns`
 
 | col_name | type | description |
 |---|---|---|
@@ -382,7 +382,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `name_title` | character |  |
 | `name_suffix` | character |  |
 
-### Returns — `mlb_api_award_recipients` / `mlbApiAwardRecipients`
+### Returns — `mlb_award_recipients` / `mlbAwardRecipients`
 
 | col_name | type | description |
 |---|---|---|
@@ -401,7 +401,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `player_name_first_last` | character |  |
 | `votes` | double |  |
 
-### Returns — `mlb_api_awards` / `mlbApiAwards`
+### Returns — `mlb_awards` / `mlbAwards`
 
 | col_name | type | description |
 |---|---|---|
@@ -416,7 +416,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `league_link` | character |  |
 | `notes` | character |  |
 
-### Returns — `mlb_api_boxscore` / `mlbApiBoxscore`
+### Returns — `mlb_boxscore` / `mlbBoxscore`
 
 | col_name | type | description |
 |---|---|---|
@@ -652,7 +652,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `stats_pitching_note` | character |  |
 | `stats_batting_note` | character |  |
 
-### Returns — `mlb_api_conference` / `mlbApiConference`
+### Returns — `mlb_conference` / `mlbConference`
 
 | col_name | type | description |
 |---|---|---|
@@ -667,7 +667,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sport_id` | integer |  |
 | `sport_link` | character |  |
 
-### Returns — `mlb_api_conferences` / `mlbApiConferences`
+### Returns — `mlb_conferences` / `mlbConferences`
 
 | col_name | type | description |
 |---|---|---|
@@ -682,7 +682,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sport_id` | integer |  |
 | `sport_link` | character |  |
 
-### Returns — `mlb_api_datacasters` / `mlbApiDatacasters`
+### Returns — `mlb_datacasters` / `mlbDatacasters`
 
 | col_name | type | description |
 |---|---|---|
@@ -694,7 +694,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
-### Returns — `mlb_api_draft_latest` / `mlbApiDraftLatest`
+### Returns — `mlb_draft_latest` / `mlbDraftLatest`
 
 | col_name | type | description |
 |---|---|---|
@@ -793,7 +793,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `pick_is_pass` | logical |  |
 | `pick_year` | character |  |
 
-### Returns — `mlb_api_free_agents` / `mlbApiFreeAgents`
+### Returns — `mlb_free_agents` / `mlbFreeAgents`
 
 | col_name | type | description |
 |---|---|---|
@@ -815,7 +815,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `new_team_name` | character |  |
 | `sort_order` | double |  |
 
-### Returns — `mlb_api_game_changes` / `mlbApiGameChanges`
+### Returns — `mlb_game_changes` / `mlbGameChanges`
 
 | col_name | type | description |
 |---|---|---|
@@ -884,7 +884,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `resumed_from` | character |  |
 | `resumed_from_date` | character |  |
 
-### Returns — `mlb_api_game_pace` / `mlbApiGamePace`
+### Returns — `mlb_game_pace` / `mlbGamePace`
 
 | col_name | type | description |
 |---|---|---|
@@ -938,13 +938,13 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `total7_inn_games_without_extra_inn` | double |  |
 | `total7_inn_games_completed_early` | double |  |
 
-### Returns — `mlb_api_game_timestamps` / `mlbApiGameTimestamps`
+### Returns — `mlb_game_timestamps` / `mlbGameTimestamps`
 
 | col_name | type | description |
 |---|---|---|
 | `timecode` | character |  |
 
-### Returns — `mlb_api_high_low` / `mlbApiHighLow`
+### Returns — `mlb_high_low` / `mlbHighLow`
 
 | col_name | type | description |
 |---|---|---|
@@ -967,7 +967,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sort_stat_high_low_types` | character |  |
 | `sort_stat_streak_levels` | character |  |
 
-### Returns — `mlb_api_home_run_derby` / `mlbApiHomeRunDerby`
+### Returns — `mlb_home_run_derby` / `mlbHomeRunDerby`
 
 | col_name | type | description |
 |---|---|---|
@@ -1053,7 +1053,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `current_team_parent_org_name` | character |  |
 | `current_team_parent_org_id` | double |  |
 
-### Returns — `mlb_api_home_run_derby_bracket` / `mlbApiHomeRunDerbyBracket`
+### Returns — `mlb_home_run_derby_bracket` / `mlbHomeRunDerbyBracket`
 
 | col_name | type | description |
 |---|---|---|
@@ -1139,7 +1139,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `current_team_parent_org_name` | character |  |
 | `current_team_parent_org_id` | double |  |
 
-### Returns — `mlb_api_home_run_derby_pool` / `mlbApiHomeRunDerbyPool`
+### Returns — `mlb_home_run_derby_pool` / `mlbHomeRunDerbyPool`
 
 | col_name | type | description |
 |---|---|---|
@@ -1225,7 +1225,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `current_team_parent_org_name` | character |  |
 | `current_team_parent_org_id` | double |  |
 
-### Returns — `mlb_api_jobs` / `mlbApiJobs`
+### Returns — `mlb_jobs` / `mlbJobs`
 
 | col_name | type | description |
 |---|---|---|
@@ -1237,7 +1237,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
-### Returns — `mlb_api_leagues` / `mlbApiLeagues`
+### Returns — `mlb_leagues` / `mlbLeagues`
 
 | col_name | type | description |
 |---|---|---|
@@ -1282,7 +1282,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sport_id` | double |  |
 | `sport_link` | character |  |
 
-### Returns — `mlb_api_linescore` / `mlbApiLinescore`
+### Returns — `mlb_linescore` / `mlbLinescore`
 
 | col_name | type | description |
 |---|---|---|
@@ -1297,7 +1297,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `away_errors` | integer |  |
 | `away_left_on_base` | integer |  |
 
-### Returns — `mlb_api_official_scorers` / `mlbApiOfficialScorers`
+### Returns — `mlb_official_scorers` / `mlbOfficialScorers`
 
 | col_name | type | description |
 |---|---|---|
@@ -1309,7 +1309,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
-### Returns — `mlb_api_play_by_play` / `mlbApiPlayByPlay`
+### Returns — `mlb_play_by_play` / `mlbPlayByPlay`
 
 | col_name | type | description |
 |---|---|---|
@@ -1371,7 +1371,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `review_details_review_type` | character |  |
 | `review_details_challenge_team_id` | double |  |
 
-### Returns — `mlb_api_schedule_postseason` / `mlbApiSchedulePostseason`
+### Returns — `mlb_schedule_postseason` / `mlbSchedulePostseason`
 
 | col_name | type | description |
 |---|---|---|
@@ -1436,7 +1436,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `venue_link` | character |  |
 | `content_link` | character |  |
 
-### Returns — `mlb_api_schedule_postseason_series` / `mlbApiSchedulePostseasonSeries`
+### Returns — `mlb_schedule_postseason_series` / `mlbSchedulePostseasonSeries`
 
 | col_name | type | description |
 |---|---|---|
@@ -1450,7 +1450,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `series_is_default` | logical |  |
 | `series_game_type` | character |  |
 
-### Returns — `mlb_api_schedule_tied` / `mlbApiScheduleTied`
+### Returns — `mlb_schedule_tied` / `mlbScheduleTied`
 
 | col_name | type | description |
 |---|---|---|
@@ -1512,7 +1512,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `venue_link` | character |  |
 | `content_link` | character |  |
 
-### Returns — `mlb_api_season` / `mlbApiSeason`
+### Returns — `mlb_season` / `mlbSeason`
 
 | col_name | type | description |
 |---|---|---|
@@ -1538,7 +1538,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `qualifier_plate_appearances` | double |  |
 | `qualifier_outs_pitched` | double |  |
 
-### Returns — `mlb_api_seasons_all` / `mlbApiSeasonsAll`
+### Returns — `mlb_seasons_all` / `mlbSeasonsAll`
 
 | col_name | type | description |
 |---|---|---|
@@ -1564,7 +1564,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `spring_start_date` | character |  |
 | `spring_end_date` | character |  |
 
-### Returns — `mlb_api_sport` / `mlbApiSport`
+### Returns — `mlb_sport` / `mlbSport`
 
 | col_name | type | description |
 |---|---|---|
@@ -1576,7 +1576,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sort_order` | integer |  |
 | `active_status` | logical |  |
 
-### Returns — `mlb_api_sport_players` / `mlbApiSportPlayers`
+### Returns — `mlb_sport_players` / `mlbSportPlayers`
 
 | col_name | type | description |
 |---|---|---|
@@ -1631,7 +1631,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `name_title` | character |  |
 | `name_suffix` | character |  |
 
-### Returns — `mlb_api_sports` / `mlbApiSports`
+### Returns — `mlb_sports` / `mlbSports`
 
 | col_name | type | description |
 |---|---|---|
@@ -1643,7 +1643,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sort_order` | integer |  |
 | `active_status` | logical |  |
 
-### Returns — `mlb_api_team` / `mlbApiTeam`
+### Returns — `mlb_team` / `mlbTeam`
 
 | col_name | type | description |
 |---|---|---|
@@ -1681,7 +1681,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sport_link` | character |  |
 | `sport_name` | character |  |
 
-### Returns — `mlb_api_team_affiliates` / `mlbApiTeamAffiliates`
+### Returns — `mlb_team_affiliates` / `mlbTeamAffiliates`
 
 | col_name | type | description |
 |---|---|---|
@@ -1721,7 +1721,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `parent_org_name` | character |  |
 | `parent_org_id` | double |  |
 
-### Returns — `mlb_api_team_alumni` / `mlbApiTeamAlumni`
+### Returns — `mlb_team_alumni` / `mlbTeamAlumni`
 
 | col_name | type | description |
 |---|---|---|
@@ -1772,7 +1772,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `last_played_date` | character |  |
 | `name_matrilineal` | character |  |
 
-### Returns — `mlb_api_team_coaches` / `mlbApiTeamCoaches`
+### Returns — `mlb_team_coaches` / `mlbTeamCoaches`
 
 | col_name | type | description |
 |---|---|---|
@@ -1784,7 +1784,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
-### Returns — `mlb_api_team_personnel` / `mlbApiTeamPersonnel`
+### Returns — `mlb_team_personnel` / `mlbTeamPersonnel`
 
 | col_name | type | description |
 |---|---|---|
@@ -1796,7 +1796,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
-### Returns — `mlb_api_team_roster` / `mlbApiTeamRoster`
+### Returns — `mlb_team_roster` / `mlbTeamRoster`
 
 | col_name | type | description |
 |---|---|---|
@@ -1811,7 +1811,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `status_code` | character |  |
 | `status_description` | character |  |
 
-### Returns — `mlb_api_team_roster_type` / `mlbApiTeamRosterType`
+### Returns — `mlb_team_roster_type` / `mlbTeamRosterType`
 
 | col_name | type | description |
 |---|---|---|
@@ -1826,7 +1826,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `status_code` | character |  |
 | `status_description` | character |  |
 
-### Returns — `mlb_api_teams_history` / `mlbApiTeamsHistory`
+### Returns — `mlb_teams_history` / `mlbTeamsHistory`
 
 | col_name | type | description |
 |---|---|---|
@@ -1857,7 +1857,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `sport_link` | character |  |
 | `sport_name` | character |  |
 
-### Returns — `mlb_api_teams_stats` / `mlbApiTeamsStats`
+### Returns — `mlb_teams_stats` / `mlbTeamsStats`
 
 | col_name | type | description |
 |---|---|---|
@@ -1869,7 +1869,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `type_display_name` | character |  |
 | `group_display_name` | character |  |
 
-### Returns — `mlb_api_teams_stats_leaders` / `mlbApiTeamsStatsLeaders`
+### Returns — `mlb_teams_stats_leaders` / `mlbTeamsStatsLeaders`
 
 | col_name | type | description |
 |---|---|---|
@@ -1881,7 +1881,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `game_type_id` | character |  |
 | `game_type_description` | character |  |
 
-### Returns — `mlb_api_umpires` / `mlbApiUmpires`
+### Returns — `mlb_umpires` / `mlbUmpires`
 
 | col_name | type | description |
 |---|---|---|
@@ -1893,7 +1893,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
-### Returns — `mlb_api_venue` / `mlbApiVenue`
+### Returns — `mlb_venue` / `mlbVenue`
 
 | col_name | type | description |
 |---|---|---|
@@ -1903,7 +1903,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `active` | logical |  |
 | `season` | character |  |
 
-### Returns — `mlb_api_venues` / `mlbApiVenues`
+### Returns — `mlb_venues` / `mlbVenues`
 
 | col_name | type | description |
 |---|---|---|
@@ -1913,7 +1913,7 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `active` | logical |  |
 | `season` | character |  |
 
-### Returns — `mlb_api_win_probability` / `mlbApiWinProbability`
+### Returns — `mlb_win_probability` / `mlbWinProbability`
 
 | col_name | type | description |
 |---|---|---|

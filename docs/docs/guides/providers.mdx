@@ -60,7 +60,7 @@ CBS league ids are slugs like `football-nfl`, `basketball-nba`, `baseball-mlb`.
 ```js
 import sdv from 'sportsdataverse';
 
-const league = await sdv.cbs.cbsNapiLeague({ league_id: 'football-nfl', parsed: true });
+const league = await sdv.cbs.cbsLeague({ league_id: 'football-nfl', parsed: true });
 console.table(league);
 ```
 
@@ -69,13 +69,13 @@ Live and inline — the `league_id` is a CBS slug (`football-nfl`,
 
 <RunCell
   league="cbs"
-  endpoint="flat:cbs_napi:league"
+  endpoint="flat:cbs:league"
   params={{ league_id: 'football-nfl' }}
   parsed
   title="CBS NAPI league metadata — live"
 />
 
-[Open in playground ▶](/playground?l=cbs&e=flat%3Acbs_napi%3Aleague&parsed=1&league_id=football-nfl)
+[Open in playground ▶](/playground?l=cbs&e=flat%3Acbs%3Aleague&parsed=1&league_id=football-nfl)
 
 ## Fox — Bifrost scoreboard
 
@@ -85,7 +85,7 @@ The public `apikey` + `api-version` pair default automatically — just pass a
 ```js
 import sdv from 'sportsdataverse';
 
-const board = await sdv.fox.foxBifrostScoreboard({ sport: 'cfb', parsed: true });
+const board = await sdv.fox.foxScoreboard({ sport: 'cfb', parsed: true });
 console.table(board);
 ```
 
@@ -94,13 +94,13 @@ Live and inline — the public `apikey` defaults out of the box; just pick a
 
 <RunCell
   league="fox"
-  endpoint="flat:fox_bifrost:scoreboard"
+  endpoint="flat:fox:scoreboard"
   params={{ sport: 'cfb' }}
   parsed
   title="Fox Bifrost scoreboard — public apikey, live"
 />
 
-[Open in playground ▶](/playground?l=fox&e=flat%3Afox_bifrost%3Ascoreboard&parsed=1&sport=cfb)
+[Open in playground ▶](/playground?l=fox&e=flat%3Afox%3Ascoreboard&parsed=1&sport=cfb)
 
 ## Yahoo — league standings
 
@@ -111,7 +111,7 @@ is rejected.
 ```js
 import sdv from 'sportsdataverse';
 
-const standings = await sdv.yahoo.yahooShangrilaLeagueStandings({
+const standings = await sdv.yahoo.yahooLeagueStandings({
   league: 'ncaaf',
   parsed: true,
 });
@@ -123,13 +123,13 @@ slug. If a Yahoo host rejects the call, add an `Origin`/`Referer` via `headers`:
 
 <RunCell
   league="yahoo"
-  endpoint="flat:yahoo_shangrila:league_standings"
+  endpoint="flat:yahoo:league_standings"
   params={{ league: 'ncaaf' }}
   parsed
   title="Yahoo shangrila league standings — live"
 />
 
-[Open in playground ▶](/playground?l=yahoo&e=flat%3Ayahoo_shangrila%3Aleague_standings&parsed=1&league=ncaaf)
+[Open in playground ▶](/playground?l=yahoo&e=flat%3Ayahoo%3Aleague_standings&parsed=1&league=ncaaf)
 
 ## 247Sports — recruiting rankings
 
@@ -164,7 +164,7 @@ This cell pulls the current CFB scoreboard from Fox's public Bifrost API:
   title="Fox Bifrost: CFB scoreboard"
   source={`const sdv = (await import('sportsdataverse')).default;
 
-const board = await sdv.fox.foxBifrostScoreboard({ sport: 'cfb', parsed: true });
+const board = await sdv.fox.foxScoreboard({ sport: 'cfb', parsed: true });
 
 board.slice(0, 5);`}
 />

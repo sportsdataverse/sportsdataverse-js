@@ -1,23 +1,23 @@
 // Flat-API parser registry. A flat wrapper carries a `parser` name on its
 // `WrapperDef`; when a caller passes `{ parsed: true }` the wrapper dispatch
 // (src/leagues/_make_flat.ts) looks the parser up here and runs it over the raw
-// JSON. Mirrors the `ENDPOINT_PARSERS` / `MLB_API_ENDPOINT_PARSERS` registries
+// JSON. Mirrors the `ENDPOINT_PARSERS` / `MLB_ENDPOINT_PARSERS` registries
 // in `sportsdataverse-py`.
 
 import {
-  parse_mlb_api_list,
-  parse_mlb_api_teams,
-  parse_mlb_api_schedule,
-  parse_mlb_api_team_roster,
-  parse_mlb_api_standings,
-  parse_mlb_api_person_stats,
-  parse_mlb_api_boxscore,
-  parse_mlb_api_linescore,
-  parse_mlb_api_play_by_play,
-  parse_mlb_api_win_probability,
-  parse_mlb_api_draft_latest,
-  parse_mlb_api_timecodes,
-} from "./mlb_api.js";
+  parse_mlb_list,
+  parse_mlb_teams,
+  parse_mlb_schedule,
+  parse_mlb_team_roster,
+  parse_mlb_standings,
+  parse_mlb_person_stats,
+  parse_mlb_boxscore,
+  parse_mlb_linescore,
+  parse_mlb_play_by_play,
+  parse_mlb_win_probability,
+  parse_mlb_draft_latest,
+  parse_mlb_timecodes,
+} from "./mlb.js";
 import {
   parse_nhl_web_pbp,
   parse_nhl_web_boxscore,
@@ -90,28 +90,28 @@ import {
   parse_sports247_ranking_feed,
 } from "./sports247.js";
 import {
-  parse_cbs_napi_list,
-  parse_cbs_napi_scoreboard,
-  parse_cbs_napi_standings,
-  parse_cbs_napi_odds,
-} from "./cbs_napi.js";
+  parse_cbs_list,
+  parse_cbs_scoreboard,
+  parse_cbs_standings,
+  parse_cbs_odds,
+} from "./cbs.js";
 import {
-  parse_fox_bifrost_list,
-  parse_fox_bifrost_scoreboard,
-  parse_fox_bifrost_standings,
-  parse_fox_bifrost_event,
-  parse_fox_bifrost_team_roster,
-  parse_fox_bifrost_search,
-} from "./fox_bifrost.js";
+  parse_fox_list,
+  parse_fox_scoreboard,
+  parse_fox_standings,
+  parse_fox_event,
+  parse_fox_team_roster,
+  parse_fox_search,
+} from "./fox.js";
 import {
-  parse_yahoo_editorial_list,
-  parse_yahoo_editorial_scoreboard,
-  parse_yahoo_editorial_boxscore,
-} from "./yahoo_editorial.js";
+  parse_yahoo_scores_list,
+  parse_yahoo_scores_scoreboard,
+  parse_yahoo_scores_boxscore,
+} from "./yahoo_scores.js";
 import {
-  parse_yahoo_shangrila_list,
-  parse_yahoo_shangrila_stats,
-} from "./yahoo_shangrila.js";
+  parse_yahoo_list,
+  parse_yahoo_stats,
+} from "./yahoo.js";
 import {
   parse_hockeytech_seasons,
   parse_hockeytech_schedule,
@@ -139,19 +139,19 @@ export type ParserFn = (raw: any) => Record<string, any>[];
 export const PARSERS: Record<string, ParserFn> = {
   // ---- MLB Stats API ----
   // Generic list flattener (the default for most endpoints).
-  parse_mlb_api_list,
+  parse_mlb_list,
   // Dedicated parsers (extra unrolling logic).
-  parse_mlb_api_teams,
-  parse_mlb_api_schedule,
-  parse_mlb_api_team_roster,
-  parse_mlb_api_standings,
-  parse_mlb_api_person_stats,
-  parse_mlb_api_boxscore,
-  parse_mlb_api_linescore,
-  parse_mlb_api_play_by_play,
-  parse_mlb_api_win_probability,
-  parse_mlb_api_draft_latest,
-  parse_mlb_api_timecodes,
+  parse_mlb_teams,
+  parse_mlb_schedule,
+  parse_mlb_team_roster,
+  parse_mlb_standings,
+  parse_mlb_person_stats,
+  parse_mlb_boxscore,
+  parse_mlb_linescore,
+  parse_mlb_play_by_play,
+  parse_mlb_win_probability,
+  parse_mlb_draft_latest,
+  parse_mlb_timecodes,
   // ---- NHL api-web (modern game-feed) ----
   parse_nhl_web_pbp,
   parse_nhl_web_boxscore,
@@ -220,31 +220,31 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_sports247_paged_list,
   parse_sports247_institution_rankings,
   parse_sports247_ranking_feed,
-  // ---- CBS Sports NAPI (api.cbssports.com/napi) ----
+  // ---- CBS Sports API (api.cbssports.com/napi) ----
   // Generic list flattener (the default for most endpoints).
-  parse_cbs_napi_list,
+  parse_cbs_list,
   // Dedicated parsers (envelope unrolling logic).
-  parse_cbs_napi_scoreboard,
-  parse_cbs_napi_standings,
-  parse_cbs_napi_odds,
-  // ---- Fox Sports Bifrost (api.foxsports.com/bifrost/v1) ----
+  parse_cbs_scoreboard,
+  parse_cbs_standings,
+  parse_cbs_odds,
+  // ---- Fox Sports Fox (api.foxsports.com/bifrost/v1) ----
   // Generic module-shell flattener (the default for most endpoints).
-  parse_fox_bifrost_list,
+  parse_fox_list,
   // Dedicated parsers (nested-list unrolling logic).
-  parse_fox_bifrost_scoreboard,
-  parse_fox_bifrost_standings,
-  parse_fox_bifrost_event,
-  parse_fox_bifrost_team_roster,
-  parse_fox_bifrost_search,
-  // ---- Yahoo Sports editorial (api-secure.sports.yahoo.com /v1/editorial/s) ----
+  parse_fox_scoreboard,
+  parse_fox_standings,
+  parse_fox_event,
+  parse_fox_team_roster,
+  parse_fox_search,
+  // ---- Yahoo Sports scores (api-secure.sports.yahoo.com /v1/scores/s) ----
   // Generic service-envelope flattener + two dedicated keyed-map unrollers.
-  parse_yahoo_editorial_list,
-  parse_yahoo_editorial_scoreboard,
-  parse_yahoo_editorial_boxscore,
-  // ---- Yahoo Sports shangrila stats-graph (graphite-secure.sports.yahoo.com) ----
+  parse_yahoo_scores_list,
+  parse_yahoo_scores_scoreboard,
+  parse_yahoo_scores_boxscore,
+  // ---- Yahoo Sports stats stats-graph (graphite-secure.sports.yahoo.com) ----
   // Generic GraphQL-envelope flattener (default) + nested stat-array unroller.
-  parse_yahoo_shangrila_list,
-  parse_yahoo_shangrila_stats,
+  parse_yahoo_list,
+  parse_yahoo_stats,
   // ---- HockeyTech / LeagueStat (lscluster.hockeytech.com + cluster.leaguestat.com) ----
   // One parser per feed view (modulekit SiteKit envelopes, statviewfeed
   // standings/leaders/pbp, gc gamesummary).

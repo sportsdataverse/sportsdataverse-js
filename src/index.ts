@@ -34,7 +34,7 @@ for (const cfg of LEAGUES) {
 // AFTER the ESPN merge so they're added alongside (never clobbering) the ESPN
 // + legacy surface. Each flat family (`WrapperDef.api`) maps to a league prefix.
 const FLAT_API_NAMESPACES: Record<string, string> = {
-  mlb_api: 'mlb',
+  mlb: 'mlb',
   mlb_statcast: 'mlb',
   nhl_api_web: 'nhl',
   nhl_edge: 'nhl',
@@ -49,22 +49,22 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
   // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
   sports247: 'recruiting',
-  // CBS Sports NAPI — third standalone (non-league) provider family. `cbs` is a
+  // CBS Sports API — third standalone (non-league) provider family. `cbs` is a
   // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
-  // the NAPI data resources are anonymously reachable).
-  cbs_napi: 'cbs',
-  // Fox Sports "Bifrost" API — fourth standalone (non-league) provider family.
+  // the API data resources are anonymously reachable).
+  cbs: 'cbs',
+  // Fox Sports API — fourth standalone (non-league) provider family.
   // `fox` is a cross-sport namespace; the merge creates `sdv.fox.*` from scratch.
   // Auth is a public apikey + api-version query pair (both default in the wrapper
   // metadata, no account/token), so it is NOT flagged auth:true.
-  fox_bifrost: 'fox',
+  fox: 'fox',
   // Yahoo Sports — fifth (and final) standalone provider family. TWO api stems
-  // (editorial + shangrila) share ONE `yahoo` namespace (two hosts, one
+  // (scores + stats) share ONE `yahoo` namespace (two hosts, one
   // namespace — like the four NHL stems share `nhl`); the merge creates
   // `sdv.yahoo.*` from scratch. Keyless (no securityScheme), so NOT auth:true —
   // callers pass browser-y Origin/Referer via the flat `headers` arg.
-  yahoo_editorial: 'yahoo',
-  yahoo_shangrila: 'yahoo',
+  yahoo_scores: 'yahoo',
+  yahoo: 'yahoo',
   // HockeyTech / LeagueStat — standalone provider family. `hockeytech` is a
   // cross-sport namespace; the merge creates `sdv.hockeytech.*` from scratch.
   // One feed gateway serves every league (PWHL + junior/minor); the `league`

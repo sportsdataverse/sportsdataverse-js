@@ -1,6 +1,6 @@
 // 247Sports Recruit Database ("RDB") flat-API parsers
 // (api.247sports.com /rdb/v1). Each parser turns a raw JSON payload into tidy
-// rectangular rows, same contract as src/parsers/mlb_api.ts:
+// rectangular rows, same contract as src/parsers/mlb.ts:
 //
 //   - return an array of flat row objects (the JS analogue of a polars frame);
 //   - empty / malformed payloads return `[]` instead of throwing, so callers

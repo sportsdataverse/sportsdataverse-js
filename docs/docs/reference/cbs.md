@@ -18,100 +18,100 @@ sidebar_position: 33
 ```js
 import sdv from 'sportsdataverse';
 
-// CBS Sports NAPI is an anonymously-reachable public JSON API (no token):
-await sdv.cbs.cbs_napi_team({ team_id: 'football-nfl-NE' });
+// CBS Sports is an anonymously-reachable public JSON API (no token):
+await sdv.cbs.cbs_league({ league_id: 'football-nfl' });
 ```
 
 ## Native API — CBS Sports
 
-Flat (non-ESPN) wrappers for CBS Sports napi. Host: `https://api.cbssports.com`. Each method is exposed under BOTH `cbs_napi_<endpoint>` (snake_case, py/R parity) and `cbsNapi<Endpoint>` (camelCase canonical) on `sdv.cbs`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the CBS Sports API. Host: `https://api.cbssports.com`. Each method is exposed under BOTH `cbs_<endpoint>` (snake_case, py/R parity) and `cbs<Endpoint>` (camelCase canonical) on `sdv.cbs`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `cbs_napi_baseball_player_meta` / `cbsNapiBaseballPlayerMeta` | `https://api.cbssports.com/resource/player/meta/baseball/{player_id}` | `player_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_boxscore` / `cbsNapiBoxscore` | `https://api.cbssports.com/resource/game/boxscore/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_bulk` / `cbsNapiBulk` | `https://api.cbssports.com/resource/bulk` | — | `player_resource` → `PlayerResource`, `team_resource` → `TeamResource`, `game_resource` → `GameResource`, `venue_resource` → `VenueResource`, `event_resource` → `EventResource`, `featured_game_resource` → `FeaturedGameResource`, `golf_event_markets_resource` → `GolfEventMarketsResource` | `parse_cbs_napi_list` | — |
-| `cbs_napi_client_configuration` / `cbsNapiClientConfiguration` | `https://api.cbssports.com/resource/client/config/{client_name}` | `client_name`\* | `resources`, `league_id` → `leagueId`, `classifier`, `key_name` → `keyName` | `parse_cbs_napi_list` | — |
-| `cbs_napi_coach_rankings` / `cbsNapiCoachRankings` | `https://api.cbssports.com/resource/coach/rankings/{coach_id}` | `coach_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_coach_team_associations` / `cbsNapiCoachTeamAssociations` | `https://api.cbssports.com/resource/coach/teamAssociations/{coach_id}` | `coach_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_depth_charts` / `cbsNapiDepthCharts` | `https://api.cbssports.com/resource/player/depthCharts/{player_id}` | `player_id`\* | `position`, `pitch_pos` → `pitchPos` | `parse_cbs_napi_list` | — |
-| `cbs_napi_endpoint_registry` / `cbsNapiEndpointRegistry` | `https://api.cbssports.com/resource/endpoint/registry` | — | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_event` / `cbsNapiEvent` | `https://api.cbssports.com/resource/event/{event_id}` | `event_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_event_entrants` / `cbsNapiEventEntrants` | `https://api.cbssports.com/resource/event/entrants/{event_id}` | `event_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_event_leaderboard` / `cbsNapiEventLeaderboard` | `https://api.cbssports.com/resource/event/leaderboard/{event_id}` | `event_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_event_seasons` / `cbsNapiEventSeasons` | `https://api.cbssports.com/resource/event/seasons/{event_id}` | `event_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_event_venues` / `cbsNapiEventVenues` | `https://api.cbssports.com/resource/event/venues/{event_id}` | `event_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_featured_game` / `cbsNapiFeaturedGame` | `https://api.cbssports.com/resource/game/featured/{game_id}` | `game_id`\* | — | `parse_cbs_napi_scoreboard` | — |
-| `cbs_napi_game` / `cbsNapiGame` | `https://api.cbssports.com/resource/game/{game_id}` | `game_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_betting_splits` / `cbsNapiGameBettingSplits` | `https://api.cbssports.com/resource/game/bettingSplits/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_content_preview` / `cbsNapiGameContentPreview` | `https://api.cbssports.com/resource/game/content/preview/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_content_recap` / `cbsNapiGameContentRecap` | `https://api.cbssports.com/resource/game/content/recap/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_content_story` / `cbsNapiGameContentStory` | `https://api.cbssports.com/resource/game/content/story/{game_id}` | `game_id`\* | `game_ids_story_tags` → `gameIdsStoryTags` | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_hq_odds` / `cbsNapiGameHqOdds` | `https://api.cbssports.com/resource/game/odds/hq/{game_id}` | `game_id`\* | — | `parse_cbs_napi_odds` | — |
-| `cbs_napi_game_lineup` / `cbsNapiGameLineup` | `https://api.cbssports.com/resource/game/lineup/{game_id}` | `game_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_odds` / `cbsNapiGameOdds` | `https://api.cbssports.com/resource/game/odds/{game_id}` | `game_id`\* | `market_ids` → `marketIds`, `book_ids` → `bookIds`, `state`, `model`, `show_hidden_odds` → `showHiddenOdds` | `parse_cbs_napi_odds` | — |
-| `cbs_napi_game_outcomes` / `cbsNapiGameOutcomes` | `https://api.cbssports.com/resource/game/outcomes/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_props` / `cbsNapiGameProps` | `https://api.cbssports.com/resource/game/props/{game_id}` | `game_id`\* | `market_ids` → `marketIds`, `book_ids` → `bookIds`, `prop_bet_types` → `propBetTypes`, `state`, `include_inactive_markets` → `includeInactiveMarkets` | `parse_cbs_napi_odds` | — |
-| `cbs_napi_game_rtwp` / `cbsNapiGameRtwp` | `https://api.cbssports.com/resource/game/rtwp/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_boxscores` / `cbsNapiGameScoringBoxscores` | `https://api.cbssports.com/resource/game/scoring/boxscores/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_drives` / `cbsNapiGameScoringDrives` | `https://api.cbssports.com/resource/game/scoring/drives/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_leaders` / `cbsNapiGameScoringLeaders` | `https://api.cbssports.com/resource/game/scoring/leaders/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_player_stats` / `cbsNapiGameScoringPlayerStats` | `https://api.cbssports.com/resource/game/scoring/playerStats/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_plays` / `cbsNapiGameScoringPlays` | `https://api.cbssports.com/resource/game/scoring/plays/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_rosters` / `cbsNapiGameScoringRosters` | `https://api.cbssports.com/resource/game/scoring/rosters/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_scoreboard` / `cbsNapiGameScoringScoreboard` | `https://api.cbssports.com/resource/game/scoring/scoreboard/{game_id}` | `game_id`\* | — | `parse_cbs_napi_scoreboard` | — |
-| `cbs_napi_game_scoring_scores` / `cbsNapiGameScoringScores` | `https://api.cbssports.com/resource/game/scoring/scores/{game_id}` | `game_id`\* | — | `parse_cbs_napi_scoreboard` | — |
-| `cbs_napi_game_scoring_team_stats` / `cbsNapiGameScoringTeamStats` | `https://api.cbssports.com/resource/game/scoring/teamStats/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_winprob` / `cbsNapiGameScoringWinprob` | `https://api.cbssports.com/resource/game/scoring/winprob/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_ytd_player_stats` / `cbsNapiGameScoringYtdPlayerStats` | `https://api.cbssports.com/resource/game/scoring/ytdPlayerStats/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_scoring_ytd_team_stats` / `cbsNapiGameScoringYtdTeamStats` | `https://api.cbssports.com/resource/game/scoring/ytdTeamStats/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_game_ticket` / `cbsNapiGameTicket` | `https://api.cbssports.com/resource/game/ticket/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_golf_event_markets` / `cbsNapiGolfEventMarkets` | `https://api.cbssports.com/resource/golf/event/markets/{event_id}` | `event_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_golf_player_markets` / `cbsNapiGolfPlayerMarkets` | `https://api.cbssports.com/resource/golf/player/markets/{player_id}` | `player_id`\* | `event_id` → `eventId` | `parse_cbs_napi_list` | — |
-| `cbs_napi_golfer_results` / `cbsNapiGolferResults` | `https://api.cbssports.com/resource/golfer/results/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_id` → `seasonId` | `parse_cbs_napi_list` | — |
-| `cbs_napi_hockey_player_meta` / `cbsNapiHockeyPlayerMeta` | `https://api.cbssports.com/resource/player/hockey/meta/{player_id}` | `player_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_league` / `cbsNapiLeague` | `https://api.cbssports.com/resource/league/{league_id}` | `league_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_league_teams` / `cbsNapiLeagueTeams` | `https://api.cbssports.com/resource/league/teams/{league_id}` | `league_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_odds` / `cbsNapiOdds` | `https://api.cbssports.com/resource/odds/{game_id}` | `game_id`\* | — | `parse_cbs_napi_odds` | — |
-| `cbs_napi_player` / `cbsNapiPlayer` | `https://api.cbssports.com/resource/player/{player_id}` | `player_id`\* | `date_format` → `dateFormat`, `year`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_combine_data` / `cbsNapiPlayerCombineData` | `https://api.cbssports.com/resource/player/combineData/{player_id}` | `player_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_draft_info` / `cbsNapiPlayerDraftInfo` | `https://api.cbssports.com/resource/player/draftInfo/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_encyclopedia` / `cbsNapiPlayerEncyclopedia` | `https://api.cbssports.com/resource/player/encyclopedia/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_id` → `seasonId` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_futures` / `cbsNapiPlayerFutures` | `https://api.cbssports.com/resource/player/futures/{player_id}` | `player_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_game_stats` / `cbsNapiPlayerGameStats` | `https://api.cbssports.com/resource/player/gameStats/{player_id}` | `player_id`\* | `game_id` → `gameId`, `season_year` → `seasonYear`, `season_type` → `seasonType` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_golf_metadata` / `cbsNapiPlayerGolfMetadata` | `https://api.cbssports.com/resource/player/meta/golf/{player_id}` | `player_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_injuries` / `cbsNapiPlayerInjuries` | `https://api.cbssports.com/resource/player/injuries/{player_id}` | `player_id`\* | `date_format` → `dateFormat` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_outlook` / `cbsNapiPlayerOutlook` | `https://api.cbssports.com/resource/player/outlook/{player_id}` | `player_id`\* | `date_format` → `dateFormat` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_rankings` / `cbsNapiPlayerRankings` | `https://api.cbssports.com/resource/player/rankings/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent`, `categories` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_standings` / `cbsNapiPlayerStandings` | `https://api.cbssports.com/resource/player/standings/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent`, `resources` | `parse_cbs_napi_standings` | — |
-| `cbs_napi_player_stats` / `cbsNapiPlayerStats` | `https://api.cbssports.com/resource/player/stats/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent`, `team_id` → `teamId`, `team_abbr` → `teamAbbr`, `is_total` → `isTotal` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_team_associations` / `cbsNapiPlayerTeamAssociations` | `https://api.cbssports.com/resource/player/teamAssociations/{player_id}` | `player_id`\* | `assoc_type` → `assocType`, `roster_status` → `rosterStatus`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_player_transactions` / `cbsNapiPlayerTransactions` | `https://api.cbssports.com/resource/player/transactions/{player_id}` | `player_id`\* | `date_format` → `dateFormat`, `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_position_rankings` / `cbsNapiPositionRankings` | `https://api.cbssports.com/resource/player/positionRankings/{player_id}` | `player_id`\* | `position` | `parse_cbs_napi_list` | — |
-| `cbs_napi_probable_players` / `cbsNapiProbablePlayers` | `https://api.cbssports.com/resource/game/probablePlayers/{game_id}` | `game_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_recruit_rankings` / `cbsNapiRecruitRankings` | `https://api.cbssports.com/resource/recruit/rankings/{player_id}` | `player_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_recruit_team_associations` / `cbsNapiRecruitTeamAssociations` | `https://api.cbssports.com/resource/player/recruitAssociations/{player_id}` | `player_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_ruwt_highlights` / `cbsNapiRuwtHighlights` | `https://api.cbssports.com/resource/game/ruwtHighlights/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_season` / `cbsNapiSeason` | `https://api.cbssports.com/resource/season/{season_id}` | `season_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_season_teams` / `cbsNapiSeasonTeams` | `https://api.cbssports.com/resource/season/teams/{season_id}` | `season_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_sport` / `cbsNapiSport` | `https://api.cbssports.com/resource/sport/{sport_id}` | `sport_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_sport_leagues` / `cbsNapiSportLeagues` | `https://api.cbssports.com/resource/sport/leagues/{sport_id}` | `sport_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_sports_line_team_rankings` / `cbsNapiSportsLineTeamRankings` | `https://api.cbssports.com/resource/team/rankings/sportsline/{team_id}` | `team_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_sports_line_team_standings` / `cbsNapiSportsLineTeamStandings` | `https://api.cbssports.com/resource/team/standings/sportsline/{team_id}` | `team_id`\* | `date_format` → `dateFormat` | `parse_cbs_napi_standings` | — |
-| `cbs_napi_sub_divisions` / `cbsNapiSubDivisions` | `https://api.cbssports.com/resource/division/subdivisions/{division_id}` | `division_id`\* | `sub_division_id` → `subDivisionId`, `name` | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_futures` / `cbsNapiTeamFutures` | `https://api.cbssports.com/resource/team/futures/{team_id}` | `team_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_metadata` / `cbsNapiTeamMetadata` | `https://api.cbssports.com/resource/team/metadata/{team_id}` | `team_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_players` / `cbsNapiTeamPlayers` | `https://api.cbssports.com/resource/team/players/{team_id}` | `team_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_polls` / `cbsNapiTeamPolls` | `https://api.cbssports.com/resource/team/polls/{team_id}` | `team_id`\* | `polls`, `season_id` → `seasonId` | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_rankings` / `cbsNapiTeamRankings` | `https://api.cbssports.com/resource/team/rankings/{team_id}` | `team_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId` | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_seasons` / `cbsNapiTeamSeasons` | `https://api.cbssports.com/resource/team/seasons/{team_id}` | `team_id`\* | `date_format` → `dateFormat`, `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_team_standings` / `cbsNapiTeamStandings` | `https://api.cbssports.com/resource/team/standings/{team_id}` | `team_id`\* | `year`, `season_type` → `seasonType`, `season_id` → `seasonId` | `parse_cbs_napi_standings` | — |
-| `cbs_napi_team_stats` / `cbsNapiTeamStats` | `https://api.cbssports.com/resource/team/stats/{team_id}` | `team_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent` | `parse_cbs_napi_list` | — |
-| `cbs_napi_venue` / `cbsNapiVenue` | `https://api.cbssports.com/resource/venue/{venue_id}` | `venue_id`\* | `resources` | `parse_cbs_napi_list` | — |
-| `cbs_napi_venue_metadata` / `cbsNapiVenueMetadata` | `https://api.cbssports.com/resource/venue/metadata/{venue_id}` | `venue_id`\* | — | `parse_cbs_napi_list` | — |
-| `cbs_napi_weather` / `cbsNapiWeather` | `https://api.cbssports.com/resource/game/weather/{game_id}` | `game_id`\* | — | `parse_cbs_napi_list` | — |
+| `cbs_baseball_player_meta` / `cbsBaseballPlayerMeta` | `https://api.cbssports.com/resource/player/meta/baseball/{player_id}` | `player_id`\* | — | `parse_cbs_list` | — |
+| `cbs_boxscore` / `cbsBoxscore` | `https://api.cbssports.com/resource/game/boxscore/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_bulk` / `cbsBulk` | `https://api.cbssports.com/resource/bulk` | — | `player_resource` → `PlayerResource`, `team_resource` → `TeamResource`, `game_resource` → `GameResource`, `venue_resource` → `VenueResource`, `event_resource` → `EventResource`, `featured_game_resource` → `FeaturedGameResource`, `golf_event_markets_resource` → `GolfEventMarketsResource` | `parse_cbs_list` | — |
+| `cbs_client_configuration` / `cbsClientConfiguration` | `https://api.cbssports.com/resource/client/config/{client_name}` | `client_name`\* | `resources`, `league_id` → `leagueId`, `classifier`, `key_name` → `keyName` | `parse_cbs_list` | — |
+| `cbs_coach_rankings` / `cbsCoachRankings` | `https://api.cbssports.com/resource/coach/rankings/{coach_id}` | `coach_id`\* | — | `parse_cbs_list` | — |
+| `cbs_coach_team_associations` / `cbsCoachTeamAssociations` | `https://api.cbssports.com/resource/coach/teamAssociations/{coach_id}` | `coach_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_depth_charts` / `cbsDepthCharts` | `https://api.cbssports.com/resource/player/depthCharts/{player_id}` | `player_id`\* | `position`, `pitch_pos` → `pitchPos` | `parse_cbs_list` | — |
+| `cbs_endpoint_registry` / `cbsEndpointRegistry` | `https://api.cbssports.com/resource/endpoint/registry` | — | — | `parse_cbs_list` | — |
+| `cbs_event` / `cbsEvent` | `https://api.cbssports.com/resource/event/{event_id}` | `event_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_list` | — |
+| `cbs_event_entrants` / `cbsEventEntrants` | `https://api.cbssports.com/resource/event/entrants/{event_id}` | `event_id`\* | — | `parse_cbs_list` | — |
+| `cbs_event_leaderboard` / `cbsEventLeaderboard` | `https://api.cbssports.com/resource/event/leaderboard/{event_id}` | `event_id`\* | — | `parse_cbs_list` | — |
+| `cbs_event_seasons` / `cbsEventSeasons` | `https://api.cbssports.com/resource/event/seasons/{event_id}` | `event_id`\* | — | `parse_cbs_list` | — |
+| `cbs_event_venues` / `cbsEventVenues` | `https://api.cbssports.com/resource/event/venues/{event_id}` | `event_id`\* | — | `parse_cbs_list` | — |
+| `cbs_featured_game` / `cbsFeaturedGame` | `https://api.cbssports.com/resource/game/featured/{game_id}` | `game_id`\* | — | `parse_cbs_scoreboard` | — |
+| `cbs_game` / `cbsGame` | `https://api.cbssports.com/resource/game/{game_id}` | `game_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_list` | — |
+| `cbs_game_betting_splits` / `cbsGameBettingSplits` | `https://api.cbssports.com/resource/game/bettingSplits/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_content_preview` / `cbsGameContentPreview` | `https://api.cbssports.com/resource/game/content/preview/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_content_recap` / `cbsGameContentRecap` | `https://api.cbssports.com/resource/game/content/recap/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_content_story` / `cbsGameContentStory` | `https://api.cbssports.com/resource/game/content/story/{game_id}` | `game_id`\* | `game_ids_story_tags` → `gameIdsStoryTags` | `parse_cbs_list` | — |
+| `cbs_game_hq_odds` / `cbsGameHqOdds` | `https://api.cbssports.com/resource/game/odds/hq/{game_id}` | `game_id`\* | — | `parse_cbs_odds` | — |
+| `cbs_game_lineup` / `cbsGameLineup` | `https://api.cbssports.com/resource/game/lineup/{game_id}` | `game_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_game_odds` / `cbsGameOdds` | `https://api.cbssports.com/resource/game/odds/{game_id}` | `game_id`\* | `market_ids` → `marketIds`, `book_ids` → `bookIds`, `state`, `model`, `show_hidden_odds` → `showHiddenOdds` | `parse_cbs_odds` | — |
+| `cbs_game_outcomes` / `cbsGameOutcomes` | `https://api.cbssports.com/resource/game/outcomes/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_props` / `cbsGameProps` | `https://api.cbssports.com/resource/game/props/{game_id}` | `game_id`\* | `market_ids` → `marketIds`, `book_ids` → `bookIds`, `prop_bet_types` → `propBetTypes`, `state`, `include_inactive_markets` → `includeInactiveMarkets` | `parse_cbs_odds` | — |
+| `cbs_game_rtwp` / `cbsGameRtwp` | `https://api.cbssports.com/resource/game/rtwp/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_boxscores` / `cbsGameScoringBoxscores` | `https://api.cbssports.com/resource/game/scoring/boxscores/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_drives` / `cbsGameScoringDrives` | `https://api.cbssports.com/resource/game/scoring/drives/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_leaders` / `cbsGameScoringLeaders` | `https://api.cbssports.com/resource/game/scoring/leaders/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_player_stats` / `cbsGameScoringPlayerStats` | `https://api.cbssports.com/resource/game/scoring/playerStats/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_plays` / `cbsGameScoringPlays` | `https://api.cbssports.com/resource/game/scoring/plays/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_rosters` / `cbsGameScoringRosters` | `https://api.cbssports.com/resource/game/scoring/rosters/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_scoreboard` / `cbsGameScoringScoreboard` | `https://api.cbssports.com/resource/game/scoring/scoreboard/{game_id}` | `game_id`\* | — | `parse_cbs_scoreboard` | — |
+| `cbs_game_scoring_scores` / `cbsGameScoringScores` | `https://api.cbssports.com/resource/game/scoring/scores/{game_id}` | `game_id`\* | — | `parse_cbs_scoreboard` | — |
+| `cbs_game_scoring_team_stats` / `cbsGameScoringTeamStats` | `https://api.cbssports.com/resource/game/scoring/teamStats/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_winprob` / `cbsGameScoringWinprob` | `https://api.cbssports.com/resource/game/scoring/winprob/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_ytd_player_stats` / `cbsGameScoringYtdPlayerStats` | `https://api.cbssports.com/resource/game/scoring/ytdPlayerStats/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_scoring_ytd_team_stats` / `cbsGameScoringYtdTeamStats` | `https://api.cbssports.com/resource/game/scoring/ytdTeamStats/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_game_ticket` / `cbsGameTicket` | `https://api.cbssports.com/resource/game/ticket/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_golf_event_markets` / `cbsGolfEventMarkets` | `https://api.cbssports.com/resource/golf/event/markets/{event_id}` | `event_id`\* | — | `parse_cbs_list` | — |
+| `cbs_golf_player_markets` / `cbsGolfPlayerMarkets` | `https://api.cbssports.com/resource/golf/player/markets/{player_id}` | `player_id`\* | `event_id` → `eventId` | `parse_cbs_list` | — |
+| `cbs_golfer_results` / `cbsGolferResults` | `https://api.cbssports.com/resource/golfer/results/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_id` → `seasonId` | `parse_cbs_list` | — |
+| `cbs_hockey_player_meta` / `cbsHockeyPlayerMeta` | `https://api.cbssports.com/resource/player/hockey/meta/{player_id}` | `player_id`\* | — | `parse_cbs_list` | — |
+| `cbs_league` / `cbsLeague` | `https://api.cbssports.com/resource/league/{league_id}` | `league_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_league_teams` / `cbsLeagueTeams` | `https://api.cbssports.com/resource/league/teams/{league_id}` | `league_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_odds` / `cbsOdds` | `https://api.cbssports.com/resource/odds/{game_id}` | `game_id`\* | — | `parse_cbs_odds` | — |
+| `cbs_player` / `cbsPlayer` | `https://api.cbssports.com/resource/player/{player_id}` | `player_id`\* | `date_format` → `dateFormat`, `year`, `resources` | `parse_cbs_list` | — |
+| `cbs_player_combine_data` / `cbsPlayerCombineData` | `https://api.cbssports.com/resource/player/combineData/{player_id}` | `player_id`\* | — | `parse_cbs_list` | — |
+| `cbs_player_draft_info` / `cbsPlayerDraftInfo` | `https://api.cbssports.com/resource/player/draftInfo/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId` | `parse_cbs_list` | — |
+| `cbs_player_encyclopedia` / `cbsPlayerEncyclopedia` | `https://api.cbssports.com/resource/player/encyclopedia/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_id` → `seasonId` | `parse_cbs_list` | — |
+| `cbs_player_futures` / `cbsPlayerFutures` | `https://api.cbssports.com/resource/player/futures/{player_id}` | `player_id`\* | — | `parse_cbs_list` | — |
+| `cbs_player_game_stats` / `cbsPlayerGameStats` | `https://api.cbssports.com/resource/player/gameStats/{player_id}` | `player_id`\* | `game_id` → `gameId`, `season_year` → `seasonYear`, `season_type` → `seasonType` | `parse_cbs_list` | — |
+| `cbs_player_golf_metadata` / `cbsPlayerGolfMetadata` | `https://api.cbssports.com/resource/player/meta/golf/{player_id}` | `player_id`\* | — | `parse_cbs_list` | — |
+| `cbs_player_injuries` / `cbsPlayerInjuries` | `https://api.cbssports.com/resource/player/injuries/{player_id}` | `player_id`\* | `date_format` → `dateFormat` | `parse_cbs_list` | — |
+| `cbs_player_outlook` / `cbsPlayerOutlook` | `https://api.cbssports.com/resource/player/outlook/{player_id}` | `player_id`\* | `date_format` → `dateFormat` | `parse_cbs_list` | — |
+| `cbs_player_rankings` / `cbsPlayerRankings` | `https://api.cbssports.com/resource/player/rankings/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent`, `categories` | `parse_cbs_list` | — |
+| `cbs_player_standings` / `cbsPlayerStandings` | `https://api.cbssports.com/resource/player/standings/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent`, `resources` | `parse_cbs_standings` | — |
+| `cbs_player_stats` / `cbsPlayerStats` | `https://api.cbssports.com/resource/player/stats/{player_id}` | `player_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent`, `team_id` → `teamId`, `team_abbr` → `teamAbbr`, `is_total` → `isTotal` | `parse_cbs_list` | — |
+| `cbs_player_team_associations` / `cbsPlayerTeamAssociations` | `https://api.cbssports.com/resource/player/teamAssociations/{player_id}` | `player_id`\* | `assoc_type` → `assocType`, `roster_status` → `rosterStatus`, `resources` | `parse_cbs_list` | — |
+| `cbs_player_transactions` / `cbsPlayerTransactions` | `https://api.cbssports.com/resource/player/transactions/{player_id}` | `player_id`\* | `date_format` → `dateFormat`, `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `resources` | `parse_cbs_list` | — |
+| `cbs_position_rankings` / `cbsPositionRankings` | `https://api.cbssports.com/resource/player/positionRankings/{player_id}` | `player_id`\* | `position` | `parse_cbs_list` | — |
+| `cbs_probable_players` / `cbsProbablePlayers` | `https://api.cbssports.com/resource/game/probablePlayers/{game_id}` | `game_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_list` | — |
+| `cbs_recruit_rankings` / `cbsRecruitRankings` | `https://api.cbssports.com/resource/recruit/rankings/{player_id}` | `player_id`\* | — | `parse_cbs_list` | — |
+| `cbs_recruit_team_associations` / `cbsRecruitTeamAssociations` | `https://api.cbssports.com/resource/player/recruitAssociations/{player_id}` | `player_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_ruwt_highlights` / `cbsRuwtHighlights` | `https://api.cbssports.com/resource/game/ruwtHighlights/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
+| `cbs_season` / `cbsSeason` | `https://api.cbssports.com/resource/season/{season_id}` | `season_id`\* | `date_format` → `dateFormat`, `resources` | `parse_cbs_list` | — |
+| `cbs_season_teams` / `cbsSeasonTeams` | `https://api.cbssports.com/resource/season/teams/{season_id}` | `season_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_sport` / `cbsSport` | `https://api.cbssports.com/resource/sport/{sport_id}` | `sport_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_sport_leagues` / `cbsSportLeagues` | `https://api.cbssports.com/resource/sport/leagues/{sport_id}` | `sport_id`\* | — | `parse_cbs_list` | — |
+| `cbs_sports_line_team_rankings` / `cbsSportsLineTeamRankings` | `https://api.cbssports.com/resource/team/rankings/sportsline/{team_id}` | `team_id`\* | — | `parse_cbs_list` | — |
+| `cbs_sports_line_team_standings` / `cbsSportsLineTeamStandings` | `https://api.cbssports.com/resource/team/standings/sportsline/{team_id}` | `team_id`\* | `date_format` → `dateFormat` | `parse_cbs_standings` | — |
+| `cbs_sub_divisions` / `cbsSubDivisions` | `https://api.cbssports.com/resource/division/subdivisions/{division_id}` | `division_id`\* | `sub_division_id` → `subDivisionId`, `name` | `parse_cbs_list` | — |
+| `cbs_team_futures` / `cbsTeamFutures` | `https://api.cbssports.com/resource/team/futures/{team_id}` | `team_id`\* | — | `parse_cbs_list` | — |
+| `cbs_team_metadata` / `cbsTeamMetadata` | `https://api.cbssports.com/resource/team/metadata/{team_id}` | `team_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_team_players` / `cbsTeamPlayers` | `https://api.cbssports.com/resource/team/players/{team_id}` | `team_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_team_polls` / `cbsTeamPolls` | `https://api.cbssports.com/resource/team/polls/{team_id}` | `team_id`\* | `polls`, `season_id` → `seasonId` | `parse_cbs_list` | — |
+| `cbs_team_rankings` / `cbsTeamRankings` | `https://api.cbssports.com/resource/team/rankings/{team_id}` | `team_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId` | `parse_cbs_list` | — |
+| `cbs_team_seasons` / `cbsTeamSeasons` | `https://api.cbssports.com/resource/team/seasons/{team_id}` | `team_id`\* | `date_format` → `dateFormat`, `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `resources` | `parse_cbs_list` | — |
+| `cbs_team_standings` / `cbsTeamStandings` | `https://api.cbssports.com/resource/team/standings/{team_id}` | `team_id`\* | `year`, `season_type` → `seasonType`, `season_id` → `seasonId` | `parse_cbs_standings` | — |
+| `cbs_team_stats` / `cbsTeamStats` | `https://api.cbssports.com/resource/team/stats/{team_id}` | `team_id`\* | `season_year` → `seasonYear`, `season_type` → `seasonType`, `season_id` → `seasonId`, `is_current` → `isCurrent` | `parse_cbs_list` | — |
+| `cbs_venue` / `cbsVenue` | `https://api.cbssports.com/resource/venue/{venue_id}` | `venue_id`\* | `resources` | `parse_cbs_list` | — |
+| `cbs_venue_metadata` / `cbsVenueMetadata` | `https://api.cbssports.com/resource/venue/metadata/{venue_id}` | `venue_id`\* | — | `parse_cbs_list` | — |
+| `cbs_weather` / `cbsWeather` | `https://api.cbssports.com/resource/game/weather/{game_id}` | `game_id`\* | — | `parse_cbs_list` | — |
 
-### Returns — `cbs_napi_endpoint_registry` / `cbsNapiEndpointRegistry`
+### Returns — `cbs_endpoint_registry` / `cbsEndpointRegistry`
 
 | col_name | type | description |
 |---|---|---|
@@ -1469,7 +1469,7 @@ Flat (non-ESPN) wrappers for CBS Sports napi. Host: `https://api.cbssports.com`.
 | `hockey_player_meta_resource_resource_cache_cache_buster` | integer | Hockey player meta resource resource cache cache buster. |
 | `hockey_player_meta_resource_expiration_message_object_key_name` | character | Hockey player meta resource expiration message object key name. |
 
-### Returns — `cbs_napi_league` / `cbsNapiLeague`
+### Returns — `cbs_league` / `cbsLeague`
 
 | col_name | type | description |
 |---|---|---|
@@ -1482,7 +1482,7 @@ Flat (non-ESPN) wrappers for CBS Sports napi. Host: `https://api.cbssports.com`.
 | `color_primary` | character | Color primary. |
 | `color_secondary` | character | Color secondary. |
 
-### Returns — `cbs_napi_season_teams` / `cbsNapiSeasonTeams`
+### Returns — `cbs_season_teams` / `cbsSeasonTeams`
 
 | col_name | type | description |
 |---|---|---|
@@ -1517,7 +1517,7 @@ Flat (non-ESPN) wrappers for CBS Sports napi. Host: `https://api.cbssports.com`.
 | `meta_tsa_overlay` | logical | Meta tsa overlay. |
 | `meta_season_id` | integer | Meta season ID. |
 
-### Returns — `cbs_napi_team_players` / `cbsNapiTeamPlayers`
+### Returns — `cbs_team_players` / `cbsTeamPlayers`
 
 | col_name | type | description |
 |---|---|---|
@@ -1553,7 +1553,7 @@ Flat (non-ESPN) wrappers for CBS Sports napi. Host: `https://api.cbssports.com`.
 | `game_stats` | character | Game stats. |
 | `combine_data` | character | Combine data. |
 
-### Returns — `cbs_napi_team_standings` / `cbsNapiTeamStandings`
+### Returns — `cbs_team_standings` / `cbsTeamStandings`
 
 | col_name | type | description |
 |---|---|---|

@@ -29,7 +29,7 @@ const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
 // contract tests assert over it ({sport} present, EspnFamily, scopes) — stays
 // untouched.
 const FLAT_API_FILES = [
-  "mlb_api",
+  "mlb",
   "mlb_statcast",
   "nhl_api_web",
   "nhl_edge",
@@ -38,10 +38,10 @@ const FLAT_API_FILES = [
   "nfl_api",
   "odds_api",
   "sports247",
-  "cbs_napi",
-  "fox_bifrost",
-  "yahoo_editorial",
-  "yahoo_shangrila",
+  "cbs",
+  "fox",
+  "yahoo_scores",
+  "yahoo",
   "hockeytech",
   "torvik",
 ];
@@ -54,7 +54,7 @@ const FLAT_API_FILES = [
 // (`odds` — the first cross-sport provider family), the family gets its OWN
 // standalone reference page (see STANDALONE_FLAT_NAMESPACES + renderStandaloneFlatPage).
 const FLAT_API_NAMESPACES = {
-  mlb_api: "mlb",
+  mlb: "mlb",
   mlb_statcast: "mlb",
   nhl_api_web: "nhl",
   nhl_edge: "nhl",
@@ -63,10 +63,10 @@ const FLAT_API_NAMESPACES = {
   nfl_api: "nfl",
   odds_api: "odds",
   sports247: "recruiting",
-  cbs_napi: "cbs",
-  fox_bifrost: "fox",
-  yahoo_editorial: "yahoo",
-  yahoo_shangrila: "yahoo",
+  cbs: "cbs",
+  fox: "fox",
+  yahoo_scores: "yahoo",
+  yahoo: "yahoo",
   // HockeyTech / LeagueStat — standalone provider namespace (`sdv.hockeytech`)
   // for the PWHL + junior/minor leagues (league chosen by a `league` param).
   hockeytech: "hockeytech",
@@ -78,7 +78,7 @@ const FLAT_API_NAMESPACES = {
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
 // section heading + intro line on the league reference page.
 const FLAT_API_META = {
-  mlb_api: { label: "MLB Stats API", source: "the official MLB Stats API" },
+  mlb: { label: "MLB Stats API", source: "the official MLB Stats API" },
   mlb_statcast: {
     label: "Baseball Savant / Statcast",
     source: "Baseball Savant (Statcast)",
@@ -108,15 +108,15 @@ const FLAT_API_META = {
     label: "247Sports",
     source: "the 247Sports recruiting database",
   },
-  cbs_napi: { label: "CBS Sports", source: "CBS Sports napi" },
-  fox_bifrost: { label: "Fox Sports", source: "Fox Sports Bifrost API" },
-  yahoo_editorial: {
-    label: "Yahoo Sports (editorial)",
-    source: "Yahoo Sports' editorial scoreboard/boxscore feed",
+  cbs: { label: "CBS Sports", source: "the CBS Sports API" },
+  fox: { label: "Fox Sports", source: "the Fox Sports API" },
+  yahoo_scores: {
+    label: "Yahoo Sports (scores)",
+    source: "the Yahoo Sports scoreboard/boxscore feed",
   },
-  yahoo_shangrila: {
-    label: "Yahoo Sports (shangrila)",
-    source: "Yahoo Sports' shangrila stats-graph API",
+  yahoo: {
+    label: "Yahoo Sports",
+    source: "the Yahoo Sports stats API",
   },
   hockeytech: {
     label: "HockeyTech / LeagueStat",
@@ -142,16 +142,16 @@ const STANDALONE_NS_EXAMPLE = {
     "  headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },\n" +
     "});\n",
   cbs:
-    "// CBS Sports NAPI is an anonymously-reachable public JSON API (no token):\n" +
-    "await sdv.cbs.cbs_napi_team({ team_id: 'football-nfl-NE' });\n",
+    "// CBS Sports is an anonymously-reachable public JSON API (no token):\n" +
+    "await sdv.cbs.cbs_league({ league_id: 'football-nfl' });\n",
   fox:
-    "// Fox Sports Bifrost uses a public apikey + api-version query pair\n" +
+    "// Fox Sports uses a public apikey + api-version query pair\n" +
     "// (both default out of the box — override apikey if you have your own):\n" +
-    "await sdv.fox.fox_bifrost_scoreboard({ sport: 'cfb' });\n",
+    "await sdv.fox.fox_scoreboard({ sport: 'cfb' });\n",
   yahoo:
     "// Yahoo Sports is keyless but rejects requests without browser-y headers —\n" +
     "// pass Origin/Referer via `headers` (two hosts share the `yahoo` namespace):\n" +
-    "await sdv.yahoo.yahoo_shangrila_league_standings({\n" +
+    "await sdv.yahoo.yahoo_league_standings({\n" +
     "  league: 'ncaaf',\n" +
     "  headers: { Origin: 'https://sports.yahoo.com', Referer: 'https://sports.yahoo.com/' },\n" +
     "});\n",
@@ -360,7 +360,7 @@ function wrapperName(prefix, short) {
   return `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 }
 
-/** snake_case -> camelCase (e.g. `mlb_api_teams` -> `mlbApiTeams`). */
+/** snake_case -> camelCase (e.g. `mlb_teams` -> `mlbTeams`). */
 function toCamel(s) {
   return s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 }
@@ -380,7 +380,7 @@ const _schemaCache = new Map();
 
 /**
  * Load a returns-schema's `columns` for a `returns_schema` value (e.g.
- * `native/mlb_api/boxscore` or `autodoc/mlb/mlb_statcast_search`), resolved
+ * `native/mlb/boxscore` or `autodoc/mlb/mlb_statcast_search`), resolved
  * under tools/codegen/schemas/. Returns the column list (`[{name, type,
  * description}]`) or `null` when the file is missing / has no columns. The
  * parsed result is cached so repeated lookups across pages are cheap.
@@ -824,7 +824,7 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs
     `:::\n` +
     `\n:::tip Native (non-ESPN) APIs\n` +
     "```js\n" +
-    `await sdv.mlb.mlbApiSchedule({ sportId: 1, date: '2024-07-01' });\n` +
+    `await sdv.mlb.mlbSchedule({ sportId: 1, date: '2024-07-01' });\n` +
     `await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });\n` +
     `await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });\n` +
     "```\n" +
@@ -977,7 +977,7 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
   );
 }
 
-/** Build the per-family flat-host map ({ mlb_api: "https://statsapi.mlb.com" }). */
+/** Build the per-family flat-host map ({ mlb: "https://statsapi.mlb.com" }). */
 function flatHostsFrom(flatWrappers) {
   const hosts = {};
   for (const w of flatWrappers) hosts[w.api] = w.host;

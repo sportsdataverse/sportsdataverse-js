@@ -1,0 +1,19 @@
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
+schema: oly_medal_count
+kind: dataframe
+columns:
+- name: display_name
+  type: character
+- name: short_display_name
+  type: character
+- name: start_date
+  type: character
+- name: end_date
+  type: character
+- name: season
+  type: numeric
+- name: alias
+  type: character
+- name: olympic_team
+  type: list

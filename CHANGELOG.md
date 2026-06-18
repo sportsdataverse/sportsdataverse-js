@@ -4,6 +4,27 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
+## Unreleased
+
+### Changed (breaking) — provider method naming
+
+Dropped internal vendor API codenames from the provider method names + labels so
+they read as the product, not the vendor's internal API name. The namespaces
+(`sdv.fox` / `sdv.cbs` / `sdv.yahoo` / `sdv.mlb`) are unchanged; only the method
+prefixes were renamed:
+
+- `foxBifrost*` → `fox*` (e.g. `foxBifrostScoreboard` → `foxScoreboard`)
+- `cbsNapi*` → `cbs*`
+- `yahooShangrila*` → `yahoo*`, `yahooEditorial*` → `yahooScores*`
+- `mlbApi*` → `mlb*` (e.g. `mlbApiSchedule` → `mlbSchedule`)
+
+The same rename flows through the codegen `api` stems, returns-schema paths,
+parser names, playground endpoint ids, and reference docs. Upstream URL paths
+that genuinely contain the vendor codename (Fox's `/bifrost/v1/…`, Yahoo's
+`/v1/query/shangrila/…`) are unchanged — those are the real endpoints.
+(`sports247` / `odds_api` / `mlb_statcast` / the four `nhl_*` families /
+`hockeytech` / `torvik` are real product names and were left as-is.)
+
 ## v3.1.0
 
 A minor, additive release: two new flat-API families (no breaking changes), plus
@@ -92,7 +113,7 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
 Beyond ESPN, the package now wraps the major leagues' own live APIs, merged onto
 the matching league namespace:
 
-- **MLB Stats API** (`statsapi.mlb.com`) — `sdv.mlb.mlbApi*` (e.g. `mlbApiSchedule`).
+- **MLB Stats API** (`statsapi.mlb.com`) — `sdv.mlb.mlb*` (e.g. `mlbSchedule`).
 - **Baseball Savant / Statcast** (`baseballsavant.mlb.com`) — `sdv.mlb.mlbStatcast*`,
   including date-chunked Statcast search; heterogeneous CSV/JSON/HTML responses are
   handled by a content-type-aware getter.
@@ -153,8 +174,8 @@ In total: **517 flat-API wrappers across 13 families** (the 7 native + 5 provide
 ### Dual-case naming
 
 - Every generated wrapper (ESPN and native) is exposed under BOTH its snake_case
-  name (`mlb_api_teams`, py/R parity) and its camelCase canonical name
-  (`mlbApiTeams`, idiomatic JS) — the same function under either name.
+  name (`mlb_teams`, py/R parity) and its camelCase canonical name
+  (`mlbTeams`, idiomatic JS) — the same function under either name.
 
 ### Docs + playground
 

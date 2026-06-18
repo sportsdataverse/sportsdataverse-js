@@ -1743,7 +1743,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   {
     "short": "teams",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams",
@@ -1775,12 +1775,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_teams"
+    "parser": "parse_mlb_teams"
   },
   {
     "short": "schedule",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/schedule",
@@ -1824,12 +1824,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule"
+    "parser": "parse_mlb_schedule"
   },
   {
     "short": "schedule_postseason",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/schedule/postseason",
@@ -1849,13 +1849,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_schedule",
-    "returnsSchema": "native/mlb_api/schedule_postseason"
+    "parser": "parse_mlb_schedule",
+    "returnsSchema": "native/mlb/schedule_postseason"
   },
   {
     "short": "pbp",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1.1/game/{game_pk}/feed/live",
@@ -1882,12 +1882,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "boxscore",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/boxscore",
@@ -1906,13 +1906,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_boxscore",
-    "returnsSchema": "native/mlb_api/boxscore"
+    "parser": "parse_mlb_boxscore",
+    "returnsSchema": "native/mlb/boxscore"
   },
   {
     "short": "linescore",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/linescore",
@@ -1931,13 +1931,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_linescore",
-    "returnsSchema": "native/mlb_api/linescore"
+    "parser": "parse_mlb_linescore",
+    "returnsSchema": "native/mlb/linescore"
   },
   {
     "short": "play_by_play",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/playByPlay",
@@ -1956,13 +1956,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_play_by_play",
-    "returnsSchema": "native/mlb_api/play_by_play"
+    "parser": "parse_mlb_play_by_play",
+    "returnsSchema": "native/mlb/play_by_play"
   },
   {
     "short": "game_context_metrics",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/contextMetrics",
@@ -1977,12 +1977,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "win_probability",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/winProbability",
@@ -1997,13 +1997,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_win_probability",
-    "returnsSchema": "native/mlb_api/win_probability"
+    "parser": "parse_mlb_win_probability",
+    "returnsSchema": "native/mlb/win_probability"
   },
   {
     "short": "game_content",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/content",
@@ -2013,12 +2013,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "team",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}",
@@ -2046,13 +2046,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/team"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/team"
   },
   {
     "short": "team_roster",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/roster",
@@ -2084,13 +2084,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_team_roster",
-    "returnsSchema": "native/mlb_api/team_roster"
+    "parser": "parse_mlb_team_roster",
+    "returnsSchema": "native/mlb/team_roster"
   },
   {
     "short": "team_alumni",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/alumni",
@@ -2114,13 +2114,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/team_alumni"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/team_alumni"
   },
   {
     "short": "team_affiliates",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/affiliates",
@@ -2144,13 +2144,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/team_affiliates"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/team_affiliates"
   },
   {
     "short": "people",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/people",
@@ -2169,12 +2169,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "person",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/people/{person_id}",
@@ -2197,12 +2197,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "person_game_stats",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/people/{person_id}/stats/game/{game_pk}",
@@ -2220,12 +2220,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "sport_players",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/sports/{sport_id}/players",
@@ -2250,13 +2250,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/sport_players"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/sport_players"
   },
   {
     "short": "sports",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/sports",
@@ -2267,13 +2267,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportId"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/sports"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/sports"
   },
   {
     "short": "leagues",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/leagues",
@@ -2293,13 +2293,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "leagueIds"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/leagues"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/leagues"
   },
   {
     "short": "season",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/seasons/{season_id}",
@@ -2315,13 +2315,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 1
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/season"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/season"
   },
   {
     "short": "venues",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/venues",
@@ -2340,13 +2340,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/venues"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/venues"
   },
   {
     "short": "venue",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/venues/{venue_id}",
@@ -2365,13 +2365,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/venue"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/venue"
   },
   {
     "short": "meta",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/{meta_type}",
@@ -2381,12 +2381,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "awards",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/awards",
@@ -2397,13 +2397,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportId"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/awards"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/awards"
   },
   {
     "short": "award_recipients",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/awards/{award_id}/recipients",
@@ -2427,13 +2427,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hydrate"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/award_recipients"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/award_recipients"
   },
   {
     "short": "draft",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/draft/{year}",
@@ -2461,24 +2461,24 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 100
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "umpires",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/jobs/umpires",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/umpires"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/umpires"
   },
   {
     "short": "conferences",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/conferences",
@@ -2497,13 +2497,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/conferences"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/conferences"
   },
   {
     "short": "conference",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/conferences/{conference_id}",
@@ -2522,13 +2522,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/conference"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/conference"
   },
   {
     "short": "draft_latest",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/draft/{year}/latest",
@@ -2538,13 +2538,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_draft_latest",
-    "returnsSchema": "native/mlb_api/draft_latest"
+    "parser": "parse_mlb_draft_latest",
+    "returnsSchema": "native/mlb/draft_latest"
   },
   {
     "short": "game_timestamps",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1.1/game/{game_pk}/feed/live/timestamps",
@@ -2554,13 +2554,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_timecodes",
-    "returnsSchema": "native/mlb_api/game_timestamps"
+    "parser": "parse_mlb_timecodes",
+    "returnsSchema": "native/mlb/game_timestamps"
   },
   {
     "short": "game_changes",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/changes",
@@ -2579,13 +2579,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule",
-    "returnsSchema": "native/mlb_api/game_changes"
+    "parser": "parse_mlb_schedule",
+    "returnsSchema": "native/mlb/game_changes"
   },
   {
     "short": "analytics_games",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/analytics/game",
@@ -2620,12 +2620,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "analytics_guids",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/analytics/guids",
@@ -2660,12 +2660,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "game_guids",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/guids",
@@ -2708,12 +2708,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "play_analytics",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/{guid}/analytics",
@@ -2735,12 +2735,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "play_context_metrics_averages",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/{guid}/contextMetricsAverages",
@@ -2758,12 +2758,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "game_color",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/feed/color",
@@ -2782,12 +2782,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "game_color_diff",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/feed/color/diffPatch",
@@ -2806,12 +2806,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "endTimecode"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "game_color_timestamps",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/feed/color/timestamps",
@@ -2821,12 +2821,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_api_timecodes"
+    "parser": "parse_mlb_timecodes"
   },
   {
     "short": "game_pace",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/gamePace",
@@ -2881,13 +2881,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/game_pace"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/game_pace"
   },
   {
     "short": "high_low",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/highLow/{org_type}",
@@ -2934,13 +2934,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/high_low"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/high_low"
   },
   {
     "short": "home_run_derby",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/homeRunDerby/{game_pk}",
@@ -2955,13 +2955,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/home_run_derby"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/home_run_derby"
   },
   {
     "short": "home_run_derby_bracket",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/homeRunDerby/{game_pk}/bracket",
@@ -2976,13 +2976,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/home_run_derby_bracket"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/home_run_derby_bracket"
   },
   {
     "short": "home_run_derby_pool",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/homeRunDerby/{game_pk}/pool",
@@ -2997,13 +2997,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/home_run_derby_pool"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/home_run_derby_pool"
   },
   {
     "short": "all_star_ballot",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/league/{league_id}/allStarBallot",
@@ -3022,13 +3022,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/all_star_ballot"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/all_star_ballot"
   },
   {
     "short": "all_star_write_ins",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/league/{league_id}/allStarWriteIns",
@@ -3047,13 +3047,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/all_star_write_ins"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/all_star_write_ins"
   },
   {
     "short": "all_star_final_vote",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/league/{league_id}/allStarFinalVote",
@@ -3072,13 +3072,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/all_star_final_vote"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/all_star_final_vote"
   },
   {
     "short": "free_agents",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/people/freeAgents",
@@ -3101,13 +3101,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/free_agents"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/free_agents"
   },
   {
     "short": "jobs",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/jobs",
@@ -3130,13 +3130,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/jobs"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/jobs"
   },
   {
     "short": "datacasters",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/jobs/datacasters",
@@ -3159,13 +3159,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/datacasters"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/datacasters"
   },
   {
     "short": "official_scorers",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/jobs/officialScorers",
@@ -3188,13 +3188,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/official_scorers"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/official_scorers"
   },
   {
     "short": "umpire_games",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/jobs/umpires/games/{umpire_id}",
@@ -3217,12 +3217,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "schedule_tied",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/schedule/games/tied",
@@ -3245,13 +3245,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule",
-    "returnsSchema": "native/mlb_api/schedule_tied"
+    "parser": "parse_mlb_schedule",
+    "returnsSchema": "native/mlb/schedule_tied"
   },
   {
     "short": "schedule_postseason_series",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/schedule/postseason/series",
@@ -3282,13 +3282,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/schedule_postseason_series"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/schedule_postseason_series"
   },
   {
     "short": "schedule_postseason_tunein",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/schedule/postseason/tuneIn",
@@ -3315,13 +3315,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_schedule",
-    "returnsSchema": "native/mlb_api/schedule_postseason_tunein"
+    "parser": "parse_mlb_schedule",
+    "returnsSchema": "native/mlb/schedule_postseason_tunein"
   },
   {
     "short": "seasons_all",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/seasons/all",
@@ -3348,13 +3348,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/seasons_all"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/seasons_all"
   },
   {
     "short": "sport",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/sports/{sport_id}",
@@ -3369,13 +3369,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/sport"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/sport"
   },
   {
     "short": "stats_metrics",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/stats/metrics",
@@ -3442,12 +3442,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "teams_history",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/history",
@@ -3470,13 +3470,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/teams_history"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/teams_history"
   },
   {
     "short": "teams_stats",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/stats",
@@ -3515,13 +3515,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_person_stats",
-    "returnsSchema": "native/mlb_api/teams_stats"
+    "parser": "parse_mlb_person_stats",
+    "returnsSchema": "native/mlb/teams_stats"
   },
   {
     "short": "teams_stats_leaders",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/stats/leaders",
@@ -3576,13 +3576,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/teams_stats_leaders"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/teams_stats_leaders"
   },
   {
     "short": "team_coaches",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/coaches",
@@ -3605,13 +3605,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/team_coaches"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/team_coaches"
   },
   {
     "short": "team_personnel",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/personnel",
@@ -3630,13 +3630,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list",
-    "returnsSchema": "native/mlb_api/team_personnel"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/team_personnel"
   },
   {
     "short": "team_roster_type",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/roster/{roster_type}",
@@ -3666,13 +3666,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_team_roster",
-    "returnsSchema": "native/mlb_api/team_roster_type"
+    "parser": "parse_mlb_team_roster",
+    "returnsSchema": "native/mlb/team_roster_type"
   },
   {
     "short": "standings",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/standings",
@@ -3700,12 +3700,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_standings"
+    "parser": "parse_mlb_standings"
   },
   {
     "short": "person_stats",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/people/{person_id}/stats",
@@ -3741,12 +3741,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_person_stats"
+    "parser": "parse_mlb_person_stats"
   },
   {
     "short": "pbp_diff",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/game/{game_pk}/feed/live/diffPatch",
@@ -3765,12 +3765,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "endTimecode"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "team_stats",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/stats",
@@ -3807,12 +3807,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_person_stats"
+    "parser": "parse_mlb_person_stats"
   },
   {
     "short": "team_leaders",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/teams/{team_id}/leaders",
@@ -3840,12 +3840,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 10
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "stats",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/stats",
@@ -3899,12 +3899,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "stats_leaders",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/stats/leaders",
@@ -3941,12 +3941,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 10
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "stats_streaks",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/stats/streaks",
@@ -3979,12 +3979,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 1
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "divisions",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/divisions",
@@ -4004,12 +4004,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "divisionId"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "seasons",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/seasons",
@@ -4029,12 +4029,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "all"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "draft_prospects",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/draft/prospects/{year}",
@@ -4054,12 +4054,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 100
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "attendance",
     "flat": true,
-    "api": "mlb_api",
+    "api": "mlb",
     "host": "https://statsapi.mlb.com",
     "scope": "universal",
     "path": "/api/v1/attendance",
@@ -4086,7 +4086,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameType"
       }
     ],
-    "parser": "parse_mlb_api_list"
+    "parser": "parse_mlb_list"
   },
   {
     "short": "leaderboard_expected_stats",
@@ -8939,7 +8939,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   {
     "short": "baseball_player_meta",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/meta/baseball/{player_id}",
@@ -8949,13 +8949,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/baseball_player_meta"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/baseball_player_meta"
   },
   {
     "short": "boxscore",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/boxscore/{game_id}",
@@ -8965,13 +8965,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/boxscore"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/boxscore"
   },
   {
     "short": "bulk",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/bulk",
@@ -9006,13 +9006,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "GolfEventMarketsResource"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/bulk"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/bulk"
   },
   {
     "short": "client_configuration",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/client/config/{client_name}",
@@ -9039,13 +9039,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "keyName"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/client_configuration"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/client_configuration"
   },
   {
     "short": "coach_rankings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/coach/rankings/{coach_id}",
@@ -9055,13 +9055,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/coach_rankings"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/coach_rankings"
   },
   {
     "short": "coach_team_associations",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/coach/teamAssociations/{coach_id}",
@@ -9076,13 +9076,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/coach_team_associations"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/coach_team_associations"
   },
   {
     "short": "depth_charts",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/depthCharts/{player_id}",
@@ -9101,25 +9101,25 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pitchPos"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/depth_charts"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/depth_charts"
   },
   {
     "short": "endpoint_registry",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/endpoint/registry",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/endpoint_registry"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/endpoint_registry"
   },
   {
     "short": "event_entrants",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/event/entrants/{event_id}",
@@ -9129,13 +9129,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/event_entrants"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event_entrants"
   },
   {
     "short": "event_leaderboard",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/event/leaderboard/{event_id}",
@@ -9145,13 +9145,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/event_leaderboard"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event_leaderboard"
   },
   {
     "short": "event",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/event/{event_id}",
@@ -9170,13 +9170,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/event"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event"
   },
   {
     "short": "event_seasons",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/event/seasons/{event_id}",
@@ -9186,13 +9186,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/event_seasons"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event_seasons"
   },
   {
     "short": "event_venues",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/event/venues/{event_id}",
@@ -9202,13 +9202,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/event_venues"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event_venues"
   },
   {
     "short": "featured_game",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/featured/{game_id}",
@@ -9218,13 +9218,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_scoreboard",
-    "returnsSchema": "native/cbs_napi/featured_game"
+    "parser": "parse_cbs_scoreboard",
+    "returnsSchema": "native/cbs/featured_game"
   },
   {
     "short": "game_betting_splits",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/bettingSplits/{game_id}",
@@ -9234,13 +9234,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_betting_splits"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_betting_splits"
   },
   {
     "short": "game_content_preview",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/content/preview/{game_id}",
@@ -9250,13 +9250,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_content_preview"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_content_preview"
   },
   {
     "short": "game_content_recap",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/content/recap/{game_id}",
@@ -9266,13 +9266,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_content_recap"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_content_recap"
   },
   {
     "short": "game_content_story",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/content/story/{game_id}",
@@ -9287,13 +9287,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameIdsStoryTags"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_content_story"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_content_story"
   },
   {
     "short": "game_hq_odds",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/odds/hq/{game_id}",
@@ -9303,13 +9303,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_odds",
-    "returnsSchema": "native/cbs_napi/game_hq_odds"
+    "parser": "parse_cbs_odds",
+    "returnsSchema": "native/cbs/game_hq_odds"
   },
   {
     "short": "game_lineup",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/lineup/{game_id}",
@@ -9324,13 +9324,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_lineup"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_lineup"
   },
   {
     "short": "game_odds",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/odds/{game_id}",
@@ -9361,13 +9361,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "showHiddenOdds"
       }
     ],
-    "parser": "parse_cbs_napi_odds",
-    "returnsSchema": "native/cbs_napi/game_odds"
+    "parser": "parse_cbs_odds",
+    "returnsSchema": "native/cbs/game_odds"
   },
   {
     "short": "game_outcomes",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/outcomes/{game_id}",
@@ -9377,13 +9377,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_outcomes"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_outcomes"
   },
   {
     "short": "game_props",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/props/{game_id}",
@@ -9414,13 +9414,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "includeInactiveMarkets"
       }
     ],
-    "parser": "parse_cbs_napi_odds",
-    "returnsSchema": "native/cbs_napi/game_props"
+    "parser": "parse_cbs_odds",
+    "returnsSchema": "native/cbs/game_props"
   },
   {
     "short": "game_rtwp",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/rtwp/{game_id}",
@@ -9430,13 +9430,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_rtwp"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_rtwp"
   },
   {
     "short": "game",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/{game_id}",
@@ -9455,13 +9455,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game"
   },
   {
     "short": "game_scoring_boxscores",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/boxscores/{game_id}",
@@ -9471,13 +9471,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_boxscores"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_boxscores"
   },
   {
     "short": "game_scoring_drives",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/drives/{game_id}",
@@ -9487,13 +9487,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_drives"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_drives"
   },
   {
     "short": "game_scoring_leaders",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/leaders/{game_id}",
@@ -9503,13 +9503,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_leaders"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_leaders"
   },
   {
     "short": "game_scoring_player_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/playerStats/{game_id}",
@@ -9519,13 +9519,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_player_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_player_stats"
   },
   {
     "short": "game_scoring_plays",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/plays/{game_id}",
@@ -9535,13 +9535,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_plays"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_plays"
   },
   {
     "short": "game_scoring_rosters",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/rosters/{game_id}",
@@ -9551,13 +9551,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_rosters"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_rosters"
   },
   {
     "short": "game_scoring_scoreboard",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/scoreboard/{game_id}",
@@ -9567,13 +9567,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_scoreboard",
-    "returnsSchema": "native/cbs_napi/game_scoring_scoreboard"
+    "parser": "parse_cbs_scoreboard",
+    "returnsSchema": "native/cbs/game_scoring_scoreboard"
   },
   {
     "short": "game_scoring_scores",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/scores/{game_id}",
@@ -9583,13 +9583,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_scoreboard",
-    "returnsSchema": "native/cbs_napi/game_scoring_scores"
+    "parser": "parse_cbs_scoreboard",
+    "returnsSchema": "native/cbs/game_scoring_scores"
   },
   {
     "short": "game_scoring_team_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/teamStats/{game_id}",
@@ -9599,13 +9599,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_team_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_team_stats"
   },
   {
     "short": "game_scoring_winprob",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/winprob/{game_id}",
@@ -9615,13 +9615,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_winprob"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_winprob"
   },
   {
     "short": "game_scoring_ytd_player_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/ytdPlayerStats/{game_id}",
@@ -9631,13 +9631,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_ytd_player_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_ytd_player_stats"
   },
   {
     "short": "game_scoring_ytd_team_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/scoring/ytdTeamStats/{game_id}",
@@ -9647,13 +9647,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_scoring_ytd_team_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_scoring_ytd_team_stats"
   },
   {
     "short": "game_ticket",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/ticket/{game_id}",
@@ -9663,13 +9663,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/game_ticket"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_ticket"
   },
   {
     "short": "golf_event_markets",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/golf/event/markets/{event_id}",
@@ -9679,13 +9679,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/golf_event_markets"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/golf_event_markets"
   },
   {
     "short": "golf_player_markets",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/golf/player/markets/{player_id}",
@@ -9700,13 +9700,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "eventId"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/golf_player_markets"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/golf_player_markets"
   },
   {
     "short": "golfer_results",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/golfer/results/{player_id}",
@@ -9725,13 +9725,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonId"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/golfer_results"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/golfer_results"
   },
   {
     "short": "hockey_player_meta",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/hockey/meta/{player_id}",
@@ -9741,13 +9741,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/hockey_player_meta"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/hockey_player_meta"
   },
   {
     "short": "league",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/league/{league_id}",
@@ -9762,13 +9762,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/league"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/league"
   },
   {
     "short": "league_teams",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/league/teams/{league_id}",
@@ -9783,13 +9783,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/league_teams"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/league_teams"
   },
   {
     "short": "odds",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/odds/{game_id}",
@@ -9799,13 +9799,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_odds",
-    "returnsSchema": "native/cbs_napi/odds"
+    "parser": "parse_cbs_odds",
+    "returnsSchema": "native/cbs/odds"
   },
   {
     "short": "player_combine_data",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/combineData/{player_id}",
@@ -9815,13 +9815,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_combine_data"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_combine_data"
   },
   {
     "short": "player_draft_info",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/draftInfo/{player_id}",
@@ -9844,13 +9844,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonId"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_draft_info"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_draft_info"
   },
   {
     "short": "player_encyclopedia",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/encyclopedia/{player_id}",
@@ -9869,13 +9869,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonId"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_encyclopedia"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_encyclopedia"
   },
   {
     "short": "player_futures",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/futures/{player_id}",
@@ -9885,13 +9885,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_futures"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_futures"
   },
   {
     "short": "player_game_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/gameStats/{player_id}",
@@ -9914,13 +9914,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonType"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_game_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_game_stats"
   },
   {
     "short": "player_golf_metadata",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/meta/golf/{player_id}",
@@ -9930,13 +9930,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_golf_metadata"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_golf_metadata"
   },
   {
     "short": "player_injuries",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/injuries/{player_id}",
@@ -9951,13 +9951,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "dateFormat"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_injuries"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_injuries"
   },
   {
     "short": "player_outlook",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/outlook/{player_id}",
@@ -9972,13 +9972,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "dateFormat"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_outlook"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_outlook"
   },
   {
     "short": "player_rankings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/rankings/{player_id}",
@@ -10009,13 +10009,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "categories"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_rankings"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_rankings"
   },
   {
     "short": "player",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/{player_id}",
@@ -10038,13 +10038,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player"
   },
   {
     "short": "player_standings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/standings/{player_id}",
@@ -10075,13 +10075,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_standings",
-    "returnsSchema": "native/cbs_napi/player_standings"
+    "parser": "parse_cbs_standings",
+    "returnsSchema": "native/cbs/player_standings"
   },
   {
     "short": "player_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/stats/{player_id}",
@@ -10120,13 +10120,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "isTotal"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_stats"
   },
   {
     "short": "player_team_associations",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/teamAssociations/{player_id}",
@@ -10149,13 +10149,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_team_associations"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_team_associations"
   },
   {
     "short": "player_transactions",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/transactions/{player_id}",
@@ -10186,13 +10186,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/player_transactions"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_transactions"
   },
   {
     "short": "position_rankings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/positionRankings/{player_id}",
@@ -10207,13 +10207,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "position"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/position_rankings"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/position_rankings"
   },
   {
     "short": "probable_players",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/probablePlayers/{game_id}",
@@ -10232,13 +10232,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/probable_players"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/probable_players"
   },
   {
     "short": "recruit_rankings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/recruit/rankings/{player_id}",
@@ -10248,13 +10248,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/recruit_rankings"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/recruit_rankings"
   },
   {
     "short": "recruit_team_associations",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/player/recruitAssociations/{player_id}",
@@ -10269,13 +10269,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/recruit_team_associations"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/recruit_team_associations"
   },
   {
     "short": "ruwt_highlights",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/ruwtHighlights/{game_id}",
@@ -10285,13 +10285,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/ruwt_highlights"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/ruwt_highlights"
   },
   {
     "short": "season",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/season/{season_id}",
@@ -10310,13 +10310,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/season"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/season"
   },
   {
     "short": "season_teams",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/season/teams/{season_id}",
@@ -10331,13 +10331,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/season_teams"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/season_teams"
   },
   {
     "short": "sport_leagues",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/sport/leagues/{sport_id}",
@@ -10347,13 +10347,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/sport_leagues"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/sport_leagues"
   },
   {
     "short": "sport",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/sport/{sport_id}",
@@ -10368,13 +10368,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/sport"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/sport"
   },
   {
     "short": "sports_line_team_rankings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/rankings/sportsline/{team_id}",
@@ -10384,13 +10384,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/sports_line_team_rankings"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/sports_line_team_rankings"
   },
   {
     "short": "sports_line_team_standings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/standings/sportsline/{team_id}",
@@ -10405,13 +10405,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "dateFormat"
       }
     ],
-    "parser": "parse_cbs_napi_standings",
-    "returnsSchema": "native/cbs_napi/sports_line_team_standings"
+    "parser": "parse_cbs_standings",
+    "returnsSchema": "native/cbs/sports_line_team_standings"
   },
   {
     "short": "sub_divisions",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/division/subdivisions/{division_id}",
@@ -10430,13 +10430,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "name"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/sub_divisions"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/sub_divisions"
   },
   {
     "short": "team_futures",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/futures/{team_id}",
@@ -10446,13 +10446,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_futures"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_futures"
   },
   {
     "short": "team_metadata",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/metadata/{team_id}",
@@ -10467,13 +10467,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_metadata"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_metadata"
   },
   {
     "short": "team_players",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/players/{team_id}",
@@ -10488,13 +10488,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_players"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_players"
   },
   {
     "short": "team_polls",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/polls/{team_id}",
@@ -10513,13 +10513,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonId"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_polls"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_polls"
   },
   {
     "short": "team_rankings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/rankings/{team_id}",
@@ -10542,13 +10542,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonId"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_rankings"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_rankings"
   },
   {
     "short": "team_seasons",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/seasons/{team_id}",
@@ -10579,13 +10579,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_seasons"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_seasons"
   },
   {
     "short": "team_standings",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/standings/{team_id}",
@@ -10608,13 +10608,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonId"
       }
     ],
-    "parser": "parse_cbs_napi_standings",
-    "returnsSchema": "native/cbs_napi/team_standings"
+    "parser": "parse_cbs_standings",
+    "returnsSchema": "native/cbs/team_standings"
   },
   {
     "short": "team_stats",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/team/stats/{team_id}",
@@ -10641,13 +10641,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "isCurrent"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/team_stats"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_stats"
   },
   {
     "short": "venue_metadata",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/venue/metadata/{venue_id}",
@@ -10657,13 +10657,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/venue_metadata"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/venue_metadata"
   },
   {
     "short": "venue",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/venue/{venue_id}",
@@ -10678,13 +10678,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "resources"
       }
     ],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/venue"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/venue"
   },
   {
     "short": "weather",
     "flat": true,
-    "api": "cbs_napi",
+    "api": "cbs",
     "host": "https://api.cbssports.com",
     "scope": "universal",
     "path": "/resource/game/weather/{game_id}",
@@ -10694,13 +10694,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_napi_list",
-    "returnsSchema": "native/cbs_napi/weather"
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/weather"
   },
   {
     "short": "scoreboard",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/scoreboard/main",
@@ -10725,13 +10725,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "groupId"
       }
     ],
-    "parser": "parse_fox_bifrost_scoreboard",
-    "returnsSchema": "native/fox_bifrost/scoreboard"
+    "parser": "parse_fox_scoreboard",
+    "returnsSchema": "native/fox/scoreboard"
   },
   {
     "short": "scorechip",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/scorechip/{chip_id}",
@@ -10755,13 +10755,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/scorechip"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/scorechip"
   },
   {
     "short": "topevents_scoreboard_segment",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/topevents/scoreboard/segment/{segment}",
@@ -10782,13 +10782,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_scoreboard",
-    "returnsSchema": "native/fox_bifrost/topevents_scoreboard_segment"
+    "parser": "parse_fox_scoreboard",
+    "returnsSchema": "native/fox/topevents_scoreboard_segment"
   },
   {
     "short": "league_conferences",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/conferences",
@@ -10809,13 +10809,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/league_conferences"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/league_conferences"
   },
   {
     "short": "league_header",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/header",
@@ -10836,13 +10836,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/league_header"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/league_header"
   },
   {
     "short": "league_odds",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/odds",
@@ -10867,13 +10867,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "groupId"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/league_odds"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/league_odds"
   },
   {
     "short": "league_playernews",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/playernews",
@@ -10894,13 +10894,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/league_playernews"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/league_playernews"
   },
   {
     "short": "league_polls",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/polls",
@@ -10921,13 +10921,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_standings",
-    "returnsSchema": "native/fox_bifrost/league_polls"
+    "parser": "parse_fox_standings",
+    "returnsSchema": "native/fox/league_polls"
   },
   {
     "short": "league_schedule",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/schedule",
@@ -10948,13 +10948,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_scoreboard",
-    "returnsSchema": "native/fox_bifrost/league_schedule"
+    "parser": "parse_fox_scoreboard",
+    "returnsSchema": "native/fox/league_schedule"
   },
   {
     "short": "league_scores",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/scores",
@@ -10975,13 +10975,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_scoreboard",
-    "returnsSchema": "native/fox_bifrost/league_scores"
+    "parser": "parse_fox_scoreboard",
+    "returnsSchema": "native/fox/league_scores"
   },
   {
     "short": "league_scores_segment",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/scores-segment/{segment_id}",
@@ -11009,13 +11009,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "groupId"
       }
     ],
-    "parser": "parse_fox_bifrost_scoreboard",
-    "returnsSchema": "native/fox_bifrost/league_scores_segment"
+    "parser": "parse_fox_scoreboard",
+    "returnsSchema": "native/fox/league_scores_segment"
   },
   {
     "short": "league_standings",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/standings",
@@ -11036,13 +11036,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_standings",
-    "returnsSchema": "native/fox_bifrost/league_standings"
+    "parser": "parse_fox_standings",
+    "returnsSchema": "native/fox/league_standings"
   },
   {
     "short": "league_stats",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/stats",
@@ -11063,13 +11063,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/league_stats"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/league_stats"
   },
   {
     "short": "league_stats_con",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/stats-con/{who}/{category}/{page}",
@@ -11103,13 +11103,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "groupId"
       }
     ],
-    "parser": "parse_fox_bifrost_standings",
-    "returnsSchema": "native/fox_bifrost/league_stats_con"
+    "parser": "parse_fox_standings",
+    "returnsSchema": "native/fox/league_stats_con"
   },
   {
     "short": "league_teamnav",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/league/teamnav",
@@ -11130,13 +11130,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/league_teamnav"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/league_teamnav"
   },
   {
     "short": "event_data",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/event/{event_id}/data",
@@ -11160,13 +11160,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_event",
-    "returnsSchema": "native/fox_bifrost/event_data"
+    "parser": "parse_fox_event",
+    "returnsSchema": "native/fox/event_data"
   },
   {
     "short": "event_matchup",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/event/{event_id}/matchup",
@@ -11190,13 +11190,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_event",
-    "returnsSchema": "native/fox_bifrost/event_matchup"
+    "parser": "parse_fox_event",
+    "returnsSchema": "native/fox/event_matchup"
   },
   {
     "short": "event_odds",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/event/{event_id}/odds",
@@ -11220,13 +11220,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/event_odds"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/event_odds"
   },
   {
     "short": "event_recap",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/event/{event_id}/recap",
@@ -11250,13 +11250,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/event_recap"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/event_recap"
   },
   {
     "short": "event_standings",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/event/{event_id}/standings",
@@ -11280,13 +11280,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_standings",
-    "returnsSchema": "native/fox_bifrost/event_standings"
+    "parser": "parse_fox_standings",
+    "returnsSchema": "native/fox/event_standings"
   },
   {
     "short": "team_gamelog",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/team/{team_id}/gamelog",
@@ -11310,13 +11310,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/team_gamelog"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/team_gamelog"
   },
   {
     "short": "team_header",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/team/{team_id}/header",
@@ -11340,13 +11340,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/team_header"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/team_header"
   },
   {
     "short": "team_roster",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/team/{team_id}/roster",
@@ -11370,13 +11370,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_team_roster",
-    "returnsSchema": "native/fox_bifrost/team_roster"
+    "parser": "parse_fox_team_roster",
+    "returnsSchema": "native/fox/team_roster"
   },
   {
     "short": "team_standings",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/team/{team_id}/standings",
@@ -11400,13 +11400,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_standings",
-    "returnsSchema": "native/fox_bifrost/team_standings"
+    "parser": "parse_fox_standings",
+    "returnsSchema": "native/fox/team_standings"
   },
   {
     "short": "team_stats",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/{sport}/team/{team_id}/stats",
@@ -11430,13 +11430,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/team_stats"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/team_stats"
   },
   {
     "short": "explore_browse",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/explore/browse/{section}/main",
@@ -11457,13 +11457,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/explore_browse"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/explore_browse"
   },
   {
     "short": "explore_favorite",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/explore/favorite/{section}/main",
@@ -11484,13 +11484,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/explore_favorite"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/explore_favorite"
   },
   {
     "short": "explore_odds",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/explore/odds/main",
@@ -11507,13 +11507,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/explore_odds"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/explore_odds"
   },
   {
     "short": "search_content",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/search/content",
@@ -11534,13 +11534,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "text"
       }
     ],
-    "parser": "parse_fox_bifrost_search",
-    "returnsSchema": "native/fox_bifrost/search_content"
+    "parser": "parse_fox_search",
+    "returnsSchema": "native/fox/search_content"
   },
   {
     "short": "search_entities",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/search/entities",
@@ -11561,13 +11561,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "text"
       }
     ],
-    "parser": "parse_fox_bifrost_search",
-    "returnsSchema": "native/fox_bifrost/search_entities"
+    "parser": "parse_fox_search",
+    "returnsSchema": "native/fox/search_entities"
   },
   {
     "short": "search_popular",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/search/popular",
@@ -11584,13 +11584,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/search_popular"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/search_popular"
   },
   {
     "short": "trending_articles",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/general/trending/articles",
@@ -11616,13 +11616,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "tags"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/trending_articles"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/trending_articles"
   },
   {
     "short": "trending_videos",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/bifrost/v1/general/trending/videos",
@@ -11649,13 +11649,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 12
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/trending_videos"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/trending_videos"
   },
   {
     "short": "foxpolls",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/foxpolls/v1/polls",
@@ -11676,13 +11676,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": true
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/foxpolls"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/foxpolls"
   },
   {
     "short": "fs_feed",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/fs/feed",
@@ -11699,13 +11699,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/fs_feed"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/fs_feed"
   },
   {
     "short": "fs_images",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/fs/images",
@@ -11722,13 +11722,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/fs_images"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/fs_images"
   },
   {
     "short": "fs_layouts",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/fs/layouts",
@@ -11745,13 +11745,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/fs_layouts"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/fs_layouts"
   },
   {
     "short": "fs_videos",
     "flat": true,
-    "api": "fox_bifrost",
+    "api": "fox",
     "host": "https://api.foxsports.com",
     "scope": "universal",
     "path": "/fs/videos",
@@ -11768,13 +11768,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1.1"
       }
     ],
-    "parser": "parse_fox_bifrost_list",
-    "returnsSchema": "native/fox_bifrost/fs_videos"
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/fs_videos"
   },
   {
     "short": "boxscore",
     "flat": true,
-    "api": "yahoo_editorial",
+    "api": "yahoo_scores",
     "host": "https://api-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/editorial/s/boxscore/{game_id}",
@@ -11809,13 +11809,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "polling"
       }
     ],
-    "parser": "parse_yahoo_editorial_boxscore",
-    "returnsSchema": "native/yahoo_editorial/boxscore"
+    "parser": "parse_yahoo_scores_boxscore",
+    "returnsSchema": "native/yahoo_scores/boxscore"
   },
   {
     "short": "scoreboard",
     "flat": true,
-    "api": "yahoo_editorial",
+    "api": "yahoo_scores",
     "host": "https://api-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/editorial/s/scoreboard",
@@ -11863,13 +11863,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 2
       }
     ],
-    "parser": "parse_yahoo_editorial_scoreboard",
-    "returnsSchema": "native/yahoo_editorial/scoreboard"
+    "parser": "parse_yahoo_scores_scoreboard",
+    "returnsSchema": "native/yahoo_scores/scoreboard"
   },
   {
     "short": "oly_medal_count",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/OlyMedalCount",
@@ -11899,13 +11899,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortMethod"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/oly_medal_count"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/oly_medal_count"
   },
   {
     "short": "oly_seasons",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/OlySeasons",
@@ -11931,13 +11931,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasons"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/oly_seasons"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/oly_seasons"
   },
   {
     "short": "alias",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/alias",
@@ -11963,13 +11963,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "alias"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/alias"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/alias"
   },
   {
     "short": "article_list_card_players",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/articleListCardPlayers",
@@ -11995,13 +11995,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/article_list_card_players"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/article_list_card_players"
   },
   {
     "short": "article_list_card_teams",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/articleListCardTeams",
@@ -12027,13 +12027,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/article_list_card_teams"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/article_list_card_teams"
   },
   {
     "short": "basic_players",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/basicPlayers",
@@ -12059,13 +12059,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "players"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/basic_players"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/basic_players"
   },
   {
     "short": "betting_disclaimer",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/bettingDisclaimer",
@@ -12091,13 +12091,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "bettingDisclaimerId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/betting_disclaimer"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/betting_disclaimer"
   },
   {
     "short": "combat_event_fights",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/combatEventFights",
@@ -12131,13 +12131,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "league"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/combat_event_fights"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/combat_event_fights"
   },
   {
     "short": "combat_schedule",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/combatSchedule",
@@ -12167,13 +12167,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "league"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/combat_schedule"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/combat_schedule"
   },
   {
     "short": "common_pills",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/common/pills",
@@ -12207,13 +12207,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/common_pills"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/common_pills"
   },
   {
     "short": "consensus_rankings_php",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/consensus-rankings.php",
@@ -12259,13 +12259,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "type"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/consensus_rankings_php"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/consensus_rankings_php"
   },
   {
     "short": "draft",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/draft",
@@ -12295,13 +12295,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/draft"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/draft"
   },
   {
     "short": "draft_prospects",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/draftProspects",
@@ -12339,13 +12339,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "imageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/draft_prospects"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/draft_prospects"
   },
   {
     "short": "driver_results",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/driverResults",
@@ -12375,13 +12375,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/driver_results"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/driver_results"
   },
   {
     "short": "driver_splits",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/driverSplits",
@@ -12407,13 +12407,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/driver_splits"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/driver_splits"
   },
   {
     "short": "featured_game_ids",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/featuredGameIds",
@@ -12435,13 +12435,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "America/Chicago"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/featured_game_ids"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/featured_game_ids"
   },
   {
     "short": "game_prop_bets",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/gamePropBets",
@@ -12467,13 +12467,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/game_prop_bets"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/game_prop_bets"
   },
   {
     "short": "game_stats_leaders",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/gameStatsLeaders",
@@ -13131,13 +13131,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "soccerTeamStatIds5"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/game_stats_leaders"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/game_stats_leaders"
   },
   {
     "short": "gametime_game",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/gametimeGame",
@@ -13163,13 +13163,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/gametime_game"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/gametime_game"
   },
   {
     "short": "gametime_team",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/gametimeTeam",
@@ -13195,13 +13195,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/gametime_team"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/gametime_team"
   },
   {
     "short": "golf_tournament_seasons",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/golfTournamentSeasons",
@@ -13227,13 +13227,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "eventGroupId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/golf_tournament_seasons"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/golf_tournament_seasons"
   },
   {
     "short": "golf_tournaments",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/golfTournaments",
@@ -13267,13 +13267,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "showDefendingChamps"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/golf_tournaments"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/golf_tournaments"
   },
   {
     "short": "golf_tournaments_basic",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/golfTournamentsBasic",
@@ -13307,13 +13307,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/golf_tournaments_basic"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/golf_tournaments_basic"
   },
   {
     "short": "league_conferences",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueConferences",
@@ -13343,13 +13343,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "divisionIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_conferences"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_conferences"
   },
   {
     "short": "league_filters_data",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueFiltersData",
@@ -13387,13 +13387,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "includePosAndSplitsData"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_filters_data"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_filters_data"
   },
   {
     "short": "league_future_odds",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueFutureOdds",
@@ -13423,13 +13423,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "betCategories"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_future_odds"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_future_odds"
   },
   {
     "short": "league_game_ids",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueGameIds",
@@ -13499,13 +13499,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameDayQueryType"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_game_ids"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_game_ids"
   },
   {
     "short": "league_game_ids_by_date",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueGameIdsByDate",
@@ -13575,13 +13575,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "isTennis"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_game_ids_by_date"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_game_ids_by_date"
   },
   {
     "short": "league_games_by_round",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueGamesByRound",
@@ -13615,13 +13615,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_games_by_round"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_games_by_round"
   },
   {
     "short": "league_info",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueInfo",
@@ -13647,13 +13647,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "league"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_info"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_info"
   },
   {
     "short": "league_injuries",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueInjuries",
@@ -13679,13 +13679,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "leagueId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_injuries"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_injuries"
   },
   {
     "short": "league_names",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueNames",
@@ -13711,13 +13711,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "leagues"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_names"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_names"
   },
   {
     "short": "league_prop_odds",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leaguePropOdds",
@@ -13747,13 +13747,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "league"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_prop_odds"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_prop_odds"
   },
   {
     "short": "league_standings",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueStandings",
@@ -13787,13 +13787,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonPhase"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_standings"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_standings"
   },
   {
     "short": "league_stats_by_team",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueStatsByTeam",
@@ -13847,13 +13847,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hockeyCutType"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/league_stats_by_team"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/league_stats_by_team"
   },
   {
     "short": "league_stats_individual",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueStatsIndividual",
@@ -13939,13 +13939,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "motorsportsStatIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/league_stats_individual"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/league_stats_individual"
   },
   {
     "short": "league_stats_overview",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueStatsOverview",
@@ -14007,13 +14007,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "motorsportsStatIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/league_stats_overview"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/league_stats_overview"
   },
   {
     "short": "league_stats_weekly",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueStatsWeekly",
@@ -14055,13 +14055,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonPhase"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/league_stats_weekly"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/league_stats_weekly"
   },
   {
     "short": "league_team_ids",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueTeamIds",
@@ -14095,13 +14095,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "getTeamsByDivision"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_team_ids"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_team_ids"
   },
   {
     "short": "league_teams",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leagueTeams",
@@ -14139,13 +14139,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "getTeamsByDivision"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/league_teams"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/league_teams"
   },
   {
     "short": "leagues_season_states",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/leaguesSeasonStates",
@@ -14171,13 +14171,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "leagues"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/leagues_season_states"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/leagues_season_states"
   },
   {
     "short": "module_game",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/moduleGame",
@@ -14211,13 +14211,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "imageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/module_game"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/module_game"
   },
   {
     "short": "motorsport_standings",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/motorsportStandings",
@@ -14247,13 +14247,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/motorsport_standings"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/motorsport_standings"
   },
   {
     "short": "nascar_drivers",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/nascarDrivers",
@@ -14279,13 +14279,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "league"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/nascar_drivers"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/nascar_drivers"
   },
   {
     "short": "nav_dropdown_tray",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/navDropdownTray",
@@ -14319,13 +14319,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "soccerTeamIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/nav_dropdown_tray"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/nav_dropdown_tray"
   },
   {
     "short": "pick_distribution",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/pickDistribution",
@@ -14359,13 +14359,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "count"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/pick_distribution"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/pick_distribution"
   },
   {
     "short": "playbook_boxscore",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookBoxscore",
@@ -14431,13 +14431,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "eventState"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_boxscore"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_boxscore"
   },
   {
     "short": "playbook_boxscore_poll",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookBoxscorePoll",
@@ -14495,13 +14495,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "eventState"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_boxscore_poll"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_boxscore_poll"
   },
   {
     "short": "playbook_boxscore_social_share",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookBoxscoreSocialShare",
@@ -14527,13 +14527,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_boxscore_social_share"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_boxscore_social_share"
   },
   {
     "short": "playbook_combat_match",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookCombatMatch",
@@ -14575,13 +14575,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "headshotWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_combat_match"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_combat_match"
   },
   {
     "short": "playbook_game",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookGame",
@@ -14615,13 +14615,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "imageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_game"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_game"
   },
   {
     "short": "playbook_game_odds_poll",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookGameOddsPoll",
@@ -14651,13 +14651,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "eventState"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_game_odds_poll"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_game_odds_poll"
   },
   {
     "short": "playbook_golf_tournament",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookGolfTournament",
@@ -14699,13 +14699,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "showHoleResults"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_golf_tournament"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_golf_tournament"
   },
   {
     "short": "playbook_league_odds",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookLeagueOdds",
@@ -14751,13 +14751,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "rangeEndDate"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_league_odds"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_league_odds"
   },
   {
     "short": "playbook_player",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookPlayer",
@@ -14787,13 +14787,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "seasonPhases"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_player"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_player"
   },
   {
     "short": "playbook_player_social_share",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookPlayerSocialShare",
@@ -14819,13 +14819,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_player_social_share"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_player_social_share"
   },
   {
     "short": "playbook_race",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookRace",
@@ -14859,13 +14859,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerImageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_race"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_race"
   },
   {
     "short": "playbook_team",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookTeam",
@@ -14911,13 +14911,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "disableDivision"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_team"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_team"
   },
   {
     "short": "playbook_team_basic",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookTeamBasic",
@@ -14951,13 +14951,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "imageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_team_basic"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_team_basic"
   },
   {
     "short": "playbook_team_social_share",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookTeamSocialShare",
@@ -14983,13 +14983,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_team_social_share"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_team_social_share"
   },
   {
     "short": "playbook_tennis_match",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playbookTennisMatch",
@@ -15015,13 +15015,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playbook_tennis_match"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playbook_tennis_match"
   },
   {
     "short": "player_basic",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playerBasic",
@@ -15051,13 +15051,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/player_basic"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/player_basic"
   },
   {
     "short": "player_career_stats",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playerCareerStats",
@@ -15107,13 +15107,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "soccerStatIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/player_career_stats"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/player_career_stats"
   },
   {
     "short": "player_game_log",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playerGameLog",
@@ -15171,13 +15171,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "soccerStatIds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/player_game_log"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/player_game_log"
   },
   {
     "short": "player_props",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playerProps",
@@ -15203,13 +15203,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/player_props"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/player_props"
   },
   {
     "short": "player_search",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playerSearch",
@@ -15259,13 +15259,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "nhlPositionId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/player_search"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/player_search"
   },
   {
     "short": "player_season_stats",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playerSeasonStats",
@@ -15339,13 +15339,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "usePlayerUniqueId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/player_season_stats"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/player_season_stats"
   },
   {
     "short": "playoff_bracket",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playoffBracket",
@@ -15387,13 +15387,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playoffRounds"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playoff_bracket"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playoff_bracket"
   },
   {
     "short": "playoff_series_game",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/playoffSeriesGame",
@@ -15419,13 +15419,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/playoff_series_game"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/playoff_series_game"
   },
   {
     "short": "polymarket_game",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/polymarketGame",
@@ -15451,13 +15451,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "gameId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/polymarket_game"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/polymarket_game"
   },
   {
     "short": "racing_schedule",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/racingSchedule",
@@ -15495,13 +15495,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "hasSeries"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/racing_schedule"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/racing_schedule"
   },
   {
     "short": "scoreboard_game",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/scoreboardGame",
@@ -15547,13 +15547,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "betEventState"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/scoreboard_game"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/scoreboard_game"
   },
   {
     "short": "season_stats_football_defense_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballDefenseNcaaf",
@@ -15596,13 +15596,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_defense_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_defense_ncaaf"
   },
   {
     "short": "season_stats_football_kicking_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballKickingNcaaf",
@@ -15645,13 +15645,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_kicking_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_kicking_ncaaf"
   },
   {
     "short": "season_stats_football_passing_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballPassingNcaaf",
@@ -15694,13 +15694,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_passing_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_passing_ncaaf"
   },
   {
     "short": "season_stats_football_punting_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballPuntingNcaaf",
@@ -15743,13 +15743,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_punting_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_punting_ncaaf"
   },
   {
     "short": "season_stats_football_receiving_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballReceivingNcaaf",
@@ -15792,13 +15792,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_receiving_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_receiving_ncaaf"
   },
   {
     "short": "season_stats_football_returns_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballReturnsNcaaf",
@@ -15841,13 +15841,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_returns_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_returns_ncaaf"
   },
   {
     "short": "season_stats_football_rushing_ncaaf",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonStatsFootballRushingNcaaf",
@@ -15890,13 +15890,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_stats_football_rushing_ncaaf"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_stats_football_rushing_ncaaf"
   },
   {
     "short": "season_team_stats_football_defense",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballDefense",
@@ -15939,13 +15939,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_defense"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_defense"
   },
   {
     "short": "season_team_stats_football_kicking",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballKicking",
@@ -15988,13 +15988,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_kicking"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_kicking"
   },
   {
     "short": "season_team_stats_football_kickoffs",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballKickoffs",
@@ -16037,13 +16037,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_kickoffs"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_kickoffs"
   },
   {
     "short": "season_team_stats_football_offense",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballOffense",
@@ -16086,13 +16086,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_offense"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_offense"
   },
   {
     "short": "season_team_stats_football_passing",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballPassing",
@@ -16135,13 +16135,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_passing"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_passing"
   },
   {
     "short": "season_team_stats_football_passing_defense",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballPassingDefense",
@@ -16184,13 +16184,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_passing_defense"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_passing_defense"
   },
   {
     "short": "season_team_stats_football_punting",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballPunting",
@@ -16233,13 +16233,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_punting"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_punting"
   },
   {
     "short": "season_team_stats_football_receiving",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballReceiving",
@@ -16282,13 +16282,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_receiving"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_receiving"
   },
   {
     "short": "season_team_stats_football_receiving_defense",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense",
@@ -16331,13 +16331,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_receiving_defense"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_receiving_defense"
   },
   {
     "short": "season_team_stats_football_returns",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballReturns",
@@ -16380,13 +16380,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_returns"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_returns"
   },
   {
     "short": "season_team_stats_football_rushing",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballRushing",
@@ -16429,13 +16429,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_rushing"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_rushing"
   },
   {
     "short": "season_team_stats_football_rushing_defense",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/seasonTeamStatsFootballRushingDefense",
@@ -16478,13 +16478,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortStatId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/season_team_stats_football_rushing_defense"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/season_team_stats_football_rushing_defense"
   },
   {
     "short": "team_injuries",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamInjuries",
@@ -16510,13 +16510,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/team_injuries"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/team_injuries"
   },
   {
     "short": "team_playoff_series",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamPlayoffSeries",
@@ -16546,13 +16546,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/team_playoff_series"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/team_playoff_series"
   },
   {
     "short": "team_roster",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamRoster",
@@ -16586,13 +16586,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "playerImageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/team_roster"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/team_roster"
   },
   {
     "short": "team_schedule_by_season",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamScheduleBySeason",
@@ -16622,13 +16622,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/team_schedule_by_season"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/team_schedule_by_season"
   },
   {
     "short": "team_search",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamSearch",
@@ -16662,13 +16662,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "imageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/team_search"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/team_search"
   },
   {
     "short": "team_stats_leaders_v2",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamStatsLeadersV2",
@@ -16726,13 +16726,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "isBaseball"
       }
     ],
-    "parser": "parse_yahoo_shangrila_stats",
-    "returnsSchema": "native/yahoo_shangrila/team_stats_leaders_v2"
+    "parser": "parse_yahoo_stats",
+    "returnsSchema": "native/yahoo/team_stats_leaders_v2"
   },
   {
     "short": "team_transactions",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamTransactions",
@@ -16758,13 +16758,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "teamId"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/team_transactions"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/team_transactions"
   },
   {
     "short": "teams_basic",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/teamsBasic",
@@ -16798,13 +16798,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "imageWidth"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/teams_basic"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/teams_basic"
   },
   {
     "short": "tennis_matches_by_date",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/tennisMatchesByDate",
@@ -16838,13 +16838,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "date"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/tennis_matches_by_date"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/tennis_matches_by_date"
   },
   {
     "short": "tennis_tournament",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/tennisTournament",
@@ -16874,13 +16874,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/tennis_tournament"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/tennis_tournament"
   },
   {
     "short": "tennis_tournaments",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/tennisTournaments",
@@ -16914,13 +16914,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "season"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/tennis_tournaments"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/tennis_tournaments"
   },
   {
     "short": "tennis_tournaments_by_date",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/tennisTournamentsByDate",
@@ -16950,13 +16950,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "date"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/tennis_tournaments_by_date"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/tennis_tournaments_by_date"
   },
   {
     "short": "trending_event_ids",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/trendingEventIds",
@@ -16990,13 +16990,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "dateFlipOffset"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/trending_event_ids"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/trending_event_ids"
   },
   {
     "short": "trending_game_ids",
     "flat": true,
-    "api": "yahoo_shangrila",
+    "api": "yahoo",
     "host": "https://graphite-secure.sports.yahoo.com",
     "scope": "universal",
     "path": "/v1/query/shangrila/trendingGameIds",
@@ -17034,8 +17034,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "dates"
       }
     ],
-    "parser": "parse_yahoo_shangrila_list",
-    "returnsSchema": "native/yahoo_shangrila/trending_game_ids"
+    "parser": "parse_yahoo_list",
+    "returnsSchema": "native/yahoo/trending_game_ids"
   },
   {
     "short": "seasons",

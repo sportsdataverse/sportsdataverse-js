@@ -1,6 +1,6 @@
 // Parsers for Baseball Savant / Statcast payloads. Faithful port of
 // `sportsdataverse/mlb/mlb_statcast_parsers.py`. Universal flat-API parser
-// contract (mirrors `mlb_api.ts`):
+// contract (mirrors `mlb.ts`):
 //
 //   - return an array of flat row objects (the JS analogue of a polars frame);
 //   - empty / malformed payloads return `[]` instead of throwing, so callers

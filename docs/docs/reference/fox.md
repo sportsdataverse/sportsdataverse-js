@@ -18,57 +18,57 @@ sidebar_position: 34
 ```js
 import sdv from 'sportsdataverse';
 
-// Fox Sports Bifrost uses a public apikey + api-version query pair
+// Fox Sports uses a public apikey + api-version query pair
 // (both default out of the box — override apikey if you have your own):
-await sdv.fox.fox_bifrost_scoreboard({ sport: 'cfb' });
+await sdv.fox.fox_scoreboard({ sport: 'cfb' });
 ```
 
 ## Native API — Fox Sports
 
-Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsports.com`. Each method is exposed under BOTH `fox_bifrost_<endpoint>` (snake_case, py/R parity) and `foxBifrost<Endpoint>` (camelCase canonical) on `sdv.fox`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the Fox Sports API. Host: `https://api.foxsports.com`. Each method is exposed under BOTH `fox_<endpoint>` (snake_case, py/R parity) and `fox<Endpoint>` (camelCase canonical) on `sdv.fox`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `fox_bifrost_event_data` / `foxBifrostEventData` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/data` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_event` | — |
-| `fox_bifrost_event_matchup` / `foxBifrostEventMatchup` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/matchup` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_event` | — |
-| `fox_bifrost_event_odds` / `foxBifrostEventOdds` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/odds` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_event_recap` / `foxBifrostEventRecap` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/recap` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_event_standings` / `foxBifrostEventStandings` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/standings` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_standings` | — |
-| `fox_bifrost_explore_browse` / `foxBifrostExploreBrowse` | `https://api.foxsports.com/bifrost/v1/explore/browse/{section}/main` | `section`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_explore_favorite` / `foxBifrostExploreFavorite` | `https://api.foxsports.com/bifrost/v1/explore/favorite/{section}/main` | `section`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_explore_odds` / `foxBifrostExploreOdds` | `https://api.foxsports.com/bifrost/v1/explore/odds/main` | — | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_foxpolls` / `foxBifrostFoxpolls` | `https://api.foxsports.com/foxpolls/v1/polls` | — | `apikey`, `associated_entity_ids` → `associatedEntityIds`, `include_answers` → `includeAnswers` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_fs_feed` / `foxBifrostFsFeed` | `https://api.foxsports.com/fs/feed` | — | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_fs_images` / `foxBifrostFsImages` | `https://api.foxsports.com/fs/images` | — | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_fs_layouts` / `foxBifrostFsLayouts` | `https://api.foxsports.com/fs/layouts` | — | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_fs_videos` / `foxBifrostFsVideos` | `https://api.foxsports.com/fs/videos` | — | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_league_conferences` / `foxBifrostLeagueConferences` | `https://api.foxsports.com/bifrost/v1/{sport}/league/conferences` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_league_header` / `foxBifrostLeagueHeader` | `https://api.foxsports.com/bifrost/v1/{sport}/league/header` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_league_odds` / `foxBifrostLeagueOdds` | `https://api.foxsports.com/bifrost/v1/{sport}/league/odds` | `sport`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_league_playernews` / `foxBifrostLeaguePlayernews` | `https://api.foxsports.com/bifrost/v1/{sport}/league/playernews` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_league_polls` / `foxBifrostLeaguePolls` | `https://api.foxsports.com/bifrost/v1/{sport}/league/polls` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_standings` | — |
-| `fox_bifrost_league_schedule` / `foxBifrostLeagueSchedule` | `https://api.foxsports.com/bifrost/v1/{sport}/league/schedule` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_scoreboard` | — |
-| `fox_bifrost_league_scores` / `foxBifrostLeagueScores` | `https://api.foxsports.com/bifrost/v1/{sport}/league/scores` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_scoreboard` | — |
-| `fox_bifrost_league_scores_segment` / `foxBifrostLeagueScoresSegment` | `https://api.foxsports.com/bifrost/v1/{sport}/league/scores-segment/{segment_id}` | `sport`\*, `segment_id`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_bifrost_scoreboard` | — |
-| `fox_bifrost_league_standings` / `foxBifrostLeagueStandings` | `https://api.foxsports.com/bifrost/v1/{sport}/league/standings` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_standings` | — |
-| `fox_bifrost_league_stats` / `foxBifrostLeagueStats` | `https://api.foxsports.com/bifrost/v1/{sport}/league/stats` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_league_stats_con` / `foxBifrostLeagueStatsCon` | `https://api.foxsports.com/bifrost/v1/{sport}/league/stats-con/{who}/{category}/{page}` | `sport`\*, `who`\*, `category`\*, `page`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_bifrost_standings` | — |
-| `fox_bifrost_league_teamnav` / `foxBifrostLeagueTeamnav` | `https://api.foxsports.com/bifrost/v1/{sport}/league/teamnav` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_scoreboard` / `foxBifrostScoreboard` | `https://api.foxsports.com/bifrost/v1/{sport}/scoreboard/main` | `sport`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_bifrost_scoreboard` | — |
-| `fox_bifrost_scorechip` / `foxBifrostScorechip` | `https://api.foxsports.com/bifrost/v1/{sport}/scorechip/{chip_id}` | `sport`\*, `chip_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_search_content` / `foxBifrostSearchContent` | `https://api.foxsports.com/bifrost/v1/search/content` | — | `apikey`, `api_version` → `api-version`, `text` | `parse_fox_bifrost_search` | — |
-| `fox_bifrost_search_entities` / `foxBifrostSearchEntities` | `https://api.foxsports.com/bifrost/v1/search/entities` | — | `apikey`, `api_version` → `api-version`, `text` | `parse_fox_bifrost_search` | — |
-| `fox_bifrost_search_popular` / `foxBifrostSearchPopular` | `https://api.foxsports.com/bifrost/v1/search/popular` | — | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_team_gamelog` / `foxBifrostTeamGamelog` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/gamelog` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_team_header` / `foxBifrostTeamHeader` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/header` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_team_roster` / `foxBifrostTeamRoster` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/roster` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_team_roster` | — |
-| `fox_bifrost_team_standings` / `foxBifrostTeamStandings` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/standings` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_standings` | — |
-| `fox_bifrost_team_stats` / `foxBifrostTeamStats` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/stats` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_topevents_scoreboard_segment` / `foxBifrostTopeventsScoreboardSegment` | `https://api.foxsports.com/bifrost/v1/topevents/scoreboard/segment/{segment}` | `segment`\* | `apikey`, `api_version` → `api-version` | `parse_fox_bifrost_scoreboard` | — |
-| `fox_bifrost_trending_articles` / `foxBifrostTrendingArticles` | `https://api.foxsports.com/bifrost/v1/general/trending/articles` | — | `apikey`, `api_version` → `api-version`, `duration`, `tags` | `parse_fox_bifrost_list` | — |
-| `fox_bifrost_trending_videos` / `foxBifrostTrendingVideos` | `https://api.foxsports.com/bifrost/v1/general/trending/videos` | — | `apikey`, `api_version` → `api-version`, `duration`, `max_items` → `maxItems` | `parse_fox_bifrost_list` | — |
+| `fox_event_data` / `foxEventData` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/data` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_event` | — |
+| `fox_event_matchup` / `foxEventMatchup` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/matchup` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_event` | — |
+| `fox_event_odds` / `foxEventOdds` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/odds` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_event_recap` / `foxEventRecap` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/recap` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_event_standings` / `foxEventStandings` | `https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/standings` | `sport`\*, `event_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_standings` | — |
+| `fox_explore_browse` / `foxExploreBrowse` | `https://api.foxsports.com/bifrost/v1/explore/browse/{section}/main` | `section`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_explore_favorite` / `foxExploreFavorite` | `https://api.foxsports.com/bifrost/v1/explore/favorite/{section}/main` | `section`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_explore_odds` / `foxExploreOdds` | `https://api.foxsports.com/bifrost/v1/explore/odds/main` | — | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_foxpolls` / `foxFoxpolls` | `https://api.foxsports.com/foxpolls/v1/polls` | — | `apikey`, `associated_entity_ids` → `associatedEntityIds`, `include_answers` → `includeAnswers` | `parse_fox_list` | — |
+| `fox_fs_feed` / `foxFsFeed` | `https://api.foxsports.com/fs/feed` | — | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_fs_images` / `foxFsImages` | `https://api.foxsports.com/fs/images` | — | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_fs_layouts` / `foxFsLayouts` | `https://api.foxsports.com/fs/layouts` | — | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_fs_videos` / `foxFsVideos` | `https://api.foxsports.com/fs/videos` | — | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_league_conferences` / `foxLeagueConferences` | `https://api.foxsports.com/bifrost/v1/{sport}/league/conferences` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_league_header` / `foxLeagueHeader` | `https://api.foxsports.com/bifrost/v1/{sport}/league/header` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_league_odds` / `foxLeagueOdds` | `https://api.foxsports.com/bifrost/v1/{sport}/league/odds` | `sport`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_list` | — |
+| `fox_league_playernews` / `foxLeaguePlayernews` | `https://api.foxsports.com/bifrost/v1/{sport}/league/playernews` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_league_polls` / `foxLeaguePolls` | `https://api.foxsports.com/bifrost/v1/{sport}/league/polls` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_standings` | — |
+| `fox_league_schedule` / `foxLeagueSchedule` | `https://api.foxsports.com/bifrost/v1/{sport}/league/schedule` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_scoreboard` | — |
+| `fox_league_scores` / `foxLeagueScores` | `https://api.foxsports.com/bifrost/v1/{sport}/league/scores` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_scoreboard` | — |
+| `fox_league_scores_segment` / `foxLeagueScoresSegment` | `https://api.foxsports.com/bifrost/v1/{sport}/league/scores-segment/{segment_id}` | `sport`\*, `segment_id`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_scoreboard` | — |
+| `fox_league_standings` / `foxLeagueStandings` | `https://api.foxsports.com/bifrost/v1/{sport}/league/standings` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_standings` | — |
+| `fox_league_stats` / `foxLeagueStats` | `https://api.foxsports.com/bifrost/v1/{sport}/league/stats` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_league_stats_con` / `foxLeagueStatsCon` | `https://api.foxsports.com/bifrost/v1/{sport}/league/stats-con/{who}/{category}/{page}` | `sport`\*, `who`\*, `category`\*, `page`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_standings` | — |
+| `fox_league_teamnav` / `foxLeagueTeamnav` | `https://api.foxsports.com/bifrost/v1/{sport}/league/teamnav` | `sport`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_scoreboard` / `foxScoreboard` | `https://api.foxsports.com/bifrost/v1/{sport}/scoreboard/main` | `sport`\* | `apikey`, `api_version` → `api-version`, `group_id` → `groupId` | `parse_fox_scoreboard` | — |
+| `fox_scorechip` / `foxScorechip` | `https://api.foxsports.com/bifrost/v1/{sport}/scorechip/{chip_id}` | `sport`\*, `chip_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_search_content` / `foxSearchContent` | `https://api.foxsports.com/bifrost/v1/search/content` | — | `apikey`, `api_version` → `api-version`, `text` | `parse_fox_search` | — |
+| `fox_search_entities` / `foxSearchEntities` | `https://api.foxsports.com/bifrost/v1/search/entities` | — | `apikey`, `api_version` → `api-version`, `text` | `parse_fox_search` | — |
+| `fox_search_popular` / `foxSearchPopular` | `https://api.foxsports.com/bifrost/v1/search/popular` | — | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_team_gamelog` / `foxTeamGamelog` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/gamelog` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_team_header` / `foxTeamHeader` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/header` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_team_roster` / `foxTeamRoster` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/roster` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_team_roster` | — |
+| `fox_team_standings` / `foxTeamStandings` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/standings` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_standings` | — |
+| `fox_team_stats` / `foxTeamStats` | `https://api.foxsports.com/bifrost/v1/{sport}/team/{team_id}/stats` | `sport`\*, `team_id`\* | `apikey`, `api_version` → `api-version` | `parse_fox_list` | — |
+| `fox_topevents_scoreboard_segment` / `foxTopeventsScoreboardSegment` | `https://api.foxsports.com/bifrost/v1/topevents/scoreboard/segment/{segment}` | `segment`\* | `apikey`, `api_version` → `api-version` | `parse_fox_scoreboard` | — |
+| `fox_trending_articles` / `foxTrendingArticles` | `https://api.foxsports.com/bifrost/v1/general/trending/articles` | — | `apikey`, `api_version` → `api-version`, `duration`, `tags` | `parse_fox_list` | — |
+| `fox_trending_videos` / `foxTrendingVideos` | `https://api.foxsports.com/bifrost/v1/general/trending/videos` | — | `apikey`, `api_version` → `api-version`, `duration`, `max_items` → `maxItems` | `parse_fox_list` | — |
 
-### Returns — `fox_bifrost_event_data` / `foxBifrostEventData`
+### Returns — `fox_event_data` / `foxEventData`
 
 | col_name | type | description |
 |---|---|---|
@@ -76,7 +76,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `left_item_details` | list | Bifrost event_data field `leftItemDetails`. |
 | `right_item_details` | list | Bifrost event_data field `rightItemDetails`. |
 
-### Returns — `fox_bifrost_event_matchup` / `foxBifrostEventMatchup`
+### Returns — `fox_event_matchup` / `foxEventMatchup`
 
 | col_name | type | description |
 |---|---|---|
@@ -84,13 +84,13 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `left_item_details` | list | Bifrost event_matchup field `leftItemDetails`. |
 | `right_item_details` | list | Bifrost event_matchup field `rightItemDetails`. |
 
-### Returns — `fox_bifrost_event_odds` / `foxBifrostEventOdds`
+### Returns — `fox_event_odds` / `foxEventOdds`
 
 | col_name | type | description |
 |---|---|---|
 | `modules` | character | Bifrost field `modules`: modules. |
 
-### Returns — `fox_bifrost_event_recap` / `foxBifrostEventRecap`
+### Returns — `fox_event_recap` / `foxEventRecap`
 
 | col_name | type | description |
 |---|---|---|
@@ -99,7 +99,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `order` | integer | Bifrost field `order`: order. |
 | `last_update` | character | Bifrost field `last_update`: last update. |
 
-### Returns — `fox_bifrost_event_standings` / `foxBifrostEventStandings`
+### Returns — `fox_event_standings` / `foxEventStandings`
 
 | col_name | type | description |
 |---|---|---|
@@ -113,26 +113,26 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `headers` | character | Bifrost field `headers`: headers. |
 | `rows` | character | Bifrost field `rows`: rows. |
 
-### Returns — `fox_bifrost_explore_browse` / `foxBifrostExploreBrowse`
+### Returns — `fox_explore_browse` / `foxExploreBrowse`
 
 | col_name | type | description |
 |---|---|---|
 | `header_title` | character | Bifrost field `header_title`: header title. |
 | `items` | character | Bifrost field `items`: items. |
 
-### Returns — `fox_bifrost_explore_odds` / `foxBifrostExploreOdds`
+### Returns — `fox_explore_odds` / `foxExploreOdds`
 
 | col_name | type | description |
 |---|---|---|
 | `modules` | character | Bifrost field `modules`: modules. |
 
-### Returns — `fox_bifrost_league_conferences` / `foxBifrostLeagueConferences`
+### Returns — `fox_league_conferences` / `foxLeagueConferences`
 
 | col_name | type | description |
 |---|---|---|
 | `items` | character | Bifrost field `items`: items. |
 
-### Returns — `fox_bifrost_league_header` / `foxBifrostLeagueHeader`
+### Returns — `fox_league_header` / `foxLeagueHeader`
 
 | col_name | type | description |
 |---|---|---|
@@ -161,7 +161,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `sponsorship_start_date` | character | Bifrost field `sponsorship_start_date`: sponsorship start date. |
 | `sponsorship_end_date` | character | Bifrost field `sponsorship_end_date`: sponsorship end date. |
 
-### Returns — `fox_bifrost_league_odds` / `foxBifrostLeagueOdds`
+### Returns — `fox_league_odds` / `foxLeagueOdds`
 
 | col_name | type | description |
 |---|---|---|
@@ -172,7 +172,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `parameters` | list | Bifrost league_odds field `parameters`. |
 | `selected` | logical | Bifrost league_odds field `selected`. |
 
-### Returns — `fox_bifrost_league_playernews` / `foxBifrostLeaguePlayernews`
+### Returns — `fox_league_playernews` / `foxLeaguePlayernews`
 
 | col_name | type | description |
 |---|---|---|
@@ -204,7 +204,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `date` | character | Bifrost field `date`: date. |
 | `source` | character | Bifrost field `source`: source. |
 
-### Returns — `fox_bifrost_league_polls` / `foxBifrostLeaguePolls`
+### Returns — `fox_league_polls` / `foxLeaguePolls`
 
 | col_name | type | description |
 |---|---|---|
@@ -214,19 +214,19 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `section_last_updated` | character | Bifrost league_polls field `lastUpdated`. |
 | `section_metadata` | list | Bifrost league_polls field `metadata`. |
 
-### Returns — `fox_bifrost_league_schedule` / `foxBifrostLeagueSchedule`
+### Returns — `fox_league_schedule` / `foxLeagueSchedule`
 
 | col_name | type | description |
 |---|---|---|
 | `group_title` | character | Bifrost league_schedule field `title`. |
 
-### Returns — `fox_bifrost_league_scores` / `foxBifrostLeagueScores`
+### Returns — `fox_league_scores` / `foxLeagueScores`
 
 | col_name | type | description |
 |---|---|---|
 | `group_title` | character | Bifrost league_scores field `title`. |
 
-### Returns — `fox_bifrost_league_standings` / `foxBifrostLeagueStandings`
+### Returns — `fox_league_standings` / `foxLeagueStandings`
 
 | col_name | type | description |
 |---|---|---|
@@ -236,14 +236,14 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `section_last_updated` | character | Bifrost league_standings field `lastUpdated`. |
 | `section_metadata` | list | Bifrost league_standings field `metadata`. |
 
-### Returns — `fox_bifrost_league_stats` / `foxBifrostLeagueStats`
+### Returns — `fox_league_stats` / `foxLeagueStats`
 
 | col_name | type | description |
 |---|---|---|
 | `title` | character | Bifrost field `title`: title. |
 | `leaders` | character | Bifrost field `leaders`: leaders. |
 
-### Returns — `fox_bifrost_league_stats_con` / `foxBifrostLeagueStatsCon`
+### Returns — `fox_league_stats_con` / `foxLeagueStatsCon`
 
 | col_name | type | description |
 |---|---|---|
@@ -253,7 +253,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `table_rows` | character | Bifrost field `table_rows`: table rows. |
 | `legend_details` | character | Bifrost field `legend_details`: legend details. |
 
-### Returns — `fox_bifrost_league_teamnav` / `foxBifrostLeagueTeamnav`
+### Returns — `fox_league_teamnav` / `foxLeagueTeamnav`
 
 | col_name | type | description |
 |---|---|---|
@@ -265,33 +265,33 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `template` | character | Bifrost league_teamnav field `template`. |
 | `alternate_logo_url` | character | Bifrost league_teamnav field `alternateLogoUrl`. |
 
-### Returns — `fox_bifrost_scoreboard` / `foxBifrostScoreboard`
+### Returns — `fox_scoreboard` / `foxScoreboard`
 
 | col_name | type | description |
 |---|---|---|
 | `group_title` | character | Bifrost scoreboard field `title`. |
 
-### Returns — `fox_bifrost_search_content` / `foxBifrostSearchContent`
+### Returns — `fox_search_content` / `foxSearchContent`
 
 | col_name | type | description |
 |---|---|---|
 | `title` | character | Bifrost search_content field `title`. |
 | `components` | list | Bifrost search_content field `components`. |
 
-### Returns — `fox_bifrost_search_entities` / `foxBifrostSearchEntities`
+### Returns — `fox_search_entities` / `foxSearchEntities`
 
 | col_name | type | description |
 |---|---|---|
 | `title` | character | Bifrost search_entities field `title`. |
 | `components` | list | Bifrost search_entities field `components`. |
 
-### Returns — `fox_bifrost_search_popular` / `foxBifrostSearchPopular`
+### Returns — `fox_search_popular` / `foxSearchPopular`
 
 | col_name | type | description |
 |---|---|---|
 | `components` | character | Bifrost field `components`: components. |
 
-### Returns — `fox_bifrost_team_gamelog` / `foxBifrostTeamGamelog`
+### Returns — `fox_team_gamelog` / `foxTeamGamelog`
 
 | col_name | type | description |
 |---|---|---|
@@ -300,20 +300,20 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `legend` | list | Bifrost team_gamelog field `legend`. |
 | `more_link` | list | Bifrost team_gamelog field `moreLink`. |
 
-### Returns — `fox_bifrost_team_header` / `foxBifrostTeamHeader`
+### Returns — `fox_team_header` / `foxTeamHeader`
 
 | col_name | type | description |
 |---|---|---|
 | `text` | character | Bifrost field `text`: text. |
 
-### Returns — `fox_bifrost_team_roster` / `foxBifrostTeamRoster`
+### Returns — `fox_team_roster` / `foxTeamRoster`
 
 | col_name | type | description |
 |---|---|---|
 | `group_template` | character | Bifrost team_roster field `template`. |
 | `group_headers` | list | Bifrost team_roster field `headers`. |
 
-### Returns — `fox_bifrost_team_standings` / `foxBifrostTeamStandings`
+### Returns — `fox_team_standings` / `foxTeamStandings`
 
 | col_name | type | description |
 |---|---|---|
@@ -330,14 +330,14 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `headers` | character | Bifrost field `headers`: headers. |
 | `rows` | character | Bifrost field `rows`: rows. |
 
-### Returns — `fox_bifrost_team_stats` / `foxBifrostTeamStats`
+### Returns — `fox_team_stats` / `foxTeamStats`
 
 | col_name | type | description |
 |---|---|---|
 | `title` | character | Bifrost field `title`: title. |
 | `leaders` | character | Bifrost field `leaders`: leaders. |
 
-### Returns — `fox_bifrost_topevents_scoreboard_segment` / `foxBifrostTopeventsScoreboardSegment`
+### Returns — `fox_topevents_scoreboard_segment` / `foxTopeventsScoreboardSegment`
 
 | col_name | type | description |
 |---|---|---|
@@ -352,7 +352,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `header_text` | character | Bifrost topevents_scoreboard_segment field `headerText`. |
 | `header_link` | list | Bifrost topevents_scoreboard_segment field `headerLink`. |
 
-### Returns — `fox_bifrost_trending_articles` / `foxBifrostTrendingArticles`
+### Returns — `fox_trending_articles` / `foxTrendingArticles`
 
 | col_name | type | description |
 |---|---|---|
@@ -367,7 +367,7 @@ Flat (non-ESPN) wrappers for Fox Sports Bifrost API. Host: `https://api.foxsport
 | `data_status_success` | logical | Bifrost field `data_status_success`: data status success. |
 | `data_status_code` | integer | Bifrost field `data_status_code`: data status code. |
 
-### Returns — `fox_bifrost_trending_videos` / `foxBifrostTrendingVideos`
+### Returns — `fox_trending_videos` / `foxTrendingVideos`
 
 | col_name | type | description |
 |---|---|---|
