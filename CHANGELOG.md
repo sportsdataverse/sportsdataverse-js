@@ -4,7 +4,48 @@ All notable changes to `sportsdataverse` (Node.js) are documented here. The
 docs-site copy lives at [`docs/src/pages/CHANGELOG.md`](docs/src/pages/CHANGELOG.md)
 and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
-## Unreleased
+## v3.1.0
+
+A minor, additive release: two new flat-API families (no breaking changes), plus
+the docs-site overhaul.
+
+### New flat-API families (2)
+
+Two standalone provider namespaces join the flat-API surface, bringing the total
+to **532 flat-API wrappers across 15 families** (was 517 across 13). Both expose
+the usual dual-case names (snake_case + camelCase), accept `{ parsed: true }` for
+tidy rows, and ship fully column-described returns tables.
+
+- **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, 10 endpoints) — a
+  **league-parameterized** women's + junior hockey family covering the **PWHL**
+  plus the CHL juniors (**AHL / OHL / WHL / QMJHL**); pick the league with a
+  `league` slug (e.g. `sdv.hockeytech.hockeytech_schedule({ league: 'pwhl' })`).
+  Endpoints: `seasons`, `schedule`, `teams`, `team_roster`, `player_stats`,
+  `game_shifts`, `standings`, `leaders`, `pbp`, `game_summary`. Hosts:
+  `lscluster.hockeytech.com` (and `cluster.leaguestat.com` for QMJHL). The
+  `src/core/hockeytech_runtime.ts` getter unwraps the JSONP envelope
+  (`angular.callbacks._N({…})`) before `JSON.parse`, switches the `gc` feed to its
+  `tab=` form (not `view=`), applies the PWHL play-by-play key override, and
+  injects each league's `client_code` / `key` / `site_id` from a per-league
+  registry (overridable via `SDV_<LEAGUE>_API_KEY`). Ported from `fastRhockey`'s
+  `hockeytech_*` and `sportsdataverse-py`'s `sportsdataverse/hockeytech/`.
+- **BartTorvik / T-Rank** (`sdv.torvik.*`, 5 endpoints) — men's college-basketball
+  advanced analytics (`ratings`, `team_factors`, `game_stats`, `player_stats`,
+  `game_schedule`) from `barttorvik.com`. The `src/core/torvik_runtime.ts` getter
+  sends a browser-like User-Agent (barttorvik rejects default programmatic UAs)
+  and returns the raw response body so each parser can branch on format — CSV via
+  papaparse, or `JSON.parse` of the **headerless positional column arrays**
+  (31 / 55 / 67 fields, ported verbatim from `hoopR`'s `torvik_*.R`).
+
+A flat family that needs non-JSON bodies or custom request shaping registers its
+own getter runtime in `GETTER_OVERRIDES` (`src/leagues/_make_flat.ts`) — the same
+pattern as the existing Statcast getter — so the shared no-auth getter stays
+JSON-only.
+
+> **Playground caveat.** QMJHL's secondary host (`cluster.leaguestat.com`) works
+> from the **library**, but not from the in-browser **playground**: the `/api/run`
+> proxy allowlist derives a single host per family, so QMJHL calls there hit the
+> primary host. Use the library directly for QMJHL.
 
 ### Docs
 

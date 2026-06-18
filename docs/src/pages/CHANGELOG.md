@@ -1,6 +1,46 @@
 # ChangeLog
 
-## **Unreleased**
+## **V3.1.0**
+
+A minor, additive release: two new flat-API families (no breaking changes), plus
+the docs-site overhaul.
+
+### New flat-API families
+
+Two standalone provider namespaces join the flat-API surface — **532 flat-API
+wrappers across 15 families** now (was 517 across 13). Both expose dual-case names
+(snake_case + camelCase), accept `{ parsed: true }`, and ship fully
+column-described returns tables.
+
+- **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, 10 endpoints) — a
+  **league-parameterized** women's + junior hockey family for the **PWHL** plus
+  **AHL / OHL / WHL / QMJHL**; pick the league with a `league` slug
+  (`sdv.hockeytech.hockeytech_schedule({ league: 'pwhl', parsed: true })`).
+  Endpoints: `seasons`, `schedule`, `teams`, `team_roster`, `player_stats`,
+  `game_shifts`, `standings`, `leaders`, `pbp`, `game_summary`. Hosts:
+  `lscluster.hockeytech.com` (+ `cluster.leaguestat.com` for QMJHL). Its runtime
+  (`src/core/hockeytech_runtime.ts`) unwraps the JSONP envelope
+  (`angular.callbacks._N({…})`) before `JSON.parse`, switches the `gc` feed to
+  `tab=` (not `view=`), applies the PWHL play-by-play key override, and injects
+  each league's `client_code` / `key` / `site_id` from a per-league registry
+  (overridable via `SDV_<LEAGUE>_API_KEY`). Ported from `fastRhockey` +
+  `sportsdataverse-py`.
+- **BartTorvik / T-Rank** (`sdv.torvik.*`, 5 endpoints) — men's
+  college-basketball analytics (`ratings`, `team_factors`, `game_stats`,
+  `player_stats`, `game_schedule`) from `barttorvik.com`. Its runtime
+  (`src/core/torvik_runtime.ts`) sends a browser-like User-Agent (barttorvik
+  rejects default UAs) and returns the raw body so each parser branches on format
+  — CSV via papaparse, or `JSON.parse` of the **headerless positional column
+  arrays** (31 / 55 / 67 fields, ported verbatim from `hoopR`'s `torvik_*.R`).
+
+  A flat family needing non-JSON bodies or custom request shaping registers its
+  own getter runtime in `GETTER_OVERRIDES` (`src/leagues/_make_flat.ts`), so the
+  shared no-auth getter stays JSON-only.
+
+  **Playground caveat:** QMJHL's secondary host works from the **library** but not
+  the in-browser **playground** — the `/api/run` proxy allowlist derives one host
+  per family, so QMJHL calls there hit the primary host. Use the library directly
+  for QMJHL.
 
 ### Docs
 
