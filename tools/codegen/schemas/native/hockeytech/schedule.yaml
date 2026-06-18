@@ -1,0 +1,192 @@
+schema: schedule
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: 'HockeyTech game id.'
+- name: season_id
+  type: character
+  description: 'HockeyTech season id.'
+- name: league_id
+  type: character
+  description: 'HockeyTech league id.'
+- name: game_number
+  type: character
+  description: 'League game number.'
+- name: game_letter
+  type: character
+  description: 'Game-type letter code.'
+- name: game_type
+  type: character
+  description: 'Game-type code.'
+- name: quick_score
+  type: character
+  description: 'Quick-score availability flag.'
+- name: date
+  type: character
+  description: 'Game date (display).'
+- name: flo_core_event_id
+  type: character
+  description: 'FloHockey core event id.'
+- name: flo_live_event_id
+  type: character
+  description: 'FloHockey live event id.'
+- name: game_date
+  type: character
+  description: 'Game date.'
+- name: game_date_iso8601
+  type: character
+  description: 'Game date/time in ISO-8601 format.'
+- name: scheduled_time
+  type: character
+  description: 'Scheduled start time.'
+- name: scheduled_formatted_time
+  type: character
+  description: 'Scheduled start time (formatted).'
+- name: timezone
+  type: character
+  description: 'Venue timezone.'
+- name: ticket_url
+  type: character
+  description: 'Ticket purchase URL.'
+- name: home_id
+  type: character
+  description: 'Home team id.'
+- name: home_code
+  type: character
+  description: 'Home team code.'
+- name: home_city
+  type: character
+  description: 'Home team city.'
+- name: home_nickname
+  type: character
+  description: 'Home team nickname.'
+- name: home_long_name
+  type: character
+  description: 'Home team full name.'
+- name: home_division
+  type: character
+  description: 'Home team division.'
+- name: home_goals
+  type: character
+  description: 'Home goals.'
+- name: home_audio_url
+  type: character
+  description: 'Home team audio broadcast URL.'
+- name: home_video_url
+  type: character
+  description: 'Home team video broadcast URL.'
+- name: home_webcast_url
+  type: character
+  description: 'Home team webcast URL.'
+- name: visitor_id
+  type: character
+  description: 'Visiting team id.'
+- name: visitor_code
+  type: character
+  description: 'Visiting team code.'
+- name: visitor_city
+  type: character
+  description: 'Visiting team city.'
+- name: visitor_nickname
+  type: character
+  description: 'Visiting team nickname.'
+- name: visitor_long_name
+  type: character
+  description: 'Visiting team full name.'
+- name: visiting_division
+  type: character
+  description: 'Visiting team division.'
+- name: visitor_goals
+  type: character
+  description: 'Visiting goals.'
+- name: visitor_audio_url
+  type: character
+  description: 'Visiting team audio broadcast URL.'
+- name: visitor_video_url
+  type: character
+  description: 'Visiting team video broadcast URL.'
+- name: visitor_webcast_url
+  type: character
+  description: 'Visiting team webcast URL.'
+- name: period
+  type: character
+  description: 'Current period number.'
+- name: period_name_short
+  type: character
+  description: 'Short period label.'
+- name: period_name_long
+  type: character
+  description: 'Long period label.'
+- name: game_clock
+  type: character
+  description: 'Current game clock.'
+- name: game_summary_url
+  type: character
+  description: 'Game summary URL.'
+- name: home_wins
+  type: character
+  description: 'Home team wins (standings context).'
+- name: home_regulation_losses
+  type: character
+  description: 'Home team regulation losses.'
+- name: home_ot_losses
+  type: character
+  description: 'Home team overtime losses.'
+- name: home_shootout_losses
+  type: character
+  description: 'Home team shootout losses.'
+- name: visitor_wins
+  type: character
+  description: 'Visiting team wins (standings context).'
+- name: visitor_regulation_losses
+  type: character
+  description: 'Visiting team regulation losses.'
+- name: visitor_ot_losses
+  type: character
+  description: 'Visiting team overtime losses.'
+- name: visitor_shootout_losses
+  type: character
+  description: 'Visiting team shootout losses.'
+- name: game_status
+  type: character
+  description: 'Game status code.'
+- name: intermission
+  type: character
+  description: 'Intermission flag.'
+- name: game_status_string
+  type: character
+  description: 'Human-readable game status.'
+- name: game_status_string_long
+  type: character
+  description: 'Human-readable game status (long form).'
+- name: ord
+  type: character
+  description: 'Sort-ordinal value.'
+- name: venue_name
+  type: character
+  description: 'Venue name.'
+- name: venue_location
+  type: character
+  description: 'Venue location.'
+- name: league_name
+  type: character
+  description: 'League name.'
+- name: league_code
+  type: character
+  description: 'League code.'
+- name: timezone_short
+  type: character
+  description: 'Short timezone label.'
+- name: home_logo
+  type: character
+  description: 'Home team logo URL.'
+- name: visitor_logo
+  type: character
+  description: 'Visiting team logo URL.'
+- name: flo_hockey_url
+  type: character
+  description: 'FloHockey broadcast URL.'
+- name: combined_client_code
+  type: character
+  description: 'Combined client code identifier.'

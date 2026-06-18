@@ -1,0 +1,138 @@
+schema: team_roster
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: 'Roster entry id.'
+- name: person_id
+  type: character
+  description: 'HockeyTech person id.'
+- name: active
+  type: character
+  description: 'Active-roster flag.'
+- name: first_name
+  type: character
+  description: 'Player first name.'
+- name: last_name
+  type: character
+  description: 'Player last name.'
+- name: phonetic_name
+  type: character
+  description: 'Phonetic spelling of the player name.'
+- name: display_name
+  type: character
+  description: 'Display name.'
+- name: shoots
+  type: character
+  description: 'Shooting hand.'
+- name: hometown
+  type: character
+  description: 'Player hometown.'
+- name: homeprov
+  type: character
+  description: 'Hometown province/state.'
+- name: homecntry
+  type: character
+  description: 'Hometown country.'
+- name: homeplace
+  type: character
+  description: 'Full hometown place string.'
+- name: birthtown
+  type: character
+  description: 'Birth town.'
+- name: birthprov
+  type: character
+  description: 'Birth province/state.'
+- name: birthcntry
+  type: character
+  description: 'Birth country.'
+- name: birthplace
+  type: character
+  description: 'Full birthplace string.'
+- name: height
+  type: character
+  description: 'Listed height.'
+- name: weight
+  type: character
+  description: 'Listed weight.'
+- name: height_hyphenated
+  type: character
+  description: 'Height in hyphenated feet-inches form.'
+- name: hidden
+  type: character
+  description: 'Hidden-from-display flag.'
+- name: current_team
+  type: character
+  description: 'Current team id.'
+- name: player_id
+  type: character
+  description: 'HockeyTech player id.'
+- name: status
+  type: character
+  description: 'Roster status.'
+- name: birthdate
+  type: character
+  description: 'Birth date.'
+- name: birthdate_year
+  type: character
+  description: 'Birth year.'
+- name: rawbirthdate
+  type: character
+  description: 'Raw (unformatted) birth date.'
+- name: latest_team_id
+  type: character
+  description: 'Most recent team id.'
+- name: veteran_status
+  type: character
+  description: 'Veteran-status flag.'
+- name: veteran_description
+  type: character
+  description: 'Veteran-status description.'
+- name: team_name
+  type: character
+  description: 'Team name.'
+- name: division
+  type: character
+  description: 'Team division.'
+- name: tp_jersey_number
+  type: character
+  description: 'Jersey number.'
+- name: rookie
+  type: character
+  description: 'Rookie flag.'
+- name: position_id
+  type: character
+  description: 'Position id.'
+- name: position
+  type: character
+  description: 'Player position.'
+- name: nhlteam
+  type: character
+  description: 'NHL team affiliation.'
+- name: is_rookie
+  type: character
+  description: 'Rookie flag (boolean form).'
+- name: h
+  type: character
+  description: 'Height (alias).'
+- name: w
+  type: character
+  description: 'Weight (alias).'
+- name: draft_status
+  type: character
+  description: 'Draft status.'
+- name: draftinfo
+  type: character
+  description: 'Draft information.'
+- name: name
+  type: character
+  description: 'Full player name.'
+- name: player_image
+  type: character
+  description: 'Player image URL.'
+- name: catches
+  type: character
+  description: 'Catching hand (goalies).'
+- name: value
+  type: character
+  description: 'Scalar value (when the source row is non-object).'

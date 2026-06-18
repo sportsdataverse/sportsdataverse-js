@@ -1,0 +1,153 @@
+schema: player_stats
+kind: dataframe
+columns:
+- name: stat_class
+  type: character
+  description: 'regular, exhibition, or playoff.'
+- name: season_id
+  type: character
+  description: 'HockeyTech season id.'
+- name: season_name
+  type: character
+  description: 'Season name.'
+- name: shortname
+  type: character
+  description: 'Short season name.'
+- name: playoff
+  type: character
+  description: 'Playoff-season flag.'
+- name: career
+  type: character
+  description: 'Career-stats flag.'
+- name: sopt_track_faceoffs
+  type: character
+  description: 'Whether faceoffs are tracked for this season.'
+- name: max_start_date
+  type: character
+  description: 'Latest game start date in the span.'
+- name: veteran_status
+  type: character
+  description: 'Veteran-status flag.'
+- name: veteran
+  type: character
+  description: 'Veteran flag.'
+- name: jersey_number
+  type: character
+  description: 'Jersey number.'
+- name: goals
+  type: character
+  description: 'Goals.'
+- name: games_played
+  type: character
+  description: 'Games played.'
+- name: assists
+  type: character
+  description: 'Assists.'
+- name: points
+  type: character
+  description: 'Points.'
+- name: plus_minus
+  type: character
+  description: 'Plus/minus.'
+- name: penalty_minutes
+  type: character
+  description: 'Penalty minutes.'
+- name: power_play_goals
+  type: character
+  description: 'Power-play goals.'
+- name: power_play_assists
+  type: character
+  description: 'Power-play assists.'
+- name: shots
+  type: character
+  description: 'Shots on goal.'
+- name: shootout_attempts
+  type: character
+  description: 'Shootout attempts.'
+- name: shootout_goals
+  type: character
+  description: 'Shootout goals.'
+- name: shootout_percentage
+  type: character
+  description: 'Shootout shooting %.'
+- name: shooting_percentage
+  type: character
+  description: 'Shooting %.'
+- name: shootout_winning_goals
+  type: character
+  description: 'Shootout-winning goals.'
+- name: points_per_game
+  type: character
+  description: 'Points per game.'
+- name: short_handed_goals
+  type: character
+  description: 'Short-handed goals.'
+- name: short_handed_assists
+  type: character
+  description: 'Short-handed assists.'
+- name: game_winning_goals
+  type: character
+  description: 'Game-winning goals.'
+- name: game_tieing_goals
+  type: character
+  description: 'Game-tying goals.'
+- name: faceoff_wins
+  type: character
+  description: 'Faceoff wins.'
+- name: faceoff_attempts
+  type: character
+  description: 'Faceoff attempts.'
+- name: faceoff_pct
+  type: character
+  description: 'Faceoff win %.'
+- name: hits
+  type: character
+  description: 'Hits.'
+- name: team_name
+  type: character
+  description: 'Team name.'
+- name: team_code
+  type: character
+  description: 'Team code.'
+- name: team_city
+  type: character
+  description: 'Team city.'
+- name: team_nickname
+  type: character
+  description: 'Team nickname.'
+- name: team_id
+  type: character
+  description: 'Team id.'
+- name: active
+  type: character
+  description: 'Active flag.'
+- name: first_goals
+  type: character
+  description: 'First goals of a game.'
+- name: insurance_goals
+  type: character
+  description: 'Insurance goals.'
+- name: overtime_goals
+  type: character
+  description: 'Overtime goals.'
+- name: unassisted_goals
+  type: character
+  description: 'Unassisted goals.'
+- name: empty_net_goals
+  type: character
+  description: 'Empty-net goals.'
+- name: penalty_minutes_per_game
+  type: character
+  description: 'Penalty minutes per game.'
+- name: division
+  type: character
+  description: 'Team division.'
+- name: ice_time
+  type: character
+  description: 'Total ice time.'
+- name: ice_time_minutes_seconds
+  type: character
+  description: 'Ice time (MM:SS).'
+- name: shots_blocked_by_player
+  type: character
+  description: 'Shots blocked by the player.'

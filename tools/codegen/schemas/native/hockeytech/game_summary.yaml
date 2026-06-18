@@ -1,0 +1,117 @@
+schema: game_summary
+kind: dataframe
+columns:
+- name: event
+  type: character
+  description: 'Event type (goal).'
+- name: x_location
+  type: character
+  description: 'X coordinate of the goal on the rink.'
+- name: y_location
+  type: character
+  description: 'Y coordinate of the goal on the rink.'
+- name: time
+  type: character
+  description: 'Game clock at the goal.'
+- name: team_id
+  type: character
+  description: 'Scoring team id.'
+- name: home
+  type: character
+  description: 'Whether the scoring team is the home team.'
+- name: period_id
+  type: character
+  description: 'Period id.'
+- name: goal_type
+  type: character
+  description: 'Goal-type code.'
+- name: location_set
+  type: character
+  description: 'Whether rink coordinates are set for the goal.'
+- name: power_play
+  type: character
+  description: 'Power-play goal flag.'
+- name: empty_net
+  type: character
+  description: 'Empty-net goal flag.'
+- name: penalty_shot
+  type: character
+  description: 'Penalty-shot goal flag.'
+- name: short_handed
+  type: character
+  description: 'Short-handed goal flag.'
+- name: insurance_goal
+  type: character
+  description: 'Insurance-goal flag.'
+- name: game_winning
+  type: character
+  description: 'Game-winning goal flag.'
+- name: game_tieing
+  type: character
+  description: 'Game-tying goal flag.'
+- name: scorer_goal_num
+  type: character
+  description: "Scorer's running goal count for the season."
+- name: s
+  type: integer
+  description: 'Goal sequence number within the game.'
+- name: goal_scorer_player_id
+  type: character
+  description: 'Goal scorer player id.'
+- name: goal_scorer_jersey_number
+  type: character
+  description: 'Goal scorer jersey number.'
+- name: goal_scorer_team_id
+  type: character
+  description: 'Goal scorer team id.'
+- name: goal_scorer_team_code
+  type: character
+  description: 'Goal scorer team code.'
+- name: goal_scorer_first_name
+  type: character
+  description: 'Goal scorer first name.'
+- name: goal_scorer_last_name
+  type: character
+  description: 'Goal scorer last name.'
+- name: assist1_player_player_id
+  type: character
+  description: 'Primary-assist player id.'
+- name: assist1_player_jersey_number
+  type: character
+  description: 'Primary-assist jersey number.'
+- name: assist1_player_team_id
+  type: character
+  description: 'Primary-assist team id.'
+- name: assist1_player_team_code
+  type: character
+  description: 'Primary-assist team code.'
+- name: assist1_player_first_name
+  type: character
+  description: 'Primary-assist first name.'
+- name: assist1_player_last_name
+  type: character
+  description: 'Primary-assist last name.'
+- name: assist2_player_player_id
+  type: character
+  description: 'Secondary-assist player id.'
+- name: assist2_player_jersey_number
+  type: character
+  description: 'Secondary-assist jersey number.'
+- name: assist2_player_team_id
+  type: character
+  description: 'Secondary-assist team id.'
+- name: assist2_player_team_code
+  type: character
+  description: 'Secondary-assist team code.'
+- name: assist2_player_first_name
+  type: character
+  description: 'Secondary-assist first name.'
+- name: assist2_player_last_name
+  type: character
+  description: 'Secondary-assist last name.'
+- name: plus
+  type: character
+  description: 'On-ice players credited plus on the goal.'
+- name: minus
+  type: character
+  description: 'On-ice players charged minus on the goal.'

@@ -64,6 +64,19 @@ export const FLAT_HOSTS: Record<string, string> = {
   // browser-y Origin/Referer, which the caller supplies via the flat `headers`.
   yahoo_editorial: "https://api-secure.sports.yahoo.com",
   yahoo_shangrila: "https://graphite-secure.sports.yahoo.com",
+  // HockeyTech / LeagueStat — standalone `hockeytech` namespace (sdv.hockeytech.*)
+  // for the PWHL + junior/minor leagues. This is the DEFAULT feed host (4 of 5
+  // leagues); QMJHL is served from cluster.leaguestat.com, which the family's
+  // content-type-aware JSONP getter (src/core/hockeytech_runtime.ts) selects
+  // per-league. Responses are JSONP, so this family registers that getter in
+  // GETTER_OVERRIDES (src/leagues/_make_flat.ts) instead of the shared `get`.
+  hockeytech: "https://lscluster.hockeytech.com",
+  // BartTorvik / T-Rank — standalone `torvik` namespace (sdv.torvik.*) for
+  // men's college basketball analytics. Keyless, but barttorvik.com rejects
+  // default programmatic User-Agents, so the family's getter
+  // (src/core/torvik_runtime.ts) sets a browser UA + returns the raw body text
+  // (the endpoints mix CSV / JSON) — registered in GETTER_OVERRIDES.
+  torvik: "https://barttorvik.com",
 };
 
 const client = axios.create({

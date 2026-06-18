@@ -1,0 +1,93 @@
+schema: team_factors
+kind: dataframe
+columns:
+- name: team_name
+  type: character
+  description: 'Team name.'
+- name: e_fg_percent
+  type: numeric
+  description: 'Effective FG% (offense).'
+- name: rk
+  type: integer
+  description: 'National rank of effective FG% (offense).'
+- name: e_fg_percent_def
+  type: numeric
+  description: 'Effective FG% allowed (defense).'
+- name: rk_1
+  type: integer
+  description: 'National rank of effective FG% allowed (defense).'
+- name: ftr
+  type: numeric
+  description: 'Free-throw rate (offense).'
+- name: rk_2
+  type: integer
+  description: 'National rank of free-throw rate (offense).'
+- name: ftr_def
+  type: numeric
+  description: 'Free-throw rate allowed (defense).'
+- name: rk_3
+  type: integer
+  description: 'National rank of free-throw rate allowed (defense).'
+- name: or_percent
+  type: numeric
+  description: 'Offensive rebound %.'
+- name: rk_4
+  type: integer
+  description: 'National rank of offensive rebound %.'
+- name: dr_percent
+  type: numeric
+  description: 'Defensive rebound %.'
+- name: rk_5
+  type: integer
+  description: 'National rank of defensive rebound %.'
+- name: to_percent
+  type: numeric
+  description: 'Turnover % (offense).'
+- name: rk_6
+  type: integer
+  description: 'National rank of turnover % (offense).'
+- name: to_percent_def
+  type: numeric
+  description: 'Turnover % forced (defense).'
+- name: rk_7
+  type: integer
+  description: 'National rank of turnover % forced (defense).'
+- name: 3_p_percent
+  type: numeric
+  description: 'Three-point % (offense).'
+- name: 3p_d_percent
+  type: numeric
+  description: 'Three-point % allowed (defense).'
+- name: 2p_percent
+  type: numeric
+  description: 'Two-point % (offense).'
+- name: 2p_percent_d
+  type: numeric
+  description: 'Two-point % allowed (defense).'
+- name: ft_percent
+  type: numeric
+  description: 'Free-throw % (offense).'
+- name: ft_percent_d
+  type: numeric
+  description: 'Free-throw % allowed (defense).'
+- name: 3_p_rate
+  type: numeric
+  description: 'Three-point attempt rate (offense).'
+- name: 3_p_rate_d
+  type: numeric
+  description: 'Three-point attempt rate allowed (defense).'
+- name: arate
+  type: numeric
+  description: 'Assist rate (offense).'
+- name: rk_8
+  type: integer
+  description: 'National rank of assist rate (offense).'
+- name: arate_d
+  type: numeric
+  description: 'Assist rate allowed (defense).'
+- name: rk_9
+  type: integer
+  description: 'National rank of assist rate allowed (defense).'
+- name: parsed_extra
+  type: character
+  description: 'Trailing unmapped CSV fields (overflow), if any.'

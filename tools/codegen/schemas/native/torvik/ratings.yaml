@@ -1,0 +1,138 @@
+schema: ratings
+kind: dataframe
+columns:
+- name: rank
+  type: integer
+  description: 'Overall T-Rank (barthag) rank.'
+- name: team
+  type: character
+  description: 'Team name.'
+- name: conf
+  type: character
+  description: 'Conference.'
+- name: record
+  type: character
+  description: 'Overall record.'
+- name: adjoe
+  type: numeric
+  description: 'Adjusted offensive efficiency.'
+- name: oe_rank
+  type: integer
+  description: 'National rank of adjusted offensive efficiency.'
+- name: adjde
+  type: numeric
+  description: 'Adjusted defensive efficiency.'
+- name: de_rank
+  type: integer
+  description: 'National rank of adjusted defensive efficiency.'
+- name: barthag
+  type: numeric
+  description: 'Power rating (win prob vs average).'
+- name: rank_1
+  type: integer
+  description: 'Interspersed secondary rank column.'
+- name: proj_w
+  type: numeric
+  description: 'Projected wins.'
+- name: proj_l
+  type: numeric
+  description: 'Projected losses.'
+- name: pro_con_w
+  type: numeric
+  description: 'Projected conference wins.'
+- name: pro_con_l
+  type: numeric
+  description: 'Projected conference losses.'
+- name: con_rec
+  type: character
+  description: 'Conference record.'
+- name: sos
+  type: numeric
+  description: 'Strength of schedule.'
+- name: ncsos
+  type: numeric
+  description: 'Non-conference strength of schedule.'
+- name: consos
+  type: numeric
+  description: 'Conference strength of schedule.'
+- name: proj_sos
+  type: numeric
+  description: 'Projected strength of schedule.'
+- name: proj_noncon_sos
+  type: numeric
+  description: 'Projected non-conference strength of schedule.'
+- name: proj_con_sos
+  type: numeric
+  description: 'Projected conference strength of schedule.'
+- name: elite_sos
+  type: numeric
+  description: 'Strength of schedule against elite teams.'
+- name: elite_noncon_sos
+  type: numeric
+  description: 'Non-conference strength of schedule against elite teams.'
+- name: opp_oe
+  type: numeric
+  description: 'Average opponent offensive efficiency.'
+- name: opp_de
+  type: numeric
+  description: 'Average opponent defensive efficiency.'
+- name: opp_proj_oe
+  type: numeric
+  description: 'Average projected opponent offensive efficiency.'
+- name: opp_proj_de
+  type: numeric
+  description: 'Average projected opponent defensive efficiency.'
+- name: con_adj_oe
+  type: numeric
+  description: 'Conference-only adjusted offensive efficiency.'
+- name: con_adj_de
+  type: numeric
+  description: 'Conference-only adjusted defensive efficiency.'
+- name: qual_o
+  type: numeric
+  description: 'Quality-adjusted offensive efficiency.'
+- name: qual_d
+  type: numeric
+  description: 'Quality-adjusted defensive efficiency.'
+- name: qual_barthag
+  type: numeric
+  description: 'Quality-adjusted power rating.'
+- name: qual_games
+  type: numeric
+  description: 'Number of quality games played.'
+- name: fun
+  type: numeric
+  description: 'Fun rating (entertainment value).'
+- name: con_pf
+  type: numeric
+  description: 'Conference points scored.'
+- name: con_pa
+  type: numeric
+  description: 'Conference points allowed.'
+- name: con_poss
+  type: numeric
+  description: 'Conference possessions.'
+- name: con_oe
+  type: numeric
+  description: 'Conference offensive efficiency.'
+- name: con_de
+  type: numeric
+  description: 'Conference defensive efficiency.'
+- name: con_sosremain
+  type: numeric
+  description: 'Remaining conference strength of schedule.'
+- name: conf_win_percent
+  type: numeric
+  description: 'Conference win percentage.'
+- name: wab
+  type: numeric
+  description: 'Wins above bubble.'
+- name: wab_rk
+  type: integer
+  description: 'National rank of wins above bubble.'
+- name: fun_rk
+  type: integer
+  description: 'National rank of fun rating.'
+- name: adjt
+  type: numeric
+  description: 'Adjusted tempo.'

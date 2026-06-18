@@ -36,7 +36,7 @@ As of **v3.0.0** the package is a **cross-league ESPN client _plus_ a native
 
 - **116 ESPN endpoint short names** generated for **29 leagues** (31 namespaces),
   exposed as `espn_<league>_<short>` (snake) + `espn<League><Short>` (camelCase).
-- **517 flat-API wrappers across 13 families** — 7 native league APIs + 5 cross-sport
+- **532 flat-API wrappers across 15 families** — 7 native league APIs + 7 cross-sport
   providers (see [Flat-API families](#flat-api-families-native--providers)).
 - A **parser layer** (`src/parsers/`): every wrapper returns raw JSON by default;
   `{ parsed: true }` returns a tidy array of flat, snake_cased row objects.
@@ -147,7 +147,7 @@ ESPN endpoints come from three family YAML files — `espn_site_v2.yaml`,
 ### Flat-API families (native + providers)
 
 Non-ESPN, absolute-host live APIs are generated into a **separate** `FLAT_WRAPPERS`
-table (so the ESPN table stays untouched). **517 flat-API wrappers across 13
+table (so the ESPN table stays untouched). **532 flat-API wrappers across 15
 families**:
 
 **7 native** — merged onto their league namespace:
@@ -162,7 +162,7 @@ families**:
 | `nhl_records` | `sdv.nhl.nhlRecords*` | `records.nhl.com` | keyless |
 | `nfl_api` | `sdv.nfl.nflApi*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
 
-**5 cross-sport providers** — standalone `sdv.<ns>.*` namespaces (NOT leagues), each
+**7 cross-sport providers** — standalone `sdv.<ns>.*` namespaces (NOT leagues), each
 getting its own generated reference page:
 
 | Family | Namespace | Auth |
@@ -172,11 +172,43 @@ getting its own generated reference page:
 | CBS Sports (`cbs_napi`) | `sdv.cbs.*` | keyless |
 | Fox Sports (`fox_bifrost`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
 | Yahoo Sports (`yahoo_editorial` + `yahoo_shangrila`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
+| HockeyTech / LeagueStat (`hockeytech`) | `sdv.hockeytech.*` | keyless; **league-parameterized** (`league` slug) |
+| BartTorvik / T-Rank (`torvik`) | `sdv.torvik.*` | keyless (needs a browser-like UA) |
 
 `FLAT_API_NAMESPACES` in both `src/index.ts` and `generate.mjs` maps each stem to its
 namespace — **keep the two copies in sync**. `standaloneFlatNamespaces()` in
 `generate.mjs` decides which namespaces are providers (not leagues) and renders them
 their own standalone reference page.
+
+**Two newest providers (v3.1.0) — HockeyTech + BartTorvik:**
+
+- **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, 10 endpoints: `seasons`,
+  `schedule`, `teams`, `team_roster`, `player_stats`, `game_shifts`, `standings`,
+  `leaders`, `pbp`, `game_summary`). One feed gateway (`/feed/index.php`) serves
+  every league; the wrapper carries a `league` slug for **PWHL + AHL/OHL/WHL/QMJHL**.
+  Hosts: `lscluster.hockeytech.com` (+ `cluster.leaguestat.com` for QMJHL). The
+  `src/core/hockeytech_runtime.ts` getter (registered as `hockeytechGet` in
+  `GETTER_OVERRIDES`) unwraps the JSONP envelope (`angular.callbacks._N({…})`)
+  before `JSON.parse`, switches the `gc` feed to `tab=` (not `view=`), applies a
+  PWHL play-by-play key override, and injects each league's `client_code` / `key` /
+  `site_id` from a per-league registry (overridable via `SDV_<LEAGUE>_API_KEY`).
+  Ported from `fastRhockey`'s `hockeytech_*.R` + sdv-py's `sportsdataverse/hockeytech/`.
+- **BartTorvik / T-Rank** (`sdv.torvik.*`, 5 endpoints: `ratings`, `team_factors`,
+  `game_stats`, `player_stats`, `game_schedule`) from `barttorvik.com`. The
+  `src/core/torvik_runtime.ts` getter (`torvikGet`) sends a browser-like User-Agent
+  (barttorvik rejects default programmatic UAs) and returns the raw body so each
+  parser branches on format — CSV via papaparse, or `JSON.parse` of the
+  **headerless positional column arrays** (31 / 55 / 67 fields, ported verbatim
+  from `hoopR`'s `torvik_*.R`).
+
+**Getter-runtime override convention.** The flat dispatch (`src/leagues/_make_flat.ts`)
+defaults to the shared **JSON-only** no-auth getter (`src/core/client.ts` `get`). A
+family that needs non-JSON bodies (CSV/HTML), envelope unwrapping (JSONP), per-league
+credential injection, or custom request shaping registers its own getter in
+`GETTER_OVERRIDES` keyed by `api` stem — `hockeytechGet`, `torvikGet`, and the MLB
+Statcast getter (the JS analog of sdv-py's `mlb_statcast_runtime`) all use this hook.
+The getter signature matches `get(url, config) => Promise<...>` so it slots in
+transparently.
 
 ### OpenAPI → endpoint-YAML transform
 

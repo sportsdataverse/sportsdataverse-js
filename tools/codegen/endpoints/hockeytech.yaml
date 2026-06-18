@@ -1,0 +1,134 @@
+# Flat (non-ESPN) API family: HockeyTech / LeagueStat (lscluster.hockeytech.com
+# + cluster.leaguestat.com). Powers the PWHL + the major junior / minor leagues
+# (AHL, OHL, WHL, QMJHL). One feed gateway (`/feed/index.php`) serves every
+# league; the league is selected by a `league` query param (pwhl|ahl|ohl|whl|
+# qmjhl) that the runtime maps to that league's client_code / api_key / site_id
+# / base host. Standalone `hockeytech` namespace (NOT an ESPN league).
+#
+# CRITICAL runtime quirks (all handled in src/core/hockeytech_runtime.ts, which
+# is registered as this family's getter via GETTER_OVERRIDES in
+# src/leagues/_make_flat.ts):
+#   - Responses are JSONP (`angular.callbacks._0({...})`) and MUST be unwrapped
+#     before JSON.parse — axios cannot parse them, so a dedicated getter fetches
+#     raw text, strips the callback wrapper, and JSON-parses.
+#   - The `gc` feed selects its view with `tab=<view>`, every other feed
+#     (modulekit / statviewfeed) uses `view=<view>`.
+#   - The PWHL play-by-play view (`gameCenterPlayByPlay`) authenticates with a
+#     DISTINCT key (694cfeed58c932ee), not the league's default key.
+#   - Each call's key / client_code / site_id / base host are injected by the
+#     runtime from the league registry; the caller only supplies `league` plus
+#     the per-view inputs (game_id / team_id / season_id / player_id).
+#
+# Each endpoint declares its `feed` + `view` as defaulted query params so the
+# getter (which only receives the resolved query) can pick the feed gateway
+# behaviour declaratively. The wrapper `path` is the gateway path
+# `/feed/index.php`; the runtime assembles the host + the full
+# feed/view/key/client_code/site_id query and strips the JSONP envelope. Ported
+# from the canonical sdv-py sportsdataverse/hockeytech/* family (and
+# fastRhockey's hockeytech_*.R).
+api: hockeytech
+host: https://lscluster.hockeytech.com
+name_pattern: hockeytech_{short}
+endpoints:
+  # modulekit feeds ---------------------------------------------------------
+  - short: seasons
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: seasons }
+    parser: parse_hockeytech_seasons
+    returns_schema: native/hockeytech/seasons
+  - short: schedule
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: season_id, query_key: season_id }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: scorebar }
+    parser: parse_hockeytech_schedule
+    returns_schema: native/hockeytech/schedule
+  - short: teams
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: season_id, query_key: season }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: teamsbyseason }
+    parser: parse_hockeytech_teams
+    returns_schema: native/hockeytech/teams
+  - short: team_roster
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: team_id, query_key: team_id }
+      - { name: season_id, query_key: season_id }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: roster }
+    parser: parse_hockeytech_team_roster
+    returns_schema: native/hockeytech/team_roster
+  - short: player_stats
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: player_id, query_key: player_id }
+      - { name: category, query_key: category, default: seasonstats }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: player }
+    parser: parse_hockeytech_player_stats
+    returns_schema: native/hockeytech/player_stats
+  - short: game_shifts
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: game_id, query_key: game_id }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: gameshifts }
+    parser: parse_hockeytech_game_shifts
+    returns_schema: native/hockeytech/game_shifts
+  # statviewfeed feeds ------------------------------------------------------
+  - short: standings
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: season_id, query_key: season }
+      - { name: feed, query_key: feed, default: statviewfeed }
+      - { name: view, query_key: view, default: teams }
+      - { name: group_teams_by, query_key: groupTeamsBy, default: division }
+      - { name: context, query_key: context, default: overall }
+      - { name: special, query_key: special, default: "false" }
+      - { name: sort, query_key: sort, default: points }
+    parser: parse_hockeytech_standings
+    returns_schema: native/hockeytech/standings
+  - short: leaders
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: season_id, query_key: season_id }
+      - { name: team_id, query_key: team_id, default: 0 }
+      - { name: player_types, query_key: playerTypes, default: skaters }
+      - { name: skater_stat_types, query_key: skaterStatTypes, default: "points,goals" }
+      - { name: active_only, query_key: activeOnly, default: 0 }
+      - { name: feed, query_key: feed, default: statviewfeed }
+      - { name: view, query_key: view, default: leadersExtended }
+    parser: parse_hockeytech_leaders
+    returns_schema: native/hockeytech/leaders
+  - short: pbp
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: game_id, query_key: game_id }
+      - { name: feed, query_key: feed, default: statviewfeed }
+      - { name: view, query_key: view, default: gameCenterPlayByPlay }
+    parser: parse_hockeytech_pbp
+    returns_schema: native/hockeytech/pbp
+  # gc feed (selects its view with tab=, not view=) -------------------------
+  - short: game_summary
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: game_id, query_key: game_id }
+      - { name: feed, query_key: feed, default: gc }
+      - { name: view, query_key: view, default: gamesummary }
+    parser: parse_hockeytech_game_summary
+    returns_schema: native/hockeytech/game_summary

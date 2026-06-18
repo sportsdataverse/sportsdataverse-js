@@ -1,0 +1,45 @@
+schema: standings
+kind: dataframe
+columns:
+- name: team_code
+  type: character
+  description: 'Team code.'
+- name: losses
+  type: character
+  description: 'Losses.'
+- name: regulation_wins
+  type: character
+  description: 'Regulation wins.'
+- name: points
+  type: integer
+  description: 'Standings points.'
+- name: goals_for
+  type: character
+  description: 'Goals for.'
+- name: goals_against
+  type: character
+  description: 'Goals against.'
+- name: non_reg_wins
+  type: character
+  description: 'Non-regulation (OT/shootout) wins.'
+- name: non_reg_losses
+  type: character
+  description: 'Non-regulation (OT/shootout) losses.'
+- name: games_remaining
+  type: character
+  description: 'Games remaining on the schedule.'
+- name: percentage
+  type: character
+  description: 'Points percentage.'
+- name: overall_rank
+  type: character
+  description: 'Overall standings rank.'
+- name: games_played
+  type: character
+  description: 'Games played.'
+- name: rank
+  type: integer
+  description: 'Standings rank (within the section).'
+- name: name
+  type: character
+  description: 'Team name.'

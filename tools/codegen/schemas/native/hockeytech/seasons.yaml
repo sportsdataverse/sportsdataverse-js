@@ -1,0 +1,24 @@
+schema: seasons
+kind: dataframe
+columns:
+- name: season_id
+  type: character
+  description: 'HockeyTech season id.'
+- name: season_name
+  type: character
+  description: 'Full season name.'
+- name: shortname
+  type: character
+  description: 'Short season name.'
+- name: career
+  type: character
+  description: 'Career-stats flag.'
+- name: playoff
+  type: character
+  description: 'Playoff-season flag.'
+- name: start_date
+  type: character
+  description: 'Season start date.'
+- name: end_date
+  type: character
+  description: 'Season end date.'

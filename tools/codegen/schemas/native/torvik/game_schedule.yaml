@@ -1,0 +1,168 @@
+schema: game_schedule
+kind: dataframe
+columns:
+- name: muid
+  type: character
+  description: 'Matchup unique id.'
+- name: date
+  type: character
+  description: 'Game date (M/D/YY).'
+- name: conmatch
+  type: character
+  description: 'Conference matchup descriptor.'
+- name: matchup
+  type: character
+  description: 'Ranked-matchup descriptor.'
+- name: prediction
+  type: character
+  description: 'Pre-game prediction (favorite, score, win %).'
+- name: ttq
+  type: numeric
+  description: 'Torvik Thrill Quotient (game excitement).'
+- name: conf
+  type: integer
+  description: 'Conference-game flag.'
+- name: venue
+  type: integer
+  description: 'Venue / neutral-site flag.'
+- name: team1
+  type: character
+  description: 'Team 1.'
+- name: t1oe
+  type: numeric
+  description: 'Team 1 offensive efficiency in the game.'
+- name: t1de
+  type: numeric
+  description: 'Team 1 defensive efficiency in the game.'
+- name: t1py
+  type: numeric
+  description: 'Team 1 pre-game win probability (pythag).'
+- name: t1wp
+  type: integer
+  description: 'Team 1 win flag (1 if won).'
+- name: t1propt
+  type: numeric
+  description: 'Team 1 projected points.'
+- name: team2
+  type: character
+  description: 'Team 2.'
+- name: t2oe
+  type: numeric
+  description: 'Team 2 offensive efficiency in the game.'
+- name: t2de
+  type: numeric
+  description: 'Team 2 defensive efficiency in the game.'
+- name: t2py
+  type: numeric
+  description: 'Team 2 pre-game win probability (pythag).'
+- name: t2wp
+  type: integer
+  description: 'Team 2 win flag (1 if won).'
+- name: t2propt
+  type: numeric
+  description: 'Team 2 projected points.'
+- name: tpro
+  type: numeric
+  description: 'Projected total points.'
+- name: t1qual
+  type: character
+  description: 'Team 1 game-quality descriptor.'
+- name: t2qual
+  type: character
+  description: 'Team 2 game-quality descriptor.'
+- name: gp
+  type: integer
+  description: 'Game-played flag (1 if completed).'
+- name: result
+  type: character
+  description: 'Final result string.'
+- name: tempo
+  type: numeric
+  description: 'Game tempo (possessions).'
+- name: possessions
+  type: numeric
+  description: 'Possessions in the game.'
+- name: t1pts
+  type: integer
+  description: 'Team 1 points.'
+- name: t2pts
+  type: integer
+  description: 'Team 2 points.'
+- name: winner
+  type: character
+  description: 'Winning team.'
+- name: loser
+  type: character
+  description: 'Losing team.'
+- name: t1adjt
+  type: numeric
+  description: 'Team 1 adjusted tempo.'
+- name: t2adjt
+  type: numeric
+  description: 'Team 2 adjusted tempo.'
+- name: t1adjo
+  type: numeric
+  description: 'Team 1 adjusted offensive efficiency.'
+- name: t1adjd
+  type: numeric
+  description: 'Team 1 adjusted defensive efficiency.'
+- name: t2adjo
+  type: numeric
+  description: 'Team 2 adjusted offensive efficiency.'
+- name: t2adjd
+  type: numeric
+  description: 'Team 2 adjusted defensive efficiency.'
+- name: gamevalue
+  type: numeric
+  description: 'Game quality value.'
+- name: mismatch
+  type: numeric
+  description: 'Mismatch rating (predicted lopsidedness).'
+- name: blowout
+  type: numeric
+  description: 'Blowout rating.'
+- name: t1elite
+  type: numeric
+  description: 'Team 1 elite-performance rating.'
+- name: t2elite
+  type: numeric
+  description: 'Team 2 elite-performance rating.'
+- name: ord_date
+  type: integer
+  description: 'Ordinal date (sortable day index).'
+- name: t1ppp
+  type: numeric
+  description: 'Team 1 points per possession.'
+- name: t2ppp
+  type: numeric
+  description: 'Team 2 points per possession.'
+- name: gameppp
+  type: numeric
+  description: 'Combined game points per possession.'
+- name: t1rk
+  type: integer
+  description: 'Team 1 T-Rank at game time.'
+- name: t2rk
+  type: integer
+  description: 'Team 2 T-Rank at game time.'
+- name: t1gs
+  type: numeric
+  description: 'Team 1 single-game quality score.'
+- name: t2gs
+  type: numeric
+  description: 'Team 2 single-game quality score.'
+- name: gamestats
+  type: character
+  description: 'Nested per-game stat array (;-joined).'
+- name: overtimes
+  type: character
+  description: 'Number of overtimes.'
+- name: t1fun
+  type: numeric
+  description: 'Team 1 fun rating.'
+- name: t2fun
+  type: numeric
+  description: 'Team 2 fun rating.'
+- name: results
+  type: character
+  description: 'Post-game results descriptor.'

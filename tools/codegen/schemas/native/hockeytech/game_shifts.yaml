@@ -1,0 +1,24 @@
+schema: game_shifts
+kind: dataframe
+columns:
+- name: side
+  type: character
+  description: 'home or visitor.'
+- name: player_id
+  type: character
+  description: 'HockeyTech player id.'
+- name: shift_number
+  type: character
+  description: 'Sequential shift number for the player.'
+- name: period
+  type: character
+  description: 'Period number.'
+- name: start_time
+  type: character
+  description: 'Shift start time (game clock).'
+- name: end_time
+  type: character
+  description: 'Shift end time (game clock).'
+- name: duration
+  type: character
+  description: 'Shift length (seconds).'

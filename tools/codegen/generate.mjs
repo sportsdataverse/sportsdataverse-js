@@ -42,6 +42,8 @@ const FLAT_API_FILES = [
   "fox_bifrost",
   "yahoo_editorial",
   "yahoo_shangrila",
+  "hockeytech",
+  "torvik",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -65,6 +67,12 @@ const FLAT_API_NAMESPACES = {
   fox_bifrost: "fox",
   yahoo_editorial: "yahoo",
   yahoo_shangrila: "yahoo",
+  // HockeyTech / LeagueStat — standalone provider namespace (`sdv.hockeytech`)
+  // for the PWHL + junior/minor leagues (league chosen by a `league` param).
+  hockeytech: "hockeytech",
+  // BartTorvik T-Rank — standalone provider namespace (`sdv.torvik`) for men's
+  // college basketball ratings / four-factors / game + player stats / schedule.
+  torvik: "torvik",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -110,6 +118,14 @@ const FLAT_API_META = {
     label: "Yahoo Sports (shangrila)",
     source: "Yahoo Sports' shangrila stats-graph API",
   },
+  hockeytech: {
+    label: "HockeyTech / LeagueStat",
+    source: "the HockeyTech / LeagueStat feed (PWHL + junior/minor hockey)",
+  },
+  torvik: {
+    label: "BartTorvik (T-Rank)",
+    source: "barttorvik.com (T-Rank college basketball analytics)",
+  },
 };
 
 // Per-standalone-namespace quick-start snippet shown on the generated
@@ -139,6 +155,14 @@ const STANDALONE_NS_EXAMPLE = {
     "  league: 'ncaaf',\n" +
     "  headers: { Origin: 'https://sports.yahoo.com', Referer: 'https://sports.yahoo.com/' },\n" +
     "});\n",
+  hockeytech:
+    "// HockeyTech serves every league from one gateway — pick the league with\n" +
+    "// the `league` param (pwhl | ahl | ohl | whl | qmjhl). Keys default in:\n" +
+    "await sdv.hockeytech.hockeytech_schedule({ league: 'pwhl', parsed: true });\n",
+  torvik:
+    "// BartTorvik T-Rank is keyless (a browser User-Agent is set for you).\n" +
+    "// `year` is the 4-digit season ending-year:\n" +
+    "await sdv.torvik.torvik_ratings({ year: 2024, parsed: true });\n",
 };
 
 // The set of league prefixes (filled after the leagues doc loads) — any

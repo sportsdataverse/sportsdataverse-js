@@ -1,0 +1,33 @@
+schema: teams
+kind: dataframe
+columns:
+- name: id
+  type: character
+  description: 'HockeyTech team id.'
+- name: name
+  type: character
+  description: 'Team name.'
+- name: city
+  type: character
+  description: 'Team city.'
+- name: code
+  type: character
+  description: 'Team code.'
+- name: nickname
+  type: character
+  description: 'Team nickname.'
+- name: team_caption
+  type: character
+  description: 'Team caption/display label.'
+- name: division_id
+  type: character
+  description: 'Division id.'
+- name: division_long_name
+  type: character
+  description: 'Division name.'
+- name: division_short_name
+  type: character
+  description: 'Short division name.'
+- name: team_logo_url
+  type: character
+  description: 'Team logo URL.'

@@ -12,11 +12,11 @@ client** with a tidy parser layer:
 - **116 ESPN endpoint wrappers** generated for **29 leagues** (31 namespaces) from a
   single YAML source of truth — play-by-play, box scores, schedules, rosters,
   standings, rankings, and more, identical on every league.
-- **517 flat-API wrappers across 13 families** — the **7 native** league APIs (MLB
+- **532 flat-API wrappers across 15 families** — the **7 native** league APIs (MLB
   Stats, Baseball Savant / Statcast, NHL api-web/edge/stats-rest/records, NFL.com
-  Shield) merged onto their league namespace, and **5 cross-sport providers** (The
-  Odds API, 247Sports, CBS Sports, Fox Sports, Yahoo Sports) on their own
-  `sdv.<provider>.*` namespaces.
+  Shield) merged onto their league namespace, and **7 cross-sport providers** (The
+  Odds API, 247Sports, CBS Sports, Fox Sports, Yahoo Sports, HockeyTech/LeagueStat,
+  BartTorvik/T-Rank) on their own `sdv.<provider>.*` namespaces.
 - **A tidy parser layer** — every wrapper returns raw JSON by default; pass
   `{ parsed: true }` to get a tidy array of flat, snake_cased row objects.
 - Plus the original hand-written scrapers the package has always shipped
@@ -165,11 +165,15 @@ hand-edited** — you edit the YAML (or the templates) and regenerate.
   `ncaa`, `football`, `mlb`) so each league gets exactly the endpoints that apply.
 - **Flat-API families** — non-ESPN, absolute-host live APIs. The **7 native** APIs
   (MLB Stats, Statcast, NHL ×4, NFL.com) are merged onto their league namespace; the
-  **5 cross-sport providers** (Odds / 247 / CBS / Fox / Yahoo) get standalone
-  `sdv.<provider>.*` namespaces and their own generated reference page. Auth varies
-  per family — bearer-token mint (NFL.com, automatic), `apiKey` query (Odds), public
-  `apikey`+`api-version` (Fox), caller-supplied `headers`/JWT (247, Yahoo), keyless
-  (CBS).
+  **7 cross-sport providers** (Odds / 247 / CBS / Fox / Yahoo / HockeyTech /
+  BartTorvik) get standalone `sdv.<provider>.*` namespaces and their own generated
+  reference page. `sdv.hockeytech.*` (PWHL + AHL/OHL/WHL/QMJHL) is
+  league-parameterized; `sdv.torvik.*` is men's college-basketball T-Rank
+  analytics. Auth varies per family — bearer-token mint (NFL.com, automatic),
+  `apiKey` query (Odds), public `apikey`+`api-version` (Fox), caller-supplied
+  `headers`/JWT (247, Yahoo), keyless (CBS, HockeyTech, BartTorvik). A family that
+  needs non-JSON bodies or custom request shaping (HockeyTech's JSONP, BartTorvik's
+  browser-UA CSV/JSON) supplies its own getter runtime via `GETTER_OVERRIDES`.
 - **OpenAPI → YAML transform** — `tools/codegen/from-openapi.mjs` turns a canonical
   OpenAPI 3.x spec (the `sdv-swagger` collection) into an endpoint-YAML *skeleton*,
   which made the provider families largely mechanical to add.

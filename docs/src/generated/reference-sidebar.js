@@ -223,6 +223,11 @@ module.exports = [
       },
       {
         "type": "doc",
+        "id": "reference/hockeytech",
+        "label": "hockeytech"
+      },
+      {
+        "type": "doc",
         "id": "reference/odds",
         "label": "odds"
       },
@@ -230,6 +235,11 @@ module.exports = [
         "type": "doc",
         "id": "reference/recruiting",
         "label": "recruiting"
+      },
+      {
+        "type": "doc",
+        "id": "reference/torvik",
+        "label": "torvik"
       },
       {
         "type": "doc",

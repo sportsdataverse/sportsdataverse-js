@@ -1,7 +1,7 @@
 # GitHub Copilot instructions — `sportsdataverse` (Node.js)
 
 A TypeScript, ESM-only Node.js client (Node ≥ 20.18.1) for sports data: a
-cross-league ESPN surface plus native (non-ESPN) live-API families and five
+cross-league ESPN surface plus native (non-ESPN) live-API families and seven
 cross-sport provider families, all with a tidy parser layer.
 
 ## Architecture (how the code is generated)
@@ -35,6 +35,21 @@ cross-sport provider families, all with a tidy parser layer.
   on empty/malformed input; never throw. `{ parsed: true }` is strictly additive
   (omitting it returns the raw payload). When you change `src/parsers/**`, re-run
   `npm run bundle:parsers` (the playground bundle) so its staleness test passes.
+- **Flat-API getter runtimes.** The flat dispatch defaults to the shared JSON-only
+  no-auth getter (`src/core/client.ts`). A family needing non-JSON bodies or custom
+  request shaping registers its own getter in `GETTER_OVERRIDES`
+  (`src/leagues/_make_flat.ts`) keyed by `api` stem:
+  - **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, `src/core/hockeytech_runtime.ts`)
+    — JSONP family; the getter strips the `angular.callbacks._N({…})` wrapper before
+    `JSON.parse`, uses `tab=` (not `view=`) on the `gc` feed, applies a PWHL
+    play-by-play key override, and injects each league's `client_code`/`key`/`site_id`
+    from a per-league registry (PWHL + AHL/OHL/WHL/QMJHL; `SDV_<LEAGUE>_API_KEY`
+    overrides the key). QMJHL uses a second host (`cluster.leaguestat.com`).
+  - **BartTorvik / T-Rank** (`sdv.torvik.*`, `src/core/torvik_runtime.ts`) — sends a
+    browser-like User-Agent (barttorvik rejects default UAs) and returns the raw body
+    so each parser branches on format (CSV via papaparse, or `JSON.parse` of
+    headerless positional column arrays ported from hoopR).
+  Both are **standalone provider namespaces** (`sdv.<ns>.*`, not leagues).
 - **Docs guides + live runner.** Getting-started guides are `.mdx` under
   `docs/docs/guides/`; `<RunCell>` (`docs/src/components/RunCell`) is embeddable
   inline in any guide for a live single-endpoint Run (via the `/api/run` proxy).
