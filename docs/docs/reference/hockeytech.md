@@ -13,7 +13,7 @@ sidebar_position: 36
 - **families:** HockeyTech / LeagueStat
 - **wrappers:** 10 native
 
-`hockeytech` is a cross-sport provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.hockeytech`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
+`hockeytech` is a Hockey provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.hockeytech`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
 
 ```js
 import sdv from 'sportsdataverse';

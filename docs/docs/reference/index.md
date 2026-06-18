@@ -49,17 +49,17 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB St
 
 ## Standalone provider namespaces
 
-Cross-sport providers that aren't tied to a single ESPN league. They get their own `sdv.<namespace>` surface and reference page.
+Native providers that aren't a single ESPN league — each gets its own `sdv.<namespace>` surface and reference page. Cross-sport providers (odds, cbs, …) live under **Providers** in the sidebar; sport-specific ones (`torvik` → Basketball, `hockeytech` → Hockey) nest under their sport.
 
-| Namespace | provider | wrappers |
-|---|---|---:|
-| [odds](./odds) | The Odds API | 10 |
-| [recruiting](./recruiting) | 247Sports | 25 |
-| [cbs](./cbs) | CBS Sports | 82 |
-| [fox](./fox) | Fox Sports | 38 |
-| [yahoo](./yahoo) | Yahoo Sports (scores), Yahoo Sports | 107 |
-| [hockeytech](./hockeytech) | HockeyTech / LeagueStat | 10 |
-| [torvik](./torvik) | BartTorvik (T-Rank) | 5 |
+| Namespace | sport | provider | wrappers |
+|---|---|---|---:|
+| [odds](./odds) | *cross-sport* | The Odds API | 10 |
+| [recruiting](./recruiting) | *cross-sport* | 247Sports | 25 |
+| [cbs](./cbs) | *cross-sport* | CBS Sports | 82 |
+| [fox](./fox) | *cross-sport* | Fox Sports | 38 |
+| [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (scores), Yahoo Sports | 107 |
+| [hockeytech](./hockeytech) | Hockey | HockeyTech / LeagueStat | 10 |
+| [torvik](./torvik) | Basketball | BartTorvik (T-Rank) | 5 |
 
 :::tip Same call, every league
 ```js
