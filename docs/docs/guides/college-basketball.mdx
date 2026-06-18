@@ -117,6 +117,8 @@ Live and inline:
 ### Four factors
 
 ```js
+import sdv from 'sportsdataverse';
+
 const factors = await sdv.torvik.torvik_team_factors({ year: 2024, parsed: true });
 console.table(factors);
 ```
@@ -137,6 +139,8 @@ console.table(factors);
 `torvik_game_schedule` round out the surface.
 
 ```js
+import sdv from 'sportsdataverse';
+
 const games = await sdv.torvik.torvik_game_stats({ year: 2024, parsed: true });
 console.table(games);
 ```

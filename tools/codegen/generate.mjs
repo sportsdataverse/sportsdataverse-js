@@ -957,8 +957,9 @@ function renderReferenceSidebar(leagues, standaloneNs) {
 function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
   // Same classification as the sidebar: sport-specific standalone namespaces
   // (torvik, hockeytech) fold into their sport; only cross-sport providers list
-  // separately. `flatCount` per sport entry = how many of its prefixes are
-  // sport-specific providers (so the homepage can label them distinctly).
+  // separately. Each sport entry also carries a `providers` array — the subset
+  // of its prefixes that are sport-specific providers — so the homepage can
+  // mark those chips distinctly from ESPN leagues.
   const { bySport, crossSportNs, sports: sportOrder } = groupBySportWithFlat(
     leagues,
     standaloneNs

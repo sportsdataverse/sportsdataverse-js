@@ -165,6 +165,8 @@ Live and inline — swap `league` for `ahl` / `ohl` / `whl`:
 ### PWHL standings
 
 ```js
+import sdv from 'sportsdataverse';
+
 const standings = await sdv.hockeytech.hockeytech_standings({ league: 'pwhl', parsed: true });
 console.table(standings);
 ```
@@ -187,6 +189,8 @@ console.table(standings);
 `game_shifts`, `game_summary`, and `seasons`.
 
 ```js
+import sdv from 'sportsdataverse';
+
 const leaders = await sdv.hockeytech.hockeytech_leaders({ league: 'pwhl', parsed: true });
 console.table(leaders);
 ```
