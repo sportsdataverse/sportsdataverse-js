@@ -85,7 +85,74 @@ console.table(games);
 
 [Open in playground ▶](/playground?l=wbb&e=espn%3Ascoreboard&parsed=1)
 
+## BartTorvik (T-Rank) — advanced analytics
+
+Beyond ESPN, [BartTorvik](https://barttorvik.com) (T-Rank) is a public men's
+college-basketball analytics source on its own `sdv.torvik` namespace (it nests
+under **Basketball** in the sidebar). It's **keyless** — a browser User-Agent is
+set for you — and every endpoint takes a `year`, the 4-digit season **ending**
+year (`2024` = the 2023–24 season).
+
+### Team ratings (T-Rank)
+
+```js
+import sdv from 'sportsdataverse';
+
+const ratings = await sdv.torvik.torvik_ratings({ year: 2024, parsed: true });
+console.table(ratings);
+```
+
+Live and inline:
+
+<RunCell
+  league="torvik"
+  endpoint="flat:torvik:ratings"
+  params={{ year: 2024 }}
+  parsed
+  title="BartTorvik T-Rank team ratings — live"
+/>
+
+[Open in playground ▶](/playground?l=torvik&e=flat%3Atorvik%3Aratings&parsed=1&year=2024)
+
+### Four factors
+
+```js
+const factors = await sdv.torvik.torvik_team_factors({ year: 2024, parsed: true });
+console.table(factors);
+```
+
+<RunCell
+  league="torvik"
+  endpoint="flat:torvik:team_factors"
+  params={{ year: 2024 }}
+  parsed
+  title="BartTorvik four factors — live"
+/>
+
+[Open in playground ▶](/playground?l=torvik&e=flat%3Atorvik%3Ateam_factors&parsed=1&year=2024)
+
+### Game-by-game results
+
+`torvik_game_stats` returns one row per game; `torvik_player_stats` and
+`torvik_game_schedule` round out the surface.
+
+```js
+const games = await sdv.torvik.torvik_game_stats({ year: 2024, parsed: true });
+console.table(games);
+```
+
+<RunCell
+  league="torvik"
+  endpoint="flat:torvik:game_stats"
+  params={{ year: 2024 }}
+  parsed
+  title="BartTorvik game stats — live"
+/>
+
+[Open in playground ▶](/playground?l=torvik&e=flat%3Atorvik%3Agame_stats&parsed=1&year=2024)
+
 :::tip
-Full method + parameter tables: **[MBB reference](/docs/reference/mbb)** and
-**[WBB reference](/docs/reference/wbb)**.
+Full method + column tables: **[MBB reference](/docs/reference/mbb)**,
+**[WBB reference](/docs/reference/wbb)**, and
+**[BartTorvik reference](/docs/reference/torvik)**.
 :::
