@@ -13,6 +13,13 @@ import styles from './styles.module.css';
 // edit here.
 import coverage from '@site/src/generated/coverage.json';
 
+// Basketball leagues are documented as WRITTEN source (phased proof): their
+// reference lives in a per-league dir (`/docs/<prefix>/`) instead of the flat
+// `/docs/reference/<prefix>` page every other league uses.
+const WRITTEN_ESPN_PREFIXES = new Set(['nba', 'wnba', 'mbb', 'wbb']);
+const leagueDocPath = (p) =>
+  WRITTEN_ESPN_PREFIXES.has(p) ? `/docs/${p}/` : `/docs/reference/${p}`;
+
 const FeatureList = [
   {
     title: "Men's College Basketball",
@@ -164,7 +171,7 @@ function CoverageSection() {
                     <Link
                       key={p}
                       className={clsx(styles.chip, isProvider && styles.chipProvider)}
-                      to={`/docs/reference/${p}`}
+                      to={leagueDocPath(p)}
                       title={
                         isProvider
                           ? `${PROVIDER_LABEL[p] || p} — native provider (not an ESPN league)`
