@@ -8,7 +8,7 @@
 // runtime-factory path. The non-basketball leagues still use the factory.
 
 import { callWrapper } from "../../core/espn.js";
-import type { LeagueConfig, WrapperFn } from "../../core/types.js";
+import type { LeagueConfig, WrapperDef, WrapperFn } from "../../core/types.js";
 
 /** Module-private league binding for `mbb` (not exported). */
 const CFG: LeagueConfig = {
@@ -21,6 +21,18 @@ const CFG: LeagueConfig = {
   ]
 };
 
+const ATHLETE_AWARDS_DEF: WrapperDef = {
+  "short": "athlete_awards",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -32,21 +44,22 @@ const CFG: LeagueConfig = {
  * @example await sdv.mbb.espnMbbAthleteAwards({ athlete_id: '…' });
  */
 export const espnMbbAthleteAwards: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_awards",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteAwards} (py/R parity). */
 export const espn_mbb_athlete_awards = espnMbbAthleteAwards;
 
+const ATHLETE_BIO_DEF: WrapperDef = {
+  "short": "athlete_bio",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete bio (ESPN site.api.espn.com).
  *
@@ -58,21 +71,26 @@ export const espn_mbb_athlete_awards = espnMbbAthleteAwards;
  * @example await sdv.mbb.espnMbbAthleteBio({ athlete_id: '…' });
  */
 export const espnMbbAthleteBio: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_bio",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_BIO_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteBio} (py/R parity). */
 export const espn_mbb_athlete_bio = espnMbbAthleteBio;
 
+const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
+  "short": "athlete_career_stats",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    },
+    {
+      "name": "stat_type",
+      "required": false
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -85,25 +103,22 @@ export const espn_mbb_athlete_bio = espnMbbAthleteBio;
  * @example await sdv.mbb.espnMbbAthleteCareerStats({ athlete_id: '…' });
  */
 export const espnMbbAthleteCareerStats: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_career_stats",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        },
-        {
-          "name": "stat_type",
-          "required": false
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteCareerStats} (py/R parity). */
 export const espn_mbb_athlete_career_stats = espnMbbAthleteCareerStats;
 
+const ATHLETE_CONTRACTS_DEF: WrapperDef = {
+  "short": "athlete_contracts",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -115,21 +130,22 @@ export const espn_mbb_athlete_career_stats = espnMbbAthleteCareerStats;
  * @example await sdv.mbb.espnMbbAthleteContracts({ athlete_id: '…' });
  */
 export const espnMbbAthleteContracts: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_contracts",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteContracts} (py/R parity). */
 export const espn_mbb_athlete_contracts = espnMbbAthleteContracts;
 
+const ATHLETE_CORE_DEF: WrapperDef = {
+  "short": "athlete_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -141,21 +157,22 @@ export const espn_mbb_athlete_contracts = espnMbbAthleteContracts;
  * @example await sdv.mbb.espnMbbAthleteCore({ athlete_id: '…' });
  */
 export const espnMbbAthleteCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteCore} (py/R parity). */
 export const espn_mbb_athlete_core = espnMbbAthleteCore;
 
+const ATHLETE_EVENTLOG_DEF: WrapperDef = {
+  "short": "athlete_eventlog",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -167,21 +184,27 @@ export const espn_mbb_athlete_core = espnMbbAthleteCore;
  * @example await sdv.mbb.espnMbbAthleteEventlog({ athlete_id: '…' });
  */
 export const espnMbbAthleteEventlog: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_eventlog",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteEventlog} (py/R parity). */
 export const espn_mbb_athlete_eventlog = espnMbbAthleteEventlog;
 
+const ATHLETE_GAMELOG_DEF: WrapperDef = {
+  "short": "athlete_gamelog",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * MBB — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
  *
@@ -194,26 +217,22 @@ export const espn_mbb_athlete_eventlog = espnMbbAthleteEventlog;
  * @example await sdv.mbb.espnMbbAthleteGamelog({ athlete_id: '…' });
  */
 export const espnMbbAthleteGamelog: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_gamelog",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteGamelog} (py/R parity). */
 export const espn_mbb_athlete_gamelog = espnMbbAthleteGamelog;
 
+const ATHLETE_INFO_DEF: WrapperDef = {
+  "short": "athlete_info",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete info (ESPN site.api.espn.com).
  *
@@ -225,21 +244,22 @@ export const espn_mbb_athlete_gamelog = espnMbbAthleteGamelog;
  * @example await sdv.mbb.espnMbbAthleteInfo({ athlete_id: '…' });
  */
 export const espnMbbAthleteInfo: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_info",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteInfo} (py/R parity). */
 export const espn_mbb_athlete_info = espnMbbAthleteInfo;
 
+const ATHLETE_INJURIES_DEF: WrapperDef = {
+  "short": "athlete_injuries",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -251,21 +271,22 @@ export const espn_mbb_athlete_info = espnMbbAthleteInfo;
  * @example await sdv.mbb.espnMbbAthleteInjuries({ athlete_id: '…' });
  */
 export const espnMbbAthleteInjuries: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_injuries",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteInjuries} (py/R parity). */
 export const espn_mbb_athlete_injuries = espnMbbAthleteInjuries;
 
+const ATHLETE_NEWS_DEF: WrapperDef = {
+  "short": "athlete_news",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/news",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete news (ESPN site.api.espn.com).
  *
@@ -277,21 +298,22 @@ export const espn_mbb_athlete_injuries = espnMbbAthleteInjuries;
  * @example await sdv.mbb.espnMbbAthleteNews({ athlete_id: '…' });
  */
 export const espnMbbAthleteNews: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_news",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/news",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteNews} (py/R parity). */
 export const espn_mbb_athlete_news = espnMbbAthleteNews;
 
+const ATHLETE_NOTES_DEF: WrapperDef = {
+  "short": "athlete_notes",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -303,21 +325,22 @@ export const espn_mbb_athlete_news = espnMbbAthleteNews;
  * @example await sdv.mbb.espnMbbAthleteNotes({ athlete_id: '…' });
  */
 export const espnMbbAthleteNotes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_notes",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteNotes} (py/R parity). */
 export const espn_mbb_athlete_notes = espnMbbAthleteNotes;
 
+const ATHLETE_OVERVIEW_DEF: WrapperDef = {
+  "short": "athlete_overview",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete overview (ESPN site.web.api.espn.com (web v3)).
  *
@@ -329,21 +352,22 @@ export const espn_mbb_athlete_notes = espnMbbAthleteNotes;
  * @example await sdv.mbb.espnMbbAthleteOverview({ athlete_id: '…' });
  */
 export const espnMbbAthleteOverview: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_overview",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteOverview} (py/R parity). */
 export const espn_mbb_athlete_overview = espnMbbAthleteOverview;
 
+const ATHLETE_RECORDS_DEF: WrapperDef = {
+  "short": "athlete_records",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete records (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -355,21 +379,22 @@ export const espn_mbb_athlete_overview = espnMbbAthleteOverview;
  * @example await sdv.mbb.espnMbbAthleteRecords({ athlete_id: '…' });
  */
 export const espnMbbAthleteRecords: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_records",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteRecords} (py/R parity). */
 export const espn_mbb_athlete_records = espnMbbAthleteRecords;
 
+const ATHLETE_SEASONS_DEF: WrapperDef = {
+  "short": "athlete_seasons",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -381,21 +406,27 @@ export const espn_mbb_athlete_records = espnMbbAthleteRecords;
  * @example await sdv.mbb.espnMbbAthleteSeasons({ athlete_id: '…' });
  */
 export const espnMbbAthleteSeasons: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_seasons",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteSeasons} (py/R parity). */
 export const espn_mbb_athlete_seasons = espnMbbAthleteSeasons;
 
+const ATHLETE_SPLITS_DEF: WrapperDef = {
+  "short": "athlete_splits",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * MBB — athlete splits (ESPN site.web.api.espn.com (web v3)).
  *
@@ -408,26 +439,22 @@ export const espn_mbb_athlete_seasons = espnMbbAthleteSeasons;
  * @example await sdv.mbb.espnMbbAthleteSplits({ athlete_id: '…' });
  */
 export const espnMbbAthleteSplits: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_splits",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteSplits} (py/R parity). */
 export const espn_mbb_athlete_splits = espnMbbAthleteSplits;
 
+const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
+  "short": "athlete_statisticslog",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -439,21 +466,27 @@ export const espn_mbb_athlete_splits = espnMbbAthleteSplits;
  * @example await sdv.mbb.espnMbbAthleteStatisticslog({ athlete_id: '…' });
  */
 export const espnMbbAthleteStatisticslog: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_statisticslog",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteStatisticslog} (py/R parity). */
 export const espn_mbb_athlete_statisticslog = espnMbbAthleteStatisticslog;
 
+const ATHLETE_STATS_DEF: WrapperDef = {
+  "short": "athlete_stats",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * MBB — athlete stats (ESPN site.web.api.espn.com (web v3)).
  *
@@ -466,26 +499,25 @@ export const espn_mbb_athlete_statisticslog = espnMbbAthleteStatisticslog;
  * @example await sdv.mbb.espnMbbAthleteStats({ athlete_id: '…' });
  */
 export const espnMbbAthleteStats: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_stats",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETE_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteStats} (py/R parity). */
 export const espn_mbb_athlete_stats = espnMbbAthleteStats;
 
+const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
+  "short": "athlete_vs_athlete",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    },
+    {
+      "name": "opp_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -498,24 +530,34 @@ export const espn_mbb_athlete_stats = espnMbbAthleteStats;
  * @example await sdv.mbb.espnMbbAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
  */
 export const espnMbbAthleteVsAthlete: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_vs_athlete",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        },
-        {
-          "name": "opp_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthleteVsAthlete} (py/R parity). */
 export const espn_mbb_athlete_vs_athlete = espnMbbAthleteVsAthlete;
 
+const ATHLETES_INDEX_DEF: WrapperDef = {
+  "short": "athletes_index",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "active",
+      "queryKey": "active",
+      "default": true
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 100
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    }
+  ]
+};
 /**
  * MBB — athletes index (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -529,33 +571,22 @@ export const espn_mbb_athlete_vs_athlete = espnMbbAthleteVsAthlete;
  * @example await sdv.mbb.espnMbbAthletesIndex({});
  */
 export const espnMbbAthletesIndex: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athletes_index",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "active",
-          "queryKey": "active",
-          "default": true
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 100
-        },
-        {
-          "name": "page",
-          "queryKey": "page",
-          "default": 1
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETES_INDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAthletesIndex} (py/R parity). */
 export const espn_mbb_athletes_index = espnMbbAthletesIndex;
 
+const AWARD_DEF: WrapperDef = {
+  "short": "award",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/awards/{award_id}",
+  "pathParams": [
+    {
+      "name": "award_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — award (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -567,21 +598,18 @@ export const espn_mbb_athletes_index = espnMbbAthletesIndex;
  * @example await sdv.mbb.espnMbbAward({ award_id: '…' });
  */
 export const espnMbbAward: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "award",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/awards/{award_id}",
-      "pathParams": [
-        {
-          "name": "award_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(AWARD_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAward} (py/R parity). */
 export const espn_mbb_award = espnMbbAward;
 
+const AWARDS_DEF: WrapperDef = {
+  "short": "awards",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/awards",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — awards (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -592,17 +620,18 @@ export const espn_mbb_award = espnMbbAward;
  * @example await sdv.mbb.espnMbbAwards({});
  */
 export const espnMbbAwards: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "awards",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/awards",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbAwards} (py/R parity). */
 export const espn_mbb_awards = espnMbbAwards;
 
+const CALENDAR_DEF: WrapperDef = {
+  "short": "calendar",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/calendar",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — calendar (ESPN site.api.espn.com).
  *
@@ -613,17 +642,22 @@ export const espn_mbb_awards = espnMbbAwards;
  * @example await sdv.mbb.espnMbbCalendar({});
  */
 export const espnMbbCalendar: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "calendar",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/calendar",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(CALENDAR_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbCalendar} (py/R parity). */
 export const espn_mbb_calendar = espnMbbCalendar;
 
+const COACH_DEF: WrapperDef = {
+  "short": "coach",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/coaches/{coach_id}",
+  "pathParams": [
+    {
+      "name": "coach_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — coach (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -635,21 +669,27 @@ export const espn_mbb_calendar = espnMbbCalendar;
  * @example await sdv.mbb.espnMbbCoach({ coach_id: '…' });
  */
 export const espnMbbCoach: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "coach",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/coaches/{coach_id}",
-      "pathParams": [
-        {
-          "name": "coach_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(COACH_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbCoach} (py/R parity). */
 export const espn_mbb_coach = espnMbbCoach;
 
+const COACH_RECORD_DEF: WrapperDef = {
+  "short": "coach_record",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/coaches/{coach_id}/record/{record_type}",
+  "pathParams": [
+    {
+      "name": "coach_id"
+    },
+    {
+      "name": "record_type",
+      "required": false,
+      "default": 0
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — coach record (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -662,26 +702,25 @@ export const espn_mbb_coach = espnMbbCoach;
  * @example await sdv.mbb.espnMbbCoachRecord({ coach_id: '…' });
  */
 export const espnMbbCoachRecord: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "coach_record",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/coaches/{coach_id}/record/{record_type}",
-      "pathParams": [
-        {
-          "name": "coach_id"
-        },
-        {
-          "name": "record_type",
-          "required": false,
-          "default": 0
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(COACH_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbCoachRecord} (py/R parity). */
 export const espn_mbb_coach_record = espnMbbCoachRecord;
 
+const COACH_SEASON_DEF: WrapperDef = {
+  "short": "coach_season",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/coaches/{coach_id}/seasons/{season}",
+  "pathParams": [
+    {
+      "name": "coach_id"
+    },
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — coach season (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -694,24 +733,18 @@ export const espn_mbb_coach_record = espnMbbCoachRecord;
  * @example await sdv.mbb.espnMbbCoachSeason({ coach_id: '…', season: '…' });
  */
 export const espnMbbCoachSeason: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "coach_season",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/coaches/{coach_id}/seasons/{season}",
-      "pathParams": [
-        {
-          "name": "coach_id"
-        },
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(COACH_SEASON_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbCoachSeason} (py/R parity). */
 export const espn_mbb_coach_season = espnMbbCoachSeason;
 
+const CONFERENCES_DEF: WrapperDef = {
+  "short": "conferences",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/groups",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — conferences (ESPN site.api.espn.com).
  *
@@ -722,17 +755,18 @@ export const espn_mbb_coach_season = espnMbbCoachSeason;
  * @example await sdv.mbb.espnMbbConferences({});
  */
 export const espnMbbConferences: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "conferences",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/groups",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(CONFERENCES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbConferences} (py/R parity). */
 export const espn_mbb_conferences = espnMbbConferences;
 
+const DRAFT_DEF: WrapperDef = {
+  "short": "draft",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/draft",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — draft (ESPN site.api.espn.com).
  *
@@ -743,17 +777,22 @@ export const espn_mbb_conferences = espnMbbConferences;
  * @example await sdv.mbb.espnMbbDraft({});
  */
 export const espnMbbDraft: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "draft",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/draft",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbDraft} (py/R parity). */
 export const espn_mbb_draft = espnMbbDraft;
 
+const EVENT_DEF: WrapperDef = {
+  "short": "event",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -765,21 +804,27 @@ export const espn_mbb_draft = espnMbbDraft;
  * @example await sdv.mbb.espnMbbEvent({ event_id: '…' });
  */
 export const espnMbbEvent: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEvent} (py/R parity). */
 export const espn_mbb_event = espnMbbEvent;
 
+const EVENT_BROADCASTS_DEF: WrapperDef = {
+  "short": "event_broadcasts",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -792,26 +837,27 @@ export const espn_mbb_event = espnMbbEvent;
  * @example await sdv.mbb.espnMbbEventBroadcasts({ event_id: '…' });
  */
 export const espnMbbEventBroadcasts: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_broadcasts",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventBroadcasts} (py/R parity). */
 export const espn_mbb_event_broadcasts = espnMbbEventBroadcasts;
 
+const EVENT_COMPETITION_DEF: WrapperDef = {
+  "short": "event_competition",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competition (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -824,26 +870,30 @@ export const espn_mbb_event_broadcasts = espnMbbEventBroadcasts;
  * @example await sdv.mbb.espnMbbEventCompetition({ event_id: '…' });
  */
 export const espnMbbEventCompetition: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competition",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITION_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetition} (py/R parity). */
 export const espn_mbb_event_competition = espnMbbEventCompetition;
 
+const EVENT_COMPETITOR_DEF: WrapperDef = {
+  "short": "event_competitor",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitor (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -857,29 +907,30 @@ export const espn_mbb_event_competition = espnMbbEventCompetition;
  * @example await sdv.mbb.espnMbbEventCompetitor({ event_id: '…', team_id: '…' });
  */
 export const espnMbbEventCompetitor: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitor} (py/R parity). */
 export const espn_mbb_event_competitor = espnMbbEventCompetitor;
 
+const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
+  "short": "event_competitor_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -893,29 +944,30 @@ export const espn_mbb_event_competitor = espnMbbEventCompetitor;
  * @example await sdv.mbb.espnMbbEventCompetitorLeaders({ event_id: '…', team_id: '…' });
  */
 export const espnMbbEventCompetitorLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitorLeaders} (py/R parity). */
 export const espn_mbb_event_competitor_leaders = espnMbbEventCompetitorLeaders;
 
+const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
+  "short": "event_competitor_linescores",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -929,29 +981,30 @@ export const espn_mbb_event_competitor_leaders = espnMbbEventCompetitorLeaders;
  * @example await sdv.mbb.espnMbbEventCompetitorLinescores({ event_id: '…', team_id: '…' });
  */
 export const espnMbbEventCompetitorLinescores: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_linescores",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitorLinescores} (py/R parity). */
 export const espn_mbb_event_competitor_linescores = espnMbbEventCompetitorLinescores;
 
+const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
+  "short": "event_competitor_record",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -965,29 +1018,30 @@ export const espn_mbb_event_competitor_linescores = espnMbbEventCompetitorLinesc
  * @example await sdv.mbb.espnMbbEventCompetitorRecord({ event_id: '…', team_id: '…' });
  */
 export const espnMbbEventCompetitorRecord: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_record",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitorRecord} (py/R parity). */
 export const espn_mbb_event_competitor_record = espnMbbEventCompetitorRecord;
 
+const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
+  "short": "event_competitor_roster",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1001,29 +1055,30 @@ export const espn_mbb_event_competitor_record = espnMbbEventCompetitorRecord;
  * @example await sdv.mbb.espnMbbEventCompetitorRoster({ event_id: '…', team_id: '…' });
  */
 export const espnMbbEventCompetitorRoster: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_roster",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitorRoster} (py/R parity). */
 export const espn_mbb_event_competitor_roster = espnMbbEventCompetitorRoster;
 
+const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
+  "short": "event_competitor_statistics",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1037,29 +1092,27 @@ export const espn_mbb_event_competitor_roster = espnMbbEventCompetitorRoster;
  * @example await sdv.mbb.espnMbbEventCompetitorStatistics({ event_id: '…', team_id: '…' });
  */
 export const espnMbbEventCompetitorStatistics: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_statistics",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitorStatistics} (py/R parity). */
 export const espn_mbb_event_competitor_statistics = espnMbbEventCompetitorStatistics;
 
+const EVENT_COMPETITORS_DEF: WrapperDef = {
+  "short": "event_competitors",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event competitors (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1072,26 +1125,27 @@ export const espn_mbb_event_competitor_statistics = espnMbbEventCompetitorStatis
  * @example await sdv.mbb.espnMbbEventCompetitors({ event_id: '…' });
  */
 export const espnMbbEventCompetitors: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitors",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventCompetitors} (py/R parity). */
 export const espn_mbb_event_competitors = espnMbbEventCompetitors;
 
+const EVENT_LEADERS_DEF: WrapperDef = {
+  "short": "event_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1104,26 +1158,27 @@ export const espn_mbb_event_competitors = espnMbbEventCompetitors;
  * @example await sdv.mbb.espnMbbEventLeaders({ event_id: '…' });
  */
 export const espnMbbEventLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventLeaders} (py/R parity). */
 export const espn_mbb_event_leaders = espnMbbEventLeaders;
 
+const EVENT_ODDS_DEF: WrapperDef = {
+  "short": "event_odds",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event odds (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1136,26 +1191,30 @@ export const espn_mbb_event_leaders = espnMbbEventLeaders;
  * @example await sdv.mbb.espnMbbEventOdds({ event_id: '…' });
  */
 export const espnMbbEventOdds: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_odds",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_ODDS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventOdds} (py/R parity). */
 export const espn_mbb_event_odds = espnMbbEventOdds;
 
+const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
+  "short": "event_official_detail",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "official_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event official detail (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1169,29 +1228,27 @@ export const espn_mbb_event_odds = espnMbbEventOdds;
  * @example await sdv.mbb.espnMbbEventOfficialDetail({ event_id: '…', official_id: '…' });
  */
 export const espnMbbEventOfficialDetail: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_official_detail",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "official_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventOfficialDetail} (py/R parity). */
 export const espn_mbb_event_official_detail = espnMbbEventOfficialDetail;
 
+const EVENT_OFFICIALS_DEF: WrapperDef = {
+  "short": "event_officials",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event officials (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1204,26 +1261,30 @@ export const espn_mbb_event_official_detail = espnMbbEventOfficialDetail;
  * @example await sdv.mbb.espnMbbEventOfficials({ event_id: '…' });
  */
 export const espnMbbEventOfficials: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_officials",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventOfficials} (py/R parity). */
 export const espn_mbb_event_officials = espnMbbEventOfficials;
 
+const EVENT_PLAY_DEF: WrapperDef = {
+  "short": "event_play",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "play_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event play (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1237,29 +1298,30 @@ export const espn_mbb_event_officials = espnMbbEventOfficials;
  * @example await sdv.mbb.espnMbbEventPlay({ event_id: '…', play_id: '…' });
  */
 export const espnMbbEventPlay: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_play",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "play_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PLAY_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventPlay} (py/R parity). */
 export const espn_mbb_event_play = espnMbbEventPlay;
 
+const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
+  "short": "event_play_personnel",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "play_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1273,29 +1335,33 @@ export const espn_mbb_event_play = espnMbbEventPlay;
  * @example await sdv.mbb.espnMbbEventPlayPersonnel({ event_id: '…', play_id: '…' });
  */
 export const espnMbbEventPlayPersonnel: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_play_personnel",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "play_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventPlayPersonnel} (py/R parity). */
 export const espn_mbb_event_play_personnel = espnMbbEventPlayPersonnel;
 
+const EVENT_PLAYS_DEF: WrapperDef = {
+  "short": "event_plays",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 1000
+    }
+  ]
+};
 /**
  * MBB — event plays (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1309,32 +1375,27 @@ export const espn_mbb_event_play_personnel = espnMbbEventPlayPersonnel;
  * @example await sdv.mbb.espnMbbEventPlays({ event_id: '…' });
  */
 export const espnMbbEventPlays: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_plays",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 1000
-        }
-      ]
-    }, CFG, params);
+  callWrapper(EVENT_PLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventPlays} (py/R parity). */
 export const espn_mbb_event_plays = espnMbbEventPlays;
 
+const EVENT_POWERINDEX_DEF: WrapperDef = {
+  "short": "event_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1347,26 +1408,27 @@ export const espn_mbb_event_plays = espnMbbEventPlays;
  * @example await sdv.mbb.espnMbbEventPowerindex({ event_id: '…' });
  */
 export const espnMbbEventPowerindex: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_powerindex",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventPowerindex} (py/R parity). */
 export const espn_mbb_event_powerindex = espnMbbEventPowerindex;
 
+const EVENT_PREDICTOR_DEF: WrapperDef = {
+  "short": "event_predictor",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event predictor (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1379,26 +1441,33 @@ export const espn_mbb_event_powerindex = espnMbbEventPowerindex;
  * @example await sdv.mbb.espnMbbEventPredictor({ event_id: '…' });
  */
 export const espnMbbEventPredictor: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_predictor",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventPredictor} (py/R parity). */
 export const espn_mbb_event_predictor = espnMbbEventPredictor;
 
+const EVENT_PROBABILITIES_DEF: WrapperDef = {
+  "short": "event_probabilities",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 300
+    }
+  ]
+};
 /**
  * MBB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1412,32 +1481,27 @@ export const espn_mbb_event_predictor = espnMbbEventPredictor;
  * @example await sdv.mbb.espnMbbEventProbabilities({ event_id: '…' });
  */
 export const espnMbbEventProbabilities: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_probabilities",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 300
-        }
-      ]
-    }, CFG, params);
+  callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventProbabilities} (py/R parity). */
 export const espn_mbb_event_probabilities = espnMbbEventProbabilities;
 
+const EVENT_PROPBETS_DEF: WrapperDef = {
+  "short": "event_propbets",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event propbets (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1450,26 +1514,27 @@ export const espn_mbb_event_probabilities = espnMbbEventProbabilities;
  * @example await sdv.mbb.espnMbbEventPropbets({ event_id: '…' });
  */
 export const espnMbbEventPropbets: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_propbets",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PROPBETS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventPropbets} (py/R parity). */
 export const espn_mbb_event_propbets = espnMbbEventPropbets;
 
+const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
+  "short": "event_scoringplays",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1482,26 +1547,27 @@ export const espn_mbb_event_propbets = espnMbbEventPropbets;
  * @example await sdv.mbb.espnMbbEventScoringplays({ event_id: '…' });
  */
 export const espnMbbEventScoringplays: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_scoringplays",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventScoringplays} (py/R parity). */
 export const espn_mbb_event_scoringplays = espnMbbEventScoringplays;
 
+const EVENT_SITUATION_DEF: WrapperDef = {
+  "short": "event_situation",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event situation (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1514,26 +1580,27 @@ export const espn_mbb_event_scoringplays = espnMbbEventScoringplays;
  * @example await sdv.mbb.espnMbbEventSituation({ event_id: '…' });
  */
 export const espnMbbEventSituation: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_situation",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_SITUATION_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventSituation} (py/R parity). */
 export const espn_mbb_event_situation = espnMbbEventSituation;
 
+const EVENT_STATUS_DEF: WrapperDef = {
+  "short": "event_status",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — event status (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1546,26 +1613,28 @@ export const espn_mbb_event_situation = espnMbbEventSituation;
  * @example await sdv.mbb.espnMbbEventStatus({ event_id: '…' });
  */
 export const espnMbbEventStatus: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_status",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_STATUS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEventStatus} (py/R parity). */
 export const espn_mbb_event_status = espnMbbEventStatus;
 
+const EVENTS_DEF: WrapperDef = {
+  "short": "events",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "dates",
+      "queryKey": "dates"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * MBB — events (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1578,27 +1647,22 @@ export const espn_mbb_event_status = espnMbbEventStatus;
  * @example await sdv.mbb.espnMbbEvents({});
  */
 export const espnMbbEvents: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "events",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "dates",
-          "queryKey": "dates"
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbEvents} (py/R parity). */
 export const espn_mbb_events = espnMbbEvents;
 
+const FRANCHISE_DEF: WrapperDef = {
+  "short": "franchise",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/franchises/{franchise_id}",
+  "pathParams": [
+    {
+      "name": "franchise_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — franchise (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1610,21 +1674,24 @@ export const espn_mbb_events = espnMbbEvents;
  * @example await sdv.mbb.espnMbbFranchise({ franchise_id: '…' });
  */
 export const espnMbbFranchise: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "franchise",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/franchises/{franchise_id}",
-      "pathParams": [
-        {
-          "name": "franchise_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(FRANCHISE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbFranchise} (py/R parity). */
 export const espn_mbb_franchise = espnMbbFranchise;
 
+const FRANCHISES_DEF: WrapperDef = {
+  "short": "franchises",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/franchises",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * MBB — franchises (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1636,23 +1703,18 @@ export const espn_mbb_franchise = espnMbbFranchise;
  * @example await sdv.mbb.espnMbbFranchises({});
  */
 export const espnMbbFranchises: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "franchises",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/franchises",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(FRANCHISES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbFranchises} (py/R parity). */
 export const espn_mbb_franchises = espnMbbFranchises;
 
+const INJURIES_DEF: WrapperDef = {
+  "short": "injuries",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/injuries",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — injuries (ESPN site.api.espn.com).
  *
@@ -1663,17 +1725,45 @@ export const espn_mbb_franchises = espnMbbFranchises;
  * @example await sdv.mbb.espnMbbInjuries({});
  */
 export const espnMbbInjuries: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "injuries",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/injuries",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbInjuries} (py/R parity). */
 export const espn_mbb_injuries = espnMbbInjuries;
 
+const LEADERS_DEF: WrapperDef = {
+  "short": "leaders",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/statistics/byathlete",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "category",
+      "queryKey": "category"
+    },
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 50
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    },
+    {
+      "name": "sort",
+      "queryKey": "sort"
+    }
+  ]
+};
 /**
  * MBB — leaders (ESPN site.web.api.espn.com (web v3)).
  *
@@ -1690,44 +1780,18 @@ export const espn_mbb_injuries = espnMbbInjuries;
  * @example await sdv.mbb.espnMbbLeaders({});
  */
 export const espnMbbLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "leaders",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/statistics/byathlete",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "category",
-          "queryKey": "category"
-        },
-        {
-          "name": "season",
-          "queryKey": "season"
-        },
-        {
-          "name": "season_type",
-          "queryKey": "seasontype"
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 50
-        },
-        {
-          "name": "page",
-          "queryKey": "page",
-          "default": 1
-        },
-        {
-          "name": "sort",
-          "queryKey": "sort"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbLeaders} (py/R parity). */
 export const espn_mbb_leaders = espnMbbLeaders;
 
+const LEADERS_CORE_DEF: WrapperDef = {
+  "short": "leaders_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/leaders",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — leaders core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1738,17 +1802,18 @@ export const espn_mbb_leaders = espnMbbLeaders;
  * @example await sdv.mbb.espnMbbLeadersCore({});
  */
 export const espnMbbLeadersCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "leaders_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/leaders",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(LEADERS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbLeadersCore} (py/R parity). */
 export const espn_mbb_leaders_core = espnMbbLeadersCore;
 
+const LEAGUE_NOTES_DEF: WrapperDef = {
+  "short": "league_notes",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/notes",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — league notes (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1759,17 +1824,18 @@ export const espn_mbb_leaders_core = espnMbbLeadersCore;
  * @example await sdv.mbb.espnMbbLeagueNotes({});
  */
 export const espnMbbLeagueNotes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "league_notes",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/notes",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(LEAGUE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbLeagueNotes} (py/R parity). */
 export const espn_mbb_league_notes = espnMbbLeagueNotes;
 
+const LEAGUE_ROOT_DEF: WrapperDef = {
+  "short": "league_root",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — league root (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1780,17 +1846,24 @@ export const espn_mbb_league_notes = espnMbbLeagueNotes;
  * @example await sdv.mbb.espnMbbLeagueRoot({});
  */
 export const espnMbbLeagueRoot: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "league_root",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(LEAGUE_ROOT_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbLeagueRoot} (py/R parity). */
 export const espn_mbb_league_root = espnMbbLeagueRoot;
 
+const NEWS_DEF: WrapperDef = {
+  "short": "news",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/news",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 50
+    }
+  ]
+};
 /**
  * MBB — news (ESPN site.api.espn.com).
  *
@@ -1802,23 +1875,22 @@ export const espn_mbb_league_root = espnMbbLeagueRoot;
  * @example await sdv.mbb.espnMbbNews({});
  */
 export const espnMbbNews: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "news",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/news",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 50
-        }
-      ]
-    }, CFG, params);
+  callWrapper(NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbNews} (py/R parity). */
 export const espn_mbb_news = espnMbbNews;
 
+const POSITION_DEF: WrapperDef = {
+  "short": "position",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/positions/{position_id}",
+  "pathParams": [
+    {
+      "name": "position_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — position (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1830,21 +1902,18 @@ export const espn_mbb_news = espnMbbNews;
  * @example await sdv.mbb.espnMbbPosition({ position_id: '…' });
  */
 export const espnMbbPosition: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "position",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/positions/{position_id}",
-      "pathParams": [
-        {
-          "name": "position_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(POSITION_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbPosition} (py/R parity). */
 export const espn_mbb_position = espnMbbPosition;
 
+const POSITIONS_DEF: WrapperDef = {
+  "short": "positions",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/positions",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — positions (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1855,17 +1924,18 @@ export const espn_mbb_position = espnMbbPosition;
  * @example await sdv.mbb.espnMbbPositions({});
  */
 export const espnMbbPositions: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "positions",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/positions",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(POSITIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbPositions} (py/R parity). */
 export const espn_mbb_positions = espnMbbPositions;
 
+const RANKINGS_DEF: WrapperDef = {
+  "short": "rankings",
+  "family": "site_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/{league}/rankings",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — rankings (ESPN site.api.espn.com).
  *
@@ -1876,17 +1946,40 @@ export const espn_mbb_positions = espnMbbPositions;
  * @example await sdv.mbb.espnMbbRankings({});
  */
 export const espnMbbRankings: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "rankings",
-      "family": "site_v2",
-      "scope": "ncaa",
-      "path": "/{sport}/{league}/rankings",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbRankings} (py/R parity). */
 export const espn_mbb_rankings = espnMbbRankings;
 
+const SCOREBOARD_DEF: WrapperDef = {
+  "short": "scoreboard",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/scoreboard",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "dates",
+      "queryKey": "dates"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    },
+    {
+      "name": "groups",
+      "queryKey": "groups"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * MBB — scoreboard (ESPN site.api.espn.com).
  *
@@ -1902,39 +1995,33 @@ export const espn_mbb_rankings = espnMbbRankings;
  * @example await sdv.mbb.espnMbbScoreboard({});
  */
 export const espnMbbScoreboard: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "scoreboard",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/scoreboard",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "dates",
-          "queryKey": "dates"
-        },
-        {
-          "name": "week",
-          "queryKey": "week"
-        },
-        {
-          "name": "season_type",
-          "queryKey": "seasontype"
-        },
-        {
-          "name": "groups",
-          "queryKey": "groups"
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SCOREBOARD_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbScoreboard} (py/R parity). */
 export const espn_mbb_scoreboard = espnMbbScoreboard;
 
+const SEASON_ATHLETES_DEF: WrapperDef = {
+  "short": "season_athletes",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 100
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    }
+  ]
+};
 /**
  * MBB — season athletes (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1948,32 +2035,22 @@ export const espn_mbb_scoreboard = espnMbbScoreboard;
  * @example await sdv.mbb.espnMbbSeasonAthletes({ season: '…' });
  */
 export const espnMbbSeasonAthletes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_athletes",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 100
-        },
-        {
-          "name": "page",
-          "queryKey": "page",
-          "default": 1
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_ATHLETES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonAthletes} (py/R parity). */
 export const espn_mbb_season_athletes = espnMbbSeasonAthletes;
 
+const SEASON_AWARDS_DEF: WrapperDef = {
+  "short": "season_awards",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/awards",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season awards (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1985,21 +2062,28 @@ export const espn_mbb_season_athletes = espnMbbSeasonAthletes;
  * @example await sdv.mbb.espnMbbSeasonAwards({ season: '…' });
  */
 export const espnMbbSeasonAwards: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_awards",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/awards",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonAwards} (py/R parity). */
 export const espn_mbb_season_awards = espnMbbSeasonAwards;
 
+const SEASON_COACHES_DEF: WrapperDef = {
+  "short": "season_coaches",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/coaches",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * MBB — season coaches (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2012,27 +2096,22 @@ export const espn_mbb_season_awards = espnMbbSeasonAwards;
  * @example await sdv.mbb.espnMbbSeasonCoaches({ season: '…' });
  */
 export const espnMbbSeasonCoaches: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_coaches",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/coaches",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_COACHES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonCoaches} (py/R parity). */
 export const espn_mbb_season_coaches = espnMbbSeasonCoaches;
 
+const SEASON_DRAFT_DEF: WrapperDef = {
+  "short": "season_draft",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/draft",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season draft (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2044,21 +2123,25 @@ export const espn_mbb_season_coaches = espnMbbSeasonCoaches;
  * @example await sdv.mbb.espnMbbSeasonDraft({ season: '…' });
  */
 export const espnMbbSeasonDraft: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_draft",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/draft",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonDraft} (py/R parity). */
 export const espn_mbb_season_draft = espnMbbSeasonDraft;
 
+const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
+  "short": "season_draft_round_picks",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "round_num"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season draft round picks (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2071,24 +2154,22 @@ export const espn_mbb_season_draft = espnMbbSeasonDraft;
  * @example await sdv.mbb.espnMbbSeasonDraftRoundPicks({ season: '…', round_num: '…' });
  */
 export const espnMbbSeasonDraftRoundPicks: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_draft_round_picks",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "round_num"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_DRAFT_ROUND_PICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonDraftRoundPicks} (py/R parity). */
 export const espn_mbb_season_draft_round_picks = espnMbbSeasonDraftRoundPicks;
 
+const SEASON_FREEAGENTS_DEF: WrapperDef = {
+  "short": "season_freeagents",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/freeagents",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season freeagents (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2100,21 +2181,22 @@ export const espn_mbb_season_draft_round_picks = espnMbbSeasonDraftRoundPicks;
  * @example await sdv.mbb.espnMbbSeasonFreeagents({ season: '…' });
  */
 export const espnMbbSeasonFreeagents: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_freeagents",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/freeagents",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_FREEAGENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonFreeagents} (py/R parity). */
 export const espn_mbb_season_freeagents = espnMbbSeasonFreeagents;
 
+const SEASON_FUTURES_DEF: WrapperDef = {
+  "short": "season_futures",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/futures",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season futures (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2126,21 +2208,28 @@ export const espn_mbb_season_freeagents = espnMbbSeasonFreeagents;
  * @example await sdv.mbb.espnMbbSeasonFutures({ season: '…' });
  */
 export const espnMbbSeasonFutures: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_futures",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/futures",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_FUTURES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonFutures} (py/R parity). */
 export const espn_mbb_season_futures = espnMbbSeasonFutures;
 
+const SEASON_GROUP_DEF: WrapperDef = {
+  "short": "season_group",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "group_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season group (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2154,27 +2243,28 @@ export const espn_mbb_season_futures = espnMbbSeasonFutures;
  * @example await sdv.mbb.espnMbbSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
  */
 export const espnMbbSeasonGroup: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_group",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "group_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_GROUP_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonGroup} (py/R parity). */
 export const espn_mbb_season_group = espnMbbSeasonGroup;
 
+const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
+  "short": "season_group_children",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "group_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season group children (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2188,27 +2278,34 @@ export const espn_mbb_season_group = espnMbbSeasonGroup;
  * @example await sdv.mbb.espnMbbSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
  */
 export const espnMbbSeasonGroupChildren: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_group_children",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "group_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_GROUP_CHILDREN_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonGroupChildren} (py/R parity). */
 export const espn_mbb_season_group_children = espnMbbSeasonGroupChildren;
 
+const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
+  "short": "season_group_teams",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "group_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * MBB — season group teams (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2223,33 +2320,25 @@ export const espn_mbb_season_group_children = espnMbbSeasonGroupChildren;
  * @example await sdv.mbb.espnMbbSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
  */
 export const espnMbbSeasonGroupTeams: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_group_teams",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "group_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_GROUP_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonGroupTeams} (py/R parity). */
 export const espn_mbb_season_group_teams = espnMbbSeasonGroupTeams;
 
+const SEASON_GROUPS_DEF: WrapperDef = {
+  "short": "season_groups",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season groups (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2262,24 +2351,22 @@ export const espn_mbb_season_group_teams = espnMbbSeasonGroupTeams;
  * @example await sdv.mbb.espnMbbSeasonGroups({ season: '…', season_type: '…' });
  */
 export const espnMbbSeasonGroups: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_groups",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_GROUPS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonGroups} (py/R parity). */
 export const espn_mbb_season_groups = espnMbbSeasonGroups;
 
+const SEASON_INFO_DEF: WrapperDef = {
+  "short": "season_info",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season info (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2291,21 +2378,18 @@ export const espn_mbb_season_groups = espnMbbSeasonGroups;
  * @example await sdv.mbb.espnMbbSeasonInfo({ season: '…' });
  */
 export const espnMbbSeasonInfo: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_info",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonInfo} (py/R parity). */
 export const espn_mbb_season_info = espnMbbSeasonInfo;
 
+const SEASON_POINTER_DEF: WrapperDef = {
+  "short": "season_pointer",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/season",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — season pointer (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2316,17 +2400,26 @@ export const espn_mbb_season_info = espnMbbSeasonInfo;
  * @example await sdv.mbb.espnMbbSeasonPointer({});
  */
 export const espnMbbSeasonPointer: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_pointer",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/season",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_POINTER_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonPointer} (py/R parity). */
 export const espn_mbb_season_pointer = espnMbbSeasonPointer;
 
+const SEASON_POWERINDEX_DEF: WrapperDef = {
+  "short": "season_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex[/{team_id}]",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "team_id",
+      "required": false
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2339,25 +2432,22 @@ export const espn_mbb_season_pointer = espnMbbSeasonPointer;
  * @example await sdv.mbb.espnMbbSeasonPowerindex({ season: '…' });
  */
 export const espnMbbSeasonPowerindex: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_powerindex",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex[/{team_id}]",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "team_id",
-          "required": false
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonPowerindex} (py/R parity). */
 export const espn_mbb_season_powerindex = espnMbbSeasonPowerindex;
 
+const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
+  "short": "season_powerindex_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex/leaders",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2369,21 +2459,28 @@ export const espn_mbb_season_powerindex = espnMbbSeasonPowerindex;
  * @example await sdv.mbb.espnMbbSeasonPowerindexLeaders({ season: '…' });
  */
 export const espnMbbSeasonPowerindexLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_powerindex_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex/leaders",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_POWERINDEX_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonPowerindexLeaders} (py/R parity). */
 export const espn_mbb_season_powerindex_leaders = espnMbbSeasonPowerindexLeaders;
 
+const SEASON_RECRUITS_DEF: WrapperDef = {
+  "short": "season_recruits",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/recruits",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 100
+    }
+  ]
+};
 /**
  * MBB — season recruits (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2396,27 +2493,25 @@ export const espn_mbb_season_powerindex_leaders = espnMbbSeasonPowerindexLeaders
  * @example await sdv.mbb.espnMbbSeasonRecruits({ season: '…' });
  */
 export const espnMbbSeasonRecruits: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_recruits",
-      "family": "core_v2",
-      "scope": "ncaa",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/recruits",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 100
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_RECRUITS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonRecruits} (py/R parity). */
 export const espn_mbb_season_recruits = espnMbbSeasonRecruits;
 
+const SEASON_TEAM_DEF: WrapperDef = {
+  "short": "season_team",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/teams/{team_id}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season team (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2429,24 +2524,28 @@ export const espn_mbb_season_recruits = espnMbbSeasonRecruits;
  * @example await sdv.mbb.espnMbbSeasonTeam({ season: '…', team_id: '…' });
  */
 export const espnMbbSeasonTeam: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_team",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/teams/{team_id}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonTeam} (py/R parity). */
 export const espn_mbb_season_team = espnMbbSeasonTeam;
 
+const SEASON_TEAMS_DEF: WrapperDef = {
+  "short": "season_teams",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/teams",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * MBB — season teams (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2459,27 +2558,25 @@ export const espn_mbb_season_team = espnMbbSeasonTeam;
  * @example await sdv.mbb.espnMbbSeasonTeams({ season: '…' });
  */
 export const espnMbbSeasonTeams: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_teams",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/teams",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonTeams} (py/R parity). */
 export const espn_mbb_season_teams = espnMbbSeasonTeams;
 
+const SEASON_TYPE_DEF: WrapperDef = {
+  "short": "season_type",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season type (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2492,24 +2589,25 @@ export const espn_mbb_season_teams = espnMbbSeasonTeams;
  * @example await sdv.mbb.espnMbbSeasonType({ season: '…', season_type: '…' });
  */
 export const espnMbbSeasonType: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_type",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonType} (py/R parity). */
 export const espn_mbb_season_type = espnMbbSeasonType;
 
+const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
+  "short": "season_type_corrections",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/corrections",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season type corrections (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2522,24 +2620,25 @@ export const espn_mbb_season_type = espnMbbSeasonType;
  * @example await sdv.mbb.espnMbbSeasonTypeCorrections({ season: '…', season_type: '…' });
  */
 export const espnMbbSeasonTypeCorrections: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_type_corrections",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/corrections",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPE_CORRECTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonTypeCorrections} (py/R parity). */
 export const espn_mbb_season_type_corrections = espnMbbSeasonTypeCorrections;
 
+const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
+  "short": "season_type_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/leaders",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season type leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2552,24 +2651,22 @@ export const espn_mbb_season_type_corrections = espnMbbSeasonTypeCorrections;
  * @example await sdv.mbb.espnMbbSeasonTypeLeaders({ season: '…', season_type: '…' });
  */
 export const espnMbbSeasonTypeLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_type_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/leaders",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPE_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonTypeLeaders} (py/R parity). */
 export const espn_mbb_season_type_leaders = espnMbbSeasonTypeLeaders;
 
+const SEASON_TYPES_DEF: WrapperDef = {
+  "short": "season_types",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season types (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2581,21 +2678,28 @@ export const espn_mbb_season_type_leaders = espnMbbSeasonTypeLeaders;
  * @example await sdv.mbb.espnMbbSeasonTypes({ season: '…' });
  */
 export const espnMbbSeasonTypes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_types",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonTypes} (py/R parity). */
 export const espn_mbb_season_types = espnMbbSeasonTypes;
 
+const SEASON_WEEK_DEF: WrapperDef = {
+  "short": "season_week",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season week (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2609,27 +2713,34 @@ export const espn_mbb_season_types = espnMbbSeasonTypes;
  * @example await sdv.mbb.espnMbbSeasonWeek({ season: '…', season_type: '…', week: '…' });
  */
 export const espnMbbSeasonWeek: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_week",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "week"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_WEEK_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonWeek} (py/R parity). */
 export const espn_mbb_season_week = espnMbbSeasonWeek;
 
+const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
+  "short": "season_week_events",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * MBB — season week events (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2644,33 +2755,28 @@ export const espn_mbb_season_week = espnMbbSeasonWeek;
  * @example await sdv.mbb.espnMbbSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
  */
 export const espnMbbSeasonWeekEvents: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_week_events",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "week"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonWeekEvents} (py/R parity). */
 export const espn_mbb_season_week_events = espnMbbSeasonWeekEvents;
 
+const SEASON_WEEK_RANKINGS_DEF: WrapperDef = {
+  "short": "season_week_rankings",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/rankings",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season week rankings (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2684,27 +2790,25 @@ export const espn_mbb_season_week_events = espnMbbSeasonWeekEvents;
  * @example await sdv.mbb.espnMbbSeasonWeekRankings({ season: '…', season_type: '…', week: '…' });
  */
 export const espnMbbSeasonWeekRankings: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_week_rankings",
-      "family": "core_v2",
-      "scope": "ncaa",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/rankings",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "week"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_WEEK_RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonWeekRankings} (py/R parity). */
 export const espn_mbb_season_week_rankings = espnMbbSeasonWeekRankings;
 
+const SEASON_WEEKS_DEF: WrapperDef = {
+  "short": "season_weeks",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — season weeks (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2717,24 +2821,24 @@ export const espn_mbb_season_week_rankings = espnMbbSeasonWeekRankings;
  * @example await sdv.mbb.espnMbbSeasonWeeks({ season: '…', season_type: '…' });
  */
 export const espnMbbSeasonWeeks: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_weeks",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_WEEKS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonWeeks} (py/R parity). */
 export const espn_mbb_season_weeks = espnMbbSeasonWeeks;
 
+const SEASONS_DEF: WrapperDef = {
+  "short": "seasons",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * MBB — seasons (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2746,23 +2850,31 @@ export const espn_mbb_season_weeks = espnMbbSeasonWeeks;
  * @example await sdv.mbb.espnMbbSeasons({});
  */
 export const espnMbbSeasons: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "seasons",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasons} (py/R parity). */
 export const espn_mbb_seasons = espnMbbSeasons;
 
+const STANDINGS_DEF: WrapperDef = {
+  "short": "standings",
+  "family": "site_v2_alt",
+  "scope": "universal",
+  "path": "/{sport}/{league}/standings",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "group",
+      "queryKey": "group"
+    },
+    {
+      "name": "standings_type",
+      "queryKey": "type"
+    }
+  ]
+};
 /**
  * MBB — standings (ESPN site.api.espn.com (v2)).
  *
@@ -2776,30 +2888,18 @@ export const espn_mbb_seasons = espnMbbSeasons;
  * @example await sdv.mbb.espnMbbStandings({});
  */
 export const espnMbbStandings: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "standings",
-      "family": "site_v2_alt",
-      "scope": "universal",
-      "path": "/{sport}/{league}/standings",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        },
-        {
-          "name": "group",
-          "queryKey": "group"
-        },
-        {
-          "name": "standings_type",
-          "queryKey": "type"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(STANDINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbStandings} (py/R parity). */
 export const espn_mbb_standings = espnMbbStandings;
 
+const STANDINGS_CORE_DEF: WrapperDef = {
+  "short": "standings_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/standings",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — standings core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2810,17 +2910,18 @@ export const espn_mbb_standings = espnMbbStandings;
  * @example await sdv.mbb.espnMbbStandingsCore({});
  */
 export const espnMbbStandingsCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "standings_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/standings",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(STANDINGS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbStandingsCore} (py/R parity). */
 export const espn_mbb_standings_core = espnMbbStandingsCore;
 
+const STATISTICS_LEAGUE_DEF: WrapperDef = {
+  "short": "statistics_league",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/statistics",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — statistics league (ESPN site.api.espn.com).
  *
@@ -2831,17 +2932,23 @@ export const espn_mbb_standings_core = espnMbbStandingsCore;
  * @example await sdv.mbb.espnMbbStatisticsLeague({});
  */
 export const espnMbbStatisticsLeague: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "statistics_league",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/statistics",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(STATISTICS_LEAGUE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbStatisticsLeague} (py/R parity). */
 export const espn_mbb_statistics_league = espnMbbStatisticsLeague;
 
+const SUMMARY_DEF: WrapperDef = {
+  "short": "summary",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/summary",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "event_id",
+      "queryKey": "event"
+    }
+  ]
+};
 /**
  * MBB — summary (ESPN site.api.espn.com).
  *
@@ -2849,26 +2956,23 @@ export const espn_mbb_statistics_league = espnMbbStatisticsLeague;
  *
  * @param params.event_id - query parameter (ESPN `event`).
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
  * @example await sdv.mbb.espnMbbSummary({});
  */
 export const espnMbbSummary: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "summary",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/summary",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "event_id",
-          "queryKey": "event"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SUMMARY_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSummary} (py/R parity). */
 export const espn_mbb_summary = espnMbbSummary;
 
+const TALENTPICKS_DEF: WrapperDef = {
+  "short": "talentpicks",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/talentpicks",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — talentpicks (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2879,17 +2983,22 @@ export const espn_mbb_summary = espnMbbSummary;
  * @example await sdv.mbb.espnMbbTalentpicks({});
  */
 export const espnMbbTalentpicks: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "talentpicks",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/talentpicks",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TALENTPICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTalentpicks} (py/R parity). */
 export const espn_mbb_talentpicks = espnMbbTalentpicks;
 
+const TEAM_DEF: WrapperDef = {
+  "short": "team",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team (ESPN site.api.espn.com).
  *
@@ -2901,21 +3010,22 @@ export const espn_mbb_talentpicks = espnMbbTalentpicks;
  * @example await sdv.mbb.espnMbbTeam({ team_id: '…' });
  */
 export const espnMbbTeam: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeam} (py/R parity). */
 export const espn_mbb_team = espnMbbTeam;
 
+const TEAM_CORE_DEF: WrapperDef = {
+  "short": "team_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/teams/{team_id}",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2927,21 +3037,22 @@ export const espn_mbb_team = espnMbbTeam;
  * @example await sdv.mbb.espnMbbTeamCore({ team_id: '…' });
  */
 export const espnMbbTeamCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/teams/{team_id}",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamCore} (py/R parity). */
 export const espn_mbb_team_core = espnMbbTeamCore;
 
+const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
+  "short": "team_depthcharts",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/depthcharts",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team depthcharts (ESPN site.api.espn.com).
  *
@@ -2953,21 +3064,22 @@ export const espn_mbb_team_core = espnMbbTeamCore;
  * @example await sdv.mbb.espnMbbTeamDepthcharts({ team_id: '…' });
  */
 export const espnMbbTeamDepthcharts: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_depthcharts",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/depthcharts",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_DEPTHCHARTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamDepthcharts} (py/R parity). */
 export const espn_mbb_team_depthcharts = espnMbbTeamDepthcharts;
 
+const TEAM_HISTORY_DEF: WrapperDef = {
+  "short": "team_history",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/history",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team history (ESPN site.api.espn.com).
  *
@@ -2979,21 +3091,22 @@ export const espn_mbb_team_depthcharts = espnMbbTeamDepthcharts;
  * @example await sdv.mbb.espnMbbTeamHistory({ team_id: '…' });
  */
 export const espnMbbTeamHistory: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_history",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/history",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_HISTORY_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamHistory} (py/R parity). */
 export const espn_mbb_team_history = espnMbbTeamHistory;
 
+const TEAM_INJURIES_DEF: WrapperDef = {
+  "short": "team_injuries",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/injuries",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team injuries (ESPN site.api.espn.com).
  *
@@ -3005,21 +3118,22 @@ export const espn_mbb_team_history = espnMbbTeamHistory;
  * @example await sdv.mbb.espnMbbTeamInjuries({ team_id: '…' });
  */
 export const espnMbbTeamInjuries: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_injuries",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/injuries",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamInjuries} (py/R parity). */
 export const espn_mbb_team_injuries = espnMbbTeamInjuries;
 
+const TEAM_LEADERS_DEF: WrapperDef = {
+  "short": "team_leaders",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/leaders",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team leaders (ESPN site.api.espn.com).
  *
@@ -3031,21 +3145,28 @@ export const espn_mbb_team_injuries = espnMbbTeamInjuries;
  * @example await sdv.mbb.espnMbbTeamLeaders({ team_id: '…' });
  */
 export const espnMbbTeamLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_leaders",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/leaders",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamLeaders} (py/R parity). */
 export const espn_mbb_team_leaders = espnMbbTeamLeaders;
 
+const TEAM_NEWS_DEF: WrapperDef = {
+  "short": "team_news",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/news",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 50
+    }
+  ]
+};
 /**
  * MBB — team news (ESPN site.api.espn.com).
  *
@@ -3058,27 +3179,22 @@ export const espn_mbb_team_leaders = espnMbbTeamLeaders;
  * @example await sdv.mbb.espnMbbTeamNews({ team_id: '…' });
  */
 export const espnMbbTeamNews: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_news",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/news",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 50
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAM_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamNews} (py/R parity). */
 export const espn_mbb_team_news = espnMbbTeamNews;
 
+const TEAM_RECORD_DEF: WrapperDef = {
+  "short": "team_record",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/record",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team record (ESPN site.api.espn.com).
  *
@@ -3090,21 +3206,22 @@ export const espn_mbb_team_news = espnMbbTeamNews;
  * @example await sdv.mbb.espnMbbTeamRecord({ team_id: '…' });
  */
 export const espnMbbTeamRecord: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_record",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/record",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamRecord} (py/R parity). */
 export const espn_mbb_team_record = espnMbbTeamRecord;
 
+const TEAM_ROSTER_DEF: WrapperDef = {
+  "short": "team_roster",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/roster",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team roster (ESPN site.api.espn.com).
  *
@@ -3116,21 +3233,27 @@ export const espn_mbb_team_record = espnMbbTeamRecord;
  * @example await sdv.mbb.espnMbbTeamRoster({ team_id: '…' });
  */
 export const espnMbbTeamRoster: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_roster",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/roster",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamRoster} (py/R parity). */
 export const espn_mbb_team_roster = espnMbbTeamRoster;
 
+const TEAM_SCHEDULE_DEF: WrapperDef = {
+  "short": "team_schedule",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/schedule",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * MBB — team schedule (ESPN site.api.espn.com).
  *
@@ -3143,26 +3266,22 @@ export const espn_mbb_team_roster = espnMbbTeamRoster;
  * @example await sdv.mbb.espnMbbTeamSchedule({ team_id: '…' });
  */
 export const espnMbbTeamSchedule: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_schedule",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/schedule",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAM_SCHEDULE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamSchedule} (py/R parity). */
 export const espn_mbb_team_schedule = espnMbbTeamSchedule;
 
+const TEAM_TRANSACTIONS_DEF: WrapperDef = {
+  "short": "team_transactions",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/transactions",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — team transactions (ESPN site.api.espn.com).
  *
@@ -3174,21 +3293,24 @@ export const espn_mbb_team_schedule = espnMbbTeamSchedule;
  * @example await sdv.mbb.espnMbbTeamTransactions({ team_id: '…' });
  */
 export const espnMbbTeamTransactions: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_transactions",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/transactions",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamTransactions} (py/R parity). */
 export const espn_mbb_team_transactions = espnMbbTeamTransactions;
 
+const TEAMS_CORE_DEF: WrapperDef = {
+  "short": "teams_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/teams",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * MBB — teams core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3200,23 +3322,24 @@ export const espn_mbb_team_transactions = espnMbbTeamTransactions;
  * @example await sdv.mbb.espnMbbTeamsCore({});
  */
 export const espnMbbTeamsCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "teams_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/teams",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAMS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamsCore} (py/R parity). */
 export const espn_mbb_teams_core = espnMbbTeamsCore;
 
+const TEAMS_SITE_DEF: WrapperDef = {
+  "short": "teams_site",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 1000
+    }
+  ]
+};
 /**
  * MBB — teams site (ESPN site.api.espn.com).
  *
@@ -3228,23 +3351,18 @@ export const espn_mbb_teams_core = espnMbbTeamsCore;
  * @example await sdv.mbb.espnMbbTeamsSite({});
  */
 export const espnMbbTeamsSite: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "teams_site",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 1000
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAMS_SITE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTeamsSite} (py/R parity). */
 export const espn_mbb_teams_site = espnMbbTeamsSite;
 
+const TOURNAMENTS_DEF: WrapperDef = {
+  "short": "tournaments",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/tournaments",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — tournaments (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3255,17 +3373,18 @@ export const espn_mbb_teams_site = espnMbbTeamsSite;
  * @example await sdv.mbb.espnMbbTournaments({});
  */
 export const espnMbbTournaments: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "tournaments",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/tournaments",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TOURNAMENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTournaments} (py/R parity). */
 export const espn_mbb_tournaments = espnMbbTournaments;
 
+const TRANSACTIONS_DEF: WrapperDef = {
+  "short": "transactions",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/transactions",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * MBB — transactions (ESPN site.api.espn.com).
  *
@@ -3276,17 +3395,22 @@ export const espn_mbb_tournaments = espnMbbTournaments;
  * @example await sdv.mbb.espnMbbTransactions({});
  */
 export const espnMbbTransactions: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "transactions",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/transactions",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbTransactions} (py/R parity). */
 export const espn_mbb_transactions = espnMbbTransactions;
 
+const VENUE_DEF: WrapperDef = {
+  "short": "venue",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/venues/{venue_id}",
+  "pathParams": [
+    {
+      "name": "venue_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * MBB — venue (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3298,21 +3422,24 @@ export const espn_mbb_transactions = espnMbbTransactions;
  * @example await sdv.mbb.espnMbbVenue({ venue_id: '…' });
  */
 export const espnMbbVenue: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "venue",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/venues/{venue_id}",
-      "pathParams": [
-        {
-          "name": "venue_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(VENUE_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbVenue} (py/R parity). */
 export const espn_mbb_venue = espnMbbVenue;
 
+const VENUES_DEF: WrapperDef = {
+  "short": "venues",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/venues",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * MBB — venues (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3324,19 +3451,6 @@ export const espn_mbb_venue = espnMbbVenue;
  * @example await sdv.mbb.espnMbbVenues({});
  */
 export const espnMbbVenues: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "venues",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/venues",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(VENUES_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbVenues} (py/R parity). */
 export const espn_mbb_venues = espnMbbVenues;

@@ -385,7 +385,7 @@ function renderWrittenEspnModule(league, wrappers) {
     "// core with the module-private `CFG` below, so URLs resolve identically to the\n" +
     "// runtime-factory path. The non-basketball leagues still use the factory.\n\n" +
     'import { callWrapper } from "../../core/espn.js";\n' +
-    'import type { LeagueConfig, WrapperFn } from "../../core/types.js";\n\n' +
+    'import type { LeagueConfig, WrapperDef, WrapperFn } from "../../core/types.js";\n\n' +
     `/** Module-private league binding for \`${league.prefix}\` (not exported). */\n` +
     `const CFG: LeagueConfig = ${cfgLiteral};\n`;
 
@@ -397,8 +397,10 @@ function renderWrittenEspnModule(league, wrappers) {
     const httpPath = displayPath(w, league);
     const summary = `${prefixUpper} — ${humanizeShort(w.short)} (${familyLabel}).`;
 
-    // The def inlined verbatim into the call (drift-guarded; same object the
-    // runtime factory passes to callWrapper).
+    // The def is hoisted to a module-level const (allocated ONCE at module load,
+    // not freshly per call) — the same object the runtime factory passes to
+    // callWrapper. Const name is unique per module (shorts are unique per league).
+    const defConst = `${w.short.replace(/[^a-zA-Z0-9]/g, "_").toUpperCase()}_DEF`;
     const defLiteral = JSON.stringify(
       {
         short: w.short,
@@ -410,15 +412,15 @@ function renderWrittenEspnModule(league, wrappers) {
       },
       null,
       2
-    )
-      // Re-indent the inlined object so it reads cleanly inside the arrow body.
-      .split("\n")
-      .map((l, i) => (i === 0 ? l : "    " + l))
-      .join("\n");
+    );
 
-    // JSDoc: summary, endpoint URL, @param per path/query param (+ parsed),
-    // @returns, @example.
-    let jsdoc = `\n/**\n * ${summary}\n *\n`;
+    // The `summary` endpoint is the Site v2 dispatcher: `{ parsed: true }` yields
+    // an object of all sub-frames, and `section` narrows to one named sub-frame.
+    const isSummary = w.short === "summary";
+
+    // JSDoc: summary, endpoint URL, @param per path/query param (+ parsed, +
+    // section for the summary dispatcher), @returns, @example.
+    let jsdoc = `/**\n * ${summary}\n *\n`;
     jsdoc += ` * **Endpoint:** \`GET ${host}${httpPath}\`\n`;
     if (league.leagueParam) {
       jsdoc +=
@@ -439,9 +441,16 @@ function renderWrittenEspnModule(league, wrappers) {
     jsdoc +=
       ` * @param params.parsed - when \`true\`, route the payload through this ` +
       `endpoint's tidy.js parser and return rows instead of raw JSON.\n`;
+    if (isSummary) {
+      jsdoc +=
+        ` * @param params.section - (with \`parsed: true\`) return just one named ` +
+        `sub-frame (e.g. \`boxscore\`, \`plays\`, \`winprobability\`) instead of the ` +
+        `object of all summary sub-frames.\n`;
+    }
     jsdoc +=
       ` * @returns Raw ESPN JSON by default; a tidy array of row objects when ` +
-      `called with \`{ parsed: true }\`.\n`;
+      `called with \`{ parsed: true }\`` +
+      `${isSummary ? " (an object of sub-frames, or the chosen `section`)" : ""}.\n`;
     const exampleArgs = w.pathParams.length
       ? `{ ${w.pathParams
           .filter((p) => p.required !== false)
@@ -450,9 +459,10 @@ function renderWrittenEspnModule(league, wrappers) {
       : "{}";
     jsdoc += ` * @example await sdv.${league.prefix}.${camel}(${exampleArgs});\n */\n`;
 
+    body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
     body += `export const ${camel}: WrapperFn = (params = {}) =>\n`;
-    body += `  callWrapper(${defLiteral}, CFG, params);\n`;
+    body += `  callWrapper(${defConst}, CFG, params);\n`;
     body += `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;
     body += `export const ${snake} = ${camel};\n`;
   }
@@ -849,6 +859,14 @@ function renderFunctionBlock(league, wrapper, parserMap) {
     rows.push([`\`${apiName}\``, `\`${p.name}\``, "no", `query parameter${def}`]);
   }
   rows.push(["—", "`parsed`", "no", "return tidy rows instead of raw JSON"]);
+  if (wrapper.short === "summary") {
+    rows.push([
+      "—",
+      "`section`",
+      "no",
+      "with `parsed`, return one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of all",
+    ]);
+  }
   body += `| API param | JS | required | description |\n`;
   body += `|---|---|---|---|\n`;
   for (const [api, js, req, desc] of rows) {

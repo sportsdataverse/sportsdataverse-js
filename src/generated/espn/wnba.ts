@@ -8,7 +8,7 @@
 // runtime-factory path. The non-basketball leagues still use the factory.
 
 import { callWrapper } from "../../core/espn.js";
-import type { LeagueConfig, WrapperFn } from "../../core/types.js";
+import type { LeagueConfig, WrapperDef, WrapperFn } from "../../core/types.js";
 
 /** Module-private league binding for `wnba` (not exported). */
 const CFG: LeagueConfig = {
@@ -20,6 +20,18 @@ const CFG: LeagueConfig = {
   ]
 };
 
+const ATHLETE_AWARDS_DEF: WrapperDef = {
+  "short": "athlete_awards",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete awards (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -31,21 +43,22 @@ const CFG: LeagueConfig = {
  * @example await sdv.wnba.espnWnbaAthleteAwards({ athlete_id: '…' });
  */
 export const espnWnbaAthleteAwards: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_awards",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteAwards} (py/R parity). */
 export const espn_wnba_athlete_awards = espnWnbaAthleteAwards;
 
+const ATHLETE_BIO_DEF: WrapperDef = {
+  "short": "athlete_bio",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete bio (ESPN site.api.espn.com).
  *
@@ -57,21 +70,26 @@ export const espn_wnba_athlete_awards = espnWnbaAthleteAwards;
  * @example await sdv.wnba.espnWnbaAthleteBio({ athlete_id: '…' });
  */
 export const espnWnbaAthleteBio: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_bio",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_BIO_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteBio} (py/R parity). */
 export const espn_wnba_athlete_bio = espnWnbaAthleteBio;
 
+const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
+  "short": "athlete_career_stats",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    },
+    {
+      "name": "stat_type",
+      "required": false
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -84,25 +102,22 @@ export const espn_wnba_athlete_bio = espnWnbaAthleteBio;
  * @example await sdv.wnba.espnWnbaAthleteCareerStats({ athlete_id: '…' });
  */
 export const espnWnbaAthleteCareerStats: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_career_stats",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        },
-        {
-          "name": "stat_type",
-          "required": false
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteCareerStats} (py/R parity). */
 export const espn_wnba_athlete_career_stats = espnWnbaAthleteCareerStats;
 
+const ATHLETE_CONTRACTS_DEF: WrapperDef = {
+  "short": "athlete_contracts",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -114,21 +129,22 @@ export const espn_wnba_athlete_career_stats = espnWnbaAthleteCareerStats;
  * @example await sdv.wnba.espnWnbaAthleteContracts({ athlete_id: '…' });
  */
 export const espnWnbaAthleteContracts: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_contracts",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteContracts} (py/R parity). */
 export const espn_wnba_athlete_contracts = espnWnbaAthleteContracts;
 
+const ATHLETE_CORE_DEF: WrapperDef = {
+  "short": "athlete_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -140,21 +156,22 @@ export const espn_wnba_athlete_contracts = espnWnbaAthleteContracts;
  * @example await sdv.wnba.espnWnbaAthleteCore({ athlete_id: '…' });
  */
 export const espnWnbaAthleteCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteCore} (py/R parity). */
 export const espn_wnba_athlete_core = espnWnbaAthleteCore;
 
+const ATHLETE_EVENTLOG_DEF: WrapperDef = {
+  "short": "athlete_eventlog",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -166,21 +183,27 @@ export const espn_wnba_athlete_core = espnWnbaAthleteCore;
  * @example await sdv.wnba.espnWnbaAthleteEventlog({ athlete_id: '…' });
  */
 export const espnWnbaAthleteEventlog: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_eventlog",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteEventlog} (py/R parity). */
 export const espn_wnba_athlete_eventlog = espnWnbaAthleteEventlog;
 
+const ATHLETE_GAMELOG_DEF: WrapperDef = {
+  "short": "athlete_gamelog",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * WNBA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
  *
@@ -193,26 +216,22 @@ export const espn_wnba_athlete_eventlog = espnWnbaAthleteEventlog;
  * @example await sdv.wnba.espnWnbaAthleteGamelog({ athlete_id: '…' });
  */
 export const espnWnbaAthleteGamelog: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_gamelog",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteGamelog} (py/R parity). */
 export const espn_wnba_athlete_gamelog = espnWnbaAthleteGamelog;
 
+const ATHLETE_INFO_DEF: WrapperDef = {
+  "short": "athlete_info",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete info (ESPN site.api.espn.com).
  *
@@ -224,21 +243,22 @@ export const espn_wnba_athlete_gamelog = espnWnbaAthleteGamelog;
  * @example await sdv.wnba.espnWnbaAthleteInfo({ athlete_id: '…' });
  */
 export const espnWnbaAthleteInfo: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_info",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteInfo} (py/R parity). */
 export const espn_wnba_athlete_info = espnWnbaAthleteInfo;
 
+const ATHLETE_INJURIES_DEF: WrapperDef = {
+  "short": "athlete_injuries",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -250,21 +270,22 @@ export const espn_wnba_athlete_info = espnWnbaAthleteInfo;
  * @example await sdv.wnba.espnWnbaAthleteInjuries({ athlete_id: '…' });
  */
 export const espnWnbaAthleteInjuries: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_injuries",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteInjuries} (py/R parity). */
 export const espn_wnba_athlete_injuries = espnWnbaAthleteInjuries;
 
+const ATHLETE_NEWS_DEF: WrapperDef = {
+  "short": "athlete_news",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/news",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete news (ESPN site.api.espn.com).
  *
@@ -276,21 +297,22 @@ export const espn_wnba_athlete_injuries = espnWnbaAthleteInjuries;
  * @example await sdv.wnba.espnWnbaAthleteNews({ athlete_id: '…' });
  */
 export const espnWnbaAthleteNews: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_news",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/news",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteNews} (py/R parity). */
 export const espn_wnba_athlete_news = espnWnbaAthleteNews;
 
+const ATHLETE_NOTES_DEF: WrapperDef = {
+  "short": "athlete_notes",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete notes (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -302,21 +324,22 @@ export const espn_wnba_athlete_news = espnWnbaAthleteNews;
  * @example await sdv.wnba.espnWnbaAthleteNotes({ athlete_id: '…' });
  */
 export const espnWnbaAthleteNotes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_notes",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteNotes} (py/R parity). */
 export const espn_wnba_athlete_notes = espnWnbaAthleteNotes;
 
+const ATHLETE_OVERVIEW_DEF: WrapperDef = {
+  "short": "athlete_overview",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete overview (ESPN site.web.api.espn.com (web v3)).
  *
@@ -328,21 +351,22 @@ export const espn_wnba_athlete_notes = espnWnbaAthleteNotes;
  * @example await sdv.wnba.espnWnbaAthleteOverview({ athlete_id: '…' });
  */
 export const espnWnbaAthleteOverview: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_overview",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteOverview} (py/R parity). */
 export const espn_wnba_athlete_overview = espnWnbaAthleteOverview;
 
+const ATHLETE_RECORDS_DEF: WrapperDef = {
+  "short": "athlete_records",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete records (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -354,21 +378,22 @@ export const espn_wnba_athlete_overview = espnWnbaAthleteOverview;
  * @example await sdv.wnba.espnWnbaAthleteRecords({ athlete_id: '…' });
  */
 export const espnWnbaAthleteRecords: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_records",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteRecords} (py/R parity). */
 export const espn_wnba_athlete_records = espnWnbaAthleteRecords;
 
+const ATHLETE_SEASONS_DEF: WrapperDef = {
+  "short": "athlete_seasons",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -380,21 +405,27 @@ export const espn_wnba_athlete_records = espnWnbaAthleteRecords;
  * @example await sdv.wnba.espnWnbaAthleteSeasons({ athlete_id: '…' });
  */
 export const espnWnbaAthleteSeasons: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_seasons",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteSeasons} (py/R parity). */
 export const espn_wnba_athlete_seasons = espnWnbaAthleteSeasons;
 
+const ATHLETE_SPLITS_DEF: WrapperDef = {
+  "short": "athlete_splits",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * WNBA — athlete splits (ESPN site.web.api.espn.com (web v3)).
  *
@@ -407,26 +438,22 @@ export const espn_wnba_athlete_seasons = espnWnbaAthleteSeasons;
  * @example await sdv.wnba.espnWnbaAthleteSplits({ athlete_id: '…' });
  */
 export const espnWnbaAthleteSplits: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_splits",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteSplits} (py/R parity). */
 export const espn_wnba_athlete_splits = espnWnbaAthleteSplits;
 
+const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
+  "short": "athlete_statisticslog",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -438,21 +465,27 @@ export const espn_wnba_athlete_splits = espnWnbaAthleteSplits;
  * @example await sdv.wnba.espnWnbaAthleteStatisticslog({ athlete_id: '…' });
  */
 export const espnWnbaAthleteStatisticslog: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_statisticslog",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteStatisticslog} (py/R parity). */
 export const espn_wnba_athlete_statisticslog = espnWnbaAthleteStatisticslog;
 
+const ATHLETE_STATS_DEF: WrapperDef = {
+  "short": "athlete_stats",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * WNBA — athlete stats (ESPN site.web.api.espn.com (web v3)).
  *
@@ -465,26 +498,25 @@ export const espn_wnba_athlete_statisticslog = espnWnbaAthleteStatisticslog;
  * @example await sdv.wnba.espnWnbaAthleteStats({ athlete_id: '…' });
  */
 export const espnWnbaAthleteStats: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_stats",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETE_STATS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteStats} (py/R parity). */
 export const espn_wnba_athlete_stats = espnWnbaAthleteStats;
 
+const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
+  "short": "athlete_vs_athlete",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
+  "pathParams": [
+    {
+      "name": "athlete_id"
+    },
+    {
+      "name": "opp_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -497,24 +529,34 @@ export const espn_wnba_athlete_stats = espnWnbaAthleteStats;
  * @example await sdv.wnba.espnWnbaAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
  */
 export const espnWnbaAthleteVsAthlete: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athlete_vs_athlete",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
-      "pathParams": [
-        {
-          "name": "athlete_id"
-        },
-        {
-          "name": "opp_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthleteVsAthlete} (py/R parity). */
 export const espn_wnba_athlete_vs_athlete = espnWnbaAthleteVsAthlete;
 
+const ATHLETES_INDEX_DEF: WrapperDef = {
+  "short": "athletes_index",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/athletes",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "active",
+      "queryKey": "active",
+      "default": true
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 100
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    }
+  ]
+};
 /**
  * WNBA — athletes index (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -528,33 +570,22 @@ export const espn_wnba_athlete_vs_athlete = espnWnbaAthleteVsAthlete;
  * @example await sdv.wnba.espnWnbaAthletesIndex({});
  */
 export const espnWnbaAthletesIndex: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "athletes_index",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/athletes",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "active",
-          "queryKey": "active",
-          "default": true
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 100
-        },
-        {
-          "name": "page",
-          "queryKey": "page",
-          "default": 1
-        }
-      ]
-    }, CFG, params);
+  callWrapper(ATHLETES_INDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAthletesIndex} (py/R parity). */
 export const espn_wnba_athletes_index = espnWnbaAthletesIndex;
 
+const AWARD_DEF: WrapperDef = {
+  "short": "award",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/awards/{award_id}",
+  "pathParams": [
+    {
+      "name": "award_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — award (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -566,21 +597,18 @@ export const espn_wnba_athletes_index = espnWnbaAthletesIndex;
  * @example await sdv.wnba.espnWnbaAward({ award_id: '…' });
  */
 export const espnWnbaAward: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "award",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/awards/{award_id}",
-      "pathParams": [
-        {
-          "name": "award_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(AWARD_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAward} (py/R parity). */
 export const espn_wnba_award = espnWnbaAward;
 
+const AWARDS_DEF: WrapperDef = {
+  "short": "awards",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/awards",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — awards (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -591,17 +619,18 @@ export const espn_wnba_award = espnWnbaAward;
  * @example await sdv.wnba.espnWnbaAwards({});
  */
 export const espnWnbaAwards: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "awards",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/awards",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaAwards} (py/R parity). */
 export const espn_wnba_awards = espnWnbaAwards;
 
+const CALENDAR_DEF: WrapperDef = {
+  "short": "calendar",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/calendar",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — calendar (ESPN site.api.espn.com).
  *
@@ -612,17 +641,22 @@ export const espn_wnba_awards = espnWnbaAwards;
  * @example await sdv.wnba.espnWnbaCalendar({});
  */
 export const espnWnbaCalendar: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "calendar",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/calendar",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(CALENDAR_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaCalendar} (py/R parity). */
 export const espn_wnba_calendar = espnWnbaCalendar;
 
+const COACH_DEF: WrapperDef = {
+  "short": "coach",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/coaches/{coach_id}",
+  "pathParams": [
+    {
+      "name": "coach_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — coach (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -634,21 +668,27 @@ export const espn_wnba_calendar = espnWnbaCalendar;
  * @example await sdv.wnba.espnWnbaCoach({ coach_id: '…' });
  */
 export const espnWnbaCoach: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "coach",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/coaches/{coach_id}",
-      "pathParams": [
-        {
-          "name": "coach_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(COACH_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaCoach} (py/R parity). */
 export const espn_wnba_coach = espnWnbaCoach;
 
+const COACH_RECORD_DEF: WrapperDef = {
+  "short": "coach_record",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/coaches/{coach_id}/record/{record_type}",
+  "pathParams": [
+    {
+      "name": "coach_id"
+    },
+    {
+      "name": "record_type",
+      "required": false,
+      "default": 0
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — coach record (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -661,26 +701,25 @@ export const espn_wnba_coach = espnWnbaCoach;
  * @example await sdv.wnba.espnWnbaCoachRecord({ coach_id: '…' });
  */
 export const espnWnbaCoachRecord: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "coach_record",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/coaches/{coach_id}/record/{record_type}",
-      "pathParams": [
-        {
-          "name": "coach_id"
-        },
-        {
-          "name": "record_type",
-          "required": false,
-          "default": 0
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(COACH_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaCoachRecord} (py/R parity). */
 export const espn_wnba_coach_record = espnWnbaCoachRecord;
 
+const COACH_SEASON_DEF: WrapperDef = {
+  "short": "coach_season",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/coaches/{coach_id}/seasons/{season}",
+  "pathParams": [
+    {
+      "name": "coach_id"
+    },
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — coach season (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -693,24 +732,18 @@ export const espn_wnba_coach_record = espnWnbaCoachRecord;
  * @example await sdv.wnba.espnWnbaCoachSeason({ coach_id: '…', season: '…' });
  */
 export const espnWnbaCoachSeason: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "coach_season",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/coaches/{coach_id}/seasons/{season}",
-      "pathParams": [
-        {
-          "name": "coach_id"
-        },
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(COACH_SEASON_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaCoachSeason} (py/R parity). */
 export const espn_wnba_coach_season = espnWnbaCoachSeason;
 
+const CONFERENCES_DEF: WrapperDef = {
+  "short": "conferences",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/groups",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — conferences (ESPN site.api.espn.com).
  *
@@ -721,17 +754,18 @@ export const espn_wnba_coach_season = espnWnbaCoachSeason;
  * @example await sdv.wnba.espnWnbaConferences({});
  */
 export const espnWnbaConferences: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "conferences",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/groups",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(CONFERENCES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaConferences} (py/R parity). */
 export const espn_wnba_conferences = espnWnbaConferences;
 
+const DRAFT_DEF: WrapperDef = {
+  "short": "draft",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/draft",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — draft (ESPN site.api.espn.com).
  *
@@ -742,17 +776,22 @@ export const espn_wnba_conferences = espnWnbaConferences;
  * @example await sdv.wnba.espnWnbaDraft({});
  */
 export const espnWnbaDraft: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "draft",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/draft",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaDraft} (py/R parity). */
 export const espn_wnba_draft = espnWnbaDraft;
 
+const EVENT_DEF: WrapperDef = {
+  "short": "event",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -764,21 +803,27 @@ export const espn_wnba_draft = espnWnbaDraft;
  * @example await sdv.wnba.espnWnbaEvent({ event_id: '…' });
  */
 export const espnWnbaEvent: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEvent} (py/R parity). */
 export const espn_wnba_event = espnWnbaEvent;
 
+const EVENT_BROADCASTS_DEF: WrapperDef = {
+  "short": "event_broadcasts",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -791,26 +836,27 @@ export const espn_wnba_event = espnWnbaEvent;
  * @example await sdv.wnba.espnWnbaEventBroadcasts({ event_id: '…' });
  */
 export const espnWnbaEventBroadcasts: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_broadcasts",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventBroadcasts} (py/R parity). */
 export const espn_wnba_event_broadcasts = espnWnbaEventBroadcasts;
 
+const EVENT_COMPETITION_DEF: WrapperDef = {
+  "short": "event_competition",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competition (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -823,26 +869,30 @@ export const espn_wnba_event_broadcasts = espnWnbaEventBroadcasts;
  * @example await sdv.wnba.espnWnbaEventCompetition({ event_id: '…' });
  */
 export const espnWnbaEventCompetition: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competition",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITION_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetition} (py/R parity). */
 export const espn_wnba_event_competition = espnWnbaEventCompetition;
 
+const EVENT_COMPETITOR_DEF: WrapperDef = {
+  "short": "event_competitor",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitor (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -856,29 +906,30 @@ export const espn_wnba_event_competition = espnWnbaEventCompetition;
  * @example await sdv.wnba.espnWnbaEventCompetitor({ event_id: '…', team_id: '…' });
  */
 export const espnWnbaEventCompetitor: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitor} (py/R parity). */
 export const espn_wnba_event_competitor = espnWnbaEventCompetitor;
 
+const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
+  "short": "event_competitor_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -892,29 +943,30 @@ export const espn_wnba_event_competitor = espnWnbaEventCompetitor;
  * @example await sdv.wnba.espnWnbaEventCompetitorLeaders({ event_id: '…', team_id: '…' });
  */
 export const espnWnbaEventCompetitorLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitorLeaders} (py/R parity). */
 export const espn_wnba_event_competitor_leaders = espnWnbaEventCompetitorLeaders;
 
+const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
+  "short": "event_competitor_linescores",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -928,29 +980,30 @@ export const espn_wnba_event_competitor_leaders = espnWnbaEventCompetitorLeaders
  * @example await sdv.wnba.espnWnbaEventCompetitorLinescores({ event_id: '…', team_id: '…' });
  */
 export const espnWnbaEventCompetitorLinescores: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_linescores",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitorLinescores} (py/R parity). */
 export const espn_wnba_event_competitor_linescores = espnWnbaEventCompetitorLinescores;
 
+const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
+  "short": "event_competitor_record",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitor record (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -964,29 +1017,30 @@ export const espn_wnba_event_competitor_linescores = espnWnbaEventCompetitorLine
  * @example await sdv.wnba.espnWnbaEventCompetitorRecord({ event_id: '…', team_id: '…' });
  */
 export const espnWnbaEventCompetitorRecord: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_record",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitorRecord} (py/R parity). */
 export const espn_wnba_event_competitor_record = espnWnbaEventCompetitorRecord;
 
+const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
+  "short": "event_competitor_roster",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1000,29 +1054,30 @@ export const espn_wnba_event_competitor_record = espnWnbaEventCompetitorRecord;
  * @example await sdv.wnba.espnWnbaEventCompetitorRoster({ event_id: '…', team_id: '…' });
  */
 export const espnWnbaEventCompetitorRoster: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_roster",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitorRoster} (py/R parity). */
 export const espn_wnba_event_competitor_roster = espnWnbaEventCompetitorRoster;
 
+const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
+  "short": "event_competitor_statistics",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "team_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1036,29 +1091,27 @@ export const espn_wnba_event_competitor_roster = espnWnbaEventCompetitorRoster;
  * @example await sdv.wnba.espnWnbaEventCompetitorStatistics({ event_id: '…', team_id: '…' });
  */
 export const espnWnbaEventCompetitorStatistics: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitor_statistics",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "team_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitorStatistics} (py/R parity). */
 export const espn_wnba_event_competitor_statistics = espnWnbaEventCompetitorStatistics;
 
+const EVENT_COMPETITORS_DEF: WrapperDef = {
+  "short": "event_competitors",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event competitors (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1071,26 +1124,27 @@ export const espn_wnba_event_competitor_statistics = espnWnbaEventCompetitorStat
  * @example await sdv.wnba.espnWnbaEventCompetitors({ event_id: '…' });
  */
 export const espnWnbaEventCompetitors: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_competitors",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventCompetitors} (py/R parity). */
 export const espn_wnba_event_competitors = espnWnbaEventCompetitors;
 
+const EVENT_LEADERS_DEF: WrapperDef = {
+  "short": "event_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1103,26 +1157,27 @@ export const espn_wnba_event_competitors = espnWnbaEventCompetitors;
  * @example await sdv.wnba.espnWnbaEventLeaders({ event_id: '…' });
  */
 export const espnWnbaEventLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventLeaders} (py/R parity). */
 export const espn_wnba_event_leaders = espnWnbaEventLeaders;
 
+const EVENT_ODDS_DEF: WrapperDef = {
+  "short": "event_odds",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event odds (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1135,26 +1190,30 @@ export const espn_wnba_event_leaders = espnWnbaEventLeaders;
  * @example await sdv.wnba.espnWnbaEventOdds({ event_id: '…' });
  */
 export const espnWnbaEventOdds: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_odds",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_ODDS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventOdds} (py/R parity). */
 export const espn_wnba_event_odds = espnWnbaEventOdds;
 
+const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
+  "short": "event_official_detail",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "official_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event official detail (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1168,29 +1227,27 @@ export const espn_wnba_event_odds = espnWnbaEventOdds;
  * @example await sdv.wnba.espnWnbaEventOfficialDetail({ event_id: '…', official_id: '…' });
  */
 export const espnWnbaEventOfficialDetail: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_official_detail",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "official_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventOfficialDetail} (py/R parity). */
 export const espn_wnba_event_official_detail = espnWnbaEventOfficialDetail;
 
+const EVENT_OFFICIALS_DEF: WrapperDef = {
+  "short": "event_officials",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event officials (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1203,26 +1260,30 @@ export const espn_wnba_event_official_detail = espnWnbaEventOfficialDetail;
  * @example await sdv.wnba.espnWnbaEventOfficials({ event_id: '…' });
  */
 export const espnWnbaEventOfficials: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_officials",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventOfficials} (py/R parity). */
 export const espn_wnba_event_officials = espnWnbaEventOfficials;
 
+const EVENT_PLAY_DEF: WrapperDef = {
+  "short": "event_play",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "play_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event play (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1236,29 +1297,30 @@ export const espn_wnba_event_officials = espnWnbaEventOfficials;
  * @example await sdv.wnba.espnWnbaEventPlay({ event_id: '…', play_id: '…' });
  */
 export const espnWnbaEventPlay: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_play",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "play_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PLAY_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventPlay} (py/R parity). */
 export const espn_wnba_event_play = espnWnbaEventPlay;
 
+const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
+  "short": "event_play_personnel",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "play_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event play personnel (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1272,29 +1334,33 @@ export const espn_wnba_event_play = espnWnbaEventPlay;
  * @example await sdv.wnba.espnWnbaEventPlayPersonnel({ event_id: '…', play_id: '…' });
  */
 export const espnWnbaEventPlayPersonnel: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_play_personnel",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "play_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventPlayPersonnel} (py/R parity). */
 export const espn_wnba_event_play_personnel = espnWnbaEventPlayPersonnel;
 
+const EVENT_PLAYS_DEF: WrapperDef = {
+  "short": "event_plays",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 1000
+    }
+  ]
+};
 /**
  * WNBA — event plays (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1308,32 +1374,27 @@ export const espn_wnba_event_play_personnel = espnWnbaEventPlayPersonnel;
  * @example await sdv.wnba.espnWnbaEventPlays({ event_id: '…' });
  */
 export const espnWnbaEventPlays: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_plays",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 1000
-        }
-      ]
-    }, CFG, params);
+  callWrapper(EVENT_PLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventPlays} (py/R parity). */
 export const espn_wnba_event_plays = espnWnbaEventPlays;
 
+const EVENT_POWERINDEX_DEF: WrapperDef = {
+  "short": "event_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1346,26 +1407,27 @@ export const espn_wnba_event_plays = espnWnbaEventPlays;
  * @example await sdv.wnba.espnWnbaEventPowerindex({ event_id: '…' });
  */
 export const espnWnbaEventPowerindex: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_powerindex",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventPowerindex} (py/R parity). */
 export const espn_wnba_event_powerindex = espnWnbaEventPowerindex;
 
+const EVENT_PREDICTOR_DEF: WrapperDef = {
+  "short": "event_predictor",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event predictor (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1378,26 +1440,33 @@ export const espn_wnba_event_powerindex = espnWnbaEventPowerindex;
  * @example await sdv.wnba.espnWnbaEventPredictor({ event_id: '…' });
  */
 export const espnWnbaEventPredictor: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_predictor",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventPredictor} (py/R parity). */
 export const espn_wnba_event_predictor = espnWnbaEventPredictor;
 
+const EVENT_PROBABILITIES_DEF: WrapperDef = {
+  "short": "event_probabilities",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 300
+    }
+  ]
+};
 /**
  * WNBA — event probabilities (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1411,32 +1480,27 @@ export const espn_wnba_event_predictor = espnWnbaEventPredictor;
  * @example await sdv.wnba.espnWnbaEventProbabilities({ event_id: '…' });
  */
 export const espnWnbaEventProbabilities: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_probabilities",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 300
-        }
-      ]
-    }, CFG, params);
+  callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventProbabilities} (py/R parity). */
 export const espn_wnba_event_probabilities = espnWnbaEventProbabilities;
 
+const EVENT_PROPBETS_DEF: WrapperDef = {
+  "short": "event_propbets",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event propbets (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1449,26 +1513,27 @@ export const espn_wnba_event_probabilities = espnWnbaEventProbabilities;
  * @example await sdv.wnba.espnWnbaEventPropbets({ event_id: '…' });
  */
 export const espnWnbaEventPropbets: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_propbets",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_PROPBETS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventPropbets} (py/R parity). */
 export const espn_wnba_event_propbets = espnWnbaEventPropbets;
 
+const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
+  "short": "event_scoringplays",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1481,26 +1546,27 @@ export const espn_wnba_event_propbets = espnWnbaEventPropbets;
  * @example await sdv.wnba.espnWnbaEventScoringplays({ event_id: '…' });
  */
 export const espnWnbaEventScoringplays: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_scoringplays",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventScoringplays} (py/R parity). */
 export const espn_wnba_event_scoringplays = espnWnbaEventScoringplays;
 
+const EVENT_SITUATION_DEF: WrapperDef = {
+  "short": "event_situation",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event situation (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1513,26 +1579,27 @@ export const espn_wnba_event_scoringplays = espnWnbaEventScoringplays;
  * @example await sdv.wnba.espnWnbaEventSituation({ event_id: '…' });
  */
 export const espnWnbaEventSituation: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_situation",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_SITUATION_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventSituation} (py/R parity). */
 export const espn_wnba_event_situation = espnWnbaEventSituation;
 
+const EVENT_STATUS_DEF: WrapperDef = {
+  "short": "event_status",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
+  "pathParams": [
+    {
+      "name": "event_id"
+    },
+    {
+      "name": "cid",
+      "required": false,
+      "defaultFrom": "event_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — event status (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1545,26 +1612,28 @@ export const espn_wnba_event_situation = espnWnbaEventSituation;
  * @example await sdv.wnba.espnWnbaEventStatus({ event_id: '…' });
  */
 export const espnWnbaEventStatus: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "event_status",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
-      "pathParams": [
-        {
-          "name": "event_id"
-        },
-        {
-          "name": "cid",
-          "required": false,
-          "defaultFrom": "event_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(EVENT_STATUS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEventStatus} (py/R parity). */
 export const espn_wnba_event_status = espnWnbaEventStatus;
 
+const EVENTS_DEF: WrapperDef = {
+  "short": "events",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/events",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "dates",
+      "queryKey": "dates"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * WNBA — events (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1577,27 +1646,22 @@ export const espn_wnba_event_status = espnWnbaEventStatus;
  * @example await sdv.wnba.espnWnbaEvents({});
  */
 export const espnWnbaEvents: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "events",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/events",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "dates",
-          "queryKey": "dates"
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaEvents} (py/R parity). */
 export const espn_wnba_events = espnWnbaEvents;
 
+const FRANCHISE_DEF: WrapperDef = {
+  "short": "franchise",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/franchises/{franchise_id}",
+  "pathParams": [
+    {
+      "name": "franchise_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — franchise (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1609,21 +1673,24 @@ export const espn_wnba_events = espnWnbaEvents;
  * @example await sdv.wnba.espnWnbaFranchise({ franchise_id: '…' });
  */
 export const espnWnbaFranchise: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "franchise",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/franchises/{franchise_id}",
-      "pathParams": [
-        {
-          "name": "franchise_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(FRANCHISE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaFranchise} (py/R parity). */
 export const espn_wnba_franchise = espnWnbaFranchise;
 
+const FRANCHISES_DEF: WrapperDef = {
+  "short": "franchises",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/franchises",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * WNBA — franchises (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1635,23 +1702,18 @@ export const espn_wnba_franchise = espnWnbaFranchise;
  * @example await sdv.wnba.espnWnbaFranchises({});
  */
 export const espnWnbaFranchises: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "franchises",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/franchises",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(FRANCHISES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaFranchises} (py/R parity). */
 export const espn_wnba_franchises = espnWnbaFranchises;
 
+const INJURIES_DEF: WrapperDef = {
+  "short": "injuries",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/injuries",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — injuries (ESPN site.api.espn.com).
  *
@@ -1662,17 +1724,45 @@ export const espn_wnba_franchises = espnWnbaFranchises;
  * @example await sdv.wnba.espnWnbaInjuries({});
  */
 export const espnWnbaInjuries: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "injuries",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/injuries",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaInjuries} (py/R parity). */
 export const espn_wnba_injuries = espnWnbaInjuries;
 
+const LEADERS_DEF: WrapperDef = {
+  "short": "leaders",
+  "family": "web_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/statistics/byathlete",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "category",
+      "queryKey": "category"
+    },
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 50
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    },
+    {
+      "name": "sort",
+      "queryKey": "sort"
+    }
+  ]
+};
 /**
  * WNBA — leaders (ESPN site.web.api.espn.com (web v3)).
  *
@@ -1689,44 +1779,18 @@ export const espn_wnba_injuries = espnWnbaInjuries;
  * @example await sdv.wnba.espnWnbaLeaders({});
  */
 export const espnWnbaLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "leaders",
-      "family": "web_v3",
-      "scope": "universal",
-      "path": "/{sport}/{league}/statistics/byathlete",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "category",
-          "queryKey": "category"
-        },
-        {
-          "name": "season",
-          "queryKey": "season"
-        },
-        {
-          "name": "season_type",
-          "queryKey": "seasontype"
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 50
-        },
-        {
-          "name": "page",
-          "queryKey": "page",
-          "default": 1
-        },
-        {
-          "name": "sort",
-          "queryKey": "sort"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaLeaders} (py/R parity). */
 export const espn_wnba_leaders = espnWnbaLeaders;
 
+const LEADERS_CORE_DEF: WrapperDef = {
+  "short": "leaders_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/leaders",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — leaders core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1737,17 +1801,18 @@ export const espn_wnba_leaders = espnWnbaLeaders;
  * @example await sdv.wnba.espnWnbaLeadersCore({});
  */
 export const espnWnbaLeadersCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "leaders_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/leaders",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(LEADERS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaLeadersCore} (py/R parity). */
 export const espn_wnba_leaders_core = espnWnbaLeadersCore;
 
+const LEAGUE_NOTES_DEF: WrapperDef = {
+  "short": "league_notes",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/notes",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — league notes (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1758,17 +1823,18 @@ export const espn_wnba_leaders_core = espnWnbaLeadersCore;
  * @example await sdv.wnba.espnWnbaLeagueNotes({});
  */
 export const espnWnbaLeagueNotes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "league_notes",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/notes",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(LEAGUE_NOTES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaLeagueNotes} (py/R parity). */
 export const espn_wnba_league_notes = espnWnbaLeagueNotes;
 
+const LEAGUE_ROOT_DEF: WrapperDef = {
+  "short": "league_root",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — league root (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1779,17 +1845,24 @@ export const espn_wnba_league_notes = espnWnbaLeagueNotes;
  * @example await sdv.wnba.espnWnbaLeagueRoot({});
  */
 export const espnWnbaLeagueRoot: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "league_root",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(LEAGUE_ROOT_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaLeagueRoot} (py/R parity). */
 export const espn_wnba_league_root = espnWnbaLeagueRoot;
 
+const NEWS_DEF: WrapperDef = {
+  "short": "news",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/news",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 50
+    }
+  ]
+};
 /**
  * WNBA — news (ESPN site.api.espn.com).
  *
@@ -1801,23 +1874,22 @@ export const espn_wnba_league_root = espnWnbaLeagueRoot;
  * @example await sdv.wnba.espnWnbaNews({});
  */
 export const espnWnbaNews: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "news",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/news",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 50
-        }
-      ]
-    }, CFG, params);
+  callWrapper(NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaNews} (py/R parity). */
 export const espn_wnba_news = espnWnbaNews;
 
+const POSITION_DEF: WrapperDef = {
+  "short": "position",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/positions/{position_id}",
+  "pathParams": [
+    {
+      "name": "position_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — position (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1829,21 +1901,18 @@ export const espn_wnba_news = espnWnbaNews;
  * @example await sdv.wnba.espnWnbaPosition({ position_id: '…' });
  */
 export const espnWnbaPosition: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "position",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/positions/{position_id}",
-      "pathParams": [
-        {
-          "name": "position_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(POSITION_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaPosition} (py/R parity). */
 export const espn_wnba_position = espnWnbaPosition;
 
+const POSITIONS_DEF: WrapperDef = {
+  "short": "positions",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/positions",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — positions (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1854,17 +1923,40 @@ export const espn_wnba_position = espnWnbaPosition;
  * @example await sdv.wnba.espnWnbaPositions({});
  */
 export const espnWnbaPositions: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "positions",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/positions",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(POSITIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaPositions} (py/R parity). */
 export const espn_wnba_positions = espnWnbaPositions;
 
+const SCOREBOARD_DEF: WrapperDef = {
+  "short": "scoreboard",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/scoreboard",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "dates",
+      "queryKey": "dates"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    },
+    {
+      "name": "groups",
+      "queryKey": "groups"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * WNBA — scoreboard (ESPN site.api.espn.com).
  *
@@ -1880,39 +1972,33 @@ export const espn_wnba_positions = espnWnbaPositions;
  * @example await sdv.wnba.espnWnbaScoreboard({});
  */
 export const espnWnbaScoreboard: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "scoreboard",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/scoreboard",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "dates",
-          "queryKey": "dates"
-        },
-        {
-          "name": "week",
-          "queryKey": "week"
-        },
-        {
-          "name": "season_type",
-          "queryKey": "seasontype"
-        },
-        {
-          "name": "groups",
-          "queryKey": "groups"
-        },
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SCOREBOARD_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaScoreboard} (py/R parity). */
 export const espn_wnba_scoreboard = espnWnbaScoreboard;
 
+const SEASON_ATHLETES_DEF: WrapperDef = {
+  "short": "season_athletes",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 100
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    }
+  ]
+};
 /**
  * WNBA — season athletes (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1926,32 +2012,22 @@ export const espn_wnba_scoreboard = espnWnbaScoreboard;
  * @example await sdv.wnba.espnWnbaSeasonAthletes({ season: '…' });
  */
 export const espnWnbaSeasonAthletes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_athletes",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 100
-        },
-        {
-          "name": "page",
-          "queryKey": "page",
-          "default": 1
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_ATHLETES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonAthletes} (py/R parity). */
 export const espn_wnba_season_athletes = espnWnbaSeasonAthletes;
 
+const SEASON_AWARDS_DEF: WrapperDef = {
+  "short": "season_awards",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/awards",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season awards (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1963,21 +2039,28 @@ export const espn_wnba_season_athletes = espnWnbaSeasonAthletes;
  * @example await sdv.wnba.espnWnbaSeasonAwards({ season: '…' });
  */
 export const espnWnbaSeasonAwards: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_awards",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/awards",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_AWARDS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonAwards} (py/R parity). */
 export const espn_wnba_season_awards = espnWnbaSeasonAwards;
 
+const SEASON_COACHES_DEF: WrapperDef = {
+  "short": "season_coaches",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/coaches",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * WNBA — season coaches (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -1990,27 +2073,22 @@ export const espn_wnba_season_awards = espnWnbaSeasonAwards;
  * @example await sdv.wnba.espnWnbaSeasonCoaches({ season: '…' });
  */
 export const espnWnbaSeasonCoaches: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_coaches",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/coaches",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_COACHES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonCoaches} (py/R parity). */
 export const espn_wnba_season_coaches = espnWnbaSeasonCoaches;
 
+const SEASON_DRAFT_DEF: WrapperDef = {
+  "short": "season_draft",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/draft",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season draft (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2022,21 +2100,25 @@ export const espn_wnba_season_coaches = espnWnbaSeasonCoaches;
  * @example await sdv.wnba.espnWnbaSeasonDraft({ season: '…' });
  */
 export const espnWnbaSeasonDraft: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_draft",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/draft",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_DRAFT_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonDraft} (py/R parity). */
 export const espn_wnba_season_draft = espnWnbaSeasonDraft;
 
+const SEASON_DRAFT_ROUND_PICKS_DEF: WrapperDef = {
+  "short": "season_draft_round_picks",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "round_num"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season draft round picks (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2049,24 +2131,22 @@ export const espn_wnba_season_draft = espnWnbaSeasonDraft;
  * @example await sdv.wnba.espnWnbaSeasonDraftRoundPicks({ season: '…', round_num: '…' });
  */
 export const espnWnbaSeasonDraftRoundPicks: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_draft_round_picks",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/draft/rounds/{round_num}/picks",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "round_num"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_DRAFT_ROUND_PICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonDraftRoundPicks} (py/R parity). */
 export const espn_wnba_season_draft_round_picks = espnWnbaSeasonDraftRoundPicks;
 
+const SEASON_FREEAGENTS_DEF: WrapperDef = {
+  "short": "season_freeagents",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/freeagents",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season freeagents (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2078,21 +2158,22 @@ export const espn_wnba_season_draft_round_picks = espnWnbaSeasonDraftRoundPicks;
  * @example await sdv.wnba.espnWnbaSeasonFreeagents({ season: '…' });
  */
 export const espnWnbaSeasonFreeagents: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_freeagents",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/freeagents",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_FREEAGENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonFreeagents} (py/R parity). */
 export const espn_wnba_season_freeagents = espnWnbaSeasonFreeagents;
 
+const SEASON_FUTURES_DEF: WrapperDef = {
+  "short": "season_futures",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/futures",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season futures (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2104,21 +2185,28 @@ export const espn_wnba_season_freeagents = espnWnbaSeasonFreeagents;
  * @example await sdv.wnba.espnWnbaSeasonFutures({ season: '…' });
  */
 export const espnWnbaSeasonFutures: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_futures",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/futures",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_FUTURES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonFutures} (py/R parity). */
 export const espn_wnba_season_futures = espnWnbaSeasonFutures;
 
+const SEASON_GROUP_DEF: WrapperDef = {
+  "short": "season_group",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "group_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season group (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2132,27 +2220,28 @@ export const espn_wnba_season_futures = espnWnbaSeasonFutures;
  * @example await sdv.wnba.espnWnbaSeasonGroup({ season: '…', season_type: '…', group_id: '…' });
  */
 export const espnWnbaSeasonGroup: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_group",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "group_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_GROUP_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonGroup} (py/R parity). */
 export const espn_wnba_season_group = espnWnbaSeasonGroup;
 
+const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
+  "short": "season_group_children",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "group_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season group children (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2166,27 +2255,34 @@ export const espn_wnba_season_group = espnWnbaSeasonGroup;
  * @example await sdv.wnba.espnWnbaSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
  */
 export const espnWnbaSeasonGroupChildren: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_group_children",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/children",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "group_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_GROUP_CHILDREN_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonGroupChildren} (py/R parity). */
 export const espn_wnba_season_group_children = espnWnbaSeasonGroupChildren;
 
+const SEASON_GROUP_TEAMS_DEF: WrapperDef = {
+  "short": "season_group_teams",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "group_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * WNBA — season group teams (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2201,33 +2297,25 @@ export const espn_wnba_season_group_children = espnWnbaSeasonGroupChildren;
  * @example await sdv.wnba.espnWnbaSeasonGroupTeams({ season: '…', season_type: '…', group_id: '…' });
  */
 export const espnWnbaSeasonGroupTeams: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_group_teams",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups/{group_id}/teams",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "group_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_GROUP_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonGroupTeams} (py/R parity). */
 export const espn_wnba_season_group_teams = espnWnbaSeasonGroupTeams;
 
+const SEASON_GROUPS_DEF: WrapperDef = {
+  "short": "season_groups",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season groups (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2240,24 +2328,22 @@ export const espn_wnba_season_group_teams = espnWnbaSeasonGroupTeams;
  * @example await sdv.wnba.espnWnbaSeasonGroups({ season: '…', season_type: '…' });
  */
 export const espnWnbaSeasonGroups: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_groups",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/groups",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_GROUPS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonGroups} (py/R parity). */
 export const espn_wnba_season_groups = espnWnbaSeasonGroups;
 
+const SEASON_INFO_DEF: WrapperDef = {
+  "short": "season_info",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season info (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2269,21 +2355,18 @@ export const espn_wnba_season_groups = espnWnbaSeasonGroups;
  * @example await sdv.wnba.espnWnbaSeasonInfo({ season: '…' });
  */
 export const espnWnbaSeasonInfo: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_info",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_INFO_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonInfo} (py/R parity). */
 export const espn_wnba_season_info = espnWnbaSeasonInfo;
 
+const SEASON_POINTER_DEF: WrapperDef = {
+  "short": "season_pointer",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/season",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — season pointer (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2294,17 +2377,26 @@ export const espn_wnba_season_info = espnWnbaSeasonInfo;
  * @example await sdv.wnba.espnWnbaSeasonPointer({});
  */
 export const espnWnbaSeasonPointer: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_pointer",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/season",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_POINTER_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonPointer} (py/R parity). */
 export const espn_wnba_season_pointer = espnWnbaSeasonPointer;
 
+const SEASON_POWERINDEX_DEF: WrapperDef = {
+  "short": "season_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex[/{team_id}]",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "team_id",
+      "required": false
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2317,25 +2409,22 @@ export const espn_wnba_season_pointer = espnWnbaSeasonPointer;
  * @example await sdv.wnba.espnWnbaSeasonPowerindex({ season: '…' });
  */
 export const espnWnbaSeasonPowerindex: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_powerindex",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex[/{team_id}]",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "team_id",
-          "required": false
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_POWERINDEX_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonPowerindex} (py/R parity). */
 export const espn_wnba_season_powerindex = espnWnbaSeasonPowerindex;
 
+const SEASON_POWERINDEX_LEADERS_DEF: WrapperDef = {
+  "short": "season_powerindex_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex/leaders",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2347,21 +2436,25 @@ export const espn_wnba_season_powerindex = espnWnbaSeasonPowerindex;
  * @example await sdv.wnba.espnWnbaSeasonPowerindexLeaders({ season: '…' });
  */
 export const espnWnbaSeasonPowerindexLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_powerindex_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/powerindex/leaders",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_POWERINDEX_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonPowerindexLeaders} (py/R parity). */
 export const espn_wnba_season_powerindex_leaders = espnWnbaSeasonPowerindexLeaders;
 
+const SEASON_TEAM_DEF: WrapperDef = {
+  "short": "season_team",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/teams/{team_id}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season team (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2374,24 +2467,28 @@ export const espn_wnba_season_powerindex_leaders = espnWnbaSeasonPowerindexLeade
  * @example await sdv.wnba.espnWnbaSeasonTeam({ season: '…', team_id: '…' });
  */
 export const espnWnbaSeasonTeam: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_team",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/teams/{team_id}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonTeam} (py/R parity). */
 export const espn_wnba_season_team = espnWnbaSeasonTeam;
 
+const SEASON_TEAMS_DEF: WrapperDef = {
+  "short": "season_teams",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/teams",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * WNBA — season teams (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2404,27 +2501,25 @@ export const espn_wnba_season_team = espnWnbaSeasonTeam;
  * @example await sdv.wnba.espnWnbaSeasonTeams({ season: '…' });
  */
 export const espnWnbaSeasonTeams: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_teams",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/teams",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_TEAMS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonTeams} (py/R parity). */
 export const espn_wnba_season_teams = espnWnbaSeasonTeams;
 
+const SEASON_TYPE_DEF: WrapperDef = {
+  "short": "season_type",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season type (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2437,24 +2532,25 @@ export const espn_wnba_season_teams = espnWnbaSeasonTeams;
  * @example await sdv.wnba.espnWnbaSeasonType({ season: '…', season_type: '…' });
  */
 export const espnWnbaSeasonType: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_type",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonType} (py/R parity). */
 export const espn_wnba_season_type = espnWnbaSeasonType;
 
+const SEASON_TYPE_CORRECTIONS_DEF: WrapperDef = {
+  "short": "season_type_corrections",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/corrections",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season type corrections (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2467,24 +2563,25 @@ export const espn_wnba_season_type = espnWnbaSeasonType;
  * @example await sdv.wnba.espnWnbaSeasonTypeCorrections({ season: '…', season_type: '…' });
  */
 export const espnWnbaSeasonTypeCorrections: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_type_corrections",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/corrections",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPE_CORRECTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonTypeCorrections} (py/R parity). */
 export const espn_wnba_season_type_corrections = espnWnbaSeasonTypeCorrections;
 
+const SEASON_TYPE_LEADERS_DEF: WrapperDef = {
+  "short": "season_type_leaders",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/leaders",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season type leaders (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2497,24 +2594,22 @@ export const espn_wnba_season_type_corrections = espnWnbaSeasonTypeCorrections;
  * @example await sdv.wnba.espnWnbaSeasonTypeLeaders({ season: '…', season_type: '…' });
  */
 export const espnWnbaSeasonTypeLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_type_leaders",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/leaders",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPE_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonTypeLeaders} (py/R parity). */
 export const espn_wnba_season_type_leaders = espnWnbaSeasonTypeLeaders;
 
+const SEASON_TYPES_DEF: WrapperDef = {
+  "short": "season_types",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types",
+  "pathParams": [
+    {
+      "name": "season"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season types (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2526,21 +2621,28 @@ export const espn_wnba_season_type_leaders = espnWnbaSeasonTypeLeaders;
  * @example await sdv.wnba.espnWnbaSeasonTypes({ season: '…' });
  */
 export const espnWnbaSeasonTypes: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_types",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types",
-      "pathParams": [
-        {
-          "name": "season"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_TYPES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonTypes} (py/R parity). */
 export const espn_wnba_season_types = espnWnbaSeasonTypes;
 
+const SEASON_WEEK_DEF: WrapperDef = {
+  "short": "season_week",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season week (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2554,27 +2656,34 @@ export const espn_wnba_season_types = espnWnbaSeasonTypes;
  * @example await sdv.wnba.espnWnbaSeasonWeek({ season: '…', season_type: '…', week: '…' });
  */
 export const espnWnbaSeasonWeek: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_week",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "week"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_WEEK_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonWeek} (py/R parity). */
 export const espn_wnba_season_week = espnWnbaSeasonWeek;
 
+const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
+  "short": "season_week_events",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * WNBA — season week events (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2589,33 +2698,25 @@ export const espn_wnba_season_week = espnWnbaSeasonWeek;
  * @example await sdv.wnba.espnWnbaSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
  */
 export const espnWnbaSeasonWeekEvents: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_week_events",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        },
-        {
-          "name": "week"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonWeekEvents} (py/R parity). */
 export const espn_wnba_season_week_events = espnWnbaSeasonWeekEvents;
 
+const SEASON_WEEKS_DEF: WrapperDef = {
+  "short": "season_weeks",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — season weeks (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2628,24 +2729,24 @@ export const espn_wnba_season_week_events = espnWnbaSeasonWeekEvents;
  * @example await sdv.wnba.espnWnbaSeasonWeeks({ season: '…', season_type: '…' });
  */
 export const espnWnbaSeasonWeeks: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "season_weeks",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks",
-      "pathParams": [
-        {
-          "name": "season"
-        },
-        {
-          "name": "season_type"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(SEASON_WEEKS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasonWeeks} (py/R parity). */
 export const espn_wnba_season_weeks = espnWnbaSeasonWeeks;
 
+const SEASONS_DEF: WrapperDef = {
+  "short": "seasons",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * WNBA — seasons (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2657,23 +2758,31 @@ export const espn_wnba_season_weeks = espnWnbaSeasonWeeks;
  * @example await sdv.wnba.espnWnbaSeasons({});
  */
 export const espnWnbaSeasons: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "seasons",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/seasons",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SEASONS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSeasons} (py/R parity). */
 export const espn_wnba_seasons = espnWnbaSeasons;
 
+const STANDINGS_DEF: WrapperDef = {
+  "short": "standings",
+  "family": "site_v2_alt",
+  "scope": "universal",
+  "path": "/{sport}/{league}/standings",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "group",
+      "queryKey": "group"
+    },
+    {
+      "name": "standings_type",
+      "queryKey": "type"
+    }
+  ]
+};
 /**
  * WNBA — standings (ESPN site.api.espn.com (v2)).
  *
@@ -2687,30 +2796,18 @@ export const espn_wnba_seasons = espnWnbaSeasons;
  * @example await sdv.wnba.espnWnbaStandings({});
  */
 export const espnWnbaStandings: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "standings",
-      "family": "site_v2_alt",
-      "scope": "universal",
-      "path": "/{sport}/{league}/standings",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        },
-        {
-          "name": "group",
-          "queryKey": "group"
-        },
-        {
-          "name": "standings_type",
-          "queryKey": "type"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(STANDINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaStandings} (py/R parity). */
 export const espn_wnba_standings = espnWnbaStandings;
 
+const STANDINGS_CORE_DEF: WrapperDef = {
+  "short": "standings_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/standings",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — standings core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2721,17 +2818,18 @@ export const espn_wnba_standings = espnWnbaStandings;
  * @example await sdv.wnba.espnWnbaStandingsCore({});
  */
 export const espnWnbaStandingsCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "standings_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/standings",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(STANDINGS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaStandingsCore} (py/R parity). */
 export const espn_wnba_standings_core = espnWnbaStandingsCore;
 
+const STATISTICS_LEAGUE_DEF: WrapperDef = {
+  "short": "statistics_league",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/statistics",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — statistics league (ESPN site.api.espn.com).
  *
@@ -2742,17 +2840,23 @@ export const espn_wnba_standings_core = espnWnbaStandingsCore;
  * @example await sdv.wnba.espnWnbaStatisticsLeague({});
  */
 export const espnWnbaStatisticsLeague: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "statistics_league",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/statistics",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(STATISTICS_LEAGUE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaStatisticsLeague} (py/R parity). */
 export const espn_wnba_statistics_league = espnWnbaStatisticsLeague;
 
+const SUMMARY_DEF: WrapperDef = {
+  "short": "summary",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/summary",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "event_id",
+      "queryKey": "event"
+    }
+  ]
+};
 /**
  * WNBA — summary (ESPN site.api.espn.com).
  *
@@ -2760,26 +2864,23 @@ export const espn_wnba_statistics_league = espnWnbaStatisticsLeague;
  *
  * @param params.event_id - query parameter (ESPN `event`).
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
- * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
  * @example await sdv.wnba.espnWnbaSummary({});
  */
 export const espnWnbaSummary: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "summary",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/summary",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "event_id",
-          "queryKey": "event"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(SUMMARY_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaSummary} (py/R parity). */
 export const espn_wnba_summary = espnWnbaSummary;
 
+const TALENTPICKS_DEF: WrapperDef = {
+  "short": "talentpicks",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/talentpicks",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — talentpicks (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2790,17 +2891,22 @@ export const espn_wnba_summary = espnWnbaSummary;
  * @example await sdv.wnba.espnWnbaTalentpicks({});
  */
 export const espnWnbaTalentpicks: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "talentpicks",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/talentpicks",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TALENTPICKS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTalentpicks} (py/R parity). */
 export const espn_wnba_talentpicks = espnWnbaTalentpicks;
 
+const TEAM_DEF: WrapperDef = {
+  "short": "team",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team (ESPN site.api.espn.com).
  *
@@ -2812,21 +2918,22 @@ export const espn_wnba_talentpicks = espnWnbaTalentpicks;
  * @example await sdv.wnba.espnWnbaTeam({ team_id: '…' });
  */
 export const espnWnbaTeam: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeam} (py/R parity). */
 export const espn_wnba_team = espnWnbaTeam;
 
+const TEAM_CORE_DEF: WrapperDef = {
+  "short": "team_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/teams/{team_id}",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -2838,21 +2945,22 @@ export const espn_wnba_team = espnWnbaTeam;
  * @example await sdv.wnba.espnWnbaTeamCore({ team_id: '…' });
  */
 export const espnWnbaTeamCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/teams/{team_id}",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamCore} (py/R parity). */
 export const espn_wnba_team_core = espnWnbaTeamCore;
 
+const TEAM_DEPTHCHARTS_DEF: WrapperDef = {
+  "short": "team_depthcharts",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/depthcharts",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team depthcharts (ESPN site.api.espn.com).
  *
@@ -2864,21 +2972,22 @@ export const espn_wnba_team_core = espnWnbaTeamCore;
  * @example await sdv.wnba.espnWnbaTeamDepthcharts({ team_id: '…' });
  */
 export const espnWnbaTeamDepthcharts: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_depthcharts",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/depthcharts",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_DEPTHCHARTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamDepthcharts} (py/R parity). */
 export const espn_wnba_team_depthcharts = espnWnbaTeamDepthcharts;
 
+const TEAM_HISTORY_DEF: WrapperDef = {
+  "short": "team_history",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/history",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team history (ESPN site.api.espn.com).
  *
@@ -2890,21 +2999,22 @@ export const espn_wnba_team_depthcharts = espnWnbaTeamDepthcharts;
  * @example await sdv.wnba.espnWnbaTeamHistory({ team_id: '…' });
  */
 export const espnWnbaTeamHistory: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_history",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/history",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_HISTORY_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamHistory} (py/R parity). */
 export const espn_wnba_team_history = espnWnbaTeamHistory;
 
+const TEAM_INJURIES_DEF: WrapperDef = {
+  "short": "team_injuries",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/injuries",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team injuries (ESPN site.api.espn.com).
  *
@@ -2916,21 +3026,22 @@ export const espn_wnba_team_history = espnWnbaTeamHistory;
  * @example await sdv.wnba.espnWnbaTeamInjuries({ team_id: '…' });
  */
 export const espnWnbaTeamInjuries: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_injuries",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/injuries",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_INJURIES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamInjuries} (py/R parity). */
 export const espn_wnba_team_injuries = espnWnbaTeamInjuries;
 
+const TEAM_LEADERS_DEF: WrapperDef = {
+  "short": "team_leaders",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/leaders",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team leaders (ESPN site.api.espn.com).
  *
@@ -2942,21 +3053,28 @@ export const espn_wnba_team_injuries = espnWnbaTeamInjuries;
  * @example await sdv.wnba.espnWnbaTeamLeaders({ team_id: '…' });
  */
 export const espnWnbaTeamLeaders: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_leaders",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/leaders",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_LEADERS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamLeaders} (py/R parity). */
 export const espn_wnba_team_leaders = espnWnbaTeamLeaders;
 
+const TEAM_NEWS_DEF: WrapperDef = {
+  "short": "team_news",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/news",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 50
+    }
+  ]
+};
 /**
  * WNBA — team news (ESPN site.api.espn.com).
  *
@@ -2969,27 +3087,22 @@ export const espn_wnba_team_leaders = espnWnbaTeamLeaders;
  * @example await sdv.wnba.espnWnbaTeamNews({ team_id: '…' });
  */
 export const espnWnbaTeamNews: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_news",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/news",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 50
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAM_NEWS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamNews} (py/R parity). */
 export const espn_wnba_team_news = espnWnbaTeamNews;
 
+const TEAM_RECORD_DEF: WrapperDef = {
+  "short": "team_record",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/record",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team record (ESPN site.api.espn.com).
  *
@@ -3001,21 +3114,22 @@ export const espn_wnba_team_news = espnWnbaTeamNews;
  * @example await sdv.wnba.espnWnbaTeamRecord({ team_id: '…' });
  */
 export const espnWnbaTeamRecord: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_record",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/record",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_RECORD_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamRecord} (py/R parity). */
 export const espn_wnba_team_record = espnWnbaTeamRecord;
 
+const TEAM_ROSTER_DEF: WrapperDef = {
+  "short": "team_roster",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/roster",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team roster (ESPN site.api.espn.com).
  *
@@ -3027,21 +3141,27 @@ export const espn_wnba_team_record = espnWnbaTeamRecord;
  * @example await sdv.wnba.espnWnbaTeamRoster({ team_id: '…' });
  */
 export const espnWnbaTeamRoster: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_roster",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/roster",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_ROSTER_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamRoster} (py/R parity). */
 export const espn_wnba_team_roster = espnWnbaTeamRoster;
 
+const TEAM_SCHEDULE_DEF: WrapperDef = {
+  "short": "team_schedule",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/schedule",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    }
+  ]
+};
 /**
  * WNBA — team schedule (ESPN site.api.espn.com).
  *
@@ -3054,26 +3174,22 @@ export const espn_wnba_team_roster = espnWnbaTeamRoster;
  * @example await sdv.wnba.espnWnbaTeamSchedule({ team_id: '…' });
  */
 export const espnWnbaTeamSchedule: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_schedule",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/schedule",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": [
-        {
-          "name": "season",
-          "queryKey": "season"
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAM_SCHEDULE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamSchedule} (py/R parity). */
 export const espn_wnba_team_schedule = espnWnbaTeamSchedule;
 
+const TEAM_TRANSACTIONS_DEF: WrapperDef = {
+  "short": "team_transactions",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams/{team_id}/transactions",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — team transactions (ESPN site.api.espn.com).
  *
@@ -3085,21 +3201,24 @@ export const espn_wnba_team_schedule = espnWnbaTeamSchedule;
  * @example await sdv.wnba.espnWnbaTeamTransactions({ team_id: '…' });
  */
 export const espnWnbaTeamTransactions: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "team_transactions",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams/{team_id}/transactions",
-      "pathParams": [
-        {
-          "name": "team_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TEAM_TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamTransactions} (py/R parity). */
 export const espn_wnba_team_transactions = espnWnbaTeamTransactions;
 
+const TEAMS_CORE_DEF: WrapperDef = {
+  "short": "teams_core",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/teams",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
+};
 /**
  * WNBA — teams core (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3111,23 +3230,24 @@ export const espn_wnba_team_transactions = espnWnbaTeamTransactions;
  * @example await sdv.wnba.espnWnbaTeamsCore({});
  */
 export const espnWnbaTeamsCore: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "teams_core",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/teams",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 500
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAMS_CORE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamsCore} (py/R parity). */
 export const espn_wnba_teams_core = espnWnbaTeamsCore;
 
+const TEAMS_SITE_DEF: WrapperDef = {
+  "short": "teams_site",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/teams",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 1000
+    }
+  ]
+};
 /**
  * WNBA — teams site (ESPN site.api.espn.com).
  *
@@ -3139,23 +3259,18 @@ export const espn_wnba_teams_core = espnWnbaTeamsCore;
  * @example await sdv.wnba.espnWnbaTeamsSite({});
  */
 export const espnWnbaTeamsSite: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "teams_site",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/teams",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 1000
-        }
-      ]
-    }, CFG, params);
+  callWrapper(TEAMS_SITE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTeamsSite} (py/R parity). */
 export const espn_wnba_teams_site = espnWnbaTeamsSite;
 
+const TOURNAMENTS_DEF: WrapperDef = {
+  "short": "tournaments",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/tournaments",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — tournaments (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3166,17 +3281,18 @@ export const espn_wnba_teams_site = espnWnbaTeamsSite;
  * @example await sdv.wnba.espnWnbaTournaments({});
  */
 export const espnWnbaTournaments: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "tournaments",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/tournaments",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TOURNAMENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTournaments} (py/R parity). */
 export const espn_wnba_tournaments = espnWnbaTournaments;
 
+const TRANSACTIONS_DEF: WrapperDef = {
+  "short": "transactions",
+  "family": "site_v2",
+  "scope": "universal",
+  "path": "/{sport}/{league}/transactions",
+  "pathParams": [],
+  "queryParams": []
+};
 /**
  * WNBA — transactions (ESPN site.api.espn.com).
  *
@@ -3187,17 +3303,22 @@ export const espn_wnba_tournaments = espnWnbaTournaments;
  * @example await sdv.wnba.espnWnbaTransactions({});
  */
 export const espnWnbaTransactions: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "transactions",
-      "family": "site_v2",
-      "scope": "universal",
-      "path": "/{sport}/{league}/transactions",
-      "pathParams": [],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(TRANSACTIONS_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaTransactions} (py/R parity). */
 export const espn_wnba_transactions = espnWnbaTransactions;
 
+const VENUE_DEF: WrapperDef = {
+  "short": "venue",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/venues/{venue_id}",
+  "pathParams": [
+    {
+      "name": "venue_id"
+    }
+  ],
+  "queryParams": []
+};
 /**
  * WNBA — venue (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3209,21 +3330,24 @@ export const espn_wnba_transactions = espnWnbaTransactions;
  * @example await sdv.wnba.espnWnbaVenue({ venue_id: '…' });
  */
 export const espnWnbaVenue: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "venue",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/venues/{venue_id}",
-      "pathParams": [
-        {
-          "name": "venue_id"
-        }
-      ],
-      "queryParams": []
-    }, CFG, params);
+  callWrapper(VENUE_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaVenue} (py/R parity). */
 export const espn_wnba_venue = espnWnbaVenue;
 
+const VENUES_DEF: WrapperDef = {
+  "short": "venues",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/venues",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
+};
 /**
  * WNBA — venues (ESPN sports.core.api.espn.com (core v2)).
  *
@@ -3235,19 +3359,6 @@ export const espn_wnba_venue = espnWnbaVenue;
  * @example await sdv.wnba.espnWnbaVenues({});
  */
 export const espnWnbaVenues: WrapperFn = (params = {}) =>
-  callWrapper({
-      "short": "venues",
-      "family": "core_v2",
-      "scope": "universal",
-      "path": "/{sport}/leagues/{league}/venues",
-      "pathParams": [],
-      "queryParams": [
-        {
-          "name": "limit",
-          "queryKey": "limit",
-          "default": 200
-        }
-      ]
-    }, CFG, params);
+  callWrapper(VENUES_DEF, CFG, params);
 /** snake_case alias of {@link espnWnbaVenues} (py/R parity). */
 export const espn_wnba_venues = espnWnbaVenues;

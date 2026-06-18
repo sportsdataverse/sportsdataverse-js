@@ -387,6 +387,7 @@ WBB — summary (ESPN site.api.espn.com).
 |---|---|---|---|
 | `event` | `event_id` | no | query parameter |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
+| — | `section` | no | with `parsed`, return one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of all |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the `summary` dispatcher returns an object of 21 sub-frames keyed by section (`{ parsed: true, section: '<name>' }` for one); see [ESPN parsed returns](../../reference/espn-parsed-returns).
 
