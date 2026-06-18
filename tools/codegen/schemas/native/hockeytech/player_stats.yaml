@@ -15,139 +15,139 @@ columns:
   description: 'Short season name.'
 - name: playoff
   type: character
-  description: ''
+  description: 'Playoff-season flag.'
 - name: career
   type: character
-  description: ''
+  description: 'Career-stats flag.'
 - name: sopt_track_faceoffs
   type: character
-  description: ''
+  description: 'Whether faceoffs are tracked for this season.'
 - name: max_start_date
   type: character
-  description: ''
+  description: 'Latest game start date in the span.'
 - name: veteran_status
   type: character
-  description: ''
+  description: 'Veteran-status flag.'
 - name: veteran
   type: character
-  description: ''
+  description: 'Veteran flag.'
 - name: jersey_number
   type: character
   description: 'Jersey number.'
 - name: goals
   type: character
-  description: ''
+  description: 'Goals.'
 - name: games_played
   type: character
-  description: ''
+  description: 'Games played.'
 - name: assists
   type: character
-  description: ''
+  description: 'Assists.'
 - name: points
   type: character
-  description: ''
+  description: 'Points.'
 - name: plus_minus
   type: character
-  description: ''
+  description: 'Plus/minus.'
 - name: penalty_minutes
   type: character
-  description: ''
+  description: 'Penalty minutes.'
 - name: power_play_goals
   type: character
-  description: ''
+  description: 'Power-play goals.'
 - name: power_play_assists
   type: character
-  description: ''
+  description: 'Power-play assists.'
 - name: shots
   type: character
-  description: ''
+  description: 'Shots on goal.'
 - name: shootout_attempts
   type: character
-  description: ''
+  description: 'Shootout attempts.'
 - name: shootout_goals
   type: character
-  description: ''
+  description: 'Shootout goals.'
 - name: shootout_percentage
   type: character
-  description: ''
+  description: 'Shootout shooting %.'
 - name: shooting_percentage
   type: character
-  description: ''
+  description: 'Shooting %.'
 - name: shootout_winning_goals
   type: character
-  description: ''
+  description: 'Shootout-winning goals.'
 - name: points_per_game
   type: character
-  description: ''
+  description: 'Points per game.'
 - name: short_handed_goals
   type: character
-  description: ''
+  description: 'Short-handed goals.'
 - name: short_handed_assists
   type: character
-  description: ''
+  description: 'Short-handed assists.'
 - name: game_winning_goals
   type: character
-  description: ''
+  description: 'Game-winning goals.'
 - name: game_tieing_goals
   type: character
-  description: ''
+  description: 'Game-tying goals.'
 - name: faceoff_wins
   type: character
-  description: ''
+  description: 'Faceoff wins.'
 - name: faceoff_attempts
   type: character
-  description: ''
+  description: 'Faceoff attempts.'
 - name: faceoff_pct
   type: character
-  description: ''
+  description: 'Faceoff win %.'
 - name: hits
   type: character
-  description: ''
+  description: 'Hits.'
 - name: team_name
   type: character
-  description: ''
+  description: 'Team name.'
 - name: team_code
   type: character
-  description: ''
+  description: 'Team code.'
 - name: team_city
   type: character
-  description: ''
+  description: 'Team city.'
 - name: team_nickname
   type: character
-  description: ''
+  description: 'Team nickname.'
 - name: team_id
   type: character
-  description: ''
+  description: 'Team id.'
 - name: active
   type: character
-  description: ''
+  description: 'Active flag.'
 - name: first_goals
   type: character
-  description: ''
+  description: 'First goals of a game.'
 - name: insurance_goals
   type: character
-  description: ''
+  description: 'Insurance goals.'
 - name: overtime_goals
   type: character
-  description: ''
+  description: 'Overtime goals.'
 - name: unassisted_goals
   type: character
-  description: ''
+  description: 'Unassisted goals.'
 - name: empty_net_goals
   type: character
-  description: ''
+  description: 'Empty-net goals.'
 - name: penalty_minutes_per_game
   type: character
-  description: ''
+  description: 'Penalty minutes per game.'
 - name: division
   type: character
-  description: ''
+  description: 'Team division.'
 - name: ice_time
   type: character
-  description: ''
+  description: 'Total ice time.'
 - name: ice_time_minutes_seconds
   type: character
-  description: ''
+  description: 'Ice time (MM:SS).'
 - name: shots_blocked_by_player
   type: character
-  description: ''
+  description: 'Shots blocked by the player.'

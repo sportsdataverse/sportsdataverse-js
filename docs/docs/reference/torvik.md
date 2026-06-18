@@ -41,95 +41,95 @@ Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics
 |---|---|---|
 | `muid` | character | Matchup unique id. |
 | `date` | character | Game date (M/D/YY). |
-| `conmatch` | character |  |
-| `matchup` | character |  |
-| `prediction` | character |  |
-| `ttq` | numeric |  |
-| `conf` | integer |  |
-| `venue` | integer |  |
+| `conmatch` | character | Conference matchup descriptor. |
+| `matchup` | character | Ranked-matchup descriptor. |
+| `prediction` | character | Pre-game prediction (favorite, score, win %). |
+| `ttq` | numeric | Torvik Thrill Quotient (game excitement). |
+| `conf` | integer | Conference-game flag. |
+| `venue` | integer | Venue / neutral-site flag. |
 | `team1` | character | Team 1. |
-| `t1oe` | numeric |  |
-| `t1de` | numeric |  |
-| `t1py` | numeric |  |
-| `t1wp` | integer |  |
-| `t1propt` | numeric |  |
+| `t1oe` | numeric | Team 1 offensive efficiency in the game. |
+| `t1de` | numeric | Team 1 defensive efficiency in the game. |
+| `t1py` | numeric | Team 1 pre-game win probability (pythag). |
+| `t1wp` | integer | Team 1 win flag (1 if won). |
+| `t1propt` | numeric | Team 1 projected points. |
 | `team2` | character | Team 2. |
-| `t2oe` | numeric |  |
-| `t2de` | numeric |  |
-| `t2py` | numeric |  |
-| `t2wp` | integer |  |
-| `t2propt` | numeric |  |
-| `tpro` | numeric |  |
-| `t1qual` | character |  |
-| `t2qual` | character |  |
-| `gp` | integer |  |
+| `t2oe` | numeric | Team 2 offensive efficiency in the game. |
+| `t2de` | numeric | Team 2 defensive efficiency in the game. |
+| `t2py` | numeric | Team 2 pre-game win probability (pythag). |
+| `t2wp` | integer | Team 2 win flag (1 if won). |
+| `t2propt` | numeric | Team 2 projected points. |
+| `tpro` | numeric | Projected total points. |
+| `t1qual` | character | Team 1 game-quality descriptor. |
+| `t2qual` | character | Team 2 game-quality descriptor. |
+| `gp` | integer | Game-played flag (1 if completed). |
 | `result` | character | Final result string. |
-| `tempo` | numeric |  |
-| `possessions` | numeric |  |
-| `t1pts` | integer |  |
-| `t2pts` | integer |  |
+| `tempo` | numeric | Game tempo (possessions). |
+| `possessions` | numeric | Possessions in the game. |
+| `t1pts` | integer | Team 1 points. |
+| `t2pts` | integer | Team 2 points. |
 | `winner` | character | Winning team. |
 | `loser` | character | Losing team. |
-| `t1adjt` | numeric |  |
-| `t2adjt` | numeric |  |
-| `t1adjo` | numeric |  |
-| `t1adjd` | numeric |  |
-| `t2adjo` | numeric |  |
-| `t2adjd` | numeric |  |
-| `gamevalue` | numeric |  |
-| `mismatch` | numeric |  |
-| `blowout` | numeric |  |
-| `t1elite` | numeric |  |
-| `t2elite` | numeric |  |
-| `ord_date` | integer |  |
-| `t1ppp` | numeric |  |
-| `t2ppp` | numeric |  |
-| `gameppp` | numeric |  |
-| `t1rk` | integer |  |
-| `t2rk` | integer |  |
-| `t1gs` | numeric |  |
-| `t2gs` | numeric |  |
+| `t1adjt` | numeric | Team 1 adjusted tempo. |
+| `t2adjt` | numeric | Team 2 adjusted tempo. |
+| `t1adjo` | numeric | Team 1 adjusted offensive efficiency. |
+| `t1adjd` | numeric | Team 1 adjusted defensive efficiency. |
+| `t2adjo` | numeric | Team 2 adjusted offensive efficiency. |
+| `t2adjd` | numeric | Team 2 adjusted defensive efficiency. |
+| `gamevalue` | numeric | Game quality value. |
+| `mismatch` | numeric | Mismatch rating (predicted lopsidedness). |
+| `blowout` | numeric | Blowout rating. |
+| `t1elite` | numeric | Team 1 elite-performance rating. |
+| `t2elite` | numeric | Team 2 elite-performance rating. |
+| `ord_date` | integer | Ordinal date (sortable day index). |
+| `t1ppp` | numeric | Team 1 points per possession. |
+| `t2ppp` | numeric | Team 2 points per possession. |
+| `gameppp` | numeric | Combined game points per possession. |
+| `t1rk` | integer | Team 1 T-Rank at game time. |
+| `t2rk` | integer | Team 2 T-Rank at game time. |
+| `t1gs` | numeric | Team 1 single-game quality score. |
+| `t2gs` | numeric | Team 2 single-game quality score. |
 | `gamestats` | character | Nested per-game stat array (;-joined). |
-| `overtimes` | character |  |
-| `t1fun` | numeric |  |
-| `t2fun` | numeric |  |
-| `results` | character |  |
+| `overtimes` | character | Number of overtimes. |
+| `t1fun` | numeric | Team 1 fun rating. |
+| `t2fun` | numeric | Team 2 fun rating. |
+| `results` | character | Post-game results descriptor. |
 
 ### Returns — `torvik_game_stats` / `torvikGameStats`
 
 | col_name | type | description |
 |---|---|---|
 | `date` | character | Game date (M/D/YY). |
-| `type` | integer |  |
+| `type` | integer | Game-type flag. |
 | `team` | character | Team name. |
-| `conf` | character |  |
+| `conf` | character | Team conference. |
 | `opp` | character | Opponent. |
 | `venue` | character | Venue (H/A/N). |
 | `result` | character | Result string. |
 | `adj_oe` | numeric | Adjusted offensive efficiency. |
 | `adj_de` | numeric | Adjusted defensive efficiency. |
-| `oe` | numeric |  |
-| `off_efg` | numeric |  |
-| `off_to` | numeric |  |
-| `off_or` | numeric |  |
-| `off_ftr` | numeric |  |
-| `de` | numeric |  |
-| `def_efg` | numeric |  |
-| `def_to` | numeric |  |
-| `def_or` | numeric |  |
-| `def_ftr` | numeric |  |
-| `game_score` | numeric |  |
-| `opp_conf` | character |  |
-| `quad` | integer |  |
+| `oe` | numeric | Raw offensive efficiency (points/100 poss). |
+| `off_efg` | numeric | Offensive effective FG%. |
+| `off_to` | numeric | Offensive turnover %. |
+| `off_or` | numeric | Offensive rebound %. |
+| `off_ftr` | numeric | Offensive free-throw rate. |
+| `de` | numeric | Raw defensive efficiency (points allowed/100 poss). |
+| `def_efg` | numeric | Defensive effective FG% allowed. |
+| `def_to` | numeric | Defensive turnover % forced. |
+| `def_or` | numeric | Defensive (opponent) rebound %. |
+| `def_ftr` | numeric | Defensive free-throw rate allowed. |
+| `game_score` | numeric | Bart Torvik single-game quality score. |
+| `opp_conf` | character | Opponent conference. |
+| `quad` | integer | NCAA quadrant (1-4) of the game. |
 | `year` | integer | Season (4-digit ending-year). |
-| `tempo` | numeric |  |
-| `muid` | character |  |
-| `coach` | character |  |
-| `opp_coach` | character |  |
-| `margin` | numeric |  |
+| `tempo` | numeric | Game tempo (possessions). |
+| `muid` | character | Matchup unique id. |
+| `coach` | character | Team head coach. |
+| `opp_coach` | character | Opponent head coach. |
+| `margin` | numeric | Final scoring margin. |
 | `win_prob` | numeric | Pre-game win probability. |
 | `game_stats` | character | Nested per-game stat array (;-joined). |
-| `overtimes` | integer |  |
+| `overtimes` | integer | Number of overtimes. |
 
 ### Returns — `torvik_player_stats` / `torvikPlayerStats`
 
@@ -139,69 +139,69 @@ Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics
 | `team` | character | Team name. |
 | `conf` | character | Conference. |
 | `games` | integer | Games played. |
-| `min_pct` | numeric |  |
+| `min_pct` | numeric | Percentage of available minutes played. |
 | `o_rtg` | numeric | Offensive rating. |
 | `usage` | numeric | Usage rate. |
-| `e_fg` | numeric |  |
-| `ts_pct` | numeric |  |
-| `orb_pct` | integer |  |
-| `drb_pct` | numeric |  |
-| `ast_pct` | numeric |  |
-| `to_pct` | numeric |  |
-| `ftm` | integer |  |
-| `fta` | integer |  |
-| `ft_pct` | numeric |  |
-| `two_pm` | integer |  |
-| `two_pa` | integer |  |
-| `two_p_pct` | numeric |  |
-| `three_pm` | integer |  |
-| `three_pa` | integer |  |
-| `three_p_pct` | integer |  |
-| `blk_pct` | integer |  |
-| `stl_pct` | integer |  |
-| `ftr` | numeric |  |
-| `class` | character |  |
-| `height` | character |  |
-| `number` | integer |  |
-| `porpag` | numeric |  |
-| `adj_oe` | numeric |  |
-| `pfr` | numeric |  |
+| `e_fg` | numeric | Effective FG%. |
+| `ts_pct` | numeric | True shooting %. |
+| `orb_pct` | integer | Offensive rebound %. |
+| `drb_pct` | numeric | Defensive rebound %. |
+| `ast_pct` | numeric | Assist %. |
+| `to_pct` | numeric | Turnover %. |
+| `ftm` | integer | Free throws made. |
+| `fta` | integer | Free throws attempted. |
+| `ft_pct` | numeric | Free-throw %. |
+| `two_pm` | integer | Two-point field goals made. |
+| `two_pa` | integer | Two-point field goals attempted. |
+| `two_p_pct` | numeric | Two-point FG%. |
+| `three_pm` | integer | Three-point field goals made. |
+| `three_pa` | integer | Three-point field goals attempted. |
+| `three_p_pct` | integer | Three-point FG%. |
+| `blk_pct` | integer | Block %. |
+| `stl_pct` | integer | Steal %. |
+| `ftr` | numeric | Free-throw rate. |
+| `class` | character | Class (Fr/So/Jr/Sr). |
+| `height` | character | Listed height. |
+| `number` | integer | Jersey number. |
+| `porpag` | numeric | Points over replacement per adjusted game. |
+| `adj_oe` | numeric | Adjusted offensive efficiency. |
+| `pfr` | numeric | Personal foul rate. |
 | `year` | integer | Season (4-digit ending-year). |
 | `player_id` | integer | Bart Torvik player id. |
-| `hometown` | character |  |
-| `rec_rank` | numeric |  |
-| `ast_to` | numeric |  |
-| `rim_made` | integer |  |
-| `rim_attempts` | integer |  |
-| `mid_made` | integer |  |
-| `mid_attempts` | integer |  |
-| `rim_pct` | numeric |  |
-| `mid_pct` | numeric |  |
-| `dunks_made` | integer |  |
-| `dunks_attempts` | integer |  |
-| `dunks_pct` | numeric |  |
-| `pick` | character |  |
-| `drtg` | numeric |  |
-| `adrtg` | numeric |  |
-| `dporpag` | numeric |  |
-| `stops` | numeric |  |
+| `hometown` | character | Player hometown. |
+| `rec_rank` | numeric | Recruiting rank. |
+| `ast_to` | numeric | Assist-to-turnover ratio. |
+| `rim_made` | integer | Field goals made at the rim. |
+| `rim_attempts` | integer | Field goals attempted at the rim. |
+| `mid_made` | integer | Mid-range field goals made. |
+| `mid_attempts` | integer | Mid-range field goals attempted. |
+| `rim_pct` | numeric | Field goal % at the rim. |
+| `mid_pct` | numeric | Mid-range field goal %. |
+| `dunks_made` | integer | Dunks made. |
+| `dunks_attempts` | integer | Dunks attempted. |
+| `dunks_pct` | numeric | Dunk %. |
+| `pick` | character | NBA draft pick (if drafted). |
+| `drtg` | numeric | Defensive rating. |
+| `adrtg` | numeric | Adjusted defensive rating. |
+| `dporpag` | numeric | Defensive points over replacement per adjusted game. |
+| `stops` | numeric | Defensive stops. |
 | `bpm` | numeric | Box plus/minus. |
-| `obpm` | numeric |  |
-| `dbpm` | numeric |  |
-| `gbpm` | numeric |  |
-| `minutes` | numeric |  |
-| `ogbpm` | numeric |  |
-| `dgbpm` | numeric |  |
-| `oreb` | numeric |  |
-| `dreb` | numeric |  |
-| `treb` | numeric |  |
-| `ast` | numeric |  |
-| `stl` | numeric |  |
-| `blk` | numeric |  |
-| `pts` | numeric |  |
-| `role` | character |  |
-| `threat` | numeric |  |
-| `recruit_date` | character |  |
+| `obpm` | numeric | Offensive box plus/minus. |
+| `dbpm` | numeric | Defensive box plus/minus. |
+| `gbpm` | numeric | Torvik (game-based) box plus/minus. |
+| `minutes` | numeric | Minutes played. |
+| `ogbpm` | numeric | Offensive Torvik box plus/minus. |
+| `dgbpm` | numeric | Defensive Torvik box plus/minus. |
+| `oreb` | numeric | Offensive rebounds per game. |
+| `dreb` | numeric | Defensive rebounds per game. |
+| `treb` | numeric | Total rebounds per game. |
+| `ast` | numeric | Assists per game. |
+| `stl` | numeric | Steals per game. |
+| `blk` | numeric | Blocks per game. |
+| `pts` | numeric | Points per game. |
+| `role` | character | Bart Torvik player role/position label. |
+| `threat` | numeric | Offensive threat rating. |
+| `recruit_date` | character | Recruiting commitment date. |
 
 ### Returns — `torvik_ratings` / `torvikRatings`
 
@@ -216,41 +216,41 @@ Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics
 | `adjde` | numeric | Adjusted defensive efficiency. |
 | `de_rank` | integer | National rank of adjusted defensive efficiency. |
 | `barthag` | numeric | Power rating (win prob vs average). |
-| `rank_1` | integer |  |
-| `proj_w` | numeric |  |
-| `proj_l` | numeric |  |
-| `pro_con_w` | numeric |  |
-| `pro_con_l` | numeric |  |
-| `con_rec` | character |  |
-| `sos` | numeric |  |
-| `ncsos` | numeric |  |
-| `consos` | numeric |  |
-| `proj_sos` | numeric |  |
-| `proj_noncon_sos` | numeric |  |
-| `proj_con_sos` | numeric |  |
-| `elite_sos` | numeric |  |
-| `elite_noncon_sos` | numeric |  |
-| `opp_oe` | numeric |  |
-| `opp_de` | numeric |  |
-| `opp_proj_oe` | numeric |  |
-| `opp_proj_de` | numeric |  |
-| `con_adj_oe` | numeric |  |
-| `con_adj_de` | numeric |  |
-| `qual_o` | numeric |  |
-| `qual_d` | numeric |  |
-| `qual_barthag` | numeric |  |
-| `qual_games` | numeric |  |
-| `fun` | numeric |  |
-| `con_pf` | numeric |  |
-| `con_pa` | numeric |  |
-| `con_poss` | numeric |  |
-| `con_oe` | numeric |  |
-| `con_de` | numeric |  |
-| `con_sosremain` | numeric |  |
-| `conf_win_percent` | numeric |  |
-| `wab` | numeric |  |
-| `wab_rk` | integer |  |
-| `fun_rk` | integer |  |
+| `rank_1` | integer | Interspersed secondary rank column. |
+| `proj_w` | numeric | Projected wins. |
+| `proj_l` | numeric | Projected losses. |
+| `pro_con_w` | numeric | Projected conference wins. |
+| `pro_con_l` | numeric | Projected conference losses. |
+| `con_rec` | character | Conference record. |
+| `sos` | numeric | Strength of schedule. |
+| `ncsos` | numeric | Non-conference strength of schedule. |
+| `consos` | numeric | Conference strength of schedule. |
+| `proj_sos` | numeric | Projected strength of schedule. |
+| `proj_noncon_sos` | numeric | Projected non-conference strength of schedule. |
+| `proj_con_sos` | numeric | Projected conference strength of schedule. |
+| `elite_sos` | numeric | Strength of schedule against elite teams. |
+| `elite_noncon_sos` | numeric | Non-conference strength of schedule against elite teams. |
+| `opp_oe` | numeric | Average opponent offensive efficiency. |
+| `opp_de` | numeric | Average opponent defensive efficiency. |
+| `opp_proj_oe` | numeric | Average projected opponent offensive efficiency. |
+| `opp_proj_de` | numeric | Average projected opponent defensive efficiency. |
+| `con_adj_oe` | numeric | Conference-only adjusted offensive efficiency. |
+| `con_adj_de` | numeric | Conference-only adjusted defensive efficiency. |
+| `qual_o` | numeric | Quality-adjusted offensive efficiency. |
+| `qual_d` | numeric | Quality-adjusted defensive efficiency. |
+| `qual_barthag` | numeric | Quality-adjusted power rating. |
+| `qual_games` | numeric | Number of quality games played. |
+| `fun` | numeric | Fun rating (entertainment value). |
+| `con_pf` | numeric | Conference points scored. |
+| `con_pa` | numeric | Conference points allowed. |
+| `con_poss` | numeric | Conference possessions. |
+| `con_oe` | numeric | Conference offensive efficiency. |
+| `con_de` | numeric | Conference defensive efficiency. |
+| `con_sosremain` | numeric | Remaining conference strength of schedule. |
+| `conf_win_percent` | numeric | Conference win percentage. |
+| `wab` | numeric | Wins above bubble. |
+| `wab_rk` | integer | National rank of wins above bubble. |
+| `fun_rk` | integer | National rank of fun rating. |
 | `adjt` | numeric | Adjusted tempo. |
 
 ### Returns — `torvik_team_factors` / `torvikTeamFactors`
@@ -259,31 +259,31 @@ Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics
 |---|---|---|
 | `team_name` | character | Team name. |
 | `e_fg_percent` | numeric | Effective FG% (offense). |
-| `rk` | integer |  |
+| `rk` | integer | National rank of effective FG% (offense). |
 | `e_fg_percent_def` | numeric | Effective FG% allowed (defense). |
-| `rk_1` | integer |  |
+| `rk_1` | integer | National rank of effective FG% allowed (defense). |
 | `ftr` | numeric | Free-throw rate (offense). |
-| `rk_2` | integer |  |
+| `rk_2` | integer | National rank of free-throw rate (offense). |
 | `ftr_def` | numeric | Free-throw rate allowed (defense). |
-| `rk_3` | integer |  |
+| `rk_3` | integer | National rank of free-throw rate allowed (defense). |
 | `or_percent` | numeric | Offensive rebound %. |
-| `rk_4` | integer |  |
+| `rk_4` | integer | National rank of offensive rebound %. |
 | `dr_percent` | numeric | Defensive rebound %. |
-| `rk_5` | integer |  |
+| `rk_5` | integer | National rank of defensive rebound %. |
 | `to_percent` | numeric | Turnover % (offense). |
-| `rk_6` | integer |  |
+| `rk_6` | integer | National rank of turnover % (offense). |
 | `to_percent_def` | numeric | Turnover % forced (defense). |
-| `rk_7` | integer |  |
-| `3_p_percent` | numeric |  |
-| `3p_d_percent` | numeric |  |
-| `2p_percent` | numeric |  |
-| `2p_percent_d` | numeric |  |
-| `ft_percent` | numeric |  |
-| `ft_percent_d` | numeric |  |
-| `3_p_rate` | numeric |  |
-| `3_p_rate_d` | numeric |  |
-| `arate` | numeric |  |
-| `rk_8` | integer |  |
-| `arate_d` | numeric |  |
-| `rk_9` | integer |  |
-| `parsed_extra` | character |  |
+| `rk_7` | integer | National rank of turnover % forced (defense). |
+| `3_p_percent` | numeric | Three-point % (offense). |
+| `3p_d_percent` | numeric | Three-point % allowed (defense). |
+| `2p_percent` | numeric | Two-point % (offense). |
+| `2p_percent_d` | numeric | Two-point % allowed (defense). |
+| `ft_percent` | numeric | Free-throw % (offense). |
+| `ft_percent_d` | numeric | Free-throw % allowed (defense). |
+| `3_p_rate` | numeric | Three-point attempt rate (offense). |
+| `3_p_rate_d` | numeric | Three-point attempt rate allowed (defense). |
+| `arate` | numeric | Assist rate (offense). |
+| `rk_8` | integer | National rank of assist rate (offense). |
+| `arate_d` | numeric | Assist rate allowed (defense). |
+| `rk_9` | integer | National rank of assist rate allowed (defense). |
+| `parsed_extra` | character | Trailing unmapped CSV fields (overflow), if any. |

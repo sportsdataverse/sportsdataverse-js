@@ -9,16 +9,16 @@ columns:
   description: 'HockeyTech player id.'
 - name: shift_number
   type: character
-  description: ''
+  description: 'Sequential shift number for the player.'
 - name: period
   type: character
   description: 'Period number.'
 - name: start_time
   type: character
-  description: ''
+  description: 'Shift start time (game clock).'
 - name: end_time
   type: character
-  description: ''
+  description: 'Shift end time (game clock).'
 - name: duration
   type: character
   description: 'Shift length (seconds).'

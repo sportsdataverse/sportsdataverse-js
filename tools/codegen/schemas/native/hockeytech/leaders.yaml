@@ -15,40 +15,40 @@ columns:
   description: 'HockeyTech player id.'
 - name: jersey_number
   type: character
-  description: ''
+  description: 'Jersey number.'
 - name: name
   type: character
   description: 'Player name.'
 - name: team_id
   type: character
-  description: ''
+  description: 'Team id.'
 - name: team_name
   type: character
-  description: ''
+  description: 'Team name.'
 - name: team_code
   type: character
   description: 'Team code.'
 - name: team_logo
   type: character
-  description: ''
+  description: 'Team logo URL.'
 - name: team_logo_small
   type: character
-  description: ''
+  description: 'Small team logo URL.'
 - name: stat_formatted
   type: character
-  description: ''
+  description: 'Formatted stat value for the category.'
 - name: type_formatted
   type: character
-  description: ''
+  description: 'Formatted category label.'
 - name: photo
   type: character
-  description: ''
+  description: 'Player photo URL.'
 - name: photo_small
   type: character
-  description: ''
+  description: 'Small player photo URL.'
 - name: position
   type: character
-  description: ''
+  description: 'Player position.'
 - name: division
   type: character
-  description: ''
+  description: 'Team division.'

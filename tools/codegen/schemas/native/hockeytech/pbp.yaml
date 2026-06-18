@@ -6,178 +6,178 @@ columns:
   description: 'Event type (goal/shot/penalty/goalie_change/...).'
 - name: goalie_coming_in_id
   type: integer
-  description: ''
+  description: 'Player id of the goalie entering the game.'
 - name: goalie_coming_in_first_name
   type: character
-  description: ''
+  description: 'First name of the goalie entering the game.'
 - name: goalie_coming_in_last_name
   type: character
-  description: ''
+  description: 'Last name of the goalie entering the game.'
 - name: goalie_coming_in_jersey_number
   type: integer
-  description: ''
+  description: 'Jersey number of the goalie entering the game.'
 - name: goalie_coming_in_position
   type: character
-  description: ''
+  description: 'Position of the goalie entering the game.'
 - name: goalie_coming_in_birth_date
   type: character
-  description: ''
+  description: 'Birth date of the goalie entering the game.'
 - name: goalie_coming_in_player_image_url
   type: character
-  description: ''
+  description: 'Image URL of the goalie entering the game.'
 - name: goalie_going_out
   type: character
-  description: ''
+  description: 'Name/id of the goalie leaving the game.'
 - name: team_id
   type: character
   description: 'Team id credited with the event.'
 - name: period_id
   type: character
-  description: ''
+  description: 'Period id.'
 - name: period_short_name
   type: character
-  description: ''
+  description: 'Short period label.'
 - name: period_long_name
   type: character
-  description: ''
+  description: 'Long period label.'
 - name: time
   type: character
   description: 'Game clock at the event.'
 - name: shooter_id
   type: integer
-  description: ''
+  description: 'Shooter player id.'
 - name: shooter_first_name
   type: character
-  description: ''
+  description: 'Shooter first name.'
 - name: shooter_last_name
   type: character
-  description: ''
+  description: 'Shooter last name.'
 - name: shooter_jersey_number
   type: integer
-  description: ''
+  description: 'Shooter jersey number.'
 - name: shooter_position
   type: character
-  description: ''
+  description: 'Shooter position.'
 - name: shooter_birth_date
   type: character
-  description: ''
+  description: 'Shooter birth date.'
 - name: shooter_player_image_url
   type: character
-  description: ''
+  description: 'Shooter image URL.'
 - name: goalie_id
   type: integer
-  description: ''
+  description: 'Goalie player id on the shot.'
 - name: goalie_first_name
   type: character
-  description: ''
+  description: 'Goalie first name.'
 - name: goalie_last_name
   type: character
-  description: ''
+  description: 'Goalie last name.'
 - name: goalie_jersey_number
   type: integer
-  description: ''
+  description: 'Goalie jersey number.'
 - name: goalie_position
   type: character
-  description: ''
+  description: 'Goalie position.'
 - name: goalie_birth_date
   type: character
-  description: ''
+  description: 'Goalie birth date.'
 - name: goalie_player_image_url
   type: character
-  description: ''
+  description: 'Goalie image URL.'
 - name: shooter_team_id
   type: character
-  description: ''
+  description: 'Shooter team id.'
 - name: is_goal
   type: logical
-  description: ''
+  description: 'Whether the shot resulted in a goal.'
 - name: shot_quality
   type: character
-  description: ''
+  description: 'Shot quality rating.'
 - name: shot_type
   type: character
-  description: ''
+  description: 'Shot type.'
 - name: x_location
   type: integer
-  description: ''
+  description: 'X coordinate of the event on the rink.'
 - name: y_location
   type: integer
-  description: ''
+  description: 'Y coordinate of the event on the rink.'
 - name: game_penalty_id
   type: character
-  description: ''
+  description: 'Penalty id.'
 - name: against_team_id
   type: integer
-  description: ''
+  description: 'Team id the penalty was called against.'
 - name: against_team_name
   type: character
-  description: ''
+  description: 'Name of the penalized team.'
 - name: against_team_city
   type: character
-  description: ''
+  description: 'City of the penalized team.'
 - name: against_team_nickname
   type: character
-  description: ''
+  description: 'Nickname of the penalized team.'
 - name: against_team_abbreviation
   type: character
-  description: ''
+  description: 'Abbreviation of the penalized team.'
 - name: against_team_logo
   type: character
-  description: ''
+  description: 'Logo URL of the penalized team.'
 - name: minutes
   type: character
-  description: ''
+  description: 'Penalty length in minutes.'
 - name: description
   type: character
-  description: ''
+  description: 'Penalty/event description.'
 - name: rule_number
   type: character
-  description: ''
+  description: 'Rulebook rule number.'
 - name: taken_by_id
   type: integer
-  description: ''
+  description: 'Player id who took the penalty.'
 - name: taken_by_first_name
   type: character
-  description: ''
+  description: 'First name of the player who took the penalty.'
 - name: taken_by_last_name
   type: character
-  description: ''
+  description: 'Last name of the player who took the penalty.'
 - name: taken_by_jersey_number
   type: integer
-  description: ''
+  description: 'Jersey number of the player who took the penalty.'
 - name: taken_by_position
   type: character
-  description: ''
+  description: 'Position of the player who took the penalty.'
 - name: taken_by_birth_date
   type: character
-  description: ''
+  description: 'Birth date of the player who took the penalty.'
 - name: taken_by_player_image_url
   type: character
-  description: ''
+  description: 'Image URL of the player who took the penalty.'
 - name: served_by_id
   type: integer
-  description: ''
+  description: 'Player id who served the penalty.'
 - name: served_by_first_name
   type: character
-  description: ''
+  description: 'First name of the player who served the penalty.'
 - name: served_by_last_name
   type: character
-  description: ''
+  description: 'Last name of the player who served the penalty.'
 - name: served_by_jersey_number
   type: integer
-  description: ''
+  description: 'Jersey number of the player who served the penalty.'
 - name: served_by_position
   type: character
-  description: ''
+  description: 'Position of the player who served the penalty.'
 - name: served_by_birth_date
   type: character
-  description: ''
+  description: 'Birth date of the player who served the penalty.'
 - name: served_by_player_image_url
   type: character
-  description: ''
+  description: 'Image URL of the player who served the penalty.'
 - name: is_power_play
   type: logical
-  description: ''
+  description: 'Whether the penalty creates a power play.'
 - name: is_bench
   type: logical
-  description: ''
+  description: 'Whether it is a bench penalty.'

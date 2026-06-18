@@ -6,10 +6,10 @@ columns:
   description: 'Team code.'
 - name: losses
   type: character
-  description: ''
+  description: 'Losses.'
 - name: regulation_wins
   type: character
-  description: ''
+  description: 'Regulation wins.'
 - name: points
   type: integer
   description: 'Standings points.'
@@ -21,16 +21,16 @@ columns:
   description: 'Goals against.'
 - name: non_reg_wins
   type: character
-  description: ''
+  description: 'Non-regulation (OT/shootout) wins.'
 - name: non_reg_losses
   type: character
-  description: ''
+  description: 'Non-regulation (OT/shootout) losses.'
 - name: games_remaining
   type: character
-  description: ''
+  description: 'Games remaining on the schedule.'
 - name: percentage
   type: character
-  description: ''
+  description: 'Points percentage.'
 - name: overall_rank
   type: character
   description: 'Overall standings rank.'
@@ -39,7 +39,7 @@ columns:
   description: 'Games played.'
 - name: rank
   type: integer
-  description: ''
+  description: 'Standings rank (within the section).'
 - name: name
   type: character
   description: 'Team name.'

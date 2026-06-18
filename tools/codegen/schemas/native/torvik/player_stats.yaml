@@ -15,7 +15,7 @@ columns:
   description: 'Games played.'
 - name: min_pct
   type: numeric
-  description: ''
+  description: 'Percentage of available minutes played.'
 - name: o_rtg
   type: numeric
   description: 'Offensive rating.'
@@ -24,76 +24,76 @@ columns:
   description: 'Usage rate.'
 - name: e_fg
   type: numeric
-  description: ''
+  description: 'Effective FG%.'
 - name: ts_pct
   type: numeric
-  description: ''
+  description: 'True shooting %.'
 - name: orb_pct
   type: integer
-  description: ''
+  description: 'Offensive rebound %.'
 - name: drb_pct
   type: numeric
-  description: ''
+  description: 'Defensive rebound %.'
 - name: ast_pct
   type: numeric
-  description: ''
+  description: 'Assist %.'
 - name: to_pct
   type: numeric
-  description: ''
+  description: 'Turnover %.'
 - name: ftm
   type: integer
-  description: ''
+  description: 'Free throws made.'
 - name: fta
   type: integer
-  description: ''
+  description: 'Free throws attempted.'
 - name: ft_pct
   type: numeric
-  description: ''
+  description: 'Free-throw %.'
 - name: two_pm
   type: integer
-  description: ''
+  description: 'Two-point field goals made.'
 - name: two_pa
   type: integer
-  description: ''
+  description: 'Two-point field goals attempted.'
 - name: two_p_pct
   type: numeric
-  description: ''
+  description: 'Two-point FG%.'
 - name: three_pm
   type: integer
-  description: ''
+  description: 'Three-point field goals made.'
 - name: three_pa
   type: integer
-  description: ''
+  description: 'Three-point field goals attempted.'
 - name: three_p_pct
   type: integer
-  description: ''
+  description: 'Three-point FG%.'
 - name: blk_pct
   type: integer
-  description: ''
+  description: 'Block %.'
 - name: stl_pct
   type: integer
-  description: ''
+  description: 'Steal %.'
 - name: ftr
   type: numeric
-  description: ''
+  description: 'Free-throw rate.'
 - name: class
   type: character
-  description: ''
+  description: 'Class (Fr/So/Jr/Sr).'
 - name: height
   type: character
-  description: ''
+  description: 'Listed height.'
 - name: number
   type: integer
-  description: ''
+  description: 'Jersey number.'
 - name: porpag
   type: numeric
-  description: ''
+  description: 'Points over replacement per adjusted game.'
 - name: adj_oe
   type: numeric
-  description: ''
+  description: 'Adjusted offensive efficiency.'
 - name: pfr
   type: numeric
-  description: ''
+  description: 'Personal foul rate.'
 - name: year
   type: integer
   description: 'Season (4-digit ending-year).'
@@ -102,103 +102,103 @@ columns:
   description: 'Bart Torvik player id.'
 - name: hometown
   type: character
-  description: ''
+  description: 'Player hometown.'
 - name: rec_rank
   type: numeric
-  description: ''
+  description: 'Recruiting rank.'
 - name: ast_to
   type: numeric
-  description: ''
+  description: 'Assist-to-turnover ratio.'
 - name: rim_made
   type: integer
-  description: ''
+  description: 'Field goals made at the rim.'
 - name: rim_attempts
   type: integer
-  description: ''
+  description: 'Field goals attempted at the rim.'
 - name: mid_made
   type: integer
-  description: ''
+  description: 'Mid-range field goals made.'
 - name: mid_attempts
   type: integer
-  description: ''
+  description: 'Mid-range field goals attempted.'
 - name: rim_pct
   type: numeric
-  description: ''
+  description: 'Field goal % at the rim.'
 - name: mid_pct
   type: numeric
-  description: ''
+  description: 'Mid-range field goal %.'
 - name: dunks_made
   type: integer
-  description: ''
+  description: 'Dunks made.'
 - name: dunks_attempts
   type: integer
-  description: ''
+  description: 'Dunks attempted.'
 - name: dunks_pct
   type: numeric
-  description: ''
+  description: 'Dunk %.'
 - name: pick
   type: character
-  description: ''
+  description: 'NBA draft pick (if drafted).'
 - name: drtg
   type: numeric
-  description: ''
+  description: 'Defensive rating.'
 - name: adrtg
   type: numeric
-  description: ''
+  description: 'Adjusted defensive rating.'
 - name: dporpag
   type: numeric
-  description: ''
+  description: 'Defensive points over replacement per adjusted game.'
 - name: stops
   type: numeric
-  description: ''
+  description: 'Defensive stops.'
 - name: bpm
   type: numeric
   description: 'Box plus/minus.'
 - name: obpm
   type: numeric
-  description: ''
+  description: 'Offensive box plus/minus.'
 - name: dbpm
   type: numeric
-  description: ''
+  description: 'Defensive box plus/minus.'
 - name: gbpm
   type: numeric
-  description: ''
+  description: 'Torvik (game-based) box plus/minus.'
 - name: minutes
   type: numeric
-  description: ''
+  description: 'Minutes played.'
 - name: ogbpm
   type: numeric
-  description: ''
+  description: 'Offensive Torvik box plus/minus.'
 - name: dgbpm
   type: numeric
-  description: ''
+  description: 'Defensive Torvik box plus/minus.'
 - name: oreb
   type: numeric
-  description: ''
+  description: 'Offensive rebounds per game.'
 - name: dreb
   type: numeric
-  description: ''
+  description: 'Defensive rebounds per game.'
 - name: treb
   type: numeric
-  description: ''
+  description: 'Total rebounds per game.'
 - name: ast
   type: numeric
-  description: ''
+  description: 'Assists per game.'
 - name: stl
   type: numeric
-  description: ''
+  description: 'Steals per game.'
 - name: blk
   type: numeric
-  description: ''
+  description: 'Blocks per game.'
 - name: pts
   type: numeric
-  description: ''
+  description: 'Points per game.'
 - name: role
   type: character
-  description: ''
+  description: 'Bart Torvik player role/position label.'
 - name: threat
   type: numeric
-  description: ''
+  description: 'Offensive threat rating.'
 - name: recruit_date
   type: character
-  description: ''
+  description: 'Recruiting commitment date.'

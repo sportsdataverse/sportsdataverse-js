@@ -46,54 +46,54 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 |---|---|---|
 | `side` | character | home or visitor. |
 | `player_id` | character | HockeyTech player id. |
-| `shift_number` | character |  |
+| `shift_number` | character | Sequential shift number for the player. |
 | `period` | character | Period number. |
-| `start_time` | character |  |
-| `end_time` | character |  |
+| `start_time` | character | Shift start time (game clock). |
+| `end_time` | character | Shift end time (game clock). |
 | `duration` | character | Shift length (seconds). |
 
 ### Returns — `hockeytech_game_summary` / `hockeytechGameSummary`
 
 | col_name | type | description |
 |---|---|---|
-| `event` | character |  |
-| `x_location` | character |  |
-| `y_location` | character |  |
+| `event` | character | Event type (goal). |
+| `x_location` | character | X coordinate of the goal on the rink. |
+| `y_location` | character | Y coordinate of the goal on the rink. |
 | `time` | character | Game clock at the goal. |
-| `team_id` | character |  |
-| `home` | character |  |
-| `period_id` | character |  |
-| `goal_type` | character |  |
-| `location_set` | character |  |
-| `power_play` | character |  |
-| `empty_net` | character |  |
-| `penalty_shot` | character |  |
-| `short_handed` | character |  |
-| `insurance_goal` | character |  |
-| `game_winning` | character |  |
-| `game_tieing` | character |  |
-| `scorer_goal_num` | character |  |
-| `s` | integer |  |
-| `goal_scorer_player_id` | character |  |
-| `goal_scorer_jersey_number` | character |  |
-| `goal_scorer_team_id` | character |  |
-| `goal_scorer_team_code` | character |  |
-| `goal_scorer_first_name` | character |  |
-| `goal_scorer_last_name` | character |  |
-| `assist1_player_player_id` | character |  |
-| `assist1_player_jersey_number` | character |  |
-| `assist1_player_team_id` | character |  |
-| `assist1_player_team_code` | character |  |
-| `assist1_player_first_name` | character |  |
-| `assist1_player_last_name` | character |  |
-| `assist2_player_player_id` | character |  |
-| `assist2_player_jersey_number` | character |  |
-| `assist2_player_team_id` | character |  |
-| `assist2_player_team_code` | character |  |
-| `assist2_player_first_name` | character |  |
-| `assist2_player_last_name` | character |  |
-| `plus` | character |  |
-| `minus` | character |  |
+| `team_id` | character | Scoring team id. |
+| `home` | character | Whether the scoring team is the home team. |
+| `period_id` | character | Period id. |
+| `goal_type` | character | Goal-type code. |
+| `location_set` | character | Whether rink coordinates are set for the goal. |
+| `power_play` | character | Power-play goal flag. |
+| `empty_net` | character | Empty-net goal flag. |
+| `penalty_shot` | character | Penalty-shot goal flag. |
+| `short_handed` | character | Short-handed goal flag. |
+| `insurance_goal` | character | Insurance-goal flag. |
+| `game_winning` | character | Game-winning goal flag. |
+| `game_tieing` | character | Game-tying goal flag. |
+| `scorer_goal_num` | character | Scorer's running goal count for the season. |
+| `s` | integer | Goal sequence number within the game. |
+| `goal_scorer_player_id` | character | Goal scorer player id. |
+| `goal_scorer_jersey_number` | character | Goal scorer jersey number. |
+| `goal_scorer_team_id` | character | Goal scorer team id. |
+| `goal_scorer_team_code` | character | Goal scorer team code. |
+| `goal_scorer_first_name` | character | Goal scorer first name. |
+| `goal_scorer_last_name` | character | Goal scorer last name. |
+| `assist1_player_player_id` | character | Primary-assist player id. |
+| `assist1_player_jersey_number` | character | Primary-assist jersey number. |
+| `assist1_player_team_id` | character | Primary-assist team id. |
+| `assist1_player_team_code` | character | Primary-assist team code. |
+| `assist1_player_first_name` | character | Primary-assist first name. |
+| `assist1_player_last_name` | character | Primary-assist last name. |
+| `assist2_player_player_id` | character | Secondary-assist player id. |
+| `assist2_player_jersey_number` | character | Secondary-assist jersey number. |
+| `assist2_player_team_id` | character | Secondary-assist team id. |
+| `assist2_player_team_code` | character | Secondary-assist team code. |
+| `assist2_player_first_name` | character | Secondary-assist first name. |
+| `assist2_player_last_name` | character | Secondary-assist last name. |
+| `plus` | character | On-ice players credited plus on the goal. |
+| `minus` | character | On-ice players charged minus on the goal. |
 
 ### Returns — `hockeytech_leaders` / `hockeytechLeaders`
 
@@ -103,84 +103,84 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `category` | character | Leaderboard category (Points/Goals/...). |
 | `rank` | integer | Rank within the category. |
 | `player_id` | character | HockeyTech player id. |
-| `jersey_number` | character |  |
+| `jersey_number` | character | Jersey number. |
 | `name` | character | Player name. |
-| `team_id` | character |  |
-| `team_name` | character |  |
+| `team_id` | character | Team id. |
+| `team_name` | character | Team name. |
 | `team_code` | character | Team code. |
-| `team_logo` | character |  |
-| `team_logo_small` | character |  |
-| `stat_formatted` | character |  |
-| `type_formatted` | character |  |
-| `photo` | character |  |
-| `photo_small` | character |  |
-| `position` | character |  |
-| `division` | character |  |
+| `team_logo` | character | Team logo URL. |
+| `team_logo_small` | character | Small team logo URL. |
+| `stat_formatted` | character | Formatted stat value for the category. |
+| `type_formatted` | character | Formatted category label. |
+| `photo` | character | Player photo URL. |
+| `photo_small` | character | Small player photo URL. |
+| `position` | character | Player position. |
+| `division` | character | Team division. |
 
 ### Returns — `hockeytech_pbp` / `hockeytechPbp`
 
 | col_name | type | description |
 |---|---|---|
 | `event` | character | Event type (goal/shot/penalty/goalie_change/...). |
-| `goalie_coming_in_id` | integer |  |
-| `goalie_coming_in_first_name` | character |  |
-| `goalie_coming_in_last_name` | character |  |
-| `goalie_coming_in_jersey_number` | integer |  |
-| `goalie_coming_in_position` | character |  |
-| `goalie_coming_in_birth_date` | character |  |
-| `goalie_coming_in_player_image_url` | character |  |
-| `goalie_going_out` | character |  |
+| `goalie_coming_in_id` | integer | Player id of the goalie entering the game. |
+| `goalie_coming_in_first_name` | character | First name of the goalie entering the game. |
+| `goalie_coming_in_last_name` | character | Last name of the goalie entering the game. |
+| `goalie_coming_in_jersey_number` | integer | Jersey number of the goalie entering the game. |
+| `goalie_coming_in_position` | character | Position of the goalie entering the game. |
+| `goalie_coming_in_birth_date` | character | Birth date of the goalie entering the game. |
+| `goalie_coming_in_player_image_url` | character | Image URL of the goalie entering the game. |
+| `goalie_going_out` | character | Name/id of the goalie leaving the game. |
 | `team_id` | character | Team id credited with the event. |
-| `period_id` | character |  |
-| `period_short_name` | character |  |
-| `period_long_name` | character |  |
+| `period_id` | character | Period id. |
+| `period_short_name` | character | Short period label. |
+| `period_long_name` | character | Long period label. |
 | `time` | character | Game clock at the event. |
-| `shooter_id` | integer |  |
-| `shooter_first_name` | character |  |
-| `shooter_last_name` | character |  |
-| `shooter_jersey_number` | integer |  |
-| `shooter_position` | character |  |
-| `shooter_birth_date` | character |  |
-| `shooter_player_image_url` | character |  |
-| `goalie_id` | integer |  |
-| `goalie_first_name` | character |  |
-| `goalie_last_name` | character |  |
-| `goalie_jersey_number` | integer |  |
-| `goalie_position` | character |  |
-| `goalie_birth_date` | character |  |
-| `goalie_player_image_url` | character |  |
-| `shooter_team_id` | character |  |
-| `is_goal` | logical |  |
-| `shot_quality` | character |  |
-| `shot_type` | character |  |
-| `x_location` | integer |  |
-| `y_location` | integer |  |
-| `game_penalty_id` | character |  |
-| `against_team_id` | integer |  |
-| `against_team_name` | character |  |
-| `against_team_city` | character |  |
-| `against_team_nickname` | character |  |
-| `against_team_abbreviation` | character |  |
-| `against_team_logo` | character |  |
-| `minutes` | character |  |
-| `description` | character |  |
-| `rule_number` | character |  |
-| `taken_by_id` | integer |  |
-| `taken_by_first_name` | character |  |
-| `taken_by_last_name` | character |  |
-| `taken_by_jersey_number` | integer |  |
-| `taken_by_position` | character |  |
-| `taken_by_birth_date` | character |  |
-| `taken_by_player_image_url` | character |  |
-| `served_by_id` | integer |  |
-| `served_by_first_name` | character |  |
-| `served_by_last_name` | character |  |
-| `served_by_jersey_number` | integer |  |
-| `served_by_position` | character |  |
-| `served_by_birth_date` | character |  |
-| `served_by_player_image_url` | character |  |
-| `is_power_play` | logical |  |
-| `is_bench` | logical |  |
+| `shooter_id` | integer | Shooter player id. |
+| `shooter_first_name` | character | Shooter first name. |
+| `shooter_last_name` | character | Shooter last name. |
+| `shooter_jersey_number` | integer | Shooter jersey number. |
+| `shooter_position` | character | Shooter position. |
+| `shooter_birth_date` | character | Shooter birth date. |
+| `shooter_player_image_url` | character | Shooter image URL. |
+| `goalie_id` | integer | Goalie player id on the shot. |
+| `goalie_first_name` | character | Goalie first name. |
+| `goalie_last_name` | character | Goalie last name. |
+| `goalie_jersey_number` | integer | Goalie jersey number. |
+| `goalie_position` | character | Goalie position. |
+| `goalie_birth_date` | character | Goalie birth date. |
+| `goalie_player_image_url` | character | Goalie image URL. |
+| `shooter_team_id` | character | Shooter team id. |
+| `is_goal` | logical | Whether the shot resulted in a goal. |
+| `shot_quality` | character | Shot quality rating. |
+| `shot_type` | character | Shot type. |
+| `x_location` | integer | X coordinate of the event on the rink. |
+| `y_location` | integer | Y coordinate of the event on the rink. |
+| `game_penalty_id` | character | Penalty id. |
+| `against_team_id` | integer | Team id the penalty was called against. |
+| `against_team_name` | character | Name of the penalized team. |
+| `against_team_city` | character | City of the penalized team. |
+| `against_team_nickname` | character | Nickname of the penalized team. |
+| `against_team_abbreviation` | character | Abbreviation of the penalized team. |
+| `against_team_logo` | character | Logo URL of the penalized team. |
+| `minutes` | character | Penalty length in minutes. |
+| `description` | character | Penalty/event description. |
+| `rule_number` | character | Rulebook rule number. |
+| `taken_by_id` | integer | Player id who took the penalty. |
+| `taken_by_first_name` | character | First name of the player who took the penalty. |
+| `taken_by_last_name` | character | Last name of the player who took the penalty. |
+| `taken_by_jersey_number` | integer | Jersey number of the player who took the penalty. |
+| `taken_by_position` | character | Position of the player who took the penalty. |
+| `taken_by_birth_date` | character | Birth date of the player who took the penalty. |
+| `taken_by_player_image_url` | character | Image URL of the player who took the penalty. |
+| `served_by_id` | integer | Player id who served the penalty. |
+| `served_by_first_name` | character | First name of the player who served the penalty. |
+| `served_by_last_name` | character | Last name of the player who served the penalty. |
+| `served_by_jersey_number` | integer | Jersey number of the player who served the penalty. |
+| `served_by_position` | character | Position of the player who served the penalty. |
+| `served_by_birth_date` | character | Birth date of the player who served the penalty. |
+| `served_by_player_image_url` | character | Image URL of the player who served the penalty. |
+| `is_power_play` | logical | Whether the penalty creates a power play. |
+| `is_bench` | logical | Whether it is a bench penalty. |
 
 ### Returns — `hockeytech_player_stats` / `hockeytechPlayerStats`
 
@@ -190,120 +190,120 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `season_id` | character | HockeyTech season id. |
 | `season_name` | character | Season name. |
 | `shortname` | character | Short season name. |
-| `playoff` | character |  |
-| `career` | character |  |
-| `sopt_track_faceoffs` | character |  |
-| `max_start_date` | character |  |
-| `veteran_status` | character |  |
-| `veteran` | character |  |
+| `playoff` | character | Playoff-season flag. |
+| `career` | character | Career-stats flag. |
+| `sopt_track_faceoffs` | character | Whether faceoffs are tracked for this season. |
+| `max_start_date` | character | Latest game start date in the span. |
+| `veteran_status` | character | Veteran-status flag. |
+| `veteran` | character | Veteran flag. |
 | `jersey_number` | character | Jersey number. |
-| `goals` | character |  |
-| `games_played` | character |  |
-| `assists` | character |  |
-| `points` | character |  |
-| `plus_minus` | character |  |
-| `penalty_minutes` | character |  |
-| `power_play_goals` | character |  |
-| `power_play_assists` | character |  |
-| `shots` | character |  |
-| `shootout_attempts` | character |  |
-| `shootout_goals` | character |  |
-| `shootout_percentage` | character |  |
-| `shooting_percentage` | character |  |
-| `shootout_winning_goals` | character |  |
-| `points_per_game` | character |  |
-| `short_handed_goals` | character |  |
-| `short_handed_assists` | character |  |
-| `game_winning_goals` | character |  |
-| `game_tieing_goals` | character |  |
-| `faceoff_wins` | character |  |
-| `faceoff_attempts` | character |  |
-| `faceoff_pct` | character |  |
-| `hits` | character |  |
-| `team_name` | character |  |
-| `team_code` | character |  |
-| `team_city` | character |  |
-| `team_nickname` | character |  |
-| `team_id` | character |  |
-| `active` | character |  |
-| `first_goals` | character |  |
-| `insurance_goals` | character |  |
-| `overtime_goals` | character |  |
-| `unassisted_goals` | character |  |
-| `empty_net_goals` | character |  |
-| `penalty_minutes_per_game` | character |  |
-| `division` | character |  |
-| `ice_time` | character |  |
-| `ice_time_minutes_seconds` | character |  |
-| `shots_blocked_by_player` | character |  |
+| `goals` | character | Goals. |
+| `games_played` | character | Games played. |
+| `assists` | character | Assists. |
+| `points` | character | Points. |
+| `plus_minus` | character | Plus/minus. |
+| `penalty_minutes` | character | Penalty minutes. |
+| `power_play_goals` | character | Power-play goals. |
+| `power_play_assists` | character | Power-play assists. |
+| `shots` | character | Shots on goal. |
+| `shootout_attempts` | character | Shootout attempts. |
+| `shootout_goals` | character | Shootout goals. |
+| `shootout_percentage` | character | Shootout shooting %. |
+| `shooting_percentage` | character | Shooting %. |
+| `shootout_winning_goals` | character | Shootout-winning goals. |
+| `points_per_game` | character | Points per game. |
+| `short_handed_goals` | character | Short-handed goals. |
+| `short_handed_assists` | character | Short-handed assists. |
+| `game_winning_goals` | character | Game-winning goals. |
+| `game_tieing_goals` | character | Game-tying goals. |
+| `faceoff_wins` | character | Faceoff wins. |
+| `faceoff_attempts` | character | Faceoff attempts. |
+| `faceoff_pct` | character | Faceoff win %. |
+| `hits` | character | Hits. |
+| `team_name` | character | Team name. |
+| `team_code` | character | Team code. |
+| `team_city` | character | Team city. |
+| `team_nickname` | character | Team nickname. |
+| `team_id` | character | Team id. |
+| `active` | character | Active flag. |
+| `first_goals` | character | First goals of a game. |
+| `insurance_goals` | character | Insurance goals. |
+| `overtime_goals` | character | Overtime goals. |
+| `unassisted_goals` | character | Unassisted goals. |
+| `empty_net_goals` | character | Empty-net goals. |
+| `penalty_minutes_per_game` | character | Penalty minutes per game. |
+| `division` | character | Team division. |
+| `ice_time` | character | Total ice time. |
+| `ice_time_minutes_seconds` | character | Ice time (MM:SS). |
+| `shots_blocked_by_player` | character | Shots blocked by the player. |
 
 ### Returns — `hockeytech_schedule` / `hockeytechSchedule`
 
 | col_name | type | description |
 |---|---|---|
 | `id` | character | HockeyTech game id. |
-| `season_id` | character |  |
-| `league_id` | character |  |
+| `season_id` | character | HockeyTech season id. |
+| `league_id` | character | HockeyTech league id. |
 | `game_number` | character | League game number. |
-| `game_letter` | character |  |
+| `game_letter` | character | Game-type letter code. |
 | `game_type` | character | Game-type code. |
-| `quick_score` | character |  |
-| `date` | character |  |
-| `flo_core_event_id` | character |  |
-| `flo_live_event_id` | character |  |
-| `game_date` | character |  |
-| `game_date_iso8601` | character |  |
-| `scheduled_time` | character |  |
-| `scheduled_formatted_time` | character |  |
-| `timezone` | character |  |
-| `ticket_url` | character |  |
-| `home_id` | character |  |
+| `quick_score` | character | Quick-score availability flag. |
+| `date` | character | Game date (display). |
+| `flo_core_event_id` | character | FloHockey core event id. |
+| `flo_live_event_id` | character | FloHockey live event id. |
+| `game_date` | character | Game date. |
+| `game_date_iso8601` | character | Game date/time in ISO-8601 format. |
+| `scheduled_time` | character | Scheduled start time. |
+| `scheduled_formatted_time` | character | Scheduled start time (formatted). |
+| `timezone` | character | Venue timezone. |
+| `ticket_url` | character | Ticket purchase URL. |
+| `home_id` | character | Home team id. |
 | `home_code` | character | Home team code. |
-| `home_city` | character |  |
-| `home_nickname` | character |  |
-| `home_long_name` | character |  |
-| `home_division` | character |  |
+| `home_city` | character | Home team city. |
+| `home_nickname` | character | Home team nickname. |
+| `home_long_name` | character | Home team full name. |
+| `home_division` | character | Home team division. |
 | `home_goals` | character | Home goals. |
-| `home_audio_url` | character |  |
-| `home_video_url` | character |  |
-| `home_webcast_url` | character |  |
-| `visitor_id` | character |  |
+| `home_audio_url` | character | Home team audio broadcast URL. |
+| `home_video_url` | character | Home team video broadcast URL. |
+| `home_webcast_url` | character | Home team webcast URL. |
+| `visitor_id` | character | Visiting team id. |
 | `visitor_code` | character | Visiting team code. |
-| `visitor_city` | character |  |
-| `visitor_nickname` | character |  |
-| `visitor_long_name` | character |  |
-| `visiting_division` | character |  |
+| `visitor_city` | character | Visiting team city. |
+| `visitor_nickname` | character | Visiting team nickname. |
+| `visitor_long_name` | character | Visiting team full name. |
+| `visiting_division` | character | Visiting team division. |
 | `visitor_goals` | character | Visiting goals. |
-| `visitor_audio_url` | character |  |
-| `visitor_video_url` | character |  |
-| `visitor_webcast_url` | character |  |
-| `period` | character |  |
-| `period_name_short` | character |  |
-| `period_name_long` | character |  |
-| `game_clock` | character |  |
-| `game_summary_url` | character |  |
-| `home_wins` | character |  |
-| `home_regulation_losses` | character |  |
-| `home_ot_losses` | character |  |
-| `home_shootout_losses` | character |  |
-| `visitor_wins` | character |  |
-| `visitor_regulation_losses` | character |  |
-| `visitor_ot_losses` | character |  |
-| `visitor_shootout_losses` | character |  |
+| `visitor_audio_url` | character | Visiting team audio broadcast URL. |
+| `visitor_video_url` | character | Visiting team video broadcast URL. |
+| `visitor_webcast_url` | character | Visiting team webcast URL. |
+| `period` | character | Current period number. |
+| `period_name_short` | character | Short period label. |
+| `period_name_long` | character | Long period label. |
+| `game_clock` | character | Current game clock. |
+| `game_summary_url` | character | Game summary URL. |
+| `home_wins` | character | Home team wins (standings context). |
+| `home_regulation_losses` | character | Home team regulation losses. |
+| `home_ot_losses` | character | Home team overtime losses. |
+| `home_shootout_losses` | character | Home team shootout losses. |
+| `visitor_wins` | character | Visiting team wins (standings context). |
+| `visitor_regulation_losses` | character | Visiting team regulation losses. |
+| `visitor_ot_losses` | character | Visiting team overtime losses. |
+| `visitor_shootout_losses` | character | Visiting team shootout losses. |
 | `game_status` | character | Game status code. |
-| `intermission` | character |  |
+| `intermission` | character | Intermission flag. |
 | `game_status_string` | character | Human-readable game status. |
-| `game_status_string_long` | character |  |
-| `ord` | character |  |
-| `venue_name` | character |  |
-| `venue_location` | character |  |
-| `league_name` | character |  |
-| `league_code` | character |  |
-| `timezone_short` | character |  |
-| `home_logo` | character |  |
-| `visitor_logo` | character |  |
-| `flo_hockey_url` | character |  |
-| `combined_client_code` | character |  |
+| `game_status_string_long` | character | Human-readable game status (long form). |
+| `ord` | character | Sort-ordinal value. |
+| `venue_name` | character | Venue name. |
+| `venue_location` | character | Venue location. |
+| `league_name` | character | League name. |
+| `league_code` | character | League code. |
+| `timezone_short` | character | Short timezone label. |
+| `home_logo` | character | Home team logo URL. |
+| `visitor_logo` | character | Visiting team logo URL. |
+| `flo_hockey_url` | character | FloHockey broadcast URL. |
+| `combined_client_code` | character | Combined client code identifier. |
 
 ### Returns — `hockeytech_seasons` / `hockeytechSeasons`
 
@@ -322,18 +322,18 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | col_name | type | description |
 |---|---|---|
 | `team_code` | character | Team code. |
-| `losses` | character |  |
-| `regulation_wins` | character |  |
+| `losses` | character | Losses. |
+| `regulation_wins` | character | Regulation wins. |
 | `points` | integer | Standings points. |
 | `goals_for` | character | Goals for. |
 | `goals_against` | character | Goals against. |
-| `non_reg_wins` | character |  |
-| `non_reg_losses` | character |  |
-| `games_remaining` | character |  |
-| `percentage` | character |  |
+| `non_reg_wins` | character | Non-regulation (OT/shootout) wins. |
+| `non_reg_losses` | character | Non-regulation (OT/shootout) losses. |
+| `games_remaining` | character | Games remaining on the schedule. |
+| `percentage` | character | Points percentage. |
 | `overall_rank` | character | Overall standings rank. |
 | `games_played` | character | Games played. |
-| `rank` | integer |  |
+| `rank` | integer | Standings rank (within the section). |
 | `name` | character | Team name. |
 
 ### Returns — `hockeytech_team_roster` / `hockeytechTeamRoster`
@@ -342,49 +342,49 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 |---|---|---|
 | `id` | character | Roster entry id. |
 | `person_id` | character | HockeyTech person id. |
-| `active` | character |  |
+| `active` | character | Active-roster flag. |
 | `first_name` | character | Player first name. |
 | `last_name` | character | Player last name. |
-| `phonetic_name` | character |  |
-| `display_name` | character |  |
+| `phonetic_name` | character | Phonetic spelling of the player name. |
+| `display_name` | character | Display name. |
 | `shoots` | character | Shooting hand. |
 | `hometown` | character | Player hometown. |
-| `homeprov` | character |  |
-| `homecntry` | character |  |
-| `homeplace` | character |  |
-| `birthtown` | character |  |
-| `birthprov` | character |  |
-| `birthcntry` | character |  |
-| `birthplace` | character |  |
-| `height` | character |  |
-| `weight` | character |  |
-| `height_hyphenated` | character |  |
-| `hidden` | character |  |
-| `current_team` | character |  |
-| `player_id` | character |  |
-| `status` | character |  |
-| `birthdate` | character |  |
-| `birthdate_year` | character |  |
-| `rawbirthdate` | character |  |
-| `latest_team_id` | character |  |
-| `veteran_status` | character |  |
-| `veteran_description` | character |  |
-| `team_name` | character |  |
-| `division` | character |  |
-| `tp_jersey_number` | character |  |
-| `rookie` | character |  |
-| `position_id` | character |  |
-| `position` | character |  |
-| `nhlteam` | character |  |
-| `is_rookie` | character |  |
-| `h` | character |  |
-| `w` | character |  |
-| `draft_status` | character |  |
-| `draftinfo` | character |  |
-| `name` | character |  |
-| `player_image` | character |  |
-| `catches` | character |  |
-| `value` | character |  |
+| `homeprov` | character | Hometown province/state. |
+| `homecntry` | character | Hometown country. |
+| `homeplace` | character | Full hometown place string. |
+| `birthtown` | character | Birth town. |
+| `birthprov` | character | Birth province/state. |
+| `birthcntry` | character | Birth country. |
+| `birthplace` | character | Full birthplace string. |
+| `height` | character | Listed height. |
+| `weight` | character | Listed weight. |
+| `height_hyphenated` | character | Height in hyphenated feet-inches form. |
+| `hidden` | character | Hidden-from-display flag. |
+| `current_team` | character | Current team id. |
+| `player_id` | character | HockeyTech player id. |
+| `status` | character | Roster status. |
+| `birthdate` | character | Birth date. |
+| `birthdate_year` | character | Birth year. |
+| `rawbirthdate` | character | Raw (unformatted) birth date. |
+| `latest_team_id` | character | Most recent team id. |
+| `veteran_status` | character | Veteran-status flag. |
+| `veteran_description` | character | Veteran-status description. |
+| `team_name` | character | Team name. |
+| `division` | character | Team division. |
+| `tp_jersey_number` | character | Jersey number. |
+| `rookie` | character | Rookie flag. |
+| `position_id` | character | Position id. |
+| `position` | character | Player position. |
+| `nhlteam` | character | NHL team affiliation. |
+| `is_rookie` | character | Rookie flag (boolean form). |
+| `h` | character | Height (alias). |
+| `w` | character | Weight (alias). |
+| `draft_status` | character | Draft status. |
+| `draftinfo` | character | Draft information. |
+| `name` | character | Full player name. |
+| `player_image` | character | Player image URL. |
+| `catches` | character | Catching hand (goalies). |
+| `value` | character | Scalar value (when the source row is non-object). |
 
 ### Returns — `hockeytech_teams` / `hockeytechTeams`
 
@@ -395,8 +395,8 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `city` | character | Team city. |
 | `code` | character | Team code. |
 | `nickname` | character | Team nickname. |
-| `team_caption` | character |  |
+| `team_caption` | character | Team caption/display label. |
 | `division_id` | character | Division id. |
 | `division_long_name` | character | Division name. |
-| `division_short_name` | character |  |
-| `team_logo_url` | character |  |
+| `division_short_name` | character | Short division name. |
+| `team_logo_url` | character | Team logo URL. |

@@ -18,7 +18,7 @@ columns:
   description: 'Team nickname.'
 - name: team_caption
   type: character
-  description: ''
+  description: 'Team caption/display label.'
 - name: division_id
   type: character
   description: 'Division id.'
@@ -27,7 +27,7 @@ columns:
   description: 'Division name.'
 - name: division_short_name
   type: character
-  description: ''
+  description: 'Short division name.'
 - name: team_logo_url
   type: character
-  description: ''
+  description: 'Team logo URL.'

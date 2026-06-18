@@ -6,13 +6,13 @@ columns:
   description: 'Game date (M/D/YY).'
 - name: type
   type: integer
-  description: ''
+  description: 'Game-type flag.'
 - name: team
   type: character
   description: 'Team name.'
 - name: conf
   type: character
-  description: ''
+  description: 'Team conference.'
 - name: opp
   type: character
   description: 'Opponent.'
@@ -30,61 +30,61 @@ columns:
   description: 'Adjusted defensive efficiency.'
 - name: oe
   type: numeric
-  description: ''
+  description: 'Raw offensive efficiency (points/100 poss).'
 - name: off_efg
   type: numeric
-  description: ''
+  description: 'Offensive effective FG%.'
 - name: off_to
   type: numeric
-  description: ''
+  description: 'Offensive turnover %.'
 - name: off_or
   type: numeric
-  description: ''
+  description: 'Offensive rebound %.'
 - name: off_ftr
   type: numeric
-  description: ''
+  description: 'Offensive free-throw rate.'
 - name: de
   type: numeric
-  description: ''
+  description: 'Raw defensive efficiency (points allowed/100 poss).'
 - name: def_efg
   type: numeric
-  description: ''
+  description: 'Defensive effective FG% allowed.'
 - name: def_to
   type: numeric
-  description: ''
+  description: 'Defensive turnover % forced.'
 - name: def_or
   type: numeric
-  description: ''
+  description: 'Defensive (opponent) rebound %.'
 - name: def_ftr
   type: numeric
-  description: ''
+  description: 'Defensive free-throw rate allowed.'
 - name: game_score
   type: numeric
-  description: ''
+  description: 'Bart Torvik single-game quality score.'
 - name: opp_conf
   type: character
-  description: ''
+  description: 'Opponent conference.'
 - name: quad
   type: integer
-  description: ''
+  description: 'NCAA quadrant (1-4) of the game.'
 - name: year
   type: integer
   description: 'Season (4-digit ending-year).'
 - name: tempo
   type: numeric
-  description: ''
+  description: 'Game tempo (possessions).'
 - name: muid
   type: character
-  description: ''
+  description: 'Matchup unique id.'
 - name: coach
   type: character
-  description: ''
+  description: 'Team head coach.'
 - name: opp_coach
   type: character
-  description: ''
+  description: 'Opponent head coach.'
 - name: margin
   type: numeric
-  description: ''
+  description: 'Final scoring margin.'
 - name: win_prob
   type: numeric
   description: 'Pre-game win probability.'
@@ -93,4 +93,4 @@ columns:
   description: 'Nested per-game stat array (;-joined).'
 - name: overtimes
   type: integer
-  description: ''
+  description: 'Number of overtimes.'
