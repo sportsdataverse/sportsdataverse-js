@@ -73,3 +73,54 @@
   margin-bottom: 8px;
   margin-right: 8px;
 }
+
+/* Data-driven coverage grid (leagues by sport + provider namespaces). */
+.coverage {
+  padding: 2rem 0 3rem;
+  width: 100%;
+}
+
+.coverageCol {
+  margin-bottom: 1.5rem;
+}
+
+.coverageHeading {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chipRowCenter {
+  justify-content: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-card-background-color);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.chip:hover {
+  text-decoration: none;
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.chipCount {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-600);
+}
