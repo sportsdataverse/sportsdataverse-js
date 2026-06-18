@@ -31,7 +31,7 @@ const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
 // contract tests assert over it ({sport} present, EspnFamily, scopes) — stays
 // untouched.
 const FLAT_API_FILES = [
-  "mlb_api",
+  "mlb",
   "mlb_statcast",
   "nhl_api_web",
   "nhl_edge",
@@ -39,11 +39,11 @@ const FLAT_API_FILES = [
   "nhl_records",
   "nfl_api",
   "odds_api",
-  "sports247",
-  "cbs_napi",
-  "fox_bifrost",
-  "yahoo_editorial",
-  "yahoo_shangrila",
+  "recruiting",
+  "cbs",
+  "fox",
+  "yahoo_scores",
+  "yahoo",
   "hockeytech",
   "torvik",
 ];
@@ -56,7 +56,7 @@ const FLAT_API_FILES = [
 // (`odds` — the first cross-sport provider family), the family gets its OWN
 // standalone reference page (see STANDALONE_FLAT_NAMESPACES + renderStandaloneFlatPage).
 const FLAT_API_NAMESPACES = {
-  mlb_api: "mlb",
+  mlb: "mlb",
   mlb_statcast: "mlb",
   nhl_api_web: "nhl",
   nhl_edge: "nhl",
@@ -64,11 +64,11 @@ const FLAT_API_NAMESPACES = {
   nhl_records: "nhl",
   nfl_api: "nfl",
   odds_api: "odds",
-  sports247: "recruiting",
-  cbs_napi: "cbs",
-  fox_bifrost: "fox",
-  yahoo_editorial: "yahoo",
-  yahoo_shangrila: "yahoo",
+  recruiting: "recruiting",
+  cbs: "cbs",
+  fox: "fox",
+  yahoo_scores: "yahoo",
+  yahoo: "yahoo",
   // HockeyTech / LeagueStat — standalone provider namespace (`sdv.hockeytech`)
   // for the PWHL + junior/minor leagues (league chosen by a `league` param).
   hockeytech: "hockeytech",
@@ -80,7 +80,7 @@ const FLAT_API_NAMESPACES = {
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
 // section heading + intro line on the league reference page.
 const FLAT_API_META = {
-  mlb_api: { label: "MLB Stats API", source: "the official MLB Stats API" },
+  mlb: { label: "MLB Stats API", source: "the official MLB Stats API" },
   mlb_statcast: {
     label: "Baseball Savant / Statcast",
     source: "Baseball Savant (Statcast)",
@@ -106,27 +106,32 @@ const FLAT_API_META = {
     source: 'the NFL.com "Shield" data API',
   },
   odds_api: { label: "The Odds API", source: "the-odds-api.com" },
-  sports247: {
+  recruiting: {
     label: "247Sports",
     source: "the 247Sports recruiting database",
   },
-  cbs_napi: { label: "CBS Sports", source: "CBS Sports napi" },
-  fox_bifrost: { label: "Fox Sports", source: "Fox Sports Bifrost API" },
-  yahoo_editorial: {
-    label: "Yahoo Sports (editorial)",
-    source: "Yahoo Sports' editorial scoreboard/boxscore feed",
+  cbs: { label: "CBS Sports", source: "the CBS Sports API" },
+  fox: { label: "Fox Sports", source: "the Fox Sports API" },
+  yahoo_scores: {
+    label: "Yahoo Sports (scores)",
+    source: "the Yahoo Sports scoreboard/boxscore feed",
   },
-  yahoo_shangrila: {
-    label: "Yahoo Sports (shangrila)",
-    source: "Yahoo Sports' shangrila stats-graph API",
+  yahoo: {
+    label: "Yahoo Sports",
+    source: "the Yahoo Sports stats API",
   },
   hockeytech: {
     label: "HockeyTech / LeagueStat",
     source: "the HockeyTech / LeagueStat feed (PWHL + junior/minor hockey)",
+    // Sport-specific standalone family: nests under the Hockey sport group
+    // (covers the major PWHL + the junior/minor leagues), NOT generic Providers.
+    sport: "hockey",
   },
   torvik: {
     label: "BartTorvik (T-Rank)",
     source: "barttorvik.com (T-Rank college basketball analytics)",
+    // Sport-specific standalone family: nests under the Basketball sport group.
+    sport: "basketball",
   },
 };
 
@@ -139,21 +144,21 @@ const STANDALONE_NS_EXAMPLE = {
     "await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY });\n",
   recruiting:
     "// 247Sports recruiting rankings (pass your own JWT via `headers`):\n" +
-    "await sdv.recruiting.sports247_rankings({\n" +
+    "await sdv.recruiting.recruiting_rankings({\n" +
     "  sport_key: 'football', year: 2025,\n" +
     "  headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },\n" +
     "});\n",
   cbs:
-    "// CBS Sports NAPI is an anonymously-reachable public JSON API (no token):\n" +
-    "await sdv.cbs.cbs_napi_team({ team_id: 'football-nfl-NE' });\n",
+    "// CBS Sports is an anonymously-reachable public JSON API (no token):\n" +
+    "await sdv.cbs.cbs_league({ league_id: 'football-nfl' });\n",
   fox:
-    "// Fox Sports Bifrost uses a public apikey + api-version query pair\n" +
+    "// Fox Sports uses a public apikey + api-version query pair\n" +
     "// (both default out of the box — override apikey if you have your own):\n" +
-    "await sdv.fox.fox_bifrost_scoreboard({ sport: 'cfb' });\n",
+    "await sdv.fox.fox_scoreboard({ sport: 'cfb' });\n",
   yahoo:
     "// Yahoo Sports is keyless but rejects requests without browser-y headers —\n" +
     "// pass Origin/Referer via `headers` (two hosts share the `yahoo` namespace):\n" +
-    "await sdv.yahoo.yahoo_shangrila_league_standings({\n" +
+    "await sdv.yahoo.yahoo_league_standings({\n" +
     "  league: 'ncaaf',\n" +
     "  headers: { Origin: 'https://sports.yahoo.com', Referer: 'https://sports.yahoo.com/' },\n" +
     "});\n",
@@ -509,7 +514,7 @@ function wrapperName(prefix, short) {
   return `espn_${prefix}_${short}`.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 }
 
-/** snake_case -> camelCase (e.g. `mlb_api_teams` -> `mlbApiTeams`). */
+/** snake_case -> camelCase (e.g. `mlb_teams` -> `mlbTeams`). */
 function toCamel(s) {
   return s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 }
@@ -529,7 +534,7 @@ const _schemaCache = new Map();
 
 /**
  * Load a returns-schema's `columns` for a `returns_schema` value (e.g.
- * `native/mlb_api/boxscore` or `autodoc/mlb/mlb_statcast_search`), resolved
+ * `native/mlb/boxscore` or `autodoc/mlb/mlb_statcast_search`), resolved
  * under tools/codegen/schemas/. Returns the column list (`[{name, type,
  * description}]`) or `null` when the file is missing / has no columns. The
  * parsed result is cached so repeated lookups across pages are cheap.
@@ -677,6 +682,10 @@ function renderStandaloneFlatPage(ns, position, flatWrappers) {
   }));
   const total = rowsByApi.reduce((n, f) => n + f.rows.length, 0);
   const labels = families.map((api) => (FLAT_API_META[api] ?? { label: api }).label);
+  // Sport-specific standalone families (torvik->basketball, hockeytech->hockey)
+  // nest under their sport in the sidebar; cross-sport providers don't.
+  const nsSport = flatNamespaceSport(ns);
+  const nsKind = nsSport ? `${sportLabel(nsSport)} provider` : "cross-sport provider";
 
   let body =
     `---\n` +
@@ -689,7 +698,7 @@ function renderStandaloneFlatPage(ns, position, flatWrappers) {
     `- **namespace:** \`sdv.${ns}\` *(standalone — not an ESPN league)*\n` +
     `- **families:** ${labels.map((l) => `${l}`).join(", ")}\n` +
     `- **wrappers:** ${total} native\n\n` +
-    `\`${ns}\` is a cross-sport provider namespace (no ESPN \`{sport}\`/\`{league}\` ` +
+    `\`${ns}\` is a ${nsKind} namespace (no ESPN \`{sport}\`/\`{league}\` ` +
     `nesting). Every method is exposed under BOTH its snake_case name ` +
     `(\`<family>_<endpoint>\`, py/R parity) and a camelCase canonical name ` +
     `(\`<family><Endpoint>\`) on \`sdv.${ns}\`. Pass \`{ parsed: true }\` to any ` +
@@ -1192,17 +1201,22 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs
   if (standaloneNs.length) {
     body +=
       `\n## Standalone provider namespaces\n\n` +
-      `Cross-sport providers that aren't tied to a single ESPN league. They get ` +
-      `their own \`sdv.<namespace>\` surface and reference page.\n\n` +
-      `| Namespace | provider | wrappers |\n` +
-      `|---|---|---:|\n`;
+      `Native providers that aren't a single ESPN league — each gets its own ` +
+      `\`sdv.<namespace>\` surface and reference page. Cross-sport providers ` +
+      `(odds, cbs, …) live under **Providers** in the sidebar; sport-specific ` +
+      `ones (\`torvik\` → Basketball, \`hockeytech\` → Hockey) nest under their ` +
+      `sport.\n\n` +
+      `| Namespace | sport | provider | wrappers |\n` +
+      `|---|---|---|---:|\n`;
     for (const ns of standaloneNs) {
       const families = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === ns);
       const count = flatWrappers.filter((w) => families.includes(w.api)).length;
       const labels = families
         .map((api) => (FLAT_API_META[api] ?? { label: api }).label)
         .join(", ");
-      body += `| [${ns}](./${ns}) | ${labels} | ${count} |\n`;
+      const nsSport = flatNamespaceSport(ns);
+      const sportCell = nsSport ? sportLabel(nsSport) : "*cross-sport*";
+      body += `| [${ns}](./${ns}) | ${sportCell} | ${labels} | ${count} |\n`;
     }
   }
 
@@ -1216,7 +1230,7 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs
     `:::\n` +
     `\n:::tip Native (non-ESPN) APIs\n` +
     "```js\n" +
-    `await sdv.mlb.mlbApiSchedule({ sportId: 1, date: '2024-07-01' });\n` +
+    `await sdv.mlb.mlbSchedule({ sportId: 1, date: '2024-07-01' });\n` +
     `await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });\n` +
     `await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });\n` +
     "```\n" +
@@ -1244,18 +1258,50 @@ const REFERENCE_CATEGORY = JSON.stringify(
 // `docs/sidebars.js` imports this array and splices it into the docs sidebar,
 // so adding a league/provider (and re-running codegen) auto-places it in the
 // right group — no manual sidebar edit. Drift-guarded via the `outputs` map.
-function renderReferenceSidebar(leagues, standaloneNs) {
-  // Group league prefixes by sport, sorted deterministically within each group.
+// Sport classification for a STANDALONE flat namespace, if it is sport-specific
+// (e.g. `torvik` -> basketball, `hockeytech` -> hockey). Cross-sport providers
+// (odds, cbs, fox, recruiting, yahoo) return null and stay under "Providers".
+// Declared via `sport:` in FLAT_API_META (keyed by api stem) + the api->ns map,
+// so a new sport-specific provider auto-nests under its sport with no edit here.
+function flatNamespaceSport(ns) {
+  for (const [api, nsValue] of Object.entries(FLAT_API_NAMESPACES)) {
+    if (nsValue === ns && FLAT_API_META[api] && FLAT_API_META[api].sport) {
+      return FLAT_API_META[api].sport;
+    }
+  }
+  return null;
+}
+
+// Partition standalone namespaces into sport-specific (folded into their sport's
+// league list) vs cross-sport (the "Providers" bucket). Shared by the sidebar +
+// the homepage coverage view so both classify identically.
+function groupBySportWithFlat(leagues, standaloneNs) {
   const bySport = new Map();
   for (const l of leagues) {
     if (!bySport.has(l.sport)) bySport.set(l.sport, []);
     bySport.get(l.sport).push(l.prefix);
   }
-  // Sport order: the curated SPORT_ORDER first, then any extra sport alphabetically.
+  const crossSportNs = [];
+  for (const ns of standaloneNs) {
+    const sport = flatNamespaceSport(ns);
+    if (sport) {
+      if (!bySport.has(sport)) bySport.set(sport, []);
+      bySport.get(sport).push(ns);
+    } else {
+      crossSportNs.push(ns);
+    }
+  }
   const sports = [
     ...SPORT_ORDER.filter((s) => bySport.has(s)),
     ...[...bySport.keys()].filter((s) => !SPORT_ORDER.includes(s)).sort(),
   ];
+  return { bySport, crossSportNs, sports };
+}
+
+function renderReferenceSidebar(leagues, standaloneNs) {
+  // Leagues grouped by sport, plus any sport-specific standalone provider
+  // namespaces (torvik->basketball, hockeytech->hockey) nested under their sport.
+  const { bySport, crossSportNs, sports } = groupBySportWithFlat(leagues, standaloneNs);
 
   const items = [
     { type: "doc", id: "reference/index", label: "Overview" },
@@ -1285,8 +1331,8 @@ function renderReferenceSidebar(leagues, standaloneNs) {
       ),
     });
   }
-  if (standaloneNs.length) {
-    const ns = standaloneNs.slice().sort((a, b) => a.localeCompare(b));
+  if (crossSportNs.length) {
+    const ns = crossSportNs.slice().sort((a, b) => a.localeCompare(b));
     items.push({
       type: "category",
       label: "Providers",
@@ -1315,26 +1361,31 @@ function renderReferenceSidebar(leagues, standaloneNs) {
 // SAME codegen pass (so it stays drift-guarded) for docs/src/pages/index.js to
 // consume instead. Display labels/order live in index.js (a view concern).
 function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
-  const bySport = new Map();
-  for (const l of leagues) {
-    if (!bySport.has(l.sport)) bySport.set(l.sport, []);
-    bySport.get(l.sport).push(l.prefix);
-  }
-  const sportOrder = [
-    ...SPORT_ORDER.filter((s) => bySport.has(s)),
-    ...[...bySport.keys()].filter((s) => !SPORT_ORDER.includes(s)).sort(),
-  ];
-  const sports = sportOrder.map((sport) => ({
-    sport,
-    prefixes: bySport.get(sport).slice().sort((a, b) => a.localeCompare(b)),
-  }));
+  // Same classification as the sidebar: sport-specific standalone namespaces
+  // (torvik, hockeytech) fold into their sport; only cross-sport providers list
+  // separately. Each sport entry also carries a `providers` array — the subset
+  // of its prefixes that are sport-specific providers — so the homepage can
+  // mark those chips distinctly from ESPN leagues.
+  const { bySport, crossSportNs, sports: sportOrder } = groupBySportWithFlat(
+    leagues,
+    standaloneNs
+  );
+  const leaguePrefixes = new Set(leagues.map((l) => l.prefix));
+  const sports = sportOrder.map((sport) => {
+    const prefixes = bySport.get(sport).slice().sort((a, b) => a.localeCompare(b));
+    return {
+      sport,
+      prefixes,
+      providers: prefixes.filter((p) => !leaguePrefixes.has(p)),
+    };
+  });
 
   const counts = {};
   for (const w of flatWrappers) {
     const ns = FLAT_API_NAMESPACES[w.api];
     if (ns) counts[ns] = (counts[ns] || 0) + 1;
   }
-  const providers = standaloneNs
+  const providers = crossSportNs
     .slice()
     .sort((a, b) => a.localeCompare(b))
     .map((ns) => ({ ns, count: counts[ns] || 0 }));
@@ -1383,7 +1434,7 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
   );
 }
 
-/** Build the per-family flat-host map ({ mlb_api: "https://statsapi.mlb.com" }). */
+/** Build the per-family flat-host map ({ mlb: "https://statsapi.mlb.com" }). */
 function flatHostsFrom(flatWrappers) {
   const hosts = {};
   for (const w of flatWrappers) hosts[w.api] = w.host;

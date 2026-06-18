@@ -1,0 +1,102 @@
+# CBS NAPI returns schema — columns DERIVED from a captured live response run
+# through the registered parser (parse_cbs_*). The CBS NAPI OpenAPI spec
+# ships no typed 200-response schema, so columns are not enumerable from the
+# spec; they are enumerated here from a representative capture. `type` is
+# inferred from the captured JS value; `description` is best-effort from the
+# snake_cased key. Endpoints with no capture remain `columns: []`.
+schema: team_players
+kind: dataframe
+columns:
+- name: player_id
+  type: integer
+  description: Player ID.
+- name: first_name
+  type: character
+  description: First name.
+- name: full_first_name
+  type: character
+  description: Full first name.
+- name: last_name
+  type: character
+  description: Last name.
+- name: full_last_name
+  type: character
+  description: Full last name.
+- name: nick_name
+  type: character
+  description: Nick name.
+- name: height
+  type: character
+  description: Height.
+- name: weight
+  type: integer
+  description: Weight.
+- name: experience
+  type: integer
+  description: Experience.
+- name: school
+  type: character
+  description: School.
+- name: home_town
+  type: character
+  description: Home town.
+- name: debut
+  type: character
+  description: Debut.
+- name: birth_date
+  type: character
+  description: Birth date.
+- name: birth_country
+  type: character
+  description: Birth country.
+- name: birth_country_code
+  type: character
+  description: Birth country code.
+- name: nationality_country
+  type: character
+  description: Nationality country.
+- name: nationality_country_code
+  type: character
+  description: Nationality country code.
+- name: locked
+  type: integer
+  description: Locked.
+- name: player_team_associations
+  type: character
+  description: Player team associations.
+- name: injuries
+  type: character
+  description: Injuries.
+- name: transactions
+  type: character
+  description: Transactions.
+- name: depth_charts
+  type: character
+  description: Depth charts.
+- name: position_rankings
+  type: character
+  description: Position rankings.
+- name: player_stats
+  type: character
+  description: Player stats.
+- name: standings
+  type: character
+  description: Standings.
+- name: rankings
+  type: character
+  description: Rankings.
+- name: player_outlook
+  type: character
+  description: Player outlook.
+- name: meta_data
+  type: character
+  description: Meta data.
+- name: draft_info
+  type: character
+  description: Draft info.
+- name: game_stats
+  type: character
+  description: Game stats.
+- name: combine_data
+  type: character
+  description: Combine data.

@@ -1,0 +1,5 @@
+# Yahoo Sports editorial — generated returns schema.
+# Parsed by parse_yahoo_scores_scoreboard. The editorial scoreboard payload is a keyed map (id -> object) with no typed item schema; the parser unrolls + snake_cases whatever keys the payload ships, so columns are not enumerable ahead of a live capture.
+schema: scoreboard
+kind: dataframe
+columns: []

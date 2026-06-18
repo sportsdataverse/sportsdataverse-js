@@ -3,7 +3,7 @@
 // and emits tools/codegen/schemas/native/yahoo_{editorial,shangrila}/<short>.yaml
 // with snake_cased columns derived from the list-item props the parser flattens
 // (deep-flattened with `_`). Untyped leaves -> `columns: []` + a note. This
-// mirrors the cbs_napi / fox_bifrost returns-schema shape. Run once:
+// mirrors the cbs / fox returns-schema shape. Run once:
 //   node tools/codegen/gen-yahoo-schemas.mjs
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -102,7 +102,7 @@ function emit(api, short, columns, note) {
   const dir = join(repoRoot, "tools", "codegen", "schemas", "native", api);
   mkdirSync(dir, { recursive: true });
   const L = [];
-  L.push(`# Yahoo Sports ${api === "yahoo_editorial" ? "editorial" : "shangrila"} — generated returns schema.`);
+  L.push(`# Yahoo Sports ${api === "yahoo_scores" ? "editorial" : "shangrila"} — generated returns schema.`);
   L.push(`# ${note}`);
   L.push(`schema: ${short}`);
   L.push(`kind: dataframe`);
@@ -138,7 +138,7 @@ function run(api, specFile) {
     readFileSync(join(here, "endpoints", `${api}.yaml`), "utf8")
   ).endpoints;
   const ops = opsByPath(spec);
-  const kind = api === "yahoo_editorial" ? "editorial" : "shangrila";
+  const kind = api === "yahoo_scores" ? "editorial" : "shangrila";
   let typed = 0;
   let untyped = 0;
   for (const ep of endpoints) {
@@ -155,7 +155,7 @@ function run(api, specFile) {
       // Keyed maps (game/player id -> object) have no typed item in the spec, so
       // columns aren't enumerable ahead of a live capture.
       note =
-        `Parsed by parse_yahoo_editorial_${ep.short === "scoreboard" || ep.short === "boxscore" ? ep.short : "list"}. ` +
+        `Parsed by parse_yahoo_scores_${ep.short === "scoreboard" || ep.short === "boxscore" ? ep.short : "list"}. ` +
         `The editorial ${ep.short} payload is a keyed map (id -> object) with no ` +
         `typed item schema; the parser unrolls + snake_cases whatever keys the ` +
         `payload ships, so columns are not enumerable ahead of a live capture.`;
@@ -165,7 +165,7 @@ function run(api, specFile) {
       if (item) columns = flattenProps(spec, item);
       // Drop array/object-only placeholder columns that flatten to nothing.
       columns = columns.filter((c) => c.name);
-      const parser = ep.parser.replace("parse_yahoo_shangrila_", "");
+      const parser = ep.parser.replace("parse_yahoo_", "");
       if (columns.length) {
         note =
           `Parsed by ${ep.parser}. Columns derived from the spec's typed ` +
@@ -185,5 +185,5 @@ function run(api, specFile) {
   console.log(`${api}: ${endpoints.length} schemas (${typed} typed, ${untyped} empty).`);
 }
 
-run("yahoo_editorial", "yahoo-sports-editorial.openapi.yaml");
-run("yahoo_shangrila", "yahoo-sports-shangrila.openapi.yaml");
+run("yahoo_scores", "yahoo-sports-editorial.openapi.yaml");
+run("yahoo", "yahoo-sports-shangrila.openapi.yaml");

@@ -50,8 +50,8 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
  * Build a league's non-ESPN "flat API" surface. For each flat wrapper, expose
  * it under BOTH names (same fn), the same dual-case pattern as the ESPN
  * wrappers:
- *   - `mlb_api_teams(params)` — snake_case (py/R parity),
- *   - `mlbApiTeams(params)`   — camelCase canonical (idiomatic JS).
+ *   - `mlb_teams(params)` — snake_case (py/R parity),
+ *   - `mlbTeams(params)`   — camelCase canonical (idiomatic JS).
  *
  * The wrapper resolves the request via `resolveFlat`, fetches the raw JSON, and
  * — only when the caller passes `{ parsed: true }` AND a parser is registered —
@@ -86,7 +86,7 @@ export function makeFlatModule(defs: WrapperDef[]): Record<string, WrapperFn> {
     };
     const snake = `${def.api}_${def.short}`;
     mod[snake] = fn; // py/R-parity alias
-    mod[toCamel(snake)] = fn; // mlbApiTeams — idiomatic JS canonical
+    mod[toCamel(snake)] = fn; // mlbTeams — idiomatic JS canonical
   }
   return mod;
 }

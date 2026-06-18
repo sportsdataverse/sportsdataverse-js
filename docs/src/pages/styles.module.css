@@ -124,3 +124,11 @@
   font-weight: 700;
   color: var(--ifm-color-emphasis-600);
 }
+
+/* Sport-specific native-provider chips (e.g. torvik, hockeytech) nested under
+   their sport group — a dashed accent marks them as providers, not ESPN
+   leagues, without pulling them out of the sport. */
+.chipProvider {
+  border-style: dashed;
+  border-color: var(--ifm-color-primary);
+}

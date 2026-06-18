@@ -125,6 +125,94 @@ console.table(records);
 
 [Open in playground ▶](/playground?l=nhl&e=flat%3Anhl_records%3Afranchises&parsed=1)
 
+## Beyond the NHL — HockeyTech (PWHL + junior/minor)
+
+The rest of hockey lives on its own `sdv.hockeytech` namespace (HockeyTech /
+LeagueStat), nested under **Hockey** in the sidebar. One gateway serves every
+league — pick it with the `league` param:
+
+| `league` | League |
+|---|---|
+| `pwhl` | Professional Women's Hockey League (major) |
+| `ahl` | American Hockey League |
+| `ohl` / `whl` | Ontario / Western Hockey League (CHL juniors) |
+| `qmjhl` | Québec Maritimes Junior Hockey League |
+
+Keys default in; switch leagues by changing `league`. Every endpoint honors
+`{ parsed: true }`.
+
+### PWHL schedule
+
+```js
+import sdv from 'sportsdataverse';
+
+const games = await sdv.hockeytech.hockeytech_schedule({ league: 'pwhl', parsed: true });
+console.table(games);
+```
+
+Live and inline — swap `league` for `ahl` / `ohl` / `whl`:
+
+<RunCell
+  league="hockeytech"
+  endpoint="flat:hockeytech:schedule"
+  params={{ league: 'pwhl' }}
+  parsed
+  title="HockeyTech — PWHL schedule (live)"
+/>
+
+[Open in playground ▶](/playground?l=hockeytech&e=flat%3Ahockeytech%3Aschedule&parsed=1&league=pwhl)
+
+### PWHL standings
+
+```js
+import sdv from 'sportsdataverse';
+
+const standings = await sdv.hockeytech.hockeytech_standings({ league: 'pwhl', parsed: true });
+console.table(standings);
+```
+
+<RunCell
+  league="hockeytech"
+  endpoint="flat:hockeytech:standings"
+  params={{ league: 'pwhl' }}
+  parsed
+  title="HockeyTech — PWHL standings (live)"
+/>
+
+[Open in playground ▶](/playground?l=hockeytech&e=flat%3Ahockeytech%3Astandings&parsed=1&league=pwhl)
+
+### Stat leaders, players & play-by-play
+
+`hockeytech_leaders` (skater/goalie leaderboards), `hockeytech_player_stats`
+(career season stats by `player_id`) and `hockeytech_pbp` (per-game events by
+`game_id`) round out the surface, alongside `teams`, `team_roster`,
+`game_shifts`, `game_summary`, and `seasons`.
+
+```js
+import sdv from 'sportsdataverse';
+
+const leaders = await sdv.hockeytech.hockeytech_leaders({ league: 'pwhl', parsed: true });
+console.table(leaders);
+```
+
+<RunCell
+  league="hockeytech"
+  endpoint="flat:hockeytech:leaders"
+  params={{ league: 'pwhl' }}
+  parsed
+  title="HockeyTech — PWHL stat leaders (live)"
+/>
+
+[Open in playground ▶](/playground?l=hockeytech&e=flat%3Ahockeytech%3Aleaders&parsed=1&league=pwhl)
+
+:::note
+PWHL / AHL / OHL / WHL run live in the playground. **QMJHL** uses a secondary
+host (`cluster.leaguestat.com`) that isn't in the playground's proxy allowlist —
+`league: 'qmjhl'` works from the library, but its in-browser playground/RunCell
+calls won't resolve. Full method + column tables:
+**[HockeyTech reference](/docs/reference/hockeytech)**.
+:::
+
 ## Run it live
 
 The cell below runs the **published npm package** end to end against the native

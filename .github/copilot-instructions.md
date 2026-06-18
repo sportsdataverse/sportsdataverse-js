@@ -28,8 +28,8 @@ cross-sport provider families, all with a tidy parser layer.
 - **ESM only** — `import sdv from 'sportsdataverse'`. There is no CommonJS
   `require` export. In RunKit/notebooks use `await import('sportsdataverse')`.
 - **Dual-case naming** — every generated wrapper is exposed under BOTH snake_case
-  (`espn_nba_scoreboard`, `mlb_api_teams`) and camelCase (`espnNbaScoreboard`,
-  `mlbApiTeams`). Same function, either name.
+  (`espn_nba_scoreboard`, `mlb_teams`) and camelCase (`espnNbaScoreboard`,
+  `mlbTeams`). Same function, either name.
 - **Parser contract** — parsers are `(raw: any) => Record<string, any>[]`: return
   a tidy array of flat (snake_cased, nested-flattened) row objects; return `[]`
   on empty/malformed input; never throw. `{ parsed: true }` is strictly additive

@@ -4,7 +4,7 @@
 // (Site v2 / Site v2 alt / Web v3 / Core v2 / Core v3) into tidy rectangular
 // rows.
 //
-// Same contract as the native flat-API parsers (mlb_api.ts, nhl_api_web.ts):
+// Same contract as the native flat-API parsers (mlb.ts, nhl_api_web.ts):
 //
 //   - every parser is `(payload: any) => Record<string, any>[]` (the JS analogue
 //     of a polars frame — an array of flat row objects);
