@@ -108,6 +108,73 @@ up once **v3 is published**. Until then the embed may resolve v2, whose surface
 differs. Copy any snippet into Node to run it against your installed version.
 :::
 
+## Real parsed output (frozen at build)
+
+The tables below are **real parser output**, rendered at build time from
+committed ESPN fixtures and frozen into this page. They are deterministic
+(fixture-driven, no network) so CI reproduces them exactly — the same injector
+could instead run live and refresh against today's data. Regenerate with
+`npm run docs:examples`.
+
+{/* The blocks between the markers below are written by tools/docs/inject-outputs.mjs. */}
+
+<!-- inject:example:scoreboard -->
+
+`sdv.nba.espnNbaScoreboard({ parsed: true })` — one row per game.
+
+| game_id | uid | date | name | short_name | season_year |
+| --- | --- | --- | --- | --- | --- |
+| 401704871 | s:40~l:46~e:401704871 | 2024-12-01T20:30Z | Orlando Magic at Brooklyn Nets | ORL @ BKN | 2025 |
+| 401704872 | s:40~l:46~e:401704872 | 2024-12-01T20:30Z | Indiana Pacers at Memphis Grizzlies | IND @ MEM | 2025 |
+| 401704873 | s:40~l:46~e:401704873 | 2024-12-01T23:00Z | Boston Celtics at Cleveland Cavaliers | BOS @ CLE | 2025 |
+| 401704874 | s:40~l:46~e:401704874 | 2024-12-01T23:00Z | New Orleans Pelicans at New York Knicks | NO @ NY | 2025 |
+| 401704875 | s:40~l:46~e:401704875 | 2024-12-01T23:00Z | Miami Heat at Toronto Raptors | MIA @ TOR | 2025 |
+| 401704876 | s:40~l:46~e:401704876 | 2024-12-02T00:00Z | Oklahoma City Thunder at Houston Rockets | OKC @ HOU | 2025 |
+| 401704877 | s:40~l:46~e:401704877 | 2024-12-02T01:00Z | Los Angeles Lakers at Utah Jazz | LAL @ UTAH | 2025 |
+| 401704878 | s:40~l:46~e:401704878 | 2024-12-02T02:00Z | Dallas Mavericks at Portland Trail Bl… | DAL @ POR | 2025 |
+
+_10 rows total — first 8 shown, 50 cols total — first 6 shown._
+
+<!-- /inject -->
+
+<!-- inject:example:standings -->
+
+`sdv.nba.espnNbaStandings({ parsed: true })` — one row per team.
+
+| group_name | group_abbreviation | team_id | team_name | team_abbreviation | team_display_name |
+| --- | --- | --- | --- | --- | --- |
+| Eastern Conference | East | 19 | Magic | ORL | Orlando Magic |
+| Eastern Conference | East | 15 | Bucks | MIL | Milwaukee Bucks |
+| Eastern Conference | East | 14 | Heat | MIA | Miami Heat |
+| Eastern Conference | East | 20 | 76ers | PHI | Philadelphia 76ers |
+| Eastern Conference | East | 11 | Pacers | IND | Indiana Pacers |
+| Eastern Conference | East | 5 | Cavaliers | CLE | Cleveland Cavaliers |
+| Eastern Conference | East | 18 | Knicks | NY | New York Knicks |
+| Eastern Conference | East | 1 | Hawks | ATL | Atlanta Hawks |
+
+_30 rows total — first 8 shown, 31 cols total — first 6 shown._
+
+<!-- /inject -->
+
+<!-- inject:example:team_roster -->
+
+`sdv.nba.espnNbaTeamRoster({ team_id: 13, parsed: true })` — one row per player.
+
+| id | uid | guid | alternate_ids_sdr | first_name | last_name |
+| --- | --- | --- | --- | --- | --- |
+| 4278129 | s:40~l:46~a:4278129 | 9af41ea8-a24c-025f-a63f-8263fbf0ca66 | 4278129 | Deandre | Ayton |
+| 3945274 | s:40~l:46~a:3945274 | 583794eb-0f38-9bbd-3e25-9dd33b7f83b8 | 3945274 | Luka | Doncic |
+| 4066648 | s:40~l:46~a:4066648 | 40c1bcf6-675b-f217-f97c-1d628073f927 | 4066648 | Rui | Hachimura |
+| 4397077 | s:40~l:46~a:4397077 | 4cd92ac1-73ce-653d-c3b1-9c68e9c7a4d0 | 4397077 | Jaxson | Hayes |
+| 4683774 | s:40~l:46~a:4683774 | 456f71fd-2ce5-3f50-8d0d-f30c0159789d | 4683774 | Bronny | James |
+| 1966 | s:40~l:46~a:1966 | 1f6592b3-ff53-d321-8dc5-6038d48c1786 | 2126588 | LeBron | James |
+| 3913174 | s:40~l:46~a:3913174 | 668a6a14-4003-d79c-c252-0ece0a960d36 | 3913174 | Luke | Kennard |
+| 2960236 | s:40~l:46~a:2960236 | d06ad722-26ff-5865-1433-061e2e6fbb32 | 2960236 | Maxi | Kleber |
+
+_17 rows total — first 8 shown, 68 cols total — first 6 shown._
+
+<!-- /inject -->
+
 ## Where next
 
 - **[NBA](./nba)**, **[NFL](./nfl)**, **[MLB](./mlb)**, **[NHL](./nhl)**,

@@ -1,8 +1,4 @@
----
-title: NBA & WNBA recipes
-sidebar_label: NBA / WNBA
-sidebar_position: 2
----
+import RunCell from '@site/src/components/RunCell';
 
 # NBA & WNBA recipes
 
@@ -20,6 +16,12 @@ const games = await sdv.nba.espnNbaScoreboard({ parsed: true });
 console.table(games);
 ```
 
+The cell below is the same call, live and inline — edit a param, hit **Run ▶**,
+and the response is parsed into tidy rows right here (no copy-paste, no leaving
+the page). It runs against the deployed site's proxy.
+
+<RunCell league="nba" endpoint="espn:scoreboard" parsed title="NBA scoreboard — live" />
+
 [Open in playground ▶](/playground?l=nba&e=espn%3Ascoreboard&parsed=1)
 
 ## A full team roster
@@ -32,6 +34,14 @@ import sdv from 'sportsdataverse';
 const roster = await sdv.nba.espnNbaTeamRoster({ team_id: 13, parsed: true });
 console.table(roster);
 ```
+
+<RunCell
+  league="nba"
+  endpoint="espn:team_roster"
+  params={{ team_id: 13 }}
+  parsed
+  title="Lakers roster — change team_id and re-run"
+/>
 
 [Open in playground ▶](/playground?l=nba&e=espn%3Ateam_roster&parsed=1&team_id=13)
 
@@ -54,6 +64,31 @@ console.table(boxscore);
 ```
 
 [Open in playground ▶](/playground?l=nba&e=espn%3Asummary&parsed=1&section=boxscore_team)
+
+### Frozen output (real summary sub-frame, no network)
+
+The table below is **real summary-dispatcher output** — the `leaders` sub-frame,
+rendered at build time from a committed ESPN fixture and frozen into this page
+(deterministic; CI reproduces it exactly). Regenerate with `npm run docs:examples`.
+
+{/* Written by tools/docs/inject-outputs.mjs — do not hand-edit. */}
+
+<!-- inject:example:summary_leaders -->
+
+`sdv.nba.espnNbaSummary({ event_id, parsed: true, section: 'leaders' })` — the `leaders` sub-frame of the 21-section summary dispatcher.
+
+| team_id | team_abbreviation | category_name | category_display_name | athlete_id | athlete_display_name |
+| --- | --- | --- | --- | --- | --- |
+| 19 | ORL | points | Points | 4432573 | Paolo Banchero |
+| 19 | ORL | assists | Assists | 4432573 | Paolo Banchero |
+| 19 | ORL | rebounds | Rebounds | 4566434 | Franz Wagner |
+| 28 | TOR | points | Points | 4277883 | Jordan Nwora |
+| 28 | TOR | assists | Assists | 4395724 | Immanuel Quickley |
+| 28 | TOR | rebounds | Rebounds | 4277883 | Jordan Nwora |
+
+_6 rows, 12 cols total — first 6 shown._
+
+<!-- /inject -->
 
 ## WNBA — same surface, different namespace
 

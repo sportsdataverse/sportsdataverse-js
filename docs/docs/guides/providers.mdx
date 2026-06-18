@@ -5,6 +5,7 @@ sidebar_position: 10
 ---
 
 import RunKit from '@site/src/components/RunKit';
+import RunCell from '@site/src/components/RunCell';
 
 # Provider recipes
 
@@ -37,9 +38,19 @@ console.table(sports);
 
 [Open in playground ▶](/playground?l=odds&e=flat%3Aodds_api%3Asports&parsed=1&api_key=YOUR_ODDS_API_KEY)
 
+Live and inline — paste a real key into the `api_key` field first (calls without
+one return 401):
+
+<RunCell
+  league="odds"
+  endpoint="flat:odds_api:sports"
+  parsed
+  title="The Odds API — covered leagues (needs your api_key)"
+/>
+
 :::note
-In the playground, replace `YOUR_ODDS_API_KEY` in the `api_key` field with a real
-key — calls without one return a 401.
+In the playground and the cell above, replace the empty `api_key` field with a
+real key — calls without one return a 401.
 :::
 
 ## CBS — league metadata
@@ -52,6 +63,17 @@ import sdv from 'sportsdataverse';
 const league = await sdv.cbs.cbsNapiLeague({ league_id: 'football-nfl', parsed: true });
 console.table(league);
 ```
+
+Live and inline — the `league_id` is a CBS slug (`football-nfl`,
+`basketball-nba`, `baseball-mlb`):
+
+<RunCell
+  league="cbs"
+  endpoint="flat:cbs_napi:league"
+  params={{ league_id: 'football-nfl' }}
+  parsed
+  title="CBS NAPI league metadata — live"
+/>
 
 [Open in playground ▶](/playground?l=cbs&e=flat%3Acbs_napi%3Aleague&parsed=1&league_id=football-nfl)
 
@@ -66,6 +88,17 @@ import sdv from 'sportsdataverse';
 const board = await sdv.fox.foxBifrostScoreboard({ sport: 'cfb', parsed: true });
 console.table(board);
 ```
+
+Live and inline — the public `apikey` defaults out of the box; just pick a
+`sport` (`cfb`, `nfl`, `mlb`, `nba`, …):
+
+<RunCell
+  league="fox"
+  endpoint="flat:fox_bifrost:scoreboard"
+  params={{ sport: 'cfb' }}
+  parsed
+  title="Fox Bifrost scoreboard — public apikey, live"
+/>
 
 [Open in playground ▶](/playground?l=fox&e=flat%3Afox_bifrost%3Ascoreboard&parsed=1&sport=cfb)
 
@@ -85,6 +118,17 @@ const standings = await sdv.yahoo.yahooShangrilaLeagueStandings({
 console.table(standings);
 ```
 
+Live and inline — `lang`/`region`/`tz` default automatically; pass a `league`
+slug. If a Yahoo host rejects the call, add an `Origin`/`Referer` via `headers`:
+
+<RunCell
+  league="yahoo"
+  endpoint="flat:yahoo_shangrila:league_standings"
+  params={{ league: 'ncaaf' }}
+  parsed
+  title="Yahoo shangrila league standings — live"
+/>
+
 [Open in playground ▶](/playground?l=yahoo&e=flat%3Ayahoo_shangrila%3Aleague_standings&parsed=1&league=ncaaf)
 
 ## 247Sports — recruiting rankings
@@ -101,6 +145,14 @@ const rankings = await sdv.recruiting.sports247Rankings({
 });
 console.table(rankings);
 ```
+
+<RunCell
+  league="recruiting"
+  endpoint="flat:sports247:rankings"
+  params={{ year: 2025, sport_key: 'football' }}
+  parsed
+  title="247Sports recruiting rankings — live"
+/>
 
 [Open in playground ▶](/playground?l=recruiting&e=flat%3Asports247%3Arankings&parsed=1&year=2025&sport_key=football)
 
