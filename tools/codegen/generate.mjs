@@ -18,7 +18,8 @@ const schemasDir = join(here, "schemas");
 const repoRoot = join(here, "..", "..");
 const generatedDir = join(repoRoot, "src", "generated");
 const generatedEspnDir = join(generatedDir, "espn");
-const referenceDir = join(repoRoot, "docs", "docs", "reference");
+const referenceRootDir = join(repoRoot, "docs", "docs");
+const referenceDir = join(referenceRootDir, "reference");
 const playgroundDir = join(repoRoot, "docs", "src", "playground");
 const docsGeneratedDir = join(repoRoot, "docs", "src", "generated");
 
@@ -767,6 +768,242 @@ function renderLeaguePage(league, wrappers, position, flatWrappers = []) {
 }
 
 // ---------------------------------------------------------------------------
+// Per-function reference docs (sdv-py-style per-league dir) — basketball proof
+// ---------------------------------------------------------------------------
+//
+// For the WRITTEN_ESPN_LEAGUES (basketball), the flat `reference/<prefix>.md`
+// page is replaced by a per-league directory that mirrors sdv-py:
+//   docs/docs/<prefix>/index.md                — league landing page
+//   docs/docs/<prefix>/reference/<family>.md   — one page per ESPN family group,
+//                                                each rendering a per-function
+//                                                8-section block (## `fnName`)
+//   docs/docs/<prefix>/_category_.json + reference/_category_.json
+//
+// Endpoints are grouped: site_v2 (+ site_v2_alt) -> "site", core_v2 -> "core",
+// web_v3 -> "web", and any NCAA-scope wrappers -> "additional" (mbb/wbb only),
+// matching sdv-py's site/core/web/additional reference pages.
+
+// Family-group definitions for the per-league reference pages. Order drives the
+// `sidebar_position` of each generated `reference/<id>.md`.
+const REFERENCE_FAMILY_GROUPS = [
+  { id: "site", label: "Site API", families: ["site_v2", "site_v2_alt"], scope: "universal" },
+  { id: "core", label: "Core API", families: ["core_v2"], scope: "universal" },
+  { id: "web", label: "Web API", families: ["web_v3"], scope: "universal" },
+];
+// NCAA-scope extras (mbb/wbb) get their own page, like sdv-py's `additional.md`.
+const REFERENCE_NCAA_GROUP = { id: "additional", label: "NCAA additional", scope: "ncaa" };
+
+/** Which reference-page group a wrapper belongs to (by scope + family). */
+function referenceGroupFor(wrapper) {
+  if (wrapper.scope === "ncaa") return REFERENCE_NCAA_GROUP.id;
+  for (const g of REFERENCE_FAMILY_GROUPS) {
+    if (g.families.includes(wrapper.family)) return g.id;
+  }
+  return "site"; // safety net (shouldn't trigger for basketball families)
+}
+
+/**
+ * Render the per-function 8-section reference block for ONE wrapper, mirroring
+ * sdv-py's `_reference_block.jinja`:
+ *   1. `## \`fnName\`` heading        5. Returns table (or raw-JSON note)
+ *   2. derived one-line summary       6. Example fenced block
+ *   3. Endpoint URL line              7. snake_case alias note
+ *   4. param table                    8. parsed-output pointer
+ */
+function renderFunctionBlock(league, wrapper, parserMap) {
+  const camel = wrapperName(league.prefix, wrapper.short);
+  const snake = `espn_${league.prefix}_${wrapper.short}`;
+  const familyLabel = ESPN_FAMILY_LABEL[wrapper.family] ?? "ESPN";
+  const host = ESPN_FAMILY_HOST[wrapper.family] ?? "";
+  const httpPath = displayPath(wrapper, league);
+  const summary = `${league.prefix.toUpperCase()} — ${humanizeShort(wrapper.short)} (${familyLabel}).`;
+
+  let body = `\n## \`${camel}\`\n\n`;
+  body += `${summary}\n\n`;
+  body += `**Endpoint URL:** \`GET ${host}${httpPath}\`\n\n`;
+
+  // Param table: API param | JS | required | description. Path + query params,
+  // plus the universal `parsed` control param.
+  const rows = [];
+  if (league.leagueParam) {
+    rows.push([`league`, `league`, "no", `ESPN league slug override (default \`${league.league}\`)`]);
+  }
+  for (const p of wrapper.pathParams) {
+    const req = p.required === false ? "no" : "yes";
+    rows.push([`{${p.name}}`, `\`${p.name}\``, req, "path parameter"]);
+  }
+  for (const p of wrapper.queryParams) {
+    const apiName = p.queryKey || p.name;
+    const def = p.default !== undefined ? ` (default \`${p.default}\`)` : "";
+    rows.push([`${apiName}`, `\`${p.name}\``, "no", `query parameter${def}`]);
+  }
+  rows.push([`—`, `\`parsed\``, "no", "return tidy rows instead of raw JSON"]);
+  body += `| API param | JS | required | description |\n`;
+  body += `|---|---|---|---|\n`;
+  for (const [api, js, req, desc] of rows) {
+    body += `| ${api} | ${js} | ${req} | ${desc} |\n`;
+  }
+
+  // Returns: reuse the returns-schema (endpoint short -> parser -> espn/<stem>)
+  // when one exists; otherwise the raw-JSON note.
+  const parser = parserMap[wrapper.short];
+  let cols = null;
+  if (parser && parser !== "parse_summary") {
+    cols = loadReturnsColumns(`espn/${parser.replace(/^parse_/, "")}`);
+  }
+  if (cols) {
+    body += `\n**Returns** (with \`{ parsed: true }\`, via \`${parser}\`):\n\n`;
+    body += renderColumnsTable(cols);
+  } else if (parser === "parse_summary") {
+    body +=
+      `\n**Returns:** raw ESPN \`Dict\` by default. With \`{ parsed: true }\` the ` +
+      `\`summary\` dispatcher returns an object of 21 sub-frames keyed by section ` +
+      `(\`{ parsed: true, section: '<name>' }\` for one); see ` +
+      `[ESPN parsed returns](../../reference/espn-parsed-returns).\n`;
+  } else {
+    body +=
+      `\n**Returns:** raw ESPN \`Dict\` by default. With \`{ parsed: true }\` the ` +
+      `payload is routed through its parser` +
+      (parser ? ` (\`${parser}\`)` : ` (generic / league-variable passthrough)`) +
+      `; the column set varies by league — see ` +
+      `[ESPN parsed returns](../../reference/espn-parsed-returns).\n`;
+  }
+
+  // Example.
+  const exampleArgs = wrapper.pathParams.length
+    ? `{ ${wrapper.pathParams
+        .filter((p) => p.required !== false)
+        .map((p) => `${p.name}: '…'`)
+        .join(", ")} }`
+    : league.leagueParam
+      ? `{ league: '${league.league}' }`
+      : "{}";
+  body += `\n**Example:**\n\n`;
+  body += "```js\n";
+  body += `await sdv.${league.prefix}.${camel}(${exampleArgs});\n`;
+  body += `// snake_case alias (py/R parity): sdv.${league.prefix}.${snake}(...)\n`;
+  body += "```\n";
+
+  return body;
+}
+
+/** Render one `reference/<group>.md` page (per-function blocks for that group). */
+function renderReferenceFamilyPage(league, group, groupRows, position, parserMap) {
+  const sorted = groupRows.slice().sort((a, b) => a.short.localeCompare(b.short));
+  let body =
+    `---\n` +
+    `title: ${group.label}\n` +
+    `sidebar_label: ${group.label}\n` +
+    `sidebar_position: ${position}\n` +
+    `---\n\n` +
+    DOCS_NOTE +
+    `\n# \`${league.prefix}\` — ${group.label}\n\n` +
+    `${sorted.length} endpoint${sorted.length === 1 ? "" : "s"} on \`sdv.${league.prefix}\`. ` +
+    `Each is exposed under a camelCase canonical name and a snake_case alias ` +
+    `(py/R parity), accepts snake_case or camelCase params, and returns raw ESPN ` +
+    `JSON by default (\`{ parsed: true }\` for tidy rows).\n`;
+  for (const w of sorted) body += renderFunctionBlock(league, w, parserMap);
+  return body;
+}
+
+/** Render the per-league landing page (`<prefix>/index.md`). */
+function renderWrittenLeagueIndex(league, wrappers, groups) {
+  const applicable = wrappersForLeague(league, wrappers);
+  const scoreboard = wrapperName(league.prefix, "scoreboard");
+  let body =
+    `---\n` +
+    `title: ${league.prefix.toUpperCase()}\n` +
+    `sidebar_label: Overview\n` +
+    `sidebar_position: 0\n` +
+    `---\n\n` +
+    DOCS_NOTE +
+    `\n# \`sdv.${league.prefix}\` — ESPN reference\n\n` +
+    `- **namespace:** \`sdv.${league.prefix}\`\n` +
+    `- **sport slug:** \`${league.sport}\`\n` +
+    `- **league slug:** \`${league.league}\`\n` +
+    `- **scopes:** ${league.scopes.map((s) => `\`${s}\``).join(", ")}\n` +
+    `- **wrappers:** ${applicable.length}\n\n` +
+    `\`sdv.${league.prefix}\` is composed from **written, documented source** ` +
+    `(\`src/generated/espn/${league.prefix}.ts\`) — a phased proof of converting the ` +
+    `runtime wrapper factory into reviewable modules. Every endpoint is a real ` +
+    `\`export const\` with JSDoc, callable as ` +
+    `\`sdv.${league.prefix}.espn${league.prefix.charAt(0).toUpperCase()}${league.prefix.slice(1)}<Endpoint>(params)\` ` +
+    `and under its snake_case alias (\`espn_${league.prefix}_<endpoint>\`) for ` +
+    `parity with the Python / R packages.\n\n` +
+    "```js\n" +
+    `import sdv from 'sportsdataverse';\n\n` +
+    `await sdv.${league.prefix}.${scoreboard}({});\n` +
+    "```\n\n" +
+    `## Reference families\n\n` +
+    `Endpoints are grouped by ESPN API family. Pick a page for its per-function ` +
+    `reference (endpoint URL, params, returns, example):\n\n` +
+    `| Family | endpoints |\n` +
+    `|---|---:|\n`;
+  for (const g of groups) {
+    body += `| [${g.label}](./reference/${g.id}) | ${g.rows.length} |\n`;
+  }
+  body +=
+    `\n> **Parsed output:** pass \`{ parsed: true }\` to any endpoint to get tidy ` +
+    `rows instead of raw JSON. The columns are determined by each endpoint's ` +
+    `parser — see [ESPN parsed returns](../reference/espn-parsed-returns) for the ` +
+    `full column reference.\n`;
+  return body;
+}
+
+/** Compute the populated reference family groups for a written-ESPN league. */
+function writtenLeagueGroups(league, wrappers) {
+  const applicable = wrappersForLeague(league, wrappers);
+  const groups = [];
+  for (const g of REFERENCE_FAMILY_GROUPS) {
+    const rows = applicable.filter(
+      (w) => w.scope === "universal" && g.families.includes(w.family)
+    );
+    if (rows.length) groups.push({ ...g, rows });
+  }
+  if (league.scopes.includes("ncaa")) {
+    const rows = applicable.filter((w) => w.scope === "ncaa");
+    if (rows.length) groups.push({ ...REFERENCE_NCAA_GROUP, rows });
+  }
+  return groups;
+}
+
+/**
+ * Register every generated doc file for a written-ESPN league into `outputs`:
+ * the `<prefix>/index.md`, the two `_category_.json`s, and one
+ * `reference/<group>.md` per populated family group.
+ */
+function registerWrittenLeagueDocs(outputs, league, wrappers, parserMap, sidebarPosition) {
+  const leagueDir = join(referenceRootDir, league.prefix);
+  const refDir = join(leagueDir, "reference");
+  const groups = writtenLeagueGroups(league, wrappers);
+
+  outputs[join(leagueDir, "index.md")] = renderWrittenLeagueIndex(league, wrappers, groups);
+  outputs[join(leagueDir, "_category_.json")] =
+    JSON.stringify(
+      {
+        label: league.prefix.toUpperCase(),
+        position: sidebarPosition,
+        collapsed: true,
+        link: { type: "doc", id: "index" },
+      },
+      null,
+      2
+    ) + "\n";
+  outputs[join(refDir, "_category_.json")] =
+    JSON.stringify({ label: "Reference", position: 1, collapsed: true }, null, 2) + "\n";
+
+  groups.forEach((g, i) => {
+    outputs[join(refDir, `${g.id}.md`)] = renderReferenceFamilyPage(
+      league,
+      g,
+      g.rows,
+      i + 1,
+      parserMap
+    );
+  });
+}
+
+// ---------------------------------------------------------------------------
 // ESPN parsed-returns reference (shared page)
 // ---------------------------------------------------------------------------
 //
@@ -939,7 +1176,12 @@ function renderReferenceIndex(leagues, wrappers, flatWrappers = [], standaloneNs
     const count = wrappersForLeague(l, wrappers).length;
     const native = flatWrappersForLeague(l.prefix, flatWrappers).length;
     const slug = l.leagueParam ? `${l.league} *(param)*` : l.league;
-    body += `| [${l.prefix}](./${l.prefix}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} | ${native || "—"} |\n`;
+    // Written-ESPN (basketball) leagues live in their own `<prefix>/` dir as a
+    // sibling of `reference/`; everyone else is the flat `reference/<prefix>.md`.
+    const link = WRITTEN_ESPN_LEAGUES.includes(l.prefix)
+      ? `../${l.prefix}/`
+      : `./${l.prefix}`;
+    body += `| [${l.prefix}](${link}) | \`${l.sport}\` | \`${slug}\` | ${l.scopes.join(", ")} | ${count} | ${native || "—"} |\n`;
   }
 
   // Standalone (non-league) provider namespaces — e.g. `odds` (The Odds API),
@@ -1169,7 +1411,16 @@ const outputs = {
     flatHosts
   ),
 };
+const writtenEspnSet = new Set(WRITTEN_ESPN_LEAGUES);
+const espnParserMap = loadEspnParserMap();
 leagues.forEach((league, i) => {
+  // Basketball (the written-ESPN proof) gets a per-league DIRECTORY with
+  // per-function reference pages (sdv-py-style) instead of the flat
+  // reference/<prefix>.md page — registered separately below.
+  if (writtenEspnSet.has(league.prefix)) {
+    registerWrittenLeagueDocs(outputs, league, wrappers, espnParserMap, i + 2);
+    return;
+  }
   // +2: position 0 is the Overview index, position 1 is the shared parsed-returns
   // page, so league pages start at 2.
   outputs[join(referenceDir, `${league.prefix}.md`)] = renderLeaguePage(

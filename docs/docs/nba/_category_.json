@@ -1,0 +1,9 @@
+{
+  "label": "NBA",
+  "position": 2,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "index"
+  }
+}
