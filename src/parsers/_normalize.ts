@@ -1,6 +1,6 @@
 // Tidy.js parser support: a `pandas.json_normalize` equivalent for the flat-API
 // parser layer. Mirrors the Python parser contract in
-// `sportsdataverse/mlb/mlb_api_parsers.py` (`_flatten_rows`):
+// `sportsdataverse/mlb/mlb_parsers.py` (`_flatten_rows`):
 //
 //   - deep-flatten nested objects with a `_` separator,
 //   - snake_case the resulting keys,

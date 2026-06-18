@@ -1,7 +1,7 @@
 // One-shot enrichment: derive returns-schema columns for the Fox Sports
-// "Bifrost" (`fox_bifrost`) family from captured response payloads.
+// "Bifrost" (`fox`) family from captured response payloads.
 //
-// 14 of the 38 fox_bifrost returns schemas already carry real columns (typed
+// 14 of the 38 fox returns schemas already carry real columns (typed
 // from the spec's `components.schemas`); this script only fills the 24 that
 // start as `columns: []`. It:
 //
@@ -18,23 +18,23 @@
 //      left untouched. Endpoints with no matching capture (or a 0-row parse)
 //      stay `columns: []` and are logged.
 //
-// Run:  node tools/codegen/_enrich_fox_bifrost_schemas.mjs
+// Run:  node tools/codegen/_enrich_fox_schemas.mjs
 // (requires `npm run build` first — imports compiled parsers from dist/).
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
-import * as foxParsers from "../../dist/parsers/fox_bifrost.js";
+import * as foxParsers from "../../dist/parsers/fox.js";
 
-// fox_bifrost.ts exports named parser functions (no aggregated registry object
-// like cbs_napi's CBS_NAPI_PARSERS), so key them by function name here.
+// fox.ts exports named parser functions (no aggregated registry object
+// like cbs's CBS_NAPI_PARSERS), so key them by function name here.
 const FOX_BIFROST_PARSERS = Object.fromEntries(
   Object.entries(foxParsers).filter(([, v]) => typeof v === "function")
 );
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const endpointsYaml = join(__dirname, "endpoints", "fox_bifrost.yaml");
+const endpointsYaml = join(__dirname, "endpoints", "fox.yaml");
 const schemasDir = join(__dirname, "schemas");
 // External capture corpus (the sdv-internal-refs checkout). Point SDV_REFS_ROOT
 // at it; no default (a hard-coded path would be non-portable + leak a local
@@ -151,7 +151,7 @@ function deriveColumns(rows, cap = 200) {
 }
 
 const HEADER = `# Fox Sports Bifrost returns schema — columns DERIVED from a captured live
-# response run through the registered parser (parse_fox_bifrost_*). The Fox spec
+# response run through the registered parser (parse_fox_*). The Fox spec
 # left this response untyped (\`object\`), so the columns are enumerated here from
 # a representative capture. \`type\` is inferred from the captured JS value;
 # \`description\` is best-effort from the snake_cased key. Endpoints with no

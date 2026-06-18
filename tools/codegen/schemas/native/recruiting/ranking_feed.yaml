@@ -1,0 +1,32 @@
+# One row per ranking-feed item (ItemDto: player + target institution).
+# Columns produced by the recruiting parser's snake_cased, flattened output.
+schema: ranking_feed
+kind: dataframe
+columns:
+- name: key
+  type: numeric
+  description: "unique identifier of the institution"
+- name: target_institution_logo
+  type: character
+  description: "institution default logo"
+- name: target_institution_name
+  type: character
+  description: "name of the target institution"
+- name: position
+  type: character
+  description: "player's position"
+- name: first_name
+  type: character
+  description: "player's first name"
+- name: last_name
+  type: character
+  description: "player's last name"
+- name: ranking_position
+  type: numeric
+  description: "ranking position"
+- name: previous_institution_name
+  type: character
+  description: "name of the previous school"
+- name: previous_institution_logo
+  type: character
+  description: "name of the previous school logo"

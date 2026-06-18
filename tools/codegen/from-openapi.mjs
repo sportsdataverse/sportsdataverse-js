@@ -27,7 +27,7 @@
 //          --out tools/codegen/endpoints/<stem>.yaml
 //
 // Flags:
-//     --api <stem>     family stem (e.g. sports247). REQUIRED.
+//     --api <stem>     family stem (e.g. recruiting). REQUIRED.
 //     --out <path>     output YAML path. Defaults to endpoints/<stem>.yaml.
 //     --host <url>     override the host (use when the spec has no `servers`).
 //     --stdout         print to stdout instead of writing a file.

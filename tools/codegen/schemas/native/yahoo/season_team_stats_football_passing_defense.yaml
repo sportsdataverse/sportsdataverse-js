@@ -1,0 +1,13 @@
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_stats. Columns derived from the spec's typed nested stat-array item props (deep-flattened with `_`, snake_cased to match the parser output).
+schema: season_team_stats_football_passing_defense
+kind: dataframe
+columns:
+- name: stat_id
+  type: character
+- name: display_name
+  type: character
+- name: abbreviation
+  type: character
+- name: sort_order
+  type: character

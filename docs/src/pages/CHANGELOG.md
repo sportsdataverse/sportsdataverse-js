@@ -1,5 +1,21 @@
 # ChangeLog
 
+## **Unreleased**
+
+### Changed (breaking) — provider method naming
+
+Dropped internal vendor API codenames (and redundant `_api` stems) from provider
+method names + labels (the `sdv.fox`/`cbs`/`yahoo`/`mlb`/`recruiting` namespaces
+are unchanged):
+
+- `foxBifrost*` → `fox*`, `cbsNapi*` → `cbs*`, `yahooShangrila*` → `yahoo*`,
+  `yahooEditorial*` → `yahooScores*`, `mlbApi*` → `mlb*`,
+  `sports247*` → `recruiting*` (label kept as "247Sports").
+
+The rename flows through the codegen stems, returns-schema paths, parser names,
+playground ids, and docs. Real upstream URL paths that contain the vendor
+codename (Fox `/bifrost/v1/…`, Yahoo `/v1/query/shangrila/…`) are unchanged.
+
 ## **V3.1.0**
 
 A minor, additive release: two new flat-API families (no breaking changes), plus
@@ -82,7 +98,7 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
 - **Native API integration (255 flat wrappers across 7 families).** Beyond ESPN,
   the package now wraps the major leagues' own live APIs, merged onto the matching
   league namespace:
-  - **MLB Stats API** (`statsapi.mlb.com`) — `sdv.mlb.mlbApi*` (e.g. `mlbApiSchedule`).
+  - **MLB Stats API** (`statsapi.mlb.com`) — `sdv.mlb.mlb*` (e.g. `mlbSchedule`).
   - **Baseball Savant / Statcast** (`baseballsavant.mlb.com`) — `sdv.mlb.mlbStatcast*`,
     including date-chunked Statcast search; heterogeneous CSV/JSON/HTML responses
     are content-type-aware.
@@ -116,8 +132,8 @@ A major release that turns `sportsdataverse` into a **cross-league ESPN client**
   **517 flat-API wrappers across 13 families** in total; `{ parsed: true }` works
   for every one.
 - **Dual-case naming.** Every generated wrapper (ESPN and native) is exposed
-  under BOTH its snake_case name (`mlb_api_teams`, py/R parity) and its camelCase
-  canonical name (`mlbApiTeams`, idiomatic JS) — same function, either name.
+  under BOTH its snake_case name (`mlb_teams`, py/R parity) and its camelCase
+  canonical name (`mlbTeams`, idiomatic JS) — same function, either name.
 - **Flat-aware docs + playground.** The generated reference pages now include a
   **Native API — `<family>`** section per league (host, path, params, parser, auth);
   the live [playground](/playground) groups native endpoints under their league by
