@@ -42,9 +42,9 @@ const ALL_STAR_BALLOT_DEF: WrapperDef = {
  * @param params.league_id - path parameter.
  * @param params.season - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbAllStarBallot({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbAllStarBallot({ league_id: '…' });
  */
 export const mlbAllStarBallot: WrapperFn = (params = {}) => callFlat(ALL_STAR_BALLOT_DEF, params);
 /** snake_case alias of {@link mlbAllStarBallot} (py/R parity). */
@@ -84,9 +84,9 @@ const ALL_STAR_FINAL_VOTE_DEF: WrapperDef = {
  * @param params.league_id - path parameter.
  * @param params.season - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbAllStarFinalVote({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbAllStarFinalVote({ league_id: '…' });
  */
 export const mlbAllStarFinalVote: WrapperFn = (params = {}) => callFlat(ALL_STAR_FINAL_VOTE_DEF, params);
 /** snake_case alias of {@link mlbAllStarFinalVote} (py/R parity). */
@@ -126,9 +126,9 @@ const ALL_STAR_WRITE_INS_DEF: WrapperDef = {
  * @param params.league_id - path parameter.
  * @param params.season - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbAllStarWriteIns({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbAllStarWriteIns({ league_id: '…' });
  */
 export const mlbAllStarWriteIns: WrapperFn = (params = {}) => callFlat(ALL_STAR_WRITE_INS_DEF, params);
 /** snake_case alias of {@link mlbAllStarWriteIns} (py/R parity). */
@@ -187,8 +187,8 @@ const ANALYTICS_GAMES_DEF: WrapperDef = {
  * @param params.is_non_statcast - query parameter (`isNonStatcast`).
  * @param params.offset - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAnalyticsGames({});
  */
 export const mlbAnalyticsGames: WrapperFn = (params = {}) => callFlat(ANALYTICS_GAMES_DEF, params);
@@ -248,8 +248,8 @@ const ANALYTICS_GUIDS_DEF: WrapperDef = {
  * @param params.is_non_statcast - query parameter (`isNonStatcast`).
  * @param params.offset - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAnalyticsGuids({});
  */
 export const mlbAnalyticsGuids: WrapperFn = (params = {}) => callFlat(ANALYTICS_GUIDS_DEF, params);
@@ -299,8 +299,8 @@ const ATTENDANCE_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.league_list_id - query parameter (`leagueListId`).
  * @param params.game_type - query parameter (`gameType`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAttendance({});
  */
 export const mlbAttendance: WrapperFn = (params = {}) => callFlat(ATTENDANCE_DEF, params);
@@ -347,9 +347,9 @@ const AWARD_RECIPIENTS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbAwardRecipients({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbAwardRecipients({ award_id: '…' });
  */
 export const mlbAwardRecipients: WrapperFn = (params = {}) => callFlat(AWARD_RECIPIENTS_DEF, params);
 /** snake_case alias of {@link mlbAwardRecipients} (py/R parity). */
@@ -379,8 +379,8 @@ const AWARDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/awards`
  *
  * @param params.sport_id - query parameter (`sportId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAwards({});
  */
 export const mlbAwards: WrapperFn = (params = {}) => callFlat(AWARDS_DEF, params);
@@ -421,9 +421,9 @@ const BOXSCORE_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.timecode - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbBoxscore({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbBoxscore({ game_pk: '…' });
  */
 export const mlbBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link mlbBoxscore} (py/R parity). */
@@ -463,9 +463,9 @@ const CONFERENCE_DEF: WrapperDef = {
  * @param params.conference_id - path parameter.
  * @param params.season - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbConference({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbConference({ conference_id: '…' });
  */
 export const mlbConference: WrapperFn = (params = {}) => callFlat(CONFERENCE_DEF, params);
 /** snake_case alias of {@link mlbConference} (py/R parity). */
@@ -505,8 +505,8 @@ const CONFERENCES_DEF: WrapperDef = {
  * @param params.conference_id - query parameter (`conferenceId`).
  * @param params.season - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbConferences({});
  */
 export const mlbConferences: WrapperFn = (params = {}) => callFlat(CONFERENCES_DEF, params);
@@ -552,8 +552,8 @@ const DATACASTERS_DEF: WrapperDef = {
  * @param params.date - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDatacasters({});
  */
 export const mlbDatacasters: WrapperFn = (params = {}) => callFlat(DATACASTERS_DEF, params);
@@ -594,8 +594,8 @@ const DIVISIONS_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.league_id - query parameter (`leagueId`).
  * @param params.division_id - query parameter (`divisionId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDivisions({});
  */
 export const mlbDivisions: WrapperFn = (params = {}) => callFlat(DIVISIONS_DEF, params);
@@ -646,9 +646,9 @@ const DRAFT_DEF: WrapperDef = {
  * @param params.team_id - query parameter (`teamId`).
  * @param params.player_id - query parameter (`playerId`).
  * @param params.limit - query parameter — default `100`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbDraft({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbDraft({ year: '…' });
  */
 export const mlbDraft: WrapperFn = (params = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link mlbDraft} (py/R parity). */
@@ -677,9 +677,9 @@ const DRAFT_LATEST_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/draft/{year}/latest`
  *
  * @param params.year - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbDraftLatest({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbDraftLatest({ year: '…' });
  */
 export const mlbDraftLatest: WrapperFn = (params = {}) => callFlat(DRAFT_LATEST_DEF, params);
 /** snake_case alias of {@link mlbDraftLatest} (py/R parity). */
@@ -719,9 +719,9 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  * @param params.year - path parameter.
  * @param params.scouting_report - query parameter (`scoutingReport`).
  * @param params.limit - query parameter — default `100`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbDraftProspects({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbDraftProspects({ year: '…' });
  */
 export const mlbDraftProspects: WrapperFn = (params = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
 /** snake_case alias of {@link mlbDraftProspects} (py/R parity). */
@@ -766,8 +766,8 @@ const FREE_AGENTS_DEF: WrapperDef = {
  * @param params.order - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbFreeAgents({});
  */
 export const mlbFreeAgents: WrapperFn = (params = {}) => callFlat(FREE_AGENTS_DEF, params);
@@ -808,8 +808,8 @@ const GAME_CHANGES_DEF: WrapperDef = {
  * @param params.updated_since - query parameter (`updatedSince`).
  * @param params.sport_id - query parameter (`sportId`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameChanges({});
  */
 export const mlbGameChanges: WrapperFn = (params = {}) => callFlat(GAME_CHANGES_DEF, params);
@@ -849,9 +849,9 @@ const GAME_COLOR_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.timecode - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameColor({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameColor({ game_pk: '…' });
  */
 export const mlbGameColor: WrapperFn = (params = {}) => callFlat(GAME_COLOR_DEF, params);
 /** snake_case alias of {@link mlbGameColor} (py/R parity). */
@@ -890,9 +890,9 @@ const GAME_COLOR_DIFF_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.start_timecode - query parameter (`startTimecode`).
  * @param params.end_timecode - query parameter (`endTimecode`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameColorDiff({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameColorDiff({ game_pk: '…' });
  */
 export const mlbGameColorDiff: WrapperFn = (params = {}) => callFlat(GAME_COLOR_DIFF_DEF, params);
 /** snake_case alias of {@link mlbGameColorDiff} (py/R parity). */
@@ -920,9 +920,9 @@ const GAME_COLOR_TIMESTAMPS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/feed/color/timestamps`
  *
  * @param params.game_pk - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameColorTimestamps({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameColorTimestamps({ game_pk: '…' });
  */
 export const mlbGameColorTimestamps: WrapperFn = (params = {}) => callFlat(GAME_COLOR_TIMESTAMPS_DEF, params);
 /** snake_case alias of {@link mlbGameColorTimestamps} (py/R parity). */
@@ -950,9 +950,9 @@ const GAME_CONTENT_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/game/{game_pk}/content`
  *
  * @param params.game_pk - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameContent({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameContent({ game_pk: '…' });
  */
 export const mlbGameContent: WrapperFn = (params = {}) => callFlat(GAME_CONTENT_DEF, params);
 /** snake_case alias of {@link mlbGameContent} (py/R parity). */
@@ -986,9 +986,9 @@ const GAME_CONTEXT_METRICS_DEF: WrapperDef = {
  *
  * @param params.game_pk - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameContextMetrics({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameContextMetrics({ game_pk: '…' });
  */
 export const mlbGameContextMetrics: WrapperFn = (params = {}) => callFlat(GAME_CONTEXT_METRICS_DEF, params);
 /** snake_case alias of {@link mlbGameContextMetrics} (py/R parity). */
@@ -1057,9 +1057,9 @@ const GAME_GUIDS_DEF: WrapperDef = {
  * @param params.hydrate - query parameter.
  * @param params.parsed_raw - query parameter (`parsed/raw`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameGuids({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameGuids({ game_pk: '…' });
  */
 export const mlbGameGuids: WrapperFn = (params = {}) => callFlat(GAME_GUIDS_DEF, params);
 /** snake_case alias of {@link mlbGameGuids} (py/R parity). */
@@ -1144,8 +1144,8 @@ const GAME_PACE_DEF: WrapperDef = {
  * @param params.org_type - query parameter (`orgType`).
  * @param params.include_children - query parameter (`includeChildren`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGamePace({});
  */
 export const mlbGamePace: WrapperFn = (params = {}) => callFlat(GAME_PACE_DEF, params);
@@ -1175,9 +1175,9 @@ const GAME_TIMESTAMPS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live/timestamps`
  *
  * @param params.game_pk - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbGameTimestamps({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbGameTimestamps({ game_pk: '…' });
  */
 export const mlbGameTimestamps: WrapperFn = (params = {}) => callFlat(GAME_TIMESTAMPS_DEF, params);
 /** snake_case alias of {@link mlbGameTimestamps} (py/R parity). */
@@ -1252,9 +1252,9 @@ const HIGH_LOW_DEF: WrapperDef = {
  * @param params.sport_ids - query parameter (`sportIds`).
  * @param params.limit - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbHighLow({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbHighLow({ org_type: '…' });
  */
 export const mlbHighLow: WrapperFn = (params = {}) => callFlat(HIGH_LOW_DEF, params);
 /** snake_case alias of {@link mlbHighLow} (py/R parity). */
@@ -1289,9 +1289,9 @@ const HOME_RUN_DERBY_DEF: WrapperDef = {
  *
  * @param params.game_pk - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbHomeRunDerby({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbHomeRunDerby({ game_pk: '…' });
  */
 export const mlbHomeRunDerby: WrapperFn = (params = {}) => callFlat(HOME_RUN_DERBY_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerby} (py/R parity). */
@@ -1326,9 +1326,9 @@ const HOME_RUN_DERBY_BRACKET_DEF: WrapperDef = {
  *
  * @param params.game_pk - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbHomeRunDerbyBracket({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbHomeRunDerbyBracket({ game_pk: '…' });
  */
 export const mlbHomeRunDerbyBracket: WrapperFn = (params = {}) => callFlat(HOME_RUN_DERBY_BRACKET_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerbyBracket} (py/R parity). */
@@ -1363,9 +1363,9 @@ const HOME_RUN_DERBY_POOL_DEF: WrapperDef = {
  *
  * @param params.game_pk - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbHomeRunDerbyPool({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbHomeRunDerbyPool({ game_pk: '…' });
  */
 export const mlbHomeRunDerbyPool: WrapperFn = (params = {}) => callFlat(HOME_RUN_DERBY_POOL_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerbyPool} (py/R parity). */
@@ -1410,8 +1410,8 @@ const JOBS_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`).
  * @param params.date - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbJobs({});
  */
 export const mlbJobs: WrapperFn = (params = {}) => callFlat(JOBS_DEF, params);
@@ -1453,8 +1453,8 @@ const LEAGUES_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.season - query parameter.
  * @param params.league_ids - query parameter (`leagueIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbLeagues({});
  */
 export const mlbLeagues: WrapperFn = (params = {}) => callFlat(LEAGUES_DEF, params);
@@ -1495,9 +1495,9 @@ const LINESCORE_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.timecode - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbLinescore({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbLinescore({ game_pk: '…' });
  */
 export const mlbLinescore: WrapperFn = (params = {}) => callFlat(LINESCORE_DEF, params);
 /** snake_case alias of {@link mlbLinescore} (py/R parity). */
@@ -1525,9 +1525,9 @@ const META_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/{meta_type}`
  *
  * @param params.meta_type - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbMeta({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbMeta({ meta_type: '…' });
  */
 export const mlbMeta: WrapperFn = (params = {}) => callFlat(META_DEF, params);
 /** snake_case alias of {@link mlbMeta} (py/R parity). */
@@ -1572,8 +1572,8 @@ const OFFICIAL_SCORERS_DEF: WrapperDef = {
  * @param params.date - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbOfficialScorers({});
  */
 export const mlbOfficialScorers: WrapperFn = (params = {}) => callFlat(OFFICIAL_SCORERS_DEF, params);
@@ -1623,9 +1623,9 @@ const PBP_DEF: WrapperDef = {
  * @param params.timecode - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPbp({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPbp({ game_pk: '…' });
  */
 export const mlbPbp: WrapperFn = (params = {}) => callFlat(PBP_DEF, params);
 /** snake_case alias of {@link mlbPbp} (py/R parity). */
@@ -1664,9 +1664,9 @@ const PBP_DIFF_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.start_timecode - query parameter (`startTimecode`).
  * @param params.end_timecode - query parameter (`endTimecode`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPbpDiff({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPbpDiff({ game_pk: '…' });
  */
 export const mlbPbpDiff: WrapperFn = (params = {}) => callFlat(PBP_DIFF_DEF, params);
 /** snake_case alias of {@link mlbPbpDiff} (py/R parity). */
@@ -1705,8 +1705,8 @@ const PEOPLE_DEF: WrapperDef = {
  * @param params.person_ids - query parameter (`personIds`).
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPeople({});
  */
 export const mlbPeople: WrapperFn = (params = {}) => callFlat(PEOPLE_DEF, params);
@@ -1751,9 +1751,9 @@ const PERSON_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPerson({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPerson({ person_id: '…' });
  */
 export const mlbPerson: WrapperFn = (params = {}) => callFlat(PERSON_DEF, params);
 /** snake_case alias of {@link mlbPerson} (py/R parity). */
@@ -1791,9 +1791,9 @@ const PERSON_GAME_STATS_DEF: WrapperDef = {
  * @param params.person_id - path parameter.
  * @param params.game_pk - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPersonGameStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPersonGameStats({ person_id: '…', game_pk: '…' });
  */
 export const mlbPersonGameStats: WrapperFn = (params = {}) => callFlat(PERSON_GAME_STATS_DEF, params);
 /** snake_case alias of {@link mlbPersonGameStats} (py/R parity). */
@@ -1853,9 +1853,9 @@ const PERSON_STATS_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`).
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPersonStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPersonStats({ person_id: '…' });
  */
 export const mlbPersonStats: WrapperFn = (params = {}) => callFlat(PERSON_STATS_DEF, params);
 /** snake_case alias of {@link mlbPersonStats} (py/R parity). */
@@ -1898,9 +1898,9 @@ const PLAY_ANALYTICS_DEF: WrapperDef = {
  * @param params.guid - path parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPlayAnalytics({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPlayAnalytics({ game_pk: '…', guid: '…' });
  */
 export const mlbPlayAnalytics: WrapperFn = (params = {}) => callFlat(PLAY_ANALYTICS_DEF, params);
 /** snake_case alias of {@link mlbPlayAnalytics} (py/R parity). */
@@ -1940,9 +1940,9 @@ const PLAY_BY_PLAY_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.timecode - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPlayByPlay({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPlayByPlay({ game_pk: '…' });
  */
 export const mlbPlayByPlay: WrapperFn = (params = {}) => callFlat(PLAY_BY_PLAY_DEF, params);
 /** snake_case alias of {@link mlbPlayByPlay} (py/R parity). */
@@ -1980,9 +1980,9 @@ const PLAY_CONTEXT_METRICS_AVERAGES_DEF: WrapperDef = {
  * @param params.game_pk - path parameter.
  * @param params.guid - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbPlayContextMetricsAverages({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbPlayContextMetricsAverages({ game_pk: '…', guid: '…' });
  */
 export const mlbPlayContextMetricsAverages: WrapperFn = (params = {}) => callFlat(PLAY_CONTEXT_METRICS_AVERAGES_DEF, params);
 /** snake_case alias of {@link mlbPlayContextMetricsAverages} (py/R parity). */
@@ -2052,8 +2052,8 @@ const SCHEDULE_DEF: WrapperDef = {
  * @param params.game_type - query parameter (`gameType`).
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedule({});
  */
 export const mlbSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
@@ -2095,8 +2095,8 @@ const SCHEDULE_POSTSEASON_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedulePostseason({});
  */
 export const mlbSchedulePostseason: WrapperFn = (params = {}) => callFlat(SCHEDULE_POSTSEASON_DEF, params);
@@ -2152,8 +2152,8 @@ const SCHEDULE_POSTSEASON_SERIES_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`).
  * @param params.season - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedulePostseasonSeries({});
  */
 export const mlbSchedulePostseasonSeries: WrapperFn = (params = {}) => callFlat(SCHEDULE_POSTSEASON_SERIES_DEF, params);
@@ -2204,8 +2204,8 @@ const SCHEDULE_POSTSEASON_TUNEIN_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedulePostseasonTunein({});
  */
 export const mlbSchedulePostseasonTunein: WrapperFn = (params = {}) => callFlat(SCHEDULE_POSTSEASON_TUNEIN_DEF, params);
@@ -2251,8 +2251,8 @@ const SCHEDULE_TIED_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbScheduleTied({});
  */
 export const mlbScheduleTied: WrapperFn = (params = {}) => callFlat(SCHEDULE_TIED_DEF, params);
@@ -2289,9 +2289,9 @@ const SEASON_DEF: WrapperDef = {
  *
  * @param params.season_id - path parameter.
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbSeason({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbSeason({ season_id: '…' });
  */
 export const mlbSeason: WrapperFn = (params = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link mlbSeason} (py/R parity). */
@@ -2331,8 +2331,8 @@ const SEASONS_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.season - query parameter.
  * @param params.all_seasons - query parameter (`all`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSeasons({});
  */
 export const mlbSeasons: WrapperFn = (params = {}) => callFlat(SEASONS_DEF, params);
@@ -2383,8 +2383,8 @@ const SEASONS_ALL_DEF: WrapperDef = {
  * @param params.with_game_type_dates - query parameter (`withGameTypeDates`).
  * @param params.sport_id - query parameter (`sportId`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSeasonsAll({});
  */
 export const mlbSeasonsAll: WrapperFn = (params = {}) => callFlat(SEASONS_ALL_DEF, params);
@@ -2420,9 +2420,9 @@ const SPORT_DEF: WrapperDef = {
  *
  * @param params.sport_id - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbSport({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbSport({ sport_id: '…' });
  */
 export const mlbSport: WrapperFn = (params = {}) => callFlat(SPORT_DEF, params);
 /** snake_case alias of {@link mlbSport} (py/R parity). */
@@ -2469,8 +2469,8 @@ const SPORT_PLAYERS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSportPlayers({});
  */
 export const mlbSportPlayers: WrapperFn = (params = {}) => callFlat(SPORT_PLAYERS_DEF, params);
@@ -2501,8 +2501,8 @@ const SPORTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/sports`
  *
  * @param params.sport_id - query parameter (`sportId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSports({});
  */
 export const mlbSports: WrapperFn = (params = {}) => callFlat(SPORTS_DEF, params);
@@ -2553,8 +2553,8 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.standings_types - query parameter (`standingsTypes`).
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStandings({});
  */
 export const mlbStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
@@ -2637,8 +2637,8 @@ const STATS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `50`.
  * @param params.offset - query parameter — default `0`.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStats({});
  */
 export const mlbStats: WrapperFn = (params = {}) => callFlat(STATS_DEF, params);
@@ -2700,8 +2700,8 @@ const STATS_LEADERS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`leagueId`).
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.limit - query parameter — default `10`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatsLeaders({});
  */
 export const mlbStatsLeaders: WrapperFn = (params = {}) => callFlat(STATS_LEADERS_DEF, params);
@@ -2801,8 +2801,8 @@ const STATS_METRICS_DEF: WrapperDef = {
  * @param params.offset - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatsMetrics({});
  */
 export const mlbStatsMetrics: WrapperFn = (params = {}) => callFlat(STATS_METRICS_DEF, params);
@@ -2859,8 +2859,8 @@ const STATS_STREAKS_DEF: WrapperDef = {
  * @param params.stat_group - query parameter (`statGroup`).
  * @param params.active_streak - query parameter (`activeStreak`).
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatsStreaks({});
  */
 export const mlbStatsStreaks: WrapperFn = (params = {}) => callFlat(STATS_STREAKS_DEF, params);
@@ -2912,9 +2912,9 @@ const TEAM_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeam({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeam({ team_id: '…' });
  */
 export const mlbTeam: WrapperFn = (params = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link mlbTeam} (py/R parity). */
@@ -2960,8 +2960,8 @@ const TEAM_AFFILIATES_DEF: WrapperDef = {
  * @param params.sport_id - query parameter (`sportId`) — default `1`.
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamAffiliates({});
  */
 export const mlbTeamAffiliates: WrapperFn = (params = {}) => callFlat(TEAM_AFFILIATES_DEF, params);
@@ -3008,9 +3008,9 @@ const TEAM_ALUMNI_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.group - query parameter — default `hitting`.
  * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamAlumni({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamAlumni({ team_id: '…' });
  */
 export const mlbTeamAlumni: WrapperFn = (params = {}) => callFlat(TEAM_ALUMNI_DEF, params);
 /** snake_case alias of {@link mlbTeamAlumni} (py/R parity). */
@@ -3055,9 +3055,9 @@ const TEAM_COACHES_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.date - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamCoaches({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamCoaches({ team_id: '…' });
  */
 export const mlbTeamCoaches: WrapperFn = (params = {}) => callFlat(TEAM_COACHES_DEF, params);
 /** snake_case alias of {@link mlbTeamCoaches} (py/R parity). */
@@ -3107,9 +3107,9 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.leader_game_types - query parameter (`leaderGameTypes`).
  * @param params.limit - query parameter — default `10`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamLeaders({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamLeaders({ team_id: '…' });
  */
 export const mlbTeamLeaders: WrapperFn = (params = {}) => callFlat(TEAM_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbTeamLeaders} (py/R parity). */
@@ -3149,9 +3149,9 @@ const TEAM_PERSONNEL_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.date - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamPersonnel({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamPersonnel({ team_id: '…' });
  */
 export const mlbTeamPersonnel: WrapperFn = (params = {}) => callFlat(TEAM_PERSONNEL_DEF, params);
 /** snake_case alias of {@link mlbTeamPersonnel} (py/R parity). */
@@ -3207,9 +3207,9 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.date - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamRoster({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamRoster({ team_id: '…' });
  */
 export const mlbTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link mlbTeamRoster} (py/R parity). */
@@ -3263,9 +3263,9 @@ const TEAM_ROSTER_TYPE_DEF: WrapperDef = {
  * @param params.date - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamRosterType({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamRosterType({ team_id: '…', roster_type: '…' });
  */
 export const mlbTeamRosterType: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_TYPE_DEF, params);
 /** snake_case alias of {@link mlbTeamRosterType} (py/R parity). */
@@ -3326,9 +3326,9 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.sport_ids - query parameter (`sportIds`).
  * @param params.game_type - query parameter (`gameType`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbTeamStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbTeamStats({ team_id: '…' });
  */
 export const mlbTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link mlbTeamStats} (py/R parity). */
@@ -3383,8 +3383,8 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.active_status - query parameter (`activeStatus`).
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeams({});
  */
 export const mlbTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
@@ -3430,8 +3430,8 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  * @param params.start_season - query parameter (`startSeason`).
  * @param params.end_season - query parameter (`endSeason`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamsHistory({});
  */
 export const mlbTeamsHistory: WrapperFn = (params = {}) => callFlat(TEAMS_HISTORY_DEF, params);
@@ -3497,8 +3497,8 @@ const TEAMS_STATS_DEF: WrapperDef = {
  * @param params.order - query parameter.
  * @param params.sort_stat - query parameter (`sortStat`).
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamsStats({});
  */
 export const mlbTeamsStats: WrapperFn = (params = {}) => callFlat(TEAMS_STATS_DEF, params);
@@ -3584,8 +3584,8 @@ const TEAMS_STATS_LEADERS_DEF: WrapperDef = {
  * @param params.hydrate - query parameter.
  * @param params.limit - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamsStatsLeaders({});
  */
 export const mlbTeamsStatsLeaders: WrapperFn = (params = {}) => callFlat(TEAMS_STATS_LEADERS_DEF, params);
@@ -3630,9 +3630,9 @@ const UMPIRE_GAMES_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbUmpireGames({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbUmpireGames({ umpire_id: '…' });
  */
 export const mlbUmpireGames: WrapperFn = (params = {}) => callFlat(UMPIRE_GAMES_DEF, params);
 /** snake_case alias of {@link mlbUmpireGames} (py/R parity). */
@@ -3656,8 +3656,8 @@ const UMPIRES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://statsapi.mlb.com/api/v1/jobs/umpires`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbUmpires({});
  */
 export const mlbUmpires: WrapperFn = (params = {}) => callFlat(UMPIRES_DEF, params);
@@ -3698,9 +3698,9 @@ const VENUE_DEF: WrapperDef = {
  * @param params.venue_id - path parameter.
  * @param params.season - query parameter.
  * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbVenue({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbVenue({ venue_id: '…' });
  */
 export const mlbVenue: WrapperFn = (params = {}) => callFlat(VENUE_DEF, params);
 /** snake_case alias of {@link mlbVenue} (py/R parity). */
@@ -3740,8 +3740,8 @@ const VENUES_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.sport_ids - query parameter (`sportIds`).
  * @param params.hydrate - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbVenues({});
  */
 export const mlbVenues: WrapperFn = (params = {}) => callFlat(VENUES_DEF, params);
@@ -3777,9 +3777,9 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  *
  * @param params.game_pk - path parameter.
  * @param params.fields - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.mlb.mlbWinProbability({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.mlb.mlbWinProbability({ game_pk: '…' });
  */
 export const mlbWinProbability: WrapperFn = (params = {}) => callFlat(WIN_PROBABILITY_DEF, params);
 /** snake_case alias of {@link mlbWinProbability} (py/R parity). */

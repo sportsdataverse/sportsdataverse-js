@@ -41,9 +41,9 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeCatGoalieDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeCatGoalieDetail({ player_id: '…' });
  */
 export const nhlEdgeCatGoalieDetail: WrapperFn = (params = {}) => callFlat(CAT_GOALIE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeCatGoalieDetail} (py/R parity). */
@@ -82,9 +82,9 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeCatSkaterDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeCatSkaterDetail({ player_id: '…' });
  */
 export const nhlEdgeCatSkaterDetail: WrapperFn = (params = {}) => callFlat(CAT_SKATER_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeCatSkaterDetail} (py/R parity). */
@@ -123,9 +123,9 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalie5v5Detail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalie5v5Detail({ player_id: '…' });
  */
 export const nhlEdgeGoalie5v5Detail: WrapperFn = (params = {}) => callFlat(GOALIE_5V5_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalie5v5Detail} (py/R parity). */
@@ -164,9 +164,9 @@ const GOALIE_5V5_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalie5v5Top10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalie5v5Top10({ sort_by: '…' });
  */
 export const nhlEdgeGoalie5v5Top10: WrapperFn = (params = {}) => callFlat(GOALIE_5V5_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalie5v5Top10} (py/R parity). */
@@ -205,9 +205,9 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalieComparison({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalieComparison({ player_id: '…' });
  */
 export const nhlEdgeGoalieComparison: WrapperFn = (params = {}) => callFlat(GOALIE_COMPARISON_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieComparison} (py/R parity). */
@@ -247,9 +247,9 @@ const GOALIE_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalieDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalieDetail({ player_id: '…' });
  */
 export const nhlEdgeGoalieDetail: WrapperFn = (params = {}) => callFlat(GOALIE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieDetail} (py/R parity). */
@@ -288,9 +288,9 @@ const GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalieEdgeSavePctgTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalieEdgeSavePctgTop10({ sort_by: '…' });
  */
 export const nhlEdgeGoalieEdgeSavePctgTop10: WrapperFn = (params = {}) => callFlat(GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieEdgeSavePctgTop10} (py/R parity). */
@@ -325,8 +325,8 @@ const GOALIE_LANDING_DEF: WrapperDef = {
  *
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeGoalieLanding({});
  */
 export const nhlEdgeGoalieLanding: WrapperFn = (params = {}) => callFlat(GOALIE_LANDING_DEF, params);
@@ -366,9 +366,9 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalieSavePercentageDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalieSavePercentageDetail({ player_id: '…' });
  */
 export const nhlEdgeGoalieSavePercentageDetail: WrapperFn = (params = {}) => callFlat(GOALIE_SAVE_PERCENTAGE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieSavePercentageDetail} (py/R parity). */
@@ -408,9 +408,9 @@ const GOALIE_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalieShotLocationDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalieShotLocationDetail({ player_id: '…' });
  */
 export const nhlEdgeGoalieShotLocationDetail: WrapperFn = (params = {}) => callFlat(GOALIE_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieShotLocationDetail} (py/R parity). */
@@ -453,9 +453,9 @@ const GOALIE_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeGoalieShotLocationTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeGoalieShotLocationTop10({ category: '…', sort_by: '…' });
  */
 export const nhlEdgeGoalieShotLocationTop10: WrapperFn = (params = {}) => callFlat(GOALIE_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeGoalieShotLocationTop10} (py/R parity). */
@@ -494,9 +494,9 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterComparison({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterComparison({ player_id: '…' });
  */
 export const nhlEdgeSkaterComparison: WrapperFn = (params = {}) => callFlat(SKATER_COMPARISON_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterComparison} (py/R parity). */
@@ -536,9 +536,9 @@ const SKATER_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterDetail({ player_id: '…' });
  */
 export const nhlEdgeSkaterDetail: WrapperFn = (params = {}) => callFlat(SKATER_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterDetail} (py/R parity). */
@@ -585,9 +585,9 @@ const SKATER_DISTANCE_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterDistanceTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterDistanceTop10({ positions: '…', strength: '…', sort_by: '…' });
  */
 export const nhlEdgeSkaterDistanceTop10: WrapperFn = (params = {}) => callFlat(SKATER_DISTANCE_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterDistanceTop10} (py/R parity). */
@@ -622,8 +622,8 @@ const SKATER_LANDING_DEF: WrapperDef = {
  *
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeSkaterLanding({});
  */
 export const nhlEdgeSkaterLanding: WrapperFn = (params = {}) => callFlat(SKATER_LANDING_DEF, params);
@@ -663,9 +663,9 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterShotLocationDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterShotLocationDetail({ player_id: '…' });
  */
 export const nhlEdgeSkaterShotLocationDetail: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotLocationDetail} (py/R parity). */
@@ -712,9 +712,9 @@ const SKATER_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterShotLocationTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterShotLocationTop10({ position: '…', category: '…', sort_by: '…' });
  */
 export const nhlEdgeSkaterShotLocationTop10: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotLocationTop10} (py/R parity). */
@@ -754,9 +754,9 @@ const SKATER_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterShotSpeedDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterShotSpeedDetail({ player_id: '…' });
  */
 export const nhlEdgeSkaterShotSpeedDetail: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotSpeedDetail} (py/R parity). */
@@ -799,9 +799,9 @@ const SKATER_SHOT_SPEED_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterShotSpeedTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterShotSpeedTop10({ positions: '…', sort_by: '…' });
  */
 export const nhlEdgeSkaterShotSpeedTop10: WrapperFn = (params = {}) => callFlat(SKATER_SHOT_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterShotSpeedTop10} (py/R parity). */
@@ -840,9 +840,9 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterSkatingDistanceDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterSkatingDistanceDetail({ player_id: '…' });
  */
 export const nhlEdgeSkaterSkatingDistanceDetail: WrapperFn = (params = {}) => callFlat(SKATER_SKATING_DISTANCE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSkatingDistanceDetail} (py/R parity). */
@@ -881,9 +881,9 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterSkatingSpeedDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterSkatingSpeedDetail({ player_id: '…' });
  */
 export const nhlEdgeSkaterSkatingSpeedDetail: WrapperFn = (params = {}) => callFlat(SKATER_SKATING_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSkatingSpeedDetail} (py/R parity). */
@@ -926,9 +926,9 @@ const SKATER_SPEED_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterSpeedTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterSpeedTop10({ positions: '…', sort_by: '…' });
  */
 export const nhlEdgeSkaterSpeedTop10: WrapperFn = (params = {}) => callFlat(SKATER_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterSpeedTop10} (py/R parity). */
@@ -968,9 +968,9 @@ const SKATER_ZONE_TIME_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterZoneTime({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterZoneTime({ player_id: '…' });
  */
 export const nhlEdgeSkaterZoneTime: WrapperFn = (params = {}) => callFlat(SKATER_ZONE_TIME_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterZoneTime} (py/R parity). */
@@ -1017,9 +1017,9 @@ const SKATER_ZONE_TIME_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeSkaterZoneTimeTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeSkaterZoneTimeTop10({ positions: '…', strength: '…', sort_by: '…' });
  */
 export const nhlEdgeSkaterZoneTimeTop10: WrapperFn = (params = {}) => callFlat(SKATER_ZONE_TIME_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeSkaterZoneTimeTop10} (py/R parity). */
@@ -1059,9 +1059,9 @@ const TEAM_DETAIL_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamDetail({ team_id: '…' });
  */
 export const nhlEdgeTeamDetail: WrapperFn = (params = {}) => callFlat(TEAM_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamDetail} (py/R parity). */
@@ -1096,8 +1096,8 @@ const TEAM_LANDING_DEF: WrapperDef = {
  *
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlEdgeTeamLanding({});
  */
 export const nhlEdgeTeamLanding: WrapperFn = (params = {}) => callFlat(TEAM_LANDING_DEF, params);
@@ -1138,9 +1138,9 @@ const TEAM_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamShotLocationDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamShotLocationDetail({ team_id: '…' });
  */
 export const nhlEdgeTeamShotLocationDetail: WrapperFn = (params = {}) => callFlat(TEAM_SHOT_LOCATION_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotLocationDetail} (py/R parity). */
@@ -1187,9 +1187,9 @@ const TEAM_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamShotLocationTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamShotLocationTop10({ position: '…', category: '…', sort_by: '…' });
  */
 export const nhlEdgeTeamShotLocationTop10: WrapperFn = (params = {}) => callFlat(TEAM_SHOT_LOCATION_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotLocationTop10} (py/R parity). */
@@ -1228,9 +1228,9 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamShotSpeedDetail({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamShotSpeedDetail({ team_id: '…' });
  */
 export const nhlEdgeTeamShotSpeedDetail: WrapperFn = (params = {}) => callFlat(TEAM_SHOT_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamShotSpeedDetail} (py/R parity). */
@@ -1268,9 +1268,9 @@ const TEAM_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceDetail({});
+ * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns The raw response (this endpoint has no parser).
+ * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceDetail({ team_id: '…' });
  */
 export const nhlEdgeTeamSkatingDistanceDetail: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_DISTANCE_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingDistanceDetail} (py/R parity). */
@@ -1317,9 +1317,9 @@ const TEAM_SKATING_DISTANCE_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamSkatingDistanceTop10({ positions: '…', strength: '…', sort_by: '…' });
  */
 export const nhlEdgeTeamSkatingDistanceTop10: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_DISTANCE_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingDistanceTop10} (py/R parity). */
@@ -1357,9 +1357,9 @@ const TEAM_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedDetail({});
+ * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.
+ * @returns The raw response (this endpoint has no parser).
+ * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedDetail({ team_id: '…' });
  */
 export const nhlEdgeTeamSkatingSpeedDetail: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_SPEED_DETAIL_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingSpeedDetail} (py/R parity). */
@@ -1402,9 +1402,9 @@ const TEAM_SKATING_SPEED_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamSkatingSpeedTop10({ positions: '…', sort_by: '…' });
  */
 export const nhlEdgeTeamSkatingSpeedTop10: WrapperFn = (params = {}) => callFlat(TEAM_SKATING_SPEED_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamSkatingSpeedTop10} (py/R parity). */
@@ -1443,9 +1443,9 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamZoneTimeDetails({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamZoneTimeDetails({ team_id: '…' });
  */
 export const nhlEdgeTeamZoneTimeDetails: WrapperFn = (params = {}) => callFlat(TEAM_ZONE_TIME_DETAILS_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamZoneTimeDetails} (py/R parity). */
@@ -1488,9 +1488,9 @@ const TEAM_ZONE_TIME_TOP_10_DEF: WrapperDef = {
  * @param params.sort_by - path parameter.
  * @param params.season - path parameter *(optional)*.
  * @param params.game_type - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlEdgeTeamZoneTimeTop10({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlEdgeTeamZoneTimeTop10({ strength: '…', sort_by: '…' });
  */
 export const nhlEdgeTeamZoneTimeTop10: WrapperFn = (params = {}) => callFlat(TEAM_ZONE_TIME_TOP_10_DEF, params);
 /** snake_case alias of {@link nhlEdgeTeamZoneTimeTop10} (py/R parity). */

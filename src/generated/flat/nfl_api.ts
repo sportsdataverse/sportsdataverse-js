@@ -41,8 +41,8 @@ const COMBINE_PROFILES_DEF: WrapperDef = {
  * @param params.year - query parameter — default `2024`.
  * @param params.limit - query parameter — default `40`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiCombineProfiles({});
  */
 export const nflApiCombineProfiles: WrapperFn = (params = {}) => callFlat(COMBINE_PROFILES_DEF, params);
@@ -82,8 +82,8 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  * @param params.year - query parameter — default `2024`.
  * @param params.limit - query parameter — default `40`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiDraftPicks({});
  */
 export const nflApiDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_DEF, params);
@@ -129,8 +129,8 @@ const GAME_SUMMARIES_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`seasonType`) — default `REG`.
  * @param params.week - query parameter — default `1`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiGameSummaries({});
  */
 export const nflApiGameSummaries: WrapperFn = (params = {}) => callFlat(GAME_SUMMARIES_DEF, params);
@@ -176,8 +176,8 @@ const INJURIES_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`seasonType`) — default `REG`.
  * @param params.week - query parameter — default `1`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiInjuries({});
  */
 export const nflApiInjuries: WrapperFn = (params = {}) => callFlat(INJURIES_DEF, params);
@@ -217,8 +217,8 @@ const ROSTERS_DEF: WrapperDef = {
  * @param params.season - query parameter — default `2024`.
  * @param params.limit - query parameter — default `40`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiRosters({});
  */
 export const nflApiRosters: WrapperFn = (params = {}) => callFlat(ROSTERS_DEF, params);
@@ -270,8 +270,8 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.week - query parameter — default `1`.
  * @param params.limit - query parameter — default `40`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiStandings({});
  */
 export const nflApiStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
@@ -303,9 +303,9 @@ const TEAM_DEF: WrapperDef = {
  *
  * @param params.team_id - path parameter.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiTeam({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nfl.nflApiTeam({ team_id: '…' });
  */
 export const nflApiTeam: WrapperFn = (params = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link nflApiTeam} (py/R parity). */
@@ -344,8 +344,8 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  * @param params.season - query parameter — default `2024`.
  * @param params.limit - query parameter — default `40`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiTeamsHistory({});
  */
 export const nflApiTeamsHistory: WrapperFn = (params = {}) => callFlat(TEAMS_HISTORY_DEF, params);
@@ -415,8 +415,8 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
  * @param params.include_standings - query parameter (`includeStandings`) — default `false`.
  * @param params.include_tagged_videos - query parameter (`includeTaggedVideos`) — default `false`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiWeeklyGameDetails({});
  */
 export const nflApiWeeklyGameDetails: WrapperFn = (params = {}) => callFlat(WEEKLY_GAME_DETAILS_DEF, params);
@@ -456,8 +456,8 @@ const WEEKS_DEF: WrapperDef = {
  * @param params.season - path parameter *(optional)*.
  * @param params.season_type - path parameter *(optional)*.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflApiWeeks({});
  */
 export const nflApiWeeks: WrapperFn = (params = {}) => callFlat(WEEKS_DEF, params);
@@ -489,9 +489,9 @@ const WEEKS_BY_DATE_DEF: WrapperDef = {
  *
  * @param params.date - path parameter.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiWeeksByDate({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nfl.nflApiWeeksByDate({ date: '…' });
  */
 export const nflApiWeeksByDate: WrapperFn = (params = {}) => callFlat(WEEKS_BY_DATE_DEF, params);
 /** snake_case alias of {@link nflApiWeeksByDate} (py/R parity). */

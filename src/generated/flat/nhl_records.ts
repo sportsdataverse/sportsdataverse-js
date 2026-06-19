@@ -25,8 +25,8 @@ const ALL_TIME_RECORD_VS_FRANCHISE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-time-record-vs-franchise`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllTimeRecordVsFranchise({});
  */
 export const nhlRecordsAllTimeRecordVsFranchise: WrapperFn = (params = {}) => callFlat(ALL_TIME_RECORD_VS_FRANCHISE_DEF, params);
@@ -50,8 +50,8 @@ const ALLSTAR_COACH_CAREER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-coach-career-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarCoachCareer({});
  */
 export const nhlRecordsAllstarCoachCareer: WrapperFn = (params = {}) => callFlat(ALLSTAR_COACH_CAREER_DEF, params);
@@ -75,8 +75,8 @@ const ALLSTAR_GOALIE_CAREER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-goaltender-career-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarGoalieCareer({});
  */
 export const nhlRecordsAllstarGoalieCareer: WrapperFn = (params = {}) => callFlat(ALLSTAR_GOALIE_CAREER_DEF, params);
@@ -100,8 +100,8 @@ const ALLSTAR_GOALIE_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-goaltender-game-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarGoalieGame({});
  */
 export const nhlRecordsAllstarGoalieGame: WrapperFn = (params = {}) => callFlat(ALLSTAR_GOALIE_GAME_DEF, params);
@@ -125,8 +125,8 @@ const ALLSTAR_SKATER_CAREER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-skater-career-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarSkaterCareer({});
  */
 export const nhlRecordsAllstarSkaterCareer: WrapperFn = (params = {}) => callFlat(ALLSTAR_SKATER_CAREER_DEF, params);
@@ -150,8 +150,8 @@ const ALLSTAR_SKATER_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/all-star-skater-game-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAllstarSkaterGame({});
  */
 export const nhlRecordsAllstarSkaterGame: WrapperFn = (params = {}) => callFlat(ALLSTAR_SKATER_GAME_DEF, params);
@@ -176,8 +176,8 @@ const ATTENDANCE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/attendance`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAttendance({});
  */
 export const nhlRecordsAttendance: WrapperFn = (params = {}) => callFlat(ATTENDANCE_DEF, params);
@@ -201,8 +201,8 @@ const AWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/award-details`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAwards({});
  */
 export const nhlRecordsAwards: WrapperFn = (params = {}) => callFlat(AWARDS_DEF, params);
@@ -231,9 +231,9 @@ const AWARDS_BY_FRANCHISE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/award-details/{franchise_id}`
  *
  * @param params.franchise_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlRecordsAwardsByFranchise({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlRecordsAwardsByFranchise({ franchise_id: '…' });
  */
 export const nhlRecordsAwardsByFranchise: WrapperFn = (params = {}) => callFlat(AWARDS_BY_FRANCHISE_DEF, params);
 /** snake_case alias of {@link nhlRecordsAwardsByFranchise} (py/R parity). */
@@ -265,9 +265,9 @@ const AWARDS_TROPHY_SEASON_DEF: WrapperDef = {
  *
  * @param params.trophy_id - path parameter.
  * @param params.season_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlRecordsAwardsTrophySeason({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlRecordsAwardsTrophySeason({ trophy_id: '…', season_id: '…' });
  */
 export const nhlRecordsAwardsTrophySeason: WrapperFn = (params = {}) => callFlat(AWARDS_TROPHY_SEASON_DEF, params);
 /** snake_case alias of {@link nhlRecordsAwardsTrophySeason} (py/R parity). */
@@ -290,8 +290,8 @@ const AWAY_TEAM_RECORD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/away-team-record`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsAwayTeamRecord({});
  */
 export const nhlRecordsAwayTeamRecord: WrapperFn = (params = {}) => callFlat(AWAY_TEAM_RECORD_DEF, params);
@@ -320,9 +320,9 @@ const COACH_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach/{coach_id}`
  *
  * @param params.coach_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlRecordsCoach({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlRecordsCoach({ coach_id: '…' });
  */
 export const nhlRecordsCoach: WrapperFn = (params = {}) => callFlat(COACH_DEF, params);
 /** snake_case alias of {@link nhlRecordsCoach} (py/R parity). */
@@ -351,8 +351,8 @@ const COACH_CAREER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach-career-records/{coach_id}`
  *
  * @param params.coach_id - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachCareer({});
  */
 export const nhlRecordsCoachCareer: WrapperFn = (params = {}) => callFlat(COACH_CAREER_DEF, params);
@@ -376,8 +376,8 @@ const COACH_CAREER_WITH_PLAYOFFS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach-career-records-regular-plus-playoffs`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachCareerWithPlayoffs({});
  */
 export const nhlRecordsCoachCareerWithPlayoffs: WrapperFn = (params = {}) => callFlat(COACH_CAREER_WITH_PLAYOFFS_DEF, params);
@@ -407,8 +407,8 @@ const COACH_FRANCHISE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach-franchise-records/{coach_id}`
  *
  * @param params.coach_id - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachFranchise({});
  */
 export const nhlRecordsCoachFranchise: WrapperFn = (params = {}) => callFlat(COACH_FRANCHISE_DEF, params);
@@ -432,8 +432,8 @@ const COACH_STANLEY_CUP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach-stanley-cup-streak`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoachStanleyCup({});
  */
 export const nhlRecordsCoachStanleyCup: WrapperFn = (params = {}) => callFlat(COACH_STANLEY_CUP_DEF, params);
@@ -458,8 +458,8 @@ const COACHES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/coach`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsCoaches({});
  */
 export const nhlRecordsCoaches: WrapperFn = (params = {}) => callFlat(COACHES_DEF, params);
@@ -483,8 +483,8 @@ const CONSECUTIVE_100PT_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/consecutive-100-point-seasons`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsConsecutive100ptSeasons({});
  */
 export const nhlRecordsConsecutive100ptSeasons: WrapperFn = (params = {}) => callFlat(CONSECUTIVE_100PT_SEASONS_DEF, params);
@@ -515,8 +515,8 @@ const DRAFT_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/draft/{draft_id}`
  *
  * @param params.draft_id - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraft({});
  */
 export const nhlRecordsDraft: WrapperFn = (params = {}) => callFlat(DRAFT_DEF, params);
@@ -545,9 +545,9 @@ const DRAFT_BY_TEAM_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/draft/byTeam/{team_id}`
  *
  * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlRecordsDraftByTeam({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlRecordsDraftByTeam({ team_id: '…' });
  */
 export const nhlRecordsDraftByTeam: WrapperFn = (params = {}) => callFlat(DRAFT_BY_TEAM_DEF, params);
 /** snake_case alias of {@link nhlRecordsDraftByTeam} (py/R parity). */
@@ -570,8 +570,8 @@ const DRAFT_LOTTERY_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/draft-lottery-odds`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraftLotteryOdds({});
  */
 export const nhlRecordsDraftLotteryOdds: WrapperFn = (params = {}) => callFlat(DRAFT_LOTTERY_ODDS_DEF, params);
@@ -601,8 +601,8 @@ const DRAFT_PROSPECT_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/draft-prospect/{prospect_id}`
  *
  * @param params.prospect_id - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsDraftProspect({});
  */
 export const nhlRecordsDraftProspect: WrapperFn = (params = {}) => callFlat(DRAFT_PROSPECT_DEF, params);
@@ -626,8 +626,8 @@ const EXPANSION_DRAFT_PICKS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/expansion-draft-picks`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsExpansionDraftPicks({});
  */
 export const nhlRecordsExpansionDraftPicks: WrapperFn = (params = {}) => callFlat(EXPANSION_DRAFT_PICKS_DEF, params);
@@ -651,8 +651,8 @@ const FRANCHISE_DETAIL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-detail`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseDetail({});
  */
 export const nhlRecordsFranchiseDetail: WrapperFn = (params = {}) => callFlat(FRANCHISE_DETAIL_DEF, params);
@@ -676,8 +676,8 @@ const FRANCHISE_PLAYOFF_APPEARANCES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-playoff-appearances`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchisePlayoffAppearances({});
  */
 export const nhlRecordsFranchisePlayoffAppearances: WrapperFn = (params = {}) => callFlat(FRANCHISE_PLAYOFF_APPEARANCES_DEF, params);
@@ -701,8 +701,8 @@ const FRANCHISE_SEASON_RESULTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-season-results`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseSeasonResults({});
  */
 export const nhlRecordsFranchiseSeasonResults: WrapperFn = (params = {}) => callFlat(FRANCHISE_SEASON_RESULTS_DEF, params);
@@ -727,8 +727,8 @@ const FRANCHISE_TEAM_TOTALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-team-totals`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseTeamTotals({});
  */
 export const nhlRecordsFranchiseTeamTotals: WrapperFn = (params = {}) => callFlat(FRANCHISE_TEAM_TOTALS_DEF, params);
@@ -752,8 +752,8 @@ const FRANCHISE_TOTALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise-totals`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchiseTotals({});
  */
 export const nhlRecordsFranchiseTotals: WrapperFn = (params = {}) => callFlat(FRANCHISE_TOTALS_DEF, params);
@@ -778,8 +778,8 @@ const FRANCHISES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/franchise`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsFranchises({});
  */
 export const nhlRecordsFranchises: WrapperFn = (params = {}) => callFlat(FRANCHISES_DEF, params);
@@ -809,8 +809,8 @@ const GM_CAREER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/general-manager/{gm_id}`
  *
  * @param params.gm_id - path parameter *(optional)*.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGmCareer({});
  */
 export const nhlRecordsGmCareer: WrapperFn = (params = {}) => callFlat(GM_CAREER_DEF, params);
@@ -834,8 +834,8 @@ const GM_FRANCHISE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/general-manager-franchise-records`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGmFranchise({});
  */
 export const nhlRecordsGmFranchise: WrapperFn = (params = {}) => callFlat(GM_FRANCHISE_DEF, params);
@@ -859,8 +859,8 @@ const GOALIE_CAREER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-career-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieCareerStats({});
  */
 export const nhlRecordsGoalieCareerStats: WrapperFn = (params = {}) => callFlat(GOALIE_CAREER_STATS_DEF, params);
@@ -884,8 +884,8 @@ const GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie_career_stats_incl_playoffs`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieCareerStatsWithPlayoffs({});
  */
 export const nhlRecordsGoalieCareerStatsWithPlayoffs: WrapperFn = (params = {}) => callFlat(GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF, params);
@@ -909,8 +909,8 @@ const GOALIE_PLAYOFF_STREAK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-playoff-streak`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoaliePlayoffStreak({});
  */
 export const nhlRecordsGoaliePlayoffStreak: WrapperFn = (params = {}) => callFlat(GOALIE_PLAYOFF_STREAK_DEF, params);
@@ -934,8 +934,8 @@ const GOALIE_SEASON_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-season-stats`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieSeasonStats({});
  */
 export const nhlRecordsGoalieSeasonStats: WrapperFn = (params = {}) => callFlat(GOALIE_SEASON_STATS_DEF, params);
@@ -959,8 +959,8 @@ const GOALIE_SHUTOUT_STREAK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-shutout-streak`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieShutoutStreak({});
  */
 export const nhlRecordsGoalieShutoutStreak: WrapperFn = (params = {}) => callFlat(GOALIE_SHUTOUT_STREAK_DEF, params);
@@ -984,8 +984,8 @@ const GOALIE_UNDEFEATED_STREAK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-undefeated-streak`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieUndefeatedStreak({});
  */
 export const nhlRecordsGoalieUndefeatedStreak: WrapperFn = (params = {}) => callFlat(GOALIE_UNDEFEATED_STREAK_DEF, params);
@@ -1009,8 +1009,8 @@ const GOALIE_WIN_PLATEAUS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-win-plateaus`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieWinPlateaus({});
  */
 export const nhlRecordsGoalieWinPlateaus: WrapperFn = (params = {}) => callFlat(GOALIE_WIN_PLATEAUS_DEF, params);
@@ -1034,8 +1034,8 @@ const GOALIE_WIN_STREAK_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/goalie-win-streak`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsGoalieWinStreak({});
  */
 export const nhlRecordsGoalieWinStreak: WrapperFn = (params = {}) => callFlat(GOALIE_WIN_STREAK_DEF, params);
@@ -1059,8 +1059,8 @@ const HOF_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/hof/players`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsHofPlayers({});
  */
 export const nhlRecordsHofPlayers: WrapperFn = (params = {}) => callFlat(HOF_PLAYERS_DEF, params);
@@ -1089,9 +1089,9 @@ const HOF_PLAYERS_BY_OFFICE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://records.nhl.com/site/api/hof/players/{office_id}`
  *
  * @param params.office_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.nhl.nhlRecordsHofPlayersByOffice({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nhl.nhlRecordsHofPlayersByOffice({ office_id: '…' });
  */
 export const nhlRecordsHofPlayersByOffice: WrapperFn = (params = {}) => callFlat(HOF_PLAYERS_BY_OFFICE_DEF, params);
 /** snake_case alias of {@link nhlRecordsHofPlayersByOffice} (py/R parity). */
@@ -1114,8 +1114,8 @@ const HOME_TEAM_RECORD_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/home-team-record`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsHomeTeamRecord({});
  */
 export const nhlRecordsHomeTeamRecord: WrapperFn = (params = {}) => callFlat(HOME_TEAM_RECORD_DEF, params);
@@ -1139,8 +1139,8 @@ const SKATER_CAREER_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/skater-career-leaders`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsSkaterCareerLeaders({});
  */
 export const nhlRecordsSkaterCareerLeaders: WrapperFn = (params = {}) => callFlat(SKATER_CAREER_LEADERS_DEF, params);
@@ -1164,8 +1164,8 @@ const SKATER_CAREER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://records.nhl.com/site/api/skater-career-statistics`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nhl.nhlRecordsSkaterCareerStats({});
  */
 export const nhlRecordsSkaterCareerStats: WrapperFn = (params = {}) => callFlat(SKATER_CAREER_STATS_DEF, params);

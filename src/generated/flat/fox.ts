@@ -48,9 +48,9 @@ const EVENT_DATA_DEF: WrapperDef = {
  * @param params.event_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxEventData({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxEventData({ sport: '…', event_id: '…' });
  */
 export const foxEventData: WrapperFn = (params = {}) => callFlat(EVENT_DATA_DEF, params);
 /** snake_case alias of {@link foxEventData} (py/R parity). */
@@ -96,9 +96,9 @@ const EVENT_MATCHUP_DEF: WrapperDef = {
  * @param params.event_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxEventMatchup({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxEventMatchup({ sport: '…', event_id: '…' });
  */
 export const foxEventMatchup: WrapperFn = (params = {}) => callFlat(EVENT_MATCHUP_DEF, params);
 /** snake_case alias of {@link foxEventMatchup} (py/R parity). */
@@ -144,9 +144,9 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.event_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxEventOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxEventOdds({ sport: '…', event_id: '…' });
  */
 export const foxEventOdds: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_DEF, params);
 /** snake_case alias of {@link foxEventOdds} (py/R parity). */
@@ -192,9 +192,9 @@ const EVENT_RECAP_DEF: WrapperDef = {
  * @param params.event_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxEventRecap({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxEventRecap({ sport: '…', event_id: '…' });
  */
 export const foxEventRecap: WrapperFn = (params = {}) => callFlat(EVENT_RECAP_DEF, params);
 /** snake_case alias of {@link foxEventRecap} (py/R parity). */
@@ -240,9 +240,9 @@ const EVENT_STANDINGS_DEF: WrapperDef = {
  * @param params.event_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxEventStandings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxEventStandings({ sport: '…', event_id: '…' });
  */
 export const foxEventStandings: WrapperFn = (params = {}) => callFlat(EVENT_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxEventStandings} (py/R parity). */
@@ -284,9 +284,9 @@ const EXPLORE_BROWSE_DEF: WrapperDef = {
  * @param params.section - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxExploreBrowse({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxExploreBrowse({ section: '…' });
  */
 export const foxExploreBrowse: WrapperFn = (params = {}) => callFlat(EXPLORE_BROWSE_DEF, params);
 /** snake_case alias of {@link foxExploreBrowse} (py/R parity). */
@@ -328,9 +328,9 @@ const EXPLORE_FAVORITE_DEF: WrapperDef = {
  * @param params.section - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxExploreFavorite({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxExploreFavorite({ section: '…' });
  */
 export const foxExploreFavorite: WrapperFn = (params = {}) => callFlat(EXPLORE_FAVORITE_DEF, params);
 /** snake_case alias of {@link foxExploreFavorite} (py/R parity). */
@@ -367,8 +367,8 @@ const EXPLORE_ODDS_DEF: WrapperDef = {
  *
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxExploreOdds({});
  */
 export const foxExploreOdds: WrapperFn = (params = {}) => callFlat(EXPLORE_ODDS_DEF, params);
@@ -411,8 +411,8 @@ const FOXPOLLS_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
  * @param params.associated_entity_ids - query parameter (`associatedEntityIds`).
  * @param params.include_answers - query parameter (`includeAnswers`) — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFoxpolls({});
  */
 export const foxFoxpolls: WrapperFn = (params = {}) => callFlat(FOXPOLLS_DEF, params);
@@ -450,8 +450,8 @@ const FS_FEED_DEF: WrapperDef = {
  *
  * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsFeed({});
  */
 export const foxFsFeed: WrapperFn = (params = {}) => callFlat(FS_FEED_DEF, params);
@@ -489,8 +489,8 @@ const FS_IMAGES_DEF: WrapperDef = {
  *
  * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsImages({});
  */
 export const foxFsImages: WrapperFn = (params = {}) => callFlat(FS_IMAGES_DEF, params);
@@ -528,8 +528,8 @@ const FS_LAYOUTS_DEF: WrapperDef = {
  *
  * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsLayouts({});
  */
 export const foxFsLayouts: WrapperFn = (params = {}) => callFlat(FS_LAYOUTS_DEF, params);
@@ -567,8 +567,8 @@ const FS_VIDEOS_DEF: WrapperDef = {
  *
  * @param params.apikey - query parameter — default `SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsVideos({});
  */
 export const foxFsVideos: WrapperFn = (params = {}) => callFlat(FS_VIDEOS_DEF, params);
@@ -611,9 +611,9 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueConferences({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueConferences({ sport: '…' });
  */
 export const foxLeagueConferences: WrapperFn = (params = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
 /** snake_case alias of {@link foxLeagueConferences} (py/R parity). */
@@ -655,9 +655,9 @@ const LEAGUE_HEADER_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueHeader({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueHeader({ sport: '…' });
  */
 export const foxLeagueHeader: WrapperFn = (params = {}) => callFlat(LEAGUE_HEADER_DEF, params);
 /** snake_case alias of {@link foxLeagueHeader} (py/R parity). */
@@ -704,9 +704,9 @@ const LEAGUE_ODDS_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueOdds({ sport: '…' });
  */
 export const foxLeagueOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_ODDS_DEF, params);
 /** snake_case alias of {@link foxLeagueOdds} (py/R parity). */
@@ -748,9 +748,9 @@ const LEAGUE_PLAYERNEWS_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeaguePlayernews({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeaguePlayernews({ sport: '…' });
  */
 export const foxLeaguePlayernews: WrapperFn = (params = {}) => callFlat(LEAGUE_PLAYERNEWS_DEF, params);
 /** snake_case alias of {@link foxLeaguePlayernews} (py/R parity). */
@@ -792,9 +792,9 @@ const LEAGUE_POLLS_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeaguePolls({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeaguePolls({ sport: '…' });
  */
 export const foxLeaguePolls: WrapperFn = (params = {}) => callFlat(LEAGUE_POLLS_DEF, params);
 /** snake_case alias of {@link foxLeaguePolls} (py/R parity). */
@@ -836,9 +836,9 @@ const LEAGUE_SCHEDULE_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueSchedule({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueSchedule({ sport: '…' });
  */
 export const foxLeagueSchedule: WrapperFn = (params = {}) => callFlat(LEAGUE_SCHEDULE_DEF, params);
 /** snake_case alias of {@link foxLeagueSchedule} (py/R parity). */
@@ -880,9 +880,9 @@ const LEAGUE_SCORES_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueScores({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueScores({ sport: '…' });
  */
 export const foxLeagueScores: WrapperFn = (params = {}) => callFlat(LEAGUE_SCORES_DEF, params);
 /** snake_case alias of {@link foxLeagueScores} (py/R parity). */
@@ -933,9 +933,9 @@ const LEAGUE_SCORES_SEGMENT_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueScoresSegment({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueScoresSegment({ sport: '…', segment_id: '…' });
  */
 export const foxLeagueScoresSegment: WrapperFn = (params = {}) => callFlat(LEAGUE_SCORES_SEGMENT_DEF, params);
 /** snake_case alias of {@link foxLeagueScoresSegment} (py/R parity). */
@@ -977,9 +977,9 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueStandings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueStandings({ sport: '…' });
  */
 export const foxLeagueStandings: WrapperFn = (params = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxLeagueStandings} (py/R parity). */
@@ -1021,9 +1021,9 @@ const LEAGUE_STATS_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueStats({ sport: '…' });
  */
 export const foxLeagueStats: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_DEF, params);
 /** snake_case alias of {@link foxLeagueStats} (py/R parity). */
@@ -1082,9 +1082,9 @@ const LEAGUE_STATS_CON_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueStatsCon({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueStatsCon({ sport: '…', who: '…', category: '…', page: '…' });
  */
 export const foxLeagueStatsCon: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_CON_DEF, params);
 /** snake_case alias of {@link foxLeagueStatsCon} (py/R parity). */
@@ -1126,9 +1126,9 @@ const LEAGUE_TEAMNAV_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueTeamnav({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxLeagueTeamnav({ sport: '…' });
  */
 export const foxLeagueTeamnav: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAMNAV_DEF, params);
 /** snake_case alias of {@link foxLeagueTeamnav} (py/R parity). */
@@ -1175,9 +1175,9 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.group_id - query parameter (`groupId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxScoreboard({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxScoreboard({ sport: '…' });
  */
 export const foxScoreboard: WrapperFn = (params = {}) => callFlat(SCOREBOARD_DEF, params);
 /** snake_case alias of {@link foxScoreboard} (py/R parity). */
@@ -1223,9 +1223,9 @@ const SCORECHIP_DEF: WrapperDef = {
  * @param params.chip_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxScorechip({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxScorechip({ sport: '…', chip_id: '…' });
  */
 export const foxScorechip: WrapperFn = (params = {}) => callFlat(SCORECHIP_DEF, params);
 /** snake_case alias of {@link foxScorechip} (py/R parity). */
@@ -1267,8 +1267,8 @@ const SEARCH_CONTENT_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.text - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxSearchContent({});
  */
 export const foxSearchContent: WrapperFn = (params = {}) => callFlat(SEARCH_CONTENT_DEF, params);
@@ -1311,8 +1311,8 @@ const SEARCH_ENTITIES_DEF: WrapperDef = {
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.text - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxSearchEntities({});
  */
 export const foxSearchEntities: WrapperFn = (params = {}) => callFlat(SEARCH_ENTITIES_DEF, params);
@@ -1350,8 +1350,8 @@ const SEARCH_POPULAR_DEF: WrapperDef = {
  *
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxSearchPopular({});
  */
 export const foxSearchPopular: WrapperFn = (params = {}) => callFlat(SEARCH_POPULAR_DEF, params);
@@ -1398,9 +1398,9 @@ const TEAM_GAMELOG_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamGamelog({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxTeamGamelog({ sport: '…', team_id: '…' });
  */
 export const foxTeamGamelog: WrapperFn = (params = {}) => callFlat(TEAM_GAMELOG_DEF, params);
 /** snake_case alias of {@link foxTeamGamelog} (py/R parity). */
@@ -1446,9 +1446,9 @@ const TEAM_HEADER_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamHeader({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxTeamHeader({ sport: '…', team_id: '…' });
  */
 export const foxTeamHeader: WrapperFn = (params = {}) => callFlat(TEAM_HEADER_DEF, params);
 /** snake_case alias of {@link foxTeamHeader} (py/R parity). */
@@ -1494,9 +1494,9 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamRoster({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxTeamRoster({ sport: '…', team_id: '…' });
  */
 export const foxTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link foxTeamRoster} (py/R parity). */
@@ -1542,9 +1542,9 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamStandings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxTeamStandings({ sport: '…', team_id: '…' });
  */
 export const foxTeamStandings: WrapperFn = (params = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link foxTeamStandings} (py/R parity). */
@@ -1590,9 +1590,9 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxTeamStats({ sport: '…', team_id: '…' });
  */
 export const foxTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link foxTeamStats} (py/R parity). */
@@ -1634,9 +1634,9 @@ const TOPEVENTS_SCOREBOARD_SEGMENT_DEF: WrapperDef = {
  * @param params.segment - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.fox.foxTopeventsScoreboardSegment({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.fox.foxTopeventsScoreboardSegment({ segment: '…' });
  */
 export const foxTopeventsScoreboardSegment: WrapperFn = (params = {}) => callFlat(TOPEVENTS_SCOREBOARD_SEGMENT_DEF, params);
 /** snake_case alias of {@link foxTopeventsScoreboardSegment} (py/R parity). */
@@ -1684,8 +1684,8 @@ const TRENDING_ARTICLES_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.duration - query parameter — default `4`.
  * @param params.tags - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxTrendingArticles({});
  */
 export const foxTrendingArticles: WrapperFn = (params = {}) => callFlat(TRENDING_ARTICLES_DEF, params);
@@ -1735,8 +1735,8 @@ const TRENDING_VIDEOS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.duration - query parameter — default `4`.
  * @param params.max_items - query parameter (`maxItems`) — default `12`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxTrendingVideos({});
  */
 export const foxTrendingVideos: WrapperFn = (params = {}) => callFlat(TRENDING_VIDEOS_DEF, params);

@@ -61,9 +61,9 @@ const BOXSCORE_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.v - query parameter — default `4`.
  * @param params.polling - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.yahoo.yahooScoresBoxscore({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.yahoo.yahooScoresBoxscore({ game_id: '…' });
  */
 export const yahooScoresBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link yahooScoresBoxscore} (py/R parity). */
@@ -138,8 +138,8 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @param params.conferences - query parameter.
  * @param params.count - query parameter — default `500`.
  * @param params.v - query parameter — default `2`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooScoresScoreboard({});
  */
 export const yahooScoresScoreboard: WrapperFn = (params = {}) => callFlat(SCOREBOARD_DEF, params);

@@ -37,8 +37,8 @@ const GAMEFEED_DEF: WrapperDef = {
  *
  * @param params.game_pk - query parameter.
  * @param params.at_bat_number - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastGamefeed({});
  */
 export const mlbStatcastGamefeed: WrapperFn = (params = {}) => callFlat(GAMEFEED_DEF, params);
@@ -85,8 +85,8 @@ const LEADERBOARD_ACTIVE_SPIN_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardActiveSpin({});
  */
 export const mlbStatcastLeaderboardActiveSpin: WrapperFn = (params = {}) => callFlat(LEADERBOARD_ACTIVE_SPIN_DEF, params);
@@ -133,8 +133,8 @@ const LEADERBOARD_ARM_ANGLES_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmAngles({});
  */
 export const mlbStatcastLeaderboardArmAngles: WrapperFn = (params = {}) => callFlat(LEADERBOARD_ARM_ANGLES_DEF, params);
@@ -181,8 +181,8 @@ const LEADERBOARD_ARM_STRENGTH_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardArmStrength({});
  */
 export const mlbStatcastLeaderboardArmStrength: WrapperFn = (params = {}) => callFlat(LEADERBOARD_ARM_STRENGTH_DEF, params);
@@ -229,8 +229,8 @@ const LEADERBOARD_BASERUNNING_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunning({});
  */
 export const mlbStatcastLeaderboardBaserunning: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BASERUNNING_DEF, params);
@@ -277,8 +277,8 @@ const LEADERBOARD_BASERUNNING_RUN_VALUE_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBaserunningRunValue({});
  */
 export const mlbStatcastLeaderboardBaserunningRunValue: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BASERUNNING_RUN_VALUE_DEF, params);
@@ -325,8 +325,8 @@ const LEADERBOARD_BASESTEALING_RUN_VALUE_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBasestealingRunValue({});
  */
 export const mlbStatcastLeaderboardBasestealingRunValue: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BASESTEALING_RUN_VALUE_DEF, params);
@@ -373,8 +373,8 @@ const LEADERBOARD_BAT_TRACKING_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBatTracking({});
  */
 export const mlbStatcastLeaderboardBatTracking: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BAT_TRACKING_DEF, params);
@@ -421,8 +421,8 @@ const LEADERBOARD_BATTED_BALL_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardBattedBall({});
  */
 export const mlbStatcastLeaderboardBattedBall: WrapperFn = (params = {}) => callFlat(LEADERBOARD_BATTED_BALL_DEF, params);
@@ -469,8 +469,8 @@ const LEADERBOARD_CATCH_PROBABILITY_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatchProbability({});
  */
 export const mlbStatcastLeaderboardCatchProbability: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCH_PROBABILITY_DEF, params);
@@ -517,8 +517,8 @@ const LEADERBOARD_CATCHER_BLOCKING_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherBlocking({});
  */
 export const mlbStatcastLeaderboardCatcherBlocking: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_BLOCKING_DEF, params);
@@ -565,8 +565,8 @@ const LEADERBOARD_CATCHER_FRAMING_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherFraming({});
  */
 export const mlbStatcastLeaderboardCatcherFraming: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_FRAMING_DEF, params);
@@ -613,8 +613,8 @@ const LEADERBOARD_CATCHER_STANCE_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherStance({});
  */
 export const mlbStatcastLeaderboardCatcherStance: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_STANCE_DEF, params);
@@ -661,8 +661,8 @@ const LEADERBOARD_CATCHER_THROWING_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCatcherThrowing({});
  */
 export const mlbStatcastLeaderboardCatcherThrowing: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CATCHER_THROWING_DEF, params);
@@ -729,8 +729,8 @@ const LEADERBOARD_CUSTOM_DEF: WrapperDef = {
  * @param params.sort - query parameter.
  * @param params.sort_dir - query parameter (`sortDir`).
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardCustom({});
  */
 export const mlbStatcastLeaderboardCustom: WrapperFn = (params = {}) => callFlat(LEADERBOARD_CUSTOM_DEF, params);
@@ -777,8 +777,8 @@ const LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardExitVelocityBarrels({});
  */
 export const mlbStatcastLeaderboardExitVelocityBarrels: WrapperFn = (params = {}) => callFlat(LEADERBOARD_EXIT_VELOCITY_BARRELS_DEF, params);
@@ -825,8 +825,8 @@ const LEADERBOARD_EXPECTED_STATS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardExpectedStats({});
  */
 export const mlbStatcastLeaderboardExpectedStats: WrapperFn = (params = {}) => callFlat(LEADERBOARD_EXPECTED_STATS_DEF, params);
@@ -867,8 +867,8 @@ const LEADERBOARD_FIELDING_RUN_VALUE_DEF: WrapperDef = {
  * @param params.type - query parameter.
  * @param params.year - query parameter.
  * @param params.team - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardFieldingRunValue({});
  */
 export const mlbStatcastLeaderboardFieldingRunValue: WrapperFn = (params = {}) => callFlat(LEADERBOARD_FIELDING_RUN_VALUE_DEF, params);
@@ -915,8 +915,8 @@ const LEADERBOARD_HOME_RUNS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardHomeRuns({});
  */
 export const mlbStatcastLeaderboardHomeRuns: WrapperFn = (params = {}) => callFlat(LEADERBOARD_HOME_RUNS_DEF, params);
@@ -963,8 +963,8 @@ const LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldDirectionalOaa({});
  */
 export const mlbStatcastLeaderboardOutfieldDirectionalOaa: WrapperFn = (params = {}) => callFlat(LEADERBOARD_OUTFIELD_DIRECTIONAL_OAA_DEF, params);
@@ -1011,8 +1011,8 @@ const LEADERBOARD_OUTFIELD_JUMP_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutfieldJump({});
  */
 export const mlbStatcastLeaderboardOutfieldJump: WrapperFn = (params = {}) => callFlat(LEADERBOARD_OUTFIELD_JUMP_DEF, params);
@@ -1059,8 +1059,8 @@ const LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardOutsAboveAverage({});
  */
 export const mlbStatcastLeaderboardOutsAboveAverage: WrapperFn = (params = {}) => callFlat(LEADERBOARD_OUTS_ABOVE_AVERAGE_DEF, params);
@@ -1101,8 +1101,8 @@ const LEADERBOARD_PARK_FACTORS_DEF: WrapperDef = {
  * @param params.type - query parameter.
  * @param params.year - query parameter.
  * @param params.team - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardParkFactors({});
  */
 export const mlbStatcastLeaderboardParkFactors: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PARK_FACTORS_DEF, params);
@@ -1149,8 +1149,8 @@ const LEADERBOARD_PERCENTILE_RANKINGS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPercentileRankings({});
  */
 export const mlbStatcastLeaderboardPercentileRankings: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PERCENTILE_RANKINGS_DEF, params);
@@ -1197,8 +1197,8 @@ const LEADERBOARD_PITCH_ARSENAL_STATS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenalStats({});
  */
 export const mlbStatcastLeaderboardPitchArsenalStats: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_ARSENAL_STATS_DEF, params);
@@ -1245,8 +1245,8 @@ const LEADERBOARD_PITCH_ARSENALS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchArsenals({});
  */
 export const mlbStatcastLeaderboardPitchArsenals: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_ARSENALS_DEF, params);
@@ -1293,8 +1293,8 @@ const LEADERBOARD_PITCH_MOVEMENT_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchMovement({});
  */
 export const mlbStatcastLeaderboardPitchMovement: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_MOVEMENT_DEF, params);
@@ -1341,8 +1341,8 @@ const LEADERBOARD_PITCH_TEMPO_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitchTempo({});
  */
 export const mlbStatcastLeaderboardPitchTempo: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCH_TEMPO_DEF, params);
@@ -1389,8 +1389,8 @@ const LEADERBOARD_PITCHER_RUNNING_GAME_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPitcherRunningGame({});
  */
 export const mlbStatcastLeaderboardPitcherRunningGame: WrapperFn = (params = {}) => callFlat(LEADERBOARD_PITCHER_RUNNING_GAME_DEF, params);
@@ -1437,8 +1437,8 @@ const LEADERBOARD_POPTIME_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardPoptime({});
  */
 export const mlbStatcastLeaderboardPoptime: WrapperFn = (params = {}) => callFlat(LEADERBOARD_POPTIME_DEF, params);
@@ -1485,8 +1485,8 @@ const LEADERBOARD_RUNNING_SPLITS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardRunningSplits({});
  */
 export const mlbStatcastLeaderboardRunningSplits: WrapperFn = (params = {}) => callFlat(LEADERBOARD_RUNNING_SPLITS_DEF, params);
@@ -1533,8 +1533,8 @@ const LEADERBOARD_SPIN_DIRECTION_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSpinDirection({});
  */
 export const mlbStatcastLeaderboardSpinDirection: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SPIN_DIRECTION_DEF, params);
@@ -1581,8 +1581,8 @@ const LEADERBOARD_SPRINT_SPEED_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSprintSpeed({});
  */
 export const mlbStatcastLeaderboardSprintSpeed: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SPRINT_SPEED_DEF, params);
@@ -1629,8 +1629,8 @@ const LEADERBOARD_SWING_PATH_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingPath({});
  */
 export const mlbStatcastLeaderboardSwingPath: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SWING_PATH_DEF, params);
@@ -1677,8 +1677,8 @@ const LEADERBOARD_SWING_TAKE_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTake({});
  */
 export const mlbStatcastLeaderboardSwingTake: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SWING_TAKE_DEF, params);
@@ -1725,8 +1725,8 @@ const LEADERBOARD_SWING_TIMING_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardSwingTiming({});
  */
 export const mlbStatcastLeaderboardSwingTiming: WrapperFn = (params = {}) => callFlat(LEADERBOARD_SWING_TIMING_DEF, params);
@@ -1773,8 +1773,8 @@ const LEADERBOARD_TIMER_INFRACTIONS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardTimerInfractions({});
  */
 export const mlbStatcastLeaderboardTimerInfractions: WrapperFn = (params = {}) => callFlat(LEADERBOARD_TIMER_INFRACTIONS_DEF, params);
@@ -1821,8 +1821,8 @@ const LEADERBOARD_YEAR_TO_YEAR_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.team - query parameter.
  * @param params.csv - query parameter — default `true`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastLeaderboardYearToYear({});
  */
 export const mlbStatcastLeaderboardYearToYear: WrapperFn = (params = {}) => callFlat(LEADERBOARD_YEAR_TO_YEAR_DEF, params);
@@ -1853,8 +1853,8 @@ const SCHEDULE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://baseballsavant.mlb.com/schedule`
  *
  * @param params.date - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatcastSchedule({});
  */
 export const mlbStatcastSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);

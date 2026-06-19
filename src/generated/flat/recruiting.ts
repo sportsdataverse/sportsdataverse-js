@@ -44,9 +44,9 @@ const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
  * @param params.ranking_key - path parameter.
  * @param params.page_size - query parameter (`pagesize`) — default `3`.
  * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingArchivedPlayerRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingArchivedPlayerRankings({ ranking_key: '…' });
  */
 export const recruitingArchivedPlayerRankings: WrapperFn = (params = {}) => callFlat(ARCHIVED_PLAYER_RANKINGS_DEF, params);
 /** snake_case alias of {@link recruitingArchivedPlayerRankings} (py/R parity). */
@@ -82,9 +82,9 @@ const BIGGEST_MOVERS_DEF: WrapperDef = {
  *
  * @param params.ranking_key - path parameter.
  * @param params.page_size - query parameter (`pageSize`) — default `10`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingBiggestMovers({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingBiggestMovers({ ranking_key: '…' });
  */
 export const recruitingBiggestMovers: WrapperFn = (params = {}) => callFlat(BIGGEST_MOVERS_DEF, params);
 /** snake_case alias of {@link recruitingBiggestMovers} (py/R parity). */
@@ -131,8 +131,8 @@ const COACHES_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.page - query parameter — default `1`.
  * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingCoaches({});
  */
 export const recruitingCoaches: WrapperFn = (params = {}) => callFlat(COACHES_DEF, params);
@@ -183,9 +183,9 @@ const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
  * @param params.sport_key - path parameter.
  * @param params.page - query parameter — default `1`.
  * @param params.page_size - query parameter (`pageSize`) — default `10`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingCurrentTargetPredictions({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingCurrentTargetPredictions({ site_key: '…', year: '…', sport_key: '…' });
  */
 export const recruitingCurrentTargetPredictions: WrapperFn = (params = {}) => callFlat(CURRENT_TARGET_PREDICTIONS_DEF, params);
 /** snake_case alias of {@link recruitingCurrentTargetPredictions} (py/R parity). */
@@ -209,8 +209,8 @@ const INSTITUTION_GROUPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/institutionGroups`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingInstitutionGroups({});
  */
 export const recruitingInstitutionGroups: WrapperFn = (params = {}) => callFlat(INSTITUTION_GROUPS_DEF, params);
@@ -283,9 +283,9 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  * @param params.institutions - query parameter.
  * @param params.page_size - query parameter (`pagesize`) — default `10`.
  * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingInstitutionRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingInstitutionRankings({ sport_key: '…', year: '…' });
  */
 export const recruitingInstitutionRankings: WrapperFn = (params = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
 /** snake_case alias of {@link recruitingInstitutionRankings} (py/R parity). */
@@ -355,8 +355,8 @@ const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.player_sport_rating - query parameter (`playerSportRating`).
  * @param params.page_size - query parameter (`pagesize`).
  * @param params.page - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingPlayerSportRankings({});
  */
 export const recruitingPlayerSportRankings: WrapperFn = (params = {}) => callFlat(PLAYER_SPORT_RANKINGS_DEF, params);
@@ -386,9 +386,9 @@ const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation`
  *
  * @param params.ranking_key - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingPlayersUnderSpecialEvaluation({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingPlayersUnderSpecialEvaluation({ ranking_key: '…' });
  */
 export const recruitingPlayersUnderSpecialEvaluation: WrapperFn = (params = {}) => callFlat(PLAYERS_UNDER_SPECIAL_EVALUATION_DEF, params);
 /** snake_case alias of {@link recruitingPlayersUnderSpecialEvaluation} (py/R parity). */
@@ -428,8 +428,8 @@ const POSITIONS_DEF: WrapperDef = {
  * @param params.ranking_key - query parameter (`rankingKey`).
  * @param params.sport_key - query parameter (`sportKey`).
  * @param params.year - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingPositions({});
  */
 export const recruitingPositions: WrapperFn = (params = {}) => callFlat(POSITIONS_DEF, params);
@@ -475,8 +475,8 @@ const RANKINGS_DEF: WrapperDef = {
  * @param params.sport_key - query parameter (`sportKey`).
  * @param params.ranking_type - query parameter (`rankingType`).
  * @param params.ranking_version - query parameter (`rankingVersion`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRankings({});
  */
 export const recruitingRankings: WrapperFn = (params = {}) => callFlat(RANKINGS_DEF, params);
@@ -517,9 +517,9 @@ const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
  * @param params.sport_key - path parameter.
  * @param params.year - path parameter.
  * @param params.page_size - query parameter (`pageSize`) — default `9`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingRankingsCompositeTeamFeed({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingRankingsCompositeTeamFeed({ sport_key: '…', year: '…' });
  */
 export const recruitingRankingsCompositeTeamFeed: WrapperFn = (params = {}) => callFlat(RANKINGS_COMPOSITE_TEAM_FEED_DEF, params);
 /** snake_case alias of {@link recruitingRankingsCompositeTeamFeed} (py/R parity). */
@@ -559,9 +559,9 @@ const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  * @param params.sport_key - path parameter.
  * @param params.year - path parameter.
  * @param params.page_size - query parameter (`pageSize`) — default `9`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingRankingsTransferPortalPlayerFeed({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingRankingsTransferPortalPlayerFeed({ sport_key: '…', year: '…' });
  */
 export const recruitingRankingsTransferPortalPlayerFeed: WrapperFn = (params = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
 /** snake_case alias of {@link recruitingRankingsTransferPortalPlayerFeed} (py/R parity). */
@@ -601,9 +601,9 @@ const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  * @param params.sport_key - path parameter.
  * @param params.year - path parameter.
  * @param params.page_size - query parameter (`pageSize`) — default `9`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingRankingsTransferPortalTeamFeed({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingRankingsTransferPortalTeamFeed({ sport_key: '…', year: '…' });
  */
 export const recruitingRankingsTransferPortalTeamFeed: WrapperFn = (params = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF, params);
 /** snake_case alias of {@link recruitingRankingsTransferPortalTeamFeed} (py/R parity). */
@@ -655,8 +655,8 @@ const RECRUITS_DEF: WrapperDef = {
  * @param params.min_date - query parameter (`minDate`).
  * @param params.page - query parameter — default `1`.
  * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRecruits({});
  */
 export const recruitingRecruits: WrapperFn = (params = {}) => callFlat(RECRUITS_DEF, params);
@@ -686,9 +686,9 @@ const SPORT_YEARS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/sports/{sport_key}/year`
  *
  * @param params.sport_key - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingSportYears({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingSportYears({ sport_key: '…' });
  */
 export const recruitingSportYears: WrapperFn = (params = {}) => callFlat(SPORT_YEARS_DEF, params);
 /** snake_case alias of {@link recruitingSportYears} (py/R parity). */
@@ -718,8 +718,8 @@ const SPORTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/sports`
  *
  * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingSports({});
  */
 export const recruitingSports: WrapperFn = (params = {}) => callFlat(SPORTS_DEF, params);
@@ -756,8 +756,8 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  *
  * @param params.default_name - query parameter (`defaultName`).
  * @param params.items - query parameter — default `100`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTagsAutocomplete({});
  */
 export const recruitingTagsAutocomplete: WrapperFn = (params = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
@@ -800,9 +800,9 @@ const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
  * @param params.prefixed_key - path parameter.
  * @param params.page - query parameter — default `1`.
  * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingTagsPhotosByKey({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingTagsPhotosByKey({ prefixed_key: '…' });
  */
 export const recruitingTagsPhotosByKey: WrapperFn = (params = {}) => callFlat(TAGS_PHOTOS_BY_KEY_DEF, params);
 /** snake_case alias of {@link recruitingTagsPhotosByKey} (py/R parity). */
@@ -848,9 +848,9 @@ const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
  * @param params.key - path parameter.
  * @param params.page - query parameter — default `1`.
  * @param params.page_size - query parameter (`pageSize`) — default `25`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingTagsPhotosByType({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingTagsPhotosByType({ type: '…', key: '…' });
  */
 export const recruitingTagsPhotosByType: WrapperFn = (params = {}) => callFlat(TAGS_PHOTOS_BY_TYPE_DEF, params);
 /** snake_case alias of {@link recruitingTagsPhotosByType} (py/R parity). */
@@ -890,8 +890,8 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.sport_key - query parameter (`sportKey`).
  * @param params.year - query parameter.
  * @param params.institution_type - query parameter (`institutionType`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTeams({});
  */
 export const recruitingTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
@@ -962,8 +962,8 @@ const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.player_sport_rating - query parameter (`playerSportRating`).
  * @param params.page_size - query parameter (`pagesize`).
  * @param params.page - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTransferPlayerSportRankings({});
  */
 export const recruitingTransferPlayerSportRankings: WrapperFn = (params = {}) => callFlat(TRANSFER_PLAYER_SPORT_RANKINGS_DEF, params);
@@ -1039,8 +1039,8 @@ const TRANSFERS_DEF: WrapperDef = {
  * @param params.status - query parameter.
  * @param params.page_size - query parameter (`pageSize`).
  * @param params.page - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTransfers({});
  */
 export const recruitingTransfers: WrapperFn = (params = {}) => callFlat(TRANSFERS_DEF, params);
@@ -1116,8 +1116,8 @@ const UNRANKED_RECRUITS_DEF: WrapperDef = {
  * @param params.list_type - query parameter (`listType`).
  * @param params.page_size - query parameter (`pagesize`).
  * @param params.page - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingUnrankedRecruits({});
  */
 export const recruitingUnrankedRecruits: WrapperFn = (params = {}) => callFlat(UNRANKED_RECRUITS_DEF, params);
@@ -1169,9 +1169,9 @@ const UNRANKED_TRANSFERS_DEF: WrapperDef = {
  * @param params.position_abbreviation - query parameter (`positionAbbreviation`).
  * @param params.page_size - query parameter (`pagesize`).
  * @param params.page - query parameter — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.recruiting.recruitingUnrankedTransfers({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.recruiting.recruitingUnrankedTransfers({ ranking_key: '…' });
  */
 export const recruitingUnrankedTransfers: WrapperFn = (params = {}) => callFlat(UNRANKED_TRANSFERS_DEF, params);
 /** snake_case alias of {@link recruitingUnrankedTransfers} (py/R parity). */
@@ -1201,8 +1201,8 @@ const YEAR_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.247sports.com/rdb/v1/year`
  *
  * @param params.ranking_key - query parameter (`rankingKey`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingYear({});
  */
 export const recruitingYear: WrapperFn = (params = {}) => callFlat(YEAR_DEF, params);

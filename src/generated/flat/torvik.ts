@@ -31,9 +31,9 @@ const GAME_SCHEDULE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://barttorvik.com/{year}_super_sked.json`
  *
  * @param params.year - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.torvik.torvikGameSchedule({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.torvik.torvikGameSchedule({ year: '…' });
  */
 export const torvikGameSchedule: WrapperFn = (params = {}) => callFlat(GAME_SCHEDULE_DEF, params);
 /** snake_case alias of {@link torvikGameSchedule} (py/R parity). */
@@ -69,8 +69,8 @@ const GAME_STATS_DEF: WrapperDef = {
  *
  * @param params.year - query parameter.
  * @param params.json - query parameter — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikGameStats({});
  */
 export const torvikGameStats: WrapperFn = (params = {}) => callFlat(GAME_STATS_DEF, params);
@@ -107,8 +107,8 @@ const PLAYER_STATS_DEF: WrapperDef = {
  *
  * @param params.year - query parameter.
  * @param params.csv - query parameter — default `1`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.torvik.torvikPlayerStats({});
  */
 export const torvikPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER_STATS_DEF, params);
@@ -138,9 +138,9 @@ const RATINGS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://barttorvik.com/{year}_team_results.csv`
  *
  * @param params.year - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.torvik.torvikRatings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.torvik.torvikRatings({ year: '…' });
  */
 export const torvikRatings: WrapperFn = (params = {}) => callFlat(RATINGS_DEF, params);
 /** snake_case alias of {@link torvikRatings} (py/R parity). */
@@ -169,9 +169,9 @@ const TEAM_FACTORS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://barttorvik.com/{year}_fffinal.csv`
  *
  * @param params.year - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.torvik.torvikTeamFactors({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.torvik.torvikTeamFactors({ year: '…' });
  */
 export const torvikTeamFactors: WrapperFn = (params = {}) => callFlat(TEAM_FACTORS_DEF, params);
 /** snake_case alias of {@link torvikTeamFactors} (py/R parity). */

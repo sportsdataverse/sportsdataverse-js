@@ -57,9 +57,9 @@ const EVENT_MARKETS_DEF: WrapperDef = {
  * @param params.regions - query parameter — default `us`.
  * @param params.bookmakers - query parameter.
  * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiEventMarkets({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiEventMarkets({ sport_key: '…', event_id: '…' });
  */
 export const oddsApiEventMarkets: WrapperFn = (params = {}) => callFlat(EVENT_MARKETS_DEF, params);
 /** snake_case alias of {@link oddsApiEventMarkets} (py/R parity). */
@@ -125,9 +125,9 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.odds_format - query parameter (`oddsFormat`).
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.bookmakers - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiEventOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiEventOdds({ sport_key: '…', event_id: '…' });
  */
 export const oddsApiEventOdds: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_DEF, params);
 /** snake_case alias of {@link oddsApiEventOdds} (py/R parity). */
@@ -198,9 +198,9 @@ const EVENT_ODDS_HISTORY_DEF: WrapperDef = {
  * @param params.odds_format - query parameter (`oddsFormat`).
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.bookmakers - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiEventOddsHistory({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiEventOddsHistory({ sport_key: '…', event_id: '…' });
  */
 export const oddsApiEventOddsHistory: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiEventOddsHistory} (py/R parity). */
@@ -235,8 +235,8 @@ const SPORTS_DEF: WrapperDef = {
  *
  * @param params.api_key - query parameter (`apiKey`).
  * @param params.all - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.odds.oddsApiSports({});
  */
 export const oddsApiSports: WrapperFn = (params = {}) => callFlat(SPORTS_DEF, params);
@@ -292,9 +292,9 @@ const SPORTS_EVENTS_DEF: WrapperDef = {
  * @param params.event_ids - query parameter (`eventIds`).
  * @param params.commence_time_from - query parameter (`commenceTimeFrom`).
  * @param params.commence_time_to - query parameter (`commenceTimeTo`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiSportsEvents({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiSportsEvents({ sport_key: '…' });
  */
 export const oddsApiSportsEvents: WrapperFn = (params = {}) => callFlat(SPORTS_EVENTS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsEvents} (py/R parity). */
@@ -354,9 +354,9 @@ const SPORTS_EVENTS_HISTORY_DEF: WrapperDef = {
  * @param params.event_ids - query parameter (`eventIds`).
  * @param params.commence_time_from - query parameter (`commenceTimeFrom`).
  * @param params.commence_time_to - query parameter (`commenceTimeTo`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiSportsEventsHistory({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiSportsEventsHistory({ sport_key: '…' });
  */
 export const oddsApiSportsEventsHistory: WrapperFn = (params = {}) => callFlat(SPORTS_EVENTS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiSportsEventsHistory} (py/R parity). */
@@ -433,9 +433,9 @@ const SPORTS_ODDS_DEF: WrapperDef = {
  * @param params.bookmakers - query parameter.
  * @param params.commence_time_from - query parameter (`commenceTimeFrom`).
  * @param params.commence_time_to - query parameter (`commenceTimeTo`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiSportsOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiSportsOdds({ sport_key: '…' });
  */
 export const oddsApiSportsOdds: WrapperFn = (params = {}) => callFlat(SPORTS_ODDS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsOdds} (py/R parity). */
@@ -507,9 +507,9 @@ const SPORTS_ODDS_HISTORY_DEF: WrapperDef = {
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.event_ids - query parameter (`eventIds`).
  * @param params.bookmakers - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiSportsOddsHistory({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiSportsOddsHistory({ sport_key: '…' });
  */
 export const oddsApiSportsOddsHistory: WrapperFn = (params = {}) => callFlat(SPORTS_ODDS_HISTORY_DEF, params);
 /** snake_case alias of {@link oddsApiSportsOddsHistory} (py/R parity). */
@@ -544,9 +544,9 @@ const SPORTS_PARTICIPANTS_DEF: WrapperDef = {
  *
  * @param params.sport_key - path parameter.
  * @param params.api_key - query parameter (`apiKey`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiSportsParticipants({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiSportsParticipants({ sport_key: '…' });
  */
 export const oddsApiSportsParticipants: WrapperFn = (params = {}) => callFlat(SPORTS_PARTICIPANTS_DEF, params);
 /** snake_case alias of {@link oddsApiSportsParticipants} (py/R parity). */
@@ -596,9 +596,9 @@ const SPORTS_SCORES_DEF: WrapperDef = {
  * @param params.days_from - query parameter (`daysFrom`).
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.event_ids - query parameter (`eventIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.odds.oddsApiSportsScores({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.odds.oddsApiSportsScores({ sport_key: '…' });
  */
 export const oddsApiSportsScores: WrapperFn = (params = {}) => callFlat(SPORTS_SCORES_DEF, params);
 /** snake_case alias of {@link oddsApiSportsScores} (py/R parity). */

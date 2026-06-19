@@ -31,9 +31,9 @@ const BASEBALL_PLAYER_META_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/player/meta/baseball/{player_id}`
  *
  * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsBaseballPlayerMeta({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsBaseballPlayerMeta({ player_id: '…' });
  */
 export const cbsBaseballPlayerMeta: WrapperFn = (params = {}) => callFlat(BASEBALL_PLAYER_META_DEF, params);
 /** snake_case alias of {@link cbsBaseballPlayerMeta} (py/R parity). */
@@ -62,9 +62,9 @@ const BOXSCORE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/boxscore/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsBoxscore({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsBoxscore({ game_id: '…' });
  */
 export const cbsBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link cbsBoxscore} (py/R parity). */
@@ -124,8 +124,8 @@ const BULK_DEF: WrapperDef = {
  * @param params.event_resource - query parameter (`EventResource`).
  * @param params.featured_game_resource - query parameter (`FeaturedGameResource`).
  * @param params.golf_event_markets_resource - query parameter (`GolfEventMarketsResource`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsBulk({});
  */
 export const cbsBulk: WrapperFn = (params = {}) => callFlat(BULK_DEF, params);
@@ -176,9 +176,9 @@ const CLIENT_CONFIGURATION_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`leagueId`).
  * @param params.classifier - query parameter.
  * @param params.key_name - query parameter (`keyName`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsClientConfiguration({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsClientConfiguration({ client_name: '…' });
  */
 export const cbsClientConfiguration: WrapperFn = (params = {}) => callFlat(CLIENT_CONFIGURATION_DEF, params);
 /** snake_case alias of {@link cbsClientConfiguration} (py/R parity). */
@@ -207,9 +207,9 @@ const COACH_RANKINGS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/coach/rankings/{coach_id}`
  *
  * @param params.coach_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsCoachRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsCoachRankings({ coach_id: '…' });
  */
 export const cbsCoachRankings: WrapperFn = (params = {}) => callFlat(COACH_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsCoachRankings} (py/R parity). */
@@ -244,9 +244,9 @@ const COACH_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  *
  * @param params.coach_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsCoachTeamAssociations({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsCoachTeamAssociations({ coach_id: '…' });
  */
 export const cbsCoachTeamAssociations: WrapperFn = (params = {}) => callFlat(COACH_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsCoachTeamAssociations} (py/R parity). */
@@ -286,9 +286,9 @@ const DEPTH_CHARTS_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.position - query parameter.
  * @param params.pitch_pos - query parameter (`pitchPos`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsDepthCharts({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsDepthCharts({ player_id: '…' });
  */
 export const cbsDepthCharts: WrapperFn = (params = {}) => callFlat(DEPTH_CHARTS_DEF, params);
 /** snake_case alias of {@link cbsDepthCharts} (py/R parity). */
@@ -312,8 +312,8 @@ const ENDPOINT_REGISTRY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://api.cbssports.com/resource/endpoint/registry`
  *
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.cbs.cbsEndpointRegistry({});
  */
 export const cbsEndpointRegistry: WrapperFn = (params = {}) => callFlat(ENDPOINT_REGISTRY_DEF, params);
@@ -354,9 +354,9 @@ const EVENT_DEF: WrapperDef = {
  * @param params.event_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsEvent({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsEvent({ event_id: '…' });
  */
 export const cbsEvent: WrapperFn = (params = {}) => callFlat(EVENT_DEF, params);
 /** snake_case alias of {@link cbsEvent} (py/R parity). */
@@ -385,9 +385,9 @@ const EVENT_ENTRANTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/event/entrants/{event_id}`
  *
  * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsEventEntrants({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsEventEntrants({ event_id: '…' });
  */
 export const cbsEventEntrants: WrapperFn = (params = {}) => callFlat(EVENT_ENTRANTS_DEF, params);
 /** snake_case alias of {@link cbsEventEntrants} (py/R parity). */
@@ -416,9 +416,9 @@ const EVENT_LEADERBOARD_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/event/leaderboard/{event_id}`
  *
  * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsEventLeaderboard({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsEventLeaderboard({ event_id: '…' });
  */
 export const cbsEventLeaderboard: WrapperFn = (params = {}) => callFlat(EVENT_LEADERBOARD_DEF, params);
 /** snake_case alias of {@link cbsEventLeaderboard} (py/R parity). */
@@ -447,9 +447,9 @@ const EVENT_SEASONS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/event/seasons/{event_id}`
  *
  * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsEventSeasons({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsEventSeasons({ event_id: '…' });
  */
 export const cbsEventSeasons: WrapperFn = (params = {}) => callFlat(EVENT_SEASONS_DEF, params);
 /** snake_case alias of {@link cbsEventSeasons} (py/R parity). */
@@ -478,9 +478,9 @@ const EVENT_VENUES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/event/venues/{event_id}`
  *
  * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsEventVenues({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsEventVenues({ event_id: '…' });
  */
 export const cbsEventVenues: WrapperFn = (params = {}) => callFlat(EVENT_VENUES_DEF, params);
 /** snake_case alias of {@link cbsEventVenues} (py/R parity). */
@@ -509,9 +509,9 @@ const FEATURED_GAME_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/featured/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsFeaturedGame({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsFeaturedGame({ game_id: '…' });
  */
 export const cbsFeaturedGame: WrapperFn = (params = {}) => callFlat(FEATURED_GAME_DEF, params);
 /** snake_case alias of {@link cbsFeaturedGame} (py/R parity). */
@@ -551,9 +551,9 @@ const GAME_DEF: WrapperDef = {
  * @param params.game_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGame({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGame({ game_id: '…' });
  */
 export const cbsGame: WrapperFn = (params = {}) => callFlat(GAME_DEF, params);
 /** snake_case alias of {@link cbsGame} (py/R parity). */
@@ -582,9 +582,9 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/bettingSplits/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameBettingSplits({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameBettingSplits({ game_id: '…' });
  */
 export const cbsGameBettingSplits: WrapperFn = (params = {}) => callFlat(GAME_BETTING_SPLITS_DEF, params);
 /** snake_case alias of {@link cbsGameBettingSplits} (py/R parity). */
@@ -613,9 +613,9 @@ const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/content/preview/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameContentPreview({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameContentPreview({ game_id: '…' });
  */
 export const cbsGameContentPreview: WrapperFn = (params = {}) => callFlat(GAME_CONTENT_PREVIEW_DEF, params);
 /** snake_case alias of {@link cbsGameContentPreview} (py/R parity). */
@@ -644,9 +644,9 @@ const GAME_CONTENT_RECAP_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/content/recap/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameContentRecap({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameContentRecap({ game_id: '…' });
  */
 export const cbsGameContentRecap: WrapperFn = (params = {}) => callFlat(GAME_CONTENT_RECAP_DEF, params);
 /** snake_case alias of {@link cbsGameContentRecap} (py/R parity). */
@@ -681,9 +681,9 @@ const GAME_CONTENT_STORY_DEF: WrapperDef = {
  *
  * @param params.game_id - path parameter.
  * @param params.game_ids_story_tags - query parameter (`gameIdsStoryTags`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameContentStory({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameContentStory({ game_id: '…' });
  */
 export const cbsGameContentStory: WrapperFn = (params = {}) => callFlat(GAME_CONTENT_STORY_DEF, params);
 /** snake_case alias of {@link cbsGameContentStory} (py/R parity). */
@@ -712,9 +712,9 @@ const GAME_HQ_ODDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/odds/hq/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameHqOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameHqOdds({ game_id: '…' });
  */
 export const cbsGameHqOdds: WrapperFn = (params = {}) => callFlat(GAME_HQ_ODDS_DEF, params);
 /** snake_case alias of {@link cbsGameHqOdds} (py/R parity). */
@@ -749,9 +749,9 @@ const GAME_LINEUP_DEF: WrapperDef = {
  *
  * @param params.game_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameLineup({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameLineup({ game_id: '…' });
  */
 export const cbsGameLineup: WrapperFn = (params = {}) => callFlat(GAME_LINEUP_DEF, params);
 /** snake_case alias of {@link cbsGameLineup} (py/R parity). */
@@ -806,9 +806,9 @@ const GAME_ODDS_DEF: WrapperDef = {
  * @param params.state - query parameter.
  * @param params.model - query parameter.
  * @param params.show_hidden_odds - query parameter (`showHiddenOdds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameOdds({ game_id: '…' });
  */
 export const cbsGameOdds: WrapperFn = (params = {}) => callFlat(GAME_ODDS_DEF, params);
 /** snake_case alias of {@link cbsGameOdds} (py/R parity). */
@@ -837,9 +837,9 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/outcomes/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameOutcomes({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameOutcomes({ game_id: '…' });
  */
 export const cbsGameOutcomes: WrapperFn = (params = {}) => callFlat(GAME_OUTCOMES_DEF, params);
 /** snake_case alias of {@link cbsGameOutcomes} (py/R parity). */
@@ -894,9 +894,9 @@ const GAME_PROPS_DEF: WrapperDef = {
  * @param params.prop_bet_types - query parameter (`propBetTypes`).
  * @param params.state - query parameter.
  * @param params.include_inactive_markets - query parameter (`includeInactiveMarkets`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameProps({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameProps({ game_id: '…' });
  */
 export const cbsGameProps: WrapperFn = (params = {}) => callFlat(GAME_PROPS_DEF, params);
 /** snake_case alias of {@link cbsGameProps} (py/R parity). */
@@ -925,9 +925,9 @@ const GAME_RTWP_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/rtwp/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameRtwp({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameRtwp({ game_id: '…' });
  */
 export const cbsGameRtwp: WrapperFn = (params = {}) => callFlat(GAME_RTWP_DEF, params);
 /** snake_case alias of {@link cbsGameRtwp} (py/R parity). */
@@ -956,9 +956,9 @@ const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/boxscores/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringBoxscores({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringBoxscores({ game_id: '…' });
  */
 export const cbsGameScoringBoxscores: WrapperFn = (params = {}) => callFlat(GAME_SCORING_BOXSCORES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringBoxscores} (py/R parity). */
@@ -987,9 +987,9 @@ const GAME_SCORING_DRIVES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/drives/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringDrives({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringDrives({ game_id: '…' });
  */
 export const cbsGameScoringDrives: WrapperFn = (params = {}) => callFlat(GAME_SCORING_DRIVES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringDrives} (py/R parity). */
@@ -1018,9 +1018,9 @@ const GAME_SCORING_LEADERS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/leaders/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringLeaders({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringLeaders({ game_id: '…' });
  */
 export const cbsGameScoringLeaders: WrapperFn = (params = {}) => callFlat(GAME_SCORING_LEADERS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringLeaders} (py/R parity). */
@@ -1049,9 +1049,9 @@ const GAME_SCORING_PLAYER_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/playerStats/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringPlayerStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringPlayerStats({ game_id: '…' });
  */
 export const cbsGameScoringPlayerStats: WrapperFn = (params = {}) => callFlat(GAME_SCORING_PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringPlayerStats} (py/R parity). */
@@ -1080,9 +1080,9 @@ const GAME_SCORING_PLAYS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/plays/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringPlays({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringPlays({ game_id: '…' });
  */
 export const cbsGameScoringPlays: WrapperFn = (params = {}) => callFlat(GAME_SCORING_PLAYS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringPlays} (py/R parity). */
@@ -1111,9 +1111,9 @@ const GAME_SCORING_ROSTERS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/rosters/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringRosters({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringRosters({ game_id: '…' });
  */
 export const cbsGameScoringRosters: WrapperFn = (params = {}) => callFlat(GAME_SCORING_ROSTERS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringRosters} (py/R parity). */
@@ -1142,9 +1142,9 @@ const GAME_SCORING_SCOREBOARD_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/scoreboard/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringScoreboard({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringScoreboard({ game_id: '…' });
  */
 export const cbsGameScoringScoreboard: WrapperFn = (params = {}) => callFlat(GAME_SCORING_SCOREBOARD_DEF, params);
 /** snake_case alias of {@link cbsGameScoringScoreboard} (py/R parity). */
@@ -1173,9 +1173,9 @@ const GAME_SCORING_SCORES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/scores/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringScores({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringScores({ game_id: '…' });
  */
 export const cbsGameScoringScores: WrapperFn = (params = {}) => callFlat(GAME_SCORING_SCORES_DEF, params);
 /** snake_case alias of {@link cbsGameScoringScores} (py/R parity). */
@@ -1204,9 +1204,9 @@ const GAME_SCORING_TEAM_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/teamStats/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringTeamStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringTeamStats({ game_id: '…' });
  */
 export const cbsGameScoringTeamStats: WrapperFn = (params = {}) => callFlat(GAME_SCORING_TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringTeamStats} (py/R parity). */
@@ -1235,9 +1235,9 @@ const GAME_SCORING_WINPROB_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/winprob/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringWinprob({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringWinprob({ game_id: '…' });
  */
 export const cbsGameScoringWinprob: WrapperFn = (params = {}) => callFlat(GAME_SCORING_WINPROB_DEF, params);
 /** snake_case alias of {@link cbsGameScoringWinprob} (py/R parity). */
@@ -1266,9 +1266,9 @@ const GAME_SCORING_YTD_PLAYER_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/ytdPlayerStats/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringYtdPlayerStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringYtdPlayerStats({ game_id: '…' });
  */
 export const cbsGameScoringYtdPlayerStats: WrapperFn = (params = {}) => callFlat(GAME_SCORING_YTD_PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringYtdPlayerStats} (py/R parity). */
@@ -1297,9 +1297,9 @@ const GAME_SCORING_YTD_TEAM_STATS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/ytdTeamStats/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameScoringYtdTeamStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameScoringYtdTeamStats({ game_id: '…' });
  */
 export const cbsGameScoringYtdTeamStats: WrapperFn = (params = {}) => callFlat(GAME_SCORING_YTD_TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsGameScoringYtdTeamStats} (py/R parity). */
@@ -1328,9 +1328,9 @@ const GAME_TICKET_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/ticket/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameTicket({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameTicket({ game_id: '…' });
  */
 export const cbsGameTicket: WrapperFn = (params = {}) => callFlat(GAME_TICKET_DEF, params);
 /** snake_case alias of {@link cbsGameTicket} (py/R parity). */
@@ -1359,9 +1359,9 @@ const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/golf/event/markets/{event_id}`
  *
  * @param params.event_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGolfEventMarkets({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGolfEventMarkets({ event_id: '…' });
  */
 export const cbsGolfEventMarkets: WrapperFn = (params = {}) => callFlat(GOLF_EVENT_MARKETS_DEF, params);
 /** snake_case alias of {@link cbsGolfEventMarkets} (py/R parity). */
@@ -1396,9 +1396,9 @@ const GOLF_PLAYER_MARKETS_DEF: WrapperDef = {
  *
  * @param params.player_id - path parameter.
  * @param params.event_id - query parameter (`eventId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGolfPlayerMarkets({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGolfPlayerMarkets({ player_id: '…' });
  */
 export const cbsGolfPlayerMarkets: WrapperFn = (params = {}) => callFlat(GOLF_PLAYER_MARKETS_DEF, params);
 /** snake_case alias of {@link cbsGolfPlayerMarkets} (py/R parity). */
@@ -1438,9 +1438,9 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
  * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGolferResults({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGolferResults({ player_id: '…' });
  */
 export const cbsGolferResults: WrapperFn = (params = {}) => callFlat(GOLFER_RESULTS_DEF, params);
 /** snake_case alias of {@link cbsGolferResults} (py/R parity). */
@@ -1469,9 +1469,9 @@ const HOCKEY_PLAYER_META_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/player/hockey/meta/{player_id}`
  *
  * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsHockeyPlayerMeta({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsHockeyPlayerMeta({ player_id: '…' });
  */
 export const cbsHockeyPlayerMeta: WrapperFn = (params = {}) => callFlat(HOCKEY_PLAYER_META_DEF, params);
 /** snake_case alias of {@link cbsHockeyPlayerMeta} (py/R parity). */
@@ -1506,9 +1506,9 @@ const LEAGUE_DEF: WrapperDef = {
  *
  * @param params.league_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsLeague({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsLeague({ league_id: '…' });
  */
 export const cbsLeague: WrapperFn = (params = {}) => callFlat(LEAGUE_DEF, params);
 /** snake_case alias of {@link cbsLeague} (py/R parity). */
@@ -1543,9 +1543,9 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  *
  * @param params.league_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsLeagueTeams({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsLeagueTeams({ league_id: '…' });
  */
 export const cbsLeagueTeams: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
 /** snake_case alias of {@link cbsLeagueTeams} (py/R parity). */
@@ -1574,9 +1574,9 @@ const ODDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/odds/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsOdds({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsOdds({ game_id: '…' });
  */
 export const cbsOdds: WrapperFn = (params = {}) => callFlat(ODDS_DEF, params);
 /** snake_case alias of {@link cbsOdds} (py/R parity). */
@@ -1621,9 +1621,9 @@ const PLAYER_DEF: WrapperDef = {
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.year - query parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayer({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayer({ player_id: '…' });
  */
 export const cbsPlayer: WrapperFn = (params = {}) => callFlat(PLAYER_DEF, params);
 /** snake_case alias of {@link cbsPlayer} (py/R parity). */
@@ -1652,9 +1652,9 @@ const PLAYER_COMBINE_DATA_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/player/combineData/{player_id}`
  *
  * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerCombineData({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerCombineData({ player_id: '…' });
  */
 export const cbsPlayerCombineData: WrapperFn = (params = {}) => callFlat(PLAYER_COMBINE_DATA_DEF, params);
 /** snake_case alias of {@link cbsPlayerCombineData} (py/R parity). */
@@ -1699,9 +1699,9 @@ const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
  * @param params.season_year - query parameter (`seasonYear`).
  * @param params.season_type - query parameter (`seasonType`).
  * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerDraftInfo({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerDraftInfo({ player_id: '…' });
  */
 export const cbsPlayerDraftInfo: WrapperFn = (params = {}) => callFlat(PLAYER_DRAFT_INFO_DEF, params);
 /** snake_case alias of {@link cbsPlayerDraftInfo} (py/R parity). */
@@ -1741,9 +1741,9 @@ const PLAYER_ENCYCLOPEDIA_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
  * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerEncyclopedia({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerEncyclopedia({ player_id: '…' });
  */
 export const cbsPlayerEncyclopedia: WrapperFn = (params = {}) => callFlat(PLAYER_ENCYCLOPEDIA_DEF, params);
 /** snake_case alias of {@link cbsPlayerEncyclopedia} (py/R parity). */
@@ -1772,9 +1772,9 @@ const PLAYER_FUTURES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/player/futures/{player_id}`
  *
  * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerFutures({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerFutures({ player_id: '…' });
  */
 export const cbsPlayerFutures: WrapperFn = (params = {}) => callFlat(PLAYER_FUTURES_DEF, params);
 /** snake_case alias of {@link cbsPlayerFutures} (py/R parity). */
@@ -1819,9 +1819,9 @@ const PLAYER_GAME_STATS_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`gameId`).
  * @param params.season_year - query parameter (`seasonYear`).
  * @param params.season_type - query parameter (`seasonType`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerGameStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerGameStats({ player_id: '…' });
  */
 export const cbsPlayerGameStats: WrapperFn = (params = {}) => callFlat(PLAYER_GAME_STATS_DEF, params);
 /** snake_case alias of {@link cbsPlayerGameStats} (py/R parity). */
@@ -1850,9 +1850,9 @@ const PLAYER_GOLF_METADATA_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/player/meta/golf/{player_id}`
  *
  * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerGolfMetadata({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerGolfMetadata({ player_id: '…' });
  */
 export const cbsPlayerGolfMetadata: WrapperFn = (params = {}) => callFlat(PLAYER_GOLF_METADATA_DEF, params);
 /** snake_case alias of {@link cbsPlayerGolfMetadata} (py/R parity). */
@@ -1887,9 +1887,9 @@ const PLAYER_INJURIES_DEF: WrapperDef = {
  *
  * @param params.player_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerInjuries({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerInjuries({ player_id: '…' });
  */
 export const cbsPlayerInjuries: WrapperFn = (params = {}) => callFlat(PLAYER_INJURIES_DEF, params);
 /** snake_case alias of {@link cbsPlayerInjuries} (py/R parity). */
@@ -1924,9 +1924,9 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
  *
  * @param params.player_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerOutlook({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerOutlook({ player_id: '…' });
  */
 export const cbsPlayerOutlook: WrapperFn = (params = {}) => callFlat(PLAYER_OUTLOOK_DEF, params);
 /** snake_case alias of {@link cbsPlayerOutlook} (py/R parity). */
@@ -1981,9 +1981,9 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
  * @param params.season_id - query parameter (`seasonId`).
  * @param params.is_current - query parameter (`isCurrent`).
  * @param params.categories - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerRankings({ player_id: '…' });
  */
 export const cbsPlayerRankings: WrapperFn = (params = {}) => callFlat(PLAYER_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerRankings} (py/R parity). */
@@ -2038,9 +2038,9 @@ const PLAYER_STANDINGS_DEF: WrapperDef = {
  * @param params.season_id - query parameter (`seasonId`).
  * @param params.is_current - query parameter (`isCurrent`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerStandings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerStandings({ player_id: '…' });
  */
 export const cbsPlayerStandings: WrapperFn = (params = {}) => callFlat(PLAYER_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerStandings} (py/R parity). */
@@ -2105,9 +2105,9 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.team_id - query parameter (`teamId`).
  * @param params.team_abbr - query parameter (`teamAbbr`).
  * @param params.is_total - query parameter (`isTotal`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerStats({ player_id: '…' });
  */
 export const cbsPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER_STATS_DEF, params);
 /** snake_case alias of {@link cbsPlayerStats} (py/R parity). */
@@ -2152,9 +2152,9 @@ const PLAYER_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  * @param params.assoc_type - query parameter (`assocType`).
  * @param params.roster_status - query parameter (`rosterStatus`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerTeamAssociations({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerTeamAssociations({ player_id: '…' });
  */
 export const cbsPlayerTeamAssociations: WrapperFn = (params = {}) => callFlat(PLAYER_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerTeamAssociations} (py/R parity). */
@@ -2209,9 +2209,9 @@ const PLAYER_TRANSACTIONS_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`seasonType`).
  * @param params.season_id - query parameter (`seasonId`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerTransactions({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerTransactions({ player_id: '…' });
  */
 export const cbsPlayerTransactions: WrapperFn = (params = {}) => callFlat(PLAYER_TRANSACTIONS_DEF, params);
 /** snake_case alias of {@link cbsPlayerTransactions} (py/R parity). */
@@ -2246,9 +2246,9 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
  *
  * @param params.player_id - path parameter.
  * @param params.position - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPositionRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPositionRankings({ player_id: '…' });
  */
 export const cbsPositionRankings: WrapperFn = (params = {}) => callFlat(POSITION_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPositionRankings} (py/R parity). */
@@ -2288,9 +2288,9 @@ const PROBABLE_PLAYERS_DEF: WrapperDef = {
  * @param params.game_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsProbablePlayers({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsProbablePlayers({ game_id: '…' });
  */
 export const cbsProbablePlayers: WrapperFn = (params = {}) => callFlat(PROBABLE_PLAYERS_DEF, params);
 /** snake_case alias of {@link cbsProbablePlayers} (py/R parity). */
@@ -2319,9 +2319,9 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/recruit/rankings/{player_id}`
  *
  * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsRecruitRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsRecruitRankings({ player_id: '…' });
  */
 export const cbsRecruitRankings: WrapperFn = (params = {}) => callFlat(RECRUIT_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsRecruitRankings} (py/R parity). */
@@ -2356,9 +2356,9 @@ const RECRUIT_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
  *
  * @param params.player_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsRecruitTeamAssociations({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsRecruitTeamAssociations({ player_id: '…' });
  */
 export const cbsRecruitTeamAssociations: WrapperFn = (params = {}) => callFlat(RECRUIT_TEAM_ASSOCIATIONS_DEF, params);
 /** snake_case alias of {@link cbsRecruitTeamAssociations} (py/R parity). */
@@ -2387,9 +2387,9 @@ const RUWT_HIGHLIGHTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/ruwtHighlights/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsRuwtHighlights({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsRuwtHighlights({ game_id: '…' });
  */
 export const cbsRuwtHighlights: WrapperFn = (params = {}) => callFlat(RUWT_HIGHLIGHTS_DEF, params);
 /** snake_case alias of {@link cbsRuwtHighlights} (py/R parity). */
@@ -2429,9 +2429,9 @@ const SEASON_DEF: WrapperDef = {
  * @param params.season_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSeason({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSeason({ season_id: '…' });
  */
 export const cbsSeason: WrapperFn = (params = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link cbsSeason} (py/R parity). */
@@ -2466,9 +2466,9 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  *
  * @param params.season_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSeasonTeams({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSeasonTeams({ season_id: '…' });
  */
 export const cbsSeasonTeams: WrapperFn = (params = {}) => callFlat(SEASON_TEAMS_DEF, params);
 /** snake_case alias of {@link cbsSeasonTeams} (py/R parity). */
@@ -2503,9 +2503,9 @@ const SPORT_DEF: WrapperDef = {
  *
  * @param params.sport_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSport({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSport({ sport_id: '…' });
  */
 export const cbsSport: WrapperFn = (params = {}) => callFlat(SPORT_DEF, params);
 /** snake_case alias of {@link cbsSport} (py/R parity). */
@@ -2534,9 +2534,9 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/sport/leagues/{sport_id}`
  *
  * @param params.sport_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSportLeagues({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSportLeagues({ sport_id: '…' });
  */
 export const cbsSportLeagues: WrapperFn = (params = {}) => callFlat(SPORT_LEAGUES_DEF, params);
 /** snake_case alias of {@link cbsSportLeagues} (py/R parity). */
@@ -2565,9 +2565,9 @@ const SPORTS_LINE_TEAM_RANKINGS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/team/rankings/sportsline/{team_id}`
  *
  * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSportsLineTeamRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSportsLineTeamRankings({ team_id: '…' });
  */
 export const cbsSportsLineTeamRankings: WrapperFn = (params = {}) => callFlat(SPORTS_LINE_TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsSportsLineTeamRankings} (py/R parity). */
@@ -2602,9 +2602,9 @@ const SPORTS_LINE_TEAM_STANDINGS_DEF: WrapperDef = {
  *
  * @param params.team_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSportsLineTeamStandings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSportsLineTeamStandings({ team_id: '…' });
  */
 export const cbsSportsLineTeamStandings: WrapperFn = (params = {}) => callFlat(SPORTS_LINE_TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsSportsLineTeamStandings} (py/R parity). */
@@ -2644,9 +2644,9 @@ const SUB_DIVISIONS_DEF: WrapperDef = {
  * @param params.division_id - path parameter.
  * @param params.sub_division_id - query parameter (`subDivisionId`).
  * @param params.name - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSubDivisions({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsSubDivisions({ division_id: '…' });
  */
 export const cbsSubDivisions: WrapperFn = (params = {}) => callFlat(SUB_DIVISIONS_DEF, params);
 /** snake_case alias of {@link cbsSubDivisions} (py/R parity). */
@@ -2675,9 +2675,9 @@ const TEAM_FUTURES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/team/futures/{team_id}`
  *
  * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamFutures({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamFutures({ team_id: '…' });
  */
 export const cbsTeamFutures: WrapperFn = (params = {}) => callFlat(TEAM_FUTURES_DEF, params);
 /** snake_case alias of {@link cbsTeamFutures} (py/R parity). */
@@ -2712,9 +2712,9 @@ const TEAM_METADATA_DEF: WrapperDef = {
  *
  * @param params.team_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamMetadata({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamMetadata({ team_id: '…' });
  */
 export const cbsTeamMetadata: WrapperFn = (params = {}) => callFlat(TEAM_METADATA_DEF, params);
 /** snake_case alias of {@link cbsTeamMetadata} (py/R parity). */
@@ -2749,9 +2749,9 @@ const TEAM_PLAYERS_DEF: WrapperDef = {
  *
  * @param params.team_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamPlayers({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamPlayers({ team_id: '…' });
  */
 export const cbsTeamPlayers: WrapperFn = (params = {}) => callFlat(TEAM_PLAYERS_DEF, params);
 /** snake_case alias of {@link cbsTeamPlayers} (py/R parity). */
@@ -2791,9 +2791,9 @@ const TEAM_POLLS_DEF: WrapperDef = {
  * @param params.team_id - path parameter.
  * @param params.polls - query parameter.
  * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamPolls({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamPolls({ team_id: '…' });
  */
 export const cbsTeamPolls: WrapperFn = (params = {}) => callFlat(TEAM_POLLS_DEF, params);
 /** snake_case alias of {@link cbsTeamPolls} (py/R parity). */
@@ -2838,9 +2838,9 @@ const TEAM_RANKINGS_DEF: WrapperDef = {
  * @param params.season_year - query parameter (`seasonYear`).
  * @param params.season_type - query parameter (`seasonType`).
  * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamRankings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamRankings({ team_id: '…' });
  */
 export const cbsTeamRankings: WrapperFn = (params = {}) => callFlat(TEAM_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamRankings} (py/R parity). */
@@ -2895,9 +2895,9 @@ const TEAM_SEASONS_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`seasonType`).
  * @param params.season_id - query parameter (`seasonId`).
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamSeasons({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamSeasons({ team_id: '…' });
  */
 export const cbsTeamSeasons: WrapperFn = (params = {}) => callFlat(TEAM_SEASONS_DEF, params);
 /** snake_case alias of {@link cbsTeamSeasons} (py/R parity). */
@@ -2942,9 +2942,9 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  * @param params.year - query parameter.
  * @param params.season_type - query parameter (`seasonType`).
  * @param params.season_id - query parameter (`seasonId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamStandings({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamStandings({ team_id: '…' });
  */
 export const cbsTeamStandings: WrapperFn = (params = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamStandings} (py/R parity). */
@@ -2994,9 +2994,9 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`seasonType`).
  * @param params.season_id - query parameter (`seasonId`).
  * @param params.is_current - query parameter (`isCurrent`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsTeamStats({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamStats({ team_id: '…' });
  */
 export const cbsTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link cbsTeamStats} (py/R parity). */
@@ -3031,9 +3031,9 @@ const VENUE_DEF: WrapperDef = {
  *
  * @param params.venue_id - path parameter.
  * @param params.resources - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsVenue({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsVenue({ venue_id: '…' });
  */
 export const cbsVenue: WrapperFn = (params = {}) => callFlat(VENUE_DEF, params);
 /** snake_case alias of {@link cbsVenue} (py/R parity). */
@@ -3062,9 +3062,9 @@ const VENUE_METADATA_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/venue/metadata/{venue_id}`
  *
  * @param params.venue_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsVenueMetadata({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsVenueMetadata({ venue_id: '…' });
  */
 export const cbsVenueMetadata: WrapperFn = (params = {}) => callFlat(VENUE_METADATA_DEF, params);
 /** snake_case alias of {@link cbsVenueMetadata} (py/R parity). */
@@ -3093,9 +3093,9 @@ const WEATHER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://api.cbssports.com/resource/game/weather/{game_id}`
  *
  * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
- * @example await sdv.cbs.cbsWeather({});
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsWeather({ game_id: '…' });
  */
 export const cbsWeather: WrapperFn = (params = {}) => callFlat(WEATHER_DEF, params);
 /** snake_case alias of {@link cbsWeather} (py/R parity). */

@@ -50,8 +50,8 @@ const ALIAS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.alias - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooAlias({});
  */
 export const yahooAlias: WrapperFn = (params = {}) => callFlat(ALIAS_DEF, params);
@@ -100,8 +100,8 @@ const ARTICLE_LIST_CARD_PLAYERS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_ids - query parameter (`playerIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooArticleListCardPlayers({});
  */
 export const yahooArticleListCardPlayers: WrapperFn = (params = {}) => callFlat(ARTICLE_LIST_CARD_PLAYERS_DEF, params);
@@ -150,8 +150,8 @@ const ARTICLE_LIST_CARD_TEAMS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_ids - query parameter (`teamIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooArticleListCardTeams({});
  */
 export const yahooArticleListCardTeams: WrapperFn = (params = {}) => callFlat(ARTICLE_LIST_CARD_TEAMS_DEF, params);
@@ -200,8 +200,8 @@ const BASIC_PLAYERS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.players - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooBasicPlayers({});
  */
 export const yahooBasicPlayers: WrapperFn = (params = {}) => callFlat(BASIC_PLAYERS_DEF, params);
@@ -250,8 +250,8 @@ const BETTING_DISCLAIMER_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.betting_disclaimer_id - query parameter (`bettingDisclaimerId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooBettingDisclaimer({});
  */
 export const yahooBettingDisclaimer: WrapperFn = (params = {}) => callFlat(BETTING_DISCLAIMER_DEF, params);
@@ -310,8 +310,8 @@ const COMBAT_EVENT_FIGHTS_DEF: WrapperDef = {
  * @param params.event_group_id - query parameter (`eventGroupId`).
  * @param params.season - query parameter.
  * @param params.league - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooCombatEventFights({});
  */
 export const yahooCombatEventFights: WrapperFn = (params = {}) => callFlat(COMBAT_EVENT_FIGHTS_DEF, params);
@@ -365,8 +365,8 @@ const COMBAT_SCHEDULE_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.league - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooCombatSchedule({});
  */
 export const yahooCombatSchedule: WrapperFn = (params = {}) => callFlat(COMBAT_SCHEDULE_DEF, params);
@@ -425,8 +425,8 @@ const COMMON_PILLS_DEF: WrapperDef = {
  * @param params.add_team_logos - query parameter (`addTeamLogos`).
  * @param params.date - query parameter.
  * @param params.team_ids - query parameter (`teamIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooCommonPills({});
  */
 export const yahooCommonPills: WrapperFn = (params = {}) => callFlat(COMMON_PILLS_DEF, params);
@@ -500,8 +500,8 @@ const CONSENSUS_RANKINGS_PHP_DEF: WrapperDef = {
  * @param params.experts - query parameter.
  * @param params.scoring - query parameter.
  * @param params.type - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooConsensusRankingsPhp({});
  */
 export const yahooConsensusRankingsPhp: WrapperFn = (params = {}) => callFlat(CONSENSUS_RANKINGS_PHP_DEF, params);
@@ -555,8 +555,8 @@ const DRAFT_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDraft({});
  */
 export const yahooDraft: WrapperFn = (params = {}) => callFlat(DRAFT_DEF, params);
@@ -620,8 +620,8 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDraftProspects({});
  */
 export const yahooDraftProspects: WrapperFn = (params = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
@@ -675,8 +675,8 @@ const DRIVER_RESULTS_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDriverResults({});
  */
 export const yahooDriverResults: WrapperFn = (params = {}) => callFlat(DRIVER_RESULTS_DEF, params);
@@ -725,8 +725,8 @@ const DRIVER_SPLITS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooDriverSplits({});
  */
 export const yahooDriverSplits: WrapperFn = (params = {}) => callFlat(DRIVER_SPLITS_DEF, params);
@@ -770,8 +770,8 @@ const FEATURED_GAME_IDS_DEF: WrapperDef = {
  * @param params.lang - query parameter — default `en-US`.
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooFeaturedGameIds({});
  */
 export const yahooFeaturedGameIds: WrapperFn = (params = {}) => callFlat(FEATURED_GAME_IDS_DEF, params);
@@ -820,8 +820,8 @@ const GAME_PROP_BETS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGamePropBets({});
  */
 export const yahooGamePropBets: WrapperFn = (params = {}) => callFlat(GAME_PROP_BETS_DEF, params);
@@ -1660,8 +1660,8 @@ const GAME_STATS_LEADERS_DEF: WrapperDef = {
  * @param params.soccer_team_stat_ids3 - query parameter (`soccerTeamStatIds3`).
  * @param params.soccer_team_stat_ids4 - query parameter (`soccerTeamStatIds4`).
  * @param params.soccer_team_stat_ids5 - query parameter (`soccerTeamStatIds5`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGameStatsLeaders({});
  */
 export const yahooGameStatsLeaders: WrapperFn = (params = {}) => callFlat(GAME_STATS_LEADERS_DEF, params);
@@ -1710,8 +1710,8 @@ const GAMETIME_GAME_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGametimeGame({});
  */
 export const yahooGametimeGame: WrapperFn = (params = {}) => callFlat(GAMETIME_GAME_DEF, params);
@@ -1760,8 +1760,8 @@ const GAMETIME_TEAM_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGametimeTeam({});
  */
 export const yahooGametimeTeam: WrapperFn = (params = {}) => callFlat(GAMETIME_TEAM_DEF, params);
@@ -1810,8 +1810,8 @@ const GOLF_TOURNAMENT_SEASONS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.event_group_id - query parameter (`eventGroupId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGolfTournamentSeasons({});
  */
 export const yahooGolfTournamentSeasons: WrapperFn = (params = {}) => callFlat(GOLF_TOURNAMENT_SEASONS_DEF, params);
@@ -1870,8 +1870,8 @@ const GOLF_TOURNAMENTS_DEF: WrapperDef = {
  * @param params.association - query parameter.
  * @param params.season - query parameter.
  * @param params.show_defending_champs - query parameter (`showDefendingChamps`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGolfTournaments({});
  */
 export const yahooGolfTournaments: WrapperFn = (params = {}) => callFlat(GOLF_TOURNAMENTS_DEF, params);
@@ -1930,8 +1930,8 @@ const GOLF_TOURNAMENTS_BASIC_DEF: WrapperDef = {
  * @param params.event_group_id - query parameter (`eventGroupId`).
  * @param params.association - query parameter.
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooGolfTournamentsBasic({});
  */
 export const yahooGolfTournamentsBasic: WrapperFn = (params = {}) => callFlat(GOLF_TOURNAMENTS_BASIC_DEF, params);
@@ -1985,8 +1985,8 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.division_ids - query parameter (`divisionIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueConferences({});
  */
 export const yahooLeagueConferences: WrapperFn = (params = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
@@ -2050,8 +2050,8 @@ const LEAGUE_FILTERS_DATA_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.view_type - query parameter (`viewType`).
  * @param params.include_pos_and_splits_data - query parameter (`includePosAndSplitsData`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueFiltersData({});
  */
 export const yahooLeagueFiltersData: WrapperFn = (params = {}) => callFlat(LEAGUE_FILTERS_DATA_DEF, params);
@@ -2105,8 +2105,8 @@ const LEAGUE_FUTURE_ODDS_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.bet_categories - query parameter (`betCategories`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueFutureOdds({});
  */
 export const yahooLeagueFutureOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_FUTURE_ODDS_DEF, params);
@@ -2210,8 +2210,8 @@ const LEAGUE_GAME_IDS_DEF: WrapperDef = {
  * @param params.conference_ids - query parameter (`conferenceIds`).
  * @param params.top25 - query parameter.
  * @param params.game_day_query_type - query parameter (`gameDayQueryType`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueGameIds({});
  */
 export const yahooLeagueGameIds: WrapperFn = (params = {}) => callFlat(LEAGUE_GAME_IDS_DEF, params);
@@ -2315,8 +2315,8 @@ const LEAGUE_GAME_IDS_BY_DATE_DEF: WrapperDef = {
  * @param params.top25 - query parameter.
  * @param params.tournament_ids - query parameter (`tournamentIds`).
  * @param params.is_tennis - query parameter (`isTennis`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueGameIdsByDate({});
  */
 export const yahooLeagueGameIdsByDate: WrapperFn = (params = {}) => callFlat(LEAGUE_GAME_IDS_BY_DATE_DEF, params);
@@ -2375,8 +2375,8 @@ const LEAGUE_GAMES_BY_ROUND_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.tournament_round_ids - query parameter (`tournamentRoundIds`).
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueGamesByRound({});
  */
 export const yahooLeagueGamesByRound: WrapperFn = (params = {}) => callFlat(LEAGUE_GAMES_BY_ROUND_DEF, params);
@@ -2425,8 +2425,8 @@ const LEAGUE_INFO_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueInfo({});
  */
 export const yahooLeagueInfo: WrapperFn = (params = {}) => callFlat(LEAGUE_INFO_DEF, params);
@@ -2475,8 +2475,8 @@ const LEAGUE_INJURIES_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league_id - query parameter (`leagueId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueInjuries({});
  */
 export const yahooLeagueInjuries: WrapperFn = (params = {}) => callFlat(LEAGUE_INJURIES_DEF, params);
@@ -2525,8 +2525,8 @@ const LEAGUE_NAMES_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueNames({});
  */
 export const yahooLeagueNames: WrapperFn = (params = {}) => callFlat(LEAGUE_NAMES_DEF, params);
@@ -2580,8 +2580,8 @@ const LEAGUE_PROP_ODDS_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.count - query parameter.
  * @param params.league - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeaguePropOdds({});
  */
 export const yahooLeaguePropOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_PROP_ODDS_DEF, params);
@@ -2640,8 +2640,8 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStandings({});
  */
 export const yahooLeagueStandings: WrapperFn = (params = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
@@ -2725,8 +2725,8 @@ const LEAGUE_STATS_BY_TEAM_DEF: WrapperDef = {
  * @param params.basketball_cut_type - query parameter (`basketballCutType`).
  * @param params.football_cut_type - query parameter (`footballCutType`).
  * @param params.hockey_cut_type - query parameter (`hockeyCutType`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsByTeam({});
  */
 export const yahooLeagueStatsByTeam: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_BY_TEAM_DEF, params);
@@ -2850,8 +2850,8 @@ const LEAGUE_STATS_INDIVIDUAL_DEF: WrapperDef = {
  * @param params.golf_stat_ids - query parameter (`golfStatIds`).
  * @param params.motorsports_sort_stat - query parameter (`motorsportsSortStat`).
  * @param params.motorsports_stat_ids - query parameter (`motorsportsStatIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsIndividual({});
  */
 export const yahooLeagueStatsIndividual: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_INDIVIDUAL_DEF, params);
@@ -2945,8 +2945,8 @@ const LEAGUE_STATS_OVERVIEW_DEF: WrapperDef = {
  * @param params.golf_stat_ids - query parameter (`golfStatIds`).
  * @param params.motorsports_sort_stat - query parameter (`motorsportsSortStat`).
  * @param params.motorsports_stat_ids - query parameter (`motorsportsStatIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsOverview({});
  */
 export const yahooLeagueStatsOverview: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_OVERVIEW_DEF, params);
@@ -3015,8 +3015,8 @@ const LEAGUE_STATS_WEEKLY_DEF: WrapperDef = {
  * @param params.week - query parameter.
  * @param params.season - query parameter.
  * @param params.season_phase - query parameter (`seasonPhase`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueStatsWeekly({});
  */
 export const yahooLeagueStatsWeekly: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_WEEKLY_DEF, params);
@@ -3075,8 +3075,8 @@ const LEAGUE_TEAM_IDS_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.division_ids - query parameter (`divisionIds`).
  * @param params.get_teams_by_division - query parameter (`getTeamsByDivision`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueTeamIds({});
  */
 export const yahooLeagueTeamIds: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAM_IDS_DEF, params);
@@ -3140,8 +3140,8 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.division_ids - query parameter (`divisionIds`).
  * @param params.get_teams_by_division - query parameter (`getTeamsByDivision`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeagueTeams({});
  */
 export const yahooLeagueTeams: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAMS_DEF, params);
@@ -3190,8 +3190,8 @@ const LEAGUES_SEASON_STATES_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooLeaguesSeasonStates({});
  */
 export const yahooLeaguesSeasonStates: WrapperFn = (params = {}) => callFlat(LEAGUES_SEASON_STATES_DEF, params);
@@ -3250,8 +3250,8 @@ const MODULE_GAME_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`gameId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooModuleGame({});
  */
 export const yahooModuleGame: WrapperFn = (params = {}) => callFlat(MODULE_GAME_DEF, params);
@@ -3305,8 +3305,8 @@ const MOTORSPORT_STANDINGS_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooMotorsportStandings({});
  */
 export const yahooMotorsportStandings: WrapperFn = (params = {}) => callFlat(MOTORSPORT_STANDINGS_DEF, params);
@@ -3355,8 +3355,8 @@ const NASCAR_DRIVERS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooNascarDrivers({});
  */
 export const yahooNascarDrivers: WrapperFn = (params = {}) => callFlat(NASCAR_DRIVERS_DEF, params);
@@ -3415,8 +3415,8 @@ const NAV_DROPDOWN_TRAY_DEF: WrapperDef = {
  * @param params.get_soccer_data - query parameter (`getSoccerData`).
  * @param params.soccer_league_ids - query parameter (`soccerLeagueIds`).
  * @param params.soccer_team_ids - query parameter (`soccerTeamIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooNavDropdownTray({});
  */
 export const yahooNavDropdownTray: WrapperFn = (params = {}) => callFlat(NAV_DROPDOWN_TRAY_DEF, params);
@@ -3470,8 +3470,8 @@ const OLY_MEDAL_COUNT_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.sort_method - query parameter (`sortMethod`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooOlyMedalCount({});
  */
 export const yahooOlyMedalCount: WrapperFn = (params = {}) => callFlat(OLY_MEDAL_COUNT_DEF, params);
@@ -3520,8 +3520,8 @@ const OLY_SEASONS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.seasons - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooOlySeasons({});
  */
 export const yahooOlySeasons: WrapperFn = (params = {}) => callFlat(OLY_SEASONS_DEF, params);
@@ -3580,8 +3580,8 @@ const PICK_DISTRIBUTION_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.dates - query parameter.
  * @param params.count - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPickDistribution({});
  */
 export const yahooPickDistribution: WrapperFn = (params = {}) => callFlat(PICK_DISTRIBUTION_DEF, params);
@@ -3680,8 +3680,8 @@ const PLAYBOOK_BOXSCORE_DEF: WrapperDef = {
  * @param params.is_hockey - query parameter (`isHockey`).
  * @param params.is_soccer - query parameter (`isSoccer`).
  * @param params.event_state - query parameter (`eventState`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookBoxscore({});
  */
 export const yahooPlaybookBoxscore: WrapperFn = (params = {}) => callFlat(PLAYBOOK_BOXSCORE_DEF, params);
@@ -3770,8 +3770,8 @@ const PLAYBOOK_BOXSCORE_POLL_DEF: WrapperDef = {
  * @param params.is_hockey - query parameter (`isHockey`).
  * @param params.is_soccer - query parameter (`isSoccer`).
  * @param params.event_state - query parameter (`eventState`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookBoxscorePoll({});
  */
 export const yahooPlaybookBoxscorePoll: WrapperFn = (params = {}) => callFlat(PLAYBOOK_BOXSCORE_POLL_DEF, params);
@@ -3820,8 +3820,8 @@ const PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookBoxscoreSocialShare({});
  */
 export const yahooPlaybookBoxscoreSocialShare: WrapperFn = (params = {}) => callFlat(PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF, params);
@@ -3890,8 +3890,8 @@ const PLAYBOOK_COMBAT_MATCH_DEF: WrapperDef = {
  * @param params.image_width - query parameter (`imageWidth`).
  * @param params.headshot_height - query parameter (`headshotHeight`).
  * @param params.headshot_width - query parameter (`headshotWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookCombatMatch({});
  */
 export const yahooPlaybookCombatMatch: WrapperFn = (params = {}) => callFlat(PLAYBOOK_COMBAT_MATCH_DEF, params);
@@ -3950,8 +3950,8 @@ const PLAYBOOK_GAME_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`gameId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookGame({});
  */
 export const yahooPlaybookGame: WrapperFn = (params = {}) => callFlat(PLAYBOOK_GAME_DEF, params);
@@ -4005,8 +4005,8 @@ const PLAYBOOK_GAME_ODDS_POLL_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.event_state - query parameter (`eventState`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookGameOddsPoll({});
  */
 export const yahooPlaybookGameOddsPoll: WrapperFn = (params = {}) => callFlat(PLAYBOOK_GAME_ODDS_POLL_DEF, params);
@@ -4075,8 +4075,8 @@ const PLAYBOOK_GOLF_TOURNAMENT_DEF: WrapperDef = {
  * @param params.count - query parameter.
  * @param params.stat_ids - query parameter (`statIds`).
  * @param params.show_hole_results - query parameter (`showHoleResults`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookGolfTournament({});
  */
 export const yahooPlaybookGolfTournament: WrapperFn = (params = {}) => callFlat(PLAYBOOK_GOLF_TOURNAMENT_DEF, params);
@@ -4150,8 +4150,8 @@ const PLAYBOOK_LEAGUE_ODDS_DEF: WrapperDef = {
  * @param params.start_time_filter - query parameter (`startTimeFilter`).
  * @param params.range_start_date - query parameter (`rangeStartDate`).
  * @param params.range_end_date - query parameter (`rangeEndDate`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookLeagueOdds({});
  */
 export const yahooPlaybookLeagueOdds: WrapperFn = (params = {}) => callFlat(PLAYBOOK_LEAGUE_ODDS_DEF, params);
@@ -4205,8 +4205,8 @@ const PLAYBOOK_PLAYER_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.season_phases - query parameter (`seasonPhases`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookPlayer({});
  */
 export const yahooPlaybookPlayer: WrapperFn = (params = {}) => callFlat(PLAYBOOK_PLAYER_DEF, params);
@@ -4255,8 +4255,8 @@ const PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookPlayerSocialShare({});
  */
 export const yahooPlaybookPlayerSocialShare: WrapperFn = (params = {}) => callFlat(PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF, params);
@@ -4315,8 +4315,8 @@ const PLAYBOOK_RACE_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`gameId`).
  * @param params.player_image_height - query parameter (`playerImageHeight`).
  * @param params.player_image_width - query parameter (`playerImageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookRace({});
  */
 export const yahooPlaybookRace: WrapperFn = (params = {}) => callFlat(PLAYBOOK_RACE_DEF, params);
@@ -4390,8 +4390,8 @@ const PLAYBOOK_TEAM_DEF: WrapperDef = {
  * @param params.league_short_name - query parameter (`leagueShortName`).
  * @param params.disable_conference - query parameter (`disableConference`).
  * @param params.disable_division - query parameter (`disableDivision`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTeam({});
  */
 export const yahooPlaybookTeam: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TEAM_DEF, params);
@@ -4450,8 +4450,8 @@ const PLAYBOOK_TEAM_BASIC_DEF: WrapperDef = {
  * @param params.team_id - query parameter (`teamId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTeamBasic({});
  */
 export const yahooPlaybookTeamBasic: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TEAM_BASIC_DEF, params);
@@ -4500,8 +4500,8 @@ const PLAYBOOK_TEAM_SOCIAL_SHARE_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTeamSocialShare({});
  */
 export const yahooPlaybookTeamSocialShare: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TEAM_SOCIAL_SHARE_DEF, params);
@@ -4550,8 +4550,8 @@ const PLAYBOOK_TENNIS_MATCH_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlaybookTennisMatch({});
  */
 export const yahooPlaybookTennisMatch: WrapperFn = (params = {}) => callFlat(PLAYBOOK_TENNIS_MATCH_DEF, params);
@@ -4605,8 +4605,8 @@ const PLAYER_BASIC_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerBasic({});
  */
 export const yahooPlayerBasic: WrapperFn = (params = {}) => callFlat(PLAYER_BASIC_DEF, params);
@@ -4685,8 +4685,8 @@ const PLAYER_CAREER_STATS_DEF: WrapperDef = {
  * @param params.baseball_stat_ids - query parameter (`baseballStatIds`).
  * @param params.hockey_stat_ids - query parameter (`hockeyStatIds`).
  * @param params.soccer_stat_ids - query parameter (`soccerStatIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerCareerStats({});
  */
 export const yahooPlayerCareerStats: WrapperFn = (params = {}) => callFlat(PLAYER_CAREER_STATS_DEF, params);
@@ -4775,8 +4775,8 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @param params.baseball_stat_ids - query parameter (`baseballStatIds`).
  * @param params.hockey_stat_ids - query parameter (`hockeyStatIds`).
  * @param params.soccer_stat_ids - query parameter (`soccerStatIds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerGameLog({});
  */
 export const yahooPlayerGameLog: WrapperFn = (params = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
@@ -4825,8 +4825,8 @@ const PLAYER_PROPS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerProps({});
  */
 export const yahooPlayerProps: WrapperFn = (params = {}) => callFlat(PLAYER_PROPS_DEF, params);
@@ -4905,8 +4905,8 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  * @param params.nba_position_id - query parameter (`nbaPositionId`).
  * @param params.mlb_position_id - query parameter (`mlbPositionId`).
  * @param params.nhl_position_id - query parameter (`nhlPositionId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerSearch({});
  */
 export const yahooPlayerSearch: WrapperFn = (params = {}) => callFlat(PLAYER_SEARCH_DEF, params);
@@ -5015,8 +5015,8 @@ const PLAYER_SEASON_STATS_DEF: WrapperDef = {
  * @param params.hockey_cut_type_groups - query parameter (`hockeyCutTypeGroups`).
  * @param params.group_by_season_phase - query parameter (`groupBySeasonPhase`).
  * @param params.use_player_unique_id - query parameter (`usePlayerUniqueId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayerSeasonStats({});
  */
 export const yahooPlayerSeasonStats: WrapperFn = (params = {}) => callFlat(PLAYER_SEASON_STATS_DEF, params);
@@ -5085,8 +5085,8 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  * @param params.tournament - query parameter.
  * @param params.type - query parameter.
  * @param params.playoff_rounds - query parameter (`playoffRounds`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayoffBracket({});
  */
 export const yahooPlayoffBracket: WrapperFn = (params = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
@@ -5135,8 +5135,8 @@ const PLAYOFF_SERIES_GAME_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPlayoffSeriesGame({});
  */
 export const yahooPlayoffSeriesGame: WrapperFn = (params = {}) => callFlat(PLAYOFF_SERIES_GAME_DEF, params);
@@ -5185,8 +5185,8 @@ const POLYMARKET_GAME_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooPolymarketGame({});
  */
 export const yahooPolymarketGame: WrapperFn = (params = {}) => callFlat(POLYMARKET_GAME_DEF, params);
@@ -5250,8 +5250,8 @@ const RACING_SCHEDULE_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.today - query parameter.
  * @param params.has_series - query parameter (`hasSeries`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooRacingSchedule({});
  */
 export const yahooRacingSchedule: WrapperFn = (params = {}) => callFlat(RACING_SCHEDULE_DEF, params);
@@ -5325,8 +5325,8 @@ const SCOREBOARD_GAME_DEF: WrapperDef = {
  * @param params.stat_leader_count - query parameter (`statLeaderCount`).
  * @param params.single_stat_leader - query parameter (`singleStatLeader`).
  * @param params.bet_event_state - query parameter (`betEventState`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooScoreboardGame({});
  */
 export const yahooScoreboardGame: WrapperFn = (params = {}) => callFlat(SCOREBOARD_GAME_DEF, params);
@@ -5396,8 +5396,8 @@ const SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballDefenseNcaaf({});
  */
 export const yahooSeasonStatsFootballDefenseNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF, params);
@@ -5467,8 +5467,8 @@ const SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballKickingNcaaf({});
  */
 export const yahooSeasonStatsFootballKickingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF, params);
@@ -5538,8 +5538,8 @@ const SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPassingNcaaf({});
  */
 export const yahooSeasonStatsFootballPassingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF, params);
@@ -5609,8 +5609,8 @@ const SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballPuntingNcaaf({});
  */
 export const yahooSeasonStatsFootballPuntingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF, params);
@@ -5680,8 +5680,8 @@ const SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReceivingNcaaf({});
  */
 export const yahooSeasonStatsFootballReceivingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF, params);
@@ -5751,8 +5751,8 @@ const SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballReturnsNcaaf({});
  */
 export const yahooSeasonStatsFootballReturnsNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF, params);
@@ -5822,8 +5822,8 @@ const SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonStatsFootballRushingNcaaf({});
  */
 export const yahooSeasonStatsFootballRushingNcaaf: WrapperFn = (params = {}) => callFlat(SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF, params);
@@ -5893,8 +5893,8 @@ const SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballDefense({});
  */
 export const yahooSeasonTeamStatsFootballDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF, params);
@@ -5964,8 +5964,8 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKicking({});
  */
 export const yahooSeasonTeamStatsFootballKicking: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF, params);
@@ -6035,8 +6035,8 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballKickoffs({});
  */
 export const yahooSeasonTeamStatsFootballKickoffs: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF, params);
@@ -6106,8 +6106,8 @@ const SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballOffense({});
  */
 export const yahooSeasonTeamStatsFootballOffense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF, params);
@@ -6177,8 +6177,8 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassing({});
  */
 export const yahooSeasonTeamStatsFootballPassing: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF, params);
@@ -6248,8 +6248,8 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPassingDefense({});
  */
 export const yahooSeasonTeamStatsFootballPassingDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF, params);
@@ -6319,8 +6319,8 @@ const SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballPunting({});
  */
 export const yahooSeasonTeamStatsFootballPunting: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF, params);
@@ -6390,8 +6390,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceiving({});
  */
 export const yahooSeasonTeamStatsFootballReceiving: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF, params);
@@ -6461,8 +6461,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReceivingDefense({});
  */
 export const yahooSeasonTeamStatsFootballReceivingDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF, params);
@@ -6532,8 +6532,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballReturns({});
  */
 export const yahooSeasonTeamStatsFootballReturns: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF, params);
@@ -6603,8 +6603,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushing({});
  */
 export const yahooSeasonTeamStatsFootballRushing: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF, params);
@@ -6674,8 +6674,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF: WrapperDef = {
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooSeasonTeamStatsFootballRushingDefense({});
  */
 export const yahooSeasonTeamStatsFootballRushingDefense: WrapperFn = (params = {}) => callFlat(SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF, params);
@@ -6724,8 +6724,8 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamInjuries({});
  */
 export const yahooTeamInjuries: WrapperFn = (params = {}) => callFlat(TEAM_INJURIES_DEF, params);
@@ -6779,8 +6779,8 @@ const TEAM_PLAYOFF_SERIES_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamPlayoffSeries({});
  */
 export const yahooTeamPlayoffSeries: WrapperFn = (params = {}) => callFlat(TEAM_PLAYOFF_SERIES_DEF, params);
@@ -6839,8 +6839,8 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.team_id - query parameter (`teamId`).
  * @param params.player_image_height - query parameter (`playerImageHeight`).
  * @param params.player_image_width - query parameter (`playerImageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamRoster({});
  */
 export const yahooTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
@@ -6894,8 +6894,8 @@ const TEAM_SCHEDULE_BY_SEASON_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamScheduleBySeason({});
  */
 export const yahooTeamScheduleBySeason: WrapperFn = (params = {}) => callFlat(TEAM_SCHEDULE_BY_SEASON_DEF, params);
@@ -6954,8 +6954,8 @@ const TEAM_SEARCH_DEF: WrapperDef = {
  * @param params.name - query parameter.
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamSearch({});
  */
 export const yahooTeamSearch: WrapperFn = (params = {}) => callFlat(TEAM_SEARCH_DEF, params);
@@ -7044,8 +7044,8 @@ const TEAM_STATS_LEADERS_V2_DEF: WrapperDef = {
  * @param params.include_team_stats - query parameter (`includeTeamStats`).
  * @param params.include_player_stats - query parameter (`includePlayerStats`).
  * @param params.is_baseball - query parameter (`isBaseball`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamStatsLeadersV2({});
  */
 export const yahooTeamStatsLeadersV2: WrapperFn = (params = {}) => callFlat(TEAM_STATS_LEADERS_V2_DEF, params);
@@ -7094,8 +7094,8 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  * @param params.region - query parameter — default `US`.
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamTransactions({});
  */
 export const yahooTeamTransactions: WrapperFn = (params = {}) => callFlat(TEAM_TRANSACTIONS_DEF, params);
@@ -7154,8 +7154,8 @@ const TEAMS_BASIC_DEF: WrapperDef = {
  * @param params.team_ids - query parameter (`teamIds`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTeamsBasic({});
  */
 export const yahooTeamsBasic: WrapperFn = (params = {}) => callFlat(TEAMS_BASIC_DEF, params);
@@ -7214,8 +7214,8 @@ const TENNIS_MATCHES_BY_DATE_DEF: WrapperDef = {
  * @param params.tournament_id - query parameter (`tournamentId`).
  * @param params.season - query parameter.
  * @param params.date - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisMatchesByDate({});
  */
 export const yahooTennisMatchesByDate: WrapperFn = (params = {}) => callFlat(TENNIS_MATCHES_BY_DATE_DEF, params);
@@ -7269,8 +7269,8 @@ const TENNIS_TOURNAMENT_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.tournament_id - query parameter (`tournamentId`).
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisTournament({});
  */
 export const yahooTennisTournament: WrapperFn = (params = {}) => callFlat(TENNIS_TOURNAMENT_DEF, params);
@@ -7329,8 +7329,8 @@ const TENNIS_TOURNAMENTS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`leagueId`).
  * @param params.match_type - query parameter (`matchType`).
  * @param params.season - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisTournaments({});
  */
 export const yahooTennisTournaments: WrapperFn = (params = {}) => callFlat(TENNIS_TOURNAMENTS_DEF, params);
@@ -7384,8 +7384,8 @@ const TENNIS_TOURNAMENTS_BY_DATE_DEF: WrapperDef = {
  * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.date - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTennisTournamentsByDate({});
  */
 export const yahooTennisTournamentsByDate: WrapperFn = (params = {}) => callFlat(TENNIS_TOURNAMENTS_BY_DATE_DEF, params);
@@ -7444,8 +7444,8 @@ const TRENDING_EVENT_IDS_DEF: WrapperDef = {
  * @param params.count - query parameter.
  * @param params.league - query parameter.
  * @param params.date_flip_offset - query parameter (`dateFlipOffset`).
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTrendingEventIds({});
  */
 export const yahooTrendingEventIds: WrapperFn = (params = {}) => callFlat(TRENDING_EVENT_IDS_DEF, params);
@@ -7509,8 +7509,8 @@ const TRENDING_GAME_IDS_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.date_flip_offset - query parameter (`dateFlipOffset`).
  * @param params.dates - query parameter.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooTrendingGameIds({});
  */
 export const yahooTrendingGameIds: WrapperFn = (params = {}) => callFlat(TRENDING_GAME_IDS_DEF, params);

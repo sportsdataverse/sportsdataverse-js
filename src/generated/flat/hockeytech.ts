@@ -49,8 +49,8 @@ const GAME_SHIFTS_DEF: WrapperDef = {
  * @param params.game_id - query parameter.
  * @param params.feed - query parameter — default `modulekit`.
  * @param params.view - query parameter — default `gameshifts`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechGameShifts({});
  */
 export const hockeytechGameShifts: WrapperFn = (params = {}) => callFlat(GAME_SHIFTS_DEF, params);
@@ -98,8 +98,8 @@ const GAME_SUMMARY_DEF: WrapperDef = {
  * @param params.game_id - query parameter.
  * @param params.feed - query parameter — default `gc`.
  * @param params.view - query parameter — default `gamesummary`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechGameSummary({});
  */
 export const hockeytechGameSummary: WrapperFn = (params = {}) => callFlat(GAME_SUMMARY_DEF, params);
@@ -171,8 +171,8 @@ const LEADERS_DEF: WrapperDef = {
  * @param params.active_only - query parameter (`activeOnly`) — default `0`.
  * @param params.feed - query parameter — default `statviewfeed`.
  * @param params.view - query parameter — default `leadersExtended`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechLeaders({});
  */
 export const hockeytechLeaders: WrapperFn = (params = {}) => callFlat(LEADERS_DEF, params);
@@ -220,8 +220,8 @@ const PBP_DEF: WrapperDef = {
  * @param params.game_id - query parameter.
  * @param params.feed - query parameter — default `statviewfeed`.
  * @param params.view - query parameter — default `gameCenterPlayByPlay`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPbp({});
  */
 export const hockeytechPbp: WrapperFn = (params = {}) => callFlat(PBP_DEF, params);
@@ -275,8 +275,8 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.category - query parameter — default `seasonstats`.
  * @param params.feed - query parameter — default `modulekit`.
  * @param params.view - query parameter — default `player`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechPlayerStats({});
  */
 export const hockeytechPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER_STATS_DEF, params);
@@ -324,8 +324,8 @@ const SCHEDULE_DEF: WrapperDef = {
  * @param params.season_id - query parameter.
  * @param params.feed - query parameter — default `modulekit`.
  * @param params.view - query parameter — default `scorebar`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechSchedule({});
  */
 export const hockeytechSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
@@ -368,8 +368,8 @@ const SEASONS_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.feed - query parameter — default `modulekit`.
  * @param params.view - query parameter — default `seasons`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechSeasons({});
  */
 export const hockeytechSeasons: WrapperFn = (params = {}) => callFlat(SEASONS_DEF, params);
@@ -441,8 +441,8 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.context - query parameter — default `overall`.
  * @param params.special - query parameter — default `false`.
  * @param params.sort - query parameter — default `points`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechStandings({});
  */
 export const hockeytechStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
@@ -495,8 +495,8 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.season_id - query parameter.
  * @param params.feed - query parameter — default `modulekit`.
  * @param params.view - query parameter — default `roster`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechTeamRoster({});
  */
 export const hockeytechTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
@@ -544,8 +544,8 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.season_id - query parameter (`season`).
  * @param params.feed - query parameter — default `modulekit`.
  * @param params.view - query parameter — default `teamsbyseason`.
- * @param params.parsed - when `true`, return tidy rows via this endpoint's parser instead of raw JSON.
- * @returns Raw response by default; a tidy array of rows when `{ parsed: true }`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.hockeytech.hockeytechTeams({});
  */
 export const hockeytechTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);

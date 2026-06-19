@@ -1620,9 +1620,18 @@ function renderWrittenFlatModule(api, defs) {
       jsdoc += ` * @param params.${p.name} - query parameter${note}${d}.\n`;
     }
     if (def.auth) jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
-    jsdoc += ` * @param params.parsed - when \`true\`, return tidy rows via this endpoint's parser instead of raw JSON.\n`;
-    jsdoc += ` * @returns Raw response by default; a tidy array of rows when \`{ parsed: true }\`.\n`;
-    jsdoc += ` * @example await sdv.${ns}.${camel}({});\n */\n`;
+    if (def.parser) {
+      jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.\n`;
+      jsdoc += ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
+    } else {
+      jsdoc += ` * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;
+      jsdoc += ` * @returns The raw response (this endpoint has no parser).\n`;
+    }
+    const reqPath = (def.pathParams ?? []).filter((p) => p.required !== false);
+    const flatExampleArgs = reqPath.length
+      ? `{ ${reqPath.map((p) => `${p.name}: '…'`).join(", ")} }`
+      : "{}";
+    jsdoc += ` * @example await sdv.${ns}.${camel}(${flatExampleArgs});\n */\n`;
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
     body += `export const ${camel}: WrapperFn = (params = {}) => callFlat(${defConst}, params);\n`;
