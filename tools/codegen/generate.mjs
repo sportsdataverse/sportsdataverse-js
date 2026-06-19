@@ -314,18 +314,20 @@ function displayPath(wrapper, league) {
 }
 
 // ---------------------------------------------------------------------------
-// Written ESPN source modules (phased proof — basketball only)
+// Written ESPN source modules (ALL leagues)
 // ---------------------------------------------------------------------------
 //
-// Most leagues are materialized AT RUNTIME by makeLeagueModule(cfg), which loops
-// the WRAPPERS table and binds each `espn_<prefix>_<short>` closure on first
-// `import sportsdataverse`. The basketball leagues below are instead emitted as
-// WRITTEN, documented source: one `src/generated/espn/<prefix>.ts` module per
-// league, with an explicit `export const` (+ rich JSDoc) per wrapper. This is a
-// phased proof of converting the runtime factory into reviewable source; the
-// other ~27 namespaces stay on the factory. The written modules call the SAME
-// `callWrapper(def, CFG, params)` core, so they resolve URLs identically.
-const WRITTEN_ESPN_LEAGUES = ["nba", "wnba", "mbb", "wbb"];
+// Every ESPN league is emitted as WRITTEN, documented source: one
+// `src/generated/espn/<prefix>.ts` module per league, with an explicit
+// `export const` (+ rich JSDoc) per wrapper, composed in src/index.ts via the
+// generated `src/generated/espn/index.ts` barrel (NOT the runtime
+// makeLeagueModule factory). The written modules call the SAME
+// `callWrapper(def, CFG, params)` core, so they resolve URLs identically — and
+// TypeScript / TypeDoc / IDEs now see every wrapper as real source.
+//
+// Populated from the loaded league matrix after `leagues` is read (below), so a
+// new league in leagues.yaml auto-gets a written module with no edit here.
+let WRITTEN_ESPN_LEAGUES = [];
 
 // site.api.espn.com host families — a short human label for the one-line JSDoc
 // summary (e.g. "NBA — scoreboard (ESPN site.api.espn.com)").
@@ -1001,12 +1003,20 @@ function writtenLeagueGroups(league, wrappers) {
  * the `<prefix>/index.md`, the two `_category_.json`s, and one
  * `reference/<group>.md` per populated family group.
  */
-function registerWrittenLeagueDocs(outputs, league, wrappers, parserMap, sidebarPosition) {
+function registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, parserMap, sidebarPosition) {
   const leagueDir = join(referenceRootDir, league.prefix);
   const refDir = join(leagueDir, "reference");
   const groups = writtenLeagueGroups(league, wrappers);
 
-  outputs[join(leagueDir, "index.md")] = renderWrittenLeagueIndex(league, wrappers, groups);
+  // Leagues with native (non-ESPN) flat families (mlb/nhl/nfl) get a "Native API"
+  // reference page alongside the ESPN family pages so those docs aren't lost.
+  const nativeFamilies = FLAT_API_FILES.filter((api) => FLAT_API_NAMESPACES[api] === league.prefix);
+  const nativeRows = (flatWrappers ?? []).filter((w) => nativeFamilies.includes(w.api));
+  const indexGroups = nativeRows.length
+    ? [...groups, { id: "native", label: "Native API", rows: nativeRows }]
+    : groups;
+
+  outputs[join(leagueDir, "index.md")] = renderWrittenLeagueIndex(league, wrappers, indexGroups);
   outputs[join(leagueDir, "_category_.json")] =
     JSON.stringify(
       {
@@ -1030,6 +1040,30 @@ function registerWrittenLeagueDocs(outputs, league, wrappers, parserMap, sidebar
       parserMap
     );
   });
+  if (nativeRows.length) {
+    outputs[join(refDir, "native.md")] = renderWrittenLeagueNativePage(
+      league,
+      flatWrappers,
+      groups.length + 1
+    );
+  }
+}
+
+/** "Native API" reference page for a written league that has flat families. */
+function renderWrittenLeagueNativePage(league, flatWrappers, position) {
+  return (
+    `---\n` +
+    `title: Native API\n` +
+    `sidebar_label: Native API\n` +
+    `sidebar_position: ${position}\n` +
+    `---\n\n` +
+    DOCS_NOTE +
+    `\n# \`sdv.${league.prefix}\` — Native (non-ESPN) APIs\n\n` +
+    `Beyond the ESPN surface, \`sdv.${league.prefix}\` also wraps the league's own ` +
+    `live APIs. Same \`{ parsed: true }\` contract; each method is exposed under ` +
+    `both snake_case and camelCase on \`sdv.${league.prefix}\`.\n` +
+    renderNativeSections(league, flatWrappers)
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -1468,6 +1502,8 @@ const flatWrappers = loadFlatWrappers();
 const flatHosts = flatHostsFrom(flatWrappers);
 const leaguesDoc = loadLeaguesDoc();
 const leagues = loadLeagues(leaguesDoc);
+// All ESPN leagues are emitted as written source (see WRITTEN_ESPN_LEAGUES above).
+WRITTEN_ESPN_LEAGUES = leagues.map((l) => l.prefix);
 const hosts = leaguesDoc.hosts;
 
 // Flat-API namespaces that are NOT leagues (e.g. `odds`) get their own
@@ -1503,7 +1539,7 @@ leagues.forEach((league, i) => {
   // per-function reference pages (sdv-py-style) instead of the flat
   // reference/<prefix>.md page — registered separately below.
   if (writtenEspnSet.has(league.prefix)) {
-    registerWrittenLeagueDocs(outputs, league, wrappers, espnParserMap, i + 2);
+    registerWrittenLeagueDocs(outputs, league, wrappers, flatWrappers, espnParserMap, i + 2);
     return;
   }
   // +2: position 0 is the Overview index, position 1 is the shared parsed-returns
@@ -1525,9 +1561,10 @@ standaloneNs.forEach((ns, i) => {
   );
 });
 
-// WRITTEN ESPN source modules (phased proof — basketball only). One
-// `src/generated/espn/<prefix>.ts` per basketball league, composed in
-// src/index.ts via WRITTEN_ESPN instead of makeLeagueModule(cfg).
+// WRITTEN ESPN source modules — one `src/generated/espn/<prefix>.ts` per league,
+// composed in src/index.ts via the generated `src/generated/espn/index.ts` barrel
+// instead of makeLeagueModule(cfg).
+const writtenPrefixes = [];
 for (const prefix of WRITTEN_ESPN_LEAGUES) {
   const league = leagues.find((l) => l.prefix === prefix);
   if (!league) continue;
@@ -1535,6 +1572,26 @@ for (const prefix of WRITTEN_ESPN_LEAGUES) {
     league,
     wrappers
   );
+  writtenPrefixes.push(prefix);
+}
+outputs[join(generatedEspnDir, "index.ts")] = renderWrittenEspnBarrel(writtenPrefixes);
+
+// Barrel: `import * as` each written module (function exports only — CFG is
+// module-private) + expose a `prefix -> module` map for src/index.ts.
+function renderWrittenEspnBarrel(prefixes) {
+  const sorted = prefixes.slice().sort();
+  let body =
+    "// AUTO-GENERATED by tools/codegen/generate.mjs — do not edit by hand.\n" +
+    "// Run `npm run codegen` to regenerate from tools/codegen/endpoints/*.yaml.\n" +
+    "//\n" +
+    "// Barrel for the WRITTEN ESPN league modules. src/index.ts composes the ESPN\n" +
+    "// surface from this `prefix -> module` map instead of makeLeagueModule(cfg).\n\n" +
+    'import type { WrapperFn } from "../../core/types.js";\n';
+  for (const p of sorted) body += `import * as ${toCamel(p)}Espn from "./${p}.js";\n`;
+  body += "\nexport const WRITTEN_ESPN: Record<string, Record<string, WrapperFn>> = {\n";
+  for (const p of sorted) body += `  ${p}: ${toCamel(p)}Espn,\n`;
+  body += "};\n";
+  return body;
 }
 
 const check = process.argv.includes("--check");

@@ -13,12 +13,12 @@ import styles from './styles.module.css';
 // edit here.
 import coverage from '@site/src/generated/coverage.json';
 
-// Basketball leagues are documented as WRITTEN source (phased proof): their
-// reference lives in a per-league dir (`/docs/<prefix>/`) instead of the flat
-// `/docs/reference/<prefix>` page every other league uses.
-const WRITTEN_ESPN_PREFIXES = new Set(['nba', 'wnba', 'mbb', 'wbb']);
-const leagueDocPath = (p) =>
-  WRITTEN_ESPN_PREFIXES.has(p) ? `/docs/${p}/` : `/docs/reference/${p}`;
+// Every ESPN league is documented as WRITTEN source — its reference lives in a
+// per-league dir (`/docs/<prefix>/`). Sport-specific PROVIDERS (torvik,
+// hockeytech) are not ESPN leagues and keep the flat `/docs/reference/<prefix>`
+// page. `isProvider` (from coverage.sports[].providers) distinguishes them.
+const chipDocPath = (p, isProvider) =>
+  isProvider ? `/docs/reference/${p}` : `/docs/${p}/`;
 
 const FeatureList = [
   {
@@ -171,7 +171,7 @@ function CoverageSection() {
                     <Link
                       key={p}
                       className={clsx(styles.chip, isProvider && styles.chipProvider)}
-                      to={leagueDocPath(p)}
+                      to={chipDocPath(p, isProvider)}
                       title={
                         isProvider
                           ? `${PROVIDER_LABEL[p] || p} — native provider (not an ESPN league)`
