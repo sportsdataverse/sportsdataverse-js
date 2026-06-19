@@ -1,0 +1,12 @@
+{
+  "//": "Minimal TS program for the TypeDoc API sample. The docs plugin loads the WHOLE tsconfig program to resolve types; pointing it at the full ../tsconfig.json now pulls in all ~44 written ESPN+flat modules (~130k lines) and OOMs/slows the docs build. `files` (with `include: []` to nullify the inherited glob) limits the program to the 4 basketball sample modules — tsc still follows their imports to resolve core/* types, so it's a small, fast program. Expanding TypeDoc to all modules is not viable (measured: heap-exhaustion); the codegen Markdown per-function reference covers every league + family.",
+  "extends": "../tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [],
+  "files": [
+    "../src/generated/espn/nba.ts",
+    "../src/generated/espn/wnba.ts",
+    "../src/generated/espn/mbb.ts",
+    "../src/generated/espn/wbb.ts"
+  ]
+}

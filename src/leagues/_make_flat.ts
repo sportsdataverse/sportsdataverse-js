@@ -47,43 +47,44 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
 };
 
 /**
- * Build a league's non-ESPN "flat API" surface. For each flat wrapper, expose
- * it under BOTH names (same fn), the same dual-case pattern as the ESPN
- * wrappers:
- *   - `mlb_teams(params)` — snake_case (py/R parity),
- *   - `mlbTeams(params)`   — camelCase canonical (idiomatic JS).
+ * Make one flat-API call (the flat analogue of `callWrapper`): pick the family
+ * getter (content-type / JSONP / UA overrides), resolve the URL + query from the
+ * def, thread an auth-bearer header when `def.auth` (caller-supplied or minted),
+ * fetch, and route through the parser only when `{ parsed: true }`. Shared by
+ * `makeFlatModule` AND the generated written flat modules
+ * (`src/generated/flat/<api>.ts`), so both resolve identically.
+ */
+export async function callFlat(
+  def: WrapperDef,
+  params: Record<string, any> = {}
+): Promise<any> {
+  const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
+  const { url, query } = resolveFlat(def, params);
+  let headers: Record<string, string> | undefined;
+  if (def.auth) {
+    const provider = def.api ? AUTH_HEADER_PROVIDERS[def.api] : undefined;
+    headers =
+      (params.headers as Record<string, string> | undefined) ??
+      (provider ? await provider() : undefined);
+  }
+  const raw = await getter(url, { params: query, headers });
+  const parser = params.parsed ? parserFor(def.parser) : undefined;
+  return parser ? parser(raw) : raw;
+}
+
+/**
+ * Build a flat-API family's surface from its `WrapperDef`s: each wrapper exposed
+ * under BOTH `<api>_<short>` (snake_case, py/R parity) and `<api><Short>`
+ * (camelCase canonical), both delegating to `callFlat`. This is the runtime-
+ * factory path; the generated written flat modules (`src/generated/flat/<api>.ts`)
+ * are the documented-source equivalent. Kept as a fallback / for direct use.
  *
- * The wrapper resolves the request via `resolveFlat`, fetches the raw JSON, and
- * — only when the caller passes `{ parsed: true }` AND a parser is registered —
- * runs the payload through the parser. Omitting `parsed` returns the raw JSON,
- * so the dispatch is strictly additive (matches sdv-py's `return_parsed=True`).
- *
- * Authenticated families (`def.auth`, e.g. `nfl_api`) additionally resolve a
- * bearer-token header set before fetching: a caller-supplied `params.headers`
- * is reused when present, else the family's `AUTH_HEADER_PROVIDERS` entry mints
- * one (cached + auto-renewed). `params.headers` and `params.parsed` are control
- * keys — `resolveFlat` only reads declared path/query params, so neither leaks
- * into the query string.
- *
- * @param defs Flat `WrapperDef`s (those with `flat: true` for this api stem).
+ * @param defs Flat `WrapperDef`s for a single api stem.
  */
 export function makeFlatModule(defs: WrapperDef[]): Record<string, WrapperFn> {
   const mod: Record<string, WrapperFn> = {};
   for (const def of defs) {
-    const getter: GetterFn =
-      (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
-    const fn: WrapperFn = async (params = {}) => {
-      const { url, query } = resolveFlat(def, params);
-      let headers: Record<string, string> | undefined;
-      if (def.auth) {
-        const provider = def.api ? AUTH_HEADER_PROVIDERS[def.api] : undefined;
-        headers = (params.headers as Record<string, string> | undefined) ??
-          (provider ? await provider() : undefined);
-      }
-      const raw = await getter(url, { params: query, headers });
-      const parser = params.parsed ? parserFor(def.parser) : undefined;
-      return parser ? parser(raw) : raw;
-    };
+    const fn: WrapperFn = (params = {}) => callFlat(def, params);
     const snake = `${def.api}_${def.short}`;
     mod[snake] = fn; // py/R-parity alias
     mod[toCamel(snake)] = fn; // mlbTeams — idiomatic JS canonical
