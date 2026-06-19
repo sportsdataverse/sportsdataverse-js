@@ -1,0 +1,9 @@
+{
+  "label": "BUNDESLIGA",
+  "position": 20,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "index"
+  }
+}

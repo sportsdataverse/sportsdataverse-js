@@ -11,8 +11,12 @@
 *.yml  text eol=lf
 *.yaml text eol=lf
 
-# Generated docs reference is emitted with LF by tools/codegen/generate.mjs; pin
-# it to LF so `npm run codegen:check` is deterministic on Windows — WITHOUT
-# forcing every hand-written .md (intro, tutorials) to LF.
-docs/docs/reference/*.md   text eol=lf
+# Docs are emitted/edited with LF by tools/codegen (the reference + per-league
+# written-source dirs), tools/docs (the output injector, which rewrites guide
+# .mdx), and the playground metadata. Pin the whole docs/docs tree + the
+# generated dirs to LF so `npm run codegen:check` / `docs:examples:check` are
+# deterministic on Windows (core.autocrlf was the recurring false "drift").
+docs/docs/**               text eol=lf
+docs/src/generated/**      text eol=lf
 docs/src/playground/*.json text eol=lf
+docs/src/playground/*.mjs  text eol=lf

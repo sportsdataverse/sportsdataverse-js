@@ -1,0 +1,9 @@
+{
+  "label": "NFL",
+  "position": 7,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "index"
+  }
+}
