@@ -67,23 +67,36 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
  *
  * @param defs Flat `WrapperDef`s (those with `flat: true` for this api stem).
  */
+/**
+ * Make one flat-API call (the flat analogue of `callWrapper`): pick the family
+ * getter (content-type / JSONP / UA overrides), resolve the URL + query from the
+ * def, thread an auth-bearer header when `def.auth` (caller-supplied or minted),
+ * fetch, and route through the parser only when `{ parsed: true }`. Shared by
+ * `makeFlatModule` AND the generated written flat modules
+ * (`src/generated/flat/<api>.ts`), so both resolve identically.
+ */
+export async function callFlat(
+  def: WrapperDef,
+  params: Record<string, any> = {}
+): Promise<any> {
+  const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
+  const { url, query } = resolveFlat(def, params);
+  let headers: Record<string, string> | undefined;
+  if (def.auth) {
+    const provider = def.api ? AUTH_HEADER_PROVIDERS[def.api] : undefined;
+    headers =
+      (params.headers as Record<string, string> | undefined) ??
+      (provider ? await provider() : undefined);
+  }
+  const raw = await getter(url, { params: query, headers });
+  const parser = params.parsed ? parserFor(def.parser) : undefined;
+  return parser ? parser(raw) : raw;
+}
+
 export function makeFlatModule(defs: WrapperDef[]): Record<string, WrapperFn> {
   const mod: Record<string, WrapperFn> = {};
   for (const def of defs) {
-    const getter: GetterFn =
-      (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
-    const fn: WrapperFn = async (params = {}) => {
-      const { url, query } = resolveFlat(def, params);
-      let headers: Record<string, string> | undefined;
-      if (def.auth) {
-        const provider = def.api ? AUTH_HEADER_PROVIDERS[def.api] : undefined;
-        headers = (params.headers as Record<string, string> | undefined) ??
-          (provider ? await provider() : undefined);
-      }
-      const raw = await getter(url, { params: query, headers });
-      const parser = params.parsed ? parserFor(def.parser) : undefined;
-      return parser ? parser(raw) : raw;
-    };
+    const fn: WrapperFn = (params = {}) => callFlat(def, params);
     const snake = `${def.api}_${def.short}`;
     mod[snake] = fn; // py/R-parity alias
     mod[toCamel(snake)] = fn; // mlbTeams — idiomatic JS canonical

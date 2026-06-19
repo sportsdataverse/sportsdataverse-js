@@ -23,11 +23,12 @@ module.exports = {
     [
       'docusaurus-plugin-typedoc',
       {
-        // The package entry, plus the four WRITTEN basketball ESPN modules
-        // (phased proof) so TypeDoc documents the real per-function wrappers
-        // from their JSDoc — the "both engines" requirement (codegen Markdown
-        // reference + TypeDoc API docs). The other leagues are runtime-
-        // materialized (no static source to document), so they aren't listed.
+        // The package entry + a SAMPLE of written modules (the four basketball
+        // ESPN leagues) for TypeDoc API docs. Expanding TypeDoc to ALL ~44
+        // written modules was measured to OOM-crash the docs build (~5k+ MDX
+        // pages, >8 min, JS heap exhausted), so it stays a sample — the codegen
+        // Markdown per-function reference already covers every league + flat
+        // family, and the written source gives IDE/hover for all of them.
         entryPoints: [
           '../src/index.ts',
           '../src/generated/espn/nba.ts',

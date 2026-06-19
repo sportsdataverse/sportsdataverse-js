@@ -10,9 +10,8 @@ import wbb from './services/wbb.service.js';
 import wnba from './services/wnba.service.js';
 
 import { LEAGUES } from './generated/leagues.js';
-import { FLAT_WRAPPERS } from './generated/wrappers.js';
 import { makeLeagueModule } from './leagues/_make.js';
-import { makeFlatModule } from './leagues/_make_flat.js';
+import { WRITTEN_FLAT } from './generated/flat/index.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -85,11 +84,12 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // a browser User-Agent (set by the family's getter); endpoints mix CSV/JSON.
   torvik: 'torvik',
 };
-const flatByApi: Record<string, typeof FLAT_WRAPPERS> = {};
-for (const w of FLAT_WRAPPERS) (flatByApi[w.api as string] ??= []).push(w);
-for (const [api, defs] of Object.entries(flatByApi)) {
+// Each flat family is composed from WRITTEN source (src/generated/flat/<api>.ts,
+// exposed via the barrel) instead of makeFlatModule(defs) at runtime — both call
+// the same `callFlat` core, so they resolve identically.
+for (const [api, mod] of Object.entries(WRITTEN_FLAT)) {
   const prefix = FLAT_API_NAMESPACES[api] ?? api;
-  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...makeFlatModule(defs) };
+  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
 }
 
 // Hand-written Baseball Savant / Statcast wrappers (date-chunked search +
