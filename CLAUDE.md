@@ -346,6 +346,10 @@ tsconfig.json, typedoc.json
   add a credential requirement or re-implement the mint.
 - **The `{ parsed: true }` kwarg must never change the raw default.** Adding a parser
   is additive; verify a raw call still returns the untouched payload.
+- **JSON imports need an explicit import attribute.** The Vercel proxy
+  (`docs/api/run.mjs`) imports `endpoints.json` with `with { type: 'json' }` — Vercel
+  traces (not bundles) the function, and native ESM fails to load the module without
+  it. Don't drop the attribute (and don't use the deprecated `assert { type: 'json' }`).
 
 ## Documentation Maintenance
 
