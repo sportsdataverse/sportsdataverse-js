@@ -208,6 +208,17 @@ The full reference is on the docs site: **<https://js.sportsdataverse.org/>**.
 - **[API](https://js.sportsdataverse.org/docs/api/)** — the full typed module surface (TypeDoc).
 - **[Changelog](https://js.sportsdataverse.org/CHANGELOG)** — release notes.
 
+<!-- cheatsheet-section -->
+## **Cheat sheet**
+
+A printable one-page reference for **sportsdataverse (Node.js)** — the loaders, the wrapper
+families, and what each one returns.
+
+📄 **[Download the sportsdataverse (Node.js) cheat sheet (PDF)](https://sportsdataverse.org/cheatsheets/sportsdataverse-js.pdf)**
+
+Every SportsDataverse package has one — browse them all at
+**[sportsdataverse.org/cheatsheets](https://sportsdataverse.org/cheatsheets)**.
+
 ### The SportsDataverse ecosystem
 
 `sportsdataverse-js` is part of a family of open-source sports-data packages across

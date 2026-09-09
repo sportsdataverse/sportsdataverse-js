@@ -69,3 +69,10 @@ cross-sport provider families, all with a tidy parser layer.
   commits or PRs. The human author is the sole attributable contributor.
 - If you touched any `tools/codegen/endpoints/*.yaml`, regenerate and commit the
   generated output in the same change.
+
+## Cheat sheet
+
+There is a printable one-page reference for this package at
+<https://sportsdataverse.org/cheatsheets/sportsdataverse-js.pdf>, one of [a set covering every SportsDataverse package](https://sportsdataverse.org/cheatsheets).
+Keep it in mind when adding or renaming an exported function: the sheet is a
+hand-built canvas, so a surface change means the sheet needs a revision too.

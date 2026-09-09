@@ -419,3 +419,10 @@ The docs site grew a literate-docs / live-runner layer. Five pieces, each
   server-side NFL.com token minting and content-type passthrough. RunCell and the
   playground are no-ops without it; locally you need the proxy running for a live
   Run (the committed injected tables and the `build` itself need no network).
+
+## Cheat sheet
+
+There is a printable one-page reference for this package at
+<https://sportsdataverse.org/cheatsheets/sportsdataverse-js.pdf>, one of [a set covering every SportsDataverse package](https://sportsdataverse.org/cheatsheets).
+Keep it in mind when adding or renaming an exported function: the sheet is a
+hand-built canvas, so a surface change means the sheet needs a revision too.
