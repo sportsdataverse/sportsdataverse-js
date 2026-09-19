@@ -273,7 +273,7 @@ function deriveShort(path, basePath, operationId) {
 
 // --- main transform ---------------------------------------------------------
 
-function transform(spec, api, hostOverride) {
+export function transform(spec, api, hostOverride) {
   const { host, basePath, warning } = resolveHost(spec, hostOverride);
   const security = resolveSecurity(spec);
 
@@ -344,7 +344,7 @@ function transform(spec, api, hostOverride) {
 
 // --- YAML emit (hand-rolled for the exact inline-flow style the repo uses) ---
 
-function emitYaml(api, host, security, endpoints) {
+export function emitYaml(api, host, basePath, security, endpoints) {
   const L = [];
   L.push("# AUTO-EMITTED by tools/codegen/from-openapi.mjs from an OpenAPI 3.x spec.");
   L.push("# This is a SKELETON: `parser:` / `returns_schema:` point at canonical");
@@ -354,7 +354,9 @@ function emitYaml(api, host, security, endpoints) {
   L.push("# Hand-review the short names / query keys / defaults below before wiring up.");
   if (security.note) L.push(`# Auth: ${security.note}`);
   L.push(`api: ${api}`);
-  L.push(`host: ${host}`);
+  // `host` may carry a base path (nhl_api ships https://api.nhle.com/stats/rest),
+  // so a spec whose servers[0].url has a path prefix keeps it here (#55).
+  L.push(`host: ${host}${basePath || ""}`);
   if (security.topLevelAuth) L.push("auth: true");
   L.push("endpoints:");
 
@@ -403,8 +405,8 @@ function main() {
   }
 
   const spec = parse(readFileSync(specPath, "utf8"));
-  const { host, security, warning, endpoints, paramNotes } = transform(spec, args.api, args.host);
-  const yaml = emitYaml(args.api, host, security, endpoints);
+  const { host, basePath, security, warning, endpoints, paramNotes } = transform(spec, args.api, args.host);
+  const yaml = emitYaml(args.api, host, basePath, security, endpoints);
 
   if (args.stdout) {
     process.stdout.write(yaml);
@@ -422,4 +424,4 @@ function main() {
   for (const n of paramNotes) log(`from-openapi: note — ${n}`);
 }
 
-main();
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();
