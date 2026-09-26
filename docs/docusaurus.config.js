@@ -307,7 +307,30 @@ module.exports = {
       darkTheme: darkCodeTheme,
     },
   },
-  scripts: [{src: 'https://plausible.io/js/script.js', defer: true, 'data-domain': 'js.sportsdataverse.org'}],
+  scripts: [
+    {src: 'https://plausible.io/js/pa-_awyfwLYlQRyeuLDfCMUd.js', async: true},
+  ],
+  // Plausible's init stub: queues calls until the async script above loads.
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML:
+        'window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()',
+    },
+  ],
+  // Offline/local full-text search (no Algolia account, no external crawler):
+  // the index is built into the static output at build time. Same plugin as
+  // py.sportsdataverse.org.
+  themes: [
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        indexBlog: false,
+      },
+    ],
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
