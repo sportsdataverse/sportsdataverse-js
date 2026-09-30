@@ -247,6 +247,11 @@ module.exports = {
           ]
         },
         {
+          label: 'Data status',
+          href: 'https://sportsdataverse.org/status',
+          position: 'right',
+        },
+        {
           label: 'GitHub',
           href: 'https://github.com/sportsdataverse/sportsdataverse-js/',
           position: 'right',

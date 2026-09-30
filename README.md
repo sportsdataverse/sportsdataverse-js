@@ -31,6 +31,8 @@ Python package and the [SportsDataverse R packages](https://r.sportsdataverse.or
 🛝 **[Playground](https://js.sportsdataverse.org/playground)** ·
 🧩 **[API](https://js.sportsdataverse.org/docs/api/)**
 
+Data freshness and pipeline status for every SportsDataverse dataset: [sportsdataverse.org/status](https://sportsdataverse.org/status).
+
 ## Installation
 
 ```bash
