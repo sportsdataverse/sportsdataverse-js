@@ -3,7 +3,8 @@ on every real capture listed in test/fixtures/py/manifest.yaml.
 
 test/parsers/parity.test.js compares each JS parser to these cell by cell, so
 run this with sportsdataverse-py checked out at the vendor pin
-(tools/codegen/vendor.yaml `source.ref`), never its working tree:
+(tools/codegen/vendor.yaml `source.ref`), never its working tree (the shared guard
+tools/sdv_py_pin.py refuses anything else):
 
     git -C <sdv-py> worktree add --detach <scratch> <source.ref>
     cd <scratch> && uv sync
@@ -20,12 +21,14 @@ import gzip
 import importlib
 import json
 import math
-import subprocess
+import sys
 from pathlib import Path
 
 import yaml
 
 JS = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(JS / "tools"))
+from sdv_py_pin import pinned_checkout, vendor_pin  # noqa: E402
 FIX = JS / "test" / "fixtures"
 ROWS = 20  # rows kept per frame; row counts are always compared in full
 
@@ -65,27 +68,7 @@ def main() -> None:
     vendor = yaml.safe_load(
         (JS / "tools/codegen/vendor.yaml").read_text(encoding="utf-8")
     )
-    ref = vendor["source"]["ref"]
-
-    def git(*args: str) -> str:
-        return subprocess.run(
-            ["git", *args], capture_output=True, text=True, check=True
-        ).stdout.strip()
-
-    head = git("rev-parse", "HEAD")
-    if head != ref:
-        raise SystemExit(f"sdv-py checkout is at {head}, the vendor pin is {ref}")
-    if git("status", "--porcelain"):
-        raise SystemExit(
-            "the sdv-py checkout has local changes; the oracle must come from the pin as committed"
-        )
-    # The parsers must be imported from this checkout, not another installed copy.
-    root = Path(git("rev-parse", "--show-toplevel")).resolve()
-    pkg = Path(importlib.import_module("sportsdataverse").__file__).resolve()
-    if root not in pkg.parents:
-        raise SystemExit(
-            f"sportsdataverse is imported from {pkg}, outside the pinned checkout {root}"
-        )
+    ref, _ = pinned_checkout(vendor_pin())
     manifest = yaml.safe_load((FIX / "py/manifest.yaml").read_text(encoding="utf-8"))
     out_dir = FIX / "py/oracle"
     out_dir.mkdir(exist_ok=True)
