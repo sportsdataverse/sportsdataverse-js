@@ -155,8 +155,9 @@ npm run codegen                 # then regenerate as usual
   a flat family is named by its YAML `name_pattern` / `qualifier` (not its file
   stem). Names py's own hand-written functions occupy are listed in
   `vendor.yaml` `py_reserved`; `test/naming.test.js` compares the result with
-  sdv-py's generated names (`test/fixtures/naming/py_public_names.json` — refresh
-  it at a pin bump, its `_provenance` says how). Pre-v4 names stay callable as
+  sdv-py's generated names at the pin (`tools/codegen/py_public_names.json`, which
+  `npm run vendor` derives from verbatim, LOCK-verified copies of sdv-py's generated
+  modules in `vendor/upstream/py/`; `vendor:check` covers it). Pre-v4 names stay callable as
   deprecated aliases generated from the frozen `tools/codegen/pre_v4_names.json`.
 
 ## Adding a new flat-API family

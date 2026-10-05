@@ -14,7 +14,10 @@ const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 const json = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 const yaml = (p) => parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 const PRE_V4 = json('../tools/codegen/pre_v4_names.json');
-const PY = json('./fixtures/naming/py_public_names.json').modules;
+// sdv-py's generated public names at the pin: derived by `npm run vendor` from
+// the verbatim (LOCK-verified) py modules in tools/codegen/vendor/upstream/py/.
+const PY_NAMES = json('../tools/codegen/py_public_names.json');
+const PY = PY_NAMES.modules;
 const VENDOR = yaml('../tools/codegen/vendor.yaml');
 const FLAT_NS = { nhl_api_web: 'nhl', nfl_api: 'nfl', cbs: 'cbs', nba_stats: 'nba', wnba_stats: 'wnba' };
 const isAlias = (fn) => typeof fn === 'function' && fn.deprecatedAliasOf !== undefined;
@@ -84,10 +87,21 @@ describe('v4 naming: deprecated aliases', () => {
         isAlias(alias).should.be.true(`sdv.${ns}.${o} is not a deprecated alias`);
         alias.deprecatedAliasOf.should.equal(sdv[ns][n], `sdv.${ns}.${o} does not forward to ${n}`);
         alias.replacement.should.equal(n);
+        alias.name.should.equal(o); // stack traces show the name the caller used
         isAlias(sdv[ns][n]).should.be.false(`sdv.${ns}.${n} (the v4 name) is itself an alias`);
       }
       sdv[ns][now].should.equal(sdv[ns][toCamel(now)], `${now} and its camelCase differ`);
     }
+  });
+
+  it('CBS defs carry their pre-v4 short as legacyShort, matching the aliases', () => {
+    const legacy = FLAT_WRAPPERS.filter((w) => w.legacyShort);
+    legacy.length.should.equal(16);
+    for (const w of legacy) {
+      w.api.should.equal('cbs');
+      FLAT_DEPRECATED_ALIASES.cbs[`cbs_${w.legacyShort}`].should.equal(w.publicName ?? `cbs_${w.short}`);
+    }
+    FLAT_WRAPPERS.find((w) => w.api === 'cbs' && w.legacyShort === 'boxscore').short.should.equal('game_boxscore');
   });
 
   it('every alias is a name JS shipped before v4 (no invented names)', () => {
@@ -143,6 +157,7 @@ describe('v4 naming: deprecated aliases', () => {
       const ours = seen.filter((w) => /espn_?[Ww]ch_?[Aa]thlete_?[Oo]verview/.test(w.message));
       ours.length.should.equal(2);
       ours.every((w) => w.name === 'DeprecationWarning').should.be.true();
+      ours.every((w) => w.code === 'SDV_DEPRECATED_NAME').should.be.true(); // filterable
       ours[0].message.should.containEql('espn_wch_player_overview');
       ours[1].message.should.containEql('espnWchPlayerOverview');
       seen.filter((w) => /espnWchPlayerOverview\(\) is deprecated/.test(w.message)).length.should.equal(0);
@@ -151,8 +166,10 @@ describe('v4 naming: deprecated aliases', () => {
 });
 
 describe('v4 naming: JS names equal sdv-py names at the vendor pin', () => {
-  // espn_fitt_v3 (`fpi`) is an sdv-py ESPN family sdv-js does not vendor yet.
-  const NOT_VENDORED = /_fpi$/;
+  it('the sdv-py names were read at the vendor pin (`npm run vendor` regenerates them)', () => {
+    PY_NAMES.ref.should.equal(VENDOR.source.ref);
+  });
+
   // sdv-py `drop:`s these generated wrappers because a hand-written py function
   // serves the same endpoint under this name; JS has no hand-written sibling, so
   // its generated wrapper carries that name (see generate.mjs).
@@ -164,26 +181,29 @@ describe('v4 naming: JS names equal sdv-py names at the vendor pin', () => {
 
   for (const league of LEAGUES) {
     it(`espn ${league.prefix}: every v4 name is sdv-py's, and every sdv-py name is here`, () => {
-      const py = PY[`${league.prefix}_espn_ext`];
-      Array.isArray(py).should.be.true(`no sdv-py module for ${league.prefix}`);
+      const py = PY[`${league.prefix}_espn_ext`]?.names;
+      Array.isArray(py).should.be.true(`no sdv-py module ${league.prefix}_espn_ext in py_public_names.json`);
       const ns = sdv[league.prefix];
       const js = Object.keys(ns).filter((k) => k.startsWith(`espn_${league.prefix}_`) && !isAlias(ns[k]));
       const pySet = new Set(py);
       js.filter((n) => !pySet.has(n) && !PY_HANDWRITTEN.has(n)).should.eql([], 'JS names sdv-py does not have');
       const jsSet = new Set(js);
-      py.filter((n) => !jsSet.has(n) && !NOT_VENDORED.test(n)).should.eql([], 'sdv-py names JS lacks');
+      py.filter((n) => !jsSet.has(n)).should.eql([], 'sdv-py names JS lacks');
       for (const n of js) (typeof ns[toCamel(n)]).should.equal('function', `${toCamel(n)} missing`);
     });
   }
 
   for (const [family, cfg0] of Object.entries(VENDOR.families)) {
     const cfg = cfg0 ?? {};
-    const derived = yaml(`../tools/codegen/endpoints/${family}.yaml`);
-    if (!derived.module || !PY[derived.module]) continue; // ESPN / leagues, or vendored after this fixture
-    it(`${family}: every vendored endpoint carries sdv-py's name (${derived.module})`, () => {
-      const pyShorts = new Set(yaml(`../tools/codegen/vendor/upstream/endpoints/${cfg.from ?? family}.yaml`).endpoints.map((e) => e.short));
+    const upstream = yaml(`../tools/codegen/vendor/upstream/endpoints/${cfg.from ?? family}.yaml`);
+    if (!upstream.module) continue; // ESPN families + leagues: the per-league tests above
+    it(`${family}: every vendored endpoint carries sdv-py's name (${upstream.module})`, () => {
+      const py = PY[upstream.module]?.names;
+      Array.isArray(py).should.be.true(`no sdv-py module ${upstream.module} in py_public_names.json (re-run \`npm run vendor\`)`);
+      const pyShorts = new Set(upstream.endpoints.map((e) => e.short));
       const js = FLAT_WRAPPERS.filter((w) => w.api === family && pyShorts.has(w.short)).map((w) => w.publicName ?? `${w.api}_${w.short}`);
-      js.slice().sort().should.eql(PY[derived.module].slice().sort());
+      js.length.should.be.above(0, `no FLAT_WRAPPERS for ${family}`);
+      js.slice().sort().should.eql(py.slice().sort());
     });
   }
 

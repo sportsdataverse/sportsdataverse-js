@@ -205,7 +205,8 @@ ESPN endpoints come from three family YAML files — `espn_site_v2.yaml`,
   (`vendor.yaml` `py_reserved`), and flat families named by py's `name_pattern` /
   `qualifier` (`nhl_boxscore`, `nhl_web_pbp`, `nfl_standings`), never by file stem.
   Never hand-rename; a new py collision goes in `py_reserved` (test/naming.test.js
-  compares against sdv-py's generated names at the pin).
+  compares against sdv-py's generated names at the pin: `tools/codegen/py_public_names.json`,
+  derived by `npm run vendor` from the verbatim py modules in `vendor/upstream/py/`).
 - **Pre-v4 names are deprecated aliases.** Every name in the frozen
   `tools/codegen/pre_v4_names.json` that a rename replaced is registered by
   `withDeprecatedAliases` (`src/core/deprecation.ts`) from `src/generated/aliases.ts`:

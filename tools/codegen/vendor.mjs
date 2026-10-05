@@ -9,6 +9,10 @@
 //   - tools/codegen/schemas/**               (the py schemas those families keep
 //     under the returns-schema policy, copied verbatim to their rewritten path)
 //   - the manifest's `copy:` files, verbatim (e.g. endpoints/releases.yaml)
+//   - tools/codegen/py_public_names.json      (the public names sdv-py's
+//     generated modules define at the pin — every vendored flat family's
+//     `module` and each league's `<prefix>_espn_ext` — read from their verbatim
+//     copies under vendor/upstream/py/; test/naming.test.js holds JS's names to it)
 //
 //   node tools/codegen/vendor.mjs [--ref <sha>]   # fetch upstream, re-derive
 //   node tools/codegen/vendor.mjs --offline       # re-derive from vendor/upstream
@@ -38,8 +42,53 @@ const REF_FILE = "REF";
 // time; the offline check re-hashes every committed copy against it.
 const LOCK_FILE = "LOCK";
 const PY_CODEGEN = "tools/codegen/";
+// Upstream subdir for verbatim sdv-py package modules (`py/sportsdataverse/...`).
+const PY_UP = "py/";
+const PY_PKG = "sportsdataverse";
+/** Derived output: sdv-py's generated public names at the pin. */
+export const PY_NAMES_FILE = "py_public_names.json";
 
 const read = (p) => readFileSync(p, "utf8");
+
+/** sdv-py repo path of an upstream path (codegen files, or `py/<repo path>`). */
+const repoPath = (p) => (p.startsWith(PY_UP) ? p.slice(PY_UP.length) : `${PY_CODEGEN}${p}`);
+
+/**
+ * Stems of the sdv-py GENERATED modules whose public names JS must match: each
+ * vendored family's `module` (flat APIs) and `<prefix>_espn_ext` for every
+ * league. `readUpstream(path)` returns an upstream endpoint file's text.
+ */
+export function pyModuleStems(manifest, readUpstream) {
+  const stems = new Set();
+  for (const [key, cfg] of familyEntries(manifest)) {
+    const doc = parse(readUpstream(upstreamEndpointPath(key, cfg)));
+    if (doc?.module) stems.add(doc.module);
+    for (const l of doc?.leagues ?? []) stems.add(`${l.prefix}_espn_ext`);
+  }
+  return [...stems].sort();
+}
+
+/** Top-level public function names a Python module defines (sorted). */
+export function pyPublicNames(source) {
+  return [...source.matchAll(/^(?:async )?def ([A-Za-z]\w*)\(/gm)].map((m) => m[1]).sort();
+}
+
+/** Render py_public_names.json from the upstream `py/` copies (offline, deterministic). */
+function renderPyNames(up, ref) {
+  const modules = {};
+  for (const p of listFiles(join(up, PY_UP)).filter((f) => f.endsWith(".py"))) {
+    const stem = p.slice(p.lastIndexOf("/") + 1, -3);
+    modules[stem] = { path: p, names: pyPublicNames(read(join(up, PY_UP, p))) };
+  }
+  const sorted = Object.fromEntries(Object.keys(modules).sort().map((k) => [k, modules[k]]));
+  const body = Object.entries(sorted)
+    .map(([k, v]) => `    ${JSON.stringify(k)}: { "path": ${JSON.stringify(v.path)}, "names": ${JSON.stringify(v.names)} }`)
+    .join(",\n");
+  return (
+    `{\n  "_generated": "tools/codegen/vendor.mjs from vendor/upstream/py/ (verbatim sdv-py modules at ref) — do not edit",\n` +
+    `  "ref": ${JSON.stringify(ref)},\n  "modules": {\n${body}\n  }\n}\n`
+  );
+}
 
 /** Git's blob id for a file's bytes: sha1("blob <len>\0" + bytes). */
 export function gitBlobSha(buf) {
@@ -266,6 +315,8 @@ export function deriveAll(root = CODEGEN_DIR) {
   const out = new Map();
   const jsOwned = new Set(); // schema files overlays attach (never vendored over)
   for (const c of manifest.copy ?? []) out.set(c, read(join(up, c)));
+  const refFile = join(up, REF_FILE);
+  out.set(PY_NAMES_FILE, renderPyNames(up, existsSync(refFile) ? read(refFile).trim() : "(missing)"));
   for (const [key, cfg] of familyEntries(manifest)) {
     const text = read(join(up, upstreamEndpointPath(key, cfg)));
     const ovPath = join(root, "overlay", `${key}.yaml`);
@@ -410,9 +461,10 @@ export function writeVendor(root = CODEGEN_DIR) {
 // Fetch (network or local git) — not used by the check.
 // ---------------------------------------------------------------------------
 
-// Each source exposes `tree(extra)` -> Map(codegen-relative path -> git blob sha)
-// for the pinned endpoints/ + schemas/ trees plus the `extra` files (`copy:`
-// entries outside those dirs), and `getMany(paths)` -> Buffers.
+// Each source exposes `tree(extra)` -> Map(upstream path -> git blob sha) for the
+// pinned endpoints/ + schemas/ trees, the `extra` files (`copy:` entries outside
+// those dirs) and the sdv-py package (as `py/sportsdataverse/...`), and
+// `getMany(paths)` -> Buffers.
 
 function gitSource(repo, ref) {
   const git = (args, input) => {
@@ -424,17 +476,18 @@ function gitSource(repo, ref) {
     async tree(extra = []) {
       const out = new Map();
       const paths = ["endpoints", "schemas", ...extra].map((p) => `${PY_CODEGEN}${p}`);
-      const ls = git(["ls-tree", "-r", ref, "--", ...paths]);
-      for (const line of ls.toString("utf8").split("\n").filter(Boolean)) {
+      const ls = (args) => git(["ls-tree", "-r", ref, "--", ...args]).toString("utf8").split("\n").filter(Boolean);
+      for (const line of [...ls(paths), ...ls([PY_PKG])]) {
         const [meta, path] = line.split("\t"); // "<mode> blob <sha>\t<path>"
         const [, type, sha] = meta.split(" ");
-        if (type === "blob") out.set(path.slice(PY_CODEGEN.length), sha);
+        if (type !== "blob") continue;
+        out.set(path.startsWith(PY_CODEGEN) ? path.slice(PY_CODEGEN.length) : PY_UP + path, sha);
       }
       return out;
     },
     async getMany(paths) {
       // One `git cat-file --batch` round trip: "<sha> blob <size>\n<bytes>\n".
-      const buf = git(["cat-file", "--batch"], paths.map((p) => `${ref}:${PY_CODEGEN}${p}`).join("\n") + "\n");
+      const buf = git(["cat-file", "--batch"], paths.map((p) => `${ref}:${repoPath(p)}`).join("\n") + "\n");
       const out = [];
       let i = 0;
       for (const p of paths) {
@@ -463,11 +516,15 @@ function githubSource(repoSlug, ref) {
       const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN.slice(0, -1)}?recursive=1`;
       const j = await (await get(url, { headers })).json();
       if (j.truncated) throw new Error(`tree listing truncated: ${url}`);
-      return new Map(
-        j.tree
+      const pkgUrl = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_PKG}?recursive=1`;
+      const pkg = await (await get(pkgUrl, { headers })).json();
+      if (pkg.truncated) throw new Error(`tree listing truncated: ${pkgUrl}`);
+      return new Map([
+        ...j.tree
           .filter((t) => t.type === "blob" && (/^(endpoints|schemas)\//.test(t.path) || extra.includes(t.path)))
-          .map((t) => [t.path, t.sha])
-      );
+          .map((t) => [t.path, t.sha]),
+        ...pkg.tree.filter((t) => t.type === "blob").map((t) => [`${PY_UP}${PY_PKG}/${t.path}`, t.sha]),
+      ]);
     },
     async getMany(paths) {
       const out = new Array(paths.length);
@@ -475,7 +532,7 @@ function githubSource(repoSlug, ref) {
       const worker = async () => {
         while (next < paths.length) {
           const i = next++;
-          const url = `https://raw.githubusercontent.com/${repoSlug}/${ref}/${PY_CODEGEN}${paths[i]}`;
+          const url = `https://raw.githubusercontent.com/${repoSlug}/${ref}/${repoPath(paths[i])}`;
           out[i] = Buffer.from(await (await get(url)).arrayBuffer());
         }
       };
@@ -517,10 +574,20 @@ export async function fetchUpstream(root = CODEGEN_DIR, ref = loadManifest(root)
   });
   const schemaList = [...schemaPaths].sort();
   const schemaBufs = await src.getMany(schemaList);
+  // The generated sdv-py modules whose public names JS must match (one per
+  // vendored flat family + one per league), located by file name in the package.
+  const fetched = new Map(endpointPaths.map((p, i) => [p, endpointBufs[i].toString("utf8")]));
+  const pyList = pyModuleStems(manifest, (p) => fetched.get(p)).map((stem) => {
+    const hits = [...tree.keys()].filter((p) => p.startsWith(PY_UP) && p.endsWith(`/${stem}.py`));
+    if (hits.length !== 1) throw new Error(`${stem}.py: ${hits.length} matches under ${PY_PKG}/ at ${ref}`);
+    return hits[0];
+  });
+  const pyBufs = await src.getMany(pyList);
 
   const files = [
     ...endpointPaths.map((p, i) => [p, endpointBufs[i]]),
     ...schemaList.map((p, i) => [p, schemaBufs[i]]),
+    ...pyList.map((p, i) => [p, pyBufs[i]]),
   ];
   for (const [p, buf] of files) {
     if (gitBlobSha(buf) !== tree.get(p)) throw new Error(`${p}: fetched bytes do not match blob ${tree.get(p)} at ${ref}`);

@@ -56,8 +56,9 @@ copy:
 # `{prefix}_{short}` that lands on one gets the family qualifier
 # (`nhl_pbp` -> `nhl_web_pbp`). Only names that change a JS name belong here.
 # test/naming.test.js compares JS names against sdv-py's generated names at the
-# pin (test/fixtures/naming/py_public_names.json); a pin bump that adds a
-# collision fails that test until the name is added here.
+# pin (tools/codegen/py_public_names.json, derived by `npm run vendor` from the
+# verbatim py modules in vendor/upstream/py/); a pin bump that adds a collision
+# fails that test until the name is added here.
 py_reserved:
   - espn_cfb_player_stats
   - espn_mbb_player_stats
