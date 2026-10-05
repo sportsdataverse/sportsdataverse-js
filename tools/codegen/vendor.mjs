@@ -35,7 +35,9 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse, parseDocument } from "yaml";
 
-export const CODEGEN_DIR = dirname(fileURLToPath(import.meta.url));
+// SDV_VENDOR_ROOT: test hook so a spawned `vendor.mjs` (and vendor-lock-online.mjs, which
+// imports this) works on a temp copy of tools/codegen. Empty counts as unset.
+export const CODEGEN_DIR = process.env.SDV_VENDOR_ROOT || dirname(fileURLToPath(import.meta.url));
 const UPSTREAM = join("vendor", "upstream");
 const REF_FILE = "REF";
 // "<git blob sha>  <path>" per upstream file, taken from the pinned tree at fetch
@@ -124,9 +126,17 @@ export function rewriteSchema(ref, prefixes = {}) {
 }
 
 /** The `returns_schema` refs an endpoint YAML text names. */
+// Memoized by text: the YAML parse dominates a check (derive + orphan scan read the
+// same ~1 MB of endpoint files several times), and the result is pure in `text`.
+const refsMemo = new Map();
 export function schemaRefs(text) {
-  const eps = parse(text)?.endpoints; // espn_parser_map.yaml's is a map, not a list
-  return Array.isArray(eps) ? [...new Set(eps.map((e) => e?.returns_schema).filter(Boolean))] : [];
+  let refs = refsMemo.get(text);
+  if (!refs) {
+    const eps = parse(text)?.endpoints; // espn_parser_map.yaml's is a map, not a list
+    refs = Array.isArray(eps) ? [...new Set(eps.map((e) => e?.returns_schema).filter(Boolean))] : [];
+    refsMemo.set(text, refs);
+  }
+  return [...refs];
 }
 
 /**
@@ -192,6 +202,17 @@ export function mapParser(cfg, pyParser, where) {
  * `schema_incompatible` entry that matches no vendored endpoint) or a duplicate short.
  */
 export function transformFamily(key, cfg, upstreamText, overlayText, source) {
+  // Pure in its inputs, and parsing ~1 MB of endpoint YAML is the slow part of every
+  // check/derive (it made the temp-tree vendor tests flaky against their timeout), so
+  // identical inputs reuse the result. Callers treat the result as read-only.
+  const memoKey = JSON.stringify([key, cfg, upstreamText, overlayText, source]);
+  let hit = transformMemo.get(memoKey);
+  if (!hit) transformMemo.set(memoKey, (hit = transformFamilyUncached(key, cfg, upstreamText, overlayText, source)));
+  return hit;
+}
+const transformMemo = new Map();
+
+function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
   const doc = parseDocument(upstreamText);
   const from = cfg.from ?? key;
   const header =
@@ -337,17 +358,21 @@ function listYaml(dir, prefix = "") {
 /**
  * Derive every vendored output (codegen-relative path -> content) from the
  * committed upstream copy + manifest + overlays. Offline and deterministic.
+ * `only` (a family key) derives just that family's endpoint + schema outputs.
  */
-export function deriveAll(root = CODEGEN_DIR) {
+export function deriveAll(root = CODEGEN_DIR, only = null) {
   const manifest = loadManifest(root);
   const up = join(root, UPSTREAM);
   const upSchemas = listYaml(join(up, "schemas"));
   const out = new Map();
   const jsOwned = new Set(); // schema files overlays attach (never vendored over)
-  for (const c of manifest.copy ?? []) out.set(c, read(join(up, c)));
-  const refFile = join(up, REF_FILE);
-  out.set(PY_NAMES_FILE, renderPyNames(up, existsSync(refFile) ? read(refFile).trim() : "(missing)"));
+  if (!only) {
+    for (const c of manifest.copy ?? []) out.set(c, read(join(up, c)));
+    const refFile = join(up, REF_FILE);
+    out.set(PY_NAMES_FILE, renderPyNames(up, existsSync(refFile) ? read(refFile).trim() : "(missing)"));
+  }
   for (const [key, cfg] of familyEntries(manifest)) {
+    if (only && key !== only) continue;
     const text = read(join(up, upstreamEndpointPath(key, cfg)));
     const ovPath = join(root, "overlay", `${key}.yaml`);
     const overlay = existsSync(ovPath) ? read(ovPath) : null;
@@ -367,13 +392,8 @@ export function deriveAll(root = CODEGEN_DIR) {
   return out;
 }
 
-/**
- * py schema copies the vendor wrote and no longer attaches (upstream renamed or
- * dropped the schema, or a declaration stopped attaching it): an exact py schema
- * path, byte-identical to the upstream copy, not vendored now and not referenced
- * by any endpoint YAML (vendored or JS-owned). A JS-authored file never qualifies.
- */
-export function findOrphans(root, outputs) {
+/** Predicate: is a schema path (relative to schemas/) named by any endpoint YAML, vendored or JS-owned? */
+function referencedBy(root, outputs) {
   const referenced = new Set();
   const endpointsDir = join(root, "endpoints");
   const endpointTexts = new Map(
@@ -383,17 +403,50 @@ export function findOrphans(root, outputs) {
   );
   for (const [p, t] of outputs) if (p.startsWith("endpoints/")) endpointTexts.set(p, t);
   for (const t of endpointTexts.values()) for (const r of schemaRefs(t)) referenced.add(r);
-  const isReferenced = (rel) => {
+  return (rel) => {
     const ref = rel.replace(/\.yaml$/, "");
     return referenced.has(ref) || (ref.includes("/") && referenced.has(ref.slice(0, ref.lastIndexOf("/"))));
   };
+}
+
+const lf = (t) => t.replace(/\r\n/g, "\n");
+
+/**
+ * Copies a pin bump leaves behind. `fetchUpstream` replaces vendor/upstream before
+ * the re-derive, so `findOrphans` (which compares against the NEW upstream) cannot
+ * see a py schema the bump renamed or dropped. Compare the outgoing derived outputs
+ * (`oldOutputs`, derived from the OLD upstream before the fetch) with the incoming
+ * ones: a schema path only the old pin vendored, whose file is byte-identical to the
+ * old copy and not referenced, is stale. A JS-authored file (different bytes, or never
+ * vendored) never qualifies.
+ */
+export function findStaleAfterBump(root, oldOutputs, outputs) {
+  const isReferenced = referencedBy(root, outputs);
+  const stale = [];
+  for (const [p, content] of oldOutputs) {
+    if (!p.startsWith("schemas/") || outputs.has(p)) continue;
+    const file = join(root, p);
+    if (!existsSync(file) || isReferenced(p.slice("schemas/".length))) continue;
+    if (lf(read(file)) === lf(content)) stale.push(p);
+  }
+  return stale.sort();
+}
+
+/**
+ * py schema copies the vendor wrote and no longer attaches (a declaration stopped
+ * attaching it, say; it cannot see a schema upstream dropped): an exact py schema
+ * path, byte-identical to the upstream copy, not vendored now and not referenced
+ * by any endpoint YAML (vendored or JS-owned). A JS-authored file never qualifies.
+ * (Across a pin bump the old upstream is gone: see `findStaleAfterBump`.)
+ */
+export function findOrphans(root, outputs) {
+  const isReferenced = referencedBy(root, outputs);
   // Only exact paths of py schema copies the vendor wrote and no longer attaches:
   // a file at a py schema's (rewritten) path, byte-identical to the upstream copy,
   // not produced now and not referenced. Never a whole directory, so a JS-authored
   // schema (not yet referenced, or at a py path with its own content) is never touched.
   const up = join(root, UPSTREAM);
   const upSchemas = listYaml(join(up, "schemas"));
-  const lf = (t) => t.replace(/\r\n/g, "\n");
   const orphans = new Set();
   for (const [key, cfg] of familyEntries(loadManifest(root))) {
     const upFile = join(up, upstreamEndpointPath(key, cfg));
@@ -540,13 +593,37 @@ function gitSource(repo, ref) {
   };
 }
 
-function githubSource(repoSlug, ref) {
+/**
+ * GET with a bounded retry (default 3 attempts, exponential backoff) on network
+ * errors and HTTP 5xx only. Any other status (403 rate limit/entitlement, 404, ...)
+ * fails at once, and exhausted retries still throw: this never turns a failure into
+ * a pass. `fetchImpl` / `sleep` are injectable for tests.
+ */
+export async function fetchWithRetry(
+  url,
+  opts = {},
+  { fetchImpl = fetch, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), attempts = 3, baseMs = 500 } = {}
+) {
+  let last;
+  for (let i = 0; i < attempts; i++) {
+    if (i) await sleep(baseMs * 2 ** (i - 1));
+    let res;
+    try {
+      res = await fetchImpl(url, opts);
+    } catch (e) {
+      last = new Error(`GET ${url} -> network error: ${e.message ?? e}`);
+      continue;
+    }
+    if (res.ok) return res;
+    last = new Error(`GET ${url} -> HTTP ${res.status}`);
+    if (res.status < 500) throw last;
+  }
+  throw last;
+}
+
+export function githubSource(repoSlug, ref) {
   const headers = process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {};
-  const get = async (url, opts = {}) => {
-    const res = await fetch(url, opts);
-    if (!res.ok) throw new Error(`GET ${url} -> HTTP ${res.status}`);
-    return res;
-  };
+  const get = (url, opts = {}) => fetchWithRetry(url, opts);
   return {
     async tree(extra = []) {
       const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN.slice(0, -1)}?recursive=1`;
@@ -578,6 +655,42 @@ function githubSource(repoSlug, ref) {
   };
 }
 
+/** Upstream endpoint-level paths the vendor fetches: each family's endpoint YAML + the `copy:` files. */
+export function endpointPathsOf(manifest) {
+  return [
+    ...new Set([...familyEntries(manifest).map(([k, c]) => upstreamEndpointPath(k, c)), ...(manifest.copy ?? [])]),
+  ];
+}
+
+/**
+ * The schema + sdv-py module paths the vendor fetches, derived from the upstream
+ * tree (`Map(path -> blob sha)`) and the endpoint YAML texts (`endpointText(path)`).
+ * ONE definition, shared by `fetchUpstream` (what to fetch + LOCK) and the online
+ * LOCK check (what LOCK must contain), so a path dropped from LOCK cannot go unnoticed.
+ * Returns `{ schemaList, pyList, dangling }` (sorted / unique where it matters).
+ */
+export function selectUpstreamPaths(manifest, tree, endpointText, ref = manifest.source.ref) {
+  const available = [...tree.keys()].filter((p) => p.startsWith("schemas/")).map((p) => p.slice("schemas/".length));
+  const schemaPaths = new Set();
+  const dangling = [];
+  for (const p of endpointPathsOf(manifest)) {
+    if ((manifest.copy ?? []).includes(p)) continue;
+    for (const ref_ of schemaRefs(endpointText(p))) {
+      const files = schemaFilesFor(ref_, available);
+      if (!files.length) dangling.push(ref_);
+      files.forEach((f) => schemaPaths.add(`schemas/${f}`));
+    }
+  }
+  // The generated sdv-py modules whose public names JS must match (one per
+  // vendored flat family + one per league), located by file name in the package.
+  const pyList = pyModuleStems(manifest, endpointText).map((stem) => {
+    const hits = [...tree.keys()].filter((p) => p.startsWith(PY_UP) && p.endsWith(`/${stem}.py`));
+    if (hits.length !== 1) throw new Error(`${stem}.py: ${hits.length} matches under ${PY_PKG}/ at ${ref}`);
+    return hits[0];
+  });
+  return { schemaList: [...schemaPaths].sort(), pyList, dangling: [...new Set(dangling)].sort() };
+}
+
 /**
  * Fetch the upstream files at `ref` (default: the manifest pin) into
  * vendor/upstream/ (replacing it), each verified against the pinned tree's blob
@@ -589,35 +702,12 @@ export async function fetchUpstream(root = CODEGEN_DIR, ref = loadManifest(root)
   const src = process.env.SDV_PY_REPO ? gitSource(process.env.SDV_PY_REPO, ref) : githubSource(repo, ref);
 
   const tree = await src.tree(manifest.copy ?? []);
-  const endpointPaths = [
-    ...new Set([
-      ...familyEntries(manifest).map(([k, c]) => upstreamEndpointPath(k, c)),
-      ...(manifest.copy ?? []),
-    ]),
-  ];
+  const endpointPaths = endpointPathsOf(manifest);
   for (const p of endpointPaths) if (!tree.has(p)) throw new Error(`${PY_CODEGEN}${p} not found at ${ref}`);
   const endpointBufs = await src.getMany(endpointPaths);
-  const available = [...tree.keys()].filter((p) => p.startsWith("schemas/")).map((p) => p.slice("schemas/".length));
-  const schemaPaths = new Set();
-  const dangling = [];
-  endpointPaths.forEach((p, i) => {
-    if ((manifest.copy ?? []).includes(p)) return;
-    for (const ref_ of schemaRefs(endpointBufs[i].toString("utf8"))) {
-      const files = schemaFilesFor(ref_, available);
-      if (!files.length) dangling.push(ref_);
-      files.forEach((f) => schemaPaths.add(`schemas/${f}`));
-    }
-  });
-  const schemaList = [...schemaPaths].sort();
-  const schemaBufs = await src.getMany(schemaList);
-  // The generated sdv-py modules whose public names JS must match (one per
-  // vendored flat family + one per league), located by file name in the package.
   const fetched = new Map(endpointPaths.map((p, i) => [p, endpointBufs[i].toString("utf8")]));
-  const pyList = pyModuleStems(manifest, (p) => fetched.get(p)).map((stem) => {
-    const hits = [...tree.keys()].filter((p) => p.startsWith(PY_UP) && p.endsWith(`/${stem}.py`));
-    if (hits.length !== 1) throw new Error(`${stem}.py: ${hits.length} matches under ${PY_PKG}/ at ${ref}`);
-    return hits[0];
-  });
+  const { schemaList, pyList, dangling } = selectUpstreamPaths(manifest, tree, (p) => fetched.get(p), ref);
+  const schemaBufs = await src.getMany(schemaList);
   const pyBufs = await src.getMany(pyList);
 
   const files = [
@@ -637,7 +727,7 @@ export async function fetchUpstream(root = CODEGEN_DIR, ref = loadManifest(root)
   writeFileSync(join(up, REF_FILE), `${ref}\n`);
   const lock = files.map(([p]) => `${tree.get(p)}  ${p}`).sort((a, b) => a.slice(42).localeCompare(b.slice(42)));
   writeFileSync(join(up, LOCK_FILE), `${lock.join("\n")}\n`);
-  return { files: files.length, dangling: [...new Set(dangling)].sort() };
+  return { files: files.length, dangling };
 }
 
 /** Rewrite `source.ref` in vendor.yaml in place (keeps its comments). */
@@ -667,16 +757,36 @@ async function main(argv) {
     if (!/^[0-9a-f]{40}$/.test(sha ?? "")) throw new Error("--ref needs a full 40-char commit sha");
     if (argv.includes("--offline")) throw new Error("--ref fetches; it can't be combined with --offline");
   }
+  let before = null;
+  const skippedPrune = [];
   if (!argv.includes("--offline")) {
     // Fetch first: a failed fetch leaves vendor.yaml (and vendor/upstream) untouched.
     const ref = sha ?? loadManifest().source.ref;
+    // Derive the OUTGOING outputs per family before the fetch replaces vendor/upstream,
+    // so a py schema the new pin renamed/dropped can be recognised (findStaleAfterBump).
+    // A family that cannot derive (newly added to vendor.yaml, say) is named and skipped
+    // without disabling pruning for the rest.
+    before = new Map();
+    for (const [key] of familyEntries(loadManifest())) {
+      try {
+        for (const [p, c] of deriveAll(CODEGEN_DIR, key)) before.set(p, c);
+      } catch (e) {
+        skippedPrune.push(key);
+        console.warn(`vendor: prune skipped for family ${key} (outgoing outputs not derivable: ${e.message})`);
+      }
+    }
     const { files, dangling } = await fetchUpstream(CODEGEN_DIR, ref);
     if (sha) bumpRef(CODEGEN_DIR, sha);
     console.log(`vendor: fetched ${files} upstream files at ${ref}`);
     if (dangling.length) console.warn(`vendor: upstream names schemas it does not ship: ${dangling.join(", ")}`);
   }
   const { written, removed } = writeVendor();
+  if (before) for (const r of findStaleAfterBump(CODEGEN_DIR, before, deriveAll())) {
+    rmSync(join(CODEGEN_DIR, r));
+    removed.push(r);
+  }
   console.log(`vendor: wrote ${written} files${removed.length ? `, removed ${removed.length} orphans` : ""}`);
+  if (skippedPrune.length) console.log(`vendor: pin-bump prune skipped for: ${skippedPrune.join(", ")}`);
   for (const r of removed) console.log(`  removed tools/codegen/${r}`);
 }
 

@@ -10,6 +10,7 @@
 // here reaches the caller unchanged; anything else becomes
 // `AssetFetchError("<family>: auth failed (apply|refresh)")`.
 
+import { createHmac, randomBytes } from "node:crypto";
 import { SdvError } from "./errors.js";
 import type { Transport, TransportRequest } from "./transport.js";
 import { headerValue, mergeHeaders } from "./transport.js";
@@ -21,6 +22,21 @@ function present<T>(map: Record<string, T | undefined | null>): Record<string, T
     if (v !== undefined && v !== null && v !== "") out[k] = v;
   }
   return out;
+}
+
+// A random key per process: a credential cache key is useless outside it.
+const CREDENTIAL_KEY = randomBytes(32);
+
+/**
+ * The cache key for a set of credentials (e.g. e-mail + password): an HMAC
+ * under a random per-process key, so neither the plaintext nor an unsalted
+ * hash of a password is held for the life of the process.
+ * @internal
+ */
+export function credentialKey(...parts: string[]): string {
+  const h = createHmac("sha256", CREDENTIAL_KEY);
+  for (const p of parts) h.update(`${p.length}:${p}`); // length-prefixed: ("a","bc") != ("ab","c")
+  return h.digest("hex");
 }
 
 /** The SdvError raised when a provider has no credential to send (no request is made). */

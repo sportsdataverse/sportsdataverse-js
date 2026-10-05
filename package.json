@@ -45,10 +45,14 @@
     "yaml": "^2.9.0"
   },
   "peerDependencies": {
-    "impit": ">=0.14.0 <1"
+    "impit": ">=0.14.0 <1",
+    "playwright": ">=1.40.0 <2"
   },
   "peerDependenciesMeta": {
     "impit": {
+      "optional": true
+    },
+    "playwright": {
       "optional": true
     }
   },
@@ -71,6 +75,7 @@
     "codegen:check": "node tools/codegen/generate.mjs --check",
     "vendor": "node tools/codegen/vendor.mjs",
     "vendor:check": "node tools/codegen/vendor.mjs --check",
+    "vendor:check:online": "node tools/codegen/vendor-lock-online.mjs",
     "bundle:parsers": "esbuild src/parsers/browser.ts --bundle --format=esm --platform=browser --legal-comments=eof --outfile=docs/src/playground/parsers.bundle.mjs",
     "docs:examples": "node tools/docs/inject-outputs.mjs",
     "docs:examples:check": "node tools/docs/inject-outputs.mjs --check"

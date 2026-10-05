@@ -258,7 +258,8 @@ export { resolvePffApiKey } from './core/pff_api_runtime.js';
 export { hasKenpomLogin, kenpomLogin, kenpomClearSessionCache } from './core/kenpom_runtime.js';
 // node-only (cheerio) — not in the browser `sportsdataverse/parsers` barrel
 export { parse_kenpom_page } from './parsers/kenpom.js';
-export { NflProAuthError, nflProToken } from './core/nfl_pro_runtime.js';
+export { NflProAuthError, nflProToken, nflProBrowserLogin, nflProClearTokenCache } from './core/nfl_pro_runtime.js';
+export type { PlaywrightLike } from './core/nfl_pro_runtime.js';
 export type { FetchErrorDetails } from './core/errors.js';
 export {
   configure,
