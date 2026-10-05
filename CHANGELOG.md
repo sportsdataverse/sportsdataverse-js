@@ -6,6 +6,14 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Fixed — parser / analytics minors (sdv-py parity)
+
+- **Statcast `/gf`:** an empty-string id cell (`batter: ""`) is now `null`, like sdv-py's `to_numeric("")`; it kept the column text before (whitespace still leaves the column as read, as in py).
+- **`findTeam` / `findAthlete`:** the team-list cache is keyed by namespace identity (an injected namespace no longer poisons or reads another's), caches the in-flight promise (concurrent first calls share one fetch) and evicts it on rejection.
+- **Odds math:** `sum` is CPython 3.12+ compensated (Neumaier), so `devig_*` match py bit for bit; the Shin-fallback warning fires once per distinct message per process (py default filter); a NaN function value anywhere in the Shin solver is a `ValueError`, as in scipy.
+- **Cricket `norm_cdf`:** relative-accurate in the far-left tail (was ~1.8e-11 relative off from the `1 - erf` branch; now ~4e-16 vs a 60-digit reference).
+- **nba_stats:** documented/tested that a legit-empty `resultSets` is data (raw keeps the headers) and parses to `[]`/an empty entry.
+
 ### Changed — vendor LOCK online integrity check + vendor-sync hardening
 
 - **New:** `npm run vendor:check:online` (CI and the weekly vendor-sync) checks `vendor/upstream/LOCK` against sdv-py's `git/trees/<ref>` at the pinned ref: every blob sha must match, and LOCK's path set must equal exactly what the vendor fetches (computed by the same path-selection helper `npm run vendor` uses), so editing a copy together with its LOCK line, or dropping a LOCK line and hand-editing the vendored copy, both fail. A network failure is a failure to verify, never a pass; 5xx/network errors are retried (3 attempts), 403/404 are not.
