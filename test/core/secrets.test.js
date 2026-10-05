@@ -201,6 +201,35 @@ describe('security: safeCause redacts credential-looking text, and only that', (
     ["{ 'api_key': 'k-1234567' }", 'k-1234567'],
     ['Cookie: sid=s3cr3tSession; theme=dark', 's3cr3tSession'],
     ['set-cookie: JWT=abc.def.ghi; path=/', 'abc.def.ghi'],
+    // camelCase token names
+    ['accessToken=at-Synthetic-111', 'at-Synthetic-111'],
+    ['?refreshToken=rt_Synthetic_222&x=1', 'rt_Synthetic_222'],
+    ['sessionToken=st.Synthetic.333', 'st.Synthetic.333'],
+    ['{"accessToken":"at Synthetic 444"}', 'at Synthetic 444'],
+    ['{"id_token": "it-Synthetic-555"}', 'it-Synthetic-555'],
+    // URL-encoded scheme / separators
+    ['authorization=Bearer%20SyntheticTok666', 'SyntheticTok666'],
+    ['authorization=Bearer+SyntheticTok667', 'SyntheticTok667'],
+    ['Authorization%3A%20Bearer%20SyntheticTok668', 'SyntheticTok668'],
+    ['email%3Da%40b.c%26password%3DSyntheticPw777', 'SyntheticPw777'],
+    ['token%3DSyntheticTok888&next=1', 'SyntheticTok888'],
+    // JWTs glued to a word or to `%3D`
+    ['tokeneyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIn0.c2lnMg sent', 'eyJzdWIiOiIyIn0'],
+    ['id_token%3DeyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIn0.c2lnMw', 'eyJzdWIiOiIzIn0'],
+    ['cb?jwt=xeyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0In0.c2lnNA#frag', 'eyJzdWIiOiI0In0'],
+    // unquoted colon / spaced forms
+    ['password: SyntheticPw999', 'SyntheticPw999'],
+    ['token: SyntheticTok000', 'SyntheticTok000'],
+    ['password = SyntheticPw121', 'SyntheticPw121'],
+    ['client_secret : SyntheticCs131', 'SyntheticCs131'],
+    // more header names
+    ['X-Auth-Token: SyntheticXat141', 'SyntheticXat141'],
+    ['x-access-token=SyntheticXac151', 'SyntheticXac151'],
+    ['api-key: SyntheticApi161', 'SyntheticApi161'],
+    ['Ocp-Apim-Subscription-Key: 0123456789abcdef0123', '0123456789abcdef0123'],
+    // a bare Basic credential (base64 of user:password), and a long key=
+    ['retry with Basic dXNlcjpwYXNz', 'dXNlcjpwYXNz'],
+    ['key=0123456789abcdefSynthetic', '0123456789abcdefSynthetic'],
   ];
   const ORDINARY = [
     'nfl_api: auth failed (apply)',
@@ -218,6 +247,18 @@ describe('security: safeCause redacts credential-looking text, and only that', (
     'eyJ is the prefix of a JWT header',
     'version 1.2.3-beta (build 42)',
     'GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard -> HTTP 503',
+    'Authorization failed',
+    'token expired',
+    'max_tokens=512',
+    'primary key=player_id',
+    'key=value pair',
+    'join on key: game_id',
+    'Basic authentication required',
+    'Basic realm="kenpom"',
+    'access token expired; refresh token rotated',
+    'sessionToken missing from the response',
+    'heyJude.mp3 not found',
+    'retrying http://example.test/path -> 503',
   ];
 
   it('redacts every credential in the matrix (message, stack and name)', () => {
@@ -234,6 +275,17 @@ describe('security: safeCause redacts credential-looking text, and only that', (
 
   it('leaves ordinary text alone', () => {
     for (const text of ORDINARY) redactSecrets(text).should.equal(text);
+  });
+
+  it('is linear: 100 KB of adversarial input redacts in < 50 ms each (the old URL patterns took seconds)', () => {
+    // runs of scheme characters, URL / JWT / header prefixes repeated with no terminator
+    for (const unit of ['a-', 'a://', 'a://b/', 'eyJ', 'eyJa.', 'authorization=', 'password ', 'bearer ', '"password" ', 'x.']) {
+      const text = unit.repeat(Math.ceil(100_000 / unit.length)).slice(0, 100_000);
+      redactSecrets(text); // warm the regex compiler
+      const t0 = performance.now();
+      redactSecrets(text);
+      (performance.now() - t0).should.be.below(50, `slow on ${JSON.stringify(unit)}`);
+    }
   });
 
   it('a user transport that throws a leaky message: the AssetFetchError and its cause carry none of it', async () => {

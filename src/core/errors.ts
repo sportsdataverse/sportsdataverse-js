@@ -18,19 +18,36 @@ export interface FetchErrorDetails {
   cause?: unknown;
 }
 
-/** Names whose `name=value` / `"name": "value"` value is a credential. */
-const SECRET_NAMES = String.raw`(?:password|passwd|pwd|(?:access_|refresh_|id_|auth_)?token|client_?secret|secret|api_?key|key|jwt)`;
-/** A credential's alphabet (base64, base64url, hex, API keys, JWTs). */
-const CREDENTIAL = String.raw`[A-Za-z0-9._~+/=-]+`;
+// Every pattern below is linear in the input: a scan that could fail late
+// (a scheme, a JWT segment) is gated by a lookbehind so it only starts at the
+// beginning of a run, never at every character of one (a test bounds 100 KB of
+// adversarial input at < 50 ms).
+
+/** Names whose `name=value` / `name: value` / `"name": "value"` value is a credential. */
+const SECRET_NAMES = String.raw`(?:password|passwd|pwd|(?:(?:access|refresh|id|auth|session)[_-]?)?token|client[_-]?secret|secret|api[_-]?key|key|jwt)`;
+/** `=` / `:` (also URL-encoded, `%3D` / `%3A`), with optional spaces and quotes. */
+const SEP = String.raw`["']?\s*(?:[:=]|%3[ADad])\s*["']?`;
+/** A credential's alphabet (base64, base64url, hex, API keys, JWTs, URL-encoded). */
+const CREDENTIAL = String.raw`[A-Za-z0-9._~+/=%-]+`;
+/** An auth scheme and its separator (a space, or `%20` / `+` when URL-encoded). */
+const SCHEME = String.raw`(?:bearer|basic|token|digest|negotiate)(?:\s+|%20|\+)`;
 const AUTH_HEADER = new RegExp(
-  String.raw`\b((?:proxy-)?authorization|x-api-key)(["']?\s*[:=]\s*["']?)(?:(?:bearer|basic|token|digest|negotiate)\s+)?${CREDENTIAL}`,
+  String.raw`\b((?:proxy-)?authorization|x-api-key|x-auth-token|x-access-token|api-key|ocp-apim-subscription-key)(${SEP})(?:${SCHEME})?${CREDENTIAL}`,
   "gi"
 );
 const COOKIE_HEADER = /\b((?:set-)?cookie["']?\s*[:=]\s*["']?)[^"'\r\n]+/gi;
-const BEARER = new RegExp(String.raw`\b(bearer\s+)(${CREDENTIAL})`, "gi");
-const JWT = /\beyJ[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]*/g;
-const JSON_SECRET = new RegExp(String.raw`(["']${SECRET_NAMES}["']\s*:\s*["'])[^"']*`, "gi");
-const PAIR_SECRET = new RegExp(String.raw`(?<![A-Za-z0-9])(${SECRET_NAMES}=)[^&\s"'<>]+`, "gi");
+const BARE_SCHEME = new RegExp(String.raw`\b((bearer|basic)(?:\s+|%20|\+))(${CREDENTIAL})`, "gi");
+const JSON_SECRET = new RegExp(String.raw`(["'](${SECRET_NAMES})["']\s*:\s*["'])([^"']*)`, "gi");
+// The name starts a word, or follows a URL escape (`…%26password%3D…`).
+const PAIR_SECRET = new RegExp(
+  String.raw`(?<=^|[^A-Za-z0-9]|%[0-9A-Fa-f]{2})((${SECRET_NAMES})${SEP})([^&\s"'<>]+)`,
+  "gi"
+);
+/** A run that may hold a JWT (dots included); started only at a run boundary. */
+const TOKEN_RUN = /(?<![A-Za-z0-9_.-])[A-Za-z0-9_.-]+/g;
+const URL_USERINFO = /(?<![a-z0-9+.-])([a-z0-9+.-]+:\/\/)[^\s/@'"]+@/gi;
+// The path stops at the next `://`, so each URL's scan is bounded by the next one.
+const URL_QUERY = /(?<![a-z0-9+.-])([a-z0-9+.-]+:\/\/(?:(?!:\/\/)[^\s?#'"])*)\?[^\s#'"]*/gi;
 
 /**
  * A bare `Bearer x` is redacted only when `x` looks like a credential (8+
@@ -39,25 +56,64 @@ const PAIR_SECRET = new RegExp(String.raw`(?<![A-Za-z0-9])(${SECRET_NAMES}=)[^&\
  */
 const looksLikeCredential = (v: string): boolean => v.length >= 20 || (v.length >= 8 && /[^A-Za-z]/.test(v));
 
+/** `Basic x`: also redacted when `x` is base64 of printable `user:password`. */
+function isBasicCredential(v: string): boolean {
+  if (v.length < 8 || v.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/.test(v)) return false;
+  try {
+    const raw = atob(v);
+    return raw.includes(":") && /^[\x20-\x7e]+$/.test(raw);
+  } catch {
+    return false;
+  }
+}
+
+/** The value of `name`: a bare `key` must look like a credential (≥ 16 chars), so "primary key=player_id" stays. */
+const secretValue = (name: string, value: string): boolean => name.toLowerCase() !== "key" || value.length >= 16;
+
+/** Cut each JWT (`eyJ…` header, payload, signature) out of a dotted run, even when glued to a prefix. */
+function redactJwts(run: string): string {
+  if (!run.includes("eyJ")) return run;
+  const seg = run.split(".");
+  const out: string[] = [];
+  for (let i = 0; i < seg.length; i++) {
+    const at = seg[i].indexOf("eyJ");
+    if (at >= 0 && seg[i].length - at >= 8 && i + 2 < seg.length && seg[i + 1].length >= 2) {
+      out.push(`${seg[i].slice(0, at)}<redacted>`);
+      i += 2; // the payload and signature go with it
+    } else {
+      out.push(seg[i]);
+    }
+  }
+  return out.join(".");
+}
+
 /**
  * Redact what must never reach a log from free text: URL query strings (API keys
  * ride there, e.g. The Odds API's `apiKey`), `user:password@` URL credentials
  * (proxy URLs), and credential-looking text a transport may echo in its error
- * message — `Authorization` / `Proxy-Authorization` / `X-Api-Key` and `Cookie` /
- * `Set-Cookie` values, `Bearer <token>`, JWT-shaped strings, and the value of
- * `password=` / `token=` / `api_key=` / `client_secret=` / … pairs (also as
+ * message — `Authorization` / `Proxy-Authorization` / `X-Api-Key` /
+ * `X-Auth-Token` / `X-Access-Token` / `Api-Key` / `Ocp-Apim-Subscription-Key`
+ * and `Cookie` / `Set-Cookie` values, `Bearer <token>` / `Basic <base64>`,
+ * JWT-shaped strings, and the value of `password` / `token` / `accessToken` /
+ * `api_key` / `client_secret` / … pairs (`=`, `:` or URL-encoded, also as
  * `"password": "…"`). Ordinary text is left alone.
  */
 export function redactSecrets(text: string): string {
   return text
     .replace(AUTH_HEADER, "$1$2<redacted>")
     .replace(COOKIE_HEADER, "$1<redacted>")
-    .replace(BEARER, (m: string, prefix: string, v: string) => (looksLikeCredential(v) ? `${prefix}<redacted>` : m))
-    .replace(JWT, "<redacted>")
-    .replace(JSON_SECRET, "$1<redacted>")
-    .replace(PAIR_SECRET, "$1<redacted>")
-    .replace(/(\b[a-z][a-z0-9+.-]*:\/\/)[^\s/@'"]+@/gi, "$1<redacted>@")
-    .replace(/(\b[a-z][a-z0-9+.-]*:\/\/[^\s?#'"]*)\?[^\s#'"]*/gi, "$1?<redacted>");
+    .replace(BARE_SCHEME, (m: string, prefix: string, scheme: string, v: string) =>
+      looksLikeCredential(v) || (scheme.toLowerCase() === "basic" && isBasicCredential(v)) ? `${prefix}<redacted>` : m
+    )
+    .replace(TOKEN_RUN, redactJwts)
+    .replace(JSON_SECRET, (m: string, prefix: string, name: string, v: string) =>
+      secretValue(name, v) ? `${prefix}<redacted>` : m
+    )
+    .replace(PAIR_SECRET, (m: string, prefix: string, name: string, v: string) =>
+      secretValue(name, v) ? `${prefix}<redacted>` : m
+    )
+    .replace(URL_USERINFO, "$1<redacted>@")
+    .replace(URL_QUERY, "$1?<redacted>");
 }
 
 /**
