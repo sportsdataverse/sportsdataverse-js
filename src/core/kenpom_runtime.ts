@@ -24,18 +24,20 @@
 //
 // Importing this module registers the `kenpom` family defaults.
 
+import { createHash, randomUUID } from "node:crypto";
 import type { AuthContext, AuthProvider } from "./auth.js";
 import { sessionAuth } from "./auth.js";
 import { registerFamilyDefaults, resolveFamily } from "./config.js";
 import { AssetFetchError, SdvError } from "./errors.js";
 import { request } from "./request.js";
-import { registerParser } from "../parsers/_registry.js";
-import { parse_kenpom_page } from "../parsers/kenpom.js";
+// registers the node-only parse_kenpom_page in the flat parser registry
+import "../parsers/kenpom.js";
 import {
   createImpersonatingTransport,
   headerValue,
   mergeHeaders,
   type Transport,
+  type TransportRequest,
   type TransportResponse,
 } from "./transport.js";
 
@@ -161,8 +163,21 @@ async function login(
   };
 }
 
-/** One cached session per explicit e-mail (env credentials use the family default). */
-let explicitSessions = new Map<string, AuthProvider>();
+/**
+ * Internal routing header: the getter tags a request with the id of the
+ * explicit-credential session it should ride on; {@link kenpomAuth} reads and
+ * strips it, so it never reaches kenpom.com.
+ */
+const SESSION_HEADER = "x-sdv-kenpom-session";
+/** Explicit-credential sessions kept at once (sdv-py's `_SESSION_CACHE_MAX`); the oldest is evicted. */
+const SESSION_CACHE_MAX = 8;
+
+/**
+ * Explicit-credential sessions, keyed by e-mail + a SHA-256 of the password
+ * (never the plaintext), so a corrected password is a different session. Only
+ * a session whose login SUCCEEDED is cached.
+ */
+let explicitSessions = new Map<string, { id: string; provider: AuthProvider }>();
 
 function sessionFor(creds?: { email: string; password: string }): AuthProvider {
   return sessionAuth({
@@ -172,14 +187,67 @@ function sessionFor(creds?: { email: string; password: string }): AuthProvider {
 
 let envSession = sessionFor();
 
+const accountKey = (c: { email: string; password: string }): string =>
+  `${c.email}\u0000${createHash("sha256").update(c.password).digest("hex")}`;
+
+function sessionById(id: string): AuthProvider | undefined {
+  for (const s of explicitSessions.values()) if (s.id === id) return s.provider;
+  return undefined;
+}
+
+const withoutHeader = (headers: Record<string, string> | undefined, name: string): Record<string, string> =>
+  Object.fromEntries(Object.entries(headers ?? {}).filter(([k]) => k.toLowerCase() !== name));
+
+/** Same contract as request(): an SdvError passes through, anything else is an auth failure. */
+const authFailure = (step: string, url: string, err: unknown): SdvError =>
+  err instanceof SdvError ? err : new AssetFetchError(`${FAMILY}: auth failed (${step})`, { url, cause: err });
+
 /**
- * The `kenpom` auth provider: the environment-credential session, skipped when
- * the request already carries a `Cookie` (an explicit-credential session the
- * getter applied, or the caller's own cookie).
+ * The session for explicit credentials: a cached one, or a fresh login that is
+ * cached only once it succeeded. Returns the session's routing id.
+ */
+async function explicitSession(creds: { email: string; password: string }, ctx: AuthContext): Promise<string> {
+  const key = accountKey(creds);
+  const hit = explicitSessions.get(key);
+  if (hit) return hit.id;
+  const provider = sessionFor(creds);
+  try {
+    await provider.apply({ method: "GET", url: LOGIN_URL }, ctx); // logs in; throws on a rejected login
+  } catch (err) {
+    throw authFailure("login", LOGIN_URL, err);
+  }
+  if (explicitSessions.size >= SESSION_CACHE_MAX) {
+    explicitSessions.delete(explicitSessions.keys().next().value as string); // FIFO-evict the oldest
+  }
+  const id = randomUUID();
+  explicitSessions.set(key, { id, provider });
+  return id;
+}
+
+/**
+ * The `kenpom` auth provider. A request tagged with an explicit-credential
+ * session id rides on that session; one that already carries a `Cookie` (the
+ * caller's own session) is sent as-is; anything else uses the
+ * environment-credential session. `refresh` re-logs-in whichever session the
+ * failed request used (nothing to refresh for the caller's own cookie).
  */
 export const kenpomAuth: AuthProvider = {
-  apply: (req, ctx) => (headerValue(req.headers, "cookie") !== undefined ? Promise.resolve(req) : envSession.apply(req, ctx)),
-  refresh: (ctx) => envSession.refresh!(ctx),
+  async apply(req, ctx) {
+    const id = headerValue(req.headers, SESSION_HEADER);
+    if (id !== undefined) {
+      const provider = sessionById(id);
+      if (!provider) throw new SdvError(`${FAMILY}: that KenPom session is no longer cached — call again with email / password`);
+      return provider.apply({ ...req, headers: withoutHeader(req.headers, SESSION_HEADER) }, ctx);
+    }
+    if (headerValue(req.headers, "cookie") !== undefined) return req;
+    return envSession.apply(req, ctx);
+  },
+  async refresh(ctx) {
+    const id = headerValue(ctx.request?.headers, SESSION_HEADER);
+    if (id !== undefined) return sessionById(id)?.refresh?.(ctx);
+    if (headerValue(ctx.request?.headers, "cookie") !== undefined) return;
+    return envSession.refresh!(ctx);
+  },
 };
 
 /** Drop every cached KenPom session (credential rotation / tests). */
@@ -194,49 +262,65 @@ export function kenpomClearSessionCache(): void {
  */
 export async function kenpomLogin(opts: { email?: string; password?: string } = {}): Promise<void> {
   const ctx: AuthContext = { family: FAMILY, transport: resolveFamily(FAMILY).transport };
-  const provider = opts.email || opts.password ? explicitProvider(resolveKenpomCredentials(opts.email, opts.password)) : envSession;
-  await provider.apply({ method: "GET", url: LOGIN_URL }, ctx);
-}
-
-function explicitProvider(creds: { email: string; password: string }): AuthProvider {
-  let p = explicitSessions.get(creds.email);
-  if (!p) {
-    p = sessionFor(creds);
-    explicitSessions.set(creds.email, p);
+  if (opts.email || opts.password) {
+    await explicitSession(resolveKenpomCredentials(opts.email, opts.password), ctx);
+    return;
   }
-  return p;
+  try {
+    await envSession.apply({ method: "GET", url: LOGIN_URL }, ctx);
+  } catch (err) {
+    throw authFailure("login", LOGIN_URL, err);
+  }
 }
 
 /**
  * GET an authenticated kenpom.com page and return its HTML. The flat dispatch
  * calls this for every `kenpom_*` wrapper; `args` are the caller's params
  * (`email`, `password`).
+ *
+ * A page that comes back as the logged-out login form is a failed fetch, never
+ * data: the session that was used is refreshed once and the page re-fetched;
+ * if it is still logged out (or the caller's own cookie was rejected) the call
+ * throws AssetFetchError.
  */
 export async function kenpomGet(
   url: string,
   config: { params?: Record<string, unknown>; headers?: Record<string, string>; family: string; args?: Record<string, any> }
 ): Promise<string> {
   const args = config.args ?? {};
+  const { auth, transport } = resolveFamily(config.family);
+  const ctx: AuthContext = { family: config.family, transport };
   let headers = mergeHeaders({ "User-Agent": USER_AGENT, Referer: `${KENPOM_BASE_URL}/` }, config.headers);
-  if (headerValue(headers, "cookie") === undefined && (args.email || args.password)) {
-    // explicit credentials: log in with them (cached per e-mail) instead of the env session
-    const provider = explicitProvider(resolveKenpomCredentials(args.email, args.password));
-    const ctx: AuthContext = { family: config.family, transport: resolveFamily(config.family).transport };
-    try {
-      headers = (await provider.apply({ method: "GET", url, headers }, ctx)).headers ?? headers;
-    } catch (err) {
-      // same contract as request(): an SdvError passes through, anything else is an auth failure
-      if (err instanceof SdvError) throw err;
-      throw new AssetFetchError(`${FAMILY}: auth failed (login)`, { url, cause: err });
+  const ownCookie = headerValue(config.headers, "cookie") !== undefined;
+  if (!ownCookie && (args.email || args.password)) {
+    if (auth !== kenpomAuth) {
+      throw new SdvError(`${FAMILY}: email / password on the call need the built-in KenPom auth (a custom auth provider is configured for kenpom)`);
     }
+    const id = await explicitSession(resolveKenpomCredentials(args.email, args.password), ctx);
+    headers = mergeHeaders(headers, { [SESSION_HEADER]: id });
   }
-  const body = await request(config.family, { method: "GET", url, query: config.params, headers, responseType: "text" });
-  return typeof body === "string" ? body : "";
+  const page: TransportRequest = { method: "GET", url, query: config.params, headers, responseType: "text" };
+  const fetchPage = async (): Promise<string> => {
+    const body = await request(config.family, page);
+    return typeof body === "string" ? body : "";
+  };
+  let html = await fetchPage();
+  if (looksLoggedOut(html) && !ownCookie && auth?.refresh) {
+    try {
+      await auth.refresh({ ...ctx, request: page });
+    } catch (err) {
+      throw authFailure("refresh", url, err);
+    }
+    html = await fetchPage();
+  }
+  if (looksLoggedOut(html)) {
+    throw new AssetFetchError(
+      `${FAMILY}: ${url} came back as the logged-out login page — the session was not accepted`,
+      { url, status: 200 }
+    );
+  }
+  return html;
 }
-
-// KenPom's HTML parser needs cheerio: registered here (node) rather than in the
-// browser-safe parser registry.
-registerParser("parse_kenpom_page", parse_kenpom_page);
 
 registerFamilyDefaults(FAMILY, {
   transport: createImpersonatingTransport(),

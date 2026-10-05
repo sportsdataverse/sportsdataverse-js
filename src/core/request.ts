@@ -115,7 +115,7 @@ export async function requestResponse(
     if (status === 401 && auth?.refresh && !refreshed) {
       refreshed = true;
       try {
-        await auth.refresh(ctx);
+        await auth.refresh({ ...ctx, request: base });
       } catch (err) {
         throw authFailed("refresh", err, status);
       }

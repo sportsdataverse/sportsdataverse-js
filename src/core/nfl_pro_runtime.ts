@@ -134,7 +134,12 @@ export async function nflProGet(
   if (headerValue(headers, "authorization") === undefined && args.token) {
     headers = mergeHeaders(headers, { Authorization: `Bearer ${nflProToken(String(args.token))}` });
   }
-  const clean = { ...(config.params ?? {}) };
+  // sdv-py sends its `bool` params (`qualifiedPasser`, …) through requests,
+  // which writes Python's str(): "True" / "False" — send exactly that.
+  // ponytail: unverified live (no token); matches py byte-for-byte on the wire.
+  const clean = Object.fromEntries(
+    Object.entries(config.params ?? {}).map(([k, v]) => [k, typeof v === "boolean" ? (v ? "True" : "False") : v])
+  );
   const fetchPage = async (query: Record<string, unknown>): Promise<unknown> => {
     const text = await request(config.family, { method: "GET", url, query, headers, responseType: "text", timeoutMs: 45000 });
     const s = typeof text === "string" ? text : "";

@@ -463,3 +463,117 @@ describe('core: registerFamilyDefaults classifyError hook', () => {
     seen.should.eql([[400, 'https://x.test/a'], [503, 'https://x.test/a']]);
   });
 });
+
+describe('kenpom runtime: credential cache, logged-out pages, refresh routing', () => {
+  isolate();
+
+  /** A kenpom.com double: GOOD password logs in; pages are logged out until `loggedInAfter` logins. */
+  function site({ good = 'right', pageStatus = () => 200, loggedOutPages = 0 } = {}) {
+    let served = 0;
+    return fakeTransport((req) => {
+      if (req.method === 'GET' && req.url === 'https://kenpom.com/index.php' && !header(req, 'cookie')) {
+        return { status: 200, data: LOGIN_FORM, headers: { 'set-cookie': 'PHPSESSID=anon' } };
+      }
+      if (req.method === 'POST') {
+        const form = Object.fromEntries(new URLSearchParams(req.body));
+        return form.password === good
+          ? { status: 200, data: LOGGED_IN, headers: { 'set-cookie': `PHPSESSID=member-${form.email}` } }
+          : { status: 200, data: LOGIN_FORM };
+      }
+      const status = pageStatus(served);
+      served++;
+      if (status !== 200) return { status, data: '' };
+      return { status: 200, data: served <= loggedOutPages ? `<html>${LOGIN_FORM}<table id="t"></table></html>` : RATINGS };
+    });
+  }
+  const posts = (t) => t.calls.filter((c) => c.method === 'POST').map((c) => Object.fromEntries(new URLSearchParams(c.body)));
+
+  it('a failed explicit login is not cached: the corrected password for the same e-mail succeeds', async () => {
+    const t = site();
+    configure({ transport: { kenpom: t } });
+    const bad = await sdv.mbb.kenpomRatings({ year: 2025, email: 'a@example.com', password: 'wrong' }).then(() => null, (e) => e);
+    bad.should.be.instanceOf(SdvError);
+    bad.message.should.match(/rejected the supplied credentials/);
+    (await sdv.mbb.kenpomRatings({ year: 2025, email: 'a@example.com', password: 'right' })).should.equal(RATINGS);
+    posts(t).map((p) => p.password).should.eql(['wrong', 'right']);
+    // the good session is cached: no further login
+    await sdv.mbb.kenpomRatings({ year: 2024, email: 'a@example.com', password: 'right' });
+    posts(t).length.should.equal(2);
+  });
+
+  it('sessions are keyed by e-mail + password hash and capped at 8 (oldest evicted)', async () => {
+    const t = site({ good: 'right' });
+    configure({ transport: { kenpom: t } });
+    for (let i = 0; i < 9; i++) await sdv.mbb.kenpomRatings({ year: 2025, email: `u${i}@example.com`, password: 'right' });
+    posts(t).length.should.equal(9);
+    await sdv.mbb.kenpomRatings({ year: 2025, email: 'u8@example.com', password: 'right' }); // cached
+    posts(t).length.should.equal(9);
+    await sdv.mbb.kenpomRatings({ year: 2025, email: 'u0@example.com', password: 'right' }); // evicted -> logs in again
+    posts(t).length.should.equal(10);
+  });
+
+  it('a logged-out page is refreshed once, then re-fetched (never returned as data)', async () => {
+    process.env.KENPOM_EMAIL = 'env@example.com';
+    process.env.KENPOM_PW = 'right';
+    const t = site({ loggedOutPages: 1 });
+    configure({ transport: { kenpom: t } });
+    (await sdv.mbb.kenpomRatings({ year: 2025 })).should.equal(RATINGS);
+    posts(t).length.should.equal(2); // the first login + the refresh
+  });
+
+  it('still logged out after the refresh -> AssetFetchError; the caller\'s own cookie is never refreshed', async () => {
+    process.env.KENPOM_EMAIL = 'env@example.com';
+    process.env.KENPOM_PW = 'right';
+    let t = site({ loggedOutPages: 99 });
+    configure({ transport: { kenpom: t } });
+    const err = await sdv.mbb.kenpomRatings({ year: 2025 }).then(() => null, (e) => e);
+    err.should.be.instanceOf(AssetFetchError);
+    err.message.should.match(/logged-out login page/);
+    t = site({ loggedOutPages: 99 });
+    configure({ transport: { kenpom: t } });
+    const own = await sdv.mbb.kenpomRatings({ year: 2025, headers: { Cookie: 'PHPSESSID=mine' } }).then(() => null, (e) => e);
+    own.should.be.instanceOf(AssetFetchError);
+    posts(t).length.should.equal(0);
+  });
+
+  it('a 401 refreshes the session the request actually used (explicit credentials, not the env session)', async () => {
+    process.env.KENPOM_EMAIL = 'env@example.com';
+    process.env.KENPOM_PW = 'right';
+    const t = site({ pageStatus: (n) => (n === 0 ? 401 : 200) });
+    configure({ transport: { kenpom: t } });
+    (await sdv.mbb.kenpomRatings({ year: 2025, email: 'arg@example.com', password: 'right' })).should.equal(RATINGS);
+    posts(t).map((p) => p.email).should.eql(['arg@example.com', 'arg@example.com']);
+    // the routing header never reaches the site
+    for (const c of t.calls) should(header(c, 'x-sdv-kenpom-session')).be.undefined();
+  });
+});
+
+describe('subscription families: `section` through the wrappers + NFL Pro booleans', () => {
+  isolate();
+
+  it('callFlat passes `section` to the PFF + KenPom parsers', async () => {
+    process.env.PFF_API_KEY = 'ak_x';
+    configure({ transport: { pff_api: fakeTransport({ status: 200, data: fixture('pff_api', 'team_rushing_direction.json') }) } });
+    const totals = await sdv.nfl.pffApiTeamRushingDirection({ league: 'nfl', team: 'x', parsed: true, section: 'teamTotals' });
+    totals.should.eql(fixture('pff_api', 'team_rushing_direction.teamTotals.py.json').rows);
+    configure({ transport: { pff_api: fakeTransport({ status: 200, data: fixture('pff_api', 'player_offense_pass_blocking.json') }) } });
+    (await sdv.nfl.pffApiPlayerOffensePassBlocking({ league: 'nfl', player_id: 1, parsed: true, section: 'career' }))
+      .should.eql(fixture('pff_api', 'player_offense_pass_blocking.career.py.json').rows);
+    configure({ transport: { kenpom: fakeTransport({ status: 200, data: RATINGS }) } });
+    const t = await sdv.mbb.kenpomRatings({ year: 2025, headers: { Cookie: 'PHPSESSID=x' }, parsed: true, section: 'ratings_table' });
+    t.length.should.equal(8);
+    (await sdv.mbb.kenpomRatings({ year: 2025, headers: { Cookie: 'PHPSESSID=x' }, parsed: true, section: 'nope' }).then(() => null, (e) => e))
+      .message.should.match(/Choose one of \["ratings_table"\]/);
+  });
+
+  it('NFL Pro sends bool params the way sdv-py\'s requests does: "True" / "False"', async () => {
+    process.env.NFLPRO_TOKEN = ENTITLED();
+    const page = fixture('nfl_pro', 'players_offense_passing_season.json');
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ qualified: true, paginate: false });
+    t.calls[0].query.qualifiedPasser.should.equal('True');
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ qualified: false, paginate: false });
+    t.calls[1].query.qualifiedPasser.should.equal('False');
+  });
+});
