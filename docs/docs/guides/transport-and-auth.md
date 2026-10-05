@@ -52,6 +52,13 @@ keys passed as query parameters are not leaked into logs.
 arguments themselves (a PFF `400` / `422`, NFL Pro's empty `200`): the call can
 never succeed as made, so it is neither "no data" nor a failed fetch.
 
+**No credentials in errors.** An error's `cause` is always a sanitized copy
+of the underlying error: its name, message (URL query strings and
+`user:password@` redacted), stack and `code` / `errno` / `syscall` — never
+the HTTP client's request config, so an `Authorization` header, a cookie or a
+POSTed login form cannot surface in `util.inspect(err)` or a logged error.
+The built-in transports reject with the same sanitized errors.
+
 ## Retries, timeout, User-Agent
 
 ```js
@@ -79,6 +86,24 @@ registerFamilyDefaults('my_family', {
 ```
 
 `nfl_api` ships registered this way.
+
+A family can also map a final failed response — non-2xx, not `404`, no retry
+left — to its own error with `classifyError`. Return an `SdvError` to throw it
+instead of the default `AssetFetchError`, or `undefined` to keep the default;
+`404` is always `NoDataError` and never reaches the hook. `url` carries no
+query string. The PFF family uses it to turn `400` / `422` into
+`InvalidParameterError` with PFF's own error message:
+
+```js
+import { registerFamilyDefaults, InvalidParameterError, AssetFetchError } from 'sportsdataverse';
+
+registerFamilyDefaults('my_family', {
+  classifyError: (res, url) =>
+    res.status === 400 || res.status === 422
+      ? new InvalidParameterError(`my_family: rejected ${url}`, { url, status: res.status })
+      : undefined,
+});
+```
 
 ## Using a proxy
 
@@ -304,6 +329,10 @@ const table = await sdv.nfl.pffApiTeamStats({
   never read as a missing stat.
 - The read budget is 100 requests a minute per **account**, shared by every
   client holding the key.
+- `{ parsed: true }` keeps sdv-py's shapes. `section` picks one table: `/v2`
+  `'rows'` (default) or `'teamTotals'`; player reports `'weeks'` (default) or
+  `'career'`; a `/v1` matrix or multi-key body (a dict by default) by key.
+  An unknown name throws, listing the valid ones.
 
 **KenPom** (`kenpom`, `sdv.mbb.kenpom*`, 30 wrappers, `kenpom.com`) logs in
 with your subscription e-mail and password: `email` / `password` on the call,
@@ -329,7 +358,12 @@ one: install the optional `impit` (`npm install impit`). To add a proxy, set
 the family's transport yourself:
 `configure({ transport: { kenpom: createImpersonatingTransport({ proxyUrl }) } })`.
 `{ parsed: true }` returns every table on the page keyed by its HTML id, with
-the same column names as sportsdataverse-py (and hoopR's KenPom tables).
+the same column names as sportsdataverse-py (and hoopR's KenPom tables);
+add `section: '<table id>'` for one table. A page that comes back as the
+logged-out login form is never returned as data: the session that was used
+is refreshed once and the page re-fetched, then it throws `AssetFetchError`.
+Sessions for explicit credentials are keyed by e-mail plus a hash of the
+password, cached only after a successful login, and capped at 8.
 
 **NFL Pro** (`nfl_pro`, `sdv.nfl.nflPro*`, 16 wrappers, `pro.nfl.com`) serves
 the Next Gen Stats tables. Its secured routes need a **user-bound** token

@@ -319,11 +319,13 @@ transform is what made the provider families largely mechanical to add.
   (scoreboard / standings / rosters / leaders / athlete deep-dives / the 21-sub-frame
   `summary` dispatcher + two generics for Core v2 list + single-resource). All 116
   ESPN endpoints route through these; `summary` honours `section`.
-- The browser-safe public barrel is `src/parsers/index.ts`, exposed via the
-  `sportsdataverse/parsers` subpath export. It transitively imports only
-  `_normalize`, sibling parser modules, and `papaparse` (all browser-safe — no
-  node-only HTTP deps). `npm run bundle:parsers` esbuilds it into the playground so
-  parsing happens client-side. **Rebundle whenever a parser changes.**
+- The browser-safe barrel is `src/parsers/browser.ts`. It transitively imports
+  only `_normalize`, sibling parser modules, and `papaparse` (all browser-safe —
+  no node-only HTTP deps). `npm run bundle:parsers` esbuilds it into the
+  playground so parsing happens client-side. **Rebundle whenever a parser
+  changes.** The public `sportsdataverse/parsers` subpath export is
+  `src/parsers/index.ts` = `browser.ts` + the node-only KenPom HTML parser
+  (cheerio), which registers itself in `PARSERS` on import (`NODE_ONLY_PARSERS`).
 
 ### Namespace assembly (`src/index.ts`)
 
