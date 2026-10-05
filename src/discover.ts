@@ -10,6 +10,7 @@
  * offline with stubbed namespaces.
  */
 import { PARSERS } from './parsers/_registry.js';
+import { NoDataError, SdvError } from './core/errors.js';
 
 type Fn = (...a: any[]) => any;
 export type Namespaces = Record<string, Record<string, any>>;
@@ -20,7 +21,11 @@ async function defaultNs(): Promise<Namespaces> {
   return (await import('./index.js')).default as Namespaces;
 }
 
-/** Function names in one namespace, hiding the camelCase twin of every snake_case name. */
+/**
+ * Function names in one namespace. Approximation: a name is hidden when it equals toCamel() of
+ * a snake_case sibling (the generated twin pairs); a hand-written camelCase method that happens
+ * to collide with such a name would be hidden too.
+ */
 function listNamespace(mod: Record<string, any>): string[] {
   const keys = Object.keys(mod).filter((k) => typeof mod[k] === 'function');
   const twins = new Set(keys.filter((k) => k.includes('_')).map(toCamel));
@@ -30,7 +35,10 @@ function listNamespace(mod: Record<string, any>): string[] {
 export interface ListFunctionsOptions {
   /** Case-insensitive substring filter. */
   search?: string;
-  /** Only parser functions (`parse_*`, from the parser registry; league ignored). */
+  /**
+   * Only parser functions. Returns the flat parser registry (`PARSERS` keys): JS parsers have no
+   * league association, so `league` is ignored when this is set.
+   */
   parsersOnly?: boolean;
   /** Exclude `parse_*` names. */
   wrappersOnly?: boolean;
@@ -153,8 +161,11 @@ export async function findAthlete(
     let payload: any;
     try {
       payload = await roster({ team_id: t.id });
-    } catch {
-      continue; // py parity: a failing roster fetch skips that team
+    } catch (e) {
+      // Only "no roster here" skips a team; a FAILED fetch (403/429/5xx) must surface,
+      // never masquerade as "athlete not found".
+      if (e instanceof NoDataError) continue;
+      throw e;
     }
     const flat: any[] = [];
     for (const entry of payload?.athletes ?? []) {
@@ -183,7 +194,9 @@ export async function findEvent(
 ): Promise<any> {
   const space = ns ?? (await defaultNs());
   const { scoreboard } = leagueFns(space, league);
-  const payload = await scoreboard({ dates: parseInt(String(date).replace(/-/g, ''), 10) });
+  const ymd = String(date).replace(/-/g, '');
+  if (!/^\d{8}$/.test(ymd)) throw new SdvError(`Invalid date '${date}': expected YYYYMMDD or YYYY-MM-DD.`);
+  const payload = await scoreboard({ dates: parseInt(ymd, 10) });
   const label = (c: any) =>
     [c?.team?.displayName, c?.team?.location, c?.team?.abbreviation, c?.team?.name].filter(Boolean).join(' ');
   const hits: any[] = [];

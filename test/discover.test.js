@@ -4,7 +4,9 @@ import sdv, {
   listFunctions, functionCount, findTeam, findAthlete, findEvent, clearTeamCache, find_team,
 } from '../dist/index.js';
 
-const fx = (n) => JSON.parse(fs.readFileSync(new URL(`./fixtures/espn/${n}`, import.meta.url)));
+import { NoDataError, AssetFetchError, SdvError } from '../dist/index.js';
+
+const fx =(n) => JSON.parse(fs.readFileSync(new URL(`./fixtures/espn/${n}`, import.meta.url)));
 
 // Real captured ESPN payloads (test/fixtures/espn/README.md) served through stubbed namespaces.
 const nba = {
@@ -76,6 +78,26 @@ describe('find: name -> id (real ESPN captures)', () => {
     nba.lastScoreboard.dates.should.equal(20251005);
     should(await findEvent('20251005', 'nba', { home: 'Orlando' }, NS)).be.null();
     (await findEvent('20251005', 'nba', { multi: true }, NS)).length.should.equal(10);
+  });
+  it('findAthlete: NoDataError skips a team, AssetFetchError propagates', async () => {
+    const two = {
+      espn_nba_teams_site: nba.espn_nba_teams_site,
+      espn_nba_scoreboard: nba.espn_nba_scoreboard,
+      espn_nba_team_roster: async ({ team_id }) => {
+        if (team_id === '1') throw new NoDataError('no roster', { url: 'x', status: 404 });
+        return fx('team_roster_nba.json');
+      },
+    };
+    (await findAthlete('ayton', 'nba', {}, { nba: two })).fullName.should.equal('Deandre Ayton');
+    clearTeamCache();
+    const failing = { ...two, espn_nba_team_roster: async () => { throw new AssetFetchError('503', { url: 'x', status: 503 }); } };
+    await findAthlete('ayton', 'nba', {}, { nba: failing }).should.be.rejectedWith(AssetFetchError);
+  });
+  it('findEvent rejects invalid dates before any request', async () => {
+    nba.lastScoreboard = undefined;
+    await findEvent('not-a-date', 'nba', {}, NS).should.be.rejectedWith(SdvError);
+    await findEvent('2025-13', 'nba', {}, NS).should.be.rejectedWith(/Invalid date/);
+    should(nba.lastScoreboard).be.undefined();
   });
   it('snake_case aliases are the same functions', () => {
     find_team.should.equal(findTeam);
