@@ -45,6 +45,8 @@ DIR = ESPN / "basketball_pbp"
 OUT = DIR / "oracle.json.gz"
 BOX_ORACLE = BOX / "oracle.json.gz"
 EXTRA = [ESPN / "summary_nba.json"]
+# sdv-py's real pickcenter arrays (not captures: spliced into derived payloads below)
+PICKCENTER = DIR / "pickcenter.json"
 LEAGUES = ("nba", "wnba", "mbb", "wbb")
 SAME = {"__same__": True}
 SAFE = 2**53 - 1
@@ -173,6 +175,11 @@ def derived(captures):
         return p["plays"]
 
     nba_pc = "nba_summary_401360428.json.gz"
+    pc = json.loads(PICKCENTER.read_text(encoding="utf-8"))
+
+    def splice(lg, game_id):
+        return setp(lambda p: p.update(pickcenter=copy.deepcopy(pc[lg][game_id])))
+
     cases = [
         (
             "format_absent_2003",
@@ -364,6 +371,35 @@ def derived(captures):
             "`team` removed from every play: the name fallback credits 'Memphis full timeout' "
             "to MEM only (PHI is inside 'Memphis', but not as a whole word)",
             setp(lambda p: [x.pop("team", None) for x in plays(p)]),
+        ),
+        # The only captures with a pickcenter are NBA games; these put sdv-py's real arrays
+        # (pickcenter.json) into the MBB / WNBA / WBB summaries so each league's own game
+        # carries a spread the py oracle reads.
+        (
+            "pickcenter_mbb_330582427",
+            "summary_mbb.json.gz",
+            "pickcenter = MBB 330582427's: a record-only teamrankings row (no spread, favorite "
+            "false) sorts ahead of consensus -17.5 (home favored by the consensus row's sign)",
+            splice("mbb", "330582427"),
+        ),
+        (
+            "pickcenter_mbb_401364342",
+            "summary_mbb.json.gz",
+            "pickcenter = MBB 401364342's: Caesars \"45\", consensus \"1004\", teamrankings "
+            "\"1002\" (str(provider.id) order reads teamrankings' -13.0 / 160.5)",
+            splice("mbb", "401364342"),
+        ),
+        (
+            "pickcenter_wnba_401320565",
+            "summary_wnba.json.gz",
+            "pickcenter = WNBA 401320565's: one provider (Caesars), away favored (+2.5)",
+            splice("wnba", "401320565"),
+        ),
+        (
+            "pickcenter_wbb_401468165",
+            "summary_wbb.json.gz",
+            "pickcenter = WBB 401468165's: one provider (Caesars), away favored (+8.0)",
+            splice("wbb", "401468165"),
         ),
     ]
     out = {}
