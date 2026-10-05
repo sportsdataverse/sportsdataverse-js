@@ -85,10 +85,17 @@ function flattenHeaders(raw: unknown): Record<string, string> {
  */
 export const axiosTransport: Transport = async (req) => {
   const responseType = req.responseType ?? "json";
+  // Encoded once up front, so an invalid Date throws an SdvError before any
+  // request (axios rewraps an error thrown inside paramsSerializer as a plain
+  // Error, which would be retried as a network failure). Handed to axios as
+  // `params` + a serializer returning that string, never baked into `url`:
+  // `config.url` stays query-free for any app-level interceptor that logs it
+  // (a caller's apiKey rides in the query). Repeated keys for arrays (axios'
+  // default sends `k[]=a`).
+  const qs = encodeQuery(req.query);
   const config = {
     params: req.query,
-    // Repeated keys for arrays (axios' default would send `k[]=a&k[]=b`).
-    paramsSerializer: (params: Record<string, unknown>) => encodeQuery(params),
+    paramsSerializer: () => qs,
     headers: req.headers,
     timeout: req.timeoutMs,
     responseType,
@@ -130,8 +137,21 @@ function encodeComponent(value: string): string {
 }
 
 /**
+ * One query value as text. A `Date` is ISO-8601 UTC (`toISOString()`, what
+ * axios' own serializer sent before the transport layer); an invalid `Date`
+ * throws instead of sending `"Invalid Date"`.
+ */
+function queryValue(key: string, item: unknown): string {
+  if (!(item instanceof Date)) return String(item);
+  if (Number.isNaN(item.getTime())) throw new SdvError(`query param "${key}" is an invalid Date`);
+  return item.toISOString();
+}
+
+/**
  * Serialise a query map: `undefined` / `null` dropped, arrays as repeated keys
- * (`k=a&k=b`). Shared by every built-in transport so the wire form is identical.
+ * (`k=a&k=b`), a `Date` as ISO-8601 UTC. Shared by every built-in transport so
+ * the wire form is identical. A date-only API (`YYYY-MM-DD`, ESPN's
+ * `YYYYMMDD`) wants a string: pass one rather than a `Date`.
  */
 export function encodeQuery(query?: Record<string, unknown>): string {
   const parts: string[] = [];
@@ -139,7 +159,7 @@ export function encodeQuery(query?: Record<string, unknown>): string {
     if (v === undefined || v === null) continue;
     for (const item of Array.isArray(v) ? v : [v]) {
       if (item === undefined || item === null) continue;
-      parts.push(`${encodeComponent(k)}=${encodeComponent(String(item))}`);
+      parts.push(`${encodeComponent(k)}=${encodeComponent(queryValue(k, item))}`);
     }
   }
   return parts.join("&");

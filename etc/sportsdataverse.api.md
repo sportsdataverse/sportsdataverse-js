@@ -32,9 +32,8 @@ export interface AuthContext {
     transport: Transport;
 }
 
-// @public (undocumented)
+// @public
 export interface AuthProvider {
-    // (undocumented)
     apply(req: TransportRequest, ctx: AuthContext): Promise<TransportRequest>;
     refresh?(ctx: AuthContext): Promise<void>;
 }
@@ -80,7 +79,9 @@ export interface FamilyDefaults {
     // (undocumented)
     auth?: AuthProvider;
     classifyError?: ClassifyError;
+    retries?: number;
     retryStatuses?: readonly number[];
+    timeoutMs?: number;
     // (undocumented)
     transport?: Transport;
 }

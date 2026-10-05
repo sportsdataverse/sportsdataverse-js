@@ -1,8 +1,10 @@
 // BartTorvik / T-Rank runtime for the generated `torvik` flat wrappers. Port of
 // hoopR's `torvik_utils.R` (`.torvik_text` + `.torvik_user_agent`).
 //
-// barttorvik.com is auth-free but rejects default programmatic User-Agents, so
-// this getter sets a browser-like UA. The five wrapped endpoints are
+// barttorvik.com is auth-free. hoopR sets a browser-like UA; sdv-js sends the
+// configured `userAgent` (`configure({ userAgent })`; the default
+// "Mozilla/5.0 (compatible; sportsdataverse-js/3.x)" answered 200 live,
+// 2026-10-05), and a caller `User-Agent` header wins. The five wrapped endpoints are
 // heterogeneous — two CSV (`text/csv`), two JSON (one even served with a
 // `text/html` content-type), one headerless CSV — so this getter does NOT
 // content-type-branch the body; it returns the RAW response text and lets each
@@ -11,10 +13,6 @@
 // (NoDataError / AssetFetchError) rather than masquerading as an empty table.
 
 import { request } from "./request.js";
-import { mergeHeaders } from "./transport.js";
-
-// A polite browser-like UA (mirrors hoopR's approach), identifying sdv-js.
-const UA = "Mozilla/5.0 (sportsdataverse-js; +https://js.sportsdataverse.org/)";
 
 /**
  * GET a barttorvik.com URL and return the raw response body as a string.
@@ -39,7 +37,7 @@ export async function torvikGet(
     method: "GET",
     url,
     query: config.params,
-    headers: mergeHeaders({ "User-Agent": UA }, config.headers),
+    headers: config.headers,
     responseType: "text",
   });
   if (data == null) return "";

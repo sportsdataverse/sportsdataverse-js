@@ -125,7 +125,7 @@ async function login(
     url: LOGIN_URL,
     headers: { "User-Agent": USER_AGENT },
     responseType: "text",
-    timeoutMs: 30000,
+    timeoutMs: resolveFamily(FAMILY).timeoutMs, // configure({ timeoutMs }) > family default > 30 s
   });
   if (landing.status >= 400) {
     throw new AssetFetchError(`${FAMILY}: login page HTTP ${landing.status}`, { url: LOGIN_URL, status: landing.status });
@@ -144,7 +144,7 @@ async function login(
       ...(Object.keys(jar).length ? { Cookie: cookieHeader() } : {}),
     },
     responseType: "text",
-    timeoutMs: 30000,
+    timeoutMs: resolveFamily(FAMILY).timeoutMs, // configure({ timeoutMs }) > family default > 30 s
   });
   if (posted.status >= 400) {
     throw new AssetFetchError(`${FAMILY}: login POST HTTP ${posted.status}`, { url: action, status: posted.status });

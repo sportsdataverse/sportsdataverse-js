@@ -68,6 +68,16 @@ export interface FamilyDefaults {
    * always `NoDataError` and never reaches this hook.
    */
   classifyError?: ClassifyError;
+  /**
+   * The family's retry budget (sdv-py passes e.g. `num_retries=4` for PFF).
+   * `configure({ retries })` still wins when the user set it.
+   */
+  retries?: number;
+  /**
+   * The family's per-request timeout in ms (e.g. NFL Pro's slow tables).
+   * `configure({ timeoutMs })` still wins when the user set it.
+   */
+  timeoutMs?: number;
 }
 
 /**
@@ -84,6 +94,9 @@ const DEFAULTS = {
 };
 
 let user: SdvConfig = fresh();
+// The scalars the user actually passed to `configure`: those beat a family's
+// registered retries / timeoutMs, the built-in DEFAULTS do not.
+let userSet: { retries?: number; timeoutMs?: number } = {};
 const familyDefaults: Record<string, FamilyDefaults> = {};
 
 function fresh(): SdvConfig {
@@ -92,11 +105,15 @@ function fresh(): SdvConfig {
 
 /**
  * Set the transport, auth, retry budget, timeout or User-Agent. Calls merge:
- * map entries are added / replaced per family, scalars replace.
+ * map entries are added / replaced per family, scalars replace. A `retries` /
+ * `timeoutMs` set here applies to every family, including one that registered
+ * its own default.
  */
 export function configure(opts: ConfigureOptions): void {
   const transport =
     typeof opts.transport === "function" ? { default: opts.transport } : (opts.transport ?? {});
+  if (opts.retries !== undefined) userSet.retries = opts.retries;
+  if (opts.timeoutMs !== undefined) userSet.timeoutMs = opts.timeoutMs;
   user = {
     transport: { ...user.transport, ...transport },
     auth: { ...user.auth, ...(opts.auth ?? {}) },
@@ -114,14 +131,24 @@ export function getConfig(): SdvConfig {
 /** Drop everything set via `configure` (family runtime defaults stay installed). */
 export function resetConfig(): void {
   user = fresh();
+  userSet = {};
 }
 
 /**
- * For family runtimes: install the transport / auth / retry statuses a family
- * needs by default. A user `configure` entry for the same family still wins.
+ * For family runtimes: install the transport / auth / retry statuses / retry
+ * budget / timeout a family needs by default. A user `configure` entry for the
+ * same family (or a `retries` / `timeoutMs` the user set) still wins.
  */
 export function registerFamilyDefaults(family: string, defaults: FamilyDefaults): void {
   familyDefaults[family] = { ...familyDefaults[family], ...defaults };
+}
+
+/**
+ * Test seam: forget what {@link registerFamilyDefaults} installed for `families`.
+ * @internal
+ */
+export function _unregisterFamilyDefaults(...families: string[]): void {
+  for (const family of families) delete familyDefaults[family];
 }
 
 /**
@@ -129,7 +156,8 @@ export function registerFamilyDefaults(family: string, defaults: FamilyDefaults)
  * default > user `"default"` > axios — a host-required family transport (e.g.
  * TLS impersonation) is never silently replaced by a generic user default.
  * Auth: user `[family]` > registered default. Retry statuses: registered
- * default > {@link DEFAULT_RETRY_STATUSES}.
+ * default > {@link DEFAULT_RETRY_STATUSES}. Retries / timeout: a value the user
+ * set via `configure` > registered default > built-in (3 retries, 30 s).
  */
 export function resolveFamily(family: string): ResolvedFamilyConfig {
   const fam = familyDefaults[family] ?? {};
@@ -137,8 +165,8 @@ export function resolveFamily(family: string): ResolvedFamilyConfig {
     transport:
       user.transport[family] ?? fam.transport ?? user.transport.default ?? axiosTransport,
     auth: user.auth[family] ?? fam.auth,
-    retries: user.retries,
-    timeoutMs: user.timeoutMs,
+    retries: userSet.retries ?? fam.retries ?? user.retries,
+    timeoutMs: userSet.timeoutMs ?? fam.timeoutMs ?? user.timeoutMs,
     userAgent: user.userAgent,
     retryStatuses: fam.retryStatuses ?? DEFAULT_RETRY_STATUSES,
     classifyError: fam.classifyError,

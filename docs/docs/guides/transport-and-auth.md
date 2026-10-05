@@ -53,8 +53,11 @@ arguments themselves (a PFF `400` / `422`, NFL Pro's empty `200`): the call can
 never succeed as made, so it is neither "no data" nor a failed fetch.
 
 **No credentials in errors.** An error's `cause` is always a sanitized copy
-of the underlying error: its name, message (URL query strings and
-`user:password@` redacted), stack and `code` / `errno` / `syscall` — never
+of the underlying error: its name, message and stack — with URL query strings,
+`user:password@`, and credential-looking text redacted (`Authorization` /
+`Cookie` values, `Bearer <token>`, JWT-shaped strings, `password=` / `token=` /
+`api_key=` values), including in an error your own transport throws — and
+`code` / `errno` / `syscall`; never
 the HTTP client's request config, so an `Authorization` header, a cookie or a
 POSTed login form cannot surface in `util.inspect(err)` or a logged error.
 The built-in transports reject with the same sanitized errors.
@@ -86,6 +89,12 @@ registerFamilyDefaults('my_family', {
 ```
 
 `nfl_api` ships registered this way.
+
+A family can register its own `retries` and `timeoutMs` too (`pff_api` uses
+sdv-py's 4 retries, `nfl_pro` its 45 s timeout). A `retries` / `timeoutMs` you
+pass to `configure` always wins over a family's own; the built-in 3 retries /
+30 s apply only where neither is set. Login and token-mint requests (KenPom,
+247Sports, `nfl_api`) use the same resolved timeout.
 
 A family can also map a final failed response — non-2xx, not `404`, no retry
 left — to its own error with `classifyError`. Return an `SdvError` to throw it
@@ -151,6 +160,12 @@ So a generic proxy set as `default` never silently replaces a transport a host
 requires, such as the browser-impersonating transport below. To proxy such a
 family, configure that family explicitly. The impersonating transport takes a
 `proxyUrl`. `resetConfig()` drops everything you configured.
+
+**Query values.** The built-in transports send an array as repeated keys
+(`k=a&k=b`) and a `Date` as ISO-8601 UTC (`2025-02-01T00:00:00.000Z`); an
+invalid `Date` throws an `SdvError` before anything is sent. Where an API wants
+a bare date (`YYYY-MM-DD`, ESPN's `dates=YYYYMMDD`, stats.nba.com's
+`MM/DD/YYYY`), pass that string rather than a `Date`.
 
 ## Browser-impersonating transport
 
@@ -227,7 +242,9 @@ Anything else becomes `AssetFetchError` with the message
 
 **Minted tokens** — `tokenAuth` calls `mint` once, caches the token in-process,
 re-mints `skewSeconds` (default 60) before `expiresAt` (unix epoch **seconds**,
-like a JWT `exp`), and re-mints immediately after a `401`. Concurrent requests
+like a JWT `exp`), and re-mints immediately after a `401` (unless the request
+carried your own credential in that header, which a new token would not
+replace). Concurrent requests
 share one in-flight mint. `mint` receives the family's transport, which bypasses
 auth, so the token call itself is not decorated:
 
@@ -286,12 +303,15 @@ The `nfl_api` family ships with a registered `tokenAuth` that mints an anonymous
 NFL.com web token for you. Override it with environment variables —
 `NFL_ACCESS_TOKEN` (used verbatim), or `NFL_CLIENT_KEY` / `NFL_CLIENT_SECRET`
 (mint with your own client credentials) — or replace it entirely with
-`configure({ auth: { nfl_api: ... } })`.
+`configure({ auth: { nfl_api: ... } })`. The built-in mint retries a network
+error or a `408` / `429` / `5xx` itself (with the `nfl_api` retry budget), but
+never a `401` / `403`.
 
 ### Subscription families: PFF, KenPom, NFL Pro
 
 Three families need **your own paid credentials**. Each registers its own auth,
-never retries a `403` (there it is an entitlement answer, not load), and is
+never retries a `403` (there it is an entitlement answer, not load; PFF, like
+sdv-py, does not retry a `408` either), and is
 never reachable from the docs playground. Credentials on the call win over the
 environment; with none anywhere the call throws an `SdvError` naming the
 variables to set, before any request goes out. Keys, tokens and passwords never
@@ -459,14 +479,18 @@ npm install impit
 - **Auth (`sports247` only).** The family registers a `tokenAuth`. On first use
   it requests `https://247sports.com/` and reads the free **guest** `JWT` cookie
   (no login, valid about 12 hours). It caches that token and re-mints it a
-  minute before the JWT `exp` and once after a `401`. If the mint fails, the
-  request goes out **without** a token, as in sdv-py, and one warning is emitted
-  per process. Public routes such as `teams` still answer. A route that needs
-  the token still fails loudly: its `401` triggers one refresh, whose mint fails
-  and throws, or it answers `403` (`AssetFetchError`).
-  `sports247ClearTokenCache()` drops the cached token.
-- **No `403` retries.** A `403` here means the fingerprint block or a
-  logged-in-only route, so neither family retries it.
+  minute before the JWT `exp`, and once after a `401` or — as sdv-py, since an
+  expired guest token can answer `403` — a `403` (not when you sent your own
+  `Authorization`). If the mint fails, the request goes out **without** a
+  token, as in sdv-py, one warning is emitted per process, and the mint is not
+  re-tried for a minute. Public routes such as `teams` still answer. A route
+  that needs the token still fails loudly: its `401` triggers one refresh, whose
+  mint fails and throws, or its `403` stands (`AssetFetchError`).
+  `sports247ClearTokenCache()` drops the cached token and the failure state.
+- **No `403` status retries.** Beyond that one re-mint, a `403` here means the
+  fingerprint block or a logged-in-only route, so neither family retries it.
+- **User-Agent.** Requests send the User-Agent of the impersonated browser
+  profile (Chrome 142), so the UA agrees with the TLS fingerprint.
 - Thirteen RDB routes (for example `biggestMovers` and `playerSportRankings`)
   need a logged-in 247Sports session and are not wrapped.
 
