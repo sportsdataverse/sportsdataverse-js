@@ -124,9 +124,17 @@ export function rewriteSchema(ref, prefixes = {}) {
 }
 
 /** The `returns_schema` refs an endpoint YAML text names. */
+// Memoized by text: the YAML parse dominates a check (derive + orphan scan read the
+// same ~1 MB of endpoint files several times), and the result is pure in `text`.
+const refsMemo = new Map();
 export function schemaRefs(text) {
-  const eps = parse(text)?.endpoints; // espn_parser_map.yaml's is a map, not a list
-  return Array.isArray(eps) ? [...new Set(eps.map((e) => e?.returns_schema).filter(Boolean))] : [];
+  let refs = refsMemo.get(text);
+  if (!refs) {
+    const eps = parse(text)?.endpoints; // espn_parser_map.yaml's is a map, not a list
+    refs = Array.isArray(eps) ? [...new Set(eps.map((e) => e?.returns_schema).filter(Boolean))] : [];
+    refsMemo.set(text, refs);
+  }
+  return [...refs];
 }
 
 /**
@@ -192,6 +200,17 @@ export function mapParser(cfg, pyParser, where) {
  * `schema_incompatible` entry that matches no vendored endpoint) or a duplicate short.
  */
 export function transformFamily(key, cfg, upstreamText, overlayText, source) {
+  // Pure in its inputs, and parsing ~1 MB of endpoint YAML is the slow part of every
+  // check/derive (it made the temp-tree vendor tests flaky against their timeout), so
+  // identical inputs reuse the result. Callers treat the result as read-only.
+  const memoKey = JSON.stringify([key, cfg, upstreamText, overlayText, source]);
+  let hit = transformMemo.get(memoKey);
+  if (!hit) transformMemo.set(memoKey, (hit = transformFamilyUncached(key, cfg, upstreamText, overlayText, source)));
+  return hit;
+}
+const transformMemo = new Map();
+
+function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
   const doc = parseDocument(upstreamText);
   const from = cfg.from ?? key;
   const header =
@@ -367,13 +386,8 @@ export function deriveAll(root = CODEGEN_DIR) {
   return out;
 }
 
-/**
- * py schema copies the vendor wrote and no longer attaches (upstream renamed or
- * dropped the schema, or a declaration stopped attaching it): an exact py schema
- * path, byte-identical to the upstream copy, not vendored now and not referenced
- * by any endpoint YAML (vendored or JS-owned). A JS-authored file never qualifies.
- */
-export function findOrphans(root, outputs) {
+/** Predicate: is a schema path (relative to schemas/) named by any endpoint YAML, vendored or JS-owned? */
+function referencedBy(root, outputs) {
   const referenced = new Set();
   const endpointsDir = join(root, "endpoints");
   const endpointTexts = new Map(
@@ -383,17 +397,50 @@ export function findOrphans(root, outputs) {
   );
   for (const [p, t] of outputs) if (p.startsWith("endpoints/")) endpointTexts.set(p, t);
   for (const t of endpointTexts.values()) for (const r of schemaRefs(t)) referenced.add(r);
-  const isReferenced = (rel) => {
+  return (rel) => {
     const ref = rel.replace(/\.yaml$/, "");
     return referenced.has(ref) || (ref.includes("/") && referenced.has(ref.slice(0, ref.lastIndexOf("/"))));
   };
+}
+
+const lf = (t) => t.replace(/\r\n/g, "\n");
+
+/**
+ * Copies a pin bump leaves behind. `fetchUpstream` replaces vendor/upstream before
+ * the re-derive, so `findOrphans` (which compares against the NEW upstream) cannot
+ * see a py schema the bump renamed or dropped. Compare the outgoing derived outputs
+ * (`oldOutputs`, derived from the OLD upstream before the fetch) with the incoming
+ * ones: a schema path only the old pin vendored, whose file is byte-identical to the
+ * old copy and not referenced, is stale. A JS-authored file (different bytes, or never
+ * vendored) never qualifies.
+ */
+export function findStaleAfterBump(root, oldOutputs, outputs) {
+  const isReferenced = referencedBy(root, outputs);
+  const stale = [];
+  for (const [p, content] of oldOutputs) {
+    if (!p.startsWith("schemas/") || outputs.has(p)) continue;
+    const file = join(root, p);
+    if (!existsSync(file) || isReferenced(p.slice("schemas/".length))) continue;
+    if (lf(read(file)) === lf(content)) stale.push(p);
+  }
+  return stale.sort();
+}
+
+/**
+ * py schema copies the vendor wrote and no longer attaches (upstream renamed or
+ * dropped the schema, or a declaration stopped attaching it): an exact py schema
+ * path, byte-identical to the upstream copy, not vendored now and not referenced
+ * by any endpoint YAML (vendored or JS-owned). A JS-authored file never qualifies.
+ * (Across a pin bump the old upstream is gone: see `findStaleAfterBump`.)
+ */
+export function findOrphans(root, outputs) {
+  const isReferenced = referencedBy(root, outputs);
   // Only exact paths of py schema copies the vendor wrote and no longer attaches:
   // a file at a py schema's (rewritten) path, byte-identical to the upstream copy,
   // not produced now and not referenced. Never a whole directory, so a JS-authored
   // schema (not yet referenced, or at a py path with its own content) is never touched.
   const up = join(root, UPSTREAM);
   const upSchemas = listYaml(join(up, "schemas"));
-  const lf = (t) => t.replace(/\r\n/g, "\n");
   const orphans = new Set();
   for (const [key, cfg] of familyEntries(loadManifest(root))) {
     const upFile = join(up, upstreamEndpointPath(key, cfg));
@@ -540,7 +587,7 @@ function gitSource(repo, ref) {
   };
 }
 
-function githubSource(repoSlug, ref) {
+export function githubSource(repoSlug, ref) {
   const headers = process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {};
   const get = async (url, opts = {}) => {
     const res = await fetch(url, opts);
@@ -670,12 +717,24 @@ async function main(argv) {
   if (!argv.includes("--offline")) {
     // Fetch first: a failed fetch leaves vendor.yaml (and vendor/upstream) untouched.
     const ref = sha ?? loadManifest().source.ref;
+    // Derive the OUTGOING outputs before the fetch replaces vendor/upstream, so a py
+    // schema the new pin renamed/dropped can be recognised (findStaleAfterBump).
+    let before = null;
+    try {
+      before = deriveAll();
+    } catch (e) {
+      console.warn(`vendor: could not derive the outgoing outputs (${e.message}); stale schema copies won't be pruned`);
+    }
     const { files, dangling } = await fetchUpstream(CODEGEN_DIR, ref);
     if (sha) bumpRef(CODEGEN_DIR, sha);
     console.log(`vendor: fetched ${files} upstream files at ${ref}`);
     if (dangling.length) console.warn(`vendor: upstream names schemas it does not ship: ${dangling.join(", ")}`);
   }
   const { written, removed } = writeVendor();
+  if (before) for (const r of findStaleAfterBump(CODEGEN_DIR, before, deriveAll())) {
+    rmSync(join(CODEGEN_DIR, r));
+    removed.push(r);
+  }
   console.log(`vendor: wrote ${written} files${removed.length ? `, removed ${removed.length} orphans` : ""}`);
   for (const r of removed) console.log(`  removed tools/codegen/${r}`);
 }

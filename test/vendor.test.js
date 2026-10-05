@@ -14,6 +14,7 @@ import {
   CODEGEN_DIR,
   checkVendor,
   deriveAll,
+  findStaleAfterBump,
   writeVendor,
   gitBlobSha,
   loadManifest,
@@ -24,6 +25,7 @@ import {
   schemaFilesFor,
   transformFamily,
 } from '../tools/codegen/vendor.mjs';
+import { readLock, verifyLockOnline } from '../tools/codegen/vendor-lock-online.mjs';
 
 // Offline tests over the COMMITTED upstream copies in tools/codegen/vendor/
 // upstream/ (verbatim sdv-py files at the pinned ref) — no network.
@@ -335,6 +337,51 @@ describe('vendor:check (offline drift gate)', function () {
     orphans.length.should.equal(readdirSync(join(tmp, 'schemas', 'native', 'nhl_edge')).length);
   });
 
+  it('a pin bump prunes a py schema the new pin dropped, but never a JS-authored file', () => {
+    const rel = 'schemas/native/dropped_family/gone.yaml';
+    const oldBytes = 'returns:\n  - col_name: a\n';
+    const old = new Map([...deriveAll(tmp), [rel, oldBytes]]); // outgoing pin vendored it
+    const incoming = deriveAll(tmp); // incoming pin no longer does
+    put(join(tmp, rel), oldBytes); // byte-identical to the OLD upstream copy
+    findStaleAfterBump(tmp, old, incoming).should.eql([rel]);
+    put(join(tmp, rel), oldBytes + '# JS-authored edit\n');
+    findStaleAfterBump(tmp, old, incoming).should.eql([]);
+    // a JS-authored schema the old pin never vendored is never a candidate
+    put(join(tmp, 'schemas', 'js_only', 'mine.yaml'), 'x: 1\n');
+    findStaleAfterBump(tmp, deriveAll(tmp), incoming).should.eql([]);
+  });
+
+  describe('online LOCK check', () => {
+    const treeOf = (lock) => async () => new Map(lock);
+    it('passes when LOCK equals the upstream tree', async () => {
+      (await verifyLockOnline(tmp, treeOf(readLock(tmp)))).should.eql([]);
+    });
+
+    it('fails when a copy and its LOCK line are edited together (offline check cannot see it)', async () => {
+      const genuine = readLock(tmp); // what upstream really has
+      const path = 'endpoints/cbs_napi.yaml';
+      const f = join(tmp, 'vendor', 'upstream', path);
+      const edited = Buffer.concat([readFileSync(f), Buffer.from('# tampered\n')]);
+      writeFileSync(f, edited);
+      const lockFile = join(tmp, 'vendor', 'upstream', 'LOCK');
+      writeFileSync(lockFile, readFileSync(lockFile, 'utf8').replace(genuine.get(path), gitBlobSha(edited)));
+      writeVendor(tmp); // re-derive so the offline gate is satisfied too
+      checkVendor(tmp).should.eql([]);
+      const problems = await verifyLockOnline(tmp, treeOf(genuine));
+      problems.should.have.length(1);
+      problems[0].should.match(/endpoints\/cbs_napi\.yaml is pinned to blob .* but upstream has /);
+    });
+
+    it('fails on a LOCK path missing upstream, and rejects (never passes) when the fetch fails', async () => {
+      const tree = readLock(tmp);
+      tree.delete('endpoints/cbs_napi.yaml');
+      (await verifyLockOnline(tmp, treeOf(tree)))[0].should.match(/endpoints\/cbs_napi\.yaml is not in /);
+      await verifyLockOnline(tmp, async () => {
+        throw new Error('GET https://api.github.com/... -> HTTP 403');
+      }).should.be.rejectedWith(/HTTP 403/);
+    });
+  });
+
   it('flags a manifest pin the upstream copy was not fetched at', () => {
     const f = join(tmp, 'vendor.yaml');
     writeFileSync(f, readFileSync(f, 'utf8').replace(manifest.source.ref, 'f'.repeat(40)));
@@ -422,5 +469,33 @@ describe('vendor-sync.yml', () => {
   it('checks out without persisting the job token', () => {
     steps[0].uses.should.startWith('actions/checkout@');
     steps[0].with['persist-credentials'].should.be.false();
+  });
+});
+
+describe('workflows: LOCK online check + vendor-sync failure handling', () => {
+  const wfDir = join(CODEGEN_DIR, '..', '..', '.github', 'workflows');
+  const sync = parse(readFileSync(join(wfDir, 'vendor-sync.yml'), 'utf8')).jobs.sync;
+  const ci = parse(readFileSync(join(wfDir, 'ci.yml'), 'utf8')).jobs.build.steps;
+
+  it('CI runs the online LOCK check', () => {
+    ci.some((s) => s.run === 'npm run vendor:check:online').should.be.true();
+  });
+
+  it('GITHUB_TOKEN is exposed to the vendor step only (never job-wide or in other steps)', () => {
+    (sync.env ?? {}).should.not.have.property('GITHUB_TOKEN');
+    const withToken = sync.steps.filter((s) => s.env?.GITHUB_TOKEN).map((s) => s.name);
+    withToken.should.eql(['Vendor + regenerate']);
+    sync.steps.find((s) => s.name === 'Vendor + regenerate').run.should.match(/vendor:check:online/);
+  });
+
+  it('a vendor failure opens or updates an issue instead of only going red', () => {
+    const v = sync.steps.find((s) => s.name === 'Vendor + regenerate');
+    v.id.should.equal('vendor');
+    v['continue-on-error'].should.be.true();
+    const issue = sync.steps.find((s) => s.name === 'Report vendor failure');
+    issue.if.should.match(/steps\.vendor\.outcome == 'failure'/);
+    issue.run.should.match(/gh issue (create|comment)/);
+    // later steps only run when vendoring succeeded
+    sync.steps.find((s) => s.id === 'test').if.should.match(/steps\.vendor\.outcome == 'success'/);
   });
 });

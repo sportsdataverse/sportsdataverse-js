@@ -29,6 +29,13 @@ jobs:
       # from tools/codegen/vendor/upstream (offline) — catches hand-edits.
       - name: Vendor drift check
         run: npm run vendor:check
+      # Online: every LOCK blob sha must equal sdv-py's git tree at the pinned ref,
+      # which the offline gate cannot prove (a copy and its LOCK line edited together
+      # pass it). Unreachable GitHub = failure to verify = red.
+      - name: Vendor LOCK online check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run vendor:check:online
       - name: Codegen drift check
         run: npm run codegen:check
       - name: Type-check

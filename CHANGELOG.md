@@ -6,6 +6,13 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed — vendor LOCK online integrity check + vendor-sync hardening
+
+- **New:** `npm run vendor:check:online` (CI and the weekly vendor-sync) compares every `vendor/upstream/LOCK` blob sha with sdv-py's `git/trees/<ref>` at the pinned ref, closing the hole where a vendored copy and its LOCK line are edited together and pass the offline `vendor:check`. A network failure is a failure to verify, never a pass.
+- **vendor-sync:** `GITHUB_TOKEN` is exposed to the vendor step only; a vendor/fetch/LOCK failure now opens or updates a "vendor-sync failed" issue (the run still goes red) instead of only failing.
+- **Pin bumps** now remove a py schema copy that the new pin renamed or dropped (byte-identical to the old upstream; JS-authored files are never touched). `npm run vendor`/`vendor:check` previously compared against the already-replaced upstream and missed it.
+- The vendor tests no longer flake against their timeout: endpoint-YAML parsing (the slow path, repeated per temp-tree copy) is memoized.
+
 
 ### Security
 
