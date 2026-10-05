@@ -1,4 +1,5 @@
 import should from 'should';
+import { readFileSync } from 'node:fs';
 import { LEAGUES, WRAPPERS, FLAT_WRAPPERS } from '../dist/index.js';
 import { resolveRequest } from '../dist/core/espn.js';
 import { resolveFlat as pkgResolveFlat } from '../dist/core/flat.js';
@@ -146,6 +147,23 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
       const expectedHost = new URL(FLAT_HOSTS[api]).host;
       FLAT_WRAPPERS.some((w) => w.api === api).should.be.true();
       expectedHost.should.be.a.String();
+    }
+  });
+
+  it('never exposes the subscription families (PFF API, KenPom, NFL Pro) to the playground or proxy', async () => {
+    const endpoints = JSON.parse(readFileSync(new URL('../docs/src/playground/endpoints.json', import.meta.url), 'utf8'));
+    for (const api of ['pff_api', 'kenpom', 'nfl_pro']) {
+      FLAT_WRAPPERS.some((w) => w.api === api).should.be.true(); // the package has them…
+      should(endpoints.flatHosts[api]).be.undefined(); // …the proxy allowlist does not
+      should(endpoints.flatLeagues[api]).be.undefined();
+      endpoints.flatApis.some((w) => w.api === api).should.be.false();
+      const short = FLAT_WRAPPERS.find((w) => w.api === api).short;
+      const res = mockRes();
+      await handler({ method: 'POST', body: { api, endpoint: short, params: {} } }, res);
+      res.statusCode.should.equal(400);
+    }
+    for (const host of ['api.pff.com', 'kenpom.com', 'pro.nfl.com']) {
+      Object.values(endpoints.flatHosts).some((u) => new URL(u).host === host).should.be.false(host);
     }
   });
 

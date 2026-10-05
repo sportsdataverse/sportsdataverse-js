@@ -47,7 +47,17 @@ const FLAT_API_FILES = [
   "yahoo",
   "hockeytech",
   "torvik",
+  // Subscription families (auth-gated): see PLAYGROUND_EXCLUDED_FLAT.
+  "pff_api",
+  "nfl_pro",
+  "kenpom",
 ];
+
+// Flat families the docs playground must never reach: they need the caller's
+// own subscription credentials (an API key, a user token, a password login), so
+// they are left out of endpoints.json — and with it the /api/run host allowlist
+// (docs/api/run.mjs derives ALLOWED_FLAT_HOSTS from `flatHosts`).
+const PLAYGROUND_EXCLUDED_FLAT = new Set(["pff_api", "nfl_pro", "kenpom"]);
 
 // Which namespace each flat-API family is documented on (mirrors
 // FLAT_API_NAMESPACES in src/index.ts — keep the two in sync). The runtime
@@ -76,6 +86,10 @@ const FLAT_API_NAMESPACES = {
   // BartTorvik T-Rank — standalone provider namespace (`sdv.torvik`) for men's
   // college basketball ratings / four-factors / game + player stats / schedule.
   torvik: "torvik",
+  // Subscription families merge onto their league namespace.
+  pff_api: "nfl",
+  nfl_pro: "nfl",
+  kenpom: "mbb",
 };
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -133,6 +147,49 @@ const FLAT_API_META = {
     source: "barttorvik.com (T-Rank college basketball analytics)",
     // Sport-specific standalone family: nests under the Basketball sport group.
     sport: "basketball",
+  },
+  // Subscription families: `authNote` replaces the docs' auto-mint auth note,
+  // `controls` documents the per-call auth/control params in the JSDoc.
+  pff_api: {
+    label: "PFF Developer API",
+    source: "the PFF Developer API (api.pff.com; PFF Pro subscription)",
+    authNote:
+      "**Auth:** a PFF API key (PFF Pro) is required — `api_key` on the call, an " +
+      "`Authorization` header in `headers`, or the `SDV_PFF_API_KEY` / `PFF_API_KEY` " +
+      "environment variable. 400/422 throw `InvalidParameterError`; columns PFF " +
+      "withholds by entitlement warn (or throw with `strict: true` / `SDV_PFF_STRICT=1`).",
+    controls: {
+      headers: "optional headers; an `Authorization` here wins over `api_key` and the environment.",
+      api_key: "PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.",
+      strict: "throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.",
+    },
+  },
+  nfl_pro: {
+    label: "NFL Pro (Next Gen Stats)",
+    source: "NFL Pro's secured Next Gen Stats API (pro.nfl.com; NFL+ Premium)",
+    authNote:
+      "**Auth:** a user-bound NFL Pro bearer token carrying an active NFL+ plan is " +
+      "required — `token` on the call, or the `NFLPRO_TOKEN` environment variable. " +
+      "Responses truncate at the page size, so the getter pages on `offset` until the " +
+      "envelope's `total` is reached.",
+    controls: {
+      headers: "optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.",
+      token: "NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.",
+      paginate: "follow `offset` until the envelope's `total` is reached (default `true`).",
+    },
+  },
+  kenpom: {
+    label: "KenPom",
+    source: "kenpom.com (subscription; HTML pages)",
+    authNote:
+      "**Auth:** a KenPom subscription login — `email` / `password` on the call, or the " +
+      "`KENPOM_EMAIL` / `KENPOM_PW` environment variables (hoopR's `KP_USER` / `KP_PW` " +
+      "also work). The session is logged in once and reused. The raw response is the " +
+      "page HTML; `{ parsed: true }` returns every table on the page keyed by its HTML id.",
+    controls: {
+      email: "KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.",
+      password: "KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.",
+    },
   },
 };
 
@@ -642,8 +699,10 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
     `through its tidy.js parser; omit it for the raw response.`;
   if (authed) {
     body +=
-      ` **Auth:** this family mints a bearer token automatically before ` +
-      `each call (no credentials required).`;
+      " " +
+      (meta.authNote ??
+        "**Auth:** this family mints a bearer token automatically before " +
+          "each call (no credentials required).");
   }
   body += `\n\n`;
   body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
@@ -1492,7 +1551,9 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
         // `flatLeagues` maps each family stem to the league prefix it's merged
         // onto (so the playground can group flat endpoints under their league).
         flatHosts,
-        flatLeagues: FLAT_API_NAMESPACES,
+        flatLeagues: Object.fromEntries(
+          Object.entries(FLAT_API_NAMESPACES).filter(([api]) => !PLAYGROUND_EXCLUDED_FLAT.has(api))
+        ),
         flatApis: flatWrappers,
       },
       null,
@@ -1543,8 +1604,10 @@ const outputs = {
     wrappers,
     leagues,
     hosts,
-    flatWrappers,
-    flatHosts
+    flatWrappers.filter((w) => !PLAYGROUND_EXCLUDED_FLAT.has(w.api)),
+    Object.fromEntries(
+      Object.entries(flatHosts).filter(([api]) => !PLAYGROUND_EXCLUDED_FLAT.has(api))
+    )
   ),
 };
 const writtenEspnSet = new Set(WRITTEN_ESPN_LEAGUES);
@@ -1634,7 +1697,11 @@ function renderWrittenFlatModule(api, defs) {
       const d = p.default !== undefined ? ` — default \`${p.default}\`` : "";
       jsdoc += ` * @param params.${p.name} - query parameter${note}${d}.\n`;
     }
-    if (def.auth) jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
+    if (meta.controls) {
+      for (const [name, doc] of Object.entries(meta.controls)) jsdoc += ` * @param params.${name} - ${doc}\n`;
+    } else if (def.auth) {
+      jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
+    }
     if (def.parser) {
       jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.\n`;
       jsdoc += ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;

@@ -1,0 +1,48 @@
+{
+ "columns": [
+  "franchise_id",
+  "slug",
+  "name",
+  "city",
+  "nickname",
+  "abbreviation",
+  "primary_color",
+  "secondary_color",
+  "group_ids"
+ ],
+ "rows": [
+  {
+   "franchise_id": 1,
+   "slug": "arizona-cardinals",
+   "name": "Arizona Cardinals",
+   "city": "Arizona",
+   "nickname": "Cardinals",
+   "abbreviation": "ARZ",
+   "primary_color": "#97233f",
+   "secondary_color": "#ffffff",
+   "group_ids": "6;10"
+  },
+  {
+   "franchise_id": 2,
+   "slug": "atlanta-falcons",
+   "name": "Atlanta Falcons",
+   "city": "Atlanta",
+   "nickname": "Falcons",
+   "abbreviation": "ATL",
+   "primary_color": "#a71930",
+   "secondary_color": "#000000",
+   "group_ids": "6;9"
+  },
+  {
+   "franchise_id": 3,
+   "slug": "baltimore-ravens",
+   "name": "Baltimore Ravens",
+   "city": "Baltimore",
+   "nickname": "Ravens",
+   "abbreviation": "BLT",
+   "primary_color": "#1a195f",
+   "secondary_color": "#000000",
+   "group_ids": "1;3"
+  }
+ ]
+}

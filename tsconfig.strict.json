@@ -12,6 +12,12 @@
     "src/core/auth.ts",
     "src/core/config.ts",
     "src/core/request.ts",
-    "src/core/transforms.ts"
+    "src/core/transforms.ts",
+    "src/core/pff_api_runtime.ts",
+    "src/core/nfl_pro_runtime.ts",
+    "src/core/kenpom_runtime.ts",
+    "src/parsers/pff_api.ts",
+    "src/parsers/nfl_pro.ts",
+    "src/parsers/kenpom.ts"
   ]
 }

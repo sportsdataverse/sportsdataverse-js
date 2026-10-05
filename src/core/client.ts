@@ -78,6 +78,12 @@ export const FLAT_HOSTS: Record<string, string> = {
   // (src/core/torvik_runtime.ts) sets a browser UA + returns the raw body text
   // (the endpoints mix CSV / JSON) — registered in GETTER_OVERRIDES.
   torvik: "https://barttorvik.com",
+  // Subscription families — each needs the caller's own credentials and has its
+  // own runtime (src/core/{pff_api,nfl_pro,kenpom}_runtime.ts). None is reachable
+  // from the docs playground proxy.
+  pff_api: "https://api.pff.com",
+  nfl_pro: "https://pro.nfl.com",
+  kenpom: "https://kenpom.com",
 };
 
 /**

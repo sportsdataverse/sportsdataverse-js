@@ -7,7 +7,7 @@
 
 export { normalize, snakeCase } from "./_normalize.js";
 export { PARSERS, parserFor } from "./_registry.js";
-export type { ParserFn } from "./_registry.js";
+export type { ParserFn, FlatParserFn, ParsedTables } from "./_registry.js";
 export {
   ESPN_ENDPOINT_PARSERS,
   parserForEndpoint,

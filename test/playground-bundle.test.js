@@ -1,6 +1,7 @@
 import 'should'; // side-effect: installs the `.should` assertion property
 import { ESPN_ENDPOINT_PARSERS as srcEspn } from '../dist/parsers/espn.js';
-import { PARSERS as srcNative } from '../dist/parsers/_registry.js';
+import { PARSERS as srcNative, NODE_ONLY_PARSERS } from '../dist/parsers/_registry.js';
+import '../dist/index.js'; // registers the node-only parsers, so the comparison below is order-independent
 import * as bundle from '../docs/src/playground/parsers.bundle.mjs';
 
 // Staleness guard for the committed playground parser bundle
@@ -22,7 +23,9 @@ describe('playground parser bundle is in sync with src/parsers', () => {
     Object.keys(bundle.ESPN_ENDPOINT_PARSERS).sort().should.eql(
       Object.keys(srcEspn).sort()
     );
-    Object.keys(bundle.PARSERS).sort().should.eql(Object.keys(srcNative).sort());
+    // node-only parsers (KenPom's cheerio HTML parser) stay out of the browser bundle
+    NODE_ONLY_PARSERS.has('parse_kenpom_page').should.be.true();
+    Object.keys(bundle.PARSERS).sort().should.eql(Object.keys(srcNative).filter((k) => !NODE_ONLY_PARSERS.has(k)).sort());
   });
 
   it('parses through the bundle (espn scoreboard + summary dispatcher)', () => {

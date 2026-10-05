@@ -11,7 +11,7 @@
 // surprises; downstream parsers may compose tidy verbs on the rectangular rows.
 
 /** Is `v` a plain object (not null, not an array, not a Date)? */
-function isPlainObject(v: any): boolean {
+export function isPlainObject(v: any): boolean {
   return (
     v !== null &&
     typeof v === "object" &&
@@ -35,6 +35,19 @@ export function snakeCase(key: string): string {
     .replace(/[\s-]+/g, "_")
     .replace(/__+/g, "_")
     .replace(/^_+|_+$/g, "")
+    .toLowerCase();
+}
+
+/**
+ * Exact port of sdv-py's `dl_utils.underscore` (the inflection rule every py
+ * parser snake-cases with). Unlike {@link snakeCase} it leaves dots, spaces and
+ * repeated underscores alone — use it where output must match py byte-for-byte.
+ */
+export function underscore(word: string): string {
+  return word
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2")
+    .replace(/([a-z\d])([A-Z])/g, "$1_$2")
+    .replace(/-/g, "_")
     .toLowerCase();
 }
 
