@@ -13,7 +13,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { CODEGEN_DIR, endpointPathsOf, githubSource, gitBlobSha, loadManifest, selectUpstreamPaths } from "./vendor.mjs";
+import { CODEGEN_DIR, decodeText, endpointPathsOf, githubSource, gitBlobSha, loadManifest, selectUpstreamPaths } from "./vendor.mjs";
 
 const LOCK = join("vendor", "upstream", "LOCK");
 
@@ -60,8 +60,11 @@ export async function verifyLockOnline(root = CODEGEN_DIR, fetchTree = defaultFe
     const file = join(root, "vendor", "upstream", p);
     if (!tree.has(p)) problems.push(`LOCK: expected ${p} is not in ${repo}@${ref}`);
     else if (!existsSync(file)) problems.push(`LOCK: expected ${p} is missing from vendor/upstream`);
-    else if (gitBlobSha(readFileSync(file)) !== tree.get(p)) problems.push(`LOCK: vendor/upstream/${p} does not match upstream blob ${tree.get(p)}`);
-    else endpoints.set(p, readFileSync(file, "utf8"));
+    else {
+      const buf = readFileSync(file); // hash and decode the same bytes
+      if (gitBlobSha(buf) !== tree.get(p)) problems.push(`LOCK: vendor/upstream/${p} does not match upstream blob ${tree.get(p)}`);
+      else endpoints.set(p, decodeText(buf));
+    }
   }
   if (problems.length) return problems;
   let expected;
