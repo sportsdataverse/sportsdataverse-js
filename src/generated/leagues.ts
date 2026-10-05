@@ -10,7 +10,10 @@ export const LEAGUES: LeagueConfig[] = [
     "league": "nba",
     "scopes": [
       "universal"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "wnba",
@@ -18,7 +21,10 @@ export const LEAGUES: LeagueConfig[] = [
     "league": "wnba",
     "scopes": [
       "universal"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "mbb",
@@ -27,7 +33,10 @@ export const LEAGUES: LeagueConfig[] = [
     "scopes": [
       "universal",
       "ncaa"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "wbb",
@@ -36,7 +45,10 @@ export const LEAGUES: LeagueConfig[] = [
     "scopes": [
       "universal",
       "ncaa"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "cfb",
@@ -46,7 +58,15 @@ export const LEAGUES: LeagueConfig[] = [
       "universal",
       "ncaa",
       "football"
-    ]
+    ],
+    "publicShorts": {
+      "season_groups": "groups",
+      "season_futures": "futures",
+      "season_powerindex": "team_powerindex",
+      "season_recruits": "recruits",
+      "season_week_rankings": "week_rankings",
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "nfl",
@@ -55,7 +75,10 @@ export const LEAGUES: LeagueConfig[] = [
     "scopes": [
       "universal",
       "football"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "mlb",
@@ -64,7 +87,10 @@ export const LEAGUES: LeagueConfig[] = [
     "scopes": [
       "universal",
       "mlb"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "nhl",
@@ -72,7 +98,10 @@ export const LEAGUES: LeagueConfig[] = [
     "league": "nhl",
     "scopes": [
       "universal"
-    ]
+    ],
+    "publicShorts": {
+      "athlete_stats": "player_stats_v3"
+    }
   },
   {
     "prefix": "mch",

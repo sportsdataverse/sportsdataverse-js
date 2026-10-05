@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.wnba`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWnbaAthleteGamelog`
+## `espnWnbaPlayerGamelog`
 
-WNBA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+WNBA — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_gamelog` / `espnWnbaAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ WNBA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_gamelog(...)
+await sdv.wnba.espnWnbaPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_gamelog(...)
 ```
 
-## `espnWnbaAthleteOverview`
+## `espnWnbaPlayerOverview`
 
-WNBA — athlete overview (ESPN site.web.api.espn.com (web v3)).
+WNBA — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_overview` / `espnWnbaAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ WNBA — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_overview(...)
+await sdv.wnba.espnWnbaPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_overview(...)
 ```
 
-## `espnWnbaAthleteSplits`
+## `espnWnbaPlayerSplits`
 
-WNBA — athlete splits (ESPN site.web.api.espn.com (web v3)).
+WNBA — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_splits` / `espnWnbaAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ WNBA — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_splits(...)
+await sdv.wnba.espnWnbaPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_splits(...)
 ```
 
-## `espnWnbaAthleteStats`
+## `espnWnbaPlayerStatsV3`
 
-WNBA — athlete stats (ESPN site.web.api.espn.com (web v3)).
+WNBA — player stats v3 (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_stats` / `espnWnbaAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ WNBA — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_stats(...)
+await sdv.wnba.espnWnbaPlayerStatsV3({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_stats_v3(...)
 ```
 
 ## `espnWnbaLeaders`

@@ -25,7 +25,7 @@ await sdv.hockeytech.hockeytech_schedule({ league: 'pwhl', parsed: true });
 
 ## Native API — HockeyTech / LeagueStat
 
-Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/minor hockey). Host: `https://lscluster.hockeytech.com`. Each method is exposed under BOTH `hockeytech_<endpoint>` (snake_case, py/R parity) and `hockeytech<Endpoint>` (camelCase canonical) on `sdv.hockeytech`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/minor hockey). Host: `https://lscluster.hockeytech.com`. Each method is exposed under BOTH its snake_case name `hockeytech_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.hockeytech`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

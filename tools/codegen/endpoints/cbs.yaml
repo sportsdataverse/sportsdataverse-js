@@ -76,8 +76,9 @@ endpoints:
     name: client_name
     required: true
     type: str
-  short: client_configuration
+  short: client_config
   summary: Get configuration for how a client should access our APIs, or any additional settings they want supplied to them.
+  legacy_short: client_configuration
   returns_schema: native/cbs/client_configuration
 - parser: parse_cbs_list
   path: /resource/coach/rankings/{coach_id}
@@ -120,8 +121,9 @@ endpoints:
     name: division_id
     required: true
     type: int
-  short: sub_divisions
+  short: division_subdivisions
   summary: Get subdivisions for a division from Atlas.
+  legacy_short: sub_divisions
   returns_schema: native/cbs/sub_divisions
 - parser: parse_cbs_list
   path: /resource/endpoint/registry
@@ -223,8 +225,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  short: boxscore
+  short: game_boxscore
   summary: Get boxscore resource
+  legacy_short: boxscore
   returns_schema: native/cbs/boxscore
 - parser: parse_cbs_list
   path: /resource/game/content/preview/{game_id}
@@ -268,8 +271,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  short: featured_game
+  short: game_featured
   summary: Get a FeaturedGame resource.
+  legacy_short: featured_game
   returns_schema: native/cbs/featured_game
 - extra_params:
   - description: 'Specify specific sub-resources to resolve.  Defaults to none. Allowed: playerTeamAssociations, injuries, metaData, playerStats.'
@@ -324,8 +328,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  short: game_hq_odds
+  short: game_odds_hq
   summary: Get an HQ odds resource for a particular game.
+  legacy_short: game_hq_odds
   returns_schema: native/cbs/game_hq_odds
 - parser: parse_cbs_list
   path: /resource/game/outcomes/{game_id}
@@ -353,8 +358,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  short: probable_players
+  short: game_probable_players
   summary: Get a list of players who are probably playing in a particular game.
+  legacy_short: probable_players
   returns_schema: native/cbs/probable_players
 - extra_params:
   - description: This value can be used to specify markets, using the marketIds.
@@ -404,8 +410,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  short: ruwt_highlights
+  short: game_ruwt_highlights
   summary: Get the RUWT highlights resource for a particular game.
+  legacy_short: ruwt_highlights
   returns_schema: native/cbs/ruwt_highlights
 - parser: parse_cbs_list
   path: /resource/game/scoring/boxscores/{game_id}
@@ -544,8 +551,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  short: weather
+  short: game_weather
   summary: Get a Weather resource for a particular game.
+  legacy_short: weather
   returns_schema: native/cbs/weather
 - parser: parse_cbs_list
   path: /resource/golf/event/markets/{event_id}
@@ -694,8 +702,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  short: depth_charts
+  short: player_depth_charts
   summary: Get depth charts for a particular player.
+  legacy_short: depth_charts
   returns_schema: native/cbs/depth_charts
 - example_args:
     player_id: 1751796
@@ -789,8 +798,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  short: hockey_player_meta
+  short: player_hockey_meta
   summary: Get the hockey meta data resource for a particular player.
+  legacy_short: hockey_player_meta
   returns_schema: native/cbs/hockey_player_meta
 - example_args:
     player_id: 1751796
@@ -818,8 +828,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  short: baseball_player_meta
+  short: player_meta_baseball
   summary: Get meta data associated to a particular baseball player.
+  legacy_short: baseball_player_meta
   returns_schema: native/cbs/baseball_player_meta
 - example_args:
     player_id: 1751796
@@ -830,8 +841,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  short: player_golf_metadata
+  short: player_meta_golf
   summary: Get a metadata resource for a particular golf player.
+  legacy_short: player_golf_metadata
   returns_schema: native/cbs/player_golf_metadata
 - example_args:
     player_id: 1751796
@@ -864,8 +876,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  short: position_rankings
+  short: player_position_rankings
   summary: Get position rankings for a player
+  legacy_short: position_rankings
   returns_schema: native/cbs/position_rankings
 - example_args:
     player_id: 1751796
@@ -914,8 +927,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  short: recruit_team_associations
+  short: player_recruit_associations
   summary: Get recruit associations for a particular player.
+  legacy_short: recruit_team_associations
   returns_schema: native/cbs/recruit_team_associations
 - example_args:
     player_id: 1751796
@@ -1229,8 +1243,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  short: sports_line_team_rankings
+  short: team_rankings_sportsline
   summary: Get sportsline rankings for a team
+  legacy_short: sports_line_team_rankings
   returns_schema: native/cbs/sports_line_team_rankings
 - example_args:
     team_id: 404
@@ -1304,8 +1319,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  short: sports_line_team_standings
+  short: team_standings_sportsline
   summary: Get SportsLine standings for a particular team.
+  legacy_short: sports_line_team_standings
   returns_schema: native/cbs/sports_line_team_standings
 - example_args:
     team_id: 404

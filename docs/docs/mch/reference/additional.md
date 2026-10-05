@@ -34,11 +34,13 @@ await sdv.mch.espnMchRankings({});
 // snake_case alias (py/R parity): sdv.mch.espn_mch_rankings(...)
 ```
 
-## `espnMchRecruitingAthletes`
+## `espnMchRecruitingPlayers`
 
-MCH — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+MCH — recruiting players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/recruiting/{year}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_recruiting_athletes` / `espnMchRecruitingAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,8 +58,8 @@ MCH — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchRecruitingAthletes({ year: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_recruiting_athletes(...)
+await sdv.mch.espnMchRecruitingPlayers({ year: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_recruiting_players(...)
 ```
 
 ## `espnMchRecruitingRankings`

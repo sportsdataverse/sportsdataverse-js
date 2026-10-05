@@ -10,6 +10,7 @@ import type { WrapperDef, WrapperFn } from "../../core/types.js";
 
 const COMBINE_PROFILES_DEF: WrapperDef = {
   "short": "combine_profiles",
+  "publicName": "nfl_combine_profiles",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -43,14 +44,15 @@ const COMBINE_PROFILES_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiCombineProfiles({});
+ * @example await sdv.nfl.nflCombineProfiles({});
  */
-export const nflApiCombineProfiles: WrapperFn = (params = {}) => callFlat(COMBINE_PROFILES_DEF, params);
-/** snake_case alias of {@link nflApiCombineProfiles} (py/R parity). */
-export const nfl_api_combine_profiles = nflApiCombineProfiles;
+export const nflCombineProfiles: WrapperFn = (params = {}) => callFlat(COMBINE_PROFILES_DEF, params);
+/** snake_case alias of {@link nflCombineProfiles} (py/R parity). */
+export const nfl_combine_profiles = nflCombineProfiles;
 
 const DRAFT_PICKS_DEF: WrapperDef = {
   "short": "draft_picks",
+  "publicName": "nfl_draft_picks",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -84,14 +86,15 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiDraftPicks({});
+ * @example await sdv.nfl.nflDraftPicks({});
  */
-export const nflApiDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_DEF, params);
-/** snake_case alias of {@link nflApiDraftPicks} (py/R parity). */
-export const nfl_api_draft_picks = nflApiDraftPicks;
+export const nflDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_DEF, params);
+/** snake_case alias of {@link nflDraftPicks} (py/R parity). */
+export const nfl_draft_picks = nflDraftPicks;
 
 const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
   "short": "game_details_by_slug",
+  "publicName": "nfl_game_details_by_slug",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -124,14 +127,15 @@ const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiGameDetailsBySlug({ slug: '…' });
+ * @example await sdv.nfl.nflGameDetailsBySlug({ slug: '…' });
  */
-export const nflApiGameDetailsBySlug: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_BY_SLUG_DEF, params);
-/** snake_case alias of {@link nflApiGameDetailsBySlug} (py/R parity). */
-export const nfl_api_game_details_by_slug = nflApiGameDetailsBySlug;
+export const nflGameDetailsBySlug: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_BY_SLUG_DEF, params);
+/** snake_case alias of {@link nflGameDetailsBySlug} (py/R parity). */
+export const nfl_game_details_by_slug = nflGameDetailsBySlug;
 
 const GAME_DETAILS_V2_DEF: WrapperDef = {
   "short": "game_details_v2",
+  "publicName": "nfl_game_details_v2",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -185,14 +189,15 @@ const GAME_DETAILS_V2_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiGameDetailsV2({ game_id: '…' });
+ * @example await sdv.nfl.nflGameDetailsV2({ game_id: '…' });
  */
-export const nflApiGameDetailsV2: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_V2_DEF, params);
-/** snake_case alias of {@link nflApiGameDetailsV2} (py/R parity). */
-export const nfl_api_game_details_v2 = nflApiGameDetailsV2;
+export const nflGameDetailsV2: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_V2_DEF, params);
+/** snake_case alias of {@link nflGameDetailsV2} (py/R parity). */
+export const nfl_game_details_v2 = nflGameDetailsV2;
 
 const GAME_SUMMARIES_DEF: WrapperDef = {
   "short": "game_summaries",
+  "publicName": "nfl_game_summaries",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -232,14 +237,15 @@ const GAME_SUMMARIES_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiGameSummaries({});
+ * @example await sdv.nfl.nflGameSummaries({});
  */
-export const nflApiGameSummaries: WrapperFn = (params = {}) => callFlat(GAME_SUMMARIES_DEF, params);
-/** snake_case alias of {@link nflApiGameSummaries} (py/R parity). */
-export const nfl_api_game_summaries = nflApiGameSummaries;
+export const nflGameSummaries: WrapperFn = (params = {}) => callFlat(GAME_SUMMARIES_DEF, params);
+/** snake_case alias of {@link nflGameSummaries} (py/R parity). */
+export const nfl_game_summaries = nflGameSummaries;
 
 const INJURIES_DEF: WrapperDef = {
   "short": "injuries",
+  "publicName": "nfl_injuries",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -279,14 +285,15 @@ const INJURIES_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiInjuries({});
+ * @example await sdv.nfl.nflInjuries({});
  */
-export const nflApiInjuries: WrapperFn = (params = {}) => callFlat(INJURIES_DEF, params);
-/** snake_case alias of {@link nflApiInjuries} (py/R parity). */
-export const nfl_api_injuries = nflApiInjuries;
+export const nflInjuries: WrapperFn = (params = {}) => callFlat(INJURIES_DEF, params);
+/** snake_case alias of {@link nflInjuries} (py/R parity). */
+export const nfl_injuries = nflInjuries;
 
 const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
   "short": "live_player_statistics",
+  "publicName": "nfl_live_player_statistics",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -311,14 +318,15 @@ const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiLivePlayerStatistics({ game_id: '…' });
+ * @example await sdv.nfl.nflLivePlayerStatistics({ game_id: '…' });
  */
-export const nflApiLivePlayerStatistics: WrapperFn = (params = {}) => callFlat(LIVE_PLAYER_STATISTICS_DEF, params);
-/** snake_case alias of {@link nflApiLivePlayerStatistics} (py/R parity). */
-export const nfl_api_live_player_statistics = nflApiLivePlayerStatistics;
+export const nflLivePlayerStatistics: WrapperFn = (params = {}) => callFlat(LIVE_PLAYER_STATISTICS_DEF, params);
+/** snake_case alias of {@link nflLivePlayerStatistics} (py/R parity). */
+export const nfl_live_player_statistics = nflLivePlayerStatistics;
 
 const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
   "short": "live_team_statistics",
+  "publicName": "nfl_live_team_statistics",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -343,14 +351,15 @@ const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiLiveTeamStatistics({ game_id: '…' });
+ * @example await sdv.nfl.nflLiveTeamStatistics({ game_id: '…' });
  */
-export const nflApiLiveTeamStatistics: WrapperFn = (params = {}) => callFlat(LIVE_TEAM_STATISTICS_DEF, params);
-/** snake_case alias of {@link nflApiLiveTeamStatistics} (py/R parity). */
-export const nfl_api_live_team_statistics = nflApiLiveTeamStatistics;
+export const nflLiveTeamStatistics: WrapperFn = (params = {}) => callFlat(LIVE_TEAM_STATISTICS_DEF, params);
+/** snake_case alias of {@link nflLiveTeamStatistics} (py/R parity). */
+export const nfl_live_team_statistics = nflLiveTeamStatistics;
 
 const ROSTERS_DEF: WrapperDef = {
   "short": "rosters",
+  "publicName": "nfl_rosters",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -390,14 +399,15 @@ const ROSTERS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiRosters({});
+ * @example await sdv.nfl.nflRosters({});
  */
-export const nflApiRosters: WrapperFn = (params = {}) => callFlat(ROSTERS_DEF, params);
-/** snake_case alias of {@link nflApiRosters} (py/R parity). */
-export const nfl_api_rosters = nflApiRosters;
+export const nflRosters: WrapperFn = (params = {}) => callFlat(ROSTERS_DEF, params);
+/** snake_case alias of {@link nflRosters} (py/R parity). */
+export const nfl_rosters = nflRosters;
 
 const STANDINGS_DEF: WrapperDef = {
   "short": "standings",
+  "publicName": "nfl_standings",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -443,14 +453,15 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiStandings({});
+ * @example await sdv.nfl.nflStandings({});
  */
-export const nflApiStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
-/** snake_case alias of {@link nflApiStandings} (py/R parity). */
-export const nfl_api_standings = nflApiStandings;
+export const nflStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
+/** snake_case alias of {@link nflStandings} (py/R parity). */
+export const nfl_standings = nflStandings;
 
 const TEAM_DEF: WrapperDef = {
   "short": "team",
+  "publicName": "nfl_team",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -476,14 +487,15 @@ const TEAM_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiTeam({ team_id: '…' });
+ * @example await sdv.nfl.nflTeam({ team_id: '…' });
  */
-export const nflApiTeam: WrapperFn = (params = {}) => callFlat(TEAM_DEF, params);
-/** snake_case alias of {@link nflApiTeam} (py/R parity). */
-export const nfl_api_team = nflApiTeam;
+export const nflTeam: WrapperFn = (params = {}) => callFlat(TEAM_DEF, params);
+/** snake_case alias of {@link nflTeam} (py/R parity). */
+export const nfl_team = nflTeam;
 
 const TEAMS_HISTORY_DEF: WrapperDef = {
   "short": "teams_history",
+  "publicName": "nfl_teams_history",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -517,14 +529,15 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiTeamsHistory({});
+ * @example await sdv.nfl.nflTeamsHistory({});
  */
-export const nflApiTeamsHistory: WrapperFn = (params = {}) => callFlat(TEAMS_HISTORY_DEF, params);
-/** snake_case alias of {@link nflApiTeamsHistory} (py/R parity). */
-export const nfl_api_teams_history = nflApiTeamsHistory;
+export const nflTeamsHistory: WrapperFn = (params = {}) => callFlat(TEAMS_HISTORY_DEF, params);
+/** snake_case alias of {@link nflTeamsHistory} (py/R parity). */
+export const nfl_teams_history = nflTeamsHistory;
 
 const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
   "short": "weekly_game_details",
+  "publicName": "nfl_weekly_game_details",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -592,14 +605,15 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiWeeklyGameDetails({});
+ * @example await sdv.nfl.nflWeeklyGameDetails({});
  */
-export const nflApiWeeklyGameDetails: WrapperFn = (params = {}) => callFlat(WEEKLY_GAME_DETAILS_DEF, params);
-/** snake_case alias of {@link nflApiWeeklyGameDetails} (py/R parity). */
-export const nfl_api_weekly_game_details = nflApiWeeklyGameDetails;
+export const nflWeeklyGameDetails: WrapperFn = (params = {}) => callFlat(WEEKLY_GAME_DETAILS_DEF, params);
+/** snake_case alias of {@link nflWeeklyGameDetails} (py/R parity). */
+export const nfl_weekly_game_details = nflWeeklyGameDetails;
 
 const WEEKS_DEF: WrapperDef = {
   "short": "weeks",
+  "publicName": "nfl_weeks",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -633,14 +647,15 @@ const WEEKS_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiWeeks({});
+ * @example await sdv.nfl.nflWeeks({});
  */
-export const nflApiWeeks: WrapperFn = (params = {}) => callFlat(WEEKS_DEF, params);
-/** snake_case alias of {@link nflApiWeeks} (py/R parity). */
-export const nfl_api_weeks = nflApiWeeks;
+export const nflWeeks: WrapperFn = (params = {}) => callFlat(WEEKS_DEF, params);
+/** snake_case alias of {@link nflWeeks} (py/R parity). */
+export const nfl_weeks = nflWeeks;
 
 const WEEKS_BY_DATE_DEF: WrapperDef = {
   "short": "weeks_by_date",
+  "publicName": "nfl_weeks_by_date",
   "flat": true,
   "api": "nfl_api",
   "host": "https://api.nfl.com",
@@ -666,8 +681,8 @@ const WEEKS_BY_DATE_DEF: WrapperDef = {
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nfl.nflApiWeeksByDate({ date: '…' });
+ * @example await sdv.nfl.nflWeeksByDate({ date: '…' });
  */
-export const nflApiWeeksByDate: WrapperFn = (params = {}) => callFlat(WEEKS_BY_DATE_DEF, params);
-/** snake_case alias of {@link nflApiWeeksByDate} (py/R parity). */
-export const nfl_api_weeks_by_date = nflApiWeeksByDate;
+export const nflWeeksByDate: WrapperFn = (params = {}) => callFlat(WEEKS_BY_DATE_DEF, params);
+/** snake_case alias of {@link nflWeeksByDate} (py/R parity). */
+export const nfl_weeks_by_date = nflWeeksByDate;

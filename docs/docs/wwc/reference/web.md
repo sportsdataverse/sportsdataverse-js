@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.wwc`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWwcAthleteGamelog`
+## `espnWwcPlayerGamelog`
 
-WWC — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+WWC — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fifa.wwc/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_gamelog` / `espnWwcAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ WWC — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_gamelog(...)
+await sdv.wwc.espnWwcPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_gamelog(...)
 ```
 
-## `espnWwcAthleteOverview`
+## `espnWwcPlayerOverview`
 
-WWC — athlete overview (ESPN site.web.api.espn.com (web v3)).
+WWC — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fifa.wwc/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_overview` / `espnWwcAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ WWC — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_overview(...)
+await sdv.wwc.espnWwcPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_overview(...)
 ```
 
-## `espnWwcAthleteSplits`
+## `espnWwcPlayerSplits`
 
-WWC — athlete splits (ESPN site.web.api.espn.com (web v3)).
+WWC — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fifa.wwc/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_splits` / `espnWwcAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ WWC — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_splits(...)
+await sdv.wwc.espnWwcPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_splits(...)
 ```
 
-## `espnWwcAthleteStats`
+## `espnWwcPlayerStats`
 
-WWC — athlete stats (ESPN site.web.api.espn.com (web v3)).
+WWC — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fifa.wwc/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_stats` / `espnWwcAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ WWC — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_stats(...)
+await sdv.wwc.espnWwcPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_stats(...)
 ```
 
 ## `espnWwcLeaders`

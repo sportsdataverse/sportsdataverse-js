@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.ucl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnUclAthleteBio`
+## `espnUclPlayerBio`
 
-UCL — athlete bio (ESPN site.api.espn.com).
+UCL — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_bio` / `espnUclAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ UCL — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_bio(...)
+await sdv.ucl.espnUclPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_bio(...)
 ```
 
-## `espnUclAthleteInfo`
+## `espnUclPlayerInfo`
 
-UCL — athlete info (ESPN site.api.espn.com).
+UCL — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_info` / `espnUclAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ UCL — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_info(...)
+await sdv.ucl.espnUclPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_info(...)
 ```
 
-## `espnUclAthleteNews`
+## `espnUclPlayerNews`
 
-UCL — athlete news (ESPN site.api.espn.com).
+UCL — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_news` / `espnUclAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ UCL — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_news(...)
+await sdv.ucl.espnUclPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_news(...)
 ```
 
 ## `espnUclCalendar`

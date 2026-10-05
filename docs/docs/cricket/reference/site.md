@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.cricket`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCricketAthleteBio`
+## `espnCricketPlayerBio`
 
-CRICKET — athlete bio (ESPN site.api.espn.com).
+CRICKET — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/cricket/{league}/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_bio` / `espnCricketAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -28,16 +30,18 @@ CRICKET — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_bio(...)
+await sdv.cricket.espnCricketPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_bio(...)
 ```
 
-## `espnCricketAthleteInfo`
+## `espnCricketPlayerInfo`
 
-CRICKET — athlete info (ESPN site.api.espn.com).
+CRICKET — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/cricket/{league}/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_info` / `espnCricketAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -49,15 +53,17 @@ CRICKET — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_info(...)
+await sdv.cricket.espnCricketPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_info(...)
 ```
 
-## `espnCricketAthleteNews`
+## `espnCricketPlayerNews`
 
-CRICKET — athlete news (ESPN site.api.espn.com).
+CRICKET — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/cricket/{league}/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cricket_athlete_news` / `espnCricketAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -90,8 +96,8 @@ CRICKET — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.cricket.espnCricketAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cricket.espn_cricket_athlete_news(...)
+await sdv.cricket.espnCricketPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cricket.espn_cricket_player_news(...)
 ```
 
 ## `espnCricketCalendar`

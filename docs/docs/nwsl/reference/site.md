@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.nwsl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNwslAthleteBio`
+## `espnNwslPlayerBio`
 
-NWSL — athlete bio (ESPN site.api.espn.com).
+NWSL — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/usa.nwsl/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_bio` / `espnNwslAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ NWSL — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_bio(...)
+await sdv.nwsl.espnNwslPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_bio(...)
 ```
 
-## `espnNwslAthleteInfo`
+## `espnNwslPlayerInfo`
 
-NWSL — athlete info (ESPN site.api.espn.com).
+NWSL — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/usa.nwsl/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_info` / `espnNwslAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ NWSL — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_info(...)
+await sdv.nwsl.espnNwslPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_info(...)
 ```
 
-## `espnNwslAthleteNews`
+## `espnNwslPlayerNews`
 
-NWSL — athlete news (ESPN site.api.espn.com).
+NWSL — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/usa.nwsl/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_news` / `espnNwslAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ NWSL — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_news(...)
+await sdv.nwsl.espnNwslPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_news(...)
 ```
 
 ## `espnNwslCalendar`

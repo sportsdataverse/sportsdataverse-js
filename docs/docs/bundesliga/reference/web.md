@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.bundesliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnBundesligaAthleteGamelog`
+## `espnBundesligaPlayerGamelog`
 
-BUNDESLIGA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+BUNDESLIGA — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ger.1/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_gamelog` / `espnBundesligaAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ BUNDESLIGA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_gamelog(...)
+await sdv.bundesliga.espnBundesligaPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_gamelog(...)
 ```
 
-## `espnBundesligaAthleteOverview`
+## `espnBundesligaPlayerOverview`
 
-BUNDESLIGA — athlete overview (ESPN site.web.api.espn.com (web v3)).
+BUNDESLIGA — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ger.1/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_overview` / `espnBundesligaAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ BUNDESLIGA — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_overview(...)
+await sdv.bundesliga.espnBundesligaPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_overview(...)
 ```
 
-## `espnBundesligaAthleteSplits`
+## `espnBundesligaPlayerSplits`
 
-BUNDESLIGA — athlete splits (ESPN site.web.api.espn.com (web v3)).
+BUNDESLIGA — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ger.1/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_splits` / `espnBundesligaAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ BUNDESLIGA — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_splits(...)
+await sdv.bundesliga.espnBundesligaPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_splits(...)
 ```
 
-## `espnBundesligaAthleteStats`
+## `espnBundesligaPlayerStats`
 
-BUNDESLIGA — athlete stats (ESPN site.web.api.espn.com (web v3)).
+BUNDESLIGA — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ger.1/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_stats` / `espnBundesligaAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ BUNDESLIGA — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_stats(...)
+await sdv.bundesliga.espnBundesligaPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_stats(...)
 ```
 
 ## `espnBundesligaLeaders`

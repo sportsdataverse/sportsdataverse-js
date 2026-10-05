@@ -87,6 +87,14 @@ await sdv.nfl.espnNflTeamSchedule({ teamId: 12, season: 2024 });  // identical
 const pbp = await sdv.nba.getPlayByPlay(401584793);  // legacy method, still works
 ```
 
+**v4 names are `sportsdataverse-py`'s.** The same endpoint has the same name in
+Python and JavaScript: an ESPN *athlete* is a *player* and an *event* a *game*
+(`espnNbaPlayerGamelog`, `espnNflGameTeamRoster`), and the native APIs use py's
+names (`nhlBoxscore`, `nflStandings`, `cbsGameBoxscore`). Every pre-v4 name
+(`espnNbaAthleteGamelog`, `nhlApiWebBoxscore`, `cbsBoxscore`, …) still works as a
+deprecated alias that emits one `DeprecationWarning` per name; the full mapping is
+in the [Deprecated names reference](https://js.sportsdataverse.org/docs/reference/deprecations).
+
 ### Tidy rows with `{ parsed: true }`
 
 Every wrapper returns the **raw** payload by default. Pass `{ parsed: true }` to run
@@ -113,8 +121,8 @@ await sdv.mlb.mlbSchedule({ sport_id: 1, date: "2024-07-04", parsed: true });
 await sdv.mlb.mlbStatcastSearch({ season: 2024, player_type: "batter" });
 
 // Native — NHL api-web + NFL.com Shield (token minted automatically, no creds)
-await sdv.nhl.nhlApiWebPbp({ game_id: 2023030417, parsed: true });
-await sdv.nfl.nflApiWeeklyGameDetails({ season: 2024, week: 1, parsed: true });
+await sdv.nhl.nhlWebPbp({ game_id: 2023030417, parsed: true });
+await sdv.nfl.nflWeeklyGameDetails({ season: 2024, week: 1, parsed: true });
 
 // Providers — standalone namespaces (auth varies per provider)
 await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY, parsed: true });
