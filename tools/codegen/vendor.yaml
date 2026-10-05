@@ -192,13 +192,12 @@ families:
     schema_compatible: true
   sports247_site_pages:
     # 247sports.com `*.json` page models. src/parsers/sports247.ts is a faithful
-    # port of sdv-py's cfb/sports247_site_pages_parsers.py, BUT sdv-py@719de79's
-    # native/sports247_site_pages schemas are stale against that parser (numeric
-    # columns typed `character`, a few strings typed `integer`), so they are NOT
-    # attached (fail-closed). Flip to true on the pin bump that ships the upstream
-    # schema regeneration; test/parsers/sports247.test.js checks column TYPES of
-    # every attached schema on the real captures, so the flip is guarded.
-    schema_compatible: false
+    # port of sdv-py's cfb/sports247_site_pages_parsers.py. sdv-py #682 rebuilt
+    # native/sports247_site_pages from that parser's output on the committed
+    # captures (the 719de79 schemas typed numeric columns `character`), so they are
+    # attached; test/parsers/sports247.test.js checks the NAMES and TYPES of every
+    # attached schema on all 35 real captures.
+    schema_compatible: true
   torvik:
     # ratings + team_factors use JS's positional parsers; game_stats /
     # player_stats / game_schedule (vendored since sdv-py #678) keep py's parser

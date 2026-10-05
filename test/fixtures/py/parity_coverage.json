@@ -3,14 +3,14 @@
   "source_ref": "81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f",
   "totals": {
     "py_tables": 911,
-    "documented": 299,
+    "documented": 334,
     "no_schema": 38,
-    "incompatible": 529,
+    "incompatible": 494,
     "overridden": 25,
     "overlay_schema": 0,
     "undeclared": 20,
     "verified": 179,
-    "unverified": 120,
+    "unverified": 155,
     "unexercised_columns": 117
   },
   "families": {
@@ -1315,14 +1315,14 @@
     },
     "sports247_site_pages": {
       "py_tables": 35,
-      "documented": 0,
+      "documented": 35,
       "no_schema": 0,
-      "incompatible": 35,
+      "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
       "verified": 0,
-      "unverified": 0,
+      "unverified": 35,
       "verified_endpoints": {}
     },
     "torvik": {

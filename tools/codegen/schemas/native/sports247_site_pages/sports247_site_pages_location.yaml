@@ -1,0 +1,36 @@
+columns:
+- description: ''
+  name: key
+  type: integer
+- description: ''
+  name: postal_code
+  type: integer
+- description: ''
+  name: city
+  type: character
+- description: ''
+  name: state
+  type: integer
+- description: ''
+  name: latitude
+  type: numeric
+- description: ''
+  name: longitude
+  type: numeric
+- description: ''
+  name: county_tax_rate
+  type: numeric
+- description: ''
+  name: city_tax_rate
+  type: numeric
+- description: ''
+  name: special_tax_rate
+  type: numeric
+- description: ''
+  name: region_name
+  type: character
+- description: ''
+  name: default_name
+  type: character
+kind: dataframe
+schema: sports247_site_pages_location

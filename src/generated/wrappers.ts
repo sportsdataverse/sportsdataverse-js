@@ -9794,7 +9794,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_coach"
   },
   {
     "short": "coach_alma_mater",
@@ -9809,7 +9810,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "coach_hometown",
@@ -9824,7 +9826,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_location"
   },
   {
     "short": "coach_ranking",
@@ -9839,7 +9842,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_coach_ranking"
   },
   {
     "short": "coach_rankings",
@@ -9854,7 +9858,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_coach_ranking"
   },
   {
     "short": "event",
@@ -9869,7 +9874,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_event"
   },
   {
     "short": "institution",
@@ -9884,7 +9890,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "institution_list",
@@ -9900,7 +9907,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "items"
       }
     ],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "institution_location",
@@ -9915,7 +9923,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_location"
   },
   {
     "short": "institution_timeline_events",
@@ -9933,7 +9942,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_timeline_event"
   },
   {
     "short": "league_draft_picks",
@@ -9957,7 +9967,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "round"
       }
     ],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_draft_pick"
   },
   {
     "short": "league_institutions",
@@ -9977,7 +9988,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "items"
       }
     ],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "page_feeds",
@@ -9992,7 +10004,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_feed"
   },
   {
     "short": "player",
@@ -10007,7 +10020,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player"
   },
   {
     "short": "player_current_institution",
@@ -10022,7 +10036,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_institution"
   },
   {
     "short": "player_high_school",
@@ -10037,7 +10052,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_institution"
   },
   {
     "short": "player_institution",
@@ -10052,7 +10068,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_institution"
   },
   {
     "short": "player_institution_evaluation",
@@ -10067,7 +10084,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_institution_evaluation"
   },
   {
     "short": "player_primary_sport",
@@ -10082,7 +10100,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport"
   },
   {
     "short": "player_search",
@@ -10102,7 +10121,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "LastName"
       }
     ],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player"
   },
   {
     "short": "playersport",
@@ -10117,7 +10137,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport"
   },
   {
     "short": "playersport_institution",
@@ -10132,7 +10153,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_institution"
   },
   {
     "short": "playersport_rank_history",
@@ -10147,7 +10169,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport_ranking"
   },
   {
     "short": "position_rankings",
@@ -10162,7 +10185,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport_ranking"
   },
   {
     "short": "recruit_interest",
@@ -10177,7 +10201,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_recruit_interest"
   },
   {
     "short": "recruitment_final_choice",
@@ -10192,7 +10217,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport"
   },
   {
     "short": "recruitment_institution",
@@ -10207,7 +10233,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "recruitment_interests",
@@ -10222,7 +10249,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "recruitment_offers",
@@ -10237,7 +10265,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_institution"
   },
   {
     "short": "recruitment_player_sport",
@@ -10252,7 +10281,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport"
   },
   {
     "short": "season_current_expert_predictions",
@@ -10267,7 +10297,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_institution_prediction"
   },
   {
     "short": "season_recruit_interest_events",
@@ -10282,7 +10313,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_recruit_interest_event"
   },
   {
     "short": "season_recruit_interests",
@@ -10297,7 +10329,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_recruit_interest"
   },
   {
     "short": "season_recruits",
@@ -10329,7 +10362,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "Institution"
       }
     ],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_recruit"
   },
   {
     "short": "season_roster_embed",
@@ -10344,7 +10378,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_sports247_site_page"
+    "parser": "parse_sports247_site_page",
+    "returnsSchema": "native/sports247_site_pages/sports247_site_pages_player_sport"
   },
   {
     "short": "bulk",
