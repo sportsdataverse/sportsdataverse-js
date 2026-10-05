@@ -61,6 +61,11 @@ are unchanged. Wrapper defs gain `publicShort` (ESPN) / `publicName` (flat) and
 `LeagueConfig` gains `publicShorts`; `makeLeagueModule` / `makeFlatModule` build
 the v4 names and register the same aliases.
 
+### Added — cricket in-play win probability / WPA (`sdv.cricket`)
+
+- `sdv.cricket.cricket_win_probability` / `cricket_match_state` / `cricket_expected_runs` / `cricket_wpa` (+ camelCase): faithful port of sdv-py's cricket in-play win probability (resource surface + isotonic calibration, bundled as `dist/models/data/cricket_wp_tables.json`). Pure/offline; parity-tested to 1e-12 against sdv-py outputs on real ESPN + Cricsheet states.
+
+
 ### Fixed
 
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.
