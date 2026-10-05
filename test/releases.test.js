@@ -16,6 +16,7 @@ import sdv, {
 } from '../dist/index.js';
 import { _timer } from '../dist/core/request.js';
 import {
+  _decode,
   _warn,
   applyInt64Policy,
   castIdInt64,
@@ -259,15 +260,51 @@ describe('release loaders', () => {
       err.message.should.match(/maxCells: Infinity/);
     });
 
-    it('sums cells over the seasons and stops downloading at the one that crosses', async () => {
-      const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
+    /** Record fetches and decodes in order (the decode seam is spied, then restored). */
+    function trace(route) {
+      const events = [];
+      const t = releasesTransport((u) => {
+        events.push(`fetch ${u.match(/_(\d{4})\./)[1]}`);
+        return route(u);
+      });
+      const real = { ..._decode };
+      for (const k of ['rows', 'columns']) {
+        _decode[k] = (def, asset) => {
+          events.push(`decode ${asset.url.match(/_(\d{4})\./)[1]}`);
+          return real[k](def, asset);
+        };
+      }
+      return { t, events, restore: () => Object.assign(_decode, real) };
+    }
+
+    it('a running total over the seasons: the season that crosses is refused before it is decoded', async () => {
+      const { t, events, restore } = trace(() => 'cfb_ratings_2024.parquet');
       use(t);
-      const err = await sdv.cfb
-        .loadCfbRatings({ seasons: [2022, 2023, 2024], maxCells: 2 * 2412 - 1 })
-        .catch((e) => e);
-      err.should.be.instanceOf(SdvError);
-      err.message.should.match(/268 rows × 18 columns \(4,824 cells\)/);
-      t.calls.length.should.equal(2);
+      try {
+        const err = await sdv.cfb
+          .loadCfbRatings({ seasons: [2022, 2023, 2024], maxCells: 2 * 2412 - 1 })
+          .catch((e) => e);
+        err.should.be.instanceOf(SdvError);
+        err.message.should.match(
+          /season 2023 \(134 rows × 18 columns\) brings the running total to 4,824 cells, which is over the 4,823-cell limit/
+        );
+        events.should.eql(['fetch 2022', 'decode 2022', 'fetch 2023']); // 2023 never decoded, 2024 never fetched
+      } finally {
+        restore();
+      }
+    });
+
+    it('seasons are fetched and decoded one at a time (one download held at once), both formats', async () => {
+      for (const format of ['rows', 'columns']) {
+        const { t, events, restore } = trace(() => 'cfb_ratings_2024.parquet');
+        use(t);
+        try {
+          await sdv.cfb.loadCfbRatings({ seasons: [2022, 2023, 2024], format });
+          events.should.eql(['fetch 2022', 'decode 2022', 'fetch 2023', 'decode 2023', 'fetch 2024', 'decode 2024']);
+        } finally {
+          restore();
+        }
+      }
     });
 
     it('counts only the requested columns; Infinity disables the check', async () => {

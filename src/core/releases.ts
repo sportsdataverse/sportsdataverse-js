@@ -83,8 +83,8 @@ export interface ReleaseLoaderOptions {
   format?: "rows" | "columns";
   /**
    * Refuse (with a catchable `SdvError`) to decode more than this many cells
-   * (rows × leaf columns, summed over the seasons) — checked from the parquet
-   * footers before anything is decoded. Default: scaled to the V8 heap limit
+   * (rows × leaf columns, a running total over the seasons) — each season's
+   * parquet footer is checked before that season is decoded. Default: scaled to the V8 heap limit
    * (see `BYTES_PER_CELL`); `Infinity` disables the check.
    */
   maxCells?: number;
@@ -334,7 +334,11 @@ function supertype(kinds: Iterable<Kind | undefined>): "string" | "number" | und
   return set.has("boolean") && [...set].every((k) => k !== "date") ? "number" : undefined;
 }
 
-/** Cast one value to the supertype — an integer id becomes "123", never "123.0". */
+/**
+ * Cast one value to the supertype — an integer id becomes "123", never "123.0".
+ * Known gap (ledgered): a Date becomes its ISO timestamp, while polars casts a
+ * Date column to "YYYY-MM-DD" (hyparquet decodes DATE and TIMESTAMP alike to Date).
+ */
 function castTo(v: unknown, target: "string" | "number"): unknown {
   if (v === null || v === undefined) return v;
   if (target === "string") {
@@ -533,20 +537,36 @@ export function applyInt64Policy(rows: ReleaseRow[], label: string): ReleaseRow[
   return rows;
 }
 
+/**
+ * Decode seam: tests spy on it to prove seasons are decoded one at a time and
+ * a refused season is never decoded.
+ * @internal
+ */
+export const _decode = { rows: decodeRows, columns: decodeColumns };
+
+/**
+ * The size-guard error. `asset` is the season that crossed the limit; `total`
+ * is the running cell total including it (earlier seasons already decoded).
+ */
 function refuse(
   def: ReleaseLoaderDef,
   format: "rows" | "columns",
-  rows: number,
-  leaves: number,
-  cells: number,
-  max: number
+  asset: Asset,
+  season: number | undefined,
+  total: number,
+  max: number,
+  first: boolean
 ): SdvError {
+  const n = (x: number): string => x.toLocaleString("en-US");
+  const size = `${n(asset.rows)} rows × ${asset.leaves} columns`;
+  const what = first
+    ? `${size} (${n(total)} cells) is`
+    : `season ${season} (${size}) brings the running total to ${n(total)} cells, which is`;
   const lighter = format === "rows" ? ', `format: "columns"` (column arrays, ~4x lighter)' : "";
   return new SdvError(
-    `${def.fn}: ${rows.toLocaleString("en-US")} rows × ${leaves} columns ` +
-      `(${cells.toLocaleString("en-US")} cells) is over the ${max.toLocaleString("en-US")}-cell ` +
-      `limit for format "${format}" on this heap. Pass \`columns\` to read fewer columns${lighter}, ` +
-      `or raise the heap (node --max-old-space-size=8192); \`maxCells: Infinity\` skips this check.`
+    `${def.fn}: ${what} over the ${n(max)}-cell limit for format "${format}" on this heap. ` +
+      `Pass \`columns\` to read fewer columns${lighter}, or raise the heap ` +
+      `(node --max-old-space-size=8192); \`maxCells: Infinity\` skips this check.`
   );
 }
 
@@ -562,50 +582,45 @@ async function load(
   }
   const maxCells = opts.maxCells ?? defaultMaxCells(format);
 
-  // Phase 1: download + read every footer. The size guard runs here, before
-  // anything is decoded (row objects are what exhaust the heap).
-  const assets: Array<Asset | undefined> = [];
+  // One season at a time: download → read the footer → add its cells to the
+  // running total → refuse if over `maxCells` (before decoding that season) →
+  // else decode it and drop its download → next season. At most one compressed
+  // download is held at once, and decoded cells never exceed `maxCells`.
+  const rowFrames: ReleaseRow[][] = [];
+  const colFrames: ColumnFrame[] = [];
   const missing: number[] = [];
-  let rows = 0;
+  let found = 0;
   let cells = 0;
   for (const season of seasons) {
     const url = season === undefined ? def.url : releaseUrl(def.url, season);
-    const asset = await fetchAsset(def, url, opts);
+    let asset = await fetchAsset(def, url, opts);
     if (!asset) {
       if (season !== undefined) missing.push(season);
       continue;
     }
-    rows += asset.rows;
-    cells += asset.rows * asset.leaves;
-    if (cells > maxCells) throw refuse(def, format, rows, asset.leaves, cells, maxCells);
-    assets.push(asset);
+    found++;
+    const total = cells + asset.rows * asset.leaves;
+    if (total > maxCells) throw refuse(def, format, asset, season, total, maxCells, cells === 0);
+    cells = total;
+    if (format === "columns") colFrames.push(await _decode.columns(def, asset));
+    else rowFrames.push(await _decode.rows(def, asset));
+    asset = undefined; // release the download before fetching the next season
   }
-  if (seasons[0] === undefined && !assets.length) {
+  if (seasons[0] === undefined && !found) {
     _warn.emit(`${def.fn}: no published asset (returning no rows)`);
   } else if (missing.length) {
     _warn.emit(`${def.fn}: no data for season(s) ${missing.join(", ")} (skipped)`);
   }
 
-  // Phase 2: decode, dropping each download as soon as it is decoded.
   if (format === "columns") {
-    const frames: ColumnFrame[] = [];
-    for (let i = 0; i < assets.length; i++) {
-      frames.push(await decodeColumns(def, assets[i]!));
-      assets[i] = undefined;
-    }
-    const out = concatColumns(def.fn, frames, opts.columns);
+    const out = concatColumns(def.fn, colFrames, opts.columns);
     for (const [name, values] of Object.entries(out)) {
       if (def.idInt64?.includes(name)) castIdColumn(arrayColumn(values));
       int64Column(def.fn, name, arrayColumn(values));
     }
     return out;
   }
-  const frames: ReleaseRow[][] = [];
-  for (let i = 0; i < assets.length; i++) {
-    frames.push(await decodeRows(def, assets[i]!));
-    assets[i] = undefined;
-  }
-  const out = concatRows(def.fn, frames, opts.columns);
+  const out = concatRows(def.fn, rowFrames, opts.columns);
   if (out.length) {
     for (const col of def.idInt64 ?? []) if (col in out[0]) castIdInt64(out, col);
   }

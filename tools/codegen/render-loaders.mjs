@@ -253,8 +253,9 @@ export function renderLoadersPage(ns, loaders, position) {
     `${bases} (parquet) — the JS mirror of sportsdataverse-py's \`load_*\` functions. ` +
     `Each is a camelCase export plus its snake_case alias and resolves to an array of plain ` +
     `row objects (or \`{ [column]: values[] }\` with \`format: "columns"\`).\n\n` +
-    `- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a ` +
-    `loader checks rows × columns (summed over the seasons) against \`maxCells\` — by default ` +
+    `- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each ` +
+    `season a loader adds its rows × columns (from the parquet footer) to a running total and ` +
+    `checks it against \`maxCells\` — by default ` +
     `heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 ` +
     `for \`format: "columns"\` — and throws a catchable \`SdvError\` instead of running out of ` +
     `memory. Play-by-play is the usual case: pass \`columns\`, use \`format: "columns"\`, or ` +
