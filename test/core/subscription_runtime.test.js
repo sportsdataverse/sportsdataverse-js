@@ -209,6 +209,19 @@ describe('pff_api runtime', () => {
     t.calls.length.should.equal(3);
   });
 
+  it('retry budget is sdv-py\'s 4 (a 5xx may be retried 4 times); configure({ retries }) still wins', async () => {
+    process.env.PFF_API_KEY = 'ak_secret_value';
+    resolveFamily('pff_api').retries.should.equal(4);
+    let t = fakeTransport({ status: 503, data: 'down' }, { status: 503 }, { status: 503 }, { status: 503 }, { status: 200, data: LEAGUES });
+    configure({ transport: { pff_api: t } });
+    (await sdv.nfl.pffApiRefLeagues()).should.eql(LEAGUES);
+    t.calls.length.should.equal(5);
+    t = fakeTransport({ status: 503, data: 'down' });
+    configure({ transport: { pff_api: t }, retries: 1 });
+    (await sdv.nfl.pffApiRefLeagues().then(() => null, (e) => e)).should.be.instanceOf(AssetFetchError);
+    t.calls.length.should.equal(2);
+  });
+
   it('a 200 whose body is not a JSON object is an unknown answer -> AssetFetchError', async () => {
     process.env.PFF_API_KEY = 'ak_x';
     for (const data of ['<html>cdn interstitial</html>', [1, 2]]) {
@@ -388,6 +401,17 @@ describe('nfl_pro runtime (user token + offset paging)', () => {
     header(t.calls[1], 'authorization').should.equal(`Bearer ${argTok}`);
     await sdv.nfl.nflProPlayersOffensePassingSeason({ token: argTok, headers: { Authorization: 'Bearer mine' }, paginate: false });
     header(t.calls[2], 'authorization').should.equal('Bearer mine');
+  });
+
+  it('timeout: sdv-py\'s 45 s by default, but configure({ timeoutMs }) is honoured', async () => {
+    process.env.NFLPRO_TOKEN = ENTITLED();
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false });
+    t.calls[0].timeoutMs.should.equal(45000);
+    configure({ timeoutMs: 120000 });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false });
+    t.calls[1].timeoutMs.should.equal(120000);
   });
 
   it('pages on offset until the envelope total is reached (responses truncate silently)', async () => {

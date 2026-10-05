@@ -462,7 +462,7 @@ export async function nflProGet(
   const fetchPage = async (query: Record<string, unknown>): Promise<unknown> => {
     let text: unknown;
     try {
-      text = await request(config.family, { method: "GET", url, query, headers, responseType: "text", timeoutMs: 45000 });
+      text = await request(config.family, { method: "GET", url, query, headers, responseType: "text" });
     } catch (err) {
       if (loggedIn !== undefined && !reminted && err instanceof AssetFetchError && err.status === 401) {
         reminted = true; // once per call: a fresh login that still 401s is the answer
@@ -544,6 +544,9 @@ registerFamilyDefaults(FAMILY, {
   auth: nflProAuth,
   // a 401 / 403 is the entitlement answer, not load: never retried
   retryStatuses: [408, 429, 500, 502, 503, 504],
+  // sdv-py `timeout=45` (a default the call can override): the secured tables are
+  // slow. A configure({ timeoutMs }) still wins.
+  timeoutMs: 45000,
   classifyError: (res, url) => {
     if (res.status === 401 || res.status === 403) {
       return new AssetFetchError(

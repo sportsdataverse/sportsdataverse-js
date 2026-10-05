@@ -119,6 +119,8 @@ registerFamilyDefaults(FAMILY, {
   auth: pffApiAuth,
   // 403 = entitlement (subscription / league), never load: not retried.
   retryStatuses: [408, 429, 500, 502, 503, 504],
+  // sdv-py `_RETRIES = 4` (download(num_retries=4)); a configure({ retries }) still wins.
+  retries: 4,
   classifyError: (res, url) => {
     const detail = pffErrorDetail(res.data);
     if (res.status === 400 || res.status === 422) {

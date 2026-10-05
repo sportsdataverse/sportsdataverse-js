@@ -299,6 +299,23 @@ describe('core/config: per-family transport selection', () => {
     resolveFamily('t2_test_family').transport.should.equal(axiosTransport); // the seam really forgets it
   });
 
+  it('retries / timeoutMs: a value the user set > the registered family default > built-in', async () => {
+    registerFamilyDefaults('t2_test_family', { retries: 4, timeoutMs: 45000 });
+    resolveFamily('t2_test_family').should.containEql({ retries: 4, timeoutMs: 45000 });
+    resolveFamily('t2_unregistered').should.containEql({ retries: 3, timeoutMs: 30000 });
+    configure({ retries: 3 }); // explicitly the built-in value: still the user's choice
+    resolveFamily('t2_test_family').should.containEql({ retries: 3, timeoutMs: 45000 });
+    configure({ timeoutMs: 5000 });
+    resolveFamily('t2_test_family').should.containEql({ retries: 3, timeoutMs: 5000 });
+    resetConfig();
+    resolveFamily('t2_test_family').should.containEql({ retries: 4, timeoutMs: 45000 });
+    const t = fakeTransport({ status: 503 });
+    configure({ transport: { t2_test_family: t } });
+    await request('t2_test_family', GET()).should.be.rejectedWith(AssetFetchError);
+    t.calls.length.should.equal(5); // 1 + the family's 4 retries
+    t.calls[0].timeoutMs.should.equal(45000);
+  });
+
   it('auth: user per-family entry > registered family default; a "default" auth is never applied', async () => {
     const t = fakeTransport({ status: 200 });
     registerFamilyDefaults('t2_auth_family', { auth: headerAuth({ 'X-Who': 'family' }) });
