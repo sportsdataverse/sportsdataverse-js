@@ -6,6 +6,8 @@ import {
   nflClearTokenCache,
   jwtExp,
 } from '../../dist/core/nfl_auth.js';
+import { configure, resetConfig, AssetFetchError } from '../../dist/index.js';
+import { request, _timer } from '../../dist/core/request.js';
 
 // No-network unit tests for the api.nfl.com token auth. The mint POST to
 // /identity/v3/token is stubbed (axios.post), so nothing here touches the wire.
@@ -137,5 +139,84 @@ describe('core/nfl_auth: nflHeadersGen', () => {
     const h = await nflHeadersGen('my-own-token');
     h.Authorization.should.equal('Bearer my-own-token');
     minted.should.be.false();
+  });
+});
+
+describe('core/nfl_auth: the mint retries transient failures itself', () => {
+  const future = () => Math.floor(Date.now() / 1000) + 3600;
+  /** A fake transport replaying `script` (Error = network failure, number = status). */
+  const minter = (...script) => {
+    const calls = [];
+    const t = async (req) => {
+      calls.push(req);
+      const step = script[Math.min(calls.length - 1, script.length - 1)];
+      if (step instanceof Error) throw step;
+      return typeof step === 'number'
+        ? { status: step, headers: {}, data: '', url: req.url }
+        : { status: 200, headers: {}, data: { accessToken: step }, url: req.url };
+    };
+    t.calls = calls;
+    return t;
+  };
+  let sleeps;
+  let realSleep;
+  beforeEach(() => {
+    nflClearTokenCache();
+    resetConfig();
+    delete process.env.NFL_ACCESS_TOKEN;
+    sleeps = [];
+    realSleep = _timer.sleep;
+    _timer.sleep = async (ms) => {
+      sleeps.push(ms);
+    };
+  });
+  afterEach(() => {
+    _timer.sleep = realSleep;
+    resetConfig();
+    nflClearTokenCache();
+  });
+
+  it('a network error, then a 503, then the token: one mint call succeeds after backoff', async () => {
+    const tok = fakeJwt(future());
+    const t = minter(new Error('ECONNRESET'), 503, tok);
+    (await nflTokenGen({ transport: t })).should.equal(tok);
+    t.calls.length.should.equal(3);
+    sleeps.length.should.equal(2);
+    t.calls.every((c) => c.url === 'https://api.nfl.com/identity/v3/token').should.be.true();
+  });
+
+  it('a persistent network error gives up after the nfl_api retry budget (and honours configure)', async () => {
+    let t = minter(new Error('ECONNRESET'));
+    (await nflTokenGen({ transport: t }).then(() => null, (e) => e)).message.should.equal('ECONNRESET');
+    t.calls.length.should.equal(4); // 1 + default 3 retries
+    configure({ retries: 0 });
+    t = minter(new Error('ECONNRESET'));
+    await nflTokenGen({ transport: t }).should.be.rejected();
+    t.calls.length.should.equal(1);
+  });
+
+  it('a 401 / 403 (bad or refused client credentials) is not retried', async () => {
+    for (const status of [401, 403]) {
+      const t = minter(status);
+      const err = await nflTokenGen({ transport: t }).then(() => null, (e) => e);
+      err.should.be.instanceOf(AssetFetchError);
+      err.status.should.equal(status);
+      t.calls.length.should.equal(1);
+    }
+    sleeps.length.should.equal(0);
+  });
+
+  it('a wrapper call rides out a mint blip (the request-level retry no longer covers the mint)', async () => {
+    const tok = fakeJwt(future());
+    const t = async (req) =>
+      req.url.endsWith('/identity/v3/token')
+        ? t.mints++ === 0
+          ? Promise.reject(new Error('socket hang up'))
+          : { status: 200, headers: {}, data: { accessToken: tok }, url: req.url }
+        : { status: 200, headers: {}, data: { auth: req.headers.Authorization }, url: req.url };
+    t.mints = 0;
+    configure({ transport: { nfl_api: t } });
+    (await request('nfl_api', { method: 'GET', url: 'https://api.nfl.com/x' })).auth.should.equal(`Bearer ${tok}`);
+    t.mints.should.equal(2);
   });
 });

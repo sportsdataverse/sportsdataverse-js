@@ -18,8 +18,9 @@
 
 import { tokenAuth, type AuthProvider } from "./auth.js";
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults, resolveFamily } from "./config.js";
-import { AssetFetchError } from "./errors.js";
-import { mergeHeaders, type Transport } from "./transport.js";
+import { AssetFetchError, SdvError } from "./errors.js";
+import { _timer, retryDelayMs } from "./request.js";
+import { headerValue, mergeHeaders, type Transport, type TransportResponse } from "./transport.js";
 
 export const NFL_API_HOST = "https://api.nfl.com";
 
@@ -92,7 +93,13 @@ export function jwtExp(token: string): number | null {
  * POST the anonymous device-token grant and return the bearer `accessToken`.
  *
  * Goes straight through the transport, not `request("nfl_api", …)` — that would
- * re-enter this family's own auth provider and recurse.
+ * re-enter this family's own auth provider and recurse. So it retries itself
+ * (the auth contract: `request()` never retries a mint), with the `nfl_api`
+ * budget and backoff: a network error up to `retries` times, a retryable status
+ * (408 / 429 / 5xx) at most min(retries, 4) times. The client credentials are
+ * the public web-app pair, so re-sending them is harmless. (sdv-py's
+ * `_mint_token` makes one attempt; this restores what the JS mint did before
+ * the transport layer, when it ran inside the request retry loop.)
  */
 async function mintToken(key: string, secret: string, transport: Transport): Promise<string> {
   const url = `${NFL_API_HOST}/identity/v3/token`;
@@ -103,17 +110,30 @@ async function mintToken(key: string, secret: string, transport: Transport): Pro
     deviceInfo: DEFAULT_DEVICE_INFO,
     networkType: "other",
   });
-  const res = await transport({
-    method: "POST",
-    url,
-    body: body.toString(),
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "User-Agent": DEFAULT_UA,
-      "X-Domain-Id": "100",
-    },
-    timeoutMs: 30000,
-  });
+  const { retries, retryStatuses } = resolveFamily("nfl_api");
+  let res: TransportResponse;
+  for (let attempt = 0, statusRetries = 0; ; attempt++) {
+    try {
+      res = await transport({
+        method: "POST",
+        url,
+        body: body.toString(),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "User-Agent": DEFAULT_UA,
+          "X-Domain-Id": "100",
+        },
+        timeoutMs: 30000,
+      });
+    } catch (err) {
+      if (err instanceof SdvError || attempt >= retries) throw err;
+      await _timer.sleep(retryDelayMs(attempt));
+      continue;
+    }
+    if (!retryStatuses.includes(res.status) || statusRetries >= Math.min(retries, 4) || attempt >= retries) break;
+    statusRetries++;
+    await _timer.sleep(retryDelayMs(attempt, headerValue(res.headers, "retry-after")));
+  }
   const token = (res?.data as { accessToken?: unknown } | undefined)?.accessToken;
   if (typeof token !== "string" || !token) {
     throw new AssetFetchError("nfl_auth: /identity/v3/token response missing accessToken", {
