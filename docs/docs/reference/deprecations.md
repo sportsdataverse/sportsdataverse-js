@@ -15,7 +15,7 @@ v4 renamed the generated wrappers to **sdv-py's names**, so the same endpoint ha
 - Native APIs: sdv-py's name pattern — `nhl_<endpoint>` for the NHL api-web family (`nhl_web_<endpoint>` where sdv-py's name is taken), `nfl_<endpoint>` for NFL.com.
 - CBS: sdv-py's 16 short names replace the ones JS had picked.
 
-Every pre-v4 name below still works: it forwards to the new function and emits one `DeprecationWarning` per name per process. The aliases will be removed in a future major release. **1405** names are deprecated, each in both its snake_case and camelCase form.
+Every pre-v4 name below still works: it forwards to the new function and emits one `DeprecationWarning` per name per process. The aliases will be removed in a future major release. **1438** names are deprecated, each in both its snake_case and camelCase form.
 
 ## `sdv.bundesliga`
 
@@ -402,6 +402,44 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_epl_events` / `espnEplEvents` | `espn_epl_games` / `espnEplGames` |
 | `espn_epl_season_athletes` / `espnEplSeasonAthletes` | `espn_epl_season_players` / `espnEplSeasonPlayers` |
 | `espn_epl_season_week_events` / `espnEplSeasonWeekEvents` | `espn_epl_season_week_games` / `espnEplSeasonWeekGames` |
+
+## `sdv.fox`
+
+| Deprecated (pre-v4) | Use instead (v4) |
+|---|---|
+| `fox_event_data` / `foxEventData` | `fox_api_event_data` / `foxApiEventData` |
+| `fox_event_matchup` / `foxEventMatchup` | `fox_api_event_matchup` / `foxApiEventMatchup` |
+| `fox_event_odds` / `foxEventOdds` | `fox_api_event_odds` / `foxApiEventOdds` |
+| `fox_event_recap` / `foxEventRecap` | `fox_api_event_recap` / `foxApiEventRecap` |
+| `fox_event_standings` / `foxEventStandings` | `fox_api_event_standings` / `foxApiEventStandings` |
+| `fox_explore_browse` / `foxExploreBrowse` | `fox_api_explore_browse` / `foxApiExploreBrowse` |
+| `fox_explore_odds` / `foxExploreOdds` | `fox_api_explore_odds` / `foxApiExploreOdds` |
+| `fox_foxpolls` / `foxFoxpolls` | `fox_api_foxpolls` / `foxApiFoxpolls` |
+| `fox_league_conferences` / `foxLeagueConferences` | `fox_api_league_conferences` / `foxApiLeagueConferences` |
+| `fox_league_header` / `foxLeagueHeader` | `fox_api_league_header` / `foxApiLeagueHeader` |
+| `fox_league_odds` / `foxLeagueOdds` | `fox_api_league_odds` / `foxApiLeagueOdds` |
+| `fox_league_playernews` / `foxLeaguePlayernews` | `fox_api_league_playernews` / `foxApiLeaguePlayernews` |
+| `fox_league_polls` / `foxLeaguePolls` | `fox_api_league_polls` / `foxApiLeaguePolls` |
+| `fox_league_schedule` / `foxLeagueSchedule` | `fox_api_league_schedule` / `foxApiLeagueSchedule` |
+| `fox_league_scores` / `foxLeagueScores` | `fox_api_league_scores` / `foxApiLeagueScores` |
+| `fox_league_scores_segment` / `foxLeagueScoresSegment` | `fox_api_league_scores_segment` / `foxApiLeagueScoresSegment` |
+| `fox_league_standings` / `foxLeagueStandings` | `fox_api_league_standings` / `foxApiLeagueStandings` |
+| `fox_league_stats` / `foxLeagueStats` | `fox_api_league_stats` / `foxApiLeagueStats` |
+| `fox_league_stats_con` / `foxLeagueStatsCon` | `fox_api_league_stats_con` / `foxApiLeagueStatsCon` |
+| `fox_league_teamnav` / `foxLeagueTeamnav` | `fox_api_league_teamnav` / `foxApiLeagueTeamnav` |
+| `fox_scoreboard` / `foxScoreboard` | `fox_api_scoreboard` / `foxApiScoreboard` |
+| `fox_scorechip` / `foxScorechip` | `fox_api_scorechip` / `foxApiScorechip` |
+| `fox_search_content` / `foxSearchContent` | `fox_api_search_content` / `foxApiSearchContent` |
+| `fox_search_entities` / `foxSearchEntities` | `fox_api_search_entities` / `foxApiSearchEntities` |
+| `fox_search_popular` / `foxSearchPopular` | `fox_api_search_popular` / `foxApiSearchPopular` |
+| `fox_team_gamelog` / `foxTeamGamelog` | `fox_api_team_gamelog` / `foxApiTeamGamelog` |
+| `fox_team_header` / `foxTeamHeader` | `fox_api_team_header` / `foxApiTeamHeader` |
+| `fox_team_roster` / `foxTeamRoster` | `fox_api_team_roster` / `foxApiTeamRoster` |
+| `fox_team_standings` / `foxTeamStandings` | `fox_api_team_standings` / `foxApiTeamStandings` |
+| `fox_team_stats` / `foxTeamStats` | `fox_api_team_stats` / `foxApiTeamStats` |
+| `fox_topevents_scoreboard_segment` / `foxTopeventsScoreboardSegment` | `fox_api_topevents_scoreboard_segment` / `foxApiTopeventsScoreboardSegment` |
+| `fox_trending_articles` / `foxTrendingArticles` | `fox_api_trending_articles` / `foxApiTrendingArticles` |
+| `fox_trending_videos` / `foxTrendingVideos` | `fox_api_trending_videos` / `foxApiTrendingVideos` |
 
 ## `sdv.laliga`
 

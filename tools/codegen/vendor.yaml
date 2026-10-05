@@ -34,6 +34,9 @@
 #             is dropped although the parser is a declared-compatible port.
 #   schemas:  returns-schema path prefix rewrite, py -> JS
 #
+# An overlay ADDITION may set `public_name:` to keep a pre-v4 JS name instead of
+# the family pattern's (the deprecated JS-only Fox routes sdv-py dropped).
+#
 # Returns-schema policy (a returns table must describe what the JS parser
 # returns), fail-closed: a py `returns_schema` is kept only when compatibility
 # is DECLARED (family `schema_compatible: true` for a kept py name, or a
@@ -43,7 +46,7 @@
 # A family with an overlay/<family>.yaml gets it merged on top.
 source:
   repo: sportsdataverse/sportsdataverse-py
-  ref: 719de79edb685b89c524f8b4c0c146fea0b53855
+  ref: 81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
 
 # Copied verbatim (no transform, not generated here).
 # espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
@@ -89,21 +92,40 @@ families:
   # src/parsers/espn.ts (a faithful port of sdv-py's); ESPN returns tables come
   # from schemas/espn/, so the YAML returns_schema is not used.
   espn_fitt_v3: {}
+  # ESPN CDN (cdn.espn.com/core/{league}/{page}?xhr=1): espn.com's own page data,
+  # a 6th ESPN host family (HOSTS.cdn). Each endpoint carries sdv-py's live-probed
+  # `include_prefixes` league allowlist and the family-level `fixed_params`
+  # (xhr: 1), both honoured by generate.mjs. The CDN parsers in
+  # src/parsers/espn.ts are ports of sdv-py's (parse_cdn_game runs parse_summary,
+  # schedule/scoreboard run parse_scoreboard); ESPN returns tables come from
+  # schemas/espn/, so the YAML returns_schema is not used.
+  espn_cdn: {}
   # Keyless providers / native league APIs that exist only in sdv-py.
   on3:
     # src/parsers/on3.ts: faithful port of sdv-py cfb/on3_parsers.py parse_on3_rdb
     # (the 4 deprecated _next/data scrape shims are not in the YAML and not ported).
-    # py's returns tables are NOT attached (fail-closed, wholesale): they are
-    # json_normalize schemas of other captures (a nested object null there is one
-    # `character` column; populated, it flattens to <name>_*), and every real RDB
-    # capture the parser-parity harness (test/parsers/parity.test.js) checks
-    # disproves its table although JS == py cell for cell: player_profile (207
-    # columns parsed vs 47 documented, 8 documented null-object columns flattened,
-    # 4 `character` columns holding numbers/booleans), player_all_rankings
-    # (documented `change` absent), team_ranking_team_rankings (23 of 50 columns
-    # documented). Upstream follow-up: sdv-py regenerates these schemas from parser
-    # output; the pin bump that ships it flips this back, gated by the harness.
-    schema_compatible: false
+    # sdv-py #683 builds these tables from parse_on3_rdb's output on its committed
+    # real captures (30 endpoints; the other 48 are `unverified` with no columns),
+    # so they are attached; the parser-parity harness (test/parsers/parity.test.js)
+    # checks every one with a capture.
+    schema_compatible: true
+    # Parity harness, real sdv-py captures: py's parse_on3_rdb (pandas) stringifies a
+    # bool column that has a null in it ('True' / 'False', 'nan' for the null), so
+    # these tables type such columns `character`; the JS port keeps booleans (the
+    # values agree). Columns: rating_five_star_plus (commits_latest,
+    # transfers_latest), roster_rating_*_plus + status_* (organizations_roster),
+    # current_measurement_verified (people_measurements_averages),
+    # primary_position_sport_is_* (player_verified), pick_correct +
+    # player_rating_five_star_plus (recruitments_latest_rpm_picks),
+    # committed_article_is_premium (transfers_best_available, transfers_latest).
+    schema_incompatible:
+      - commits_latest
+      - organizations_roster
+      - people_measurements_averages
+      - player_verified
+      - recruitments_latest_rpm_picks
+      - transfers_best_available
+      - transfers_latest
   asa:
     # src/parsers/asa.ts: faithful port of sdv-py soccer/asa_parsers.py. The
     # multi-table goals-added parser returns py's documented default sub-frame
@@ -166,10 +188,8 @@ families:
     schema_compatible: true
   mlb:
     from: mlb_api
-    # overlay/mlb.yaml: the 14 JS-only endpoints, JS's schemas for the two
-    # parser_overrides below, and a `pbp` patch for sdv-py@719de79's
-    # `timecode` -> `language` query-key bug. Drop that patch once the pin
-    # includes the upstream sdv-py fix.
+    # overlay/mlb.yaml: the 14 JS-only endpoints and JS's schemas for the two
+    # parser_overrides below.
     parsers:
       # src/parsers/mlb.ts: "Faithful port of" sdv-py's MLB Stats parsers (mlb_parsers.py,
       # since renamed mlb_api_parsers.py); every py parser is mapped explicitly.
@@ -194,16 +214,17 @@ families:
     schema_compatible: true
   sports247_site_pages:
     # 247sports.com `*.json` page models. src/parsers/sports247.ts is a faithful
-    # port of sdv-py's cfb/sports247_site_pages_parsers.py, BUT sdv-py@719de79's
-    # native/sports247_site_pages schemas are stale against that parser (numeric
-    # columns typed `character`, a few strings typed `integer`), so they are NOT
-    # attached (fail-closed). Flip to true on the pin bump that ships the upstream
-    # schema regeneration; test/parsers/sports247.test.js checks column TYPES of
-    # every attached schema on the real captures, so the flip is guarded.
-    schema_compatible: false
+    # port of sdv-py's cfb/sports247_site_pages_parsers.py. sdv-py #682 rebuilt
+    # native/sports247_site_pages from that parser's output on the committed
+    # captures (the 719de79 schemas typed numeric columns `character`), so they are
+    # attached; test/parsers/sports247.test.js checks the NAMES and TYPES of every
+    # attached schema on all 35 real captures.
+    schema_compatible: true
   torvik:
-    # Both py endpoints use JS's positional parsers, so JS keeps its own schemas
-    # (overlay/torvik.yaml, with the 3 JS-only endpoints).
+    # ratings + team_factors use JS's positional parsers; game_stats /
+    # player_stats / game_schedule (vendored since sdv-py #678) keep py's parser
+    # names but JS's hoopR ports, which py's tables do not describe (undeclared).
+    # JS keeps its own schemas for all five (overlay/torvik.yaml).
     parser_overrides:
       ratings: parse_torvik_ratings
       team_factors: parse_torvik_team_factors
@@ -231,6 +252,33 @@ families:
       team_standings_sportsline: parse_cbs_standings
     schemas:
       native/cbs_napi/: native/cbs/
+  fox:
+    from: fox_api
+    # Fox Sports Bifrost (api.foxsports.com), vendored from sdv-py's fox_api.yaml
+    # (#680; it was JS-owned before). Public names are sdv-py's (fox_api_<short>);
+    # the pre-v4 fox_<short> names are deprecated aliases. The 5 routes sdv-py
+    # dropped as dead are deprecated JS-only additions in overlay/fox.yaml.
+    # JS's Fox parsers (src/parsers/fox.ts) were written independently of sdv-py's
+    # parse_fox_api_* (sdv-py ships no fox_api returns schemas), so each py
+    # parser maps to the JS parser every endpoint used before the switch, and JS
+    # keeps its own returns tables via the overlay.
+    parsers:
+      parse_fox_api: {js: parse_fox_list, schema_compatible: false}
+      parse_fox_api_events: {js: parse_fox_scoreboard, schema_compatible: false}
+      parse_fox_api_scorechip: {js: parse_fox_list, schema_compatible: false}
+      parse_fox_api_nav: {js: parse_fox_list, schema_compatible: false}
+      parse_fox_api_header: {js: parse_fox_list, schema_compatible: false}
+      parse_fox_api_polls: {js: parse_fox_standings, schema_compatible: false}
+      parse_fox_api_standings: {js: parse_fox_standings, schema_compatible: false}
+      parse_fox_api_roster: {js: parse_fox_team_roster, schema_compatible: false}
+      parse_fox_api_search: {js: parse_fox_search, schema_compatible: false}
+      parse_fox_api_trending: {js: parse_fox_list, schema_compatible: false}
+    parser_overrides:
+      # endpoints whose JS parser differs from the one their py parser maps to
+      league_stats_con: parse_fox_standings
+      event_data: parse_fox_event
+      event_matchup: parse_fox_event
+      search_popular: parse_fox_list
   yahoo:
     from: yahoo_shangrila
     # JS's Yahoo parsers were written independently of sdv-py's, so JS keeps its
@@ -276,24 +324,19 @@ families:
     # src/parsers/nba_stats.ts: "Faithful port of" sdv-py's nba/nba_stats_parsers.py
     # (parse_nba_stats_result_sets: resultSets / resultSet / shot-location grouped
     # headers / scoreboardv3 / scheduleleaguev2 / boxscore *v3 / video envelopes).
-    # py's returns tables are NOT attached (fail-closed, wholesale): sdv-py builds
-    # them from the endpoint catalog (tools/codegen/gen_nba_stats.py), not from the
-    # parser. On sdv-py's real captures the parser-parity harness
-    # (test/parsers/parity.test.js) disproves 11 of the 13 tables it can check
-    # although JS == py cell for cell: catalog `fg3m` / `fg3a` / `leagueid` /
-    # `5-9_ft_fgm` vs parsed `fg3_m` / `fg3_a` / `league_id` / `5_9_ft_fgm`;
-    # PtMeasureType-dependent columns (leaguedashptstats); multi-result-set payloads
-    # parsed to {set: rows}, not the one documented frame. ~69 of the remaining
-    # tables carry the same catalog names. Upstream follow-up: sdv-py regenerates
-    # these schemas from parser output; the pin bump that ships it flips this back,
-    # gated by the harness.
-    schema_compatible: false
+    # sdv-py #683 builds these tables from that parser's output on a trimmed real
+    # capture of every endpoint (`kind: frames` = one table per result set), so
+    # they are attached; the parser-parity harness checks every one against its
+    # capture (test/parsers/parity.test.js).
+    schema_compatible: true
+    # leaguedashptstats: py documents the default PtMeasureType (SpeedDistance)
+    # columns; the 7 other real tracking captures (CatchShoot, Defense, Drives,
+    # Passing, Possessions, PullUpShot, Rebounding) return other columns, so the
+    # table does not describe the endpoint's output.
+    schema_incompatible: [leaguedashptstats]
   wnba_stats:
     # sdv-py's parse_wnba_stats_result_sets is a re-export alias of the NBA parser,
-    # so the WNBA family runs the same ported JS parser. Its py returns tables are
-    # NOT attached, for the reason given under nba_stats: the harness disproves all
-    # 8 it can check (fg3m vs fg3_m; `if_necessary` documented `character` where the
-    # WNBA capture ships booleans; multi-result-set payloads), and ~61 of the rest
-    # carry the same catalog names. Re-enabled with the upstream schema regeneration.
+    # so the WNBA family runs the same ported JS parser, and its parser-derived
+    # tables (sdv-py #683) are attached the same way.
     parsers:
-      parse_wnba_stats_result_sets: {js: parse_nba_stats_result_sets, schema_compatible: false}
+      parse_wnba_stats_result_sets: {js: parse_nba_stats_result_sets, schema_compatible: true}

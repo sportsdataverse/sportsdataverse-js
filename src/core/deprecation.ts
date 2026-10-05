@@ -14,6 +14,13 @@ export interface DeprecatedAlias extends WrapperFn {
 /** `code` of the DeprecationWarning a pre-v4 name emits. */
 export const DEPRECATED_NAME_CODE = "SDV_DEPRECATED_NAME";
 
+/**
+ * `code` of the DeprecationWarning a deprecated ENDPOINT emits (endpoint YAML
+ * `deprecated:`: a dead route kept callable, e.g. `recruiting_*`, the Fox routes
+ * sdv-py dropped). Filter with `w.code === "SDV_DEPRECATED_ENDPOINT"`.
+ */
+export const DEPRECATED_ENDPOINT_CODE = "SDV_DEPRECATED_ENDPOINT";
+
 const warned = new Set<string>();
 
 const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());

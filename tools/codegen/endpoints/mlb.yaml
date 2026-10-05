@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
 # tools/codegen/endpoints/mlb_api.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/mlb.yaml; shared changes land in sdv-py first.
@@ -29,11 +29,6 @@ endpoints:
     type: str
   parser: parse_mlb_schedule
   returns_schema: native/mlb/schedule_postseason
-# ---------------------------------------------------------------------------
-# Patch: sdv-py@719de79 maps `timecode` to the `language` query key (a py-side
-# bug). The Stats API key is `timecode`. Drop this patch once the vendor pin
-# includes the upstream sdv-py fix.
-# ---------------------------------------------------------------------------
 - short: pbp
   returns_schema: native/mlb/pbp
   summary: "GET /api/v1.1/game/{gamePk}/feed/live — live firehose (v1.1)."

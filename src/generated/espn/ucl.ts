@@ -653,6 +653,52 @@ export const espnUclCalendar: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnUclCalendar} (py/R parity). */
 export const espn_ucl_calendar = espnUclCalendar;
 
+const CDN_SCOREBOARD_DEF: WrapperDef = {
+  "short": "cdn_scoreboard",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/scoreboard",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "date",
+      "queryKey": "date"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "year"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * UCL — cdn scoreboard (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/uefa.champions/scoreboard?xhr=1`
+ *
+ * @param params.date - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter (ESPN `year`).
+ * @param params.season_type - query parameter (ESPN `seasontype`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.ucl.espnUclCdnScoreboard({});
+ */
+export const espnUclCdnScoreboard: WrapperFn = (params = {}) =>
+  callWrapper(CDN_SCOREBOARD_DEF, CFG, params);
+/** snake_case alias of {@link espnUclCdnScoreboard} (py/R parity). */
+export const espn_ucl_cdn_scoreboard = espnUclCdnScoreboard;
+
 const COACH_DEF: WrapperDef = {
   "short": "coach",
   "family": "core_v2",

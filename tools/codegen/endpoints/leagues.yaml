@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
 # tools/codegen/endpoints/leagues.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/leagues.yaml; shared changes land in sdv-py first.
@@ -11,6 +11,9 @@ hosts:
   # ESPN's FPI surface. The core_v2 powerindex endpoint returns only $ref links;
   # this host serves the resolved Football Power Index table directly.
   fitt_v3: "https://site.web.api.espn.com/apis/fitt/v3/sports"
+  # espn.com's own page data (gamecast, boxscore, schedule, scoreboard, rankings)
+  # as JSON. Keyed by league slug only -- no {sport} segment. See espn_cdn.yaml.
+  cdn: "https://cdn.espn.com/core"
 leagues:
 - { prefix: nba, sport: basketball, league: nba, scopes: [ universal ] }
 - { prefix: wnba, sport: basketball, league: wnba, scopes: [ universal ] }

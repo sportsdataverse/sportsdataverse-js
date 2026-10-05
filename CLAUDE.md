@@ -140,9 +140,11 @@ The generator is a pure file-in / file-out renderer — it makes **no network ca
 ### Vendored families (one-way sync from sdv-py)
 
 sdv-py's codegen YAML is the **source of truth** for the shared families:
-`espn_site_v2`, `espn_core_v2`, `espn_web_v3`, `leagues`, `mlb_statcast`, `nfl_api`,
-the four `nhl_*`, `mlb` (py `mlb_api`), `torvik`, `cbs` (py `cbs_napi`), `yahoo`
-(py `yahoo_shangrila`), `sports247`, `sports247_site_pages`, plus `endpoints/releases.yaml` (verbatim) and every returns
+`espn_site_v2`, `espn_core_v2`, `espn_web_v3`, `espn_fitt_v3`, `espn_cdn`, `leagues`,
+`mlb_statcast`, `nfl_api`, the four `nhl_*`, `mlb` (py `mlb_api`), `torvik`, `cbs`
+(py `cbs_napi`), `yahoo` (py `yahoo_shangrila`), `fox` (py `fox_api`), `sports247`,
+`sports247_site_pages`, `on3`, `nba_stats`, `wnba_stats` (and the other keyless /
+subscription families listed in `vendor.yaml`), plus `endpoints/releases.yaml` (verbatim) and every returns
 schema those families reference. `tools/codegen/vendor.mjs` derives them from a
 pinned sdv-py commit:
 
@@ -170,8 +172,9 @@ pinned sdv-py commit:
 - `tools/codegen/vendor/upstream/` — the fetched py files, **verbatim**
   (`.gitattributes` `-text`), plus `REF` and `LOCK` (each file's git blob sha from
   the pinned tree; the fetch verifies every file against it). Never edit them.
-- `tools/codegen/overlay/<family>.yaml` — JS-owned additions (`mlb`'s 14 and
-  `torvik`'s 3 JS-only endpoints; an addition needs a `path`) and patches (an entry
+- `tools/codegen/overlay/<family>.yaml` — JS-owned additions (`mlb`'s 14 JS-only
+  endpoints, `fox`'s 5 deprecated dead routes kept under their pre-v4 names via
+  `public_name:`; an addition needs a `path`) and patches (an entry
   whose `short` is vendored replaces those keys; never `parser`). A patch for a
   short that isn't vendored, or a patched key that already equals upstream, fails
   the vendor ("remove it"), so stale patches surface on the next sync. This is the
@@ -187,7 +190,7 @@ pinned sdv-py commit:
   orphan schema, or a pin/upstream mismatch.
 - `.github/workflows/vendor-sync.yml` bumps the pin to sdv-py `main` weekly and opens
   one sync PR.
-- JS-owned (hand-maintained, not vendored): `fox`, `odds_api`, `hockeytech`,
+- JS-owned (hand-maintained, not vendored): `odds_api`, `hockeytech`,
   `yahoo_scores`, `recruiting`, and `espn_parser_map.yaml`.
 - New or changed shared endpoints land in **sdv-py first**. A new py parser name
   needs a `parsers` mapping (the flat-contract test fails on an unregistered name);
@@ -200,12 +203,14 @@ pinned sdv-py commit:
 
 ### ESPN cross-league surface
 
-ESPN endpoints come from three family YAML files — `espn_site_v2.yaml`,
-`espn_core_v2.yaml`, `espn_web_v3.yaml` — and feed the `WRAPPERS` table in
+ESPN endpoints come from five family YAML files — `espn_site_v2.yaml`,
+`espn_core_v2.yaml`, `espn_web_v3.yaml`, `espn_fitt_v3.yaml`, `espn_cdn.yaml` (whose
+endpoints carry an `include_prefixes` league allowlist and a family `fixed_params`
+`xhr: 1`) — and feed the `WRAPPERS` table in
 `src/generated/wrappers.ts`. The pattern is **one core, parameterized on
 `(sport, league)` slugs**, wrapped once per URL family.
 
-- **116 distinct short names** are exposed across **29 leagues** (`leagues.yaml`).
+- **126 distinct short names** are exposed across **29 leagues** (`leagues.yaml`).
 - Each wrapper is registered under BOTH its sdv-py snake_case name (py/R parity)
   and the camelCase form (idiomatic JS) — both resolve to the same function.
 - **v4 names are sdv-py's.** `tools/codegen/generate.mjs` ports py's emit-time rename
@@ -266,7 +271,7 @@ getting its own generated reference page:
 | 247Sports (`sports247` + `sports247_site_pages`, vendored) | `sdv.sports247.*` | **guest JWT minted automatically** (`sports247`; `src/core/sports247_runtime.ts`); both need the impersonating transport (`impit`) and stay off the playground |
 | 247Sports, old (`recruiting`, `api.247sports.com`) | `sdv.recruiting.*` | **deprecated** (host answers 500; one `DeprecationWarning` per method, naming its `sports247` replacement) |
 | CBS Sports (`cbs`) | `sdv.cbs.*` | keyless |
-| Fox Sports (`fox`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
+| Fox Sports (`fox`, vendored from py `fox_api`) | `sdv.fox.*` (`fox_api_*`; pre-v4 `fox_*` are deprecated aliases) | public `apikey` + `api-version` query (defaulted; `scorechip` and `foxpolls` send no `api-version`) |
 | Yahoo Sports (`yahoo_scores` + `yahoo`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
 | HockeyTech / LeagueStat (`hockeytech`) | `sdv.hockeytech.*` | keyless; **league-parameterized** (`league` slug) |
 | BartTorvik / T-Rank (`torvik`) | `sdv.torvik.*` | keyless (needs a browser-like UA) |

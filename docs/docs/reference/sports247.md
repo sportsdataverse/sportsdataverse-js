@@ -360,3 +360,1064 @@ Flat (non-ESPN) wrappers for the 247sports.com `*.json` page models. Host: `http
 | `sports247_site_pages_season_recruit_interests` / `sports247SitePagesSeasonRecruitInterests` | `https://247sports.com/Season/{season}/RecruitInterests.json` | `season`\* | — | `parse_sports247_site_page` | — |
 | `sports247_site_pages_season_recruits` / `sports247SitePagesSeasonRecruits` | `https://247sports.com/Season/{season}/Recruits.json` | `season`\* | `items` → `Items`, `page` → `Page`, `player_full_name` → `Player.FullName`, `institution` → `Institution` | `parse_sports247_site_page` | — |
 | `sports247_site_pages_season_roster_embed` / `sports247SitePagesSeasonRosterEmbed` | `https://247sports.com/Season/{season}/Roster/Embed.json` | `season`\* | — | `parse_sports247_site_page` | — |
+
+### Returns — `sports247_site_pages_coach` / `sports247SitePagesCoach`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `full_name` | character |  |
+| `birthdate` | character |  |
+| `hometown` | integer |  |
+| `alma_mater` | integer |  |
+| `cbs_key` | integer |  |
+| `twitter_contact` | character |  |
+| `predictions_locked` | character |  |
+| `primary_coach_job` | integer |  |
+| `default_asset` | integer |  |
+| `hero_asset` | character |  |
+| `quote_asset` | character |  |
+| `default_name` | character |  |
+
+### Returns — `sports247_site_pages_coach_alma_mater` / `sports247SitePagesCoachAlmaMater`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_coach_hometown` / `sports247SitePagesCoachHometown`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `postal_code` | integer |  |
+| `city` | character |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `county_tax_rate` | numeric |  |
+| `city_tax_rate` | numeric |  |
+| `special_tax_rate` | numeric |  |
+| `region_name` | character |  |
+| `default_name` | character |  |
+
+### Returns — `sports247_site_pages_coach_ranking` / `sports247SitePagesCoachRanking`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `coach` | integer |  |
+| `institution` | integer |  |
+| `conference` | integer |  |
+| `ranking` | integer |  |
+| `sport` | integer |  |
+| `recruitment` | character |  |
+| `rating` | numeric |  |
+| `scout_rating` | numeric |  |
+| `composite_rating` | numeric |  |
+| `commits` | integer |  |
+| `total` | integer |  |
+| `composite_total` | integer |  |
+| `five_stars` | integer |  |
+| `scout_five_stars` | integer |  |
+| `composite_five_stars` | integer |  |
+| `four_stars` | integer |  |
+| `scout_four_stars` | integer |  |
+| `composite_four_stars` | integer |  |
+| `three_stars` | integer |  |
+| `scout_three_stars` | integer |  |
+| `composite_three_stars` | integer |  |
+| `two_stars` | integer |  |
+| `scout_two_stars` | integer |  |
+| `composite_two_stars` | integer |  |
+| `average_rating` | numeric |  |
+| `average_scout_rating` | integer |  |
+| `composite_average_rating` | numeric |  |
+| `overall_rank` | integer |  |
+| `composite_overall_rank` | integer |  |
+| `scout_overall_rank` | integer |  |
+| `division_rank` | integer |  |
+| `scout_division_rank` | integer |  |
+| `composite_division_rank` | integer |  |
+| `conference_rank` | integer |  |
+| `scout_conference_rank` | integer |  |
+| `composite_conference_rank` | integer |  |
+| `previous_coach_ranking` | numeric |  |
+| `default_name` | integer |  |
+
+### Returns — `sports247_site_pages_coach_rankings` / `sports247SitePagesCoachRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `coach` | integer |  |
+| `institution` | integer |  |
+| `conference` | integer |  |
+| `ranking` | integer |  |
+| `sport` | integer |  |
+| `recruitment` | character |  |
+| `rating` | numeric |  |
+| `scout_rating` | numeric |  |
+| `composite_rating` | numeric |  |
+| `commits` | integer |  |
+| `total` | integer |  |
+| `composite_total` | integer |  |
+| `five_stars` | integer |  |
+| `scout_five_stars` | integer |  |
+| `composite_five_stars` | integer |  |
+| `four_stars` | integer |  |
+| `scout_four_stars` | integer |  |
+| `composite_four_stars` | integer |  |
+| `three_stars` | integer |  |
+| `scout_three_stars` | integer |  |
+| `composite_three_stars` | integer |  |
+| `two_stars` | integer |  |
+| `scout_two_stars` | integer |  |
+| `composite_two_stars` | integer |  |
+| `average_rating` | numeric |  |
+| `average_scout_rating` | integer |  |
+| `composite_average_rating` | numeric |  |
+| `overall_rank` | integer |  |
+| `composite_overall_rank` | integer |  |
+| `scout_overall_rank` | integer |  |
+| `division_rank` | integer |  |
+| `scout_division_rank` | integer |  |
+| `composite_division_rank` | integer |  |
+| `conference_rank` | integer |  |
+| `scout_conference_rank` | integer |  |
+| `composite_conference_rank` | integer |  |
+| `previous_coach_ranking` | numeric |  |
+| `default_name` | integer |  |
+
+### Returns — `sports247_site_pages_event` / `sports247SitePagesEvent`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `event_group` | integer |  |
+| `event_type` | integer |  |
+| `event_date` | character |  |
+| `default_asset` | integer |  |
+| `primary_color` | integer |  |
+| `year` | integer |  |
+| `default_name` | character |  |
+
+### Returns — `sports247_site_pages_institution` / `sports247SitePagesInstitution`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_institution_list` / `sports247SitePagesInstitutionList`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_institution_location` / `sports247SitePagesInstitutionLocation`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `postal_code` | integer |  |
+| `city` | character |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `county_tax_rate` | numeric |  |
+| `city_tax_rate` | numeric |  |
+| `special_tax_rate` | numeric |  |
+| `region_name` | character |  |
+| `default_name` | character |  |
+
+### Returns — `sports247_site_pages_institution_timeline_events` / `sports247SitePagesInstitutionTimelineEvents`
+
+| col_name | type | description |
+|---|---|---|
+| `body` | character |  |
+| `date` | character |  |
+| `author_first_name` | character |  |
+| `author_last_name` | character |  |
+| `author_affiliation` | character |  |
+
+### Returns — `sports247_site_pages_league_draft_picks` / `sports247SitePagesLeagueDraftPicks`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `pro_team` | integer |  |
+| `pro_team_name` | character |  |
+| `year` | integer |  |
+| `round` | integer |  |
+| `pick` | integer |  |
+| `overall_pick` | integer |  |
+| `player` | integer |  |
+| `player_first_name` | character |  |
+| `player_last_name` | character |  |
+| `college_team` | integer |  |
+| `college_team_name` | character |  |
+| `position_abbreviation` | character |  |
+| `traded_from_team` | character |  |
+| `pick_type` | character |  |
+| `league` | integer |  |
+| `mock` | character |  |
+| `default_name` | integer |  |
+
+### Returns — `sports247_site_pages_league_institutions` / `sports247SitePagesLeagueInstitutions`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_page_feeds` / `sports247SitePagesPageFeeds`
+
+| col_name | type | description |
+|---|---|---|
+| `uid` | character |  |
+| `update_date` | character |  |
+| `title_text` | character |  |
+| `main_text` | character |  |
+| `redirection_url` | character |  |
+
+### Returns — `sports247_site_pages_player` / `sports247SitePagesPlayer`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `full_name` | character |  |
+| `height` | character |  |
+| `weight` | numeric |  |
+| `bio` | character |  |
+| `scout_evaluation` | character |  |
+| `birthdate` | character |  |
+| `modified_user` | character |  |
+| `modified_date` | character |  |
+| `cbs_key` | integer |  |
+| `url` | character |  |
+| `last_recruitment_player_institution` | integer |  |
+| `current_player_institution` | integer |  |
+| `twitter_contact` | integer |  |
+| `mobile_phone_contact` | character |  |
+| `primary_player_sport` | integer |  |
+| `primary_recruitment` | integer |  |
+| `default_name` | character |  |
+| `default_asset` | integer |  |
+| `default_asset_url` | character |  |
+| `hero_asset` | character |  |
+| `quote_asset` | character |  |
+| `user` | character |  |
+| `pro_stat_player` | integer |  |
+| `college_stat_player` | integer |  |
+| `bio_or_default` | character |  |
+| `rating` | integer |  |
+| `star_rating` | integer |  |
+| `national_rank` | integer |  |
+| `position_rank` | integer |  |
+| `state_rank` | integer |  |
+| `hometown_state` | character |  |
+| `hometown_city` | character |  |
+| `player_high_school_name` | character |  |
+| `primary_player_position_abbreviation` | character |  |
+
+### Returns — `sports247_site_pages_player_current_institution` / `sports247SitePagesPlayerCurrentInstitution`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `institution` | integer |  |
+| `state` | integer |  |
+| `agent` | character |  |
+| `end_year` | integer |  |
+| `end_date` | character |  |
+| `early_enrollee` | character |  |
+| `early_signee` | character |  |
+| `height` | numeric |  |
+| `weight` | numeric |  |
+| `transfer_institution` | character |  |
+| `transfer_season` | character |  |
+| `transfer_eligibility` | character |  |
+| `created_date` | character |  |
+| `modified_date` | character |  |
+| `lead_expert` | integer |  |
+| `player_institution_evaluation` | integer |  |
+| `primary_player_sport` | integer |  |
+| `default_asset` | integer |  |
+| `hero_asset` | character |  |
+| `primary_recruitment` | integer |  |
+| `default_name` | character |  |
+| `end_year_or_current` | integer |  |
+| `start_year_or_expected` | integer |  |
+| `end_year_or_expected` | integer |  |
+| `next_institution_type` | character |  |
+| `next_institution_group` | character |  |
+| `start_year` | integer |  |
+| `start_date` | character |  |
+
+### Returns — `sports247_site_pages_player_high_school` / `sports247SitePagesPlayerHighSchool`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `institution` | integer |  |
+| `state` | integer |  |
+| `agent` | character |  |
+| `end_year` | integer |  |
+| `end_date` | character |  |
+| `early_enrollee` | character |  |
+| `early_signee` | character |  |
+| `height` | numeric |  |
+| `weight` | numeric |  |
+| `transfer_institution` | character |  |
+| `transfer_season` | character |  |
+| `transfer_eligibility` | character |  |
+| `created_date` | character |  |
+| `modified_date` | character |  |
+| `lead_expert` | integer |  |
+| `player_institution_evaluation` | integer |  |
+| `primary_player_sport` | integer |  |
+| `default_asset` | integer |  |
+| `hero_asset` | character |  |
+| `primary_recruitment` | integer |  |
+| `default_name` | character |  |
+| `end_year_or_current` | integer |  |
+| `start_year_or_expected` | integer |  |
+| `end_year_or_expected` | integer |  |
+| `next_institution_type` | character |  |
+| `next_institution_group` | character |  |
+| `start_year` | integer |  |
+| `start_date` | character |  |
+
+### Returns — `sports247_site_pages_player_institution` / `sports247SitePagesPlayerInstitution`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `institution` | integer |  |
+| `state` | integer |  |
+| `agent` | character |  |
+| `end_year` | integer |  |
+| `end_date` | character |  |
+| `early_enrollee` | character |  |
+| `early_signee` | character |  |
+| `height` | numeric |  |
+| `weight` | numeric |  |
+| `transfer_institution` | character |  |
+| `transfer_season` | character |  |
+| `transfer_eligibility` | character |  |
+| `created_date` | character |  |
+| `modified_date` | character |  |
+| `lead_expert` | integer |  |
+| `player_institution_evaluation` | integer |  |
+| `primary_player_sport` | integer |  |
+| `default_asset` | integer |  |
+| `hero_asset` | character |  |
+| `primary_recruitment` | integer |  |
+| `default_name` | character |  |
+| `end_year_or_current` | integer |  |
+| `start_year_or_expected` | integer |  |
+| `end_year_or_expected` | integer |  |
+| `next_institution_type` | character |  |
+| `next_institution_group` | character |  |
+| `start_year` | integer |  |
+| `start_date` | character |  |
+
+### Returns — `sports247_site_pages_player_institution_evaluation` / `sports247SitePagesPlayerInstitutionEvaluation`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player_institution` | integer |  |
+| `user` | integer |  |
+| `evaluated_date` | character |  |
+| `comparison_player` | integer |  |
+| `projection` | character |  |
+| `primary` | character |  |
+| `scout_evaluation` | character |  |
+| `event` | character |  |
+| `default_name` | integer |  |
+
+### Returns — `sports247_site_pages_player_primary_sport` / `sports247SitePagesPlayerPrimarySport`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `player_institution` | integer |  |
+| `state` | integer |  |
+| `sport` | integer |  |
+| `rating` | integer |  |
+| `rating_or_default` | integer |  |
+| `local_index` | integer |  |
+| `rivals_grade` | numeric |  |
+| `rivals_rank` | integer |  |
+| `rivals_index` | numeric |  |
+| `espn_grade` | integer |  |
+| `espn_rank` | integer |  |
+| `espn_index` | numeric |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `composite_rating_or_default` | numeric |  |
+| `average_rank` | numeric |  |
+| `previous_recruitment` | integer |  |
+| `primary` | character |  |
+| `class_year_override` | character |  |
+| `class_year` | character |  |
+| `recruitment` | integer |  |
+| `primary_institution_prediction` | numeric |  |
+| `secondary_institution_prediction` | integer |  |
+| `primary_institution_prediction_percentage` | numeric |  |
+| `show_unranked_rating` | character |  |
+| `current_player_sport_year` | numeric |  |
+| `unpublished_player_sport_ranking` | numeric |  |
+| `current_player_sport_ranking` | numeric |  |
+| `primary_player_position` | integer |  |
+| `primary_position` | integer |  |
+| `primary_position_group` | integer |  |
+| `default_name` | character |  |
+| `star_rating` | integer |  |
+| `secondary_institution_prediction_percentage` | numeric |  |
+| `jersey` | integer |  |
+
+### Returns — `sports247_site_pages_player_search` / `sports247SitePagesPlayerSearch`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `full_name` | character |  |
+| `height` | character |  |
+| `weight` | numeric |  |
+| `bio` | character |  |
+| `scout_evaluation` | character |  |
+| `birthdate` | character |  |
+| `modified_user` | character |  |
+| `modified_date` | character |  |
+| `cbs_key` | integer |  |
+| `url` | character |  |
+| `last_recruitment_player_institution` | integer |  |
+| `current_player_institution` | integer |  |
+| `twitter_contact` | integer |  |
+| `mobile_phone_contact` | character |  |
+| `primary_player_sport` | integer |  |
+| `primary_recruitment` | integer |  |
+| `default_name` | character |  |
+| `default_asset` | integer |  |
+| `default_asset_url` | character |  |
+| `hero_asset` | character |  |
+| `quote_asset` | character |  |
+| `user` | character |  |
+| `pro_stat_player` | integer |  |
+| `college_stat_player` | integer |  |
+| `bio_or_default` | character |  |
+| `rating` | integer |  |
+| `star_rating` | integer |  |
+| `national_rank` | integer |  |
+| `position_rank` | integer |  |
+| `state_rank` | integer |  |
+| `hometown_state` | character |  |
+| `hometown_city` | character |  |
+| `player_high_school_name` | character |  |
+| `primary_player_position_abbreviation` | character |  |
+
+### Returns — `sports247_site_pages_playersport` / `sports247SitePagesPlayersport`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `player_institution` | integer |  |
+| `state` | integer |  |
+| `sport` | integer |  |
+| `rating` | integer |  |
+| `rating_or_default` | integer |  |
+| `local_index` | integer |  |
+| `rivals_grade` | numeric |  |
+| `rivals_rank` | integer |  |
+| `rivals_index` | numeric |  |
+| `espn_grade` | integer |  |
+| `espn_rank` | integer |  |
+| `espn_index` | numeric |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `composite_rating_or_default` | numeric |  |
+| `average_rank` | numeric |  |
+| `previous_recruitment` | integer |  |
+| `primary` | character |  |
+| `class_year_override` | character |  |
+| `class_year` | character |  |
+| `recruitment` | integer |  |
+| `primary_institution_prediction` | numeric |  |
+| `secondary_institution_prediction` | integer |  |
+| `primary_institution_prediction_percentage` | numeric |  |
+| `show_unranked_rating` | character |  |
+| `current_player_sport_year` | numeric |  |
+| `unpublished_player_sport_ranking` | numeric |  |
+| `current_player_sport_ranking` | numeric |  |
+| `primary_player_position` | integer |  |
+| `primary_position` | integer |  |
+| `primary_position_group` | integer |  |
+| `default_name` | character |  |
+| `star_rating` | integer |  |
+| `secondary_institution_prediction_percentage` | numeric |  |
+| `jersey` | integer |  |
+
+### Returns — `sports247_site_pages_playersport_institution` / `sports247SitePagesPlayersportInstitution`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `institution` | integer |  |
+| `state` | integer |  |
+| `agent` | character |  |
+| `end_year` | integer |  |
+| `end_date` | character |  |
+| `early_enrollee` | character |  |
+| `early_signee` | character |  |
+| `height` | numeric |  |
+| `weight` | numeric |  |
+| `transfer_institution` | character |  |
+| `transfer_season` | character |  |
+| `transfer_eligibility` | character |  |
+| `created_date` | character |  |
+| `modified_date` | character |  |
+| `lead_expert` | integer |  |
+| `player_institution_evaluation` | integer |  |
+| `primary_player_sport` | integer |  |
+| `default_asset` | integer |  |
+| `hero_asset` | character |  |
+| `primary_recruitment` | integer |  |
+| `default_name` | character |  |
+| `end_year_or_current` | integer |  |
+| `start_year_or_expected` | integer |  |
+| `end_year_or_expected` | integer |  |
+| `next_institution_type` | character |  |
+| `next_institution_group` | character |  |
+| `start_year` | integer |  |
+| `start_date` | character |  |
+
+### Returns — `sports247_site_pages_playersport_rank_history` / `sports247SitePagesPlayersportRankHistory`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `ranking` | integer |  |
+| `sport` | integer |  |
+| `player_sport` | integer |  |
+| `committed_institution` | integer |  |
+| `order` | integer |  |
+| `position` | integer |  |
+| `position_group` | integer |  |
+| `platoon` | integer |  |
+| `state` | integer |  |
+| `region` | integer |  |
+| `institution` | integer |  |
+| `institution_group` | character |  |
+| `rating` | integer |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `overall_rank` | integer |  |
+| `composite_overall_rank` | integer |  |
+| `group_rank` | integer |  |
+| `composite_group_rank` | integer |  |
+| `position_rank` | integer |  |
+| `previous_player_sport_ranking` | numeric |  |
+| `composite_position_rank` | integer |  |
+| `state_rank` | integer |  |
+| `composite_state_rank` | integer |  |
+| `default_name` | character |  |
+| `position_group_rank` | integer |  |
+| `region_rank` | integer |  |
+
+### Returns — `sports247_site_pages_position_rankings` / `sports247SitePagesPositionRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `ranking` | integer |  |
+| `sport` | integer |  |
+| `player_sport` | integer |  |
+| `committed_institution` | integer |  |
+| `order` | integer |  |
+| `position` | integer |  |
+| `position_group` | integer |  |
+| `platoon` | integer |  |
+| `state` | integer |  |
+| `region` | integer |  |
+| `institution` | integer |  |
+| `institution_group` | character |  |
+| `rating` | integer |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `overall_rank` | integer |  |
+| `composite_overall_rank` | integer |  |
+| `group_rank` | integer |  |
+| `composite_group_rank` | integer |  |
+| `position_rank` | integer |  |
+| `previous_player_sport_ranking` | numeric |  |
+| `composite_position_rank` | integer |  |
+| `state_rank` | integer |  |
+| `composite_state_rank` | integer |  |
+| `default_name` | character |  |
+| `position_group_rank` | integer |  |
+| `region_rank` | integer |  |
+
+### Returns — `sports247_site_pages_recruit_interest` / `sports247SitePagesRecruitInterest`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `recruitment` | integer |  |
+| `player_sport` | integer |  |
+| `recruit_state` | integer |  |
+| `institution` | integer |  |
+| `lock_prediction` | character |  |
+| `recruits_interest` | character |  |
+| `primary_coach` | numeric |  |
+| `secondary_coach` | character |  |
+| `keeper_coach` | character |  |
+| `institutions_interest` | character |  |
+| `position` | integer |  |
+| `position_group` | integer |  |
+| `platoon` | integer |  |
+| `offered` | character |  |
+| `gray_shirt` | character |  |
+| `walk_on` | character |  |
+| `official_visit` | numeric |  |
+| `second_official_visit` | character |  |
+| `soft_commit` | character |  |
+| `hard_commit` | numeric |  |
+| `signing_date` | numeric |  |
+| `enrollment_date` | numeric |  |
+| `decommit` | character |  |
+| `offer` | character |  |
+| `highest_recruit_interest_event` | numeric |  |
+| `commit_status` | character |  |
+| `default_name` | character |  |
+
+### Returns — `sports247_site_pages_recruitment_final_choice` / `sports247SitePagesRecruitmentFinalChoice`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `player_institution` | integer |  |
+| `state` | integer |  |
+| `sport` | integer |  |
+| `rating` | integer |  |
+| `rating_or_default` | integer |  |
+| `local_index` | integer |  |
+| `rivals_grade` | numeric |  |
+| `rivals_rank` | integer |  |
+| `rivals_index` | numeric |  |
+| `espn_grade` | integer |  |
+| `espn_rank` | integer |  |
+| `espn_index` | numeric |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `composite_rating_or_default` | numeric |  |
+| `average_rank` | numeric |  |
+| `previous_recruitment` | integer |  |
+| `primary` | character |  |
+| `class_year_override` | character |  |
+| `class_year` | character |  |
+| `recruitment` | integer |  |
+| `primary_institution_prediction` | numeric |  |
+| `secondary_institution_prediction` | integer |  |
+| `primary_institution_prediction_percentage` | numeric |  |
+| `show_unranked_rating` | character |  |
+| `current_player_sport_year` | numeric |  |
+| `unpublished_player_sport_ranking` | numeric |  |
+| `current_player_sport_ranking` | numeric |  |
+| `primary_player_position` | integer |  |
+| `primary_position` | integer |  |
+| `primary_position_group` | integer |  |
+| `default_name` | character |  |
+| `star_rating` | integer |  |
+| `secondary_institution_prediction_percentage` | numeric |  |
+| `jersey` | integer |  |
+
+### Returns — `sports247_site_pages_recruitment_institution` / `sports247SitePagesRecruitmentInstitution`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_recruitment_interests` / `sports247SitePagesRecruitmentInterests`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_recruitment_offers` / `sports247SitePagesRecruitmentOffers`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `type` | character |  |
+| `group` | character |  |
+| `location` | integer |  |
+| `state` | integer |  |
+| `latitude` | numeric |  |
+| `longitude` | numeric |  |
+| `rankable` | character |  |
+| `mascot` | character |  |
+| `abbreviation` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `is_foreign` | character |  |
+| `site` | integer |  |
+| `default_asset` | numeric |  |
+| `alternate_asset` | numeric |  |
+| `light_asset` | numeric |  |
+| `default_name` | character |  |
+| `address` | character |  |
+| `telephone` | character |  |
+| `website` | character |  |
+
+### Returns — `sports247_site_pages_recruitment_player_sport` / `sports247SitePagesRecruitmentPlayerSport`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `player_institution` | integer |  |
+| `state` | integer |  |
+| `sport` | integer |  |
+| `rating` | integer |  |
+| `rating_or_default` | integer |  |
+| `local_index` | integer |  |
+| `rivals_grade` | numeric |  |
+| `rivals_rank` | integer |  |
+| `rivals_index` | numeric |  |
+| `espn_grade` | integer |  |
+| `espn_rank` | integer |  |
+| `espn_index` | numeric |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `composite_rating_or_default` | numeric |  |
+| `average_rank` | numeric |  |
+| `previous_recruitment` | integer |  |
+| `primary` | character |  |
+| `class_year_override` | character |  |
+| `class_year` | character |  |
+| `recruitment` | integer |  |
+| `primary_institution_prediction` | numeric |  |
+| `secondary_institution_prediction` | integer |  |
+| `primary_institution_prediction_percentage` | numeric |  |
+| `show_unranked_rating` | character |  |
+| `current_player_sport_year` | numeric |  |
+| `unpublished_player_sport_ranking` | numeric |  |
+| `current_player_sport_ranking` | numeric |  |
+| `primary_player_position` | integer |  |
+| `primary_position` | integer |  |
+| `primary_position_group` | integer |  |
+| `default_name` | character |  |
+| `star_rating` | integer |  |
+| `secondary_institution_prediction_percentage` | numeric |  |
+| `jersey` | integer |  |
+
+### Returns — `sports247_site_pages_season_current_expert_predictions` / `sports247SitePagesSeasonCurrentExpertPredictions`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player_institution` | integer |  |
+| `institution` | integer |  |
+| `user` | integer |  |
+| `updated_on` | character |  |
+| `prediction_status` | character |  |
+| `days_correct` | numeric |  |
+| `premium` | character |  |
+| `score` | numeric |  |
+| `confidence` | integer |  |
+| `parent` | character |  |
+| `is_zero_zone` | character |  |
+| `default_name` | integer |  |
+
+### Returns — `sports247_site_pages_season_recruit_interest_events` / `sports247SitePagesSeasonRecruitInterestEvents`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `institution` | integer |  |
+| `recruitment` | integer |  |
+| `recruit_interest` | integer |  |
+| `type` | character |  |
+| `date` | character |  |
+| `default_name` | integer |  |
+
+### Returns — `sports247_site_pages_season_recruit_interests` / `sports247SitePagesSeasonRecruitInterests`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `recruitment` | integer |  |
+| `player_sport` | integer |  |
+| `recruit_state` | integer |  |
+| `institution` | integer |  |
+| `lock_prediction` | character |  |
+| `recruits_interest` | character |  |
+| `primary_coach` | numeric |  |
+| `secondary_coach` | character |  |
+| `keeper_coach` | character |  |
+| `institutions_interest` | character |  |
+| `position` | integer |  |
+| `position_group` | integer |  |
+| `platoon` | integer |  |
+| `offered` | character |  |
+| `gray_shirt` | character |  |
+| `walk_on` | character |  |
+| `official_visit` | numeric |  |
+| `second_official_visit` | character |  |
+| `soft_commit` | character |  |
+| `hard_commit` | numeric |  |
+| `signing_date` | numeric |  |
+| `enrollment_date` | numeric |  |
+| `decommit` | character |  |
+| `offer` | character |  |
+| `highest_recruit_interest_event` | numeric |  |
+| `commit_status` | character |  |
+| `default_name` | character |  |
+
+### Returns — `sports247_site_pages_season_recruits` / `sports247SitePagesSeasonRecruits`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player_institution` | integer |  |
+| `year` | integer |  |
+| `announcement_date` | character |  |
+| `signed_institution` | integer |  |
+| `position` | integer |  |
+| `institution` | integer |  |
+| `state` | integer |  |
+| `player_sport` | integer |  |
+| `composite_strength` | integer |  |
+| `final_choice` | integer |  |
+| `highest_recruit_interest_event_type` | character |  |
+| `highest_recruit_interest_event` | integer |  |
+| `committed_recruit_interest` | integer |  |
+| `committed_institution` | integer |  |
+| `highest_recruit_interest` | integer |  |
+| `primary_player_position` | integer |  |
+| `primary_position` | integer |  |
+| `default_name` | character |  |
+| `commited_institution_team_image` | character |  |
+| `recruit_interest_count` | integer |  |
+| `recruit_interests_url` | character |  |
+| `player_key` | integer |  |
+| `player_first_name` | character |  |
+| `player_last_name` | character |  |
+| `player_full_name` | character |  |
+| `player_height` | character |  |
+| `player_weight` | numeric |  |
+| `player_bio` | character |  |
+| `player_scout_evaluation` | character |  |
+| `player_birthdate` | character |  |
+| `player_modified_user` | character |  |
+| `player_modified_date` | character |  |
+| `player_cbs_key` | integer |  |
+| `player_url` | character |  |
+| `player_last_recruitment_player_institution` | integer |  |
+| `player_current_player_institution` | integer |  |
+| `player_twitter_contact` | numeric |  |
+| `player_mobile_phone_contact` | character |  |
+| `player_primary_player_sport` | integer |  |
+| `player_primary_recruitment` | integer |  |
+| `player_default_name` | character |  |
+| `player_default_asset` | integer |  |
+| `player_default_asset_url` | character |  |
+| `player_hero_asset` | character |  |
+| `player_quote_asset` | character |  |
+| `player_user` | character |  |
+| `player_pro_stat_player` | integer |  |
+| `player_college_stat_player` | integer |  |
+| `player_bio_or_default` | character |  |
+| `player_rating` | integer |  |
+| `player_star_rating` | integer |  |
+| `player_national_rank` | integer |  |
+| `player_position_rank` | integer |  |
+| `player_state_rank` | integer |  |
+| `player_hometown_state` | character |  |
+| `player_hometown_city` | character |  |
+| `player_player_high_school_name` | character |  |
+| `player_primary_player_position_abbreviation` | character |  |
+
+### Returns — `sports247_site_pages_season_roster_embed` / `sports247SitePagesSeasonRosterEmbed`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `player` | integer |  |
+| `player_institution` | integer |  |
+| `state` | integer |  |
+| `sport` | integer |  |
+| `rating` | integer |  |
+| `rating_or_default` | integer |  |
+| `local_index` | integer |  |
+| `rivals_grade` | numeric |  |
+| `rivals_rank` | integer |  |
+| `rivals_index` | numeric |  |
+| `espn_grade` | integer |  |
+| `espn_rank` | integer |  |
+| `espn_index` | numeric |  |
+| `composite_strength` | integer |  |
+| `composite_rating` | numeric |  |
+| `composite_rating_or_default` | numeric |  |
+| `average_rank` | numeric |  |
+| `previous_recruitment` | integer |  |
+| `primary` | character |  |
+| `class_year_override` | character |  |
+| `class_year` | character |  |
+| `recruitment` | integer |  |
+| `primary_institution_prediction` | numeric |  |
+| `secondary_institution_prediction` | integer |  |
+| `primary_institution_prediction_percentage` | numeric |  |
+| `show_unranked_rating` | character |  |
+| `current_player_sport_year` | numeric |  |
+| `unpublished_player_sport_ranking` | numeric |  |
+| `current_player_sport_ranking` | numeric |  |
+| `primary_player_position` | integer |  |
+| `primary_position` | integer |  |
+| `primary_position_group` | integer |  |
+| `default_name` | character |  |
+| `star_rating` | integer |  |
+| `secondary_institution_prediction_percentage` | numeric |  |
+| `jersey` | integer |  |

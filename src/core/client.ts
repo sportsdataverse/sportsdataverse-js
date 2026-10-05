@@ -13,6 +13,8 @@ export const HOSTS: Record<EspnFamily, string> = {
   web_v3: "https://site.web.api.espn.com/apis/common/v3/sports",
   core_v2: "https://sports.core.api.espn.com/v2/sports",
   fitt_v3: "https://site.web.api.espn.com/apis/fitt/v3/sports",
+  // espn.com's own page data (JSON with `xhr=1`); keyed by league slug, no {sport}.
+  cdn: "https://cdn.espn.com/core",
 };
 
 /**

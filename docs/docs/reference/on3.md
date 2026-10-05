@@ -106,3 +106,1334 @@ Flat (non-ESPN) wrappers for the On3 public Recruit Database (RDB). Host: `https
 | `on3_transfers_best_available` / `on3TransfersBestAvailable` | `https://api.on3.com/public/rdb/v1/transfers/best-available` | — | `org_key` → `orgKey`, `sport_key` → `sportKey`, `year`, `position_abbr` → `positionAbbr`, `status`, `page`, `cutoff`, `order_by` → `orderBy` | `parse_on3_rdb` | — |
 | `on3_transfers_latest` / `on3TransfersLatest` | `https://api.on3.com/public/rdb/v1/transfers/latest` | — | `org_key` → `orgKey`, `sport_key` → `sportKey`, `year`, `position_abbr` → `positionAbbr`, `status`, `page` | `parse_on3_rdb` | — |
 | `on3_videos_video_key` / `on3VideosVideoKey` | `https://api.on3.com/public/rdb/v1/videos/{video_key}` | `video_key`\* | — | `parse_on3_rdb` | — |
+
+### Returns — `on3_coaches_history` / `on3CoachesHistory`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_coaches_profile` / `on3CoachesProfile`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_collective_groups` / `on3CollectiveGroups`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `name` | character |  |
+| `default_asset_key` | integer |  |
+| `social_asset_key` | integer |  |
+| `organization_key` | integer |  |
+| `launch_date` | character |  |
+| `organization_type` | character |  |
+| `twitter_handle` | character |  |
+| `instagram_handle` | character |  |
+| `tik_tok_handle` | character |  |
+| `youtube_handle` | character |  |
+| `linked_in_handle` | character |  |
+| `website_name` | character |  |
+| `website_url` | character |  |
+| `mission_statement` | character |  |
+| `description` | character |  |
+| `annual_goal_amount` | numeric |  |
+| `confirmed_raised_amount` | numeric |  |
+| `merged_into_group_key` | integer |  |
+| `merged_into_group` | character |  |
+| `slug` | character |  |
+| `founders` | character |  |
+| `sports` | character |  |
+| `default_asset_key_2` | integer |  |
+| `default_asset_domain_override` | character |  |
+| `default_asset_domain` | character |  |
+| `default_asset_source_override` | character |  |
+| `default_asset_source` | character |  |
+| `default_asset_title` | character |  |
+| `default_asset_description` | character |  |
+| `default_asset_caption` | character |  |
+| `default_asset_category` | character |  |
+| `default_asset_alt_text` | character |  |
+| `default_asset_height` | integer |  |
+| `default_asset_width` | integer |  |
+| `default_asset_asset_type` | character |  |
+| `default_asset_file_system` | character |  |
+| `default_asset_path` | character |  |
+| `default_asset_type` | character |  |
+| `default_asset_thumbnail` | character |  |
+| `default_asset_duration` | integer |  |
+| `default_asset_mime_type` | character |  |
+| `social_asset_key_2` | integer |  |
+| `social_asset_domain_override` | character |  |
+| `social_asset_domain` | character |  |
+| `social_asset_source_override` | character |  |
+| `social_asset_source` | character |  |
+| `social_asset_title` | character |  |
+| `social_asset_description` | character |  |
+| `social_asset_caption` | character |  |
+| `social_asset_category` | character |  |
+| `social_asset_alt_text` | character |  |
+| `social_asset_height` | integer |  |
+| `social_asset_width` | integer |  |
+| `social_asset_asset_type` | character |  |
+| `social_asset_file_system` | character |  |
+| `social_asset_path` | character |  |
+| `social_asset_type` | character |  |
+| `social_asset_thumbnail` | character |  |
+| `social_asset_duration` | integer |  |
+| `social_asset_mime_type` | character |  |
+| `organization_key_2` | integer |  |
+| `organization_full_name` | character |  |
+| `organization_name` | character |  |
+| `organization_known_as` | character |  |
+| `organization_mascot` | character |  |
+| `organization_abbreviation` | character |  |
+| `organization_asset_url` | character |  |
+| `organization_default_asset_key` | integer |  |
+| `organization_default_asset_domain_override` | character |  |
+| `organization_default_asset_domain` | character |  |
+| `organization_default_asset_source_override` | character |  |
+| `organization_default_asset_source` | character |  |
+| `organization_default_asset_title` | character |  |
+| `organization_default_asset_description` | character |  |
+| `organization_default_asset_caption` | character |  |
+| `organization_default_asset_category` | character |  |
+| `organization_default_asset_alt_text` | character |  |
+| `organization_default_asset_height` | integer |  |
+| `organization_default_asset_width` | integer |  |
+| `organization_default_asset_asset_type` | character |  |
+| `organization_default_asset_file_system` | character |  |
+| `organization_default_asset_path` | character |  |
+| `organization_default_asset_type` | character |  |
+| `organization_default_asset_thumbnail` | character |  |
+| `organization_default_asset_duration` | integer |  |
+| `organization_default_asset_mime_type` | character |  |
+| `organization_slug` | character |  |
+| `organization_primary_color` | character |  |
+| `organization_org_type` | character |  |
+| `organization_org_type_enum` | character |  |
+| `organization_division` | character |  |
+| `organization_site_keys` | character |  |
+| `organization_url_slug` | character |  |
+
+### Returns — `on3_collective_groups_deals` / `on3CollectiveGroupsDeals`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_collective_groups_key` / `on3CollectiveGroupsKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_commits_organizations_latest_commits` / `on3CommitsOrganizationsLatestCommits`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_commits_organizations_org_key` / `on3CommitsOrganizationsOrgKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_draft_organization_rank` / `on3DraftOrganizationRank`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_draft_pick_organization_rank` / `on3DraftPickOrganizationRank`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_drafts` / `on3Drafts`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_drafts_by_stars` / `on3DraftsByStars`
+
+| col_name | type | description |
+|---|---|---|
+| `blue_chip_percent` | numeric |  |
+| `population_percent` | numeric |  |
+| `talent_ratio` | numeric |  |
+| `five_stars` | integer |  |
+| `four_stars` | integer |  |
+| `three_stars` | integer |  |
+| `zero_stars` | integer |  |
+| `total` | integer |  |
+| `state_key` | integer |  |
+| `state_name` | character |  |
+| `state_abbreviation` | character |  |
+| `state_country_key` | integer |  |
+
+### Returns — `on3_drafts_by_stars_summary` / `on3DraftsByStarsSummary`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_drafts_players` / `on3DraftsPlayers`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_filters_conferences` / `on3FiltersConferences`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_filters_draft_rounds` / `on3FiltersDraftRounds`
+
+| col_name | type | description |
+|---|---|---|
+| `round` | integer |  |
+
+### Returns — `on3_filters_positions` / `on3FiltersPositions`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_filters_sports` / `on3FiltersSports`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_filters_status` / `on3FiltersStatus`
+
+| col_name | type | description |
+|---|---|---|
+| `value` | character |  |
+
+### Returns — `on3_filters_teams` / `on3FiltersTeams`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_filters_years` / `on3FiltersYears`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_nil_100` / `on3Nil100`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_nil_100_v2` / `on3Nil100V2`
+
+| col_name | type | description |
+|---|---|---|
+| `person_rating_consensus_rating` | numeric |  |
+| `person_rating_consensus_stars` | integer |  |
+| `person_rating_consensus_national_rank` | integer |  |
+| `person_rating_consensus_position_rank` | integer |  |
+| `person_rating_consensus_state_rank` | integer |  |
+| `person_rating_key` | integer |  |
+| `person_rating_rating` | numeric |  |
+| `person_rating_stars` | integer |  |
+| `person_rating_national_rank` | integer |  |
+| `person_rating_position_rank` | integer |  |
+| `person_rating_state_rank` | integer |  |
+| `person_rating_position_abbr` | character |  |
+| `person_rating_state_abbr` | character |  |
+| `person_rating_five_star_plus` | logical |  |
+| `person_division` | character |  |
+| `person_default_sport_key` | integer |  |
+| `person_default_sport_name` | character |  |
+| `person_organization_level` | character |  |
+| `person_age` | numeric |  |
+| `person_tags` | character |  |
+| `person_key` | integer |  |
+| `person_recruitment_key` | integer |  |
+| `person_name` | character |  |
+| `person_slug` | character |  |
+| `person_high_school_name` | character |  |
+| `person_high_school_key` | integer |  |
+| `person_high_school_full_name` | character |  |
+| `person_high_school_name_2` | character |  |
+| `person_high_school_known_as` | character |  |
+| `person_high_school_mascot` | character |  |
+| `person_high_school_abbreviation` | character |  |
+| `person_high_school_asset_url` | character |  |
+| `person_high_school_default_asset_key` | numeric |  |
+| `person_high_school_default_asset_domain_override` | character |  |
+| `person_high_school_default_asset_domain` | character |  |
+| `person_high_school_default_asset_source_override` | character |  |
+| `person_high_school_default_asset_source` | character |  |
+| `person_high_school_default_asset_title` | character |  |
+| `person_high_school_default_asset_description` | character |  |
+| `person_high_school_default_asset_caption` | character |  |
+| `person_high_school_default_asset_category` | character |  |
+| `person_high_school_default_asset_alt_text` | character |  |
+| `person_high_school_default_asset_height` | numeric |  |
+| `person_high_school_default_asset_width` | numeric |  |
+| `person_high_school_default_asset_asset_type` | character |  |
+| `person_high_school_default_asset_file_system` | character |  |
+| `person_high_school_default_asset_path` | character |  |
+| `person_high_school_default_asset_type` | character |  |
+| `person_high_school_default_asset_thumbnail` | character |  |
+| `person_high_school_default_asset_duration` | numeric |  |
+| `person_high_school_default_asset_mime_type` | character |  |
+| `person_high_school_slug` | character |  |
+| `person_high_school_primary_color` | character |  |
+| `person_high_school_org_type` | character |  |
+| `person_high_school_org_type_enum` | character |  |
+| `person_high_school_division` | character |  |
+| `person_high_school_site_keys` | character |  |
+| `person_high_school_url_slug` | character |  |
+| `person_home_town_name` | character |  |
+| `person_early_enrollee` | logical |  |
+| `person_early_signee` | logical |  |
+| `person_default_asset_url` | character |  |
+| `person_class_year` | integer |  |
+| `person_athlete_verified` | logical |  |
+| `person_prospect_verified` | logical |  |
+| `person_default_asset_key` | integer |  |
+| `person_default_asset_domain_override` | character |  |
+| `person_default_asset_domain` | character |  |
+| `person_default_asset_source_override` | character |  |
+| `person_default_asset_source` | character |  |
+| `person_default_asset_title` | character |  |
+| `person_default_asset_description` | character |  |
+| `person_default_asset_caption` | character |  |
+| `person_default_asset_category` | character |  |
+| `person_default_asset_alt_text` | character |  |
+| `person_default_asset_height` | integer |  |
+| `person_default_asset_width` | integer |  |
+| `person_default_asset_asset_type` | character |  |
+| `person_default_asset_file_system` | character |  |
+| `person_default_asset_path` | character |  |
+| `person_default_asset_type` | character |  |
+| `person_default_asset_thumbnail` | character |  |
+| `person_default_asset_duration` | integer |  |
+| `person_default_asset_mime_type` | character |  |
+| `person_position_abbreviation` | character |  |
+| `person_height` | character |  |
+| `person_weight` | integer |  |
+| `person_roster_rating` | character |  |
+| `person_commit_status_type` | character |  |
+| `person_commit_status_short_term_signee` | logical |  |
+| `person_commit_status_date` | character |  |
+| `person_commit_status_committed_asset` | character |  |
+| `person_commit_status_committed_asset_res` | character |  |
+| `person_commit_status_transferred_asset_key` | integer |  |
+| `person_commit_status_transferred_asset_url` | character |  |
+| `person_commit_status_transferred_asset_slug` | character |  |
+| `person_commit_status_transferred_asset_full_name` | character |  |
+| `person_commit_status_transferred_asset_res` | character |  |
+| `person_commit_status_committed_organization_key` | integer |  |
+| `person_commit_status_committed_organization_full_name` | character |  |
+| `person_commit_status_committed_organization_name` | character |  |
+| `person_commit_status_committed_organization_mascot` | character |  |
+| `person_commit_status_committed_organization_abbreviation` | character |  |
+| `person_commit_status_committed_organization_asset_url` | character |  |
+| `person_commit_status_committed_organization_asset_key` | integer |  |
+| `person_commit_status_committed_organization_asset_domain_override` | character |  |
+| `person_commit_status_committed_organization_asset_domain` | character |  |
+| `person_commit_status_committed_organization_asset_source_override` | character |  |
+| `person_commit_status_committed_organization_asset_source` | character |  |
+| `person_commit_status_committed_organization_asset_title` | character |  |
+| `person_commit_status_committed_organization_asset_description` | character |  |
+| `person_commit_status_committed_organization_asset_caption` | character |  |
+| `person_commit_status_committed_organization_asset_category` | character |  |
+| `person_commit_status_committed_organization_asset_alt_text` | character |  |
+| `person_commit_status_committed_organization_asset_height` | integer |  |
+| `person_commit_status_committed_organization_asset_width` | integer |  |
+| `person_commit_status_committed_organization_asset_asset_type` | character |  |
+| `person_commit_status_committed_organization_asset_file_system` | character |  |
+| `person_commit_status_committed_organization_asset_path` | character |  |
+| `person_commit_status_committed_organization_asset_type` | character |  |
+| `person_commit_status_committed_organization_asset_thumbnail` | character |  |
+| `person_commit_status_committed_organization_asset_duration` | integer |  |
+| `person_commit_status_committed_organization_asset_mime_type` | character |  |
+| `person_commit_status_committed_organization_slug` | character |  |
+| `person_commit_status_committed_organization_primary_color` | character |  |
+| `person_commit_status_class_rank` | character |  |
+| `person_commit_status_transfer_entered` | character |  |
+| `person_commit_status_recruitment_year` | integer |  |
+| `person_commit_status_decommitted_asset` | character |  |
+| `person_commit_status_transfer` | logical |  |
+| `person_commit_status_expected_to_transfer` | logical |  |
+| `person_commit_status_recruitment_key` | integer |  |
+| `person_commit_status_withdrawn_transfer` | logical |  |
+| `person_commit_status_withdrawn_transfer_date` | character |  |
+| `person_predictions` | character |  |
+| `person_nil_status` | character |  |
+| `person_nil_value` | numeric |  |
+| `person_sport` | character |  |
+| `valuation_nil_status` | character |  |
+| `valuation_valuation` | integer |  |
+| `valuation_valuation_change` | integer |  |
+| `valuation_followers` | integer |  |
+| `valuation_rank` | integer |  |
+| `valuation_last_updated` | integer |  |
+| `valuation_whisper` | numeric |  |
+| `valuation_whisper_change` | numeric |  |
+| `valuation_social_valuations` | character |  |
+| `valuation_group_rank` | integer |  |
+| `valuation_group_name` | character |  |
+| `valuation_tags` | character |  |
+| `valuation_roster_value` | character |  |
+| `valuation_nil_value` | character |  |
+| `person_high_school_default_asset` | character |  |
+
+### Returns — `on3_nil_compliances_state` / `on3NilCompliancesState`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_nil_rankings` / `on3NilRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `person_default_sport_key` | integer |  |
+| `person_default_sport_name` | character |  |
+| `person_default_sport_slug` | character |  |
+| `person_default_sport_abbreviation` | character |  |
+| `person_default_sport_is_rankable` | logical |  |
+| `person_default_sport_is_industry_rankable` | logical |  |
+| `person_default_sport_is_scoutable` | logical |  |
+| `person_rating_consensus_rating` | numeric |  |
+| `person_rating_consensus_stars` | integer |  |
+| `person_rating_consensus_national_rank` | integer |  |
+| `person_rating_consensus_position_rank` | integer |  |
+| `person_rating_consensus_state_rank` | integer |  |
+| `person_rating_key` | integer |  |
+| `person_rating_rating` | numeric |  |
+| `person_rating_stars` | integer |  |
+| `person_rating_national_rank` | integer |  |
+| `person_rating_position_rank` | integer |  |
+| `person_rating_state_rank` | integer |  |
+| `person_rating_position_abbr` | character |  |
+| `person_rating_state_abbr` | character |  |
+| `person_rating_five_star_plus` | logical |  |
+| `person_status_is_committed` | logical |  |
+| `person_status_is_signed` | logical |  |
+| `person_status_is_transfer` | logical |  |
+| `person_status_is_enrolled` | logical |  |
+| `person_status_commitment_date` | character |  |
+| `person_status_committed_organization_key` | numeric |  |
+| `person_status_committed_organization_slug` | character |  |
+| `person_status_committed_organization_asset_url` | character |  |
+| `person_status_committed_organization_asset_key` | numeric |  |
+| `person_status_committed_organization_asset_domain_override` | character |  |
+| `person_status_committed_organization_asset_domain` | character |  |
+| `person_status_committed_organization_asset_source_override` | character |  |
+| `person_status_committed_organization_asset_source` | character |  |
+| `person_status_committed_organization_asset_title` | character |  |
+| `person_status_committed_organization_asset_description` | character |  |
+| `person_status_committed_organization_asset_caption` | character |  |
+| `person_status_committed_organization_asset_category` | character |  |
+| `person_status_committed_organization_asset_alt_text` | character |  |
+| `person_status_committed_organization_asset_height` | numeric |  |
+| `person_status_committed_organization_asset_width` | numeric |  |
+| `person_status_committed_organization_asset_asset_type` | character |  |
+| `person_status_committed_organization_asset_file_system` | character |  |
+| `person_status_committed_organization_asset_path` | character |  |
+| `person_status_committed_organization_asset_type` | character |  |
+| `person_status_committed_organization_asset_thumbnail` | character |  |
+| `person_status_committed_organization_asset_duration` | numeric |  |
+| `person_status_committed_organization_asset_mime_type` | character |  |
+| `person_status_committed_organization_primary_color` | character |  |
+| `person_status_transferred_from_organization_asset_url` | character |  |
+| `person_status_transferred_from_organization_slug` | character |  |
+| `person_status_highest_interest_level` | numeric |  |
+| `person_status_interest_count` | integer |  |
+| `person_status_recruitment_year` | integer |  |
+| `person_status_sport_name` | character |  |
+| `person_status_short_term_signee` | logical |  |
+| `person_predictions` | character |  |
+| `person_tags` | character |  |
+| `person_key` | integer |  |
+| `person_name` | character |  |
+| `person_slug` | character |  |
+| `person_high_school_name` | character |  |
+| `person_high_school_key` | integer |  |
+| `person_high_school_full_name` | character |  |
+| `person_high_school_name_2` | character |  |
+| `person_high_school_known_as` | character |  |
+| `person_high_school_mascot` | character |  |
+| `person_high_school_abbreviation` | character |  |
+| `person_high_school_asset_url` | character |  |
+| `person_high_school_default_asset_key` | integer |  |
+| `person_high_school_default_asset_domain_override` | character |  |
+| `person_high_school_default_asset_domain` | character |  |
+| `person_high_school_default_asset_source_override` | character |  |
+| `person_high_school_default_asset_source` | character |  |
+| `person_high_school_default_asset_title` | character |  |
+| `person_high_school_default_asset_description` | character |  |
+| `person_high_school_default_asset_caption` | character |  |
+| `person_high_school_default_asset_category` | character |  |
+| `person_high_school_default_asset_alt_text` | character |  |
+| `person_high_school_default_asset_height` | integer |  |
+| `person_high_school_default_asset_width` | integer |  |
+| `person_high_school_default_asset_asset_type` | character |  |
+| `person_high_school_default_asset_file_system` | character |  |
+| `person_high_school_default_asset_path` | character |  |
+| `person_high_school_default_asset_type` | character |  |
+| `person_high_school_default_asset_thumbnail` | character |  |
+| `person_high_school_default_asset_duration` | integer |  |
+| `person_high_school_default_asset_mime_type` | character |  |
+| `person_high_school_slug` | character |  |
+| `person_high_school_primary_color` | character |  |
+| `person_high_school_org_type` | character |  |
+| `person_high_school_org_type_enum` | character |  |
+| `person_high_school_division` | character |  |
+| `person_high_school_site_keys` | character |  |
+| `person_high_school_url_slug` | character |  |
+| `person_home_town_name` | character |  |
+| `person_default_asset_url` | character |  |
+| `person_default_asset_key` | integer |  |
+| `person_default_asset_domain_override` | character |  |
+| `person_default_asset_domain` | character |  |
+| `person_default_asset_source_override` | character |  |
+| `person_default_asset_source` | character |  |
+| `person_default_asset_title` | character |  |
+| `person_default_asset_description` | character |  |
+| `person_default_asset_caption` | character |  |
+| `person_default_asset_category` | character |  |
+| `person_default_asset_alt_text` | character |  |
+| `person_default_asset_height` | integer |  |
+| `person_default_asset_width` | integer |  |
+| `person_default_asset_asset_type` | character |  |
+| `person_default_asset_file_system` | character |  |
+| `person_default_asset_path` | character |  |
+| `person_default_asset_type` | character |  |
+| `person_default_asset_thumbnail` | character |  |
+| `person_default_asset_duration` | integer |  |
+| `person_default_asset_mime_type` | character |  |
+| `person_early_signee` | logical |  |
+| `person_early_enrollee` | logical |  |
+| `person_position_abbreviation` | character |  |
+| `person_height` | numeric |  |
+| `person_formatted_height` | character |  |
+| `person_weight` | integer |  |
+| `person_class_year` | integer |  |
+| `person_athlete_verified` | logical |  |
+| `person_prospect_verified` | logical |  |
+| `person_class_rank` | character |  |
+| `person_recruitment_key` | integer |  |
+| `person_age` | integer |  |
+| `valuation_nil_status` | character |  |
+| `valuation_valuation` | integer |  |
+| `valuation_valuation_change` | integer |  |
+| `valuation_followers` | integer |  |
+| `valuation_rank` | integer |  |
+| `valuation_last_updated` | integer |  |
+| `valuation_whisper` | character |  |
+| `valuation_whisper_change` | character |  |
+| `valuation_social_valuations` | character |  |
+| `valuation_group_rank` | integer |  |
+| `valuation_group_name` | character |  |
+| `valuation_tags` | character |  |
+| `valuation_roster_value` | character |  |
+| `valuation_nil_value` | character |  |
+| `person_status_committed_organization_asset` | character |  |
+
+### Returns — `on3_organizations_draft_class_by_state` / `on3OrganizationsDraftClassByState`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_draft_class_by_year` / `on3OrganizationsDraftClassByYear`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_draft_count_by_stars` / `on3OrganizationsDraftCountByStars`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_draft_count_by_year` / `on3OrganizationsDraftCountByYear`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_draft_ranking_summary` / `on3OrganizationsDraftRankingSummary`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_drafted_players` / `on3OrganizationsDraftedPlayers`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_drafts_by_stars_summary` / `on3OrganizationsDraftsByStarsSummary`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_organizations_roster_header` / `on3OrganizationsRosterHeader`
+
+| col_name | type | description |
+|---|---|---|
+| `talent_rank` | character |  |
+| `prev_talent_rank` | character |  |
+| `conference_rank` | character |  |
+| `prev_conference_rank` | character |  |
+| `average_rating` | character |  |
+| `prev_average_rating` | character |  |
+| `average_nil_value` | numeric |  |
+| `total_nil_value` | integer |  |
+| `head_coach_key` | integer |  |
+| `head_coach_first_name` | character |  |
+| `head_coach_last_name` | character |  |
+| `head_coach_known_as_name` | character |  |
+| `head_coach_full_name` | character |  |
+| `head_coach_slug` | character |  |
+| `head_coach_default_asset_key` | integer |  |
+| `head_coach_default_asset_domain_override` | character |  |
+| `head_coach_default_asset_domain` | character |  |
+| `head_coach_default_asset_source_override` | character |  |
+| `head_coach_default_asset_source` | character |  |
+| `head_coach_default_asset_title` | character |  |
+| `head_coach_default_asset_description` | character |  |
+| `head_coach_default_asset_caption` | character |  |
+| `head_coach_default_asset_category` | character |  |
+| `head_coach_default_asset_alt_text` | character |  |
+| `head_coach_default_asset_height` | integer |  |
+| `head_coach_default_asset_width` | integer |  |
+| `head_coach_default_asset_asset_type` | character |  |
+| `head_coach_default_asset_file_system` | character |  |
+| `head_coach_default_asset_path` | character |  |
+| `head_coach_default_asset_type` | character |  |
+| `head_coach_default_asset_thumbnail` | character |  |
+| `head_coach_default_asset_duration` | integer |  |
+| `head_coach_default_asset_mime_type` | character |  |
+| `head_coach_organization_key` | integer |  |
+| `head_coach_organization_full_name` | character |  |
+| `head_coach_organization_name` | character |  |
+| `head_coach_organization_known_as` | character |  |
+| `head_coach_organization_mascot` | character |  |
+| `head_coach_organization_abbreviation` | character |  |
+| `head_coach_organization_asset_url` | character |  |
+| `head_coach_organization_default_asset_key` | integer |  |
+| `head_coach_organization_default_asset_domain_override` | character |  |
+| `head_coach_organization_default_asset_domain` | character |  |
+| `head_coach_organization_default_asset_source_override` | character |  |
+| `head_coach_organization_default_asset_source` | character |  |
+| `head_coach_organization_default_asset_title` | character |  |
+| `head_coach_organization_default_asset_description` | character |  |
+| `head_coach_organization_default_asset_caption` | character |  |
+| `head_coach_organization_default_asset_category` | character |  |
+| `head_coach_organization_default_asset_alt_text` | character |  |
+| `head_coach_organization_default_asset_height` | integer |  |
+| `head_coach_organization_default_asset_width` | integer |  |
+| `head_coach_organization_default_asset_asset_type` | character |  |
+| `head_coach_organization_default_asset_file_system` | character |  |
+| `head_coach_organization_default_asset_path` | character |  |
+| `head_coach_organization_default_asset_type` | character |  |
+| `head_coach_organization_default_asset_thumbnail` | character |  |
+| `head_coach_organization_default_asset_duration` | integer |  |
+| `head_coach_organization_default_asset_mime_type` | character |  |
+| `head_coach_organization_slug` | character |  |
+| `head_coach_organization_primary_color` | character |  |
+| `head_coach_organization_org_type` | character |  |
+| `head_coach_organization_org_type_enum` | character |  |
+| `head_coach_organization_division` | character |  |
+| `head_coach_organization_site_keys` | character |  |
+| `head_coach_organization_url_slug` | character |  |
+| `head_coach_primary_position_key` | integer |  |
+| `head_coach_primary_position_name` | character |  |
+| `head_coach_primary_position_abbr` | character |  |
+| `head_coach_secondary_position` | character |  |
+| `head_coach_org_season_count` | integer |  |
+| `head_coach_years_active` | integer |  |
+
+### Returns — `on3_people_combine_measurements` / `on3PeopleCombineMeasurements`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_people_latest_valuation` / `on3PeopleLatestValuation`
+
+| col_name | type | description |
+|---|---|---|
+| `nil_status` | character |  |
+| `valuation` | integer |  |
+| `valuation_change` | integer |  |
+| `followers` | integer |  |
+| `rank` | integer |  |
+| `last_updated` | integer |  |
+| `whisper` | numeric |  |
+| `whisper_change` | numeric |  |
+| `social_valuations` | character |  |
+| `group_rank` | integer |  |
+| `group_name` | character |  |
+| `tags` | character |  |
+| `roster_value` | character |  |
+| `nil_value` | character |  |
+
+### Returns — `on3_people_measurements` / `on3PeopleMeasurements`
+
+| col_name | type | description |
+|---|---|---|
+| `player_measurements` | character |  |
+
+### Returns — `on3_people_person_connections` / `on3PeoplePersonConnections`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_people_social` / `on3PeopleSocial`
+
+| col_name | type | description |
+|---|---|---|
+| `type` | character |  |
+| `handle` | character |  |
+| `handshake` | logical |  |
+
+### Returns — `on3_people_social_post_summary` / `on3PeopleSocialPostSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `social_type` | character |  |
+| `type` | character |  |
+| `followers` | integer |  |
+
+### Returns — `on3_people_track_and_field_measurements` / `on3PeopleTrackAndFieldMeasurements`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_people_valuation_growth` / `on3PeopleValuationGrowth`
+
+| col_name | type | description |
+|---|---|---|
+| `nil_status` | character |  |
+| `valuation` | integer |  |
+| `valuation_change` | numeric |  |
+| `date` | character |  |
+| `date_unix` | integer |  |
+
+### Returns — `on3_person_connections_connection_key` / `on3PersonConnectionsConnectionKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_person_primary_recruitment_evaluation` / `on3PersonPrimaryRecruitmentEvaluation`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_person_recruitment_evaluations` / `on3PersonRecruitmentEvaluations`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_person_sport_profile_recruit` / `on3PersonSportProfileRecruit`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_person_sport_rankings` / `on3PersonSportRankings`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_player_all_rankings` / `on3PlayerAllRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `type` | character |  |
+| `link` | character |  |
+| `ranking_key` | integer |  |
+| `ranking_year` | integer |  |
+| `ranking_type` | character |  |
+| `rating` | numeric |  |
+| `sport` | character |  |
+| `class_year` | integer |  |
+| `state_rank` | integer |  |
+| `state_abbr` | character |  |
+| `position_rank` | integer |  |
+| `position_abbr` | character |  |
+| `overall_rank` | integer |  |
+| `stars` | integer |  |
+| `five_star_plus` | logical |  |
+| `nearly_five_star_plus` | logical |  |
+| `change_1` | character |  |
+
+### Returns — `on3_player_database_updates` / `on3PlayerDatabaseUpdates`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `type` | character |  |
+| `text` | character |  |
+| `replacement_text` | character |  |
+| `link` | character |  |
+| `date_added` | integer |  |
+| `date_occurred` | integer |  |
+| `object_key` | integer |  |
+| `sport_key` | integer |  |
+| `person_key` | integer |  |
+| `organization_key` | integer |  |
+
+### Returns — `on3_player_images` / `on3PlayerImages`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `domain_override` | character |  |
+| `domain` | character |  |
+| `source_override` | character |  |
+| `source` | character |  |
+| `title` | character |  |
+| `description` | character |  |
+| `caption` | character |  |
+| `category` | character |  |
+| `alt_text` | character |  |
+| `height` | integer |  |
+| `width` | integer |  |
+| `asset_type` | character |  |
+| `file_system` | character |  |
+| `path` | character |  |
+| `type` | character |  |
+| `thumbnail` | character |  |
+| `duration` | integer |  |
+| `mime_type` | character |  |
+
+### Returns — `on3_player_organizations` / `on3PlayerOrganizations`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_player_organizations_org_key` / `on3PlayerOrganizationsOrgKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_player_person_rankings` / `on3PlayerPersonRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `ranking_key` | integer |  |
+| `rating` | integer |  |
+| `state_rank` | integer |  |
+| `state_abbr` | character |  |
+| `position_rank` | integer |  |
+| `position_abbr` | character |  |
+| `overall_rank` | integer |  |
+| `stars` | integer |  |
+| `consensus_rating` | numeric |  |
+| `consensus_state_rank` | integer |  |
+| `consensus_position_rank` | integer |  |
+| `consensus_overall_rank` | integer |  |
+| `consensus_stars` | integer |  |
+| `strength` | integer |  |
+| `five_star_plus` | logical |  |
+| `ranking_type` | character |  |
+| `ranking_key_2` | integer |  |
+| `ranking_sport_key` | integer |  |
+| `ranking_sport_key_2` | integer |  |
+| `ranking_sport_name` | character |  |
+| `ranking_year` | integer |  |
+| `change_38` | character |  |
+| `consensus_change_41` | character |  |
+
+### Returns — `on3_player_profile` / `on3PlayerProfile`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `class_year_recruitment_key` | integer |  |
+| `recruitment_key` | integer |  |
+| `person_can_manage_recruitment` | logical |  |
+| `ranking_key` | integer |  |
+| `person_sport_key` | integer |  |
+| `oracle_key` | character |  |
+| `name` | character |  |
+| `slug` | character |  |
+| `high_school_name` | character |  |
+| `hometown_name` | character |  |
+| `position_abbreviation` | character |  |
+| `class_rank` | character |  |
+| `height` | character |  |
+| `weight` | integer |  |
+| `class_year` | integer |  |
+| `degree` | character |  |
+| `age` | integer |  |
+| `sports` | character |  |
+| `description` | character |  |
+| `bio_pro_prospect` | character |  |
+| `bio_college_recruit` | character |  |
+| `organization_level` | character |  |
+| `high_school_org_key` | integer |  |
+| `prep_school_org_key` | character |  |
+| `junior_college_org_key` | character |  |
+| `college_org_key` | integer |  |
+| `nil_value` | integer |  |
+| `athlete_verified` | logical |  |
+| `prospect_verified` | logical |  |
+| `is_coach` | logical |  |
+| `is_athlete` | logical |  |
+| `visibility` | character |  |
+| `tier` | character |  |
+| `review_status` | character |  |
+| `jersey_number` | integer |  |
+| `badge` | character |  |
+| `ncaa_id` | character |  |
+| `managed_by_user` | logical |  |
+| `ranking_key_2` | integer |  |
+| `ranking_rating` | numeric |  |
+| `ranking_stars` | integer |  |
+| `ranking_national_rank` | integer |  |
+| `ranking_position_rank` | integer |  |
+| `ranking_state_rank` | integer |  |
+| `ranking_position_abbr` | character |  |
+| `ranking_state_abbr` | character |  |
+| `ranking_five_star_plus` | logical |  |
+| `high_school_key` | integer |  |
+| `high_school_full_name` | character |  |
+| `high_school_name_2` | character |  |
+| `high_school_known_as` | character |  |
+| `high_school_mascot` | character |  |
+| `high_school_abbreviation` | character |  |
+| `high_school_asset_url` | character |  |
+| `high_school_default_asset_key` | integer |  |
+| `high_school_default_asset_domain_override` | character |  |
+| `high_school_default_asset_domain` | character |  |
+| `high_school_default_asset_source_override` | character |  |
+| `high_school_default_asset_source` | character |  |
+| `high_school_default_asset_title` | character |  |
+| `high_school_default_asset_description` | character |  |
+| `high_school_default_asset_caption` | character |  |
+| `high_school_default_asset_category` | character |  |
+| `high_school_default_asset_alt_text` | character |  |
+| `high_school_default_asset_height` | integer |  |
+| `high_school_default_asset_width` | integer |  |
+| `high_school_default_asset_asset_type` | character |  |
+| `high_school_default_asset_file_system` | character |  |
+| `high_school_default_asset_path` | character |  |
+| `high_school_default_asset_type` | character |  |
+| `high_school_default_asset_thumbnail` | character |  |
+| `high_school_default_asset_duration` | integer |  |
+| `high_school_default_asset_mime_type` | character |  |
+| `high_school_slug` | character |  |
+| `high_school_primary_color` | character |  |
+| `high_school_org_type` | character |  |
+| `high_school_org_type_enum` | character |  |
+| `high_school_division` | character |  |
+| `high_school_site_keys` | character |  |
+| `high_school_url_slug` | character |  |
+| `hometown_state_key` | integer |  |
+| `hometown_state_name` | character |  |
+| `hometown_state_abbreviation` | character |  |
+| `hometown_state_country_key` | integer |  |
+| `current_state_key` | integer |  |
+| `current_state_name` | character |  |
+| `current_state_abbreviation` | character |  |
+| `current_state_country_key` | integer |  |
+| `default_asset_key` | integer |  |
+| `default_asset_domain_override` | character |  |
+| `default_asset_domain` | character |  |
+| `default_asset_source_override` | character |  |
+| `default_asset_source` | character |  |
+| `default_asset_title` | character |  |
+| `default_asset_description` | character |  |
+| `default_asset_caption` | character |  |
+| `default_asset_category` | character |  |
+| `default_asset_alt_text` | character |  |
+| `default_asset_height` | integer |  |
+| `default_asset_width` | integer |  |
+| `default_asset_asset_type` | character |  |
+| `default_asset_file_system` | character |  |
+| `default_asset_path` | character |  |
+| `default_asset_type` | character |  |
+| `default_asset_thumbnail` | character |  |
+| `default_asset_duration` | integer |  |
+| `default_asset_mime_type` | character |  |
+| `primary_position_key` | integer |  |
+| `primary_position_name` | character |  |
+| `primary_position_abbreviation` | character |  |
+| `primary_position_sport_key` | integer |  |
+| `primary_position_sport_key_2` | integer |  |
+| `primary_position_sport_name` | character |  |
+| `primary_position_sport_slug` | character |  |
+| `primary_position_sport_abbreviation` | character |  |
+| `primary_position_sport_is_rankable` | logical |  |
+| `primary_position_sport_is_industry_rankable` | logical |  |
+| `primary_position_sport_is_scoutable` | logical |  |
+| `primary_position_position_type` | character |  |
+| `default_sport_key` | integer |  |
+| `default_sport_name` | character |  |
+| `player_status_type` | character |  |
+| `player_status_short_term_signee` | logical |  |
+| `player_status_date` | character |  |
+| `player_status_committed_asset_key` | integer |  |
+| `player_status_committed_asset_url` | character |  |
+| `player_status_committed_asset_slug` | character |  |
+| `player_status_committed_asset_full_name` | character |  |
+| `player_status_committed_asset_res_key` | integer |  |
+| `player_status_committed_asset_res_domain_override` | character |  |
+| `player_status_committed_asset_res_domain` | character |  |
+| `player_status_committed_asset_res_source_override` | character |  |
+| `player_status_committed_asset_res_source` | character |  |
+| `player_status_committed_asset_res_title` | character |  |
+| `player_status_committed_asset_res_description` | character |  |
+| `player_status_committed_asset_res_caption` | character |  |
+| `player_status_committed_asset_res_category` | character |  |
+| `player_status_committed_asset_res_alt_text` | character |  |
+| `player_status_committed_asset_res_height` | integer |  |
+| `player_status_committed_asset_res_width` | integer |  |
+| `player_status_committed_asset_res_asset_type` | character |  |
+| `player_status_committed_asset_res_file_system` | character |  |
+| `player_status_committed_asset_res_path` | character |  |
+| `player_status_committed_asset_res_type` | character |  |
+| `player_status_committed_asset_res_thumbnail` | character |  |
+| `player_status_committed_asset_res_duration` | integer |  |
+| `player_status_committed_asset_res_mime_type` | character |  |
+| `player_status_transferred_asset_key` | integer |  |
+| `player_status_transferred_asset_url` | character |  |
+| `player_status_transferred_asset_slug` | character |  |
+| `player_status_transferred_asset_full_name` | character |  |
+| `player_status_transferred_asset_res_key` | integer |  |
+| `player_status_transferred_asset_res_domain_override` | character |  |
+| `player_status_transferred_asset_res_domain` | character |  |
+| `player_status_transferred_asset_res_source_override` | character |  |
+| `player_status_transferred_asset_res_source` | character |  |
+| `player_status_transferred_asset_res_title` | character |  |
+| `player_status_transferred_asset_res_description` | character |  |
+| `player_status_transferred_asset_res_caption` | character |  |
+| `player_status_transferred_asset_res_category` | character |  |
+| `player_status_transferred_asset_res_alt_text` | character |  |
+| `player_status_transferred_asset_res_height` | integer |  |
+| `player_status_transferred_asset_res_width` | integer |  |
+| `player_status_transferred_asset_res_asset_type` | character |  |
+| `player_status_transferred_asset_res_file_system` | character |  |
+| `player_status_transferred_asset_res_path` | character |  |
+| `player_status_transferred_asset_res_type` | character |  |
+| `player_status_transferred_asset_res_thumbnail` | character |  |
+| `player_status_transferred_asset_res_duration` | integer |  |
+| `player_status_transferred_asset_res_mime_type` | character |  |
+| `player_status_committed_organization_key` | integer |  |
+| `player_status_committed_organization_full_name` | character |  |
+| `player_status_committed_organization_name` | character |  |
+| `player_status_committed_organization_mascot` | character |  |
+| `player_status_committed_organization_abbreviation` | character |  |
+| `player_status_committed_organization_asset_url` | character |  |
+| `player_status_committed_organization_asset_key` | integer |  |
+| `player_status_committed_organization_asset_domain_override` | character |  |
+| `player_status_committed_organization_asset_domain` | character |  |
+| `player_status_committed_organization_asset_source_override` | character |  |
+| `player_status_committed_organization_asset_source` | character |  |
+| `player_status_committed_organization_asset_title` | character |  |
+| `player_status_committed_organization_asset_description` | character |  |
+| `player_status_committed_organization_asset_caption` | character |  |
+| `player_status_committed_organization_asset_category` | character |  |
+| `player_status_committed_organization_asset_alt_text` | character |  |
+| `player_status_committed_organization_asset_height` | integer |  |
+| `player_status_committed_organization_asset_width` | integer |  |
+| `player_status_committed_organization_asset_asset_type` | character |  |
+| `player_status_committed_organization_asset_file_system` | character |  |
+| `player_status_committed_organization_asset_path` | character |  |
+| `player_status_committed_organization_asset_type` | character |  |
+| `player_status_committed_organization_asset_thumbnail` | character |  |
+| `player_status_committed_organization_asset_duration` | integer |  |
+| `player_status_committed_organization_asset_mime_type` | character |  |
+| `player_status_committed_organization_slug` | character |  |
+| `player_status_committed_organization_primary_color` | character |  |
+| `player_status_class_rank` | character |  |
+| `player_status_transfer_entered` | character |  |
+| `player_status_recruitment_year` | character |  |
+| `player_status_decommitted_asset` | character |  |
+| `player_status_transfer` | logical |  |
+| `player_status_expected_to_transfer` | logical |  |
+| `player_status_recruitment_key` | integer |  |
+| `player_status_withdrawn_transfer` | logical |  |
+| `player_status_withdrawn_transfer_date` | character |  |
+
+### Returns — `on3_player_team_targets` / `on3PlayerTeamTargets`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_player_videos` / `on3PlayerVideos`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `source_url` | character |  |
+| `title` | character |  |
+| `thumbnail` | character |  |
+| `description` | character |  |
+| `date` | integer |  |
+| `person_key` | integer |  |
+| `person_sport` | character |  |
+| `is_featured` | logical |  |
+| `featured_order` | character |  |
+| `category_key` | integer |  |
+| `category_value` | character |  |
+
+### Returns — `on3_player_visit_center` / `on3PlayerVisitCenter`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_players_industry_comparision` / `on3PlayersIndustryComparision`
+
+| col_name | type | description |
+|---|---|---|
+| `ratings` | character |  |
+| `nil_value` | integer |  |
+| `person_key` | integer |  |
+| `person_name` | character |  |
+| `person_slug` | character |  |
+| `person_high_school_name` | character |  |
+| `person_high_school_key` | integer |  |
+| `person_high_school_full_name` | character |  |
+| `person_high_school_name_2` | character |  |
+| `person_high_school_known_as` | character |  |
+| `person_high_school_mascot` | character |  |
+| `person_high_school_abbreviation` | character |  |
+| `person_high_school_asset_url` | character |  |
+| `person_high_school_default_asset_key` | integer |  |
+| `person_high_school_default_asset_domain_override` | character |  |
+| `person_high_school_default_asset_domain` | character |  |
+| `person_high_school_default_asset_source_override` | character |  |
+| `person_high_school_default_asset_source` | character |  |
+| `person_high_school_default_asset_title` | character |  |
+| `person_high_school_default_asset_description` | character |  |
+| `person_high_school_default_asset_caption` | character |  |
+| `person_high_school_default_asset_category` | character |  |
+| `person_high_school_default_asset_alt_text` | character |  |
+| `person_high_school_default_asset_height` | integer |  |
+| `person_high_school_default_asset_width` | integer |  |
+| `person_high_school_default_asset_asset_type` | character |  |
+| `person_high_school_default_asset_file_system` | character |  |
+| `person_high_school_default_asset_path` | character |  |
+| `person_high_school_default_asset_type` | character |  |
+| `person_high_school_default_asset_thumbnail` | character |  |
+| `person_high_school_default_asset_duration` | integer |  |
+| `person_high_school_default_asset_mime_type` | character |  |
+| `person_high_school_slug` | character |  |
+| `person_high_school_primary_color` | character |  |
+| `person_high_school_org_type` | character |  |
+| `person_high_school_org_type_enum` | character |  |
+| `person_high_school_division` | character |  |
+| `person_high_school_site_keys` | character |  |
+| `person_high_school_url_slug` | character |  |
+| `person_home_town_name` | character |  |
+| `person_default_asset_url` | character |  |
+| `person_default_asset_key` | integer |  |
+| `person_default_asset_domain_override` | character |  |
+| `person_default_asset_domain` | character |  |
+| `person_default_asset_source_override` | character |  |
+| `person_default_asset_source` | character |  |
+| `person_default_asset_title` | character |  |
+| `person_default_asset_description` | character |  |
+| `person_default_asset_caption` | character |  |
+| `person_default_asset_category` | character |  |
+| `person_default_asset_alt_text` | character |  |
+| `person_default_asset_height` | integer |  |
+| `person_default_asset_width` | integer |  |
+| `person_default_asset_asset_type` | character |  |
+| `person_default_asset_file_system` | character |  |
+| `person_default_asset_path` | character |  |
+| `person_default_asset_type` | character |  |
+| `person_default_asset_thumbnail` | character |  |
+| `person_default_asset_duration` | integer |  |
+| `person_default_asset_mime_type` | character |  |
+| `person_early_signee` | logical |  |
+| `person_early_enrollee` | logical |  |
+| `person_position_abbreviation` | character |  |
+| `person_height` | numeric |  |
+| `person_formatted_height` | character |  |
+| `person_weight` | integer |  |
+| `person_class_year` | integer |  |
+| `person_athlete_verified` | logical |  |
+| `person_prospect_verified` | logical |  |
+| `person_class_rank` | character |  |
+| `person_recruitment_key` | integer |  |
+| `person_age` | integer |  |
+
+### Returns — `on3_players_industry_comparision_list` / `on3PlayersIndustryComparisionList`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_predictions_user_key` / `on3PredictionsUserKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_quotes` / `on3Quotes`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `body` | character |  |
+| `category` | character |  |
+| `person_key` | integer |  |
+| `date_added` | character |  |
+| `date_updated` | character |  |
+| `person_key_2` | integer |  |
+| `person_known_as_name` | character |  |
+| `person_first_name` | character |  |
+| `person_last_name` | character |  |
+| `person_twitter_handle` | character |  |
+| `person_instagram_profile` | character |  |
+| `person_tik_tok_handle` | character |  |
+| `person_espn_profile` | character |  |
+| `person_class_year` | integer |  |
+| `person_two_four_seven_profile` | character |  |
+| `person_rivals_profile` | character |  |
+
+### Returns — `on3_quotes_key` / `on3QuotesKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_recruitment_primary_recruitment_evaluation` / `on3RecruitmentPrimaryRecruitmentEvaluation`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_recruitment_recruitment_evaluations` / `on3RecruitmentRecruitmentEvaluations`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_recruitments_profile` / `on3RecruitmentsProfile`
+
+| col_name | type | description |
+|---|---|---|
+| `class_year` | integer |  |
+| `high_school` | character |  |
+| `home_town` | character |  |
+| `rating_key` | integer |  |
+| `rating_rating` | numeric |  |
+| `rating_stars` | integer |  |
+| `rating_national_rank` | integer |  |
+| `rating_position_rank` | integer |  |
+| `rating_state_rank` | integer |  |
+| `rating_position_abbr` | character |  |
+| `rating_state_abbr` | character |  |
+| `rating_five_star_plus` | logical |  |
+| `committed_status_type` | character |  |
+| `committed_status_short_term_signee` | logical |  |
+| `committed_status_date` | character |  |
+| `committed_status_committed_asset_key` | integer |  |
+| `committed_status_committed_asset_url` | character |  |
+| `committed_status_committed_asset_slug` | character |  |
+| `committed_status_committed_asset_full_name` | character |  |
+| `committed_status_committed_asset_res_key` | integer |  |
+| `committed_status_committed_asset_res_domain_override` | character |  |
+| `committed_status_committed_asset_res_domain` | character |  |
+| `committed_status_committed_asset_res_source_override` | character |  |
+| `committed_status_committed_asset_res_source` | character |  |
+| `committed_status_committed_asset_res_title` | character |  |
+| `committed_status_committed_asset_res_description` | character |  |
+| `committed_status_committed_asset_res_caption` | character |  |
+| `committed_status_committed_asset_res_category` | character |  |
+| `committed_status_committed_asset_res_alt_text` | character |  |
+| `committed_status_committed_asset_res_height` | integer |  |
+| `committed_status_committed_asset_res_width` | integer |  |
+| `committed_status_committed_asset_res_asset_type` | character |  |
+| `committed_status_committed_asset_res_file_system` | character |  |
+| `committed_status_committed_asset_res_path` | character |  |
+| `committed_status_committed_asset_res_type` | character |  |
+| `committed_status_committed_asset_res_thumbnail` | character |  |
+| `committed_status_committed_asset_res_duration` | integer |  |
+| `committed_status_committed_asset_res_mime_type` | character |  |
+| `committed_status_transferred_asset` | character |  |
+| `committed_status_transferred_asset_res` | character |  |
+| `committed_status_committed_organization_key` | integer |  |
+| `committed_status_committed_organization_full_name` | character |  |
+| `committed_status_committed_organization_name` | character |  |
+| `committed_status_committed_organization_mascot` | character |  |
+| `committed_status_committed_organization_abbreviation` | character |  |
+| `committed_status_committed_organization_asset_url` | character |  |
+| `committed_status_committed_organization_asset` | character |  |
+| `committed_status_committed_organization_slug` | character |  |
+| `committed_status_committed_organization_primary_color` | character |  |
+| `committed_status_class_rank` | character |  |
+| `committed_status_transfer_entered` | character |  |
+| `committed_status_recruitment_year` | character |  |
+| `committed_status_decommitted_asset` | character |  |
+| `committed_status_transfer` | logical |  |
+| `committed_status_expected_to_transfer` | logical |  |
+| `committed_status_recruitment_key` | integer |  |
+| `committed_status_withdrawn_transfer` | logical |  |
+| `committed_status_withdrawn_transfer_date` | character |  |
+| `high_school_org_key` | integer |  |
+| `high_school_org_full_name` | character |  |
+| `high_school_org_name` | character |  |
+| `high_school_org_known_as` | character |  |
+| `high_school_org_mascot` | character |  |
+| `high_school_org_abbreviation` | character |  |
+| `high_school_org_asset_url` | character |  |
+| `high_school_org_default_asset_key` | integer |  |
+| `high_school_org_default_asset_domain_override` | character |  |
+| `high_school_org_default_asset_domain` | character |  |
+| `high_school_org_default_asset_source_override` | character |  |
+| `high_school_org_default_asset_source` | character |  |
+| `high_school_org_default_asset_title` | character |  |
+| `high_school_org_default_asset_description` | character |  |
+| `high_school_org_default_asset_caption` | character |  |
+| `high_school_org_default_asset_category` | character |  |
+| `high_school_org_default_asset_alt_text` | character |  |
+| `high_school_org_default_asset_height` | integer |  |
+| `high_school_org_default_asset_width` | integer |  |
+| `high_school_org_default_asset_asset_type` | character |  |
+| `high_school_org_default_asset_file_system` | character |  |
+| `high_school_org_default_asset_path` | character |  |
+| `high_school_org_default_asset_type` | character |  |
+| `high_school_org_default_asset_thumbnail` | character |  |
+| `high_school_org_default_asset_duration` | integer |  |
+| `high_school_org_default_asset_mime_type` | character |  |
+| `high_school_org_slug` | character |  |
+| `high_school_org_primary_color` | character |  |
+| `high_school_org_org_type` | character |  |
+| `high_school_org_org_type_enum` | character |  |
+| `high_school_org_division` | character |  |
+| `high_school_org_site_keys` | character |  |
+| `high_school_org_url_slug` | character |  |
+
+### Returns — `on3_recruitments_rpm_picks` / `on3RecruitmentsRpmPicks`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_recruitments_rpm_summary` / `on3RecruitmentsRpmSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `predictions` | character |  |
+| `locked` | logical |  |
+
+### Returns — `on3_team_ranking` / `on3TeamRanking`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_team_ranking_bluechips_team_rankings` / `on3TeamRankingBluechipsTeamRankings`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_team_ranking_consensus_team_rankings` / `on3TeamRankingConsensusTeamRankings`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_team_ranking_organizations_summary` / `on3TeamRankingOrganizationsSummary`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+
+### Returns — `on3_team_ranking_team_rankings` / `on3TeamRankingTeamRankings`
+
+| col_name | type | description |
+|---|---|---|
+| `key` | integer |  |
+| `year` | integer |  |
+| `applied_total_rating` | numeric |  |
+| `applied_total_consensus_rating` | numeric |  |
+| `applied_average_rating` | numeric |  |
+| `applied_average_consensus_rating` | numeric |  |
+| `commits` | integer |  |
+| `applied_commits` | integer |  |
+| `deductions` | numeric |  |
+| `deductions_description` | character |  |
+| `five_stars` | integer |  |
+| `consensus_five_stars` | integer |  |
+| `four_stars` | integer |  |
+| `consensus_four_stars` | integer |  |
+| `three_stars` | integer |  |
+| `consensus_three_stars` | integer |  |
+| `overall_rank` | integer |  |
+| `overall_consensus_rank` | integer |  |
+| `dispay_consensus_score` | numeric |  |
+| `dispay_on3_score` | numeric |  |
+| `average_nil_value` | numeric |  |
+| `conference_rank` | integer |  |
+| `conference_consensus_rank` | integer |  |
+| `organization_key` | integer |  |
+| `organization_full_name` | character |  |
+| `organization_name` | character |  |
+| `organization_mascot` | character |  |
+| `organization_abbreviation` | character |  |
+| `organization_asset_url` | character |  |
+| `organization_asset_key` | integer |  |
+| `organization_asset_domain_override` | character |  |
+| `organization_asset_domain` | character |  |
+| `organization_asset_source_override` | character |  |
+| `organization_asset_source` | character |  |
+| `organization_asset_title` | character |  |
+| `organization_asset_description` | character |  |
+| `organization_asset_caption` | character |  |
+| `organization_asset_category` | character |  |
+| `organization_asset_alt_text` | character |  |
+| `organization_asset_height` | integer |  |
+| `organization_asset_width` | integer |  |
+| `organization_asset_asset_type` | character |  |
+| `organization_asset_file_system` | character |  |
+| `organization_asset_path` | character |  |
+| `organization_asset_type` | character |  |
+| `organization_asset_thumbnail` | character |  |
+| `organization_asset_duration` | integer |  |
+| `organization_asset_mime_type` | character |  |
+| `organization_slug` | character |  |
+| `organization_primary_color` | character |  |
+
+### Returns — `on3_videos_video_key` / `on3VideosVideoKey`
+
+No returns table is published for this endpoint: no committed capture with rows; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published

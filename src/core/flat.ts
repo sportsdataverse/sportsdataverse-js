@@ -49,6 +49,8 @@ function cleanQuery(
   params: Record<string, any>
 ): Record<string, any> {
   const out: Record<string, any> = {};
+  // sdv-py endpoint `fixed_params`: sent first, so a caller param of the same name wins.
+  for (const [k, v] of Object.entries(def.fixedParams ?? {})) out[k] = lookup(params, k) ?? v;
   for (const qp of def.queryParams ?? []) {
     const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null && v !== "") out[qp.queryKey] = v;

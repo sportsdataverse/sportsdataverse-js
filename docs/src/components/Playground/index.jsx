@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import endpoints from '@site/src/playground/endpoints.json';
 import { resolveUrl, resolveFlatUrl, findFlatDef } from '@site/src/playground/resolve.mjs';
-import { parseEndpoint } from '@site/src/playground/parsers.bundle.mjs';
+import { parseEndpoint, SECTIONED_ENDPOINTS } from '@site/src/playground/parsers.bundle.mjs';
 import { EXAMPLES, examplesBySport } from '@site/src/playground/examples.js';
 import styles from './styles.module.css';
 
@@ -67,11 +67,11 @@ const flatMethodName = (api, short) => {
 const espnId = (short) => `espn:${short}`;
 const flatId = (api, short) => `flat:${api}:${short}`;
 
-/** ESPN endpoints applicable to a league = those whose scope is in its scopes. */
+/** ESPN endpoints applicable to a league = scope in its scopes, and on the endpoint's includePrefixes allowlist if any. */
 function espnEndpointsFor(league) {
   const scopes = new Set(league.scopes);
   return endpoints.endpoints
-    .filter((e) => scopes.has(e.scope))
+    .filter((e) => scopes.has(e.scope) && (!e.includePrefixes || e.includePrefixes.includes(league.prefix)))
     .sort((a, b) => a.short.localeCompare(b.short));
 }
 
@@ -310,7 +310,7 @@ export default function Playground() {
     const entries = Object.entries(params).filter(([, v]) => v !== '' && v != null);
     if (parsed && hasParser) {
       entries.push(['parsed', 'true']);
-      if (sel.short === 'summary' && section) entries.push(['section', section]);
+      if (sel.kind === 'espn' && SECTIONED_ENDPOINTS.has(sel.short) && section) entries.push(['section', section]);
     }
     const args = entries
       .map(([k, v]) => {
@@ -331,8 +331,10 @@ export default function Playground() {
     if (!parsed || !hasParser || rawData == null || !sel) return null;
     try {
       const key = sel.kind === 'espn' ? sel.short : sel.def.parser;
-      if (sel.kind === 'espn' && sel.short === 'summary') {
-        const dict = parseEndpoint('espn', 'summary', rawData);
+      // The summary dispatcher and the CDN game pages (which run it) return an
+      // object of sub-frames: show a section picker.
+      if (sel.kind === 'espn' && SECTIONED_ENDPOINTS.has(sel.short)) {
+        const dict = parseEndpoint('espn', sel.short, rawData);
         const sections = dict && typeof dict === 'object' ? Object.keys(dict) : [];
         const active = section && sections.includes(section) ? section : sections[0];
         return { kind: 'summary', sections, active, rows: active ? dict[active] : [] };

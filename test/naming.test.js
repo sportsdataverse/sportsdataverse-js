@@ -77,7 +77,7 @@ describe('v4 naming: deprecated aliases', () => {
 
   it('cover the renamed ESPN + native names (both case forms)', () => {
     rows.length.should.be.above(1400);
-    Object.keys(FLAT_DEPRECATED_ALIASES).sort().should.eql(['cbs', 'nfl_api', 'nhl_api_web']);
+    Object.keys(FLAT_DEPRECATED_ALIASES).sort().should.eql(['cbs', 'fox', 'nfl_api', 'nhl_api_web']);
   });
 
   it('each alias resolves to the same v4 wrapper, in snake_case and camelCase', () => {
@@ -234,6 +234,8 @@ describe('v4 naming: JS names equal sdv-py names at the vendor pin', () => {
     FLAT_DEPRECATED_ALIASES.nfl_api.nfl_api_standings.should.equal('nfl_standings');
     FLAT_DEPRECATED_ALIASES.cbs.cbs_boxscore.should.equal('cbs_game_boxscore');
     Object.keys(FLAT_DEPRECATED_ALIASES.cbs).length.should.equal(16);
+    FLAT_DEPRECATED_ALIASES.fox.fox_scoreboard.should.equal('fox_api_scoreboard'); // vendored from sdv-py fox_api
+    Object.keys(FLAT_DEPRECATED_ALIASES.fox).length.should.equal(33); // the 5 dead routes keep their names
   });
 });
 

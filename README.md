@@ -126,7 +126,7 @@ await sdv.nfl.nflWeeklyGameDetails({ season: 2024, week: 1, parsed: true });
 
 // Providers — standalone namespaces (auth varies per provider)
 await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY, parsed: true });
-await sdv.fox.fox_scoreboard({ parsed: true });            // public apikey defaulted
+await sdv.fox.fox_api_scoreboard({ parsed: true });         // public apikey defaulted
 ```
 
 Browser callers can import **just** the parser layer (no node-only HTTP deps) from the

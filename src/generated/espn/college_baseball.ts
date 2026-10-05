@@ -654,6 +654,162 @@ export const espnCollegeBaseballCalendar: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnCollegeBaseballCalendar} (py/R parity). */
 export const espn_college_baseball_calendar = espnCollegeBaseballCalendar;
 
+const CDN_BOXSCORE_DEF: WrapperDef = {
+  "short": "cdn_boxscore",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/boxscore",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "game_id",
+      "queryKey": "gameId"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * COLLEGE_BASEBALL — cdn boxscore (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/college-baseball/boxscore?xhr=1`
+ *
+ * @param params.game_id - query parameter (ESPN `gameId`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @example await sdv.college_baseball.espnCollegeBaseballCdnBoxscore({});
+ */
+export const espnCollegeBaseballCdnBoxscore: WrapperFn = (params = {}) =>
+  callWrapper(CDN_BOXSCORE_DEF, CFG, params);
+/** snake_case alias of {@link espnCollegeBaseballCdnBoxscore} (py/R parity). */
+export const espn_college_baseball_cdn_boxscore = espnCollegeBaseballCdnBoxscore;
+
+const CDN_PLAYBYPLAY_DEF: WrapperDef = {
+  "short": "cdn_playbyplay",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/playbyplay",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "game_id",
+      "queryKey": "gameId"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * COLLEGE_BASEBALL — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/college-baseball/playbyplay?xhr=1`
+ *
+ * @param params.game_id - query parameter (ESPN `gameId`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @param params.section - (with `parsed: true`) return just one named sub-frame (e.g. `boxscore`, `plays`, `winprobability`) instead of the object of all summary sub-frames.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }` (an object of sub-frames, or the chosen `section`).
+ * @example await sdv.college_baseball.espnCollegeBaseballCdnPlaybyplay({});
+ */
+export const espnCollegeBaseballCdnPlaybyplay: WrapperFn = (params = {}) =>
+  callWrapper(CDN_PLAYBYPLAY_DEF, CFG, params);
+/** snake_case alias of {@link espnCollegeBaseballCdnPlaybyplay} (py/R parity). */
+export const espn_college_baseball_cdn_playbyplay = espnCollegeBaseballCdnPlaybyplay;
+
+const CDN_SCHEDULE_DEF: WrapperDef = {
+  "short": "cdn_schedule",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/schedule",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "date",
+      "queryKey": "date"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "year"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * COLLEGE_BASEBALL — cdn schedule (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/college-baseball/schedule?xhr=1`
+ *
+ * @param params.date - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter (ESPN `year`).
+ * @param params.season_type - query parameter (ESPN `seasontype`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.college_baseball.espnCollegeBaseballCdnSchedule({});
+ */
+export const espnCollegeBaseballCdnSchedule: WrapperFn = (params = {}) =>
+  callWrapper(CDN_SCHEDULE_DEF, CFG, params);
+/** snake_case alias of {@link espnCollegeBaseballCdnSchedule} (py/R parity). */
+export const espn_college_baseball_cdn_schedule = espnCollegeBaseballCdnSchedule;
+
+const CDN_SCOREBOARD_DEF: WrapperDef = {
+  "short": "cdn_scoreboard",
+  "family": "cdn",
+  "scope": "universal",
+  "path": "/{league}/scoreboard",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "date",
+      "queryKey": "date"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "year"
+    },
+    {
+      "name": "season_type",
+      "queryKey": "seasontype"
+    }
+  ],
+  "fixedParams": {
+    "xhr": 1
+  }
+};
+/**
+ * COLLEGE_BASEBALL — cdn scoreboard (ESPN cdn.espn.com (espn.com page data)).
+ *
+ * **Endpoint:** `GET https://cdn.espn.com/core/college-baseball/scoreboard?xhr=1`
+ *
+ * @param params.date - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter (ESPN `year`).
+ * @param params.season_type - query parameter (ESPN `seasontype`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.college_baseball.espnCollegeBaseballCdnScoreboard({});
+ */
+export const espnCollegeBaseballCdnScoreboard: WrapperFn = (params = {}) =>
+  callWrapper(CDN_SCOREBOARD_DEF, CFG, params);
+/** snake_case alias of {@link espnCollegeBaseballCdnScoreboard} (py/R parity). */
+export const espn_college_baseball_cdn_scoreboard = espnCollegeBaseballCdnScoreboard;
+
 const COACH_DEF: WrapperDef = {
   "short": "coach",
   "family": "core_v2",

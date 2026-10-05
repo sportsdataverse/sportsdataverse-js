@@ -85,7 +85,7 @@ The public `apikey` + `api-version` pair default automatically — just pass a
 ```js
 import sdv from 'sportsdataverse';
 
-const board = await sdv.fox.foxScoreboard({ sport: 'cfb', parsed: true });
+const board = await sdv.fox.foxApiScoreboard({ sport: 'cfb', parsed: true });
 console.table(board);
 ```
 
@@ -162,7 +162,7 @@ This cell pulls the current CFB scoreboard from Fox's public Bifrost API:
   title="Fox Bifrost: CFB scoreboard"
   source={`const sdv = (await import('sportsdataverse')).default;
 
-const board = await sdv.fox.foxScoreboard({ sport: 'cfb', parsed: true });
+const board = await sdv.fox.foxApiScoreboard({ sport: 'cfb', parsed: true });
 
 board.slice(0, 5);`}
 />

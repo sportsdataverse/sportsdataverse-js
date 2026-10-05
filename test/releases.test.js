@@ -11,6 +11,7 @@ import sdv, {
   resetConfig,
   SdvError,
   AssetFetchError,
+  NoDataError,
   SeasonNotFoundError,
   RELEASES_FAMILY,
 } from '../dist/index.js';
@@ -208,6 +209,53 @@ describe('release loaders', () => {
       (await sdv.nhl.loadNhlGroups().catch((e) => e)).should.be.instanceOf(AssetFetchError);
     });
 
+    it('on_missing: raise -> a 404 season throws NoDataError (sdv-py hand-written nfl loaders), no skip', async () => {
+      use(releasesTransport(() => 404));
+      const err = await sdv.nfl.loadNflUsagePlayers({ seasons: 2024 }).catch((e) => e);
+      err.should.be.instanceOf(NoDataError);
+      (err instanceof AssetFetchError).should.be.false();
+      err.status.should.equal(404);
+      err.message.should.match(/load_nfl_usage_players: no published asset for season 2024/);
+      warnings.should.eql([]);
+    });
+
+    it('on_missing: raise -> a present season loads; a missing one in the list throws', async () => {
+      use(releasesTransport((u) => (u.includes('_2022.') ? 'ftn_charting_2022_head100.parquet' : 404)));
+      (await sdv.nfl.loadNflFtnCharting({ seasons: 2022 })).length.should.equal(100);
+      (await sdv.nfl.loadNflFtnCharting({ seasons: [2022, 2023] }).catch((e) => e)).should.be.instanceOf(NoDataError);
+    });
+
+    it('on_missing: raise -> a failed fetch is still AssetFetchError, never NoDataError', async () => {
+      use(releasesTransport(() => 503));
+      const err = await sdv.nfl.loadNflUsagePlayers({ seasons: 2024 }).catch((e) => e);
+      err.should.be.instanceOf(AssetFetchError);
+      (err instanceof NoDataError).should.be.false();
+    });
+
+    it('on_missing: the generated defs raise exactly where releases.yaml says (others skip)', () => {
+      const raise = MANIFEST.loaders.filter((ld) => ld.on_missing === 'raise').map((ld) => ld.fn).sort();
+      raise.length.should.equal(25);
+      raise.should.containEql('load_nfl_usage_players');
+      raise.should.containEql('load_nfl_coach_tendencies');
+      const views = loadReleaseLoaders(new URL('../tools/codegen/endpoints/', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+      views.filter((v) => v.raiseOnMissing).map((v) => v.fn).sort().should.eql(raise);
+      const nfl = readFileSync(new URL('../src/generated/loaders/nfl.ts', import.meta.url), 'utf8');
+      (nfl.match(/"onMissing":"raise"/g) ?? []).length.should.equal(raise.length);
+    });
+
+    it('codegen fails closed on an unknown on_missing value', () => {
+      const dir = mkdtempSync(join(tmpdir(), 'sdv-releases-'));
+      try {
+        writeFileSync(
+          join(dir, 'releases.yaml'),
+          stringify({ bases: { b: 'https://x/' }, loaders: [{ fn: 'load_x_stuff', league: 'x', base: 'b', url: 'a.parquet', tag: 't', on_missing: 'ignore' }] })
+        );
+        (() => loadReleaseLoaders(dir)).should.throw(/on_missing must be 'skip' or 'raise'/);
+      } finally {
+        rmSync(dir, { recursive: true, force: true });
+      }
+    });
+
     it('a season below min_season raises SeasonNotFoundError before any fetch', async () => {
       const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
       use(t);
@@ -385,7 +433,7 @@ describe('release loaders', () => {
       drift.team_id.length.should.equal(234);
       should(drift.team_id[0]).be.null();
       should(drift.nflverse_game_id[233]).be.null();
-      (await sdv.nfl.loadNflFtnCharting({ seasons: 2024, format: 'columns' })).should.eql({});
+      (await sdv.cfb.loadCfbRatings({ seasons: 2026, format: 'columns' })).should.eql({}); // a skip loader (nfl ones raise)
     });
 
     it('rejects an unknown format', async () => {

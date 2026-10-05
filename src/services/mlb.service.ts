@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnMlbCdnBoxscore, espnMlbCdnPlaybyplay, espnMlbCdnSchedule } from '../generated/espn/mlb.js';
+import { cdnDate } from './_cdn.js';
 /**
  * Operations for MLB.
  *
@@ -22,16 +24,8 @@ export default {
    * const result = await sdv.mlb.getPlayByPlay(401472105);
    */
   getPlayByPlay: async function (id) {
-    const baseUrl = "http://cdn.espn.com/core/mlb/playbyplay";
-    const params: Record<string, any> = {
-      gameId: id,
-      xhr: 1,
-      render: "false",
-      userab: 18,
-    };
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    // via espn_mlb_cdn_playbyplay (https; core request layer + error vocabulary)
+    const res = { data: await espnMlbCdnPlaybyplay({ game_id: id }) };
     return {
       teams: res.data.gamepackageJSON.header.competitions[0].competitors,
       id: res.data.gamepackageJSON.header.id,
@@ -54,17 +48,8 @@ export default {
    * const result = await sdv.mlb.getBoxScore(401472105);
    */
   getBoxScore: async function (id) {
-    const baseUrl = "http://cdn.espn.com/core/mlb/boxscore";
-    const params: Record<string, any> = {
-      gameId: id,
-      xhr: 1,
-      render: false,
-      device: "desktop",
-      userab: 18,
-    };
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    // via espn_mlb_cdn_boxscore (https; core request layer + error vocabulary)
+    const res = { data: await espnMlbCdnBoxscore({ game_id: id }) };
     const game = res.data.gamepackageJSON.boxscore;
     game.id = res.data.gameId;
     return game;
@@ -153,21 +138,9 @@ export default {
    * )
    */
   getSchedule: async function ({ year, month, day }) {
-    const baseUrl = `http://cdn.espn.com/core/mlb/schedule`;
-
-    const params: Record<string, any> = {
-      xhr: 1,
-      render: false,
-      device: "desktop",
-      userab: 18,
-    };
-    if (year && month && day) {
-      params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-    }
-    const res = await axios.get(baseUrl, {
-      params,
-    });
-    return res.data.content.schedule;
+    // espn_mlb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
+    const res = await espnMlbCdnSchedule({ date: cdnDate(year, month, day) });
+    return res.content.schedule;
   },
   /**
    * Gets the MLB scoreboard data for a specified date if available.

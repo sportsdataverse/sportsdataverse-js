@@ -86,6 +86,11 @@ export function loadReleaseLoaders(endpointsDir) {
     const camel = toCamel(ld.fn);
     if (seen.has(camel)) throw new Error(`releases.yaml: duplicate loader name ${camel}`);
     seen.add(camel);
+    // sdv-py spec.Loader.on_missing: `skip` (default) | `raise`; anything else fails closed.
+    const onMissing = ld.on_missing ?? "skip";
+    if (onMissing !== "skip" && onMissing !== "raise") {
+      throw new Error(`releases.yaml: ${ld.fn} on_missing must be 'skip' or 'raise', got ${JSON.stringify(ld.on_missing)}`);
+    }
     const token = ld.url.match(SEASON_TOKEN);
     // Release-tag page: GitHub-release assets link their own repo's tag; others
     // (raw.githubusercontent) keep their provenance tag in sportsdataverse-data.
@@ -104,6 +109,7 @@ export function loadReleaseLoaders(endpointsDir) {
       single: !token,
       seasonOffset: token?.[1] ? Number(token[1]) : 0,
       idInt64: ld.id_int64?.length ? ld.id_int64 : undefined,
+      raiseOnMissing: onMissing === "raise",
       deprecatedFor: ld.deprecated_for ?? undefined,
       notes: ld.notes?.trim() || undefined,
       exampleSeasons: ld.example_args?.seasons ?? 2024,
@@ -150,6 +156,7 @@ function renderLoaderTs(ns, ld) {
   const def = { fn: ld.fn, url: ld.url };
   if (ld.minSeason !== undefined) def.minSeason = ld.minSeason;
   if (ld.idInt64) def.idInt64 = ld.idInt64;
+  if (ld.raiseOnMissing) def.onMissing = "raise";
   const loaderType = ld.single ? "AssetLoader" : "SeasonLoader";
   let out = "";
   if (!ld.deprecatedFor) out += `\nconst ${defConst}: ReleaseLoaderDef = ${JSON.stringify(def)};\n`;
@@ -169,7 +176,10 @@ function renderLoaderTs(ns, ld) {
     doc.push(`@param opts - optional \`columns\` / \`timeoutMs\`.`);
   } else {
     const rng = ld.minSeason !== undefined ? ` (>= ${ld.minSeason})` : "";
-    doc.push(`@param opts.seasons - a season or a list of seasons${rng}; one with no published asset is skipped with a warning.`);
+    doc.push(
+      `@param opts.seasons - a season or a list of seasons${rng}; one with no published asset ` +
+        (ld.raiseOnMissing ? "throws `NoDataError` (sdv-py parity)." : "is skipped with a warning.")
+    );
   }
   doc.push("@param opts.columns - read only these columns (default: all).");
   doc.push('@param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).');
@@ -181,6 +191,9 @@ function renderLoaderTs(ns, ld) {
   );
   if (!ld.single && ld.minSeason !== undefined) {
     doc.push(`@throws SeasonNotFoundError if a season is below ${ld.minSeason}.`);
+  }
+  if (ld.raiseOnMissing) {
+    doc.push(`@throws NoDataError if a requested ${ld.single ? "asset" : "season"} has no published asset (HTTP 404).`);
   }
   doc.push("@throws SdvError if the data is over `maxCells` (checked before decoding).");
   doc.push("@throws AssetFetchError if a download fails (never reported as an empty season).");
@@ -261,7 +274,8 @@ export function renderLoadersPage(ns, loaders, position) {
     `memory. Play-by-play is the usual case: pass \`columns\`, use \`format: "columns"\`, or ` +
     `raise the heap (\`node --max-old-space-size=8192\`).\n` +
     `- **Seasons:** \`seasons\` takes one season or a list. A season with no published ` +
-    `asset (HTTP 404) is skipped with a warning; any other failure raises ` +
+    `asset (HTTP 404) is skipped with a warning (loaders marked so in their \`seasons\` row — ` +
+    `sdv-py's hand-written ones — throw \`NoDataError\` instead); any other failure raises ` +
     `\`AssetFetchError\` (a failed download is never an empty season); a season below the ` +
     `loader's floor raises \`SeasonNotFoundError\` before anything is fetched. Multi-season ` +
     `results union the columns, null-filling gaps, and cast a column whose type changed ` +
@@ -289,7 +303,8 @@ export function renderLoadersPage(ns, loaders, position) {
     body += `| option | type | required | description |\n|---|---|---|---|\n`;
     if (!ld.single) {
       const rng = ld.minSeason !== undefined ? ` (>= ${ld.minSeason})` : "";
-      body += `| \`seasons\` | \`number \\| number[]\` | yes | season(s) to load${rng} |\n`;
+      const miss = ld.raiseOnMissing ? "; a season with no published asset throws `NoDataError`" : "";
+      body += `| \`seasons\` | \`number \\| number[]\` | yes | season(s) to load${rng}${miss} |\n`;
     }
     body += `| \`columns\` | \`string[]\` | no | read only these columns |\n`;
     body += `| \`format\` | \`"rows" \\| "columns"\` | no | row objects (default) or column arrays |\n`;

@@ -1,0 +1,132 @@
+# JS-owned patches and additions merged on top of the VENDORED `fox` family
+# (sdv-py tools/codegen/endpoints/fox_api.yaml). See tools/codegen/vendor.yaml.
+# Edit here, then `npm run vendor -- --offline`.
+#
+# Public names are sdv-py's (`fox_api_<short>`). The pre-v4 `fox_<short>` names
+# stay callable as deprecated aliases (tools/codegen/pre_v4_names.json).
+endpoints:
+# ---------------------------------------------------------------------------
+# JS's returns tables. They describe JS's own Fox parsers (src/parsers/fox.ts),
+# which vendor.yaml maps py's parse_fox_api_* parsers to. sdv-py ships no fox_api
+# returns schemas.
+# ---------------------------------------------------------------------------
+- short: scoreboard
+  returns_schema: native/fox/scoreboard
+- short: scorechip
+  returns_schema: native/fox/scorechip
+- short: topevents_scoreboard_segment
+  returns_schema: native/fox/topevents_scoreboard_segment
+- short: league_conferences
+  returns_schema: native/fox/league_conferences
+- short: league_header
+  returns_schema: native/fox/league_header
+- short: league_odds
+  returns_schema: native/fox/league_odds
+- short: league_playernews
+  returns_schema: native/fox/league_playernews
+- short: league_polls
+  returns_schema: native/fox/league_polls
+- short: league_schedule
+  returns_schema: native/fox/league_schedule
+- short: league_scores
+  returns_schema: native/fox/league_scores
+- short: league_scores_segment
+  returns_schema: native/fox/league_scores_segment
+- short: league_standings
+  returns_schema: native/fox/league_standings
+- short: league_stats
+  returns_schema: native/fox/league_stats
+- short: league_stats_con
+  returns_schema: native/fox/league_stats_con
+- short: league_teamnav
+  returns_schema: native/fox/league_teamnav
+- short: event_data
+  returns_schema: native/fox/event_data
+- short: event_matchup
+  returns_schema: native/fox/event_matchup
+- short: event_odds
+  returns_schema: native/fox/event_odds
+- short: event_recap
+  returns_schema: native/fox/event_recap
+- short: event_standings
+  returns_schema: native/fox/event_standings
+- short: team_gamelog
+  returns_schema: native/fox/team_gamelog
+- short: team_header
+  returns_schema: native/fox/team_header
+- short: team_roster
+  returns_schema: native/fox/team_roster
+- short: team_standings
+  returns_schema: native/fox/team_standings
+- short: team_stats
+  returns_schema: native/fox/team_stats
+- short: explore_browse
+  returns_schema: native/fox/explore_browse
+- short: explore_odds
+  returns_schema: native/fox/explore_odds
+- short: search_content
+  returns_schema: native/fox/search_content
+- short: search_entities
+  returns_schema: native/fox/search_entities
+- short: search_popular
+  returns_schema: native/fox/search_popular
+- short: trending_articles
+  returns_schema: native/fox/trending_articles
+- short: trending_videos
+  returns_schema: native/fox/trending_videos
+- short: foxpolls
+  returns_schema: native/fox/foxpolls
+# ---------------------------------------------------------------------------
+# DEPRECATED, JS-only. sdv-py dropped these five as dead (see the probe record
+# at the top of its tools/codegen/endpoints/fox_api.yaml, 2026-10-05, with
+# same-run 200 controls). JS keeps them callable under their pre-v4 names
+# (`public_name`, no new fox_api_* name is invented); each warns once. They are
+# removed in a future major.
+# ---------------------------------------------------------------------------
+- short: explore_favorite
+  public_name: fox_explore_favorite
+  path: /bifrost/v1/explore/favorite/{section}/main
+  parser: parse_fox_list
+  returns_schema: native/fox/explore_favorite
+  path_params:
+  - {name: section, required: true}
+  extra_params:
+  - {name: apikey, query_key: apikey, default: jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  deprecated: "Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse()."
+- short: fs_feed
+  public_name: fox_fs_feed
+  path: /fs/feed
+  parser: parse_fox_list
+  returns_schema: native/fox/fs_feed
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  deprecated: "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
+- short: fs_images
+  public_name: fox_fs_images
+  path: /fs/images
+  parser: parse_fox_list
+  returns_schema: native/fox/fs_images
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  deprecated: "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
+- short: fs_layouts
+  public_name: fox_fs_layouts
+  path: /fs/layouts
+  parser: parse_fox_list
+  returns_schema: native/fox/fs_layouts
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  deprecated: "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
+- short: fs_videos
+  public_name: fox_fs_videos
+  path: /fs/videos
+  parser: parse_fox_list
+  returns_schema: native/fox/fs_videos
+  extra_params:
+  - {name: apikey, query_key: apikey, default: SuNgfBgmTGS2xozZbnV6FcjGGRQrR8cg}
+  - {name: api_version, query_key: api-version, default: '1.1'}
+  deprecated: "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."

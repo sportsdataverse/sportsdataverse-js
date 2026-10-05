@@ -11,20 +11,21 @@ import {
   type ReleaseLoaderDef,
 } from "../../core/releases.js";
 
-const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.parquet","minSeason":1999};
+const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.parquet","minSeason":1999,"onMissing":"raise"};
 
 /**
  * Load `pbp` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/pbp
  *
- * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1999.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
@@ -33,20 +34,21 @@ export const loadNflPbp = seasonLoader(LOAD_NFL_PBP);
 /** snake_case alias of {@link loadNflPbp} (py/R parity). */
 export const load_nfl_pbp = loadNflPbp;
 
-const LOAD_NFL_MODEL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_model_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_model_pbp/model_pbp_{season}.parquet","minSeason":1999};
+const LOAD_NFL_MODEL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_model_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_model_pbp/model_pbp_{season}.parquet","minSeason":1999,"onMissing":"raise"};
 
 /**
  * Load `nfl_model_pbp` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_model_pbp
  *
- * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1999.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
@@ -55,20 +57,21 @@ export const loadNflModelPbp = seasonLoader(LOAD_NFL_MODEL_PBP);
 /** snake_case alias of {@link loadNflModelPbp} (py/R parity). */
 export const load_nfl_model_pbp = loadNflModelPbp;
 
-const LOAD_NFL_RATINGS_WEEKLY: ReleaseLoaderDef = {"fn":"load_nfl_ratings_weekly","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ratings_weekly/nfl_ratings_weekly_{season}.parquet","minSeason":1999};
+const LOAD_NFL_RATINGS_WEEKLY: ReleaseLoaderDef = {"fn":"load_nfl_ratings_weekly","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ratings_weekly/nfl_ratings_weekly_{season}.parquet","minSeason":1999,"onMissing":"raise"};
 
 /**
  * Load `nfl_ratings_weekly` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ratings_weekly
  *
- * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1999.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflRatingsWeekly({ seasons: 2024 });
@@ -77,20 +80,21 @@ export const loadNflRatingsWeekly = seasonLoader(LOAD_NFL_RATINGS_WEEKLY);
 /** snake_case alias of {@link loadNflRatingsWeekly} (py/R parity). */
 export const load_nfl_ratings_weekly = loadNflRatingsWeekly;
 
-const LOAD_NFL_NGS: ReleaseLoaderDef = {"fn":"load_nfl_ngs","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_passing/ngs_passing_{season}.parquet","minSeason":2009};
+const LOAD_NFL_NGS: ReleaseLoaderDef = {"fn":"load_nfl_ngs","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_passing/ngs_passing_{season}.parquet","minSeason":2009,"onMissing":"raise"};
 
 /**
  * Load `nfl_ngs_passing` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ngs_passing
  *
- * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2009.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflNgs({ seasons: 2024 });
@@ -99,20 +103,21 @@ export const loadNflNgs = seasonLoader(LOAD_NFL_NGS);
 /** snake_case alias of {@link loadNflNgs} (py/R parity). */
 export const load_nfl_ngs = loadNflNgs;
 
-const LOAD_NFL_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_rosters","url":"https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_{season}.parquet","minSeason":1920};
+const LOAD_NFL_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_rosters","url":"https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_{season}.parquet","minSeason":1920,"onMissing":"raise"};
 
 /**
  * Load `rosters` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/rosters
  *
- * @param opts.seasons - a season or a list of seasons (>= 1920); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1920); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1920.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflRosters({ seasons: 2024 });
@@ -121,20 +126,21 @@ export const loadNflRosters = seasonLoader(LOAD_NFL_ROSTERS);
 /** snake_case alias of {@link loadNflRosters} (py/R parity). */
 export const load_nfl_rosters = loadNflRosters;
 
-const LOAD_NFL_WEEKLY_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_weekly_rosters","url":"https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_{season}.parquet","minSeason":2002};
+const LOAD_NFL_WEEKLY_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_weekly_rosters","url":"https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `weekly_rosters` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflWeeklyRosters({ seasons: 2024 });
@@ -143,20 +149,21 @@ export const loadNflWeeklyRosters = seasonLoader(LOAD_NFL_WEEKLY_ROSTERS);
 /** snake_case alias of {@link loadNflWeeklyRosters} (py/R parity). */
 export const load_nfl_weekly_rosters = loadNflWeeklyRosters;
 
-const LOAD_NFL_DEPTH_CHARTS: ReleaseLoaderDef = {"fn":"load_nfl_depth_charts","url":"https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_{season}.parquet","minSeason":2001};
+const LOAD_NFL_DEPTH_CHARTS: ReleaseLoaderDef = {"fn":"load_nfl_depth_charts","url":"https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_{season}.parquet","minSeason":2001,"onMissing":"raise"};
 
 /**
  * Load `depth_charts` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/depth_charts
  *
- * @param opts.seasons - a season or a list of seasons (>= 2001); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2001); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2001.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflDepthCharts({ seasons: 2024 });
@@ -165,20 +172,21 @@ export const loadNflDepthCharts = seasonLoader(LOAD_NFL_DEPTH_CHARTS);
 /** snake_case alias of {@link loadNflDepthCharts} (py/R parity). */
 export const load_nfl_depth_charts = loadNflDepthCharts;
 
-const LOAD_NFL_INJURIES: ReleaseLoaderDef = {"fn":"load_nfl_injuries","url":"https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{season}.parquet","minSeason":2009};
+const LOAD_NFL_INJURIES: ReleaseLoaderDef = {"fn":"load_nfl_injuries","url":"https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{season}.parquet","minSeason":2009,"onMissing":"raise"};
 
 /**
  * Load `injuries` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/injuries
  *
- * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2009.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflInjuries({ seasons: 2024 });
@@ -187,20 +195,21 @@ export const loadNflInjuries = seasonLoader(LOAD_NFL_INJURIES);
 /** snake_case alias of {@link loadNflInjuries} (py/R parity). */
 export const load_nfl_injuries = loadNflInjuries;
 
-const LOAD_NFL_SNAP_COUNTS: ReleaseLoaderDef = {"fn":"load_nfl_snap_counts","url":"https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_{season}.parquet","minSeason":2012};
+const LOAD_NFL_SNAP_COUNTS: ReleaseLoaderDef = {"fn":"load_nfl_snap_counts","url":"https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_{season}.parquet","minSeason":2012,"onMissing":"raise"};
 
 /**
  * Load `snap_counts` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/snap_counts
  *
- * @param opts.seasons - a season or a list of seasons (>= 2012); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2012); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2012.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflSnapCounts({ seasons: 2024 });
@@ -209,20 +218,21 @@ export const loadNflSnapCounts = seasonLoader(LOAD_NFL_SNAP_COUNTS);
 /** snake_case alias of {@link loadNflSnapCounts} (py/R parity). */
 export const load_nfl_snap_counts = loadNflSnapCounts;
 
-const LOAD_NFL_PBP_PARTICIPATION: ReleaseLoaderDef = {"fn":"load_nfl_pbp_participation","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp_participation/pbp_participation_{season}.parquet","minSeason":2016};
+const LOAD_NFL_PBP_PARTICIPATION: ReleaseLoaderDef = {"fn":"load_nfl_pbp_participation","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp_participation/pbp_participation_{season}.parquet","minSeason":2016,"onMissing":"raise"};
 
 /**
  * Load `pbp_participation` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/pbp_participation
  *
- * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2016.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflPbpParticipation({ seasons: 2024, columns: ['nflverse_game_id', 'play_id', 'offense_formation', 'defenders_in_box'] });
@@ -231,20 +241,21 @@ export const loadNflPbpParticipation = seasonLoader(LOAD_NFL_PBP_PARTICIPATION);
 /** snake_case alias of {@link loadNflPbpParticipation} (py/R parity). */
 export const load_nfl_pbp_participation = loadNflPbpParticipation;
 
-const LOAD_NFL_FTN_CHARTING: ReleaseLoaderDef = {"fn":"load_nfl_ftn_charting","url":"https://github.com/nflverse/nflverse-data/releases/download/ftn_charting/ftn_charting_{season}.parquet","minSeason":2022};
+const LOAD_NFL_FTN_CHARTING: ReleaseLoaderDef = {"fn":"load_nfl_ftn_charting","url":"https://github.com/nflverse/nflverse-data/releases/download/ftn_charting/ftn_charting_{season}.parquet","minSeason":2022,"onMissing":"raise"};
 
 /**
  * Load `ftn_charting` (nflverse data releases).
  *
  * Source: https://github.com/nflverse/nflverse-data/releases/tag/ftn_charting
  *
- * @param opts.seasons - a season or a list of seasons (>= 2022); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2022); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2022.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflFtnCharting({ seasons: 2024 });
@@ -253,7 +264,7 @@ export const loadNflFtnCharting = seasonLoader(LOAD_NFL_FTN_CHARTING);
 /** snake_case alias of {@link loadNflFtnCharting} (py/R parity). */
 export const load_nfl_ftn_charting = loadNflFtnCharting;
 
-const LOAD_NFL_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_players","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_players/usage_players_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_players","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_players/usage_players_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_players` (sportsdataverse-data releases).
@@ -262,13 +273,14 @@ const LOAD_NFL_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_players",
  *
  * Note: 2005 has no asset: ESPN's 2005 NFL feed carries no play text, so no usage rows exist for it. position_group is null before 2014, when the feed starts carrying participant positions. A season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePlayers({ seasons: 2024 });
@@ -277,7 +289,7 @@ export const loadNflUsagePlayers = seasonLoader(LOAD_NFL_USAGE_PLAYERS);
 /** snake_case alias of {@link loadNflUsagePlayers} (py/R parity). */
 export const load_nfl_usage_players = loadNflUsagePlayers;
 
-const LOAD_NFL_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_usage_position_groups","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_position_groups/usage_position_groups_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_usage_position_groups","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_position_groups/usage_position_groups_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_position_groups` (sportsdataverse-data releases).
@@ -286,13 +298,14 @@ const LOAD_NFL_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_usage_p
  *
  * Note: Built from ESPN play participants, which the NFL feed carries from 2014; earlier seasons have no asset (NoDataError).
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePositionGroups({ seasons: 2024 });
@@ -301,7 +314,7 @@ export const loadNflUsagePositionGroups = seasonLoader(LOAD_NFL_USAGE_POSITION_G
 /** snake_case alias of {@link loadNflUsagePositionGroups} (py/R parity). */
 export const load_nfl_usage_position_groups = loadNflUsagePositionGroups;
 
-const LOAD_NFL_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_tackles","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_tackles/usage_tackles_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_tackles","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_tackles/usage_tackles_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_tackles` (sportsdataverse-data releases).
@@ -310,13 +323,14 @@ const LOAD_NFL_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_tackles",
  *
  * Note: Built from ESPN play participants (tackler / assist ids), which the NFL feed carries from 2014; earlier seasons have no asset (NoDataError).
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageTackles({ seasons: 2024 });
@@ -325,7 +339,7 @@ export const loadNflUsageTackles = seasonLoader(LOAD_NFL_USAGE_TACKLES);
 /** snake_case alias of {@link loadNflUsageTackles} (py/R parity). */
 export const load_nfl_usage_tackles = loadNflUsageTackles;
 
-const LOAD_NFL_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_position_group_tackles","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_position_group_tackles/usage_position_group_tackles_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_position_group_tackles","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_position_group_tackles/usage_position_group_tackles_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_position_group_tackles` (sportsdataverse-data releases).
@@ -334,13 +348,14 @@ const LOAD_NFL_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_
  *
  * Note: Built from ESPN play participants, which the NFL feed carries from 2014; earlier seasons have no asset (NoDataError).
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePositionGroupTackles({ seasons: 2024 });
@@ -349,7 +364,7 @@ export const loadNflUsagePositionGroupTackles = seasonLoader(LOAD_NFL_USAGE_POSI
 /** snake_case alias of {@link loadNflUsagePositionGroupTackles} (py/R parity). */
 export const load_nfl_usage_position_group_tackles = loadNflUsagePositionGroupTackles;
 
-const LOAD_NFL_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_nfl_usage_teams","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_teams/usage_teams_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_nfl_usage_teams","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_teams/usage_teams_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_teams` (sportsdataverse-data releases).
@@ -358,13 +373,14 @@ const LOAD_NFL_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_nfl_usage_teams","url
  *
  * Note: Published 2002-2026 (2005 is built from ESPN's play-text-less 2005 feed, so it is thin). A season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageTeams({ seasons: 2024 });
@@ -373,7 +389,7 @@ export const loadNflUsageTeams = seasonLoader(LOAD_NFL_USAGE_TEAMS);
 /** snake_case alias of {@link loadNflUsageTeams} (py/R parity). */
 export const load_nfl_usage_teams = loadNflUsageTeams;
 
-const LOAD_NFL_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_nfl_usage_drive_scripting","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_drive_scripting/usage_drive_scripting_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_nfl_usage_drive_scripting","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_drive_scripting/usage_drive_scripting_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_drive_scripting` (sportsdataverse-data releases).
@@ -382,13 +398,14 @@ const LOAD_NFL_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_nfl_usage_d
  *
  * Note: Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageDriveScripting({ seasons: 2024 });
@@ -397,7 +414,7 @@ export const loadNflUsageDriveScripting = seasonLoader(LOAD_NFL_USAGE_DRIVE_SCRI
 /** snake_case alias of {@link loadNflUsageDriveScripting} (py/R parity). */
 export const load_nfl_usage_drive_scripting = loadNflUsageDriveScripting;
 
-const LOAD_NFL_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_kickers","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_kickers/usage_st_kickers_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_kickers","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_kickers/usage_st_kickers_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_st_kickers` (sportsdataverse-data releases).
@@ -406,13 +423,14 @@ const LOAD_NFL_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_kic
  *
  * Note: No asset for 2005-2007 (2005 has no play text upstream); a season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStKickers({ seasons: 2024 });
@@ -421,7 +439,7 @@ export const loadNflUsageStKickers = seasonLoader(LOAD_NFL_USAGE_ST_KICKERS);
 /** snake_case alias of {@link loadNflUsageStKickers} (py/R parity). */
 export const load_nfl_usage_st_kickers = loadNflUsageStKickers;
 
-const LOAD_NFL_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_punters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_punters/usage_st_punters_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_punters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_punters/usage_st_punters_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_st_punters` (sportsdataverse-data releases).
@@ -430,13 +448,14 @@ const LOAD_NFL_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_pun
  *
  * Note: No asset for 2005-2007 (2005 has no play text upstream); a season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStPunters({ seasons: 2024 });
@@ -445,7 +464,7 @@ export const loadNflUsageStPunters = seasonLoader(LOAD_NFL_USAGE_ST_PUNTERS);
 /** snake_case alias of {@link loadNflUsageStPunters} (py/R parity). */
 export const load_nfl_usage_st_punters = loadNflUsageStPunters;
 
-const LOAD_NFL_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_returners","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_returners/usage_st_returners_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_returners","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_returners/usage_st_returners_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_st_returners` (sportsdataverse-data releases).
@@ -454,13 +473,14 @@ const LOAD_NFL_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_r
  *
  * Note: No asset for 2005-2007 (2005 has no play text upstream); a season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStReturners({ seasons: 2024 });
@@ -469,7 +489,7 @@ export const loadNflUsageStReturners = seasonLoader(LOAD_NFL_USAGE_ST_RETURNERS)
 /** snake_case alias of {@link loadNflUsageStReturners} (py/R parity). */
 export const load_nfl_usage_st_returners = loadNflUsageStReturners;
 
-const LOAD_NFL_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_blocks","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_blocks/usage_st_blocks_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_blocks","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_blocks/usage_st_blocks_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_st_blocks` (sportsdataverse-data releases).
@@ -478,13 +498,14 @@ const LOAD_NFL_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_bloc
  *
  * Note: Published from 2007 (no block participants earlier); a season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStBlocks({ seasons: 2024 });
@@ -493,7 +514,7 @@ export const loadNflUsageStBlocks = seasonLoader(LOAD_NFL_USAGE_ST_BLOCKS);
 /** snake_case alias of {@link loadNflUsageStBlocks} (py/R parity). */
 export const load_nfl_usage_st_blocks = loadNflUsageStBlocks;
 
-const LOAD_NFL_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_team","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_team/usage_st_team_{season}.parquet","minSeason":2002};
+const LOAD_NFL_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_team","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_usage_st_team/usage_st_team_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_usage_st_team` (sportsdataverse-data releases).
@@ -502,13 +523,14 @@ const LOAD_NFL_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_team",
  *
  * Note: Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStTeam({ seasons: 2024 });
@@ -517,7 +539,7 @@ export const loadNflUsageStTeam = seasonLoader(LOAD_NFL_USAGE_ST_TEAM);
 /** snake_case alias of {@link loadNflUsageStTeam} (py/R parity). */
 export const load_nfl_usage_st_team = loadNflUsageStTeam;
 
-const LOAD_NFL_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_team_tendencies","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_team_tendencies/team_tendencies_{season}.parquet","minSeason":2002};
+const LOAD_NFL_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_team_tendencies","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_team_tendencies/team_tendencies_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_team_tendencies` (sportsdataverse-data releases).
@@ -526,13 +548,14 @@ const LOAD_NFL_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_team_tendenci
  *
  * Note: Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflTeamTendencies({ seasons: 2024 });
@@ -541,7 +564,7 @@ export const loadNflTeamTendencies = seasonLoader(LOAD_NFL_TEAM_TENDENCIES);
 /** snake_case alias of {@link loadNflTeamTendencies} (py/R parity). */
 export const load_nfl_team_tendencies = loadNflTeamTendencies;
 
-const LOAD_NFL_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_coach_tendencies","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_coach_tendencies/coach_tendencies_{season}.parquet","minSeason":2002};
+const LOAD_NFL_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_coach_tendencies","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nfl_coach_tendencies/coach_tendencies_{season}.parquet","minSeason":2002,"onMissing":"raise"};
 
 /**
  * Load `espn_nfl_coach_tendencies` (sportsdataverse-data releases).
@@ -550,13 +573,14 @@ const LOAD_NFL_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_coach_tenden
  *
  * Note: One row per (season, team, head coach). The coach comes from the nflverse schedule (home_coach / away_coach) per game, so a midseason change splits the season between both coaches; role is always "HC". Published 2002-2026 (2005 is thin). A season with no asset raises NoDataError.
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflCoachTendencies({ seasons: 2024 });
@@ -657,7 +681,7 @@ export const loadNflGroupAliases = assetLoader(LOAD_NFL_GROUP_ALIASES);
 /** snake_case alias of {@link loadNflGroupAliases} (py/R parity). */
 export const load_nfl_group_aliases = loadNflGroupAliases;
 
-const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group_seasons","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_groups/nfl_team_group_seasons_{season}.parquet","minSeason":1970};
+const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group_seasons","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_groups/nfl_team_group_seasons_{season}.parquet","minSeason":1970,"onMissing":"raise"};
 
 /**
  * Load `nfl_groups` (sportsdataverse-data releases).
@@ -666,13 +690,14 @@ const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group
  *
  * Note: One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id; team_id_source names the id space. season is the STARTING year (2025 = the 2025-26 season); seasons 1970-2026.
  *
- * @param opts.seasons - a season or a list of seasons (>= 1970); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1970); one with no published asset throws `NoDataError` (sdv-py parity).
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1970.
+ * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflTeamGroupSeasons({ seasons: 2024 });

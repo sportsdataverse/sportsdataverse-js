@@ -15,6 +15,19 @@ const E = Object.fromEntries(WRAPPERS.map((w) => [w.short, w]));
 // Flat wrappers keyed by `${api}:${short}` (a flat `short` isn't unique across families).
 const F = Object.fromEntries(FLAT_WRAPPERS.map((w) => [`${w.api}:${w.short}`, w]));
 
+describe('flat endpoint fixed_params (sdv-py spec.Endpoint.fixed_params)', () => {
+  // No vendored flat family uses it at this pin; a synthetic def pins the contract.
+  const def = {
+    short: 'x', flat: true, api: 'mlb', host: 'https://statsapi.mlb.com', scope: 'universal', path: '/api/v1/x',
+    pathParams: [], queryParams: [{ name: 'season', queryKey: 'season' }], fixedParams: { format: 'json' },
+  };
+  it('is sent first, a caller param of the same name overrides it, package == playground', () => {
+    pkgResolveFlat(def, { season: 2024 }).query.should.eql({ format: 'json', season: 2024 });
+    pkgResolveFlat(def, { format: 'csv' }).query.should.eql({ format: 'csv' });
+    resolveFlat(def, { season: 2024 }, FLAT_HOSTS).query.should.eql({ format: 'json', season: 2024 });
+  });
+});
+
 describe('playground resolve.mjs matches the package resolver', () => {
   const cases = [
     ['nba', 'scoreboard', {}],
@@ -23,6 +36,9 @@ describe('playground resolve.mjs matches the package resolver', () => {
     ['nfl', 'team_schedule', { teamId: 12, season: 2024 }],
     ['soccer', 'scoreboard', { league: 'eng.1' }],
     ['cfb', 'rankings', {}],
+    // CDN: league-slug path, fixed xhr=1 before the caller's params
+    ['nba', 'cdn_schedule', { date: '20250115' }],
+    ['cfb', 'cdn_rankings', { season: 2024, week: 5 }],
   ];
   for (const [prefix, short, params] of cases) {
     it(`${prefix}.${short} resolves to an identical URL`, () => {
@@ -68,6 +84,12 @@ describe('playground proxy (run.mjs) validation + allowlist', () => {
   it('rejects an out-of-scope endpoint with 400 (nba + rankings)', async () => {
     const res = mockRes();
     await handler({ method: 'POST', body: { league: 'nba', endpoint: 'rankings', params: {} } }, res);
+    res.statusCode.should.equal(400);
+  });
+
+  it('rejects a league outside the endpoint includePrefixes with 400 (nba + cdn_rankings)', async () => {
+    const res = mockRes();
+    await handler({ method: 'POST', body: { league: 'nba', endpoint: 'cdn_rankings', params: {} } }, res);
     res.statusCode.should.equal(400);
   });
 

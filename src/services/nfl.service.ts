@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnNflCdnBoxscore, espnNflCdnPlaybyplay, espnNflCdnSchedule } from '../generated/espn/nfl.js';
+import { cdnDate, warnFootballDate } from './_cdn.js';
 /**
  * Operations for NFL.
  *
@@ -22,16 +24,8 @@ export default {
      * const result = await sdv.nfl.getPlayByPlay(401220403);
      */
     getPlayByPlay: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/nfl/playbyplay';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: 'false',
-            userab: 18
-        };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_nfl_cdn_playbyplay (https; core request layer + error vocabulary)
+        const res = { data: await espnNflCdnPlaybyplay({ game_id: id }) };
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
             id: res.data.gameId,
@@ -55,17 +49,8 @@ export default {
      * const result = await sdv.nfl.getBoxScore(401220403);
      */
     getBoxScore: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/nfl/boxscore';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_nfl_cdn_boxscore (https; core request layer + error vocabulary)
+        const res = { data: await espnNflCdnBoxscore({ game_id: id }) };
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
         return game;
@@ -148,24 +133,21 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {*} month - Month (MM)
      * @param {*} day - Day (DD)
+     * @param {number} week - Week number. The CDN schedule page is week-oriented and ignores a
+     * date, so pass `week` (with `year` = the season) to pick a week; without it the current
+     * week comes back (and a date warns once).
+     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3 (with `week`)
      * @returns json
      * @example
-     * const result = await sdv.nfl.getSchedule(
-     * year = 2019, month = 11, day = 17
-     * )
+     * const result = await sdv.nfl.getSchedule({ year: 2024, week: 5, seasontype: 2 })
      */
-    getSchedule: async function ({ year = null, month = null, day = null }) {
-        const baseUrl = `http://cdn.espn.com/core/nfl/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        const params: Record<string, any> = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+    getSchedule: async function ({ year = null, month = null, day = null, week = null, seasontype = 2 }) {
+        // The CDN ignores a date for football: select the week (espn_nfl_cdn_schedule).
+        if (week == null && cdnDate(year, month, day)) warnFootballDate("nfl");
+        const res = await espnNflCdnSchedule(
+            week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
+        );
+        return res.content.schedule;
     },
 
 
@@ -185,17 +167,9 @@ export default {
      */
     getWeeklySchedule: async function ({ week = 1, year = null, seasonType = 2 }) {
         if(!year) year = new Date().getFullYear();
-       const baseUrl = `http://cdn.espn.com/core/nfl/schedule/_/week/${week}/year/${year}/seasontype/${seasonType}`;
-            const params: Record<string, any> = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+        // via espn_nfl_cdn_schedule (https; core request layer + error vocabulary)
+        const res = await espnNflCdnSchedule({ week, season: year, season_type: seasonType });
+        return res.content.schedule;
     },
     /**
      * Gets the NFL scoreboard data for a specified date if available.

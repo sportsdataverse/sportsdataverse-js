@@ -1216,12 +1216,98 @@ export function parse_summary(
 }
 
 // ===========================================================================
+// ESPN CDN (cdn.espn.com/core/{league}/{page}?xhr=1) page payloads
+// ===========================================================================
+//
+// Port of the CDN parsers in sdv-py's _common_espn_parsers.py (#681): the pages
+// embed payloads the parsers above already read (a Site v2 summary, scoreboard
+// events), and the rankings page is parsed into one row per poll entry.
+
+/** The `content` block of a CDN page payload, or `{}`. */
+function cdnContent(payload: any): any {
+  const content = isPlainObject(payload) ? payload.content : undefined;
+  return isPlainObject(content) ? content : {};
+}
+
+/**
+ * Parse a CDN `playbyplay` / `boxscore` page: its `gamepackageJSON` block is a
+ * Site v2 summary payload, so this is {@link parse_summary} run on that block
+ * (an object of every sub-frame, or the one `section`). A page without it yields
+ * empty sub-frames. The page's `__gamepackage__.playerHash` is not parsed.
+ */
+export function parse_cdn_game(
+  payload: any,
+  section?: string
+): Record<string, any>[] | Record<string, Record<string, any>[]> {
+  const gp = isPlainObject(payload) ? payload.gamepackageJSON : undefined;
+  return parse_summary(isPlainObject(gp) ? gp : {}, section);
+}
+
+/** Parse a CDN `scoreboard` page: its `content.sbData` block is a Site v2 scoreboard. */
+export function parse_cdn_scoreboard(payload: any): Record<string, any>[] {
+  const sb = cdnContent(payload).sbData;
+  return parse_scoreboard(isPlainObject(sb) ? sb : {});
+}
+
+/**
+ * Parse a CDN `schedule` page: `content.schedule` maps a `YYYYMMDD` key to that
+ * day's block, whose `games` are scoreboard events; every day's games become one
+ * frame of {@link parse_scoreboard} rows.
+ */
+export function parse_cdn_schedule(payload: any): Record<string, any>[] {
+  const sch = cdnContent(payload).schedule;
+  const days: any[] = isPlainObject(sch) ? Object.values(sch) : [];
+  const games = days
+    .filter(isPlainObject)
+    .flatMap((day) => (Array.isArray(day.games) ? day.games : []))
+    .filter(isPlainObject);
+  return parse_scoreboard({ events: games });
+}
+
+const CDN_RANKINGS_LEAD = ["poll_id", "poll_name", "poll_short_name", "ranked", "team_id"];
+
+/**
+ * Parse a CDN `rankings` page into one row per (poll, team): each poll's `ranks`
+ * (`ranked: true`) and `others` (teams receiving votes, `ranked: false`).
+ * `team_id` is a string, like every other ESPN team id these parsers emit, read
+ * from the team page URL (null on vote-receiving rows and unlinked teams). Rows
+ * are rectangular: a column an entry lacks is `null`.
+ */
+export function parse_cdn_rankings(payload: any): Record<string, any>[] {
+  const data = cdnContent(payload).data;
+  const polls = isPlainObject(data) ? data.rankings : undefined;
+  const rows: Record<string, any>[] = [];
+  for (const poll of Array.isArray(polls) ? polls : []) {
+    if (!isPlainObject(poll)) continue;
+    const head = { poll_id: poll.id, poll_name: poll.name, poll_short_name: poll.short_name };
+    for (const [ranked, key] of [[true, "ranks"], [false, "others"]] as const) {
+      for (const entry of Array.isArray(poll[key]) ? poll[key] : []) {
+        if (isPlainObject(entry)) rows.push({ ...head, ranked, ...entry });
+      }
+    }
+  }
+  if (!rows.length) return [];
+  const cols = [...new Set(rows.flatMap((r) => Object.keys(r)))];
+  const rest = cols.map(pyUnderscore).filter((c) => !CDN_RANKINGS_LEAD.includes(c));
+  return rows.map((r) => {
+    const snaked: Record<string, any> = {};
+    for (const c of cols) snaked[pyUnderscore(c)] = r[c] ?? null;
+    const url = snaked.team_url;
+    const m = typeof url === "string" ? /\/id\/(\d+)/.exec(url) : null;
+    const out: Record<string, any> = {};
+    for (const c of CDN_RANKINGS_LEAD) out[c] = c === "team_id" ? (m ? m[1] : null) : snaked[c] ?? null;
+    for (const c of rest) out[c] = snaked[c];
+    return out;
+  });
+}
+
+// ===========================================================================
 // Endpoint -> parser registry
 // ===========================================================================
 //
 // Maps the *short name* used in the ESPN cross-league wrapper tables to the
 // parser that turns its raw payload into tidy rows. Mirrors the Python
-// `ENDPOINT_PARSERS` registry verbatim (121 entries). Most short names map to
+// `ENDPOINT_PARSERS` registry verbatim. Most short names map to
 // `parse_items` (Core v2 paginated lists) or `parse_single_entity` (Core v2
 // single-resource payloads); the rich Site v2 surfaces get dedicated parsers,
 // and `summary` is the multi-section dispatcher.
@@ -1373,7 +1459,25 @@ export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summa
   event_predictor: parse_single_entity,
   event_powerindex: parse_single_entity,
   event_official_detail: parse_single_entity,
+  // ---- ESPN CDN page payloads (cdn.espn.com/core) ----
+  cdn_playbyplay: parse_cdn_game,
+  cdn_boxscore: parse_cdn_game,
+  cdn_schedule: parse_cdn_schedule,
+  cdn_scoreboard: parse_cdn_scoreboard,
+  cdn_rankings: parse_cdn_rankings,
 };
+
+/** The parsers that run the summary dispatcher (an object of sub-frames, or one `section`). */
+const SUMMARY_DISPATCHERS = new Set<unknown>([parse_summary, parse_cdn_game]);
+
+/**
+ * Endpoint shorts whose parser is (or runs) the summary dispatcher: they take
+ * `section`. Derived from the registry; tools/codegen/endpoints/espn_parser_map.yaml
+ * `dispatchers` (the codegen's copy) is drift-tested against it.
+ */
+export const SECTIONED_ENDPOINTS: ReadonlySet<string> = new Set(
+  Object.keys(ESPN_ENDPOINT_PARSERS).filter((k) => SUMMARY_DISPATCHERS.has(ESPN_ENDPOINT_PARSERS[k]))
+);
 
 /**
  * Return the registered parser for an endpoint short name, or `undefined`.

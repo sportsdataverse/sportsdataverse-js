@@ -10,6 +10,7 @@ import type { WrapperDef, WrapperFn } from "../../core/types.js";
 
 const EVENT_DATA_DEF: WrapperDef = {
   "short": "event_data",
+  "publicName": "fox_api_event_data",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -50,14 +51,15 @@ const EVENT_DATA_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxEventData({ sport: '…', event_id: '…' });
+ * @example await sdv.fox.foxApiEventData({ sport: '…', event_id: '…' });
  */
-export const foxEventData: WrapperFn = (params = {}) => callFlat(EVENT_DATA_DEF, params);
-/** snake_case alias of {@link foxEventData} (py/R parity). */
-export const fox_event_data = foxEventData;
+export const foxApiEventData: WrapperFn = (params = {}) => callFlat(EVENT_DATA_DEF, params);
+/** snake_case alias of {@link foxApiEventData} (py/R parity). */
+export const fox_api_event_data = foxApiEventData;
 
 const EVENT_MATCHUP_DEF: WrapperDef = {
   "short": "event_matchup",
+  "publicName": "fox_api_event_matchup",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -98,14 +100,15 @@ const EVENT_MATCHUP_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxEventMatchup({ sport: '…', event_id: '…' });
+ * @example await sdv.fox.foxApiEventMatchup({ sport: '…', event_id: '…' });
  */
-export const foxEventMatchup: WrapperFn = (params = {}) => callFlat(EVENT_MATCHUP_DEF, params);
-/** snake_case alias of {@link foxEventMatchup} (py/R parity). */
-export const fox_event_matchup = foxEventMatchup;
+export const foxApiEventMatchup: WrapperFn = (params = {}) => callFlat(EVENT_MATCHUP_DEF, params);
+/** snake_case alias of {@link foxApiEventMatchup} (py/R parity). */
+export const fox_api_event_matchup = foxApiEventMatchup;
 
 const EVENT_ODDS_DEF: WrapperDef = {
   "short": "event_odds",
+  "publicName": "fox_api_event_odds",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -146,14 +149,15 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxEventOdds({ sport: '…', event_id: '…' });
+ * @example await sdv.fox.foxApiEventOdds({ sport: '…', event_id: '…' });
  */
-export const foxEventOdds: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_DEF, params);
-/** snake_case alias of {@link foxEventOdds} (py/R parity). */
-export const fox_event_odds = foxEventOdds;
+export const foxApiEventOdds: WrapperFn = (params = {}) => callFlat(EVENT_ODDS_DEF, params);
+/** snake_case alias of {@link foxApiEventOdds} (py/R parity). */
+export const fox_api_event_odds = foxApiEventOdds;
 
 const EVENT_RECAP_DEF: WrapperDef = {
   "short": "event_recap",
+  "publicName": "fox_api_event_recap",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -194,14 +198,15 @@ const EVENT_RECAP_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxEventRecap({ sport: '…', event_id: '…' });
+ * @example await sdv.fox.foxApiEventRecap({ sport: '…', event_id: '…' });
  */
-export const foxEventRecap: WrapperFn = (params = {}) => callFlat(EVENT_RECAP_DEF, params);
-/** snake_case alias of {@link foxEventRecap} (py/R parity). */
-export const fox_event_recap = foxEventRecap;
+export const foxApiEventRecap: WrapperFn = (params = {}) => callFlat(EVENT_RECAP_DEF, params);
+/** snake_case alias of {@link foxApiEventRecap} (py/R parity). */
+export const fox_api_event_recap = foxApiEventRecap;
 
 const EVENT_STANDINGS_DEF: WrapperDef = {
   "short": "event_standings",
+  "publicName": "fox_api_event_standings",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -242,14 +247,15 @@ const EVENT_STANDINGS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxEventStandings({ sport: '…', event_id: '…' });
+ * @example await sdv.fox.foxApiEventStandings({ sport: '…', event_id: '…' });
  */
-export const foxEventStandings: WrapperFn = (params = {}) => callFlat(EVENT_STANDINGS_DEF, params);
-/** snake_case alias of {@link foxEventStandings} (py/R parity). */
-export const fox_event_standings = foxEventStandings;
+export const foxApiEventStandings: WrapperFn = (params = {}) => callFlat(EVENT_STANDINGS_DEF, params);
+/** snake_case alias of {@link foxApiEventStandings} (py/R parity). */
+export const fox_api_event_standings = foxApiEventStandings;
 
 const EXPLORE_BROWSE_DEF: WrapperDef = {
   "short": "explore_browse",
+  "publicName": "fox_api_explore_browse",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -286,11 +292,11 @@ const EXPLORE_BROWSE_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxExploreBrowse({ section: '…' });
+ * @example await sdv.fox.foxApiExploreBrowse({ section: '…' });
  */
-export const foxExploreBrowse: WrapperFn = (params = {}) => callFlat(EXPLORE_BROWSE_DEF, params);
-/** snake_case alias of {@link foxExploreBrowse} (py/R parity). */
-export const fox_explore_browse = foxExploreBrowse;
+export const foxApiExploreBrowse: WrapperFn = (params = {}) => callFlat(EXPLORE_BROWSE_DEF, params);
+/** snake_case alias of {@link foxApiExploreBrowse} (py/R parity). */
+export const fox_api_explore_browse = foxApiExploreBrowse;
 
 const EXPLORE_FAVORITE_DEF: WrapperDef = {
   "short": "explore_favorite",
@@ -317,7 +323,8 @@ const EXPLORE_FAVORITE_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_fox_list",
-  "returnsSchema": "native/fox/explore_favorite"
+  "returnsSchema": "native/fox/explore_favorite",
+  "deprecated": "Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse()."
 };
 
 /**
@@ -331,13 +338,18 @@ const EXPLORE_FAVORITE_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxExploreFavorite({ section: '…' });
+ * @deprecated Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse().
  */
 export const foxExploreFavorite: WrapperFn = (params = {}) => callFlat(EXPLORE_FAVORITE_DEF, params);
-/** snake_case alias of {@link foxExploreFavorite} (py/R parity). */
+/**
+ * snake_case alias of {@link foxExploreFavorite} (py/R parity).
+ * @deprecated Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse().
+ */
 export const fox_explore_favorite = foxExploreFavorite;
 
 const EXPLORE_ODDS_DEF: WrapperDef = {
   "short": "explore_odds",
+  "publicName": "fox_api_explore_odds",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -369,14 +381,15 @@ const EXPLORE_ODDS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxExploreOdds({});
+ * @example await sdv.fox.foxApiExploreOdds({});
  */
-export const foxExploreOdds: WrapperFn = (params = {}) => callFlat(EXPLORE_ODDS_DEF, params);
-/** snake_case alias of {@link foxExploreOdds} (py/R parity). */
-export const fox_explore_odds = foxExploreOdds;
+export const foxApiExploreOdds: WrapperFn = (params = {}) => callFlat(EXPLORE_ODDS_DEF, params);
+/** snake_case alias of {@link foxApiExploreOdds} (py/R parity). */
+export const fox_api_explore_odds = foxApiExploreOdds;
 
 const FOXPOLLS_DEF: WrapperDef = {
   "short": "foxpolls",
+  "publicName": "fox_api_foxpolls",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -396,7 +409,8 @@ const FOXPOLLS_DEF: WrapperDef = {
     {
       "name": "include_answers",
       "queryKey": "includeAnswers",
-      "default": true
+      "default": true,
+      "transform": "bool_str"
     }
   ],
   "parser": "parse_fox_list",
@@ -413,11 +427,11 @@ const FOXPOLLS_DEF: WrapperDef = {
  * @param params.include_answers - query parameter (`includeAnswers`) — default `true`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxFoxpolls({});
+ * @example await sdv.fox.foxApiFoxpolls({});
  */
-export const foxFoxpolls: WrapperFn = (params = {}) => callFlat(FOXPOLLS_DEF, params);
-/** snake_case alias of {@link foxFoxpolls} (py/R parity). */
-export const fox_foxpolls = foxFoxpolls;
+export const foxApiFoxpolls: WrapperFn = (params = {}) => callFlat(FOXPOLLS_DEF, params);
+/** snake_case alias of {@link foxApiFoxpolls} (py/R parity). */
+export const fox_api_foxpolls = foxApiFoxpolls;
 
 const FS_FEED_DEF: WrapperDef = {
   "short": "fs_feed",
@@ -440,7 +454,8 @@ const FS_FEED_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_fox_list",
-  "returnsSchema": "native/fox/fs_feed"
+  "returnsSchema": "native/fox/fs_feed",
+  "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
 };
 
 /**
@@ -453,9 +468,13 @@ const FS_FEED_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsFeed({});
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsFeed: WrapperFn = (params = {}) => callFlat(FS_FEED_DEF, params);
-/** snake_case alias of {@link foxFsFeed} (py/R parity). */
+/**
+ * snake_case alias of {@link foxFsFeed} (py/R parity).
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
+ */
 export const fox_fs_feed = foxFsFeed;
 
 const FS_IMAGES_DEF: WrapperDef = {
@@ -479,7 +498,8 @@ const FS_IMAGES_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_fox_list",
-  "returnsSchema": "native/fox/fs_images"
+  "returnsSchema": "native/fox/fs_images",
+  "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
 };
 
 /**
@@ -492,9 +512,13 @@ const FS_IMAGES_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsImages({});
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsImages: WrapperFn = (params = {}) => callFlat(FS_IMAGES_DEF, params);
-/** snake_case alias of {@link foxFsImages} (py/R parity). */
+/**
+ * snake_case alias of {@link foxFsImages} (py/R parity).
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
+ */
 export const fox_fs_images = foxFsImages;
 
 const FS_LAYOUTS_DEF: WrapperDef = {
@@ -518,7 +542,8 @@ const FS_LAYOUTS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_fox_list",
-  "returnsSchema": "native/fox/fs_layouts"
+  "returnsSchema": "native/fox/fs_layouts",
+  "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
 };
 
 /**
@@ -531,9 +556,13 @@ const FS_LAYOUTS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsLayouts({});
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsLayouts: WrapperFn = (params = {}) => callFlat(FS_LAYOUTS_DEF, params);
-/** snake_case alias of {@link foxFsLayouts} (py/R parity). */
+/**
+ * snake_case alias of {@link foxFsLayouts} (py/R parity).
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
+ */
 export const fox_fs_layouts = foxFsLayouts;
 
 const FS_VIDEOS_DEF: WrapperDef = {
@@ -557,7 +586,8 @@ const FS_VIDEOS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_fox_list",
-  "returnsSchema": "native/fox/fs_videos"
+  "returnsSchema": "native/fox/fs_videos",
+  "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
 };
 
 /**
@@ -570,13 +600,18 @@ const FS_VIDEOS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.fox.foxFsVideos({});
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
  */
 export const foxFsVideos: WrapperFn = (params = {}) => callFlat(FS_VIDEOS_DEF, params);
-/** snake_case alias of {@link foxFsVideos} (py/R parity). */
+/**
+ * snake_case alias of {@link foxFsVideos} (py/R parity).
+ * @deprecated Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml).
+ */
 export const fox_fs_videos = foxFsVideos;
 
 const LEAGUE_CONFERENCES_DEF: WrapperDef = {
   "short": "league_conferences",
+  "publicName": "fox_api_league_conferences",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -613,14 +648,15 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueConferences({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueConferences({ sport: '…' });
  */
-export const foxLeagueConferences: WrapperFn = (params = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
-/** snake_case alias of {@link foxLeagueConferences} (py/R parity). */
-export const fox_league_conferences = foxLeagueConferences;
+export const foxApiLeagueConferences: WrapperFn = (params = {}) => callFlat(LEAGUE_CONFERENCES_DEF, params);
+/** snake_case alias of {@link foxApiLeagueConferences} (py/R parity). */
+export const fox_api_league_conferences = foxApiLeagueConferences;
 
 const LEAGUE_HEADER_DEF: WrapperDef = {
   "short": "league_header",
+  "publicName": "fox_api_league_header",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -657,14 +693,15 @@ const LEAGUE_HEADER_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueHeader({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueHeader({ sport: '…' });
  */
-export const foxLeagueHeader: WrapperFn = (params = {}) => callFlat(LEAGUE_HEADER_DEF, params);
-/** snake_case alias of {@link foxLeagueHeader} (py/R parity). */
-export const fox_league_header = foxLeagueHeader;
+export const foxApiLeagueHeader: WrapperFn = (params = {}) => callFlat(LEAGUE_HEADER_DEF, params);
+/** snake_case alias of {@link foxApiLeagueHeader} (py/R parity). */
+export const fox_api_league_header = foxApiLeagueHeader;
 
 const LEAGUE_ODDS_DEF: WrapperDef = {
   "short": "league_odds",
+  "publicName": "fox_api_league_odds",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -706,14 +743,15 @@ const LEAGUE_ODDS_DEF: WrapperDef = {
  * @param params.group_id - query parameter (`groupId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueOdds({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueOdds({ sport: '…' });
  */
-export const foxLeagueOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_ODDS_DEF, params);
-/** snake_case alias of {@link foxLeagueOdds} (py/R parity). */
-export const fox_league_odds = foxLeagueOdds;
+export const foxApiLeagueOdds: WrapperFn = (params = {}) => callFlat(LEAGUE_ODDS_DEF, params);
+/** snake_case alias of {@link foxApiLeagueOdds} (py/R parity). */
+export const fox_api_league_odds = foxApiLeagueOdds;
 
 const LEAGUE_PLAYERNEWS_DEF: WrapperDef = {
   "short": "league_playernews",
+  "publicName": "fox_api_league_playernews",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -750,14 +788,15 @@ const LEAGUE_PLAYERNEWS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeaguePlayernews({ sport: '…' });
+ * @example await sdv.fox.foxApiLeaguePlayernews({ sport: '…' });
  */
-export const foxLeaguePlayernews: WrapperFn = (params = {}) => callFlat(LEAGUE_PLAYERNEWS_DEF, params);
-/** snake_case alias of {@link foxLeaguePlayernews} (py/R parity). */
-export const fox_league_playernews = foxLeaguePlayernews;
+export const foxApiLeaguePlayernews: WrapperFn = (params = {}) => callFlat(LEAGUE_PLAYERNEWS_DEF, params);
+/** snake_case alias of {@link foxApiLeaguePlayernews} (py/R parity). */
+export const fox_api_league_playernews = foxApiLeaguePlayernews;
 
 const LEAGUE_POLLS_DEF: WrapperDef = {
   "short": "league_polls",
+  "publicName": "fox_api_league_polls",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -794,14 +833,15 @@ const LEAGUE_POLLS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeaguePolls({ sport: '…' });
+ * @example await sdv.fox.foxApiLeaguePolls({ sport: '…' });
  */
-export const foxLeaguePolls: WrapperFn = (params = {}) => callFlat(LEAGUE_POLLS_DEF, params);
-/** snake_case alias of {@link foxLeaguePolls} (py/R parity). */
-export const fox_league_polls = foxLeaguePolls;
+export const foxApiLeaguePolls: WrapperFn = (params = {}) => callFlat(LEAGUE_POLLS_DEF, params);
+/** snake_case alias of {@link foxApiLeaguePolls} (py/R parity). */
+export const fox_api_league_polls = foxApiLeaguePolls;
 
 const LEAGUE_SCHEDULE_DEF: WrapperDef = {
   "short": "league_schedule",
+  "publicName": "fox_api_league_schedule",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -838,14 +878,15 @@ const LEAGUE_SCHEDULE_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueSchedule({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueSchedule({ sport: '…' });
  */
-export const foxLeagueSchedule: WrapperFn = (params = {}) => callFlat(LEAGUE_SCHEDULE_DEF, params);
-/** snake_case alias of {@link foxLeagueSchedule} (py/R parity). */
-export const fox_league_schedule = foxLeagueSchedule;
+export const foxApiLeagueSchedule: WrapperFn = (params = {}) => callFlat(LEAGUE_SCHEDULE_DEF, params);
+/** snake_case alias of {@link foxApiLeagueSchedule} (py/R parity). */
+export const fox_api_league_schedule = foxApiLeagueSchedule;
 
 const LEAGUE_SCORES_DEF: WrapperDef = {
   "short": "league_scores",
+  "publicName": "fox_api_league_scores",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -882,14 +923,15 @@ const LEAGUE_SCORES_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueScores({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueScores({ sport: '…' });
  */
-export const foxLeagueScores: WrapperFn = (params = {}) => callFlat(LEAGUE_SCORES_DEF, params);
-/** snake_case alias of {@link foxLeagueScores} (py/R parity). */
-export const fox_league_scores = foxLeagueScores;
+export const foxApiLeagueScores: WrapperFn = (params = {}) => callFlat(LEAGUE_SCORES_DEF, params);
+/** snake_case alias of {@link foxApiLeagueScores} (py/R parity). */
+export const fox_api_league_scores = foxApiLeagueScores;
 
 const LEAGUE_SCORES_SEGMENT_DEF: WrapperDef = {
   "short": "league_scores_segment",
+  "publicName": "fox_api_league_scores_segment",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -935,14 +977,15 @@ const LEAGUE_SCORES_SEGMENT_DEF: WrapperDef = {
  * @param params.group_id - query parameter (`groupId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueScoresSegment({ sport: '…', segment_id: '…' });
+ * @example await sdv.fox.foxApiLeagueScoresSegment({ sport: '…', segment_id: '…' });
  */
-export const foxLeagueScoresSegment: WrapperFn = (params = {}) => callFlat(LEAGUE_SCORES_SEGMENT_DEF, params);
-/** snake_case alias of {@link foxLeagueScoresSegment} (py/R parity). */
-export const fox_league_scores_segment = foxLeagueScoresSegment;
+export const foxApiLeagueScoresSegment: WrapperFn = (params = {}) => callFlat(LEAGUE_SCORES_SEGMENT_DEF, params);
+/** snake_case alias of {@link foxApiLeagueScoresSegment} (py/R parity). */
+export const fox_api_league_scores_segment = foxApiLeagueScoresSegment;
 
 const LEAGUE_STANDINGS_DEF: WrapperDef = {
   "short": "league_standings",
+  "publicName": "fox_api_league_standings",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -979,14 +1022,15 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueStandings({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueStandings({ sport: '…' });
  */
-export const foxLeagueStandings: WrapperFn = (params = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
-/** snake_case alias of {@link foxLeagueStandings} (py/R parity). */
-export const fox_league_standings = foxLeagueStandings;
+export const foxApiLeagueStandings: WrapperFn = (params = {}) => callFlat(LEAGUE_STANDINGS_DEF, params);
+/** snake_case alias of {@link foxApiLeagueStandings} (py/R parity). */
+export const fox_api_league_standings = foxApiLeagueStandings;
 
 const LEAGUE_STATS_DEF: WrapperDef = {
   "short": "league_stats",
+  "publicName": "fox_api_league_stats",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1023,14 +1067,15 @@ const LEAGUE_STATS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueStats({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueStats({ sport: '…' });
  */
-export const foxLeagueStats: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_DEF, params);
-/** snake_case alias of {@link foxLeagueStats} (py/R parity). */
-export const fox_league_stats = foxLeagueStats;
+export const foxApiLeagueStats: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_DEF, params);
+/** snake_case alias of {@link foxApiLeagueStats} (py/R parity). */
+export const fox_api_league_stats = foxApiLeagueStats;
 
 const LEAGUE_STATS_CON_DEF: WrapperDef = {
   "short": "league_stats_con",
+  "publicName": "fox_api_league_stats_con",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1084,14 +1129,15 @@ const LEAGUE_STATS_CON_DEF: WrapperDef = {
  * @param params.group_id - query parameter (`groupId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueStatsCon({ sport: '…', who: '…', category: '…', page: '…' });
+ * @example await sdv.fox.foxApiLeagueStatsCon({ sport: '…', who: '…', category: '…', page: '…' });
  */
-export const foxLeagueStatsCon: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_CON_DEF, params);
-/** snake_case alias of {@link foxLeagueStatsCon} (py/R parity). */
-export const fox_league_stats_con = foxLeagueStatsCon;
+export const foxApiLeagueStatsCon: WrapperFn = (params = {}) => callFlat(LEAGUE_STATS_CON_DEF, params);
+/** snake_case alias of {@link foxApiLeagueStatsCon} (py/R parity). */
+export const fox_api_league_stats_con = foxApiLeagueStatsCon;
 
 const LEAGUE_TEAMNAV_DEF: WrapperDef = {
   "short": "league_teamnav",
+  "publicName": "fox_api_league_teamnav",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1128,14 +1174,15 @@ const LEAGUE_TEAMNAV_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxLeagueTeamnav({ sport: '…' });
+ * @example await sdv.fox.foxApiLeagueTeamnav({ sport: '…' });
  */
-export const foxLeagueTeamnav: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAMNAV_DEF, params);
-/** snake_case alias of {@link foxLeagueTeamnav} (py/R parity). */
-export const fox_league_teamnav = foxLeagueTeamnav;
+export const foxApiLeagueTeamnav: WrapperFn = (params = {}) => callFlat(LEAGUE_TEAMNAV_DEF, params);
+/** snake_case alias of {@link foxApiLeagueTeamnav} (py/R parity). */
+export const fox_api_league_teamnav = foxApiLeagueTeamnav;
 
 const SCOREBOARD_DEF: WrapperDef = {
   "short": "scoreboard",
+  "publicName": "fox_api_scoreboard",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1177,14 +1224,15 @@ const SCOREBOARD_DEF: WrapperDef = {
  * @param params.group_id - query parameter (`groupId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxScoreboard({ sport: '…' });
+ * @example await sdv.fox.foxApiScoreboard({ sport: '…' });
  */
-export const foxScoreboard: WrapperFn = (params = {}) => callFlat(SCOREBOARD_DEF, params);
-/** snake_case alias of {@link foxScoreboard} (py/R parity). */
-export const fox_scoreboard = foxScoreboard;
+export const foxApiScoreboard: WrapperFn = (params = {}) => callFlat(SCOREBOARD_DEF, params);
+/** snake_case alias of {@link foxApiScoreboard} (py/R parity). */
+export const fox_api_scoreboard = foxApiScoreboard;
 
 const SCORECHIP_DEF: WrapperDef = {
   "short": "scorechip",
+  "publicName": "fox_api_scorechip",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1203,11 +1251,6 @@ const SCORECHIP_DEF: WrapperDef = {
       "name": "apikey",
       "queryKey": "apikey",
       "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
-    },
-    {
-      "name": "api_version",
-      "queryKey": "api-version",
-      "default": "1.1"
     }
   ],
   "parser": "parse_fox_list",
@@ -1222,17 +1265,17 @@ const SCORECHIP_DEF: WrapperDef = {
  * @param params.sport - path parameter.
  * @param params.chip_id - path parameter.
  * @param params.apikey - query parameter — default `jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq`.
- * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxScorechip({ sport: '…', chip_id: '…' });
+ * @example await sdv.fox.foxApiScorechip({ sport: '…', chip_id: '…' });
  */
-export const foxScorechip: WrapperFn = (params = {}) => callFlat(SCORECHIP_DEF, params);
-/** snake_case alias of {@link foxScorechip} (py/R parity). */
-export const fox_scorechip = foxScorechip;
+export const foxApiScorechip: WrapperFn = (params = {}) => callFlat(SCORECHIP_DEF, params);
+/** snake_case alias of {@link foxApiScorechip} (py/R parity). */
+export const fox_api_scorechip = foxApiScorechip;
 
 const SEARCH_CONTENT_DEF: WrapperDef = {
   "short": "search_content",
+  "publicName": "fox_api_search_content",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1269,14 +1312,15 @@ const SEARCH_CONTENT_DEF: WrapperDef = {
  * @param params.text - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxSearchContent({});
+ * @example await sdv.fox.foxApiSearchContent({});
  */
-export const foxSearchContent: WrapperFn = (params = {}) => callFlat(SEARCH_CONTENT_DEF, params);
-/** snake_case alias of {@link foxSearchContent} (py/R parity). */
-export const fox_search_content = foxSearchContent;
+export const foxApiSearchContent: WrapperFn = (params = {}) => callFlat(SEARCH_CONTENT_DEF, params);
+/** snake_case alias of {@link foxApiSearchContent} (py/R parity). */
+export const fox_api_search_content = foxApiSearchContent;
 
 const SEARCH_ENTITIES_DEF: WrapperDef = {
   "short": "search_entities",
+  "publicName": "fox_api_search_entities",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1313,14 +1357,15 @@ const SEARCH_ENTITIES_DEF: WrapperDef = {
  * @param params.text - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxSearchEntities({});
+ * @example await sdv.fox.foxApiSearchEntities({});
  */
-export const foxSearchEntities: WrapperFn = (params = {}) => callFlat(SEARCH_ENTITIES_DEF, params);
-/** snake_case alias of {@link foxSearchEntities} (py/R parity). */
-export const fox_search_entities = foxSearchEntities;
+export const foxApiSearchEntities: WrapperFn = (params = {}) => callFlat(SEARCH_ENTITIES_DEF, params);
+/** snake_case alias of {@link foxApiSearchEntities} (py/R parity). */
+export const fox_api_search_entities = foxApiSearchEntities;
 
 const SEARCH_POPULAR_DEF: WrapperDef = {
   "short": "search_popular",
+  "publicName": "fox_api_search_popular",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1352,14 +1397,15 @@ const SEARCH_POPULAR_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxSearchPopular({});
+ * @example await sdv.fox.foxApiSearchPopular({});
  */
-export const foxSearchPopular: WrapperFn = (params = {}) => callFlat(SEARCH_POPULAR_DEF, params);
-/** snake_case alias of {@link foxSearchPopular} (py/R parity). */
-export const fox_search_popular = foxSearchPopular;
+export const foxApiSearchPopular: WrapperFn = (params = {}) => callFlat(SEARCH_POPULAR_DEF, params);
+/** snake_case alias of {@link foxApiSearchPopular} (py/R parity). */
+export const fox_api_search_popular = foxApiSearchPopular;
 
 const TEAM_GAMELOG_DEF: WrapperDef = {
   "short": "team_gamelog",
+  "publicName": "fox_api_team_gamelog",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1400,14 +1446,15 @@ const TEAM_GAMELOG_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamGamelog({ sport: '…', team_id: '…' });
+ * @example await sdv.fox.foxApiTeamGamelog({ sport: '…', team_id: '…' });
  */
-export const foxTeamGamelog: WrapperFn = (params = {}) => callFlat(TEAM_GAMELOG_DEF, params);
-/** snake_case alias of {@link foxTeamGamelog} (py/R parity). */
-export const fox_team_gamelog = foxTeamGamelog;
+export const foxApiTeamGamelog: WrapperFn = (params = {}) => callFlat(TEAM_GAMELOG_DEF, params);
+/** snake_case alias of {@link foxApiTeamGamelog} (py/R parity). */
+export const fox_api_team_gamelog = foxApiTeamGamelog;
 
 const TEAM_HEADER_DEF: WrapperDef = {
   "short": "team_header",
+  "publicName": "fox_api_team_header",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1448,14 +1495,15 @@ const TEAM_HEADER_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamHeader({ sport: '…', team_id: '…' });
+ * @example await sdv.fox.foxApiTeamHeader({ sport: '…', team_id: '…' });
  */
-export const foxTeamHeader: WrapperFn = (params = {}) => callFlat(TEAM_HEADER_DEF, params);
-/** snake_case alias of {@link foxTeamHeader} (py/R parity). */
-export const fox_team_header = foxTeamHeader;
+export const foxApiTeamHeader: WrapperFn = (params = {}) => callFlat(TEAM_HEADER_DEF, params);
+/** snake_case alias of {@link foxApiTeamHeader} (py/R parity). */
+export const fox_api_team_header = foxApiTeamHeader;
 
 const TEAM_ROSTER_DEF: WrapperDef = {
   "short": "team_roster",
+  "publicName": "fox_api_team_roster",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1496,14 +1544,15 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamRoster({ sport: '…', team_id: '…' });
+ * @example await sdv.fox.foxApiTeamRoster({ sport: '…', team_id: '…' });
  */
-export const foxTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
-/** snake_case alias of {@link foxTeamRoster} (py/R parity). */
-export const fox_team_roster = foxTeamRoster;
+export const foxApiTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
+/** snake_case alias of {@link foxApiTeamRoster} (py/R parity). */
+export const fox_api_team_roster = foxApiTeamRoster;
 
 const TEAM_STANDINGS_DEF: WrapperDef = {
   "short": "team_standings",
+  "publicName": "fox_api_team_standings",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1544,14 +1593,15 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamStandings({ sport: '…', team_id: '…' });
+ * @example await sdv.fox.foxApiTeamStandings({ sport: '…', team_id: '…' });
  */
-export const foxTeamStandings: WrapperFn = (params = {}) => callFlat(TEAM_STANDINGS_DEF, params);
-/** snake_case alias of {@link foxTeamStandings} (py/R parity). */
-export const fox_team_standings = foxTeamStandings;
+export const foxApiTeamStandings: WrapperFn = (params = {}) => callFlat(TEAM_STANDINGS_DEF, params);
+/** snake_case alias of {@link foxApiTeamStandings} (py/R parity). */
+export const fox_api_team_standings = foxApiTeamStandings;
 
 const TEAM_STATS_DEF: WrapperDef = {
   "short": "team_stats",
+  "publicName": "fox_api_team_stats",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1592,14 +1642,15 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTeamStats({ sport: '…', team_id: '…' });
+ * @example await sdv.fox.foxApiTeamStats({ sport: '…', team_id: '…' });
  */
-export const foxTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
-/** snake_case alias of {@link foxTeamStats} (py/R parity). */
-export const fox_team_stats = foxTeamStats;
+export const foxApiTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
+/** snake_case alias of {@link foxApiTeamStats} (py/R parity). */
+export const fox_api_team_stats = foxApiTeamStats;
 
 const TOPEVENTS_SCOREBOARD_SEGMENT_DEF: WrapperDef = {
   "short": "topevents_scoreboard_segment",
+  "publicName": "fox_api_topevents_scoreboard_segment",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1636,14 +1687,15 @@ const TOPEVENTS_SCOREBOARD_SEGMENT_DEF: WrapperDef = {
  * @param params.api_version - query parameter (`api-version`) — default `1.1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTopeventsScoreboardSegment({ segment: '…' });
+ * @example await sdv.fox.foxApiTopeventsScoreboardSegment({ segment: '…' });
  */
-export const foxTopeventsScoreboardSegment: WrapperFn = (params = {}) => callFlat(TOPEVENTS_SCOREBOARD_SEGMENT_DEF, params);
-/** snake_case alias of {@link foxTopeventsScoreboardSegment} (py/R parity). */
-export const fox_topevents_scoreboard_segment = foxTopeventsScoreboardSegment;
+export const foxApiTopeventsScoreboardSegment: WrapperFn = (params = {}) => callFlat(TOPEVENTS_SCOREBOARD_SEGMENT_DEF, params);
+/** snake_case alias of {@link foxApiTopeventsScoreboardSegment} (py/R parity). */
+export const fox_api_topevents_scoreboard_segment = foxApiTopeventsScoreboardSegment;
 
 const TRENDING_ARTICLES_DEF: WrapperDef = {
   "short": "trending_articles",
+  "publicName": "fox_api_trending_articles",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1686,14 +1738,15 @@ const TRENDING_ARTICLES_DEF: WrapperDef = {
  * @param params.tags - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTrendingArticles({});
+ * @example await sdv.fox.foxApiTrendingArticles({});
  */
-export const foxTrendingArticles: WrapperFn = (params = {}) => callFlat(TRENDING_ARTICLES_DEF, params);
-/** snake_case alias of {@link foxTrendingArticles} (py/R parity). */
-export const fox_trending_articles = foxTrendingArticles;
+export const foxApiTrendingArticles: WrapperFn = (params = {}) => callFlat(TRENDING_ARTICLES_DEF, params);
+/** snake_case alias of {@link foxApiTrendingArticles} (py/R parity). */
+export const fox_api_trending_articles = foxApiTrendingArticles;
 
 const TRENDING_VIDEOS_DEF: WrapperDef = {
   "short": "trending_videos",
+  "publicName": "fox_api_trending_videos",
   "flat": true,
   "api": "fox",
   "host": "https://api.foxsports.com",
@@ -1737,8 +1790,8 @@ const TRENDING_VIDEOS_DEF: WrapperDef = {
  * @param params.max_items - query parameter (`maxItems`) — default `12`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.fox.foxTrendingVideos({});
+ * @example await sdv.fox.foxApiTrendingVideos({});
  */
-export const foxTrendingVideos: WrapperFn = (params = {}) => callFlat(TRENDING_VIDEOS_DEF, params);
-/** snake_case alias of {@link foxTrendingVideos} (py/R parity). */
-export const fox_trending_videos = foxTrendingVideos;
+export const foxApiTrendingVideos: WrapperFn = (params = {}) => callFlat(TRENDING_VIDEOS_DEF, params);
+/** snake_case alias of {@link foxApiTrendingVideos} (py/R parity). */
+export const fox_api_trending_videos = foxApiTrendingVideos;

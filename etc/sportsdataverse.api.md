@@ -72,7 +72,7 @@ export function createImpersonatingTransport(opts?: {
 export const DEFAULT_RETRY_STATUSES: readonly number[];
 
 // @public
-export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2" | "fitt_v3";
+export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2" | "fitt_v3" | "cdn";
 
 // @public
 export interface FamilyDefaults {
@@ -484,8 +484,10 @@ export interface WrapperDef {
     auth?: boolean;
     deprecated?: string;
     family?: EspnFamily;
+    fixedParams?: Record<string, string | number | boolean>;
     flat?: boolean;
     host?: string;
+    includePrefixes?: string[];
     legacyShort?: string;
     nowToggle?: string;
     nowVariant?: string;

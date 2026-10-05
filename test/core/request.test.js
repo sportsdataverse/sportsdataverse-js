@@ -165,9 +165,9 @@ describe('core/request: retry + classification', () => {
   });
 
   it('a 403 that recovers within the cap returns the data', async () => {
-    const t = fakeTransport({ status: 403 }, { status: 403 }, { status: 200, data: 'ok' });
+    const t = fakeTransport({ status: 403 }, { status: 403 }, { status: 200, data: { ok: true } });
     configure({ transport: t });
-    (await request('core_v2', GET())).should.equal('ok');
+    (await request('core_v2', GET())).should.eql({ ok: true });
     t.calls.length.should.equal(3);
   });
 
@@ -226,10 +226,31 @@ describe('core/request: retry + classification', () => {
   it('ESPN families: a 200 body { code: 404 } -> NoDataError; other families pass it through', async () => {
     const body = { code: 404, message: 'Failed to get events endpoint.' };
     configure({ transport: fakeTransport({ status: 200, data: body }) });
-    for (const family of ['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3']) {
+    for (const family of ['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3', 'cdn']) {
       await request(family, GET()).should.be.rejectedWith(NoDataError);
     }
     (await request('mlb', GET())).should.eql(body);
+  });
+
+  it('ESPN families: a 2xx non-JSON body (HTML challenge, empty) -> AssetFetchError, not retried; [] / {} are data', async () => {
+    for (const r of [
+      { status: 202, data: '<html>challenge</html>' },
+      { status: 200, data: '' },
+      { status: 200, data: null },
+    ]) {
+      const t = fakeTransport(r);
+      configure({ transport: t });
+      for (const family of ['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3', 'cdn']) {
+        const err = await request(family, GET()).then(() => null, (e) => e);
+        err.should.be.instanceOf(AssetFetchError);
+        err.status.should.equal(r.status);
+      }
+      t.calls.length.should.equal(6); // one call per family: a challenge is not retried
+    }
+    configure({ transport: fakeTransport({ status: 200, data: [] }) });
+    (await request('cdn', GET())).should.eql([]);
+    configure({ transport: fakeTransport({ status: 200, data: 'text,csv' }) });
+    (await request('mlb_statcast', GET())).should.equal('text,csv'); // non-ESPN families pass text through
   });
 
   it('network errors are retried, then wrapped in AssetFetchError with the cause', async () => {
@@ -333,7 +354,7 @@ describe('core/config: per-family transport selection', () => {
   it('default User-Agent carries no +http token (ESPN site API 403s on one)', async () => {
     getConfig().userAgent.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
     getConfig().userAgent.should.not.containEql('+http');
-    const t = fakeTransport({ status: 200 });
+    const t = fakeTransport({ status: 200, data: {} });
     configure({ transport: t });
     await request('site_v2', GET());
     t.calls[0].headers['User-Agent'].should.not.containEql('+http');

@@ -1,11 +1,13 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
 # tools/codegen/endpoints/wnba_stats.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/wnba_stats.yaml; shared changes land in sdv-py first.
 
 api: wnba_stats
 endpoints:
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``GPLeaders``, ``PTSLeaders``, ``ASTLeaders``, ``STLLeaders``, ``OREBLeaders``, ``DREBLeaders``, ``REBLeaders``, ``BLKLeaders``, ``FGMLeaders``, ``FGALeaders``, ``FG_PCTLeaders``, ``TOVLeaders``, ``FG3MLeaders``, ``FG3ALeaders``, ``FG3_PCTLeaders``, ``PFLeaders``, ``FTMLeaders``, ``FTALeaders``, ``FT_PCTLeaders``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -26,6 +28,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/alltimeleadersgrids
+  returns_schema: native/wnba_stats/alltimeleadersgrids
   short: alltimeleadersgrids
   summary: GET /stats/alltimeleadersgrids
 - example_args:
@@ -53,6 +56,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/assistleaders
+  returns_schema: native/wnba_stats/assistleaders
   short: assistleaders
   summary: GET /stats/assistleaders
 - example_args:
@@ -172,9 +176,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/assisttracker
+  returns_schema: native/wnba_stats/assisttracker
   short: assisttracker
   summary: GET /stats/assisttracker
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -202,9 +209,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoreadvancedv2
+  returns_schema: native/wnba_stats/boxscoreadvancedv2
   short: boxscoreadvancedv2
   summary: GET /stats/boxscoreadvancedv2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -232,9 +242,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoreadvancedv3
+  returns_schema: native/wnba_stats/boxscoreadvancedv3
   short: boxscoreadvancedv3
   summary: GET /stats/boxscoreadvancedv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '1022200034'
     name: game_id
@@ -242,9 +255,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoredefensivev2
+  returns_schema: native/wnba_stats/boxscoredefensivev2
   short: boxscoredefensivev2
   summary: GET /stats/boxscoredefensivev2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``sqlPlayersFourFactors``, ``sqlTeamsFourFactors``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -272,9 +288,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscorefourfactorsv2
+  returns_schema: native/wnba_stats/boxscorefourfactorsv2
   short: boxscorefourfactorsv2
   summary: GET /stats/boxscorefourfactorsv2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -302,9 +321,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscorefourfactorsv3
+  returns_schema: native/wnba_stats/boxscorefourfactorsv3
   short: boxscorefourfactorsv3
   summary: GET /stats/boxscorefourfactorsv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '0022200021'
     name: game_id
@@ -312,9 +334,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscorehustlev2
+  returns_schema: native/wnba_stats/boxscorehustlev2
   short: boxscorehustlev2
   summary: GET /stats/boxscorehustlev2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '1022200034'
     name: game_id
@@ -322,9 +347,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscorematchupsv3
+  returns_schema: native/wnba_stats/boxscorematchupsv3
   short: boxscorematchupsv3
   summary: GET /stats/boxscorematchupsv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``sqlPlayersMisc``, ``sqlTeamsMisc``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -352,9 +380,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoremiscv2
+  returns_schema: native/wnba_stats/boxscoremiscv2
   short: boxscoremiscv2
   summary: GET /stats/boxscoremiscv2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -382,9 +413,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoremiscv3
+  returns_schema: native/wnba_stats/boxscoremiscv3
   short: boxscoremiscv3
   summary: GET /stats/boxscoremiscv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '1022200034'
     name: game_id
@@ -392,9 +426,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoreplayertrackv3
+  returns_schema: native/wnba_stats/boxscoreplayertrackv3
   short: boxscoreplayertrackv3
   summary: GET /stats/boxscoreplayertrackv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``sqlPlayersScoring``, ``sqlTeamsScoring``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -422,9 +459,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscorescoringv2
+  returns_schema: native/wnba_stats/boxscorescoringv2
   short: boxscorescoringv2
   summary: GET /stats/boxscorescoringv2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -452,9 +492,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscorescoringv3
+  returns_schema: native/wnba_stats/boxscorescoringv3
   short: boxscorescoringv3
   summary: GET /stats/boxscorescoringv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``GameSummary``, ``OtherStats``, ``Officials``, ``InactivePlayers``, ``GameInfo``, ``LineScore``, ``LastMeeting``, ``SeasonSeries``, ``AvailableVideo``)
+  example_args: {}
   extra_params:
   - default: '1022200034'
     name: game_id
@@ -462,9 +505,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoresummaryv2
+  returns_schema: native/wnba_stats/boxscoresummaryv2
   short: boxscoresummaryv2
   summary: GET /stats/boxscoresummaryv2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``, ``Officials``)
+  example_args: {}
   extra_params:
   - default: '1022200034'
     name: game_id
@@ -472,9 +518,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoresummaryv3
+  returns_schema: native/wnba_stats/boxscoresummaryv3
   short: boxscoresummaryv3
   summary: GET /stats/boxscoresummaryv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``, ``TeamStarterBenchStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -502,9 +551,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoretraditionalv2
+  returns_schema: native/wnba_stats/boxscoretraditionalv2
   short: boxscoretraditionalv2
   summary: GET /stats/boxscoretraditionalv2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -532,9 +584,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoretraditionalv3
+  returns_schema: native/wnba_stats/boxscoretraditionalv3
   short: boxscoretraditionalv3
   summary: GET /stats/boxscoretraditionalv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``sqlPlayersUsage``, ``sqlTeamsUsage``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -562,9 +617,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoreusagev2
+  returns_schema: native/wnba_stats/boxscoreusagev2
   short: boxscoreusagev2
   summary: GET /stats/boxscoreusagev2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '14'
     name: end_period
@@ -592,6 +650,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoreusagev3
+  returns_schema: native/wnba_stats/boxscoreusagev3
   short: boxscoreusagev3
   summary: GET /stats/boxscoreusagev3
 - example_args:
@@ -611,9 +670,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonallplayers
+  returns_schema: native/wnba_stats/commonallplayers
   short: commonallplayers
   summary: GET /stats/commonallplayers
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``CommonPlayerInfo``, ``PlayerHeadlineStats``, ``AvailableSeasons``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -626,6 +688,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonplayerinfo
+  returns_schema: native/wnba_stats/commonplayerinfo
   short: commonplayerinfo
   summary: GET /stats/commonplayerinfo
 - example_args:
@@ -645,9 +708,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonplayoffseries
+  returns_schema: native/wnba_stats/commonplayoffseries
   short: commonplayoffseries
   summary: GET /stats/commonplayoffseries
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``CommonTeamRoster``, ``Coaches``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -664,6 +730,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonteamroster
+  returns_schema: native/wnba_stats/commonteamroster
   short: commonteamroster
   summary: GET /stats/commonteamroster
 - example_args:
@@ -675,9 +742,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonteamyears
+  returns_schema: native/wnba_stats/commonteamyears
   short: commonteamyears
   summary: GET /stats/commonteamyears
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``GameByGameStats``, ``TotalPlayerStats``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '1022200018'
@@ -702,6 +772,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/cumestatsplayer
+  returns_schema: native/wnba_stats/cumestatsplayer
   short: cumestatsplayer
   summary: GET /stats/cumestatsplayer
 - example_args:
@@ -745,9 +816,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/cumestatsplayergames
+  returns_schema: native/wnba_stats/cumestatsplayergames
   short: cumestatsplayergames
   summary: GET /stats/cumestatsplayergames
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``GameByGameStats``, ``TotalTeamStats``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '1022200018'
@@ -772,6 +846,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/cumestatsteam
+  returns_schema: native/wnba_stats/cumestatsteam
   short: cumestatsteam
   summary: GET /stats/cumestatsteam
 - example_args:
@@ -819,6 +894,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/cumestatsteamgames
+  returns_schema: native/wnba_stats/cumestatsteamgames
   short: cumestatsteamgames
   summary: GET /stats/cumestatsteamgames
 - example_args:
@@ -834,6 +910,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombinestats
+  returns_schema: native/wnba_stats/draftcombinestats
   short: draftcombinestats
   summary: GET /stats/draftcombinestats
 - docstring:
@@ -890,6 +967,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/drafthistory
+  returns_schema: native/wnba_stats/drafthistory
   short: drafthistory
   summary: GET /stats/drafthistory
 - example_args:
@@ -973,9 +1051,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/fantasywidget
+  returns_schema: native/wnba_stats/fantasywidget
   short: fantasywidget
   summary: GET /stats/fantasywidget
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``FranchiseHistory``, ``DefunctTeams``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -984,6 +1065,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/franchisehistory
+  returns_schema: native/wnba_stats/franchisehistory
   short: franchisehistory
   summary: GET /stats/franchisehistory
 - example_args:
@@ -999,6 +1081,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/franchiseleaders
+  returns_schema: native/wnba_stats/franchiseleaders
   short: franchiseleaders
   summary: GET /stats/franchiseleaders
 - example_args:
@@ -1022,6 +1105,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/franchiseleaderswrank
+  returns_schema: native/wnba_stats/franchiseleaderswrank
   short: franchiseleaderswrank
   summary: GET /stats/franchiseleaderswrank
 - example_args:
@@ -1045,9 +1129,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/franchiseplayers
+  returns_schema: native/wnba_stats/franchiseplayers
   short: franchiseplayers
   summary: GET /stats/franchiseplayers
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``AwayTeam``, ``HomeTeam``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '1022200034'
@@ -1060,9 +1147,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/gamerotation
+  returns_schema: native/wnba_stats/gamerotation
   short: gamerotation
   summary: GET /stats/gamerotation
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``HomePageLeaders``, ``LeagueAverage``, ``LeagueMax``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: Season
@@ -1095,9 +1185,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/homepageleaders
+  returns_schema: native/wnba_stats/homepageleaders
   short: homepageleaders
   summary: GET /stats/homepageleaders
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``HomePageStat1``, ``HomePageStat2``, ``HomePageStat3``, ``HomePageStat4``, ``HomePageStat5``, ``HomePageStat6``, ``HomePageStat7``, ``HomePageStat8``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: Season
@@ -1130,9 +1223,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/homepagev2
+  returns_schema: native/wnba_stats/homepagev2
   short: homepagev2
   summary: GET /stats/homepagev2
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``HustleStatsAvailable``, ``PlayerStats``, ``TeamStats``)
+  example_args: {}
   extra_params:
   - default: '0022200021'
     name: game_id
@@ -1140,6 +1236,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/hustlestatsboxscore
+  returns_schema: native/wnba_stats/hustlestatsboxscore
   short: hustlestatsboxscore
   summary: GET /stats/hustlestatsboxscore
 - example_args: {}
@@ -1150,9 +1247,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/infographicfanduelplayer
+  returns_schema: native/wnba_stats/infographicfanduelplayer
   short: infographicfanduelplayer
   summary: GET /stats/infographicfanduelplayer
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``LeadersTiles``, ``AllTimeSeasonHigh``, ``LastSeasonHigh``, ``LowSeasonHigh``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: Season
@@ -1185,6 +1285,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaderstiles
+  returns_schema: native/wnba_stats/leaderstiles
   short: leaderstiles
   summary: GET /stats/leaderstiles
 - example_args:
@@ -1296,6 +1397,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashlineups
+  returns_schema: native/wnba_stats/leaguedashlineups
   short: leaguedashlineups
   summary: GET /stats/leaguedashlineups
 - example_args:
@@ -1427,6 +1529,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayerbiostats
+  returns_schema: native/wnba_stats/leaguedashplayerbiostats
   short: leaguedashplayerbiostats
   summary: GET /stats/leaguedashplayerbiostats
 - example_args:
@@ -1586,6 +1689,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayerclutch
+  returns_schema: native/wnba_stats/leaguedashplayerclutch
   short: leaguedashplayerclutch
   summary: GET /stats/leaguedashplayerclutch
 - example_args:
@@ -1737,6 +1841,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayershotlocations
+  returns_schema: native/wnba_stats/leaguedashplayershotlocations
   short: leaguedashplayershotlocations
   summary: GET /stats/leaguedashplayershotlocations
 - example_args:
@@ -1888,6 +1993,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayerstats
+  returns_schema: native/wnba_stats/leaguedashplayerstats
   short: leaguedashplayerstats
   summary: GET /stats/leaguedashplayerstats
 - example_args:
@@ -2019,6 +2125,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashptdefend
+  returns_schema: native/wnba_stats/leaguedashptdefend
   short: leaguedashptdefend
   summary: GET /stats/leaguedashptdefend
 - example_args:
@@ -2154,6 +2261,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashteamclutch
+  returns_schema: native/wnba_stats/leaguedashteamclutch
   short: leaguedashteamclutch
   summary: GET /stats/leaguedashteamclutch
 - example_args:
@@ -2281,6 +2389,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashteamshotlocations
+  returns_schema: native/wnba_stats/leaguedashteamshotlocations
   short: leaguedashteamshotlocations
   summary: GET /stats/leaguedashteamshotlocations
 - example_args:
@@ -2408,6 +2517,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashteamstats
+  returns_schema: native/wnba_stats/leaguedashteamstats
   short: leaguedashteamstats
   summary: GET /stats/leaguedashteamstats
 - example_args:
@@ -2767,6 +2877,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguegamefinder
+  returns_schema: native/wnba_stats/leaguegamefinder
   short: leaguegamefinder
   summary: GET /stats/leaguegamefinder
 - example_args:
@@ -2810,6 +2921,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguegamelog
+  returns_schema: native/wnba_stats/leaguegamelog
   short: leaguegamelog
   summary: GET /stats/leaguegamelog
 - example_args:
@@ -2845,6 +2957,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leagueleaders
+  returns_schema: native/wnba_stats/leagueleaders
   short: leagueleaders
   summary: GET /stats/leagueleaders
 - example_args:
@@ -2960,6 +3073,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguelineupviz
+  returns_schema: native/wnba_stats/leaguelineupviz
   short: leaguelineupviz
   summary: GET /stats/leaguelineupviz
 - example_args:
@@ -3051,6 +3165,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leagueplayerondetails
+  returns_schema: native/wnba_stats/leagueplayerondetails
   short: leagueplayerondetails
   summary: GET /stats/leagueplayerondetails
 - example_args:
@@ -3090,6 +3205,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leagueseasonmatchups
+  returns_schema: native/wnba_stats/leagueseasonmatchups
   short: leagueseasonmatchups
   summary: GET /stats/leagueseasonmatchups
 - example_args:
@@ -3113,9 +3229,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguestandingsv3
+  returns_schema: native/wnba_stats/leaguestandingsv3
   short: leaguestandingsv3
   summary: GET /stats/leaguestandingsv3
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``PlayByPlay``, ``AvailableVideo``)
+  example_args: {}
   extra_params:
   - default: null
     name: end_period
@@ -3131,6 +3250,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playbyplayv2
+  returns_schema: native/wnba_stats/playbyplayv2
   short: playbyplayv2
   summary: GET /stats/playbyplayv2
 - example_args: {}
@@ -3149,6 +3269,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playbyplayv3
+  returns_schema: native/wnba_stats/playbyplayv3
   short: playbyplayv3
   summary: GET /stats/playbyplayv3
 - example_args: {}
@@ -3159,9 +3280,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerawards
+  returns_schema: native/wnba_stats/playerawards
   short: playerawards
   summary: GET /stats/playerawards
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``East``, ``South``, ``Midwest``, ``West``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -3182,9 +3306,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playercareerbycollegerollup
+  returns_schema: native/wnba_stats/playercareerbycollegerollup
   short: playercareerbycollegerollup
   summary: GET /stats/playercareerbycollegerollup
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``SeasonTotalsRegularSeason``, ``CareerTotalsRegularSeason``, ``SeasonTotalsPostSeason``, ``CareerTotalsPostSeason``, ``SeasonTotalsAllStarSeason``, ``CareerTotalsAllStarSeason``, ``SeasonTotalsCollegeSeason``, ``CareerTotalsCollegeSeason``, ``SeasonTotalsShowcaseSeason``, ``CareerTotalsShowcaseSeason``, ``SeasonRankingsRegularSeason``, ``SeasonRankingsPostSeason``, ``SeasonHighs``, ``CareerHighs``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -3201,9 +3328,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playercareerstats
+  returns_schema: native/wnba_stats/playercareerstats
   short: playercareerstats
   summary: GET /stats/playercareerstats
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallCompare``, ``Individual``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3308,9 +3438,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playercompare
+  returns_schema: native/wnba_stats/playercompare
   short: playercompare
   summary: GET /stats/playercompare
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Last5Min5PointPlayerDashboard``, ``Last3Min5PointPlayerDashboard``, ``Last1Min5PointPlayerDashboard``, ``Last30Sec3PointPlayerDashboard``, ``Last10Sec3PointPlayerDashboard``, ``Last5MinPlusMinus5PointPlayerDashboard``, ``Last3MinPlusMinus5PointPlayerDashboard``, ``Last1MinPlusMinus5PointPlayerDashboard``, ``Last30Sec3Point2PlayerDashboard``, ``Last10Sec3Point2PlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3407,9 +3540,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbyclutch
+  returns_schema: native/wnba_stats/playerdashboardbyclutch
   short: playerdashboardbyclutch
   summary: GET /stats/playerdashboardbyclutch
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ByHalfPlayerDashboard``, ``ByPeriodPlayerDashboard``, ``ByScoreMarginPlayerDashboard``, ``ByActualMarginPlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3506,9 +3642,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbygamesplits
+  returns_schema: native/wnba_stats/playerdashboardbygamesplits
   short: playerdashboardbygamesplits
   summary: GET /stats/playerdashboardbygamesplits
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``LocationPlayerDashboard``, ``WinsLossesPlayerDashboard``, ``MonthPlayerDashboard``, ``PrePostAllStarPlayerDashboard``, ``StartingPosition``, ``DaysRestPlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3605,9 +3744,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbygeneralsplits
+  returns_schema: native/wnba_stats/playerdashboardbygeneralsplits
   short: playerdashboardbygeneralsplits
   summary: GET /stats/playerdashboardbygeneralsplits
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Last5PlayerDashboard``, ``Last10PlayerDashboard``, ``Last15PlayerDashboard``, ``Last20PlayerDashboard``, ``GameNumberPlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3704,9 +3846,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbylastngames
+  returns_schema: native/wnba_stats/playerdashboardbylastngames
   short: playerdashboardbylastngames
   summary: GET /stats/playerdashboardbylastngames
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ConferencePlayerDashboard``, ``DivisionPlayerDashboard``, ``OpponentPlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3803,9 +3948,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbyopponent
+  returns_schema: native/wnba_stats/playerdashboardbyopponent
   short: playerdashboardbyopponent
   summary: GET /stats/playerdashboardbyopponent
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Shot5FTPlayerDashboard``, ``Shot8FTPlayerDashboard``, ``ShotAreaPlayerDashboard``, ``AssitedShotPlayerDashboard``, ``ShotTypeSummaryPlayerDashboard``, ``ShotTypePlayerDashboard``, ``AssistedBy``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -3902,9 +4050,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbyshootingsplits
+  returns_schema: native/wnba_stats/playerdashboardbyshootingsplits
   short: playerdashboardbyshootingsplits
   summary: GET /stats/playerdashboardbyshootingsplits
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ScoreDifferentialPlayerDashboard``, ``PointsScoredPlayerDashboard``, ``PontsAgainstPlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -4001,9 +4152,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbyteamperformance
+  returns_schema: native/wnba_stats/playerdashboardbyteamperformance
   short: playerdashboardbyteamperformance
   summary: GET /stats/playerdashboardbyteamperformance
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ByYearPlayerDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -4100,6 +4254,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashboardbyyearoveryear
+  returns_schema: native/wnba_stats/playerdashboardbyyearoveryear
   short: playerdashboardbyyearoveryear
   summary: GET /stats/playerdashboardbyyearoveryear
 - example_args:
@@ -4179,6 +4334,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerdashptshotdefend
+  returns_schema: native/wnba_stats/playerdashptshotdefend
   short: playerdashptshotdefend
   summary: GET /stats/playerdashptshotdefend
 - example_args:
@@ -4198,9 +4354,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerestimatedmetrics
+  returns_schema: native/wnba_stats/playerestimatedmetrics
   short: playerestimatedmetrics
   summary: GET /stats/playerestimatedmetrics
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``Location``, ``LastNGames``, ``DaysRestModified``, ``Opponent``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -4241,9 +4400,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerfantasyprofile
+  returns_schema: native/wnba_stats/playerfantasyprofile
   short: playerfantasyprofile
   summary: GET /stats/playerfantasyprofile
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``SeasonAvg``, ``LastFiveGamesAvg``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -4264,6 +4426,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerfantasyprofilebargraph
+  returns_schema: native/wnba_stats/playerfantasyprofilebargraph
   short: playerfantasyprofilebargraph
   summary: GET /stats/playerfantasyprofilebargraph
 - example_args:
@@ -4295,6 +4458,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playergamelog
+  returns_schema: native/wnba_stats/playergamelog
   short: playergamelog
   summary: GET /stats/playergamelog
 - example_args:
@@ -4386,6 +4550,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playergamelogs
+  returns_schema: native/wnba_stats/playergamelogs
   short: playergamelogs
   summary: GET /stats/playergamelogs
 - example_args:
@@ -4749,6 +4914,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playergamestreakfinder
+  returns_schema: native/wnba_stats/playergamestreakfinder
   short: playergamestreakfinder
   summary: GET /stats/playergamestreakfinder
 - example_args:
@@ -4808,6 +4974,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerindex
+  returns_schema: native/wnba_stats/playerindex
   short: playerindex
   summary: GET /stats/playerindex
 - example_args:
@@ -4835,9 +5002,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playernextngames
+  returns_schema: native/wnba_stats/playernextngames
   short: playernextngames
   summary: GET /stats/playernextngames
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``SeasonTotalsRegularSeason``, ``CareerTotalsRegularSeason``, ``SeasonTotalsPostSeason``, ``CareerTotalsPostSeason``, ``SeasonTotalsAllStarSeason``, ``CareerTotalsAllStarSeason``, ``SeasonTotalsCollegeSeason``, ``CareerTotalsCollegeSeason``, ``SeasonTotalsPreseason``, ``CareerTotalsPreseason``, ``SeasonRankingsRegularSeason``, ``SeasonRankingsPostSeason``, ``SeasonHighs``, ``CareerHighs``, ``NextGame``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -4854,9 +5024,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playerprofilev2
+  returns_schema: native/wnba_stats/playerprofilev2
   short: playerprofilev2
   summary: GET /stats/playerprofilev2
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``OnOffCourt``, ``ShotDistanceOverall``, ``ShotDistanceOnCourt``, ``ShotDistanceOffCourt``, ``ShotAreaOverall``, ``ShotAreaOnCourt``, ``ShotAreaOffCourt``, ``PlayerInfo``, ``VsPlayerInfo``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -4949,6 +5122,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playervsplayer
+  returns_schema: native/wnba_stats/playervsplayer
   short: playervsplayer
   summary: GET /stats/playervsplayer
 - example_args:
@@ -4964,6 +5138,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/scheduleleaguev2
+  returns_schema: native/wnba_stats/scheduleleaguev2
   short: scheduleleaguev2
   summary: GET /stats/scheduleleaguev2
 - example_args:
@@ -4979,9 +5154,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/scheduleleaguev2int
+  returns_schema: native/wnba_stats/scheduleleaguev2int
   short: scheduleleaguev2int
   summary: GET /stats/scheduleleaguev2int
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``GameHeader``, ``LineScore``, ``SeriesStandings``, ``LastMeeting``, ``EastConfStandingsByDay``, ``WestConfStandingsByDay``, ``Available``, ``TeamLeaders``, ``TicketLinks``, ``WinProbability``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '0'
@@ -4998,6 +5176,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/scoreboardv2
+  returns_schema: native/wnba_stats/scoreboardv2
   short: scoreboardv2
   summary: GET /stats/scoreboardv2
 - example_args:
@@ -5013,9 +5192,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/scoreboardv3
+  returns_schema: native/wnba_stats/scoreboardv3
   short: scoreboardv3
   summary: GET /stats/scoreboardv3
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``Shot_Chart_Detail``, ``LeagueAverages``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: null
@@ -5144,6 +5326,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/shotchartdetail
+  returns_schema: native/wnba_stats/shotchartdetail
   short: shotchartdetail
   summary: GET /stats/shotchartdetail
 - example_args:
@@ -5159,9 +5342,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/shotchartleaguewide
+  returns_schema: native/wnba_stats/shotchartleaguewide
   short: shotchartleaguewide
   summary: GET /stats/shotchartleaguewide
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``ShotChartLineupDetail``, ``ShotChartLineupLeagueAverage``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5246,9 +5432,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/shotchartlineupdetail
+  returns_schema: native/wnba_stats/shotchartlineupdetail
   short: shotchartlineupdetail
   summary: GET /stats/shotchartlineupdetail
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Last5Min5PointTeamDashboard``, ``Last3Min5PointTeamDashboard``, ``Last1Min5PointTeamDashboard``, ``Last30Sec3PointTeamDashboard``, ``Last10Sec3PointTeamDashboard``, ``Last5MinPlusMinus5PointTeamDashboard``, ``Last3MinPlusMinus5PointTeamDashboard``, ``Last1MinPlusMinus5PointTeamDashboard``, ``Last30Sec3Point2TeamDashboard``, ``Last10Sec3Point2TeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5345,9 +5534,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbyclutch
+  returns_schema: native/wnba_stats/teamdashboardbyclutch
   short: teamdashboardbyclutch
   summary: GET /stats/teamdashboardbyclutch
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ByHalfTeamDashboard``, ``ByPeriodTeamDashboard``, ``ByScoreMarginTeamDashboard``, ``ByActualMarginTeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5444,9 +5636,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbygamesplits
+  returns_schema: native/wnba_stats/teamdashboardbygamesplits
   short: teamdashboardbygamesplits
   summary: GET /stats/teamdashboardbygamesplits
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``LocationTeamDashboard``, ``WinsLossesTeamDashboard``, ``MonthTeamDashboard``, ``PrePostAllStarTeamDashboard``, ``DaysRestTeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5543,9 +5738,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbygeneralsplits
+  returns_schema: native/wnba_stats/teamdashboardbygeneralsplits
   short: teamdashboardbygeneralsplits
   summary: GET /stats/teamdashboardbygeneralsplits
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Last5TeamDashboard``, ``Last10TeamDashboard``, ``Last15TeamDashboard``, ``Last20TeamDashboard``, ``GameNumberTeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5642,9 +5840,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbylastngames
+  returns_schema: native/wnba_stats/teamdashboardbylastngames
   short: teamdashboardbylastngames
   summary: GET /stats/teamdashboardbylastngames
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ConferenceTeamDashboard``, ``DivisionTeamDashboard``, ``OpponentTeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5741,9 +5942,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbyopponent
+  returns_schema: native/wnba_stats/teamdashboardbyopponent
   short: teamdashboardbyopponent
   summary: GET /stats/teamdashboardbyopponent
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Shot5FTTeamDashboard``, ``Shot8FTTeamDashboard``, ``ShotAreaTeamDashboard``, ``AssitedShotTeamDashboard``, ``ShotTypeTeamDashboard``, ``AssistedBy``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5840,9 +6044,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbyshootingsplits
+  returns_schema: native/wnba_stats/teamdashboardbyshootingsplits
   short: teamdashboardbyshootingsplits
   summary: GET /stats/teamdashboardbyshootingsplits
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ScoreDifferentialTeamDashboard``, ``PointsScoredTeamDashboard``, ``PontsAgainstTeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -5939,9 +6146,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbyteamperformance
+  returns_schema: native/wnba_stats/teamdashboardbyteamperformance
   short: teamdashboardbyteamperformance
   summary: GET /stats/teamdashboardbyteamperformance
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ByYearTeamDashboard``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -6038,9 +6248,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashboardbyyearoveryear
+  returns_schema: native/wnba_stats/teamdashboardbyyearoveryear
   short: teamdashboardbyyearoveryear
   summary: GET /stats/teamdashboardbyyearoveryear
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``Lineups``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -6145,9 +6358,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdashlineups
+  returns_schema: native/wnba_stats/teamdashlineups
   short: teamdashlineups
   summary: GET /stats/teamdashlineups
-- example_args: {}
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``TeamBackground``, ``TeamHistory``, ``TeamSocialSites``, ``TeamAwardsChampionships``, ``TeamAwardsConf``, ``TeamAwardsDiv``, ``TeamHof``, ``TeamRetired``, ``TeamAwardsCommCup``)
+  example_args: {}
   extra_params:
   - default: '1611661328'
     name: team_id
@@ -6155,6 +6371,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamdetails
+  returns_schema: native/wnba_stats/teamdetails
   short: teamdetails
   summary: GET /stats/teamdetails
 - example_args:
@@ -6174,6 +6391,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamestimatedmetrics
+  returns_schema: native/wnba_stats/teamestimatedmetrics
   short: teamestimatedmetrics
   summary: GET /stats/teamestimatedmetrics
 - example_args:
@@ -6205,6 +6423,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamgamelog
+  returns_schema: native/wnba_stats/teamgamelog
   short: teamgamelog
   summary: GET /stats/teamgamelog
 - example_args:
@@ -6296,9 +6515,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamgamelogs
+  returns_schema: native/wnba_stats/teamgamelogs
   short: teamgamelogs
   summary: GET /stats/teamgamelogs
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``TeamInfoCommon``, ``TeamSeasonRanks``, ``AvailableSeasons``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: '10'
@@ -6319,9 +6541,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teaminfocommon
+  returns_schema: native/wnba_stats/teaminfocommon
   short: teaminfocommon
   summary: GET /stats/teaminfocommon
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``TeamOverall``, ``PlayersSeasonTotals``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -6418,9 +6643,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamplayerdashboard
+  returns_schema: native/wnba_stats/teamplayerdashboard
   short: teamplayerdashboard
   summary: GET /stats/teamplayerdashboard
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamPlayerOnOffDetails``, ``PlayersOnCourtTeamPlayerOnOffDetails``, ``PlayersOffCourtTeamPlayerOnOffDetails``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -6509,9 +6737,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamplayeronoffdetails
+  returns_schema: native/wnba_stats/teamplayeronoffdetails
   short: teamplayeronoffdetails
   summary: GET /stats/teamplayeronoffdetails
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamPlayerOnOffSummary``, ``PlayersOnCourtTeamPlayerOnOffSummary``, ``PlayersOffCourtTeamPlayerOnOffSummary``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -6600,9 +6831,12 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamplayeronoffsummary
+  returns_schema: native/wnba_stats/teamplayeronoffsummary
   short: teamplayeronoffsummary
   summary: GET /stats/teamplayeronoffsummary
-- example_args:
+- docstring:
+    parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``vsPlayerOverall``, ``OnOffCourt``, ``ShotDistanceOverall``, ``ShotDistanceOnCourt``, ``ShotDistanceOffCourt``, ``ShotAreaOverall``, ``ShotAreaOnCourt``, ``ShotAreaOffCourt``)
+  example_args:
     league_id: '10'
   extra_params:
   - default: ''
@@ -6699,6 +6933,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamvsplayer
+  returns_schema: native/wnba_stats/teamvsplayer
   short: teamvsplayer
   summary: GET /stats/teamvsplayer
 - example_args:
@@ -6722,6 +6957,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/teamyearbyyearstats
+  returns_schema: native/wnba_stats/teamyearbyyearstats
   short: teamyearbyyearstats
   summary: GET /stats/teamyearbyyearstats
 - example_args:
@@ -6737,6 +6973,7 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/videostatus
+  returns_schema: native/wnba_stats/videostatus
   short: videostatus
   summary: GET /stats/videostatus
 getter_module: sportsdataverse.wnba.wnba_stats_runtime

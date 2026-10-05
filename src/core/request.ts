@@ -12,7 +12,7 @@ import {
 } from "./transport.js";
 
 /** ESPN families whose 200 body `{ code: 404 }` means "no such resource". */
-const ESPN_FAMILIES = new Set(["site_v2", "site_v2_alt", "web_v3", "core_v2", "fitt_v3"]);
+const ESPN_FAMILIES = new Set(["site_v2", "site_v2_alt", "web_v3", "core_v2", "fitt_v3", "cdn"]);
 
 /** Ceiling on an honoured `Retry-After`, in seconds (same as sdv-py). */
 const MAX_RETRY_AFTER_SECONDS = 120;
@@ -122,11 +122,22 @@ export async function requestResponse(
       continue;
     }
     if (status >= 200 && status < 300) {
-      if (ESPN_FAMILIES.has(family) && isEspnCode404(res.data)) {
-        throw new NoDataError(`${family}: no data (ESPN code 404): ${req.url}`, {
-          ...where,
-          status,
-        });
+      if (ESPN_FAMILIES.has(family)) {
+        // ESPN's are JSON APIs: a 2xx whose body is not a JSON object / array (an
+        // HTML bot-challenge page, e.g. the CDN's HTTP 202 to some User-Agents, or
+        // an empty body) is a failed fetch, never an empty result.
+        if (typeof res.data !== "object" || res.data === null) {
+          throw new AssetFetchError(
+            `${family}: HTTP ${status} with a non-JSON body (a bot challenge or error page?): ${req.url}`,
+            { ...where, status }
+          );
+        }
+        if (isEspnCode404(res.data)) {
+          throw new NoDataError(`${family}: no data (ESPN code 404): ${req.url}`, {
+            ...where,
+            status,
+          });
+        }
       }
       return res;
     }

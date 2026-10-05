@@ -103,7 +103,7 @@ async function handleEspn(res, body) {
     res.status(400).json({ error: 'Unknown league or endpoint.' });
     return;
   }
-  if (!league.scopes.includes(def.scope)) {
+  if (!league.scopes.includes(def.scope) || (def.includePrefixes && !def.includePrefixes.includes(league.prefix))) {
     res
       .status(400)
       .json({ error: `Endpoint "${short}" is not available for league "${prefix}".` });

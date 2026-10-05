@@ -1,7 +1,9 @@
 # sdv-py real captures for the parser-parity harness
 
-Real API response bodies copied from sportsdataverse-py at the vendor pin
-`719de79edb685b89c524f8b4c0c146fea0b53855` (`tools/codegen/vendor.yaml` `source.ref`).
+Real API response bodies copied from sportsdataverse-py: the first batch at
+`719de79edb685b89c524f8b4c0c146fea0b53855`, the stats.nba.com / stats.wnba.com / On3
+batch (the captures sdv-py #683 derives those returns tables from, trimmed by its
+`tools/codegen/vendor_captures.py`) at `81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f`.
 No synthetic payloads: each file is the sdv-py capture byte for byte, and a
 `*.gz` file is that capture gzipped (`gzip -9 -n`; byte-identical after
 gunzip) to keep the repo small. Capture dates, request URLs and any trimming are
@@ -27,7 +29,11 @@ in the README of the sdv-py source directory named below.
   py types an all-null column `character`) must be typed `unknown`.
 - `test/parsers/parity.test.js` is the harness.
 
-Not vendored: captures whose parse is empty in both languages (nothing to verify),
+Not vendored: captures whose parse is empty in both languages (nothing to verify:
+`playbyplayv3` in both stats families; On3 `drafts`, `people_combine_measurements`,
+`people_person_connections`, `recruitment_recruitment_evaluations`, `recruitments_rpm_picks`),
+On3 `on3_player_rankings` / `on3_team_rankings` (they back sdv-py's deprecated shims, not
+a vendored endpoint),
 and `mlb_statcast/leaderboard_xstats.csv` (a hand-written one-row stub, not a capture).
 
 | file (under `py/`) | sdv-py source (`@719de79`) | |
@@ -202,3 +208,267 @@ and `mlb_statcast/leaderboard_xstats.csv` (a hand-written one-row stub, not a ca
 | `wnba_stats/cap_homepagev2_wnba.json` | `tests/nba/fixtures/cap_homepagev2_wnba.json` | |
 | `wnba_stats/cap_playbyplayv2_wnba.json.gz` | `tests/nba/fixtures/cap_playbyplayv2_wnba.json` | gzipped |
 | `wnba_stats/cap_playercareerbycollegerollup_wnba.json` | `tests/nba/fixtures/cap_playercareerbycollegerollup_wnba.json` | |
+
+At `@81eb7e7060` (one capture per endpoint; the file name is the endpoint short):
+
+| file (under `py/`) | sdv-py source (`@81eb7e7060`) | |
+|---|---|---|
+| `nba_stats/endpoints/alltimeleadersgrids.json` | `tests/fixtures/nba_stats/endpoints/alltimeleadersgrids.json` |  |
+| `nba_stats/endpoints/assistleaders.json` | `tests/fixtures/nba_stats/endpoints/assistleaders.json` |  |
+| `nba_stats/endpoints/assisttracker.json` | `tests/fixtures/nba_stats/endpoints/assisttracker.json` |  |
+| `nba_stats/endpoints/boxscoreadvancedv3.json` | `tests/fixtures/nba_stats/endpoints/boxscoreadvancedv3.json` |  |
+| `nba_stats/endpoints/boxscoredefensivev2.json` | `tests/fixtures/nba_stats/endpoints/boxscoredefensivev2.json` |  |
+| `nba_stats/endpoints/boxscorefourfactorsv3.json` | `tests/fixtures/nba_stats/endpoints/boxscorefourfactorsv3.json` |  |
+| `nba_stats/endpoints/boxscorehustlev2.json` | `tests/fixtures/nba_stats/endpoints/boxscorehustlev2.json` |  |
+| `nba_stats/endpoints/boxscorematchupsv3.json` | `tests/fixtures/nba_stats/endpoints/boxscorematchupsv3.json` |  |
+| `nba_stats/endpoints/boxscoremiscv3.json` | `tests/fixtures/nba_stats/endpoints/boxscoremiscv3.json` |  |
+| `nba_stats/endpoints/boxscoreplayertrackv3.json` | `tests/fixtures/nba_stats/endpoints/boxscoreplayertrackv3.json` |  |
+| `nba_stats/endpoints/boxscorescoringv3.json` | `tests/fixtures/nba_stats/endpoints/boxscorescoringv3.json` |  |
+| `nba_stats/endpoints/boxscoresummaryv2.json` | `tests/fixtures/nba_stats/endpoints/boxscoresummaryv2.json` |  |
+| `nba_stats/endpoints/boxscoresummaryv3.json` | `tests/fixtures/nba_stats/endpoints/boxscoresummaryv3.json` |  |
+| `nba_stats/endpoints/boxscoretraditionalv2.json` | `tests/fixtures/nba_stats/endpoints/boxscoretraditionalv2.json` |  |
+| `nba_stats/endpoints/boxscoretraditionalv3.json` | `tests/fixtures/nba_stats/endpoints/boxscoretraditionalv3.json` |  |
+| `nba_stats/endpoints/boxscoreusagev3.json` | `tests/fixtures/nba_stats/endpoints/boxscoreusagev3.json` |  |
+| `nba_stats/endpoints/commonallplayers.json` | `tests/fixtures/nba_stats/endpoints/commonallplayers.json` |  |
+| `nba_stats/endpoints/commonplayerinfo.json` | `tests/fixtures/nba_stats/endpoints/commonplayerinfo.json` |  |
+| `nba_stats/endpoints/commonplayoffseries.json` | `tests/fixtures/nba_stats/endpoints/commonplayoffseries.json` |  |
+| `nba_stats/endpoints/commonteamroster.json` | `tests/fixtures/nba_stats/endpoints/commonteamroster.json` |  |
+| `nba_stats/endpoints/commonteamyears.json` | `tests/fixtures/nba_stats/endpoints/commonteamyears.json` |  |
+| `nba_stats/endpoints/cumestatsplayer.json` | `tests/fixtures/nba_stats/endpoints/cumestatsplayer.json` |  |
+| `nba_stats/endpoints/cumestatsplayergames.json` | `tests/fixtures/nba_stats/endpoints/cumestatsplayergames.json` |  |
+| `nba_stats/endpoints/cumestatsteam.json` | `tests/fixtures/nba_stats/endpoints/cumestatsteam.json` |  |
+| `nba_stats/endpoints/cumestatsteamgames.json` | `tests/fixtures/nba_stats/endpoints/cumestatsteamgames.json` |  |
+| `nba_stats/endpoints/draftcombinedrillresults.json` | `tests/fixtures/nba_stats/endpoints/draftcombinedrillresults.json` |  |
+| `nba_stats/endpoints/draftcombinenonstationaryshooting.json` | `tests/fixtures/nba_stats/endpoints/draftcombinenonstationaryshooting.json` |  |
+| `nba_stats/endpoints/draftcombineplayeranthro.json` | `tests/fixtures/nba_stats/endpoints/draftcombineplayeranthro.json` |  |
+| `nba_stats/endpoints/draftcombinespotshooting.json` | `tests/fixtures/nba_stats/endpoints/draftcombinespotshooting.json` |  |
+| `nba_stats/endpoints/draftcombinestats.json` | `tests/fixtures/nba_stats/endpoints/draftcombinestats.json` |  |
+| `nba_stats/endpoints/drafthistory.json` | `tests/fixtures/nba_stats/endpoints/drafthistory.json` |  |
+| `nba_stats/endpoints/fantasywidget.json` | `tests/fixtures/nba_stats/endpoints/fantasywidget.json` |  |
+| `nba_stats/endpoints/franchisehistory.json` | `tests/fixtures/nba_stats/endpoints/franchisehistory.json` |  |
+| `nba_stats/endpoints/franchiseleaders.json` | `tests/fixtures/nba_stats/endpoints/franchiseleaders.json` |  |
+| `nba_stats/endpoints/franchiseleaderswrank.json` | `tests/fixtures/nba_stats/endpoints/franchiseleaderswrank.json` |  |
+| `nba_stats/endpoints/franchiseplayers.json` | `tests/fixtures/nba_stats/endpoints/franchiseplayers.json` |  |
+| `nba_stats/endpoints/gamerotation.json` | `tests/fixtures/nba_stats/endpoints/gamerotation.json` |  |
+| `nba_stats/endpoints/homepageleaders.json` | `tests/fixtures/nba_stats/endpoints/homepageleaders.json` |  |
+| `nba_stats/endpoints/homepagev2.json` | `tests/fixtures/nba_stats/endpoints/homepagev2.json` |  |
+| `nba_stats/endpoints/hustlestatsboxscore.json` | `tests/fixtures/nba_stats/endpoints/hustlestatsboxscore.json` |  |
+| `nba_stats/endpoints/infographicfanduelplayer.json` | `tests/fixtures/nba_stats/endpoints/infographicfanduelplayer.json` |  |
+| `nba_stats/endpoints/leaderstiles.json` | `tests/fixtures/nba_stats/endpoints/leaderstiles.json` |  |
+| `nba_stats/endpoints/leaguedashlineups.json` | `tests/fixtures/nba_stats/endpoints/leaguedashlineups.json` |  |
+| `nba_stats/endpoints/leaguedashoppptshot.json` | `tests/fixtures/nba_stats/endpoints/leaguedashoppptshot.json` |  |
+| `nba_stats/endpoints/leaguedashplayerbiostats.json` | `tests/fixtures/nba_stats/endpoints/leaguedashplayerbiostats.json` |  |
+| `nba_stats/endpoints/leaguedashplayerclutch.json` | `tests/fixtures/nba_stats/endpoints/leaguedashplayerclutch.json` |  |
+| `nba_stats/endpoints/leaguedashplayerptshot.json` | `tests/fixtures/nba_stats/endpoints/leaguedashplayerptshot.json` |  |
+| `nba_stats/endpoints/leaguedashplayershotlocations.json` | `tests/fixtures/nba_stats/endpoints/leaguedashplayershotlocations.json` |  |
+| `nba_stats/endpoints/leaguedashplayerstats.json` | `tests/fixtures/nba_stats/endpoints/leaguedashplayerstats.json` |  |
+| `nba_stats/endpoints/leaguedashptdefend.json` | `tests/fixtures/nba_stats/endpoints/leaguedashptdefend.json` |  |
+| `nba_stats/endpoints/leaguedashptstats.json` | `tests/fixtures/nba_stats/endpoints/leaguedashptstats.json` |  |
+| `nba_stats/endpoints/leaguedashptteamdefend.json` | `tests/fixtures/nba_stats/endpoints/leaguedashptteamdefend.json` |  |
+| `nba_stats/endpoints/leaguedashteamclutch.json` | `tests/fixtures/nba_stats/endpoints/leaguedashteamclutch.json` |  |
+| `nba_stats/endpoints/leaguedashteamptshot.json` | `tests/fixtures/nba_stats/endpoints/leaguedashteamptshot.json` |  |
+| `nba_stats/endpoints/leaguedashteamshotlocations.json` | `tests/fixtures/nba_stats/endpoints/leaguedashteamshotlocations.json` |  |
+| `nba_stats/endpoints/leaguedashteamstats.json` | `tests/fixtures/nba_stats/endpoints/leaguedashteamstats.json` |  |
+| `nba_stats/endpoints/leaguegamefinder.json` | `tests/fixtures/nba_stats/endpoints/leaguegamefinder.json` |  |
+| `nba_stats/endpoints/leaguegamelog.json` | `tests/fixtures/nba_stats/endpoints/leaguegamelog.json` |  |
+| `nba_stats/endpoints/leaguehustlestatsplayer.json` | `tests/fixtures/nba_stats/endpoints/leaguehustlestatsplayer.json` |  |
+| `nba_stats/endpoints/leaguehustlestatsteam.json` | `tests/fixtures/nba_stats/endpoints/leaguehustlestatsteam.json` |  |
+| `nba_stats/endpoints/leagueleaders.json` | `tests/fixtures/nba_stats/endpoints/leagueleaders.json` |  |
+| `nba_stats/endpoints/leaguelineupviz.json` | `tests/fixtures/nba_stats/endpoints/leaguelineupviz.json` |  |
+| `nba_stats/endpoints/leagueplayerondetails.json` | `tests/fixtures/nba_stats/endpoints/leagueplayerondetails.json` |  |
+| `nba_stats/endpoints/leagueseasonmatchups.json` | `tests/fixtures/nba_stats/endpoints/leagueseasonmatchups.json` |  |
+| `nba_stats/endpoints/leaguestandings.json` | `tests/fixtures/nba_stats/endpoints/leaguestandings.json` |  |
+| `nba_stats/endpoints/leaguestandingsv3.json` | `tests/fixtures/nba_stats/endpoints/leaguestandingsv3.json` |  |
+| `nba_stats/endpoints/matchupsrollup.json` | `tests/fixtures/nba_stats/endpoints/matchupsrollup.json` |  |
+| `nba_stats/endpoints/playerawards.json` | `tests/fixtures/nba_stats/endpoints/playerawards.json` |  |
+| `nba_stats/endpoints/playercareerbycollegerollup.json` | `tests/fixtures/nba_stats/endpoints/playercareerbycollegerollup.json` |  |
+| `nba_stats/endpoints/playercareerstats.json` | `tests/fixtures/nba_stats/endpoints/playercareerstats.json` |  |
+| `nba_stats/endpoints/playercompare.json` | `tests/fixtures/nba_stats/endpoints/playercompare.json` |  |
+| `nba_stats/endpoints/playerdashboardbyclutch.json.gz` | `tests/fixtures/nba_stats/endpoints/playerdashboardbyclutch.json` | gzipped |
+| `nba_stats/endpoints/playerdashboardbygamesplits.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbygamesplits.json` |  |
+| `nba_stats/endpoints/playerdashboardbygeneralsplits.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbygeneralsplits.json` |  |
+| `nba_stats/endpoints/playerdashboardbylastngames.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbylastngames.json` |  |
+| `nba_stats/endpoints/playerdashboardbyopponent.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbyopponent.json` |  |
+| `nba_stats/endpoints/playerdashboardbyshootingsplits.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbyshootingsplits.json` |  |
+| `nba_stats/endpoints/playerdashboardbyteamperformance.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbyteamperformance.json` |  |
+| `nba_stats/endpoints/playerdashboardbyyearoveryear.json` | `tests/fixtures/nba_stats/endpoints/playerdashboardbyyearoveryear.json` |  |
+| `nba_stats/endpoints/playerdashptpass.json` | `tests/fixtures/nba_stats/endpoints/playerdashptpass.json` |  |
+| `nba_stats/endpoints/playerdashptreb.json` | `tests/fixtures/nba_stats/endpoints/playerdashptreb.json` |  |
+| `nba_stats/endpoints/playerdashptshotdefend.json` | `tests/fixtures/nba_stats/endpoints/playerdashptshotdefend.json` |  |
+| `nba_stats/endpoints/playerdashptshots.json` | `tests/fixtures/nba_stats/endpoints/playerdashptshots.json` |  |
+| `nba_stats/endpoints/playerestimatedmetrics.json` | `tests/fixtures/nba_stats/endpoints/playerestimatedmetrics.json` |  |
+| `nba_stats/endpoints/playerfantasyprofile.json` | `tests/fixtures/nba_stats/endpoints/playerfantasyprofile.json` |  |
+| `nba_stats/endpoints/playerfantasyprofilebargraph.json` | `tests/fixtures/nba_stats/endpoints/playerfantasyprofilebargraph.json` |  |
+| `nba_stats/endpoints/playergamelog.json` | `tests/fixtures/nba_stats/endpoints/playergamelog.json` |  |
+| `nba_stats/endpoints/playergamelogs.json` | `tests/fixtures/nba_stats/endpoints/playergamelogs.json` |  |
+| `nba_stats/endpoints/playergamestreakfinder.json` | `tests/fixtures/nba_stats/endpoints/playergamestreakfinder.json` |  |
+| `nba_stats/endpoints/playerindex.json` | `tests/fixtures/nba_stats/endpoints/playerindex.json` |  |
+| `nba_stats/endpoints/playerprofilev2.json` | `tests/fixtures/nba_stats/endpoints/playerprofilev2.json` |  |
+| `nba_stats/endpoints/playervsplayer.json` | `tests/fixtures/nba_stats/endpoints/playervsplayer.json` |  |
+| `nba_stats/endpoints/playoffpicture.json` | `tests/fixtures/nba_stats/endpoints/playoffpicture.json` |  |
+| `nba_stats/endpoints/scheduleleaguev2.json.gz` | `tests/fixtures/nba_stats/endpoints/scheduleleaguev2.json` | gzipped |
+| `nba_stats/endpoints/scheduleleaguev2int.json.gz` | `tests/fixtures/nba_stats/endpoints/scheduleleaguev2int.json` | gzipped |
+| `nba_stats/endpoints/scoreboardv2.json` | `tests/fixtures/nba_stats/endpoints/scoreboardv2.json` |  |
+| `nba_stats/endpoints/scoreboardv3.json` | `tests/fixtures/nba_stats/endpoints/scoreboardv3.json` |  |
+| `nba_stats/endpoints/shotchartdetail.json` | `tests/fixtures/nba_stats/endpoints/shotchartdetail.json` |  |
+| `nba_stats/endpoints/shotchartleaguewide.json` | `tests/fixtures/nba_stats/endpoints/shotchartleaguewide.json` |  |
+| `nba_stats/endpoints/shotchartlineupdetail.json` | `tests/fixtures/nba_stats/endpoints/shotchartlineupdetail.json` |  |
+| `nba_stats/endpoints/synergyplaytypes.json` | `tests/fixtures/nba_stats/endpoints/synergyplaytypes.json` |  |
+| `nba_stats/endpoints/teamdashboardbyclutch.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbyclutch.json` |  |
+| `nba_stats/endpoints/teamdashboardbygamesplits.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbygamesplits.json` |  |
+| `nba_stats/endpoints/teamdashboardbygeneralsplits.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbygeneralsplits.json` |  |
+| `nba_stats/endpoints/teamdashboardbylastngames.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbylastngames.json` |  |
+| `nba_stats/endpoints/teamdashboardbyopponent.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbyopponent.json` |  |
+| `nba_stats/endpoints/teamdashboardbyshootingsplits.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbyshootingsplits.json` |  |
+| `nba_stats/endpoints/teamdashboardbyteamperformance.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbyteamperformance.json` |  |
+| `nba_stats/endpoints/teamdashboardbyyearoveryear.json` | `tests/fixtures/nba_stats/endpoints/teamdashboardbyyearoveryear.json` |  |
+| `nba_stats/endpoints/teamdashlineups.json` | `tests/fixtures/nba_stats/endpoints/teamdashlineups.json` |  |
+| `nba_stats/endpoints/teamdashptpass.json` | `tests/fixtures/nba_stats/endpoints/teamdashptpass.json` |  |
+| `nba_stats/endpoints/teamdashptreb.json` | `tests/fixtures/nba_stats/endpoints/teamdashptreb.json` |  |
+| `nba_stats/endpoints/teamdashptshots.json` | `tests/fixtures/nba_stats/endpoints/teamdashptshots.json` |  |
+| `nba_stats/endpoints/teamdetails.json` | `tests/fixtures/nba_stats/endpoints/teamdetails.json` |  |
+| `nba_stats/endpoints/teamestimatedmetrics.json` | `tests/fixtures/nba_stats/endpoints/teamestimatedmetrics.json` |  |
+| `nba_stats/endpoints/teamgamelog.json` | `tests/fixtures/nba_stats/endpoints/teamgamelog.json` |  |
+| `nba_stats/endpoints/teamgamelogs.json` | `tests/fixtures/nba_stats/endpoints/teamgamelogs.json` |  |
+| `nba_stats/endpoints/teaminfocommon.json` | `tests/fixtures/nba_stats/endpoints/teaminfocommon.json` |  |
+| `nba_stats/endpoints/teamplayerdashboard.json` | `tests/fixtures/nba_stats/endpoints/teamplayerdashboard.json` |  |
+| `nba_stats/endpoints/teamplayeronoffdetails.json` | `tests/fixtures/nba_stats/endpoints/teamplayeronoffdetails.json` |  |
+| `nba_stats/endpoints/teamplayeronoffsummary.json` | `tests/fixtures/nba_stats/endpoints/teamplayeronoffsummary.json` |  |
+| `nba_stats/endpoints/teamvsplayer.json` | `tests/fixtures/nba_stats/endpoints/teamvsplayer.json` |  |
+| `nba_stats/endpoints/teamyearbyyearstats.json` | `tests/fixtures/nba_stats/endpoints/teamyearbyyearstats.json` |  |
+| `nba_stats/endpoints/videostatus.json` | `tests/fixtures/nba_stats/endpoints/videostatus.json` |  |
+| `wnba_stats/endpoints/alltimeleadersgrids.json` | `tests/fixtures/wnba_stats/endpoints/alltimeleadersgrids.json` |  |
+| `wnba_stats/endpoints/assistleaders.json` | `tests/fixtures/wnba_stats/endpoints/assistleaders.json` |  |
+| `wnba_stats/endpoints/assisttracker.json` | `tests/fixtures/wnba_stats/endpoints/assisttracker.json` |  |
+| `wnba_stats/endpoints/boxscoreadvancedv2.json` | `tests/fixtures/wnba_stats/endpoints/boxscoreadvancedv2.json` |  |
+| `wnba_stats/endpoints/boxscoreadvancedv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscoreadvancedv3.json` |  |
+| `wnba_stats/endpoints/boxscoredefensivev2.json` | `tests/fixtures/wnba_stats/endpoints/boxscoredefensivev2.json` |  |
+| `wnba_stats/endpoints/boxscorefourfactorsv2.json` | `tests/fixtures/wnba_stats/endpoints/boxscorefourfactorsv2.json` |  |
+| `wnba_stats/endpoints/boxscorefourfactorsv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscorefourfactorsv3.json` |  |
+| `wnba_stats/endpoints/boxscorehustlev2.json` | `tests/fixtures/wnba_stats/endpoints/boxscorehustlev2.json` |  |
+| `wnba_stats/endpoints/boxscorematchupsv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscorematchupsv3.json` |  |
+| `wnba_stats/endpoints/boxscoremiscv2.json` | `tests/fixtures/wnba_stats/endpoints/boxscoremiscv2.json` |  |
+| `wnba_stats/endpoints/boxscoremiscv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscoremiscv3.json` |  |
+| `wnba_stats/endpoints/boxscoreplayertrackv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscoreplayertrackv3.json` |  |
+| `wnba_stats/endpoints/boxscorescoringv2.json` | `tests/fixtures/wnba_stats/endpoints/boxscorescoringv2.json` |  |
+| `wnba_stats/endpoints/boxscorescoringv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscorescoringv3.json` |  |
+| `wnba_stats/endpoints/boxscoresummaryv2.json` | `tests/fixtures/wnba_stats/endpoints/boxscoresummaryv2.json` |  |
+| `wnba_stats/endpoints/boxscoresummaryv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscoresummaryv3.json` |  |
+| `wnba_stats/endpoints/boxscoretraditionalv2.json` | `tests/fixtures/wnba_stats/endpoints/boxscoretraditionalv2.json` |  |
+| `wnba_stats/endpoints/boxscoretraditionalv3.json` | `tests/fixtures/wnba_stats/endpoints/boxscoretraditionalv3.json` |  |
+| `wnba_stats/endpoints/boxscoreusagev2.json` | `tests/fixtures/wnba_stats/endpoints/boxscoreusagev2.json` |  |
+| `wnba_stats/endpoints/boxscoreusagev3.json` | `tests/fixtures/wnba_stats/endpoints/boxscoreusagev3.json` |  |
+| `wnba_stats/endpoints/commonallplayers.json` | `tests/fixtures/wnba_stats/endpoints/commonallplayers.json` |  |
+| `wnba_stats/endpoints/commonplayerinfo.json` | `tests/fixtures/wnba_stats/endpoints/commonplayerinfo.json` |  |
+| `wnba_stats/endpoints/commonplayoffseries.json` | `tests/fixtures/wnba_stats/endpoints/commonplayoffseries.json` |  |
+| `wnba_stats/endpoints/commonteamroster.json` | `tests/fixtures/wnba_stats/endpoints/commonteamroster.json` |  |
+| `wnba_stats/endpoints/commonteamyears.json` | `tests/fixtures/wnba_stats/endpoints/commonteamyears.json` |  |
+| `wnba_stats/endpoints/cumestatsplayer.json` | `tests/fixtures/wnba_stats/endpoints/cumestatsplayer.json` |  |
+| `wnba_stats/endpoints/cumestatsplayergames.json` | `tests/fixtures/wnba_stats/endpoints/cumestatsplayergames.json` |  |
+| `wnba_stats/endpoints/cumestatsteam.json` | `tests/fixtures/wnba_stats/endpoints/cumestatsteam.json` |  |
+| `wnba_stats/endpoints/cumestatsteamgames.json` | `tests/fixtures/wnba_stats/endpoints/cumestatsteamgames.json` |  |
+| `wnba_stats/endpoints/draftcombinestats.json` | `tests/fixtures/wnba_stats/endpoints/draftcombinestats.json` |  |
+| `wnba_stats/endpoints/drafthistory.json` | `tests/fixtures/wnba_stats/endpoints/drafthistory.json` |  |
+| `wnba_stats/endpoints/fantasywidget.json` | `tests/fixtures/wnba_stats/endpoints/fantasywidget.json` |  |
+| `wnba_stats/endpoints/franchisehistory.json` | `tests/fixtures/wnba_stats/endpoints/franchisehistory.json` |  |
+| `wnba_stats/endpoints/franchiseleaders.json` | `tests/fixtures/wnba_stats/endpoints/franchiseleaders.json` |  |
+| `wnba_stats/endpoints/franchiseleaderswrank.json` | `tests/fixtures/wnba_stats/endpoints/franchiseleaderswrank.json` |  |
+| `wnba_stats/endpoints/franchiseplayers.json` | `tests/fixtures/wnba_stats/endpoints/franchiseplayers.json` |  |
+| `wnba_stats/endpoints/gamerotation.json` | `tests/fixtures/wnba_stats/endpoints/gamerotation.json` |  |
+| `wnba_stats/endpoints/homepageleaders.json` | `tests/fixtures/wnba_stats/endpoints/homepageleaders.json` |  |
+| `wnba_stats/endpoints/hustlestatsboxscore.json` | `tests/fixtures/wnba_stats/endpoints/hustlestatsboxscore.json` |  |
+| `wnba_stats/endpoints/infographicfanduelplayer.json` | `tests/fixtures/wnba_stats/endpoints/infographicfanduelplayer.json` |  |
+| `wnba_stats/endpoints/leaderstiles.json` | `tests/fixtures/wnba_stats/endpoints/leaderstiles.json` |  |
+| `wnba_stats/endpoints/leaguedashlineups.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashlineups.json` |  |
+| `wnba_stats/endpoints/leaguedashplayerbiostats.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashplayerbiostats.json` |  |
+| `wnba_stats/endpoints/leaguedashplayerclutch.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashplayerclutch.json` |  |
+| `wnba_stats/endpoints/leaguedashplayershotlocations.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashplayershotlocations.json` |  |
+| `wnba_stats/endpoints/leaguedashplayerstats.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashplayerstats.json` |  |
+| `wnba_stats/endpoints/leaguedashptdefend.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashptdefend.json` |  |
+| `wnba_stats/endpoints/leaguedashteamclutch.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashteamclutch.json` |  |
+| `wnba_stats/endpoints/leaguedashteamshotlocations.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashteamshotlocations.json` |  |
+| `wnba_stats/endpoints/leaguedashteamstats.json` | `tests/fixtures/wnba_stats/endpoints/leaguedashteamstats.json` |  |
+| `wnba_stats/endpoints/leaguegamefinder.json` | `tests/fixtures/wnba_stats/endpoints/leaguegamefinder.json` |  |
+| `wnba_stats/endpoints/leaguegamelog.json` | `tests/fixtures/wnba_stats/endpoints/leaguegamelog.json` |  |
+| `wnba_stats/endpoints/leagueleaders.json` | `tests/fixtures/wnba_stats/endpoints/leagueleaders.json` |  |
+| `wnba_stats/endpoints/leaguelineupviz.json` | `tests/fixtures/wnba_stats/endpoints/leaguelineupviz.json` |  |
+| `wnba_stats/endpoints/leagueplayerondetails.json` | `tests/fixtures/wnba_stats/endpoints/leagueplayerondetails.json` |  |
+| `wnba_stats/endpoints/leagueseasonmatchups.json` | `tests/fixtures/wnba_stats/endpoints/leagueseasonmatchups.json` |  |
+| `wnba_stats/endpoints/leaguestandingsv3.json` | `tests/fixtures/wnba_stats/endpoints/leaguestandingsv3.json` |  |
+| `wnba_stats/endpoints/playbyplayv2.json` | `tests/fixtures/wnba_stats/endpoints/playbyplayv2.json` |  |
+| `wnba_stats/endpoints/playerawards.json` | `tests/fixtures/wnba_stats/endpoints/playerawards.json` |  |
+| `wnba_stats/endpoints/playercareerbycollegerollup.json` | `tests/fixtures/wnba_stats/endpoints/playercareerbycollegerollup.json` |  |
+| `wnba_stats/endpoints/playercareerstats.json` | `tests/fixtures/wnba_stats/endpoints/playercareerstats.json` |  |
+| `wnba_stats/endpoints/playercompare.json` | `tests/fixtures/wnba_stats/endpoints/playercompare.json` |  |
+| `wnba_stats/endpoints/playerdashboardbyclutch.json.gz` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbyclutch.json` | gzipped |
+| `wnba_stats/endpoints/playerdashboardbygamesplits.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbygamesplits.json` |  |
+| `wnba_stats/endpoints/playerdashboardbygeneralsplits.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbygeneralsplits.json` |  |
+| `wnba_stats/endpoints/playerdashboardbylastngames.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbylastngames.json` |  |
+| `wnba_stats/endpoints/playerdashboardbyopponent.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbyopponent.json` |  |
+| `wnba_stats/endpoints/playerdashboardbyshootingsplits.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbyshootingsplits.json` |  |
+| `wnba_stats/endpoints/playerdashboardbyteamperformance.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbyteamperformance.json` |  |
+| `wnba_stats/endpoints/playerdashboardbyyearoveryear.json` | `tests/fixtures/wnba_stats/endpoints/playerdashboardbyyearoveryear.json` |  |
+| `wnba_stats/endpoints/playerdashptshotdefend.json` | `tests/fixtures/wnba_stats/endpoints/playerdashptshotdefend.json` |  |
+| `wnba_stats/endpoints/playerestimatedmetrics.json` | `tests/fixtures/wnba_stats/endpoints/playerestimatedmetrics.json` |  |
+| `wnba_stats/endpoints/playerfantasyprofile.json` | `tests/fixtures/wnba_stats/endpoints/playerfantasyprofile.json` |  |
+| `wnba_stats/endpoints/playerfantasyprofilebargraph.json` | `tests/fixtures/wnba_stats/endpoints/playerfantasyprofilebargraph.json` |  |
+| `wnba_stats/endpoints/playergamelog.json` | `tests/fixtures/wnba_stats/endpoints/playergamelog.json` |  |
+| `wnba_stats/endpoints/playergamelogs.json` | `tests/fixtures/wnba_stats/endpoints/playergamelogs.json` |  |
+| `wnba_stats/endpoints/playergamestreakfinder.json` | `tests/fixtures/wnba_stats/endpoints/playergamestreakfinder.json` |  |
+| `wnba_stats/endpoints/playerindex.json` | `tests/fixtures/wnba_stats/endpoints/playerindex.json` |  |
+| `wnba_stats/endpoints/playernextngames.json` | `tests/fixtures/wnba_stats/endpoints/playernextngames.json` |  |
+| `wnba_stats/endpoints/playerprofilev2.json` | `tests/fixtures/wnba_stats/endpoints/playerprofilev2.json` |  |
+| `wnba_stats/endpoints/playervsplayer.json` | `tests/fixtures/wnba_stats/endpoints/playervsplayer.json` |  |
+| `wnba_stats/endpoints/scheduleleaguev2.json.gz` | `tests/fixtures/wnba_stats/endpoints/scheduleleaguev2.json` | gzipped |
+| `wnba_stats/endpoints/scheduleleaguev2int.json.gz` | `tests/fixtures/wnba_stats/endpoints/scheduleleaguev2int.json` | gzipped |
+| `wnba_stats/endpoints/scoreboardv2.json` | `tests/fixtures/wnba_stats/endpoints/scoreboardv2.json` |  |
+| `wnba_stats/endpoints/scoreboardv3.json` | `tests/fixtures/wnba_stats/endpoints/scoreboardv3.json` |  |
+| `wnba_stats/endpoints/shotchartdetail.json` | `tests/fixtures/wnba_stats/endpoints/shotchartdetail.json` |  |
+| `wnba_stats/endpoints/shotchartleaguewide.json` | `tests/fixtures/wnba_stats/endpoints/shotchartleaguewide.json` |  |
+| `wnba_stats/endpoints/shotchartlineupdetail.json` | `tests/fixtures/wnba_stats/endpoints/shotchartlineupdetail.json` |  |
+| `wnba_stats/endpoints/teamdashboardbyclutch.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbyclutch.json` |  |
+| `wnba_stats/endpoints/teamdashboardbygamesplits.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbygamesplits.json` |  |
+| `wnba_stats/endpoints/teamdashboardbygeneralsplits.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbygeneralsplits.json` |  |
+| `wnba_stats/endpoints/teamdashboardbylastngames.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbylastngames.json` |  |
+| `wnba_stats/endpoints/teamdashboardbyopponent.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbyopponent.json` |  |
+| `wnba_stats/endpoints/teamdashboardbyshootingsplits.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbyshootingsplits.json` |  |
+| `wnba_stats/endpoints/teamdashboardbyteamperformance.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbyteamperformance.json` |  |
+| `wnba_stats/endpoints/teamdashboardbyyearoveryear.json` | `tests/fixtures/wnba_stats/endpoints/teamdashboardbyyearoveryear.json` |  |
+| `wnba_stats/endpoints/teamdashlineups.json` | `tests/fixtures/wnba_stats/endpoints/teamdashlineups.json` |  |
+| `wnba_stats/endpoints/teamdetails.json` | `tests/fixtures/wnba_stats/endpoints/teamdetails.json` |  |
+| `wnba_stats/endpoints/teamestimatedmetrics.json` | `tests/fixtures/wnba_stats/endpoints/teamestimatedmetrics.json` |  |
+| `wnba_stats/endpoints/teamgamelog.json` | `tests/fixtures/wnba_stats/endpoints/teamgamelog.json` |  |
+| `wnba_stats/endpoints/teamgamelogs.json` | `tests/fixtures/wnba_stats/endpoints/teamgamelogs.json` |  |
+| `wnba_stats/endpoints/teaminfocommon.json` | `tests/fixtures/wnba_stats/endpoints/teaminfocommon.json` |  |
+| `wnba_stats/endpoints/teamplayerdashboard.json` | `tests/fixtures/wnba_stats/endpoints/teamplayerdashboard.json` |  |
+| `wnba_stats/endpoints/teamplayeronoffdetails.json` | `tests/fixtures/wnba_stats/endpoints/teamplayeronoffdetails.json` |  |
+| `wnba_stats/endpoints/teamplayeronoffsummary.json` | `tests/fixtures/wnba_stats/endpoints/teamplayeronoffsummary.json` |  |
+| `wnba_stats/endpoints/teamvsplayer.json` | `tests/fixtures/wnba_stats/endpoints/teamvsplayer.json` |  |
+| `wnba_stats/endpoints/teamyearbyyearstats.json` | `tests/fixtures/wnba_stats/endpoints/teamyearbyyearstats.json` |  |
+| `wnba_stats/endpoints/videostatus.json` | `tests/fixtures/wnba_stats/endpoints/videostatus.json` |  |
+| `on3/collective_groups.json` | `tests/fixtures/on3/collective_groups.json` |  |
+| `on3/commits_latest.json` | `tests/fixtures/on3/commits_latest.json` |  |
+| `on3/drafts_by_stars.json` | `tests/fixtures/on3/drafts_by_stars.json` |  |
+| `on3/filters_draft_rounds.json` | `tests/fixtures/on3/filters_draft_rounds.json` |  |
+| `on3/nil_100_v2.json.gz` | `tests/fixtures/on3/nil_100_v2.json` | gzipped |
+| `on3/nil_rankings.json` | `tests/fixtures/on3/nil_rankings.json` |  |
+| `on3/organizations_roster.json.gz` | `tests/fixtures/on3/organizations_roster.json` | gzipped |
+| `on3/organizations_roster_header.json` | `tests/fixtures/on3/organizations_roster_header.json` |  |
+| `on3/people_latest_valuation.json` | `tests/fixtures/on3/people_latest_valuation.json` |  |
+| `on3/people_measurements.json` | `tests/fixtures/on3/people_measurements.json` |  |
+| `on3/people_measurements_averages.json` | `tests/fixtures/on3/people_measurements_averages.json` |  |
+| `on3/people_social.json` | `tests/fixtures/on3/people_social.json` |  |
+| `on3/people_social_post_summary.json` | `tests/fixtures/on3/people_social_post_summary.json` |  |
+| `on3/people_valuation_growth.json` | `tests/fixtures/on3/people_valuation_growth.json` |  |
+| `on3/player_database_updates.json` | `tests/fixtures/on3/player_database_updates.json` |  |
+| `on3/player_images.json` | `tests/fixtures/on3/player_images.json` |  |
+| `on3/player_person_rankings.json` | `tests/fixtures/on3/player_person_rankings.json` |  |
+| `on3/player_verified.json` | `tests/fixtures/on3/player_verified.json` |  |
+| `on3/player_videos.json` | `tests/fixtures/on3/player_videos.json` |  |
+| `on3/players_industry_comparision.json` | `tests/fixtures/on3/players_industry_comparision.json` |  |
+| `on3/quotes.json` | `tests/fixtures/on3/quotes.json` |  |
+| `on3/recruitments_latest_rpm_picks.json.gz` | `tests/fixtures/on3/recruitments_latest_rpm_picks.json` | gzipped |
+| `on3/recruitments_profile.json` | `tests/fixtures/on3/recruitments_profile.json` |  |
+| `on3/recruitments_rpm_summary.json` | `tests/fixtures/on3/recruitments_rpm_summary.json` |  |
+| `on3/transfers_best_available.json.gz` | `tests/fixtures/on3/transfers_best_available.json` | gzipped |
+| `on3/transfers_latest.json.gz` | `tests/fixtures/on3/transfers_latest.json` | gzipped |

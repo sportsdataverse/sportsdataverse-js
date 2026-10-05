@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
 # tools/codegen/endpoints/torvik.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/torvik.yaml; shared changes land in sdv-py first.
@@ -32,8 +32,8 @@ docstring:
 runtime_imports:
 - _get
 endpoints:
-# Patches: sdv-py's two endpoints run through JS's positional parsers here
-# (vendor.yaml parser_overrides), so they keep JS's own schemas.
+# Patches: sdv-py's ratings + team_factors run through JS's positional parsers
+# here (vendor.yaml parser_overrides), so they keep JS's own schemas.
 - short: ratings
   summary: "GET /{year}_team_results.csv — men's T-Rank team ratings (adjoe/adjde/barthag, one row per team; the team/conf pair feeds the MBB crosswalk)."
   path: /{year}_team_results.csv
@@ -56,32 +56,82 @@ endpoints:
     year: 2025
   parser: parse_torvik_team_factors
   returns_schema: native/torvik/team_factors
-# JS-only: sdv-py wraps only `ratings` + `team_factors`; these three were ported
-# from hoopR's torvik_*.R (positional column arrays carried over verbatim in
-# src/parsers/torvik.ts) and stay here until they are upstreamed. All three
-# routes are live (the `.php` ones included).
+# game_stats / player_stats / game_schedule are vendored since sdv-py #678. JS's
+# parsers (ported from hoopR's torvik_*.R, src/parsers/torvik.ts) are not ports
+# of sdv-py's, which add derived columns (`game_date`; `year` on the schedule),
+# so py's tables are undeclared (dropped) and JS keeps its own.
 - short: game_stats
-  # getgamestats.php?year=&json=1 — headerless JSON, 31 positional fields.
+  summary: "GET /getgamestats.php?year=&json=1 — men's per-team-game efficiency and four-factors log (one row per team-game, 31 positional fields)."
   path: /getgamestats.php
   path_params: []
   extra_params:
-  - { name: year, query_key: year }
-  - { name: json, query_key: json, default: 1 }
+  - name: year
+    query_key: year
+    type: int
+    required: true
+    description: 4-digit season ending year (2025 = the 2024-25 season).
+  - name: json
+    query_key: json
+    type: int
+    default: 1
+    description: Response format switch; leave at 1 (the parser expects the headerless JSON array).
+  docstring:
+    raw_doc: 'the decoded JSON response body (the positional-field array)'
+    example_import: true
+    raises:
+    - 'sportsdataverse.errors.NoESPNDataError: barttorvik.com returned 404 (no data file for that season).'
+    - 'requests.exceptions.RequestException: Connection-level failure after ``dl_utils.download`` exhausts its retries.'
+    see_also:
+    - name: hoopR
+      url: https://hoopR.sportsdataverse.org
+      note: R sister package for men's college basketball
+    - name: Bart Torvik
+      url: https://barttorvik.com
+      note: data origin (T-Rank)
+  example_args:
+    year: 2025
   parser: parse_torvik_game_stats
   returns_schema: native/torvik/game_stats
 - short: player_stats
-  # getadvstats.php?year=&csv=1 — headerless CSV, 67 positional fields.
+  summary: "GET /getadvstats.php?year=&csv=1 — men's player advanced stats (one row per player, 67 positional fields)."
   path: /getadvstats.php
   path_params: []
   extra_params:
-  - { name: year, query_key: year }
-  - { name: csv, query_key: csv, default: 1 }
+  - name: year
+    query_key: year
+    type: int
+    required: true
+    description: 4-digit season ending year (2025 = the 2024-25 season).
+  - name: csv
+    query_key: csv
+    type: int
+    default: 1
+    description: Response format switch; leave at 1 (the parser expects the headerless CSV).
+  example_args:
+    year: 2025
   parser: parse_torvik_player_stats
   returns_schema: native/torvik/player_stats
 - short: game_schedule
-  # {year}_super_sked.json — headerless JSON, 55 positional fields.
+  summary: "GET /{year}_super_sked.json — men's season schedule/results with T-Rank projections (one row per game, 55 positional fields)."
   path: /{year}_super_sked.json
   path_params:
-  - { name: year, type: int, required: true }
+  - name: year
+    type: int
+    required: true
+  docstring:
+    raw_doc: 'the decoded JSON response body (the positional-field array)'
+    example_import: true
+    raises:
+    - 'sportsdataverse.errors.NoESPNDataError: barttorvik.com returned 404 (no data file for that season).'
+    - 'requests.exceptions.RequestException: Connection-level failure after ``dl_utils.download`` exhausts its retries.'
+    see_also:
+    - name: hoopR
+      url: https://hoopR.sportsdataverse.org
+      note: R sister package for men's college basketball
+    - name: Bart Torvik
+      url: https://barttorvik.com
+      note: data origin (T-Rank)
+  example_args:
+    year: 2025
   parser: parse_torvik_game_schedule
   returns_schema: native/torvik/game_schedule

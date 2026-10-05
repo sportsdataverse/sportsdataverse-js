@@ -6,25 +6,6 @@
 # vendored keys). Edit here, then `npm run vendor -- --offline`.
 endpoints:
 # ---------------------------------------------------------------------------
-# Patch: sdv-py@719de79 maps `timecode` to the `language` query key (a py-side
-# bug). The Stats API key is `timecode`. Drop this patch once the vendor pin
-# includes the upstream sdv-py fix.
-# ---------------------------------------------------------------------------
-- short: pbp
-  extra_params:
-  - name: language
-    query_key: language
-    type: str
-  - name: timecode
-    query_key: timecode
-    type: str
-  - name: hydrate
-    query_key: hydrate
-    type: str
-  - name: fields
-    query_key: fields
-    type: str
-# ---------------------------------------------------------------------------
 # JS's schemas for the two endpoints vendor.yaml's parser_overrides route
 # through a different parser than sdv-py's (py's schema would describe the
 # wrong output).

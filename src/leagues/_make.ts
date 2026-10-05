@@ -31,6 +31,7 @@ export function makeLeagueModule(
   const mod: Record<string, WrapperFn> = {};
   for (const scope of cfg.scopes) {
     for (const def of WRAPPER_TABLES[scope] ?? []) {
+      if (def.includePrefixes && !def.includePrefixes.includes(cfg.prefix)) continue;
       const snake = espnPublicName(cfg, def);
       const fn: WrapperFn = (params = {}) => callWrapper(def, cfg, params);
       mod[snake] = fn; // py/R-parity alias

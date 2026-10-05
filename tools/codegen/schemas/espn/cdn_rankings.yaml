@@ -1,0 +1,48 @@
+schema: cdn_rankings
+kind: dataframe
+columns:
+- name: poll_id
+  type: integer
+  description: 'Poll id (1 = AP Top 25).'
+- name: poll_name
+  type: character
+  description: 'Poll name (e.g. AP Top 25, AFCA Coaches Poll).'
+- name: poll_short_name
+  type: character
+  description: 'Short poll name.'
+- name: ranked
+  type: logical
+  description: 'true for a ranked team, false for a team receiving votes.'
+- name: team_id
+  type: character
+  description: 'ESPN team id, read from team_url (null when the team is not linked).'
+- name: team_display_name
+  type: character
+  description: 'Team display name.'
+- name: trend
+  type: character
+  description: 'Movement since the previous poll.'
+- name: formatted_record
+  type: character
+  description: 'Win-loss record (e.g. 4-0).'
+- name: first_place_votes
+  type: integer
+  description: 'First-place votes.'
+- name: rank
+  type: integer
+  description: 'Poll rank (null for teams receiving votes).'
+- name: previous_rank
+  type: integer
+  description: 'Rank in the previous poll.'
+- name: team_abbreviation
+  type: character
+  description: 'Team abbreviation.'
+- name: team_url
+  type: character
+  description: 'espn.com team page URL.'
+- name: team_logo
+  type: character
+  description: 'Team logo URL.'
+- name: points
+  type: integer
+  description: 'Poll points.'

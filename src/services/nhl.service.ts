@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnNhlCdnSchedule } from '../generated/espn/nhl.js';
+import { cdnDate } from './_cdn.js';
 /**
  * Operations for NHL.
  *
@@ -153,18 +155,9 @@ export default {
      * )
      */
     getSchedule: async function ({ year = null, month = null, day = null }) {
-        const baseUrl = `http://cdn.espn.com/core/nhl/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        const params: Record<string, any> = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+        // espn_nhl_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
+        const res = await espnNhlCdnSchedule({ date: cdnDate(year, month, day) });
+        return res.content.schedule;
     },
     /**
      * Gets the NHL scoreboard data for a specified date if available.

@@ -1,5 +1,5 @@
 /** ESPN URL families, keyed to their host (see `HOSTS` in client.ts). */
-export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2" | "fitt_v3";
+export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2" | "fitt_v3" | "cdn";
 
 /** Which wrapper tables apply to a league (mirrors sdv-py's scope flags). */
 export type Scope = "universal" | "ncaa" | "football" | "mlb";
@@ -86,6 +86,12 @@ export interface WrapperDef {
    */
   family?: EspnFamily;
   scope: Scope;
+  /**
+   * ESPN only: the league prefixes this wrapper is emitted for, on top of
+   * `scope` (sdv-py `include_prefixes`, a live-probed allowlist). Absent = every
+   * in-scope league.
+   */
+  includePrefixes?: string[];
   path: string;
   /** Flat only (sdv-py `now_variant`): path used when the `nowToggle` param is absent. */
   nowVariant?: string;
@@ -93,6 +99,12 @@ export interface WrapperDef {
   nowToggle?: string;
   pathParams: PathParam[];
   queryParams: QueryParam[];
+  /**
+   * Constant query params sent on every request and never exposed as arguments
+   * (sdv-py `fixed_params`: per endpoint, or family-level on an ESPN family, e.g.
+   * the CDN's `xhr: 1`). A caller param of the same name overrides one.
+   */
+  fixedParams?: Record<string, string | number | boolean>;
   /** True for non-ESPN "flat API" wrappers (see `src/core/flat.ts`). */
   flat?: boolean;
   /** Flat-API family stem, e.g. `"mlb"`. */

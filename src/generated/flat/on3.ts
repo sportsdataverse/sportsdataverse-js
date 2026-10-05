@@ -30,7 +30,8 @@ const COACHES_HISTORY_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/coaches_history"
 };
 
 /**
@@ -62,7 +63,8 @@ const COACHES_PROFILE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/coaches_profile"
 };
 
 /**
@@ -109,7 +111,8 @@ const COLLECTIVE_GROUPS_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/collective_groups"
 };
 
 /**
@@ -152,7 +155,8 @@ const COLLECTIVE_GROUPS_DEALS_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/collective_groups_deals"
 };
 
 /**
@@ -184,7 +188,8 @@ const COLLECTIVE_GROUPS_KEY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/collective_groups_key"
 };
 
 /**
@@ -255,7 +260,8 @@ const COMMITS_ORGANIZATIONS_LATEST_COMMITS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/commits_organizations_latest_commits"
 };
 
 /**
@@ -285,7 +291,8 @@ const COMMITS_ORGANIZATIONS_ORG_KEY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/commits_organizations_org_key"
 };
 
 /**
@@ -328,7 +335,8 @@ const DRAFT_ORGANIZATION_RANK_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/draft_organization_rank"
 };
 
 /**
@@ -374,7 +382,8 @@ const DRAFT_PICK_ORGANIZATION_RANK_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/draft_pick_organization_rank"
 };
 
 /**
@@ -416,7 +425,8 @@ const DRAFTS_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/drafts"
 };
 
 /**
@@ -457,7 +467,8 @@ const DRAFTS_BY_STARS_DEF: WrapperDef = {
       "queryKey": "yearSpan"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/drafts_by_stars"
 };
 
 /**
@@ -494,7 +505,8 @@ const DRAFTS_BY_STARS_SUMMARY_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/drafts_by_stars_summary"
 };
 
 /**
@@ -530,7 +542,8 @@ const DRAFTS_PLAYERS_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/drafts_players"
 };
 
 /**
@@ -566,7 +579,8 @@ const FILTERS_CONFERENCES_DEF: WrapperDef = {
       "queryKey": "sportKey"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_conferences"
 };
 
 /**
@@ -602,7 +616,8 @@ const FILTERS_DRAFT_ROUNDS_DEF: WrapperDef = {
       "queryKey": "sportKey"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_draft_rounds"
 };
 
 /**
@@ -638,7 +653,8 @@ const FILTERS_POSITIONS_DEF: WrapperDef = {
       "queryKey": "positionType"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_positions"
 };
 
 /**
@@ -665,7 +681,8 @@ const FILTERS_SPORTS_DEF: WrapperDef = {
   "path": "/filters/sports",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_sports"
 };
 
 /**
@@ -690,7 +707,8 @@ const FILTERS_STATUS_DEF: WrapperDef = {
   "path": "/filters/status",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_status"
 };
 
 /**
@@ -728,7 +746,8 @@ const FILTERS_TEAMS_DEF: WrapperDef = {
       "queryKey": "sportKey"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_teams"
 };
 
 /**
@@ -756,7 +775,8 @@ const FILTERS_YEARS_DEF: WrapperDef = {
   "path": "/filters/years",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/filters_years"
 };
 
 /**
@@ -786,7 +806,8 @@ const NIL_100_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/nil_100"
 };
 
 /**
@@ -829,7 +850,8 @@ const NIL_100_V2_DEF: WrapperDef = {
       "queryKey": "page"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/nil_100_v2"
 };
 
 /**
@@ -863,7 +885,8 @@ const NIL_COMPLIANCES_STATE_DEF: WrapperDef = {
       "queryKey": "stateKey"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/nil_compliances_state"
 };
 
 /**
@@ -914,7 +937,8 @@ const NIL_RANKINGS_DEF: WrapperDef = {
       "queryKey": "stateAbbr"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/nil_rankings"
 };
 
 /**
@@ -958,7 +982,8 @@ const ORGANIZATIONS_DRAFT_CLASS_BY_STATE_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_draft_class_by_state"
 };
 
 /**
@@ -999,7 +1024,8 @@ const ORGANIZATIONS_DRAFT_CLASS_BY_YEAR_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_draft_class_by_year"
 };
 
 /**
@@ -1031,7 +1057,8 @@ const ORGANIZATIONS_DRAFT_COUNT_BY_STARS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_draft_count_by_stars"
 };
 
 /**
@@ -1070,7 +1097,8 @@ const ORGANIZATIONS_DRAFT_COUNT_BY_YEAR_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_draft_count_by_year"
 };
 
 /**
@@ -1107,7 +1135,8 @@ const ORGANIZATIONS_DRAFT_RANKING_SUMMARY_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_draft_ranking_summary"
 };
 
 /**
@@ -1147,7 +1176,8 @@ const ORGANIZATIONS_DRAFTED_PLAYERS_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_drafted_players"
 };
 
 /**
@@ -1184,7 +1214,8 @@ const ORGANIZATIONS_DRAFTS_BY_STARS_SUMMARY_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_drafts_by_stars_summary"
 };
 
 /**
@@ -1275,7 +1306,8 @@ const ORGANIZATIONS_ROSTER_HEADER_DEF: WrapperDef = {
       "queryKey": "year"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/organizations_roster_header"
 };
 
 /**
@@ -1307,7 +1339,8 @@ const PEOPLE_COMBINE_MEASUREMENTS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_combine_measurements"
 };
 
 /**
@@ -1337,7 +1370,8 @@ const PEOPLE_LATEST_VALUATION_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_latest_valuation"
 };
 
 /**
@@ -1367,7 +1401,8 @@ const PEOPLE_MEASUREMENTS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_measurements"
 };
 
 /**
@@ -1447,7 +1482,8 @@ const PEOPLE_PERSON_CONNECTIONS_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_person_connections"
 };
 
 /**
@@ -1479,7 +1515,8 @@ const PEOPLE_SOCIAL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_social"
 };
 
 /**
@@ -1509,7 +1546,8 @@ const PEOPLE_SOCIAL_POST_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_social_post_summary"
 };
 
 /**
@@ -1539,7 +1577,8 @@ const PEOPLE_TRACK_AND_FIELD_MEASUREMENTS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_track_and_field_measurements"
 };
 
 /**
@@ -1569,7 +1608,8 @@ const PEOPLE_VALUATION_GROWTH_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/people_valuation_growth"
 };
 
 /**
@@ -1599,7 +1639,8 @@ const PERSON_CONNECTIONS_CONNECTION_KEY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/person_connections_connection_key"
 };
 
 /**
@@ -1629,7 +1670,8 @@ const PERSON_PRIMARY_RECRUITMENT_EVALUATION_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/person_primary_recruitment_evaluation"
 };
 
 /**
@@ -1659,7 +1701,8 @@ const PERSON_RECRUITMENT_EVALUATIONS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/person_recruitment_evaluations"
 };
 
 /**
@@ -1689,7 +1732,8 @@ const PERSON_SPORT_PROFILE_RECRUIT_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/person_sport_profile_recruit"
 };
 
 /**
@@ -1732,7 +1776,8 @@ const PERSON_SPORT_RANKINGS_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/person_sport_rankings"
 };
 
 /**
@@ -1765,7 +1810,8 @@ const PLAYER_ALL_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_all_rankings"
 };
 
 /**
@@ -1795,7 +1841,8 @@ const PLAYER_DATABASE_UPDATES_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_database_updates"
 };
 
 /**
@@ -1825,7 +1872,8 @@ const PLAYER_IMAGES_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_images"
 };
 
 /**
@@ -1855,7 +1903,8 @@ const PLAYER_ORGANIZATIONS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_organizations"
 };
 
 /**
@@ -1888,7 +1937,8 @@ const PLAYER_ORGANIZATIONS_ORG_KEY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_organizations_org_key"
 };
 
 /**
@@ -1919,7 +1969,8 @@ const PLAYER_PERSON_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_person_rankings"
 };
 
 /**
@@ -1949,7 +2000,8 @@ const PLAYER_PROFILE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_profile"
 };
 
 /**
@@ -1979,7 +2031,8 @@ const PLAYER_TEAM_TARGETS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_team_targets"
 };
 
 /**
@@ -2050,7 +2103,8 @@ const PLAYER_VIDEOS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_videos"
 };
 
 /**
@@ -2080,7 +2134,8 @@ const PLAYER_VISIT_CENTER_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/player_visit_center"
 };
 
 /**
@@ -2131,7 +2186,8 @@ const PLAYERS_INDUSTRY_COMPARISION_DEF: WrapperDef = {
       "queryKey": "sortByIndustry"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/players_industry_comparision"
 };
 
 /**
@@ -2179,7 +2235,8 @@ const PLAYERS_INDUSTRY_COMPARISION_LIST_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/players_industry_comparision_list"
 };
 
 /**
@@ -2221,7 +2278,8 @@ const PREDICTIONS_USER_KEY_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/predictions_user_key"
 };
 
 /**
@@ -2258,7 +2316,8 @@ const QUOTES_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/quotes"
 };
 
 /**
@@ -2289,7 +2348,8 @@ const QUOTES_KEY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/quotes_key"
 };
 
 /**
@@ -2319,7 +2379,8 @@ const RECRUITMENT_PRIMARY_RECRUITMENT_EVALUATION_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/recruitment_primary_recruitment_evaluation"
 };
 
 /**
@@ -2349,7 +2410,8 @@ const RECRUITMENT_RECRUITMENT_EVALUATIONS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/recruitment_recruitment_evaluations"
 };
 
 /**
@@ -2425,7 +2487,8 @@ const RECRUITMENTS_PROFILE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/recruitments_profile"
 };
 
 /**
@@ -2455,7 +2518,8 @@ const RECRUITMENTS_RPM_PICKS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/recruitments_rpm_picks"
 };
 
 /**
@@ -2485,7 +2549,8 @@ const RECRUITMENTS_RPM_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/recruitments_rpm_summary"
 };
 
 /**
@@ -2528,7 +2593,8 @@ const TEAM_RANKING_DEF: WrapperDef = {
       "queryKey": "pageSize"
     }
   ],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/team_ranking"
 };
 
 /**
@@ -2564,7 +2630,8 @@ const TEAM_RANKING_BLUECHIPS_TEAM_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/team_ranking_bluechips_team_rankings"
 };
 
 /**
@@ -2598,7 +2665,8 @@ const TEAM_RANKING_CONSENSUS_TEAM_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/team_ranking_consensus_team_rankings"
 };
 
 /**
@@ -2629,7 +2697,8 @@ const TEAM_RANKING_ORGANIZATIONS_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/team_ranking_organizations_summary"
 };
 
 /**
@@ -2662,7 +2731,8 @@ const TEAM_RANKING_TEAM_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/team_ranking_team_rankings"
 };
 
 /**
@@ -2815,7 +2885,8 @@ const VIDEOS_VIDEO_KEY_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb"
+  "parser": "parse_on3_rdb",
+  "returnsSchema": "native/on3/videos_video_key"
 };
 
 /**

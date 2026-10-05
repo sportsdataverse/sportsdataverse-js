@@ -6,6 +6,44 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed — vendor pin 81eb7e7060: ESPN CDN, Fox, stats/On3 returns tables, `on_missing`
+
+- **Pin:** the vendored sdv-py ref moves from `719de79` to `81eb7e7060`. Two JS overlays the upstream absorbed are gone:
+  - The MLB `pbp` `timecode` patch (sdv-py #679).
+  - The torvik `game_stats` / `player_stats` / `game_schedule` additions. They are vendored now (sdv-py #678). Names are unchanged, and JS keeps its hoopR-ported parsers and its own returns tables.
+- **Added — ESPN CDN (`cdn.espn.com/core`):** 5 endpoints become 41 wrappers on 14 leagues: `espn_<lg>_cdn_playbyplay`, `_cdn_boxscore`, `_cdn_schedule`, `_cdn_scoreboard`, and `espn_cfb_cdn_rankings`.
+  - The generator honours sdv-py's per-endpoint `include_prefixes` (a probed league allowlist) and the family's `fixed_params` (`xhr=1`, which a caller param can override).
+  - Ported parsers:
+    - `parse_cdn_game` runs the summary dispatcher and takes `section`.
+    - `parse_cdn_scoreboard` and `parse_cdn_schedule` return scoreboard rows.
+    - `parse_cdn_rankings` returns a string `team_id`.
+- **Fixed — legacy `getSchedule` dates:** `sdv.{nba,wnba,nhl,mlb,mbb,wbb,cfb,nfl}.getSchedule({ year, month, day })` sent `dates=`. The CDN ignores that key and answered with today's page for every date.
+  - The methods now route through `espn_<lg>_cdn_schedule`, which sends `date=`. The signature and the return shape (`content.schedule`) are unchanged, and a failed fetch throws `AssetFetchError`.
+  - The other legacy CDN methods (`getPlayByPlay`, `getBoxScore` on nba / wnba / mbb / wbb / mlb / cfb / nfl, `sdv.cfb.getRankings`, `sdv.nfl.getWeeklySchedule`) also route through the vendored `espn_<lg>_cdn_*` wrappers instead of raw axios over `http://`: https, the same signatures and return shapes, and the core error vocabulary.
+- **Fixed — ESPN JSON families:** a 2xx response whose body is not a JSON object / array (the CDN's HTTP 202 HTML bot challenge, an error page, an empty body) now throws `AssetFetchError` instead of passing through as data. Before, a parsed CDN wrapper returned `[]` (a failed fetch that looked like no data) and the legacy `getSchedule` threw a `TypeError`.
+  - Football pages ignore dates, so `cfb` / `nfl` take an optional `week`. A date without a `week` warns once (`SDV_CDN_FOOTBALL_DATE`).
+- **BREAKING — Fox:** `sdv.fox` is now vendored from sdv-py's `fox_api`.
+  - The canonical names are `fox_api_*` / `foxApi*`. Every pre-v4 `fox_*` name is a deprecated alias.
+  - `scorechip` no longer sends `api-version`, which made it answer 400.
+  - The 5 routes sdv-py dropped as dead (`fs_feed`, `fs_images`, `fs_layouts`, `fs_videos`, `explore_favorite`) keep their old names, are deprecated, and warn once (`DeprecationWarning`, code `SDV_DEPRECATED_ENDPOINT`, the code every deprecated endpoint now carries, `recruiting_*` included).
+  - `parsed: true` output is unchanged.
+- **Codegen:** an endpoint-level `fixed_params` on a flat family is honoured (sent first, overridable), as sdv-py's spec allows; a family-level one on a flat YAML fails codegen (sdv-py merges it only for ESPN families). `kind: frames` endpoints document their `parsed: true` return as an object of tables keyed by result set.
+- **Loaders — `on_missing: raise`:** the 25 seasonal NFL loaders that sdv-py hand-writes (pbp, rosters, the usage/tendency tables, …) now throw `NoDataError` for a season with no published asset instead of skipping it. A failed fetch is still `AssetFetchError`.
+- **Returns tables:** sdv-py now derives these from parser output, so they document their columns again:
+
+  | family | tables documented |
+  |---|---|
+  | 247Sports site pages | 35 |
+  | `nba_stats` | 126 of 128 |
+  | `wnba_stats` | 110 of 111 |
+  | On3 | 23 of 78 (48 are `unverified` upstream) |
+
+  - A `kind: frames` schema renders one table per frame. An `unverified` schema prints its reason. The vendor fails closed on a schema shape it does not know.
+  - Kept off, because the parity harness disproves them on real captures:
+    - `nba_stats.leaguedashptstats`: the table documents the default measure type, and the 7 other tracking measure types return other columns.
+    - 7 On3 tables: sdv-py stringifies a bool column that contains a null, while JS keeps booleans.
+- **Parity harness:** 259 more sdv-py captures (124 NBA, 109 WNBA, 26 On3), with `kind: frames` checked frame by frame. Verified endpoints go from 179 to 438.
+
 ### Fixed — transport / auth runtime
 
 - **Date query values.** A `Date` passed as a query parameter is sent as ISO-8601 UTC again (`2025-02-01T00:00:00.000Z`, what axios sent before the transport layer); it had become `Date#toString()` (`"Sat Feb 01 2025 …"`). An invalid `Date` throws an `SdvError` naming the parameter before anything is sent. Both built-in transports serialise the same way, and axios' `config.url` stays query-free (an app interceptor that logs it never sees a query-param key). A date-only API (`YYYY-MM-DD`, ESPN's `YYYYMMDD`) wants a string.

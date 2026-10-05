@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnCfbCdnBoxscore, espnCfbCdnPlaybyplay, espnCfbCdnRankings, espnCfbCdnSchedule } from '../generated/espn/cfb.js';
+import { cdnDate, warnFootballDate } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for College Football.
@@ -23,17 +25,8 @@ export default {
      * const result = await sdv.cfb.getPlayByPlay(401256194);
      */
     getPlayByPlay: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/college-football/playbyplay';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: 'false',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_cfb_cdn_playbyplay (https; core request layer + error vocabulary)
+        const res = { data: await espnCfbCdnPlaybyplay({ game_id: id }) };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -58,18 +51,8 @@ export default {
      * const result = await sdv.cfb.getBoxScore(401256194);
      */
     getBoxScore: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/college-football/boxscore';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_cfb_cdn_boxscore (https; core request layer + error vocabulary)
+        const res = { data: await espnCfbCdnBoxscore({ game_id: id }) };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -345,20 +328,8 @@ export default {
      * const result = await sdv.cfb.getRankings(year = 2020, week = 4)
      */
     getRankings: async function ({ year, week }) {
-        const baseUrl = 'http://cdn.espn.com/core/college-football/rankings';
-        const params: Record<string, any> = {};
-
-        if (year) {
-            params.year = year;
-        }
-
-        if (week) {
-            params.week = week;
-        }
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_cfb_cdn_rankings (https; core request layer + error vocabulary)
+        const res = { data: await espnCfbCdnRankings({ season: year || undefined, week: week || undefined }) };
         return res.data;
     },
     /**
@@ -369,30 +340,22 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {*} month - Month (MM)
      * @param {*} day - Day (DD)
-     * @param {number} group - Group is 80 for FBS, 81 for FCS
-     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+     * @param {number} group - Ignored: the espn.com CFB schedule page always serves FBS (80)
+     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4 (with `week`)
+     * @param {number} week - Week number. The CDN schedule page is week-oriented and ignores a
+     * date, so pass `week` (with `year` = the season) to pick a week; without it the current
+     * week comes back (and a date warns once).
      * @returns json
      * @example
-     * const result = await sdv.cfb.getSchedule(year = 2019, month = 11, day = 16, group=80)
+     * const result = await sdv.cfb.getSchedule({ year: 2024, week: 12, seasontype: 2 })
      */
-    getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2 }) {
-        const baseUrl = `http://cdn.espn.com/core/college-football/schedule`;
-        const params: Record<string, any> = {
-            groups: groups,
-            seasontype: seasontype,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-        if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        }
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+    getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2, week = null }) {
+        // The CDN ignores a date for football: select the week (espn_cfb_cdn_schedule).
+        if (week == null && cdnDate(year, month, day)) warnFootballDate("cfb");
+        const res = await espnCfbCdnSchedule(
+            week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
+        );
+        return res.content.schedule;
     },
     /**
      * Gets the College Football scoreboard data for a specified date if available.

@@ -81,6 +81,9 @@ export function parserForEndpoint(short: string): ParserFn | typeof parse_summar
 export const PARSERS: Record<string, FlatParserFn>;
 
 // @public
+export const SECTIONED_ENDPOINTS: ReadonlySet<string>;
+
+// @public
 export function snakeCase(key: string): string;
 
 // @public (undocumented)

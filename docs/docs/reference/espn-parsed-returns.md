@@ -16,7 +16,7 @@ const raw  = await sdv.nba.espnNbaScoreboard({});               // raw Dict
 const rows = await sdv.nba.espnNbaScoreboard({ parsed: true }); // tidy row[]
 ```
 
-The **121** ESPN endpoints route through just **23** parsers, so the returned columns are determined by the endpoint's *parser*, not the league — the same parser yields the same shape across every league. Each parser's column set is documented once below; the **Endpoints** line under each lists the short names that use it. Columns are snake_cased and nested objects flattened with `_` (e.g. `team.abbreviation` -> `team_abbreviation`). Generic / league-variable passthroughs show no fixed table.
+The **126** ESPN endpoints route through just **27** parsers, so the returned columns are determined by the endpoint's *parser*, not the league — the same parser yields the same shape across every league. Each parser's column set is documented once below; the **Endpoints** line under each lists the short names that use it. Columns are snake_cased and nested objects flattened with `_` (e.g. `team.abbreviation` -> `team_abbreviation`). Generic / league-variable passthroughs show no fixed table.
 
 ## `parse_scoreboard`
 
@@ -423,6 +423,155 @@ Generic Core v2 single resource — one row for the entity.
 **Endpoints (31):** `athlete_bio`, `athlete_core`, `athlete_hotzones`, `athlete_info`, `athlete_vs_athlete`, `award`, `coach`, `coach_record`, `coach_season`, `event`, `event_competition`, `event_competitor`, `event_competitor_record`, `event_official_detail`, `event_play`, `event_powerindex`, `event_predictor`, `event_situation`, `event_status`, `franchise`, `league_root`, `position`, `season_group`, `season_info`, `season_pointer`, `season_team`, `season_type`, `season_week`, `team`, `team_core`, `venue`
 
 _Generic / dynamic passthrough — the column set varies by league and payload (e.g. Core v2 `$ref` items or a league-specific catalog). Call with `{ parsed: true }` to inspect the columns for a given league._
+
+## `parse_cdn_game`
+
+CDN play-by-play / box-score page: its `gamepackageJSON` (a Site v2 summary) through the `summary` dispatcher — an object of 21 sub-frames, or one `section` (see [Summary sub-frames](#summary-sub-frames)).
+
+**Endpoints (2):** `cdn_boxscore`, `cdn_playbyplay`
+
+
+## `parse_cdn_scoreboard`
+
+CDN scoreboard page: its `sbData` (a Site v2 scoreboard), one row per game — the `parse_scoreboard` columns.
+
+**Endpoints (1):** `cdn_scoreboard`
+
+| col_name | type | description |
+|---|---|---|
+| `game_id` | character |  |
+| `uid` | character |  |
+| `date` | character |  |
+| `name` | character |  |
+| `short_name` | character |  |
+| `season_year` | integer |  |
+| `season_type` | integer |  |
+| `season_slug` | character |  |
+| `status_type_id` | character |  |
+| `status_type_name` | character |  |
+| `status_type_state` | character |  |
+| `status_type_completed` | logical |  |
+| `status_type_description` | character |  |
+| `status_type_detail` | character |  |
+| `status_type_short_detail` | character |  |
+| `status_clock` | integer |  |
+| `status_display_clock` | character |  |
+| `status_period` | integer |  |
+| `neutral_site` | logical |  |
+| `conference_competition` | logical |  |
+| `attendance` | integer |  |
+| `venue_id` | character |  |
+| `venue_full_name` | character |  |
+| `venue_city` | character |  |
+| `venue_state` | character |  |
+| `venue_indoor` | logical |  |
+| `broadcast` | character |  |
+| `note` | character |  |
+| `home_id` | character |  |
+| `home_name` | character |  |
+| `home_abbreviation` | character |  |
+| `home_display_name` | character |  |
+| `home_location` | character |  |
+| `home_color` | character |  |
+| `home_alternate_color` | character |  |
+| `home_logo` | character |  |
+| `home_score` | character |  |
+| `home_winner` | logical |  |
+| `home_rank` | character |  |
+| `away_id` | character |  |
+| `away_name` | character |  |
+| `away_abbreviation` | character |  |
+| `away_display_name` | character |  |
+| `away_location` | character |  |
+| `away_color` | character |  |
+| `away_alternate_color` | character |  |
+| `away_logo` | character |  |
+| `away_score` | character |  |
+| `away_winner` | logical |  |
+| `away_rank` | character |  |
+
+## `parse_cdn_schedule`
+
+CDN schedule page: every day's games, one row per game — the `parse_scoreboard` columns.
+
+**Endpoints (1):** `cdn_schedule`
+
+| col_name | type | description |
+|---|---|---|
+| `game_id` | character |  |
+| `uid` | character |  |
+| `date` | character |  |
+| `name` | character |  |
+| `short_name` | character |  |
+| `season_year` | integer |  |
+| `season_type` | integer |  |
+| `season_slug` | character |  |
+| `status_type_id` | character |  |
+| `status_type_name` | character |  |
+| `status_type_state` | character |  |
+| `status_type_completed` | logical |  |
+| `status_type_description` | character |  |
+| `status_type_detail` | character |  |
+| `status_type_short_detail` | character |  |
+| `status_clock` | integer |  |
+| `status_display_clock` | character |  |
+| `status_period` | integer |  |
+| `neutral_site` | logical |  |
+| `conference_competition` | logical |  |
+| `attendance` | integer |  |
+| `venue_id` | character |  |
+| `venue_full_name` | character |  |
+| `venue_city` | character |  |
+| `venue_state` | character |  |
+| `venue_indoor` | logical |  |
+| `broadcast` | character |  |
+| `note` | character |  |
+| `home_id` | character |  |
+| `home_name` | character |  |
+| `home_abbreviation` | character |  |
+| `home_display_name` | character |  |
+| `home_location` | character |  |
+| `home_color` | character |  |
+| `home_alternate_color` | character |  |
+| `home_logo` | character |  |
+| `home_score` | character |  |
+| `home_winner` | logical |  |
+| `home_rank` | character |  |
+| `away_id` | character |  |
+| `away_name` | character |  |
+| `away_abbreviation` | character |  |
+| `away_display_name` | character |  |
+| `away_location` | character |  |
+| `away_color` | character |  |
+| `away_alternate_color` | character |  |
+| `away_logo` | character |  |
+| `away_score` | character |  |
+| `away_winner` | logical |  |
+| `away_rank` | character |  |
+
+## `parse_cdn_rankings`
+
+CDN poll rankings page (cfb): one row per (poll, team), ranked teams and those receiving votes.
+
+**Endpoints (1):** `cdn_rankings`
+
+| col_name | type | description |
+|---|---|---|
+| `poll_id` | integer | Poll id (1 = AP Top 25). |
+| `poll_name` | character | Poll name (e.g. AP Top 25, AFCA Coaches Poll). |
+| `poll_short_name` | character | Short poll name. |
+| `ranked` | logical | true for a ranked team, false for a team receiving votes. |
+| `team_id` | character | ESPN team id, read from team_url (null when the team is not linked). |
+| `team_display_name` | character | Team display name. |
+| `trend` | character | Movement since the previous poll. |
+| `formatted_record` | character | Win-loss record (e.g. 4-0). |
+| `first_place_votes` | integer | First-place votes. |
+| `rank` | integer | Poll rank (null for teams receiving votes). |
+| `previous_rank` | integer | Rank in the previous poll. |
+| `team_abbreviation` | character | Team abbreviation. |
+| `team_url` | character | espn.com team page URL. |
+| `team_logo` | character | Team logo URL. |
+| `points` | integer | Poll points. |
 
 ## Summary sub-frames
 

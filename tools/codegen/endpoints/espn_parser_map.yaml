@@ -2,6 +2,9 @@
 # Filtered to actual ESPN wrapper short names (WRAPPERS) that have a parser
 # in ESPN_ENDPOINT_PARSERS. A drift test asserts this matches the runtime.
 # Codegen reads this to render the shared "ESPN parsed returns" doc page.
+# `dispatchers`: the parsers that run the summary dispatcher; their endpoints take
+# `section` (a drift test holds this equal to SECTIONED_ENDPOINTS in src/parsers/espn.ts).
+dispatchers: [parse_cdn_game, parse_summary]
 endpoints:
   athlete_awards: parse_items
   athlete_bio: parse_single_entity
@@ -26,6 +29,11 @@ endpoints:
   award: parse_single_entity
   awards: parse_items
   calendar: parse_items
+  cdn_boxscore: parse_cdn_game
+  cdn_playbyplay: parse_cdn_game
+  cdn_rankings: parse_cdn_rankings
+  cdn_schedule: parse_cdn_schedule
+  cdn_scoreboard: parse_cdn_scoreboard
   coach: parse_single_entity
   coach_record: parse_single_entity
   coach_season: parse_single_entity

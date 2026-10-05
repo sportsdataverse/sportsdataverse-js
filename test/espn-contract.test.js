@@ -9,13 +9,15 @@ import { HOSTS } from '../dist/core/client.js';
 // builds a well-formed ESPN URL. ~819 wrappers across 29 leagues.
 
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
-const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3']);
+const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3', 'cdn']);
+// cdn.espn.com/core/{league}/{page}: keyed by the league slug only (no {sport}).
+const NO_SPORT = new Set(['cdn']);
 const SCOPES = new Set(['universal', 'ncaa', 'football', 'mlb']);
 
-/** Wrappers applicable to a league = those whose scope is in the league's scopes. */
+/** Wrappers applicable to a league = scope in the league's scopes, and on its includePrefixes allowlist if any. */
 function applicable(league) {
   const scopes = new Set(league.scopes);
-  return WRAPPERS.filter((w) => scopes.has(w.scope));
+  return WRAPPERS.filter((w) => scopes.has(w.scope) && (!w.includePrefixes || w.includePrefixes.includes(league.prefix)));
 }
 
 /** Fill every path param that has no other resolution source, so URLs fully resolve. */
@@ -40,7 +42,8 @@ describe('ESPN wrapper metadata invariants', () => {
       FAMILIES.has(w.family).should.be.true(`bad family on ${w.short}: ${w.family}`);
       SCOPES.has(w.scope).should.be.true(`bad scope on ${w.short}: ${w.scope}`);
       w.path.startsWith('/').should.be.true(`path not absolute on ${w.short}: ${w.path}`);
-      w.path.includes('{sport}').should.be.true(`path lacks {sport} on ${w.short}`);
+      const slug = NO_SPORT.has(w.family) ? '{league}' : '{sport}';
+      w.path.includes(slug).should.be.true(`path lacks ${slug} on ${w.short}`);
       Array.isArray(w.pathParams).should.be.true(`pathParams not an array on ${w.short}`);
       Array.isArray(w.queryParams).should.be.true(`queryParams not an array on ${w.short}`);
     }
@@ -79,7 +82,7 @@ describe('every wrapper builds a well-formed ESPN URL (no network)', () => {
       for (const w of applicable(league)) {
         const { url } = resolveRequest(w, league, minimalParams(league, w));
         url.should.startWith(HOSTS[w.family], `${w.short}: wrong host`);
-        url.should.containEql(`/${league.sport}/`, `${w.short}: missing sport slug`);
+        if (!NO_SPORT.has(w.family)) url.should.containEql(`/${league.sport}/`, `${w.short}: missing sport slug`);
         if (!league.leagueParam) {
           url.should.containEql(`/${league.league}`, `${w.short}: missing league slug`);
         }

@@ -205,9 +205,9 @@ describe('parsers/espn: parse_leaders + parse_event_plays (inline payloads)', ()
 });
 
 describe('parsers/espn: ESPN_ENDPOINT_PARSERS registry', () => {
-  it('has exactly 126 entries, all functions', () => {
+  it('has exactly 131 entries, all functions', () => {
     const entries = Object.entries(ESPN_ENDPOINT_PARSERS);
-    entries.length.should.equal(126);
+    entries.length.should.equal(131); // + the 5 CDN shorts (sdv-py #681)
     for (const [, fn] of entries) (typeof fn).should.equal('function');
   });
 
