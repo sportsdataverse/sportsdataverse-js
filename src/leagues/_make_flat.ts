@@ -8,6 +8,7 @@ import "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
 import { torvikGet } from "../core/torvik_runtime.js";
+import { nbaStatsGet } from "../core/nba_stats_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import { aliasesFor, withDeprecatedAliases } from "../core/deprecation.js";
 import { FLAT_DEPRECATED_ALIASES } from "../generated/aliases.js";
@@ -37,6 +38,10 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   // and JSON (one JSON endpoint even with a text/html content-type), so this
   // getter sets a browser UA and returns the raw body text for the parser.
   torvik: torvikGet,
+  // stats.nba.com / stats.wnba.com: browser headers, sorted params, zero-padded
+  // GameID, and a body check so a throttled blank / `{}` reply is a failure.
+  nba_stats: nbaStatsGet,
+  wnba_stats: nbaStatsGet,
 };
 
 /**

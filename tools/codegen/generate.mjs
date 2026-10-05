@@ -47,6 +47,8 @@ const FLAT_API_FILES = [
   "yahoo",
   "hockeytech",
   "torvik",
+  "nba_stats",
+  "wnba_stats",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -76,7 +78,14 @@ const FLAT_API_NAMESPACES = {
   // BartTorvik T-Rank — standalone provider namespace (`sdv.torvik`) for men's
   // college basketball ratings / four-factors / game + player stats / schedule.
   torvik: "torvik",
+  // stats.nba.com / stats.wnba.com — merge onto the league namespaces
+  // (sdv.nba.nba_stats_*, sdv.wnba.wnba_stats_*). TLS-impersonation transport.
+  nba_stats: "nba",
+  wnba_stats: "wnba",
 };
+
+// Flat families excluded from the docs playground (see renderEndpointsJson).
+const NO_PLAYGROUND_FAMILIES = new Set(["nba_stats", "wnba_stats"]);
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
 // section heading + intro line on the league reference page.
@@ -133,6 +142,16 @@ const FLAT_API_META = {
     source: "barttorvik.com (T-Rank college basketball analytics)",
     // Sport-specific standalone family: nests under the Basketball sport group.
     sport: "basketball",
+  },
+  nba_stats: {
+    label: "NBA Stats API (stats.nba.com)",
+    source:
+      "stats.nba.com (needs a TLS-impersonating transport and a residential IP)",
+  },
+  wnba_stats: {
+    label: "WNBA Stats API (stats.wnba.com)",
+    source:
+      "stats.wnba.com (needs a TLS-impersonating transport and a residential IP)",
   },
 };
 
@@ -1637,6 +1656,14 @@ function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
 // ---------------------------------------------------------------------------
 
 function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) {
+  // Families that must NEVER be reachable through the docs playground's
+  // /api/run proxy (its host allowlist derives from `flatHosts`): stats.nba.com
+  // / stats.wnba.com need TLS impersonation and a residential IP, so a
+  // serverless fetch would only hang. Dropped from the playground metadata.
+  flatWrappers = flatWrappers.filter((w) => !NO_PLAYGROUND_FAMILIES.has(w.api));
+  flatHosts = Object.fromEntries(
+    Object.entries(flatHosts).filter(([api]) => !NO_PLAYGROUND_FAMILIES.has(api))
+  );
   return (
     JSON.stringify(
       {
