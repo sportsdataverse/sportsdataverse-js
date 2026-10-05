@@ -23,6 +23,26 @@ export const DEPRECATED_ENDPOINT_CODE = "SDV_DEPRECATED_ENDPOINT";
 
 const warned = new Set<string>();
 
+/**
+ * `process.emitWarning(message, options)` the first time `key` is seen in this
+ * process, never again: the one warn-once registry behind the deprecated names and
+ * endpoints, the stats.ncaa.org scrapers and the CDN football-date warning. Namespace
+ * the key by caller (`"name:" + fn`) so two callers cannot share it.
+ */
+export function warnOnce(key: string, message: string, options: { type?: string; code?: string }): void {
+  if (warned.has(key)) return;
+  warned.add(key);
+  process.emitWarning(message, options);
+}
+
+/**
+ * Forget every {@link warnOnce} key, so each warns again. For tests: a "warns once"
+ * test calls it first instead of depending on no earlier test having warned.
+ */
+export function resetWarnOnce(): void {
+  warned.clear();
+}
+
 const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
 
 /**
@@ -31,15 +51,13 @@ const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string)
  */
 export function deprecatedAlias(target: WrapperFn, name: string, replacement: string): DeprecatedAlias {
   const alias = (params?: Record<string, any>) => {
-    if (!warned.has(name)) {
-      warned.add(name);
-      process.emitWarning(
-        `${name}() is deprecated: sportsdataverse v4 adopted sdv-py's names; call ${replacement}() instead. ` +
-          "The old name will be removed in a future major release.",
-        // A stable `code` so callers can filter: `w.code === "SDV_DEPRECATED_NAME"`.
-        { type: "DeprecationWarning", code: DEPRECATED_NAME_CODE }
-      );
-    }
+    warnOnce(
+      `name:${name}`,
+      `${name}() is deprecated: sportsdataverse v4 adopted sdv-py's names; call ${replacement}() instead. ` +
+        "The old name will be removed in a future major release.",
+      // A stable `code` so callers can filter: `w.code === "SDV_DEPRECATED_NAME"`.
+      { type: "DeprecationWarning", code: DEPRECATED_NAME_CODE }
+    );
     return target(params);
   };
   return Object.defineProperties(alias, {

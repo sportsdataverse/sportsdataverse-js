@@ -30,6 +30,9 @@ const schemaColumns = (stem) => readSchema(['schemas'], stem).map((c) => c.name)
 const TYPE_OK = {
   integer: (v) => typeof v === 'bigint' || Number.isInteger(v),
   double: (v) => typeof v === 'number',
+  // Any number, whole or not: JS has one number type, so a whole-valued Float64 cell (py 5.0)
+  // and an Int64 one are the same value and the integer/numeric split cannot be seen here.
+  // What can be seen is checked: a numeric column holding a BigInt (an integer past 2^53) fails.
   numeric: (v) => typeof v === 'number',
   character: (v) => typeof v === 'string',
   logical: (v) => typeof v === 'boolean',

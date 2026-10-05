@@ -5,9 +5,10 @@ derived payloads that reach gate branches no capture reaches.
 
 test/producers/espn_basketball_box.test.js compares src/producers/espn_basketball_box.ts
 to this cell by cell (column names, order, dtypes, values). Run it from sdv-py checked
-out at the vendor pin (tools/codegen/vendor.yaml `source.ref`), never a working tree:
+out at PORT_PIN (tools/sdv_py_pin.py: the pin the producers were ported from and this
+oracle was generated at), never a working tree; the shared guard refuses anything else:
 
-    git -C <sdv-py> worktree add --detach <scratch> <source.ref>
+    git -C <sdv-py> worktree add --detach <scratch> <PORT_PIN>
     cd <scratch> && uv sync
     uv run python <sdv-js>/tools/parity/espn_basketball_box_oracle.py
 
@@ -24,36 +25,17 @@ import gzip
 import importlib
 import json
 import math
-import subprocess
+import sys
 from pathlib import Path
 
-import yaml
-
 JS = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(JS / "tools"))
+from sdv_py_pin import PORT_PIN, pinned_checkout  # noqa: E402
 DIR = JS / "test" / "fixtures" / "espn" / "basketball_box"
 # Real captures: every *.json.gz in DIR, plus the existing NBA summary capture.
 EXTRA = [JS / "test" / "fixtures" / "espn" / "summary_nba.json"]
 OUT = DIR / "oracle.json.gz"
 LEAGUES = ("nba", "wnba", "mbb", "wbb")
-
-
-def git(*args: str) -> str:
-    return subprocess.run(["git", *args], capture_output=True, text=True, check=True).stdout.strip()
-
-
-def pinned_checkout() -> str:
-    vendor = yaml.safe_load((JS / "tools/codegen/vendor.yaml").read_text(encoding="utf-8"))
-    ref = vendor["source"]["ref"]
-    head = git("rev-parse", "HEAD")
-    if head != ref:
-        raise SystemExit(f"sdv-py checkout is at {head}, the vendor pin is {ref}")
-    if git("status", "--porcelain"):
-        raise SystemExit("the sdv-py checkout has local changes; the oracle must come from the pin as committed")
-    root = Path(git("rev-parse", "--show-toplevel")).resolve()
-    pkg = Path(importlib.import_module("sportsdataverse").__file__).resolve()
-    if root not in pkg.parents:
-        raise SystemExit(f"sportsdataverse is imported from {pkg}, outside the pinned checkout {root}")
-    return ref
 
 
 def read(path: Path):
@@ -329,7 +311,7 @@ def derived(captures):
 
 
 def main() -> None:
-    ref = pinned_checkout()
+    ref, _ = pinned_checkout(PORT_PIN)
     fns = helpers()
     # never read our own output back in as a capture
     paths = sorted(p for p in DIR.glob("*.json.gz") if p.name != OUT.name) + EXTRA

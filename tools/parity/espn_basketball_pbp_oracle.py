@@ -5,10 +5,10 @@ REAL committed capture, plus labelled derived payloads that reach league-fact br
 capture reaches.
 
 test/producers/espn_basketball_pbp.test.js compares src/producers/espn_basketball_pbp.ts to
-this cell by cell. Run it from sdv-py checked out at the vendor pin (tools/codegen/vendor.yaml
-``source.ref``), never a working tree (the guard is shared with the box oracle):
+this cell by cell. Run it from sdv-py checked out at PORT_PIN (tools/sdv_py_pin.py, the pin the
+producers were ported from), never a working tree (the shared guard refuses anything else):
 
-    git -C <sdv-py> worktree add --detach <scratch> <source.ref>
+    git -C <sdv-py> worktree add --detach <scratch> <PORT_PIN>
     cd <scratch> && uv sync
     uv run python <sdv-js>/tools/parity/espn_basketball_pbp_oracle.py
 
@@ -36,7 +36,7 @@ import json
 import math
 
 import numpy as np
-from espn_basketball_box_oracle import JS, pinned_checkout, read
+from espn_basketball_box_oracle import JS, PORT_PIN, pinned_checkout, read
 
 ESPN = JS / "test" / "fixtures" / "espn"
 BOX = ESPN / "basketball_box"
@@ -371,7 +371,7 @@ def derived(captures):
 
 
 def main() -> None:
-    ref = pinned_checkout()
+    ref, _ = pinned_checkout(PORT_PIN)
     recorders = [Recorder(lg) for lg in LEAGUES]
     # never read an oracle (ours or the box one) back in as a capture
     paths = (

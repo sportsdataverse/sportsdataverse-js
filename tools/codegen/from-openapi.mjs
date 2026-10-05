@@ -176,7 +176,18 @@ function resolveHost(spec, override) {
     // bare-origin `--host` doesn't silently drop it.
     const { basePath } = resolveHost(spec, undefined);
     const o = override.replace(/\/+$/, "");
-    const hasPath = new URL(o).pathname !== "/";
+    let url;
+    try {
+      url = new URL(o);
+    } catch {
+      url = null;
+    }
+    // `new URL("api.example.com")` throws a bare "Invalid URL"; `localhost:8080` parses with the
+    // scheme `localhost:`. Both are a --host without its http(s):// scheme.
+    if (!url || !/^https?:$/.test(url.protocol)) {
+      throw new Error(`--host must be an absolute http(s) URL such as https://api.example.com (got "${override}")`);
+    }
+    const hasPath = url.pathname !== "/";
     return { host: hasPath ? o : o + basePath, basePath: "" };
   }
 

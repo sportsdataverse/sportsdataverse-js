@@ -1,7 +1,8 @@
 """Generate the odds-math parity oracle from sdv-py `sportsdataverse.wexp.market`.
 
-Provenance: sdv-py pin 719de79edb685b89c524f8b4c0c146fea0b53855. Run with the
-pin on PYTHONPATH (scratch `git worktree add <dir> <pin>`):
+Provenance: sdv-py at PORT_PIN (tools/sdv_py_pin.py). Run with a clean worktree of
+that pin on PYTHONPATH (scratch `git worktree add <dir> <PORT_PIN>`); the shared guard
+refuses any other checkout, a dirty one, or another installed copy:
 
   PYTHONPATH=<scratch> <sdv-py venv python> tools/oracle/odds_math_oracle.py \
       [--build-fixture <odds-data/odds dir>]
@@ -17,7 +18,8 @@ import sportsdataverse.wexp.market as m
 
 HERE = Path(__file__).resolve().parents[2]
 FIX = HERE / "test" / "fixtures" / "odds"
-PIN = "719de79edb685b89c524f8b4c0c146fea0b53855"
+sys.path.insert(0, str(HERE / "tools"))
+from sdv_py_pin import PORT_PIN, pinned_checkout  # noqa: E402
 
 
 def enc(x):
@@ -56,10 +58,11 @@ def build_fixture(root):
                             rows.append({"src": f"{sport}/lines/{f}", "home": ev["home_team"], "away": ev["away_team"],
                                          "bookmaker": bk["key"], "outcomes": mk["outcomes"]})
     doc = {"provenance": f"The Odds API historical h2h captures (oddsapiR-dev/odds-data/odds), American prices; extracted by tools/oracle/odds_math_oracle.py", "rows": rows}
-    json.dump(doc, open(FIX / "h2h_rows.json", "w"), indent=0)
+    json.dump(doc, open(FIX / "h2h_rows.json", "w", newline="\n"), indent=0)
 
 
 def main():
+    PIN, _ = pinned_checkout(PORT_PIN)
     if "--build-fixture" in sys.argv:
         build_fixture(sys.argv[sys.argv.index("--build-fixture") + 1])
     rows = json.load(open(FIX / "h2h_rows.json"))["rows"]
@@ -103,7 +106,7 @@ def main():
         for meth in ("multiplicative", "shin", "power", ""):
             cases["moneyline_pair_prob"].append({"args": [enc(h), enc(a), meth], **call(m.moneyline_pair_prob, h, a, meth)})
     json.dump(enc({"provenance": {"sdv_py_pin": PIN, "module": "sportsdataverse.wexp.market", "module_file": m.__file__.replace("\\", "/").split("sportsdataverse/")[-1]}, "cases": cases}),
-              open(FIX / "odds_math_oracle.json", "w"), indent=0)
+              open(FIX / "odds_math_oracle.json", "w", newline="\n"), indent=0)
     print({k: len(v) for k, v in cases.items()})
 
 

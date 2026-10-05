@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import sdv, { configure, resetConfig, AssetFetchError, NoDataError } from '../dist/index.js';
 import { _timer } from '../dist/core/request.js';
+import { resetWarnOnce } from '../dist/core/deprecation.js';
+import { captureWarnings } from './helpers/warnings.mjs';
 
 // The legacy hand-written `sdv.<league>.get*` methods that used raw axios (mostly
 // over http://) now fetch through the core request layer: https, retries, the
@@ -415,18 +417,14 @@ describe('legacy ncaa methods: through the request layer', () => {
 
   it("stats.ncaa.org scrapers: https; Akamai's 403 is AssetFetchError at once (not retried); still deprecated", async () => {
     const calls = fake(() => ({ status: 403, data: '<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD></HTML>' }));
-    const warnings = [];
-    const onWarn = (w) => w.name === 'DeprecationWarning' && warnings.push(w.message);
-    process.on('warning', onWarn);
-    try {
-      const err = await rejection(() => sdv.ncaa.getTeamData('MFB', '2017', '11', '52', 'N', '20'));
-      err.should.be.instanceOf(AssetFetchError);
-      err.status.should.equal(403);
-      await new Promise((r) => setImmediate(r)); // 'warning' is emitted on the next tick
-    } finally {
-      process.off('warning', onWarn);
-    }
-    warnings.some((m) => /getTeamData\(\) scrapes stats\.ncaa\.org/.test(m)).should.be.true();
+    let err;
+    resetWarnOnce(); // warn-once state is per process: start clean whatever ran before
+    const warnings = await captureWarnings(async () => {
+      err = await rejection(() => sdv.ncaa.getTeamData('MFB', '2017', '11', '52', 'N', '20'));
+    });
+    err.should.be.instanceOf(AssetFetchError);
+    err.status.should.equal(403);
+    warnings.some((w) => w.name === 'DeprecationWarning' && /getTeamData\(\) scrapes stats\.ncaa\.org/.test(w.message)).should.be.true();
     calls.length.should.equal(1);
     calls[0].family.should.equal('stats_ncaa');
     calls[0].url.should.equal('https://stats.ncaa.org/rankings/change_sport_year_div');
@@ -434,15 +432,16 @@ describe('legacy ncaa methods: through the request layer', () => {
     calls[0].responseType.should.equal('text');
 
     const all = fake(() => ({ status: 403, data: '' }));
-    // (getSports is left to test/phase0-fixes.test.js: its once-per-process warning test must see the first call)
-    for (const call of [
-      () => sdv.ncaa.getSeasons('MBB'),
-      () => sdv.ncaa.getDivisions('MBB', '2017'),
-      () => sdv.ncaa.getSportDivisionData('MFB', '2016', 12, 'team', true),
-      () => sdv.ncaa.getPlayerData('MFB', '2017', '11', '52', 'N', '20'),
-    ]) {
-      (await rejection(call)).should.be.instanceOf(AssetFetchError);
-    }
+    await captureWarnings(async () => {
+      for (const call of [
+        () => sdv.ncaa.getSeasons('MBB'),
+        () => sdv.ncaa.getDivisions('MBB', '2017'),
+        () => sdv.ncaa.getSportDivisionData('MFB', '2016', 12, 'team', true),
+        () => sdv.ncaa.getPlayerData('MFB', '2017', '11', '52', 'N', '20'),
+      ]) {
+        (await rejection(call)).should.be.instanceOf(AssetFetchError);
+      }
+    });
     all.map((c) => c.url).should.eql(Array(4).fill('https://stats.ncaa.org/rankings/change_sport_year_div'));
   });
 });

@@ -72,6 +72,12 @@ export function createImpersonatingTransport(opts?: {
 export const DEFAULT_RETRY_STATUSES: readonly number[];
 
 // @public
+export const DEPRECATED_ENDPOINT_CODE = "SDV_DEPRECATED_ENDPOINT";
+
+// @public
+export const DEPRECATED_NAME_CODE = "SDV_DEPRECATED_NAME";
+
+// @public
 export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2" | "fitt_v3" | "cdn";
 
 // @public

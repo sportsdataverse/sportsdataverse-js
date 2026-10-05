@@ -6,7 +6,8 @@
 //
 // `endpoint` is the playground's selection id:
 //   - ESPN endpoints:  `espn:<short>`            (e.g. `espn:scoreboard`)
-//   - native (flat):   `flat:<api>:<short>`      (e.g. `flat:mlb_api:schedule`)
+//   - native (flat):   `flat:<api>:<short>`      (e.g. `flat:mlb:schedule`; <api> is the
+//     endpoints.json `flatApis[].api` stem: `cbs`, not sdv-py's `cbs_napi`)
 // Keep presets to STABLE params (no volatile per-day ids) so the links keep
 // working; endpoints that need a game/event id note it in `blurb`.
 
@@ -143,7 +144,7 @@ export const EXAMPLES = [
       "MLB's own statsapi.mlb.com schedule feed. Add a `date` (YYYY-MM-DD) or " +
       '`season` param to scope it; parsed to one row per game.',
     league: 'mlb',
-    endpoint: 'flat:mlb_api:schedule',
+    endpoint: 'flat:mlb:schedule',
     parsed: true,
   },
   {
@@ -236,7 +237,7 @@ export const EXAMPLES = [
       "CBS Sports' public NAPI league resource. The league_id is a slug like " +
       '`football-nfl` / `basketball-nba`; parsed to tidy rows.',
     league: 'cbs',
-    endpoint: 'flat:cbs_napi:league',
+    endpoint: 'flat:cbs:league',
     params: { league_id: 'football-nfl' },
     parsed: true,
   },
@@ -248,7 +249,7 @@ export const EXAMPLES = [
       "Fox Sports' Bifrost scoreboard. The public apikey + api-version default " +
       'out of the box — just pass a `sport` (cfb / nfl / mlb / nba …). Parsed.',
     league: 'fox',
-    endpoint: 'flat:fox_bifrost:scoreboard',
+    endpoint: 'flat:fox:scoreboard',
     params: { sport: 'cfb' },
     parsed: true,
   },
@@ -260,7 +261,7 @@ export const EXAMPLES = [
       "Yahoo's shangrila stats-graph standings. Pass a `league` slug (ncaaf / " +
       'nfl / nba …); parsed to tidy rows.',
     league: 'yahoo',
-    endpoint: 'flat:yahoo_shangrila:league_standings',
+    endpoint: 'flat:yahoo:league_standings',
     params: { league: 'ncaaf' },
     parsed: true,
   },
@@ -272,7 +273,7 @@ export const EXAMPLES = [
       "Yahoo's editorial scoreboard feed (api-secure.sports.yahoo.com). Pass a " +
       '`leagues` slug (nfl / nba / mlb …); region/tz/count default out. Parsed.',
     league: 'yahoo',
-    endpoint: 'flat:yahoo_editorial:scoreboard',
+    endpoint: 'flat:yahoo_scores:scoreboard',
     params: { leagues: 'nfl' },
     parsed: true,
   },

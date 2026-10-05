@@ -33,8 +33,12 @@ const ALLOWED_HOSTS = new Set(
 // (e.g. `https://api.nhle.com/stats/rest`) — `new URL(...).host` keys on the
 // bare host (`api.nhle.com`), which is exactly what we compare the resolved
 // target's `.host` against.
-// Per-endpoint host overrides (e.g. MLS's sportapi/dapi) are generated from the
-// vendored endpoint YAML too, so their hosts are allowed the same way.
+// Per-endpoint host overrides of ANY playground family (not only the keyless
+// ones: MLS's sportapi/dapi, On3's /public/rdb/v2, Yahoo's editorial routes) come
+// from the generated `flatApis` too, so they are allowed the same way. Families
+// that need the caller's credentials or browser impersonation never reach
+// endpoints.json (`NO_PLAYGROUND_FAMILIES` in tools/codegen/generate.mjs), so none
+// of their hosts is ever allowed here.
 const ALLOWED_FLAT_HOSTS = new Set(
   [
     ...Object.values(endpoints.flatHosts || {}),

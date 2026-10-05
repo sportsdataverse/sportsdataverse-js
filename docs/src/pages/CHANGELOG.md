@@ -15,6 +15,14 @@
 - **Migrating:** compare and join ids as strings. For a number back, `Number(row.game_id)` (safe ids only); for a 64-bit id keep the string or use `BigInt(row.id)`; for a column array, `cols.id.map(Number)` or `cols.id.map(BigInt)`. To match your own numeric id: `String(myId) === row.team_id`. This covers the widened names too: `athlete_id_1`, `playerId`, `homeTeamId`, `id_play`, `start.team.id` (e.g. `Number(r.playerId)`).
 - **Also:** the loaders run the integer policy only on the id columns and the columns some season stores as INT64 (CFB pbp 2024: 153 INT64 columns of 506), about 2x faster after the decode; the `maxCells` default is documented as a measured heuristic (long-string-only selections cost more per cell).
 
+### Changed — tooling, playground and docs cleanup
+
+- **Exports:** `DEPRECATED_NAME_CODE` and `DEPRECATED_ENDPOINT_CODE` are exported from the package entry, so callers can filter the v4 rename and dead-route `DeprecationWarning`s by `w.code` without copying the strings.
+- **Playground:** five Examples presets named pre-v4 family stems (`mlb_api`, `cbs_napi`, `fox_bifrost`, `yahoo_shangrila`, `yahoo_editorial`) and selected nothing; they now use `mlb`, `cbs`, `fox`, `yahoo` and `yahoo_scores`, and a test checks that every preset and guide cell resolves. The parser bundle is rebuilt (the HockeyTech scorebar parser was stale), and a test now compares it byte for byte with a fresh `npm run bundle:parsers`.
+- **`from-openapi`:** a `--host` without its `https://` scheme now fails with a message that names the fix, instead of a bare `Invalid URL`.
+- **Oracle generators:** every sdv-py oracle generator (`tools/parity`, `tools/oracle`) runs one shared guard, `tools/sdv_py_pin.py`: the checkout must be at the pin, clean, and the one `sportsdataverse` is imported from. The cricket and odds generators had no pin check before. The cricket and HockeyTech generators now produce the same bytes on every run; their committed fixtures changed in key and row order only. The six keyless-parser oracles (On3, ASA, MLS, NWSL, FPI, women's T-Rank) now have a generator too, `tools/parity/keyless_oracle.py`, which reproduces them byte for byte.
+- **Tests:** a test scans every page Docusaurus compiles for braces and tags that MDX would parse (it reports file:line), so a broken page fails locally and not only on Vercel. Warn-once warnings share one registry that tests can reset, and tests that trigger a deprecation on purpose capture the warning instead of printing it.
+
 ### Changed — vendor tooling + CI hardening
 
 - **`fetchWithRetry`:** each attempt gets its own `AbortSignal.timeout` (30 s), and the body is read inside the attempt, so a hung socket or a mid-body reset is retried (error names the URL) and cannot stall a job. Worst case per URL: 3 x 30 s plus 1.5 s of backoff. `raw.githubusercontent.com` file fetches retry exactly like the API ones.
