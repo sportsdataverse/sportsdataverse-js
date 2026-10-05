@@ -22,12 +22,25 @@ const json = (...p) => JSON.parse(read(...p));
 const SUMMARY = json('espn', 'summary_nba.json');
 const SUMMARY_NHL = json('legacy', 'summary_nhl.json.gz');
 const SUMMARY_NFL = json('legacy', 'summary_nfl.json.gz');
+const SUMMARY_MLB = json('legacy', 'summary_mlb.json.gz');
 const SCOREBOARD = json('espn', 'scoreboard_nba.json');
 const STANDINGS = json('espn', 'standings_nba.json');
 const TEAMS = json('espn', 'teams_site_nba.json');
 const ROSTER = json('espn', 'team_roster_nba.json');
 const RANKINGS_247 = read('legacy', 'sports247_cfb_composite_2024_p1.html');
 const NCAA_SCOREBOARD = json('legacy', 'ncaa_scoreboard_basketball-men_d3_20190215.json.gz');
+
+/** Each league's real site v2 summary (cfb answers the NFL one: same football shape). */
+const SUMMARIES = {
+  nba: SUMMARY,
+  wnba: json('espn', 'basketball_box', 'summary_wnba.json.gz'),
+  mbb: json('espn', 'basketball_box', 'summary_mbb.json.gz'),
+  wbb: json('espn', 'basketball_box', 'summary_wbb.json.gz'),
+  mlb: SUMMARY_MLB,
+  nhl: SUMMARY_NHL,
+  nfl: SUMMARY_NFL,
+  cfb: SUMMARY_NFL,
+};
 
 // The CDN's documented bot challenge: HTTP 202 + an HTML page instead of JSON.
 const CHALLENGE = { status: 202, headers: { 'content-type': 'text/html' }, data: '<html><body>Just a moment...</body></html>' };
@@ -71,10 +84,69 @@ const PATH = {
 };
 const ID = 401585607;
 
-/** Every legacy ESPN site-API method: [label, call, family, url]. */
+/** Where each projected field of a summary-reading method comes from in a site v2 summary. */
+const SRC = {
+  boxScore: (b) => b.boxscore,
+  gameInfo: (b) => b.gameInfo,
+  header: (b) => b.header,
+  leaders: (b) => b.leaders,
+  winProbability: (b) => b.winprobability,
+  plays: (b) => b.plays,
+  standings: (b) => b.standings,
+  drives: (b) => b.drives,
+  scoringPlays: (b) => b.scoringPlays,
+  onIce: (b) => b.onIce,
+  seasonSeries: (b) => b.seasonseries,
+  pickcenter: (b) => b.pickcenter,
+  againstTheSpread: (b) => b.againstTheSpread,
+  odds: (b) => b.odds,
+  teams: (b) => b.header.competitions[0].competitors,
+  competitions: (b) => b.header.competitions,
+  season: (b) => b.header.season,
+  week: (b) => b.header.week,
+  id: (b) => parseInt(b.header.id),
+  'id:str': (b) => b.header.id,
+};
+const FOOTBALL_SUMMARY = 'id boxScore gameInfo drives leaders header teams scoringPlays winProbability competitions season week standings';
+const GAME_SUMMARY = 'boxScore gameInfo header teams id:str plays winProbability leaders competitions season seasonSeries standings';
+const PICKS = 'id gameInfo leaders header teams competitions winProbability pickcenter againstTheSpread odds season standings';
+/** The documented return of every summary-reading method: its keys and their sources. */
+const SHAPE = {
+  'cfb.getSummary': FOOTBALL_SUMMARY,
+  'nfl.getSummary': FOOTBALL_SUMMARY,
+  'mbb.getSummary': 'boxScore gameInfo leaders winProbability header plays standings',
+  'wbb.getSummary': 'boxScore gameInfo leaders winProbability header plays standings',
+  'nba.getSummary': GAME_SUMMARY,
+  'mlb.getSummary': GAME_SUMMARY,
+  'wnba.getSummary': GAME_SUMMARY,
+  'nhl.getSummary': 'boxScore gameInfo header teams id plays onIce leaders competitions season seasonSeries standings',
+  'cfb.getPicks': `${PICKS} week`,
+  'nfl.getPicks': `${PICKS} week`,
+  'mbb.getPicks': PICKS,
+  'nba.getPicks': `${PICKS} seasonSeries`,
+  'mlb.getPicks': `${PICKS} seasonSeries`,
+  'nhl.getPicks': 'id gameInfo leaders header teams competitions pickcenter againstTheSpread odds seasonSeries season standings',
+  'nhl.getPlayByPlay': 'teams id plays onIce competitions season boxScore seasonSeries standings',
+};
+
+/** Assert `out` is the documented return of `label` for the real summary `body`. */
+function checkShape(label, out, body) {
+  if (label === 'nhl.getBoxScore') {
+    out.should.equal(body.boxscore, label);
+    out.id.should.equal(parseInt(body.header.id));
+    return;
+  }
+  const spec = SHAPE[label];
+  if (!spec) return out.should.equal(body, label); // raw-body method: the response body itself
+  const fields = spec.split(' ');
+  Object.keys(out).sort().should.eql(fields.map((f) => f.replace(':str', '')).sort(), label);
+  for (const f of fields) should(out[f.replace(':str', '')]).equal(SRC[f](body), `${label}.${f}`);
+}
+
+/** Every legacy ESPN site-API method: [label, call, family, url, league]. */
 const ESPN_METHODS = [];
 for (const [lg, path] of Object.entries(PATH)) {
-  const add = (m, args, family, url) => ESPN_METHODS.push([`${lg}.${m}`, () => sdv[lg][m](...args), family, url]);
+  const add = (m, args, family, url) => ESPN_METHODS.push([`${lg}.${m}`, () => sdv[lg][m](...args), family, url, lg]);
   add('getSummary', [ID], 'site_v2', `${SITE}/${path}/summary`);
   if (!['wbb', 'wnba'].includes(lg)) add('getPicks', [ID], 'site_v2', `${SITE}/${path}/summary`);
   if (lg === 'nhl') {
@@ -90,29 +162,61 @@ for (const [lg, path] of Object.entries(PATH)) {
   add('getTeamInfo', [team], 'site_v2', `${SITE}/${path}/teams/16`);
   add('getTeamPlayers', [team], 'site_v2', `${SITE}/${path}/teams/16`);
 }
-ESPN_METHODS.push(['tennis.getScoreboard', () => sdv.tennis.getScoreboard({}), 'site_v2', `${SITE}/tennis/atp/scoreboard`]);
+ESPN_METHODS.push(['tennis.getScoreboard', () => sdv.tennis.getScoreboard({}), 'site_v2', `${SITE}/tennis/atp/scoreboard`, 'nba']);
+
+const STANDINGS_BASE = { region: 'us', lang: 'en', contentorigin: 'espn' };
+const NCAA_SORT =
+  'leaguewinpercent:desc,vsconf_winpercent:desc,' +
+  'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,' +
+  'losses:desc,playoffseed:asc,alpha:asc';
 
 describe('legacy ESPN site-API methods: https through the core request layer', () => {
   afterEach(() => resetConfig());
 
-  it(`all ${ESPN_METHODS.length} methods send one https request on their ESPN family`, async () => {
-    for (const [label, call, family, url] of ESPN_METHODS) {
-      const calls = fake(answer(SUMMARY));
-      await call();
+  it(`all ${ESPN_METHODS.length} methods: one https request on their ESPN family, documented return (real summaries)`, async () => {
+    for (const [label, call, family, url, lg] of ESPN_METHODS) {
+      const body = SUMMARIES[lg];
+      const calls = fake(answer(body));
+      const out = await call();
       calls.map((c) => [c.family, c.method, c.url]).should.eql([[family, 'GET', url]], label);
+      checkShape(label, out, body);
     }
   });
 
-  it('queries are unchanged', async () => {
+  it('every documented summary field is present in its real capture (the shape check is not vacuous)', () => {
+    const missing = [];
+    for (const [label, spec] of Object.entries(SHAPE)) {
+      const body = SUMMARIES[label.split('.')[0]];
+      for (const f of spec.split(' ')) if (SRC[f](body) === undefined) missing.push(`${label}.${f}`);
+    }
+    // MLB site v2 summaries carry no `leaders` section (no equivalent elsewhere): that field stays undefined.
+    missing.should.eql(['mlb.getSummary.leaders', 'mlb.getPicks.leaders']);
+  });
+
+  it('nba / mlb getSummary: the 7 fields once read off a nonexistent gamepackageJSON are populated', async () => {
+    for (const lg of ['nba', 'mlb']) {
+      const body = SUMMARIES[lg];
+      fake(answer(body));
+      const out = await sdv[lg].getSummary(ID);
+      out.teams.should.equal(body.header.competitions[0].competitors);
+      out.teams.length.should.equal(2);
+      out.id.should.equal(body.header.id);
+      out.plays.should.equal(body.plays);
+      out.plays.length.should.be.above(100);
+      out.competitions.should.equal(body.header.competitions);
+      out.season.should.equal(body.header.season);
+      out.seasonSeries.should.equal(body.seasonseries);
+      out.standings.should.equal(body.standings);
+    }
+  });
+
+  it('queries are unchanged (an exact row per league)', async () => {
     const cases = [
       [() => sdv.nba.getSummary(ID), { event: ID }],
       [() => sdv.nba.getPicks(ID), { event: ID }],
       [() => sdv.nba.getScoreboard({ year: 2025, month: '1', day: 5 }), { limit: 300, dates: '20250105' }],
       [() => sdv.nba.getScoreboard({}), { limit: 300 }],
-      [
-        () => sdv.nba.getStandings({ year: 2024, group: 'conference' }),
-        { region: 'us', lang: 'en', contentorigin: 'espn', season: 2024, type: 1, level: 2 },
-      ],
+      [() => sdv.nba.getStandings({ year: 2024, group: 'conference' }), { ...STANDINGS_BASE, season: 2024, type: 1, level: 2 }],
       [() => sdv.nba.getTeamList(), { limit: 1000 }],
       [() => sdv.nba.getTeamInfo(16), undefined],
       [() => sdv.nba.getTeamPlayers(16), { enable: 'roster' }],
@@ -123,62 +227,35 @@ describe('legacy ESPN site-API methods: https through the core request layer', (
       [() => sdv.cfb.getConferences({ year: 2023 }), { season: 2023, group: 80 }],
       [
         () => sdv.cfb.getStandings({ year: 2023 }),
-        {
-          region: 'us',
-          lang: 'en',
-          contentorigin: 'espn',
-          season: 2023,
-          group: 80,
-          type: 0,
-          level: 1,
-          sort:
-            'winpercent:desc,leaguewinpercent:desc,vsconf_winpercent:desc,' +
-            'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,' +
-            'losses:desc,playoffseed:asc,alpha:asc',
-        },
+        { ...STANDINGS_BASE, season: 2023, group: 80, type: 0, level: 1, sort: `winpercent:desc,${NCAA_SORT}` },
       ],
       [() => sdv.cfb.getTeamList({ group: 81 }), { group: 81, limit: 1000 }],
+      [() => sdv.mbb.getScoreboard({ year: 2024, month: 3, day: 9 }), { groups: 50, seasontype: 2, limit: 1000, dates: '20240309' }],
+      [() => sdv.mbb.getStandings({ year: 2024 }), { ...STANDINGS_BASE, season: 2024, group: 50, type: 0, level: 1, sort: NCAA_SORT }],
+      [() => sdv.mbb.getTeamList({}), { group: 50, limit: 1000 }],
+      [() => sdv.wbb.getScoreboard({ year: 2024, month: 3, day: 9 }), { groups: 50, seasontype: 2, limit: 300, dates: '20240309' }],
+      [() => sdv.wbb.getConferences({ year: 2024 }), { season: 2024, group: 50 }],
+      [() => sdv.wbb.getStandings({ year: 2024 }), { ...STANDINGS_BASE, season: 2024, group: 50, type: 0, level: 1, sort: NCAA_SORT }],
+      [() => sdv.wnba.getScoreboard({ year: 2024, month: 9, day: 1 }), { limit: 300, dates: '20240901' }],
+      [() => sdv.wnba.getStandings({ year: 2024, group: 'conference' }), { ...STANDINGS_BASE, season: 2024, type: 0, level: 2 }],
+      [() => sdv.mlb.getScoreboard({ year: 2024, month: 10, day: 30 }), { limit: 300, dates: '20241030' }],
+      [() => sdv.mlb.getStandings({ year: 2024, group: 'division' }), { ...STANDINGS_BASE, season: 2024, type: 1, level: 3 }],
+      [() => sdv.mlb.getTeamPlayers(16), { enable: 'roster' }],
+      [() => sdv.nhl.getScoreboard({ year: 2024, month: 6, day: 24 }), { limit: 300, dates: '20240624' }],
+      [
+        () => sdv.nhl.getStandings({ year: 2024 }),
+        { ...STANDINGS_BASE, type: 1, level: 1, sort: 'playoffseed:asc,points:desc,gamesplayed:asc,rotwins:desc', season: 2024 },
+      ],
+      [() => sdv.nhl.getPlayByPlay(ID), { event: ID }],
+      [() => sdv.nfl.getScoreboard({ year: 2025, month: 2, day: 9 }), { limit: 300, dates: '20250209' }],
+      [() => sdv.nfl.getStandings({ year: 2024, group: 'division' }), { ...STANDINGS_BASE, season: 2024, type: 1, level: 3 }],
+      [() => sdv.nfl.getTeamPlayers({ id: 16 }), { enable: 'roster' }],
       [() => sdv.tennis.getScoreboard({ league: 'wta', year: 2023, month: 6, day: 20 }), { dates: '20230620' }],
     ];
     for (const [call, query] of cases) {
       const calls = fake(answer(SUMMARY));
       await call();
-      should(calls[0].query).eql(query);
-    }
-  });
-
-  it('summary-backed methods keep their return shapes (real summaries)', async () => {
-    fake(answer(SUMMARY));
-    const s = await sdv.nba.getSummary(ID);
-    s.boxScore.should.equal(SUMMARY.boxscore);
-    s.header.should.equal(SUMMARY.header);
-    s.leaders.should.equal(SUMMARY.leaders);
-    s.winProbability.should.equal(SUMMARY.winprobability);
-    const p = await sdv.nba.getPicks(ID);
-    p.id.should.equal(parseInt(SUMMARY.header.id));
-    p.teams.should.equal(SUMMARY.header.competitions[0].competitors);
-    p.pickcenter.should.equal(SUMMARY.pickcenter);
-    p.againstTheSpread.should.equal(SUMMARY.againstTheSpread);
-
-    fake(answer(SUMMARY_NHL));
-    const id = parseInt(SUMMARY_NHL.header.id);
-    const pbp = await sdv.nhl.getPlayByPlay(id);
-    pbp.id.should.equal(id);
-    pbp.plays.should.equal(SUMMARY_NHL.plays);
-    pbp.teams.should.equal(SUMMARY_NHL.header.competitions[0].competitors);
-    const box = await sdv.nhl.getBoxScore(id);
-    box.should.equal(SUMMARY_NHL.boxscore);
-    box.id.should.equal(id);
-    (await sdv.nhl.getSummary(id)).plays.should.equal(SUMMARY_NHL.plays);
-    (await sdv.nhl.getPicks(id)).odds.should.equal(SUMMARY_NHL.odds);
-
-    fake(answer(SUMMARY_NFL));
-    for (const lg of ['nfl', 'cfb']) {
-      const g = await sdv[lg].getSummary(ID);
-      g.id.should.equal(parseInt(SUMMARY_NFL.header.id));
-      g.drives.should.equal(SUMMARY_NFL.drives);
-      g.scoringPlays.should.equal(SUMMARY_NFL.scoringPlays);
-      g.week.should.equal(SUMMARY_NFL.header.week);
+      should(calls[0].query).eql(query, call.toString());
     }
   });
 
@@ -273,6 +350,14 @@ describe('legacy 247sports.com scrapers (deprecated): https through the request 
     err.status.should.equal(503);
   });
 
+  it("a 403 (the 247 edge's block) is AssetFetchError at once, never retried", async () => {
+    const calls = fake(() => ({ status: 403, data: '' }));
+    const err = await rejection(() => sdv.cfb.getPlayerRankings({ year: 2024 }));
+    err.should.be.instanceOf(AssetFetchError);
+    err.status.should.equal(403);
+    calls.length.should.equal(1);
+  });
+
   it('a network error is AssetFetchError with a sanitized cause (no raw HTTP-client error escapes)', async () => {
     configure({
       transport: {
@@ -319,6 +404,13 @@ describe('legacy ncaa methods: through the request layer', () => {
     calls.map((c) => [c.family, c.url, c.responseType]).should.eql([
       ['ncaa_com', 'https://ncaa.com//game/basketball-men/d3/2019/02/15/alfred-utica', 'text'],
     ]);
+  });
+
+  it('getRedirectUrl: a final URL without a game id (a transport that does not report redirects) is AssetFetchError, not NaN', async () => {
+    fake(() => ({ data: '<html></html>' })); // url echoes the request URL
+    const err = await rejection(() => sdv.ncaa.getRedirectUrl('/game/basketball-men/d3/2019/02/15/alfred-utica'));
+    err.should.be.instanceOf(AssetFetchError);
+    err.message.should.match(/no game id in the final URL/);
   });
 
   it("stats.ncaa.org scrapers: https; Akamai's 403 is AssetFetchError at once (not retried); still deprecated", async () => {
