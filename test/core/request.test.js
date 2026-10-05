@@ -211,6 +211,15 @@ describe('core/config: per-family transport selection', () => {
     getConfig().transport.should.eql({});
   });
 
+  it('default User-Agent carries no +http token (ESPN site API 403s on one)', async () => {
+    getConfig().userAgent.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    getConfig().userAgent.should.not.containEql('+http');
+    const t = fakeTransport({ status: 200 });
+    configure({ transport: t });
+    await request('site_v2', GET());
+    t.calls[0].headers['User-Agent'].should.not.containEql('+http');
+  });
+
   it('a bare transport means every family', async () => {
     const t = fakeTransport({ status: 200, data: 1 });
     configure({ transport: t });
