@@ -24,6 +24,7 @@ import {
   defaultMaxCells,
   releaseUrl,
 } from '../dist/core/releases.js';
+import { _int64Warned } from '../dist/core/int64.js';
 import { loadReleaseLoaders } from '../tools/codegen/render-loaders.mjs';
 
 // No-network tests for the generated release loaders (src/generated/loaders/,
@@ -108,7 +109,7 @@ describe('release loaders', () => {
   });
 
   describe('release loaders: real fixtures', () => {
-    it('loads cfb_ratings 2024 (ZSTD) through the releases family, ids pinned to numbers', async () => {
+    it('loads cfb_ratings 2024 (ZSTD) through the releases family, ids pinned to decimal strings', async () => {
       const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
       use(t);
       const rows = await sdv.cfb.loadCfbRatings({ seasons: 2024 });
@@ -117,10 +118,10 @@ describe('release loaders', () => {
       t.calls[0].responseType.should.equal('arraybuffer');
       rows.length.should.equal(134);
       Object.keys(rows[0]).length.should.equal(18);
-      // INT64 `season` / `games` -> number; STRING `team_id` (id_int64) -> number.
+      // INT64 `season` / `games` -> number; STRING `team_id` (id_int64 -> Int64, an id) -> decimal string.
       rows.every((r) => r.season === 2024).should.be.true();
-      rows.every((r) => Number.isInteger(r.games) && Number.isInteger(r.team_id)).should.be.true();
-      rows.find((r) => r.team_id === 2306).should.be.ok();
+      rows.every((r) => Number.isInteger(r.games) && /^\d+$/.test(r.team_id)).should.be.true();
+      rows.find((r) => r.team_id === '2306').should.be.ok();
       warnings.should.eql([]);
     });
 
@@ -412,7 +413,7 @@ describe('release loaders', () => {
       const cols = await sdv.cfb.loadCfbRatings({ seasons: 2024, format: 'columns' });
       Object.keys(cols).length.should.equal(18);
       Object.values(cols).every((v) => Array.isArray(v) && v.length === 134).should.be.true();
-      cols.team_id.every(Number.isInteger).should.be.true(); // STRING id_int64 -> numbers
+      cols.team_id.every((t) => /^\d+$/.test(t)).should.be.true(); // STRING id_int64 -> decimal strings
       cols.season.every((s) => s === 2024).should.be.true(); // INT64 -> numbers
       const rows = await sdv.cfb.loadCfbRatings({ seasons: 2024 });
       rows.map((r) => r.adj_net).should.eql(cols.adj_net);
@@ -458,11 +459,11 @@ describe('release loaders', () => {
       cols.team_id.should.eql(rows.map((r) => r.team_id));
     });
 
-    it('then id_int64 pins it back to integers (py: String supercast, then _cast_ids_int64)', async () => {
+    it('then id_int64 pins it to Int64 (py: String supercast, then _cast_ids_int64): an id, so decimal strings', async () => {
       use(releasesTransport(route));
       const rows = await sdv.cfb.loadCfbRatings({ seasons: [2023, 2024] });
-      rows.every((r) => Number.isInteger(r.team_id)).should.be.true();
-      rows.slice(0, 3).map((r) => r.team_id).should.eql([2, 5, 6]);
+      rows.every((r) => typeof r.team_id === 'string').should.be.true();
+      rows.slice(0, 3).map((r) => r.team_id).should.eql(['2', '5', '6']);
     });
   });
 
@@ -482,36 +483,68 @@ describe('release loaders', () => {
       warnings.should.eql([]);
     });
 
-    it('real data: the CFB pbp play `id` (> 2^53) stays BigInt, exact, with one warning', async () => {
-      use(releasesTransport(() => 'cfb_pbp_2024_head20.parquet'));
+    // The v4 id rule (owner decision 2026-10-05): an INT64 id column is exact decimal strings,
+    // every row, every call. CFB play ids are 12 digits (safe) in 2013 and 18 (beyond 2^53) in 2024.
+    const pbp = (u) => (u.includes('_2013.') ? 'cfb_pbp_2013_head20.parquet' : 'cfb_pbp_2024_head20.parquet');
+
+    it('real data: the CFB pbp play `id` is an exact decimal string in an 18-digit (2024) season, no warning', async () => {
+      use(releasesTransport(pbp));
       const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024 });
       rows.length.should.equal(20);
       Object.keys(rows[0]).length.should.equal(506);
-      rows.every((r) => typeof r.id === 'bigint').should.be.true();
-      rows[0].id.should.equal(401628579101849903n); // pyarrow reads the same value
-      rows[0].game_id.should.equal(401628579); // a safe INT64 in the same file -> number
-      warnings.should.eql([
-        'load_cfb_pbp: column "id" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt',
-      ]);
+      rows.every((r) => typeof r.id === 'string').should.be.true();
+      rows[0].id.should.equal('401628579101849903'); // pyarrow reads the same value
+      rows[0].game_id.should.equal('401628579'); // a safe INT64 id in the same file: a string too
+      (typeof rows[0].period).should.equal('number'); // a non-id INT64 column: number
+      rows[0].pos_team_id.should.be.a.String(); // every INT64 id column
+      warnings.should.eql([]);
     });
 
-    it('a column with an unsafe value stays BigInt (exact) with one warning naming it', async () => {
+    it('real data: ... and in a 12-digit (2013) season; a mixed 2013 + 2024 batch is all strings (rows and columns)', async () => {
+      use(releasesTransport(pbp));
+      const old = await sdv.cfb.loadCfbPbp({ seasons: 2013 });
+      old[0].id.should.equal('332830097002'); // pyarrow: 332830097002 (safe, was a number before v4)
+      old[0].game_id.should.equal('332830097');
+      // polars pl.concat([2013, 2024], how="diagonal_relaxed"): id Int64, 40 rows, 506 columns
+      const rows = await sdv.cfb.loadCfbPbp({ seasons: [2013, 2024] });
+      rows.length.should.equal(40);
+      Object.keys(rows[0]).length.should.equal(506);
+      rows.every((r) => typeof r.id === 'string' && typeof r.game_id === 'string').should.be.true();
+      [rows[0].id, rows[39].id].should.eql(['332830097002', '401628579101877912']); // polars head / tail
+      const cols = await sdv.cfb.loadCfbPbp({ seasons: [2013, 2024], format: 'columns', columns: ['id', 'game_id', 'period'] });
+      cols.id.should.eql(rows.map((r) => r.id));
+      cols.game_id.should.eql(rows.map((r) => r.game_id));
+      // the whole result is JSON-safe (a BigInt would throw)
+      JSON.parse(JSON.stringify(rows)).length.should.equal(40);
+      warnings.should.eql([]);
+    });
+
+    it('a non-id column with an unsafe value stays BigInt (exact); one SDV_INT64 warning per (loader, column) per process', async () => {
       // The same branch on the small ratings fixture, with one value bumped.
-      const rows = await raw();
-      rows[5].games = 2n ** 60n;
-      applyInt64Policy(rows, 'load_cfb_ratings');
-      rows.every((r) => typeof r.games === 'bigint').should.be.true();
-      rows[5].games.should.equal(2n ** 60n);
-      (typeof rows[0].net_rank).should.equal('number'); // other INT64 columns still convert
+      _int64Warned.clear();
+      const codes = [];
+      _warn.emit = (m, code) => {
+        warnings.push(m);
+        codes.push(code);
+      };
+      for (let call = 0; call < 2; call++) {
+        const rows = await raw();
+        rows[5].games = 2n ** 60n;
+        applyInt64Policy(rows, 'load_cfb_ratings');
+        rows.every((r) => typeof r.games === 'bigint').should.be.true();
+        rows[5].games.should.equal(2n ** 60n);
+        (typeof rows[0].net_rank).should.equal('number'); // other INT64 columns still convert
+      }
       warnings.should.eql([
         'load_cfb_ratings: column "games" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt',
-      ]);
+      ]); // two calls, one warning
+      codes.should.eql(['SDV_INT64']);
     });
 
-    it('applies inside lists / structs too', () => {
-      const rows = [{ ids: [1n, 2n], s: { a: 3n } }];
+    it('applies inside lists / structs too (an id list column -> strings)', () => {
+      const rows = [{ ids: [1n, 2n], s: { a: 3n }, play_ids: [401628579101849903n, 2n] }];
       applyInt64Policy(rows, 'x');
-      rows[0].should.eql({ ids: [1, 2], s: { a: 3 } });
+      rows[0].should.eql({ ids: [1, 2], s: { a: 3 }, play_ids: ['401628579101849903', '2'] });
     });
 
     it('id_int64 (sdv-py _cast_ids_int64): canonical integer strings convert, anything else is left alone', () => {

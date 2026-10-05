@@ -7,6 +7,7 @@ import { dirname, join } from 'node:path';
 import sdv, * as root from '../../dist/index.js';
 import * as P from '../../dist/producers/espn_basketball_pbp.js';
 import { _warn } from '../../dist/core/releases.js';
+import { isIdColumn } from '../../dist/core/int64.js';
 
 // Parity: espn_<lg>_pbp's trimming + helper_<lg>_pbp (and the stage helpers' init) for every
 // league on every payload, compared to sdv-py@719de79's own output
@@ -34,9 +35,9 @@ function decode(v) {
   return v;
 }
 
-/** Does a non-null JS value have the JS shape of a polars dtype? */
-function dtypeOk(v, dtype) {
-  if (dtype === 'Int64') return Number.isInteger(v) || typeof v === 'bigint';
+/** Does a non-null JS value of column `col` have the JS shape of a polars dtype? (An Int64 id is a decimal string: the v4 id rule.) */
+function dtypeOk(v, dtype, col) {
+  if (dtype === 'Int64') return isIdColumn(col) ? typeof v === 'string' : Number.isInteger(v) || typeof v === 'bigint';
   if (/^U?Int\d+$/.test(dtype)) return Number.isInteger(v);
   if (dtype === 'Float32') return typeof v === 'number' && (Number.isNaN(v) || Math.fround(v) === v);
   if (dtype === 'Float64') return typeof v === 'number';
@@ -46,23 +47,28 @@ function dtypeOk(v, dtype) {
   throw new Error(`unknown polars dtype ${dtype}`);
 }
 
-/** The INT64 policy applied to py's column: all BigInt when any value is beyond 2^53, else numbers. */
-const int64Column = (vals) => (vals.some((v) => typeof v === 'bigint') ? vals.map((v) => (v === null ? null : BigInt(v))) : vals);
+/**
+ * The INT64 policy applied to py's column: an id column is exact decimal strings (the v4 id
+ * rule, every era); any other column all BigInt when a value is beyond 2^53, else numbers.
+ */
+const int64Column = (vals, col) =>
+  isIdColumn(col)
+    ? vals.map((v) => (v === null ? null : String(v)))
+    : vals.some((v) => typeof v === 'bigint')
+      ? vals.map((v) => (v === null ? null : BigInt(v)))
+      : vals;
 
 function expectPlays(rows, want, label) {
   rows.length.should.equal(want.rows.length, `${label}: row count`);
   if (!rows.length) return want.columns.should.eql([], `${label}: py's empty frame`);
   rows.forEach((r, i) => Object.keys(r).should.eql(want.columns, `${label}[${i}]: column names/order`));
-  const idMode = { bigint: false };
   want.columns.forEach((c, k) => {
     let vals = want.rows.map((r) => decode(r[k]));
-    if (want.dtypes[k] === 'Int64') vals = int64Column(vals);
-    if (c === 'id') idMode.bigint = vals.some((v) => typeof v === 'bigint');
-    const bad = rows.find((r) => r[c] !== null && !dtypeOk(r[c], want.dtypes[k]));
+    if (want.dtypes[k] === 'Int64') vals = int64Column(vals, c);
+    const bad = rows.find((r) => r[c] !== null && !dtypeOk(r[c], want.dtypes[k], c));
     assert.equal(bad?.[c], undefined, `${label}.${c}: JS value does not fit py dtype ${want.dtypes[k]}`);
     rows.forEach((r, i) => assert.deepStrictEqual(r[c], vals[i], `${label}[${i}].${c}`));
   });
-  return idMode.bigint;
 }
 
 /**
@@ -96,10 +102,11 @@ function expectLeague(lg, payload, gameId, want, label) {
   const out = run();
   Object.keys(out).should.eql(want.out.keys, `${label}: output key order`);
   assert.deepStrictEqual(out.gameId, decode(want.out.gameId), `${label}: gameId`);
-  const bigIds = expectPlays(out.plays, want.out.plays, `${label} plays`);
-  // timeouts: py int keys -> JS string keys (JS orders integer keys itself); ids follow the id column.
+  expectPlays(out.plays, want.out.plays, `${label} plays`);
+  // timeouts: py int keys -> JS string keys (JS orders integer keys itself); ids follow the id
+  // column (exact decimal strings).
   const tw = Object.fromEntries(
-    want.out.timeouts.map(([k, v]) => [String(k), Object.fromEntries(Object.entries(v).map(([h, ids]) => [h, decode(ids).map((x) => (bigIds ? BigInt(x) : x))]))])
+    want.out.timeouts.map(([k, v]) => [String(k), Object.fromEntries(Object.entries(v).map(([h, ids]) => [h, decode(ids).map(String)]))])
   );
   assert.deepStrictEqual(out.timeouts, tw, `${label}: timeouts`);
   for (const [k, v] of Object.entries(want.out.pass)) {
@@ -230,15 +237,29 @@ describe('ESPN basketball pbp league facts', () => {
     r['start.game_seconds_remaining'].should.not.equal(53.1);
   });
 
-  it('INT64 policy: 18-digit MBB play ids stay BigInt with ONE warning; NBA ids are numbers', () => {
+  it('INT64 id rule: the play id is an exact decimal string in every era, timeouts too; no warning', () => {
     const seen = [];
     _warn.emit = (m) => seen.push(m);
+    const ids = (out) => out.plays.map((r) => r.id);
+    const timeoutIds = (out) => Object.values(out.timeouts).flatMap((h) => [...h['1'], ...h['2']]);
+    // 18-digit (beyond 2^53) college ids: exact strings, the value pyarrow / polars hold
     const mbb = run('mbb', 'summary_mbb.json.gz');
-    seen.length.should.equal(1);
-    seen[0].should.match(/helper_mbb_pbp_features: column "id"/);
-    mbb.plays.every((r) => typeof r.id === 'bigint').should.be.true();
-    Object.values(mbb.timeouts).flatMap((h) => [...h['1'], ...h['2']]).every((x) => typeof x === 'bigint').should.be.true();
-    run('nba', 'summary_nba.json').plays.every((r) => typeof r.id === 'number').should.be.true();
+    ids(mbb)[0].should.equal('401638645101799901');
+    ids(mbb).every((x) => /^\d{18}$/.test(x)).should.be.true();
+    timeoutIds(mbb).length.should.be.above(0);
+    timeoutIds(mbb).every((x) => typeof x === 'string').should.be.true();
+    // safe ids (NBA, 10-12 digits) are strings too: one type per column, whatever the magnitude
+    run('nba', 'summary_nba.json').plays.every((r) => typeof r.id === 'string' && /^\d{10,12}$/.test(r.id)).should.be.true();
+    // one league, two eras: WBB on a 14-digit-id game and an 18-digit-id game -> one batch, all strings
+    const old = run('wbb', 'wnba_summary_230614002.json.gz');
+    const modern = run('wbb', 'wbb_summary_401587390.json.gz');
+    ids(old)[0].should.match(/^\d{14}$/);
+    ids(modern)[0].should.match(/^\d{18}$/);
+    const batch = [...old.plays, ...modern.plays];
+    batch.every((r) => typeof r.id === 'string').should.be.true();
+    // the whole result is JSON-safe (a BigInt anywhere would throw)
+    for (const out of [mbb, old, modern]) JSON.parse(JSON.stringify(out)).plays.length.should.equal(out.plays.length);
+    seen.should.eql([]);
   });
 
   it('lag / lead / row numbers are per game: a concatenated two-game frame never leaks', () => {

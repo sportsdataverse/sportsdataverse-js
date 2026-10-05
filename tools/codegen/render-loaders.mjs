@@ -186,7 +186,7 @@ function renderLoaderTs(ns, ld) {
   doc.push("@param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.");
   doc.push("@param opts.timeoutMs - download timeout in ms (default 300000).");
   doc.push(
-    "@returns One plain object per row (or column arrays with `format: \"columns\"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning)." +
+    "@returns One plain object per row (or column arrays with `format: \"columns\"`). INT64 id columns (`id`, `*_id`, `*_ids`, `*_pk`) are exact decimal strings; other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process)." +
       (ld.single ? " An absent asset returns no rows with a warning." : "")
   );
   if (!ld.single && ld.minSeason !== undefined) {
@@ -281,8 +281,10 @@ export function renderLoadersPage(ns, loaders, position) {
     `results union the columns, null-filling gaps, and cast a column whose type changed ` +
     `between seasons to the common type (an integer id that became a string → strings, ` +
     `"123" not "123.0"), as sdv-py's \`diagonal_relaxed\` concat does.\n` +
-    `- **Integers:** INT64 columns come back as \`number\` when every value is a safe ` +
-    `integer, otherwise as \`BigInt\` with one warning naming the column.\n` +
+    `- **Integers:** an INT64 id column (\`id\`, \`*_id\`, \`*_ids\`, \`*_pk\`) comes back as ` +
+    `exact decimal strings in every season (\`"401628579101849903"\`, \`"332830097002"\`); ` +
+    `any other INT64 column as \`number\` when every value is a safe integer, otherwise as ` +
+    `\`BigInt\` with one warning (code \`SDV_INT64\`) per column per process.\n` +
     `- **Runtime:** Node only. Downloads go through the \`releases\` transport family ` +
     `(see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is ` +
     `downloaded whole, then decoded.\n\n` +
