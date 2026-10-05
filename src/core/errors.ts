@@ -18,10 +18,46 @@ export interface FetchErrorDetails {
   cause?: unknown;
 }
 
-/** Base class for every error sportsdataverse raises. */
+/**
+ * Redact what must never reach a log from free text: URL query strings (API keys
+ * ride there, e.g. The Odds API's `apiKey`) and `user:password@` URL credentials
+ * (proxy URLs).
+ */
+export function redactSecrets(text: string): string {
+  return text
+    .replace(/(\b[a-z][a-z0-9+.-]*:\/\/)[^\s/@'"]+@/gi, "$1<redacted>@")
+    .replace(/(\b[a-z][a-z0-9+.-]*:\/\/[^\s?#'"]*)\?[^\s#'"]*/gi, "$1?<redacted>");
+}
+
+/**
+ * A copy of `err` that is safe to keep as an error's `cause`: its name,
+ * message and stack (both through {@link redactSecrets}) and its
+ * `code` / `errno` / `syscall` — nothing else. A raw HTTP-client error must
+ * never be attached as-is: an axios error carries the request config, so its
+ * `Authorization` header, cookies and a POSTed login form (password included)
+ * would surface in `util.inspect(err)` or a logged stack. An SdvError is kept
+ * (its own cause went through this when it was built).
+ */
+export function safeCause(err: unknown): unknown {
+  if (err === undefined || err === null || err instanceof SdvError) return err;
+  const e = (typeof err === "object" ? err : {}) as Record<string, unknown>;
+  const out = new Error(redactSecrets(typeof e.message === "string" ? e.message : String(err)));
+  out.name = typeof e.name === "string" ? e.name : "Error";
+  for (const k of ["code", "errno", "syscall"]) {
+    const v = e[k];
+    if (typeof v === "string" || typeof v === "number") (out as unknown as Record<string, unknown>)[k] = v;
+  }
+  if (typeof e.stack === "string") out.stack = redactSecrets(e.stack);
+  return out;
+}
+
+/**
+ * Base class for every error sportsdataverse raises. A `cause` is always stored
+ * through {@link safeCause}, whichever code path built the error.
+ */
 export class SdvError extends Error {
   constructor(message: string, options?: { cause?: unknown }) {
-    super(message, options);
+    super(message, options && "cause" in options ? { cause: safeCause(options.cause) } : undefined);
     this.name = new.target.name;
   }
 }

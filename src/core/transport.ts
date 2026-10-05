@@ -4,7 +4,7 @@
 // `request()` (src/core/request.ts), so every transport gets them for free.
 
 import axios from "axios";
-import { SdvError, TransportUnavailableError } from "./errors.js";
+import { SdvError, TransportUnavailableError, redactSecrets, safeCause } from "./errors.js";
 
 export interface TransportRequest {
   method: "GET" | "POST";
@@ -98,10 +98,18 @@ export const axiosTransport: Transport = async (req) => {
   };
   // ponytail: axios.get / axios.post (not axios.request) — the existing NFL auth
   // tests stub `axios.post`, and both helpers take the same config.
-  const res =
-    req.method === "POST"
-      ? await axios.post(req.url, req.body, config)
-      : await axios.get(req.url, config);
+  let res;
+  try {
+    res =
+      req.method === "POST"
+        ? await axios.post(req.url, req.body, config)
+        : await axios.get(req.url, config);
+  } catch (err) {
+    // An axios error carries the whole request config (headers incl.
+    // Authorization / Cookie, a POSTed body incl. a login password): reject with
+    // a sanitized copy (name / message / code / errno / syscall) instead.
+    throw safeCause(err);
+  }
   const finalUrl = (res.request as { res?: { responseUrl?: string } } | undefined)?.res
     ?.responseUrl;
   return {
@@ -198,7 +206,7 @@ export function createImpersonatingTransport(
       return new Impit({ browser: opts.browser ?? "chrome", proxyUrl: opts.proxyUrl });
     } catch (err) {
       throw new SdvError(
-        `The impersonating transport could not create an impit client (browser ${JSON.stringify(opts.browser ?? "chrome")}): ${err instanceof Error ? err.message : String(err)}`,
+        `The impersonating transport could not create an impit client (browser ${JSON.stringify(opts.browser ?? "chrome")}): ${redactSecrets(err instanceof Error ? err.message : String(err))}`,
         { cause: err }
       );
     }
@@ -222,12 +230,18 @@ export function createImpersonatingTransport(
         headers = mergeHeaders(headers, { "Content-Type": "application/json" });
       }
     }
-    const res = await impit.fetch(url, {
-      method: req.method,
-      headers,
-      body: body ?? undefined,
-      timeout: req.timeoutMs,
-    });
+    let res: Awaited<ReturnType<ImpitClient["fetch"]>>;
+    try {
+      res = await impit.fetch(url, {
+        method: req.method,
+        headers,
+        body: body ?? undefined,
+        timeout: req.timeoutMs,
+      });
+    } catch (err) {
+      // same boundary rule as axiosTransport: never surface a raw client error
+      throw safeCause(err);
+    }
     const outHeaders: Record<string, string> = {};
     res.headers.forEach((v, k) => {
       outHeaders[k.toLowerCase()] = v;
