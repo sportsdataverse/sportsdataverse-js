@@ -1,7 +1,27 @@
-import axios from 'axios';
 import * as cheerio from 'cheerio';
 import decode from 'decode-html';
 import { Tabletojson as tabletojson } from 'tabletojson';
+import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from '../core/config.js';
+import { AssetFetchError } from '../core/errors.js';
+import { request, requestResponse } from '../core/request.js';
+import { getHtml } from './_cdn.js';
+
+/** Request-layer family for ncaa.com and its data.ncaa.com casablanca JSON. */
+const NCAA_COM = 'ncaa_com';
+/** Request-layer family for the stats.ncaa.org HTML scrapers. */
+const STATS_NCAA = 'stats_ncaa';
+// stats.ncaa.org's Akamai edge answers plain clients 403 Access Denied (probed
+// 2026-10-05): a block, not load, so a 403 is never retried there.
+registerFamilyDefaults(STATS_NCAA, { retryStatuses: DEFAULT_RETRY_STATUSES.filter((s) => s !== 403) });
+
+/** GET a casablanca JSON file. A 2xx whose body is not a JSON object is a failed fetch. */
+async function casablanca(url: string): Promise<any> {
+    const data = await request(NCAA_COM, { method: 'GET', url });
+    if (typeof data !== 'object' || data === null) {
+        throw new AssetFetchError(`${NCAA_COM}: HTTP 2xx with a non-JSON body: ${url}`, { url });
+    }
+    return data;
+}
 
 /** Internal helper: scrape an HTML `<select>` (by id) into {value, name} pairs. */
 function extractSelectList($: any, array: any[], id: string) {
@@ -50,8 +70,8 @@ export default {
      */
     getRedirectUrl: async function (url) {
         const baseUrl = `https://ncaa.com/${url}`;
-        const response = await axios.get(baseUrl);
-        const gameUrl = response.request.res.responseUrl;
+        // the game page's final URL, after ncaa.com's redirects
+        const { url: gameUrl } = await requestResponse(NCAA_COM, { method: 'GET', url: baseUrl, responseType: 'text' });
         const gameId = parseInt(gameUrl.match(/.*\/(.*)\/(.*)$/)[2]);
         return gameId;
     },
@@ -73,8 +93,7 @@ export default {
      */
     getInfo: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/gameInfo.json`;
-        const res = await axios.get(baseUrl);
-        return res.data;
+        return casablanca(baseUrl);
     },
     /**
      * Gets the box score data for a specified game if available.
@@ -93,8 +112,7 @@ export default {
      */
     getBoxScore: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/boxscore.json`;
-        const res = await axios.get(baseUrl);
-        return res.data;
+        return casablanca(baseUrl);
     },
     /**
      * Gets the play-by-play data for a specified game if available.
@@ -113,8 +131,7 @@ export default {
      */
     getPlayByPlay: async function (game) {
         const baseUrl = `https://data.ncaa.com/casablanca/game/${game}/pbp.json`;
-        const res = await axios.get(baseUrl);
-        return res.data;
+        return casablanca(baseUrl);
     },
     /**
      * Gets the scoreboard data for a specified date and team sport if available.
@@ -142,8 +159,7 @@ export default {
      */
     getScoreboard: async function ({ sport, division, year, month, day }) {
         const baseUrl = `https://data.ncaa.com/casablanca/scoreboard/${sport}/${division}/${year}/${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}/${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}/scoreboard.json`;
-        const res = await axios.get(baseUrl);
-        return res.data;
+        return casablanca(baseUrl);
     },
     extractSelectList,
 
@@ -157,9 +173,9 @@ export default {
      */
     getSports: async function () {
         warnDeprecated('getSports');
-        const baseUrl = 'http://stats.ncaa.org/';
+        const baseUrl = 'https://stats.ncaa.org/';
 
-        const res = await axios.get(baseUrl)
+        const res = { data: await getHtml(STATS_NCAA, baseUrl) };
         let data = {
             sports: []
         };
@@ -195,7 +211,7 @@ export default {
         if (!sport) {
             return;
         }
-        const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
+        const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
 
         const params: Record<string, any> = {
             "sport_code": sport,
@@ -212,9 +228,7 @@ export default {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
         let data = {
             seasons: []
         };
@@ -253,7 +267,7 @@ export default {
             return;
         }
 
-        const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
+        const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season,
@@ -269,9 +283,7 @@ export default {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl, {
-            params
-        })
+        const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
         let data = {
             divisions: []
         };
@@ -321,7 +333,7 @@ export default {
         const rankingType = (type == 'team') ? 'T' : 'I';
         const isGameHigh = (gameHigh == 'true') ? 'Y' : 'N';
 
-        const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
+        const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season,
@@ -337,9 +349,7 @@ export default {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl, {
-            params
-        })
+        const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
         let data = {
             sport: sport,
             season: season,
@@ -385,7 +395,7 @@ export default {
      */
     getPlayerData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
         warnDeprecated('getPlayerData');
-        const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
+        const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season || '',
@@ -401,9 +411,7 @@ export default {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
 
         let data = tabletojson.convert(res.data)
 
@@ -440,7 +448,7 @@ export default {
      */
     getTeamData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
         warnDeprecated('getTeamData');
-        const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
+        const baseUrl = 'https://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
             "sport_code": sport,
             "academic_year": season || '',
@@ -456,9 +464,7 @@ export default {
             "ncaa_custom_rank_summary_id": "-1",
             "user_custom_rank_summary_id": -1
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await getHtml(STATS_NCAA, baseUrl, params) };
 
         const data = tabletojson.convert(res.data)
 

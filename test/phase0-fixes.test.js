@@ -1,14 +1,12 @@
 import should from 'should';
-import axios from 'axios';
 import sdv, { FLAT_WRAPPERS, configure, resetConfig } from '../dist/index.js';
 import { resolveFlat } from '../dist/core/flat.js';
 import { FLAT_HOSTS } from '../dist/core/client.js';
 
-// Offline regression tests for the Phase 0 correctness fixes (axios.get stubbed).
+// Offline regression tests for the Phase 0 correctness fixes (a fake transport answers every family).
 describe('phase 0 fixes (offline)', () => {
-  const realGet = axios.get;
-  afterEach(() => { axios.get = realGet; resetConfig(); });
   const answer = (data) => configure({ transport: async (req) => ({ status: 200, headers: {}, url: req.url, data }) });
+  afterEach(() => resetConfig());
 
   it('CBS host carries the /napi base', () => {
     FLAT_HOSTS.cbs.should.equal('https://api.cbssports.com/napi');
@@ -41,7 +39,7 @@ describe('phase 0 fixes (offline)', () => {
   });
 
   it('ncaa stats.ncaa.org scrapers emit a one-time DeprecationWarning', async () => {
-    axios.get = async () => ({ data: '<html></html>' });
+    answer('<html></html>');
     const warnings = [];
     const on = (w) => warnings.push(w);
     process.on('warning', on);
