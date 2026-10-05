@@ -2,7 +2,7 @@
 // test/transforms.test.js keeps the two lists equal). generate.mjs refuses any
 // other `transform:` name, so a transform sdv-py adds upstream fails the codegen
 // loudly instead of being silently dropped.
-export const PARAM_TRANSFORMS = ["bool_str", "_bool_str", "format_nhl_season"];
+export const PARAM_TRANSFORMS = ["bool_str", "_bool_str", "format_nhl_season", "season_or_previous"];
 
 /** Return `name` if the runtime implements it; throw otherwise. */
 export function checkTransform(name, where) {
