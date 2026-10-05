@@ -1,5 +1,5 @@
 import should from 'should';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, writeFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -25,7 +25,9 @@ import { same } from '../helpers/parity.mjs';
 // payload order); a nested list/object cell compares by structure (JS
 // JSON-encodes it, py keeps a polars List/Struct or stringifies it with str());
 // ids compare strictly (same type and value). Generated row types (Task 18a)
-// are emitted only for documented endpoints verified here.
+// are emitted only for documented endpoints verified here: the committed
+// test/fixtures/py/parity_coverage.json lists them (a drift-checked summary;
+// SDV_PARITY_WRITE=1 rewrites it).
 
 const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, '..', 'fixtures');
@@ -153,16 +155,66 @@ describe('parser parity: manifest + coverage', () => {
       Object.keys(oracle).filter((k) => k !== '_provenance').sort().should.eql(Object.keys(fixtures).sort(), family);
     }
   });
-  it('documented endpoints verified by a capture (SDV_PARITY_REPORT=1 prints the table)', () => {
-    const lines = ['family | documented | verified | unverified'];
-    let verified = 0;
-    for (const [family, shorts] of docs) {
-      if (!shorts.size) continue;
-      const hit = new Set(Object.values(manifest[family] ?? {}).filter((s) => shorts.has(s)));
-      verified += hit.size;
-      lines.push(`${family} | ${shorts.size} | ${hit.size} | ${shorts.size - hit.size}`);
+  it('parity_coverage.json is current (SDV_PARITY_WRITE=1 rewrites it; SDV_PARITY_REPORT=1 prints it)', () => {
+    const cov = coverage();
+    const file = join(FIX, 'py', 'parity_coverage.json');
+    const out = `${JSON.stringify(cov, null, 2)}
+`;
+    if (process.env.SDV_PARITY_WRITE) writeFileSync(file, out);
+    if (process.env.SDV_PARITY_REPORT) {
+      console.log('family | documented | verified | unverified | incompatible');
+      for (const [f, c] of Object.entries(cov.families)) {
+        console.log(`${f} | ${c.documented} | ${c.verified} | ${c.unverified} | ${c.incompatible}`);
+      }
     }
-    if (process.env.SDV_PARITY_REPORT) console.log(lines.join('\n'));
-    verified.should.be.above(150);
+    readFileSync(file, 'utf8').should.equal(out, 'stale: rerun with SDV_PARITY_WRITE=1');
+    cov.totals.verified.should.be.above(150);
   });
 });
+
+/**
+ * Per family: `documented` (py returns table attached), `verified` (documented and
+ * checked on a real capture here; `verified_endpoints` names them), `unverified`,
+ * and `incompatible` (a py returns table vendor.yaml explicitly declares does not
+ * describe the JS parser: `schema_compatible: false` at family / parser level, or
+ * `schema_incompatible`). Families with none of these are left out.
+ */
+function coverage() {
+  const m = loadManifest();
+  const families = {};
+  const totals = { documented: 0, verified: 0, unverified: 0, incompatible: 0 };
+  for (const [key, c] of Object.entries(m.families).sort(([a], [b]) => a.localeCompare(b))) {
+    const cfg = c ?? {};
+    const shorts = docs.get(key);
+    const verified = [...new Set(Object.values(manifest[key] ?? {}))].filter((s) => shorts.has(s)).sort();
+    const flipped = new Set(cfg.schema_incompatible ?? []);
+    const py = parse(text(join(CODEGEN, 'vendor', 'upstream', 'endpoints', `${cfg.from ?? key}.yaml`))).endpoints ?? [];
+    let incompatible = 0;
+    for (const e of py) {
+      const short = (cfg.names ?? {})[e.short] ?? e.short;
+      if (!e.returns_schema || !e.parser || (cfg.parser_overrides ?? {})[short]) continue;
+      const entry = (cfg.parsers ?? {})[e.parser];
+      if (flipped.has(short) || (entry ? entry.schema_compatible : cfg.schema_compatible) === false) incompatible++;
+    }
+    const row = {
+      documented: shorts.size,
+      verified: verified.length,
+      unverified: shorts.size - verified.length,
+      incompatible,
+    };
+    if (!row.documented && !incompatible) continue;
+    for (const k of Object.keys(totals)) totals[k] += row[k];
+    families[key] = { ...row, verified_endpoints: verified };
+  }
+  return {
+    _doc:
+      'Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js ' +
+      '(SDV_PARITY_WRITE=1). documented: py table attached; verified: documented and checked on a real ' +
+      'sdv-py capture (verified_endpoints; generated row types are emitted only for these); unverified: ' +
+      'documented, no capture; incompatible: py table vendor.yaml declares does not describe the JS ' +
+      'parser (schema_compatible: false, or schema_incompatible).',
+    source_ref: m.source.ref,
+    totals,
+    families,
+  };
+}

@@ -1,9 +1,0 @@
-columns:
-- description: ''
-  name: pick
-  type: character
-- description: ''
-  name: player
-  type: character
-kind: dataframe
-schema: recruitments_latest_rpm_picks

@@ -17051,8 +17051,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/coaches_history"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "coaches_profile",
@@ -17067,8 +17066,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/coaches_profile"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "collective_groups",
@@ -17100,8 +17098,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/collective_groups"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "collective_groups_deals",
@@ -17125,8 +17122,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/collective_groups_deals"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "collective_groups_key",
@@ -17141,8 +17137,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/collective_groups_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "commits_latest",
@@ -17166,8 +17161,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/commits_latest"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "commits_organizations_latest_commits",
@@ -17182,8 +17176,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/commits_organizations_latest_commits"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "commits_organizations_org_key",
@@ -17198,8 +17191,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/commits_organizations_org_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "draft_organization_rank",
@@ -17227,8 +17219,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/draft_organization_rank"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "draft_pick_organization_rank",
@@ -17256,8 +17247,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/draft_pick_organization_rank"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "drafts",
@@ -17281,8 +17271,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/drafts"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "drafts_by_stars",
@@ -17306,8 +17295,7 @@
           "queryKey": "yearSpan"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/drafts_by_stars"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "drafts_by_stars_summary",
@@ -17327,8 +17315,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/drafts_by_stars_summary"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "drafts_players",
@@ -17348,8 +17335,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/drafts_players"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_conferences",
@@ -17369,8 +17355,7 @@
           "queryKey": "sportKey"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_conferences"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_draft_rounds",
@@ -17390,8 +17375,7 @@
           "queryKey": "sportKey"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_draft_rounds"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_positions",
@@ -17411,8 +17395,7 @@
           "queryKey": "positionType"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_positions"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_sports",
@@ -17423,8 +17406,7 @@
       "path": "/filters/sports",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_sports"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_status",
@@ -17435,8 +17417,7 @@
       "path": "/filters/status",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_status"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_teams",
@@ -17460,8 +17441,7 @@
           "queryKey": "sportKey"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_teams"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "filters_years",
@@ -17472,8 +17452,7 @@
       "path": "/filters/years",
       "pathParams": [],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/filters_years"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "nil_100",
@@ -17489,8 +17468,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/nil_100"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "nil_100_v2",
@@ -17518,8 +17496,7 @@
           "queryKey": "page"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/nil_100_v2"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "nil_compliances_state",
@@ -17535,8 +17512,7 @@
           "queryKey": "stateKey"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/nil_compliances_state"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "nil_rankings",
@@ -17572,8 +17548,7 @@
           "queryKey": "stateAbbr"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/nil_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_draft_class_by_state",
@@ -17597,8 +17572,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_draft_class_by_state"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_draft_class_by_year",
@@ -17622,8 +17596,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_draft_class_by_year"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_draft_count_by_stars",
@@ -17638,8 +17611,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_draft_count_by_stars"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_draft_count_by_year",
@@ -17663,8 +17635,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_draft_count_by_year"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_draft_ranking_summary",
@@ -17684,8 +17655,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_draft_ranking_summary"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_drafted_players",
@@ -17709,8 +17679,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_drafted_players"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_drafts_by_stars_summary",
@@ -17730,8 +17699,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_drafts_by_stars_summary"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_roster",
@@ -17763,8 +17731,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_roster"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "organizations_roster_header",
@@ -17788,8 +17755,7 @@
           "queryKey": "year"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/organizations_roster_header"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_combine_measurements",
@@ -17804,8 +17770,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_combine_measurements"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_latest_valuation",
@@ -17820,8 +17785,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_latest_valuation"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_measurements",
@@ -17836,8 +17800,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_measurements"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_measurements_averages",
@@ -17861,8 +17824,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_measurements_averages"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_person_connections",
@@ -17886,8 +17848,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_person_connections"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_social",
@@ -17902,8 +17863,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_social"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_social_post_summary",
@@ -17918,8 +17878,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_social_post_summary"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_track_and_field_measurements",
@@ -17934,8 +17893,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_track_and_field_measurements"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "people_valuation_growth",
@@ -17950,8 +17908,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/people_valuation_growth"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "person_connections_connection_key",
@@ -17966,8 +17923,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/person_connections_connection_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "person_primary_recruitment_evaluation",
@@ -17982,8 +17938,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/person_primary_recruitment_evaluation"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "person_recruitment_evaluations",
@@ -17998,8 +17953,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/person_recruitment_evaluations"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "person_sport_profile_recruit",
@@ -18014,8 +17968,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/person_sport_profile_recruit"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "person_sport_rankings",
@@ -18043,8 +17996,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/person_sport_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_all_rankings",
@@ -18074,8 +18026,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_database_updates"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_images",
@@ -18090,8 +18041,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_images"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_organizations",
@@ -18106,8 +18056,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_organizations"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_organizations_org_key",
@@ -18125,8 +18074,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_organizations_org_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_person_rankings",
@@ -18141,8 +18089,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_person_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_profile",
@@ -18172,8 +18119,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_team_targets"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_verified",
@@ -18197,8 +18143,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_verified"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_videos",
@@ -18213,8 +18158,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_videos"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_visit_center",
@@ -18229,8 +18173,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_visit_center"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "players_industry_comparision",
@@ -18266,8 +18209,7 @@
           "queryKey": "sortByIndustry"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/players_industry_comparision"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "players_industry_comparision_list",
@@ -18295,8 +18237,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/players_industry_comparision_list"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "predictions_user_key",
@@ -18320,8 +18261,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/predictions_user_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "quotes",
@@ -18341,8 +18281,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/quotes"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "quotes_key",
@@ -18357,8 +18296,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/quotes_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "recruitment_primary_recruitment_evaluation",
@@ -18373,8 +18311,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/recruitment_primary_recruitment_evaluation"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "recruitment_recruitment_evaluations",
@@ -18389,8 +18326,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/recruitment_recruitment_evaluations"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "recruitments_latest_rpm_picks",
@@ -18418,8 +18354,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/recruitments_latest_rpm_picks"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "recruitments_profile",
@@ -18434,8 +18369,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/recruitments_profile"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "recruitments_rpm_picks",
@@ -18450,8 +18384,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/recruitments_rpm_picks"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "recruitments_rpm_summary",
@@ -18466,8 +18399,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/recruitments_rpm_summary"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "team_ranking",
@@ -18495,8 +18427,7 @@
           "queryKey": "pageSize"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/team_ranking"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "team_ranking_bluechips_team_rankings",
@@ -18514,8 +18445,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/team_ranking_bluechips_team_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "team_ranking_consensus_team_rankings",
@@ -18533,8 +18463,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/team_ranking_consensus_team_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "team_ranking_organizations_summary",
@@ -18549,8 +18478,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/team_ranking_organizations_summary"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "team_ranking_team_rankings",
@@ -18612,8 +18540,7 @@
           "queryKey": "orderBy"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/transfers_best_available"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "transfers_latest",
@@ -18649,8 +18576,7 @@
           "queryKey": "page"
         }
       ],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/transfers_latest"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "videos_video_key",
@@ -18665,8 +18591,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/videos_video_key"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "games",

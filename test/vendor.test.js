@@ -1,5 +1,5 @@
 import should from 'should';
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -68,10 +68,12 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     transform('nhl_edge', { schema_compatible: true }, edge).schemaRefs.length.should.be.above(0);
     (() => transform('nhl_edge', { schema_compatible: 'yes' }, edge)).should.throw(/schema_compatible must be a boolean/);
     // schema_incompatible (a parser-parity harness finding) drops py's schema per endpoint.
-    const nba = family('nba_stats');
-    should(nba.ep('leaguedashplayerstats').returns_schema).be.undefined();
-    nba.ep('leaguedashplayerstats').parser.should.equal('parse_nba_stats_result_sets');
-    nba.ep('scheduleleaguev2').returns_schema.should.equal('native/nba_stats/scheduleleaguev2');
+    const statcast = family('mlb_statcast');
+    should(statcast.ep('gamefeed').returns_schema).be.undefined();
+    statcast.ep('gamefeed').parser.should.equal('parse_mlb_statcast_gamefeed');
+    statcast.ep('schedule').returns_schema.should.equal('native/mlb_statcast/schedule');
+    // ... and a family flipped wholesale (the harness disproved its tables) keeps none.
+    family('nba_stats').schemaRefs.should.eql([]);
     (() => transform('nhl_edge', { schema_compatible: true, schema_incompatible: 'skater_detail' }, edge)).should.throw(
       /schema_incompatible must be a list/
     );
@@ -285,6 +287,18 @@ describe('vendor:check (offline drift gate)', function () {
     checkVendor(tmp).should.eql([
       `ORPHAN: tools/codegen/schemas/native/nhl_edge/stray.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
     ]);
+  });
+
+  it('flags every schema a family flipped to schema_compatible: false leaves behind', () => {
+    const f = join(tmp, 'vendor.yaml');
+    const flipped = readFileSync(f, 'utf8').replace(
+      /(\n {2}nhl_edge:\n(?: {4}#.*\n)*) {4}schema_compatible: true\n/,
+      '$1    schema_compatible: false\n'
+    );
+    flipped.should.not.equal(readFileSync(f, 'utf8'));
+    writeFileSync(f, flipped);
+    const orphans = checkVendor(tmp).filter((l) => l.startsWith('ORPHAN: tools/codegen/schemas/native/nhl_edge/'));
+    orphans.length.should.equal(readdirSync(join(tmp, 'schemas', 'native', 'nhl_edge')).length);
   });
 
   it('flags a manifest pin the upstream copy was not fetched at', () => {

@@ -368,8 +368,19 @@ export function findOrphans(root, outputs) {
       .filter((p) => p.startsWith("schemas/"))
       .map((p) => p.slice(0, p.lastIndexOf("/")))
   );
+  // Every directory a family's py schema refs point into is vendor territory, even
+  // when none of them is attached any more (a family flipped to
+  // schema_compatible: false must not leave its old copies behind).
+  for (const [key, cfg] of familyEntries(loadManifest(root))) {
+    const up = join(root, UPSTREAM, upstreamEndpointPath(key, cfg));
+    for (const ref of existsSync(up) ? schemaRefs(read(up)) : []) {
+      const r = rewriteSchema(ref, cfg.schemas);
+      if (r.includes("/")) dirs.add(`schemas/${r.slice(0, r.lastIndexOf("/"))}`);
+    }
+  }
   const orphans = [];
   for (const d of dirs) {
+    if (!existsSync(join(root, d))) continue;
     for (const e of readdirSync(join(root, d), { withFileTypes: true })) {
       const p = `${d}/${e.name}`;
       if (e.isFile() && e.name.endsWith(".yaml") && !outputs.has(p) && !isReferenced(p.slice("schemas/".length))) {
