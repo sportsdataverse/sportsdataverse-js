@@ -67,6 +67,9 @@ endpoints:
   position: parse_single_entity
   positions: parse_items
   rankings: parse_items
+  recruiting_athletes: parse_items
+  recruiting_rankings: parse_items
+  recruiting_years: parse_items
   scoreboard: parse_scoreboard
   season_athletes: parse_items
   season_awards: parse_items
@@ -94,6 +97,7 @@ endpoints:
   season_types: parse_items
   season_week: parse_single_entity
   season_week_events: parse_items
+  season_week_powerindex: parse_items
   season_week_rankings: parse_items
   season_weeks: parse_items
   seasons: parse_items

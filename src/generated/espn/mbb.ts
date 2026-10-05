@@ -608,13 +608,20 @@ const AWARDS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/awards",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * MBB — awards (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/awards`
  *
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbAwards({});
@@ -1912,13 +1919,20 @@ const POSITIONS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/positions",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * MBB — positions (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/positions`
  *
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbPositions({});
@@ -1949,6 +1963,95 @@ export const espnMbbRankings: WrapperFn = (params = {}) =>
   callWrapper(RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbRankings} (py/R parity). */
 export const espn_mbb_rankings = espnMbbRankings;
+
+const RECRUITING_ATHLETES_DEF: WrapperDef = {
+  "short": "recruiting_athletes",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/recruiting/{year}/athletes",
+  "pathParams": [
+    {
+      "name": "year"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    }
+  ]
+};
+/**
+ * MBB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/recruiting/{year}/athletes`
+ *
+ * @param params.year - path parameter.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.mbb.espnMbbRecruitingAthletes({ year: '…' });
+ */
+export const espnMbbRecruitingAthletes: WrapperFn = (params = {}) =>
+  callWrapper(RECRUITING_ATHLETES_DEF, CFG, params);
+/** snake_case alias of {@link espnMbbRecruitingAthletes} (py/R parity). */
+export const espn_mbb_recruiting_athletes = espnMbbRecruitingAthletes;
+
+const RECRUITING_RANKINGS_DEF: WrapperDef = {
+  "short": "recruiting_rankings",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/recruiting/{year}/rankings",
+  "pathParams": [
+    {
+      "name": "year"
+    }
+  ],
+  "queryParams": []
+};
+/**
+ * MBB — recruiting rankings (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/recruiting/{year}/rankings`
+ *
+ * @param params.year - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.mbb.espnMbbRecruitingRankings({ year: '…' });
+ */
+export const espnMbbRecruitingRankings: WrapperFn = (params = {}) =>
+  callWrapper(RECRUITING_RANKINGS_DEF, CFG, params);
+/** snake_case alias of {@link espnMbbRecruitingRankings} (py/R parity). */
+export const espn_mbb_recruiting_rankings = espnMbbRecruitingRankings;
+
+const RECRUITING_YEARS_DEF: WrapperDef = {
+  "short": "recruiting_years",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/recruiting",
+  "pathParams": [],
+  "queryParams": []
+};
+/**
+ * MBB — recruiting years (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/recruiting`
+ *
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.mbb.espnMbbRecruitingYears({});
+ */
+export const espnMbbRecruitingYears: WrapperFn = (params = {}) =>
+  callWrapper(RECRUITING_YEARS_DEF, CFG, params);
+/** snake_case alias of {@link espnMbbRecruitingYears} (py/R parity). */
+export const espn_mbb_recruiting_years = espnMbbRecruitingYears;
 
 const SCOREBOARD_DEF: WrapperDef = {
   "short": "scoreboard",
@@ -2049,7 +2152,13 @@ const SEASON_AWARDS_DEF: WrapperDef = {
       "name": "season"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * MBB — season awards (ESPN sports.core.api.espn.com (core v2)).
@@ -2057,6 +2166,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/awards`
  *
  * @param params.season - path parameter.
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbSeasonAwards({ season: '…' });
@@ -2080,7 +2190,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 200
+      "default": 500
     }
   ]
 };
@@ -2090,7 +2200,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/coaches`
  *
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `200`.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbSeasonCoaches({ season: '…' });
@@ -2263,7 +2373,13 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
       "name": "group_id"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * MBB — season group children (ESPN sports.core.api.espn.com (core v2)).
@@ -2273,6 +2389,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @param params.season - path parameter.
  * @param params.season_type - path parameter.
  * @param params.group_id - path parameter.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
@@ -2477,7 +2594,12 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 100
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -2487,7 +2609,8 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/recruits`
  *
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `100`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbSeasonRecruits({ season: '…' });
@@ -2542,7 +2665,12 @@ const SEASON_TEAMS_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 500
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -2552,7 +2680,8 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/teams`
  *
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `500`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbSeasonTeams({ season: '…' });
@@ -2758,6 +2887,47 @@ export const espnMbbSeasonWeekEvents: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnMbbSeasonWeekEvents} (py/R parity). */
 export const espn_mbb_season_week_events = espnMbbSeasonWeekEvents;
+
+const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
+  "short": "season_week_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    }
+  ]
+};
+/**
+ * MBB — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+ *
+ * @param params.season - path parameter.
+ * @param params.season_type - path parameter.
+ * @param params.week - path parameter.
+ * @param params.limit - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.mbb.espnMbbSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+ */
+export const espnMbbSeasonWeekPowerindex: WrapperFn = (params = {}) =>
+  callWrapper(SEASON_WEEK_POWERINDEX_DEF, CFG, params);
+/** snake_case alias of {@link espnMbbSeasonWeekPowerindex} (py/R parity). */
+export const espn_mbb_season_week_powerindex = espnMbbSeasonWeekPowerindex;
 
 const SEASON_WEEK_RANKINGS_DEF: WrapperDef = {
   "short": "season_week_rankings",
@@ -3220,7 +3390,13 @@ const TEAM_ROSTER_DEF: WrapperDef = {
       "name": "team_id"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * MBB — team roster (ESPN site.api.espn.com).
@@ -3228,6 +3404,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/{team_id}/roster`
  *
  * @param params.team_id - path parameter.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbTeamRoster({ team_id: '…' });
@@ -3307,7 +3484,12 @@ const TEAMS_CORE_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 500
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -3316,7 +3498,8 @@ const TEAMS_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/teams`
  *
- * @param params.limit - query parameter — default `500`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbTeamsCore({});
@@ -3361,13 +3544,20 @@ const TOURNAMENTS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/tournaments",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * MBB — tournaments (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/tournaments`
  *
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbTournaments({});
@@ -3383,13 +3573,20 @@ const TRANSACTIONS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/{league}/transactions",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * MBB — transactions (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/transactions`
  *
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbTransactions({});
@@ -3436,7 +3633,7 @@ const VENUES_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 200
+      "default": 1000
     }
   ]
 };
@@ -3445,7 +3642,7 @@ const VENUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/venues`
  *
- * @param params.limit - query parameter — default `200`.
+ * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.mbb.espnMbbVenues({});

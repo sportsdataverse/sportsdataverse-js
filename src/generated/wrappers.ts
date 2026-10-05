@@ -83,7 +83,13 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/{league}/transactions",
     "pathParams": [],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      }
+    ]
   },
   {
     "short": "conferences",
@@ -145,7 +151,13 @@ export const WRAPPERS: WrapperDef[] = [
         "name": "team_id"
       }
     ],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      }
+    ]
   },
   {
     "short": "team_schedule",
@@ -461,7 +473,13 @@ export const WRAPPERS: WrapperDef[] = [
         "name": "group_id"
       }
     ],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      }
+    ]
   },
   {
     "short": "season_type_leaders",
@@ -527,6 +545,29 @@ export const WRAPPERS: WrapperDef[] = [
     "queryParams": []
   },
   {
+    "short": "season_week_powerindex",
+    "family": "core_v2",
+    "scope": "universal",
+    "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex",
+    "pathParams": [
+      {
+        "name": "season"
+      },
+      {
+        "name": "season_type"
+      },
+      {
+        "name": "week"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      }
+    ]
+  },
+  {
     "short": "season_week_events",
     "family": "core_v2",
     "scope": "universal",
@@ -564,7 +605,12 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "limit",
         "queryKey": "limit",
-        "default": 500
+        "default": 1000
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
       }
     ]
   },
@@ -620,7 +666,7 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "limit",
         "queryKey": "limit",
-        "default": 200
+        "default": 500
       }
     ]
   },
@@ -713,7 +759,13 @@ export const WRAPPERS: WrapperDef[] = [
         "name": "season"
       }
     ],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 200
+      }
+    ]
   },
   {
     "short": "athletes_index",
@@ -1348,7 +1400,12 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "limit",
         "queryKey": "limit",
-        "default": 500
+        "default": 1000
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
       }
     ]
   },
@@ -1374,7 +1431,7 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "limit",
         "queryKey": "limit",
-        "default": 200
+        "default": 1000
       }
     ]
   },
@@ -1466,7 +1523,13 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/positions",
     "pathParams": [],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 200
+      }
+    ]
   },
   {
     "short": "position",
@@ -1486,7 +1549,13 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/tournaments",
     "pathParams": [],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 200
+      }
+    ]
   },
   {
     "short": "awards",
@@ -1494,7 +1563,13 @@ export const WRAPPERS: WrapperDef[] = [
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/awards",
     "pathParams": [],
-    "queryParams": []
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 200
+      }
+    ]
   },
   {
     "short": "award",
@@ -1554,9 +1629,57 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "limit",
         "queryKey": "limit",
-        "default": 100
+        "default": 1000
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
       }
     ]
+  },
+  {
+    "short": "recruiting_years",
+    "family": "core_v2",
+    "scope": "ncaa",
+    "path": "/{sport}/leagues/{league}/recruiting",
+    "pathParams": [],
+    "queryParams": []
+  },
+  {
+    "short": "recruiting_athletes",
+    "family": "core_v2",
+    "scope": "ncaa",
+    "path": "/{sport}/leagues/{league}/recruiting/{year}/athletes",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 1000
+      },
+      {
+        "name": "page",
+        "queryKey": "page",
+        "default": 1
+      }
+    ]
+  },
+  {
+    "short": "recruiting_rankings",
+    "family": "core_v2",
+    "scope": "ncaa",
+    "path": "/{sport}/leagues/{league}/recruiting/{year}/rankings",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": []
   },
   {
     "short": "season_week_rankings",
@@ -1741,92 +1864,6 @@ export const WRAPPERS: WrapperDef[] = [
 
 export const FLAT_WRAPPERS: WrapperDef[] = [
   {
-    "short": "teams",
-    "flat": true,
-    "api": "mlb",
-    "host": "https://statsapi.mlb.com",
-    "scope": "universal",
-    "path": "/api/v1/teams",
-    "pathParams": [],
-    "queryParams": [
-      {
-        "name": "sport_id",
-        "queryKey": "sportId",
-        "default": 1
-      },
-      {
-        "name": "season",
-        "queryKey": "season"
-      },
-      {
-        "name": "league_ids",
-        "queryKey": "leagueIds"
-      },
-      {
-        "name": "active_status",
-        "queryKey": "activeStatus"
-      },
-      {
-        "name": "hydrate",
-        "queryKey": "hydrate"
-      },
-      {
-        "name": "fields",
-        "queryKey": "fields"
-      }
-    ],
-    "parser": "parse_mlb_teams"
-  },
-  {
-    "short": "schedule",
-    "flat": true,
-    "api": "mlb",
-    "host": "https://statsapi.mlb.com",
-    "scope": "universal",
-    "path": "/api/v1/schedule",
-    "pathParams": [],
-    "queryParams": [
-      {
-        "name": "sport_id",
-        "queryKey": "sportId",
-        "default": 1
-      },
-      {
-        "name": "date",
-        "queryKey": "date"
-      },
-      {
-        "name": "season",
-        "queryKey": "season"
-      },
-      {
-        "name": "team_id",
-        "queryKey": "teamId"
-      },
-      {
-        "name": "start_date",
-        "queryKey": "startDate"
-      },
-      {
-        "name": "end_date",
-        "queryKey": "endDate"
-      },
-      {
-        "name": "game_type",
-        "queryKey": "gameType"
-      },
-      {
-        "name": "hydrate",
-        "queryKey": "hydrate"
-      },
-      {
-        "name": "fields",
-        "queryKey": "fields"
-      }
-    ],
-    "parser": "parse_mlb_schedule"
-  },
-  {
     "short": "schedule_postseason",
     "flat": true,
     "api": "mlb",
@@ -1882,7 +1919,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/pbp"
   },
   {
     "short": "boxscore",
@@ -1977,7 +2015,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/game_context_metrics"
   },
   {
     "short": "win_probability",
@@ -2013,7 +2052,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/game_content"
   },
   {
     "short": "team",
@@ -2169,7 +2209,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/people"
   },
   {
     "short": "person",
@@ -2197,7 +2238,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/person"
   },
   {
     "short": "person_game_stats",
@@ -2220,7 +2262,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "fields"
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/person_game_stats"
   },
   {
     "short": "sport_players",
@@ -2381,7 +2424,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/meta"
   },
   {
     "short": "awards",
@@ -2461,7 +2505,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 100
       }
     ],
-    "parser": "parse_mlb_list"
+    "parser": "parse_mlb_list",
+    "returnsSchema": "native/mlb/draft"
   },
   {
     "short": "umpires",
@@ -3668,6 +3713,92 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_mlb_team_roster",
     "returnsSchema": "native/mlb/team_roster_type"
+  },
+  {
+    "short": "teams",
+    "flat": true,
+    "api": "mlb",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/teams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "league_ids",
+        "queryKey": "leagueIds"
+      },
+      {
+        "name": "active_status",
+        "queryKey": "activeStatus"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_teams"
+  },
+  {
+    "short": "schedule",
+    "flat": true,
+    "api": "mlb",
+    "host": "https://statsapi.mlb.com",
+    "scope": "universal",
+    "path": "/api/v1/schedule",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_id",
+        "queryKey": "sportId",
+        "default": 1
+      },
+      {
+        "name": "date",
+        "queryKey": "date"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "startDate"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "endDate"
+      },
+      {
+        "name": "game_type",
+        "queryKey": "gameType"
+      },
+      {
+        "name": "hydrate",
+        "queryKey": "hydrate"
+      },
+      {
+        "name": "fields",
+        "queryKey": "fields"
+      }
+    ],
+    "parser": "parse_mlb_schedule"
   },
   {
     "short": "standings",
@@ -5303,7 +5434,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_right_rail"
+    "parser": "parse_nhl_web_right_rail",
+    "returnsSchema": "native/nhl_api_web/right_rail"
   },
   {
     "short": "schedule",
@@ -5353,7 +5485,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_schedule"
+    "parser": "parse_nhl_web_schedule",
+    "returnsSchema": "native/nhl_api_web/schedule_calendar"
   },
   {
     "short": "playoff_series",
@@ -5440,7 +5573,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_club_schedule"
+    "parser": "parse_nhl_web_club_schedule",
+    "returnsSchema": "native/nhl_api_web/club_schedule_month"
   },
   {
     "short": "club_schedule_week",
@@ -5459,7 +5593,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_club_schedule"
+    "parser": "parse_nhl_web_club_schedule",
+    "returnsSchema": "native/nhl_api_web/club_schedule_week"
   },
   {
     "short": "club_stats",
@@ -5483,7 +5618,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_club_stats"
+    "parser": "parse_nhl_web_club_stats",
+    "returnsSchema": "native/nhl_api_web/club_stats"
   },
   {
     "short": "club_stats_season",
@@ -5498,7 +5634,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_club_stats"
+    "parser": "parse_nhl_web_club_stats",
+    "returnsSchema": "native/nhl_api_web/club_stats_season"
   },
   {
     "short": "roster",
@@ -5533,7 +5670,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_web_roster"
+    "parser": "parse_nhl_web_roster",
+    "returnsSchema": "native/nhl_api_web/roster_season"
   },
   {
     "short": "player_landing",
@@ -5683,7 +5821,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/v1/draft/picks/now",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_web_draft_picks"
+    "parser": "parse_nhl_web_draft_picks",
+    "returnsSchema": "native/nhl_api_web/draft_picks_now"
   },
   {
     "short": "draft_rankings_now",
@@ -5706,7 +5845,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/v1/draft-tracker/picks/now",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_web_draft_picks"
+    "parser": "parse_nhl_web_draft_picks",
+    "returnsSchema": "native/nhl_api_web/draft_tracker_picks_now"
   },
   {
     "short": "skater_detail",
@@ -5755,7 +5895,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/skater_comparison"
   },
   {
     "short": "skater_shot_location_detail",
@@ -5779,7 +5920,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_shot_location"
+    "parser": "parse_edge_shot_location",
+    "returnsSchema": "native/nhl_edge/skater_shot_location_detail"
   },
   {
     "short": "skater_shot_location_top_10",
@@ -5885,7 +6027,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/skater_skating_distance_detail"
   },
   {
     "short": "skater_skating_speed_detail",
@@ -5909,7 +6052,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/skater_skating_speed_detail"
   },
   {
     "short": "skater_speed_top_10",
@@ -6042,7 +6186,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/skater_landing"
   },
   {
     "short": "goalie_detail",
@@ -6091,7 +6236,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/goalie_5v5_detail"
   },
   {
     "short": "goalie_5v5_top_10",
@@ -6139,7 +6285,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/goalie_comparison"
   },
   {
     "short": "goalie_save_percentage_detail",
@@ -6163,7 +6310,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/goalie_save_percentage_detail"
   },
   {
     "short": "goalie_edge_save_pctg_top_10",
@@ -6260,7 +6408,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/goalie_landing"
   },
   {
     "short": "team_detail",
@@ -6306,7 +6455,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/team_landing"
   },
   {
     "short": "team_shot_location_detail",
@@ -6385,7 +6535,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/team_shot_speed_detail"
   },
   {
     "short": "team_skating_distance_detail",
@@ -6461,7 +6612,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 2
       }
     ],
-    "queryParams": []
+    "queryParams": [],
+    "returnsSchema": "native/nhl_edge/team_skating_speed_detail"
   },
   {
     "short": "team_skating_speed_top_10",
@@ -6512,7 +6664,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_zone_time"
+    "parser": "parse_edge_zone_time",
+    "returnsSchema": "native/nhl_edge/team_zone_time_details"
   },
   {
     "short": "team_zone_time_top_10",
@@ -6563,7 +6716,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/cat_skater_detail"
   },
   {
     "short": "cat_goalie_detail",
@@ -6587,7 +6741,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_edge_detail"
+    "parser": "parse_edge_detail",
+    "returnsSchema": "native/nhl_edge/cat_goalie_detail"
   },
   {
     "short": "ping",
@@ -6683,7 +6838,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/draft"
   },
   {
     "short": "franchise",
@@ -6718,7 +6874,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/game"
   },
   {
     "short": "glossary",
@@ -6777,7 +6934,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/leaders_goalies"
   },
   {
     "short": "leaders_skaters",
@@ -6797,7 +6955,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/leaders_skaters"
   },
   {
     "short": "milestones_goalies",
@@ -6814,7 +6973,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/milestones_goalies"
   },
   {
     "short": "milestones_skaters",
@@ -6831,7 +6991,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/milestones_skaters"
   },
   {
     "short": "players",
@@ -6848,7 +7009,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/players"
   },
   {
     "short": "season",
@@ -6883,7 +7045,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/shiftcharts"
   },
   {
     "short": "skater_report",
@@ -6921,7 +7084,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/team"
   },
   {
     "short": "team_by_id",
@@ -6941,7 +7105,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_stats_rest"
+    "parser": "parse_nhl_stats_rest",
+    "returnsSchema": "native/nhl_stats_rest/team_by_id"
   },
   {
     "short": "team_report",
@@ -6973,7 +7138,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/award-details",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/awards"
   },
   {
     "short": "awards_by_franchise",
@@ -6988,7 +7154,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/awards_by_franchise"
   },
   {
     "short": "awards_trophy_season",
@@ -7006,7 +7173,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/awards_trophy_season"
   },
   {
     "short": "coaches",
@@ -7033,7 +7201,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/coach"
   },
   {
     "short": "coach_career",
@@ -7049,7 +7218,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/coach_career"
   },
   {
     "short": "coach_career_with_playoffs",
@@ -7060,7 +7230,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/coach-career-records-regular-plus-playoffs",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/coach_career_with_playoffs"
   },
   {
     "short": "coach_franchise",
@@ -7076,7 +7247,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/coach_franchise"
   },
   {
     "short": "coach_stanley_cup",
@@ -7087,7 +7259,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/coach-stanley-cup-streak",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/coach_stanley_cup"
   },
   {
     "short": "franchises",
@@ -7110,7 +7283,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/franchise-detail",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/franchise_detail"
   },
   {
     "short": "franchise_team_totals",
@@ -7133,7 +7307,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/franchise-season-results",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/franchise_season_results"
   },
   {
     "short": "franchise_playoff_appearances",
@@ -7144,7 +7319,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/franchise-playoff-appearances",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/franchise_playoff_appearances"
   },
   {
     "short": "franchise_totals",
@@ -7155,7 +7331,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/franchise-totals",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/franchise_totals"
   },
   {
     "short": "all_time_record_vs_franchise",
@@ -7166,7 +7343,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/all-time-record-vs-franchise",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/all_time_record_vs_franchise"
   },
   {
     "short": "skater_career_stats",
@@ -7199,7 +7377,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/consecutive-100-point-seasons",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/consecutive_100pt_seasons"
   },
   {
     "short": "goalie_career_stats",
@@ -7210,7 +7389,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-career-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_career_stats"
   },
   {
     "short": "goalie_career_stats_with_playoffs",
@@ -7221,7 +7401,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie_career_stats_incl_playoffs",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_career_stats_with_playoffs"
   },
   {
     "short": "goalie_season_stats",
@@ -7232,7 +7413,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-season-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_season_stats"
   },
   {
     "short": "goalie_win_streak",
@@ -7243,7 +7425,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-win-streak",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_win_streak"
   },
   {
     "short": "goalie_shutout_streak",
@@ -7254,7 +7437,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-shutout-streak",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_shutout_streak"
   },
   {
     "short": "goalie_win_plateaus",
@@ -7265,7 +7449,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-win-plateaus",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_win_plateaus"
   },
   {
     "short": "goalie_playoff_streak",
@@ -7276,7 +7461,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-playoff-streak",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_playoff_streak"
   },
   {
     "short": "goalie_undefeated_streak",
@@ -7287,7 +7473,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/goalie-undefeated-streak",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/goalie_undefeated_streak"
   },
   {
     "short": "draft",
@@ -7319,7 +7506,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/draft_by_team"
   },
   {
     "short": "draft_prospect",
@@ -7335,7 +7523,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/draft_prospect"
   },
   {
     "short": "draft_lottery_odds",
@@ -7346,7 +7535,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/draft-lottery-odds",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/draft_lottery_odds"
   },
   {
     "short": "expansion_draft_picks",
@@ -7357,7 +7547,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/expansion-draft-picks",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/expansion_draft_picks"
   },
   {
     "short": "allstar_skater_career",
@@ -7368,7 +7559,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/all-star-skater-career-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/allstar_skater_career"
   },
   {
     "short": "allstar_goalie_career",
@@ -7379,7 +7571,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/all-star-goaltender-career-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/allstar_goalie_career"
   },
   {
     "short": "allstar_coach_career",
@@ -7390,7 +7583,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/all-star-coach-career-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/allstar_coach_career"
   },
   {
     "short": "allstar_skater_game",
@@ -7401,7 +7595,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/all-star-skater-game-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/allstar_skater_game"
   },
   {
     "short": "allstar_goalie_game",
@@ -7412,7 +7607,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/all-star-goaltender-game-stats",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/allstar_goalie_game"
   },
   {
     "short": "attendance",
@@ -7435,7 +7631,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/hof/players",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/hof_players"
   },
   {
     "short": "hof_players_by_office",
@@ -7450,7 +7647,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/hof_players_by_office"
   },
   {
     "short": "gm_career",
@@ -7466,7 +7664,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/gm_career"
   },
   {
     "short": "gm_franchise",
@@ -7477,7 +7676,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/general-manager-franchise-records",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/gm_franchise"
   },
   {
     "short": "home_team_record",
@@ -7488,7 +7688,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/home-team-record",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/home_team_record"
   },
   {
     "short": "away_team_record",
@@ -7499,7 +7700,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/away-team-record",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_nhl_records"
+    "parser": "parse_nhl_records",
+    "returnsSchema": "native/nhl_records/away_team_record"
   },
   {
     "short": "standings",
@@ -7553,6 +7755,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "limit",
         "queryKey": "limit",
         "default": 40
+      },
+      {
+        "name": "team_id",
+        "queryKey": "teamId",
+        "default": null
       }
     ],
     "parser": "parse_nfl_rosters",
@@ -7794,6 +8001,101 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_nfl_weekly_game_details",
     "returnsSchema": "native/nfl_api/weekly_game_details",
+    "auth": true
+  },
+  {
+    "short": "live_team_statistics",
+    "flat": true,
+    "api": "nfl_api",
+    "host": "https://api.nfl.com",
+    "scope": "universal",
+    "path": "/football/v2/stats/live/team-statistics/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nfl_team",
+    "returnsSchema": "native/nfl_api/live_team_statistics",
+    "auth": true
+  },
+  {
+    "short": "live_player_statistics",
+    "flat": true,
+    "api": "nfl_api",
+    "host": "https://api.nfl.com",
+    "scope": "universal",
+    "path": "/football/v2/stats/live/player-statistics/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_nfl_team",
+    "returnsSchema": "native/nfl_api/live_player_statistics",
+    "auth": true
+  },
+  {
+    "short": "game_details_v2",
+    "flat": true,
+    "api": "nfl_api",
+    "host": "https://api.nfl.com",
+    "scope": "universal",
+    "path": "/experience/v2/gamedetails/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "include_drive_chart",
+        "queryKey": "includeDriveChart",
+        "default": false
+      },
+      {
+        "name": "include_replays",
+        "queryKey": "includeReplays",
+        "default": false
+      },
+      {
+        "name": "include_standings",
+        "queryKey": "includeStandings",
+        "default": false
+      },
+      {
+        "name": "include_tagged_videos",
+        "queryKey": "includeTaggedVideos",
+        "default": false
+      }
+    ],
+    "parser": "parse_nfl_team",
+    "returnsSchema": "native/nfl_api/game_details_v2",
+    "auth": true
+  },
+  {
+    "short": "game_details_by_slug",
+    "flat": true,
+    "api": "nfl_api",
+    "host": "https://api.nfl.com",
+    "scope": "universal",
+    "path": "/experience/v1/gamedetailsbyslug/{slug}",
+    "pathParams": [
+      {
+        "name": "slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "include_replays",
+        "queryKey": "includeReplays",
+        "default": false
+      }
+    ],
+    "parser": "parse_nfl_team",
+    "returnsSchema": "native/nfl_api/game_details_by_slug",
     "auth": true
   },
   {
@@ -8937,42 +9239,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/recruiting/unranked_transfers"
   },
   {
-    "short": "baseball_player_meta",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/player/meta/baseball/{player_id}",
-    "pathParams": [
-      {
-        "name": "player_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/baseball_player_meta"
-  },
-  {
-    "short": "boxscore",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/game/boxscore/{game_id}",
-    "pathParams": [
-      {
-        "name": "game_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/boxscore"
-  },
-  {
     "short": "bulk",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/bulk",
     "pathParams": [],
@@ -9013,7 +9283,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "client_configuration",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/client/config/{client_name}",
     "pathParams": [
@@ -9040,13 +9310,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/client_configuration"
+    "returnsSchema": "native/cbs/client_config"
   },
   {
     "short": "coach_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/coach/rankings/{coach_id}",
     "pathParams": [
@@ -9062,7 +9332,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "coach_team_associations",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/coach/teamAssociations/{coach_id}",
     "pathParams": [
@@ -9080,35 +9350,35 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/coach_team_associations"
   },
   {
-    "short": "depth_charts",
+    "short": "sub_divisions",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/player/depthCharts/{player_id}",
+    "path": "/resource/division/subdivisions/{division_id}",
     "pathParams": [
       {
-        "name": "player_id"
+        "name": "division_id"
       }
     ],
     "queryParams": [
       {
-        "name": "position",
-        "queryKey": "position"
+        "name": "sub_division_id",
+        "queryKey": "subDivisionId"
       },
       {
-        "name": "pitch_pos",
-        "queryKey": "pitchPos"
+        "name": "name",
+        "queryKey": "name"
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/depth_charts"
+    "returnsSchema": "native/cbs/division_subdivisions"
   },
   {
     "short": "endpoint_registry",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/endpoint/registry",
     "pathParams": [],
@@ -9117,42 +9387,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/endpoint_registry"
   },
   {
-    "short": "event_entrants",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/event/entrants/{event_id}",
-    "pathParams": [
-      {
-        "name": "event_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/event_entrants"
-  },
-  {
-    "short": "event_leaderboard",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/event/leaderboard/{event_id}",
-    "pathParams": [
-      {
-        "name": "event_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/event_leaderboard"
-  },
-  {
     "short": "event",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/{event_id}",
     "pathParams": [
@@ -9174,10 +9412,42 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/event"
   },
   {
+    "short": "event_entrants",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/event/entrants/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event_entrants"
+  },
+  {
+    "short": "event_leaderboard",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/event/leaderboard/{event_id}",
+    "pathParams": [
+      {
+        "name": "event_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/event_leaderboard"
+  },
+  {
     "short": "event_seasons",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/seasons/{event_id}",
     "pathParams": [
@@ -9193,7 +9463,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "event_venues",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/event/venues/{event_id}",
     "pathParams": [
@@ -9206,26 +9476,35 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/event_venues"
   },
   {
-    "short": "featured_game",
+    "short": "game",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/game/featured/{game_id}",
+    "path": "/resource/game/{game_id}",
     "pathParams": [
       {
         "name": "game_id"
       }
     ],
-    "queryParams": [],
-    "parser": "parse_cbs_scoreboard",
-    "returnsSchema": "native/cbs/featured_game"
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game"
   },
   {
     "short": "game_betting_splits",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/bettingSplits/{game_id}",
     "pathParams": [
@@ -9238,10 +9517,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_betting_splits"
   },
   {
+    "short": "boxscore",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/game/boxscore/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_boxscore"
+  },
+  {
     "short": "game_content_preview",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/content/preview/{game_id}",
     "pathParams": [
@@ -9257,7 +9552,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_content_recap",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/content/recap/{game_id}",
     "pathParams": [
@@ -9273,7 +9568,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_content_story",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/content/story/{game_id}",
     "pathParams": [
@@ -9291,26 +9586,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_content_story"
   },
   {
-    "short": "game_hq_odds",
+    "short": "featured_game",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/game/odds/hq/{game_id}",
+    "path": "/resource/game/featured/{game_id}",
     "pathParams": [
       {
         "name": "game_id"
       }
     ],
     "queryParams": [],
-    "parser": "parse_cbs_odds",
-    "returnsSchema": "native/cbs/game_hq_odds"
+    "parser": "parse_cbs_scoreboard",
+    "returnsSchema": "native/cbs/game_featured"
   },
   {
     "short": "game_lineup",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/lineup/{game_id}",
     "pathParams": [
@@ -9331,7 +9626,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_odds",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/odds/{game_id}",
     "pathParams": [
@@ -9365,10 +9660,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_odds"
   },
   {
+    "short": "game_hq_odds",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/game/odds/hq/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_odds",
+    "returnsSchema": "native/cbs/game_odds_hq"
+  },
+  {
     "short": "game_outcomes",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/outcomes/{game_id}",
     "pathParams": [
@@ -9381,10 +9692,35 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_outcomes"
   },
   {
+    "short": "probable_players",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/game/probablePlayers/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_probable_players"
+  },
+  {
     "short": "game_props",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/props/{game_id}",
     "pathParams": [
@@ -9421,7 +9757,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_rtwp",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/rtwp/{game_id}",
     "pathParams": [
@@ -9434,35 +9770,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_rtwp"
   },
   {
-    "short": "game",
+    "short": "ruwt_highlights",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/game/{game_id}",
+    "path": "/resource/game/ruwtHighlights/{game_id}",
     "pathParams": [
       {
         "name": "game_id"
       }
     ],
-    "queryParams": [
-      {
-        "name": "date_format",
-        "queryKey": "dateFormat"
-      },
-      {
-        "name": "resources",
-        "queryKey": "resources"
-      }
-    ],
+    "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/game"
+    "returnsSchema": "native/cbs/game_ruwt_highlights"
   },
   {
     "short": "game_scoring_boxscores",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/boxscores/{game_id}",
     "pathParams": [
@@ -9478,7 +9805,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_drives",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/drives/{game_id}",
     "pathParams": [
@@ -9494,7 +9821,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_leaders",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/leaders/{game_id}",
     "pathParams": [
@@ -9510,7 +9837,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_player_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/playerStats/{game_id}",
     "pathParams": [
@@ -9526,7 +9853,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_plays",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/plays/{game_id}",
     "pathParams": [
@@ -9542,7 +9869,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_rosters",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/rosters/{game_id}",
     "pathParams": [
@@ -9558,7 +9885,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_scoreboard",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/scoreboard/{game_id}",
     "pathParams": [
@@ -9574,7 +9901,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_scores",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/scores/{game_id}",
     "pathParams": [
@@ -9590,7 +9917,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_team_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/teamStats/{game_id}",
     "pathParams": [
@@ -9606,7 +9933,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_winprob",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/winprob/{game_id}",
     "pathParams": [
@@ -9622,7 +9949,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_ytd_player_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/ytdPlayerStats/{game_id}",
     "pathParams": [
@@ -9638,7 +9965,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_scoring_ytd_team_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/scoring/ytdTeamStats/{game_id}",
     "pathParams": [
@@ -9654,7 +9981,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_ticket",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/game/ticket/{game_id}",
     "pathParams": [
@@ -9667,10 +9994,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_ticket"
   },
   {
+    "short": "weather",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/game/weather/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/game_weather"
+  },
+  {
     "short": "golf_event_markets",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/golf/event/markets/{event_id}",
     "pathParams": [
@@ -9686,7 +10029,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golf_player_markets",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/golf/player/markets/{player_id}",
     "pathParams": [
@@ -9707,7 +10050,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golfer_results",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/golfer/results/{player_id}",
     "pathParams": [
@@ -9729,26 +10072,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/golfer_results"
   },
   {
-    "short": "hockey_player_meta",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/player/hockey/meta/{player_id}",
-    "pathParams": [
-      {
-        "name": "player_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/hockey_player_meta"
-  },
-  {
     "short": "league",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/league/{league_id}",
     "pathParams": [
@@ -9769,7 +10096,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_teams",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/league/teams/{league_id}",
     "pathParams": [
@@ -9790,7 +10117,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "odds",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/odds/{game_id}",
     "pathParams": [
@@ -9803,10 +10130,39 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/odds"
   },
   {
+    "short": "player",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/player/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "resources",
+        "queryKey": "resources"
+      }
+    ],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player"
+  },
+  {
     "short": "player_combine_data",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/combineData/{player_id}",
     "pathParams": [
@@ -9819,10 +10175,35 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_combine_data"
   },
   {
+    "short": "depth_charts",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/player/depthCharts/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "position",
+        "queryKey": "position"
+      },
+      {
+        "name": "pitch_pos",
+        "queryKey": "pitchPos"
+      }
+    ],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_depth_charts"
+  },
+  {
     "short": "player_draft_info",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/draftInfo/{player_id}",
     "pathParams": [
@@ -9851,7 +10232,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_encyclopedia",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/encyclopedia/{player_id}",
     "pathParams": [
@@ -9876,7 +10257,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_futures",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/futures/{player_id}",
     "pathParams": [
@@ -9892,7 +10273,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_game_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/gameStats/{player_id}",
     "pathParams": [
@@ -9918,12 +10299,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_game_stats"
   },
   {
-    "short": "player_golf_metadata",
+    "short": "hockey_player_meta",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/player/meta/golf/{player_id}",
+    "path": "/resource/player/hockey/meta/{player_id}",
     "pathParams": [
       {
         "name": "player_id"
@@ -9931,13 +10312,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_golf_metadata"
+    "returnsSchema": "native/cbs/player_hockey_meta"
   },
   {
     "short": "player_injuries",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/injuries/{player_id}",
     "pathParams": [
@@ -9955,10 +10336,42 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_injuries"
   },
   {
+    "short": "baseball_player_meta",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/player/meta/baseball/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_meta_baseball"
+  },
+  {
+    "short": "player_golf_metadata",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/player/meta/golf/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_meta_golf"
+  },
+  {
     "short": "player_outlook",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/outlook/{player_id}",
     "pathParams": [
@@ -9976,10 +10389,31 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_outlook"
   },
   {
+    "short": "position_rankings",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/player/positionRankings/{player_id}",
+    "pathParams": [
+      {
+        "name": "player_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "position",
+        "queryKey": "position"
+      }
+    ],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/player_position_rankings"
+  },
+  {
     "short": "player_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/rankings/{player_id}",
     "pathParams": [
@@ -10013,12 +10447,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_rankings"
   },
   {
-    "short": "player",
+    "short": "recruit_team_associations",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/player/{player_id}",
+    "path": "/resource/player/recruitAssociations/{player_id}",
     "pathParams": [
       {
         "name": "player_id"
@@ -10026,26 +10460,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [
       {
-        "name": "date_format",
-        "queryKey": "dateFormat"
-      },
-      {
-        "name": "year",
-        "queryKey": "year"
-      },
-      {
         "name": "resources",
         "queryKey": "resources"
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player"
+    "returnsSchema": "native/cbs/player_recruit_associations"
   },
   {
     "short": "player_standings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/standings/{player_id}",
     "pathParams": [
@@ -10082,7 +10508,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/stats/{player_id}",
     "pathParams": [
@@ -10127,7 +10553,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_team_associations",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/teamAssociations/{player_id}",
     "pathParams": [
@@ -10156,7 +10582,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_transactions",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/player/transactions/{player_id}",
     "pathParams": [
@@ -10190,56 +10616,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_transactions"
   },
   {
-    "short": "position_rankings",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/player/positionRankings/{player_id}",
-    "pathParams": [
-      {
-        "name": "player_id"
-      }
-    ],
-    "queryParams": [
-      {
-        "name": "position",
-        "queryKey": "position"
-      }
-    ],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/position_rankings"
-  },
-  {
-    "short": "probable_players",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/game/probablePlayers/{game_id}",
-    "pathParams": [
-      {
-        "name": "game_id"
-      }
-    ],
-    "queryParams": [
-      {
-        "name": "date_format",
-        "queryKey": "dateFormat"
-      },
-      {
-        "name": "resources",
-        "queryKey": "resources"
-      }
-    ],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/probable_players"
-  },
-  {
     "short": "recruit_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/recruit/rankings/{player_id}",
     "pathParams": [
@@ -10252,47 +10632,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/recruit_rankings"
   },
   {
-    "short": "recruit_team_associations",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/player/recruitAssociations/{player_id}",
-    "pathParams": [
-      {
-        "name": "player_id"
-      }
-    ],
-    "queryParams": [
-      {
-        "name": "resources",
-        "queryKey": "resources"
-      }
-    ],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/recruit_team_associations"
-  },
-  {
-    "short": "ruwt_highlights",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/game/ruwtHighlights/{game_id}",
-    "pathParams": [
-      {
-        "name": "game_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/ruwt_highlights"
-  },
-  {
     "short": "season",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/season/{season_id}",
     "pathParams": [
@@ -10317,7 +10660,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_teams",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/season/teams/{season_id}",
     "pathParams": [
@@ -10335,26 +10678,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/season_teams"
   },
   {
-    "short": "sport_leagues",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/sport/leagues/{sport_id}",
-    "pathParams": [
-      {
-        "name": "sport_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/sport_leagues"
-  },
-  {
     "short": "sport",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/sport/{sport_id}",
     "pathParams": [
@@ -10372,72 +10699,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/sport"
   },
   {
-    "short": "sports_line_team_rankings",
+    "short": "sport_leagues",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/team/rankings/sportsline/{team_id}",
+    "path": "/resource/sport/leagues/{sport_id}",
     "pathParams": [
       {
-        "name": "team_id"
+        "name": "sport_id"
       }
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/sports_line_team_rankings"
-  },
-  {
-    "short": "sports_line_team_standings",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/team/standings/sportsline/{team_id}",
-    "pathParams": [
-      {
-        "name": "team_id"
-      }
-    ],
-    "queryParams": [
-      {
-        "name": "date_format",
-        "queryKey": "dateFormat"
-      }
-    ],
-    "parser": "parse_cbs_standings",
-    "returnsSchema": "native/cbs/sports_line_team_standings"
-  },
-  {
-    "short": "sub_divisions",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/division/subdivisions/{division_id}",
-    "pathParams": [
-      {
-        "name": "division_id"
-      }
-    ],
-    "queryParams": [
-      {
-        "name": "sub_division_id",
-        "queryKey": "subDivisionId"
-      },
-      {
-        "name": "name",
-        "queryKey": "name"
-      }
-    ],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/sub_divisions"
+    "returnsSchema": "native/cbs/sport_leagues"
   },
   {
     "short": "team_futures",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/futures/{team_id}",
     "pathParams": [
@@ -10453,7 +10734,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_metadata",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/metadata/{team_id}",
     "pathParams": [
@@ -10474,7 +10755,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_players",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/players/{team_id}",
     "pathParams": [
@@ -10495,7 +10776,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_polls",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/polls/{team_id}",
     "pathParams": [
@@ -10520,7 +10801,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_rankings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/rankings/{team_id}",
     "pathParams": [
@@ -10546,10 +10827,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_rankings"
   },
   {
+    "short": "sports_line_team_rankings",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/team/rankings/sportsline/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_cbs_list",
+    "returnsSchema": "native/cbs/team_rankings_sportsline"
+  },
+  {
     "short": "team_seasons",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/seasons/{team_id}",
     "pathParams": [
@@ -10586,7 +10883,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_standings",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/standings/{team_id}",
     "pathParams": [
@@ -10612,10 +10909,31 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_standings"
   },
   {
+    "short": "sports_line_team_standings",
+    "flat": true,
+    "api": "cbs",
+    "host": "https://api.cbssports.com/napi",
+    "scope": "universal",
+    "path": "/resource/team/standings/sportsline/{team_id}",
+    "pathParams": [
+      {
+        "name": "team_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "date_format",
+        "queryKey": "dateFormat"
+      }
+    ],
+    "parser": "parse_cbs_standings",
+    "returnsSchema": "native/cbs/team_standings_sportsline"
+  },
+  {
     "short": "team_stats",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/team/stats/{team_id}",
     "pathParams": [
@@ -10645,26 +10963,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_stats"
   },
   {
-    "short": "venue_metadata",
-    "flat": true,
-    "api": "cbs",
-    "host": "https://api.cbssports.com",
-    "scope": "universal",
-    "path": "/resource/venue/metadata/{venue_id}",
-    "pathParams": [
-      {
-        "name": "venue_id"
-      }
-    ],
-    "queryParams": [],
-    "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/venue_metadata"
-  },
-  {
     "short": "venue",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
     "path": "/resource/venue/{venue_id}",
     "pathParams": [
@@ -10682,20 +10984,20 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/venue"
   },
   {
-    "short": "weather",
+    "short": "venue_metadata",
     "flat": true,
     "api": "cbs",
-    "host": "https://api.cbssports.com",
+    "host": "https://api.cbssports.com/napi",
     "scope": "universal",
-    "path": "/resource/game/weather/{game_id}",
+    "path": "/resource/venue/metadata/{venue_id}",
     "pathParams": [
       {
-        "name": "game_id"
+        "name": "venue_id"
       }
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/weather"
+    "returnsSchema": "native/cbs/venue_metadata"
   },
   {
     "short": "scoreboard",
@@ -11870,26 +12172,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "oly_medal_count",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/OlyMedalCount",
+    "path": "/OlyMedalCount",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
@@ -11906,26 +12193,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "oly_seasons",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/OlySeasons",
+    "path": "/OlySeasons",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "seasons",
         "queryKey": "seasons"
@@ -11938,26 +12210,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "alias",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/alias",
+    "path": "/alias",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "alias",
         "queryKey": "alias"
@@ -11970,26 +12227,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "article_list_card_players",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/articleListCardPlayers",
+    "path": "/articleListCardPlayers",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_ids",
         "queryKey": "playerIds"
@@ -12002,26 +12244,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "article_list_card_teams",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/articleListCardTeams",
+    "path": "/articleListCardTeams",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_ids",
         "queryKey": "teamIds"
@@ -12034,26 +12261,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "basic_players",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/basicPlayers",
+    "path": "/basicPlayers",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "players",
         "queryKey": "players"
@@ -12066,26 +12278,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "betting_disclaimer",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/bettingDisclaimer",
+    "path": "/bettingDisclaimer",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "betting_disclaimer_id",
         "queryKey": "bettingDisclaimerId"
@@ -12098,26 +12295,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "combat_event_fights",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/combatEventFights",
+    "path": "/combatEventFights",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "event_group_id",
         "queryKey": "eventGroupId"
@@ -12138,26 +12320,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "combat_schedule",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/combatSchedule",
+    "path": "/combatSchedule",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
@@ -12174,26 +12341,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "common_pills",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/common/pills",
+    "path": "/common/pills",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "add_team_logos",
         "queryKey": "addTeamLogos"
@@ -12214,26 +12366,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "consensus_rankings_php",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/consensus-rankings.php",
+    "path": "/consensus-rankings.php",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "sport",
         "queryKey": "sport"
@@ -12266,26 +12403,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "draft",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/draft",
+    "path": "/draft",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -12302,26 +12424,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "draft_prospects",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/draftProspects",
+    "path": "/draftProspects",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -12346,26 +12453,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "driver_results",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/driverResults",
+    "path": "/driverResults",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -12382,26 +12474,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "driver_splits",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/driverSplits",
+    "path": "/driverSplits",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -12414,27 +12491,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "featured_game_ids",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/featuredGameIds",
+    "path": "/featuredGameIds",
     "pathParams": [],
-    "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      }
-    ],
+    "queryParams": [],
     "parser": "parse_yahoo_list",
     "returnsSchema": "native/yahoo/featured_game_ids"
   },
@@ -12442,26 +12503,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_prop_bets",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/gamePropBets",
+    "path": "/gamePropBets",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -12474,26 +12520,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "game_stats_leaders",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/gameStatsLeaders",
+    "path": "/gameStatsLeaders",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -13138,26 +13169,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "gametime_game",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/gametimeGame",
+    "path": "/gametimeGame",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -13170,26 +13186,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "gametime_team",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/gametimeTeam",
+    "path": "/gametimeTeam",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -13202,26 +13203,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golf_tournament_seasons",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/golfTournamentSeasons",
+    "path": "/golfTournamentSeasons",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "event_group_id",
         "queryKey": "eventGroupId"
@@ -13234,26 +13220,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golf_tournaments",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/golfTournaments",
+    "path": "/golfTournaments",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "association",
         "queryKey": "association"
@@ -13274,26 +13245,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "golf_tournaments_basic",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/golfTournamentsBasic",
+    "path": "/golfTournamentsBasic",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "event_group_id",
         "queryKey": "eventGroupId"
@@ -13314,26 +13270,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_conferences",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueConferences",
+    "path": "/leagueConferences",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -13350,26 +13291,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_filters_data",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueFiltersData",
+    "path": "/leagueFiltersData",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -13394,26 +13320,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_future_odds",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueFutureOdds",
+    "path": "/leagueFutureOdds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -13430,26 +13341,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_game_ids",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueGameIds",
+    "path": "/leagueGameIds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "count",
         "queryKey": "count"
@@ -13506,26 +13402,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_game_ids_by_date",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueGameIdsByDate",
+    "path": "/leagueGameIdsByDate",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -13582,26 +13463,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_games_by_round",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueGamesByRound",
+    "path": "/leagueGamesByRound",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -13622,26 +13488,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_info",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueInfo",
+    "path": "/leagueInfo",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -13654,26 +13505,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_injuries",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueInjuries",
+    "path": "/leagueInjuries",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league_id",
         "queryKey": "leagueId"
@@ -13686,26 +13522,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_names",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueNames",
+    "path": "/leagueNames",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -13718,26 +13539,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_prop_odds",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leaguePropOdds",
+    "path": "/leaguePropOdds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "count",
         "queryKey": "count"
@@ -13754,26 +13560,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_standings",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueStandings",
+    "path": "/leagueStandings",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -13794,26 +13585,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_stats_by_team",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueStatsByTeam",
+    "path": "/leagueStatsByTeam",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -13854,26 +13630,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_stats_individual",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueStatsIndividual",
+    "path": "/leagueStatsIndividual",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -13946,26 +13707,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_stats_overview",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueStatsOverview",
+    "path": "/leagueStatsOverview",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -14014,26 +13760,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_stats_weekly",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueStatsWeekly",
+    "path": "/leagueStatsWeekly",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -14062,26 +13793,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_team_ids",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueTeamIds",
+    "path": "/leagueTeamIds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -14102,26 +13818,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "league_teams",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leagueTeams",
+    "path": "/leagueTeams",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -14146,26 +13847,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "leagues_season_states",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/leaguesSeasonStates",
+    "path": "/leaguesSeasonStates",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "leagues",
         "queryKey": "leagues"
@@ -14178,26 +13864,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "module_game",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/moduleGame",
+    "path": "/moduleGame",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14218,26 +13889,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "motorsport_standings",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/motorsportStandings",
+    "path": "/motorsportStandings",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -14254,26 +13910,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "nascar_drivers",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/nascarDrivers",
+    "path": "/nascarDrivers",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -14286,26 +13927,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "nav_dropdown_tray",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/navDropdownTray",
+    "path": "/navDropdownTray",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "get_soccer_data",
         "queryKey": "getSoccerData"
@@ -14326,26 +13952,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "pick_distribution",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/pickDistribution",
+    "path": "/pickDistribution",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -14366,26 +13977,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_boxscore",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookBoxscore",
+    "path": "/playbookBoxscore",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14438,26 +14034,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_boxscore_poll",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookBoxscorePoll",
+    "path": "/playbookBoxscorePoll",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14502,26 +14083,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_boxscore_social_share",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookBoxscoreSocialShare",
+    "path": "/playbookBoxscoreSocialShare",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14534,26 +14100,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_combat_match",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookCombatMatch",
+    "path": "/playbookCombatMatch",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14582,26 +14133,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_game",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookGame",
+    "path": "/playbookGame",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14622,26 +14158,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_game_odds_poll",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookGameOddsPoll",
+    "path": "/playbookGameOddsPoll",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14658,26 +14179,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_golf_tournament",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookGolfTournament",
+    "path": "/playbookGolfTournament",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14706,26 +14212,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_league_odds",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookLeagueOdds",
+    "path": "/playbookLeagueOdds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -14758,26 +14249,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_player",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookPlayer",
+    "path": "/playbookPlayer",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -14794,26 +14270,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_player_social_share",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookPlayerSocialShare",
+    "path": "/playbookPlayerSocialShare",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -14826,26 +14287,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_race",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookRace",
+    "path": "/playbookRace",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -14866,26 +14312,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_team",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookTeam",
+    "path": "/playbookTeam",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -14918,26 +14349,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_team_basic",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookTeamBasic",
+    "path": "/playbookTeamBasic",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -14958,26 +14374,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_team_social_share",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookTeamSocialShare",
+    "path": "/playbookTeamSocialShare",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -14990,26 +14391,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playbook_tennis_match",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playbookTennisMatch",
+    "path": "/playbookTennisMatch",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -15022,26 +14408,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_basic",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playerBasic",
+    "path": "/playerBasic",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -15058,26 +14429,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_career_stats",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playerCareerStats",
+    "path": "/playerCareerStats",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -15114,26 +14470,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_game_log",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playerGameLog",
+    "path": "/playerGameLog",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -15178,26 +14519,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_props",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playerProps",
+    "path": "/playerProps",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -15210,26 +14536,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_search",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playerSearch",
+    "path": "/playerSearch",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -15266,26 +14577,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "player_season_stats",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playerSeasonStats",
+    "path": "/playerSeasonStats",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "player_id",
         "queryKey": "playerId"
@@ -15346,26 +14642,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playoff_bracket",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playoffBracket",
+    "path": "/playoffBracket",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -15394,26 +14675,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "playoff_series_game",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/playoffSeriesGame",
+    "path": "/playoffSeriesGame",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -15426,26 +14692,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "polymarket_game",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/polymarketGame",
+    "path": "/polymarketGame",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -15458,26 +14709,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "racing_schedule",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/racingSchedule",
+    "path": "/racingSchedule",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -15502,26 +14738,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "scoreboard_game",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/scoreboardGame",
+    "path": "/scoreboardGame",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "game_id",
         "queryKey": "gameId"
@@ -15554,34 +14775,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_defense_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballDefenseNcaaf",
+    "path": "/seasonStatsFootballDefenseNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15603,34 +14808,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_kicking_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballKickingNcaaf",
+    "path": "/seasonStatsFootballKickingNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15652,34 +14841,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_passing_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballPassingNcaaf",
+    "path": "/seasonStatsFootballPassingNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15701,34 +14874,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_punting_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballPuntingNcaaf",
+    "path": "/seasonStatsFootballPuntingNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15750,34 +14907,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_receiving_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballReceivingNcaaf",
+    "path": "/seasonStatsFootballReceivingNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15799,34 +14940,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_returns_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballReturnsNcaaf",
+    "path": "/seasonStatsFootballReturnsNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15848,34 +14973,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_stats_football_rushing_ncaaf",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonStatsFootballRushingNcaaf",
+    "path": "/seasonStatsFootballRushingNcaaf",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15897,34 +15006,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_defense",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballDefense",
+    "path": "/seasonTeamStatsFootballDefense",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15946,34 +15039,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_kicking",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballKicking",
+    "path": "/seasonTeamStatsFootballKicking",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -15995,34 +15072,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_kickoffs",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballKickoffs",
+    "path": "/seasonTeamStatsFootballKickoffs",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16044,34 +15105,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_offense",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballOffense",
+    "path": "/seasonTeamStatsFootballOffense",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16093,34 +15138,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_passing",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballPassing",
+    "path": "/seasonTeamStatsFootballPassing",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16142,34 +15171,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_passing_defense",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballPassingDefense",
+    "path": "/seasonTeamStatsFootballPassingDefense",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16191,34 +15204,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_punting",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballPunting",
+    "path": "/seasonTeamStatsFootballPunting",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16240,34 +15237,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_receiving",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballReceiving",
+    "path": "/seasonTeamStatsFootballReceiving",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16289,34 +15270,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_receiving_defense",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense",
+    "path": "/seasonTeamStatsFootballReceivingDefense",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16338,34 +15303,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_returns",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballReturns",
+    "path": "/seasonTeamStatsFootballReturns",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16387,34 +15336,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_rushing",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballRushing",
+    "path": "/seasonTeamStatsFootballRushing",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16436,34 +15369,18 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "season_team_stats_football_rushing_defense",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/seasonTeamStatsFootballRushingDefense",
+    "path": "/seasonTeamStatsFootballRushingDefense",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
       },
       {
         "name": "league",
-        "queryKey": "league",
-        "default": "ncaaf"
+        "queryKey": "league"
       },
       {
         "name": "league_structure",
@@ -16485,26 +15402,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_injuries",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamInjuries",
+    "path": "/teamInjuries",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -16517,26 +15419,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_playoff_series",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamPlayoffSeries",
+    "path": "/teamPlayoffSeries",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -16553,26 +15440,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_roster",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamRoster",
+    "path": "/teamRoster",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -16593,26 +15465,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_schedule_by_season",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamScheduleBySeason",
+    "path": "/teamScheduleBySeason",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
@@ -16629,26 +15486,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_search",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamSearch",
+    "path": "/teamSearch",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "name",
         "queryKey": "name"
@@ -16669,26 +15511,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_stats_leaders_v2",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamStatsLeadersV2",
+    "path": "/teamStatsLeadersV2",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league",
         "queryKey": "league"
@@ -16733,26 +15560,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "team_transactions",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamTransactions",
+    "path": "/teamTransactions",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_id",
         "queryKey": "teamId"
@@ -16765,26 +15577,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "teams_basic",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/teamsBasic",
+    "path": "/teamsBasic",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "team_ids",
         "queryKey": "teamIds"
@@ -16805,26 +15602,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "tennis_matches_by_date",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/tennisMatchesByDate",
+    "path": "/tennisMatchesByDate",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "tournament_id",
         "queryKey": "tournamentId"
@@ -16845,26 +15627,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "tennis_tournament",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/tennisTournament",
+    "path": "/tennisTournament",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "tournament_id",
         "queryKey": "tournamentId"
@@ -16881,26 +15648,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "tennis_tournaments",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/tennisTournaments",
+    "path": "/tennisTournaments",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "league_id",
         "queryKey": "leagueId"
@@ -16921,26 +15673,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "tennis_tournaments_by_date",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/tennisTournamentsByDate",
+    "path": "/tennisTournamentsByDate",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "season",
         "queryKey": "season"
@@ -16957,26 +15694,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "trending_event_ids",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/trendingEventIds",
+    "path": "/trendingEventIds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "count",
         "queryKey": "count"
@@ -16997,26 +15719,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "short": "trending_game_ids",
     "flat": true,
     "api": "yahoo",
-    "host": "https://graphite-secure.sports.yahoo.com",
+    "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
     "scope": "universal",
-    "path": "/v1/query/shangrila/trendingGameIds",
+    "path": "/trendingGameIds",
     "pathParams": [],
     "queryParams": [
-      {
-        "name": "lang",
-        "queryKey": "lang",
-        "default": "en-US"
-      },
-      {
-        "name": "region",
-        "queryKey": "region",
-        "default": "US"
-      },
-      {
-        "name": "tz",
-        "queryKey": "tz",
-        "default": "America/Chicago"
-      },
       {
         "name": "count",
         "queryKey": "count"
@@ -17036,6 +15743,68 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_yahoo_list",
     "returnsSchema": "native/yahoo/trending_game_ids"
+  },
+  {
+    "short": "editorial_boxscore",
+    "flat": true,
+    "api": "yahoo",
+    "host": "https://api-secure.sports.yahoo.com/v1/editorial/s",
+    "scope": "universal",
+    "path": "/boxscore/{game_id}",
+    "pathParams": [
+      {
+        "name": "game_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "v",
+        "queryKey": "v"
+      },
+      {
+        "name": "polling",
+        "queryKey": "polling"
+      }
+    ],
+    "parser": "parse_yahoo_scores_boxscore",
+    "returnsSchema": "native/yahoo/editorial_boxscore"
+  },
+  {
+    "short": "editorial_scoreboard",
+    "flat": true,
+    "api": "yahoo",
+    "host": "https://api-secure.sports.yahoo.com/v1/editorial/s",
+    "scope": "universal",
+    "path": "/scoreboard",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "leagues",
+        "queryKey": "leagues"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "conferences",
+        "queryKey": "conferences"
+      },
+      {
+        "name": "count",
+        "queryKey": "count"
+      },
+      {
+        "name": "v",
+        "queryKey": "v"
+      }
+    ],
+    "parser": "parse_yahoo_scores_scoreboard",
+    "returnsSchema": "native/yahoo/editorial_scoreboard"
   },
   {
     "short": "seasons",

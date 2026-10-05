@@ -9,7 +9,7 @@ sidebar_position: 2
 
 # `ligue1` — Core API
 
-81 endpoints on `sdv.ligue1`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+82 endpoints on `sdv.ligue1`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnLigue1AthleteAwards`
 
@@ -325,6 +325,7 @@ LIGUE1 — awards (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1128,6 +1129,7 @@ LIGUE1 — positions (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1178,6 +1180,7 @@ LIGUE1 — season awards (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1202,7 +1205,7 @@ LIGUE1 — season coaches (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_coaches`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1340,6 +1343,7 @@ LIGUE1 — season group children (ESPN sports.core.api.espn.com (core v2)).
 | `{season}` | `season` | yes | path parameter |
 | `{season_type}` | `season_type` | yes | path parameter |
 | `{group_id}` | `group_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1525,7 +1529,8 @@ LIGUE1 — season teams (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1685,6 +1690,33 @@ await sdv.ligue1.espnLigue1SeasonWeekEvents({ season: '…', season_type: '…',
 // snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_week_events(...)
 ```
 
+## `espnLigue1SeasonWeekPowerindex`
+
+LIGUE1 — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
+| `limit` | `limit` | no | query parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.ligue1.espnLigue1SeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_week_powerindex(...)
+```
+
 ## `espnLigue1SeasonWeeks`
 
 LIGUE1 — season weeks (ESPN sports.core.api.espn.com (core v2)).
@@ -1838,7 +1870,8 @@ LIGUE1 — teams core (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_teams`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1858,6 +1891,7 @@ LIGUE1 — tournaments (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1901,7 +1935,7 @@ LIGUE1 — venues (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

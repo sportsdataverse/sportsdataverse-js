@@ -50,7 +50,7 @@ export const FLAT_HOSTS: Record<string, string> = {
   // onto the standalone `cbs` namespace (sdv.cbs.*). The CBS data resources are
   // anonymously reachable (the spec ships no securityScheme), so this family is
   // NOT `auth: true` — no token, no required `headers`.
-  cbs: "https://api.cbssports.com",
+  cbs: "https://api.cbssports.com/napi",
   // Fox Sports API — fourth cross-sport (non-league) provider family.
   // Merges onto the standalone `fox` namespace (sdv.fox.*). Auth is a public
   // apikey + api-version query pair (both default in the wrapper metadata), so
@@ -63,7 +63,7 @@ export const FLAT_HOSTS: Record<string, string> = {
   // securityScheme), so NOT `auth: true` — Yahoo rejects requests without
   // browser-y Origin/Referer, which the caller supplies via the flat `headers`.
   yahoo_scores: "https://api-secure.sports.yahoo.com",
-  yahoo: "https://graphite-secure.sports.yahoo.com",
+  yahoo: "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   // HockeyTech / LeagueStat — standalone `hockeytech` namespace (sdv.hockeytech.*)
   // for the PWHL + junior/minor leagues. This is the DEFAULT feed host (4 of 5
   // leagues); QMJHL is served from cluster.leaguestat.com, which the family's

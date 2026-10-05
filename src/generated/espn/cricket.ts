@@ -628,7 +628,13 @@ const AWARDS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/awards",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * CRICKET — awards (ESPN sports.core.api.espn.com (core v2)).
@@ -636,6 +642,7 @@ const AWARDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/cricket/leagues/{league}/awards`
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketAwards({});
@@ -1973,7 +1980,13 @@ const POSITIONS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/positions",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * CRICKET — positions (ESPN sports.core.api.espn.com (core v2)).
@@ -1981,6 +1994,7 @@ const POSITIONS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/cricket/leagues/{league}/positions`
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketPositions({});
@@ -2091,7 +2105,13 @@ const SEASON_AWARDS_DEF: WrapperDef = {
       "name": "season"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * CRICKET — season awards (ESPN sports.core.api.espn.com (core v2)).
@@ -2100,6 +2120,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - path parameter.
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketSeasonAwards({ season: '…' });
@@ -2123,7 +2144,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 200
+      "default": 500
     }
   ]
 };
@@ -2134,7 +2155,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `200`.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketSeasonCoaches({ season: '…' });
@@ -2312,7 +2333,13 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
       "name": "group_id"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * CRICKET — season group children (ESPN sports.core.api.espn.com (core v2)).
@@ -2323,6 +2350,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @param params.season - path parameter.
  * @param params.season_type - path parameter.
  * @param params.group_id - path parameter.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
@@ -2565,7 +2593,12 @@ const SEASON_TEAMS_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 500
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -2576,7 +2609,8 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `500`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketSeasonTeams({ season: '…' });
@@ -2788,6 +2822,48 @@ export const espnCricketSeasonWeekEvents: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnCricketSeasonWeekEvents} (py/R parity). */
 export const espn_cricket_season_week_events = espnCricketSeasonWeekEvents;
+
+const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
+  "short": "season_week_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    }
+  ]
+};
+/**
+ * CRICKET — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/cricket/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+ *
+ * @param params.league - ESPN league slug override (default `eng.1`).
+ * @param params.season - path parameter.
+ * @param params.season_type - path parameter.
+ * @param params.week - path parameter.
+ * @param params.limit - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.cricket.espnCricketSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+ */
+export const espnCricketSeasonWeekPowerindex: WrapperFn = (params = {}) =>
+  callWrapper(SEASON_WEEK_POWERINDEX_DEF, CFG, params);
+/** snake_case alias of {@link espnCricketSeasonWeekPowerindex} (py/R parity). */
+export const espn_cricket_season_week_powerindex = espnCricketSeasonWeekPowerindex;
 
 const SEASON_WEEKS_DEF: WrapperDef = {
   "short": "season_weeks",
@@ -3230,7 +3306,13 @@ const TEAM_ROSTER_DEF: WrapperDef = {
       "name": "team_id"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * CRICKET — team roster (ESPN site.api.espn.com).
@@ -3239,6 +3321,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
  * @param params.team_id - path parameter.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketTeamRoster({ team_id: '…' });
@@ -3320,7 +3403,12 @@ const TEAMS_CORE_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 500
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -3330,7 +3418,8 @@ const TEAMS_CORE_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/cricket/leagues/{league}/teams`
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
- * @param params.limit - query parameter — default `500`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketTeamsCore({});
@@ -3376,7 +3465,13 @@ const TOURNAMENTS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/tournaments",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * CRICKET — tournaments (ESPN sports.core.api.espn.com (core v2)).
@@ -3384,6 +3479,7 @@ const TOURNAMENTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/cricket/leagues/{league}/tournaments`
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketTournaments({});
@@ -3399,7 +3495,13 @@ const TRANSACTIONS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/{league}/transactions",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * CRICKET — transactions (ESPN site.api.espn.com).
@@ -3407,6 +3509,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/cricket/{league}/transactions`
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketTransactions({});
@@ -3454,7 +3557,7 @@ const VENUES_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 200
+      "default": 1000
     }
   ]
 };
@@ -3464,7 +3567,7 @@ const VENUES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/cricket/leagues/{league}/venues`
  *
  * @param params.league - ESPN league slug override (default `eng.1`).
- * @param params.limit - query parameter — default `200`.
+ * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.cricket.espnCricketVenues({});

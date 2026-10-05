@@ -1175,6 +1175,109 @@ Flat (non-ESPN) wrappers for the official MLB Stats API. Host: `https://statsapi
 | `person_full_name` | character |  |
 | `person_link` | character |  |
 
+### Returns — `mlb_people` / `mlbPeople`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `full_name` | character |  |
+| `link` | character |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `primary_number` | character |  |
+| `birth_date` | character |  |
+| `current_age` | integer |  |
+| `birth_city` | character |  |
+| `birth_country` | character |  |
+| `height` | character |  |
+| `weight` | integer |  |
+| `active` | logical |  |
+| `use_name` | character |  |
+| `use_last_name` | character |  |
+| `boxscore_name` | character |  |
+| `nick_name` | character |  |
+| `gender` | character |  |
+| `is_player` | logical |  |
+| `is_verified` | logical |  |
+| `pronunciation` | character |  |
+| `mlb_debut_date` | character |  |
+| `name_first_last` | character |  |
+| `name_slug` | character |  |
+| `first_last_name` | character |  |
+| `last_first_name` | character |  |
+| `last_init_name` | character |  |
+| `init_last_name` | character |  |
+| `full_fml_name` | character |  |
+| `full_lfm_name` | character |  |
+| `strike_zone_top` | double |  |
+| `strike_zone_bottom` | double |  |
+| `primary_position_code` | character |  |
+| `primary_position_name` | character |  |
+| `primary_position_type` | character |  |
+| `primary_position_abbreviation` | character |  |
+| `bat_side_code` | character |  |
+| `bat_side_description` | character |  |
+| `pitch_hand_code` | character |  |
+| `pitch_hand_description` | character |  |
+| `birth_state_province` | character |  |
+| `middle_name` | character |  |
+| `draft_year` | double |  |
+
+### Returns — `mlb_person` / `mlbPerson`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | integer |  |
+| `full_name` | character |  |
+| `link` | character |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `primary_number` | character |  |
+| `birth_date` | character |  |
+| `current_age` | integer |  |
+| `birth_city` | character |  |
+| `birth_country` | character |  |
+| `height` | character |  |
+| `weight` | integer |  |
+| `active` | logical |  |
+| `use_name` | character |  |
+| `use_last_name` | character |  |
+| `boxscore_name` | character |  |
+| `nick_name` | character |  |
+| `gender` | character |  |
+| `is_player` | logical |  |
+| `is_verified` | logical |  |
+| `pronunciation` | character |  |
+| `mlb_debut_date` | character |  |
+| `name_first_last` | character |  |
+| `name_slug` | character |  |
+| `first_last_name` | character |  |
+| `last_first_name` | character |  |
+| `last_init_name` | character |  |
+| `init_last_name` | character |  |
+| `full_fml_name` | character |  |
+| `full_lfm_name` | character |  |
+| `strike_zone_top` | double |  |
+| `strike_zone_bottom` | double |  |
+| `primary_position_code` | character |  |
+| `primary_position_name` | character |  |
+| `primary_position_type` | character |  |
+| `primary_position_abbreviation` | character |  |
+| `bat_side_code` | character |  |
+| `bat_side_description` | character |  |
+| `pitch_hand_code` | character |  |
+| `pitch_hand_description` | character |  |
+
+### Returns — `mlb_person_game_stats` / `mlbPersonGameStats`
+
+| col_name | type | description |
+|---|---|---|
+| `total_splits` | double |  |
+| `exemptions` | character |  |
+| `splits` | character |  |
+| `type_display_name` | character |  |
+| `group_display_name` | character |  |
+
 ### Returns — `mlb_play_by_play` / `mlbPlayByPlay`
 
 | col_name | type | description |
@@ -1907,10 +2010,10 @@ Flat (non-ESPN) wrappers for Baseball Savant (Statcast). Host: `https://baseball
 | `ab_number` | character | Ab number. |
 | `cap_index` | character | Cap index. |
 | `outs` | character | Outs. |
-| `batter` | character | MLBAM id of the batter. |
+| `batter` | integer | MLBAM id of the batter. |
 | `stand` | character | Batter stance side (R/L). |
 | `batter_name` | character | Batter name. |
-| `pitcher` | character | MLBAM id of the pitcher. |
+| `pitcher` | integer | MLBAM id of the pitcher. |
 | `p_throws` | character | Pitcher throwing hand (R/L). |
 | `pitcher_name` | character | Pitcher name. |
 | `catcher` | character | Catcher. |
@@ -1964,7 +2067,7 @@ Flat (non-ESPN) wrappers for Baseball Savant (Statcast). Host: `https://baseball
 | `launch_speed` | character | Exit velocity of the batted ball (mph). |
 | `launch_angle` | character | Launch angle (deg). |
 | `game_total_pitches` | character | Game total pitches. |
-| `game_pk` | character | MLBAM game id. |
+| `game_pk` | integer | MLBAM game id. |
 
 ### Returns — `mlb_statcast_leaderboard_active_spin` / `mlbStatcastLeaderboardActiveSpin`
 

@@ -9,7 +9,7 @@ sidebar_position: 4
 
 # `wch` — NCAA additional
 
-3 endpoints on `sdv.wch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+6 endpoints on `sdv.wch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnWchRankings`
 
@@ -34,6 +34,79 @@ await sdv.wch.espnWchRankings({});
 // snake_case alias (py/R parity): sdv.wch.espn_wch_rankings(...)
 ```
 
+## `espnWchRecruitingAthletes`
+
+WCH — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting/{year}/athletes`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{year}` | `year` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.wch.espnWchRecruitingAthletes({ year: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_recruiting_athletes(...)
+```
+
+## `espnWchRecruitingRankings`
+
+WCH — recruiting rankings (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting/{year}/rankings`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{year}` | `year` | yes | path parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.wch.espnWchRecruitingRankings({ year: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_recruiting_rankings(...)
+```
+
+## `espnWchRecruitingYears`
+
+WCH — recruiting years (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.wch.espnWchRecruitingYears({});
+// snake_case alias (py/R parity): sdv.wch.espn_wch_recruiting_years(...)
+```
+
 ## `espnWchSeasonRecruits`
 
 WCH — season recruits (ESPN sports.core.api.espn.com (core v2)).
@@ -43,7 +116,8 @@ WCH — season recruits (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `100`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

@@ -16,6 +16,40 @@ The rename flows through the codegen stems, returns-schema paths, parser names,
 playground ids, and docs. Real upstream URL paths that contain the vendor
 codename (Fox `/bifrost/v1/…`, Yahoo `/v1/query/shangrila/…`) are unchanged.
 
+### Changed — shared endpoint YAML is vendored from sportsdataverse-py
+
+The shared codegen families (`espn_site_v2`, `espn_core_v2`, `espn_web_v3`,
+`leagues`, `mlb_statcast`, `nfl_api`, the four `nhl_*`, `mlb`, `torvik`, `cbs`,
+`yahoo`) and every returns schema they reference are now derived from a pinned
+sportsdataverse-py commit by `tools/codegen/vendor.mjs` (`npm run vendor`), with
+JS-only endpoints in `tools/codegen/overlay/`. `npm run vendor:check` (CI) fails
+on a hand-edit; a weekly `vendor-sync.yml` PR bumps the pin. The first re-vendor
+(sdv-py `719de79edb`) converges the 127 shared endpoint definitions that had
+drifted since the 2026-06 fork:
+
+- **New wrappers:** ESPN Core v2 `season_week_powerindex` (every league) and NCAA
+  `recruiting_years` / `recruiting_athletes` / `recruiting_rankings`;
+  `sdv.nfl.nflApi{GameDetailsBySlug,GameDetailsV2,LiveTeamStatistics,LivePlayerStatistics}`;
+  `sdv.yahoo.yahooEditorial{Boxscore,Scoreboard}` (on the editorial host — flat
+  endpoints may now carry their own `host`). Their py-only parsers fall back to the
+  family's generic parser in JS.
+- **New query defaults:** ESPN `team_roster` / `transactions` /
+  `season_group_children` send `limit=500`; `awards` / `season_awards` /
+  `positions` / `tournaments` `limit=200`; `teams_core` / `season_teams` /
+  `season_recruits` `limit=1000` + `page=1`; `venues` `limit=1000`; `season_coaches`
+  `limit=500`. ESPN otherwise pages these silently (CFB rosters were cut at 100).
+  `nflApiRosters` gains `team_id`.
+- **`sdv.yahoo.*` (stats graph):** host is now
+  `https://graphite-secure.sports.yahoo.com/v1/query/shangrila` (same final URLs).
+  The wrappers no longer declare `lang` / `region` / `tz` (Yahoo applies the same
+  locale defaults server-side) and the stats queries no longer default
+  `league=ncaaf` — pass `league` explicitly. **BREAKING** for callers that passed a
+  locale or relied on the `league` default.
+- **`sdv.cbs.*`:** host `https://api.cbssports.com/napi` (what sdv-py ships).
+- About 166 more returns-schema files reach the docs (619, up from 453), including
+  NHL Records, NHL EDGE, NHL Stats REST and the ESPN per-league schemas. CBS and
+  Yahoo returns tables now follow sdv-py's schemas.
+
 ## **V3.1.0**
 
 A minor, additive release: two new flat-API families (no breaking changes), plus

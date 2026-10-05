@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `hockey`
 - **league slug:** `nhl`
 - **scopes:** `universal`
-- **wrappers:** 110
+- **wrappers:** 111
 
 `sdv.nhl` is composed from **written, documented source** (`src/generated/espn/nhl.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.nhl.espnNhl<Endpoint>(params)` and under its snake_case alias (`espn_nhl_<endpoint>`) for parity with the Python / R packages.
 
@@ -30,7 +30,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | Family | endpoints |
 |---|---:|
 | [Site API](./reference/site) | 24 |
-| [Core API](./reference/core) | 81 |
+| [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
 | [Native API](./reference/native) | 127 |
 

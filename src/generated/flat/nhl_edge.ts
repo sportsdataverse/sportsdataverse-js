@@ -30,7 +30,8 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/cat_goalie_detail"
 };
 
 /**
@@ -71,7 +72,8 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/cat_skater_detail"
 };
 
 /**
@@ -112,7 +114,8 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_5v5_detail"
 };
 
 /**
@@ -194,7 +197,8 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_comparison"
 };
 
 /**
@@ -315,7 +319,8 @@ const GOALIE_LANDING_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_landing"
 };
 
 /**
@@ -355,7 +360,8 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_save_percentage_detail"
 };
 
 /**
@@ -483,7 +489,8 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_comparison"
 };
 
 /**
@@ -612,7 +619,8 @@ const SKATER_LANDING_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_landing"
 };
 
 /**
@@ -652,7 +660,8 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_shot_location"
+  "parser": "parse_edge_shot_location",
+  "returnsSchema": "native/nhl_edge/skater_shot_location_detail"
 };
 
 /**
@@ -829,7 +838,8 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_skating_distance_detail"
 };
 
 /**
@@ -870,7 +880,8 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_skating_speed_detail"
 };
 
 /**
@@ -1086,7 +1097,8 @@ const TEAM_LANDING_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/team_landing"
 };
 
 /**
@@ -1217,7 +1229,8 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/team_shot_speed_detail"
 };
 
 /**
@@ -1346,7 +1359,8 @@ const TEAM_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
       "default": 2
     }
   ],
-  "queryParams": []
+  "queryParams": [],
+  "returnsSchema": "native/nhl_edge/team_skating_speed_detail"
 };
 
 /**
@@ -1432,7 +1446,8 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_zone_time"
+  "parser": "parse_edge_zone_time",
+  "returnsSchema": "native/nhl_edge/team_zone_time_details"
 };
 
 /**

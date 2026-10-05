@@ -9,7 +9,7 @@ sidebar_position: 2
 
 # `soccer` — Core API
 
-81 endpoints on `sdv.soccer`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+82 endpoints on `sdv.soccer`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnSoccerAthleteAwards`
 
@@ -339,6 +339,7 @@ SOCCER — awards (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1177,6 +1178,7 @@ SOCCER — positions (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1229,6 +1231,7 @@ SOCCER — season awards (ESPN sports.core.api.espn.com (core v2)).
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
 | `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1254,7 +1257,7 @@ SOCCER — season coaches (ESPN sports.core.api.espn.com (core v2)).
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_coaches`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1398,6 +1401,7 @@ SOCCER — season group children (ESPN sports.core.api.espn.com (core v2)).
 | `{season}` | `season` | yes | path parameter |
 | `{season_type}` | `season_type` | yes | path parameter |
 | `{group_id}` | `group_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1591,7 +1595,8 @@ SOCCER — season teams (ESPN sports.core.api.espn.com (core v2)).
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1757,6 +1762,34 @@ await sdv.soccer.espnSoccerSeasonWeekEvents({ season: '…', season_type: '…',
 // snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_week_events(...)
 ```
 
+## `espnSoccerSeasonWeekPowerindex`
+
+SOCCER — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `league` | `league` | no | ESPN league slug override (default `eng.1`) |
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
+| `limit` | `limit` | no | query parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.soccer.espnSoccerSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_week_powerindex(...)
+```
+
 ## `espnSoccerSeasonWeeks`
 
 SOCCER — season weeks (ESPN sports.core.api.espn.com (core v2)).
@@ -1916,7 +1949,8 @@ SOCCER — teams core (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_teams`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1937,6 +1971,7 @@ SOCCER — tournaments (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1982,7 +2017,7 @@ SOCCER — venues (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

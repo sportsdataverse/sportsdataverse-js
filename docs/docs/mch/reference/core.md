@@ -9,7 +9,7 @@ sidebar_position: 2
 
 # `mch` — Core API
 
-81 endpoints on `sdv.mch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+82 endpoints on `sdv.mch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnMchAthleteAwards`
 
@@ -325,6 +325,7 @@ MCH — awards (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1128,6 +1129,7 @@ MCH — positions (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1178,6 +1180,7 @@ MCH — season awards (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1202,7 +1205,7 @@ MCH — season coaches (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_coaches`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1340,6 +1343,7 @@ MCH — season group children (ESPN sports.core.api.espn.com (core v2)).
 | `{season}` | `season` | yes | path parameter |
 | `{season_type}` | `season_type` | yes | path parameter |
 | `{group_id}` | `group_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1525,7 +1529,8 @@ MCH — season teams (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1685,6 +1690,33 @@ await sdv.mch.espnMchSeasonWeekEvents({ season: '…', season_type: '…', week:
 // snake_case alias (py/R parity): sdv.mch.espn_mch_season_week_events(...)
 ```
 
+## `espnMchSeasonWeekPowerindex`
+
+MCH — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
+| `limit` | `limit` | no | query parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.mch.espnMchSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_season_week_powerindex(...)
+```
+
 ## `espnMchSeasonWeeks`
 
 MCH — season weeks (ESPN sports.core.api.espn.com (core v2)).
@@ -1838,7 +1870,8 @@ MCH — teams core (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_teams`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1858,6 +1891,7 @@ MCH — tournaments (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1901,7 +1935,7 @@ MCH — venues (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

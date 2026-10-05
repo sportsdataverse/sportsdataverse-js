@@ -12,7 +12,7 @@ const BASEBALL_PLAYER_META_DEF: WrapperDef = {
   "short": "baseball_player_meta",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/meta/baseball/{player_id}",
   "pathParams": [
@@ -22,13 +22,13 @@ const BASEBALL_PLAYER_META_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/baseball_player_meta"
+  "returnsSchema": "native/cbs/player_meta_baseball"
 };
 
 /**
  * CBS Sports — baseball player meta.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/meta/baseball/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/baseball/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -43,7 +43,7 @@ const BOXSCORE_DEF: WrapperDef = {
   "short": "boxscore",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/boxscore/{game_id}",
   "pathParams": [
@@ -53,13 +53,13 @@ const BOXSCORE_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/boxscore"
+  "returnsSchema": "native/cbs/game_boxscore"
 };
 
 /**
  * CBS Sports — boxscore.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/boxscore/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/boxscore/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -74,7 +74,7 @@ const BULK_DEF: WrapperDef = {
   "short": "bulk",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/bulk",
   "pathParams": [],
@@ -115,7 +115,7 @@ const BULK_DEF: WrapperDef = {
 /**
  * CBS Sports — bulk.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/bulk`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/bulk`
  *
  * @param params.player_resource - query parameter (`PlayerResource`).
  * @param params.team_resource - query parameter (`TeamResource`).
@@ -136,7 +136,7 @@ const CLIENT_CONFIGURATION_DEF: WrapperDef = {
   "short": "client_configuration",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/client/config/{client_name}",
   "pathParams": [
@@ -163,13 +163,13 @@ const CLIENT_CONFIGURATION_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/client_configuration"
+  "returnsSchema": "native/cbs/client_config"
 };
 
 /**
  * CBS Sports — client configuration.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/client/config/{client_name}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/client/config/{client_name}`
  *
  * @param params.client_name - path parameter.
  * @param params.resources - query parameter.
@@ -188,7 +188,7 @@ const COACH_RANKINGS_DEF: WrapperDef = {
   "short": "coach_rankings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/coach/rankings/{coach_id}",
   "pathParams": [
@@ -204,7 +204,7 @@ const COACH_RANKINGS_DEF: WrapperDef = {
 /**
  * CBS Sports — coach rankings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/coach/rankings/{coach_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/coach/rankings/{coach_id}`
  *
  * @param params.coach_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -219,7 +219,7 @@ const COACH_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
   "short": "coach_team_associations",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/coach/teamAssociations/{coach_id}",
   "pathParams": [
@@ -240,7 +240,7 @@ const COACH_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
 /**
  * CBS Sports — coach team associations.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/coach/teamAssociations/{coach_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/coach/teamAssociations/{coach_id}`
  *
  * @param params.coach_id - path parameter.
  * @param params.resources - query parameter.
@@ -256,7 +256,7 @@ const DEPTH_CHARTS_DEF: WrapperDef = {
   "short": "depth_charts",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/depthCharts/{player_id}",
   "pathParams": [
@@ -275,13 +275,13 @@ const DEPTH_CHARTS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/depth_charts"
+  "returnsSchema": "native/cbs/player_depth_charts"
 };
 
 /**
  * CBS Sports — depth charts.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/depthCharts/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/depthCharts/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.position - query parameter.
@@ -298,7 +298,7 @@ const ENDPOINT_REGISTRY_DEF: WrapperDef = {
   "short": "endpoint_registry",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/endpoint/registry",
   "pathParams": [],
@@ -310,7 +310,7 @@ const ENDPOINT_REGISTRY_DEF: WrapperDef = {
 /**
  * CBS Sports — endpoint registry.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/endpoint/registry`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/endpoint/registry`
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -324,7 +324,7 @@ const EVENT_DEF: WrapperDef = {
   "short": "event",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/event/{event_id}",
   "pathParams": [
@@ -349,7 +349,7 @@ const EVENT_DEF: WrapperDef = {
 /**
  * CBS Sports — event.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/event/{event_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -366,7 +366,7 @@ const EVENT_ENTRANTS_DEF: WrapperDef = {
   "short": "event_entrants",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/event/entrants/{event_id}",
   "pathParams": [
@@ -382,7 +382,7 @@ const EVENT_ENTRANTS_DEF: WrapperDef = {
 /**
  * CBS Sports — event entrants.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/event/entrants/{event_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/entrants/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -397,7 +397,7 @@ const EVENT_LEADERBOARD_DEF: WrapperDef = {
   "short": "event_leaderboard",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/event/leaderboard/{event_id}",
   "pathParams": [
@@ -413,7 +413,7 @@ const EVENT_LEADERBOARD_DEF: WrapperDef = {
 /**
  * CBS Sports — event leaderboard.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/event/leaderboard/{event_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/leaderboard/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -428,7 +428,7 @@ const EVENT_SEASONS_DEF: WrapperDef = {
   "short": "event_seasons",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/event/seasons/{event_id}",
   "pathParams": [
@@ -444,7 +444,7 @@ const EVENT_SEASONS_DEF: WrapperDef = {
 /**
  * CBS Sports — event seasons.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/event/seasons/{event_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/seasons/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -459,7 +459,7 @@ const EVENT_VENUES_DEF: WrapperDef = {
   "short": "event_venues",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/event/venues/{event_id}",
   "pathParams": [
@@ -475,7 +475,7 @@ const EVENT_VENUES_DEF: WrapperDef = {
 /**
  * CBS Sports — event venues.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/event/venues/{event_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/event/venues/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -490,7 +490,7 @@ const FEATURED_GAME_DEF: WrapperDef = {
   "short": "featured_game",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/featured/{game_id}",
   "pathParams": [
@@ -500,13 +500,13 @@ const FEATURED_GAME_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_scoreboard",
-  "returnsSchema": "native/cbs/featured_game"
+  "returnsSchema": "native/cbs/game_featured"
 };
 
 /**
  * CBS Sports — featured game.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/featured/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/featured/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -521,7 +521,7 @@ const GAME_DEF: WrapperDef = {
   "short": "game",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/{game_id}",
   "pathParams": [
@@ -546,7 +546,7 @@ const GAME_DEF: WrapperDef = {
 /**
  * CBS Sports — game.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -563,7 +563,7 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
   "short": "game_betting_splits",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/bettingSplits/{game_id}",
   "pathParams": [
@@ -579,7 +579,7 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
 /**
  * CBS Sports — game betting splits.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/bettingSplits/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/bettingSplits/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -594,7 +594,7 @@ const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
   "short": "game_content_preview",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/content/preview/{game_id}",
   "pathParams": [
@@ -610,7 +610,7 @@ const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
 /**
  * CBS Sports — game content preview.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/content/preview/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/content/preview/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -625,7 +625,7 @@ const GAME_CONTENT_RECAP_DEF: WrapperDef = {
   "short": "game_content_recap",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/content/recap/{game_id}",
   "pathParams": [
@@ -641,7 +641,7 @@ const GAME_CONTENT_RECAP_DEF: WrapperDef = {
 /**
  * CBS Sports — game content recap.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/content/recap/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/content/recap/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -656,7 +656,7 @@ const GAME_CONTENT_STORY_DEF: WrapperDef = {
   "short": "game_content_story",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/content/story/{game_id}",
   "pathParams": [
@@ -677,7 +677,7 @@ const GAME_CONTENT_STORY_DEF: WrapperDef = {
 /**
  * CBS Sports — game content story.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/content/story/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/content/story/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.game_ids_story_tags - query parameter (`gameIdsStoryTags`).
@@ -693,7 +693,7 @@ const GAME_HQ_ODDS_DEF: WrapperDef = {
   "short": "game_hq_odds",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/odds/hq/{game_id}",
   "pathParams": [
@@ -703,13 +703,13 @@ const GAME_HQ_ODDS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_odds",
-  "returnsSchema": "native/cbs/game_hq_odds"
+  "returnsSchema": "native/cbs/game_odds_hq"
 };
 
 /**
  * CBS Sports — game hq odds.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/odds/hq/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/odds/hq/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -724,7 +724,7 @@ const GAME_LINEUP_DEF: WrapperDef = {
   "short": "game_lineup",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/lineup/{game_id}",
   "pathParams": [
@@ -745,7 +745,7 @@ const GAME_LINEUP_DEF: WrapperDef = {
 /**
  * CBS Sports — game lineup.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/lineup/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/lineup/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.resources - query parameter.
@@ -761,7 +761,7 @@ const GAME_ODDS_DEF: WrapperDef = {
   "short": "game_odds",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/odds/{game_id}",
   "pathParams": [
@@ -798,7 +798,7 @@ const GAME_ODDS_DEF: WrapperDef = {
 /**
  * CBS Sports — game odds.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/odds/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/odds/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.market_ids - query parameter (`marketIds`).
@@ -818,7 +818,7 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
   "short": "game_outcomes",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/outcomes/{game_id}",
   "pathParams": [
@@ -834,7 +834,7 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
 /**
  * CBS Sports — game outcomes.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/outcomes/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/outcomes/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -849,7 +849,7 @@ const GAME_PROPS_DEF: WrapperDef = {
   "short": "game_props",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/props/{game_id}",
   "pathParams": [
@@ -886,7 +886,7 @@ const GAME_PROPS_DEF: WrapperDef = {
 /**
  * CBS Sports — game props.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/props/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/props/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.market_ids - query parameter (`marketIds`).
@@ -906,7 +906,7 @@ const GAME_RTWP_DEF: WrapperDef = {
   "short": "game_rtwp",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/rtwp/{game_id}",
   "pathParams": [
@@ -922,7 +922,7 @@ const GAME_RTWP_DEF: WrapperDef = {
 /**
  * CBS Sports — game rtwp.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/rtwp/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/rtwp/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -937,7 +937,7 @@ const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
   "short": "game_scoring_boxscores",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/boxscores/{game_id}",
   "pathParams": [
@@ -953,7 +953,7 @@ const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring boxscores.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/boxscores/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/boxscores/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -968,7 +968,7 @@ const GAME_SCORING_DRIVES_DEF: WrapperDef = {
   "short": "game_scoring_drives",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/drives/{game_id}",
   "pathParams": [
@@ -984,7 +984,7 @@ const GAME_SCORING_DRIVES_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring drives.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/drives/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/drives/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -999,7 +999,7 @@ const GAME_SCORING_LEADERS_DEF: WrapperDef = {
   "short": "game_scoring_leaders",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/leaders/{game_id}",
   "pathParams": [
@@ -1015,7 +1015,7 @@ const GAME_SCORING_LEADERS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring leaders.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/leaders/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/leaders/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1030,7 +1030,7 @@ const GAME_SCORING_PLAYER_STATS_DEF: WrapperDef = {
   "short": "game_scoring_player_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/playerStats/{game_id}",
   "pathParams": [
@@ -1046,7 +1046,7 @@ const GAME_SCORING_PLAYER_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring player stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/playerStats/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/playerStats/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1061,7 +1061,7 @@ const GAME_SCORING_PLAYS_DEF: WrapperDef = {
   "short": "game_scoring_plays",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/plays/{game_id}",
   "pathParams": [
@@ -1077,7 +1077,7 @@ const GAME_SCORING_PLAYS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring plays.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/plays/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/plays/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1092,7 +1092,7 @@ const GAME_SCORING_ROSTERS_DEF: WrapperDef = {
   "short": "game_scoring_rosters",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/rosters/{game_id}",
   "pathParams": [
@@ -1108,7 +1108,7 @@ const GAME_SCORING_ROSTERS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring rosters.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/rosters/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/rosters/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1123,7 +1123,7 @@ const GAME_SCORING_SCOREBOARD_DEF: WrapperDef = {
   "short": "game_scoring_scoreboard",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/scoreboard/{game_id}",
   "pathParams": [
@@ -1139,7 +1139,7 @@ const GAME_SCORING_SCOREBOARD_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring scoreboard.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/scoreboard/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/scoreboard/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1154,7 +1154,7 @@ const GAME_SCORING_SCORES_DEF: WrapperDef = {
   "short": "game_scoring_scores",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/scores/{game_id}",
   "pathParams": [
@@ -1170,7 +1170,7 @@ const GAME_SCORING_SCORES_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring scores.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/scores/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/scores/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1185,7 +1185,7 @@ const GAME_SCORING_TEAM_STATS_DEF: WrapperDef = {
   "short": "game_scoring_team_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/teamStats/{game_id}",
   "pathParams": [
@@ -1201,7 +1201,7 @@ const GAME_SCORING_TEAM_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring team stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/teamStats/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/teamStats/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1216,7 +1216,7 @@ const GAME_SCORING_WINPROB_DEF: WrapperDef = {
   "short": "game_scoring_winprob",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/winprob/{game_id}",
   "pathParams": [
@@ -1232,7 +1232,7 @@ const GAME_SCORING_WINPROB_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring winprob.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/winprob/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/winprob/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1247,7 +1247,7 @@ const GAME_SCORING_YTD_PLAYER_STATS_DEF: WrapperDef = {
   "short": "game_scoring_ytd_player_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/ytdPlayerStats/{game_id}",
   "pathParams": [
@@ -1263,7 +1263,7 @@ const GAME_SCORING_YTD_PLAYER_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring ytd player stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/ytdPlayerStats/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/ytdPlayerStats/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1278,7 +1278,7 @@ const GAME_SCORING_YTD_TEAM_STATS_DEF: WrapperDef = {
   "short": "game_scoring_ytd_team_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/scoring/ytdTeamStats/{game_id}",
   "pathParams": [
@@ -1294,7 +1294,7 @@ const GAME_SCORING_YTD_TEAM_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — game scoring ytd team stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/scoring/ytdTeamStats/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/scoring/ytdTeamStats/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1309,7 +1309,7 @@ const GAME_TICKET_DEF: WrapperDef = {
   "short": "game_ticket",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/ticket/{game_id}",
   "pathParams": [
@@ -1325,7 +1325,7 @@ const GAME_TICKET_DEF: WrapperDef = {
 /**
  * CBS Sports — game ticket.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/ticket/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/ticket/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1340,7 +1340,7 @@ const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
   "short": "golf_event_markets",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/golf/event/markets/{event_id}",
   "pathParams": [
@@ -1356,7 +1356,7 @@ const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
 /**
  * CBS Sports — golf event markets.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/golf/event/markets/{event_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/golf/event/markets/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1371,7 +1371,7 @@ const GOLF_PLAYER_MARKETS_DEF: WrapperDef = {
   "short": "golf_player_markets",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/golf/player/markets/{player_id}",
   "pathParams": [
@@ -1392,7 +1392,7 @@ const GOLF_PLAYER_MARKETS_DEF: WrapperDef = {
 /**
  * CBS Sports — golf player markets.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/golf/player/markets/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/golf/player/markets/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.event_id - query parameter (`eventId`).
@@ -1408,7 +1408,7 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
   "short": "golfer_results",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/golfer/results/{player_id}",
   "pathParams": [
@@ -1433,7 +1433,7 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
 /**
  * CBS Sports — golfer results.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/golfer/results/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/golfer/results/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -1450,7 +1450,7 @@ const HOCKEY_PLAYER_META_DEF: WrapperDef = {
   "short": "hockey_player_meta",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/hockey/meta/{player_id}",
   "pathParams": [
@@ -1460,13 +1460,13 @@ const HOCKEY_PLAYER_META_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/hockey_player_meta"
+  "returnsSchema": "native/cbs/player_hockey_meta"
 };
 
 /**
  * CBS Sports — hockey player meta.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/hockey/meta/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/hockey/meta/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1481,7 +1481,7 @@ const LEAGUE_DEF: WrapperDef = {
   "short": "league",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/league/{league_id}",
   "pathParams": [
@@ -1502,7 +1502,7 @@ const LEAGUE_DEF: WrapperDef = {
 /**
  * CBS Sports — league.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/league/{league_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/league/{league_id}`
  *
  * @param params.league_id - path parameter.
  * @param params.resources - query parameter.
@@ -1518,7 +1518,7 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
   "short": "league_teams",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/league/teams/{league_id}",
   "pathParams": [
@@ -1539,7 +1539,7 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
 /**
  * CBS Sports — league teams.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/league/teams/{league_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/league/teams/{league_id}`
  *
  * @param params.league_id - path parameter.
  * @param params.resources - query parameter.
@@ -1555,7 +1555,7 @@ const ODDS_DEF: WrapperDef = {
   "short": "odds",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/odds/{game_id}",
   "pathParams": [
@@ -1571,7 +1571,7 @@ const ODDS_DEF: WrapperDef = {
 /**
  * CBS Sports — odds.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/odds/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/odds/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1586,7 +1586,7 @@ const PLAYER_DEF: WrapperDef = {
   "short": "player",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/{player_id}",
   "pathParams": [
@@ -1615,7 +1615,7 @@ const PLAYER_DEF: WrapperDef = {
 /**
  * CBS Sports — player.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -1633,7 +1633,7 @@ const PLAYER_COMBINE_DATA_DEF: WrapperDef = {
   "short": "player_combine_data",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/combineData/{player_id}",
   "pathParams": [
@@ -1649,7 +1649,7 @@ const PLAYER_COMBINE_DATA_DEF: WrapperDef = {
 /**
  * CBS Sports — player combine data.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/combineData/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/combineData/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1664,7 +1664,7 @@ const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
   "short": "player_draft_info",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/draftInfo/{player_id}",
   "pathParams": [
@@ -1693,7 +1693,7 @@ const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
 /**
  * CBS Sports — player draft info.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/draftInfo/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/draftInfo/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -1711,7 +1711,7 @@ const PLAYER_ENCYCLOPEDIA_DEF: WrapperDef = {
   "short": "player_encyclopedia",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/encyclopedia/{player_id}",
   "pathParams": [
@@ -1736,7 +1736,7 @@ const PLAYER_ENCYCLOPEDIA_DEF: WrapperDef = {
 /**
  * CBS Sports — player encyclopedia.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/encyclopedia/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/encyclopedia/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -1753,7 +1753,7 @@ const PLAYER_FUTURES_DEF: WrapperDef = {
   "short": "player_futures",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/futures/{player_id}",
   "pathParams": [
@@ -1769,7 +1769,7 @@ const PLAYER_FUTURES_DEF: WrapperDef = {
 /**
  * CBS Sports — player futures.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/futures/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/futures/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1784,7 +1784,7 @@ const PLAYER_GAME_STATS_DEF: WrapperDef = {
   "short": "player_game_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/gameStats/{player_id}",
   "pathParams": [
@@ -1813,7 +1813,7 @@ const PLAYER_GAME_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — player game stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/gameStats/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/gameStats/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.game_id - query parameter (`gameId`).
@@ -1831,7 +1831,7 @@ const PLAYER_GOLF_METADATA_DEF: WrapperDef = {
   "short": "player_golf_metadata",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/meta/golf/{player_id}",
   "pathParams": [
@@ -1841,13 +1841,13 @@ const PLAYER_GOLF_METADATA_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_golf_metadata"
+  "returnsSchema": "native/cbs/player_meta_golf"
 };
 
 /**
  * CBS Sports — player golf metadata.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/meta/golf/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/golf/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1862,7 +1862,7 @@ const PLAYER_INJURIES_DEF: WrapperDef = {
   "short": "player_injuries",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/injuries/{player_id}",
   "pathParams": [
@@ -1883,7 +1883,7 @@ const PLAYER_INJURIES_DEF: WrapperDef = {
 /**
  * CBS Sports — player injuries.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/injuries/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/injuries/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -1899,7 +1899,7 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
   "short": "player_outlook",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/outlook/{player_id}",
   "pathParams": [
@@ -1920,7 +1920,7 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
 /**
  * CBS Sports — player outlook.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/outlook/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/outlook/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -1936,7 +1936,7 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
   "short": "player_rankings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/rankings/{player_id}",
   "pathParams": [
@@ -1973,7 +1973,7 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
 /**
  * CBS Sports — player rankings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/rankings/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/rankings/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -1993,7 +1993,7 @@ const PLAYER_STANDINGS_DEF: WrapperDef = {
   "short": "player_standings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/standings/{player_id}",
   "pathParams": [
@@ -2030,7 +2030,7 @@ const PLAYER_STANDINGS_DEF: WrapperDef = {
 /**
  * CBS Sports — player standings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/standings/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/standings/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -2050,7 +2050,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
   "short": "player_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/stats/{player_id}",
   "pathParams": [
@@ -2095,7 +2095,7 @@ const PLAYER_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — player stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/stats/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/stats/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -2117,7 +2117,7 @@ const PLAYER_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
   "short": "player_team_associations",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/teamAssociations/{player_id}",
   "pathParams": [
@@ -2146,7 +2146,7 @@ const PLAYER_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
 /**
  * CBS Sports — player team associations.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/teamAssociations/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/teamAssociations/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.assoc_type - query parameter (`assocType`).
@@ -2164,7 +2164,7 @@ const PLAYER_TRANSACTIONS_DEF: WrapperDef = {
   "short": "player_transactions",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/transactions/{player_id}",
   "pathParams": [
@@ -2201,7 +2201,7 @@ const PLAYER_TRANSACTIONS_DEF: WrapperDef = {
 /**
  * CBS Sports — player transactions.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/transactions/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/transactions/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -2221,7 +2221,7 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
   "short": "position_rankings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/positionRankings/{player_id}",
   "pathParams": [
@@ -2236,13 +2236,13 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/position_rankings"
+  "returnsSchema": "native/cbs/player_position_rankings"
 };
 
 /**
  * CBS Sports — position rankings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/positionRankings/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/positionRankings/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.position - query parameter.
@@ -2258,7 +2258,7 @@ const PROBABLE_PLAYERS_DEF: WrapperDef = {
   "short": "probable_players",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/probablePlayers/{game_id}",
   "pathParams": [
@@ -2277,13 +2277,13 @@ const PROBABLE_PLAYERS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/probable_players"
+  "returnsSchema": "native/cbs/game_probable_players"
 };
 
 /**
  * CBS Sports — probable players.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/probablePlayers/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/probablePlayers/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -2300,7 +2300,7 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
   "short": "recruit_rankings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/recruit/rankings/{player_id}",
   "pathParams": [
@@ -2316,7 +2316,7 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
 /**
  * CBS Sports — recruit rankings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/recruit/rankings/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/recruit/rankings/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2331,7 +2331,7 @@ const RECRUIT_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
   "short": "recruit_team_associations",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/player/recruitAssociations/{player_id}",
   "pathParams": [
@@ -2346,13 +2346,13 @@ const RECRUIT_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/recruit_team_associations"
+  "returnsSchema": "native/cbs/player_recruit_associations"
 };
 
 /**
  * CBS Sports — recruit team associations.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/player/recruitAssociations/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/recruitAssociations/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.resources - query parameter.
@@ -2368,7 +2368,7 @@ const RUWT_HIGHLIGHTS_DEF: WrapperDef = {
   "short": "ruwt_highlights",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/ruwtHighlights/{game_id}",
   "pathParams": [
@@ -2378,13 +2378,13 @@ const RUWT_HIGHLIGHTS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/ruwt_highlights"
+  "returnsSchema": "native/cbs/game_ruwt_highlights"
 };
 
 /**
  * CBS Sports — ruwt highlights.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/ruwtHighlights/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/ruwtHighlights/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2399,7 +2399,7 @@ const SEASON_DEF: WrapperDef = {
   "short": "season",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/season/{season_id}",
   "pathParams": [
@@ -2424,7 +2424,7 @@ const SEASON_DEF: WrapperDef = {
 /**
  * CBS Sports — season.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/season/{season_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/season/{season_id}`
  *
  * @param params.season_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -2441,7 +2441,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
   "short": "season_teams",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/season/teams/{season_id}",
   "pathParams": [
@@ -2462,7 +2462,7 @@ const SEASON_TEAMS_DEF: WrapperDef = {
 /**
  * CBS Sports — season teams.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/season/teams/{season_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/season/teams/{season_id}`
  *
  * @param params.season_id - path parameter.
  * @param params.resources - query parameter.
@@ -2478,7 +2478,7 @@ const SPORT_DEF: WrapperDef = {
   "short": "sport",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/sport/{sport_id}",
   "pathParams": [
@@ -2499,7 +2499,7 @@ const SPORT_DEF: WrapperDef = {
 /**
  * CBS Sports — sport.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/sport/{sport_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/sport/{sport_id}`
  *
  * @param params.sport_id - path parameter.
  * @param params.resources - query parameter.
@@ -2515,7 +2515,7 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
   "short": "sport_leagues",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/sport/leagues/{sport_id}",
   "pathParams": [
@@ -2531,7 +2531,7 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
 /**
  * CBS Sports — sport leagues.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/sport/leagues/{sport_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/sport/leagues/{sport_id}`
  *
  * @param params.sport_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2546,7 +2546,7 @@ const SPORTS_LINE_TEAM_RANKINGS_DEF: WrapperDef = {
   "short": "sports_line_team_rankings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/rankings/sportsline/{team_id}",
   "pathParams": [
@@ -2556,13 +2556,13 @@ const SPORTS_LINE_TEAM_RANKINGS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/sports_line_team_rankings"
+  "returnsSchema": "native/cbs/team_rankings_sportsline"
 };
 
 /**
  * CBS Sports — sports line team rankings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/rankings/sportsline/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/rankings/sportsline/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2577,7 +2577,7 @@ const SPORTS_LINE_TEAM_STANDINGS_DEF: WrapperDef = {
   "short": "sports_line_team_standings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/standings/sportsline/{team_id}",
   "pathParams": [
@@ -2592,13 +2592,13 @@ const SPORTS_LINE_TEAM_STANDINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_standings",
-  "returnsSchema": "native/cbs/sports_line_team_standings"
+  "returnsSchema": "native/cbs/team_standings_sportsline"
 };
 
 /**
  * CBS Sports — sports line team standings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/standings/sportsline/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/standings/sportsline/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -2614,7 +2614,7 @@ const SUB_DIVISIONS_DEF: WrapperDef = {
   "short": "sub_divisions",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/division/subdivisions/{division_id}",
   "pathParams": [
@@ -2633,13 +2633,13 @@ const SUB_DIVISIONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/sub_divisions"
+  "returnsSchema": "native/cbs/division_subdivisions"
 };
 
 /**
  * CBS Sports — sub divisions.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/division/subdivisions/{division_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/division/subdivisions/{division_id}`
  *
  * @param params.division_id - path parameter.
  * @param params.sub_division_id - query parameter (`subDivisionId`).
@@ -2656,7 +2656,7 @@ const TEAM_FUTURES_DEF: WrapperDef = {
   "short": "team_futures",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/futures/{team_id}",
   "pathParams": [
@@ -2672,7 +2672,7 @@ const TEAM_FUTURES_DEF: WrapperDef = {
 /**
  * CBS Sports — team futures.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/futures/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/futures/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2687,7 +2687,7 @@ const TEAM_METADATA_DEF: WrapperDef = {
   "short": "team_metadata",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/metadata/{team_id}",
   "pathParams": [
@@ -2708,7 +2708,7 @@ const TEAM_METADATA_DEF: WrapperDef = {
 /**
  * CBS Sports — team metadata.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/metadata/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/metadata/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.resources - query parameter.
@@ -2724,7 +2724,7 @@ const TEAM_PLAYERS_DEF: WrapperDef = {
   "short": "team_players",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/players/{team_id}",
   "pathParams": [
@@ -2745,7 +2745,7 @@ const TEAM_PLAYERS_DEF: WrapperDef = {
 /**
  * CBS Sports — team players.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/players/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/players/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.resources - query parameter.
@@ -2761,7 +2761,7 @@ const TEAM_POLLS_DEF: WrapperDef = {
   "short": "team_polls",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/polls/{team_id}",
   "pathParams": [
@@ -2786,7 +2786,7 @@ const TEAM_POLLS_DEF: WrapperDef = {
 /**
  * CBS Sports — team polls.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/polls/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/polls/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.polls - query parameter.
@@ -2803,7 +2803,7 @@ const TEAM_RANKINGS_DEF: WrapperDef = {
   "short": "team_rankings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/rankings/{team_id}",
   "pathParams": [
@@ -2832,7 +2832,7 @@ const TEAM_RANKINGS_DEF: WrapperDef = {
 /**
  * CBS Sports — team rankings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/rankings/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/rankings/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -2850,7 +2850,7 @@ const TEAM_SEASONS_DEF: WrapperDef = {
   "short": "team_seasons",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/seasons/{team_id}",
   "pathParams": [
@@ -2887,7 +2887,7 @@ const TEAM_SEASONS_DEF: WrapperDef = {
 /**
  * CBS Sports — team seasons.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/seasons/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/seasons/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.date_format - query parameter (`dateFormat`).
@@ -2907,7 +2907,7 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
   "short": "team_standings",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/standings/{team_id}",
   "pathParams": [
@@ -2936,7 +2936,7 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
 /**
  * CBS Sports — team standings.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/standings/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/standings/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.year - query parameter.
@@ -2954,7 +2954,7 @@ const TEAM_STATS_DEF: WrapperDef = {
   "short": "team_stats",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/team/stats/{team_id}",
   "pathParams": [
@@ -2987,7 +2987,7 @@ const TEAM_STATS_DEF: WrapperDef = {
 /**
  * CBS Sports — team stats.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/team/stats/{team_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/stats/{team_id}`
  *
  * @param params.team_id - path parameter.
  * @param params.season_year - query parameter (`seasonYear`).
@@ -3006,7 +3006,7 @@ const VENUE_DEF: WrapperDef = {
   "short": "venue",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/venue/{venue_id}",
   "pathParams": [
@@ -3027,7 +3027,7 @@ const VENUE_DEF: WrapperDef = {
 /**
  * CBS Sports — venue.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/venue/{venue_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/venue/{venue_id}`
  *
  * @param params.venue_id - path parameter.
  * @param params.resources - query parameter.
@@ -3043,7 +3043,7 @@ const VENUE_METADATA_DEF: WrapperDef = {
   "short": "venue_metadata",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/venue/metadata/{venue_id}",
   "pathParams": [
@@ -3059,7 +3059,7 @@ const VENUE_METADATA_DEF: WrapperDef = {
 /**
  * CBS Sports — venue metadata.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/venue/metadata/{venue_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/venue/metadata/{venue_id}`
  *
  * @param params.venue_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -3074,7 +3074,7 @@ const WEATHER_DEF: WrapperDef = {
   "short": "weather",
   "flat": true,
   "api": "cbs",
-  "host": "https://api.cbssports.com",
+  "host": "https://api.cbssports.com/napi",
   "scope": "universal",
   "path": "/resource/game/weather/{game_id}",
   "pathParams": [
@@ -3084,13 +3084,13 @@ const WEATHER_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/weather"
+  "returnsSchema": "native/cbs/game_weather"
 };
 
 /**
  * CBS Sports — weather.
  *
- * **Endpoint:** `GET https://api.cbssports.com/resource/game/weather/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/weather/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.

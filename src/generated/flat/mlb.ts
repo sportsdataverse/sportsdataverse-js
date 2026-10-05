@@ -633,7 +633,8 @@ const DRAFT_DEF: WrapperDef = {
       "default": 100
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/draft"
 };
 
 /**
@@ -941,7 +942,8 @@ const GAME_CONTENT_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/game_content"
 };
 
 /**
@@ -976,7 +978,8 @@ const GAME_CONTEXT_METRICS_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/game_context_metrics"
 };
 
 /**
@@ -1516,7 +1519,8 @@ const META_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/meta"
 };
 
 /**
@@ -1610,7 +1614,8 @@ const PBP_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/pbp"
 };
 
 /**
@@ -1694,7 +1699,8 @@ const PEOPLE_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/people"
 };
 
 /**
@@ -1739,7 +1745,8 @@ const PERSON_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/person"
 };
 
 /**
@@ -1780,7 +1787,8 @@ const PERSON_GAME_STATS_DEF: WrapperDef = {
       "queryKey": "fields"
     }
   ],
-  "parser": "parse_mlb_list"
+  "parser": "parse_mlb_list",
+  "returnsSchema": "native/mlb/person_game_stats"
 };
 
 /**

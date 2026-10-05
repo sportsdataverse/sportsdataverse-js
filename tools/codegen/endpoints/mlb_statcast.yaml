@@ -1,18 +1,21 @@
-# Flat (non-ESPN) API family: Baseball Savant / Statcast (baseballsavant.mlb.com).
-# Heterogeneous responses — CSV leaderboards (csv=true), JSON gamefeed/schedule,
-# and a couple of HTML-embedded-JSON leaderboards. `host` is an absolute base
-# URL and each endpoint `path` is appended verbatim. The `mlb_statcast` api stem
-# is keyed into GETTER_OVERRIDES (src/leagues/_make_flat.ts) so a content-type-
-# aware getter (src/core/statcast_runtime.ts) returns JSON objects for JSON
-# bodies and raw text for CSV/HTML bodies — no per-endpoint flag needed. Port of
-# sdv-py tools/codegen/endpoints/mlb_statcast.yaml (37 leaderboards incl. 2 HTML
-# ones + gamefeed + schedule = 39 endpoints). Each endpoint names a parser in
-# src/parsers/_registry.ts.
+# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# tools/codegen/endpoints/mlb_statcast.yaml by tools/codegen/vendor.mjs.
+# DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
+# tools/codegen/overlay/mlb_statcast.yaml; shared changes land in sdv-py first.
+
 api: mlb_statcast
 host: https://baseballsavant.mlb.com
 name_pattern: mlb_statcast_{short}
+module: mlb_statcast
+parser_module: mlb.mlb_statcast_parsers
+getter_module: sportsdataverse.mlb.mlb_statcast_runtime
+qualifier: ''
+passthrough_query: true
+runtime_imports:
+- _get
 endpoints:
 - short: leaderboard_expected_stats
+  summary: "GET /leaderboard/expected_statistics — xBA/xSLG/xwOBA/xISO expected-statistics leaderboard."
   path: /leaderboard/expected_statistics
   extra_params:
   - name: type
@@ -31,6 +34,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_expected_stats
 - short: leaderboard_percentile_rankings
+  summary: "GET /leaderboard/percentile-rankings — player percentile-ranking sliders (xwOBA/xBA/xSLG/…)."
   path: /leaderboard/percentile-rankings
   extra_params:
   - name: type
@@ -49,6 +53,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_percentile_rankings
 - short: leaderboard_sprint_speed
+  summary: "GET /leaderboard/sprint_speed — sprint-speed (ft/sec) leaderboard."
   path: /leaderboard/sprint_speed
   extra_params:
   - name: type
@@ -67,6 +72,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_sprint_speed
 - short: leaderboard_running_splits
+  summary: "GET /leaderboard/running_splits — 90-foot running splits leaderboard."
   path: /leaderboard/running_splits
   extra_params:
   - name: type
@@ -85,6 +91,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_running_splits
 - short: leaderboard_bat_tracking
+  summary: "GET /leaderboard/bat-tracking — bat-tracking (swing speed / squared-up) leaderboard."
   path: /leaderboard/bat-tracking
   extra_params:
   - name: type
@@ -103,6 +110,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_bat_tracking
 - short: leaderboard_swing_path
+  summary: "GET /leaderboard/bat-tracking/swing-path-attack-angle — swing path & attack-angle leaderboard."
   path: /leaderboard/bat-tracking/swing-path-attack-angle
   extra_params:
   - name: type
@@ -121,6 +129,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_swing_path
 - short: leaderboard_swing_timing
+  summary: "GET /leaderboard/bat-tracking/swing-timing-miss-distance — swing timing & miss-distance leaderboard."
   path: /leaderboard/bat-tracking/swing-timing-miss-distance
   extra_params:
   - name: type
@@ -139,6 +148,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_swing_timing
 - short: leaderboard_swing_take
+  summary: "GET /leaderboard/swing-take — swing/take run-value leaderboard."
   path: /leaderboard/swing-take
   extra_params:
   - name: type
@@ -157,6 +167,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_swing_take
 - short: leaderboard_exit_velocity_barrels
+  summary: "GET /leaderboard/statcast — exit velocity & barrels leaderboard."
   path: /leaderboard/statcast
   extra_params:
   - name: type
@@ -175,6 +186,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_exit_velocity_barrels
 - short: leaderboard_batted_ball
+  summary: "GET /leaderboard/batted-ball — batted-ball profile leaderboard."
   path: /leaderboard/batted-ball
   extra_params:
   - name: type
@@ -193,6 +205,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_batted_ball
 - short: leaderboard_home_runs
+  summary: "GET /leaderboard/home-runs — Statcast home-runs leaderboard."
   path: /leaderboard/home-runs
   extra_params:
   - name: type
@@ -211,6 +224,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_home_runs
 - short: leaderboard_pitch_arsenals
+  summary: "GET /leaderboard/pitch-arsenals — pitch arsenals (velo/spin/movement) leaderboard."
   path: /leaderboard/pitch-arsenals
   extra_params:
   - name: type
@@ -229,6 +243,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_pitch_arsenals
 - short: leaderboard_pitch_arsenal_stats
+  summary: "GET /leaderboard/pitch-arsenal-stats — per-pitch-type outcome stats leaderboard."
   path: /leaderboard/pitch-arsenal-stats
   extra_params:
   - name: type
@@ -247,6 +262,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_pitch_arsenal_stats
 - short: leaderboard_pitch_movement
+  summary: "GET /leaderboard/pitch-movement — pitch-movement leaderboard."
   path: /leaderboard/pitch-movement
   extra_params:
   - name: type
@@ -265,6 +281,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_pitch_movement
 - short: leaderboard_pitch_tempo
+  summary: "GET /leaderboard/pitch-tempo — pitch-tempo leaderboard."
   path: /leaderboard/pitch-tempo
   extra_params:
   - name: type
@@ -283,6 +300,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_pitch_tempo
 - short: leaderboard_active_spin
+  summary: "GET /leaderboard/active-spin — active-spin leaderboard."
   path: /leaderboard/active-spin
   extra_params:
   - name: type
@@ -301,6 +319,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_active_spin
 - short: leaderboard_spin_direction
+  summary: "GET /leaderboard/spin-direction-pitches — spin-direction (per-pitch) leaderboard."
   path: /leaderboard/spin-direction-pitches
   extra_params:
   - name: type
@@ -319,6 +338,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_spin_direction
 - short: leaderboard_arm_angles
+  summary: "GET /leaderboard/pitcher-arm-angles — pitcher arm-angle leaderboard."
   path: /leaderboard/pitcher-arm-angles
   extra_params:
   - name: type
@@ -337,6 +357,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_arm_angles
 - short: leaderboard_pitcher_running_game
+  summary: "GET /leaderboard/pitcher-running-game — pitcher running-game (holding runners) leaderboard."
   path: /leaderboard/pitcher-running-game
   extra_params:
   - name: type
@@ -355,6 +376,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_pitcher_running_game
 - short: leaderboard_outs_above_average
+  summary: "GET /leaderboard/outs_above_average — Outs Above Average (OAA) fielding leaderboard."
   path: /leaderboard/outs_above_average
   extra_params:
   - name: type
@@ -373,6 +395,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_outs_above_average
 - short: leaderboard_outfield_directional_oaa
+  summary: "GET /leaderboard/outfield_directional_outs_above_average — outfield directional OAA leaderboard."
   path: /leaderboard/outfield_directional_outs_above_average
   extra_params:
   - name: type
@@ -391,6 +414,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_outfield_directional_oaa
 - short: leaderboard_outfield_jump
+  summary: "GET /leaderboard/outfield_jump — outfielder jump leaderboard."
   path: /leaderboard/outfield_jump
   extra_params:
   - name: type
@@ -409,6 +433,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_outfield_jump
 - short: leaderboard_catch_probability
+  summary: "GET /leaderboard/catch_probability — outfielder catch-probability leaderboard."
   path: /leaderboard/catch_probability
   extra_params:
   - name: type
@@ -427,6 +452,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_catch_probability
 - short: leaderboard_arm_strength
+  summary: "GET /leaderboard/arm-strength — fielder arm-strength leaderboard."
   path: /leaderboard/arm-strength
   extra_params:
   - name: type
@@ -445,6 +471,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_arm_strength
 - short: leaderboard_poptime
+  summary: "GET /leaderboard/poptime — catcher pop-time leaderboard."
   path: /leaderboard/poptime
   extra_params:
   - name: type
@@ -463,6 +490,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_poptime
 - short: leaderboard_catcher_framing
+  summary: "GET /leaderboard/catcher-framing — catcher framing leaderboard."
   path: /leaderboard/catcher-framing
   extra_params:
   - name: type
@@ -481,6 +509,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_catcher_framing
 - short: leaderboard_catcher_blocking
+  summary: "GET /leaderboard/catcher-blocking — catcher blocking leaderboard."
   path: /leaderboard/catcher-blocking
   extra_params:
   - name: type
@@ -499,6 +528,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_catcher_blocking
 - short: leaderboard_catcher_throwing
+  summary: "GET /leaderboard/catcher-throwing — catcher throwing leaderboard."
   path: /leaderboard/catcher-throwing
   extra_params:
   - name: type
@@ -517,6 +547,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_catcher_throwing
 - short: leaderboard_catcher_stance
+  summary: "GET /leaderboard/catcher-stance — catcher stance leaderboard."
   path: /leaderboard/catcher-stance
   extra_params:
   - name: type
@@ -535,6 +566,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_catcher_stance
 - short: leaderboard_basestealing_run_value
+  summary: "GET /leaderboard/basestealing-run-value — basestealing run-value leaderboard."
   path: /leaderboard/basestealing-run-value
   extra_params:
   - name: type
@@ -553,6 +585,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_basestealing_run_value
 - short: leaderboard_baserunning_run_value
+  summary: "GET /leaderboard/baserunning-run-value — baserunning run-value leaderboard."
   path: /leaderboard/baserunning-run-value
   extra_params:
   - name: type
@@ -571,6 +604,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_baserunning_run_value
 - short: leaderboard_baserunning
+  summary: "GET /leaderboard/baserunning — extra-bases-taken run-value leaderboard."
   path: /leaderboard/baserunning
   extra_params:
   - name: type
@@ -589,6 +623,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_baserunning
 - short: leaderboard_year_to_year
+  summary: "GET /leaderboard/statcast-year-to-year — year-to-year metric change leaderboard."
   path: /leaderboard/statcast-year-to-year
   extra_params:
   - name: type
@@ -607,6 +642,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_year_to_year
 - short: leaderboard_timer_infractions
+  summary: "GET /leaderboard/pitch-timer-infractions — pitch-timer infractions leaderboard."
   path: /leaderboard/pitch-timer-infractions
   extra_params:
   - name: type
@@ -625,6 +661,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_timer_infractions
 - short: leaderboard_custom
+  summary: "GET /leaderboard/custom — build-your-own metric leaderboard (comma-separated selections)."
   path: /leaderboard/custom
   extra_params:
   - name: type
@@ -655,6 +692,7 @@ endpoints:
   parser: parse_mlb_statcast_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_custom
 - short: leaderboard_fielding_run_value
+  summary: "GET /leaderboard/fielding-run-value — fielding run-value leaderboard (HTML-embedded JSON)."
   path: /leaderboard/fielding-run-value
   extra_params:
   - name: type
@@ -669,6 +707,7 @@ endpoints:
   parser: parse_mlb_statcast_html_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_fielding_run_value
 - short: leaderboard_park_factors
+  summary: "GET /leaderboard/statcast-park-factors — Statcast park-factors leaderboard (HTML-embedded JSON)."
   path: /leaderboard/statcast-park-factors
   extra_params:
   - name: type
@@ -683,6 +722,7 @@ endpoints:
   parser: parse_mlb_statcast_html_leaderboard
   returns_schema: native/mlb_statcast/leaderboard_park_factors
 - short: gamefeed
+  summary: "GET /gf — Savant per-game JSON feed (pitch-by-pitch tracking)."
   path: /gf
   extra_params:
   - name: game_pk
@@ -694,6 +734,7 @@ endpoints:
   parser: parse_mlb_statcast_gamefeed
   returns_schema: native/mlb_statcast/gamefeed
 - short: schedule
+  summary: "GET /schedule — Savant schedule feed (one row per game)."
   path: /schedule
   extra_params:
   - name: date

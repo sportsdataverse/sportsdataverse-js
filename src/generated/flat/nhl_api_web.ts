@@ -56,7 +56,8 @@ const CLUB_SCHEDULE_MONTH_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_club_schedule"
+  "parser": "parse_nhl_web_club_schedule",
+  "returnsSchema": "native/nhl_api_web/club_schedule_month"
 };
 
 /**
@@ -127,7 +128,8 @@ const CLUB_SCHEDULE_WEEK_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_club_schedule"
+  "parser": "parse_nhl_web_club_schedule",
+  "returnsSchema": "native/nhl_api_web/club_schedule_week"
 };
 
 /**
@@ -167,7 +169,8 @@ const CLUB_STATS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_club_stats"
+  "parser": "parse_nhl_web_club_stats",
+  "returnsSchema": "native/nhl_api_web/club_stats"
 };
 
 /**
@@ -199,7 +202,8 @@ const CLUB_STATS_SEASON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_club_stats"
+  "parser": "parse_nhl_web_club_stats",
+  "returnsSchema": "native/nhl_api_web/club_stats_season"
 };
 
 /**
@@ -262,7 +266,8 @@ const DRAFT_PICKS_NOW_DEF: WrapperDef = {
   "path": "/v1/draft/picks/now",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_web_draft_picks"
+  "parser": "parse_nhl_web_draft_picks",
+  "returnsSchema": "native/nhl_api_web/draft_picks_now"
 };
 
 /**
@@ -350,7 +355,8 @@ const DRAFT_TRACKER_PICKS_NOW_DEF: WrapperDef = {
   "path": "/v1/draft-tracker/picks/now",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_web_draft_picks"
+  "parser": "parse_nhl_web_draft_picks",
+  "returnsSchema": "native/nhl_api_web/draft_tracker_picks_now"
 };
 
 /**
@@ -613,7 +619,8 @@ const RIGHT_RAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_right_rail"
+  "parser": "parse_nhl_web_right_rail",
+  "returnsSchema": "native/nhl_api_web/right_rail"
 };
 
 /**
@@ -679,7 +686,8 @@ const ROSTER_SEASON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_roster"
+  "parser": "parse_nhl_web_roster",
+  "returnsSchema": "native/nhl_api_web/roster_season"
 };
 
 /**
@@ -742,7 +750,8 @@ const SCHEDULE_CALENDAR_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_web_schedule"
+  "parser": "parse_nhl_web_schedule",
+  "returnsSchema": "native/nhl_api_web/schedule_calendar"
 };
 
 /**

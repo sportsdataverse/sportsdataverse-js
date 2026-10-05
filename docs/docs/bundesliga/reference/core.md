@@ -9,7 +9,7 @@ sidebar_position: 2
 
 # `bundesliga` — Core API
 
-81 endpoints on `sdv.bundesliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+82 endpoints on `sdv.bundesliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnBundesligaAthleteAwards`
 
@@ -325,6 +325,7 @@ BUNDESLIGA — awards (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1128,6 +1129,7 @@ BUNDESLIGA — positions (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1178,6 +1180,7 @@ BUNDESLIGA — season awards (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1202,7 +1205,7 @@ BUNDESLIGA — season coaches (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_coaches`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1340,6 +1343,7 @@ BUNDESLIGA — season group children (ESPN sports.core.api.espn.com (core v2)).
 | `{season}` | `season` | yes | path parameter |
 | `{season_type}` | `season_type` | yes | path parameter |
 | `{group_id}` | `group_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1525,7 +1529,8 @@ BUNDESLIGA — season teams (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1685,6 +1690,33 @@ await sdv.bundesliga.espnBundesligaSeasonWeekEvents({ season: '…', season_type
 // snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_week_events(...)
 ```
 
+## `espnBundesligaSeasonWeekPowerindex`
+
+BUNDESLIGA — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/ger.1/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{season}` | `season` | yes | path parameter |
+| `{season_type}` | `season_type` | yes | path parameter |
+| `{week}` | `week` | yes | path parameter |
+| `limit` | `limit` | no | query parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.bundesliga.espnBundesligaSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_season_week_powerindex(...)
+```
+
 ## `espnBundesligaSeasonWeeks`
 
 BUNDESLIGA — season weeks (ESPN sports.core.api.espn.com (core v2)).
@@ -1838,7 +1870,8 @@ BUNDESLIGA — teams core (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `limit` | `limit` | no | query parameter (default `500`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns:** raw ESPN `Dict` by default. With `{ parsed: true }` the payload is routed through its parser (`parse_teams`); the column set varies by league — see [ESPN parsed returns](../../reference/espn-parsed-returns).
@@ -1858,6 +1891,7 @@ BUNDESLIGA — tournaments (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `200`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):
@@ -1901,7 +1935,7 @@ BUNDESLIGA — venues (ESPN sports.core.api.espn.com (core v2)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `limit` | `limit` | no | query parameter (default `200`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

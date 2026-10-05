@@ -1,3 +1,8 @@
+# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# tools/codegen/endpoints/espn_site_v2.yaml by tools/codegen/vendor.mjs.
+# DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
+# tools/codegen/overlay/espn_site_v2.yaml; shared changes land in sdv-py first.
+
 api: espn_site_v2
 host: site_v2
 name_pattern: espn_{prefix}_{short}
@@ -52,13 +57,23 @@ endpoints:
     type: int
     default: 50
   parser: parse_news
+  returns_schema: news
 - short: injuries
   scope: universal
   path: /{sport}/{league}/injuries
   parser: parse_injuries
+  returns_schema: injuries
 - short: transactions
   scope: universal
   path: /{sport}/{league}/transactions
+  extra_params:
+  # Rolling feed with no `count` field: the default returned 25 for every league
+  # that publishes one. There is no natural total to cover, so 500 is a deliberate
+  # ceiling, not a proof of completeness -- pass a larger `limit` if you need more.
+  - name: limit
+    query_key: limit
+    type: int
+    default: 500
   parser: parse_items
 - short: conferences
   scope: universal
@@ -99,6 +114,14 @@ endpoints:
   - name: team_id
     type: int|str
     required: true
+  extra_params:
+  # ESPN pages this at 100 with no signal that it did. CFB rosters routinely
+  # exceed that (Alabama 120, Auburn 113, LSU 108 -- measured 2026-08-29), so
+  # every CFB roster scraped through this wrapper was silently truncated.
+  - name: limit
+    query_key: limit
+    type: int
+    default: 500
   parser: parse_team_roster
   returns_schema: team_roster
   example_args:
@@ -115,6 +138,7 @@ endpoints:
     query_key: season
     type: int|str
   parser: parse_team_schedule
+  returns_schema: team_schedule
   example_args:
     team_id: '4'
 - short: team_record
@@ -145,6 +169,7 @@ endpoints:
     type: int|str
     required: true
   parser: parse_injuries
+  returns_schema: injuries
   example_args:
     team_id: '4'
 - short: team_transactions
@@ -180,6 +205,7 @@ endpoints:
     type: int
     default: 50
   parser: parse_news
+  returns_schema: news
   example_args:
     team_id: '4'
 - short: team_leaders
@@ -220,6 +246,7 @@ endpoints:
     type: int|str
     required: true
   parser: parse_news
+  returns_schema: news
   example_args:
     athlete_id: '4239'
 - short: standings

@@ -608,13 +608,20 @@ const AWARDS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/awards",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * WCH — awards (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/awards`
  *
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchAwards({});
@@ -1912,13 +1919,20 @@ const POSITIONS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/positions",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * WCH — positions (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/positions`
  *
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchPositions({});
@@ -1949,6 +1963,95 @@ export const espnWchRankings: WrapperFn = (params = {}) =>
   callWrapper(RANKINGS_DEF, CFG, params);
 /** snake_case alias of {@link espnWchRankings} (py/R parity). */
 export const espn_wch_rankings = espnWchRankings;
+
+const RECRUITING_ATHLETES_DEF: WrapperDef = {
+  "short": "recruiting_athletes",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/recruiting/{year}/athletes",
+  "pathParams": [
+    {
+      "name": "year"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
+    }
+  ]
+};
+/**
+ * WCH — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting/{year}/athletes`
+ *
+ * @param params.year - path parameter.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wch.espnWchRecruitingAthletes({ year: '…' });
+ */
+export const espnWchRecruitingAthletes: WrapperFn = (params = {}) =>
+  callWrapper(RECRUITING_ATHLETES_DEF, CFG, params);
+/** snake_case alias of {@link espnWchRecruitingAthletes} (py/R parity). */
+export const espn_wch_recruiting_athletes = espnWchRecruitingAthletes;
+
+const RECRUITING_RANKINGS_DEF: WrapperDef = {
+  "short": "recruiting_rankings",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/recruiting/{year}/rankings",
+  "pathParams": [
+    {
+      "name": "year"
+    }
+  ],
+  "queryParams": []
+};
+/**
+ * WCH — recruiting rankings (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting/{year}/rankings`
+ *
+ * @param params.year - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wch.espnWchRecruitingRankings({ year: '…' });
+ */
+export const espnWchRecruitingRankings: WrapperFn = (params = {}) =>
+  callWrapper(RECRUITING_RANKINGS_DEF, CFG, params);
+/** snake_case alias of {@link espnWchRecruitingRankings} (py/R parity). */
+export const espn_wch_recruiting_rankings = espnWchRecruitingRankings;
+
+const RECRUITING_YEARS_DEF: WrapperDef = {
+  "short": "recruiting_years",
+  "family": "core_v2",
+  "scope": "ncaa",
+  "path": "/{sport}/leagues/{league}/recruiting",
+  "pathParams": [],
+  "queryParams": []
+};
+/**
+ * WCH — recruiting years (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting`
+ *
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wch.espnWchRecruitingYears({});
+ */
+export const espnWchRecruitingYears: WrapperFn = (params = {}) =>
+  callWrapper(RECRUITING_YEARS_DEF, CFG, params);
+/** snake_case alias of {@link espnWchRecruitingYears} (py/R parity). */
+export const espn_wch_recruiting_years = espnWchRecruitingYears;
 
 const SCOREBOARD_DEF: WrapperDef = {
   "short": "scoreboard",
@@ -2049,7 +2152,13 @@ const SEASON_AWARDS_DEF: WrapperDef = {
       "name": "season"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * WCH — season awards (ESPN sports.core.api.espn.com (core v2)).
@@ -2057,6 +2166,7 @@ const SEASON_AWARDS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/awards`
  *
  * @param params.season - path parameter.
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchSeasonAwards({ season: '…' });
@@ -2080,7 +2190,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 200
+      "default": 500
     }
   ]
 };
@@ -2090,7 +2200,7 @@ const SEASON_COACHES_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/coaches`
  *
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `200`.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchSeasonCoaches({ season: '…' });
@@ -2263,7 +2373,13 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
       "name": "group_id"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * WCH — season group children (ESPN sports.core.api.espn.com (core v2)).
@@ -2273,6 +2389,7 @@ const SEASON_GROUP_CHILDREN_DEF: WrapperDef = {
  * @param params.season - path parameter.
  * @param params.season_type - path parameter.
  * @param params.group_id - path parameter.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchSeasonGroupChildren({ season: '…', season_type: '…', group_id: '…' });
@@ -2477,7 +2594,12 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 100
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -2487,7 +2609,8 @@ const SEASON_RECRUITS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/recruits`
  *
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `100`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchSeasonRecruits({ season: '…' });
@@ -2542,7 +2665,12 @@ const SEASON_TEAMS_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 500
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -2552,7 +2680,8 @@ const SEASON_TEAMS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/teams`
  *
  * @param params.season - path parameter.
- * @param params.limit - query parameter — default `500`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchSeasonTeams({ season: '…' });
@@ -2758,6 +2887,47 @@ export const espnWchSeasonWeekEvents: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
 /** snake_case alias of {@link espnWchSeasonWeekEvents} (py/R parity). */
 export const espn_wch_season_week_events = espnWchSeasonWeekEvents;
+
+const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
+  "short": "season_week_powerindex",
+  "family": "core_v2",
+  "scope": "universal",
+  "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex",
+  "pathParams": [
+    {
+      "name": "season"
+    },
+    {
+      "name": "season_type"
+    },
+    {
+      "name": "week"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    }
+  ]
+};
+/**
+ * WCH — season week powerindex (ESPN sports.core.api.espn.com (core v2)).
+ *
+ * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/powerindex`
+ *
+ * @param params.season - path parameter.
+ * @param params.season_type - path parameter.
+ * @param params.week - path parameter.
+ * @param params.limit - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wch.espnWchSeasonWeekPowerindex({ season: '…', season_type: '…', week: '…' });
+ */
+export const espnWchSeasonWeekPowerindex: WrapperFn = (params = {}) =>
+  callWrapper(SEASON_WEEK_POWERINDEX_DEF, CFG, params);
+/** snake_case alias of {@link espnWchSeasonWeekPowerindex} (py/R parity). */
+export const espn_wch_season_week_powerindex = espnWchSeasonWeekPowerindex;
 
 const SEASON_WEEK_RANKINGS_DEF: WrapperDef = {
   "short": "season_week_rankings",
@@ -3220,7 +3390,13 @@ const TEAM_ROSTER_DEF: WrapperDef = {
       "name": "team_id"
     }
   ],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * WCH — team roster (ESPN site.api.espn.com).
@@ -3228,6 +3404,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/womens-college-hockey/teams/{team_id}/roster`
  *
  * @param params.team_id - path parameter.
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchTeamRoster({ team_id: '…' });
@@ -3307,7 +3484,12 @@ const TEAMS_CORE_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 500
+      "default": 1000
+    },
+    {
+      "name": "page",
+      "queryKey": "page",
+      "default": 1
     }
   ]
 };
@@ -3316,7 +3498,8 @@ const TEAMS_CORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/teams`
  *
- * @param params.limit - query parameter — default `500`.
+ * @param params.limit - query parameter — default `1000`.
+ * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchTeamsCore({});
@@ -3361,13 +3544,20 @@ const TOURNAMENTS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/leagues/{league}/tournaments",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 200
+    }
+  ]
 };
 /**
  * WCH — tournaments (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/tournaments`
  *
+ * @param params.limit - query parameter — default `200`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchTournaments({});
@@ -3383,13 +3573,20 @@ const TRANSACTIONS_DEF: WrapperDef = {
   "scope": "universal",
   "path": "/{sport}/{league}/transactions",
   "pathParams": [],
-  "queryParams": []
+  "queryParams": [
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 500
+    }
+  ]
 };
 /**
  * WCH — transactions (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/womens-college-hockey/transactions`
  *
+ * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchTransactions({});
@@ -3436,7 +3633,7 @@ const VENUES_DEF: WrapperDef = {
     {
       "name": "limit",
       "queryKey": "limit",
-      "default": 200
+      "default": 1000
     }
   ]
 };
@@ -3445,7 +3642,7 @@ const VENUES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/venues`
  *
- * @param params.limit - query parameter — default `200`.
+ * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
  * @example await sdv.wch.espnWchVenues({});

@@ -11,7 +11,7 @@ sidebar_position: 35
 
 - **namespace:** `sdv.yahoo` *(standalone — not an ESPN league)*
 - **families:** Yahoo Sports (scores), Yahoo Sports
-- **wrappers:** 107 native
+- **wrappers:** 109 native
 
 `yahoo` is a cross-sport provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.yahoo`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
 
@@ -37,115 +37,143 @@ Flat (non-ESPN) wrappers for the Yahoo Sports scoreboard/boxscore feed. Host: `h
 
 ## Native API — Yahoo Sports
 
-Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite-secure.sports.yahoo.com`. Each method is exposed under BOTH `yahoo_<endpoint>` (snake_case, py/R parity) and `yahoo<Endpoint>` (camelCase canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite-secure.sports.yahoo.com/v1/query/shangrila`. Each method is exposed under BOTH `yahoo_<endpoint>` (snake_case, py/R parity) and `yahoo<Endpoint>` (camelCase canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `yahoo_alias` / `yahooAlias` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/alias` | — | `lang`, `region`, `tz`, `alias` | `parse_yahoo_list` | — |
-| `yahoo_article_list_card_players` / `yahooArticleListCardPlayers` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardPlayers` | — | `lang`, `region`, `tz`, `player_ids` → `playerIds` | `parse_yahoo_list` | — |
-| `yahoo_article_list_card_teams` / `yahooArticleListCardTeams` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardTeams` | — | `lang`, `region`, `tz`, `team_ids` → `teamIds` | `parse_yahoo_list` | — |
-| `yahoo_basic_players` / `yahooBasicPlayers` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/basicPlayers` | — | `lang`, `region`, `tz`, `players` | `parse_yahoo_list` | — |
-| `yahoo_betting_disclaimer` / `yahooBettingDisclaimer` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/bettingDisclaimer` | — | `lang`, `region`, `tz`, `betting_disclaimer_id` → `bettingDisclaimerId` | `parse_yahoo_list` | — |
-| `yahoo_combat_event_fights` / `yahooCombatEventFights` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatEventFights` | — | `lang`, `region`, `tz`, `event_group_id` → `eventGroupId`, `season`, `league` | `parse_yahoo_list` | — |
-| `yahoo_combat_schedule` / `yahooCombatSchedule` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatSchedule` | — | `lang`, `region`, `tz`, `season`, `league` | `parse_yahoo_list` | — |
-| `yahoo_common_pills` / `yahooCommonPills` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/common/pills` | — | `lang`, `region`, `tz`, `add_team_logos` → `addTeamLogos`, `date`, `team_ids` → `teamIds` | `parse_yahoo_list` | — |
-| `yahoo_consensus_rankings_php` / `yahooConsensusRankingsPhp` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/consensus-rankings.php` | — | `lang`, `region`, `tz`, `sport`, `position`, `filters`, `experts`, `scoring`, `type` | `parse_yahoo_list` | — |
-| `yahoo_draft` / `yahooDraft` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draft` | — | `lang`, `region`, `tz`, `league`, `season` | `parse_yahoo_list` | — |
-| `yahoo_draft_prospects` / `yahooDraftProspects` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draftProspects` | — | `lang`, `region`, `tz`, `league`, `season`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
-| `yahoo_driver_results` / `yahooDriverResults` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverResults` | — | `lang`, `region`, `tz`, `player_id` → `playerId`, `season` | `parse_yahoo_list` | — |
-| `yahoo_driver_splits` / `yahooDriverSplits` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverSplits` | — | `lang`, `region`, `tz`, `player_id` → `playerId` | `parse_yahoo_list` | — |
-| `yahoo_featured_game_ids` / `yahooFeaturedGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/featuredGameIds` | — | `lang`, `region`, `tz` | `parse_yahoo_list` | — |
-| `yahoo_game_prop_bets` / `yahooGamePropBets` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gamePropBets` | — | `lang`, `region`, `tz`, `game_id` → `gameId` | `parse_yahoo_list` | — |
-| `yahoo_game_stats_leaders` / `yahooGameStatsLeaders` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gameStatsLeaders` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `season`, `season_phases` → `seasonPhases`, `qualified`, `count`, `is_pregame` → `isPregame`, `team_image_height` → `teamImageHeight`, `team_image_width` → `teamImageWidth`, `player_image_height` → `playerImageHeight`, `player_image_width` → `playerImageWidth`, `baseball_leader_sort_stat0` → `baseballLeaderSortStat0`, `baseball_leader_sort_stat1` → `baseballLeaderSortStat1`, `baseball_leader_sort_stat2` → `baseballLeaderSortStat2`, `baseball_leader_sort_stat3` → `baseballLeaderSortStat3`, `baseball_leader_sort_stat4` → `baseballLeaderSortStat4`, `baseball_leader_stat_ids0` → `baseballLeaderStatIds0`, `baseball_leader_stat_ids1` → `baseballLeaderStatIds1`, `baseball_leader_stat_ids2` → `baseballLeaderStatIds2`, `baseball_leader_stat_ids3` → `baseballLeaderStatIds3`, `baseball_leader_stat_ids4` → `baseballLeaderStatIds4`, `baseball_player_stat_ids0` → `baseballPlayerStatIds0`, `baseball_player_stat_ids1` → `baseballPlayerStatIds1`, `baseball_team_sort_stat0` → `baseballTeamSortStat0`, `baseball_team_sort_stat1` → `baseballTeamSortStat1`, `baseball_team_sort_stat2` → `baseballTeamSortStat2`, `baseball_team_sort_stat3` → `baseballTeamSortStat3`, `baseball_team_sort_stat4` → `baseballTeamSortStat4`, `baseball_team_sort_stat5` → `baseballTeamSortStat5`, `baseball_team_sort_stat6` → `baseballTeamSortStat6`, `baseball_team_sort_stat7` → `baseballTeamSortStat7`, `baseball_team_sort_stat8` → `baseballTeamSortStat8`, `baseball_team_sort_stat9` → `baseballTeamSortStat9`, `baseball_team_sort_stat10` → `baseballTeamSortStat10`, `baseball_team_sort_stat11` → `baseballTeamSortStat11`, `baseball_team_stat_ids0` → `baseballTeamStatIds0`, `baseball_team_stat_ids1` → `baseballTeamStatIds1`, `baseball_team_stat_ids2` → `baseballTeamStatIds2`, `baseball_team_stat_ids3` → `baseballTeamStatIds3`, `baseball_team_stat_ids4` → `baseballTeamStatIds4`, `baseball_team_stat_ids5` → `baseballTeamStatIds5`, `baseball_team_stat_ids6` → `baseballTeamStatIds6`, `baseball_team_stat_ids7` → `baseballTeamStatIds7`, `baseball_team_stat_ids8` → `baseballTeamStatIds8`, `baseball_team_stat_ids9` → `baseballTeamStatIds9`, `baseball_team_stat_ids10` → `baseballTeamStatIds10`, `baseball_team_stat_ids11` → `baseballTeamStatIds11`, `basketball_leader_sort_stat0` → `basketballLeaderSortStat0`, `basketball_leader_sort_stat1` → `basketballLeaderSortStat1`, `basketball_leader_sort_stat2` → `basketballLeaderSortStat2`, `basketball_leader_sort_stat3` → `basketballLeaderSortStat3`, `basketball_leader_sort_stat4` → `basketballLeaderSortStat4`, `basketball_leader_stat_ids0` → `basketballLeaderStatIds0`, `basketball_leader_stat_ids1` → `basketballLeaderStatIds1`, `basketball_leader_stat_ids2` → `basketballLeaderStatIds2`, `basketball_leader_stat_ids3` → `basketballLeaderStatIds3`, `basketball_leader_stat_ids4` → `basketballLeaderStatIds4`, `basketball_player_stat_ids0` → `basketballPlayerStatIds0`, `basketball_team_sort_stat0` → `basketballTeamSortStat0`, `basketball_team_sort_stat1` → `basketballTeamSortStat1`, `basketball_team_sort_stat2` → `basketballTeamSortStat2`, `basketball_team_sort_stat3` → `basketballTeamSortStat3`, `basketball_team_sort_stat4` → `basketballTeamSortStat4`, `basketball_team_sort_stat5` → `basketballTeamSortStat5`, `basketball_team_sort_stat6` → `basketballTeamSortStat6`, `basketball_team_sort_stat7` → `basketballTeamSortStat7`, `basketball_team_sort_stat8` → `basketballTeamSortStat8`, `basketball_team_sort_stat9` → `basketballTeamSortStat9`, `basketball_team_stat_ids0` → `basketballTeamStatIds0`, `basketball_team_stat_ids1` → `basketballTeamStatIds1`, `basketball_team_stat_ids2` → `basketballTeamStatIds2`, `basketball_team_stat_ids3` → `basketballTeamStatIds3`, `basketball_team_stat_ids4` → `basketballTeamStatIds4`, `basketball_team_stat_ids5` → `basketballTeamStatIds5`, `basketball_team_stat_ids6` → `basketballTeamStatIds6`, `basketball_team_stat_ids7` → `basketballTeamStatIds7`, `basketball_team_stat_ids8` → `basketballTeamStatIds8`, `basketball_team_stat_ids9` → `basketballTeamStatIds9`, `football_leader_sort_stat0` → `footballLeaderSortStat0`, `football_leader_sort_stat1` → `footballLeaderSortStat1`, `football_leader_sort_stat2` → `footballLeaderSortStat2`, `football_leader_sort_stat3` → `footballLeaderSortStat3`, `football_leader_stat_ids0` → `footballLeaderStatIds0`, `football_leader_stat_ids1` → `footballLeaderStatIds1`, `football_leader_stat_ids2` → `footballLeaderStatIds2`, `football_leader_stat_ids3` → `footballLeaderStatIds3`, `football_player_stat_ids0` → `footballPlayerStatIds0`, `football_player_stat_ids1` → `footballPlayerStatIds1`, `football_player_stat_ids2` → `footballPlayerStatIds2`, `football_player_stat_ids3` → `footballPlayerStatIds3`, `football_player_stat_ids4` → `footballPlayerStatIds4`, `football_player_stat_ids5` → `footballPlayerStatIds5`, `football_player_stat_ids6` → `footballPlayerStatIds6`, `football_player_stat_ids7` → `footballPlayerStatIds7`, `football_team_sort_stat0` → `footballTeamSortStat0`, `football_team_sort_stat1` → `footballTeamSortStat1`, `football_team_sort_stat2` → `footballTeamSortStat2`, `football_team_sort_stat3` → `footballTeamSortStat3`, `football_team_sort_stat4` → `footballTeamSortStat4`, `football_team_sort_stat5` → `footballTeamSortStat5`, `football_team_sort_stat6` → `footballTeamSortStat6`, `football_team_sort_stat7` → `footballTeamSortStat7`, `football_team_sort_stat8` → `footballTeamSortStat8`, `football_team_sort_stat9` → `footballTeamSortStat9`, `football_team_sort_stat10` → `footballTeamSortStat10`, `football_team_sort_stat11` → `footballTeamSortStat11`, `football_team_stat_ids0` → `footballTeamStatIds0`, `football_team_stat_ids1` → `footballTeamStatIds1`, `football_team_stat_ids2` → `footballTeamStatIds2`, `football_team_stat_ids3` → `footballTeamStatIds3`, `football_team_stat_ids4` → `footballTeamStatIds4`, `football_team_stat_ids5` → `footballTeamStatIds5`, `football_team_stat_ids6` → `footballTeamStatIds6`, `football_team_stat_ids7` → `footballTeamStatIds7`, `football_team_stat_ids8` → `footballTeamStatIds8`, `football_team_stat_ids9` → `footballTeamStatIds9`, `football_team_stat_ids10` → `footballTeamStatIds10`, `football_team_stat_ids11` → `footballTeamStatIds11`, `hockey_leader_sort_stat0` → `hockeyLeaderSortStat0`, `hockey_leader_sort_stat1` → `hockeyLeaderSortStat1`, `hockey_leader_sort_stat2` → `hockeyLeaderSortStat2`, `hockey_leader_sort_stat3` → `hockeyLeaderSortStat3`, `hockey_leader_stat_ids0` → `hockeyLeaderStatIds0`, `hockey_leader_stat_ids1` → `hockeyLeaderStatIds1`, `hockey_leader_stat_ids2` → `hockeyLeaderStatIds2`, `hockey_leader_stat_ids3` → `hockeyLeaderStatIds3`, `hockey_player_stat_ids0` → `hockeyPlayerStatIds0`, `hockey_player_stat_ids1` → `hockeyPlayerStatIds1`, `hockey_player_stat_ids2` → `hockeyPlayerStatIds2`, `hockey_team_sort_stat0` → `hockeyTeamSortStat0`, `hockey_team_sort_stat1` → `hockeyTeamSortStat1`, `hockey_team_sort_stat2` → `hockeyTeamSortStat2`, `hockey_team_sort_stat3` → `hockeyTeamSortStat3`, `hockey_team_sort_stat4` → `hockeyTeamSortStat4`, `hockey_team_sort_stat5` → `hockeyTeamSortStat5`, `hockey_team_sort_stat6` → `hockeyTeamSortStat6`, `hockey_team_stat_ids0` → `hockeyTeamStatIds0`, `hockey_team_stat_ids1` → `hockeyTeamStatIds1`, `hockey_team_stat_ids2` → `hockeyTeamStatIds2`, `hockey_team_stat_ids3` → `hockeyTeamStatIds3`, `hockey_team_stat_ids4` → `hockeyTeamStatIds4`, `hockey_team_stat_ids5` → `hockeyTeamStatIds5`, `hockey_team_stat_ids6` → `hockeyTeamStatIds6`, `soccer_player_stat_ids0` → `soccerPlayerStatIds0`, `soccer_player_stat_ids1` → `soccerPlayerStatIds1`, `soccer_player_stat_ids2` → `soccerPlayerStatIds2`, `soccer_player_stat_ids3` → `soccerPlayerStatIds3`, `soccer_player_stat_ids4` → `soccerPlayerStatIds4`, `soccer_team_sort_stat0` → `soccerTeamSortStat0`, `soccer_team_sort_stat1` → `soccerTeamSortStat1`, `soccer_team_sort_stat2` → `soccerTeamSortStat2`, `soccer_team_sort_stat3` → `soccerTeamSortStat3`, `soccer_team_sort_stat4` → `soccerTeamSortStat4`, `soccer_team_sort_stat5` → `soccerTeamSortStat5`, `soccer_team_stat_ids0` → `soccerTeamStatIds0`, `soccer_team_stat_ids1` → `soccerTeamStatIds1`, `soccer_team_stat_ids2` → `soccerTeamStatIds2`, `soccer_team_stat_ids3` → `soccerTeamStatIds3`, `soccer_team_stat_ids4` → `soccerTeamStatIds4`, `soccer_team_stat_ids5` → `soccerTeamStatIds5` | `parse_yahoo_stats` | — |
-| `yahoo_gametime_game` / `yahooGametimeGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeGame` | — | `lang`, `region`, `tz`, `game_id` → `gameId` | `parse_yahoo_list` | — |
-| `yahoo_gametime_team` / `yahooGametimeTeam` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeTeam` | — | `lang`, `region`, `tz`, `team_id` → `teamId` | `parse_yahoo_list` | — |
-| `yahoo_golf_tournament_seasons` / `yahooGolfTournamentSeasons` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentSeasons` | — | `lang`, `region`, `tz`, `event_group_id` → `eventGroupId` | `parse_yahoo_list` | — |
-| `yahoo_golf_tournaments` / `yahooGolfTournaments` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournaments` | — | `lang`, `region`, `tz`, `association`, `season`, `show_defending_champs` → `showDefendingChamps` | `parse_yahoo_list` | — |
-| `yahoo_golf_tournaments_basic` / `yahooGolfTournamentsBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentsBasic` | — | `lang`, `region`, `tz`, `event_group_id` → `eventGroupId`, `association`, `season` | `parse_yahoo_list` | — |
-| `yahoo_league_conferences` / `yahooLeagueConferences` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueConferences` | — | `lang`, `region`, `tz`, `league`, `division_ids` → `divisionIds` | `parse_yahoo_list` | — |
-| `yahoo_league_filters_data` / `yahooLeagueFiltersData` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFiltersData` | — | `lang`, `region`, `tz`, `league`, `season`, `view_type` → `viewType`, `include_pos_and_splits_data` → `includePosAndSplitsData` | `parse_yahoo_list` | — |
-| `yahoo_league_future_odds` / `yahooLeagueFutureOdds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFutureOdds` | — | `lang`, `region`, `tz`, `league`, `bet_categories` → `betCategories` | `parse_yahoo_list` | — |
-| `yahoo_league_game_ids` / `yahooLeagueGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIds` | — | `lang`, `region`, `tz`, `count`, `league`, `week`, `date`, `season`, `game_status_order` → `gameStatusOrder`, `start_time_order` → `startTimeOrder`, `date_flip_offset` → `dateFlipOffset`, `season_phase` → `seasonPhase`, `conference_ids` → `conferenceIds`, `top25`, `game_day_query_type` → `gameDayQueryType` | `parse_yahoo_list` | — |
-| `yahoo_league_game_ids_by_date` / `yahooLeagueGameIdsByDate` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIdsByDate` | — | `lang`, `region`, `tz`, `leagues`, `week`, `dates`, `start_range` → `startRange`, `end_range` → `endRange`, `season`, `season_phases` → `seasonPhases`, `conference_ids` → `conferenceIds`, `division_ids` → `divisionIds`, `top25`, `tournament_ids` → `tournamentIds`, `is_tennis` → `isTennis` | `parse_yahoo_list` | — |
-| `yahoo_league_games_by_round` / `yahooLeagueGamesByRound` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGamesByRound` | — | `lang`, `region`, `tz`, `league`, `tournament_round_ids` → `tournamentRoundIds`, `season` | `parse_yahoo_list` | — |
-| `yahoo_league_info` / `yahooLeagueInfo` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInfo` | — | `lang`, `region`, `tz`, `league` | `parse_yahoo_list` | — |
-| `yahoo_league_injuries` / `yahooLeagueInjuries` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInjuries` | — | `lang`, `region`, `tz`, `league_id` → `leagueId` | `parse_yahoo_list` | — |
-| `yahoo_league_names` / `yahooLeagueNames` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueNames` | — | `lang`, `region`, `tz`, `leagues` | `parse_yahoo_list` | — |
-| `yahoo_league_prop_odds` / `yahooLeaguePropOdds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguePropOdds` | — | `lang`, `region`, `tz`, `count`, `league` | `parse_yahoo_list` | — |
-| `yahoo_league_standings` / `yahooLeagueStandings` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStandings` | — | `lang`, `region`, `tz`, `league`, `season`, `season_phase` → `seasonPhase` | `parse_yahoo_list` | — |
-| `yahoo_league_stats_by_team` / `yahooLeagueStatsByTeam` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsByTeam` | — | `lang`, `region`, `tz`, `leagues`, `count`, `season`, `league_structure_id` → `leagueStructureId`, `baseball_cut_type` → `baseballCutType`, `basketball_cut_type` → `basketballCutType`, `football_cut_type` → `footballCutType`, `hockey_cut_type` → `hockeyCutType` | `parse_yahoo_stats` | — |
-| `yahoo_league_stats_individual` / `yahooLeagueStatsIndividual` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsIndividual` | — | `lang`, `region`, `tz`, `leagues`, `count`, `season`, `qualified`, `league_structure_id` → `leagueStructureId`, `baseball_cut_type` → `baseballCutType`, `baseball_position` → `baseballPosition`, `basketball_cut_type` → `basketballCutType`, `basketball_position` → `basketballPosition`, `football_cut_type` → `footballCutType`, `hockey_cut_type` → `hockeyCutType`, `hockey_position` → `hockeyPosition`, `golf_sort_stat` → `golfSortStat`, `golf_stat_ids` → `golfStatIds`, `motorsports_sort_stat` → `motorsportsSortStat`, `motorsports_stat_ids` → `motorsportsStatIds` | `parse_yahoo_stats` | — |
-| `yahoo_league_stats_overview` / `yahooLeagueStatsOverview` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsOverview` | — | `lang`, `region`, `tz`, `leagues`, `count`, `week`, `week_season_phase` → `weekSeasonPhase`, `season_phase` → `seasonPhase`, `league_structure_id` → `leagueStructureId`, `golf_sort_stat` → `golfSortStat`, `golf_stat_ids` → `golfStatIds`, `motorsports_sort_stat` → `motorsportsSortStat`, `motorsports_stat_ids` → `motorsportsStatIds` | `parse_yahoo_stats` | — |
-| `yahoo_league_stats_weekly` / `yahooLeagueStatsWeekly` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsWeekly` | — | `lang`, `region`, `tz`, `leagues`, `count`, `week`, `season`, `season_phase` → `seasonPhase` | `parse_yahoo_stats` | — |
-| `yahoo_league_team_ids` / `yahooLeagueTeamIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeamIds` | — | `lang`, `region`, `tz`, `league`, `division_ids` → `divisionIds`, `get_teams_by_division` → `getTeamsByDivision` | `parse_yahoo_list` | — |
-| `yahoo_league_teams` / `yahooLeagueTeams` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeams` | — | `lang`, `region`, `tz`, `league`, `season`, `division_ids` → `divisionIds`, `get_teams_by_division` → `getTeamsByDivision` | `parse_yahoo_list` | — |
-| `yahoo_leagues_season_states` / `yahooLeaguesSeasonStates` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguesSeasonStates` | — | `lang`, `region`, `tz`, `leagues` | `parse_yahoo_list` | — |
-| `yahoo_module_game` / `yahooModuleGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/moduleGame` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
-| `yahoo_motorsport_standings` / `yahooMotorsportStandings` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/motorsportStandings` | — | `lang`, `region`, `tz`, `league`, `season` | `parse_yahoo_list` | — |
-| `yahoo_nascar_drivers` / `yahooNascarDrivers` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/nascarDrivers` | — | `lang`, `region`, `tz`, `league` | `parse_yahoo_list` | — |
-| `yahoo_nav_dropdown_tray` / `yahooNavDropdownTray` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/navDropdownTray` | — | `lang`, `region`, `tz`, `get_soccer_data` → `getSoccerData`, `soccer_league_ids` → `soccerLeagueIds`, `soccer_team_ids` → `soccerTeamIds` | `parse_yahoo_list` | — |
-| `yahoo_oly_medal_count` / `yahooOlyMedalCount` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlyMedalCount` | — | `lang`, `region`, `tz`, `season`, `sort_method` → `sortMethod` | `parse_yahoo_list` | — |
-| `yahoo_oly_seasons` / `yahooOlySeasons` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlySeasons` | — | `lang`, `region`, `tz`, `seasons` | `parse_yahoo_list` | — |
-| `yahoo_pick_distribution` / `yahooPickDistribution` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/pickDistribution` | — | `lang`, `region`, `tz`, `league`, `dates`, `count` | `parse_yahoo_list` | — |
-| `yahoo_playbook_boxscore` / `yahooPlaybookBoxscore` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscore` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `standings_season_phases` → `standingsSeasonPhases`, `image_height` → `imageHeight`, `image_width` → `imageWidth`, `is_baseball` → `isBaseball`, `is_football` → `isFootball`, `is_pro_basketball` → `isProBasketball`, `is_college_basketball` → `isCollegeBasketball`, `is_hockey` → `isHockey`, `is_soccer` → `isSoccer`, `event_state` → `eventState` | `parse_yahoo_list` | — |
-| `yahoo_playbook_boxscore_poll` / `yahooPlaybookBoxscorePoll` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscorePoll` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `standings_season_phases` → `standingsSeasonPhases`, `is_baseball` → `isBaseball`, `is_football` → `isFootball`, `is_pro_basketball` → `isProBasketball`, `is_college_basketball` → `isCollegeBasketball`, `is_hockey` → `isHockey`, `is_soccer` → `isSoccer`, `event_state` → `eventState` | `parse_yahoo_list` | — |
-| `yahoo_playbook_boxscore_social_share` / `yahooPlaybookBoxscoreSocialShare` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscoreSocialShare` | — | `lang`, `region`, `tz`, `game_id` → `gameId` | `parse_yahoo_list` | — |
-| `yahoo_playbook_combat_match` / `yahooPlaybookCombatMatch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookCombatMatch` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `image_height` → `imageHeight`, `image_width` → `imageWidth`, `headshot_height` → `headshotHeight`, `headshot_width` → `headshotWidth` | `parse_yahoo_list` | — |
-| `yahoo_playbook_game` / `yahooPlaybookGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGame` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
-| `yahoo_playbook_game_odds_poll` / `yahooPlaybookGameOddsPoll` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGameOddsPoll` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `event_state` → `eventState` | `parse_yahoo_list` | — |
-| `yahoo_playbook_golf_tournament` / `yahooPlaybookGolfTournament` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGolfTournament` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `season`, `count`, `stat_ids` → `statIds`, `show_hole_results` → `showHoleResults` | `parse_yahoo_list` | — |
-| `yahoo_playbook_league_odds` / `yahooPlaybookLeagueOdds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookLeagueOdds` | — | `lang`, `region`, `tz`, `league`, `dates`, `count`, `start_time_filter` → `startTimeFilter`, `range_start_date` → `rangeStartDate`, `range_end_date` → `rangeEndDate` | `parse_yahoo_list` | — |
-| `yahoo_playbook_player` / `yahooPlaybookPlayer` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayer` | — | `lang`, `region`, `tz`, `player_id` → `playerId`, `season_phases` → `seasonPhases` | `parse_yahoo_list` | — |
-| `yahoo_playbook_player_social_share` / `yahooPlaybookPlayerSocialShare` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayerSocialShare` | — | `lang`, `region`, `tz`, `player_id` → `playerId` | `parse_yahoo_list` | — |
-| `yahoo_playbook_race` / `yahooPlaybookRace` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookRace` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `player_image_height` → `playerImageHeight`, `player_image_width` → `playerImageWidth` | `parse_yahoo_list` | — |
-| `yahoo_playbook_team` / `yahooPlaybookTeam` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeam` | — | `lang`, `region`, `tz`, `team_id` → `teamId`, `image_height` → `imageHeight`, `image_width` → `imageWidth`, `league_short_name` → `leagueShortName`, `disable_conference` → `disableConference`, `disable_division` → `disableDivision` | `parse_yahoo_list` | — |
-| `yahoo_playbook_team_basic` / `yahooPlaybookTeamBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamBasic` | — | `lang`, `region`, `tz`, `team_id` → `teamId`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
-| `yahoo_playbook_team_social_share` / `yahooPlaybookTeamSocialShare` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamSocialShare` | — | `lang`, `region`, `tz`, `team_id` → `teamId` | `parse_yahoo_list` | — |
-| `yahoo_playbook_tennis_match` / `yahooPlaybookTennisMatch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTennisMatch` | — | `lang`, `region`, `tz`, `game_id` → `gameId` | `parse_yahoo_list` | — |
-| `yahoo_player_basic` / `yahooPlayerBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerBasic` | — | `lang`, `region`, `tz`, `league`, `player_id` → `playerId` | `parse_yahoo_list` | — |
-| `yahoo_player_career_stats` / `yahooPlayerCareerStats` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerCareerStats` | — | `lang`, `region`, `tz`, `player_id` → `playerId`, `season_phases` → `seasonPhases`, `football_stat_ids` → `footballStatIds`, `basketball_stat_ids` → `basketballStatIds`, `baseball_stat_ids` → `baseballStatIds`, `hockey_stat_ids` → `hockeyStatIds`, `soccer_stat_ids` → `soccerStatIds` | `parse_yahoo_list` | — |
-| `yahoo_player_game_log` / `yahooPlayerGameLog` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerGameLog` | — | `lang`, `region`, `tz`, `player_id` → `playerId`, `count`, `seasons`, `season_phases` → `seasonPhases`, `football_stat_ids` → `footballStatIds`, `basketball_stat_ids` → `basketballStatIds`, `baseball_stat_ids` → `baseballStatIds`, `hockey_stat_ids` → `hockeyStatIds`, `soccer_stat_ids` → `soccerStatIds` | `parse_yahoo_list` | — |
-| `yahoo_player_props` / `yahooPlayerProps` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerProps` | — | `lang`, `region`, `tz`, `player_id` → `playerId` | `parse_yahoo_list` | — |
-| `yahoo_player_search` / `yahooPlayerSearch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSearch` | — | `lang`, `region`, `tz`, `league`, `name`, `on_active_roster_only` → `onActiveRosterOnly`, `nfl_position_id` → `nflPositionId`, `nba_position_id` → `nbaPositionId`, `mlb_position_id` → `mlbPositionId`, `nhl_position_id` → `nhlPositionId` | `parse_yahoo_list` | — |
-| `yahoo_player_season_stats` / `yahooPlayerSeasonStats` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSeasonStats` | — | `lang`, `region`, `tz`, `player_id` → `playerId`, `seasons`, `season_phases` → `seasonPhases`, `football_stat_ids` → `footballStatIds`, `football_cut_type_groups` → `footballCutTypeGroups`, `basketball_stat_ids` → `basketballStatIds`, `basketball_cut_type_groups` → `basketballCutTypeGroups`, `baseball_stat_ids` → `baseballStatIds`, `baseball_cut_type_groups` → `baseballCutTypeGroups`, `hockey_stat_ids` → `hockeyStatIds`, `hockey_cut_type_groups` → `hockeyCutTypeGroups`, `group_by_season_phase` → `groupBySeasonPhase`, `use_player_unique_id` → `usePlayerUniqueId` | `parse_yahoo_list` | — |
-| `yahoo_playoff_bracket` / `yahooPlayoffBracket` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffBracket` | — | `lang`, `region`, `tz`, `league`, `season`, `tournament`, `type`, `playoff_rounds` → `playoffRounds` | `parse_yahoo_list` | — |
-| `yahoo_playoff_series_game` / `yahooPlayoffSeriesGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffSeriesGame` | — | `lang`, `region`, `tz`, `game_id` → `gameId` | `parse_yahoo_list` | — |
-| `yahoo_polymarket_game` / `yahooPolymarketGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/polymarketGame` | — | `lang`, `region`, `tz`, `game_id` → `gameId` | `parse_yahoo_list` | — |
-| `yahoo_racing_schedule` / `yahooRacingSchedule` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/racingSchedule` | — | `lang`, `region`, `tz`, `league`, `season`, `today`, `has_series` → `hasSeries` | `parse_yahoo_list` | — |
-| `yahoo_scoreboard_game` / `yahooScoreboardGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/scoreboardGame` | — | `lang`, `region`, `tz`, `game_id` → `gameId`, `season`, `season_phase` → `seasonPhase`, `stat_leader_count` → `statLeaderCount`, `single_stat_leader` → `singleStatLeader`, `bet_event_state` → `betEventState` | `parse_yahoo_list` | — |
-| `yahoo_season_stats_football_defense_ncaaf` / `yahooSeasonStatsFootballDefenseNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballDefenseNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_stats_football_kicking_ncaaf` / `yahooSeasonStatsFootballKickingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballKickingNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_stats_football_passing_ncaaf` / `yahooSeasonStatsFootballPassingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPassingNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_stats_football_punting_ncaaf` / `yahooSeasonStatsFootballPuntingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPuntingNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_stats_football_receiving_ncaaf` / `yahooSeasonStatsFootballReceivingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReceivingNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_stats_football_returns_ncaaf` / `yahooSeasonStatsFootballReturnsNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReturnsNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_stats_football_rushing_ncaaf` / `yahooSeasonStatsFootballRushingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballRushingNcaaf` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_defense` / `yahooSeasonTeamStatsFootballDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballDefense` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_kicking` / `yahooSeasonTeamStatsFootballKicking` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKicking` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_kickoffs` / `yahooSeasonTeamStatsFootballKickoffs` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKickoffs` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_offense` / `yahooSeasonTeamStatsFootballOffense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballOffense` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_passing` / `yahooSeasonTeamStatsFootballPassing` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassing` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_passing_defense` / `yahooSeasonTeamStatsFootballPassingDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassingDefense` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_punting` / `yahooSeasonTeamStatsFootballPunting` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPunting` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_receiving` / `yahooSeasonTeamStatsFootballReceiving` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceiving` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_receiving_defense` / `yahooSeasonTeamStatsFootballReceivingDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_returns` / `yahooSeasonTeamStatsFootballReturns` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReturns` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_rushing` / `yahooSeasonTeamStatsFootballRushing` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushing` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_season_team_stats_football_rushing_defense` / `yahooSeasonTeamStatsFootballRushingDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense` | — | `lang`, `region`, `tz`, `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
-| `yahoo_team_injuries` / `yahooTeamInjuries` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamInjuries` | — | `lang`, `region`, `tz`, `team_id` → `teamId` | `parse_yahoo_list` | — |
-| `yahoo_team_playoff_series` / `yahooTeamPlayoffSeries` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamPlayoffSeries` | — | `lang`, `region`, `tz`, `team_id` → `teamId`, `season` | `parse_yahoo_list` | — |
-| `yahoo_team_roster` / `yahooTeamRoster` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamRoster` | — | `lang`, `region`, `tz`, `team_id` → `teamId`, `player_image_height` → `playerImageHeight`, `player_image_width` → `playerImageWidth` | `parse_yahoo_list` | — |
-| `yahoo_team_schedule_by_season` / `yahooTeamScheduleBySeason` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamScheduleBySeason` | — | `lang`, `region`, `tz`, `season`, `team_id` → `teamId` | `parse_yahoo_list` | — |
-| `yahoo_team_search` / `yahooTeamSearch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamSearch` | — | `lang`, `region`, `tz`, `name`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
-| `yahoo_team_stats_leaders_v2` / `yahooTeamStatsLeadersV2` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamStatsLeadersV2` | — | `lang`, `region`, `tz`, `league`, `team_id` → `teamId`, `count`, `season`, `baseball_cut_type` → `baseballCutType`, `qualified`, `include_team_stats` → `includeTeamStats`, `include_player_stats` → `includePlayerStats`, `is_baseball` → `isBaseball` | `parse_yahoo_stats` | — |
-| `yahoo_team_transactions` / `yahooTeamTransactions` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamTransactions` | — | `lang`, `region`, `tz`, `team_id` → `teamId` | `parse_yahoo_list` | — |
-| `yahoo_teams_basic` / `yahooTeamsBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamsBasic` | — | `lang`, `region`, `tz`, `team_ids` → `teamIds`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
-| `yahoo_tennis_matches_by_date` / `yahooTennisMatchesByDate` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisMatchesByDate` | — | `lang`, `region`, `tz`, `tournament_id` → `tournamentId`, `season`, `date` | `parse_yahoo_list` | — |
-| `yahoo_tennis_tournament` / `yahooTennisTournament` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournament` | — | `lang`, `region`, `tz`, `tournament_id` → `tournamentId`, `season` | `parse_yahoo_list` | — |
-| `yahoo_tennis_tournaments` / `yahooTennisTournaments` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournaments` | — | `lang`, `region`, `tz`, `league_id` → `leagueId`, `match_type` → `matchType`, `season` | `parse_yahoo_list` | — |
-| `yahoo_tennis_tournaments_by_date` / `yahooTennisTournamentsByDate` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournamentsByDate` | — | `lang`, `region`, `tz`, `season`, `date` | `parse_yahoo_list` | — |
-| `yahoo_trending_event_ids` / `yahooTrendingEventIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingEventIds` | — | `lang`, `region`, `tz`, `count`, `league`, `date_flip_offset` → `dateFlipOffset` | `parse_yahoo_list` | — |
-| `yahoo_trending_game_ids` / `yahooTrendingGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingGameIds` | — | `lang`, `region`, `tz`, `count`, `league`, `date_flip_offset` → `dateFlipOffset`, `dates` | `parse_yahoo_list` | — |
+| `yahoo_alias` / `yahooAlias` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/alias` | — | `alias` | `parse_yahoo_list` | — |
+| `yahoo_article_list_card_players` / `yahooArticleListCardPlayers` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardPlayers` | — | `player_ids` → `playerIds` | `parse_yahoo_list` | — |
+| `yahoo_article_list_card_teams` / `yahooArticleListCardTeams` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardTeams` | — | `team_ids` → `teamIds` | `parse_yahoo_list` | — |
+| `yahoo_basic_players` / `yahooBasicPlayers` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/basicPlayers` | — | `players` | `parse_yahoo_list` | — |
+| `yahoo_betting_disclaimer` / `yahooBettingDisclaimer` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/bettingDisclaimer` | — | `betting_disclaimer_id` → `bettingDisclaimerId` | `parse_yahoo_list` | — |
+| `yahoo_combat_event_fights` / `yahooCombatEventFights` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatEventFights` | — | `event_group_id` → `eventGroupId`, `season`, `league` | `parse_yahoo_list` | — |
+| `yahoo_combat_schedule` / `yahooCombatSchedule` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatSchedule` | — | `season`, `league` | `parse_yahoo_list` | — |
+| `yahoo_common_pills` / `yahooCommonPills` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/common/pills` | — | `add_team_logos` → `addTeamLogos`, `date`, `team_ids` → `teamIds` | `parse_yahoo_list` | — |
+| `yahoo_consensus_rankings_php` / `yahooConsensusRankingsPhp` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/consensus-rankings.php` | — | `sport`, `position`, `filters`, `experts`, `scoring`, `type` | `parse_yahoo_list` | — |
+| `yahoo_draft` / `yahooDraft` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draft` | — | `league`, `season` | `parse_yahoo_list` | — |
+| `yahoo_draft_prospects` / `yahooDraftProspects` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draftProspects` | — | `league`, `season`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
+| `yahoo_driver_results` / `yahooDriverResults` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverResults` | — | `player_id` → `playerId`, `season` | `parse_yahoo_list` | — |
+| `yahoo_driver_splits` / `yahooDriverSplits` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverSplits` | — | `player_id` → `playerId` | `parse_yahoo_list` | — |
+| `yahoo_editorial_boxscore` / `yahooEditorialBoxscore` | `https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/{game_id}` | `game_id`\* | `v`, `polling` | `parse_yahoo_scores_boxscore` | — |
+| `yahoo_editorial_scoreboard` / `yahooEditorialScoreboard` | `https://api-secure.sports.yahoo.com/v1/editorial/s/scoreboard` | — | `leagues`, `week`, `season`, `conferences`, `count`, `v` | `parse_yahoo_scores_scoreboard` | — |
+| `yahoo_featured_game_ids` / `yahooFeaturedGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/featuredGameIds` | — | — | `parse_yahoo_list` | — |
+| `yahoo_game_prop_bets` / `yahooGamePropBets` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gamePropBets` | — | `game_id` → `gameId` | `parse_yahoo_list` | — |
+| `yahoo_game_stats_leaders` / `yahooGameStatsLeaders` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gameStatsLeaders` | — | `game_id` → `gameId`, `season`, `season_phases` → `seasonPhases`, `qualified`, `count`, `is_pregame` → `isPregame`, `team_image_height` → `teamImageHeight`, `team_image_width` → `teamImageWidth`, `player_image_height` → `playerImageHeight`, `player_image_width` → `playerImageWidth`, `baseball_leader_sort_stat0` → `baseballLeaderSortStat0`, `baseball_leader_sort_stat1` → `baseballLeaderSortStat1`, `baseball_leader_sort_stat2` → `baseballLeaderSortStat2`, `baseball_leader_sort_stat3` → `baseballLeaderSortStat3`, `baseball_leader_sort_stat4` → `baseballLeaderSortStat4`, `baseball_leader_stat_ids0` → `baseballLeaderStatIds0`, `baseball_leader_stat_ids1` → `baseballLeaderStatIds1`, `baseball_leader_stat_ids2` → `baseballLeaderStatIds2`, `baseball_leader_stat_ids3` → `baseballLeaderStatIds3`, `baseball_leader_stat_ids4` → `baseballLeaderStatIds4`, `baseball_player_stat_ids0` → `baseballPlayerStatIds0`, `baseball_player_stat_ids1` → `baseballPlayerStatIds1`, `baseball_team_sort_stat0` → `baseballTeamSortStat0`, `baseball_team_sort_stat1` → `baseballTeamSortStat1`, `baseball_team_sort_stat2` → `baseballTeamSortStat2`, `baseball_team_sort_stat3` → `baseballTeamSortStat3`, `baseball_team_sort_stat4` → `baseballTeamSortStat4`, `baseball_team_sort_stat5` → `baseballTeamSortStat5`, `baseball_team_sort_stat6` → `baseballTeamSortStat6`, `baseball_team_sort_stat7` → `baseballTeamSortStat7`, `baseball_team_sort_stat8` → `baseballTeamSortStat8`, `baseball_team_sort_stat9` → `baseballTeamSortStat9`, `baseball_team_sort_stat10` → `baseballTeamSortStat10`, `baseball_team_sort_stat11` → `baseballTeamSortStat11`, `baseball_team_stat_ids0` → `baseballTeamStatIds0`, `baseball_team_stat_ids1` → `baseballTeamStatIds1`, `baseball_team_stat_ids2` → `baseballTeamStatIds2`, `baseball_team_stat_ids3` → `baseballTeamStatIds3`, `baseball_team_stat_ids4` → `baseballTeamStatIds4`, `baseball_team_stat_ids5` → `baseballTeamStatIds5`, `baseball_team_stat_ids6` → `baseballTeamStatIds6`, `baseball_team_stat_ids7` → `baseballTeamStatIds7`, `baseball_team_stat_ids8` → `baseballTeamStatIds8`, `baseball_team_stat_ids9` → `baseballTeamStatIds9`, `baseball_team_stat_ids10` → `baseballTeamStatIds10`, `baseball_team_stat_ids11` → `baseballTeamStatIds11`, `basketball_leader_sort_stat0` → `basketballLeaderSortStat0`, `basketball_leader_sort_stat1` → `basketballLeaderSortStat1`, `basketball_leader_sort_stat2` → `basketballLeaderSortStat2`, `basketball_leader_sort_stat3` → `basketballLeaderSortStat3`, `basketball_leader_sort_stat4` → `basketballLeaderSortStat4`, `basketball_leader_stat_ids0` → `basketballLeaderStatIds0`, `basketball_leader_stat_ids1` → `basketballLeaderStatIds1`, `basketball_leader_stat_ids2` → `basketballLeaderStatIds2`, `basketball_leader_stat_ids3` → `basketballLeaderStatIds3`, `basketball_leader_stat_ids4` → `basketballLeaderStatIds4`, `basketball_player_stat_ids0` → `basketballPlayerStatIds0`, `basketball_team_sort_stat0` → `basketballTeamSortStat0`, `basketball_team_sort_stat1` → `basketballTeamSortStat1`, `basketball_team_sort_stat2` → `basketballTeamSortStat2`, `basketball_team_sort_stat3` → `basketballTeamSortStat3`, `basketball_team_sort_stat4` → `basketballTeamSortStat4`, `basketball_team_sort_stat5` → `basketballTeamSortStat5`, `basketball_team_sort_stat6` → `basketballTeamSortStat6`, `basketball_team_sort_stat7` → `basketballTeamSortStat7`, `basketball_team_sort_stat8` → `basketballTeamSortStat8`, `basketball_team_sort_stat9` → `basketballTeamSortStat9`, `basketball_team_stat_ids0` → `basketballTeamStatIds0`, `basketball_team_stat_ids1` → `basketballTeamStatIds1`, `basketball_team_stat_ids2` → `basketballTeamStatIds2`, `basketball_team_stat_ids3` → `basketballTeamStatIds3`, `basketball_team_stat_ids4` → `basketballTeamStatIds4`, `basketball_team_stat_ids5` → `basketballTeamStatIds5`, `basketball_team_stat_ids6` → `basketballTeamStatIds6`, `basketball_team_stat_ids7` → `basketballTeamStatIds7`, `basketball_team_stat_ids8` → `basketballTeamStatIds8`, `basketball_team_stat_ids9` → `basketballTeamStatIds9`, `football_leader_sort_stat0` → `footballLeaderSortStat0`, `football_leader_sort_stat1` → `footballLeaderSortStat1`, `football_leader_sort_stat2` → `footballLeaderSortStat2`, `football_leader_sort_stat3` → `footballLeaderSortStat3`, `football_leader_stat_ids0` → `footballLeaderStatIds0`, `football_leader_stat_ids1` → `footballLeaderStatIds1`, `football_leader_stat_ids2` → `footballLeaderStatIds2`, `football_leader_stat_ids3` → `footballLeaderStatIds3`, `football_player_stat_ids0` → `footballPlayerStatIds0`, `football_player_stat_ids1` → `footballPlayerStatIds1`, `football_player_stat_ids2` → `footballPlayerStatIds2`, `football_player_stat_ids3` → `footballPlayerStatIds3`, `football_player_stat_ids4` → `footballPlayerStatIds4`, `football_player_stat_ids5` → `footballPlayerStatIds5`, `football_player_stat_ids6` → `footballPlayerStatIds6`, `football_player_stat_ids7` → `footballPlayerStatIds7`, `football_team_sort_stat0` → `footballTeamSortStat0`, `football_team_sort_stat1` → `footballTeamSortStat1`, `football_team_sort_stat2` → `footballTeamSortStat2`, `football_team_sort_stat3` → `footballTeamSortStat3`, `football_team_sort_stat4` → `footballTeamSortStat4`, `football_team_sort_stat5` → `footballTeamSortStat5`, `football_team_sort_stat6` → `footballTeamSortStat6`, `football_team_sort_stat7` → `footballTeamSortStat7`, `football_team_sort_stat8` → `footballTeamSortStat8`, `football_team_sort_stat9` → `footballTeamSortStat9`, `football_team_sort_stat10` → `footballTeamSortStat10`, `football_team_sort_stat11` → `footballTeamSortStat11`, `football_team_stat_ids0` → `footballTeamStatIds0`, `football_team_stat_ids1` → `footballTeamStatIds1`, `football_team_stat_ids2` → `footballTeamStatIds2`, `football_team_stat_ids3` → `footballTeamStatIds3`, `football_team_stat_ids4` → `footballTeamStatIds4`, `football_team_stat_ids5` → `footballTeamStatIds5`, `football_team_stat_ids6` → `footballTeamStatIds6`, `football_team_stat_ids7` → `footballTeamStatIds7`, `football_team_stat_ids8` → `footballTeamStatIds8`, `football_team_stat_ids9` → `footballTeamStatIds9`, `football_team_stat_ids10` → `footballTeamStatIds10`, `football_team_stat_ids11` → `footballTeamStatIds11`, `hockey_leader_sort_stat0` → `hockeyLeaderSortStat0`, `hockey_leader_sort_stat1` → `hockeyLeaderSortStat1`, `hockey_leader_sort_stat2` → `hockeyLeaderSortStat2`, `hockey_leader_sort_stat3` → `hockeyLeaderSortStat3`, `hockey_leader_stat_ids0` → `hockeyLeaderStatIds0`, `hockey_leader_stat_ids1` → `hockeyLeaderStatIds1`, `hockey_leader_stat_ids2` → `hockeyLeaderStatIds2`, `hockey_leader_stat_ids3` → `hockeyLeaderStatIds3`, `hockey_player_stat_ids0` → `hockeyPlayerStatIds0`, `hockey_player_stat_ids1` → `hockeyPlayerStatIds1`, `hockey_player_stat_ids2` → `hockeyPlayerStatIds2`, `hockey_team_sort_stat0` → `hockeyTeamSortStat0`, `hockey_team_sort_stat1` → `hockeyTeamSortStat1`, `hockey_team_sort_stat2` → `hockeyTeamSortStat2`, `hockey_team_sort_stat3` → `hockeyTeamSortStat3`, `hockey_team_sort_stat4` → `hockeyTeamSortStat4`, `hockey_team_sort_stat5` → `hockeyTeamSortStat5`, `hockey_team_sort_stat6` → `hockeyTeamSortStat6`, `hockey_team_stat_ids0` → `hockeyTeamStatIds0`, `hockey_team_stat_ids1` → `hockeyTeamStatIds1`, `hockey_team_stat_ids2` → `hockeyTeamStatIds2`, `hockey_team_stat_ids3` → `hockeyTeamStatIds3`, `hockey_team_stat_ids4` → `hockeyTeamStatIds4`, `hockey_team_stat_ids5` → `hockeyTeamStatIds5`, `hockey_team_stat_ids6` → `hockeyTeamStatIds6`, `soccer_player_stat_ids0` → `soccerPlayerStatIds0`, `soccer_player_stat_ids1` → `soccerPlayerStatIds1`, `soccer_player_stat_ids2` → `soccerPlayerStatIds2`, `soccer_player_stat_ids3` → `soccerPlayerStatIds3`, `soccer_player_stat_ids4` → `soccerPlayerStatIds4`, `soccer_team_sort_stat0` → `soccerTeamSortStat0`, `soccer_team_sort_stat1` → `soccerTeamSortStat1`, `soccer_team_sort_stat2` → `soccerTeamSortStat2`, `soccer_team_sort_stat3` → `soccerTeamSortStat3`, `soccer_team_sort_stat4` → `soccerTeamSortStat4`, `soccer_team_sort_stat5` → `soccerTeamSortStat5`, `soccer_team_stat_ids0` → `soccerTeamStatIds0`, `soccer_team_stat_ids1` → `soccerTeamStatIds1`, `soccer_team_stat_ids2` → `soccerTeamStatIds2`, `soccer_team_stat_ids3` → `soccerTeamStatIds3`, `soccer_team_stat_ids4` → `soccerTeamStatIds4`, `soccer_team_stat_ids5` → `soccerTeamStatIds5` | `parse_yahoo_stats` | — |
+| `yahoo_gametime_game` / `yahooGametimeGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeGame` | — | `game_id` → `gameId` | `parse_yahoo_list` | — |
+| `yahoo_gametime_team` / `yahooGametimeTeam` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeTeam` | — | `team_id` → `teamId` | `parse_yahoo_list` | — |
+| `yahoo_golf_tournament_seasons` / `yahooGolfTournamentSeasons` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentSeasons` | — | `event_group_id` → `eventGroupId` | `parse_yahoo_list` | — |
+| `yahoo_golf_tournaments` / `yahooGolfTournaments` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournaments` | — | `association`, `season`, `show_defending_champs` → `showDefendingChamps` | `parse_yahoo_list` | — |
+| `yahoo_golf_tournaments_basic` / `yahooGolfTournamentsBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentsBasic` | — | `event_group_id` → `eventGroupId`, `association`, `season` | `parse_yahoo_list` | — |
+| `yahoo_league_conferences` / `yahooLeagueConferences` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueConferences` | — | `league`, `division_ids` → `divisionIds` | `parse_yahoo_list` | — |
+| `yahoo_league_filters_data` / `yahooLeagueFiltersData` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFiltersData` | — | `league`, `season`, `view_type` → `viewType`, `include_pos_and_splits_data` → `includePosAndSplitsData` | `parse_yahoo_list` | — |
+| `yahoo_league_future_odds` / `yahooLeagueFutureOdds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFutureOdds` | — | `league`, `bet_categories` → `betCategories` | `parse_yahoo_list` | — |
+| `yahoo_league_game_ids` / `yahooLeagueGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIds` | — | `count`, `league`, `week`, `date`, `season`, `game_status_order` → `gameStatusOrder`, `start_time_order` → `startTimeOrder`, `date_flip_offset` → `dateFlipOffset`, `season_phase` → `seasonPhase`, `conference_ids` → `conferenceIds`, `top25`, `game_day_query_type` → `gameDayQueryType` | `parse_yahoo_list` | — |
+| `yahoo_league_game_ids_by_date` / `yahooLeagueGameIdsByDate` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIdsByDate` | — | `leagues`, `week`, `dates`, `start_range` → `startRange`, `end_range` → `endRange`, `season`, `season_phases` → `seasonPhases`, `conference_ids` → `conferenceIds`, `division_ids` → `divisionIds`, `top25`, `tournament_ids` → `tournamentIds`, `is_tennis` → `isTennis` | `parse_yahoo_list` | — |
+| `yahoo_league_games_by_round` / `yahooLeagueGamesByRound` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGamesByRound` | — | `league`, `tournament_round_ids` → `tournamentRoundIds`, `season` | `parse_yahoo_list` | — |
+| `yahoo_league_info` / `yahooLeagueInfo` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInfo` | — | `league` | `parse_yahoo_list` | — |
+| `yahoo_league_injuries` / `yahooLeagueInjuries` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInjuries` | — | `league_id` → `leagueId` | `parse_yahoo_list` | — |
+| `yahoo_league_names` / `yahooLeagueNames` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueNames` | — | `leagues` | `parse_yahoo_list` | — |
+| `yahoo_league_prop_odds` / `yahooLeaguePropOdds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguePropOdds` | — | `count`, `league` | `parse_yahoo_list` | — |
+| `yahoo_league_standings` / `yahooLeagueStandings` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStandings` | — | `league`, `season`, `season_phase` → `seasonPhase` | `parse_yahoo_list` | — |
+| `yahoo_league_stats_by_team` / `yahooLeagueStatsByTeam` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsByTeam` | — | `leagues`, `count`, `season`, `league_structure_id` → `leagueStructureId`, `baseball_cut_type` → `baseballCutType`, `basketball_cut_type` → `basketballCutType`, `football_cut_type` → `footballCutType`, `hockey_cut_type` → `hockeyCutType` | `parse_yahoo_stats` | — |
+| `yahoo_league_stats_individual` / `yahooLeagueStatsIndividual` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsIndividual` | — | `leagues`, `count`, `season`, `qualified`, `league_structure_id` → `leagueStructureId`, `baseball_cut_type` → `baseballCutType`, `baseball_position` → `baseballPosition`, `basketball_cut_type` → `basketballCutType`, `basketball_position` → `basketballPosition`, `football_cut_type` → `footballCutType`, `hockey_cut_type` → `hockeyCutType`, `hockey_position` → `hockeyPosition`, `golf_sort_stat` → `golfSortStat`, `golf_stat_ids` → `golfStatIds`, `motorsports_sort_stat` → `motorsportsSortStat`, `motorsports_stat_ids` → `motorsportsStatIds` | `parse_yahoo_stats` | — |
+| `yahoo_league_stats_overview` / `yahooLeagueStatsOverview` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsOverview` | — | `leagues`, `count`, `week`, `week_season_phase` → `weekSeasonPhase`, `season_phase` → `seasonPhase`, `league_structure_id` → `leagueStructureId`, `golf_sort_stat` → `golfSortStat`, `golf_stat_ids` → `golfStatIds`, `motorsports_sort_stat` → `motorsportsSortStat`, `motorsports_stat_ids` → `motorsportsStatIds` | `parse_yahoo_stats` | — |
+| `yahoo_league_stats_weekly` / `yahooLeagueStatsWeekly` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsWeekly` | — | `leagues`, `count`, `week`, `season`, `season_phase` → `seasonPhase` | `parse_yahoo_stats` | — |
+| `yahoo_league_team_ids` / `yahooLeagueTeamIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeamIds` | — | `league`, `division_ids` → `divisionIds`, `get_teams_by_division` → `getTeamsByDivision` | `parse_yahoo_list` | — |
+| `yahoo_league_teams` / `yahooLeagueTeams` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeams` | — | `league`, `season`, `division_ids` → `divisionIds`, `get_teams_by_division` → `getTeamsByDivision` | `parse_yahoo_list` | — |
+| `yahoo_leagues_season_states` / `yahooLeaguesSeasonStates` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguesSeasonStates` | — | `leagues` | `parse_yahoo_list` | — |
+| `yahoo_module_game` / `yahooModuleGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/moduleGame` | — | `game_id` → `gameId`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
+| `yahoo_motorsport_standings` / `yahooMotorsportStandings` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/motorsportStandings` | — | `league`, `season` | `parse_yahoo_list` | — |
+| `yahoo_nascar_drivers` / `yahooNascarDrivers` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/nascarDrivers` | — | `league` | `parse_yahoo_list` | — |
+| `yahoo_nav_dropdown_tray` / `yahooNavDropdownTray` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/navDropdownTray` | — | `get_soccer_data` → `getSoccerData`, `soccer_league_ids` → `soccerLeagueIds`, `soccer_team_ids` → `soccerTeamIds` | `parse_yahoo_list` | — |
+| `yahoo_oly_medal_count` / `yahooOlyMedalCount` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlyMedalCount` | — | `season`, `sort_method` → `sortMethod` | `parse_yahoo_list` | — |
+| `yahoo_oly_seasons` / `yahooOlySeasons` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlySeasons` | — | `seasons` | `parse_yahoo_list` | — |
+| `yahoo_pick_distribution` / `yahooPickDistribution` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/pickDistribution` | — | `league`, `dates`, `count` | `parse_yahoo_list` | — |
+| `yahoo_playbook_boxscore` / `yahooPlaybookBoxscore` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscore` | — | `game_id` → `gameId`, `standings_season_phases` → `standingsSeasonPhases`, `image_height` → `imageHeight`, `image_width` → `imageWidth`, `is_baseball` → `isBaseball`, `is_football` → `isFootball`, `is_pro_basketball` → `isProBasketball`, `is_college_basketball` → `isCollegeBasketball`, `is_hockey` → `isHockey`, `is_soccer` → `isSoccer`, `event_state` → `eventState` | `parse_yahoo_list` | — |
+| `yahoo_playbook_boxscore_poll` / `yahooPlaybookBoxscorePoll` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscorePoll` | — | `game_id` → `gameId`, `standings_season_phases` → `standingsSeasonPhases`, `is_baseball` → `isBaseball`, `is_football` → `isFootball`, `is_pro_basketball` → `isProBasketball`, `is_college_basketball` → `isCollegeBasketball`, `is_hockey` → `isHockey`, `is_soccer` → `isSoccer`, `event_state` → `eventState` | `parse_yahoo_list` | — |
+| `yahoo_playbook_boxscore_social_share` / `yahooPlaybookBoxscoreSocialShare` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscoreSocialShare` | — | `game_id` → `gameId` | `parse_yahoo_list` | — |
+| `yahoo_playbook_combat_match` / `yahooPlaybookCombatMatch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookCombatMatch` | — | `game_id` → `gameId`, `image_height` → `imageHeight`, `image_width` → `imageWidth`, `headshot_height` → `headshotHeight`, `headshot_width` → `headshotWidth` | `parse_yahoo_list` | — |
+| `yahoo_playbook_game` / `yahooPlaybookGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGame` | — | `game_id` → `gameId`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
+| `yahoo_playbook_game_odds_poll` / `yahooPlaybookGameOddsPoll` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGameOddsPoll` | — | `game_id` → `gameId`, `event_state` → `eventState` | `parse_yahoo_list` | — |
+| `yahoo_playbook_golf_tournament` / `yahooPlaybookGolfTournament` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGolfTournament` | — | `game_id` → `gameId`, `season`, `count`, `stat_ids` → `statIds`, `show_hole_results` → `showHoleResults` | `parse_yahoo_list` | — |
+| `yahoo_playbook_league_odds` / `yahooPlaybookLeagueOdds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookLeagueOdds` | — | `league`, `dates`, `count`, `start_time_filter` → `startTimeFilter`, `range_start_date` → `rangeStartDate`, `range_end_date` → `rangeEndDate` | `parse_yahoo_list` | — |
+| `yahoo_playbook_player` / `yahooPlaybookPlayer` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayer` | — | `player_id` → `playerId`, `season_phases` → `seasonPhases` | `parse_yahoo_list` | — |
+| `yahoo_playbook_player_social_share` / `yahooPlaybookPlayerSocialShare` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayerSocialShare` | — | `player_id` → `playerId` | `parse_yahoo_list` | — |
+| `yahoo_playbook_race` / `yahooPlaybookRace` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookRace` | — | `game_id` → `gameId`, `player_image_height` → `playerImageHeight`, `player_image_width` → `playerImageWidth` | `parse_yahoo_list` | — |
+| `yahoo_playbook_team` / `yahooPlaybookTeam` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeam` | — | `team_id` → `teamId`, `image_height` → `imageHeight`, `image_width` → `imageWidth`, `league_short_name` → `leagueShortName`, `disable_conference` → `disableConference`, `disable_division` → `disableDivision` | `parse_yahoo_list` | — |
+| `yahoo_playbook_team_basic` / `yahooPlaybookTeamBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamBasic` | — | `team_id` → `teamId`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
+| `yahoo_playbook_team_social_share` / `yahooPlaybookTeamSocialShare` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamSocialShare` | — | `team_id` → `teamId` | `parse_yahoo_list` | — |
+| `yahoo_playbook_tennis_match` / `yahooPlaybookTennisMatch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTennisMatch` | — | `game_id` → `gameId` | `parse_yahoo_list` | — |
+| `yahoo_player_basic` / `yahooPlayerBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerBasic` | — | `league`, `player_id` → `playerId` | `parse_yahoo_list` | — |
+| `yahoo_player_career_stats` / `yahooPlayerCareerStats` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerCareerStats` | — | `player_id` → `playerId`, `season_phases` → `seasonPhases`, `football_stat_ids` → `footballStatIds`, `basketball_stat_ids` → `basketballStatIds`, `baseball_stat_ids` → `baseballStatIds`, `hockey_stat_ids` → `hockeyStatIds`, `soccer_stat_ids` → `soccerStatIds` | `parse_yahoo_list` | — |
+| `yahoo_player_game_log` / `yahooPlayerGameLog` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerGameLog` | — | `player_id` → `playerId`, `count`, `seasons`, `season_phases` → `seasonPhases`, `football_stat_ids` → `footballStatIds`, `basketball_stat_ids` → `basketballStatIds`, `baseball_stat_ids` → `baseballStatIds`, `hockey_stat_ids` → `hockeyStatIds`, `soccer_stat_ids` → `soccerStatIds` | `parse_yahoo_list` | — |
+| `yahoo_player_props` / `yahooPlayerProps` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerProps` | — | `player_id` → `playerId` | `parse_yahoo_list` | — |
+| `yahoo_player_search` / `yahooPlayerSearch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSearch` | — | `league`, `name`, `on_active_roster_only` → `onActiveRosterOnly`, `nfl_position_id` → `nflPositionId`, `nba_position_id` → `nbaPositionId`, `mlb_position_id` → `mlbPositionId`, `nhl_position_id` → `nhlPositionId` | `parse_yahoo_list` | — |
+| `yahoo_player_season_stats` / `yahooPlayerSeasonStats` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSeasonStats` | — | `player_id` → `playerId`, `seasons`, `season_phases` → `seasonPhases`, `football_stat_ids` → `footballStatIds`, `football_cut_type_groups` → `footballCutTypeGroups`, `basketball_stat_ids` → `basketballStatIds`, `basketball_cut_type_groups` → `basketballCutTypeGroups`, `baseball_stat_ids` → `baseballStatIds`, `baseball_cut_type_groups` → `baseballCutTypeGroups`, `hockey_stat_ids` → `hockeyStatIds`, `hockey_cut_type_groups` → `hockeyCutTypeGroups`, `group_by_season_phase` → `groupBySeasonPhase`, `use_player_unique_id` → `usePlayerUniqueId` | `parse_yahoo_list` | — |
+| `yahoo_playoff_bracket` / `yahooPlayoffBracket` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffBracket` | — | `league`, `season`, `tournament`, `type`, `playoff_rounds` → `playoffRounds` | `parse_yahoo_list` | — |
+| `yahoo_playoff_series_game` / `yahooPlayoffSeriesGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffSeriesGame` | — | `game_id` → `gameId` | `parse_yahoo_list` | — |
+| `yahoo_polymarket_game` / `yahooPolymarketGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/polymarketGame` | — | `game_id` → `gameId` | `parse_yahoo_list` | — |
+| `yahoo_racing_schedule` / `yahooRacingSchedule` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/racingSchedule` | — | `league`, `season`, `today`, `has_series` → `hasSeries` | `parse_yahoo_list` | — |
+| `yahoo_scoreboard_game` / `yahooScoreboardGame` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/scoreboardGame` | — | `game_id` → `gameId`, `season`, `season_phase` → `seasonPhase`, `stat_leader_count` → `statLeaderCount`, `single_stat_leader` → `singleStatLeader`, `bet_event_state` → `betEventState` | `parse_yahoo_list` | — |
+| `yahoo_season_stats_football_defense_ncaaf` / `yahooSeasonStatsFootballDefenseNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballDefenseNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_stats_football_kicking_ncaaf` / `yahooSeasonStatsFootballKickingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballKickingNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_stats_football_passing_ncaaf` / `yahooSeasonStatsFootballPassingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPassingNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_stats_football_punting_ncaaf` / `yahooSeasonStatsFootballPuntingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPuntingNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_stats_football_receiving_ncaaf` / `yahooSeasonStatsFootballReceivingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReceivingNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_stats_football_returns_ncaaf` / `yahooSeasonStatsFootballReturnsNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReturnsNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_stats_football_rushing_ncaaf` / `yahooSeasonStatsFootballRushingNcaaf` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballRushingNcaaf` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_defense` / `yahooSeasonTeamStatsFootballDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballDefense` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_kicking` / `yahooSeasonTeamStatsFootballKicking` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKicking` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_kickoffs` / `yahooSeasonTeamStatsFootballKickoffs` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKickoffs` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_offense` / `yahooSeasonTeamStatsFootballOffense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballOffense` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_passing` / `yahooSeasonTeamStatsFootballPassing` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassing` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_passing_defense` / `yahooSeasonTeamStatsFootballPassingDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassingDefense` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_punting` / `yahooSeasonTeamStatsFootballPunting` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPunting` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_receiving` / `yahooSeasonTeamStatsFootballReceiving` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceiving` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_receiving_defense` / `yahooSeasonTeamStatsFootballReceivingDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_returns` / `yahooSeasonTeamStatsFootballReturns` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReturns` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_rushing` / `yahooSeasonTeamStatsFootballRushing` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushing` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_season_team_stats_football_rushing_defense` / `yahooSeasonTeamStatsFootballRushingDefense` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense` | — | `season`, `league`, `league_structure` → `leagueStructure`, `count`, `sort_stat_id` → `sortStatId` | `parse_yahoo_stats` | — |
+| `yahoo_team_injuries` / `yahooTeamInjuries` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamInjuries` | — | `team_id` → `teamId` | `parse_yahoo_list` | — |
+| `yahoo_team_playoff_series` / `yahooTeamPlayoffSeries` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamPlayoffSeries` | — | `team_id` → `teamId`, `season` | `parse_yahoo_list` | — |
+| `yahoo_team_roster` / `yahooTeamRoster` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamRoster` | — | `team_id` → `teamId`, `player_image_height` → `playerImageHeight`, `player_image_width` → `playerImageWidth` | `parse_yahoo_list` | — |
+| `yahoo_team_schedule_by_season` / `yahooTeamScheduleBySeason` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamScheduleBySeason` | — | `season`, `team_id` → `teamId` | `parse_yahoo_list` | — |
+| `yahoo_team_search` / `yahooTeamSearch` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamSearch` | — | `name`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
+| `yahoo_team_stats_leaders_v2` / `yahooTeamStatsLeadersV2` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamStatsLeadersV2` | — | `league`, `team_id` → `teamId`, `count`, `season`, `baseball_cut_type` → `baseballCutType`, `qualified`, `include_team_stats` → `includeTeamStats`, `include_player_stats` → `includePlayerStats`, `is_baseball` → `isBaseball` | `parse_yahoo_stats` | — |
+| `yahoo_team_transactions` / `yahooTeamTransactions` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamTransactions` | — | `team_id` → `teamId` | `parse_yahoo_list` | — |
+| `yahoo_teams_basic` / `yahooTeamsBasic` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamsBasic` | — | `team_ids` → `teamIds`, `image_height` → `imageHeight`, `image_width` → `imageWidth` | `parse_yahoo_list` | — |
+| `yahoo_tennis_matches_by_date` / `yahooTennisMatchesByDate` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisMatchesByDate` | — | `tournament_id` → `tournamentId`, `season`, `date` | `parse_yahoo_list` | — |
+| `yahoo_tennis_tournament` / `yahooTennisTournament` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournament` | — | `tournament_id` → `tournamentId`, `season` | `parse_yahoo_list` | — |
+| `yahoo_tennis_tournaments` / `yahooTennisTournaments` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournaments` | — | `league_id` → `leagueId`, `match_type` → `matchType`, `season` | `parse_yahoo_list` | — |
+| `yahoo_tennis_tournaments_by_date` / `yahooTennisTournamentsByDate` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournamentsByDate` | — | `season`, `date` | `parse_yahoo_list` | — |
+| `yahoo_trending_event_ids` / `yahooTrendingEventIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingEventIds` | — | `count`, `league`, `date_flip_offset` → `dateFlipOffset` | `parse_yahoo_list` | — |
+| `yahoo_trending_game_ids` / `yahooTrendingGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingGameIds` | — | `count`, `league`, `date_flip_offset` → `dateFlipOffset`, `dates` | `parse_yahoo_list` | — |
+
+### Returns — `yahoo_alias` / `yahooAlias`
+
+| col_name | type | description |
+|---|---|---|
+| `page_type` | character |  |
+| `league_short_name` | character |  |
+| `league_display_name` | character |  |
+| `entity_type` | character |  |
+| `subpage_translation` | character |  |
+| `entity_alias` | character |  |
+| `subpage_alias` | character |  |
+| `hotlist_data_desktop_space_id` | character |  |
+| `hotlist_data_tablet_space_id` | character |  |
+| `hotlist_data_mobile_space_id` | character |  |
+| `entity_list_id_desktop_list_id` | character |  |
+| `entity_list_id_mobile_list_id` | character |  |
+| `entity_list_id_tablet_list_id` | character |  |
+| `game` | character |  |
+| `match` | character |  |
+| `race` | character |  |
+| `league` | character |  |
+| `team` | character |  |
+| `golf_tournament` | character |  |
+| `tennis_tournament` | character |  |
+| `player` | character |  |
 
 ### Returns — `yahoo_article_list_card_players` / `yahooArticleListCardPlayers`
 
@@ -247,8 +275,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_team_id` | character |  |
 | `home_team_primary_color` | character |  |
 | `home_team_display_name` | character |  |
-| `active_prop_bets` | list |  |
-| `game_props` | list |  |
+| `active_prop_bets` | character |  |
+| `game_props` | character |  |
 
 ### Returns — `yahoo_game_stats_leaders` / `yahooGameStatsLeaders`
 
@@ -268,16 +296,16 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `league_football_team_season_stats9` | character |  |
 | `league_football_team_season_stats10` | character |  |
 | `league_football_team_season_stats11` | character |  |
-| `game_leader_stats0` | list |  |
-| `game_leader_stats1` | list |  |
-| `game_leader_stats2` | list |  |
-| `game_leader_stats3` | list |  |
+| `game_leader_stats0` | character |  |
+| `game_leader_stats1` | character |  |
+| `game_leader_stats2` | character |  |
+| `game_leader_stats3` | character |  |
 | `away_team_game_stats0_stats` | character |  |
 | `away_team_game_stats1_stats` | character |  |
 | `home_team_game_stats0_stats` | character |  |
 | `home_team_game_stats1_stats` | character |  |
-| `home_team_lineup` | list |  |
-| `away_team_lineup` | list |  |
+| `home_team_lineup` | character |  |
+| `away_team_lineup` | character |  |
 | `away_team_id` | character |  |
 | `away_team_full_name` | character |  |
 | `away_team_team_id` | character |  |
@@ -352,15 +380,15 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `end_date` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
-| `player_tournament_stats` | list |  |
+| `player_tournament_stats` | character |  |
 | `purse` | character |  |
 | `major` | logical |  |
 | `venue_display_name` | character |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |
-| `par` | numeric |  |
-| `yardage` | numeric |  |
+| `par` | integer |  |
+| `yardage` | integer |  |
 
 ### Returns — `yahoo_golf_tournaments_basic` / `yahooGolfTournamentsBasic`
 
@@ -370,9 +398,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `end_date` | character |  |
-| `season` | numeric |  |
-| `clubs` | list |  |
-| `courses` | list |  |
+| `season` | integer |  |
+| `clubs` | character |  |
+| `courses` | character |  |
 | `name` | character |  |
 | `status` | character |  |
 | `alias_url` | character |  |
@@ -388,7 +416,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `conferences` | list |  |
+| `conferences` | character |  |
 
 ### Returns — `yahoo_league_filters_data` / `yahooLeagueFiltersData`
 
@@ -399,24 +427,24 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `current_league_day` | list |  |
-| `teams` | list |  |
-| `current_week` | numeric |  |
+| `current_league_day` | character |  |
+| `teams` | character |  |
+| `current_week` | integer |  |
 | `current_season_phase` | character |  |
 | `current_game_season_phase` | character |  |
-| `current_season` | numeric |  |
-| `current_league_season` | list |  |
-| `league_seasons` | list |  |
-| `league_weeks` | list |  |
-| `current_season_league_weeks` | list |  |
-| `divisions` | list |  |
-| `conferences` | list |  |
+| `current_season` | integer |  |
+| `current_league_season` | character |  |
+| `league_seasons` | character |  |
+| `league_weeks` | character |  |
+| `current_season_league_weeks` | character |  |
+| `divisions` | character |  |
+| `conferences` | character |  |
 
 ### Returns — `yahoo_league_future_odds` / `yahooLeagueFutureOdds`
 
 | col_name | type | description |
 |---|---|---|
-| `bets` | list |  |
+| `bets` | character |  |
 | `league` | character |  |
 
 ### Returns — `yahoo_league_game_ids` / `yahooLeagueGameIds`
@@ -425,8 +453,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `alias_url` | character |  |
 | `alias_navigation_links` | character |  |
-| `current_week` | numeric |  |
-| `games` | list |  |
+| `current_week` | integer |  |
+| `games` | character |  |
 
 ### Returns — `yahoo_league_game_ids_by_date` / `yahooLeagueGameIdsByDate`
 
@@ -435,10 +463,10 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `display_short` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `current_week` | numeric |  |
+| `current_week` | integer |  |
 | `current_game_season_phase` | character |  |
-| `current_league_season` | list |  |
-| `games` | list |  |
+| `current_league_season` | character |  |
+| `games` | character |  |
 
 ### Returns — `yahoo_league_info` / `yahooLeagueInfo`
 
@@ -453,20 +481,30 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `teams` | list |  |
+| `team_id` | character |  |
+| `nickname` | character |  |
+| `full_name` | character |  |
+| `location` | character |  |
+| `display_name` | character |  |
+| `primary_color` | character |  |
+| `abbreviation` | character |  |
+| `alias` | character |  |
+| `team_logo_white` | character |  |
+| `team_logo` | character |  |
+| `players` | character |  |
 
 ### Returns — `yahoo_league_names` / `yahooLeagueNames`
 
 | col_name | type | description |
 |---|---|---|
-| `league_id` | numeric |  |
+| `league_id` | integer |  |
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
 | `display_short` | character |  |
 | `display_abbr` | character |  |
-| `current_season` | numeric |  |
-| `league_seasons` | list |  |
+| `current_season` | integer |  |
+| `league_seasons` | character |  |
 | `alias_url` | character |  |
 | `alias_path` | character |  |
 | `alias_subpages` | character |  |
@@ -477,10 +515,10 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `sport_name` | character |  |
 | `current_season_phase` | character |  |
-| `current_league_season` | list |  |
-| `divisions` | list |  |
-| `teams` | list |  |
-| `conferences` | list |  |
+| `current_league_season` | character |  |
+| `divisions` | character |  |
+| `teams` | character |  |
+| `conferences` | character |  |
 
 ### Returns — `yahoo_league_stats_by_team` / `yahooLeagueStatsByTeam`
 
@@ -491,7 +529,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `football_stats` | list |  |
+| `football_stats` | character |  |
 
 ### Returns — `yahoo_league_stats_individual` / `yahooLeagueStatsIndividual`
 
@@ -502,7 +540,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `football_stats` | list |  |
+| `football_stats` | character |  |
 
 ### Returns — `yahoo_league_stats_weekly` / `yahooLeagueStatsWeekly`
 
@@ -513,21 +551,21 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `football_stats` | list |  |
+| `football_stats` | character |  |
 
 ### Returns — `yahoo_league_team_ids` / `yahooLeagueTeamIds`
 
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `teams` | list |  |
+| `teams` | character |  |
 
 ### Returns — `yahoo_league_teams` / `yahooLeagueTeams`
 
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `teams` | list |  |
+| `teams` | character |  |
 
 ### Returns — `yahoo_leagues_season_states` / `yahooLeaguesSeasonStates`
 
@@ -538,16 +576,16 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `full_name` | character |  |
 | `display_short` | character |  |
 | `current_season_phase` | character |  |
-| `current_week` | numeric |  |
-| `current_season` | numeric |  |
-| `stats_season` | list |  |
+| `current_week` | integer |  |
+| `current_season` | integer |  |
+| `stats_season` | character |  |
 | `sport_name` | character |  |
-| `league_weeks` | list |  |
+| `league_weeks` | character |  |
 | `alias_url` | character |  |
 | `alias_navigation_links` | character |  |
-| `league_seasons` | list |  |
-| `bye_weeks` | list |  |
-| `divisions` | list |  |
+| `league_seasons` | character |  |
+| `bye_weeks` | character |  |
+| `divisions` | character |  |
 
 ### Returns — `yahoo_module_game` / `yahooModuleGame`
 
@@ -599,14 +637,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_team_standings` | character |  |
 | `home_team_rank_polls` | character |  |
 | `home_team_playoff_seeds` | character |  |
-| `away_score` | numeric |  |
-| `home_score` | numeric |  |
+| `away_score` | integer |  |
+| `home_score` | integer |  |
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `if_necessary` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
-| `season` | numeric |  |
+| `season` | integer |  |
 | `season_phase` | character |  |
 | `time_left` | character |  |
 | `tournament_id` | character |  |
@@ -614,14 +652,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `game_ticket_price` | character |  |
 | `playoff_series` | character |  |
 | `winning_team_id` | character |  |
-| `broadcast_channels` | list |  |
+| `broadcast_channels` | character |  |
 | `news_break_subtext` | character |  |
 | `news_break_title` | character |  |
 | `news_break_url` | character |  |
 | `news_break_uuid` | character |  |
 | `brief` | character |  |
 | `event_extended_display_name` | character |  |
-| `bets` | list |  |
+| `bets` | character |  |
 | `venue_display_name` | character |  |
 | `venue_city` | character |  |
 | `venue_cover_type` | character |  |
@@ -630,18 +668,18 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `venue_country` | character |  |
 | `tv_coverage` | character |  |
 | `weather` | character |  |
-| `away_line_score` | list |  |
+| `away_line_score` | character |  |
 | `current_period_period` | character |  |
 | `field_position` | character |  |
 | `field_position_display_name` | character |  |
-| `home_line_score` | list |  |
-| `home_timeouts_remaining` | numeric |  |
-| `away_timeouts_remaining` | numeric |  |
-| `last_play` | list |  |
-| `game_stat_leaders` | list |  |
+| `home_line_score` | character |  |
+| `home_timeouts_remaining` | integer |  |
+| `away_timeouts_remaining` | integer |  |
+| `last_play` | character |  |
+| `game_stat_leaders` | character |  |
 | `team_possessing_ball` | character |  |
-| `recap_videos` | list |  |
-| `week` | numeric |  |
+| `recap_videos` | character |  |
+| `week` | integer |  |
 
 ### Returns — `yahoo_motorsport_standings` / `yahooMotorsportStandings`
 
@@ -649,21 +687,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `name` | character |  |
 | `full_name` | character |  |
-| `current_league_season` | list |  |
+| `current_league_season` | character |  |
 
 ### Returns — `yahoo_nascar_drivers` / `yahooNascarDrivers`
 
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `players` | list |  |
-
-### Returns — `yahoo_nav_dropdown_tray` / `yahooNavDropdownTray`
-
-| col_name | type | description |
-|---|---|---|
-| `short_name` | character |  |
-| `teams` | list |  |
+| `players` | character |  |
 
 ### Returns — `yahoo_oly_medal_count` / `yahooOlyMedalCount`
 
@@ -673,15 +704,15 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_display_name` | character |  |
 | `start_date` | character |  |
 | `end_date` | character |  |
-| `season` | numeric |  |
+| `season` | integer |  |
 | `alias` | character |  |
-| `olympic_team` | list |  |
+| `olympic_team` | character |  |
 
 ### Returns — `yahoo_oly_seasons` / `yahooOlySeasons`
 
 | col_name | type | description |
 |---|---|---|
-| `season` | numeric |  |
+| `season` | integer |  |
 | `display_name` | character |  |
 | `type` | character |  |
 
@@ -689,24 +720,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `ncaaf_games` | list |  |
-| `conferences` | list |  |
-
-### Returns — `yahoo_playbook_boxscore` / `yahooPlaybookBoxscore`
-
-| col_name | type | description |
-|---|---|---|
-| `position_id` | character |  |
-| `name` | character |  |
-| `abbreviation` | character |  |
-
-### Returns — `yahoo_playbook_boxscore_poll` / `yahooPlaybookBoxscorePoll`
-
-| col_name | type | description |
-|---|---|---|
-| `position_id` | character |  |
-| `name` | character |  |
-| `abbreviation` | character |  |
+| `ncaaf_games` | character |  |
+| `conferences` | character |  |
 
 ### Returns — `yahoo_playbook_boxscore_social_share` / `yahooPlaybookBoxscoreSocialShare`
 
@@ -774,26 +789,26 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_players` | character |  |
 | `home_team_rank_polls` | character |  |
 | `home_team_playoff_seeds` | character |  |
-| `away_score` | numeric |  |
-| `home_score` | numeric |  |
+| `away_score` | integer |  |
+| `home_score` | integer |  |
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `if_necessary` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
-| `season` | numeric |  |
+| `season` | integer |  |
 | `season_phase` | character |  |
 | `time_left` | character |  |
 | `tournament_id` | character |  |
 | `playoff_series` | character |  |
 | `winning_team_id` | character |  |
-| `broadcast_channels` | list |  |
+| `broadcast_channels` | character |  |
 | `news_break_subtext` | character |  |
 | `news_break_title` | character |  |
 | `news_break_url` | character |  |
 | `news_break_uuid` | character |  |
 | `brief` | character |  |
-| `bets` | list |  |
+| `bets` | character |  |
 | `venue_display_name` | character |  |
 | `venue_city` | character |  |
 | `venue_cover_type` | character |  |
@@ -802,34 +817,34 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `venue_country` | character |  |
 | `tv_coverage` | character |  |
 | `weather` | character |  |
-| `away_line_score` | list |  |
+| `away_line_score` | character |  |
 | `current_period_period` | character |  |
 | `field_position` | character |  |
 | `field_position_display_name` | character |  |
-| `home_line_score` | list |  |
-| `home_timeouts_remaining` | numeric |  |
-| `away_timeouts_remaining` | numeric |  |
-| `last_play` | list |  |
-| `game_stat_leaders` | list |  |
+| `home_line_score` | character |  |
+| `home_timeouts_remaining` | integer |  |
+| `away_timeouts_remaining` | integer |  |
+| `last_play` | character |  |
+| `game_stat_leaders` | character |  |
 | `team_possessing_ball` | character |  |
-| `recap_videos` | list |  |
-| `week` | numeric |  |
-| `play_by_play` | list |  |
+| `recap_videos` | character |  |
+| `week` | integer |  |
+| `play_by_play` | character |  |
 
 ### Returns — `yahoo_playbook_game_odds_poll` / `yahooPlaybookGameOddsPoll`
 
 | col_name | type | description |
 |---|---|---|
 | `game_id` | character |  |
-| `bets` | list |  |
-| `partial_game_bets` | list |  |
+| `bets` | character |  |
+| `partial_game_bets` | character |  |
 
 ### Returns — `yahoo_playbook_league_odds` / `yahooPlaybookLeagueOdds`
 
 | col_name | type | description |
 |---|---|---|
-| `ncaaf_games` | list |  |
-| `conferences` | list |  |
+| `ncaaf_games` | character |  |
+| `conferences` | character |  |
 
 ### Returns — `yahoo_playbook_player` / `yahooPlaybookPlayer`
 
@@ -847,14 +862,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `birth_city` | character |  |
 | `birth_country` | character |  |
 | `birth_date` | character |  |
-| `height` | numeric |  |
+| `height` | integer |  |
 | `display_height` | character |  |
-| `weight` | numeric |  |
+| `weight` | integer |  |
 | `status` | character |  |
 | `active` | logical |  |
 | `suggested_headshot` | character |  |
 | `uniform_number` | character |  |
-| `positions` | list |  |
+| `positions` | character |  |
 | `team_id` | character |  |
 | `team_team_id` | character |  |
 | `team_display_name` | character |  |
@@ -865,22 +880,22 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `team_primary_color` | character |  |
 | `team_secondary_color` | character |  |
 | `draft_position` | character |  |
-| `player_seasons` | list |  |
-| `header_stats_passing` | list |  |
-| `season_stats_passing` | list |  |
-| `header_stats_rushing` | list |  |
-| `season_stats_rushing` | list |  |
-| `header_stats_receiving` | list |  |
-| `season_stats_receiving` | list |  |
-| `header_stats_defense` | list |  |
-| `season_stats_defense` | list |  |
-| `header_stats_kicking` | list |  |
-| `season_stats_kicking` | list |  |
-| `header_stats_punting` | list |  |
-| `season_stats_punting` | list |  |
-| `earnings` | list |  |
+| `player_seasons` | character |  |
+| `header_stats_passing` | character |  |
+| `season_stats_passing` | character |  |
+| `header_stats_rushing` | character |  |
+| `season_stats_rushing` | character |  |
+| `header_stats_receiving` | character |  |
+| `season_stats_receiving` | character |  |
+| `header_stats_defense` | character |  |
+| `season_stats_defense` | character |  |
+| `header_stats_kicking` | character |  |
+| `season_stats_kicking` | character |  |
+| `header_stats_punting` | character |  |
+| `season_stats_punting` | character |  |
+| `earnings` | character |  |
 | `first_year` | character |  |
-| `last_year` | numeric |  |
+| `last_year` | integer |  |
 | `injury` | character |  |
 
 ### Returns — `yahoo_playbook_player_social_share` / `yahooPlaybookPlayerSocialShare`
@@ -894,57 +909,6 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `team_secondary_color` | character |  |
 | `team_league` | character |  |
 
-### Returns — `yahoo_playbook_team` / `yahooPlaybookTeam`
-
-| col_name | type | description |
-|---|---|---|
-| `sport_sport_id` | character |  |
-| `sport_name` | character |  |
-| `league_name` | character |  |
-| `league_short_name` | character |  |
-| `league_current_season_phase` | character |  |
-| `team_id` | character |  |
-| `conference_id` | numeric |  |
-| `full_name` | character |  |
-| `display_name` | character |  |
-| `location` | character |  |
-| `nickname` | character |  |
-| `primary_color` | character |  |
-| `secondary_color` | character |  |
-| `team_logo_white_url` | character |  |
-| `team_logo_url` | character |  |
-| `alias_navigation_links` | character |  |
-| `alias_url` | character |  |
-| `alias_path` | character |  |
-| `last_games` | list |  |
-| `next_games` | list |  |
-| `division_name` | character |  |
-| `division_teams` | character |  |
-| `conference_short_name` | character |  |
-| `conference_name` | character |  |
-| `conference_conference_id` | character |  |
-| `conference_team_standings` | character |  |
-| `conference_abbreviation` | character |  |
-| `team_standings_team` | character |  |
-| `team_standings_conference_id` | character |  |
-| `team_standings_conference` | character |  |
-| `team_standings_display_name` | character |  |
-| `team_standings_full_name` | character |  |
-| `team_standings_position` | character |  |
-| `team_standings_sequence` | character |  |
-| `team_standings_team_record` | character |  |
-| `team_standings_conference_position` | character |  |
-| `team_standings_points_for` | character |  |
-| `team_standings_points_against` | character |  |
-| `team_standings_clinched_playoff` | character |  |
-| `team_standings_clinched_division` | character |  |
-| `team_standings_streak_display` | character |  |
-| `gametime_ticket_url` | character |  |
-| `football_team_season_stats` | list |  |
-| `football_player_season_stats` | list |  |
-| `injured_players` | list |  |
-| `transactions` | list |  |
-
 ### Returns — `yahoo_playbook_team_basic` / `yahooPlaybookTeamBasic`
 
 | col_name | type | description |
@@ -955,7 +919,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `league_short_name` | character |  |
 | `league_current_season_phase` | character |  |
 | `team_id` | character |  |
-| `conference_id` | numeric |  |
+| `conference_id` | integer |  |
 | `full_name` | character |  |
 | `display_name` | character |  |
 | `location` | character |  |
@@ -967,8 +931,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_navigation_links` | character |  |
 | `alias_url` | character |  |
 | `alias_path` | character |  |
-| `last_games` | list |  |
-| `next_games` | list |  |
+| `last_games` | character |  |
+| `next_games` | character |  |
 | `division_name` | character |  |
 | `conference_short_name` | character |  |
 | `conference_name` | character |  |
@@ -1000,32 +964,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `team_logo_url` | character |  |
 | `team_logo_white_url` | character |  |
 
-### Returns — `yahoo_player_basic` / `yahooPlayerBasic`
-
-| col_name | type | description |
-|---|---|---|
-| `alias_path` | character |  |
-| `alias_lang` | character |  |
-| `alias_url` | character |  |
-| `alias_domain` | character |  |
-| `display_name` | character |  |
-| `first_name` | character |  |
-| `last_name` | character |  |
-| `player_id` | character |  |
-| `positions` | list |  |
-| `team_display_name` | character |  |
-| `team_team_id` | character |  |
-| `uniform_number` | character |  |
-| `injury` | character |  |
-
 ### Returns — `yahoo_player_career_stats` / `yahooPlayerCareerStats`
 
 | col_name | type | description |
 |---|---|---|
-| `positions` | list |  |
-| `stats_by_season` | list |  |
-| `total_stats` | list |  |
-| `career_stats` | list |  |
+| `positions` | character |  |
+| `stats_by_season` | character |  |
+| `total_stats` | character |  |
+| `career_stats` | character |  |
 
 ### Returns — `yahoo_player_game_log` / `yahooPlayerGameLog`
 
@@ -1033,16 +979,16 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `player_id` | character |  |
 | `active` | logical |  |
-| `positions` | list |  |
+| `positions` | character |  |
 | `team_id` | character |  |
-| `player_game_stats` | list |  |
-| `player_season_stats` | list |  |
+| `player_game_stats` | character |  |
+| `player_season_stats` | character |  |
 
 ### Returns — `yahoo_player_props` / `yahooPlayerProps`
 
 | col_name | type | description |
 |---|---|---|
-| `games` | list |  |
+| `games` | character |  |
 | `player_id` | character |  |
 | `display_name` | character |  |
 
@@ -1050,7 +996,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `players` | list |  |
+| `player_id` | character |  |
+| `active` | character |  |
+| `alias` | character |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `display_name` | character |  |
+| `suggested_headshot` | character |  |
+| `team` | character |  |
 
 ### Returns — `yahoo_player_season_stats` / `yahooPlayerSeasonStats`
 
@@ -1058,15 +1011,23 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `player_id` | character |  |
 | `active` | logical |  |
-| `positions` | list |  |
+| `positions` | character |  |
 | `team_id` | character |  |
-| `player_season_stats` | list |  |
+| `player_season_stats` | character |  |
 
 ### Returns — `yahoo_playoff_bracket` / `yahooPlayoffBracket`
 
 | col_name | type | description |
 |---|---|---|
-| `bracket_slots` | list |  |
+| `conference` | character |  |
+| `id` | character |  |
+| `location` | character |  |
+| `playoff_round` | character |  |
+| `display_order` | character |  |
+| `season` | character |  |
+| `max_games` | character |  |
+| `winner_bracket_slot_id` | character |  |
+| `playoff_series` | character |  |
 
 ### Returns — `yahoo_playoff_series_game` / `yahooPlayoffSeriesGame`
 
@@ -1086,8 +1047,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `league_seasons` | list |  |
-| `current_season` | numeric |  |
+| `league_seasons` | character |  |
+| `current_season` | integer |  |
 
 ### Returns — `yahoo_scoreboard_game` / `yahooScoreboardGame`
 
@@ -1102,7 +1063,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `league_sport` | character |  |
 | `league_alias` | character |  |
 | `league_league_logo` | character |  |
-| `partner_url` | list |  |
+| `partner_url` | character |  |
 | `alias_url` | character |  |
 | `away_team_id` | character |  |
 | `away_team_full_name` | character |  |
@@ -1132,22 +1093,22 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_record` | character |  |
 | `current_period_overtime` | character |  |
 | `current_period_short_display_name` | character |  |
-| `away_score` | numeric |  |
-| `home_score` | numeric |  |
+| `away_score` | integer |  |
+| `home_score` | integer |  |
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `if_necessary` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
 | `full_status_display_name` | character |  |
-| `season` | numeric |  |
+| `season` | integer |  |
 | `season_phase` | character |  |
 | `time_left` | character |  |
 | `tournament_id` | character |  |
 | `display_result` | character |  |
 | `playoff_series` | character |  |
 | `winning_team_id` | character |  |
-| `broadcast_channels` | list |  |
+| `broadcast_channels` | character |  |
 | `news_break_subtext` | character |  |
 | `news_break_title` | character |  |
 | `news_break_url` | character |  |
@@ -1156,190 +1117,19 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `brief` | character |  |
 | `event_extended_display_name` | character |  |
 | `special_event_type` | character |  |
-| `bets` | list |  |
+| `bets` | character |  |
 | `venue_display_name` | character |  |
 | `weather` | character |  |
 | `gametime_ticket_url` | character |  |
 | `game_ticket_price` | character |  |
-| `teams` | list |  |
+| `teams` | character |  |
 | `field_position` | character |  |
 | `field_position_display_name` | character |  |
 | `team_possessing_ball` | character |  |
-| `week` | numeric |  |
-| `passing_leader` | list |  |
-| `rushing_leader` | list |  |
-| `receiving_leader` | list |  |
-
-### Returns — `yahoo_season_stats_football_defense_ncaaf` / `yahooSeasonStatsFootballDefenseNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_stats_football_kicking_ncaaf` / `yahooSeasonStatsFootballKickingNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_stats_football_passing_ncaaf` / `yahooSeasonStatsFootballPassingNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_stats_football_punting_ncaaf` / `yahooSeasonStatsFootballPuntingNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_stats_football_receiving_ncaaf` / `yahooSeasonStatsFootballReceivingNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_stats_football_returns_ncaaf` / `yahooSeasonStatsFootballReturnsNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_stats_football_rushing_ncaaf` / `yahooSeasonStatsFootballRushingNcaaf`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_defense` / `yahooSeasonTeamStatsFootballDefense`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_kicking` / `yahooSeasonTeamStatsFootballKicking`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_kickoffs` / `yahooSeasonTeamStatsFootballKickoffs`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_offense` / `yahooSeasonTeamStatsFootballOffense`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_passing` / `yahooSeasonTeamStatsFootballPassing`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_passing_defense` / `yahooSeasonTeamStatsFootballPassingDefense`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_punting` / `yahooSeasonTeamStatsFootballPunting`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_receiving` / `yahooSeasonTeamStatsFootballReceiving`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_receiving_defense` / `yahooSeasonTeamStatsFootballReceivingDefense`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_returns` / `yahooSeasonTeamStatsFootballReturns`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_rushing` / `yahooSeasonTeamStatsFootballRushing`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
-
-### Returns — `yahoo_season_team_stats_football_rushing_defense` / `yahooSeasonTeamStatsFootballRushingDefense`
-
-| col_name | type | description |
-|---|---|---|
-| `stat_id` | character |  |
-| `display_name` | character |  |
-| `abbreviation` | character |  |
-| `sort_order` | character |  |
+| `week` | integer |  |
+| `passing_leader` | character |  |
+| `rushing_leader` | character |  |
+| `receiving_leader` | character |  |
 
 ### Returns — `yahoo_team_injuries` / `yahooTeamInjuries`
 
@@ -1356,20 +1146,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_url` | character |  |
 | `team_logo_white_url` | character |  |
 | `team_logo_url` | character |  |
-| `players` | list |  |
-
-### Returns — `yahoo_team_playoff_series` / `yahooTeamPlayoffSeries`
-
-| col_name | type | description |
-|---|---|---|
-| `playoff_series` | list |  |
+| `players` | character |  |
 
 ### Returns — `yahoo_team_roster` / `yahooTeamRoster`
 
 | col_name | type | description |
 |---|---|---|
 | `league_current_season` | character |  |
-| `roster` | list |  |
+| `roster` | character |  |
 
 ### Returns — `yahoo_team_schedule_by_season` / `yahooTeamScheduleBySeason`
 
@@ -1380,9 +1164,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `gametime_ticket_url` | character |  |
-| `bye_weeks` | list |  |
-| `games` | list |  |
-| `leagues` | list |  |
+| `bye_weeks` | character |  |
+| `games` | character |  |
+| `leagues` | character |  |
 | `full_name` | character |  |
 | `abbreviation` | character |  |
 | `nickname` | character |  |
@@ -1425,7 +1209,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_domain` | character |  |
 | `team_logo_white_url` | character |  |
 | `team_logo_url` | character |  |
-| `transactions` | list |  |
+| `transactions` | character |  |
 
 ### Returns — `yahoo_teams_basic` / `yahooTeamsBasic`
 
@@ -1454,9 +1238,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `tournament_status` | character |  |
 | `start_time` | character |  |
 | `end_time` | character |  |
-| `events` | list |  |
-| `champions` | list |  |
-| `previous_champions` | list |  |
+| `events` | character |  |
+| `champions` | character |  |
+| `previous_champions` | character |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |
@@ -1469,9 +1253,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `tournament_status` | character |  |
 | `start_time` | character |  |
 | `end_time` | character |  |
-| `events` | list |  |
-| `champions` | list |  |
-| `previous_champions` | list |  |
+| `events` | character |  |
+| `champions` | character |  |
+| `previous_champions` | character |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |
@@ -1488,12 +1272,12 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `start_time` | character |  |
 | `end_time` | character |  |
 | `tournament_status` | character |  |
-| `champions` | list |  |
+| `champions` | character |  |
 | `alias_path` | character |  |
 | `alias_lang` | character |  |
 | `alias_url` | character |  |
 | `alias_domain` | character |  |
-| `previous_champions` | list |  |
+| `previous_champions` | character |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |

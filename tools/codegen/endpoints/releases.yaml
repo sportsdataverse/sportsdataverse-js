@@ -1,0 +1,2650 @@
+bases:
+  sdv_releases: https://github.com/sportsdataverse/sportsdataverse-data/releases/download/
+  raw_data: https://raw.githubusercontent.com/sportsdataverse/
+  nflverse: https://github.com/nflverse/nflverse-data/releases/download/
+loaders:
+- fn: load_cfb_pbp
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_pbp/play_by_play_{season}.parquet
+  tag: espn_cfb_pbp
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_ratings
+  league: cfb
+  base: sdv_releases
+  url: cfb_ratings/cfb_ratings_{season}.parquet
+  tag: cfb_ratings
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_recruiting_proj
+  league: cfb
+  base: sdv_releases
+  url: cfb_recruiting_proj/cfb_recruiting_proj_{season}.parquet
+  tag: cfb_recruiting_proj
+  min_season: 2016
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_recruits
+  league: cfb
+  base: sdv_releases
+  url: cfb_recruits/cfb_recruits_{season}.parquet
+  tag: cfb_recruits
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_returning_production
+  league: cfb
+  base: sdv_releases
+  url: cfb_returning_production/cfb_returning_production_{season}.parquet
+  tag: cfb_returning_production
+  min_season: 2005
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_rosters
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_rosters/cfb_rosters_{season}.parquet
+  tag: espn_cfb_rosters
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+  - athlete_id
+- fn: load_cfb_rosters_cfbd
+  league: cfb
+  base: raw_data
+  url: cfbfastR-data/main/rosters/parquet/cfb_rosters_{season}.parquet
+  tag: cfbfastR-data
+  min_season: 2003
+  example_args:
+    seasons: 2024
+- fn: load_cfb_schedule
+  league: cfb
+  base: sdv_releases
+  url: cfb_schedules/cfb_schedules_{season}.parquet
+  tag: cfb_schedules
+  min_season: 2001
+  example_args:
+    seasons: 2024
+- fn: load_cfb_team_info
+  league: cfb
+  base: sdv_releases
+  url: cfb_team_info/cfb_team_info_{season}.parquet
+  tag: cfb_team_info
+  min_season: 2001
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_teams
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_teams/cfb_teams_{season}.parquet
+  tag: espn_cfb_teams
+  min_season: 2001
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_team_portal
+  league: cfb
+  base: sdv_releases
+  url: cfb_team_portal/cfb_team_portal_{season}.parquet
+  tag: cfb_team_portal
+  min_season: 2015
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+  notes: "Portal counts are D-I to D-I moves visible in ESPN rosters (FBS and FCS mixed): an athlete id on a different team's roster the prior season. JUCO and non-D-I arrivals are not counted. Talent points name-join players to the cfb_recruits release, so an unmatched player carries the 0-star default."
+- fn: load_cfb_team_talent
+  league: cfb
+  base: sdv_releases
+  url: cfb_team_talent/cfb_team_talent_{season}.parquet
+  tag: cfb_team_talent
+  min_season: 2005
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_teams_crosswalk
+  league: cfb
+  base: sdv_releases
+  url: cfb_crosswalk/cfb_teams_crosswalk_{season}.parquet
+  tag: cfb_crosswalk
+  min_season: 2014
+  example_args:
+    seasons: 2024
+- fn: load_cfb_schedule_crosswalk
+  league: cfb
+  base: sdv_releases
+  url: cfb_crosswalk/cfb_schedule_crosswalk_{season}.parquet
+  tag: cfb_crosswalk
+  min_season: 2014
+  example_args:
+    seasons: 2024
+# --- ESPN per-game / per-season datasets from the cfb-data python dual-write
+# (backfilled gap-free 2004-2025; play_participants 2014+, power_index 2015+). ---
+- fn: load_cfb_team_box
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_team_box/team_box_{season}.parquet
+  tag: espn_cfb_team_box
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_player_box
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_player_box/player_box_{season}.parquet
+  tag: espn_cfb_player_box
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_drives
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_drives/drives_{season}.parquet
+  tag: espn_cfb_drives
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_play_participants
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_play_participants/play_participants_{season}.parquet
+  tag: espn_cfb_play_participants
+  min_season: 2014
+  example_args:
+    seasons: 2024
+- fn: load_cfb_game_rosters
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_game_rosters/game_rosters_{season}.parquet
+  tag: espn_cfb_game_rosters
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_linescores
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_linescores/linescores_{season}.parquet
+  tag: espn_cfb_linescores
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_betting
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_betting/betting_{season}.parquet
+  tag: espn_cfb_betting
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_fpi_weekly
+  league: cfb
+  base: sdv_releases
+  url: cfb_fpi_weekly/cfb_fpi_weekly_{season}.parquet
+  tag: cfb_fpi_weekly
+  min_season: 2005
+  id_int64:
+  - team_id
+  example_args:
+    seasons: 2024
+- fn: load_cfb_power_index
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_power_index/power_index_{season}.parquet
+  tag: espn_cfb_power_index
+  min_season: 2015
+  id_int64:
+  - team_id
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_team
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_team/adv_team_{season}.parquet
+  tag: espn_cfb_adv_team
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_passing
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_passing/adv_passing_{season}.parquet
+  tag: espn_cfb_adv_passing
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_rushing
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_rushing/adv_rushing_{season}.parquet
+  tag: espn_cfb_adv_rushing
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_receiving
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_receiving/adv_receiving_{season}.parquet
+  tag: espn_cfb_adv_receiving
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_defensive
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_defensive/adv_defensive_{season}.parquet
+  tag: espn_cfb_adv_defensive
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_defensive_players
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_defensive_players/adv_defensive_players_{season}.parquet
+  tag: espn_cfb_adv_defensive_players
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_drives
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_drives/adv_drives_{season}.parquet
+  tag: espn_cfb_adv_drives
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_situational
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_situational/adv_situational_{season}.parquet
+  tag: espn_cfb_adv_situational
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_specialists
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_specialists/adv_specialists_{season}.parquet
+  tag: espn_cfb_adv_specialists
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_adv_turnover
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_turnover/adv_turnover_{season}.parquet
+  tag: espn_cfb_adv_turnover
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_model_pbp
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_model_pbp/model_pbp_{season}.parquet
+  tag: espn_cfb_model_pbp
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_passing
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_passing/cfb_passing_{season}.parquet
+  tag: espn_cfb_passing
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_percentiles
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_percentiles/cfb_percentiles_{season}.parquet
+  tag: espn_cfb_percentiles
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_receiving
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_receiving/cfb_receiving_{season}.parquet
+  tag: espn_cfb_receiving
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_rushing
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_rushing/cfb_rushing_{season}.parquet
+  tag: espn_cfb_rushing
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_team_summaries
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_team_summaries/cfb_team_summaries_{season}.parquet
+  tag: espn_cfb_team_summaries
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_adv_team_gamelog
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_adv_team_gamelog/adv_team_gamelog_{season}.parquet
+  tag: espn_cfb_adv_team_gamelog
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_ratings_weekly
+  league: cfb
+  base: sdv_releases
+  url: cfb_ratings_weekly/cfb_ratings_weekly_{season}.parquet
+  tag: cfb_ratings_weekly
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+- fn: load_cfb_team_summaries_weekly
+  league: cfb
+  base: sdv_releases
+  url: cfb_team_summaries_weekly/cfb_team_summaries_weekly_{season}.parquet
+  tag: cfb_team_summaries_weekly
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  id_int64:
+  - team_id
+# ESPN CFB usage leaderboards + team / coach tendencies (sportsdataverse.football
+# usage_box / tendencies, built by cfbfastR-cfb-data). One asset per season; the
+# coach_careers tag is a single season-less file (no {season} token -> no seasons arg).
+- fn: load_cfb_usage_players
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_players/usage_players_{season}.parquet
+  tag: espn_cfb_usage_players
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  notes: "position_group is null for seasons whose play-by-play carried no participant positions."
+- fn: load_cfb_usage_position_groups
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_position_groups/usage_position_groups_{season}.parquet
+  tag: espn_cfb_usage_position_groups
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  notes: "Needs ESPN play participants: rows exist only for seasons whose play-by-play carried player positions."
+- fn: load_cfb_usage_tackles
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_tackles/usage_tackles_{season}.parquet
+  tag: espn_cfb_usage_tackles
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  notes: "Needs ESPN play participants (tackler / assist ids); a season without them has no rows, and position_group is null when no participant carried a position."
+- fn: load_cfb_usage_position_group_tackles
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_position_group_tackles/usage_position_group_tackles_{season}.parquet
+  tag: espn_cfb_usage_position_group_tackles
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  notes: "Needs ESPN play participants with player positions; a season without them has no rows."
+- fn: load_cfb_usage_teams
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_teams/usage_teams_{season}.parquet
+  tag: espn_cfb_usage_teams
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_usage_drive_scripting
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_drive_scripting/usage_drive_scripting_{season}.parquet
+  tag: espn_cfb_usage_drive_scripting
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_usage_st_kickers
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_st_kickers/usage_st_kickers_{season}.parquet
+  tag: espn_cfb_usage_st_kickers
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_usage_st_punters
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_st_punters/usage_st_punters_{season}.parquet
+  tag: espn_cfb_usage_st_punters
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_usage_st_returners
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_st_returners/usage_st_returners_{season}.parquet
+  tag: espn_cfb_usage_st_returners
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_usage_st_blocks
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_st_blocks/usage_st_blocks_{season}.parquet
+  tag: espn_cfb_usage_st_blocks
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_usage_st_team
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_usage_st_team/usage_st_team_{season}.parquet
+  tag: espn_cfb_usage_st_team
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_team_tendencies
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_team_tendencies/team_tendencies_{season}.parquet
+  tag: espn_cfb_team_tendencies
+  min_season: 2004
+  example_args:
+    seasons: 2024
+- fn: load_cfb_coach_tendencies
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_coach_tendencies/coach_tendencies_{season}.parquet
+  tag: espn_cfb_coach_tendencies
+  min_season: 2004
+  example_args:
+    seasons: 2024
+  notes: "One row per (season, team, head coach). The coach comes from the producer's vendored CFBD coach roster (team-season attribution), so role is always \"HC\"."
+- fn: load_cfb_coach_careers
+  league: cfb
+  base: sdv_releases
+  url: espn_cfb_coach_careers/coach_careers.parquet
+  tag: espn_cfb_coach_careers
+  notes: "One season-less file: every published coach_tendencies season summed per head coach with the rates recomputed (play-weighted, never averaged averages). Careers therefore cover exactly the seasons published under the coach_tendencies tag."
+- fn: load_mbb_pbp
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_pbp/play_by_play_{season}.parquet
+  tag: espn_mens_college_basketball_pbp
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_mbb_player_boxscore
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_player_boxscores/player_box_{season}.parquet
+  tag: espn_mens_college_basketball_player_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_mbb_schedule
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_schedules/mbb_schedule_{season}.parquet
+  tag: espn_mens_college_basketball_schedules
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_mbb_team_boxscore
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_team_boxscores/team_box_{season}.parquet
+  tag: espn_mens_college_basketball_team_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_mbb_ratings
+  league: mbb
+  base: sdv_releases
+  url: mbb_ratings/mbb_ratings_{season}.parquet
+  tag: mbb_ratings
+  min_season: 2006
+  example_args:
+    seasons: 2025
+- fn: load_mbb_player_value
+  league: mbb
+  base: sdv_releases
+  url: mbb_player_value/mbb_player_value_{season}.parquet
+  tag: mbb_player_value
+  min_season: 2006
+  example_args:
+    seasons: 2025
+- fn: load_mlb_re24_matrix
+  league: mlb
+  base: sdv_releases
+  url: mlb_game_state/mlb_re24_matrix_{season}.parquet
+  tag: mlb_game_state
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_we_table
+  league: mlb
+  base: sdv_releases
+  url: mlb_game_state/mlb_we_table_{season}.parquet
+  tag: mlb_game_state
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_wpa
+  league: mlb
+  base: sdv_releases
+  url: mlb_game_state/mlb_wpa_{season}.parquet
+  tag: mlb_game_state
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_pbp
+  league: mlb
+  base: sdv_releases
+  url: mlb_pbp/mlb_pbp_{season}.parquet
+  tag: mlb_pbp
+  min_season: 1988
+  example_args:
+    seasons: 2024
+- fn: load_mlb_pitches
+  league: mlb
+  base: sdv_releases
+  url: mlb_pitches/mlb_pitches_{season}.parquet
+  tag: mlb_pitches
+  min_season: 1988
+  example_args:
+    seasons: 2024
+- fn: load_mlb_runners
+  league: mlb
+  base: sdv_releases
+  url: mlb_runners/mlb_runners_{season}.parquet
+  tag: mlb_runners
+  min_season: 1988
+  example_args:
+    seasons: 2024
+- fn: load_mlb_expected_stats
+  league: mlb
+  base: sdv_releases
+  url: mlb_hitting_models/mlb_expected_stats_{season}.parquet
+  tag: mlb_hitting_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_expected_hr
+  league: mlb
+  base: sdv_releases
+  url: mlb_hitting_models/mlb_expected_hr_{season}.parquet
+  tag: mlb_hitting_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_batter_projection
+  league: mlb
+  base: sdv_releases
+  url: mlb_hitting_models/mlb_batter_projection_{season}.parquet
+  tag: mlb_hitting_models
+  min_season: 2016
+  example_args:
+    seasons: 2024
+- fn: load_mlb_oaa
+  league: mlb
+  base: sdv_releases
+  url: mlb_fielding_models/mlb_oaa_{season}.parquet
+  tag: mlb_fielding_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_catcher_framing
+  league: mlb
+  base: sdv_releases
+  url: mlb_fielding_models/mlb_catcher_framing_{season}.parquet
+  tag: mlb_fielding_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_xera
+  league: mlb
+  base: sdv_releases
+  url: mlb_pitching_models/mlb_xera_{season}.parquet
+  tag: mlb_pitching_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_stuff_plus
+  league: mlb
+  base: sdv_releases
+  url: mlb_pitching_models/mlb_stuff_plus_{season}.parquet
+  tag: mlb_pitching_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_mlb_command_plus
+  league: mlb
+  base: sdv_releases
+  url: mlb_pitching_models/mlb_command_plus_{season}.parquet
+  tag: mlb_pitching_models
+  min_season: 2015
+  example_args:
+    seasons: 2024
+- fn: load_nba_pbp
+  league: nba
+  base: sdv_releases
+  url: espn_nba_pbp/play_by_play_{season}.parquet
+  tag: espn_nba_pbp
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_nba_player_boxscore
+  league: nba
+  base: sdv_releases
+  url: espn_nba_player_boxscores/player_box_{season}.parquet
+  tag: espn_nba_player_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_nba_schedule
+  league: nba
+  base: sdv_releases
+  url: espn_nba_schedules/nba_schedule_{season}.parquet
+  tag: espn_nba_schedules
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_nba_team_boxscore
+  league: nba
+  base: sdv_releases
+  url: espn_nba_team_boxscores/team_box_{season}.parquet
+  tag: espn_nba_team_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_nhl_pbp
+  league: nhl
+  base: sdv_releases
+  url: nhl_pbp_full/play_by_play_{season}.parquet
+  tag: nhl_pbp_full
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_nhl_player_boxscore
+  league: nhl
+  base: sdv_releases
+  url: nhl_player_boxscores/player_box_{season}.parquet
+  tag: nhl_player_boxscores
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_nhl_schedule
+  league: nhl
+  base: sdv_releases
+  url: nhl_schedules/nhl_schedule_{season}.parquet
+  tag: nhl_schedules
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_nhl_team_boxscore
+  league: nhl
+  base: sdv_releases
+  url: nhl_team_boxscores/team_box_{season}.parquet
+  tag: nhl_team_boxscores
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_wbb_pbp
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_pbp/play_by_play_{season}.parquet
+  tag: espn_womens_college_basketball_pbp
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wbb_player_boxscore
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_player_boxscores/player_box_{season}.parquet
+  tag: espn_womens_college_basketball_player_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wbb_schedule
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_schedules/wbb_schedule_{season}.parquet
+  tag: espn_womens_college_basketball_schedules
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wbb_team_boxscore
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_team_boxscores/team_box_{season}.parquet
+  tag: espn_womens_college_basketball_team_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wbb_ratings
+  league: wbb
+  base: sdv_releases
+  url: wbb_ratings/wbb_ratings_{season}.parquet
+  tag: wbb_ratings
+  min_season: 2008
+  example_args:
+    seasons: 2025
+- fn: load_wbb_player_value
+  league: wbb
+  base: sdv_releases
+  url: wbb_player_value/wbb_player_value_{season}.parquet
+  tag: wbb_player_value
+  min_season: 2014
+  example_args:
+    seasons: 2025
+- fn: load_wnba_pbp
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_pbp/play_by_play_{season}.parquet
+  tag: espn_wnba_pbp
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wnba_player_boxscore
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_player_boxscores/player_box_{season}.parquet
+  tag: espn_wnba_player_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wnba_schedule
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_schedules/wnba_schedule_{season}.parquet
+  tag: espn_wnba_schedules
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_wnba_team_boxscore
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_team_boxscores/team_box_{season}.parquet
+  tag: espn_wnba_team_boxscores
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_mbb_shots
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_shots/shots_{season}.parquet
+  tag: espn_mens_college_basketball_shots
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_mbb_standings
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_standings/standings_{season}.parquet
+  tag: espn_mens_college_basketball_standings
+  min_season: 2003
+  example_args:
+    seasons: 2025
+- fn: load_mbb_player_season_stats
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_player_season_stats/player_season_stats_{season}.parquet
+  tag: espn_mens_college_basketball_player_season_stats
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_mbb_rosters
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_rosters/rosters_{season}.parquet
+  tag: espn_mens_college_basketball_rosters
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_mbb_officials
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_officials/officials_{season}.parquet
+  tag: espn_mens_college_basketball_officials
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_mbb_game_rosters
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_game_rosters/game_rosters_{season}.parquet
+  tag: espn_mens_college_basketball_game_rosters
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_mbb_team_season_stats
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_team_season_stats/team_season_stats_{season}.parquet
+  tag: espn_mens_college_basketball_team_season_stats
+  min_season: 2003
+  example_args:
+    seasons: 2025
+- fn: load_nba_game_rosters
+  league: nba
+  base: sdv_releases
+  url: espn_nba_game_rosters/game_rosters_{season}.parquet
+  tag: espn_nba_game_rosters
+  min_season: 2002
+  example_args:
+    seasons: 2002
+- fn: load_nba_officials
+  league: nba
+  base: sdv_releases
+  url: espn_nba_officials/officials_{season}.parquet
+  tag: espn_nba_officials
+  min_season: 2002
+  example_args:
+    seasons: 2002
+- fn: load_nba_shots
+  league: nba
+  base: sdv_releases
+  url: espn_nba_shots/shots_{season}.parquet
+  tag: espn_nba_shots
+  min_season: 2002
+  example_args:
+    seasons: 2002
+- fn: load_nba_standings
+  league: nba
+  base: sdv_releases
+  url: espn_nba_standings/standings_{season}.parquet
+  tag: espn_nba_standings
+  min_season: 2002
+  example_args:
+    seasons: 2002
+- fn: load_nba_player_season_stats
+  league: nba
+  base: sdv_releases
+  url: espn_nba_player_season_stats/player_season_stats_{season}.parquet
+  tag: espn_nba_player_season_stats
+  min_season: 2002
+  example_args:
+    seasons: 2025
+- fn: load_nba_team_season_stats
+  league: nba
+  base: sdv_releases
+  url: espn_nba_team_season_stats/team_season_stats_{season}.parquet
+  tag: espn_nba_team_season_stats
+  min_season: 2002
+  example_args:
+    seasons: 2025
+- fn: load_nba_draft
+  league: nba
+  base: sdv_releases
+  url: espn_nba_draft/draft_{season}.parquet
+  tag: espn_nba_draft
+  min_season: 2003
+  example_args:
+    seasons: 2025
+- fn: load_nba_rosters
+  league: nba
+  base: sdv_releases
+  url: espn_nba_rosters/rosters_{season}.parquet
+  tag: espn_nba_rosters
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_wnba_draft
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_draft/draft_{season}.parquet
+  tag: espn_wnba_draft
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_game_rosters
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_game_rosters/game_rosters_{season}.parquet
+  tag: espn_wnba_game_rosters
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_officials
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_officials/officials_{season}.parquet
+  tag: espn_wnba_officials
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_player_season_stats
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_player_season_stats/player_season_stats_{season}.parquet
+  tag: espn_wnba_player_season_stats
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_rosters
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_rosters/rosters_{season}.parquet
+  tag: espn_wnba_rosters
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_shots
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_shots/shots_{season}.parquet
+  tag: espn_wnba_shots
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_standings
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_standings/standings_{season}.parquet
+  tag: espn_wnba_standings
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_team_season_stats
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_team_season_stats/team_season_stats_{season}.parquet
+  tag: espn_wnba_team_season_stats
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wbb_game_rosters
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_game_rosters/game_rosters_{season}.parquet
+  tag: espn_womens_college_basketball_game_rosters
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_officials
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_officials/officials_{season}.parquet
+  tag: espn_womens_college_basketball_officials
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_player_season_stats
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_player_season_stats/player_season_stats_{season}.parquet
+  tag: espn_womens_college_basketball_player_season_stats
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_rosters
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_rosters/rosters_{season}.parquet
+  tag: espn_womens_college_basketball_rosters
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_shots
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_shots/shots_{season}.parquet
+  tag: espn_womens_college_basketball_shots
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_standings
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_standings/standings_{season}.parquet
+  tag: espn_womens_college_basketball_standings
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_team_season_stats
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_team_season_stats/team_season_stats_{season}.parquet
+  tag: espn_womens_college_basketball_team_season_stats
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_nba_stats_schedules
+  league: nba
+  base: sdv_releases
+  # {season} stays the START year (1996 = 1996-97); the Program V asset is keyed
+  # by the END year, so the +1 is the translation -- NOT a change to the arg.
+  url: nba_stats_schedules/nba_schedule_{season + 1}.parquet
+  tag: nba_stats_schedules
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_coaches
+  league: nba
+  base: sdv_releases
+  url: nba_stats_coaches/coaches_{season + 1}.parquet
+  tag: nba_stats_coaches
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_game_rosters
+  league: nba
+  base: sdv_releases
+  url: nba_stats_game_rosters/game_rosters_{season + 1}.parquet
+  tag: nba_stats_game_rosters
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_lineups
+  league: nba
+  base: sdv_releases
+  url: nba_stats_lineups/lineups_{season + 1}.parquet
+  tag: nba_stats_lineups
+  min_season: 2007
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_lineups_v3
+  league: nba
+  base: sdv_releases
+  url: nba_stats_game_lineups/nba_lineups_{season + 1}.parquet
+  tag: nba_stats_game_lineups
+  deprecated_for: load_nba_stats_game_lineups
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_officials
+  league: nba
+  base: sdv_releases
+  url: nba_stats_officials/officials_{season + 1}.parquet
+  tag: nba_stats_officials
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_pbp
+  league: nba
+  base: sdv_releases
+  url: nba_stats_pbp/nba_play_by_play_{season + 1}.parquet
+  tag: nba_stats_pbp
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_possessions
+  league: nba
+  base: sdv_releases
+  url: nba_stats_possessions/nba_possessions_{season + 1}.parquet
+  tag: nba_stats_possessions
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_game_lineups
+  league: nba
+  base: sdv_releases
+  url: nba_stats_game_lineups/nba_lineups_{season + 1}.parquet
+  tag: nba_stats_game_lineups
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_game_matchups
+  league: nba
+  base: sdv_releases
+  url: nba_stats_game_matchups/game_matchups_{season + 1}.parquet
+  tag: nba_stats_game_matchups
+  min_season: 2017
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_pbp_v3
+  league: nba
+  base: sdv_releases
+  url: nba_stats_pbp/nba_play_by_play_{season + 1}.parquet
+  tag: nba_stats_pbp
+  deprecated_for: load_nba_stats_pbp
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_player_boxscores
+  league: nba
+  base: sdv_releases
+  url: nba_stats_player_boxscores/player_boxscores_{season + 1}.parquet
+  tag: nba_stats_player_boxscores
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_player_game_logs
+  league: nba
+  base: sdv_releases
+  url: nba_stats_player_game_logs/player_game_logs_{season + 1}.parquet
+  tag: nba_stats_player_game_logs
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_player_season_stats
+  league: nba
+  base: sdv_releases
+  url: nba_stats_player_season_stats/player_season_stats_{season + 1}.parquet
+  tag: nba_stats_player_season_stats
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_possessions_v3
+  league: nba
+  base: sdv_releases
+  url: nba_stats_possessions/nba_possessions_{season + 1}.parquet
+  tag: nba_stats_possessions
+  deprecated_for: load_nba_stats_possessions
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_rosters
+  league: nba
+  base: sdv_releases
+  url: nba_stats_rosters/rosters_{season + 1}.parquet
+  tag: nba_stats_rosters
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_shots
+  league: nba
+  base: sdv_releases
+  url: nba_stats_shots/shots_{season + 1}.parquet
+  tag: nba_stats_shots
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_standings
+  league: nba
+  base: sdv_releases
+  url: nba_stats_standings/standings_{season + 1}.parquet
+  tag: nba_stats_standings
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_team_boxscores
+  league: nba
+  base: sdv_releases
+  url: nba_stats_team_boxscores/team_boxscores_{season + 1}.parquet
+  tag: nba_stats_team_boxscores
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_nba_stats_team_season_stats
+  league: nba
+  base: sdv_releases
+  url: nba_stats_team_season_stats/team_season_stats_{season + 1}.parquet
+  tag: nba_stats_team_season_stats
+  min_season: 1996
+  example_args:
+    seasons: 2025
+- fn: load_cfb_pbp_r
+  league: cfb
+  base: sdv_releases
+  url: cfbfastR_cfb_pbp/play_by_play_{season}.parquet
+  tag: cfbfastR_cfb_pbp
+  min_season: 2014
+  example_args:
+    seasons: 2024
+- fn: load_mbb_player_crosswalk
+  league: mbb
+  base: sdv_releases
+  url: mbb_crosswalk/mbb_player_crosswalk_{season}.parquet
+  tag: mbb_crosswalk
+  min_season: 2025
+  example_args:
+    seasons: 2026
+- fn: load_mbb_schedule_crosswalk
+  league: mbb
+  base: sdv_releases
+  url: mbb_crosswalk/mbb_schedule_crosswalk_{season}.parquet
+  tag: mbb_crosswalk
+  min_season: 2025
+  example_args:
+    seasons: 2026
+- fn: load_mbb_team_crosswalk
+  league: mbb
+  base: sdv_releases
+  url: mbb_crosswalk/mbb_team_crosswalk_{season}.parquet
+  tag: mbb_crosswalk
+  min_season: 2002
+  example_args:
+    seasons: 2026
+- fn: load_wbb_player_crosswalk
+  league: wbb
+  base: sdv_releases
+  url: wbb_crosswalk/wbb_player_crosswalk_{season}.parquet
+  tag: wbb_crosswalk
+  min_season: 2014
+  example_args:
+    seasons: 2026
+- fn: load_wbb_schedule_crosswalk
+  league: wbb
+  base: sdv_releases
+  url: wbb_crosswalk/wbb_schedule_crosswalk_{season}.parquet
+  tag: wbb_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wbb_team_crosswalk
+  league: wbb
+  base: sdv_releases
+  url: wbb_crosswalk/wbb_team_crosswalk_{season}.parquet
+  tag: wbb_crosswalk
+  min_season: 2014
+  example_args:
+    seasons: 2026
+- fn: load_nba_player_crosswalk
+  league: nba
+  base: sdv_releases
+  url: nba_crosswalk/nba_player_crosswalk_{season}.parquet
+  tag: nba_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_nba_schedule_crosswalk
+  league: nba
+  base: sdv_releases
+  url: nba_crosswalk/nba_schedule_crosswalk_{season}.parquet
+  tag: nba_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_nba_team_crosswalk
+  league: nba
+  base: sdv_releases
+  url: nba_crosswalk/nba_team_crosswalk_{season}.parquet
+  tag: nba_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_player_crosswalk
+  league: wnba
+  base: sdv_releases
+  url: wnba_crosswalk/wnba_player_crosswalk_{season}.parquet
+  tag: wnba_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_schedule_crosswalk
+  league: wnba
+  base: sdv_releases
+  url: wnba_crosswalk/wnba_schedule_crosswalk_{season}.parquet
+  tag: wnba_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_team_crosswalk
+  league: wnba
+  base: sdv_releases
+  url: wnba_crosswalk/wnba_team_crosswalk_{season}.parquet
+  tag: wnba_crosswalk
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_nba_player_core
+  league: nba
+  base: sdv_releases
+  url: espn_nba_player_core/player_core_{season}.parquet
+  tag: espn_nba_player_core
+  min_season: 2002
+  example_args:
+    seasons: 2025
+- fn: load_wnba_player_core
+  league: wnba
+  base: sdv_releases
+  url: espn_wnba_player_core/player_core_{season}.parquet
+  tag: espn_wnba_player_core
+  min_season: 2003
+  example_args:
+    seasons: 2025
+- fn: load_mbb_player_core
+  league: mbb
+  base: sdv_releases
+  url: espn_mens_college_basketball_player_core/player_core_{season}.parquet
+  tag: espn_mens_college_basketball_player_core
+  min_season: 2003
+  example_args:
+    seasons: 2025
+- fn: load_wbb_player_core
+  league: wbb
+  base: sdv_releases
+  url: espn_womens_college_basketball_player_core/player_core_{season}.parquet
+  tag: espn_womens_college_basketball_player_core
+  min_season: 2004
+  example_args:
+    seasons: 2025
+- fn: load_wnba_player_impact
+  league: wnba
+  base: sdv_releases
+  url: wnba_player_impact/wnba_player_impact_{season}.parquet
+  tag: wnba_player_impact
+  min_season: 1997
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_baseball_pbp
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_pbp/ncaa_baseball_pbp_{season}.parquet
+  tag: ncaa_baseball_pbp
+  min_season: 2017
+  example_args:
+    seasons: 2023
+- fn: load_ncaa_baseball_schedule
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_schedules/ncaa_baseball_schedule_{season}.parquet
+  tag: ncaa_baseball_schedules
+  min_season: 2012
+  example_args:
+    seasons: 2023
+- fn: load_ncaa_baseball_teams
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_teams/ncaa_baseball_teams_{season}.parquet
+  tag: ncaa_baseball_teams
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_ncaa_baseball_rosters
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_rosters/ncaa_baseball_rosters_{season}.parquet
+  tag: ncaa_baseball_rosters
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_ncaa_baseball_linescore
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_linescore/ncaa_baseball_linescore_{season}.parquet
+  tag: ncaa_baseball_linescore
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_ncaa_baseball_team_stats
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_team_stats/ncaa_baseball_team_stats_{season}.parquet
+  tag: ncaa_baseball_team_stats
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_ncaa_baseball_player_stats
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_player_stats/ncaa_baseball_player_stats_{season}.parquet
+  tag: ncaa_baseball_player_stats
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_ncaa_baseball_situational_stats
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_situational_stats/ncaa_baseball_situational_stats_{season}.parquet
+  tag: ncaa_baseball_situational_stats
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_ncaa_baseball_games
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_games/ncaa_baseball_games_{season}.parquet
+  tag: ncaa_baseball_games
+  min_season: 2017
+  example_args:
+    seasons: 2024
+- fn: load_nba_player_impact
+  league: nba
+  base: sdv_releases
+  url: nba_player_impact/nba_player_impact_{season}.parquet
+  tag: nba_player_impact
+  min_season: 1996
+  example_args:
+    seasons: 2024
+- fn: load_nhl_game_info
+  league: nhl
+  base: sdv_releases
+  url: nhl_game_info/game_info_{season}.parquet
+  tag: nhl_game_info
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_game_rosters
+  league: nhl
+  base: sdv_releases
+  url: nhl_game_rosters/game_rosters_{season}.parquet
+  tag: nhl_game_rosters
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_goalie_boxscores
+  league: nhl
+  base: sdv_releases
+  url: nhl_goalie_boxscores/goalie_box_{season}.parquet
+  tag: nhl_goalie_boxscores
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_linescore
+  league: nhl
+  base: sdv_releases
+  url: nhl_linescore/linescore_{season}.parquet
+  tag: nhl_linescore
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_officials
+  league: nhl
+  base: sdv_releases
+  url: nhl_officials/officials_{season}.parquet
+  tag: nhl_officials
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_nhl_pbp_full
+  league: nhl
+  base: sdv_releases
+  url: nhl_pbp_full/play_by_play_{season}.parquet
+  tag: nhl_pbp_full
+  min_season: 2010
+  example_args:
+    seasons: 2010
+- fn: load_nhl_pbp_lite
+  league: nhl
+  base: sdv_releases
+  url: nhl_pbp_lite/play_by_play_{season}_lite.parquet
+  tag: nhl_pbp_lite
+  min_season: 2010
+  example_args:
+    seasons: 2010
+- fn: load_nhl_penalties
+  league: nhl
+  base: sdv_releases
+  url: nhl_penalties/penalties_{season}.parquet
+  tag: nhl_penalties
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_player_boxscores
+  league: nhl
+  base: sdv_releases
+  url: nhl_player_boxscores/player_box_{season}.parquet
+  tag: nhl_player_boxscores
+  min_season: 2010
+  example_args:
+    seasons: 2010
+- fn: load_nhl_rosters
+  league: nhl
+  base: sdv_releases
+  url: nhl_rosters/rosters_{season}.parquet
+  tag: nhl_rosters
+  min_season: 2010
+  example_args:
+    seasons: 2010
+- fn: load_nhl_schedules
+  league: nhl
+  base: sdv_releases
+  url: nhl_schedules/nhl_schedule_{season}.parquet
+  tag: nhl_schedules
+  min_season: 2010
+  example_args:
+    seasons: 2010
+- fn: load_nhl_scoring
+  league: nhl
+  base: sdv_releases
+  url: nhl_scoring/scoring_{season}.parquet
+  tag: nhl_scoring
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_scratches
+  league: nhl
+  base: sdv_releases
+  url: nhl_scratches/scratches_{season}.parquet
+  tag: nhl_scratches
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_shifts
+  league: nhl
+  base: sdv_releases
+  url: nhl_shifts/shifts_{season}.parquet
+  tag: nhl_shifts
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_nhl_shootout
+  league: nhl
+  base: sdv_releases
+  url: nhl_shootout/shootout_summary_{season}.parquet
+  tag: nhl_shootout
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_nhl_shots_by_period
+  league: nhl
+  base: sdv_releases
+  url: nhl_shots_by_period/shots_by_period_{season}.parquet
+  tag: nhl_shots_by_period
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_nhl_skater_boxscores
+  league: nhl
+  base: sdv_releases
+  url: nhl_skater_boxscores/skater_box_{season}.parquet
+  tag: nhl_skater_boxscores
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_nhl_team_boxscores
+  league: nhl
+  base: sdv_releases
+  url: nhl_team_boxscores/team_box_{season}.parquet
+  tag: nhl_team_boxscores
+  min_season: 2010
+  example_args:
+    seasons: 2010
+- fn: load_nhl_three_stars
+  league: nhl
+  base: sdv_releases
+  url: nhl_three_stars/three_stars_{season}.parquet
+  tag: nhl_three_stars
+  min_season: 2024
+  example_args:
+    seasons: 2024
+# PHF (Premier Hockey Federation) lives in the pwhl module: the frozen
+# predecessor women's pro hockey league (ceased operations June 2023).
+# Seasons 2016-2023; pbp has no 2017-2019 assets (never published upstream) --
+# the loaders' 404-safe skip-with-warning covers those seasons.
+- fn: load_phf_pbp
+  league: pwhl
+  base: sdv_releases
+  url: phf_pbp/play_by_play_{season}.parquet
+  tag: phf_pbp
+  min_season: 2016
+  example_args:
+    seasons: 2023
+- fn: load_phf_player_boxscores
+  league: pwhl
+  base: sdv_releases
+  url: phf_player_boxscores/player_box_{season}.parquet
+  tag: phf_player_boxscores
+  min_season: 2016
+  example_args:
+    seasons: 2023
+- fn: load_phf_schedules
+  league: pwhl
+  base: sdv_releases
+  url: phf_schedules/phf_schedule_{season}.parquet
+  tag: phf_schedules
+  min_season: 2016
+  example_args:
+    seasons: 2023
+- fn: load_phf_team_boxscores
+  league: pwhl
+  base: sdv_releases
+  url: phf_team_boxscores/team_box_{season}.parquet
+  tag: phf_team_boxscores
+  min_season: 2016
+  example_args:
+    seasons: 2023
+- fn: load_pwhl_game_info
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_game_info/game_info_{season}.parquet
+  tag: pwhl_game_info
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_game_rosters
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_game_rosters/game_rosters_{season}.parquet
+  tag: pwhl_game_rosters
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_shifts
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_shifts/shifts_{season}.parquet
+  tag: pwhl_shifts
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_pwhl_goalie_boxscores
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_goalie_boxscores/goalie_box_{season}.parquet
+  tag: pwhl_goalie_boxscores
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_officials
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_officials/officials_{season}.parquet
+  tag: pwhl_officials
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_pbp
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_pbp/play_by_play_{season}.parquet
+  tag: pwhl_pbp
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_xg_pbp
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_xg_pbp/pwhl_xg_pbp_{season}.parquet
+  tag: pwhl_xg_pbp
+  min_season: 2024
+  example_args:
+    seasons: 2025
+- fn: load_pwhl_penalty_summary
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_penalty_summary/penalty_summary_{season}.parquet
+  tag: pwhl_penalty_summary
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_player_boxscores
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_player_boxscores/player_box_{season}.parquet
+  tag: pwhl_player_boxscores
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_rosters
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_rosters/rosters_{season}.parquet
+  tag: pwhl_rosters
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_schedules
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_schedules/pwhl_schedule_{season}.parquet
+  tag: pwhl_schedules
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_scoring_summary
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_scoring_summary/scoring_summary_{season}.parquet
+  tag: pwhl_scoring_summary
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_shootout
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_shootout/shootout_summary_{season}.parquet
+  tag: pwhl_shootout
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_pwhl_shots_by_period
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_shots_by_period/shots_by_period_{season}.parquet
+  tag: pwhl_shots_by_period
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_skater_boxscores
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_skater_boxscores/skater_box_{season}.parquet
+  tag: pwhl_skater_boxscores
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_team_boxscores
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_team_boxscores/team_box_{season}.parquet
+  tag: pwhl_team_boxscores
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_pwhl_three_stars
+  league: pwhl
+  base: sdv_releases
+  url: pwhl_three_stars/three_stars_{season}.parquet
+  tag: pwhl_three_stars
+  min_season: 2024
+  example_args:
+    seasons: 2024
+- fn: load_wnba_stats_coaches
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_coaches/coaches_{season}.parquet
+  tag: wnba_stats_coaches
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_stats_draft
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_draft/draft_{season}.parquet
+  tag: wnba_stats_draft
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_wnba_stats_game_rosters
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_game_rosters/game_rosters_{season}.parquet
+  tag: wnba_stats_game_rosters
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_stats_officials
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_officials/officials_{season}.parquet
+  tag: wnba_stats_officials
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_stats_pbp
+  league: wnba
+  base: sdv_releases
+  # WNBA seasons are single-calendar-year, so start year == end year: no +1 here.
+  url: wnba_stats_pbp/wnba_play_by_play_{season}.parquet
+  tag: wnba_stats_pbp
+  min_season: 1997
+  example_args:
+    seasons: 2025
+- fn: load_wnba_stats_possessions
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_possessions/wnba_possessions_{season}.parquet
+  tag: wnba_stats_possessions
+  min_season: 1997
+  example_args:
+    seasons: 2025
+- fn: load_wnba_stats_game_lineups
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_game_lineups/wnba_lineups_{season}.parquet
+  tag: wnba_stats_game_lineups
+  min_season: 1997
+  example_args:
+    seasons: 2025
+- fn: load_wnba_stats_player_boxscores
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_player_boxscores/player_boxscores_{season}.parquet
+  tag: wnba_stats_player_boxscores
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_stats_player_game_logs
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_player_game_logs/player_game_logs_{season}.parquet
+  tag: wnba_stats_player_game_logs
+  min_season: 2025
+  example_args:
+    seasons: 2025
+- fn: load_wnba_stats_rosters
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_rosters/rosters_{season}.parquet
+  tag: wnba_stats_rosters
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_stats_schedules
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_schedules/wnba_schedule_{season}.parquet
+  tag: wnba_stats_schedules
+  min_season: 1997
+  example_args:
+    seasons: 2025
+- fn: load_wnba_stats_shots
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_shots/shots_{season}.parquet
+  tag: wnba_stats_shots
+  min_season: 2026
+  example_args:
+    seasons: 2026
+- fn: load_wnba_stats_team_boxscores
+  league: wnba
+  base: sdv_releases
+  url: wnba_stats_team_boxscores/team_boxscores_{season}.parquet
+  tag: wnba_stats_team_boxscores
+  min_season: 2026
+  example_args:
+    seasons: 2026
+# --- NFL nflverse loaders (docs metadata only; nfl_loaders.py stays hand-written
+# + @cached_loader, NFL is NOT in _GENERATED_LOADER_LEAGUES). Surfaces the
+# "Dataset loaders" reference grouping on the NFL index. Only the uniform
+# per-season loaders are listed; season-less / extra-param / alias loaders
+# (player_stats, nextgen_stats, pfr_advstats, teams, players, ff_*, ...) stay
+# under "Additional functions". ---
+# load_nfl_pbp also accepts source="sdv" to read the SDV-native nfl_model_pbp
+# release (Python-built, nflfastR-faithful EP/WP/CP/xYAC; published seasons only).
+# The default source="nflverse" maps to the asset below and is documented here.
+- fn: load_nfl_pbp
+  league: nfl
+  base: nflverse
+  url: pbp/play_by_play_{season}.parquet
+  tag: pbp
+  min_season: 1999
+  example_args:
+    seasons: 2024
+# SDV-native enriched pbp: the same asset load_nfl_pbp(source="sdv") reads, given
+# its own name so the nfl_model_pbp tag is reachable without the source= kwarg.
+# 28 assets, 1999-2026; 326 columns per season from 2002, 257/256/256 for the
+# pre-rebuild 1999-2001 assets (footer scan, verified live 2026-09-17).
+# CAVEAT: 2000, 2001 and 2002 are published but near-empty -- 955 / 1,168 / 7,772
+# rows against ~44,000 in adjacent seasons, because the upstream Shield feed
+# serves drive and scoring data but almost no plays for those three years. Every
+# game is present and nothing errors, so it does not look wrong. Documented in
+# the loader docstring; tracking sportsdataverse/nfl-data#34.
+- fn: load_nfl_model_pbp
+  league: nfl
+  base: sdv_releases
+  url: nfl_model_pbp/model_pbp_{season}.parquet
+  tag: nfl_model_pbp
+  min_season: 1999
+  example_args:
+    seasons: 2024
+# SDV-native: per-week as-of vintages of the ratings spine (nfl-data
+# nfl_ratings_weekly job). as_of_week is STRICTLY EXCLUSIVE — a row at
+# as_of_week=W was fit only on games before week W's first kickoff.
+- fn: load_nfl_ratings_weekly
+  league: nfl
+  base: sdv_releases
+  url: nfl_ratings_weekly/nfl_ratings_weekly_{season}.parquet
+  tag: nfl_ratings_weekly
+  min_season: 1999
+  example_args:
+    seasons: 2024
+# SDV-native Next Gen Stats (nfl-ngs-data): one unified loader over 16 tags
+# (dataset= selects the tag). Listed under the default dataset's tag; the
+# full dataset -> tag -> floor table lives in the loader docstring. The floor
+# here is the surface-wide minimum (schedules / gamecenter_passers); the
+# statboards and leaderboards start 2016 and the loader enforces per-dataset.
+- fn: load_nfl_ngs
+  league: nfl
+  base: sdv_releases
+  url: nfl_ngs_passing/ngs_passing_{season}.parquet
+  tag: nfl_ngs_passing
+  min_season: 2009
+  example_args:
+    seasons: 2024
+# load_nfl_rosters also accepts source="sdv" to read the SDV-native nfl_rosters
+# release (public Shield/ESPN build; 30-col subset; published seasons 2022+).
+# The default source="nflverse" maps to the asset below and is documented here.
+- fn: load_nfl_rosters
+  league: nfl
+  base: nflverse
+  url: rosters/roster_{season}.parquet
+  tag: rosters
+  min_season: 1920
+  example_args:
+    seasons: 2024
+- fn: load_nfl_weekly_rosters
+  league: nfl
+  base: nflverse
+  url: weekly_rosters/roster_weekly_{season}.parquet
+  tag: weekly_rosters
+  min_season: 2002
+  example_args:
+    seasons: 2024
+- fn: load_nfl_depth_charts
+  league: nfl
+  base: nflverse
+  url: depth_charts/depth_charts_{season}.parquet
+  tag: depth_charts
+  min_season: 2001
+  example_args:
+    seasons: 2024
+- fn: load_nfl_injuries
+  league: nfl
+  base: nflverse
+  url: injuries/injuries_{season}.parquet
+  tag: injuries
+  min_season: 2009
+  example_args:
+    seasons: 2024
+- fn: load_nfl_snap_counts
+  league: nfl
+  base: nflverse
+  url: snap_counts/snap_counts_{season}.parquet
+  tag: snap_counts
+  min_season: 2012
+  example_args:
+    seasons: 2024
+- fn: load_nfl_pbp_participation
+  league: nfl
+  base: nflverse
+  url: pbp_participation/pbp_participation_{season}.parquet
+  tag: pbp_participation
+  min_season: 2016
+  example_args:
+    seasons: 2024
+- fn: load_nfl_ftn_charting
+  league: nfl
+  base: nflverse
+  url: ftn_charting/ftn_charting_{season}.parquet
+  tag: ftn_charting
+  min_season: 2022
+  example_args:
+    seasons: 2024
+# ESPN NFL usage leaderboards + team / coach tendencies (sportsdataverse.football
+# usage_box / tendencies, built by nfl-data). Docs metadata only: NFL loaders are
+# hand-written in nfl_loaders.py (NFL is not in _GENERATED_LOADER_LEAGUES) and a
+# missing season raises NoDataError there. Per-tag coverage as published 2026-09-15
+# is in each entry's notes.
+- fn: load_nfl_usage_players
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_players/usage_players_{season}.parquet
+  tag: espn_nfl_usage_players
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "2005 has no asset: ESPN's 2005 NFL feed carries no play text, so no usage rows exist for it. position_group is null before 2014, when the feed starts carrying participant positions. A season with no asset raises NoDataError."
+- fn: load_nfl_usage_position_groups
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_position_groups/usage_position_groups_{season}.parquet
+  tag: espn_nfl_usage_position_groups
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Built from ESPN play participants, which the NFL feed carries from 2014; earlier seasons have no asset (NoDataError)."
+- fn: load_nfl_usage_tackles
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_tackles/usage_tackles_{season}.parquet
+  tag: espn_nfl_usage_tackles
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Built from ESPN play participants (tackler / assist ids), which the NFL feed carries from 2014; earlier seasons have no asset (NoDataError)."
+- fn: load_nfl_usage_position_group_tackles
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_position_group_tackles/usage_position_group_tackles_{season}.parquet
+  tag: espn_nfl_usage_position_group_tackles
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Built from ESPN play participants, which the NFL feed carries from 2014; earlier seasons have no asset (NoDataError)."
+- fn: load_nfl_usage_teams
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_teams/usage_teams_{season}.parquet
+  tag: espn_nfl_usage_teams
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Published 2002-2026 (2005 is built from ESPN's play-text-less 2005 feed, so it is thin). A season with no asset raises NoDataError."
+- fn: load_nfl_usage_drive_scripting
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_drive_scripting/usage_drive_scripting_{season}.parquet
+  tag: espn_nfl_usage_drive_scripting
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A season with no asset raises NoDataError."
+- fn: load_nfl_usage_st_kickers
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_st_kickers/usage_st_kickers_{season}.parquet
+  tag: espn_nfl_usage_st_kickers
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "No asset for 2005-2007 (2005 has no play text upstream); a season with no asset raises NoDataError."
+- fn: load_nfl_usage_st_punters
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_st_punters/usage_st_punters_{season}.parquet
+  tag: espn_nfl_usage_st_punters
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "No asset for 2005-2007 (2005 has no play text upstream); a season with no asset raises NoDataError."
+- fn: load_nfl_usage_st_returners
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_st_returners/usage_st_returners_{season}.parquet
+  tag: espn_nfl_usage_st_returners
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "No asset for 2005-2007 (2005 has no play text upstream); a season with no asset raises NoDataError."
+- fn: load_nfl_usage_st_blocks
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_st_blocks/usage_st_blocks_{season}.parquet
+  tag: espn_nfl_usage_st_blocks
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Published from 2007 (no block participants earlier); a season with no asset raises NoDataError."
+- fn: load_nfl_usage_st_team
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_usage_st_team/usage_st_team_{season}.parquet
+  tag: espn_nfl_usage_st_team
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A season with no asset raises NoDataError."
+- fn: load_nfl_team_tendencies
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_team_tendencies/team_tendencies_{season}.parquet
+  tag: espn_nfl_team_tendencies
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A season with no asset raises NoDataError."
+- fn: load_nfl_coach_tendencies
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_coach_tendencies/coach_tendencies_{season}.parquet
+  tag: espn_nfl_coach_tendencies
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "One row per (season, team, head coach). The coach comes from the nflverse schedule (home_coach / away_coach) per game, so a midseason change splits the season between both coaches; role is always \"HC\". Published 2002-2026 (2005 is thin). A season with no asset raises NoDataError."
+- fn: load_nfl_coach_careers
+  league: nfl
+  base: sdv_releases
+  url: espn_nfl_coach_careers/coach_careers.parquet
+  tag: espn_nfl_coach_careers
+  notes: "One season-less file: every published coach_tendencies season summed per head coach with the rates recomputed (play-weighted, never averaged averages). Careers therefore cover exactly the seasons published under the coach_tendencies tag."
+- fn: load_ncaa_mbb_pbp
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_pbp/ncaa_mbb_pbp_{season}.parquet
+  tag: ncaa_mbb_pbp
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_schedule
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_schedule/ncaa_mbb_schedule_{season}.parquet
+  tag: ncaa_mbb_schedule
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_player_box
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_player_box/ncaa_mbb_player_box_{season}.parquet
+  tag: ncaa_mbb_player_box
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_team_box
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_team_box/ncaa_mbb_team_box_{season}.parquet
+  tag: ncaa_mbb_team_box
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_rosters
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_rosters/ncaa_mbb_rosters_{season}.parquet
+  tag: ncaa_mbb_rosters
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_team_rosters
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_team_rosters/ncaa_mbb_team_rosters_{season}.parquet
+  tag: ncaa_mbb_team_rosters
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_team_ids
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_team_ids/ncaa_mbb_team_ids_{season}.parquet
+  tag: ncaa_mbb_team_ids
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_possessions
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_possessions/ncaa_mbb_possessions_{season}.parquet
+  tag: ncaa_mbb_possessions
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_lineups
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_lineups/ncaa_mbb_lineups_{season}.parquet
+  tag: ncaa_mbb_lineups
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_matchup_stints
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_matchup_stints/ncaa_mbb_matchup_stints_{season}.parquet
+  tag: ncaa_mbb_matchup_stints
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_shots
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_shots/ncaa_mbb_shots_{season}.parquet
+  tag: ncaa_mbb_shots
+  min_season: 2019
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_rapm_within_team
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_rapm_within_team/ncaa_mbb_rapm_within_team_{season}.parquet
+  tag: ncaa_mbb_rapm_within_team
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mbb_rapm
+  league: mbb
+  base: sdv_releases
+  url: ncaa_mbb_rapm/ncaa_mbb_rapm_{season}.parquet
+  tag: ncaa_mbb_rapm
+  min_season: 2011
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_rapm
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_rapm/ncaa_wbb_rapm_{season}.parquet
+  tag: ncaa_wbb_rapm
+  min_season: 2011
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_pbp
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_pbp/ncaa_mfb_pbp_{season}.parquet
+  tag: ncaa_mfb_pbp
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_pbp_cfbfastr
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_pbp_cfbfastr/ncaa_mfb_pbp_cfbfastr_{season}.parquet
+  tag: ncaa_mfb_pbp_cfbfastr
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_drives
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_drives/ncaa_mfb_drives_{season}.parquet
+  tag: ncaa_mfb_drives
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_schedule
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_schedule/ncaa_mfb_schedule_{season}.parquet
+  tag: ncaa_mfb_schedule
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_rosters
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_rosters/ncaa_mfb_rosters_{season}.parquet
+  tag: ncaa_mfb_rosters
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_teams
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_teams/ncaa_mfb_teams_{season}.parquet
+  tag: ncaa_mfb_teams
+  min_season: 2013
+  notes: "No conference column: for conference membership by season use load_cfb_team_group_seasons (the cfb_groups release)."
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_team_stats
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_team_stats/ncaa_mfb_team_stats_{season}.parquet
+  tag: ncaa_mfb_team_stats
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_player_stats
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_player_stats/ncaa_mfb_player_stats_{season}.parquet
+  tag: ncaa_mfb_player_stats
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_officials
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_officials/ncaa_mfb_officials_{season}.parquet
+  tag: ncaa_mfb_officials
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_mfb_linescore
+  league: cfb
+  base: sdv_releases
+  url: ncaa_mfb_linescore/ncaa_mfb_linescore_{season}.parquet
+  tag: ncaa_mfb_linescore
+  min_season: 2013
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_pbp
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_pbp/ncaa_wbb_pbp_{season}.parquet
+  tag: ncaa_wbb_pbp
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_schedule
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_schedule/ncaa_wbb_schedule_{season}.parquet
+  tag: ncaa_wbb_schedule
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_player_box
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_player_box/ncaa_wbb_player_box_{season}.parquet
+  tag: ncaa_wbb_player_box
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_team_box
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_team_box/ncaa_wbb_team_box_{season}.parquet
+  tag: ncaa_wbb_team_box
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_rosters
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_rosters/ncaa_wbb_rosters_{season}.parquet
+  tag: ncaa_wbb_rosters
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_team_rosters
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_team_rosters/ncaa_wbb_team_rosters_{season}.parquet
+  tag: ncaa_wbb_team_rosters
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_team_ids
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_team_ids/ncaa_wbb_team_ids_{season}.parquet
+  tag: ncaa_wbb_team_ids
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_possessions
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_possessions/ncaa_wbb_possessions_{season}.parquet
+  tag: ncaa_wbb_possessions
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_lineups
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_lineups/ncaa_wbb_lineups_{season}.parquet
+  tag: ncaa_wbb_lineups
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_matchup_stints
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_matchup_stints/ncaa_wbb_matchup_stints_{season}.parquet
+  tag: ncaa_wbb_matchup_stints
+  min_season: 2010
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_shots
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_shots/ncaa_wbb_shots_{season}.parquet
+  tag: ncaa_wbb_shots
+  min_season: 2019
+  example_args:
+    seasons: 2024
+- fn: load_ncaa_wbb_rapm_within_team
+  league: wbb
+  base: sdv_releases
+  url: ncaa_wbb_rapm_within_team/ncaa_wbb_rapm_within_team_{season}.parquet
+  tag: ncaa_wbb_rapm_within_team
+  min_season: 2010
+  example_args:
+    seasons: 2024
+# --- {league}_groups: conference / division reference tables (sportsdataverse/
+# sdv-reference-data). Three season-less tables (groups, group_seasons,
+# group_aliases) plus one team_group_seasons asset per season. The season key is
+# the league's own (ENDING year for mbb / wbb / nba / nhl), so no {season + N}
+# offset. NCAA baseball lives under league: mlb. NFL entries are docs metadata
+# only: load_nfl_*groups* are hand-written in nfl_loaders.py. ---
+- fn: load_cfb_groups
+  league: cfb
+  base: sdv_releases
+  url: cfb_groups/cfb_groups.parquet
+  tag: cfb_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. cfb:big-ten) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the STARTING year (2025 = the fall 2025 season)."
+- fn: load_cfb_group_seasons
+  league: cfb
+  base: sdv_releases
+  url: cfb_groups/cfb_group_seasons.parquet
+  tag: cfb_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the STARTING year (2025 = the fall 2025 season)."
+- fn: load_cfb_group_aliases
+  league: cfb
+  base: sdv_releases
+  url: cfb_groups/cfb_group_aliases.parquet
+  tag: cfb_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (cfbd, espn, sdv) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_cfb_team_group_seasons
+  league: cfb
+  base: sdv_releases
+  url: cfb_groups/cfb_team_group_seasons_{season}.parquet
+  tag: cfb_groups
+  min_season: 1869
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id where ESPN covers the team, otherwise the CFBD id; team_id_source names the id space. season is the STARTING year (2025 = the fall 2025 season); seasons 1869-2026. No 1871 asset."
+- fn: load_mbb_groups
+  league: mbb
+  base: sdv_releases
+  url: mbb_groups/mbb_groups.parquet
+  tag: mbb_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. mbb:big-east) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_mbb_group_seasons
+  league: mbb
+  base: sdv_releases
+  url: mbb_groups/mbb_group_seasons.parquet
+  tag: mbb_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the ENDING year (2025 = the 2024-25 season)."
+- fn: load_mbb_group_aliases
+  league: mbb
+  base: sdv_releases
+  url: mbb_groups/mbb_group_aliases.parquet
+  tag: mbb_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, kenpom, ncaa, sdv) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_mbb_team_group_seasons
+  league: mbb
+  base: sdv_releases
+  url: mbb_groups/mbb_team_group_seasons_{season}.parquet
+  tag: mbb_groups
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id; team_id_source names the id space. season is the ENDING year (2025 = the 2024-25 season); seasons 2002-2027."
+- fn: load_wbb_groups
+  league: wbb
+  base: sdv_releases
+  url: wbb_groups/wbb_groups.parquet
+  tag: wbb_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. wbb:big-east) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_wbb_group_seasons
+  league: wbb
+  base: sdv_releases
+  url: wbb_groups/wbb_group_seasons.parquet
+  tag: wbb_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the ENDING year (2025 = the 2024-25 season)."
+- fn: load_wbb_group_aliases
+  league: wbb
+  base: sdv_releases
+  url: wbb_groups/wbb_group_aliases.parquet
+  tag: wbb_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, ncaa, sdv) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_wbb_team_group_seasons
+  league: wbb
+  base: sdv_releases
+  url: wbb_groups/wbb_team_group_seasons_{season}.parquet
+  tag: wbb_groups
+  min_season: 2002
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id; team_id_source names the id space. season is the ENDING year (2025 = the 2024-25 season); seasons 2002-2027."
+- fn: load_nfl_groups
+  league: nfl
+  base: sdv_releases
+  url: nfl_groups/nfl_groups.parquet
+  tag: nfl_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. nfl:afc-east) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the STARTING year (2025 = the 2025-26 season)."
+- fn: load_nfl_group_seasons
+  league: nfl
+  base: sdv_releases
+  url: nfl_groups/nfl_group_seasons.parquet
+  tag: nfl_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the STARTING year (2025 = the 2025-26 season)."
+- fn: load_nfl_group_aliases
+  league: nfl
+  base: sdv_releases
+  url: nfl_groups/nfl_group_aliases.parquet
+  tag: nfl_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, nflverse, sdv) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_nfl_team_group_seasons
+  league: nfl
+  base: sdv_releases
+  url: nfl_groups/nfl_team_group_seasons_{season}.parquet
+  tag: nfl_groups
+  min_season: 1970
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id; team_id_source names the id space. season is the STARTING year (2025 = the 2025-26 season); seasons 1970-2026."
+- fn: load_nba_groups
+  league: nba
+  base: sdv_releases
+  url: nba_groups/nba_groups.parquet
+  tag: nba_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. nba:atlantic) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_nba_group_seasons
+  league: nba
+  base: sdv_releases
+  url: nba_groups/nba_group_seasons.parquet
+  tag: nba_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the ENDING year (2025 = the 2024-25 season)."
+- fn: load_nba_group_aliases
+  league: nba
+  base: sdv_releases
+  url: nba_groups/nba_group_aliases.parquet
+  tag: nba_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, nba_stats, sdv) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_nba_team_group_seasons
+  league: nba
+  base: sdv_releases
+  url: nba_groups/nba_team_group_seasons_{season}.parquet
+  tag: nba_groups
+  min_season: 1971
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id; team_id_source names the id space. season is the ENDING year (2025 = the 2024-25 season); seasons 1971-2027."
+- fn: load_wnba_groups
+  league: wnba
+  base: sdv_releases
+  url: wnba_groups/wnba_groups.parquet
+  tag: wnba_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. wnba:east) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the calendar year."
+- fn: load_wnba_group_seasons
+  league: wnba
+  base: sdv_releases
+  url: wnba_groups/wnba_group_seasons.parquet
+  tag: wnba_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the calendar year."
+- fn: load_wnba_group_aliases
+  league: wnba
+  base: sdv_releases
+  url: wnba_groups/wnba_group_aliases.parquet
+  tag: wnba_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, sdv, wnba_stats) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_wnba_team_group_seasons
+  league: wnba
+  base: sdv_releases
+  url: wnba_groups/wnba_team_group_seasons_{season}.parquet
+  tag: wnba_groups
+  min_season: 1997
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id; team_id_source names the id space. season is the calendar year; seasons 1997-2026."
+- fn: load_mlb_groups
+  league: mlb
+  base: sdv_releases
+  url: mlb_groups/mlb_groups.parquet
+  tag: mlb_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. mlb:al-east) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the calendar year."
+- fn: load_mlb_group_seasons
+  league: mlb
+  base: sdv_releases
+  url: mlb_groups/mlb_group_seasons.parquet
+  tag: mlb_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the calendar year."
+- fn: load_mlb_group_aliases
+  league: mlb
+  base: sdv_releases
+  url: mlb_groups/mlb_group_aliases.parquet
+  tag: mlb_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, mlb) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_mlb_team_group_seasons
+  league: mlb
+  base: sdv_releases
+  url: mlb_groups/mlb_team_group_seasons_{season}.parquet
+  tag: mlb_groups
+  min_season: 1901
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id where ESPN covers the team, otherwise the MLB Stats API id; team_id_source names the id space. season is the calendar year; seasons 1901-2026."
+- fn: load_nhl_groups
+  league: nhl
+  base: sdv_releases
+  url: nhl_groups/nhl_groups.parquet
+  tag: nhl_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. nhl:metropolitan) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_nhl_group_seasons
+  league: nhl
+  base: sdv_releases
+  url: nhl_groups/nhl_group_seasons.parquet
+  tag: nhl_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the ENDING year (2025 = the 2024-25 season)."
+- fn: load_nhl_group_aliases
+  league: nhl
+  base: sdv_releases
+  url: nhl_groups/nhl_group_aliases.parquet
+  tag: nhl_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (espn, nhl) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_nhl_team_group_seasons
+  league: nhl
+  base: sdv_releases
+  url: nhl_groups/nhl_team_group_seasons_{season}.parquet
+  tag: nhl_groups
+  min_season: 1918
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the ESPN team id where ESPN covers the team, otherwise the NHL id; team_id_source names the id space. season is the ENDING year (2025 = the 2024-25 season); seasons 1918-2026. No 2005 asset (the 2004-05 lockout)."
+- fn: load_ncaa_baseball_groups
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_groups/ncaa_baseball_groups.parquet
+  tag: ncaa_baseball_groups
+  notes: "One season-less file: one row per group lineage (the league, subdivisions, conferences, divisions) with the first and last season it had members. group_id is SDV's own id (e.g. ncaa_baseball:acc) and names a lineage: a rename that keeps continuity keeps the id, a new body gets a new one, and notes records each call. Seasons are the calendar year."
+- fn: load_ncaa_baseball_group_seasons
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_groups/ncaa_baseball_group_seasons.parquet
+  tag: ncaa_baseball_groups
+  notes: "One season-less file: one row per group per season it existed, with its name, short name, abbreviation and parent group AS OF that season (never today's label applied to the past) and its member count. season is the calendar year."
+- fn: load_ncaa_baseball_group_aliases
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_groups/ncaa_baseball_group_aliases.parquet
+  tag: ncaa_baseball_groups
+  notes: "One season-less file: every name, abbreviation, slug and source id that a source (ncaa, sdv) uses for a group, each with the seasons it is valid for (valid_from / valid_to, inclusive; null = unbounded). Match a source's conference or division label here to reach group_id."
+- fn: load_ncaa_baseball_team_group_seasons
+  league: mlb
+  base: sdv_releases
+  url: ncaa_baseball_groups/ncaa_baseball_team_group_seasons_{season}.parquet
+  tag: ncaa_baseball_groups
+  min_season: 2010
+  example_args:
+    seasons: 2024
+  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the stats.ncaa.org org id (not an ESPN id); team_id_source names the id space. season is the calendar year; seasons 2010-2026."
+# --- mlb_parks: MLB park dimensions (sportsdataverse/sdv-reference-data). One
+# season-less venue x season table; fences in feet at MLB's seven markers. ---
+- fn: load_mlb_park_dimensions
+  league: mlb
+  base: sdv_releases
+  url: mlb_parks/mlb_park_dimensions.parquet
+  tag: mlb_parks
+  notes: "One season-less file, seasons 2001 on: one row per MLB venue per season (regular-season, spring-training, neutral and international sites) from the MLB Stats API venues endpoint, with fence distances in feet at MLB's seven markers, capacity, turf, roof, azimuth, elevation and coordinates as of that season. venue_id is a string (the MLB Stats API venue id, venue.id in game feeds); venue_name is the name in use that season. The API lags or misses some fence moves: cited corrections (Camden Yards, Petco Park, T-Mobile Park, Comerica Park, 2022 Rate Field and Progressive Field) are applied and described in notes, which is null on uncorrected rows."

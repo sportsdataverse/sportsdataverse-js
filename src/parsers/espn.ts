@@ -1279,6 +1279,13 @@ export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summa
   season_type_leaders: parse_items,
   season_week_rankings: parse_items,
   season_group_children: parse_items,
+  // sdv-py names parse_weekly_powerindex here (not ported); the list parser is
+  // the Core v2 fallback until it is.
+  season_week_powerindex: parse_items,
+  // NCAA recruiting (Core v2 list payloads).
+  recruiting_years: parse_items,
+  recruiting_athletes: parse_items,
+  recruiting_rankings: parse_items,
   // ---- Event-scoped list payloads ----
   event_broadcasts: parse_items,
   event_competitors: parse_items,
