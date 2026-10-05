@@ -1,0 +1,18 @@
+# Multi-table flat-API parsers: sdv-py returns a dict of frames; under `parsed: true`
+# the JS wrapper returns ONE sub-frame -- `default` (the frame sdv-py's returns schema
+# documents) -- and `section: "<name>"` selects any other. Codegen reads this to
+# document the values in the reference; a drift test asserts it equals
+# MULTI_TABLE_SECTIONS in src/parsers/_frames.ts (the runtime source of truth).
+parsers:
+  parse_asa_goals_added:
+    default: summary
+    sections: [summary, actions]
+  parse_mls_standings:
+    default: entries
+    sections: [tables, entries]
+  parse_mls_match:
+    default: match_information
+    sections: [match_information, environment, teams, players, staff, referees, last_matches]
+  parse_nwsl_lineups:
+    default: players
+    sections: [teams, players, staff]

@@ -143,10 +143,14 @@ import {
   parse_pff_v2_table,
 } from "./pff_api.js";
 import { parse_nfl_pro_stats } from "./nfl_pro.js";
+import { parse_on3_rdb } from "./on3.js";
+import { parse_asa, parse_asa_goals_added } from "./asa.js";
+import { parse_mls_api, parse_mls_entity, parse_mls_standings, parse_mls_match } from "./mls_api.js";
+import { parse_nwsl_sdp, parse_nwsl_standings, parse_nwsl_stats, parse_nwsl_lineups } from "./nwsl_api.js";
 import { parse_nba_stats_result_sets } from "./nba_stats.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
-export type ParserFn = (raw: any) => Record<string, any>[];
+export type ParserFn = (raw: any, section?: string) => Record<string, any>[];
 
 /** Named tables from one payload (a multi-table page, e.g. KenPom or PFF `/v1/teams`). */
 export type ParsedTables = Record<string, Record<string, any>[]>;
@@ -155,7 +159,7 @@ export type ParsedTables = Record<string, Record<string, any>[]>;
  * A registered flat-API parser: tidy rows, or — for a payload that carries
  * several tables (sdv-py returns a dict of frames there) — a dict of row arrays.
  */
-export type FlatParserFn = (raw: any) => Record<string, any>[] | ParsedTables;
+export type FlatParserFn = (raw: any, section?: string) => Record<string, any>[] | ParsedTables;
 
 /** Registered parsers, keyed by the `parser` name on a flat `WrapperDef`. */
 export const PARSERS: Record<string, FlatParserFn> = {
@@ -304,6 +308,18 @@ export const PARSERS: Record<string, FlatParserFn> = {
   parse_nfl_pro_stats,
   // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY, added by
   // src/core/kenpom_runtime.ts via registerParser (see NODE_ONLY_PARSERS).
+  // ---- Keyless providers / league APIs (vendored from sdv-py) ----
+  parse_on3_rdb,
+  parse_asa,
+  parse_asa_goals_added,
+  parse_mls_api,
+  parse_mls_entity,
+  parse_mls_standings,
+  parse_mls_match,
+  parse_nwsl_sdp,
+  parse_nwsl_standings,
+  parse_nwsl_stats,
+  parse_nwsl_lineups,
   // ---- stats.nba.com / stats.wnba.com (resultSets envelope; one generic parser) ----
   // Multi-set payloads return { [setName]: rows }, hence the cast.
   parse_nba_stats_result_sets: parse_nba_stats_result_sets as ParserFn,

@@ -2,6 +2,7 @@
 
 ## **Unreleased**
 
+
 ### Fixed
 
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.
@@ -9,13 +10,16 @@
 - `sdv.wnba.getTeamList()` no longer throws when called with no argument.
 - ESPN site API rejected the default User-Agent (HTTP 403 on every site_v2 wrapper: scoreboard, summary, teams, rosters…); the default UA no longer carries the `+https://…` token.
 
+
 ### Deprecated
 
 - The six stats.ncaa.org scrapers in `sdv.ncaa` (`getSports`, `getSeasons`, `getDivisions`, `getSportDivisionData`, `getPlayerData`, `getTeamData`) are marked `@deprecated` and emit a one-time `DeprecationWarning` (the host 403s plain clients). `ncaa.getScoreboard` only serves historical seasons.
 
+
 ### CI
 
 - New weekly `live-smoke.yml` runs the `SDV_LIVE=1` suite and opens/updates one `live-tests:drift` issue on failure; `npm-publish.yml` now runs `npm test` before publishing.
+
 
 ### Added — subscription families: PFF Developer API, KenPom, NFL Pro
 
@@ -27,11 +31,24 @@ Vendored from sportsdataverse-py (`719de79`). Each needs the caller's own paid c
 - Core: `registerFamilyDefaults(family, { classifyError })` lets a family map a final failed response to its own error (404 stays `NoDataError`). New exports: `InvalidParameterError`, `NflProAuthError`, `nflProToken`, `resolvePffApiKey`, `hasKenpomLogin`, `kenpomLogin`, `kenpomClearSessionCache`, `parse_kenpom_page`, `NODE_ONLY_PARSERS`, and the `FlatParserFn` / `ParsedTables` types (a flat parser may return a dict of tables, as for KenPom pages and PFF's multi-table bodies).
 - Live tests: `SDV_PFF_LIVE=1`, `SDV_KENPOM_LIVE=1`, `SDV_NFL_PRO_LIVE=1`, each also skipped without its credentials.
 
+
+### Added — keyless sdv-py families: On3, ASA, MLS, NWSL, women's T-Rank, ESPN FPI
+
+Vendored from sdv-py at the existing pin (`719de79`); no key or login for any of them.
+
+- `sdv.on3.*` (78 endpoints, On3 Recruit Database `api.on3.com/public/rdb`), `sdv.asa.*` (15, American Soccer Analysis, `league_slug` = mls/nwsl/uslc/usl1/mlsnp), `sdv.mls.mls_api_*` (12, the three mlssoccer.com hosts) and `sdv.nwsl.nwsl_api_*` (9, StatsPerform SDP). MLS and NWSL send the site `Referer` plus a browser User-Agent; NWSL composite ids (`nwsl::Football_Season::<hex>`) go on the wire with the `::` unencoded. The four deprecated On3 `_next/data` scrape shims are not ported.
+- `sdv.torvik.bart_wbb_ratings` (women's T-Rank, `barttorvik.com/ncaaw`).
+- `espn_<league>_fpi` on every league: ESPN's resolved Football Power Index table (`site.web.api.espn.com/apis/fitt/v3`, a fifth ESPN host family), parsed by `parse_fpi`.
+- Parsers are ports of sdv-py's, checked cell by cell against sdv-py's own output on real captures. Multi-table parsers (ASA goals-added, MLS standings and match, NWSL lineups) return one sub-frame under `parsed: true` — the one sdv-py's returns schema documents (ASA `summary`, MLS `entries` / `match_information`, NWSL `players`) — and `section: "<name>"` selects any other (unknown name throws, listing the valid ones; values are in the generated reference). Every sub-frame at once: `parse_asa_goals_added_tables`, `parse_mls_standings_tables`, `parse_mls_match_tables`, `parse_nwsl_lineups_tables` from `sportsdataverse/parsers`.
+- A 2xx non-JSON body (HTML bot block) from these JSON hosts is an `AssetFetchError`, not an empty result; a genuinely empty `[]` / `{}` is data.
+- Playground proxy: the new hosts (and MLS's per-endpoint `sportapi` / `dapi` hosts) are allowlisted; the proxy supplies the MLS / NWSL `Referer`.
+
 ### Added — stats.nba.com / stats.wnba.com (`nba_stats` 128, `wnba_stats` 111)
 
 - Vendored from sdv-py@719de79 onto `sdv.nba.nba_stats_<slug>` (e.g. `nba_stats_leaguedashplayerstats`, `nba_stats_playercareerstats`) and `sdv.wnba.wnba_stats_<slug>`; `league_id` selects `"00"` NBA, `"20"` G-League, `"15"` Summer League (WNBA `"10"`). `{ parsed: true }` runs the ported `parse_nba_stats_result_sets` (single set -> rows, several -> `{ setName: rows }`, empty/malformed -> `[]`).
 - **Needs a TLS-impersonating transport.** stats.nba.com fingerprint-blocks plain clients (the request hangs instead of failing) and hangs on datacenter/cloud IPs. Both families default to `createImpersonatingTransport({ browser: "chrome" })` (optional peer `impit`: `npm install impit`) with the sdv-py stats headers, and 403 is never retried. Without `impit`, calls reject with `TransportUnavailableError` explaining the install and the datacenter-IP caveat. A timeout, blank body or bare `{}` is a failure (`AssetFetchError`), never "no data".
 - Not on the docs playground proxy. Live tests use their own gate `SDV_NBA_STATS_LIVE=1` (never set in CI).
+
 
 ### Added — HockeyTech: 15 more leagues, season-id helpers, PWHL views
 
@@ -40,6 +57,7 @@ Vendored from sportsdataverse-py (`719de79`). Each needs the caller's own paid c
 - Season helpers on `sdv.hockeytech`: `hockeytech_season_id(league)`, `most_recent_hockeytech_season(league)`, `hockeytech_resolve_season_id(league, {season|seasonId, gameType})` (camelCase too).
 - `hockeytech_seasons` parsed rows gain `season_yr` and `game_type_label`; `hockeytech_schedule` now defaults to the full-history window (`numberofdaysback/ahead/limit` = 10000, as sdv-py).
 - Season ids: `hockeytech_schedule` / `hockeytech_playoff_bracket` take a raw `season_id` (py accepts an end-year `season=`). Resolve first with `hockeytech_resolve_season_id(league, { season })`; brackets need `gameType: 'playoffs'`. The views that sdv-py sends `league_id` on (schedule/scorebar, standings, transactions, brackets) now send the league's registry `leagueId` (overridable via `league_id`).
+
 
 ### Changed (breaking) — error vocabulary, pluggable transport + auth
 
@@ -68,6 +86,7 @@ retry → classification.
   whose getter takes headers (not HockeyTech, which builds its own).
 - New guide: [Transport, auth & errors](/docs/guides/transport-and-auth).
 
+
 ### Changed (breaking) — provider method naming
 
 Dropped internal vendor API codenames (and redundant `_api` stems) from provider
@@ -81,6 +100,7 @@ are unchanged):
 The rename flows through the codegen stems, returns-schema paths, parser names,
 playground ids, and docs. Real upstream URL paths that contain the vendor
 codename (Fox `/bifrost/v1/…`, Yahoo `/v1/query/shangrila/…`) are unchanged.
+
 
 ### Changed — shared endpoint YAML is vendored from sportsdataverse-py
 
@@ -128,6 +148,7 @@ drifted since the 2026-06 fork:
 A minor, additive release: two new flat-API families (no breaking changes), plus
 the docs-site overhaul.
 
+
 ### New flat-API families
 
 Two standalone provider namespaces join the flat-API surface — **532 flat-API
@@ -164,6 +185,7 @@ column-described returns tables.
   the in-browser **playground** — the `/api/run` proxy allowlist derives one host
   per family, so QMJHL calls there hit the primary host. Use the library directly
   for QMJHL.
+
 
 ### Docs
 

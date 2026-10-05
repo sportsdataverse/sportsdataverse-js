@@ -31,10 +31,11 @@ const UA = "Mozilla/5.0 (sportsdataverse-js; +https://js.sportsdataverse.org/)";
  */
 export async function torvikGet(
   url: string,
-  config: { params?: Record<string, unknown>; headers?: Record<string, string> } = {}
+  config: { params?: Record<string, unknown>; headers?: Record<string, string> } = {},
+  family = "torvik"
 ): Promise<string> {
   // Raw body text; the per-endpoint parser decides CSV-parse vs JSON.parse.
-  const data = await request("torvik", {
+  const data = await request(family, {
     method: "GET",
     url,
     query: config.params,
@@ -44,3 +45,9 @@ export async function torvikGet(
   if (data == null) return "";
   return typeof data === "string" ? data : String(data);
 }
+
+/** Women's T-Rank (`barttorvik.com/ncaaw`): the same getter under its own `bart_wbb` family stem. */
+export const bartWbbGet = (
+  url: string,
+  config: { params?: Record<string, unknown>; headers?: Record<string, string> } = {}
+): Promise<string> => torvikGet(url, config, "bart_wbb");

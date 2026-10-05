@@ -70,7 +70,7 @@ describe('param transforms (ports of the sdv-py runtime functions)', () => {
     const named = [...WRAPPERS, ...FLAT_WRAPPERS].flatMap((d) =>
       [...d.pathParams, ...d.queryParams].map((p) => p.transform).filter(Boolean)
     );
-    named.length.should.equal(52); // 42 format_nhl_season + 9 _bool_str + 1 bool_str
+    named.length.should.equal(53); // 42 format_nhl_season + 9 _bool_str + 2 bool_str (nhl + mls_api)
     for (const t of named) should(TRANSFORMS[t]).be.a.Function();
   });
 });

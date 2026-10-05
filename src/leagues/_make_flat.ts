@@ -7,14 +7,16 @@ import { toCamel } from "../core/espn.js";
 import "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
-import { torvikGet } from "../core/torvik_runtime.js";
 // Subscription families: each module registers its auth / retry / error
 // defaults on import and exports the getter the dispatch routes through.
 import { pffApiGet } from "../core/pff_api_runtime.js";
 import { nflProGet } from "../core/nfl_pro_runtime.js";
 import { kenpomGet } from "../core/kenpom_runtime.js";
+import { torvikGet, bartWbbGet } from "../core/torvik_runtime.js";
+import { on3Get, mlsGet, nwslGet } from "../core/keyless_runtime.js";
 import { nbaStatsGet } from "../core/nba_stats_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
+import { MULTI_TABLE_SECTIONS } from "../parsers/_frames.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
 /**
@@ -50,6 +52,12 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   pff_api: pffApiGet,
   nfl_pro: nflProGet,
   kenpom: kenpomGet,
+  // Women's T-Rank: same raw-text getter under the `bart_wbb` family.
+  bart_wbb: bartWbbGet,
+  // Keyless providers: browser UA (+ site Referer for MLS / NWSL).
+  on3: on3Get,
+  mls_api: mlsGet,
+  nwsl_api: nwslGet,
   // stats.nba.com / stats.wnba.com: browser headers, sorted params, zero-padded
   // GameID, and a body check so a throttled blank / `{}` reply is a failure.
   nba_stats: nbaStatsGet,
@@ -73,7 +81,10 @@ export async function callFlat(
   // Flat defs always carry their `api` stem (codegen); get() guards it at runtime.
   const raw = await getter(url, { params: query, headers: params.headers, family: def.api!, args: params });
   const parser = params.parsed ? parserFor(def.parser) : undefined;
-  return parser ? parser(raw) : raw;
+  // Multi-table parsers (sdv-py returns a dict of frames) take `section`; the rest
+  // keep their one-argument contract.
+  if (!parser) return raw;
+  return def.parser && def.parser in MULTI_TABLE_SECTIONS ? parser(raw, params.section) : parser(raw);
 }
 
 /**

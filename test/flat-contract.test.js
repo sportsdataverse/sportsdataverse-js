@@ -30,6 +30,9 @@ const FLAT_API_NAMESPACES = {
   pff_api: 'nfl',
   nfl_pro: 'nfl',
   kenpom: 'mbb',
+  bart_wbb: 'torvik',
+  mls_api: 'mls',
+  nwsl_api: 'nwsl',
   nba_stats: 'nba',
   wnba_stats: 'wnba',
 };

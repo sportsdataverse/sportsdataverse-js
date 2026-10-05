@@ -89,6 +89,13 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   pff_api: 'nfl',
   nfl_pro: 'nfl',
   kenpom: 'mbb',
+  // Women's T-Rank joins `sdv.torvik`; On3 / ASA are standalone provider
+  // namespaces; the MLS / NWSL native APIs merge onto their league namespaces.
+  bart_wbb: 'torvik',
+  on3: 'on3',
+  asa: 'asa',
+  mls_api: 'mls',
+  nwsl_api: 'nwsl',
   // stats.nba.com / stats.wnba.com (TLS-impersonating transport; see
   // src/core/nba_stats_runtime.ts) merge onto the league namespaces.
   nba_stats: 'nba',

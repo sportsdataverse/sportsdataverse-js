@@ -12,7 +12,7 @@ import {
 } from "./transport.js";
 
 /** ESPN families whose 200 body `{ code: 404 }` means "no such resource". */
-const ESPN_FAMILIES = new Set(["site_v2", "site_v2_alt", "web_v3", "core_v2"]);
+const ESPN_FAMILIES = new Set(["site_v2", "site_v2_alt", "web_v3", "core_v2", "fitt_v3"]);
 
 /** Ceiling on an honoured `Retry-After`, in seconds (same as sdv-py). */
 const MAX_RETRY_AFTER_SECONDS = 120;
