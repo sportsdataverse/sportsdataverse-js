@@ -86,6 +86,11 @@ export interface WrapperDef {
    * (`configure({ auth })`) for that `api` stem.
    */
   auth?: boolean;
+  /**
+   * Set on a deprecated flat wrapper (endpoint YAML `deprecated:`): what to use
+   * instead. The first call of each such wrapper emits one DeprecationWarning.
+   */
+  deprecated?: string;
 }
 
 /** A generated cross-league wrapper: `(params?) => Promise<raw ESPN JSON>`. */

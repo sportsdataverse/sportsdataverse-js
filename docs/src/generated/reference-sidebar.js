@@ -504,6 +504,11 @@ module.exports = [
       },
       {
         "type": "doc",
+        "id": "reference/sports247",
+        "label": "sports247"
+      },
+      {
+        "type": "doc",
         "id": "reference/yahoo",
         "label": "yahoo"
       }

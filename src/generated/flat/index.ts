@@ -17,6 +17,8 @@ import * as nhlRecordsFlat from "./nhl_records.js";
 import * as nhlStatsRestFlat from "./nhl_stats_rest.js";
 import * as oddsApiFlat from "./odds_api.js";
 import * as recruitingFlat from "./recruiting.js";
+import * as sports247Flat from "./sports247.js";
+import * as sports247SitePagesFlat from "./sports247_site_pages.js";
 import * as torvikFlat from "./torvik.js";
 import * as yahooFlat from "./yahoo.js";
 import * as yahooScoresFlat from "./yahoo_scores.js";
@@ -34,6 +36,8 @@ export const WRITTEN_FLAT: Record<string, Record<string, WrapperFn>> = {
   nhl_stats_rest: nhlStatsRestFlat,
   odds_api: oddsApiFlat,
   recruiting: recruitingFlat,
+  sports247: sports247Flat,
+  sports247_site_pages: sports247SitePagesFlat,
   torvik: torvikFlat,
   yahoo: yahooFlat,
   yahoo_scores: yahooScoresFlat,

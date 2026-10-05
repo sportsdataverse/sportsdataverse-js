@@ -41,6 +41,8 @@ const FLAT_API_FILES = [
   "nfl_api",
   "odds_api",
   "recruiting",
+  "sports247",
+  "sports247_site_pages",
   "cbs",
   "fox",
   "yahoo_scores",
@@ -66,6 +68,10 @@ const FLAT_API_NAMESPACES = {
   nfl_api: "nfl",
   odds_api: "odds",
   recruiting: "recruiting",
+  // 247Sports (supersedes `recruiting`): two vendored stems on two hosts share
+  // the standalone `sdv.sports247` namespace.
+  sports247: "sports247",
+  sports247_site_pages: "sports247",
   cbs: "cbs",
   fox: "fox",
   yahoo_scores: "yahoo",
@@ -110,6 +116,29 @@ const FLAT_API_META = {
   recruiting: {
     label: "247Sports",
     source: "the 247Sports recruiting database",
+    deprecated:
+      "Every method is deprecated: `api.247sports.com` answers HTTP 500. Use " +
+      "[`sdv.sports247`](./sports247) instead — each row below names its " +
+      "replacement; the 13 routes without one need a logged-in 247Sports session.",
+  },
+  sports247: {
+    label: "247Sports RDB",
+    source: "the 247Sports Recruit Database (`ipa.247sports.com`)",
+    // The guest JWT is minted by src/core/sports247_runtime.ts (sdv-py's YAML
+    // carries no `auth: true`; its runtime mints there too).
+    auth: true,
+    note:
+      "**Transport:** the host fingerprint-blocks plain HTTP clients, so this " +
+      "family uses the browser-impersonating transport — `npm install impit` " +
+      "(without it, calls reject with `TransportUnavailableError`).",
+  },
+  sports247_site_pages: {
+    label: "247Sports site pages",
+    source: "the 247sports.com `*.json` page models",
+    note:
+      "No auth. **Transport:** browser-impersonating (`npm install impit`), as " +
+      "for `sports247`. Nested entities arrive as bare integer keys — walk each " +
+      "through its own `.json` route.",
   },
   cbs: { label: "CBS Sports", source: "the CBS Sports API" },
   fox: { label: "Fox Sports", source: "the Fox Sports API" },
@@ -144,11 +173,17 @@ const STANDALONE_NS_EXAMPLE = {
     "// The Odds API uses a plain `apiKey` query param (you supply it):\n" +
     "await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY });\n",
   recruiting:
+    "// DEPRECATED (api.247sports.com answers HTTP 500) — use sdv.sports247.\n" +
     "// 247Sports recruiting rankings (pass your own JWT via `headers`):\n" +
     "await sdv.recruiting.recruiting_rankings({\n" +
     "  sport_key: 'football', year: 2025,\n" +
     "  headers: { Authorization: `Bearer ${process.env.SPORTS247_TOKEN}` },\n" +
     "});\n",
+  sports247:
+    "// 247Sports: a free guest token is minted for you; needs `npm install impit`\n" +
+    "// (both hosts block plain HTTP clients). sport_key 1 = football, 2 = basketball.\n" +
+    "await sdv.sports247.sports247InstitutionRankings({ year: 2026, parsed: true });\n" +
+    "await sdv.sports247.sports247SitePagesInstitution({ key: 24099, parsed: true });\n",
   cbs:
     "// CBS Sports is an anonymously-reachable public JSON API (no token):\n" +
     "await sdv.cbs.cbs_league({ league_id: 'football-nfl' });\n",
@@ -253,7 +288,7 @@ function loadFlatWrappers() {
     // A top-level `auth: true` on the family YAML (e.g. nfl_api) flags every
     // emitted wrapper so the flat dispatch resolves a bearer-token header set
     // before fetching (see AUTH_HEADER_PROVIDERS in src/leagues/_make_flat.ts).
-    const auth = doc.auth === true;
+    const auth = doc.auth === true || FLAT_API_META[doc.api]?.auth === true;
     for (const ep of doc.endpoints ?? []) {
       wrappers.push({
         short: ep.short,
@@ -267,6 +302,7 @@ function loadFlatWrappers() {
         ...(ep.parser ? { parser: ep.parser } : {}),
         ...(ep.returns_schema ? { returnsSchema: ep.returns_schema } : {}),
         ...(auth ? { auth: true } : {}),
+        ...(ep.deprecated ? { deprecated: String(ep.deprecated) } : {}),
       });
     }
   }
@@ -645,13 +681,17 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
       ` **Auth:** this family mints a bearer token automatically before ` +
       `each call (no credentials required).`;
   }
+  if (meta.note) body += ` ${meta.note}`;
+  if (meta.deprecated) body += `\n\n:::warning Deprecated\n\n${meta.deprecated}\n\n:::`;
   body += `\n\n`;
   body += `| Method | HTTP | Path params | Query params | Parser | Auth |\n`;
   body += `|---|---|---|---|---|---|\n`;
   const sorted = rows.slice().sort((a, b) => a.short.localeCompare(b.short));
   for (const w of sorted) {
     const camel = toCamel(`${api}_${w.short}`);
-    const method = `\`${api}_${w.short}\` / \`${camel}\``;
+    const method =
+      `\`${api}_${w.short}\` / \`${camel}\`` +
+      (w.deprecated ? ` — **deprecated:** ${escapeCell(w.deprecated)}` : "");
     const http = `\`${w.host}${w.path}\``;
     const auth = w.auth ? "yes" : "—";
     body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
@@ -1476,7 +1516,14 @@ function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
 // Playground metadata (consumed by the React component + serverless proxy)
 // ---------------------------------------------------------------------------
 
-function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) {
+// Families kept OFF the docs playground: their hosts answer only a
+// browser-impersonating TLS client, which the serverless proxy's plain fetch is
+// not. Leaving them out of `flatHosts` also keeps them off the proxy allowlist.
+const PLAYGROUND_EXCLUDED = new Set(["sports247", "sports247_site_pages"]);
+
+function renderEndpointsJson(wrappers, leagues, hosts, allFlatWrappers) {
+  const flatWrappers = allFlatWrappers.filter((w) => !PLAYGROUND_EXCLUDED.has(w.api));
+  const flatHosts = flatHostsFrom(flatWrappers);
   return (
     JSON.stringify(
       {
@@ -1492,7 +1539,9 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
         // `flatLeagues` maps each family stem to the league prefix it's merged
         // onto (so the playground can group flat endpoints under their league).
         flatHosts,
-        flatLeagues: FLAT_API_NAMESPACES,
+        flatLeagues: Object.fromEntries(
+          Object.entries(FLAT_API_NAMESPACES).filter(([api]) => !PLAYGROUND_EXCLUDED.has(api))
+        ),
         flatApis: flatWrappers,
       },
       null,
@@ -1514,7 +1563,6 @@ function flatHostsFrom(flatWrappers) {
 
 const wrappers = loadWrappers();
 const flatWrappers = loadFlatWrappers();
-const flatHosts = flatHostsFrom(flatWrappers);
 const leaguesDoc = loadLeaguesDoc();
 const leagues = loadLeagues(leaguesDoc);
 // All ESPN leagues are emitted as written source (see WRITTEN_ESPN_LEAGUES above).
@@ -1543,8 +1591,7 @@ const outputs = {
     wrappers,
     leagues,
     hosts,
-    flatWrappers,
-    flatHosts
+    flatWrappers
   ),
 };
 const writtenEspnSet = new Set(WRITTEN_ESPN_LEAGUES);
@@ -1646,11 +1693,15 @@ function renderWrittenFlatModule(api, defs) {
     const flatExampleArgs = reqPath.length
       ? `{ ${reqPath.map((p) => `${p.name}: '…'`).join(", ")} }`
       : "{}";
-    jsdoc += ` * @example await sdv.${ns}.${camel}(${flatExampleArgs});\n */\n`;
+    jsdoc += ` * @example await sdv.${ns}.${camel}(${flatExampleArgs});\n`;
+    if (def.deprecated) jsdoc += ` * @deprecated ${def.deprecated}\n`;
+    jsdoc += ` */\n`;
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
     body += `export const ${camel}: WrapperFn = (params = {}) => callFlat(${defConst}, params);\n`;
-    body += `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;
+    body += def.deprecated
+      ? `/**\n * snake_case alias of {@link ${camel}} (py/R parity).\n * @deprecated ${def.deprecated}\n */\n`
+      : `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;
     body += `export const ${snake} = ${camel};\n`;
   }
   return body;

@@ -8,6 +8,8 @@ import "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
 import { torvikGet } from "../core/torvik_runtime.js";
+// Also registers the 247 families' transport / guest-JWT auth defaults.
+import { sports247Get, sports247SitePagesGet } from "../core/sports247_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
@@ -35,7 +37,13 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   // and JSON (one JSON endpoint even with a text/html content-type), so this
   // getter sets a browser UA and returns the raw body text for the parser.
   torvik: torvikGet,
+  // 247Sports: browser headers (+ the RDB's trailing slash); the guest JWT and
+  // the impersonating transport come from the family defaults.
+  sports247: sports247Get,
+  sports247_site_pages: sports247SitePagesGet,
 };
+
+const warnedDeprecated = new Set<string>();
 
 /**
  * Make one flat-API call (the flat analogue of `callWrapper`): pick the family
@@ -49,6 +57,13 @@ export async function callFlat(
   def: WrapperDef,
   params: Record<string, any> = {}
 ): Promise<any> {
+  if (def.deprecated) {
+    const name = `${def.api}_${def.short}`;
+    if (!warnedDeprecated.has(name)) {
+      warnedDeprecated.add(name);
+      process.emitWarning(`${name}() is deprecated: ${def.deprecated}`, "DeprecationWarning");
+    }
+  }
   const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
   const { url, query } = resolveFlat(def, params);
   // Flat defs always carry their `api` stem (codegen); get() guards it at runtime.

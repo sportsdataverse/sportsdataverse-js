@@ -173,7 +173,9 @@ hand-edited** — you edit the YAML (or the templates) and regenerate.
   league-parameterized; `sdv.torvik.*` is men's college-basketball T-Rank
   analytics. Auth varies per family — bearer-token mint (NFL.com, automatic),
   `apiKey` query (Odds), public `apikey`+`api-version` (Fox), caller-supplied
-  `headers`/JWT (247, Yahoo), keyless (CBS, HockeyTech, BartTorvik). A family that
+  `headers` (Yahoo), a free guest JWT minted automatically plus a
+  browser-impersonating transport (247Sports on `sdv.sports247`, needs `impit`),
+  keyless (CBS, HockeyTech, BartTorvik). A family that
   needs non-JSON bodies or custom request shaping (HockeyTech's JSONP, BartTorvik's
   browser-UA CSV/JSON) supplies its own getter runtime via `GETTER_OVERRIDES`.
 - **OpenAPI → YAML transform** — `tools/codegen/from-openapi.mjs` turns a canonical

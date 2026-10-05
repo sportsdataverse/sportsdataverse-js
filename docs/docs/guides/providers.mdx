@@ -19,7 +19,7 @@ honors `{ parsed: true }`:
 | `sdv.cbs` | CBS Sports NAPI | public, anonymous; league/team ids are slugs |
 | `sdv.fox` | Fox Sports Bifrost | public apikey defaults out of the box |
 | `sdv.yahoo` | Yahoo shangrila / editorial | pass a `league` slug |
-| `sdv.recruiting` | 247Sports | recruiting rankings, transfers |
+| `sdv.sports247` | 247Sports | recruits, team rankings, transfers, page models; needs `impit` |
 
 ## Odds — The Odds API
 
@@ -133,28 +133,26 @@ slug. If a Yahoo host rejects the call, add an `Origin`/`Referer` via `headers`:
 
 ## 247Sports — recruiting rankings
 
-Scope with `year` + `sport_key` (`football`, `basketball`).
+`sdv.sports247` covers the 247Sports Recruit Database (`ipa.247sports.com`) and
+the `247sports.com` `*.json` page models. A free guest token is minted for you.
+Both hosts block plain HTTP clients, so install the optional `impit` dependency
+(`npm install impit`). The family is not on the playground for the same reason.
+Scope with `year` and `sport_key` (`1` = football, `2` = basketball).
 
 ```js
 import sdv from 'sportsdataverse';
 
-const rankings = await sdv.recruiting.recruitingRankings({
-  year: 2025,
-  sport_key: 'football',
+const teams = await sdv.sports247.sports247InstitutionRankings({
+  year: 2026,
+  sport_key: 1,
   parsed: true,
 });
-console.table(rankings);
+const recruits = await sdv.sports247.sports247Recruits({ year: 2026, parsed: true });
+console.table(teams.slice(0, 10));
 ```
 
-<RunCell
-  league="recruiting"
-  endpoint="flat:recruiting:rankings"
-  params={{ year: 2025, sport_key: 'football' }}
-  parsed
-  title="247Sports recruiting rankings — live"
-/>
-
-[Open in playground ▶](/playground?l=recruiting&e=flat%3Arecruiting%3Arankings&parsed=1&year=2025&sport_key=football)
+The older `sdv.recruiting` methods (`api.247sports.com`) are deprecated because
+that host answers HTTP 500.
 
 ## Run it live
 
@@ -178,5 +176,5 @@ then the embed may load v2. Copy any snippet into Node to run it locally.
 :::tip
 Per-provider method tables: **[odds](/docs/reference/odds)**,
 **[cbs](/docs/reference/cbs)**, **[fox](/docs/reference/fox)**,
-**[yahoo](/docs/reference/yahoo)**, **[247 / recruiting](/docs/reference/recruiting)**.
+**[yahoo](/docs/reference/yahoo)**, **[247Sports](/docs/reference/sports247)**.
 :::

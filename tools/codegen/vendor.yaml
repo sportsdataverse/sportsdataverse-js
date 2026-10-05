@@ -99,6 +99,15 @@ families:
       team_roster_type: parse_mlb_team_roster
     schemas:
       native/mlb_api/: native/mlb/
+  sports247:
+    # 247Sports RDB (ipa.247sports.com) — the supported 247 surface; supersedes
+    # the JS-owned `recruiting` family (api.247sports.com, HTTP 500).
+    # src/parsers/sports247.ts: "Faithful port of" sdv-py's cfb/sports247_parsers.py
+    schema_compatible: true
+  sports247_site_pages:
+    # 247sports.com `*.json` page models.
+    # src/parsers/sports247.ts: "Faithful port of" sdv-py's cfb/sports247_site_pages_parsers.py
+    schema_compatible: true
   torvik:
     # Both py endpoints use JS's positional parsers, so JS keeps its own schemas
     # (overlay/torvik.yaml, with the 3 JS-only endpoints).
