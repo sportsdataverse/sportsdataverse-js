@@ -168,7 +168,7 @@ npm run codegen                 # then regenerate as usual
   edited together, or a LOCK line dropped): every LOCK blob sha must equal
   `git/trees/<ref>` of sdv-py at the pin AND LOCK's path set must equal what the vendor
   fetches (one shared path-selection helper). Unauthenticated, or `GITHUB_TOKEN`;
-  5xx/network errors retry 3 times, 403/404 and exhausted retries fail; it never passes unverified.
+  5xx/network errors get up to 3 attempts, 403/404 and exhausted attempts fail; it never passes unverified.
 - A new param `transform:` upstream fails `npm run codegen` until it is ported to
   `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
   `tools/codegen/param-transforms.mjs`.

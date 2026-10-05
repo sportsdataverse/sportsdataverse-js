@@ -35,8 +35,9 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse, parseDocument } from "yaml";
 
-// SDV_VENDOR_ROOT: test hook so a spawned `vendor.mjs` works on a temp copy of tools/codegen.
-export const CODEGEN_DIR = process.env.SDV_VENDOR_ROOT ?? dirname(fileURLToPath(import.meta.url));
+// SDV_VENDOR_ROOT: test hook so a spawned `vendor.mjs` (and vendor-lock-online.mjs, which
+// imports this) works on a temp copy of tools/codegen. Empty counts as unset.
+export const CODEGEN_DIR = process.env.SDV_VENDOR_ROOT || dirname(fileURLToPath(import.meta.url));
 const UPSTREAM = join("vendor", "upstream");
 const REF_FILE = "REF";
 // "<git blob sha>  <path>" per upstream file, taken from the pinned tree at fetch
