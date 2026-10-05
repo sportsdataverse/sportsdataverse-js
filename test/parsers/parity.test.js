@@ -322,6 +322,38 @@ function coverage() {
 }
 
 describe('parser parity: manifest + coverage', () => {
+  it('the dtype check holds the INT64 id rule both ways (a number in an id column fails)', () => {
+    sameType('1630639', 'Int64', 'player_id').should.be.true();
+    sameType(1630639, 'Int64', 'player_id').should.be.false(); // an id returned as a number
+    sameType('8445802', 'Float64', 'player_id').should.be.true(); // pandas' Float64 of an Int64 id with nulls
+    sameType(1630639n, 'Int64', 'game_pk').should.be.false();
+    sameType(12, 'Int64', 'games').should.be.true(); // non-id INT64: number / bigint
+    sameType(12n, 'Int64', 'games').should.be.true();
+    sameType('12', 'Int64', 'games').should.be.false();
+    typeCheck('integer', 'team_id')('1610612742').should.be.true();
+    typeCheck('integer', 'team_id')(1610612742).should.be.false();
+    typeCheck('integer', 'games')(3).should.be.true();
+    same('1630639', 1630639, 'player_id').should.be.true(); // py's integer id == JS's decimal string
+    same('1630639', 1630640, 'player_id').should.be.false();
+    same(1630639, 1630639, 'player_id').should.be.true(); // equality alone; the dtype check rejects the number
+  });
+
+  it('a kind: frames schema with columns is documented, never no_schema', () => {
+    let frames = 0;
+    for (const [key, eps] of status) {
+      for (const e of eps.filter((x) => x.status === 'attached')) {
+        // read independently of schemaTables (plain text: a YAML parse of every schema is slow)
+        const p = join(CODEGEN, 'schemas', `${e.ref}.yaml`);
+        const raw = existsSync(p) ? text(p) : '';
+        if (!/^kind: frames\s*$/m.test(raw) || !/^\s*-? *name: /m.test(raw)) continue;
+        frames++;
+        schemaColumns(e.ref).length.should.be.above(0, `${key}.${e.short}`);
+        docs.get(key).has(e.short).should.be.true(`${key}.${e.short} is documented`);
+      }
+    }
+    frames.should.be.above(0);
+  });
+
   it('every oracle entry has a capture in the manifest (regenerate with tools/parity/py_oracle.py)', () => {
     for (const [family, fixtures] of Object.entries(manifest)) {
       const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
