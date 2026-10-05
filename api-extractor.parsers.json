@@ -1,0 +1,12 @@
+// API report for the `sportsdataverse/parsers` subpath export.
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+  "extends": "./api-extractor.json",
+  "mainEntryPointFilePath": "<projectFolder>/dist/parsers/index.d.ts",
+  "apiReport": {
+    "enabled": true,
+    "reportFileName": "sportsdataverse-parsers",
+    "reportFolder": "<projectFolder>/etc/",
+    "reportTempFolder": "<projectFolder>/temp/api-extractor/"
+  }
+}

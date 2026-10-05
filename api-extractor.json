@@ -1,0 +1,34 @@
+// API report for the package root (`import sdv from 'sportsdataverse'`).
+// Regenerate with `npm run api:report`; CI runs `npm run api:check`.
+// The `sportsdataverse/parsers` subpath has its own report (api-extractor.parsers.json).
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+  "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
+  "apiReport": {
+    "enabled": true,
+    "reportFileName": "sportsdataverse",
+    "reportFolder": "<projectFolder>/etc/",
+    "reportTempFolder": "<projectFolder>/temp/api-extractor/"
+  },
+  "docModel": { "enabled": false },
+  "dtsRollup": { "enabled": false },
+  "tsdocMetadata": { "enabled": false },
+  "newlineKind": "lf",
+  "messages": {
+    "compilerMessageReporting": { "default": { "logLevel": "warning" } },
+    "extractorMessageReporting": {
+      "default": { "logLevel": "warning" },
+      // The package does not use @public/@beta/@internal release tags: every export is public.
+      "ae-missing-release-tag": { "logLevel": "none" },
+      // Doc-comment {@link} hygiene is not part of the API-surface gate.
+      "ae-unresolved-link": { "logLevel": "none" },
+      // Internal helper types (`Row`, `ClassifyError`, `PlaywrightBrowser`) still appear by
+      // name in the signatures that use them. The warning itself is left out because API
+      // Extractor sometimes prints it with a source line number, which would make the
+      // report drift on edits that do not change the API.
+      "ae-forgotten-export": { "logLevel": "none", "addToApiReportFile": false }
+    },
+    // The source uses JSDoc/TypeDoc comments, not TSDoc; doc syntax is not what this gate checks.
+    "tsdocMessageReporting": { "default": { "logLevel": "none" } }
+  }
+}

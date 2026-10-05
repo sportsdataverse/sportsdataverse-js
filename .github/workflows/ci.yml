@@ -44,6 +44,14 @@ jobs:
       # rest of the codebase still type-checks under the pragmatic base config.
       - name: Strict type-check (runtime core)
         run: npm run typecheck:strict
+      # Public API reports (API Extractor): dist/*.d.ts must match the committed
+      # etc/*.api.md. After an intended API change: `npm run api:report` + commit.
+      - name: API report check
+        run: npm run api:check
+      # Lint the published artifact: `npm pack`, then @arethetypeswrong/cli and
+      # publint against that tarball (exports map, types conditions, resolution).
+      - name: Package check (attw + publint on the packed tarball)
+        run: npm run pack:check
       - name: Verify the build output exists
         run: |
           node -e "import('./dist/index.js').then(m => { const s = Object.keys(m.default); if (s.length < 29 || !s.includes('nba') || !s.includes('soccer')) { throw new Error('unexpected namespaces ' + s.length); } console.log('OK', s.length, 'namespaces'); })"

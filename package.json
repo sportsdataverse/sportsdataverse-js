@@ -16,6 +16,14 @@
       "import": "./dist/parsers/index.js"
     }
   },
+  "typesVersions": {
+    "*": {
+      "parsers": [
+        "./dist/parsers/index.d.ts"
+      ]
+    }
+  },
+  "sideEffects": true,
   "files": [
     "dist"
   ],
@@ -33,11 +41,14 @@
     "tabletojson": "^4.1.10"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@microsoft/api-extractor": "^7.59.3",
     "@types/node": "^22.19.21",
     "@types/papaparse": "^5.5.2",
     "esbuild": "^0.28.1",
     "impit": "^0.14.5",
     "mocha": "^11.7.6",
+    "publint": "^0.3.25",
     "should": "^13.2.3",
     "tsx": "^4.22.4",
     "typedoc": "^0.28.19",
@@ -75,6 +86,9 @@
     "codegen:check": "node tools/codegen/generate.mjs --check",
     "vendor": "node tools/codegen/vendor.mjs",
     "vendor:check": "node tools/codegen/vendor.mjs --check",
+    "api:report": "tsc && node tools/api-report.mjs",
+    "api:check": "tsc && node tools/api-report.mjs --check",
+    "pack:check": "node tools/pack-check.mjs",
     "vendor:check:online": "node tools/codegen/vendor-lock-online.mjs",
     "bundle:parsers": "esbuild src/parsers/browser.ts --bundle --format=esm --platform=browser --legal-comments=eof --outfile=docs/src/playground/parsers.bundle.mjs",
     "docs:examples": "node tools/docs/inject-outputs.mjs",
