@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `basketball`
 - **league slug:** `wnba`
 - **scopes:** `universal`
-- **wrappers:** 111
+- **wrappers:** 112
 
 `sdv.wnba` is composed from **written, documented source** (`src/generated/espn/wnba.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.wnba.espnWnba<Endpoint>(params)` and under its snake_case alias (`espn_wnba_<endpoint>`) for parity with the Python / R packages.
 
@@ -32,6 +32,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [Site API](./reference/site) | 24 |
 | [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
+| [FPI API (fitt v3)](./reference/fitt) | 1 |
 | [Native API](./reference/native) | 111 |
 | [Dataset loaders](./reference/loaders) | 34 |
 

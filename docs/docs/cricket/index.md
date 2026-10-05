@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `cricket`
 - **league slug:** `eng.1`
 - **scopes:** `universal`
-- **wrappers:** 111
+- **wrappers:** 112
 
 `sdv.cricket` is composed from **written, documented source** (`src/generated/espn/cricket.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.cricket.espnCricket<Endpoint>(params)` and under its snake_case alias (`espn_cricket_<endpoint>`) for parity with the Python / R packages.
 
@@ -32,5 +32,6 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [Site API](./reference/site) | 24 |
 | [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
+| [FPI API (fitt v3)](./reference/fitt) | 1 |
 
 > **Parsed output:** pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON. The columns are determined by each endpoint's parser — see [ESPN parsed returns](../reference/espn-parsed-returns) for the full column reference.

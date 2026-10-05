@@ -7,6 +7,12 @@
 
 export { normalize, snakeCase } from "./_normalize.js";
 export { PARSERS, parserFor } from "./_registry.js";
+export { MULTI_TABLE_SECTIONS } from "./_frames.js";
+// Multi-table parsers: every sub-frame at once (the registry entries return one,
+// chosen by `section`).
+export { parse_asa_goals_added_tables } from "./asa.js";
+export { parse_mls_standings_tables, parse_mls_match_tables } from "./mls_api.js";
+export { parse_nwsl_lineups_tables } from "./nwsl_api.js";
 export type { ParserFn } from "./_registry.js";
 export {
   ESPN_ENDPOINT_PARSERS,

@@ -32,7 +32,7 @@ const referenceDir = join(referenceRootDir, "reference");
 const playgroundDir = join(repoRoot, "docs", "src", "playground");
 const docsGeneratedDir = join(repoRoot, "docs", "src", "generated");
 
-const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3"];
+const FAMILY_FILES = ["espn_site_v2", "espn_core_v2", "espn_web_v3", "espn_fitt_v3"];
 
 // Non-ESPN "flat API" families (one YAML each). These are absolute-host live
 // APIs (no {sport}/{league} nesting) and are emitted into a SEPARATE
@@ -55,6 +55,11 @@ const FLAT_API_FILES = [
   "yahoo",
   "hockeytech",
   "torvik",
+  "bart_wbb",
+  "on3",
+  "asa",
+  "mls_api",
+  "nwsl_api",
   "nba_stats",
   "wnba_stats",
 ];
@@ -86,6 +91,14 @@ const FLAT_API_NAMESPACES = {
   // BartTorvik T-Rank — standalone provider namespace (`sdv.torvik`) for men's
   // college basketball ratings / four-factors / game + player stats / schedule.
   torvik: "torvik",
+  // Women's T-Rank (barttorvik.com/ncaaw) shares the `sdv.torvik` namespace.
+  bart_wbb: "torvik",
+  // On3 Recruit Database + American Soccer Analysis: standalone provider namespaces.
+  on3: "on3",
+  asa: "asa",
+  // Official MLS / NWSL league APIs merge onto the league namespaces.
+  mls_api: "mls",
+  nwsl_api: "nwsl",
   // stats.nba.com / stats.wnba.com — merge onto the league namespaces
   // (sdv.nba.nba_stats_*, sdv.wnba.wnba_stats_*). TLS-impersonation transport.
   nba_stats: "nba",
@@ -145,6 +158,15 @@ const FLAT_API_META = {
     // (covers the major PWHL + the junior/minor leagues), NOT generic Providers.
     sport: "hockey",
   },
+  bart_wbb: {
+    label: "BartTorvik women's (T-Rank)",
+    source: "barttorvik.com/ncaaw (women's T-Rank)",
+    sport: "basketball",
+  },
+  on3: { label: "On3 Recruit Database", source: "the On3 public Recruit Database (RDB)" },
+  asa: { label: "American Soccer Analysis", source: "the American Soccer Analysis public API", sport: "soccer" },
+  mls_api: { label: "MLS web API", source: "the official mlssoccer.com data APIs" },
+  nwsl_api: { label: "NWSL (StatsPerform SDP)", source: "the official NWSL StatsPerform SDP API" },
   torvik: {
     label: "BartTorvik (T-Rank)",
     source: "barttorvik.com (T-Rank college basketball analytics)",
@@ -198,6 +220,12 @@ const STANDALONE_NS_EXAMPLE = {
     "// BartTorvik T-Rank is keyless (a browser User-Agent is set for you).\n" +
     "// `year` is the 4-digit season ending-year:\n" +
     "await sdv.torvik.torvik_ratings({ year: 2024, parsed: true });\n",
+  on3:
+    "// The On3 Recruit Database is keyless:\n" +
+    "await sdv.on3.on3_player_profile({ person_key: 89617, parsed: true });\n",
+  asa:
+    "// American Soccer Analysis is keyless; league_slug is mls | nwsl | uslc | usl1 | mlsnp:\n" +
+    "await sdv.asa.asa_teams({ league_slug: 'mls', parsed: true });\n",
 };
 
 // The set of league prefixes (filled after the leagues doc loads) — any
@@ -378,6 +406,7 @@ const ESPN_FAMILY_LABEL = {
   site_v2_alt: "ESPN site.api.espn.com (v2)",
   web_v3: "ESPN site.web.api.espn.com (web v3)",
   core_v2: "ESPN sports.core.api.espn.com (core v2)",
+  fitt_v3: "ESPN site.web.api.espn.com (FPI, fitt v3)",
 };
 
 // Absolute host roots per ESPN family (mirrors HOSTS in src/core/client.ts) —
@@ -387,6 +416,7 @@ const ESPN_FAMILY_HOST = {
   site_v2_alt: "https://site.api.espn.com/apis/v2/sports",
   web_v3: "https://site.web.api.espn.com/apis/common/v3/sports",
   core_v2: "https://sports.core.api.espn.com/v2/sports",
+  fitt_v3: "https://site.web.api.espn.com/apis/fitt/v3/sports",
 };
 
 /** Humanize a wrapper `short` for the JSDoc summary (`athlete_gamelog` -> `athlete gamelog`). */
@@ -579,8 +609,17 @@ function flatWrappersForLeague(prefix, flatWrappers) {
 }
 
 /** Render the parser cell for a flat wrapper (raw JSON passthrough when none). */
+// Multi-table flat parsers (default sub-frame + valid `section` names), from
+// endpoints/flat_parser_sections.yaml; a test keeps it equal to the runtime.
+const FLAT_PARSER_SECTIONS =
+  parse(readFileSync(join(endpointsDir, "flat_parser_sections.yaml"), "utf8"))?.parsers ?? {};
+
 function flatParserCell(wrapper) {
-  return wrapper.parser ? `\`${wrapper.parser}\`` : "*(raw)*";
+  if (!wrapper.parser) return "*(raw)*";
+  const spec = FLAT_PARSER_SECTIONS[wrapper.parser];
+  if (!spec) return `\`${wrapper.parser}\``;
+  const names = spec.sections.map((s) => (s === spec.default ? `\`${s}\` (default)` : `\`${s}\``));
+  return `\`${wrapper.parser}\` — multi-table: \`section\` = ${names.join(", ")}`;
 }
 
 // In-process cache so each `returns_schema` YAML is read + parsed at most once.
@@ -667,6 +706,12 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
     `py/R parity) and \`${toCamel(api)}<Endpoint>\` (camelCase canonical) on ` +
     `\`sdv.${nsPrefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
     `through its tidy.js parser; omit it for the raw response.`;
+  if (rows.some((w) => FLAT_PARSER_SECTIONS[w.parser])) {
+    body +=
+      ` Endpoints marked **multi-table** parse to several frames in sdv-py; with ` +
+      `\`parsed: true\` they return the default sub-frame shown in the Parser column, ` +
+      `and \`section: "<name>"\` selects any other (an unknown name throws, listing the valid ones).`;
+  }
   if (authed) {
     body +=
       ` **Auth:** this family mints a bearer token automatically before ` +
@@ -852,6 +897,7 @@ const REFERENCE_FAMILY_GROUPS = [
   { id: "site", label: "Site API", families: ["site_v2", "site_v2_alt"], scope: "universal" },
   { id: "core", label: "Core API", families: ["core_v2"], scope: "universal" },
   { id: "web", label: "Web API", families: ["web_v3"], scope: "universal" },
+  { id: "fitt", label: "FPI API (fitt v3)", families: ["fitt_v3"], scope: "universal" },
 ];
 // NCAA-scope extras (mbb/wbb) get their own page, like sdv-py's `additional.md`.
 const REFERENCE_NCAA_GROUP = { id: "additional", label: "NCAA additional", scope: "ncaa" };

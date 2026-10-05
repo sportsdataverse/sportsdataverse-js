@@ -285,6 +285,11 @@ module.exports = [
     "collapsed": true,
     "items": [
       {
+        "type": "doc",
+        "id": "reference/asa",
+        "label": "asa"
+      },
+      {
         "type": "category",
         "label": "bundesliga",
         "link": {
@@ -510,6 +515,11 @@ module.exports = [
         "type": "doc",
         "id": "reference/odds",
         "label": "odds"
+      },
+      {
+        "type": "doc",
+        "id": "reference/on3",
+        "label": "on3"
       },
       {
         "type": "doc",
