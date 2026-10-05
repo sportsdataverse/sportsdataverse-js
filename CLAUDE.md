@@ -97,7 +97,16 @@ npm run vendor          # re-vendor sdv-py endpoint YAML + schemas (--ref <sha> 
 npm run vendor:check    # VENDOR GATE — fails on a hand-edit to a vendored file (offline)
 npm run bundle:parsers  # esbuild the browser parser bundle for the playground
 npm run docs            # typedoc -> the typed module reference
+
+npm run api:report      # rewrite etc/*.api.md (API Extractor) — commit with any public-API change
+npm run api:check       # API GATE — fails if etc/*.api.md no longer matches dist/*.d.ts
+npm run pack:check      # npm pack, then attw + publint --strict against that tarball
 ```
+
+- The API reports cover the two entry points (`etc/sportsdataverse.api.md`,
+  `etc/sportsdataverse-parsers.api.md`). Generated wrappers are not listed one by one:
+  the default export is typed `Record<string, Record<string, any>>`, and the wrapper
+  surface is reviewed through `src/generated/**` + the codegen drift gate.
 
 - `test` runs Mocha against `test/**/*.test.js` with no network access.
 - `prepare` / `prepublishOnly` build `dist/`; only `dist/` is published (`files:

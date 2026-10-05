@@ -7,3 +7,6 @@ dist/
 # generated into the Docusaurus site by docusaurus-plugin-typedoc instead.
 typedoc-build/
 # docs/api/ is the docs site's Vercel serverless functions dir (playground proxy).
+
+# API Extractor scratch output (`npm run api:report` / `api:check`); the committed reports live in etc/.
+temp/

@@ -48,6 +48,9 @@ Useful scripts:
 | `npm run docs` | TypeDoc (the typed module reference) |
 | `npm run build` | compile TypeScript to `dist/` |
 | `npm test` | Mocha suite over `test/**/*.test.js` (no network) |
+| `npm run api:report` | rewrite the API Extractor reports `etc/*.api.md` from the built `.d.ts`; commit them with any public-API change |
+| `npm run api:check` | **API gate** (CI) — fails if `etc/*.api.md` is stale |
+| `npm run pack:check` | `npm pack`, then `@arethetypeswrong/cli` + `publint --strict` on that tarball (CI) |
 
 ## Architecture overview
 
