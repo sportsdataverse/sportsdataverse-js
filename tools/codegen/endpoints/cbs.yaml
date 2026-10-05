@@ -1,7 +1,7 @@
 # CBS Sports API (api.cbssports.com/napi) flat-API family.
 #
 # AUTO-EMITTED skeleton from sdv-swagger/cbssports-napi.openapi.yaml via
-#   node tools/codegen/from-openapi.mjs <spec> --api cbs --host https://api.cbssports.com
+#   node tools/codegen/from-openapi.mjs <spec> --api cbs --host https://api.cbssports.com/napi
 # then HAND-CLEANED: dropped the redundant `_resource` suffix every endpoint
 # shared (so `game_scoring_scoreboard` reads cleanly) and renamed the lone
 # `bulk_resource_controller` -> `bulk`.
@@ -23,7 +23,7 @@
 # is the default; `scoreboard` / `standings` / `odds` get dedicated parsers
 # that unroll their list payloads.
 api: cbs
-host: https://api.cbssports.com
+host: https://api.cbssports.com/napi
 endpoints:
 - short: baseball_player_meta
   path: /resource/player/meta/baseball/{player_id}

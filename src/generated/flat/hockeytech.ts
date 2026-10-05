@@ -652,6 +652,10 @@ const STANDINGS_DEF: WrapperDef = {
       "default": "statviewfeed"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "teams"
@@ -689,6 +693,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.season_id - query parameter (`season`).
  * @param params.feed - query parameter — default `statviewfeed`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `teams`.
  * @param params.group_teams_by - query parameter (`groupTeamsBy`) — default `division`.
  * @param params.context - query parameter — default `overall`.
