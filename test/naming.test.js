@@ -155,7 +155,9 @@ describe('v4 naming: deprecated aliases', () => {
       const ours = seen.filter((w) => /espn_?[Ww]ch_?[Aa]thlete_?[Oo]verview/.test(w.message));
       ours.length.should.equal(2);
       ours.every((w) => w.name === 'DeprecationWarning').should.be.true();
-      ours.every((w) => w.code === 'SDV_DEPRECATED_NAME').should.be.true(); // filterable
+      pkg.DEPRECATED_NAME_CODE.should.equal('SDV_DEPRECATED_NAME'); // exported, to filter on
+      pkg.DEPRECATED_ENDPOINT_CODE.should.equal('SDV_DEPRECATED_ENDPOINT');
+      ours.every((w) => w.code === pkg.DEPRECATED_NAME_CODE).should.be.true();
       ours[0].message.should.containEql('espn_wch_player_overview');
       ours[1].message.should.containEql('espnWchPlayerOverview');
       seen.filter((w) => /espnWchPlayerOverview\(\) is deprecated/.test(w.message)).length.should.equal(0);
