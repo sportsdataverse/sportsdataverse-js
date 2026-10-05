@@ -8,6 +8,8 @@ import { configure, resetConfig } from '../../dist/core/config.js';
 import { AssetFetchError } from '../../dist/core/errors.js';
 import * as FLAT from '../../dist/generated/flat/hockeytech.js';
 import * as A from '../../dist/analytics/hockeytech.js';
+import { parse_hockeytech_pbp } from '../../dist/parsers/hockeytech.js';
+import { isIdColumn, pyIdRows } from '../helpers/parity.mjs';
 
 // Parity: every case below is compared cell-by-cell against `oracle.json`, produced ONCE by
 // running sdv-py @719de79 (tools/oracle/hockeytech_analytics_oracle.py) over the REAL committed
@@ -22,6 +24,8 @@ const meta42 = load('pwhl_game_summary_42');
 const ohlPbp = load('ohl_pbp_27225');
 
 const FUZZY = new Set(['shot_distance', 'shot_angle']);
+/** An oracle frame as the public wrappers return it: py's integer ids as decimal strings (the v4 id rule). */
+const ids = (o) => ({ ...o, rows: pyIdRows(o.rows) });
 
 function expectFrame(rows, oracle, { sortBy } = {}) {
   if (oracle.rows.length === 0) return rows.length.should.equal(0);
@@ -200,9 +204,9 @@ describe('hockeytech analytics: per-league wrappers (offline stub transport serv
     sdv.hockeytech.hockeytech_game_shifts.should.be.a.Function(); // the raw-feed flat wrapper is untouched
   });
   it('pwhl_game_shifts / pwhl_player_toi / pwhl_game_corsi match py end to end', async () => {
-    expectFrame(await sdv.hockeytech.pwhl_game_shifts(42), O.pwhl_family_game_shifts);
-    expectFrame(await sdv.hockeytech.pwhl_player_toi(42), O.pwhl_family_player_toi, { sortBy: byPid });
-    expectFrame(await sdv.hockeytech.pwhl_game_corsi(42), O.pwhl_family_game_corsi);
+    expectFrame(await sdv.hockeytech.pwhl_game_shifts(42), ids(O.pwhl_family_game_shifts));
+    expectFrame(await sdv.hockeytech.pwhl_player_toi(42), ids(O.pwhl_family_player_toi), { sortBy: byPid });
+    expectFrame(await sdv.hockeytech.pwhl_game_corsi(42), ids(O.pwhl_family_game_corsi));
     const shiftCall = calls.find((c) => c.q.view === 'gameshifts');
     String(shiftCall.q.game_id).should.equal('42');
     shiftCall.q.client_code.should.equal('pwhl');
@@ -210,10 +214,10 @@ describe('hockeytech analytics: per-league wrappers (offline stub transport serv
   it('generic league-parameterised forms', async () => {
     expectFrame(
       await sdv.hockeytech.hockeytech_player_toi({ league: 'pwhl', game_id: 42 }),
-      O.pwhl_family_player_toi,
+      ids(O.pwhl_family_player_toi),
       { sortBy: byPid }
     );
-    expectFrame(await sdv.hockeytech.hockeytechGameCorsi({ league: 'pwhl', game_id: 42 }), O.pwhl_family_game_corsi);
+    expectFrame(await sdv.hockeytech.hockeytechGameCorsi({ league: 'pwhl', game_id: 42 }), ids(O.pwhl_family_game_corsi));
   });
   it('a valid game with no events / shifts (envelopes present, no rows) is [] for every function', async () => {
     mode = 'emptyGame';
@@ -239,7 +243,28 @@ describe('hockeytech analytics: per-league wrappers (offline stub transport serv
     });
   }
   it('pwhl_pbp (public in py) matches the enriched oracle', async () => {
-    expectFrame(await sdv.hockeytech.pwhl_pbp(42), O.pwhl_family_pbp);
+    expectFrame(await sdv.hockeytech.pwhl_pbp(42), ids(O.pwhl_family_pbp));
+  });
+  it('the four wrappers return id columns as decimal strings, like parse_hockeytech_pbp: ids join across them', async () => {
+    const out = {
+      shifts: await sdv.hockeytech.pwhl_game_shifts(42),
+      toi: await sdv.hockeytech.pwhl_player_toi(42),
+      pbp: await sdv.hockeytech.pwhl_pbp(42),
+      corsi: await sdv.hockeytech.pwhl_game_corsi(42),
+      flat: parse_hockeytech_pbp(pbp42),
+    };
+    for (const [name, rows] of Object.entries(out)) {
+      rows.length.should.be.above(0, name);
+      const idCols = Object.keys(rows[0]).filter(isIdColumn);
+      idCols.length.should.be.above(0, name);
+      for (const c of idCols) rows.every((r) => r[c] == null || typeof r[c] === 'string').should.be.true(`${name}.${c}`);
+    }
+    // the pure frame functions stay py-faithful (numbers); the wrappers convert on the way out
+    A.parse_shifts(shifts42, 42).some((r) => typeof r.player_id === 'number').should.be.true();
+    const toi = new Set(out.toi.map((r) => r.player_id));
+    out.shifts.every((r) => toi.has(r.player_id)).should.be.true();
+    out.corsi.every((r) => toi.has(r.player_id)).should.be.true();
+    out.pbp[0].game_id.should.equal('42');
   });
   it('new public names never collide with an existing flat sdv.hockeytech key', () => {
     const flat = new Set(Object.keys(FLAT));
@@ -287,14 +312,14 @@ describe('hockeytech analytics: live 2026-10-05 captures (MJHL access denied, US
   for (const lg of ['mjhl', 'ushl']) {
     it(`${lg}: pbp (goals / penalties / goalie changes only) matches py; shifts / toi / corsi are [] like py`, async () => {
       const pbp = await sdv.hockeytech[`${lg}_pbp`](GAMES[lg]);
-      expectFrame(pbp, O[`live_${lg}_pbp`]);
+      expectFrame(pbp, ids(O[`live_${lg}_pbp`]));
       // known-positive control: real events came back, with no shot rows and no coordinates (partial feed)
       pbp.length.should.be.above(15);
       pbp.some((r) => r.event === 'goal').should.be.true();
       pbp.every((r) => r.event !== 'shot' && r.x_coord === null).should.be.true();
-      expectFrame(await sdv.hockeytech[`${lg}_game_shifts`](GAMES[lg]), O[`live_${lg}_game_shifts`]);
-      expectFrame(await sdv.hockeytech[`${lg}_player_toi`](GAMES[lg]), O[`live_${lg}_player_toi`]);
-      expectFrame(await sdv.hockeytech[`${lg}_game_corsi`](GAMES[lg]), O[`live_${lg}_game_corsi`]);
+      expectFrame(await sdv.hockeytech[`${lg}_game_shifts`](GAMES[lg]), ids(O[`live_${lg}_game_shifts`]));
+      expectFrame(await sdv.hockeytech[`${lg}_player_toi`](GAMES[lg]), ids(O[`live_${lg}_player_toi`]));
+      expectFrame(await sdv.hockeytech[`${lg}_game_corsi`](GAMES[lg]), ids(O[`live_${lg}_game_corsi`]));
     });
   }
   it('an access-denied pbp or shifts feed is "nothing here" ([]), not a failed fetch', async () => {
