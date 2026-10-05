@@ -2,6 +2,16 @@
 
 ## **Unreleased**
 
+### Fixed — legacy `get*` methods fetch through the request layer
+
+- The last 77 raw axios calls in the hand-written `sdv.<league>.get*` methods (`src/services`) now go through the core request layer. That gives them https, retries with backoff, `configure()` transports, and the `NoDataError` / `AssetFetchError` vocabulary. Signatures, URLs (bar `http://` → `https://`), queries and return shapes are unchanged. For each ESPN endpoint shape, the old and new code returned the same object live.
+  - ESPN site API, family `site_v2`: `getSummary`, `getPicks`, `getScoreboard`, `getConferences`, `getTeamList`, `getTeamInfo`, `getTeamPlayers` on the 8 leagues, NHL `getPlayByPlay` / `getBoxScore` (read off the summary), and `sdv.tennis.getScoreboard`. `getStandings` (`site.web.api.espn.com`) uses family `web_v3`.
+  - 247Sports HTML scrapers (deprecated `getPlayerRankings`, `getSchoolRankings`, `getSchoolCommits` on cfb / mbb): family `sports247_html`. Over `http://`, 247sports.com answered HTTP 406. Over https the pages load and parse again.
+  - `sdv.ncaa`: ncaa.com and data.ncaa.com (`getRedirectUrl`, `getInfo`, `getBoxScore`, `getPlayByPlay`, `getScoreboard`) use family `ncaa_com`. A 2xx casablanca response that is not JSON throws `AssetFetchError`. The deprecated stats.ncaa.org scrapers use family `stats_ncaa` over https and keep their `DeprecationWarning`. Their Akamai 403 is a block, so it is not retried.
+- **BREAKING — errors:** a failed fetch throws a typed error instead of a raw axios error. HTTP 404 is `NoDataError`. A 403 / 429 / 5xx that persists after retries, or a network error, is `AssetFetchError`, whose `cause` carries no request config. Two cases differ beyond the error class:
+  - The ESPN methods that return the body as-is (`getScoreboard`, `getStandings`, `getTeamList`, `getTeamInfo`, `getTeamPlayers`, `getConferences`) now throw `NoDataError` for ESPN's HTTP 200 `{ code: 404 }` body, which they used to return. They throw `AssetFetchError` for a 2xx body that is not JSON, which they used to return as a string.
+  - A 403 / 408 / 429 / 5xx is now retried (at most 4 times) before it fails.
+
 ### Changed — vendor pin 81eb7e7060: ESPN CDN, Fox, stats/On3 returns tables, `on_missing`
 
 - **Pin:** the vendored sdv-py ref moves from `719de79` to `81eb7e7060`. Two JS overlays the upstream absorbed are gone:
