@@ -154,6 +154,27 @@ describe('ESPN basketball pbp league facts', () => {
   // py's end.* overrides fire on the FIRST play of the new period (lag == previous period).
   const firstOf = (rows, period) => rows.find((r) => r['period.number'] === period);
 
+  it('a numeric play id past 2^53 is refused (already rounded), a safe one is still cast', () => {
+    // every id numeric (a caller that parsed them as numbers): safe first, one unsafe later
+    const numeric = () => {
+      const c = structuredClone(capture('summary_nba.json'));
+      c.plays.forEach((p, i) => (p.id = 1000 + i));
+      return c;
+    };
+    const cap = numeric();
+    cap.plays[cap.plays.length - 1].id = 2 ** 60;
+    let err;
+    try {
+      P._pbpFromSummary('nba', Number(cap.header.id), cap);
+    } catch (e) {
+      err = e;
+    }
+    err.should.be.instanceOf(TypeError);
+    err.message.should.match(/lost precision/);
+    const ok = numeric();
+    P._pbpFromSummary('nba', Number(ok.header.id), ok).plays.length.should.be.above(0);
+  });
+
   it('known-positive control: each league yields plays on its own real games', () => {
     const own = {
       nba: ['summary_nba.json', 'nba_summary_401360428.json.gz'],

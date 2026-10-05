@@ -162,6 +162,13 @@ function castInt32(v: unknown): number | null {
 function castInt64(v: unknown): number | bigint | null {
   if (v === null || v === undefined) return null;
   if (typeof v === "boolean") return v ? 1 : 0;
+  // A JS number past 2^53 was already rounded before it got here (py's ints are
+  // exact, so py never sees this): refuse it rather than emit a wrong id.
+  if (typeof v === "number" && Number.isInteger(v) && !Number.isSafeInteger(v)) {
+    throw new TypeError(
+      `integer ${v} is beyond Number.MAX_SAFE_INTEGER and has lost precision; pass 64-bit ids as decimal strings (as ESPN's JSON does)`
+    );
+  }
   if (typeof v === "number" && Number.isFinite(v) && Math.abs(v) < 2 ** 63) return Math.trunc(v) || 0;
   if (typeof v === "string" && POLARS_INT.test(v)) {
     const b = BigInt(v);
