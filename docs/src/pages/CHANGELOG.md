@@ -24,6 +24,27 @@
 - `hockeytech_seasons` parsed rows gain `season_yr` and `game_type_label`; `hockeytech_schedule` now defaults to the full-history window (`numberofdaysback/ahead/limit` = 10000, as sdv-py).
 - Season ids: `hockeytech_schedule` / `hockeytech_playoff_bracket` take a raw `season_id` (py accepts an end-year `season=`). Resolve first with `hockeytech_resolve_season_id(league, { season })`; brackets need `gameType: 'playoffs'`. The views that sdv-py sends `league_id` on (schedule/scorebar, standings, transactions, brackets) now send the league's registry `leagueId` (overridable via `league_id`).
 
+### Changed (breaking) — error vocabulary, pluggable transport + auth
+
+Every wrapper now fetches through one runtime core: auth provider → transport →
+retry → classification.
+
+- **BREAKING:** wrapper failures raise `NoDataError` (HTTP 404, or an ESPN 200
+  body `{ code: 404 }`) / `AssetFetchError` (403, 429, 5xx, network, retries
+  exhausted) instead of raw axios errors — siblings under `SdvError`;
+  `NoESPNDataError` aliases `NoDataError`. The Statcast, BartTorvik and
+  HockeyTech getters no longer swallow a failed fetch into `{}` / `""`.
+- Retries 429 / 5xx / network with backoff + jitter (honours `Retry-After`,
+  default 3); 403 never retried; a 401 refreshes credentials once.
+- `configure({ transport, auth, retries, timeoutMs, userAgent })`,
+  `getConfig()`, `resetConfig()` — per-family transports + auth.
+- Transports: `axiosTransport` (default), `createImpersonatingTransport()` via
+  the optional peer dependency `impit`. Auth helpers: `bearerAuth`,
+  `headerAuth`, `queryAuth`, `tokenAuth`, `sessionAuth`; NFL.com auth is a
+  registered `tokenAuth` (same `NFL_*` env vars).
+- Fix: a flat wrapper's `headers` argument is now sent for every family.
+- New guide: [Transport, auth & errors](/docs/guides/transport-and-auth).
+
 ### Changed (breaking) — provider method naming
 
 Dropped internal vendor API codenames (and redundant `_api` stems) from provider

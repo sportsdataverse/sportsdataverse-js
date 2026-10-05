@@ -10,8 +10,16 @@
 // Env overrides (all optional):
 //   - `NFL_ACCESS_TOKEN`              — returned verbatim (skips minting + caching).
 //   - `NFL_CLIENT_KEY` / `NFL_CLIENT_SECRET` — mint with these instead of defaults.
+//
+// Importing this module registers `nflAuth` (a `tokenAuth`) as the `nfl_api`
+// family's default auth provider, so every `nfl_api` request made through
+// `request()` carries the bearer + browser headers. `configure({ auth: { nfl_api } })`
+// replaces it.
 
-import axios from "axios";
+import { tokenAuth, type AuthProvider } from "./auth.js";
+import { registerFamilyDefaults, resolveFamily } from "./config.js";
+import { AssetFetchError } from "./errors.js";
+import { mergeHeaders, type Transport } from "./transport.js";
 
 export const NFL_API_HOST = "https://api.nfl.com";
 
@@ -50,6 +58,8 @@ export interface NflTokenOptions {
   clientSecret?: string;
   /** Mint a new token even if a cached one is still valid. */
   forceRefresh?: boolean;
+  /** Transport for the mint POST (default: the `nfl_api` family's configured transport). */
+  transport?: Transport;
 }
 
 /** base64url -> Uint8Array (Node Buffer handles the `-_` alphabet + missing padding). */
@@ -78,8 +88,14 @@ export function jwtExp(token: string): number | null {
   }
 }
 
-/** POST the anonymous device-token grant and return the bearer `accessToken`. */
-async function mintToken(key: string, secret: string): Promise<string> {
+/**
+ * POST the anonymous device-token grant and return the bearer `accessToken`.
+ *
+ * Goes straight through the transport, not `request("nfl_api", …)` — that would
+ * re-enter this family's own auth provider and recurse.
+ */
+async function mintToken(key: string, secret: string, transport: Transport): Promise<string> {
+  const url = `${NFL_API_HOST}/identity/v3/token`;
   const body = new URLSearchParams({
     clientKey: key,
     clientSecret: secret,
@@ -87,17 +103,23 @@ async function mintToken(key: string, secret: string): Promise<string> {
     deviceInfo: DEFAULT_DEVICE_INFO,
     networkType: "other",
   });
-  const res = await axios.post(`${NFL_API_HOST}/identity/v3/token`, body.toString(), {
+  const res = await transport({
+    method: "POST",
+    url,
+    body: body.toString(),
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "User-Agent": DEFAULT_UA,
       "X-Domain-Id": "100",
     },
-    timeout: 30000,
+    timeoutMs: 30000,
   });
-  const token = res?.data?.accessToken;
+  const token = (res?.data as { accessToken?: unknown } | undefined)?.accessToken;
   if (typeof token !== "string" || !token) {
-    throw new Error("nfl_auth: /identity/v3/token response missing accessToken");
+    throw new AssetFetchError("nfl_auth: /identity/v3/token response missing accessToken", {
+      url,
+      status: res?.status,
+    });
   }
   return token;
 }
@@ -110,6 +132,7 @@ function cryptoRandomUuid(): string {
 /** Drop the cached `api.nfl.com` token (forces a fresh mint on the next call). */
 export function nflClearTokenCache(): void {
   tokenCache = null;
+  wrapperTokens = makeWrapperTokens();
 }
 
 /**
@@ -128,7 +151,7 @@ export function nflClearTokenCache(): void {
  *      / `NFL_CLIENT_SECRET` env vars -> the bundled public `WEB_DESKTOP` pair.
  */
 export async function nflTokenGen(opts: NflTokenOptions = {}): Promise<string> {
-  const { clientKey, clientSecret, forceRefresh = false } = opts;
+  const { clientKey, clientSecret, forceRefresh = false, transport } = opts;
 
   // 1. A user-supplied token via env wins outright, unless explicit credentials
   //    were passed (which mean "mint with these").
@@ -153,7 +176,7 @@ export async function nflTokenGen(opts: NflTokenOptions = {}): Promise<string> {
     return tokenCache.token;
   }
 
-  const token = await mintToken(key, secret);
+  const token = await mintToken(key, secret, transport ?? resolveFamily("nfl_api").transport);
   const exp = jwtExp(token);
   tokenCache = {
     token,
@@ -177,12 +200,44 @@ export async function nflHeadersGen(
   token?: string
 ): Promise<Record<string, string>> {
   const bearer = token ?? (await nflTokenGen());
-  return {
-    "User-Agent": DEFAULT_UA,
-    Accept: "application/json",
-    Referer: "https://www.nfl.com/",
-    Origin: "https://www.nfl.com",
-    Authorization: `Bearer ${bearer}`,
-    "X-Domain-Id": "100",
-  };
+  return { ...NFL_BROWSER_HEADERS, Authorization: `Bearer ${bearer}` };
 }
+
+/** Browser-style headers the NFL.com web app sends alongside the bearer. */
+const NFL_BROWSER_HEADERS: Record<string, string> = {
+  "User-Agent": DEFAULT_UA,
+  Accept: "application/json",
+  Referer: "https://www.nfl.com/",
+  Origin: "https://www.nfl.com",
+  "X-Domain-Id": "100",
+};
+
+/**
+ * Token cache for wrapper calls: re-mints (always a real mint, so a 401
+ * refresh never gets the rejected token back) ~2 min before the JWT `exp`.
+ * `NFL_ACCESS_TOKEN` still wins — `nflTokenGen` returns it verbatim.
+ */
+function makeWrapperTokens(): AuthProvider {
+  return tokenAuth({
+    skewSeconds: TOKEN_SKEW_SECONDS,
+    mint: async (ctx) => {
+      const token = await nflTokenGen({ forceRefresh: true, transport: ctx.transport });
+      return { token, expiresAt: jwtExp(token) ?? Date.now() / 1000 + TOKEN_FALLBACK_TTL };
+    },
+  });
+}
+let wrapperTokens = makeWrapperTokens();
+
+/**
+ * The `nfl_api` auth provider: a `tokenAuth` bearer plus the browser headers.
+ * Caller-supplied headers (including `Authorization`) win.
+ */
+export const nflAuth: AuthProvider = {
+  async apply(req, ctx) {
+    const authed = await wrapperTokens.apply(req, ctx);
+    return { ...authed, headers: mergeHeaders(NFL_BROWSER_HEADERS, authed.headers) };
+  },
+  refresh: (ctx) => wrapperTokens.refresh!(ctx),
+};
+
+registerFamilyDefaults("nfl_api", { auth: nflAuth });

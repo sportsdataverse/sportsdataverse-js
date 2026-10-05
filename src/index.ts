@@ -134,6 +134,22 @@ export {
   NFL_API_HOST,
 } from './core/nfl_auth.js';
 export type { NflTokenOptions } from './core/nfl_auth.js';
+// Runtime core: error vocabulary, configuration, transports, auth providers.
+export {
+  SdvError,
+  NoDataError,
+  NoESPNDataError,
+  AssetFetchError,
+  SeasonNotFoundError,
+  TransportUnavailableError,
+} from './core/errors.js';
+export type { FetchErrorDetails } from './core/errors.js';
+export { configure, getConfig, resetConfig } from './core/config.js';
+export type { ConfigureOptions, SdvConfig } from './core/config.js';
+export { axiosTransport, createImpersonatingTransport } from './core/transport.js';
+export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
+export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
+export type { AuthProvider, AuthContext } from './core/auth.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
 export type { ParserFn } from './parsers/_registry.js';

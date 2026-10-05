@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "noEmit": true
+  },
+  "include": [],
+  "files": [
+    "src/core/errors.ts",
+    "src/core/transport.ts",
+    "src/core/auth.ts",
+    "src/core/config.ts",
+    "src/core/request.ts"
+  ]
+}

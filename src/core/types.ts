@@ -76,10 +76,10 @@ export interface WrapperDef {
    */
   returnsSchema?: string;
   /**
-   * True for flat-API families that need a bearer token (e.g. `nfl_api`). The
-   * dispatch (`src/leagues/_make_flat.ts`) resolves auth headers via the
-   * `AUTH_HEADER_PROVIDERS` map for that `api` stem before fetching. Non-auth
-   * families omit this and behave exactly as before.
+   * True for flat-API families that need a bearer token (e.g. `nfl_api`).
+   * Docs metadata: the token itself is applied inside `request()` by the auth
+   * provider registered (`registerFamilyDefaults`) or configured
+   * (`configure({ auth })`) for that `api` stem.
    */
   auth?: boolean;
 }

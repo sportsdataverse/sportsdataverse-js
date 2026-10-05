@@ -1,4 +1,4 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import { request } from "./request.js";
 import type { EspnFamily } from "./types.js";
 
 /**
@@ -79,19 +79,21 @@ export const FLAT_HOSTS: Record<string, string> = {
   torvik: "https://barttorvik.com",
 };
 
-const client = axios.create({
-  timeout: 30000,
-  headers: {
-    "User-Agent":
-      "Mozilla/5.0 (compatible; sportsdataverse-js/3.x; +https://js.sportsdataverse.org/)",
-  },
-});
-
-/** GET an ESPN URL and return the raw JSON body. */
+/**
+ * GET a URL through `request()` (configured transport + auth, retry, error
+ * classification) and return the body. `family` selects the transport / auth
+ * and enables the ESPN `{ code: 404 }` check for the ESPN families.
+ *
+ * @throws NoDataError on 404 (or an ESPN `{ code: 404 }` body); AssetFetchError on any other failure.
+ */
 export async function get(
   url: string,
-  config?: AxiosRequestConfig
+  config: { params?: Record<string, unknown>; headers?: Record<string, string>; family?: string } = {}
 ): Promise<any> {
-  const res = await client.get(url, config);
-  return res.data;
+  return request(config.family ?? "default", {
+    method: "GET",
+    url,
+    query: config.params,
+    headers: config.headers,
+  });
 }
