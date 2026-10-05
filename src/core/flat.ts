@@ -1,5 +1,5 @@
 import { toCamel } from "./espn.js";
-import { applyTransform } from "./transforms.js";
+import { applyTransform, redateDefaultSeasons } from "./transforms.js";
 import type { WrapperDef } from "./types.js";
 
 /**
@@ -52,9 +52,16 @@ function cleanQuery(
   // sdv-py endpoint `fixed_params`: sent first, so a caller param of the same name wins.
   for (const [k, v] of Object.entries(def.fixedParams ?? {})) out[k] = lookup(params, k) ?? v;
   for (const qp of def.queryParams ?? []) {
+    // sdv-py season_latest_with_data("") is "": an explicit empty season is sent as
+    // `Season=` (the API's own every-season answer), never replaced by the default.
+    if (qp.transform === "season_latest_with_data" && (params[qp.name] === "" || params[toCamel(qp.name)] === "")) {
+      out[qp.queryKey] = "";
+      continue;
+    }
     const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default, def);
     if (v !== undefined && v !== null && v !== "") out[qp.queryKey] = v;
   }
+  redateDefaultSeasons(def, out);
   return out;
 }
 

@@ -356,28 +356,29 @@ function standaloneFlatNamespaces(leagues) {
 }
 
 // A param `transform` (sdv-py runtime function name) rides into the def; an
-// unknown name fails the codegen (tools/codegen/param-transforms.mjs).
-const mapTransform = (ep, p) =>
+// unknown name, or a family-only one on another family, fails the codegen
+// (tools/codegen/param-transforms.mjs). `api`: the flat family (ESPN: none).
+const mapTransform = (ep, p, api) =>
   p.transform !== undefined
-    ? { transform: checkTransform(p.transform, `${ep.short}.${p.name}`) }
+    ? { transform: checkTransform(p.transform, `${ep.short}.${p.name}`, api) }
     : {};
 
-function mapPathParams(ep) {
+function mapPathParams(ep, api) {
   return (ep.path_params ?? []).map((p) => ({
     name: p.name,
     ...(p.required === false ? { required: false } : {}),
     ...(p.default !== undefined ? { default: p.default } : {}),
     ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
-    ...mapTransform(ep, p),
+    ...mapTransform(ep, p, api),
   }));
 }
 
-function mapQueryParams(ep) {
+function mapQueryParams(ep, api) {
   return (ep.extra_params ?? []).map((p) => ({
     name: p.name,
     queryKey: p.query_key,
     ...(p.default !== undefined ? { default: p.default } : {}),
-    ...mapTransform(ep, p),
+    ...mapTransform(ep, p, api),
   }));
 }
 
@@ -584,8 +585,8 @@ function loadFlatWrappers() {
         // sdv-py `now_variant`/`now_toggle`: alternate path used when the
         // toggle path param is absent (NHL api-web `/now` vs dated paths).
         ...(ep.now_variant ? { nowVariant: ep.now_variant, nowToggle: nowToggle(ep) } : {}),
-        pathParams: mapPathParams(ep),
-        queryParams: mapQueryParams(ep),
+        pathParams: mapPathParams(ep, doc.api),
+        queryParams: mapQueryParams(ep, doc.api),
         // sdv-py endpoint fixed_params: constant query params, never arguments.
         ...(ep.fixed_params && Object.keys(ep.fixed_params).length ? { fixedParams: ep.fixed_params } : {}),
         ...(ep.parser ? { parser: ep.parser } : {}),

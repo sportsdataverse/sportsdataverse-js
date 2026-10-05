@@ -88,7 +88,7 @@ const ASSISTLEADERS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -231,7 +231,8 @@ const ASSISTTRACKER_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -990,7 +991,7 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1072,7 +1073,7 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "series_id_nullable",
@@ -1119,7 +1120,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "team_id",
@@ -1273,7 +1274,7 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -1346,7 +1347,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -1410,7 +1411,7 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_id_nullable",
@@ -1489,7 +1490,7 @@ const DRAFTCOMBINEDRILLRESULTS_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1530,7 +1531,7 @@ const DRAFTCOMBINENONSTATIONARYSHOOTING_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1571,7 +1572,7 @@ const DRAFTCOMBINEPLAYERANTHRO_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1612,7 +1613,7 @@ const DRAFTCOMBINESPOTSHOOTING_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1653,7 +1654,7 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
       "name": "season_all_time",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1713,7 +1714,8 @@ const DRAFTHISTORY_DEF: WrapperDef = {
     {
       "name": "season_year_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "team_id_nullable",
@@ -1819,7 +1821,8 @@ const FANTASYWIDGET_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -2144,7 +2147,8 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -2214,7 +2218,8 @@ const HOMEPAGEV2_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -2352,7 +2357,8 @@ const LEADERSTILES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -2498,7 +2504,7 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -2673,7 +2679,7 @@ const LEAGUEDASHOPPPTSHOT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -2883,7 +2889,7 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3133,7 +3139,7 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3365,7 +3371,7 @@ const LEAGUEDASHPLAYERPTSHOT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3619,7 +3625,7 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3859,7 +3865,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4088,7 +4094,8 @@ const LEAGUEDASHPTDEFEND_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4297,7 +4304,8 @@ const LEAGUEDASHPTSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4470,7 +4478,7 @@ const LEAGUEDASHPTTEAMDEFEND_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4669,7 +4677,8 @@ const LEAGUEDASHTEAMCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4854,7 +4863,8 @@ const LEAGUEDASHTEAMPTSHOT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5063,7 +5073,8 @@ const LEAGUEDASHTEAMSHOTLOCATIONS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5266,7 +5277,8 @@ const LEAGUEDASHTEAMSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5764,7 +5776,8 @@ const LEAGUEGAMEFINDER_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5956,7 +5969,7 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -6099,7 +6112,7 @@ const LEAGUEHUSTLESTATSPLAYER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6278,7 +6291,7 @@ const LEAGUEHUSTLESTATSTEAM_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6386,7 +6399,8 @@ const LEAGUELEADERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -6537,7 +6551,7 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6703,7 +6717,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6813,7 +6827,7 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -6865,7 +6879,7 @@ const LEAGUESTANDINGS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -6918,7 +6932,7 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -6996,7 +7010,7 @@ const MATCHUPSROLLUP_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -7132,7 +7146,8 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -7484,7 +7499,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -7651,7 +7666,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -7818,7 +7833,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -7985,7 +8000,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8152,7 +8167,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -8319,7 +8334,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8486,7 +8501,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8652,7 +8667,8 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8784,7 +8800,7 @@ const PLAYERDASHPTPASS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8918,7 +8934,8 @@ const PLAYERDASHPTREB_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -9055,7 +9072,7 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -9191,7 +9208,8 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -9206,7 +9224,7 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "0"
+      "default": "1610612747"
     },
     {
       "name": "vs_conference_nullable",
@@ -9243,7 +9261,7 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `0`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612747`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -9272,7 +9290,8 @@ const PLAYERESTIMATEDMETRICS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -9348,7 +9367,8 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -9406,7 +9426,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star_nullable",
@@ -9469,7 +9489,7 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -9584,7 +9604,7 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
       "name": "season_nullable",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10068,7 +10088,8 @@ const PLAYERGAMESTREAKFINDER_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10281,7 +10302,7 @@ const PLAYERINDEX_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "team_id_nullable",
@@ -10464,7 +10485,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10589,7 +10610,8 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10629,7 +10651,8 @@ const SCHEDULELEAGUEV2INT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10865,7 +10888,8 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10970,7 +10994,7 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -11075,7 +11099,8 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -11179,7 +11204,7 @@ const SYNERGYPLAYTYPES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "type_grouping_nullable",
@@ -11305,7 +11330,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -11472,7 +11497,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -11639,7 +11664,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -11806,7 +11831,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -11973,7 +11998,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -12140,7 +12165,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12307,7 +12332,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -12473,7 +12498,8 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -12650,7 +12676,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12784,7 +12810,7 @@ const TEAMDASHPTPASS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12912,7 +12938,8 @@ const TEAMDASHPTREB_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13043,7 +13070,7 @@ const TEAMDASHPTSHOTS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13157,7 +13184,8 @@ const TEAMESTIMATEDMETRICS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -13214,7 +13242,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -13334,7 +13362,7 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
       "name": "season_nullable",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13423,7 +13451,8 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_nullable",
@@ -13550,7 +13579,8 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13712,7 +13742,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13867,7 +13897,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -14027,7 +14057,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -14196,7 +14226,7 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",

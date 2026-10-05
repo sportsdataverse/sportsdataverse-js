@@ -1,13 +1,17 @@
 import should from 'should';
+import { readdirSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { parse } from 'yaml';
 import {
   TRANSFORMS,
   applyTransform,
   bool_str,
   _bool_str,
   format_nhl_season,
-  previousNbaSeason,
-  previousWnbaSeason,
-  season_or_previous,
+  DefaultSeason,
+  latestSeason,
+  season_latest_with_data,
 } from '../dist/core/transforms.js';
 import { resolveFlat } from '../dist/core/flat.js';
 import { resolveRequest } from '../dist/core/espn.js';
@@ -19,6 +23,7 @@ import { PARAM_TRANSFORMS, checkTransform } from '../tools/codegen/param-transfo
 // and `nfl/nfl_api_runtime._bool_str`, applied by the resolvers to the param
 // values the vendored YAML marks with `transform:`.
 const flat = (api, short) => FLAT_WRAPPERS.find((w) => w.api === api && w.short === short);
+const endpointsDir = join(dirname(fileURLToPath(import.meta.url)), '..', 'tools', 'codegen', 'endpoints');
 
 describe('param transforms (ports of the sdv-py runtime functions)', () => {
   it('format_nhl_season: py test + docstring cases', () => {
@@ -50,22 +55,18 @@ describe('param transforms (ports of the sdv-py runtime functions)', () => {
     _bool_str('False').should.equal('false');
   });
 
-  // sdv-py@fbcf17dfaa {nba,wnba}/*_stats_runtime.season_or_previous (+ the docstrings'
-  // cases): nba = year_to_season(most_recent_nba_season() - 2), wnba = most_recent_wnba_season() - 1.
-  it('season_or_previous: the season unchanged, else the family previous season', () => {
-    previousNbaSeason(new Date(2026, 9, 1)).should.equal('2025-26'); // October 2026 (py docstring)
-    previousNbaSeason(new Date(2026, 8, 30)).should.equal('2024-25');
-    previousNbaSeason(new Date(2000, 9, 1)).should.equal('1999-00'); // py year_to_season rollover
-    previousNbaSeason(new Date(2010, 0, 1)).should.equal('2008-09');
-    previousWnbaSeason(new Date(2026, 4, 1)).should.equal('2025'); // wehoop's default during 2026
-    previousWnbaSeason(new Date(2026, 3, 30)).should.equal('2024');
-    season_or_previous('2023-24', { api: 'nba_stats' }).should.equal('2023-24');
-    season_or_previous(undefined, { api: 'nba_stats' }).should.equal(previousNbaSeason());
-    season_or_previous(null, { api: 'wnba_stats' }).should.equal(previousWnbaSeason());
-    (() => season_or_previous(undefined, { api: 'mlb' })).should.throw(/no previous-season rule for family "mlb"/);
+  // sdv-py@28ee34b {nba,wnba}/*_stats_runtime.season_latest_with_data; its every-day
+  // tables and the py oracle are in test/nba_stats_season.test.js.
+  it('season_latest_with_data: the season unchanged ("" too), else a DefaultSeason to re-date', () => {
+    season_latest_with_data('2023-24', { api: 'nba_stats' }).should.equal('2023-24');
+    season_latest_with_data('', { api: 'wnba_stats' }).should.equal(''); // every season, as py
+    const nba = season_latest_with_data(undefined, { api: 'nba_stats' });
+    (nba instanceof DefaultSeason).should.be.true(); // should() would unbox it
+    String(nba).should.equal(latestSeason('00'));
+    String(season_latest_with_data(null, { api: 'wnba_stats' })).should.equal(latestSeason('10'));
     const def = { api: 'wnba_stats', host: 'https://stats.wnba.com', path: '/stats/x', pathParams: [],
-      queryParams: [{ name: 'season', queryKey: 'Season', transform: 'season_or_previous' }] };
-    resolveFlat(def, {}).query.Season.should.equal(previousWnbaSeason());
+      queryParams: [{ name: 'season', queryKey: 'Season', transform: 'season_latest_with_data' }] };
+    resolveFlat(def, {}).query.Season.should.equal(latestSeason('10'));
     resolveFlat(def, { season: '2021' }).query.Season.should.equal('2021');
   });
 
@@ -81,30 +82,42 @@ describe('param transforms (ports of the sdv-py runtime functions)', () => {
       for (const name of PARAM_TRANSFORMS) {
         for (const def of [undefined, { api: 'nba_stats' }, { api: 'wnba_stats' }]) {
           let a, b;
-          try { a = TRANSFORMS[name](v, def); } catch (e) { a = `throws ${e.message}`; }
-          try { b = PLAYGROUND_TRANSFORMS[name](v, def); } catch (e) { b = `throws ${e.message}`; }
+          // a DefaultSeason (each copy has its own class) compares as its label
+          const norm = (x) => (x instanceof String ? `default ${x}` : x);
+          try { a = norm(TRANSFORMS[name](v, def)); } catch (e) { a = `throws ${e.message}`; }
+          try { b = norm(PLAYGROUND_TRANSFORMS[name](v, def)); } catch (e) { b = `throws ${e.message}`; }
           should(b).eql(a, `${name}(${String(v)}, ${def?.api})`);
         }
       }
     }
   });
 
-  it('codegen refuses an unknown transform name', () => {
+  it('codegen refuses an unknown transform name, and a family-only one on another family', () => {
     checkTransform('format_nhl_season', 'x').should.equal('format_nhl_season');
     (() => checkTransform('to_upper', 'nhl_edge.skater_detail.season')).should.throw(
       /nhl_edge\.skater_detail\.season: unknown param transform "to_upper"/
     );
+    checkTransform('season_latest_with_data', 'x', 'wnba_stats').should.equal('season_latest_with_data');
+    (() => checkTransform('season_latest_with_data', 'game.season', 'mlb')).should.throw(
+      /game\.season: param transform "season_latest_with_data" is only defined for nba_stats, wnba_stats, not "mlb"/
+    );
+    (() => checkTransform('season_latest_with_data', 'scoreboard.season')).should.throw(/not "undefined"/); // ESPN
   });
 
-  it('every transform on a generated def is one the runtime implements', () => {
+  it('every transform on a generated def is one the runtime implements, as many as the YAML names', () => {
     const named = [...WRAPPERS, ...FLAT_WRAPPERS].flatMap((d) =>
       [...d.pathParams, ...d.queryParams].filter((p) => p.transform).map((p) => [d, p.transform])
     );
-    // 42 format_nhl_season + 9 _bool_str + 3 bool_str (nhl + mls_api + fox foxpolls)
-    named.filter(([, t]) => t !== 'season_or_previous').length.should.equal(54);
+    const tally = (pairs) => pairs.reduce((t, [, name]) => ({ ...t, [name]: (t[name] ?? 0) + 1 }), {});
+    const fromYaml = readdirSync(endpointsDir)
+      .filter((f) => f.endsWith('.yaml'))
+      .flatMap((f) => parse(readFileSync(join(endpointsDir, f), 'utf8'))?.endpoints ?? [])
+      .flatMap((ep) => [...(ep.path_params ?? []), ...(ep.extra_params ?? [])])
+      .filter((p) => p.transform)
+      .map((p) => [p, p.transform]);
+    Object.keys(tally(fromYaml)).length.should.be.above(3);
+    tally(named).should.eql(tally(fromYaml));
     for (const [, t] of named) should(TRANSFORMS[t]).be.a.Function();
-    // season_or_previous (sdv-py's stats runtimes) only on a family that has a previous-season rule
-    for (const [d, t] of named) if (t === 'season_or_previous') ['nba_stats', 'wnba_stats'].should.containEql(d.api);
   });
 });
 
