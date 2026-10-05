@@ -516,6 +516,100 @@ Flat (non-ESPN) wrappers for the PFF Developer API (api.pff.com; PFF Pro subscri
 | `player_id` | numeric |  |
 | `touchdowns` | numeric |  |
 
+### Returns — `pff_api_facet_defense_coverage_matchup` / `pffApiFacetDefenseCoverageMatchup`
+
+With `{ parsed: true }`: an object of tables, one per key below.
+
+**`defenders`**
+
+| col_name | type | description |
+|---|---|---|
+| `broken_up_passes` | integer |  |
+| `drops` | integer |  |
+| `first_downs` | integer |  |
+| `grades_coverage_defense` | numeric |  |
+| `grades_defense` | numeric |  |
+| `grades_defense_penalty` | numeric |  |
+| `grades_overall` | numeric |  |
+| `grades_overall_tackle` | numeric |  |
+| `grades_pass_rush_defense` | numeric |  |
+| `grades_run_defense` | numeric |  |
+| `grades_tackle` | numeric |  |
+| `interceptions` | integer |  |
+| `longest` | integer |  |
+| `player_game_count` | integer |  |
+| `player_id` | integer |  |
+| `receptions` | integer |  |
+| `targets` | integer |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_catch` | integer |  |
+| `yards_per_reception` | numeric |  |
+| `grades_offense` | numeric |  |
+| `grades_offense_penalty` | numeric |  |
+| `grades_run_block` | numeric |  |
+| `grades_pass_block` | numeric |  |
+| `grades_hands_drop` | numeric |  |
+| `grades_hands_fumble` | numeric |  |
+| `grades_pass_route` | numeric |  |
+| `grades_pass` | numeric |  |
+| `grades_run` | numeric |  |
+
+**`receivers`**
+
+| col_name | type | description |
+|---|---|---|
+| `broken_up_passes` | integer |  |
+| `drops` | integer |  |
+| `first_downs` | integer |  |
+| `grades_hands_drop` | numeric |  |
+| `grades_hands_fumble` | numeric |  |
+| `grades_offense` | numeric |  |
+| `grades_offense_penalty` | numeric |  |
+| `grades_overall` | numeric |  |
+| `grades_pass_route` | numeric |  |
+| `grades_run_block` | numeric |  |
+| `grades_screen_block` | numeric |  |
+| `interceptions` | integer |  |
+| `longest` | integer |  |
+| `player_game_count` | integer |  |
+| `player_id` | integer |  |
+| `receptions` | integer |  |
+| `targets` | integer |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_catch` | integer |  |
+| `yards_per_reception` | numeric |  |
+| `grades_pass` | numeric |  |
+| `grades_pass_block` | numeric |  |
+| `grades_run` | numeric |  |
+| `grades_defense` | numeric |  |
+| `grades_defense_penalty` | numeric |  |
+| `grades_pass_rush_defense` | numeric |  |
+| `grades_run_defense` | numeric |  |
+| `grades_coverage_defense` | numeric |  |
+| `grades_overall_tackle` | numeric |  |
+| `grades_tackle` | numeric |  |
+| `grades_snap` | numeric |  |
+
+**`versus`**
+
+| col_name | type | description |
+|---|---|---|
+| `broken_up_passes` | integer |  |
+| `coverage_player_id` | integer |  |
+| `drops` | integer |  |
+| `first_downs` | integer |  |
+| `interceptions` | integer |  |
+| `longest` | integer |  |
+| `player_id` | integer |  |
+| `receptions` | integer |  |
+| `targets` | integer |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_catch` | integer |  |
+| `yards_per_reception` | numeric |  |
+
 ### Returns — `pff_api_facet_defense_coverage_scheme` / `pffApiFacetDefenseCoverageScheme`
 
 | col_name | type | description |
@@ -3110,6 +3204,100 @@ Flat (non-ESPN) wrappers for the PFF Developer API (api.pff.com; PFF Pro subscri
 | `slot_yards` | numeric |  |
 | `player_id` | numeric |  |
 
+### Returns — `pff_api_facet_receiving_coverage` / `pffApiFacetReceivingCoverage`
+
+With `{ parsed: true }`: an object of tables, one per key below.
+
+**`defenders`**
+
+| col_name | type | description |
+|---|---|---|
+| `broken_up_passes` | integer |  |
+| `drops` | integer |  |
+| `first_downs` | integer |  |
+| `grades_coverage_defense` | numeric |  |
+| `grades_defense` | numeric |  |
+| `grades_defense_penalty` | numeric |  |
+| `grades_overall` | numeric |  |
+| `grades_overall_tackle` | numeric |  |
+| `grades_pass_rush_defense` | numeric |  |
+| `grades_run_defense` | numeric |  |
+| `grades_tackle` | numeric |  |
+| `interceptions` | integer |  |
+| `longest` | integer |  |
+| `player_game_count` | integer |  |
+| `player_id` | integer |  |
+| `receptions` | integer |  |
+| `targets` | integer |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_catch` | integer |  |
+| `yards_per_reception` | numeric |  |
+| `grades_offense` | numeric |  |
+| `grades_offense_penalty` | numeric |  |
+| `grades_run_block` | numeric |  |
+| `grades_pass_block` | numeric |  |
+| `grades_hands_drop` | numeric |  |
+| `grades_hands_fumble` | numeric |  |
+| `grades_pass_route` | numeric |  |
+| `grades_pass` | numeric |  |
+| `grades_run` | numeric |  |
+
+**`receivers`**
+
+| col_name | type | description |
+|---|---|---|
+| `broken_up_passes` | integer |  |
+| `drops` | integer |  |
+| `first_downs` | integer |  |
+| `grades_hands_drop` | numeric |  |
+| `grades_hands_fumble` | numeric |  |
+| `grades_offense` | numeric |  |
+| `grades_offense_penalty` | numeric |  |
+| `grades_overall` | numeric |  |
+| `grades_pass_route` | numeric |  |
+| `grades_run_block` | numeric |  |
+| `grades_screen_block` | numeric |  |
+| `interceptions` | integer |  |
+| `longest` | integer |  |
+| `player_game_count` | integer |  |
+| `player_id` | integer |  |
+| `receptions` | integer |  |
+| `targets` | integer |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_catch` | integer |  |
+| `yards_per_reception` | numeric |  |
+| `grades_pass` | numeric |  |
+| `grades_pass_block` | numeric |  |
+| `grades_run` | numeric |  |
+| `grades_defense` | numeric |  |
+| `grades_defense_penalty` | numeric |  |
+| `grades_pass_rush_defense` | numeric |  |
+| `grades_run_defense` | numeric |  |
+| `grades_coverage_defense` | numeric |  |
+| `grades_overall_tackle` | numeric |  |
+| `grades_tackle` | numeric |  |
+| `grades_snap` | numeric |  |
+
+**`versus`**
+
+| col_name | type | description |
+|---|---|---|
+| `broken_up_passes` | integer |  |
+| `coverage_player_id` | integer |  |
+| `drops` | integer |  |
+| `first_downs` | integer |  |
+| `interceptions` | integer |  |
+| `longest` | integer |  |
+| `player_id` | integer |  |
+| `receptions` | integer |  |
+| `targets` | integer |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_catch` | integer |  |
+| `yards_per_reception` | numeric |  |
+
 ### Returns — `pff_api_facet_receiving_depth` / `pffApiFacetReceivingDepth`
 
 | col_name | type | description |
@@ -3902,6 +4090,363 @@ Flat (non-ESPN) wrappers for the PFF Developer API (api.pff.com; PFF Pro subscri
 | `grades_punter` | numeric |  |
 | `grades_kick_return` | numeric |  |
 | `grades_punt_return` | numeric |  |
+
+### Returns — `pff_api_player_defense_summary` / `pffApiPlayerDefenseSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `targets` | integer |  |
+| `game_id` | integer |  |
+| `interception_touchdowns` | integer |  |
+| `week` | integer |  |
+| `forced_fumbles` | integer |  |
+| `missed_tackles` | integer |  |
+| `status` | character |  |
+| `catch_rate` | numeric |  |
+| `tackles` | integer |  |
+| `jersey_number` | character |  |
+| `away_team_name` | character |  |
+| `snap_counts_offball` | integer |  |
+| `snap_counts_box` | integer |  |
+| `sacks` | integer |  |
+| `snap_counts_pass_rush` | integer |  |
+| `snap_counts_dl` | integer |  |
+| `grades_tackle` | numeric |  |
+| `yards` | integer |  |
+| `player_franchise_id` | integer |  |
+| `receptions` | integer |  |
+| `grades_coverage_defense` | numeric |  |
+| `hurries` | integer |  |
+| `interceptions` | integer |  |
+| `snap_counts_coverage` | integer |  |
+| `snap_counts_dl_over_t` | integer |  |
+| `snap_counts_dl_a_gap` | integer |  |
+| `fumble_recoveries` | integer |  |
+| `grades_run_defense` | numeric |  |
+| `snap_counts_corner` | integer |  |
+| `hits` | integer |  |
+| `penalties` | integer |  |
+| `batted_passes` | integer |  |
+| `stops` | integer |  |
+| `declined_penalties` | integer |  |
+| `total_pressures` | integer |  |
+| `position` | character |  |
+| `fumble_recovery_touchdowns` | integer |  |
+| `longest` | integer |  |
+| `away_franchise_id` | integer |  |
+| `snap_counts_slot` | integer |  |
+| `missed_tackle_rate` | numeric |  |
+| `grades_defense` | numeric |  |
+| `yards_per_reception` | numeric |  |
+| `grades_defense_penalty` | numeric |  |
+| `safeties` | integer |  |
+| `snap_counts_defense` | integer |  |
+| `yards_after_catch` | integer |  |
+| `home_franchise_id` | integer |  |
+| `snap_counts_dl_b_gap` | integer |  |
+| `home_team_name` | character |  |
+| `pass_break_ups` | integer |  |
+| `qb_rating_against` | numeric |  |
+| `snap_counts_run_defense` | integer |  |
+| `tackles_for_loss` | integer |  |
+| `assists` | integer |  |
+| `grades_pass_rush_defense` | numeric |  |
+| `player_id` | integer |  |
+| `snap_counts_fs` | integer |  |
+| `touchdowns` | integer |  |
+| `snap_counts_dl_outside_t` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_field_goal_summary` / `pffApiPlayerFieldGoalSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `twenty_attempts` | integer |  |
+| `game_id` | integer |  |
+| `pat_percent` | numeric |  |
+| `week` | integer |  |
+| `status` | character |  |
+| `forty_made` | integer |  |
+| `fifty_percent` | numeric |  |
+| `total_made` | integer |  |
+| `jersey_number` | character |  |
+| `away_team_name` | character |  |
+| `one_made` | integer |  |
+| `fifty_attempts` | integer |  |
+| `forty_attempts` | integer |  |
+| `thirty_percent` | numeric |  |
+| `total_attempts` | integer |  |
+| `pat_attempts` | integer |  |
+| `player_franchise_id` | integer |  |
+| `twenty_made` | integer |  |
+| `one_attempts` | integer |  |
+| `grades_fgep_kicker` | numeric |  |
+| `thirty_attempts` | integer |  |
+| `pat_made` | integer |  |
+| `one_percent` | numeric |  |
+| `total_percent` | numeric |  |
+| `position` | character |  |
+| `twenty_percent` | numeric |  |
+| `away_franchise_id` | integer |  |
+| `forty_percent` | numeric |  |
+| `fifty_made` | integer |  |
+| `thirty_made` | integer |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `player_id` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_kickoff_summary` / `pffApiPlayerKickoffSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `attempts` | integer |  |
+| `attempts_with_hangtime` | integer |  |
+| `average_distance` | numeric |  |
+| `average_hangtime` | numeric |  |
+| `average_starting_field_position` | numeric |  |
+| `average_yards_per_return` | numeric |  |
+| `away_franchise_id` | integer |  |
+| `away_team_name` | character |  |
+| `fair_catches` | integer |  |
+| `game_id` | integer |  |
+| `grades_kickoff_kicker` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `jersey_number` | character |  |
+| `kicked_yards` | integer |  |
+| `kicks_returned` | integer |  |
+| `onside_kicks` | integer |  |
+| `percent_returned` | numeric |  |
+| `player_franchise_id` | integer |  |
+| `player_id` | integer |  |
+| `position` | character |  |
+| `return_yards` | integer |  |
+| `status` | character |  |
+| `total_hangtime` | numeric |  |
+| `touchbacks` | integer |  |
+| `week` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_offense_blocking` / `pffApiPlayerOffenseBlocking`
+
+| col_name | type | description |
+|---|---|---|
+| `grades_pass_block` | numeric |  |
+| `grades_offense` | numeric |  |
+| `game_id` | integer |  |
+| `pbe` | numeric |  |
+| `non_spike_pass_block_percentage` | numeric |  |
+| `week` | integer |  |
+| `snap_counts_rg` | integer |  |
+| `status` | character |  |
+| `jersey_number` | character |  |
+| `snap_counts_ce` | integer |  |
+| `hits_allowed` | integer |  |
+| `block_percent` | numeric |  |
+| `snap_counts_offense` | integer |  |
+| `away_team_name` | character |  |
+| `snap_counts_block` | integer |  |
+| `hurries_allowed` | integer |  |
+| `player_franchise_id` | integer |  |
+| `grades_run_block` | numeric |  |
+| `snap_counts_run_block` | integer |  |
+| `pressures_allowed` | integer |  |
+| `snap_counts_pass_play` | integer |  |
+| `penalties` | integer |  |
+| `sacks_allowed` | integer |  |
+| `declined_penalties` | integer |  |
+| `snap_counts_te` | integer |  |
+| `snap_counts_rt` | integer |  |
+| `position` | character |  |
+| `away_franchise_id` | integer |  |
+| `non_spike_pass_block` | integer |  |
+| `snap_counts_lt` | integer |  |
+| `snap_counts_pass_block` | integer |  |
+| `pass_block_percent` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `snap_counts_lg` | integer |  |
+| `non_spike_passing` | integer |  |
+| `player_id` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_offense_pass_blocking` / `pffApiPlayerOffensePassBlocking`
+
+| col_name | type | description |
+|---|---|---|
+| `true_pass_set_non_spike_pass_block_percentage` | numeric |  |
+| `true_pass_set_pressures_allowed` | integer |  |
+| `grades_pass_block` | numeric |  |
+| `true_pass_set_pass_block_percent` | numeric |  |
+| `game_id` | integer |  |
+| `pbe` | numeric |  |
+| `non_spike_pass_block_percentage` | numeric |  |
+| `week` | integer |  |
+| `status` | character |  |
+| `jersey_number` | character |  |
+| `true_pass_set_non_spike_passing` | integer |  |
+| `hits_allowed` | integer |  |
+| `true_pass_set_non_spike_pass_block` | integer |  |
+| `away_team_name` | character |  |
+| `hurries_allowed` | integer |  |
+| `true_pass_set_hurries_allowed` | integer |  |
+| `player_franchise_id` | integer |  |
+| `true_pass_set_snap_counts_pass_play` | integer |  |
+| `true_pass_set_hits_allowed` | integer |  |
+| `pressures_allowed` | integer |  |
+| `true_pass_set_pbe` | numeric |  |
+| `snap_counts_pass_play` | integer |  |
+| `penalties` | integer |  |
+| `sacks_allowed` | integer |  |
+| `declined_penalties` | integer |  |
+| `position` | character |  |
+| `away_franchise_id` | integer |  |
+| `non_spike_pass_block` | integer |  |
+| `true_pass_set_snap_counts_pass_block` | integer |  |
+| `true_pass_set_sacks_allowed` | integer |  |
+| `snap_counts_pass_block` | integer |  |
+| `pass_block_percent` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `non_spike_passing` | integer |  |
+| `player_id` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_offense_run_blocking` / `pffApiPlayerOffenseRunBlocking`
+
+| col_name | type | description |
+|---|---|---|
+| `away_franchise_id` | integer |  |
+| `away_team_name` | character |  |
+| `declined_penalties` | integer |  |
+| `game_id` | integer |  |
+| `gap_run_block_percent` | numeric |  |
+| `gap_snap_counts_run_block` | integer |  |
+| `gap_snap_counts_run_block_percent` | numeric |  |
+| `gap_snap_counts_run_play` | integer |  |
+| `grades_run_block` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `jersey_number` | character |  |
+| `penalties` | integer |  |
+| `player_franchise_id` | integer |  |
+| `player_id` | integer |  |
+| `position` | character |  |
+| `run_block_percent` | numeric |  |
+| `snap_counts_run_block` | integer |  |
+| `snap_counts_run_play` | integer |  |
+| `status` | character |  |
+| `week` | integer |  |
+| `zone_run_block_percent` | numeric |  |
+| `zone_snap_counts_run_block` | integer |  |
+| `zone_snap_counts_run_block_percent` | numeric |  |
+| `zone_snap_counts_run_play` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_offense_summary` / `pffApiPlayerOffenseSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `away_franchise_id` | integer |  |
+| `away_team_name` | character |  |
+| `declined_penalties` | integer |  |
+| `game_id` | integer |  |
+| `grades_hands_fumble` | numeric |  |
+| `grades_offense` | numeric |  |
+| `grades_offense_penalty` | numeric |  |
+| `grades_pass` | numeric |  |
+| `grades_run` | numeric |  |
+| `grades_run_block` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `jersey_number` | character |  |
+| `penalties` | integer |  |
+| `player_franchise_id` | integer |  |
+| `player_id` | integer |  |
+| `position` | character |  |
+| `snap_counts_pass` | integer |  |
+| `snap_counts_pass_block` | integer |  |
+| `snap_counts_pass_route` | integer |  |
+| `snap_counts_run` | integer |  |
+| `snap_counts_run_block` | integer |  |
+| `snap_counts_total` | integer |  |
+| `snap_counts_total_pass` | integer |  |
+| `snap_counts_total_run` | integer |  |
+| `status` | character |  |
+| `week` | integer |  |
+| `grades_pass_route` | numeric |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
 
 ### Returns — `pff_api_player_passing_concept` / `pffApiPlayerPassingConcept`
 
@@ -4904,6 +5449,132 @@ Flat (non-ESPN) wrappers for the PFF Developer API (api.pff.com; PFF Pro subscri
 | `no_pressure_grades_overall_tackle` | numeric |  |
 | `no_blitz_grades_tackle` | numeric |  |
 
+### Returns — `pff_api_player_passing_summary` / `pffApiPlayerPassingSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `grades_offense` | numeric |  |
+| `twp_rate` | numeric |  |
+| `game_id` | integer |  |
+| `btt_rate` | numeric |  |
+| `spikes` | integer |  |
+| `dropbacks` | integer |  |
+| `all_attempts` | integer |  |
+| `thrown_aways` | integer |  |
+| `week` | integer |  |
+| `status` | character |  |
+| `all_dropbacks` | integer |  |
+| `grades_pass` | numeric |  |
+| `ttt_total_time` | numeric |  |
+| `hit_as_threw` | integer |  |
+| `first_downs` | integer |  |
+| `jersey_number` | character |  |
+| `sack_percent` | numeric |  |
+| `bats` | integer |  |
+| `away_team_name` | character |  |
+| `sacks` | integer |  |
+| `completions` | integer |  |
+| `yards` | integer |  |
+| `player_franchise_id` | integer |  |
+| `accuracy_percent` | numeric |  |
+| `scrambles` | integer |  |
+| `interceptions` | integer |  |
+| `positive_epa_plays` | integer |  |
+| `drop_rate` | numeric |  |
+| `grades_run` | numeric |  |
+| `qb_rating` | numeric |  |
+| `completion_percent` | numeric |  |
+| `plays_with_epa` | integer |  |
+| `penalties` | integer |  |
+| `attempts` | integer |  |
+| `declined_penalties` | integer |  |
+| `passing_snaps` | integer |  |
+| `pressure_to_sack_rate` | numeric |  |
+| `ypa` | numeric |  |
+| `drops` | integer |  |
+| `position` | character |  |
+| `grades_hands_fumble` | numeric |  |
+| `avg_time_to_throw` | numeric |  |
+| `away_franchise_id` | integer |  |
+| `big_time_throws` | integer |  |
+| `positive_epa_percent` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `avg_depth_of_target` | numeric |  |
+| `turnover_worthy_plays` | integer |  |
+| `epa` | numeric |  |
+| `aimed_passes` | integer |  |
+| `player_id` | integer |  |
+| `touchdowns` | integer |  |
+| `def_gen_pressures` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_position_pivot` / `pffApiPlayerPositionPivot`
+
+| col_name | type | description |
+|---|---|---|
+| `group` | character |  |
+| `group_order` | integer |  |
+| `positions` | character |  |
+
+### Returns — `pff_api_player_punting_summary` / `pffApiPlayerPuntingSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `game_id` | integer |  |
+| `touchbacks` | integer |  |
+| `attempts_with_hangtime` | integer |  |
+| `percent_returned` | numeric |  |
+| `week` | integer |  |
+| `status` | character |  |
+| `fair_catches` | integer |  |
+| `jersey_number` | character |  |
+| `away_team_name` | character |  |
+| `average_net_yards` | numeric |  |
+| `yards` | integer |  |
+| `player_franchise_id` | integer |  |
+| `average_hangtime` | numeric |  |
+| `total_net_yards` | integer |  |
+| `attempts` | integer |  |
+| `inside_twenties` | integer |  |
+| `out_of_bounds` | integer |  |
+| `average_yards_per_return` | numeric |  |
+| `total_hangtime` | numeric |  |
+| `returns` | integer |  |
+| `position` | character |  |
+| `long` | integer |  |
+| `away_franchise_id` | integer |  |
+| `blocks` | integer |  |
+| `average_yards_per_attempt` | numeric |  |
+| `grades_punter` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `return_yards` | integer |  |
+| `downeds` | integer |  |
+| `player_id` | integer |  |
+| `snaps` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
 ### Returns — `pff_api_player_receiving_depth` / `pffApiPlayerReceivingDepth`
 
 | col_name | type | description |
@@ -5418,11 +6089,290 @@ Flat (non-ESPN) wrappers for the PFF Developer API (api.pff.com; PFF Pro subscri
 | `right_behind_los_drops` | numeric |  |
 | `left_behind_los_first_downs` | numeric |  |
 
+### Returns — `pff_api_player_receiving_summary` / `pffApiPlayerReceivingSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `targets` | integer |  |
+| `grades_offense` | numeric |  |
+| `game_id` | integer |  |
+| `yards_after_catch_per_reception` | numeric |  |
+| `grades_pass_route` | numeric |  |
+| `week` | integer |  |
+| `status` | character |  |
+| `yprr` | numeric |  |
+| `wide_snaps` | integer |  |
+| `fumbles` | integer |  |
+| `first_downs` | integer |  |
+| `jersey_number` | character |  |
+| `inline_snaps` | integer |  |
+| `away_team_name` | character |  |
+| `contested_targets` | integer |  |
+| `inline_rate` | numeric |  |
+| `contested_catch_rate` | numeric |  |
+| `yards` | integer |  |
+| `player_franchise_id` | integer |  |
+| `receptions` | integer |  |
+| `targeted_qb_rating` | numeric |  |
+| `interceptions` | integer |  |
+| `caught_percent` | numeric |  |
+| `positive_epa_plays` | integer |  |
+| `drop_rate` | numeric |  |
+| `grades_hands_drop` | numeric |  |
+| `slot_rate` | numeric |  |
+| `plays_with_epa` | integer |  |
+| `slot_snaps` | integer |  |
+| `penalties` | integer |  |
+| `wide_rate` | numeric |  |
+| `pass_block_rate` | numeric |  |
+| `declined_penalties` | integer |  |
+| `route_rate` | numeric |  |
+| `drops` | integer |  |
+| `position` | character |  |
+| `grades_hands_fumble` | numeric |  |
+| `longest` | integer |  |
+| `pass_blocks` | integer |  |
+| `away_franchise_id` | integer |  |
+| `routes` | integer |  |
+| `pass_plays` | integer |  |
+| `yards_per_reception` | numeric |  |
+| `targets_percent` | numeric |  |
+| `positive_epa_percent` | numeric |  |
+| `contested_receptions` | integer |  |
+| `yards_after_catch` | integer |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `avg_depth_of_target` | numeric |  |
+| `epa` | numeric |  |
+| `avoided_tackles` | integer |  |
+| `player_id` | integer |  |
+| `touchdowns` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_return_summary` / `pffApiPlayerReturnSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `away_franchise_id` | integer |  |
+| `away_team_name` | character |  |
+| `game_id` | integer |  |
+| `grades_punt_return` | numeric |  |
+| `grades_return` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `jersey_number` | character |  |
+| `kickoff_attempts` | integer |  |
+| `kickoff_count_of_yards` | integer |  |
+| `kickoff_fair_catches` | integer |  |
+| `kickoff_long` | integer |  |
+| `kickoff_muffed_returns` | integer |  |
+| `kickoff_touchdowns` | integer |  |
+| `kickoff_yards` | integer |  |
+| `kickoff_ypa` | numeric |  |
+| `player_franchise_id` | integer |  |
+| `player_id` | integer |  |
+| `position` | character |  |
+| `punt_attempts` | integer |  |
+| `punt_count_of_yards` | integer |  |
+| `punt_fair_catches` | integer |  |
+| `punt_long` | integer |  |
+| `punt_muffed_returns` | integer |  |
+| `punt_touchdowns` | integer |  |
+| `punt_yards` | integer |  |
+| `punt_ypa` | numeric |  |
+| `status` | character |  |
+| `total_attempts` | integer |  |
+| `week` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+| `grades_kick_return` | numeric |  |
+
+### Returns — `pff_api_player_rushing_direction` / `pffApiPlayerRushingDirection`
+
+| col_name | type | description |
+|---|---|---|
+| `attempts` | integer |  |
+| `direction` | character |  |
+| `explosive` | integer |  |
+| `first_downs` | integer |  |
+| `franchise_id` | integer |  |
+| `fumbles` | integer |  |
+| `long` | integer |  |
+| `missed_tackles` | integer |  |
+| `player_id` | integer |  |
+| `team_name` | character |  |
+| `touchdowns` | integer |  |
+| `yards` | integer |  |
+| `yards_after_contact` | integer |  |
+| `yco_attempt` | numeric |  |
+| `ypa` | numeric |  |
+
+### Returns — `pff_api_player_rushing_summary` / `pffApiPlayerRushingSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `targets` | integer |  |
+| `grades_offense` | numeric |  |
+| `game_id` | integer |  |
+| `yards_after_contact` | integer |  |
+| `explosive` | integer |  |
+| `week` | integer |  |
+| `elu_rush_mtf` | integer |  |
+| `breakaway_attempts` | integer |  |
+| `status` | character |  |
+| `designed_yards` | integer |  |
+| `yprr` | numeric |  |
+| `breakaway_percent` | numeric |  |
+| `fumbles` | integer |  |
+| `first_downs` | integer |  |
+| `elusive_rating` | numeric |  |
+| `jersey_number` | character |  |
+| `breakaway_yards` | integer |  |
+| `away_team_name` | character |  |
+| `total_touches` | integer |  |
+| `scramble_yards` | integer |  |
+| `yco_attempt` | numeric |  |
+| `yards` | integer |  |
+| `player_franchise_id` | integer |  |
+| `grades_run_block` | numeric |  |
+| `receptions` | integer |  |
+| `zone_attempts` | integer |  |
+| `scrambles` | integer |  |
+| `grades_run` | numeric |  |
+| `penalties` | integer |  |
+| `attempts` | integer |  |
+| `elu_yco` | integer |  |
+| `elu_recv_mtf` | integer |  |
+| `declined_penalties` | integer |  |
+| `ypa` | numeric |  |
+| `drops` | integer |  |
+| `position` | character |  |
+| `grades_hands_fumble` | numeric |  |
+| `longest` | integer |  |
+| `away_franchise_id` | integer |  |
+| `count_of_yards` | integer |  |
+| `routes` | integer |  |
+| `rec_yards` | integer |  |
+| `home_franchise_id` | integer |  |
+| `gap_attempts` | integer |  |
+| `run_plays` | integer |  |
+| `home_team_name` | character |  |
+| `avoided_tackles` | integer |  |
+| `grades_offense_penalty` | numeric |  |
+| `player_id` | integer |  |
+| `touchdowns` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
+### Returns — `pff_api_player_seasons` / `pffApiPlayerSeasons`
+
+| col_name | type | description |
+|---|---|---|
+| `value` | integer |  |
+
+### Returns — `pff_api_player_snaps_summary` / `pffApiPlayerSnapsSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `season` | integer |  |
+| `snap_counts_coverage` | integer |  |
+| `snap_counts_defense` | integer |  |
+| `snap_counts_field_goal` | integer |  |
+| `snap_counts_field_goal_blocking` | integer |  |
+| `snap_counts_field_goal_kicking` | integer |  |
+| `snap_counts_kickoff_coverage` | integer |  |
+| `snap_counts_kickoff_kicking` | integer |  |
+| `snap_counts_kickoff_return_blocking` | integer |  |
+| `snap_counts_kickoff_returning` | integer |  |
+| `snap_counts_offense` | integer |  |
+| `snap_counts_pass` | integer |  |
+| `snap_counts_pass_block` | integer |  |
+| `snap_counts_pass_route` | integer |  |
+| `snap_counts_pass_rush` | integer |  |
+| `snap_counts_punt_coverage` | integer |  |
+| `snap_counts_punt_punting` | integer |  |
+| `snap_counts_punt_return_blocking` | integer |  |
+| `snap_counts_punt_returning` | integer |  |
+| `snap_counts_run` | integer |  |
+| `snap_counts_run_block` | integer |  |
+| `snap_counts_run_defense` | integer |  |
+| `snap_counts_special_teams` | integer |  |
+
+### Returns — `pff_api_player_special_summary` / `pffApiPlayerSpecialSummary`
+
+| col_name | type | description |
+|---|---|---|
+| `assists` | integer |  |
+| `away_franchise_id` | integer |  |
+| `away_team_name` | character |  |
+| `declined_penalties` | integer |  |
+| `game_id` | integer |  |
+| `grades_fgep_defense` | numeric |  |
+| `grades_misc_st` | numeric |  |
+| `grades_special_teams_penalty` | numeric |  |
+| `home_franchise_id` | integer |  |
+| `home_team_name` | character |  |
+| `jersey_number` | character |  |
+| `missed_tackles` | integer |  |
+| `penalties` | integer |  |
+| `player_franchise_id` | integer |  |
+| `player_id` | integer |  |
+| `position` | character |  |
+| `pu_def_rush` | integer |  |
+| `snap_counts_field_goal` | integer |  |
+| `snap_counts_field_goal_blocking` | integer |  |
+| `snap_counts_kickoff` | integer |  |
+| `snap_counts_kickoff_return` | integer |  |
+| `snap_counts_punt_coverage` | integer |  |
+| `snap_counts_punt_return` | integer |  |
+| `status` | character |  |
+| `tackles` | integer |  |
+| `week` | integer |  |
+| `game_away_franchise_id` | integer |  |
+| `game_away_team_name` | character |  |
+| `game_game_id` | integer |  |
+| `game_home_franchise_id` | integer |  |
+| `game_home_team_name` | character |  |
+| `game_player_franchise_id` | integer |  |
+| `game_position` | character |  |
+| `game_status` | character |  |
+| `game_week` | integer |  |
+| `league_id` | integer |  |
+| `season` | integer |  |
+
 ### Returns — `pff_api_position_report` / `pffApiPositionReport`
 
-With `{ parsed: true }`: an object of tables, one per key below.
+With `{ parsed: true }`: a single table, whose columns depend on `report` (one set per value below).
 
-**`offense`**
+**When `report` is `offense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -5455,7 +6405,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_name` | character |  |
 | `grades_pass_block` | numeric |  |
 
-**`passing`**
+**When `report` is `passing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -5517,7 +6467,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`passing-depth`**
+**When `report` is `passing-depth`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6080,7 +7030,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `center_medium_btt_rate` | numeric |  |
 | `left_deep_grades_pass` | numeric |  |
 
-**`passing-pressure`**
+**When `report` is `passing-pressure`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6298,7 +7248,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `no_pressure_grades_overall_tackle` | numeric |  |
 | `no_blitz_grades_tackle` | numeric |  |
 
-**`receiving`**
+**When `report` is `receiving`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6357,7 +7307,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`receiving-depth`**
+**When `report` is `receiving-depth`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6464,7 +7414,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `behind_los_first_downs` | integer |  |
 | `behind_los_targeted_qb_rating` | numeric |  |
 
-**`rushing`**
+**When `report` is `rushing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6523,7 +7473,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`blocking`**
+**When `report` is `blocking`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6561,7 +7511,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `snap_counts_rt` | integer |  |
 | `snap_counts_te` | integer |  |
 
-**`pass-blocking`**
+**When `report` is `pass-blocking`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6616,7 +7566,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`run-blocking`**
+**When `report` is `run-blocking`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6660,7 +7610,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`defense`**
+**When `report` is `defense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6724,7 +7674,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `touchdowns` | integer |  |
 | `snap_counts_dl_outside_t` | integer |  |
 
-**`run-defense`**
+**When `report` is `run-defense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6759,7 +7709,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pos_graded_rate` | numeric |  |
 | `neg_graded_rate` | numeric |  |
 
-**`pass-rush`**
+**When `report` is `pass-rush`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6834,7 +7784,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pass_rush_grade_oe_percentile` | numeric |  |
 | `double_team_rate` | numeric |  |
 
-**`coverage`**
+**When `report` is `coverage`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6883,7 +7833,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grades_pass_rush_defense` | numeric |  |
 | `touchdowns` | integer |  |
 
-**`special-teams`**
+**When `report` is `special-teams`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6920,7 +7870,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grades_kick_return` | numeric |  |
 | `grades_punt_return` | numeric |  |
 
-**`kick-returns`**
+**When `report` is `kick-returns`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6955,7 +7905,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `team_name` | character |  |
 | `total_attempts` | integer |  |
 
-**`field-goals`**
+**When `report` is `field-goals`**
 
 | col_name | type | description |
 |---|---|---|
@@ -6996,7 +7946,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `field_goal_oe` | numeric |  |
 | `field_goal_oe_total` | numeric |  |
 
-**`punting`**
+**When `report` is `punting`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7034,7 +7984,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `downeds` | integer |  |
 | `snaps` | integer |  |
 
-**`kickoffs`**
+**When `report` is `kickoffs`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7346,9 +8296,9 @@ With `{ parsed: true }`: an object of tables, one per key below.
 
 ### Returns — `pff_api_team_leaders` / `pffApiTeamLeaders`
 
-With `{ parsed: true }`: an object of tables, one per key below.
+With `{ parsed: true }`: a single table, whose columns depend on `group` (one set per value below).
 
-**`receiving`**
+**When `group` is `receiving`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7405,7 +8355,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grade_pass_block_rank_of` | integer |  |
 | `grade_pass_block_percentile` | integer |  |
 
-**`passing`**
+**When `group` is `passing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7462,7 +8412,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grade_fumble_rank_of` | integer |  |
 | `grade_fumble_percentile` | integer |  |
 
-**`rushing`**
+**When `group` is `rushing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7519,7 +8469,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grade_pass_block_rank_of` | integer |  |
 | `grade_pass_block_percentile` | integer |  |
 
-**`defense`**
+**When `group` is `defense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7613,9 +8563,9 @@ With `{ parsed: true }`: an object of tables, one per key below.
 
 ### Returns — `pff_api_team_report` / `pffApiTeamReport`
 
-With `{ parsed: true }`: an object of tables, one per key below.
+With `{ parsed: true }`: a single table, whose columns depend on `report` (one set per value below).
 
-**`offense`**
+**When `report` is `offense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7648,7 +8598,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grades_pass_route` | numeric |  |
 | `grades_run` | numeric |  |
 
-**`passing`**
+**When `report` is `passing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -7710,7 +8660,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`passing-depth`**
+**When `report` is `passing-depth`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8273,7 +9223,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `center_medium_btt_rate` | numeric |  |
 | `left_deep_grades_pass` | numeric |  |
 
-**`passing-pressure`**
+**When `report` is `passing-pressure`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8467,7 +9417,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pressure_grades_hands_drop` | numeric |  |
 | `no_blitz_grades_hands_drop` | numeric |  |
 
-**`receiving`**
+**When `report` is `receiving`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8527,7 +9477,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`receiving-depth`**
+**When `report` is `receiving-depth`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8634,7 +9584,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `behind_los_first_downs` | integer |  |
 | `behind_los_targeted_qb_rating` | numeric |  |
 
-**`rushing`**
+**When `report` is `rushing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8693,7 +9643,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_neg_graded_rate` | numeric |  |
 | `grades_pass` | numeric |  |
 
-**`blocking`**
+**When `report` is `blocking`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8731,7 +9681,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `snap_counts_rt` | integer |  |
 | `snap_counts_te` | integer |  |
 
-**`pass-blocking`**
+**When `report` is `pass-blocking`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8786,7 +9736,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`run-blocking`**
+**When `report` is `run-blocking`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8830,7 +9780,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `offense_pos_graded_rate` | numeric |  |
 | `offense_neg_graded_rate` | numeric |  |
 
-**`defense`**
+**When `report` is `defense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8894,7 +9844,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `touchdowns` | integer |  |
 | `snap_counts_dl_outside_t` | integer |  |
 
-**`run-defense`**
+**When `report` is `run-defense`**
 
 | col_name | type | description |
 |---|---|---|
@@ -8929,7 +9879,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pos_graded_rate` | numeric |  |
 | `neg_graded_rate` | numeric |  |
 
-**`pass-rush`**
+**When `report` is `pass-rush`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9004,7 +9954,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pass_rush_grade_oe_percentile` | numeric |  |
 | `double_team_rate` | numeric |  |
 
-**`coverage`**
+**When `report` is `coverage`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9053,7 +10003,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grades_pass_rush_defense` | numeric |  |
 | `touchdowns` | integer |  |
 
-**`special-teams`**
+**When `report` is `special-teams`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9090,7 +10040,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `grades_fgep_kicker` | numeric |  |
 | `grades_kickoff_kicker` | numeric |  |
 
-**`kick-returns`**
+**When `report` is `kick-returns`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9125,7 +10075,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `total_attempts` | integer |  |
 | `grades_punt_return` | numeric |  |
 
-**`field-goals`**
+**When `report` is `field-goals`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9166,7 +10116,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `field_goal_oe` | numeric |  |
 | `field_goal_oe_total` | numeric |  |
 
-**`punting`**
+**When `report` is `punting`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9204,7 +10154,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `downeds` | integer |  |
 | `snaps` | integer |  |
 
-**`kickoffs`**
+**When `report` is `kickoffs`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9303,9 +10253,9 @@ With `{ parsed: true }`: an object of tables, one per key below.
 
 ### Returns — `pff_api_team_stats` / `pffApiTeamStats`
 
-With `{ parsed: true }`: an object of tables, one per key below.
+With `{ parsed: true }`: a single table, whose columns depend on `category` (one set per value below).
 
-**`offense-overall-success`**
+**When `category` is `offense-overall-success`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9331,7 +10281,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `conversion_after4` | numeric |  |
 | `conversion_after4_rank` | integer |  |
 
-**`offense-passing`**
+**When `category` is `offense-passing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9393,7 +10343,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `target_share_rb` | numeric |  |
 | `target_share_rb_rank` | integer |  |
 
-**`offense-rushing`**
+**When `category` is `offense-rushing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9439,7 +10389,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `pull_lead_rate` | numeric |  |
 | `pull_lead_rate_rank` | integer |  |
 
-**`defense-overall-success`**
+**When `category` is `defense-overall-success`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9467,7 +10417,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `conversion_after4_allowed` | numeric |  |
 | `conversion_after4_allowed_rank` | integer |  |
 
-**`defense-passing`**
+**When `category` is `defense-passing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9517,7 +10467,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `zone_coverage_pct` | numeric |  |
 | `zone_coverage_pct_rank` | integer |  |
 
-**`defense-rushing`**
+**When `category` is `defense-rushing`**
 
 | col_name | type | description |
 |---|---|---|
@@ -9543,7 +10493,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `stuff_rate` | numeric |  |
 | `stuff_rate_rank` | integer |  |
 
-**`defense-opponent-tendencies`**
+**When `category` is `defense-opponent-tendencies`**
 
 | col_name | type | description |
 |---|---|---|

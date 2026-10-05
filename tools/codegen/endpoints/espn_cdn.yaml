@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
+# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
 # tools/codegen/endpoints/espn_cdn.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/espn_cdn.yaml; shared changes land in sdv-py first.
@@ -134,6 +134,16 @@ endpoints:
   example_args:
     date: '20250115'
   league_example_args:
+    ufl:
+      date: '20250405'
+    wnba:
+      date: '20250715'
+    mlb:
+      date: '20250415'
+    college_baseball:
+      date: '20250315'
+    college_softball:
+      date: '20250315'
     cfb:
       season: 2024
       week: 12
@@ -169,6 +179,12 @@ endpoints:
   example_args:
     date: '20250115'
   league_example_args:
+    wnba:
+      date: '20250715'
+    mlb:
+      date: '20250415'
+    college_baseball:
+      date: '20250315'
     cfb:
       season: 2024
       week: 12
