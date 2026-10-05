@@ -524,7 +524,15 @@ function loadWrappers() {
 
 // Family (file-level) host per flat api stem — the `flatHosts` base URL, which
 // a per-endpoint `host` override (e.g. Yahoo's editorial routes) never replaces.
-const FLAT_FAMILY_HOSTS = {};
+// Built once and frozen: nothing may mutate it after load.
+const FLAT_FAMILY_HOSTS = Object.freeze(
+  Object.fromEntries(
+    FLAT_API_FILES.map((stem) => {
+      const doc = parse(readFileSync(join(endpointsDir, `${stem}.yaml`), "utf8"));
+      return [doc.api, doc.host];
+    })
+  )
+);
 
 /**
  * Load the flat-API wrappers (one `WrapperDef` per endpoint across every
@@ -536,7 +544,6 @@ function loadFlatWrappers() {
   const wrappers = [];
   for (const stem of FLAT_API_FILES) {
     const doc = parse(readFileSync(join(endpointsDir, `${stem}.yaml`), "utf8"));
-    FLAT_FAMILY_HOSTS[doc.api] = doc.host;
     // A top-level `auth: true` on the family YAML (e.g. nfl_api) flags every
     // emitted wrapper so the flat dispatch resolves a bearer-token header set
     // before fetching (see AUTH_HEADER_PROVIDERS in src/leagues/_make_flat.ts).
@@ -2311,18 +2318,19 @@ function renderWrittenFlatModule(api, defs) {
       jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
     }
     if (def.parser) {
-      jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.\n`;
       const sec = FLAT_PARSER_SECTIONS[def.parser];
+      // A `kind: frames` schema (and no single default sub-frame): the parser returns
+      // an object of tables, one per documented key.
+      const frames = loadReturnsSchema(def.returnsSchema)?.frames;
+      const objectOfTables = frames && !(sec && sec.default !== null);
+      jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return ${objectOfTables ? "an object of tables keyed by result set" : "tidy rows"} instead of the raw response.\n`;
       if (sec) {
         const names = sec.sections ? sec.sections.map((s) => `\`${s}\``).join(", ") : sec.dynamic;
         const dflt = sec.default === null ? "every table, as a dict" : `\`${sec.default}\``;
         jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; an unknown name throws, listing the valid ones.\n`;
       }
-      // A `kind: frames` schema (and no single default sub-frame): the parser returns
-      // an object of tables, one per documented key.
-      const frames = loadReturnsSchema(def.returnsSchema)?.frames;
       jsdoc +=
-        frames && !(sec && sec.default !== null)
+        objectOfTables
           ? ` * @returns The raw response by default; with \`{ parsed: true }\`, an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}.\n`
           : ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
     } else {

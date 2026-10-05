@@ -67,6 +67,11 @@ copy:
 # verbatim py modules in vendor/upstream/py/); a pin bump that adds a collision
 # fails that test until the name is added here.
 py_reserved:
+  # hand-written in sdv-py (T22f): JS must never generate these names
+  - espn_mbb_pbp
+  - espn_nba_pbp
+  - espn_wbb_pbp
+  - espn_wnba_pbp
   - espn_cfb_player_stats
   - espn_mbb_player_stats
   - espn_mlb_player_stats

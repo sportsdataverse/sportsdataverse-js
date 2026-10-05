@@ -6,6 +6,17 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed — vendor tooling + CI hardening
+
+- **`fetchWithRetry`:** each attempt gets its own `AbortSignal.timeout` (30 s, headers and body), so a hung socket cannot stall a job. Worst case per URL: 3 x 30 s plus 1.5 s of backoff. `raw.githubusercontent.com` file fetches retry exactly like the API ones.
+- **BOM:** upstream text is decoded by one function for a fresh fetch and a committed copy, so a leading BOM can never make the two diverge. The bytes on disk (and in LOCK) stay verbatim.
+- **Overlays:** an overlay addition whose `path` duplicates a vendored endpoint (or an earlier addition) now throws. On a pin bump, `vendor` warns when a whole-key overlay patch replaces a key whose upstream value also changed in that bump (the change is masked).
+- **`vendor.yaml`:** `py_reserved` gains `espn_nba_pbp`, `espn_wnba_pbp`, `espn_mbb_pbp`, `espn_wbb_pbp` (hand-written in sdv-py); a test checks no generated ESPN wrapper takes one.
+- **Workflows:** `timeout-minutes` on every CI, vendor-sync and live-smoke job. Live smoke serialises runs and files a separate `live-tests:build-failure` issue when install or build fails (only a failing live step is "drift"). The vendor-sync failure issue names the resolved sdv-py sha.
+- **vendor-sync to CI:** the sync PR is opened with `GITHUB_TOKEN`, which starts no `pull_request` run. `ci.yml` gains `workflow_dispatch` and vendor-sync runs `gh workflow run ci.yml --ref chore/vendor-sync` after the PR is created or updated (`actions: write`, token on that step only), so the checks attach to the branch head.
+- **Tests:** the token-scoping check also rejects a workflow-level or job-level token `env` and an inline secrets expression in `run` / `with`; the failed-fetch test runs on a temp copy (`SDV_VENDOR_ROOT`), never the real codegen dir; the pipefail semantics test no longer spawns a bare `bash` on Windows (WSL); the pruned-file check asserts the file is gone instead of reading a spawned process status; the skipped-family pre-bump message is covered.
+- **Docs:** `@param params.parsed` on the 130 `kind: frames` flat endpoints now says it returns an object of tables keyed by result set (matching `@returns`). `FLAT_FAMILY_HOSTS` in the generator is built once and frozen.
+
 ### Changed — vendor pin 81eb7e7060: ESPN CDN, Fox, stats/On3 returns tables, `on_missing`
 
 - **Pin:** the vendored sdv-py ref moves from `719de79` to `81eb7e7060`. Two JS overlays the upstream absorbed are gone:

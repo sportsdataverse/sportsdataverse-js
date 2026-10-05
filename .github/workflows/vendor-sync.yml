@@ -19,6 +19,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  actions: write # only for `gh workflow run ci.yml` on the sync branch
 
 concurrency:
   group: vendor-sync
@@ -27,6 +28,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
         with:
@@ -70,13 +72,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           VENDOR_OUTCOME: ${{ steps.vendor.outcome }}
+          SHA: ${{ steps.ref.outputs.sha }}
           CODEGEN_OUTCOME: ${{ steps.codegen.outcome }}
         run: |
           failed="resolve ref"
           [ "$VENDOR_OUTCOME" = failure ] && failed="vendor (fetch / LOCK check)"
           [ "$CODEGEN_OUTCOME" = failure ] && failed="codegen"
           title="vendor-sync failed"
-          body="The weekly vendor sync failed at: $failed. $RUN_URL"
+          body="The weekly vendor sync failed at: $failed. sdv-py sha: ${SHA:-not resolved}. $RUN_URL"
           n=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$n" ]; then
             gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "$body"
@@ -119,7 +122,8 @@ jobs:
             echo '```'
             echo '</details>'
           } > pr-body.md
-      - if: steps.codegen.outcome == 'success'
+      - id: cpr
+        if: steps.codegen.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
         with:
           branch: chore/vendor-sync
@@ -133,3 +137,11 @@ jobs:
             docs/docs/**
             docs/src/generated/**
             docs/src/playground/endpoints.json
+      # A PR opened/updated with GITHUB_TOKEN starts no pull_request run. workflow_dispatch
+      # is exempt from that rule, so dispatch CI on the branch: its check runs attach to
+      # the branch head commit and so show on the PR. The token lives on this step only.
+      - name: Run CI on the sync branch
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref chore/vendor-sync

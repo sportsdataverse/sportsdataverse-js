@@ -1,5 +1,5 @@
 import should from 'should';
-import { cpSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -14,7 +14,12 @@ import {
   CODEGEN_DIR,
   checkSchemaShape,
   checkVendor,
+  decodeText,
   deriveAll,
+  deriveOutgoing,
+  familyPatches,
+  findMaskedPatches,
+  githubSource,
   fetchWithRetry,
   findStaleAfterBump,
   writeVendor,
@@ -508,7 +513,7 @@ describe('vendor:check (offline drift gate)', function () {
         const r = bump(repo, sha2);
         r.status.should.equal(0, r.stderr);
         r.stdout.should.match(new RegExp(`removed tools/codegen/${SCHEMA}`));
-        spawnSync('node', ['-e', `require('fs').statSync(${JSON.stringify(join(tmp, SCHEMA))})`]).status.should.not.equal(0);
+        existsSync(join(tmp, SCHEMA)).should.be.false(); // gone, asserted directly (a spawned node's null status would pass `not.equal(0)`)
       } finally {
         rmSync(repo, { recursive: true, force: true });
       }
@@ -582,14 +587,15 @@ describe('vendor:check (offline drift gate)', function () {
     const repo = mkdtempSync(join(tmpdir(), 'sdv-vendor-repo-'));
     try {
       spawnSync('git', ['init', '-q', repo]);
-      const before = [readFileSync(join(CODEGEN_DIR, 'vendor.yaml')), readFileSync(join(CODEGEN_DIR, 'vendor', 'upstream', 'LOCK'))];
+      // Runs on the temp copy, never the real CODEGEN_DIR: a regression must not rewrite the repo's vendor.yaml.
+      const before = [readFileSync(join(tmp, 'vendor.yaml')), readFileSync(join(tmp, 'vendor', 'upstream', 'LOCK'))];
       const r = spawnSync(process.execPath, [join(CODEGEN_DIR, 'vendor.mjs'), '--ref', '0'.repeat(40)], {
-        env: { ...process.env, SDV_PY_REPO: repo },
+        env: { ...process.env, SDV_PY_REPO: repo, SDV_VENDOR_ROOT: tmp },
         encoding: 'utf8',
       });
       r.status.should.equal(1);
-      readFileSync(join(CODEGEN_DIR, 'vendor.yaml')).equals(before[0]).should.be.true();
-      readFileSync(join(CODEGEN_DIR, 'vendor', 'upstream', 'LOCK')).equals(before[1]).should.be.true();
+      readFileSync(join(tmp, 'vendor.yaml')).equals(before[0]).should.be.true();
+      readFileSync(join(tmp, 'vendor', 'upstream', 'LOCK')).equals(before[1]).should.be.true();
     } finally {
       rmSync(repo, { recursive: true, force: true });
     }
@@ -607,7 +613,12 @@ describe('vendor-sync.yml', () => {
     t.run.should.match(/npm test 2>&1 \| tail/);
     // The PR body reports the step OUTCOME (failure even under continue-on-error).
     steps.find((s) => s.name === 'Build PR body').env.OUTCOME.should.equal('${{ steps.test.outcome }}');
-    // pipefail is what makes the pipe report npm's failure:
+    // pipefail is what makes the pipe report npm's failure (checked in the next test)
+  });
+
+  it('bash -o pipefail reports a failing pipe (the semantics the test step relies on)', function () {
+    // A bare `bash` on Windows is often the WSL launcher, not the bash GitHub runs.
+    if (process.platform === 'win32') this.skip();
     spawnSync('bash', ['--noprofile', '--norc', '-eo', 'pipefail', '-c', 'false | tail -n 1']).status.should.equal(1);
     spawnSync('bash', ['--noprofile', '--norc', '-e', '-c', 'false | tail -n 1']).status.should.equal(0);
   });
@@ -631,7 +642,7 @@ describe('workflows: LOCK online check + vendor-sync failure handling', () => {
     (sync.env ?? {}).should.not.have.property('GITHUB_TOKEN');
     (sync.env ?? {}).should.not.have.property('GH_TOKEN');
     sync.steps.filter((s) => s.env?.GITHUB_TOKEN).map((s) => s.name).should.eql(['Vendor (fetch + online LOCK check)']);
-    sync.steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure']);
+    sync.steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure', 'Run CI on the sync branch']);
     sync.steps.find((s) => s.name === 'Vendor (fetch + online LOCK check)').run.should.match(/vendor:check:online/);
     // codegen runs in its own step, without the token
     const cg = sync.steps.find((s) => s.id === 'codegen');
@@ -648,5 +659,201 @@ describe('workflows: LOCK online check + vendor-sync failure handling', () => {
     issue.run.trimEnd().split('\n').pop().should.match(/^exit 1/); // red after reporting
     // later steps only run when everything before them succeeded
     sync.steps.find((s) => s.id === 'test').if.should.match(/steps\.codegen\.outcome == 'success'/);
+  });
+});
+
+describe('vendor: fetch hardening', () => {
+  const res = (status) => ({ ok: status < 400, status });
+  const fast = { sleep: async () => {}, attempts: 3 };
+
+  it('gives every attempt its own AbortSignal.timeout', async () => {
+    const seen = [];
+    await fetchWithRetry('u', {}, { ...fast, timeoutMs: 1234, fetchImpl: async (u, o) => (seen.push(o.signal), seen.length < 3 ? res(503) : res(200)) });
+    seen.length.should.equal(3);
+    new Set(seen).size.should.equal(3); // a fresh signal per attempt, not one shared deadline
+    seen.every((s) => s instanceof AbortSignal).should.be.true();
+  });
+
+  it('a hung request is aborted and retried, then fails: bounded, never a hang', async () => {
+    let n = 0;
+    const hang = (u, { signal }) => new Promise((_, rej) => {
+      n++;
+      signal.addEventListener('abort', () => rej(signal.reason));
+    });
+    await fetchWithRetry('u', {}, { ...fast, timeoutMs: 20, fetchImpl: hang }).should.be.rejectedWith(/network error/);
+    n.should.equal(3);
+  });
+
+  it('raw.githubusercontent file fetches retry like the API ones', async () => {
+    const calls = [];
+    const fetchImpl = async (url) => {
+      calls.push(url);
+      if (url.includes('raw.githubusercontent.com') && calls.filter((c) => c === url).length < 3) return res(503);
+      return { ok: true, status: 200, arrayBuffer: async () => Buffer.from('x') };
+    };
+    const [buf] = await githubSource('o/r', 'a'.repeat(40), { fetchImpl, sleep: async () => {}, attempts: 3 }).getMany(['endpoints/x.yaml']);
+    buf.toString().should.equal('x');
+    calls.filter((c) => c.startsWith('https://raw.githubusercontent.com/o/r/')).length.should.equal(3);
+  });
+
+  it('a BOM is stripped identically for fetched bytes and committed copies', function () {
+    this.timeout(60000);
+    const bom = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from('a: 1\n')]);
+    decodeText(bom).should.equal('a: 1\n');
+    decodeText(Buffer.from('a: 1\n')).should.equal('a: 1\n');
+    // the bytes (what LOCK hashes) are left alone
+    gitBlobSha(bom).should.not.equal(gitBlobSha(Buffer.from('a: 1\n')));
+    // local path: deriveAll reads a BOM-prefixed upstream copy to the same output
+    const tmp = mkdtempSync(join(tmpdir(), 'sdv-bom-'));
+    try {
+      for (const d of ['vendor', 'overlay', 'endpoints', 'schemas']) cpSync(join(CODEGEN_DIR, d), join(tmp, d), { recursive: true });
+      for (const c of ['vendor.yaml', ...(manifest.copy ?? [])]) cpSync(join(CODEGEN_DIR, c), join(tmp, c));
+      const want = deriveAll(tmp).get('endpoints/cbs.yaml');
+      const f = join(tmp, 'vendor', 'upstream', 'endpoints', 'cbs_napi.yaml');
+      writeFileSync(f, Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), readFileSync(f)]));
+      deriveAll(tmp).get('endpoints/cbs.yaml').should.equal(want);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+});
+
+describe('vendor: overlay vs upstream', () => {
+  it('rejects an overlay addition whose path duplicates a vendored endpoint', () => {
+    const ep = family('cbs').doc.endpoints.find((e) => e.path);
+    (() => family('cbs', `endpoints:\n  - short: zz_dup\n    path: ${JSON.stringify(ep.path)}\n`)).should.throw(
+      /overlay\/cbs\.yaml zz_dup: path .* duplicates endpoint/
+    );
+  });
+
+  it('rejects two overlay additions that share a path', () => {
+    const ov = `endpoints:\n  - short: zz_a\n    path: /zz/unique\n  - short: zz_b\n    path: /zz/unique\n`;
+    (() => family('cbs', ov)).should.throw(/zz_b: path \/zz\/unique duplicates endpoint zz_a/);
+  });
+
+  it('records what upstream said for a patched key, and warns when a pin bump changes it (masking)', () => {
+    const cfg = manifest.families.cbs;
+    const text = upstream(`endpoints/${cfg.from ?? 'cbs'}.yaml`);
+    const ep = family('cbs').doc.endpoints.find((e) => e.path);
+    const ov = `endpoints:\n  - short: ${ep.short}\n    path: /overridden\n`;
+    const run = (t) => transformFamily('cbs', cfg, t, ov, manifest.source).patches.filter((p) => p.k === 'path');
+    const oldP = run(text);
+    oldP.should.have.length(1);
+    oldP[0].upstream.should.equal(JSON.stringify(ep.path));
+    const newP = run(text.replace(`path: ${ep.path}`, `path: ${ep.path}/v2`));
+    findMaskedPatches('cbs', oldP, newP).should.have.length(1);
+    findMaskedPatches('cbs', oldP, newP)[0].should.match(/overlay\/cbs\.yaml .*path replaces the whole upstream value.*MASKED/);
+    findMaskedPatches('cbs', oldP, oldP).should.eql([]); // unchanged upstream: silent
+    familyPatches(CODEGEN_DIR, 'cbs').length.should.be.above(0);
+  });
+});
+
+describe('vendor: reserved names and the skipped-family message', () => {
+  it('py_reserved lists the hand-written espn_<lg>_pbp names and no ESPN wrapper is generated under a reserved name', async () => {
+    const reserved = new Set(manifest.py_reserved);
+    for (const n of ['espn_nba_pbp', 'espn_wnba_pbp', 'espn_mbb_pbp', 'espn_wbb_pbp']) reserved.has(n).should.be.true(n);
+    const { WRAPPERS } = await import('../dist/generated/wrappers.js');
+    const generated = new Set(WRAPPERS.map((w) => w.publicShort ?? w.short));
+    for (const n of [...reserved].filter((r) => r.endsWith('_pbp'))) {
+      const rest = n.replace(/^espn_[a-z]+?_/, '');
+      generated.has(rest).should.be.false(`a generated ESPN wrapper would take the reserved name ${n}`);
+    }
+  });
+
+  it('names a family whose outgoing outputs cannot be derived, and skips only it', function () {
+    this.timeout(60000);
+    const tmp = mkdtempSync(join(tmpdir(), 'sdv-skip-'));
+    try {
+      for (const d of ['vendor', 'overlay', 'endpoints', 'schemas']) cpSync(join(CODEGEN_DIR, d), join(tmp, d), { recursive: true });
+      for (const c of ['vendor.yaml', ...(manifest.copy ?? [])]) cpSync(join(CODEGEN_DIR, c), join(tmp, c));
+      const f = join(tmp, 'vendor.yaml');
+      writeFileSync(f, readFileSync(f, 'utf8').replace(/^families:\n/m, 'families:\n  brand_new_family: {}\n'));
+      const warned = [];
+      const out = deriveOutgoing(tmp, (m) => warned.push(m));
+      out.skipped.should.eql(['brand_new_family']);
+      warned.should.have.length(1);
+      warned[0].should.match(/^vendor: prune skipped for family brand_new_family \(outgoing outputs not derivable: /);
+      out.before.has('endpoints/cbs.yaml').should.be.true(); // the rest still derive
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+});
+
+describe('workflows: hardening', () => {
+  const wfDir = join(CODEGEN_DIR, '..', '..', '.github', 'workflows');
+  const load = (n) => parse(readFileSync(join(wfDir, n), 'utf8'));
+  const files = readdirSync(wfDir).filter((f) => f.endsWith('.yml'));
+  const tokenish = /secrets\.|github\.token|GITHUB_TOKEN|GH_TOKEN/;
+
+  it('no workflow leaks a secret/token via workflow-level env, job-level env, or an inline ${{ secrets.* }} in run:/with:', () => {
+    for (const f of files) {
+      const wf = load(f);
+      JSON.stringify(wf.env ?? {}).should.not.match(tokenish, `${f}: workflow-level env`);
+      for (const [name, job] of Object.entries(wf.jobs)) {
+        JSON.stringify(job.env ?? {}).should.not.match(tokenish, `${f}: job ${name} env`);
+        for (const s of job.steps ?? []) {
+          (s.run ?? '').should.not.match(/\$\{\{\s*(secrets|github\.token)/, `${f}: ${name}/${s.name ?? s.id} run`);
+          JSON.stringify(s.with ?? {}).should.not.match(/\$\{\{\s*(secrets|github\.token)/, `${f}: ${name}/${s.name ?? s.id} with`);
+        }
+      }
+    }
+  });
+
+  it('the scoping check itself fails on each leak shape', () => {
+    const leaks = [
+      { env: { GH_TOKEN: '${{ github.token }}' } },
+      { env: { T: '${{ secrets.X }}' } },
+    ];
+    for (const l of leaks) JSON.stringify(l.env).should.match(tokenish);
+    '${{ secrets.NPM }}'.should.match(/\$\{\{\s*(secrets|github\.token)/);
+  });
+
+  it('every job in ci / vendor-sync / live-smoke has timeout-minutes', () => {
+    for (const f of ['ci.yml', 'vendor-sync.yml', 'live-smoke.yml']) {
+      for (const [name, job] of Object.entries(load(f).jobs)) {
+        job['timeout-minutes'].should.be.a.Number().and.be.above(0, `${f}: ${name}`);
+        job['timeout-minutes'].should.be.belowOrEqual(60, `${f}: ${name}`);
+      }
+    }
+  });
+
+  it('live-smoke serialises runs and labels a build failure apart from drift', () => {
+    const wf = load('live-smoke.yml');
+    wf.concurrency.group.should.equal('live-smoke');
+    wf.concurrency['cancel-in-progress'].should.be.false();
+    const steps = wf.jobs.live.steps;
+    const live = steps.find((s) => s.id === 'live');
+    live.run.should.match(/SDV_LIVE=1 npm test/);
+    const drift = steps.find((s) => /drift issue/.test(s.name ?? ''));
+    drift.if.should.equal("failure() && steps.live.outcome == 'failure'");
+    drift.run.should.match(/live-tests:drift/);
+    const build = steps.find((s) => /build-failure issue/.test(s.name ?? ''));
+    build.if.should.equal("failure() && steps.live.outcome != 'failure'");
+    build.run.should.match(/live-tests:build-failure/).and.not.match(/live-tests:drift/);
+    steps.indexOf(live).should.be.above(steps.findIndex((s) => s.run === 'npm run build'));
+  });
+
+  it('vendor-sync dispatches CI on the sync branch (GITHUB_TOKEN PRs start no pull_request run)', () => {
+    const ci = load('ci.yml');
+    Object.keys(ci.on).should.containEql('workflow_dispatch');
+    const wf = load('vendor-sync.yml');
+    wf.permissions.actions.should.equal('write');
+    const steps = wf.jobs.sync.steps;
+    const cprIdx = steps.findIndex((s) => s.uses?.startsWith('peter-evans/create-pull-request@'));
+    steps[cprIdx].id.should.equal('cpr');
+    const d = steps[steps.findIndex((s) => s.name === 'Run CI on the sync branch')];
+    steps.indexOf(d).should.be.above(cprIdx);
+    d.run.should.match(/gh workflow run ci\.yml .*--ref chore\/vendor-sync/);
+    steps[cprIdx].with.branch.should.equal('chore/vendor-sync');
+    d.if.should.match(/pull-request-operation == 'created'/).and.match(/pull-request-operation == 'updated'/);
+    d.env.GH_TOKEN.should.equal('${{ github.token }}'); // only on this step
+    steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure', 'Run CI on the sync branch']);
+  });
+
+  it('the vendor-sync failure issue carries the resolved sdv-py sha', () => {
+    const issue = load('vendor-sync.yml').jobs.sync.steps.find((s) => s.name === 'Report sync failure');
+    issue.env.SHA.should.equal('${{ steps.ref.outputs.sha }}');
+    issue.run.should.match(/sdv-py sha: \$\{SHA:-not resolved\}/);
   });
 });
