@@ -29,7 +29,7 @@ import {
 import { _impitLoader, encodeQuery } from '../../dist/core/transport.js';
 import { get } from '../../dist/core/client.js';
 import { statcastGet } from '../../dist/core/statcast_runtime.js';
-import { torvikGet } from '../../dist/core/torvik_runtime.js';
+import { torvikGet, bartWbbGet } from '../../dist/core/torvik_runtime.js';
 import { hockeytechGet, resolveSeasonId } from '../../dist/core/hockeytech_runtime.js';
 
 // No-network tests for the runtime core (src/core/{errors,transport,auth,config,request}.ts).
@@ -756,10 +756,23 @@ describe('core/request: wrappers route through request()', () => {
     });
     (await statcastGet('https://baseballsavant.mlb.com/gf')).should.eql({ a: 1 });
     (await statcastGet('https://baseballsavant.mlb.com/leaderboard')).should.equal('a,b\n1,2');
-    (await torvikGet('https://barttorvik.com/x')).should.match(/^Mozilla\/5\.0 \(sportsdataverse-js/);
+    (await torvikGet('https://barttorvik.com/x')).should.equal(getConfig().userAgent);
     const ht = await hockeytechGet('ignored', { params: { league: 'pwhl', view: 'scorebar' } });
     ht.should.have.property('client_code', 'pwhl');
     ht.should.have.property('key');
+  });
+
+  it('torvik / bart_wbb send the configured User-Agent (no hard-coded UA, no +https token); a caller UA wins', async () => {
+    const echo = () => fakeTransport((req) => ({ status: 200, data: req.headers['User-Agent'] ?? req.headers['user-agent'] }));
+    configure({ transport: { torvik: echo(), bart_wbb: echo() }, userAgent: 'my-app/1.0' });
+    (await torvikGet('https://barttorvik.com/x')).should.equal('my-app/1.0');
+    (await bartWbbGet('https://barttorvik.com/ncaaw/x')).should.equal('my-app/1.0');
+    (await torvikGet('https://barttorvik.com/x', { headers: { 'user-agent': 'caller/2' } })).should.equal('caller/2');
+    resetConfig();
+    configure({ transport: { torvik: echo() } });
+    const ua = await torvikGet('https://barttorvik.com/x');
+    ua.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    ua.should.not.containEql('+http');
   });
 
   it('hockeytech resolveSeasonId: PWHL keeps its fallback table on a failed fetch; others throw', async () => {

@@ -14,6 +14,7 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 - **`nfl_api`:** the built-in token mint retries a network error or a `408` / `429` / `5xx` itself (never `401` / `403`); since the transport layer one network blip at `/identity/v3/token` failed the call at once.
 - **`tokenAuth`:** a `401` on a request that carried your own credential no longer mints a token that would never be sent.
 - **`sports247`:** a `403` re-mints the guest JWT once and retries, as sdv-py does (not when you sent your own `Authorization`); after a failed mint, calls go out tokenless for a minute instead of re-trying the site root on every call; `sports247ClearTokenCache()` also resets the once-per-process warning; the User-Agent is now the one impit's `chrome142` profile sends (was Chrome/124 over a Chrome 142 TLS fingerprint).
+- **`torvik` / `bart_wbb`:** no hard-coded User-Agent any more (it carried a `+https://` token, which ESPN's site API answers with 403). They send the configured `userAgent`, so `configure({ userAgent })` applies; a caller `User-Agent` header still wins. barttorvik.com answered 200 to the default UA (one live request, 2026-10-05).
 - **`nfl_pro` login:** the error name is scrubbed like the message; the browser-close cap no longer lets the process exit before the login settles.
 - `AuthProvider` documents its failure contract on the interface. Test isolation: an `@internal` `_unregisterFamilyDefaults` seam.
 
