@@ -8,6 +8,7 @@
   - [Build & Development Commands](#build--development-commands)
   - [Architecture](#architecture)
     - [Codegen pipeline (the heart of the repo)](#codegen-pipeline-the-heart-of-the-repo)
+    - [Vendored families (one-way sync from sdv-py)](#vendored-families-one-way-sync-from-sdv-py)
     - [ESPN cross-league surface](#espn-cross-league-surface)
     - [Flat-API families (native + providers)](#flat-api-families-native--providers)
     - [OpenAPI → endpoint-YAML transform](#openapi--endpoint-yaml-transform)
@@ -92,6 +93,8 @@ npm test                # mocha suite (no network) — runs `npm run build` firs
 
 npm run codegen         # regenerate src/generated + docs/docs/reference + playground JSON
 npm run codegen:check   # DRIFT GATE — fails if committed generated output is stale
+npm run vendor          # re-vendor sdv-py endpoint YAML + schemas (--ref <sha> | --offline)
+npm run vendor:check    # VENDOR GATE — fails on a hand-edit to a vendored file (offline)
 npm run bundle:parsers  # esbuild the browser parser bundle for the playground
 npm run docs            # typedoc -> the typed module reference
 ```
@@ -124,6 +127,41 @@ endpoint YAML in `tools/codegen/endpoints/*.yaml` (plus return schemas under
   `npm run codegen`; otherwise the drift gate goes red.
 
 The generator is a pure file-in / file-out renderer — it makes **no network calls**.
+
+### Vendored families (one-way sync from sdv-py)
+
+sdv-py's codegen YAML is the **source of truth** for the shared families:
+`espn_site_v2`, `espn_core_v2`, `espn_web_v3`, `leagues`, `mlb_statcast`, `nfl_api`,
+the four `nhl_*`, `mlb` (py `mlb_api`), `torvik`, `cbs` (py `cbs_napi`), `yahoo`
+(py `yahoo_shangrila`), plus `endpoints/releases.yaml` (verbatim) and every returns
+schema those families reference. `tools/codegen/vendor.mjs` derives them from a
+pinned sdv-py commit:
+
+- `tools/codegen/vendor.yaml` — the manifest: `source.ref` (the pin) and, per family,
+  `from` (py stem), `names` (py short → JS short; keeps CBS's JS names), `parsers`
+  (py parser → JS registry name), `parser_overrides` (JS short → JS parser),
+  `schemas` (returns-schema path prefix rewrite).
+- `tools/codegen/vendor/upstream/` — the fetched py files, **verbatim**, plus `REF`.
+- `tools/codegen/overlay/<family>.yaml` — JS-owned additions (`mlb`'s 14 and
+  `torvik`'s 3 JS-only endpoints) and patches (an entry whose `short` is vendored
+  replaces those keys). This is the ONLY place to change a vendored family in JS.
+- `npm run vendor -- --ref <sha>` fetches (GitHub raw, or a local clone via env
+  `SDV_PY_REPO`, read with `git cat-file` at the ref — never its working tree),
+  re-derives, and deletes orphaned schemas. `npm run vendor -- --offline` re-derives
+  from `vendor/upstream/` after an overlay/manifest edit. Then `npm run codegen`.
+- `npm run vendor:check` (CI, next to `codegen:check`) is offline: it re-derives and
+  fails on any difference, an orphan schema, or a pin/upstream mismatch.
+- `.github/workflows/vendor-sync.yml` bumps the pin to sdv-py `main` weekly and opens
+  one sync PR.
+- JS-owned (hand-maintained, not vendored): `fox`, `odds_api`, `hockeytech`,
+  `yahoo_scores`, `recruiting`, and `espn_parser_map.yaml`.
+- New or changed shared endpoints land in **sdv-py first**. A new py parser name
+  needs a `parsers` mapping (the flat-contract test fails on an unregistered name);
+  a new ESPN short needs an `ESPN_ENDPOINT_PARSERS` entry + `espn_parser_map.yaml`.
+- `_enrich_cbs_napi_schemas.mjs` / `gen-yahoo-schemas.mjs` write into vendored schema
+  dirs — don't run them; enrich upstream in sdv-py instead.
+- A flat endpoint may carry its own `host` (Yahoo's editorial routes): `generate.mjs`
+  uses `ep.host ?? doc.host`, and `flatHosts` stays the family host.
 
 ### ESPN cross-league surface
 
@@ -286,6 +324,7 @@ src/
   index.ts        # namespace assembly + default export
 tools/codegen/
   generate.mjs    # the codegen entry point (writes generated + docs + playground)
+  vendor.mjs      # one-way sdv-py -> JS sync (vendor.yaml, overlay/, vendor/upstream/)
   from-openapi.mjs# OpenAPI 3.x spec -> endpoint-YAML skeleton
   endpoints/*.yaml# SOURCE OF TRUTH (espn_* families + flat-API stems + leagues.yaml)
   schemas/        # return schemas consumed by the docs renderer
@@ -327,6 +366,9 @@ tsconfig.json, typedoc.json
 
 ## Common Pitfalls
 
+- **Don't hand-edit a vendored YAML or schema** (header `VENDORED from …`, or any
+  file under a vendored family): `vendor:check` fails and `npm run vendor` clobbers
+  it. Change it in sdv-py, or via `tools/codegen/overlay/<family>.yaml`.
 - **Don't hand-edit `src/generated/**` or `docs/docs/reference/**`.** They're
   codegen-owned; the drift gate will fail and your edit will be clobbered on the next
   `npm run codegen`. Edit the YAML / renderer instead.

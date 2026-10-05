@@ -1,0 +1,131 @@
+# One-way vendor sync: sportsdataverse-py -> sportsdataverse-js.
+#
+# sdv-py's codegen endpoint YAML + returns schemas are the source of truth for
+# the shared families below. `tools/codegen/vendor.mjs` fetches them at
+# `source.ref` into tools/codegen/vendor/upstream/ (verbatim, committed), then
+# derives tools/codegen/endpoints/<family>.yaml + the schemas they reference.
+#
+#   npm run vendor -- --ref <sha>   # bump the pin, fetch, re-derive
+#   npm run vendor -- --offline     # re-derive from the committed upstream copy
+#   npm run vendor:check            # offline drift gate (CI): fails on hand-edits
+#
+# Never hand-edit a vendored file. JS-only endpoints and JS-side patches go in
+# tools/codegen/overlay/<family>.yaml; new/changed shared endpoints land in
+# sdv-py first. Fetch is GitHub raw by default, or a local sdv-py checkout via
+# env SDV_PY_REPO (read with `git show <ref>:<path>`, never its working tree).
+#
+# Per family (key = JS family = output file + `api` stem):
+#   from:     py endpoint stem (default: the key)
+#   names:    py short -> JS short (keeps JS public names; Task 4 flips CBS)
+#   parsers:  py parser name -> JS registry name (src/parsers/_registry.ts)
+#   parser_overrides: JS short -> JS parser (where JS uses a different parser
+#             than the py name maps to; keyed by the post-rename JS short)
+#   schemas:  returns-schema path prefix rewrite, py -> JS
+# A family with an overlay/<family>.yaml gets it merged on top.
+source:
+  repo: sportsdataverse/sportsdataverse-py
+  ref: 719de79edb685b89c524f8b4c0c146fea0b53855
+
+# Copied verbatim (no transform, not generated here).
+copy:
+  - endpoints/releases.yaml
+
+families:
+  espn_site_v2: {}
+  espn_core_v2:
+    parsers:
+      # py-only weekly FPI parser; JS falls back to the Core v2 list parser.
+      parse_weekly_powerindex: parse_items
+  espn_web_v3: {}
+  leagues: {}
+  mlb_statcast: {}
+  nfl_api:
+    parsers:
+      # py-only parsers. game_details_* are one-row object flatteners, which is
+      # exactly parse_nfl_team; live_* fall back to the same generic flattener.
+      parse_nfl_game_details_v2: parse_nfl_team
+      parse_nfl_game_details_by_slug: parse_nfl_team
+      parse_nfl_live_team_statistics: parse_nfl_team
+      parse_nfl_live_player_statistics: parse_nfl_team
+  nhl_api_web: {}
+  nhl_edge: {}
+  nhl_records: {}
+  nhl_stats_rest: {}
+  mlb:
+    from: mlb_api
+    parsers:
+      parse_mlb_api_schedule: parse_mlb_schedule
+      parse_mlb_api_list: parse_mlb_list
+      parse_mlb_api_boxscore: parse_mlb_boxscore
+      parse_mlb_api_linescore: parse_mlb_linescore
+      parse_mlb_api_play_by_play: parse_mlb_play_by_play
+      parse_mlb_api_win_probability: parse_mlb_win_probability
+      parse_mlb_api_team_roster: parse_mlb_team_roster
+      parse_mlb_api_draft_latest: parse_mlb_draft_latest
+      parse_mlb_api_timecodes: parse_mlb_timecodes
+    parser_overrides:
+      teams_stats: parse_mlb_person_stats
+      team_roster_type: parse_mlb_team_roster
+    schemas:
+      native/mlb_api/: native/mlb/
+  torvik:
+    parser_overrides:
+      ratings: parse_torvik_ratings
+      team_factors: parse_torvik_team_factors
+  cbs:
+    from: cbs_napi
+    names:
+      client_config: client_configuration
+      division_subdivisions: sub_divisions
+      game_boxscore: boxscore
+      game_featured: featured_game
+      game_odds_hq: game_hq_odds
+      game_probable_players: probable_players
+      game_ruwt_highlights: ruwt_highlights
+      game_weather: weather
+      player_depth_charts: depth_charts
+      player_hockey_meta: hockey_player_meta
+      player_meta_baseball: baseball_player_meta
+      player_meta_golf: player_golf_metadata
+      player_position_rankings: position_rankings
+      player_recruit_associations: recruit_team_associations
+      team_rankings_sportsline: sports_line_team_rankings
+      team_standings_sportsline: sports_line_team_standings
+    parsers:
+      parse_cbs_napi: parse_cbs_list
+      parse_cbs_napi_scoring_drives: parse_cbs_list
+      parse_cbs_napi_scoring_plays: parse_cbs_list
+      parse_cbs_napi_standings: parse_cbs_standings
+    parser_overrides:
+      featured_game: parse_cbs_scoreboard
+      game_scoring_scoreboard: parse_cbs_scoreboard
+      game_scoring_scores: parse_cbs_scoreboard
+      game_hq_odds: parse_cbs_odds
+      game_odds: parse_cbs_odds
+      game_props: parse_cbs_odds
+      odds: parse_cbs_odds
+      player_standings: parse_cbs_standings
+      sports_line_team_standings: parse_cbs_standings
+    schemas:
+      native/cbs_napi/: native/cbs/
+  yahoo:
+    from: yahoo_shangrila
+    parsers:
+      parse_yahoo_shangrila: parse_yahoo_list
+      parse_yahoo_shangrila_tables: parse_yahoo_stats
+      parse_yahoo_editorial: parse_yahoo_scores_list
+    parser_overrides:
+      game_stats_leaders: parse_yahoo_stats
+      league_stats_by_team: parse_yahoo_stats
+      league_stats_individual: parse_yahoo_stats
+      league_stats_overview: parse_yahoo_stats
+      league_stats_weekly: parse_yahoo_stats
+      nav_dropdown_tray: parse_yahoo_list
+      playbook_boxscore: parse_yahoo_list
+      playbook_boxscore_poll: parse_yahoo_list
+      playbook_team: parse_yahoo_list
+      player_basic: parse_yahoo_list
+      editorial_boxscore: parse_yahoo_scores_boxscore
+      editorial_scoreboard: parse_yahoo_scores_scoreboard
+    schemas:
+      native/yahoo_shangrila/: native/yahoo/

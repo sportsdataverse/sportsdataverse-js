@@ -101,8 +101,8 @@ export function resolveUrl(def, league, params, hosts) {
 // src/core/flat.ts (resolveFlat). Used by BOTH the browser playground and the
 // /api/run proxy, exactly like resolveRequest above. There's no {sport}/{league}
 // slug nesting and no optional [...] segments; the path is host-relative with
-// bare {token} path params, and the host is absolute (looked up by `def.api` in
-// `flatHosts`, falling back to the wrapper's own `def.host`).
+// bare {token} path params, and the host is absolute (the wrapper's own
+// `def.host`, which carries any per-endpoint override, else `flatHosts[def.api]`).
 // ---------------------------------------------------------------------------
 
 /** Build the flat query map from `queryParams` (+ defaults), dropping empties. */
@@ -117,12 +117,13 @@ function cleanFlatQuery(def, params) {
 
 /**
  * Build { url, query } for a flat wrapper without fetching (mirrors
- * src/core/flat.ts `resolveFlat`). `flatHosts` is the generated per-family
- * base-URL map (endpoints.json `flatHosts`); the wrapper's own `def.host` is the
+ * src/core/flat.ts `resolveFlat`). The wrapper's own `def.host` wins (it carries
+ * per-endpoint host overrides, e.g. Yahoo's editorial routes); `flatHosts` (the
+ * generated per-family base-URL map, endpoints.json `flatHosts`) is the
  * fallback. A required `{token}` that can't be resolved throws.
  */
 export function resolveFlat(def, params = {}, flatHosts = {}) {
-  const host = (def.api && flatHosts[def.api]) || def.host;
+  const host = def.host || (def.api && flatHosts[def.api]);
   if (!host) throw new Error(`${def.short}: flat wrapper missing host`);
   const byName = new Map((def.pathParams || []).map((p) => [p.name, p]));
   const path = def.path.replace(/\{(\w+)\}/g, (_m, name) => {
