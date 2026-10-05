@@ -13,6 +13,7 @@ const PIN = {
   'parity/espn_basketball_pbp_oracle.py': 'BASKETBALL_PBP_PIN',
   'parity/keyless_oracle.py': 'PORT_PIN',
   'parity/py_oracle.py': 'vendor_pin()',
+  'parity/season_oracle.py': 'vendor_pin()', // the season transform rides in with the vendored YAML
   'oracle/gen_cricket_wp_oracle.py': 'PORT_PIN',
   'oracle/hockeytech_analytics_oracle.py': 'PORT_PIN',
   'oracle/odds_math_oracle.py': 'PORT_PIN',

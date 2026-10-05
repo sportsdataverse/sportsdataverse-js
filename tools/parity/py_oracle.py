@@ -92,7 +92,8 @@ def main() -> None:
             parser = by_short[js_to_py.get(short, short)]
             out = getattr(module, parser)(read(FIX / path))
             result[path] = {"parser": parser, "out": frame(out)}
-        text = json.dumps(result, indent=1, ensure_ascii=False, default=str) + "\n"
+        # allow_nan=False: a NaN that frame() missed (a nested one) fails here, never writes `NaN`.
+        text = json.dumps(result, indent=1, ensure_ascii=False, default=str, allow_nan=False) + "\n"
         # gzip with mtime 0 (same bytes every run): wide frames make the JSON large.
         (out_dir / f"{family}.json.gz").write_bytes(
             gzip.compress(text.encode("utf-8"), compresslevel=9, mtime=0)

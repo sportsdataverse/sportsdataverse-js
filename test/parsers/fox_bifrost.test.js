@@ -278,6 +278,7 @@ describe('fox flat-API family metadata (flat-contract style)', () => {
     } finally {
       resetConfig();
     }
+    seen.length.should.equal(1, seen.map((w) => w.message).join(' | ')); // nothing else warned
     seen = seen.filter((w) => /fox_fs_videos/.test(w.message));
     calls.should.eql(['https://api.foxsports.com/fs/videos', 'https://api.foxsports.com/fs/videos']);
     seen.length.should.equal(1);

@@ -52,7 +52,7 @@ const ALLTIMELEADERSGRIDS_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.topx - query parameter (`TopX`) — default `10`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`.
  * @example await sdv.nba.nbaStatsAlltimeleadersgrids({});
  */
@@ -88,7 +88,7 @@ const ASSISTLEADERS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -111,7 +111,7 @@ const ASSISTLEADERS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsAssistleaders({});
  */
@@ -231,7 +231,8 @@ const ASSISTTRACKER_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -307,7 +308,7 @@ const ASSISTTRACKER_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default `null`.
  * @param params.weight_nullable - query parameter (`Weight`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsAssisttracker({});
  */
@@ -371,7 +372,7 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreadvancedv3({});
  */
@@ -405,7 +406,7 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoredefensivev2({});
  */
@@ -469,7 +470,7 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorefourfactorsv3({});
  */
@@ -503,7 +504,7 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorehustlev2({});
  */
@@ -537,7 +538,7 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorematchupsv3({});
  */
@@ -601,7 +602,7 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoremiscv3({});
  */
@@ -635,7 +636,7 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreplayertrackv3({});
  */
@@ -699,7 +700,7 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorescoringv3({});
  */
@@ -733,7 +734,7 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv2({});
  */
@@ -767,7 +768,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv3({});
  */
@@ -831,7 +832,7 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`.
  * @example await sdv.nba.nbaStatsBoxscoretraditionalv2({});
  */
@@ -895,7 +896,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoretraditionalv3({});
  */
@@ -959,7 +960,7 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreusagev3({});
  */
@@ -990,7 +991,7 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1006,7 +1007,7 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsCommonallplayers({});
  */
@@ -1046,7 +1047,7 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`.
  * @example await sdv.nba.nbaStatsCommonplayerinfo({});
  */
@@ -1072,7 +1073,7 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "series_id_nullable",
@@ -1093,7 +1094,7 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.series_id_nullable - query parameter (`SeriesID`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsCommonplayoffseries({});
  */
@@ -1119,7 +1120,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "team_id",
@@ -1140,7 +1141,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`.
  * @example await sdv.nba.nbaStatsCommonteamroster({});
  */
@@ -1174,7 +1175,7 @@ const COMMONTEAMYEARS_DEF: WrapperDef = {
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsCommonteamyears({});
  */
@@ -1232,7 +1233,7 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `2020-21`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`.
  * @example await sdv.nba.nbaStatsCumestatsplayer({});
  */
@@ -1273,7 +1274,7 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -1315,7 +1316,7 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsCumestatsplayergames({});
  */
@@ -1346,7 +1347,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -1374,7 +1375,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`.
  * @example await sdv.nba.nbaStatsCumestatsteam({});
  */
@@ -1410,7 +1411,7 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_id_nullable",
@@ -1463,7 +1464,7 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsCumestatsteamgames({});
  */
@@ -1489,7 +1490,7 @@ const DRAFTCOMBINEDRILLRESULTS_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1504,7 +1505,7 @@ const DRAFTCOMBINEDRILLRESULTS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsDraftcombinedrillresults({});
  */
@@ -1530,7 +1531,7 @@ const DRAFTCOMBINENONSTATIONARYSHOOTING_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1545,7 +1546,7 @@ const DRAFTCOMBINENONSTATIONARYSHOOTING_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsDraftcombinenonstationaryshooting({});
  */
@@ -1571,7 +1572,7 @@ const DRAFTCOMBINEPLAYERANTHRO_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1586,7 +1587,7 @@ const DRAFTCOMBINEPLAYERANTHRO_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsDraftcombineplayeranthro({});
  */
@@ -1612,7 +1613,7 @@ const DRAFTCOMBINESPOTSHOOTING_DEF: WrapperDef = {
       "name": "season_year",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1627,7 +1628,7 @@ const DRAFTCOMBINESPOTSHOOTING_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_year - query parameter (`SeasonYear`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsDraftcombinespotshooting({});
  */
@@ -1653,7 +1654,7 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
       "name": "season_all_time",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1668,7 +1669,7 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_all_time - query parameter (`SeasonYear`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsDraftcombinestats({});
  */
@@ -1713,7 +1714,8 @@ const DRAFTHISTORY_DEF: WrapperDef = {
     {
       "name": "season_year_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "team_id_nullable",
@@ -1744,7 +1746,7 @@ const DRAFTHISTORY_DEF: WrapperDef = {
  * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
  * @param params.topx_nullable - query parameter (`TopX`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsDrafthistory({});
  */
@@ -1819,7 +1821,8 @@ const FANTASYWIDGET_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -1886,7 +1889,7 @@ const FANTASYWIDGET_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFantasywidget({});
  */
@@ -1920,7 +1923,7 @@ const FRANCHISEHISTORY_DEF: WrapperDef = {
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`.
  * @example await sdv.nba.nbaStatsFranchisehistory({});
  */
@@ -1960,7 +1963,7 @@ const FRANCHISELEADERS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFranchiseleaders({});
  */
@@ -2012,7 +2015,7 @@ const FRANCHISELEADERSWRANK_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFranchiseleaderswrank({});
  */
@@ -2064,7 +2067,7 @@ const FRANCHISEPLAYERS_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFranchiseplayers({});
  */
@@ -2104,7 +2107,7 @@ const GAMEROTATION_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`.
  * @example await sdv.nba.nbaStatsGamerotation({});
  */
@@ -2144,7 +2147,8 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -2174,7 +2178,7 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat_category - query parameter (`StatCategory`) — default `Points`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`.
  * @example await sdv.nba.nbaStatsHomepageleaders({});
  */
@@ -2214,7 +2218,8 @@ const HOMEPAGEV2_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -2244,7 +2249,7 @@ const HOMEPAGEV2_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat_type - query parameter (`StatType`) — default `Traditional`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`.
  * @example await sdv.nba.nbaStatsHomepagev2({});
  */
@@ -2278,7 +2283,7 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsHustlestatsboxscore({});
  */
@@ -2312,7 +2317,7 @@ const INFOGRAPHICFANDUELPLAYER_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `22201086`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsInfographicfanduelplayer({});
  */
@@ -2352,7 +2357,8 @@ const LEADERSTILES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -2382,7 +2388,7 @@ const LEADERSTILES_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat - query parameter (`Stat`) — default `PTS`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`.
  * @example await sdv.nba.nbaStatsLeaderstiles({});
  */
@@ -2498,7 +2504,7 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -2567,7 +2573,7 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashlineups({});
  */
@@ -2673,7 +2679,7 @@ const LEAGUEDASHOPPPTSHOT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -2752,7 +2758,7 @@ const LEAGUEDASHOPPPTSHOT_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashoppptshot({});
  */
@@ -2883,7 +2889,7 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -2967,7 +2973,7 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashplayerbiostats({});
  */
@@ -3133,7 +3139,7 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3224,7 +3230,7 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashplayerclutch({});
  */
@@ -3365,7 +3371,7 @@ const LEAGUEDASHPLAYERPTSHOT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3463,7 +3469,7 @@ const LEAGUEDASHPLAYERPTSHOT_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashplayerptshot({});
  */
@@ -3619,7 +3625,7 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3708,7 +3714,7 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashplayershotlocations({});
  */
@@ -3859,7 +3865,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -3953,7 +3959,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashplayerstats({});
  */
@@ -4088,7 +4094,8 @@ const LEAGUEDASHPTDEFEND_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4167,7 +4174,7 @@ const LEAGUEDASHPTDEFEND_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashptdefend({});
  */
@@ -4297,7 +4304,8 @@ const LEAGUEDASHPTSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4374,7 +4382,7 @@ const LEAGUEDASHPTSTATS_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashptstats({});
  */
@@ -4470,7 +4478,7 @@ const LEAGUEDASHPTTEAMDEFEND_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4529,7 +4537,7 @@ const LEAGUEDASHPTTEAMDEFEND_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashptteamdefend({});
  */
@@ -4669,7 +4677,8 @@ const LEAGUEDASHTEAMCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4749,7 +4758,7 @@ const LEAGUEDASHTEAMCLUTCH_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashteamclutch({});
  */
@@ -4854,7 +4863,8 @@ const LEAGUEDASHTEAMPTSHOT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -4933,7 +4943,7 @@ const LEAGUEDASHTEAMPTSHOT_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashteamptshot({});
  */
@@ -5063,7 +5073,8 @@ const LEAGUEDASHTEAMSHOTLOCATIONS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5141,7 +5152,7 @@ const LEAGUEDASHTEAMSHOTLOCATIONS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashteamshotlocations({});
  */
@@ -5266,7 +5277,8 @@ const LEAGUEDASHTEAMSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5349,7 +5361,7 @@ const LEAGUEDASHTEAMSTATS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguedashteamstats({});
  */
@@ -5764,7 +5776,8 @@ const LEAGUEGAMEFINDER_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -5905,7 +5918,7 @@ const LEAGUEGAMEFINDER_DEF: WrapperDef = {
  * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
  * @param params.years_experience_nullable - query parameter (`YearsExperience`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguegamefinder({});
  */
@@ -5956,7 +5969,7 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -5988,7 +6001,7 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.sorter - query parameter (`Sorter`) — default `DATE`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguegamelog({});
  */
@@ -6099,7 +6112,7 @@ const LEAGUEHUSTLESTATSPLAYER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6167,7 +6180,7 @@ const LEAGUEHUSTLESTATSPLAYER_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguehustlestatsplayer({});
  */
@@ -6278,7 +6291,7 @@ const LEAGUEHUSTLESTATSTEAM_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6346,7 +6359,7 @@ const LEAGUEHUSTLESTATSTEAM_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguehustlestatsteam({});
  */
@@ -6386,7 +6399,8 @@ const LEAGUELEADERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -6416,7 +6430,7 @@ const LEAGUELEADERS_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat_category_abbreviation - query parameter (`StatCategory`) — default `PTS`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeagueleaders({});
  */
@@ -6537,7 +6551,7 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6607,7 +6621,7 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguelineupviz({});
  */
@@ -6703,7 +6717,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -6762,7 +6776,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeagueplayerondetails({});
  */
@@ -6813,7 +6827,7 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -6839,7 +6853,7 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeagueseasonmatchups({});
  */
@@ -6865,7 +6879,7 @@ const LEAGUESTANDINGS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -6892,7 +6906,7 @@ const LEAGUESTANDINGS_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.season_nullable - query parameter (`SeasonYear`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguestandings({});
  */
@@ -6918,7 +6932,7 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -6945,7 +6959,7 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.season_nullable - query parameter (`SeasonYear`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsLeaguestandingsv3({});
  */
@@ -6996,7 +7010,7 @@ const MATCHUPSROLLUP_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_playoffs",
@@ -7022,7 +7036,7 @@ const MATCHUPSROLLUP_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsMatchupsrollup({});
  */
@@ -7068,7 +7082,7 @@ const PLAYBYPLAYV3_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`GameID`) — default `22201086`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlaybyplayv3({});
  */
@@ -7102,7 +7116,7 @@ const PLAYERAWARDS_DEF: WrapperDef = {
  *
  * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayerawards({});
  */
@@ -7132,7 +7146,8 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -7154,7 +7169,7 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
  * @param params.season_nullable - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`.
  * @example await sdv.nba.nbaStatsPlayercareerbycollegerollup({});
  */
@@ -7200,7 +7215,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
  * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
  * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`.
  * @example await sdv.nba.nbaStatsPlayercareerstats({});
  */
@@ -7378,7 +7393,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `201566,201939,201935,201142,203076`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`.
  * @example await sdv.nba.nbaStatsPlayercompare({});
  */
@@ -7484,7 +7499,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -7545,7 +7560,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyclutch({});
  */
@@ -7651,7 +7666,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -7712,7 +7727,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbygamesplits({});
  */
@@ -7818,7 +7833,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -7879,7 +7894,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbygeneralsplits({});
  */
@@ -7985,7 +8000,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8046,7 +8061,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbylastngames({});
  */
@@ -8152,7 +8167,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -8213,7 +8228,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyopponent({});
  */
@@ -8319,7 +8334,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8380,7 +8395,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyshootingsplits({});
  */
@@ -8486,7 +8501,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8547,7 +8562,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyteamperformance({});
  */
@@ -8652,7 +8667,8 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8713,7 +8729,7 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyyearoveryear({});
  */
@@ -8784,7 +8800,7 @@ const PLAYERDASHPTPASS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8838,7 +8854,7 @@ const PLAYERDASHPTPASS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`.
  * @example await sdv.nba.nbaStatsPlayerdashptpass({});
  */
@@ -8918,7 +8934,8 @@ const PLAYERDASHPTREB_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -8974,7 +8991,7 @@ const PLAYERDASHPTREB_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`.
  * @example await sdv.nba.nbaStatsPlayerdashptreb({});
  */
@@ -9055,7 +9072,7 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -9111,7 +9128,7 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayerdashptshotdefend({});
  */
@@ -9191,7 +9208,8 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -9206,7 +9224,7 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "0"
+      "default": "1610612747"
     },
     {
       "name": "vs_conference_nullable",
@@ -9243,11 +9261,11 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `0`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612747`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`.
  * @example await sdv.nba.nbaStatsPlayerdashptshots({});
  */
@@ -9272,7 +9290,8 @@ const PLAYERESTIMATEDMETRICS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -9293,7 +9312,7 @@ const PLAYERESTIMATEDMETRICS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayerestimatedmetrics({});
  */
@@ -9348,7 +9367,8 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -9375,7 +9395,7 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`.
  * @example await sdv.nba.nbaStatsPlayerfantasyprofile({});
  */
@@ -9406,7 +9426,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star_nullable",
@@ -9428,7 +9448,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star_nullable - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`.
  * @example await sdv.nba.nbaStatsPlayerfantasyprofilebargraph({});
  */
@@ -9469,7 +9489,7 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -9493,7 +9513,7 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayergamelog({});
  */
@@ -9584,7 +9604,7 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
       "name": "season_nullable",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -9648,7 +9668,7 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayergamelogs({});
  */
@@ -10068,7 +10088,8 @@ const PLAYERGAMESTREAKFINDER_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10210,7 +10231,7 @@ const PLAYERGAMESTREAKFINDER_DEF: WrapperDef = {
  * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
  * @param params.years_experience_nullable - query parameter (`YearsExperience`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayergamestreakfinder({});
  */
@@ -10281,7 +10302,7 @@ const PLAYERINDEX_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "team_id_nullable",
@@ -10317,7 +10338,7 @@ const PLAYERINDEX_DEF: WrapperDef = {
  * @param params.team_id_nullable - query parameter (`TeamID`) — default `0`.
  * @param params.weight_nullable - query parameter (`Weight`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayerindex({});
  */
@@ -10363,7 +10384,7 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
  * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
  * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`.
  * @example await sdv.nba.nbaStatsPlayerprofilev2({});
  */
@@ -10464,7 +10485,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10524,7 +10545,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `203076`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`.
  * @example await sdv.nba.nbaStatsPlayervsplayer({});
  */
@@ -10564,7 +10585,7 @@ const PLAYOFFPICTURE_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_id - query parameter (`SeasonID`) — default `22022`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `EastConfPlayoffPicture`, `WestConfPlayoffPicture`, `EastConfStandings`, `WestConfStandings`, `EastConfRemainingGames`, `WestConfRemainingGames`.
  * @example await sdv.nba.nbaStatsPlayoffpicture({});
  */
@@ -10589,7 +10610,8 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10604,7 +10626,7 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsScheduleleaguev2({});
  */
@@ -10629,7 +10651,8 @@ const SCHEDULELEAGUEV2INT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10644,7 +10667,7 @@ const SCHEDULELEAGUEV2INT_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsScheduleleaguev2int({});
  */
@@ -10690,7 +10713,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
  * @param params.game_date - query parameter (`GameDate`) — default `2021-07-20`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`.
  * @example await sdv.nba.nbaStatsScoreboardv2({});
  */
@@ -10730,7 +10753,7 @@ const SCOREBOARDV3_DEF: WrapperDef = {
  * @param params.game_date - query parameter (`GameDate`) — default `2023-03-26`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsScoreboardv3({});
  */
@@ -10865,7 +10888,8 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -10944,7 +10968,7 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`.
  * @example await sdv.nba.nbaStatsShotchartdetail({});
  */
@@ -10970,7 +10994,7 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10985,7 +11009,7 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsShotchartleaguewide({});
  */
@@ -11075,7 +11099,8 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -11133,7 +11158,7 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`.
  * @example await sdv.nba.nbaStatsShotchartlineupdetail({});
  */
@@ -11179,7 +11204,7 @@ const SYNERGYPLAYTYPES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "SeasonYear",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "type_grouping_nullable",
@@ -11204,7 +11229,7 @@ const SYNERGYPLAYTYPES_DEF: WrapperDef = {
  * @param params.season - query parameter (`SeasonYear`) — default `null`.
  * @param params.type_grouping_nullable - query parameter (`TypeGrouping`) — default `Offensive`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsSynergyplaytypes({});
  */
@@ -11305,7 +11330,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -11371,7 +11396,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyclutch({});
  */
@@ -11472,7 +11497,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -11538,7 +11563,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbygamesplits({});
  */
@@ -11639,7 +11664,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -11705,7 +11730,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbygeneralsplits({});
  */
@@ -11806,7 +11831,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -11872,7 +11897,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbylastngames({});
  */
@@ -11973,7 +11998,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -12039,7 +12064,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyopponent({});
  */
@@ -12140,7 +12165,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12206,7 +12231,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyshootingsplits({});
  */
@@ -12307,7 +12332,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -12373,7 +12398,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyteamperformance({});
  */
@@ -12473,7 +12498,8 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment",
@@ -12539,7 +12565,7 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyyearoveryear({});
  */
@@ -12650,7 +12676,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12718,7 +12744,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`.
  * @example await sdv.nba.nbaStatsTeamdashlineups({});
  */
@@ -12784,7 +12810,7 @@ const TEAMDASHPTPASS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12837,7 +12863,7 @@ const TEAMDASHPTPASS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`.
  * @example await sdv.nba.nbaStatsTeamdashptpass({});
  */
@@ -12912,7 +12938,8 @@ const TEAMDASHPTREB_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -12967,7 +12994,7 @@ const TEAMDASHPTREB_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`.
  * @example await sdv.nba.nbaStatsTeamdashptreb({});
  */
@@ -13043,7 +13070,7 @@ const TEAMDASHPTSHOTS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13098,7 +13125,7 @@ const TEAMDASHPTSHOTS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`.
  * @example await sdv.nba.nbaStatsTeamdashptshots({});
  */
@@ -13132,7 +13159,7 @@ const TEAMDETAILS_DEF: WrapperDef = {
  *
  * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`.
  * @example await sdv.nba.nbaStatsTeamdetails({});
  */
@@ -13157,7 +13184,8 @@ const TEAMESTIMATEDMETRICS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type",
@@ -13178,7 +13206,7 @@ const TEAMESTIMATEDMETRICS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsTeamestimatedmetrics({});
  */
@@ -13214,7 +13242,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -13243,7 +13271,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsTeamgamelog({});
  */
@@ -13334,7 +13362,7 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
       "name": "season_nullable",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13398,7 +13426,7 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsTeamgamelogs({});
  */
@@ -13423,7 +13451,8 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_nullable",
@@ -13450,7 +13479,7 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
  * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`.
  * @example await sdv.nba.nbaStatsTeaminfocommon({});
  */
@@ -13550,7 +13579,8 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13616,7 +13646,7 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`.
  * @example await sdv.nba.nbaStatsTeamplayerdashboard({});
  */
@@ -13712,7 +13742,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13771,7 +13801,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`.
  * @example await sdv.nba.nbaStatsTeamplayeronoffdetails({});
  */
@@ -13867,7 +13897,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -13926,7 +13956,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`.
  * @example await sdv.nba.nbaStatsTeamplayeronoffsummary({});
  */
@@ -14027,7 +14057,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_segment_nullable",
@@ -14093,7 +14123,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`.
  * @example await sdv.nba.nbaStatsTeamvsplayer({});
  */
@@ -14145,7 +14175,7 @@ const TEAMYEARBYYEARSTATS_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsTeamyearbyyearstats({});
  */
@@ -14196,7 +14226,7 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
       "name": "season",
       "queryKey": "Season",
       "default": null,
-      "transform": "season_or_previous"
+      "transform": "season_latest_with_data"
     },
     {
       "name": "season_type_all_star",
@@ -14354,7 +14384,7 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
  * @param params.clutch_time_nullable - query parameter (`ClutchTime`) — default ``.
  * @param params.ahead_behind_nullable - query parameter (`AheadBehind`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideodetailsasset({});
  */
@@ -14394,7 +14424,7 @@ const VIDEOEVENTS_DEF: WrapperDef = {
  * @param params.game_event_id - query parameter (`GameEventID`) — default `10`.
  * @param params.game_id - query parameter (`GameID`) — default `21700807`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideoevents({});
  */
@@ -14434,7 +14464,7 @@ const VIDEOEVENTSASSET_DEF: WrapperDef = {
  * @param params.game_event_id - query parameter (`GameEventID`) — default `0`.
  * @param params.game_id - query parameter (`GameID`) — default `21700807`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideoeventsasset({});
  */
@@ -14474,7 +14504,7 @@ const VIDEOSTATUS_DEF: WrapperDef = {
  * @param params.game_date - query parameter (`GameDate`) — default `2023-03-10`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
+ * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict, or a one-table payload's table itself; an unknown name returns `[]`, sdv-py's zero-row frame.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsVideostatus({});
  */

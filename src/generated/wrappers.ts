@@ -24374,7 +24374,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -24497,7 +24497,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -24970,7 +24971,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25017,7 +25018,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "series_id_nullable",
@@ -25046,7 +25047,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "team_id",
@@ -25146,7 +25147,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -25195,7 +25196,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -25239,7 +25240,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_id_nullable",
@@ -25293,7 +25294,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_year",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25317,7 +25318,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_year",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25341,7 +25342,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_year",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25365,7 +25366,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_year",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25389,7 +25390,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_all_time",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25432,7 +25433,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_year_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "team_id_nullable",
@@ -25515,7 +25517,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -25718,7 +25721,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -25766,7 +25770,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -25850,7 +25855,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -25974,7 +25980,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -26108,7 +26114,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -26277,7 +26283,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -26481,7 +26487,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -26660,7 +26666,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -26864,7 +26870,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27053,7 +27059,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27231,7 +27237,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27394,7 +27401,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27522,7 +27530,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27685,7 +27693,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27823,7 +27832,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -27991,7 +28001,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -28149,7 +28160,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -28602,7 +28614,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -28691,7 +28704,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -28810,7 +28823,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -28949,7 +28962,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -29017,7 +29030,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -29146,7 +29160,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -29270,7 +29284,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -29344,7 +29358,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -29373,7 +29387,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -29407,7 +29421,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -29466,7 +29480,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -29545,7 +29559,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -29820,7 +29835,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -29949,7 +29964,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30078,7 +30093,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30207,7 +30222,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30336,7 +30351,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -30465,7 +30480,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30594,7 +30609,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30722,7 +30737,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30816,7 +30832,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -30919,7 +30935,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -31023,7 +31040,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -31126,7 +31143,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -31141,7 +31159,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "0"
+        "default": "1610612747"
       },
       {
         "name": "vs_conference_nullable",
@@ -31174,7 +31192,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -31232,7 +31251,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -31266,7 +31286,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star_nullable",
@@ -31310,7 +31330,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -31404,7 +31424,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_nullable",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -31852,7 +31872,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -31961,7 +31982,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "team_id_nullable",
@@ -32098,7 +32119,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -32169,7 +32190,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -32192,7 +32214,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -32376,7 +32399,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -32435,7 +32459,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -32523,7 +32547,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -32592,7 +32617,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "type_grouping_nullable",
@@ -32696,7 +32721,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -32825,7 +32850,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -32954,7 +32979,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -33083,7 +33108,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -33212,7 +33237,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -33341,7 +33366,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -33470,7 +33495,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -33598,7 +33623,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -33737,7 +33763,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -33831,7 +33857,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -33929,7 +33955,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34028,7 +34055,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34094,7 +34121,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -34133,7 +34161,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -34232,7 +34260,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_nullable",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34285,7 +34313,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_nullable",
@@ -34393,7 +34422,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34517,7 +34547,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34636,7 +34666,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34760,7 +34790,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -34872,7 +34902,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -35123,7 +35153,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -35246,7 +35276,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -35934,7 +35965,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -35981,7 +36012,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "series_id_nullable",
@@ -36010,7 +36041,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "team_id",
@@ -36254,7 +36285,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_all_time",
         "queryKey": "SeasonYear",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -36297,7 +36328,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_year_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "team_id_nullable",
@@ -36380,7 +36412,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -36583,7 +36616,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -36631,7 +36665,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -36715,7 +36750,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -36839,7 +36875,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -36998,7 +37034,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -37202,7 +37238,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -37396,7 +37432,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -37585,7 +37621,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -37763,7 +37799,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -37936,7 +37973,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -38099,7 +38137,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -38257,7 +38296,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -38710,7 +38750,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -38799,7 +38840,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -38847,7 +38888,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -38976,7 +39018,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -39100,7 +39142,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -39174,7 +39216,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_playoffs",
@@ -39203,7 +39245,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -39315,7 +39357,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -39457,7 +39500,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -39591,7 +39634,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -39720,7 +39763,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -39849,7 +39892,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -39978,7 +40021,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -40107,7 +40150,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -40236,7 +40279,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -40365,7 +40408,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -40493,7 +40536,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -40597,7 +40641,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -40645,7 +40689,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -40703,7 +40748,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -40737,7 +40783,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star_nullable",
@@ -40781,7 +40827,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -40875,7 +40921,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_nullable",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -41323,7 +41369,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -41432,7 +41479,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "team_id_nullable",
@@ -41476,7 +41523,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_all",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -41608,7 +41655,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -41656,7 +41703,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -41679,7 +41727,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -41863,7 +41912,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -41922,7 +41972,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -42010,7 +42060,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -42134,7 +42185,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -42263,7 +42314,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -42392,7 +42443,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -42521,7 +42572,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -42650,7 +42701,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -42779,7 +42830,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -42908,7 +42959,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -43036,7 +43087,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment",
@@ -43175,7 +43227,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -43246,7 +43298,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type",
@@ -43285,7 +43338,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_all_star",
@@ -43384,7 +43437,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season_nullable",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -43437,7 +43490,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_type_nullable",
@@ -43545,7 +43599,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -43669,7 +43724,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -43788,7 +43843,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",
@@ -43912,7 +43967,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "season",
         "queryKey": "Season",
         "default": null,
-        "transform": "season_or_previous"
+        "transform": "season_latest_with_data"
       },
       {
         "name": "season_segment_nullable",

@@ -440,7 +440,7 @@ const COLUMN_KEYS = new Set(["name", "type", "description"]);
  * may add `frames_by: <request param>`: then it is ONE table, whose columns are
  * the frame whose `section` equals that param's value (sdv-py generate.py
  * `_returns_dict`); `endpointParams` (one request-param-name list per endpoint
- * using the schema) must each name it. Optional
+ * using the schema) is then required and must each name it. Optional
  * `schema` / `description` / `note`, and `unverified: <reason>`, which must
  * publish no columns (sdv-py had no capture the parser emits rows for). Each
  * column is `{name, type, description?}`. An unknown key anywhere fails closed:
@@ -452,7 +452,12 @@ const shapeChecked = new Map();
 export function checkSchemaShape(text, where, endpointParams = null) {
   if (!shapeChecked.has(text)) shapeChecked.set(text, checkShape(text, where));
   const by = shapeChecked.get(text);
-  if (by !== undefined && endpointParams && (!endpointParams.length || endpointParams.some((ps) => !ps.includes(by)))) {
+  if (by === undefined) return;
+  if (!endpointParams) {
+    // fail closed: a frames_by schema checked without its endpoints' params is unchecked
+    throw new Error(`${where}: frames_by ${JSON.stringify(by)} needs the request params of the endpoints using this schema`);
+  }
+  if (!endpointParams.length || endpointParams.some((ps) => !ps.includes(by))) {
     throw new Error(
       `${where}: frames_by ${JSON.stringify(by)} is not a request parameter of every endpoint using this schema ` +
         `(${endpointParams.map((ps) => ps.join(", ") || "no params").join(" | ") || "no endpoint"})`

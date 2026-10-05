@@ -25,19 +25,37 @@ export const TRANSFORMS = {
     if (s.length === 4 && /^\d+$/.test(s)) return `${Number(s) - 1}${s}`;
     throw new Error(`Unrecognized NHL season ${JSON.stringify(season)}`);
   },
-  season_or_previous: (season, def) => {
+  season_latest_with_data: (season, def) => {
     if (season !== null && season !== undefined) return season;
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = now.getMonth() + 1;
-    if (def?.api === 'nba_stats') {
-      const start = (m >= 10 ? y + 1 : y) - 2;
-      return `${start}-${String((start + 1) % 100).padStart(2, '0')}`;
-    }
-    if (def?.api === 'wnba_stats') return String((m >= 5 ? y : y - 1) - 1);
-    throw new Error(`season_or_previous: no previous-season rule for family "${def?.api}"`);
+    return new DefaultSeason(latestSeason(def?.api === 'wnba_stats' ? '10' : '00'));
   },
 };
+// sdv-py nba_stats_runtime `_FIRST_ROWS` / `_latest_season` / `_DefaultSeason` (see
+// src/core/transforms.ts): the latest season with rows on `today`, per league/endpoint/SeasonType.
+const FIRST_ROWS = new Map([
+  ['00', [11, 0]], ['20', [1, 1]], ['15', [8, 0]], ['10', [6, 0]], ['draftcombine', [6, 0]],
+  ['00 drafthistory', [7, 0]], ['10 drafthistory', [5, 0]],
+  ['00 playoffs', [5, 1]], ['20 playoffs', [5, 1]], ['10 playoffs', [10, 0]],
+  ['00 allstar', [3, 1]], ['10 allstar', [8, 0]],
+]);
+export function latestSeason(leagueId = '00', endpoint = '', today = new Date(), seasonType) {
+  if (endpoint === 'commonplayoffseries' || seasonType === 'Playoffs' || seasonType === 'PlayIn') endpoint = 'playoffs';
+  else if (seasonType === 'All Star') endpoint = 'allstar';
+  else if (endpoint.startsWith('draftcombine')) endpoint = 'draftcombine';
+  const [month, lag] =
+    FIRST_ROWS.get(endpoint) ?? FIRST_ROWS.get(`${leagueId} ${endpoint}`) ?? FIRST_ROWS.get(leagueId) ?? FIRST_ROWS.get('00');
+  const start = today.getFullYear() - lag - (today.getMonth() + 1 < month ? 1 : 0);
+  return leagueId === '10' || endpoint === 'drafthistory' ? String(start) : `${start}-${String(start + 1).slice(2)}`;
+}
+class DefaultSeason extends String {}
+function redateDefaultSeasons(def, query) {
+  for (const key of ['Season', 'SeasonYear']) {
+    if (!(query[key] instanceof DefaultSeason)) continue;
+    const league = String(query.LeagueID || ((def.host || '').includes('wnba') ? '10' : '00'));
+    const endpoint = (def.path || '').replace(/\/+$/, '').split('/').pop() || '';
+    query[key] = latestSeason(league, endpoint, new Date(), query.SeasonType);
+  }
+}
 function applyTransform(name, value, def) {
   if (!name) return value;
   if (!TRANSFORMS[name]) throw new Error(`unknown param transform "${name}"`);
@@ -155,6 +173,7 @@ function cleanFlatQuery(def, params) {
     const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default, def);
     if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;
   }
+  redateDefaultSeasons(def, out);
   return out;
 }
 
