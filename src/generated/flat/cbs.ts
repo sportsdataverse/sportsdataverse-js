@@ -8,68 +8,6 @@
 import { callFlat } from "../../leagues/_make_flat.js";
 import type { WrapperDef, WrapperFn } from "../../core/types.js";
 
-const BASEBALL_PLAYER_META_DEF: WrapperDef = {
-  "short": "baseball_player_meta",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/player/meta/baseball/{player_id}",
-  "pathParams": [
-    {
-      "name": "player_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/baseball_player_meta"
-};
-
-/**
- * CBS Sports — baseball player meta.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/baseball/{player_id}`
- *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsBaseballPlayerMeta({ player_id: '…' });
- */
-export const cbsBaseballPlayerMeta: WrapperFn = (params = {}) => callFlat(BASEBALL_PLAYER_META_DEF, params);
-/** snake_case alias of {@link cbsBaseballPlayerMeta} (py/R parity). */
-export const cbs_baseball_player_meta = cbsBaseballPlayerMeta;
-
-const BOXSCORE_DEF: WrapperDef = {
-  "short": "boxscore",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/game/boxscore/{game_id}",
-  "pathParams": [
-    {
-      "name": "game_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/boxscore"
-};
-
-/**
- * CBS Sports — boxscore.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/boxscore/{game_id}`
- *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsBoxscore({ game_id: '…' });
- */
-export const cbsBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
-/** snake_case alias of {@link cbsBoxscore} (py/R parity). */
-export const cbs_boxscore = cbsBoxscore;
-
 const BULK_DEF: WrapperDef = {
   "short": "bulk",
   "flat": true,
@@ -132,8 +70,9 @@ export const cbsBulk: WrapperFn = (params = {}) => callFlat(BULK_DEF, params);
 /** snake_case alias of {@link cbsBulk} (py/R parity). */
 export const cbs_bulk = cbsBulk;
 
-const CLIENT_CONFIGURATION_DEF: WrapperDef = {
-  "short": "client_configuration",
+const CLIENT_CONFIG_DEF: WrapperDef = {
+  "short": "client_config",
+  "legacyShort": "client_configuration",
   "flat": true,
   "api": "cbs",
   "host": "https://api.cbssports.com/napi",
@@ -167,7 +106,7 @@ const CLIENT_CONFIGURATION_DEF: WrapperDef = {
 };
 
 /**
- * CBS Sports — client configuration.
+ * CBS Sports — client config.
  *
  * **Endpoint:** `GET https://api.cbssports.com/napi/resource/client/config/{client_name}`
  *
@@ -178,11 +117,11 @@ const CLIENT_CONFIGURATION_DEF: WrapperDef = {
  * @param params.key_name - query parameter (`keyName`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsClientConfiguration({ client_name: '…' });
+ * @example await sdv.cbs.cbsClientConfig({ client_name: '…' });
  */
-export const cbsClientConfiguration: WrapperFn = (params = {}) => callFlat(CLIENT_CONFIGURATION_DEF, params);
-/** snake_case alias of {@link cbsClientConfiguration} (py/R parity). */
-export const cbs_client_configuration = cbsClientConfiguration;
+export const cbsClientConfig: WrapperFn = (params = {}) => callFlat(CLIENT_CONFIG_DEF, params);
+/** snake_case alias of {@link cbsClientConfig} (py/R parity). */
+export const cbs_client_config = cbsClientConfig;
 
 const COACH_RANKINGS_DEF: WrapperDef = {
   "short": "coach_rankings",
@@ -252,47 +191,48 @@ export const cbsCoachTeamAssociations: WrapperFn = (params = {}) => callFlat(COA
 /** snake_case alias of {@link cbsCoachTeamAssociations} (py/R parity). */
 export const cbs_coach_team_associations = cbsCoachTeamAssociations;
 
-const DEPTH_CHARTS_DEF: WrapperDef = {
-  "short": "depth_charts",
+const DIVISION_SUBDIVISIONS_DEF: WrapperDef = {
+  "short": "division_subdivisions",
+  "legacyShort": "sub_divisions",
   "flat": true,
   "api": "cbs",
   "host": "https://api.cbssports.com/napi",
   "scope": "universal",
-  "path": "/resource/player/depthCharts/{player_id}",
+  "path": "/resource/division/subdivisions/{division_id}",
   "pathParams": [
     {
-      "name": "player_id"
+      "name": "division_id"
     }
   ],
   "queryParams": [
     {
-      "name": "position",
-      "queryKey": "position"
+      "name": "sub_division_id",
+      "queryKey": "subDivisionId"
     },
     {
-      "name": "pitch_pos",
-      "queryKey": "pitchPos"
+      "name": "name",
+      "queryKey": "name"
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/depth_charts"
+  "returnsSchema": "native/cbs/sub_divisions"
 };
 
 /**
- * CBS Sports — depth charts.
+ * CBS Sports — division subdivisions.
  *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/depthCharts/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/division/subdivisions/{division_id}`
  *
- * @param params.player_id - path parameter.
- * @param params.position - query parameter.
- * @param params.pitch_pos - query parameter (`pitchPos`).
+ * @param params.division_id - path parameter.
+ * @param params.sub_division_id - query parameter (`subDivisionId`).
+ * @param params.name - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsDepthCharts({ player_id: '…' });
+ * @example await sdv.cbs.cbsDivisionSubdivisions({ division_id: '…' });
  */
-export const cbsDepthCharts: WrapperFn = (params = {}) => callFlat(DEPTH_CHARTS_DEF, params);
-/** snake_case alias of {@link cbsDepthCharts} (py/R parity). */
-export const cbs_depth_charts = cbsDepthCharts;
+export const cbsDivisionSubdivisions: WrapperFn = (params = {}) => callFlat(DIVISION_SUBDIVISIONS_DEF, params);
+/** snake_case alias of {@link cbsDivisionSubdivisions} (py/R parity). */
+export const cbs_division_subdivisions = cbsDivisionSubdivisions;
 
 const ENDPOINT_REGISTRY_DEF: WrapperDef = {
   "short": "endpoint_registry",
@@ -486,37 +426,6 @@ export const cbsEventVenues: WrapperFn = (params = {}) => callFlat(EVENT_VENUES_
 /** snake_case alias of {@link cbsEventVenues} (py/R parity). */
 export const cbs_event_venues = cbsEventVenues;
 
-const FEATURED_GAME_DEF: WrapperDef = {
-  "short": "featured_game",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/game/featured/{game_id}",
-  "pathParams": [
-    {
-      "name": "game_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_scoreboard",
-  "returnsSchema": "native/cbs/featured_game"
-};
-
-/**
- * CBS Sports — featured game.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/featured/{game_id}`
- *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsFeaturedGame({ game_id: '…' });
- */
-export const cbsFeaturedGame: WrapperFn = (params = {}) => callFlat(FEATURED_GAME_DEF, params);
-/** snake_case alias of {@link cbsFeaturedGame} (py/R parity). */
-export const cbs_featured_game = cbsFeaturedGame;
-
 const GAME_DEF: WrapperDef = {
   "short": "game",
   "flat": true,
@@ -589,6 +498,38 @@ const GAME_BETTING_SPLITS_DEF: WrapperDef = {
 export const cbsGameBettingSplits: WrapperFn = (params = {}) => callFlat(GAME_BETTING_SPLITS_DEF, params);
 /** snake_case alias of {@link cbsGameBettingSplits} (py/R parity). */
 export const cbs_game_betting_splits = cbsGameBettingSplits;
+
+const GAME_BOXSCORE_DEF: WrapperDef = {
+  "short": "game_boxscore",
+  "legacyShort": "boxscore",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/game/boxscore/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/boxscore"
+};
+
+/**
+ * CBS Sports — game boxscore.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/boxscore/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameBoxscore({ game_id: '…' });
+ */
+export const cbsGameBoxscore: WrapperFn = (params = {}) => callFlat(GAME_BOXSCORE_DEF, params);
+/** snake_case alias of {@link cbsGameBoxscore} (py/R parity). */
+export const cbs_game_boxscore = cbsGameBoxscore;
 
 const GAME_CONTENT_PREVIEW_DEF: WrapperDef = {
   "short": "game_content_preview",
@@ -689,36 +630,37 @@ export const cbsGameContentStory: WrapperFn = (params = {}) => callFlat(GAME_CON
 /** snake_case alias of {@link cbsGameContentStory} (py/R parity). */
 export const cbs_game_content_story = cbsGameContentStory;
 
-const GAME_HQ_ODDS_DEF: WrapperDef = {
-  "short": "game_hq_odds",
+const GAME_FEATURED_DEF: WrapperDef = {
+  "short": "game_featured",
+  "legacyShort": "featured_game",
   "flat": true,
   "api": "cbs",
   "host": "https://api.cbssports.com/napi",
   "scope": "universal",
-  "path": "/resource/game/odds/hq/{game_id}",
+  "path": "/resource/game/featured/{game_id}",
   "pathParams": [
     {
       "name": "game_id"
     }
   ],
   "queryParams": [],
-  "parser": "parse_cbs_odds",
-  "returnsSchema": "native/cbs/game_hq_odds"
+  "parser": "parse_cbs_scoreboard",
+  "returnsSchema": "native/cbs/featured_game"
 };
 
 /**
- * CBS Sports — game hq odds.
+ * CBS Sports — game featured.
  *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/odds/hq/{game_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/featured/{game_id}`
  *
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsGameHqOdds({ game_id: '…' });
+ * @example await sdv.cbs.cbsGameFeatured({ game_id: '…' });
  */
-export const cbsGameHqOdds: WrapperFn = (params = {}) => callFlat(GAME_HQ_ODDS_DEF, params);
-/** snake_case alias of {@link cbsGameHqOdds} (py/R parity). */
-export const cbs_game_hq_odds = cbsGameHqOdds;
+export const cbsGameFeatured: WrapperFn = (params = {}) => callFlat(GAME_FEATURED_DEF, params);
+/** snake_case alias of {@link cbsGameFeatured} (py/R parity). */
+export const cbs_game_featured = cbsGameFeatured;
 
 const GAME_LINEUP_DEF: WrapperDef = {
   "short": "game_lineup",
@@ -814,6 +756,38 @@ export const cbsGameOdds: WrapperFn = (params = {}) => callFlat(GAME_ODDS_DEF, p
 /** snake_case alias of {@link cbsGameOdds} (py/R parity). */
 export const cbs_game_odds = cbsGameOdds;
 
+const GAME_ODDS_HQ_DEF: WrapperDef = {
+  "short": "game_odds_hq",
+  "legacyShort": "game_hq_odds",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/game/odds/hq/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_odds",
+  "returnsSchema": "native/cbs/game_hq_odds"
+};
+
+/**
+ * CBS Sports — game odds hq.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/odds/hq/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameOddsHq({ game_id: '…' });
+ */
+export const cbsGameOddsHq: WrapperFn = (params = {}) => callFlat(GAME_ODDS_HQ_DEF, params);
+/** snake_case alias of {@link cbsGameOddsHq} (py/R parity). */
+export const cbs_game_odds_hq = cbsGameOddsHq;
+
 const GAME_OUTCOMES_DEF: WrapperDef = {
   "short": "game_outcomes",
   "flat": true,
@@ -844,6 +818,49 @@ const GAME_OUTCOMES_DEF: WrapperDef = {
 export const cbsGameOutcomes: WrapperFn = (params = {}) => callFlat(GAME_OUTCOMES_DEF, params);
 /** snake_case alias of {@link cbsGameOutcomes} (py/R parity). */
 export const cbs_game_outcomes = cbsGameOutcomes;
+
+const GAME_PROBABLE_PLAYERS_DEF: WrapperDef = {
+  "short": "game_probable_players",
+  "legacyShort": "probable_players",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/game/probablePlayers/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "date_format",
+      "queryKey": "dateFormat"
+    },
+    {
+      "name": "resources",
+      "queryKey": "resources"
+    }
+  ],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/probable_players"
+};
+
+/**
+ * CBS Sports — game probable players.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/probablePlayers/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.date_format - query parameter (`dateFormat`).
+ * @param params.resources - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameProbablePlayers({ game_id: '…' });
+ */
+export const cbsGameProbablePlayers: WrapperFn = (params = {}) => callFlat(GAME_PROBABLE_PLAYERS_DEF, params);
+/** snake_case alias of {@link cbsGameProbablePlayers} (py/R parity). */
+export const cbs_game_probable_players = cbsGameProbablePlayers;
 
 const GAME_PROPS_DEF: WrapperDef = {
   "short": "game_props",
@@ -932,6 +949,38 @@ const GAME_RTWP_DEF: WrapperDef = {
 export const cbsGameRtwp: WrapperFn = (params = {}) => callFlat(GAME_RTWP_DEF, params);
 /** snake_case alias of {@link cbsGameRtwp} (py/R parity). */
 export const cbs_game_rtwp = cbsGameRtwp;
+
+const GAME_RUWT_HIGHLIGHTS_DEF: WrapperDef = {
+  "short": "game_ruwt_highlights",
+  "legacyShort": "ruwt_highlights",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/game/ruwtHighlights/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/ruwt_highlights"
+};
+
+/**
+ * CBS Sports — game ruwt highlights.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/ruwtHighlights/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameRuwtHighlights({ game_id: '…' });
+ */
+export const cbsGameRuwtHighlights: WrapperFn = (params = {}) => callFlat(GAME_RUWT_HIGHLIGHTS_DEF, params);
+/** snake_case alias of {@link cbsGameRuwtHighlights} (py/R parity). */
+export const cbs_game_ruwt_highlights = cbsGameRuwtHighlights;
 
 const GAME_SCORING_BOXSCORES_DEF: WrapperDef = {
   "short": "game_scoring_boxscores",
@@ -1336,6 +1385,38 @@ export const cbsGameTicket: WrapperFn = (params = {}) => callFlat(GAME_TICKET_DE
 /** snake_case alias of {@link cbsGameTicket} (py/R parity). */
 export const cbs_game_ticket = cbsGameTicket;
 
+const GAME_WEATHER_DEF: WrapperDef = {
+  "short": "game_weather",
+  "legacyShort": "weather",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/game/weather/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/weather"
+};
+
+/**
+ * CBS Sports — game weather.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/weather/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsGameWeather({ game_id: '…' });
+ */
+export const cbsGameWeather: WrapperFn = (params = {}) => callFlat(GAME_WEATHER_DEF, params);
+/** snake_case alias of {@link cbsGameWeather} (py/R parity). */
+export const cbs_game_weather = cbsGameWeather;
+
 const GOLF_EVENT_MARKETS_DEF: WrapperDef = {
   "short": "golf_event_markets",
   "flat": true,
@@ -1445,37 +1526,6 @@ const GOLFER_RESULTS_DEF: WrapperDef = {
 export const cbsGolferResults: WrapperFn = (params = {}) => callFlat(GOLFER_RESULTS_DEF, params);
 /** snake_case alias of {@link cbsGolferResults} (py/R parity). */
 export const cbs_golfer_results = cbsGolferResults;
-
-const HOCKEY_PLAYER_META_DEF: WrapperDef = {
-  "short": "hockey_player_meta",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/player/hockey/meta/{player_id}",
-  "pathParams": [
-    {
-      "name": "player_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/hockey_player_meta"
-};
-
-/**
- * CBS Sports — hockey player meta.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/hockey/meta/{player_id}`
- *
- * @param params.player_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsHockeyPlayerMeta({ player_id: '…' });
- */
-export const cbsHockeyPlayerMeta: WrapperFn = (params = {}) => callFlat(HOCKEY_PLAYER_META_DEF, params);
-/** snake_case alias of {@link cbsHockeyPlayerMeta} (py/R parity). */
-export const cbs_hockey_player_meta = cbsHockeyPlayerMeta;
 
 const LEAGUE_DEF: WrapperDef = {
   "short": "league",
@@ -1660,6 +1710,49 @@ export const cbsPlayerCombineData: WrapperFn = (params = {}) => callFlat(PLAYER_
 /** snake_case alias of {@link cbsPlayerCombineData} (py/R parity). */
 export const cbs_player_combine_data = cbsPlayerCombineData;
 
+const PLAYER_DEPTH_CHARTS_DEF: WrapperDef = {
+  "short": "player_depth_charts",
+  "legacyShort": "depth_charts",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/player/depthCharts/{player_id}",
+  "pathParams": [
+    {
+      "name": "player_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "position",
+      "queryKey": "position"
+    },
+    {
+      "name": "pitch_pos",
+      "queryKey": "pitchPos"
+    }
+  ],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/depth_charts"
+};
+
+/**
+ * CBS Sports — player depth charts.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/depthCharts/{player_id}`
+ *
+ * @param params.player_id - path parameter.
+ * @param params.position - query parameter.
+ * @param params.pitch_pos - query parameter (`pitchPos`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerDepthCharts({ player_id: '…' });
+ */
+export const cbsPlayerDepthCharts: WrapperFn = (params = {}) => callFlat(PLAYER_DEPTH_CHARTS_DEF, params);
+/** snake_case alias of {@link cbsPlayerDepthCharts} (py/R parity). */
+export const cbs_player_depth_charts = cbsPlayerDepthCharts;
+
 const PLAYER_DRAFT_INFO_DEF: WrapperDef = {
   "short": "player_draft_info",
   "flat": true,
@@ -1827,13 +1920,14 @@ export const cbsPlayerGameStats: WrapperFn = (params = {}) => callFlat(PLAYER_GA
 /** snake_case alias of {@link cbsPlayerGameStats} (py/R parity). */
 export const cbs_player_game_stats = cbsPlayerGameStats;
 
-const PLAYER_GOLF_METADATA_DEF: WrapperDef = {
-  "short": "player_golf_metadata",
+const PLAYER_HOCKEY_META_DEF: WrapperDef = {
+  "short": "player_hockey_meta",
+  "legacyShort": "hockey_player_meta",
   "flat": true,
   "api": "cbs",
   "host": "https://api.cbssports.com/napi",
   "scope": "universal",
-  "path": "/resource/player/meta/golf/{player_id}",
+  "path": "/resource/player/hockey/meta/{player_id}",
   "pathParams": [
     {
       "name": "player_id"
@@ -1841,22 +1935,22 @@ const PLAYER_GOLF_METADATA_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_golf_metadata"
+  "returnsSchema": "native/cbs/hockey_player_meta"
 };
 
 /**
- * CBS Sports — player golf metadata.
+ * CBS Sports — player hockey meta.
  *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/golf/{player_id}`
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/hockey/meta/{player_id}`
  *
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPlayerGolfMetadata({ player_id: '…' });
+ * @example await sdv.cbs.cbsPlayerHockeyMeta({ player_id: '…' });
  */
-export const cbsPlayerGolfMetadata: WrapperFn = (params = {}) => callFlat(PLAYER_GOLF_METADATA_DEF, params);
-/** snake_case alias of {@link cbsPlayerGolfMetadata} (py/R parity). */
-export const cbs_player_golf_metadata = cbsPlayerGolfMetadata;
+export const cbsPlayerHockeyMeta: WrapperFn = (params = {}) => callFlat(PLAYER_HOCKEY_META_DEF, params);
+/** snake_case alias of {@link cbsPlayerHockeyMeta} (py/R parity). */
+export const cbs_player_hockey_meta = cbsPlayerHockeyMeta;
 
 const PLAYER_INJURIES_DEF: WrapperDef = {
   "short": "player_injuries",
@@ -1895,6 +1989,70 @@ export const cbsPlayerInjuries: WrapperFn = (params = {}) => callFlat(PLAYER_INJ
 /** snake_case alias of {@link cbsPlayerInjuries} (py/R parity). */
 export const cbs_player_injuries = cbsPlayerInjuries;
 
+const PLAYER_META_BASEBALL_DEF: WrapperDef = {
+  "short": "player_meta_baseball",
+  "legacyShort": "baseball_player_meta",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/player/meta/baseball/{player_id}",
+  "pathParams": [
+    {
+      "name": "player_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/baseball_player_meta"
+};
+
+/**
+ * CBS Sports — player meta baseball.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/baseball/{player_id}`
+ *
+ * @param params.player_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerMetaBaseball({ player_id: '…' });
+ */
+export const cbsPlayerMetaBaseball: WrapperFn = (params = {}) => callFlat(PLAYER_META_BASEBALL_DEF, params);
+/** snake_case alias of {@link cbsPlayerMetaBaseball} (py/R parity). */
+export const cbs_player_meta_baseball = cbsPlayerMetaBaseball;
+
+const PLAYER_META_GOLF_DEF: WrapperDef = {
+  "short": "player_meta_golf",
+  "legacyShort": "player_golf_metadata",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/player/meta/golf/{player_id}",
+  "pathParams": [
+    {
+      "name": "player_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/player_golf_metadata"
+};
+
+/**
+ * CBS Sports — player meta golf.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/meta/golf/{player_id}`
+ *
+ * @param params.player_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerMetaGolf({ player_id: '…' });
+ */
+export const cbsPlayerMetaGolf: WrapperFn = (params = {}) => callFlat(PLAYER_META_GOLF_DEF, params);
+/** snake_case alias of {@link cbsPlayerMetaGolf} (py/R parity). */
+export const cbs_player_meta_golf = cbsPlayerMetaGolf;
+
 const PLAYER_OUTLOOK_DEF: WrapperDef = {
   "short": "player_outlook",
   "flat": true,
@@ -1931,6 +2089,44 @@ const PLAYER_OUTLOOK_DEF: WrapperDef = {
 export const cbsPlayerOutlook: WrapperFn = (params = {}) => callFlat(PLAYER_OUTLOOK_DEF, params);
 /** snake_case alias of {@link cbsPlayerOutlook} (py/R parity). */
 export const cbs_player_outlook = cbsPlayerOutlook;
+
+const PLAYER_POSITION_RANKINGS_DEF: WrapperDef = {
+  "short": "player_position_rankings",
+  "legacyShort": "position_rankings",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/player/positionRankings/{player_id}",
+  "pathParams": [
+    {
+      "name": "player_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "position",
+      "queryKey": "position"
+    }
+  ],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/position_rankings"
+};
+
+/**
+ * CBS Sports — player position rankings.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/positionRankings/{player_id}`
+ *
+ * @param params.player_id - path parameter.
+ * @param params.position - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerPositionRankings({ player_id: '…' });
+ */
+export const cbsPlayerPositionRankings: WrapperFn = (params = {}) => callFlat(PLAYER_POSITION_RANKINGS_DEF, params);
+/** snake_case alias of {@link cbsPlayerPositionRankings} (py/R parity). */
+export const cbs_player_position_rankings = cbsPlayerPositionRankings;
 
 const PLAYER_RANKINGS_DEF: WrapperDef = {
   "short": "player_rankings",
@@ -1988,6 +2184,44 @@ const PLAYER_RANKINGS_DEF: WrapperDef = {
 export const cbsPlayerRankings: WrapperFn = (params = {}) => callFlat(PLAYER_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsPlayerRankings} (py/R parity). */
 export const cbs_player_rankings = cbsPlayerRankings;
+
+const PLAYER_RECRUIT_ASSOCIATIONS_DEF: WrapperDef = {
+  "short": "player_recruit_associations",
+  "legacyShort": "recruit_team_associations",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/player/recruitAssociations/{player_id}",
+  "pathParams": [
+    {
+      "name": "player_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "resources",
+      "queryKey": "resources"
+    }
+  ],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/recruit_team_associations"
+};
+
+/**
+ * CBS Sports — player recruit associations.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/recruitAssociations/{player_id}`
+ *
+ * @param params.player_id - path parameter.
+ * @param params.resources - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsPlayerRecruitAssociations({ player_id: '…' });
+ */
+export const cbsPlayerRecruitAssociations: WrapperFn = (params = {}) => callFlat(PLAYER_RECRUIT_ASSOCIATIONS_DEF, params);
+/** snake_case alias of {@link cbsPlayerRecruitAssociations} (py/R parity). */
+export const cbs_player_recruit_associations = cbsPlayerRecruitAssociations;
 
 const PLAYER_STANDINGS_DEF: WrapperDef = {
   "short": "player_standings",
@@ -2217,85 +2451,6 @@ export const cbsPlayerTransactions: WrapperFn = (params = {}) => callFlat(PLAYER
 /** snake_case alias of {@link cbsPlayerTransactions} (py/R parity). */
 export const cbs_player_transactions = cbsPlayerTransactions;
 
-const POSITION_RANKINGS_DEF: WrapperDef = {
-  "short": "position_rankings",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/player/positionRankings/{player_id}",
-  "pathParams": [
-    {
-      "name": "player_id"
-    }
-  ],
-  "queryParams": [
-    {
-      "name": "position",
-      "queryKey": "position"
-    }
-  ],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/position_rankings"
-};
-
-/**
- * CBS Sports — position rankings.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/positionRankings/{player_id}`
- *
- * @param params.player_id - path parameter.
- * @param params.position - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsPositionRankings({ player_id: '…' });
- */
-export const cbsPositionRankings: WrapperFn = (params = {}) => callFlat(POSITION_RANKINGS_DEF, params);
-/** snake_case alias of {@link cbsPositionRankings} (py/R parity). */
-export const cbs_position_rankings = cbsPositionRankings;
-
-const PROBABLE_PLAYERS_DEF: WrapperDef = {
-  "short": "probable_players",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/game/probablePlayers/{game_id}",
-  "pathParams": [
-    {
-      "name": "game_id"
-    }
-  ],
-  "queryParams": [
-    {
-      "name": "date_format",
-      "queryKey": "dateFormat"
-    },
-    {
-      "name": "resources",
-      "queryKey": "resources"
-    }
-  ],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/probable_players"
-};
-
-/**
- * CBS Sports — probable players.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/probablePlayers/{game_id}`
- *
- * @param params.game_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsProbablePlayers({ game_id: '…' });
- */
-export const cbsProbablePlayers: WrapperFn = (params = {}) => callFlat(PROBABLE_PLAYERS_DEF, params);
-/** snake_case alias of {@link cbsProbablePlayers} (py/R parity). */
-export const cbs_probable_players = cbsProbablePlayers;
-
 const RECRUIT_RANKINGS_DEF: WrapperDef = {
   "short": "recruit_rankings",
   "flat": true,
@@ -2326,74 +2481,6 @@ const RECRUIT_RANKINGS_DEF: WrapperDef = {
 export const cbsRecruitRankings: WrapperFn = (params = {}) => callFlat(RECRUIT_RANKINGS_DEF, params);
 /** snake_case alias of {@link cbsRecruitRankings} (py/R parity). */
 export const cbs_recruit_rankings = cbsRecruitRankings;
-
-const RECRUIT_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
-  "short": "recruit_team_associations",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/player/recruitAssociations/{player_id}",
-  "pathParams": [
-    {
-      "name": "player_id"
-    }
-  ],
-  "queryParams": [
-    {
-      "name": "resources",
-      "queryKey": "resources"
-    }
-  ],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/recruit_team_associations"
-};
-
-/**
- * CBS Sports — recruit team associations.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/player/recruitAssociations/{player_id}`
- *
- * @param params.player_id - path parameter.
- * @param params.resources - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsRecruitTeamAssociations({ player_id: '…' });
- */
-export const cbsRecruitTeamAssociations: WrapperFn = (params = {}) => callFlat(RECRUIT_TEAM_ASSOCIATIONS_DEF, params);
-/** snake_case alias of {@link cbsRecruitTeamAssociations} (py/R parity). */
-export const cbs_recruit_team_associations = cbsRecruitTeamAssociations;
-
-const RUWT_HIGHLIGHTS_DEF: WrapperDef = {
-  "short": "ruwt_highlights",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/game/ruwtHighlights/{game_id}",
-  "pathParams": [
-    {
-      "name": "game_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/ruwt_highlights"
-};
-
-/**
- * CBS Sports — ruwt highlights.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/ruwtHighlights/{game_id}`
- *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsRuwtHighlights({ game_id: '…' });
- */
-export const cbsRuwtHighlights: WrapperFn = (params = {}) => callFlat(RUWT_HIGHLIGHTS_DEF, params);
-/** snake_case alias of {@link cbsRuwtHighlights} (py/R parity). */
-export const cbs_ruwt_highlights = cbsRuwtHighlights;
 
 const SEASON_DEF: WrapperDef = {
   "short": "season",
@@ -2541,116 +2628,6 @@ const SPORT_LEAGUES_DEF: WrapperDef = {
 export const cbsSportLeagues: WrapperFn = (params = {}) => callFlat(SPORT_LEAGUES_DEF, params);
 /** snake_case alias of {@link cbsSportLeagues} (py/R parity). */
 export const cbs_sport_leagues = cbsSportLeagues;
-
-const SPORTS_LINE_TEAM_RANKINGS_DEF: WrapperDef = {
-  "short": "sports_line_team_rankings",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/team/rankings/sportsline/{team_id}",
-  "pathParams": [
-    {
-      "name": "team_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/sports_line_team_rankings"
-};
-
-/**
- * CBS Sports — sports line team rankings.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/rankings/sportsline/{team_id}`
- *
- * @param params.team_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSportsLineTeamRankings({ team_id: '…' });
- */
-export const cbsSportsLineTeamRankings: WrapperFn = (params = {}) => callFlat(SPORTS_LINE_TEAM_RANKINGS_DEF, params);
-/** snake_case alias of {@link cbsSportsLineTeamRankings} (py/R parity). */
-export const cbs_sports_line_team_rankings = cbsSportsLineTeamRankings;
-
-const SPORTS_LINE_TEAM_STANDINGS_DEF: WrapperDef = {
-  "short": "sports_line_team_standings",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/team/standings/sportsline/{team_id}",
-  "pathParams": [
-    {
-      "name": "team_id"
-    }
-  ],
-  "queryParams": [
-    {
-      "name": "date_format",
-      "queryKey": "dateFormat"
-    }
-  ],
-  "parser": "parse_cbs_standings",
-  "returnsSchema": "native/cbs/sports_line_team_standings"
-};
-
-/**
- * CBS Sports — sports line team standings.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/standings/sportsline/{team_id}`
- *
- * @param params.team_id - path parameter.
- * @param params.date_format - query parameter (`dateFormat`).
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSportsLineTeamStandings({ team_id: '…' });
- */
-export const cbsSportsLineTeamStandings: WrapperFn = (params = {}) => callFlat(SPORTS_LINE_TEAM_STANDINGS_DEF, params);
-/** snake_case alias of {@link cbsSportsLineTeamStandings} (py/R parity). */
-export const cbs_sports_line_team_standings = cbsSportsLineTeamStandings;
-
-const SUB_DIVISIONS_DEF: WrapperDef = {
-  "short": "sub_divisions",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/division/subdivisions/{division_id}",
-  "pathParams": [
-    {
-      "name": "division_id"
-    }
-  ],
-  "queryParams": [
-    {
-      "name": "sub_division_id",
-      "queryKey": "subDivisionId"
-    },
-    {
-      "name": "name",
-      "queryKey": "name"
-    }
-  ],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/sub_divisions"
-};
-
-/**
- * CBS Sports — sub divisions.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/division/subdivisions/{division_id}`
- *
- * @param params.division_id - path parameter.
- * @param params.sub_division_id - query parameter (`subDivisionId`).
- * @param params.name - query parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsSubDivisions({ division_id: '…' });
- */
-export const cbsSubDivisions: WrapperFn = (params = {}) => callFlat(SUB_DIVISIONS_DEF, params);
-/** snake_case alias of {@link cbsSubDivisions} (py/R parity). */
-export const cbs_sub_divisions = cbsSubDivisions;
 
 const TEAM_FUTURES_DEF: WrapperDef = {
   "short": "team_futures",
@@ -2846,6 +2823,38 @@ export const cbsTeamRankings: WrapperFn = (params = {}) => callFlat(TEAM_RANKING
 /** snake_case alias of {@link cbsTeamRankings} (py/R parity). */
 export const cbs_team_rankings = cbsTeamRankings;
 
+const TEAM_RANKINGS_SPORTSLINE_DEF: WrapperDef = {
+  "short": "team_rankings_sportsline",
+  "legacyShort": "sports_line_team_rankings",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/team/rankings/sportsline/{team_id}",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_cbs_list",
+  "returnsSchema": "native/cbs/sports_line_team_rankings"
+};
+
+/**
+ * CBS Sports — team rankings sportsline.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/rankings/sportsline/{team_id}`
+ *
+ * @param params.team_id - path parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamRankingsSportsline({ team_id: '…' });
+ */
+export const cbsTeamRankingsSportsline: WrapperFn = (params = {}) => callFlat(TEAM_RANKINGS_SPORTSLINE_DEF, params);
+/** snake_case alias of {@link cbsTeamRankingsSportsline} (py/R parity). */
+export const cbs_team_rankings_sportsline = cbsTeamRankingsSportsline;
+
 const TEAM_SEASONS_DEF: WrapperDef = {
   "short": "team_seasons",
   "flat": true,
@@ -2949,6 +2958,44 @@ const TEAM_STANDINGS_DEF: WrapperDef = {
 export const cbsTeamStandings: WrapperFn = (params = {}) => callFlat(TEAM_STANDINGS_DEF, params);
 /** snake_case alias of {@link cbsTeamStandings} (py/R parity). */
 export const cbs_team_standings = cbsTeamStandings;
+
+const TEAM_STANDINGS_SPORTSLINE_DEF: WrapperDef = {
+  "short": "team_standings_sportsline",
+  "legacyShort": "sports_line_team_standings",
+  "flat": true,
+  "api": "cbs",
+  "host": "https://api.cbssports.com/napi",
+  "scope": "universal",
+  "path": "/resource/team/standings/sportsline/{team_id}",
+  "pathParams": [
+    {
+      "name": "team_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "date_format",
+      "queryKey": "dateFormat"
+    }
+  ],
+  "parser": "parse_cbs_standings",
+  "returnsSchema": "native/cbs/sports_line_team_standings"
+};
+
+/**
+ * CBS Sports — team standings sportsline.
+ *
+ * **Endpoint:** `GET https://api.cbssports.com/napi/resource/team/standings/sportsline/{team_id}`
+ *
+ * @param params.team_id - path parameter.
+ * @param params.date_format - query parameter (`dateFormat`).
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.cbs.cbsTeamStandingsSportsline({ team_id: '…' });
+ */
+export const cbsTeamStandingsSportsline: WrapperFn = (params = {}) => callFlat(TEAM_STANDINGS_SPORTSLINE_DEF, params);
+/** snake_case alias of {@link cbsTeamStandingsSportsline} (py/R parity). */
+export const cbs_team_standings_sportsline = cbsTeamStandingsSportsline;
 
 const TEAM_STATS_DEF: WrapperDef = {
   "short": "team_stats",
@@ -3069,34 +3116,3 @@ const VENUE_METADATA_DEF: WrapperDef = {
 export const cbsVenueMetadata: WrapperFn = (params = {}) => callFlat(VENUE_METADATA_DEF, params);
 /** snake_case alias of {@link cbsVenueMetadata} (py/R parity). */
 export const cbs_venue_metadata = cbsVenueMetadata;
-
-const WEATHER_DEF: WrapperDef = {
-  "short": "weather",
-  "flat": true,
-  "api": "cbs",
-  "host": "https://api.cbssports.com/napi",
-  "scope": "universal",
-  "path": "/resource/game/weather/{game_id}",
-  "pathParams": [
-    {
-      "name": "game_id"
-    }
-  ],
-  "queryParams": [],
-  "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/weather"
-};
-
-/**
- * CBS Sports — weather.
- *
- * **Endpoint:** `GET https://api.cbssports.com/napi/resource/game/weather/{game_id}`
- *
- * @param params.game_id - path parameter.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.cbs.cbsWeather({ game_id: '…' });
- */
-export const cbsWeather: WrapperFn = (params = {}) => callFlat(WEATHER_DEF, params);
-/** snake_case alias of {@link cbsWeather} (py/R parity). */
-export const cbs_weather = cbsWeather;

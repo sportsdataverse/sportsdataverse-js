@@ -128,7 +128,7 @@ export function cricket_match_state(summary: any, opts: { fmt: string }): Cricke
 }
 
 // ---- normal CDF (full double precision; scipy.stats.norm.cdf equivalent) ---
-// erf via the all-positive series for |x|<3 and the Laplace continued fraction
+// erf via the all-positive series for |z|<2 and the Laplace continued fraction
 // for erfc beyond; absolute error ~1e-16.
 function erfSeries(x: number): number {
   // erf(x) = 2/sqrt(pi) * exp(-x^2) * sum_{n>=0} 2^n x^(2n+1) / (1*3*...*(2n+1))
@@ -145,13 +145,13 @@ function erfSeries(x: number): number {
 function erfcCF(z: number): number {
   // erfc(z) = exp(-z^2)/sqrt(pi) * 1/(z + (1/2)/(z + 1/(z + (3/2)/(z + 2/(z + ...)))))
   let f = z;
-  for (let k = 120; k >= 1; k--) f = z + k / 2 / f;
+  for (let k = 400; k >= 1; k--) f = z + k / 2 / f;
   return Math.exp(-z * z) / Math.sqrt(Math.PI) / f;
 }
 
 function erfc(z: number): number {
   if (z < 0) return 2 - erfc(-z);
-  return z < 3 ? 1 - erfSeries(z) : erfcCF(z);
+  return z < 2 ? 1 - erfSeries(z) : erfcCF(z);
 }
 
 /** Standard normal CDF. */

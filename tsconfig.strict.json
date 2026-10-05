@@ -13,6 +13,7 @@
     "src/core/config.ts",
     "src/core/request.ts",
     "src/core/transforms.ts",
+    "src/core/deprecation.ts",
     "src/core/nba_stats_runtime.ts",
     "src/models/cricket_wp.ts"
   ]

@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.wch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWchAthleteAwards`
+## `espnWchPlayerAwards`
 
-WCH — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+WCH — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_awards` / `espnWchAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ WCH — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_awards(...)
+await sdv.wch.espnWchPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_awards(...)
 ```
 
-## `espnWchAthleteCareerStats`
+## `espnWchPlayerCareerStats`
 
-WCH — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+WCH — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_career_stats` / `espnWchAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ WCH — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_career_stats(...)
+await sdv.wch.espnWchPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_career_stats(...)
 ```
 
-## `espnWchAthleteContracts`
+## `espnWchPlayerContracts`
 
-WCH — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+WCH — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_contracts` / `espnWchAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ WCH — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_contracts(...)
+await sdv.wch.espnWchPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_contracts(...)
 ```
 
-## `espnWchAthleteCore`
+## `espnWchPlayerCore`
 
-WCH — athlete core (ESPN sports.core.api.espn.com (core v2)).
+WCH — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_core` / `espnWchAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ WCH — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_core(...)
+await sdv.wch.espnWchPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_core(...)
 ```
 
-## `espnWchAthleteEventlog`
+## `espnWchPlayerEventlog`
 
-WCH — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+WCH — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_eventlog` / `espnWchAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ WCH — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_eventlog(...)
+await sdv.wch.espnWchPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_eventlog(...)
 ```
 
-## `espnWchAthleteInjuries`
+## `espnWchPlayerInjuries`
 
-WCH — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+WCH — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_injuries` / `espnWchAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ WCH — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_injuries(...)
+await sdv.wch.espnWchPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_injuries(...)
 ```
 
-## `espnWchAthleteNotes`
+## `espnWchPlayerNotes`
 
-WCH — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+WCH — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_notes` / `espnWchAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ WCH — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_notes(...)
+await sdv.wch.espnWchPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_notes(...)
 ```
 
-## `espnWchAthleteRecords`
+## `espnWchPlayerRecords`
 
-WCH — athlete records (ESPN sports.core.api.espn.com (core v2)).
+WCH — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_records` / `espnWchAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ WCH — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_records(...)
+await sdv.wch.espnWchPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_records(...)
 ```
 
-## `espnWchAthleteSeasons`
+## `espnWchPlayerSeasons`
 
-WCH — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+WCH — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_seasons` / `espnWchAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ WCH — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_seasons(...)
+await sdv.wch.espnWchPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_seasons(...)
 ```
 
-## `espnWchAthleteStatisticslog`
+## `espnWchPlayerStatisticslog`
 
-WCH — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+WCH — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_statisticslog` / `espnWchAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ WCH — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_statisticslog(...)
+await sdv.wch.espnWchPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_statisticslog(...)
 ```
 
-## `espnWchAthleteVsAthlete`
+## `espnWchPlayerVsPlayer`
 
-WCH — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+WCH — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_vs_athlete` / `espnWchAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ WCH — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_vs_athlete(...)
+await sdv.wch.espnWchPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_vs_player(...)
 ```
 
-## `espnWchAthletesIndex`
+## `espnWchPlayersIndex`
 
-WCH — athletes index (ESPN sports.core.api.espn.com (core v2)).
+WCH — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athletes_index` / `espnWchAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ WCH — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthletesIndex({});
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athletes_index(...)
+await sdv.wch.espnWchPlayersIndex({});
+// snake_case alias (py/R parity): sdv.wch.espn_wch_players_index(...)
 ```
 
 ## `espnWchAward`
@@ -403,12 +427,14 @@ await sdv.wch.espnWchCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.wch.espn_wch_coach_season(...)
 ```
 
-## `espnWchEvent`
+## `espnWchGame`
 
-WCH — event (ESPN sports.core.api.espn.com (core v2)).
+WCH — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event` / `espnWchEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ WCH — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event(...)
+await sdv.wch.espnWchGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game(...)
 ```
 
-## `espnWchEventBroadcasts`
+## `espnWchGameBroadcasts`
 
-WCH — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+WCH — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_broadcasts` / `espnWchEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ WCH — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_broadcasts(...)
+await sdv.wch.espnWchGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_broadcasts(...)
 ```
 
-## `espnWchEventCompetition`
+## `espnWchGameCompetition`
 
-WCH — event competition (ESPN sports.core.api.espn.com (core v2)).
+WCH — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competition` / `espnWchEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ WCH — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competition(...)
+await sdv.wch.espnWchGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_competition(...)
 ```
 
-## `espnWchEventCompetitor`
+## `espnWchGameTeam`
 
-WCH — event competitor (ESPN sports.core.api.espn.com (core v2)).
+WCH — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitor` / `espnWchEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ WCH — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitor(...)
+await sdv.wch.espnWchGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_team(...)
 ```
 
-## `espnWchEventCompetitorLeaders`
+## `espnWchGameTeamLeaders`
 
-WCH — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+WCH — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitor_leaders` / `espnWchEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ WCH — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitor_leaders(...)
+await sdv.wch.espnWchGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_team_leaders(...)
 ```
 
-## `espnWchEventCompetitorLinescores`
+## `espnWchGameTeamLinescores`
 
-WCH — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+WCH — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitor_linescores` / `espnWchEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ WCH — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitor_linescores(...)
+await sdv.wch.espnWchGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_team_linescores(...)
 ```
 
-## `espnWchEventCompetitorRecord`
+## `espnWchGameTeamRecord`
 
-WCH — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+WCH — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitor_record` / `espnWchEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ WCH — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitor_record(...)
+await sdv.wch.espnWchGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_team_record(...)
 ```
 
-## `espnWchEventCompetitorRoster`
+## `espnWchGameTeamRoster`
 
-WCH — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+WCH — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitor_roster` / `espnWchEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ WCH — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitor_roster(...)
+await sdv.wch.espnWchGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_team_roster(...)
 ```
 
-## `espnWchEventCompetitorStatistics`
+## `espnWchGameTeamStatistics`
 
-WCH — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+WCH — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitor_statistics` / `espnWchEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ WCH — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitor_statistics(...)
+await sdv.wch.espnWchGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_team_statistics(...)
 ```
 
-## `espnWchEventCompetitors`
+## `espnWchGameTeams`
 
-WCH — event competitors (ESPN sports.core.api.espn.com (core v2)).
+WCH — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_competitors` / `espnWchEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ WCH — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_competitors(...)
+await sdv.wch.espnWchGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_teams(...)
 ```
 
-## `espnWchEventLeaders`
+## `espnWchGameLeaders`
 
-WCH — event leaders (ESPN sports.core.api.espn.com (core v2)).
+WCH — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_leaders` / `espnWchEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ WCH — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_leaders(...)
+await sdv.wch.espnWchGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_leaders(...)
 ```
 
-## `espnWchEventOdds`
+## `espnWchGameOdds`
 
-WCH — event odds (ESPN sports.core.api.espn.com (core v2)).
+WCH — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_odds` / `espnWchEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ WCH — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_odds(...)
+await sdv.wch.espnWchGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_odds(...)
 ```
 
-## `espnWchEventOfficialDetail`
+## `espnWchGameOfficialDetail`
 
-WCH — event official detail (ESPN sports.core.api.espn.com (core v2)).
+WCH — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_official_detail` / `espnWchEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ WCH — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_official_detail(...)
+await sdv.wch.espnWchGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_official_detail(...)
 ```
 
-## `espnWchEventOfficials`
+## `espnWchGameOfficials`
 
-WCH — event officials (ESPN sports.core.api.espn.com (core v2)).
+WCH — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_officials` / `espnWchEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ WCH — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_officials(...)
+await sdv.wch.espnWchGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_officials(...)
 ```
 
-## `espnWchEventPlay`
+## `espnWchGamePlay`
 
-WCH — event play (ESPN sports.core.api.espn.com (core v2)).
+WCH — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_play` / `espnWchEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ WCH — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_play(...)
+await sdv.wch.espnWchGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_play(...)
 ```
 
-## `espnWchEventPlayPersonnel`
+## `espnWchGamePlayPersonnel`
 
-WCH — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+WCH — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_play_personnel` / `espnWchEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ WCH — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_play_personnel(...)
+await sdv.wch.espnWchGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_play_personnel(...)
 ```
 
-## `espnWchEventPlays`
+## `espnWchGamePlays`
 
-WCH — event plays (ESPN sports.core.api.espn.com (core v2)).
+WCH — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_plays` / `espnWchEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ WCH — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_plays(...)
+await sdv.wch.espnWchGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_plays(...)
 ```
 
-## `espnWchEventPowerindex`
+## `espnWchGamePowerindex`
 
-WCH — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+WCH — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_powerindex` / `espnWchEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ WCH — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_powerindex(...)
+await sdv.wch.espnWchGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_powerindex(...)
 ```
 
-## `espnWchEventPredictor`
+## `espnWchGamePredictor`
 
-WCH — event predictor (ESPN sports.core.api.espn.com (core v2)).
+WCH — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_predictor` / `espnWchEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ WCH — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_predictor(...)
+await sdv.wch.espnWchGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_predictor(...)
 ```
 
-## `espnWchEventProbabilities`
+## `espnWchGameProbabilities`
 
-WCH — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+WCH — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_probabilities` / `espnWchEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ WCH — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_probabilities(...)
+await sdv.wch.espnWchGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_probabilities(...)
 ```
 
-## `espnWchEventPropbets`
+## `espnWchGamePropbets`
 
-WCH — event propbets (ESPN sports.core.api.espn.com (core v2)).
+WCH — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_propbets` / `espnWchEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ WCH — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_propbets(...)
+await sdv.wch.espnWchGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_propbets(...)
 ```
 
-## `espnWchEventScoringplays`
+## `espnWchGameScoringplays`
 
-WCH — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+WCH — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_scoringplays` / `espnWchEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ WCH — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_scoringplays(...)
+await sdv.wch.espnWchGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_scoringplays(...)
 ```
 
-## `espnWchEventSituation`
+## `espnWchGameSituation`
 
-WCH — event situation (ESPN sports.core.api.espn.com (core v2)).
+WCH — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_situation` / `espnWchEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ WCH — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_situation(...)
+await sdv.wch.espnWchGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_situation(...)
 ```
 
-## `espnWchEventStatus`
+## `espnWchGameStatus`
 
-WCH — event status (ESPN sports.core.api.espn.com (core v2)).
+WCH — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_event_status` / `espnWchEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ WCH — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_event_status(...)
+await sdv.wch.espnWchGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_game_status(...)
 ```
 
-## `espnWchEvents`
+## `espnWchGames`
 
-WCH — events (ESPN sports.core.api.espn.com (core v2)).
+WCH — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_events` / `espnWchEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ WCH — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchEvents({});
-// snake_case alias (py/R parity): sdv.wch.espn_wch_events(...)
+await sdv.wch.espnWchGames({});
+// snake_case alias (py/R parity): sdv.wch.espn_wch_games(...)
 ```
 
 ## `espnWchFranchise`
@@ -1145,11 +1219,13 @@ await sdv.wch.espnWchPositions({});
 // snake_case alias (py/R parity): sdv.wch.espn_wch_positions(...)
 ```
 
-## `espnWchSeasonAthletes`
+## `espnWchSeasonPlayers`
 
-WCH — season athletes (ESPN sports.core.api.espn.com (core v2)).
+WCH — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_season_athletes` / `espnWchSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ WCH — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_season_athletes(...)
+await sdv.wch.espnWchSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_season_players(...)
 ```
 
 ## `espnWchSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.wch.espnWchSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.wch.espn_wch_season_week(...)
 ```
 
-## `espnWchSeasonWeekEvents`
+## `espnWchSeasonWeekGames`
 
-WCH — season week events (ESPN sports.core.api.espn.com (core v2)).
+WCH — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_season_week_events` / `espnWchSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ WCH — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_season_week_events(...)
+await sdv.wch.espnWchSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_season_week_games(...)
 ```
 
 ## `espnWchSeasonWeekPowerindex`

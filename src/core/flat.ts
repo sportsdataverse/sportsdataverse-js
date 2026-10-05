@@ -76,7 +76,7 @@ export function resolveFlat(
       const pp = (def.pathParams ?? []).find((p) => p.name === name);
       if (pp?.required === false) return "";
       throw new Error(
-        `${toCamel(`${def.api ?? "flat"}_${def.short}`)}: missing required path parameter "${name}"`
+        `${toCamel(def.publicName ?? `${def.api ?? "flat"}_${def.short}`)}: missing required path parameter "${name}"`
       );
     }
     return String(v);

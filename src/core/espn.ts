@@ -87,7 +87,7 @@ function buildPath(
     if (v === undefined || v === null) {
       if (byName.get(name)?.required === false) return "";
       throw new Error(
-        `${toCamel(`espn_${cfg.prefix}_${def.short}`)}: missing required path parameter "${name}"`
+        `${toCamel(`espn_${cfg.prefix}_${cfg.publicShorts?.[def.short] ?? def.publicShort ?? def.short}`)}: missing required path parameter "${name}"`
       );
     }
     return String(v);

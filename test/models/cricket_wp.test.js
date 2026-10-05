@@ -55,7 +55,8 @@ describe('models/cricket_wp (parity with sdv-py 719de79)', () => {
   it('norm_cdf is accurate to 1e-15 on known values', () => {
     norm_cdf(0).should.equal(0.5);
     Math.abs(norm_cdf(1.96) - 0.9750021048517795).should.be.below(1e-15);
-    Math.abs(norm_cdf(-3.5) - 0.00023262907903552504).should.be.below(1e-15);
+    Math.abs(norm_cdf(-3.5) / 0.00023262907903552504 - 1).should.be.below(1e-13);
+    Math.abs(norm_cdf(-5) / 2.866515718791939e-7 - 1).should.be.below(1e-13);
     Math.abs(norm_cdf(-6) - 9.865876450376946e-10).should.be.below(1e-22);
     norm_cdf(40).should.equal(1);
   });

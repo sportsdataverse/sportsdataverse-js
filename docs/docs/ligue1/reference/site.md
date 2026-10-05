@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.ligue1`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLigue1AthleteBio`
+## `espnLigue1PlayerBio`
 
-LIGUE1 — athlete bio (ESPN site.api.espn.com).
+LIGUE1 — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_bio` / `espnLigue1AthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ LIGUE1 — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_bio(...)
+await sdv.ligue1.espnLigue1PlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_bio(...)
 ```
 
-## `espnLigue1AthleteInfo`
+## `espnLigue1PlayerInfo`
 
-LIGUE1 — athlete info (ESPN site.api.espn.com).
+LIGUE1 — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_info` / `espnLigue1AthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ LIGUE1 — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_info(...)
+await sdv.ligue1.espnLigue1PlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_info(...)
 ```
 
-## `espnLigue1AthleteNews`
+## `espnLigue1PlayerNews`
 
-LIGUE1 — athlete news (ESPN site.api.espn.com).
+LIGUE1 — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_news` / `espnLigue1AthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ LIGUE1 — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_news(...)
+await sdv.ligue1.espnLigue1PlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_news(...)
 ```
 
 ## `espnLigue1Calendar`

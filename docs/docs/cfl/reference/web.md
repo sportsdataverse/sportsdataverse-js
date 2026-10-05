@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.cfl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCflAthleteGamelog`
+## `espnCflPlayerGamelog`
 
-CFL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+CFL — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/cfl/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_gamelog` / `espnCflAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ CFL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_gamelog(...)
+await sdv.cfl.espnCflPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_gamelog(...)
 ```
 
-## `espnCflAthleteOverview`
+## `espnCflPlayerOverview`
 
-CFL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+CFL — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/cfl/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_overview` / `espnCflAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ CFL — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_overview(...)
+await sdv.cfl.espnCflPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_overview(...)
 ```
 
-## `espnCflAthleteSplits`
+## `espnCflPlayerSplits`
 
-CFL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+CFL — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/cfl/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_splits` / `espnCflAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ CFL — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_splits(...)
+await sdv.cfl.espnCflPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_splits(...)
 ```
 
-## `espnCflAthleteStats`
+## `espnCflPlayerStats`
 
-CFL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+CFL — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/cfl/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_stats` / `espnCflAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ CFL — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_stats(...)
+await sdv.cfl.espnCflPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_stats(...)
 ```
 
 ## `espnCflLeaders`

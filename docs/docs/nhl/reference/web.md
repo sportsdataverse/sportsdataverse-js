@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.nhl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNhlAthleteGamelog`
+## `espnNhlPlayerGamelog`
 
-NHL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+NHL — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_gamelog` / `espnNhlAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ NHL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_gamelog(...)
+await sdv.nhl.espnNhlPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_gamelog(...)
 ```
 
-## `espnNhlAthleteOverview`
+## `espnNhlPlayerOverview`
 
-NHL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+NHL — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_overview` / `espnNhlAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ NHL — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_overview(...)
+await sdv.nhl.espnNhlPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_overview(...)
 ```
 
-## `espnNhlAthleteSplits`
+## `espnNhlPlayerSplits`
 
-NHL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+NHL — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_splits` / `espnNhlAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ NHL — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_splits(...)
+await sdv.nhl.espnNhlPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_splits(...)
 ```
 
-## `espnNhlAthleteStats`
+## `espnNhlPlayerStatsV3`
 
-NHL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+NHL — player stats v3 (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_stats` / `espnNhlAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ NHL — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_stats(...)
+await sdv.nhl.espnNhlPlayerStatsV3({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_stats_v3(...)
 ```
 
 ## `espnNhlLeaders`

@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.cfl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCflAthleteAwards`
+## `espnCflPlayerAwards`
 
-CFL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+CFL — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_awards` / `espnCflAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ CFL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_awards(...)
+await sdv.cfl.espnCflPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_awards(...)
 ```
 
-## `espnCflAthleteCareerStats`
+## `espnCflPlayerCareerStats`
 
-CFL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+CFL — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_career_stats` / `espnCflAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ CFL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_career_stats(...)
+await sdv.cfl.espnCflPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_career_stats(...)
 ```
 
-## `espnCflAthleteContracts`
+## `espnCflPlayerContracts`
 
-CFL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+CFL — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_contracts` / `espnCflAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ CFL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_contracts(...)
+await sdv.cfl.espnCflPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_contracts(...)
 ```
 
-## `espnCflAthleteCore`
+## `espnCflPlayerCore`
 
-CFL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+CFL — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_core` / `espnCflAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ CFL — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_core(...)
+await sdv.cfl.espnCflPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_core(...)
 ```
 
-## `espnCflAthleteEventlog`
+## `espnCflPlayerEventlog`
 
-CFL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+CFL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_eventlog` / `espnCflAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ CFL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_eventlog(...)
+await sdv.cfl.espnCflPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_eventlog(...)
 ```
 
-## `espnCflAthleteInjuries`
+## `espnCflPlayerInjuries`
 
-CFL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+CFL — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_injuries` / `espnCflAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ CFL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_injuries(...)
+await sdv.cfl.espnCflPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_injuries(...)
 ```
 
-## `espnCflAthleteNotes`
+## `espnCflPlayerNotes`
 
-CFL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+CFL — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_notes` / `espnCflAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ CFL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_notes(...)
+await sdv.cfl.espnCflPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_notes(...)
 ```
 
-## `espnCflAthleteRecords`
+## `espnCflPlayerRecords`
 
-CFL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+CFL — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_records` / `espnCflAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ CFL — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_records(...)
+await sdv.cfl.espnCflPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_records(...)
 ```
 
-## `espnCflAthleteSeasons`
+## `espnCflPlayerSeasons`
 
-CFL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+CFL — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_seasons` / `espnCflAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ CFL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_seasons(...)
+await sdv.cfl.espnCflPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_seasons(...)
 ```
 
-## `espnCflAthleteStatisticslog`
+## `espnCflPlayerStatisticslog`
 
-CFL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+CFL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_statisticslog` / `espnCflAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ CFL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_statisticslog(...)
+await sdv.cfl.espnCflPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_statisticslog(...)
 ```
 
-## `espnCflAthleteVsAthlete`
+## `espnCflPlayerVsPlayer`
 
-CFL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+CFL — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athlete_vs_athlete` / `espnCflAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ CFL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athlete_vs_athlete(...)
+await sdv.cfl.espnCflPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_player_vs_player(...)
 ```
 
-## `espnCflAthletesIndex`
+## `espnCflPlayersIndex`
 
-CFL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+CFL — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_athletes_index` / `espnCflAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ CFL — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflAthletesIndex({});
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_athletes_index(...)
+await sdv.cfl.espnCflPlayersIndex({});
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_players_index(...)
 ```
 
 ## `espnCflAward`
@@ -403,12 +427,14 @@ await sdv.cfl.espnCflCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.cfl.espn_cfl_coach_season(...)
 ```
 
-## `espnCflEvent`
+## `espnCflGame`
 
-CFL — event (ESPN sports.core.api.espn.com (core v2)).
+CFL — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event` / `espnCflEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ CFL — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event(...)
+await sdv.cfl.espnCflGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game(...)
 ```
 
-## `espnCflEventBroadcasts`
+## `espnCflGameBroadcasts`
 
-CFL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+CFL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_broadcasts` / `espnCflEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ CFL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_broadcasts(...)
+await sdv.cfl.espnCflGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_broadcasts(...)
 ```
 
-## `espnCflEventCompetition`
+## `espnCflGameCompetition`
 
-CFL — event competition (ESPN sports.core.api.espn.com (core v2)).
+CFL — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competition` / `espnCflEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ CFL — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competition(...)
+await sdv.cfl.espnCflGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_competition(...)
 ```
 
-## `espnCflEventCompetitor`
+## `espnCflGameTeam`
 
-CFL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+CFL — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitor` / `espnCflEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ CFL — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitor(...)
+await sdv.cfl.espnCflGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_team(...)
 ```
 
-## `espnCflEventCompetitorLeaders`
+## `espnCflGameTeamLeaders`
 
-CFL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+CFL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitor_leaders` / `espnCflEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ CFL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitor_leaders(...)
+await sdv.cfl.espnCflGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_team_leaders(...)
 ```
 
-## `espnCflEventCompetitorLinescores`
+## `espnCflGameTeamLinescores`
 
-CFL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+CFL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitor_linescores` / `espnCflEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ CFL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitor_linescores(...)
+await sdv.cfl.espnCflGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_team_linescores(...)
 ```
 
-## `espnCflEventCompetitorRecord`
+## `espnCflGameTeamRecord`
 
-CFL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+CFL — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitor_record` / `espnCflEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ CFL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitor_record(...)
+await sdv.cfl.espnCflGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_team_record(...)
 ```
 
-## `espnCflEventCompetitorRoster`
+## `espnCflGameTeamRoster`
 
-CFL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+CFL — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitor_roster` / `espnCflEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ CFL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitor_roster(...)
+await sdv.cfl.espnCflGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_team_roster(...)
 ```
 
-## `espnCflEventCompetitorStatistics`
+## `espnCflGameTeamStatistics`
 
-CFL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+CFL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitor_statistics` / `espnCflEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ CFL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitor_statistics(...)
+await sdv.cfl.espnCflGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_team_statistics(...)
 ```
 
-## `espnCflEventCompetitors`
+## `espnCflGameTeams`
 
-CFL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+CFL — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_competitors` / `espnCflEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ CFL — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_competitors(...)
+await sdv.cfl.espnCflGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_teams(...)
 ```
 
-## `espnCflEventLeaders`
+## `espnCflGameLeaders`
 
-CFL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+CFL — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_leaders` / `espnCflEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ CFL — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_leaders(...)
+await sdv.cfl.espnCflGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_leaders(...)
 ```
 
-## `espnCflEventOdds`
+## `espnCflGameOdds`
 
-CFL — event odds (ESPN sports.core.api.espn.com (core v2)).
+CFL — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_odds` / `espnCflEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ CFL — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_odds(...)
+await sdv.cfl.espnCflGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_odds(...)
 ```
 
-## `espnCflEventOfficialDetail`
+## `espnCflGameOfficialDetail`
 
-CFL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+CFL — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_official_detail` / `espnCflEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ CFL — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_official_detail(...)
+await sdv.cfl.espnCflGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_official_detail(...)
 ```
 
-## `espnCflEventOfficials`
+## `espnCflGameOfficials`
 
-CFL — event officials (ESPN sports.core.api.espn.com (core v2)).
+CFL — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_officials` / `espnCflEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ CFL — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_officials(...)
+await sdv.cfl.espnCflGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_officials(...)
 ```
 
-## `espnCflEventPlay`
+## `espnCflGamePlay`
 
-CFL — event play (ESPN sports.core.api.espn.com (core v2)).
+CFL — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_play` / `espnCflEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ CFL — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_play(...)
+await sdv.cfl.espnCflGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_play(...)
 ```
 
-## `espnCflEventPlayPersonnel`
+## `espnCflGamePlayPersonnel`
 
-CFL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+CFL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_play_personnel` / `espnCflEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ CFL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_play_personnel(...)
+await sdv.cfl.espnCflGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_play_personnel(...)
 ```
 
-## `espnCflEventPlays`
+## `espnCflGamePlays`
 
-CFL — event plays (ESPN sports.core.api.espn.com (core v2)).
+CFL — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_plays` / `espnCflEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ CFL — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_plays(...)
+await sdv.cfl.espnCflGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_plays(...)
 ```
 
-## `espnCflEventPowerindex`
+## `espnCflGamePowerindex`
 
-CFL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+CFL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_powerindex` / `espnCflEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ CFL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_powerindex(...)
+await sdv.cfl.espnCflGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_powerindex(...)
 ```
 
-## `espnCflEventPredictor`
+## `espnCflGamePredictor`
 
-CFL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+CFL — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_predictor` / `espnCflEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ CFL — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_predictor(...)
+await sdv.cfl.espnCflGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_predictor(...)
 ```
 
-## `espnCflEventProbabilities`
+## `espnCflGameProbabilities`
 
-CFL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+CFL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_probabilities` / `espnCflEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ CFL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_probabilities(...)
+await sdv.cfl.espnCflGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_probabilities(...)
 ```
 
-## `espnCflEventPropbets`
+## `espnCflGamePropbets`
 
-CFL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+CFL — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_propbets` / `espnCflEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ CFL — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_propbets(...)
+await sdv.cfl.espnCflGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_propbets(...)
 ```
 
-## `espnCflEventScoringplays`
+## `espnCflGameScoringplays`
 
-CFL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+CFL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_scoringplays` / `espnCflEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ CFL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_scoringplays(...)
+await sdv.cfl.espnCflGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_scoringplays(...)
 ```
 
-## `espnCflEventSituation`
+## `espnCflGameSituation`
 
-CFL — event situation (ESPN sports.core.api.espn.com (core v2)).
+CFL — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_situation` / `espnCflEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ CFL — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_situation(...)
+await sdv.cfl.espnCflGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_situation(...)
 ```
 
-## `espnCflEventStatus`
+## `espnCflGameStatus`
 
-CFL — event status (ESPN sports.core.api.espn.com (core v2)).
+CFL — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_event_status` / `espnCflEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ CFL — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_event_status(...)
+await sdv.cfl.espnCflGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_game_status(...)
 ```
 
-## `espnCflEvents`
+## `espnCflGames`
 
-CFL — events (ESPN sports.core.api.espn.com (core v2)).
+CFL — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_events` / `espnCflEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ CFL — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflEvents({});
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_events(...)
+await sdv.cfl.espnCflGames({});
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_games(...)
 ```
 
 ## `espnCflFranchise`
@@ -1145,11 +1219,13 @@ await sdv.cfl.espnCflPositions({});
 // snake_case alias (py/R parity): sdv.cfl.espn_cfl_positions(...)
 ```
 
-## `espnCflSeasonAthletes`
+## `espnCflSeasonPlayers`
 
-CFL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+CFL — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_season_athletes` / `espnCflSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ CFL — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_season_athletes(...)
+await sdv.cfl.espnCflSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_season_players(...)
 ```
 
 ## `espnCflSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.cfl.espnCflSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.cfl.espn_cfl_season_week(...)
 ```
 
-## `espnCflSeasonWeekEvents`
+## `espnCflSeasonWeekGames`
 
-CFL — season week events (ESPN sports.core.api.espn.com (core v2)).
+CFL — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/cfl/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfl_season_week_events` / `espnCflSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ CFL — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfl.espnCflSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.cfl.espn_cfl_season_week_events(...)
+await sdv.cfl.espnCflSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.cfl.espn_cfl_season_week_games(...)
 ```
 
 ## `espnCflSeasonWeekPowerindex`

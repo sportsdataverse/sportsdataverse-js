@@ -190,10 +190,11 @@ describe('flat-API wrapper metadata invariants', () => {
 describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
   for (const def of FLAT_WRAPPERS) {
     const prefix = FLAT_API_NAMESPACES[def.api] ?? def.api;
-    it(`${def.api}_${def.short} present as snake + camelCase (same fn) on sdv.${prefix}`, () => {
+    // v4 public name (sdv-py's); pre-v4 names are covered by test/naming.test.js
+    const snake = def.publicName ?? `${def.api}_${def.short}`;
+    it(`${snake} present as snake + camelCase (same fn) on sdv.${prefix}`, () => {
       const ns = sdv[prefix];
       should(ns).be.an.Object();
-      const snake = `${def.api}_${def.short}`;
       const camel = toCamel(snake);
       (typeof ns[snake]).should.equal('function', `missing ${snake}`);
       (typeof ns[camel]).should.equal('function', `missing ${camel}`);
@@ -236,7 +237,7 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
   it('all four NHL families merge onto sdv.nhl alongside legacy + ESPN', () => {
     (typeof sdv.nhl.getPlayByPlay).should.equal('function'); // legacy
     (typeof sdv.nhl.espnNhlScoreboard).should.equal('function'); // ESPN
-    (typeof sdv.nhl.nhlApiWebSchedule).should.equal('function'); // nhl_api_web
+    (typeof sdv.nhl.nhlWebSchedule).should.equal('function'); // nhl_api_web (py: nhl_web_schedule)
     (typeof sdv.nhl.nhlEdgeSkaterDetail).should.equal('function'); // nhl_edge
     (typeof sdv.nhl.nhlStatsRestTeam).should.equal('function'); // nhl_stats_rest
     (typeof sdv.nhl.nhlRecordsFranchises).should.equal('function'); // nhl_records
@@ -245,10 +246,10 @@ describe('every flat wrapper is exposed under both names on sdv.mlb', () => {
   it('nfl_api family merges onto sdv.nfl alongside legacy + ESPN (snake + camel)', () => {
     (typeof sdv.nfl.getPlayByPlay).should.equal('function'); // legacy
     (typeof sdv.nfl.espnNflScoreboard).should.equal('function'); // ESPN
-    (typeof sdv.nfl.nfl_api_standings).should.equal('function'); // flat snake
-    (typeof sdv.nfl.nflApiStandings).should.equal('function'); // flat camel
-    sdv.nfl.nflApiStandings.should.equal(sdv.nfl.nfl_api_standings);
-    (typeof sdv.nfl.nflApiWeeklyGameDetails).should.equal('function');
+    (typeof sdv.nfl.nfl_standings).should.equal('function'); // flat snake
+    (typeof sdv.nfl.nflStandings).should.equal('function'); // flat camel
+    sdv.nfl.nflStandings.should.equal(sdv.nfl.nfl_standings);
+    (typeof sdv.nfl.nflWeeklyGameDetails).should.equal('function');
   });
 
   it('odds_api family creates the standalone sdv.odds namespace (snake + camel)', () => {

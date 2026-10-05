@@ -10,6 +10,7 @@ import type { WrapperDef, WrapperFn } from "../../core/types.js";
 
 const BOXSCORE_DEF: WrapperDef = {
   "short": "boxscore",
+  "publicName": "nhl_boxscore",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -33,14 +34,15 @@ const BOXSCORE_DEF: WrapperDef = {
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebBoxscore({ game_id: '…' });
+ * @example await sdv.nhl.nhlBoxscore({ game_id: '…' });
  */
-export const nhlApiWebBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
-/** snake_case alias of {@link nhlApiWebBoxscore} (py/R parity). */
-export const nhl_api_web_boxscore = nhlApiWebBoxscore;
+export const nhlBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
+/** snake_case alias of {@link nhlBoxscore} (py/R parity). */
+export const nhl_boxscore = nhlBoxscore;
 
 const CLUB_SCHEDULE_MONTH_DEF: WrapperDef = {
   "short": "club_schedule_month",
+  "publicName": "nhl_club_schedule_month",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -69,14 +71,15 @@ const CLUB_SCHEDULE_MONTH_DEF: WrapperDef = {
  * @param params.month - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebClubScheduleMonth({ team: '…' });
+ * @example await sdv.nhl.nhlClubScheduleMonth({ team: '…' });
  */
-export const nhlApiWebClubScheduleMonth: WrapperFn = (params = {}) => callFlat(CLUB_SCHEDULE_MONTH_DEF, params);
-/** snake_case alias of {@link nhlApiWebClubScheduleMonth} (py/R parity). */
-export const nhl_api_web_club_schedule_month = nhlApiWebClubScheduleMonth;
+export const nhlClubScheduleMonth: WrapperFn = (params = {}) => callFlat(CLUB_SCHEDULE_MONTH_DEF, params);
+/** snake_case alias of {@link nhlClubScheduleMonth} (py/R parity). */
+export const nhl_club_schedule_month = nhlClubScheduleMonth;
 
 const CLUB_SCHEDULE_SEASON_DEF: WrapperDef = {
   "short": "club_schedule_season",
+  "publicName": "nhl_club_schedule_season",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -106,14 +109,15 @@ const CLUB_SCHEDULE_SEASON_DEF: WrapperDef = {
  * @param params.season - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebClubScheduleSeason({ team: '…' });
+ * @example await sdv.nhl.nhlClubScheduleSeason({ team: '…' });
  */
-export const nhlApiWebClubScheduleSeason: WrapperFn = (params = {}) => callFlat(CLUB_SCHEDULE_SEASON_DEF, params);
-/** snake_case alias of {@link nhlApiWebClubScheduleSeason} (py/R parity). */
-export const nhl_api_web_club_schedule_season = nhlApiWebClubScheduleSeason;
+export const nhlClubScheduleSeason: WrapperFn = (params = {}) => callFlat(CLUB_SCHEDULE_SEASON_DEF, params);
+/** snake_case alias of {@link nhlClubScheduleSeason} (py/R parity). */
+export const nhl_club_schedule_season = nhlClubScheduleSeason;
 
 const CLUB_SCHEDULE_WEEK_DEF: WrapperDef = {
   "short": "club_schedule_week",
+  "publicName": "nhl_club_schedule_week",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -142,14 +146,15 @@ const CLUB_SCHEDULE_WEEK_DEF: WrapperDef = {
  * @param params.date - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebClubScheduleWeek({ team: '…' });
+ * @example await sdv.nhl.nhlClubScheduleWeek({ team: '…' });
  */
-export const nhlApiWebClubScheduleWeek: WrapperFn = (params = {}) => callFlat(CLUB_SCHEDULE_WEEK_DEF, params);
-/** snake_case alias of {@link nhlApiWebClubScheduleWeek} (py/R parity). */
-export const nhl_api_web_club_schedule_week = nhlApiWebClubScheduleWeek;
+export const nhlClubScheduleWeek: WrapperFn = (params = {}) => callFlat(CLUB_SCHEDULE_WEEK_DEF, params);
+/** snake_case alias of {@link nhlClubScheduleWeek} (py/R parity). */
+export const nhl_club_schedule_week = nhlClubScheduleWeek;
 
 const CLUB_STATS_DEF: WrapperDef = {
   "short": "club_stats",
+  "publicName": "nhl_club_stats",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -185,14 +190,15 @@ const CLUB_STATS_DEF: WrapperDef = {
  * @param params.game_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebClubStats({ team: '…' });
+ * @example await sdv.nhl.nhlClubStats({ team: '…' });
  */
-export const nhlApiWebClubStats: WrapperFn = (params = {}) => callFlat(CLUB_STATS_DEF, params);
-/** snake_case alias of {@link nhlApiWebClubStats} (py/R parity). */
-export const nhl_api_web_club_stats = nhlApiWebClubStats;
+export const nhlClubStats: WrapperFn = (params = {}) => callFlat(CLUB_STATS_DEF, params);
+/** snake_case alias of {@link nhlClubStats} (py/R parity). */
+export const nhl_club_stats = nhlClubStats;
 
 const CLUB_STATS_SEASON_DEF: WrapperDef = {
   "short": "club_stats_season",
+  "publicName": "nhl_club_stats_season",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -216,14 +222,15 @@ const CLUB_STATS_SEASON_DEF: WrapperDef = {
  * @param params.team - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebClubStatsSeason({ team: '…' });
+ * @example await sdv.nhl.nhlClubStatsSeason({ team: '…' });
  */
-export const nhlApiWebClubStatsSeason: WrapperFn = (params = {}) => callFlat(CLUB_STATS_SEASON_DEF, params);
-/** snake_case alias of {@link nhlApiWebClubStatsSeason} (py/R parity). */
-export const nhl_api_web_club_stats_season = nhlApiWebClubStatsSeason;
+export const nhlClubStatsSeason: WrapperFn = (params = {}) => callFlat(CLUB_STATS_SEASON_DEF, params);
+/** snake_case alias of {@link nhlClubStatsSeason} (py/R parity). */
+export const nhl_club_stats_season = nhlClubStatsSeason;
 
 const DRAFT_PICKS_DEF: WrapperDef = {
   "short": "draft_picks",
+  "publicName": "nhl_draft_picks",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -253,14 +260,15 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  * @param params.round_ - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebDraftPicks({ year: '…' });
+ * @example await sdv.nhl.nhlDraftPicks({ year: '…' });
  */
-export const nhlApiWebDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_DEF, params);
-/** snake_case alias of {@link nhlApiWebDraftPicks} (py/R parity). */
-export const nhl_api_web_draft_picks = nhlApiWebDraftPicks;
+export const nhlDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_DEF, params);
+/** snake_case alias of {@link nhlDraftPicks} (py/R parity). */
+export const nhl_draft_picks = nhlDraftPicks;
 
 const DRAFT_PICKS_NOW_DEF: WrapperDef = {
   "short": "draft_picks_now",
+  "publicName": "nhl_draft_picks_now",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -279,14 +287,15 @@ const DRAFT_PICKS_NOW_DEF: WrapperDef = {
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebDraftPicksNow({});
+ * @example await sdv.nhl.nhlDraftPicksNow({});
  */
-export const nhlApiWebDraftPicksNow: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_NOW_DEF, params);
-/** snake_case alias of {@link nhlApiWebDraftPicksNow} (py/R parity). */
-export const nhl_api_web_draft_picks_now = nhlApiWebDraftPicksNow;
+export const nhlDraftPicksNow: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_NOW_DEF, params);
+/** snake_case alias of {@link nhlDraftPicksNow} (py/R parity). */
+export const nhl_draft_picks_now = nhlDraftPicksNow;
 
 const DRAFT_RANKINGS_DEF: WrapperDef = {
   "short": "draft_rankings",
+  "publicName": "nhl_draft_rankings",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -316,14 +325,15 @@ const DRAFT_RANKINGS_DEF: WrapperDef = {
  * @param params.category - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebDraftRankings({ year: '…' });
+ * @example await sdv.nhl.nhlDraftRankings({ year: '…' });
  */
-export const nhlApiWebDraftRankings: WrapperFn = (params = {}) => callFlat(DRAFT_RANKINGS_DEF, params);
-/** snake_case alias of {@link nhlApiWebDraftRankings} (py/R parity). */
-export const nhl_api_web_draft_rankings = nhlApiWebDraftRankings;
+export const nhlDraftRankings: WrapperFn = (params = {}) => callFlat(DRAFT_RANKINGS_DEF, params);
+/** snake_case alias of {@link nhlDraftRankings} (py/R parity). */
+export const nhl_draft_rankings = nhlDraftRankings;
 
 const DRAFT_RANKINGS_NOW_DEF: WrapperDef = {
   "short": "draft_rankings_now",
+  "publicName": "nhl_draft_rankings_now",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -342,14 +352,15 @@ const DRAFT_RANKINGS_NOW_DEF: WrapperDef = {
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebDraftRankingsNow({});
+ * @example await sdv.nhl.nhlDraftRankingsNow({});
  */
-export const nhlApiWebDraftRankingsNow: WrapperFn = (params = {}) => callFlat(DRAFT_RANKINGS_NOW_DEF, params);
-/** snake_case alias of {@link nhlApiWebDraftRankingsNow} (py/R parity). */
-export const nhl_api_web_draft_rankings_now = nhlApiWebDraftRankingsNow;
+export const nhlDraftRankingsNow: WrapperFn = (params = {}) => callFlat(DRAFT_RANKINGS_NOW_DEF, params);
+/** snake_case alias of {@link nhlDraftRankingsNow} (py/R parity). */
+export const nhl_draft_rankings_now = nhlDraftRankingsNow;
 
 const DRAFT_TRACKER_PICKS_NOW_DEF: WrapperDef = {
   "short": "draft_tracker_picks_now",
+  "publicName": "nhl_draft_tracker_picks_now",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -368,14 +379,15 @@ const DRAFT_TRACKER_PICKS_NOW_DEF: WrapperDef = {
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebDraftTrackerPicksNow({});
+ * @example await sdv.nhl.nhlDraftTrackerPicksNow({});
  */
-export const nhlApiWebDraftTrackerPicksNow: WrapperFn = (params = {}) => callFlat(DRAFT_TRACKER_PICKS_NOW_DEF, params);
-/** snake_case alias of {@link nhlApiWebDraftTrackerPicksNow} (py/R parity). */
-export const nhl_api_web_draft_tracker_picks_now = nhlApiWebDraftTrackerPicksNow;
+export const nhlDraftTrackerPicksNow: WrapperFn = (params = {}) => callFlat(DRAFT_TRACKER_PICKS_NOW_DEF, params);
+/** snake_case alias of {@link nhlDraftTrackerPicksNow} (py/R parity). */
+export const nhl_draft_tracker_picks_now = nhlDraftTrackerPicksNow;
 
 const GOALIE_LEADERS_DEF: WrapperDef = {
   "short": "goalie_leaders",
+  "publicName": "nhl_goalie_leaders",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -407,14 +419,15 @@ const GOALIE_LEADERS_DEF: WrapperDef = {
  * @param params.game_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebGoalieLeaders({});
+ * @example await sdv.nhl.nhlGoalieLeaders({});
  */
-export const nhlApiWebGoalieLeaders: WrapperFn = (params = {}) => callFlat(GOALIE_LEADERS_DEF, params);
-/** snake_case alias of {@link nhlApiWebGoalieLeaders} (py/R parity). */
-export const nhl_api_web_goalie_leaders = nhlApiWebGoalieLeaders;
+export const nhlGoalieLeaders: WrapperFn = (params = {}) => callFlat(GOALIE_LEADERS_DEF, params);
+/** snake_case alias of {@link nhlGoalieLeaders} (py/R parity). */
+export const nhl_goalie_leaders = nhlGoalieLeaders;
 
 const LANDING_DEF: WrapperDef = {
   "short": "landing",
+  "publicName": "nhl_landing",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -438,14 +451,15 @@ const LANDING_DEF: WrapperDef = {
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebLanding({ game_id: '…' });
+ * @example await sdv.nhl.nhlLanding({ game_id: '…' });
  */
-export const nhlApiWebLanding: WrapperFn = (params = {}) => callFlat(LANDING_DEF, params);
-/** snake_case alias of {@link nhlApiWebLanding} (py/R parity). */
-export const nhl_api_web_landing = nhlApiWebLanding;
+export const nhlLanding: WrapperFn = (params = {}) => callFlat(LANDING_DEF, params);
+/** snake_case alias of {@link nhlLanding} (py/R parity). */
+export const nhl_landing = nhlLanding;
 
 const PBP_DEF: WrapperDef = {
   "short": "pbp",
+  "publicName": "nhl_web_pbp",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -469,14 +483,15 @@ const PBP_DEF: WrapperDef = {
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebPbp({ game_id: '…' });
+ * @example await sdv.nhl.nhlWebPbp({ game_id: '…' });
  */
-export const nhlApiWebPbp: WrapperFn = (params = {}) => callFlat(PBP_DEF, params);
-/** snake_case alias of {@link nhlApiWebPbp} (py/R parity). */
-export const nhl_api_web_pbp = nhlApiWebPbp;
+export const nhlWebPbp: WrapperFn = (params = {}) => callFlat(PBP_DEF, params);
+/** snake_case alias of {@link nhlWebPbp} (py/R parity). */
+export const nhl_web_pbp = nhlWebPbp;
 
 const PLAYER_GAME_LOG_DEF: WrapperDef = {
   "short": "player_game_log",
+  "publicName": "nhl_player_game_log",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -512,14 +527,15 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  * @param params.game_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebPlayerGameLog({ player_id: '…' });
+ * @example await sdv.nhl.nhlPlayerGameLog({ player_id: '…' });
  */
-export const nhlApiWebPlayerGameLog: WrapperFn = (params = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
-/** snake_case alias of {@link nhlApiWebPlayerGameLog} (py/R parity). */
-export const nhl_api_web_player_game_log = nhlApiWebPlayerGameLog;
+export const nhlPlayerGameLog: WrapperFn = (params = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
+/** snake_case alias of {@link nhlPlayerGameLog} (py/R parity). */
+export const nhl_player_game_log = nhlPlayerGameLog;
 
 const PLAYER_LANDING_DEF: WrapperDef = {
   "short": "player_landing",
+  "publicName": "nhl_player_landing",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -543,14 +559,15 @@ const PLAYER_LANDING_DEF: WrapperDef = {
  * @param params.player_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebPlayerLanding({ player_id: '…' });
+ * @example await sdv.nhl.nhlPlayerLanding({ player_id: '…' });
  */
-export const nhlApiWebPlayerLanding: WrapperFn = (params = {}) => callFlat(PLAYER_LANDING_DEF, params);
-/** snake_case alias of {@link nhlApiWebPlayerLanding} (py/R parity). */
-export const nhl_api_web_player_landing = nhlApiWebPlayerLanding;
+export const nhlPlayerLanding: WrapperFn = (params = {}) => callFlat(PLAYER_LANDING_DEF, params);
+/** snake_case alias of {@link nhlPlayerLanding} (py/R parity). */
+export const nhl_player_landing = nhlPlayerLanding;
 
 const PLAYER_SPOTLIGHT_DEF: WrapperDef = {
   "short": "player_spotlight",
+  "publicName": "nhl_player_spotlight",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -569,14 +586,15 @@ const PLAYER_SPOTLIGHT_DEF: WrapperDef = {
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebPlayerSpotlight({});
+ * @example await sdv.nhl.nhlPlayerSpotlight({});
  */
-export const nhlApiWebPlayerSpotlight: WrapperFn = (params = {}) => callFlat(PLAYER_SPOTLIGHT_DEF, params);
-/** snake_case alias of {@link nhlApiWebPlayerSpotlight} (py/R parity). */
-export const nhl_api_web_player_spotlight = nhlApiWebPlayerSpotlight;
+export const nhlPlayerSpotlight: WrapperFn = (params = {}) => callFlat(PLAYER_SPOTLIGHT_DEF, params);
+/** snake_case alias of {@link nhlPlayerSpotlight} (py/R parity). */
+export const nhl_player_spotlight = nhlPlayerSpotlight;
 
 const PLAYOFF_SERIES_DEF: WrapperDef = {
   "short": "playoff_series",
+  "publicName": "nhl_playoff_series",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -605,14 +623,15 @@ const PLAYOFF_SERIES_DEF: WrapperDef = {
  * @param params.series_letter - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebPlayoffSeries({ season: '…', series_letter: '…' });
+ * @example await sdv.nhl.nhlPlayoffSeries({ season: '…', series_letter: '…' });
  */
-export const nhlApiWebPlayoffSeries: WrapperFn = (params = {}) => callFlat(PLAYOFF_SERIES_DEF, params);
-/** snake_case alias of {@link nhlApiWebPlayoffSeries} (py/R parity). */
-export const nhl_api_web_playoff_series = nhlApiWebPlayoffSeries;
+export const nhlPlayoffSeries: WrapperFn = (params = {}) => callFlat(PLAYOFF_SERIES_DEF, params);
+/** snake_case alias of {@link nhlPlayoffSeries} (py/R parity). */
+export const nhl_playoff_series = nhlPlayoffSeries;
 
 const RIGHT_RAIL_DEF: WrapperDef = {
   "short": "right_rail",
+  "publicName": "nhl_right_rail",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -636,14 +655,15 @@ const RIGHT_RAIL_DEF: WrapperDef = {
  * @param params.game_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebRightRail({ game_id: '…' });
+ * @example await sdv.nhl.nhlRightRail({ game_id: '…' });
  */
-export const nhlApiWebRightRail: WrapperFn = (params = {}) => callFlat(RIGHT_RAIL_DEF, params);
-/** snake_case alias of {@link nhlApiWebRightRail} (py/R parity). */
-export const nhl_api_web_right_rail = nhlApiWebRightRail;
+export const nhlRightRail: WrapperFn = (params = {}) => callFlat(RIGHT_RAIL_DEF, params);
+/** snake_case alias of {@link nhlRightRail} (py/R parity). */
+export const nhl_right_rail = nhlRightRail;
 
 const ROSTER_DEF: WrapperDef = {
   "short": "roster",
+  "publicName": "nhl_roster",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -673,14 +693,15 @@ const ROSTER_DEF: WrapperDef = {
  * @param params.season - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebRoster({ team: '…' });
+ * @example await sdv.nhl.nhlRoster({ team: '…' });
  */
-export const nhlApiWebRoster: WrapperFn = (params = {}) => callFlat(ROSTER_DEF, params);
-/** snake_case alias of {@link nhlApiWebRoster} (py/R parity). */
-export const nhl_api_web_roster = nhlApiWebRoster;
+export const nhlRoster: WrapperFn = (params = {}) => callFlat(ROSTER_DEF, params);
+/** snake_case alias of {@link nhlRoster} (py/R parity). */
+export const nhl_roster = nhlRoster;
 
 const ROSTER_SEASON_DEF: WrapperDef = {
   "short": "roster_season",
+  "publicName": "nhl_roster_season",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -704,14 +725,15 @@ const ROSTER_SEASON_DEF: WrapperDef = {
  * @param params.team - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebRosterSeason({ team: '…' });
+ * @example await sdv.nhl.nhlRosterSeason({ team: '…' });
  */
-export const nhlApiWebRosterSeason: WrapperFn = (params = {}) => callFlat(ROSTER_SEASON_DEF, params);
-/** snake_case alias of {@link nhlApiWebRosterSeason} (py/R parity). */
-export const nhl_api_web_roster_season = nhlApiWebRosterSeason;
+export const nhlRosterSeason: WrapperFn = (params = {}) => callFlat(ROSTER_SEASON_DEF, params);
+/** snake_case alias of {@link nhlRosterSeason} (py/R parity). */
+export const nhl_roster_season = nhlRosterSeason;
 
 const SCHEDULE_DEF: WrapperDef = {
   "short": "schedule",
+  "publicName": "nhl_web_schedule",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -736,14 +758,15 @@ const SCHEDULE_DEF: WrapperDef = {
  * @param params.date - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebSchedule({});
+ * @example await sdv.nhl.nhlWebSchedule({});
  */
-export const nhlApiWebSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
-/** snake_case alias of {@link nhlApiWebSchedule} (py/R parity). */
-export const nhl_api_web_schedule = nhlApiWebSchedule;
+export const nhlWebSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
+/** snake_case alias of {@link nhlWebSchedule} (py/R parity). */
+export const nhl_web_schedule = nhlWebSchedule;
 
 const SCHEDULE_CALENDAR_DEF: WrapperDef = {
   "short": "schedule_calendar",
+  "publicName": "nhl_schedule_calendar",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -768,14 +791,15 @@ const SCHEDULE_CALENDAR_DEF: WrapperDef = {
  * @param params.date - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebScheduleCalendar({});
+ * @example await sdv.nhl.nhlScheduleCalendar({});
  */
-export const nhlApiWebScheduleCalendar: WrapperFn = (params = {}) => callFlat(SCHEDULE_CALENDAR_DEF, params);
-/** snake_case alias of {@link nhlApiWebScheduleCalendar} (py/R parity). */
-export const nhl_api_web_schedule_calendar = nhlApiWebScheduleCalendar;
+export const nhlScheduleCalendar: WrapperFn = (params = {}) => callFlat(SCHEDULE_CALENDAR_DEF, params);
+/** snake_case alias of {@link nhlScheduleCalendar} (py/R parity). */
+export const nhl_schedule_calendar = nhlScheduleCalendar;
 
 const SCORE_DEF: WrapperDef = {
   "short": "score",
+  "publicName": "nhl_score",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -800,14 +824,15 @@ const SCORE_DEF: WrapperDef = {
  * @param params.date - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebScore({});
+ * @example await sdv.nhl.nhlScore({});
  */
-export const nhlApiWebScore: WrapperFn = (params = {}) => callFlat(SCORE_DEF, params);
-/** snake_case alias of {@link nhlApiWebScore} (py/R parity). */
-export const nhl_api_web_score = nhlApiWebScore;
+export const nhlScore: WrapperFn = (params = {}) => callFlat(SCORE_DEF, params);
+/** snake_case alias of {@link nhlScore} (py/R parity). */
+export const nhl_score = nhlScore;
 
 const SKATER_LEADERS_DEF: WrapperDef = {
   "short": "skater_leaders",
+  "publicName": "nhl_skater_leaders",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -839,14 +864,15 @@ const SKATER_LEADERS_DEF: WrapperDef = {
  * @param params.game_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebSkaterLeaders({});
+ * @example await sdv.nhl.nhlSkaterLeaders({});
  */
-export const nhlApiWebSkaterLeaders: WrapperFn = (params = {}) => callFlat(SKATER_LEADERS_DEF, params);
-/** snake_case alias of {@link nhlApiWebSkaterLeaders} (py/R parity). */
-export const nhl_api_web_skater_leaders = nhlApiWebSkaterLeaders;
+export const nhlSkaterLeaders: WrapperFn = (params = {}) => callFlat(SKATER_LEADERS_DEF, params);
+/** snake_case alias of {@link nhlSkaterLeaders} (py/R parity). */
+export const nhl_skater_leaders = nhlSkaterLeaders;
 
 const STANDINGS_DEF: WrapperDef = {
   "short": "standings",
+  "publicName": "nhl_standings",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -871,14 +897,15 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.date - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebStandings({});
+ * @example await sdv.nhl.nhlStandings({});
  */
-export const nhlApiWebStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
-/** snake_case alias of {@link nhlApiWebStandings} (py/R parity). */
-export const nhl_api_web_standings = nhlApiWebStandings;
+export const nhlStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
+/** snake_case alias of {@link nhlStandings} (py/R parity). */
+export const nhl_standings = nhlStandings;
 
 const STANDINGS_SEASON_DEF: WrapperDef = {
   "short": "standings_season",
+  "publicName": "nhl_standings_season",
   "flat": true,
   "api": "nhl_api_web",
   "host": "https://api-web.nhle.com",
@@ -897,8 +924,8 @@ const STANDINGS_SEASON_DEF: WrapperDef = {
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nhl.nhlApiWebStandingsSeason({});
+ * @example await sdv.nhl.nhlStandingsSeason({});
  */
-export const nhlApiWebStandingsSeason: WrapperFn = (params = {}) => callFlat(STANDINGS_SEASON_DEF, params);
-/** snake_case alias of {@link nhlApiWebStandingsSeason} (py/R parity). */
-export const nhl_api_web_standings_season = nhlApiWebStandingsSeason;
+export const nhlStandingsSeason: WrapperFn = (params = {}) => callFlat(STANDINGS_SEASON_DEF, params);
+/** snake_case alias of {@link nhlStandingsSeason} (py/R parity). */
+export const nhl_standings_season = nhlStandingsSeason;
