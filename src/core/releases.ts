@@ -64,6 +64,12 @@ export interface ReleaseLoaderDef {
   minSeason?: number;
   /** Id columns pinned to integers at the boundary (sdv-py `id_int64`). */
   idInt64?: string[];
+  /**
+   * releases.yaml `on_missing: raise` (sdv-py's hand-written nfl loaders): a
+   * requested season with no published asset throws {@link NoDataError} instead
+   * of being skipped. Absent = skip (the generated-loader default).
+   */
+  onMissing?: "raise";
 }
 
 /** A row of a loaded dataset (column name -> value). */
@@ -614,6 +620,10 @@ async function load(
     const url = season === undefined ? def.url : releaseUrl(def.url, season);
     let asset = await fetchAsset(def, url, opts);
     if (!asset) {
+      if (def.onMissing === "raise") {
+        const what = season === undefined ? "no published asset" : `no published asset for season ${season}`;
+        throw new NoDataError(`${def.fn}: ${what} (${url})`, { url, status: 404 });
+      }
       if (season !== undefined) missing.push(season);
       continue;
     }
@@ -648,7 +658,8 @@ async function load(
 
 /**
  * A per-season loader: every season is fetched in turn, a season with no
- * published asset (HTTP 404) is skipped with one warning, any other failure
+ * published asset (HTTP 404) is skipped with one warning (or, with
+ * `onMissing: "raise"`, throws {@link NoDataError}), any other failure
  * raises `AssetFetchError`, and the seasons are concatenated (columns unioned,
  * gaps null-filled, drifted types cast to their supertype). Seasons below
  * `minSeason` raise {@link SeasonNotFoundError} before anything is fetched.
