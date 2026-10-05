@@ -48,6 +48,8 @@ const CLUB_SCHEDULE_MONTH_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/club-schedule/{team}/month/{month}",
+  "nowVariant": "/v1/club-schedule/{team}/month/now",
+  "nowToggle": "month",
   "pathParams": [
     {
       "name": "team"
@@ -85,6 +87,8 @@ const CLUB_SCHEDULE_SEASON_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/club-schedule-season/{team}/{season}",
+  "nowVariant": "/v1/club-schedule-season/{team}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team"
@@ -123,6 +127,8 @@ const CLUB_SCHEDULE_WEEK_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/club-schedule/{team}/week/{date}",
+  "nowVariant": "/v1/club-schedule/{team}/week/now",
+  "nowToggle": "date",
   "pathParams": [
     {
       "name": "team"
@@ -160,6 +166,8 @@ const CLUB_STATS_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/club-stats/{team}/{season}/{game_type}",
+  "nowVariant": "/v1/club-stats/{team}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team"
@@ -393,6 +401,8 @@ const GOALIE_LEADERS_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/goalie-stats-leaders/{season}/{game_type}",
+  "nowVariant": "/v1/goalie-stats-leaders/current",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "season",
@@ -497,6 +507,8 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/player/{player_id}/game-log/{season}/{game_type}",
+  "nowVariant": "/v1/player/{player_id}/game-log/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -669,6 +681,8 @@ const ROSTER_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/roster/{team}/{season}",
+  "nowVariant": "/v1/roster/{team}/current",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team"
@@ -739,6 +753,8 @@ const SCHEDULE_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/schedule/{date}",
+  "nowVariant": "/v1/schedule/now",
+  "nowToggle": "date",
   "pathParams": [
     {
       "name": "date",
@@ -772,6 +788,8 @@ const SCHEDULE_CALENDAR_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/schedule-calendar/{date}",
+  "nowVariant": "/v1/schedule-calendar/now",
+  "nowToggle": "date",
   "pathParams": [
     {
       "name": "date",
@@ -805,6 +823,8 @@ const SCORE_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/score/{date}",
+  "nowVariant": "/v1/score/now",
+  "nowToggle": "date",
   "pathParams": [
     {
       "name": "date",
@@ -838,6 +858,8 @@ const SKATER_LEADERS_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/skater-stats-leaders/{season}/{game_type}",
+  "nowVariant": "/v1/skater-stats-leaders/current",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "season",
@@ -878,6 +900,8 @@ const STANDINGS_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/standings/{date}",
+  "nowVariant": "/v1/standings/now",
+  "nowToggle": "date",
   "pathParams": [
     {
       "name": "date",

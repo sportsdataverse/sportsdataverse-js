@@ -2,6 +2,10 @@
 
 ## **Unreleased**
 
+### Fixed
+
+- NHL api-web / EDGE / records wrappers now honor sdv-py's `now_variant`: omitting the toggle arg (`season`, `date`, ...) requests the `/now` path instead of a malformed dated URL (`now_variant`/`now_toggle` carried through codegen, `resolveFlat`, and the playground resolver).
+
 
 ### Security
 
