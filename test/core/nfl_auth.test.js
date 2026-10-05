@@ -1,5 +1,6 @@
 import should from 'should';
 import axios from 'axios';
+import { inspect } from 'node:util';
 import {
   nflTokenGen,
   nflHeadersGen,
@@ -186,8 +187,16 @@ describe('core/nfl_auth: the mint retries transient failures itself', () => {
   });
 
   it('a persistent network error gives up after the nfl_api retry budget (and honours configure)', async () => {
-    let t = minter(new Error('ECONNRESET'));
-    (await nflTokenGen({ transport: t }).then(() => null, (e) => e)).message.should.equal('ECONNRESET');
+    // a user transport's raw error, echoing a synthetic secret: wrapped, never thrown as-is
+    const raw = Object.assign(new Error('ECONNRESET (clientSecret=SyntheticSecret987)'), { code: 'ECONNRESET', config: { data: 'x' } });
+    let t = minter(raw);
+    const err = await nflTokenGen({ transport: t }).then(() => null, (e) => e);
+    err.should.be.instanceOf(AssetFetchError);
+    err.message.should.match(/identity\/v3\/token request failed after 4 attempt/);
+    err.cause.should.not.equal(raw);
+    err.cause.code.should.equal('ECONNRESET');
+    should(err.cause.config).be.undefined();
+    inspect(err, { depth: Infinity, showHidden: true }).should.not.containEql('SyntheticSecret987');
     t.calls.length.should.equal(4); // 1 + default 3 retries
     configure({ retries: 0 });
     t = minter(new Error('ECONNRESET'));

@@ -126,7 +126,11 @@ async function mintToken(key: string, secret: string, transport: Transport): Pro
         timeoutMs, // configure({ timeoutMs }) > family default > 30 s
       });
     } catch (err) {
-      if (err instanceof SdvError || attempt >= retries) throw err;
+      if (err instanceof SdvError) throw err;
+      if (attempt >= retries) {
+        // a user transport's raw error never escapes: its cause goes through safeCause
+        throw new AssetFetchError(`nfl_auth: ${url} request failed after ${attempt + 1} attempt(s)`, { url, cause: err });
+      }
       await _timer.sleep(retryDelayMs(attempt));
       continue;
     }
