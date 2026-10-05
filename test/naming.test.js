@@ -96,6 +96,14 @@ describe('v4 naming: deprecated aliases', () => {
     }
   });
 
+  it('a legacyShort is never a current short of its family, nor shared by two defs (it would resolve wrongly)', () => {
+    const current = new Set(FLAT_WRAPPERS.map((w) => `${w.api}:${w.short}`));
+    const legacy = FLAT_WRAPPERS.filter((w) => w.legacyShort).map((w) => `${w.api}:${w.legacyShort}`);
+    legacy.length.should.be.above(0);
+    legacy.filter((k) => current.has(k)).should.eql([]);
+    legacy.filter((k, i) => legacy.indexOf(k) !== i).should.eql([]);
+  });
+
   it('CBS defs carry their pre-v4 short as legacyShort, matching the aliases', () => {
     const legacy = FLAT_WRAPPERS.filter((w) => w.legacyShort);
     legacy.length.should.equal(16);
