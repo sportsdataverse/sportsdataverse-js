@@ -2252,9 +2252,7 @@
     "on3": "on3",
     "asa": "asa",
     "mls_api": "mls",
-    "nwsl_api": "nwsl",
-    "nba_stats": "nba",
-    "wnba_stats": "wnba"
+    "nwsl_api": "nwsl"
   },
   "flatApis": [
     {
@@ -9001,7 +8999,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/coaches"
+      "returnsSchema": "native/recruiting/coaches",
+      "deprecated": "use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "rankings_transfer_portal_player_feed",
@@ -9026,7 +9025,8 @@
         }
       ],
       "parser": "parse_recruiting_ranking_feed",
-      "returnsSchema": "native/recruiting/ranking_feed"
+      "returnsSchema": "native/recruiting/ranking_feed",
+      "deprecated": "use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "rankings_composite_team_feed",
@@ -9051,7 +9051,8 @@
         }
       ],
       "parser": "parse_recruiting_ranking_feed",
-      "returnsSchema": "native/recruiting/ranking_feed"
+      "returnsSchema": "native/recruiting/ranking_feed",
+      "deprecated": "use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "rankings_transfer_portal_team_feed",
@@ -9076,7 +9077,8 @@
         }
       ],
       "parser": "parse_recruiting_ranking_feed",
-      "returnsSchema": "native/recruiting/ranking_feed"
+      "returnsSchema": "native/recruiting/ranking_feed",
+      "deprecated": "use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "institution_groups",
@@ -9088,7 +9090,8 @@
       "pathParams": [],
       "queryParams": [],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/institution_groups"
+      "returnsSchema": "native/recruiting/institution_groups",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "institution_rankings",
@@ -9139,7 +9142,8 @@
         }
       ],
       "parser": "parse_recruiting_institution_rankings",
-      "returnsSchema": "native/recruiting/institution_rankings"
+      "returnsSchema": "native/recruiting/institution_rankings",
+      "deprecated": "use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "current_target_predictions",
@@ -9172,7 +9176,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/current_target_predictions"
+      "returnsSchema": "native/recruiting/current_target_predictions",
+      "deprecated": "use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "player_sport_rankings",
@@ -9221,7 +9226,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/player_sport_rankings"
+      "returnsSchema": "native/recruiting/player_sport_rankings",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "transfer_player_sport_rankings",
@@ -9270,7 +9276,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/transfer_player_sport_rankings"
+      "returnsSchema": "native/recruiting/transfer_player_sport_rankings",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "unranked_recruits",
@@ -9323,7 +9330,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/unranked_recruits"
+      "returnsSchema": "native/recruiting/unranked_recruits",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "players_under_special_evaluation",
@@ -9339,7 +9347,8 @@
       ],
       "queryParams": [],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/players_under_special_evaluation"
+      "returnsSchema": "native/recruiting/players_under_special_evaluation",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "biggest_movers",
@@ -9361,7 +9370,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/biggest_movers"
+      "returnsSchema": "native/recruiting/biggest_movers",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "positions",
@@ -9386,7 +9396,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/positions"
+      "returnsSchema": "native/recruiting/positions",
+      "deprecated": "use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "rankings",
@@ -9415,7 +9426,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/rankings"
+      "returnsSchema": "native/recruiting/rankings",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "archived_player_rankings",
@@ -9442,7 +9454,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/archived_player_rankings"
+      "returnsSchema": "native/recruiting/archived_player_rankings",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "year",
@@ -9459,7 +9472,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/year"
+      "returnsSchema": "native/recruiting/year",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "recruits",
@@ -9494,7 +9508,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/recruits"
+      "returnsSchema": "native/recruiting/recruits",
+      "deprecated": "use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "sports",
@@ -9511,7 +9526,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/sports"
+      "returnsSchema": "native/recruiting/sports",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "sport_years",
@@ -9527,7 +9543,8 @@
       ],
       "queryParams": [],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/sport_years"
+      "returnsSchema": "native/recruiting/sport_years",
+      "deprecated": "use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "tags_autocomplete",
@@ -9549,7 +9566,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/tags_autocomplete"
+      "returnsSchema": "native/recruiting/tags_autocomplete",
+      "deprecated": "use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "tags_photos_by_key",
@@ -9576,7 +9594,8 @@
         }
       ],
       "parser": "parse_recruiting_paged_list",
-      "returnsSchema": "native/recruiting/tags_photos"
+      "returnsSchema": "native/recruiting/tags_photos",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "tags_photos_by_type",
@@ -9606,7 +9625,8 @@
         }
       ],
       "parser": "parse_recruiting_paged_list",
-      "returnsSchema": "native/recruiting/tags_photos"
+      "returnsSchema": "native/recruiting/tags_photos",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "teams",
@@ -9631,7 +9651,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/teams"
+      "returnsSchema": "native/recruiting/teams",
+      "deprecated": "use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "transfers",
@@ -9684,7 +9705,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/transfers"
+      "returnsSchema": "native/recruiting/transfers",
+      "deprecated": "use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500)."
     },
     {
       "short": "unranked_transfers",
@@ -9718,7 +9740,8 @@
         }
       ],
       "parser": "parse_recruiting_list",
-      "returnsSchema": "native/recruiting/unranked_transfers"
+      "returnsSchema": "native/recruiting/unranked_transfers",
+      "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
     },
     {
       "short": "bulk",

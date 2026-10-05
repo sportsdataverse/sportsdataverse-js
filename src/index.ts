@@ -61,10 +61,15 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace (NOT a league), so `prefix` here is its own name: the merge below
   // creates `sdv.odds.*` from scratch (no legacy/ESPN service to merge onto).
   odds_api: 'odds',
-  // 247Sports Recruit Database — second standalone (non-league) provider family.
-  // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
-  // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  // 247Sports Recruit Database on api.247sports.com — DEPRECATED (the host
+  // answers HTTP 500; every method warns once). Kept for back-compat.
   recruiting: 'recruiting',
+  // 247Sports, the supported surface: the RDB on ipa.247sports.com (guest JWT
+  // minted automatically) + the 247sports.com `*.json` page models, both on
+  // `sdv.sports247` (browser-impersonating transport — needs `impit`).
+  // Supersedes `recruiting` and the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  sports247: 'sports247',
+  sports247_site_pages: 'sports247',
   // CBS Sports API — third standalone (non-league) provider family. `cbs` is a
   // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
   // the API data resources are anonymously reachable).
@@ -157,6 +162,7 @@ export {
   NFL_API_HOST,
 } from './core/nfl_auth.js';
 export type { NflTokenOptions } from './core/nfl_auth.js';
+export { sports247ClearTokenCache } from './core/sports247_runtime.js';
 // Runtime core: error vocabulary, configuration, transports, auth providers.
 export {
   SdvError,
@@ -179,6 +185,11 @@ export { axiosTransport, createImpersonatingTransport } from './core/transport.j
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
 export type { AuthProvider, AuthContext } from './core/auth.js';
+export {
+  listFunctions, functionCount, findTeam, findAthlete, findEvent, clearTeamCache,
+  list_functions, function_count, find_team, find_athlete, find_event, clear_team_cache,
+} from './discover.js';
+export type { ListFunctionsOptions, Namespaces } from './discover.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
 export type { ParserFn } from './parsers/_registry.js';

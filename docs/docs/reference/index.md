@@ -55,6 +55,7 @@ Native providers that aren't a single ESPN league — each gets its own `sdv.<na
 |---|---|---|---:|
 | [odds](./odds) | *cross-sport* | The Odds API | 10 |
 | [recruiting](./recruiting) | *cross-sport* | 247Sports | 25 |
+| [sports247](./sports247) | *cross-sport* | 247Sports RDB, 247Sports site pages | 47 |
 | [cbs](./cbs) | *cross-sport* | CBS Sports | 82 |
 | [fox](./fox) | *cross-sport* | Fox Sports | 38 |
 | [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (scores), Yahoo Sports | 109 |
