@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { espnMbbCdnSchedule } from '../generated/espn/mbb.js';
+import { espnMbbCdnBoxscore, espnMbbCdnPlaybyplay, espnMbbCdnSchedule } from '../generated/espn/mbb.js';
 import { cdnDate } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
@@ -25,17 +25,8 @@ export default {
      * const result = await sdv.mbb.getPlayByPlay(401260281);
      */
     getPlayByPlay: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/playbyplay';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: 'false',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_mbb_cdn_playbyplay (https; core request layer + error vocabulary)
+        const res = { data: await espnMbbCdnPlaybyplay({ game_id: id }) };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -57,18 +48,8 @@ export default {
      * const result = await sdv.mbb.getBoxScore(401260281);
      */
     getBoxScore: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/mens-college-basketball/boxscore';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_mbb_cdn_boxscore (https; core request layer + error vocabulary)
+        const res = { data: await espnMbbCdnBoxscore({ game_id: id }) };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;

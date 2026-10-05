@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { espnWbbCdnSchedule } from '../generated/espn/wbb.js';
+import { espnWbbCdnBoxscore, espnWbbCdnPlaybyplay, espnWbbCdnSchedule } from '../generated/espn/wbb.js';
 import { cdnDate } from './_cdn.js';
 /**
  * Operations for WBB.
@@ -24,17 +24,8 @@ export default {
      * const result = await sdv.wbb.getPlayByPlay(401260565);
      */
     getPlayByPlay: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/playbyplay';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: 'false',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_wbb_cdn_playbyplay (https; core request layer + error vocabulary)
+        const res = { data: await espnWbbCdnPlaybyplay({ game_id: id }) };
 
         return {
             id: res.data.gamepackageJSON.header.id,
@@ -56,18 +47,8 @@ export default {
      * const result = await sdv.wbb.getBoxScore(401260565);
      */
     getBoxScore: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/womens-college-basketball/boxscore';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_wbb_cdn_boxscore (https; core request layer + error vocabulary)
+        const res = { data: await espnWbbCdnBoxscore({ game_id: id }) };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;

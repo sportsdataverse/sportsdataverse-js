@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { espnCfbCdnSchedule } from '../generated/espn/cfb.js';
+import { espnCfbCdnBoxscore, espnCfbCdnPlaybyplay, espnCfbCdnRankings, espnCfbCdnSchedule } from '../generated/espn/cfb.js';
 import { cdnDate, warnFootballDate } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
@@ -25,17 +25,8 @@ export default {
      * const result = await sdv.cfb.getPlayByPlay(401256194);
      */
     getPlayByPlay: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/college-football/playbyplay';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: 'false',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_cfb_cdn_playbyplay (https; core request layer + error vocabulary)
+        const res = { data: await espnCfbCdnPlaybyplay({ game_id: id }) };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -60,18 +51,8 @@ export default {
      * const result = await sdv.cfb.getBoxScore(401256194);
      */
     getBoxScore: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/college-football/boxscore';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_cfb_cdn_boxscore (https; core request layer + error vocabulary)
+        const res = { data: await espnCfbCdnBoxscore({ game_id: id }) };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
@@ -347,20 +328,8 @@ export default {
      * const result = await sdv.cfb.getRankings(year = 2020, week = 4)
      */
     getRankings: async function ({ year, week }) {
-        const baseUrl = 'http://cdn.espn.com/core/college-football/rankings';
-        const params: Record<string, any> = {};
-
-        if (year) {
-            params.year = year;
-        }
-
-        if (week) {
-            params.week = week;
-        }
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_cfb_cdn_rankings (https; core request layer + error vocabulary)
+        const res = { data: await espnCfbCdnRankings({ season: year || undefined, week: week || undefined }) };
         return res.data;
     },
     /**

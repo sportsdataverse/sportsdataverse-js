@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { espnWnbaCdnSchedule } from '../generated/espn/wnba.js';
+import { espnWnbaCdnBoxscore, espnWnbaCdnPlaybyplay, espnWnbaCdnSchedule } from '../generated/espn/wnba.js';
 import { cdnDate } from './_cdn.js';
 /**
  * Operations for WNBA.
@@ -24,17 +24,8 @@ export default {
      * const result = await sdv.wnba.getPlayByPlay(401244185);
      */
     getPlayByPlay: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/wnba/playbyplay';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: 'false',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_wnba_cdn_playbyplay (https; core request layer + error vocabulary)
+        const res = { data: await espnWnbaCdnPlaybyplay({ game_id: id }) };
 
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
@@ -58,18 +49,8 @@ export default {
      * const result = await sdv.wnba.getBoxScore(401244185);
      */
     getBoxScore: async function (id) {
-        const baseUrl = 'http://cdn.espn.com/core/wnba/boxscore';
-        const params: Record<string, any> = {
-            gameId: id,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        // via espn_wnba_cdn_boxscore (https; core request layer + error vocabulary)
+        const res = { data: await espnWnbaCdnBoxscore({ game_id: id }) };
 
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
