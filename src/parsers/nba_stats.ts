@@ -229,7 +229,8 @@ function toRows(rs: ResultSet): Row[] {
  * Parse a stats.nba.com / stats.wnba.com response.
  *
  * @param raw Raw JSON body. Empty / malformed input returns `[]`, never throws.
- * @param resultSet When given, return only that named set (`[]` if absent).
+ * @param resultSet When given, return only that named set (`[]` if absent, as sdv-py's zero-row
+ *   frame). The flat wrappers pass `params.section` here (MULTI_TABLE_SECTIONS).
  * @returns Rows for a named or single set (a legit-empty set is `[]`: rows-as-objects cannot carry
  *   py's zero-row schema, so read `resultSets[i].headers` from the raw body for the column list); `{ [setName]: rows }` for several sets.
  */
@@ -246,9 +247,19 @@ export function parse_nba_stats_result_sets(
   }
   const frames: Record<string, Row[]> = {};
   sets.forEach((rs, i) => {
-    frames[rs.name ?? `set_${i}`] = toRows(rs);
+    // An own data property even for a set named `__proto__` (plain assignment would hit
+    // the inherited setter and drop the frame); sdv-py's dict keeps every name.
+    Object.defineProperty(frames, rs.name ?? `set_${i}`, {
+      value: toRows(rs),
+      enumerable: true,
+      writable: true,
+      configurable: true,
+    });
   });
-  if (resultSet !== undefined) return frames[resultSet] ?? [];
+  // sdv-py `result_set`: an unknown name is a zero-row frame there, `[]` here (never throws).
+  if (resultSet != null) {
+    return Object.prototype.hasOwnProperty.call(frames, resultSet) ? frames[resultSet] : [];
+  }
   const names = Object.keys(frames);
   if (!names.length) return [];
   if (names.length === 1) return frames[names[0]];

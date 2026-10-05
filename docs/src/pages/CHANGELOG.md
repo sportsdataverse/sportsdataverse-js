@@ -2,6 +2,10 @@
 
 ## **Unreleased**
 
+### Added — `section` on the stats.nba.com / stats.wnba.com wrappers
+
+- **`nba_stats_*` / `wnba_stats_*`:** `{ parsed: true, section: "<result set>" }` returns that one result set, as sdv-py's `result_set` does; an unknown name returns `[]` (sdv-py: a zero-row frame, no error). Without `section` the result is unchanged. Each result set of the committed real captures equals sdv-py's frame. The playground passes `section` to flat multi-table parsers and offers a section picker; the parity oracles keep sdv-py's NaN / inf as a marker the tests decode.
+
 ### Changed (breaking) — HockeyTech season years and season resolution (sdv-py parity)
 
 Same rules as sdv-py #694, checked cell for cell against sdv-py on the 20 leagues' seasons feeds (season year and label of all 1,102 rows, the default season, and 3,520 season lookups).

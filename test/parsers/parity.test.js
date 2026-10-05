@@ -8,7 +8,7 @@ import { FLAT_WRAPPERS } from '../../dist/index.js';
 import { parserFor } from '../../dist/parsers/_registry.js';
 import { MULTI_TABLE_SECTIONS } from '../../dist/parsers/_frames.js';
 import { loadManifest, transformFamily } from '../../tools/codegen/vendor.mjs';
-import { isIdColumn, same, sameType } from '../helpers/parity.mjs';
+import { isIdColumn, pyOracleReviver, same, sameType } from '../helpers/parity.mjs';
 
 // Parser-parity harness: the gate that a vendored py returns schema describes
 // what the JS parser returns, on sdv-py's REAL committed captures
@@ -52,6 +52,8 @@ const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, '..', 'fixtures');
 const CODEGEN = join(here, '..', '..', 'tools', 'codegen');
 const text = (p) => (p.endsWith('.gz') ? gunzipSync(readFileSync(p)) : readFileSync(p)).toString('utf8');
+/** sdv-py's output on every capture of a family (tools/parity/py_oracle.py), NaN / inf markers decoded. */
+const readOracle = (family) => JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)), pyOracleReviver);
 // CSV / HTML bodies reach the parser as text, JSON as the decoded value (callFlat).
 const body = (p) => (/\.(csv|html)(\.gz)?$/.test(p) ? text(p) : JSON.parse(text(p)));
 /**
@@ -216,7 +218,7 @@ function exerciseUncached(family, short) {
 }
 
 for (const [family, fixtures] of Object.entries(manifest)) {
-  const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
+  const oracle = readOracle(family);
   describe(`parser parity: ${family} (sdv-py real captures)`, () => {
     for (const [path, short] of Object.entries(fixtures)) {
       const ref = verifiable(family, short);
@@ -227,7 +229,9 @@ for (const [family, fixtures] of Object.entries(manifest)) {
         should.exist(def, `${family}.${short} is not a wrapper`);
         if (error) throw error;
         let py = oracle[path].out;
-        if (def.parser in MULTI_TABLE_SECTIONS) py = py[MULTI_TABLE_SECTIONS[def.parser].default];
+        // a fixed default sub-frame; a `default: null` parser returns py's own shape
+        const dflt = MULTI_TABLE_SECTIONS[def.parser]?.default;
+        if (dflt) py = py[dflt];
         if (def.parser in PRIMARY_FRAME) py = py[PRIMARY_FRAME[def.parser]];
 
         if (ref) {
@@ -276,6 +280,63 @@ for (const [family, fixtures] of Object.entries(manifest)) {
     }
   });
 }
+
+// `section` on the stats.nba.com / stats.wnba.com wrappers is sdv-py's `result_set`:
+// py's `parse(raw, result_set=k)` is `parse(raw)[k]` (both read one `frames` dict), so
+// every result set of every capture, picked by name, must equal py's frame of that
+// name. An unknown name is py's zero-row frame (it never raises): `[]` here.
+describe('parser parity: nba_stats / wnba_stats `section` = sdv-py result_set (real captures)', () => {
+  const parser = 'parse_nba_stats_result_sets';
+  const fn = parserFor(parser);
+  // A one-set payload's name: as it ships, or the name sdv-py gives the set it derives.
+  const oneSetName = (raw) => {
+    const rs = raw.resultSets ?? raw.resultSet;
+    const first = Array.isArray(rs) ? rs[0] : rs;
+    return first?.name ?? (raw.scoreboard ? 'GameHeader' : raw.leagueSchedule ? 'SeasonGames' : undefined);
+  };
+  it('is a multi-table parser whose names come from the payload', () => {
+    MULTI_TABLE_SECTIONS[parser].should.containEql({ default: null, sections: null, resultSet: true });
+  });
+  for (const family of ['nba_stats', 'wnba_stats']) {
+    const oracle = readOracle(family);
+    const captures = Object.keys(manifest[family]).map((path) => [path, body(join(FIX, path)), oracle[path].out]);
+    it(`${family}: every result set of every capture, by name, equals py's frame`, () => {
+      let multi = 0;
+      let one = 0;
+      for (const [path, raw, py] of captures) {
+        if ('columns' in py) {
+          const name = oneSetName(raw);
+          should.exist(name, `${path}: one-set payload with no set name`);
+          assertFrame(fn(raw, name), py, `${path}[${name}]`, parser);
+          one++;
+        } else {
+          for (const k of Object.keys(py)) assertFrame(fn(raw, k), py[k], `${path}[${k}]`, parser);
+          multi += Object.keys(py).length;
+        }
+      }
+      multi.should.be.above(250);
+      one.should.be.above(40);
+    });
+    it(`${family}: an unknown name is [] (py: a zero-row frame, no raise); no name keeps the default shape`, () => {
+      for (const [path, raw] of captures) {
+        for (const bad of ['nope', 'seasonhighs', 'constructor', '__proto__']) fn(raw, bad).should.eql([], `${path}[${bad}]`);
+        fn(raw, undefined).should.eql(fn(raw), path);
+      }
+    });
+    it(`${family}: a result set NAMED __proto__ is an own key, like a py dict key`, () => {
+      const raw = {
+        resultSets: [
+          { name: '__proto__', headers: ['A'], rowSet: [[1]] },
+          { name: 'Other', headers: ['B'], rowSet: [[2]] },
+        ],
+      };
+      const all = fn(raw);
+      Object.keys(all).should.eql(['__proto__', 'Other']);
+      Object.prototype.hasOwnProperty.call(all, '__proto__').should.be.true();
+      fn(raw, '__proto__').length.should.equal(1);
+    });
+  }
+});
 
 // Bucket for each py returns_schema status; documented + no_schema + every other bucket == py_tables.
 const BUCKET = {
@@ -367,9 +428,36 @@ describe('parser parity: manifest + coverage', () => {
     frames.should.be.above(0);
   });
 
+  it("py_oracle.py's NaN / inf marker comes back as the JS number, and compares as py's float", () => {
+    // what the generator writes: clean() -> {"__float__": str(v)}; Python's str() of the three
+    readFileSync(join(here, '..', '..', 'tools', 'parity', 'py_oracle.py'), 'utf8').should.match(
+      /return \{"__float__": str\(v\)\}/
+    );
+    const oracle = JSON.parse(
+      JSON.stringify({
+        rows: [{ a: { __float__: 'inf' }, b: { __float__: '-inf' }, c: { __float__: 'nan' }, d: 1.5 }],
+        keep: [{ __float__: 'x' }, { __float__: 'inf', other: 1 }, { __float__: 'constructor' }],
+      }),
+      pyOracleReviver
+    );
+    const [r] = oracle.rows;
+    r.a.should.equal(Infinity);
+    r.b.should.equal(-Infinity);
+    Number.isNaN(r.c).should.be.true();
+    r.d.should.equal(1.5);
+    oracle.keep.should.eql([{ __float__: 'x' }, { __float__: 'inf', other: 1 }, { __float__: 'constructor' }]);
+    same(Infinity, r.a, 'x').should.be.true();
+    same(-Infinity, r.b, 'x').should.be.true();
+    same(Infinity, r.b, 'x').should.be.false();
+    same(1e308, r.a, 'x').should.be.false();
+    same(NaN, r.c, 'x').should.be.true(); // a JS NaN, or a missing value (null), is py's NaN
+    same(null, r.c, 'x').should.be.true();
+    same(0, r.c, 'x').should.be.false();
+  });
+
   it('every oracle entry has a capture in the manifest (regenerate with tools/parity/py_oracle.py)', () => {
     for (const [family, fixtures] of Object.entries(manifest)) {
-      const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
+      const oracle = readOracle(family);
       Object.keys(oracle).filter((k) => k !== '_provenance').sort().should.eql(Object.keys(fixtures).sort(), family);
     }
   });

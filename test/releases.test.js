@@ -16,6 +16,7 @@ import sdv, {
   RELEASES_FAMILY,
 } from '../dist/index.js';
 import { _timer } from '../dist/core/request.js';
+import { captureWarnings } from './helpers/warnings.mjs';
 import {
   _decode,
   _warn,
@@ -316,10 +317,10 @@ describe('release loaders', () => {
     it('a deprecated loader forwards to its replacement with a DeprecationWarning', async () => {
       const t = releasesTransport(() => 404);
       use(t);
-      const warned = new Promise((resolve) => process.once('warning', resolve));
-      await sdv.nba.loadNbaStatsPbpV3({ seasons: 2024 });
+      const seen = await captureWarnings(() => sdv.nba.loadNbaStatsPbpV3({ seasons: 2024 }));
       t.calls[0].url.should.equal(`${SDV}nba_stats_pbp/nba_play_by_play_2025.parquet`);
-      const w = await warned;
+      seen.should.have.length(1);
+      const [w] = seen;
       w.name.should.equal('DeprecationWarning');
       w.message.should.match(/load_nba_stats_pbp_v3 is deprecated; use load_nba_stats_pbp/);
     });
