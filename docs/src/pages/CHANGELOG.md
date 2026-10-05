@@ -15,12 +15,15 @@
     - `parse_cdn_rankings` returns a string `team_id`.
 - **Fixed — legacy `getSchedule` dates:** `sdv.{nba,wnba,nhl,mlb,mbb,wbb,cfb,nfl}.getSchedule({ year, month, day })` sent `dates=`. The CDN ignores that key and answered with today's page for every date.
   - The methods now route through `espn_<lg>_cdn_schedule`, which sends `date=`. The signature and the return shape (`content.schedule`) are unchanged, and a failed fetch throws `AssetFetchError`.
+  - The other legacy CDN methods (`getPlayByPlay`, `getBoxScore` on nba / wnba / mbb / wbb / mlb / cfb / nfl, `sdv.cfb.getRankings`, `sdv.nfl.getWeeklySchedule`) also route through the vendored `espn_<lg>_cdn_*` wrappers instead of raw axios over `http://`: https, the same signatures and return shapes, and the core error vocabulary.
+- **Fixed — ESPN JSON families:** a 2xx response whose body is not a JSON object / array (the CDN's HTTP 202 HTML bot challenge, an error page, an empty body) now throws `AssetFetchError` instead of passing through as data. Before, a parsed CDN wrapper returned `[]` (a failed fetch that looked like no data) and the legacy `getSchedule` threw a `TypeError`.
   - Football pages ignore dates, so `cfb` / `nfl` take an optional `week`. A date without a `week` warns once (`SDV_CDN_FOOTBALL_DATE`).
 - **BREAKING — Fox:** `sdv.fox` is now vendored from sdv-py's `fox_api`.
   - The canonical names are `fox_api_*` / `foxApi*`. Every pre-v4 `fox_*` name is a deprecated alias.
   - `scorechip` no longer sends `api-version`, which made it answer 400.
-  - The 5 routes sdv-py dropped as dead (`fs_feed`, `fs_images`, `fs_layouts`, `fs_videos`, `explore_favorite`) keep their old names, are deprecated, and warn once.
+  - The 5 routes sdv-py dropped as dead (`fs_feed`, `fs_images`, `fs_layouts`, `fs_videos`, `explore_favorite`) keep their old names, are deprecated, and warn once (`DeprecationWarning`, code `SDV_DEPRECATED_ENDPOINT`, the code every deprecated endpoint now carries, `recruiting_*` included).
   - `parsed: true` output is unchanged.
+- **Codegen:** an endpoint-level `fixed_params` on a flat family is honoured (sent first, overridable), as sdv-py's spec allows; a family-level one on a flat YAML fails codegen (sdv-py merges it only for ESPN families). `kind: frames` endpoints document their `parsed: true` return as an object of tables keyed by result set.
 - **Loaders — `on_missing: raise`:** the 25 seasonal NFL loaders that sdv-py hand-writes (pbp, rosters, the usage/tendency tables, …) now throw `NoDataError` for a season with no published asset instead of skipping it. A failed fetch is still `AssetFetchError`.
 - **Returns tables:** sdv-py now derives these from parser output, so they document their columns again:
 
