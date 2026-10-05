@@ -15,7 +15,7 @@ columns:
   description: 'Player last name.'
 - name: name
   type: character
-  description: 'Player full name.'
+  description: 'Player full name (e.g. ''Jessie Eldridge'').'
 - name: phonetic_name
   type: character
   description: 'Phonetic spelling of the player name.'
@@ -24,7 +24,7 @@ columns:
   description: 'Whether athlete is currently active.'
 - name: height
   type: character
-  description: 'Player height as feet-and-inches text (e.g. 5''11); empty when not recorded.'
+  description: 'Player height as feet-and-inches text (e.g. 5''11), not a number of inches.'
 - name: weight
   type: character
   description: 'Player weight in pounds.'
@@ -51,7 +51,7 @@ columns:
   description: 'Whether the player is a rookie.'
 - name: veteran
   type: character
-  description: 'HockeyTech veteran-status code (''1'' or ''2'' in the captured PWHL rows; the codes are not documented by the feed).'
+  description: 'HockeyTech veteran-status code as text (''1'' or ''2'' in the captured rows; the feed does not document the codes), not a boolean.'
 - name: draft_eligible
   type: character
   description: 'Whether the player is draft eligible.'
@@ -69,7 +69,7 @@ columns:
   description: 'HockeyTech team id.'
 - name: division
   type: character
-  description: 'Division name (e.g. ''PWHL'').'
+  description: 'Division name as text (e.g. ''PWHL''), not an identifier.'
 - name: birthdate
   type: character
   description: 'Date of birth.'
@@ -78,7 +78,7 @@ columns:
   description: 'Player birth year.'
 - name: hometown
   type: character
-  description: 'Player hometown (city and province/state abbreviation, e.g. ''Barrie, ON'').'
+  description: 'Player hometown as city and province, state or country abbreviation (e.g. ''Barrie, ON'').'
 - name: homeprov
   type: character
   description: 'Player home province/state.'
@@ -246,7 +246,7 @@ columns:
   description: 'URL to the team logo.'
 - name: rank
   type: character
-  description: '1-based position of the player in the feed''s sorted stat list.'
+  description: '1-based position of the player in the feed''s sorted stat table.'
 - name: team_breakdown
   type: character
   description: 'Per-team statistical breakdown.'
@@ -261,7 +261,7 @@ columns:
   description: 'URL to the player''s headshot image as served by the HockeyTech data feed.'
 - name: namelink
   type: character
-  description: 'Player name used as the text of the feed''s player link (equals `name` in the captures).'
+  description: 'Player name as plain text (the text of the feed''s player link; equals name in the captures), not HTML.'
 - name: teamlink
   type: character
   description: 'HTML link for the team.'

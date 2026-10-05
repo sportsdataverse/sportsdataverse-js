@@ -35,3 +35,15 @@ internal-refs commit b78eb2c; stored pretty-printed, wire form was compact):
 `pwhl_svf_streaks_invalidview.json` (`statviewfeed` / `streaks` →
 `{"error": "InvalidView error: streaks"}`). The access-denied plain-text reply is
 `analytics/live-2026-10-05/mjhl_summary_7301.txt`.
+
+## Added 2026-10-05 (sdv-js JS-9, season names and season resolution)
+
+`seasons/<league>.json`: the `modulekit` / `seasons` reply of all 20 leagues, used by
+`test/parsers/hockeytech_seasons.test.js` (a port of sdv-py's
+`tests/hockeytech/test_season_names.py`). Each file is a byte copy of sdv-py's
+`tests/fixtures/hockeytech/<league>_seasons.json` at sdv-py 23e223d35c (#694): 18 untrimmed
+live replies taken 2026-10-05 with `hockeytech_api(lg, "modulekit", "seasons", {})`, AHL
+trimmed from the 2026-07-12 sdv-internal-refs capture, and PWHL as committed 2026-06-09
+(ids 1-10, ending at the "2026-27 Pre-Season", a real preseason-before-regular window). The
+`key` in `Parameters` is `REDACTED` in all 20. Sharing the files lets the JS and py outputs be
+compared cell for cell.

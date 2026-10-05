@@ -54,13 +54,13 @@ columns:
   description: 'Jersey number.'
 - name: role_id
   type: character
-  description: 'Numeric id of the person''s primary role in the HockeyTech person record (see `role_name`; ''1'' = ''Player'' in the captures).'
+  description: 'Id of the person''s role in the HockeyTech person record (''1'' = ''Player'' in the captures): player or staff, not a playing position (see position).'
 - name: season_id
   type: character
   description: 'HockeyTech season id.'
 - name: role_name
   type: character
-  description: 'Label of the person''s primary role in the HockeyTech person record (e.g. ''Player'').'
+  description: 'Label of the person''s role in the HockeyTech person record (e.g. ''Player''), not a playing position (see position).'
 - name: all_roles
   type: character
   description: 'Pipe- or comma-delimited string listing every positional or roster role associated with the player in the HockeyTech system.'
@@ -78,10 +78,10 @@ columns:
   description: 'Player position.'
 - name: profile_image
   type: character
-  description: 'File name of the player''s profile photo, not a full URL (e.g. ''7dea378a91cedc9d5d14b1222802322c.jpg'').'
+  description: 'File name of the player''s profile photo, not a URL (e.g. ''7dea378a91cedc9d5d14b1222802322c.jpg'').'
 - name: score
   type: character
-  description: 'Search relevance score of the match (e.g. ''5.911529541015625'').'
+  description: 'Search relevance score of the match as a decimal string (e.g. ''5.911529541015625''), not a game score.'
 - name: last_active_date
   type: character
-  description: 'Date (YYYY-MM-DD) the feed reports the person as last active; for the active players captured it equals the capture date.'
+  description: 'Date (YYYY-MM-DD) the feed reports the person as last active; for the active players captured it equals the capture date, so it is not the date of the player''s last game.'

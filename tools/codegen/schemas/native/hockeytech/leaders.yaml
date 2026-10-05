@@ -18,7 +18,7 @@ columns:
   description: 'Jersey number.'
 - name: name
   type: character
-  description: 'Player name.'
+  description: 'Player full name (e.g. ''Hilary Knight'').'
 - name: team_id
   type: character
   description: 'Team id.'
