@@ -85,10 +85,11 @@ function flattenHeaders(raw: unknown): Record<string, string> {
  */
 export const axiosTransport: Transport = async (req) => {
   const responseType = req.responseType ?? "json";
+  // Serialised here, not via axios' paramsSerializer: axios turns an error thrown
+  // there (an invalid Date) into a plain Error, which would be retried as a
+  // network failure. Repeated keys for arrays (axios' default sends `k[]=a`).
+  const url = withQuery(req.url, req.query);
   const config = {
-    params: req.query,
-    // Repeated keys for arrays (axios' default would send `k[]=a&k[]=b`).
-    paramsSerializer: (params: Record<string, unknown>) => encodeQuery(params),
     headers: req.headers,
     timeout: req.timeoutMs,
     responseType,
@@ -102,8 +103,8 @@ export const axiosTransport: Transport = async (req) => {
   try {
     res =
       req.method === "POST"
-        ? await axios.post(req.url, req.body, config)
-        : await axios.get(req.url, config);
+        ? await axios.post(url, req.body, config)
+        : await axios.get(url, config);
   } catch (err) {
     // An axios error carries the whole request config (headers incl.
     // Authorization / Cookie, a POSTed body incl. a login password): reject with
@@ -130,8 +131,21 @@ function encodeComponent(value: string): string {
 }
 
 /**
+ * One query value as text. A `Date` is ISO-8601 UTC (`toISOString()`, what
+ * axios' own serializer sent before the transport layer); an invalid `Date`
+ * throws instead of sending `"Invalid Date"`.
+ */
+function queryValue(key: string, item: unknown): string {
+  if (!(item instanceof Date)) return String(item);
+  if (Number.isNaN(item.getTime())) throw new SdvError(`query param "${key}" is an invalid Date`);
+  return item.toISOString();
+}
+
+/**
  * Serialise a query map: `undefined` / `null` dropped, arrays as repeated keys
- * (`k=a&k=b`). Shared by every built-in transport so the wire form is identical.
+ * (`k=a&k=b`), a `Date` as ISO-8601 UTC. Shared by every built-in transport so
+ * the wire form is identical. A date-only API (`YYYY-MM-DD`, ESPN's
+ * `YYYYMMDD`) wants a string: pass one rather than a `Date`.
  */
 export function encodeQuery(query?: Record<string, unknown>): string {
   const parts: string[] = [];
@@ -139,7 +153,7 @@ export function encodeQuery(query?: Record<string, unknown>): string {
     if (v === undefined || v === null) continue;
     for (const item of Array.isArray(v) ? v : [v]) {
       if (item === undefined || item === null) continue;
-      parts.push(`${encodeComponent(k)}=${encodeComponent(String(item))}`);
+      parts.push(`${encodeComponent(k)}=${encodeComponent(queryValue(k, item))}`);
     }
   }
   return parts.join("&");

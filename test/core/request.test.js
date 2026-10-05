@@ -595,9 +595,10 @@ describe('core/transport', () => {
     fail.data.should.equal('nope');
   });
 
-  // The pinned TransportRequest.query contract: arrays repeat the key, never k[]=.
-  const QUERY = { k: ['a', 'b'], s: 'x y', c: 'a,b', skip: undefined };
-  const WIRE = '/q?k=a&k=b&s=x+y&c=a,b';
+  // The pinned TransportRequest.query contract: arrays repeat the key, never k[]=;
+  // a Date is ISO-8601 UTC (axios' pre-transport serializer), never Date#toString.
+  const QUERY = { k: ['a', 'b'], s: 'x y', c: 'a,b', skip: undefined, d: new Date(Date.UTC(2025, 1, 1, 12, 30)) };
+  const WIRE = '/q?k=a&k=b&s=x+y&c=a,b&d=2025-02-01T12:30:00.000Z';
 
   it('query contract: axiosTransport sends arrays as repeated keys (k=a&k=b)', async () => {
     const res = await axiosTransport({ method: 'GET', url: `${base}/q`, query: QUERY });
@@ -618,6 +619,34 @@ describe('core/transport', () => {
     encodeQuery({ a: 1, b: null, c: undefined, d: 'x:y$z', e: ['1', null, '2'] }).should.equal(
       'a=1&d=x:y$z&e=1&e=2'
     );
+  });
+
+  it('encodeQuery sends a Date (scalar or in an array) as ISO-8601 UTC', () => {
+    const day = new Date(Date.UTC(2025, 1, 1));
+    encodeQuery({ d: day, r: [day, new Date(Date.UTC(2025, 1, 2, 23, 59, 59, 5))] }).should.equal(
+      'd=2025-02-01T00:00:00.000Z&r=2025-02-01T00:00:00.000Z&r=2025-02-02T23:59:59.005Z'
+    );
+  });
+
+  it('an invalid Date query value -> SdvError naming the param, never retried (both transports)', async function () {
+    (() => encodeQuery({ when: new Date('nope') })).should.throw(SdvError, { message: /"when" is an invalid Date/ });
+    const transports = [axiosTransport];
+    try {
+      await import('impit');
+      transports.push(createImpersonatingTransport());
+    } catch {
+      // impit not installed: the axios half still runs
+    }
+    for (const transport of transports) {
+      configure({ transport: { t2_date: transport } });
+      const err = await request('t2_date', { ...GET(`${base}/q`), query: { when: new Date('nope') } }).then(
+        () => null,
+        (e) => e
+      );
+      err.should.be.instanceOf(SdvError);
+      err.message.should.match(/"when" is an invalid Date/);
+      sleeps.length.should.equal(0); // not mistaken for a network error
+    }
   });
 
   it('a throwing impit constructor -> SdvError (not retried), and the failure is not cached', async () => {
