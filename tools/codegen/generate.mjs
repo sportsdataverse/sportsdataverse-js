@@ -947,13 +947,22 @@ function flatWrappersForLeague(prefix, flatWrappers) {
 const FLAT_PARSER_SECTIONS =
   parse(readFileSync(join(endpointsDir, "flat_parser_sections.yaml"), "utf8"))?.parsers ?? {};
 
+// The default of a `default: null` parser: every table as a dict (sdv-py's shape); a
+// `resultSet` parser (sdv-py `result_set`) returns a one-table payload's table itself.
+const sectionDefaultDoc = (spec) =>
+  spec.resultSet ? "every table, as a dict (one table: that table)" : "every table, as a dict";
+// What an unknown `section` does: throw listing the valid names, or (`resultSet`) `[]` as sdv-py.
+const sectionUnknownDoc = (spec) =>
+  spec.resultSet
+    ? "an unknown name returns `[]` (sdv-py: a zero-row frame)"
+    : "an unknown name throws, listing the valid ones";
+
 function flatParserCell(wrapper) {
   if (!wrapper.parser) return "*(raw)*";
   const spec = FLAT_PARSER_SECTIONS[wrapper.parser];
   if (!spec) return `\`${wrapper.parser}\``;
-  // `default: null` = every table as a dict (sdv-py's shape); `sections: null` =
-  // the payload names its tables (`dynamic` says how).
-  const dflt = spec.default === null ? " (default: every table, as a dict)" : "";
+  // `sections: null` = the payload names its tables (`dynamic` says how).
+  const dflt = spec.default === null ? ` (default: ${sectionDefaultDoc(spec)})` : "";
   if (!spec.sections) return `\`${wrapper.parser}\` — multi-table${dflt}: \`section\` = ${spec.dynamic}`;
   const names = spec.sections.map((s) => (s === spec.default ? `\`${s}\` (default)` : `\`${s}\``));
   return `\`${wrapper.parser}\` — multi-table${dflt}: \`section\` = ${names.join(", ")}`;
@@ -1031,11 +1040,13 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
     `(sdv-py's name, py/R parity) and its camelCase form (canonical) on ` +
     `\`sdv.${nsPrefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
     `through its tidy.js parser; omit it for the raw response.`;
-  if (rows.some((w) => FLAT_PARSER_SECTIONS[w.parser])) {
+  // ponytail: no family mixes a `resultSet` parser with a throwing one, so its first spec speaks for all
+  const multi = rows.map((w) => FLAT_PARSER_SECTIONS[w.parser]).find(Boolean);
+  if (multi) {
     body +=
       ` Endpoints marked **multi-table** parse to several frames in sdv-py; with ` +
       `\`parsed: true\` they return the default shown in the Parser column (one sub-frame, or every table as a dict), ` +
-      `and \`section: "<name>"\` selects any other (an unknown name throws, listing the valid ones).`;
+      `and \`section: "<name>"\` selects any other (${sectionUnknownDoc(multi)}).`;
   }
   if (authed) {
     body +=
@@ -2275,8 +2286,8 @@ function renderWrittenFlatModule(api, defs) {
       jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return ${objectOfTables ? "an object of tables keyed by result set" : "tidy rows"} instead of the raw response.\n`;
       if (sec) {
         const names = sec.sections ? sec.sections.map((s) => `\`${s}\``).join(", ") : sec.dynamic;
-        const dflt = sec.default === null ? "every table, as a dict" : `\`${sec.default}\``;
-        jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; an unknown name throws, listing the valid ones.\n`;
+        const dflt = sec.default === null ? sectionDefaultDoc(sec) : `\`${sec.default}\``;
+        jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; ${sectionUnknownDoc(sec)}.\n`;
       }
       jsdoc +=
         objectOfTables

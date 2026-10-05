@@ -33,3 +33,10 @@ parsers:
     default: null
     sections: null
     dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"
+  # stats.nba.com / stats.wnba.com (sdv-py's `result_set`): `resultSet: true` = an
+  # unknown name returns [] (py: a zero-row frame) and a one-set payload is that set.
+  parse_nba_stats_result_sets:
+    default: null
+    sections: null
+    dynamic: "a result-set name the payload ships (sdv-py's `result_set`)"
+    resultSet: true

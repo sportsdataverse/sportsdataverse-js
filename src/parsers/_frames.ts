@@ -149,6 +149,11 @@ export interface SectionSpec {
   sections: string[] | null;
   /** For payload-named tables: what the names are (shown in the reference). */
   dynamic?: string;
+  /**
+   * sdv-py's `result_set` contract (stats.nba.com): an unknown name returns `[]` (py: a
+   * zero-row frame) instead of throwing, and a one-table payload is that table by default.
+   */
+  resultSet?: true;
 }
 
 export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec> = {
@@ -172,6 +177,13 @@ export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec> = {
     default: null,
     sections: null,
     dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)",
+  },
+  // stats.nba.com / stats.wnba.com: the parser selects itself (sdv-py `result_set`).
+  parse_nba_stats_result_sets: {
+    default: null,
+    sections: null,
+    dynamic: "a result-set name the payload ships (sdv-py's `result_set`)",
+    resultSet: true,
   },
 };
 

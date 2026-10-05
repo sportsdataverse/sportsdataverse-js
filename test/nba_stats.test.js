@@ -221,6 +221,23 @@ describe('nba_stats runtime (fake transport)', () => {
       .should.eql({ A: [], B: [{ y: 1 }] });
   });
 
+  it('`section` (sdv-py result_set) reaches the parser through the wrapper; unknown -> []; never sent upstream', async () => {
+    const career = readFileSync(join(here, 'fixtures', 'nba_stats', 'cap_playercareerstats_nba.json'), 'utf8');
+    configure({ transport: { nba_stats: fake({ status: 200, data: career }) } });
+    const all = await sdv.nba.nbaStatsPlayercareerstats({ parsed: true });
+    Object.keys(all).should.have.length(14); // default unchanged: every set
+    const highs = await sdv.nba.nbaStatsPlayercareerstats({ parsed: true, section: 'SeasonHighs' });
+    highs.should.have.length(1);
+    highs.should.eql(all.SeasonHighs);
+    (await sdv.nba.nba_stats_playercareerstats({ parsed: true, section: 'nope' })).should.eql([]);
+    calls.should.have.length(3);
+    calls.every((c) => !Object.keys(c.query).some((k) => /section/i.test(k))).should.be.true();
+    const box = readFileSync(join(here, 'fixtures', 'nba_stats', 'cap_boxscoretraditionalv3_wnba.json'), 'utf8');
+    configure({ transport: { wnba_stats: fake({ status: 200, data: box }) } });
+    (await sdv.wnba.wnbaStatsBoxscoretraditionalv3({ game_id: '1022300001', parsed: true, section: 'TeamStats' }))
+      .should.have.length(2);
+  });
+
   it('503 is retried', async () => {
     configure({ transport: { nba_stats: fake({ status: 503, data: '' }, ok) } });
     (await sdv.nba.nba_stats_leaguedashplayerstats({})).resultSets.should.have.length(1);

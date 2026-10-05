@@ -227,7 +227,9 @@ for (const [family, fixtures] of Object.entries(manifest)) {
         should.exist(def, `${family}.${short} is not a wrapper`);
         if (error) throw error;
         let py = oracle[path].out;
-        if (def.parser in MULTI_TABLE_SECTIONS) py = py[MULTI_TABLE_SECTIONS[def.parser].default];
+        // a fixed default sub-frame; a `default: null` parser returns py's own shape
+        const dflt = MULTI_TABLE_SECTIONS[def.parser]?.default;
+        if (dflt) py = py[dflt];
         if (def.parser in PRIMARY_FRAME) py = py[PRIMARY_FRAME[def.parser]];
 
         if (ref) {
@@ -276,6 +278,51 @@ for (const [family, fixtures] of Object.entries(manifest)) {
     }
   });
 }
+
+// `section` on the stats.nba.com / stats.wnba.com wrappers is sdv-py's `result_set`:
+// py's `parse(raw, result_set=k)` is `parse(raw)[k]` (both read one `frames` dict), so
+// every result set of every capture, picked by name, must equal py's frame of that
+// name. An unknown name is py's zero-row frame (it never raises): `[]` here.
+describe('parser parity: nba_stats / wnba_stats `section` = sdv-py result_set (real captures)', () => {
+  const parser = 'parse_nba_stats_result_sets';
+  const fn = parserFor(parser);
+  // A one-set payload's name: as it ships, or the name sdv-py gives the set it derives.
+  const oneSetName = (raw) => {
+    const rs = raw.resultSets ?? raw.resultSet;
+    const first = Array.isArray(rs) ? rs[0] : rs;
+    return first?.name ?? (raw.scoreboard ? 'GameHeader' : raw.leagueSchedule ? 'SeasonGames' : undefined);
+  };
+  it('is a multi-table parser whose names come from the payload', () => {
+    MULTI_TABLE_SECTIONS[parser].should.containEql({ default: null, sections: null, resultSet: true });
+  });
+  for (const family of ['nba_stats', 'wnba_stats']) {
+    const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
+    const captures = Object.keys(manifest[family]).map((path) => [path, body(join(FIX, path)), oracle[path].out]);
+    it(`${family}: every result set of every capture, by name, equals py's frame`, () => {
+      let multi = 0;
+      let one = 0;
+      for (const [path, raw, py] of captures) {
+        if ('columns' in py) {
+          const name = oneSetName(raw);
+          should.exist(name, `${path}: one-set payload with no set name`);
+          assertFrame(fn(raw, name), py, `${path}[${name}]`, parser);
+          one++;
+        } else {
+          for (const k of Object.keys(py)) assertFrame(fn(raw, k), py[k], `${path}[${k}]`, parser);
+          multi += Object.keys(py).length;
+        }
+      }
+      multi.should.be.above(250);
+      one.should.be.above(40);
+    });
+    it(`${family}: an unknown name is [] (py: a zero-row frame, no raise); no name keeps the default shape`, () => {
+      for (const [path, raw] of captures) {
+        for (const bad of ['nope', 'seasonhighs', 'constructor', '__proto__']) fn(raw, bad).should.eql([], `${path}[${bad}]`);
+        fn(raw, undefined).should.eql(fn(raw), path);
+      }
+    });
+  }
+});
 
 // Bucket for each py returns_schema status; documented + no_schema + every other bucket == py_tables.
 const BUCKET = {
