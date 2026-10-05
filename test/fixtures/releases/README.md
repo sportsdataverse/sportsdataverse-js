@@ -13,6 +13,7 @@ downloaded 2026-10-05.
 | `cfb_pbp_2024_head20.parquet` | `sportsdataverse-data` release `espn_cfb_pbp`, `play_by_play_2024.parquet` (55,573,805 bytes, 163,567 rows × 506 columns) | the first 20 rows re-written with pyarrow 24.0.0 (`pq.write_table(t.slice(0, 20), compression="zstd")`); arrow schema incl. metadata asserted identical to the original. Its INT64 play `id` (e.g. `401628579101849903`) is beyond `Number.MAX_SAFE_INTEGER` — the modern 18-digit case of the INT64 id rule (a decimal string). |
 | `cfb_pbp_2013_head20.parquet` | `sportsdataverse-data` release `espn_cfb_pbp`, `play_by_play_2013.parquet` (53,006,390 bytes, 159,038 rows × 499 columns, Polars writer, ZSTD), downloaded 2026-10-05 | the first 20 rows re-written the same way (pyarrow 24.0.0, zstd; schema incl. metadata asserted identical). Its INT64 play ids are 12 digits (`332830097002`, safe; every 2013 id is 12 digits) — the old-era case: before v4 they decoded to numbers while 2024's were BigInt. polars `pl.concat([2013, 2024], how="diagonal_relaxed")`: 40 rows × 506 columns (2013's 499 ⊂ 2024's), `id` Int64, head `332830097002`, tail `401628579101877912`. |
 | `pbp_participation_2025_head20.parquet` | `nflverse-data` release `pbp_participation`, `pbp_participation_2025.parquet` (4,741,443 bytes, 45,184 rows × 26 columns, arrow-cpp 23.0.0, SNAPPY), downloaded 2026-10-05 | the first 20 rows re-written with pyarrow 24.0.0 (`compression="snappy"`; schema incl. metadata asserted identical). Its `play_id` is a DOUBLE holding integer ids (`40.0`, `71.0`, …; R numeric) — the real DOUBLE case of the any-width id rule (`"40"`, never `"40.0"`). Every 2025 `play_id` is integral and below 2^53 (all 45,184 checked). |
+| `crafted_ids_2021.parquet`, `crafted_ids_2022.parquet`, `crafted_ids_2023.parquet` | **crafted** (not a release asset): pyarrow 24.0.0, zstd | The edge cases no real release carries, for the cross-season id unification test: `play_id` STRING `["40", "71"]` (2021); DOUBLE with a fraction `[1.5, 2.0, null]` (2022); DOUBLE integral with a NaN value (not a null) `[40.0, 71.0, null, NaN]` (2023); each with an INT32 `season`. Written by `pq.write_table(pa.table({...}), path, compression="zstd")`. |
 
 sha256:
 
@@ -24,6 +25,9 @@ f8bd58b245bb871a76ccb8b971bf5e1a2aa807c01eaf624953f83d18c4a537e4  ftn_charting_2
 2d12745d5ae47083b0cd8568da0384245a67cc7e3f81151c8cbf82984ce8db5a  cfb_pbp_2024_head20.parquet
 5ac95feecb2b36391c91a1466d93a17787ab0137a7337cc82c8b33530aa765fd  cfb_pbp_2013_head20.parquet
 401bbd1a6a36fd4ab4e2b5ccbd91d20a56d9c7efe45021aa67701f5586b7e496  pbp_participation_2025_head20.parquet
+835237c763577b3cb6aa8a1c1921715019415478fcd74286f30456fefd1b2df4  crafted_ids_2021.parquet
+edec14280bf7df68dc5a6f091dab5f124cb3e39fb4163cbb781714810f1c36c4  crafted_ids_2022.parquet
+f696736c3a5ae9ada88537ac0bd89d85dc0331cc5952583a90faa3a09a47df6f  crafted_ids_2023.parquet
 ```
 
 The two codecs are the two the release assets actually use: Polars-written

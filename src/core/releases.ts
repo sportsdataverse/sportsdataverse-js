@@ -372,7 +372,10 @@ function kindOf(v: unknown): Kind | undefined {
  * column whose dtype differs between seasons to their supertype. A parquet
  * column has one type per file, so each season's kind is its first non-null
  * value's. Anything + string → string; boolean + numeric → number; number +
- * bigint is left to the INT64 policy; nested / other mixes are left alone.
+ * bigint is left to the INT64 policy; nested / other mixes are left alone. An id
+ * column is not cast here: the id rule unifies it after the concat (integers of
+ * any width → decimal strings, a NaN → null, a fraction left as read with one
+ * warning), so a DOUBLE NaN never becomes "NaN" nor a fraction "1.5".
  */
 function supertype(kinds: Iterable<Kind | undefined>): "string" | "number" | undefined {
   const set = new Set<Kind>();
@@ -414,6 +417,7 @@ function concatRows(label: string, frames: ReleaseRow[][], requested?: string[])
   const names = unionNames(label, keys, requested, frames.some((f) => f.length > 0));
   if (frames.length > 1) {
     for (const c of names) {
+      if (isIdColumn(c)) continue;
       const target = supertype(frames.map((f) => kindOf(firstNonNull(f.length, (i) => f[i][c]))));
       if (target) for (const f of frames) for (const r of f) r[c] = castTo(r[c], target);
     }
@@ -441,7 +445,7 @@ function concatColumns(label: string, frames: ColumnFrame[], requested?: string[
   );
   const out: ReleaseColumns = {};
   for (const c of names) {
-    if (frames.length > 1) {
+    if (frames.length > 1 && !isIdColumn(c)) {
       const target = supertype(
         frames.map((f) => {
           const v = f.cols[c];

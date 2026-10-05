@@ -23,6 +23,7 @@ import {
   castIdInt64,
   defaultMaxCells,
   releaseUrl,
+  seasonLoader,
 } from '../dist/core/releases.js';
 import { _int64Warned } from '../dist/core/int64.js';
 import { loadReleaseLoaders } from '../tools/codegen/render-loaders.mjs';
@@ -585,6 +586,44 @@ describe('release loaders', () => {
         'load_x: column "drive_id" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt',
       ]); // two calls, each warning once
       codes.should.eql(['SDV_INT64', 'SDV_INT64', 'SDV_INT64']);
+    });
+
+    // Crafted parquet (test/fixtures/releases/README.md): play_id STRING (2021), DOUBLE with a
+    // fraction (2022), DOUBLE integral + NaN (2023). The cross-season type unification must not
+    // turn a DOUBLE NaN into "NaN" nor a fraction into "1.5": the id rule decides.
+    describe('cross-season id unification (crafted parquet)', () => {
+      const crafted = seasonLoader({ fn: 'load_crafted', url: 'https://x/crafted_ids_{season}.parquet' });
+      const route = (u) => `crafted_ids_${/_(\d{4})\.parquet/.exec(u)[1]}.parquet`;
+      const codes = [];
+      beforeEach(() => {
+        _int64Warned.clear();
+        codes.length = 0;
+        _warn.emit = (m, code) => {
+          warnings.push(m);
+          codes.push(code);
+        };
+        use(releasesTransport(route));
+      });
+
+      it('STRING season + integral DOUBLE season with a NaN: decimal strings, the NaN is null, no warning', async () => {
+        for (const format of ['rows', 'columns']) {
+          const out = await crafted({ seasons: [2021, 2023], format });
+          const ids = format === 'rows' ? out.map((r) => r.play_id) : out.play_id;
+          ids.should.eql(['40', '71', '40', '71', null, null]);
+        }
+        warnings.should.eql([]);
+      });
+
+      it('a fractional DOUBLE id is left as read with ONE SDV_INT64 warning (alone or after a STRING season); a NaN is still null', async () => {
+        (await crafted({ seasons: 2022 })).map((r) => r.play_id).should.eql([1.5, 2, null]);
+        (await crafted({ seasons: [2021, 2022] })).map((r) => r.play_id).should.eql(['40', '71', 1.5, 2, null]);
+        const cols = await crafted({ seasons: [2022, 2023], format: 'columns' });
+        cols.play_id.should.eql([1.5, 2, null, 40, 71, null, null]); // left as read, but a NaN is still null
+        warnings.should.eql([
+          'load_crafted: id column "play_id" holds values that are not exact integers (a fraction, a number beyond Number.MAX_SAFE_INTEGER, a boolean or an object); left as read, not decimal strings',
+        ]);
+        codes.should.eql(['SDV_INT64']);
+      });
     });
 
     it('id_int64 (sdv-py _cast_ids_int64): canonical integer strings convert, anything else is left alone', () => {
