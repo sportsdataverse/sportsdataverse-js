@@ -259,6 +259,8 @@ export { parse_kenpom_page } from './parsers/kenpom.js';
 export { NflProAuthError, nflProToken, nflProBrowserLogin, nflProClearTokenCache } from './core/nfl_pro_runtime.js';
 export type { PlaywrightLike } from './core/nfl_pro_runtime.js';
 export type { FetchErrorDetails } from './core/errors.js';
+// `code` of the DeprecationWarning a pre-v4 name / a deprecated endpoint emits, to filter on.
+export { DEPRECATED_NAME_CODE, DEPRECATED_ENDPOINT_CODE } from './core/deprecation.js';
 export {
   configure,
   getConfig,

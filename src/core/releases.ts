@@ -20,6 +20,15 @@ import {
 import { compressors } from "hyparquet-compressors";
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from "./config.js";
 import { NoDataError, SdvError, SeasonNotFoundError } from "./errors.js";
+import {
+  bigintWarning,
+  idsToStrings,
+  INT64_WARNING_CODE,
+  isIdColumn,
+  notIntegerIdWarning,
+  rowCells,
+  type Cells,
+} from "./int64.js";
 import { request } from "./request.js";
 
 /**
@@ -51,6 +60,11 @@ export const RELEASE_TIMEOUT_MS = 300_000;
  * 2.2 GB; espn_mbb_pbp 2024, 122.3M cells, peaks 2.9 GB). The guard therefore
  * allows heap_size_limit / 100 cells for rows (45.0M on the default heap) and
  * heap_size_limit / 30 for columns (149.9M), scaling with --max-old-space-size.
+ *
+ * A heuristic, not a bound: the per-cell cost was measured on wide pbp frames (a
+ * mix of numbers, short strings and nulls). A selection of only long-string
+ * columns (play text) costs more per cell, so it can still exhaust the heap
+ * under the limit; pass a lower `maxCells` (or `format: "columns"`) for those.
  */
 const BYTES_PER_CELL = { rows: 100, columns: 30 } as const;
 
@@ -91,7 +105,8 @@ export interface ReleaseLoaderOptions {
    * Refuse (with a catchable `SdvError`) to decode more than this many cells
    * (rows × leaf columns, a running total over the seasons) — each season's
    * parquet footer is checked before that season is decoded. Default: scaled to the V8 heap limit
-   * (see `BYTES_PER_CELL`); `Infinity` disables the check.
+   * (see `BYTES_PER_CELL`; a measured heuristic — long-string-only selections cost more per
+   * cell); `Infinity` disables the check.
    */
   maxCells?: number;
   /** Download timeout in milliseconds (default {@link RELEASE_TIMEOUT_MS}). */
@@ -117,12 +132,13 @@ export interface AssetLoader {
 }
 
 /**
- * Test seam for warnings (skipped seasons, an absent asset, a BigInt column).
+ * Test seam for warnings (skipped seasons, an absent asset: `SDV_RELEASE`; a
+ * non-id BigInt column: `SDV_INT64`, once per (loader, column) per process).
  * @internal
  */
 export const _warn = {
-  emit: (message: string): void => {
-    process.emitWarning(message, { code: "SDV_RELEASE" });
+  emit: (message: string, code = "SDV_RELEASE"): void => {
+    process.emitWarning(message, { code });
   },
 };
 
@@ -204,6 +220,8 @@ interface Asset {
   rows: number;
   /** Leaf columns under `names` (nested columns count each leaf). */
   leaves: number;
+  /** Top-level columns with an INT64 leaf (hyparquet decodes those as bigint): the INT64 policy's columns. */
+  int64: string[];
 }
 
 const decodeError = (def: ReleaseLoaderDef, url: string, err: unknown): SdvError =>
@@ -211,6 +229,10 @@ const decodeError = (def: ReleaseLoaderDef, url: string, err: unknown): SdvError
 
 function leafCount(node: SchemaTree): number {
   return node.children.length ? node.children.reduce((n, c) => n + leafCount(c), 0) : 1;
+}
+
+function hasInt64Leaf(node: SchemaTree): boolean {
+  return node.children.length ? node.children.some(hasInt64Leaf) : node.element.type === "INT64";
 }
 
 /**
@@ -255,6 +277,7 @@ async function fetchAsset(
       columns: opts.columns ? names : undefined,
       rows: Number(metadata.num_rows),
       leaves: picked.reduce((n, c) => n + leafCount(c), 0),
+      int64: picked.filter(hasInt64Leaf).map((c) => c.element.name),
     };
   } catch (err) {
     throw decodeError(def, url, err);
@@ -349,7 +372,10 @@ function kindOf(v: unknown): Kind | undefined {
  * column whose dtype differs between seasons to their supertype. A parquet
  * column has one type per file, so each season's kind is its first non-null
  * value's. Anything + string → string; boolean + numeric → number; number +
- * bigint is left to the INT64 policy; nested / other mixes are left alone.
+ * bigint is left to the INT64 policy; nested / other mixes are left alone. An id
+ * column is not cast here: the id rule unifies it after the concat (integers of
+ * any width → decimal strings, a NaN → null, a fraction left as read with one
+ * warning), so a DOUBLE NaN never becomes "NaN" nor a fraction "1.5".
  */
 function supertype(kinds: Iterable<Kind | undefined>): "string" | "number" | undefined {
   const set = new Set<Kind>();
@@ -391,6 +417,7 @@ function concatRows(label: string, frames: ReleaseRow[][], requested?: string[])
   const names = unionNames(label, keys, requested, frames.some((f) => f.length > 0));
   if (frames.length > 1) {
     for (const c of names) {
+      if (isIdColumn(c)) continue;
       const target = supertype(frames.map((f) => kindOf(firstNonNull(f.length, (i) => f[i][c]))));
       if (target) for (const f of frames) for (const r of f) r[c] = castTo(r[c], target);
     }
@@ -418,7 +445,7 @@ function concatColumns(label: string, frames: ColumnFrame[], requested?: string[
   );
   const out: ReleaseColumns = {};
   for (const c of names) {
-    if (frames.length > 1) {
+    if (frames.length > 1 && !isIdColumn(c)) {
       const target = supertype(
         frames.map((f) => {
           const v = f.cols[c];
@@ -481,22 +508,7 @@ function bigintsToNumbers(v: unknown): unknown {
   return v;
 }
 
-/** One column of either format, read and written by index. */
-interface ColumnAccess {
-  n: number;
-  get(i: number): unknown;
-  set(i: number, v: unknown): void;
-}
-
-const rowColumn = (rows: ReleaseRow[], col: string): ColumnAccess => ({
-  n: rows.length,
-  get: (i) => rows[i][col],
-  set: (i, v) => {
-    rows[i][col] = v;
-  },
-});
-
-const arrayColumn = (values: unknown[]): ColumnAccess => ({
+const arrayColumn = (values: unknown[]): Cells => ({
   n: values.length,
   get: (i) => values[i],
   set: (i, v) => {
@@ -504,61 +516,86 @@ const arrayColumn = (values: unknown[]): ColumnAccess => ({
   },
 });
 
+/** An integer `v` as an in-range INT64 bigint, or `undefined`. */
+function asInt64(v: number | string): bigint | undefined {
+  const b = BigInt(v);
+  return b >= INT64_MIN && b <= INT64_MAX ? b : undefined;
+}
+
 /**
- * sdv-py `_cast_ids_int64`: pin an id column to integers when EVERY non-null
- * value survives exactly — integer numbers, bigints, or canonical in-range
- * integer strings (`"007"`, `"1.5"`, `"abc"` leave the column untouched).
- * Strings become BigInt here; the INT64 policy then makes them numbers when
- * safe, exactly like any other INT64 column.
+ * sdv-py `_cast_ids_int64`: pin an id column to Int64 when EVERY non-null value
+ * survives exactly — integer numbers, bigints, or canonical in-range integer
+ * strings (`"007"`, `"1.5"`, `"abc"` leave the column untouched). Every value
+ * becomes a bigint here (the column is INT64 now, as in sdv-py); the INT64
+ * policy then applies — an id column becomes decimal strings.
  */
-function castIdColumn(c: ColumnAccess): void {
+function castIdColumn(c: Cells): void {
   for (let i = 0; i < c.n; i++) {
     const v = c.get(i);
     if (v === null || v === undefined || typeof v === "bigint") continue;
-    if (typeof v === "number" ? Number.isInteger(v) : typeof v === "string" && CANONICAL_INT.test(v)) {
-      if (typeof v === "string") {
-        const b = BigInt(v);
-        if (b < INT64_MIN || b > INT64_MAX) return;
-      }
-      continue;
-    }
-    return;
+    const int = typeof v === "number" ? Number.isInteger(v) : typeof v === "string" && CANONICAL_INT.test(v);
+    if (!int || asInt64(v as number | string) === undefined) return;
   }
   for (let i = 0; i < c.n; i++) {
     const v = c.get(i);
-    if (typeof v === "string") c.set(i, BigInt(v));
+    if (typeof v === "string" || typeof v === "number") c.set(i, asInt64(v));
   }
 }
 
 /**
- * INT64 policy (owner decision 3) for one column: hyparquet decodes INT64 as
- * BigInt. If every value is a safe integer (|v| <= Number.MAX_SAFE_INTEGER) the
- * column becomes plain `number`; otherwise it is left BigInt (exact) and ONE
- * warning names it. Nested lists / structs included.
+ * The integer policy for one column (owner decision 2026-10-05 12:55). An id
+ * column (`isIdColumn`: `id`, `*_id`, `*_ids`, `*_pk`, MLBAM ids) of integers
+ * becomes exact decimal strings, every value, whatever it was stored as (INT32,
+ * INT64 -> hyparquet bigint, or a DOUBLE holding integers: `39` -> `"39"`) and
+ * whatever the magnitude, so the column has one type in every season and joins
+ * across releases. An id column that is not exact integers (a fraction, a DOUBLE
+ * past 2^53, ...) is NOT stringified (that would be a wrong id): it gets ONE
+ * warning per (loader, column) per process and falls through to the non-id
+ * policy. Any other column: plain `number` if every bigint is a safe integer, else
+ * left BigInt (exact) with ONE warning per (loader, column) per process. Nested
+ * lists / structs included.
+ *
+ * The loaders run it only on the id columns and the columns some season stores as
+ * INT64 (`Asset.int64`), not on every cell of every column.
  */
-function int64Column(label: string, col: string, c: ColumnAccess): void {
-  let sawBigint = false;
-  for (let i = 0; i < c.n; i++) {
-    const safe = everyBigint(c.get(i), (b) => {
-      sawBigint = true;
-      return b >= MIN_SAFE && b <= MAX_SAFE;
-    });
-    if (!safe) {
-      _warn.emit(`${label}: column "${col}" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt`);
-      return;
-    }
+function int64Column(label: string, col: string, c: Cells): void {
+  if (isIdColumn(col)) {
+    if (idsToStrings(c) !== "not-integers") return;
+    const message = notIntegerIdWarning(label, col);
+    if (message !== undefined) _warn.emit(message, INT64_WARNING_CODE);
   }
-  if (sawBigint) for (let i = 0; i < c.n; i++) c.set(i, bigintsToNumbers(c.get(i)));
+  let sawBigint = false;
+  let safe = true;
+  const visit = (b: bigint): boolean => {
+    sawBigint = true;
+    return b >= MIN_SAFE && b <= MAX_SAFE;
+  };
+  for (let i = 0; i < c.n && safe; i++) {
+    const v = c.get(i);
+    if (typeof v === "bigint") safe = visit(v);
+    else if (typeof v === "object" && v !== null) safe = everyBigint(v, visit);
+  }
+  if (!safe) {
+    const message = bigintWarning(label, col);
+    if (message !== undefined) _warn.emit(message, INT64_WARNING_CODE);
+    return;
+  }
+  if (!sawBigint) return;
+  for (let i = 0; i < c.n; i++) {
+    const v = c.get(i);
+    if (typeof v === "bigint") c.set(i, Number(v));
+    else if (typeof v === "object" && v !== null) c.set(i, bigintsToNumbers(v));
+  }
 }
 
 /** {@link castIdColumn} over row objects (exported for tests). */
 export function castIdInt64(rows: ReleaseRow[], col: string): void {
-  castIdColumn(rowColumn(rows, col));
+  castIdColumn(rowCells(rows, col));
 }
 
 /** The INT64 policy over every column of row objects. Mutates and returns `rows`. */
 export function applyInt64Policy(rows: ReleaseRow[], label: string): ReleaseRow[] {
-  if (rows.length) for (const col of Object.keys(rows[0])) int64Column(label, col, rowColumn(rows, col));
+  if (rows.length) for (const col of Object.keys(rows[0])) int64Column(label, col, rowCells(rows, col));
   return rows;
 }
 
@@ -616,6 +653,7 @@ async function load(
   const missing: number[] = [];
   let found = 0;
   let cells = 0;
+  const int64 = new Set<string>(def.idInt64); // id_int64 columns become INT64 below
   for (const season of seasons) {
     const url = season === undefined ? def.url : releaseUrl(def.url, season);
     let asset = await fetchAsset(def, url, opts);
@@ -628,6 +666,7 @@ async function load(
       continue;
     }
     found++;
+    for (const c of asset.int64) int64.add(c);
     const total = cells + asset.rows * asset.leaves;
     if (total > maxCells) throw refuse(def, format, asset, season, total, maxCells, cells === 0);
     cells = total;
@@ -641,9 +680,14 @@ async function load(
     _warn.emit(`${def.fn}: no data for season(s) ${missing.join(", ")} (skipped)`);
   }
 
+  // The integer policy runs on every id column (any width: INT32, INT64, DOUBLE)
+  // and on the columns some season stores as INT64 (plus the id_int64 ones), not
+  // on every cell of every column.
+  const policy = (col: string): boolean => int64.has(col) || isIdColumn(col);
   if (format === "columns") {
     const out = concatColumns(def.fn, colFrames, opts.columns);
     for (const [name, values] of Object.entries(out)) {
+      if (!policy(name)) continue;
       if (def.idInt64?.includes(name)) castIdColumn(arrayColumn(values));
       int64Column(def.fn, name, arrayColumn(values));
     }
@@ -652,8 +696,9 @@ async function load(
   const out = concatRows(def.fn, rowFrames, opts.columns);
   if (out.length) {
     for (const col of def.idInt64 ?? []) if (col in out[0]) castIdInt64(out, col);
+    for (const col of Object.keys(out[0])) if (policy(col)) int64Column(def.fn, col, rowCells(out, col));
   }
-  return applyInt64Policy(out, def.fn);
+  return out;
 }
 
 /**

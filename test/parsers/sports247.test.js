@@ -11,6 +11,7 @@ import {
 } from '../../dist/parsers/sports247.js';
 import { FLAT_WRAPPERS } from '../../dist/index.js';
 import { parserFor } from '../../dist/parsers/_registry.js';
+import { isIdColumn } from '../../dist/core/int64.js';
 
 // No-network parser tests for the vendored 247Sports families, on REAL captures
 // copied from sdv-py's tests/fixtures (see the fixture READMEs). The parsers are
@@ -29,6 +30,9 @@ const schemaColumns = (stem) => readSchema(['schemas'], stem).map((c) => c.name)
 const TYPE_OK = {
   integer: (v) => typeof v === 'bigint' || Number.isInteger(v),
   double: (v) => typeof v === 'number',
+  // Any number, whole or not: JS has one number type, so a whole-valued Float64 cell (py 5.0)
+  // and an Int64 one are the same value and the integer/numeric split cannot be seen here.
+  // What can be seen is checked: a numeric column holding a BigInt (an integer past 2^53) fails.
   numeric: (v) => typeof v === 'number',
   character: (v) => typeof v === 'string',
   logical: (v) => typeof v === 'boolean',
@@ -40,7 +44,8 @@ function typeMismatches(rows, columns) {
   for (const r of rows) {
     for (const [col, v] of Object.entries(r)) {
       if (v === null || v === undefined || !(col in types)) continue;
-      const ok = TYPE_OK[types[col]];
+      // an id column the schema types numeric is decimal strings (the v4 INT64 id rule)
+      const ok = isIdColumn(col) && ['integer', 'double', 'numeric'].includes(types[col]) ? (x) => typeof x === 'string' : TYPE_OK[types[col]];
       if (!ok || !ok(v)) bad.add(`${col}: ${types[col]} vs ${typeof v} ${JSON.stringify(String(v)).slice(0, 20)}`);
     }
   }
@@ -106,13 +111,13 @@ const SITE_CAPTURES = {
 };
 
 describe('parsers/sports247: RDB (parse_sports247_result_set + aliases)', () => {
-  it('teams: one row per team with integer ids', () => {
+  it('teams: one row per team with integer ids (team_id a decimal string, v4 id rule)', () => {
     const rows = parse_sports247_teams(load('sports247', 'sports247_teams_football.json'));
     rows.length.should.be.above(100);
     for (const col of ['name', 'team_id', 'institution_key', 'conference', 'conference_abbreviation', 'sport']) {
       rows[0].should.have.property(col);
     }
-    rows.every((r) => Number.isInteger(r.team_id) && Number.isInteger(r.institution_key)).should.be.true();
+    rows.every((r) => /^\d+$/.test(r.team_id) && Number.isInteger(r.institution_key)).should.be.true();
   });
 
   it('institution_rankings: unrolls {pagination, list}; ranks ascend from 1', () => {
@@ -191,6 +196,11 @@ describe('parsers/sports247: site pages (parse_sports247_site_page)', () => {
     rows.map((r) => r.d).should.eql(['7', 'x']);
     should(rows[0].e).be.null();
     rows[1].e.should.equal(4);
+  });
+
+  it('an integer-string id column is its canonical decimal strings, exact past 2^53 (v4 id rule)', () => {
+    const rows = parse_sports247_site_page([{ PlayerId: '007' }, { PlayerId: '9007199254740993' }, { PlayerId: null }]);
+    rows.map((r) => r.player_id).should.eql(['7', '9007199254740993', null]);
   });
 
   it('keeps integers beyond 2^53 exact as BigInt', () => {

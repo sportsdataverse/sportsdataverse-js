@@ -5,10 +5,14 @@
 //   - deep-flatten nested objects with a `_` separator,
 //   - snake_case the resulting keys,
 //   - stringify array-valued cells (JSON.stringify) so rows stay rectangular,
+//   - an id column (`id`, `*_id`, `*_ids`, `*_pk`) of integers -> decimal
+//     strings (sdv-py: Int64; the v4 id rule, src/core/int64.ts),
 //   - non-array / empty input → [].
 //
 // `normalize` itself is plain TS (no @tidyjs/tidy dependency) so it has no
 // surprises; downstream parsers may compose tidy verbs on the rectangular rows.
+
+import { idColumnsToStrings } from "../core/int64.js";
 
 /** Is `v` a plain object (not null, not an array, not a Date)? */
 export function isPlainObject(v: any): boolean {
@@ -76,11 +80,12 @@ function flattenRow(
 /**
  * json_normalize equivalent: flatten an array of (possibly nested) row objects
  * into rectangular rows with deep `_`-joined, snake_cased keys. Array-valued
- * cells are stringified. Non-array / empty input returns `[]`.
+ * cells are stringified; an id column of integers becomes decimal strings.
+ * Non-array / empty input returns `[]`.
  */
 export function normalize(rows: any[]): Record<string, any>[] {
   if (!Array.isArray(rows) || rows.length === 0) return [];
-  return rows.map((row) => {
+  const flat = rows.map((row) => {
     const out: Record<string, any> = {};
     if (isPlainObject(row)) {
       flattenRow(row, "", out);
@@ -94,4 +99,5 @@ export function normalize(rows: any[]): Record<string, any>[] {
     for (const [k, v] of Object.entries(out)) snaked[snakeCase(k)] = v;
     return snaked;
   });
+  return idColumnsToStrings(flat);
 }

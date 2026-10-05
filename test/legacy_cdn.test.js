@@ -4,6 +4,8 @@ import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import sdv, { configure, resetConfig, AssetFetchError } from '../dist/index.js';
+import { resetWarnOnce } from '../dist/core/deprecation.js';
+import { captureWarnings } from './helpers/warnings.mjs';
 
 // The legacy hand-written CDN methods (`sdv.<league>.getSchedule / getPlayByPlay /
 // getBoxScore`, `sdv.cfb.getRankings`, `sdv.nfl.getWeeklySchedule`) used raw axios
@@ -79,16 +81,15 @@ describe('legacy getSchedule: the CDN date key is `date`, not `dates`', () => {
 
     it(`${lg}.getSchedule with only a date sends date= and warns once`, async () => {
       const calls = cdn(answer(SCHEDULE));
-      const warnings = [];
-      const onWarn = (w) => w.code === 'SDV_CDN_FOOTBALL_DATE' && warnings.push(w.message);
-      process.on('warning', onWarn);
-      try {
-        await sdv[lg].getSchedule({ year: 2024, month: 10, day: 6 });
-        await sdv[lg].getSchedule({ year: 2024, month: 10, day: 13 });
-        await new Promise((r) => setImmediate(r)); // 'warning' is emitted on the next tick
-      } finally {
-        process.off('warning', onWarn);
-      }
+      resetWarnOnce(); // warn-once state is per process: start clean whatever ran before
+      const warnings = (
+        await captureWarnings(async () => {
+          await sdv[lg].getSchedule({ year: 2024, month: 10, day: 6 });
+          await sdv[lg].getSchedule({ year: 2024, month: 10, day: 13 });
+        })
+      )
+        .filter((w) => w.code === 'SDV_CDN_FOOTBALL_DATE')
+        .map((w) => w.message);
       calls.map((c) => c.query).should.eql([
         { xhr: 1, date: '20241006' },
         { xhr: 1, date: '20241013' },

@@ -25,7 +25,7 @@ describe('parsers/cbs: parse_cbs_list (generic flattener)', () => {
     };
     const rows = parse_cbs_list(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('player_id', 1); // playerId -> player_id
+    rows[0].should.have.property('player_id', '1'); // playerId -> player_id
     rows[0].should.have.property('first_name', 'John');
     rows[0].should.have.property('bats_hand', 'R');
   });
@@ -33,7 +33,7 @@ describe('parsers/cbs: parse_cbs_list (generic flattener)', () => {
   it('finds the first inner list under a known list key', () => {
     parse_cbs_list({ data: { rows: [{ teamId: 7, name: 'A' }] } })[0].should.have.property(
       'team_id',
-      7
+      '7'
     );
     parse_cbs_list({ data: { items: [{ id: 'x' }] } })[0].should.have.property('id', 'x');
   });
@@ -46,13 +46,13 @@ describe('parsers/cbs: parse_cbs_list (generic flattener)', () => {
   it('emits a single resource object (no inner list) as one row', () => {
     const rows = parse_cbs_list({ data: { teamId: 5, location: { city: 'Boston' } } });
     rows.length.should.equal(1);
-    rows[0].should.have.property('team_id', 5);
+    rows[0].should.have.property('team_id', '5');
     rows[0].should.have.property('location_city', 'Boston'); // deep-flatten
   });
 
   it('also accepts an un-enveloped payload (bare array / object)', () => {
-    parse_cbs_list([{ id: 9 }])[0].should.have.property('id', 9);
-    parse_cbs_list({ venueId: 3 })[0].should.have.property('venue_id', 3);
+    parse_cbs_list([{ id: 9 }])[0].should.have.property('id', '9');
+    parse_cbs_list({ venueId: 3 })[0].should.have.property('venue_id', '3');
   });
 
   it('returns [] for empty / error-envelope / malformed payloads', () => {
@@ -76,16 +76,16 @@ describe('parsers/cbs: parse_cbs_scoreboard', () => {
     };
     const rows = parse_cbs_scoreboard(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('game_id', 100);
+    rows[0].should.have.property('game_id', '100');
     rows[0].should.have.property('home_abbr', 'NE'); // nested deep-flatten
     rows[0].should.have.property('away_score', 17);
   });
 
   it('accepts a bare array and a single-game object', () => {
-    parse_cbs_scoreboard({ data: [{ gameId: 1 }] })[0].should.have.property('game_id', 1);
+    parse_cbs_scoreboard({ data: [{ gameId: 1 }] })[0].should.have.property('game_id', '1');
     parse_cbs_scoreboard({ data: { gameId: 9, status: 'final' } })[0].should.have.property(
       'game_id',
-      9
+      '9'
     );
   });
 
@@ -176,7 +176,7 @@ describe('parsers/cbs: parse_cbs_odds', () => {
   });
 
   it('accepts a single odds object and returns [] when empty', () => {
-    parse_cbs_odds({ data: { gameId: 5, spread: -3 } })[0].should.have.property('game_id', 5);
+    parse_cbs_odds({ data: { gameId: 5, spread: -3 } })[0].should.have.property('game_id', '5');
     parse_cbs_odds({ data: {} }).should.eql([]);
     parse_cbs_odds(null).should.eql([]);
   });

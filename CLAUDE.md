@@ -35,10 +35,12 @@ roster, standings, odds, and many other surfaces across the major leagues.
 As of **v3.0.0** the package is a **cross-league ESPN client _plus_ a native
 (non-ESPN) live-API client** with a tidy parser layer:
 
-- **116 ESPN endpoint short names** generated for **29 leagues** (31 namespaces),
+- **126 ESPN endpoint short names** generated for **29 leagues** (31 namespaces),
   exposed as `espn_<league>_<short>` (snake) + `espn<League><Short>` (camelCase).
-- **532 flat-API wrappers across 15 families** — 7 native league APIs + 7 cross-sport
-  providers (see [Flat-API families](#flat-api-families-native--providers)).
+- **1059 flat-API wrappers across 27 families** — 14 merged onto a league namespace
+  and 13 on standalone provider namespaces (see
+  [Flat-API families](#flat-api-families-native--providers)). `npm run codegen` prints
+  the current counts; take numbers from it, not from this file.
 - A **parser layer** (`src/parsers/`): every wrapper returns raw JSON by default;
   `{ parsed: true }` returns a tidy array of flat, snake_cased row objects.
 
@@ -238,10 +240,10 @@ endpoints carry an `include_prefixes` league allowlist and a family `fixed_param
 ### Flat-API families (native + providers)
 
 Non-ESPN, absolute-host live APIs are generated into a **separate** `FLAT_WRAPPERS`
-table (so the ESPN table stays untouched). **532 flat-API wrappers across 15
-families**:
+table (so the ESPN table stays untouched). **1059 flat-API wrappers across 27
+families** (YAML stems; `npm run codegen` prints the counts):
 
-**7 native** — merged onto their league namespace:
+**14 league families** — merged onto their league namespace:
 
 | Family (YAML stem) | Namespace | Host | Auth |
 |---|---|---|---|
@@ -255,15 +257,19 @@ families**:
 | `pff_api` | `sdv.nfl.pffApi*` | `api.pff.com` | **caller's PFF Pro key** (`api_key` / `PFF_API_KEY`; `src/core/pff_api_runtime.ts`) |
 | `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`, else an id.nfl.com browser login with `email` / `password` or `NFLPRO_EMAIL` / `NFLPRO_PW` via the optional peer `playwright`; offset paging; `src/core/nfl_pro_runtime.ts`) |
 | `kenpom` | `sdv.mbb.kenpom*` | `kenpom.com` | **caller's subscription login** (`KENPOM_EMAIL` / `KENPOM_PW`; impersonating transport, needs `impit`; `src/core/kenpom_runtime.ts`) |
+| `mls_api` | `sdv.mls.mls*` | `stats-api.mlssoccer.com` (+ `sportapi` / `dapi` per endpoint) | keyless (browser UA + the site `Referer`; `src/core/keyless_runtime.ts`) |
+| `nwsl_api` | `sdv.nwsl.nwsl*` | `api-sdp.nwslsoccer.com` | keyless (browser UA + `Referer`; composite ids keep their `::`) |
+| `nba_stats` | `sdv.nba.nba_stats*` | `stats.nba.com` | keyless, but **TLS impersonation by default** (`impit`; plain clients hang, never retried on 403; `src/core/nba_stats_runtime.ts`); live tests only under `SDV_NBA_STATS_LIVE=1` |
+| `wnba_stats` | `sdv.wnba.wnba_stats*` | `stats.wnba.com` | as `nba_stats` |
 
-The three subscription families (`pff_api`, `nfl_pro`, `kenpom`) are never on the
-docs playground or its proxy allowlist (`NO_PLAYGROUND_FAMILIES` in
-`generate.mjs`). KenPom's HTML parser needs cheerio, so it is node-only:
+The subscription families (`pff_api`, `nfl_pro`, `kenpom`) and the impersonation-only
+ones (`nba_stats`, `wnba_stats`, both 247Sports stems) are never on the docs
+playground or its proxy allowlist (`NO_PLAYGROUND_FAMILIES` in `generate.mjs`). KenPom's HTML parser needs cheerio, so it is node-only:
 `src/parsers/kenpom.ts` registers it with `registerParser` on import instead of
 listing it in the browser-safe `_registry.ts` (`NODE_ONLY_PARSERS`).
 
-**7 cross-sport providers** — standalone `sdv.<ns>.*` namespaces (NOT leagues), each
-getting its own generated reference page:
+**13 provider families** — standalone `sdv.<ns>.*` namespaces (NOT leagues; 10
+namespaces), each getting its own generated reference page:
 
 | Family | Namespace | Auth |
 |---|---|---|
@@ -274,25 +280,38 @@ getting its own generated reference page:
 | Fox Sports (`fox`, vendored from py `fox_api`) | `sdv.fox.*` (`fox_api_*`; pre-v4 `fox_*` are deprecated aliases) | public `apikey` + `api-version` query (defaulted; `scorechip` and `foxpolls` send no `api-version`) |
 | Yahoo Sports (`yahoo_scores` + `yahoo`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
 | HockeyTech / LeagueStat (`hockeytech`) | `sdv.hockeytech.*` | keyless; **league-parameterized** (`league` slug) |
-| BartTorvik / T-Rank (`torvik`) | `sdv.torvik.*` | keyless (needs a browser-like UA) |
+| BartTorvik / T-Rank (`torvik` + `bart_wbb`, women's) | `sdv.torvik.*` | keyless (needs a browser-like UA) |
+| On3 Recruit Database (`on3`, vendored) | `sdv.on3.*` | keyless |
+| American Soccer Analysis (`asa`, vendored) | `sdv.asa.*` | keyless |
 
 `FLAT_API_NAMESPACES` in both `src/index.ts` and `generate.mjs` maps each stem to its
 namespace — **keep the two copies in sync**. `standaloneFlatNamespaces()` in
 `generate.mjs` decides which namespaces are providers (not leagues) and renders them
 their own standalone reference page.
 
-**Two newest providers (v3.1.0) — HockeyTech + BartTorvik:**
+**HockeyTech + BartTorvik (v3.1.0; HockeyTech is JS-owned, `torvik` vendored with JS parsers):**
 
-- **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, 10 endpoints: `seasons`,
-  `schedule`, `teams`, `team_roster`, `player_stats`, `game_shifts`, `standings`,
-  `leaders`, `pbp`, `game_summary`). One feed gateway (`/feed/index.php`) serves
-  every league; the wrapper carries a `league` slug for **PWHL + AHL/OHL/WHL/QMJHL**.
+- **HockeyTech / LeagueStat** (`sdv.hockeytech.*`, 16 endpoints: `seasons`,
+  `schedule`, `scorebar`, `teams`, `team_roster`, `player_stats`, `player_game_log`,
+  `player_search`, `stats`, `transactions`, `playoff_bracket`, `standings`, `leaders`,
+  `game_shifts`, `pbp`, `game_summary`). One feed gateway (`/feed/index.php`) serves
+  every league; the wrapper carries a `league` slug for **20 leagues** (PWHL, AHL, OHL,
+  WHL, QMJHL and 15 minor / junior leagues; the registry is `HOCKEYTECH_LEAGUES`).
   Hosts: `lscluster.hockeytech.com` (+ `cluster.leaguestat.com` for QMJHL). The
   `src/core/hockeytech_runtime.ts` getter (registered as `hockeytechGet` in
   `GETTER_OVERRIDES`) unwraps the JSONP envelope (`angular.callbacks._N({…})`)
   before `JSON.parse`, switches the `gc` feed to `tab=` (not `view=`), applies a
   PWHL play-by-play key override, and injects each league's `client_code` / `key` /
-  `site_id` from a per-league registry (overridable via `SDV_<LEAGUE>_API_KEY`).
+  `site_id` (overridable via `SDV_<LEAGUE>_API_KEY`). It sends the configured
+  User-Agent (`configure({ userAgent })`), no family override.
+  **A failed fetch is never an empty result:** an empty or unparseable body, or
+  HockeyTech's HTTP-200 error sentinel (`{"error": …}`, `{"SiteKit"|"GC": {"Undefined": …}}`),
+  throws `AssetFetchError`; HTTP 404 throws `NoDataError`, any other HTTP failure
+  `AssetFetchError`. The ONE reply that means "nothing here" is the plain-text
+  `Feed type access denied.` (e.g. MJHL's key has no gamecenter access): `{}`, so
+  the parsers return `[]` as sdv-py does. Analytics ported from sdv-py
+  (`src/analytics/hockeytech*.ts`) add per-league `<lg>_game_shifts` / `<lg>_pbp` /
+  `<lg>_player_toi` / `<lg>_game_corsi` plus league-parameterised `hockeytech_*` forms.
   Ported from `fastRhockey`'s `hockeytech_*.R` + sdv-py's `sportsdataverse/hockeytech/`.
 - **BartTorvik / T-Rank** (`sdv.torvik.*`, 5 endpoints: `ratings`, `team_factors`,
   `game_stats`, `player_stats`, `game_schedule`) from `barttorvik.com`. The
@@ -344,10 +363,15 @@ transform is what made the provider families largely mechanical to add.
   default; passing `{ parsed: true }` runs the registered parser. Omitting the kwarg
   preserves the raw return for every existing caller. This mirrors
   `sportsdataverse-py`'s `return_parsed=True`.
-- ESPN parsed dispatch is a port of py's `_common_espn_parsers` — **22 parsers**
-  (scoreboard / standings / rosters / leaders / athlete deep-dives / the 21-sub-frame
-  `summary` dispatcher + two generics for Core v2 list + single-resource). All 116
-  ESPN endpoints route through these; `summary` honours `section`.
+- ESPN parsed dispatch is a port of py's `_common_espn_parsers` — **27 parsers**
+  (scoreboard / standings / rosters / leaders / athlete deep-dives / FPI / the
+  21-sub-frame `summary` dispatcher + two generics for Core v2 list + single-resource,
+  plus 4 for the ESPN CDN pages: `parse_cdn_game` runs `summary` on a game page's
+  `gamepackageJSON`, so `cdn_playbyplay` / `cdn_boxscore` honour `section` like
+  `summary` (`SECTIONED_ENDPOINTS`); `parse_cdn_scoreboard` / `parse_cdn_schedule`
+  run the scoreboard parser on `content.sbData` / `content.schedule`;
+  `parse_cdn_rankings` gives one row per poll entry). All 126 ESPN shorts route
+  through these (`ESPN_ENDPOINT_PARSERS`).
 - The browser-safe barrel is `src/parsers/browser.ts`. It transitively imports
   only `_normalize`, sibling parser modules, and `papaparse` (all browser-safe —
   no node-only HTTP deps). `npm run bundle:parsers` esbuilds it into the

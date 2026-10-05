@@ -2,6 +2,8 @@ import should from 'should';
 import sdv, { FLAT_WRAPPERS, configure, resetConfig } from '../dist/index.js';
 import { resolveFlat } from '../dist/core/flat.js';
 import { FLAT_HOSTS } from '../dist/core/client.js';
+import { resetWarnOnce } from '../dist/core/deprecation.js';
+import { captureWarnings } from './helpers/warnings.mjs';
 
 // Offline regression tests for the Phase 0 correctness fixes (a fake transport answers every family).
 describe('phase 0 fixes (offline)', () => {
@@ -40,13 +42,11 @@ describe('phase 0 fixes (offline)', () => {
 
   it('ncaa stats.ncaa.org scrapers emit a one-time DeprecationWarning', async () => {
     answer('<html></html>');
-    const warnings = [];
-    const on = (w) => warnings.push(w);
-    process.on('warning', on);
-    await sdv.ncaa.getSports();
-    await sdv.ncaa.getSports();
-    await new Promise((r) => setImmediate(r));
-    process.off('warning', on);
+    resetWarnOnce(); // warn-once state is per process: start clean whatever ran before
+    const warnings = await captureWarnings(async () => {
+      await sdv.ncaa.getSports();
+      await sdv.ncaa.getSports();
+    });
     warnings.filter((w) => w.name === 'DeprecationWarning' && /getSports/.test(w.message)).length.should.equal(1);
   });
 });

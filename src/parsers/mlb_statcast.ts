@@ -20,6 +20,7 @@
 // same `underscore` pass.
 
 import Papa from "papaparse";
+import { idColumnsToStrings, MLBAM_ID_COLUMNS, warnBigint } from "../core/int64.js";
 
 /**
  * Faithful port of `sportsdataverse.dl_utils.underscore` (+ the parser's
@@ -78,12 +79,13 @@ export function underscoreKeys(row: Record<string, any>): Record<string, any> {
  */
 function jsonRows(rows: any[]): Record<string, any>[] {
   if (!Array.isArray(rows) || rows.length === 0) return [];
-  return rows.map((row) => {
-    const flat: Record<string, any> = {};
-    if (isPlainObject(row)) flattenRow(row, "", flat);
-    else flat.value = Array.isArray(row) ? JSON.stringify(row) : row;
-    return underscoreKeys(flat);
+  const flat = rows.map((row) => {
+    const out: Record<string, any> = {};
+    if (isPlainObject(row)) flattenRow(row, "", out);
+    else out.value = Array.isArray(row) ? JSON.stringify(row) : row;
+    return underscoreKeys(out);
   });
+  return idColumnsToStrings(flat); // an id column of integers -> decimal strings (v4 id rule)
 }
 
 /**
@@ -138,10 +140,10 @@ function warn(message: string): void {
  * every other cell is numeric becomes numbers (an integer column holding a value
  * beyond Number.MAX_SAFE_INTEGER becomes BigInt instead, with one warning,
  * so no int64 precision is lost), one of only True/False cells booleans; anything
- * else stays text.
+ * else stays text. (`typedCsvRows` names a column still BigInt after the id
+ * rule in one warning per column per process.)
  */
 function inferCsvTypes(rows: Record<string, any>[]): Record<string, any>[] {
-  const bigint: string[] = [];
   for (const col of rows.length ? Object.keys(rows[0]) : []) {
     const present = rows.map((r) => r[col]).filter((v) => typeof v === "string" && !CSV_NA.has(v));
     let conv: ((v: string) => any) | null = null;
@@ -149,7 +151,6 @@ function inferCsvTypes(rows: Record<string, any>[]): Record<string, any>[] {
       const big =
         present.every((v) => CSV_INT.test(v.trim())) &&
         present.some((v) => !Number.isSafeInteger(Number(v.trim())));
-      if (big) bigint.push(col);
       conv = big ? (v) => BigInt(v.trim()) : csvNumber;
     } else if (present.length && present.every((v) => CSV_BOOL.has(v))) {
       conv = (v) => CSV_TRUE.has(v);
@@ -159,28 +160,32 @@ function inferCsvTypes(rows: Record<string, any>[]): Record<string, any>[] {
       r[col] = typeof v !== "string" || CSV_NA.has(v) ? null : conv ? conv(v) : v;
     }
   }
-  if (bigint.length) {
-    warn(`Savant CSV columns [${bigint.join(", ")}] hold integers beyond Number.MAX_SAFE_INTEGER; returned as BigInt.`);
-  }
   return rows;
 }
 
 /**
- * Savant columns holding MLBAM integer ids (players, game); sdv-py's
- * `_MLBAM_ID_COLUMNS` at the vendor pin. Pinned to integers at the parse boundary
- * so the CSV (search / leaderboard) and JSON (`/gf`) frames join on them.
+ * An MLBAM id cell as sdv-py's `to_numeric` + Int64 cast reads it, as its exact
+ * decimal string; `undefined` when it is not an integer (or is a number past
+ * 2^53, already rounded).
  */
-export const MLBAM_ID_COLUMNS: readonly string[] = [
-  "batter", "pitcher", "on_1b", "on_2b", "on_3b",
-  ...[2, 3, 4, 5, 6, 7, 8, 9].map((i) => `fielder_${i}`),
-  "game_pk",
-];
+function mlbamId(v: any): string | undefined {
+  if (typeof v === "bigint") return v.toString();
+  if (typeof v === "number") return Number.isSafeInteger(v) ? String(v) : undefined;
+  if (typeof v !== "string") return undefined;
+  const t = v.trim();
+  if (CSV_INT.test(t)) return BigInt(t).toString(); // exact, any length
+  const n = CSV_NUMBER.test(t) ? csvNumber(t) : NaN;
+  return Number.isSafeInteger(n) ? String(n) : undefined;
+}
 
 /**
- * Port of sdv-py's `_pin_id_columns`, in place: an MLBAM id column whose every
- * non-null cell is an integer (a number, or a digit string such as the `/gf`
- * feed's `"745444"`) becomes integer numbers; a column holding a non-integral or
- * non-numeric value is left as read and named in one warning (`_warn_uncast_ids`).
+ * Port of sdv-py's `_pin_id_columns`, in place: an MLBAM id column
+ * (`MLBAM_ID_COLUMNS`) whose every non-null cell is an integer (a number, or a
+ * digit string such as the `/gf` feed's `"745444"`) is pinned to Int64 in
+ * sdv-py, so here to its exact decimal strings (the v4 id rule:
+ * `"745444"`, `"0745444"` -> `"745444"`); `""` is null. A column holding a
+ * non-integral or non-numeric value is left as read and named in one warning
+ * (`_warn_uncast_ids`).
  */
 function pinIdColumns(rows: Record<string, any>[]): Record<string, any>[] {
   const uncast: string[] = [];
@@ -188,15 +193,13 @@ function pinIdColumns(rows: Record<string, any>[]): Record<string, any>[] {
     if (!rows.some((r) => col in r)) continue;
     // pandas `to_numeric("")` -> NaN, so an empty-string cell is null (whitespace is not).
     const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== undefined && v !== "");
-    const asInt = (v: any) =>
-      typeof v === "bigint" ? v : typeof v === "number" ? v : typeof v === "string" && CSV_NUMBER.test(v.trim()) ? csvNumber(v) : NaN;
-    if (!present.every((v) => typeof v === "bigint" || Number.isInteger(asInt(v)))) {
+    if (!present.every((v) => mlbamId(v) !== undefined)) {
       uncast.push(col);
       continue;
     }
     for (const r of rows) {
       if (r[col] === "") r[col] = null;
-      else if (r[col] !== null && r[col] !== undefined) r[col] = asInt(r[col]);
+      else if (r[col] !== null && r[col] !== undefined) r[col] = mlbamId(r[col]);
     }
   }
   if (uncast.length) {
@@ -211,10 +214,16 @@ function pinIdColumns(rows: Record<string, any>[]): Record<string, any>[] {
 /**
  * Raw CSV rows (`csvToRowsRaw`) -> the tidy, typed form sdv-py's `_csv_to_frame`
  * returns: pandas-style column typing, the `underscore` key transform, MLBAM ids
- * pinned to integers. Mutates the raw rows' cells.
+ * pinned (decimal strings), every other id column of integers decimal strings
+ * (the v4 id rule). An integer column left BigInt is named in one warning per
+ * column per process (code `SDV_INT64`). Mutates the raw rows' cells.
  */
 export function typedCsvRows(rows: Record<string, any>[]): Record<string, any>[] {
-  return pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row)));
+  const out = idColumnsToStrings(pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row))));
+  for (const col of out.length ? Object.keys(out[0]) : []) {
+    if (out.some((r) => typeof r[col] === "bigint")) warnBigint("Savant CSV", col);
+  }
+  return out;
 }
 
 /** `csvToRowsRaw` + `typedCsvRows` (the tidy form). */

@@ -95,6 +95,18 @@ jobs:
             gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
           fi
           exit 1 # keep the run red as well; the issue is the durable record
+      # parity_coverage.json records the vendored sdv-py ref and the per-family coverage
+      # counts, so every sync changes it. Rewrite it here so the PR carries that diff for
+      # review instead of failing the staleness test. A coverage error still fails the
+      # Test step below and reaches the PR body.
+      - name: Refresh parity coverage
+        if: steps.codegen.outcome == 'success'
+        continue-on-error: true
+        env:
+          SDV_PARITY_WRITE: "1"
+        run: | # the parity test imports dist/, so build first
+          npm run build
+          npx mocha --timeout 15000 test/parsers/parity.test.js --grep "parity_coverage.json is current"
       - name: Test
         id: test
         if: steps.codegen.outcome == 'success'
@@ -153,6 +165,7 @@ jobs:
             docs/docs/**
             docs/src/generated/**
             docs/src/playground/endpoints.json
+            test/fixtures/py/parity_coverage.json
 
   # A PR opened/updated with GITHUB_TOKEN starts no pull_request run, but
   # workflow_dispatch is exempt, so dispatch CI on the branch (its check runs attach to

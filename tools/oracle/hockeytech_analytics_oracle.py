@@ -1,10 +1,11 @@
 """Generate the sdv-py oracle for the sdv-js HockeyTech analytics port (Task 22a).
 
-Run ONCE from a throwaway sdv-py worktree checked out at the pin:
+Run ONCE from a throwaway sdv-py worktree checked out at PORT_PIN (tools/sdv_py_pin.py;
+the shared guard refuses any other checkout, a dirty one, or another installed copy):
 
-    git -C <sdv-py> worktree add --detach <scratch>/pyoracle 719de79edb685b89c524f8b4c0c146fea0b53855
+    git -C <sdv-py> worktree add --detach <scratch>/pyoracle <PORT_PIN>
     cd <scratch>/pyoracle && uv sync --extra tests
-    uv run python <this file> <sdv-js repo root>
+    uv run python <sdv-js>/tools/oracle/hockeytech_analytics_oracle.py
 
 It reads the committed REAL HockeyTech captures from
 ``<sdv-js>/test/fixtures/hockeytech/analytics/`` (copied byte-for-byte from sdv-py
@@ -12,7 +13,7 @@ It reads the committed REAL HockeyTech captures from
 client patched to serve those captures) and writes
 ``<sdv-js>/test/fixtures/hockeytech/analytics/oracle.json``.
 
-Provenance: sdv-py 719de79edb685b89c524f8b4c0c146fea0b53855, polars as locked there.
+Provenance: sdv-py at PORT_PIN, polars as locked there.
 The ``synthetic_*`` cases are small hand-built frames that exercise edge cases the two
 captured games do not contain (goal-instant epsilon clamp, pulled goalie, line-change
 boundary, overlapping penalties); they are labelled as such and run through the same
@@ -23,7 +24,6 @@ from __future__ import annotations
 
 import json
 import math
-import subprocess
 import sys
 from pathlib import Path
 
@@ -33,9 +33,12 @@ import sportsdataverse.hockeytech._family as F
 from sportsdataverse.hockeytech import _analytics as A
 from sportsdataverse.hockeytech import _parsers as P
 
-ROOT = Path(sys.argv[1])
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools"))
+from sdv_py_pin import PORT_PIN, pinned_checkout  # noqa: E402
+
+PIN, _ = pinned_checkout(PORT_PIN)
 FIX = ROOT / "test" / "fixtures" / "hockeytech" / "analytics"
-PIN = "719de79edb685b89c524f8b4c0c146fea0b53855"
 
 
 def load(stem):
@@ -87,7 +90,9 @@ C["ohl_pbp_enriched_no_meta_no_shifts"] = frame(ohl_enriched)
 
 # --- analytics on the real enriched game ----------------------------------
 C["pwhl_player_toi"] = frame(A.player_toi(shifts))
-C["pwhl_corsi_fenwick_team"] = frame(A.corsi_fenwick(enriched))
+# corsi_fenwick builds its team rows from an unordered `unique()` (a random order per run):
+# sort them so the oracle is byte-stable (the JS test compares these frames sorted by team).
+C["pwhl_corsi_fenwick_team"] = frame(A.corsi_fenwick(enriched).sort("team_id"))
 C["pwhl_corsi_fenwick_on_ice"] = frame(A.corsi_fenwick_on_ice(enriched))
 goalies = sorted({str(g) for g in enriched["goalie_id"].drop_nulls().to_list()})
 C["pwhl_strength_state"] = {
@@ -323,7 +328,7 @@ cf_in = pl.DataFrame(
 )
 C["synthetic_corsi"] = {
     "rows": cf_in.to_dicts(),
-    "team": frame(A.corsi_fenwick(cf_in)),
+    "team": frame(A.corsi_fenwick(cf_in).sort("team_id")),  # unordered in py, as above
     "on_ice": frame(A.corsi_fenwick_on_ice(cf_in)),
 }
 
@@ -338,9 +343,7 @@ toi_in = pl.DataFrame(
 )
 C["synthetic_toi"] = {"rows": toi_in.to_dicts(), "out": frame(A.player_toi(toi_in))}
 
-out["provenance"]["py_head"] = subprocess.run(
-    ["git", "rev-parse", "HEAD"], capture_output=True, text=True
-).stdout.strip()
+out["provenance"]["py_head"] = PIN  # the guard checked HEAD == PIN
 
 dest = FIX / "oracle.json"
 dest.write_text(

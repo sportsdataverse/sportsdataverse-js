@@ -15,8 +15,11 @@ sidebar_position: 1
 
 **`sportsdataverse`** is the SportsDataverse's Node.js client for sports data. As
 of **v3.0.0** it is a **cross-league ESPN client**: a single, uniform surface of
-**116 endpoint wrappers** generated for **29 leagues** — play-by-play, box scores,
-schedules, rosters, standings, rankings, odds, and more — plus the original
+**126 endpoint wrappers** generated for **29 leagues** — play-by-play, box scores,
+schedules, rosters, standings, rankings, odds, and more — plus **1059 flat-API
+wrappers across 27 families** (league APIs such as MLB Stats, NHL, NFL.com, MLS, NWSL
+and stats.nba.com, and providers such as The Odds API, 247Sports, CBS, Fox, Yahoo,
+HockeyTech, BartTorvik, On3 and American Soccer Analysis) and the original
 hand-written scrapers it has always shipped.
 
 It is the Node.js sister to the [`sportsdataverse-py`](https://py.sportsdataverse.org/)
@@ -101,7 +104,7 @@ const box = await sdv.cfb.getBoxScore(401628319);
 
 The ESPN client is **generated from a single YAML source of truth**
 (`tools/codegen/endpoints/*.yaml`). Each endpoint is wrapped once and bound to
-every applicable league, so the 116 endpoints × 29 leagues stay perfectly in
+every applicable league, so the 126 endpoints × 29 leagues stay perfectly in
 sync. Endpoints are grouped into **scopes**:
 
 | Scope | Applies to | Examples |
@@ -117,7 +120,7 @@ You can introspect the whole surface at runtime:
 import sdv, { LEAGUES, WRAPPERS } from 'sportsdataverse';
 
 LEAGUES.map((l) => l.prefix);            // ['nba','nfl','nhl',...,'soccer','cricket','ufl',...]
-WRAPPERS.length;                          // 116 endpoint definitions
+WRAPPERS.length;                          // 126 endpoint definitions
 Object.keys(sdv.nba).filter((k) => k.startsWith('espnNba'));  // every NBA wrapper
 ```
 

@@ -1,5 +1,5 @@
 import should from 'should';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { LEAGUES, WRAPPERS, FLAT_WRAPPERS } from '../dist/index.js';
 import { resolveRequest } from '../dist/core/espn.js';
 import { resolveFlat as pkgResolveFlat } from '../dist/core/flat.js';
@@ -391,5 +391,47 @@ describe('playground proxy: keyless provider hosts (on3, asa, mls_api, nwsl_api,
     r.res.statusCode.should.equal(200);
     r.fetched.should.containEql('/seasons/nwsl::Football_Season::0b6761e4701749f593690c0f338da74c/teams');
     r.sentHeaders.Referer.should.equal('https://www.nwslsoccer.com/');
+  });
+});
+
+describe('playground presets and guide cells point at real endpoints', () => {
+  const endpoints = JSON.parse(readFileSync(new URL('../docs/src/playground/endpoints.json', import.meta.url), 'utf8'));
+  // examples.js is ESM under docs/ (no "type": "module" there): import its source as a
+  // data: URL so node does not warn about a typeless package. It imports nothing.
+  const examplesSrc = readFileSync(new URL('../docs/src/playground/examples.js', import.meta.url), 'utf8');
+  const flatDef = (id) => {
+    const [, api, short] = id.split(':');
+    return { api, def: findFlatDef(endpoints.flatApis, api, short) };
+  };
+
+  it('every Examples preset resolves, and a flat one is grouped under its league', async () => {
+    const { EXAMPLES } = await import(`data:text/javascript,${encodeURIComponent(examplesSrc)}`);
+    EXAMPLES.length.should.be.above(10);
+    const bad = [];
+    for (const ex of EXAMPLES) {
+      if (ex.endpoint.startsWith('flat:')) {
+        const { api, def } = flatDef(ex.endpoint);
+        if (!def || endpoints.flatLeagues[api] !== ex.league) bad.push(`${ex.id}: ${ex.endpoint} (league ${ex.league})`);
+      } else if (!endpoints.endpoints.some((e) => `espn:${e.short}` === ex.endpoint)) {
+        bad.push(`${ex.id}: ${ex.endpoint}`);
+      }
+    }
+    bad.should.eql([]);
+  });
+
+  it('every flat:<api>:<short> RunCell id in the guides resolves', () => {
+    const dir = new URL('../docs/docs/guides/', import.meta.url);
+    const ids = readdirSync(dir)
+      .filter((f) => f.endsWith('.mdx'))
+      .flatMap((f) => [...readFileSync(new URL(f, dir), 'utf8').matchAll(/endpoint="(flat:[\w]+:[\w]+)"/g)].map((m) => `${f}: ${m[1]}`));
+    ids.length.should.be.above(5);
+    ids.filter((s) => !flatDef(s.split(': ')[1]).def).should.eql([]);
+  });
+
+  it('flatLeagues lists no family the playground cannot run (impersonation / caller credentials)', () => {
+    for (const api of ['nba_stats', 'wnba_stats', 'sports247', 'sports247_site_pages', 'pff_api', 'nfl_pro', 'kenpom']) {
+      (endpoints.flatLeagues[api] === undefined).should.be.true(api);
+      endpoints.flatApis.some((w) => w.api === api).should.be.false(api);
+    }
   });
 });

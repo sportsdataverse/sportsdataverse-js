@@ -7,7 +7,11 @@
 // Contract: a single result set -> rows; several -> `{ [name]: rows }`; empty or
 // malformed input -> `[]` (never throws). Columns are snake_cased with sdv-py's
 // `underscore`. A zero-row frame in py carries the documented schema; rows-as-
-// objects cannot, so an empty set is `[]`.
+// objects cannot, so an empty set is `[]`. An id column of integers (`player_id`,
+// `team_id`, ...: Int64 in py) is decimal strings (the v4 id rule, src/core/int64.ts);
+// `game_id` ships as a string ("0022300001") and stays one.
+
+import { idColumnsToStrings } from "../core/int64.js";
 
 type Row = Record<string, any>;
 type ResultSet = { name?: string; headers?: any; rowSet?: any };
@@ -218,7 +222,7 @@ function toRows(rs: ResultSet): Row[] {
     });
     out.push(o);
   }
-  return out;
+  return idColumnsToStrings(out);
 }
 
 /**

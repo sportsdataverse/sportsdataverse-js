@@ -17,6 +17,7 @@ import {
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
 import sdv from '../../dist/index.js';
 import { configure, resetConfig } from '../../dist/core/config.js';
+import { _int64Warned } from '../../dist/core/int64.js';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 
@@ -39,7 +40,7 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
     // Python parser which does NOT collapse it to last_name_first_name.
     rows[0].should.have.property('last_name, first_name', 'Judge, Aaron');
     // numeric columns are numbers, as pandas.read_csv types them in sdv-py
-    rows[0].should.have.property('player_id', 592450);
+    rows[0].should.have.property('player_id', '592450');
     rows[0].should.have.property('xw_oba', 0.458); // xwOBA -> xw_oba (underscore)
     rows[0].should.have.property('attempts', 540);
     rows[1].should.have.property('last_name, first_name', 'Ohtani, Shohei');
@@ -64,42 +65,60 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
   it('types CSV columns the way pandas.read_csv does (NA cells null; numeric / bool columns)', () => {
     const csv = 'id,name,flag,pct,note\n1,A,True,0.5,\n2,,False,NA,x\n3,C,true,,NaN';
     parse_mlb_statcast_leaderboard(csv).should.eql([
-      { id: 1, name: 'A', flag: true, pct: 0.5, note: null },
-      { id: 2, name: null, flag: false, pct: null, note: 'x' },
-      { id: 3, name: 'C', flag: true, pct: null, note: null },
+      { id: '1', name: 'A', flag: true, pct: 0.5, note: null }, // an id column: decimal strings (v4)
+      { id: '2', name: null, flag: false, pct: null, note: 'x' },
+      { id: '3', name: 'C', flag: true, pct: null, note: null },
     ]);
   });
 
-  it('integers beyond Number.MAX_SAFE_INTEGER stay exact as BigInt (one warning); inf / -inf are +/-Infinity', async () => {
+  it('integers beyond Number.MAX_SAFE_INTEGER stay exact as BigInt (one warning per column per process, code SDV_INT64); inf / -inf are +/-Infinity', async () => {
+    _int64Warned.clear();
     const warned = [];
-    const onWarn = (w) => warned.push(w.message);
+    const onWarn = (w) => warned.push(w);
     process.on('warning', onWarn);
     try {
-      parse_mlb_statcast_leaderboard('big,x\n9007199254740993,inf\n2,-inf').should.eql([
-        { big: 9007199254740993n, x: Infinity },
-        { big: 2n, x: -Infinity },
-      ]);
+      for (let call = 0; call < 2; call++) {
+        parse_mlb_statcast_leaderboard('big,x\n9007199254740993,inf\n2,-inf').should.eql([
+          { big: 9007199254740993n, x: Infinity },
+          { big: 2n, x: -Infinity },
+        ]);
+      }
     } finally {
       await new Promise((r) => setImmediate(r));
       process.off('warning', onWarn);
     }
-    warned.filter((m) => /\[big\].*BigInt/.test(m)).length.should.equal(1);
+    const big = warned.filter((w) => /"big".*BigInt/.test(w.message));
+    big.length.should.equal(1); // two calls, one warning
+    big[0].code.should.equal('SDV_INT64');
+  });
+
+  it('an id column is exact decimal strings in every era: 6-digit and beyond-2^53 ids, CSV and JSON alike', () => {
+    // CSV text is exact, so a 64-bit id never passes through a rounded number
+    const rows = parse_mlb_statcast_leaderboard('player_id,game_pk,v\n592450,745444,1\n9007199254740993,401628579101849903,2');
+    rows.map((r) => r.player_id).should.eql(['592450', '9007199254740993']);
+    rows.map((r) => r.game_pk).should.eql(['745444', '401628579101849903']);
+    rows.map((r) => r.v).should.eql([1, 2]);
+    // `n_pk` is the pickoff count (leaderboard_pitcher_running_game / basestealing_run_value), not an id
+    parse_mlb_statcast_leaderboard('player_id,n_pk,game_pk\n592450,3,745444')[0].should.eql({ player_id: '592450', n_pk: 3, game_pk: '745444' });
+    JSON.stringify(rows).should.be.a.String(); // no BigInt left in an id column
+    parse_mlb_statcast_gamefeed({ team_home: [{ game_pk: '401628579101849903', batter: 660271 }, { game_pk: '0745444', batter: '7' }] })
+      .should.eql([{ game_pk: '401628579101849903', batter: '660271' }, { game_pk: '745444', batter: '7' }]);
   });
 
   it('pins MLBAM id columns to integers like sdv-py _pin_id_columns (CSV and the /gf feed)', () => {
     // the /gf feed ships game_pk as a digit string; sdv-py casts it to Int64
     parse_mlb_statcast_gamefeed({ team_home: [{ game_pk: '745444', batter: '660271', pitch_type: 'FF' }] }).should.eql([
-      { game_pk: 745444, batter: 660271, pitch_type: 'FF' },
+      { game_pk: '745444', batter: '660271', pitch_type: 'FF' }, // Int64 in sdv-py: decimal strings (v4)
     ]);
     // a non-integral id column is left as read (sdv-py warns and does not cast)
-    parse_mlb_statcast_leaderboard('game_pk,pitcher\n7.5,1\n8,2')[0].should.eql({ game_pk: 7.5, pitcher: 1 });
+    parse_mlb_statcast_leaderboard('game_pk,pitcher\n7.5,1\n8,2')[0].should.eql({ game_pk: 7.5, pitcher: '1' });
   });
 
   it('/gf "" id cell is null like sdv-py to_numeric (oracle: pin 719de79, pandas)', () => {
     parse_mlb_statcast_gamefeed({ team_home: [{ game_pk: '745444', batter: '' }, { game_pk: '745444', batter: '123' }] })
-      .should.eql([{ game_pk: 745444, batter: null }, { game_pk: 745444, batter: 123 }]);
+      .should.eql([{ game_pk: '745444', batter: null }, { game_pk: '745444', batter: '123' }]);
     parse_mlb_statcast_gamefeed({ team_home: [{ batter: '' }, { batter: null }, { batter: '4' }] })
-      .should.eql([{ batter: null }, { batter: null }, { batter: 4 }]);
+      .should.eql([{ batter: null }, { batter: null }, { batter: '4' }]);
     // whitespace is not blank to pandas: column left as read
     parse_mlb_statcast_gamefeed({ team_home: [{ batter: ' ' }, { batter: '7' }] }).should.eql([{ batter: ' ' }, { batter: '7' }]);
   });
@@ -117,8 +136,8 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
       for (const fn of ['mlb_statcast_search', 'mlb_statcast_search_minors', 'mlb_statcast_search_wbc']) {
         const rows = await sdv.mlb[fn]('2024-06-15', '2024-06-15', { parsed: true });
         rows.should.eql(typed, fn);
-        rows[0].game_pk.should.be.a.Number();
-        rows[0].batter.should.be.a.Number();
+        rows[0].game_pk.should.be.a.String(); // MLBAM ids: decimal strings (v4 id rule)
+        rows[0].batter.should.be.a.String();
         rows[0].release_speed.should.be.a.Number();
         const raw = await sdv.mlb[fn]('2024-06-15', '2024-06-15');
         raw[0].game_pk.should.be.a.String(); // raw = the CSV text cells
@@ -155,7 +174,7 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_gamefeed (JSON)', () => {
     rows.length.should.equal(3); // 2 home + 1 away
     rows[0].should.have.property('pitch_type', 'FF');
     rows[0].should.have.property('start_speed', 95.2);
-    rows[0].should.have.property('batter_id', 1); // nested flatten batter.id -> batter_id
+    rows[0].should.have.property('batter_id', '1'); // nested flatten batter.id -> batter_id
     rows[2].should.have.property('pitch_type', 'CH');
   });
 
@@ -190,7 +209,7 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_html_leaderboard (HTML-embedd
       '</script></body></html>';
     const rows = parse_mlb_statcast_html_leaderboard(html);
     rows.length.should.equal(2);
-    rows[0].should.have.property('player_id', 592450);
+    rows[0].should.have.property('player_id', '592450');
     rows[0].should.have.property('name', 'Judge');
     rows[0].should.have.property('value_runs', 7); // nested flatten value.runs -> value_runs
   });
@@ -217,7 +236,7 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_player (serverVals HTML)', ()
 
     const logs = parse_mlb_statcast_player(html, 'statcastGameLogs');
     logs.length.should.equal(1);
-    logs[0].should.have.property('game_pk', 745444);
+    logs[0].should.have.property('game_pk', '745444');
     logs[0].should.have.property('hits', 2);
   });
 
@@ -247,9 +266,9 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_schedule (JSON)', () => {
     };
     const rows = parse_mlb_statcast_schedule(raw);
     rows.length.should.equal(3);
-    rows[0].should.have.property('game_pk', 745444); // gamePk -> game_pk
-    rows[0].should.have.property('teams_home_team_id', 147); // nested flatten
-    rows[2].should.have.property('game_pk', 745446);
+    rows[0].should.have.property('game_pk', '745444'); // gamePk -> game_pk
+    rows[0].should.have.property('teams_home_team_id', '147'); // nested flatten
+    rows[2].should.have.property('game_pk', '745446');
   });
 
   it('returns [] for missing / malformed schedule', () => {

@@ -681,6 +681,21 @@ describe('core/transport', () => {
     res.data.path.should.equal(WIRE);
   });
 
+  it("both transports keep a composite id's '::' unencoded, in the path and the query (NWSL ids)", async () => {
+    const id = 'nwsl::Football_Season::0b6761e4701749f593690c0f338da74c';
+    const transports = [['axios', axiosTransport]];
+    try {
+      await import('impit');
+      transports.push(['impit', createImpersonatingTransport()]);
+    } catch {
+      // impit not installed: the axios half still runs
+    }
+    for (const [name, transport] of transports) {
+      const res = await transport({ method: 'GET', url: `${base}/seasons/${id}/teams`, query: { season_id: id } });
+      res.data.path.should.equal(`/seasons/${id}/teams?season_id=${id}`, name);
+    }
+  });
+
   it('encodeQuery keeps axios scalar encoding and drops undefined / null', () => {
     encodeQuery({ a: 1, b: null, c: undefined, d: 'x:y$z', e: ['1', null, '2'] }).should.equal(
       'a=1&d=x:y$z&e=1&e=2'

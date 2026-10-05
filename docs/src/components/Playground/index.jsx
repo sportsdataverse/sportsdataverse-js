@@ -13,9 +13,10 @@ const FLAT_HOSTS = endpoints.flatHosts || {};
 const MAX_TABLE_ROWS = 200;
 const MAX_TABLE_COLS = 40;
 
-// Human label per flat-API family stem (matches the docs section headings).
+// Human label per flat-API family stem (endpoints.json `flatApis[].api`; matches the
+// docs section headings). A stem missing here shows as itself.
 const FLAT_API_LABEL = {
-  mlb_api: 'MLB Stats API',
+  mlb: 'MLB Stats API',
   mlb_statcast: 'Baseball Savant / Statcast',
   nhl_api_web: 'NHL api-web (game feed)',
   nhl_edge: 'NHL EDGE (player tracking)',
@@ -23,11 +24,18 @@ const FLAT_API_LABEL = {
   nhl_records: 'NHL Records',
   nfl_api: 'NFL.com Shield API',
   odds_api: 'The Odds API',
-  sports247: '247Sports (recruiting)',
-  cbs_napi: 'CBS Sports (napi)',
-  fox_bifrost: 'Fox Sports (Bifrost)',
-  yahoo_editorial: 'Yahoo Sports (editorial)',
-  yahoo_shangrila: 'Yahoo Sports (shangrila)',
+  recruiting: '247Sports (old API, deprecated)',
+  cbs: 'CBS Sports (napi)',
+  fox: 'Fox Sports (Bifrost)',
+  yahoo_scores: 'Yahoo Sports (editorial)',
+  yahoo: 'Yahoo Sports (shangrila)',
+  hockeytech: 'HockeyTech / LeagueStat',
+  torvik: 'BartTorvik / T-Rank',
+  bart_wbb: "BartTorvik / T-Rank (women's)",
+  on3: 'On3 Recruit Database',
+  asa: 'American Soccer Analysis',
+  mls_api: 'MLS stats API',
+  nwsl_api: 'NWSL stats API',
 };
 
 // Standalone (non-league) flat namespaces — any `flatLeagues` value that isn't a
@@ -386,7 +394,7 @@ export default function Playground() {
     didInit.current = true; // we're explicitly setting everything; don't reset
     skipReset.current = true; // the (prefix, selId) effect must keep our params
     setPrefix(ex.league);
-    setSelId(ex.endpoint);
+    setSelId(canonicalSelId(ex.endpoint)); // a pre-v4 flat short -> its v4 id, as share links do
     setParams(Object.fromEntries(Object.entries(ex.params || {}).map(([k, v]) => [k, String(v)])));
     setParsed(!!ex.parsed);
     setSection(ex.section || null);
