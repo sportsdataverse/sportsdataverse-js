@@ -137,10 +137,14 @@ import {
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
 } from "./torvik.js";
+import { parse_on3_rdb } from "./on3.js";
+import { parse_asa, parse_asa_goals_added } from "./asa.js";
+import { parse_mls_api, parse_mls_entity, parse_mls_standings, parse_mls_match } from "./mls_api.js";
+import { parse_nwsl_sdp, parse_nwsl_standings, parse_nwsl_stats, parse_nwsl_lineups } from "./nwsl_api.js";
 import { parse_nba_stats_result_sets } from "./nba_stats.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
-export type ParserFn = (raw: any) => Record<string, any>[];
+export type ParserFn = (raw: any, section?: string) => Record<string, any>[];
 
 /** Registered parsers, keyed by the `parser` name on a flat `WrapperDef`. */
 export const PARSERS: Record<string, ParserFn> = {
@@ -279,6 +283,18 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_torvik_game_stats,
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
+  // ---- Keyless providers / league APIs (vendored from sdv-py) ----
+  parse_on3_rdb,
+  parse_asa,
+  parse_asa_goals_added,
+  parse_mls_api,
+  parse_mls_entity,
+  parse_mls_standings,
+  parse_mls_match,
+  parse_nwsl_sdp,
+  parse_nwsl_standings,
+  parse_nwsl_stats,
+  parse_nwsl_lineups,
   // ---- stats.nba.com / stats.wnba.com (resultSets envelope; one generic parser) ----
   // Multi-set payloads return { [setName]: rows }, hence the cast.
   parse_nba_stats_result_sets: parse_nba_stats_result_sets as ParserFn,

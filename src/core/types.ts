@@ -1,5 +1,5 @@
 /** ESPN URL families, keyed to their host (see `HOSTS` in client.ts). */
-export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2";
+export type EspnFamily = "site_v2" | "site_v2_alt" | "web_v3" | "core_v2" | "fitt_v3";
 
 /** Which wrapper tables apply to a league (mirrors sdv-py's scope flags). */
 export type Scope = "universal" | "ncaa" | "football" | "mlb";

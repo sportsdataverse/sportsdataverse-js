@@ -16,7 +16,7 @@ const raw  = await sdv.nba.espnNbaScoreboard({});               // raw Dict
 const rows = await sdv.nba.espnNbaScoreboard({ parsed: true }); // tidy row[]
 ```
 
-The **120** ESPN endpoints route through just **22** parsers, so the returned columns are determined by the endpoint's *parser*, not the league — the same parser yields the same shape across every league. Each parser's column set is documented once below; the **Endpoints** line under each lists the short names that use it. Columns are snake_cased and nested objects flattened with `_` (e.g. `team.abbreviation` -> `team_abbreviation`). Generic / league-variable passthroughs show no fixed table.
+The **121** ESPN endpoints route through just **23** parsers, so the returned columns are determined by the endpoint's *parser*, not the league — the same parser yields the same shape across every league. Each parser's column set is documented once below; the **Endpoints** line under each lists the short names that use it. Columns are snake_cased and nested objects flattened with `_` (e.g. `team.abbreviation` -> `team_abbreviation`). Generic / league-variable passthroughs show no fixed table.
 
 ## `parse_scoreboard`
 

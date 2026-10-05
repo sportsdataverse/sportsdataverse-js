@@ -1659,6 +1659,44 @@ export const espnCollegeBaseballEvents: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnCollegeBaseballEvents} (py/R parity). */
 export const espn_college_baseball_events = espnCollegeBaseballEvents;
 
+const FPI_DEF: WrapperDef = {
+  "short": "fpi",
+  "family": "fitt_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/powerindex",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    },
+    {
+      "name": "page",
+      "queryKey": "page"
+    }
+  ]
+};
+/**
+ * COLLEGE_BASEBALL — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)).
+ *
+ * **Endpoint:** `GET https://site.web.api.espn.com/apis/fitt/v3/sports/baseball/college-baseball/powerindex`
+ *
+ * @param params.season - query parameter.
+ * @param params.limit - query parameter.
+ * @param params.page - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.college_baseball.espnCollegeBaseballFpi({});
+ */
+export const espnCollegeBaseballFpi: WrapperFn = (params = {}) =>
+  callWrapper(FPI_DEF, CFG, params);
+/** snake_case alias of {@link espnCollegeBaseballFpi} (py/R parity). */
+export const espn_college_baseball_fpi = espnCollegeBaseballFpi;
+
 const FRANCHISE_DEF: WrapperDef = {
   "short": "franchise",
   "family": "core_v2",

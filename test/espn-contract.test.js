@@ -9,7 +9,7 @@ import { HOSTS } from '../dist/core/client.js';
 // builds a well-formed ESPN URL. ~819 wrappers across 29 leagues.
 
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
-const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2']);
+const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3']);
 const SCOPES = new Set(['universal', 'ncaa', 'football', 'mlb']);
 
 /** Wrappers applicable to a league = those whose scope is in the league's scopes. */

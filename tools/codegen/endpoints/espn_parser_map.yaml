@@ -56,6 +56,7 @@ endpoints:
   event_situation: parse_single_entity
   event_status: parse_single_entity
   events: parse_items
+  fpi: parse_fpi
   franchise: parse_single_entity
   franchises: parse_items
   injuries: parse_injuries

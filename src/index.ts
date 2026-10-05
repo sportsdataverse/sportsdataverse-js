@@ -84,6 +84,13 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace; the merge creates `sdv.torvik.*` from scratch. Keyless but needs
   // a browser User-Agent (set by the family's getter); endpoints mix CSV/JSON.
   torvik: 'torvik',
+  // Women's T-Rank joins `sdv.torvik`; On3 / ASA are standalone provider
+  // namespaces; the MLS / NWSL native APIs merge onto their league namespaces.
+  bart_wbb: 'torvik',
+  on3: 'on3',
+  asa: 'asa',
+  mls_api: 'mls',
+  nwsl_api: 'nwsl',
   // stats.nba.com / stats.wnba.com (TLS-impersonating transport; see
   // src/core/nba_stats_runtime.ts) merge onto the league namespaces.
   nba_stats: 'nba',

@@ -12,6 +12,7 @@ export const HOSTS: Record<EspnFamily, string> = {
   site_v2_alt: "https://site.api.espn.com/apis/v2/sports",
   web_v3: "https://site.web.api.espn.com/apis/common/v3/sports",
   core_v2: "https://sports.core.api.espn.com/v2/sports",
+  fitt_v3: "https://site.web.api.espn.com/apis/fitt/v3/sports",
 };
 
 /**
@@ -78,6 +79,16 @@ export const FLAT_HOSTS: Record<string, string> = {
   // (src/core/torvik_runtime.ts) sets a browser UA + returns the raw body text
   // (the endpoints mix CSV / JSON) — registered in GETTER_OVERRIDES.
   torvik: "https://barttorvik.com",
+  // Women's T-Rank (same site, /ncaaw data files) — shares sdv.torvik.
+  bart_wbb: "https://barttorvik.com/ncaaw",
+  // On3 Recruit Database (keyless public gateway; one endpoint carries a /rdb/v2 host override).
+  on3: "https://api.on3.com/public/rdb/v1",
+  // American Soccer Analysis public API (keyless).
+  asa: "https://app.americansocceranalysis.com/api/v1",
+  // Official MLS web API (stats-api; sportapi / dapi are per-endpoint host overrides).
+  mls_api: "https://stats-api.mlssoccer.com",
+  // NWSL StatsPerform SDP API (keyless).
+  nwsl_api: "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
   // stats.nba.com / stats.wnba.com — fingerprint-block plain clients (silent
   // hang), so the families install an impersonating transport by default (see
   // src/core/nba_stats_runtime.ts).

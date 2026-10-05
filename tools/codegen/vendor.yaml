@@ -51,6 +51,38 @@ families:
       # py-only weekly FPI parser (not ported); the Core v2 list parser stands in.
       parse_weekly_powerindex: {js: parse_items, schema_compatible: false}
   espn_web_v3: {}
+  # ESPN FPI (fitt v3): a 5th ESPN host family (HOSTS.fitt_v3). Its `fpi` wrapper is
+  # universal-scope, so it lands on every league. `parse_fpi` is registered in
+  # src/parsers/espn.ts (a faithful port of sdv-py's); ESPN returns tables come
+  # from schemas/espn/, so the YAML returns_schema is not used.
+  espn_fitt_v3: {}
+  # Keyless providers / native league APIs that exist only in sdv-py.
+  on3:
+    # src/parsers/on3.ts: faithful port of sdv-py cfb/on3_parsers.py parse_on3_rdb
+    # (the 4 deprecated _next/data scrape shims are not in the YAML and not ported).
+    schema_compatible: true
+  asa:
+    # src/parsers/asa.ts: faithful port of sdv-py soccer/asa_parsers.py. The
+    # multi-table goals-added parser returns py's documented default sub-frame
+    # (`summary`) under `parsed: true`; `section: "actions"` selects the other.
+    schema_compatible: true
+  mls_api:
+    # src/parsers/mls_api.ts: faithful port of sdv-py soccer/mls/mls_api_parsers.py.
+    # A multi-table parser returns the sub-frame py's schema documents by default
+    # (standings -> entries, match -> match_information); `section` selects the others.
+    schema_compatible: true
+  nwsl_api:
+    # src/parsers/nwsl_api.ts: faithful port of sdv-py soccer/nwsl/nwsl_api_parsers.py;
+    # lineups returns the `players` sub-frame py's schema documents by default
+    # (`section`: teams | staff for the others).
+    schema_compatible: true
+  bart_wbb:
+    # Women's T-Rank: the same header-CSV parse as men's, run through JS's
+    # parse_torvik_ratings. Its de-duplicated header names differ from py's
+    # (`rank_1` vs `rank_2` for the repeated `rank` column), so py's returns
+    # schema does not describe the JS output: no returns table.
+    parsers:
+      parse_torvik_csv: {js: parse_torvik_ratings, schema_compatible: false}
   leagues: {}
   mlb_statcast:
     # src/parsers/mlb_statcast.ts: "Faithful port of" sdv-py's mlb_statcast_parsers.py
