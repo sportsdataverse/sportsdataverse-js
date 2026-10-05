@@ -70,7 +70,9 @@ export function resolveFlat(
   if (!host) {
     throw new Error(`${def.short}: flat wrapper missing host`);
   }
-  const path = def.path.replace(/\{(\w+)\}/g, (_m, name: string) => {
+  // sdv-py `now_variant`: toggle param absent (py `is None`) -> the `/now` path.
+  const useNow = def.nowVariant && def.nowToggle && lookup(params, def.nowToggle) === undefined;
+  const path = (useNow ? def.nowVariant! : def.path).replace(/\{(\w+)\}/g, (_m, name: string) => {
     const v = resolvePathParam(def, params, name);
     if (v === undefined || v === null) {
       const pp = (def.pathParams ?? []).find((p) => p.name === name);
