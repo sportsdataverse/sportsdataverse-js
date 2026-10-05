@@ -1,9 +1,15 @@
 import should from 'should';
-import { cpSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { parse } from 'yaml';
+
+// git does not track empty directories, so a fixture file may land in one a fresh checkout lacks
+const put = (path, body) => {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, body);
+};
 import {
   CODEGEN_DIR,
   checkVendor,
@@ -294,7 +300,7 @@ describe('vendor:check (offline drift gate)', function () {
     // a py schema the declaration does not attach (nba_stats is schema_compatible: false),
     // left behind byte-identical to its upstream copy
     const rel = join('schemas', 'native', 'nba_stats', 'leaguedashplayerstats.yaml');
-    writeFileSync(join(tmp, rel), readFileSync(join(tmp, 'vendor', 'upstream', rel)));
+    put(join(tmp, rel), readFileSync(join(tmp, 'vendor', 'upstream', rel)));
     checkVendor(tmp).should.eql([
       `ORPHAN: tools/codegen/schemas/native/nba_stats/leaguedashplayerstats.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
     ]);
@@ -311,7 +317,7 @@ describe('vendor:check (offline drift gate)', function () {
       // a hand-added file in a fully vendored directory
       [join('schemas', 'native', 'nhl_edge', 'stray.yaml')]: 'schema: stray\ncolumns: []\n',
     };
-    for (const [rel, body] of Object.entries(files)) writeFileSync(join(tmp, rel), body);
+    for (const [rel, body] of Object.entries(files)) put(join(tmp, rel), body);
     checkVendor(tmp).should.eql([]);
     writeVendor(tmp).removed.should.eql([]);
     for (const [rel, body] of Object.entries(files)) readFileSync(join(tmp, rel), 'utf8').should.equal(body);
