@@ -11,9 +11,11 @@ Every wrapper — ESPN and flat-API alike — fetches through one runtime core:
 1. the **auth provider** for the wrapper's family decorates the request (bearer
    token, API-key header or query param, login cookies);
 2. the family's **transport** sends it;
-3. a `401` triggers one credential refresh and a retry; `429`, `5xx` and network
-   errors are retried with exponential backoff + jitter (honouring
-   `Retry-After`, default 3 retries); a `403` is never retried;
+3. a `401` triggers one credential refresh and a retry; network errors and the
+   family's retry statuses (by default `403`, `408`, `429`, `500`, `502`, `503`,
+   `504`) are retried with exponential backoff + jitter (honouring
+   `Retry-After`, default 3 retries, at most 4 of them on statuses);
+   auth-gated families such as `nfl_api` never retry a `403`;
 4. the outcome is classified into a small error vocabulary.
 
 A **family** is the stem a wrapper belongs to: the ESPN URL families
@@ -53,6 +55,26 @@ import { configure } from 'sportsdataverse';
 configure({ retries: 5, timeoutMs: 60_000, userAgent: 'my-app/1.0' });
 ```
 
+`retries` is the whole attempt budget. Network errors may use all of it; retry
+statuses may use at most 4 retries (`min(retries, 4)`), so a persistent `403`
+or `5xx` can't spin the full budget. A status that persists past the cap raises
+`AssetFetchError`.
+
+Which statuses are retried is per family. The default set,
+`DEFAULT_RETRY_STATUSES`, matches sdv-py and includes `403` because ESPN's
+Core v2 API answers `403` under load. A family whose `403` is a real
+"forbidden" (an auth-gated API) narrows the set with `registerFamilyDefaults`:
+
+```js
+import { registerFamilyDefaults, DEFAULT_RETRY_STATUSES } from 'sportsdataverse';
+
+registerFamilyDefaults('my_family', {
+  retryStatuses: DEFAULT_RETRY_STATUSES.filter((s) => s !== 403),
+});
+```
+
+`nfl_api` ships registered this way.
+
 ## Using a proxy
 
 A transport is just an async function from a request to a response. It must
@@ -87,11 +109,18 @@ configure({ transport: { core_v2: viaProxy } });          // just ESPN Core v2
 configure({ transport: { default: viaProxy, mlb: other } }); // per family + fallback
 ```
 
-Transport precedence for a family: your `configure` entry for that family, then
-your `default`, then the transport the family's runtime registers for itself,
-then the built-in axios transport. A bare transport (or `default`) also replaces
-family-specific transports such as the impersonating one below, so scope it with
-a family map when that matters. `resetConfig()` drops everything you configured.
+Transport precedence for a family:
+
+1. your `configure` entry for that family;
+2. the transport the family's runtime registers for itself
+   (`registerFamilyDefaults`), when the host requires one;
+3. your `default` (or bare) transport;
+4. the built-in axios transport.
+
+So a generic proxy set as `default` never silently replaces a transport a host
+requires, such as the browser-impersonating transport below. To proxy such a
+family, configure that family explicitly. The impersonating transport takes a
+`proxyUrl`. `resetConfig()` drops everything you configured.
 
 ## Browser-impersonating transport
 

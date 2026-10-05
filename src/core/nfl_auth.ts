@@ -17,7 +17,7 @@
 // replaces it.
 
 import { tokenAuth, type AuthProvider } from "./auth.js";
-import { registerFamilyDefaults, resolveFamily } from "./config.js";
+import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults, resolveFamily } from "./config.js";
 import { AssetFetchError } from "./errors.js";
 import { mergeHeaders, type Transport } from "./transport.js";
 
@@ -240,4 +240,8 @@ export const nflAuth: AuthProvider = {
   refresh: (ctx) => wrapperTokens.refresh!(ctx),
 };
 
-registerFamilyDefaults("nfl_api", { auth: nflAuth });
+// 403 from api.nfl.com is a real forbidden, not load — never retried.
+registerFamilyDefaults("nfl_api", {
+  auth: nflAuth,
+  retryStatuses: DEFAULT_RETRY_STATUSES.filter((s) => s !== 403),
+});

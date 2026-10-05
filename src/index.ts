@@ -144,8 +144,14 @@ export {
   TransportUnavailableError,
 } from './core/errors.js';
 export type { FetchErrorDetails } from './core/errors.js';
-export { configure, getConfig, resetConfig } from './core/config.js';
-export type { ConfigureOptions, SdvConfig } from './core/config.js';
+export {
+  configure,
+  getConfig,
+  resetConfig,
+  registerFamilyDefaults,
+  DEFAULT_RETRY_STATUSES,
+} from './core/config.js';
+export type { ConfigureOptions, SdvConfig, FamilyDefaults } from './core/config.js';
 export { axiosTransport, createImpersonatingTransport } from './core/transport.js';
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';

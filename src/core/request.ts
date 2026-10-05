@@ -18,6 +18,12 @@ const ESPN_FAMILIES = new Set(["site_v2", "site_v2_alt", "web_v3", "core_v2"]);
 const MAX_RETRY_AFTER_SECONDS = 120;
 
 /**
+ * Status retries get their own small cap (sdv-py `_MAX_STATUS_RETRIES`) so a
+ * persistent 403 / 5xx can't spin the whole budget; network retries don't.
+ */
+const MAX_STATUS_RETRIES = 4;
+
+/**
  * Test seam for the backoff sleep.
  * @internal
  */
@@ -60,11 +66,15 @@ export async function requestResponse(
   family: string,
   req: TransportRequest
 ): Promise<TransportResponse> {
-  const { transport, auth, retries, timeoutMs, userAgent } = resolveFamily(family);
+  const { transport, auth, retries, timeoutMs, userAgent, retryStatuses } = resolveFamily(family);
+  // Same accounting as sdv-py: one attempt budget (`retries`), of which at most
+  // min(retries, 4) may be spent on retryable statuses.
+  const statusBudget = Math.min(retries, MAX_STATUS_RETRIES);
   const ctx: AuthContext = { family, transport };
   const base: TransportRequest = { ...req, timeoutMs: req.timeoutMs ?? timeoutMs };
   const where = { url: req.url };
   let attempt = 0;
+  let statusRetries = 0;
   let refreshed = false;
 
   for (;;) {
@@ -115,8 +125,9 @@ export async function requestResponse(
     if (status === 404) {
       throw new NoDataError(`${family}: HTTP 404: ${req.url}`, { ...where, status });
     }
-    if ((status === 429 || status >= 500) && attempt < retries) {
+    if (retryStatuses.includes(status) && statusRetries < statusBudget && attempt < retries) {
       await _timer.sleep(retryDelayMs(attempt, headerValue(res.headers, "retry-after")));
+      statusRetries++;
       attempt++;
       continue;
     }
@@ -131,11 +142,13 @@ export async function requestResponse(
  * Fetch through the family's configured transport + auth and return the body.
  *
  * Auth is applied, then the transport is called. A 401 triggers one
- * `auth.refresh` and a retry. 429 / 5xx / network errors are retried with
- * bounded exponential backoff + jitter (honouring `Retry-After`), up to
- * `retries` (default 3). Then: 2xx returns the data; 404 — or an ESPN-family
- * 200 body `{ code: 404 }` — throws {@link NoDataError}; anything else throws
- * {@link AssetFetchError}. 403 is never retried.
+ * `auth.refresh` and a retry. Network errors and the family's retry statuses
+ * (default 403 / 408 / 429 / 500 / 502 / 503 / 504; auth-gated families drop
+ * 403) are retried with bounded exponential backoff + jitter (honouring
+ * `Retry-After`), up to `retries` (default 3) attempts in all, at most 4 of
+ * them on statuses. Then: 2xx returns the data; 404 — or an ESPN-family 200
+ * body `{ code: 404 }` — throws {@link NoDataError}; anything else (including a
+ * 403 that persists) throws {@link AssetFetchError}.
  *
  * @param family Family stem (`"site_v2"`, `"mlb"`, `"nfl_api"`, …) — selects transport + auth.
  */

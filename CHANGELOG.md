@@ -43,9 +43,14 @@ Every wrapper (ESPN and flat-API) now fetches through one runtime core
 - **BREAKING: the Statcast, BartTorvik and HockeyTech getters no longer swallow a
   failed fetch** into `{}` / `""` — they throw like every other wrapper, so a
   failed fetch can't be mistaken for an empty table.
-- **Retries:** 429 / 5xx / network errors are retried with exponential backoff +
-  jitter (0.5s doubling, capped at 4s), honouring `Retry-After` (capped at 120s),
-  default 3 retries. 403 is never retried; a 401 refreshes credentials once.
+- **Retries:** network errors and the family's retry statuses (default
+  `DEFAULT_RETRY_STATUSES` = 403 / 408 / 429 / 500 / 502 / 503 / 504, as
+  sdv-py) are retried with exponential backoff + jitter (0.5s doubling, capped
+  at 4s), honouring `Retry-After` (capped at 120s). The default budget is 3
+  retries, with at most 4 spent on statuses. 403 is retried because ESPN Core v2
+  answers 403 under load. Auth-gated families narrow the set with
+  `registerFamilyDefaults(family, { retryStatuses })`; `nfl_api` never retries a
+  403. A 401 refreshes credentials once.
 - **`configure({ transport, auth, retries, timeoutMs, userAgent })`** +
   `getConfig()` / `resetConfig()`. Transports and auth are per family
   (`site_v2`, `core_v2`, `mlb`, `nfl_api`, …) with an optional `default`

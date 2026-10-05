@@ -13,7 +13,10 @@ export interface ConfigureOptions {
    * auth on purpose: credentials are only ever sent to the family they belong to.
    */
   auth?: Record<string, AuthProvider>;
-  /** Retries after the first attempt for 429 / 5xx / network errors (default 3). */
+  /**
+   * Retries after the first attempt (default 3): network errors may use all of
+   * them, the family's retry statuses at most min(retries, 4).
+   */
   retries?: number;
   /** Per-request timeout in milliseconds (default 30000). */
   timeoutMs?: number;
@@ -36,7 +39,26 @@ export interface ResolvedFamilyConfig {
   retries: number;
   timeoutMs: number;
   userAgent: string;
+  /** HTTP statuses retried for this family (see {@link DEFAULT_RETRY_STATUSES}). */
+  retryStatuses: readonly number[];
 }
+
+/** What a family runtime can install with {@link registerFamilyDefaults}. */
+export interface FamilyDefaults {
+  transport?: Transport;
+  auth?: AuthProvider;
+  /**
+   * Statuses worth retrying for this family. Auth-gated families drop 403 —
+   * there it is a real forbidden / entitlement, not load.
+   */
+  retryStatuses?: readonly number[];
+}
+
+/**
+ * Statuses retried by default (sdv-py `dl_utils._RETRYABLE_STATUS`). 403 is in
+ * the set because ESPN Core v2 answers 403 under load.
+ */
+export const DEFAULT_RETRY_STATUSES: readonly number[] = [403, 408, 429, 500, 502, 503, 504];
 
 const DEFAULTS = {
   retries: 3,
@@ -46,7 +68,7 @@ const DEFAULTS = {
 };
 
 let user: SdvConfig = fresh();
-const familyDefaults: Record<string, { transport?: Transport; auth?: AuthProvider }> = {};
+const familyDefaults: Record<string, FamilyDefaults> = {};
 
 function fresh(): SdvConfig {
   return { transport: {}, auth: {}, ...DEFAULTS };
@@ -78,26 +100,30 @@ export function resetConfig(): void {
   user = fresh();
 }
 
-/** For family runtimes: install the transport / auth a family needs by default. */
-export function registerFamilyDefaults(
-  family: string,
-  defaults: { transport?: Transport; auth?: AuthProvider }
-): void {
+/**
+ * For family runtimes: install the transport / auth / retry statuses a family
+ * needs by default. A user `configure` entry for the same family still wins.
+ */
+export function registerFamilyDefaults(family: string, defaults: FamilyDefaults): void {
   familyDefaults[family] = { ...familyDefaults[family], ...defaults };
 }
 
 /**
- * Resolve one family. Transport precedence: user `[family]` > user `"default"`
- * > registered family default > axios. Auth: user `[family]` > registered default.
+ * Resolve one family. Transport precedence: user `[family]` > registered family
+ * default > user `"default"` > axios — a host-required family transport (e.g.
+ * TLS impersonation) is never silently replaced by a generic user default.
+ * Auth: user `[family]` > registered default. Retry statuses: registered
+ * default > {@link DEFAULT_RETRY_STATUSES}.
  */
 export function resolveFamily(family: string): ResolvedFamilyConfig {
   const fam = familyDefaults[family] ?? {};
   return {
     transport:
-      user.transport[family] ?? user.transport.default ?? fam.transport ?? axiosTransport,
+      user.transport[family] ?? fam.transport ?? user.transport.default ?? axiosTransport,
     auth: user.auth[family] ?? fam.auth,
     retries: user.retries,
     timeoutMs: user.timeoutMs,
     userAgent: user.userAgent,
+    retryStatuses: fam.retryStatuses ?? DEFAULT_RETRY_STATUSES,
   };
 }

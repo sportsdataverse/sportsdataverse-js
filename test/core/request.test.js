@@ -20,7 +20,7 @@ import sdv, {
   nflClearTokenCache,
 } from '../../dist/index.js';
 import { request, retryDelayMs, _timer } from '../../dist/core/request.js';
-import { registerFamilyDefaults } from '../../dist/core/config.js';
+import { registerFamilyDefaults, resolveFamily, DEFAULT_RETRY_STATUSES } from '../../dist/core/config.js';
 import { _impitLoader } from '../../dist/core/transport.js';
 import { statcastGet } from '../../dist/core/statcast_runtime.js';
 import { torvikGet } from '../../dist/core/torvik_runtime.js';
@@ -141,13 +141,79 @@ describe('core/request: retry + classification', () => {
     t.calls.length.should.equal(1);
   });
 
-  it('403 -> AssetFetchError with exactly one attempt (never retried)', async () => {
+  it('ESPN 403 (load) is retried, capped at 4 status retries, then AssetFetchError', async () => {
+    const t = fakeTransport({ status: 403 });
+    configure({ transport: t, retries: 10 });
+    const err = await request('core_v2', GET()).should.be.rejectedWith(AssetFetchError);
+    err.status.should.equal(403);
+    t.calls.length.should.equal(5); // 1 attempt + 4 status retries (the cap), not 1 + 10
+    sleeps.length.should.equal(4);
+  });
+
+  it('status retries are min(retries, 4): the default budget of 3 gives 4 attempts', async () => {
     const t = fakeTransport({ status: 403 });
     configure({ transport: t });
-    const err = await request('site_v2', GET()).should.be.rejectedWith(AssetFetchError);
+    await request('site_v2', GET()).should.be.rejectedWith(AssetFetchError);
+    t.calls.length.should.equal(4);
+  });
+
+  it('a 403 that recovers within the cap returns the data', async () => {
+    const t = fakeTransport({ status: 403 }, { status: 403 }, { status: 200, data: 'ok' });
+    configure({ transport: t });
+    (await request('core_v2', GET())).should.equal('ok');
+    t.calls.length.should.equal(3);
+  });
+
+  it('408 is retried', async () => {
+    const t = fakeTransport({ status: 408 }, { status: 200, data: 'ok' });
+    configure({ transport: t });
+    (await request('mlb', GET())).should.equal('ok');
+    t.calls.length.should.equal(2);
+  });
+
+  it('non-listed statuses (400, 501) fail on the first attempt', async () => {
+    for (const status of [400, 501]) {
+      const t = fakeTransport({ status });
+      configure({ transport: t });
+      const err = await request('mlb', GET()).should.be.rejectedWith(AssetFetchError);
+      err.status.should.equal(status);
+      t.calls.length.should.equal(1);
+    }
+  });
+
+  it('network errors keep the full retry budget (not the status cap)', async () => {
+    const t = fakeTransport(new Error('ECONNRESET'));
+    configure({ transport: t, retries: 10 });
+    await request('core_v2', GET()).should.be.rejectedWith(AssetFetchError);
+    t.calls.length.should.equal(11);
+  });
+
+  it('a family that opts out via registerFamilyDefaults({ retryStatuses }) never retries 403', async () => {
+    registerFamilyDefaults('t2_authd_family', {
+      retryStatuses: DEFAULT_RETRY_STATUSES.filter((s) => s !== 403),
+    });
+    const t = fakeTransport({ status: 403 });
+    configure({ transport: t, retries: 10 });
+    const err = await request('t2_authd_family', GET()).should.be.rejectedWith(AssetFetchError);
     err.status.should.equal(403);
     t.calls.length.should.equal(1);
     sleeps.length.should.equal(0);
+  });
+
+  it('nfl_api 403 -> AssetFetchError after exactly one attempt', async () => {
+    nflClearTokenCache();
+    const t = fakeTransport((req) =>
+      req.method === 'POST' ? { status: 200, data: { accessToken: 'tok' } } : { status: 403 }
+    );
+    configure({ transport: { nfl_api: t }, retries: 10 });
+    const err = await sdv.nfl.nflApiInjuries({}).should.be.rejectedWith(AssetFetchError);
+    err.status.should.equal(403);
+    t.calls.filter((c) => c.method === 'GET').length.should.equal(1);
+    nflClearTokenCache();
+  });
+
+  it('DEFAULT_RETRY_STATUSES matches sdv-py _RETRYABLE_STATUS', () => {
+    [...DEFAULT_RETRY_STATUSES].sort().should.eql([403, 408, 429, 500, 502, 503, 504]);
   });
 
   it('ESPN families: a 200 body { code: 404 } -> NoDataError; other families pass it through', async () => {
@@ -191,24 +257,44 @@ describe('core/request: retry + classification', () => {
 
 describe('core/config: per-family transport selection', () => {
   isolate();
-  it('user [family] > user default > registered family default > axios', async () => {
-    const famDefault = fakeTransport({ status: 200, data: 'family-default' });
-    registerFamilyDefaults('t2_test_family', { transport: famDefault });
+  it('level 4: nothing configured or registered -> the built-in axiosTransport', () => {
+    resolveFamily('t2_unregistered').transport.should.equal(axiosTransport);
+  });
+
+  it('level 3: a user "default" transport applies to a family with no registered default', async () => {
+    configure({ transport: { default: fakeTransport({ status: 200, data: 'user-default' }) } });
+    (await request('t2_unregistered', GET())).should.equal('user-default');
+  });
+
+  it('level 2: a registered family default beats the user "default" (host-required transports survive)', async () => {
+    registerFamilyDefaults('t2_test_family', {
+      transport: fakeTransport({ status: 200, data: 'family-default' }),
+    });
     (await request('t2_test_family', GET())).should.equal('family-default');
+    configure({ transport: fakeTransport({ status: 200, data: 'user-default' }) }); // bare = default
+    (await request('t2_test_family', GET())).should.equal('family-default');
+    (await request('t2_unregistered', GET())).should.equal('user-default');
+  });
 
-    const userDefault = fakeTransport({ status: 200, data: 'user-default' });
-    configure({ transport: { default: userDefault } });
-    (await request('t2_test_family', GET())).should.equal('user-default');
-    (await request('other', GET())).should.equal('user-default');
-
-    const specific = fakeTransport({ status: 200, data: 'specific' });
-    configure({ transport: { t2_test_family: specific } });
+  it('level 1: a user per-family entry beats the registered family default', async () => {
+    configure({ transport: { t2_test_family: fakeTransport({ status: 200, data: 'specific' }) } });
     (await request('t2_test_family', GET())).should.equal('specific');
-    (await request('other', GET())).should.equal('user-default');
-
     resetConfig();
     (await request('t2_test_family', GET())).should.equal('family-default');
     getConfig().transport.should.eql({});
+  });
+
+  it('auth: user per-family entry > registered family default; a "default" auth is never applied', async () => {
+    const t = fakeTransport({ status: 200 });
+    registerFamilyDefaults('t2_auth_family', { auth: headerAuth({ 'X-Who': 'family' }) });
+    configure({ transport: t, auth: { default: headerAuth({ 'X-Who': 'user-default' }) } });
+    await request('t2_auth_family', GET());
+    t.calls[0].headers['X-Who'].should.equal('family');
+    await request('t2_unregistered', GET());
+    should(t.calls[1].headers['X-Who']).be.undefined();
+    configure({ auth: { t2_auth_family: headerAuth({ 'X-Who': 'user' }) } });
+    await request('t2_auth_family', GET());
+    t.calls[2].headers['X-Who'].should.equal('user');
   });
 
   it('default User-Agent carries no +http token (ESPN site API 403s on one)', async () => {

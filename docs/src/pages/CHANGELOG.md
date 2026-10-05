@@ -34,8 +34,11 @@ retry → classification.
   exhausted) instead of raw axios errors — siblings under `SdvError`;
   `NoESPNDataError` aliases `NoDataError`. The Statcast, BartTorvik and
   HockeyTech getters no longer swallow a failed fetch into `{}` / `""`.
-- Retries 429 / 5xx / network with backoff + jitter (honours `Retry-After`,
-  default 3); 403 never retried; a 401 refreshes credentials once.
+- Retries network errors and 403 / 408 / 429 / 500 / 502 / 503 / 504 with
+  backoff + jitter (honours `Retry-After`; default 3 retries, at most 4 on
+  statuses). Auth-gated families drop 403 via
+  `registerFamilyDefaults(family, { retryStatuses })` (`nfl_api` does). A 401
+  refreshes credentials once.
 - `configure({ transport, auth, retries, timeoutMs, userAgent })`,
   `getConfig()`, `resetConfig()` — per-family transports + auth.
 - Transports: `axiosTransport` (default), `createImpersonatingTransport()` via
