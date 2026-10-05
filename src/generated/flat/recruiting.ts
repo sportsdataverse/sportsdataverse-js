@@ -33,7 +33,8 @@ const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/archived_player_rankings"
+  "returnsSchema": "native/recruiting/archived_player_rankings",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -47,9 +48,13 @@ const ARCHIVED_PLAYER_RANKINGS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingArchivedPlayerRankings({ ranking_key: '…' });
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingArchivedPlayerRankings: WrapperFn = (params = {}) => callFlat(ARCHIVED_PLAYER_RANKINGS_DEF, params);
-/** snake_case alias of {@link recruitingArchivedPlayerRankings} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingArchivedPlayerRankings} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_archived_player_rankings = recruitingArchivedPlayerRankings;
 
 const BIGGEST_MOVERS_DEF: WrapperDef = {
@@ -72,7 +77,8 @@ const BIGGEST_MOVERS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/biggest_movers"
+  "returnsSchema": "native/recruiting/biggest_movers",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -85,9 +91,13 @@ const BIGGEST_MOVERS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingBiggestMovers({ ranking_key: '…' });
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingBiggestMovers: WrapperFn = (params = {}) => callFlat(BIGGEST_MOVERS_DEF, params);
-/** snake_case alias of {@link recruitingBiggestMovers} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingBiggestMovers} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_biggest_movers = recruitingBiggestMovers;
 
 const COACHES_DEF: WrapperDef = {
@@ -119,7 +129,8 @@ const COACHES_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/coaches"
+  "returnsSchema": "native/recruiting/coaches",
+  "deprecated": "use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -134,9 +145,13 @@ const COACHES_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingCoaches({});
+ * @deprecated use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingCoaches: WrapperFn = (params = {}) => callFlat(COACHES_DEF, params);
-/** snake_case alias of {@link recruitingCoaches} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingCoaches} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_coaches = recruitingCoaches;
 
 const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
@@ -170,7 +185,8 @@ const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/current_target_predictions"
+  "returnsSchema": "native/recruiting/current_target_predictions",
+  "deprecated": "use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -186,9 +202,13 @@ const CURRENT_TARGET_PREDICTIONS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingCurrentTargetPredictions({ site_key: '…', year: '…', sport_key: '…' });
+ * @deprecated use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingCurrentTargetPredictions: WrapperFn = (params = {}) => callFlat(CURRENT_TARGET_PREDICTIONS_DEF, params);
-/** snake_case alias of {@link recruitingCurrentTargetPredictions} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingCurrentTargetPredictions} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_current_target_predictions = recruitingCurrentTargetPredictions;
 
 const INSTITUTION_GROUPS_DEF: WrapperDef = {
@@ -201,7 +221,8 @@ const INSTITUTION_GROUPS_DEF: WrapperDef = {
   "pathParams": [],
   "queryParams": [],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/institution_groups"
+  "returnsSchema": "native/recruiting/institution_groups",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -212,9 +233,13 @@ const INSTITUTION_GROUPS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingInstitutionGroups({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingInstitutionGroups: WrapperFn = (params = {}) => callFlat(INSTITUTION_GROUPS_DEF, params);
-/** snake_case alias of {@link recruitingInstitutionGroups} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingInstitutionGroups} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_institution_groups = recruitingInstitutionGroups;
 
 const INSTITUTION_RANKINGS_DEF: WrapperDef = {
@@ -266,7 +291,8 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_institution_rankings",
-  "returnsSchema": "native/recruiting/institution_rankings"
+  "returnsSchema": "native/recruiting/institution_rankings",
+  "deprecated": "use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -286,9 +312,13 @@ const INSTITUTION_RANKINGS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingInstitutionRankings({ sport_key: '…', year: '…' });
+ * @deprecated use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingInstitutionRankings: WrapperFn = (params = {}) => callFlat(INSTITUTION_RANKINGS_DEF, params);
-/** snake_case alias of {@link recruitingInstitutionRankings} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingInstitutionRankings} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_institution_rankings = recruitingInstitutionRankings;
 
 const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
@@ -338,7 +368,8 @@ const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/player_sport_rankings"
+  "returnsSchema": "native/recruiting/player_sport_rankings",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -358,9 +389,13 @@ const PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingPlayerSportRankings({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingPlayerSportRankings: WrapperFn = (params = {}) => callFlat(PLAYER_SPORT_RANKINGS_DEF, params);
-/** snake_case alias of {@link recruitingPlayerSportRankings} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingPlayerSportRankings} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_player_sport_rankings = recruitingPlayerSportRankings;
 
 const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
@@ -377,7 +412,8 @@ const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/players_under_special_evaluation"
+  "returnsSchema": "native/recruiting/players_under_special_evaluation",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -389,9 +425,13 @@ const PLAYERS_UNDER_SPECIAL_EVALUATION_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingPlayersUnderSpecialEvaluation({ ranking_key: '…' });
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingPlayersUnderSpecialEvaluation: WrapperFn = (params = {}) => callFlat(PLAYERS_UNDER_SPECIAL_EVALUATION_DEF, params);
-/** snake_case alias of {@link recruitingPlayersUnderSpecialEvaluation} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingPlayersUnderSpecialEvaluation} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_players_under_special_evaluation = recruitingPlayersUnderSpecialEvaluation;
 
 const POSITIONS_DEF: WrapperDef = {
@@ -417,7 +457,8 @@ const POSITIONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/positions"
+  "returnsSchema": "native/recruiting/positions",
+  "deprecated": "use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -431,9 +472,13 @@ const POSITIONS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingPositions({});
+ * @deprecated use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingPositions: WrapperFn = (params = {}) => callFlat(POSITIONS_DEF, params);
-/** snake_case alias of {@link recruitingPositions} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingPositions} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_positions = recruitingPositions;
 
 const RANKINGS_DEF: WrapperDef = {
@@ -463,7 +508,8 @@ const RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/rankings"
+  "returnsSchema": "native/recruiting/rankings",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -478,9 +524,13 @@ const RANKINGS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRankings({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingRankings: WrapperFn = (params = {}) => callFlat(RANKINGS_DEF, params);
-/** snake_case alias of {@link recruitingRankings} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingRankings} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_rankings = recruitingRankings;
 
 const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
@@ -506,7 +556,8 @@ const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_ranking_feed",
-  "returnsSchema": "native/recruiting/ranking_feed"
+  "returnsSchema": "native/recruiting/ranking_feed",
+  "deprecated": "use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -520,9 +571,13 @@ const RANKINGS_COMPOSITE_TEAM_FEED_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRankingsCompositeTeamFeed({ sport_key: '…', year: '…' });
+ * @deprecated use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRankingsCompositeTeamFeed: WrapperFn = (params = {}) => callFlat(RANKINGS_COMPOSITE_TEAM_FEED_DEF, params);
-/** snake_case alias of {@link recruitingRankingsCompositeTeamFeed} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingRankingsCompositeTeamFeed} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_rankings_composite_team_feed = recruitingRankingsCompositeTeamFeed;
 
 const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
@@ -548,7 +603,8 @@ const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_ranking_feed",
-  "returnsSchema": "native/recruiting/ranking_feed"
+  "returnsSchema": "native/recruiting/ranking_feed",
+  "deprecated": "use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -562,9 +618,13 @@ const RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRankingsTransferPortalPlayerFeed({ sport_key: '…', year: '…' });
+ * @deprecated use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRankingsTransferPortalPlayerFeed: WrapperFn = (params = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_PLAYER_FEED_DEF, params);
-/** snake_case alias of {@link recruitingRankingsTransferPortalPlayerFeed} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingRankingsTransferPortalPlayerFeed} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_rankings_transfer_portal_player_feed = recruitingRankingsTransferPortalPlayerFeed;
 
 const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
@@ -590,7 +650,8 @@ const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_ranking_feed",
-  "returnsSchema": "native/recruiting/ranking_feed"
+  "returnsSchema": "native/recruiting/ranking_feed",
+  "deprecated": "use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -604,9 +665,13 @@ const RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRankingsTransferPortalTeamFeed({ sport_key: '…', year: '…' });
+ * @deprecated use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRankingsTransferPortalTeamFeed: WrapperFn = (params = {}) => callFlat(RANKINGS_TRANSFER_PORTAL_TEAM_FEED_DEF, params);
-/** snake_case alias of {@link recruitingRankingsTransferPortalTeamFeed} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingRankingsTransferPortalTeamFeed} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_rankings_transfer_portal_team_feed = recruitingRankingsTransferPortalTeamFeed;
 
 const RECRUITS_DEF: WrapperDef = {
@@ -642,7 +707,8 @@ const RECRUITS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/recruits"
+  "returnsSchema": "native/recruiting/recruits",
+  "deprecated": "use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -658,9 +724,13 @@ const RECRUITS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingRecruits({});
+ * @deprecated use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingRecruits: WrapperFn = (params = {}) => callFlat(RECRUITS_DEF, params);
-/** snake_case alias of {@link recruitingRecruits} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingRecruits} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_recruits = recruitingRecruits;
 
 const SPORT_YEARS_DEF: WrapperDef = {
@@ -677,7 +747,8 @@ const SPORT_YEARS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/sport_years"
+  "returnsSchema": "native/recruiting/sport_years",
+  "deprecated": "use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -689,9 +760,13 @@ const SPORT_YEARS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingSportYears({ sport_key: '…' });
+ * @deprecated use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingSportYears: WrapperFn = (params = {}) => callFlat(SPORT_YEARS_DEF, params);
-/** snake_case alias of {@link recruitingSportYears} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingSportYears} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_sport_years = recruitingSportYears;
 
 const SPORTS_DEF: WrapperDef = {
@@ -709,7 +784,8 @@ const SPORTS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/sports"
+  "returnsSchema": "native/recruiting/sports",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -721,9 +797,13 @@ const SPORTS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingSports({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingSports: WrapperFn = (params = {}) => callFlat(SPORTS_DEF, params);
-/** snake_case alias of {@link recruitingSports} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingSports} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_sports = recruitingSports;
 
 const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
@@ -746,7 +826,8 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/tags_autocomplete"
+  "returnsSchema": "native/recruiting/tags_autocomplete",
+  "deprecated": "use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -759,9 +840,13 @@ const TAGS_AUTOCOMPLETE_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTagsAutocomplete({});
+ * @deprecated use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingTagsAutocomplete: WrapperFn = (params = {}) => callFlat(TAGS_AUTOCOMPLETE_DEF, params);
-/** snake_case alias of {@link recruitingTagsAutocomplete} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingTagsAutocomplete} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_tags_autocomplete = recruitingTagsAutocomplete;
 
 const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
@@ -789,7 +874,8 @@ const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_paged_list",
-  "returnsSchema": "native/recruiting/tags_photos"
+  "returnsSchema": "native/recruiting/tags_photos",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -803,9 +889,13 @@ const TAGS_PHOTOS_BY_KEY_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTagsPhotosByKey({ prefixed_key: '…' });
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingTagsPhotosByKey: WrapperFn = (params = {}) => callFlat(TAGS_PHOTOS_BY_KEY_DEF, params);
-/** snake_case alias of {@link recruitingTagsPhotosByKey} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingTagsPhotosByKey} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_tags_photos_by_key = recruitingTagsPhotosByKey;
 
 const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
@@ -836,7 +926,8 @@ const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_paged_list",
-  "returnsSchema": "native/recruiting/tags_photos"
+  "returnsSchema": "native/recruiting/tags_photos",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -851,9 +942,13 @@ const TAGS_PHOTOS_BY_TYPE_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTagsPhotosByType({ type: '…', key: '…' });
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingTagsPhotosByType: WrapperFn = (params = {}) => callFlat(TAGS_PHOTOS_BY_TYPE_DEF, params);
-/** snake_case alias of {@link recruitingTagsPhotosByType} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingTagsPhotosByType} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_tags_photos_by_type = recruitingTagsPhotosByType;
 
 const TEAMS_DEF: WrapperDef = {
@@ -879,7 +974,8 @@ const TEAMS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/teams"
+  "returnsSchema": "native/recruiting/teams",
+  "deprecated": "use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -893,9 +989,13 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTeams({});
+ * @deprecated use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
-/** snake_case alias of {@link recruitingTeams} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingTeams} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_teams = recruitingTeams;
 
 const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
@@ -945,7 +1045,8 @@ const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/transfer_player_sport_rankings"
+  "returnsSchema": "native/recruiting/transfer_player_sport_rankings",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -965,9 +1066,13 @@ const TRANSFER_PLAYER_SPORT_RANKINGS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTransferPlayerSportRankings({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingTransferPlayerSportRankings: WrapperFn = (params = {}) => callFlat(TRANSFER_PLAYER_SPORT_RANKINGS_DEF, params);
-/** snake_case alias of {@link recruitingTransferPlayerSportRankings} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingTransferPlayerSportRankings} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_transfer_player_sport_rankings = recruitingTransferPlayerSportRankings;
 
 const TRANSFERS_DEF: WrapperDef = {
@@ -1021,7 +1126,8 @@ const TRANSFERS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/transfers"
+  "returnsSchema": "native/recruiting/transfers",
+  "deprecated": "use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500)."
 };
 
 /**
@@ -1042,9 +1148,13 @@ const TRANSFERS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingTransfers({});
+ * @deprecated use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500).
  */
 export const recruitingTransfers: WrapperFn = (params = {}) => callFlat(TRANSFERS_DEF, params);
-/** snake_case alias of {@link recruitingTransfers} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingTransfers} (py/R parity).
+ * @deprecated use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500).
+ */
 export const recruiting_transfers = recruitingTransfers;
 
 const UNRANKED_RECRUITS_DEF: WrapperDef = {
@@ -1098,7 +1208,8 @@ const UNRANKED_RECRUITS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/unranked_recruits"
+  "returnsSchema": "native/recruiting/unranked_recruits",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -1119,9 +1230,13 @@ const UNRANKED_RECRUITS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingUnrankedRecruits({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingUnrankedRecruits: WrapperFn = (params = {}) => callFlat(UNRANKED_RECRUITS_DEF, params);
-/** snake_case alias of {@link recruitingUnrankedRecruits} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingUnrankedRecruits} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_unranked_recruits = recruitingUnrankedRecruits;
 
 const UNRANKED_TRANSFERS_DEF: WrapperDef = {
@@ -1156,7 +1271,8 @@ const UNRANKED_TRANSFERS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/unranked_transfers"
+  "returnsSchema": "native/recruiting/unranked_transfers",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -1172,9 +1288,13 @@ const UNRANKED_TRANSFERS_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingUnrankedTransfers({ ranking_key: '…' });
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingUnrankedTransfers: WrapperFn = (params = {}) => callFlat(UNRANKED_TRANSFERS_DEF, params);
-/** snake_case alias of {@link recruitingUnrankedTransfers} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingUnrankedTransfers} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_unranked_transfers = recruitingUnrankedTransfers;
 
 const YEAR_DEF: WrapperDef = {
@@ -1192,7 +1312,8 @@ const YEAR_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_recruiting_list",
-  "returnsSchema": "native/recruiting/year"
+  "returnsSchema": "native/recruiting/year",
+  "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
 };
 
 /**
@@ -1204,7 +1325,11 @@ const YEAR_DEF: WrapperDef = {
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.recruiting.recruitingYear({});
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
  */
 export const recruitingYear: WrapperFn = (params = {}) => callFlat(YEAR_DEF, params);
-/** snake_case alias of {@link recruitingYear} (py/R parity). */
+/**
+ * snake_case alias of {@link recruitingYear} (py/R parity).
+ * @deprecated no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500.
+ */
 export const recruiting_year = recruitingYear;

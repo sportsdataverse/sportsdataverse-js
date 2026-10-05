@@ -140,10 +140,10 @@ export default {
     },
     /**
      * Gets the Men's College Basketball Player recruiting data for a specified year, page, position and institution type if available.
-     * @deprecated Superseded by the generated 247Sports recruiting family on the
-     * standalone `recruiting` namespace — `sdv.recruiting.recruiting_rankings(...)`
-     * / `recruiting_player_sport_rankings(...)` (api.247sports.com RDB JSON API).
-     * This legacy method scrapes 247sports.com HTML and is kept for back-compat.
+     * @deprecated Superseded by the 247Sports Recruit Database family on
+     * `sdv.sports247` — `sdv.sports247.sports247_recruits(...)` (ipa.247sports.com;
+     * the older `sdv.recruiting` family is deprecated too). This legacy method
+     * scrapes 247sports.com HTML and is kept for back-compat.
      * @memberOf mbb
      * @async
      * @function
@@ -200,10 +200,10 @@ export default {
 
     /**
      * Gets the Men's College Basketball School recruiting data for a specified year, page, position and institution type if available.
-     * @deprecated Superseded by the generated 247Sports recruiting family —
-     * `sdv.recruiting.recruiting_institution_rankings(...)` /
-     * `recruiting_rankings_composite_team_feed(...)` (api.247sports.com RDB JSON
-     * API). This legacy method scrapes 247sports.com HTML; kept for back-compat.
+     * @deprecated Superseded by the 247Sports Recruit Database family on
+     * `sdv.sports247` — `sdv.sports247.sports247_institution_rankings(...)` /
+     * `sports247_composite_team_ranking_feed(...)` (ipa.247sports.com). This
+     * legacy method scrapes 247sports.com HTML; kept for back-compat.
      * @memberOf mbb
      * @async
      * @function
@@ -243,10 +243,10 @@ export default {
     },
     /**
      * Gets the Men's College Basketball School commitment data for a specified school and year.
-     * @deprecated Superseded by the generated 247Sports recruiting family —
-     * `sdv.recruiting.recruiting_recruits(...)` / `recruiting_transfers(...)`
-     * (api.247sports.com RDB JSON API). This legacy method scrapes
-     * 247sports.com HTML and is kept for back-compat only.
+     * @deprecated Superseded by the 247Sports families on `sdv.sports247` —
+     * `sdv.sports247.sports247_recruits(...)` / `sports247_transfers(...)`
+     * (ipa.247sports.com). This legacy method scrapes 247sports.com HTML and is
+     * kept for back-compat only.
      * @memberOf mbb
      * @async
      * @function
