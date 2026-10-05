@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.college_softball`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCollegeSoftballAthleteAwards`
+## `espnCollegeSoftballPlayerAwards`
 
-COLLEGE_SOFTBALL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_awards` / `espnCollegeSoftballAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ COLLEGE_SOFTBALL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_awards(...)
+await sdv.college_softball.espnCollegeSoftballPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_awards(...)
 ```
 
-## `espnCollegeSoftballAthleteCareerStats`
+## `espnCollegeSoftballPlayerCareerStats`
 
-COLLEGE_SOFTBALL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_career_stats` / `espnCollegeSoftballAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ COLLEGE_SOFTBALL — athlete career stats (ESPN sports.core.api.espn.com (core v
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_career_stats(...)
+await sdv.college_softball.espnCollegeSoftballPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_career_stats(...)
 ```
 
-## `espnCollegeSoftballAthleteContracts`
+## `espnCollegeSoftballPlayerContracts`
 
-COLLEGE_SOFTBALL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_contracts` / `espnCollegeSoftballAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ COLLEGE_SOFTBALL — athlete contracts (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_contracts(...)
+await sdv.college_softball.espnCollegeSoftballPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_contracts(...)
 ```
 
-## `espnCollegeSoftballAthleteCore`
+## `espnCollegeSoftballPlayerCore`
 
-COLLEGE_SOFTBALL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_core` / `espnCollegeSoftballAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ COLLEGE_SOFTBALL — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_core(...)
+await sdv.college_softball.espnCollegeSoftballPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_core(...)
 ```
 
-## `espnCollegeSoftballAthleteEventlog`
+## `espnCollegeSoftballPlayerEventlog`
 
-COLLEGE_SOFTBALL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_eventlog` / `espnCollegeSoftballAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ COLLEGE_SOFTBALL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_eventlog(...)
+await sdv.college_softball.espnCollegeSoftballPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_eventlog(...)
 ```
 
-## `espnCollegeSoftballAthleteInjuries`
+## `espnCollegeSoftballPlayerInjuries`
 
-COLLEGE_SOFTBALL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_injuries` / `espnCollegeSoftballAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ COLLEGE_SOFTBALL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_injuries(...)
+await sdv.college_softball.espnCollegeSoftballPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_injuries(...)
 ```
 
-## `espnCollegeSoftballAthleteNotes`
+## `espnCollegeSoftballPlayerNotes`
 
-COLLEGE_SOFTBALL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_notes` / `espnCollegeSoftballAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ COLLEGE_SOFTBALL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_notes(...)
+await sdv.college_softball.espnCollegeSoftballPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_notes(...)
 ```
 
-## `espnCollegeSoftballAthleteRecords`
+## `espnCollegeSoftballPlayerRecords`
 
-COLLEGE_SOFTBALL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_records` / `espnCollegeSoftballAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ COLLEGE_SOFTBALL — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_records(...)
+await sdv.college_softball.espnCollegeSoftballPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_records(...)
 ```
 
-## `espnCollegeSoftballAthleteSeasons`
+## `espnCollegeSoftballPlayerSeasons`
 
-COLLEGE_SOFTBALL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_seasons` / `espnCollegeSoftballAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ COLLEGE_SOFTBALL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_seasons(...)
+await sdv.college_softball.espnCollegeSoftballPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_seasons(...)
 ```
 
-## `espnCollegeSoftballAthleteStatisticslog`
+## `espnCollegeSoftballPlayerStatisticslog`
 
-COLLEGE_SOFTBALL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_statisticslog` / `espnCollegeSoftballAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ COLLEGE_SOFTBALL — athlete statisticslog (ESPN sports.core.api.espn.com (core 
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_statisticslog(...)
+await sdv.college_softball.espnCollegeSoftballPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_statisticslog(...)
 ```
 
-## `espnCollegeSoftballAthleteVsAthlete`
+## `espnCollegeSoftballPlayerVsPlayer`
 
-COLLEGE_SOFTBALL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athlete_vs_athlete` / `espnCollegeSoftballAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ COLLEGE_SOFTBALL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athlete_vs_athlete(...)
+await sdv.college_softball.espnCollegeSoftballPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_player_vs_player(...)
 ```
 
-## `espnCollegeSoftballAthletesIndex`
+## `espnCollegeSoftballPlayersIndex`
 
-COLLEGE_SOFTBALL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_athletes_index` / `espnCollegeSoftballAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ COLLEGE_SOFTBALL — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballAthletesIndex({});
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_athletes_index(...)
+await sdv.college_softball.espnCollegeSoftballPlayersIndex({});
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_players_index(...)
 ```
 
 ## `espnCollegeSoftballAward`
@@ -403,12 +427,14 @@ await sdv.college_softball.espnCollegeSoftballCoachSeason({ coach_id: '…', sea
 // snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_coach_season(...)
 ```
 
-## `espnCollegeSoftballEvent`
+## `espnCollegeSoftballGame`
 
-COLLEGE_SOFTBALL — event (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event` / `espnCollegeSoftballEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ COLLEGE_SOFTBALL — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event(...)
+await sdv.college_softball.espnCollegeSoftballGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game(...)
 ```
 
-## `espnCollegeSoftballEventBroadcasts`
+## `espnCollegeSoftballGameBroadcasts`
 
-COLLEGE_SOFTBALL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_broadcasts` / `espnCollegeSoftballEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ COLLEGE_SOFTBALL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_broadcasts(...)
+await sdv.college_softball.espnCollegeSoftballGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_broadcasts(...)
 ```
 
-## `espnCollegeSoftballEventCompetition`
+## `espnCollegeSoftballGameCompetition`
 
-COLLEGE_SOFTBALL — event competition (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competition` / `espnCollegeSoftballEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ COLLEGE_SOFTBALL — event competition (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competition(...)
+await sdv.college_softball.espnCollegeSoftballGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_competition(...)
 ```
 
-## `espnCollegeSoftballEventCompetitor`
+## `espnCollegeSoftballGameTeam`
 
-COLLEGE_SOFTBALL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitor` / `espnCollegeSoftballEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ COLLEGE_SOFTBALL — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitor(...)
+await sdv.college_softball.espnCollegeSoftballGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_team(...)
 ```
 
-## `espnCollegeSoftballEventCompetitorLeaders`
+## `espnCollegeSoftballGameTeamLeaders`
 
-COLLEGE_SOFTBALL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitor_leaders` / `espnCollegeSoftballEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ COLLEGE_SOFTBALL — event competitor leaders (ESPN sports.core.api.espn.com (co
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitor_leaders(...)
+await sdv.college_softball.espnCollegeSoftballGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_team_leaders(...)
 ```
 
-## `espnCollegeSoftballEventCompetitorLinescores`
+## `espnCollegeSoftballGameTeamLinescores`
 
-COLLEGE_SOFTBALL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitor_linescores` / `espnCollegeSoftballEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ COLLEGE_SOFTBALL — event competitor linescores (ESPN sports.core.api.espn.com 
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitor_linescores(...)
+await sdv.college_softball.espnCollegeSoftballGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_team_linescores(...)
 ```
 
-## `espnCollegeSoftballEventCompetitorRecord`
+## `espnCollegeSoftballGameTeamRecord`
 
-COLLEGE_SOFTBALL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitor_record` / `espnCollegeSoftballEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ COLLEGE_SOFTBALL — event competitor record (ESPN sports.core.api.espn.com (cor
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitor_record(...)
+await sdv.college_softball.espnCollegeSoftballGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_team_record(...)
 ```
 
-## `espnCollegeSoftballEventCompetitorRoster`
+## `espnCollegeSoftballGameTeamRoster`
 
-COLLEGE_SOFTBALL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitor_roster` / `espnCollegeSoftballEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ COLLEGE_SOFTBALL — event competitor roster (ESPN sports.core.api.espn.com (cor
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitor_roster(...)
+await sdv.college_softball.espnCollegeSoftballGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_team_roster(...)
 ```
 
-## `espnCollegeSoftballEventCompetitorStatistics`
+## `espnCollegeSoftballGameTeamStatistics`
 
-COLLEGE_SOFTBALL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitor_statistics` / `espnCollegeSoftballEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ COLLEGE_SOFTBALL — event competitor statistics (ESPN sports.core.api.espn.com 
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitor_statistics(...)
+await sdv.college_softball.espnCollegeSoftballGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_team_statistics(...)
 ```
 
-## `espnCollegeSoftballEventCompetitors`
+## `espnCollegeSoftballGameTeams`
 
-COLLEGE_SOFTBALL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_competitors` / `espnCollegeSoftballEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ COLLEGE_SOFTBALL — event competitors (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_competitors(...)
+await sdv.college_softball.espnCollegeSoftballGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_teams(...)
 ```
 
-## `espnCollegeSoftballEventLeaders`
+## `espnCollegeSoftballGameLeaders`
 
-COLLEGE_SOFTBALL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_leaders` / `espnCollegeSoftballEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ COLLEGE_SOFTBALL — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_leaders(...)
+await sdv.college_softball.espnCollegeSoftballGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_leaders(...)
 ```
 
-## `espnCollegeSoftballEventOdds`
+## `espnCollegeSoftballGameOdds`
 
-COLLEGE_SOFTBALL — event odds (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_odds` / `espnCollegeSoftballEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ COLLEGE_SOFTBALL — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_odds(...)
+await sdv.college_softball.espnCollegeSoftballGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_odds(...)
 ```
 
-## `espnCollegeSoftballEventOfficialDetail`
+## `espnCollegeSoftballGameOfficialDetail`
 
-COLLEGE_SOFTBALL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_official_detail` / `espnCollegeSoftballEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ COLLEGE_SOFTBALL — event official detail (ESPN sports.core.api.espn.com (core 
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_official_detail(...)
+await sdv.college_softball.espnCollegeSoftballGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_official_detail(...)
 ```
 
-## `espnCollegeSoftballEventOfficials`
+## `espnCollegeSoftballGameOfficials`
 
-COLLEGE_SOFTBALL — event officials (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_officials` / `espnCollegeSoftballEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ COLLEGE_SOFTBALL — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_officials(...)
+await sdv.college_softball.espnCollegeSoftballGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_officials(...)
 ```
 
-## `espnCollegeSoftballEventPlay`
+## `espnCollegeSoftballGamePlay`
 
-COLLEGE_SOFTBALL — event play (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_play` / `espnCollegeSoftballEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ COLLEGE_SOFTBALL — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_play(...)
+await sdv.college_softball.espnCollegeSoftballGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_play(...)
 ```
 
-## `espnCollegeSoftballEventPlayPersonnel`
+## `espnCollegeSoftballGamePlayPersonnel`
 
-COLLEGE_SOFTBALL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_play_personnel` / `espnCollegeSoftballEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ COLLEGE_SOFTBALL — event play personnel (ESPN sports.core.api.espn.com (core v
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_play_personnel(...)
+await sdv.college_softball.espnCollegeSoftballGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_play_personnel(...)
 ```
 
-## `espnCollegeSoftballEventPlays`
+## `espnCollegeSoftballGamePlays`
 
-COLLEGE_SOFTBALL — event plays (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_plays` / `espnCollegeSoftballEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ COLLEGE_SOFTBALL — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_plays(...)
+await sdv.college_softball.espnCollegeSoftballGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_plays(...)
 ```
 
-## `espnCollegeSoftballEventPowerindex`
+## `espnCollegeSoftballGamePowerindex`
 
-COLLEGE_SOFTBALL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_powerindex` / `espnCollegeSoftballEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ COLLEGE_SOFTBALL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_powerindex(...)
+await sdv.college_softball.espnCollegeSoftballGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_powerindex(...)
 ```
 
-## `espnCollegeSoftballEventPredictor`
+## `espnCollegeSoftballGamePredictor`
 
-COLLEGE_SOFTBALL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_predictor` / `espnCollegeSoftballEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ COLLEGE_SOFTBALL — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_predictor(...)
+await sdv.college_softball.espnCollegeSoftballGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_predictor(...)
 ```
 
-## `espnCollegeSoftballEventProbabilities`
+## `espnCollegeSoftballGameProbabilities`
 
-COLLEGE_SOFTBALL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_probabilities` / `espnCollegeSoftballEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ COLLEGE_SOFTBALL — event probabilities (ESPN sports.core.api.espn.com (core v2
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_probabilities(...)
+await sdv.college_softball.espnCollegeSoftballGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_probabilities(...)
 ```
 
-## `espnCollegeSoftballEventPropbets`
+## `espnCollegeSoftballGamePropbets`
 
-COLLEGE_SOFTBALL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_propbets` / `espnCollegeSoftballEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ COLLEGE_SOFTBALL — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_propbets(...)
+await sdv.college_softball.espnCollegeSoftballGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_propbets(...)
 ```
 
-## `espnCollegeSoftballEventScoringplays`
+## `espnCollegeSoftballGameScoringplays`
 
-COLLEGE_SOFTBALL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_scoringplays` / `espnCollegeSoftballEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ COLLEGE_SOFTBALL — event scoringplays (ESPN sports.core.api.espn.com (core v2)
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_scoringplays(...)
+await sdv.college_softball.espnCollegeSoftballGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_scoringplays(...)
 ```
 
-## `espnCollegeSoftballEventSituation`
+## `espnCollegeSoftballGameSituation`
 
-COLLEGE_SOFTBALL — event situation (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_situation` / `espnCollegeSoftballEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ COLLEGE_SOFTBALL — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_situation(...)
+await sdv.college_softball.espnCollegeSoftballGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_situation(...)
 ```
 
-## `espnCollegeSoftballEventStatus`
+## `espnCollegeSoftballGameStatus`
 
-COLLEGE_SOFTBALL — event status (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_event_status` / `espnCollegeSoftballEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ COLLEGE_SOFTBALL — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_event_status(...)
+await sdv.college_softball.espnCollegeSoftballGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_game_status(...)
 ```
 
-## `espnCollegeSoftballEvents`
+## `espnCollegeSoftballGames`
 
-COLLEGE_SOFTBALL — events (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_events` / `espnCollegeSoftballEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ COLLEGE_SOFTBALL — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballEvents({});
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_events(...)
+await sdv.college_softball.espnCollegeSoftballGames({});
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_games(...)
 ```
 
 ## `espnCollegeSoftballFranchise`
@@ -1145,11 +1219,13 @@ await sdv.college_softball.espnCollegeSoftballPositions({});
 // snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_positions(...)
 ```
 
-## `espnCollegeSoftballSeasonAthletes`
+## `espnCollegeSoftballSeasonPlayers`
 
-COLLEGE_SOFTBALL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_season_athletes` / `espnCollegeSoftballSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ COLLEGE_SOFTBALL — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_season_athletes(...)
+await sdv.college_softball.espnCollegeSoftballSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_season_players(...)
 ```
 
 ## `espnCollegeSoftballSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.college_softball.espnCollegeSoftballSeasonWeek({ season: '…', season
 // snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_season_week(...)
 ```
 
-## `espnCollegeSoftballSeasonWeekEvents`
+## `espnCollegeSoftballSeasonWeekGames`
 
-COLLEGE_SOFTBALL — season week events (ESPN sports.core.api.espn.com (core v2)).
+COLLEGE_SOFTBALL — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-softball/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_softball_season_week_events` / `espnCollegeSoftballSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ COLLEGE_SOFTBALL — season week events (ESPN sports.core.api.espn.com (core v2)
 **Example:**
 
 ```js
-await sdv.college_softball.espnCollegeSoftballSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_season_week_events(...)
+await sdv.college_softball.espnCollegeSoftballSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.college_softball.espn_college_softball_season_week_games(...)
 ```
 
 ## `espnCollegeSoftballSeasonWeekPowerindex`

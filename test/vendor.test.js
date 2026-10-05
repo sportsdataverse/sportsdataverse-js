@@ -10,6 +10,9 @@ import {
   deriveAll,
   gitBlobSha,
   loadManifest,
+  PY_NAMES_FILE,
+  pyModuleStems,
+  pyPublicNames,
   rewriteSchema,
   schemaFilesFor,
   transformFamily,
@@ -30,22 +33,24 @@ const family = (key, overlayText = null) => {
 };
 
 describe('vendor: transforms (offline, committed upstream copies)', () => {
-  it('cbs: api stem, /napi host, JS short names, mapped parsers; JS keeps its schemas', () => {
+  it('cbs: api stem, /napi host, sdv-py short names, mapped parsers; JS keeps its schemas', () => {
     const { doc, ep, schemaRefs } = family('cbs');
     doc.api.should.equal('cbs');
     doc.host.should.equal('https://api.cbssports.com/napi');
     doc.endpoints.length.should.equal(82);
-    should(ep('client_config')).be.undefined(); // py name mapped away
-    const cc = ep('client_configuration');
+    should(ep('client_configuration')).be.undefined(); // v4: py's short, not JS's pre-v4 one
+    const cc = ep('client_config');
     cc.path.should.equal('/resource/client/config/{client_name}');
     cc.parser.should.equal('parse_cbs_list');
     // schema_compatible: false -> py's schema is dropped, none copied ...
     should(cc.returns_schema).be.undefined();
     schemaRefs.should.eql([]);
-    // ... and the overlay re-attaches JS's own (described) schema.
-    family('cbs', overlay('cbs')).ep('client_configuration').returns_schema.should.equal('native/cbs/client_configuration');
-    ep('featured_game').parser.should.equal('parse_cbs_scoreboard'); // per-short override
-    ep('team_standings').parser.should.equal('parse_cbs_standings'); // py name map
+    // ... and the overlay re-attaches JS's own (described) schema + the pre-v4 short.
+    const ov = family('cbs', overlay('cbs')).ep('client_config');
+    ov.returns_schema.should.equal('native/cbs/client_configuration');
+    ov.legacy_short.should.equal('client_configuration');
+    ep('game_featured').parser.should.equal('parse_cbs_scoreboard'); // per-short override
+    ep('team_standings').parser.should.equal('parse_cbs_standings'); // py parser name map
   });
 
   it('keeps py schemas only where compatibility is declared (fail-closed)', () => {
@@ -219,6 +224,19 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
   it('copies releases.yaml verbatim', () => {
     deriveAll().get('endpoints/releases.yaml').should.equal(upstream('endpoints/releases.yaml'));
   });
+
+  it('derives sdv-py public names from a verbatim module copy per vendored family and league', () => {
+    const names = JSON.parse(deriveAll().get(PY_NAMES_FILE));
+    names.ref.should.equal(manifest.source.ref);
+    const stems = pyModuleStems(manifest, upstream);
+    Object.keys(names.modules).should.eql(stems); // exactly the modules JS must match
+    stems.should.containEql('nhl_api_web');
+    stems.should.containEql('mls_api');
+    stems.should.containEql('nba_espn_ext');
+    names.modules.nhl_api_web.path.should.equal('sportsdataverse/nhl/nhl_api_web.py');
+    names.modules.nhl_api_web.names.should.containEql('nhl_web_pbp');
+    pyPublicNames('def a(x):\n    def inner():\n        pass\nasync def b():\n    pass\ndef _private():\n    pass\n').should.eql(['a', 'b']);
+  });
 });
 
 describe('vendor:check (offline drift gate)', function () {
@@ -230,6 +248,9 @@ describe('vendor:check (offline drift gate)', function () {
       cpSync(join(CODEGEN_DIR, d), join(tmp, d), { recursive: true });
     }
     cpSync(join(CODEGEN_DIR, 'vendor.yaml'), join(tmp, 'vendor.yaml'));
+    // `copy:` files that live outside the dirs above (espn_rename_map.yaml) + the
+    // derived sdv-py public-names file.
+    for (const c of [...(manifest.copy ?? []), PY_NAMES_FILE]) cpSync(join(CODEGEN_DIR, c), join(tmp, c));
   });
   afterEach(() => rmSync(tmp, { recursive: true, force: true }));
 
@@ -285,6 +306,22 @@ describe('vendor:check (offline drift gate)', function () {
       readFileSync(join(tmp, 'vendor', 'upstream', 'LOCK'), 'utf8').match(/^([0-9a-f]{40}) {2}endpoints\/cbs_napi\.yaml$/m)[1]
     } (${REFETCH})`]);
     problems.join('\n').should.not.match(/--offline/);
+  });
+
+  it('catches a hand-edit to the derived sdv-py public names', () => {
+    const f = join(tmp, PY_NAMES_FILE);
+    writeFileSync(f, readFileSync(f, 'utf8').replace('"nhl_web_pbp"', '"nhl_pbp"'));
+    checkVendor(tmp).should.eql([`DRIFT: tools/codegen/${PY_NAMES_FILE} differs from its vendored source (${REGEN})`]);
+  });
+
+  it('fails when a vendored sdv-py module copy is edited (even after re-deriving)', () => {
+    const rel = 'py/sportsdataverse/nhl/nhl_api_web.py';
+    const f = join(tmp, 'vendor', 'upstream', ...rel.split('/'));
+    writeFileSync(f, readFileSync(f, 'utf8').replace('def nhl_web_pbp(', 'def nhl_pbp('));
+    writeFileSync(join(tmp, PY_NAMES_FILE), deriveAll(tmp).get(PY_NAMES_FILE));
+    checkVendor(tmp).should.eql([`UPSTREAM: vendor/upstream/${rel} does not match pinned blob ${
+      readFileSync(join(tmp, 'vendor', 'upstream', 'LOCK'), 'utf8').match(/^([0-9a-f]{40}) {2}py\/sportsdataverse\/nhl\/nhl_api_web\.py$/m)[1]
+    } (${REFETCH})`]);
   });
 
   it('fails when an upstream file is deleted', () => {

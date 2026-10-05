@@ -13,21 +13,21 @@ Beyond the ESPN surface, `sdv.nwsl` also wraps the league's own live APIs. Same 
 
 ## Native API — NWSL (StatsPerform SDP)
 
-Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `https://api-sdp.nwslsoccer.com/v1/nwsl/football`. Each method is exposed under BOTH `nwsl_api_<endpoint>` (snake_case, py/R parity) and `nwslApi<Endpoint>` (camelCase canonical) on `sdv.nwsl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
+Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `https://api-sdp.nwslsoccer.com/v1/nwsl/football`. Each method is exposed under BOTH its snake_case name `nwsl_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nwsl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `nwsl_api_competitions` / `nwslApiCompetitions` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/competitions` | — | `locale` | `parse_nwsl_sdp` | — |
-| `nwsl_api_match_lineups` / `nwslApiMatchLineups` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matches/{match_id}/lineups` | `season_id`\*, `match_id`\* | `locale` | `parse_nwsl_lineups` — multi-table: `section` = `teams`, `players` (default), `staff` | — |
-| `nwsl_api_matchdays` / `nwslApiMatchdays` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matchdays` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
-| `nwsl_api_player_stats` / `nwslApiPlayerStats` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stats/players` | `season_id`\* | `locale`, `category`, `role`, `direction`, `page`, `page_num_element` → `pageNumElement` | `parse_nwsl_stats` | — |
-| `nwsl_api_season_matches` / `nwslApiSeasonMatches` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/multipleSeasonMatches` | — | `season_ids` → `seasonIds`, `locale`, `start_date` → `startDate`, `end_date` → `endDate` | `parse_nwsl_sdp` | — |
-| `nwsl_api_stages` / `nwslApiStages` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stages` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
-| `nwsl_api_standings` / `nwslApiStandings` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/standings/overall` | `season_id`\* | `locale`, `order_by` → `orderBy`, `direction` | `parse_nwsl_standings` | — |
-| `nwsl_api_team_stats` / `nwslApiTeamStats` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stats/teams` | `season_id`\* | `locale`, `category` | `parse_nwsl_stats` | — |
-| `nwsl_api_teams` / `nwslApiTeams` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/teams` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
+| `nwsl_competitions` / `nwslCompetitions` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/competitions` | — | `locale` | `parse_nwsl_sdp` | — |
+| `nwsl_match_lineups` / `nwslMatchLineups` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matches/{match_id}/lineups` | `season_id`\*, `match_id`\* | `locale` | `parse_nwsl_lineups` — multi-table: `section` = `teams`, `players` (default), `staff` | — |
+| `nwsl_matchdays` / `nwslMatchdays` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matchdays` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
+| `nwsl_player_stats` / `nwslPlayerStats` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stats/players` | `season_id`\* | `locale`, `category`, `role`, `direction`, `page`, `page_num_element` → `pageNumElement` | `parse_nwsl_stats` | — |
+| `nwsl_season_matches` / `nwslSeasonMatches` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/multipleSeasonMatches` | — | `season_ids` → `seasonIds`, `locale`, `start_date` → `startDate`, `end_date` → `endDate` | `parse_nwsl_sdp` | — |
+| `nwsl_stages` / `nwslStages` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stages` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
+| `nwsl_standings` / `nwslStandings` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/standings/overall` | `season_id`\* | `locale`, `order_by` → `orderBy`, `direction` | `parse_nwsl_standings` | — |
+| `nwsl_team_stats` / `nwslTeamStats` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stats/teams` | `season_id`\* | `locale`, `category` | `parse_nwsl_stats` | — |
+| `nwsl_teams` / `nwslTeams` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/teams` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
 
-### Returns — `nwsl_api_competitions` / `nwslApiCompetitions`
+### Returns — `nwsl_competitions` / `nwslCompetitions`
 
 | col_name | type | description |
 |---|---|---|
@@ -38,7 +38,7 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `short_name` | character | Short team name. |
 | `acronym_name` | character | 3-letter team code. |
 
-### Returns — `nwsl_api_match_lineups` / `nwslApiMatchLineups`
+### Returns — `nwsl_match_lineups` / `nwslMatchLineups`
 
 | col_name | type | description |
 |---|---|---|
@@ -66,7 +66,7 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `average_x_position` | character | Average pitch x-coordinate of the player over the match. |
 | `average_y_position` | character | Average pitch y-coordinate of the player over the match. |
 
-### Returns — `nwsl_api_matchdays` / `nwslApiMatchdays`
+### Returns — `nwsl_matchdays` / `nwslMatchdays`
 
 | col_name | type | description |
 |---|---|---|
@@ -85,7 +85,7 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `end_date_utc` | character | Season window end (ISO-8601 UTC). |
 | `matchday_status` | character | Status of the match day (scheduled, in progress, completed). |
 
-### Returns — `nwsl_api_player_stats` / `nwslApiPlayerStats`
+### Returns — `nwsl_player_stats` / `nwslPlayerStats`
 
 | col_name | type | description |
 |---|---|---|
@@ -137,7 +137,7 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `team_editorial_club_text_colour` | character | Club editorial: club text colour (hex). |
 | `editorial_player_role_within_team` | character | Editorial metadata: editorial description of the player's role in the side. |
 
-### Returns — `nwsl_api_season_matches` / `nwslApiSeasonMatches`
+### Returns — `nwsl_season_matches` / `nwslSeasonMatches`
 
 | col_name | type | description |
 |---|---|---|
@@ -254,14 +254,14 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `match_set_end_date_utc` | character | Match day (round): Season window end (ISO-8601 UTC). |
 | `match_set_matchday_status` | character | Match day (round): status of the match day (scheduled, in progress, completed). |
 
-### Returns — `nwsl_api_stages` / `nwslApiStages`
+### Returns — `nwsl_stages` / `nwslStages`
 
 | col_name | type | description |
 |---|---|---|
 | `stage_id` | character | Composite Stage id (`nwsl::Football_Stage::{hex}`). |
 | `name` | character | Stage display name. |
 
-### Returns — `nwsl_api_team_stats` / `nwslApiTeamStats`
+### Returns — `nwsl_team_stats` / `nwslTeamStats`
 
 | col_name | type | description |
 |---|---|---|
@@ -299,7 +299,7 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `editorial_club_secondary_colour` | character | Editorial metadata: club secondary colour (hex). |
 | `editorial_club_text_colour` | character | Editorial metadata: club text colour (hex). |
 
-### Returns — `nwsl_api_teams` / `nwslApiTeams`
+### Returns — `nwsl_teams` / `nwslTeams`
 
 | col_name | type | description |
 |---|---|---|

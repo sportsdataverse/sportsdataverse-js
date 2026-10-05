@@ -13,7 +13,7 @@ Beyond the ESPN surface, `sdv.nba` also wraps the league's own live APIs. Same `
 
 ## Native API — NBA Stats API (stats.nba.com)
 
-Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport and a residential IP). Host: `https://stats.nba.com`. Each method is exposed under BOTH `nba_stats_<endpoint>` (snake_case, py/R parity) and `nbaStats<Endpoint>` (camelCase canonical) on `sdv.nba`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport and a residential IP). Host: `https://stats.nba.com`. Each method is exposed under BOTH its snake_case name `nba_stats_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nba`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

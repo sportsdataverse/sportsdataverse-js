@@ -268,6 +268,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_info",
+    "publicShort": "player_info",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}",
@@ -280,6 +281,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_bio",
+    "publicShort": "player_bio",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
@@ -292,6 +294,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_news",
+    "publicShort": "player_news",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/news",
@@ -569,6 +572,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_week_events",
+    "publicShort": "season_week_games",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
@@ -631,6 +635,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_athletes",
+    "publicShort": "season_players",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
@@ -769,6 +774,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athletes_index",
+    "publicShort": "players_index",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes",
@@ -794,6 +800,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_core",
+    "publicShort": "player_core",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
@@ -806,6 +813,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_career_stats",
+    "publicShort": "player_career_stats",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
@@ -822,6 +830,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_statisticslog",
+    "publicShort": "player_statisticslog",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
@@ -834,6 +843,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_eventlog",
+    "publicShort": "player_eventlog",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
@@ -846,6 +856,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_contracts",
+    "publicShort": "player_contracts",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
@@ -858,6 +869,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_awards",
+    "publicShort": "player_awards",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
@@ -870,6 +882,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_seasons",
+    "publicShort": "player_seasons",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
@@ -882,6 +895,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_records",
+    "publicShort": "player_records",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
@@ -894,6 +908,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_injuries",
+    "publicShort": "player_injuries",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
@@ -906,6 +921,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_notes",
+    "publicShort": "player_notes",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
@@ -918,6 +934,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_vs_athlete",
+    "publicShort": "player_vs_player",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
@@ -933,6 +950,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "events",
+    "publicShort": "games",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events",
@@ -951,6 +969,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event",
+    "publicShort": "game",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}",
@@ -963,6 +982,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competition",
+    "publicShort": "game_competition",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
@@ -980,6 +1000,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitors",
+    "publicShort": "game_teams",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
@@ -997,6 +1018,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor",
+    "publicShort": "game_team",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
@@ -1017,6 +1039,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_roster",
+    "publicShort": "game_team_roster",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
@@ -1037,6 +1060,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_linescores",
+    "publicShort": "game_team_linescores",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
@@ -1057,6 +1081,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_statistics",
+    "publicShort": "game_team_statistics",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
@@ -1077,6 +1102,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_record",
+    "publicShort": "game_team_record",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
@@ -1097,6 +1123,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_leaders",
+    "publicShort": "game_team_leaders",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
@@ -1117,6 +1144,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_odds",
+    "publicShort": "game_odds",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
@@ -1134,6 +1162,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_probabilities",
+    "publicShort": "game_probabilities",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
@@ -1157,6 +1186,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_plays",
+    "publicShort": "game_plays",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
@@ -1180,6 +1210,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_play",
+    "publicShort": "game_play",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
@@ -1200,6 +1231,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_play_personnel",
+    "publicShort": "game_play_personnel",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
@@ -1220,6 +1252,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_situation",
+    "publicShort": "game_situation",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
@@ -1237,6 +1270,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_status",
+    "publicShort": "game_status",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
@@ -1254,6 +1288,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_officials",
+    "publicShort": "game_officials",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
@@ -1271,6 +1306,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_broadcasts",
+    "publicShort": "game_broadcasts",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
@@ -1288,6 +1324,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_predictor",
+    "publicShort": "game_predictor",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
@@ -1305,6 +1342,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_powerindex",
+    "publicShort": "game_powerindex",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
@@ -1322,6 +1360,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_propbets",
+    "publicShort": "game_propbets",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
@@ -1339,6 +1378,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_leaders",
+    "publicShort": "game_leaders",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
@@ -1356,6 +1396,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_scoringplays",
+    "publicShort": "game_scoringplays",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
@@ -1373,6 +1414,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_official_detail",
+    "publicShort": "game_official_detail",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
@@ -1649,6 +1691,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "recruiting_athletes",
+    "publicShort": "recruiting_players",
     "family": "core_v2",
     "scope": "ncaa",
     "path": "/{sport}/leagues/{league}/recruiting/{year}/athletes",
@@ -1753,6 +1796,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_hotzones",
+    "publicShort": "player_hotzones",
     "family": "core_v2",
     "scope": "mlb",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/hotzones",
@@ -1765,6 +1809,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_overview",
+    "publicShort": "player_overview",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
@@ -1777,6 +1822,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_stats",
+    "publicShort": "player_stats",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
@@ -1794,6 +1840,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_gamelog",
+    "publicShort": "player_gamelog",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
@@ -1811,6 +1858,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_splits",
+    "publicShort": "player_splits",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
@@ -5395,6 +5443,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "pbp",
+    "publicName": "nhl_web_pbp",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5411,6 +5460,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "boxscore",
+    "publicName": "nhl_boxscore",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5427,6 +5477,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "landing",
+    "publicName": "nhl_landing",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5443,6 +5494,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "right_rail",
+    "publicName": "nhl_right_rail",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5459,6 +5511,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "schedule",
+    "publicName": "nhl_web_schedule",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5476,6 +5529,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "score",
+    "publicName": "nhl_score",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5493,6 +5547,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "schedule_calendar",
+    "publicName": "nhl_schedule_calendar",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5510,6 +5565,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "playoff_series",
+    "publicName": "nhl_playoff_series",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5530,6 +5586,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nhl_standings",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5547,6 +5604,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings_season",
+    "publicName": "nhl_standings_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5559,6 +5617,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_season",
+    "publicName": "nhl_club_schedule_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5580,6 +5639,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_month",
+    "publicName": "nhl_club_schedule_month",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5600,6 +5660,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_week",
+    "publicName": "nhl_club_schedule_week",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5620,6 +5681,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_stats",
+    "publicName": "nhl_club_stats",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5646,6 +5708,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_stats_season",
+    "publicName": "nhl_club_stats_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5662,6 +5725,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "roster",
+    "publicName": "nhl_roster",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5683,6 +5747,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "roster_season",
+    "publicName": "nhl_roster_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5699,6 +5764,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_landing",
+    "publicName": "nhl_player_landing",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5715,6 +5781,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_game_log",
+    "publicName": "nhl_player_game_log",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5741,6 +5808,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_spotlight",
+    "publicName": "nhl_player_spotlight",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5753,6 +5821,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "skater_leaders",
+    "publicName": "nhl_skater_leaders",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5776,6 +5845,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "goalie_leaders",
+    "publicName": "nhl_goalie_leaders",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5799,6 +5869,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks",
+    "publicName": "nhl_draft_picks",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5820,6 +5891,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_rankings",
+    "publicName": "nhl_draft_rankings",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5841,6 +5913,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks_now",
+    "publicName": "nhl_draft_picks_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5853,6 +5926,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_rankings_now",
+    "publicName": "nhl_draft_rankings_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5865,6 +5939,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_tracker_picks_now",
+    "publicName": "nhl_draft_tracker_picks_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -7766,6 +7841,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nfl_standings",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7800,6 +7876,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "rosters",
+    "publicName": "nfl_rosters",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7829,6 +7906,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "teams_history",
+    "publicName": "nfl_teams_history",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7853,6 +7931,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team",
+    "publicName": "nfl_team",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7870,6 +7949,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weeks",
+    "publicName": "nfl_weeks",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7894,6 +7974,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weeks_by_date",
+    "publicName": "nfl_weeks_by_date",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7911,6 +7992,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "combine_profiles",
+    "publicName": "nfl_combine_profiles",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7935,6 +8017,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks",
+    "publicName": "nfl_draft_picks",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7959,6 +8042,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "injuries",
+    "publicName": "nfl_injuries",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7988,6 +8072,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_summaries",
+    "publicName": "nfl_game_summaries",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8017,6 +8102,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weekly_game_details",
+    "publicName": "nfl_weekly_game_details",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8070,6 +8156,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "live_team_statistics",
+    "publicName": "nfl_live_team_statistics",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8086,6 +8173,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "live_player_statistics",
+    "publicName": "nfl_live_player_statistics",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8102,6 +8190,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_details_v2",
+    "publicName": "nfl_game_details_v2",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8143,6 +8232,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_details_by_slug",
+    "publicName": "nfl_game_details_by_slug",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8585,7 +8675,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/coaches"
+    "returnsSchema": "native/recruiting/coaches",
+    "deprecated": "use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "rankings_transfer_portal_player_feed",
@@ -8610,7 +8701,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_ranking_feed",
-    "returnsSchema": "native/recruiting/ranking_feed"
+    "returnsSchema": "native/recruiting/ranking_feed",
+    "deprecated": "use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "rankings_composite_team_feed",
@@ -8635,7 +8727,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_ranking_feed",
-    "returnsSchema": "native/recruiting/ranking_feed"
+    "returnsSchema": "native/recruiting/ranking_feed",
+    "deprecated": "use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "rankings_transfer_portal_team_feed",
@@ -8660,7 +8753,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_ranking_feed",
-    "returnsSchema": "native/recruiting/ranking_feed"
+    "returnsSchema": "native/recruiting/ranking_feed",
+    "deprecated": "use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "institution_groups",
@@ -8672,7 +8766,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "pathParams": [],
     "queryParams": [],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/institution_groups"
+    "returnsSchema": "native/recruiting/institution_groups",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "institution_rankings",
@@ -8723,7 +8818,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_institution_rankings",
-    "returnsSchema": "native/recruiting/institution_rankings"
+    "returnsSchema": "native/recruiting/institution_rankings",
+    "deprecated": "use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "current_target_predictions",
@@ -8756,7 +8852,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/current_target_predictions"
+    "returnsSchema": "native/recruiting/current_target_predictions",
+    "deprecated": "use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "player_sport_rankings",
@@ -8805,7 +8902,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/player_sport_rankings"
+    "returnsSchema": "native/recruiting/player_sport_rankings",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "transfer_player_sport_rankings",
@@ -8854,7 +8952,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/transfer_player_sport_rankings"
+    "returnsSchema": "native/recruiting/transfer_player_sport_rankings",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "unranked_recruits",
@@ -8907,7 +9006,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/unranked_recruits"
+    "returnsSchema": "native/recruiting/unranked_recruits",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "players_under_special_evaluation",
@@ -8923,7 +9023,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/players_under_special_evaluation"
+    "returnsSchema": "native/recruiting/players_under_special_evaluation",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "biggest_movers",
@@ -8945,7 +9046,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/biggest_movers"
+    "returnsSchema": "native/recruiting/biggest_movers",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "positions",
@@ -8970,7 +9072,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/positions"
+    "returnsSchema": "native/recruiting/positions",
+    "deprecated": "use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "rankings",
@@ -8999,7 +9102,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/rankings"
+    "returnsSchema": "native/recruiting/rankings",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "archived_player_rankings",
@@ -9026,7 +9130,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/archived_player_rankings"
+    "returnsSchema": "native/recruiting/archived_player_rankings",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "year",
@@ -9043,7 +9148,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/year"
+    "returnsSchema": "native/recruiting/year",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "recruits",
@@ -9078,7 +9184,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/recruits"
+    "returnsSchema": "native/recruiting/recruits",
+    "deprecated": "use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "sports",
@@ -9095,7 +9202,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/sports"
+    "returnsSchema": "native/recruiting/sports",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "sport_years",
@@ -9111,7 +9219,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/sport_years"
+    "returnsSchema": "native/recruiting/sport_years",
+    "deprecated": "use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "tags_autocomplete",
@@ -9133,7 +9242,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/tags_autocomplete"
+    "returnsSchema": "native/recruiting/tags_autocomplete",
+    "deprecated": "use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "tags_photos_by_key",
@@ -9160,7 +9270,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_paged_list",
-    "returnsSchema": "native/recruiting/tags_photos"
+    "returnsSchema": "native/recruiting/tags_photos",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "tags_photos_by_type",
@@ -9190,7 +9301,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_paged_list",
-    "returnsSchema": "native/recruiting/tags_photos"
+    "returnsSchema": "native/recruiting/tags_photos",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   },
   {
     "short": "teams",
@@ -9215,7 +9327,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/teams"
+    "returnsSchema": "native/recruiting/teams",
+    "deprecated": "use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "transfers",
@@ -9268,7 +9381,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/transfers"
+    "returnsSchema": "native/recruiting/transfers",
+    "deprecated": "use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500)."
   },
   {
     "short": "unranked_transfers",
@@ -9302,7 +9416,935 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_recruiting_list",
-    "returnsSchema": "native/recruiting/unranked_transfers"
+    "returnsSchema": "native/recruiting/unranked_transfers",
+    "deprecated": "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
+  },
+  {
+    "short": "teams",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/teams/",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey",
+        "default": 1
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "institution_type",
+        "queryKey": "institutionType"
+      }
+    ],
+    "parser": "parse_sports247_teams",
+    "returnsSchema": "native/sports247/sports247_teams",
+    "auth": true
+  },
+  {
+    "short": "institution_rankings",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/institutionrankings/",
+    "pathParams": [
+      {
+        "name": "year"
+      },
+      {
+        "name": "sport_key",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pagesize",
+        "default": 50
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "use_composite",
+        "queryKey": "useComposite"
+      },
+      {
+        "name": "conference_abbreviation",
+        "queryKey": "conferenceAbbreviation"
+      },
+      {
+        "name": "institution_key",
+        "queryKey": "institutionKey"
+      }
+    ],
+    "parser": "parse_sports247_institution_rankings",
+    "returnsSchema": "native/sports247/sports247_institution_rankings",
+    "auth": true
+  },
+  {
+    "short": "recruits",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/recruits/",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey",
+        "default": 1
+      },
+      {
+        "name": "year",
+        "queryKey": "year",
+        "default": 2026
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize",
+        "default": 50
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "position_abbreviation",
+        "queryKey": "positionAbbreviation"
+      },
+      {
+        "name": "state_abbreviation",
+        "queryKey": "stateAbbreviation"
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_recruits",
+    "auth": true
+  },
+  {
+    "short": "transfers",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/transfers/",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey",
+        "default": 1
+      },
+      {
+        "name": "year",
+        "queryKey": "year",
+        "default": 2026
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pagesize",
+        "default": 50
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_transfers",
+    "auth": true
+  },
+  {
+    "short": "coaches",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/coaches/",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey",
+        "default": 1
+      },
+      {
+        "name": "year",
+        "queryKey": "year",
+        "default": 2026
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 50
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_coaches",
+    "auth": true
+  },
+  {
+    "short": "transfer_portal_player_feed",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed/",
+    "pathParams": [
+      {
+        "name": "year"
+      },
+      {
+        "name": "sport_key",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 50
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_transfer_portal_player_feed",
+    "auth": true
+  },
+  {
+    "short": "composite_team_ranking_feed",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed/",
+    "pathParams": [
+      {
+        "name": "year"
+      },
+      {
+        "name": "sport_key",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 50
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_composite_team_ranking_feed",
+    "auth": true
+  },
+  {
+    "short": "transfer_portal_team_feed",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed/",
+    "pathParams": [
+      {
+        "name": "year"
+      },
+      {
+        "name": "sport_key",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 50
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_transfer_portal_team_feed",
+    "auth": true
+  },
+  {
+    "short": "target_predictions",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions/",
+    "pathParams": [
+      {
+        "name": "site_key"
+      },
+      {
+        "name": "year"
+      },
+      {
+        "name": "sport_key",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page_size",
+        "queryKey": "pageSize",
+        "default": 50
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_target_predictions",
+    "auth": true
+  },
+  {
+    "short": "sport_years",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/sports/{sport_key}/year/",
+    "pathParams": [
+      {
+        "name": "sport_key",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_sport_years",
+    "auth": true
+  },
+  {
+    "short": "tags_autocomplete",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/tags/autocomplete/",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "default_name",
+        "queryKey": "defaultName"
+      },
+      {
+        "name": "items",
+        "queryKey": "items",
+        "default": 10
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_tags_autocomplete",
+    "auth": true
+  },
+  {
+    "short": "positions",
+    "flat": true,
+    "api": "sports247",
+    "host": "https://ipa.247sports.com",
+    "scope": "universal",
+    "path": "/rdb/v1/positions/",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey",
+        "default": 1
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "ranking_key",
+        "queryKey": "rankingKey"
+      }
+    ],
+    "parser": "parse_sports247_result_set",
+    "returnsSchema": "native/sports247/sports247_positions",
+    "auth": true
+  },
+  {
+    "short": "coach",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Coach/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "coach_alma_mater",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Coach/{key}/AlmaMater.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "coach_hometown",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Coach/{key}/Hometown.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "coach_ranking",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/CoachRanking/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "coach_rankings",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Coach/{key}/CoachRankings.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "event",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Event/{slug}.json",
+    "pathParams": [
+      {
+        "name": "slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "institution",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Institution/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "institution_list",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Institution.json",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "items",
+        "queryKey": "items"
+      }
+    ],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "institution_location",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Institution/{key}/Location.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "institution_timeline_events",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/college/{school_slug}/Institution/{key}/TimelineEvents.json",
+    "pathParams": [
+      {
+        "name": "school_slug"
+      },
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "league_draft_picks",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/League/{league_slug}/DraftPicks/ConfigureEmbed/.json",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "round",
+        "queryKey": "round"
+      }
+    ],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "league_institutions",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/League/{league_id}/Institutions.json",
+    "pathParams": [
+      {
+        "name": "league_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "items",
+        "queryKey": "items"
+      }
+    ],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "page_feeds",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Page/{page_id}/Feeds.json",
+    "pathParams": [
+      {
+        "name": "page_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Player/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player_current_institution",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Player/{key}/CurrentPlayerInstitution.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player_high_school",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Player/{key}/PlayerHighSchool.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player_institution",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/PlayerInstitution/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player_institution_evaluation",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/PlayerInstitutionEvaluation/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player_primary_sport",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Player/{key}/PrimaryPlayerSport.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "player_search",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Player.json",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "first_name",
+        "queryKey": "FirstName"
+      },
+      {
+        "name": "last_name",
+        "queryKey": "LastName"
+      }
+    ],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "playersport",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/playersport/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "playersport_institution",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/PlayerSport/{key}/PlayerInstitution.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "playersport_rank_history",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/PlayerSport/{key}/RecruitRankHistory.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "position_rankings",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Position/{key}/playersportrankings.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "recruit_interest",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/RecruitInterest/{key}.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "recruitment_final_choice",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Recruitment/{key}/FinalChoice.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "recruitment_institution",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Recruitment/{key}/Institution.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "recruitment_interests",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Recruitment/{key}/Interests.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "recruitment_offers",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Recruitment/{key}/Offers.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "recruitment_player_sport",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Recruitment/{key}/PlayerSport.json",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "season_current_expert_predictions",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Season/{season}/CurrentExpertPredictions.json",
+    "pathParams": [
+      {
+        "name": "season"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "season_recruit_interest_events",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Season/{season}/RecruitInterestEvents.json",
+    "pathParams": [
+      {
+        "name": "season"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "season_recruit_interests",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Season/{season}/RecruitInterests.json",
+    "pathParams": [
+      {
+        "name": "season"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "season_recruits",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Season/{season}/Recruits.json",
+    "pathParams": [
+      {
+        "name": "season"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "items",
+        "queryKey": "Items"
+      },
+      {
+        "name": "page",
+        "queryKey": "Page"
+      },
+      {
+        "name": "player_full_name",
+        "queryKey": "Player.FullName"
+      },
+      {
+        "name": "institution",
+        "queryKey": "Institution"
+      }
+    ],
+    "parser": "parse_sports247_site_page"
+  },
+  {
+    "short": "season_roster_embed",
+    "flat": true,
+    "api": "sports247_site_pages",
+    "host": "https://247sports.com",
+    "scope": "universal",
+    "path": "/Season/{season}/Roster/Embed.json",
+    "pathParams": [
+      {
+        "name": "season"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_sports247_site_page"
   },
   {
     "short": "bulk",
@@ -9346,7 +10388,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/bulk"
   },
   {
-    "short": "client_configuration",
+    "short": "client_config",
+    "legacyShort": "client_configuration",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9416,7 +10459,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/coach_team_associations"
   },
   {
-    "short": "sub_divisions",
+    "short": "division_subdivisions",
+    "legacyShort": "sub_divisions",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9583,7 +10627,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_betting_splits"
   },
   {
-    "short": "boxscore",
+    "short": "game_boxscore",
+    "legacyShort": "boxscore",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9652,7 +10697,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_content_story"
   },
   {
-    "short": "featured_game",
+    "short": "game_featured",
+    "legacyShort": "featured_game",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9726,7 +10772,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_odds"
   },
   {
-    "short": "game_hq_odds",
+    "short": "game_odds_hq",
+    "legacyShort": "game_hq_odds",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9758,7 +10805,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_outcomes"
   },
   {
-    "short": "probable_players",
+    "short": "game_probable_players",
+    "legacyShort": "probable_players",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9836,7 +10884,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_rtwp"
   },
   {
-    "short": "ruwt_highlights",
+    "short": "game_ruwt_highlights",
+    "legacyShort": "ruwt_highlights",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10060,7 +11109,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_ticket"
   },
   {
-    "short": "weather",
+    "short": "game_weather",
+    "legacyShort": "weather",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10241,7 +11291,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_combine_data"
   },
   {
-    "short": "depth_charts",
+    "short": "player_depth_charts",
+    "legacyShort": "depth_charts",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10365,7 +11416,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_game_stats"
   },
   {
-    "short": "hockey_player_meta",
+    "short": "player_hockey_meta",
+    "legacyShort": "hockey_player_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10402,7 +11454,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_injuries"
   },
   {
-    "short": "baseball_player_meta",
+    "short": "player_meta_baseball",
+    "legacyShort": "baseball_player_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10418,7 +11471,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/baseball_player_meta"
   },
   {
-    "short": "player_golf_metadata",
+    "short": "player_meta_golf",
+    "legacyShort": "player_golf_metadata",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10455,7 +11509,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_outlook"
   },
   {
-    "short": "position_rankings",
+    "short": "player_position_rankings",
+    "legacyShort": "position_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10513,7 +11568,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_rankings"
   },
   {
-    "short": "recruit_team_associations",
+    "short": "player_recruit_associations",
+    "legacyShort": "recruit_team_associations",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10893,7 +11949,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_rankings"
   },
   {
-    "short": "sports_line_team_rankings",
+    "short": "team_rankings_sportsline",
+    "legacyShort": "sports_line_team_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10975,7 +12032,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_standings"
   },
   {
-    "short": "sports_line_team_standings",
+    "short": "team_standings_sportsline",
+    "legacyShort": "sports_line_team_standings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -18790,6 +19848,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club",
+    "publicName": "mls_club",
     "flat": true,
     "api": "mls_api",
     "host": "https://stats-api.mlssoccer.com",
@@ -18806,6 +19865,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "competition_seasons",
+    "publicName": "mls_competition_seasons",
     "flat": true,
     "api": "mls_api",
     "host": "https://stats-api.mlssoccer.com",
@@ -18822,6 +19882,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "competitions",
+    "publicName": "mls_competitions",
     "flat": true,
     "api": "mls_api",
     "host": "https://stats-api.mlssoccer.com",
@@ -18834,6 +19895,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "content_season",
+    "publicName": "mls_content_season",
     "flat": true,
     "api": "mls_api",
     "host": "https://dapi.mlssoccer.com",
@@ -18850,6 +19912,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "content_seasons",
+    "publicName": "mls_content_seasons",
     "flat": true,
     "api": "mls_api",
     "host": "https://dapi.mlssoccer.com",
@@ -18871,6 +19934,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "match",
+    "publicName": "mls_match",
     "flat": true,
     "api": "mls_api",
     "host": "https://stats-api.mlssoccer.com",
@@ -18887,6 +19951,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_matches",
+    "publicName": "mls_season_matches",
     "flat": true,
     "api": "mls_api",
     "host": "https://stats-api.mlssoccer.com",
@@ -18928,6 +19993,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "sportapi_club_players",
+    "publicName": "mls_sportapi_club_players",
     "flat": true,
     "api": "mls_api",
     "host": "https://sportapi.mlssoccer.com",
@@ -18949,6 +20015,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "sportapi_clubs_by_sportec_ids",
+    "publicName": "mls_sportapi_clubs_by_sportec_ids",
     "flat": true,
     "api": "mls_api",
     "host": "https://sportapi.mlssoccer.com",
@@ -18965,6 +20032,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "sportapi_match",
+    "publicName": "mls_sportapi_match",
     "flat": true,
     "api": "mls_api",
     "host": "https://sportapi.mlssoccer.com",
@@ -18981,6 +20049,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "sportapi_matches_by_sportec_ids",
+    "publicName": "mls_sportapi_matches_by_sportec_ids",
     "flat": true,
     "api": "mls_api",
     "host": "https://sportapi.mlssoccer.com",
@@ -18997,6 +20066,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "mls_standings",
     "flat": true,
     "api": "mls_api",
     "host": "https://stats-api.mlssoccer.com",
@@ -19030,6 +20100,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "competitions",
+    "publicName": "nwsl_competitions",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19048,6 +20119,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "match_lineups",
+    "publicName": "nwsl_match_lineups",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19073,6 +20145,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "matchdays",
+    "publicName": "nwsl_matchdays",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19095,6 +20168,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_stats",
+    "publicName": "nwsl_player_stats",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19137,6 +20211,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_matches",
+    "publicName": "nwsl_season_matches",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19167,6 +20242,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "stages",
+    "publicName": "nwsl_stages",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19189,6 +20265,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nwsl_standings",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19218,6 +20295,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_stats",
+    "publicName": "nwsl_team_stats",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -19244,6 +20322,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "teams",
+    "publicName": "nwsl_teams",
     "flat": true,
     "api": "nwsl_api",
     "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",

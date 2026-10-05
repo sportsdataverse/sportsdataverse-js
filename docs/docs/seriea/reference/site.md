@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.seriea`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnSerieaAthleteBio`
+## `espnSerieaPlayerBio`
 
-SERIEA — athlete bio (ESPN site.api.espn.com).
+SERIEA — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_bio` / `espnSerieaAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ SERIEA — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_bio(...)
+await sdv.seriea.espnSerieaPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_bio(...)
 ```
 
-## `espnSerieaAthleteInfo`
+## `espnSerieaPlayerInfo`
 
-SERIEA — athlete info (ESPN site.api.espn.com).
+SERIEA — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_info` / `espnSerieaAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ SERIEA — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_info(...)
+await sdv.seriea.espnSerieaPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_info(...)
 ```
 
-## `espnSerieaAthleteNews`
+## `espnSerieaPlayerNews`
 
-SERIEA — athlete news (ESPN site.api.espn.com).
+SERIEA — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_news` / `espnSerieaAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ SERIEA — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_news(...)
+await sdv.seriea.espnSerieaPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_news(...)
 ```
 
 ## `espnSerieaCalendar`

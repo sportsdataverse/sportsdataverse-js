@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.seriea`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnSerieaAthleteGamelog`
+## `espnSerieaPlayerGamelog`
 
-SERIEA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+SERIEA — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ita.1/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_gamelog` / `espnSerieaAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ SERIEA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_gamelog(...)
+await sdv.seriea.espnSerieaPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_gamelog(...)
 ```
 
-## `espnSerieaAthleteOverview`
+## `espnSerieaPlayerOverview`
 
-SERIEA — athlete overview (ESPN site.web.api.espn.com (web v3)).
+SERIEA — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ita.1/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_overview` / `espnSerieaAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ SERIEA — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_overview(...)
+await sdv.seriea.espnSerieaPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_overview(...)
 ```
 
-## `espnSerieaAthleteSplits`
+## `espnSerieaPlayerSplits`
 
-SERIEA — athlete splits (ESPN site.web.api.espn.com (web v3)).
+SERIEA — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ita.1/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_splits` / `espnSerieaAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ SERIEA — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_splits(...)
+await sdv.seriea.espnSerieaPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_splits(...)
 ```
 
-## `espnSerieaAthleteStats`
+## `espnSerieaPlayerStats`
 
-SERIEA — athlete stats (ESPN site.web.api.espn.com (web v3)).
+SERIEA — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/ita.1/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_seriea_athlete_stats` / `espnSerieaAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ SERIEA — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.seriea.espnSerieaAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.seriea.espn_seriea_athlete_stats(...)
+await sdv.seriea.espnSerieaPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.seriea.espn_seriea_player_stats(...)
 ```
 
 ## `espnSerieaLeaders`

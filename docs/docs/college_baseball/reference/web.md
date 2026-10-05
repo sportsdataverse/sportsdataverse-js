@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.college_baseball`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCollegeBaseballAthleteGamelog`
+## `espnCollegeBaseballPlayerGamelog`
 
-COLLEGE_BASEBALL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+COLLEGE_BASEBALL — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/college-baseball/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_baseball_athlete_gamelog` / `espnCollegeBaseballAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ COLLEGE_BASEBALL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.college_baseball.espnCollegeBaseballAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_athlete_gamelog(...)
+await sdv.college_baseball.espnCollegeBaseballPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_player_gamelog(...)
 ```
 
-## `espnCollegeBaseballAthleteOverview`
+## `espnCollegeBaseballPlayerOverview`
 
-COLLEGE_BASEBALL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+COLLEGE_BASEBALL — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/college-baseball/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_baseball_athlete_overview` / `espnCollegeBaseballAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ COLLEGE_BASEBALL — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.college_baseball.espnCollegeBaseballAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_athlete_overview(...)
+await sdv.college_baseball.espnCollegeBaseballPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_player_overview(...)
 ```
 
-## `espnCollegeBaseballAthleteSplits`
+## `espnCollegeBaseballPlayerSplits`
 
-COLLEGE_BASEBALL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+COLLEGE_BASEBALL — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/college-baseball/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_baseball_athlete_splits` / `espnCollegeBaseballAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ COLLEGE_BASEBALL — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.college_baseball.espnCollegeBaseballAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_athlete_splits(...)
+await sdv.college_baseball.espnCollegeBaseballPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_player_splits(...)
 ```
 
-## `espnCollegeBaseballAthleteStats`
+## `espnCollegeBaseballPlayerStats`
 
-COLLEGE_BASEBALL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+COLLEGE_BASEBALL — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/college-baseball/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_college_baseball_athlete_stats` / `espnCollegeBaseballAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ COLLEGE_BASEBALL — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.college_baseball.espnCollegeBaseballAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_athlete_stats(...)
+await sdv.college_baseball.espnCollegeBaseballPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_player_stats(...)
 ```
 
 ## `espnCollegeBaseballLeaders`

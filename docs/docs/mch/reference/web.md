@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.mch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMchAthleteGamelog`
+## `espnMchPlayerGamelog`
 
-MCH — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+MCH — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/mens-college-hockey/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_gamelog` / `espnMchAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ MCH — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_gamelog(...)
+await sdv.mch.espnMchPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_gamelog(...)
 ```
 
-## `espnMchAthleteOverview`
+## `espnMchPlayerOverview`
 
-MCH — athlete overview (ESPN site.web.api.espn.com (web v3)).
+MCH — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/mens-college-hockey/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_overview` / `espnMchAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ MCH — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_overview(...)
+await sdv.mch.espnMchPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_overview(...)
 ```
 
-## `espnMchAthleteSplits`
+## `espnMchPlayerSplits`
 
-MCH — athlete splits (ESPN site.web.api.espn.com (web v3)).
+MCH — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/mens-college-hockey/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_splits` / `espnMchAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ MCH — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_splits(...)
+await sdv.mch.espnMchPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_splits(...)
 ```
 
-## `espnMchAthleteStats`
+## `espnMchPlayerStats`
 
-MCH — athlete stats (ESPN site.web.api.espn.com (web v3)).
+MCH — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/mens-college-hockey/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_stats` / `espnMchAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ MCH — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_stats(...)
+await sdv.mch.espnMchPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_stats(...)
 ```
 
 ## `espnMchLeaders`

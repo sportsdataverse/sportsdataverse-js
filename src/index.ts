@@ -13,6 +13,8 @@ import wnba from './services/wnba.service.js';
 import { LEAGUES } from './generated/leagues.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { WRITTEN_FLAT } from './generated/flat/index.js';
+import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from './generated/aliases.js';
+import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -32,10 +34,14 @@ const legacy: Record<string, Record<string, any>> = {
 // `espn_<prefix>_*` wrappers, merged onto its legacy service when one exists
 // (and added as a new namespace otherwise — soccer, cricket, ufl, mch, ...).
 // Each league pulls from its written module (WRITTEN_ESPN); makeLeagueModule is
-// only a fallback if a module is somehow missing.
+// only a fallback if a module is somehow missing. v4: wrappers carry sdv-py's
+// names, and every pre-v4 name a rename replaced is added as a deprecated alias
+// (one DeprecationWarning per name per process; src/generated/aliases.ts).
 const sdv: Record<string, Record<string, any>> = { ...legacy };
 for (const cfg of LEAGUES) {
-  const espn = WRITTEN_ESPN[cfg.prefix] ?? makeLeagueModule(cfg);
+  const espn = WRITTEN_ESPN[cfg.prefix]
+    ? withDeprecatedAliases(WRITTEN_ESPN[cfg.prefix], ESPN_DEPRECATED_ALIASES[cfg.prefix])
+    : makeLeagueModule(cfg);
   sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...espn };
 }
 
@@ -54,10 +60,15 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace (NOT a league), so `prefix` here is its own name: the merge below
   // creates `sdv.odds.*` from scratch (no legacy/ESPN service to merge onto).
   odds_api: 'odds',
-  // 247Sports Recruit Database — second standalone (non-league) provider family.
-  // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
-  // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  // 247Sports Recruit Database on api.247sports.com — DEPRECATED (the host
+  // answers HTTP 500; every method warns once). Kept for back-compat.
   recruiting: 'recruiting',
+  // 247Sports, the supported surface: the RDB on ipa.247sports.com (guest JWT
+  // minted automatically) + the 247sports.com `*.json` page models, both on
+  // `sdv.sports247` (browser-impersonating transport — needs `impit`).
+  // Supersedes `recruiting` and the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  sports247: 'sports247',
+  sports247_site_pages: 'sports247',
   // CBS Sports API — third standalone (non-league) provider family. `cbs` is a
   // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
   // the API data resources are anonymously reachable).
@@ -101,7 +112,7 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
 // the same `callFlat` core, so they resolve identically.
 for (const [api, mod] of Object.entries(WRITTEN_FLAT)) {
   const prefix = FLAT_API_NAMESPACES[api] ?? api;
-  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
+  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...withDeprecatedAliases(mod, FLAT_DEPRECATED_ALIASES[api]) };
 }
 
 // Hand-written Baseball Savant / Statcast wrappers (date-chunked search +
@@ -145,6 +156,7 @@ export {
   NFL_API_HOST,
 } from './core/nfl_auth.js';
 export type { NflTokenOptions } from './core/nfl_auth.js';
+export { sports247ClearTokenCache } from './core/sports247_runtime.js';
 // Runtime core: error vocabulary, configuration, transports, auth providers.
 export {
   SdvError,
@@ -167,6 +179,11 @@ export { axiosTransport, createImpersonatingTransport } from './core/transport.j
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
 export type { AuthProvider, AuthContext } from './core/auth.js';
+export {
+  listFunctions, functionCount, findTeam, findAthlete, findEvent, clearTeamCache,
+  list_functions, function_count, find_team, find_athlete, find_event, clear_team_cache,
+} from './discover.js';
+export type { ListFunctionsOptions, Namespaces } from './discover.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
 export type { ParserFn } from './parsers/_registry.js';

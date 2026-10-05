@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.wbb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWbbAthleteBio`
+## `espnWbbPlayerBio`
 
-WBB — athlete bio (ESPN site.api.espn.com).
+WBB — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_athlete_bio` / `espnWbbAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ WBB — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_athlete_bio(...)
+await sdv.wbb.espnWbbPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_player_bio(...)
 ```
 
-## `espnWbbAthleteInfo`
+## `espnWbbPlayerInfo`
 
-WBB — athlete info (ESPN site.api.espn.com).
+WBB — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_athlete_info` / `espnWbbAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ WBB — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_athlete_info(...)
+await sdv.wbb.espnWbbPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_player_info(...)
 ```
 
-## `espnWbbAthleteNews`
+## `espnWbbPlayerNews`
 
-WBB — athlete news (ESPN site.api.espn.com).
+WBB — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_athlete_news` / `espnWbbAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ WBB — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_athlete_news(...)
+await sdv.wbb.espnWbbPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_player_news(...)
 ```
 
 ## `espnWbbCalendar`

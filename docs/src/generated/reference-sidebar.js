@@ -13,6 +13,11 @@ module.exports = [
     "label": "Parsed returns"
   },
   {
+    "type": "doc",
+    "id": "reference/deprecations",
+    "label": "Deprecated names (v4)"
+  },
+  {
     "type": "category",
     "label": "Basketball",
     "collapsible": true,
@@ -511,6 +516,11 @@ module.exports = [
         "type": "doc",
         "id": "reference/recruiting",
         "label": "recruiting"
+      },
+      {
+        "type": "doc",
+        "id": "reference/sports247",
+        "label": "sports247"
       },
       {
         "type": "doc",
