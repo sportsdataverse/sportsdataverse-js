@@ -379,6 +379,21 @@ describe('core/auth', () => {
     t.calls.length.should.equal(2);
   });
 
+  it('a 401 on the caller\'s own credential mints nothing (tokenAuth refresh is a no-op then)', async () => {
+    let mints = 0;
+    const t = fakeTransport({ status: 401 });
+    configure({
+      transport: t,
+      auth: { fam: tokenAuth({ mint: async () => ({ token: `t${++mints}` }), header: 'X-Token', scheme: '' }) },
+    });
+    const err = await request('fam', { ...GET(), headers: { 'x-token': 'mine' } }).should.be.rejectedWith(
+      AssetFetchError
+    );
+    err.status.should.equal(401);
+    mints.should.equal(0);
+    t.calls.every((c) => c.headers['x-token'] === 'mine' && c.headers['X-Token'] === undefined).should.be.true();
+  });
+
   it('tokenAuth shares one in-flight mint between concurrent requests', async () => {
     let mints = 0;
     configure({
