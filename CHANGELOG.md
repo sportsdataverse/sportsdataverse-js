@@ -6,9 +6,6 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
-### Fixed
-
-- NHL api-web / EDGE / records wrappers now honor sdv-py's `now_variant`: omitting the toggle arg (`season`, `date`, ...) requests the `/now` path instead of a malformed dated URL (`now_variant`/`now_toggle` carried through codegen, `resolveFlat`, and the playground resolver).
 
 
 ### Security
@@ -86,6 +83,7 @@ the v4 names and register the same aliases.
 
 ### Fixed
 
+- NHL api-web / EDGE / records wrappers now honor sdv-py's `now_variant`: omitting the toggle arg (`season`, `date`, ...) requests the endpoint's `now_variant` route (`/now`, `/current`, or the collection path) instead of a malformed dated URL (`now_variant`/`now_toggle` carried through codegen, `resolveFlat`, and the playground resolver).
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.
 - `getPicks` (cfb, mbb, mlb, nba, nfl, nhl): `pickcenter` was populated from `winprobability`; it now returns the real `pickcenter`.
 - `sdv.wnba.getTeamList()` no longer throws when called with no argument.

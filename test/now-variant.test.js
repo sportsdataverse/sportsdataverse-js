@@ -1,4 +1,7 @@
 import should from 'should';
+import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+import { nowToggle } from '../tools/codegen/now-toggle.mjs';
 import { FLAT_WRAPPERS } from '../dist/index.js';
 import { resolveFlat } from '../dist/core/flat.js';
 import { resolveFlat as resolveFlatPlayground } from '../docs/src/playground/resolve.mjs';
@@ -9,9 +12,21 @@ const withNow = FLAT_WRAPPERS.filter((w) => w.nowVariant);
 const fill = (tpl, vals) => tpl.replace(/\{(\w+)\}/g, (_m, k) => vals[k]);
 
 describe('now_variant routing (nhl_api_web / nhl_edge / nhl_records)', () => {
-  it('is declared on every vendored endpoint that has a variant', () => {
-    new Set(withNow.map((w) => w.api)).should.containEql('nhl_api_web');
+  it('generated defs carry nowVariant for exactly the YAML now_variant entries (12/35/5 today)', () => {
+    for (const api of ['nhl_api_web', 'nhl_edge', 'nhl_records']) {
+      const doc = parse(readFileSync(new URL(`../tools/codegen/endpoints/${api}.yaml`, import.meta.url), 'utf8'));
+      const want = (doc.endpoints ?? []).filter((e) => e.now_variant).map((e) => e.short).sort();
+      want.length.should.be.above(0);
+      withNow.filter((w) => w.api === api).map((w) => w.short).sort().should.eql(want);
+    }
     for (const w of withNow) should(w.nowToggle).be.a.String();
+  });
+
+  it('toggle fallback (py generate.py): explicit > first optional no-default > last path param', () => {
+    nowToggle({ now_toggle: 'x', path_params: [{ name: 'a' }] }).should.equal('x');
+    nowToggle({ path_params: [{ name: 'a' }, { name: 'b', required: false }, { name: 'c', required: false }] }).should.equal('b');
+    nowToggle({ path_params: [{ name: 'a', required: false, default: 1 }, { name: 'z' }] }).should.equal('z');
+    should(nowToggle({})).be.undefined();
   });
 
   for (const w of withNow) {
@@ -30,9 +45,7 @@ describe('now_variant routing (nhl_api_web / nhl_edge / nhl_records)', () => {
 
     it(`${w.api}.${w.short}: given ${w.nowToggle} -> dated path`, () => {
       const { url } = resolveFlat(w, base);
-      url.should.startWith(w.host);
-      url.should.not.match(/\/now(\/|$)/);
-      url.should.not.match(/[{}]/);
+      url.should.equal(`${w.host}${fill(w.path, base)}`);
       resolveFlatPlayground(w, base).url.should.equal(url);
     });
   }
