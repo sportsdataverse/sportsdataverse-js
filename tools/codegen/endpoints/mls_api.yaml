@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
+# VENDORED from sportsdataverse/sportsdataverse-py@28ee34b46520e1648b4f9fcf9ac20ba27ff37403
 # tools/codegen/endpoints/mls_api.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/mls_api.yaml; shared changes land in sdv-py first.
@@ -8,7 +8,6 @@ docstring:
   example_import: true
   raises:
   - 'sportsdataverse.errors.NoESPNDataError: the MLS host returned 404 (unknown id, or an unplayed match on ``/matches/{matchId}``).'
-  - 'requests.exceptions.RequestException: Connection-level failure after ``dl_utils.download`` exhausts its retries.'
   see_also:
   - name: MLS
     note: the public site these hosts render

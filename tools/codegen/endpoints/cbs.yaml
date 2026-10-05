@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
+# VENDORED from sportsdataverse/sportsdataverse-py@28ee34b46520e1648b4f9fcf9ac20ba27ff37403
 # tools/codegen/endpoints/cbs_napi.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/cbs.yaml; shared changes land in sdv-py first.
@@ -7,7 +7,7 @@ api: cbs
 docstring:
   example_import: true
   raises:
-  - 'requests.exceptions.RequestException: Connection-level failure after ``dl_utils.download`` exhausts its retries. An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.'
+  - 'AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.'
   see_also:
   - name: CBS Sports NAPI registry
     note: the API's own self-documenting endpoint catalog (data origin)

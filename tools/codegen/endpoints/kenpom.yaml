@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
+# VENDORED from sportsdataverse/sportsdataverse-py@28ee34b46520e1648b4f9fcf9ac20ba27ff37403
 # tools/codegen/endpoints/kenpom.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/kenpom.yaml; shared changes land in sdv-py first.
@@ -28,7 +28,6 @@ docstring:
   example_import: true
   raises:
   - 'RuntimeError: No KenPom credentials could be resolved (pass ``email=``/``password=``, or set ``KENPOM_EMAIL``/``KENPOM_PW``), or kenpom.com rejected them.'
-  - 'requests.exceptions.RequestException: Connection-level failure after ``dl_utils.download`` exhausts its retries.'
   see_also:
   - name: hoopR
     url: https://hoopR.sportsdataverse.org

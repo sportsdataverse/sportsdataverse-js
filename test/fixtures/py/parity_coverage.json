@@ -1,6 +1,6 @@
 {
   "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown. A kind: frames schema counts the columns of every frame, and lists its unexercised ones as <section>.<column>. One with frames_by (a single table, the frame a request parameter picks) is always unverified: a capture records no request parameter to pick it by.",
-  "source_ref": "07390b71c156675080b5de573fccbd5a8076c143",
+  "source_ref": "28ee34b46520e1648b4f9fcf9ac20ba27ff37403",
   "totals": {
     "py_tables": 916,
     "documented": 616,
