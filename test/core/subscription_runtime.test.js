@@ -695,10 +695,19 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
       { email: 'jane.doe@example.com', password: 'https://pw.example/?k=Tail77', markers: ['Tail77', 'pw.example'] },
       // an e-mail echoed URL-encoded (jane.doe%2Bnfl%40example.com)
       { email: 'jane.doe+nfl@example.com', password: PW, markers: [] },
+      // a lone surrogate: encodeURIComponent throws on it; still NflProAuthError, nothing leaks
+      { email: 'jane.doe@example.com', password: 'pw\uD800Tail88', markers: ['Tail88'] },
     ];
+    const enc = (x) => {
+      try {
+        return encodeURIComponent(x);
+      } catch {
+        return x;
+      }
+    };
     for (const { email, password, markers } of creds) {
       const found = tokenFor(email, { plans: [] }); // a non-entitled token sitting in localStorage
-      const forbidden = [password, email, encodeURIComponent(email), encodeURIComponent(password), found, ...markers];
+      const forbidden = [password, email, enc(email), enc(password), found, ...markers];
       const modes = [
         fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'password' && leaky(k, v) }),
         fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'email' && leaky(k, v) }),

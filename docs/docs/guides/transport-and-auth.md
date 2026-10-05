@@ -390,9 +390,10 @@ keeps only a token whose JWT carries an active `NFL_PLUS_*` plan; "signed in"
 alone proves nothing, because an anonymous token looks the same. Logged-in
 tokens are cached per account until they expire (with 120 s to spare). The
 cache key is an HMAC of the e-mail and password under a random per-process
-key. Concurrent calls for one account share one login, and a whole login that
-has not finished in 3 minutes is abandoned (the browser is closed and the
-call throws). A `401` on a logged-in token drops it and logs in again once; a
+key. Concurrent calls for one account share one login, and a login whose page
+flow has not finished 3 minutes after the browser starts is abandoned (the
+browser is closed and the call throws). Browser start-up itself is bounded by
+Playwright's own launch timeout (also 3 minutes), so the worst case is about 6. A `401` on a logged-in token drops it and logs in again once; a
 supplied token is never re-minted. `nflProClearTokenCache()` forgets every
 token. The e-mail, password and token never appear in an error, its `cause`,
 or a warning. An NFL account with no password on file (id.nfl.com asks you to

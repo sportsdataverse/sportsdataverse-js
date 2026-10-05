@@ -176,10 +176,19 @@ const readLocalStorage = (): string[] => {
  * contains the e-mail is removed whole — and only then `redactSecrets`, which
  * would otherwise rewrite a `scheme://…?` password before the split could match.
  */
+// A lone surrogate makes encodeURIComponent throw; such a string has no URL-encoded form to cut.
+const uriEncoded = (x: string) => {
+  try {
+    return encodeURIComponent(x);
+  } catch {
+    return x;
+  }
+};
+
 function scrubbed(err: unknown, secrets: string[]): Error {
   const forms = secrets
     .filter(Boolean)
-    .flatMap((x) => [x, encodeURIComponent(x)])
+    .flatMap((x) => [x, uriEncoded(x)])
     .sort((a, b) => b.length - a.length);
   const cut = (s: string) => redactSecrets(forms.reduce((acc, x) => acc.split(x).join("<redacted>"), s));
   const e = (typeof err === "object" && err !== null ? err : {}) as Record<string, unknown>;
