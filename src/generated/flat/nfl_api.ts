@@ -6,7 +6,7 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
 
 const COMBINE_PROFILES_DEF: WrapperDef = {
   "short": "combine_profiles",
@@ -46,7 +46,7 @@ const COMBINE_PROFILES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflCombineProfiles({});
  */
-export const nflCombineProfiles: WrapperFn = (params = {}) => callFlat(COMBINE_PROFILES_DEF, params);
+export const nflCombineProfiles: Wrapper = (params: WrapperParams = {}) => callFlat(COMBINE_PROFILES_DEF, params);
 /** snake_case alias of {@link nflCombineProfiles} (py/R parity). */
 export const nfl_combine_profiles = nflCombineProfiles;
 
@@ -88,7 +88,7 @@ const DRAFT_PICKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflDraftPicks({});
  */
-export const nflDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS_DEF, params);
+export const nflDraftPicks: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_PICKS_DEF, params);
 /** snake_case alias of {@link nflDraftPicks} (py/R parity). */
 export const nfl_draft_picks = nflDraftPicks;
 
@@ -129,7 +129,7 @@ const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflGameDetailsBySlug({ slug: '…' });
  */
-export const nflGameDetailsBySlug: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_BY_SLUG_DEF, params);
+export const nflGameDetailsBySlug: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_DETAILS_BY_SLUG_DEF, params);
 /** snake_case alias of {@link nflGameDetailsBySlug} (py/R parity). */
 export const nfl_game_details_by_slug = nflGameDetailsBySlug;
 
@@ -191,7 +191,7 @@ const GAME_DETAILS_V2_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflGameDetailsV2({ game_id: '…' });
  */
-export const nflGameDetailsV2: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_V2_DEF, params);
+export const nflGameDetailsV2: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_DETAILS_V2_DEF, params);
 /** snake_case alias of {@link nflGameDetailsV2} (py/R parity). */
 export const nfl_game_details_v2 = nflGameDetailsV2;
 
@@ -239,7 +239,7 @@ const GAME_SUMMARIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflGameSummaries({});
  */
-export const nflGameSummaries: WrapperFn = (params = {}) => callFlat(GAME_SUMMARIES_DEF, params);
+export const nflGameSummaries: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_SUMMARIES_DEF, params);
 /** snake_case alias of {@link nflGameSummaries} (py/R parity). */
 export const nfl_game_summaries = nflGameSummaries;
 
@@ -287,7 +287,7 @@ const INJURIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflInjuries({});
  */
-export const nflInjuries: WrapperFn = (params = {}) => callFlat(INJURIES_DEF, params);
+export const nflInjuries: Wrapper = (params: WrapperParams = {}) => callFlat(INJURIES_DEF, params);
 /** snake_case alias of {@link nflInjuries} (py/R parity). */
 export const nfl_injuries = nflInjuries;
 
@@ -320,7 +320,7 @@ const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflLivePlayerStatistics({ game_id: '…' });
  */
-export const nflLivePlayerStatistics: WrapperFn = (params = {}) => callFlat(LIVE_PLAYER_STATISTICS_DEF, params);
+export const nflLivePlayerStatistics: Wrapper = (params: WrapperParams = {}) => callFlat(LIVE_PLAYER_STATISTICS_DEF, params);
 /** snake_case alias of {@link nflLivePlayerStatistics} (py/R parity). */
 export const nfl_live_player_statistics = nflLivePlayerStatistics;
 
@@ -353,7 +353,7 @@ const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflLiveTeamStatistics({ game_id: '…' });
  */
-export const nflLiveTeamStatistics: WrapperFn = (params = {}) => callFlat(LIVE_TEAM_STATISTICS_DEF, params);
+export const nflLiveTeamStatistics: Wrapper = (params: WrapperParams = {}) => callFlat(LIVE_TEAM_STATISTICS_DEF, params);
 /** snake_case alias of {@link nflLiveTeamStatistics} (py/R parity). */
 export const nfl_live_team_statistics = nflLiveTeamStatistics;
 
@@ -401,7 +401,7 @@ const ROSTERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflRosters({});
  */
-export const nflRosters: WrapperFn = (params = {}) => callFlat(ROSTERS_DEF, params);
+export const nflRosters: Wrapper = (params: WrapperParams = {}) => callFlat(ROSTERS_DEF, params);
 /** snake_case alias of {@link nflRosters} (py/R parity). */
 export const nfl_rosters = nflRosters;
 
@@ -455,7 +455,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflStandings({});
  */
-export const nflStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
+export const nflStandings: Wrapper = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link nflStandings} (py/R parity). */
 export const nfl_standings = nflStandings;
 
@@ -489,7 +489,7 @@ const TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflTeam({ team_id: '…' });
  */
-export const nflTeam: WrapperFn = (params = {}) => callFlat(TEAM_DEF, params);
+export const nflTeam: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link nflTeam} (py/R parity). */
 export const nfl_team = nflTeam;
 
@@ -531,7 +531,7 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflTeamsHistory({});
  */
-export const nflTeamsHistory: WrapperFn = (params = {}) => callFlat(TEAMS_HISTORY_DEF, params);
+export const nflTeamsHistory: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_HISTORY_DEF, params);
 /** snake_case alias of {@link nflTeamsHistory} (py/R parity). */
 export const nfl_teams_history = nflTeamsHistory;
 
@@ -607,7 +607,7 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflWeeklyGameDetails({});
  */
-export const nflWeeklyGameDetails: WrapperFn = (params = {}) => callFlat(WEEKLY_GAME_DETAILS_DEF, params);
+export const nflWeeklyGameDetails: Wrapper = (params: WrapperParams = {}) => callFlat(WEEKLY_GAME_DETAILS_DEF, params);
 /** snake_case alias of {@link nflWeeklyGameDetails} (py/R parity). */
 export const nfl_weekly_game_details = nflWeeklyGameDetails;
 
@@ -649,7 +649,7 @@ const WEEKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflWeeks({});
  */
-export const nflWeeks: WrapperFn = (params = {}) => callFlat(WEEKS_DEF, params);
+export const nflWeeks: Wrapper = (params: WrapperParams = {}) => callFlat(WEEKS_DEF, params);
 /** snake_case alias of {@link nflWeeks} (py/R parity). */
 export const nfl_weeks = nflWeeks;
 
@@ -683,6 +683,6 @@ const WEEKS_BY_DATE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nfl.nflWeeksByDate({ date: '…' });
  */
-export const nflWeeksByDate: WrapperFn = (params = {}) => callFlat(WEEKS_BY_DATE_DEF, params);
+export const nflWeeksByDate: Wrapper = (params: WrapperParams = {}) => callFlat(WEEKS_BY_DATE_DEF, params);
 /** snake_case alias of {@link nflWeeksByDate} (py/R parity). */
 export const nfl_weeks_by_date = nflWeeksByDate;

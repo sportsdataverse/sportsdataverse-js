@@ -28,6 +28,7 @@ import {
   renderLoadersIndexSection,
   renderLoaderOnlyIndex,
 } from "./render-loaders.mjs";
+import { flatWrapperType, loadParityCoverage, renderRowsBarrel, renderRowsModule } from "./row-types.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
@@ -754,7 +755,7 @@ function renderWrittenEspnModule(league, wrappers) {
     "// core with the module-private `CFG` below, so URLs resolve identically to the\n" +
     "// runtime-factory path. The non-basketball leagues still use the factory.\n\n" +
     'import { callWrapper } from "../../core/espn.js";\n' +
-    'import type { LeagueConfig, WrapperDef, WrapperFn } from "../../core/types.js";\n\n' +
+    'import type { LeagueConfig, ParsedTables, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n\n' +
     `/** Module-private league binding for \`${league.prefix}\` (not exported). */\n` +
     `const CFG: LeagueConfig = ${cfgLiteral};\n`;
 
@@ -833,7 +834,8 @@ function renderWrittenEspnModule(league, wrappers) {
 
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
-    body += `export const ${camel}: WrapperFn = (params = {}) =>\n`;
+    // The summary dispatcher's parsed result is every sub-frame as a dict; `section` picks one.
+    body += `export const ${camel}: ${isSummary ? "SectionedWrapper<ParsedTables>" : "Wrapper"} = (params: WrapperParams = {}) =>\n`;
     body += `  callWrapper(${defConst}, CFG, params);\n`;
     body += `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;
     body += `export const ${snake} = ${camel};\n`;
@@ -2209,14 +2211,30 @@ outputs[join(generatedEspnDir, "index.ts")] = renderWrittenEspnBarrel(writtenPre
 // WRITTEN flat-API source modules — one `src/generated/flat/<api>.ts` per family,
 // composed in src/index.ts via the generated barrel instead of makeFlatModule.
 const generatedFlatDir = join(generatedDir, "flat");
+// The parser-parity harness's verified endpoints: the only ones that get row types.
+const PARITY_COVERAGE = loadParityCoverage(repoRoot);
+// api -> the row / tables interfaces its rows module exports (for the barrel).
+const rowTypeNames = new Map();
 const writtenFlatApis = [];
 for (const api of FLAT_API_FILES) {
   const defs = flatWrappers.filter((w) => w.api === api);
   if (!defs.length) continue;
-  outputs[join(generatedFlatDir, `${api}.ts`)] = renderWrittenFlatModule(api, defs);
+  const rows = renderRowsModule(api, defs, {
+    coverage: PARITY_COVERAGE,
+    schemasDir,
+    sectionsOf: (d) => (d.parser ? FLAT_PARSER_SECTIONS[d.parser] : undefined),
+    snakeOf: flatSnake,
+    nsOf: (d) => FLAT_API_NAMESPACES[d.api] ?? d.api,
+  });
+  if (rows.source) {
+    outputs[join(generatedDir, "rows", `${api}.ts`)] = rows.source;
+    rowTypeNames.set(api, rows.exports);
+  }
+  outputs[join(generatedFlatDir, `${api}.ts`)] = renderWrittenFlatModule(api, defs, rows.types);
   writtenFlatApis.push(api);
 }
 outputs[join(generatedFlatDir, "index.ts")] = renderWrittenFlatBarrel(writtenFlatApis);
+outputs[join(generatedDir, "rows", "index.ts")] = renderRowsBarrel(rowTypeNames);
 
 // Release loader modules (src/generated/loaders/) + the docs dir of each
 // loader-only namespace (written leagues got their loaders page above).
@@ -2243,7 +2261,7 @@ loaderOnly.forEach(([ns], i) => {
 
 // One WRITTEN flat-API module: each wrapper a real `export const` delegating to
 // the shared `callFlat(def, params)` core (its def hoisted to a module const).
-function renderWrittenFlatModule(api, defs) {
+function renderWrittenFlatModule(api, defs, rowTypes = new Map()) {
   const meta = FLAT_API_META[api] ?? { label: api, source: api };
   const ns = FLAT_API_NAMESPACES[api] ?? api;
   let body =
@@ -2254,7 +2272,9 @@ function renderWrittenFlatModule(api, defs) {
     "// delegates to the shared `callFlat(def, params)` core, so TypeScript /\n" +
     "// TypeDoc / IDEs see every wrapper.\n\n" +
     'import { callFlat } from "../../leagues/_make_flat.js";\n' +
-    'import type { WrapperDef, WrapperFn } from "../../core/types.js";\n';
+    'import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";\n';
+  const rowNames = [...rowTypes.values()].flatMap((t) => t.names);
+  if (rowNames.length) body += `import type {\n${rowNames.map((n) => `  ${n},\n`).join("")}} from "../rows/${api}.js";\n`;
   const sorted = defs.slice().sort((a, b) => a.short.localeCompare(b.short));
   for (const def of sorted) {
     const snake = flatSnake(def);
@@ -2307,7 +2327,8 @@ function renderWrittenFlatModule(api, defs) {
     jsdoc += ` */\n`;
     body += `\nconst ${defConst}: WrapperDef = ${defLiteral};\n`;
     body += jsdoc;
-    body += `export const ${camel}: WrapperFn = (params = {}) => callFlat(${defConst}, params);\n`;
+    const wrapperType = flatWrapperType(def, def.parser ? FLAT_PARSER_SECTIONS[def.parser] : undefined, rowTypes.get(def.short));
+    body += `export const ${camel}: ${wrapperType} = (params: WrapperParams = {}) => callFlat(${defConst}, params);\n`;
     body += def.deprecated
       ? `/**\n * snake_case alias of {@link ${camel}} (py/R parity).\n * @deprecated ${def.deprecated}\n */\n`
       : `/** snake_case alias of {@link ${camel}} (py/R parity). */\n`;

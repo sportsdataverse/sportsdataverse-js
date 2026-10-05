@@ -25,7 +25,7 @@ export default {
      */
     getPlayByPlay: async function (id) {
         // via espn_nba_cdn_playbyplay (https; core request layer + error vocabulary)
-        const res = { data: await espnNbaCdnPlaybyplay({ game_id: id }) };
+        const res = { data: (await espnNbaCdnPlaybyplay({ game_id: id })) as any };
         return {
             teams: res.data.gamepackageJSON.header.competitions[0].competitors,
             id: res.data.gamepackageJSON.header.id,
@@ -49,7 +49,7 @@ export default {
      */
     getBoxScore: async function (id) {
         // via espn_nba_cdn_boxscore (https; core request layer + error vocabulary)
-        const res = { data: await espnNbaCdnBoxscore({ game_id: id }) };
+        const res = { data: (await espnNbaCdnBoxscore({ game_id: id })) as any };
         const game = res.data.gamepackageJSON.boxscore;
         game.id = res.data.gameId;
         return game;
@@ -134,7 +134,7 @@ export default {
      */
     getSchedule: async function ({ year = null, month = null, day = null }) {
         // espn_nba_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
-        const res = await espnNbaCdnSchedule({ date: cdnDate(year, month, day) });
+        const res = (await espnNbaCdnSchedule({ date: cdnDate(year, month, day) })) as any;
         return res.content.schedule;
     },
     /**

@@ -6,7 +6,55 @@
 // TypeDoc / IDEs see every wrapper.
 
 import { callFlat } from "../../leagues/_make_flat.js";
-import type { WrapperDef, WrapperFn } from "../../core/types.js";
+import type { ParsedTables, Row, SectionedWrapper, Wrapper, WrapperDef, WrapperParams } from "../../core/types.js";
+import type {
+  MlbAllStarBallotRow,
+  MlbAllStarFinalVoteRow,
+  MlbAllStarWriteInsRow,
+  MlbAwardRecipientsRow,
+  MlbAwardsRow,
+  MlbBoxscoreRow,
+  MlbConferenceRow,
+  MlbConferencesRow,
+  MlbDatacastersRow,
+  MlbDraftLatestRow,
+  MlbFreeAgentsRow,
+  MlbGameChangesRow,
+  MlbGamePaceRow,
+  MlbGameTimestampsRow,
+  MlbHighLowRow,
+  MlbHomeRunDerbyRow,
+  MlbHomeRunDerbyBracketRow,
+  MlbHomeRunDerbyPoolRow,
+  MlbJobsRow,
+  MlbLeaguesRow,
+  MlbLinescoreRow,
+  MlbOfficialScorersRow,
+  MlbPeopleRow,
+  MlbPersonRow,
+  MlbPersonGameStatsRow,
+  MlbPlayByPlayRow,
+  MlbSchedulePostseasonRow,
+  MlbSchedulePostseasonSeriesRow,
+  MlbScheduleTiedRow,
+  MlbSeasonRow,
+  MlbSeasonsAllRow,
+  MlbSportRow,
+  MlbSportPlayersRow,
+  MlbSportsRow,
+  MlbTeamRow,
+  MlbTeamAffiliatesRow,
+  MlbTeamAlumniRow,
+  MlbTeamCoachesRow,
+  MlbTeamPersonnelRow,
+  MlbTeamRosterRow,
+  MlbTeamsHistoryRow,
+  MlbTeamsStatsLeadersRow,
+  MlbUmpiresRow,
+  MlbVenueRow,
+  MlbVenuesRow,
+  MlbWinProbabilityRow,
+} from "../rows/mlb.js";
 
 const ALL_STAR_BALLOT_DEF: WrapperDef = {
   "short": "all_star_ballot",
@@ -46,7 +94,7 @@ const ALL_STAR_BALLOT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAllStarBallot({ league_id: '…' });
  */
-export const mlbAllStarBallot: WrapperFn = (params = {}) => callFlat(ALL_STAR_BALLOT_DEF, params);
+export const mlbAllStarBallot: Wrapper<MlbAllStarBallotRow[]> = (params: WrapperParams = {}) => callFlat(ALL_STAR_BALLOT_DEF, params);
 /** snake_case alias of {@link mlbAllStarBallot} (py/R parity). */
 export const mlb_all_star_ballot = mlbAllStarBallot;
 
@@ -88,7 +136,7 @@ const ALL_STAR_FINAL_VOTE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAllStarFinalVote({ league_id: '…' });
  */
-export const mlbAllStarFinalVote: WrapperFn = (params = {}) => callFlat(ALL_STAR_FINAL_VOTE_DEF, params);
+export const mlbAllStarFinalVote: Wrapper<MlbAllStarFinalVoteRow[]> = (params: WrapperParams = {}) => callFlat(ALL_STAR_FINAL_VOTE_DEF, params);
 /** snake_case alias of {@link mlbAllStarFinalVote} (py/R parity). */
 export const mlb_all_star_final_vote = mlbAllStarFinalVote;
 
@@ -130,7 +178,7 @@ const ALL_STAR_WRITE_INS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAllStarWriteIns({ league_id: '…' });
  */
-export const mlbAllStarWriteIns: WrapperFn = (params = {}) => callFlat(ALL_STAR_WRITE_INS_DEF, params);
+export const mlbAllStarWriteIns: Wrapper<MlbAllStarWriteInsRow[]> = (params: WrapperParams = {}) => callFlat(ALL_STAR_WRITE_INS_DEF, params);
 /** snake_case alias of {@link mlbAllStarWriteIns} (py/R parity). */
 export const mlb_all_star_write_ins = mlbAllStarWriteIns;
 
@@ -191,7 +239,7 @@ const ANALYTICS_GAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAnalyticsGames({});
  */
-export const mlbAnalyticsGames: WrapperFn = (params = {}) => callFlat(ANALYTICS_GAMES_DEF, params);
+export const mlbAnalyticsGames: Wrapper = (params: WrapperParams = {}) => callFlat(ANALYTICS_GAMES_DEF, params);
 /** snake_case alias of {@link mlbAnalyticsGames} (py/R parity). */
 export const mlb_analytics_games = mlbAnalyticsGames;
 
@@ -252,7 +300,7 @@ const ANALYTICS_GUIDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAnalyticsGuids({});
  */
-export const mlbAnalyticsGuids: WrapperFn = (params = {}) => callFlat(ANALYTICS_GUIDS_DEF, params);
+export const mlbAnalyticsGuids: Wrapper = (params: WrapperParams = {}) => callFlat(ANALYTICS_GUIDS_DEF, params);
 /** snake_case alias of {@link mlbAnalyticsGuids} (py/R parity). */
 export const mlb_analytics_guids = mlbAnalyticsGuids;
 
@@ -303,7 +351,7 @@ const ATTENDANCE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAttendance({});
  */
-export const mlbAttendance: WrapperFn = (params = {}) => callFlat(ATTENDANCE_DEF, params);
+export const mlbAttendance: Wrapper = (params: WrapperParams = {}) => callFlat(ATTENDANCE_DEF, params);
 /** snake_case alias of {@link mlbAttendance} (py/R parity). */
 export const mlb_attendance = mlbAttendance;
 
@@ -351,7 +399,7 @@ const AWARD_RECIPIENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAwardRecipients({ award_id: '…' });
  */
-export const mlbAwardRecipients: WrapperFn = (params = {}) => callFlat(AWARD_RECIPIENTS_DEF, params);
+export const mlbAwardRecipients: Wrapper<MlbAwardRecipientsRow[]> = (params: WrapperParams = {}) => callFlat(AWARD_RECIPIENTS_DEF, params);
 /** snake_case alias of {@link mlbAwardRecipients} (py/R parity). */
 export const mlb_award_recipients = mlbAwardRecipients;
 
@@ -383,7 +431,7 @@ const AWARDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbAwards({});
  */
-export const mlbAwards: WrapperFn = (params = {}) => callFlat(AWARDS_DEF, params);
+export const mlbAwards: Wrapper<MlbAwardsRow[]> = (params: WrapperParams = {}) => callFlat(AWARDS_DEF, params);
 /** snake_case alias of {@link mlbAwards} (py/R parity). */
 export const mlb_awards = mlbAwards;
 
@@ -425,7 +473,7 @@ const BOXSCORE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbBoxscore({ game_pk: '…' });
  */
-export const mlbBoxscore: WrapperFn = (params = {}) => callFlat(BOXSCORE_DEF, params);
+export const mlbBoxscore: Wrapper<MlbBoxscoreRow[]> = (params: WrapperParams = {}) => callFlat(BOXSCORE_DEF, params);
 /** snake_case alias of {@link mlbBoxscore} (py/R parity). */
 export const mlb_boxscore = mlbBoxscore;
 
@@ -467,7 +515,7 @@ const CONFERENCE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbConference({ conference_id: '…' });
  */
-export const mlbConference: WrapperFn = (params = {}) => callFlat(CONFERENCE_DEF, params);
+export const mlbConference: Wrapper<MlbConferenceRow[]> = (params: WrapperParams = {}) => callFlat(CONFERENCE_DEF, params);
 /** snake_case alias of {@link mlbConference} (py/R parity). */
 export const mlb_conference = mlbConference;
 
@@ -509,7 +557,7 @@ const CONFERENCES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbConferences({});
  */
-export const mlbConferences: WrapperFn = (params = {}) => callFlat(CONFERENCES_DEF, params);
+export const mlbConferences: Wrapper<MlbConferencesRow[]> = (params: WrapperParams = {}) => callFlat(CONFERENCES_DEF, params);
 /** snake_case alias of {@link mlbConferences} (py/R parity). */
 export const mlb_conferences = mlbConferences;
 
@@ -556,7 +604,7 @@ const DATACASTERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDatacasters({});
  */
-export const mlbDatacasters: WrapperFn = (params = {}) => callFlat(DATACASTERS_DEF, params);
+export const mlbDatacasters: Wrapper<MlbDatacastersRow[]> = (params: WrapperParams = {}) => callFlat(DATACASTERS_DEF, params);
 /** snake_case alias of {@link mlbDatacasters} (py/R parity). */
 export const mlb_datacasters = mlbDatacasters;
 
@@ -598,7 +646,7 @@ const DIVISIONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDivisions({});
  */
-export const mlbDivisions: WrapperFn = (params = {}) => callFlat(DIVISIONS_DEF, params);
+export const mlbDivisions: Wrapper = (params: WrapperParams = {}) => callFlat(DIVISIONS_DEF, params);
 /** snake_case alias of {@link mlbDivisions} (py/R parity). */
 export const mlb_divisions = mlbDivisions;
 
@@ -651,7 +699,7 @@ const DRAFT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDraft({ year: '…' });
  */
-export const mlbDraft: WrapperFn = (params = {}) => callFlat(DRAFT_DEF, params);
+export const mlbDraft: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_DEF, params);
 /** snake_case alias of {@link mlbDraft} (py/R parity). */
 export const mlb_draft = mlbDraft;
 
@@ -682,7 +730,7 @@ const DRAFT_LATEST_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDraftLatest({ year: '…' });
  */
-export const mlbDraftLatest: WrapperFn = (params = {}) => callFlat(DRAFT_LATEST_DEF, params);
+export const mlbDraftLatest: Wrapper<MlbDraftLatestRow[]> = (params: WrapperParams = {}) => callFlat(DRAFT_LATEST_DEF, params);
 /** snake_case alias of {@link mlbDraftLatest} (py/R parity). */
 export const mlb_draft_latest = mlbDraftLatest;
 
@@ -724,7 +772,7 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbDraftProspects({ year: '…' });
  */
-export const mlbDraftProspects: WrapperFn = (params = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
+export const mlbDraftProspects: Wrapper = (params: WrapperParams = {}) => callFlat(DRAFT_PROSPECTS_DEF, params);
 /** snake_case alias of {@link mlbDraftProspects} (py/R parity). */
 export const mlb_draft_prospects = mlbDraftProspects;
 
@@ -771,7 +819,7 @@ const FREE_AGENTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbFreeAgents({});
  */
-export const mlbFreeAgents: WrapperFn = (params = {}) => callFlat(FREE_AGENTS_DEF, params);
+export const mlbFreeAgents: Wrapper<MlbFreeAgentsRow[]> = (params: WrapperParams = {}) => callFlat(FREE_AGENTS_DEF, params);
 /** snake_case alias of {@link mlbFreeAgents} (py/R parity). */
 export const mlb_free_agents = mlbFreeAgents;
 
@@ -813,7 +861,7 @@ const GAME_CHANGES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameChanges({});
  */
-export const mlbGameChanges: WrapperFn = (params = {}) => callFlat(GAME_CHANGES_DEF, params);
+export const mlbGameChanges: Wrapper<MlbGameChangesRow[]> = (params: WrapperParams = {}) => callFlat(GAME_CHANGES_DEF, params);
 /** snake_case alias of {@link mlbGameChanges} (py/R parity). */
 export const mlb_game_changes = mlbGameChanges;
 
@@ -854,7 +902,7 @@ const GAME_COLOR_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameColor({ game_pk: '…' });
  */
-export const mlbGameColor: WrapperFn = (params = {}) => callFlat(GAME_COLOR_DEF, params);
+export const mlbGameColor: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_COLOR_DEF, params);
 /** snake_case alias of {@link mlbGameColor} (py/R parity). */
 export const mlb_game_color = mlbGameColor;
 
@@ -895,7 +943,7 @@ const GAME_COLOR_DIFF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameColorDiff({ game_pk: '…' });
  */
-export const mlbGameColorDiff: WrapperFn = (params = {}) => callFlat(GAME_COLOR_DIFF_DEF, params);
+export const mlbGameColorDiff: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_COLOR_DIFF_DEF, params);
 /** snake_case alias of {@link mlbGameColorDiff} (py/R parity). */
 export const mlb_game_color_diff = mlbGameColorDiff;
 
@@ -925,7 +973,7 @@ const GAME_COLOR_TIMESTAMPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameColorTimestamps({ game_pk: '…' });
  */
-export const mlbGameColorTimestamps: WrapperFn = (params = {}) => callFlat(GAME_COLOR_TIMESTAMPS_DEF, params);
+export const mlbGameColorTimestamps: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_COLOR_TIMESTAMPS_DEF, params);
 /** snake_case alias of {@link mlbGameColorTimestamps} (py/R parity). */
 export const mlb_game_color_timestamps = mlbGameColorTimestamps;
 
@@ -956,7 +1004,7 @@ const GAME_CONTENT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameContent({ game_pk: '…' });
  */
-export const mlbGameContent: WrapperFn = (params = {}) => callFlat(GAME_CONTENT_DEF, params);
+export const mlbGameContent: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_CONTENT_DEF, params);
 /** snake_case alias of {@link mlbGameContent} (py/R parity). */
 export const mlb_game_content = mlbGameContent;
 
@@ -993,7 +1041,7 @@ const GAME_CONTEXT_METRICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameContextMetrics({ game_pk: '…' });
  */
-export const mlbGameContextMetrics: WrapperFn = (params = {}) => callFlat(GAME_CONTEXT_METRICS_DEF, params);
+export const mlbGameContextMetrics: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_CONTEXT_METRICS_DEF, params);
 /** snake_case alias of {@link mlbGameContextMetrics} (py/R parity). */
 export const mlb_game_context_metrics = mlbGameContextMetrics;
 
@@ -1064,7 +1112,7 @@ const GAME_GUIDS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameGuids({ game_pk: '…' });
  */
-export const mlbGameGuids: WrapperFn = (params = {}) => callFlat(GAME_GUIDS_DEF, params);
+export const mlbGameGuids: Wrapper = (params: WrapperParams = {}) => callFlat(GAME_GUIDS_DEF, params);
 /** snake_case alias of {@link mlbGameGuids} (py/R parity). */
 export const mlb_game_guids = mlbGameGuids;
 
@@ -1151,7 +1199,7 @@ const GAME_PACE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGamePace({});
  */
-export const mlbGamePace: WrapperFn = (params = {}) => callFlat(GAME_PACE_DEF, params);
+export const mlbGamePace: Wrapper<MlbGamePaceRow[]> = (params: WrapperParams = {}) => callFlat(GAME_PACE_DEF, params);
 /** snake_case alias of {@link mlbGamePace} (py/R parity). */
 export const mlb_game_pace = mlbGamePace;
 
@@ -1182,7 +1230,7 @@ const GAME_TIMESTAMPS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbGameTimestamps({ game_pk: '…' });
  */
-export const mlbGameTimestamps: WrapperFn = (params = {}) => callFlat(GAME_TIMESTAMPS_DEF, params);
+export const mlbGameTimestamps: Wrapper<MlbGameTimestampsRow[]> = (params: WrapperParams = {}) => callFlat(GAME_TIMESTAMPS_DEF, params);
 /** snake_case alias of {@link mlbGameTimestamps} (py/R parity). */
 export const mlb_game_timestamps = mlbGameTimestamps;
 
@@ -1259,7 +1307,7 @@ const HIGH_LOW_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbHighLow({ org_type: '…' });
  */
-export const mlbHighLow: WrapperFn = (params = {}) => callFlat(HIGH_LOW_DEF, params);
+export const mlbHighLow: Wrapper<MlbHighLowRow[]> = (params: WrapperParams = {}) => callFlat(HIGH_LOW_DEF, params);
 /** snake_case alias of {@link mlbHighLow} (py/R parity). */
 export const mlb_high_low = mlbHighLow;
 
@@ -1296,7 +1344,7 @@ const HOME_RUN_DERBY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbHomeRunDerby({ game_pk: '…' });
  */
-export const mlbHomeRunDerby: WrapperFn = (params = {}) => callFlat(HOME_RUN_DERBY_DEF, params);
+export const mlbHomeRunDerby: Wrapper<MlbHomeRunDerbyRow[]> = (params: WrapperParams = {}) => callFlat(HOME_RUN_DERBY_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerby} (py/R parity). */
 export const mlb_home_run_derby = mlbHomeRunDerby;
 
@@ -1333,7 +1381,7 @@ const HOME_RUN_DERBY_BRACKET_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbHomeRunDerbyBracket({ game_pk: '…' });
  */
-export const mlbHomeRunDerbyBracket: WrapperFn = (params = {}) => callFlat(HOME_RUN_DERBY_BRACKET_DEF, params);
+export const mlbHomeRunDerbyBracket: Wrapper<MlbHomeRunDerbyBracketRow[]> = (params: WrapperParams = {}) => callFlat(HOME_RUN_DERBY_BRACKET_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerbyBracket} (py/R parity). */
 export const mlb_home_run_derby_bracket = mlbHomeRunDerbyBracket;
 
@@ -1370,7 +1418,7 @@ const HOME_RUN_DERBY_POOL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbHomeRunDerbyPool({ game_pk: '…' });
  */
-export const mlbHomeRunDerbyPool: WrapperFn = (params = {}) => callFlat(HOME_RUN_DERBY_POOL_DEF, params);
+export const mlbHomeRunDerbyPool: Wrapper<MlbHomeRunDerbyPoolRow[]> = (params: WrapperParams = {}) => callFlat(HOME_RUN_DERBY_POOL_DEF, params);
 /** snake_case alias of {@link mlbHomeRunDerbyPool} (py/R parity). */
 export const mlb_home_run_derby_pool = mlbHomeRunDerbyPool;
 
@@ -1417,7 +1465,7 @@ const JOBS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbJobs({});
  */
-export const mlbJobs: WrapperFn = (params = {}) => callFlat(JOBS_DEF, params);
+export const mlbJobs: Wrapper<MlbJobsRow[]> = (params: WrapperParams = {}) => callFlat(JOBS_DEF, params);
 /** snake_case alias of {@link mlbJobs} (py/R parity). */
 export const mlb_jobs = mlbJobs;
 
@@ -1460,7 +1508,7 @@ const LEAGUES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbLeagues({});
  */
-export const mlbLeagues: WrapperFn = (params = {}) => callFlat(LEAGUES_DEF, params);
+export const mlbLeagues: Wrapper<MlbLeaguesRow[]> = (params: WrapperParams = {}) => callFlat(LEAGUES_DEF, params);
 /** snake_case alias of {@link mlbLeagues} (py/R parity). */
 export const mlb_leagues = mlbLeagues;
 
@@ -1502,7 +1550,7 @@ const LINESCORE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbLinescore({ game_pk: '…' });
  */
-export const mlbLinescore: WrapperFn = (params = {}) => callFlat(LINESCORE_DEF, params);
+export const mlbLinescore: Wrapper<MlbLinescoreRow[]> = (params: WrapperParams = {}) => callFlat(LINESCORE_DEF, params);
 /** snake_case alias of {@link mlbLinescore} (py/R parity). */
 export const mlb_linescore = mlbLinescore;
 
@@ -1533,7 +1581,7 @@ const META_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbMeta({ meta_type: '…' });
  */
-export const mlbMeta: WrapperFn = (params = {}) => callFlat(META_DEF, params);
+export const mlbMeta: Wrapper = (params: WrapperParams = {}) => callFlat(META_DEF, params);
 /** snake_case alias of {@link mlbMeta} (py/R parity). */
 export const mlb_meta = mlbMeta;
 
@@ -1580,7 +1628,7 @@ const OFFICIAL_SCORERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbOfficialScorers({});
  */
-export const mlbOfficialScorers: WrapperFn = (params = {}) => callFlat(OFFICIAL_SCORERS_DEF, params);
+export const mlbOfficialScorers: Wrapper<MlbOfficialScorersRow[]> = (params: WrapperParams = {}) => callFlat(OFFICIAL_SCORERS_DEF, params);
 /** snake_case alias of {@link mlbOfficialScorers} (py/R parity). */
 export const mlb_official_scorers = mlbOfficialScorers;
 
@@ -1632,7 +1680,7 @@ const PBP_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPbp({ game_pk: '…' });
  */
-export const mlbPbp: WrapperFn = (params = {}) => callFlat(PBP_DEF, params);
+export const mlbPbp: Wrapper = (params: WrapperParams = {}) => callFlat(PBP_DEF, params);
 /** snake_case alias of {@link mlbPbp} (py/R parity). */
 export const mlb_pbp = mlbPbp;
 
@@ -1673,7 +1721,7 @@ const PBP_DIFF_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPbpDiff({ game_pk: '…' });
  */
-export const mlbPbpDiff: WrapperFn = (params = {}) => callFlat(PBP_DIFF_DEF, params);
+export const mlbPbpDiff: Wrapper = (params: WrapperParams = {}) => callFlat(PBP_DIFF_DEF, params);
 /** snake_case alias of {@link mlbPbpDiff} (py/R parity). */
 export const mlb_pbp_diff = mlbPbpDiff;
 
@@ -1715,7 +1763,7 @@ const PEOPLE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPeople({});
  */
-export const mlbPeople: WrapperFn = (params = {}) => callFlat(PEOPLE_DEF, params);
+export const mlbPeople: Wrapper<MlbPeopleRow[]> = (params: WrapperParams = {}) => callFlat(PEOPLE_DEF, params);
 /** snake_case alias of {@link mlbPeople} (py/R parity). */
 export const mlb_people = mlbPeople;
 
@@ -1762,7 +1810,7 @@ const PERSON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPerson({ person_id: '…' });
  */
-export const mlbPerson: WrapperFn = (params = {}) => callFlat(PERSON_DEF, params);
+export const mlbPerson: Wrapper<MlbPersonRow[]> = (params: WrapperParams = {}) => callFlat(PERSON_DEF, params);
 /** snake_case alias of {@link mlbPerson} (py/R parity). */
 export const mlb_person = mlbPerson;
 
@@ -1803,7 +1851,7 @@ const PERSON_GAME_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPersonGameStats({ person_id: '…', game_pk: '…' });
  */
-export const mlbPersonGameStats: WrapperFn = (params = {}) => callFlat(PERSON_GAME_STATS_DEF, params);
+export const mlbPersonGameStats: Wrapper<MlbPersonGameStatsRow[]> = (params: WrapperParams = {}) => callFlat(PERSON_GAME_STATS_DEF, params);
 /** snake_case alias of {@link mlbPersonGameStats} (py/R parity). */
 export const mlb_person_game_stats = mlbPersonGameStats;
 
@@ -1865,7 +1913,7 @@ const PERSON_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPersonStats({ person_id: '…' });
  */
-export const mlbPersonStats: WrapperFn = (params = {}) => callFlat(PERSON_STATS_DEF, params);
+export const mlbPersonStats: Wrapper = (params: WrapperParams = {}) => callFlat(PERSON_STATS_DEF, params);
 /** snake_case alias of {@link mlbPersonStats} (py/R parity). */
 export const mlb_person_stats = mlbPersonStats;
 
@@ -1910,7 +1958,7 @@ const PLAY_ANALYTICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPlayAnalytics({ game_pk: '…', guid: '…' });
  */
-export const mlbPlayAnalytics: WrapperFn = (params = {}) => callFlat(PLAY_ANALYTICS_DEF, params);
+export const mlbPlayAnalytics: Wrapper = (params: WrapperParams = {}) => callFlat(PLAY_ANALYTICS_DEF, params);
 /** snake_case alias of {@link mlbPlayAnalytics} (py/R parity). */
 export const mlb_play_analytics = mlbPlayAnalytics;
 
@@ -1952,7 +2000,7 @@ const PLAY_BY_PLAY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPlayByPlay({ game_pk: '…' });
  */
-export const mlbPlayByPlay: WrapperFn = (params = {}) => callFlat(PLAY_BY_PLAY_DEF, params);
+export const mlbPlayByPlay: Wrapper<MlbPlayByPlayRow[]> = (params: WrapperParams = {}) => callFlat(PLAY_BY_PLAY_DEF, params);
 /** snake_case alias of {@link mlbPlayByPlay} (py/R parity). */
 export const mlb_play_by_play = mlbPlayByPlay;
 
@@ -1992,7 +2040,7 @@ const PLAY_CONTEXT_METRICS_AVERAGES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbPlayContextMetricsAverages({ game_pk: '…', guid: '…' });
  */
-export const mlbPlayContextMetricsAverages: WrapperFn = (params = {}) => callFlat(PLAY_CONTEXT_METRICS_AVERAGES_DEF, params);
+export const mlbPlayContextMetricsAverages: Wrapper = (params: WrapperParams = {}) => callFlat(PLAY_CONTEXT_METRICS_AVERAGES_DEF, params);
 /** snake_case alias of {@link mlbPlayContextMetricsAverages} (py/R parity). */
 export const mlb_play_context_metrics_averages = mlbPlayContextMetricsAverages;
 
@@ -2064,7 +2112,7 @@ const SCHEDULE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedule({});
  */
-export const mlbSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
+export const mlbSchedule: Wrapper = (params: WrapperParams = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link mlbSchedule} (py/R parity). */
 export const mlb_schedule = mlbSchedule;
 
@@ -2107,7 +2155,7 @@ const SCHEDULE_POSTSEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedulePostseason({});
  */
-export const mlbSchedulePostseason: WrapperFn = (params = {}) => callFlat(SCHEDULE_POSTSEASON_DEF, params);
+export const mlbSchedulePostseason: Wrapper<MlbSchedulePostseasonRow[]> = (params: WrapperParams = {}) => callFlat(SCHEDULE_POSTSEASON_DEF, params);
 /** snake_case alias of {@link mlbSchedulePostseason} (py/R parity). */
 export const mlb_schedule_postseason = mlbSchedulePostseason;
 
@@ -2164,7 +2212,7 @@ const SCHEDULE_POSTSEASON_SERIES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedulePostseasonSeries({});
  */
-export const mlbSchedulePostseasonSeries: WrapperFn = (params = {}) => callFlat(SCHEDULE_POSTSEASON_SERIES_DEF, params);
+export const mlbSchedulePostseasonSeries: Wrapper<MlbSchedulePostseasonSeriesRow[]> = (params: WrapperParams = {}) => callFlat(SCHEDULE_POSTSEASON_SERIES_DEF, params);
 /** snake_case alias of {@link mlbSchedulePostseasonSeries} (py/R parity). */
 export const mlb_schedule_postseason_series = mlbSchedulePostseasonSeries;
 
@@ -2216,7 +2264,7 @@ const SCHEDULE_POSTSEASON_TUNEIN_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSchedulePostseasonTunein({});
  */
-export const mlbSchedulePostseasonTunein: WrapperFn = (params = {}) => callFlat(SCHEDULE_POSTSEASON_TUNEIN_DEF, params);
+export const mlbSchedulePostseasonTunein: Wrapper = (params: WrapperParams = {}) => callFlat(SCHEDULE_POSTSEASON_TUNEIN_DEF, params);
 /** snake_case alias of {@link mlbSchedulePostseasonTunein} (py/R parity). */
 export const mlb_schedule_postseason_tunein = mlbSchedulePostseasonTunein;
 
@@ -2263,7 +2311,7 @@ const SCHEDULE_TIED_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbScheduleTied({});
  */
-export const mlbScheduleTied: WrapperFn = (params = {}) => callFlat(SCHEDULE_TIED_DEF, params);
+export const mlbScheduleTied: Wrapper<MlbScheduleTiedRow[]> = (params: WrapperParams = {}) => callFlat(SCHEDULE_TIED_DEF, params);
 /** snake_case alias of {@link mlbScheduleTied} (py/R parity). */
 export const mlb_schedule_tied = mlbScheduleTied;
 
@@ -2301,7 +2349,7 @@ const SEASON_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSeason({ season_id: '…' });
  */
-export const mlbSeason: WrapperFn = (params = {}) => callFlat(SEASON_DEF, params);
+export const mlbSeason: Wrapper<MlbSeasonRow[]> = (params: WrapperParams = {}) => callFlat(SEASON_DEF, params);
 /** snake_case alias of {@link mlbSeason} (py/R parity). */
 export const mlb_season = mlbSeason;
 
@@ -2343,7 +2391,7 @@ const SEASONS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSeasons({});
  */
-export const mlbSeasons: WrapperFn = (params = {}) => callFlat(SEASONS_DEF, params);
+export const mlbSeasons: Wrapper = (params: WrapperParams = {}) => callFlat(SEASONS_DEF, params);
 /** snake_case alias of {@link mlbSeasons} (py/R parity). */
 export const mlb_seasons = mlbSeasons;
 
@@ -2395,7 +2443,7 @@ const SEASONS_ALL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSeasonsAll({});
  */
-export const mlbSeasonsAll: WrapperFn = (params = {}) => callFlat(SEASONS_ALL_DEF, params);
+export const mlbSeasonsAll: Wrapper<MlbSeasonsAllRow[]> = (params: WrapperParams = {}) => callFlat(SEASONS_ALL_DEF, params);
 /** snake_case alias of {@link mlbSeasonsAll} (py/R parity). */
 export const mlb_seasons_all = mlbSeasonsAll;
 
@@ -2432,7 +2480,7 @@ const SPORT_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSport({ sport_id: '…' });
  */
-export const mlbSport: WrapperFn = (params = {}) => callFlat(SPORT_DEF, params);
+export const mlbSport: Wrapper<MlbSportRow[]> = (params: WrapperParams = {}) => callFlat(SPORT_DEF, params);
 /** snake_case alias of {@link mlbSport} (py/R parity). */
 export const mlb_sport = mlbSport;
 
@@ -2481,7 +2529,7 @@ const SPORT_PLAYERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSportPlayers({});
  */
-export const mlbSportPlayers: WrapperFn = (params = {}) => callFlat(SPORT_PLAYERS_DEF, params);
+export const mlbSportPlayers: Wrapper<MlbSportPlayersRow[]> = (params: WrapperParams = {}) => callFlat(SPORT_PLAYERS_DEF, params);
 /** snake_case alias of {@link mlbSportPlayers} (py/R parity). */
 export const mlb_sport_players = mlbSportPlayers;
 
@@ -2513,7 +2561,7 @@ const SPORTS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbSports({});
  */
-export const mlbSports: WrapperFn = (params = {}) => callFlat(SPORTS_DEF, params);
+export const mlbSports: Wrapper<MlbSportsRow[]> = (params: WrapperParams = {}) => callFlat(SPORTS_DEF, params);
 /** snake_case alias of {@link mlbSports} (py/R parity). */
 export const mlb_sports = mlbSports;
 
@@ -2565,7 +2613,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStandings({});
  */
-export const mlbStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
+export const mlbStandings: Wrapper = (params: WrapperParams = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link mlbStandings} (py/R parity). */
 export const mlb_standings = mlbStandings;
 
@@ -2649,7 +2697,7 @@ const STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStats({});
  */
-export const mlbStats: WrapperFn = (params = {}) => callFlat(STATS_DEF, params);
+export const mlbStats: Wrapper = (params: WrapperParams = {}) => callFlat(STATS_DEF, params);
 /** snake_case alias of {@link mlbStats} (py/R parity). */
 export const mlb_stats = mlbStats;
 
@@ -2712,7 +2760,7 @@ const STATS_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatsLeaders({});
  */
-export const mlbStatsLeaders: WrapperFn = (params = {}) => callFlat(STATS_LEADERS_DEF, params);
+export const mlbStatsLeaders: Wrapper = (params: WrapperParams = {}) => callFlat(STATS_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbStatsLeaders} (py/R parity). */
 export const mlb_stats_leaders = mlbStatsLeaders;
 
@@ -2813,7 +2861,7 @@ const STATS_METRICS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatsMetrics({});
  */
-export const mlbStatsMetrics: WrapperFn = (params = {}) => callFlat(STATS_METRICS_DEF, params);
+export const mlbStatsMetrics: Wrapper = (params: WrapperParams = {}) => callFlat(STATS_METRICS_DEF, params);
 /** snake_case alias of {@link mlbStatsMetrics} (py/R parity). */
 export const mlb_stats_metrics = mlbStatsMetrics;
 
@@ -2871,7 +2919,7 @@ const STATS_STREAKS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbStatsStreaks({});
  */
-export const mlbStatsStreaks: WrapperFn = (params = {}) => callFlat(STATS_STREAKS_DEF, params);
+export const mlbStatsStreaks: Wrapper = (params: WrapperParams = {}) => callFlat(STATS_STREAKS_DEF, params);
 /** snake_case alias of {@link mlbStatsStreaks} (py/R parity). */
 export const mlb_stats_streaks = mlbStatsStreaks;
 
@@ -2924,7 +2972,7 @@ const TEAM_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeam({ team_id: '…' });
  */
-export const mlbTeam: WrapperFn = (params = {}) => callFlat(TEAM_DEF, params);
+export const mlbTeam: Wrapper<MlbTeamRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_DEF, params);
 /** snake_case alias of {@link mlbTeam} (py/R parity). */
 export const mlb_team = mlbTeam;
 
@@ -2972,7 +3020,7 @@ const TEAM_AFFILIATES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamAffiliates({});
  */
-export const mlbTeamAffiliates: WrapperFn = (params = {}) => callFlat(TEAM_AFFILIATES_DEF, params);
+export const mlbTeamAffiliates: Wrapper<MlbTeamAffiliatesRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_AFFILIATES_DEF, params);
 /** snake_case alias of {@link mlbTeamAffiliates} (py/R parity). */
 export const mlb_team_affiliates = mlbTeamAffiliates;
 
@@ -3020,7 +3068,7 @@ const TEAM_ALUMNI_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamAlumni({ team_id: '…' });
  */
-export const mlbTeamAlumni: WrapperFn = (params = {}) => callFlat(TEAM_ALUMNI_DEF, params);
+export const mlbTeamAlumni: Wrapper<MlbTeamAlumniRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_ALUMNI_DEF, params);
 /** snake_case alias of {@link mlbTeamAlumni} (py/R parity). */
 export const mlb_team_alumni = mlbTeamAlumni;
 
@@ -3067,7 +3115,7 @@ const TEAM_COACHES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamCoaches({ team_id: '…' });
  */
-export const mlbTeamCoaches: WrapperFn = (params = {}) => callFlat(TEAM_COACHES_DEF, params);
+export const mlbTeamCoaches: Wrapper<MlbTeamCoachesRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_COACHES_DEF, params);
 /** snake_case alias of {@link mlbTeamCoaches} (py/R parity). */
 export const mlb_team_coaches = mlbTeamCoaches;
 
@@ -3119,7 +3167,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamLeaders({ team_id: '…' });
  */
-export const mlbTeamLeaders: WrapperFn = (params = {}) => callFlat(TEAM_LEADERS_DEF, params);
+export const mlbTeamLeaders: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbTeamLeaders} (py/R parity). */
 export const mlb_team_leaders = mlbTeamLeaders;
 
@@ -3161,7 +3209,7 @@ const TEAM_PERSONNEL_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamPersonnel({ team_id: '…' });
  */
-export const mlbTeamPersonnel: WrapperFn = (params = {}) => callFlat(TEAM_PERSONNEL_DEF, params);
+export const mlbTeamPersonnel: Wrapper<MlbTeamPersonnelRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_PERSONNEL_DEF, params);
 /** snake_case alias of {@link mlbTeamPersonnel} (py/R parity). */
 export const mlb_team_personnel = mlbTeamPersonnel;
 
@@ -3219,7 +3267,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamRoster({ team_id: '…' });
  */
-export const mlbTeamRoster: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_DEF, params);
+export const mlbTeamRoster: Wrapper<MlbTeamRosterRow[]> = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_DEF, params);
 /** snake_case alias of {@link mlbTeamRoster} (py/R parity). */
 export const mlb_team_roster = mlbTeamRoster;
 
@@ -3275,7 +3323,7 @@ const TEAM_ROSTER_TYPE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamRosterType({ team_id: '…', roster_type: '…' });
  */
-export const mlbTeamRosterType: WrapperFn = (params = {}) => callFlat(TEAM_ROSTER_TYPE_DEF, params);
+export const mlbTeamRosterType: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_ROSTER_TYPE_DEF, params);
 /** snake_case alias of {@link mlbTeamRosterType} (py/R parity). */
 export const mlb_team_roster_type = mlbTeamRosterType;
 
@@ -3338,7 +3386,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamStats({ team_id: '…' });
  */
-export const mlbTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
+export const mlbTeamStats: Wrapper = (params: WrapperParams = {}) => callFlat(TEAM_STATS_DEF, params);
 /** snake_case alias of {@link mlbTeamStats} (py/R parity). */
 export const mlb_team_stats = mlbTeamStats;
 
@@ -3395,7 +3443,7 @@ const TEAMS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeams({});
  */
-export const mlbTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
+export const mlbTeams: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link mlbTeams} (py/R parity). */
 export const mlb_teams = mlbTeams;
 
@@ -3442,7 +3490,7 @@ const TEAMS_HISTORY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamsHistory({});
  */
-export const mlbTeamsHistory: WrapperFn = (params = {}) => callFlat(TEAMS_HISTORY_DEF, params);
+export const mlbTeamsHistory: Wrapper<MlbTeamsHistoryRow[]> = (params: WrapperParams = {}) => callFlat(TEAMS_HISTORY_DEF, params);
 /** snake_case alias of {@link mlbTeamsHistory} (py/R parity). */
 export const mlb_teams_history = mlbTeamsHistory;
 
@@ -3509,7 +3557,7 @@ const TEAMS_STATS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamsStats({});
  */
-export const mlbTeamsStats: WrapperFn = (params = {}) => callFlat(TEAMS_STATS_DEF, params);
+export const mlbTeamsStats: Wrapper = (params: WrapperParams = {}) => callFlat(TEAMS_STATS_DEF, params);
 /** snake_case alias of {@link mlbTeamsStats} (py/R parity). */
 export const mlb_teams_stats = mlbTeamsStats;
 
@@ -3596,7 +3644,7 @@ const TEAMS_STATS_LEADERS_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbTeamsStatsLeaders({});
  */
-export const mlbTeamsStatsLeaders: WrapperFn = (params = {}) => callFlat(TEAMS_STATS_LEADERS_DEF, params);
+export const mlbTeamsStatsLeaders: Wrapper<MlbTeamsStatsLeadersRow[]> = (params: WrapperParams = {}) => callFlat(TEAMS_STATS_LEADERS_DEF, params);
 /** snake_case alias of {@link mlbTeamsStatsLeaders} (py/R parity). */
 export const mlb_teams_stats_leaders = mlbTeamsStatsLeaders;
 
@@ -3642,7 +3690,7 @@ const UMPIRE_GAMES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbUmpireGames({ umpire_id: '…' });
  */
-export const mlbUmpireGames: WrapperFn = (params = {}) => callFlat(UMPIRE_GAMES_DEF, params);
+export const mlbUmpireGames: Wrapper = (params: WrapperParams = {}) => callFlat(UMPIRE_GAMES_DEF, params);
 /** snake_case alias of {@link mlbUmpireGames} (py/R parity). */
 export const mlb_umpire_games = mlbUmpireGames;
 
@@ -3668,7 +3716,7 @@ const UMPIRES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbUmpires({});
  */
-export const mlbUmpires: WrapperFn = (params = {}) => callFlat(UMPIRES_DEF, params);
+export const mlbUmpires: Wrapper<MlbUmpiresRow[]> = (params: WrapperParams = {}) => callFlat(UMPIRES_DEF, params);
 /** snake_case alias of {@link mlbUmpires} (py/R parity). */
 export const mlb_umpires = mlbUmpires;
 
@@ -3710,7 +3758,7 @@ const VENUE_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbVenue({ venue_id: '…' });
  */
-export const mlbVenue: WrapperFn = (params = {}) => callFlat(VENUE_DEF, params);
+export const mlbVenue: Wrapper<MlbVenueRow[]> = (params: WrapperParams = {}) => callFlat(VENUE_DEF, params);
 /** snake_case alias of {@link mlbVenue} (py/R parity). */
 export const mlb_venue = mlbVenue;
 
@@ -3752,7 +3800,7 @@ const VENUES_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbVenues({});
  */
-export const mlbVenues: WrapperFn = (params = {}) => callFlat(VENUES_DEF, params);
+export const mlbVenues: Wrapper<MlbVenuesRow[]> = (params: WrapperParams = {}) => callFlat(VENUES_DEF, params);
 /** snake_case alias of {@link mlbVenues} (py/R parity). */
 export const mlb_venues = mlbVenues;
 
@@ -3789,6 +3837,6 @@ const WIN_PROBABILITY_DEF: WrapperDef = {
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.mlb.mlbWinProbability({ game_pk: '…' });
  */
-export const mlbWinProbability: WrapperFn = (params = {}) => callFlat(WIN_PROBABILITY_DEF, params);
+export const mlbWinProbability: Wrapper<MlbWinProbabilityRow[]> = (params: WrapperParams = {}) => callFlat(WIN_PROBABILITY_DEF, params);
 /** snake_case alias of {@link mlbWinProbability} (py/R parity). */
 export const mlb_win_probability = mlbWinProbability;

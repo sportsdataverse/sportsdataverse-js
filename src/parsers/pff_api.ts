@@ -19,7 +19,7 @@ import { idColumnsToStrings } from "../core/int64.js";
 import { isPlainObject, underscore } from "./_normalize.js";
 import { MULTI_TABLE_SECTIONS, sectionError } from "./_frames.js";
 
-type Row = Record<string, any>;
+import type { ParserRow as Row } from "../core/types.js";
 type Tables = Record<string, Row[]>;
 
 const MATRIX_KEYS = ["defenders", "receivers", "versus"];

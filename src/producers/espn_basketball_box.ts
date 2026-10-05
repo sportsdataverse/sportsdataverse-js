@@ -37,7 +37,8 @@
 
 import { idColumnsToStrings } from "../core/int64.js";
 
-export type Row = Record<string, any>;
+export type { ParserRow as Row } from "../core/types.js";
+import type { ParserRow as Row } from "../core/types.js";
 
 // ---------------------------------------------------------------------------
 // Python / polars semantics (the exported ones are shared with espn_basketball_pbp.ts)

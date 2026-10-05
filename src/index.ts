@@ -307,4 +307,12 @@ export type {
   WrapperDef,
   QueryParam,
   PathParam,
+  Row,
+  ParserRow,
+  Wrapper,
+  SectionedWrapper,
+  WrapperParams,
 } from './core/types.js';
+// Generated row types of the parity-verified endpoints' `{ parsed: true }` returns
+// (src/generated/rows/, tools/codegen/row-types.mjs). Type-only: the module is empty at runtime.
+export * from './generated/rows/index.js';
