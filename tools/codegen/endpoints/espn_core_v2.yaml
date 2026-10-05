@@ -517,7 +517,6 @@ endpoints:
     type: int|str
     required: true
   parser: parse_injuries
-  returns_schema: injuries
   example_args:
     athlete_id: '4239'
 - short: athlete_notes
@@ -949,7 +948,6 @@ endpoints:
     type: int
     default: 1
   parser: parse_teams
-  returns_schema: teams
 - short: team_core
   scope: universal
   path: /{sport}/leagues/{league}/teams/{team_id}
@@ -1093,7 +1091,6 @@ endpoints:
   scope: universal
   path: /{sport}/leagues/{league}/standings
   parser: parse_standings
-  returns_schema: standings
 - short: leaders_core
   scope: universal
   path: /{sport}/leagues/{league}/leaders

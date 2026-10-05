@@ -138,31 +138,43 @@ pinned sdv-py commit:
 
 - `tools/codegen/vendor.yaml` — the manifest: `source.ref` (the pin) and, per family,
   `from` (py stem), `names` (py short → JS short; keeps CBS's JS names), `parsers`
-  (py parser → `{js, schema_compatible}`), `parser_overrides` (JS short → JS
-  parser), `schemas` (returns-schema path prefix rewrite).
-- **Returns-schema policy:** a returns table must describe what the JS parser
-  returns. A py `returns_schema` is kept only when the JS parser is py's ported
-  under the same name or a `schema_compatible: true` mapping, with no
-  `parser_overrides` entry; otherwise it is dropped and the overlay attaches JS's
-  own schema where one exists (CBS, Yahoo, torvik and two MLB endpoints keep JS's).
-  `test/vendor.test.js` enforces it, and `vendor.mjs` refuses to vendor a py schema
-  over a JS-owned one an overlay attaches.
+  (py parser → `{js, schema_compatible}`), family `schema_compatible: true`,
+  `parser_overrides` (JS short → JS parser), `schemas` (returns-schema path prefix
+  rewrite). A `names`/`parsers`/`parser_overrides` key that matches no vendored
+  endpoint fails the vendor (stale).
+- **Returns-schema policy (fail-closed):** a returns table must describe what the
+  JS parser returns. A py `returns_schema` is kept only when compatibility is
+  DECLARED: family `schema_compatible: true` (only for families whose JS parsers
+  are faithful ports: `mlb_statcast`, `nfl_api`, the four `nhl_*`) for a py parser
+  name kept as-is, or a `parsers` entry with `schema_compatible: true` (`mlb`), and
+  no `parser_overrides` entry. Otherwise it is dropped and the overlay attaches
+  JS's own schema where one exists (CBS, Yahoo, torvik and two MLB endpoints keep
+  JS's; ESPN carries none). `test/vendor.test.js` enforces it, and `vendor.mjs`
+  refuses to vendor a py schema over a JS-owned one an overlay attaches.
 - **Param transforms:** a vendored param may name an sdv-py runtime function in
   `transform:` (`format_nhl_season`, `bool_str`, `_bool_str`). They are ported in
   `src/core/transforms.ts` (+ a copy in `docs/src/playground/resolve.mjs`) and applied
   by both resolvers to the resolved path/query value; `generate.mjs` fails on a name
   not in `tools/codegen/param-transforms.mjs`. A new upstream transform = port it,
   list it there, add tests.
-- `tools/codegen/vendor/upstream/` — the fetched py files, **verbatim**, plus `REF`.
+- `tools/codegen/vendor/upstream/` — the fetched py files, **verbatim**
+  (`.gitattributes` `-text`), plus `REF` and `LOCK` (each file's git blob sha from
+  the pinned tree; the fetch verifies every file against it). Never edit them.
 - `tools/codegen/overlay/<family>.yaml` — JS-owned additions (`mlb`'s 14 and
-  `torvik`'s 3 JS-only endpoints) and patches (an entry whose `short` is vendored
-  replaces those keys). This is the ONLY place to change a vendored family in JS.
+  `torvik`'s 3 JS-only endpoints; an addition needs a `path`) and patches (an entry
+  whose `short` is vendored replaces those keys; never `parser`). A patch for a
+  short that isn't vendored, or a patched key that already equals upstream, fails
+  the vendor ("remove it"), so stale patches surface on the next sync. This is the
+  ONLY place to change a vendored family in JS.
 - `npm run vendor -- --ref <sha>` fetches (GitHub raw, or a local clone via env
   `SDV_PY_REPO`, read with `git cat-file` at the ref — never its working tree),
-  re-derives, and deletes orphaned schemas. `npm run vendor -- --offline` re-derives
-  from `vendor/upstream/` after an overlay/manifest edit. Then `npm run codegen`.
-- `npm run vendor:check` (CI, next to `codegen:check`) is offline: it re-derives and
-  fails on any difference, an orphan schema, or a pin/upstream mismatch.
+  re-derives, and deletes orphaned schemas; `--ref` bumps the pin only after the
+  fetch succeeds. `npm run vendor -- --offline` re-derives from `vendor/upstream/`
+  after an overlay/manifest edit. Then `npm run codegen`.
+- `npm run vendor:check` (CI, next to `codegen:check`) is offline: it re-hashes
+  `vendor/upstream/` against `LOCK` (an edited, missing or extra upstream file
+  fails; fix by re-fetching), then re-derives and fails on any difference, an
+  orphan schema, or a pin/upstream mismatch.
 - `.github/workflows/vendor-sync.yml` bumps the pin to sdv-py `main` weekly and opens
   one sync PR.
 - JS-owned (hand-maintained, not vendored): `fox`, `odds_api`, `hockeytech`,

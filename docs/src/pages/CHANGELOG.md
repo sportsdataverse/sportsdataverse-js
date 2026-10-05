@@ -101,10 +101,11 @@ drifted since the 2026-06 fork:
   `format_nhl_season`; an unrecognized season throws). `nflApi*` `include_*` flags and
   ESPN `athletes_index` `active` are sent as `"true"`/`"false"`. The codegen fails on
   a transform the runtime doesn't implement.
-- 178 returns-schema files arrive from sdv-py (NHL Records, NHL EDGE, NHL Stats
-  REST, MLB, nfl_api and the ESPN per-league schemas). A py schema is attached only
-  where the JS parser is declared equivalent to sdv-py's; CBS, Yahoo, torvik and
-  the endpoints on a different or fallback parser keep JS's own schema or show none.
+- 75 returns-schema files arrive from sdv-py (NHL Records, NHL EDGE, NHL Stats
+  REST, NHL api-web, MLB Stats, nfl_api). A py schema is attached only where
+  vendor.yaml declares the JS parser equivalent to sdv-py's (fail-closed); CBS,
+  Yahoo, torvik, ESPN and the endpoints on a different or fallback parser keep JS's
+  own schema or show none.
 
 ## **V3.1.0**
 

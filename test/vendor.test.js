@@ -1,5 +1,6 @@
 import should from 'should';
 import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parse } from 'yaml';
@@ -7,6 +8,7 @@ import {
   CODEGEN_DIR,
   checkVendor,
   deriveAll,
+  gitBlobSha,
   loadManifest,
   rewriteSchema,
   schemaFilesFor,
@@ -18,15 +20,11 @@ import {
 const manifest = loadManifest();
 const upstream = (p) => readFileSync(join(CODEGEN_DIR, 'vendor', 'upstream', p), 'utf8');
 const overlay = (f) => readFileSync(join(CODEGEN_DIR, 'overlay', `${f}.yaml`), 'utf8');
+const transform = (key, cfg, upstreamText, overlayText = null) =>
+  transformFamily(key, cfg, upstreamText, overlayText, manifest.source);
 const family = (key, overlayText = null) => {
   const cfg = manifest.families[key] ?? {};
-  const { text, schemaRefs } = transformFamily(
-    key,
-    cfg,
-    upstream(`endpoints/${cfg.from ?? key}.yaml`),
-    overlayText,
-    manifest.source
-  );
+  const { text, schemaRefs } = transform(key, cfg, upstream(`endpoints/${cfg.from ?? key}.yaml`), overlayText);
   const doc = parse(text);
   return { text, doc, schemaRefs, ep: (s) => doc.endpoints.find((e) => e.short === s) };
 };
@@ -50,28 +48,34 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     ep('team_standings').parser.should.equal('parse_cbs_standings'); // py name map
   });
 
-  it('keeps py schemas only for schema-compatible parsers', () => {
+  it('keeps py schemas only where compatibility is declared (fail-closed)', () => {
     const mlb = family('mlb');
-    mlb.ep('boxscore').returns_schema.should.equal('native/mlb/boxscore'); // declared port
+    mlb.ep('boxscore').returns_schema.should.equal('native/mlb/boxscore'); // declared mapping
     should(mlb.ep('teams_stats').returns_schema).be.undefined(); // parser_overrides
     const nfl = family('nfl_api');
-    nfl.ep('standings').returns_schema.should.equal('native/nfl_api/standings'); // same-name port
-    should(nfl.ep('live_team_statistics').returns_schema).be.undefined(); // fallback parser
+    nfl.ep('standings').returns_schema.should.equal('native/nfl_api/standings'); // family declared
+    should(nfl.ep('live_team_statistics').returns_schema).be.undefined(); // declared false
     should(family('espn_core_v2').ep('season_week_powerindex').returns_schema).be.undefined();
+    // Undeclared family: a kept py parser name does NOT bring py's schema.
+    should(family('espn_site_v2').ep('scoreboard').returns_schema).be.undefined();
+    const edge = upstream('endpoints/nhl_edge.yaml');
+    transform('nhl_edge', {}, edge).schemaRefs.should.eql([]);
+    transform('nhl_edge', { schema_compatible: true }, edge).schemaRefs.length.should.be.above(0);
+    (() => transform('nhl_edge', { schema_compatible: 'yes' }, edge)).should.throw(/schema_compatible must be a boolean/);
   });
 
   it('refuses an overlay that swaps a vendored parser (parser_overrides only)', () => {
     const ov = 'endpoints:\n- short: boxscore\n  parser: parse_mlb_list\n';
-    (() =>
-      transformFamily('mlb', manifest.families.mlb, upstream('endpoints/mlb_api.yaml'), ov, manifest.source)
-    ).should.throw(/overlay\/mlb\.yaml boxscore: set its parser via vendor\.yaml parser_overrides/);
+    (() => transform('mlb', manifest.families.mlb, upstream('endpoints/mlb_api.yaml'), ov)).should.throw(
+      /overlay\/mlb\.yaml boxscore: set its parser via vendor\.yaml parser_overrides/
+    );
   });
 
   it('refuses a parser mapping that does not declare schema_compatible', () => {
     const cfg = { parsers: { parse_torvik_csv: 'parse_torvik_ratings' } };
-    (() =>
-      transformFamily('torvik', cfg, upstream('endpoints/torvik.yaml'), null, manifest.source)
-    ).should.throw(/must be \{js: <name>, schema_compatible: <bool>\}/);
+    (() => transform('torvik', cfg, upstream('endpoints/torvik.yaml'))).should.throw(
+      /must be \{js: <name>, schema_compatible: <bool>\}/
+    );
   });
 
   it('mlb: overlay appends the 14 JS-only endpoints and patches pbp', () => {
@@ -101,11 +105,39 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     text.should.startWith(`# VENDORED from ${manifest.source.repo}@${manifest.source.ref}`);
   });
 
-  it('throws on a stale manifest entry instead of silently skipping it', () => {
-    const cfg = { names: { no_such_short: 'x' } };
-    (() =>
-      transformFamily('torvik', cfg, upstream('endpoints/torvik.yaml'), null, manifest.source)
-    ).should.throw(/stale entries match no endpoint: no_such_short/);
+  it('throws on stale manifest entries (names, parsers, parser_overrides)', () => {
+    const torvik = upstream('endpoints/torvik.yaml');
+    (() => transform('torvik', { names: { no_such_short: 'x' } }, torvik)).should.throw(
+      /stale entries match no endpoint: no_such_short/
+    );
+    (() => transform('torvik', { parser_overrides: { no_such_short: 'parse_x' } }, torvik)).should.throw(
+      /stale entries match no endpoint: no_such_short/
+    );
+    const parsers = { parse_gone_upstream: { js: 'parse_torvik_ratings', schema_compatible: false } };
+    (() => transform('torvik', { parsers }, torvik)).should.throw(/stale entries match no endpoint: parse_gone_upstream/);
+  });
+
+  it('overlay: a patch for a short that is not vendored throws (no path-less append)', () => {
+    const ov = 'endpoints:\n- short: no_such_short\n  returns_schema: native/mlb/x\n';
+    (() => transform('mlb', manifest.families.mlb, upstream('endpoints/mlb_api.yaml'), ov)).should.throw(
+      /overlay\/mlb\.yaml no_such_short: patches no vendored endpoint .* an addition needs a `path`/
+    );
+  });
+
+  it('overlay: a patch upstream has absorbed throws (the pbp timecode fix announces itself)', () => {
+    // Simulate the pin including the sdv-py fix: timecode -> query_key timecode.
+    const py = upstream('endpoints/mlb_api.yaml');
+    const fixed = py.replace(
+      '  - name: timecode\n    query_key: language\n',
+      '  - name: timecode\n    query_key: timecode\n'
+    );
+    fixed.should.not.equal(py); // the bug is present at the current pin
+    (() => transform('mlb', manifest.families.mlb, fixed, overlay('mlb'))).should.throw(
+      /overlay\/mlb\.yaml pbp\.extra_params: already equal upstream; remove it from this overlay entry/
+    );
+    // An addition that upstream now ships with the same path is also a no-op.
+    const dup = 'endpoints:\n- short: boxscore\n  path: /api/v1/game/{game_pk}/boxscore\n';
+    (() => transform('mlb', manifest.families.mlb, py, dup)).should.throw(/boxscore\.path: already equal upstream/);
   });
 
   it('refuses to vendor a py schema over a JS-owned one an overlay attaches', () => {
@@ -131,15 +163,16 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
       .should.eql(['scoreboard.yaml', 'scoreboard/nba.yaml']);
   });
 
-  // Policy (a returns table must describe what the JS parser returns): a py
-  // schema may be attached only where the endpoint's JS parser is py's own,
-  // ported under the same name, or a mapping declared schema_compatible, and no
+  // Policy (a returns table must describe what the JS parser returns), fail-closed:
+  // an endpoint may carry a vendored (py) schema only when its parser's
+  // compatibility is DECLARED in vendor.yaml (family `schema_compatible: true`
+  // for a kept py name, or a `parsers` entry with schema_compatible: true) and no
   // parser_overrides entry swaps it. Checked on the committed endpoint files.
-  it('every attached vendored schema sits on a schema-compatible parser', () => {
+  it('a vendored schema is attached only to a declared schema-compatible parser', () => {
     const outputs = [...deriveAll().keys()];
-    const vendored = (ref) =>
-      outputs.some((p) => p === `schemas/${ref}.yaml` || p.startsWith(`schemas/${ref}/`));
-    let checked = 0;
+    const vendored = (ref) => outputs.some((p) => p === `schemas/${ref}.yaml` || p.startsWith(`schemas/${ref}/`));
+    let attached = 0;
+    let undeclaredWithPyRef = 0;
     for (const [key, cfg0] of Object.entries(manifest.families)) {
       const cfg = cfg0 ?? {};
       if (key === 'leagues') continue;
@@ -147,18 +180,26 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
       const py = Object.fromEntries(pyEps.map((e) => [(cfg.names ?? {})[e.short] ?? e.short, e]));
       const js = parse(readFileSync(join(CODEGEN_DIR, 'endpoints', `${key}.yaml`), 'utf8')).endpoints;
       for (const e of js) {
-        if (!e.returns_schema || !vendored(e.returns_schema)) continue;
-        checked++;
-        const where = `${key}.${e.short} (${e.returns_schema})`;
-        should.exist(py[e.short], `${where}: a vendored schema on a JS-only endpoint`);
-        const m = (cfg.parsers ?? {})[py[e.short].parser];
-        const compatible =
-          m === undefined ? e.parser === py[e.short].parser : m.schema_compatible === true && m.js === e.parser;
-        compatible.should.be.true(`${where}: parser ${e.parser} is not declared schema-compatible`);
-        should.not.exist((cfg.parser_overrides ?? {})[e.short], `${where}: parser overridden`);
+        const p = py[e.short];
+        const fromPy = Boolean(e.returns_schema) && vendored(e.returns_schema);
+        if (!p) {
+          fromPy.should.be.false(`${key}.${e.short}: a vendored schema on a JS-only endpoint`);
+          continue;
+        }
+        const m = (cfg.parsers ?? {})[p.parser];
+        const declared =
+          (m === undefined
+            ? cfg.schema_compatible === true && e.parser === p.parser
+            : m.schema_compatible === true && m.js === e.parser) && !(cfg.parser_overrides ?? {})[e.short];
+        if (fromPy) {
+          attached++;
+          declared.should.be.true(`${key}.${e.short} (${e.returns_schema}): parser ${e.parser} is not declared schema-compatible`);
+        }
+        if (!declared && p.returns_schema) undeclaredWithPyRef++;
       }
     }
-    checked.should.be.above(100);
+    attached.should.be.above(100); // the declared families do carry py schemas
+    undeclaredWithPyRef.should.be.above(100); // and every undeclared one (ESPN, CBS, Yahoo, ...) doesn't
   });
 
   it('copies releases.yaml verbatim', () => {
@@ -178,32 +219,109 @@ describe('vendor:check (offline drift gate)', function () {
   });
   afterEach(() => rmSync(tmp, { recursive: true, force: true }));
 
-  it('is clean on the committed tree', () => {
+  const REGEN = 'regenerate with `npm run vendor -- --offline`; change JS behaviour in overlay/ or vendor.yaml, never in a vendored file';
+  const REFETCH = 'upstream copies are fetched, never edited: re-fetch with `npm run vendor`';
+
+  it('is clean on the committed tree (LOCK verified, derived files match)', () => {
     checkVendor().should.eql([]);
+  });
+
+  it('gitBlobSha is git\'s blob id', () => {
+    gitBlobSha(Buffer.from('')).should.equal('e69de29bb2d1d6434b8b29ae775ad8c2e48c5391');
+    gitBlobSha(Buffer.from('hello\n')).should.equal('ce013625030ba8dba906f756967f9e9ca394464a');
   });
 
   it('catches a hand-edit to a vendored endpoint file', () => {
     const f = join(tmp, 'endpoints', 'cbs.yaml');
     writeFileSync(f, readFileSync(f, 'utf8').replace('host: https://api.cbssports.com/napi', 'host: https://api.cbssports.com'));
-    checkVendor(tmp).should.eql(['DRIFT: tools/codegen/endpoints/cbs.yaml differs from its vendored source (hand-edit?)']);
+    checkVendor(tmp).should.eql([`DRIFT: tools/codegen/endpoints/cbs.yaml differs from its vendored source (${REGEN})`]);
   });
 
   it('catches a hand-edit to a vendored schema', () => {
     const f = join(tmp, 'schemas', 'native', 'nhl_edge', 'skater_detail.yaml');
     writeFileSync(f, readFileSync(f, 'utf8') + '# local tweak\n');
     checkVendor(tmp).should.eql([
-      'DRIFT: tools/codegen/schemas/native/nhl_edge/skater_detail.yaml differs from its vendored source (hand-edit?)',
+      `DRIFT: tools/codegen/schemas/native/nhl_edge/skater_detail.yaml differs from its vendored source (${REGEN})`,
     ]);
   });
 
   it('flags a stray schema in a vendored directory', () => {
     writeFileSync(join(tmp, 'schemas', 'native', 'nhl_edge', 'stray.yaml'), 'schema: stray\ncolumns: []\n');
-    checkVendor(tmp).should.eql(['ORPHAN: tools/codegen/schemas/native/nhl_edge/stray.yaml (not vendored, not referenced)']);
+    checkVendor(tmp).should.eql([
+      `ORPHAN: tools/codegen/schemas/native/nhl_edge/stray.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
+    ]);
   });
 
   it('flags a manifest pin the upstream copy was not fetched at', () => {
     const f = join(tmp, 'vendor.yaml');
     writeFileSync(f, readFileSync(f, 'utf8').replace(manifest.source.ref, 'f'.repeat(40)));
     checkVendor(tmp)[0].should.match(/vendor\/upstream is at [0-9a-f]{40} but vendor.yaml pins f{40}/);
+  });
+
+  // Laundering: editing the upstream copy and re-deriving with --offline must
+  // not pass; the LOCK (git blob shas from the pinned tree) catches it.
+  it('fails when an upstream copy is edited (even after re-deriving)', () => {
+    const f = join(tmp, 'vendor', 'upstream', 'endpoints', 'cbs_napi.yaml');
+    writeFileSync(f, readFileSync(f, 'utf8').replace('https://api.cbssports.com/napi', 'https://api.cbssports.com'));
+    // The derived file is regenerated to match, so only the LOCK can notice.
+    const vendorOut = deriveAll(tmp).get('endpoints/cbs.yaml');
+    writeFileSync(join(tmp, 'endpoints', 'cbs.yaml'), vendorOut);
+    const problems = checkVendor(tmp);
+    problems.should.eql([`UPSTREAM: vendor/upstream/endpoints/cbs_napi.yaml does not match pinned blob ${
+      readFileSync(join(tmp, 'vendor', 'upstream', 'LOCK'), 'utf8').match(/^([0-9a-f]{40}) {2}endpoints\/cbs_napi\.yaml$/m)[1]
+    } (${REFETCH})`]);
+    problems.join('\n').should.not.match(/--offline/);
+  });
+
+  it('fails when an upstream file is deleted', () => {
+    rmSync(join(tmp, 'vendor', 'upstream', 'schemas', 'native', 'nhl_edge', 'skater_detail.yaml'));
+    checkVendor(tmp).should.eql([
+      `UPSTREAM: vendor/upstream/schemas/native/nhl_edge/skater_detail.yaml is missing (${REFETCH})`,
+    ]);
+  });
+
+  it('fails when an unlisted file appears in the upstream copy', () => {
+    writeFileSync(join(tmp, 'vendor', 'upstream', 'schemas', 'extra.yaml'), 'x: 1\n');
+    checkVendor(tmp).should.eql([`UPSTREAM: vendor/upstream/schemas/extra.yaml is not in LOCK (${REFETCH})`]);
+  });
+
+  it('a failed fetch leaves vendor.yaml and the upstream copy untouched', () => {
+    // An empty git repo as SDV_PY_REPO: `git ls-tree <sha>` fails before any write.
+    const repo = mkdtempSync(join(tmpdir(), 'sdv-vendor-repo-'));
+    try {
+      spawnSync('git', ['init', '-q', repo]);
+      const before = [readFileSync(join(CODEGEN_DIR, 'vendor.yaml')), readFileSync(join(CODEGEN_DIR, 'vendor', 'upstream', 'LOCK'))];
+      const r = spawnSync(process.execPath, [join(CODEGEN_DIR, 'vendor.mjs'), '--ref', '0'.repeat(40)], {
+        env: { ...process.env, SDV_PY_REPO: repo },
+        encoding: 'utf8',
+      });
+      r.status.should.equal(1);
+      readFileSync(join(CODEGEN_DIR, 'vendor.yaml')).equals(before[0]).should.be.true();
+      readFileSync(join(CODEGEN_DIR, 'vendor', 'upstream', 'LOCK')).equals(before[1]).should.be.true();
+    } finally {
+      rmSync(repo, { recursive: true, force: true });
+    }
+  });
+});
+
+describe('vendor-sync.yml', () => {
+  const wf = parse(readFileSync(join(CODEGEN_DIR, '..', '..', '.github', 'workflows', 'vendor-sync.yml'), 'utf8'));
+  const steps = wf.jobs.sync.steps;
+
+  it('runs the test step with pipefail so a failing `npm test | tail` fails the step', () => {
+    const t = steps.find((s) => s.id === 'test');
+    t.shell.should.equal('bash'); // GitHub runs `bash --noprofile --norc -eo pipefail {0}`
+    t['continue-on-error'].should.be.true();
+    t.run.should.match(/npm test 2>&1 \| tail/);
+    // The PR body reports the step OUTCOME (failure even under continue-on-error).
+    steps.find((s) => s.name === 'Build PR body').env.OUTCOME.should.equal('${{ steps.test.outcome }}');
+    // pipefail is what makes the pipe report npm's failure:
+    spawnSync('bash', ['--noprofile', '--norc', '-eo', 'pipefail', '-c', 'false | tail -n 1']).status.should.equal(1);
+    spawnSync('bash', ['--noprofile', '--norc', '-e', '-c', 'false | tail -n 1']).status.should.equal(0);
+  });
+
+  it('checks out without persisting the job token', () => {
+    steps[0].uses.should.startWith('actions/checkout@');
+    steps[0].with['persist-credentials'].should.be.false();
   });
 });

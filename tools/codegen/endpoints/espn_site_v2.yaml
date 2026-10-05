@@ -28,7 +28,6 @@ endpoints:
     type: int
     default: 500
   parser: parse_scoreboard
-  returns_schema: scoreboard
   example_args:
     dates: '20240115'
 - short: summary
@@ -39,7 +38,6 @@ endpoints:
     query_key: event
     type: int|str
   parser: parse_summary
-  returns_schema: summary
 # Base calendar works (current-season week labels/dates). The /calendar/{offseason,
 # regular-season,postseason,ondays} sub-paths 404 at ESPN for every league/season
 # (verified nfl/cfb/nhl) -- removed so we don't ship endpoints that always raise
@@ -57,12 +55,10 @@ endpoints:
     type: int
     default: 50
   parser: parse_news
-  returns_schema: news
 - short: injuries
   scope: universal
   path: /{sport}/{league}/injuries
   parser: parse_injuries
-  returns_schema: injuries
 - short: transactions
   scope: universal
   path: /{sport}/{league}/transactions
@@ -96,7 +92,6 @@ endpoints:
     type: int
     default: 1000
   parser: parse_teams
-  returns_schema: teams
 - short: team
   scope: universal
   path: /{sport}/{league}/teams/{team_id}
@@ -123,7 +118,6 @@ endpoints:
     type: int
     default: 500
   parser: parse_team_roster
-  returns_schema: team_roster
   example_args:
     team_id: '4'
 - short: team_schedule
@@ -138,7 +132,6 @@ endpoints:
     query_key: season
     type: int|str
   parser: parse_team_schedule
-  returns_schema: team_schedule
   example_args:
     team_id: '4'
 - short: team_record
@@ -169,7 +162,6 @@ endpoints:
     type: int|str
     required: true
   parser: parse_injuries
-  returns_schema: injuries
   example_args:
     team_id: '4'
 - short: team_transactions
@@ -205,7 +197,6 @@ endpoints:
     type: int
     default: 50
   parser: parse_news
-  returns_schema: news
   example_args:
     team_id: '4'
 - short: team_leaders
@@ -246,7 +237,6 @@ endpoints:
     type: int|str
     required: true
   parser: parse_news
-  returns_schema: news
   example_args:
     athlete_id: '4239'
 - short: standings
@@ -264,7 +254,6 @@ endpoints:
     query_key: type
     type: str
   parser: parse_standings
-  returns_schema: standings
 - short: rankings
   scope: ncaa
   path: /{sport}/{league}/rankings

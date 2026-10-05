@@ -27,6 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+        with:
+          # create-pull-request authenticates with its own token input; don't
+          # leave the job token in .git/config for the npm scripts to read.
+          persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444  # v5
         with:
           node-version: 22.x
@@ -51,9 +55,14 @@ jobs:
       - name: Test
         id: test
         continue-on-error: true
+        # Explicit `shell: bash` runs `bash --noprofile --norc -eo pipefail`; the
+        # default (`bash -e`) has no pipefail, so a failing `npm test` piped into
+        # `tail` would pass. With pipefail the step fails, `steps.test.outcome` is
+        # `failure` (continue-on-error keeps the job going), and the PR body says so.
+        shell: bash
         run: |
           npm run build
-          npm test 2>&1 | tail -n 60 > test-summary.txt  # pipefail keeps npm's status
+          npm test 2>&1 | tail -n 60 > test-summary.txt
       - name: Build PR body
         env:
           SHA: ${{ steps.ref.outputs.sha }}

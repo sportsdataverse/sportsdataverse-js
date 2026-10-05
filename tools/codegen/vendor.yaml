@@ -18,18 +18,21 @@
 #   from:     py endpoint stem (default: the key)
 #   names:    py short -> JS short (keeps JS public names; Task 4 flips CBS)
 #   parsers:  py parser name -> {js: <JS registry name>, schema_compatible: <bool>}
-#             A py parser with NO entry is the same parser ported to JS under
-#             py's name. `schema_compatible: true` declares the JS parser an
-#             equivalent port, so py's returns schema describes its output.
+#             (every entry must match a vendored endpoint's parser). A py parser
+#             with NO entry keeps its name in JS.
+#   schema_compatible: true  (family) declares that the family's JS parsers are
+#             faithful ports of sdv-py's, so py's returns schemas describe the
+#             output of every py parser name kept as-is.
 #   parser_overrides: JS short -> JS parser (JS deliberately uses a different
 #             parser than py's maps to; keyed by the post-rename JS short)
 #   schemas:  returns-schema path prefix rewrite, py -> JS
 #
 # Returns-schema policy (a returns table must describe what the JS parser
-# returns): a py `returns_schema` is kept only when the endpoint's parser is
-# py's name ported as-is or a `schema_compatible: true` mapping, and no
-# `parser_overrides` entry applies. Otherwise it is dropped, and the family's
-# overlay attaches JS's own schema where JS had one (no table beats a wrong one).
+# returns), fail-closed: a py `returns_schema` is kept only when compatibility
+# is DECLARED (family `schema_compatible: true` for a kept py name, or a
+# `parsers` entry with `schema_compatible: true`) and no `parser_overrides`
+# entry applies. Otherwise it is dropped, and the family's overlay attaches JS's
+# own schema where JS had one (no table beats a wrong one).
 # A family with an overlay/<family>.yaml gets it merged on top.
 source:
   repo: sportsdataverse/sportsdataverse-py
@@ -40,6 +43,8 @@ copy:
   - endpoints/releases.yaml
 
 families:
+  # ESPN: no schema_compatible declaration (the JS generator renders ESPN returns
+  # tables from schemas/espn/<parser>.yaml, not from the YAML returns_schema).
   espn_site_v2: {}
   espn_core_v2:
     parsers:
@@ -47,18 +52,30 @@ families:
       parse_weekly_powerindex: {js: parse_items, schema_compatible: false}
   espn_web_v3: {}
   leagues: {}
-  mlb_statcast: {}
+  mlb_statcast:
+    # src/parsers/mlb_statcast.ts: "Faithful port of" sdv-py's mlb_statcast_parsers.py
+    schema_compatible: true
   nfl_api:
+    # src/parsers/nfl_api.ts: "Faithful port of" sdv-py's nfl/nfl_api_parsers.py
+    schema_compatible: true
     parsers:
       # py-only parsers (not ported): the generic one-row flattener stands in.
       parse_nfl_game_details_v2: {js: parse_nfl_team, schema_compatible: false}
       parse_nfl_game_details_by_slug: {js: parse_nfl_team, schema_compatible: false}
       parse_nfl_live_team_statistics: {js: parse_nfl_team, schema_compatible: false}
       parse_nfl_live_player_statistics: {js: parse_nfl_team, schema_compatible: false}
-  nhl_api_web: {}
-  nhl_edge: {}
-  nhl_records: {}
-  nhl_stats_rest: {}
+  nhl_api_web:
+    # src/parsers/nhl_api_web.ts: "Faithful port of" sdv-py's nhl/nhl_api_web_parsers.py
+    schema_compatible: true
+  nhl_edge:
+    # src/parsers/nhl_edge.ts: "Faithful port of" sdv-py's nhl/nhl_edge_parsers.py
+    schema_compatible: true
+  nhl_records:
+    # src/parsers/nhl_records.ts: "Faithful port of" sdv-py's nhl/nhl_records_parsers.py
+    schema_compatible: true
+  nhl_stats_rest:
+    # src/parsers/nhl_stats_rest.ts: "Faithful port of" sdv-py's nhl/nhl_stats_rest_parsers.py
+    schema_compatible: true
   mlb:
     from: mlb_api
     # overlay/mlb.yaml: the 14 JS-only endpoints, JS's schemas for the two
@@ -66,7 +83,8 @@ families:
     # `timecode` -> `language` query-key bug. Drop that patch once the pin
     # includes the upstream sdv-py fix.
     parsers:
-      # src/parsers/mlb.ts is a faithful port of sdv-py's MLB Stats parsers.
+      # src/parsers/mlb.ts: "Faithful port of" sdv-py's MLB Stats parsers (mlb_parsers.py,
+      # since renamed mlb_api_parsers.py); every py parser is mapped explicitly.
       parse_mlb_api_schedule: {js: parse_mlb_schedule, schema_compatible: true}
       parse_mlb_api_list: {js: parse_mlb_list, schema_compatible: true}
       parse_mlb_api_boxscore: {js: parse_mlb_boxscore, schema_compatible: true}

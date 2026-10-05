@@ -123,22 +123,27 @@ names, parser names, schema paths).
 ```sh
 npm run vendor -- --ref <sha>   # bump the pin + fetch (GitHub raw; SDV_PY_REPO=<clone> for local)
 npm run vendor -- --offline     # re-derive after editing vendor.yaml or overlay/
-npm run vendor:check            # offline gate (CI): fails on any hand-edit
+npm run vendor:check            # offline gate (CI): LOCK hashes + any hand-edit
 npm run codegen                 # then regenerate as usual
 ```
 
-- **Never hand-edit a vendored file** (it starts `# VENDORED from …`). JS-only
-  endpoints and JS-side patches go in `tools/codegen/overlay/<family>.yaml`: an entry
-  with a new `short` is appended, an entry with a vendored `short` replaces those keys.
+- **Never hand-edit a vendored file** (it starts `# VENDORED from …`) or the
+  upstream copies in `tools/codegen/vendor/upstream/` (`vendor:check` re-hashes them
+  against `LOCK`). JS-only endpoints and JS-side patches go in
+  `tools/codegen/overlay/<family>.yaml`: an entry with a new `short` (and a `path`)
+  is appended, an entry with a vendored `short` replaces those keys. A patch that
+  matches nothing, or that upstream has already absorbed, fails the vendor so you
+  can delete it.
 - Shared endpoint changes land in **sdv-py first**; the weekly
   `vendor-sync.yml` workflow opens a PR bumping the pin. The workflow itself runs
   `npm run vendor`, `npm run codegen`, the build and `npm test` before opening the
   PR (the outcome is in the PR body), but a PR opened with the workflow's
   `GITHUB_TOKEN` does **not** trigger CI: a maintainer closes and reopens it (or
   pushes to it) to run the CI checks before merging.
-- A py `returns_schema` is attached only where the JS parser is declared
-  equivalent to py's (`parsers: {<py>: {js: <name>, schema_compatible: true}}`, or
-  the same parser name); otherwise JS's own schema (via the overlay) or none.
+- A py `returns_schema` is attached only where the JS parser is DECLARED
+  equivalent to py's (family `schema_compatible: true` for a kept py parser name,
+  or `parsers: {<py>: {js: <name>, schema_compatible: true}}`); otherwise JS's own
+  schema (via the overlay) or none.
 - A new param `transform:` upstream fails `npm run codegen` until it is ported to
   `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
   `tools/codegen/param-transforms.mjs`.

@@ -2,16 +2,17 @@
 //
 // Reads tools/codegen/vendor.yaml (pinned sdv-py ref + per-family transforms),
 // keeps a verbatim copy of every upstream file under tools/codegen/vendor/
-// upstream/ (committed, so the check is offline), and derives:
+// upstream/ (committed, with REF + a LOCK of git blob shas from the pinned tree,
+// so the check is offline), and derives:
 //   - tools/codegen/endpoints/<family>.yaml  (api-stem / short-name / parser /
 //     returns-schema rewrites + overlay/<family>.yaml merged on top)
-//   - tools/codegen/schemas/**               (every schema those families
-//     reference, copied verbatim to its rewritten path)
+//   - tools/codegen/schemas/**               (the py schemas those families keep
+//     under the returns-schema policy, copied verbatim to their rewritten path)
 //   - the manifest's `copy:` files, verbatim (e.g. endpoints/releases.yaml)
 //
 //   node tools/codegen/vendor.mjs [--ref <sha>]   # fetch upstream, re-derive
 //   node tools/codegen/vendor.mjs --offline       # re-derive from vendor/upstream
-//   node tools/codegen/vendor.mjs --check         # offline drift gate (exit 1)
+//   node tools/codegen/vendor.mjs --check         # offline gate: LOCK + drift (exit 1)
 //
 // Fetch source: GitHub raw at the pinned ref by default; env SDV_PY_REPO=<path
 // to an sdv-py clone> reads the same ref through `git cat-file` (never the
@@ -25,16 +26,35 @@ import {
   rmSync,
 } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parse, parseDocument, isMap } from "yaml";
+import { parse, parseDocument } from "yaml";
 
 export const CODEGEN_DIR = dirname(fileURLToPath(import.meta.url));
 const UPSTREAM = join("vendor", "upstream");
 const REF_FILE = "REF";
+// "<git blob sha>  <path>" per upstream file, taken from the pinned tree at fetch
+// time; the offline check re-hashes every committed copy against it.
+const LOCK_FILE = "LOCK";
 const PY_CODEGEN = "tools/codegen/";
 
 const read = (p) => readFileSync(p, "utf8");
+
+/** Git's blob id for a file's bytes: sha1("blob <len>\0" + bytes). */
+export function gitBlobSha(buf) {
+  return createHash("sha1").update(`blob ${buf.length}\0`).update(buf).digest("hex");
+}
+
+/** JSON with sorted object keys, for order-insensitive YAML value comparison. */
+function stable(v) {
+  if (Array.isArray(v)) return `[${v.map(stable).join(",")}]`;
+  if (v && typeof v === "object") {
+    return `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${stable(v[k])}`).join(",")}}`;
+  }
+  return JSON.stringify(v);
+}
+const plain = (node) => (node && typeof node.toJSON === "function" ? node.toJSON() : node);
 
 export function loadManifest(root = CODEGEN_DIR) {
   return parse(read(join(root, "vendor.yaml")));
@@ -76,13 +96,17 @@ export function schemaFilesFor(ref, available) {
 
 /**
  * The JS parser a py parser maps to, and whether its output is described by
- * py's returns schema. A py name with no `parsers` entry is the same parser
- * ported to JS under py's name (schema-compatible). A mapped name must say so
- * explicitly: `{js: <name>, schema_compatible: <bool>}`.
+ * py's returns schema. Fail-closed: compatibility must be DECLARED in
+ * vendor.yaml, per parser (`parsers: {<py>: {js, schema_compatible}}`) or, for py
+ * names kept as-is, per family (`schema_compatible: true`, for families whose JS
+ * parsers are faithful ports of sdv-py's). Undeclared = not compatible.
  */
 export function mapParser(cfg, pyParser, where) {
+  if (cfg.schema_compatible !== undefined && typeof cfg.schema_compatible !== "boolean") {
+    throw new Error(`vendor.yaml ${where}: schema_compatible must be a boolean`);
+  }
   const m = (cfg.parsers ?? {})[pyParser];
-  if (m === undefined) return { js: pyParser, compatible: true };
+  if (m === undefined) return { js: pyParser, compatible: cfg.schema_compatible === true };
   if (typeof m?.js !== "string" || typeof m.schema_compatible !== "boolean") {
     throw new Error(`vendor.yaml ${where}: parsers.${pyParser} must be {js: <name>, schema_compatible: <bool>}`);
   }
@@ -100,8 +124,13 @@ export function mapParser(cfg, pyParser, where) {
  * `parser_overrides` entry replaces it; otherwise it is dropped (no table beats
  * a wrong one) and the overlay may attach a JS-owned schema instead.
  *
- * Throws on a stale manifest entry (a `names` / `parser_overrides` key that
- * matches no vendored endpoint) or a duplicate short.
+ * Overlay entries: one whose `short` is vendored patches it (never its `parser`;
+ * use `parser_overrides`); one with a new `short` is appended and must carry a
+ * `path`. A patched key whose value already equals the vendored one throws, so a
+ * patch that upstream has absorbed announces itself.
+ *
+ * Throws on a stale manifest entry (a `names` / `parsers` / `parser_overrides`
+ * key that matches no vendored endpoint) or a duplicate short.
  */
 export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   const doc = parseDocument(upstreamText);
@@ -120,6 +149,7 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   const overrides = cfg.parser_overrides ?? {};
   const unusedNames = new Set(Object.keys(names));
   const unusedOverrides = new Set(Object.keys(overrides));
+  const unusedParsers = new Set(Object.keys(cfg.parsers ?? {}));
   const pyRefs = new Map(); // endpoint node -> py returns_schema ref it keeps
   for (const ep of items) {
     let short = ep.get("short");
@@ -131,6 +161,7 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
     const pyParser = ep.get("parser");
     let compatible = false;
     if (pyParser) {
+      unusedParsers.delete(pyParser);
       const m = mapParser(cfg, pyParser, key);
       ep.set("parser", m.js);
       compatible = m.compatible;
@@ -157,21 +188,33 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
       const first = ovSeq.items[0];
       first.commentBefore = [ovSeq.commentBefore, first.commentBefore].filter(Boolean).join("\n");
     }
+    const vendored = [...items]; // overlay additions never become patch targets
     for (const oep of ovSeq?.items ?? []) {
       const short = oep.get("short");
-      const target = items.find((ep) => ep.get("short") === short);
+      const target = vendored.find((ep) => ep.get("short") === short);
       if (!target) {
+        if (!oep.has("path")) {
+          throw new Error(
+            `overlay/${key}.yaml ${short}: patches no vendored endpoint (renamed or dropped upstream?); an addition needs a \`path\``
+          );
+        }
         seq.add(oep);
         continue;
       }
       for (const pair of oep.items) {
-        if (pair.key.value === "short") continue;
-        if (pair.key.value === "parser") {
+        const k = pair.key.value;
+        if (k === "short") continue;
+        if (k === "parser") {
           // One way to swap a vendored parser, so the schema policy sees it.
           throw new Error(`overlay/${key}.yaml ${short}: set its parser via vendor.yaml parser_overrides`);
         }
-        target.set(pair.key.value, pair.value);
-        if (pair.key.value === "returns_schema") pyRefs.delete(target); // JS-owned now
+        if (stable(plain(target.get(k, true))) === stable(plain(pair.value))) {
+          throw new Error(
+            `overlay/${key}.yaml ${short}.${k}: already equal upstream; remove it from this overlay entry`
+          );
+        }
+        target.set(k, pair.value);
+        if (k === "returns_schema") pyRefs.delete(target); // JS-owned now
       }
       if (oep.commentBefore) {
         target.commentBefore = [target.commentBefore, oep.commentBefore]
@@ -181,10 +224,10 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
     }
   }
 
-  if (unusedNames.size || unusedOverrides.size) {
+  if (unusedNames.size || unusedOverrides.size || unusedParsers.size) {
     throw new Error(
       `vendor.yaml ${key}: stale entries match no endpoint: ` +
-        [...unusedNames, ...unusedOverrides].join(", ")
+        [...unusedNames, ...unusedParsers, ...unusedOverrides].join(", ")
     );
   }
   const shorts = (seq?.items ?? []).map((ep) => ep.get("short"));
@@ -279,24 +322,74 @@ export function findOrphans(root, outputs) {
   return orphans.sort();
 }
 
+/** Every file under `dir` (recursive), as `/`-joined paths relative to it. */
+function listFiles(dir, prefix = "") {
+  if (!existsSync(dir)) return [];
+  const out = [];
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    const rel = prefix + e.name;
+    if (e.isDirectory()) out.push(...listFiles(join(dir, e.name), `${rel}/`));
+    else out.push(rel);
+  }
+  return out.sort();
+}
+
+const REFETCH = "upstream copies are fetched, never edited: re-fetch with `npm run vendor`";
+
+/**
+ * Verify vendor/upstream/ against LOCK: every listed file present with its pinned
+ * git blob sha, and no unlisted file. Offline.
+ */
+function checkUpstreamLock(up) {
+  const lockFile = join(up, LOCK_FILE);
+  if (!existsSync(lockFile)) return [`UPSTREAM: vendor/upstream/${LOCK_FILE} is missing (${REFETCH})`];
+  const problems = [];
+  const lock = new Map(
+    read(lockFile)
+      .split("\n")
+      .filter(Boolean)
+      .map((l) => {
+        const [sha, path] = l.split(/ {2}/);
+        return [path, sha];
+      })
+  );
+  const present = new Set(listFiles(up).filter((p) => p !== LOCK_FILE && p !== REF_FILE));
+  for (const [p, sha] of lock) {
+    if (!present.has(p)) problems.push(`UPSTREAM: vendor/upstream/${p} is missing (${REFETCH})`);
+    else if (gitBlobSha(readFileSync(join(up, p))) !== sha) {
+      problems.push(`UPSTREAM: vendor/upstream/${p} does not match pinned blob ${sha} (${REFETCH})`);
+    }
+  }
+  for (const p of present) {
+    if (!lock.has(p)) problems.push(`UPSTREAM: vendor/upstream/${p} is not in ${LOCK_FILE} (${REFETCH})`);
+  }
+  return problems;
+}
+
 /** Offline drift check. Returns a list of human-readable problems ([] = clean). */
 export function checkVendor(root = CODEGEN_DIR) {
   const problems = [];
   const manifest = loadManifest(root);
-  const refFile = join(root, UPSTREAM, REF_FILE);
+  const up = join(root, UPSTREAM);
+  const refFile = join(up, REF_FILE);
   const stamped = existsSync(refFile) ? read(refFile).trim() : "(missing)";
   if (stamped !== manifest.source.ref) {
     problems.push(
-      `vendor/upstream is at ${stamped} but vendor.yaml pins ${manifest.source.ref} — run \`npm run vendor\``
+      `UPSTREAM: vendor/upstream is at ${stamped} but vendor.yaml pins ${manifest.source.ref} (re-fetch with \`npm run vendor\`)`
     );
   }
+  problems.push(...checkUpstreamLock(up));
+  if (problems.length) return problems; // derive only from a verified upstream copy
   const outputs = deriveAll(root);
+  const regen = "regenerate with `npm run vendor -- --offline`; change JS behaviour in overlay/ or vendor.yaml, never in a vendored file";
   for (const [p, content] of outputs) {
     const file = join(root, p);
-    if (!existsSync(file)) problems.push(`MISSING: tools/codegen/${p}`);
-    else if (read(file) !== content) problems.push(`DRIFT: tools/codegen/${p} differs from its vendored source (hand-edit?)`);
+    if (!existsSync(file)) problems.push(`MISSING: tools/codegen/${p} (${regen})`);
+    else if (read(file) !== content) problems.push(`DRIFT: tools/codegen/${p} differs from its vendored source (${regen})`);
   }
-  for (const o of findOrphans(root, outputs)) problems.push(`ORPHAN: tools/codegen/${o} (not vendored, not referenced)`);
+  for (const o of findOrphans(root, outputs)) {
+    problems.push(`ORPHAN: tools/codegen/${o} is not vendored and not referenced (delete it, or ${regen})`);
+  }
   return problems;
 }
 
@@ -317,6 +410,9 @@ export function writeVendor(root = CODEGEN_DIR) {
 // Fetch (network or local git) — not used by the check.
 // ---------------------------------------------------------------------------
 
+// Each source exposes `tree()` -> Map(codegen-relative path -> git blob sha) for
+// the pinned endpoints/ + schemas/ trees, and `getMany(paths)` -> Buffers.
+
 function gitSource(repo, ref) {
   const git = (args, input) => {
     const r = spawnSync("git", ["-C", repo, ...args], { input, maxBuffer: 1 << 30 });
@@ -324,15 +420,19 @@ function gitSource(repo, ref) {
     return r.stdout;
   };
   return {
-    async list() {
-      return git(["ls-tree", "-r", "--name-only", ref, "--", `${PY_CODEGEN}schemas`])
-        .toString("utf8")
-        .split("\n")
-        .filter(Boolean);
+    async tree() {
+      const out = new Map();
+      const ls = git(["ls-tree", "-r", ref, "--", `${PY_CODEGEN}endpoints`, `${PY_CODEGEN}schemas`]);
+      for (const line of ls.toString("utf8").split("\n").filter(Boolean)) {
+        const [meta, path] = line.split("\t"); // "<mode> blob <sha>\t<path>"
+        const [, type, sha] = meta.split(" ");
+        if (type === "blob") out.set(path.slice(PY_CODEGEN.length), sha);
+      }
+      return out;
     },
     async getMany(paths) {
       // One `git cat-file --batch` round trip: "<sha> blob <size>\n<bytes>\n".
-      const buf = git(["cat-file", "--batch"], paths.map((p) => `${ref}:${p}`).join("\n") + "\n");
+      const buf = git(["cat-file", "--batch"], paths.map((p) => `${ref}:${PY_CODEGEN}${p}`).join("\n") + "\n");
       const out = [];
       let i = 0;
       for (const p of paths) {
@@ -341,7 +441,7 @@ function gitSource(repo, ref) {
         i = nl + 1;
         if (head.endsWith(" missing")) throw new Error(`${p} not found at ${ref} in ${repo}`);
         const size = Number(head.split(" ")[2]);
-        out.push(buf.toString("utf8", i, i + size));
+        out.push(Buffer.from(buf.subarray(i, i + size)));
         i += size + 1;
       }
       return out;
@@ -357,11 +457,15 @@ function githubSource(repoSlug, ref) {
     return res;
   };
   return {
-    async list() {
-      const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN}schemas?recursive=1`;
+    async tree() {
+      const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN.slice(0, -1)}?recursive=1`;
       const j = await (await get(url, { headers })).json();
       if (j.truncated) throw new Error(`tree listing truncated: ${url}`);
-      return j.tree.filter((t) => t.type === "blob").map((t) => `${PY_CODEGEN}schemas/${t.path}`);
+      return new Map(
+        j.tree
+          .filter((t) => t.type === "blob" && /^(endpoints|schemas)\//.test(t.path))
+          .map((t) => [t.path, t.sha])
+      );
     },
     async getMany(paths) {
       const out = new Array(paths.length);
@@ -369,8 +473,8 @@ function githubSource(repoSlug, ref) {
       const worker = async () => {
         while (next < paths.length) {
           const i = next++;
-          const url = `https://raw.githubusercontent.com/${repoSlug}/${ref}/${paths[i]}`;
-          out[i] = await (await get(url)).text();
+          const url = `https://raw.githubusercontent.com/${repoSlug}/${ref}/${PY_CODEGEN}${paths[i]}`;
+          out[i] = Buffer.from(await (await get(url)).arrayBuffer());
         }
       };
       await Promise.all(Array.from({ length: 8 }, worker));
@@ -379,44 +483,55 @@ function githubSource(repoSlug, ref) {
   };
 }
 
-/** Fetch the pinned upstream files into vendor/upstream/ (replacing it). */
-export async function fetchUpstream(root = CODEGEN_DIR) {
+/**
+ * Fetch the upstream files at `ref` (default: the manifest pin) into
+ * vendor/upstream/ (replacing it), each verified against the pinned tree's blob
+ * sha, and write REF + LOCK. All network reads finish before anything is written.
+ */
+export async function fetchUpstream(root = CODEGEN_DIR, ref = loadManifest(root).source.ref) {
   const manifest = loadManifest(root);
-  const { repo, ref } = manifest.source;
+  const { repo } = manifest.source;
   const src = process.env.SDV_PY_REPO ? gitSource(process.env.SDV_PY_REPO, ref) : githubSource(repo, ref);
 
+  const tree = await src.tree();
   const endpointPaths = [
     ...new Set([
       ...familyEntries(manifest).map(([k, c]) => upstreamEndpointPath(k, c)),
       ...(manifest.copy ?? []),
     ]),
   ];
-  const endpointTexts = await src.getMany(endpointPaths.map((p) => PY_CODEGEN + p));
-  const available = (await src.list()).map((p) => p.slice(`${PY_CODEGEN}schemas/`.length));
+  for (const p of endpointPaths) if (!tree.has(p)) throw new Error(`${PY_CODEGEN}${p} not found at ${ref}`);
+  const endpointBufs = await src.getMany(endpointPaths);
+  const available = [...tree.keys()].filter((p) => p.startsWith("schemas/")).map((p) => p.slice("schemas/".length));
   const schemaPaths = new Set();
   const dangling = [];
   endpointPaths.forEach((p, i) => {
-    if (!p.startsWith("endpoints/") || (manifest.copy ?? []).includes(p)) return;
-    for (const ref_ of schemaRefs(endpointTexts[i])) {
+    if ((manifest.copy ?? []).includes(p)) return;
+    for (const ref_ of schemaRefs(endpointBufs[i].toString("utf8"))) {
       const files = schemaFilesFor(ref_, available);
       if (!files.length) dangling.push(ref_);
       files.forEach((f) => schemaPaths.add(`schemas/${f}`));
     }
   });
   const schemaList = [...schemaPaths].sort();
-  const schemaTexts = await src.getMany(schemaList.map((p) => PY_CODEGEN + p));
+  const schemaBufs = await src.getMany(schemaList);
 
+  const files = [
+    ...endpointPaths.map((p, i) => [p, endpointBufs[i]]),
+    ...schemaList.map((p, i) => [p, schemaBufs[i]]),
+  ];
+  for (const [p, buf] of files) {
+    if (gitBlobSha(buf) !== tree.get(p)) throw new Error(`${p}: fetched bytes do not match blob ${tree.get(p)} at ${ref}`);
+  }
   const up = join(root, UPSTREAM);
   rmSync(up, { recursive: true, force: true });
-  const files = [
-    ...endpointPaths.map((p, i) => [p, endpointTexts[i]]),
-    ...schemaList.map((p, i) => [p, schemaTexts[i]]),
-  ];
-  for (const [p, text] of files) {
+  for (const [p, buf] of files) {
     mkdirSync(dirname(join(up, p)), { recursive: true });
-    writeFileSync(join(up, p), text);
+    writeFileSync(join(up, p), buf);
   }
   writeFileSync(join(up, REF_FILE), `${ref}\n`);
+  const lock = files.map(([p]) => `${tree.get(p)}  ${p}`).sort((a, b) => a.slice(42).localeCompare(b.slice(42)));
+  writeFileSync(join(up, LOCK_FILE), `${lock.join("\n")}\n`);
   return { files: files.length, dangling: [...new Set(dangling)].sort() };
 }
 
@@ -434,21 +549,25 @@ async function main(argv) {
     const problems = checkVendor();
     for (const p of problems) console.error(p);
     if (problems.length) {
-      console.error(`vendor:check: ${problems.length} problem(s) — run \`npm run vendor -- --offline\` (or edit overlay/, not the vendored files)`);
+      console.error(`vendor:check: ${problems.length} problem(s); each line above says how to fix it`);
       process.exit(1);
     }
-    console.log("vendor:check: vendored files match tools/codegen/vendor/upstream");
+    console.log("vendor:check: vendor/upstream matches LOCK and the vendored files match vendor/upstream");
     return;
   }
   const refIdx = argv.indexOf("--ref");
+  let sha;
   if (refIdx !== -1) {
-    const sha = argv[refIdx + 1];
+    sha = argv[refIdx + 1];
     if (!/^[0-9a-f]{40}$/.test(sha ?? "")) throw new Error("--ref needs a full 40-char commit sha");
-    bumpRef(CODEGEN_DIR, sha);
+    if (argv.includes("--offline")) throw new Error("--ref fetches; it can't be combined with --offline");
   }
   if (!argv.includes("--offline")) {
-    const { files, dangling } = await fetchUpstream();
-    console.log(`vendor: fetched ${files} upstream files at ${loadManifest().source.ref}`);
+    // Fetch first: a failed fetch leaves vendor.yaml (and vendor/upstream) untouched.
+    const ref = sha ?? loadManifest().source.ref;
+    const { files, dangling } = await fetchUpstream(CODEGEN_DIR, ref);
+    if (sha) bumpRef(CODEGEN_DIR, sha);
+    console.log(`vendor: fetched ${files} upstream files at ${ref}`);
     if (dangling.length) console.warn(`vendor: upstream names schemas it does not ship: ${dangling.join(", ")}`);
   }
   const { written, removed } = writeVendor();
