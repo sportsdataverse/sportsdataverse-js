@@ -13,7 +13,7 @@ sidebar_position: 0
 - **sport slug:** `baseball`
 - **league slug:** `college-softball`
 - **scopes:** `universal`, `ncaa`
-- **wrappers:** 117
+- **wrappers:** 118
 
 `sdv.college_softball` is composed from **written, documented source** (`src/generated/espn/college_softball.ts`) — a phased proof of converting the runtime wrapper factory into reviewable modules. Every endpoint is a real `export const` with JSDoc, callable as `sdv.college_softball.espnCollege_softball<Endpoint>(params)` and under its snake_case alias (`espn_college_softball_<endpoint>`) for parity with the Python / R packages.
 
@@ -32,6 +32,7 @@ Endpoints are grouped by ESPN API family. Pick a page for its per-function refer
 | [Site API](./reference/site) | 24 |
 | [Core API](./reference/core) | 82 |
 | [Web API](./reference/web) | 5 |
+| [FPI API (fitt v3)](./reference/fitt) | 1 |
 | [NCAA additional](./reference/additional) | 6 |
 
 > **Parsed output:** pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON. The columns are determined by each endpoint's parser — see [ESPN parsed returns](../reference/espn-parsed-returns) for the full column reference.

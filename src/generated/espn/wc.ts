@@ -1658,6 +1658,44 @@ export const espnWcGames: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnWcGames} (py/R parity). */
 export const espn_wc_games = espnWcGames;
 
+const FPI_DEF: WrapperDef = {
+  "short": "fpi",
+  "family": "fitt_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/powerindex",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    },
+    {
+      "name": "page",
+      "queryKey": "page"
+    }
+  ]
+};
+/**
+ * WC — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)).
+ *
+ * **Endpoint:** `GET https://site.web.api.espn.com/apis/fitt/v3/sports/soccer/fifa.world/powerindex`
+ *
+ * @param params.season - query parameter.
+ * @param params.limit - query parameter.
+ * @param params.page - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.wc.espnWcFpi({});
+ */
+export const espnWcFpi: WrapperFn = (params = {}) =>
+  callWrapper(FPI_DEF, CFG, params);
+/** snake_case alias of {@link espnWcFpi} (py/R parity). */
+export const espn_wc_fpi = espnWcFpi;
+
 const FRANCHISE_DEF: WrapperDef = {
   "short": "franchise",
   "family": "core_v2",

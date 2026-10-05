@@ -51,6 +51,7 @@
     {
       "sport": "soccer",
       "prefixes": [
+        "asa",
         "bundesliga",
         "epl",
         "laliga",
@@ -65,7 +66,9 @@
         "wc",
         "wwc"
       ],
-      "providers": []
+      "providers": [
+        "asa"
+      ]
     },
     {
       "sport": "cricket",
@@ -87,6 +90,10 @@
     {
       "ns": "odds",
       "count": 10
+    },
+    {
+      "ns": "on3",
+      "count": 78
     },
     {
       "ns": "recruiting",

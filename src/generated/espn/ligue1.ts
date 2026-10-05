@@ -1658,6 +1658,44 @@ export const espnLigue1Games: WrapperFn = (params = {}) =>
 /** snake_case alias of {@link espnLigue1Games} (py/R parity). */
 export const espn_ligue1_games = espnLigue1Games;
 
+const FPI_DEF: WrapperDef = {
+  "short": "fpi",
+  "family": "fitt_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/powerindex",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    },
+    {
+      "name": "page",
+      "queryKey": "page"
+    }
+  ]
+};
+/**
+ * LIGUE1 — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)).
+ *
+ * **Endpoint:** `GET https://site.web.api.espn.com/apis/fitt/v3/sports/soccer/fra.1/powerindex`
+ *
+ * @param params.season - query parameter.
+ * @param params.limit - query parameter.
+ * @param params.page - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.ligue1.espnLigue1Fpi({});
+ */
+export const espnLigue1Fpi: WrapperFn = (params = {}) =>
+  callWrapper(FPI_DEF, CFG, params);
+/** snake_case alias of {@link espnLigue1Fpi} (py/R parity). */
+export const espn_ligue1_fpi = espnLigue1Fpi;
+
 const FRANCHISE_DEF: WrapperDef = {
   "short": "franchise",
   "family": "core_v2",

@@ -220,7 +220,7 @@ describe('core/request: retry + classification', () => {
   it('ESPN families: a 200 body { code: 404 } -> NoDataError; other families pass it through', async () => {
     const body = { code: 404, message: 'Failed to get events endpoint.' };
     configure({ transport: fakeTransport({ status: 200, data: body }) });
-    for (const family of ['site_v2', 'site_v2_alt', 'web_v3', 'core_v2']) {
+    for (const family of ['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3']) {
       await request(family, GET()).should.be.rejectedWith(NoDataError);
     }
     (await request('mlb', GET())).should.eql(body);
