@@ -14,6 +14,7 @@ import { LEAGUES } from './generated/leagues.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { WRITTEN_FLAT } from './generated/flat/index.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
+import * as cricketWp from './models/cricket_wp.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
 // documented `export const` wrappers in src/generated/espn/<prefix>.ts, exposed
@@ -126,6 +127,19 @@ const hockeytechSeasonExtra = {
 for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
   sdv.hockeytech[name] = fn;
   sdv.hockeytech[toCamel(name)] = fn;
+}
+
+// Cricket in-play win probability (pure, offline) merged onto `sdv.cricket`
+// under py's snake_case names and camelCase aliases.
+const cricketWpExports: Record<string, any> = {
+  cricket_match_state: cricketWp.cricket_match_state,
+  cricket_win_probability: cricketWp.cricket_win_probability,
+  cricket_parse_score_string: cricketWp.parse_score_string,
+  cricket_get_format: cricketWp.get_format,
+};
+for (const [name, fn] of Object.entries(cricketWpExports)) {
+  sdv.cricket[name] = fn;
+  sdv.cricket[toCamel(name)] = fn;
 }
 
 export default sdv;
