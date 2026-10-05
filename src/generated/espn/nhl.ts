@@ -17,7 +17,10 @@ const CFG: LeagueConfig = {
   "league": "nhl",
   "scopes": [
     "universal"
-  ]
+  ],
+  "publicShorts": {
+    "athlete_stats": "player_stats_v3"
+  }
 };
 
 const ATHLETE_AWARDS_DEF: WrapperDef = {
@@ -33,19 +36,19 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player awards (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/awards`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteAwards({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerAwards({ athlete_id: '…' });
  */
-export const espnNhlAthleteAwards: WrapperFn = (params = {}) =>
+export const espnNhlPlayerAwards: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteAwards} (py/R parity). */
-export const espn_nhl_athlete_awards = espnNhlAthleteAwards;
+/** snake_case alias of {@link espnNhlPlayerAwards} (py/R parity). */
+export const espn_nhl_player_awards = espnNhlPlayerAwards;
 
 const ATHLETE_BIO_DEF: WrapperDef = {
   "short": "athlete_bio",
@@ -60,19 +63,19 @@ const ATHLETE_BIO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete bio (ESPN site.api.espn.com).
+ * NHL — player bio (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/athletes/{athlete_id}/bio`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteBio({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerBio({ athlete_id: '…' });
  */
-export const espnNhlAthleteBio: WrapperFn = (params = {}) =>
+export const espnNhlPlayerBio: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteBio} (py/R parity). */
-export const espn_nhl_athlete_bio = espnNhlAthleteBio;
+/** snake_case alias of {@link espnNhlPlayerBio} (py/R parity). */
+export const espn_nhl_player_bio = espnNhlPlayerBio;
 
 const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "short": "athlete_career_stats",
@@ -91,7 +94,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player career stats (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/statistics[/{stat_type}]`
  *
@@ -99,12 +102,12 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @param params.stat_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteCareerStats({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerCareerStats({ athlete_id: '…' });
  */
-export const espnNhlAthleteCareerStats: WrapperFn = (params = {}) =>
+export const espnNhlPlayerCareerStats: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteCareerStats} (py/R parity). */
-export const espn_nhl_athlete_career_stats = espnNhlAthleteCareerStats;
+/** snake_case alias of {@link espnNhlPlayerCareerStats} (py/R parity). */
+export const espn_nhl_player_career_stats = espnNhlPlayerCareerStats;
 
 const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "short": "athlete_contracts",
@@ -119,19 +122,19 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player contracts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/contracts`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteContracts({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerContracts({ athlete_id: '…' });
  */
-export const espnNhlAthleteContracts: WrapperFn = (params = {}) =>
+export const espnNhlPlayerContracts: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteContracts} (py/R parity). */
-export const espn_nhl_athlete_contracts = espnNhlAthleteContracts;
+/** snake_case alias of {@link espnNhlPlayerContracts} (py/R parity). */
+export const espn_nhl_player_contracts = espnNhlPlayerContracts;
 
 const ATHLETE_CORE_DEF: WrapperDef = {
   "short": "athlete_core",
@@ -146,19 +149,19 @@ const ATHLETE_CORE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player core (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteCore({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerCore({ athlete_id: '…' });
  */
-export const espnNhlAthleteCore: WrapperFn = (params = {}) =>
+export const espnNhlPlayerCore: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteCore} (py/R parity). */
-export const espn_nhl_athlete_core = espnNhlAthleteCore;
+/** snake_case alias of {@link espnNhlPlayerCore} (py/R parity). */
+export const espn_nhl_player_core = espnNhlPlayerCore;
 
 const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "short": "athlete_eventlog",
@@ -173,19 +176,19 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/eventlog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteEventlog({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerEventlog({ athlete_id: '…' });
  */
-export const espnNhlAthleteEventlog: WrapperFn = (params = {}) =>
+export const espnNhlPlayerEventlog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteEventlog} (py/R parity). */
-export const espn_nhl_athlete_eventlog = espnNhlAthleteEventlog;
+/** snake_case alias of {@link espnNhlPlayerEventlog} (py/R parity). */
+export const espn_nhl_player_eventlog = espnNhlPlayerEventlog;
 
 const ATHLETE_GAMELOG_DEF: WrapperDef = {
   "short": "athlete_gamelog",
@@ -205,7 +208,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+ * NHL — player gamelog (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/gamelog`
  *
@@ -213,12 +216,12 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteGamelog({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerGamelog({ athlete_id: '…' });
  */
-export const espnNhlAthleteGamelog: WrapperFn = (params = {}) =>
+export const espnNhlPlayerGamelog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteGamelog} (py/R parity). */
-export const espn_nhl_athlete_gamelog = espnNhlAthleteGamelog;
+/** snake_case alias of {@link espnNhlPlayerGamelog} (py/R parity). */
+export const espn_nhl_player_gamelog = espnNhlPlayerGamelog;
 
 const ATHLETE_INFO_DEF: WrapperDef = {
   "short": "athlete_info",
@@ -233,19 +236,19 @@ const ATHLETE_INFO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete info (ESPN site.api.espn.com).
+ * NHL — player info (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteInfo({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerInfo({ athlete_id: '…' });
  */
-export const espnNhlAthleteInfo: WrapperFn = (params = {}) =>
+export const espnNhlPlayerInfo: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteInfo} (py/R parity). */
-export const espn_nhl_athlete_info = espnNhlAthleteInfo;
+/** snake_case alias of {@link espnNhlPlayerInfo} (py/R parity). */
+export const espn_nhl_player_info = espnNhlPlayerInfo;
 
 const ATHLETE_INJURIES_DEF: WrapperDef = {
   "short": "athlete_injuries",
@@ -260,19 +263,19 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player injuries (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/injuries`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteInjuries({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerInjuries({ athlete_id: '…' });
  */
-export const espnNhlAthleteInjuries: WrapperFn = (params = {}) =>
+export const espnNhlPlayerInjuries: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteInjuries} (py/R parity). */
-export const espn_nhl_athlete_injuries = espnNhlAthleteInjuries;
+/** snake_case alias of {@link espnNhlPlayerInjuries} (py/R parity). */
+export const espn_nhl_player_injuries = espnNhlPlayerInjuries;
 
 const ATHLETE_NEWS_DEF: WrapperDef = {
   "short": "athlete_news",
@@ -287,19 +290,19 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete news (ESPN site.api.espn.com).
+ * NHL — player news (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/athletes/{athlete_id}/news`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteNews({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerNews({ athlete_id: '…' });
  */
-export const espnNhlAthleteNews: WrapperFn = (params = {}) =>
+export const espnNhlPlayerNews: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteNews} (py/R parity). */
-export const espn_nhl_athlete_news = espnNhlAthleteNews;
+/** snake_case alias of {@link espnNhlPlayerNews} (py/R parity). */
+export const espn_nhl_player_news = espnNhlPlayerNews;
 
 const ATHLETE_NOTES_DEF: WrapperDef = {
   "short": "athlete_notes",
@@ -314,19 +317,19 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player notes (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/notes`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteNotes({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerNotes({ athlete_id: '…' });
  */
-export const espnNhlAthleteNotes: WrapperFn = (params = {}) =>
+export const espnNhlPlayerNotes: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteNotes} (py/R parity). */
-export const espn_nhl_athlete_notes = espnNhlAthleteNotes;
+/** snake_case alias of {@link espnNhlPlayerNotes} (py/R parity). */
+export const espn_nhl_player_notes = espnNhlPlayerNotes;
 
 const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "short": "athlete_overview",
@@ -341,19 +344,19 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+ * NHL — player overview (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/overview`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteOverview({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerOverview({ athlete_id: '…' });
  */
-export const espnNhlAthleteOverview: WrapperFn = (params = {}) =>
+export const espnNhlPlayerOverview: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteOverview} (py/R parity). */
-export const espn_nhl_athlete_overview = espnNhlAthleteOverview;
+/** snake_case alias of {@link espnNhlPlayerOverview} (py/R parity). */
+export const espn_nhl_player_overview = espnNhlPlayerOverview;
 
 const ATHLETE_RECORDS_DEF: WrapperDef = {
   "short": "athlete_records",
@@ -368,19 +371,19 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player records (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/records`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteRecords({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerRecords({ athlete_id: '…' });
  */
-export const espnNhlAthleteRecords: WrapperFn = (params = {}) =>
+export const espnNhlPlayerRecords: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteRecords} (py/R parity). */
-export const espn_nhl_athlete_records = espnNhlAthleteRecords;
+/** snake_case alias of {@link espnNhlPlayerRecords} (py/R parity). */
+export const espn_nhl_player_records = espnNhlPlayerRecords;
 
 const ATHLETE_SEASONS_DEF: WrapperDef = {
   "short": "athlete_seasons",
@@ -395,19 +398,19 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player seasons (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/seasons`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteSeasons({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerSeasons({ athlete_id: '…' });
  */
-export const espnNhlAthleteSeasons: WrapperFn = (params = {}) =>
+export const espnNhlPlayerSeasons: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteSeasons} (py/R parity). */
-export const espn_nhl_athlete_seasons = espnNhlAthleteSeasons;
+/** snake_case alias of {@link espnNhlPlayerSeasons} (py/R parity). */
+export const espn_nhl_player_seasons = espnNhlPlayerSeasons;
 
 const ATHLETE_SPLITS_DEF: WrapperDef = {
   "short": "athlete_splits",
@@ -427,7 +430,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+ * NHL — player splits (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/splits`
  *
@@ -435,12 +438,12 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteSplits({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerSplits({ athlete_id: '…' });
  */
-export const espnNhlAthleteSplits: WrapperFn = (params = {}) =>
+export const espnNhlPlayerSplits: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteSplits} (py/R parity). */
-export const espn_nhl_athlete_splits = espnNhlAthleteSplits;
+/** snake_case alias of {@link espnNhlPlayerSplits} (py/R parity). */
+export const espn_nhl_player_splits = espnNhlPlayerSplits;
 
 const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "short": "athlete_statisticslog",
@@ -455,19 +458,19 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/statisticslog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteStatisticslog({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerStatisticslog({ athlete_id: '…' });
  */
-export const espnNhlAthleteStatisticslog: WrapperFn = (params = {}) =>
+export const espnNhlPlayerStatisticslog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteStatisticslog} (py/R parity). */
-export const espn_nhl_athlete_statisticslog = espnNhlAthleteStatisticslog;
+/** snake_case alias of {@link espnNhlPlayerStatisticslog} (py/R parity). */
+export const espn_nhl_player_statisticslog = espnNhlPlayerStatisticslog;
 
 const ATHLETE_STATS_DEF: WrapperDef = {
   "short": "athlete_stats",
@@ -487,7 +490,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+ * NHL — player stats v3 (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/nhl/athletes/{athlete_id}/stats`
  *
@@ -495,12 +498,12 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteStats({ athlete_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerStatsV3({ athlete_id: '…' });
  */
-export const espnNhlAthleteStats: WrapperFn = (params = {}) =>
+export const espnNhlPlayerStatsV3: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteStats} (py/R parity). */
-export const espn_nhl_athlete_stats = espnNhlAthleteStats;
+/** snake_case alias of {@link espnNhlPlayerStatsV3} (py/R parity). */
+export const espn_nhl_player_stats_v3 = espnNhlPlayerStatsV3;
 
 const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "short": "athlete_vs_athlete",
@@ -518,7 +521,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — player vs player (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes/{athlete_id}/vsathlete/{opp_id}`
  *
@@ -526,12 +529,12 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @param params.opp_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
+ * @example await sdv.nhl.espnNhlPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  */
-export const espnNhlAthleteVsAthlete: WrapperFn = (params = {}) =>
+export const espnNhlPlayerVsPlayer: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthleteVsAthlete} (py/R parity). */
-export const espn_nhl_athlete_vs_athlete = espnNhlAthleteVsAthlete;
+/** snake_case alias of {@link espnNhlPlayerVsPlayer} (py/R parity). */
+export const espn_nhl_player_vs_player = espnNhlPlayerVsPlayer;
 
 const ATHLETES_INDEX_DEF: WrapperDef = {
   "short": "athletes_index",
@@ -559,7 +562,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — players index (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/athletes`
  *
@@ -568,12 +571,12 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlAthletesIndex({});
+ * @example await sdv.nhl.espnNhlPlayersIndex({});
  */
-export const espnNhlAthletesIndex: WrapperFn = (params = {}) =>
+export const espnNhlPlayersIndex: WrapperFn = (params = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlAthletesIndex} (py/R parity). */
-export const espn_nhl_athletes_index = espnNhlAthletesIndex;
+/** snake_case alias of {@link espnNhlPlayersIndex} (py/R parity). */
+export const espn_nhl_players_index = espnNhlPlayersIndex;
 
 const AWARD_DEF: WrapperDef = {
   "short": "award",
@@ -801,19 +804,19 @@ const EVENT_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEvent({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGame({ event_id: '…' });
  */
-export const espnNhlEvent: WrapperFn = (params = {}) =>
+export const espnNhlGame: WrapperFn = (params = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEvent} (py/R parity). */
-export const espn_nhl_event = espnNhlEvent;
+/** snake_case alias of {@link espnNhlGame} (py/R parity). */
+export const espn_nhl_game = espnNhlGame;
 
 const EVENT_BROADCASTS_DEF: WrapperDef = {
   "short": "event_broadcasts",
@@ -833,7 +836,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/broadcasts`
  *
@@ -841,12 +844,12 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventBroadcasts({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameBroadcasts({ event_id: '…' });
  */
-export const espnNhlEventBroadcasts: WrapperFn = (params = {}) =>
+export const espnNhlGameBroadcasts: WrapperFn = (params = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventBroadcasts} (py/R parity). */
-export const espn_nhl_event_broadcasts = espnNhlEventBroadcasts;
+/** snake_case alias of {@link espnNhlGameBroadcasts} (py/R parity). */
+export const espn_nhl_game_broadcasts = espnNhlGameBroadcasts;
 
 const EVENT_COMPETITION_DEF: WrapperDef = {
   "short": "event_competition",
@@ -866,7 +869,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competition (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game competition (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}`
  *
@@ -874,12 +877,12 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetition({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameCompetition({ event_id: '…' });
  */
-export const espnNhlEventCompetition: WrapperFn = (params = {}) =>
+export const espnNhlGameCompetition: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetition} (py/R parity). */
-export const espn_nhl_event_competition = espnNhlEventCompetition;
+/** snake_case alias of {@link espnNhlGameCompetition} (py/R parity). */
+export const espn_nhl_game_competition = espnNhlGameCompetition;
 
 const EVENT_COMPETITOR_DEF: WrapperDef = {
   "short": "event_competitor",
@@ -902,7 +905,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game team (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}`
  *
@@ -911,12 +914,12 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitor({ event_id: '…', team_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeam({ event_id: '…', team_id: '…' });
  */
-export const espnNhlEventCompetitor: WrapperFn = (params = {}) =>
+export const espnNhlGameTeam: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitor} (py/R parity). */
-export const espn_nhl_event_competitor = espnNhlEventCompetitor;
+/** snake_case alias of {@link espnNhlGameTeam} (py/R parity). */
+export const espn_nhl_game_team = espnNhlGameTeam;
 
 const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "short": "event_competitor_leaders",
@@ -939,7 +942,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
  *
@@ -948,12 +951,12 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitorLeaders({ event_id: '…', team_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeamLeaders({ event_id: '…', team_id: '…' });
  */
-export const espnNhlEventCompetitorLeaders: WrapperFn = (params = {}) =>
+export const espnNhlGameTeamLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitorLeaders} (py/R parity). */
-export const espn_nhl_event_competitor_leaders = espnNhlEventCompetitorLeaders;
+/** snake_case alias of {@link espnNhlGameTeamLeaders} (py/R parity). */
+export const espn_nhl_game_team_leaders = espnNhlGameTeamLeaders;
 
 const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "short": "event_competitor_linescores",
@@ -976,7 +979,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
  *
@@ -985,12 +988,12 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitorLinescores({ event_id: '…', team_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeamLinescores({ event_id: '…', team_id: '…' });
  */
-export const espnNhlEventCompetitorLinescores: WrapperFn = (params = {}) =>
+export const espnNhlGameTeamLinescores: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitorLinescores} (py/R parity). */
-export const espn_nhl_event_competitor_linescores = espnNhlEventCompetitorLinescores;
+/** snake_case alias of {@link espnNhlGameTeamLinescores} (py/R parity). */
+export const espn_nhl_game_team_linescores = espnNhlGameTeamLinescores;
 
 const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "short": "event_competitor_record",
@@ -1013,7 +1016,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game team record (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
  *
@@ -1022,12 +1025,12 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitorRecord({ event_id: '…', team_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeamRecord({ event_id: '…', team_id: '…' });
  */
-export const espnNhlEventCompetitorRecord: WrapperFn = (params = {}) =>
+export const espnNhlGameTeamRecord: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitorRecord} (py/R parity). */
-export const espn_nhl_event_competitor_record = espnNhlEventCompetitorRecord;
+/** snake_case alias of {@link espnNhlGameTeamRecord} (py/R parity). */
+export const espn_nhl_game_team_record = espnNhlGameTeamRecord;
 
 const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "short": "event_competitor_roster",
@@ -1050,7 +1053,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game team roster (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
  *
@@ -1059,12 +1062,12 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitorRoster({ event_id: '…', team_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeamRoster({ event_id: '…', team_id: '…' });
  */
-export const espnNhlEventCompetitorRoster: WrapperFn = (params = {}) =>
+export const espnNhlGameTeamRoster: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitorRoster} (py/R parity). */
-export const espn_nhl_event_competitor_roster = espnNhlEventCompetitorRoster;
+/** snake_case alias of {@link espnNhlGameTeamRoster} (py/R parity). */
+export const espn_nhl_game_team_roster = espnNhlGameTeamRoster;
 
 const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "short": "event_competitor_statistics",
@@ -1087,7 +1090,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
  *
@@ -1096,12 +1099,12 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitorStatistics({ event_id: '…', team_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeamStatistics({ event_id: '…', team_id: '…' });
  */
-export const espnNhlEventCompetitorStatistics: WrapperFn = (params = {}) =>
+export const espnNhlGameTeamStatistics: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitorStatistics} (py/R parity). */
-export const espn_nhl_event_competitor_statistics = espnNhlEventCompetitorStatistics;
+/** snake_case alias of {@link espnNhlGameTeamStatistics} (py/R parity). */
+export const espn_nhl_game_team_statistics = espnNhlGameTeamStatistics;
 
 const EVENT_COMPETITORS_DEF: WrapperDef = {
   "short": "event_competitors",
@@ -1121,7 +1124,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game teams (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/competitors`
  *
@@ -1129,12 +1132,12 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventCompetitors({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameTeams({ event_id: '…' });
  */
-export const espnNhlEventCompetitors: WrapperFn = (params = {}) =>
+export const espnNhlGameTeams: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventCompetitors} (py/R parity). */
-export const espn_nhl_event_competitors = espnNhlEventCompetitors;
+/** snake_case alias of {@link espnNhlGameTeams} (py/R parity). */
+export const espn_nhl_game_teams = espnNhlGameTeams;
 
 const EVENT_LEADERS_DEF: WrapperDef = {
   "short": "event_leaders",
@@ -1154,7 +1157,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/leaders`
  *
@@ -1162,12 +1165,12 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventLeaders({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameLeaders({ event_id: '…' });
  */
-export const espnNhlEventLeaders: WrapperFn = (params = {}) =>
+export const espnNhlGameLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventLeaders} (py/R parity). */
-export const espn_nhl_event_leaders = espnNhlEventLeaders;
+/** snake_case alias of {@link espnNhlGameLeaders} (py/R parity). */
+export const espn_nhl_game_leaders = espnNhlGameLeaders;
 
 const EVENT_ODDS_DEF: WrapperDef = {
   "short": "event_odds",
@@ -1187,7 +1190,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event odds (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game odds (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/odds`
  *
@@ -1195,12 +1198,12 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventOdds({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameOdds({ event_id: '…' });
  */
-export const espnNhlEventOdds: WrapperFn = (params = {}) =>
+export const espnNhlGameOdds: WrapperFn = (params = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventOdds} (py/R parity). */
-export const espn_nhl_event_odds = espnNhlEventOdds;
+/** snake_case alias of {@link espnNhlGameOdds} (py/R parity). */
+export const espn_nhl_game_odds = espnNhlGameOdds;
 
 const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "short": "event_official_detail",
@@ -1223,7 +1226,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game official detail (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/officials/{official_id}`
  *
@@ -1232,12 +1235,12 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventOfficialDetail({ event_id: '…', official_id: '…' });
+ * @example await sdv.nhl.espnNhlGameOfficialDetail({ event_id: '…', official_id: '…' });
  */
-export const espnNhlEventOfficialDetail: WrapperFn = (params = {}) =>
+export const espnNhlGameOfficialDetail: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventOfficialDetail} (py/R parity). */
-export const espn_nhl_event_official_detail = espnNhlEventOfficialDetail;
+/** snake_case alias of {@link espnNhlGameOfficialDetail} (py/R parity). */
+export const espn_nhl_game_official_detail = espnNhlGameOfficialDetail;
 
 const EVENT_OFFICIALS_DEF: WrapperDef = {
   "short": "event_officials",
@@ -1257,7 +1260,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event officials (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game officials (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/officials`
  *
@@ -1265,12 +1268,12 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventOfficials({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameOfficials({ event_id: '…' });
  */
-export const espnNhlEventOfficials: WrapperFn = (params = {}) =>
+export const espnNhlGameOfficials: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventOfficials} (py/R parity). */
-export const espn_nhl_event_officials = espnNhlEventOfficials;
+/** snake_case alias of {@link espnNhlGameOfficials} (py/R parity). */
+export const espn_nhl_game_officials = espnNhlGameOfficials;
 
 const EVENT_PLAY_DEF: WrapperDef = {
   "short": "event_play",
@@ -1293,7 +1296,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event play (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game play (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays/{play_id}`
  *
@@ -1302,12 +1305,12 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventPlay({ event_id: '…', play_id: '…' });
+ * @example await sdv.nhl.espnNhlGamePlay({ event_id: '…', play_id: '…' });
  */
-export const espnNhlEventPlay: WrapperFn = (params = {}) =>
+export const espnNhlGamePlay: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventPlay} (py/R parity). */
-export const espn_nhl_event_play = espnNhlEventPlay;
+/** snake_case alias of {@link espnNhlGamePlay} (py/R parity). */
+export const espn_nhl_game_play = espnNhlGamePlay;
 
 const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "short": "event_play_personnel",
@@ -1330,7 +1333,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
  *
@@ -1339,12 +1342,12 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventPlayPersonnel({ event_id: '…', play_id: '…' });
+ * @example await sdv.nhl.espnNhlGamePlayPersonnel({ event_id: '…', play_id: '…' });
  */
-export const espnNhlEventPlayPersonnel: WrapperFn = (params = {}) =>
+export const espnNhlGamePlayPersonnel: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventPlayPersonnel} (py/R parity). */
-export const espn_nhl_event_play_personnel = espnNhlEventPlayPersonnel;
+/** snake_case alias of {@link espnNhlGamePlayPersonnel} (py/R parity). */
+export const espn_nhl_game_play_personnel = espnNhlGamePlayPersonnel;
 
 const EVENT_PLAYS_DEF: WrapperDef = {
   "short": "event_plays",
@@ -1370,7 +1373,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — event plays (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game plays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/plays`
  *
@@ -1379,12 +1382,12 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventPlays({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGamePlays({ event_id: '…' });
  */
-export const espnNhlEventPlays: WrapperFn = (params = {}) =>
+export const espnNhlGamePlays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventPlays} (py/R parity). */
-export const espn_nhl_event_plays = espnNhlEventPlays;
+/** snake_case alias of {@link espnNhlGamePlays} (py/R parity). */
+export const espn_nhl_game_plays = espnNhlGamePlays;
 
 const EVENT_POWERINDEX_DEF: WrapperDef = {
   "short": "event_powerindex",
@@ -1404,7 +1407,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/powerindex`
  *
@@ -1412,12 +1415,12 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventPowerindex({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGamePowerindex({ event_id: '…' });
  */
-export const espnNhlEventPowerindex: WrapperFn = (params = {}) =>
+export const espnNhlGamePowerindex: WrapperFn = (params = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventPowerindex} (py/R parity). */
-export const espn_nhl_event_powerindex = espnNhlEventPowerindex;
+/** snake_case alias of {@link espnNhlGamePowerindex} (py/R parity). */
+export const espn_nhl_game_powerindex = espnNhlGamePowerindex;
 
 const EVENT_PREDICTOR_DEF: WrapperDef = {
   "short": "event_predictor",
@@ -1437,7 +1440,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game predictor (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/predictor`
  *
@@ -1445,12 +1448,12 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventPredictor({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGamePredictor({ event_id: '…' });
  */
-export const espnNhlEventPredictor: WrapperFn = (params = {}) =>
+export const espnNhlGamePredictor: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventPredictor} (py/R parity). */
-export const espn_nhl_event_predictor = espnNhlEventPredictor;
+/** snake_case alias of {@link espnNhlGamePredictor} (py/R parity). */
+export const espn_nhl_game_predictor = espnNhlGamePredictor;
 
 const EVENT_PROBABILITIES_DEF: WrapperDef = {
   "short": "event_probabilities",
@@ -1476,7 +1479,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/probabilities`
  *
@@ -1485,12 +1488,12 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `300`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventProbabilities({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameProbabilities({ event_id: '…' });
  */
-export const espnNhlEventProbabilities: WrapperFn = (params = {}) =>
+export const espnNhlGameProbabilities: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventProbabilities} (py/R parity). */
-export const espn_nhl_event_probabilities = espnNhlEventProbabilities;
+/** snake_case alias of {@link espnNhlGameProbabilities} (py/R parity). */
+export const espn_nhl_game_probabilities = espnNhlGameProbabilities;
 
 const EVENT_PROPBETS_DEF: WrapperDef = {
   "short": "event_propbets",
@@ -1510,7 +1513,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game propbets (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/propbets`
  *
@@ -1518,12 +1521,12 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventPropbets({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGamePropbets({ event_id: '…' });
  */
-export const espnNhlEventPropbets: WrapperFn = (params = {}) =>
+export const espnNhlGamePropbets: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventPropbets} (py/R parity). */
-export const espn_nhl_event_propbets = espnNhlEventPropbets;
+/** snake_case alias of {@link espnNhlGamePropbets} (py/R parity). */
+export const espn_nhl_game_propbets = espnNhlGamePropbets;
 
 const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "short": "event_scoringplays",
@@ -1543,7 +1546,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/scoringplays`
  *
@@ -1551,12 +1554,12 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventScoringplays({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameScoringplays({ event_id: '…' });
  */
-export const espnNhlEventScoringplays: WrapperFn = (params = {}) =>
+export const espnNhlGameScoringplays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventScoringplays} (py/R parity). */
-export const espn_nhl_event_scoringplays = espnNhlEventScoringplays;
+/** snake_case alias of {@link espnNhlGameScoringplays} (py/R parity). */
+export const espn_nhl_game_scoringplays = espnNhlGameScoringplays;
 
 const EVENT_SITUATION_DEF: WrapperDef = {
   "short": "event_situation",
@@ -1576,7 +1579,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event situation (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game situation (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/situation`
  *
@@ -1584,12 +1587,12 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventSituation({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameSituation({ event_id: '…' });
  */
-export const espnNhlEventSituation: WrapperFn = (params = {}) =>
+export const espnNhlGameSituation: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventSituation} (py/R parity). */
-export const espn_nhl_event_situation = espnNhlEventSituation;
+/** snake_case alias of {@link espnNhlGameSituation} (py/R parity). */
+export const espn_nhl_game_situation = espnNhlGameSituation;
 
 const EVENT_STATUS_DEF: WrapperDef = {
   "short": "event_status",
@@ -1609,7 +1612,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * NHL — event status (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — game status (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events/{event_id}/competitions/{cid}/status`
  *
@@ -1617,12 +1620,12 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEventStatus({ event_id: '…' });
+ * @example await sdv.nhl.espnNhlGameStatus({ event_id: '…' });
  */
-export const espnNhlEventStatus: WrapperFn = (params = {}) =>
+export const espnNhlGameStatus: WrapperFn = (params = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEventStatus} (py/R parity). */
-export const espn_nhl_event_status = espnNhlEventStatus;
+/** snake_case alias of {@link espnNhlGameStatus} (py/R parity). */
+export const espn_nhl_game_status = espnNhlGameStatus;
 
 const EVENTS_DEF: WrapperDef = {
   "short": "events",
@@ -1643,7 +1646,7 @@ const EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — events (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/events`
  *
@@ -1651,12 +1654,12 @@ const EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlEvents({});
+ * @example await sdv.nhl.espnNhlGames({});
  */
-export const espnNhlEvents: WrapperFn = (params = {}) =>
+export const espnNhlGames: WrapperFn = (params = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlEvents} (py/R parity). */
-export const espn_nhl_events = espnNhlEvents;
+/** snake_case alias of {@link espnNhlGames} (py/R parity). */
+export const espn_nhl_games = espnNhlGames;
 
 const FPI_DEF: WrapperDef = {
   "short": "fpi",
@@ -2053,7 +2056,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — season players (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/seasons/{season}/athletes`
  *
@@ -2062,12 +2065,12 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlSeasonAthletes({ season: '…' });
+ * @example await sdv.nhl.espnNhlSeasonPlayers({ season: '…' });
  */
-export const espnNhlSeasonAthletes: WrapperFn = (params = {}) =>
+export const espnNhlSeasonPlayers: WrapperFn = (params = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlSeasonAthletes} (py/R parity). */
-export const espn_nhl_season_athletes = espnNhlSeasonAthletes;
+/** snake_case alias of {@link espnNhlSeasonPlayers} (py/R parity). */
+export const espn_nhl_season_players = espnNhlSeasonPlayers;
 
 const SEASON_AWARDS_DEF: WrapperDef = {
   "short": "season_awards",
@@ -2758,7 +2761,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * NHL — season week events (ESPN sports.core.api.espn.com (core v2)).
+ * NHL — season week games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/seasons/{season}/types/{season_type}/weeks/{week}/events`
  *
@@ -2768,12 +2771,12 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.nhl.espnNhlSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
+ * @example await sdv.nhl.espnNhlSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  */
-export const espnNhlSeasonWeekEvents: WrapperFn = (params = {}) =>
+export const espnNhlSeasonWeekGames: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnNhlSeasonWeekEvents} (py/R parity). */
-export const espn_nhl_season_week_events = espnNhlSeasonWeekEvents;
+/** snake_case alias of {@link espnNhlSeasonWeekGames} (py/R parity). */
+export const espn_nhl_season_week_games = espnNhlSeasonWeekGames;
 
 const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
   "short": "season_week_powerindex",

@@ -34,11 +34,13 @@ await sdv.wbb.espnWbbRankings({});
 // snake_case alias (py/R parity): sdv.wbb.espn_wbb_rankings(...)
 ```
 
-## `espnWbbRecruitingAthletes`
+## `espnWbbRecruitingPlayers`
 
-WBB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+WBB — recruiting players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting/{year}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_recruiting_athletes` / `espnWbbRecruitingAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,8 +58,8 @@ WBB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbRecruitingAthletes({ year: '…' });
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_recruiting_athletes(...)
+await sdv.wbb.espnWbbRecruitingPlayers({ year: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_recruiting_players(...)
 ```
 
 ## `espnWbbRecruitingRankings`

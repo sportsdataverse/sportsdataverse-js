@@ -99,7 +99,8 @@ function buildPath(def, league, params) {
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
       if (pp && pp.required === false) return '';
-      throw new Error(`espn_${league.prefix}_${def.short}: missing required path parameter "${name}"`);
+      const pub = (league.publicShorts && league.publicShorts[def.short]) || def.publicShort || def.short;
+      throw new Error(`espn_${league.prefix}_${pub}: missing required path parameter "${name}"`);
     }
     return String(v);
   });
@@ -158,12 +159,24 @@ export function resolveFlat(def, params = {}, flatHosts = {}) {
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
       if (pp && pp.required === false) return '';
-      const camel = toCamel(`${def.api || 'flat'}_${def.short}`);
+      const camel = toCamel(def.publicName || `${def.api || 'flat'}_${def.short}`);
       throw new Error(`${camel}: missing required path parameter "${name}"`);
     }
     return String(v);
   });
   return { url: `${host}${path}`, query: cleanFlatQuery(def, params) };
+}
+
+/**
+ * The flat def for `api` + `short` (endpoints.json `flatApis`), also accepting a
+ * pre-v4 short (`legacyShort`, e.g. CBS `boxscore` -> `game_boxscore`) so old
+ * share links and proxy calls keep resolving. Undefined when neither matches.
+ */
+export function findFlatDef(flatApis, api, short) {
+  return (
+    flatApis.find((e) => e.api === api && e.short === short) ||
+    flatApis.find((e) => e.api === api && e.legacyShort === short)
+  );
 }
 
 /** Full absolute flat URL including the query string (what the proxy fetches). */

@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.ucl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnUclAthleteAwards`
+## `espnUclPlayerAwards`
 
-UCL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+UCL — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_awards` / `espnUclAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ UCL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_awards(...)
+await sdv.ucl.espnUclPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_awards(...)
 ```
 
-## `espnUclAthleteCareerStats`
+## `espnUclPlayerCareerStats`
 
-UCL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+UCL — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_career_stats` / `espnUclAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ UCL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_career_stats(...)
+await sdv.ucl.espnUclPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_career_stats(...)
 ```
 
-## `espnUclAthleteContracts`
+## `espnUclPlayerContracts`
 
-UCL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+UCL — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_contracts` / `espnUclAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ UCL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_contracts(...)
+await sdv.ucl.espnUclPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_contracts(...)
 ```
 
-## `espnUclAthleteCore`
+## `espnUclPlayerCore`
 
-UCL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+UCL — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_core` / `espnUclAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ UCL — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_core(...)
+await sdv.ucl.espnUclPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_core(...)
 ```
 
-## `espnUclAthleteEventlog`
+## `espnUclPlayerEventlog`
 
-UCL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+UCL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_eventlog` / `espnUclAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ UCL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_eventlog(...)
+await sdv.ucl.espnUclPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_eventlog(...)
 ```
 
-## `espnUclAthleteInjuries`
+## `espnUclPlayerInjuries`
 
-UCL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+UCL — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_injuries` / `espnUclAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ UCL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_injuries(...)
+await sdv.ucl.espnUclPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_injuries(...)
 ```
 
-## `espnUclAthleteNotes`
+## `espnUclPlayerNotes`
 
-UCL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+UCL — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_notes` / `espnUclAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ UCL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_notes(...)
+await sdv.ucl.espnUclPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_notes(...)
 ```
 
-## `espnUclAthleteRecords`
+## `espnUclPlayerRecords`
 
-UCL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+UCL — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_records` / `espnUclAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ UCL — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_records(...)
+await sdv.ucl.espnUclPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_records(...)
 ```
 
-## `espnUclAthleteSeasons`
+## `espnUclPlayerSeasons`
 
-UCL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+UCL — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_seasons` / `espnUclAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ UCL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_seasons(...)
+await sdv.ucl.espnUclPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_seasons(...)
 ```
 
-## `espnUclAthleteStatisticslog`
+## `espnUclPlayerStatisticslog`
 
-UCL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+UCL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_statisticslog` / `espnUclAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ UCL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_statisticslog(...)
+await sdv.ucl.espnUclPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_statisticslog(...)
 ```
 
-## `espnUclAthleteVsAthlete`
+## `espnUclPlayerVsPlayer`
 
-UCL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+UCL — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athlete_vs_athlete` / `espnUclAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ UCL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athlete_vs_athlete(...)
+await sdv.ucl.espnUclPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_player_vs_player(...)
 ```
 
-## `espnUclAthletesIndex`
+## `espnUclPlayersIndex`
 
-UCL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+UCL — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_athletes_index` / `espnUclAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ UCL — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclAthletesIndex({});
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_athletes_index(...)
+await sdv.ucl.espnUclPlayersIndex({});
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_players_index(...)
 ```
 
 ## `espnUclAward`
@@ -403,12 +427,14 @@ await sdv.ucl.espnUclCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.ucl.espn_ucl_coach_season(...)
 ```
 
-## `espnUclEvent`
+## `espnUclGame`
 
-UCL — event (ESPN sports.core.api.espn.com (core v2)).
+UCL — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event` / `espnUclEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ UCL — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event(...)
+await sdv.ucl.espnUclGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game(...)
 ```
 
-## `espnUclEventBroadcasts`
+## `espnUclGameBroadcasts`
 
-UCL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+UCL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_broadcasts` / `espnUclEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ UCL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_broadcasts(...)
+await sdv.ucl.espnUclGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_broadcasts(...)
 ```
 
-## `espnUclEventCompetition`
+## `espnUclGameCompetition`
 
-UCL — event competition (ESPN sports.core.api.espn.com (core v2)).
+UCL — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competition` / `espnUclEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ UCL — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competition(...)
+await sdv.ucl.espnUclGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_competition(...)
 ```
 
-## `espnUclEventCompetitor`
+## `espnUclGameTeam`
 
-UCL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+UCL — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitor` / `espnUclEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ UCL — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitor(...)
+await sdv.ucl.espnUclGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_team(...)
 ```
 
-## `espnUclEventCompetitorLeaders`
+## `espnUclGameTeamLeaders`
 
-UCL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+UCL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitor_leaders` / `espnUclEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ UCL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitor_leaders(...)
+await sdv.ucl.espnUclGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_team_leaders(...)
 ```
 
-## `espnUclEventCompetitorLinescores`
+## `espnUclGameTeamLinescores`
 
-UCL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+UCL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitor_linescores` / `espnUclEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ UCL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitor_linescores(...)
+await sdv.ucl.espnUclGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_team_linescores(...)
 ```
 
-## `espnUclEventCompetitorRecord`
+## `espnUclGameTeamRecord`
 
-UCL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+UCL — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitor_record` / `espnUclEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ UCL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitor_record(...)
+await sdv.ucl.espnUclGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_team_record(...)
 ```
 
-## `espnUclEventCompetitorRoster`
+## `espnUclGameTeamRoster`
 
-UCL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+UCL — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitor_roster` / `espnUclEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ UCL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitor_roster(...)
+await sdv.ucl.espnUclGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_team_roster(...)
 ```
 
-## `espnUclEventCompetitorStatistics`
+## `espnUclGameTeamStatistics`
 
-UCL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+UCL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitor_statistics` / `espnUclEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ UCL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitor_statistics(...)
+await sdv.ucl.espnUclGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_team_statistics(...)
 ```
 
-## `espnUclEventCompetitors`
+## `espnUclGameTeams`
 
-UCL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+UCL — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_competitors` / `espnUclEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ UCL — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_competitors(...)
+await sdv.ucl.espnUclGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_teams(...)
 ```
 
-## `espnUclEventLeaders`
+## `espnUclGameLeaders`
 
-UCL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+UCL — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_leaders` / `espnUclEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ UCL — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_leaders(...)
+await sdv.ucl.espnUclGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_leaders(...)
 ```
 
-## `espnUclEventOdds`
+## `espnUclGameOdds`
 
-UCL — event odds (ESPN sports.core.api.espn.com (core v2)).
+UCL — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_odds` / `espnUclEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ UCL — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_odds(...)
+await sdv.ucl.espnUclGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_odds(...)
 ```
 
-## `espnUclEventOfficialDetail`
+## `espnUclGameOfficialDetail`
 
-UCL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+UCL — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_official_detail` / `espnUclEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ UCL — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_official_detail(...)
+await sdv.ucl.espnUclGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_official_detail(...)
 ```
 
-## `espnUclEventOfficials`
+## `espnUclGameOfficials`
 
-UCL — event officials (ESPN sports.core.api.espn.com (core v2)).
+UCL — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_officials` / `espnUclEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ UCL — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_officials(...)
+await sdv.ucl.espnUclGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_officials(...)
 ```
 
-## `espnUclEventPlay`
+## `espnUclGamePlay`
 
-UCL — event play (ESPN sports.core.api.espn.com (core v2)).
+UCL — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_play` / `espnUclEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ UCL — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_play(...)
+await sdv.ucl.espnUclGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_play(...)
 ```
 
-## `espnUclEventPlayPersonnel`
+## `espnUclGamePlayPersonnel`
 
-UCL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+UCL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_play_personnel` / `espnUclEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ UCL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_play_personnel(...)
+await sdv.ucl.espnUclGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_play_personnel(...)
 ```
 
-## `espnUclEventPlays`
+## `espnUclGamePlays`
 
-UCL — event plays (ESPN sports.core.api.espn.com (core v2)).
+UCL — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_plays` / `espnUclEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ UCL — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_plays(...)
+await sdv.ucl.espnUclGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_plays(...)
 ```
 
-## `espnUclEventPowerindex`
+## `espnUclGamePowerindex`
 
-UCL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+UCL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_powerindex` / `espnUclEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ UCL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_powerindex(...)
+await sdv.ucl.espnUclGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_powerindex(...)
 ```
 
-## `espnUclEventPredictor`
+## `espnUclGamePredictor`
 
-UCL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+UCL — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_predictor` / `espnUclEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ UCL — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_predictor(...)
+await sdv.ucl.espnUclGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_predictor(...)
 ```
 
-## `espnUclEventProbabilities`
+## `espnUclGameProbabilities`
 
-UCL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+UCL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_probabilities` / `espnUclEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ UCL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_probabilities(...)
+await sdv.ucl.espnUclGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_probabilities(...)
 ```
 
-## `espnUclEventPropbets`
+## `espnUclGamePropbets`
 
-UCL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+UCL — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_propbets` / `espnUclEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ UCL — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_propbets(...)
+await sdv.ucl.espnUclGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_propbets(...)
 ```
 
-## `espnUclEventScoringplays`
+## `espnUclGameScoringplays`
 
-UCL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+UCL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_scoringplays` / `espnUclEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ UCL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_scoringplays(...)
+await sdv.ucl.espnUclGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_scoringplays(...)
 ```
 
-## `espnUclEventSituation`
+## `espnUclGameSituation`
 
-UCL — event situation (ESPN sports.core.api.espn.com (core v2)).
+UCL — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_situation` / `espnUclEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ UCL — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_situation(...)
+await sdv.ucl.espnUclGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_situation(...)
 ```
 
-## `espnUclEventStatus`
+## `espnUclGameStatus`
 
-UCL — event status (ESPN sports.core.api.espn.com (core v2)).
+UCL — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_event_status` / `espnUclEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ UCL — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_event_status(...)
+await sdv.ucl.espnUclGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_game_status(...)
 ```
 
-## `espnUclEvents`
+## `espnUclGames`
 
-UCL — events (ESPN sports.core.api.espn.com (core v2)).
+UCL — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_events` / `espnUclEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ UCL — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclEvents({});
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_events(...)
+await sdv.ucl.espnUclGames({});
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_games(...)
 ```
 
 ## `espnUclFranchise`
@@ -1145,11 +1219,13 @@ await sdv.ucl.espnUclPositions({});
 // snake_case alias (py/R parity): sdv.ucl.espn_ucl_positions(...)
 ```
 
-## `espnUclSeasonAthletes`
+## `espnUclSeasonPlayers`
 
-UCL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+UCL — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_season_athletes` / `espnUclSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ UCL — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_season_athletes(...)
+await sdv.ucl.espnUclSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_season_players(...)
 ```
 
 ## `espnUclSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.ucl.espnUclSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.ucl.espn_ucl_season_week(...)
 ```
 
-## `espnUclSeasonWeekEvents`
+## `espnUclSeasonWeekGames`
 
-UCL — season week events (ESPN sports.core.api.espn.com (core v2)).
+UCL — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/uefa.champions/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ucl_season_week_events` / `espnUclSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ UCL — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ucl.espnUclSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.ucl.espn_ucl_season_week_events(...)
+await sdv.ucl.espnUclSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.ucl.espn_ucl_season_week_games(...)
 ```
 
 ## `espnUclSeasonWeekPowerindex`

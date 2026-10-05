@@ -40,7 +40,7 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
 
   it('mls: Referer + browser UA, no credentials', async () => {
     status = 200;
-    await sdv.mls.mls_api_competitions({});
+    await sdv.mls.mls_competitions({});
     seen.headers.referer.should.equal('https://www.mlssoccer.com/');
     seen.headers['user-agent'].should.match(/Chrome/);
     should(seen.headers.authorization).be.undefined();
@@ -49,7 +49,7 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
   it('nwsl: Referer + UA, and "::" is on the wire literally', async () => {
     status = 200;
     const id = 'nwsl::Football_Season::0b6761e4701749f593690c0f338da74c';
-    const rows = await sdv.nwsl.nwsl_api_teams({ season_id: id, parsed: true });
+    const rows = await sdv.nwsl.nwsl_teams({ season_id: id, parsed: true });
     seen.headers.referer.should.equal('https://www.nwslsoccer.com/');
     seen.url.should.containEql(`/seasons/${id}/teams`);
     rows[0].team_id.should.equal('nwsl::Football_Team::abc');
@@ -69,8 +69,8 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
     reply = '<!doctype html><html><body>Access denied</body></html>';
     try {
       await sdv.on3.on3_filters_status({}).should.be.rejectedWith(AssetFetchError);
-      await sdv.mls.mls_api_competitions({ parsed: true }).should.be.rejectedWith(AssetFetchError);
-      await sdv.nwsl.nwsl_api_competitions({ parsed: true }).should.be.rejectedWith(AssetFetchError);
+      await sdv.mls.mls_competitions({ parsed: true }).should.be.rejectedWith(AssetFetchError);
+      await sdv.nwsl.nwsl_competitions({ parsed: true }).should.be.rejectedWith(AssetFetchError);
     } finally {
       ctype = 'application/json';
       reply = null;
@@ -84,8 +84,8 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
       (await sdv.on3.on3_filters_status({})).should.eql([]);
       (await sdv.on3.on3_filters_status({ parsed: true })).should.eql([]);
       reply = '{}';
-      (await sdv.nwsl.nwsl_api_competitions({})).should.eql({});
-      (await sdv.nwsl.nwsl_api_competitions({ parsed: true })).should.eql([]);
+      (await sdv.nwsl.nwsl_competitions({})).should.eql({});
+      (await sdv.nwsl.nwsl_competitions({ parsed: true })).should.eql([]);
     } finally {
       reply = null;
     }
@@ -96,10 +96,10 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
     try {
       reply = fixture('mls_api', 'statsapi_match_single.json');
       const m = { match_id: 'MLS-MAT-0009H8', parsed: true };
-      (await sdv.mls.mls_api_match(m)).should.have.length(1); // match_information
-      (await sdv.mls.mls_api_match({ ...m, section: 'players' })).length.should.be.above(1);
-      (await sdv.mls.mls_api_match({ ...m, section: 'referees' })).length.should.be.above(0);
-      await sdv.mls.mls_api_match({ ...m, section: 'nope' }).should.be.rejectedWith(/unknown section 'nope'/);
+      (await sdv.mls.mls_match(m)).should.have.length(1); // match_information
+      (await sdv.mls.mls_match({ ...m, section: 'players' })).length.should.be.above(1);
+      (await sdv.mls.mls_match({ ...m, section: 'referees' })).length.should.be.above(0);
+      await sdv.mls.mls_match({ ...m, section: 'nope' }).should.be.rejectedWith(/unknown section 'nope'/);
       reply = fixture('asa', 'players_goals-added.json');
       const g = { league_slug: 'mls', parsed: true };
       const summary = await sdv.asa.asa_players_goals_added(g);
@@ -112,7 +112,7 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
   });
 
   it('merges onto the documented namespaces', () => {
-    for (const [ns, fn] of [['mls', 'mls_api_club'], ['nwsl', 'nwsl_api_standings'], ['on3', 'on3_player_profile'],
+    for (const [ns, fn] of [['mls', 'mls_club'], ['nwsl', 'nwsl_standings'], ['on3', 'on3_player_profile'],
       ['asa', 'asa_games'], ['torvik', 'bart_wbb_ratings']]) {
       (typeof sdv[ns][fn]).should.equal('function', `${ns}.${fn}`);
     }

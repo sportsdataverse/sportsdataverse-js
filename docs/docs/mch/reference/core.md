@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.mch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMchAthleteAwards`
+## `espnMchPlayerAwards`
 
-MCH — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+MCH — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_awards` / `espnMchAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ MCH — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_awards(...)
+await sdv.mch.espnMchPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_awards(...)
 ```
 
-## `espnMchAthleteCareerStats`
+## `espnMchPlayerCareerStats`
 
-MCH — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+MCH — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_career_stats` / `espnMchAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ MCH — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_career_stats(...)
+await sdv.mch.espnMchPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_career_stats(...)
 ```
 
-## `espnMchAthleteContracts`
+## `espnMchPlayerContracts`
 
-MCH — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+MCH — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_contracts` / `espnMchAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ MCH — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_contracts(...)
+await sdv.mch.espnMchPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_contracts(...)
 ```
 
-## `espnMchAthleteCore`
+## `espnMchPlayerCore`
 
-MCH — athlete core (ESPN sports.core.api.espn.com (core v2)).
+MCH — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_core` / `espnMchAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ MCH — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_core(...)
+await sdv.mch.espnMchPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_core(...)
 ```
 
-## `espnMchAthleteEventlog`
+## `espnMchPlayerEventlog`
 
-MCH — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+MCH — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_eventlog` / `espnMchAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ MCH — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_eventlog(...)
+await sdv.mch.espnMchPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_eventlog(...)
 ```
 
-## `espnMchAthleteInjuries`
+## `espnMchPlayerInjuries`
 
-MCH — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+MCH — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_injuries` / `espnMchAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ MCH — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_injuries(...)
+await sdv.mch.espnMchPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_injuries(...)
 ```
 
-## `espnMchAthleteNotes`
+## `espnMchPlayerNotes`
 
-MCH — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+MCH — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_notes` / `espnMchAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ MCH — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_notes(...)
+await sdv.mch.espnMchPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_notes(...)
 ```
 
-## `espnMchAthleteRecords`
+## `espnMchPlayerRecords`
 
-MCH — athlete records (ESPN sports.core.api.espn.com (core v2)).
+MCH — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_records` / `espnMchAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ MCH — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_records(...)
+await sdv.mch.espnMchPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_records(...)
 ```
 
-## `espnMchAthleteSeasons`
+## `espnMchPlayerSeasons`
 
-MCH — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+MCH — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_seasons` / `espnMchAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ MCH — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_seasons(...)
+await sdv.mch.espnMchPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_seasons(...)
 ```
 
-## `espnMchAthleteStatisticslog`
+## `espnMchPlayerStatisticslog`
 
-MCH — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+MCH — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_statisticslog` / `espnMchAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ MCH — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_statisticslog(...)
+await sdv.mch.espnMchPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_statisticslog(...)
 ```
 
-## `espnMchAthleteVsAthlete`
+## `espnMchPlayerVsPlayer`
 
-MCH — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+MCH — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_vs_athlete` / `espnMchAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ MCH — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_vs_athlete(...)
+await sdv.mch.espnMchPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_vs_player(...)
 ```
 
-## `espnMchAthletesIndex`
+## `espnMchPlayersIndex`
 
-MCH — athletes index (ESPN sports.core.api.espn.com (core v2)).
+MCH — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athletes_index` / `espnMchAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ MCH — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthletesIndex({});
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athletes_index(...)
+await sdv.mch.espnMchPlayersIndex({});
+// snake_case alias (py/R parity): sdv.mch.espn_mch_players_index(...)
 ```
 
 ## `espnMchAward`
@@ -403,12 +427,14 @@ await sdv.mch.espnMchCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.mch.espn_mch_coach_season(...)
 ```
 
-## `espnMchEvent`
+## `espnMchGame`
 
-MCH — event (ESPN sports.core.api.espn.com (core v2)).
+MCH — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event` / `espnMchEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ MCH — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event(...)
+await sdv.mch.espnMchGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game(...)
 ```
 
-## `espnMchEventBroadcasts`
+## `espnMchGameBroadcasts`
 
-MCH — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+MCH — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_broadcasts` / `espnMchEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ MCH — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_broadcasts(...)
+await sdv.mch.espnMchGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_broadcasts(...)
 ```
 
-## `espnMchEventCompetition`
+## `espnMchGameCompetition`
 
-MCH — event competition (ESPN sports.core.api.espn.com (core v2)).
+MCH — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competition` / `espnMchEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ MCH — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competition(...)
+await sdv.mch.espnMchGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_competition(...)
 ```
 
-## `espnMchEventCompetitor`
+## `espnMchGameTeam`
 
-MCH — event competitor (ESPN sports.core.api.espn.com (core v2)).
+MCH — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitor` / `espnMchEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ MCH — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitor(...)
+await sdv.mch.espnMchGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_team(...)
 ```
 
-## `espnMchEventCompetitorLeaders`
+## `espnMchGameTeamLeaders`
 
-MCH — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+MCH — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitor_leaders` / `espnMchEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ MCH — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitor_leaders(...)
+await sdv.mch.espnMchGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_team_leaders(...)
 ```
 
-## `espnMchEventCompetitorLinescores`
+## `espnMchGameTeamLinescores`
 
-MCH — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+MCH — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitor_linescores` / `espnMchEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ MCH — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitor_linescores(...)
+await sdv.mch.espnMchGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_team_linescores(...)
 ```
 
-## `espnMchEventCompetitorRecord`
+## `espnMchGameTeamRecord`
 
-MCH — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+MCH — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitor_record` / `espnMchEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ MCH — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitor_record(...)
+await sdv.mch.espnMchGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_team_record(...)
 ```
 
-## `espnMchEventCompetitorRoster`
+## `espnMchGameTeamRoster`
 
-MCH — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+MCH — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitor_roster` / `espnMchEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ MCH — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitor_roster(...)
+await sdv.mch.espnMchGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_team_roster(...)
 ```
 
-## `espnMchEventCompetitorStatistics`
+## `espnMchGameTeamStatistics`
 
-MCH — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+MCH — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitor_statistics` / `espnMchEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ MCH — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitor_statistics(...)
+await sdv.mch.espnMchGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_team_statistics(...)
 ```
 
-## `espnMchEventCompetitors`
+## `espnMchGameTeams`
 
-MCH — event competitors (ESPN sports.core.api.espn.com (core v2)).
+MCH — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_competitors` / `espnMchEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ MCH — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_competitors(...)
+await sdv.mch.espnMchGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_teams(...)
 ```
 
-## `espnMchEventLeaders`
+## `espnMchGameLeaders`
 
-MCH — event leaders (ESPN sports.core.api.espn.com (core v2)).
+MCH — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_leaders` / `espnMchEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ MCH — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_leaders(...)
+await sdv.mch.espnMchGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_leaders(...)
 ```
 
-## `espnMchEventOdds`
+## `espnMchGameOdds`
 
-MCH — event odds (ESPN sports.core.api.espn.com (core v2)).
+MCH — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_odds` / `espnMchEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ MCH — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_odds(...)
+await sdv.mch.espnMchGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_odds(...)
 ```
 
-## `espnMchEventOfficialDetail`
+## `espnMchGameOfficialDetail`
 
-MCH — event official detail (ESPN sports.core.api.espn.com (core v2)).
+MCH — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_official_detail` / `espnMchEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ MCH — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_official_detail(...)
+await sdv.mch.espnMchGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_official_detail(...)
 ```
 
-## `espnMchEventOfficials`
+## `espnMchGameOfficials`
 
-MCH — event officials (ESPN sports.core.api.espn.com (core v2)).
+MCH — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_officials` / `espnMchEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ MCH — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_officials(...)
+await sdv.mch.espnMchGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_officials(...)
 ```
 
-## `espnMchEventPlay`
+## `espnMchGamePlay`
 
-MCH — event play (ESPN sports.core.api.espn.com (core v2)).
+MCH — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_play` / `espnMchEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ MCH — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_play(...)
+await sdv.mch.espnMchGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_play(...)
 ```
 
-## `espnMchEventPlayPersonnel`
+## `espnMchGamePlayPersonnel`
 
-MCH — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+MCH — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_play_personnel` / `espnMchEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ MCH — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_play_personnel(...)
+await sdv.mch.espnMchGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_play_personnel(...)
 ```
 
-## `espnMchEventPlays`
+## `espnMchGamePlays`
 
-MCH — event plays (ESPN sports.core.api.espn.com (core v2)).
+MCH — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_plays` / `espnMchEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ MCH — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_plays(...)
+await sdv.mch.espnMchGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_plays(...)
 ```
 
-## `espnMchEventPowerindex`
+## `espnMchGamePowerindex`
 
-MCH — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+MCH — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_powerindex` / `espnMchEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ MCH — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_powerindex(...)
+await sdv.mch.espnMchGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_powerindex(...)
 ```
 
-## `espnMchEventPredictor`
+## `espnMchGamePredictor`
 
-MCH — event predictor (ESPN sports.core.api.espn.com (core v2)).
+MCH — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_predictor` / `espnMchEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ MCH — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_predictor(...)
+await sdv.mch.espnMchGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_predictor(...)
 ```
 
-## `espnMchEventProbabilities`
+## `espnMchGameProbabilities`
 
-MCH — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+MCH — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_probabilities` / `espnMchEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ MCH — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_probabilities(...)
+await sdv.mch.espnMchGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_probabilities(...)
 ```
 
-## `espnMchEventPropbets`
+## `espnMchGamePropbets`
 
-MCH — event propbets (ESPN sports.core.api.espn.com (core v2)).
+MCH — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_propbets` / `espnMchEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ MCH — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_propbets(...)
+await sdv.mch.espnMchGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_propbets(...)
 ```
 
-## `espnMchEventScoringplays`
+## `espnMchGameScoringplays`
 
-MCH — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+MCH — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_scoringplays` / `espnMchEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ MCH — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_scoringplays(...)
+await sdv.mch.espnMchGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_scoringplays(...)
 ```
 
-## `espnMchEventSituation`
+## `espnMchGameSituation`
 
-MCH — event situation (ESPN sports.core.api.espn.com (core v2)).
+MCH — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_situation` / `espnMchEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ MCH — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_situation(...)
+await sdv.mch.espnMchGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_situation(...)
 ```
 
-## `espnMchEventStatus`
+## `espnMchGameStatus`
 
-MCH — event status (ESPN sports.core.api.espn.com (core v2)).
+MCH — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_event_status` / `espnMchEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ MCH — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_event_status(...)
+await sdv.mch.espnMchGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_game_status(...)
 ```
 
-## `espnMchEvents`
+## `espnMchGames`
 
-MCH — events (ESPN sports.core.api.espn.com (core v2)).
+MCH — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_events` / `espnMchEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ MCH — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchEvents({});
-// snake_case alias (py/R parity): sdv.mch.espn_mch_events(...)
+await sdv.mch.espnMchGames({});
+// snake_case alias (py/R parity): sdv.mch.espn_mch_games(...)
 ```
 
 ## `espnMchFranchise`
@@ -1145,11 +1219,13 @@ await sdv.mch.espnMchPositions({});
 // snake_case alias (py/R parity): sdv.mch.espn_mch_positions(...)
 ```
 
-## `espnMchSeasonAthletes`
+## `espnMchSeasonPlayers`
 
-MCH — season athletes (ESPN sports.core.api.espn.com (core v2)).
+MCH — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_season_athletes` / `espnMchSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ MCH — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_season_athletes(...)
+await sdv.mch.espnMchSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_season_players(...)
 ```
 
 ## `espnMchSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.mch.espnMchSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.mch.espn_mch_season_week(...)
 ```
 
-## `espnMchSeasonWeekEvents`
+## `espnMchSeasonWeekGames`
 
-MCH — season week events (ESPN sports.core.api.espn.com (core v2)).
+MCH — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/mens-college-hockey/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_season_week_events` / `espnMchSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ MCH — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mch.espnMchSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_season_week_events(...)
+await sdv.mch.espnMchSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_season_week_games(...)
 ```
 
 ## `espnMchSeasonWeekPowerindex`

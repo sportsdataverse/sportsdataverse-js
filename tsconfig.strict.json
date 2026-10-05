@@ -14,6 +14,12 @@
     "src/core/request.ts",
     "src/core/transforms.ts",
     "src/core/releases.ts",
-    "src/core/nba_stats_runtime.ts"
+    "src/core/sports247_runtime.ts",
+    "src/parsers/sports247.ts",
+    "src/core/deprecation.ts",
+    "src/core/nba_stats_runtime.ts",
+    "src/analytics/hockeytech.ts",
+    "src/models/cricket_wp.ts",
+    "src/odds/math.ts"
   ]
 }

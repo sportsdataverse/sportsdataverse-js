@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.mls`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMlsAthleteGamelog`
+## `espnMlsPlayerGamelog`
 
-MLS — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+MLS — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.1/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_gamelog` / `espnMlsAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ MLS — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_gamelog(...)
+await sdv.mls.espnMlsPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_gamelog(...)
 ```
 
-## `espnMlsAthleteOverview`
+## `espnMlsPlayerOverview`
 
-MLS — athlete overview (ESPN site.web.api.espn.com (web v3)).
+MLS — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.1/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_overview` / `espnMlsAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ MLS — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_overview(...)
+await sdv.mls.espnMlsPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_overview(...)
 ```
 
-## `espnMlsAthleteSplits`
+## `espnMlsPlayerSplits`
 
-MLS — athlete splits (ESPN site.web.api.espn.com (web v3)).
+MLS — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.1/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_splits` / `espnMlsAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ MLS — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_splits(...)
+await sdv.mls.espnMlsPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_splits(...)
 ```
 
-## `espnMlsAthleteStats`
+## `espnMlsPlayerStats`
 
-MLS — athlete stats (ESPN site.web.api.espn.com (web v3)).
+MLS — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.1/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_stats` / `espnMlsAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ MLS — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_stats(...)
+await sdv.mls.espnMlsPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_stats(...)
 ```
 
 ## `espnMlsLeaders`

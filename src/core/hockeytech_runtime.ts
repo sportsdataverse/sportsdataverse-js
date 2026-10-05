@@ -173,14 +173,29 @@ export async function hockeytechGet(
   _url: string,
   config?: { params?: Record<string, unknown> }
 ): Promise<any> {
-  const params = (config?.params ?? {}) as Record<string, any>;
-  let target: string;
+  const body = await hockeytechGetText(config?.params);
+  if (body === null) return {};
   try {
-    target = buildHockeytechUrl(params);
+    return JSON.parse(stripJsonp(body));
   } catch {
     return {};
   }
-  const referer = params.league ? LEAGUE_REFERER[String(params.league)] : undefined;
+}
+
+/**
+ * The raw (still JSONP-wrapped) response text of a HockeyTech feed, or `null` when the
+ * params cannot build a URL / the body is empty. A failed fetch throws. Lets callers tell
+ * an unparseable body (e.g. the plain-text `Feed type access denied.`) from `{}`.
+ */
+export async function hockeytechGetText(params?: Record<string, unknown>): Promise<string | null> {
+  const p = (params ?? {}) as Record<string, any>;
+  let target: string;
+  try {
+    target = buildHockeytechUrl(p);
+  } catch {
+    return null;
+  }
+  const referer = p.league ? LEAGUE_REFERER[String(p.league)] : undefined;
   const headers: Record<string, string> = { "User-Agent": UA, Accept: "application/json" };
   if (referer) headers.Referer = referer;
   // Split the key-bearing query off the URL so error messages never carry it.
@@ -192,13 +207,8 @@ export async function hockeytechGet(
     headers,
     responseType: "text", // raw text; we strip + parse ourselves
   });
-  if (data == null) return {};
-  const body = typeof data === "string" ? data : String(data);
-  try {
-    return JSON.parse(stripJsonp(body));
-  } catch {
-    return {};
-  }
+  if (data == null) return null;
+  return typeof data === "string" ? data : String(data);
 }
 
 // ---------------------------------------------------------------------------

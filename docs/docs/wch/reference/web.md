@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.wch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWchAthleteGamelog`
+## `espnWchPlayerGamelog`
 
-WCH — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+WCH — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/womens-college-hockey/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_gamelog` / `espnWchAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ WCH — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_gamelog(...)
+await sdv.wch.espnWchPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_gamelog(...)
 ```
 
-## `espnWchAthleteOverview`
+## `espnWchPlayerOverview`
 
-WCH — athlete overview (ESPN site.web.api.espn.com (web v3)).
+WCH — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/womens-college-hockey/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_overview` / `espnWchAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ WCH — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_overview(...)
+await sdv.wch.espnWchPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_overview(...)
 ```
 
-## `espnWchAthleteSplits`
+## `espnWchPlayerSplits`
 
-WCH — athlete splits (ESPN site.web.api.espn.com (web v3)).
+WCH — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/womens-college-hockey/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_splits` / `espnWchAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ WCH — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_splits(...)
+await sdv.wch.espnWchPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_splits(...)
 ```
 
-## `espnWchAthleteStats`
+## `espnWchPlayerStats`
 
-WCH — athlete stats (ESPN site.web.api.espn.com (web v3)).
+WCH — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/hockey/womens-college-hockey/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_stats` / `espnWchAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ WCH — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_stats(...)
+await sdv.wch.espnWchPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_stats(...)
 ```
 
 ## `espnWchLeaders`

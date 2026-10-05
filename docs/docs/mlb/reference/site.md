@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.mlb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMlbAthleteBio`
+## `espnMlbPlayerBio`
 
-MLB — athlete bio (ESPN site.api.espn.com).
+MLB — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_bio` / `espnMlbAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ MLB — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_bio(...)
+await sdv.mlb.espnMlbPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_bio(...)
 ```
 
-## `espnMlbAthleteInfo`
+## `espnMlbPlayerInfo`
 
-MLB — athlete info (ESPN site.api.espn.com).
+MLB — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_info` / `espnMlbAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ MLB — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_info(...)
+await sdv.mlb.espnMlbPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_info(...)
 ```
 
-## `espnMlbAthleteNews`
+## `espnMlbPlayerNews`
 
-MLB — athlete news (ESPN site.api.espn.com).
+MLB — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_news` / `espnMlbAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ MLB — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_news(...)
+await sdv.mlb.espnMlbPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_news(...)
 ```
 
 ## `espnMlbCalendar`
