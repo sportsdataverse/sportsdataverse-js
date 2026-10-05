@@ -1,4 +1,7 @@
 import 'should'; // side-effect: installs the `.should` assertion property
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { build } from 'esbuild';
 import { ESPN_ENDPOINT_PARSERS as srcEspn } from '../dist/parsers/espn.js';
 import { PARSERS as srcNative, NODE_ONLY_PARSERS } from '../dist/parsers/_registry.js';
 import '../dist/index.js'; // registers the node-only parsers, so the comparison below is order-independent
@@ -35,5 +38,23 @@ describe('playground parser bundle is in sync with src/parsers', () => {
     const dict = bundle.parseEndpoint('espn', 'summary', { boxscore: {} });
     dict.should.be.an.Object();
     dict.should.have.property('boxscore_team');
+  });
+
+  it('is byte-identical to a fresh `npm run bundle:parsers` (a changed parser BODY is stale too)', async () => {
+    // Same options as the package.json script, built in memory.
+    const root = fileURLToPath(new URL('..', import.meta.url));
+    const out = 'docs/src/playground/parsers.bundle.mjs';
+    const { outputFiles } = await build({
+      absWorkingDir: root,
+      entryPoints: ['src/parsers/browser.ts'],
+      bundle: true,
+      format: 'esm',
+      platform: 'browser',
+      legalComments: 'eof',
+      outfile: out,
+      write: false,
+      logLevel: 'silent',
+    });
+    (outputFiles[0].text === readFileSync(root + out, 'utf8')).should.equal(true, `${out} is stale: run npm run bundle:parsers`);
   });
 });

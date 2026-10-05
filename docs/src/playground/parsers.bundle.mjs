@@ -1870,7 +1870,7 @@ function parse_hockeytech_game_summary(payload) {
   return normalize(goals);
 }
 function parse_hockeytech_scorebar(payload) {
-  return normalize(siteKitRows(payload));
+  return parse_hockeytech_schedule(payload);
 }
 function parse_hockeytech_player_search(payload) {
   return normalize(siteKitRows(payload));
