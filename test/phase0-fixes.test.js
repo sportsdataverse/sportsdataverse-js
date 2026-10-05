@@ -1,6 +1,6 @@
 import should from 'should';
 import axios from 'axios';
-import sdv from '../dist/index.js';
+import sdv, { FLAT_WRAPPERS } from '../dist/index.js';
 import { resolveFlat } from '../dist/core/flat.js';
 import { FLAT_HOSTS } from '../dist/core/client.js';
 
@@ -16,7 +16,8 @@ describe('phase 0 fixes (offline)', () => {
   });
 
   it('a CBS wrapper resolves under /napi/resource/', () => {
-    const def = { api: 'cbs', short: 'boxscore', host: FLAT_HOSTS.cbs, path: '/resource/game/boxscore/{game_id}', pathParams: [{ name: 'game_id', required: true }] };
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'cbs' && w.short === 'boxscore');
+    should(def).exist;
     resolveFlat(def, { game_id: '1' }).url.should.startWith('https://api.cbssports.com/napi/resource/');
   });
 
