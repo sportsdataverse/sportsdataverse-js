@@ -323,6 +323,18 @@ describe('parser parity: nba_stats / wnba_stats `section` = sdv-py result_set (r
         fn(raw, undefined).should.eql(fn(raw), path);
       }
     });
+    it(`${family}: a result set NAMED __proto__ is an own key, like a py dict key`, () => {
+      const raw = {
+        resultSets: [
+          { name: '__proto__', headers: ['A'], rowSet: [[1]] },
+          { name: 'Other', headers: ['B'], rowSet: [[2]] },
+        ],
+      };
+      const all = fn(raw);
+      Object.keys(all).should.eql(['__proto__', 'Other']);
+      Object.prototype.hasOwnProperty.call(all, '__proto__').should.be.true();
+      fn(raw, '__proto__').length.should.equal(1);
+    });
   }
 });
 

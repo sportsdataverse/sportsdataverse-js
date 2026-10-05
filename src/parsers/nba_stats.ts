@@ -247,7 +247,14 @@ export function parse_nba_stats_result_sets(
   }
   const frames: Record<string, Row[]> = {};
   sets.forEach((rs, i) => {
-    frames[rs.name ?? `set_${i}`] = toRows(rs);
+    // An own data property even for a set named `__proto__` (plain assignment would hit
+    // the inherited setter and drop the frame); sdv-py's dict keeps every name.
+    Object.defineProperty(frames, rs.name ?? `set_${i}`, {
+      value: toRows(rs),
+      enumerable: true,
+      writable: true,
+      configurable: true,
+    });
   });
   // sdv-py `result_set`: an unknown name is a zero-row frame there, `[]` here (never throws).
   if (resultSet != null) {
