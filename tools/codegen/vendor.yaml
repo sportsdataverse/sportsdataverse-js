@@ -61,7 +61,9 @@ copy:
 # generate.mjs then applies py's rule: a convention rename that lands on one of
 # these is version-qualified (`athlete_stats` -> `player_stats_v3`), and a flat
 # `{prefix}_{short}` that lands on one gets the family qualifier
-# (`nhl_pbp` -> `nhl_web_pbp`). Only names that change a JS name belong here.
+# (`nhl_pbp` -> `nhl_web_pbp`). Entries are names that change a JS name today, plus
+# py's hand-written `espn_<lg>_pbp` (T22f): they change none yet, but are listed so a
+# future generated wrapper cannot silently take one (test/vendor.test.js checks it).
 # test/naming.test.js compares JS names against sdv-py's generated names at the
 # pin (tools/codegen/py_public_names.json, derived by `npm run vendor` from the
 # verbatim py modules in vendor/upstream/py/); a pin bump that adds a collision

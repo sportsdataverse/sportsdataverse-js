@@ -29,6 +29,7 @@ jobs:
       - run: npm run build
       - name: Live tests
         id: live
+        timeout-minutes: 25 # a hang fails this step, so it reaches the drift issue (a job timeout would not)
         run: SDV_LIVE=1 npm test
       # Only a failing LIVE step is drift. A failure before it (install, build) is a
       # broken checkout, not an upstream change: labelled separately.
@@ -38,13 +39,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          gh label create live-tests:drift --color B60205 --description "Weekly live smoke detected upstream drift" 2>/dev/null || true
+          gh label create --repo "$GITHUB_REPOSITORY" live-tests:drift --color B60205 --description "Weekly live smoke detected upstream drift" 2>/dev/null || true
           body="Live smoke failed: $RUN_URL"
-          n=$(gh issue list --label live-tests:drift --state open --json number --jq '.[0].number // empty')
+          n=$(gh issue list --repo "$GITHUB_REPOSITORY" --label live-tests:drift --state open --json number --jq '.[0].number // empty')
           if [ -n "$n" ]; then
-            gh issue comment "$n" --body "$body"
+            gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "$body"
           else
-            gh issue create --label live-tests:drift --title "Live smoke: upstream drift detected" --body "$body"
+            gh issue create --repo "$GITHUB_REPOSITORY" --label live-tests:drift --title "Live smoke: upstream drift detected" --body "$body"
           fi
       - name: Open or update the build-failure issue
         if: failure() && steps.live.outcome != 'failure'
@@ -52,11 +53,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          gh label create live-tests:build-failure --color D93F0B --description "Weekly live smoke could not run (install/build failed): not drift" 2>/dev/null || true
+          gh label create --repo "$GITHUB_REPOSITORY" live-tests:build-failure --color D93F0B --description "Weekly live smoke could not run (install/build failed): not drift" 2>/dev/null || true
           body="Live smoke could not run: install/build failed before the live tests (not upstream drift): $RUN_URL"
-          n=$(gh issue list --label live-tests:build-failure --state open --json number --jq '.[0].number // empty')
+          n=$(gh issue list --repo "$GITHUB_REPOSITORY" --label live-tests:build-failure --state open --json number --jq '.[0].number // empty')
           if [ -n "$n" ]; then
-            gh issue comment "$n" --body "$body"
+            gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "$body"
           else
-            gh issue create --label live-tests:build-failure --title "Live smoke: build failed (not drift)" --body "$body"
+            gh issue create --repo "$GITHUB_REPOSITORY" --label live-tests:build-failure --title "Live smoke: build failed (not drift)" --body "$body"
           fi

@@ -22,6 +22,7 @@
 // to an sdv-py clone> reads the same ref through `git cat-file` (never the
 // clone's working tree).
 import {
+  appendFileSync,
   readFileSync,
   writeFileSync,
   existsSync,
@@ -242,6 +243,10 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
     throw new Error(`vendor.yaml ${key}: schema_incompatible must be a list of endpoint shorts`);
   }
   const unusedIncompatible = new Set(cfg.schema_incompatible ?? []);
+  // Raw upstream endpoints BEFORE the rename/policy loop below (which deletes a
+  // dropped returns_schema, renames shorts and swaps parsers): what a whole-key overlay
+  // patch actually replaces.
+  const rawUp = new Map(items.map((ep) => [ep, plain(ep)]));
   const pyRefs = new Map(); // endpoint node -> py returns_schema ref it keeps
   const pySchemas = new Map(); // endpoint node -> { short, ref, status } for every py returns_schema
   for (const ep of items) {
@@ -293,8 +298,16 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
       first.commentBefore = [ovSeq.commentBefore, first.commentBefore].filter(Boolean).join("\n");
     }
     const vendored = [...items]; // overlay additions never become patch targets
-    const taken = new Map(); // path -> short, upstream first then overlay additions
-    for (const ep of items) if (ep.get("path") !== undefined) taken.set(String(ep.get("path")), ep.get("short"));
+    // Endpoint identity = host + path + fixed/extra params (upstream ships legitimate
+    // same-path pairs: on3 nil_100 / nil_100_v2 on different hosts, kenpom /history.php
+    // with different query keys), so a bare path would false-positive.
+    const famHost = plain(doc.get("host"));
+    const sig = (ep) => {
+      const o = plain(ep);
+      return stable([o.host ?? famHost ?? null, o.path, o.fixed_params ?? null, o.extra_params ?? null, o.query_params ?? null]);
+    };
+    const taken = new Map(); // signature -> short, upstream first then overlay additions
+    for (const ep of items) if (ep.get("path") !== undefined) taken.set(sig(ep), ep.get("short"));
     for (const oep of ovSeq?.items ?? []) {
       const short = oep.get("short");
       const target = vendored.find((ep) => ep.get("short") === short);
@@ -305,12 +318,13 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
           );
         }
         const addPath = String(oep.get("path"));
-        if (taken.has(addPath)) {
+        const addSig = sig(oep);
+        if (taken.has(addSig)) {
           throw new Error(
-            `overlay/${key}.yaml ${short}: path ${addPath} duplicates endpoint ${taken.get(addPath)} (upstream or an earlier overlay addition); patch that endpoint instead`
+            `overlay/${key}.yaml ${short}: path ${addPath} (same host and params) duplicates endpoint ${taken.get(addSig)} (upstream or an earlier overlay addition); patch that endpoint instead`
           );
         }
-        taken.set(addPath, short);
+        taken.set(addSig, short);
         seq.add(oep);
         continue;
       }
@@ -328,7 +342,8 @@ function transformFamilyUncached(key, cfg, upstreamText, overlayText, source) {
         }
         // Remember what upstream said, so a pin bump can tell when a whole-key patch
         // is now masking a changed upstream value (findMaskedPatches).
-        patches.push({ short, k, upstream: stable(plain(target.get(k, true))) ?? "(absent)" });
+        const rawVal = rawUp.get(target)?.[k];
+        patches.push({ short, k, upstream: rawVal === undefined ? "(absent)" : stable(rawVal) });
         target.set(k, pair.value);
         if (k === "returns_schema") {
           pyRefs.delete(target); // JS-owned now
@@ -375,10 +390,11 @@ export function findMaskedPatches(family, oldPatches, newPatches) {
   const old = new Map(oldPatches.map((p) => [`${p.short}.${p.k}`, p.upstream]));
   return newPatches
     .filter((p) => old.has(`${p.short}.${p.k}`) && old.get(`${p.short}.${p.k}`) !== p.upstream)
-    .map(
-      (p) =>
-        `overlay/${family}.yaml ${p.short}.${p.k} replaces the whole upstream value, and sdv-py changed that value in this bump: the change is MASKED by the overlay; review whether the patch still applies`
-    );
+    .map((p) => {
+      const was = old.get(`${p.short}.${p.k}`);
+      const cut = (s) => (s.length > 120 ? `${s.slice(0, 117)}...` : s);
+      return `overlay/${family}.yaml ${p.short}.${p.k} replaces the whole upstream value, and sdv-py changed that value in this bump (${cut(was)} -> ${cut(p.upstream)}): the change is MASKED by the overlay; review whether the patch still applies`;
+    });
 }
 
 /** The whole-key overlay patches a family currently applies (see findMaskedPatches). */
@@ -707,16 +723,18 @@ function gitSource(repo, ref) {
 /**
  * GET with a bounded retry (default 3 attempts, exponential backoff) on network
  * errors, per-attempt timeouts and HTTP 5xx only. Each attempt gets its own
- * `AbortSignal.timeout(timeoutMs)` (default 30 s, covering headers AND body), so a
- * hung socket cannot stall a job: the worst case per URL is
- * `attempts * timeoutMs + backoff` = 3 * 30 s + 0.5 s + 1 s = 91.5 s. Any other status (403 rate limit/entitlement, 404, ...)
- * fails at once, and exhausted retries still throw: this never turns a failure into
- * a pass. `fetchImpl` / `sleep` are injectable for tests.
+ * `AbortSignal.timeout(timeoutMs)` (default 30 s); the signal stays attached while
+ * the body streams, and with `readBody` (`res => Promise`) the body is read INSIDE
+ * the attempt, so a body timeout or reset is retried and the error names the URL.
+ * Worst case per URL: `attempts * timeoutMs + backoff` = 3 * 30 s + 0.5 s + 1 s = 91.5 s.
+ * Any other status (403 rate limit/entitlement, 404, ...) fails at once, and exhausted
+ * retries still throw: this never turns a failure into a pass. `fetchImpl` / `sleep`
+ * are injectable for tests.
  */
 export async function fetchWithRetry(
   url,
   opts = {},
-  { fetchImpl = fetch, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), attempts = 3, baseMs = 500, timeoutMs = 30_000 } = {}
+  { fetchImpl = fetch, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), attempts = 3, baseMs = 500, timeoutMs = 30_000, readBody = null } = {}
 ) {
   let last;
   for (let i = 0; i < attempts; i++) {
@@ -724,6 +742,7 @@ export async function fetchWithRetry(
     let res;
     try {
       res = await fetchImpl(url, { ...opts, signal: AbortSignal.timeout(timeoutMs) });
+      if (res.ok && readBody) return await readBody(res); // body timeouts/resets retry too, naming the URL
     } catch (e) {
       last = new Error(`GET ${url} -> network error: ${e.message ?? e}`);
       continue;
@@ -737,14 +756,14 @@ export async function fetchWithRetry(
 
 export function githubSource(repoSlug, ref, retryOpts = {}) {
   const headers = process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {};
-  const get = (url, opts = {}) => fetchWithRetry(url, opts, retryOpts); // API and raw.githubusercontent alike
+  const get = (url, opts = {}, readBody) => fetchWithRetry(url, opts, { ...retryOpts, readBody }); // API and raw.githubusercontent alike
   return {
     async tree(extra = []) {
       const url = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_CODEGEN.slice(0, -1)}?recursive=1`;
-      const j = await (await get(url, { headers })).json();
+      const j = await get(url, { headers }, (r) => r.json());
       if (j.truncated) throw new Error(`tree listing truncated: ${url}`);
       const pkgUrl = `https://api.github.com/repos/${repoSlug}/git/trees/${ref}:${PY_PKG}?recursive=1`;
-      const pkg = await (await get(pkgUrl, { headers })).json();
+      const pkg = await get(pkgUrl, { headers }, (r) => r.json());
       if (pkg.truncated) throw new Error(`tree listing truncated: ${pkgUrl}`);
       return new Map([
         ...j.tree
@@ -760,7 +779,7 @@ export function githubSource(repoSlug, ref, retryOpts = {}) {
         while (next < paths.length) {
           const i = next++;
           const url = `https://raw.githubusercontent.com/${repoSlug}/${ref}/${repoPath(paths[i])}`;
-          out[i] = Buffer.from(await (await get(url)).arrayBuffer());
+          out[i] = await get(url, {}, async (r) => Buffer.from(await r.arrayBuffer()));
         }
       };
       await Promise.all(Array.from({ length: 8 }, worker));
@@ -913,7 +932,12 @@ async function main(argv) {
     if (dangling.length) console.warn(`vendor: upstream names schemas it does not ship: ${dangling.join(", ")}`);
   }
   for (const [key, old] of oldPatches) {
-    for (const w of findMaskedPatches(key, old, familyPatches(CODEGEN_DIR, key))) console.warn(`vendor: WARNING ${w}`);
+    for (const w of findMaskedPatches(key, old, familyPatches(CODEGEN_DIR, key))) {
+      console.warn(`vendor: WARNING ${w}`);
+      // CI sets this so the sync PR body and the step summary can show the warning.
+      if (process.env.SDV_VENDOR_WARNINGS) appendFileSync(process.env.SDV_VENDOR_WARNINGS, `- ${w}
+`);
+    }
   }
   const { written, removed } = writeVendor();
   if (before) for (const r of findStaleAfterBump(CODEGEN_DIR, before, deriveAll())) {

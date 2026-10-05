@@ -642,7 +642,7 @@ describe('workflows: LOCK online check + vendor-sync failure handling', () => {
     (sync.env ?? {}).should.not.have.property('GITHUB_TOKEN');
     (sync.env ?? {}).should.not.have.property('GH_TOKEN');
     sync.steps.filter((s) => s.env?.GITHUB_TOKEN).map((s) => s.name).should.eql(['Vendor (fetch + online LOCK check)']);
-    sync.steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure', 'Run CI on the sync branch']);
+    sync.steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure']);
     sync.steps.find((s) => s.name === 'Vendor (fetch + online LOCK check)').run.should.match(/vendor:check:online/);
     // codegen runs in its own step, without the token
     const cg = sync.steps.find((s) => s.id === 'codegen');
@@ -684,6 +684,16 @@ describe('vendor: fetch hardening', () => {
     n.should.equal(3);
   });
 
+  it('a body-phase reset is retried and names the URL when it never recovers', async () => {
+    let n = 0;
+    const body = async () => { n++; throw new Error('ECONNRESET'); };
+    await fetchWithRetry('http://x/y', {}, { ...fast, readBody: body, fetchImpl: async () => ({ ok: true, status: 200 }) }).should.be.rejectedWith(/GET http:\/\/x\/y -> network error: ECONNRESET/);
+    n.should.equal(3);
+    n = 0;
+    const flaky = async () => { if (++n < 3) throw new Error('reset'); return 'ok'; };
+    (await fetchWithRetry('u', {}, { ...fast, readBody: flaky, fetchImpl: async () => ({ ok: true, status: 200 }) })).should.equal('ok');
+  });
+
   it('raw.githubusercontent file fetches retry like the API ones', async () => {
     const calls = [];
     const fetchImpl = async (url) => {
@@ -720,7 +730,7 @@ describe('vendor: fetch hardening', () => {
 
 describe('vendor: overlay vs upstream', () => {
   it('rejects an overlay addition whose path duplicates a vendored endpoint', () => {
-    const ep = family('cbs').doc.endpoints.find((e) => e.path);
+    const ep = family('cbs').doc.endpoints.find((e) => e.path && !e.extra_params && !e.fixed_params && !e.query_params && !e.host);
     (() => family('cbs', `endpoints:\n  - short: zz_dup\n    path: ${JSON.stringify(ep.path)}\n`)).should.throw(
       /overlay\/cbs\.yaml zz_dup: path .* duplicates endpoint/
     );
@@ -728,7 +738,7 @@ describe('vendor: overlay vs upstream', () => {
 
   it('rejects two overlay additions that share a path', () => {
     const ov = `endpoints:\n  - short: zz_a\n    path: /zz/unique\n  - short: zz_b\n    path: /zz/unique\n`;
-    (() => family('cbs', ov)).should.throw(/zz_b: path \/zz\/unique duplicates endpoint zz_a/);
+    (() => family('cbs', ov)).should.throw(/zz_b: path .zz.unique .* duplicates endpoint zz_a/);
   });
 
   it('records what upstream said for a patched key, and warns when a pin bump changes it (masking)', () => {
@@ -744,7 +754,32 @@ describe('vendor: overlay vs upstream', () => {
     findMaskedPatches('cbs', oldP, newP).should.have.length(1);
     findMaskedPatches('cbs', oldP, newP)[0].should.match(/overlay\/cbs\.yaml .*path replaces the whole upstream value.*MASKED/);
     findMaskedPatches('cbs', oldP, oldP).should.eql([]); // unchanged upstream: silent
+    findMaskedPatches('cbs', oldP, newP)[0].should.match(/\(".*" -> ".*\/v2"\)/); // old -> new in the message
     familyPatches(CODEGEN_DIR, 'cbs').length.should.be.above(0);
+  });
+
+  it('records the RAW upstream value even where the schema policy dropped it (not all "(absent)")', () => {
+    let seen = 0;
+    let rows = 0;
+    for (const k of Object.keys(manifest.families)) {
+      if (!existsSync(join(CODEGEN_DIR, 'overlay', k + '.yaml'))) continue;
+      for (const p of familyPatches(CODEGEN_DIR, k)) {
+        rows++;
+        if (p.k === 'returns_schema' && p.upstream !== '(absent)') seen++;
+      }
+    }
+    rows.should.be.above(100);
+    seen.should.be.above(0); // before the fix every returns_schema patch recorded (absent)
+  });
+
+  it('the duplicate-path check keys on host + path + params, so legitimate same-path endpoints pass', () => {
+    const cfg = manifest.families.cbs;
+    const text = upstream('endpoints/' + (cfg.from ?? 'cbs') + '.yaml');
+    const ep = family('cbs').doc.endpoints.find((e) => e.path && !e.extra_params && !e.fixed_params);
+    const other = 'endpoints:\n  - short: zz_other_host\n    host: https://other.example\n    path: ' + JSON.stringify(ep.path) + '\n';
+    (() => transformFamily('cbs', cfg, text, other, manifest.source)).should.not.throw();
+    const params = 'endpoints:\n  - short: zz_params\n    path: ' + JSON.stringify(ep.path) + '\n    extra_params:\n      - {name: zz, query_key: zz, type: str}\n';
+    (() => transformFamily('cbs', cfg, text, params, manifest.source)).should.not.throw();
   });
 });
 
@@ -786,27 +821,41 @@ describe('workflows: hardening', () => {
   const files = readdirSync(wfDir).filter((f) => f.endsWith('.yml'));
   const tokenish = /secrets\.|github\.token|GITHUB_TOKEN|GH_TOKEN/;
 
-  it('no workflow leaks a secret/token via workflow-level env, job-level env, or an inline ${{ secrets.* }} in run:/with:', () => {
-    for (const f of files) {
-      const wf = load(f);
-      JSON.stringify(wf.env ?? {}).should.not.match(tokenish, `${f}: workflow-level env`);
-      for (const [name, job] of Object.entries(wf.jobs)) {
-        JSON.stringify(job.env ?? {}).should.not.match(tokenish, `${f}: job ${name} env`);
-        for (const s of job.steps ?? []) {
-          (s.run ?? '').should.not.match(/\$\{\{\s*(secrets|github\.token)/, `${f}: ${name}/${s.name ?? s.id} run`);
-          JSON.stringify(s.with ?? {}).should.not.match(/\$\{\{\s*(secrets|github\.token)/, `${f}: ${name}/${s.name ?? s.id} with`);
-        }
-      }
-    }
+  // The ONE allowed place for a token/secret expression is a step's env. Everything else
+  // (workflow/job env, run:, with:, if:, container credentials, secrets: inherit) is a leak.
+  const TOKEN_EXPR = /\$\{\{(?:(?!\}\}).)*?\b(?:secrets\b|github\s*(?:\.\s*token\b|\[\s*['"]token['"]\s*\]))/;
+  const tokenLeaks = (wf) => {
+    const w = structuredClone(wf);
+    for (const j of Object.values(w.jobs ?? {})) for (const s of j.steps ?? []) delete s.env;
+    const txt = JSON.stringify(w);
+    return TOKEN_EXPR.test(txt) || /"secrets":"inherit"/.test(txt);
+  };
+
+  it('no workflow leaks a secret/token outside a step env', () => {
+    for (const f of files) tokenLeaks(load(f)).should.be.false(f);
   });
 
-  it('the scoping check itself fails on each leak shape', () => {
-    const leaks = [
-      { env: { GH_TOKEN: '${{ github.token }}' } },
-      { env: { T: '${{ secrets.X }}' } },
-    ];
-    for (const l of leaks) JSON.stringify(l.env).should.match(tokenish);
-    '${{ secrets.NPM }}'.should.match(/\$\{\{\s*(secrets|github\.token)/);
+  it('tokenLeaks catches every leak shape (mutated clones of a real workflow)', () => {
+    const base = load('vendor-sync.yml');
+    const mutate = (fn) => { const w = structuredClone(base); fn(w); return w; };
+    const stepOf = (w, id) => w.jobs.sync.steps.find((s) => s.id === id);
+    const cases = {
+      'workflow env': (w) => { w.env = { T: '${{ secrets.X }}' }; },
+      'job env': (w) => { w.jobs.sync.env = { T: '${{ github.token }}' }; },
+      'run inline': (w) => { stepOf(w, 'codegen').run = 'echo ${{ secrets.NPM_TOKEN }}'; },
+      'with inline': (w) => { w.jobs.sync.steps.at(-1).with = { token: '${{ secrets.PAT }}' }; },
+      'toJSON(secrets)': (w) => { stepOf(w, 'codegen').run = 'echo ${{ toJSON(secrets) }}'; },
+      "secrets['X']": (w) => { stepOf(w, 'codegen').run = "echo ${{ secrets['X'] }}"; },
+      "github['token']": (w) => { stepOf(w, 'codegen').run = "echo ${{ github['token'] }}"; },
+      'format()': (w) => { stepOf(w, 'codegen').run = "echo ${{ format('{0}', secrets.X) }}"; },
+      'secrets: inherit': (w) => { w.jobs.sync.secrets = 'inherit'; },
+      'container credentials': (w) => { w.jobs.sync.container = { image: 'x', credentials: { username: 'u', password: '${{ secrets.P }}' } }; },
+      'if expression': (w) => { stepOf(w, 'codegen').if = "${{ secrets.X != '' }}"; },
+    };
+    tokenLeaks(base).should.be.false();
+    for (const [name, fn] of Object.entries(cases)) tokenLeaks(mutate(fn)).should.be.true(name);
+    // and a step-level env stays allowed
+    tokenLeaks(mutate((w) => { stepOf(w, 'codegen').env = { GH_TOKEN: '${{ github.token }}' }; })).should.be.false();
   });
 
   it('every job in ci / vendor-sync / live-smoke has timeout-minutes', () => {
@@ -832,23 +881,54 @@ describe('workflows: hardening', () => {
     build.if.should.equal("failure() && steps.live.outcome != 'failure'");
     build.run.should.match(/live-tests:build-failure/).and.not.match(/live-tests:drift/);
     steps.indexOf(live).should.be.above(steps.findIndex((s) => s.run === 'npm run build'));
+    live['timeout-minutes'].should.be.below(wf.jobs.live['timeout-minutes']); // a hang fails the step, so the issue step still runs
+    for (const s of steps.filter((x) => /gh (issue|label)/.test(x.run ?? ''))) {
+      s.run.split('\n').filter((l) => /gh (issue (list|create|comment)|label create)/.test(l)).every((l) => l.includes('--repo "$GITHUB_REPOSITORY"')).should.be.true();
+    }
   });
 
-  it('vendor-sync dispatches CI on the sync branch (GITHUB_TOKEN PRs start no pull_request run)', () => {
+  it('vendor-sync dispatches CI from a SEPARATE job: actions: write exists nowhere else', () => {
     const ci = load('ci.yml');
     Object.keys(ci.on).should.containEql('workflow_dispatch');
     const wf = load('vendor-sync.yml');
-    wf.permissions.actions.should.equal('write');
-    const steps = wf.jobs.sync.steps;
-    const cprIdx = steps.findIndex((s) => s.uses?.startsWith('peter-evans/create-pull-request@'));
-    steps[cprIdx].id.should.equal('cpr');
-    const d = steps[steps.findIndex((s) => s.name === 'Run CI on the sync branch')];
-    steps.indexOf(d).should.be.above(cprIdx);
-    d.run.should.match(/gh workflow run ci\.yml .*--ref chore\/vendor-sync/);
-    steps[cprIdx].with.branch.should.equal('chore/vendor-sync');
-    d.if.should.match(/pull-request-operation == 'created'/).and.match(/pull-request-operation == 'updated'/);
-    d.env.GH_TOKEN.should.equal('${{ github.token }}'); // only on this step
-    steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure', 'Run CI on the sync branch']);
+    wf.permissions.should.eql({}); // no workflow-wide grant
+    const sync = wf.jobs.sync;
+    sync.permissions.should.eql({ contents: 'write', 'pull-requests': 'write', issues: 'write' });
+    sync.outputs.op.should.equal('${{ steps.cpr.outputs.pull-request-operation }}');
+    const cpr = sync.steps.find((s) => s.uses?.startsWith('peter-evans/create-pull-request@'));
+    cpr.id.should.equal('cpr');
+    cpr.with.branch.should.equal('chore/vendor-sync');
+    const d = wf.jobs['dispatch-ci'];
+    d.needs.should.equal('sync');
+    d.if.should.match(/needs\.sync\.outputs\.op == 'created'/).and.match(/needs\.sync\.outputs\.op == 'updated'/);
+    d.permissions.should.eql({ actions: 'write' });
+    d['timeout-minutes'].should.be.belowOrEqual(5);
+    // fresh VM, nothing of ours runs next to the token
+    d.steps.should.have.length(1);
+    d.steps.some((s) => /checkout|setup-node/.test(s.uses ?? '') || /\bnpm\b/.test(s.run ?? '')).should.be.false();
+    d.steps[0].run.should.match(/gh workflow run ci\.yml .*--ref chore\/vendor-sync/);
+    d.steps[0].env.GH_TOKEN.should.equal('${{ github.token }}');
+    // actions: write on no other job or workflow level, in any workflow
+    for (const f of files) {
+      const w = load(f);
+      JSON.stringify(w.permissions ?? {}).should.not.match(/actions/, f + ' workflow-level');
+      for (const [name, job] of Object.entries(w.jobs)) {
+        if (f === 'vendor-sync.yml' && name === 'dispatch-ci') continue;
+        JSON.stringify(job.permissions ?? {}).should.not.match(/actions/, f + ':' + name);
+      }
+    }
+    sync.steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure']);
+  });
+
+  it('the vendor step has its own timeout and surfaces masked-patch warnings in the PR body', () => {
+    const w = load('vendor-sync.yml');
+    const steps = w.jobs.sync.steps;
+    const v = steps.find((s) => s.id === 'vendor');
+    v['timeout-minutes'].should.be.below(w.jobs.sync['timeout-minutes']);
+    v.env.SDV_VENDOR_WARNINGS.should.equal('vendor-warnings.txt');
+    const body = steps.find((s) => s.name === 'Build PR body').run;
+    body.should.match(/vendor-warnings\.txt/).and.match(/GITHUB_STEP_SUMMARY/).and.match(/CI was dispatched/);
+    body.should.not.match(/close\/reopen/);
   });
 
   it('the vendor-sync failure issue carries the resolved sdv-py sha', () => {

@@ -15,11 +15,11 @@ on:
         description: "sdv-py commit sha to vendor (default: main HEAD)"
         required: false
 
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  actions: write # only for `gh workflow run ci.yml` on the sync branch
+# No workflow-wide grant: each job asks for exactly what it needs. `actions: write`
+# (dispatching CI) lives on the separate `dispatch-ci` job ONLY, because the sync job
+# runs upstream-generated code and installed npm deps with a contents:write token; a
+# token that could also dispatch workflows could start npm-publish.yml.
+permissions: {}
 
 concurrency:
   group: vendor-sync
@@ -29,6 +29,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    outputs:
+      op: ${{ steps.cpr.outputs.pull-request-operation }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
         with:
@@ -55,9 +61,11 @@ jobs:
         id: vendor
         if: steps.ref.outcome == 'success'
         continue-on-error: true
+        timeout-minutes: 15 # a hang becomes a step failure that reaches the report step
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SHA: ${{ steps.ref.outputs.sha }}
+          SDV_VENDOR_WARNINGS: vendor-warnings.txt # masked overlay patches, shown in the PR body
         run: |
           npm run vendor -- --ref "$SHA"
           npm run vendor:check:online
@@ -113,8 +121,16 @@ jobs:
             echo
             echo "A failure usually means sdv-py added a parser name or endpoint that needs a"
             echo "\`tools/codegen/vendor.yaml\` mapping or an \`overlay/\` entry. PRs opened by"
-            echo "GITHUB_TOKEN do not trigger CI: close/reopen this PR (or push to it) to run it."
+            echo "GITHUB_TOKEN start no pull_request run, so CI was dispatched on the branch"
+            echo "(`workflow_dispatch`): its checks attach to the branch head."
             echo
+            if [ -s vendor-warnings.txt ]; then
+              echo "**Overlay patches masking upstream changes (review):**"
+              echo
+              cat vendor-warnings.txt
+              echo
+              { echo "### vendor warnings"; cat vendor-warnings.txt; } >> "$GITHUB_STEP_SUMMARY"
+            fi
             echo '<details><summary>npm test (tail)</summary>'
             echo
             echo '```'
@@ -137,11 +153,20 @@ jobs:
             docs/docs/**
             docs/src/generated/**
             docs/src/playground/endpoints.json
-      # A PR opened/updated with GITHUB_TOKEN starts no pull_request run. workflow_dispatch
-      # is exempt from that rule, so dispatch CI on the branch: its check runs attach to
-      # the branch head commit and so show on the PR. The token lives on this step only.
+
+  # A PR opened/updated with GITHUB_TOKEN starts no pull_request run, but
+  # workflow_dispatch is exempt, so dispatch CI on the branch (its check runs attach to
+  # the branch head, so they show on the PR). Its own job on a fresh VM: no checkout, no
+  # npm, no upstream-generated code, and the only token anywhere with `actions: write`.
+  dispatch-ci:
+    needs: sync
+    if: needs.sync.outputs.op == 'created' || needs.sync.outputs.op == 'updated'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
       - name: Run CI on the sync branch
-        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref chore/vendor-sync
