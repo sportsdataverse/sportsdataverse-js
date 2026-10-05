@@ -333,3 +333,13 @@ describe('hockeytech: 20-league registry + new views', () => {
     err.message.should.match(/Provide either season/);
   });
 });
+
+describe('hockeytech: league_id injection', () => {
+  it('sends the registry leagueId on scorebar/transactions/brackets, explicit wins, none elsewhere', () => {
+    buildHockeytechUrl({ league: 'ahl', feed: 'modulekit', view: 'scorebar' }).should.match(/league_id=4/);
+    buildHockeytechUrl({ league: 'whl', feed: 'modulekit', view: 'transactions' }).should.match(/league_id=7/);
+    buildHockeytechUrl({ league: 'qmjhl', feed: 'modulekit', view: 'brackets' }).should.match(/league_id=6/);
+    buildHockeytechUrl({ league: 'ahl', view: 'scorebar', league_id: 9 }).should.match(/league_id=9/);
+    buildHockeytechUrl({ league: 'ahl', feed: 'modulekit', view: 'seasons' }).should.not.match(/league_id/);
+  });
+});

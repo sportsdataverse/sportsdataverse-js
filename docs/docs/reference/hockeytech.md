@@ -36,15 +36,15 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `hockeytech_player_game_log` / `hockeytechPlayerGameLog` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `player_id`, `season_id`, `category`, `feed`, `view` | `parse_hockeytech_player_game_log` | — |
 | `hockeytech_player_search` / `hockeytechPlayerSearch` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `search_term`, `feed`, `view` | `parse_hockeytech_player_search` | — |
 | `hockeytech_player_stats` / `hockeytechPlayerStats` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `player_id`, `category`, `feed`, `view` | `parse_hockeytech_player_stats` | — |
-| `hockeytech_playoff_bracket` / `hockeytechPlayoffBracket` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `feed`, `view` | `parse_hockeytech_playoff_bracket` | — |
-| `hockeytech_schedule` / `hockeytechSchedule` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `view` | `parse_hockeytech_schedule` | — |
-| `hockeytech_scorebar` / `hockeytechScorebar` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `view` | `parse_hockeytech_scorebar` | — |
+| `hockeytech_playoff_bracket` / `hockeytechPlayoffBracket` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `feed`, `league_id`, `view` | `parse_hockeytech_playoff_bracket` | — |
+| `hockeytech_schedule` / `hockeytechSchedule` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `league_id`, `view` | `parse_hockeytech_schedule` | — |
+| `hockeytech_scorebar` / `hockeytechScorebar` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `league_id`, `view` | `parse_hockeytech_scorebar` | — |
 | `hockeytech_seasons` / `hockeytechSeasons` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `feed`, `view` | `parse_hockeytech_seasons` | — |
 | `hockeytech_standings` / `hockeytechStandings` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id` → `season`, `feed`, `view`, `group_teams_by` → `groupTeamsBy`, `context`, `special`, `sort` | `parse_hockeytech_standings` | — |
 | `hockeytech_stats` / `hockeytechStats` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `type`, `feed`, `view` | `parse_hockeytech_stats` | — |
 | `hockeytech_team_roster` / `hockeytechTeamRoster` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `team_id`, `season_id`, `feed`, `view` | `parse_hockeytech_team_roster` | — |
 | `hockeytech_teams` / `hockeytechTeams` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id` → `season`, `feed`, `view` | `parse_hockeytech_teams` | — |
-| `hockeytech_transactions` / `hockeytechTransactions` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `feed`, `view` | `parse_hockeytech_transactions` | — |
+| `hockeytech_transactions` / `hockeytechTransactions` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `feed`, `league_id`, `view` | `parse_hockeytech_transactions` | — |
 
 ### Returns — `hockeytech_game_shifts` / `hockeytechGameShifts`
 

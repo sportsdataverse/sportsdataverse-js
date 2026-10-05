@@ -415,6 +415,10 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
       "default": "modulekit"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "brackets"
@@ -432,6 +436,7 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.season_id - query parameter.
  * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `brackets`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -479,6 +484,10 @@ const SCHEDULE_DEF: WrapperDef = {
       "default": "modulekit"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "scorebar"
@@ -499,6 +508,7 @@ const SCHEDULE_DEF: WrapperDef = {
  * @param params.number_of_days_ahead - query parameter (`numberofdaysahead`) — default `10000`.
  * @param params.limit - query parameter — default `10000`.
  * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `scorebar`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -542,6 +552,10 @@ const SCOREBAR_DEF: WrapperDef = {
       "default": "modulekit"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "scorebar"
@@ -561,6 +575,7 @@ const SCOREBAR_DEF: WrapperDef = {
  * @param params.number_of_days_ahead - query parameter (`numberofdaysahead`) — default `3`.
  * @param params.limit - query parameter — default `100`.
  * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `scorebar`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -864,6 +879,10 @@ const TRANSACTIONS_DEF: WrapperDef = {
       "default": "modulekit"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "transactions"
@@ -880,6 +899,7 @@ const TRANSACTIONS_DEF: WrapperDef = {
  *
  * @param params.league - query parameter.
  * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `transactions`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.

@@ -49,6 +49,7 @@ endpoints:
       - { name: number_of_days_ahead, query_key: numberofdaysahead, default: 10000 }
       - { name: limit, query_key: limit, default: 10000 }
       - { name: feed, query_key: feed, default: modulekit }
+      - { name: league_id, query_key: league_id }
       - { name: view, query_key: view, default: scorebar }
     parser: parse_hockeytech_schedule
     returns_schema: native/hockeytech/schedule
@@ -98,6 +99,7 @@ endpoints:
       - { name: number_of_days_ahead, query_key: numberofdaysahead, default: 3 }
       - { name: limit, query_key: limit, default: 100 }
       - { name: feed, query_key: feed, default: modulekit }
+      - { name: league_id, query_key: league_id }
       - { name: view, query_key: view, default: scorebar }
     parser: parse_hockeytech_scorebar
     returns_schema: native/hockeytech/scorebar
@@ -136,6 +138,7 @@ endpoints:
     extra_params:
       - { name: league, query_key: league }
       - { name: feed, query_key: feed, default: modulekit }
+      - { name: league_id, query_key: league_id }
       - { name: view, query_key: view, default: transactions }
     parser: parse_hockeytech_transactions
     returns_schema: native/hockeytech/transactions
@@ -145,6 +148,7 @@ endpoints:
       - { name: league, query_key: league }
       - { name: season_id, query_key: season_id }
       - { name: feed, query_key: feed, default: modulekit }
+      - { name: league_id, query_key: league_id }
       - { name: view, query_key: view, default: brackets }
     parser: parse_hockeytech_playoff_bracket
     returns_schema: native/hockeytech/playoff_bracket

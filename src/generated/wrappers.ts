@@ -17102,6 +17102,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "modulekit"
       },
       {
+        "name": "league_id",
+        "queryKey": "league_id"
+      },
+      {
         "name": "view",
         "queryKey": "view",
         "default": "scorebar"
@@ -17277,6 +17281,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "modulekit"
       },
       {
+        "name": "league_id",
+        "queryKey": "league_id"
+      },
+      {
         "name": "view",
         "queryKey": "view",
         "default": "scorebar"
@@ -17411,6 +17419,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "modulekit"
       },
       {
+        "name": "league_id",
+        "queryKey": "league_id"
+      },
+      {
         "name": "view",
         "queryKey": "view",
         "default": "transactions"
@@ -17440,6 +17452,10 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "feed",
         "queryKey": "feed",
         "default": "modulekit"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "league_id"
       },
       {
         "name": "view",

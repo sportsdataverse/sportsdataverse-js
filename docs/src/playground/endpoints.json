@@ -17384,6 +17384,10 @@
           "default": "modulekit"
         },
         {
+          "name": "league_id",
+          "queryKey": "league_id"
+        },
+        {
           "name": "view",
           "queryKey": "view",
           "default": "scorebar"
@@ -17559,6 +17563,10 @@
           "default": "modulekit"
         },
         {
+          "name": "league_id",
+          "queryKey": "league_id"
+        },
+        {
           "name": "view",
           "queryKey": "view",
           "default": "scorebar"
@@ -17693,6 +17701,10 @@
           "default": "modulekit"
         },
         {
+          "name": "league_id",
+          "queryKey": "league_id"
+        },
+        {
           "name": "view",
           "queryKey": "view",
           "default": "transactions"
@@ -17722,6 +17734,10 @@
           "name": "feed",
           "queryKey": "feed",
           "default": "modulekit"
+        },
+        {
+          "name": "league_id",
+          "queryKey": "league_id"
         },
         {
           "name": "view",
