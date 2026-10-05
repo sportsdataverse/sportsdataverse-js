@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnNflCdnSchedule } from '../generated/espn/nfl.js';
+import { cdnDate, warnFootballDate } from './_cdn.js';
 /**
  * Operations for NFL.
  *
@@ -148,24 +150,21 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {*} month - Month (MM)
      * @param {*} day - Day (DD)
+     * @param {number} week - Week number. The CDN schedule page is week-oriented and ignores a
+     * date, so pass `week` (with `year` = the season) to pick a week; without it the current
+     * week comes back (and a date warns once).
+     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3 (with `week`)
      * @returns json
      * @example
-     * const result = await sdv.nfl.getSchedule(
-     * year = 2019, month = 11, day = 17
-     * )
+     * const result = await sdv.nfl.getSchedule({ year: 2024, week: 5, seasontype: 2 })
      */
-    getSchedule: async function ({ year = null, month = null, day = null }) {
-        const baseUrl = `http://cdn.espn.com/core/nfl/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        const params: Record<string, any> = {
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+    getSchedule: async function ({ year = null, month = null, day = null, week = null, seasontype = 2 }) {
+        // The CDN ignores a date for football: select the week (espn_nfl_cdn_schedule).
+        if (week == null && cdnDate(year, month, day)) warnFootballDate("nfl");
+        const res = await espnNflCdnSchedule(
+            week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
+        );
+        return res.content.schedule;
     },
 
 

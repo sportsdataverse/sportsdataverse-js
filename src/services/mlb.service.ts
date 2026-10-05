@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnMlbCdnSchedule } from '../generated/espn/mlb.js';
+import { cdnDate } from './_cdn.js';
 /**
  * Operations for MLB.
  *
@@ -153,21 +155,9 @@ export default {
    * )
    */
   getSchedule: async function ({ year, month, day }) {
-    const baseUrl = `http://cdn.espn.com/core/mlb/schedule`;
-
-    const params: Record<string, any> = {
-      xhr: 1,
-      render: false,
-      device: "desktop",
-      userab: 18,
-    };
-    if (year && month && day) {
-      params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-    }
-    const res = await axios.get(baseUrl, {
-      params,
-    });
-    return res.data.content.schedule;
+    // espn_mlb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
+    const res = await espnMlbCdnSchedule({ date: cdnDate(year, month, day) });
+    return res.content.schedule;
   },
   /**
    * Gets the MLB scoreboard data for a specified date if available.

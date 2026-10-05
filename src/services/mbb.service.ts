@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnMbbCdnSchedule } from '../generated/espn/mbb.js';
+import { cdnDate } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
@@ -297,8 +299,8 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {*} month - Month (MM)
      * @param {*} day - Day (DD)
-     * @param {number} group - Group is 50 for Division-I, 51 for Division-II, 52 for Division-III
-     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+     * @param {number} group - Ignored: the espn.com schedule page always serves Division I (50)
+     * @param {number} seasontype - Ignored by the espn.com schedule page
      * @returns json
      * @example
      * const result = await sdv.mbb.getSchedule(
@@ -312,17 +314,9 @@ export default {
         group = 50,
         seasontype = 2
     }) {
-        const baseUrl = `http://cdn.espn.com/core/mens-college-basketball/schedule?dates=${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        const params: Record<string, any> = {
-            groups: group,
-            seasontype: seasontype,
-            xhr: 1
-        };
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+        // espn_mbb_cdn_schedule sends the CDN's `date` key (`dates` is ignored).
+        const res = await espnMbbCdnSchedule({ date: cdnDate(year, month, day) });
+        return res.content.schedule;
     },
     /**
      * Gets the Men's College Basketball scoreboard data for a specified date if available.

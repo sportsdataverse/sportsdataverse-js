@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { espnCfbCdnSchedule } from '../generated/espn/cfb.js';
+import { cdnDate, warnFootballDate } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for College Football.
@@ -369,30 +371,22 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {*} month - Month (MM)
      * @param {*} day - Day (DD)
-     * @param {number} group - Group is 80 for FBS, 81 for FCS
-     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4
+     * @param {number} group - Ignored: the espn.com CFB schedule page always serves FBS (80)
+     * @param {number} seasontype - Pre-Season: 1, Regular Season: 2, Postseason: 3, Off-season: 4 (with `week`)
+     * @param {number} week - Week number. The CDN schedule page is week-oriented and ignores a
+     * date, so pass `week` (with `year` = the season) to pick a week; without it the current
+     * week comes back (and a date warns once).
      * @returns json
      * @example
-     * const result = await sdv.cfb.getSchedule(year = 2019, month = 11, day = 16, group=80)
+     * const result = await sdv.cfb.getSchedule({ year: 2024, week: 12, seasontype: 2 })
      */
-    getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2 }) {
-        const baseUrl = `http://cdn.espn.com/core/college-football/schedule`;
-        const params: Record<string, any> = {
-            groups: groups,
-            seasontype: seasontype,
-            xhr: 1,
-            render: false,
-            device: 'desktop',
-            userab: 18
-        };
-        if (year && month && day) {
-            params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
-        }
-
-        const res = await axios.get(baseUrl, {
-            params
-        });
-        return res.data.content.schedule;
+    getSchedule: async function ({ year, month, day, groups = 80, seasontype = 2, week = null }) {
+        // The CDN ignores a date for football: select the week (espn_cfb_cdn_schedule).
+        if (week == null && cdnDate(year, month, day)) warnFootballDate("cfb");
+        const res = await espnCfbCdnSchedule(
+            week != null ? { week, season: year, season_type: seasontype } : { date: cdnDate(year, month, day) }
+        );
+        return res.content.schedule;
     },
     /**
      * Gets the College Football scoreboard data for a specified date if available.
