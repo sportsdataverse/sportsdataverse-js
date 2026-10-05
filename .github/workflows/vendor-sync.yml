@@ -4,8 +4,8 @@ name: Vendor sync (sdv-py)
 # `main` HEAD, re-vendor the shared endpoint YAML + schemas, regenerate, test,
 # and open (or update) ONE sync PR. The diff is what sdv-py changed; a failing
 # test is reported in the PR body rather than blocking it (a py parser name with
-# no JS mapping, say, needs a vendor.yaml entry — a human call). A vendor/fetch
-# failure (or a LOCK mismatch against sdv-py's tree) opens or updates one issue.
+# no JS mapping, say, needs a vendor.yaml entry — a human call). A ref/vendor/
+# codegen failure (or a LOCK mismatch against sdv-py's tree) opens or updates one issue.
 on:
   schedule:
     - cron: "0 14 * * 1" # Mondays 14:00 UTC
@@ -40,6 +40,7 @@ jobs:
       - run: npm ci
       - name: Resolve the sdv-py ref
         id: ref
+        continue-on-error: true # a failure is reported by "Report sync failure"
         env:
           INPUT_REF: ${{ inputs.ref }}
         run: |
@@ -47,9 +48,10 @@ jobs:
           [[ "$sha" =~ ^[0-9a-f]{40}$ ]] || { echo "not a full commit sha: $sha"; exit 1; }
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
           echo "short=${sha:0:10}" >> "$GITHUB_OUTPUT"
-      # The only step that sees GITHUB_TOKEN (API rate limit for the tree fetch).
-      - name: Vendor + regenerate
+      # Only this step sees GITHUB_TOKEN (API rate limit for the tree fetch).
+      - name: Vendor (fetch + online LOCK check)
         id: vendor
+        if: steps.ref.outcome == 'success'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,16 +59,24 @@ jobs:
         run: |
           npm run vendor -- --ref "$SHA"
           npm run vendor:check:online
-          npm run codegen
-      - name: Report vendor failure
-        if: steps.vendor.outcome == 'failure'
+      - name: Regenerate
+        id: codegen
+        if: steps.vendor.outcome == 'success'
+        continue-on-error: true
+        run: npm run codegen
+      - name: Report sync failure
+        if: always() && (steps.ref.outcome == 'failure' || steps.vendor.outcome == 'failure' || steps.codegen.outcome == 'failure')
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          SHA: ${{ steps.ref.outputs.sha }}
+          VENDOR_OUTCOME: ${{ steps.vendor.outcome }}
+          CODEGEN_OUTCOME: ${{ steps.codegen.outcome }}
         run: |
+          failed="resolve ref"
+          [ "$VENDOR_OUTCOME" = failure ] && failed="vendor (fetch / LOCK check)"
+          [ "$CODEGEN_OUTCOME" = failure ] && failed="codegen"
           title="vendor-sync failed"
-          body="The weekly vendor sync could not vendor sportsdataverse-py@$SHA (fetch error, blob mismatch or LOCK/tree mismatch): $RUN_URL"
+          body="The weekly vendor sync failed at: $failed. $RUN_URL"
           n=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$n" ]; then
             gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "$body"
@@ -76,7 +86,7 @@ jobs:
           exit 1 # keep the run red as well; the issue is the durable record
       - name: Test
         id: test
-        if: steps.vendor.outcome == 'success'
+        if: steps.codegen.outcome == 'success'
         continue-on-error: true
         # Explicit `shell: bash` runs `bash --noprofile --norc -eo pipefail`; the
         # default (`bash -e`) has no pipefail, so a failing `npm test` piped into
@@ -87,7 +97,7 @@ jobs:
           npm run build
           npm test 2>&1 | tail -n 60 > test-summary.txt
       - name: Build PR body
-        if: steps.vendor.outcome == 'success'
+        if: steps.codegen.outcome == 'success'
         env:
           SHA: ${{ steps.ref.outputs.sha }}
           OUTCOME: ${{ steps.test.outcome }}
@@ -109,7 +119,7 @@ jobs:
             echo '```'
             echo '</details>'
           } > pr-body.md
-      - if: steps.vendor.outcome == 'success'
+      - if: steps.codegen.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
         with:
           branch: chore/vendor-sync

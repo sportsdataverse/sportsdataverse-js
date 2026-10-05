@@ -14,6 +14,7 @@ import {
   CODEGEN_DIR,
   checkVendor,
   deriveAll,
+  fetchWithRetry,
   findStaleAfterBump,
   writeVendor,
   gitBlobSha,
@@ -368,8 +369,7 @@ describe('vendor:check (offline drift gate)', function () {
       writeVendor(tmp); // re-derive so the offline gate is satisfied too
       checkVendor(tmp).should.eql([]);
       const problems = await verifyLockOnline(tmp, treeOf(genuine));
-      problems.should.have.length(1);
-      problems[0].should.match(/endpoints\/cbs_napi\.yaml is pinned to blob .* but upstream has /);
+      problems.some((p) => /endpoints\/cbs_napi\.yaml is pinned to blob .* but upstream has /.test(p)).should.be.true();
     });
 
     it('fails on a LOCK path missing upstream, and rejects (never passes) when the fetch fails', async () => {
@@ -379,6 +379,119 @@ describe('vendor:check (offline drift gate)', function () {
       await verifyLockOnline(tmp, async () => {
         throw new Error('GET https://api.github.com/... -> HTTP 403');
       }).should.be.rejectedWith(/HTTP 403/);
+    });
+
+    it('fails when a path is dropped from LOCK and its vendored copy hand-edited (completeness probe)', async () => {
+      const genuine = readLock(tmp);
+      const path = 'schemas/native/nhl_edge/skater_detail.yaml';
+      genuine.has(path).should.be.true();
+      rmSync(join(tmp, 'vendor', 'upstream', path));
+      const lockFile = join(tmp, 'vendor', 'upstream', 'LOCK');
+      writeFileSync(lockFile, readFileSync(lockFile, 'utf8').split('\n').filter((l) => !l.endsWith(`  ${path}`)).join('\n'));
+      const vendored = join(tmp, path);
+      writeFileSync(vendored, readFileSync(vendored, 'utf8') + '# hand edit\n');
+      checkVendor(tmp).should.eql([]); // the offline gate cannot see it
+      const problems = await verifyLockOnline(tmp, treeOf(genuine));
+      problems.should.have.length(1);
+      problems[0].should.match(/skater_detail\.yaml is missing from LOCK/);
+    });
+
+    it('fails on an extra LOCK path the vendor would not fetch', async () => {
+      const tree = readLock(tmp);
+      tree.set('schemas/native/zzz/extra.yaml', 'a'.repeat(40));
+      const lockFile = join(tmp, 'vendor', 'upstream', 'LOCK');
+      writeFileSync(lockFile, readFileSync(lockFile, 'utf8') + `${'a'.repeat(40)}  schemas/native/zzz/extra.yaml\n`);
+      (await verifyLockOnline(tmp, treeOf(tree)))[0].should.match(/extra\.yaml is in LOCK but is not a file the vendor fetches/);
+    });
+
+    describe('fetchWithRetry', () => {
+      const res = (status) => ({ ok: status < 400, status });
+      const opts = (impl) => ({ fetchImpl: impl, sleep: async () => {}, attempts: 3 });
+      it('retries 5xx and network errors, then succeeds', async () => {
+        const seq = [() => res(502), () => { throw new Error('ECONNRESET'); }, () => res(200)];
+        let n = 0;
+        (await fetchWithRetry('u', {}, opts(async () => seq[n++]()))).status.should.equal(200);
+        n.should.equal(3);
+      });
+      it('still fails when retries are exhausted', async () => {
+        let n = 0;
+        await fetchWithRetry('u', {}, opts(async () => (n++, res(503)))).should.be.rejectedWith(/HTTP 503/);
+        n.should.equal(3);
+        n = 0;
+        await fetchWithRetry('u', {}, opts(async () => { n++; throw new Error('ETIMEDOUT'); })).should.be.rejectedWith(/network error: ETIMEDOUT/);
+        n.should.equal(3);
+      });
+      it('never retries 403 / 404', async () => {
+        for (const status of [403, 404]) {
+          let n = 0;
+          await fetchWithRetry('u', {}, opts(async () => (n++, res(status)))).should.be.rejectedWith(new RegExp(`HTTP ${status}`));
+          n.should.equal(1);
+        }
+      });
+    });
+  });
+
+  describe('pin-bump pruning through `vendor.mjs` (main)', function () {
+    this.timeout(120000);
+    const REF = 'native/nhl_edge/skater_detail';
+    const SCHEMA = `schemas/${REF}.yaml`;
+    // A two-commit stand-in for sdv-py: commit 1 = the committed upstream copy; commit 2
+    // drops REF's `returns_schema:` line from the endpoint file and the schema file.
+    const twoCommitRepo = () => {
+      const repo = mkdtempSync(join(tmpdir(), 'sdv-vendor-repo-'));
+      const git = (...a) => {
+        const r = spawnSync('git', ['-C', repo, '-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', ...a], { encoding: 'utf8' });
+        r.status.should.equal(0, r.stderr);
+        return r.stdout.trim();
+      };
+      git('init', '-q');
+      const up = join(tmp, 'vendor', 'upstream');
+      const walk = (d, pre = '') => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name), `${pre}${e.name}/`) : [`${pre}${e.name}`]));
+      for (const p of walk(up).filter((f) => f !== 'LOCK' && f !== 'REF')) {
+        put(join(repo, p.startsWith('py/') ? p.slice(3) : `tools/codegen/${p}`), readFileSync(join(up, p)));
+      }
+      git('add', '-A');
+      git('commit', '-q', '-m', 'old');
+      const sha1 = git('rev-parse', 'HEAD');
+      const ep = join(repo, 'tools', 'codegen', 'endpoints', 'nhl_edge.yaml');
+      const text = readFileSync(ep, 'utf8');
+      text.should.match(new RegExp(`returns_schema: ${REF}\\b`));
+      writeFileSync(ep, text.split('\n').filter((l) => !new RegExp(`returns_schema: ${REF}\\s*$`).test(l)).join('\n'));
+      rmSync(join(repo, 'tools', 'codegen', SCHEMA));
+      git('add', '-A');
+      git('commit', '-q', '-m', 'new');
+      return { repo, sha1, sha2: git('rev-parse', 'HEAD') };
+    };
+    const bump = (repo, sha) =>
+      spawnSync(process.execPath, [join(CODEGEN_DIR, 'vendor.mjs'), '--ref', sha], {
+        env: { ...process.env, SDV_PY_REPO: repo, SDV_VENDOR_ROOT: tmp },
+        encoding: 'utf8',
+      });
+
+    it('removes a schema copy the new pin dropped', () => {
+      const { repo, sha2 } = twoCommitRepo();
+      try {
+        readFileSync(join(tmp, SCHEMA), 'utf8'); // vendored at the old pin
+        const r = bump(repo, sha2);
+        r.status.should.equal(0, r.stderr);
+        r.stdout.should.match(new RegExp(`removed tools/codegen/${SCHEMA}`));
+        spawnSync('node', ['-e', `require('fs').statSync(${JSON.stringify(join(tmp, SCHEMA))})`]).status.should.not.equal(0);
+      } finally {
+        rmSync(repo, { recursive: true, force: true });
+      }
+    });
+
+    it('keeps an old-only schema a JS-owned endpoint still references', () => {
+      const { repo, sha2 } = twoCommitRepo();
+      try {
+        put(join(tmp, 'endpoints', 'js_owned.yaml'), `endpoints:\n  - short: mine\n    path: /x\n    returns_schema: ${REF}\n`);
+        const r = bump(repo, sha2);
+        r.status.should.equal(0, r.stderr);
+        r.stdout.should.not.match(/removed tools\/codegen\/schemas\/native\/nhl_edge\/skater_detail/);
+        readFileSync(join(tmp, SCHEMA), 'utf8').should.be.a.String();
+      } finally {
+        rmSync(repo, { recursive: true, force: true });
+      }
     });
   });
 
@@ -481,21 +594,26 @@ describe('workflows: LOCK online check + vendor-sync failure handling', () => {
     ci.some((s) => s.run === 'npm run vendor:check:online').should.be.true();
   });
 
-  it('GITHUB_TOKEN is exposed to the vendor step only (never job-wide or in other steps)', () => {
+  it('GITHUB_TOKEN / GH_TOKEN appear only on the steps that need them', () => {
     (sync.env ?? {}).should.not.have.property('GITHUB_TOKEN');
-    const withToken = sync.steps.filter((s) => s.env?.GITHUB_TOKEN).map((s) => s.name);
-    withToken.should.eql(['Vendor + regenerate']);
-    sync.steps.find((s) => s.name === 'Vendor + regenerate').run.should.match(/vendor:check:online/);
+    (sync.env ?? {}).should.not.have.property('GH_TOKEN');
+    sync.steps.filter((s) => s.env?.GITHUB_TOKEN).map((s) => s.name).should.eql(['Vendor (fetch + online LOCK check)']);
+    sync.steps.filter((s) => s.env?.GH_TOKEN).map((s) => s.name).should.eql(['Report sync failure']);
+    sync.steps.find((s) => s.name === 'Vendor (fetch + online LOCK check)').run.should.match(/vendor:check:online/);
+    // codegen runs in its own step, without the token
+    const cg = sync.steps.find((s) => s.id === 'codegen');
+    cg.run.should.equal('npm run codegen');
+    (cg.env ?? {}).should.eql({});
   });
 
-  it('a vendor failure opens or updates an issue instead of only going red', () => {
-    const v = sync.steps.find((s) => s.name === 'Vendor + regenerate');
-    v.id.should.equal('vendor');
-    v['continue-on-error'].should.be.true();
-    const issue = sync.steps.find((s) => s.name === 'Report vendor failure');
-    issue.if.should.match(/steps\.vendor\.outcome == 'failure'/);
-    issue.run.should.match(/gh issue (create|comment)/);
-    // later steps only run when vendoring succeeded
-    sync.steps.find((s) => s.id === 'test').if.should.match(/steps\.vendor\.outcome == 'success'/);
+  it('a ref/vendor/codegen failure opens or updates an issue and keeps the run red', () => {
+    for (const id of ['ref', 'vendor', 'codegen']) sync.steps.find((s) => s.id === id)['continue-on-error'].should.be.true();
+    const issue = sync.steps.find((s) => s.name === 'Report sync failure');
+    for (const id of ['ref', 'vendor', 'codegen']) issue.if.should.match(new RegExp(`steps\.${id}\.outcome == 'failure'`));
+    issue.if.should.match(/^always\(\)/);
+    issue.run.should.match(/gh issue create/).and.match(/gh issue comment/);
+    issue.run.trimEnd().split('\n').pop().should.match(/^exit 1/); // red after reporting
+    // later steps only run when everything before them succeeded
+    sync.steps.find((s) => s.id === 'test').if.should.match(/steps\.codegen\.outcome == 'success'/);
   });
 });
