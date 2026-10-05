@@ -4,6 +4,7 @@
 export function nowToggle(ep) {
   if (ep.now_toggle) return ep.now_toggle;
   const pp = ep.path_params ?? [];
-  const noneDefault = pp.find((p) => p.required === false && p.default === undefined);
+  // `== null`: py's `default is None` also holds for an explicit YAML `default: null`
+  const noneDefault = pp.find((p) => p.required === false && p.default == null);
   return (noneDefault ?? pp[pp.length - 1])?.name;
 }

@@ -26,6 +26,7 @@ describe('now_variant routing (nhl_api_web / nhl_edge / nhl_records)', () => {
     nowToggle({ now_toggle: 'x', path_params: [{ name: 'a' }] }).should.equal('x');
     nowToggle({ path_params: [{ name: 'a' }, { name: 'b', required: false }, { name: 'c', required: false }] }).should.equal('b');
     nowToggle({ path_params: [{ name: 'a', required: false, default: 1 }, { name: 'z' }] }).should.equal('z');
+    nowToggle({ path_params: [{ name: 'a', required: false, default: null }, { name: 'z' }] }).should.equal('a');
     should(nowToggle({})).be.undefined();
   });
 
