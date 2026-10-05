@@ -1,0 +1,66 @@
+schema: playoff_bracket
+kind: dataframe
+columns:
+- name: round_number
+  type: character
+  description: 'Round number within the playoffs.'
+- name: round_name
+  type: character
+  description: 'HockeyTech `round_name` field.'
+- name: round_season_id
+  type: character
+  description: 'HockeyTech `round_season_id` field.'
+- name: round_type_id
+  type: character
+  description: 'HockeyTech `round_type_id` field.'
+- name: round_type_name
+  type: character
+  description: 'HockeyTech `round_type_name` field.'
+- name: series_letter
+  type: character
+  description: 'HockeyTech `series_letter` field.'
+- name: series_name
+  type: character
+  description: 'HockeyTech `series_name` field.'
+- name: series_logo
+  type: character
+  description: 'HockeyTech `series_logo` field.'
+- name: round
+  type: character
+  description: 'HockeyTech `round` field.'
+- name: active
+  type: character
+  description: 'HockeyTech `active` field.'
+- name: feeder_series1
+  type: character
+  description: 'HockeyTech `feeder_series1` field.'
+- name: feeder_series2
+  type: character
+  description: 'HockeyTech `feeder_series2` field.'
+- name: team1
+  type: character
+  description: 'HockeyTech `team1` field.'
+- name: team2
+  type: character
+  description: 'HockeyTech `team2` field.'
+- name: content_en
+  type: character
+  description: 'HockeyTech `content_en` field.'
+- name: content_fr
+  type: character
+  description: 'HockeyTech `content_fr` field.'
+- name: winner
+  type: character
+  description: 'HockeyTech `winner` field.'
+- name: games
+  type: character
+  description: 'HockeyTech `games` field.'
+- name: team1_wins
+  type: character
+  description: 'HockeyTech `team1_wins` field.'
+- name: team2_wins
+  type: character
+  description: 'HockeyTech `team2_wins` field.'
+- name: ties
+  type: character
+  description: 'HockeyTech `ties` field.'

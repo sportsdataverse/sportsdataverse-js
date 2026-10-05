@@ -123,6 +123,12 @@ import {
   parse_hockeytech_leaders,
   parse_hockeytech_pbp,
   parse_hockeytech_game_summary,
+  parse_hockeytech_scorebar,
+  parse_hockeytech_player_search,
+  parse_hockeytech_stats,
+  parse_hockeytech_player_game_log,
+  parse_hockeytech_transactions,
+  parse_hockeytech_playoff_bracket,
 } from "./hockeytech.js";
 import {
   parse_torvik_ratings,
@@ -258,6 +264,12 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_hockeytech_leaders,
   parse_hockeytech_pbp,
   parse_hockeytech_game_summary,
+  parse_hockeytech_scorebar,
+  parse_hockeytech_player_search,
+  parse_hockeytech_stats,
+  parse_hockeytech_player_game_log,
+  parse_hockeytech_transactions,
+  parse_hockeytech_playoff_bracket,
   // ---- BartTorvik / T-Rank (barttorvik.com) ----
   // Two header-CSV parsers, one headerless-CSV (67 positional cols), two
   // headerless-JSON (31 / 55 positional cols).

@@ -1605,8 +1605,29 @@ function siteKitRows(payload) {
   }
   return [];
 }
+function deriveSeasonYear(name) {
+  const s = String(name ?? "");
+  const m = /(\d{4})-(\d{2})/.exec(s);
+  if (m) {
+    const start = Number(m[1]);
+    let end = Math.floor(start / 100) * 100 + Number(m[2]);
+    if (end < start) end += 100;
+    return end;
+  }
+  const m2 = /(\d{4})/.exec(s);
+  return m2 ? Number(m2[1]) : null;
+}
+function gameTypeLabel(name) {
+  const n = String(name ?? "").toLowerCase();
+  if (/pre[- ]?season/.test(n)) return "preseason";
+  if (/playoff|post/.test(n)) return "playoffs";
+  return "regular";
+}
 function parse_hockeytech_seasons(payload) {
-  return normalize(siteKitRows(payload));
+  const rows = siteKitRows(payload).map(
+    (r) => isPlainObject15(r) ? { ...r, season_yr: deriveSeasonYear(r.season_name), game_type_label: gameTypeLabel(r.season_name) } : r
+  );
+  return normalize(rows);
 }
 function parse_hockeytech_schedule(payload) {
   return normalize(siteKitRows(payload));
@@ -1690,6 +1711,45 @@ function parse_hockeytech_game_summary(payload) {
   const goals = isPlainObject15(summary) ? summary.goals : void 0;
   if (!Array.isArray(goals)) return [];
   return normalize(goals);
+}
+function parse_hockeytech_scorebar(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_player_search(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_stats(payload) {
+  return normalize(siteKitRows(payload));
+}
+function parse_hockeytech_player_game_log(payload) {
+  const kit = isPlainObject15(payload) ? payload.SiteKit : void 0;
+  const player = isPlainObject15(kit) ? kit.Player : void 0;
+  const games = isPlainObject15(player) ? player.games : void 0;
+  return Array.isArray(games) ? normalize(games) : [];
+}
+function parse_hockeytech_transactions(payload) {
+  const kit = isPlainObject15(payload) ? payload.SiteKit : void 0;
+  const tx = isPlainObject15(kit) ? kit.Transactions : void 0;
+  const rows = isPlainObject15(tx) ? tx.transactions : void 0;
+  return Array.isArray(rows) ? normalize(rows) : [];
+}
+function parse_hockeytech_playoff_bracket(payload) {
+  const kit = isPlainObject15(payload) ? payload.SiteKit : void 0;
+  const br = isPlainObject15(kit) ? kit.Brackets : void 0;
+  const rounds = isPlainObject15(br) ? br.rounds : void 0;
+  if (!Array.isArray(rounds)) return [];
+  const rows = [];
+  for (const rd of rounds) {
+    if (!isPlainObject15(rd)) continue;
+    const { matchups, ...roundFields } = rd;
+    if (!Array.isArray(matchups)) continue;
+    for (const m of matchups) {
+      if (!isPlainObject15(m)) continue;
+      const prefixed = Object.fromEntries(Object.entries(roundFields).map(([k, v]) => [k === "round" ? "round_number" : k.startsWith("round_") ? k : `round_${k}`, v]));
+      rows.push({ ...prefixed, ...m });
+    }
+  }
+  return normalize(rows);
 }
 
 // src/parsers/torvik.ts
@@ -2069,6 +2129,12 @@ var PARSERS = {
   parse_hockeytech_leaders,
   parse_hockeytech_pbp,
   parse_hockeytech_game_summary,
+  parse_hockeytech_scorebar,
+  parse_hockeytech_player_search,
+  parse_hockeytech_stats,
+  parse_hockeytech_player_game_log,
+  parse_hockeytech_transactions,
+  parse_hockeytech_playoff_bracket,
   // ---- BartTorvik / T-Rank (barttorvik.com) ----
   // Two header-CSV parsers, one headerless-CSV (67 positional cols), two
   // headerless-JSON (31 / 55 positional cols).

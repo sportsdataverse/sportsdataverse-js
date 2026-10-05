@@ -1,4 +1,5 @@
 import cfb from './services/cfb.service.js';
+import { hockeytechSeasonId, mostRecentHockeytechSeason, resolveSeasonId } from './core/hockeytech_runtime.js';
 import mbb from './services/mbb.service.js';
 import mlb from './services/mlb.service.js';
 import nba from './services/nba.service.js';
@@ -102,6 +103,18 @@ for (const [name, fn] of Object.entries(mlbStatcastExtra)) {
   if (typeof fn !== 'function') continue; // skip exported types/interfaces
   sdv.mlb[name] = fn;
   sdv.mlb[toCamel(name)] = fn;
+}
+
+// HockeyTech season-id helpers (py `<lg>_season_id` / `most_recent_<lg>_season` /
+// `resolve_season_id`, league-parameterised) merged onto `sdv.hockeytech`.
+const hockeytechSeasonExtra = {
+  hockeytech_season_id: hockeytechSeasonId,
+  most_recent_hockeytech_season: mostRecentHockeytechSeason,
+  hockeytech_resolve_season_id: resolveSeasonId,
+};
+for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
+  sdv.hockeytech[name] = fn;
+  sdv.hockeytech[toCamel(name)] = fn;
 }
 
 export default sdv;

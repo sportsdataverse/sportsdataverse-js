@@ -1,0 +1,267 @@
+schema: stats
+kind: dataframe
+columns:
+- name: player_id
+  type: character
+  description: 'HockeyTech player id.'
+- name: shortname
+  type: character
+  description: 'HockeyTech `shortname` field.'
+- name: first_name
+  type: character
+  description: 'HockeyTech `first_name` field.'
+- name: last_name
+  type: character
+  description: 'HockeyTech `last_name` field.'
+- name: name
+  type: character
+  description: 'HockeyTech `name` field.'
+- name: phonetic_name
+  type: character
+  description: 'HockeyTech `phonetic_name` field.'
+- name: active
+  type: character
+  description: 'HockeyTech `active` field.'
+- name: height
+  type: character
+  description: 'HockeyTech `height` field.'
+- name: weight
+  type: character
+  description: 'HockeyTech `weight` field.'
+- name: last_years_club
+  type: character
+  description: 'HockeyTech `last_years_club` field.'
+- name: age
+  type: character
+  description: 'HockeyTech `age` field.'
+- name: shoots
+  type: character
+  description: 'HockeyTech `shoots` field.'
+- name: position
+  type: character
+  description: 'HockeyTech `position` field.'
+- name: suspension_games_remaining
+  type: character
+  description: 'HockeyTech `suspension_games_remaining` field.'
+- name: suspension_indefinite
+  type: character
+  description: 'HockeyTech `suspension_indefinite` field.'
+- name: rookie
+  type: character
+  description: 'HockeyTech `rookie` field.'
+- name: veteran
+  type: character
+  description: 'HockeyTech `veteran` field.'
+- name: draft_eligible
+  type: character
+  description: 'HockeyTech `draft_eligible` field.'
+- name: jersey_number
+  type: character
+  description: 'HockeyTech `jersey_number` field.'
+- name: team_name
+  type: character
+  description: 'HockeyTech `team_name` field.'
+- name: team_code
+  type: character
+  description: 'HockeyTech `team_code` field.'
+- name: team_id
+  type: character
+  description: 'HockeyTech team id.'
+- name: division
+  type: character
+  description: 'HockeyTech `division` field.'
+- name: birthdate
+  type: character
+  description: 'HockeyTech `birthdate` field.'
+- name: birthdate_year
+  type: character
+  description: 'HockeyTech `birthdate_year` field.'
+- name: hometown
+  type: character
+  description: 'HockeyTech `hometown` field.'
+- name: homeprov
+  type: character
+  description: 'HockeyTech `homeprov` field.'
+- name: homecntry
+  type: character
+  description: 'HockeyTech `homecntry` field.'
+- name: birthtown
+  type: character
+  description: 'HockeyTech `birthtown` field.'
+- name: birthprov
+  type: character
+  description: 'HockeyTech `birthprov` field.'
+- name: birthcntry
+  type: character
+  description: 'HockeyTech `birthcntry` field.'
+- name: hometownprov
+  type: character
+  description: 'HockeyTech `hometownprov` field.'
+- name: homeplace
+  type: character
+  description: 'HockeyTech `homeplace` field.'
+- name: games_played
+  type: character
+  description: 'HockeyTech `games_played` field.'
+- name: game_winning_goals
+  type: character
+  description: 'HockeyTech `game_winning_goals` field.'
+- name: game_tieing_goals
+  type: character
+  description: 'HockeyTech `game_tieing_goals` field.'
+- name: first_goals
+  type: character
+  description: 'HockeyTech `first_goals` field.'
+- name: insurance_goals
+  type: character
+  description: 'HockeyTech `insurance_goals` field.'
+- name: unassisted_goals
+  type: character
+  description: 'HockeyTech `unassisted_goals` field.'
+- name: empty_net_goals
+  type: character
+  description: 'HockeyTech `empty_net_goals` field.'
+- name: overtime_goals
+  type: character
+  description: 'HockeyTech `overtime_goals` field.'
+- name: ice_time
+  type: character
+  description: 'HockeyTech `ice_time` field.'
+- name: ice_time_avg
+  type: character
+  description: 'HockeyTech `ice_time_avg` field.'
+- name: goals
+  type: character
+  description: 'HockeyTech `goals` field.'
+- name: shots
+  type: character
+  description: 'HockeyTech `shots` field.'
+- name: loose_ball_recoveries
+  type: character
+  description: 'HockeyTech `loose_ball_recoveries` field.'
+- name: caused_turnovers
+  type: character
+  description: 'HockeyTech `caused_turnovers` field.'
+- name: turnovers
+  type: character
+  description: 'HockeyTech `turnovers` field.'
+- name: hits
+  type: character
+  description: 'HockeyTech `hits` field.'
+- name: shots_blocked_by_player
+  type: character
+  description: 'HockeyTech `shots_blocked_by_player` field.'
+- name: ice_time_minutes_seconds
+  type: character
+  description: 'HockeyTech `ice_time_minutes_seconds` field.'
+- name: shooting_percentage
+  type: character
+  description: 'HockeyTech `shooting_percentage` field.'
+- name: assists
+  type: character
+  description: 'HockeyTech `assists` field.'
+- name: points
+  type: character
+  description: 'HockeyTech `points` field.'
+- name: points_per_game
+  type: character
+  description: 'HockeyTech `points_per_game` field.'
+- name: plus_minus
+  type: character
+  description: 'HockeyTech `plus_minus` field.'
+- name: penalty_minutes
+  type: character
+  description: 'HockeyTech `penalty_minutes` field.'
+- name: penalty_minutes_per_game
+  type: character
+  description: 'HockeyTech `penalty_minutes_per_game` field.'
+- name: ice_time_per_game_avg
+  type: character
+  description: 'HockeyTech `ice_time_per_game_avg` field.'
+- name: hits_per_game_avg
+  type: character
+  description: 'HockeyTech `hits_per_game_avg` field.'
+- name: minor_penalties
+  type: character
+  description: 'HockeyTech `minor_penalties` field.'
+- name: major_penalties
+  type: character
+  description: 'HockeyTech `major_penalties` field.'
+- name: power_play_goals
+  type: character
+  description: 'HockeyTech `power_play_goals` field.'
+- name: power_play_assists
+  type: character
+  description: 'HockeyTech `power_play_assists` field.'
+- name: power_play_points
+  type: character
+  description: 'HockeyTech `power_play_points` field.'
+- name: short_handed_goals
+  type: character
+  description: 'HockeyTech `short_handed_goals` field.'
+- name: short_handed_assists
+  type: character
+  description: 'HockeyTech `short_handed_assists` field.'
+- name: short_handed_points
+  type: character
+  description: 'HockeyTech `short_handed_points` field.'
+- name: shootout_goals
+  type: character
+  description: 'HockeyTech `shootout_goals` field.'
+- name: shootout_attempts
+  type: character
+  description: 'HockeyTech `shootout_attempts` field.'
+- name: shootout_winning_goals
+  type: character
+  description: 'HockeyTech `shootout_winning_goals` field.'
+- name: shootout_games_played
+  type: character
+  description: 'HockeyTech `shootout_games_played` field.'
+- name: faceoff_attempts
+  type: character
+  description: 'HockeyTech `faceoff_attempts` field.'
+- name: faceoff_wins
+  type: character
+  description: 'HockeyTech `faceoff_wins` field.'
+- name: faceoff_pct
+  type: character
+  description: 'HockeyTech `faceoff_pct` field.'
+- name: faceoff_wa
+  type: character
+  description: 'HockeyTech `faceoff_wa` field.'
+- name: shots_on
+  type: character
+  description: 'HockeyTech `shots_on` field.'
+- name: shootout_percentage
+  type: character
+  description: 'HockeyTech `shootout_percentage` field.'
+- name: latest_team_id
+  type: character
+  description: 'HockeyTech `latest_team_id` field.'
+- name: num_teams
+  type: character
+  description: 'HockeyTech `num_teams` field.'
+- name: logo
+  type: character
+  description: 'HockeyTech `logo` field.'
+- name: rank
+  type: character
+  description: 'HockeyTech `rank` field.'
+- name: team_breakdown
+  type: character
+  description: 'HockeyTech `team_breakdown` field.'
+- name: player_page_link
+  type: character
+  description: 'HockeyTech `player_page_link` field.'
+- name: is_total
+  type: character
+  description: 'HockeyTech `is_total` field.'
+- name: player_image
+  type: character
+  description: 'HockeyTech `player_image` field.'
+- name: namelink
+  type: character
+  description: 'HockeyTech `namelink` field.'
+- name: teamlink
+  type: character
+  description: 'HockeyTech `teamlink` field.'

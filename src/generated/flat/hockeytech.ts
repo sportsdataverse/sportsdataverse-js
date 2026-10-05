@@ -228,6 +228,115 @@ export const hockeytechPbp: WrapperFn = (params = {}) => callFlat(PBP_DEF, param
 /** snake_case alias of {@link hockeytechPbp} (py/R parity). */
 export const hockeytech_pbp = hockeytechPbp;
 
+const PLAYER_GAME_LOG_DEF: WrapperDef = {
+  "short": "player_game_log",
+  "flat": true,
+  "api": "hockeytech",
+  "host": "https://lscluster.hockeytech.com",
+  "scope": "universal",
+  "path": "/feed/index.php",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "league",
+      "queryKey": "league"
+    },
+    {
+      "name": "player_id",
+      "queryKey": "player_id"
+    },
+    {
+      "name": "season_id",
+      "queryKey": "season_id"
+    },
+    {
+      "name": "category",
+      "queryKey": "category",
+      "default": "gamebygame"
+    },
+    {
+      "name": "feed",
+      "queryKey": "feed",
+      "default": "modulekit"
+    },
+    {
+      "name": "view",
+      "queryKey": "view",
+      "default": "player"
+    }
+  ],
+  "parser": "parse_hockeytech_player_game_log",
+  "returnsSchema": "native/hockeytech/player_game_log"
+};
+
+/**
+ * HockeyTech / LeagueStat — player game log.
+ *
+ * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
+ *
+ * @param params.league - query parameter.
+ * @param params.player_id - query parameter.
+ * @param params.season_id - query parameter.
+ * @param params.category - query parameter — default `gamebygame`.
+ * @param params.feed - query parameter — default `modulekit`.
+ * @param params.view - query parameter — default `player`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.hockeytech.hockeytechPlayerGameLog({});
+ */
+export const hockeytechPlayerGameLog: WrapperFn = (params = {}) => callFlat(PLAYER_GAME_LOG_DEF, params);
+/** snake_case alias of {@link hockeytechPlayerGameLog} (py/R parity). */
+export const hockeytech_player_game_log = hockeytechPlayerGameLog;
+
+const PLAYER_SEARCH_DEF: WrapperDef = {
+  "short": "player_search",
+  "flat": true,
+  "api": "hockeytech",
+  "host": "https://lscluster.hockeytech.com",
+  "scope": "universal",
+  "path": "/feed/index.php",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "league",
+      "queryKey": "league"
+    },
+    {
+      "name": "search_term",
+      "queryKey": "search_term"
+    },
+    {
+      "name": "feed",
+      "queryKey": "feed",
+      "default": "modulekit"
+    },
+    {
+      "name": "view",
+      "queryKey": "view",
+      "default": "searchplayers"
+    }
+  ],
+  "parser": "parse_hockeytech_player_search",
+  "returnsSchema": "native/hockeytech/player_search"
+};
+
+/**
+ * HockeyTech / LeagueStat — player search.
+ *
+ * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
+ *
+ * @param params.league - query parameter.
+ * @param params.search_term - query parameter.
+ * @param params.feed - query parameter — default `modulekit`.
+ * @param params.view - query parameter — default `searchplayers`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.hockeytech.hockeytechPlayerSearch({});
+ */
+export const hockeytechPlayerSearch: WrapperFn = (params = {}) => callFlat(PLAYER_SEARCH_DEF, params);
+/** snake_case alias of {@link hockeytechPlayerSearch} (py/R parity). */
+export const hockeytech_player_search = hockeytechPlayerSearch;
+
 const PLAYER_STATS_DEF: WrapperDef = {
   "short": "player_stats",
   "flat": true,
@@ -283,8 +392,8 @@ export const hockeytechPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER
 /** snake_case alias of {@link hockeytechPlayerStats} (py/R parity). */
 export const hockeytech_player_stats = hockeytechPlayerStats;
 
-const SCHEDULE_DEF: WrapperDef = {
-  "short": "schedule",
+const PLAYOFF_BRACKET_DEF: WrapperDef = {
+  "short": "playoff_bracket",
   "flat": true,
   "api": "hockeytech",
   "host": "https://lscluster.hockeytech.com",
@@ -306,6 +415,79 @@ const SCHEDULE_DEF: WrapperDef = {
       "default": "modulekit"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
+      "name": "view",
+      "queryKey": "view",
+      "default": "brackets"
+    }
+  ],
+  "parser": "parse_hockeytech_playoff_bracket",
+  "returnsSchema": "native/hockeytech/playoff_bracket"
+};
+
+/**
+ * HockeyTech / LeagueStat — playoff bracket.
+ *
+ * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
+ *
+ * @param params.league - query parameter.
+ * @param params.season_id - query parameter.
+ * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
+ * @param params.view - query parameter — default `brackets`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.hockeytech.hockeytechPlayoffBracket({});
+ */
+export const hockeytechPlayoffBracket: WrapperFn = (params = {}) => callFlat(PLAYOFF_BRACKET_DEF, params);
+/** snake_case alias of {@link hockeytechPlayoffBracket} (py/R parity). */
+export const hockeytech_playoff_bracket = hockeytechPlayoffBracket;
+
+const SCHEDULE_DEF: WrapperDef = {
+  "short": "schedule",
+  "flat": true,
+  "api": "hockeytech",
+  "host": "https://lscluster.hockeytech.com",
+  "scope": "universal",
+  "path": "/feed/index.php",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "league",
+      "queryKey": "league"
+    },
+    {
+      "name": "season_id",
+      "queryKey": "season_id"
+    },
+    {
+      "name": "number_of_days_back",
+      "queryKey": "numberofdaysback",
+      "default": 10000
+    },
+    {
+      "name": "number_of_days_ahead",
+      "queryKey": "numberofdaysahead",
+      "default": 10000
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 10000
+    },
+    {
+      "name": "feed",
+      "queryKey": "feed",
+      "default": "modulekit"
+    },
+    {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "scorebar"
@@ -322,7 +504,11 @@ const SCHEDULE_DEF: WrapperDef = {
  *
  * @param params.league - query parameter.
  * @param params.season_id - query parameter.
+ * @param params.number_of_days_back - query parameter (`numberofdaysback`) — default `10000`.
+ * @param params.number_of_days_ahead - query parameter (`numberofdaysahead`) — default `10000`.
+ * @param params.limit - query parameter — default `10000`.
  * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `scorebar`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -331,6 +517,73 @@ const SCHEDULE_DEF: WrapperDef = {
 export const hockeytechSchedule: WrapperFn = (params = {}) => callFlat(SCHEDULE_DEF, params);
 /** snake_case alias of {@link hockeytechSchedule} (py/R parity). */
 export const hockeytech_schedule = hockeytechSchedule;
+
+const SCOREBAR_DEF: WrapperDef = {
+  "short": "scorebar",
+  "flat": true,
+  "api": "hockeytech",
+  "host": "https://lscluster.hockeytech.com",
+  "scope": "universal",
+  "path": "/feed/index.php",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "league",
+      "queryKey": "league"
+    },
+    {
+      "name": "number_of_days_back",
+      "queryKey": "numberofdaysback",
+      "default": 3
+    },
+    {
+      "name": "number_of_days_ahead",
+      "queryKey": "numberofdaysahead",
+      "default": 3
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit",
+      "default": 100
+    },
+    {
+      "name": "feed",
+      "queryKey": "feed",
+      "default": "modulekit"
+    },
+    {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
+      "name": "view",
+      "queryKey": "view",
+      "default": "scorebar"
+    }
+  ],
+  "parser": "parse_hockeytech_scorebar",
+  "returnsSchema": "native/hockeytech/scorebar"
+};
+
+/**
+ * HockeyTech / LeagueStat — scorebar.
+ *
+ * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
+ *
+ * @param params.league - query parameter.
+ * @param params.number_of_days_back - query parameter (`numberofdaysback`) — default `3`.
+ * @param params.number_of_days_ahead - query parameter (`numberofdaysahead`) — default `3`.
+ * @param params.limit - query parameter — default `100`.
+ * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
+ * @param params.view - query parameter — default `scorebar`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.hockeytech.hockeytechScorebar({});
+ */
+export const hockeytechScorebar: WrapperFn = (params = {}) => callFlat(SCOREBAR_DEF, params);
+/** snake_case alias of {@link hockeytechScorebar} (py/R parity). */
+export const hockeytech_scorebar = hockeytechScorebar;
 
 const SEASONS_DEF: WrapperDef = {
   "short": "seasons",
@@ -399,6 +652,10 @@ const STANDINGS_DEF: WrapperDef = {
       "default": "statviewfeed"
     },
     {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
       "name": "view",
       "queryKey": "view",
       "default": "teams"
@@ -436,6 +693,7 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.league - query parameter.
  * @param params.season_id - query parameter (`season`).
  * @param params.feed - query parameter — default `statviewfeed`.
+ * @param params.league_id - query parameter.
  * @param params.view - query parameter — default `teams`.
  * @param params.group_teams_by - query parameter (`groupTeamsBy`) — default `division`.
  * @param params.context - query parameter — default `overall`.
@@ -448,6 +706,61 @@ const STANDINGS_DEF: WrapperDef = {
 export const hockeytechStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
 /** snake_case alias of {@link hockeytechStandings} (py/R parity). */
 export const hockeytech_standings = hockeytechStandings;
+
+const STATS_DEF: WrapperDef = {
+  "short": "stats",
+  "flat": true,
+  "api": "hockeytech",
+  "host": "https://lscluster.hockeytech.com",
+  "scope": "universal",
+  "path": "/feed/index.php",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "league",
+      "queryKey": "league"
+    },
+    {
+      "name": "season_id",
+      "queryKey": "season_id"
+    },
+    {
+      "name": "type",
+      "queryKey": "type",
+      "default": "skaters"
+    },
+    {
+      "name": "feed",
+      "queryKey": "feed",
+      "default": "modulekit"
+    },
+    {
+      "name": "view",
+      "queryKey": "view",
+      "default": "statviewtype"
+    }
+  ],
+  "parser": "parse_hockeytech_stats",
+  "returnsSchema": "native/hockeytech/stats"
+};
+
+/**
+ * HockeyTech / LeagueStat — stats.
+ *
+ * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
+ *
+ * @param params.league - query parameter.
+ * @param params.season_id - query parameter.
+ * @param params.type - query parameter — default `skaters`.
+ * @param params.feed - query parameter — default `modulekit`.
+ * @param params.view - query parameter — default `statviewtype`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.hockeytech.hockeytechStats({});
+ */
+export const hockeytechStats: WrapperFn = (params = {}) => callFlat(STATS_DEF, params);
+/** snake_case alias of {@link hockeytechStats} (py/R parity). */
+export const hockeytech_stats = hockeytechStats;
 
 const TEAM_ROSTER_DEF: WrapperDef = {
   "short": "team_roster",
@@ -551,3 +864,52 @@ const TEAMS_DEF: WrapperDef = {
 export const hockeytechTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
 /** snake_case alias of {@link hockeytechTeams} (py/R parity). */
 export const hockeytech_teams = hockeytechTeams;
+
+const TRANSACTIONS_DEF: WrapperDef = {
+  "short": "transactions",
+  "flat": true,
+  "api": "hockeytech",
+  "host": "https://lscluster.hockeytech.com",
+  "scope": "universal",
+  "path": "/feed/index.php",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "league",
+      "queryKey": "league"
+    },
+    {
+      "name": "feed",
+      "queryKey": "feed",
+      "default": "modulekit"
+    },
+    {
+      "name": "league_id",
+      "queryKey": "league_id"
+    },
+    {
+      "name": "view",
+      "queryKey": "view",
+      "default": "transactions"
+    }
+  ],
+  "parser": "parse_hockeytech_transactions",
+  "returnsSchema": "native/hockeytech/transactions"
+};
+
+/**
+ * HockeyTech / LeagueStat — transactions.
+ *
+ * **Endpoint:** `GET https://lscluster.hockeytech.com/feed/index.php`
+ *
+ * @param params.league - query parameter.
+ * @param params.feed - query parameter — default `modulekit`.
+ * @param params.league_id - query parameter.
+ * @param params.view - query parameter — default `transactions`.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.hockeytech.hockeytechTransactions({});
+ */
+export const hockeytechTransactions: WrapperFn = (params = {}) => callFlat(TRANSACTIONS_DEF, params);
+/** snake_case alias of {@link hockeytechTransactions} (py/R parity). */
+export const hockeytech_transactions = hockeytechTransactions;

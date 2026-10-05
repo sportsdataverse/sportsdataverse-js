@@ -22,3 +22,9 @@ columns:
 - name: end_date
   type: character
   description: 'Season end date.'
+- name: season_yr
+  type: integer
+  description: 'Season end-year derived from the season name (2025-26 -> 2026).'
+- name: game_type_label
+  type: character
+  description: 'regular, playoffs or preseason, derived from the season name.'
