@@ -151,6 +151,10 @@ configure({
 Without `impit` installed, a request through this transport rejects with
 `TransportUnavailableError` (not retried) naming the install command.
 
+## Keyless families that need headers
+
+`on3`, `asa`, `mls_api`, `nwsl_api` and `bart_wbb` need no key or login, so there is nothing to configure. Their getters set a browser User-Agent for you (and the site `Referer` for MLS and NWSL); a `headers` argument on the call overrides either. A 404 is a `NoDataError`, any other failure an `AssetFetchError`, never an empty table.
+
 ## Keys and logins per family
 
 Auth providers are configured per family. There is deliberately **no

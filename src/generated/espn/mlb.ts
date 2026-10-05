@@ -18,7 +18,10 @@ const CFG: LeagueConfig = {
   "scopes": [
     "universal",
     "mlb"
-  ]
+  ],
+  "publicShorts": {
+    "athlete_stats": "player_stats_v3"
+  }
 };
 
 const ATHLETE_AWARDS_DEF: WrapperDef = {
@@ -34,19 +37,19 @@ const ATHLETE_AWARDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player awards (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/awards`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteAwards({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerAwards({ athlete_id: '…' });
  */
-export const espnMlbAthleteAwards: WrapperFn = (params = {}) =>
+export const espnMlbPlayerAwards: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_AWARDS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteAwards} (py/R parity). */
-export const espn_mlb_athlete_awards = espnMlbAthleteAwards;
+/** snake_case alias of {@link espnMlbPlayerAwards} (py/R parity). */
+export const espn_mlb_player_awards = espnMlbPlayerAwards;
 
 const ATHLETE_BIO_DEF: WrapperDef = {
   "short": "athlete_bio",
@@ -61,19 +64,19 @@ const ATHLETE_BIO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete bio (ESPN site.api.espn.com).
+ * MLB — player bio (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/athletes/{athlete_id}/bio`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteBio({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerBio({ athlete_id: '…' });
  */
-export const espnMlbAthleteBio: WrapperFn = (params = {}) =>
+export const espnMlbPlayerBio: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_BIO_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteBio} (py/R parity). */
-export const espn_mlb_athlete_bio = espnMlbAthleteBio;
+/** snake_case alias of {@link espnMlbPlayerBio} (py/R parity). */
+export const espn_mlb_player_bio = espnMlbPlayerBio;
 
 const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "short": "athlete_career_stats",
@@ -92,7 +95,7 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player career stats (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/statistics[/{stat_type}]`
  *
@@ -100,12 +103,12 @@ const ATHLETE_CAREER_STATS_DEF: WrapperDef = {
  * @param params.stat_type - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteCareerStats({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerCareerStats({ athlete_id: '…' });
  */
-export const espnMlbAthleteCareerStats: WrapperFn = (params = {}) =>
+export const espnMlbPlayerCareerStats: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CAREER_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteCareerStats} (py/R parity). */
-export const espn_mlb_athlete_career_stats = espnMlbAthleteCareerStats;
+/** snake_case alias of {@link espnMlbPlayerCareerStats} (py/R parity). */
+export const espn_mlb_player_career_stats = espnMlbPlayerCareerStats;
 
 const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "short": "athlete_contracts",
@@ -120,19 +123,19 @@ const ATHLETE_CONTRACTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player contracts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/contracts`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteContracts({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerContracts({ athlete_id: '…' });
  */
-export const espnMlbAthleteContracts: WrapperFn = (params = {}) =>
+export const espnMlbPlayerContracts: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CONTRACTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteContracts} (py/R parity). */
-export const espn_mlb_athlete_contracts = espnMlbAthleteContracts;
+/** snake_case alias of {@link espnMlbPlayerContracts} (py/R parity). */
+export const espn_mlb_player_contracts = espnMlbPlayerContracts;
 
 const ATHLETE_CORE_DEF: WrapperDef = {
   "short": "athlete_core",
@@ -147,19 +150,19 @@ const ATHLETE_CORE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete core (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player core (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteCore({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerCore({ athlete_id: '…' });
  */
-export const espnMlbAthleteCore: WrapperFn = (params = {}) =>
+export const espnMlbPlayerCore: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_CORE_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteCore} (py/R parity). */
-export const espn_mlb_athlete_core = espnMlbAthleteCore;
+/** snake_case alias of {@link espnMlbPlayerCore} (py/R parity). */
+export const espn_mlb_player_core = espnMlbPlayerCore;
 
 const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "short": "athlete_eventlog",
@@ -174,19 +177,19 @@ const ATHLETE_EVENTLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player eventlog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/eventlog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteEventlog({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerEventlog({ athlete_id: '…' });
  */
-export const espnMlbAthleteEventlog: WrapperFn = (params = {}) =>
+export const espnMlbPlayerEventlog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_EVENTLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteEventlog} (py/R parity). */
-export const espn_mlb_athlete_eventlog = espnMlbAthleteEventlog;
+/** snake_case alias of {@link espnMlbPlayerEventlog} (py/R parity). */
+export const espn_mlb_player_eventlog = espnMlbPlayerEventlog;
 
 const ATHLETE_GAMELOG_DEF: WrapperDef = {
   "short": "athlete_gamelog",
@@ -206,7 +209,7 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+ * MLB — player gamelog (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/mlb/athletes/{athlete_id}/gamelog`
  *
@@ -214,12 +217,12 @@ const ATHLETE_GAMELOG_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteGamelog({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerGamelog({ athlete_id: '…' });
  */
-export const espnMlbAthleteGamelog: WrapperFn = (params = {}) =>
+export const espnMlbPlayerGamelog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_GAMELOG_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteGamelog} (py/R parity). */
-export const espn_mlb_athlete_gamelog = espnMlbAthleteGamelog;
+/** snake_case alias of {@link espnMlbPlayerGamelog} (py/R parity). */
+export const espn_mlb_player_gamelog = espnMlbPlayerGamelog;
 
 const ATHLETE_HOTZONES_DEF: WrapperDef = {
   "short": "athlete_hotzones",
@@ -234,19 +237,19 @@ const ATHLETE_HOTZONES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete hotzones (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player hotzones (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/hotzones`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteHotzones({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerHotzones({ athlete_id: '…' });
  */
-export const espnMlbAthleteHotzones: WrapperFn = (params = {}) =>
+export const espnMlbPlayerHotzones: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_HOTZONES_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteHotzones} (py/R parity). */
-export const espn_mlb_athlete_hotzones = espnMlbAthleteHotzones;
+/** snake_case alias of {@link espnMlbPlayerHotzones} (py/R parity). */
+export const espn_mlb_player_hotzones = espnMlbPlayerHotzones;
 
 const ATHLETE_INFO_DEF: WrapperDef = {
   "short": "athlete_info",
@@ -261,19 +264,19 @@ const ATHLETE_INFO_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete info (ESPN site.api.espn.com).
+ * MLB — player info (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/athletes/{athlete_id}`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteInfo({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerInfo({ athlete_id: '…' });
  */
-export const espnMlbAthleteInfo: WrapperFn = (params = {}) =>
+export const espnMlbPlayerInfo: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INFO_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteInfo} (py/R parity). */
-export const espn_mlb_athlete_info = espnMlbAthleteInfo;
+/** snake_case alias of {@link espnMlbPlayerInfo} (py/R parity). */
+export const espn_mlb_player_info = espnMlbPlayerInfo;
 
 const ATHLETE_INJURIES_DEF: WrapperDef = {
   "short": "athlete_injuries",
@@ -288,19 +291,19 @@ const ATHLETE_INJURIES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player injuries (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/injuries`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteInjuries({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerInjuries({ athlete_id: '…' });
  */
-export const espnMlbAthleteInjuries: WrapperFn = (params = {}) =>
+export const espnMlbPlayerInjuries: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_INJURIES_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteInjuries} (py/R parity). */
-export const espn_mlb_athlete_injuries = espnMlbAthleteInjuries;
+/** snake_case alias of {@link espnMlbPlayerInjuries} (py/R parity). */
+export const espn_mlb_player_injuries = espnMlbPlayerInjuries;
 
 const ATHLETE_NEWS_DEF: WrapperDef = {
   "short": "athlete_news",
@@ -315,19 +318,19 @@ const ATHLETE_NEWS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete news (ESPN site.api.espn.com).
+ * MLB — player news (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/athletes/{athlete_id}/news`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteNews({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerNews({ athlete_id: '…' });
  */
-export const espnMlbAthleteNews: WrapperFn = (params = {}) =>
+export const espnMlbPlayerNews: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NEWS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteNews} (py/R parity). */
-export const espn_mlb_athlete_news = espnMlbAthleteNews;
+/** snake_case alias of {@link espnMlbPlayerNews} (py/R parity). */
+export const espn_mlb_player_news = espnMlbPlayerNews;
 
 const ATHLETE_NOTES_DEF: WrapperDef = {
   "short": "athlete_notes",
@@ -342,19 +345,19 @@ const ATHLETE_NOTES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player notes (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/notes`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteNotes({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerNotes({ athlete_id: '…' });
  */
-export const espnMlbAthleteNotes: WrapperFn = (params = {}) =>
+export const espnMlbPlayerNotes: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_NOTES_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteNotes} (py/R parity). */
-export const espn_mlb_athlete_notes = espnMlbAthleteNotes;
+/** snake_case alias of {@link espnMlbPlayerNotes} (py/R parity). */
+export const espn_mlb_player_notes = espnMlbPlayerNotes;
 
 const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "short": "athlete_overview",
@@ -369,19 +372,19 @@ const ATHLETE_OVERVIEW_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete overview (ESPN site.web.api.espn.com (web v3)).
+ * MLB — player overview (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/mlb/athletes/{athlete_id}/overview`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteOverview({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerOverview({ athlete_id: '…' });
  */
-export const espnMlbAthleteOverview: WrapperFn = (params = {}) =>
+export const espnMlbPlayerOverview: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_OVERVIEW_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteOverview} (py/R parity). */
-export const espn_mlb_athlete_overview = espnMlbAthleteOverview;
+/** snake_case alias of {@link espnMlbPlayerOverview} (py/R parity). */
+export const espn_mlb_player_overview = espnMlbPlayerOverview;
 
 const ATHLETE_RECORDS_DEF: WrapperDef = {
   "short": "athlete_records",
@@ -396,19 +399,19 @@ const ATHLETE_RECORDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete records (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player records (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/records`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteRecords({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerRecords({ athlete_id: '…' });
  */
-export const espnMlbAthleteRecords: WrapperFn = (params = {}) =>
+export const espnMlbPlayerRecords: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_RECORDS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteRecords} (py/R parity). */
-export const espn_mlb_athlete_records = espnMlbAthleteRecords;
+/** snake_case alias of {@link espnMlbPlayerRecords} (py/R parity). */
+export const espn_mlb_player_records = espnMlbPlayerRecords;
 
 const ATHLETE_SEASONS_DEF: WrapperDef = {
   "short": "athlete_seasons",
@@ -423,19 +426,19 @@ const ATHLETE_SEASONS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player seasons (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/seasons`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteSeasons({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerSeasons({ athlete_id: '…' });
  */
-export const espnMlbAthleteSeasons: WrapperFn = (params = {}) =>
+export const espnMlbPlayerSeasons: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SEASONS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteSeasons} (py/R parity). */
-export const espn_mlb_athlete_seasons = espnMlbAthleteSeasons;
+/** snake_case alias of {@link espnMlbPlayerSeasons} (py/R parity). */
+export const espn_mlb_player_seasons = espnMlbPlayerSeasons;
 
 const ATHLETE_SPLITS_DEF: WrapperDef = {
   "short": "athlete_splits",
@@ -455,7 +458,7 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — athlete splits (ESPN site.web.api.espn.com (web v3)).
+ * MLB — player splits (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/mlb/athletes/{athlete_id}/splits`
  *
@@ -463,12 +466,12 @@ const ATHLETE_SPLITS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteSplits({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerSplits({ athlete_id: '…' });
  */
-export const espnMlbAthleteSplits: WrapperFn = (params = {}) =>
+export const espnMlbPlayerSplits: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_SPLITS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteSplits} (py/R parity). */
-export const espn_mlb_athlete_splits = espnMlbAthleteSplits;
+/** snake_case alias of {@link espnMlbPlayerSplits} (py/R parity). */
+export const espn_mlb_player_splits = espnMlbPlayerSplits;
 
 const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "short": "athlete_statisticslog",
@@ -483,19 +486,19 @@ const ATHLETE_STATISTICSLOG_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/statisticslog`
  *
  * @param params.athlete_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteStatisticslog({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerStatisticslog({ athlete_id: '…' });
  */
-export const espnMlbAthleteStatisticslog: WrapperFn = (params = {}) =>
+export const espnMlbPlayerStatisticslog: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATISTICSLOG_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteStatisticslog} (py/R parity). */
-export const espn_mlb_athlete_statisticslog = espnMlbAthleteStatisticslog;
+/** snake_case alias of {@link espnMlbPlayerStatisticslog} (py/R parity). */
+export const espn_mlb_player_statisticslog = espnMlbPlayerStatisticslog;
 
 const ATHLETE_STATS_DEF: WrapperDef = {
   "short": "athlete_stats",
@@ -515,7 +518,7 @@ const ATHLETE_STATS_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — athlete stats (ESPN site.web.api.espn.com (web v3)).
+ * MLB — player stats v3 (ESPN site.web.api.espn.com (web v3)).
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/baseball/mlb/athletes/{athlete_id}/stats`
  *
@@ -523,12 +526,12 @@ const ATHLETE_STATS_DEF: WrapperDef = {
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteStats({ athlete_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerStatsV3({ athlete_id: '…' });
  */
-export const espnMlbAthleteStats: WrapperFn = (params = {}) =>
+export const espnMlbPlayerStatsV3: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_STATS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteStats} (py/R parity). */
-export const espn_mlb_athlete_stats = espnMlbAthleteStats;
+/** snake_case alias of {@link espnMlbPlayerStatsV3} (py/R parity). */
+export const espn_mlb_player_stats_v3 = espnMlbPlayerStatsV3;
 
 const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "short": "athlete_vs_athlete",
@@ -546,7 +549,7 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — player vs player (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/vsathlete/{opp_id}`
  *
@@ -554,12 +557,12 @@ const ATHLETE_VS_ATHLETE_DEF: WrapperDef = {
  * @param params.opp_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
+ * @example await sdv.mlb.espnMlbPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
  */
-export const espnMlbAthleteVsAthlete: WrapperFn = (params = {}) =>
+export const espnMlbPlayerVsPlayer: WrapperFn = (params = {}) =>
   callWrapper(ATHLETE_VS_ATHLETE_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthleteVsAthlete} (py/R parity). */
-export const espn_mlb_athlete_vs_athlete = espnMlbAthleteVsAthlete;
+/** snake_case alias of {@link espnMlbPlayerVsPlayer} (py/R parity). */
+export const espn_mlb_player_vs_player = espnMlbPlayerVsPlayer;
 
 const ATHLETES_INDEX_DEF: WrapperDef = {
   "short": "athletes_index",
@@ -587,7 +590,7 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — athletes index (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — players index (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes`
  *
@@ -596,12 +599,12 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbAthletesIndex({});
+ * @example await sdv.mlb.espnMlbPlayersIndex({});
  */
-export const espnMlbAthletesIndex: WrapperFn = (params = {}) =>
+export const espnMlbPlayersIndex: WrapperFn = (params = {}) =>
   callWrapper(ATHLETES_INDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbAthletesIndex} (py/R parity). */
-export const espn_mlb_athletes_index = espnMlbAthletesIndex;
+/** snake_case alias of {@link espnMlbPlayersIndex} (py/R parity). */
+export const espn_mlb_players_index = espnMlbPlayersIndex;
 
 const AWARD_DEF: WrapperDef = {
   "short": "award",
@@ -829,19 +832,19 @@ const EVENT_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}`
  *
  * @param params.event_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEvent({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGame({ event_id: '…' });
  */
-export const espnMlbEvent: WrapperFn = (params = {}) =>
+export const espnMlbGame: WrapperFn = (params = {}) =>
   callWrapper(EVENT_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEvent} (py/R parity). */
-export const espn_mlb_event = espnMlbEvent;
+/** snake_case alias of {@link espnMlbGame} (py/R parity). */
+export const espn_mlb_game = espnMlbGame;
 
 const EVENT_BROADCASTS_DEF: WrapperDef = {
   "short": "event_broadcasts",
@@ -861,7 +864,7 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/broadcasts`
  *
@@ -869,12 +872,12 @@ const EVENT_BROADCASTS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventBroadcasts({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameBroadcasts({ event_id: '…' });
  */
-export const espnMlbEventBroadcasts: WrapperFn = (params = {}) =>
+export const espnMlbGameBroadcasts: WrapperFn = (params = {}) =>
   callWrapper(EVENT_BROADCASTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventBroadcasts} (py/R parity). */
-export const espn_mlb_event_broadcasts = espnMlbEventBroadcasts;
+/** snake_case alias of {@link espnMlbGameBroadcasts} (py/R parity). */
+export const espn_mlb_game_broadcasts = espnMlbGameBroadcasts;
 
 const EVENT_COMPETITION_DEF: WrapperDef = {
   "short": "event_competition",
@@ -894,7 +897,7 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competition (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game competition (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}`
  *
@@ -902,12 +905,12 @@ const EVENT_COMPETITION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetition({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameCompetition({ event_id: '…' });
  */
-export const espnMlbEventCompetition: WrapperFn = (params = {}) =>
+export const espnMlbGameCompetition: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITION_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetition} (py/R parity). */
-export const espn_mlb_event_competition = espnMlbEventCompetition;
+/** snake_case alias of {@link espnMlbGameCompetition} (py/R parity). */
+export const espn_mlb_game_competition = espnMlbGameCompetition;
 
 const EVENT_COMPETITOR_DEF: WrapperDef = {
   "short": "event_competitor",
@@ -930,7 +933,7 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitor (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game team (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}`
  *
@@ -939,12 +942,12 @@ const EVENT_COMPETITOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitor({ event_id: '…', team_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeam({ event_id: '…', team_id: '…' });
  */
-export const espnMlbEventCompetitor: WrapperFn = (params = {}) =>
+export const espnMlbGameTeam: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitor} (py/R parity). */
-export const espn_mlb_event_competitor = espnMlbEventCompetitor;
+/** snake_case alias of {@link espnMlbGameTeam} (py/R parity). */
+export const espn_mlb_game_team = espnMlbGameTeam;
 
 const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "short": "event_competitor_leaders",
@@ -967,7 +970,7 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game team leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
  *
@@ -976,12 +979,12 @@ const EVENT_COMPETITOR_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitorLeaders({ event_id: '…', team_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeamLeaders({ event_id: '…', team_id: '…' });
  */
-export const espnMlbEventCompetitorLeaders: WrapperFn = (params = {}) =>
+export const espnMlbGameTeamLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitorLeaders} (py/R parity). */
-export const espn_mlb_event_competitor_leaders = espnMlbEventCompetitorLeaders;
+/** snake_case alias of {@link espnMlbGameTeamLeaders} (py/R parity). */
+export const espn_mlb_game_team_leaders = espnMlbGameTeamLeaders;
 
 const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "short": "event_competitor_linescores",
@@ -1004,7 +1007,7 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game team linescores (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
  *
@@ -1013,12 +1016,12 @@ const EVENT_COMPETITOR_LINESCORES_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitorLinescores({ event_id: '…', team_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeamLinescores({ event_id: '…', team_id: '…' });
  */
-export const espnMlbEventCompetitorLinescores: WrapperFn = (params = {}) =>
+export const espnMlbGameTeamLinescores: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_LINESCORES_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitorLinescores} (py/R parity). */
-export const espn_mlb_event_competitor_linescores = espnMlbEventCompetitorLinescores;
+/** snake_case alias of {@link espnMlbGameTeamLinescores} (py/R parity). */
+export const espn_mlb_game_team_linescores = espnMlbGameTeamLinescores;
 
 const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "short": "event_competitor_record",
@@ -1041,7 +1044,7 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game team record (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
  *
@@ -1050,12 +1053,12 @@ const EVENT_COMPETITOR_RECORD_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitorRecord({ event_id: '…', team_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeamRecord({ event_id: '…', team_id: '…' });
  */
-export const espnMlbEventCompetitorRecord: WrapperFn = (params = {}) =>
+export const espnMlbGameTeamRecord: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_RECORD_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitorRecord} (py/R parity). */
-export const espn_mlb_event_competitor_record = espnMlbEventCompetitorRecord;
+/** snake_case alias of {@link espnMlbGameTeamRecord} (py/R parity). */
+export const espn_mlb_game_team_record = espnMlbGameTeamRecord;
 
 const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "short": "event_competitor_roster",
@@ -1078,7 +1081,7 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game team roster (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
  *
@@ -1087,12 +1090,12 @@ const EVENT_COMPETITOR_ROSTER_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitorRoster({ event_id: '…', team_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeamRoster({ event_id: '…', team_id: '…' });
  */
-export const espnMlbEventCompetitorRoster: WrapperFn = (params = {}) =>
+export const espnMlbGameTeamRoster: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_ROSTER_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitorRoster} (py/R parity). */
-export const espn_mlb_event_competitor_roster = espnMlbEventCompetitorRoster;
+/** snake_case alias of {@link espnMlbGameTeamRoster} (py/R parity). */
+export const espn_mlb_game_team_roster = espnMlbGameTeamRoster;
 
 const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "short": "event_competitor_statistics",
@@ -1115,7 +1118,7 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game team statistics (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
  *
@@ -1124,12 +1127,12 @@ const EVENT_COMPETITOR_STATISTICS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitorStatistics({ event_id: '…', team_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeamStatistics({ event_id: '…', team_id: '…' });
  */
-export const espnMlbEventCompetitorStatistics: WrapperFn = (params = {}) =>
+export const espnMlbGameTeamStatistics: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITOR_STATISTICS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitorStatistics} (py/R parity). */
-export const espn_mlb_event_competitor_statistics = espnMlbEventCompetitorStatistics;
+/** snake_case alias of {@link espnMlbGameTeamStatistics} (py/R parity). */
+export const espn_mlb_game_team_statistics = espnMlbGameTeamStatistics;
 
 const EVENT_COMPETITORS_DEF: WrapperDef = {
   "short": "event_competitors",
@@ -1149,7 +1152,7 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event competitors (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game teams (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors`
  *
@@ -1157,12 +1160,12 @@ const EVENT_COMPETITORS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventCompetitors({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameTeams({ event_id: '…' });
  */
-export const espnMlbEventCompetitors: WrapperFn = (params = {}) =>
+export const espnMlbGameTeams: WrapperFn = (params = {}) =>
   callWrapper(EVENT_COMPETITORS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventCompetitors} (py/R parity). */
-export const espn_mlb_event_competitors = espnMlbEventCompetitors;
+/** snake_case alias of {@link espnMlbGameTeams} (py/R parity). */
+export const espn_mlb_game_teams = espnMlbGameTeams;
 
 const EVENT_LEADERS_DEF: WrapperDef = {
   "short": "event_leaders",
@@ -1182,7 +1185,7 @@ const EVENT_LEADERS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event leaders (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game leaders (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/leaders`
  *
@@ -1190,12 +1193,12 @@ const EVENT_LEADERS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventLeaders({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameLeaders({ event_id: '…' });
  */
-export const espnMlbEventLeaders: WrapperFn = (params = {}) =>
+export const espnMlbGameLeaders: WrapperFn = (params = {}) =>
   callWrapper(EVENT_LEADERS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventLeaders} (py/R parity). */
-export const espn_mlb_event_leaders = espnMlbEventLeaders;
+/** snake_case alias of {@link espnMlbGameLeaders} (py/R parity). */
+export const espn_mlb_game_leaders = espnMlbGameLeaders;
 
 const EVENT_ODDS_DEF: WrapperDef = {
   "short": "event_odds",
@@ -1215,7 +1218,7 @@ const EVENT_ODDS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event odds (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game odds (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/odds`
  *
@@ -1223,12 +1226,12 @@ const EVENT_ODDS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventOdds({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameOdds({ event_id: '…' });
  */
-export const espnMlbEventOdds: WrapperFn = (params = {}) =>
+export const espnMlbGameOdds: WrapperFn = (params = {}) =>
   callWrapper(EVENT_ODDS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventOdds} (py/R parity). */
-export const espn_mlb_event_odds = espnMlbEventOdds;
+/** snake_case alias of {@link espnMlbGameOdds} (py/R parity). */
+export const espn_mlb_game_odds = espnMlbGameOdds;
 
 const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "short": "event_official_detail",
@@ -1251,7 +1254,7 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event official detail (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game official detail (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials/{official_id}`
  *
@@ -1260,12 +1263,12 @@ const EVENT_OFFICIAL_DETAIL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventOfficialDetail({ event_id: '…', official_id: '…' });
+ * @example await sdv.mlb.espnMlbGameOfficialDetail({ event_id: '…', official_id: '…' });
  */
-export const espnMlbEventOfficialDetail: WrapperFn = (params = {}) =>
+export const espnMlbGameOfficialDetail: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIAL_DETAIL_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventOfficialDetail} (py/R parity). */
-export const espn_mlb_event_official_detail = espnMlbEventOfficialDetail;
+/** snake_case alias of {@link espnMlbGameOfficialDetail} (py/R parity). */
+export const espn_mlb_game_official_detail = espnMlbGameOfficialDetail;
 
 const EVENT_OFFICIALS_DEF: WrapperDef = {
   "short": "event_officials",
@@ -1285,7 +1288,7 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event officials (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game officials (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials`
  *
@@ -1293,12 +1296,12 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventOfficials({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameOfficials({ event_id: '…' });
  */
-export const espnMlbEventOfficials: WrapperFn = (params = {}) =>
+export const espnMlbGameOfficials: WrapperFn = (params = {}) =>
   callWrapper(EVENT_OFFICIALS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventOfficials} (py/R parity). */
-export const espn_mlb_event_officials = espnMlbEventOfficials;
+/** snake_case alias of {@link espnMlbGameOfficials} (py/R parity). */
+export const espn_mlb_game_officials = espnMlbGameOfficials;
 
 const EVENT_PLAY_DEF: WrapperDef = {
   "short": "event_play",
@@ -1321,7 +1324,7 @@ const EVENT_PLAY_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event play (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game play (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}`
  *
@@ -1330,12 +1333,12 @@ const EVENT_PLAY_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventPlay({ event_id: '…', play_id: '…' });
+ * @example await sdv.mlb.espnMlbGamePlay({ event_id: '…', play_id: '…' });
  */
-export const espnMlbEventPlay: WrapperFn = (params = {}) =>
+export const espnMlbGamePlay: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventPlay} (py/R parity). */
-export const espn_mlb_event_play = espnMlbEventPlay;
+/** snake_case alias of {@link espnMlbGamePlay} (py/R parity). */
+export const espn_mlb_game_play = espnMlbGamePlay;
 
 const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "short": "event_play_personnel",
@@ -1358,7 +1361,7 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game play personnel (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
  *
@@ -1367,12 +1370,12 @@ const EVENT_PLAY_PERSONNEL_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventPlayPersonnel({ event_id: '…', play_id: '…' });
+ * @example await sdv.mlb.espnMlbGamePlayPersonnel({ event_id: '…', play_id: '…' });
  */
-export const espnMlbEventPlayPersonnel: WrapperFn = (params = {}) =>
+export const espnMlbGamePlayPersonnel: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAY_PERSONNEL_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventPlayPersonnel} (py/R parity). */
-export const espn_mlb_event_play_personnel = espnMlbEventPlayPersonnel;
+/** snake_case alias of {@link espnMlbGamePlayPersonnel} (py/R parity). */
+export const espn_mlb_game_play_personnel = espnMlbGamePlayPersonnel;
 
 const EVENT_PLAYS_DEF: WrapperDef = {
   "short": "event_plays",
@@ -1398,7 +1401,7 @@ const EVENT_PLAYS_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — event plays (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game plays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays`
  *
@@ -1407,12 +1410,12 @@ const EVENT_PLAYS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `1000`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventPlays({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGamePlays({ event_id: '…' });
  */
-export const espnMlbEventPlays: WrapperFn = (params = {}) =>
+export const espnMlbGamePlays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventPlays} (py/R parity). */
-export const espn_mlb_event_plays = espnMlbEventPlays;
+/** snake_case alias of {@link espnMlbGamePlays} (py/R parity). */
+export const espn_mlb_game_plays = espnMlbGamePlays;
 
 const EVENT_POWERINDEX_DEF: WrapperDef = {
   "short": "event_powerindex",
@@ -1432,7 +1435,7 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game powerindex (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/powerindex`
  *
@@ -1440,12 +1443,12 @@ const EVENT_POWERINDEX_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventPowerindex({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGamePowerindex({ event_id: '…' });
  */
-export const espnMlbEventPowerindex: WrapperFn = (params = {}) =>
+export const espnMlbGamePowerindex: WrapperFn = (params = {}) =>
   callWrapper(EVENT_POWERINDEX_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventPowerindex} (py/R parity). */
-export const espn_mlb_event_powerindex = espnMlbEventPowerindex;
+/** snake_case alias of {@link espnMlbGamePowerindex} (py/R parity). */
+export const espn_mlb_game_powerindex = espnMlbGamePowerindex;
 
 const EVENT_PREDICTOR_DEF: WrapperDef = {
   "short": "event_predictor",
@@ -1465,7 +1468,7 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event predictor (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game predictor (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/predictor`
  *
@@ -1473,12 +1476,12 @@ const EVENT_PREDICTOR_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventPredictor({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGamePredictor({ event_id: '…' });
  */
-export const espnMlbEventPredictor: WrapperFn = (params = {}) =>
+export const espnMlbGamePredictor: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PREDICTOR_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventPredictor} (py/R parity). */
-export const espn_mlb_event_predictor = espnMlbEventPredictor;
+/** snake_case alias of {@link espnMlbGamePredictor} (py/R parity). */
+export const espn_mlb_game_predictor = espnMlbGamePredictor;
 
 const EVENT_PROBABILITIES_DEF: WrapperDef = {
   "short": "event_probabilities",
@@ -1504,7 +1507,7 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game probabilities (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/probabilities`
  *
@@ -1513,12 +1516,12 @@ const EVENT_PROBABILITIES_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `300`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventProbabilities({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameProbabilities({ event_id: '…' });
  */
-export const espnMlbEventProbabilities: WrapperFn = (params = {}) =>
+export const espnMlbGameProbabilities: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROBABILITIES_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventProbabilities} (py/R parity). */
-export const espn_mlb_event_probabilities = espnMlbEventProbabilities;
+/** snake_case alias of {@link espnMlbGameProbabilities} (py/R parity). */
+export const espn_mlb_game_probabilities = espnMlbGameProbabilities;
 
 const EVENT_PROPBETS_DEF: WrapperDef = {
   "short": "event_propbets",
@@ -1538,7 +1541,7 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event propbets (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game propbets (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/propbets`
  *
@@ -1546,12 +1549,12 @@ const EVENT_PROPBETS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventPropbets({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGamePropbets({ event_id: '…' });
  */
-export const espnMlbEventPropbets: WrapperFn = (params = {}) =>
+export const espnMlbGamePropbets: WrapperFn = (params = {}) =>
   callWrapper(EVENT_PROPBETS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventPropbets} (py/R parity). */
-export const espn_mlb_event_propbets = espnMlbEventPropbets;
+/** snake_case alias of {@link espnMlbGamePropbets} (py/R parity). */
+export const espn_mlb_game_propbets = espnMlbGamePropbets;
 
 const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "short": "event_scoringplays",
@@ -1571,7 +1574,7 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/scoringplays`
  *
@@ -1579,12 +1582,12 @@ const EVENT_SCORINGPLAYS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventScoringplays({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameScoringplays({ event_id: '…' });
  */
-export const espnMlbEventScoringplays: WrapperFn = (params = {}) =>
+export const espnMlbGameScoringplays: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SCORINGPLAYS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventScoringplays} (py/R parity). */
-export const espn_mlb_event_scoringplays = espnMlbEventScoringplays;
+/** snake_case alias of {@link espnMlbGameScoringplays} (py/R parity). */
+export const espn_mlb_game_scoringplays = espnMlbGameScoringplays;
 
 const EVENT_SITUATION_DEF: WrapperDef = {
   "short": "event_situation",
@@ -1604,7 +1607,7 @@ const EVENT_SITUATION_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event situation (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game situation (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/situation`
  *
@@ -1612,12 +1615,12 @@ const EVENT_SITUATION_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventSituation({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameSituation({ event_id: '…' });
  */
-export const espnMlbEventSituation: WrapperFn = (params = {}) =>
+export const espnMlbGameSituation: WrapperFn = (params = {}) =>
   callWrapper(EVENT_SITUATION_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventSituation} (py/R parity). */
-export const espn_mlb_event_situation = espnMlbEventSituation;
+/** snake_case alias of {@link espnMlbGameSituation} (py/R parity). */
+export const espn_mlb_game_situation = espnMlbGameSituation;
 
 const EVENT_STATUS_DEF: WrapperDef = {
   "short": "event_status",
@@ -1637,7 +1640,7 @@ const EVENT_STATUS_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MLB — event status (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — game status (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/status`
  *
@@ -1645,12 +1648,12 @@ const EVENT_STATUS_DEF: WrapperDef = {
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEventStatus({ event_id: '…' });
+ * @example await sdv.mlb.espnMlbGameStatus({ event_id: '…' });
  */
-export const espnMlbEventStatus: WrapperFn = (params = {}) =>
+export const espnMlbGameStatus: WrapperFn = (params = {}) =>
   callWrapper(EVENT_STATUS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEventStatus} (py/R parity). */
-export const espn_mlb_event_status = espnMlbEventStatus;
+/** snake_case alias of {@link espnMlbGameStatus} (py/R parity). */
+export const espn_mlb_game_status = espnMlbGameStatus;
 
 const EVENTS_DEF: WrapperDef = {
   "short": "events",
@@ -1671,7 +1674,7 @@ const EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — events (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events`
  *
@@ -1679,12 +1682,50 @@ const EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbEvents({});
+ * @example await sdv.mlb.espnMlbGames({});
  */
-export const espnMlbEvents: WrapperFn = (params = {}) =>
+export const espnMlbGames: WrapperFn = (params = {}) =>
   callWrapper(EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbEvents} (py/R parity). */
-export const espn_mlb_events = espnMlbEvents;
+/** snake_case alias of {@link espnMlbGames} (py/R parity). */
+export const espn_mlb_games = espnMlbGames;
+
+const FPI_DEF: WrapperDef = {
+  "short": "fpi",
+  "family": "fitt_v3",
+  "scope": "universal",
+  "path": "/{sport}/{league}/powerindex",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "limit",
+      "queryKey": "limit"
+    },
+    {
+      "name": "page",
+      "queryKey": "page"
+    }
+  ]
+};
+/**
+ * MLB — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)).
+ *
+ * **Endpoint:** `GET https://site.web.api.espn.com/apis/fitt/v3/sports/baseball/mlb/powerindex`
+ *
+ * @param params.season - query parameter.
+ * @param params.limit - query parameter.
+ * @param params.page - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
+ * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
+ * @example await sdv.mlb.espnMlbFpi({});
+ */
+export const espnMlbFpi: WrapperFn = (params = {}) =>
+  callWrapper(FPI_DEF, CFG, params);
+/** snake_case alias of {@link espnMlbFpi} (py/R parity). */
+export const espn_mlb_fpi = espnMlbFpi;
 
 const FRANCHISE_DEF: WrapperDef = {
   "short": "franchise",
@@ -2043,7 +2084,7 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — season athletes (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — season players (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/seasons/{season}/athletes`
  *
@@ -2052,12 +2093,12 @@ const SEASON_ATHLETES_DEF: WrapperDef = {
  * @param params.page - query parameter — default `1`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbSeasonAthletes({ season: '…' });
+ * @example await sdv.mlb.espnMlbSeasonPlayers({ season: '…' });
  */
-export const espnMlbSeasonAthletes: WrapperFn = (params = {}) =>
+export const espnMlbSeasonPlayers: WrapperFn = (params = {}) =>
   callWrapper(SEASON_ATHLETES_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbSeasonAthletes} (py/R parity). */
-export const espn_mlb_season_athletes = espnMlbSeasonAthletes;
+/** snake_case alias of {@link espnMlbSeasonPlayers} (py/R parity). */
+export const espn_mlb_season_players = espnMlbSeasonPlayers;
 
 const SEASON_AWARDS_DEF: WrapperDef = {
   "short": "season_awards",
@@ -2748,7 +2789,7 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
   ]
 };
 /**
- * MLB — season week events (ESPN sports.core.api.espn.com (core v2)).
+ * MLB — season week games (ESPN sports.core.api.espn.com (core v2)).
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks/{week}/events`
  *
@@ -2758,12 +2799,12 @@ const SEASON_WEEK_EVENTS_DEF: WrapperDef = {
  * @param params.limit - query parameter — default `500`.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns Raw ESPN JSON by default; a tidy array of row objects when called with `{ parsed: true }`.
- * @example await sdv.mlb.espnMlbSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
+ * @example await sdv.mlb.espnMlbSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
  */
-export const espnMlbSeasonWeekEvents: WrapperFn = (params = {}) =>
+export const espnMlbSeasonWeekGames: WrapperFn = (params = {}) =>
   callWrapper(SEASON_WEEK_EVENTS_DEF, CFG, params);
-/** snake_case alias of {@link espnMlbSeasonWeekEvents} (py/R parity). */
-export const espn_mlb_season_week_events = espnMlbSeasonWeekEvents;
+/** snake_case alias of {@link espnMlbSeasonWeekGames} (py/R parity). */
+export const espn_mlb_season_week_games = espnMlbSeasonWeekGames;
 
 const SEASON_WEEK_POWERINDEX_DEF: WrapperDef = {
   "short": "season_week_powerindex",

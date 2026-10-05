@@ -9,7 +9,7 @@ import { HOSTS } from '../dist/core/client.js';
 // builds a well-formed ESPN URL. ~819 wrappers across 29 leagues.
 
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
-const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2']);
+const FAMILIES = new Set(['site_v2', 'site_v2_alt', 'web_v3', 'core_v2', 'fitt_v3']);
 const SCOPES = new Set(['universal', 'ncaa', 'football', 'mlb']);
 
 /** Wrappers applicable to a league = those whose scope is in the league's scopes. */
@@ -61,7 +61,9 @@ describe('every wrapper is exposed under both names on every applicable league',
       const ns = sdv[league.prefix];
       should(ns).be.an.Object();
       for (const w of wrappers) {
-        const snake = `espn_${league.prefix}_${w.short}`;
+        // v4 public name (sdv-py's); pre-v4 names are covered by test/naming.test.js
+        const pub = league.publicShorts?.[w.short] ?? w.publicShort ?? w.short;
+        const snake = `espn_${league.prefix}_${pub}`;
         const camel = toCamel(snake);
         (typeof ns[snake]).should.equal('function', `missing ${snake}`);
         (typeof ns[camel]).should.equal('function', `missing ${camel}`);

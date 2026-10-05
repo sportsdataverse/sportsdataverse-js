@@ -15,6 +15,7 @@
     "src/core/transforms.ts",
     "src/core/sports247_runtime.ts",
     "src/parsers/sports247.ts",
+    "src/core/deprecation.ts",
     "src/core/nba_stats_runtime.ts"
   ]
 }

@@ -17,35 +17,35 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB St
 
 | League | sport | ESPN slug | scopes | wrappers | native |
 |---|---|---|---|---:|---:|
-| [nba](../nba/) | `basketball` | `nba` | universal | 111 | 128 |
-| [wnba](../wnba/) | `basketball` | `wnba` | universal | 111 | 111 |
-| [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 117 | — |
-| [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 117 | — |
-| [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 119 | — |
-| [nfl](../nfl/) | `football` | `nfl` | universal, football | 113 | 15 |
-| [mlb](../mlb/) | `baseball` | `mlb` | universal, mlb | 112 | 117 |
-| [nhl](../nhl/) | `hockey` | `nhl` | universal | 111 | 127 |
-| [mch](../mch/) | `hockey` | `mens-college-hockey` | universal, ncaa | 117 | — |
-| [wch](../wch/) | `hockey` | `womens-college-hockey` | universal, ncaa | 117 | — |
-| [college_baseball](../college_baseball/) | `baseball` | `college-baseball` | universal, ncaa | 117 | — |
-| [college_softball](../college_softball/) | `baseball` | `college-softball` | universal, ncaa | 117 | — |
-| [ufl](../ufl/) | `football` | `ufl` | universal | 111 | — |
-| [xfl](../xfl/) | `football` | `xfl` | universal | 111 | — |
-| [cfl](../cfl/) | `football` | `cfl` | universal | 111 | — |
-| [soccer](../soccer/) | `soccer` | `eng.1 *(param)*` | universal | 111 | — |
-| [epl](../epl/) | `soccer` | `eng.1` | universal | 111 | — |
-| [laliga](../laliga/) | `soccer` | `esp.1` | universal | 111 | — |
-| [bundesliga](../bundesliga/) | `soccer` | `ger.1` | universal | 111 | — |
-| [seriea](../seriea/) | `soccer` | `ita.1` | universal | 111 | — |
-| [ligue1](../ligue1/) | `soccer` | `fra.1` | universal | 111 | — |
-| [mls](../mls/) | `soccer` | `usa.1` | universal | 111 | — |
-| [ligamx](../ligamx/) | `soccer` | `mex.1` | universal | 111 | — |
-| [ucl](../ucl/) | `soccer` | `uefa.champions` | universal | 111 | — |
-| [uel](../uel/) | `soccer` | `uefa.europa` | universal | 111 | — |
-| [nwsl](../nwsl/) | `soccer` | `usa.nwsl` | universal | 111 | — |
-| [wwc](../wwc/) | `soccer` | `fifa.wwc` | universal | 111 | — |
-| [wc](../wc/) | `soccer` | `fifa.world` | universal | 111 | — |
-| [cricket](../cricket/) | `cricket` | `eng.1 *(param)*` | universal | 111 | — |
+| [nba](../nba/) | `basketball` | `nba` | universal | 112 | 128 |
+| [wnba](../wnba/) | `basketball` | `wnba` | universal | 112 | 111 |
+| [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 118 | — |
+| [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 118 | — |
+| [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 120 | — |
+| [nfl](../nfl/) | `football` | `nfl` | universal, football | 114 | 15 |
+| [mlb](../mlb/) | `baseball` | `mlb` | universal, mlb | 113 | 117 |
+| [nhl](../nhl/) | `hockey` | `nhl` | universal | 112 | 127 |
+| [mch](../mch/) | `hockey` | `mens-college-hockey` | universal, ncaa | 118 | — |
+| [wch](../wch/) | `hockey` | `womens-college-hockey` | universal, ncaa | 118 | — |
+| [college_baseball](../college_baseball/) | `baseball` | `college-baseball` | universal, ncaa | 118 | — |
+| [college_softball](../college_softball/) | `baseball` | `college-softball` | universal, ncaa | 118 | — |
+| [ufl](../ufl/) | `football` | `ufl` | universal | 112 | — |
+| [xfl](../xfl/) | `football` | `xfl` | universal | 112 | — |
+| [cfl](../cfl/) | `football` | `cfl` | universal | 112 | — |
+| [soccer](../soccer/) | `soccer` | `eng.1 *(param)*` | universal | 112 | — |
+| [epl](../epl/) | `soccer` | `eng.1` | universal | 112 | — |
+| [laliga](../laliga/) | `soccer` | `esp.1` | universal | 112 | — |
+| [bundesliga](../bundesliga/) | `soccer` | `ger.1` | universal | 112 | — |
+| [seriea](../seriea/) | `soccer` | `ita.1` | universal | 112 | — |
+| [ligue1](../ligue1/) | `soccer` | `fra.1` | universal | 112 | — |
+| [mls](../mls/) | `soccer` | `usa.1` | universal | 112 | 12 |
+| [ligamx](../ligamx/) | `soccer` | `mex.1` | universal | 112 | — |
+| [ucl](../ucl/) | `soccer` | `uefa.champions` | universal | 112 | — |
+| [uel](../uel/) | `soccer` | `uefa.europa` | universal | 112 | — |
+| [nwsl](../nwsl/) | `soccer` | `usa.nwsl` | universal | 112 | 9 |
+| [wwc](../wwc/) | `soccer` | `fifa.wwc` | universal | 112 | — |
+| [wc](../wc/) | `soccer` | `fifa.world` | universal | 112 | — |
+| [cricket](../cricket/) | `cricket` | `eng.1 *(param)*` | universal | 112 | — |
 
 ## Standalone provider namespaces
 
@@ -60,7 +60,9 @@ Native providers that aren't a single ESPN league — each gets its own `sdv.<na
 | [fox](./fox) | *cross-sport* | Fox Sports | 38 |
 | [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (scores), Yahoo Sports | 109 |
 | [hockeytech](./hockeytech) | Hockey | HockeyTech / LeagueStat | 16 |
-| [torvik](./torvik) | Basketball | BartTorvik (T-Rank) | 5 |
+| [torvik](./torvik) | Basketball | BartTorvik (T-Rank), BartTorvik women's (T-Rank) | 6 |
+| [on3](./on3) | *cross-sport* | On3 Recruit Database | 78 |
+| [asa](./asa) | Soccer | American Soccer Analysis | 15 |
 
 :::tip Same call, every league
 ```js
@@ -73,7 +75,11 @@ await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });
 :::tip Native (non-ESPN) APIs
 ```js
 await sdv.mlb.mlbSchedule({ sportId: 1, date: '2024-07-01' });
-await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });
-await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });
+await sdv.nhl.nhlWebPbp({ gameId: 2023030417, parsed: true });
+await sdv.nfl.nflStandings({ season: 2024, seasonType: 'REG', week: 1 });
 ```
+:::
+
+:::note v4 names
+Since v4 every wrapper carries sdv-py's name (`athlete` → `player`, `event` → `game`, …). Pre-v4 names still work as deprecated aliases (one `DeprecationWarning` per name) — see [Deprecated names](./deprecations).
 :::

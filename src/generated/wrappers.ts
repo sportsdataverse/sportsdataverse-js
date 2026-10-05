@@ -268,6 +268,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_info",
+    "publicShort": "player_info",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}",
@@ -280,6 +281,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_bio",
+    "publicShort": "player_bio",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/bio",
@@ -292,6 +294,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_news",
+    "publicShort": "player_news",
     "family": "site_v2",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/news",
@@ -569,6 +572,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_week_events",
+    "publicShort": "season_week_games",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events",
@@ -631,6 +635,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "season_athletes",
+    "publicShort": "season_players",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/seasons/{season}/athletes",
@@ -769,6 +774,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athletes_index",
+    "publicShort": "players_index",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes",
@@ -794,6 +800,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_core",
+    "publicShort": "player_core",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}",
@@ -806,6 +813,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_career_stats",
+    "publicShort": "player_career_stats",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]",
@@ -822,6 +830,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_statisticslog",
+    "publicShort": "player_statisticslog",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/statisticslog",
@@ -834,6 +843,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_eventlog",
+    "publicShort": "player_eventlog",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/eventlog",
@@ -846,6 +856,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_contracts",
+    "publicShort": "player_contracts",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/contracts",
@@ -858,6 +869,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_awards",
+    "publicShort": "player_awards",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/awards",
@@ -870,6 +882,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_seasons",
+    "publicShort": "player_seasons",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/seasons",
@@ -882,6 +895,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_records",
+    "publicShort": "player_records",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/records",
@@ -894,6 +908,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_injuries",
+    "publicShort": "player_injuries",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/injuries",
@@ -906,6 +921,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_notes",
+    "publicShort": "player_notes",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/notes",
@@ -918,6 +934,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_vs_athlete",
+    "publicShort": "player_vs_player",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}",
@@ -933,6 +950,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "events",
+    "publicShort": "games",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events",
@@ -951,6 +969,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event",
+    "publicShort": "game",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}",
@@ -963,6 +982,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competition",
+    "publicShort": "game_competition",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}",
@@ -980,6 +1000,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitors",
+    "publicShort": "game_teams",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors",
@@ -997,6 +1018,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor",
+    "publicShort": "game_team",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}",
@@ -1017,6 +1039,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_roster",
+    "publicShort": "game_team_roster",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster",
@@ -1037,6 +1060,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_linescores",
+    "publicShort": "game_team_linescores",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores",
@@ -1057,6 +1081,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_statistics",
+    "publicShort": "game_team_statistics",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics",
@@ -1077,6 +1102,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_record",
+    "publicShort": "game_team_record",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record",
@@ -1097,6 +1123,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_competitor_leaders",
+    "publicShort": "game_team_leaders",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders",
@@ -1117,6 +1144,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_odds",
+    "publicShort": "game_odds",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/odds",
@@ -1134,6 +1162,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_probabilities",
+    "publicShort": "game_probabilities",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities",
@@ -1157,6 +1186,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_plays",
+    "publicShort": "game_plays",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays",
@@ -1180,6 +1210,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_play",
+    "publicShort": "game_play",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}",
@@ -1200,6 +1231,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_play_personnel",
+    "publicShort": "game_play_personnel",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel",
@@ -1220,6 +1252,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_situation",
+    "publicShort": "game_situation",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/situation",
@@ -1237,6 +1270,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_status",
+    "publicShort": "game_status",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/status",
@@ -1254,6 +1288,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_officials",
+    "publicShort": "game_officials",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials",
@@ -1271,6 +1306,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_broadcasts",
+    "publicShort": "game_broadcasts",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts",
@@ -1288,6 +1324,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_predictor",
+    "publicShort": "game_predictor",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/predictor",
@@ -1305,6 +1342,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_powerindex",
+    "publicShort": "game_powerindex",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex",
@@ -1322,6 +1360,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_propbets",
+    "publicShort": "game_propbets",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/propbets",
@@ -1339,6 +1378,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_leaders",
+    "publicShort": "game_leaders",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/leaders",
@@ -1356,6 +1396,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_scoringplays",
+    "publicShort": "game_scoringplays",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays",
@@ -1373,6 +1414,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_official_detail",
+    "publicShort": "game_official_detail",
     "family": "core_v2",
     "scope": "universal",
     "path": "/{sport}/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}",
@@ -1649,6 +1691,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "recruiting_athletes",
+    "publicShort": "recruiting_players",
     "family": "core_v2",
     "scope": "ncaa",
     "path": "/{sport}/leagues/{league}/recruiting/{year}/athletes",
@@ -1753,6 +1796,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_hotzones",
+    "publicShort": "player_hotzones",
     "family": "core_v2",
     "scope": "mlb",
     "path": "/{sport}/leagues/{league}/athletes/{athlete_id}/hotzones",
@@ -1765,6 +1809,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_overview",
+    "publicShort": "player_overview",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/overview",
@@ -1777,6 +1822,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_stats",
+    "publicShort": "player_stats",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/stats",
@@ -1794,6 +1840,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_gamelog",
+    "publicShort": "player_gamelog",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/gamelog",
@@ -1811,6 +1858,7 @@ export const WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "athlete_splits",
+    "publicShort": "player_splits",
     "family": "web_v3",
     "scope": "universal",
     "path": "/{sport}/{league}/athletes/{athlete_id}/splits",
@@ -1858,6 +1906,27 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "sort",
         "queryKey": "sort"
+      }
+    ]
+  },
+  {
+    "short": "fpi",
+    "family": "fitt_v3",
+    "scope": "universal",
+    "path": "/{sport}/{league}/powerindex",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
       }
     ]
   }
@@ -5376,6 +5445,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "pbp",
+    "publicName": "nhl_web_pbp",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5392,6 +5462,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "boxscore",
+    "publicName": "nhl_boxscore",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5408,6 +5479,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "landing",
+    "publicName": "nhl_landing",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5424,6 +5496,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "right_rail",
+    "publicName": "nhl_right_rail",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5440,6 +5513,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "schedule",
+    "publicName": "nhl_web_schedule",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5457,6 +5531,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "score",
+    "publicName": "nhl_score",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5474,6 +5549,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "schedule_calendar",
+    "publicName": "nhl_schedule_calendar",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5491,6 +5567,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "playoff_series",
+    "publicName": "nhl_playoff_series",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5511,6 +5588,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nhl_standings",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5528,6 +5606,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings_season",
+    "publicName": "nhl_standings_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5540,6 +5619,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_season",
+    "publicName": "nhl_club_schedule_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5561,6 +5641,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_month",
+    "publicName": "nhl_club_schedule_month",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5581,6 +5662,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_schedule_week",
+    "publicName": "nhl_club_schedule_week",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5601,6 +5683,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_stats",
+    "publicName": "nhl_club_stats",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5627,6 +5710,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "club_stats_season",
+    "publicName": "nhl_club_stats_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5643,6 +5727,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "roster",
+    "publicName": "nhl_roster",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5664,6 +5749,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "roster_season",
+    "publicName": "nhl_roster_season",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5680,6 +5766,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_landing",
+    "publicName": "nhl_player_landing",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5696,6 +5783,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_game_log",
+    "publicName": "nhl_player_game_log",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5722,6 +5810,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_spotlight",
+    "publicName": "nhl_player_spotlight",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5734,6 +5823,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "skater_leaders",
+    "publicName": "nhl_skater_leaders",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5757,6 +5847,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "goalie_leaders",
+    "publicName": "nhl_goalie_leaders",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5780,6 +5871,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks",
+    "publicName": "nhl_draft_picks",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5801,6 +5893,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_rankings",
+    "publicName": "nhl_draft_rankings",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5822,6 +5915,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks_now",
+    "publicName": "nhl_draft_picks_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5834,6 +5928,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_rankings_now",
+    "publicName": "nhl_draft_rankings_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -5846,6 +5941,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_tracker_picks_now",
+    "publicName": "nhl_draft_tracker_picks_now",
     "flat": true,
     "api": "nhl_api_web",
     "host": "https://api-web.nhle.com",
@@ -7747,6 +7843,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "standings",
+    "publicName": "nfl_standings",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7781,6 +7878,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "rosters",
+    "publicName": "nfl_rosters",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7810,6 +7908,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "teams_history",
+    "publicName": "nfl_teams_history",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7834,6 +7933,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team",
+    "publicName": "nfl_team",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7851,6 +7951,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weeks",
+    "publicName": "nfl_weeks",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7875,6 +7976,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weeks_by_date",
+    "publicName": "nfl_weeks_by_date",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7892,6 +7994,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "combine_profiles",
+    "publicName": "nfl_combine_profiles",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7916,6 +8019,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "draft_picks",
+    "publicName": "nfl_draft_picks",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7940,6 +8044,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "injuries",
+    "publicName": "nfl_injuries",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7969,6 +8074,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_summaries",
+    "publicName": "nfl_game_summaries",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -7998,6 +8104,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "weekly_game_details",
+    "publicName": "nfl_weekly_game_details",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8051,6 +8158,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "live_team_statistics",
+    "publicName": "nfl_live_team_statistics",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8067,6 +8175,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "live_player_statistics",
+    "publicName": "nfl_live_player_statistics",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8083,6 +8192,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_details_v2",
+    "publicName": "nfl_game_details_v2",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -8124,6 +8234,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_details_by_slug",
+    "publicName": "nfl_game_details_by_slug",
     "flat": true,
     "api": "nfl_api",
     "host": "https://api.nfl.com",
@@ -10279,7 +10390,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/bulk"
   },
   {
-    "short": "client_configuration",
+    "short": "client_config",
+    "legacyShort": "client_configuration",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10349,7 +10461,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/coach_team_associations"
   },
   {
-    "short": "sub_divisions",
+    "short": "division_subdivisions",
+    "legacyShort": "sub_divisions",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10516,7 +10629,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_betting_splits"
   },
   {
-    "short": "boxscore",
+    "short": "game_boxscore",
+    "legacyShort": "boxscore",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10585,7 +10699,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_content_story"
   },
   {
-    "short": "featured_game",
+    "short": "game_featured",
+    "legacyShort": "featured_game",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10659,7 +10774,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_odds"
   },
   {
-    "short": "game_hq_odds",
+    "short": "game_odds_hq",
+    "legacyShort": "game_hq_odds",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10691,7 +10807,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_outcomes"
   },
   {
-    "short": "probable_players",
+    "short": "game_probable_players",
+    "legacyShort": "probable_players",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10769,7 +10886,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_rtwp"
   },
   {
-    "short": "ruwt_highlights",
+    "short": "game_ruwt_highlights",
+    "legacyShort": "ruwt_highlights",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10993,7 +11111,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/game_ticket"
   },
   {
-    "short": "weather",
+    "short": "game_weather",
+    "legacyShort": "weather",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11174,7 +11293,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_combine_data"
   },
   {
-    "short": "depth_charts",
+    "short": "player_depth_charts",
+    "legacyShort": "depth_charts",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11298,7 +11418,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_game_stats"
   },
   {
-    "short": "hockey_player_meta",
+    "short": "player_hockey_meta",
+    "legacyShort": "hockey_player_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11335,7 +11456,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_injuries"
   },
   {
-    "short": "baseball_player_meta",
+    "short": "player_meta_baseball",
+    "legacyShort": "baseball_player_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11351,7 +11473,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/baseball_player_meta"
   },
   {
-    "short": "player_golf_metadata",
+    "short": "player_meta_golf",
+    "legacyShort": "player_golf_metadata",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11388,7 +11511,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_outlook"
   },
   {
-    "short": "position_rankings",
+    "short": "player_position_rankings",
+    "legacyShort": "position_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11446,7 +11570,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/player_rankings"
   },
   {
-    "short": "recruit_team_associations",
+    "short": "player_recruit_associations",
+    "legacyShort": "recruit_team_associations",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11826,7 +11951,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_rankings"
   },
   {
-    "short": "sports_line_team_rankings",
+    "short": "team_rankings_sportsline",
+    "legacyShort": "sports_line_team_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11908,7 +12034,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/cbs/team_standings"
   },
   {
-    "short": "sports_line_team_standings",
+    "short": "team_standings_sportsline",
+    "legacyShort": "sports_line_team_standings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -17493,6 +17620,2734 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "queryParams": [],
     "parser": "parse_torvik_game_schedule",
     "returnsSchema": "native/torvik/game_schedule"
+  },
+  {
+    "short": "ratings",
+    "flat": true,
+    "api": "bart_wbb",
+    "host": "https://barttorvik.com/ncaaw",
+    "scope": "universal",
+    "path": "/{year}_team_results.csv",
+    "pathParams": [
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_torvik_ratings"
+  },
+  {
+    "short": "coaches_history",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/coaches/{person_key}/history",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/coaches_history"
+  },
+  {
+    "short": "coaches_profile",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/coaches/{person_key}/profile",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/coaches_profile"
+  },
+  {
+    "short": "collective_groups",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/collective-groups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "organization_key",
+        "queryKey": "organizationKey"
+      },
+      {
+        "name": "query",
+        "queryKey": "query"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/collective_groups"
+  },
+  {
+    "short": "collective_groups_deals",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/collective-groups/{key}/deals",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/collective_groups_deals"
+  },
+  {
+    "short": "collective_groups_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/collective-groups/{key}",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/collective_groups_key"
+  },
+  {
+    "short": "commits_latest",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/commits/latest",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/commits_latest"
+  },
+  {
+    "short": "commits_organizations_latest_commits",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/commits/organizations/{org_key}/latest-commits",
+    "pathParams": [
+      {
+        "name": "org_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/commits_organizations_latest_commits"
+  },
+  {
+    "short": "commits_organizations_org_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/commits/organizations/{org_key}",
+    "pathParams": [
+      {
+        "name": "org_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/commits_organizations_org_key"
+  },
+  {
+    "short": "draft_organization_rank",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/draft-organization-rank",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/draft_organization_rank"
+  },
+  {
+    "short": "draft_pick_organization_rank",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/draft-pick-organization-rank",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/draft_pick_organization_rank"
+  },
+  {
+    "short": "drafts",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/drafts",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "round",
+        "queryKey": "round"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts"
+  },
+  {
+    "short": "drafts_by_stars",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/drafts-by-stars",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "year_span",
+        "queryKey": "yearSpan"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts_by_stars"
+  },
+  {
+    "short": "drafts_by_stars_summary",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/drafts-by-stars-summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts_by_stars_summary"
+  },
+  {
+    "short": "drafts_players",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/drafts/{org_key}/players",
+    "pathParams": [
+      {
+        "name": "org_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts_players"
+  },
+  {
+    "short": "filters_conferences",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/conferences",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_conferences"
+  },
+  {
+    "short": "filters_draft_rounds",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/draft-rounds",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_draft_rounds"
+  },
+  {
+    "short": "filters_positions",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/positions",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "position_type",
+        "queryKey": "positionType"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_positions"
+  },
+  {
+    "short": "filters_sports",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/sports",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_sports"
+  },
+  {
+    "short": "filters_status",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/status",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_status"
+  },
+  {
+    "short": "filters_teams",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/teams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "group_by",
+        "queryKey": "groupBy"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_teams"
+  },
+  {
+    "short": "filters_years",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/filters/years",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_years"
+  },
+  {
+    "short": "nil_100",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/nil-100",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_100"
+  },
+  {
+    "short": "nil_100_v2",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v2",
+    "scope": "universal",
+    "path": "/nil-100",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "org_key",
+        "queryKey": "orgKey"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_100_v2"
+  },
+  {
+    "short": "nil_compliances_state",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/nil-compliances/state",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "state_key",
+        "queryKey": "stateKey"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_compliances_state"
+  },
+  {
+    "short": "nil_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/nil-rankings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "gender",
+        "queryKey": "gender"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "org_type",
+        "queryKey": "orgType"
+      },
+      {
+        "name": "position_abbr",
+        "queryKey": "positionAbbr"
+      },
+      {
+        "name": "state_abbr",
+        "queryKey": "stateAbbr"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_rankings"
+  },
+  {
+    "short": "organizations_draft_class_by_state",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/draft-class-by-state",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_class_by_state"
+  },
+  {
+    "short": "organizations_draft_class_by_year",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/draft-class-by-year",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_class_by_year"
+  },
+  {
+    "short": "organizations_draft_count_by_stars",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/draft-count-by-stars",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_count_by_stars"
+  },
+  {
+    "short": "organizations_draft_count_by_year",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/draft-count-by-year",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_count_by_year"
+  },
+  {
+    "short": "organizations_draft_ranking_summary",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/draft-ranking-summary",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_ranking_summary"
+  },
+  {
+    "short": "organizations_drafted_players",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/drafted-players",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_drafted_players"
+  },
+  {
+    "short": "organizations_drafts_by_stars_summary",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/drafts-by-stars-summary",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_drafts_by_stars_summary"
+  },
+  {
+    "short": "organizations_roster",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/roster",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_roster"
+  },
+  {
+    "short": "organizations_roster_header",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/organizations/{organization_key}/roster-header",
+    "pathParams": [
+      {
+        "name": "organization_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_roster_header"
+  },
+  {
+    "short": "people_combine_measurements",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/combine-measurements",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_combine_measurements"
+  },
+  {
+    "short": "people_latest_valuation",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/latest-valuation",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_latest_valuation"
+  },
+  {
+    "short": "people_measurements",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/measurements",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_measurements"
+  },
+  {
+    "short": "people_measurements_averages",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/measurements/averages",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_measurements_averages"
+  },
+  {
+    "short": "people_person_connections",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/person-connections",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_person_connections"
+  },
+  {
+    "short": "people_social",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/social",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_social"
+  },
+  {
+    "short": "people_social_post_summary",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/social-post-summary",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_social_post_summary"
+  },
+  {
+    "short": "people_track_and_field_measurements",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/track-and-field-measurements",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_track_and_field_measurements"
+  },
+  {
+    "short": "people_valuation_growth",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/people/{person_key}/valuation-growth",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_valuation_growth"
+  },
+  {
+    "short": "person_connections_connection_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/person-connections/{connection_key}",
+    "pathParams": [
+      {
+        "name": "connection_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_connections_connection_key"
+  },
+  {
+    "short": "person_primary_recruitment_evaluation",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/person/{person_key}/primary-recruitment-evaluation",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_primary_recruitment_evaluation"
+  },
+  {
+    "short": "person_recruitment_evaluations",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/person/{person_key}/recruitment-evaluations",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_recruitment_evaluations"
+  },
+  {
+    "short": "person_sport_profile_recruit",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/person-sport/{ps_key}/profile-recruit",
+    "pathParams": [
+      {
+        "name": "ps_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_sport_profile_recruit"
+  },
+  {
+    "short": "person_sport_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/person-sport-rankings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_sport_rankings"
+  },
+  {
+    "short": "player_all_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/all-rankings",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_all_rankings"
+  },
+  {
+    "short": "player_database_updates",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/database-updates",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_database_updates"
+  },
+  {
+    "short": "player_images",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/images",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_images"
+  },
+  {
+    "short": "player_organizations",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/organizations",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_organizations"
+  },
+  {
+    "short": "player_organizations_org_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{player_key}/organizations/{org_key}",
+    "pathParams": [
+      {
+        "name": "player_key"
+      },
+      {
+        "name": "org_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_organizations_org_key"
+  },
+  {
+    "short": "player_person_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/rankings",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_person_rankings"
+  },
+  {
+    "short": "player_profile",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/profile",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_profile"
+  },
+  {
+    "short": "player_team_targets",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{player_key}/team-targets",
+    "pathParams": [
+      {
+        "name": "player_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_team_targets"
+  },
+  {
+    "short": "player_verified",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/verified",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_verified"
+  },
+  {
+    "short": "player_videos",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{person_key}/videos",
+    "pathParams": [
+      {
+        "name": "person_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_videos"
+  },
+  {
+    "short": "player_visit_center",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/player/{player_key}/visit-center",
+    "pathParams": [
+      {
+        "name": "player_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_visit_center"
+  },
+  {
+    "short": "players_industry_comparision",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/players/industry-comparision",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "state_abbr",
+        "queryKey": "stateAbbr"
+      },
+      {
+        "name": "position_abbr",
+        "queryKey": "positionAbbr"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "sort_by_industry",
+        "queryKey": "sortByIndustry"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/players_industry_comparision"
+  },
+  {
+    "short": "players_industry_comparision_list",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/players/industry-comparision-list",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/players_industry_comparision_list"
+  },
+  {
+    "short": "predictions_user_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/predictions/{user_key}",
+    "pathParams": [
+      {
+        "name": "user_key"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/predictions_user_key"
+  },
+  {
+    "short": "quotes",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/quotes",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/quotes"
+  },
+  {
+    "short": "quotes_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/quotes/{key}",
+    "pathParams": [
+      {
+        "name": "key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/quotes_key"
+  },
+  {
+    "short": "recruitment_primary_recruitment_evaluation",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/recruitment/{recruitment_key}/primary-recruitment-evaluation",
+    "pathParams": [
+      {
+        "name": "recruitment_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitment_primary_recruitment_evaluation"
+  },
+  {
+    "short": "recruitment_recruitment_evaluations",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/recruitment/{recruitment_key}/recruitment-evaluations",
+    "pathParams": [
+      {
+        "name": "recruitment_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitment_recruitment_evaluations"
+  },
+  {
+    "short": "recruitments_latest_rpm_picks",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/recruitments/latest-rpm-picks",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "org_key",
+        "queryKey": "orgKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_latest_rpm_picks"
+  },
+  {
+    "short": "recruitments_profile",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/recruitments/{rec_key}/profile",
+    "pathParams": [
+      {
+        "name": "rec_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_profile"
+  },
+  {
+    "short": "recruitments_rpm_picks",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/recruitments/{rec_key}/rpm-picks",
+    "pathParams": [
+      {
+        "name": "rec_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_rpm_picks"
+  },
+  {
+    "short": "recruitments_rpm_summary",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/recruitments/{rec_key}/rpm-summary",
+    "pathParams": [
+      {
+        "name": "rec_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_rpm_summary"
+  },
+  {
+    "short": "team_ranking",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/team-ranking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_size",
+        "queryKey": "pageSize"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking"
+  },
+  {
+    "short": "team_ranking_bluechips_team_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/team-ranking/{sport_slug}-{year}/bluechips-team-rankings",
+    "pathParams": [
+      {
+        "name": "sport_slug"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_bluechips_team_rankings"
+  },
+  {
+    "short": "team_ranking_consensus_team_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/team-ranking/{sport_slug}-{year}/consensus-team-rankings",
+    "pathParams": [
+      {
+        "name": "sport_slug"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_consensus_team_rankings"
+  },
+  {
+    "short": "team_ranking_organizations_summary",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/team-ranking/organizations/{org_key}/summary",
+    "pathParams": [
+      {
+        "name": "org_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_organizations_summary"
+  },
+  {
+    "short": "team_ranking_team_rankings",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/team-ranking/{sport_slug}-{year}/team-rankings",
+    "pathParams": [
+      {
+        "name": "sport_slug"
+      },
+      {
+        "name": "year"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_team_rankings"
+  },
+  {
+    "short": "transfers_best_available",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/transfers/best-available",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "org_key",
+        "queryKey": "orgKey"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "position_abbr",
+        "queryKey": "positionAbbr"
+      },
+      {
+        "name": "status",
+        "queryKey": "status"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "cutoff",
+        "queryKey": "cutoff"
+      },
+      {
+        "name": "order_by",
+        "queryKey": "orderBy"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/transfers_best_available"
+  },
+  {
+    "short": "transfers_latest",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/transfers/latest",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "org_key",
+        "queryKey": "orgKey"
+      },
+      {
+        "name": "sport_key",
+        "queryKey": "sportKey"
+      },
+      {
+        "name": "year",
+        "queryKey": "year"
+      },
+      {
+        "name": "position_abbr",
+        "queryKey": "positionAbbr"
+      },
+      {
+        "name": "status",
+        "queryKey": "status"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      }
+    ],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/transfers_latest"
+  },
+  {
+    "short": "videos_video_key",
+    "flat": true,
+    "api": "on3",
+    "host": "https://api.on3.com/public/rdb/v1",
+    "scope": "universal",
+    "path": "/videos/{video_key}",
+    "pathParams": [
+      {
+        "name": "video_key"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/videos_video_key"
+  },
+  {
+    "short": "games",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/games",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/games"
+  },
+  {
+    "short": "games_xgoals",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/games/xgoals",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/games_xgoals"
+  },
+  {
+    "short": "goalkeepers_goals_added",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/goalkeepers/goals-added",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa_goals_added",
+    "returnsSchema": "native/asa/goalkeepers_goals_added"
+  },
+  {
+    "short": "goalkeepers_xgoals",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/goalkeepers/xgoals",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/goalkeepers_xgoals"
+  },
+  {
+    "short": "managers",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/managers",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/managers"
+  },
+  {
+    "short": "players",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/players",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/players"
+  },
+  {
+    "short": "players_goals_added",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/players/goals-added",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa_goals_added",
+    "returnsSchema": "native/asa/players_goals_added"
+  },
+  {
+    "short": "players_salaries",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/players/salaries",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/players_salaries"
+  },
+  {
+    "short": "players_xgoals",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/players/xgoals",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/players_xgoals"
+  },
+  {
+    "short": "referees",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/referees",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/referees"
+  },
+  {
+    "short": "stadia",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/stadia",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/stadia"
+  },
+  {
+    "short": "teams",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/teams",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/teams"
+  },
+  {
+    "short": "teams_goals_added",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/teams/goals-added",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa_goals_added",
+    "returnsSchema": "native/asa/teams_goals_added"
+  },
+  {
+    "short": "teams_xgoals",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/teams/xgoals",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/teams_xgoals"
+  },
+  {
+    "short": "teams_xpass",
+    "flat": true,
+    "api": "asa",
+    "host": "https://app.americansocceranalysis.com/api/v1",
+    "scope": "universal",
+    "path": "/{league_slug}/teams/xpass",
+    "pathParams": [
+      {
+        "name": "league_slug"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season_name",
+        "queryKey": "season_name"
+      },
+      {
+        "name": "stage_name",
+        "queryKey": "stage_name"
+      },
+      {
+        "name": "minimum_minutes",
+        "queryKey": "minimum_minutes"
+      },
+      {
+        "name": "general_position",
+        "queryKey": "general_position"
+      },
+      {
+        "name": "split_by_teams",
+        "queryKey": "split_by_teams"
+      },
+      {
+        "name": "split_by_seasons",
+        "queryKey": "split_by_seasons"
+      },
+      {
+        "name": "split_by_games",
+        "queryKey": "split_by_games"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "start_date"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "end_date"
+      }
+    ],
+    "parser": "parse_asa",
+    "returnsSchema": "native/asa/teams_xpass"
+  },
+  {
+    "short": "club",
+    "publicName": "mls_club",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://stats-api.mlssoccer.com",
+    "scope": "universal",
+    "path": "/clubs/{club_id}",
+    "pathParams": [
+      {
+        "name": "club_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_entity",
+    "returnsSchema": "native/mls_api/club"
+  },
+  {
+    "short": "competition_seasons",
+    "publicName": "mls_competition_seasons",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://stats-api.mlssoccer.com",
+    "scope": "universal",
+    "path": "/competitions/{competition_id}/seasons",
+    "pathParams": [
+      {
+        "name": "competition_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/competition_seasons"
+  },
+  {
+    "short": "competitions",
+    "publicName": "mls_competitions",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://stats-api.mlssoccer.com",
+    "scope": "universal",
+    "path": "/competitions",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/competitions"
+  },
+  {
+    "short": "content_season",
+    "publicName": "mls_content_season",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://dapi.mlssoccer.com",
+    "scope": "universal",
+    "path": "/v2/content/en-us/seasons/{slug}",
+    "pathParams": [
+      {
+        "name": "slug"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_entity",
+    "returnsSchema": "native/mls_api/content_season"
+  },
+  {
+    "short": "content_seasons",
+    "publicName": "mls_content_seasons",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://dapi.mlssoccer.com",
+    "scope": "universal",
+    "path": "/v2/content/en-us/seasons",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "competition_sportec_id",
+        "queryKey": "fields.competitionSportecId"
+      },
+      {
+        "name": "sportec_id",
+        "queryKey": "fields.sportecId"
+      }
+    ],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/content_seasons"
+  },
+  {
+    "short": "match",
+    "publicName": "mls_match",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://stats-api.mlssoccer.com",
+    "scope": "universal",
+    "path": "/matches/{match_id}",
+    "pathParams": [
+      {
+        "name": "match_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_match",
+    "returnsSchema": "native/mls_api/match"
+  },
+  {
+    "short": "season_matches",
+    "publicName": "mls_season_matches",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://stats-api.mlssoccer.com",
+    "scope": "universal",
+    "path": "/matches/seasons/{season_id}",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "match_date_gte",
+        "queryKey": "match_date[gte]"
+      },
+      {
+        "name": "match_date_lte",
+        "queryKey": "match_date[lte]"
+      },
+      {
+        "name": "competition_id",
+        "queryKey": "competition_id"
+      },
+      {
+        "name": "per_page",
+        "queryKey": "per_page"
+      },
+      {
+        "name": "sort",
+        "queryKey": "sort"
+      },
+      {
+        "name": "series_name",
+        "queryKey": "series_name"
+      }
+    ],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/season_matches"
+  },
+  {
+    "short": "sportapi_club_players",
+    "publicName": "mls_sportapi_club_players",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://sportapi.mlssoccer.com",
+    "scope": "universal",
+    "path": "/api/players/byClub/{club_id}",
+    "pathParams": [
+      {
+        "name": "club_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "culture",
+        "queryKey": "culture"
+      }
+    ],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/sportapi_club_players"
+  },
+  {
+    "short": "sportapi_clubs_by_sportec_ids",
+    "publicName": "mls_sportapi_clubs_by_sportec_ids",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://sportapi.mlssoccer.com",
+    "scope": "universal",
+    "path": "/api/clubs/bySportecIds/{ids}",
+    "pathParams": [
+      {
+        "name": "ids"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/sportapi_clubs_by_sportec_ids"
+  },
+  {
+    "short": "sportapi_match",
+    "publicName": "mls_sportapi_match",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://sportapi.mlssoccer.com",
+    "scope": "universal",
+    "path": "/api/matches/{match_id}",
+    "pathParams": [
+      {
+        "name": "match_id"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_entity",
+    "returnsSchema": "native/mls_api/sportapi_match"
+  },
+  {
+    "short": "sportapi_matches_by_sportec_ids",
+    "publicName": "mls_sportapi_matches_by_sportec_ids",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://sportapi.mlssoccer.com",
+    "scope": "universal",
+    "path": "/api/matches/bySportecIds/{ids}",
+    "pathParams": [
+      {
+        "name": "ids"
+      }
+    ],
+    "queryParams": [],
+    "parser": "parse_mls_api",
+    "returnsSchema": "native/mls_api/sportapi_matches_by_sportec_ids"
+  },
+  {
+    "short": "standings",
+    "publicName": "mls_standings",
+    "flat": true,
+    "api": "mls_api",
+    "host": "https://stats-api.mlssoccer.com",
+    "scope": "universal",
+    "path": "/competitions/{competition_id}/seasons/{season_id}/standings",
+    "pathParams": [
+      {
+        "name": "competition_id"
+      },
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "category",
+        "queryKey": "category"
+      },
+      {
+        "name": "standings_type",
+        "queryKey": "type"
+      },
+      {
+        "name": "is_live",
+        "queryKey": "is_live",
+        "transform": "bool_str"
+      }
+    ],
+    "parser": "parse_mls_standings",
+    "returnsSchema": "native/mls_api/standings"
+  },
+  {
+    "short": "competitions",
+    "publicName": "nwsl_competitions",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/competitions",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      }
+    ],
+    "parser": "parse_nwsl_sdp",
+    "returnsSchema": "native/nwsl_api/competitions"
+  },
+  {
+    "short": "match_lineups",
+    "publicName": "nwsl_match_lineups",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/matches/{match_id}/lineups",
+    "pathParams": [
+      {
+        "name": "season_id"
+      },
+      {
+        "name": "match_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      }
+    ],
+    "parser": "parse_nwsl_lineups",
+    "returnsSchema": "native/nwsl_api/match_lineups"
+  },
+  {
+    "short": "matchdays",
+    "publicName": "nwsl_matchdays",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/matchdays",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      }
+    ],
+    "parser": "parse_nwsl_sdp",
+    "returnsSchema": "native/nwsl_api/matchdays"
+  },
+  {
+    "short": "player_stats",
+    "publicName": "nwsl_player_stats",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/stats/players",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      },
+      {
+        "name": "category",
+        "queryKey": "category"
+      },
+      {
+        "name": "role",
+        "queryKey": "role"
+      },
+      {
+        "name": "direction",
+        "queryKey": "direction"
+      },
+      {
+        "name": "page",
+        "queryKey": "page"
+      },
+      {
+        "name": "page_num_element",
+        "queryKey": "pageNumElement"
+      }
+    ],
+    "parser": "parse_nwsl_stats",
+    "returnsSchema": "native/nwsl_api/player_stats"
+  },
+  {
+    "short": "season_matches",
+    "publicName": "nwsl_season_matches",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/multipleSeasonMatches",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season_ids",
+        "queryKey": "seasonIds"
+      },
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      },
+      {
+        "name": "start_date",
+        "queryKey": "startDate"
+      },
+      {
+        "name": "end_date",
+        "queryKey": "endDate"
+      }
+    ],
+    "parser": "parse_nwsl_sdp",
+    "returnsSchema": "native/nwsl_api/season_matches"
+  },
+  {
+    "short": "stages",
+    "publicName": "nwsl_stages",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/stages",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      }
+    ],
+    "parser": "parse_nwsl_sdp",
+    "returnsSchema": "native/nwsl_api/stages"
+  },
+  {
+    "short": "standings",
+    "publicName": "nwsl_standings",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/standings/overall",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      },
+      {
+        "name": "order_by",
+        "queryKey": "orderBy"
+      },
+      {
+        "name": "direction",
+        "queryKey": "direction"
+      }
+    ],
+    "parser": "parse_nwsl_standings",
+    "returnsSchema": "native/nwsl_api/standings"
+  },
+  {
+    "short": "team_stats",
+    "publicName": "nwsl_team_stats",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/stats/teams",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      },
+      {
+        "name": "category",
+        "queryKey": "category"
+      }
+    ],
+    "parser": "parse_nwsl_stats",
+    "returnsSchema": "native/nwsl_api/team_stats"
+  },
+  {
+    "short": "teams",
+    "publicName": "nwsl_teams",
+    "flat": true,
+    "api": "nwsl_api",
+    "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+    "scope": "universal",
+    "path": "/seasons/{season_id}/teams",
+    "pathParams": [
+      {
+        "name": "season_id"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "locale",
+        "queryKey": "locale",
+        "default": "en-US"
+      }
+    ],
+    "parser": "parse_nwsl_sdp",
+    "returnsSchema": "native/nwsl_api/teams"
   },
   {
     "short": "alltimeleadersgrids",

@@ -13,6 +13,8 @@ import wnba from './services/wnba.service.js';
 import { LEAGUES } from './generated/leagues.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { WRITTEN_FLAT } from './generated/flat/index.js';
+import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from './generated/aliases.js';
+import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -32,10 +34,14 @@ const legacy: Record<string, Record<string, any>> = {
 // `espn_<prefix>_*` wrappers, merged onto its legacy service when one exists
 // (and added as a new namespace otherwise — soccer, cricket, ufl, mch, ...).
 // Each league pulls from its written module (WRITTEN_ESPN); makeLeagueModule is
-// only a fallback if a module is somehow missing.
+// only a fallback if a module is somehow missing. v4: wrappers carry sdv-py's
+// names, and every pre-v4 name a rename replaced is added as a deprecated alias
+// (one DeprecationWarning per name per process; src/generated/aliases.ts).
 const sdv: Record<string, Record<string, any>> = { ...legacy };
 for (const cfg of LEAGUES) {
-  const espn = WRITTEN_ESPN[cfg.prefix] ?? makeLeagueModule(cfg);
+  const espn = WRITTEN_ESPN[cfg.prefix]
+    ? withDeprecatedAliases(WRITTEN_ESPN[cfg.prefix], ESPN_DEPRECATED_ALIASES[cfg.prefix])
+    : makeLeagueModule(cfg);
   sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...espn };
 }
 
@@ -89,6 +95,13 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace; the merge creates `sdv.torvik.*` from scratch. Keyless but needs
   // a browser User-Agent (set by the family's getter); endpoints mix CSV/JSON.
   torvik: 'torvik',
+  // Women's T-Rank joins `sdv.torvik`; On3 / ASA are standalone provider
+  // namespaces; the MLS / NWSL native APIs merge onto their league namespaces.
+  bart_wbb: 'torvik',
+  on3: 'on3',
+  asa: 'asa',
+  mls_api: 'mls',
+  nwsl_api: 'nwsl',
   // stats.nba.com / stats.wnba.com (TLS-impersonating transport; see
   // src/core/nba_stats_runtime.ts) merge onto the league namespaces.
   nba_stats: 'nba',
@@ -99,7 +112,7 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
 // the same `callFlat` core, so they resolve identically.
 for (const [api, mod] of Object.entries(WRITTEN_FLAT)) {
   const prefix = FLAT_API_NAMESPACES[api] ?? api;
-  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
+  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...withDeprecatedAliases(mod, FLAT_DEPRECATED_ALIASES[api]) };
 }
 
 // Hand-written Baseball Savant / Statcast wrappers (date-chunked search +

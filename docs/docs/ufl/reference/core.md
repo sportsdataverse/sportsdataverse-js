@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.ufl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnUflAthleteAwards`
+## `espnUflPlayerAwards`
 
-UFL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+UFL — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_awards` / `espnUflAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ UFL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_awards(...)
+await sdv.ufl.espnUflPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_awards(...)
 ```
 
-## `espnUflAthleteCareerStats`
+## `espnUflPlayerCareerStats`
 
-UFL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+UFL — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_career_stats` / `espnUflAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ UFL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_career_stats(...)
+await sdv.ufl.espnUflPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_career_stats(...)
 ```
 
-## `espnUflAthleteContracts`
+## `espnUflPlayerContracts`
 
-UFL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+UFL — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_contracts` / `espnUflAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ UFL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_contracts(...)
+await sdv.ufl.espnUflPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_contracts(...)
 ```
 
-## `espnUflAthleteCore`
+## `espnUflPlayerCore`
 
-UFL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+UFL — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_core` / `espnUflAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ UFL — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_core(...)
+await sdv.ufl.espnUflPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_core(...)
 ```
 
-## `espnUflAthleteEventlog`
+## `espnUflPlayerEventlog`
 
-UFL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+UFL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_eventlog` / `espnUflAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ UFL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_eventlog(...)
+await sdv.ufl.espnUflPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_eventlog(...)
 ```
 
-## `espnUflAthleteInjuries`
+## `espnUflPlayerInjuries`
 
-UFL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+UFL — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_injuries` / `espnUflAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ UFL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_injuries(...)
+await sdv.ufl.espnUflPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_injuries(...)
 ```
 
-## `espnUflAthleteNotes`
+## `espnUflPlayerNotes`
 
-UFL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+UFL — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_notes` / `espnUflAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ UFL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_notes(...)
+await sdv.ufl.espnUflPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_notes(...)
 ```
 
-## `espnUflAthleteRecords`
+## `espnUflPlayerRecords`
 
-UFL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+UFL — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_records` / `espnUflAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ UFL — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_records(...)
+await sdv.ufl.espnUflPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_records(...)
 ```
 
-## `espnUflAthleteSeasons`
+## `espnUflPlayerSeasons`
 
-UFL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+UFL — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_seasons` / `espnUflAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ UFL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_seasons(...)
+await sdv.ufl.espnUflPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_seasons(...)
 ```
 
-## `espnUflAthleteStatisticslog`
+## `espnUflPlayerStatisticslog`
 
-UFL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+UFL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_statisticslog` / `espnUflAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ UFL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_statisticslog(...)
+await sdv.ufl.espnUflPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_statisticslog(...)
 ```
 
-## `espnUflAthleteVsAthlete`
+## `espnUflPlayerVsPlayer`
 
-UFL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+UFL — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athlete_vs_athlete` / `espnUflAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ UFL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athlete_vs_athlete(...)
+await sdv.ufl.espnUflPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_player_vs_player(...)
 ```
 
-## `espnUflAthletesIndex`
+## `espnUflPlayersIndex`
 
-UFL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+UFL — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_athletes_index` / `espnUflAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ UFL — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflAthletesIndex({});
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_athletes_index(...)
+await sdv.ufl.espnUflPlayersIndex({});
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_players_index(...)
 ```
 
 ## `espnUflAward`
@@ -403,12 +427,14 @@ await sdv.ufl.espnUflCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.ufl.espn_ufl_coach_season(...)
 ```
 
-## `espnUflEvent`
+## `espnUflGame`
 
-UFL — event (ESPN sports.core.api.espn.com (core v2)).
+UFL — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event` / `espnUflEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ UFL — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event(...)
+await sdv.ufl.espnUflGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game(...)
 ```
 
-## `espnUflEventBroadcasts`
+## `espnUflGameBroadcasts`
 
-UFL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+UFL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_broadcasts` / `espnUflEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ UFL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_broadcasts(...)
+await sdv.ufl.espnUflGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_broadcasts(...)
 ```
 
-## `espnUflEventCompetition`
+## `espnUflGameCompetition`
 
-UFL — event competition (ESPN sports.core.api.espn.com (core v2)).
+UFL — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competition` / `espnUflEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ UFL — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competition(...)
+await sdv.ufl.espnUflGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_competition(...)
 ```
 
-## `espnUflEventCompetitor`
+## `espnUflGameTeam`
 
-UFL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+UFL — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitor` / `espnUflEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ UFL — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitor(...)
+await sdv.ufl.espnUflGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_team(...)
 ```
 
-## `espnUflEventCompetitorLeaders`
+## `espnUflGameTeamLeaders`
 
-UFL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+UFL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitor_leaders` / `espnUflEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ UFL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitor_leaders(...)
+await sdv.ufl.espnUflGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_team_leaders(...)
 ```
 
-## `espnUflEventCompetitorLinescores`
+## `espnUflGameTeamLinescores`
 
-UFL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+UFL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitor_linescores` / `espnUflEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ UFL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitor_linescores(...)
+await sdv.ufl.espnUflGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_team_linescores(...)
 ```
 
-## `espnUflEventCompetitorRecord`
+## `espnUflGameTeamRecord`
 
-UFL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+UFL — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitor_record` / `espnUflEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ UFL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitor_record(...)
+await sdv.ufl.espnUflGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_team_record(...)
 ```
 
-## `espnUflEventCompetitorRoster`
+## `espnUflGameTeamRoster`
 
-UFL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+UFL — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitor_roster` / `espnUflEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ UFL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitor_roster(...)
+await sdv.ufl.espnUflGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_team_roster(...)
 ```
 
-## `espnUflEventCompetitorStatistics`
+## `espnUflGameTeamStatistics`
 
-UFL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+UFL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitor_statistics` / `espnUflEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ UFL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitor_statistics(...)
+await sdv.ufl.espnUflGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_team_statistics(...)
 ```
 
-## `espnUflEventCompetitors`
+## `espnUflGameTeams`
 
-UFL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+UFL — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_competitors` / `espnUflEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ UFL — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_competitors(...)
+await sdv.ufl.espnUflGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_teams(...)
 ```
 
-## `espnUflEventLeaders`
+## `espnUflGameLeaders`
 
-UFL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+UFL — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_leaders` / `espnUflEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ UFL — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_leaders(...)
+await sdv.ufl.espnUflGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_leaders(...)
 ```
 
-## `espnUflEventOdds`
+## `espnUflGameOdds`
 
-UFL — event odds (ESPN sports.core.api.espn.com (core v2)).
+UFL — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_odds` / `espnUflEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ UFL — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_odds(...)
+await sdv.ufl.espnUflGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_odds(...)
 ```
 
-## `espnUflEventOfficialDetail`
+## `espnUflGameOfficialDetail`
 
-UFL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+UFL — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_official_detail` / `espnUflEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ UFL — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_official_detail(...)
+await sdv.ufl.espnUflGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_official_detail(...)
 ```
 
-## `espnUflEventOfficials`
+## `espnUflGameOfficials`
 
-UFL — event officials (ESPN sports.core.api.espn.com (core v2)).
+UFL — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_officials` / `espnUflEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ UFL — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_officials(...)
+await sdv.ufl.espnUflGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_officials(...)
 ```
 
-## `espnUflEventPlay`
+## `espnUflGamePlay`
 
-UFL — event play (ESPN sports.core.api.espn.com (core v2)).
+UFL — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_play` / `espnUflEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ UFL — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_play(...)
+await sdv.ufl.espnUflGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_play(...)
 ```
 
-## `espnUflEventPlayPersonnel`
+## `espnUflGamePlayPersonnel`
 
-UFL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+UFL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_play_personnel` / `espnUflEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ UFL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_play_personnel(...)
+await sdv.ufl.espnUflGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_play_personnel(...)
 ```
 
-## `espnUflEventPlays`
+## `espnUflGamePlays`
 
-UFL — event plays (ESPN sports.core.api.espn.com (core v2)).
+UFL — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_plays` / `espnUflEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ UFL — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_plays(...)
+await sdv.ufl.espnUflGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_plays(...)
 ```
 
-## `espnUflEventPowerindex`
+## `espnUflGamePowerindex`
 
-UFL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+UFL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_powerindex` / `espnUflEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ UFL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_powerindex(...)
+await sdv.ufl.espnUflGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_powerindex(...)
 ```
 
-## `espnUflEventPredictor`
+## `espnUflGamePredictor`
 
-UFL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+UFL — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_predictor` / `espnUflEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ UFL — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_predictor(...)
+await sdv.ufl.espnUflGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_predictor(...)
 ```
 
-## `espnUflEventProbabilities`
+## `espnUflGameProbabilities`
 
-UFL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+UFL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_probabilities` / `espnUflEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ UFL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_probabilities(...)
+await sdv.ufl.espnUflGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_probabilities(...)
 ```
 
-## `espnUflEventPropbets`
+## `espnUflGamePropbets`
 
-UFL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+UFL — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_propbets` / `espnUflEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ UFL — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_propbets(...)
+await sdv.ufl.espnUflGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_propbets(...)
 ```
 
-## `espnUflEventScoringplays`
+## `espnUflGameScoringplays`
 
-UFL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+UFL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_scoringplays` / `espnUflEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ UFL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_scoringplays(...)
+await sdv.ufl.espnUflGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_scoringplays(...)
 ```
 
-## `espnUflEventSituation`
+## `espnUflGameSituation`
 
-UFL — event situation (ESPN sports.core.api.espn.com (core v2)).
+UFL — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_situation` / `espnUflEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ UFL — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_situation(...)
+await sdv.ufl.espnUflGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_situation(...)
 ```
 
-## `espnUflEventStatus`
+## `espnUflGameStatus`
 
-UFL — event status (ESPN sports.core.api.espn.com (core v2)).
+UFL — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_event_status` / `espnUflEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ UFL — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_event_status(...)
+await sdv.ufl.espnUflGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_game_status(...)
 ```
 
-## `espnUflEvents`
+## `espnUflGames`
 
-UFL — events (ESPN sports.core.api.espn.com (core v2)).
+UFL — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_events` / `espnUflEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ UFL — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflEvents({});
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_events(...)
+await sdv.ufl.espnUflGames({});
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_games(...)
 ```
 
 ## `espnUflFranchise`
@@ -1145,11 +1219,13 @@ await sdv.ufl.espnUflPositions({});
 // snake_case alias (py/R parity): sdv.ufl.espn_ufl_positions(...)
 ```
 
-## `espnUflSeasonAthletes`
+## `espnUflSeasonPlayers`
 
-UFL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+UFL — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_season_athletes` / `espnUflSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ UFL — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_season_athletes(...)
+await sdv.ufl.espnUflSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_season_players(...)
 ```
 
 ## `espnUflSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.ufl.espnUflSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.ufl.espn_ufl_season_week(...)
 ```
 
-## `espnUflSeasonWeekEvents`
+## `espnUflSeasonWeekGames`
 
-UFL — season week events (ESPN sports.core.api.espn.com (core v2)).
+UFL — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/ufl/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ufl_season_week_events` / `espnUflSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ UFL — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ufl.espnUflSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.ufl.espn_ufl_season_week_events(...)
+await sdv.ufl.espnUflSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.ufl.espn_ufl_season_week_games(...)
 ```
 
 ## `espnUflSeasonWeekPowerindex`

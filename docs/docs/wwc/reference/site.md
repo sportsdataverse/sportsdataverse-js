@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.wwc`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWwcAthleteBio`
+## `espnWwcPlayerBio`
 
-WWC — athlete bio (ESPN site.api.espn.com).
+WWC — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.wwc/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_bio` / `espnWwcAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ WWC — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_bio(...)
+await sdv.wwc.espnWwcPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_bio(...)
 ```
 
-## `espnWwcAthleteInfo`
+## `espnWwcPlayerInfo`
 
-WWC — athlete info (ESPN site.api.espn.com).
+WWC — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.wwc/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_info` / `espnWwcAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ WWC — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_info(...)
+await sdv.wwc.espnWwcPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_info(...)
 ```
 
-## `espnWwcAthleteNews`
+## `espnWwcPlayerNews`
 
-WWC — athlete news (ESPN site.api.espn.com).
+WWC — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.wwc/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_news` / `espnWwcAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ WWC — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_news(...)
+await sdv.wwc.espnWwcPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_news(...)
 ```
 
 ## `espnWwcCalendar`

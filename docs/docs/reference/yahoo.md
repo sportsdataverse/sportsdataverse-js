@@ -28,7 +28,7 @@ await sdv.yahoo.yahoo_league_standings({
 
 ## Native API — Yahoo Sports (scores)
 
-Flat (non-ESPN) wrappers for the Yahoo Sports scoreboard/boxscore feed. Host: `https://api-secure.sports.yahoo.com`. Each method is exposed under BOTH `yahoo_scores_<endpoint>` (snake_case, py/R parity) and `yahooScores<Endpoint>` (camelCase canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the Yahoo Sports scoreboard/boxscore feed. Host: `https://api-secure.sports.yahoo.com`. Each method is exposed under BOTH its snake_case name `yahoo_scores_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -37,7 +37,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports scoreboard/boxscore feed. Host: `h
 
 ## Native API — Yahoo Sports
 
-Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite-secure.sports.yahoo.com/v1/query/shangrila`. Each method is exposed under BOTH `yahoo_<endpoint>` (snake_case, py/R parity) and `yahoo<Endpoint>` (camelCase canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite-secure.sports.yahoo.com/v1/query/shangrila`. Each method is exposed under BOTH its snake_case name `yahoo_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.yahoo`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

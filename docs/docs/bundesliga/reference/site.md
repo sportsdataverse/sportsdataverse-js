@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.bundesliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnBundesligaAthleteBio`
+## `espnBundesligaPlayerBio`
 
-BUNDESLIGA — athlete bio (ESPN site.api.espn.com).
+BUNDESLIGA — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_bio` / `espnBundesligaAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ BUNDESLIGA — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_bio(...)
+await sdv.bundesliga.espnBundesligaPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_bio(...)
 ```
 
-## `espnBundesligaAthleteInfo`
+## `espnBundesligaPlayerInfo`
 
-BUNDESLIGA — athlete info (ESPN site.api.espn.com).
+BUNDESLIGA — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_info` / `espnBundesligaAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ BUNDESLIGA — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_info(...)
+await sdv.bundesliga.espnBundesligaPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_info(...)
 ```
 
-## `espnBundesligaAthleteNews`
+## `espnBundesligaPlayerNews`
 
-BUNDESLIGA — athlete news (ESPN site.api.espn.com).
+BUNDESLIGA — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/ger.1/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_bundesliga_athlete_news` / `espnBundesligaAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ BUNDESLIGA — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.bundesliga.espnBundesligaAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_athlete_news(...)
+await sdv.bundesliga.espnBundesligaPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.bundesliga.espn_bundesliga_player_news(...)
 ```
 
 ## `espnBundesligaCalendar`

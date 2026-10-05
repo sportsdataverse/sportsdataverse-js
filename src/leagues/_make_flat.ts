@@ -7,11 +7,15 @@ import { toCamel } from "../core/espn.js";
 import "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
-import { torvikGet } from "../core/torvik_runtime.js";
+import { torvikGet, bartWbbGet } from "../core/torvik_runtime.js";
+import { on3Get, mlsGet, nwslGet } from "../core/keyless_runtime.js";
 // Also registers the 247 families' transport / guest-JWT auth defaults.
 import { sports247Get, sports247SitePagesGet } from "../core/sports247_runtime.js";
 import { nbaStatsGet } from "../core/nba_stats_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
+import { aliasesFor, withDeprecatedAliases } from "../core/deprecation.js";
+import { FLAT_DEPRECATED_ALIASES } from "../generated/aliases.js";
+import { MULTI_TABLE_SECTIONS } from "../parsers/_frames.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
 /** A flat-API getter: same shape as `core/client.ts` `get`. */
@@ -42,6 +46,12 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   // the impersonating transport come from the family defaults.
   sports247: sports247Get,
   sports247_site_pages: sports247SitePagesGet,
+  // Women's T-Rank: same raw-text getter under the `bart_wbb` family.
+  bart_wbb: bartWbbGet,
+  // Keyless providers: browser UA (+ site Referer for MLS / NWSL).
+  on3: on3Get,
+  mls_api: mlsGet,
+  nwsl_api: nwslGet,
   // stats.nba.com / stats.wnba.com: browser headers, sorted params, zero-padded
   // GameID, and a body check so a throttled blank / `{}` reply is a failure.
   nba_stats: nbaStatsGet,
@@ -74,7 +84,10 @@ export async function callFlat(
   // Flat defs always carry their `api` stem (codegen); get() guards it at runtime.
   const raw = await getter(url, { params: query, headers: params.headers, family: def.api! });
   const parser = params.parsed ? parserFor(def.parser) : undefined;
-  return parser ? parser(raw) : raw;
+  // Multi-table parsers (sdv-py returns a dict of frames) take `section`; the rest
+  // keep their one-argument contract.
+  if (!parser) return raw;
+  return def.parser && def.parser in MULTI_TABLE_SECTIONS ? parser(raw, params.section) : parser(raw);
 }
 
 /**
@@ -88,11 +101,14 @@ export async function callFlat(
  */
 export function makeFlatModule(defs: WrapperDef[]): Record<string, WrapperFn> {
   const mod: Record<string, WrapperFn> = {};
+  const aliases: Record<string, string> = {};
   for (const def of defs) {
     const fn: WrapperFn = (params = {}) => callFlat(def, params);
-    const snake = `${def.api}_${def.short}`;
+    const snake = def.publicName ?? `${def.api}_${def.short}`; // sdv-py's name (v4)
     mod[snake] = fn; // py/R-parity alias
     mod[toCamel(snake)] = fn; // mlbTeams — idiomatic JS canonical
+    Object.assign(aliases, FLAT_DEPRECATED_ALIASES[def.api!]);
   }
-  return mod;
+  // Pre-v4 names a rename replaced stay callable as deprecated aliases.
+  return withDeprecatedAliases(mod, aliasesFor(mod, aliases));
 }

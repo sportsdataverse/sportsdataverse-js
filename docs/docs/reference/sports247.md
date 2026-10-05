@@ -26,7 +26,7 @@ await sdv.sports247.sports247SitePagesInstitution({ key: 24099, parsed: true });
 
 ## Native API — 247Sports RDB
 
-Flat (non-ESPN) wrappers for the 247Sports Recruit Database (`ipa.247sports.com`). Host: `https://ipa.247sports.com`. Each method is exposed under BOTH `sports247_<endpoint>` (snake_case, py/R parity) and `sports247<Endpoint>` (camelCase canonical) on `sdv.sports247`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** this family mints a bearer token automatically before each call (no credentials required). **Transport:** the host fingerprint-blocks plain HTTP clients, so this family uses the browser-impersonating transport — `npm install impit` (without it, calls reject with `TransportUnavailableError`).
+Flat (non-ESPN) wrappers for the 247Sports Recruit Database (`ipa.247sports.com`). Host: `https://ipa.247sports.com`. Each method is exposed under BOTH its snake_case name `sports247_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.sports247`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** this family mints a bearer token automatically before each call (no credentials required). **Transport:** the host fingerprint-blocks plain HTTP clients, so this family uses the browser-impersonating transport — `npm install impit` (without it, calls reject with `TransportUnavailableError`).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -321,7 +321,7 @@ Flat (non-ESPN) wrappers for the 247Sports Recruit Database (`ipa.247sports.com`
 
 ## Native API — 247Sports site pages
 
-Flat (non-ESPN) wrappers for the 247sports.com `*.json` page models. Host: `https://247sports.com`. Each method is exposed under BOTH `sports247_site_pages_<endpoint>` (snake_case, py/R parity) and `sports247SitePages<Endpoint>` (camelCase canonical) on `sdv.sports247`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. No auth. **Transport:** browser-impersonating (`npm install impit`), as for `sports247`. Nested entities arrive as bare integer keys — walk each through its own `.json` route.
+Flat (non-ESPN) wrappers for the 247sports.com `*.json` page models. Host: `https://247sports.com`. Each method is exposed under BOTH its snake_case name `sports247_site_pages_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.sports247`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. No auth. **Transport:** browser-impersonating (`npm install impit`), as for `sports247`. Nested entities arrive as bare integer keys — walk each through its own `.json` route.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

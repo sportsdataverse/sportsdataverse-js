@@ -10,8 +10,8 @@ sidebar_position: 38
 # `torvik` — native provider reference
 
 - **namespace:** `sdv.torvik` *(standalone — not an ESPN league)*
-- **families:** BartTorvik (T-Rank)
-- **wrappers:** 5 native
+- **families:** BartTorvik (T-Rank), BartTorvik women's (T-Rank)
+- **wrappers:** 6 native
 
 `torvik` is a Basketball provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.torvik`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
 
@@ -25,7 +25,7 @@ await sdv.torvik.torvik_ratings({ year: 2024, parsed: true });
 
 ## Native API — BartTorvik (T-Rank)
 
-Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics). Host: `https://barttorvik.com`. Each method is exposed under BOTH `torvik_<endpoint>` (snake_case, py/R parity) and `torvik<Endpoint>` (camelCase canonical) on `sdv.torvik`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics). Host: `https://barttorvik.com`. Each method is exposed under BOTH its snake_case name `torvik_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.torvik`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -287,3 +287,11 @@ Flat (non-ESPN) wrappers for barttorvik.com (T-Rank college basketball analytics
 | `arate_d` | numeric | Assist rate allowed (defense). |
 | `rk_9` | integer | National rank of assist rate allowed (defense). |
 | `parsed_extra` | character | Trailing unmapped CSV fields (overflow), if any. |
+
+## Native API — BartTorvik women's (T-Rank)
+
+Flat (non-ESPN) wrappers for barttorvik.com/ncaaw (women's T-Rank). Host: `https://barttorvik.com/ncaaw`. Each method is exposed under BOTH its snake_case name `bart_wbb_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.torvik`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+
+| Method | HTTP | Path params | Query params | Parser | Auth |
+|---|---|---|---|---|---|
+| `bart_wbb_ratings` / `bartWbbRatings` | `https://barttorvik.com/ncaaw/{year}_team_results.csv` | `year`\* | — | `parse_torvik_ratings` | — |

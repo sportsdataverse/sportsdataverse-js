@@ -12,6 +12,47 @@
 ### Deprecated — `sdv.recruiting` (api.247sports.com)
 
 - All 25 `recruiting_*` methods are `@deprecated`, because `api.247sports.com` answers HTTP 500. Each emits one `DeprecationWarning` on its first call. Twelve name their `sports247_*` replacement. The other 13 have none, since they need a logged-in 247Sports session. The methods still exist. Endpoint YAML can now mark any flat wrapper `deprecated:`.
+_The next release is **4.0.0**: the naming change below is breaking._
+
+### BREAKING — 4.0.0 (Unreleased): public names are sportsdataverse-py's
+
+Every generated wrapper now carries **sdv-py's public name**, so the same endpoint
+has the same name in Python and JavaScript. `tools/codegen/generate.mjs` ports
+sdv-py's emit-time rename layer (`tools/codegen/generate.py` at the vendor pin):
+
+- **ESPN** (all 29 leagues): `athlete` → `player`, `event` → `game` (plurals too) as
+  whole `_`-separated words (`espnNbaAthleteGamelog` → `espnNbaPlayerGamelog`,
+  `espnNflEvents` → `espnNflGames`; `athlete_eventlog` → `player_eventlog`),
+  `event_competitor*` → `game_team*`, `event_competition` → `game_competition`.
+  sdv-py's curated CFB renames apply (`espnCfbSeasonFutures` → `espnCfbFutures`, …,
+  from the now-vendored `espn_rename_map.yaml`). Where sdv-py hand-writes a
+  `player_stats`, the web-v3 stats endpoint is `player_stats_v3`
+  (`espnNbaAthleteStats` → `espnNbaPlayerStatsV3`; cfb, mbb, mlb, nba, nfl, nhl,
+  wbb, wnba), elsewhere plain `player_stats`.
+- **Native APIs** use sdv-py's `name_pattern` / `qualifier`: NHL api-web
+  `nhlApiWeb*` → `nhl*` (`nhlWebPbp` / `nhlWebSchedule` where sdv-py's own
+  `nhl_pbp` / `nhl_schedule` take the plain name); NFL.com `nflApi*` → `nfl*`.
+- **CBS** takes sdv-py's 16 short names (`cbsBoxscore` → `cbsGameBoxscore`,
+  `cbsClientConfiguration` → `cbsClientConfig`, …).
+  The 16 CBS `FLAT_WRAPPERS[].short` values change with them (`boxscore` →
+  `game_boxscore`); each def keeps its pre-v4 short as `legacyShort`, and the docs
+  playground (share links `?e=flat:cbs:boxscore`, `RunCell`) and `/api/run`
+  (`{ api: 'cbs', endpoint: 'boxscore' }`) still accept it. Code that matches
+  `FLAT_WRAPPERS` by `short` should also match `legacyShort`.
+- Families already named like sdv-py (MLB, Statcast, NHL edge / stats-rest /
+  records, nba_stats, wnba_stats, Torvik, Yahoo) are unchanged.
+
+**Nothing is removed.** All 1,405 renamed pre-v4 names (2,810 counting both
+snake_case and camelCase) stay callable as deprecated aliases: each forwards to the
+new wrapper (its `.name` is the old name) and emits one `DeprecationWarning` per
+name per process, with `code: 'SDV_DEPRECATED_NAME'` so it can be filtered. The full
+mapping is the new [Deprecated names (v4)](https://js.sportsdataverse.org/docs/reference/deprecations)
+reference page; `test/naming.test.js` asserts every pre-v4 public name (frozen in
+`tools/codegen/pre_v4_names.json`) still resolves, and that the v4 names equal
+sdv-py's generated names at the pin. The raw-JSON default and `{ parsed: true }`
+are unchanged. Wrapper defs gain `publicShort` (ESPN) / `publicName` (flat) and
+`LeagueConfig` gains `publicShorts`; `makeLeagueModule` / `makeFlatModule` build
+the v4 names and register the same aliases.
 
 ### Fixed
 
@@ -28,6 +69,16 @@
 
 - New weekly `live-smoke.yml` runs the `SDV_LIVE=1` suite and opens/updates one `live-tests:drift` issue on failure; `npm-publish.yml` now runs `npm test` before publishing.
 
+### Added — keyless sdv-py families: On3, ASA, MLS, NWSL, women's T-Rank, ESPN FPI
+
+Vendored from sdv-py at the existing pin (`719de79`); no key or login for any of them.
+
+- `sdv.on3.*` (78 endpoints, On3 Recruit Database `api.on3.com/public/rdb`), `sdv.asa.*` (15, American Soccer Analysis, `league_slug` = mls/nwsl/uslc/usl1/mlsnp), `sdv.mls.mls_*` (12, the three mlssoccer.com hosts) and `sdv.nwsl.nwsl_*` (9, StatsPerform SDP; sdv-py's names, v4). MLS and NWSL send the site `Referer` plus a browser User-Agent; NWSL composite ids (`nwsl::Football_Season::<hex>`) go on the wire with the `::` unencoded. The four deprecated On3 `_next/data` scrape shims are not ported.
+- `sdv.torvik.bart_wbb_ratings` (women's T-Rank, `barttorvik.com/ncaaw`).
+- `espn_<league>_fpi` on every league: ESPN's resolved Football Power Index table (`site.web.api.espn.com/apis/fitt/v3`, a fifth ESPN host family), parsed by `parse_fpi`.
+- Parsers are ports of sdv-py's, checked cell by cell against sdv-py's own output on real captures. Multi-table parsers (ASA goals-added, MLS standings and match, NWSL lineups) return one sub-frame under `parsed: true` — the one sdv-py's returns schema documents (ASA `summary`, MLS `entries` / `match_information`, NWSL `players`) — and `section: "<name>"` selects any other (unknown name throws, listing the valid ones; values are in the generated reference). Every sub-frame at once: `parse_asa_goals_added_tables`, `parse_mls_standings_tables`, `parse_mls_match_tables`, `parse_nwsl_lineups_tables` from `sportsdataverse/parsers`.
+- A 2xx non-JSON body (HTML bot block) from these JSON hosts is an `AssetFetchError`, not an empty result; a genuinely empty `[]` / `{}` is data.
+- Playground proxy: the new hosts (and MLS's per-endpoint `sportapi` / `dapi` hosts) are allowlisted; the proxy supplies the MLS / NWSL `Referer`.
 ### Added — stats.nba.com / stats.wnba.com (`nba_stats` 128, `wnba_stats` 111)
 
 - Vendored from sdv-py@719de79 onto `sdv.nba.nba_stats_<slug>` (e.g. `nba_stats_leaguedashplayerstats`, `nba_stats_playercareerstats`) and `sdv.wnba.wnba_stats_<slug>`; `league_id` selects `"00"` NBA, `"20"` G-League, `"15"` Summer League (WNBA `"10"`). `{ parsed: true }` runs the ported `parse_nba_stats_result_sets` (single set -> rows, several -> `{ setName: rows }`, empty/malformed -> `[]`).

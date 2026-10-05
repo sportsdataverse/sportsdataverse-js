@@ -5,7 +5,7 @@ import { resolveFlat as pkgResolveFlat } from '../dist/core/flat.js';
 import { HOSTS, FLAT_HOSTS } from '../dist/core/client.js';
 // the docs playground's standalone runtime (separate port of the resolver + the
 // serverless proxy) — tested here so it can't drift from the package.
-import { resolveUrl, resolveFlat, resolveFlatUrl } from '../docs/src/playground/resolve.mjs';
+import { resolveUrl, resolveFlat, resolveFlatUrl, findFlatDef } from '../docs/src/playground/resolve.mjs';
 import { nflClearTokenCache } from '../docs/src/playground/nfl_auth.mjs';
 import handler from '../docs/api/run.mjs';
 
@@ -149,6 +149,38 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
     }
   });
 
+  it('findFlatDef resolves a pre-v4 CBS short to its v4 def (share links, RunCell)', () => {
+    const flatApis = FLAT_WRAPPERS;
+    const v4 = findFlatDef(flatApis, 'cbs', 'game_boxscore');
+    v4.short.should.equal('game_boxscore');
+    findFlatDef(flatApis, 'cbs', 'boxscore').should.equal(v4); // legacyShort
+    findFlatDef(flatApis, 'cbs', 'client_configuration').short.should.equal('client_config');
+    should(findFlatDef(flatApis, 'cbs', 'nope')).be.undefined();
+    should(findFlatDef(flatApis, 'mlb', 'boxscore')).not.be.undefined(); // a short stays family-scoped
+    findFlatDef(flatApis, 'mlb', 'boxscore').api.should.equal('mlb');
+  });
+
+  it('dispatches a pre-v4 CBS short to the same upstream URL as its v4 short', async () => {
+    const original = global.fetch;
+    const fetched = [];
+    global.fetch = async (url) => {
+      fetched.push(url);
+      return { ok: true, status: 200, headers: new Map([['content-type', 'application/json']]), text: async () => '{}' };
+    };
+    try {
+      for (const endpoint of ['boxscore', 'game_boxscore']) {
+        const res = mockRes();
+        await handler({ method: 'POST', body: { api: 'cbs', endpoint, params: { game_id: '1' } } }, res);
+        res.statusCode.should.equal(200, `cbs:${endpoint}`);
+      }
+      fetched.length.should.equal(2);
+      fetched[0].should.equal(fetched[1]);
+      fetched[0].should.startWith('https://api.cbssports.com/napi/resource/');
+    } finally {
+      global.fetch = original;
+    }
+  });
+
   it('rejects an unknown native endpoint with 400', async () => {
     const res = mockRes();
     await handler({ method: 'POST', body: { api: 'mlb', endpoint: 'nope', params: {} } }, res);
@@ -264,5 +296,61 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
       global.fetch = original;
       nflClearTokenCache();
     }
+  });
+});
+
+describe('playground proxy: keyless provider hosts (on3, asa, mls_api, nwsl_api, bart_wbb)', () => {
+  async function proxy(api, endpoint, params) {
+    const original = global.fetch;
+    let fetched = null;
+    let sentHeaders = null;
+    global.fetch = async (url, cfg) => {
+      fetched = url;
+      sentHeaders = cfg && cfg.headers;
+      return {
+        ok: true,
+        status: 200,
+        headers: new Map([['content-type', 'application/json']]),
+        text: async () => '[]',
+      };
+    };
+    try {
+      const res = mockRes();
+      await handler({ method: 'POST', body: { api, endpoint, params } }, res);
+      return { res, fetched, sentHeaders };
+    } finally {
+      global.fetch = original;
+    }
+  }
+
+  it('on3 + asa + bart_wbb are allowlisted (keyless)', async () => {
+    let r = await proxy('on3', 'filters_status', {});
+    r.res.statusCode.should.equal(200);
+    r.fetched.should.startWith('https://api.on3.com/public/rdb/v1/');
+    r = await proxy('asa', 'teams', { league_slug: 'mls' });
+    r.fetched.should.equal('https://app.americansocceranalysis.com/api/v1/mls/teams');
+    r = await proxy('bart_wbb', 'ratings', { year: 2025 });
+    r.fetched.should.equal('https://barttorvik.com/ncaaw/2025_team_results.csv');
+  });
+
+  it('mls_api per-endpoint hosts (sportapi, dapi) are allowlisted and get the site Referer', async () => {
+    const sport = FLAT_WRAPPERS.find((w) => w.api === 'mls_api' && w.host.includes('sportapi'));
+    const dapi = FLAT_WRAPPERS.find((w) => w.api === 'mls_api' && w.host.includes('dapi'));
+    for (const def of [sport, dapi]) {
+      const params = {};
+      for (const p of def.pathParams) params[p.name] = 'x';
+      const r = await proxy('mls_api', def.short, params);
+      r.res.statusCode.should.equal(200, def.short);
+      r.fetched.should.startWith(def.host);
+      r.sentHeaders.Referer.should.equal('https://www.mlssoccer.com/');
+    }
+  });
+
+  it('nwsl_api keeps the "::" in composite ids and sends the NWSL Referer', async () => {
+    const id = 'nwsl::Football_Season::0b6761e4701749f593690c0f338da74c';
+    const r = await proxy('nwsl_api', 'teams', { season_id: id });
+    r.res.statusCode.should.equal(200);
+    r.fetched.should.containEql('/seasons/nwsl::Football_Season::0b6761e4701749f593690c0f338da74c/teams');
+    r.sentHeaders.Referer.should.equal('https://www.nwslsoccer.com/');
   });
 });

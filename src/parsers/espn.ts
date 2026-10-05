@@ -22,6 +22,7 @@
 
 import { normalize, snakeCase } from "./_normalize.js";
 import type { ParserFn } from "./_registry.js";
+import { pyUnderscore } from "./_frames.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -1082,6 +1083,46 @@ export function parse_summary_news(payload: any): Record<string, any>[] {
   return rowPerItem(news.articles);
 }
 
+/**
+ * Parse an ESPN fitt-v3 `powerindex` payload into one row per team (team-season
+ * FPI). Faithful port of sdv-py's `parse_fpi`: the per-team `categories` blocks
+ * carry POSITIONAL `values` and a null `names`, so labels come from the top-level
+ * `categories` metadata, zipped by index with a length guard (a short value array
+ * must not shift later labels). A name repeated across categories (`fpirank` in
+ * both `fpi` and `resume`) gets the category appended instead of overwriting.
+ */
+export function parse_fpi(payload: any): Record<string, any>[] {
+  const teams = (payload || {}).teams;
+  if (!Array.isArray(teams) || teams.length === 0) return [];
+  const namesByCat: Record<string, any[]> = {};
+  for (const c of (payload || {}).categories || []) namesByCat[c?.name] = c?.names || [];
+  const rows = teams.map((entry: any) => {
+    const tm = entry?.team || {};
+    const row: Record<string, any> = {
+      team_id: tm.id,
+      team_uid: tm.uid,
+      team_abbreviation: tm.abbreviation,
+      team_display_name: tm.displayName,
+      team_short_display_name: tm.shortDisplayName,
+      team_nickname: tm.nickname,
+    };
+    for (const cat of entry?.categories || []) {
+      const names = cat.names || namesByCat[cat.name] || [];
+      const values = cat.values || [];
+      const n = Math.min(names.length, values.length);
+      for (let i = 0; i < n; i++) {
+        let key = pyUnderscore(String(names[i]));
+        if (key in row) key = `${key}_${pyUnderscore(String(cat.name ?? "x"))}`;
+        row[key] = values[i];
+      }
+    }
+    // pandas.json_normalize puts the flattened nested `season` object last.
+    row.season = payload.requestedSeason;
+    return row;
+  });
+  return normalize(rows);
+}
+
 /** Generic single-row flattener for any ESPN single-entity payload. */
 export function parse_single_entity(payload: any): Record<string, any>[] {
   return singleRow(isPlainObject(payload) ? payload : null);
@@ -1273,6 +1314,8 @@ export const ESPN_ENDPOINT_PARSERS: Record<string, ParserFn | typeof parse_summa
   talentpicks: parse_items,
   // ---- Core v2 list payloads (more) ----
   leaders_core: parse_items,
+  // ESPN fitt-v3 (FPI) team-season table.
+  fpi: parse_fpi,
   season_powerindex: parse_items,
   season_powerindex_leaders: parse_items,
   season_type_corrections: parse_items,

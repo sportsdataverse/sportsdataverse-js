@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.cfb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnCfbAthleteBio`
+## `espnCfbPlayerBio`
 
-CFB — athlete bio (ESPN site.api.espn.com).
+CFB — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_athlete_bio` / `espnCfbAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ CFB — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_athlete_bio(...)
+await sdv.cfb.espnCfbPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_player_bio(...)
 ```
 
-## `espnCfbAthleteInfo`
+## `espnCfbPlayerInfo`
 
-CFB — athlete info (ESPN site.api.espn.com).
+CFB — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_athlete_info` / `espnCfbAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ CFB — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_athlete_info(...)
+await sdv.cfb.espnCfbPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_player_info(...)
 ```
 
-## `espnCfbAthleteNews`
+## `espnCfbPlayerNews`
 
-CFB — athlete news (ESPN site.api.espn.com).
+CFB — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_athlete_news` / `espnCfbAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ CFB — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_athlete_news(...)
+await sdv.cfb.espnCfbPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_player_news(...)
 ```
 
 ## `espnCfbCalendar`

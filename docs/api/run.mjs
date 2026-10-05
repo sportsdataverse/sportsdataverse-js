@@ -22,7 +22,7 @@
 // Native ESM (Vercel traces rather than bundles this function) requires an
 // explicit import attribute for JSON — without it the module fails to load.
 import endpoints from '../src/playground/endpoints.json' with { type: 'json' };
-import { resolveRequest, resolveFlat } from '../src/playground/resolve.mjs';
+import { resolveRequest, resolveFlat, findFlatDef } from '../src/playground/resolve.mjs';
 import { AUTH_HEADER_PROVIDERS } from '../src/playground/nfl_auth.mjs';
 
 const ALLOWED_HOSTS = new Set(
@@ -33,16 +33,26 @@ const ALLOWED_HOSTS = new Set(
 // (e.g. `https://api.nhle.com/stats/rest`) — `new URL(...).host` keys on the
 // bare host (`api.nhle.com`), which is exactly what we compare the resolved
 // target's `.host` against.
+// Per-endpoint host overrides (e.g. MLS's sportapi/dapi) are generated from the
+// vendored endpoint YAML too, so their hosts are allowed the same way.
 const ALLOWED_FLAT_HOSTS = new Set(
-  Object.values(endpoints.flatHosts || {}).map((u) => new URL(u).host)
+  [
+    ...Object.values(endpoints.flatHosts || {}),
+    ...(endpoints.flatApis || []).map((e) => e.host).filter(Boolean),
+  ].map((u) => new URL(u).host)
 );
+// Keyless hosts that expect the originating site's Referer (browsers can't forge
+// it, so the proxy sets it). No credentials are involved for these families.
+const FLAT_EXTRA_HEADERS = {
+  mls_api: { Referer: 'https://www.mlssoccer.com/' },
+  nwsl_api: { Referer: 'https://www.nwslsoccer.com/' },
+};
 const LEAGUE = Object.fromEntries(endpoints.leagues.map((l) => [l.prefix, l]));
 const ENDPOINT = Object.fromEntries(endpoints.endpoints.map((e) => [e.short, e]));
-// Flat endpoints keyed by `${api}:${short}` (a flat `short` like `teams` is not
-// unique across families, so the family stem is part of the key).
-const FLAT_ENDPOINT = Object.fromEntries(
-  (endpoints.flatApis || []).map((e) => [`${e.api}:${e.short}`, e])
-);
+// Flat endpoints are looked up by family stem + short (a flat `short` like
+// `teams` is not unique across families); `findFlatDef` also accepts a pre-v4
+// short (CBS `boxscore` -> `game_boxscore`).
+const FLAT_APIS = endpoints.flatApis || [];
 
 /**
  * Run the resolved upstream request (bounded + edge-cached) and stream the
@@ -128,7 +138,7 @@ async function handleFlat(res, body) {
   const short = body.endpoint;
   const params = body.params || {};
 
-  const def = FLAT_ENDPOINT[`${api}:${short}`];
+  const def = findFlatDef(FLAT_APIS, api, short);
   if (!def) {
     res.status(400).json({ error: 'Unknown native API endpoint.' });
     return;
@@ -151,7 +161,7 @@ async function handleFlat(res, body) {
 
   // Auth families resolve a bearer-token header set before fetching. The token
   // is minted server-side and never exposed to the browser.
-  let headers;
+  let headers = FLAT_EXTRA_HEADERS[api];
   if (def.auth) {
     const provider = AUTH_HEADER_PROVIDERS[api];
     if (!provider) {
