@@ -9,14 +9,17 @@
 **v3.0.0** it is a **cross-league ESPN client _plus_ a native (non-ESPN) live-API
 client** with a tidy parser layer:
 
-- **116 ESPN endpoint wrappers** generated for **29 leagues** (31 namespaces) from a
+- **126 ESPN endpoint wrappers** generated for **29 leagues** (31 namespaces) from a
   single YAML source of truth — play-by-play, box scores, schedules, rosters,
   standings, rankings, and more, identical on every league.
-- **532 flat-API wrappers across 15 families** — the **7 native** league APIs (MLB
-  Stats, Baseball Savant / Statcast, NHL api-web/edge/stats-rest/records, NFL.com
-  Shield) merged onto their league namespace, and **7 cross-sport providers** (The
-  Odds API, 247Sports, CBS Sports, Fox Sports, Yahoo Sports, HockeyTech/LeagueStat,
-  BartTorvik/T-Rank) on their own `sdv.<provider>.*` namespaces.
+- **1059 flat-API wrappers across 27 families** — **14 league families** merged onto
+  their league namespace (MLB Stats, Baseball Savant / Statcast, NHL
+  api-web/edge/stats-rest/records, NFL.com Shield, PFF API, NFL Pro, KenPom, the MLS
+  and NWSL stats APIs, stats.nba.com, stats.wnba.com), and **13 provider families** on
+  their own `sdv.<provider>.*` namespaces (The Odds API, 247Sports RDB + site pages,
+  the deprecated old 247Sports API, CBS Sports, Fox Sports, Yahoo Sports editorial +
+  shangrila, HockeyTech/LeagueStat, BartTorvik/T-Rank men's + women's, On3, American
+  Soccer Analysis).
 - **A tidy parser layer** — every wrapper returns raw JSON by default; pass
   `{ parsed: true }` to get a tidy array of flat, snake_cased row objects.
 - Plus the original hand-written scrapers the package has always shipped
@@ -173,17 +176,22 @@ hand-edited** — you edit the YAML (or the templates) and regenerate.
   as `espn_<league>_<short>` (snake) **and** `espn<League><Short>` (camelCase). The
   per-league extension modules are thin; endpoints carry a **scope** (`universal`,
   `ncaa`, `football`, `mlb`) so each league gets exactly the endpoints that apply.
-- **Flat-API families** — non-ESPN, absolute-host live APIs. The **7 native** APIs
-  (MLB Stats, Statcast, NHL ×4, NFL.com) are merged onto their league namespace; the
-  **7 cross-sport providers** (Odds / 247 / CBS / Fox / Yahoo / HockeyTech /
-  BartTorvik) get standalone `sdv.<provider>.*` namespaces and their own generated
-  reference page. `sdv.hockeytech.*` (PWHL + AHL/OHL/WHL/QMJHL) is
-  league-parameterized; `sdv.torvik.*` is men's college-basketball T-Rank
-  analytics. Auth varies per family — bearer-token mint (NFL.com, automatic),
-  `apiKey` query (Odds), public `apikey`+`api-version` (Fox), caller-supplied
-  `headers` (Yahoo), a free guest JWT minted automatically plus a
-  browser-impersonating transport (247Sports on `sdv.sports247`, needs `impit`),
-  keyless (CBS, HockeyTech, BartTorvik). A family that
+- **Flat-API families** — non-ESPN, absolute-host live APIs. The **14 league
+  families** (MLB Stats, Statcast, NHL ×4, NFL.com, PFF API, NFL Pro, KenPom, MLS,
+  NWSL, stats.nba.com, stats.wnba.com) are merged onto their league namespace; the
+  **13 provider families** (Odds / 247 RDB + site pages / old 247 / CBS / Fox / Yahoo
+  ×2 / HockeyTech / BartTorvik men's + women's / On3 / ASA) get standalone
+  `sdv.<provider>.*` namespaces and their own generated reference page.
+  `sdv.hockeytech.*` (PWHL, AHL, OHL, WHL, QMJHL and 15 minor / junior leagues: 20 in
+  all) is league-parameterized; `sdv.torvik.*` is college-basketball T-Rank analytics,
+  men's and women's (`bart_wbb`). Auth varies per family — keyless (MLB, NHL, CBS,
+  Yahoo, HockeyTech, BartTorvik, On3, ASA, and MLS / NWSL with the site's `Referer`),
+  bearer-token mint (NFL.com, automatic), public `apikey`+`api-version` (Fox), a free
+  guest JWT minted automatically plus a browser-impersonating transport (247Sports on
+  `sdv.sports247`, needs `impit`), the caller's own credentials (`apiKey` for The Odds
+  API, a PFF API key, an NFL+ token or login for NFL Pro, a KenPom login), and a
+  TLS-impersonating transport by default for stats.nba.com / stats.wnba.com (needs
+  `impit`). A family that
   needs non-JSON bodies or custom request shaping (HockeyTech's JSONP, BartTorvik's
   browser-UA CSV/JSON) supplies its own getter runtime via `GETTER_OVERRIDES`.
 - **OpenAPI → YAML transform** — `tools/codegen/from-openapi.mjs` turns a canonical
