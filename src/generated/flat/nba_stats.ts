@@ -52,7 +52,7 @@ const ALLTIMELEADERSGRIDS_DEF: WrapperDef = {
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.topx - query parameter (`TopX`) — default `10`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GPLeaders`, `PTSLeaders`, `ASTLeaders`, `STLLeaders`, `OREBLeaders`, `DREBLeaders`, `REBLeaders`, `BLKLeaders`, `FGMLeaders`, `FGALeaders`, `FG_PCTLeaders`, `TOVLeaders`, `FG3MLeaders`, `FG3ALeaders`, `FG3_PCTLeaders`, `PFLeaders`, `FTMLeaders`, `FTALeaders`, `FT_PCTLeaders`.
  * @example await sdv.nba.nbaStatsAlltimeleadersgrids({});
  */
 export const nbaStatsAlltimeleadersgrids: WrapperFn = (params = {}) => callFlat(ALLTIMELEADERSGRIDS_DEF, params);
@@ -367,7 +367,7 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreadvancedv3({});
  */
 export const nbaStatsBoxscoreadvancedv3: WrapperFn = (params = {}) => callFlat(BOXSCOREADVANCEDV3_DEF, params);
@@ -400,7 +400,7 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoredefensivev2({});
  */
 export const nbaStatsBoxscoredefensivev2: WrapperFn = (params = {}) => callFlat(BOXSCOREDEFENSIVEV2_DEF, params);
@@ -463,7 +463,7 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorefourfactorsv3({});
  */
 export const nbaStatsBoxscorefourfactorsv3: WrapperFn = (params = {}) => callFlat(BOXSCOREFOURFACTORSV3_DEF, params);
@@ -496,7 +496,7 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorehustlev2({});
  */
 export const nbaStatsBoxscorehustlev2: WrapperFn = (params = {}) => callFlat(BOXSCOREHUSTLEV2_DEF, params);
@@ -529,7 +529,7 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorematchupsv3({});
  */
 export const nbaStatsBoxscorematchupsv3: WrapperFn = (params = {}) => callFlat(BOXSCOREMATCHUPSV3_DEF, params);
@@ -592,7 +592,7 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoremiscv3({});
  */
 export const nbaStatsBoxscoremiscv3: WrapperFn = (params = {}) => callFlat(BOXSCOREMISCV3_DEF, params);
@@ -625,7 +625,7 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreplayertrackv3({});
  */
 export const nbaStatsBoxscoreplayertrackv3: WrapperFn = (params = {}) => callFlat(BOXSCOREPLAYERTRACKV3_DEF, params);
@@ -688,7 +688,7 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorescoringv3({});
  */
 export const nbaStatsBoxscorescoringv3: WrapperFn = (params = {}) => callFlat(BOXSCORESCORINGV3_DEF, params);
@@ -721,7 +721,7 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv2({});
  */
 export const nbaStatsBoxscoresummaryv2: WrapperFn = (params = {}) => callFlat(BOXSCORESUMMARYV2_DEF, params);
@@ -754,7 +754,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv3({});
  */
 export const nbaStatsBoxscoresummaryv3: WrapperFn = (params = {}) => callFlat(BOXSCORESUMMARYV3_DEF, params);
@@ -817,7 +817,7 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `TeamStarterBenchStats`.
  * @example await sdv.nba.nbaStatsBoxscoretraditionalv2({});
  */
 export const nbaStatsBoxscoretraditionalv2: WrapperFn = (params = {}) => callFlat(BOXSCORETRADITIONALV2_DEF, params);
@@ -880,7 +880,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoretraditionalv3({});
  */
 export const nbaStatsBoxscoretraditionalv3: WrapperFn = (params = {}) => callFlat(BOXSCORETRADITIONALV3_DEF, params);
@@ -943,7 +943,7 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreusagev3({});
  */
 export const nbaStatsBoxscoreusagev3: WrapperFn = (params = {}) => callFlat(BOXSCOREUSAGEV3_DEF, params);
@@ -1027,7 +1027,7 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`.
  * @example await sdv.nba.nbaStatsCommonplayerinfo({});
  */
 export const nbaStatsCommonplayerinfo: WrapperFn = (params = {}) => callFlat(COMMONPLAYERINFO_DEF, params);
@@ -1117,7 +1117,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.team_id - query parameter (`TeamID`) — default `1611661317`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`.
  * @example await sdv.nba.nbaStatsCommonteamroster({});
  */
 export const nbaStatsCommonteamroster: WrapperFn = (params = {}) => callFlat(COMMONTEAMROSTER_DEF, params);
@@ -1207,7 +1207,7 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `2021-22`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`.
  * @example await sdv.nba.nbaStatsCumestatsplayer({});
  */
 export const nbaStatsCumestatsplayer: WrapperFn = (params = {}) => callFlat(CUMESTATSPLAYER_DEF, params);
@@ -1345,7 +1345,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1611661317`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`.
  * @example await sdv.nba.nbaStatsCumestatsteam({});
  */
 export const nbaStatsCumestatsteam: WrapperFn = (params = {}) => callFlat(CUMESTATSTEAM_DEF, params);
@@ -1876,7 +1876,7 @@ const FRANCHISEHISTORY_DEF: WrapperDef = {
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `FranchiseHistory`, `DefunctTeams`.
  * @example await sdv.nba.nbaStatsFranchisehistory({});
  */
 export const nbaStatsFranchisehistory: WrapperFn = (params = {}) => callFlat(FRANCHISEHISTORY_DEF, params);
@@ -2056,7 +2056,7 @@ const GAMEROTATION_DEF: WrapperDef = {
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`.
  * @example await sdv.nba.nbaStatsGamerotation({});
  */
 export const nbaStatsGamerotation: WrapperFn = (params = {}) => callFlat(GAMEROTATION_DEF, params);
@@ -2125,7 +2125,7 @@ const HOMEPAGELEADERS_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat_category - query parameter (`StatCategory`) — default `Points`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageLeaders`, `LeagueAverage`, `LeagueMax`.
  * @example await sdv.nba.nbaStatsHomepageleaders({});
  */
 export const nbaStatsHomepageleaders: WrapperFn = (params = {}) => callFlat(HOMEPAGELEADERS_DEF, params);
@@ -2194,7 +2194,7 @@ const HOMEPAGEV2_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat_type - query parameter (`StatType`) — default `Traditional`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HomePageStat1`, `HomePageStat2`, `HomePageStat3`, `HomePageStat4`, `HomePageStat5`, `HomePageStat6`, `HomePageStat7`, `HomePageStat8`.
  * @example await sdv.nba.nbaStatsHomepagev2({});
  */
 export const nbaStatsHomepagev2: WrapperFn = (params = {}) => callFlat(HOMEPAGEV2_DEF, params);
@@ -2227,7 +2227,7 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
  *
  * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsHustlestatsboxscore({});
  */
 export const nbaStatsHustlestatsboxscore: WrapperFn = (params = {}) => callFlat(HUSTLESTATSBOXSCORE_DEF, params);
@@ -2329,7 +2329,7 @@ const LEADERSTILES_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.stat - query parameter (`Stat`) — default `PTS`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `LeadersTiles`, `AllTimeSeasonHigh`, `LastSeasonHigh`, `LowSeasonHigh`.
  * @example await sdv.nba.nbaStatsLeaderstiles({});
  */
 export const nbaStatsLeaderstiles: WrapperFn = (params = {}) => callFlat(LEADERSTILES_DEF, params);
@@ -7056,7 +7056,7 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
  * @param params.season_nullable - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `East`, `South`, `Midwest`, `West`.
  * @example await sdv.nba.nbaStatsPlayercareerbycollegerollup({});
  */
 export const nbaStatsPlayercareerbycollegerollup: WrapperFn = (params = {}) => callFlat(PLAYERCAREERBYCOLLEGEROLLUP_DEF, params);
@@ -7101,7 +7101,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
  * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
  * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`.
  * @example await sdv.nba.nbaStatsPlayercareerstats({});
  */
 export const nbaStatsPlayercareerstats: WrapperFn = (params = {}) => callFlat(PLAYERCAREERSTATS_DEF, params);
@@ -7278,7 +7278,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`.
  * @example await sdv.nba.nbaStatsPlayercompare({});
  */
 export const nbaStatsPlayercompare: WrapperFn = (params = {}) => callFlat(PLAYERCOMPARE_DEF, params);
@@ -7443,7 +7443,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5Min5PointPlayerDashboard`, `Last3Min5PointPlayerDashboard`, `Last1Min5PointPlayerDashboard`, `Last30Sec3PointPlayerDashboard`, `Last10Sec3PointPlayerDashboard`, `Last5MinPlusMinus5PointPlayerDashboard`, `Last3MinPlusMinus5PointPlayerDashboard`, `Last1MinPlusMinus5PointPlayerDashboard`, `Last30Sec3Point2PlayerDashboard`, `Last10Sec3Point2PlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyclutch({});
  */
 export const nbaStatsPlayerdashboardbyclutch: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYCLUTCH_DEF, params);
@@ -7608,7 +7608,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByHalfPlayerDashboard`, `ByPeriodPlayerDashboard`, `ByScoreMarginPlayerDashboard`, `ByActualMarginPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbygamesplits({});
  */
 export const nbaStatsPlayerdashboardbygamesplits: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYGAMESPLITS_DEF, params);
@@ -7773,7 +7773,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `LocationPlayerDashboard`, `WinsLossesPlayerDashboard`, `MonthPlayerDashboard`, `PrePostAllStarPlayerDashboard`, `StartingPosition`, `DaysRestPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbygeneralsplits({});
  */
 export const nbaStatsPlayerdashboardbygeneralsplits: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYGENERALSPLITS_DEF, params);
@@ -7938,7 +7938,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Last5PlayerDashboard`, `Last10PlayerDashboard`, `Last15PlayerDashboard`, `Last20PlayerDashboard`, `GameNumberPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbylastngames({});
  */
 export const nbaStatsPlayerdashboardbylastngames: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYLASTNGAMES_DEF, params);
@@ -8103,7 +8103,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ConferencePlayerDashboard`, `DivisionPlayerDashboard`, `OpponentPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyopponent({});
  */
 export const nbaStatsPlayerdashboardbyopponent: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYOPPONENT_DEF, params);
@@ -8268,7 +8268,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `Shot5FTPlayerDashboard`, `Shot8FTPlayerDashboard`, `ShotAreaPlayerDashboard`, `AssitedShotPlayerDashboard`, `ShotTypeSummaryPlayerDashboard`, `ShotTypePlayerDashboard`, `AssistedBy`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyshootingsplits({});
  */
 export const nbaStatsPlayerdashboardbyshootingsplits: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF, params);
@@ -8433,7 +8433,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ScoreDifferentialPlayerDashboard`, `PointsScoredPlayerDashboard`, `PontsAgainstPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyteamperformance({});
  */
 export const nbaStatsPlayerdashboardbyteamperformance: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF, params);
@@ -8598,7 +8598,7 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallPlayerDashboard`, `ByYearPlayerDashboard`.
  * @example await sdv.nba.nbaStatsPlayerdashboardbyyearoveryear({});
  */
 export const nbaStatsPlayerdashboardbyyearoveryear: WrapperFn = (params = {}) => callFlat(PLAYERDASHBOARDBYYEAROVERYEAR_DEF, params);
@@ -8721,7 +8721,7 @@ const PLAYERDASHPTPASS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`.
  * @example await sdv.nba.nbaStatsPlayerdashptpass({});
  */
 export const nbaStatsPlayerdashptpass: WrapperFn = (params = {}) => callFlat(PLAYERDASHPTPASS_DEF, params);
@@ -8856,7 +8856,7 @@ const PLAYERDASHPTREB_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`.
  * @example await sdv.nba.nbaStatsPlayerdashptreb({});
  */
 export const nbaStatsPlayerdashptreb: WrapperFn = (params = {}) => callFlat(PLAYERDASHPTREB_DEF, params);
@@ -9126,7 +9126,7 @@ const PLAYERDASHPTSHOTS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`.
  * @example await sdv.nba.nbaStatsPlayerdashptshots({});
  */
 export const nbaStatsPlayerdashptshots: WrapperFn = (params = {}) => callFlat(PLAYERDASHPTSHOTS_DEF, params);
@@ -9252,7 +9252,7 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Location`, `LastNGames`, `DaysRestModified`, `Opponent`.
  * @example await sdv.nba.nbaStatsPlayerfantasyprofile({});
  */
 export const nbaStatsPlayerfantasyprofile: WrapperFn = (params = {}) => callFlat(PLAYERFANTASYPROFILE_DEF, params);
@@ -9303,7 +9303,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star_nullable - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonAvg`, `LastFiveGamesAvg`.
  * @example await sdv.nba.nbaStatsPlayerfantasyprofilebargraph({});
  */
 export const nbaStatsPlayerfantasyprofilebargraph: WrapperFn = (params = {}) => callFlat(PLAYERFANTASYPROFILEBARGRAPH_DEF, params);
@@ -10230,7 +10230,7 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
  * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
  * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`.
  * @example await sdv.nba.nbaStatsPlayerprofilev2({});
  */
 export const nbaStatsPlayerprofilev2: WrapperFn = (params = {}) => callFlat(PLAYERPROFILEV2_DEF, params);
@@ -10389,7 +10389,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `1629488`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`.
  * @example await sdv.nba.nbaStatsPlayervsplayer({});
  */
 export const nbaStatsPlayervsplayer: WrapperFn = (params = {}) => callFlat(PLAYERVSPLAYER_DEF, params);
@@ -10428,7 +10428,7 @@ const PLAYOFFPICTURE_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_id - query parameter (`SeasonID`) — default `22022`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `EastConfPlayoffPicture`, `WestConfPlayoffPicture`, `EastConfStandings`, `WestConfStandings`, `EastConfRemainingGames`, `WestConfRemainingGames`.
  * @example await sdv.nba.nbaStatsPlayoffpicture({});
  */
 export const nbaStatsPlayoffpicture: WrapperFn = (params = {}) => callFlat(PLAYOFFPICTURE_DEF, params);
@@ -10551,7 +10551,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
  * @param params.game_date - query parameter (`GameDate`) — default `2022-07-20`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`.
  * @example await sdv.nba.nbaStatsScoreboardv2({});
  */
 export const nbaStatsScoreboardv2: WrapperFn = (params = {}) => callFlat(SCOREBOARDV2_DEF, params);
@@ -10803,7 +10803,7 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Shot_Chart_Detail`, `LeagueAverages`.
  * @example await sdv.nba.nbaStatsShotchartdetail({});
  */
 export const nbaStatsShotchartdetail: WrapperFn = (params = {}) => callFlat(SHOTCHARTDETAIL_DEF, params);
@@ -10989,7 +10989,7 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `ShotChartLineupDetail`, `ShotChartLineupLeagueAverage`.
  * @example await sdv.nba.nbaStatsShotchartlineupdetail({});
  */
 export const nbaStatsShotchartlineupdetail: WrapperFn = (params = {}) => callFlat(SHOTCHARTLINEUPDETAIL_DEF, params);
@@ -11223,7 +11223,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5Min5PointTeamDashboard`, `Last3Min5PointTeamDashboard`, `Last1Min5PointTeamDashboard`, `Last30Sec3PointTeamDashboard`, `Last10Sec3PointTeamDashboard`, `Last5MinPlusMinus5PointTeamDashboard`, `Last3MinPlusMinus5PointTeamDashboard`, `Last1MinPlusMinus5PointTeamDashboard`, `Last30Sec3Point2TeamDashboard`, `Last10Sec3Point2TeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyclutch({});
  */
 export const nbaStatsTeamdashboardbyclutch: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYCLUTCH_DEF, params);
@@ -11388,7 +11388,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByHalfTeamDashboard`, `ByPeriodTeamDashboard`, `ByScoreMarginTeamDashboard`, `ByActualMarginTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbygamesplits({});
  */
 export const nbaStatsTeamdashboardbygamesplits: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYGAMESPLITS_DEF, params);
@@ -11553,7 +11553,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `LocationTeamDashboard`, `WinsLossesTeamDashboard`, `MonthTeamDashboard`, `PrePostAllStarTeamDashboard`, `DaysRestTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbygeneralsplits({});
  */
 export const nbaStatsTeamdashboardbygeneralsplits: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYGENERALSPLITS_DEF, params);
@@ -11718,7 +11718,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Last5TeamDashboard`, `Last10TeamDashboard`, `Last15TeamDashboard`, `Last20TeamDashboard`, `GameNumberTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbylastngames({});
  */
 export const nbaStatsTeamdashboardbylastngames: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYLASTNGAMES_DEF, params);
@@ -11883,7 +11883,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ConferenceTeamDashboard`, `DivisionTeamDashboard`, `OpponentTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyopponent({});
  */
 export const nbaStatsTeamdashboardbyopponent: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYOPPONENT_DEF, params);
@@ -12048,7 +12048,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `Shot5FTTeamDashboard`, `Shot8FTTeamDashboard`, `ShotAreaTeamDashboard`, `AssitedShotTeamDashboard`, `ShotTypeTeamDashboard`, `AssistedBy`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyshootingsplits({});
  */
 export const nbaStatsTeamdashboardbyshootingsplits: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYSHOOTINGSPLITS_DEF, params);
@@ -12213,7 +12213,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ScoreDifferentialTeamDashboard`, `PointsScoredTeamDashboard`, `PontsAgainstTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyteamperformance({});
  */
 export const nbaStatsTeamdashboardbyteamperformance: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYTEAMPERFORMANCE_DEF, params);
@@ -12378,7 +12378,7 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamDashboard`, `ByYearTeamDashboard`.
  * @example await sdv.nba.nbaStatsTeamdashboardbyyearoveryear({});
  */
 export const nbaStatsTeamdashboardbyyearoveryear: WrapperFn = (params = {}) => callFlat(TEAMDASHBOARDBYYEAROVERYEAR_DEF, params);
@@ -12555,7 +12555,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `Lineups`.
  * @example await sdv.nba.nbaStatsTeamdashlineups({});
  */
 export const nbaStatsTeamdashlineups: WrapperFn = (params = {}) => callFlat(TEAMDASHLINEUPS_DEF, params);
@@ -12672,7 +12672,7 @@ const TEAMDASHPTPASS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PassesMade`, `PassesReceived`.
  * @example await sdv.nba.nbaStatsTeamdashptpass({});
  */
 export const nbaStatsTeamdashptpass: WrapperFn = (params = {}) => callFlat(TEAMDASHPTPASS_DEF, params);
@@ -12801,7 +12801,7 @@ const TEAMDASHPTREB_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallRebounding`, `ShotTypeRebounding`, `NumContestedRebounding`, `ShotDistanceRebounding`, `RebDistanceRebounding`.
  * @example await sdv.nba.nbaStatsTeamdashptreb({});
  */
 export const nbaStatsTeamdashptreb: WrapperFn = (params = {}) => callFlat(TEAMDASHPTREB_DEF, params);
@@ -12930,7 +12930,7 @@ const TEAMDASHPTSHOTS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GeneralShooting`, `ShotClockShooting`, `DribbleShooting`, `ClosestDefenderShooting`, `ClosestDefender10ftPlusShooting`, `TouchTimeShooting`.
  * @example await sdv.nba.nbaStatsTeamdashptshots({});
  */
 export const nbaStatsTeamdashptshots: WrapperFn = (params = {}) => callFlat(TEAMDASHPTSHOTS_DEF, params);
@@ -12963,7 +12963,7 @@ const TEAMDETAILS_DEF: WrapperDef = {
  *
  * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`.
  * @example await sdv.nba.nbaStatsTeamdetails({});
  */
 export const nbaStatsTeamdetails: WrapperFn = (params = {}) => callFlat(TEAMDETAILS_DEF, params);
@@ -13275,7 +13275,7 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
  * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`.
  * @example await sdv.nba.nbaStatsTeaminfocommon({});
  */
 export const nbaStatsTeaminfocommon: WrapperFn = (params = {}) => callFlat(TEAMINFOCOMMON_DEF, params);
@@ -13440,7 +13440,7 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamOverall`, `PlayersSeasonTotals`.
  * @example await sdv.nba.nbaStatsTeamplayerdashboard({});
  */
 export const nbaStatsTeamplayerdashboard: WrapperFn = (params = {}) => callFlat(TEAMPLAYERDASHBOARD_DEF, params);
@@ -13593,7 +13593,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffDetails`, `PlayersOnCourtTeamPlayerOnOffDetails`, `PlayersOffCourtTeamPlayerOnOffDetails`.
  * @example await sdv.nba.nbaStatsTeamplayeronoffdetails({});
  */
 export const nbaStatsTeamplayeronoffdetails: WrapperFn = (params = {}) => callFlat(TEAMPLAYERONOFFDETAILS_DEF, params);
@@ -13746,7 +13746,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallTeamPlayerOnOffSummary`, `PlayersOnCourtTeamPlayerOnOffSummary`, `PlayersOffCourtTeamPlayerOnOffSummary`.
  * @example await sdv.nba.nbaStatsTeamplayeronoffsummary({});
  */
 export const nbaStatsTeamplayeronoffsummary: WrapperFn = (params = {}) => callFlat(TEAMPLAYERONOFFSUMMARY_DEF, params);
@@ -13911,7 +13911,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `1628932`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`.
  * @example await sdv.nba.nbaStatsTeamvsplayer({});
  */
 export const nbaStatsTeamvsplayer: WrapperFn = (params = {}) => callFlat(TEAMVSPLAYER_DEF, params);
@@ -14169,7 +14169,7 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
  * @param params.clutch_time_nullable - query parameter (`ClutchTime`) — default ``.
  * @param params.ahead_behind_nullable - query parameter (`AheadBehind`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideodetailsasset({});
  */
 export const nbaStatsVideodetailsasset: WrapperFn = (params = {}) => callFlat(VIDEODETAILSASSET_DEF, params);
@@ -14208,7 +14208,7 @@ const VIDEOEVENTS_DEF: WrapperDef = {
  * @param params.game_event_id - query parameter (`GameEventID`) — default `10`.
  * @param params.game_id - query parameter (`GameID`) — default `1022200075`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideoevents({});
  */
 export const nbaStatsVideoevents: WrapperFn = (params = {}) => callFlat(VIDEOEVENTS_DEF, params);
@@ -14247,7 +14247,7 @@ const VIDEOEVENTSASSET_DEF: WrapperDef = {
  * @param params.game_event_id - query parameter (`GameEventID`) — default `0`.
  * @param params.game_id - query parameter (`GameID`) — default `21700807`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideoeventsasset({});
  */
 export const nbaStatsVideoeventsasset: WrapperFn = (params = {}) => callFlat(VIDEOEVENTSASSET_DEF, params);

@@ -2313,7 +2313,13 @@ function renderWrittenFlatModule(api, defs) {
         const dflt = sec.default === null ? "every table, as a dict" : `\`${sec.default}\``;
         jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; an unknown name throws, listing the valid ones.\n`;
       }
-      jsdoc += ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
+      // A `kind: frames` schema (and no single default sub-frame): the parser returns
+      // an object of tables, one per documented key.
+      const frames = loadReturnsSchema(def.returnsSchema)?.frames;
+      jsdoc +=
+        frames && !(sec && sec.default !== null)
+          ? ` * @returns The raw response by default; with \`{ parsed: true }\`, an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}.\n`
+          : ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
     } else {
       jsdoc += ` * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;
       jsdoc += ` * @returns The raw response (this endpoint has no parser).\n`;
