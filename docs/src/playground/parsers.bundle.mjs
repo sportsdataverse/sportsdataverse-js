@@ -3087,7 +3087,12 @@ function parse_nba_stats_result_sets(raw, resultSet) {
   }
   const frames = {};
   sets.forEach((rs, i) => {
-    frames[rs.name ?? `set_${i}`] = toRows(rs);
+    Object.defineProperty(frames, rs.name ?? `set_${i}`, {
+      value: toRows(rs),
+      enumerable: true,
+      writable: true,
+      configurable: true
+    });
   });
   if (resultSet != null) {
     return Object.prototype.hasOwnProperty.call(frames, resultSet) ? frames[resultSet] : [];

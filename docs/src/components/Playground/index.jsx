@@ -320,27 +320,6 @@ export default function Playground() {
     }
   }, [sel, league, params]);
 
-  const call = useMemo(() => {
-    if (!sel) return '';
-    const entries = Object.entries(params).filter(([, v]) => v !== '' && v != null);
-    if (parsed && hasParser) {
-      entries.push(['parsed', 'true']);
-      if (selHasSections(sel) && section) entries.push(['section', section]);
-    }
-    const args = entries
-      .map(([k, v]) => {
-        // Render booleans (true/false) and numbers as literals; everything else
-        // as a quoted string — so e.g. includeReplays=false reads as `false`.
-        const isBool = v === 'true' || v === 'false';
-        const isNum = /^-?\d+(\.\d+)?$/.test(v);
-        return `${k}: ${isBool || isNum ? v : `'${v}'`}`;
-      })
-      .join(', ');
-    const method =
-      sel.kind === 'flat' ? flatMethodName(sel.api, sel.short) : espnMethodName(prefix, sel.short);
-    return `await sdv.${prefix}.${method}(${args ? `{ ${args} }` : '{}'});`;
-  }, [prefix, sel, params, parsed, hasParser, section]);
-
   // Parse the cached raw payload client-side (instant Raw<->Parsed toggle).
   const parsedView = useMemo(() => {
     if (!parsed || !hasParser || rawData == null || !sel) return null;
@@ -372,6 +351,30 @@ export default function Playground() {
       return { error: String(e.message || e) };
     }
   }, [parsed, hasParser, rawData, sel, section]);
+
+  // After parsedView: the call names the section the table shows (the picker's default
+  // when none is chosen), so copying it returns that table, not the whole dict.
+  const call = useMemo(() => {
+    if (!sel) return '';
+    const entries = Object.entries(params).filter(([, v]) => v !== '' && v != null);
+    if (parsed && hasParser) {
+      entries.push(['parsed', 'true']);
+      const shown = parsedView?.kind === 'sections' ? parsedView.active : section;
+      if (selHasSections(sel) && shown) entries.push(['section', shown]);
+    }
+    const args = entries
+      .map(([k, v]) => {
+        // Render booleans (true/false) and numbers as literals; everything else
+        // as a quoted string — so e.g. includeReplays=false reads as `false`.
+        const isBool = v === 'true' || v === 'false';
+        const isNum = /^-?\d+(\.\d+)?$/.test(v);
+        return `${k}: ${isBool || isNum ? v : `'${v}'`}`;
+      })
+      .join(', ');
+    const method =
+      sel.kind === 'flat' ? flatMethodName(sel.api, sel.short) : espnMethodName(prefix, sel.short);
+    return `await sdv.${prefix}.${method}(${args ? `{ ${args} }` : '{}'});`;
+  }, [prefix, sel, params, parsed, hasParser, section, parsedView]);
 
   async function run() {
     setLoading(true);
