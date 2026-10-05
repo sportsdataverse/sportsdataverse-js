@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import sdv, { configure, resetConfig } from '../../dist/index.js';
+import sdv, { configure, resetConfig, espn_basketball_pbp_from_summary } from '../../dist/index.js';
 import * as P from '../../dist/producers/espn_basketball_pbp.js';
 import { _warn } from '../../dist/core/releases.js';
 
@@ -244,7 +244,7 @@ describe('ESPN basketball pbp league facts', () => {
     }
   });
 
-  it('is on sdv.<lg> under py and camelCase names (helpers + espn_<lg>_pbp)', () => {
+  it('is on sdv.<lg> under py and camelCase names; the trim core is a root export', () => {
     const camel = (s) => s.replace(/_([a-z0-9])/g, (_m, ch) => ch.toUpperCase());
     for (const lg of LEAGUES) {
       for (const stage of ['pbp', 'pickcenter', 'game_data', 'pbp_features']) {
@@ -252,23 +252,24 @@ describe('ESPN basketball pbp league facts', () => {
         sdv[lg][name].should.equal(P[name]);
         sdv[lg][camel(name)].should.equal(P[name]);
       }
-      sdv[lg][`espn_${lg}_pbp`].should.be.a.Function();
-      sdv[lg][camel(`espn_${lg}_pbp`)].should.equal(sdv[lg][`espn_${lg}_pbp`]);
+      should(sdv[lg][`espn_${lg}_pbp`]).be.undefined(); // sdv.<lg>.espn_<lg>_* = the generated wrappers
     }
+    espn_basketball_pbp_from_summary.should.equal(P.espn_basketball_pbp_from_summary);
   });
 
-  describe('espn_<lg>_pbp fetches the summary through the ESPN site family', () => {
+  describe('py espn_<lg>_pbp = espn_<lg>_summary + espn_basketball_pbp_from_summary', () => {
     afterEach(() => resetConfig());
-    it('requests summary?event=<id> and returns helper_<lg>_pbp of it (raw: the trimmed payload)', async () => {
+    it('the summary wrapper requests summary?event=<id>; the trim core makes helper_<lg>_pbp of it', async () => {
       const cap = capture('wbb_summary_401587390.json.gz');
       const calls = [];
       configure({ transport: async (req) => (calls.push(req), { status: 200, headers: {}, data: cap, url: req.url }) });
-      const out = await sdv.wbb.espn_wbb_pbp(401587390);
+      const summary = await sdv.wbb.espn_wbb_summary({ event_id: 401587390 });
       calls.length.should.equal(1);
-      String(calls[0].url).should.match(/\/basketball\/womens-college-basketball\/summary/);
+      String(calls[0].url).should.match(/\/basketball\/womens-college-basketball\/summary$/);
       String(calls[0].query.event).should.equal('401587390');
-      assert.deepStrictEqual(out, P.espn_basketball_pbp_from_summary('wbb', 401587390, cap));
-      assert.deepStrictEqual(await sdv.wbb.espn_wbb_pbp(401587390, { raw: true }), P.espn_basketball_pbp_from_summary('wbb', 401587390, cap, true));
+      const want = O.captures['wbb_summary_401587390.json.gz'].wbb;
+      espn_basketball_pbp_from_summary('wbb', 401587390, summary).plays.length.should.equal(want.out.plays.rows.length);
+      Object.keys(espn_basketball_pbp_from_summary('wbb', 401587390, summary, true)).should.eql(want.raw.keys);
     });
   });
 });

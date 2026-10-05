@@ -28,8 +28,9 @@
 //   NCAA (MBB/WBB) `espn_<lg>_pbp` defaults the ARRAY keys (plays, videos, ...) to {} and the
 //         dict keys to [] -- py's (swapped) dict_keys_expected, kept as is.
 //
-// Output (py `to_dicts()` / dict), PURE (no network; `espn_<lg>_pbp` is wired in src/index.ts
-// with the fetch injected): `plays` is `Row[]` with py's column names (dotted, e.g.
+// Output (py `to_dicts()` / dict), PURE (no network; py's `espn_<lg>_pbp(id)` is
+// `espn_basketball_pbp_from_summary(lg, id, await sdv.<lg>.espn_<lg>_summary({ event_id: id }))`,
+// not put on sdv.<lg>, whose `espn_<lg>_*` names are the generated wrappers): `plays` is `Row[]` with py's column names (dotted, e.g.
 // `end.half_seconds_remaining`) in py's order; `[]` when py's frame is empty. The other keys are
 // the summary's own values (np.array(x).tolist() is the identity on ESPN's lists of objects /
 // dicts; a list of scalars, which numpy would coerce, is passed through unchanged -- ESPN ships
