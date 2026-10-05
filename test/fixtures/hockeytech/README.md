@@ -24,3 +24,14 @@ Live PWHL captures (trimmed, JSONP re-wrapped): `pwhl_searchplayers.jsonp`
 (`statviewtype` skaters, season_id 8), `pwhl_transactions.jsonp`,
 `pwhl_brackets.jsonp` (season_id 9, 2026 playoffs), `pwhl_player_gamebygame.jsonp`
 (player 36, season_id 7). Positive control for game log: player 12 / season 8 returns 30 games.
+
+## Added 2026-10-05 (sdv-js JS-1, error sentinels)
+
+Two real HTTP-200 error bodies, copied from sdv-internal-refs
+`hockeytech/captures/samples/pwhl/{streaks,svf_streaks}.json` (captured live 2026-07-12,
+internal-refs commit b78eb2c; stored pretty-printed, wire form was compact):
+`pwhl_streaks_undefined_tab.json` (`modulekit` / `streaks` →
+`{"SiteKit": {..., "Undefined": "Undefined Tab streaks"}}`) and
+`pwhl_svf_streaks_invalidview.json` (`statviewfeed` / `streaks` →
+`{"error": "InvalidView error: streaks"}`). The access-denied plain-text reply is
+`analytics/live-2026-10-05/mjhl_summary_7301.txt`.

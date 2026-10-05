@@ -6,61 +6,61 @@ columns:
   description: 'Round number within the playoffs.'
 - name: round_name
   type: character
-  description: 'HockeyTech `round_name` field.'
+  description: 'Name of the playoff round (e.g. ''PWHL Walter Cup Finals Presented by Scotiabank'').'
 - name: round_season_id
   type: character
-  description: 'HockeyTech `round_season_id` field.'
+  description: 'HockeyTech season id of the playoff season the round belongs to.'
 - name: round_type_id
   type: character
-  description: 'HockeyTech `round_type_id` field.'
+  description: 'Round-type id (''1'' = ''Regular Playoff Series'' in the capture).'
 - name: round_type_name
   type: character
-  description: 'HockeyTech `round_type_name` field.'
+  description: 'Round-type label (e.g. ''Regular Playoff Series'').'
 - name: series_letter
   type: character
-  description: 'HockeyTech `series_letter` field.'
+  description: 'Letter identifying the series in the bracket (A, B, C, ...).'
 - name: series_name
   type: character
-  description: 'HockeyTech `series_name` field.'
+  description: 'Display name of the series.'
 - name: series_logo
   type: character
-  description: 'HockeyTech `series_logo` field.'
+  description: 'Series logo URL (empty in the capture).'
 - name: round
   type: character
-  description: 'HockeyTech `round` field.'
+  description: 'Round number the series belongs to (1 = first round).'
 - name: active
   type: character
-  description: 'HockeyTech `active` field.'
+  description: 'Series `active` flag as served by the feed (''1'' for every captured series).'
 - name: feeder_series1
   type: character
-  description: 'HockeyTech `feeder_series1` field.'
+  description: 'Letter of one of the two series whose winners meet in this series (''N/A'' for a first-round series).'
 - name: feeder_series2
   type: character
-  description: 'HockeyTech `feeder_series2` field.'
+  description: 'Letter of the other series whose winner meets in this series (''N/A'' for a first-round series).'
 - name: team1
   type: character
-  description: 'HockeyTech `team1` field.'
+  description: 'HockeyTech team id of the first team in the series.'
 - name: team2
   type: character
-  description: 'HockeyTech `team2` field.'
+  description: 'HockeyTech team id of the second team in the series.'
 - name: content_en
   type: character
-  description: 'HockeyTech `content_en` field.'
+  description: 'English series content text (empty in the capture).'
 - name: content_fr
   type: character
-  description: 'HockeyTech `content_fr` field.'
+  description: 'French series content text (empty in the capture).'
 - name: winner
   type: character
-  description: 'HockeyTech `winner` field.'
+  description: 'Series winner as served by the feed (empty for every captured series, completed ones included).'
 - name: games
   type: character
-  description: 'HockeyTech `games` field.'
+  description: 'JSON text of the series'' games, one object per game (`game_id`, `home_team`, `home_goal_count`, `visiting_team`, `visiting_goal_count`, `status`, `game_status`, `date_time`, ...).'
 - name: team1_wins
   type: character
-  description: 'HockeyTech `team1_wins` field.'
+  description: 'Series wins of `team1`.'
 - name: team2_wins
   type: character
-  description: 'HockeyTech `team2_wins` field.'
+  description: 'Series wins of `team2`.'
 - name: ties
   type: character
-  description: 'HockeyTech `ties` field.'
+  description: 'Tied games in the series (0 in the capture).'

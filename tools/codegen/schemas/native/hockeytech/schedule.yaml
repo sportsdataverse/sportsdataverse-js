@@ -9,184 +9,184 @@ columns:
   description: 'HockeyTech season id.'
 - name: league_id
   type: character
-  description: 'HockeyTech league id.'
+  description: 'HockeyTech league id of the game (the feed''s `league_id`, e.g. ''1'' for PWHL).'
 - name: game_number
   type: character
-  description: 'League game number.'
+  description: 'Game number within the schedule.'
 - name: game_letter
   type: character
-  description: 'Game-type letter code.'
+  description: 'Letter suffix of the game number; in the captures it is set only on playoff games (letters A-P, one per series) and empty otherwise.'
 - name: game_type
   type: character
-  description: 'Game-type code.'
+  description: 'Game type the row belongs to.'
 - name: quick_score
   type: character
-  description: 'Quick-score availability flag.'
+  description: 'Quick-score flag string; ''0'' in every captured row (17 leagues), so the non-zero case was not observed.'
 - name: date
   type: character
-  description: 'Game date (display).'
+  description: 'Game date (YYYY-MM-DD).'
 - name: flo_core_event_id
   type: character
-  description: 'FloHockey core event id.'
+  description: 'FloSports core event identifier linking this game to its FloSports broadcast event record.'
 - name: flo_live_event_id
   type: character
-  description: 'FloHockey live event id.'
+  description: 'FloSports live-stream event identifier for this game.'
 - name: game_date
   type: character
   description: 'Game date.'
 - name: game_date_iso8601
   type: character
-  description: 'Game date/time in ISO-8601 format.'
+  description: 'Scheduled start as an ISO 8601 date-time with UTC offset (e.g. ''2023-12-04T13:00:00-05:00'').'
 - name: scheduled_time
   type: character
-  description: 'Scheduled start time.'
+  description: 'Raw scheduled start time for the game as returned by the HockeyTech feed, typically in HH:MM:SS format.'
 - name: scheduled_formatted_time
   type: character
-  description: 'Scheduled start time (formatted).'
+  description: 'Human-readable local game start time string formatted for display (e.g., "7:00 PM ET").'
 - name: timezone
   type: character
-  description: 'Venue timezone.'
+  description: 'Time zone of the scheduled start, as a tz database name (e.g. ''Canada/Eastern'').'
 - name: ticket_url
   type: character
-  description: 'Ticket purchase URL.'
+  description: 'URL to the official ticketing page where fans can purchase tickets for this game.'
 - name: home_id
   type: character
-  description: 'Home team id.'
+  description: 'HockeyTech team identifier for the home team in this game.'
 - name: home_code
   type: character
-  description: 'Home team code.'
+  description: 'Short team code (abbreviation) for the home team (e.g., "BOS", "MIN").'
 - name: home_city
   type: character
-  description: 'Home team city.'
+  description: 'City name of the home team (e.g. ''Boston'', ''Minnesota'').'
 - name: home_nickname
   type: character
-  description: 'Home team nickname.'
+  description: 'Franchise nickname for the home team (e.g., "Fleet", "Frost").'
 - name: home_long_name
   type: character
-  description: 'Home team full name.'
+  description: 'Full name including city and franchise for the home team (e.g., "Boston Fleet").'
 - name: home_division
   type: character
   description: 'Home team division.'
 - name: home_goals
   type: character
-  description: 'Home goals.'
+  description: 'Number of goals scored by the home team at the current point in the game.'
 - name: home_audio_url
   type: character
-  description: 'Home team audio broadcast URL.'
+  description: 'URL of the home-team radio or audio broadcast stream for this game.'
 - name: home_video_url
   type: character
-  description: 'Home team video broadcast URL.'
+  description: 'URL of the home-team video broadcast stream for this game.'
 - name: home_webcast_url
   type: character
-  description: 'Home team webcast URL.'
+  description: 'URL of the home-team webcast for online viewing of this game.'
 - name: visitor_id
   type: character
-  description: 'Visiting team id.'
+  description: 'HockeyTech team identifier for the visiting team in this game.'
 - name: visitor_code
   type: character
-  description: 'Visiting team code.'
+  description: 'Short team code (abbreviation) for the visiting team (e.g., "NYR", "OTT").'
 - name: visitor_city
   type: character
-  description: 'Visiting team city.'
+  description: 'City name of the visiting team (e.g., "New York", "Ottawa").'
 - name: visitor_nickname
   type: character
-  description: 'Visiting team nickname.'
+  description: 'Franchise nickname for the visiting team (e.g., "Charge", "Sceptres").'
 - name: visitor_long_name
   type: character
-  description: 'Visiting team full name.'
+  description: 'Full name including city and franchise for the visiting team (e.g., "Ottawa Charge").'
 - name: visiting_division
   type: character
   description: 'Visiting team division.'
 - name: visitor_goals
   type: character
-  description: 'Visiting goals.'
+  description: 'Number of goals scored by the visiting team at the current point in the game.'
 - name: visitor_audio_url
   type: character
-  description: 'Visiting team audio broadcast URL.'
+  description: 'URL of the visiting-team radio or audio broadcast stream for this game.'
 - name: visitor_video_url
   type: character
-  description: 'Visiting team video broadcast URL.'
+  description: 'URL of the visiting-team video broadcast stream for this game.'
 - name: visitor_webcast_url
   type: character
-  description: 'Visiting team webcast URL.'
+  description: 'URL of the visiting-team webcast for online viewing of this game.'
 - name: period
   type: character
-  description: 'Current period number.'
+  description: 'Period number.'
 - name: period_name_short
   type: character
-  description: 'Short period label.'
+  description: 'Abbreviated name of the current or final game period (e.g., "3rd", "OT").'
 - name: period_name_long
   type: character
-  description: 'Long period label.'
+  description: 'Verbose name of the current or final game period (e.g., "Third Period", "Overtime").'
 - name: game_clock
   type: character
-  description: 'Current game clock.'
+  description: 'Game clock.'
 - name: game_summary_url
   type: character
-  description: 'Game summary URL.'
+  description: 'Game-summary link target: the bare game id in some leagues (e.g. PWHL ''74'') and a site-relative path in others (e.g. ''/game-center/?game_id=12821'').'
 - name: home_wins
   type: character
-  description: 'Home team wins (standings context).'
+  description: 'Wins in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: home_regulation_losses
   type: character
-  description: 'Home team regulation losses.'
+  description: 'Regulation losses in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: home_ot_losses
   type: character
-  description: 'Home team overtime losses.'
+  description: 'Overtime losses in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: home_shootout_losses
   type: character
-  description: 'Home team shootout losses.'
+  description: 'Shootout losses in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: visitor_wins
   type: character
-  description: 'Visiting team wins (standings context).'
+  description: 'Wins in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: visitor_regulation_losses
   type: character
-  description: 'Visiting team regulation losses.'
+  description: 'Regulation losses in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: visitor_ot_losses
   type: character
-  description: 'Visiting team overtime losses.'
+  description: 'Overtime losses in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: visitor_shootout_losses
   type: character
-  description: 'Visiting team shootout losses.'
+  description: 'Shootout losses in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
 - name: game_status
   type: character
-  description: 'Game status code.'
+  description: 'Numeric game-status code; ''4'' on every captured final game (`game_status_string` ''Final'').'
 - name: intermission
   type: character
-  description: 'Intermission flag.'
+  description: 'Flag or string indicating whether the game is currently in an intermission period.'
 - name: game_status_string
   type: character
-  description: 'Human-readable game status.'
+  description: 'Short status label for the game''s current state (e.g., "Final", "In Progress", "Scheduled").'
 - name: game_status_string_long
   type: character
-  description: 'Human-readable game status (long form).'
+  description: 'Verbose status description for the game''s current state, including period or overtime context.'
 - name: ord
   type: character
-  description: 'Sort-ordinal value.'
+  description: 'Ordinal sort key used by the HockeyTech scorebar feed to order games within a day.'
 - name: venue_name
   type: character
-  description: 'Venue name.'
+  description: 'Name of the venue.'
 - name: venue_location
   type: character
-  description: 'Venue location.'
+  description: 'City and/or arena name indicating the physical location where the game is played.'
 - name: league_name
   type: character
   description: 'League name.'
 - name: league_code
   type: character
-  description: 'League code.'
+  description: 'Short code identifying the league for this scorebar record (e.g., "PWHL").'
 - name: timezone_short
   type: character
-  description: 'Short timezone label.'
+  description: 'Abbreviated timezone label for the game''s scheduled start time (e.g., "ET", "CT").'
 - name: home_logo
   type: character
   description: 'Home team logo URL.'
 - name: visitor_logo
   type: character
-  description: 'Visiting team logo URL.'
+  description: 'URL of the logo image for the visiting team.'
 - name: flo_hockey_url
   type: character
-  description: 'FloHockey broadcast URL.'
+  description: 'URL to the FloHockey streaming page for this game.'
 - name: combined_client_code
   type: character
-  description: 'Combined client code identifier.'
+  description: 'Combined league-and-client identifier string used by the HockeyTech feed to distinguish multi-tenant deployments.'
