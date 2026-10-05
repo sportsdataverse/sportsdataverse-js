@@ -485,3 +485,51 @@ describe('hockeytech: every hockeytechGet caller under the new classification', 
     await sdv.hockeytech.pwhl_pbp(74).should.be.rejectedWith(AssetFetchError, { message: /Undefined Tab/ });
   });
 });
+
+describe('hockeytech: resolveSeasonId (gameType filter + PWHL fallback)', () => {
+  afterEach(() => resetConfig());
+
+  it('filters the real seasons list by end-year AND gameType (default regular)', async () => {
+    useTransport(() => ({ data: SEASONS() }));
+    (await resolveSeasonId('pwhl', { season: 2026 })).should.equal(8);
+    (await resolveSeasonId('pwhl', { season: 2026, gameType: 'playoffs' })).should.equal(9);
+    (await resolveSeasonId('pwhl', { season: 2027, gameType: 'preseason' })).should.equal(10);
+    await resolveSeasonId('ahl', { season: 2027 }).should.be.rejectedWith(/No ahl season for season=2027, gameType=regular/);
+  });
+
+  it('PWHL falls back to its table when the answered list lacks the season, or the fetch failed', async () => {
+    useTransport(() => ({ data: SEASONS() })); // the live list starts at 2025-26
+    (await resolveSeasonId('pwhl', { season: 2024 })).should.equal(1);
+    (await resolveSeasonId('pwhl', { season: 2024, gameType: 'playoffs' })).should.equal(3);
+    useTransport(() => ({ data: '<html>oops</html>' })); // unparseable -> AssetFetchError -> fallback
+    (await resolveSeasonId('pwhl', { season: 2025 })).should.equal(5);
+    await resolveSeasonId('pwhl', { season: 2019 }).should.be.rejectedWith(/No pwhl season/);
+    await resolveSeasonId('echl', { season: 2025 }).should.be.rejectedWith(AssetFetchError);
+  });
+});
+
+describe('hockeytech: T5 view URL defaults (generated wrappers)', () => {
+  afterEach(() => resetConfig());
+
+  it('each new view sends its feed/view and documented defaults', async () => {
+    const calls = useTransport(() => ({ data: '{"SiteKit":{}}' }));
+    await FLAT.hockeytech_scorebar({ league: 'ahl' });
+    await FLAT.hockeytech_stats({ league: 'pwhl', season_id: 8 });
+    await FLAT.hockeytech_player_game_log({ league: 'pwhl', player_id: 36, season_id: 7 });
+    await FLAT.hockeytech_player_search({ league: 'pwhl', search_term: 'Poulin' });
+    await FLAT.hockeytech_transactions({ league: 'whl' });
+    await FLAT.hockeytech_playoff_bracket({ league: 'qmjhl', season_id: 9 });
+    const q = calls.map((c) => c.query);
+    q[0].should.containEql({ feed: 'modulekit', view: 'scorebar', numberofdaysback: '3', numberofdaysahead: '3', limit: '100', league_id: '4', client_code: 'ahl' });
+    q[1].should.containEql({ feed: 'modulekit', view: 'statviewtype', type: 'skaters', season_id: '8' });
+    q[2].should.containEql({ feed: 'modulekit', view: 'player', category: 'gamebygame', player_id: '36', season_id: '7' });
+    q[3].should.containEql({ feed: 'modulekit', view: 'searchplayers', search_term: 'Poulin' });
+    q[4].should.containEql({ feed: 'modulekit', view: 'transactions', league_id: '7' });
+    q[5].should.containEql({ feed: 'modulekit', view: 'brackets', season_id: '9', league_id: '6', client_code: 'lhjmq' });
+    calls[5].url.should.equal('https://cluster.leaguestat.com/feed/index.php');
+    for (const c of q) {
+      c.should.have.property('lang', 'en');
+      c.should.not.have.property('league'); // the control param never reaches the feed
+    }
+  });
+});
