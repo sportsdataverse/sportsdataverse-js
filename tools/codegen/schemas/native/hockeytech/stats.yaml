@@ -258,7 +258,7 @@ columns:
   description: 'Whether the row is a season total.'
 - name: player_image
   type: character
-  description: 'URL to the player''s headshot image as served by the HockeyTech/PWHL data feed.'
+  description: 'URL to the player''s headshot image as served by the HockeyTech data feed.'
 - name: namelink
   type: character
   description: 'Player name used as the text of the feed''s player link (equals `name` in the captures).'

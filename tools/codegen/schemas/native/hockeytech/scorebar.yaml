@@ -3,7 +3,7 @@ kind: dataframe
 columns:
 - name: id
   type: character
-  description: 'HockeyTech record id.'
+  description: 'HockeyTech game id.'
 - name: season_id
   type: character
   description: 'HockeyTech season id.'
@@ -27,10 +27,10 @@ columns:
   description: 'Game date (YYYY-MM-DD).'
 - name: flo_core_event_id
   type: character
-  description: 'FloSports core event identifier linking this PWHL game to its FloSports broadcast event record.'
+  description: 'FloSports core event identifier linking this game to its FloSports broadcast event record.'
 - name: flo_live_event_id
   type: character
-  description: 'FloSports live-stream event identifier for this PWHL game.'
+  description: 'FloSports live-stream event identifier for this game.'
 - name: game_date
   type: character
   description: 'Game date.'
@@ -186,7 +186,7 @@ columns:
   description: 'URL of the logo image for the visiting team.'
 - name: flo_hockey_url
   type: character
-  description: 'URL to the FloHockey streaming page for this PWHL game.'
+  description: 'URL to the FloHockey streaming page for this game.'
 - name: combined_client_code
   type: character
   description: 'Combined league-and-client identifier string used by the HockeyTech feed to distinguish multi-tenant deployments.'

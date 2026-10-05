@@ -33,7 +33,7 @@ columns:
   description: 'Player weight in pounds.'
 - name: rawbirthdate
   type: character
-  description: 'Player''s birth date as a raw string in the format returned by the PWHL HockeyTech API, typically YYYY-MM-DD.'
+  description: 'Player''s birth date as a raw string in the format returned by the HockeyTech API, typically YYYY-MM-DD.'
 - name: birthdate
   type: character
   description: 'Date of birth.'
@@ -63,13 +63,13 @@ columns:
   description: 'Label of the person''s primary role in the HockeyTech person record (e.g. ''Player'').'
 - name: all_roles
   type: character
-  description: 'Pipe- or comma-delimited string listing every positional or roster role associated with the player in the PWHL HockeyTech system.'
+  description: 'Pipe- or comma-delimited string listing every positional or roster role associated with the player in the HockeyTech system.'
 - name: last_team_name
   type: character
-  description: 'Full name of the PWHL team on which the player most recently appeared.'
+  description: 'Full name of the team on which the player most recently appeared.'
 - name: last_team_code
   type: character
-  description: 'Short abbreviation code for the PWHL team on which the player most recently appeared.'
+  description: 'Short abbreviation code for the team on which the player most recently appeared.'
 - name: division
   type: character
   description: 'Division name (e.g. ''PWHL'').'

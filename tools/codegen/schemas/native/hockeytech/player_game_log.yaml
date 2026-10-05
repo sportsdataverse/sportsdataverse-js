@@ -6,7 +6,7 @@ columns:
   description: 'Month name of the game date (e.g. ''November'').'
 - name: id
   type: character
-  description: 'HockeyTech record id.'
+  description: 'HockeyTech game id.'
 - name: home_team
   type: character
   description: 'HockeyTech team id of the home team.'
