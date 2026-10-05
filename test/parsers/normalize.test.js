@@ -30,7 +30,7 @@ describe('parsers/_normalize: normalize', () => {
   it('snake_cases the flattened keys', () => {
     const rows = normalize([{ team: { teamName: 'NYY', teamId: 147 } }]);
     rows[0].should.have.property('team_team_name', 'NYY');
-    rows[0].should.have.property('team_team_id', 147);
+    rows[0].should.have.property('team_team_id', '147');
   });
 
   it('stringifies array-valued cells (JSON.stringify) so rows stay rectangular', () => {
@@ -57,6 +57,22 @@ describe('parsers/_normalize: normalize', () => {
       { id: 2, name: 'b' },
     ]);
     rows.length.should.equal(2);
-    rows[1].should.eql({ id: 2, name: 'b' });
+    rows[1].should.eql({ id: '2', name: 'b' });
+  });
+
+  it('an id column of integers is decimal strings (v4 INT64 id rule); other integers stay numbers', () => {
+    const rows = normalize([
+      { gameId: 401585607, playId: '401585607101849903', score: 3, team: { id: 13 } },
+      { gameId: 12, playId: null, score: 4, team: { id: -0 } },
+    ]);
+    rows.map((r) => r.game_id).should.eql(['401585607', '12']);
+    rows.map((r) => r.play_id).should.eql(['401585607101849903', null]); // a JSON string id is kept exactly
+    rows.map((r) => r.team_id).should.eql(['13', '0']);
+    rows.map((r) => r.score).should.eql([3, 4]);
+    JSON.stringify(rows).should.be.a.String();
+    // not an integer column: left as read (a fraction, a boolean, a number past 2^53 already rounded by JSON.parse)
+    normalize([{ id: 1.5 }, { id: 2 }]).map((r) => r.id).should.eql([1.5, 2]);
+    normalize([{ team_id: true }]).map((r) => r.team_id).should.eql([true]);
+    normalize([{ id: 2 ** 60 }]).map((r) => r.id).should.eql([2 ** 60]);
   });
 });

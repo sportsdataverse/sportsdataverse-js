@@ -36,12 +36,12 @@ describe('parsers/fox: parse_fox_list (generic flattener)', () => {
   it('deep-flattens + snake_cases a single module object into one row', () => {
     const rows = parse_fox_list({ teamId: 5, navItems: [], logo: { webUrl: 'x' } });
     rows.length.should.equal(1);
-    rows[0].should.have.property('team_id', 5);
+    rows[0].should.have.property('team_id', '5');
     rows[0].should.have.property('logo_web_url', 'x'); // deep-flatten + snake
   });
 
   it('accepts a bare array payload', () => {
-    parse_fox_list([{ id: 9 }])[0].should.have.property('id', 9);
+    parse_fox_list([{ id: 9 }])[0].should.have.property('id', '9');
   });
 
   it('returns [] for empty / malformed payloads', () => {
@@ -67,14 +67,14 @@ describe('parsers/fox: parse_fox_scoreboard', () => {
     };
     const rows = parse_fox_scoreboard(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('event_id', 100);
+    rows[0].should.have.property('event_id', '100');
     rows[0].should.have.property('group_title', 'Top 25'); // group meta prefixed
     rows[0].should.have.property('home_team_name', 'GA'); // deep-flatten
   });
 
   it('falls back to a bare events[] list (top-events segment)', () => {
     const rows = parse_fox_scoreboard({ events: [{ eventId: 7, status: 'live' }] });
-    rows[0].should.have.property('event_id', 7);
+    rows[0].should.have.property('event_id', '7');
   });
 
   it('returns [] for empty / malformed payloads', () => {
@@ -138,7 +138,7 @@ describe('parsers/fox: parse_fox_event', () => {
     );
     const shell = parse_fox_event({ header: { eventId: 5 } });
     shell.length.should.equal(1);
-    shell[0].should.have.property('header_event_id', 5);
+    shell[0].should.have.property('header_event_id', '5');
   });
 
   it('returns [] for empty / malformed payloads', () => {

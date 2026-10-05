@@ -5,8 +5,15 @@
 //
 // Fetch failures throw (`NoDataError` / `AssetFetchError`) — a failed fetch is never
 // reported as an empty game.
+//
+// Every public wrapper returns its id columns (`game_id`, `player_id`, `team_id`,
+// `goalie_id`, ...) as decimal strings (the v4 id rule, src/core/int64.ts), like
+// `parse_hockeytech_pbp` and every other parser. The pure frame functions in
+// `./hockeytech.ts` stay sdv-py-faithful (their joins use the raw ids); the
+// conversion happens once, on the way out.
 
 import { AssetFetchError } from "../core/errors.js";
+import { idColumnsToStrings } from "../core/int64.js";
 import { HOCKEYTECH_LEAGUES, hockeytechFetch } from "../core/hockeytech_runtime.js";
 import {
   enrich_pbp,
@@ -66,14 +73,17 @@ const metaFeed = (lg: string, id: GameId) =>
     denied: { GC: { Gamesummary: {} } },
   });
 
+const stints = async (league: string, gameId: GameId): Promise<Row[]> =>
+  parse_shifts(await shiftsFeed(league, gameId), gameId);
+
 /** `<lg>_game_shifts`: one row per player-shift stint. */
 export async function hockeytechShiftStints(league: string, gameId: GameId): Promise<Row[]> {
-  return parse_shifts(await shiftsFeed(league, gameId), gameId);
+  return idColumnsToStrings(await stints(league, gameId));
 }
 
 /** `<lg>_player_toi`: per-player time-on-ice totals for a game. */
 export async function hockeytechPlayerToi(league: string, gameId: GameId): Promise<Row[]> {
-  return player_toi(await hockeytechShiftStints(league, gameId));
+  return idColumnsToStrings(player_toi(await stints(league, gameId)));
 }
 
 async function enriched(league: string, gameId: GameId): Promise<{ pbp: Row[]; shiftsPayload: any }> {
@@ -90,13 +100,13 @@ async function enriched(league: string, gameId: GameId): Promise<{ pbp: Row[]; s
 
 /** `<lg>_pbp` (public in py): one row per event with clock, coordinate, shot-geometry and on-ice columns. */
 export async function hockeytechEnrichedPbp(league: string, gameId: GameId): Promise<Row[]> {
-  return (await enriched(league, gameId)).pbp;
+  return idColumnsToStrings((await enriched(league, gameId)).pbp);
 }
 
 /** `<lg>_game_corsi`: player-level on-ice Corsi/Fenwick (proxies; no missed shots) + TOI + `corsi_for_per60`. */
 export async function hockeytechGameCorsi(league: string, gameId: GameId): Promise<Row[]> {
   const { pbp, shiftsPayload } = await enriched(league, gameId);
-  return game_corsi_rows(pbp, parse_shifts(shiftsPayload, gameId));
+  return idColumnsToStrings(game_corsi_rows(pbp, parse_shifts(shiftsPayload, gameId)));
 }
 
 const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());

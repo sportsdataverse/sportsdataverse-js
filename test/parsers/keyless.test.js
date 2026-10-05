@@ -24,7 +24,7 @@ import { parse_torvik_ratings } from '../../dist/parsers/torvik.js';
 import { FLAT_WRAPPERS, WRAPPERS } from '../../dist/index.js';
 import { PARSERS } from '../../dist/parsers/_registry.js';
 import { resolveFlat } from '../../dist/core/flat.js';
-import { same } from '../helpers/parity.mjs';
+import { same, sameType } from '../helpers/parity.mjs';
 
 // Real captures copied from sdv-py (test/fixtures/{on3,asa,mls_api,nwsl_api}/README.md
 // carry provenance). `py_oracle*.json` is sdv-py's own parser output (polars) on
@@ -34,10 +34,31 @@ import { same } from '../helpers/parity.mjs';
 const here = dirname(fileURLToPath(import.meta.url));
 const fx = (...p) => JSON.parse(readFileSync(join(here, '..', 'fixtures', ...p), 'utf8'));
 
+/**
+ * Every non-null JS value has the JS type of py's polars dtype (`schema`), so an id
+ * column that py types numeric must be a decimal string (the v4 id rule) and a
+ * number there fails. Known sdv-py divergence, parse_on3_rdb ONLY (as in
+ * parity.test.js): pandas stringifies a bool column that has a null ('True' /
+ * 'False' / 'nan', dtype String); the JS port keeps booleans.
+ */
+function assertTypes(js, py, label) {
+  const bad = [];
+  for (const c of py.columns) {
+    const dtype = py.schema?.[c];
+    if (!dtype) continue;
+    const boolText =
+      label.startsWith('parse_on3_rdb') && dtype === 'String' && py.rows.every((r) => r[c] == null || ['True', 'False', 'nan'].includes(r[c]));
+    const v = js.map((r) => r[c]).find((x) => x != null && !sameType(x, dtype, c) && !(boolText && typeof x === 'boolean'));
+    if (v !== undefined) bad.push(`${c}: py ${dtype}, JS ${typeof v} ${JSON.stringify(String(v)).slice(0, 30)}`);
+  }
+  bad.should.eql([], `${label}: JS value types disagree with sdv-py's dtypes`);
+}
+
 function assertParity(js, py, label) {
   js.length.should.equal(py.rows.length, `${label}: row count`);
   if (py.rows.length === 0) return;
   Object.keys(js[0]).should.eql(py.columns, `${label}: columns`);
+  assertTypes(js, py, label);
   js.forEach((row, i) => {
     for (const c of py.columns) {
       same(row[c], py.rows[i][c], c).should.equal(

@@ -10,10 +10,12 @@
 //     the way py returns a dict of frames;
 //   - `/v2` bodies self-describe their columns (`columns: [{key, type}]`) and the
 //     declared types are the schema;
-//   - id columns are integer join keys, `jersey_number` stays a string ("09");
+//   - id columns are integer join keys (Int64 in sdv-py), returned as exact decimal
+//     strings (the v4 id rule, src/core/int64.ts); `jersey_number` stays a string ("09");
 //     list / dict cells are JSON-stringified (py `json.dumps(sort_keys=True)`);
 //   - keys are snake-cased with py's `underscore`; empty input returns `[]`.
 
+import { idColumnsToStrings } from "../core/int64.js";
 import { isPlainObject, underscore } from "./_normalize.js";
 import { MULTI_TABLE_SECTIONS, sectionError } from "./_frames.js";
 
@@ -111,12 +113,15 @@ function rectangular(rows: Row[]): { columns: string[]; rows: Row[] } {
   return { columns, rows: out };
 }
 
-/** polars non-strict cast of one value to Int64 (`null` when it can't). */
-function toInt(v: any): number | null {
+/** polars non-strict cast of one value to Int64 (`null` when it can't); a digit string past 2^53 stays exact (BigInt). */
+function toInt(v: any): number | bigint | null {
   if (v === null || v === undefined) return null;
   if (typeof v === "boolean") return v ? 1 : 0;
   if (typeof v === "number") return Number.isFinite(v) ? Math.trunc(v) : null;
-  if (typeof v === "string" && /^\s*[-+]?\d+\s*$/.test(v)) return Number(v);
+  if (typeof v === "string" && /^\s*[-+]?\d+\s*$/.test(v)) {
+    const n = Number(v);
+    return Number.isSafeInteger(n) ? n : BigInt(v.trim());
+  }
   return null;
 }
 
@@ -150,7 +155,7 @@ function frame(rows: unknown): Row[] {
     if (ID_COLS.has(c) && !isText) for (const r of out) r[c] = toInt(r[c]);
   }
   if (columns.includes("jersey_number")) for (const r of out) r.jersey_number = toStr(r.jersey_number);
-  return out;
+  return idColumnsToStrings(out);
 }
 
 /** The single matrix object in an envelope (py `parse_pff_matrix` lookup). */
@@ -305,6 +310,7 @@ export function parse_pff_v2_table(raw: any, section?: string): Row[] {
   for (const c of declared) {
     const name = underscore(String(c.key));
     const type = ["integer", "number", "boolean", "string"].includes(String(c.type)) ? String(c.type) : "string";
+    // sdv-py's own /v2 id cast (a faithful port, narrower than isIdColumn); idColumnsToStrings runs on the output.
     schema.set(name, name === "id" || name.endsWith("_id") ? "integer" : type);
   }
   const rows = ((body[table] as any[]) || []).filter(isPlainObject);
@@ -331,9 +337,11 @@ export function parse_pff_v2_table(raw: any, section?: string): Row[] {
     }
   }
   const order = [...schema.keys(), ...columns.filter((c) => !schema.has(c))];
-  return out.map((r) => {
-    const o: Row = {};
-    for (const c of order) o[c] = r[c];
-    return o;
-  });
+  return idColumnsToStrings(
+    out.map((r) => {
+      const o: Row = {};
+      for (const c of order) o[c] = r[c];
+      return o;
+    })
+  );
 }

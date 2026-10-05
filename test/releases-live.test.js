@@ -23,7 +23,7 @@ live('release loaders (live)', function () {
       _warn.emit = realEmit;
     }
     rows.length.should.be.above(100);
-    rows.every((r) => r.season === 2024 && Number.isInteger(r.team_id)).should.be.true();
+    rows.every((r) => r.season === 2024 && /^\d+$/.test(r.team_id)).should.be.true(); // id: decimal string (v4)
     should(rows[0].adj_net).be.a.Number();
     warnings.should.eql(['load_cfb_ratings: no data for season(s) 2099 (skipped)']);
   });

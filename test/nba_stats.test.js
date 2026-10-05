@@ -75,7 +75,11 @@ describe('parse_nba_stats_result_sets: real captures', () => {
       keys.should.containEql('player_name');
       keys.every((k) => k === k.toLowerCase()).should.be.true();
       keys.should.have.length(raw.resultSets[0].headers.length);
-      out[0].player_id.should.equal(raw.resultSets[0].rowSet[0][0]);
+      // an id column of integers is decimal strings (the v4 INT64 id rule), exact
+      out[0].player_id.should.equal(String(raw.resultSets[0].rowSet[0][0]));
+      const idOk = (v) => v === null || typeof v === 'string';
+      out.every((r) => idOk(r.player_id) && idOk(r.team_id)).should.be.true();
+      out.some((r) => typeof r.player_id === 'string').should.be.true();
       parse_nba_stats_result_sets(raw, 'LeagueDashPlayerStats').should.have.length(out.length);
       parse_nba_stats_result_sets(raw, 'Nope').should.eql([]);
     });
@@ -112,6 +116,22 @@ describe('parse_nba_stats_result_sets: real captures', () => {
     (Array.isArray(sum) ? sum : Object.keys(sum)).length.should.be.above(0);
   });
 
+  it('underscore-less stats ids (teamid / personid / playerid / matchupid, video hid / vid) are decimal strings (real captures)', () => {
+    const py = (n) => JSON.parse(readFileSync(join(here, 'fixtures', 'py', 'nba_stats', n), 'utf8'));
+    const sb = parse_nba_stats_result_sets(py('cap_scoreboardv3_nba.json'));
+    sb[0].hometeam_teamid.should.equal('1610612755');
+    sb[0].awayteam_teamid.should.equal('1610612752');
+    sb[0].gameleaders_homeleaders_personid.should.equal('1630178');
+    sb[0].teamleaders_awayleaders_personid.should.equal('1626157');
+    const td = parse_nba_stats_result_sets(py('endpoints/teamdetails.json'));
+    td.TeamHof[0].playerid.should.equal('2546');
+    td.TeamRetired[0].playerid.should.equal('2200');
+    parse_nba_stats_result_sets(py('endpoints/playerdashptshotdefend.json'))[0].matchupid.should.equal('2544');
+    const video = parse_nba_stats_result_sets(py('cap_videodetailsasset_nba.json')).playlist[0];
+    [video.hid, video.vid].should.eql(['1610612744', '1610612747']); // home / visitor team ids
+    video.ei.should.equal(98); // the event number stays a number, like its pbp partner eventnum
+  });
+
   it('shot-location 2-level headers flatten to composite columns', () => {
     const raw = {
       resultSets: {
@@ -125,7 +145,7 @@ describe('parse_nba_stats_result_sets: real captures', () => {
     };
     const row = parse_nba_stats_result_sets(raw)[0];
     row.should.eql({
-      player_id: 1,
+      player_id: '1',
       less_than_5_ft_fgm: 2,
       less_than_5_ft_fga: 3,
       mid_range_fgm: 4, // underscore() maps '-' to '_'
@@ -163,7 +183,7 @@ describe('nba_stats runtime (fake transport)', () => {
   it('sends the stats headers, sorted params and a zero-padded GameID', async () => {
     configure({ transport: { nba_stats: fake(ok) } });
     const rows = await sdv.nba.nba_stats_leaguedashplayerstats({ season: '2023-24', parsed: true });
-    rows.should.eql([{ player_id: 7 }]);
+    rows.should.eql([{ player_id: '7' }]);
     const h = calls[0].headers;
     h['x-nba-stats-token'].should.equal('true');
     h.Referer.should.equal('https://www.nba.com/');

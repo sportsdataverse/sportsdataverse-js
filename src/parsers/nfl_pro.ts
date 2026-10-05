@@ -8,6 +8,7 @@
 // `players`). Some echoes are lists themselves, so "the first list" is not a
 // safe rule: known collection keys first, else the longest record list.
 
+import { idColumnsToStrings } from "../core/int64.js";
 import { isPlainObject, underscore } from "./_normalize.js";
 
 type Row = Record<string, any>;
@@ -108,7 +109,7 @@ export function parse_nfl_pro_stats(payload: any): Row[] {
   const stringify = new Set(
     keep.filter(([k]) => flat.some((r) => r[k] !== null && typeof r[k] === "object")).map(([k]) => k)
   );
-  return flat.map((r) => {
+  const rows = flat.map((r) => {
     const o: Row = {};
     for (const [k, name] of keep) {
       const missing = !(k in r);
@@ -116,4 +117,5 @@ export function parse_nfl_pro_stats(payload: any): Row[] {
     }
     return o;
   });
+  return idColumnsToStrings(rows); // an id column of integers -> decimal strings (v4 id rule)
 }

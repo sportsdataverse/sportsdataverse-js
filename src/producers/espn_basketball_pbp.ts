@@ -39,12 +39,13 @@
 //
 // dtypes (py polars -> JS): Int32 / UInt32 -> number; Float32 -> number rounded to float32 at
 // every arithmetic step exactly as polars computes it (Math.fround); Float64 -> number; String;
-// Boolean; Int64 -> the INT64 policy (owner decision 3, `applyInt64Policy`), applied per call
-// (one game): `id` is parsed exactly (BigInt) and becomes `number` when every id of the game is
-// a safe integer, else the column stays BigInt and ONE warning names it. So the JS type of `id`
-// depends on the game's era: ESPN's college play ids are 13 digits (numbers) for 2006-2013 and
-// 18 digits (BigInt) from 2014-15, and the 2014 season mixes both; NBA / WNBA ids are numbers.
-// The per-column id type is under review for v4. The timeouts lists hold the same id values. No py column is a date / datetime (`wallclock` is a String in py, kept so).
+// Boolean; Int64 -> number (safe integers: scores, coordinates). Id columns follow the id rule
+// (`applyInt64Policy`, src/core/int64.ts; owner decision 2026-10-05): the play `id` (Int64,
+// parsed exactly), `game_id`, `homeTeamId` / `awayTeamId` (Int32 or py int) and the result's
+// top-level `gameId` are decimal STRINGS in every game of every era (ESPN's college play ids are
+// 12-13 digits through 2013 and 18 digits from 2014-15, beyond 2^53), as the release loaders
+// return them. The timeouts lists hold the same id strings. The stage helpers' `init` dict
+// (`helper_<lg>_game_data`) stays py-faithful. No py column is a date / datetime (`wallclock` is a String in py, kept so).
 //
 // Every lag / lead / row-number op runs per `game_id` (py's frames are single-game; here a
 // concatenated frame never leaks across games -- see the test).
@@ -55,6 +56,7 @@
 // sort is not guaranteed stable); `timeouts` keys are strings (py: int) and JS orders
 // integer keys ascending; int-vs-float is invisible in JS (py `-1 * abs(0)` is int 0, here -0).
 
+import { idColumnsToStrings } from "../core/int64.js";
 import { applyInt64Policy } from "../core/releases.js";
 import { isObj, or, pyEqTrue, PY_FLOAT, PY_INT, truthy, type Row } from "./espn_basketball_box.js";
 
@@ -158,10 +160,10 @@ function castInt32(v: unknown): number | null {
   return n >= -(2 ** 31) && n <= 2 ** 31 - 1 ? n : badCast(v, "i32");
 }
 
-/** `cast(pl.Int64)`: a string parses exactly (BigInt; the INT64 policy decides number vs BigInt). */
-function castInt64(v: unknown): number | bigint | null {
+/** `cast(pl.Int64)` as an exact BigInt (the INT64 policy then makes the `id` column decimal strings). */
+function castInt64(v: unknown): bigint | null {
   if (v === null || v === undefined) return null;
-  if (typeof v === "boolean") return v ? 1 : 0;
+  if (typeof v === "boolean") return v ? 1n : 0n;
   // A JS number past 2^53 was already rounded before it got here (py's ints are
   // exact, so py never sees this): refuse it rather than emit a wrong id.
   if (typeof v === "number" && Number.isInteger(v) && !Number.isSafeInteger(v)) {
@@ -169,7 +171,7 @@ function castInt64(v: unknown): number | bigint | null {
       `integer ${v} is beyond Number.MAX_SAFE_INTEGER and has lost precision; pass 64-bit ids as decimal strings (as ESPN's JSON does)`
     );
   }
-  if (typeof v === "number" && Number.isFinite(v) && Math.abs(v) < 2 ** 63) return Math.trunc(v) || 0;
+  if (typeof v === "number" && Number.isFinite(v) && Math.abs(v) < 2 ** 63) return BigInt(Math.trunc(v));
   if (typeof v === "string" && POLARS_INT.test(v)) {
     const b = BigInt(v);
     if (b >= I64_MIN && b <= I64_MAX) return b;
@@ -735,7 +737,8 @@ function pbp(league: League, game_id: unknown, pbp_txt: any): PbpResult {
   for (const k of ["pickcenter", "againstTheSpread", "odds", "predictor", "espnWP", "gameInfo", "teamInfo", "season"]) {
     out[k] = at(txt, k);
   }
-  return out as PbpResult;
+  // the top-level `gameId` (py int) is an id too: a decimal string, like the plays' ids
+  return idColumnsToStrings([out])[0] as PbpResult;
 }
 
 
