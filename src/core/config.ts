@@ -125,6 +125,14 @@ export function registerFamilyDefaults(family: string, defaults: FamilyDefaults)
 }
 
 /**
+ * Test seam: forget what {@link registerFamilyDefaults} installed for `families`.
+ * @internal
+ */
+export function _unregisterFamilyDefaults(...families: string[]): void {
+  for (const family of families) delete familyDefaults[family];
+}
+
+/**
  * Resolve one family. Transport precedence: user `[family]` > registered family
  * default > user `"default"` > axios — a host-required family transport (e.g.
  * TLS impersonation) is never silently replaced by a generic user default.

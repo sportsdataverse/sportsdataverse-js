@@ -20,7 +20,12 @@ import sdv, {
   nflClearTokenCache,
 } from '../../dist/index.js';
 import { request, retryDelayMs, _timer } from '../../dist/core/request.js';
-import { registerFamilyDefaults, resolveFamily, DEFAULT_RETRY_STATUSES } from '../../dist/core/config.js';
+import {
+  registerFamilyDefaults,
+  resolveFamily,
+  DEFAULT_RETRY_STATUSES,
+  _unregisterFamilyDefaults,
+} from '../../dist/core/config.js';
 import { _impitLoader, encodeQuery } from '../../dist/core/transport.js';
 import { get } from '../../dist/core/client.js';
 import { statcastGet } from '../../dist/core/statcast_runtime.js';
@@ -260,6 +265,8 @@ describe('core/request: retry + classification', () => {
 
 describe('core/config: per-family transport selection', () => {
   isolate();
+  // each test registers what it needs; nothing leaks into the next one
+  afterEach(() => _unregisterFamilyDefaults('t2_test_family', 't2_auth_family'));
   it('level 4: nothing configured or registered -> the built-in axiosTransport', () => {
     resolveFamily('t2_unregistered').transport.should.equal(axiosTransport);
   });
@@ -280,11 +287,16 @@ describe('core/config: per-family transport selection', () => {
   });
 
   it('level 1: a user per-family entry beats the registered family default', async () => {
+    registerFamilyDefaults('t2_test_family', {
+      transport: fakeTransport({ status: 200, data: 'family-default' }),
+    });
     configure({ transport: { t2_test_family: fakeTransport({ status: 200, data: 'specific' }) } });
     (await request('t2_test_family', GET())).should.equal('specific');
     resetConfig();
     (await request('t2_test_family', GET())).should.equal('family-default');
     getConfig().transport.should.eql({});
+    _unregisterFamilyDefaults('t2_test_family');
+    resolveFamily('t2_test_family').transport.should.equal(axiosTransport); // the seam really forgets it
   });
 
   it('auth: user per-family entry > registered family default; a "default" auth is never applied', async () => {
