@@ -110,7 +110,7 @@ async function mintToken(key: string, secret: string, transport: Transport): Pro
     deviceInfo: DEFAULT_DEVICE_INFO,
     networkType: "other",
   });
-  const { retries, retryStatuses } = resolveFamily("nfl_api");
+  const { retries, retryStatuses, timeoutMs } = resolveFamily("nfl_api");
   let res: TransportResponse;
   for (let attempt = 0, statusRetries = 0; ; attempt++) {
     try {
@@ -123,7 +123,7 @@ async function mintToken(key: string, secret: string, transport: Transport): Pro
           "User-Agent": DEFAULT_UA,
           "X-Domain-Id": "100",
         },
-        timeoutMs: 30000,
+        timeoutMs, // configure({ timeoutMs }) > family default > 30 s
       });
     } catch (err) {
       if (err instanceof SdvError || attempt >= retries) throw err;

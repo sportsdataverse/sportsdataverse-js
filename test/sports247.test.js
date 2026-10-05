@@ -144,6 +144,18 @@ describe('sports247: guest JWT + transport (offline)', () => {
     }
   });
 
+  it('the guest-JWT mint uses the resolved timeout: 30 s by default, configure({ timeoutMs }) wins', async () => {
+    let { transport, calls } = fakeTransport({ jwts: [fakeJwt(later())] });
+    configure({ transport: { sports247: transport } });
+    await sdv.sports247.sports247Teams();
+    calls.find((c) => c.url === 'https://247sports.com/').timeoutMs.should.equal(30000);
+    sports247ClearTokenCache();
+    ({ transport, calls } = fakeTransport({ jwts: [fakeJwt(later())] }));
+    configure({ transport: { sports247: transport }, timeoutMs: 77000 });
+    await sdv.sports247.sports247Teams();
+    calls.find((c) => c.url === 'https://247sports.com/').timeoutMs.should.equal(77000);
+  });
+
   it('re-mints when the cached token is within a minute of its exp', async () => {
     const soon = Math.floor(Date.now() / 1000) + 30;
     const { transport, calls } = fakeTransport({ jwts: [fakeJwt(soon, 'old'), fakeJwt(later(), 'new')] });

@@ -72,7 +72,7 @@ async function mintGuestJwt(ctx: AuthContext): Promise<{ token: string; expiresA
       method: "GET",
       url: SPORTS247_SITE_ROOT,
       headers: { ...SPORTS247_HEADERS },
-      timeoutMs: 30000,
+      timeoutMs: resolveFamily(ctx.family).timeoutMs, // configure({ timeoutMs }) > family default > 30 s
       responseType: "text",
     });
   } catch (err) {

@@ -117,8 +117,9 @@ export const pffApiAuth = bearerAuth(() => {
 
 registerFamilyDefaults(FAMILY, {
   auth: pffApiAuth,
-  // 403 = entitlement (subscription / league), never load: not retried.
-  retryStatuses: [408, 429, 500, 502, 503, 504],
+  // sdv-py _RETRY_STATUSES = {429, 500, 502, 503, 504}: 403 is an entitlement answer, and
+  // 408 is not retried either (the 100 reads/min budget is shared with the pff scrapers).
+  retryStatuses: [429, 500, 502, 503, 504],
   // sdv-py `_RETRIES = 4` (download(num_retries=4)); a configure({ retries }) still wins.
   retries: 4,
   classifyError: (res, url) => {

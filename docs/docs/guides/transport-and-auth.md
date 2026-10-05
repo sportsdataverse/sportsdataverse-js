@@ -93,7 +93,8 @@ registerFamilyDefaults('my_family', {
 A family can register its own `retries` and `timeoutMs` too (`pff_api` uses
 sdv-py's 4 retries, `nfl_pro` its 45 s timeout). A `retries` / `timeoutMs` you
 pass to `configure` always wins over a family's own; the built-in 3 retries /
-30 s apply only where neither is set.
+30 s apply only where neither is set. Login and token-mint requests (KenPom,
+247Sports, `nfl_api`) use the same resolved timeout.
 
 A family can also map a final failed response — non-2xx, not `404`, no retry
 left — to its own error with `classifyError`. Return an `SdvError` to throw it
@@ -309,7 +310,8 @@ never a `401` / `403`.
 ### Subscription families: PFF, KenPom, NFL Pro
 
 Three families need **your own paid credentials**. Each registers its own auth,
-never retries a `403` (there it is an entitlement answer, not load), and is
+never retries a `403` (there it is an entitlement answer, not load; PFF, like
+sdv-py, does not retry a `408` either), and is
 never reachable from the docs playground. Credentials on the call win over the
 environment; with none anywhere the call throws an `SdvError` naming the
 variables to set, before any request goes out. Keys, tokens and passwords never

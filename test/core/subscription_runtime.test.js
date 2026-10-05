@@ -99,11 +99,11 @@ async function warningsDuring(fn) {
 }
 
 describe('subscription families: wiring', () => {
-  it('each family opts out of 403 retries and has an auth provider', () => {
+  it('each family opts out of 403 retries and has an auth provider (PFF also of 408, as sdv-py)', () => {
     for (const fam of ['pff_api', 'kenpom', 'nfl_pro']) {
       const r = resolveFamily(fam);
       should.exist(r.auth, fam);
-      r.retryStatuses.should.eql([408, 429, 500, 502, 503, 504]);
+      r.retryStatuses.should.eql(fam === 'pff_api' ? [429, 500, 502, 503, 504] : [408, 429, 500, 502, 503, 504]);
     }
   });
   it('wrappers are exposed (snake + camel) on their league namespace', () => {
@@ -223,6 +223,16 @@ describe('pff_api runtime', () => {
     t.calls.length.should.equal(2);
   });
 
+  it('408 is not retried (sdv-py _RETRY_STATUSES = {429, 5xx}; the read budget is shared)', async () => {
+    process.env.PFF_API_KEY = 'ak_secret_value';
+    const t = fakeTransport({ status: 408, data: 'timeout' }, { status: 200, data: LEAGUES });
+    configure({ transport: { pff_api: t } });
+    const err = await sdv.nfl.pffApiRefLeagues().then(() => null, (e) => e);
+    err.should.be.instanceOf(AssetFetchError);
+    err.status.should.equal(408);
+    t.calls.length.should.equal(1);
+  });
+
   it('a 200 whose body is not a JSON object is an unknown answer -> AssetFetchError', async () => {
     process.env.PFF_API_KEY = 'ak_x';
     for (const data of ['<html>cdn interstitial</html>', [1, 2]]) {
@@ -308,6 +318,20 @@ describe('kenpom runtime (password-login session)', () => {
     const tables = await sdv.mbb.kenpomEfficiency({ year: 2025, parsed: true });
     t.calls.length.should.equal(4);
     tables.ratings_table.length.should.equal(8);
+  });
+
+  it('the login GET / POST use the resolved timeout: 30 s by default, configure({ timeoutMs }) wins', async () => {
+    process.env.KP_USER = 'r@example.com';
+    process.env.KP_PW = 'secret';
+    let t = kenpomSite();
+    configure({ transport: { kenpom: t } });
+    await sdv.mbb.kenpomRatings({ year: 2025 });
+    t.calls.slice(0, 2).map((c) => c.timeoutMs).should.eql([30000, 30000]);
+    kenpomClearSessionCache();
+    t = kenpomSite();
+    configure({ transport: { kenpom: t }, timeoutMs: 77000 });
+    await sdv.mbb.kenpomRatings({ year: 2025 });
+    t.calls.slice(0, 2).map((c) => c.timeoutMs).should.eql([77000, 77000]);
   });
 
   it('a rejected login (login form still on the page) throws instead of scraping free-tier tables', async () => {

@@ -195,6 +195,16 @@ describe('core/nfl_auth: the mint retries transient failures itself', () => {
     t.calls.length.should.equal(1);
   });
 
+  it('the mint uses the resolved timeout: 30 s by default, configure({ timeoutMs }) wins', async () => {
+    let t = minter(fakeJwt(future()));
+    await nflTokenGen({ transport: t });
+    t.calls[0].timeoutMs.should.equal(30000);
+    configure({ timeoutMs: 77000 });
+    t = minter(fakeJwt(future()));
+    await nflTokenGen({ transport: t, forceRefresh: true });
+    t.calls[0].timeoutMs.should.equal(77000);
+  });
+
   it('a 401 / 403 (bad or refused client credentials) is not retried', async () => {
     for (const status of [401, 403]) {
       const t = minter(status);
