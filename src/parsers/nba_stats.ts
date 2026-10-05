@@ -226,7 +226,8 @@ function toRows(rs: ResultSet): Row[] {
  *
  * @param raw Raw JSON body. Empty / malformed input returns `[]`, never throws.
  * @param resultSet When given, return only that named set (`[]` if absent).
- * @returns Rows for a named or single set; `{ [setName]: rows }` for several sets.
+ * @returns Rows for a named or single set (a legit-empty set is `[]`: rows-as-objects cannot carry
+ *   py's zero-row schema, so read `resultSets[i].headers` from the raw body for the column list); `{ [setName]: rows }` for several sets.
  */
 export function parse_nba_stats_result_sets(
   raw: any,
