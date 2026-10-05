@@ -179,6 +179,11 @@ export { axiosTransport, createImpersonatingTransport } from './core/transport.j
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
 export type { AuthProvider, AuthContext } from './core/auth.js';
+export {
+  listFunctions, functionCount, findTeam, findAthlete, findEvent, clearTeamCache,
+  list_functions, function_count, find_team, find_athlete, find_event, clear_team_cache,
+} from './discover.js';
+export type { ListFunctionsOptions, Namespaces } from './discover.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
 export type { ParserFn } from './parsers/_registry.js';
