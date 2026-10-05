@@ -14,6 +14,13 @@ import { parse } from "yaml";
 import { checkTransform } from "./param-transforms.mjs";
 import { nowToggle } from "./now-toggle.mjs";
 import {
+  escapeCell,
+  flatReturnsSchema,
+  renderColumnsTable,
+  renderFlatReturns,
+  renderReturnsTable,
+} from "./returns-tables.mjs";
+import {
   loadReleaseLoaders,
   loadersByLeague,
   registerLoaderModules,
@@ -975,63 +982,14 @@ function loadReturnsColumns(returnsSchema) {
   return columns;
 }
 
-/**
- * A flat endpoint's returns schema for the docs: `{ columns }` (one table),
- * `{ frames: [{ section, columns }] }` (`kind: frames`, one table per key of the
- * parser's dict), `{ unverified }` (sdv-py publishes no columns, and says why),
- * or `null` (no schema file, or no columns). vendor.mjs checkSchemaShape has
- * already refused any other shape.
- */
+/** A flat endpoint's returns schema for the docs (returns-tables.mjs flatReturnsSchema), or `null` without a file. */
 const _flatSchemaCache = new Map();
 function loadReturnsSchema(returnsSchema) {
   if (!returnsSchema) return null;
   if (_flatSchemaCache.has(returnsSchema)) return _flatSchemaCache.get(returnsSchema);
   const file = join(schemasDir, `${returnsSchema}.yaml`);
-  let out = null;
-  if (existsSync(file)) {
-    const doc = parse(readFileSync(file, "utf8"));
-    if (typeof doc?.unverified === "string") out = { unverified: doc.unverified };
-    else if (doc?.kind === "frames" && doc.frames?.some((f) => f.columns?.length)) out = { frames: doc.frames };
-    else if (Array.isArray(doc?.columns) && doc.columns.length) out = { columns: doc.columns };
-  }
+  const out = existsSync(file) ? flatReturnsSchema(parse(readFileSync(file, "utf8"))) : null;
   _flatSchemaCache.set(returnsSchema, out);
-  return out;
-}
-
-/** Render a flat endpoint's `### Returns` block (one table, one per frame, or the unverified note). */
-function renderFlatReturns(label, schema) {
-  if (schema.columns) return renderReturnsTable(label, schema.columns);
-  if (schema.unverified) {
-    return `\n### Returns — ${label}\n\nNo returns table is published for this endpoint: ${escapeCell(schema.unverified).replace(/[{}<>]/g, (c) => `\\${c}`)}\n`;
-  }
-  let out = `\n### Returns — ${label}\n\nWith \`{ parsed: true }\`: an object of tables, one per key below.\n`;
-  for (const f of schema.frames) {
-    out += `\n**\`${escapeCell(f.section)}\`**${f.columns.length ? "" : " — no columns in the reference capture"}\n\n`;
-    if (f.columns.length) out += renderColumnsTable(f.columns);
-  }
-  return out;
-}
-
-/** Escape `|` (and stray backticks-balance is left as-is) for a markdown table cell. */
-function escapeCell(text) {
-  return String(text ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim();
-}
-
-/**
- * Render a `### Returns — <label>` subsection: a `col_name | type | description`
- * table built from a returns-schema's columns. `label` is the wrapper's
- * display name (already backtick-wrapped by the caller). Returns "" when the
- * schema resolves to no columns (caller then skips emitting anything).
- */
-function renderReturnsTable(label, columns) {
-  if (!columns || !columns.length) return "";
-  let out = `\n### Returns — ${label}\n\n`;
-  out += `| col_name | type | description |\n`;
-  out += `|---|---|---|\n`;
-  for (const c of columns) {
-    const desc = c.description ? escapeCell(c.description) : "";
-    out += `| \`${escapeCell(c.name)}\` | ${escapeCell(c.type)} | ${desc} |\n`;
-  }
   return out;
 }
 
@@ -1610,16 +1568,6 @@ const ESPN_PARSER_DESC = {
 function loadEspnParserMap() {
   const doc = parse(readFileSync(join(endpointsDir, "espn_parser_map.yaml"), "utf8"));
   return doc?.endpoints || {};
-}
-
-/** Render just the `col_name | type | description` table body (no heading). */
-function renderColumnsTable(columns) {
-  let out = `| col_name | type | description |\n|---|---|---|\n`;
-  for (const c of columns) {
-    const desc = c.description ? escapeCell(c.description) : "";
-    out += `| \`${escapeCell(c.name)}\` | ${escapeCell(c.type)} | ${desc} |\n`;
-  }
-  return out;
 }
 
 /** The shared "ESPN parsed returns" reference page (one table per parser). */
@@ -2320,9 +2268,10 @@ function renderWrittenFlatModule(api, defs) {
     if (def.parser) {
       const sec = FLAT_PARSER_SECTIONS[def.parser];
       // A `kind: frames` schema (and no single default sub-frame): the parser returns
-      // an object of tables, one per documented key.
-      const frames = loadReturnsSchema(def.returnsSchema)?.frames;
-      const objectOfTables = frames && !(sec && sec.default !== null);
+      // an object of tables, one per documented key. With `frames_by` it returns ONE
+      // table, whose columns that request parameter picks.
+      const { frames, framesBy } = loadReturnsSchema(def.returnsSchema) ?? {};
+      const objectOfTables = frames && !framesBy && !(sec && sec.default !== null);
       jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return ${objectOfTables ? "an object of tables keyed by result set" : "tidy rows"} instead of the raw response.\n`;
       if (sec) {
         const names = sec.sections ? sec.sections.map((s) => `\`${s}\``).join(", ") : sec.dynamic;
@@ -2332,7 +2281,7 @@ function renderWrittenFlatModule(api, defs) {
       jsdoc +=
         objectOfTables
           ? ` * @returns The raw response by default; with \`{ parsed: true }\`, an object of tables (arrays of row objects) keyed by result set: ${frames.map((f) => `\`${f.section}\``).join(", ")}.\n`
-          : ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
+          : ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`${framesBy ? ` (its columns depend on \`${framesBy}\`)` : ""}.\n`;
     } else {
       jsdoc += ` * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;
       jsdoc += ` * @returns The raw response (this endpoint has no parser).\n`;

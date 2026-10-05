@@ -25,11 +25,23 @@ export const TRANSFORMS = {
     if (s.length === 4 && /^\d+$/.test(s)) return `${Number(s) - 1}${s}`;
     throw new Error(`Unrecognized NHL season ${JSON.stringify(season)}`);
   },
+  season_or_previous: (season, def) => {
+    if (season !== null && season !== undefined) return season;
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = now.getMonth() + 1;
+    if (def?.api === 'nba_stats') {
+      const start = (m >= 10 ? y + 1 : y) - 2;
+      return `${start}-${String((start + 1) % 100).padStart(2, '0')}`;
+    }
+    if (def?.api === 'wnba_stats') return String((m >= 5 ? y : y - 1) - 1);
+    throw new Error(`season_or_previous: no previous-season rule for family "${def?.api}"`);
+  },
 };
-function applyTransform(name, value) {
+function applyTransform(name, value, def) {
   if (!name) return value;
   if (!TRANSFORMS[name]) throw new Error(`unknown param transform "${name}"`);
-  return TRANSFORMS[name](value);
+  return TRANSFORMS[name](value, def);
 }
 
 /** snake_case -> camelCase (e.g. `event_id` -> `eventId`). */
@@ -140,7 +152,7 @@ function cleanFlatQuery(def, params) {
   const out = {};
   for (const [k, v] of Object.entries(def.fixedParams || {})) out[k] = lookup(params, k) ?? v;
   for (const qp of def.queryParams || []) {
-    const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
+    const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default, def);
     if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;
   }
   return out;
@@ -159,7 +171,7 @@ export function resolveFlat(def, params = {}, flatHosts = {}) {
   const byName = new Map((def.pathParams || []).map((p) => [p.name, p]));
   const useNow = def.nowVariant && def.nowToggle && lookup(params, def.nowToggle) === undefined;
   const path = (useNow ? def.nowVariant : def.path).replace(/\{(\w+)\}/g, (_m, name) => {
-    const v = applyTransform(byName.get(name)?.transform, lookup(params, name) ?? byName.get(name)?.default);
+    const v = applyTransform(byName.get(name)?.transform, lookup(params, name) ?? byName.get(name)?.default, def);
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
       if (pp && pp.required === false) return '';
