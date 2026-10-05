@@ -2,6 +2,14 @@
 
 ## **Unreleased**
 
+### Changed — vendor LOCK online integrity check + vendor-sync hardening
+
+- **New:** `npm run vendor:check:online` (CI and the weekly vendor-sync) checks `vendor/upstream/LOCK` against sdv-py's `git/trees/<ref>` at the pinned ref: every blob sha must match, and LOCK's path set must equal exactly what the vendor fetches (computed by the same path-selection helper `npm run vendor` uses), so editing a copy together with its LOCK line, or dropping a LOCK line and hand-editing the vendored copy, both fail. A network failure is a failure to verify, never a pass; 5xx/network errors are retried (3 attempts), 403/404 are not.
+- **vendor-sync:** `GITHUB_TOKEN` is exposed to the vendor step only (codegen runs in its own step without it); a ref/vendor/codegen failure opens or updates a "vendor-sync failed" issue naming the failing step (the run still goes red) instead of only failing.
+- **Pin bumps:** `npm run vendor` (not `vendor:check`) now removes a py schema copy that the new pin renamed or dropped (byte-identical to the old upstream, not referenced by any endpoint; JS-authored files are never touched). It derives the outgoing outputs per family, and names any family whose prune was skipped.
+- The vendor tests no longer flake against their timeout: endpoint-YAML parsing (the slow path, repeated per temp-tree copy) is memoized.
+
+
 
 ### Added — ESPN basketball box producers (NBA / WNBA / MBB / WBB)
 
