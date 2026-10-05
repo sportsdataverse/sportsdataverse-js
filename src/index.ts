@@ -20,6 +20,7 @@ import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 import * as cricketWp from './models/cricket_wp.js';
 import { BASKETBALL_BOX_PRODUCERS } from './producers/espn_basketball_box.js';
+import { BASKETBALL_PBP_PRODUCERS, espn_basketball_pbp_from_summary, type League } from './producers/espn_basketball_pbp.js';
 import { oddsMath, oddsErrors } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -193,10 +194,23 @@ for (const [name, fn] of Object.entries(cricketWpExports)) {
   sdv.cricket[toCamel(name)] = fn;
 }
 
-// ESPN basketball box producers (py `helper_<lg>_player_box` / `helper_<lg>_team_box`; pure:
-// one summary payload in, release rows out) merged onto sdv.nba / wnba / mbb / wbb under py +
-// camelCase names. Never silently overwrite an existing key.
-for (const [lg, fns] of Object.entries(BASKETBALL_BOX_PRODUCERS)) {
+// ESPN basketball box + PBP producers (py `helper_<lg>_player_box` / `helper_<lg>_team_box`,
+// `helper_<lg>_pbp` and its stages; pure: one summary payload in) plus py's `espn_<lg>_pbp`
+// (fetch the summary through the generated `espn_<lg>_summary`, trim, `helper_<lg>_pbp`) merged
+// onto sdv.nba / wnba / mbb / wbb under py + camelCase names. Never silently overwrite a key.
+const basketballPbpFetchers: Record<string, Record<string, (...args: any[]) => unknown>> = {};
+for (const lg of Object.keys(BASKETBALL_PBP_PRODUCERS) as League[]) {
+  const summary = sdv[lg][`espn_${lg}_summary`];
+  basketballPbpFetchers[lg] = {
+    [`espn_${lg}_pbp`]: async (game_id: unknown, { raw = false, ...params }: Record<string, any> = {}) =>
+      espn_basketball_pbp_from_summary(lg, game_id, await summary({ ...params, event_id: game_id }), raw),
+  };
+}
+for (const [lg, fns] of [
+  ...Object.entries(BASKETBALL_BOX_PRODUCERS),
+  ...Object.entries(BASKETBALL_PBP_PRODUCERS),
+  ...Object.entries(basketballPbpFetchers),
+]) {
   for (const [name, fn] of Object.entries(fns)) {
     for (const n of [name, toCamel(name)]) {
       if (n in sdv[lg]) throw new Error(`sdv.${lg}.${n} already exists`);
