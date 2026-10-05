@@ -1,10 +1,22 @@
 // ESPN basketball PBP producers (NBA / WNBA / MBB / WBB): one game's ESPN summary payload
 // -> py's cleaned game dict (`plays` rows, `timeouts`, the raw summary keys passed through).
 //
-// Faithful port of sdv-py, pinned at 719de79edb685b89c524f8b4c0c146fea0b53855:
+// Faithful port of sdv-py, pinned at 313587306d1031b0da46f5e1fef85dbaf5728200 (includes #688):
 // `{nba,wnba,mbb,wbb}/<lg>_pbp.py` -- `helper_<lg>_pbp(game_id, pbp_txt)` and its stages
 // `helper_<lg>_pickcenter` -> `helper_<lg>_game_data` -> `helper_<lg>_pbp_features`, plus the
-// key trimming `espn_<lg>_pbp` applies to the fetched summary before calling the helper.
+// key trimming `espn_<lg>_pbp` applies to the fetched summary before calling the helper, and
+// the pieces the four share (`_espn_basketball_pbp.py`: `pickcenter_odds`, `team_timeout_called`).
+//
+// Shared (all four leagues):
+//   pickcenter  read whenever some provider carries a spread (one provider is enough), in
+//               str(provider.id) order; the spread and the home favorite come from the SAME row
+//               (the first with a spread): favorite = spread < 0, or that row's own flag for a
+//               spread of 0 (home when unset). Over/under = the first non-null one. No spread
+//               anywhere: the defaults (2.5, home, unavailable). Values are plain scalars.
+//   timeouts    a team-timeout type (RegularTimeOut, ShortTimeOut, Full / Short / No / Reset
+//               Timeout; official / TV timeouts excluded) credited to the play's own `team.id`;
+//               a play without one falls back to the team's abbreviation / location / mascot /
+//               alt name as a whole word in the text (case-insensitive).
 //
 // Per-league facts, from diffing the four modules against each other:
 //   NBA   quarters always (no era logic). Seconds ladders 720 / 1440 / 2160 / 2880, OT 300.
@@ -21,11 +33,11 @@
 //         130.5, no `seasonseries`, `gameId` = int(game_id).
 //   MBB   halves always, its own column set: `half` = period, `lag_period` / `lead_period`,
 //         `start.period_seconds_remaining` / `end.period_seconds_remaining` (no qtr / game_half
-//         / period / quarter columns). NO "0:" prefix and an Int32 clock, so a decimal
-//         last-minute clock ("23.4") RAISES in py (and here) -- ESPN's college feeds use
-//         whole-second M:SS clocks, so only a non-MBB payload hits it. Ladders 1200 / 2400, OT 300;
-//         `end.period_seconds_remaining` only resets on 2 -> 3 (first OT), as py. Timeouts split
-//         at period <= 1. Over/under 142.0; ids not cast; `gameId` = int(game_id).
+//         / period / quarter columns). The clock is split with a "0:" prefix when it has no
+//         colon ("23.4" -> 0:23; `time` / `clock.displayValue` keep the display as is) and cast
+//         Float64 -> Int32 (truncating). Ladders 1200 / 2400, OT 300; `end.period_seconds_remaining`
+//         and `end.game_seconds_remaining` both reset to 300 at every OT. Timeouts split at
+//         period <= 1. Over/under 142.0; ids not cast; `gameId` = int(game_id).
 //   NCAA (MBB/WBB) `espn_<lg>_pbp` defaults the ARRAY keys (plays, videos, ...) to {} and the
 //         dict keys to [] -- py's (swapped) dict_keys_expected, kept as is.
 //
@@ -51,10 +63,10 @@
 // concatenated frame never leaks across games -- see the test).
 //
 // Known ceilings (not reproduced): a JSON object key that is an integer string is reordered by
-// JS; regex corner cases where Rust and JS syntax differ (lookaround / backrefs, a lone `]`) in
-// the team-name patterns of the timeout flags; pickcenter ties keep their input order (py's
-// sort is not guaranteed stable); `timeouts` keys are strings (py: int) and JS orders
-// integer keys ascending; int-vs-float is invisible in JS (py `-1 * abs(0)` is int 0, here -0).
+// JS; a numeric `provider.id` column that pandas holds as Float64 (ints mixed with a missing id)
+// reads "45.0" in py's str sort, "45" here (ESPN ships string ids); `timeouts` keys are strings
+// (py: int) and JS orders integer keys ascending; int-vs-float is invisible in JS (py
+// `-1 * abs(0)` is int 0, here -0).
 
 import { idColumnsToStrings } from "../core/int64.js";
 import { applyInt64Policy } from "../core/releases.js";
@@ -85,13 +97,6 @@ function at(o: unknown, k: string | number): any {
 function pyGet(o: unknown, k: string): any {
   if (!isObj(o)) fail("AttributeError", `.get('${k}') on a non-dict`);
   return has(o, k) ? o[k] : null;
-}
-
-/** py `len(x)`. */
-function pyLen(v: unknown): number {
-  if (Array.isArray(v) || typeof v === "string") return v.length;
-  if (isObj(v)) return Object.keys(v).length;
-  return fail("TypeError", "object has no len()");
 }
 
 /** py `int(x)`. */
@@ -179,16 +184,22 @@ function castInt64(v: unknown): bigint | null {
   return badCast(v, "i64");
 }
 
-/** `cast(pl.Float32)` (Rust float grammar: no whitespace / `_`; inf, nan case-insensitive). */
-function castFloat32(v: unknown): number | null {
+/** `cast(pl.Float64)` (Rust float grammar: no whitespace / `_`; inf, nan case-insensitive). */
+function castFloat64(v: unknown, to = "f64"): number | null {
   if (v === null || v === undefined) return null;
-  if (typeof v === "number") return Math.fround(v);
+  if (typeof v === "number") return v;
   if (typeof v === "boolean") return v ? 1 : 0;
-  if (typeof v !== "string" || !POLARS_FLOAT.test(v)) return badCast(v, "f32");
+  if (typeof v !== "string" || !POLARS_FLOAT.test(v)) return badCast(v, to);
   const s = v.toLowerCase();
   if (s.endsWith("nan")) return NaN;
   if (s.endsWith("inf") || s.endsWith("infinity")) return s.startsWith("-") ? -Infinity : Infinity;
-  return Math.fround(Number(s));
+  return Number(s);
+}
+
+/** `cast(pl.Float32)`. */
+function castFloat32(v: unknown): number | null {
+  const x = castFloat64(v, "f32");
+  return x === null ? null : Math.fround(x);
 }
 
 const f32 = Math.fround;
@@ -325,42 +336,43 @@ function nestedToRecord(d: Record<string, unknown>, prefix = "", out: Row = newR
   return out;
 }
 
-/** pandas sort order for `provider.id` (NaN last; str vs number raises TypeError). */
-function providerOrder(a: unknown, b: unknown): number {
-  const na = a === null || a === undefined;
-  const nb = b === null || b === undefined;
-  if (na || nb) return na === nb ? 0 : na ? 1 : -1;
-  if (typeof a !== typeof b || (typeof a !== "string" && typeof a !== "number")) {
-    fail("TypeError", "'<' not supported between provider.id values");
-  }
-  return a === b ? 0 : (a as string | number) < (b as string | number) ? -1 : 1;
-}
+/** pandas `astype(str)` of a `provider.id` cell: an absent id is NaN -> "nan", a null one "None". */
+const providerKey = (v: unknown): string => (v === undefined ? "nan" : pyStr(v));
 
-/** The spread / over-under / home-favorite metadata (py `helper_<lg>_pickcenter`). */
+/**
+ * The spread / over-under / home-favorite metadata (py `helper_<lg>_pickcenter` ->
+ * `_espn_basketball_pbp.pickcenter_odds`): providers in str(provider.id) order (teamrankings
+ * "1002" ahead of consensus "1004" and Caesars "45"); the spread and the home favorite from the
+ * same row, the first with a spread; the first non-null over/under.
+ */
 function pickcenter(pbp_txt: any, facts: Facts): Record<string, unknown> {
-  const pc = has(pbp_txt, "pickcenter") ? pbp_txt.pickcenter : [];
-  if (pyLen(pc) <= 1) {
+  // pd.json_normalize(pbp_txt.get("pickcenter") or []): a dict is one record
+  const pc = or(pyGet(pbp_txt, "pickcenter"), []);
+  if (!Array.isArray(pc) && !isObj(pc)) fail("TypeError", "pickcenter is not a list of dicts");
+  const recs = (Array.isArray(pc) ? pc : [pc]).map((e) => (isObj(e) ? nestedToRecord(e) : fail("TypeError", "pickcenter entry is not a dict")));
+  const val = (r: Row, c: string): unknown => r[c] ?? null;
+  if (!recs.some((r) => val(r, "spread") !== null)) {
     return { gameSpread: 2.5, overUnder: facts.overUnder, homeFavorite: true, gameSpreadAvailable: false };
   }
-  // pd.json_normalize(data=pbp_txt, record_path="pickcenter").sort_values(by=["provider.id"])
-  if (!Array.isArray(pc)) fail("TypeError", "Path must contain list or null at 'pickcenter'");
-  const recs = (pc as unknown[]).map((e) => (isObj(e) ? nestedToRecord(e) : fail("TypeError", "pickcenter entry is not a dict")));
-  const cols = new Set(recs.flatMap((r) => Object.keys(r)));
-  if (!cols.has("provider.id")) fail("KeyError", "provider.id");
-  const sorted = [...recs].sort((a, b) => providerOrder(a["provider.id"], b["provider.id"]));
-  // pickcenter[pickcenter[c].notnull()][[c]].values[0] -> a one-element array (py: ndarray)
-  const firstNotNull = (c: string, dflt: unknown): unknown => {
-    if (!cols.has(c)) return dflt;
-    const hit = sorted.find((r) => r[c] !== null && r[c] !== undefined);
-    return hit ? [hit[c]] : fail("IndexError", `no non-null ${c}`);
-  };
+  const byId = recs.some((r) => "provider.id" in r);
+  // sort_values(key=astype(str), kind="stable"); JS sort is stable
+  const sorted = byId ? [...recs].sort((a, b) => cmpStr(providerKey(a["provider.id"]), providerKey(b["provider.id"]))) : recs;
+  const row = sorted.find((r) => val(r, "spread") !== null) as Row;
+  const spread = pyFloat(row.spread);
+  // ESPN's spread is the home team's line: negative = home favorite; a pick'em takes the row's flag
+  const fav = val(row, "homeTeamOdds.favorite");
+  const homeFavorite = spread !== 0 ? spread < 0 : fav === null ? true : truthy(fav);
+  const ou = sorted.find((r) => val(r, "overUnder") !== null);
   return {
-    homeFavorite: firstNotNull("homeTeamOdds.favorite", true),
-    gameSpread: firstNotNull("spread", 2.5),
-    overUnder: firstNotNull("overUnder", facts.overUnder),
+    gameSpread: spread,
+    overUnder: ou ? pyFloat(ou.overUnder) : facts.overUnder,
+    homeFavorite,
     gameSpreadAvailable: true,
   };
 }
+
+/** Python str comparison (code point order). */
+const cmpStr = (a: string, b: string): number => (a === b ? 0 : a < b ? -1 : 1);
 
 // ---------------------------------------------------------------------------
 // helper_<lg>_game_data
@@ -509,16 +521,42 @@ export function _playsFrame(league: League, game_id: unknown, pbp_txt: any, init
   return f;
 }
 
-/** The timeout flag: `type.text == "ShortTimeOut"` and the text names the team (regex, lowercased). */
-function timeoutFlags(f: Frame, names: unknown[]): boolean[] {
-  const pats = names.map((x) => new RegExp(pyStr(x).toLowerCase(), "u"));
-  const typeText = strCol(f, "type.text");
-  const text = strCol(f, "text");
-  return text.map((t, i) => typeText[i] === "ShortTimeOut" && t !== null && pats.some((p) => p.test(t.toLowerCase())));
+/** ESPN play types for a timeout a team called (py `TEAM_TIMEOUT_TYPES`; official / TV timeouts are no team's). */
+const TEAM_TIMEOUT_TYPES = new Set(["RegularTimeOut", "ShortTimeOut", "Full Timeout", "Short Timeout", "No Timeout", "Reset Timeout"]);
+/** Rust regex's Unicode `\W` (JS `\W` is ASCII-only, even with the `u` flag). */
+const NON_WORD = "[^\\p{Alphabetic}\\p{M}\\p{Nd}\\p{Pc}\\p{Join_Control}]";
+const escapeRe = (s: string): string => s.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+
+/** `team.id` `cast(pl.Int64, strict=False)`: an unparseable id is null. */
+function teamIdOrNull(v: unknown): bigint | null {
+  try {
+    return castInt64(v);
+  } catch {
+    return null; // ponytail: castInt64's refusals (bad string, unsafe number) all mean null here
+  }
 }
 
-const flagsFor = (f: Frame, init: any, side: "home" | "away") =>
-  timeoutFlags(f, ["Abbrev", "Abbrev", "Name", "Mascot", "NameAlt"].map((k) => at(init, `${side}Team${k}`)));
+/**
+ * py `team_timeout_called(columns, init, side)`: a team-timeout play the side's team called. The
+ * play's own `team.id` decides; only a play without one falls back to the side's abbreviation /
+ * location / mascot / alt name as a whole word in the text (case-insensitive).
+ */
+function timeoutFlags(f: Frame, init: any, side: "home" | "away"): boolean[] {
+  const typeText = strCol(f, "type.text");
+  const sideId = BigInt(at(init, `${side}TeamId`));
+  const teamIds = f.cols.includes("team.id") ? col(f, "team.id").map(teamIdOrNull) : typeText.map(() => null);
+  const names = new Set(["Abbrev", "Name", "Mascot", "NameAlt"].map((k) => pyStr(at(init, `${side}Team${k}`))));
+  names.delete("");
+  names.delete("None");
+  let byName: (boolean | null)[] = typeText.map(() => false);
+  if (names.size) {
+    const re = new RegExp(`(?:^|${NON_WORD})(?:${[...names].map(escapeRe).join("|")})(?:${NON_WORD}|$)`, "iu");
+    byName = strCol(f, "text").map((t) => (t === null ? null : re.test(t)));
+  }
+  return typeText.map(
+    (t, i) => t !== null && TEAM_TIMEOUT_TYPES.has(t) && (teamIds[i] !== null ? teamIds[i] === sideId : byName[i] === true),
+  );
+}
 
 /** Is the WNBA / WBB game in the halves era (py: format first, season-year fallback)? */
 function halvesEra(pbp_txt: any, facts: Facts): boolean {
@@ -557,8 +595,8 @@ function proFeatures(f: Frame, init: any, v: Variant): void {
   withColumns(f, [
     ["clock.minutes", col(f, "clock.minutes").map(castFloat32)],
     ["clock.seconds", col(f, "clock.seconds").map(castFloat32)],
-    ["homeTimeoutCalled", flagsFor(f, init, "home")],
-    ["awayTimeoutCalled", flagsFor(f, init, "away")],
+    ["homeTimeoutCalled", timeoutFlags(f, init, "home")],
+    ["awayTimeoutCalled", timeoutFlags(f, init, "away")],
   ]);
   const qtr = col(f, "qtr");
   const firstHalf = v.halves ? 1 : 2;
@@ -626,17 +664,21 @@ function proFeatures(f: Frame, init: any, v: Variant): void {
   ]);
 }
 
-/** MBB features after stage A (halves; Int32 clock; no "0:" prefix). */
+/** `cast(pl.Float64).cast(pl.Int32)`: parse, then truncate (NaN / inf / out of range raise). */
+const castInt32ViaF64 = (v: unknown): number | null => castInt32(castFloat64(v));
+
+/** MBB features after stage A (halves; Int32 clock, a bare-seconds clock read as 0:ss). */
 function mbbFeatures(f: Frame, init: any): void {
   const pn = col(f, "period.number").map(castInt32);
   const display = strCol(f, "clock.displayValue");
   withColumns(f, [["period.number", pn], ["half", pn], ["time", display]]);
-  unnestClock(f, display);
+  // the "0:" prefix feeds the split only; `clock.displayValue` / `time` keep the display
+  unnestClock(f, display.map((d) => (d === null || d.includes(":") ? d : `0:${d}`)));
   withColumns(f, [
-    ["clock.minutes", col(f, "clock.minutes").map(castInt32)],
-    ["clock.seconds", col(f, "clock.seconds").map(castInt32)],
-    ["homeTimeoutCalled", flagsFor(f, init, "home")],
-    ["awayTimeoutCalled", flagsFor(f, init, "away")],
+    ["clock.minutes", col(f, "clock.minutes").map(castInt32ViaF64)],
+    ["clock.seconds", col(f, "clock.seconds").map(castInt32ViaF64)],
+    ["homeTimeoutCalled", timeoutFlags(f, init, "home")],
+    ["awayTimeoutCalled", timeoutFlags(f, init, "away")],
   ]);
   withColumns(f, [
     ["lag_period", shiftByGame(f, pn, 1)],
@@ -658,7 +700,7 @@ function mbbFeatures(f: Frame, init: any): void {
   const endG: unknown[] = [];
   for (const r of f.rows) {
     const [g1, p, lag] = [r.game_play_number === 1, r["period.number"], r.lag_period];
-    endP.push(g1 || (eq(lag, 1) && eq(p, 2)) ? 1200 : eq(lag, 2) && eq(p, 3) ? 300 : r["end.period_seconds_remaining"]);
+    endP.push(g1 || (eq(lag, 1) && eq(p, 2)) ? 1200 : otStart(lag, p, 3) ? 300 : r["end.period_seconds_remaining"]);
     endG.push(g1 ? 2400 : eq(lag, 1) && eq(p, 2) ? 1200 : otStart(lag, p, 3) ? 300 : r["end.game_seconds_remaining"]);
   }
   withColumns(f, [["end.period_seconds_remaining", endP], ["end.game_seconds_remaining", endG]]);
@@ -789,13 +831,13 @@ const WBB = leagueHelpers("wbb");
 
 /**
  * NBA pickcenter metadata (sdv-py `helper_nba_pickcenter(pbp_txt)`): spread / over-under (default
- * 215.5) / home favorite. A value taken from the pickcenter is a ONE-ELEMENT ARRAY (py: numpy),
- * e.g. `gameSpread: [-8.5]`; a default is a scalar.
+ * 215.5) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
+ * favorite come from one provider row.
  */
 export const helper_nba_pickcenter = NBA.pickcenter;
 /**
  * NBA home / away identification (sdv-py `helper_nba_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * The pickcenter's one-element arrays pass through (`homeTeamSpread` too).
+ * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
  */
 export const helper_nba_game_data = NBA.game_data;
 /** NBA play features + timeouts (sdv-py `helper_nba_pbp_features`): quarters, 720-second ladder. */
@@ -804,13 +846,13 @@ export const helper_nba_pbp_features = NBA.pbp_features;
 export const helper_nba_pbp = NBA.pbp;
 /**
  * WNBA pickcenter metadata (sdv-py `helper_wnba_pickcenter(pbp_txt)`): spread / over-under (default
- * 165.5) / home favorite. A value taken from the pickcenter is a ONE-ELEMENT ARRAY (py: numpy),
- * e.g. `gameSpread: [-8.5]`; a default is a scalar.
+ * 165.5) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
+ * favorite come from one provider row.
  */
 export const helper_wnba_pickcenter = WNBA.pickcenter;
 /**
  * WNBA home / away identification (sdv-py `helper_wnba_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * The pickcenter's one-element arrays pass through (`homeTeamSpread` too).
+ * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
  */
 export const helper_wnba_game_data = WNBA.game_data;
 /** WNBA play features + timeouts (sdv-py `helper_wnba_pbp_features`): halves before 2006, else quarters. */
@@ -819,13 +861,13 @@ export const helper_wnba_pbp_features = WNBA.pbp_features;
 export const helper_wnba_pbp = WNBA.pbp;
 /**
  * MBB pickcenter metadata (sdv-py `helper_mbb_pickcenter(pbp_txt)`): spread / over-under (default
- * 142.0) / home favorite. A value taken from the pickcenter is a ONE-ELEMENT ARRAY (py: numpy),
- * e.g. `gameSpread: [-8.5]`; a default is a scalar.
+ * 142.0) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
+ * favorite come from one provider row.
  */
 export const helper_mbb_pickcenter = MBB.pickcenter;
 /**
  * MBB home / away identification (sdv-py `helper_mbb_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * The pickcenter's one-element arrays pass through (`homeTeamSpread` too).
+ * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
  */
 export const helper_mbb_game_data = MBB.game_data;
 /** MBB play features + timeouts (sdv-py `helper_mbb_pbp_features`): halves, Int32 clock. */
@@ -834,13 +876,13 @@ export const helper_mbb_pbp_features = MBB.pbp_features;
 export const helper_mbb_pbp = MBB.pbp;
 /**
  * WBB pickcenter metadata (sdv-py `helper_wbb_pickcenter(pbp_txt)`): spread / over-under (default
- * 130.5) / home favorite. A value taken from the pickcenter is a ONE-ELEMENT ARRAY (py: numpy),
- * e.g. `gameSpread: [-8.5]`; a default is a scalar.
+ * 130.5) / home favorite / availability as plain scalars, e.g. `gameSpread: -8.5`; the spread and the
+ * favorite come from one provider row.
  */
 export const helper_wbb_pickcenter = WBB.pickcenter;
 /**
  * WBB home / away identification (sdv-py `helper_wbb_game_data(pbp_txt, init)`): `[pbp_txt, init]`.
- * The pickcenter's one-element arrays pass through (`homeTeamSpread` too).
+ * `homeTeamSpread` follows `homeFavorite` (a one-element array in `init` stays one, as numpy).
  */
 export const helper_wbb_game_data = WBB.game_data;
 /** WBB play features + timeouts (sdv-py `helper_wbb_pbp_features`): halves before 2016, else quarters. */

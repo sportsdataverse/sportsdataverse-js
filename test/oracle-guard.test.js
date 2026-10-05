@@ -27,8 +27,8 @@ describe('sdv-py oracle generators share one pin guard', () => {
       });
       continue;
     }
-    it(`${g} calls pinned_checkout(PORT_PIN | vendor_pin()) and has no private git guard`, () => {
-      src.should.match(/pinned_checkout\((PORT_PIN|vendor_pin\(\))\)/);
+    it(`${g} calls pinned_checkout(PORT_PIN | BASKETBALL_PBP_PIN | vendor_pin()) and has no private git guard`, () => {
+      src.should.match(/pinned_checkout\((PORT_PIN|BASKETBALL_PBP_PIN|vendor_pin\(\))\)/);
       src.should.not.match(/rev-parse|--porcelain/);
     });
   }

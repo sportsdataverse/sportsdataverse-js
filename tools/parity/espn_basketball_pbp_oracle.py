@@ -5,10 +5,10 @@ REAL committed capture, plus labelled derived payloads that reach league-fact br
 capture reaches.
 
 test/producers/espn_basketball_pbp.test.js compares src/producers/espn_basketball_pbp.ts to
-this cell by cell. Run it from sdv-py checked out at PORT_PIN (tools/sdv_py_pin.py, the pin the
-producers were ported from), never a working tree (the shared guard refuses anything else):
+this cell by cell. Run it from sdv-py checked out at BASKETBALL_PBP_PIN (tools/sdv_py_pin.py, the
+pin the producers follow), never a working tree (the shared guard refuses anything else):
 
-    git -C <sdv-py> worktree add --detach <scratch> <PORT_PIN>
+    git -C <sdv-py> worktree add --detach <scratch> <BASKETBALL_PBP_PIN>
     cd <scratch> && uv sync
     uv run python <sdv-js>/tools/parity/espn_basketball_pbp_oracle.py
 
@@ -36,7 +36,8 @@ import json
 import math
 
 import numpy as np
-from espn_basketball_box_oracle import JS, PORT_PIN, pinned_checkout, read
+from espn_basketball_box_oracle import JS, pinned_checkout, read
+from sdv_py_pin import BASKETBALL_PBP_PIN
 
 ESPN = JS / "test" / "fixtures" / "espn"
 BOX = ESPN / "basketball_box"
@@ -220,7 +221,7 @@ def derived(captures):
         (
             "pickcenter_favorite_false",
             nba_pc,
-            "homeTeamOdds.favorite false on every provider (homeTeamSpread = -spread)",
+            "homeTeamOdds.favorite false on every provider (the spread's sign decides: -8.5 -> home favored)",
             setp(
                 lambda p: [
                     e["homeTeamOdds"].update(favorite=False) for e in p["pickcenter"]
@@ -236,19 +237,19 @@ def derived(captures):
         (
             "pickcenter_null_spread",
             nba_pc,
-            "`spread` null on every provider (py IndexError)",
+            "`spread` null on every provider (no spread anywhere -> the defaults)",
             setp(lambda p: [e.update(spread=None) for e in p["pickcenter"]]),
         ),
         (
             "pickcenter_no_provider_id",
             nba_pc,
-            "`provider` removed from every entry (py KeyError on the sort)",
+            "`provider` removed from every entry (no sort: the input order stands)",
             setp(lambda p: [e.pop("provider") for e in p["pickcenter"]]),
         ),
         (
             "pickcenter_string_spread",
             nba_pc,
-            "spreads as strings (float() parses for the plays; abs() raises in game_data)",
+            "spreads as strings (float() parses them)",
             setp(
                 lambda p: [e.update(spread=str(e["spread"])) for e in p["pickcenter"]]
             ),
@@ -270,13 +271,13 @@ def derived(captures):
         (
             "mbb_integer_clock",
             "summary_mbb.json.gz",
-            "one clock '5' (no colon): MBB -> minutes 5, seconds null; the others prefix '0:'",
+            "one clock '5' (no colon): every league prefixes '0:' (minutes 0, seconds 5)",
             setp(lambda p: plays(p)[3]["clock"].update(displayValue="5")),
         ),
         (
             "clock_empty_string",
             "summary_wbb.json.gz",
-            "one clock '' (py's Float32 / Int32 cast raises)",
+            "one clock '' (py's Float32 / Float64 cast raises)",
             setp(lambda p: plays(p)[3]["clock"].update(displayValue="")),
         ),
         (
@@ -329,11 +330,12 @@ def derived(captures):
         (
             "timeout_texts",
             "mbb_summary_401600379.json.gz",
-            "three ShortTimeOut texts name a team only by its alt name ('Ohio St.'), mascot "
-            "('Terrapins') or abbreviation ('MD') -- each regex pattern on its own",
+            "three ShortTimeOut plays lose their `team` and name it only by its alt name "
+            "('Ohio St.'), mascot ('Terrapins') or abbreviation ('MD') -- each whole-word "
+            "name pattern of the fallback on its own",
             setp(
                 lambda p: [
-                    plays(p)[i].update(text=t)
+                    (plays(p)[i].update(text=t), plays(p)[i].pop("team", None))
                     for i, t in (
                         (37, "Ohio St. Timeout"),
                         (140, "Terrapins Timeout"),
@@ -348,6 +350,20 @@ def derived(captures):
             "one first-quarter clock '1:00.0018': NBA's ((720 + 60m) + s) and WNBA's "
             "600 + (60m + s) round differently in Float32",
             setp(lambda p: plays(p)[5]["clock"].update(displayValue="1:00.0018")),
+        ),
+        (
+            "pickcenter_zero_spread",
+            nba_pc,
+            "a pick'em: spread 0 on every provider (no sign, so the read row's own "
+            "homeTeamOdds.favorite, true, decides)",
+            setp(lambda p: [e.update(spread=0.0) for e in p["pickcenter"]]),
+        ),
+        (
+            "timeout_team_stripped",
+            "nba_summary_260312029.json.gz",
+            "`team` removed from every play: the name fallback credits 'Memphis full timeout' "
+            "to MEM only (PHI is inside 'Memphis', but not as a whole word)",
+            setp(lambda p: [x.pop("team", None) for x in plays(p)]),
         ),
     ]
     out = {}
@@ -371,7 +387,7 @@ def derived(captures):
 
 
 def main() -> None:
-    ref, _ = pinned_checkout(PORT_PIN)
+    ref, _ = pinned_checkout(BASKETBALL_PBP_PIN)
     recorders = [Recorder(lg) for lg in LEAGUES]
     # never read an oracle (ours or the box one) back in as a capture
     paths = (

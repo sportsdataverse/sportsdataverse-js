@@ -10,7 +10,7 @@ import { _warn } from '../../dist/core/releases.js';
 import { isIdColumn } from '../../dist/core/int64.js';
 
 // Parity: espn_<lg>_pbp's trimming + helper_<lg>_pbp (and the stage helpers' init) for every
-// league on every payload, compared to sdv-py@719de79's own output
+// league on every payload, compared to sdv-py@3135873's own output (BASKETBALL_PBP_PIN)
 // (tools/parity/espn_basketball_pbp_oracle.py -> basketball_pbp/oracle.json.gz): plays column
 // names AND order, each value's type against py's polars dtype, every cell strictly; the timeouts
 // map; every other output key; the raw (trimmed) payload; init. Payloads: the REAL captures in
@@ -155,6 +155,113 @@ describe('ESPN basketball pbp producers vs the sdv-py oracle (derived payloads)'
   }
 });
 
+// sdv-py #688 (merged as ebac69ed2d), locked on real ESPN payloads as sdv-py's own
+// tests/test_basketball_pbp_offline.py locks it: the captures here, and the verbatim pickcenter
+// arrays of basketball_pbp/pickcenter.json (copied from sdv-py, which took them from the hoopR /
+// wehoop raw stores).
+describe('ESPN basketball pbp: sdv-py #688 fixes on real payloads', () => {
+  quiet();
+  const PC = read(join(ESPN, 'basketball_pbp', 'pickcenter.json'));
+  const DEFAULT_OU = { nba: 215.5, wnba: 165.5, mbb: 142.0, wbb: 130.5 };
+  const TYPES = new Set(['RegularTimeOut', 'ShortTimeOut', 'Full Timeout', 'Short Timeout', 'No Timeout', 'Reset Timeout']);
+  const pick = (lg, pickcenter) => {
+    const init = P[`helper_${lg}_pickcenter`]({ pickcenter: structuredClone(pickcenter) });
+    return [init.gameSpread, init.overUnder, init.homeFavorite, init.gameSpreadAvailable];
+  };
+  const homeLine = ([spread, , favorite]) => (favorite ? Math.abs(spread) : -Math.abs(spread));
+  /** py's `_expected_timeouts`: every team-timeout play credited to its own team.id, split by half. */
+  const expectedTimeouts = (plays, teamIds, firstHalfPeriods) => {
+    const out = Object.fromEntries(teamIds.map((t) => [String(t), { 1: [], 2: [] }]));
+    for (const p of plays) {
+      const team = p.team?.id;
+      if (TYPES.has(p.type.text) && team != null && String(Number(team)) in out) {
+        out[String(Number(team))][p.period.number <= firstHalfPeriods ? '1' : '2'].push(String(p.id));
+      }
+    }
+    return out;
+  };
+  const pbpOf = (lg, name, mutate = (c) => c) => {
+    const cap = mutate(structuredClone(capture(name)));
+    return { cap, out: P._pbpFromSummary(lg, Number(cap.header.id), cap) };
+  };
+
+  it('one provider is enough: the scheduled NBA capture reads DraftKings (was the 2.5 default)', () => {
+    pick('nba', capture('nba_summary_scheduled_401909093.json.gz').pickcenter).should.eql([-4.5, 233.5, true, true]);
+  });
+
+  for (const [lg, id, want] of [
+    ['mbb', '401856600', [-6.5, 146.5, true, true]], // one provider: DraftKings, MICH -6.5
+    ['nba', '401809238', [-4.5, 241.5, true, true]], // one provider: DraftKings
+    ['wnba', '401320565', [2.5, 161.0, false, true]], // one provider: Caesars, away favored
+    ['wbb', '401468165', [8.0, 147.5, false, true]], // one provider: Caesars, away favored
+    ['mbb', '400766104', [-6.5, 132.5, true, true]], // several providers: unchanged
+    ['nba', '400578293', [-9.0, 191.0, true, true]], // several providers: unchanged
+    ['mbb', '401364342', [-13.0, 160.5, true, true]], // str(provider.id) order: teamrankings "1002" before Caesars "45"
+  ]) {
+    it(`${lg} ${id}: pickcenter reads the provider (${want.slice(0, 2).join(' / ')})`, () => {
+      pick(lg, PC[lg][id]).should.eql(want);
+    });
+  }
+
+  it('the spread and its home favorite come from the same provider row (record-only teamrankings row first)', () => {
+    // MBB 330582427 (UNCA home -17.5) and NBA 401430219 (MIA home -4.5): the home line was -17.5 / -4.5
+    homeLine(pick('mbb', PC.mbb['330582427'])).should.equal(17.5);
+    homeLine(pick('nba', PC.nba['401430219'])).should.equal(4.5);
+    // the live NBA capture of 401430219 carries the same two rows; every play gets MIA's line
+    const { out } = pbpOf('nba', 'nba_summary_401430219.json.gz');
+    out.plays.length.should.be.above(400);
+    out.plays.every((r) => r.gameSpread === 4.5 && r.homeFavorite === true && r.homeTeamSpread === 4.5).should.be.true();
+  });
+
+  for (const lg of LEAGUES) {
+    it(`${lg}: a pickcenter without a spread keeps the defaults ([], {}, null, a lone record-only entry)`, () => {
+      for (const pc of [[], {}, null, PC.mbb['400587253']]) pick(lg, pc).should.eql([2.5, DEFAULT_OU[lg], true, false]);
+    });
+  }
+
+  it("a zero spread takes that row's favorite flag, home when unset (py test_zero_spread_takes_that_rows_favorite_flag)", () => {
+    // real case WNBA 401391858 (spread 0, home favorite false)
+    const row = { provider: { id: '1002' }, spread: 0.0, overUnder: 160.5, homeTeamOdds: { favorite: false } };
+    pick('wnba', [row]).should.eql([0, 160.5, false, true]);
+    row.homeTeamOdds.favorite = true;
+    pick('wnba', [row])[2].should.equal(true);
+    delete row.homeTeamOdds;
+    pick('wnba', [row])[2].should.equal(true);
+  });
+
+  for (const [lg, firstHalf, n] of [
+    ['nba', 2, 9], // 9 "Full Timeout" (the ShortTimeOut-only filter found 0)
+    ['wnba', 2, 15], // 13 "Full Timeout" + 2 "No Timeout"; "Official Timeout" excluded
+    ['mbb', 1, 6], // 6 ShortTimeOut; 8 OfficialTVTimeOut excluded
+    ['wbb', 2, 4], // 4 ShortTimeOut; 4 OfficialTVTimeOut excluded
+  ]) {
+    it(`${lg}: the timeouts map holds every team timeout of summary_${lg}, credited by team.id (${n})`, () => {
+      const name = lg === 'nba' ? 'summary_nba.json' : `summary_${lg}.json.gz`;
+      const { cap, out } = pbpOf(lg, name);
+      out.timeouts.should.eql(expectedTimeouts(cap.plays, Object.keys(out.timeouts), firstHalf));
+      Object.values(out.timeouts).flatMap((h) => [...h['1'], ...h['2']]).length.should.equal(n);
+    });
+  }
+
+  it('WNBA 400927398: two " Full timeout" plays that name no team go to the play team (CHI, MIN)', () => {
+    const { cap, out } = pbpOf('wnba', 'wnba_summary_400927398.json.gz');
+    out.timeouts.should.eql(expectedTimeouts(cap.plays, ['8', '19'], 2));
+    out.timeouts['19']['1'].should.containEql('400927398184');
+    out.timeouts['8']['2'].should.containEql('400927398402');
+  });
+
+  it('NBA 260312029 PHI @ MEM: "Memphis full timeout" goes to MEM only, by team.id and by the whole-word name fallback', () => {
+    const { cap, out } = pbpOf('nba', 'nba_summary_260312029.json.gz');
+    const want = expectedTimeouts(cap.plays, ['29', '20'], 2);
+    out.timeouts.should.eql(want);
+    const [mem, phi] = ['29', '20'].map((t) => new Set([...want[t]['1'], ...want[t]['2']]));
+    (mem.size && phi.size && ![...mem].some((x) => phi.has(x))).should.be.ok();
+    // every play's team removed: only the name fallback runs ("phi" is inside "Memphis", not a word)
+    const stripped = pbpOf('nba', 'nba_summary_260312029.json.gz', (c) => (c.plays.forEach((p) => delete p.team), c));
+    stripped.out.timeouts.should.eql(want);
+  });
+});
+
 describe('ESPN basketball pbp league facts', () => {
   quiet();
   const run = (lg, name) => {
@@ -215,22 +322,29 @@ describe('ESPN basketball pbp league facts', () => {
     firstOf(n, 2).half.should.equal(1); // NBA has no era logic: period 2 is still the first half
   });
 
-  it('OT: the overtime period starts at 300 (NBA OT, WBB 4OT); MBB resets end.period only on 2 -> 3', () => {
+  it('OT: the overtime period starts at 300 (NBA OT, WBB 4OT, MBB every OT for end.period AND end.game: sdv-py #688)', () => {
     const nba = run('nba', 'nba_summary_401360428.json.gz').plays;
     firstOf(nba, 5)['end.quarter_seconds_remaining'].should.equal(300);
     const wbb = run('wbb', 'wbb_summary_401587390.json.gz').plays;
     for (const p of [5, 6, 7, 8]) firstOf(wbb, p)['end.game_seconds_remaining'].should.equal(300);
     const mbb = run('mbb', 'mbb_summary_401600379.json.gz').plays; // 2OT
-    firstOf(mbb, 3)['end.period_seconds_remaining'].should.equal(300);
-    firstOf(mbb, 4)['end.period_seconds_remaining'].should.not.equal(300); // py quirk, kept
-    firstOf(mbb, 4)['end.game_seconds_remaining'].should.equal(300);
+    for (const p of [3, 4]) {
+      firstOf(mbb, p)['end.period_seconds_remaining'].should.equal(300, `MBB OT period ${p}`);
+      firstOf(mbb, p)['end.game_seconds_remaining'].should.equal(300, `MBB OT period ${p}`);
+    }
+    // from the second half on, the two columns measure the same clock (py's lock on 401830342)
+    const late = mbb.filter((r) => r['period.number'] >= 2);
+    late.map((r) => r['end.period_seconds_remaining']).should.eql(late.map((r) => r['end.game_seconds_remaining']));
   });
 
   it('MBB columns: half = period, lag_period, period_seconds; no qtr / game_half / period; Int32 clock', () => {
     const cols = Object.keys(run('mbb', 'summary_mbb.json.gz').plays[0]);
     cols.should.containDeep(['half', 'lag_period', 'lead_period', 'start.period_seconds_remaining', 'end.period_seconds_remaining']);
     for (const c of ['qtr', 'game_half', 'period', 'lag_qtr', 'start.quarter_seconds_remaining']) cols.should.not.containEql(c);
-    (() => run('mbb', 'summary_nba.json')).should.throw(/conversion to i32/); // "53.1": no "0:" prefix
+    // a bare-seconds clock ("53.1") reads as 0:53 in MBB (Int32, truncated; sdv-py #688), and
+    // MBB's `time` keeps the display, where the NBA path prefixes it and keeps Float32 tenths
+    const bare = run('mbb', 'summary_nba.json').plays.find((r) => r.time === '53.1');
+    [bare['clock.minutes'], bare['clock.seconds'], bare['start.period_seconds_remaining']].should.eql([0, 53, 53]);
     run('nba', 'summary_nba.json').plays.some((r) => r.time.startsWith('0:') && r['clock.seconds'] % 1 !== 0).should.be.true();
   });
 
