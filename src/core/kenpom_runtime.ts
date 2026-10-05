@@ -190,7 +190,32 @@ let envSession = sessionFor();
 const accountKey = (c: { email: string; password: string }): string =>
   `${c.email}\u0000${createHash("sha256").update(c.password).digest("hex")}`;
 
+type ExplicitSession = { id: string; provider: AuthProvider };
+
+/** Logins in flight, per account key: concurrent first calls share ONE login (removed when it settles). */
+let pendingLogins = new Map<string, Promise<ExplicitSession>>();
+
+/**
+ * Sessions held by in-flight requests (id -> session + holder count). A request
+ * keeps riding on the session it started with even if the cache evicts it
+ * meanwhile (a 9th account) — eviction only stops NEW calls from reusing it.
+ */
+const inUse = new Map<string, { session: ExplicitSession; holders: number }>();
+
+function hold(s: ExplicitSession): void {
+  const e = inUse.get(s.id);
+  if (e) e.holders++;
+  else inUse.set(s.id, { session: s, holders: 1 });
+}
+
+function release(s: ExplicitSession): void {
+  const e = inUse.get(s.id);
+  if (e && --e.holders === 0) inUse.delete(s.id);
+}
+
 function sessionById(id: string): AuthProvider | undefined {
+  const held = inUse.get(id);
+  if (held) return held.session.provider;
   for (const s of explicitSessions.values()) if (s.id === id) return s.provider;
   return undefined;
 }
@@ -203,25 +228,38 @@ const authFailure = (step: string, url: string, err: unknown): SdvError =>
   err instanceof SdvError ? err : new AssetFetchError(`${FAMILY}: auth failed (${step})`, { url, cause: err });
 
 /**
- * The session for explicit credentials: a cached one, or a fresh login that is
- * cached only once it succeeded. Returns the session's routing id.
+ * The session for explicit credentials: a cached one, the login already in
+ * flight for the same account, or a fresh login that is cached only once it
+ * succeeded (a failed login is not cached, and its pending entry is dropped).
  */
-async function explicitSession(creds: { email: string; password: string }, ctx: AuthContext): Promise<string> {
+function explicitSession(creds: { email: string; password: string }, ctx: AuthContext): Promise<ExplicitSession> {
   const key = accountKey(creds);
   const hit = explicitSessions.get(key);
-  if (hit) return hit.id;
-  const provider = sessionFor(creds);
-  try {
-    await provider.apply({ method: "GET", url: LOGIN_URL }, ctx); // logs in; throws on a rejected login
-  } catch (err) {
-    throw authFailure("login", LOGIN_URL, err);
+  if (hit) return Promise.resolve(hit);
+  let pending = pendingLogins.get(key);
+  if (!pending) {
+    const logins = pendingLogins; // a cache clear mid-login must not drop a newer map's entry
+    pending = (async (): Promise<ExplicitSession> => {
+      const provider = sessionFor(creds);
+      try {
+        await provider.apply({ method: "GET", url: LOGIN_URL }, ctx); // logs in; throws on a rejected login
+      } catch (err) {
+        throw authFailure("login", LOGIN_URL, err);
+      }
+      const raced = explicitSessions.get(key);
+      if (raced) return raced;
+      if (explicitSessions.size >= SESSION_CACHE_MAX) {
+        explicitSessions.delete(explicitSessions.keys().next().value as string); // FIFO-evict the oldest
+      }
+      const session = { id: randomUUID(), provider };
+      explicitSessions.set(key, session);
+      return session;
+    })().finally(() => {
+      if (logins.get(key) === pending) logins.delete(key);
+    });
+    logins.set(key, pending);
   }
-  if (explicitSessions.size >= SESSION_CACHE_MAX) {
-    explicitSessions.delete(explicitSessions.keys().next().value as string); // FIFO-evict the oldest
-  }
-  const id = randomUUID();
-  explicitSessions.set(key, { id, provider });
-  return id;
+  return pending;
 }
 
 /**
@@ -253,6 +291,7 @@ export const kenpomAuth: AuthProvider = {
 /** Drop every cached KenPom session (credential rotation / tests). */
 export function kenpomClearSessionCache(): void {
   explicitSessions = new Map();
+  pendingLogins = new Map();
   envSession = sessionFor();
 }
 
@@ -292,13 +331,31 @@ export async function kenpomGet(
   const ctx: AuthContext = { family: config.family, transport };
   let headers = mergeHeaders({ "User-Agent": USER_AGENT, Referer: `${KENPOM_BASE_URL}/` }, config.headers);
   const ownCookie = headerValue(config.headers, "cookie") !== undefined;
+  let held: ExplicitSession | undefined;
   if (!ownCookie && (args.email || args.password)) {
     if (auth !== kenpomAuth) {
       throw new SdvError(`${FAMILY}: email / password on the call need the built-in KenPom auth (a custom auth provider is configured for kenpom)`);
     }
-    const id = await explicitSession(resolveKenpomCredentials(args.email, args.password), ctx);
-    headers = mergeHeaders(headers, { [SESSION_HEADER]: id });
+    held = await explicitSession(resolveKenpomCredentials(args.email, args.password), ctx);
+    hold(held); // this request keeps its session even if the cache evicts it meanwhile
+    headers = mergeHeaders(headers, { [SESSION_HEADER]: held.id });
   }
+  try {
+    return await fetchLoggedIn(url, config, headers, ownCookie, ctx, auth);
+  } finally {
+    if (held) release(held);
+  }
+}
+
+/** Fetch a page; a logged-out answer refreshes the used session once, then throws. */
+async function fetchLoggedIn(
+  url: string,
+  config: { params?: Record<string, unknown>; family: string },
+  headers: Record<string, string>,
+  ownCookie: boolean,
+  ctx: AuthContext,
+  auth: AuthProvider | undefined
+): Promise<string> {
   const page: TransportRequest = { method: "GET", url, query: config.params, headers, responseType: "text" };
   const fetchPage = async (): Promise<string> => {
     const body = await request(config.family, page);

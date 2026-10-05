@@ -363,7 +363,8 @@ add `section: '<table id>'` for one table. A page that comes back as the
 logged-out login form is never returned as data: the session that was used
 is refreshed once and the page re-fetched, then it throws `AssetFetchError`.
 Sessions for explicit credentials are keyed by e-mail plus a hash of the
-password, cached only after a successful login, and capped at 8.
+password, cached only after a successful login, and capped at 8. Concurrent
+calls for one account share a single login.
 
 **NFL Pro** (`nfl_pro`, `sdv.nfl.nflPro*`, 16 wrappers, `pro.nfl.com`) serves
 the Next Gen Stats tables. Its secured routes need a **user-bound** token

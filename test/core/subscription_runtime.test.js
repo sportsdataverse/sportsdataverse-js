@@ -29,7 +29,7 @@ function fakeTransport(...script) {
   const t = async (req) => {
     calls.push(req);
     const step = script[Math.min(calls.length - 1, script.length - 1)];
-    const r = typeof step === 'function' ? step(req, calls.length - 1) : step;
+    const r = typeof step === 'function' ? await step(req, calls.length - 1) : step;
     if (r instanceof Error) throw r;
     return { headers: {}, data: null, url: req.url, ...r };
   };
@@ -575,5 +575,88 @@ describe('subscription families: `section` through the wrappers + NFL Pro boolea
     t.calls[0].query.qualifiedPasser.should.equal('True');
     await sdv.nfl.nflProPlayersOffensePassingSeason({ qualified: false, paginate: false });
     t.calls[1].query.qualifiedPasser.should.equal('False');
+  });
+});
+
+describe('kenpom runtime: concurrent explicit-credential calls', () => {
+  isolate();
+
+  /** Site double: logins succeed for password "right"; `pageStep(req)` decides each page answer. */
+  function site(pageStep) {
+    return fakeTransport((req) => {
+      if (req.method === 'GET' && req.url === 'https://kenpom.com/index.php' && !header(req, 'cookie')) {
+        return { status: 200, data: LOGIN_FORM, headers: { 'set-cookie': 'PHPSESSID=anon' } };
+      }
+      if (req.method === 'POST') {
+        const form = Object.fromEntries(new URLSearchParams(req.body));
+        return form.password === 'right'
+          ? { status: 200, data: LOGGED_IN, headers: { 'set-cookie': `PHPSESSID=member-${form.email}` } }
+          : { status: 200, data: LOGIN_FORM };
+      }
+      return pageStep(req);
+    });
+  }
+  const logins = (t) => t.calls.filter((c) => c.method === 'POST').length;
+
+  it('two concurrent calls for one account share ONE login and both survive a retry', async () => {
+    const firstAttempt = new Set();
+    const t = site((req) => {
+      // every call's first page attempt is a 503 -> request() retries and re-applies the session
+      const key = `${req.url}?${JSON.stringify(req.query)}`;
+      if (!firstAttempt.has(key)) {
+        firstAttempt.add(key);
+        return { status: 503, data: '' };
+      }
+      return { status: 200, data: RATINGS };
+    });
+    configure({ transport: { kenpom: t } });
+    const creds = { email: 'same@example.com', password: 'right' };
+    const results = await Promise.allSettled([
+      sdv.mbb.kenpomRatings({ year: 2025, ...creds }),
+      sdv.mbb.kenpomRatings({ year: 2024, ...creds }),
+    ]);
+    results.map((r) => r.status).should.eql(['fulfilled', 'fulfilled']);
+    results.every((r) => r.value === RATINGS).should.be.true();
+    logins(t).should.equal(1);
+  });
+
+  it('a failed concurrent login is shared too, and is not cached', async () => {
+    const t = site(() => ({ status: 200, data: RATINGS }));
+    configure({ transport: { kenpom: t } });
+    const creds = { email: 'same@example.com', password: 'wrong' };
+    const results = await Promise.allSettled([
+      sdv.mbb.kenpomRatings({ year: 2025, ...creds }),
+      sdv.mbb.kenpomRatings({ year: 2024, ...creds }),
+    ]);
+    results.map((r) => r.status).should.eql(['rejected', 'rejected']);
+    logins(t).should.equal(1);
+    await sdv.mbb.kenpomRatings({ year: 2025, ...creds }).then(() => null, (e) => e);
+    logins(t).should.equal(2); // not cached: the next call logs in again
+  });
+
+  it('an in-flight request keeps its session when 8 other accounts evict it from the cache', async () => {
+    let releaseFirst;
+    const gate = new Promise((r) => (releaseFirst = r));
+    let firstPage = true;
+    const t = site(async (req) => {
+      if (header(req, 'cookie') === 'PHPSESSID=member-a@example.com' && firstPage) {
+        firstPage = false;
+        await gate; // hold account a's request open while the cache churns
+        return { status: 503, data: '' }; // -> retry -> re-applies a's (now evicted) session
+      }
+      return { status: 200, data: RATINGS };
+    });
+    configure({ transport: { kenpom: t } });
+    const inFlight = sdv.mbb.kenpomRatings({ year: 2025, email: 'a@example.com', password: 'right' });
+    await new Promise((r) => setTimeout(r, 0));
+    while (logins(t) < 1) await new Promise((r) => setTimeout(r, 0));
+    for (let i = 0; i < 8; i++) {
+      await sdv.mbb.kenpomRatings({ year: 2025, email: `u${i}@example.com`, password: 'right' });
+    }
+    releaseFirst();
+    (await inFlight).should.equal(RATINGS);
+    logins(t).should.equal(9); // a was evicted from the cache, but its request never re-logged-in or threw
+    await sdv.mbb.kenpomRatings({ year: 2025, email: 'a@example.com', password: 'right' });
+    logins(t).should.equal(10); // a NEW call for a logs in again (evicted from the cache)
   });
 });
