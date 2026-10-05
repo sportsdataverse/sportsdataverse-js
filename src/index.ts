@@ -284,7 +284,11 @@ export type { ParserFn, FlatParserFn, ParsedTables } from './parsers/_registry.j
 // (from `{ parsed: true }`) through grammar-of-data-manipulation verbs, e.g.
 // `import { tidy } from 'sportsdataverse';
 //  tidy.tidy(rows, tidy.groupBy('team', tidy.summarize({ n: tidy.n() })))`.
-export * as tidy from '@tidyjs/tidy';
+// Same module namespace as `export * as tidy from '@tidyjs/tidy'`, spelled as
+// import + export because API Extractor (`npm run api:report`) cannot analyze
+// `export * as` of an external package.
+import * as tidy from '@tidyjs/tidy';
+export { tidy };
 export type {
   LeagueConfig,
   EspnFamily,

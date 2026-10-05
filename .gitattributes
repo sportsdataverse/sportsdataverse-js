@@ -31,3 +31,6 @@ test/fixtures/py/** -text
 
 # Parquet fixtures (test/fixtures/releases) are binary.
 *.parquet binary
+
+# API Extractor reports (npm run api:report) are written with LF; keep them LF on checkout.
+etc/*.api.md text eol=lf

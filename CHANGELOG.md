@@ -6,6 +6,14 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed — package checks: attw + publint on the packed tarball, API Extractor reports
+
+- **New CI gates** (Node 20 and 22). `npm run pack:check` packs the package with `npm pack` and runs `@arethetypeswrong/cli` and `publint --strict` on that tarball. `npm run api:check` fails when the public API in `dist/*.d.ts` no longer matches the committed API Extractor reports, `etc/sportsdataverse.api.md` (package root) and `etc/sportsdataverse-parsers.api.md` (`sportsdataverse/parsers`). After an intended API change, run `npm run api:report` and commit the updated report, so the change shows up in the PR diff. Generated wrappers are not listed one by one in the report (the default export is typed `Record<string, Record<string, any>>`); they are reviewed through `src/generated/**` and the codegen drift gate.
+- **Fixed:** `sportsdataverse/parsers` now resolves its types under TypeScript `moduleResolution: "node"` / `"node10"` (new `typesVersions` entry; the package root already resolved). The `exports` map is unchanged.
+- `package.json` now says `"sideEffects": true`. Importing the package registers per-family transport defaults and the KenPom parser, so a bundler must not drop those imports. Behavior is unchanged (a missing field already meant `true`).
+- The package stays ESM-only. attw's `cjs-resolves-to-esm` rule is ignored on purpose: CommonJS callers use `await import('sportsdataverse')`, or `require()` on Node 20.19+ / 22.12+.
+- New devDependencies only: `@arethetypeswrong/cli`, `publint`, `@microsoft/api-extractor`. `npm audit` is clean.
+
 ### Changed — vendor LOCK online integrity check + vendor-sync hardening
 
 - **New:** `npm run vendor:check:online` (CI and the weekly vendor-sync) checks `vendor/upstream/LOCK` against sdv-py's `git/trees/<ref>` at the pinned ref: every blob sha must match, and LOCK's path set must equal exactly what the vendor fetches (computed by the same path-selection helper `npm run vendor` uses), so editing a copy together with its LOCK line, or dropping a LOCK line and hand-editing the vendored copy, both fail. A network failure is a failure to verify, never a pass; 5xx/network errors are retried (3 attempts), 403/404 are not.
