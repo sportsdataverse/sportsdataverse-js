@@ -129,7 +129,7 @@ export function cricket_match_state(summary: any, opts: { fmt: string }): Cricke
 
 // ---- normal CDF (full double precision; scipy.stats.norm.cdf equivalent) ---
 // erf via the all-positive series for |z|<2 and the Laplace continued fraction
-// for erfc beyond; absolute error ~1e-16.
+// in the left tail (CF form); absolute error ~1e-16 in the series range.
 function erfSeries(x: number): number {
   // erf(x) = 2/sqrt(pi) * exp(-x^2) * sum_{n>=0} 2^n x^(2n+1) / (1*3*...*(2n+1))
   let term = x;
@@ -142,22 +142,35 @@ function erfSeries(x: number): number {
   return (2 / Math.sqrt(Math.PI)) * Math.exp(-x * x) * sum;
 }
 
-function erfcCF(z: number): number {
-  // erfc(z) = exp(-z^2)/sqrt(pi) * 1/(z + (1/2)/(z + 1/(z + (3/2)/(z + 2/(z + ...)))))
+// exp(-t/2) for t = x^2 with the square formed exactly: x*x in double loses ~x^2*eps
+// relative accuracy (5e-14 at x=-30), so square an exactly-representable high part
+// separately (Cody/Sun split).
+function expNegHalfSq(x: number): number {
+  const xh = Math.trunc(x * 16) / 16;
+  return Math.exp((-xh * xh) / 2) * Math.exp((-(x - xh) * (x + xh)) / 2);
+}
+
+// Laplace continued fraction: erfc(z) = exp(-z^2)/sqrt(pi) / F, F = z + (1/2)/(z + 1/(z + (3/2)/(z + ...)));
+// returns F (relative-accurate for z >= 1; the 1000 terms are far past convergence there).
+function erfcCFDenominator(z: number): number {
   let f = z;
-  for (let k = 400; k >= 1; k--) f = z + k / 2 / f;
-  return Math.exp(-z * z) / Math.sqrt(Math.PI) / f;
+  for (let k = 1000; k >= 1; k--) f = z + k / 2 / f;
+  return f;
 }
 
-function erfc(z: number): number {
-  if (z < 0) return 2 - erfc(-z);
-  return z < 2 ? 1 - erfSeries(z) : erfcCF(z);
-}
-
-/** Standard normal CDF. */
+/** Standard normal CDF (relative error ~1e-15 in the left tail; agrees with scipy norm.cdf to ~6e-14 relative at worst, |x| >= 20). */
 export function norm_cdf(x: number): number {
   if (Number.isNaN(x)) return NaN;
-  return 0.5 * erfc(-x / Math.SQRT2);
+  if (x < -Math.SQRT2) {
+    // Phi(x) = erfc(-x/sqrt2)/2 = exp(-x^2/2) / (2 sqrt(pi) F)(-x/sqrt2): no 1 - erf cancellation.
+    return (expNegHalfSq(x) / (2 * Math.sqrt(Math.PI)) / erfcCFDenominator(-x * Math.SQRT1_2));
+  }
+  if (x > Math.SQRT2) return 1 - norm_cdf(-x);
+  return 0.5 * (1 + erfSeriesSigned(x * Math.SQRT1_2));
+}
+
+function erfSeriesSigned(z: number): number {
+  return z < 0 ? -erfSeries(-z) : erfSeries(z);
 }
 
 // ---- bundled tables ---------------------------------------------------------

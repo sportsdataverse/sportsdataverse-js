@@ -191,6 +191,16 @@ describe('nba_stats runtime (fake transport)', () => {
     }
   });
 
+  it('a legit-empty resultSets (headers, no rows) is DATA, not a fetch failure: raw keeps the headers, parsed is []', async () => {
+    const empty = { resultSets: [{ name: 'A', headers: ['PLAYER_ID', 'PTS'], rowSet: [] }] };
+    configure({ transport: { nba_stats: fake({ status: 200, data: JSON.stringify(empty) }) } });
+    (await sdv.nba.nba_stats_leaguedashplayerstats({})).should.eql(empty); // schema recoverable from raw
+    (await sdv.nba.nba_stats_leaguedashplayerstats({ parsed: true })).should.eql([]); // rows-as-objects carry no schema
+    // multi-set: the empty set keeps its key (py: zero-row frame under the same name)
+    parse_nba_stats_result_sets({ resultSets: [{ name: 'A', headers: ['X'], rowSet: [] }, { name: 'B', headers: ['Y'], rowSet: [[1]] }] })
+      .should.eql({ A: [], B: [{ y: 1 }] });
+  });
+
   it('503 is retried', async () => {
     configure({ transport: { nba_stats: fake({ status: 503, data: '' }, ok) } });
     (await sdv.nba.nba_stats_leaguedashplayerstats({})).resultSets.should.have.length(1);
