@@ -1,0 +1,242 @@
+# Parser-parity manifest: real sdv-py captures -> the vendored endpoint whose
+# py returns schema each one verifies. test/parsers/parity.test.js runs the
+# endpoint's JS parser on the capture and checks it against that schema (every
+# column present, runtime types agree) and against sdv-py's own output on the
+# same bytes (py/oracle/<family>.json, from tools/parity/py_oracle.py).
+#
+#   <family>:                      # tools/codegen/vendor.yaml family key
+#     <path under test/fixtures/>: <JS endpoint short>
+#
+# An endpoint listed here is VERIFIED (the gate generated row types key on);
+# a declared-compatible endpoint with no entry is unverified. *.gz files are the
+# sdv-py capture gzipped verbatim (byte-identical after gunzip); provenance in
+# py/README.md.
+mlb:
+  py/mlb/team_roster_yankees_2024.json.gz: team_roster
+  py/mlb/venues_active.json.gz: venues
+  py/mlb/sports.json: sports
+  py/mlb/conferences.json: conferences
+  py/mlb/conference.json: conference
+  py/mlb/draft_latest.json: draft_latest
+  py/mlb/game_timestamps.json: game_timestamps
+  py/mlb/game_changes.json.gz: game_changes
+  py/mlb/game_pace.json.gz: game_pace
+  py/mlb/high_low.json: high_low
+  py/mlb/home_run_derby.json.gz: home_run_derby
+  py/mlb/home_run_derby_bracket.json.gz: home_run_derby_bracket
+  py/mlb/home_run_derby_pool.json.gz: home_run_derby_pool
+  py/mlb/all_star_ballot.json.gz: all_star_ballot
+  py/mlb/all_star_write_ins.json.gz: all_star_write_ins
+  py/mlb/all_star_final_vote.json.gz: all_star_final_vote
+  py/mlb/free_agents.json.gz: free_agents
+  py/mlb/jobs.json.gz: jobs
+  py/mlb/datacasters.json.gz: datacasters
+  py/mlb/official_scorers.json.gz: official_scorers
+  py/mlb/schedule_tied.json: schedule_tied
+  py/mlb/schedule_postseason_series.json.gz: schedule_postseason_series
+  py/mlb/seasons_all.json.gz: seasons_all
+  py/mlb/sport.json: sport
+  py/mlb/teams_history.json: teams_history
+  py/mlb/teams_stats_leaders.json: teams_stats_leaders
+  py/mlb/team_coaches.json: team_coaches
+  py/mlb/team_personnel.json: team_personnel
+  py/mlb/leagues.json: leagues
+  py/mlb/awards.json.gz: awards
+  py/mlb/award_recipients_almvp.json.gz: award_recipients
+  py/mlb/team_147.json: team
+  py/mlb/team_alumni_147_2024.json.gz: team_alumni
+  py/mlb/team_affiliates_147.json: team_affiliates
+  py/mlb/season_2024.json: season
+  py/mlb/venue_3313.json: venue
+  py/mlb/sport_players_2024.json.gz: sport_players
+  py/mlb/umpires.json: umpires
+  py/mlb/schedule_postseason_2024.json.gz: schedule_postseason
+  py/mlb/boxscore_745282.json.gz: boxscore
+  py/mlb/linescore_745282.json: linescore
+  py/mlb/play_by_play_745282.json.gz: play_by_play
+  py/mlb/win_probability_745282.json.gz: win_probability
+  py/mlb/people_multi.json: people
+  py/mlb/person_660271.json: person
+  py/mlb/person_game_stats_660271.json: person_game_stats
+nhl_api_web:
+  py/nhl_api_web/pbp_2024_scf_g7.json.gz: pbp
+  py/nhl_api_web/boxscore_2024_scf_g7.json.gz: boxscore
+  py/nhl_api_web/landing_2024_scf_g7.json: landing
+  py/nhl_api_web/right_rail_2024_scf_g7.json: right_rail
+  py/nhl_api_web/schedule_2024_06_24.json: schedule
+  py/nhl_api_web/score_2024_06_24.json: score
+  py/nhl_api_web/standings_now.json.gz: standings
+  py/nhl_api_web/standings_season.json.gz: standings_season
+  py/nhl_api_web/club_schedule_edm_2024.json.gz: club_schedule_season
+  py/nhl_api_web/club_stats_edm_2024.json.gz: club_stats
+  py/nhl_api_web/roster_edm_2024.json: roster
+  py/nhl_api_web/player_mcdavid_landing.json.gz: player_landing
+  py/nhl_api_web/player_mcdavid_gamelog.json.gz: player_game_log
+  py/nhl_api_web/skater_leaders_now.json: skater_leaders
+  py/nhl_api_web/goalie_leaders_now.json: goalie_leaders
+  py/nhl_api_web/draft_picks_2024_r1.json.gz: draft_picks
+  py/nhl_api_web/draft_picks_now.json: draft_picks_now
+  py/nhl_api_web/draft_tracker_picks_now.json: draft_tracker_picks_now
+  py/nhl_api_web/player_spotlight.json: player_spotlight
+  py/nhl_api_web/draft_rankings_now.json.gz: draft_rankings_now
+  py/nhl_api_web/draft_rankings_2024_1.json.gz: draft_rankings
+  py/nhl_api_web/playoff_series_20232024_a.json: playoff_series
+nhl_edge:
+  py/nhl_edge/skater_detail.json: skater_detail
+  py/nhl_edge/skater_comparison.json.gz: skater_comparison
+  py/nhl_edge/skater_shot_loc_detail.json: skater_shot_location_detail
+  py/nhl_edge/skater_skating_distance_detail.json.gz: skater_skating_distance_detail
+  py/nhl_edge/skater_skating_speed_detail.json: skater_skating_speed_detail
+  py/nhl_edge/skater_zone_time.json: skater_zone_time
+  py/nhl_edge/skater_landing.json: skater_landing
+  py/nhl_edge/skater_shot_speed.json: skater_shot_speed_detail
+  py/nhl_edge/goalie_detail.json: goalie_detail
+  py/nhl_edge/goalie_5v5_detail.json: goalie_5v5_detail
+  py/nhl_edge/goalie_comparison.json.gz: goalie_comparison
+  py/nhl_edge/goalie_save_pct_detail.json: goalie_save_percentage_detail
+  py/nhl_edge/goalie_shot_loc.json: goalie_shot_location_detail
+  py/nhl_edge/goalie_landing.json: goalie_landing
+  py/nhl_edge/team_detail.json: team_detail
+  py/nhl_edge/team_shot_loc.json: team_shot_location_detail
+  py/nhl_edge/team_shot_speed_detail.json.gz: team_shot_speed_detail
+  py/nhl_edge/team_zone_time_details.json: team_zone_time_details
+  py/nhl_edge/team_landing.json: team_landing
+  py/nhl_edge/cat_skater_detail.json: cat_skater_detail
+  py/nhl_edge/cat_goalie_detail.json: cat_goalie_detail
+nhl_records:
+  py/nhl_records/records_franchise.json: franchises
+  py/nhl_records/records_franchise_team_totals.json: franchise_team_totals
+  py/nhl_records/records_franchise_season_results.json: franchise_season_results
+  py/nhl_records/records_franchise_playoff_appearances.json: franchise_playoff_appearances
+  py/nhl_records/records_franchise_totals.json: franchise_totals
+  py/nhl_records/records_franchise_detail.json.gz: franchise_detail
+  py/nhl_records/records_all_time_record_vs_franchise.json: all_time_record_vs_franchise
+  py/nhl_records/records_coach.json: coaches
+  py/nhl_records/records_coach_single.json: coach
+  py/nhl_records/records_coach_career.json: coach_career
+  py/nhl_records/records_coach_career_with_playoffs.json: coach_career_with_playoffs
+  py/nhl_records/records_coach_franchise.json: coach_franchise
+  py/nhl_records/records_coach_stanley_cup.json: coach_stanley_cup
+  py/nhl_records/records_goalie_career_stats.json: goalie_career_stats
+  py/nhl_records/records_goalie_career_stats_with_playoffs.json: goalie_career_stats_with_playoffs
+  py/nhl_records/records_goalie_season_stats.json: goalie_season_stats
+  py/nhl_records/records_goalie_win_streak.json: goalie_win_streak
+  py/nhl_records/records_goalie_shutout_streak.json: goalie_shutout_streak
+  py/nhl_records/records_goalie_win_plateaus.json: goalie_win_plateaus
+  py/nhl_records/records_goalie_playoff_streak.json: goalie_playoff_streak
+  py/nhl_records/records_goalie_undefeated_streak.json: goalie_undefeated_streak
+  py/nhl_records/records_consecutive_100pt_seasons.json: consecutive_100pt_seasons
+  py/nhl_records/records_draft.json: draft
+  py/nhl_records/records_draft_by_team.json: draft_by_team
+  py/nhl_records/records_draft_prospect.json.gz: draft_prospect
+  py/nhl_records/records_draft_lottery_odds.json.gz: draft_lottery_odds
+  py/nhl_records/records_expansion_draft_picks.json: expansion_draft_picks
+  py/nhl_records/records_allstar_skater_career.json: allstar_skater_career
+  py/nhl_records/records_allstar_goalie_career.json: allstar_goalie_career
+  py/nhl_records/records_allstar_coach_career.json: allstar_coach_career
+  py/nhl_records/records_allstar_skater_game.json: allstar_skater_game
+  py/nhl_records/records_allstar_goalie_game.json: allstar_goalie_game
+  py/nhl_records/records_awards.json: awards
+  py/nhl_records/records_awards_trophy_season.json: awards_trophy_season
+  py/nhl_records/records_hof_players.json: hof_players
+  py/nhl_records/records_hof_players_by_office.json: hof_players_by_office
+  py/nhl_records/records_gm_career.json: gm_career
+  py/nhl_records/records_gm_franchise.json: gm_franchise
+  py/nhl_records/records_home_team_record.json: home_team_record
+  py/nhl_records/records_away_team_record.json: away_team_record
+  py/nhl_records/records_attendance.json: attendance
+nhl_stats_rest:
+  py/nhl_stats_rest/stats_rest_season.json.gz: season
+  py/nhl_stats_rest/stats_rest_franchise.json: franchise
+  py/nhl_stats_rest/stats_rest_country.json.gz: country
+  py/nhl_stats_rest/stats_rest_glossary.json.gz: glossary
+  py/nhl_stats_rest/stats_rest_draft.json: draft
+  py/nhl_stats_rest/stats_rest_game.json: game
+  py/nhl_stats_rest/stats_rest_milestones_goalies.json: milestones_goalies
+  py/nhl_stats_rest/stats_rest_milestones_skaters.json: milestones_skaters
+  py/nhl_stats_rest/stats_rest_team.json: team
+  py/nhl_stats_rest/stats_rest_team_by_id.json: team_by_id
+  py/nhl_stats_rest/stats_rest_leaders_goalies.json.gz: leaders_goalies
+  py/nhl_stats_rest/stats_rest_leaders_skaters.json.gz: leaders_skaters
+  py/nhl_stats_rest/stats_rest_shiftcharts.json: shiftcharts
+  py/nhl_stats_rest/stats_rest_skater_summary_2024.json: skater_report
+  py/nhl_stats_rest/stats_rest_goalie_summary_2024.json: goalie_report
+  py/nhl_stats_rest/stats_rest_team_summary_2024.json.gz: team_report
+mlb_statcast:
+  py/mlb_statcast/leaderboard_catcher_stance.csv: leaderboard_catcher_stance
+  py/mlb_statcast/gamefeed.json: gamefeed
+  py/mlb_statcast/schedule.json: schedule
+on3:
+  on3/player_profile.json: player_profile
+  on3/player_all_rankings.json: player_all_rankings
+  on3/team_ranking_team_rankings.json: team_ranking_team_rankings
+asa:
+  asa/teams.json: teams
+  asa/players.json: players
+  asa/games.json: games
+  asa/players_xgoals.json: players_xgoals
+  asa/players_salaries.json: players_salaries
+  asa/players_goals-added.json: players_goals_added
+  asa/teams_goals-added.json: teams_goals_added
+mls_api:
+  mls_api/statsapi_competitions.json: competitions
+  mls_api/statsapi_competitions_seasons.json: competition_seasons
+  mls_api/statsapi_matches_by_season.json: season_matches
+  mls_api/statsapi_standings_conference.json: standings
+  mls_api/statsapi_match_single.json: match
+  mls_api/statsapi_club_single.json: club
+  mls_api/sportapi_match_single.json: sportapi_match
+  mls_api/sportapi_players_byclub.json: sportapi_club_players
+  mls_api/dapi_seasons_query.json: content_seasons
+nwsl_api:
+  nwsl_api/sdp_competitions.json: competitions
+  nwsl_api/sdp_teams.json: teams
+  nwsl_api/sdp_standings_overall.json: standings
+  nwsl_api/sdp_stats_players.json: player_stats
+  nwsl_api/sdp_stats_teams.json: team_stats
+  nwsl_api/sdp_match_lineups.json: match_lineups
+  nwsl_api/sdp_multipleSeasonMatches.json: season_matches
+nba_stats:
+  nba_stats/cap_leaguedashplayerstats_nba.json: leaguedashplayerstats
+  nba_stats/cap_leaguedashplayerstats_gleague.json: leaguedashplayerstats
+  nba_stats/cap_leaguedashplayerstats_summer.json: leaguedashplayerstats
+  nba_stats/cap_playercareerstats_nba.json: playercareerstats
+  nba_stats/scheduleleaguev2_2025_26.json: scheduleleaguev2
+  py/nba_stats/commonteamroster_1610612747_2023_24.json: commonteamroster
+  py/nba_stats/leaguegamelog_team_2023_24.json: leaguegamelog
+  py/nba_stats/leaguestandingsv3_2023_24.json.gz: leaguestandingsv3
+  py/nba_stats/leaguedashptstats_catchshoot_2324.json.gz: leaguedashptstats
+  py/nba_stats/leaguedashptstats_defense_2324.json.gz: leaguedashptstats
+  py/nba_stats/leaguedashptstats_drives_2324.json.gz: leaguedashptstats
+  py/nba_stats/leaguedashptstats_passing_2324.json.gz: leaguedashptstats
+  py/nba_stats/leaguedashptstats_possessions_2324.json.gz: leaguedashptstats
+  py/nba_stats/leaguedashptstats_pullupshot_2324.json.gz: leaguedashptstats
+  py/nba_stats/leaguedashptstats_rebounding_2324.json.gz: leaguedashptstats
+  py/nba_stats/cap_shotlocations_nba.json: leaguedashplayershotlocations
+  py/nba_stats/cap_scoreboardv2_nba.json.gz: scoreboardv2
+  py/nba_stats/cap_scoreboardv3_nba.json: scoreboardv3
+  py/nba_stats/cap_videodetailsasset_nba.json: videodetailsasset
+  py/nba_stats/cap_videoevents_nba.json: videoevents
+  py/nba_stats/cap_videoeventsasset_nba.json: videoeventsasset
+wnba_stats:
+  nba_stats/cap_leaguedashplayerstats_wnba.json: leaguedashplayerstats
+  nba_stats/cap_boxscoretraditionalv3_wnba.json: boxscoretraditionalv3
+  nba_stats/cap_boxscoresummaryv3_wnba.json: boxscoresummaryv3
+  nba_stats/scheduleleaguev2_2026_wnba.json: scheduleleaguev2
+  py/wnba_stats/commonteamroster_1611661319_2023.json: commonteamroster
+  py/wnba_stats/cap_homepagev2_wnba.json: homepagev2
+  py/wnba_stats/cap_playbyplayv2_wnba.json.gz: playbyplayv2
+  py/wnba_stats/cap_playercareerbycollegerollup_wnba.json: playercareerbycollegerollup
+sports247:
+  sports247/sports247_teams_football.json: teams
+  sports247/sports247_institution_rankings_fb_2026.json: institution_rankings
+  sports247/sports247_recruits_fb_2026.json: recruits
+  sports247/sports247_transfers_fb_2026.json: transfers
+  sports247/sports247_coaches_fb_2026.json: coaches
+  sports247/sports247_transfer_portal_player_feed_fb_2026.json: transfer_portal_player_feed
+  sports247/sports247_composite_team_ranking_feed_fb_2026.json: composite_team_ranking_feed
+  sports247/sports247_transfer_portal_only_team_feed_fb_2026.json: transfer_portal_team_feed
+  sports247/sports247_current_target_predictions_fb_2026.json: target_predictions
+  sports247/sports247_sports_year_fb.json: sport_years
+  sports247/sports247_tags_autocomplete.json: tags_autocomplete
+  sports247/sports247_positions_fb_2026.json: positions

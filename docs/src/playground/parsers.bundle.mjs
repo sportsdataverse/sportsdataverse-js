@@ -979,8 +979,95 @@ function csvToRowsRaw(text) {
   if (!Array.isArray(data) || data.length === 0) return [];
   return data;
 }
+var CSV_NA = /* @__PURE__ */ new Set([
+  "",
+  "#N/A",
+  "#N/A N/A",
+  "#NA",
+  "-1.#IND",
+  "-1.#QNAN",
+  "-NaN",
+  "-nan",
+  "1.#IND",
+  "1.#QNAN",
+  "<NA>",
+  "N/A",
+  "NA",
+  "NULL",
+  "NaN",
+  "None",
+  "n/a",
+  "nan",
+  "null"
+]);
+var CSV_INT = /^[+-]?\d+$/;
+var CSV_NUMBER = /^[+-]?((\d+\.?\d*|\.\d+)([eE][+-]?\d+)?|inf|infinity)$/i;
+var CSV_TRUE = /* @__PURE__ */ new Set(["True", "TRUE", "true"]);
+var CSV_BOOL = /* @__PURE__ */ new Set([...CSV_TRUE, "False", "FALSE", "false"]);
+function csvNumber(v) {
+  const t = v.trim();
+  return /inf/i.test(t) ? t.startsWith("-") ? -Infinity : Infinity : Number(t);
+}
+function warn(message) {
+  const proc = globalThis.process;
+  if (proc?.emitWarning) proc.emitWarning(message);
+  else console.warn(message);
+}
+function inferCsvTypes(rows) {
+  const bigint = [];
+  for (const col of rows.length ? Object.keys(rows[0]) : []) {
+    const present = rows.map((r) => r[col]).filter((v) => typeof v === "string" && !CSV_NA.has(v));
+    let conv = null;
+    if (present.length && present.every((v) => CSV_NUMBER.test(v.trim()))) {
+      const big = present.every((v) => CSV_INT.test(v.trim())) && present.some((v) => !Number.isSafeInteger(Number(v.trim())));
+      if (big) bigint.push(col);
+      conv = big ? (v) => BigInt(v.trim()) : csvNumber;
+    } else if (present.length && present.every((v) => CSV_BOOL.has(v))) {
+      conv = (v) => CSV_TRUE.has(v);
+    }
+    for (const r of rows) {
+      const v = r[col];
+      r[col] = typeof v !== "string" || CSV_NA.has(v) ? null : conv ? conv(v) : v;
+    }
+  }
+  if (bigint.length) {
+    warn(`Savant CSV columns [${bigint.join(", ")}] hold integers beyond Number.MAX_SAFE_INTEGER; returned as BigInt.`);
+  }
+  return rows;
+}
+var MLBAM_ID_COLUMNS = [
+  "batter",
+  "pitcher",
+  "on_1b",
+  "on_2b",
+  "on_3b",
+  ...[2, 3, 4, 5, 6, 7, 8, 9].map((i) => `fielder_${i}`),
+  "game_pk"
+];
+function pinIdColumns(rows) {
+  const uncast = [];
+  for (const col of MLBAM_ID_COLUMNS) {
+    if (!rows.some((r) => col in r)) continue;
+    const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== void 0);
+    const asInt = (v) => typeof v === "bigint" ? v : typeof v === "number" ? v : typeof v === "string" && CSV_NUMBER.test(v.trim()) ? csvNumber(v) : NaN;
+    if (!present.every((v) => typeof v === "bigint" || Number.isInteger(asInt(v)))) {
+      uncast.push(col);
+      continue;
+    }
+    for (const r of rows) if (r[col] !== null && r[col] !== void 0) r[col] = asInt(r[col]);
+  }
+  if (uncast.length) {
+    warn(
+      `Savant CSV id columns [${uncast.sort().join(", ")}] hold non-integral or non-numeric values; left as read, not cast to Int64.`
+    );
+  }
+  return rows;
+}
+function typedCsvRows(rows) {
+  return pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row)));
+}
 function csvToRows(text) {
-  return csvToRowsRaw(text).map((row) => underscoreKeys(row));
+  return typedCsvRows(csvToRowsRaw(text));
 }
 function htmlDecodeVar(html, varName) {
   if (!html || typeof html !== "string") return null;
@@ -1050,7 +1137,7 @@ function parse_mlb_statcast_gamefeed(payload) {
   if (rows.length === 0 && Array.isArray(payload.exit_velocity)) {
     rows = payload.exit_velocity;
   }
-  return jsonRows(rows);
+  return pinIdColumns(jsonRows(rows));
 }
 function parse_mlb_statcast_schedule(payload) {
   const sched = isPlainObject8(payload) ? payload.schedule : null;
@@ -1252,7 +1339,7 @@ function parse_sports247_institution_rankings(raw) {
 var INT_RE = /^[+-]?\d+$/;
 var FLOAT_RE = /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/;
 var warnedBigInt = /* @__PURE__ */ new Set();
-function warn(message) {
+function warn2(message) {
   const proc = globalThis.process;
   if (proc?.emitWarning) proc.emitWarning(message);
   else console.warn(message);
@@ -1271,7 +1358,7 @@ function castNumericStrings(rows) {
         present.forEach((r, i) => r[col] = BigInt(values[i]));
         if (!warnedBigInt.has(col)) {
           warnedBigInt.add(col);
-          warn(`sports247_site_pages: column "${col}" holds integers beyond 2^53; kept as BigInt.`);
+          warn2(`sports247_site_pages: column "${col}" holds integers beyond 2^53; kept as BigInt.`);
         }
       }
     } else if (values.every((v) => FLOAT_RE.test(v))) {

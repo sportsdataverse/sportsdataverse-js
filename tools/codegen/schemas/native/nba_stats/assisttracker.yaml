@@ -1,6 +1,0 @@
-columns:
-- description: ''
-  name: assists
-  type: numeric
-kind: dataframe
-schema: assisttracker

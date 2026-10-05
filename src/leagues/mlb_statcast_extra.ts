@@ -8,7 +8,7 @@
 import { statcastGet } from "../core/statcast_runtime.js";
 import {
   csvToRowsRaw,
-  underscoreKeys,
+  typedCsvRows,
   parse_mlb_statcast_player,
 } from "../parsers/mlb_statcast.js";
 
@@ -161,8 +161,8 @@ async function fetchChunk(
     ...translateFilters(filters),
   };
   const text = await statcastGet(baseUrl, { params });
-  // Raw CSV rows (papaparse, original headers) — the tidy `underscore` pass is
-  // applied at the top level only when the caller opts in with `{ parsed: true }`.
+  // Raw CSV rows (papaparse, original headers) — the tidy, typed pass
+  // (`typedCsvRows`) runs on the merged chunks only with `{ parsed: true }`.
   return csvToRowsRaw(typeof text === "string" ? text : "");
 }
 
@@ -241,7 +241,7 @@ export async function mlb_statcast_search(
 ): Promise<Record<string, any>[]> {
   const { playerType, chunkDays, parsed, filters } = splitOptions(opts);
   const rows = await searchCore(startDt, endDt, SEARCH_URL, "mlb_statcast_search", playerType, chunkDays, filters);
-  return parsed ? rows.map(underscoreKeys) : rows;
+  return parsed ? typedCsvRows(rows) : rows;
 }
 
 /**
@@ -264,7 +264,7 @@ export async function mlb_statcast_search_minors(
     chunkDays,
     filters
   );
-  return parsed ? rows.map(underscoreKeys) : rows;
+  return parsed ? typedCsvRows(rows) : rows;
 }
 
 /**
@@ -287,7 +287,7 @@ export async function mlb_statcast_search_wbc(
     chunkDays,
     filters
   );
-  return parsed ? rows.map(underscoreKeys) : rows;
+  return parsed ? typedCsvRows(rows) : rows;
 }
 
 /** Options for {@link mlb_statcast_player}. */
