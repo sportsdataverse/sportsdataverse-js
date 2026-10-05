@@ -269,7 +269,7 @@ describe('parsers/hockeytech: statviewfeed + modulekit shape parsers', () => {
 });
 
 describe('parsers/hockeytech: registry wiring', () => {
-  it('registers all ten hockeytech parsers in PARSERS', () => {
+  it('registers the hockeytech parsers in PARSERS (scorebar alongside schedule)', () => {
     for (const name of [
       'parse_hockeytech_seasons',
       'parse_hockeytech_schedule',
@@ -281,10 +281,18 @@ describe('parsers/hockeytech: registry wiring', () => {
       'parse_hockeytech_leaders',
       'parse_hockeytech_pbp',
       'parse_hockeytech_game_summary',
+      'parse_hockeytech_scorebar',
     ]) {
       (typeof PARSERS[name]).should.equal('function', `missing ${name}`);
       should(parserFor(name)).equal(PARSERS[name]);
     }
+  });
+
+  it('parse_hockeytech_scorebar is the schedule parser under a second name (same SiteKit.Scorebar)', () => {
+    const fx = loadFixture('pwhl_scorebar.jsonp');
+    const rows = parse_hockeytech_scorebar(fx);
+    rows.length.should.be.above(0);
+    rows.should.eql(parse_hockeytech_schedule(fx));
   });
 });
 
@@ -507,6 +515,26 @@ describe('hockeytech: resolveSeasonId (gameType filter + PWHL fallback)', () => 
     (await resolveSeasonId('pwhl', { season: 2025 })).should.equal(5);
     await resolveSeasonId('pwhl', { season: 2019 }).should.be.rejectedWith(/No pwhl season/);
     await resolveSeasonId('echl', { season: 2025 }).should.be.rejectedWith(AssetFetchError);
+  });
+
+  it('PWHL does not fall back on a non-SdvError (a programming error is rethrown, not masked)', async () => {
+    // request() wraps a throwing transport in AssetFetchError, so raise the TypeError from the
+    // response instead: it escapes the fetch unwrapped.
+    configure({
+      retries: 0,
+      transport: {
+        hockeytech: async (req) => ({
+          status: 200,
+          headers: {},
+          url: req.url,
+          get data() {
+            throw new TypeError('boom');
+          },
+        }),
+      },
+    });
+    const err = await resolveSeasonId('pwhl', { season: 2025 }).should.be.rejectedWith(TypeError, { message: 'boom' });
+    err.should.not.be.instanceOf(AssetFetchError);
   });
 });
 
