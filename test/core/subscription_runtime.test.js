@@ -28,6 +28,7 @@ import { accountKey as kenpomAccountKey } from '../../dist/core/kenpom_runtime.j
 import { createHash } from 'node:crypto';
 import { TransportUnavailableError } from '../../dist/core/errors.js';
 import { inspect } from 'node:util';
+import { spawnSync } from 'node:child_process';
 
 // No-network tests for the subscription runtimes (src/core/{pff_api,kenpom,
 // nfl_pro}_runtime.ts): credential precedence, the login flow, error mapping,
@@ -717,6 +718,7 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
         `locator.fill: Timeout 8000ms exceeded.\nCall log:\n  - fill("${value}") on ${kind}\n  - navigated to https://id.nfl.com/x?u=${encodeURIComponent(value)}\n  - form field ${encodeURIComponent(value)}`
       );
       e.stack = `${e.message}\n    at fill (${value})`;
+      e.name = `TimeoutError[${value}]`; // the name is copied onto the scrubbed cause too
       e.log = [value];
       throw e;
     };
@@ -762,7 +764,9 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
           const err = await call().then(() => null, (e) => e);
           err.should.be.instanceOf(NflProAuthError);
           const dumps = [inspect(err, { depth: Infinity, showHidden: true }), JSON.stringify(err), String(err.stack)];
-          for (let c = err.cause; c; c = c.cause) dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack));
+          for (let c = err.cause; c; c = c.cause) {
+            dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack), String(c.name));
+          }
           for (const d of dumps) for (const f of forbidden) d.should.not.containEql(f);
           t.calls.length.should.equal(0);
         }
@@ -792,6 +796,50 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
     (await nflProToken(creds)).should.equal(tokenFor('a@example.com'));
     pw.log.launched.should.equal(2);
     pw.log.closed.should.equal(2);
+  });
+
+  it('the browser-close cap: a hung close still settles the login, a normal close never holds the process', function () {
+    // In a child process, where nothing else keeps the event loop alive: an
+    // unref'd cap let it exit mid-await (no output); an uncleared ref'd cap would
+    // hold it open for the whole cap after a normal close.
+    this.timeout(30000);
+    const runtime = new URL('../../dist/core/nfl_pro_runtime.js', import.meta.url).href;
+    const token = tokenFor('a@example.com');
+    const run = (hangClose, capMs) => {
+      const script = `
+        import { nflProBrowserLogin, _loginLimits } from ${JSON.stringify(runtime)};
+        _loginLimits.closeCapMs = ${capMs};
+        let submitted = false;
+        const locator = (sel) => {
+          const l = {
+            first: () => l,
+            count: async () => (sel.includes('password') && !submitted ? 1 : 0),
+            isVisible: async () => false,
+            fill: async () => {},
+            press: async () => { if (sel.includes('password')) submitted = true; },
+          };
+          return l;
+        };
+        const page = {
+          goto: async () => {},
+          waitForTimeout: async () => {},
+          url: () => 'https://pro.nfl.com/',
+          evaluate: async (fn) => (String(fn).includes('localStorage') ? [${JSON.stringify(token)}] : String(fn).includes('use password') ? false : undefined),
+          locator,
+        };
+        const browser = { newContext: async () => ({ newPage: async () => page }), close: () => (${hangClose} ? new Promise(() => {}) : Promise.resolve()) };
+        const t = await nflProBrowserLogin('a@example.com', 'pw', { playwright: { chromium: { launch: async () => browser } } });
+        console.log(t === ${JSON.stringify(token)} ? 'LOGGED_IN' : 'WRONG_TOKEN');`;
+      const t0 = Date.now();
+      const r = spawnSync(process.execPath, ['--input-type=module', '-e', script], { encoding: 'utf8', timeout: 20000 });
+      return { out: r.stdout.trim(), status: r.status, ms: Date.now() - t0 };
+    };
+    const hung = run(true, 200);
+    hung.out.should.equal('LOGGED_IN');
+    hung.status.should.equal(0);
+    const normal = run(false, 15000);
+    normal.out.should.equal('LOGGED_IN');
+    normal.ms.should.be.below(10000); // not held open for the 15 s cap
   });
 
   it('a 401 on a logged-in token drops it and logs in again exactly once (explicit and env credentials)', async () => {
