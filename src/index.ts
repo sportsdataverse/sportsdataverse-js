@@ -134,6 +134,8 @@ for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
 const cricketWpExports: Record<string, any> = {
   cricket_match_state: cricketWp.cricket_match_state,
   cricket_win_probability: cricketWp.cricket_win_probability,
+  cricket_expected_runs: cricketWp.cricket_expected_runs,
+  cricket_wpa: cricketWp.cricket_wpa,
   cricket_parse_score_string: cricketWp.parse_score_string,
   cricket_get_format: cricketWp.get_format,
 };

@@ -26,6 +26,7 @@ export const FORMAT_TABLE: Record<string, FormatConstants> = {
 
 /** Resolve a format slug (case-insensitive). Throws for "test" (deferred) or unknown. */
 export function get_format(fmt: string): FormatConstants {
+  // Divergence from py: py joins the surface / calibration on the raw slug (KeyError for e.g. "T20"); JS is more lenient and normalises case.
   const key = (fmt ?? '').trim().toLowerCase();
   if (key === 'test') throw new Error('Test cricket deferred');
   if (!Object.prototype.hasOwnProperty.call(FORMAT_TABLE, key)) {
@@ -226,3 +227,60 @@ export const getFormat = get_format;
 export const parseScoreString = parse_score_string;
 export const cricketMatchState = cricket_match_state;
 export const cricketWinProbability = cricket_win_probability;
+
+// ---- expected runs + WPA (port of sdv-py cricket_wpa.py) --------------------
+export interface CricketExpectedRuns extends CricketWinProb {
+  exp_runs_remaining: number;
+  exp_run_rate: number | null;
+}
+
+export interface CricketWpa extends CricketWinProb {
+  win_prob_before: number | null;
+  wpa_batting: number;
+  wpa_bowling: number;
+}
+
+/** Projected runs still to come (proj_final - runs, floored at 0) and per-over rate (null when no overs left). */
+export function cricket_expected_runs(
+  stateWp: Pick<CricketWinProb, 'runs' | 'proj_final' | 'overs_left'>[],
+): (typeof stateWp[number] & { exp_runs_remaining: number; exp_run_rate: number | null })[] {
+  return stateWp.map((s) => {
+    const exp_runs_remaining = Math.max(0.0, s.proj_final - s.runs);
+    const exp_run_rate = s.overs_left > 0 ? exp_runs_remaining / s.overs_left : null;
+    return { ...s, exp_runs_remaining, exp_run_rate };
+  });
+}
+
+function cmpNullFirst(a: any, b: any): number {
+  if (a === b) return 0;
+  if (a === null || a === undefined) return -1;
+  if (b === null || b === undefined) return 1;
+  return a < b ? -1 : 1;
+}
+
+/**
+ * Batting/bowling win-probability added: wpa_batting = win_prob - previous
+ * win_prob within the same (event_id, innings_number) (0 for the first state),
+ * wpa_bowling = -wpa_batting. Rows are returned sorted by
+ * event_id, innings_number, balls_bowled (stable; polars' sort is unspecified on ties).
+ */
+export function cricket_wpa(
+  stateWp: Pick<CricketWinProb, 'event_id' | 'innings_number' | 'balls_bowled' | 'win_prob'>[],
+): (typeof stateWp[number] & { win_prob_before: number | null; wpa_batting: number; wpa_bowling: number })[] {
+  const sorted = [...stateWp].sort(
+    (a, b) =>
+      cmpNullFirst(a.event_id, b.event_id) ||
+      cmpNullFirst(a.innings_number, b.innings_number) ||
+      cmpNullFirst(a.balls_bowled, b.balls_bowled),
+  );
+  return sorted.map((s, i) => {
+    const prev = i > 0 ? sorted[i - 1] : null;
+    const same = prev !== null && prev.event_id === s.event_id && prev.innings_number === s.innings_number;
+    const win_prob_before = same ? prev!.win_prob : null;
+    const wpa_batting = win_prob_before === null ? 0.0 : s.win_prob - win_prob_before;
+    return { ...s, win_prob_before, wpa_batting, wpa_bowling: -wpa_batting };
+  });
+}
+
+export const cricketExpectedRuns = cricket_expected_runs;
+export const cricketWpa = cricket_wpa;

@@ -9,6 +9,8 @@ import {
   parse_score_string,
   get_format,
   norm_cdf,
+  cricket_expected_runs,
+  cricket_wpa,
 } from '../../dist/models/cricket_wp.js';
 
 const fx = (f) =>
@@ -86,7 +88,50 @@ describe('models/cricket_wp (parity with sdv-py 719de79)', () => {
   it('is exposed on sdv.cricket (snake + camel) and throws for test cricket', () => {
     sdv.cricket.cricket_win_probability.should.equal(cricket_win_probability);
     sdv.cricket.cricketMatchState.should.equal(cricket_match_state);
+    sdv.cricket.cricket_wpa.should.equal(cricket_wpa);
+    sdv.cricket.cricketWpa.should.equal(cricket_wpa);
+    sdv.cricket.cricketExpectedRuns.should.equal(cricket_expected_runs);
     (() => cricket_match_state({}, { fmt: 'test' })).should.throw(/deferred/);
     cricket_win_probability([]).should.eql([]);
+  });
+
+  describe('expected runs + WPA (py cricket_wpa.py)', () => {
+    const { state, wp, expected_runs, wpa } = oracle.wpa;
+    const near = (a, b, l) => {
+      if (b === null) return should(a).be.null();
+      if (!(Math.abs(a - b) <= TOL)) throw new Error(`${l}: js=${a} py=${b}`);
+    };
+
+    it('win-prob chain on the shuffled real WPA-holdout matches py', () => {
+      checkRows(cricket_win_probability(state), wp, 'wpa-wp');
+    });
+
+    it('cricket_expected_runs equals py (floor at 0, null rate when no overs left)', () => {
+      const got = cricket_expected_runs(cricket_win_probability(state));
+      got.length.should.equal(expected_runs.length);
+      got.forEach((g, i) => {
+        near(g.exp_runs_remaining, expected_runs[i].exp_runs_remaining, `er[${i}]`);
+        near(g.exp_run_rate, expected_runs[i].exp_run_rate, `rate[${i}]`);
+      });
+      got.some((g) => g.exp_run_rate === null).should.be.true();
+    });
+
+    it('cricket_wpa equals py (sorted, per-innings lead, first state 0, bowling = -batting)', () => {
+      const got = cricket_wpa(cricket_win_probability(state));
+      got.length.should.equal(wpa.length);
+      got.forEach((g, i) => {
+        g.event_id.should.equal(wpa[i].event_id);
+        g.balls_bowled.should.equal(wpa[i].balls_bowled);
+        near(g.win_prob_before, wpa[i].win_prob_before, `before[${i}]`);
+        near(g.wpa_batting, wpa[i].wpa_batting, `wpa[${i}]`);
+        near(g.wpa_bowling, wpa[i].wpa_bowling, `wpab[${i}]`);
+      });
+      got.filter((g) => g.win_prob_before === null).length.should.be.above(10);
+    });
+
+    it('empty inputs return empty arrays', () => {
+      cricket_expected_runs([]).should.eql([]);
+      cricket_wpa([]).should.eql([]);
+    });
   });
 });
