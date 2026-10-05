@@ -28,3 +28,6 @@ tools/codegen/vendor/upstream/** -text
 # Verbatim sdv-py captures for the parser-parity harness (test/fixtures/py/README.md):
 # never EOL-normalize, so each file stays byte-identical to its sdv-py blob.
 test/fixtures/py/** -text
+
+# Parquet fixtures (test/fixtures/releases) are binary.
+*.parquet binary

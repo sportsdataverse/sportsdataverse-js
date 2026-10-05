@@ -83,3 +83,19 @@ await sdv.nfl.nflStandings({ season: 2024, seasonType: 'REG', week: 1 });
 :::note v4 names
 Since v4 every wrapper carries sdv-py's name (`athlete` → `player`, `event` → `game`, …). Pre-v4 names still work as deprecated aliases (one `DeprecationWarning` per name) — see [Deprecated names](./deprecations).
 :::
+
+## Dataset loaders
+
+`load*` functions read the published SportsDataverse release assets (parquet) — play-by-play with EPA/WP, schedules, rosters, box scores, ratings, player value — the way sportsdataverse-py's `load_*` functions do. Node only.
+
+| Namespace | loaders |
+|---|---:|
+| [cfb](../cfb/reference/loaders.md) | 71 |
+| [mbb](../mbb/reference/loaders.md) | 34 |
+| [mlb](../mlb/reference/loaders.md) | 32 |
+| [nba](../nba/reference/loaders.md) | 41 |
+| [nfl](../nfl/reference/loaders.md) | 29 |
+| [nhl](../nhl/reference/loaders.md) | 27 |
+| [pwhl](../pwhl/reference/loaders.md) | 21 |
+| [wbb](../wbb/reference/loaders.md) | 34 |
+| [wnba](../wnba/reference/loaders.md) | 34 |
