@@ -109,9 +109,42 @@ export function csvToRowsRaw(text: any): Record<string, any>[] {
   return data;
 }
 
-/** `csvToRowsRaw` + the `underscore` key transform (the tidy form). */
+// pandas.read_csv's default NA strings (pandas STR_NA_VALUES): such a cell is missing.
+const CSV_NA = new Set([
+  "", "#N/A", "#N/A N/A", "#NA", "-1.#IND", "-1.#QNAN", "-NaN", "-nan", "1.#IND",
+  "1.#QNAN", "<NA>", "N/A", "NA", "NULL", "NaN", "None", "n/a", "nan", "null",
+]);
+const CSV_NUMBER = /^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/;
+const CSV_TRUE = new Set(["True", "TRUE", "true"]);
+const CSV_BOOL = new Set([...CSV_TRUE, "False", "FALSE", "false"]);
+
+/**
+ * pandas.read_csv's per-column dtype inference (what sdv-py's `_csv_to_frame`
+ * reads Savant CSVs with), in place: an NA cell becomes `null`; a column whose
+ * every other cell is numeric becomes numbers, one of only True/False cells
+ * booleans; anything else stays text.
+ */
+function inferCsvTypes(rows: Record<string, any>[]): Record<string, any>[] {
+  for (const col of rows.length ? Object.keys(rows[0]) : []) {
+    const present = rows.map((r) => r[col]).filter((v) => typeof v === "string" && !CSV_NA.has(v));
+    const conv = !present.length
+      ? null
+      : present.every((v) => CSV_NUMBER.test(v.trim()))
+        ? (v: string) => Number(v)
+        : present.every((v) => CSV_BOOL.has(v))
+          ? (v: string) => CSV_TRUE.has(v)
+          : null;
+    for (const r of rows) {
+      const v = r[col];
+      r[col] = typeof v !== "string" || CSV_NA.has(v) ? null : conv ? conv(v) : v;
+    }
+  }
+  return rows;
+}
+
+/** `csvToRowsRaw` + pandas-style column typing + the `underscore` key transform (the tidy form). */
 function csvToRows(text: any): Record<string, any>[] {
-  return csvToRowsRaw(text).map((row) => underscoreKeys(row));
+  return inferCsvTypes(csvToRowsRaw(text)).map((row) => underscoreKeys(row));
 }
 
 /**

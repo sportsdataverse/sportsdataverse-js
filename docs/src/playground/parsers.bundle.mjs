@@ -979,8 +979,43 @@ function csvToRowsRaw(text) {
   if (!Array.isArray(data) || data.length === 0) return [];
   return data;
 }
+var CSV_NA = /* @__PURE__ */ new Set([
+  "",
+  "#N/A",
+  "#N/A N/A",
+  "#NA",
+  "-1.#IND",
+  "-1.#QNAN",
+  "-NaN",
+  "-nan",
+  "1.#IND",
+  "1.#QNAN",
+  "<NA>",
+  "N/A",
+  "NA",
+  "NULL",
+  "NaN",
+  "None",
+  "n/a",
+  "nan",
+  "null"
+]);
+var CSV_NUMBER = /^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/;
+var CSV_TRUE = /* @__PURE__ */ new Set(["True", "TRUE", "true"]);
+var CSV_BOOL = /* @__PURE__ */ new Set([...CSV_TRUE, "False", "FALSE", "false"]);
+function inferCsvTypes(rows) {
+  for (const col of rows.length ? Object.keys(rows[0]) : []) {
+    const present = rows.map((r) => r[col]).filter((v) => typeof v === "string" && !CSV_NA.has(v));
+    const conv = !present.length ? null : present.every((v) => CSV_NUMBER.test(v.trim())) ? (v) => Number(v) : present.every((v) => CSV_BOOL.has(v)) ? (v) => CSV_TRUE.has(v) : null;
+    for (const r of rows) {
+      const v = r[col];
+      r[col] = typeof v !== "string" || CSV_NA.has(v) ? null : conv ? conv(v) : v;
+    }
+  }
+  return rows;
+}
 function csvToRows(text) {
-  return csvToRowsRaw(text).map((row) => underscoreKeys(row));
+  return inferCsvTypes(csvToRowsRaw(text)).map((row) => underscoreKeys(row));
 }
 function htmlDecodeVar(html, varName) {
   if (!html || typeof html !== "string") return null;

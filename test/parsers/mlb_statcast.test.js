@@ -34,9 +34,10 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
     // first column header is preserved verbatim (comma + space), matching the
     // Python parser which does NOT collapse it to last_name_first_name.
     rows[0].should.have.property('last_name, first_name', 'Judge, Aaron');
-    rows[0].should.have.property('player_id', '592450'); // dynamicTyping:false -> string
-    rows[0].should.have.property('xw_oba', '0.458'); // xwOBA -> xw_oba (underscore)
-    rows[0].should.have.property('attempts', '540');
+    // numeric columns are numbers, as pandas.read_csv types them in sdv-py
+    rows[0].should.have.property('player_id', 592450);
+    rows[0].should.have.property('xw_oba', 0.458); // xwOBA -> xw_oba (underscore)
+    rows[0].should.have.property('attempts', 540);
     rows[1].should.have.property('last_name, first_name', 'Ohtani, Shohei');
   });
 
@@ -52,8 +53,17 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
     const rows = parse_mlb_statcast_search(csv);
     rows.length.should.equal(2);
     rows[0].should.have.property('pitch_type', 'FF');
-    rows[0].should.have.property('release_speed', '95.2');
-    rows[1].should.have.property('launch_speed', '92.0');
+    rows[0].should.have.property('release_speed', 95.2);
+    rows[1].should.have.property('launch_speed', 92);
+  });
+
+  it('types CSV columns the way pandas.read_csv does (NA cells null; numeric / bool columns)', () => {
+    const csv = 'id,name,flag,pct,note\n1,A,True,0.5,\n2,,False,NA,x\n3,C,true,,NaN';
+    parse_mlb_statcast_leaderboard(csv).should.eql([
+      { id: 1, name: 'A', flag: true, pct: 0.5, note: null },
+      { id: 2, name: null, flag: false, pct: null, note: 'x' },
+      { id: 3, name: 'C', flag: true, pct: null, note: null },
+    ]);
   });
 
   it('csvToRowsRaw keeps original headers; underscoreKeys applies the tidy pass', () => {
