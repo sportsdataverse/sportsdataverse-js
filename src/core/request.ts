@@ -122,11 +122,22 @@ export async function requestResponse(
       continue;
     }
     if (status >= 200 && status < 300) {
-      if (ESPN_FAMILIES.has(family) && isEspnCode404(res.data)) {
-        throw new NoDataError(`${family}: no data (ESPN code 404): ${req.url}`, {
-          ...where,
-          status,
-        });
+      if (ESPN_FAMILIES.has(family)) {
+        // ESPN's are JSON APIs: a 2xx whose body is not a JSON object / array (an
+        // HTML bot-challenge page, e.g. the CDN's HTTP 202 to some User-Agents, or
+        // an empty body) is a failed fetch, never an empty result.
+        if (typeof res.data !== "object" || res.data === null) {
+          throw new AssetFetchError(
+            `${family}: HTTP ${status} with a non-JSON body (a bot challenge or error page?): ${req.url}`,
+            { ...where, status }
+          );
+        }
+        if (isEspnCode404(res.data)) {
+          throw new NoDataError(`${family}: no data (ESPN code 404): ${req.url}`, {
+            ...where,
+            status,
+          });
+        }
       }
       return res;
     }
