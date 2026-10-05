@@ -52,6 +52,8 @@ const FLAT_API_FILES = [
   "asa",
   "mls_api",
   "nwsl_api",
+  "nba_stats",
+  "wnba_stats",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -89,7 +91,14 @@ const FLAT_API_NAMESPACES = {
   // Official MLS / NWSL league APIs merge onto the league namespaces.
   mls_api: "mls",
   nwsl_api: "nwsl",
+  // stats.nba.com / stats.wnba.com — merge onto the league namespaces
+  // (sdv.nba.nba_stats_*, sdv.wnba.wnba_stats_*). TLS-impersonation transport.
+  nba_stats: "nba",
+  wnba_stats: "wnba",
 };
+
+// Flat families excluded from the docs playground (see renderEndpointsJson).
+const NO_PLAYGROUND_FAMILIES = new Set(["nba_stats", "wnba_stats"]);
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
 // section heading + intro line on the league reference page.
@@ -155,6 +164,16 @@ const FLAT_API_META = {
     source: "barttorvik.com (T-Rank college basketball analytics)",
     // Sport-specific standalone family: nests under the Basketball sport group.
     sport: "basketball",
+  },
+  nba_stats: {
+    label: "NBA Stats API (stats.nba.com)",
+    source:
+      "stats.nba.com (needs a TLS-impersonating transport and a residential IP)",
+  },
+  wnba_stats: {
+    label: "WNBA Stats API (stats.wnba.com)",
+    source:
+      "stats.wnba.com (needs a TLS-impersonating transport and a residential IP)",
   },
 };
 
@@ -582,8 +601,17 @@ function flatWrappersForLeague(prefix, flatWrappers) {
 }
 
 /** Render the parser cell for a flat wrapper (raw JSON passthrough when none). */
+// Multi-table flat parsers (default sub-frame + valid `section` names), from
+// endpoints/flat_parser_sections.yaml; a test keeps it equal to the runtime.
+const FLAT_PARSER_SECTIONS =
+  parse(readFileSync(join(endpointsDir, "flat_parser_sections.yaml"), "utf8"))?.parsers ?? {};
+
 function flatParserCell(wrapper) {
-  return wrapper.parser ? `\`${wrapper.parser}\`` : "*(raw)*";
+  if (!wrapper.parser) return "*(raw)*";
+  const spec = FLAT_PARSER_SECTIONS[wrapper.parser];
+  if (!spec) return `\`${wrapper.parser}\``;
+  const names = spec.sections.map((s) => (s === spec.default ? `\`${s}\` (default)` : `\`${s}\``));
+  return `\`${wrapper.parser}\` — multi-table: \`section\` = ${names.join(", ")}`;
 }
 
 // In-process cache so each `returns_schema` YAML is read + parsed at most once.
@@ -670,6 +698,12 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
     `py/R parity) and \`${toCamel(api)}<Endpoint>\` (camelCase canonical) on ` +
     `\`sdv.${nsPrefix}\`. Pass \`{ parsed: true }\` to run the payload ` +
     `through its tidy.js parser; omit it for the raw response.`;
+  if (rows.some((w) => FLAT_PARSER_SECTIONS[w.parser])) {
+    body +=
+      ` Endpoints marked **multi-table** parse to several frames in sdv-py; with ` +
+      `\`parsed: true\` they return the default sub-frame shown in the Parser column, ` +
+      `and \`section: "<name>"\` selects any other (an unknown name throws, listing the valid ones).`;
+  }
   if (authed) {
     body +=
       ` **Auth:** this family mints a bearer token automatically before ` +
@@ -1508,6 +1542,14 @@ function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
 // ---------------------------------------------------------------------------
 
 function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) {
+  // Families that must NEVER be reachable through the docs playground's
+  // /api/run proxy (its host allowlist derives from `flatHosts`): stats.nba.com
+  // / stats.wnba.com need TLS impersonation and a residential IP, so a
+  // serverless fetch would only hang. Dropped from the playground metadata.
+  flatWrappers = flatWrappers.filter((w) => !NO_PLAYGROUND_FAMILIES.has(w.api));
+  flatHosts = Object.fromEntries(
+    Object.entries(flatHosts).filter(([api]) => !NO_PLAYGROUND_FAMILIES.has(api))
+  );
   return (
     JSON.stringify(
       {

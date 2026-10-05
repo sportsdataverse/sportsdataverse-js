@@ -34,7 +34,11 @@ const fx = (...p) => JSON.parse(readFileSync(join(here, '..', 'fixtures', ...p),
 
 // py frames are polars; object-dtype columns that py stringified compare by
 // string form, everything else numerically.
-function same(a, b) {
+function same(a, b, col) {
+  // Id columns are join keys: strict. Same string, same case, no numeric coercion.
+  if (col && (col === 'id' || /_ids?$/.test(col)) && a !== null && a !== undefined && b !== null && b !== undefined) {
+    return typeof a === 'string' && typeof b === 'string' && a === b;
+  }
   // py stringifies a missing value in a mixed object column to "nan"; JS keeps null.
   if (b === 'nan' && (a === null || a === undefined)) return true;
   if (a === null || a === undefined || b === null || b === undefined) {
@@ -52,7 +56,7 @@ function assertParity(js, py, label) {
   Object.keys(js[0]).should.eql(py.columns, `${label}: columns`);
   js.forEach((row, i) => {
     for (const c of py.columns) {
-      same(row[c], py.rows[i][c]).should.equal(
+      same(row[c], py.rows[i][c], c).should.equal(
         true,
         `${label}[${i}].${c}: js=${JSON.stringify(row[c])} py=${JSON.stringify(py.rows[i][c])}`
       );
@@ -61,7 +65,10 @@ function assertParity(js, py, label) {
 }
 
 const flat = (fn) => (body) => ({ js: fn(body), py: (o) => o });
-const sub = (fn, name) => (body) => ({ js: fn(body)[name], py: (o) => o[name] });
+// A multi-table parser through its public single-frame form: no section = the default
+// (which is also the frame sdv-py's returns schema documents), else `section`.
+const sec = (fn, name) => (body) => ({ js: fn(body, name), py: (o) => o[name] });
+const dflt = (fn, name) => (body) => ({ js: fn(body), py: (o) => o[name] });
 
 function suite(dir, cases) {
   const oracle = fx(dir, 'py_oracle.json');
@@ -85,15 +92,22 @@ suite('on3', [
 ]);
 suite('asa', [
   ...['teams', 'players', 'games', 'players_xgoals', 'players_salaries'].map((f) => [`parse_asa:${f}`, f, flat(parse_asa)]),
-  ['parse_asa_goals_added:players_goals-added', 'players_goals-added', sub(parse_asa_goals_added_tables, 'actions')],
-  ['parse_asa_goals_added:teams_goals-added', 'teams_goals-added', sub(parse_asa_goals_added_tables, 'actions')],
+  ['parse_asa_goals_added:players_goals-added', 'players_goals-added', dflt(parse_asa_goals_added, 'summary')],
+  ['parse_asa_goals_added:players_goals-added', 'players_goals-added', sec(parse_asa_goals_added, 'summary')],
+  ['parse_asa_goals_added:players_goals-added', 'players_goals-added', sec(parse_asa_goals_added, 'actions')],
+  ['parse_asa_goals_added:teams_goals-added', 'teams_goals-added', dflt(parse_asa_goals_added, 'summary')],
+  ['parse_asa_goals_added:teams_goals-added', 'teams_goals-added', sec(parse_asa_goals_added, 'actions')],
 ]);
 suite('mls_api', [
   ['parse_mls_api:statsapi_competitions', 'statsapi_competitions', flat(parse_mls_api)],
   ['parse_mls_api:statsapi_competitions_seasons', 'statsapi_competitions_seasons', flat(parse_mls_api)],
   ['parse_mls_api:statsapi_matches_by_season', 'statsapi_matches_by_season', flat(parse_mls_api)],
-  ['parse_mls_standings:statsapi_standings_conference', 'statsapi_standings_conference', sub(parse_mls_standings_tables, 'entries')],
-  ['parse_mls_match:statsapi_match_single', 'statsapi_match_single', sub(parse_mls_match_tables, 'match_information')],
+  ['parse_mls_standings:statsapi_standings_conference', 'statsapi_standings_conference', dflt(parse_mls_standings, 'entries')],
+  ['parse_mls_standings:statsapi_standings_conference', 'statsapi_standings_conference', sec(parse_mls_standings, 'tables')],
+  ['parse_mls_match:statsapi_match_single', 'statsapi_match_single', dflt(parse_mls_match, 'match_information')],
+  ...['match_information', 'environment', 'teams', 'players', 'staff', 'referees', 'last_matches'].map((n) => [
+    'parse_mls_match:statsapi_match_single', 'statsapi_match_single', sec(parse_mls_match, n),
+  ]),
   ['parse_mls_entity:statsapi_club_single', 'statsapi_club_single', flat(parse_mls_entity)],
   ['parse_mls_entity:sportapi_match_single', 'sportapi_match_single', flat(parse_mls_entity)],
   ['parse_mls_api:sportapi_players_byclub', 'sportapi_players_byclub', flat(parse_mls_api)],
@@ -106,21 +120,62 @@ suite('nwsl_api', [
   ['parse_nwsl_standings:sdp_standings_overall', 'sdp_standings_overall', flat(parse_nwsl_standings)],
   ['parse_nwsl_stats:sdp_stats_players', 'sdp_stats_players', flat(parse_nwsl_stats)],
   ['parse_nwsl_stats:sdp_stats_teams', 'sdp_stats_teams', flat(parse_nwsl_stats)],
-  ['parse_nwsl_lineups:sdp_match_lineups', 'sdp_match_lineups', sub(parse_nwsl_lineups_tables, 'players')],
+  ['parse_nwsl_lineups:sdp_match_lineups', 'sdp_match_lineups', dflt(parse_nwsl_lineups, 'players')],
+  ...['teams', 'players', 'staff'].map((n) => [
+    'parse_nwsl_lineups:sdp_match_lineups', 'sdp_match_lineups', sec(parse_nwsl_lineups, n),
+  ]),
   ['parse_nwsl_sdp:sdp_multipleSeasonMatches', 'sdp_multipleSeasonMatches', flat(parse_nwsl_sdp)],
 ]);
 
 describe('single-frame parsers return the sub-frame the returns schema documents', () => {
-  it('standings -> entries, match -> match_information, lineups -> players, goals-added -> actions', () => {
+  it('defaults are the frames sdv-py documents: asa summary, mls entries / match_information, nwsl players', () => {
+    const g = fx('asa', 'players_goals-added.json');
+    parse_asa_goals_added(g).should.eql(parse_asa_goals_added_tables(g).summary);
+    parse_asa_goals_added(g, 'actions').should.eql(parse_asa_goals_added_tables(g).actions);
+    parse_asa_goals_added(g).length.should.equal(g.length);
     const st = fx('mls_api', 'statsapi_standings_conference.json');
     parse_mls_standings(st).should.eql(parse_mls_standings_tables(st).entries);
     const m = fx('mls_api', 'statsapi_match_single.json');
     parse_mls_match(m).should.eql(parse_mls_match_tables(m).match_information);
     const l = fx('nwsl_api', 'sdp_match_lineups.json');
     parse_nwsl_lineups(l).should.eql(parse_nwsl_lineups_tables(l).players);
-    const g = fx('asa', 'players_goals-added.json');
-    parse_asa_goals_added(g).should.eql(parse_asa_goals_added_tables(g).actions);
-    parse_asa_goals_added_tables(g).summary.length.should.equal(g.length);
+  });
+  it('an unknown section throws, naming the valid ones', () => {
+    const cases = [
+      [parse_asa_goals_added, fx('asa', 'players_goals-added.json')],
+      [parse_mls_standings, fx('mls_api', 'statsapi_standings_conference.json')],
+      [parse_mls_match, fx('mls_api', 'statsapi_match_single.json')],
+      [parse_nwsl_lineups, fx('nwsl_api', 'sdp_match_lineups.json')],
+    ];
+    for (const [fn, body] of cases) {
+      (() => fn(body, 'nope')).should.throw(/unknown section 'nope'.*Choose one of \[/);
+    }
+    // the message lists every valid name
+    (() => parse_mls_match({}, 'nope')).should.throw(/last_matches/);
+  });
+  it('MULTI_TABLE_SECTIONS == the codegen metadata == the keys the _tables functions return', async () => {
+    const { MULTI_TABLE_SECTIONS } = await import('../../dist/parsers/_frames.js');
+    const yaml = (await import('yaml')).parse(
+      readFileSync(join(here, '..', '..', 'tools', 'codegen', 'endpoints', 'flat_parser_sections.yaml'), 'utf8')
+    ).parsers;
+    yaml.should.eql(MULTI_TABLE_SECTIONS);
+    const tables = {
+      parse_asa_goals_added: parse_asa_goals_added_tables(fx('asa', 'players_goals-added.json')),
+      parse_mls_standings: parse_mls_standings_tables(fx('mls_api', 'statsapi_standings_conference.json')),
+      parse_mls_match: parse_mls_match_tables(fx('mls_api', 'statsapi_match_single.json')),
+      parse_nwsl_lineups: parse_nwsl_lineups_tables(fx('nwsl_api', 'sdp_match_lineups.json')),
+    };
+    for (const [name, spec] of Object.entries(MULTI_TABLE_SECTIONS)) {
+      Object.keys(tables[name]).should.eql(spec.sections, name);
+      spec.sections.should.containEql(spec.default);
+    }
+  });
+  it('the parse_*_tables functions are importable from the built package entry (sportsdataverse/parsers)', async () => {
+    const pkg = await import('sportsdataverse/parsers');
+    for (const n of ['parse_asa_goals_added_tables', 'parse_mls_standings_tables', 'parse_mls_match_tables', 'parse_nwsl_lineups_tables']) {
+      (typeof pkg[n]).should.equal('function', n);
+    }
+    Object.keys(pkg.parse_mls_match_tables(fx('mls_api', 'statsapi_match_single.json'))).should.have.length(7);
   });
   it('ids stay strings (NWSL composite ids, ASA base62, MLS Sportec)', () => {
     parse_nwsl_sdp(fx('nwsl_api', 'sdp_teams.json'))[0].team_id.should.match(/^nwsl::Football_Team::/);

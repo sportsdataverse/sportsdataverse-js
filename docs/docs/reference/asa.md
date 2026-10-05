@@ -24,23 +24,23 @@ await sdv.asa.asa_teams({ league_slug: 'mls', parsed: true });
 
 ## Native API — American Soccer Analysis
 
-Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `https://app.americansocceranalysis.com/api/v1`. Each method is exposed under BOTH `asa_<endpoint>` (snake_case, py/R parity) and `asa<Endpoint>` (camelCase canonical) on `sdv.asa`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `https://app.americansocceranalysis.com/api/v1`. Each method is exposed under BOTH `asa_<endpoint>` (snake_case, py/R parity) and `asa<Endpoint>` (camelCase canonical) on `sdv.asa`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
 | `asa_games` / `asaGames` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/games` | `league_slug`\* | — | `parse_asa` | — |
 | `asa_games_xgoals` / `asaGamesXgoals` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/games/xgoals` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
-| `asa_goalkeepers_goals_added` / `asaGoalkeepersGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` | — |
+| `asa_goalkeepers_goals_added` / `asaGoalkeepersGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` — multi-table: `section` = `summary` (default), `actions` | — |
 | `asa_goalkeepers_xgoals` / `asaGoalkeepersXgoals` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/goalkeepers/xgoals` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 | `asa_managers` / `asaManagers` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/managers` | `league_slug`\* | — | `parse_asa` | — |
 | `asa_players` / `asaPlayers` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players` | `league_slug`\* | — | `parse_asa` | — |
-| `asa_players_goals_added` / `asaPlayersGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` | — |
+| `asa_players_goals_added` / `asaPlayersGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` — multi-table: `section` = `summary` (default), `actions` | — |
 | `asa_players_salaries` / `asaPlayersSalaries` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/salaries` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 | `asa_players_xgoals` / `asaPlayersXgoals` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/players/xgoals` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 | `asa_referees` / `asaReferees` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/referees` | `league_slug`\* | — | `parse_asa` | — |
 | `asa_stadia` / `asaStadia` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/stadia` | `league_slug`\* | — | `parse_asa` | — |
 | `asa_teams` / `asaTeams` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/teams` | `league_slug`\* | — | `parse_asa` | — |
-| `asa_teams_goals_added` / `asaTeamsGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` | — |
+| `asa_teams_goals_added` / `asaTeamsGoalsAdded` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/goals-added` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa_goals_added` — multi-table: `section` = `summary` (default), `actions` | — |
 | `asa_teams_xgoals` / `asaTeamsXgoals` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/xgoals` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 | `asa_teams_xpass` / `asaTeamsXpass` | `https://app.americansocceranalysis.com/api/v1/{league_slug}/teams/xpass` | `league_slug`\* | `season_name`, `stage_name`, `minimum_minutes`, `general_position`, `split_by_teams`, `split_by_seasons`, `split_by_games`, `start_date`, `end_date` | `parse_asa` | — |
 
@@ -87,6 +87,14 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 | `home_xpoints` | numeric | Home expected points from the match. |
 | `away_xpoints` | numeric | Away expected points from the match. |
 
+### Returns — `asa_goalkeepers_goals_added` / `asaGoalkeepersGoalsAdded`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | character | ASA player id (base62 string; Utf8 join key). |
+| `team_id` | character | ASA team id (base62 string; Utf8 join key, never numeric). |
+| `minutes_played` | integer | Minutes played in the filtered window. |
+
 ### Returns — `asa_goalkeepers_xgoals` / `asaGoalkeepersXgoals`
 
 | col_name | type | description |
@@ -125,6 +133,15 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 | `primary_general_position` | character | General position code (GK/CB/FB/DM/CM/AM/W/ST). |
 | `season_name` | character | Season(s) the player appears in; may serialize as a scalar, a list, or an object across the leagues. |
 | `secondary_general_position` | character | Secondary general position code (nullable). |
+
+### Returns — `asa_players_goals_added` / `asaPlayersGoalsAdded`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | character | ASA player id (base62 string; Utf8 join key). |
+| `team_id` | character | ASA team id (base62 string; Utf8 join key, never numeric). |
+| `general_position` | character | General position code (GK/CB/FB/DM/CM/AM/W/ST). |
+| `minutes_played` | integer | Minutes played in the filtered window. |
 
 ### Returns — `asa_players_salaries` / `asaPlayersSalaries`
 
@@ -198,6 +215,13 @@ Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `htt
 | `team_name` | character | Full club name. |
 | `team_short_name` | character | Short club name. |
 | `team_abbreviation` | character | Short (2-4 char) club abbreviation. |
+
+### Returns — `asa_teams_goals_added` / `asaTeamsGoalsAdded`
+
+| col_name | type | description |
+|---|---|---|
+| `team_id` | character | ASA team id (base62 string; Utf8 join key, never numeric). |
+| `minutes` | integer | Team minutes in the window. |
 
 ### Returns — `asa_teams_xgoals` / `asaTeamsXgoals`
 

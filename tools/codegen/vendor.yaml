@@ -62,20 +62,19 @@ families:
     # (the 4 deprecated _next/data scrape shims are not in the YAML and not ported).
     schema_compatible: true
   asa:
-    # src/parsers/asa.ts: faithful port of sdv-py soccer/asa_parsers.py
+    # src/parsers/asa.ts: faithful port of sdv-py soccer/asa_parsers.py. The
+    # multi-table goals-added parser returns py's documented default sub-frame
+    # (`summary`) under `parsed: true`; `section: "actions"` selects the other.
     schema_compatible: true
-    parsers:
-      # JS returns the long per-action frame (the useful half); py documents its
-      # id-only `summary` frame, so py's schema does not describe the JS output.
-      parse_asa_goals_added: {js: parse_asa_goals_added, schema_compatible: false}
   mls_api:
     # src/parsers/mls_api.ts: faithful port of sdv-py soccer/mls/mls_api_parsers.py.
-    # A multi-table parser returns the one sub-frame py's schema documents
-    # (standings -> entries, match -> match_information).
+    # A multi-table parser returns the sub-frame py's schema documents by default
+    # (standings -> entries, match -> match_information); `section` selects the others.
     schema_compatible: true
   nwsl_api:
     # src/parsers/nwsl_api.ts: faithful port of sdv-py soccer/nwsl/nwsl_api_parsers.py;
-    # lineups returns the `players` sub-frame py's schema documents.
+    # lineups returns the `players` sub-frame py's schema documents by default
+    # (`section`: teams | staff for the others).
     schema_compatible: true
   bart_wbb:
     # Women's T-Rank: the same header-CSV parse as men's, run through JS's
@@ -200,3 +199,13 @@ families:
       editorial_scoreboard: parse_yahoo_scores_scoreboard
     schemas:
       native/yahoo_shangrila/: native/yahoo/
+  nba_stats:
+    # src/parsers/nba_stats.ts: "Faithful port of" sdv-py's nba/nba_stats_parsers.py
+    # (parse_nba_stats_result_sets: resultSets / resultSet / shot-location grouped
+    # headers / scoreboardv3 / scheduleleaguev2 / boxscore *v3 / video envelopes).
+    schema_compatible: true
+  wnba_stats:
+    # sdv-py's parse_wnba_stats_result_sets is a re-export alias of the NBA parser,
+    # so the WNBA family runs the same ported JS parser.
+    parsers:
+      parse_wnba_stats_result_sets: {js: parse_nba_stats_result_sets, schema_compatible: true}

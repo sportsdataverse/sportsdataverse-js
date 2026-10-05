@@ -2175,7 +2175,9 @@
     "on3": "on3",
     "asa": "asa",
     "mls_api": "mls",
-    "nwsl_api": "nwsl"
+    "nwsl_api": "nwsl",
+    "nba_stats": "nba",
+    "wnba_stats": "wnba"
   },
   "flatApis": [
     {
@@ -18632,7 +18634,8 @@
           "queryKey": "end_date"
         }
       ],
-      "parser": "parse_asa_goals_added"
+      "parser": "parse_asa_goals_added",
+      "returnsSchema": "native/asa/goalkeepers_goals_added"
     },
     {
       "short": "goalkeepers_xgoals",
@@ -18769,7 +18772,8 @@
           "queryKey": "end_date"
         }
       ],
-      "parser": "parse_asa_goals_added"
+      "parser": "parse_asa_goals_added",
+      "returnsSchema": "native/asa/players_goals_added"
     },
     {
       "short": "players_salaries",
@@ -18975,7 +18979,8 @@
           "queryKey": "end_date"
         }
       ],
-      "parser": "parse_asa_goals_added"
+      "parser": "parse_asa_goals_added",
+      "returnsSchema": "native/asa/teams_goals_added"
     },
     {
       "short": "teams_xgoals",

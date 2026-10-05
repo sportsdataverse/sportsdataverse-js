@@ -2,7 +2,13 @@ import should from 'should';
 import http from 'node:http';
 import sdv from '../../dist/index.js';
 import { configure, resetConfig } from '../../dist/core/config.js';
-import { NoDataError } from '../../dist/core/errors.js';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { NoDataError, AssetFetchError } from '../../dist/core/errors.js';
+
+const fixture = (...p) =>
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'fixtures', ...p), 'utf8');
 
 // Offline: a local server stands in for the host, so we can see exactly what the
 // keyless getters send (browser UA; site Referer for MLS / NWSL; no key anywhere)
@@ -11,12 +17,14 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
   let srv;
   let seen;
   let status = 200;
+  let reply = null; // overrides the default body
+  let ctype = 'application/json';
   before(async () => {
     srv = http.createServer((req, res) => {
       seen = { url: req.url, headers: req.headers };
       res.statusCode = status;
-      res.setHeader('content-type', 'application/json');
-      res.end(status === 200 ? '{"teams":[{"teamId":"nwsl::Football_Team::abc"}]}' : '{}');
+      res.setHeader('content-type', ctype);
+      res.end(reply ?? (status === 200 ? '{"teams":[{"teamId":"nwsl::Football_Team::abc"}]}' : '{}'));
     });
     await new Promise((r) => srv.listen(0, '127.0.0.1', r));
     const base = `http://127.0.0.1:${srv.address().port}`;
@@ -53,6 +61,54 @@ describe('keyless runtime getters (on3, mls_api, nwsl_api)', () => {
     seen.headers['user-agent'].should.match(/Chrome/);
     status = 404;
     await sdv.on3.on3_filters_status({}).should.be.rejectedWith(NoDataError);
+  });
+
+  it('a 2xx non-JSON body (HTML bot block) is an AssetFetchError, never an empty result', async () => {
+    status = 200;
+    ctype = 'text/html';
+    reply = '<!doctype html><html><body>Access denied</body></html>';
+    try {
+      await sdv.on3.on3_filters_status({}).should.be.rejectedWith(AssetFetchError);
+      await sdv.mls.mls_api_competitions({ parsed: true }).should.be.rejectedWith(AssetFetchError);
+      await sdv.nwsl.nwsl_api_competitions({ parsed: true }).should.be.rejectedWith(AssetFetchError);
+    } finally {
+      ctype = 'application/json';
+      reply = null;
+    }
+  });
+
+  it('a genuinely empty JSON body ([] / {}) is data, not an error', async () => {
+    status = 200;
+    try {
+      reply = '[]';
+      (await sdv.on3.on3_filters_status({})).should.eql([]);
+      (await sdv.on3.on3_filters_status({ parsed: true })).should.eql([]);
+      reply = '{}';
+      (await sdv.nwsl.nwsl_api_competitions({})).should.eql({});
+      (await sdv.nwsl.nwsl_api_competitions({ parsed: true })).should.eql([]);
+    } finally {
+      reply = null;
+    }
+  });
+
+  it('parsed:true returns the default sub-frame; section selects the others; bad section throws', async () => {
+    status = 200;
+    try {
+      reply = fixture('mls_api', 'statsapi_match_single.json');
+      const m = { match_id: 'MLS-MAT-0009H8', parsed: true };
+      (await sdv.mls.mls_api_match(m)).should.have.length(1); // match_information
+      (await sdv.mls.mls_api_match({ ...m, section: 'players' })).length.should.be.above(1);
+      (await sdv.mls.mls_api_match({ ...m, section: 'referees' })).length.should.be.above(0);
+      await sdv.mls.mls_api_match({ ...m, section: 'nope' }).should.be.rejectedWith(/unknown section 'nope'/);
+      reply = fixture('asa', 'players_goals-added.json');
+      const g = { league_slug: 'mls', parsed: true };
+      const summary = await sdv.asa.asa_players_goals_added(g);
+      const actions = await sdv.asa.asa_players_goals_added({ ...g, section: 'actions' });
+      Object.keys(summary[0]).should.not.containEql('action_type');
+      Object.keys(actions[0]).should.containEql('action_type');
+    } finally {
+      reply = null;
+    }
   });
 
   it('merges onto the documented namespaces', () => {

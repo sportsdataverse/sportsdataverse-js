@@ -18339,7 +18339,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "end_date"
       }
     ],
-    "parser": "parse_asa_goals_added"
+    "parser": "parse_asa_goals_added",
+    "returnsSchema": "native/asa/goalkeepers_goals_added"
   },
   {
     "short": "goalkeepers_xgoals",
@@ -18476,7 +18477,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "end_date"
       }
     ],
-    "parser": "parse_asa_goals_added"
+    "parser": "parse_asa_goals_added",
+    "returnsSchema": "native/asa/players_goals_added"
   },
   {
     "short": "players_salaries",
@@ -18682,7 +18684,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "end_date"
       }
     ],
-    "parser": "parse_asa_goals_added"
+    "parser": "parse_asa_goals_added",
+    "returnsSchema": "native/asa/teams_goals_added"
   },
   {
     "short": "teams_xgoals",
@@ -19266,5 +19269,19592 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "parser": "parse_nwsl_sdp",
     "returnsSchema": "native/nwsl_api/teams"
+  },
+  {
+    "short": "alltimeleadersgrids",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/alltimeleadersgrids",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "topx",
+        "queryKey": "TopX",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/alltimeleadersgrids"
+  },
+  {
+    "short": "assistleaders",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/assistleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/assistleaders"
+  },
+  {
+    "short": "assisttracker",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/assisttracker",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": null
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": null
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": null
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": null
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": null
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": null
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": null
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": null
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": null
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": null
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": null
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": null
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": null
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": null
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": null
+      },
+      {
+        "name": "per_mode_simple_nullable",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": null
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": null
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": null
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": null
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/assisttracker"
+  },
+  {
+    "short": "boxscoreadvancedv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreadvancedv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoreadvancedv3"
+  },
+  {
+    "short": "boxscoredefensivev2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoredefensivev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoredefensivev2"
+  },
+  {
+    "short": "boxscorefourfactorsv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorefourfactorsv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorefourfactorsv3"
+  },
+  {
+    "short": "boxscorehustlev2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorehustlev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "0022200021"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorehustlev2"
+  },
+  {
+    "short": "boxscorematchupsv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorematchupsv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorematchupsv3"
+  },
+  {
+    "short": "boxscoremiscv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoremiscv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoremiscv3"
+  },
+  {
+    "short": "boxscoreplayertrackv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreplayertrackv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoreplayertrackv3"
+  },
+  {
+    "short": "boxscorescoringv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorescoringv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorescoringv3"
+  },
+  {
+    "short": "boxscoresummaryv2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoresummaryv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoresummaryv2"
+  },
+  {
+    "short": "boxscoresummaryv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoresummaryv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoresummaryv3"
+  },
+  {
+    "short": "boxscoretraditionalv2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoretraditionalv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoretraditionalv2"
+  },
+  {
+    "short": "boxscoretraditionalv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoretraditionalv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoretraditionalv3"
+  },
+  {
+    "short": "boxscoreusagev3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreusagev3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoreusagev3"
+  },
+  {
+    "short": "commonallplayers",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/commonallplayers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "is_only_current_season",
+        "queryKey": "IsOnlyCurrentSeason",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonallplayers"
+  },
+  {
+    "short": "commonplayerinfo",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/commonplayerinfo",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonplayerinfo"
+  },
+  {
+    "short": "commonplayoffseries",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/commonplayoffseries",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "series_id_nullable",
+        "queryKey": "SeriesID",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonplayoffseries"
+  },
+  {
+    "short": "commonteamroster",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/commonteamroster",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661317"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonteamroster"
+  },
+  {
+    "short": "commonteamyears",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/commonteamyears",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonteamyears"
+  },
+  {
+    "short": "cumestatsplayer",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_ids",
+        "queryKey": "GameIDs",
+        "default": "1022200018"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "204319"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsplayer"
+  },
+  {
+    "short": "cumestatsplayergames",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsplayergames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "204319"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsplayergames"
+  },
+  {
+    "short": "cumestatsteam",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsteam",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_ids",
+        "queryKey": "GameIDs",
+        "default": "1022200018"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661317"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsteam"
+  },
+  {
+    "short": "cumestatsteamgames",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsteamgames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_id_nullable",
+        "queryKey": "SeasonID",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661317"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsteamgames"
+  },
+  {
+    "short": "draftcombinedrillresults",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/draftcombinedrillresults",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "SeasonYear",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinedrillresults"
+  },
+  {
+    "short": "draftcombinenonstationaryshooting",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/draftcombinenonstationaryshooting",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "SeasonYear",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinenonstationaryshooting"
+  },
+  {
+    "short": "draftcombineplayeranthro",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/draftcombineplayeranthro",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "SeasonYear",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombineplayeranthro"
+  },
+  {
+    "short": "draftcombinespotshooting",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/draftcombinespotshooting",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_year",
+        "queryKey": "SeasonYear",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinespotshooting"
+  },
+  {
+    "short": "draftcombinestats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/draftcombinestats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_all_time",
+        "queryKey": "SeasonYear",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinestats"
+  },
+  {
+    "short": "drafthistory",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/drafthistory",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "overall_pick_nullable",
+        "queryKey": "OverallPick",
+        "default": ""
+      },
+      {
+        "name": "round_num_nullable",
+        "queryKey": "RoundNum",
+        "default": ""
+      },
+      {
+        "name": "round_pick_nullable",
+        "queryKey": "RoundPick",
+        "default": ""
+      },
+      {
+        "name": "season_year_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "topx_nullable",
+        "queryKey": "TopX",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/drafthistory"
+  },
+  {
+    "short": "fantasywidget",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/fantasywidget",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_players",
+        "queryKey": "ActivePlayers",
+        "default": "N"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": ""
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "position_nullable",
+        "queryKey": "Position",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "todays_opponent",
+        "queryKey": "TodaysOpponent",
+        "default": "0"
+      },
+      {
+        "name": "todays_players",
+        "queryKey": "TodaysPlayers",
+        "default": "N"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/fantasywidget"
+  },
+  {
+    "short": "franchisehistory",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/franchisehistory",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchisehistory"
+  },
+  {
+    "short": "franchiseleaders",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/franchiseleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661324"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchiseleaders"
+  },
+  {
+    "short": "franchiseleaderswrank",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/franchiseleaderswrank",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661324"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchiseleaderswrank"
+  },
+  {
+    "short": "franchiseplayers",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/franchiseplayers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661319"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchiseplayers"
+  },
+  {
+    "short": "gamerotation",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/gamerotation",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/gamerotation"
+  },
+  {
+    "short": "homepageleaders",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/homepageleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_scope_detailed",
+        "queryKey": "GameScope",
+        "default": "Season"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "player_scope",
+        "queryKey": "PlayerScope",
+        "default": "All Players"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat_category",
+        "queryKey": "StatCategory",
+        "default": "Points"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/homepageleaders"
+  },
+  {
+    "short": "homepagev2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/homepagev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_scope_detailed",
+        "queryKey": "GameScope",
+        "default": "Season"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "player_scope",
+        "queryKey": "PlayerScope",
+        "default": "All Players"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat_type",
+        "queryKey": "StatType",
+        "default": "Traditional"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/homepagev2"
+  },
+  {
+    "short": "hustlestatsboxscore",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/hustlestatsboxscore",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "0022200021"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/hustlestatsboxscore"
+  },
+  {
+    "short": "infographicfanduelplayer",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/infographicfanduelplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/infographicfanduelplayer"
+  },
+  {
+    "short": "leaderstiles",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaderstiles",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_scope_detailed",
+        "queryKey": "GameScope",
+        "default": "Season"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "player_scope",
+        "queryKey": "PlayerScope",
+        "default": "All Players"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat",
+        "queryKey": "Stat",
+        "default": "PTS"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaderstiles"
+  },
+  {
+    "short": "leaguedashlineups",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashlineups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "group_quantity",
+        "queryKey": "GroupQuantity",
+        "default": "5"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashlineups"
+  },
+  {
+    "short": "leaguedashoppptshot",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashoppptshot",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "close_def_dist_range_nullable",
+        "queryKey": "CloseDefDistRange",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "dribble_range_nullable",
+        "queryKey": "DribbleRange",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "general_range_nullable",
+        "queryKey": "GeneralRange",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "shot_dist_range_nullable",
+        "queryKey": "ShotDistRange",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "touch_time_range_nullable",
+        "queryKey": "TouchTimeRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashoppptshot"
+  },
+  {
+    "short": "leaguedashplayerbiostats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerbiostats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": ""
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerbiostats"
+  },
+  {
+    "short": "leaguedashplayerclutch",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ahead_behind",
+        "queryKey": "AheadBehind",
+        "default": "Ahead or Behind"
+      },
+      {
+        "name": "clutch_time",
+        "queryKey": "ClutchTime",
+        "default": "Last 5 Minutes"
+      },
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "point_diff",
+        "queryKey": "PointDiff",
+        "default": "5"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerclutch"
+  },
+  {
+    "short": "leaguedashplayerptshot",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerptshot",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "close_def_dist_range_nullable",
+        "queryKey": "CloseDefDistRange",
+        "default": ""
+      },
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "dribble_range_nullable",
+        "queryKey": "DribbleRange",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "general_range_nullable",
+        "queryKey": "GeneralRange",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "shot_dist_range_nullable",
+        "queryKey": "ShotDistRange",
+        "default": null
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "touch_time_range_nullable",
+        "queryKey": "TouchTimeRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerptshot"
+  },
+  {
+    "short": "leaguedashplayershotlocations",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayershotlocations",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "distance_range",
+        "queryKey": "DistanceRange",
+        "default": "By Zone"
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_simple",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayershotlocations"
+  },
+  {
+    "short": "leaguedashplayerstats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "two_way_nullable",
+        "queryKey": "TwoWay",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerstats"
+  },
+  {
+    "short": "leaguedashptdefend",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashptdefend",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "defense_category",
+        "queryKey": "DefenseCategory",
+        "default": "Overall"
+      },
+      {
+        "name": "division_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": ""
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashptdefend"
+  },
+  {
+    "short": "leaguedashptstats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashptstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Player"
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "pt_measure_type",
+        "queryKey": "PtMeasureType",
+        "default": "Drives"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashptstats"
+  },
+  {
+    "short": "leaguedashptteamdefend",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashptteamdefend",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "defense_category",
+        "queryKey": "DefenseCategory",
+        "default": "Overall"
+      },
+      {
+        "name": "division_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashptteamdefend"
+  },
+  {
+    "short": "leaguedashteamclutch",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ahead_behind",
+        "queryKey": "AheadBehind",
+        "default": "Ahead or Behind"
+      },
+      {
+        "name": "clutch_time",
+        "queryKey": "ClutchTime",
+        "default": "Last 5 Minutes"
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "point_diff",
+        "queryKey": "PointDiff",
+        "default": "5"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamclutch"
+  },
+  {
+    "short": "leaguedashteamptshot",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamptshot",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "close_def_dist_range_nullable",
+        "queryKey": "CloseDefDistRange",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "dribble_range_nullable",
+        "queryKey": "DribbleRange",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "general_range_nullable",
+        "queryKey": "GeneralRange",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "shot_dist_range_nullable",
+        "queryKey": "ShotDistRange",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "touch_time_range_nullable",
+        "queryKey": "TouchTimeRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamptshot"
+  },
+  {
+    "short": "leaguedashteamshotlocations",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamshotlocations",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "distance_range",
+        "queryKey": "DistanceRange",
+        "default": "By Zone"
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_simple",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamshotlocations"
+  },
+  {
+    "short": "leaguedashteamstats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": null
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": null
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "two_way_nullable",
+        "queryKey": "TwoWay",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamstats"
+  },
+  {
+    "short": "leaguegamefinder",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguegamefinder",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_number_nullable",
+        "queryKey": "DraftNumber",
+        "default": ""
+      },
+      {
+        "name": "draft_round_nullable",
+        "queryKey": "DraftRound",
+        "default": ""
+      },
+      {
+        "name": "draft_team_id_nullable",
+        "queryKey": "DraftTeamID",
+        "default": "0"
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "eq_ast_nullable",
+        "queryKey": "EqAST",
+        "default": ""
+      },
+      {
+        "name": "eq_blk_nullable",
+        "queryKey": "EqBLK",
+        "default": ""
+      },
+      {
+        "name": "eq_dd_nullable",
+        "queryKey": "EqDD",
+        "default": ""
+      },
+      {
+        "name": "eq_dreb_nullable",
+        "queryKey": "EqDREB",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3a_nullable",
+        "queryKey": "EqFG3A",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3m_nullable",
+        "queryKey": "EqFG3M",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3_pct_nullable",
+        "queryKey": "EqFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fga_nullable",
+        "queryKey": "EqFGA",
+        "default": ""
+      },
+      {
+        "name": "eq_fgm_nullable",
+        "queryKey": "EqFGM",
+        "default": ""
+      },
+      {
+        "name": "eq_fg_pct_nullable",
+        "queryKey": "EqFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fta_nullable",
+        "queryKey": "EqFTA",
+        "default": ""
+      },
+      {
+        "name": "eq_ftm_nullable",
+        "queryKey": "EqFTM",
+        "default": ""
+      },
+      {
+        "name": "eq_ft_pct_nullable",
+        "queryKey": "EqFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_minutes_nullable",
+        "queryKey": "EqMINUTES",
+        "default": ""
+      },
+      {
+        "name": "eq_oreb_nullable",
+        "queryKey": "EqOREB",
+        "default": ""
+      },
+      {
+        "name": "eq_pf_nullable",
+        "queryKey": "EqPF",
+        "default": ""
+      },
+      {
+        "name": "eq_pts_nullable",
+        "queryKey": "EqPTS",
+        "default": ""
+      },
+      {
+        "name": "eq_reb_nullable",
+        "queryKey": "EqREB",
+        "default": ""
+      },
+      {
+        "name": "eq_stl_nullable",
+        "queryKey": "EqSTL",
+        "default": ""
+      },
+      {
+        "name": "eq_td_nullable",
+        "queryKey": "EqTD",
+        "default": ""
+      },
+      {
+        "name": "eq_tov_nullable",
+        "queryKey": "EqTOV",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "gt_ast_nullable",
+        "queryKey": "GtAST",
+        "default": ""
+      },
+      {
+        "name": "gt_blk_nullable",
+        "queryKey": "GtBLK",
+        "default": ""
+      },
+      {
+        "name": "gt_dd_nullable",
+        "queryKey": "GtDD",
+        "default": ""
+      },
+      {
+        "name": "gt_dreb_nullable",
+        "queryKey": "GtDREB",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3a_nullable",
+        "queryKey": "GtFG3A",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3m_nullable",
+        "queryKey": "GtFG3M",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3_pct_nullable",
+        "queryKey": "GtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fga_nullable",
+        "queryKey": "GtFGA",
+        "default": ""
+      },
+      {
+        "name": "gt_fgm_nullable",
+        "queryKey": "GtFGM",
+        "default": ""
+      },
+      {
+        "name": "gt_fg_pct_nullable",
+        "queryKey": "GtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fta_nullable",
+        "queryKey": "GtFTA",
+        "default": ""
+      },
+      {
+        "name": "gt_ftm_nullable",
+        "queryKey": "GtFTM",
+        "default": ""
+      },
+      {
+        "name": "gt_ft_pct_nullable",
+        "queryKey": "GtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_minutes_nullable",
+        "queryKey": "GtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "gt_oreb_nullable",
+        "queryKey": "GtOREB",
+        "default": ""
+      },
+      {
+        "name": "gt_pf_nullable",
+        "queryKey": "GtPF",
+        "default": ""
+      },
+      {
+        "name": "gt_pts_nullable",
+        "queryKey": "GtPTS",
+        "default": ""
+      },
+      {
+        "name": "gt_reb_nullable",
+        "queryKey": "GtREB",
+        "default": ""
+      },
+      {
+        "name": "gt_stl_nullable",
+        "queryKey": "GtSTL",
+        "default": ""
+      },
+      {
+        "name": "gt_td_nullable",
+        "queryKey": "GtTD",
+        "default": ""
+      },
+      {
+        "name": "gt_tov_nullable",
+        "queryKey": "GtTOV",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "lt_ast_nullable",
+        "queryKey": "LtAST",
+        "default": ""
+      },
+      {
+        "name": "lt_blk_nullable",
+        "queryKey": "LtBLK",
+        "default": ""
+      },
+      {
+        "name": "lt_dd_nullable",
+        "queryKey": "LtDD",
+        "default": ""
+      },
+      {
+        "name": "lt_dreb_nullable",
+        "queryKey": "LtDREB",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3a_nullable",
+        "queryKey": "LtFG3A",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3m_nullable",
+        "queryKey": "LtFG3M",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3_pct_nullable",
+        "queryKey": "LtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fga_nullable",
+        "queryKey": "LtFGA",
+        "default": ""
+      },
+      {
+        "name": "lt_fgm_nullable",
+        "queryKey": "LtFGM",
+        "default": ""
+      },
+      {
+        "name": "lt_fg_pct_nullable",
+        "queryKey": "LtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fta_nullable",
+        "queryKey": "LtFTA",
+        "default": ""
+      },
+      {
+        "name": "lt_ftm_nullable",
+        "queryKey": "LtFTM",
+        "default": ""
+      },
+      {
+        "name": "lt_ft_pct_nullable",
+        "queryKey": "LtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_minutes_nullable",
+        "queryKey": "LtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "lt_oreb_nullable",
+        "queryKey": "LtOREB",
+        "default": ""
+      },
+      {
+        "name": "lt_pf_nullable",
+        "queryKey": "LtPF",
+        "default": ""
+      },
+      {
+        "name": "lt_pts_nullable",
+        "queryKey": "LtPTS",
+        "default": ""
+      },
+      {
+        "name": "lt_reb_nullable",
+        "queryKey": "LtREB",
+        "default": ""
+      },
+      {
+        "name": "lt_stl_nullable",
+        "queryKey": "LtSTL",
+        "default": ""
+      },
+      {
+        "name": "lt_td_nullable",
+        "queryKey": "LtTD",
+        "default": ""
+      },
+      {
+        "name": "lt_tov_nullable",
+        "queryKey": "LtTOV",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "player_or_team_abbreviation",
+        "queryKey": "PlayerOrTeam",
+        "default": "T"
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      },
+      {
+        "name": "years_experience_nullable",
+        "queryKey": "YearsExperience",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguegamefinder"
+  },
+  {
+    "short": "leaguegamelog",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguegamelog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "counter",
+        "queryKey": "Counter",
+        "default": "0"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "direction",
+        "queryKey": "Direction",
+        "default": "ASC"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_or_team_abbreviation",
+        "queryKey": "PlayerOrTeam",
+        "default": "T"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "sorter",
+        "queryKey": "Sorter",
+        "default": "DATE"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguegamelog"
+  },
+  {
+    "short": "leaguehustlestatsplayer",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguehustlestatsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_time",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguehustlestatsplayer"
+  },
+  {
+    "short": "leaguehustlestatsteam",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguehustlestatsteam",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_time",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguehustlestatsteam"
+  },
+  {
+    "short": "leagueleaders",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leagueleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_flag_nullable",
+        "queryKey": "ActiveFlag",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode48",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "scope",
+        "queryKey": "Scope",
+        "default": "S"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat_category_abbreviation",
+        "queryKey": "StatCategory",
+        "default": "PTS"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leagueleaders"
+  },
+  {
+    "short": "leaguelineupviz",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguelineupviz",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "group_quantity",
+        "queryKey": "GroupQuantity",
+        "default": "5"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "minutes_min",
+        "queryKey": "MinutesMin",
+        "default": "10"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguelineupviz"
+  },
+  {
+    "short": "leagueplayerondetails",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leagueplayerondetails",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661313"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leagueplayerondetails"
+  },
+  {
+    "short": "leagueseasonmatchups",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leagueseasonmatchups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "def_player_id_nullable",
+        "queryKey": "DefPlayerID",
+        "default": ""
+      },
+      {
+        "name": "def_team_id_nullable",
+        "queryKey": "DefTeamID",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "off_player_id_nullable",
+        "queryKey": "OffPlayerID",
+        "default": ""
+      },
+      {
+        "name": "off_team_id_nullable",
+        "queryKey": "OffTeamID",
+        "default": "0"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leagueseasonmatchups"
+  },
+  {
+    "short": "leaguestandings",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguestandings",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "SeasonYear",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguestandings"
+  },
+  {
+    "short": "leaguestandingsv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/leaguestandingsv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "SeasonYear",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguestandingsv3"
+  },
+  {
+    "short": "matchupsrollup",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/matchupsrollup",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "def_player_id_nullable",
+        "queryKey": "DefPlayerID",
+        "default": ""
+      },
+      {
+        "name": "def_team_id_nullable",
+        "queryKey": "DefTeamID",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "off_player_id_nullable",
+        "queryKey": "OffPlayerID",
+        "default": ""
+      },
+      {
+        "name": "off_team_id_nullable",
+        "queryKey": "OffTeamID",
+        "default": "0"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/matchupsrollup"
+  },
+  {
+    "short": "playbyplayv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playbyplayv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playbyplayv3"
+  },
+  {
+    "short": "playerawards",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerawards",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerawards"
+  },
+  {
+    "short": "playercareerbycollegerollup",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playercareerbycollegerollup",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playercareerbycollegerollup"
+  },
+  {
+    "short": "playercareerstats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playercareerstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode36",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playercareerstats"
+  },
+  {
+    "short": "playercompare",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playercompare",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": null
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_list",
+        "queryKey": "PlayerIDList",
+        "default": null
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2020-21"
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_player_id_list",
+        "queryKey": "VsPlayerIDList",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playercompare"
+  },
+  {
+    "short": "playerdashboardbyclutch",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyclutch"
+  },
+  {
+    "short": "playerdashboardbygamesplits",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbygamesplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbygamesplits"
+  },
+  {
+    "short": "playerdashboardbygeneralsplits",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbygeneralsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbygeneralsplits"
+  },
+  {
+    "short": "playerdashboardbylastngames",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbylastngames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbylastngames"
+  },
+  {
+    "short": "playerdashboardbyopponent",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyopponent",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyopponent"
+  },
+  {
+    "short": "playerdashboardbyshootingsplits",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyshootingsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyshootingsplits"
+  },
+  {
+    "short": "playerdashboardbyteamperformance",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyteamperformance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyteamperformance"
+  },
+  {
+    "short": "playerdashboardbyyearoveryear",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyyearoveryear",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyyearoveryear"
+  },
+  {
+    "short": "playerdashptpass",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashptpass",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "2544"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptpass"
+  },
+  {
+    "short": "playerdashptreb",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashptreb",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "2544"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptreb"
+  },
+  {
+    "short": "playerdashptshotdefend",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashptshotdefend",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "2544"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptshotdefend"
+  },
+  {
+    "short": "playerdashptshots",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashptshots",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "2544"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptshots"
+  },
+  {
+    "short": "playerestimatedmetrics",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerestimatedmetrics",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerestimatedmetrics"
+  },
+  {
+    "short": "playerfantasyprofile",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerfantasyprofile",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerfantasyprofile"
+  },
+  {
+    "short": "playerfantasyprofilebargraph",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerfantasyprofilebargraph",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerfantasyprofilebargraph"
+  },
+  {
+    "short": "playergamelog",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playergamelog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playergamelog"
+  },
+  {
+    "short": "playergamelogs",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playergamelogs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_player_game_logs_nullable",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "oppteamid",
+        "queryKey": "OppTeamID",
+        "default": null
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple_nullable",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playergamelogs"
+  },
+  {
+    "short": "playergamestreakfinder",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playergamestreakfinder",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_streaks_only_nullable",
+        "queryKey": "ActiveStreaksOnly",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_number_nullable",
+        "queryKey": "DraftNumber",
+        "default": ""
+      },
+      {
+        "name": "draft_round_nullable",
+        "queryKey": "DraftRound",
+        "default": ""
+      },
+      {
+        "name": "draft_team_id_nullable",
+        "queryKey": "DraftTeamID",
+        "default": "0"
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "eq_ast_nullable",
+        "queryKey": "EqAST",
+        "default": ""
+      },
+      {
+        "name": "eq_blk_nullable",
+        "queryKey": "EqBLK",
+        "default": ""
+      },
+      {
+        "name": "eq_dd_nullable",
+        "queryKey": "EqDD",
+        "default": ""
+      },
+      {
+        "name": "eq_dreb_nullable",
+        "queryKey": "EqDREB",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3a_nullable",
+        "queryKey": "EqFG3A",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3m_nullable",
+        "queryKey": "EqFG3M",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3_pct_nullable",
+        "queryKey": "EqFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fga_nullable",
+        "queryKey": "EqFGA",
+        "default": ""
+      },
+      {
+        "name": "eq_fgm_nullable",
+        "queryKey": "EqFGM",
+        "default": ""
+      },
+      {
+        "name": "eq_fg_pct_nullable",
+        "queryKey": "EqFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fta_nullable",
+        "queryKey": "EqFTA",
+        "default": ""
+      },
+      {
+        "name": "eq_ftm_nullable",
+        "queryKey": "EqFTM",
+        "default": ""
+      },
+      {
+        "name": "eq_ft_pct_nullable",
+        "queryKey": "EqFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_minutes_nullable",
+        "queryKey": "EqMINUTES",
+        "default": ""
+      },
+      {
+        "name": "eq_oreb_nullable",
+        "queryKey": "EqOREB",
+        "default": ""
+      },
+      {
+        "name": "eq_pf_nullable",
+        "queryKey": "EqPF",
+        "default": ""
+      },
+      {
+        "name": "eq_pts_nullable",
+        "queryKey": "EqPTS",
+        "default": ""
+      },
+      {
+        "name": "eq_reb_nullable",
+        "queryKey": "EqREB",
+        "default": ""
+      },
+      {
+        "name": "eq_stl_nullable",
+        "queryKey": "EqSTL",
+        "default": ""
+      },
+      {
+        "name": "eq_td_nullable",
+        "queryKey": "EqTD",
+        "default": ""
+      },
+      {
+        "name": "eq_tov_nullable",
+        "queryKey": "EqTOV",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "gt_ast_nullable",
+        "queryKey": "GtAST",
+        "default": ""
+      },
+      {
+        "name": "gt_blk_nullable",
+        "queryKey": "GtBLK",
+        "default": ""
+      },
+      {
+        "name": "gt_dd_nullable",
+        "queryKey": "GtDD",
+        "default": ""
+      },
+      {
+        "name": "gt_dreb_nullable",
+        "queryKey": "GtDREB",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3a_nullable",
+        "queryKey": "GtFG3A",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3m_nullable",
+        "queryKey": "GtFG3M",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3_pct_nullable",
+        "queryKey": "GtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fga_nullable",
+        "queryKey": "GtFGA",
+        "default": ""
+      },
+      {
+        "name": "gt_fgm_nullable",
+        "queryKey": "GtFGM",
+        "default": ""
+      },
+      {
+        "name": "gt_fg_pct_nullable",
+        "queryKey": "GtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fta_nullable",
+        "queryKey": "GtFTA",
+        "default": ""
+      },
+      {
+        "name": "gt_ftm_nullable",
+        "queryKey": "GtFTM",
+        "default": ""
+      },
+      {
+        "name": "gt_ft_pct_nullable",
+        "queryKey": "GtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_minutes_nullable",
+        "queryKey": "GtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "gt_oreb_nullable",
+        "queryKey": "GtOREB",
+        "default": ""
+      },
+      {
+        "name": "gt_pf_nullable",
+        "queryKey": "GtPF",
+        "default": ""
+      },
+      {
+        "name": "gt_pts_nullable",
+        "queryKey": "GtPTS",
+        "default": ""
+      },
+      {
+        "name": "gt_reb_nullable",
+        "queryKey": "GtREB",
+        "default": ""
+      },
+      {
+        "name": "gt_stl_nullable",
+        "queryKey": "GtSTL",
+        "default": ""
+      },
+      {
+        "name": "gt_td_nullable",
+        "queryKey": "GtTD",
+        "default": ""
+      },
+      {
+        "name": "gt_tov_nullable",
+        "queryKey": "GtTOV",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "lt_ast_nullable",
+        "queryKey": "LtAST",
+        "default": ""
+      },
+      {
+        "name": "lt_blk_nullable",
+        "queryKey": "LtBLK",
+        "default": ""
+      },
+      {
+        "name": "lt_dd_nullable",
+        "queryKey": "LtDD",
+        "default": ""
+      },
+      {
+        "name": "lt_dreb_nullable",
+        "queryKey": "LtDREB",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3a_nullable",
+        "queryKey": "LtFG3A",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3m_nullable",
+        "queryKey": "LtFG3M",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3_pct_nullable",
+        "queryKey": "LtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fga_nullable",
+        "queryKey": "LtFGA",
+        "default": ""
+      },
+      {
+        "name": "lt_fgm_nullable",
+        "queryKey": "LtFGM",
+        "default": ""
+      },
+      {
+        "name": "lt_fg_pct_nullable",
+        "queryKey": "LtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fta_nullable",
+        "queryKey": "LtFTA",
+        "default": ""
+      },
+      {
+        "name": "lt_ftm_nullable",
+        "queryKey": "LtFTM",
+        "default": ""
+      },
+      {
+        "name": "lt_ft_pct_nullable",
+        "queryKey": "LtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_minutes_nullable",
+        "queryKey": "LtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "lt_oreb_nullable",
+        "queryKey": "LtOREB",
+        "default": ""
+      },
+      {
+        "name": "lt_pf_nullable",
+        "queryKey": "LtPF",
+        "default": ""
+      },
+      {
+        "name": "lt_pts_nullable",
+        "queryKey": "LtPTS",
+        "default": ""
+      },
+      {
+        "name": "lt_reb_nullable",
+        "queryKey": "LtREB",
+        "default": ""
+      },
+      {
+        "name": "lt_stl_nullable",
+        "queryKey": "LtSTL",
+        "default": ""
+      },
+      {
+        "name": "lt_td_nullable",
+        "queryKey": "LtTD",
+        "default": ""
+      },
+      {
+        "name": "lt_tov_nullable",
+        "queryKey": "LtTOV",
+        "default": ""
+      },
+      {
+        "name": "min_games_nullable",
+        "queryKey": "MinGames",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      },
+      {
+        "name": "years_experience_nullable",
+        "queryKey": "YearsExperience",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playergamestreakfinder"
+  },
+  {
+    "short": "playerindex",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerindex",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_nullable",
+        "queryKey": "Active",
+        "default": null
+      },
+      {
+        "name": "allstar_nullable",
+        "queryKey": "AllStar",
+        "default": null
+      },
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_round_nullable",
+        "queryKey": "DraftRound",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "historical_nullable",
+        "queryKey": "Historical",
+        "default": "1"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerindex"
+  },
+  {
+    "short": "playerprofilev2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playerprofilev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode36",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerprofilev2"
+  },
+  {
+    "short": "playervsplayer",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playervsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_player_id",
+        "queryKey": "VsPlayerID",
+        "default": "1629488"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playervsplayer"
+  },
+  {
+    "short": "playoffpicture",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/playoffpicture",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_id",
+        "queryKey": "SeasonID",
+        "default": "22022"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playoffpicture"
+  },
+  {
+    "short": "scheduleleaguev2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/scheduleleaguev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scheduleleaguev2"
+  },
+  {
+    "short": "scheduleleaguev2int",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/scheduleleaguev2int",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scheduleleaguev2int"
+  },
+  {
+    "short": "scoreboardv2",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/scoreboardv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "day_offset",
+        "queryKey": "DayOffset",
+        "default": "0"
+      },
+      {
+        "name": "game_date",
+        "queryKey": "GameDate",
+        "default": "2022-07-20"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scoreboardv2"
+  },
+  {
+    "short": "scoreboardv3",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/scoreboardv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_date",
+        "queryKey": "GameDate",
+        "default": "2022-06-26"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scoreboardv3"
+  },
+  {
+    "short": "shotchartdetail",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/shotchartdetail",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ahead_behind_nullable",
+        "queryKey": "AheadBehind",
+        "default": null
+      },
+      {
+        "name": "clutch_time_nullable",
+        "queryKey": "ClutchTime",
+        "default": null
+      },
+      {
+        "name": "context_filter_nullable",
+        "queryKey": "ContextFilter",
+        "default": null
+      },
+      {
+        "name": "context_measure_simple",
+        "queryKey": "ContextMeasure",
+        "default": "FGA"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "end_period_nullable",
+        "queryKey": "EndPeriod",
+        "default": null
+      },
+      {
+        "name": "end_range_nullable",
+        "queryKey": "EndRange",
+        "default": null
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "point_diff_nullable",
+        "queryKey": "PointDiff",
+        "default": null
+      },
+      {
+        "name": "position_nullable",
+        "queryKey": "Position",
+        "default": null
+      },
+      {
+        "name": "range_type_nullable",
+        "queryKey": "RangeType",
+        "default": null
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "start_period_nullable",
+        "queryKey": "StartPeriod",
+        "default": null
+      },
+      {
+        "name": "start_range_nullable",
+        "queryKey": "StartRange",
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/shotchartdetail"
+  },
+  {
+    "short": "shotchartleaguewide",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/shotchartleaguewide",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/shotchartleaguewide"
+  },
+  {
+    "short": "shotchartlineupdetail",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/shotchartlineupdetail",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "context_filter_nullable",
+        "queryKey": "ContextFilter",
+        "default": ""
+      },
+      {
+        "name": "context_measure_detailed",
+        "queryKey": "ContextMeasure",
+        "default": "FGA"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "group_id",
+        "queryKey": "GROUP_ID",
+        "default": "-1628899-1629481-1630096-1631019-1642784-"
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/shotchartlineupdetail"
+  },
+  {
+    "short": "synergyplaytypes",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/synergyplaytypes",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "play_type_nullable",
+        "queryKey": "PlayType",
+        "default": "Isolation"
+      },
+      {
+        "name": "player_or_team_abbreviation",
+        "queryKey": "PlayerOrTeam",
+        "default": "P"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "season",
+        "queryKey": "SeasonYear",
+        "default": null
+      },
+      {
+        "name": "type_grouping_nullable",
+        "queryKey": "TypeGrouping",
+        "default": "Offensive"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/synergyplaytypes"
+  },
+  {
+    "short": "teamdashboardbyclutch",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyclutch"
+  },
+  {
+    "short": "teamdashboardbygamesplits",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbygamesplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbygamesplits"
+  },
+  {
+    "short": "teamdashboardbygeneralsplits",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbygeneralsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbygeneralsplits"
+  },
+  {
+    "short": "teamdashboardbylastngames",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbylastngames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbylastngames"
+  },
+  {
+    "short": "teamdashboardbyopponent",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyopponent",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyopponent"
+  },
+  {
+    "short": "teamdashboardbyshootingsplits",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyshootingsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyshootingsplits"
+  },
+  {
+    "short": "teamdashboardbyteamperformance",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyteamperformance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyteamperformance"
+  },
+  {
+    "short": "teamdashboardbyyearoveryear",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyyearoveryear",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyyearoveryear"
+  },
+  {
+    "short": "teamdashlineups",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashlineups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "group_quantity",
+        "queryKey": "GroupQuantity",
+        "default": "5"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashlineups"
+  },
+  {
+    "short": "teamdashptpass",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashptpass",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1610612749"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashptpass"
+  },
+  {
+    "short": "teamdashptreb",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashptreb",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1610612749"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashptreb"
+  },
+  {
+    "short": "teamdashptshots",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashptshots",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1610612749"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashptshots"
+  },
+  {
+    "short": "teamdetails",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamdetails",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdetails"
+  },
+  {
+    "short": "teamestimatedmetrics",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamestimatedmetrics",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamestimatedmetrics"
+  },
+  {
+    "short": "teamgamelog",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamgamelog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamgamelog"
+  },
+  {
+    "short": "teamgamelogs",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamgamelogs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_player_game_logs_nullable",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opp_team_id_nullable",
+        "queryKey": "OppTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple_nullable",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamgamelogs"
+  },
+  {
+    "short": "teaminfocommon",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teaminfocommon",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teaminfocommon"
+  },
+  {
+    "short": "teamplayerdashboard",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamplayerdashboard",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamplayerdashboard"
+  },
+  {
+    "short": "teamplayeronoffdetails",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamplayeronoffdetails",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamplayeronoffdetails"
+  },
+  {
+    "short": "teamplayeronoffsummary",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamplayeronoffsummary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamplayeronoffsummary"
+  },
+  {
+    "short": "teamvsplayer",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamvsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_player_id",
+        "queryKey": "VsPlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamvsplayer"
+  },
+  {
+    "short": "teamyearbyyearstats",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/teamyearbyyearstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamyearbyyearstats"
+  },
+  {
+    "short": "videodetailsasset",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/videodetailsasset",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "context_measure_detailed",
+        "queryKey": "ContextMeasure",
+        "default": "FGA"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "2544"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2022-23"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1610612747"
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "start_range_nullable",
+        "queryKey": "StartRange",
+        "default": ""
+      },
+      {
+        "name": "start_period_nullable",
+        "queryKey": "StartPeriod",
+        "default": ""
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "range_type_nullable",
+        "queryKey": "RangeType",
+        "default": ""
+      },
+      {
+        "name": "position_nullable",
+        "queryKey": "Position",
+        "default": ""
+      },
+      {
+        "name": "point_diff_nullable",
+        "queryKey": "PointDiff",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "end_range_nullable",
+        "queryKey": "EndRange",
+        "default": ""
+      },
+      {
+        "name": "end_period_nullable",
+        "queryKey": "EndPeriod",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "context_filter_nullable",
+        "queryKey": "ContextFilter",
+        "default": ""
+      },
+      {
+        "name": "clutch_time_nullable",
+        "queryKey": "ClutchTime",
+        "default": ""
+      },
+      {
+        "name": "ahead_behind_nullable",
+        "queryKey": "AheadBehind",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videodetailsasset"
+  },
+  {
+    "short": "videoevents",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/videoevents",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_event_id",
+        "queryKey": "GameEventID",
+        "default": "10"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200075"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videoevents"
+  },
+  {
+    "short": "videoeventsasset",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/videoeventsasset",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_event_id",
+        "queryKey": "GameEventID",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": 21700807
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videoeventsasset"
+  },
+  {
+    "short": "videostatus",
+    "flat": true,
+    "api": "nba_stats",
+    "host": "https://stats.nba.com",
+    "scope": "universal",
+    "path": "/stats/videostatus",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_date",
+        "queryKey": "GameDate",
+        "default": "2022-06-10"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "00"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videostatus"
+  },
+  {
+    "short": "alltimeleadersgrids",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/alltimeleadersgrids",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "topx",
+        "queryKey": "TopX",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/alltimeleadersgrids"
+  },
+  {
+    "short": "assistleaders",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/assistleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/assistleaders"
+  },
+  {
+    "short": "assisttracker",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/assisttracker",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": null
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": null
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": null
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": null
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": null
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": null
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": null
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": null
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": null
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": null
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": null
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": null
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": null
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": null
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": null
+      },
+      {
+        "name": "per_mode_simple_nullable",
+        "queryKey": "PerMode",
+        "default": "PerGame"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": null
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": null
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": null
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": null
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/assisttracker"
+  },
+  {
+    "short": "boxscoreadvancedv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreadvancedv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreadvancedv2"
+  },
+  {
+    "short": "boxscoreadvancedv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreadvancedv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreadvancedv3"
+  },
+  {
+    "short": "boxscoredefensivev2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoredefensivev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoredefensivev2"
+  },
+  {
+    "short": "boxscorefourfactorsv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorefourfactorsv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorefourfactorsv2"
+  },
+  {
+    "short": "boxscorefourfactorsv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorefourfactorsv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorefourfactorsv3"
+  },
+  {
+    "short": "boxscorehustlev2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorehustlev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "0022200021"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorehustlev2"
+  },
+  {
+    "short": "boxscorematchupsv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorematchupsv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorematchupsv3"
+  },
+  {
+    "short": "boxscoremiscv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoremiscv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoremiscv2"
+  },
+  {
+    "short": "boxscoremiscv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoremiscv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoremiscv3"
+  },
+  {
+    "short": "boxscoreplayertrackv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreplayertrackv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreplayertrackv3"
+  },
+  {
+    "short": "boxscorescoringv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorescoringv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorescoringv2"
+  },
+  {
+    "short": "boxscorescoringv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscorescoringv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorescoringv3"
+  },
+  {
+    "short": "boxscoresummaryv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoresummaryv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoresummaryv2"
+  },
+  {
+    "short": "boxscoresummaryv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoresummaryv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoresummaryv3"
+  },
+  {
+    "short": "boxscoretraditionalv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoretraditionalv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoretraditionalv2"
+  },
+  {
+    "short": "boxscoretraditionalv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoretraditionalv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoretraditionalv3"
+  },
+  {
+    "short": "boxscoreusagev2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreusagev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreusagev2"
+  },
+  {
+    "short": "boxscoreusagev3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/boxscoreusagev3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "14"
+      },
+      {
+        "name": "end_range",
+        "queryKey": "EndRange",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "range_type",
+        "queryKey": "RangeType",
+        "default": "0"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      },
+      {
+        "name": "start_range",
+        "queryKey": "StartRange",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreusagev3"
+  },
+  {
+    "short": "commonallplayers",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/commonallplayers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "is_only_current_season",
+        "queryKey": "IsOnlyCurrentSeason",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonallplayers"
+  },
+  {
+    "short": "commonplayerinfo",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/commonplayerinfo",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonplayerinfo"
+  },
+  {
+    "short": "commonplayoffseries",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/commonplayoffseries",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "series_id_nullable",
+        "queryKey": "SeriesID",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonplayoffseries"
+  },
+  {
+    "short": "commonteamroster",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/commonteamroster",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661317"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonteamroster"
+  },
+  {
+    "short": "commonteamyears",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/commonteamyears",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonteamyears"
+  },
+  {
+    "short": "cumestatsplayer",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_ids",
+        "queryKey": "GameIDs",
+        "default": "1022200018"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "204319"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsplayer"
+  },
+  {
+    "short": "cumestatsplayergames",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsplayergames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "204319"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsplayergames"
+  },
+  {
+    "short": "cumestatsteam",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsteam",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_ids",
+        "queryKey": "GameIDs",
+        "default": "1022200018"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661317"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsteam"
+  },
+  {
+    "short": "cumestatsteamgames",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/cumestatsteamgames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2021-22"
+      },
+      {
+        "name": "season_id_nullable",
+        "queryKey": "SeasonID",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661317"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsteamgames"
+  },
+  {
+    "short": "draftcombinestats",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/draftcombinestats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season_all_time",
+        "queryKey": "SeasonYear",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/draftcombinestats"
+  },
+  {
+    "short": "drafthistory",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/drafthistory",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "overall_pick_nullable",
+        "queryKey": "OverallPick",
+        "default": ""
+      },
+      {
+        "name": "round_num_nullable",
+        "queryKey": "RoundNum",
+        "default": ""
+      },
+      {
+        "name": "round_pick_nullable",
+        "queryKey": "RoundPick",
+        "default": ""
+      },
+      {
+        "name": "season_year_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "topx_nullable",
+        "queryKey": "TopX",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/drafthistory"
+  },
+  {
+    "short": "fantasywidget",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/fantasywidget",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_players",
+        "queryKey": "ActivePlayers",
+        "default": "N"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": ""
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "position_nullable",
+        "queryKey": "Position",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "todays_opponent",
+        "queryKey": "TodaysOpponent",
+        "default": "0"
+      },
+      {
+        "name": "todays_players",
+        "queryKey": "TodaysPlayers",
+        "default": "N"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/fantasywidget"
+  },
+  {
+    "short": "franchisehistory",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/franchisehistory",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchisehistory"
+  },
+  {
+    "short": "franchiseleaders",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/franchiseleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661324"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchiseleaders"
+  },
+  {
+    "short": "franchiseleaderswrank",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/franchiseleaderswrank",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661324"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchiseleaderswrank"
+  },
+  {
+    "short": "franchiseplayers",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/franchiseplayers",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661319"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchiseplayers"
+  },
+  {
+    "short": "gamerotation",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/gamerotation",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/gamerotation"
+  },
+  {
+    "short": "homepageleaders",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/homepageleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_scope_detailed",
+        "queryKey": "GameScope",
+        "default": "Season"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "player_scope",
+        "queryKey": "PlayerScope",
+        "default": "All Players"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat_category",
+        "queryKey": "StatCategory",
+        "default": "Points"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/homepageleaders"
+  },
+  {
+    "short": "homepagev2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/homepagev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_scope_detailed",
+        "queryKey": "GameScope",
+        "default": "Season"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "player_scope",
+        "queryKey": "PlayerScope",
+        "default": "All Players"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat_type",
+        "queryKey": "StatType",
+        "default": "Traditional"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/homepagev2"
+  },
+  {
+    "short": "hustlestatsboxscore",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/hustlestatsboxscore",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "0022200021"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/hustlestatsboxscore"
+  },
+  {
+    "short": "infographicfanduelplayer",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/infographicfanduelplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/infographicfanduelplayer"
+  },
+  {
+    "short": "leaderstiles",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaderstiles",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_scope_detailed",
+        "queryKey": "GameScope",
+        "default": "Season"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_or_team",
+        "queryKey": "PlayerOrTeam",
+        "default": "Team"
+      },
+      {
+        "name": "player_scope",
+        "queryKey": "PlayerScope",
+        "default": "All Players"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat",
+        "queryKey": "Stat",
+        "default": "PTS"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaderstiles"
+  },
+  {
+    "short": "leaguedashlineups",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashlineups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "group_quantity",
+        "queryKey": "GroupQuantity",
+        "default": "5"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashlineups"
+  },
+  {
+    "short": "leaguedashplayerbiostats",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerbiostats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": ""
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayerbiostats"
+  },
+  {
+    "short": "leaguedashplayerclutch",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ahead_behind",
+        "queryKey": "AheadBehind",
+        "default": "Ahead or Behind"
+      },
+      {
+        "name": "clutch_time",
+        "queryKey": "ClutchTime",
+        "default": "Last 5 Minutes"
+      },
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "point_diff",
+        "queryKey": "PointDiff",
+        "default": "5"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayerclutch"
+  },
+  {
+    "short": "leaguedashplayershotlocations",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayershotlocations",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "distance_range",
+        "queryKey": "DistanceRange",
+        "default": "By Zone"
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_simple",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayershotlocations"
+  },
+  {
+    "short": "leaguedashplayerstats",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashplayerstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "two_way_nullable",
+        "queryKey": "TwoWay",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayerstats"
+  },
+  {
+    "short": "leaguedashptdefend",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashptdefend",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "defense_category",
+        "queryKey": "DefenseCategory",
+        "default": "Overall"
+      },
+      {
+        "name": "division_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": ""
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashptdefend"
+  },
+  {
+    "short": "leaguedashteamclutch",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ahead_behind",
+        "queryKey": "AheadBehind",
+        "default": "Ahead or Behind"
+      },
+      {
+        "name": "clutch_time",
+        "queryKey": "ClutchTime",
+        "default": "Last 5 Minutes"
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "point_diff",
+        "queryKey": "PointDiff",
+        "default": "5"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashteamclutch"
+  },
+  {
+    "short": "leaguedashteamshotlocations",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamshotlocations",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "distance_range",
+        "queryKey": "DistanceRange",
+        "default": "By Zone"
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_simple",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": ""
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashteamshotlocations"
+  },
+  {
+    "short": "leaguedashteamstats",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguedashteamstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_scope_simple_nullable",
+        "queryKey": "GameScope",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_experience_nullable",
+        "queryKey": "PlayerExperience",
+        "default": null
+      },
+      {
+        "name": "player_position_abbreviation_nullable",
+        "queryKey": "PlayerPosition",
+        "default": null
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "two_way_nullable",
+        "queryKey": "TwoWay",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashteamstats"
+  },
+  {
+    "short": "leaguegamefinder",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguegamefinder",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_number_nullable",
+        "queryKey": "DraftNumber",
+        "default": ""
+      },
+      {
+        "name": "draft_round_nullable",
+        "queryKey": "DraftRound",
+        "default": ""
+      },
+      {
+        "name": "draft_team_id_nullable",
+        "queryKey": "DraftTeamID",
+        "default": "0"
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "eq_ast_nullable",
+        "queryKey": "EqAST",
+        "default": ""
+      },
+      {
+        "name": "eq_blk_nullable",
+        "queryKey": "EqBLK",
+        "default": ""
+      },
+      {
+        "name": "eq_dd_nullable",
+        "queryKey": "EqDD",
+        "default": ""
+      },
+      {
+        "name": "eq_dreb_nullable",
+        "queryKey": "EqDREB",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3a_nullable",
+        "queryKey": "EqFG3A",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3m_nullable",
+        "queryKey": "EqFG3M",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3_pct_nullable",
+        "queryKey": "EqFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fga_nullable",
+        "queryKey": "EqFGA",
+        "default": ""
+      },
+      {
+        "name": "eq_fgm_nullable",
+        "queryKey": "EqFGM",
+        "default": ""
+      },
+      {
+        "name": "eq_fg_pct_nullable",
+        "queryKey": "EqFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fta_nullable",
+        "queryKey": "EqFTA",
+        "default": ""
+      },
+      {
+        "name": "eq_ftm_nullable",
+        "queryKey": "EqFTM",
+        "default": ""
+      },
+      {
+        "name": "eq_ft_pct_nullable",
+        "queryKey": "EqFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_minutes_nullable",
+        "queryKey": "EqMINUTES",
+        "default": ""
+      },
+      {
+        "name": "eq_oreb_nullable",
+        "queryKey": "EqOREB",
+        "default": ""
+      },
+      {
+        "name": "eq_pf_nullable",
+        "queryKey": "EqPF",
+        "default": ""
+      },
+      {
+        "name": "eq_pts_nullable",
+        "queryKey": "EqPTS",
+        "default": ""
+      },
+      {
+        "name": "eq_reb_nullable",
+        "queryKey": "EqREB",
+        "default": ""
+      },
+      {
+        "name": "eq_stl_nullable",
+        "queryKey": "EqSTL",
+        "default": ""
+      },
+      {
+        "name": "eq_td_nullable",
+        "queryKey": "EqTD",
+        "default": ""
+      },
+      {
+        "name": "eq_tov_nullable",
+        "queryKey": "EqTOV",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "gt_ast_nullable",
+        "queryKey": "GtAST",
+        "default": ""
+      },
+      {
+        "name": "gt_blk_nullable",
+        "queryKey": "GtBLK",
+        "default": ""
+      },
+      {
+        "name": "gt_dd_nullable",
+        "queryKey": "GtDD",
+        "default": ""
+      },
+      {
+        "name": "gt_dreb_nullable",
+        "queryKey": "GtDREB",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3a_nullable",
+        "queryKey": "GtFG3A",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3m_nullable",
+        "queryKey": "GtFG3M",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3_pct_nullable",
+        "queryKey": "GtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fga_nullable",
+        "queryKey": "GtFGA",
+        "default": ""
+      },
+      {
+        "name": "gt_fgm_nullable",
+        "queryKey": "GtFGM",
+        "default": ""
+      },
+      {
+        "name": "gt_fg_pct_nullable",
+        "queryKey": "GtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fta_nullable",
+        "queryKey": "GtFTA",
+        "default": ""
+      },
+      {
+        "name": "gt_ftm_nullable",
+        "queryKey": "GtFTM",
+        "default": ""
+      },
+      {
+        "name": "gt_ft_pct_nullable",
+        "queryKey": "GtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_minutes_nullable",
+        "queryKey": "GtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "gt_oreb_nullable",
+        "queryKey": "GtOREB",
+        "default": ""
+      },
+      {
+        "name": "gt_pf_nullable",
+        "queryKey": "GtPF",
+        "default": ""
+      },
+      {
+        "name": "gt_pts_nullable",
+        "queryKey": "GtPTS",
+        "default": ""
+      },
+      {
+        "name": "gt_reb_nullable",
+        "queryKey": "GtREB",
+        "default": ""
+      },
+      {
+        "name": "gt_stl_nullable",
+        "queryKey": "GtSTL",
+        "default": ""
+      },
+      {
+        "name": "gt_td_nullable",
+        "queryKey": "GtTD",
+        "default": ""
+      },
+      {
+        "name": "gt_tov_nullable",
+        "queryKey": "GtTOV",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "lt_ast_nullable",
+        "queryKey": "LtAST",
+        "default": ""
+      },
+      {
+        "name": "lt_blk_nullable",
+        "queryKey": "LtBLK",
+        "default": ""
+      },
+      {
+        "name": "lt_dd_nullable",
+        "queryKey": "LtDD",
+        "default": ""
+      },
+      {
+        "name": "lt_dreb_nullable",
+        "queryKey": "LtDREB",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3a_nullable",
+        "queryKey": "LtFG3A",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3m_nullable",
+        "queryKey": "LtFG3M",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3_pct_nullable",
+        "queryKey": "LtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fga_nullable",
+        "queryKey": "LtFGA",
+        "default": ""
+      },
+      {
+        "name": "lt_fgm_nullable",
+        "queryKey": "LtFGM",
+        "default": ""
+      },
+      {
+        "name": "lt_fg_pct_nullable",
+        "queryKey": "LtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fta_nullable",
+        "queryKey": "LtFTA",
+        "default": ""
+      },
+      {
+        "name": "lt_ftm_nullable",
+        "queryKey": "LtFTM",
+        "default": ""
+      },
+      {
+        "name": "lt_ft_pct_nullable",
+        "queryKey": "LtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_minutes_nullable",
+        "queryKey": "LtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "lt_oreb_nullable",
+        "queryKey": "LtOREB",
+        "default": ""
+      },
+      {
+        "name": "lt_pf_nullable",
+        "queryKey": "LtPF",
+        "default": ""
+      },
+      {
+        "name": "lt_pts_nullable",
+        "queryKey": "LtPTS",
+        "default": ""
+      },
+      {
+        "name": "lt_reb_nullable",
+        "queryKey": "LtREB",
+        "default": ""
+      },
+      {
+        "name": "lt_stl_nullable",
+        "queryKey": "LtSTL",
+        "default": ""
+      },
+      {
+        "name": "lt_td_nullable",
+        "queryKey": "LtTD",
+        "default": ""
+      },
+      {
+        "name": "lt_tov_nullable",
+        "queryKey": "LtTOV",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "player_or_team_abbreviation",
+        "queryKey": "PlayerOrTeam",
+        "default": "T"
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      },
+      {
+        "name": "years_experience_nullable",
+        "queryKey": "YearsExperience",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguegamefinder"
+  },
+  {
+    "short": "leaguegamelog",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguegamelog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "counter",
+        "queryKey": "Counter",
+        "default": "0"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "direction",
+        "queryKey": "Direction",
+        "default": "ASC"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_or_team_abbreviation",
+        "queryKey": "PlayerOrTeam",
+        "default": "T"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "sorter",
+        "queryKey": "Sorter",
+        "default": "DATE"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguegamelog"
+  },
+  {
+    "short": "leagueleaders",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leagueleaders",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_flag_nullable",
+        "queryKey": "ActiveFlag",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode48",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "scope",
+        "queryKey": "Scope",
+        "default": "S"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "stat_category_abbreviation",
+        "queryKey": "StatCategory",
+        "default": "PTS"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leagueleaders"
+  },
+  {
+    "short": "leaguelineupviz",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguelineupviz",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "group_quantity",
+        "queryKey": "GroupQuantity",
+        "default": "5"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "minutes_min",
+        "queryKey": "MinutesMin",
+        "default": "10"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguelineupviz"
+  },
+  {
+    "short": "leagueplayerondetails",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leagueplayerondetails",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661313"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leagueplayerondetails"
+  },
+  {
+    "short": "leagueseasonmatchups",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leagueseasonmatchups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "def_player_id_nullable",
+        "queryKey": "DefPlayerID",
+        "default": ""
+      },
+      {
+        "name": "def_team_id_nullable",
+        "queryKey": "DefTeamID",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "off_player_id_nullable",
+        "queryKey": "OffPlayerID",
+        "default": ""
+      },
+      {
+        "name": "off_team_id_nullable",
+        "queryKey": "OffTeamID",
+        "default": "0"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leagueseasonmatchups"
+  },
+  {
+    "short": "leaguestandingsv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/leaguestandingsv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "SeasonYear",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguestandingsv3"
+  },
+  {
+    "short": "playbyplayv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playbyplayv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": null
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playbyplayv2"
+  },
+  {
+    "short": "playbyplayv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playbyplayv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "end_period",
+        "queryKey": "EndPeriod",
+        "default": "0"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "GameID",
+        "default": "1022200034"
+      },
+      {
+        "name": "start_period",
+        "queryKey": "StartPeriod",
+        "default": "0"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playbyplayv3"
+  },
+  {
+    "short": "playerawards",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerawards",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerawards"
+  },
+  {
+    "short": "playercareerbycollegerollup",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playercareerbycollegerollup",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playercareerbycollegerollup"
+  },
+  {
+    "short": "playercareerstats",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playercareerstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode36",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playercareerstats"
+  },
+  {
+    "short": "playercompare",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playercompare",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": null
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_list",
+        "queryKey": "PlayerIDList",
+        "default": null
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": "2020-21"
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_player_id_list",
+        "queryKey": "VsPlayerIDList",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playercompare"
+  },
+  {
+    "short": "playerdashboardbyclutch",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyclutch"
+  },
+  {
+    "short": "playerdashboardbygamesplits",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbygamesplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbygamesplits"
+  },
+  {
+    "short": "playerdashboardbygeneralsplits",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbygeneralsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbygeneralsplits"
+  },
+  {
+    "short": "playerdashboardbylastngames",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbylastngames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbylastngames"
+  },
+  {
+    "short": "playerdashboardbyopponent",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyopponent",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyopponent"
+  },
+  {
+    "short": "playerdashboardbyshootingsplits",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyshootingsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyshootingsplits"
+  },
+  {
+    "short": "playerdashboardbyteamperformance",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyteamperformance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyteamperformance"
+  },
+  {
+    "short": "playerdashboardbyyearoveryear",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashboardbyyearoveryear",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyyearoveryear"
+  },
+  {
+    "short": "playerdashptshotdefend",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerdashptshotdefend",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "2544"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashptshotdefend"
+  },
+  {
+    "short": "playerestimatedmetrics",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerestimatedmetrics",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerestimatedmetrics"
+  },
+  {
+    "short": "playerfantasyprofile",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerfantasyprofile",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerfantasyprofile"
+  },
+  {
+    "short": "playerfantasyprofilebargraph",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerfantasyprofilebargraph",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerfantasyprofilebargraph"
+  },
+  {
+    "short": "playergamelog",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playergamelog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playergamelog"
+  },
+  {
+    "short": "playergamelogs",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playergamelogs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_player_game_logs_nullable",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "oppteamid",
+        "queryKey": "OppTeamID",
+        "default": null
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple_nullable",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playergamelogs"
+  },
+  {
+    "short": "playergamestreakfinder",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playergamestreakfinder",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_streaks_only_nullable",
+        "queryKey": "ActiveStreaksOnly",
+        "default": ""
+      },
+      {
+        "name": "conference_nullable",
+        "queryKey": "Conference",
+        "default": ""
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "division_simple_nullable",
+        "queryKey": "Division",
+        "default": ""
+      },
+      {
+        "name": "draft_number_nullable",
+        "queryKey": "DraftNumber",
+        "default": ""
+      },
+      {
+        "name": "draft_round_nullable",
+        "queryKey": "DraftRound",
+        "default": ""
+      },
+      {
+        "name": "draft_team_id_nullable",
+        "queryKey": "DraftTeamID",
+        "default": "0"
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "eq_ast_nullable",
+        "queryKey": "EqAST",
+        "default": ""
+      },
+      {
+        "name": "eq_blk_nullable",
+        "queryKey": "EqBLK",
+        "default": ""
+      },
+      {
+        "name": "eq_dd_nullable",
+        "queryKey": "EqDD",
+        "default": ""
+      },
+      {
+        "name": "eq_dreb_nullable",
+        "queryKey": "EqDREB",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3a_nullable",
+        "queryKey": "EqFG3A",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3m_nullable",
+        "queryKey": "EqFG3M",
+        "default": ""
+      },
+      {
+        "name": "eq_fg3_pct_nullable",
+        "queryKey": "EqFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fga_nullable",
+        "queryKey": "EqFGA",
+        "default": ""
+      },
+      {
+        "name": "eq_fgm_nullable",
+        "queryKey": "EqFGM",
+        "default": ""
+      },
+      {
+        "name": "eq_fg_pct_nullable",
+        "queryKey": "EqFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_fta_nullable",
+        "queryKey": "EqFTA",
+        "default": ""
+      },
+      {
+        "name": "eq_ftm_nullable",
+        "queryKey": "EqFTM",
+        "default": ""
+      },
+      {
+        "name": "eq_ft_pct_nullable",
+        "queryKey": "EqFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "eq_minutes_nullable",
+        "queryKey": "EqMINUTES",
+        "default": ""
+      },
+      {
+        "name": "eq_oreb_nullable",
+        "queryKey": "EqOREB",
+        "default": ""
+      },
+      {
+        "name": "eq_pf_nullable",
+        "queryKey": "EqPF",
+        "default": ""
+      },
+      {
+        "name": "eq_pts_nullable",
+        "queryKey": "EqPTS",
+        "default": ""
+      },
+      {
+        "name": "eq_reb_nullable",
+        "queryKey": "EqREB",
+        "default": ""
+      },
+      {
+        "name": "eq_stl_nullable",
+        "queryKey": "EqSTL",
+        "default": ""
+      },
+      {
+        "name": "eq_td_nullable",
+        "queryKey": "EqTD",
+        "default": ""
+      },
+      {
+        "name": "eq_tov_nullable",
+        "queryKey": "EqTOV",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "gt_ast_nullable",
+        "queryKey": "GtAST",
+        "default": ""
+      },
+      {
+        "name": "gt_blk_nullable",
+        "queryKey": "GtBLK",
+        "default": ""
+      },
+      {
+        "name": "gt_dd_nullable",
+        "queryKey": "GtDD",
+        "default": ""
+      },
+      {
+        "name": "gt_dreb_nullable",
+        "queryKey": "GtDREB",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3a_nullable",
+        "queryKey": "GtFG3A",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3m_nullable",
+        "queryKey": "GtFG3M",
+        "default": ""
+      },
+      {
+        "name": "gt_fg3_pct_nullable",
+        "queryKey": "GtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fga_nullable",
+        "queryKey": "GtFGA",
+        "default": ""
+      },
+      {
+        "name": "gt_fgm_nullable",
+        "queryKey": "GtFGM",
+        "default": ""
+      },
+      {
+        "name": "gt_fg_pct_nullable",
+        "queryKey": "GtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_fta_nullable",
+        "queryKey": "GtFTA",
+        "default": ""
+      },
+      {
+        "name": "gt_ftm_nullable",
+        "queryKey": "GtFTM",
+        "default": ""
+      },
+      {
+        "name": "gt_ft_pct_nullable",
+        "queryKey": "GtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "gt_minutes_nullable",
+        "queryKey": "GtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "gt_oreb_nullable",
+        "queryKey": "GtOREB",
+        "default": ""
+      },
+      {
+        "name": "gt_pf_nullable",
+        "queryKey": "GtPF",
+        "default": ""
+      },
+      {
+        "name": "gt_pts_nullable",
+        "queryKey": "GtPTS",
+        "default": ""
+      },
+      {
+        "name": "gt_reb_nullable",
+        "queryKey": "GtREB",
+        "default": ""
+      },
+      {
+        "name": "gt_stl_nullable",
+        "queryKey": "GtSTL",
+        "default": ""
+      },
+      {
+        "name": "gt_td_nullable",
+        "queryKey": "GtTD",
+        "default": ""
+      },
+      {
+        "name": "gt_tov_nullable",
+        "queryKey": "GtTOV",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "lt_ast_nullable",
+        "queryKey": "LtAST",
+        "default": ""
+      },
+      {
+        "name": "lt_blk_nullable",
+        "queryKey": "LtBLK",
+        "default": ""
+      },
+      {
+        "name": "lt_dd_nullable",
+        "queryKey": "LtDD",
+        "default": ""
+      },
+      {
+        "name": "lt_dreb_nullable",
+        "queryKey": "LtDREB",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3a_nullable",
+        "queryKey": "LtFG3A",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3m_nullable",
+        "queryKey": "LtFG3M",
+        "default": ""
+      },
+      {
+        "name": "lt_fg3_pct_nullable",
+        "queryKey": "LtFG3_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fga_nullable",
+        "queryKey": "LtFGA",
+        "default": ""
+      },
+      {
+        "name": "lt_fgm_nullable",
+        "queryKey": "LtFGM",
+        "default": ""
+      },
+      {
+        "name": "lt_fg_pct_nullable",
+        "queryKey": "LtFG_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_fta_nullable",
+        "queryKey": "LtFTA",
+        "default": ""
+      },
+      {
+        "name": "lt_ftm_nullable",
+        "queryKey": "LtFTM",
+        "default": ""
+      },
+      {
+        "name": "lt_ft_pct_nullable",
+        "queryKey": "LtFT_PCT",
+        "default": ""
+      },
+      {
+        "name": "lt_minutes_nullable",
+        "queryKey": "LtMINUTES",
+        "default": ""
+      },
+      {
+        "name": "lt_oreb_nullable",
+        "queryKey": "LtOREB",
+        "default": ""
+      },
+      {
+        "name": "lt_pf_nullable",
+        "queryKey": "LtPF",
+        "default": ""
+      },
+      {
+        "name": "lt_pts_nullable",
+        "queryKey": "LtPTS",
+        "default": ""
+      },
+      {
+        "name": "lt_reb_nullable",
+        "queryKey": "LtREB",
+        "default": ""
+      },
+      {
+        "name": "lt_stl_nullable",
+        "queryKey": "LtSTL",
+        "default": ""
+      },
+      {
+        "name": "lt_td_nullable",
+        "queryKey": "LtTD",
+        "default": ""
+      },
+      {
+        "name": "lt_tov_nullable",
+        "queryKey": "LtTOV",
+        "default": ""
+      },
+      {
+        "name": "min_games_nullable",
+        "queryKey": "MinGames",
+        "default": ""
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "starter_bench_nullable",
+        "queryKey": "StarterBench",
+        "default": ""
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_team_id_nullable",
+        "queryKey": "VsTeamID",
+        "default": "0"
+      },
+      {
+        "name": "years_experience_nullable",
+        "queryKey": "YearsExperience",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playergamestreakfinder"
+  },
+  {
+    "short": "playerindex",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerindex",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "active_nullable",
+        "queryKey": "Active",
+        "default": null
+      },
+      {
+        "name": "allstar_nullable",
+        "queryKey": "AllStar",
+        "default": null
+      },
+      {
+        "name": "college_nullable",
+        "queryKey": "College",
+        "default": ""
+      },
+      {
+        "name": "country_nullable",
+        "queryKey": "Country",
+        "default": ""
+      },
+      {
+        "name": "draft_pick_nullable",
+        "queryKey": "DraftPick",
+        "default": ""
+      },
+      {
+        "name": "draft_round_nullable",
+        "queryKey": "DraftRound",
+        "default": ""
+      },
+      {
+        "name": "draft_year_nullable",
+        "queryKey": "DraftYear",
+        "default": ""
+      },
+      {
+        "name": "height_nullable",
+        "queryKey": "Height",
+        "default": ""
+      },
+      {
+        "name": "historical_nullable",
+        "queryKey": "Historical",
+        "default": "1"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "weight_nullable",
+        "queryKey": "Weight",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerindex"
+  },
+  {
+    "short": "playernextngames",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playernextngames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "number_of_games",
+        "queryKey": "NumberOfGames",
+        "default": "2147483647"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "season_all",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playernextngames"
+  },
+  {
+    "short": "playerprofilev2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playerprofilev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode36",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerprofilev2"
+  },
+  {
+    "short": "playervsplayer",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/playervsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_player_id",
+        "queryKey": "VsPlayerID",
+        "default": "1629488"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playervsplayer"
+  },
+  {
+    "short": "scheduleleaguev2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/scheduleleaguev2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scheduleleaguev2"
+  },
+  {
+    "short": "scheduleleaguev2int",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/scheduleleaguev2int",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scheduleleaguev2int"
+  },
+  {
+    "short": "scoreboardv2",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/scoreboardv2",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "day_offset",
+        "queryKey": "DayOffset",
+        "default": "0"
+      },
+      {
+        "name": "game_date",
+        "queryKey": "GameDate",
+        "default": "2022-07-20"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scoreboardv2"
+  },
+  {
+    "short": "scoreboardv3",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/scoreboardv3",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_date",
+        "queryKey": "GameDate",
+        "default": "2022-06-26"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scoreboardv3"
+  },
+  {
+    "short": "shotchartdetail",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/shotchartdetail",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "ahead_behind_nullable",
+        "queryKey": "AheadBehind",
+        "default": null
+      },
+      {
+        "name": "clutch_time_nullable",
+        "queryKey": "ClutchTime",
+        "default": null
+      },
+      {
+        "name": "context_filter_nullable",
+        "queryKey": "ContextFilter",
+        "default": null
+      },
+      {
+        "name": "context_measure_simple",
+        "queryKey": "ContextMeasure",
+        "default": "FGA"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "end_period_nullable",
+        "queryKey": "EndPeriod",
+        "default": null
+      },
+      {
+        "name": "end_range_nullable",
+        "queryKey": "EndRange",
+        "default": null
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "PlayerID",
+        "default": "1628932"
+      },
+      {
+        "name": "player_position_nullable",
+        "queryKey": "PlayerPosition",
+        "default": ""
+      },
+      {
+        "name": "point_diff_nullable",
+        "queryKey": "PointDiff",
+        "default": null
+      },
+      {
+        "name": "position_nullable",
+        "queryKey": "Position",
+        "default": null
+      },
+      {
+        "name": "range_type_nullable",
+        "queryKey": "RangeType",
+        "default": null
+      },
+      {
+        "name": "rookie_year_nullable",
+        "queryKey": "RookieYear",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "start_period_nullable",
+        "queryKey": "StartPeriod",
+        "default": null
+      },
+      {
+        "name": "start_range_nullable",
+        "queryKey": "StartRange",
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/shotchartdetail"
+  },
+  {
+    "short": "shotchartleaguewide",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/shotchartleaguewide",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/shotchartleaguewide"
+  },
+  {
+    "short": "shotchartlineupdetail",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/shotchartlineupdetail",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "context_filter_nullable",
+        "queryKey": "ContextFilter",
+        "default": ""
+      },
+      {
+        "name": "context_measure_detailed",
+        "queryKey": "ContextMeasure",
+        "default": "FGA"
+      },
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "group_id",
+        "queryKey": "GROUP_ID",
+        "default": "-1628899-1629481-1630096-1631019-1642784-"
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id_nullable",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/shotchartlineupdetail"
+  },
+  {
+    "short": "teamdashboardbyclutch",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyclutch",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyclutch"
+  },
+  {
+    "short": "teamdashboardbygamesplits",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbygamesplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbygamesplits"
+  },
+  {
+    "short": "teamdashboardbygeneralsplits",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbygeneralsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbygeneralsplits"
+  },
+  {
+    "short": "teamdashboardbylastngames",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbylastngames",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbylastngames"
+  },
+  {
+    "short": "teamdashboardbyopponent",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyopponent",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyopponent"
+  },
+  {
+    "short": "teamdashboardbyshootingsplits",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyshootingsplits",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyshootingsplits"
+  },
+  {
+    "short": "teamdashboardbyteamperformance",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyteamperformance",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyteamperformance"
+  },
+  {
+    "short": "teamdashboardbyyearoveryear",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashboardbyyearoveryear",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyyearoveryear"
+  },
+  {
+    "short": "teamdashlineups",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdashlineups",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_id_nullable",
+        "queryKey": "GameID",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "group_quantity",
+        "queryKey": "GroupQuantity",
+        "default": "5"
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashlineups"
+  },
+  {
+    "short": "teamdetails",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamdetails",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdetails"
+  },
+  {
+    "short": "teamestimatedmetrics",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamestimatedmetrics",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamestimatedmetrics"
+  },
+  {
+    "short": "teamgamelog",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamgamelog",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamgamelog"
+  },
+  {
+    "short": "teamgamelogs",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamgamelogs",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games_nullable",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_player_game_logs_nullable",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month_nullable",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opp_team_id_nullable",
+        "queryKey": "OppTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "per_mode_simple_nullable",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period_nullable",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": null
+      },
+      {
+        "name": "team_id_nullable",
+        "queryKey": "TeamID",
+        "default": "0"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamgamelogs"
+  },
+  {
+    "short": "teaminfocommon",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teaminfocommon",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "season_nullable",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_type_nullable",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teaminfocommon"
+  },
+  {
+    "short": "teamplayerdashboard",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamplayerdashboard",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "po_round_nullable",
+        "queryKey": "PORound",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "shot_clock_range_nullable",
+        "queryKey": "ShotClockRange",
+        "default": ""
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamplayerdashboard"
+  },
+  {
+    "short": "teamplayeronoffdetails",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamplayeronoffdetails",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamplayeronoffdetails"
+  },
+  {
+    "short": "teamplayeronoffsummary",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamplayeronoffsummary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamplayeronoffsummary"
+  },
+  {
+    "short": "teamvsplayer",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamvsplayer",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date_from_nullable",
+        "queryKey": "DateFrom",
+        "default": ""
+      },
+      {
+        "name": "date_to_nullable",
+        "queryKey": "DateTo",
+        "default": ""
+      },
+      {
+        "name": "game_segment_nullable",
+        "queryKey": "GameSegment",
+        "default": ""
+      },
+      {
+        "name": "last_n_games",
+        "queryKey": "LastNGames",
+        "default": "0"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "location_nullable",
+        "queryKey": "Location",
+        "default": ""
+      },
+      {
+        "name": "measure_type_detailed_defense",
+        "queryKey": "MeasureType",
+        "default": "Base"
+      },
+      {
+        "name": "month",
+        "queryKey": "Month",
+        "default": "0"
+      },
+      {
+        "name": "opponent_team_id",
+        "queryKey": "OpponentTeamID",
+        "default": "0"
+      },
+      {
+        "name": "outcome_nullable",
+        "queryKey": "Outcome",
+        "default": ""
+      },
+      {
+        "name": "pace_adjust",
+        "queryKey": "PaceAdjust",
+        "default": "N"
+      },
+      {
+        "name": "per_mode_detailed",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "period",
+        "queryKey": "Period",
+        "default": "0"
+      },
+      {
+        "name": "player_id_nullable",
+        "queryKey": "PlayerID",
+        "default": ""
+      },
+      {
+        "name": "plus_minus",
+        "queryKey": "PlusMinus",
+        "default": "N"
+      },
+      {
+        "name": "rank",
+        "queryKey": "Rank",
+        "default": "N"
+      },
+      {
+        "name": "season",
+        "queryKey": "Season",
+        "default": null
+      },
+      {
+        "name": "season_segment_nullable",
+        "queryKey": "SeasonSegment",
+        "default": ""
+      },
+      {
+        "name": "season_type_playoffs",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      },
+      {
+        "name": "vs_conference_nullable",
+        "queryKey": "VsConference",
+        "default": ""
+      },
+      {
+        "name": "vs_division_nullable",
+        "queryKey": "VsDivision",
+        "default": ""
+      },
+      {
+        "name": "vs_player_id",
+        "queryKey": "VsPlayerID",
+        "default": "1628932"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamvsplayer"
+  },
+  {
+    "short": "teamyearbyyearstats",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/teamyearbyyearstats",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      },
+      {
+        "name": "per_mode_simple",
+        "queryKey": "PerMode",
+        "default": "Totals"
+      },
+      {
+        "name": "season_type_all_star",
+        "queryKey": "SeasonType",
+        "default": "Regular Season"
+      },
+      {
+        "name": "team_id",
+        "queryKey": "TeamID",
+        "default": "1611661328"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamyearbyyearstats"
+  },
+  {
+    "short": "videostatus",
+    "flat": true,
+    "api": "wnba_stats",
+    "host": "https://stats.wnba.com",
+    "scope": "universal",
+    "path": "/stats/videostatus",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_date",
+        "queryKey": "GameDate",
+        "default": "2022-06-10"
+      },
+      {
+        "name": "league_id",
+        "queryKey": "LeagueID",
+        "default": "10"
+      }
+    ],
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/videostatus"
   }
 ];

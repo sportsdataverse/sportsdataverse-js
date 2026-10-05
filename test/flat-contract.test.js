@@ -30,6 +30,8 @@ const FLAT_API_NAMESPACES = {
   bart_wbb: 'torvik',
   mls_api: 'mls',
   nwsl_api: 'nwsl',
+  nba_stats: 'nba',
+  wnba_stats: 'wnba',
 };
 
 /** Fill every required path param so the URL fully resolves. */

@@ -89,6 +89,11 @@ export const FLAT_HOSTS: Record<string, string> = {
   mls_api: "https://stats-api.mlssoccer.com",
   // NWSL StatsPerform SDP API (keyless).
   nwsl_api: "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
+  // stats.nba.com / stats.wnba.com — fingerprint-block plain clients (silent
+  // hang), so the families install an impersonating transport by default (see
+  // src/core/nba_stats_runtime.ts).
+  nba_stats: "https://stats.nba.com",
+  wnba_stats: "https://stats.wnba.com",
 };
 
 /**

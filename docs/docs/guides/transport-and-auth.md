@@ -257,3 +257,17 @@ NFL.com web token for you. Override it with environment variables —
 `NFL_ACCESS_TOKEN` (used verbatim), or `NFL_CLIENT_KEY` / `NFL_CLIENT_SECRET`
 (mint with your own client credentials) — or replace it entirely with
 `configure({ auth: { nfl_api: ... } })`.
+
+### stats.nba.com / stats.wnba.com (`nba_stats`, `wnba_stats`)
+
+Both families install `createImpersonatingTransport({ browser: 'chrome' })` as
+their default transport, send the stats headers (`x-nba-stats-origin`,
+`x-nba-stats-token`, `Referer` / `Origin` on nba.com or wnba.com) and never retry
+403. Install the optional dependency (`npm install impit`) and run from a
+**residential** connection: these hosts hang (rather than error) on datacenter
+and cloud IPs such as GitHub Actions or AWS. A timeout, blank body or bare `{}`
+rejects with `AssetFetchError`; it is never reported as "no data". Raise
+`configure({ timeoutMs })` for slow historical endpoints, and route through a
+residential proxy with
+`configure({ transport: { nba_stats: createImpersonatingTransport({ proxyUrl }) } })`.
+Live tests: `SDV_NBA_STATS_LIVE=1 npm test` (never set in CI).

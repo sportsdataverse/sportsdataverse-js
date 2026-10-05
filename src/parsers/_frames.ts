@@ -134,3 +134,36 @@ export function asRows(raw: any): any[] {
   if (isPlainObject(raw) && Object.keys(raw).length > 0) return [raw];
   return [];
 }
+
+/**
+ * Multi-table parsers (sdv-py returns a dict of frames): the sub-frame names each
+ * returns and the one returned by default, i.e. the frame sdv-py's returns schema
+ * documents. `section` on the wrapper (same name as the ESPN summary dispatcher's)
+ * picks any other. Mirrored in tools/codegen/endpoints/flat_parser_sections.yaml
+ * (read by codegen for the reference docs; a test keeps the two equal).
+ */
+export const MULTI_TABLE_SECTIONS: Record<string, { default: string; sections: string[] }> = {
+  parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
+  parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
+  parse_mls_match: {
+    default: "match_information",
+    sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"],
+  },
+  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
+};
+
+/**
+ * Select one sub-frame of a multi-table parse. `section` omitted -> the parser's
+ * default. An unknown name throws, listing the valid ones.
+ */
+export function pickSection(parser: string, tables: Record<string, Row[]>, section?: string): Row[] {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? spec.default;
+  if (!Object.prototype.hasOwnProperty.call(tables, name) || !spec.sections.includes(name)) {
+    throw new Error(
+      `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(spec.sections)}` +
+        ` (default '${spec.default}').`
+    );
+  }
+  return tables[name];
+}

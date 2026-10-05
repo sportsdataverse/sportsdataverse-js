@@ -9,12 +9,12 @@
 //
 // sdv-py returns two or seven frames for standings / match; the flat-API contract
 // is one frame, so those two return the sub-frame sdv-py's returns schema documents
-// (`entries` / `match_information`) and the full set is exported as
-// `parse_mls_standings_tables` / `parse_mls_match_tables`.
+// by default (`entries` / `match_information`); `section` selects any other, and the
+// full sets are exported as `parse_mls_standings_tables` / `parse_mls_match_tables`.
 //
 // Ids are opaque Sportec strings (`MLS-COM/SEA/MAT/CLU/OBJ-*`) pinned to strings.
 
-import { isPlainObject, rowsToFrame, type Row } from "./_frames.js";
+import { isPlainObject, pickSection, rowsToFrame, type Row } from "./_frames.js";
 
 const OPTS = { ids: true, dropNull: true } as const;
 
@@ -64,9 +64,9 @@ export function parse_mls_standings_tables(raw: any): { tables: Row[]; entries: 
   return { tables: rowsToFrame(meta, OPTS), entries: rowsToFrame(entries, OPTS) };
 }
 
-/** Parse an MLS standings payload into one row per ranked club (carrying its table's keys). */
-export function parse_mls_standings(raw: any): Row[] {
-  return parse_mls_standings_tables(raw).entries;
+/** Parse an MLS standings payload: `entries` (default, one row per ranked club) or `tables` via `section`. */
+export function parse_mls_standings(raw: any, section?: string): Row[] {
+  return pickSection("parse_mls_standings", parse_mls_standings_tables(raw), section);
 }
 
 const MATCH_TABLES = [
@@ -120,7 +120,7 @@ export function parse_mls_match_tables(raw: any): MatchTables {
   return out;
 }
 
-/** Parse a stats-api match-detail payload into its `match_information` frame (one row). */
-export function parse_mls_match(raw: any): Row[] {
-  return parse_mls_match_tables(raw).match_information;
+/** Parse a stats-api match-detail payload: `match_information` (default) or any of the seven sub-frames via `section`. */
+export function parse_mls_match(raw: any, section?: string): Row[] {
+  return pickSection("parse_mls_match", parse_mls_match_tables(raw), section);
 }

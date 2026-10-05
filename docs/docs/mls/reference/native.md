@@ -13,7 +13,7 @@ Beyond the ESPN surface, `sdv.mls` also wraps the league's own live APIs. Same `
 
 ## Native API — MLS web API
 
-Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https://stats-api.mlssoccer.com`. Each method is exposed under BOTH `mls_api_<endpoint>` (snake_case, py/R parity) and `mlsApi<Endpoint>` (camelCase canonical) on `sdv.mls`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https://stats-api.mlssoccer.com`. Each method is exposed under BOTH `mls_api_<endpoint>` (snake_case, py/R parity) and `mlsApi<Endpoint>` (camelCase canonical) on `sdv.mls`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -22,13 +22,13 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `mls_api_competitions` / `mlsApiCompetitions` | `https://stats-api.mlssoccer.com/competitions` | — | — | `parse_mls_api` | — |
 | `mls_api_content_season` / `mlsApiContentSeason` | `https://dapi.mlssoccer.com/v2/content/en-us/seasons/{slug}` | `slug`\* | — | `parse_mls_entity` | — |
 | `mls_api_content_seasons` / `mlsApiContentSeasons` | `https://dapi.mlssoccer.com/v2/content/en-us/seasons` | — | `competition_sportec_id` → `fields.competitionSportecId`, `sportec_id` → `fields.sportecId` | `parse_mls_api` | — |
-| `mls_api_match` / `mlsApiMatch` | `https://stats-api.mlssoccer.com/matches/{match_id}` | `match_id`\* | — | `parse_mls_match` | — |
+| `mls_api_match` / `mlsApiMatch` | `https://stats-api.mlssoccer.com/matches/{match_id}` | `match_id`\* | — | `parse_mls_match` — multi-table: `section` = `match_information` (default), `environment`, `teams`, `players`, `staff`, `referees`, `last_matches` | — |
 | `mls_api_season_matches` / `mlsApiSeasonMatches` | `https://stats-api.mlssoccer.com/matches/seasons/{season_id}` | `season_id`\* | `match_date_gte` → `match_date[gte]`, `match_date_lte` → `match_date[lte]`, `competition_id`, `per_page`, `sort`, `series_name` | `parse_mls_api` | — |
 | `mls_api_sportapi_club_players` / `mlsApiSportapiClubPlayers` | `https://sportapi.mlssoccer.com/api/players/byClub/{club_id}` | `club_id`\* | `culture` | `parse_mls_api` | — |
 | `mls_api_sportapi_clubs_by_sportec_ids` / `mlsApiSportapiClubsBySportecIds` | `https://sportapi.mlssoccer.com/api/clubs/bySportecIds/{ids}` | `ids`\* | — | `parse_mls_api` | — |
 | `mls_api_sportapi_match` / `mlsApiSportapiMatch` | `https://sportapi.mlssoccer.com/api/matches/{match_id}` | `match_id`\* | — | `parse_mls_entity` | — |
 | `mls_api_sportapi_matches_by_sportec_ids` / `mlsApiSportapiMatchesBySportecIds` | `https://sportapi.mlssoccer.com/api/matches/bySportecIds/{ids}` | `ids`\* | — | `parse_mls_api` | — |
-| `mls_api_standings` / `mlsApiStandings` | `https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons/{season_id}/standings` | `competition_id`\*, `season_id`\* | `category`, `standings_type` → `type`, `is_live` | `parse_mls_standings` | — |
+| `mls_api_standings` / `mlsApiStandings` | `https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons/{season_id}/standings` | `competition_id`\*, `season_id`\* | `category`, `standings_type` → `type`, `is_live` | `parse_mls_standings` — multi-table: `section` = `tables`, `entries` (default) | — |
 
 ### Returns — `mls_api_club` / `mlsApiClub`
 

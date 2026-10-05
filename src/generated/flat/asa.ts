@@ -166,7 +166,8 @@ const GOALKEEPERS_GOALS_ADDED_DEF: WrapperDef = {
       "queryKey": "end_date"
     }
   ],
-  "parser": "parse_asa_goals_added"
+  "parser": "parse_asa_goals_added",
+  "returnsSchema": "native/asa/goalkeepers_goals_added"
 };
 
 /**
@@ -381,7 +382,8 @@ const PLAYERS_GOALS_ADDED_DEF: WrapperDef = {
       "queryKey": "end_date"
     }
   ],
-  "parser": "parse_asa_goals_added"
+  "parser": "parse_asa_goals_added",
+  "returnsSchema": "native/asa/players_goals_added"
 };
 
 /**
@@ -704,7 +706,8 @@ const TEAMS_GOALS_ADDED_DEF: WrapperDef = {
       "queryKey": "end_date"
     }
   ],
-  "parser": "parse_asa_goals_added"
+  "parser": "parse_asa_goals_added",
+  "returnsSchema": "native/asa/teams_goals_added"
 };
 
 /**

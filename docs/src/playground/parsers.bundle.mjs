@@ -2079,6 +2079,25 @@ function asRows(raw) {
   if (isPlainObject16(raw) && Object.keys(raw).length > 0) return [raw];
   return [];
 }
+var MULTI_TABLE_SECTIONS = {
+  parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
+  parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
+  parse_mls_match: {
+    default: "match_information",
+    sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"]
+  },
+  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] }
+};
+function pickSection(parser, tables, section) {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? spec.default;
+  if (!Object.prototype.hasOwnProperty.call(tables, name) || !spec.sections.includes(name)) {
+    throw new Error(
+      `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(spec.sections)} (default '${spec.default}').`
+    );
+  }
+  return tables[name];
+}
 
 // src/parsers/on3.ts
 function parse_on3_rdb(raw) {
@@ -2109,8 +2128,8 @@ function parse_asa_goals_added_tables(raw) {
   }
   return { summary: rowsToFrame(summary, OPTS), actions: rowsToFrame(actions, OPTS) };
 }
-function parse_asa_goals_added(raw) {
-  return parse_asa_goals_added_tables(raw).actions;
+function parse_asa_goals_added(raw, section) {
+  return pickSection("parse_asa_goals_added", parse_asa_goals_added_tables(raw), section);
 }
 
 // src/parsers/mls_api.ts
@@ -2151,8 +2170,8 @@ function parse_mls_standings_tables(raw) {
   }
   return { tables: rowsToFrame(meta, OPTS2), entries: rowsToFrame(entries, OPTS2) };
 }
-function parse_mls_standings(raw) {
-  return parse_mls_standings_tables(raw).entries;
+function parse_mls_standings(raw, section) {
+  return pickSection("parse_mls_standings", parse_mls_standings_tables(raw), section);
 }
 var MATCH_TABLES = [
   "match_information",
@@ -2200,8 +2219,8 @@ function parse_mls_match_tables(raw) {
   for (const name of MATCH_TABLES) out[name] = rowsToFrame(blocks[name], OPTS2);
   return out;
 }
-function parse_mls_match(raw) {
-  return parse_mls_match_tables(raw).match_information;
+function parse_mls_match(raw, section) {
+  return pickSection("parse_mls_match", parse_mls_match_tables(raw), section);
 }
 
 // src/parsers/nwsl_api.ts
@@ -2289,8 +2308,210 @@ function parse_nwsl_lineups_tables(raw) {
     staff: rowsToFrame(staff, OPTS3)
   };
 }
-function parse_nwsl_lineups(raw) {
-  return parse_nwsl_lineups_tables(raw).players;
+function parse_nwsl_lineups(raw, section) {
+  return pickSection("parse_nwsl_lineups", parse_nwsl_lineups_tables(raw), section);
+}
+
+// src/parsers/nba_stats.ts
+function underscore2(word) {
+  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
+}
+var isObj = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
+var isNested = (v) => isObj(v) || Array.isArray(v);
+function pyJson2(v) {
+  if (v === null || v === void 0) return "null";
+  if (typeof v === "string") {
+    return JSON.stringify(v).replace(
+      /[\u007f-￿]/g,
+      (c) => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0")
+    );
+  }
+  if (Array.isArray(v)) return "[" + v.map(pyJson2).join(", ") + "]";
+  if (isObj(v)) {
+    return "{" + Object.entries(v).map(([k, x]) => `${pyJson2(String(k))}: ${pyJson2(x)}`).join(", ") + "}";
+  }
+  return String(v);
+}
+function setFromRows(name, rows) {
+  const headers = [];
+  const seen = /* @__PURE__ */ new Set();
+  for (const r of rows) for (const k of Object.keys(r)) if (!seen.has(k)) seen.add(k), headers.push(k);
+  return { name, headers, rowSet: rows.map((r) => headers.map((h) => h in r ? r[h] : null)) };
+}
+function setFromRowsSorted(name, rows) {
+  const headers = [...new Set(rows.flatMap((r) => Object.keys(r)))].sort();
+  return { name, headers, rowSet: rows.map((r) => headers.map((h) => h in r ? r[h] : null)) };
+}
+function videoResultSets(rs) {
+  const urls = isObj(rs.Meta) && Array.isArray(rs.Meta.videoUrls) ? rs.Meta.videoUrls : [];
+  const playlist = Array.isArray(rs.playlist) ? rs.playlist : [];
+  return [
+    setFromRows("videoUrls", urls.filter(isObj)),
+    setFromRows("playlist", playlist.filter(isObj))
+  ];
+}
+function boxscoreV3ResultSets(box) {
+  const gameMeta = {};
+  for (const [k, v] of Object.entries(box)) if (!isNested(v)) gameMeta[k] = v;
+  const teams = ["homeTeam", "awayTeam"].filter((s) => isObj(box[s])).map((s) => box[s]);
+  if (!teams.length) {
+    const row = {};
+    for (const [k, v] of Object.entries(box)) row[k] = isNested(v) ? pyJson2(v) : v;
+    return [setFromRows("BoxScoreSummary", [row])];
+  }
+  const playerRows = [];
+  const teamRows = [];
+  for (const team of teams) {
+    const ident = { ...gameMeta };
+    for (const [k, v] of Object.entries(team)) if (!isNested(v)) ident[k] = v;
+    const tstats = isObj(team.statistics) ? team.statistics : {};
+    const trow = { ...ident };
+    for (const [k, v] of Object.entries(tstats)) if (!isNested(v)) trow[k] = v;
+    teamRows.push(trow);
+    for (const player of Array.isArray(team.players) ? team.players : []) {
+      const row = { ...ident };
+      for (const [k, v] of Object.entries(player)) {
+        if (k === "statistics" && isObj(v)) {
+          for (const [sk, sv] of Object.entries(v)) if (!isNested(sv)) row[sk] = sv;
+        } else if (isNested(v)) row[k] = pyJson2(v);
+        else row[k] = v;
+      }
+      playerRows.push(row);
+    }
+  }
+  const sets = [setFromRows("PlayerStats", playerRows), setFromRows("TeamStats", teamRows)];
+  for (const [k, v] of Object.entries(box)) {
+    if (Array.isArray(v) && v.length && isObj(v[0])) {
+      const rows = v.map((rec) => {
+        const o = {};
+        for (const [rk, rv] of Object.entries(rec)) o[rk] = isNested(rv) ? pyJson2(rv) : rv;
+        return o;
+      });
+      sets.push(setFromRows(k.charAt(0).toUpperCase() + k.slice(1), rows));
+    }
+  }
+  return sets;
+}
+function flattenGame(record, prefix = "") {
+  const out = {};
+  for (const [key, value] of Object.entries(record)) {
+    const name = prefix ? `${prefix}${key}` : key;
+    if (isObj(value)) Object.assign(out, flattenGame(value, `${name}_`));
+    else if (Array.isArray(value)) continue;
+    else out[name.toLowerCase()] = value;
+  }
+  return out;
+}
+function scoreboardResultSet(sb) {
+  const base = {};
+  for (const [k, v] of Object.entries(sb)) if (k !== "games" && !isNested(v)) base[k] = v;
+  const rows = sb.games.filter(isObj).map((g) => {
+    const merged = { ...base };
+    for (const [k, v] of Object.entries(g)) if (!Array.isArray(v)) merged[k] = v;
+    return flattenGame(merged);
+  });
+  return setFromRowsSorted("GameHeader", rows);
+}
+var SEASON_TYPE_BY_ID = {
+  "1": "Pre-Season",
+  "2": "Regular Season",
+  "3": "All-Star",
+  "4": "Playoffs",
+  "5": "Play-In Game",
+  "6": "NBA Cup",
+  "9": "International"
+};
+var nestedName = (outer, inner) => `${underscore2(outer)}_${underscore2(inner)}`.replace(/team_team/g, "team");
+function leagueScheduleResultSet(ls) {
+  const rows = [];
+  for (const gd of ls.gameDates) {
+    if (!isObj(gd)) continue;
+    const day = {};
+    for (const [k, v] of Object.entries(gd)) if (k !== "games" && !isNested(v)) day[underscore2(k)] = v;
+    for (const game of Array.isArray(gd.games) ? gd.games : []) {
+      if (!isObj(game)) continue;
+      const row = { ...day };
+      for (const [key, value] of Object.entries(game)) {
+        if (Array.isArray(value)) continue;
+        if (isObj(value)) {
+          for (const [k, v] of Object.entries(value)) if (!isNested(v)) row[nestedName(key, k)] = v;
+        } else row[underscore2(key)] = value;
+      }
+      const gid = row.game_id;
+      const typeId = gid ? String(gid).slice(2, 3) : null;
+      row.season_type_id = typeId;
+      row.season_type_description = SEASON_TYPE_BY_ID[typeId ?? ""] ?? null;
+      row.season = ls.seasonYear ?? null;
+      row.league_id = ls.leagueId ?? null;
+      rows.push(row);
+    }
+  }
+  return setFromRowsSorted("SeasonGames", rows);
+}
+function resultSets(raw) {
+  if (Array.isArray(raw.resultSets)) return raw.resultSets;
+  if (isObj(raw.resultSets)) {
+    if ("Meta" in raw.resultSets || "playlist" in raw.resultSets) return videoResultSets(raw.resultSets);
+    return [raw.resultSets];
+  }
+  if (isObj(raw.resultSet)) return [raw.resultSet];
+  if (Array.isArray(raw.resultSet)) return raw.resultSet;
+  if (isObj(raw.scoreboard) && Array.isArray(raw.scoreboard.games)) return [scoreboardResultSet(raw.scoreboard)];
+  if (isObj(raw.leagueSchedule) && Array.isArray(raw.leagueSchedule.gameDates)) {
+    return [leagueScheduleResultSet(raw.leagueSchedule)];
+  }
+  for (const [key, val] of Object.entries(raw)) {
+    if (key.startsWith("boxScore") && isObj(val)) return boxscoreV3ResultSets(val);
+  }
+  return [];
+}
+function flattenHeaders(headers) {
+  if (!Array.isArray(headers) || !headers.length || !isObj(headers[0])) return Array.isArray(headers) ? [...headers] : [];
+  const [group, flatHdr] = headers;
+  const flat = [...flatHdr?.columnNames ?? []];
+  const skip = group.columnsToSkip ?? 0;
+  const span = group.columnSpan ?? 1;
+  const out = flat.slice(0, skip);
+  let idx = skip;
+  for (const grp of group.columnNames ?? []) {
+    const prefix = String(grp).replace(/\./g, "").trim().replace(/ /g, "_");
+    for (let i = 0; i < span; i++) if (idx < flat.length) out.push(`${prefix}_${flat[idx++]}`);
+  }
+  return out.concat(flat.slice(idx));
+}
+function toRows(rs) {
+  const headers = flattenHeaders(rs.headers).map((h) => underscore2(String(h)));
+  if (!headers.length) return [];
+  const rows = Array.isArray(rs.rowSet) ? rs.rowSet : [];
+  const out = [];
+  for (const r of rows) {
+    if (!Array.isArray(r) || r.length !== headers.length) continue;
+    const o = {};
+    headers.forEach((h, i) => {
+      const c = r[i];
+      o[h] = Array.isArray(c) ? c.map(String).join("|") : c;
+    });
+    out.push(o);
+  }
+  return out;
+}
+function parse_nba_stats_result_sets(raw, resultSet) {
+  if (!isObj(raw)) return [];
+  let sets;
+  try {
+    sets = resultSets(raw).filter(isObj);
+  } catch {
+    return [];
+  }
+  const frames = {};
+  sets.forEach((rs, i) => {
+    frames[rs.name ?? `set_${i}`] = toRows(rs);
+  });
+  if (resultSet !== void 0) return frames[resultSet] ?? [];
+  const names = Object.keys(frames);
+  if (!names.length) return [];
+  if (names.length === 1) return frames[names[0]];
+  return frames;
 }
 
 // src/parsers/_registry.ts
@@ -2441,7 +2662,10 @@ var PARSERS = {
   parse_nwsl_sdp,
   parse_nwsl_standings,
   parse_nwsl_stats,
-  parse_nwsl_lineups
+  parse_nwsl_lineups,
+  // ---- stats.nba.com / stats.wnba.com (resultSets envelope; one generic parser) ----
+  // Multi-set payloads return { [setName]: rows }, hence the cast.
+  parse_nba_stats_result_sets
 };
 function parserFor(name) {
   return name ? PARSERS[name] : void 0;
@@ -3529,10 +3753,15 @@ function parseEndpoint(kind, key, raw, section) {
 }
 export {
   ESPN_ENDPOINT_PARSERS,
+  MULTI_TABLE_SECTIONS,
   PARSERS,
   SUMMARY_SECTION_PARSERS,
   normalize,
   parseEndpoint,
+  parse_asa_goals_added_tables,
+  parse_mls_match_tables,
+  parse_mls_standings_tables,
+  parse_nwsl_lineups_tables,
   parse_summary,
   parserFor,
   parserForEndpoint,

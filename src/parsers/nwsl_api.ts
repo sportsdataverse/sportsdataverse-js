@@ -10,10 +10,11 @@
 //   parse_nwsl_lineups    team / player / staff frames
 //
 // sdv-py's lineups parser returns three frames; the flat-API contract is one, so
-// `parse_nwsl_lineups` returns the `players` frame sdv-py's returns schema documents
-// and the three-frame form is exported as `parse_nwsl_lineups_tables`.
+// `parse_nwsl_lineups(raw, section?)` returns the `players` frame sdv-py's returns
+// schema documents by default (`teams` / `staff` via `section`); the three-frame form
+// is exported as `parse_nwsl_lineups_tables`.
 
-import { isPlainObject, pyJson, pyUnderscore, rowsToFrame, type Row } from "./_frames.js";
+import { isPlainObject, pickSection, pyJson, pyUnderscore, rowsToFrame, type Row } from "./_frames.js";
 
 const OPTS = { ids: true, dropNull: true } as const;
 
@@ -121,7 +122,7 @@ export function parse_nwsl_lineups_tables(raw: any): { teams: Row[]; players: Ro
   };
 }
 
-/** Parse an NWSL match-lineups payload into its `players` frame (starting XI + bench). */
-export function parse_nwsl_lineups(raw: any): Row[] {
-  return parse_nwsl_lineups_tables(raw).players;
+/** Parse an NWSL match-lineups payload: `players` (default; starting XI + bench), `teams` or `staff` via `section`. */
+export function parse_nwsl_lineups(raw: any, section?: string): Row[] {
+  return pickSection("parse_nwsl_lineups", parse_nwsl_lineups_tables(raw), section);
 }

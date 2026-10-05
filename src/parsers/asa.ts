@@ -4,11 +4,12 @@
 // `team_id` -- a player who featured for several clubs -- is comma-joined).
 //
 // The three `goals-added` routes nest a per-action breakdown under `data[]`. sdv-py
-// returns two frames (`summary`, `actions`); the flat-API contract is one frame, so
-// `parse_asa_goals_added` returns the long `actions` frame (the g+ measures) and the
-// two-frame form is exported as `parse_asa_goals_added_tables`.
+// returns a dict of two frames (`summary`, `actions`). The flat-API contract is one
+// frame, so `parse_asa_goals_added(raw, section?)` returns `summary` by default (the
+// frame sdv-py's returns schema documents) and `section: "actions"` the long per-action
+// frame; `parse_asa_goals_added_tables` returns both.
 
-import { asRows, isPlainObject, rowsToFrame, type Row } from "./_frames.js";
+import { asRows, isPlainObject, pickSection, rowsToFrame, type Row } from "./_frames.js";
 
 const OPTS = { ids: true, dropNull: true } as const;
 
@@ -36,7 +37,7 @@ export function parse_asa_goals_added_tables(raw: any): { summary: Row[]; action
   return { summary: rowsToFrame(summary, OPTS), actions: rowsToFrame(actions, OPTS) };
 }
 
-/** Parse an ASA `goals-added` body into its long per-action frame. */
-export function parse_asa_goals_added(raw: any): Row[] {
-  return parse_asa_goals_added_tables(raw).actions;
+/** Parse an ASA `goals-added` body: `summary` (default) or `actions` via `section`. */
+export function parse_asa_goals_added(raw: any, section?: string): Row[] {
+  return pickSection("parse_asa_goals_added", parse_asa_goals_added_tables(raw), section);
 }

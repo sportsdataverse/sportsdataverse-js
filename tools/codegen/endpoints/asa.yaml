@@ -121,6 +121,7 @@ endpoints:
   - name: league_slug
     required: true
     type: str
+  returns_schema: native/asa/goalkeepers_goals_added
   short: goalkeepers_goals_added
   summary: Per-goalkeeper Goals Added with a per-action-type data[] breakdown.
 - example_args:
@@ -238,6 +239,7 @@ endpoints:
   - name: league_slug
     required: true
     type: str
+  returns_schema: native/asa/players_goals_added
   short: players_goals_added
   summary: Per-player Goals Added (g+) with a per-action-type data[] breakdown.
 - example_args:
@@ -414,6 +416,7 @@ endpoints:
   - name: league_slug
     required: true
     type: str
+  returns_schema: native/asa/teams_goals_added
   short: teams_goals_added
   summary: Per-team Goals Added for/against with a per-action-type data[] breakdown.
 - example_args:

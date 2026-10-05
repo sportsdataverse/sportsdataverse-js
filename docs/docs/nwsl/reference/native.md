@@ -13,12 +13,12 @@ Beyond the ESPN surface, `sdv.nwsl` also wraps the league's own live APIs. Same 
 
 ## Native API — NWSL (StatsPerform SDP)
 
-Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `https://api-sdp.nwslsoccer.com/v1/nwsl/football`. Each method is exposed under BOTH `nwsl_api_<endpoint>` (snake_case, py/R parity) and `nwslApi<Endpoint>` (camelCase canonical) on `sdv.nwsl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `https://api-sdp.nwslsoccer.com/v1/nwsl/football`. Each method is exposed under BOTH `nwsl_api_<endpoint>` (snake_case, py/R parity) and `nwslApi<Endpoint>` (camelCase canonical) on `sdv.nwsl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
 | `nwsl_api_competitions` / `nwslApiCompetitions` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/competitions` | — | `locale` | `parse_nwsl_sdp` | — |
-| `nwsl_api_match_lineups` / `nwslApiMatchLineups` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matches/{match_id}/lineups` | `season_id`\*, `match_id`\* | `locale` | `parse_nwsl_lineups` | — |
+| `nwsl_api_match_lineups` / `nwslApiMatchLineups` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matches/{match_id}/lineups` | `season_id`\*, `match_id`\* | `locale` | `parse_nwsl_lineups` — multi-table: `section` = `teams`, `players` (default), `staff` | — |
 | `nwsl_api_matchdays` / `nwslApiMatchdays` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/matchdays` | `season_id`\* | `locale` | `parse_nwsl_sdp` | — |
 | `nwsl_api_player_stats` / `nwslApiPlayerStats` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/{season_id}/stats/players` | `season_id`\* | `locale`, `category`, `role`, `direction`, `page`, `page_num_element` → `pageNumElement` | `parse_nwsl_stats` | — |
 | `nwsl_api_season_matches` / `nwslApiSeasonMatches` | `https://api-sdp.nwslsoccer.com/v1/nwsl/football/seasons/multipleSeasonMatches` | — | `season_ids` → `seasonIds`, `locale`, `start_date` → `startDate`, `end_date` → `endDate` | `parse_nwsl_sdp` | — |

@@ -13,6 +13,7 @@
 // `::` literal. They are substituted into the URL path by `resolveFlat` and the
 // transport sends the absolute URL as given, so nothing percent-encodes them.
 
+import { AssetFetchError } from "./errors.js";
 import { request } from "./request.js";
 import { mergeHeaders } from "./transport.js";
 
@@ -34,6 +35,14 @@ function makeGetter(family: string, defaults: Record<string, string>) {
       // caller headers win key-by-key
       headers: mergeHeaders(defaults, config.headers),
     });
+    // These are JSON APIs. A 2xx body that is not JSON (an HTML bot-block / error page
+    // arrives as a string) is a failed fetch, never an empty result; a genuinely empty
+    // JSON body ([] / {}) is data and passes through.
+    if (typeof data === "string") {
+      throw new AssetFetchError(`${family}: expected JSON but received a non-JSON body: ${url}`, {
+        url,
+      });
+    }
     return data ?? {};
   };
 }
