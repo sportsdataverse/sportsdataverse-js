@@ -152,7 +152,9 @@ const hockeytechAnalytics = {
 };
 // Never silently overwrite an existing sdv.hockeytech key (the flat raw-feed wrappers share the namespace).
 for (const name of Object.keys(hockeytechAnalytics)) {
-  if (name in sdv.hockeytech || name in hockeytechSeasonExtra) throw new Error(`sdv.hockeytech.${name} already exists`);
+  for (const n of [name, toCamel(name)]) {
+    if (n in sdv.hockeytech || n in hockeytechSeasonExtra) throw new Error(`sdv.hockeytech.${n} already exists`);
+  }
 }
 Object.assign(hockeytechSeasonExtra, hockeytechAnalytics);
 for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {

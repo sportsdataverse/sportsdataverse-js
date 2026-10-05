@@ -257,3 +257,70 @@ describe('hockeytech analytics: per-league wrappers (offline stub transport serv
     sdv.hockeytech.hockeytech_game_shifts.should.equal(FLAT.hockeytech_game_shifts);
   });
 });
+
+describe('hockeytech analytics: live 2026-10-05 captures (MJHL access denied, USHL partial pbp) vs the py oracle', () => {
+  const live = (n) => readFileSync(join(dir, 'live-2026-10-05', `${n}.txt`), 'utf8');
+  const GAMES = { mjhl: 7301, ushl: 13506 };
+  let override = null; // { league, feed/view -> text }
+  before(() => {
+    configure({
+      retries: 0,
+      transport: async (req) => {
+        const q = req.query ?? {};
+        const key = q.view === 'gameshifts' ? 'shifts' : q.feed === 'statviewfeed' ? 'pbp' : 'summary';
+        let text;
+        if (override && override[key] !== undefined) text = override[key];
+        else if (q.client_code === 'ohl' && key === 'shifts') text = live('ohl_shifts_29044');
+        else text = live(`${q.client_code}_${key}_${GAMES[q.client_code]}`);
+        return { status: 200, headers: {}, data: text, url: req.url };
+      },
+    });
+  });
+  after(() => resetConfig());
+  afterEach(() => {
+    override = null;
+  });
+
+  it('the MJHL summary really is the plain-text "Feed type access denied." reply', () => {
+    live('mjhl_summary_7301').should.equal('Feed type access denied.');
+  });
+  for (const lg of ['mjhl', 'ushl']) {
+    it(`${lg}: pbp (goals / penalties / goalie changes only) matches py; shifts / toi / corsi are [] like py`, async () => {
+      const pbp = await sdv.hockeytech[`${lg}_pbp`](GAMES[lg]);
+      expectFrame(pbp, O[`live_${lg}_pbp`]);
+      // known-positive control: real events came back, with no shot rows and no coordinates (partial feed)
+      pbp.length.should.be.above(15);
+      pbp.some((r) => r.event === 'goal').should.be.true();
+      pbp.every((r) => r.event !== 'shot' && r.x_coord === null).should.be.true();
+      expectFrame(await sdv.hockeytech[`${lg}_game_shifts`](GAMES[lg]), O[`live_${lg}_game_shifts`]);
+      expectFrame(await sdv.hockeytech[`${lg}_player_toi`](GAMES[lg]), O[`live_${lg}_player_toi`]);
+      expectFrame(await sdv.hockeytech[`${lg}_game_corsi`](GAMES[lg]), O[`live_${lg}_game_corsi`]);
+    });
+  }
+  it('an access-denied pbp or shifts feed is "nothing here" ([]), not a failed fetch', async () => {
+    override = { pbp: 'Feed type access denied.', shifts: 'Feed type access denied.' };
+    (await sdv.hockeytech.mjhl_pbp(7301)).should.eql([]);
+    (await sdv.hockeytech.mjhl_game_shifts(7301)).should.eql([]);
+    (await sdv.hockeytech.mjhl_game_corsi(7301)).should.eql([]);
+  });
+  it('an empty OHL shift envelope (real capture) is []', async () => {
+    (await sdv.hockeytech.ohl_game_shifts(29044)).should.eql([]);
+  });
+  it('unrecognised bodies are still AssetFetchError (near-miss text, HTML, invalid-view sentinels)', async () => {
+    const bads = [
+      'Feed type access granted.',
+      'Access denied.',
+      '<html>blocked</html>',
+      JSON.stringify({ error: 'InvalidView error: gameshifts' }),
+      JSON.stringify({ SiteKit: { Undefined: 'Undefined Tab gameshifts' } }),
+    ];
+    for (const b of bads) {
+      override = { shifts: b };
+      await sdv.hockeytech.ushl_game_shifts(13506).should.be.rejectedWith(AssetFetchError);
+      override = { pbp: b };
+      await sdv.hockeytech.ushl_pbp(13506).should.be.rejectedWith(AssetFetchError);
+    }
+    override = { summary: 'nope' };
+    await sdv.hockeytech.ushl_pbp(13506).should.be.rejectedWith(AssetFetchError);
+  });
+});

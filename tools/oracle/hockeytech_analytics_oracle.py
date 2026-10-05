@@ -124,6 +124,37 @@ try:
 except Exception as e:  # recorded so the JS port can mirror it
     C["ohl_family_game_corsi_no_shifts"] = {"error": f"{type(e).__name__}: {e}"}
 
+# --- live captures 2026-10-05 (fix round 2): MJHL (summary access denied), USHL (partial pbp) ---
+LIVE = FIX / "live-2026-10-05"
+
+
+def live_payload(name):
+    text = (LIVE / f"{name}.txt").read_text(encoding="utf-8")
+    try:
+        return json.loads(F_client_strip(text))
+    except Exception:  # plain-text "Feed type access denied." -> hockeytech_api returns None
+        return None
+
+
+from sportsdataverse.hockeytech._client import _strip_jsonp as F_client_strip  # noqa: E402
+
+LIVE_GAMES = {
+    "mjhl": 7301,
+    "ushl": 13506,
+}
+for lg, gid in LIVE_GAMES.items():
+    served = {
+        ("statviewfeed", "gameCenterPlayByPlay"): live_payload(f"{lg}_pbp_{gid}"),
+        ("modulekit", "gameshifts"): live_payload(f"{lg}_shifts_{gid}"),
+        ("gc", "gamesummary"): live_payload(f"{lg}_summary_{gid}"),
+    }
+    F.hockeytech_api = lambda league, feed, view, params=None, _s=served, **kw: _s[(feed, view)]
+    fam_lg = F.build_family(lg)
+    C[f"live_{lg}_pbp"] = frame(fam_lg[f"{lg}_pbp"](gid))
+    C[f"live_{lg}_game_shifts"] = frame(fam_lg[f"{lg}_game_shifts"](gid))
+    C[f"live_{lg}_player_toi"] = frame(fam_lg[f"{lg}_player_toi"](gid))
+    C[f"live_{lg}_game_corsi"] = frame(fam_lg[f"{lg}_game_corsi"](gid))
+
 # --- synthetic edge cases ---------------------------------------------------
 SH_SCHEMA = {
     "player_id": pl.Int64,
