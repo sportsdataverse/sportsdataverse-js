@@ -9,6 +9,7 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ### Security
 
+- Runtime dependencies patched: `axios` `^1.17.0` → `^1.20.0` (22 advisories, 8 high — header injection, prototype-pollution gadgets, ReDoS, HTTP/2 DoS, fetch-adapter redirect SSRF) and `undici` (pulled in by `cheerio`) 7.27.2 → 7.30.0 in the lockfile (21 advisories, 6 high). Both stay within their major version; no API change. `npm audit --omit=dev` is clean.
 - Credentials no longer reach `err.cause`. A raw axios error carries its request config — the `Authorization` header, cookies, and a POSTed login form, password included — and it was attached as-is to `AssetFetchError` (network failures, auth failures), so `util.inspect(err)` or a logged error could expose them. Every `SdvError` now stores its `cause` through `safeCause` (name, message and stack with URL query strings and `user:password@` redacted, plus `code` / `errno` / `syscall` — nothing else). `axiosTransport` and the impersonating (impit) transport reject with the same sanitized errors. This applies to every family; the old behavior predates this PR.
 
 ### Added — release dataset loaders (323 `load*` functions)
