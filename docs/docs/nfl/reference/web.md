@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.nfl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNflAthleteGamelog`
+## `espnNflPlayerGamelog`
 
-NFL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+NFL — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nfl_athlete_gamelog` / `espnNflAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ NFL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nfl.espnNflAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nfl.espn_nfl_athlete_gamelog(...)
+await sdv.nfl.espnNflPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nfl.espn_nfl_player_gamelog(...)
 ```
 
-## `espnNflAthleteOverview`
+## `espnNflPlayerOverview`
 
-NFL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+NFL — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nfl_athlete_overview` / `espnNflAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ NFL — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nfl.espnNflAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nfl.espn_nfl_athlete_overview(...)
+await sdv.nfl.espnNflPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nfl.espn_nfl_player_overview(...)
 ```
 
-## `espnNflAthleteSplits`
+## `espnNflPlayerSplits`
 
-NFL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+NFL — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nfl_athlete_splits` / `espnNflAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ NFL — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nfl.espnNflAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nfl.espn_nfl_athlete_splits(...)
+await sdv.nfl.espnNflPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nfl.espn_nfl_player_splits(...)
 ```
 
-## `espnNflAthleteStats`
+## `espnNflPlayerStatsV3`
 
-NFL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+NFL — player stats v3 (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nfl_athlete_stats` / `espnNflAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ NFL — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nfl.espnNflAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nfl.espn_nfl_athlete_stats(...)
+await sdv.nfl.espnNflPlayerStatsV3({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nfl.espn_nfl_player_stats_v3(...)
 ```
 
 ## `espnNflLeaders`

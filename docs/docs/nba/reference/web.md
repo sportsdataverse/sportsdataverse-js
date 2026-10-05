@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.nba`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNbaAthleteGamelog`
+## `espnNbaPlayerGamelog`
 
-NBA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+NBA — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nba_athlete_gamelog` / `espnNbaAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ NBA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nba.espnNbaAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nba.espn_nba_athlete_gamelog(...)
+await sdv.nba.espnNbaPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nba.espn_nba_player_gamelog(...)
 ```
 
-## `espnNbaAthleteOverview`
+## `espnNbaPlayerOverview`
 
-NBA — athlete overview (ESPN site.web.api.espn.com (web v3)).
+NBA — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nba_athlete_overview` / `espnNbaAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ NBA — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nba.espnNbaAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nba.espn_nba_athlete_overview(...)
+await sdv.nba.espnNbaPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nba.espn_nba_player_overview(...)
 ```
 
-## `espnNbaAthleteSplits`
+## `espnNbaPlayerSplits`
 
-NBA — athlete splits (ESPN site.web.api.espn.com (web v3)).
+NBA — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nba_athlete_splits` / `espnNbaAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ NBA — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nba.espnNbaAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nba.espn_nba_athlete_splits(...)
+await sdv.nba.espnNbaPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nba.espn_nba_player_splits(...)
 ```
 
-## `espnNbaAthleteStats`
+## `espnNbaPlayerStatsV3`
 
-NBA — athlete stats (ESPN site.web.api.espn.com (web v3)).
+NBA — player stats v3 (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nba_athlete_stats` / `espnNbaAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ NBA — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nba.espnNbaAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nba.espn_nba_athlete_stats(...)
+await sdv.nba.espnNbaPlayerStatsV3({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nba.espn_nba_player_stats_v3(...)
 ```
 
 ## `espnNbaLeaders`

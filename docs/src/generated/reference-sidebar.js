@@ -13,6 +13,11 @@ module.exports = [
     "label": "Parsed returns"
   },
   {
+    "type": "doc",
+    "id": "reference/deprecations",
+    "label": "Deprecated names (v4)"
+  },
+  {
     "type": "category",
     "label": "Basketball",
     "collapsible": true,

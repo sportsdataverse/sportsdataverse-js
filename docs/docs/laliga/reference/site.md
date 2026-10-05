@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.laliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLaligaAthleteBio`
+## `espnLaligaPlayerBio`
 
-LALIGA — athlete bio (ESPN site.api.espn.com).
+LALIGA — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_bio` / `espnLaligaAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ LALIGA — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_bio(...)
+await sdv.laliga.espnLaligaPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_bio(...)
 ```
 
-## `espnLaligaAthleteInfo`
+## `espnLaligaPlayerInfo`
 
-LALIGA — athlete info (ESPN site.api.espn.com).
+LALIGA — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_info` / `espnLaligaAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ LALIGA — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_info(...)
+await sdv.laliga.espnLaligaPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_info(...)
 ```
 
-## `espnLaligaAthleteNews`
+## `espnLaligaPlayerNews`
 
-LALIGA — athlete news (ESPN site.api.espn.com).
+LALIGA — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/esp.1/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_news` / `espnLaligaAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ LALIGA — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_news(...)
+await sdv.laliga.espnLaligaPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_news(...)
 ```
 
 ## `espnLaligaCalendar`

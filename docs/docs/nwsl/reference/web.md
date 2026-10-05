@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.nwsl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNwslAthleteGamelog`
+## `espnNwslPlayerGamelog`
 
-NWSL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+NWSL — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.nwsl/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_gamelog` / `espnNwslAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ NWSL — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_gamelog(...)
+await sdv.nwsl.espnNwslPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_gamelog(...)
 ```
 
-## `espnNwslAthleteOverview`
+## `espnNwslPlayerOverview`
 
-NWSL — athlete overview (ESPN site.web.api.espn.com (web v3)).
+NWSL — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.nwsl/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_overview` / `espnNwslAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ NWSL — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_overview(...)
+await sdv.nwsl.espnNwslPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_overview(...)
 ```
 
-## `espnNwslAthleteSplits`
+## `espnNwslPlayerSplits`
 
-NWSL — athlete splits (ESPN site.web.api.espn.com (web v3)).
+NWSL — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.nwsl/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_splits` / `espnNwslAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ NWSL — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_splits(...)
+await sdv.nwsl.espnNwslPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_splits(...)
 ```
 
-## `espnNwslAthleteStats`
+## `espnNwslPlayerStats`
 
-NWSL — athlete stats (ESPN site.web.api.espn.com (web v3)).
+NWSL — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/usa.nwsl/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_stats` / `espnNwslAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ NWSL — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_stats(...)
+await sdv.nwsl.espnNwslPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_stats(...)
 ```
 
 ## `espnNwslLeaders`

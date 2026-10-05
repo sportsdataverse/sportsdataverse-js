@@ -24,7 +24,7 @@ await sdv.odds.oddsApiSports({ api_key: process.env.ODDS_API_KEY });
 
 ## Native API — The Odds API
 
-Flat (non-ESPN) wrappers for the-odds-api.com. Host: `https://api.the-odds-api.com`. Each method is exposed under BOTH `odds_api_<endpoint>` (snake_case, py/R parity) and `oddsApi<Endpoint>` (camelCase canonical) on `sdv.odds`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the-odds-api.com. Host: `https://api.the-odds-api.com`. Each method is exposed under BOTH its snake_case name `odds_api_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.odds`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

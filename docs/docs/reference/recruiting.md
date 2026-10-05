@@ -27,7 +27,7 @@ await sdv.recruiting.recruiting_rankings({
 
 ## Native API — 247Sports
 
-Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://api.247sports.com`. Each method is exposed under BOTH `recruiting_<endpoint>` (snake_case, py/R parity) and `recruiting<Endpoint>` (camelCase canonical) on `sdv.recruiting`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the 247Sports recruiting database. Host: `https://api.247sports.com`. Each method is exposed under BOTH its snake_case name `recruiting_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.recruiting`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

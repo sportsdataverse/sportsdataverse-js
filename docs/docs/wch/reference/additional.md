@@ -34,11 +34,13 @@ await sdv.wch.espnWchRankings({});
 // snake_case alias (py/R parity): sdv.wch.espn_wch_rankings(...)
 ```
 
-## `espnWchRecruitingAthletes`
+## `espnWchRecruitingPlayers`
 
-WCH — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+WCH — recruiting players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/hockey/leagues/womens-college-hockey/recruiting/{year}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_recruiting_athletes` / `espnWchRecruitingAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,8 +58,8 @@ WCH — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wch.espnWchRecruitingAthletes({ year: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_recruiting_athletes(...)
+await sdv.wch.espnWchRecruitingPlayers({ year: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_recruiting_players(...)
 ```
 
 ## `espnWchRecruitingRankings`
