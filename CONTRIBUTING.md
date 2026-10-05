@@ -124,6 +124,7 @@ names, parser names, schema paths).
 npm run vendor -- --ref <sha>   # bump the pin + fetch (GitHub raw; SDV_PY_REPO=<clone> for local)
 npm run vendor -- --offline     # re-derive after editing vendor.yaml or overlay/
 npm run vendor:check            # offline gate (CI): LOCK hashes + any hand-edit
+npm run vendor:check:online     # CI + weekly sync: LOCK shas == sdv-py's git tree at the pin
 npm run codegen                 # then regenerate as usual
 ```
 
@@ -158,7 +159,16 @@ npm run codegen                 # then regenerate as usual
   and a column it lists as unexercised (null in every capture) is typed `unknown`.
 - `npm run vendor` deletes (and `vendor:check` flags) only the exact py schema
   copies it wrote and no longer attaches (byte-identical to the upstream copy);
-  JS-authored schemas are never touched, wherever they live.
+  JS-authored schemas are never touched, wherever they live. Across a pin bump,
+  `npm run vendor` (only it; the old upstream copy is gone by the time `vendor:check`
+  runs) also prunes copies only the OLD pin vendored, compared against the outgoing
+  derived outputs per family; a family whose outgoing outputs cannot be derived is named
+  and skipped.
+- `vendor:check:online` closes the gap the offline gate leaves (a copy and its LOCK line
+  edited together, or a LOCK line dropped): every LOCK blob sha must equal
+  `git/trees/<ref>` of sdv-py at the pin AND LOCK's path set must equal what the vendor
+  fetches (one shared path-selection helper). Unauthenticated, or `GITHUB_TOKEN`;
+  5xx/network errors get up to 3 attempts, 403/404 and exhausted attempts fail; it never passes unverified.
 - A new param `transform:` upstream fails `npm run codegen` until it is ported to
   `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
   `tools/codegen/param-transforms.mjs`.

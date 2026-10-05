@@ -2,13 +2,24 @@
 
 ## **Unreleased**
 
+### Changed — vendor LOCK online integrity check + vendor-sync hardening
+
+- **New:** `npm run vendor:check:online` (CI and the weekly vendor-sync) checks `vendor/upstream/LOCK` against sdv-py's `git/trees/<ref>` at the pinned ref: every blob sha must match, and LOCK's path set must equal exactly what the vendor fetches (computed by the same path-selection helper `npm run vendor` uses), so editing a copy together with its LOCK line, or dropping a LOCK line and hand-editing the vendored copy, both fail. A network failure is a failure to verify, never a pass; 5xx/network errors are retried (3 attempts), 403/404 are not.
+- **vendor-sync:** `GITHUB_TOKEN` is exposed to the vendor step only (codegen runs in its own step without it); a ref/vendor/codegen failure opens or updates a "vendor-sync failed" issue naming the failing step (the run still goes red) instead of only failing.
+- **Pin bumps:** `npm run vendor` (not `vendor:check`) now removes a py schema copy that the new pin renamed or dropped (byte-identical to the old upstream, not referenced by any endpoint; JS-authored files are never touched). It derives the outgoing outputs per family, and names any family whose prune was skipped.
+- The vendor tests no longer flake against their timeout: endpoint-YAML parsing (the slow path, repeated per temp-tree copy) is memoized.
 
 ### Added — NFL Pro email/password login
 
 - **NFL Pro** (`nfl_pro`) can now log in for you, ported from sdv-py's `nflpro_runtime`. The token resolves in sdv-py's order: `headers.Authorization` > `token` > `NFLPRO_TOKEN` > a headless-browser id.nfl.com login with `email` / `password` on the call, else `NFLPRO_EMAIL` / `NFLPRO_PW` (the same env var names as sdv-py) > `NflProAuthError` with instructions. `NFLPRO_TOKEN` wins over `email` / `password` on the call, as in sdv-py.
 - The login drives id.nfl.com as a state machine (e-mail, an optional passkey offer, password, in whatever order the site shows them). It keeps only a token whose JWT carries an active `NFL_PLUS_*` plan, because an anonymous token looks the same. Tokens are cached per account until 120 s before they expire, keyed by an HMAC of e-mail + password under a random per-process key (a wrong password is never answered from the cache; expired entries are dropped). Concurrent calls for one account share one login; the whole login has one 3-minute deadline, after which the browser is closed and every waiter rejects. A `401` on a logged-in token drops it and logs in again once (a supplied token is never re-minted). The e-mail, password and token never reach an error, its `cause`, or a warning; note that `DEBUG=pw:api` makes Playwright itself log `fill()` values to stderr.
+- The password is submitted **once**: if id.nfl.com still shows the password field afterwards, the login stops with "did not accept the password" instead of retrying (sdv-py resubmits, which with a wrong `NFLPRO_PW` is repeated failed attempts against a paid account).
 - `playwright` is a new **optional** peer dependency, imported only when a login is actually needed: `npm i playwright && npx playwright install chromium`. Without it, a login throws `TransportUnavailableError` naming that command.
 - New exports `nflProBrowserLogin(email, password, { playwright })` (the login itself; the module is injectable) and `nflProClearTokenCache()`, plus the `PlaywrightLike` type. `nflProToken` (new in this release) is now `async` and takes `{ token, email, password }`. Live test: `SDV_NFLPRO_LIVE=1` (or `SDV_NFL_PRO_LIVE=1`) with `NFLPRO_TOKEN` or `NFLPRO_EMAIL` / `NFLPRO_PW`.
+
+### Added — ESPN basketball box producers (NBA / WNBA / MBB / WBB)
+
+- `sdv.<lg>.helper_<lg>_player_box(summary)` and `helper_<lg>_team_box(summary)` (+ camelCase, e.g. `sdv.nba.helperNbaPlayerBox`) for `nba`, `wnba`, `mbb`, `wbb`: one game's ESPN summary payload in, the rows the hoopR / wehoop box-score releases publish out. Pure (no network): fetch with `espn_<lg>_summary({ event_id })` and pass the result in. Ported from sdv-py (pin 719de79) with its per-league facts: NBA/WNBA carry `plus_minus` (a string such as `"+16"`), MBB/WBB do not; MBB/WBB skip a game whose second team ships no athletes, NBA/WNBA publish the first team's rows; MBB orders `active` last. Same columns, order and null handling as sdv-py; Int32 columns are numbers (ids included); `game_date_time` and `game_date` are JS `Date`s, exactly as the release loaders decode the published parquet (the instant, and the New York calendar date at UTC midnight), so producer rows and loaded rows join on the same values. A payload sdv-py skips returns `[]`. Parity: every helper is compared cell by cell with sdv-py's output on 14 real captures (full games in all four leagues, plus archival, one-sided, scheduled and stat-less payloads) and 24 derived gate payloads (`tools/parity/espn_basketball_box_oracle.py`).
 
 ### Security
 
