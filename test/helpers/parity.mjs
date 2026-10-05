@@ -1,21 +1,34 @@
-import { MLBAM_ID_COLUMNS } from '../../dist/parsers/mlb_statcast.js';
+import { isIdColumn } from '../../dist/core/int64.js';
 
 // Cell comparison for JS-parser vs sdv-py-oracle parity tests (keyless.test.js,
 // parity.test.js). py frames are polars; object-dtype columns that py
 // stringified compare by string form, everything else numerically.
 
-const MLBAM_IDS = new Set(MLBAM_ID_COLUMNS);
-/** A join-key column: `id`, `*_id`, `*_ids`, `*_pk`, or an MLBAM id column (`batter`, `on_1b`, ...). */
-export const isIdColumn = (col) => col === 'id' || /_(ids?|pk)$/.test(col) || MLBAM_IDS.has(col);
+/** A join-key column (`id`, `*_id`, `*_ids`, `*_pk`, MLBAM ids): the runtime's own rule, src/core/int64.ts. */
+export { isIdColumn };
 
 /**
- * Does a non-null JS value have the JS type of a polars dtype (the oracle's
- * `dtypes`)? Integers / floats -> number|bigint, String -> string, Boolean ->
- * boolean, a List / Struct (JS JSON-encodes nested cells) or temporal -> string,
- * Null -> nothing (py has no value there). An unknown dtype fails closed.
+ * sdv-py golden rows as sdv-js v4 returns them: an integer in an id column becomes
+ * its decimal string (the INT64 id rule); everything else is untouched.
  */
-export function sameType(v, dtype) {
-  if (/^(U?Int\d+|Float\d+|Decimal)/.test(dtype)) return typeof v === 'number' || typeof v === 'bigint';
+export const pyIdRows = (rows) =>
+  rows.map((r) =>
+    Object.fromEntries(Object.entries(r).map(([k, v]) => [k, isIdColumn(k) && Number.isSafeInteger(v) ? String(v) : v]))
+  );
+
+/**
+ * Does a non-null JS value of column `col` have the JS type of a polars dtype
+ * (the oracle's `dtypes`)? Integers / floats -> number|bigint, String -> string,
+ * Boolean -> boolean, a List / Struct (JS JSON-encodes nested cells) or temporal
+ * -> string, Null -> nothing (py has no value there). An unknown dtype fails
+ * closed. An id column (`isIdColumn`) that py types numeric must be a STRING:
+ * the v4 id rule makes py's Int64 id (or the Float64 pandas makes of one with
+ * nulls) decimal strings in JS, so a number there fails.
+ */
+export function sameType(v, dtype, col) {
+  if (/^(U?Int\d+|Float\d+|Decimal)/.test(dtype)) {
+    return col !== undefined && isIdColumn(col) ? typeof v === 'string' : typeof v === 'number' || typeof v === 'bigint';
+  }
   if (/^(String|Utf8|Categorical|Enum)/.test(dtype)) return typeof v === 'string';
   if (dtype === 'Boolean') return typeof v === 'boolean';
   if (/^(List|Array|Struct|Date|Datetime|Time|Duration)/.test(dtype)) return typeof v === 'string';
@@ -36,8 +49,11 @@ export function same(a, b, col) {
       // not both parseable: compare as text below
     }
   }
-  // Id columns are join keys: strict. Same type, same value, no numeric coercion.
-  if (col && isIdColumn(col) && !nil(a) && !nil(b)) return a === b;
+  // Id columns are join keys: strict. Same value, no numeric coercion; py's integer
+  // id (Int64, or an integral Float64) is JS's exact decimal string.
+  if (col && isIdColumn(col) && !nil(a) && !nil(b)) {
+    return a === b || (typeof a === 'string' && Number.isSafeInteger(b) && a === String(b));
+  }
   // py stringifies a missing value in a mixed object column to "nan"; JS keeps null.
   if (b === 'nan' && nil(a)) return true;
   if (nil(a) || nil(b)) return (a ?? null) === (b ?? null);

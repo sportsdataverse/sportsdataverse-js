@@ -8,7 +8,7 @@ import { FLAT_WRAPPERS } from '../../dist/index.js';
 import { parserFor } from '../../dist/parsers/_registry.js';
 import { MULTI_TABLE_SECTIONS } from '../../dist/parsers/_frames.js';
 import { loadManifest, transformFamily } from '../../tools/codegen/vendor.mjs';
-import { same, sameType } from '../helpers/parity.mjs';
+import { isIdColumn, same, sameType } from '../helpers/parity.mjs';
 
 // Parser-parity harness: the gate that a vendored py returns schema describes
 // what the JS parser returns, on sdv-py's REAL committed captures
@@ -25,7 +25,9 @@ import { same, sameType } from '../helpers/parity.mjs';
 // (pandas.json_normalize orders scalars before flattened objects; JS keeps
 // payload order); a nested list/object cell compares by structure (JS
 // JSON-encodes it, py keeps a polars List/Struct or stringifies it with str());
-// ids (`id`, `*_id(s)`, `*_pk`, MLBAM id columns) compare strictly.
+// ids (`id`, `*_id(s)`, `*_pk`, MLBAM id columns) compare strictly, and an id
+// column py types numeric (Int64, or Float64 with nulls) must be decimal STRINGS
+// in JS (the v4 INT64 id rule, src/core/int64.ts) — in (2) and (3) alike.
 //
 // A `kind: frames` schema (sdv-py #683: one table per key of the parser's dict,
 // e.g. a stats.nba.com payload with several result sets) is checked frame by
@@ -99,6 +101,9 @@ const TYPE_OK = {
   character: (v) => typeof v === 'string',
   logical: (v) => typeof v === 'boolean',
 };
+const isStr = (v) => typeof v === 'string';
+/** (2)'s check for one schema column: a numeric id column is decimal strings (a number fails). */
+const typeCheck = (type, name) => (TYPE_OK[type] === isNum && isIdColumn(name) ? isStr : TYPE_OK[type]);
 
 /** The parser's output exactly as `callFlat(def, { parsed: true })` returns it. */
 function runParser(def, raw) {
@@ -133,7 +138,7 @@ function assertFrame(rows, py, label, parser) {
       py.rows.every((r) => nil(r[c]) || ['True', 'False', 'nan'].includes(r[c]));
     const v = rows
       .map((r) => r[c])
-      .find((x) => !nil(x) && !sameType(x, py.dtypes[k]) && !(boolText && typeof x === 'boolean'));
+      .find((x) => !nil(x) && !sameType(x, py.dtypes[k], c) && !(boolText && typeof x === 'boolean'));
     if (v !== undefined) bad.push(`${c}: py ${py.dtypes[k]}, JS ${typeof v} ${JSON.stringify(String(v)).slice(0, 40)}`);
   });
   bad.should.eql([], `${label}: JS value types disagree with sdv-py's dtypes`);
@@ -235,7 +240,7 @@ for (const [family, fixtures] of Object.entries(manifest)) {
             missing.push(...columns.filter((c) => !cols.includes(c.name)).map((c) => at + c.name));
             // (2) runtime types agree with the schema (nulls allowed; an all-null column is unexercised)
             for (const { name, type } of columns) {
-              const ok = TYPE_OK[type];
+              const ok = typeCheck(type, name);
               if (!ok) throw new Error(`${at}${name}: unknown schema type ${type}`);
               const v = rows.map((r) => r[name]).find((x) => !nil(x) && !ok(x));
               if (v !== undefined) bad.push(`${at}${name}: ${type}, JS ${typeof v} ${JSON.stringify(String(v)).slice(0, 60)}`);

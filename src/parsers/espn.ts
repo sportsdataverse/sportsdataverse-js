@@ -23,6 +23,7 @@
 import { normalize, snakeCase } from "./_normalize.js";
 import type { ParserFn } from "./_registry.js";
 import { pyUnderscore } from "./_frames.js";
+import { idColumnsToStrings } from "../core/int64.js";
 
 /** Is `v` a plain object (not null, not an array)? */
 function isPlainObject(v: any): boolean {
@@ -1270,8 +1271,9 @@ const CDN_RANKINGS_LEAD = ["poll_id", "poll_name", "poll_short_name", "ranked", 
  * Parse a CDN `rankings` page into one row per (poll, team): each poll's `ranks`
  * (`ranked: true`) and `others` (teams receiving votes, `ranked: false`).
  * `team_id` is a string, like every other ESPN team id these parsers emit, read
- * from the team page URL (null on vote-receiving rows and unlinked teams). Rows
- * are rectangular: a column an entry lacks is `null`.
+ * from the team page URL (null on vote-receiving rows and unlinked teams); `poll_id`
+ * is a decimal string too (the v4 id rule). Rows are rectangular: a column an
+ * entry lacks is `null`.
  */
 export function parse_cdn_rankings(payload: any): Record<string, any>[] {
   const data = cdnContent(payload).data;
@@ -1289,7 +1291,7 @@ export function parse_cdn_rankings(payload: any): Record<string, any>[] {
   if (!rows.length) return [];
   const cols = [...new Set(rows.flatMap((r) => Object.keys(r)))];
   const rest = cols.map(pyUnderscore).filter((c) => !CDN_RANKINGS_LEAD.includes(c));
-  return rows.map((r) => {
+  const tidy = rows.map((r) => {
     const snaked: Record<string, any> = {};
     for (const c of cols) snaked[pyUnderscore(c)] = r[c] ?? null;
     const url = snaked.team_url;
@@ -1299,6 +1301,7 @@ export function parse_cdn_rankings(payload: any): Record<string, any>[] {
     for (const c of rest) out[c] = snaked[c];
     return out;
   });
+  return idColumnsToStrings(tidy);
 }
 
 // ===========================================================================

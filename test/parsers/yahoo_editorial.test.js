@@ -21,13 +21,13 @@ describe('parsers/yahoo_scores: parse_yahoo_scores_list (generic)', () => {
     const raw = { service: { games: [{ id: 1, name: 'A' }, { id: 2, name: 'B' }] } };
     const rows = parse_yahoo_scores_list(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('id', 1);
+    rows[0].should.have.property('id', '1');
   });
 
   it('deep-flattens + snake_cases a single service object into one row', () => {
     const rows = parse_yahoo_scores_list({ service: { meta: { gameId: 5 } } });
     rows.length.should.equal(1);
-    rows[0].should.have.property('meta_game_id', 5);
+    rows[0].should.have.property('meta_game_id', '5');
   });
 
   it('returns [] for empty / malformed payloads', () => {

@@ -29,7 +29,7 @@ describe('parsers/mlb: parse_mlb_teams', () => {
     };
     const rows = parse_mlb_teams(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('id', 147);
+    rows[0].should.have.property('id', '147');
     rows[0].should.have.property('name', 'New York Yankees');
     rows[0].should.have.property('team_code', 'nya'); // teamCode -> team_code
   });
@@ -38,7 +38,7 @@ describe('parsers/mlb: parse_mlb_teams', () => {
     const rows = parse_mlb_teams({
       teams: [{ id: 147, venue: { id: 3313, name: 'Yankee Stadium' } }],
     });
-    rows[0].should.have.property('venue_id', 3313);
+    rows[0].should.have.property('venue_id', '3313');
     rows[0].should.have.property('venue_name', 'Yankee Stadium');
   });
 
@@ -66,10 +66,10 @@ describe('parsers/mlb: parse_mlb_schedule', () => {
     const rows = parse_mlb_schedule(raw);
     rows.length.should.equal(3);
     rows[0].should.have.property('schedule_date', '2024-07-04');
-    rows[0].should.have.property('game_pk', 1); // gamePk -> game_pk
-    rows[0].should.have.property('teams_home_team_id', 147); // deep flatten + snake
+    rows[0].should.have.property('game_pk', '1'); // gamePk -> game_pk
+    rows[0].should.have.property('teams_home_team_id', '147'); // deep flatten + snake
     rows[2].should.have.property('schedule_date', '2024-07-05');
-    rows[2].should.have.property('game_pk', 3);
+    rows[2].should.have.property('game_pk', '3');
   });
 
   it('returns [] for a missing / empty dates block', () => {
@@ -89,7 +89,7 @@ describe('parsers/mlb: parse_mlb_list (generic flattener)', () => {
       ],
     });
     rows.length.should.equal(2);
-    rows[0].should.have.property('id', 15);
+    rows[0].should.have.property('id', '15');
     rows[0].should.have.property('location_city', 'Los Angeles'); // deep flatten
   });
 
@@ -121,7 +121,7 @@ describe('parsers/mlb: parse_mlb_team_roster', () => {
     const rows = parse_mlb_team_roster(raw);
     rows.length.should.equal(2);
     rows[0].should.have.property('jersey_number', '99'); // jerseyNumber -> jersey_number
-    rows[0].should.have.property('person_id', 592450); // person.id -> person_id
+    rows[0].should.have.property('person_id', '592450'); // person.id -> person_id
     rows[0].should.have.property('position_abbreviation', 'RF');
     rows[0].should.have.property('status_code', 'A');
   });
@@ -159,12 +159,12 @@ describe('parsers/mlb: parse_mlb_standings', () => {
     };
     const rows = parse_mlb_standings(raw);
     rows.length.should.equal(3);
-    rows[0].should.have.property('standings_league_id', 103);
+    rows[0].should.have.property('standings_league_id', '103');
     rows[0].should.have.property('standings_division_name', 'AL East');
     rows[0].should.have.property('wins', 94);
-    rows[0].should.have.property('team_id', 147); // team.id -> team_id
+    rows[0].should.have.property('team_id', '147'); // team.id -> team_id
     rows[0].should.have.property('division_rank', '1'); // divisionRank -> division_rank
-    rows[2].should.have.property('standings_league_id', 104);
+    rows[2].should.have.property('standings_league_id', '104');
   });
 
   it('returns [] for a missing / empty records block', () => {
@@ -193,7 +193,7 @@ describe('parsers/mlb: parse_mlb_person_stats', () => {
     rows[0].should.have.property('stats_type', 'season');
     rows[0].should.have.property('stats_group', 'hitting');
     rows[0].should.have.property('stat_home_runs', 58); // stat.homeRuns -> stat_home_runs
-    rows[0].should.have.property('team_id', 147);
+    rows[0].should.have.property('team_id', '147');
     rows[1].should.have.property('season', '2023');
   });
 
@@ -226,8 +226,8 @@ describe('parsers/mlb: parse_mlb_boxscore', () => {
     const rows = parse_mlb_boxscore(raw);
     rows.length.should.equal(3); // 1 home + 2 away
     rows[0].should.have.property('team_side', 'home');
-    rows[0].should.have.property('team_id', 147);
-    rows[0].should.have.property('person_id', 592450);
+    rows[0].should.have.property('team_id', '147');
+    rows[0].should.have.property('person_id', '592450');
     rows[0].should.have.property('stats_batting_hits', 2); // deep flatten
     const away = rows.filter((r) => r.team_side === 'away');
     away.length.should.equal(2);
@@ -312,7 +312,7 @@ describe('parsers/mlb: parse_mlb_draft_latest', () => {
     rows.length.should.equal(1);
     rows[0].should.not.have.property('copyright');
     rows[0].should.have.property('pick_pick_number', 1); // pick.pickNumber -> pick_pick_number
-    rows[0].should.have.property('pick_person_id', 12345);
+    rows[0].should.have.property('pick_person_id', '12345');
     rows[0].should.have.property('number', 1);
   });
 

@@ -34,7 +34,7 @@ describe('parsers/yahoo: parse_yahoo_list (generic)', () => {
     const raw = { data: { games: [{ gameId: 1 }, { gameId: 2 }] } };
     const rows = parse_yahoo_list(raw);
     rows.length.should.equal(2);
-    rows[1].should.have.property('game_id', 2);
+    rows[1].should.have.property('game_id', '2');
   });
 
   it('emits a single root object with no inner list as one row', () => {
