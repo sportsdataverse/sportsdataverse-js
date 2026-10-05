@@ -95,6 +95,15 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
     parse_mlb_statcast_leaderboard('game_pk,pitcher\n7.5,1\n8,2')[0].should.eql({ game_pk: 7.5, pitcher: 1 });
   });
 
+  it('/gf "" id cell is null like sdv-py to_numeric (oracle: pin 719de79, pandas)', () => {
+    parse_mlb_statcast_gamefeed({ team_home: [{ game_pk: '745444', batter: '' }, { game_pk: '745444', batter: '123' }] })
+      .should.eql([{ game_pk: 745444, batter: null }, { game_pk: 745444, batter: 123 }]);
+    parse_mlb_statcast_gamefeed({ team_home: [{ batter: '' }, { batter: null }, { batter: '4' }] })
+      .should.eql([{ batter: null }, { batter: null }, { batter: 4 }]);
+    // whitespace is not blank to pandas: column left as read
+    parse_mlb_statcast_gamefeed({ team_home: [{ batter: ' ' }, { batter: '7' }] }).should.eql([{ batter: ' ' }, { batter: '7' }]);
+  });
+
   it('mlb_statcast_search / _minors / _wbc with { parsed: true } return the typed rows (real 2024-06-15 capture)', async () => {
     // tests/fixtures/mlb_statcast/search_2024-06-15_head.csv at the sdv-py pin (test/fixtures/py/README.md)
     const csv = gunzipSync(

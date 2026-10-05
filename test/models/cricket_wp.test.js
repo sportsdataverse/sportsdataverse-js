@@ -61,6 +61,24 @@ describe('models/cricket_wp (parity with sdv-py 719de79)', () => {
     norm_cdf(40).should.equal(1);
   });
 
+  it('norm_cdf: far-left tail is relative-accurate (scipy.stats.norm.cdf 1.18 oracle + 60-digit truth)', () => {
+    // rows: [x, 60-digit-decimal truth (x <= -1.5 only, else null), scipy norm.cdf]
+    const rows = fx('norm_cdf_oracle.json');
+    rows.length.should.be.above(500);
+    let worstScipy = 0;
+    let worstTruth = 0;
+    for (const [x, truth, scipy] of rows) {
+      const got = norm_cdf(x);
+      if (scipy > 0) worstScipy = Math.max(worstScipy, Math.abs(got / scipy - 1));
+      else got.should.be.below(1e-300);
+      if (truth) worstTruth = Math.max(worstTruth, Math.abs(got / truth - 1));
+    }
+    worstScipy.should.be.below(2e-13); // scipy itself is ~6e-14 off truth at x<=-20 (unsplit exp(-z*z))
+    worstTruth.should.be.below(2e-15); // was 1.8e-11 before the erfc/CF fix
+    Number.isNaN(norm_cdf(NaN)).should.equal(true);
+    norm_cdf(-9).should.be.approximately(1.1285884059538324e-19, 1e-31);
+  });
+
   it('match state from the real ESPN IPL capture equals py (summary header + scoreboard event)', () => {
     const summary = cricket_match_state(fx('espn_ipl_8048_summary_header.json'), { fmt: 't20' });
     summary.should.eql(oracle.espn.summary.state);

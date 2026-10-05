@@ -31,8 +31,19 @@ export class OddsRuntimeError extends SdvError {
   override name = 'RuntimeError';
 }
 
-// Python `sum()` of floats (3.12+ is compensated; ~1ulp from naive, inside parity tolerance).
-const sum = (xs: readonly number[]): number => xs.reduce((a, b) => a + b, 0);
+// Python `sum()` of floats: CPython 3.12+ Neumaier (improved Kahan-Babuska) compensated
+// summation, ported from bltinmodule.c (incl. its finite-compensation guard).
+const sum = (xs: readonly number[]): number => {
+  let result = 0;
+  let c = 0;
+  for (const x of xs) {
+    const t = result + x;
+    if (Math.abs(result) >= Math.abs(x)) c += result - t + x;
+    else c += x - t + result;
+    result = t;
+  }
+  return c !== 0 && Number.isFinite(c) ? result + c : result;
+};
 
 /** Raw implied probability of an American price. Raises ValueError on 0. */
 export function prob_from_american(price: number): number {
@@ -54,8 +65,12 @@ export function devig_multiplicative(p_raw: readonly number[]): number[] {
   return p_raw.map((p) => p / total);
 }
 
-// Node: process warning; other runtimes: console.warn.
+// Node: process warning; other runtimes: console.warn. Once per distinct message per
+// process, like Python's default filter (once per site + text; each call site is distinct).
+const warned = new Set<string>();
 const warn = (msg: string): void => {
+  if (warned.has(msg)) return;
+  warned.add(msg);
   if (typeof process !== 'undefined' && typeof process.emitWarning === 'function') process.emitWarning(msg, 'SdvWarning');
   else console.warn(msg);
 };
@@ -66,9 +81,15 @@ const signbit = (x: number): boolean => x < 0 || Object.is(x, -0);
 /**
  * scipy.optimize.brentq (C implementation) with scipy's defaults except xtol:
  * rtol = 4*eps, maxiter = 100. Raises ValueError on a non-bracketing interval
- * (or NaN endpoint values) and RuntimeError on non-convergence, like scipy.
+ * (or any NaN function value) and RuntimeError on non-convergence, like scipy.
  */
-function brentq(f: (x: number) => number, xa: number, xb: number, xtol: number): number {
+function brentq(f0: (x: number) => number, xa: number, xb: number, xtol: number): number {
+  // scipy >= 1.x: a NaN from f at ANY evaluation is a ValueError ("solver cannot continue").
+  const f = (x: number): number => {
+    const v = f0(x);
+    if (Number.isNaN(v)) throw new OddsValueError(`The function value at x=${x} is NaN; solver cannot continue.`);
+    return v;
+  };
   const rtol = 4 * 2.220446049250313e-16;
   const maxiter = 100;
   let xpre = xa;
@@ -81,8 +102,7 @@ function brentq(f: (x: number) => number, xa: number, xb: number, xtol: number):
   let scur = 0;
   if (fpre === 0) return xpre;
   if (fcur === 0) return xcur;
-  // ponytail: NaN endpoint values are treated as a sign error (C signbit of a NaN is platform-defined).
-  if (Number.isNaN(fpre) || Number.isNaN(fcur) || signbit(fpre) === signbit(fcur)) {
+  if (signbit(fpre) === signbit(fcur)) {
     throw new OddsValueError('f(a) and f(b) must have different signs');
   }
   for (let i = 0; i < maxiter; i++) {

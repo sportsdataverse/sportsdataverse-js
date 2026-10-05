@@ -34,8 +34,8 @@ describe('odds/math: parity with sdv-py wexp.market', () => {
   for (const [name, cases] of Object.entries(oracle.cases)) {
     it(`${name}: ${cases.length} oracle cases (values and error types)`, () => {
       const orig = process.emitWarning;
-      let emitted = 0;
-      process.emitWarning = (msg) => { if (/Shin solver failed/.test(msg)) emitted++; };
+      const emitted = new Set();
+      process.emitWarning = (msg) => { if (/Shin solver failed/.test(msg)) { emitted.has(msg).should.equal(false, 'duplicate warning'); emitted.add(msg); } };
       let warnWant = 0;
       try {
         for (const c of cases) {
@@ -51,10 +51,37 @@ describe('odds/math: parity with sdv-py wexp.market', () => {
       } finally {
         process.emitWarning = orig;
       }
-      // py warns exactly where JS warns (Shin bracketing failure -> multiplicative fallback)
-      emitted.should.equal(warnWant);
+      // py warns where JS warns (Shin bracketing failure -> multiplicative fallback), but
+      // once per distinct message per process (py default filter), not once per call
+      // devig_shin is the first suite to reach each message, so there parity is exact in presence
+      if (name === 'devig_shin') (emitted.size > 0).should.equal(warnWant > 0);
+      emitted.size.should.be.belowOrEqual(warnWant);
     });
   }
+
+  it('devig_multiplicative is BIT-exact vs py (3.13 compensated sum), incl. cancellation-prone books', () => {
+    for (const c of oracle.cases.devig_multiplicative) {
+      if (c.error) continue;
+      const got = m.devig_multiplicative(decAll(c.args[0]));
+      const want = decAll(c.value);
+      got.length.should.equal(want.length);
+      want.forEach((w, i) => Object.is(got[i], w).should.equal(true, `${JSON.stringify(c.args)}[${i}]: got ${got[i]} want ${w}`));
+    }
+    m.devig_multiplicative([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]).forEach((p) => p.should.equal(0.1));
+  });
+
+  it('warns once per distinct message per process (py default filter), not per call', () => {
+    const orig = process.emitWarning;
+    const got = [];
+    process.emitWarning = (msg) => got.push(msg);
+    try {
+      for (let i = 0; i < 3; i++) m.devig_shin([3.3e300, 1e300]);
+      for (let i = 0; i < 3; i++) m.devig_shin([4.4e300, 1e300]);
+    } finally {
+      process.emitWarning = orig;
+    }
+    got.length.should.equal(2);
+  });
 
   it('real The Odds API h2h rows are present and drive the oracle', () => {
     rows.length.should.be.greaterThan(100);
