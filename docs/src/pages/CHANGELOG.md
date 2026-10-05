@@ -2,6 +2,41 @@
 
 ## **Unreleased**
 
+### Changed — vendor pin 81eb7e7060: ESPN CDN, Fox, stats/On3 returns tables, `on_missing`
+
+- **Pin:** the vendored sdv-py ref moves from `719de79` to `81eb7e7060`. Two JS overlays the upstream absorbed are gone:
+  - The MLB `pbp` `timecode` patch (sdv-py #679).
+  - The torvik `game_stats` / `player_stats` / `game_schedule` additions. They are vendored now (sdv-py #678). Names are unchanged, and JS keeps its hoopR-ported parsers and its own returns tables.
+- **Added — ESPN CDN (`cdn.espn.com/core`):** 5 endpoints become 41 wrappers on 14 leagues: `espn_<lg>_cdn_playbyplay`, `_cdn_boxscore`, `_cdn_schedule`, `_cdn_scoreboard`, and `espn_cfb_cdn_rankings`.
+  - The generator honours sdv-py's per-endpoint `include_prefixes` (a probed league allowlist) and the family's `fixed_params` (`xhr=1`, which a caller param can override).
+  - Ported parsers:
+    - `parse_cdn_game` runs the summary dispatcher and takes `section`.
+    - `parse_cdn_scoreboard` and `parse_cdn_schedule` return scoreboard rows.
+    - `parse_cdn_rankings` returns a string `team_id`.
+- **Fixed — legacy `getSchedule` dates:** `sdv.{nba,wnba,nhl,mlb,mbb,wbb,cfb,nfl}.getSchedule({ year, month, day })` sent `dates=`. The CDN ignores that key and answered with today's page for every date.
+  - The methods now route through `espn_<lg>_cdn_schedule`, which sends `date=`. The signature and the return shape (`content.schedule`) are unchanged, and a failed fetch throws `AssetFetchError`.
+  - Football pages ignore dates, so `cfb` / `nfl` take an optional `week`. A date without a `week` warns once (`SDV_CDN_FOOTBALL_DATE`).
+- **BREAKING — Fox:** `sdv.fox` is now vendored from sdv-py's `fox_api`.
+  - The canonical names are `fox_api_*` / `foxApi*`. Every pre-v4 `fox_*` name is a deprecated alias.
+  - `scorechip` no longer sends `api-version`, which made it answer 400.
+  - The 5 routes sdv-py dropped as dead (`fs_feed`, `fs_images`, `fs_layouts`, `fs_videos`, `explore_favorite`) keep their old names, are deprecated, and warn once.
+  - `parsed: true` output is unchanged.
+- **Loaders — `on_missing: raise`:** the 25 seasonal NFL loaders that sdv-py hand-writes (pbp, rosters, the usage/tendency tables, …) now throw `NoDataError` for a season with no published asset instead of skipping it. A failed fetch is still `AssetFetchError`.
+- **Returns tables:** sdv-py now derives these from parser output, so they document their columns again:
+
+  | family | tables documented |
+  |---|---|
+  | 247Sports site pages | 35 |
+  | `nba_stats` | 126 of 128 |
+  | `wnba_stats` | 110 of 111 |
+  | On3 | 23 of 78 (48 are `unverified` upstream) |
+
+  - A `kind: frames` schema renders one table per frame. An `unverified` schema prints its reason. The vendor fails closed on a schema shape it does not know.
+  - Kept off, because the parity harness disproves them on real captures:
+    - `nba_stats.leaguedashptstats`: the table documents the default measure type, and the 7 other tracking measure types return other columns.
+    - 7 On3 tables: sdv-py stringifies a bool column that contains a null, while JS keeps booleans.
+- **Parity harness:** 259 more sdv-py captures (124 NBA, 109 WNBA, 26 On3), with `kind: frames` checked frame by frame. Verified endpoints go from 179 to 438.
+
 ### Changed — package checks: attw + publint on the packed tarball, API Extractor reports
 
 - **New CI gates** (Node 20 and 22). `npm run pack:check` packs the package with `npm pack` and runs `@arethetypeswrong/cli` and `publint --strict` on that tarball. `npm run api:check` fails when the public API in `dist/*.d.ts` no longer matches the committed API Extractor reports, `etc/sportsdataverse.api.md` (package root) and `etc/sportsdataverse-parsers.api.md` (`sportsdataverse/parsers`). After an intended API change, run `npm run api:report` and commit the updated report, so the change shows up in the PR diff. Generated wrappers are not listed one by one in the report (the default export is typed `Record<string, Record<string, any>>`); they are reviewed through `src/generated/**` and the codegen drift gate.
