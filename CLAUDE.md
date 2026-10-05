@@ -224,6 +224,15 @@ families**:
 | `nhl_stats_rest` | `sdv.nhl.nhlStatsRest*` | `api.nhle.com/stats/rest` | keyless |
 | `nhl_records` | `sdv.nhl.nhlRecords*` | `records.nhl.com` | keyless |
 | `nfl_api` | `sdv.nfl.nflApi*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
+| `pff_api` | `sdv.nfl.pffApi*` | `api.pff.com` | **caller's PFF Pro key** (`api_key` / `PFF_API_KEY`; `src/core/pff_api_runtime.ts`) |
+| `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`; offset paging; `src/core/nfl_pro_runtime.ts`) |
+| `kenpom` | `sdv.mbb.kenpom*` | `kenpom.com` | **caller's subscription login** (`KENPOM_EMAIL` / `KENPOM_PW`; impersonating transport, needs `impit`; `src/core/kenpom_runtime.ts`) |
+
+The three subscription families (`pff_api`, `nfl_pro`, `kenpom`) are never on the
+docs playground or its proxy allowlist (`PLAYGROUND_EXCLUDED_FLAT` in
+`generate.mjs`). KenPom's HTML parser needs cheerio, so it is node-only:
+`src/core/kenpom_runtime.ts` adds it with `registerParser` instead of listing it
+in the browser-safe `_registry.ts` (`NODE_ONLY_PARSERS`).
 
 **7 cross-sport providers** — standalone `sdv.<ns>.*` namespaces (NOT leagues), each
 getting its own generated reference page:
