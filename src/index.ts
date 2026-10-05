@@ -175,7 +175,14 @@ export { axiosTransport, createImpersonatingTransport } from './core/transport.j
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
 export { RELEASES_FAMILY } from './core/releases.js';
-export type { ReleaseRow, ReleaseLoaderOptions, SeasonLoaderOptions } from './core/releases.js';
+export type {
+  ReleaseRow,
+  ReleaseColumns,
+  ReleaseLoaderOptions,
+  SeasonLoaderOptions,
+  SeasonLoader,
+  AssetLoader,
+} from './core/releases.js';
 export type { AuthProvider, AuthContext } from './core/auth.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor } from './parsers/_registry.js';
