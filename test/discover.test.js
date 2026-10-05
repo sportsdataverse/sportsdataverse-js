@@ -93,6 +93,23 @@ describe('find: name -> id (real ESPN captures)', () => {
     const failing = { ...two, espn_nba_team_roster: async () => { throw new AssetFetchError('503', { url: 'x', status: 503 }); } };
     await findAthlete('ayton', 'nba', {}, { nba: failing }).should.be.rejectedWith(AssetFetchError);
   });
+  it('team cache: per-namespace, shares one in-flight fetch, evicts on rejection', async () => {
+    let calls = 0;
+    const mk = (fail) => ({
+      nba: { ...NS.nba, espn_nba_teams_site: async (...a) => { calls++; await new Promise((r) => setTimeout(r, 5)); if (fail) throw new AssetFetchError('503', { url: 'x', status: 503 }); return NS.nba.espn_nba_teams_site(...a); } },
+    });
+    const ns1 = mk(false);
+    await Promise.all([findTeam('lakers', 'nba', {}, ns1), findTeam('LAL', 'nba', {}, ns1)]);
+    calls.should.equal(1);
+    // a second injected namespace is not served from the first one's cache
+    await findTeam('lakers', 'nba', {}, mk(false));
+    calls.should.equal(2);
+    // rejection is evicted: the next call refetches
+    const bad = mk(true);
+    await findTeam('lakers', 'nba', {}, bad).should.be.rejectedWith(AssetFetchError);
+    await findTeam('lakers', 'nba', {}, bad).should.be.rejectedWith(AssetFetchError);
+    calls.should.equal(4);
+  });
   it('findEvent rejects invalid dates before any request', async () => {
     nba.lastScoreboard = undefined;
     await findEvent('not-a-date', 'nba', {}, NS).should.be.rejectedWith(SdvError);

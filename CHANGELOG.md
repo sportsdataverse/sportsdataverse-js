@@ -41,6 +41,14 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
     - 7 On3 tables: sdv-py stringifies a bool column that contains a null, while JS keeps booleans.
 - **Parity harness:** 259 more sdv-py captures (124 NBA, 109 WNBA, 26 On3), with `kind: frames` checked frame by frame. Verified endpoints go from 179 to 438.
 
+### Fixed — parser / analytics minors (sdv-py parity)
+
+- **Statcast `/gf`:** an empty-string id cell (`batter: ""`) is now `null`, like sdv-py's `to_numeric("")`; it kept the column text before (whitespace still leaves the column as read, as in py).
+- **`findTeam` / `findAthlete`:** the team-list cache is keyed by namespace identity (an injected namespace no longer poisons or reads another's), caches the in-flight promise (concurrent first calls share one fetch) and evicts it on rejection.
+- **Odds math:** `sum` is CPython 3.12+ compensated (Neumaier), so `devig_*` match py bit for bit; the Shin-fallback warning fires once per distinct message per process (py default filter); a NaN function value anywhere in the Shin solver is a `ValueError`, as in scipy.
+- **Cricket `norm_cdf`:** relative-accurate in the far-left tail (was ~1.8e-11 relative off from the `1 - erf` branch; now ~4e-16 vs a 60-digit reference).
+- **nba_stats:** documented/tested that a legit-empty `resultSets` is data (raw keeps the headers) and parses to `[]`/an empty entry.
+
 ### Changed — package checks: attw + publint on the packed tarball, API Extractor reports
 
 - **New CI gates** (Node 20 and 22). `npm run pack:check` packs the package with `npm pack` and runs `@arethetypeswrong/cli` and `publint --strict` on that tarball. `npm run api:check` fails when the public API in `dist/*.d.ts` no longer matches the committed API Extractor reports, `etc/sportsdataverse.api.md` (package root) and `etc/sportsdataverse-parsers.api.md` (`sportsdataverse/parsers`). After an intended API change, run `npm run api:report` and commit the updated report, so the change shows up in the PR diff. Generated wrappers are not listed one by one in the report (the default export is typed `Record<string, Record<string, any>>`); they are reviewed through `src/generated/**` and the codegen drift gate.
