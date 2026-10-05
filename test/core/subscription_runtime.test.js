@@ -28,6 +28,7 @@ import { accountKey as kenpomAccountKey } from '../../dist/core/kenpom_runtime.j
 import { createHash } from 'node:crypto';
 import { TransportUnavailableError } from '../../dist/core/errors.js';
 import { inspect } from 'node:util';
+import { spawnSync } from 'node:child_process';
 
 // No-network tests for the subscription runtimes (src/core/{pff_api,kenpom,
 // nfl_pro}_runtime.ts): credential precedence, the login flow, error mapping,
@@ -98,11 +99,11 @@ async function warningsDuring(fn) {
 }
 
 describe('subscription families: wiring', () => {
-  it('each family opts out of 403 retries and has an auth provider', () => {
+  it('each family opts out of 403 retries and has an auth provider (PFF also of 408, as sdv-py)', () => {
     for (const fam of ['pff_api', 'kenpom', 'nfl_pro']) {
       const r = resolveFamily(fam);
       should.exist(r.auth, fam);
-      r.retryStatuses.should.eql([408, 429, 500, 502, 503, 504]);
+      r.retryStatuses.should.eql(fam === 'pff_api' ? [429, 500, 502, 503, 504] : [408, 429, 500, 502, 503, 504]);
     }
   });
   it('wrappers are exposed (snake + camel) on their league namespace', () => {
@@ -209,6 +210,29 @@ describe('pff_api runtime', () => {
     t.calls.length.should.equal(3);
   });
 
+  it('retry budget is sdv-py\'s 4 (a 5xx may be retried 4 times); configure({ retries }) still wins', async () => {
+    process.env.PFF_API_KEY = 'ak_secret_value';
+    resolveFamily('pff_api').retries.should.equal(4);
+    let t = fakeTransport({ status: 503, data: 'down' }, { status: 503 }, { status: 503 }, { status: 503 }, { status: 200, data: LEAGUES });
+    configure({ transport: { pff_api: t } });
+    (await sdv.nfl.pffApiRefLeagues()).should.eql(LEAGUES);
+    t.calls.length.should.equal(5);
+    t = fakeTransport({ status: 503, data: 'down' });
+    configure({ transport: { pff_api: t }, retries: 1 });
+    (await sdv.nfl.pffApiRefLeagues().then(() => null, (e) => e)).should.be.instanceOf(AssetFetchError);
+    t.calls.length.should.equal(2);
+  });
+
+  it('408 is not retried (sdv-py _RETRY_STATUSES = {429, 5xx}; the read budget is shared)', async () => {
+    process.env.PFF_API_KEY = 'ak_secret_value';
+    const t = fakeTransport({ status: 408, data: 'timeout' }, { status: 200, data: LEAGUES });
+    configure({ transport: { pff_api: t } });
+    const err = await sdv.nfl.pffApiRefLeagues().then(() => null, (e) => e);
+    err.should.be.instanceOf(AssetFetchError);
+    err.status.should.equal(408);
+    t.calls.length.should.equal(1);
+  });
+
   it('a 200 whose body is not a JSON object is an unknown answer -> AssetFetchError', async () => {
     process.env.PFF_API_KEY = 'ak_x';
     for (const data of ['<html>cdn interstitial</html>', [1, 2]]) {
@@ -294,6 +318,20 @@ describe('kenpom runtime (password-login session)', () => {
     const tables = await sdv.mbb.kenpomEfficiency({ year: 2025, parsed: true });
     t.calls.length.should.equal(4);
     tables.ratings_table.length.should.equal(8);
+  });
+
+  it('the login GET / POST use the resolved timeout: 30 s by default, configure({ timeoutMs }) wins', async () => {
+    process.env.KP_USER = 'r@example.com';
+    process.env.KP_PW = 'secret';
+    let t = kenpomSite();
+    configure({ transport: { kenpom: t } });
+    await sdv.mbb.kenpomRatings({ year: 2025 });
+    t.calls.slice(0, 2).map((c) => c.timeoutMs).should.eql([30000, 30000]);
+    kenpomClearSessionCache();
+    t = kenpomSite();
+    configure({ transport: { kenpom: t }, timeoutMs: 77000 });
+    await sdv.mbb.kenpomRatings({ year: 2025 });
+    t.calls.slice(0, 2).map((c) => c.timeoutMs).should.eql([77000, 77000]);
   });
 
   it('a rejected login (login form still on the page) throws instead of scraping free-tier tables', async () => {
@@ -388,6 +426,17 @@ describe('nfl_pro runtime (user token + offset paging)', () => {
     header(t.calls[1], 'authorization').should.equal(`Bearer ${argTok}`);
     await sdv.nfl.nflProPlayersOffensePassingSeason({ token: argTok, headers: { Authorization: 'Bearer mine' }, paginate: false });
     header(t.calls[2], 'authorization').should.equal('Bearer mine');
+  });
+
+  it('timeout: sdv-py\'s 45 s by default, but configure({ timeoutMs }) is honoured', async () => {
+    process.env.NFLPRO_TOKEN = ENTITLED();
+    const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+    configure({ transport: { nfl_pro: t } });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false });
+    t.calls[0].timeoutMs.should.equal(45000);
+    configure({ timeoutMs: 120000 });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false });
+    t.calls[1].timeoutMs.should.equal(120000);
   });
 
   it('pages on offset until the envelope total is reached (responses truncate silently)', async () => {
@@ -693,6 +742,7 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
         `locator.fill: Timeout 8000ms exceeded.\nCall log:\n  - fill("${value}") on ${kind}\n  - navigated to https://id.nfl.com/x?u=${encodeURIComponent(value)}\n  - form field ${encodeURIComponent(value)}`
       );
       e.stack = `${e.message}\n    at fill (${value})`;
+      e.name = `TimeoutError[${value}]`; // the name is copied onto the scrubbed cause too
       e.log = [value];
       throw e;
     };
@@ -738,7 +788,9 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
           const err = await call().then(() => null, (e) => e);
           err.should.be.instanceOf(NflProAuthError);
           const dumps = [inspect(err, { depth: Infinity, showHidden: true }), JSON.stringify(err), String(err.stack)];
-          for (let c = err.cause; c; c = c.cause) dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack));
+          for (let c = err.cause; c; c = c.cause) {
+            dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack), String(c.name));
+          }
           for (const d of dumps) for (const f of forbidden) d.should.not.containEql(f);
           t.calls.length.should.equal(0);
         }
@@ -768,6 +820,50 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
     (await nflProToken(creds)).should.equal(tokenFor('a@example.com'));
     pw.log.launched.should.equal(2);
     pw.log.closed.should.equal(2);
+  });
+
+  it('the browser-close cap: a hung close still settles the login, a normal close never holds the process', function () {
+    // In a child process, where nothing else keeps the event loop alive: an
+    // unref'd cap let it exit mid-await (no output); an uncleared ref'd cap would
+    // hold it open for the whole cap after a normal close.
+    this.timeout(30000);
+    const runtime = new URL('../../dist/core/nfl_pro_runtime.js', import.meta.url).href;
+    const token = tokenFor('a@example.com');
+    const run = (hangClose, capMs) => {
+      const script = `
+        import { nflProBrowserLogin, _loginLimits } from ${JSON.stringify(runtime)};
+        _loginLimits.closeCapMs = ${capMs};
+        let submitted = false;
+        const locator = (sel) => {
+          const l = {
+            first: () => l,
+            count: async () => (sel.includes('password') && !submitted ? 1 : 0),
+            isVisible: async () => false,
+            fill: async () => {},
+            press: async () => { if (sel.includes('password')) submitted = true; },
+          };
+          return l;
+        };
+        const page = {
+          goto: async () => {},
+          waitForTimeout: async () => {},
+          url: () => 'https://pro.nfl.com/',
+          evaluate: async (fn) => (String(fn).includes('localStorage') ? [${JSON.stringify(token)}] : String(fn).includes('use password') ? false : undefined),
+          locator,
+        };
+        const browser = { newContext: async () => ({ newPage: async () => page }), close: () => (${hangClose} ? new Promise(() => {}) : Promise.resolve()) };
+        const t = await nflProBrowserLogin('a@example.com', 'pw', { playwright: { chromium: { launch: async () => browser } } });
+        console.log(t === ${JSON.stringify(token)} ? 'LOGGED_IN' : 'WRONG_TOKEN');`;
+      const t0 = Date.now();
+      const r = spawnSync(process.execPath, ['--input-type=module', '-e', script], { encoding: 'utf8', timeout: 20000 });
+      return { out: r.stdout.trim(), status: r.status, ms: Date.now() - t0 };
+    };
+    const hung = run(true, 200);
+    hung.out.should.equal('LOGGED_IN');
+    hung.status.should.equal(0);
+    const normal = run(false, 15000);
+    normal.out.should.equal('LOGGED_IN');
+    normal.ms.should.be.below(10000); // not held open for the 15 s cap
   });
 
   it('a 401 on a logged-in token drops it and logs in again exactly once (explicit and env credentials)', async () => {

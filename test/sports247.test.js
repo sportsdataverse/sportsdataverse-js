@@ -1,4 +1,5 @@
 import should from 'should';
+import http from 'node:http';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -10,8 +11,10 @@ import sdv, {
   sports247ClearTokenCache,
   AssetFetchError,
   TransportUnavailableError,
+  createImpersonatingTransport,
 } from '../dist/index.js';
 import { _impitLoader } from '../dist/core/transport.js';
+import { SPORTS247_HEADERS } from '../dist/core/sports247_runtime.js';
 import handler from '../docs/api/run.mjs';
 
 // No-network tests for the 247Sports families (sports247 + sports247_site_pages)
@@ -56,6 +59,20 @@ const header = (req, name) =>
   Object.entries(req.headers ?? {}).find(([k]) => k.toLowerCase() === name.toLowerCase())?.[1];
 
 const later = () => Math.floor(Date.now() / 1000) + 12 * 3600;
+
+/** The messages of the process warnings emitted while `fn` runs. */
+async function warningsDuring(fn) {
+  const seen = [];
+  const onWarning = (w) => seen.push(w.message);
+  process.on('warning', onWarning);
+  try {
+    await fn();
+    await new Promise((r) => setImmediate(r)); // 'warning' fires on the next tick
+  } finally {
+    process.off('warning', onWarning);
+  }
+  return seen;
+}
 
 describe('sports247: surface', () => {
   it('exposes the 12 RDB + 35 site-page wrappers on sdv.sports247 (snake + camel)', () => {
@@ -104,7 +121,39 @@ describe('sports247: guest JWT + transport (offline)', () => {
     header(coaches, 'authorization').should.equal(`Bearer ${jwt}`);
     header(teams, 'referer').should.equal('https://247sports.com/');
     header(teams, 'origin').should.equal('https://247sports.com');
-    header(teams, 'user-agent').should.match(/Chrome\/124\.0/);
+    header(teams, 'user-agent').should.equal(SPORTS247_HEADERS['User-Agent']);
+  });
+
+  it('the User-Agent is the one the pinned impit profile itself sends (UA agrees with the TLS fingerprint)', async function () {
+    try {
+      await import('impit');
+    } catch {
+      this.skip();
+    }
+    const server = http.createServer((req, res) => res.end(JSON.stringify({ ua: req.headers['user-agent'] })));
+    await new Promise((r) => server.listen(0, '127.0.0.1', r));
+    try {
+      // no UA on the request: whatever arrives is impit's own for that profile
+      const res = await createImpersonatingTransport({ browser: 'chrome142' })({
+        method: 'GET',
+        url: `http://127.0.0.1:${server.address().port}/`,
+      });
+      res.data.ua.should.equal(SPORTS247_HEADERS['User-Agent']);
+    } finally {
+      server.close();
+    }
+  });
+
+  it('the guest-JWT mint uses the resolved timeout: 30 s by default, configure({ timeoutMs }) wins', async () => {
+    let { transport, calls } = fakeTransport({ jwts: [fakeJwt(later())] });
+    configure({ transport: { sports247: transport } });
+    await sdv.sports247.sports247Teams();
+    calls.find((c) => c.url === 'https://247sports.com/').timeoutMs.should.equal(30000);
+    sports247ClearTokenCache();
+    ({ transport, calls } = fakeTransport({ jwts: [fakeJwt(later())] }));
+    configure({ transport: { sports247: transport }, timeoutMs: 77000 });
+    await sdv.sports247.sports247Teams();
+    calls.find((c) => c.url === 'https://247sports.com/').timeoutMs.should.equal(77000);
   });
 
   it('re-mints when the cached token is within a minute of its exp', async () => {
@@ -174,21 +223,85 @@ describe('sports247: guest JWT + transport (offline)', () => {
     should(header(dataCalls(calls)[0], 'authorization')).be.undefined();
   });
 
-  it('a 403 is not retried (fingerprint block / logged-in-only route)', async () => {
-    const { transport, calls } = fakeTransport({ jwts: [fakeJwt(later())], respond: () => ({ status: 403, data: '' }) });
+  it('a 403 re-mints once and retries with the fresh token (sdv-py: an expired guest token can 403)', async () => {
+    const [stale, fresh] = [fakeJwt(later(), 'stale'), fakeJwt(later(), 'fresh')];
+    const { transport, calls } = fakeTransport({
+      jwts: [stale, fresh],
+      respond: (req) =>
+        header(req, 'authorization') === `Bearer ${stale}` ? { status: 403, data: '' } : { status: 200, data: [] },
+    });
+    configure({ transport: { sports247: transport } });
+    (await sdv.sports247.sports247Coaches()).should.eql([]);
+    mints(calls).should.equal(2);
+    dataCalls(calls).map((c) => header(c, 'authorization')).should.eql([`Bearer ${stale}`, `Bearer ${fresh}`]);
+  });
+
+  it('a 403 that persists after the re-mint is the answer: one re-mint, two data calls, no status retry', async () => {
+    const { transport, calls } = fakeTransport({
+      jwts: [fakeJwt(later(), 'a'), fakeJwt(later(), 'b'), fakeJwt(later(), 'c')],
+      respond: () => ({ status: 403, data: '' }),
+    });
     configure({ transport: { sports247: transport } });
     const err = await sdv.sports247.sports247Coaches().then(() => null, (e) => e);
     err.should.be.instanceOf(AssetFetchError);
     err.status.should.equal(403);
-    dataCalls(calls).length.should.equal(1);
+    mints(calls).should.equal(2);
+    dataCalls(calls).length.should.equal(2);
   });
 
-  it('a caller-supplied Authorization wins (no mint)', async () => {
+  it('a caller-supplied Authorization wins (no mint, and no re-mint on its 403)', async () => {
     const { transport, calls } = fakeTransport();
     configure({ transport: { sports247: transport } });
     await sdv.sports247.sports247Teams({ headers: { Authorization: 'Bearer mine' } });
     mints(calls).should.equal(0);
     header(dataCalls(calls)[0], 'authorization').should.equal('Bearer mine');
+    const denied = fakeTransport({ jwts: [fakeJwt(later())], respond: () => ({ status: 403, data: '' }) });
+    configure({ transport: { sports247: denied.transport } });
+    const err = await sdv.sports247.sports247Coaches({ headers: { Authorization: 'Bearer mine' } }).then(() => null, (e) => e);
+    err.status.should.equal(403);
+    mints(denied.calls).should.equal(0);
+    dataCalls(denied.calls).length.should.equal(1);
+  });
+
+  it('after a failed mint (tokenless fallback) a caller-supplied Authorization is still sent as-is', async () => {
+    const { transport, calls } = fakeTransport({ jwts: [] }); // the root sets no JWT cookie
+    configure({ transport: { sports247: transport } });
+    await sdv.sports247.sports247Teams(); // mint fails -> tokenless
+    await sdv.sports247.sports247Teams({ headers: { Authorization: 'Bearer mine' } });
+    const [tokenless, mine] = dataCalls(calls);
+    should(header(tokenless, 'authorization')).be.undefined();
+    header(mine, 'authorization').should.equal('Bearer mine');
+    mints(calls).should.equal(1);
+  });
+
+  it('a failed mint is not re-tried for a minute (an outage costs one root GET, not one per call)', async () => {
+    const realNow = Date.now;
+    let now = realNow();
+    Date.now = () => now;
+    try {
+      const { transport, calls } = fakeTransport({ jwts: [] });
+      configure({ transport: { sports247: transport } });
+      for (let i = 0; i < 3; i++) await sdv.sports247.sports247Teams();
+      mints(calls).should.equal(1);
+      dataCalls(calls).length.should.equal(3);
+      now += 61_000; // cooldown over: the next call mints again
+      await sdv.sports247.sports247Teams();
+      mints(calls).should.equal(2);
+    } finally {
+      Date.now = realNow;
+    }
+  });
+
+  it('sports247ClearTokenCache resets the failure state: the next failed mint warns again', async () => {
+    const seen = await warningsDuring(async () => {
+      for (let round = 0; round < 2; round++) {
+        sports247ClearTokenCache();
+        const { transport } = fakeTransport({ jwts: [] });
+        configure({ transport: { sports247: transport } });
+        await sdv.sports247.sports247Teams();
+      }
+    });
+    seen.filter((m) => /guest JWT mint failed/.test(m)).length.should.equal(2);
   });
 
   it('site pages: no auth, no mint, URL sent verbatim', async () => {
@@ -201,7 +314,7 @@ describe('sports247: guest JWT + transport (offline)', () => {
     mints(calls).should.equal(0);
     calls[0].url.should.equal('https://247sports.com/Institution/24099.json');
     should(header(calls[0], 'authorization')).be.undefined();
-    header(calls[0], 'user-agent').should.match(/Chrome\/124\.0/);
+    header(calls[0], 'user-agent').should.equal(SPORTS247_HEADERS['User-Agent']);
   });
 
   it('without `impit`, the default transport rejects with TransportUnavailableError', async () => {

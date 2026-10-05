@@ -1,5 +1,6 @@
 import should from 'should';
 import http from 'node:http';
+import axios from 'axios';
 import sdv, {
   configure,
   getConfig,
@@ -20,11 +21,16 @@ import sdv, {
   nflClearTokenCache,
 } from '../../dist/index.js';
 import { request, retryDelayMs, _timer } from '../../dist/core/request.js';
-import { registerFamilyDefaults, resolveFamily, DEFAULT_RETRY_STATUSES } from '../../dist/core/config.js';
+import {
+  registerFamilyDefaults,
+  resolveFamily,
+  DEFAULT_RETRY_STATUSES,
+  _unregisterFamilyDefaults,
+} from '../../dist/core/config.js';
 import { _impitLoader, encodeQuery } from '../../dist/core/transport.js';
 import { get } from '../../dist/core/client.js';
 import { statcastGet } from '../../dist/core/statcast_runtime.js';
-import { torvikGet } from '../../dist/core/torvik_runtime.js';
+import { torvikGet, bartWbbGet } from '../../dist/core/torvik_runtime.js';
 import { hockeytechGet, resolveSeasonId } from '../../dist/core/hockeytech_runtime.js';
 
 // No-network tests for the runtime core (src/core/{errors,transport,auth,config,request}.ts).
@@ -260,6 +266,8 @@ describe('core/request: retry + classification', () => {
 
 describe('core/config: per-family transport selection', () => {
   isolate();
+  // each test registers what it needs; nothing leaks into the next one
+  afterEach(() => _unregisterFamilyDefaults('t2_test_family', 't2_auth_family'));
   it('level 4: nothing configured or registered -> the built-in axiosTransport', () => {
     resolveFamily('t2_unregistered').transport.should.equal(axiosTransport);
   });
@@ -280,11 +288,33 @@ describe('core/config: per-family transport selection', () => {
   });
 
   it('level 1: a user per-family entry beats the registered family default', async () => {
+    registerFamilyDefaults('t2_test_family', {
+      transport: fakeTransport({ status: 200, data: 'family-default' }),
+    });
     configure({ transport: { t2_test_family: fakeTransport({ status: 200, data: 'specific' }) } });
     (await request('t2_test_family', GET())).should.equal('specific');
     resetConfig();
     (await request('t2_test_family', GET())).should.equal('family-default');
     getConfig().transport.should.eql({});
+    _unregisterFamilyDefaults('t2_test_family');
+    resolveFamily('t2_test_family').transport.should.equal(axiosTransport); // the seam really forgets it
+  });
+
+  it('retries / timeoutMs: a value the user set > the registered family default > built-in', async () => {
+    registerFamilyDefaults('t2_test_family', { retries: 4, timeoutMs: 45000 });
+    resolveFamily('t2_test_family').should.containEql({ retries: 4, timeoutMs: 45000 });
+    resolveFamily('t2_unregistered').should.containEql({ retries: 3, timeoutMs: 30000 });
+    configure({ retries: 3 }); // explicitly the built-in value: still the user's choice
+    resolveFamily('t2_test_family').should.containEql({ retries: 3, timeoutMs: 45000 });
+    configure({ timeoutMs: 5000 });
+    resolveFamily('t2_test_family').should.containEql({ retries: 3, timeoutMs: 5000 });
+    resetConfig();
+    resolveFamily('t2_test_family').should.containEql({ retries: 4, timeoutMs: 45000 });
+    const t = fakeTransport({ status: 503 });
+    configure({ transport: { t2_test_family: t } });
+    await request('t2_test_family', GET()).should.be.rejectedWith(AssetFetchError);
+    t.calls.length.should.equal(5); // 1 + the family's 4 retries
+    t.calls[0].timeoutMs.should.equal(45000);
   });
 
   it('auth: user per-family entry > registered family default; a "default" auth is never applied', async () => {
@@ -377,6 +407,21 @@ describe('core/auth', () => {
     err.status.should.equal(401);
     mints.should.equal(2);
     t.calls.length.should.equal(2);
+  });
+
+  it('a 401 on the caller\'s own credential mints nothing (tokenAuth refresh is a no-op then)', async () => {
+    let mints = 0;
+    const t = fakeTransport({ status: 401 });
+    configure({
+      transport: t,
+      auth: { fam: tokenAuth({ mint: async () => ({ token: `t${++mints}` }), header: 'X-Token', scheme: '' }) },
+    });
+    const err = await request('fam', { ...GET(), headers: { 'x-token': 'mine' } }).should.be.rejectedWith(
+      AssetFetchError
+    );
+    err.status.should.equal(401);
+    mints.should.equal(0);
+    t.calls.every((c) => c.headers['x-token'] === 'mine' && c.headers['X-Token'] === undefined).should.be.true();
   });
 
   it('tokenAuth shares one in-flight mint between concurrent requests', async () => {
@@ -595,9 +640,10 @@ describe('core/transport', () => {
     fail.data.should.equal('nope');
   });
 
-  // The pinned TransportRequest.query contract: arrays repeat the key, never k[]=.
-  const QUERY = { k: ['a', 'b'], s: 'x y', c: 'a,b', skip: undefined };
-  const WIRE = '/q?k=a&k=b&s=x+y&c=a,b';
+  // The pinned TransportRequest.query contract: arrays repeat the key, never k[]=;
+  // a Date is ISO-8601 UTC (axios' pre-transport serializer), never Date#toString.
+  const QUERY = { k: ['a', 'b'], s: 'x y', c: 'a,b', skip: undefined, d: new Date(Date.UTC(2025, 1, 1, 12, 30)) };
+  const WIRE = '/q?k=a&k=b&s=x+y&c=a,b&d=2025-02-01T12:30:00.000Z';
 
   it('query contract: axiosTransport sends arrays as repeated keys (k=a&k=b)', async () => {
     const res = await axiosTransport({ method: 'GET', url: `${base}/q`, query: QUERY });
@@ -618,6 +664,52 @@ describe('core/transport', () => {
     encodeQuery({ a: 1, b: null, c: undefined, d: 'x:y$z', e: ['1', null, '2'] }).should.equal(
       'a=1&d=x:y$z&e=1&e=2'
     );
+  });
+
+  it('axiosTransport keeps the query out of config.url (an app interceptor logging url never sees an apiKey)', async () => {
+    const seen = [];
+    const id = axios.interceptors.request.use((config) => {
+      seen.push({ url: config.url, uri: axios.getUri(config) });
+      return config;
+    });
+    try {
+      const res = await axiosTransport({ method: 'GET', url: `${base}/q`, query: { apiKey: 'synthetic-key-123', k: ['a', 'b'] } });
+      res.data.path.should.equal('/q?apiKey=synthetic-key-123&k=a&k=b'); // still sent, repeated keys
+      seen.length.should.equal(1);
+      seen[0].url.should.equal(`${base}/q`);
+      seen[0].url.should.not.containEql('synthetic-key-123');
+      seen[0].uri.should.endWith('/q?apiKey=synthetic-key-123&k=a&k=b'); // the serializer is the pre-encoded string
+    } finally {
+      axios.interceptors.request.eject(id);
+    }
+  });
+
+  it('encodeQuery sends a Date (scalar or in an array) as ISO-8601 UTC', () => {
+    const day = new Date(Date.UTC(2025, 1, 1));
+    encodeQuery({ d: day, r: [day, new Date(Date.UTC(2025, 1, 2, 23, 59, 59, 5))] }).should.equal(
+      'd=2025-02-01T00:00:00.000Z&r=2025-02-01T00:00:00.000Z&r=2025-02-02T23:59:59.005Z'
+    );
+  });
+
+  it('an invalid Date query value -> SdvError naming the param, never retried (both transports)', async function () {
+    (() => encodeQuery({ when: new Date('nope') })).should.throw(SdvError, { message: /"when" is an invalid Date/ });
+    const transports = [axiosTransport];
+    try {
+      await import('impit');
+      transports.push(createImpersonatingTransport());
+    } catch {
+      // impit not installed: the axios half still runs
+    }
+    for (const transport of transports) {
+      configure({ transport: { t2_date: transport } });
+      const err = await request('t2_date', { ...GET(`${base}/q`), query: { when: new Date('nope') } }).then(
+        () => null,
+        (e) => e
+      );
+      err.should.be.instanceOf(SdvError);
+      err.message.should.match(/"when" is an invalid Date/);
+      sleeps.length.should.equal(0); // not mistaken for a network error
+    }
   });
 
   it('a throwing impit constructor -> SdvError (not retried), and the failure is not cached', async () => {
@@ -683,10 +775,23 @@ describe('core/request: wrappers route through request()', () => {
     });
     (await statcastGet('https://baseballsavant.mlb.com/gf')).should.eql({ a: 1 });
     (await statcastGet('https://baseballsavant.mlb.com/leaderboard')).should.equal('a,b\n1,2');
-    (await torvikGet('https://barttorvik.com/x')).should.match(/^Mozilla\/5\.0 \(sportsdataverse-js/);
+    (await torvikGet('https://barttorvik.com/x')).should.equal(getConfig().userAgent);
     const ht = await hockeytechGet('ignored', { params: { league: 'pwhl', view: 'scorebar' } });
     ht.should.have.property('client_code', 'pwhl');
     ht.should.have.property('key');
+  });
+
+  it('torvik / bart_wbb send the configured User-Agent (no hard-coded UA, no +https token); a caller UA wins', async () => {
+    const echo = () => fakeTransport((req) => ({ status: 200, data: req.headers['User-Agent'] ?? req.headers['user-agent'] }));
+    configure({ transport: { torvik: echo(), bart_wbb: echo() }, userAgent: 'my-app/1.0' });
+    (await torvikGet('https://barttorvik.com/x')).should.equal('my-app/1.0');
+    (await bartWbbGet('https://barttorvik.com/ncaaw/x')).should.equal('my-app/1.0');
+    (await torvikGet('https://barttorvik.com/x', { headers: { 'user-agent': 'caller/2' } })).should.equal('caller/2');
+    resetConfig();
+    configure({ transport: { torvik: echo() } });
+    const ua = await torvikGet('https://barttorvik.com/x');
+    ua.should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    ua.should.not.containEql('+http');
   });
 
   it('hockeytech resolveSeasonId: PWHL keeps its fallback table on a failed fetch; others throw', async () => {

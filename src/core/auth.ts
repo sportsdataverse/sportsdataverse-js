@@ -1,14 +1,9 @@
 // Auth providers. A provider decorates a TransportRequest (headers, query,
 // cookies) before `request()` sends it; `refresh` is called once when a request
 // comes back 401. Values the caller already put on the request win over the
-// provider's (explicit args beat configured / env credentials).
-//
-// Failure contract: `apply` / `refresh` (and so `mint` / `login` / a token
-// getter) THROW on failure. `request()` never retries them — re-submitting
-// credentials is the provider's decision — so a provider that wants to ride out
-// transient errors retries inside `mint` / `login` itself. An SdvError thrown
-// here reaches the caller unchanged; anything else becomes
-// `AssetFetchError("<family>: auth failed (apply|refresh)")`.
+// provider's (explicit args beat configured / env credentials). The failure
+// contract is on the `AuthProvider` interface: `mint` / `login` / a token
+// getter throw on failure and `request()` never retries them.
 
 import { createHmac, randomBytes } from "node:crypto";
 import { SdvError } from "./errors.js";
@@ -58,9 +53,23 @@ export interface AuthContext {
   request?: TransportRequest;
 }
 
+/**
+ * Decorates a request with credentials. Values the caller already put on the
+ * request win over the provider's.
+ *
+ * Failure contract: `apply` and `refresh` THROW on failure, and `request()`
+ * never retries them (re-submitting credentials is the provider's decision),
+ * so a provider that wants to ride out transient errors retries internally.
+ * An `SdvError` thrown here reaches the caller unchanged; anything else becomes
+ * `AssetFetchError("<family>: auth failed (apply|refresh)")`.
+ */
 export interface AuthProvider {
+  /** The request with credentials added (values the caller set win). Throws on failure. */
   apply(req: TransportRequest, ctx: AuthContext): Promise<TransportRequest>;
-  /** Force new credentials (called once after a 401). */
+  /**
+   * Force new credentials (called once after a 401; `ctx.request` is the
+   * request that failed). Throws on failure, as `apply` does.
+   */
   refresh?(ctx: AuthContext): Promise<void>;
 }
 
@@ -144,6 +153,9 @@ export function tokenAuth(opts: {
       return { ...req, headers: mergeHeaders(req.headers, { [header]: value }) };
     },
     async refresh(ctx) {
+      // The 401 was for the caller's own credential (apply sent it untouched):
+      // a minted token would never be sent, so don't mint one.
+      if (headerValue(ctx.request?.headers, header) !== undefined) return;
       cached = undefined;
       await mint(ctx);
     },
