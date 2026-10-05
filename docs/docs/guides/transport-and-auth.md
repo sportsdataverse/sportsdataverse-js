@@ -259,7 +259,7 @@ NFL.com web token for you. Override it with environment variables —
 The dataset loaders (`sdv.<league>.load*`, e.g. `sdv.cfb.loadCfbPbp({ seasons: 2024 })`)
 download the published release assets (GitHub releases / raw) through the
 keyless `releases` family. It is gateway traffic, so the default retry statuses
-apply — `403` included, since GitHub answers `403` under load. Each download
+apply — `403` included, as sdv-py retries it for every gateway host. Each download
 gets its own 5-minute timeout (the largest assets are ~55 MB); pass `timeoutMs`
 to a loader to change it. Route the downloads through a proxy or a custom
 transport like any other family:
@@ -273,3 +273,17 @@ configure({ transport: { releases: myTransport } });
 A season whose asset is absent (HTTP `404`) is skipped with a warning; any other
 failure raises `AssetFetchError`, so a failed download is never mistaken for an
 empty season.
+
+### stats.nba.com / stats.wnba.com (`nba_stats`, `wnba_stats`)
+
+Both families install `createImpersonatingTransport({ browser: 'chrome' })` as
+their default transport, send the stats headers (`x-nba-stats-origin`,
+`x-nba-stats-token`, `Referer` / `Origin` on nba.com or wnba.com) and never retry
+403. Install the optional dependency (`npm install impit`) and run from a
+**residential** connection: these hosts hang (rather than error) on datacenter
+and cloud IPs such as GitHub Actions or AWS. A timeout, blank body or bare `{}`
+rejects with `AssetFetchError`; it is never reported as "no data". Raise
+`configure({ timeoutMs })` for slow historical endpoints, and route through a
+residential proxy with
+`configure({ transport: { nba_stats: createImpersonatingTransport({ proxyUrl }) } })`.
+Live tests: `SDV_NBA_STATS_LIVE=1 npm test` (never set in CI).

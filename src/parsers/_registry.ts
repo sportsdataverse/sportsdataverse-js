@@ -137,6 +137,7 @@ import {
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
 } from "./torvik.js";
+import { parse_nba_stats_result_sets } from "./nba_stats.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -278,6 +279,9 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_torvik_game_stats,
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
+  // ---- stats.nba.com / stats.wnba.com (resultSets envelope; one generic parser) ----
+  // Multi-set payloads return { [setName]: rows }, hence the cast.
+  parse_nba_stats_result_sets: parse_nba_stats_result_sets as ParserFn,
 };
 
 /**

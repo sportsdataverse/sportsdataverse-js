@@ -85,6 +85,10 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace; the merge creates `sdv.torvik.*` from scratch. Keyless but needs
   // a browser User-Agent (set by the family's getter); endpoints mix CSV/JSON.
   torvik: 'torvik',
+  // stats.nba.com / stats.wnba.com (TLS-impersonating transport; see
+  // src/core/nba_stats_runtime.ts) merge onto the league namespaces.
+  nba_stats: 'nba',
+  wnba_stats: 'wnba',
 };
 // Each flat family is composed from WRITTEN source (src/generated/flat/<api>.ts,
 // exposed via the barrel) instead of makeFlatModule(defs) at runtime — both call
