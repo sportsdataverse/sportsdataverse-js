@@ -113,19 +113,21 @@ const PRIMARY_FRAME = { parse_nhl_web_right_rail: 'season_series', parse_nhl_web
 const columnsOf = (rows) => [...new Set(rows.flatMap((r) => Object.keys(r)))];
 
 /** (3) JS rows vs one py oracle frame `{columns, dtypes, n_rows, rows}`. */
-function assertFrame(rows, py, label) {
+function assertFrame(rows, py, label, parser) {
   rows.length.should.equal(py.n_rows, `${label}: row count`);
   if (!py.n_rows) return;
   columnsOf(rows).sort().should.eql([...py.columns].sort(), `${label}: column set`);
   // every non-null JS value has the JS type of py's polars dtype for that column
   const bad = [];
   py.columns.forEach((c, k) => {
-    // Known sdv-py divergence (on3): pandas stringifies a bool column that has a
-    // null in it ('True' / 'False', 'nan' for the null), so py's dtype is String;
-    // the JS port keeps booleans. Same values (same() folds case and 'nan'); the
-    // column's py returns type (`character`) is wrong for JS, so vendor.yaml marks
-    // those tables schema_incompatible.
+    // Known sdv-py divergence, parse_on3_rdb ONLY: pandas stringifies a bool column
+    // that has a null in it ('True' / 'False', 'nan' for the null), so py's dtype
+    // is String; the JS port keeps booleans. Same values (same() folds case and
+    // 'nan'); the column's py returns type (`character`) is wrong for JS, so
+    // vendor.yaml marks those tables schema_incompatible. Scoped to that parser so
+    // a "True"/"False" text column elsewhere (the nfl_pro ruling) stays strict.
     const boolText =
+      parser === 'parse_on3_rdb' &&
       py.dtypes[k] === 'String' &&
       py.rows.some((r) => r[c] === 'True' || r[c] === 'False') &&
       py.rows.every((r) => nil(r[c]) || ['True', 'False', 'nan'].includes(r[c]));
@@ -247,11 +249,11 @@ for (const [family, fixtures] of Object.entries(manifest)) {
         // (3) parity with sdv-py's own output on the same capture
         if (Array.isArray(out)) {
           out.length.should.be.above(0, 'an empty frame verifies nothing');
-          assertFrame(out, py, short);
+          assertFrame(out, py, short, def.parser);
         } else {
           // a multi-frame payload: py returns {name: frame}, JS {name: rows}
           Object.keys(out).should.eql(Object.keys(py), `${short}: frame names`);
-          for (const k of Object.keys(py)) assertFrame(out[k], py[k], `${short}.${k}`);
+          for (const k of Object.keys(py)) assertFrame(out[k], py[k], `${short}.${k}`, def.parser);
         }
       });
     }
