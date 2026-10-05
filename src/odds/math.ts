@@ -14,16 +14,20 @@
  * Python's float arithmetic propagates it.
  */
 
-export class ValueError extends Error {
+import { SdvError } from '../core/errors.js';
+
+// Python-named errors (`name` stays 'ValueError' etc. so py error types can be compared);
+// the classes carry an `Odds` prefix to avoid generic-name collisions and extend SdvError.
+export class OddsValueError extends SdvError {
   override name = 'ValueError';
 }
-export class ZeroDivisionError extends Error {
+export class OddsZeroDivisionError extends SdvError {
   override name = 'ZeroDivisionError';
 }
-export class OverflowError extends Error {
+export class OddsOverflowError extends SdvError {
   override name = 'OverflowError';
 }
-export class RuntimeError extends Error {
+export class OddsRuntimeError extends SdvError {
   override name = 'RuntimeError';
 }
 
@@ -32,23 +36,29 @@ const sum = (xs: readonly number[]): number => xs.reduce((a, b) => a + b, 0);
 
 /** Raw implied probability of an American price. Raises ValueError on 0. */
 export function prob_from_american(price: number): number {
-  if (price === 0) throw new ValueError('American price cannot be 0');
+  if (price === 0) throw new OddsValueError('American price cannot be 0');
   const p = Number(price);
   return p < 0 ? -p / (-p + 100) : 100 / (p + 100);
 }
 
 /** Raw implied probability of a decimal price (> 1). Raises ValueError otherwise. */
 export function prob_from_decimal(price: number): number {
-  if (price <= 1) throw new ValueError('Decimal price must be > 1');
+  if (price <= 1) throw new OddsValueError('Decimal price must be > 1');
   return 1.0 / Number(price);
 }
 
 /** Vig removal by normalizing raw implied probabilities to sum to 1 (order preserved). */
 export function devig_multiplicative(p_raw: readonly number[]): number[] {
   const total = sum(p_raw);
-  if (p_raw.length > 0 && total === 0) throw new ZeroDivisionError('float division by zero');
+  if (p_raw.length > 0 && total === 0) throw new OddsZeroDivisionError('float division by zero');
   return p_raw.map((p) => p / total);
 }
+
+// Node: process warning; other runtimes: console.warn.
+const warn = (msg: string): void => {
+  if (typeof process !== 'undefined' && typeof process.emitWarning === 'function') process.emitWarning(msg, 'SdvWarning');
+  else console.warn(msg);
+};
 
 // sign bit incl. -0, as C `signbit`
 const signbit = (x: number): boolean => x < 0 || Object.is(x, -0);
@@ -73,7 +83,7 @@ function brentq(f: (x: number) => number, xa: number, xb: number, xtol: number):
   if (fcur === 0) return xcur;
   // ponytail: NaN endpoint values are treated as a sign error (C signbit of a NaN is platform-defined).
   if (Number.isNaN(fpre) || Number.isNaN(fcur) || signbit(fpre) === signbit(fcur)) {
-    throw new ValueError('f(a) and f(b) must have different signs');
+    throw new OddsValueError('f(a) and f(b) must have different signs');
   }
   for (let i = 0; i < maxiter; i++) {
     if (fpre !== 0 && fcur !== 0 && signbit(fpre) !== signbit(fcur)) {
@@ -110,7 +120,7 @@ function brentq(f: (x: number) => number, xa: number, xb: number, xtol: number):
     xcur += Math.abs(scur) > delta ? scur : sbis > 0 ? delta : -delta;
     fcur = f(xcur);
   }
-  throw new RuntimeError(`Failed to converge after ${maxiter} iterations`);
+  throw new OddsRuntimeError(`Failed to converge after ${maxiter} iterations`);
 }
 
 /**
@@ -131,11 +141,8 @@ export function devig_shin(p_raw: readonly number[]): number[] {
   try {
     zStar = brentq(excess, 0.0, 1.0 - 1e-9, 1e-12);
   } catch (e) {
-    if (!(e instanceof ValueError)) throw e;
-    process.emitWarning(
-      `Shin solver failed to bracket (booksum=${booksum.toFixed(4)}); falling back to multiplicative devig`,
-      'SdvWarning',
-    );
+    if (!(e instanceof OddsValueError)) throw e;
+    warn(`Shin solver failed to bracket (booksum=${booksum.toFixed(4)}); falling back to multiplicative devig`);
     return devig_multiplicative(p_raw);
   }
   const probs = shinProbs(zStar);
@@ -181,26 +188,26 @@ function normCdf(x: number): number {
 
 /** P(home win) = Phi(spread / sigma). Raises ZeroDivisionError when sigma is 0. */
 export function spread_to_prob(spread: number, sigma: number): number {
-  if (sigma === 0) throw new ZeroDivisionError('float division by zero');
+  if (sigma === 0) throw new OddsZeroDivisionError('float division by zero');
   return normCdf(spread / sigma);
 }
 
 const pyLog = (x: number): number => {
-  if (x <= 0) throw new ValueError('math domain error');
+  if (x <= 0) throw new OddsValueError('math domain error');
   return Math.log(x);
 };
 
 /** Blend two probabilities in logit space (nfelo's 70/30 practice). */
 export function logit_blend(p_a: number, p_b: number, weight_a = 0.7): number {
   const ratio = (p: number): number => {
-    if (1 - p === 0) throw new ZeroDivisionError('float division by zero');
+    if (1 - p === 0) throw new OddsZeroDivisionError('float division by zero');
     return p / (1 - p);
   };
   const la = pyLog(ratio(p_a));
   const lb = pyLog(ratio(p_b));
   const lz = weight_a * la + (1 - weight_a) * lb;
   const ex = Math.exp(-lz);
-  if (!Number.isFinite(ex) && Number.isFinite(lz)) throw new OverflowError('math range error');
+  if (!Number.isFinite(ex) && Number.isFinite(lz)) throw new OddsOverflowError('math range error');
   return 1 / (1 + ex);
 }
 
@@ -213,8 +220,10 @@ export function moneyline_pair_prob(
   const raw = [prob_from_american(home_price), prob_from_american(away_price)];
   if (method === 'multiplicative') return devig_multiplicative(raw)[0];
   if (method === 'shin') return devig_shin(raw)[0];
-  throw new ValueError(`unknown devig method: '${method}'`);
+  throw new OddsValueError(`unknown devig method: '${method}'`);
 }
+
+export const oddsErrors = { ValueError: OddsValueError, ZeroDivisionError: OddsZeroDivisionError, OverflowError: OddsOverflowError, RuntimeError: OddsRuntimeError };
 
 export const oddsMath = {
   prob_from_american, probFromAmerican: prob_from_american,

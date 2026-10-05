@@ -16,7 +16,7 @@ import { WRITTEN_FLAT } from './generated/flat/index.js';
 import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from './generated/aliases.js';
 import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
-import { oddsMath } from './odds/math.js';
+import { oddsMath, oddsErrors } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
 // documented `export const` wrappers in src/generated/espn/<prefix>.ts, exposed
@@ -136,9 +136,11 @@ for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
 }
 
 // Odds / market math (py wexp.market) merged onto sdv.odds under py + camelCase names.
-sdv.odds = { ...(sdv.odds ?? {}), ...oddsMath };
+sdv.odds = { ...(sdv.odds ?? {}), ...oddsMath, errors: oddsErrors };
 
 export default sdv;
+
+export { OddsValueError, OddsZeroDivisionError, OddsOverflowError, OddsRuntimeError } from './odds/math.js';
 
 // Advanced / tree-shakeable use:
 export { LEAGUES };

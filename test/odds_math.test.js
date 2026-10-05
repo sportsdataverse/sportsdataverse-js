@@ -2,6 +2,7 @@ import should from 'should';
 import { readFileSync } from 'node:fs';
 import sdv from '../dist/index.js';
 import * as m from '../dist/odds/math.js';
+import { SdvError, OddsValueError, OddsZeroDivisionError } from '../dist/index.js';
 
 const oracle = JSON.parse(readFileSync(new URL('./fixtures/odds/odds_math_oracle.json', import.meta.url)));
 const rows = JSON.parse(readFileSync(new URL('./fixtures/odds/h2h_rows.json', import.meta.url))).rows;
@@ -105,6 +106,16 @@ describe('odds/math: properties and edge cases', () => {
 });
 
 describe('odds/math: sdv.odds surface', () => {
+  it('errors extend SdvError, keep python names, and are exported', () => {
+    let e;
+    try { m.prob_from_american(0); } catch (x) { e = x; }
+    e.should.be.instanceOf(SdvError).and.instanceOf(OddsValueError);
+    e.name.should.equal('ValueError');
+    try { m.spread_to_prob(1, 0); } catch (x) { e = x; }
+    e.should.be.instanceOf(SdvError).and.instanceOf(OddsZeroDivisionError);
+    e.name.should.equal('ZeroDivisionError');
+    sdv.odds.errors.ValueError.should.equal(OddsValueError);
+  });
   it('exposes py snake_case and camelCase names', () => {
     for (const n of ['prob_from_american', 'prob_from_decimal', 'devig_multiplicative', 'devig_shin', 'spread_to_prob', 'logit_blend', 'moneyline_pair_prob']) {
       sdv.odds[n].should.be.a.Function();
