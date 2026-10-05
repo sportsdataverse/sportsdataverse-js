@@ -41,9 +41,11 @@
 // every arithmetic step exactly as polars computes it (Math.fround); Float64 -> number; String;
 // Boolean; Int64 -> number (safe integers: scores, coordinates). Id columns follow the id rule
 // (`applyInt64Policy`, src/core/int64.ts; owner decision 2026-10-05): the play `id` (Int64,
-// parsed exactly) and `game_id` (Int32) are decimal STRINGS in every game of every era (ESPN's
-// college play ids are 12-13 digits through 2013 and 18 digits from 2014-15, beyond 2^53), as
-// the release loaders return them. The timeouts lists hold the same id strings. No py column is a date / datetime (`wallclock` is a String in py, kept so).
+// parsed exactly), `game_id`, `homeTeamId` / `awayTeamId` (Int32 or py int) and the result's
+// top-level `gameId` are decimal STRINGS in every game of every era (ESPN's college play ids are
+// 12-13 digits through 2013 and 18 digits from 2014-15, beyond 2^53), as the release loaders
+// return them. The timeouts lists hold the same id strings. The stage helpers' `init` dict
+// (`helper_<lg>_game_data`) stays py-faithful. No py column is a date / datetime (`wallclock` is a String in py, kept so).
 //
 // Every lag / lead / row-number op runs per `game_id` (py's frames are single-game; here a
 // concatenated frame never leaks across games -- see the test).
@@ -54,6 +56,7 @@
 // sort is not guaranteed stable); `timeouts` keys are strings (py: int) and JS orders
 // integer keys ascending; int-vs-float is invisible in JS (py `-1 * abs(0)` is int 0, here -0).
 
+import { idColumnsToStrings } from "../core/int64.js";
 import { applyInt64Policy } from "../core/releases.js";
 import { isObj, or, pyEqTrue, PY_FLOAT, PY_INT, truthy, type Row } from "./espn_basketball_box.js";
 
@@ -734,7 +737,8 @@ function pbp(league: League, game_id: unknown, pbp_txt: any): PbpResult {
   for (const k of ["pickcenter", "againstTheSpread", "odds", "predictor", "espnWP", "gameInfo", "teamInfo", "season"]) {
     out[k] = at(txt, k);
   }
-  return out as PbpResult;
+  // the top-level `gameId` (py int) is an id too: a decimal string, like the plays' ids
+  return idColumnsToStrings([out])[0] as PbpResult;
 }
 
 

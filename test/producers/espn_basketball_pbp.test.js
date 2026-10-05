@@ -103,7 +103,8 @@ function expectLeague(lg, payload, gameId, want, label) {
   if (want.out.raises) return run.should.throw(raisesAs(want.out.raises), `${label}: py raises ${want.out.raises}`);
   const out = run();
   Object.keys(out).should.eql(want.out.keys, `${label}: output key order`);
-  assert.deepStrictEqual(out.gameId, decode(want.out.gameId), `${label}: gameId`);
+  const pyGameId = decode(want.out.gameId); // py int -> the id rule's decimal string
+  assert.deepStrictEqual(out.gameId, Number.isInteger(pyGameId) ? String(pyGameId) : pyGameId, `${label}: gameId`);
   expectPlays(out.plays, want.out.plays, `${label} plays`);
   // timeouts: py int keys -> JS string keys (JS orders integer keys itself); ids follow the id
   // column (exact decimal strings).
@@ -248,6 +249,7 @@ describe('ESPN basketball pbp league facts', () => {
     const mbb = run('mbb', 'summary_mbb.json.gz');
     ids(mbb)[0].should.equal('401638645101799901');
     mbb.plays.every((r) => r.game_id === '401638645').should.be.true(); // the Int32 game_id too (any width)
+    mbb.gameId.should.equal('401638645'); // the top-level gameId (py int)
     // homeTeamId / awayTeamId (Int32 on NBA / WNBA, py int on MBB / WBB): strings, every league
     for (const out of [mbb, run('nba', 'summary_nba.json')]) {
       out.plays.every((r) => typeof r.homeTeamId === 'string' && /^\d+$/.test(r.homeTeamId)).should.be.true();
