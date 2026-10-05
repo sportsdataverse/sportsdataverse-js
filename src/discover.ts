@@ -95,7 +95,10 @@ export async function functionCount(
 // find_* : name -> ESPN id resolvers (raw ESPN JSON, matches py's return_parsed=False)
 // ---------------------------------------------------------------------------
 
-const TEAM_CACHE = new Map<string, any[]>();
+// Keyed by namespace identity (an injected namespace never shares a default's teams), then league.
+// Holds the in-flight PROMISE so concurrent first calls share one fetch; evicted on rejection.
+const TEAM_CACHE = new WeakMap<object, Map<string, Promise<any[]>>>();
+const TEAM_CACHE_MAPS = new Set<WeakRef<Map<string, Promise<any[]>>>>();
 
 function leagueFns(space: Namespaces, league: string) {
   const l = league.toLowerCase();
@@ -119,12 +122,24 @@ function matches(needle: string | undefined, ...fields: Array<string | null | un
 async function listTeams(league: string, ns?: Namespaces): Promise<any[]> {
   const space = ns ?? (await defaultNs());
   const { l, teams } = leagueFns(space, league);
-  if (TEAM_CACHE.has(l)) return TEAM_CACHE.get(l)!;
-  const payload = await teams({});
-  const raw = payload?.sports?.[0]?.leagues?.[0]?.teams ?? [];
-  const flat = raw.map((t: any) => t?.team ?? {}).filter((t: any) => Object.keys(t).length);
-  TEAM_CACHE.set(l, flat);
-  return flat;
+  let byLeague = TEAM_CACHE.get(space);
+  if (!byLeague) {
+    byLeague = new Map();
+    TEAM_CACHE.set(space, byLeague);
+    TEAM_CACHE_MAPS.add(new WeakRef(byLeague));
+  }
+  const hit = byLeague.get(l);
+  if (hit) return hit;
+  const pending = (async () => {
+    const payload = await teams({});
+    const raw = payload?.sports?.[0]?.leagues?.[0]?.teams ?? [];
+    return raw.map((t: any) => t?.team ?? {}).filter((t: any) => Object.keys(t).length);
+  })();
+  byLeague.set(l, pending);
+  pending.catch(() => {
+    if (byLeague!.get(l) === pending) byLeague!.delete(l);
+  });
+  return pending;
 }
 
 /** Resolve a team name/abbreviation (case-insensitive substring) to ESPN team metadata. `multi` returns all matches. */
@@ -214,8 +229,12 @@ export async function findEvent(
 
 /** Reset the in-process team-list cache (one league, or all). */
 export function clearTeamCache(league?: string): void {
-  if (league == null) TEAM_CACHE.clear();
-  else TEAM_CACHE.delete(league.toLowerCase());
+  for (const ref of TEAM_CACHE_MAPS) {
+    const m = ref.deref();
+    if (!m) TEAM_CACHE_MAPS.delete(ref);
+    else if (league == null) m.clear();
+    else m.delete(league.toLowerCase());
+  }
 }
 
 // py snake_case names
