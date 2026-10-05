@@ -17,15 +17,17 @@ import {
 // test/parsers/*); this pins the shared pieces.
 
 describe('INT64 id rule (src/core/int64.ts)', () => {
-  it('names an id: id, *_id, *_ids, *_pk, numbered, id_*, *_id_started, camelCase, dotted, MLBAM', () => {
+  it('names an id: id, *_id, *_ids, numbered, id_play / id_drive, *_id_started, teamid / personid, camelCase, dotted, listed', () => {
     const ids = [
       'id', 'game_id', 'athlete_ids', 'game_pk', // the base forms
       'athlete_id_1', 'athlete_id_3', 'sack_player_id2', 'team_id_247', 'details_team_id_2', // numbered
-      'id_play', 'id_drive', 'id_type', // id_<entity>
+      'id_play', 'id_drive', // id_<entity>: only the names the data has
       'drive_play_id_started', 'drive_play_id_ended',
       'playerId', 'homeTeamId', 'awayTeamId', 'eventId', 'firstHalfKickoffTeamId', 'mediaId', 'teamIds', // camelCase
       'start.team.id', 'end.pos_team.id', 'pointAfterAttempt.id', 'participants.0.athlete.id', 'end.team_id', // dotted
       'batter', 'pitcher', 'on_1b', 'on_3b', 'fielder_2', 'fielder_9', // MLBAM
+      'hometeam_teamid', 'awayteam_teamid', 'gameleaders_homeleaders_personid', 'teamleaders_awayleaders_personid', // stats.nba.com
+      'playerid', 'matchupid', 'teamid', 'personid', 'hid', 'vid', // (hid / vid: the video playlist's home / visitor team ids)
     ];
     for (const c of ids) isIdColumn(c).should.be.true(c);
     // ordinary words and the real non-id columns the enumeration found (f-js6 report)
@@ -35,6 +37,7 @@ describe('INT64 id rule (src/core/int64.ts)', () => {
       'games', 'event_idx', 'valid_games', 'valid_from', 'video_available', 'mid_pct', 'middle_8', 'team.uid',
       'team_id_source', 'fields_competition_sportec_id_overwrite', 'parameters_player_id_list',
       'html_body_table_id_ratings_table', 'fielder_1', 'fielder_10', 'on_4b',
+      'n_pk', 'id_type', 'id_source', 'blk_mid', 'ei', 'gi', 'squid', 'player_key', 'institution_key', // n_pk: Savant pickoffs; *_key stay numbers
     ];
     for (const c of words) isIdColumn(c).should.be.false(c);
   });

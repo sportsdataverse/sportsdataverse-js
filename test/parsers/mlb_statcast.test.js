@@ -98,6 +98,8 @@ describe('parsers/mlb_statcast: parse_mlb_statcast_leaderboard (CSV)', () => {
     rows.map((r) => r.player_id).should.eql(['592450', '9007199254740993']);
     rows.map((r) => r.game_pk).should.eql(['745444', '401628579101849903']);
     rows.map((r) => r.v).should.eql([1, 2]);
+    // `n_pk` is the pickoff count (leaderboard_pitcher_running_game / basestealing_run_value), not an id
+    parse_mlb_statcast_leaderboard('player_id,n_pk,game_pk\n592450,3,745444')[0].should.eql({ player_id: '592450', n_pk: 3, game_pk: '745444' });
     JSON.stringify(rows).should.be.a.String(); // no BigInt left in an id column
     parse_mlb_statcast_gamefeed({ team_home: [{ game_pk: '401628579101849903', batter: 660271 }, { game_pk: '0745444', batter: '7' }] })
       .should.eql([{ game_pk: '401628579101849903', batter: '660271' }, { game_pk: '745444', batter: '7' }]);

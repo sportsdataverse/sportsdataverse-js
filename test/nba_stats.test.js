@@ -116,6 +116,22 @@ describe('parse_nba_stats_result_sets: real captures', () => {
     (Array.isArray(sum) ? sum : Object.keys(sum)).length.should.be.above(0);
   });
 
+  it('underscore-less stats ids (teamid / personid / playerid / matchupid, video hid / vid) are decimal strings (real captures)', () => {
+    const py = (n) => JSON.parse(readFileSync(join(here, 'fixtures', 'py', 'nba_stats', n), 'utf8'));
+    const sb = parse_nba_stats_result_sets(py('cap_scoreboardv3_nba.json'));
+    sb[0].hometeam_teamid.should.equal('1610612755');
+    sb[0].awayteam_teamid.should.equal('1610612752');
+    sb[0].gameleaders_homeleaders_personid.should.equal('1630178');
+    sb[0].teamleaders_awayleaders_personid.should.equal('1626157');
+    const td = parse_nba_stats_result_sets(py('endpoints/teamdetails.json'));
+    td.TeamHof[0].playerid.should.equal('2546');
+    td.TeamRetired[0].playerid.should.equal('2200');
+    parse_nba_stats_result_sets(py('endpoints/playerdashptshotdefend.json'))[0].matchupid.should.equal('2544');
+    const video = parse_nba_stats_result_sets(py('cap_videodetailsasset_nba.json')).playlist[0];
+    [video.hid, video.vid].should.eql(['1610612744', '1610612747']); // home / visitor team ids
+    video.ei.should.equal(98); // the event number stays a number, like its pbp partner eventnum
+  });
+
   it('shot-location 2-level headers flatten to composite columns', () => {
     const raw = {
       resultSets: {

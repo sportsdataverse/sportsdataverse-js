@@ -454,10 +454,10 @@ var MLBAM_ID_COLUMNS = [
   ...[2, 3, 4, 5, 6, 7, 8, 9].map((i) => `fielder_${i}`),
   "game_pk"
 ];
-var MLBAM = new Set(MLBAM_ID_COLUMNS);
-var ID_SEGMENT = /^id$|_(ids?|pk)$|_id\d+$|_id_(\d+|started|ended)$|^id_|[a-z0-9]Ids?$/;
+var EXACT_IDS = /* @__PURE__ */ new Set([...MLBAM_ID_COLUMNS, "hid", "vid"]);
+var ID_SEGMENT = /^id$|_ids?$|_id\d+$|_id_(\d+|started|ended)$|^id_(play|drive)$|(team|person|player|matchup)id$|[a-z0-9]Ids?$/;
 function isIdColumn(name) {
-  return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || MLBAM.has(name);
+  return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || EXACT_IDS.has(name);
 }
 var INT64_WARNING_CODE = "SDV_INT64";
 function rowCells(rows, col) {
