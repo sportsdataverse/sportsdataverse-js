@@ -22,6 +22,8 @@ export interface QueryParam {
   name: string;
   queryKey: string;
   default?: string | number | boolean;
+  /** sdv-py param transform applied to the resolved value (src/core/transforms.ts). */
+  transform?: string;
 }
 
 /**
@@ -34,6 +36,8 @@ export interface PathParam {
   required?: boolean;
   default?: string | number;
   defaultFrom?: string;
+  /** sdv-py param transform applied to the resolved value (src/core/transforms.ts). */
+  transform?: string;
 }
 
 /**

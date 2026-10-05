@@ -9,7 +9,7 @@ sidebar_position: 4
 
 # `college_baseball` — NCAA additional
 
-3 endpoints on `sdv.college_baseball`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+6 endpoints on `sdv.college_baseball`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnCollegeBaseballRankings`
 
@@ -34,6 +34,79 @@ await sdv.college_baseball.espnCollegeBaseballRankings({});
 // snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_rankings(...)
 ```
 
+## `espnCollegeBaseballRecruitingAthletes`
+
+COLLEGE_BASEBALL — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-baseball/recruiting/{year}/athletes`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{year}` | `year` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.college_baseball.espnCollegeBaseballRecruitingAthletes({ year: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_recruiting_athletes(...)
+```
+
+## `espnCollegeBaseballRecruitingRankings`
+
+COLLEGE_BASEBALL — recruiting rankings (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-baseball/recruiting/{year}/rankings`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{year}` | `year` | yes | path parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.college_baseball.espnCollegeBaseballRecruitingRankings({ year: '…' });
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_recruiting_rankings(...)
+```
+
+## `espnCollegeBaseballRecruitingYears`
+
+COLLEGE_BASEBALL — recruiting years (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/college-baseball/recruiting`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.college_baseball.espnCollegeBaseballRecruitingYears({});
+// snake_case alias (py/R parity): sdv.college_baseball.espn_college_baseball_recruiting_years(...)
+```
+
 ## `espnCollegeBaseballSeasonRecruits`
 
 COLLEGE_BASEBALL — season recruits (ESPN sports.core.api.espn.com (core v2)).
@@ -43,7 +116,8 @@ COLLEGE_BASEBALL — season recruits (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `100`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

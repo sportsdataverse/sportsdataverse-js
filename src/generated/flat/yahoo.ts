@@ -12,26 +12,11 @@ const ALIAS_DEF: WrapperDef = {
   "short": "alias",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/alias",
+  "path": "/alias",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "alias",
       "queryKey": "alias"
@@ -46,9 +31,6 @@ const ALIAS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/alias`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.alias - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -62,26 +44,11 @@ const ARTICLE_LIST_CARD_PLAYERS_DEF: WrapperDef = {
   "short": "article_list_card_players",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/articleListCardPlayers",
+  "path": "/articleListCardPlayers",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_ids",
       "queryKey": "playerIds"
@@ -96,9 +63,6 @@ const ARTICLE_LIST_CARD_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardPlayers`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_ids - query parameter (`playerIds`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -112,26 +76,11 @@ const ARTICLE_LIST_CARD_TEAMS_DEF: WrapperDef = {
   "short": "article_list_card_teams",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/articleListCardTeams",
+  "path": "/articleListCardTeams",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_ids",
       "queryKey": "teamIds"
@@ -146,9 +95,6 @@ const ARTICLE_LIST_CARD_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/articleListCardTeams`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_ids - query parameter (`teamIds`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -162,26 +108,11 @@ const BASIC_PLAYERS_DEF: WrapperDef = {
   "short": "basic_players",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/basicPlayers",
+  "path": "/basicPlayers",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "players",
       "queryKey": "players"
@@ -196,9 +127,6 @@ const BASIC_PLAYERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/basicPlayers`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.players - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -212,26 +140,11 @@ const BETTING_DISCLAIMER_DEF: WrapperDef = {
   "short": "betting_disclaimer",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/bettingDisclaimer",
+  "path": "/bettingDisclaimer",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "betting_disclaimer_id",
       "queryKey": "bettingDisclaimerId"
@@ -246,9 +159,6 @@ const BETTING_DISCLAIMER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/bettingDisclaimer`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.betting_disclaimer_id - query parameter (`bettingDisclaimerId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -262,26 +172,11 @@ const COMBAT_EVENT_FIGHTS_DEF: WrapperDef = {
   "short": "combat_event_fights",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/combatEventFights",
+  "path": "/combatEventFights",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "event_group_id",
       "queryKey": "eventGroupId"
@@ -304,9 +199,6 @@ const COMBAT_EVENT_FIGHTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatEventFights`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.event_group_id - query parameter (`eventGroupId`).
  * @param params.season - query parameter.
  * @param params.league - query parameter.
@@ -322,26 +214,11 @@ const COMBAT_SCHEDULE_DEF: WrapperDef = {
   "short": "combat_schedule",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/combatSchedule",
+  "path": "/combatSchedule",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
@@ -360,9 +237,6 @@ const COMBAT_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/combatSchedule`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.league - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -377,26 +251,11 @@ const COMMON_PILLS_DEF: WrapperDef = {
   "short": "common_pills",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/common/pills",
+  "path": "/common/pills",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "add_team_logos",
       "queryKey": "addTeamLogos"
@@ -419,9 +278,6 @@ const COMMON_PILLS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/common/pills`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.add_team_logos - query parameter (`addTeamLogos`).
  * @param params.date - query parameter.
  * @param params.team_ids - query parameter (`teamIds`).
@@ -437,26 +293,11 @@ const CONSENSUS_RANKINGS_PHP_DEF: WrapperDef = {
   "short": "consensus_rankings_php",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/consensus-rankings.php",
+  "path": "/consensus-rankings.php",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "sport",
       "queryKey": "sport"
@@ -491,9 +332,6 @@ const CONSENSUS_RANKINGS_PHP_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/consensus-rankings.php`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.sport - query parameter.
  * @param params.position - query parameter.
  * @param params.filters - query parameter.
@@ -512,26 +350,11 @@ const DRAFT_DEF: WrapperDef = {
   "short": "draft",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/draft",
+  "path": "/draft",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -550,9 +373,6 @@ const DRAFT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draft`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -567,26 +387,11 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
   "short": "draft_prospects",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/draftProspects",
+  "path": "/draftProspects",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -613,9 +418,6 @@ const DRAFT_PROSPECTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/draftProspects`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.image_height - query parameter (`imageHeight`).
@@ -632,26 +434,11 @@ const DRIVER_RESULTS_DEF: WrapperDef = {
   "short": "driver_results",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/driverResults",
+  "path": "/driverResults",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -670,9 +457,6 @@ const DRIVER_RESULTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverResults`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -687,26 +471,11 @@ const DRIVER_SPLITS_DEF: WrapperDef = {
   "short": "driver_splits",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/driverSplits",
+  "path": "/driverSplits",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -721,9 +490,6 @@ const DRIVER_SPLITS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/driverSplits`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -733,31 +499,114 @@ export const yahooDriverSplits: WrapperFn = (params = {}) => callFlat(DRIVER_SPL
 /** snake_case alias of {@link yahooDriverSplits} (py/R parity). */
 export const yahoo_driver_splits = yahooDriverSplits;
 
+const EDITORIAL_BOXSCORE_DEF: WrapperDef = {
+  "short": "editorial_boxscore",
+  "flat": true,
+  "api": "yahoo",
+  "host": "https://api-secure.sports.yahoo.com/v1/editorial/s",
+  "scope": "universal",
+  "path": "/boxscore/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "v",
+      "queryKey": "v"
+    },
+    {
+      "name": "polling",
+      "queryKey": "polling"
+    }
+  ],
+  "parser": "parse_yahoo_scores_boxscore",
+  "returnsSchema": "native/yahoo_scores/boxscore"
+};
+
+/**
+ * Yahoo Sports — editorial boxscore.
+ *
+ * **Endpoint:** `GET https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.v - query parameter.
+ * @param params.polling - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.yahoo.yahooEditorialBoxscore({ game_id: '…' });
+ */
+export const yahooEditorialBoxscore: WrapperFn = (params = {}) => callFlat(EDITORIAL_BOXSCORE_DEF, params);
+/** snake_case alias of {@link yahooEditorialBoxscore} (py/R parity). */
+export const yahoo_editorial_boxscore = yahooEditorialBoxscore;
+
+const EDITORIAL_SCOREBOARD_DEF: WrapperDef = {
+  "short": "editorial_scoreboard",
+  "flat": true,
+  "api": "yahoo",
+  "host": "https://api-secure.sports.yahoo.com/v1/editorial/s",
+  "scope": "universal",
+  "path": "/scoreboard",
+  "pathParams": [],
+  "queryParams": [
+    {
+      "name": "leagues",
+      "queryKey": "leagues"
+    },
+    {
+      "name": "week",
+      "queryKey": "week"
+    },
+    {
+      "name": "season",
+      "queryKey": "season"
+    },
+    {
+      "name": "conferences",
+      "queryKey": "conferences"
+    },
+    {
+      "name": "count",
+      "queryKey": "count"
+    },
+    {
+      "name": "v",
+      "queryKey": "v"
+    }
+  ],
+  "parser": "parse_yahoo_scores_scoreboard",
+  "returnsSchema": "native/yahoo_scores/scoreboard"
+};
+
+/**
+ * Yahoo Sports — editorial scoreboard.
+ *
+ * **Endpoint:** `GET https://api-secure.sports.yahoo.com/v1/editorial/s/scoreboard`
+ *
+ * @param params.leagues - query parameter.
+ * @param params.week - query parameter.
+ * @param params.season - query parameter.
+ * @param params.conferences - query parameter.
+ * @param params.count - query parameter.
+ * @param params.v - query parameter.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.yahoo.yahooEditorialScoreboard({});
+ */
+export const yahooEditorialScoreboard: WrapperFn = (params = {}) => callFlat(EDITORIAL_SCOREBOARD_DEF, params);
+/** snake_case alias of {@link yahooEditorialScoreboard} (py/R parity). */
+export const yahoo_editorial_scoreboard = yahooEditorialScoreboard;
+
 const FEATURED_GAME_IDS_DEF: WrapperDef = {
   "short": "featured_game_ids",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/featuredGameIds",
+  "path": "/featuredGameIds",
   "pathParams": [],
-  "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    }
-  ],
+  "queryParams": [],
   "parser": "parse_yahoo_list",
   "returnsSchema": "native/yahoo/featured_game_ids"
 };
@@ -767,9 +616,6 @@ const FEATURED_GAME_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/featuredGameIds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.yahoo.yahooFeaturedGameIds({});
@@ -782,26 +628,11 @@ const GAME_PROP_BETS_DEF: WrapperDef = {
   "short": "game_prop_bets",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/gamePropBets",
+  "path": "/gamePropBets",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -816,9 +647,6 @@ const GAME_PROP_BETS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gamePropBets`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -832,26 +660,11 @@ const GAME_STATS_LEADERS_DEF: WrapperDef = {
   "short": "game_stats_leaders",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/gameStatsLeaders",
+  "path": "/gameStatsLeaders",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -1498,9 +1311,6 @@ const GAME_STATS_LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gameStatsLeaders`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.season - query parameter.
  * @param params.season_phases - query parameter (`seasonPhases`).
@@ -1672,26 +1482,11 @@ const GAMETIME_GAME_DEF: WrapperDef = {
   "short": "gametime_game",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/gametimeGame",
+  "path": "/gametimeGame",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -1706,9 +1501,6 @@ const GAMETIME_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeGame`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -1722,26 +1514,11 @@ const GAMETIME_TEAM_DEF: WrapperDef = {
   "short": "gametime_team",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/gametimeTeam",
+  "path": "/gametimeTeam",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -1756,9 +1533,6 @@ const GAMETIME_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/gametimeTeam`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -1772,26 +1546,11 @@ const GOLF_TOURNAMENT_SEASONS_DEF: WrapperDef = {
   "short": "golf_tournament_seasons",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/golfTournamentSeasons",
+  "path": "/golfTournamentSeasons",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "event_group_id",
       "queryKey": "eventGroupId"
@@ -1806,9 +1565,6 @@ const GOLF_TOURNAMENT_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentSeasons`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.event_group_id - query parameter (`eventGroupId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -1822,26 +1578,11 @@ const GOLF_TOURNAMENTS_DEF: WrapperDef = {
   "short": "golf_tournaments",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/golfTournaments",
+  "path": "/golfTournaments",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "association",
       "queryKey": "association"
@@ -1864,9 +1605,6 @@ const GOLF_TOURNAMENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournaments`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.association - query parameter.
  * @param params.season - query parameter.
  * @param params.show_defending_champs - query parameter (`showDefendingChamps`).
@@ -1882,26 +1620,11 @@ const GOLF_TOURNAMENTS_BASIC_DEF: WrapperDef = {
   "short": "golf_tournaments_basic",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/golfTournamentsBasic",
+  "path": "/golfTournamentsBasic",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "event_group_id",
       "queryKey": "eventGroupId"
@@ -1924,9 +1647,6 @@ const GOLF_TOURNAMENTS_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/golfTournamentsBasic`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.event_group_id - query parameter (`eventGroupId`).
  * @param params.association - query parameter.
  * @param params.season - query parameter.
@@ -1942,26 +1662,11 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
   "short": "league_conferences",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueConferences",
+  "path": "/leagueConferences",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -1980,9 +1685,6 @@ const LEAGUE_CONFERENCES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueConferences`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.division_ids - query parameter (`divisionIds`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -1997,26 +1699,11 @@ const LEAGUE_FILTERS_DATA_DEF: WrapperDef = {
   "short": "league_filters_data",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueFiltersData",
+  "path": "/leagueFiltersData",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -2043,9 +1730,6 @@ const LEAGUE_FILTERS_DATA_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFiltersData`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.view_type - query parameter (`viewType`).
@@ -2062,26 +1746,11 @@ const LEAGUE_FUTURE_ODDS_DEF: WrapperDef = {
   "short": "league_future_odds",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueFutureOdds",
+  "path": "/leagueFutureOdds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -2100,9 +1769,6 @@ const LEAGUE_FUTURE_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueFutureOdds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.bet_categories - query parameter (`betCategories`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2117,26 +1783,11 @@ const LEAGUE_GAME_IDS_DEF: WrapperDef = {
   "short": "league_game_ids",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueGameIds",
+  "path": "/leagueGameIds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "count",
       "queryKey": "count"
@@ -2195,9 +1846,6 @@ const LEAGUE_GAME_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.count - query parameter.
  * @param params.league - query parameter.
  * @param params.week - query parameter.
@@ -2222,26 +1870,11 @@ const LEAGUE_GAME_IDS_BY_DATE_DEF: WrapperDef = {
   "short": "league_game_ids_by_date",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueGameIdsByDate",
+  "path": "/leagueGameIdsByDate",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -2300,9 +1933,6 @@ const LEAGUE_GAME_IDS_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGameIdsByDate`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.week - query parameter.
  * @param params.dates - query parameter.
@@ -2327,26 +1957,11 @@ const LEAGUE_GAMES_BY_ROUND_DEF: WrapperDef = {
   "short": "league_games_by_round",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueGamesByRound",
+  "path": "/leagueGamesByRound",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -2369,9 +1984,6 @@ const LEAGUE_GAMES_BY_ROUND_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueGamesByRound`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.tournament_round_ids - query parameter (`tournamentRoundIds`).
  * @param params.season - query parameter.
@@ -2387,26 +1999,11 @@ const LEAGUE_INFO_DEF: WrapperDef = {
   "short": "league_info",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueInfo",
+  "path": "/leagueInfo",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -2421,9 +2018,6 @@ const LEAGUE_INFO_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInfo`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -2437,26 +2031,11 @@ const LEAGUE_INJURIES_DEF: WrapperDef = {
   "short": "league_injuries",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueInjuries",
+  "path": "/leagueInjuries",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league_id",
       "queryKey": "leagueId"
@@ -2471,9 +2050,6 @@ const LEAGUE_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueInjuries`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league_id - query parameter (`leagueId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -2487,26 +2063,11 @@ const LEAGUE_NAMES_DEF: WrapperDef = {
   "short": "league_names",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueNames",
+  "path": "/leagueNames",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -2521,9 +2082,6 @@ const LEAGUE_NAMES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueNames`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -2537,26 +2095,11 @@ const LEAGUE_PROP_ODDS_DEF: WrapperDef = {
   "short": "league_prop_odds",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leaguePropOdds",
+  "path": "/leaguePropOdds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "count",
       "queryKey": "count"
@@ -2575,9 +2118,6 @@ const LEAGUE_PROP_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguePropOdds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.count - query parameter.
  * @param params.league - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -2592,26 +2132,11 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
   "short": "league_standings",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueStandings",
+  "path": "/leagueStandings",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -2634,9 +2159,6 @@ const LEAGUE_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStandings`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.season_phase - query parameter (`seasonPhase`).
@@ -2652,26 +2174,11 @@ const LEAGUE_STATS_BY_TEAM_DEF: WrapperDef = {
   "short": "league_stats_by_team",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueStatsByTeam",
+  "path": "/leagueStatsByTeam",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -2714,9 +2221,6 @@ const LEAGUE_STATS_BY_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsByTeam`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.count - query parameter.
  * @param params.season - query parameter.
@@ -2737,26 +2241,11 @@ const LEAGUE_STATS_INDIVIDUAL_DEF: WrapperDef = {
   "short": "league_stats_individual",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueStatsIndividual",
+  "path": "/leagueStatsIndividual",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -2831,9 +2320,6 @@ const LEAGUE_STATS_INDIVIDUAL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsIndividual`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.count - query parameter.
  * @param params.season - query parameter.
@@ -2862,26 +2348,11 @@ const LEAGUE_STATS_OVERVIEW_DEF: WrapperDef = {
   "short": "league_stats_overview",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueStatsOverview",
+  "path": "/leagueStatsOverview",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -2932,9 +2403,6 @@ const LEAGUE_STATS_OVERVIEW_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsOverview`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.count - query parameter.
  * @param params.week - query parameter.
@@ -2957,26 +2425,11 @@ const LEAGUE_STATS_WEEKLY_DEF: WrapperDef = {
   "short": "league_stats_weekly",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueStatsWeekly",
+  "path": "/leagueStatsWeekly",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -3007,9 +2460,6 @@ const LEAGUE_STATS_WEEKLY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueStatsWeekly`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.count - query parameter.
  * @param params.week - query parameter.
@@ -3027,26 +2477,11 @@ const LEAGUE_TEAM_IDS_DEF: WrapperDef = {
   "short": "league_team_ids",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueTeamIds",
+  "path": "/leagueTeamIds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -3069,9 +2504,6 @@ const LEAGUE_TEAM_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeamIds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.division_ids - query parameter (`divisionIds`).
  * @param params.get_teams_by_division - query parameter (`getTeamsByDivision`).
@@ -3087,26 +2519,11 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
   "short": "league_teams",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leagueTeams",
+  "path": "/leagueTeams",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -3133,9 +2550,6 @@ const LEAGUE_TEAMS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leagueTeams`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.division_ids - query parameter (`divisionIds`).
@@ -3152,26 +2566,11 @@ const LEAGUES_SEASON_STATES_DEF: WrapperDef = {
   "short": "leagues_season_states",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/leaguesSeasonStates",
+  "path": "/leaguesSeasonStates",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "leagues",
       "queryKey": "leagues"
@@ -3186,9 +2585,6 @@ const LEAGUES_SEASON_STATES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/leaguesSeasonStates`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.leagues - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -3202,26 +2598,11 @@ const MODULE_GAME_DEF: WrapperDef = {
   "short": "module_game",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/moduleGame",
+  "path": "/moduleGame",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -3244,9 +2625,6 @@ const MODULE_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/moduleGame`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -3262,26 +2640,11 @@ const MOTORSPORT_STANDINGS_DEF: WrapperDef = {
   "short": "motorsport_standings",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/motorsportStandings",
+  "path": "/motorsportStandings",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -3300,9 +2663,6 @@ const MOTORSPORT_STANDINGS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/motorsportStandings`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -3317,26 +2677,11 @@ const NASCAR_DRIVERS_DEF: WrapperDef = {
   "short": "nascar_drivers",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/nascarDrivers",
+  "path": "/nascarDrivers",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -3351,9 +2696,6 @@ const NASCAR_DRIVERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/nascarDrivers`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -3367,26 +2709,11 @@ const NAV_DROPDOWN_TRAY_DEF: WrapperDef = {
   "short": "nav_dropdown_tray",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/navDropdownTray",
+  "path": "/navDropdownTray",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "get_soccer_data",
       "queryKey": "getSoccerData"
@@ -3409,9 +2736,6 @@ const NAV_DROPDOWN_TRAY_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/navDropdownTray`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.get_soccer_data - query parameter (`getSoccerData`).
  * @param params.soccer_league_ids - query parameter (`soccerLeagueIds`).
  * @param params.soccer_team_ids - query parameter (`soccerTeamIds`).
@@ -3427,26 +2751,11 @@ const OLY_MEDAL_COUNT_DEF: WrapperDef = {
   "short": "oly_medal_count",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/OlyMedalCount",
+  "path": "/OlyMedalCount",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
@@ -3465,9 +2774,6 @@ const OLY_MEDAL_COUNT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlyMedalCount`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.sort_method - query parameter (`sortMethod`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -3482,26 +2788,11 @@ const OLY_SEASONS_DEF: WrapperDef = {
   "short": "oly_seasons",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/OlySeasons",
+  "path": "/OlySeasons",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "seasons",
       "queryKey": "seasons"
@@ -3516,9 +2807,6 @@ const OLY_SEASONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/OlySeasons`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.seasons - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -3532,26 +2820,11 @@ const PICK_DISTRIBUTION_DEF: WrapperDef = {
   "short": "pick_distribution",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/pickDistribution",
+  "path": "/pickDistribution",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -3574,9 +2847,6 @@ const PICK_DISTRIBUTION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/pickDistribution`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.dates - query parameter.
  * @param params.count - query parameter.
@@ -3592,26 +2862,11 @@ const PLAYBOOK_BOXSCORE_DEF: WrapperDef = {
   "short": "playbook_boxscore",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookBoxscore",
+  "path": "/playbookBoxscore",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -3666,9 +2921,6 @@ const PLAYBOOK_BOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscore`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.standings_season_phases - query parameter (`standingsSeasonPhases`).
  * @param params.image_height - query parameter (`imageHeight`).
@@ -3692,26 +2944,11 @@ const PLAYBOOK_BOXSCORE_POLL_DEF: WrapperDef = {
   "short": "playbook_boxscore_poll",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookBoxscorePoll",
+  "path": "/playbookBoxscorePoll",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -3758,9 +2995,6 @@ const PLAYBOOK_BOXSCORE_POLL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscorePoll`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.standings_season_phases - query parameter (`standingsSeasonPhases`).
  * @param params.is_baseball - query parameter (`isBaseball`).
@@ -3782,26 +3016,11 @@ const PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF: WrapperDef = {
   "short": "playbook_boxscore_social_share",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookBoxscoreSocialShare",
+  "path": "/playbookBoxscoreSocialShare",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -3816,9 +3035,6 @@ const PLAYBOOK_BOXSCORE_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscoreSocialShare`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -3832,26 +3048,11 @@ const PLAYBOOK_COMBAT_MATCH_DEF: WrapperDef = {
   "short": "playbook_combat_match",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookCombatMatch",
+  "path": "/playbookCombatMatch",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -3882,9 +3083,6 @@ const PLAYBOOK_COMBAT_MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookCombatMatch`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -3902,26 +3100,11 @@ const PLAYBOOK_GAME_DEF: WrapperDef = {
   "short": "playbook_game",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookGame",
+  "path": "/playbookGame",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -3944,9 +3127,6 @@ const PLAYBOOK_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGame`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -3962,26 +3142,11 @@ const PLAYBOOK_GAME_ODDS_POLL_DEF: WrapperDef = {
   "short": "playbook_game_odds_poll",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookGameOddsPoll",
+  "path": "/playbookGameOddsPoll",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -4000,9 +3165,6 @@ const PLAYBOOK_GAME_ODDS_POLL_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGameOddsPoll`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.event_state - query parameter (`eventState`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -4017,26 +3179,11 @@ const PLAYBOOK_GOLF_TOURNAMENT_DEF: WrapperDef = {
   "short": "playbook_golf_tournament",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookGolfTournament",
+  "path": "/playbookGolfTournament",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -4067,9 +3214,6 @@ const PLAYBOOK_GOLF_TOURNAMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookGolfTournament`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.season - query parameter.
  * @param params.count - query parameter.
@@ -4087,26 +3231,11 @@ const PLAYBOOK_LEAGUE_ODDS_DEF: WrapperDef = {
   "short": "playbook_league_odds",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookLeagueOdds",
+  "path": "/playbookLeagueOdds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -4141,9 +3270,6 @@ const PLAYBOOK_LEAGUE_ODDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookLeagueOdds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.dates - query parameter.
  * @param params.count - query parameter.
@@ -4162,26 +3288,11 @@ const PLAYBOOK_PLAYER_DEF: WrapperDef = {
   "short": "playbook_player",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookPlayer",
+  "path": "/playbookPlayer",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -4200,9 +3311,6 @@ const PLAYBOOK_PLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayer`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.season_phases - query parameter (`seasonPhases`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -4217,26 +3325,11 @@ const PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF: WrapperDef = {
   "short": "playbook_player_social_share",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookPlayerSocialShare",
+  "path": "/playbookPlayerSocialShare",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -4251,9 +3344,6 @@ const PLAYBOOK_PLAYER_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookPlayerSocialShare`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -4267,26 +3357,11 @@ const PLAYBOOK_RACE_DEF: WrapperDef = {
   "short": "playbook_race",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookRace",
+  "path": "/playbookRace",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -4309,9 +3384,6 @@ const PLAYBOOK_RACE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookRace`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.player_image_height - query parameter (`playerImageHeight`).
  * @param params.player_image_width - query parameter (`playerImageWidth`).
@@ -4327,26 +3399,11 @@ const PLAYBOOK_TEAM_DEF: WrapperDef = {
   "short": "playbook_team",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookTeam",
+  "path": "/playbookTeam",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -4381,9 +3438,6 @@ const PLAYBOOK_TEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeam`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -4402,26 +3456,11 @@ const PLAYBOOK_TEAM_BASIC_DEF: WrapperDef = {
   "short": "playbook_team_basic",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookTeamBasic",
+  "path": "/playbookTeamBasic",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -4444,9 +3483,6 @@ const PLAYBOOK_TEAM_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamBasic`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -4462,26 +3498,11 @@ const PLAYBOOK_TEAM_SOCIAL_SHARE_DEF: WrapperDef = {
   "short": "playbook_team_social_share",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookTeamSocialShare",
+  "path": "/playbookTeamSocialShare",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -4496,9 +3517,6 @@ const PLAYBOOK_TEAM_SOCIAL_SHARE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeamSocialShare`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -4512,26 +3530,11 @@ const PLAYBOOK_TENNIS_MATCH_DEF: WrapperDef = {
   "short": "playbook_tennis_match",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playbookTennisMatch",
+  "path": "/playbookTennisMatch",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -4546,9 +3549,6 @@ const PLAYBOOK_TENNIS_MATCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTennisMatch`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -4562,26 +3562,11 @@ const PLAYER_BASIC_DEF: WrapperDef = {
   "short": "player_basic",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playerBasic",
+  "path": "/playerBasic",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -4600,9 +3585,6 @@ const PLAYER_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerBasic`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -4617,26 +3599,11 @@ const PLAYER_CAREER_STATS_DEF: WrapperDef = {
   "short": "player_career_stats",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playerCareerStats",
+  "path": "/playerCareerStats",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -4675,9 +3642,6 @@ const PLAYER_CAREER_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerCareerStats`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.season_phases - query parameter (`seasonPhases`).
  * @param params.football_stat_ids - query parameter (`footballStatIds`).
@@ -4697,26 +3661,11 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
   "short": "player_game_log",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playerGameLog",
+  "path": "/playerGameLog",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -4763,9 +3712,6 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerGameLog`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.count - query parameter.
  * @param params.seasons - query parameter.
@@ -4787,26 +3733,11 @@ const PLAYER_PROPS_DEF: WrapperDef = {
   "short": "player_props",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playerProps",
+  "path": "/playerProps",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -4821,9 +3752,6 @@ const PLAYER_PROPS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerProps`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -4837,26 +3765,11 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
   "short": "player_search",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playerSearch",
+  "path": "/playerSearch",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -4895,9 +3808,6 @@ const PLAYER_SEARCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSearch`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.name - query parameter.
  * @param params.on_active_roster_only - query parameter (`onActiveRosterOnly`).
@@ -4917,26 +3827,11 @@ const PLAYER_SEASON_STATS_DEF: WrapperDef = {
   "short": "player_season_stats",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playerSeasonStats",
+  "path": "/playerSeasonStats",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "player_id",
       "queryKey": "playerId"
@@ -4999,9 +3894,6 @@ const PLAYER_SEASON_STATS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerSeasonStats`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.player_id - query parameter (`playerId`).
  * @param params.seasons - query parameter.
  * @param params.season_phases - query parameter (`seasonPhases`).
@@ -5027,26 +3919,11 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
   "short": "playoff_bracket",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playoffBracket",
+  "path": "/playoffBracket",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -5077,9 +3954,6 @@ const PLAYOFF_BRACKET_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffBracket`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.tournament - query parameter.
@@ -5097,26 +3971,11 @@ const PLAYOFF_SERIES_GAME_DEF: WrapperDef = {
   "short": "playoff_series_game",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/playoffSeriesGame",
+  "path": "/playoffSeriesGame",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -5131,9 +3990,6 @@ const PLAYOFF_SERIES_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playoffSeriesGame`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -5147,26 +4003,11 @@ const POLYMARKET_GAME_DEF: WrapperDef = {
   "short": "polymarket_game",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/polymarketGame",
+  "path": "/polymarketGame",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -5181,9 +4022,6 @@ const POLYMARKET_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/polymarketGame`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -5197,26 +4035,11 @@ const RACING_SCHEDULE_DEF: WrapperDef = {
   "short": "racing_schedule",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/racingSchedule",
+  "path": "/racingSchedule",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -5243,9 +4066,6 @@ const RACING_SCHEDULE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/racingSchedule`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.season - query parameter.
  * @param params.today - query parameter.
@@ -5262,26 +4082,11 @@ const SCOREBOARD_GAME_DEF: WrapperDef = {
   "short": "scoreboard_game",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/scoreboardGame",
+  "path": "/scoreboardGame",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "game_id",
       "queryKey": "gameId"
@@ -5316,9 +4121,6 @@ const SCOREBOARD_GAME_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/scoreboardGame`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.game_id - query parameter (`gameId`).
  * @param params.season - query parameter.
  * @param params.season_phase - query parameter (`seasonPhase`).
@@ -5337,34 +4139,18 @@ const SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_defense_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballDefenseNcaaf",
+  "path": "/seasonStatsFootballDefenseNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5388,11 +4174,8 @@ const SEASON_STATS_FOOTBALL_DEFENSE_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballDefenseNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5408,34 +4191,18 @@ const SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_kicking_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballKickingNcaaf",
+  "path": "/seasonStatsFootballKickingNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5459,11 +4226,8 @@ const SEASON_STATS_FOOTBALL_KICKING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballKickingNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5479,34 +4243,18 @@ const SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_passing_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballPassingNcaaf",
+  "path": "/seasonStatsFootballPassingNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5530,11 +4278,8 @@ const SEASON_STATS_FOOTBALL_PASSING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPassingNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5550,34 +4295,18 @@ const SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_punting_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballPuntingNcaaf",
+  "path": "/seasonStatsFootballPuntingNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5601,11 +4330,8 @@ const SEASON_STATS_FOOTBALL_PUNTING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPuntingNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5621,34 +4347,18 @@ const SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_receiving_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballReceivingNcaaf",
+  "path": "/seasonStatsFootballReceivingNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5672,11 +4382,8 @@ const SEASON_STATS_FOOTBALL_RECEIVING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReceivingNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5692,34 +4399,18 @@ const SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_returns_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballReturnsNcaaf",
+  "path": "/seasonStatsFootballReturnsNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5743,11 +4434,8 @@ const SEASON_STATS_FOOTBALL_RETURNS_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReturnsNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5763,34 +4451,18 @@ const SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF: WrapperDef = {
   "short": "season_stats_football_rushing_ncaaf",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonStatsFootballRushingNcaaf",
+  "path": "/seasonStatsFootballRushingNcaaf",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5814,11 +4486,8 @@ const SEASON_STATS_FOOTBALL_RUSHING_NCAAF_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballRushingNcaaf`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5834,34 +4503,18 @@ const SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF: WrapperDef = {
   "short": "season_team_stats_football_defense",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballDefense",
+  "path": "/seasonTeamStatsFootballDefense",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5885,11 +4538,8 @@ const SEASON_TEAM_STATS_FOOTBALL_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballDefense`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5905,34 +4555,18 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF: WrapperDef = {
   "short": "season_team_stats_football_kicking",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballKicking",
+  "path": "/seasonTeamStatsFootballKicking",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -5956,11 +4590,8 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKicking`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -5976,34 +4607,18 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF: WrapperDef = {
   "short": "season_team_stats_football_kickoffs",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballKickoffs",
+  "path": "/seasonTeamStatsFootballKickoffs",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6027,11 +4642,8 @@ const SEASON_TEAM_STATS_FOOTBALL_KICKOFFS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKickoffs`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6047,34 +4659,18 @@ const SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF: WrapperDef = {
   "short": "season_team_stats_football_offense",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballOffense",
+  "path": "/seasonTeamStatsFootballOffense",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6098,11 +4694,8 @@ const SEASON_TEAM_STATS_FOOTBALL_OFFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballOffense`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6118,34 +4711,18 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF: WrapperDef = {
   "short": "season_team_stats_football_passing",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballPassing",
+  "path": "/seasonTeamStatsFootballPassing",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6169,11 +4746,8 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassing`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6189,34 +4763,18 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF: WrapperDef = {
   "short": "season_team_stats_football_passing_defense",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballPassingDefense",
+  "path": "/seasonTeamStatsFootballPassingDefense",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6240,11 +4798,8 @@ const SEASON_TEAM_STATS_FOOTBALL_PASSING_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassingDefense`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6260,34 +4815,18 @@ const SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF: WrapperDef = {
   "short": "season_team_stats_football_punting",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballPunting",
+  "path": "/seasonTeamStatsFootballPunting",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6311,11 +4850,8 @@ const SEASON_TEAM_STATS_FOOTBALL_PUNTING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPunting`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6331,34 +4867,18 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF: WrapperDef = {
   "short": "season_team_stats_football_receiving",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballReceiving",
+  "path": "/seasonTeamStatsFootballReceiving",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6382,11 +4902,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceiving`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6402,34 +4919,18 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF: WrapperDef = {
   "short": "season_team_stats_football_receiving_defense",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense",
+  "path": "/seasonTeamStatsFootballReceivingDefense",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6453,11 +4954,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RECEIVING_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6473,34 +4971,18 @@ const SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF: WrapperDef = {
   "short": "season_team_stats_football_returns",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballReturns",
+  "path": "/seasonTeamStatsFootballReturns",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6524,11 +5006,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RETURNS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReturns`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6544,34 +5023,18 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF: WrapperDef = {
   "short": "season_team_stats_football_rushing",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballRushing",
+  "path": "/seasonTeamStatsFootballRushing",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6595,11 +5058,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushing`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6615,34 +5075,18 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF: WrapperDef = {
   "short": "season_team_stats_football_rushing_defense",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/seasonTeamStatsFootballRushingDefense",
+  "path": "/seasonTeamStatsFootballRushingDefense",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
     },
     {
       "name": "league",
-      "queryKey": "league",
-      "default": "ncaaf"
+      "queryKey": "league"
     },
     {
       "name": "league_structure",
@@ -6666,11 +5110,8 @@ const SEASON_TEAM_STATS_FOOTBALL_RUSHING_DEFENSE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
- * @param params.league - query parameter — default `ncaaf`.
+ * @param params.league - query parameter.
  * @param params.league_structure - query parameter (`leagueStructure`).
  * @param params.count - query parameter.
  * @param params.sort_stat_id - query parameter (`sortStatId`).
@@ -6686,26 +5127,11 @@ const TEAM_INJURIES_DEF: WrapperDef = {
   "short": "team_injuries",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamInjuries",
+  "path": "/teamInjuries",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -6720,9 +5146,6 @@ const TEAM_INJURIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamInjuries`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -6736,26 +5159,11 @@ const TEAM_PLAYOFF_SERIES_DEF: WrapperDef = {
   "short": "team_playoff_series",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamPlayoffSeries",
+  "path": "/teamPlayoffSeries",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -6774,9 +5182,6 @@ const TEAM_PLAYOFF_SERIES_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamPlayoffSeries`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -6791,26 +5196,11 @@ const TEAM_ROSTER_DEF: WrapperDef = {
   "short": "team_roster",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamRoster",
+  "path": "/teamRoster",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -6833,9 +5223,6 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamRoster`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.player_image_height - query parameter (`playerImageHeight`).
  * @param params.player_image_width - query parameter (`playerImageWidth`).
@@ -6851,26 +5238,11 @@ const TEAM_SCHEDULE_BY_SEASON_DEF: WrapperDef = {
   "short": "team_schedule_by_season",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamScheduleBySeason",
+  "path": "/teamScheduleBySeason",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
@@ -6889,9 +5261,6 @@ const TEAM_SCHEDULE_BY_SEASON_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamScheduleBySeason`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -6906,26 +5275,11 @@ const TEAM_SEARCH_DEF: WrapperDef = {
   "short": "team_search",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamSearch",
+  "path": "/teamSearch",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "name",
       "queryKey": "name"
@@ -6948,9 +5302,6 @@ const TEAM_SEARCH_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamSearch`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.name - query parameter.
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -6966,26 +5317,11 @@ const TEAM_STATS_LEADERS_V2_DEF: WrapperDef = {
   "short": "team_stats_leaders_v2",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamStatsLeadersV2",
+  "path": "/teamStatsLeadersV2",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league",
       "queryKey": "league"
@@ -7032,9 +5368,6 @@ const TEAM_STATS_LEADERS_V2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamStatsLeadersV2`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league - query parameter.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.count - query parameter.
@@ -7056,26 +5389,11 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
   "short": "team_transactions",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamTransactions",
+  "path": "/teamTransactions",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_id",
       "queryKey": "teamId"
@@ -7090,9 +5408,6 @@ const TEAM_TRANSACTIONS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamTransactions`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_id - query parameter (`teamId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -7106,26 +5421,11 @@ const TEAMS_BASIC_DEF: WrapperDef = {
   "short": "teams_basic",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/teamsBasic",
+  "path": "/teamsBasic",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "team_ids",
       "queryKey": "teamIds"
@@ -7148,9 +5448,6 @@ const TEAMS_BASIC_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamsBasic`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.team_ids - query parameter (`teamIds`).
  * @param params.image_height - query parameter (`imageHeight`).
  * @param params.image_width - query parameter (`imageWidth`).
@@ -7166,26 +5463,11 @@ const TENNIS_MATCHES_BY_DATE_DEF: WrapperDef = {
   "short": "tennis_matches_by_date",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/tennisMatchesByDate",
+  "path": "/tennisMatchesByDate",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "tournament_id",
       "queryKey": "tournamentId"
@@ -7208,9 +5490,6 @@ const TENNIS_MATCHES_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisMatchesByDate`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.tournament_id - query parameter (`tournamentId`).
  * @param params.season - query parameter.
  * @param params.date - query parameter.
@@ -7226,26 +5505,11 @@ const TENNIS_TOURNAMENT_DEF: WrapperDef = {
   "short": "tennis_tournament",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/tennisTournament",
+  "path": "/tennisTournament",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "tournament_id",
       "queryKey": "tournamentId"
@@ -7264,9 +5528,6 @@ const TENNIS_TOURNAMENT_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournament`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.tournament_id - query parameter (`tournamentId`).
  * @param params.season - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -7281,26 +5542,11 @@ const TENNIS_TOURNAMENTS_DEF: WrapperDef = {
   "short": "tennis_tournaments",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/tennisTournaments",
+  "path": "/tennisTournaments",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "league_id",
       "queryKey": "leagueId"
@@ -7323,9 +5569,6 @@ const TENNIS_TOURNAMENTS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournaments`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.league_id - query parameter (`leagueId`).
  * @param params.match_type - query parameter (`matchType`).
  * @param params.season - query parameter.
@@ -7341,26 +5584,11 @@ const TENNIS_TOURNAMENTS_BY_DATE_DEF: WrapperDef = {
   "short": "tennis_tournaments_by_date",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/tennisTournamentsByDate",
+  "path": "/tennisTournamentsByDate",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "season",
       "queryKey": "season"
@@ -7379,9 +5607,6 @@ const TENNIS_TOURNAMENTS_BY_DATE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/tennisTournamentsByDate`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.season - query parameter.
  * @param params.date - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -7396,26 +5621,11 @@ const TRENDING_EVENT_IDS_DEF: WrapperDef = {
   "short": "trending_event_ids",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/trendingEventIds",
+  "path": "/trendingEventIds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "count",
       "queryKey": "count"
@@ -7438,9 +5648,6 @@ const TRENDING_EVENT_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingEventIds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.count - query parameter.
  * @param params.league - query parameter.
  * @param params.date_flip_offset - query parameter (`dateFlipOffset`).
@@ -7456,26 +5663,11 @@ const TRENDING_GAME_IDS_DEF: WrapperDef = {
   "short": "trending_game_ids",
   "flat": true,
   "api": "yahoo",
-  "host": "https://graphite-secure.sports.yahoo.com",
+  "host": "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   "scope": "universal",
-  "path": "/v1/query/shangrila/trendingGameIds",
+  "path": "/trendingGameIds",
   "pathParams": [],
   "queryParams": [
-    {
-      "name": "lang",
-      "queryKey": "lang",
-      "default": "en-US"
-    },
-    {
-      "name": "region",
-      "queryKey": "region",
-      "default": "US"
-    },
-    {
-      "name": "tz",
-      "queryKey": "tz",
-      "default": "America/Chicago"
-    },
     {
       "name": "count",
       "queryKey": "count"
@@ -7502,9 +5694,6 @@ const TRENDING_GAME_IDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingGameIds`
  *
- * @param params.lang - query parameter — default `en-US`.
- * @param params.region - query parameter — default `US`.
- * @param params.tz - query parameter — default `America/Chicago`.
  * @param params.count - query parameter.
  * @param params.league - query parameter.
  * @param params.date_flip_offset - query parameter (`dateFlipOffset`).

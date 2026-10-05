@@ -1,0 +1,100 @@
+name: Vendor sync (sdv-py)
+
+# Weekly: bump the pinned sdv-py ref in tools/codegen/vendor.yaml to sdv-py
+# `main` HEAD, re-vendor the shared endpoint YAML + schemas, regenerate, test,
+# and open (or update) ONE sync PR. The diff is what sdv-py changed; a failing
+# test is reported in the PR body rather than blocking it (a py parser name with
+# no JS mapping, say, needs a vendor.yaml entry — a human call).
+on:
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "sdv-py commit sha to vendor (default: main HEAD)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: vendor-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+        with:
+          # create-pull-request authenticates with its own token input; don't
+          # leave the job token in .git/config for the npm scripts to read.
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444  # v5
+        with:
+          node-version: 22.x
+          cache: npm
+      - run: npm ci
+      - name: Resolve the sdv-py ref
+        id: ref
+        env:
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          sha="${INPUT_REF:-$(git ls-remote https://github.com/sportsdataverse/sportsdataverse-py refs/heads/main | cut -f1)}"
+          [[ "$sha" =~ ^[0-9a-f]{40}$ ]] || { echo "not a full commit sha: $sha"; exit 1; }
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "short=${sha:0:10}" >> "$GITHUB_OUTPUT"
+      - name: Vendor + regenerate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ steps.ref.outputs.sha }}
+        run: |
+          npm run vendor -- --ref "$SHA"
+          npm run codegen
+      - name: Test
+        id: test
+        continue-on-error: true
+        # Explicit `shell: bash` runs `bash --noprofile --norc -eo pipefail`; the
+        # default (`bash -e`) has no pipefail, so a failing `npm test` piped into
+        # `tail` would pass. With pipefail the step fails, `steps.test.outcome` is
+        # `failure` (continue-on-error keeps the job going), and the PR body says so.
+        shell: bash
+        run: |
+          npm run build
+          npm test 2>&1 | tail -n 60 > test-summary.txt
+      - name: Build PR body
+        env:
+          SHA: ${{ steps.ref.outputs.sha }}
+          OUTCOME: ${{ steps.test.outcome }}
+        run: |
+          {
+            echo "Automated weekly sync of the vendored sdv-py codegen YAML + returns schemas"
+            echo "to sportsdataverse-py@$SHA (\`npm run vendor\` + \`npm run codegen\`)."
+            echo
+            echo "**npm test:** $OUTCOME"
+            echo
+            echo "A failure usually means sdv-py added a parser name or endpoint that needs a"
+            echo "\`tools/codegen/vendor.yaml\` mapping or an \`overlay/\` entry. PRs opened by"
+            echo "GITHUB_TOKEN do not trigger CI: close/reopen this PR (or push to it) to run it."
+            echo
+            echo '<details><summary>npm test (tail)</summary>'
+            echo
+            echo '```'
+            cat test-summary.txt 2>/dev/null || true
+            echo '```'
+            echo '</details>'
+          } > pr-body.md
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
+        with:
+          branch: chore/vendor-sync
+          delete-branch: true
+          commit-message: "chore(vendor): sync sdv-py codegen YAML to ${{ steps.ref.outputs.short }}"
+          title: "chore(vendor): sync sdv-py codegen YAML to ${{ steps.ref.outputs.short }}"
+          body-path: pr-body.md
+          add-paths: |
+            tools/codegen/**
+            src/generated/**
+            docs/docs/**
+            docs/src/generated/**
+            docs/src/playground/endpoints.json

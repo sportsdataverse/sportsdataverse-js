@@ -21,7 +21,8 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -30,7 +31,8 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/cat_goalie_detail"
 };
 
 /**
@@ -62,7 +64,8 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -71,7 +74,8 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/cat_skater_detail"
 };
 
 /**
@@ -103,7 +107,8 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -112,7 +117,8 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_5v5_detail"
 };
 
 /**
@@ -144,7 +150,8 @@ const GOALIE_5V5_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -185,7 +192,8 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -194,7 +202,8 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_comparison"
 };
 
 /**
@@ -226,7 +235,8 @@ const GOALIE_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -268,7 +278,8 @@ const GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -306,7 +317,8 @@ const GOALIE_LANDING_DEF: WrapperDef = {
   "pathParams": [
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -315,7 +327,8 @@ const GOALIE_LANDING_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_landing"
 };
 
 /**
@@ -346,7 +359,8 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -355,7 +369,8 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/goalie_save_percentage_detail"
 };
 
 /**
@@ -387,7 +402,8 @@ const GOALIE_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -432,7 +448,8 @@ const GOALIE_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -474,7 +491,8 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -483,7 +501,8 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_comparison"
 };
 
 /**
@@ -515,7 +534,8 @@ const SKATER_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -563,7 +583,8 @@ const SKATER_DISTANCE_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -603,7 +624,8 @@ const SKATER_LANDING_DEF: WrapperDef = {
   "pathParams": [
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -612,7 +634,8 @@ const SKATER_LANDING_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_landing"
 };
 
 /**
@@ -643,7 +666,8 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -652,7 +676,8 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_shot_location"
+  "parser": "parse_edge_shot_location",
+  "returnsSchema": "native/nhl_edge/skater_shot_location_detail"
 };
 
 /**
@@ -690,7 +715,8 @@ const SKATER_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -733,7 +759,8 @@ const SKATER_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -778,7 +805,8 @@ const SKATER_SHOT_SPEED_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -820,7 +848,8 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -829,7 +858,8 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_skating_distance_detail"
 };
 
 /**
@@ -861,7 +891,8 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -870,7 +901,8 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/skater_skating_speed_detail"
 };
 
 /**
@@ -905,7 +937,8 @@ const SKATER_SPEED_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -947,7 +980,8 @@ const SKATER_ZONE_TIME_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -995,7 +1029,8 @@ const SKATER_ZONE_TIME_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1038,7 +1073,8 @@ const TEAM_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1077,7 +1113,8 @@ const TEAM_LANDING_DEF: WrapperDef = {
   "pathParams": [
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1086,7 +1123,8 @@ const TEAM_LANDING_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/team_landing"
 };
 
 /**
@@ -1117,7 +1155,8 @@ const TEAM_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1165,7 +1204,8 @@ const TEAM_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1208,7 +1248,8 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1217,7 +1258,8 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_detail"
+  "parser": "parse_edge_detail",
+  "returnsSchema": "native/nhl_edge/team_shot_speed_detail"
 };
 
 /**
@@ -1249,7 +1291,8 @@ const TEAM_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1295,7 +1338,8 @@ const TEAM_SKATING_DISTANCE_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1338,7 +1382,8 @@ const TEAM_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1381,7 +1426,8 @@ const TEAM_SKATING_SPEED_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1423,7 +1469,8 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -1432,7 +1479,8 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_edge_zone_time"
+  "parser": "parse_edge_zone_time",
+  "returnsSchema": "native/nhl_edge/team_zone_time_details"
 };
 
 /**
@@ -1467,7 +1515,8 @@ const TEAM_ZONE_TIME_TOP_10_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",

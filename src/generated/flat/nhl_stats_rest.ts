@@ -153,7 +153,8 @@ const DRAFT_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/draft"
 };
 
 /**
@@ -218,7 +219,8 @@ const GAME_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/game"
 };
 
 /**
@@ -323,7 +325,8 @@ const LEADERS_GOALIES_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/leaders_goalies"
 };
 
 /**
@@ -359,7 +362,8 @@ const LEADERS_SKATERS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/leaders_skaters"
 };
 
 /**
@@ -392,7 +396,8 @@ const MILESTONES_GOALIES_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/milestones_goalies"
 };
 
 /**
@@ -424,7 +429,8 @@ const MILESTONES_SKATERS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/milestones_skaters"
 };
 
 /**
@@ -480,7 +486,8 @@ const PLAYERS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/players"
 };
 
 /**
@@ -545,7 +552,8 @@ const SHIFTCHARTS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/shiftcharts"
 };
 
 /**
@@ -614,7 +622,8 @@ const TEAM_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/team"
 };
 
 /**
@@ -649,7 +658,8 @@ const TEAM_BY_ID_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_stats_rest"
+  "parser": "parse_nhl_stats_rest",
+  "returnsSchema": "native/nhl_stats_rest/team_by_id"
 };
 
 /**

@@ -12,6 +12,7 @@ conventions. By participating you agree to the
 - [Architecture overview](#architecture-overview)
 - [Codegen workflow](#codegen-workflow)
 - [Adding an ESPN endpoint](#adding-an-espn-endpoint)
+- [Vendored families (sync from sdv-py)](#vendored-families-sync-from-sdv-py)
 - [Adding a new flat-API family](#adding-a-new-flat-api-family)
 - [The parser contract](#the-parser-contract)
 - [Testing](#testing)
@@ -93,16 +94,61 @@ YAML without committing the regenerated output will fail the drift gate.**
 
 ## Adding an ESPN endpoint
 
-1. Add the endpoint to the right family file (`espn_site_v2.yaml` / `espn_core_v2.yaml`
-   / `espn_web_v3.yaml`) with its `short`, `family`, `scope`
-   (`universal` / `ncaa` / `football` / `mlb`), `path`, and params.
-2. (Optional) Register a parser in `src/parsers/espn.ts` / `_registry.ts` and a
-   returns schema under `tools/codegen/schemas/`.
-3. `npm run codegen` and commit the regenerated output.
-4. Add or extend a Mocha test under `test/`.
+The ESPN family files are **vendored from sdv-py** (see the next section), so:
+
+1. Add the endpoint to the right family file in **sportsdataverse-py**
+   (`tools/codegen/endpoints/espn_site_v2.yaml` / `espn_core_v2.yaml` /
+   `espn_web_v3.yaml`) with its `short`, `scope` (`universal` / `ncaa` / `football` /
+   `mlb`), `path`, and params, and merge it there.
+2. Re-vendor here: `npm run vendor -- --ref <sdv-py sha>` (or wait for the weekly
+   sync PR).
+3. Register its parser in `ESPN_ENDPOINT_PARSERS` (`src/parsers/espn.ts`) and
+   `tools/codegen/endpoints/espn_parser_map.yaml` (the coverage test requires one).
+4. `npm run codegen` and commit the regenerated output.
+5. Add or extend a Mocha test under `test/`.
 
 The endpoint automatically appears on **every** league in its scope under both naming
 conventions — no per-league edits required.
+
+## Vendored families (sync from sdv-py)
+
+sdv-py's codegen YAML is the source of truth for the shared families (`espn_*`,
+`leagues`, `mlb`, `mlb_statcast`, `nfl_api`, `nhl_*`, `torvik`, `cbs`, `yahoo`) and the
+returns schemas they reference. `tools/codegen/vendor.mjs` copies them from a pinned
+sdv-py commit (`tools/codegen/vendor.yaml` → `source.ref`) into
+`tools/codegen/vendor/upstream/` verbatim, then derives `tools/codegen/endpoints/` +
+`tools/codegen/schemas/` through the manifest's per-family rewrites (api stem, short
+names, parser names, schema paths).
+
+```sh
+npm run vendor -- --ref <sha>   # bump the pin + fetch (GitHub raw; SDV_PY_REPO=<clone> for local)
+npm run vendor -- --offline     # re-derive after editing vendor.yaml or overlay/
+npm run vendor:check            # offline gate (CI): LOCK hashes + any hand-edit
+npm run codegen                 # then regenerate as usual
+```
+
+- **Never hand-edit a vendored file** (it starts `# VENDORED from …`) or the
+  upstream copies in `tools/codegen/vendor/upstream/` (`vendor:check` re-hashes them
+  against `LOCK`). JS-only endpoints and JS-side patches go in
+  `tools/codegen/overlay/<family>.yaml`: an entry with a new `short` (and a `path`)
+  is appended, an entry with a vendored `short` replaces those keys. A patch that
+  matches nothing, or that upstream has already absorbed, fails the vendor so you
+  can delete it.
+- Shared endpoint changes land in **sdv-py first**; the weekly
+  `vendor-sync.yml` workflow opens a PR bumping the pin. The workflow itself runs
+  `npm run vendor`, `npm run codegen`, the build and `npm test` before opening the
+  PR (the outcome is in the PR body), but a PR opened with the workflow's
+  `GITHUB_TOKEN` does **not** trigger CI: a maintainer closes and reopens it (or
+  pushes to it) to run the CI checks before merging.
+- A py `returns_schema` is attached only where the JS parser is DECLARED
+  equivalent to py's (family `schema_compatible: true` for a kept py parser name,
+  or `parsers: {<py>: {js: <name>, schema_compatible: true}}`); otherwise JS's own
+  schema (via the overlay) or none.
+- A new param `transform:` upstream fails `npm run codegen` until it is ported to
+  `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
+  `tools/codegen/param-transforms.mjs`.
+- JS-owned families (`fox`, `odds_api`, `hockeytech`, `yahoo_scores`, `recruiting`)
+  are edited here directly, as before.
 
 ## Adding a new flat-API family
 

@@ -64,7 +64,7 @@ export const FLAT_HOSTS: Record<string, string> = {
   // securityScheme), so NOT `auth: true` — Yahoo rejects requests without
   // browser-y Origin/Referer, which the caller supplies via the flat `headers`.
   yahoo_scores: "https://api-secure.sports.yahoo.com",
-  yahoo: "https://graphite-secure.sports.yahoo.com",
+  yahoo: "https://graphite-secure.sports.yahoo.com/v1/query/shangrila",
   // HockeyTech / LeagueStat — standalone `hockeytech` namespace (sdv.hockeytech.*)
   // for the PWHL + junior/minor leagues. This is the DEFAULT feed host (4 of 5
   // leagues); QMJHL is served from cluster.leaguestat.com, which the family's

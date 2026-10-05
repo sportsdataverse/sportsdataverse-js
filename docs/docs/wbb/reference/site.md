@@ -590,6 +590,7 @@ WBB — team roster (ESPN site.api.espn.com).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{team_id}` | `team_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_team_roster`):
@@ -745,6 +746,7 @@ WBB — transactions (ESPN site.api.espn.com).
 
 | API param | JS | required | description |
 |---|---|---|---|
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

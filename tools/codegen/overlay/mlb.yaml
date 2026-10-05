@@ -1,0 +1,364 @@
+# JS-owned additions/patches merged on top of the VENDORED `mlb` family
+# (sdv-py tools/codegen/endpoints/mlb_api.yaml). See tools/codegen/vendor.yaml.
+#
+# An entry whose `short` is NOT in the vendored family is appended; an entry
+# whose `short` IS vendored patches that endpoint (its keys replace the
+# vendored keys). Edit here, then `npm run vendor -- --offline`.
+endpoints:
+# ---------------------------------------------------------------------------
+# Patch: sdv-py@719de79 maps `timecode` to the `language` query key (a py-side
+# bug). The Stats API key is `timecode`. Drop this patch once the vendor pin
+# includes the upstream sdv-py fix.
+# ---------------------------------------------------------------------------
+- short: pbp
+  extra_params:
+  - name: language
+    query_key: language
+    type: str
+  - name: timecode
+    query_key: timecode
+    type: str
+  - name: hydrate
+    query_key: hydrate
+    type: str
+  - name: fields
+    query_key: fields
+    type: str
+# ---------------------------------------------------------------------------
+# JS's schemas for the two endpoints vendor.yaml's parser_overrides route
+# through a different parser than sdv-py's (py's schema would describe the
+# wrong output).
+# ---------------------------------------------------------------------------
+- short: teams_stats
+  returns_schema: native/mlb/teams_stats
+- short: team_roster_type
+  returns_schema: native/mlb/team_roster_type
+# ---------------------------------------------------------------------------
+# JS-only endpoints. sdv-py ships these 14 as hand-written wrappers in
+# sportsdataverse/mlb/mlb_api_extra.py (same public names), not as codegen
+# YAML, so they live here until they are upstreamed into mlb_api.yaml.
+# ---------------------------------------------------------------------------
+- short: teams
+  path: /api/v1/teams
+  extra_params:
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  - name: season
+    query_key: season
+    type: int
+  - name: league_ids
+    query_key: leagueIds
+    type: int|List[int]
+  - name: active_status
+    query_key: activeStatus
+    type: str
+  - name: hydrate
+    query_key: hydrate
+    type: str
+  - name: fields
+    query_key: fields
+    type: str
+  parser: parse_mlb_teams
+- short: schedule
+  path: /api/v1/schedule
+  extra_params:
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  - name: date
+    query_key: date
+    type: str
+  - name: season
+    query_key: season
+    type: int
+  - name: team_id
+    query_key: teamId
+    type: int
+  - name: start_date
+    query_key: startDate
+    type: str
+  - name: end_date
+    query_key: endDate
+    type: str
+  - name: game_type
+    query_key: gameType
+    type: str
+  - name: hydrate
+    query_key: hydrate
+    type: str
+  - name: fields
+    query_key: fields
+    type: str
+  parser: parse_mlb_schedule
+- short: standings
+  path: /api/v1/standings
+  extra_params:
+  - name: league_id
+    query_key: leagueId
+    type: int|str
+    default: '103,104'
+  - name: season
+    query_key: season
+    type: int|str
+  - name: standings_types
+    query_key: standingsTypes
+    type: str
+  - name: hydrate
+    query_key: hydrate
+    type: str
+  - name: fields
+    query_key: fields
+    type: str
+  parser: parse_mlb_standings
+- short: person_stats
+  path: /api/v1/people/{person_id}/stats
+  path_params:
+  - name: person_id
+    type: int
+    required: true
+  extra_params:
+  - name: stats
+    query_key: stats
+    type: str
+    default: season
+  - name: group
+    query_key: group
+    type: str
+  - name: season
+    query_key: season
+    type: int|str
+  - name: sport_id
+    query_key: sportId
+    type: int
+  - name: hydrate
+    query_key: hydrate
+    type: str
+  - name: fields
+    query_key: fields
+    type: str
+  parser: parse_mlb_person_stats
+# ---------------------------------------------------------------------------
+# Hand-written extras (sdv-py mlb_extra.py) — wrappers the Python codegen
+# can't express inline (conditional _csv joins / multi-param shaping). In JS
+# they collapse to plain flat endpoints; the comma-joining the Python `_csv`
+# helper does is the caller's responsibility (pass `'103,104'`).
+# ---------------------------------------------------------------------------
+- short: pbp_diff
+  path: /api/v1/game/{game_pk}/feed/live/diffPatch
+  path_params:
+  - name: game_pk
+    type: int
+    required: true
+  extra_params:
+  - name: start_timecode
+    query_key: startTimecode
+    type: str
+  - name: end_timecode
+    query_key: endTimecode
+    type: str
+  parser: parse_mlb_list
+- short: team_stats
+  path: /api/v1/teams/{team_id}/stats
+  path_params:
+  - name: team_id
+    type: int
+    required: true
+  extra_params:
+  - name: season
+    query_key: season
+    type: int|str
+  - name: stats
+    query_key: stats
+    type: str
+    default: season
+  - name: group
+    query_key: group
+    type: str
+    default: hitting
+  - name: sport_ids
+    query_key: sportIds
+    type: int|List[int]
+  - name: game_type
+    query_key: gameType
+    type: str
+  - name: fields
+    query_key: fields
+    type: str
+  parser: parse_mlb_person_stats
+- short: team_leaders
+  path: /api/v1/teams/{team_id}/leaders
+  path_params:
+  - name: team_id
+    type: int
+    required: true
+  extra_params:
+  - name: leader_categories
+    query_key: leaderCategories
+    type: str
+  - name: season
+    query_key: season
+    type: int|str
+  - name: leader_game_types
+    query_key: leaderGameTypes
+    type: str
+  - name: limit
+    query_key: limit
+    type: int
+    default: 10
+  parser: parse_mlb_list
+- short: stats
+  path: /api/v1/stats
+  extra_params:
+  - name: stats
+    query_key: stats
+    type: str
+  - name: group
+    query_key: group
+    type: str
+  - name: season
+    query_key: season
+    type: int|str
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  - name: league_id
+    query_key: leagueId
+    type: int|str
+  - name: team_id
+    query_key: teamId
+    type: int
+  - name: player_pool
+    query_key: playerPool
+    type: str
+  - name: game_type
+    query_key: gameType
+    type: str
+  - name: limit
+    query_key: limit
+    type: int
+    default: 50
+  - name: offset
+    query_key: offset
+    type: int
+    default: 0
+  - name: fields
+    query_key: fields
+    type: str
+  parser: parse_mlb_list
+- short: stats_leaders
+  path: /api/v1/stats/leaders
+  extra_params:
+  - name: leader_categories
+    query_key: leaderCategories
+    type: str
+  - name: season
+    query_key: season
+    type: int|str
+  - name: leader_game_types
+    query_key: leaderGameTypes
+    type: str
+  - name: stat_group
+    query_key: statGroup
+    type: str
+  - name: league_id
+    query_key: leagueId
+    type: int|str
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  - name: limit
+    query_key: limit
+    type: int
+    default: 10
+  parser: parse_mlb_list
+- short: stats_streaks
+  path: /api/v1/stats/streaks
+  extra_params:
+  - name: streak_type
+    query_key: streakType
+    type: str
+  - name: streak_threshold
+    query_key: streakThreshold
+    type: int
+    default: 1
+  - name: season
+    query_key: season
+    type: int|str
+  - name: stat_group
+    query_key: statGroup
+    type: str
+  - name: active_streak
+    query_key: activeStreak
+    type: str
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  parser: parse_mlb_list
+- short: divisions
+  path: /api/v1/divisions
+  extra_params:
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  - name: league_id
+    query_key: leagueId
+    type: int|str
+  - name: division_id
+    query_key: divisionId
+    type: int
+  parser: parse_mlb_list
+- short: seasons
+  path: /api/v1/seasons
+  extra_params:
+  - name: sport_id
+    query_key: sportId
+    type: int
+    default: 1
+  - name: season
+    query_key: season
+    type: int|str
+  - name: all_seasons
+    query_key: all
+    type: str
+  parser: parse_mlb_list
+- short: draft_prospects
+  path: /api/v1/draft/prospects/{year}
+  path_params:
+  - name: year
+    type: int|str
+    required: true
+  extra_params:
+  - name: scouting_report
+    query_key: scoutingReport
+    type: str
+  - name: limit
+    query_key: limit
+    type: int
+    default: 100
+  parser: parse_mlb_list
+- short: attendance
+  path: /api/v1/attendance
+  extra_params:
+  - name: team_id
+    query_key: teamId
+    type: int
+  - name: league_id
+    query_key: leagueId
+    type: int|str
+  - name: season
+    query_key: season
+    type: int|str
+  - name: league_list_id
+    query_key: leagueListId
+    type: str
+  - name: game_type
+    query_key: gameType
+    type: str
+  parser: parse_mlb_list

@@ -9,7 +9,7 @@ sidebar_position: 4
 
 # `wbb` — NCAA additional
 
-3 endpoints on `sdv.wbb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
+6 endpoints on `sdv.wbb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
 ## `espnWbbRankings`
 
@@ -34,6 +34,79 @@ await sdv.wbb.espnWbbRankings({});
 // snake_case alias (py/R parity): sdv.wbb.espn_wbb_rankings(...)
 ```
 
+## `espnWbbRecruitingAthletes`
+
+WBB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting/{year}/athletes`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{year}` | `year` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.wbb.espnWbbRecruitingAthletes({ year: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_recruiting_athletes(...)
+```
+
+## `espnWbbRecruitingRankings`
+
+WBB — recruiting rankings (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting/{year}/rankings`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| `{year}` | `year` | yes | path parameter |
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.wbb.espnWbbRecruitingRankings({ year: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_recruiting_rankings(...)
+```
+
+## `espnWbbRecruitingYears`
+
+WBB — recruiting years (ESPN sports.core.api.espn.com (core v2)).
+
+**Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/recruiting`
+
+| API param | JS | required | description |
+|---|---|---|---|
+| — | `parsed` | no | return tidy rows instead of raw JSON |
+
+**Returns** (with `{ parsed: true }`, via `parse_items`):
+
+| col_name | type | description |
+|---|---|---|
+| `$ref` | character | Core v2 $ref URL to the resource |
+
+**Example:**
+
+```js
+await sdv.wbb.espnWbbRecruitingYears({});
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_recruiting_years(...)
+```
+
 ## `espnWbbSeasonRecruits`
 
 WBB — season recruits (ESPN sports.core.api.espn.com (core v2)).
@@ -43,7 +116,8 @@ WBB — season recruits (ESPN sports.core.api.espn.com (core v2)).
 | API param | JS | required | description |
 |---|---|---|---|
 | `{season}` | `season` | yes | path parameter |
-| `limit` | `limit` | no | query parameter (default `100`) |
+| `limit` | `limit` | no | query parameter (default `1000`) |
+| `page` | `page` | no | query parameter (default `1`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

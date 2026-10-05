@@ -6,6 +6,7 @@ import {
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
 import sdv, { FLAT_WRAPPERS } from '../../dist/index.js';
 import { FLAT_HOSTS } from '../../dist/core/client.js';
+import { resolveFlat } from '../../dist/core/flat.js';
 
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 
@@ -107,11 +108,25 @@ describe('parsers/yahoo: registry wiring', () => {
 describe('yahoo flat-API family metadata (flat-contract style)', () => {
   const family = () => FLAT_WRAPPERS.filter((w) => w.api === 'yahoo');
 
-  it('registers the yahoo family (105 endpoints) on https://graphite-secure.sports.yahoo.com', () => {
+  it('registers the yahoo family (107 endpoints) on https://graphite-secure.sports.yahoo.com/v1/query/shangrila', () => {
     const rows = family();
-    rows.length.should.equal(105);
-    FLAT_HOSTS.yahoo.should.equal('https://graphite-secure.sports.yahoo.com');
-    for (const w of rows) w.host.should.equal('https://graphite-secure.sports.yahoo.com');
+    rows.length.should.equal(107);
+    FLAT_HOSTS.yahoo.should.equal('https://graphite-secure.sports.yahoo.com/v1/query/shangrila');
+    // The two editorial routes carry a per-endpoint host (vendored from sdv-py).
+    for (const w of rows) {
+      w.host.should.equal(
+        w.short.startsWith('editorial_')
+          ? 'https://api-secure.sports.yahoo.com/v1/editorial/s'
+          : 'https://graphite-secure.sports.yahoo.com/v1/query/shangrila'
+      );
+    }
+  });
+
+  it('resolves an editorial route against its per-endpoint host', () => {
+    const def = family().find((w) => w.short === 'editorial_boxscore');
+    resolveFlat(def, { game_id: 'nfl.g.123' }).url.should.equal(
+      'https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/nfl.g.123'
+    );
   });
 
   it('every yahoo wrapper names a registered parser, none auth', () => {

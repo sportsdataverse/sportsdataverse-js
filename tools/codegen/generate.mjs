@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parse } from "yaml";
+import { checkTransform } from "./param-transforms.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
@@ -189,12 +190,20 @@ function standaloneFlatNamespaces(leagues) {
   return out;
 }
 
+// A param `transform` (sdv-py runtime function name) rides into the def; an
+// unknown name fails the codegen (tools/codegen/param-transforms.mjs).
+const mapTransform = (ep, p) =>
+  p.transform !== undefined
+    ? { transform: checkTransform(p.transform, `${ep.short}.${p.name}`) }
+    : {};
+
 function mapPathParams(ep) {
   return (ep.path_params ?? []).map((p) => ({
     name: p.name,
     ...(p.required === false ? { required: false } : {}),
     ...(p.default !== undefined ? { default: p.default } : {}),
     ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
+    ...mapTransform(ep, p),
   }));
 }
 
@@ -203,6 +212,7 @@ function mapQueryParams(ep) {
     name: p.name,
     queryKey: p.query_key,
     ...(p.default !== undefined ? { default: p.default } : {}),
+    ...mapTransform(ep, p),
   }));
 }
 
@@ -225,6 +235,10 @@ function loadWrappers() {
   return wrappers;
 }
 
+// Family (file-level) host per flat api stem — the `flatHosts` base URL, which
+// a per-endpoint `host` override (e.g. Yahoo's editorial routes) never replaces.
+const FLAT_FAMILY_HOSTS = {};
+
 /**
  * Load the flat-API wrappers (one `WrapperDef` per endpoint across every
  * FLAT_API_FILES YAML). Each carries `flat: true`, the family `api` stem, the
@@ -235,6 +249,7 @@ function loadFlatWrappers() {
   const wrappers = [];
   for (const stem of FLAT_API_FILES) {
     const doc = parse(readFileSync(join(endpointsDir, `${stem}.yaml`), "utf8"));
+    FLAT_FAMILY_HOSTS[doc.api] = doc.host;
     // A top-level `auth: true` on the family YAML (e.g. nfl_api) flags every
     // emitted wrapper so the flat dispatch resolves a bearer-token header set
     // before fetching (see AUTH_HEADER_PROVIDERS in src/leagues/_make_flat.ts).
@@ -244,7 +259,7 @@ function loadFlatWrappers() {
         short: ep.short,
         flat: true,
         api: doc.api,
-        host: doc.host,
+        host: ep.host ?? doc.host, // per-endpoint host override (e.g. Yahoo editorial)
         scope: "universal",
         path: ep.path,
         pathParams: mapPathParams(ep),
@@ -615,7 +630,7 @@ const STATCAST_HANDWRITTEN = [
 function renderNativeFamilySection(api, rows, nsPrefix) {
   if (!rows.length) return "";
   const meta = FLAT_API_META[api] ?? { label: api, source: api };
-  const host = rows[0].host;
+  const host = FLAT_FAMILY_HOSTS[api] ?? rows[0].host;
   const authed = rows.some((w) => w.auth);
   let body = `\n## Native API — ${meta.label}\n\n`;
   body +=
@@ -1489,7 +1504,7 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
 /** Build the per-family flat-host map ({ mlb: "https://statsapi.mlb.com" }). */
 function flatHostsFrom(flatWrappers) {
   const hosts = {};
-  for (const w of flatWrappers) hosts[w.api] = w.host;
+  for (const w of flatWrappers) hosts[w.api] = FLAT_FAMILY_HOSTS[w.api];
   return hosts;
 }
 

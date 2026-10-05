@@ -17,7 +17,8 @@ const ALL_TIME_RECORD_VS_FRANCHISE_DEF: WrapperDef = {
   "path": "/all-time-record-vs-franchise",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/all_time_record_vs_franchise"
 };
 
 /**
@@ -42,7 +43,8 @@ const ALLSTAR_COACH_CAREER_DEF: WrapperDef = {
   "path": "/all-star-coach-career-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/allstar_coach_career"
 };
 
 /**
@@ -67,7 +69,8 @@ const ALLSTAR_GOALIE_CAREER_DEF: WrapperDef = {
   "path": "/all-star-goaltender-career-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/allstar_goalie_career"
 };
 
 /**
@@ -92,7 +95,8 @@ const ALLSTAR_GOALIE_GAME_DEF: WrapperDef = {
   "path": "/all-star-goaltender-game-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/allstar_goalie_game"
 };
 
 /**
@@ -117,7 +121,8 @@ const ALLSTAR_SKATER_CAREER_DEF: WrapperDef = {
   "path": "/all-star-skater-career-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/allstar_skater_career"
 };
 
 /**
@@ -142,7 +147,8 @@ const ALLSTAR_SKATER_GAME_DEF: WrapperDef = {
   "path": "/all-star-skater-game-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/allstar_skater_game"
 };
 
 /**
@@ -193,7 +199,8 @@ const AWARDS_DEF: WrapperDef = {
   "path": "/award-details",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/awards"
 };
 
 /**
@@ -222,7 +229,8 @@ const AWARDS_BY_FRANCHISE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/awards_by_franchise"
 };
 
 /**
@@ -255,7 +263,8 @@ const AWARDS_TROPHY_SEASON_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/awards_trophy_season"
 };
 
 /**
@@ -282,7 +291,8 @@ const AWAY_TEAM_RECORD_DEF: WrapperDef = {
   "path": "/away-team-record",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/away_team_record"
 };
 
 /**
@@ -311,7 +321,8 @@ const COACH_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/coach"
 };
 
 /**
@@ -342,7 +353,8 @@ const COACH_CAREER_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/coach_career"
 };
 
 /**
@@ -368,7 +380,8 @@ const COACH_CAREER_WITH_PLAYOFFS_DEF: WrapperDef = {
   "path": "/coach-career-records-regular-plus-playoffs",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/coach_career_with_playoffs"
 };
 
 /**
@@ -398,7 +411,8 @@ const COACH_FRANCHISE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/coach_franchise"
 };
 
 /**
@@ -424,7 +438,8 @@ const COACH_STANLEY_CUP_DEF: WrapperDef = {
   "path": "/coach-stanley-cup-streak",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/coach_stanley_cup"
 };
 
 /**
@@ -475,7 +490,8 @@ const CONSECUTIVE_100PT_SEASONS_DEF: WrapperDef = {
   "path": "/consecutive-100-point-seasons",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/consecutive_100pt_seasons"
 };
 
 /**
@@ -536,7 +552,8 @@ const DRAFT_BY_TEAM_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/draft_by_team"
 };
 
 /**
@@ -562,7 +579,8 @@ const DRAFT_LOTTERY_ODDS_DEF: WrapperDef = {
   "path": "/draft-lottery-odds",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/draft_lottery_odds"
 };
 
 /**
@@ -592,7 +610,8 @@ const DRAFT_PROSPECT_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/draft_prospect"
 };
 
 /**
@@ -618,7 +637,8 @@ const EXPANSION_DRAFT_PICKS_DEF: WrapperDef = {
   "path": "/expansion-draft-picks",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/expansion_draft_picks"
 };
 
 /**
@@ -643,7 +663,8 @@ const FRANCHISE_DETAIL_DEF: WrapperDef = {
   "path": "/franchise-detail",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/franchise_detail"
 };
 
 /**
@@ -668,7 +689,8 @@ const FRANCHISE_PLAYOFF_APPEARANCES_DEF: WrapperDef = {
   "path": "/franchise-playoff-appearances",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/franchise_playoff_appearances"
 };
 
 /**
@@ -693,7 +715,8 @@ const FRANCHISE_SEASON_RESULTS_DEF: WrapperDef = {
   "path": "/franchise-season-results",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/franchise_season_results"
 };
 
 /**
@@ -744,7 +767,8 @@ const FRANCHISE_TOTALS_DEF: WrapperDef = {
   "path": "/franchise-totals",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/franchise_totals"
 };
 
 /**
@@ -800,7 +824,8 @@ const GM_CAREER_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/gm_career"
 };
 
 /**
@@ -826,7 +851,8 @@ const GM_FRANCHISE_DEF: WrapperDef = {
   "path": "/general-manager-franchise-records",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/gm_franchise"
 };
 
 /**
@@ -851,7 +877,8 @@ const GOALIE_CAREER_STATS_DEF: WrapperDef = {
   "path": "/goalie-career-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_career_stats"
 };
 
 /**
@@ -876,7 +903,8 @@ const GOALIE_CAREER_STATS_WITH_PLAYOFFS_DEF: WrapperDef = {
   "path": "/goalie_career_stats_incl_playoffs",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_career_stats_with_playoffs"
 };
 
 /**
@@ -901,7 +929,8 @@ const GOALIE_PLAYOFF_STREAK_DEF: WrapperDef = {
   "path": "/goalie-playoff-streak",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_playoff_streak"
 };
 
 /**
@@ -926,7 +955,8 @@ const GOALIE_SEASON_STATS_DEF: WrapperDef = {
   "path": "/goalie-season-stats",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_season_stats"
 };
 
 /**
@@ -951,7 +981,8 @@ const GOALIE_SHUTOUT_STREAK_DEF: WrapperDef = {
   "path": "/goalie-shutout-streak",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_shutout_streak"
 };
 
 /**
@@ -976,7 +1007,8 @@ const GOALIE_UNDEFEATED_STREAK_DEF: WrapperDef = {
   "path": "/goalie-undefeated-streak",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_undefeated_streak"
 };
 
 /**
@@ -1001,7 +1033,8 @@ const GOALIE_WIN_PLATEAUS_DEF: WrapperDef = {
   "path": "/goalie-win-plateaus",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_win_plateaus"
 };
 
 /**
@@ -1026,7 +1059,8 @@ const GOALIE_WIN_STREAK_DEF: WrapperDef = {
   "path": "/goalie-win-streak",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/goalie_win_streak"
 };
 
 /**
@@ -1051,7 +1085,8 @@ const HOF_PLAYERS_DEF: WrapperDef = {
   "path": "/hof/players",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/hof_players"
 };
 
 /**
@@ -1080,7 +1115,8 @@ const HOF_PLAYERS_BY_OFFICE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/hof_players_by_office"
 };
 
 /**
@@ -1106,7 +1142,8 @@ const HOME_TEAM_RECORD_DEF: WrapperDef = {
   "path": "/home-team-record",
   "pathParams": [],
   "queryParams": [],
-  "parser": "parse_nhl_records"
+  "parser": "parse_nhl_records",
+  "returnsSchema": "native/nhl_records/home_team_record"
 };
 
 /**

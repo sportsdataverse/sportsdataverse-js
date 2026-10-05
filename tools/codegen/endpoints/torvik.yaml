@@ -1,61 +1,87 @@
-# Flat (non-ESPN) API family: BartTorvik / T-Rank (barttorvik.com) — public
-# men's college basketball analytics. Standalone `torvik` namespace (NOT an ESPN
-# league). No auth, but barttorvik.com rejects default programmatic User-Agents,
-# so the family's getter (src/core/torvik_runtime.ts, registered in
-# GETTER_OVERRIDES) sets a browser UA and returns the raw response body text;
-# each parser then handles its own format (CSV via papaparse, or headerless JSON
-# positional arrays).
-#
-# Only the five clean, self-describing data files are wrapped (the interactive
-# `.php` / `.cgi` pages sit behind a JavaScript browser check and are
-# intentionally not used). Two return CSV WITH a header row; two return
-# headerless JSON arrays whose positional column names are hardcoded in the
-# parser; one returns a headerless CSV whose positional names are hardcoded.
-# `year` is the 4-digit season ending-year (e.g. 2024 = the 2023-24 season).
-#
-# Ported from hoopR's torvik_*.R (R/torvik_ratings.R, torvik_team_factors.R,
-# torvik_game_stats.R, torvik_player_stats.R, torvik_game_schedule.R +
-# torvik_utils.R) — the positional column arrays are carried over verbatim.
+# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# tools/codegen/endpoints/torvik.yaml by tools/codegen/vendor.mjs.
+# DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
+# tools/codegen/overlay/torvik.yaml; shared changes land in sdv-py first.
+
 api: torvik
 host: https://barttorvik.com
 name_pattern: torvik_{short}
+module: torvik
+parser_module: mbb.torvik_parsers
+getter_module: sportsdataverse.mbb.torvik_runtime
+qualifier: ''
+passthrough_query: false
+# barttorvik.com serves CSV data files, not JSON: torvik_runtime._get is
+# content-type aware and hands back the raw body TEXT for these endpoints.
+raw_types:
+- Dict
+- str
+docstring:
+  raw_doc: 'the raw CSV response body (``str``)'
+  example_import: true
+  raises:
+  - 'sportsdataverse.errors.NoESPNDataError: barttorvik.com returned 404 (no data file for that season).'
+  - 'requests.exceptions.RequestException: Connection-level failure after ``dl_utils.download`` exhausts its retries.'
+  see_also:
+  - name: hoopR
+    url: https://hoopR.sportsdataverse.org
+    note: R sister package for men's college basketball
+  - name: Bart Torvik
+    url: https://barttorvik.com
+    note: data origin (T-Rank)
+runtime_imports:
+- _get
 endpoints:
-  - short: ratings
-    # {year}_team_results.csv — CSV WITH header; one row per team (T-Rank).
-    path: /{year}_team_results.csv
-    path_params:
-      - { name: year, type: int, required: true }
-    parser: parse_torvik_ratings
-    returns_schema: native/torvik/ratings
-  - short: team_factors
-    # {year}_fffinal.csv — CSV WITH header; one row per team (four factors).
-    path: /{year}_fffinal.csv
-    path_params:
-      - { name: year, type: int, required: true }
-    parser: parse_torvik_team_factors
-    returns_schema: native/torvik/team_factors
-  - short: game_stats
-    # getgamestats.php?year=&json=1 — headerless JSON, 31 positional fields.
-    path: /getgamestats.php
-    path_params: []
-    extra_params:
-      - { name: year, query_key: year }
-      - { name: json, query_key: json, default: 1 }
-    parser: parse_torvik_game_stats
-    returns_schema: native/torvik/game_stats
-  - short: player_stats
-    # getadvstats.php?year=&csv=1 — headerless CSV, 67 positional fields.
-    path: /getadvstats.php
-    path_params: []
-    extra_params:
-      - { name: year, query_key: year }
-      - { name: csv, query_key: csv, default: 1 }
-    parser: parse_torvik_player_stats
-    returns_schema: native/torvik/player_stats
-  - short: game_schedule
-    # {year}_super_sked.json — headerless JSON, 55 positional fields.
-    path: /{year}_super_sked.json
-    path_params:
-      - { name: year, type: int, required: true }
-    parser: parse_torvik_game_schedule
-    returns_schema: native/torvik/game_schedule
+# Patches: sdv-py's two endpoints run through JS's positional parsers here
+# (vendor.yaml parser_overrides), so they keep JS's own schemas.
+- short: ratings
+  summary: "GET /{year}_team_results.csv — men's T-Rank team ratings (adjoe/adjde/barthag, one row per team; the team/conf pair feeds the MBB crosswalk)."
+  path: /{year}_team_results.csv
+  path_params:
+  - name: year
+    type: int
+    required: true
+  example_args:
+    year: 2025
+  parser: parse_torvik_ratings
+  returns_schema: native/torvik/ratings
+- short: team_factors
+  summary: "GET /{year}_fffinal.csv — men's four-factors splits (eFG%/FTR/OR%/TO% offense + defense, with per-stat ranks)."
+  path: /{year}_fffinal.csv
+  path_params:
+  - name: year
+    type: int
+    required: true
+  example_args:
+    year: 2025
+  parser: parse_torvik_team_factors
+  returns_schema: native/torvik/team_factors
+# JS-only: sdv-py wraps only `ratings` + `team_factors`; these three were ported
+# from hoopR's torvik_*.R (positional column arrays carried over verbatim in
+# src/parsers/torvik.ts) and stay here until they are upstreamed. All three
+# routes are live (the `.php` ones included).
+- short: game_stats
+  # getgamestats.php?year=&json=1 — headerless JSON, 31 positional fields.
+  path: /getgamestats.php
+  path_params: []
+  extra_params:
+  - { name: year, query_key: year }
+  - { name: json, query_key: json, default: 1 }
+  parser: parse_torvik_game_stats
+  returns_schema: native/torvik/game_stats
+- short: player_stats
+  # getadvstats.php?year=&csv=1 — headerless CSV, 67 positional fields.
+  path: /getadvstats.php
+  path_params: []
+  extra_params:
+  - { name: year, query_key: year }
+  - { name: csv, query_key: csv, default: 1 }
+  parser: parse_torvik_player_stats
+  returns_schema: native/torvik/player_stats
+- short: game_schedule
+  # {year}_super_sked.json — headerless JSON, 55 positional fields.
+  path: /{year}_super_sked.json
+  path_params:
+  - { name: year, type: int, required: true }
+  parser: parse_torvik_game_schedule
+  returns_schema: native/torvik/game_schedule

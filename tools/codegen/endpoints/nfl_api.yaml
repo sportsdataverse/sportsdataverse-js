@@ -1,97 +1,163 @@
-# Flat (non-ESPN) API family: the NFL.com "Shield" API (api.nfl.com), the modern
-# `/football/v2` surface. Unlike the other flat families this one is token-auth:
-# the top-level `auth: true` flags every emitted wrapper so the flat dispatch
-# (src/leagues/_make_flat.ts) mints/threads a public WEB_DESKTOP bearer token
-# (src/core/nfl_auth.ts) before fetching. Mirrors sdv-py's nfl_api family
-# (tools/codegen/endpoints/nfl_api.yaml + nfl/nfl_api_runtime.py). 11 endpoints.
-#
-# NOTE: api.nfl.com `season_type` uses STRING codes (PRE/REG/POST), NOT ESPN's
-# numeric 1/2/3.
+# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# tools/codegen/endpoints/nfl_api.yaml by tools/codegen/vendor.mjs.
+# DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
+# tools/codegen/overlay/nfl_api.yaml; shared changes land in sdv-py first.
+
 api: nfl_api
 host: https://api.nfl.com
+name_pattern: nfl_{short}
+module: nfl_api
+parser_module: nfl.nfl_api_parsers
+qualifier: api
+# api.nfl.com requires a bearer token: import the auth-aware getter (mints/threads
+# a WEB_DESKTOP token) instead of the shared no-auth runtime, and give every
+# wrapper a reusable `headers` arg. The getter still routes the HTTP call through
+# sportsdataverse.dl_utils.download() like every other wrapper in the package.
+getter_module: sportsdataverse.nfl.nfl_api_runtime
 auth: true
+# api.nfl.com season_type uses STRING codes (PRE/REG/POST), unlike the shared
+# parameters.yaml `season_type` (ESPN's numeric 1/2/3) -- so every season_type
+# below carries an explicit description override to keep the generated docs honest.
 endpoints:
 - short: standings
+  summary: "GET /football/v2/standings — one row per team standing across the returned week(s)."
   path: /football/v2/standings
   parser: parse_nfl_standings
   returns_schema: native/nfl_api/standings
   extra_params:
-  - {name: season, query_key: season, default: 2024}
-  - {name: season_type, query_key: seasonType, default: REG}
-  - {name: week, query_key: week, default: 1}
-  - {name: limit, query_key: limit, default: 40}
+  - { name: season, query_key: season, type: int, default: 2024 }
+  - { name: season_type, query_key: seasonType, type: str, default: REG, description: "Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3." }
+  - { name: week, query_key: week, type: int, default: 1 }
+  - { name: limit, query_key: limit, type: int, default: 40 }
+  example_args: { season: 2024, season_type: REG, week: 18 }
 - short: rosters
+  summary: "GET /football/v2/rosters — one row per team roster for the season."
   path: /football/v2/rosters
   parser: parse_nfl_rosters
   returns_schema: native/nfl_api/rosters
   extra_params:
-  - {name: season, query_key: season, default: 2024}
-  - {name: limit, query_key: limit, default: 40}
+  - { name: season, query_key: season, type: int, default: 2024 }
+  - { name: limit, query_key: limit, type: int, default: 40 }
+  - { name: team_id, query_key: teamId, type: str, default: null, kw_only: true, description: "Shield team uuid (the ``id`` of a team in the teams history listing). Returns just that team's roster -- one roster (~37 KB) instead of all 32 (~1.2 MB)." }
+  example_args: { season: 2024 }
 - short: teams_history
+  summary: "GET /football/v2/teams/history — one row per team for a season."
   path: /football/v2/teams/history
   parser: parse_nfl_teams_history
   returns_schema: native/nfl_api/teams_history
   extra_params:
-  - {name: season, query_key: season, default: 2024}
-  - {name: limit, query_key: limit, default: 40}
+  - { name: season, query_key: season, type: int, default: 2024 }
+  - { name: limit, query_key: limit, type: int, default: 40 }
+  example_args: { season: 2024 }
 - short: team
+  summary: "GET /football/v2/teams/{team_id} — single-team detail (one row)."
   path: /football/v2/teams/{team_id}
   parser: parse_nfl_team
   returns_schema: native/nfl_api/team
   path_params:
-  - {name: team_id, required: true}
+  - { name: team_id, type: str, required: true }
+  example_args: { team_id: 10403800-517c-7b8c-65a3-c61b95d86123 }
 - short: weeks
+  summary: "GET /football/v2/weeks/season/{season}/seasonType/{season_type} — week calendar (one row per week)."
   path: /football/v2/weeks/season/{season}/seasonType/{season_type}
   parser: parse_nfl_weeks
   returns_schema: native/nfl_api/weeks
   path_params:
-  - {name: season, required: false, default: 2024}
-  - {name: season_type, required: false, default: REG}
+  - { name: season, type: int, required: false, default: 2024 }
+  - { name: season_type, type: str, required: false, default: REG, description: "Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3." }
+  example_args: { season: 2024, season_type: REG }
 - short: weeks_by_date
+  summary: "GET /football/v2/weeks/date/{YYYY-MM-DD} — the week containing a date (one row)."
   path: /football/v2/weeks/date/{date}
   parser: parse_nfl_weeks_by_date
   returns_schema: native/nfl_api/weeks_by_date
   path_params:
-  - {name: date, required: true}
+  - { name: date, type: str, required: true }
+  example_args: { date: '2024-09-08' }
 - short: combine_profiles
+  summary: "GET /football/v2/combine/profiles — one row per combine prospect."
   path: /football/v2/combine/profiles
   parser: parse_nfl_combine_profiles
   returns_schema: native/nfl_api/combine_profiles
   extra_params:
-  - {name: year, query_key: year, default: 2024}
-  - {name: limit, query_key: limit, default: 40}
+  - { name: year, query_key: year, type: int, default: 2024 }
+  - { name: limit, query_key: limit, type: int, default: 40 }
+  example_args: { year: 2024 }
 - short: draft_picks
+  summary: "GET /football/v2/draft/picks/report — one row per draft pick."
   path: /football/v2/draft/picks/report
   parser: parse_nfl_draft_picks
   returns_schema: native/nfl_api/draft_picks
   extra_params:
-  - {name: year, query_key: year, default: 2024}
-  - {name: limit, query_key: limit, default: 40}
+  - { name: year, query_key: year, type: int, default: 2024 }
+  - { name: limit, query_key: limit, type: int, default: 40 }
+  example_args: { year: 2024 }
 - short: injuries
+  summary: "GET /football/v2/injuries — one row per injured player."
   path: /football/v2/injuries
   parser: parse_nfl_injuries
   returns_schema: native/nfl_api/injuries
   extra_params:
-  - {name: season, query_key: season, default: 2024}
-  - {name: season_type, query_key: seasonType, default: REG}
-  - {name: week, query_key: week, default: 1}
+  - { name: season, query_key: season, type: int, default: 2024 }
+  - { name: season_type, query_key: seasonType, type: str, default: REG, description: "Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3." }
+  - { name: week, query_key: week, type: int, default: 1 }
+  example_args: { season: 2024, season_type: REG, week: 1 }
 - short: game_summaries
+  summary: "GET /football/v2/stats/live/game-summaries — one row per game (live state)."
   path: /football/v2/stats/live/game-summaries
   parser: parse_nfl_game_summaries
   returns_schema: native/nfl_api/game_summaries
   extra_params:
-  - {name: season, query_key: season, default: 2024}
-  - {name: season_type, query_key: seasonType, default: REG}
-  - {name: week, query_key: week, default: 1}
+  - { name: season, query_key: season, type: int, default: 2024 }
+  - { name: season_type, query_key: seasonType, type: str, default: REG, description: "Season type code (string): PRE, REG, or POST -- not ESPN's numeric 1/2/3." }
+  - { name: week, query_key: week, type: int, default: 1 }
+  example_args: { season: 2024, season_type: REG, week: 1 }
 - short: weekly_game_details
+  summary: "GET /football/v2/experience/weekly-game-details — one row per game (bare list)."
   path: /football/v2/experience/weekly-game-details
   parser: parse_nfl_weekly_game_details
   returns_schema: native/nfl_api/weekly_game_details
   extra_params:
-  - {name: season, query_key: season, default: 2024}
-  - {name: season_type, query_key: type, default: REG}
-  - {name: week, query_key: week, default: 1}
-  - {name: include_drive_chart, query_key: includeDriveChart, default: true}
-  - {name: include_replays, query_key: includeReplays, default: false}
-  - {name: include_standings, query_key: includeStandings, default: false}
-  - {name: include_tagged_videos, query_key: includeTaggedVideos, default: false}
+  - { name: season, query_key: season, type: int, default: 2024 }
+  - { name: season_type, query_key: type, type: str, default: REG, description: "Season type code (string): PRE, REG, or POST (sent as the `type` query param) -- not ESPN's numeric 1/2/3." }
+  - { name: week, query_key: week, type: int, default: 1 }
+  - { name: include_drive_chart, query_key: includeDriveChart, type: bool, default: true, transform: _bool_str }
+  - { name: include_replays, query_key: includeReplays, type: bool, default: false, transform: _bool_str }
+  - { name: include_standings, query_key: includeStandings, type: bool, default: false, transform: _bool_str }
+  - { name: include_tagged_videos, query_key: includeTaggedVideos, type: bool, default: false, transform: _bool_str }
+  example_args: { season: 2024, season_type: REG, week: 1 }
+- short: live_team_statistics
+  summary: "GET /football/v2/stats/live/team-statistics/{game_id} — one row per side (away, home): the live team box score."
+  path: /football/v2/stats/live/team-statistics/{game_id}
+  parser: parse_nfl_team
+  path_params:
+  - { name: game_id, type: str, required: true, description: "Shield uuid game id -- the ``id`` column of the week games and weekly game details listings." }
+  example_args: { game_id: a9a890ed-4feb-11f1-abca-2c54536568a9 }
+- short: live_player_statistics
+  summary: "GET /football/v2/stats/live/player-statistics/{game_id} — one row per player per side: the live player box score."
+  path: /football/v2/stats/live/player-statistics/{game_id}
+  parser: parse_nfl_team
+  path_params:
+  - { name: game_id, type: str, required: true, description: "Shield uuid game id -- the ``id`` column of the week games and weekly game details listings." }
+  example_args: { game_id: a9a890ed-4feb-11f1-abca-2c54536568a9 }
+- short: game_details_v2
+  summary: "GET /experience/v2/gamedetails/{game_id} — one row: the flat v2 game detail (game, summary, optional drive chart / replays / standings)."
+  path: /experience/v2/gamedetails/{game_id}
+  parser: parse_nfl_team
+  path_params:
+  - { name: game_id, type: str, required: true, description: "Shield uuid game id -- the ``id`` column of the week games and weekly game details listings." }
+  extra_params:
+  - { name: include_drive_chart, query_key: includeDriveChart, type: bool, default: false, transform: _bool_str }
+  - { name: include_replays, query_key: includeReplays, type: bool, default: false, transform: _bool_str }
+  - { name: include_standings, query_key: includeStandings, type: bool, default: false, transform: _bool_str }
+  - { name: include_tagged_videos, query_key: includeTaggedVideos, type: bool, default: false, transform: _bool_str }
+  example_args: { game_id: a9a890ed-4feb-11f1-abca-2c54536568a9 }
+- short: game_details_by_slug
+  summary: "GET /experience/v1/gamedetailsbyslug/{slug} — one row: the flat game detail looked up by nfl.com slug."
+  path: /experience/v1/gamedetailsbyslug/{slug}
+  parser: parse_nfl_team
+  path_params:
+  - { name: slug, type: str, required: true, description: "nfl.com game slug, e.g. ``broncos-at-chiefs-2026-reg-1`` -- the last segment of the nfl.com game page URL and the ``slug`` external id." }
+  extra_params:
+  - { name: include_replays, query_key: includeReplays, type: bool, default: false, transform: _bool_str }
+  example_args: { slug: broncos-at-chiefs-2026-reg-1 }

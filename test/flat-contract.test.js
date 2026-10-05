@@ -3,6 +3,7 @@ import sdv, { FLAT_WRAPPERS } from '../dist/index.js';
 // deep import (not public API) — exercise flat request building w/o network
 import { resolveFlat } from '../dist/core/flat.js';
 import { FLAT_HOSTS } from '../dist/core/client.js';
+import { parserFor } from '../dist/parsers/_registry.js';
 
 // No-network contract tests for the flat-API (non-ESPN) surface. Mirrors
 // espn-contract.test.js but for the absolute-host MLB Stats API slice: every
@@ -32,7 +33,10 @@ const FLAT_API_NAMESPACES = {
 function minimalParams(def) {
   const params = {};
   for (const p of def.pathParams || []) {
-    if (p.required !== false && p.default === undefined) params[p.name] = 12345;
+    if (p.required !== false && p.default === undefined) {
+      // format_nhl_season (sdv-py transform) rejects a non-season value, as py does.
+      params[p.name] = p.transform === 'format_nhl_season' ? 2025 : 12345;
+    }
   }
   return params;
 }
@@ -109,9 +113,9 @@ describe('flat-API wrapper metadata invariants', () => {
     }
   });
 
-  it('registers the nfl_api family (11 endpoints) on https://api.nfl.com', () => {
+  it('registers the nfl_api family (15 endpoints) on https://api.nfl.com', () => {
     const nfl = FLAT_WRAPPERS.filter((w) => w.api === 'nfl_api');
-    nfl.length.should.equal(11);
+    nfl.length.should.equal(15);
     FLAT_HOSTS.nfl_api.should.equal('https://api.nfl.com');
     for (const w of nfl) w.host.should.equal('https://api.nfl.com');
   });
@@ -120,6 +124,17 @@ describe('flat-API wrapper metadata invariants', () => {
     for (const w of FLAT_WRAPPERS) {
       if (w.api === 'nfl_api') w.auth.should.be.true(`auth flag missing on ${w.short}`);
       else should(w.auth).not.be.true(`unexpected auth flag on ${w.api}_${w.short}`);
+    }
+  });
+
+  it('every flat wrapper parser name resolves in the registry', () => {
+    // Vendored families carry py parser names mapped through tools/codegen/
+    // vendor.yaml; an unmapped py name would silently return raw JSON.
+    for (const w of FLAT_WRAPPERS.filter((x) => x.parser)) {
+      (typeof parserFor(w.parser)).should.equal(
+        'function',
+        `${w.api}_${w.short}: parser ${w.parser} is not registered`
+      );
     }
   });
 

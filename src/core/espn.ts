@@ -1,5 +1,6 @@
 import { HOSTS, get } from "./client.js";
 import type { LeagueConfig, Scope, WrapperDef } from "./types.js";
+import { applyTransform } from "./transforms.js";
 import { WRAPPERS } from "../generated/wrappers.js";
 import { parserForEndpoint } from "../parsers/espn.js";
 
@@ -28,7 +29,7 @@ function cleanQuery(
 ): Record<string, any> | undefined {
   const out: Record<string, any> = {};
   for (const qp of def.queryParams) {
-    const v = lookup(params, qp.name) ?? qp.default;
+    const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null) out[qp.queryKey] = v;
   }
   return Object.keys(out).length ? out : undefined;
@@ -49,8 +50,9 @@ function buildPath(
   const byName = new Map(def.pathParams.map((p) => [p.name, p]));
 
   // Resolve a path token: explicit param -> `defaultFrom` param -> `default`
-  // (each lookup accepts the snake_case name or a camelCase alias).
-  const resolve = (name: string): any => {
+  // (each lookup accepts the snake_case name or a camelCase alias), then the
+  // param's `transform`.
+  const raw = (name: string): any => {
     const v = lookup(params, name);
     if (v !== undefined && v !== null) return v;
     const pp = byName.get(name);
@@ -60,6 +62,7 @@ function buildPath(
     }
     return pp?.default;
   };
+  const resolve = (name: string): any => applyTransform(byName.get(name)?.transform, raw(name));
 
   let path = def.path
     .replace("{sport}", cfg.sport)

@@ -1,3 +1,8 @@
+# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# tools/codegen/endpoints/espn_web_v3.yaml by tools/codegen/vendor.mjs.
+# DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
+# tools/codegen/overlay/espn_web_v3.yaml; shared changes land in sdv-py first.
+
 api: espn_web_v3
 host: web_v3
 name_pattern: espn_{prefix}_{short}
@@ -79,4 +84,3 @@ endpoints:
     query_key: sort
     type: str
   parser: parse_leaders
-  returns_schema: leaders

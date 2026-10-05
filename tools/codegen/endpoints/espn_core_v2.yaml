@@ -1,3 +1,8 @@
+# VENDORED from sportsdataverse/sportsdataverse-py@719de79edb685b89c524f8b4c0c146fea0b53855
+# tools/codegen/endpoints/espn_core_v2.yaml by tools/codegen/vendor.mjs.
+# DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
+# tools/codegen/overlay/espn_core_v2.yaml; shared changes land in sdv-py first.
+
 api: espn_core_v2
 host: core_v2
 name_pattern: espn_{prefix}_{short}
@@ -121,6 +126,16 @@ endpoints:
   - name: group_id
     type: int|str
     required: true
+  # ESPN pages this collection at 25 by default, so without an explicit limit
+  # the wrapper silently returned page 1 only -- 25 of 31 women's D-I
+  # conferences, leaving 76 ESPN teams with a null conference. Mirrors the
+  # limit block its sibling season_group_teams already declares. scope is
+  # universal, so this one entry fixes every league's wrapper.
+  extra_params:
+  - name: limit
+    query_key: limit
+    type: int
+    default: 500
   parser: parse_items
   example_args:
     season: 2024
@@ -186,6 +201,37 @@ endpoints:
     season: 2024
     season_type: 2
     week: 1
+- short: season_week_powerindex
+  scope: universal
+  # WEEKLY HISTORICAL FPI -- the point-in-time table. Each row carries its own
+  # lastUpdated / runDateTimeKey stamp and the values genuinely move week to week
+  # (Ohio State 2024: 26.200 wk3 -> 27.471 wk8 -> 24.823 wk15), so this is the
+  # leakage-safe source for as-of-week ratings.
+  #
+  # Do NOT substitute the fitt-v3 season table for this: that endpoint ACCEPTS a
+  # `week` query param and silently ignores it, returning the season-final figure
+  # for every week requested.
+  path: /{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/powerindex
+  path_params:
+  - name: season
+    type: int|str
+    required: true
+  - name: season_type
+    type: int|str
+    required: true
+  - name: week
+    type: int|str
+    required: true
+  extra_params:
+  - name: limit
+    query_key: limit
+    type: int
+    description: Page size for this weekly power-index table; pass a limit large enough to avoid paging (table size varies by sport/league -- CFB's FBS table alone is ~134 rows).
+  parser: parse_items
+  example_args:
+    season: 2024
+    season_type: 2
+    week: 8
 - short: season_week_events
   scope: universal
   path: /{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events
@@ -217,10 +263,15 @@ endpoints:
     type: int|str
     required: true
   extra_params:
+  # 1000 = ESPN Core v2's ceiling; WBB 2024 has 1262 teams, so `page` finishes the set.
   - name: limit
     query_key: limit
     type: int
-    default: 500
+    default: 1000
+  - name: page
+    query_key: page
+    type: int
+    default: 1
   parser: parse_items
   example_args:
     season: 2024
@@ -265,10 +316,11 @@ endpoints:
     type: int|str
     required: true
   extra_params:
+  # measured max 376 (WBB 2024); 200 truncated CFB (265) and MBB (372).
   - name: limit
     query_key: limit
     type: int
-    default: 200
+    default: 500
   parser: parse_coaches
   example_args:
     season: 2024
@@ -347,6 +399,11 @@ endpoints:
   - name: season
     type: int|str
     required: true
+  extra_params:
+  - name: limit
+    query_key: limit
+    type: int
+    default: 200
   parser: parse_items
   example_args:
     season: 2024
@@ -880,12 +937,17 @@ endpoints:
   scope: universal
   path: /{sport}/leagues/{league}/teams
   extra_params:
+  # 1000 is ESPN Core v2's hard ceiling (limit=1001 silently degrades to pageSize=25),
+  # and WBB has 1396 teams / MBB 1107 -- so `page` is required to finish the set.
   - name: limit
     query_key: limit
     type: int
-    default: 500
+    default: 1000
+  - name: page
+    query_key: page
+    type: int
+    default: 1
   parser: parse_teams
-  returns_schema: teams
 - short: team_core
   scope: universal
   path: /{sport}/leagues/{league}/teams/{team_id}
@@ -900,10 +962,12 @@ endpoints:
   scope: universal
   path: /{sport}/leagues/{league}/venues
   extra_params:
+  # 1000 is ESPN Core v2's hard ceiling -- limit=1001 silently falls back to
+  # pageSize=25. Measured max venue count is 990 (MBB), so 1000 covers every league.
   - name: limit
     query_key: limit
     type: int
-    default: 200
+    default: 1000
   parser: parse_items
 - short: venue
   scope: universal
@@ -979,6 +1043,11 @@ endpoints:
 - short: positions
   scope: universal
   path: /{sport}/leagues/{league}/positions
+  extra_params:
+  - name: limit
+    query_key: limit
+    type: int
+    default: 200
   parser: parse_items
 - short: position
   scope: universal
@@ -993,10 +1062,20 @@ endpoints:
 - short: tournaments
   scope: universal
   path: /{sport}/leagues/{league}/tournaments
+  extra_params:
+  - name: limit
+    query_key: limit
+    type: int
+    default: 200
   parser: parse_items
 - short: awards
   scope: universal
   path: /{sport}/leagues/{league}/awards
+  extra_params:
+  - name: limit
+    query_key: limit
+    type: int
+    default: 200
   parser: parse_items
 - short: award
   scope: universal
@@ -1012,7 +1091,6 @@ endpoints:
   scope: universal
   path: /{sport}/leagues/{league}/standings
   parser: parse_standings
-  returns_schema: standings
 - short: leaders_core
   scope: universal
   path: /{sport}/leagues/{league}/leaders
@@ -1033,13 +1111,54 @@ endpoints:
     type: int|str
     required: true
   extra_params:
+  # ~4,095 recruits for CFB 2024, so this is a genuine paging surface: `limit`
+  # tops out at ESPN's 1000 ceiling and the caller must walk `page`.
   - name: limit
     query_key: limit
     type: int
-    default: 100
+    default: 1000
+  - name: page
+    query_key: page
+    type: int
+    default: 1
   parser: parse_items
   example_args:
     season: 2024
+- short: recruiting_years
+  scope: ncaa
+  path: /{sport}/leagues/{league}/recruiting
+  parser: parse_items
+- short: recruiting_athletes
+  scope: ncaa
+  path: /{sport}/leagues/{league}/recruiting/{year}/athletes
+  path_params:
+  - name: year
+    type: int|str
+    required: true
+  extra_params:
+  # 3,815 athletes for CFB 2024 / 5,193 for 2026 -- a paging surface, same as
+  # season_recruits. Unlike season_recruits these items ship pre-hydrated.
+  - name: limit
+    query_key: limit
+    type: int
+    default: 1000
+  - name: page
+    query_key: page
+    type: int
+    default: 1
+  parser: parse_items
+  example_args:
+    year: 2026
+- short: recruiting_rankings
+  scope: ncaa
+  path: /{sport}/leagues/{league}/recruiting/{year}/rankings
+  path_params:
+  - name: year
+    type: int|str
+    required: true
+  parser: parse_items
+  example_args:
+    year: 2026
 - short: season_week_rankings
   scope: ncaa
   path: /{sport}/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/rankings

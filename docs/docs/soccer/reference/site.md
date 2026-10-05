@@ -610,6 +610,7 @@ SOCCER — team roster (ESPN site.api.espn.com).
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
 | `{team_id}` | `team_id` | yes | path parameter |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_team_roster`):
@@ -769,6 +770,7 @@ SOCCER — transactions (ESPN site.api.espn.com).
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
+| `limit` | `limit` | no | query parameter (default `500`) |
 | — | `parsed` | no | return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_items`):

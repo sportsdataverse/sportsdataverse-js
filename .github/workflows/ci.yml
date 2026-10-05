@@ -25,6 +25,10 @@ jobs:
           cache: npm
       # `npm ci` runs the `prepare` script, which compiles src -> dist via tsc
       - run: npm ci
+      # Vendored sdv-py endpoint YAML + schemas must re-derive byte-for-byte
+      # from tools/codegen/vendor/upstream (offline) — catches hand-edits.
+      - name: Vendor drift check
+        run: npm run vendor:check
       - name: Codegen drift check
         run: npm run codegen:check
       - name: Type-check

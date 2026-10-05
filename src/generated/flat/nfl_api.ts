@@ -90,6 +90,107 @@ export const nflApiDraftPicks: WrapperFn = (params = {}) => callFlat(DRAFT_PICKS
 /** snake_case alias of {@link nflApiDraftPicks} (py/R parity). */
 export const nfl_api_draft_picks = nflApiDraftPicks;
 
+const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
+  "short": "game_details_by_slug",
+  "flat": true,
+  "api": "nfl_api",
+  "host": "https://api.nfl.com",
+  "scope": "universal",
+  "path": "/experience/v1/gamedetailsbyslug/{slug}",
+  "pathParams": [
+    {
+      "name": "slug"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "include_replays",
+      "queryKey": "includeReplays",
+      "default": false,
+      "transform": "_bool_str"
+    }
+  ],
+  "parser": "parse_nfl_team",
+  "auth": true
+};
+
+/**
+ * NFL.com Shield API — game details by slug.
+ *
+ * **Endpoint:** `GET https://api.nfl.com/experience/v1/gamedetailsbyslug/{slug}`
+ *
+ * @param params.slug - path parameter.
+ * @param params.include_replays - query parameter (`includeReplays`) — default `false`.
+ * @param params.headers - optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nfl.nflApiGameDetailsBySlug({ slug: '…' });
+ */
+export const nflApiGameDetailsBySlug: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_BY_SLUG_DEF, params);
+/** snake_case alias of {@link nflApiGameDetailsBySlug} (py/R parity). */
+export const nfl_api_game_details_by_slug = nflApiGameDetailsBySlug;
+
+const GAME_DETAILS_V2_DEF: WrapperDef = {
+  "short": "game_details_v2",
+  "flat": true,
+  "api": "nfl_api",
+  "host": "https://api.nfl.com",
+  "scope": "universal",
+  "path": "/experience/v2/gamedetails/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "include_drive_chart",
+      "queryKey": "includeDriveChart",
+      "default": false,
+      "transform": "_bool_str"
+    },
+    {
+      "name": "include_replays",
+      "queryKey": "includeReplays",
+      "default": false,
+      "transform": "_bool_str"
+    },
+    {
+      "name": "include_standings",
+      "queryKey": "includeStandings",
+      "default": false,
+      "transform": "_bool_str"
+    },
+    {
+      "name": "include_tagged_videos",
+      "queryKey": "includeTaggedVideos",
+      "default": false,
+      "transform": "_bool_str"
+    }
+  ],
+  "parser": "parse_nfl_team",
+  "auth": true
+};
+
+/**
+ * NFL.com Shield API — game details v2.
+ *
+ * **Endpoint:** `GET https://api.nfl.com/experience/v2/gamedetails/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.include_drive_chart - query parameter (`includeDriveChart`) — default `false`.
+ * @param params.include_replays - query parameter (`includeReplays`) — default `false`.
+ * @param params.include_standings - query parameter (`includeStandings`) — default `false`.
+ * @param params.include_tagged_videos - query parameter (`includeTaggedVideos`) — default `false`.
+ * @param params.headers - optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nfl.nflApiGameDetailsV2({ game_id: '…' });
+ */
+export const nflApiGameDetailsV2: WrapperFn = (params = {}) => callFlat(GAME_DETAILS_V2_DEF, params);
+/** snake_case alias of {@link nflApiGameDetailsV2} (py/R parity). */
+export const nfl_api_game_details_v2 = nflApiGameDetailsV2;
+
 const GAME_SUMMARIES_DEF: WrapperDef = {
   "short": "game_summaries",
   "flat": true,
@@ -184,6 +285,70 @@ export const nflApiInjuries: WrapperFn = (params = {}) => callFlat(INJURIES_DEF,
 /** snake_case alias of {@link nflApiInjuries} (py/R parity). */
 export const nfl_api_injuries = nflApiInjuries;
 
+const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
+  "short": "live_player_statistics",
+  "flat": true,
+  "api": "nfl_api",
+  "host": "https://api.nfl.com",
+  "scope": "universal",
+  "path": "/football/v2/stats/live/player-statistics/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_nfl_team",
+  "auth": true
+};
+
+/**
+ * NFL.com Shield API — live player statistics.
+ *
+ * **Endpoint:** `GET https://api.nfl.com/football/v2/stats/live/player-statistics/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.headers - optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nfl.nflApiLivePlayerStatistics({ game_id: '…' });
+ */
+export const nflApiLivePlayerStatistics: WrapperFn = (params = {}) => callFlat(LIVE_PLAYER_STATISTICS_DEF, params);
+/** snake_case alias of {@link nflApiLivePlayerStatistics} (py/R parity). */
+export const nfl_api_live_player_statistics = nflApiLivePlayerStatistics;
+
+const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
+  "short": "live_team_statistics",
+  "flat": true,
+  "api": "nfl_api",
+  "host": "https://api.nfl.com",
+  "scope": "universal",
+  "path": "/football/v2/stats/live/team-statistics/{game_id}",
+  "pathParams": [
+    {
+      "name": "game_id"
+    }
+  ],
+  "queryParams": [],
+  "parser": "parse_nfl_team",
+  "auth": true
+};
+
+/**
+ * NFL.com Shield API — live team statistics.
+ *
+ * **Endpoint:** `GET https://api.nfl.com/football/v2/stats/live/team-statistics/{game_id}`
+ *
+ * @param params.game_id - path parameter.
+ * @param params.headers - optional bearer headers (auto-minted if omitted).
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @example await sdv.nfl.nflApiLiveTeamStatistics({ game_id: '…' });
+ */
+export const nflApiLiveTeamStatistics: WrapperFn = (params = {}) => callFlat(LIVE_TEAM_STATISTICS_DEF, params);
+/** snake_case alias of {@link nflApiLiveTeamStatistics} (py/R parity). */
+export const nfl_api_live_team_statistics = nflApiLiveTeamStatistics;
+
 const ROSTERS_DEF: WrapperDef = {
   "short": "rosters",
   "flat": true,
@@ -202,6 +367,11 @@ const ROSTERS_DEF: WrapperDef = {
       "name": "limit",
       "queryKey": "limit",
       "default": 40
+    },
+    {
+      "name": "team_id",
+      "queryKey": "teamId",
+      "default": null
     }
   ],
   "parser": "parse_nfl_rosters",
@@ -216,6 +386,7 @@ const ROSTERS_DEF: WrapperDef = {
  *
  * @param params.season - query parameter — default `2024`.
  * @param params.limit - query parameter — default `40`.
+ * @param params.team_id - query parameter (`teamId`) — default `null`.
  * @param params.headers - optional bearer headers (auto-minted if omitted).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -379,22 +550,26 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
     {
       "name": "include_drive_chart",
       "queryKey": "includeDriveChart",
-      "default": true
+      "default": true,
+      "transform": "_bool_str"
     },
     {
       "name": "include_replays",
       "queryKey": "includeReplays",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_standings",
       "queryKey": "includeStandings",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_tagged_videos",
       "queryKey": "includeTaggedVideos",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     }
   ],
   "parser": "parse_nfl_weekly_game_details",

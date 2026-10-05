@@ -1,0 +1,39 @@
+# JS-owned additions and patches merged on top of the VENDORED `torvik` family
+# (sdv-py tools/codegen/endpoints/torvik.yaml). See tools/codegen/vendor.yaml.
+# Edit here, then `npm run vendor -- --offline`.
+endpoints:
+# Patches: sdv-py's two endpoints run through JS's positional parsers here
+# (vendor.yaml parser_overrides), so they keep JS's own schemas.
+- short: ratings
+  returns_schema: native/torvik/ratings
+- short: team_factors
+  returns_schema: native/torvik/team_factors
+# JS-only: sdv-py wraps only `ratings` + `team_factors`; these three were ported
+# from hoopR's torvik_*.R (positional column arrays carried over verbatim in
+# src/parsers/torvik.ts) and stay here until they are upstreamed. All three
+# routes are live (the `.php` ones included).
+- short: game_stats
+  # getgamestats.php?year=&json=1 — headerless JSON, 31 positional fields.
+  path: /getgamestats.php
+  path_params: []
+  extra_params:
+    - { name: year, query_key: year }
+    - { name: json, query_key: json, default: 1 }
+  parser: parse_torvik_game_stats
+  returns_schema: native/torvik/game_stats
+- short: player_stats
+  # getadvstats.php?year=&csv=1 — headerless CSV, 67 positional fields.
+  path: /getadvstats.php
+  path_params: []
+  extra_params:
+    - { name: year, query_key: year }
+    - { name: csv, query_key: csv, default: 1 }
+  parser: parse_torvik_player_stats
+  returns_schema: native/torvik/player_stats
+- short: game_schedule
+  # {year}_super_sked.json — headerless JSON, 55 positional fields.
+  path: /{year}_super_sked.json
+  path_params:
+    - { name: year, type: int, required: true }
+  parser: parse_torvik_game_schedule
+  returns_schema: native/torvik/game_schedule

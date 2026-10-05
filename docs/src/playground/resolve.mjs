@@ -6,6 +6,32 @@
 // The only deliberate deviation from the package: empty-string param values are
 // treated as "not provided" (the playground's text inputs yield "" when blank).
 
+// Param transforms — a dependency-free copy of src/core/transforms.ts (exact
+// ports of the sdv-py functions the vendored YAML names in `transform:`).
+// test/transforms.test.js checks this copy against the package's.
+function pyTruthy(v) {
+  if (typeof v === 'number') return v !== 0;
+  if (typeof v === 'string' || Array.isArray(v)) return v.length > 0;
+  if (v !== null && typeof v === 'object') return Object.keys(v).length > 0;
+  return Boolean(v);
+}
+export const TRANSFORMS = {
+  bool_str: (v) => (v === null || v === undefined ? v : pyTruthy(v) ? 'true' : 'false'),
+  _bool_str: (v) => (v === null || v === undefined ? v : String(v).toLowerCase()),
+  format_nhl_season: (season) => {
+    if (season === null || season === undefined) return season;
+    const s = String(season);
+    if (s.length === 8 && /^\d+$/.test(s)) return s;
+    if (s.length === 4 && /^\d+$/.test(s)) return `${Number(s) - 1}${s}`;
+    throw new Error(`Unrecognized NHL season ${JSON.stringify(season)}`);
+  },
+};
+function applyTransform(name, value) {
+  if (!name) return value;
+  if (!TRANSFORMS[name]) throw new Error(`unknown param transform "${name}"`);
+  return TRANSFORMS[name](value);
+}
+
 /** snake_case -> camelCase (e.g. `event_id` -> `eventId`). */
 function toCamel(s) {
   return s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
@@ -27,7 +53,7 @@ function lookup(params, name) {
 function cleanQuery(def, params) {
   const out = {};
   for (const qp of def.queryParams || []) {
-    const v = lookup(params, qp.name) ?? qp.default;
+    const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;
   }
   return out;
@@ -39,7 +65,7 @@ function buildPath(def, league, params) {
   const leagueSlug = override != null ? override : league.league;
   const byName = new Map((def.pathParams || []).map((p) => [p.name, p]));
 
-  const resolve = (name) => {
+  const raw = (name) => {
     const v = lookup(params, name);
     if (v !== undefined) return v;
     const pp = byName.get(name);
@@ -49,6 +75,7 @@ function buildPath(def, league, params) {
     }
     return pp ? pp.default : undefined;
   };
+  const resolve = (name) => applyTransform(byName.get(name)?.transform, raw(name));
 
   let path = def.path
     .replace('{sport}', league.sport)
@@ -101,15 +128,15 @@ export function resolveUrl(def, league, params, hosts) {
 // src/core/flat.ts (resolveFlat). Used by BOTH the browser playground and the
 // /api/run proxy, exactly like resolveRequest above. There's no {sport}/{league}
 // slug nesting and no optional [...] segments; the path is host-relative with
-// bare {token} path params, and the host is absolute (looked up by `def.api` in
-// `flatHosts`, falling back to the wrapper's own `def.host`).
+// bare {token} path params, and the host is absolute (the wrapper's own
+// `def.host`, which carries any per-endpoint override, else `flatHosts[def.api]`).
 // ---------------------------------------------------------------------------
 
 /** Build the flat query map from `queryParams` (+ defaults), dropping empties. */
 function cleanFlatQuery(def, params) {
   const out = {};
   for (const qp of def.queryParams || []) {
-    const v = lookup(params, qp.name) ?? qp.default;
+    const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null && v !== '') out[qp.queryKey] = v;
   }
   return out;
@@ -117,16 +144,17 @@ function cleanFlatQuery(def, params) {
 
 /**
  * Build { url, query } for a flat wrapper without fetching (mirrors
- * src/core/flat.ts `resolveFlat`). `flatHosts` is the generated per-family
- * base-URL map (endpoints.json `flatHosts`); the wrapper's own `def.host` is the
+ * src/core/flat.ts `resolveFlat`). The wrapper's own `def.host` wins (it carries
+ * per-endpoint host overrides, e.g. Yahoo's editorial routes); `flatHosts` (the
+ * generated per-family base-URL map, endpoints.json `flatHosts`) is the
  * fallback. A required `{token}` that can't be resolved throws.
  */
 export function resolveFlat(def, params = {}, flatHosts = {}) {
-  const host = (def.api && flatHosts[def.api]) || def.host;
+  const host = def.host || (def.api && flatHosts[def.api]);
   if (!host) throw new Error(`${def.short}: flat wrapper missing host`);
   const byName = new Map((def.pathParams || []).map((p) => [p.name, p]));
   const path = def.path.replace(/\{(\w+)\}/g, (_m, name) => {
-    const v = lookup(params, name) ?? byName.get(name)?.default;
+    const v = applyTransform(byName.get(name)?.transform, lookup(params, name) ?? byName.get(name)?.default);
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
       if (pp && pp.required === false) return '';

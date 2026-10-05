@@ -19,9 +19,13 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 |---|---|---|---|---|---|
 | `nfl_api_combine_profiles` / `nflApiCombineProfiles` | `https://api.nfl.com/football/v2/combine/profiles` | — | `year`, `limit` | `parse_nfl_combine_profiles` | yes |
 | `nfl_api_draft_picks` / `nflApiDraftPicks` | `https://api.nfl.com/football/v2/draft/picks/report` | — | `year`, `limit` | `parse_nfl_draft_picks` | yes |
+| `nfl_api_game_details_by_slug` / `nflApiGameDetailsBySlug` | `https://api.nfl.com/experience/v1/gamedetailsbyslug/{slug}` | `slug`\* | `include_replays` → `includeReplays` | `parse_nfl_team` | yes |
+| `nfl_api_game_details_v2` / `nflApiGameDetailsV2` | `https://api.nfl.com/experience/v2/gamedetails/{game_id}` | `game_id`\* | `include_drive_chart` → `includeDriveChart`, `include_replays` → `includeReplays`, `include_standings` → `includeStandings`, `include_tagged_videos` → `includeTaggedVideos` | `parse_nfl_team` | yes |
 | `nfl_api_game_summaries` / `nflApiGameSummaries` | `https://api.nfl.com/football/v2/stats/live/game-summaries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_game_summaries` | yes |
 | `nfl_api_injuries` / `nflApiInjuries` | `https://api.nfl.com/football/v2/injuries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_injuries` | yes |
-| `nfl_api_rosters` / `nflApiRosters` | `https://api.nfl.com/football/v2/rosters` | — | `season`, `limit` | `parse_nfl_rosters` | yes |
+| `nfl_api_live_player_statistics` / `nflApiLivePlayerStatistics` | `https://api.nfl.com/football/v2/stats/live/player-statistics/{game_id}` | `game_id`\* | — | `parse_nfl_team` | yes |
+| `nfl_api_live_team_statistics` / `nflApiLiveTeamStatistics` | `https://api.nfl.com/football/v2/stats/live/team-statistics/{game_id}` | `game_id`\* | — | `parse_nfl_team` | yes |
+| `nfl_api_rosters` / `nflApiRosters` | `https://api.nfl.com/football/v2/rosters` | — | `season`, `limit`, `team_id` → `teamId` | `parse_nfl_rosters` | yes |
 | `nfl_api_standings` / `nflApiStandings` | `https://api.nfl.com/football/v2/standings` | — | `season`, `season_type` → `seasonType`, `week`, `limit` | `parse_nfl_standings` | yes |
 | `nfl_api_team` / `nflApiTeam` | `https://api.nfl.com/football/v2/teams/{team_id}` | `team_id`\* | — | `parse_nfl_team` | yes |
 | `nfl_api_teams_history` / `nflApiTeamsHistory` | `https://api.nfl.com/football/v2/teams/history` | — | `season`, `limit` | `parse_nfl_teams_history` | yes |
