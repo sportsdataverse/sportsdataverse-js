@@ -10,8 +10,8 @@
 // * Guest JWT (`sports247` only) — `GET https://247sports.com/` sets a `JWT`
 //   cookie with no login (~12 h TTL). It is minted lazily, cached until shortly
 //   before its `exp`, sent as `Authorization: Bearer`, and re-minted once on a
-//   401 or (as sdv-py) a 403. The 13 RDB routes that need a logged-in session (the guest token still
-//   403s) are not wrapped, as in sdv-py.
+//   401 or (as sdv-py) a 403. The 13 RDB routes that need a logged-in session
+//   (the guest token still 403s) are not wrapped, as in sdv-py.
 // * `sports247_site_pages` is auth-free; its `.json` URLs are sent verbatim.
 //
 // As in sdv-py, a failed mint falls back to an unauthenticated request (one

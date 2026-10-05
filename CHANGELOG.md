@@ -6,6 +6,17 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Fixed — transport / auth runtime
+
+- **Date query values.** A `Date` passed as a query parameter is sent as ISO-8601 UTC again (`2025-02-01T00:00:00.000Z`, what axios sent before the transport layer); it had become `Date#toString()` (`"Sat Feb 01 2025 …"`). An invalid `Date` throws an `SdvError` naming the parameter before anything is sent. Both built-in transports serialise the same way. A date-only API (`YYYY-MM-DD`, ESPN's `YYYYMMDD`) wants a string.
+- **Credential redaction.** `safeCause` (every `SdvError` cause) also redacts credential-looking text, so an error your own transport throws can't carry it: `Authorization` / `Proxy-Authorization` / `X-Api-Key` and `Cookie` / `Set-Cookie` values, `Bearer <token>`, JWT-shaped strings, and the values of `password=` / `token=` / `api_key=` / `client_secret=` / … (also `"password": "…"`). Ordinary text is untouched; the error name is redacted too.
+- **Retries / timeout per family.** `registerFamilyDefaults` takes `retries` and `timeoutMs`; a value you pass to `configure` still wins. `pff_api` now retries 4 times (sdv-py's budget; was 3). `nfl_pro` keeps sdv-py's 45 s timeout but no longer overrides `configure({ timeoutMs })`.
+- **`nfl_api`:** the built-in token mint retries a network error or a `408` / `429` / `5xx` itself (never `401` / `403`); since the transport layer one network blip at `/identity/v3/token` failed the call at once.
+- **`tokenAuth`:** a `401` on a request that carried your own credential no longer mints a token that would never be sent.
+- **`sports247`:** a `403` re-mints the guest JWT once and retries, as sdv-py does (not when you sent your own `Authorization`); after a failed mint, calls go out tokenless for a minute instead of re-trying the site root on every call; `sports247ClearTokenCache()` also resets the once-per-process warning; the User-Agent is now the one impit's `chrome142` profile sends (was Chrome/124 over a Chrome 142 TLS fingerprint).
+- **`nfl_pro` login:** the error name is scrubbed like the message; the browser-close cap no longer lets the process exit before the login settles.
+- `AuthProvider` documents its failure contract on the interface. Test isolation: an `@internal` `_unregisterFamilyDefaults` seam.
+
 ### Changed — package checks: attw + publint on the packed tarball, API Extractor reports
 
 - **New CI gates** (Node 20 and 22). `npm run pack:check` packs the package with `npm pack` and runs `@arethetypeswrong/cli` and `publint --strict` on that tarball. `npm run api:check` fails when the public API in `dist/*.d.ts` no longer matches the committed API Extractor reports, `etc/sportsdataverse.api.md` (package root) and `etc/sportsdataverse-parsers.api.md` (`sportsdataverse/parsers`). After an intended API change, run `npm run api:report` and commit the updated report, so the change shows up in the PR diff. Generated wrappers are not listed one by one in the report (the default export is typed `Record<string, Record<string, any>>`); they are reviewed through `src/generated/**` and the codegen drift gate.
