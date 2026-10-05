@@ -134,6 +134,13 @@ describe('ESPN basketball pbp oracle covers exactly the committed captures', () 
     const files = DIRS.flatMap((d) => readdirSync(join(ESPN, d)).filter((f) => f.endsWith('.json.gz') && f !== 'oracle.json.gz'));
     Object.keys(O.captures).sort().should.eql([...files, 'summary_nba.json'].sort());
   });
+
+  it('was generated at BASKETBALL_PBP_PIN (a pin bump without a regenerate fails here)', () => {
+    const pinFile = readFileSync(join(ESPN, '..', '..', '..', 'tools', 'sdv_py_pin.py'), 'utf8');
+    const pin = pinFile.match(/^BASKETBALL_PBP_PIN = "([0-9a-f]{40})"\r?$/m)?.[1];
+    should(pin).be.a.String();
+    O._provenance.should.startWith(`sportsdataverse-py@${pin} `);
+  });
 });
 
 describe('ESPN basketball pbp producers vs the sdv-py oracle (real captures)', () => {
