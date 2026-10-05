@@ -32,11 +32,55 @@ const BASE_LABEL = {
 
 const toCamel = (s) => s.replace(/_([a-z0-9])/g, (_m, c) => c.toUpperCase());
 
+/**
+ * `columns` for the generated examples of every play-by-play loader and of every
+ * loader whose example asset is over the row-format size guard on the default
+ * 4 GB heap (45.0M cells) — a full row-object read of those exhausts the heap.
+ * Names checked against each example asset's real parquet footer (2026-10-05
+ * survey of all 323 example assets); cells = rows × leaf columns of that asset.
+ * Every `*pbp*` loader must have an entry; a stale key fails codegen.
+ */
+const EXAMPLE_COLUMNS = {
+  load_cfb_pbp: ["game_id", "period", "text", "EPA", "home_wp_before"], // 82.8M cells (its `id` is > 2^53)
+  load_cfb_model_pbp: ["game_id", "period", "text", "epa", "wpa"],
+  load_cfb_pbp_r: ["game_id", "play_type", "play_text", "EPA", "wpa"], // 100.3M
+  load_mbb_pbp: ["game_id", "sequence_number", "type_text", "text", "score_value"], // 122.3M
+  load_wbb_pbp: ["game_id", "sequence_number", "type_text", "text", "score_value"], // 126.0M
+  load_nba_pbp: ["game_id", "sequence_number", "type_text", "text", "score_value"], // 41.2M
+  load_wnba_pbp: ["game_id", "sequence_number", "type_text", "text", "score_value"],
+  load_mlb_pbp: ["game_pk", "inning", "event_type", "description"],
+  load_nhl_pbp: ["game_id", "period", "event_type", "description", "strength_state"], // 104.0M
+  load_nhl_pbp_full: ["game_id", "period", "event_type", "description", "event"],
+  load_nhl_pbp_lite: ["game_id", "period", "event_type", "description", "event"],
+  load_nba_stats_pbp: ["game_id", "period", "clock", "event_type", "description"], // 34.7M
+  load_nba_stats_pbp_v3: ["game_id", "period", "clock", "event_type", "description"],
+  load_wnba_stats_pbp: ["game_id", "period", "clock", "event_type", "description"],
+  load_ncaa_baseball_pbp: ["contest_id", "inning", "play_type", "description"],
+  load_phf_pbp: ["game_id", "period_id", "play_type", "play_description"],
+  load_pwhl_pbp: ["game_id", "period_of_game", "event", "event_type", "strength_state"],
+  load_pwhl_xg_pbp: ["game_id", "period_of_game", "sec_from_start", "event_type"],
+  load_nfl_pbp: ["game_id", "play_id", "desc", "epa", "wp"],
+  load_nfl_model_pbp: ["game_id", "play_id", "desc", "epa", "wp"],
+  load_nfl_pbp_participation: ["nflverse_game_id", "play_id", "offense_formation", "defenders_in_box"],
+  load_ncaa_mbb_pbp: ["game_date", "home", "away", "period", "event_type", "shot_value"], // 259.4M
+  load_ncaa_wbb_pbp: ["game_date", "home", "away", "period", "event_type", "shot_value"], // 249.8M
+  load_ncaa_mfb_pbp: ["contest_id", "drive_number", "play_number", "play_type", "play_text"],
+  load_ncaa_mfb_pbp_cfbfastr: ["game_id", "id_play", "play_type", "play_text", "yards_gained"],
+  load_ncaa_baseball_team_stats: ["contest_id", "category", "stat", "away_value", "home_value"], // 83.8M
+  load_ncaa_mbb_possessions: ["game_date", "home", "away", "poss_num", "poss_team"], // 48.8M
+  load_ncaa_wbb_possessions: ["game_date", "home", "away", "poss_num", "poss_team"], // 47.1M
+};
+
 /** Read releases.yaml into template-ready loader views (manifest order). */
 export function loadReleaseLoaders(endpointsDir) {
   const doc = parse(readFileSync(join(endpointsDir, "releases.yaml"), "utf8"));
   const seen = new Set();
-  return doc.loaders.map((ld) => {
+  const views = doc.loaders.map((ld) => {
+    // Fail closed: sdv-py renders a stub as NotImplementedError; JS has no stub path.
+    if (ld.stub) throw new Error(`releases.yaml: ${ld.fn} is a stub; the JS generator has no stub support`);
+    if (ld.fn.includes("pbp") && !EXAMPLE_COLUMNS[ld.fn]) {
+      throw new Error(`render-loaders: ${ld.fn} needs an EXAMPLE_COLUMNS entry (play-by-play examples pass columns)`);
+    }
     const base = doc.bases[ld.base];
     if (!base) throw new Error(`releases.yaml: ${ld.fn} has unknown base "${ld.base}"`);
     const camel = toCamel(ld.fn);
@@ -63,8 +107,12 @@ export function loadReleaseLoaders(endpointsDir) {
       deprecatedFor: ld.deprecated_for ?? undefined,
       notes: ld.notes?.trim() || undefined,
       exampleSeasons: ld.example_args?.seasons ?? 2024,
+      exampleColumns: EXAMPLE_COLUMNS[ld.fn],
     };
   });
+  const stale = Object.keys(EXAMPLE_COLUMNS).filter((fn) => !seen.has(toCamel(fn)));
+  if (stale.length) throw new Error(`render-loaders: EXAMPLE_COLUMNS names unknown loaders: ${stale.join(", ")}`);
+  return views;
 }
 
 /** Leagues in manifest-first-seen order -> their loaders. */
@@ -82,7 +130,10 @@ const jsdocText = (s) => s.replace(/\*\//g, "*\\/");
 const mdxText = (s) => s.replace(/[{}<>]/g, (c) => `\\${c}`);
 
 function exampleCall(ns, ld) {
-  return ld.single ? `await sdv.${ns}.${ld.camel}()` : `await sdv.${ns}.${ld.camel}({ seasons: ${ld.exampleSeasons} })`;
+  const args = [];
+  if (!ld.single) args.push(`seasons: ${ld.exampleSeasons}`);
+  if (ld.exampleColumns) args.push(`columns: [${ld.exampleColumns.map((c) => `'${c}'`).join(", ")}]`);
+  return `await sdv.${ns}.${ld.camel}(${args.length ? `{ ${args.join(", ")} }` : ""})`;
 }
 
 function seasonNote(ld) {
@@ -99,7 +150,7 @@ function renderLoaderTs(ns, ld) {
   const def = { fn: ld.fn, url: ld.url };
   if (ld.minSeason !== undefined) def.minSeason = ld.minSeason;
   if (ld.idInt64) def.idInt64 = ld.idInt64;
-  const optsType = ld.single ? "ReleaseLoaderOptions" : "SeasonLoaderOptions";
+  const loaderType = ld.single ? "AssetLoader" : "SeasonLoader";
   let out = "";
   if (!ld.deprecatedFor) out += `\nconst ${defConst}: ReleaseLoaderDef = ${JSON.stringify(def)};\n`;
 
@@ -121,14 +172,17 @@ function renderLoaderTs(ns, ld) {
     doc.push(`@param opts.seasons - a season or a list of seasons${rng}; one with no published asset is skipped with a warning.`);
   }
   doc.push("@param opts.columns - read only these columns (default: all).");
+  doc.push('@param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).');
+  doc.push("@param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.");
   doc.push("@param opts.timeoutMs - download timeout in ms (default 300000).");
   doc.push(
-    "@returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning)." +
-      (ld.single ? " An absent asset returns `[]` with a warning." : "")
+    "@returns One plain object per row (or column arrays with `format: \"columns\"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning)." +
+      (ld.single ? " An absent asset returns no rows with a warning." : "")
   );
   if (!ld.single && ld.minSeason !== undefined) {
     doc.push(`@throws SeasonNotFoundError if a season is below ${ld.minSeason}.`);
   }
+  doc.push("@throws SdvError if the data is over `maxCells` (checked before decoding).");
   doc.push("@throws AssetFetchError if a download fails (never reported as an empty season).");
   if (ld.deprecatedFor) doc.push(`@deprecated Use {@link ${toCamel(ld.deprecatedFor)}}; same \`seasons\` convention.`);
   doc.push(`@example ${exampleCall(ns, ld)};`);
@@ -136,14 +190,11 @@ function renderLoaderTs(ns, ld) {
 
   if (ld.deprecatedFor) {
     out +=
-      `export const ${ld.camel} = (opts: ${optsType}): Promise<ReleaseRow[]> => {\n` +
-      `  warnDeprecatedLoader(${JSON.stringify(ld.fn)}, ${JSON.stringify(ld.deprecatedFor)});\n` +
-      `  return ${toCamel(ld.deprecatedFor)}(opts);\n` +
-      `};\n`;
-  } else if (ld.single) {
-    out += `export const ${ld.camel} = (opts: ${optsType} = {}): Promise<ReleaseRow[]> =>\n  loadReleaseAsset(${defConst}, opts);\n`;
+      `export const ${ld.camel} = deprecatedLoader<${loaderType}>(\n` +
+      `  ${JSON.stringify(ld.fn)},\n  ${JSON.stringify(ld.deprecatedFor)},\n` +
+      `  () => ${toCamel(ld.deprecatedFor)}\n);\n`;
   } else {
-    out += `export const ${ld.camel} = (opts: ${optsType}): Promise<ReleaseRow[]> =>\n  loadRelease(${defConst}, opts);\n`;
+    out += `export const ${ld.camel} = ${ld.single ? "assetLoader" : "seasonLoader"}(${defConst});\n`;
   }
   out += `/** snake_case alias of {@link ${ld.camel}} (py/R parity). */\nexport const ${ld.fn} = ${ld.camel};\n`;
   return out;
@@ -151,14 +202,15 @@ function renderLoaderTs(ns, ld) {
 
 /** One `src/generated/loaders/<league>.ts` module. */
 function renderLeagueModule(ns, loaders) {
-  const used = new Set(["ReleaseRow"]);
+  const used = new Set();
   const fns = new Set();
   for (const ld of loaders) {
-    used.add(ld.single ? "ReleaseLoaderOptions" : "SeasonLoaderOptions");
-    if (ld.deprecatedFor) fns.add("warnDeprecatedLoader");
-    else {
+    if (ld.deprecatedFor) {
+      fns.add("deprecatedLoader");
+      used.add(ld.single ? "AssetLoader" : "SeasonLoader");
+    } else {
       used.add("ReleaseLoaderDef");
-      fns.add(ld.single ? "loadReleaseAsset" : "loadRelease");
+      fns.add(ld.single ? "assetLoader" : "seasonLoader");
     }
   }
   const imports = [...[...fns].sort(), ...[...used].sort().map((t) => `type ${t}`)];
@@ -199,13 +251,21 @@ export function renderLoadersPage(ns, loaders, position) {
     `\n# \`sdv.${ns}\` — dataset loaders\n\n` +
     `${loaders.length} loader${loaders.length === 1 ? "" : "s"} reading the published ` +
     `${bases} (parquet) — the JS mirror of sportsdataverse-py's \`load_*\` functions. ` +
-    `Each is a camelCase export plus its snake_case alias, resolves to an array of plain ` +
-    `row objects, and accepts \`columns\` (read only those) and \`timeoutMs\`.\n\n` +
+    `Each is a camelCase export plus its snake_case alias and resolves to an array of plain ` +
+    `row objects (or \`{ [column]: values[] }\` with \`format: "columns"\`).\n\n` +
+    `- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a ` +
+    `loader checks rows × columns (summed over the seasons) against \`maxCells\` — by default ` +
+    `heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 ` +
+    `for \`format: "columns"\` — and throws a catchable \`SdvError\` instead of running out of ` +
+    `memory. Play-by-play is the usual case: pass \`columns\`, use \`format: "columns"\`, or ` +
+    `raise the heap (\`node --max-old-space-size=8192\`).\n` +
     `- **Seasons:** \`seasons\` takes one season or a list. A season with no published ` +
     `asset (HTTP 404) is skipped with a warning; any other failure raises ` +
     `\`AssetFetchError\` (a failed download is never an empty season); a season below the ` +
     `loader's floor raises \`SeasonNotFoundError\` before anything is fetched. Multi-season ` +
-    `results union the columns, null-filling gaps.\n` +
+    `results union the columns, null-filling gaps, and cast a column whose type changed ` +
+    `between seasons to the common type (an integer id that became a string → strings, ` +
+    `"123" not "123.0"), as sdv-py's \`diagonal_relaxed\` concat does.\n` +
     `- **Integers:** INT64 columns come back as \`number\` when every value is a safe ` +
     `integer, otherwise as \`BigInt\` with one warning naming the column.\n` +
     `- **Runtime:** Node only. Downloads go through the \`releases\` transport family ` +
@@ -231,6 +291,8 @@ export function renderLoadersPage(ns, loaders, position) {
       body += `| \`seasons\` | \`number \\| number[]\` | yes | season(s) to load${rng} |\n`;
     }
     body += `| \`columns\` | \`string[]\` | no | read only these columns |\n`;
+    body += `| \`format\` | \`"rows" \\| "columns"\` | no | row objects (default) or column arrays |\n`;
+    body += `| \`maxCells\` | \`number\` | no | size guard; default scales with the heap, \`Infinity\` disables |\n`;
     body += `| \`timeoutMs\` | \`number\` | no | download timeout in ms (default 300000) |\n`;
     body += `\n\`\`\`js\nconst rows = ${exampleCall(ns, ld)};\n// snake_case alias (py/R parity): sdv.${ns}.${ld.fn}(...)\n\`\`\`\n`;
   }

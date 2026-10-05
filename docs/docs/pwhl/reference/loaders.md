@@ -9,9 +9,10 @@ sidebar_position: 1
 
 # `sdv.pwhl` — dataset loaders
 
-21 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias, resolves to an array of plain row objects, and accepts `columns` (read only those) and `timeoutMs`.
+21 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
-- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps.
+- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a loader checks rows × columns (summed over the seasons) against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
+- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
 - **Integers:** INT64 columns come back as `number` when every value is a safe integer, otherwise as `BigInt` with one warning naming the column.
 - **Runtime:** Node only. Downloads go through the `releases` transport family (see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is downloaded whole, then decoded.
 
@@ -47,10 +48,12 @@ Release: [phf_pbp](https://github.com/sportsdataverse/sportsdataverse-data/relea
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.pwhl.loadPhfPbp({ seasons: 2023 });
+const rows = await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'period_id', 'play_type', 'play_description'] });
 // snake_case alias (py/R parity): sdv.pwhl.load_phf_pbp(...)
 ```
 
@@ -62,6 +65,8 @@ Release: [phf_player_boxscores](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -77,6 +82,8 @@ Release: [phf_schedules](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -92,6 +99,8 @@ Release: [phf_team_boxscores](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -107,6 +116,8 @@ Release: [pwhl_game_info](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -122,6 +133,8 @@ Release: [pwhl_game_rosters](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -137,6 +150,8 @@ Release: [pwhl_shifts](https://github.com/sportsdataverse/sportsdataverse-data/r
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -152,6 +167,8 @@ Release: [pwhl_goalie_boxscores](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -167,6 +184,8 @@ Release: [pwhl_officials](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -182,10 +201,12 @@ Release: [pwhl_pbp](https://github.com/sportsdataverse/sportsdataverse-data/rele
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.pwhl.loadPwhlPbp({ seasons: 2024 });
+const rows = await sdv.pwhl.loadPwhlPbp({ seasons: 2024, columns: ['game_id', 'period_of_game', 'event', 'event_type', 'strength_state'] });
 // snake_case alias (py/R parity): sdv.pwhl.load_pwhl_pbp(...)
 ```
 
@@ -197,10 +218,12 @@ Release: [pwhl_xg_pbp](https://github.com/sportsdataverse/sportsdataverse-data/r
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.pwhl.loadPwhlXgPbp({ seasons: 2025 });
+const rows = await sdv.pwhl.loadPwhlXgPbp({ seasons: 2025, columns: ['game_id', 'period_of_game', 'sec_from_start', 'event_type'] });
 // snake_case alias (py/R parity): sdv.pwhl.load_pwhl_xg_pbp(...)
 ```
 
@@ -212,6 +235,8 @@ Release: [pwhl_penalty_summary](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -227,6 +252,8 @@ Release: [pwhl_player_boxscores](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -242,6 +269,8 @@ Release: [pwhl_rosters](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -257,6 +286,8 @@ Release: [pwhl_schedules](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -272,6 +303,8 @@ Release: [pwhl_scoring_summary](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -287,6 +320,8 @@ Release: [pwhl_shootout](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -302,6 +337,8 @@ Release: [pwhl_shots_by_period](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -317,6 +354,8 @@ Release: [pwhl_skater_boxscores](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -332,6 +371,8 @@ Release: [pwhl_team_boxscores](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -347,6 +388,8 @@ Release: [pwhl_three_stars](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js

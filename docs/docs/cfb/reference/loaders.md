@@ -9,9 +9,10 @@ sidebar_position: 50
 
 # `sdv.cfb` — dataset loaders
 
-71 loaders reading the published sportsdataverse-data releases / sportsdataverse raw data (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias, resolves to an array of plain row objects, and accepts `columns` (read only those) and `timeoutMs`.
+71 loaders reading the published sportsdataverse-data releases / sportsdataverse raw data (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
-- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps.
+- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a loader checks rows × columns (summed over the seasons) against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
+- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
 - **Integers:** INT64 columns come back as `number` when every value is a safe integer, otherwise as `BigInt` with one warning naming the column.
 - **Runtime:** Node only. Downloads go through the `releases` transport family (see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is downloaded whole, then decoded.
 
@@ -97,10 +98,12 @@ Release: [espn_cfb_pbp](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024 });
+const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'period', 'text', 'EPA', 'home_wp_before'] });
 // snake_case alias (py/R parity): sdv.cfb.load_cfb_pbp(...)
 ```
 
@@ -112,6 +115,8 @@ Release: [cfb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/r
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -127,6 +132,8 @@ Release: [cfb_recruiting_proj](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -142,6 +149,8 @@ Release: [cfb_recruits](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -157,6 +166,8 @@ Release: [cfb_returning_production](https://github.com/sportsdataverse/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2005) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -172,6 +183,8 @@ Release: [espn_cfb_rosters](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -187,6 +200,8 @@ Release: [cfbfastR-data](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -202,6 +217,8 @@ Release: [cfb_schedules](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2001) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -217,6 +234,8 @@ Release: [cfb_team_info](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2001) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -232,6 +251,8 @@ Release: [espn_cfb_teams](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2001) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -251,6 +272,8 @@ Portal counts are D-I to D-I moves visible in ESPN rosters (FBS and FCS mixed): 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2015) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -266,6 +289,8 @@ Release: [cfb_team_talent](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2005) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -281,6 +306,8 @@ Release: [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -296,6 +323,8 @@ Release: [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -311,6 +340,8 @@ Release: [espn_cfb_team_box](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -326,6 +357,8 @@ Release: [espn_cfb_player_box](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -341,6 +374,8 @@ Release: [espn_cfb_drives](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -356,6 +391,8 @@ Release: [espn_cfb_play_participants](https://github.com/sportsdataverse/sportsd
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -371,6 +408,8 @@ Release: [espn_cfb_game_rosters](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -386,6 +425,8 @@ Release: [espn_cfb_linescores](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -401,6 +442,8 @@ Release: [espn_cfb_betting](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -416,6 +459,8 @@ Release: [cfb_fpi_weekly](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2005) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -431,6 +476,8 @@ Release: [espn_cfb_power_index](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2015) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -446,6 +493,8 @@ Release: [espn_cfb_adv_team](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -461,6 +510,8 @@ Release: [espn_cfb_adv_passing](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -476,6 +527,8 @@ Release: [espn_cfb_adv_rushing](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -491,6 +544,8 @@ Release: [espn_cfb_adv_receiving](https://github.com/sportsdataverse/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -506,6 +561,8 @@ Release: [espn_cfb_adv_defensive](https://github.com/sportsdataverse/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -521,6 +578,8 @@ Release: [espn_cfb_adv_defensive_players](https://github.com/sportsdataverse/spo
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -536,6 +595,8 @@ Release: [espn_cfb_adv_drives](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -551,6 +612,8 @@ Release: [espn_cfb_adv_situational](https://github.com/sportsdataverse/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -566,6 +629,8 @@ Release: [espn_cfb_adv_specialists](https://github.com/sportsdataverse/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -581,6 +646,8 @@ Release: [espn_cfb_adv_turnover](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -596,10 +663,12 @@ Release: [espn_cfb_model_pbp](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.cfb.loadCfbModelPbp({ seasons: 2024 });
+const rows = await sdv.cfb.loadCfbModelPbp({ seasons: 2024, columns: ['game_id', 'period', 'text', 'epa', 'wpa'] });
 // snake_case alias (py/R parity): sdv.cfb.load_cfb_model_pbp(...)
 ```
 
@@ -611,6 +680,8 @@ Release: [espn_cfb_passing](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -626,6 +697,8 @@ Release: [espn_cfb_percentiles](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -641,6 +714,8 @@ Release: [espn_cfb_receiving](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -656,6 +731,8 @@ Release: [espn_cfb_rushing](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -671,6 +748,8 @@ Release: [espn_cfb_team_summaries](https://github.com/sportsdataverse/sportsdata
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -686,6 +765,8 @@ Release: [espn_cfb_adv_team_gamelog](https://github.com/sportsdataverse/sportsda
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -701,6 +782,8 @@ Release: [cfb_ratings_weekly](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -716,6 +799,8 @@ Release: [cfb_team_summaries_weekly](https://github.com/sportsdataverse/sportsda
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -735,6 +820,8 @@ position_group is null for seasons whose play-by-play carried no participant pos
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -754,6 +841,8 @@ Needs ESPN play participants: rows exist only for seasons whose play-by-play car
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -773,6 +862,8 @@ Needs ESPN play participants (tackler / assist ids); a season without them has n
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -792,6 +883,8 @@ Needs ESPN play participants with player positions; a season without them has no
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -807,6 +900,8 @@ Release: [espn_cfb_usage_teams](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -822,6 +917,8 @@ Release: [espn_cfb_usage_drive_scripting](https://github.com/sportsdataverse/spo
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -837,6 +934,8 @@ Release: [espn_cfb_usage_st_kickers](https://github.com/sportsdataverse/sportsda
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -852,6 +951,8 @@ Release: [espn_cfb_usage_st_punters](https://github.com/sportsdataverse/sportsda
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -867,6 +968,8 @@ Release: [espn_cfb_usage_st_returners](https://github.com/sportsdataverse/sports
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -882,6 +985,8 @@ Release: [espn_cfb_usage_st_blocks](https://github.com/sportsdataverse/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -897,6 +1002,8 @@ Release: [espn_cfb_usage_st_team](https://github.com/sportsdataverse/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -912,6 +1019,8 @@ Release: [espn_cfb_team_tendencies](https://github.com/sportsdataverse/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -931,6 +1040,8 @@ One row per (season, team, head coach). The coach comes from the producer's vend
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -949,6 +1060,8 @@ One season-less file: every published coach_tendencies season summed per head co
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -964,10 +1077,12 @@ Release: [cfbfastR_cfb_pbp](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.cfb.loadCfbPbpR({ seasons: 2024 });
+const rows = await sdv.cfb.loadCfbPbpR({ seasons: 2024, columns: ['game_id', 'play_type', 'play_text', 'EPA', 'wpa'] });
 // snake_case alias (py/R parity): sdv.cfb.load_cfb_pbp_r(...)
 ```
 
@@ -979,10 +1094,12 @@ Release: [ncaa_mfb_pbp](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.cfb.loadNcaaMfbPbp({ seasons: 2024 });
+const rows = await sdv.cfb.loadNcaaMfbPbp({ seasons: 2024, columns: ['contest_id', 'drive_number', 'play_number', 'play_type', 'play_text'] });
 // snake_case alias (py/R parity): sdv.cfb.load_ncaa_mfb_pbp(...)
 ```
 
@@ -994,10 +1111,12 @@ Release: [ncaa_mfb_pbp_cfbfastr](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.cfb.loadNcaaMfbPbpCfbfastr({ seasons: 2024 });
+const rows = await sdv.cfb.loadNcaaMfbPbpCfbfastr({ seasons: 2024, columns: ['game_id', 'id_play', 'play_type', 'play_text', 'yards_gained'] });
 // snake_case alias (py/R parity): sdv.cfb.load_ncaa_mfb_pbp_cfbfastr(...)
 ```
 
@@ -1009,6 +1128,8 @@ Release: [ncaa_mfb_drives](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1024,6 +1145,8 @@ Release: [ncaa_mfb_schedule](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1039,6 +1162,8 @@ Release: [ncaa_mfb_rosters](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1058,6 +1183,8 @@ No conference column: for conference membership by season use load_cfb_team_grou
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1073,6 +1200,8 @@ Release: [ncaa_mfb_team_stats](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1088,6 +1217,8 @@ Release: [ncaa_mfb_player_stats](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1103,6 +1234,8 @@ Release: [ncaa_mfb_officials](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1118,6 +1251,8 @@ Release: [ncaa_mfb_linescore](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1136,6 +1271,8 @@ One season-less file: one row per group lineage (the league, subdivisions, confe
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1154,6 +1291,8 @@ One season-less file: one row per group per season it existed, with its name, sh
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1172,6 +1311,8 @@ One season-less file: every name, abbreviation, slug and source id that a source
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -1191,6 +1332,8 @@ One row per team per season: the SDV subdivision, conference and division group 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1869) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js

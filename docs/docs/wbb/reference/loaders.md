@@ -9,9 +9,10 @@ sidebar_position: 50
 
 # `sdv.wbb` — dataset loaders
 
-34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias, resolves to an array of plain row objects, and accepts `columns` (read only those) and `timeoutMs`.
+34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
-- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps.
+- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a loader checks rows × columns (summed over the seasons) against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
+- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
 - **Integers:** INT64 columns come back as `number` when every value is a safe integer, otherwise as `BigInt` with one warning naming the column.
 - **Runtime:** Node only. Downloads go through the `releases` transport family (see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is downloaded whole, then decoded.
 
@@ -60,10 +61,12 @@ Release: [espn_womens_college_basketball_pbp](https://github.com/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024 });
+const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
 // snake_case alias (py/R parity): sdv.wbb.load_wbb_pbp(...)
 ```
 
@@ -75,6 +78,8 @@ Release: [espn_womens_college_basketball_player_boxscores](https://github.com/sp
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -90,6 +95,8 @@ Release: [espn_womens_college_basketball_schedules](https://github.com/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -105,6 +112,8 @@ Release: [espn_womens_college_basketball_team_boxscores](https://github.com/spor
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -120,6 +129,8 @@ Release: [wbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/r
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2008) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -135,6 +146,8 @@ Release: [wbb_player_value](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -150,6 +163,8 @@ Release: [espn_womens_college_basketball_game_rosters](https://github.com/sports
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -165,6 +180,8 @@ Release: [espn_womens_college_basketball_officials](https://github.com/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -180,6 +197,8 @@ Release: [espn_womens_college_basketball_player_season_stats](https://github.com
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -195,6 +214,8 @@ Release: [espn_womens_college_basketball_rosters](https://github.com/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -210,6 +231,8 @@ Release: [espn_womens_college_basketball_shots](https://github.com/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -225,6 +248,8 @@ Release: [espn_womens_college_basketball_standings](https://github.com/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -240,6 +265,8 @@ Release: [espn_womens_college_basketball_team_season_stats](https://github.com/s
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -255,6 +282,8 @@ Release: [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -270,6 +299,8 @@ Release: [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -285,6 +316,8 @@ Release: [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -300,6 +333,8 @@ Release: [espn_womens_college_basketball_player_core](https://github.com/sportsd
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -315,6 +350,8 @@ Release: [ncaa_wbb_rapm](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2011) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -330,10 +367,12 @@ Release: [ncaa_wbb_pbp](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.wbb.loadNcaaWbbPbp({ seasons: 2024 });
+const rows = await sdv.wbb.loadNcaaWbbPbp({ seasons: 2024, columns: ['game_date', 'home', 'away', 'period', 'event_type', 'shot_value'] });
 // snake_case alias (py/R parity): sdv.wbb.load_ncaa_wbb_pbp(...)
 ```
 
@@ -345,6 +384,8 @@ Release: [ncaa_wbb_schedule](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -360,6 +401,8 @@ Release: [ncaa_wbb_player_box](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -375,6 +418,8 @@ Release: [ncaa_wbb_team_box](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -390,6 +435,8 @@ Release: [ncaa_wbb_rosters](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -405,6 +452,8 @@ Release: [ncaa_wbb_team_rosters](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -420,6 +469,8 @@ Release: [ncaa_wbb_team_ids](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -435,10 +486,12 @@ Release: [ncaa_wbb_possessions](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024 });
+const rows = await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024, columns: ['game_date', 'home', 'away', 'poss_num', 'poss_team'] });
 // snake_case alias (py/R parity): sdv.wbb.load_ncaa_wbb_possessions(...)
 ```
 
@@ -450,6 +503,8 @@ Release: [ncaa_wbb_lineups](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -465,6 +520,8 @@ Release: [ncaa_wbb_matchup_stints](https://github.com/sportsdataverse/sportsdata
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -480,6 +537,8 @@ Release: [ncaa_wbb_shots](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2019) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -495,6 +554,8 @@ Release: [ncaa_wbb_rapm_within_team](https://github.com/sportsdataverse/sportsda
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -513,6 +574,8 @@ One season-less file: one row per group lineage (the league, subdivisions, confe
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -531,6 +594,8 @@ One season-less file: one row per group per season it existed, with its name, sh
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -549,6 +614,8 @@ One season-less file: every name, abbreviation, slug and source id that a source
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -568,6 +635,8 @@ One row per team per season: the SDV subdivision, conference and division group 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js

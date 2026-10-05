@@ -6,12 +6,9 @@
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
-  loadRelease,
-  loadReleaseAsset,
+  assetLoader,
+  seasonLoader,
   type ReleaseLoaderDef,
-  type ReleaseLoaderOptions,
-  type ReleaseRow,
-  type SeasonLoaderOptions,
 } from "../../core/releases.js";
 
 const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.parquet","minSeason":1999};
@@ -23,14 +20,16 @@ const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://githu
  *
  * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1999.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.nfl.loadNflPbp({ seasons: 2024 });
+ * @example await sdv.nfl.loadNflPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
  */
-export const loadNflPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_PBP, opts);
+export const loadNflPbp = seasonLoader(LOAD_NFL_PBP);
 /** snake_case alias of {@link loadNflPbp} (py/R parity). */
 export const load_nfl_pbp = loadNflPbp;
 
@@ -43,14 +42,16 @@ const LOAD_NFL_MODEL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_model_pbp","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1999.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.nfl.loadNflModelPbp({ seasons: 2024 });
+ * @example await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
  */
-export const loadNflModelPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_MODEL_PBP, opts);
+export const loadNflModelPbp = seasonLoader(LOAD_NFL_MODEL_PBP);
 /** snake_case alias of {@link loadNflModelPbp} (py/R parity). */
 export const load_nfl_model_pbp = loadNflModelPbp;
 
@@ -63,14 +64,16 @@ const LOAD_NFL_RATINGS_WEEKLY: ReleaseLoaderDef = {"fn":"load_nfl_ratings_weekly
  *
  * @param opts.seasons - a season or a list of seasons (>= 1999); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1999.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflRatingsWeekly({ seasons: 2024 });
  */
-export const loadNflRatingsWeekly = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_RATINGS_WEEKLY, opts);
+export const loadNflRatingsWeekly = seasonLoader(LOAD_NFL_RATINGS_WEEKLY);
 /** snake_case alias of {@link loadNflRatingsWeekly} (py/R parity). */
 export const load_nfl_ratings_weekly = loadNflRatingsWeekly;
 
@@ -83,14 +86,16 @@ const LOAD_NFL_NGS: ReleaseLoaderDef = {"fn":"load_nfl_ngs","url":"https://githu
  *
  * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2009.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflNgs({ seasons: 2024 });
  */
-export const loadNflNgs = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_NGS, opts);
+export const loadNflNgs = seasonLoader(LOAD_NFL_NGS);
 /** snake_case alias of {@link loadNflNgs} (py/R parity). */
 export const load_nfl_ngs = loadNflNgs;
 
@@ -103,14 +108,16 @@ const LOAD_NFL_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_rosters","url":"https
  *
  * @param opts.seasons - a season or a list of seasons (>= 1920); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1920.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflRosters({ seasons: 2024 });
  */
-export const loadNflRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_ROSTERS, opts);
+export const loadNflRosters = seasonLoader(LOAD_NFL_ROSTERS);
 /** snake_case alias of {@link loadNflRosters} (py/R parity). */
 export const load_nfl_rosters = loadNflRosters;
 
@@ -123,14 +130,16 @@ const LOAD_NFL_WEEKLY_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_weekly_rosters
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflWeeklyRosters({ seasons: 2024 });
  */
-export const loadNflWeeklyRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_WEEKLY_ROSTERS, opts);
+export const loadNflWeeklyRosters = seasonLoader(LOAD_NFL_WEEKLY_ROSTERS);
 /** snake_case alias of {@link loadNflWeeklyRosters} (py/R parity). */
 export const load_nfl_weekly_rosters = loadNflWeeklyRosters;
 
@@ -143,14 +152,16 @@ const LOAD_NFL_DEPTH_CHARTS: ReleaseLoaderDef = {"fn":"load_nfl_depth_charts","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2001); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2001.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflDepthCharts({ seasons: 2024 });
  */
-export const loadNflDepthCharts = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_DEPTH_CHARTS, opts);
+export const loadNflDepthCharts = seasonLoader(LOAD_NFL_DEPTH_CHARTS);
 /** snake_case alias of {@link loadNflDepthCharts} (py/R parity). */
 export const load_nfl_depth_charts = loadNflDepthCharts;
 
@@ -163,14 +174,16 @@ const LOAD_NFL_INJURIES: ReleaseLoaderDef = {"fn":"load_nfl_injuries","url":"htt
  *
  * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2009.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflInjuries({ seasons: 2024 });
  */
-export const loadNflInjuries = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_INJURIES, opts);
+export const loadNflInjuries = seasonLoader(LOAD_NFL_INJURIES);
 /** snake_case alias of {@link loadNflInjuries} (py/R parity). */
 export const load_nfl_injuries = loadNflInjuries;
 
@@ -183,14 +196,16 @@ const LOAD_NFL_SNAP_COUNTS: ReleaseLoaderDef = {"fn":"load_nfl_snap_counts","url
  *
  * @param opts.seasons - a season or a list of seasons (>= 2012); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2012.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflSnapCounts({ seasons: 2024 });
  */
-export const loadNflSnapCounts = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_SNAP_COUNTS, opts);
+export const loadNflSnapCounts = seasonLoader(LOAD_NFL_SNAP_COUNTS);
 /** snake_case alias of {@link loadNflSnapCounts} (py/R parity). */
 export const load_nfl_snap_counts = loadNflSnapCounts;
 
@@ -203,14 +218,16 @@ const LOAD_NFL_PBP_PARTICIPATION: ReleaseLoaderDef = {"fn":"load_nfl_pbp_partici
  *
  * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2016.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.nfl.loadNflPbpParticipation({ seasons: 2024 });
+ * @example await sdv.nfl.loadNflPbpParticipation({ seasons: 2024, columns: ['nflverse_game_id', 'play_id', 'offense_formation', 'defenders_in_box'] });
  */
-export const loadNflPbpParticipation = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_PBP_PARTICIPATION, opts);
+export const loadNflPbpParticipation = seasonLoader(LOAD_NFL_PBP_PARTICIPATION);
 /** snake_case alias of {@link loadNflPbpParticipation} (py/R parity). */
 export const load_nfl_pbp_participation = loadNflPbpParticipation;
 
@@ -223,14 +240,16 @@ const LOAD_NFL_FTN_CHARTING: ReleaseLoaderDef = {"fn":"load_nfl_ftn_charting","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2022); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2022.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflFtnCharting({ seasons: 2024 });
  */
-export const loadNflFtnCharting = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_FTN_CHARTING, opts);
+export const loadNflFtnCharting = seasonLoader(LOAD_NFL_FTN_CHARTING);
 /** snake_case alias of {@link loadNflFtnCharting} (py/R parity). */
 export const load_nfl_ftn_charting = loadNflFtnCharting;
 
@@ -245,14 +264,16 @@ const LOAD_NFL_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_players",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePlayers({ seasons: 2024 });
  */
-export const loadNflUsagePlayers = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_PLAYERS, opts);
+export const loadNflUsagePlayers = seasonLoader(LOAD_NFL_USAGE_PLAYERS);
 /** snake_case alias of {@link loadNflUsagePlayers} (py/R parity). */
 export const load_nfl_usage_players = loadNflUsagePlayers;
 
@@ -267,14 +288,16 @@ const LOAD_NFL_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_usage_p
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePositionGroups({ seasons: 2024 });
  */
-export const loadNflUsagePositionGroups = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_POSITION_GROUPS, opts);
+export const loadNflUsagePositionGroups = seasonLoader(LOAD_NFL_USAGE_POSITION_GROUPS);
 /** snake_case alias of {@link loadNflUsagePositionGroups} (py/R parity). */
 export const load_nfl_usage_position_groups = loadNflUsagePositionGroups;
 
@@ -289,14 +312,16 @@ const LOAD_NFL_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_tackles",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageTackles({ seasons: 2024 });
  */
-export const loadNflUsageTackles = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_TACKLES, opts);
+export const loadNflUsageTackles = seasonLoader(LOAD_NFL_USAGE_TACKLES);
 /** snake_case alias of {@link loadNflUsageTackles} (py/R parity). */
 export const load_nfl_usage_tackles = loadNflUsageTackles;
 
@@ -311,14 +336,16 @@ const LOAD_NFL_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsagePositionGroupTackles({ seasons: 2024 });
  */
-export const loadNflUsagePositionGroupTackles = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_POSITION_GROUP_TACKLES, opts);
+export const loadNflUsagePositionGroupTackles = seasonLoader(LOAD_NFL_USAGE_POSITION_GROUP_TACKLES);
 /** snake_case alias of {@link loadNflUsagePositionGroupTackles} (py/R parity). */
 export const load_nfl_usage_position_group_tackles = loadNflUsagePositionGroupTackles;
 
@@ -333,14 +360,16 @@ const LOAD_NFL_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_nfl_usage_teams","url
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageTeams({ seasons: 2024 });
  */
-export const loadNflUsageTeams = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_TEAMS, opts);
+export const loadNflUsageTeams = seasonLoader(LOAD_NFL_USAGE_TEAMS);
 /** snake_case alias of {@link loadNflUsageTeams} (py/R parity). */
 export const load_nfl_usage_teams = loadNflUsageTeams;
 
@@ -355,14 +384,16 @@ const LOAD_NFL_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_nfl_usage_d
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageDriveScripting({ seasons: 2024 });
  */
-export const loadNflUsageDriveScripting = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_DRIVE_SCRIPTING, opts);
+export const loadNflUsageDriveScripting = seasonLoader(LOAD_NFL_USAGE_DRIVE_SCRIPTING);
 /** snake_case alias of {@link loadNflUsageDriveScripting} (py/R parity). */
 export const load_nfl_usage_drive_scripting = loadNflUsageDriveScripting;
 
@@ -377,14 +408,16 @@ const LOAD_NFL_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_kic
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStKickers({ seasons: 2024 });
  */
-export const loadNflUsageStKickers = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_ST_KICKERS, opts);
+export const loadNflUsageStKickers = seasonLoader(LOAD_NFL_USAGE_ST_KICKERS);
 /** snake_case alias of {@link loadNflUsageStKickers} (py/R parity). */
 export const load_nfl_usage_st_kickers = loadNflUsageStKickers;
 
@@ -399,14 +432,16 @@ const LOAD_NFL_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_pun
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStPunters({ seasons: 2024 });
  */
-export const loadNflUsageStPunters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_ST_PUNTERS, opts);
+export const loadNflUsageStPunters = seasonLoader(LOAD_NFL_USAGE_ST_PUNTERS);
 /** snake_case alias of {@link loadNflUsageStPunters} (py/R parity). */
 export const load_nfl_usage_st_punters = loadNflUsageStPunters;
 
@@ -421,14 +456,16 @@ const LOAD_NFL_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_r
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStReturners({ seasons: 2024 });
  */
-export const loadNflUsageStReturners = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_ST_RETURNERS, opts);
+export const loadNflUsageStReturners = seasonLoader(LOAD_NFL_USAGE_ST_RETURNERS);
 /** snake_case alias of {@link loadNflUsageStReturners} (py/R parity). */
 export const load_nfl_usage_st_returners = loadNflUsageStReturners;
 
@@ -443,14 +480,16 @@ const LOAD_NFL_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_bloc
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStBlocks({ seasons: 2024 });
  */
-export const loadNflUsageStBlocks = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_ST_BLOCKS, opts);
+export const loadNflUsageStBlocks = seasonLoader(LOAD_NFL_USAGE_ST_BLOCKS);
 /** snake_case alias of {@link loadNflUsageStBlocks} (py/R parity). */
 export const load_nfl_usage_st_blocks = loadNflUsageStBlocks;
 
@@ -465,14 +504,16 @@ const LOAD_NFL_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_team",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflUsageStTeam({ seasons: 2024 });
  */
-export const loadNflUsageStTeam = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_USAGE_ST_TEAM, opts);
+export const loadNflUsageStTeam = seasonLoader(LOAD_NFL_USAGE_ST_TEAM);
 /** snake_case alias of {@link loadNflUsageStTeam} (py/R parity). */
 export const load_nfl_usage_st_team = loadNflUsageStTeam;
 
@@ -487,14 +528,16 @@ const LOAD_NFL_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_team_tendenci
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflTeamTendencies({ seasons: 2024 });
  */
-export const loadNflTeamTendencies = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_TEAM_TENDENCIES, opts);
+export const loadNflTeamTendencies = seasonLoader(LOAD_NFL_TEAM_TENDENCIES);
 /** snake_case alias of {@link loadNflTeamTendencies} (py/R parity). */
 export const load_nfl_team_tendencies = loadNflTeamTendencies;
 
@@ -509,14 +552,16 @@ const LOAD_NFL_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_coach_tenden
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflCoachTendencies({ seasons: 2024 });
  */
-export const loadNflCoachTendencies = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_COACH_TENDENCIES, opts);
+export const loadNflCoachTendencies = seasonLoader(LOAD_NFL_COACH_TENDENCIES);
 /** snake_case alias of {@link loadNflCoachTendencies} (py/R parity). */
 export const load_nfl_coach_tendencies = loadNflCoachTendencies;
 
@@ -531,13 +576,15 @@ const LOAD_NFL_COACH_CAREERS: ReleaseLoaderDef = {"fn":"load_nfl_coach_careers",
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflCoachCareers();
  */
-export const loadNflCoachCareers = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_NFL_COACH_CAREERS, opts);
+export const loadNflCoachCareers = assetLoader(LOAD_NFL_COACH_CAREERS);
 /** snake_case alias of {@link loadNflCoachCareers} (py/R parity). */
 export const load_nfl_coach_careers = loadNflCoachCareers;
 
@@ -552,13 +599,15 @@ const LOAD_NFL_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_groups","url":"https:/
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroups();
  */
-export const loadNflGroups = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_NFL_GROUPS, opts);
+export const loadNflGroups = assetLoader(LOAD_NFL_GROUPS);
 /** snake_case alias of {@link loadNflGroups} (py/R parity). */
 export const load_nfl_groups = loadNflGroups;
 
@@ -573,13 +622,15 @@ const LOAD_NFL_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_group_seasons",
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroupSeasons();
  */
-export const loadNflGroupSeasons = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_NFL_GROUP_SEASONS, opts);
+export const loadNflGroupSeasons = assetLoader(LOAD_NFL_GROUP_SEASONS);
 /** snake_case alias of {@link loadNflGroupSeasons} (py/R parity). */
 export const load_nfl_group_seasons = loadNflGroupSeasons;
 
@@ -594,13 +645,15 @@ const LOAD_NFL_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_nfl_group_aliases",
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroupAliases();
  */
-export const loadNflGroupAliases = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_NFL_GROUP_ALIASES, opts);
+export const loadNflGroupAliases = assetLoader(LOAD_NFL_GROUP_ALIASES);
 /** snake_case alias of {@link loadNflGroupAliases} (py/R parity). */
 export const load_nfl_group_aliases = loadNflGroupAliases;
 
@@ -615,13 +668,15 @@ const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group
  *
  * @param opts.seasons - a season or a list of seasons (>= 1970); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1970.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadNflTeamGroupSeasons = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NFL_TEAM_GROUP_SEASONS, opts);
+export const loadNflTeamGroupSeasons = seasonLoader(LOAD_NFL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNflTeamGroupSeasons} (py/R parity). */
 export const load_nfl_team_group_seasons = loadNflTeamGroupSeasons;

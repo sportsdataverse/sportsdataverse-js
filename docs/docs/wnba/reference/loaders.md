@@ -9,9 +9,10 @@ sidebar_position: 50
 
 # `sdv.wnba` — dataset loaders
 
-34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias, resolves to an array of plain row objects, and accepts `columns` (read only those) and `timeoutMs`.
+34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
-- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps.
+- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a loader checks rows × columns (summed over the seasons) against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
+- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
 - **Integers:** INT64 columns come back as `number` when every value is a safe integer, otherwise as `BigInt` with one warning naming the column.
 - **Runtime:** Node only. Downloads go through the `releases` transport family (see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is downloaded whole, then decoded.
 
@@ -60,10 +61,12 @@ Release: [espn_wnba_pbp](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.wnba.loadWnbaPbp({ seasons: 2024 });
+const rows = await sdv.wnba.loadWnbaPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
 // snake_case alias (py/R parity): sdv.wnba.load_wnba_pbp(...)
 ```
 
@@ -75,6 +78,8 @@ Release: [espn_wnba_player_boxscores](https://github.com/sportsdataverse/sportsd
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -90,6 +95,8 @@ Release: [espn_wnba_schedules](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -105,6 +112,8 @@ Release: [espn_wnba_team_boxscores](https://github.com/sportsdataverse/sportsdat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -120,6 +129,8 @@ Release: [espn_wnba_draft](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -135,6 +146,8 @@ Release: [espn_wnba_game_rosters](https://github.com/sportsdataverse/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -150,6 +163,8 @@ Release: [espn_wnba_officials](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -165,6 +180,8 @@ Release: [espn_wnba_player_season_stats](https://github.com/sportsdataverse/spor
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -180,6 +197,8 @@ Release: [espn_wnba_rosters](https://github.com/sportsdataverse/sportsdataverse-
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -195,6 +214,8 @@ Release: [espn_wnba_shots](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -210,6 +231,8 @@ Release: [espn_wnba_standings](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -225,6 +248,8 @@ Release: [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sports
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -240,6 +265,8 @@ Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -255,6 +282,8 @@ Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -270,6 +299,8 @@ Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -285,6 +316,8 @@ Release: [espn_wnba_player_core](https://github.com/sportsdataverse/sportsdatave
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -300,6 +333,8 @@ Release: [wnba_player_impact](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -315,6 +350,8 @@ Release: [wnba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -330,6 +367,8 @@ Release: [wnba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -345,6 +384,8 @@ Release: [wnba_stats_game_rosters](https://github.com/sportsdataverse/sportsdata
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -360,6 +401,8 @@ Release: [wnba_stats_officials](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -375,10 +418,12 @@ Release: [wnba_stats_pbp](https://github.com/sportsdataverse/sportsdataverse-dat
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.wnba.loadWnbaStatsPbp({ seasons: 2025 });
+const rows = await sdv.wnba.loadWnbaStatsPbp({ seasons: 2025, columns: ['game_id', 'period', 'clock', 'event_type', 'description'] });
 // snake_case alias (py/R parity): sdv.wnba.load_wnba_stats_pbp(...)
 ```
 
@@ -390,6 +435,8 @@ Release: [wnba_stats_possessions](https://github.com/sportsdataverse/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -405,6 +452,8 @@ Release: [wnba_stats_game_lineups](https://github.com/sportsdataverse/sportsdata
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -420,6 +469,8 @@ Release: [wnba_stats_player_boxscores](https://github.com/sportsdataverse/sports
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -435,6 +486,8 @@ Release: [wnba_stats_player_game_logs](https://github.com/sportsdataverse/sports
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -450,6 +503,8 @@ Release: [wnba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -465,6 +520,8 @@ Release: [wnba_stats_schedules](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -480,6 +537,8 @@ Release: [wnba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -495,6 +554,8 @@ Release: [wnba_stats_team_boxscores](https://github.com/sportsdataverse/sportsda
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -513,6 +574,8 @@ One season-less file: one row per group lineage (the league, subdivisions, confe
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -531,6 +594,8 @@ One season-less file: one row per group per season it existed, with its name, sh
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -549,6 +614,8 @@ One season-less file: every name, abbreviation, slug and source id that a source
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -568,6 +635,8 @@ One row per team per season: the SDV subdivision, conference and division group 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js

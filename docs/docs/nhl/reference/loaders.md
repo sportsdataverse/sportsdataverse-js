@@ -9,9 +9,10 @@ sidebar_position: 50
 
 # `sdv.nhl` — dataset loaders
 
-27 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias, resolves to an array of plain row objects, and accepts `columns` (read only those) and `timeoutMs`.
+27 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
-- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps.
+- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a loader checks rows × columns (summed over the seasons) against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
+- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
 - **Integers:** INT64 columns come back as `number` when every value is a safe integer, otherwise as `BigInt` with one warning naming the column.
 - **Runtime:** Node only. Downloads go through the `releases` transport family (see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is downloaded whole, then decoded.
 
@@ -53,10 +54,12 @@ Release: [nhl_pbp_full](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.nhl.loadNhlPbp({ seasons: 2024 });
+const rows = await sdv.nhl.loadNhlPbp({ seasons: 2024, columns: ['game_id', 'period', 'event_type', 'description', 'strength_state'] });
 // snake_case alias (py/R parity): sdv.nhl.load_nhl_pbp(...)
 ```
 
@@ -68,6 +71,8 @@ Release: [nhl_player_boxscores](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -83,6 +88,8 @@ Release: [nhl_schedules](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -98,6 +105,8 @@ Release: [nhl_team_boxscores](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -113,6 +122,8 @@ Release: [nhl_game_info](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -128,6 +139,8 @@ Release: [nhl_game_rosters](https://github.com/sportsdataverse/sportsdataverse-d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -143,6 +156,8 @@ Release: [nhl_goalie_boxscores](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -158,6 +173,8 @@ Release: [nhl_linescore](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -173,6 +190,8 @@ Release: [nhl_officials](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -188,10 +207,12 @@ Release: [nhl_pbp_full](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.nhl.loadNhlPbpFull({ seasons: 2010 });
+const rows = await sdv.nhl.loadNhlPbpFull({ seasons: 2010, columns: ['game_id', 'period', 'event_type', 'description', 'event'] });
 // snake_case alias (py/R parity): sdv.nhl.load_nhl_pbp_full(...)
 ```
 
@@ -203,10 +224,12 @@ Release: [nhl_pbp_lite](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.nhl.loadNhlPbpLite({ seasons: 2010 });
+const rows = await sdv.nhl.loadNhlPbpLite({ seasons: 2010, columns: ['game_id', 'period', 'event_type', 'description', 'event'] });
 // snake_case alias (py/R parity): sdv.nhl.load_nhl_pbp_lite(...)
 ```
 
@@ -218,6 +241,8 @@ Release: [nhl_penalties](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -233,6 +258,8 @@ Release: [nhl_player_boxscores](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -248,6 +275,8 @@ Release: [nhl_rosters](https://github.com/sportsdataverse/sportsdataverse-data/r
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -263,6 +292,8 @@ Release: [nhl_schedules](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -278,6 +309,8 @@ Release: [nhl_scoring](https://github.com/sportsdataverse/sportsdataverse-data/r
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -293,6 +326,8 @@ Release: [nhl_scratches](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -308,6 +343,8 @@ Release: [nhl_shifts](https://github.com/sportsdataverse/sportsdataverse-data/re
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -323,6 +360,8 @@ Release: [nhl_shootout](https://github.com/sportsdataverse/sportsdataverse-data/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -338,6 +377,8 @@ Release: [nhl_shots_by_period](https://github.com/sportsdataverse/sportsdatavers
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -353,6 +394,8 @@ Release: [nhl_skater_boxscores](https://github.com/sportsdataverse/sportsdataver
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -368,6 +411,8 @@ Release: [nhl_team_boxscores](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -383,6 +428,8 @@ Release: [nhl_three_stars](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -401,6 +448,8 @@ One season-less file: one row per group lineage (the league, subdivisions, confe
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -419,6 +468,8 @@ One season-less file: one row per group per season it existed, with its name, sh
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -437,6 +488,8 @@ One season-less file: every name, abbreviation, slug and source id that a source
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -456,6 +509,8 @@ One row per team per season: the SDV subdivision, conference and division group 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1918) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js

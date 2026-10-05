@@ -5,10 +5,18 @@
 // `_as_season_list`) + the `load_module.py.jinja` season loop.
 //
 // Node-first: the parquet decode (hyparquet, pure JS) would run in a browser,
-// but release downloads are cross-origin GitHub assets, so browsers are not a
-// supported target.
+// but release downloads are cross-origin GitHub assets and the size guard reads
+// the V8 heap limit, so browsers are not a supported target.
 
-import { parquetMetadata, parquetReadObjects, parquetSchema } from "hyparquet";
+import { getHeapStatistics } from "node:v8";
+import {
+  parquetMetadata,
+  parquetRead,
+  parquetReadObjects,
+  parquetSchema,
+  type FileMetaData,
+  type SchemaTree,
+} from "hyparquet";
 import { compressors } from "hyparquet-compressors";
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from "./config.js";
 import { NoDataError, SdvError, SeasonNotFoundError } from "./errors.js";
@@ -24,11 +32,27 @@ export const RELEASES_FAMILY = "releases";
 registerFamilyDefaults(RELEASES_FAMILY, { retryStatuses: DEFAULT_RETRY_STATUSES });
 
 /**
- * Per-request timeout for a release download. The default 30 s request timeout
- * covers the whole body, and the largest assets (CFB play-by-play, ~55 MB) need
- * longer on an ordinary connection. Override per call with `timeoutMs`.
+ * Per-request timeout for a release download. With the default axios transport
+ * (follow-redirects) the timeout is a wall-clock timer only until the response
+ * headers arrive, then a socket-idle timer — so it does not cap a slow 55 MB
+ * body there. Other transports (fetch / impit) may bound the whole request, so
+ * release downloads get a longer default than the 30 s global one. Override per
+ * call with `timeoutMs`.
  */
 export const RELEASE_TIMEOUT_MS = 300_000;
+
+/**
+ * Heap bytes budgeted per decoded cell (rows × leaf columns), by output format.
+ * MEASURED 2026-10-05 on Node 24 with the default heap (4288 MB): row objects
+ * cost 52-80 B/cell retained and 60-97 B/cell at peak (espn_cfb_pbp 2024,
+ * 163,567 × 506 = 82.8M cells, OOMs; its first 300 columns, 49.1M cells, peak
+ * 2.9 GB; espn_nba_pbp 2024, 41.2M cells, peak 2.5 GB). Column arrays cost
+ * 13 B/cell retained and 24-28 B/cell at peak (the full 82.8M-cell CFB pbp peaks
+ * 2.2 GB; espn_mbb_pbp 2024, 122.3M cells, peaks 2.9 GB). The guard therefore
+ * allows heap_size_limit / 100 cells for rows (45.0M on the default heap) and
+ * heap_size_limit / 30 for columns (149.9M), scaling with --max-old-space-size.
+ */
+const BYTES_PER_CELL = { rows: 100, columns: 30 } as const;
 
 /** One generated loader: everything the runtime needs from its manifest entry. */
 export interface ReleaseLoaderDef {
@@ -45,10 +69,25 @@ export interface ReleaseLoaderDef {
 /** A row of a loaded dataset (column name -> value). */
 export type ReleaseRow = Record<string, unknown>;
 
+/** A loaded dataset in column form (`format: "columns"`): column name -> values. */
+export type ReleaseColumns = Record<string, unknown[]>;
+
 /** Options every loader accepts. */
 export interface ReleaseLoaderOptions {
   /** Read only these columns (the rest are not decoded). Default: all. */
   columns?: string[];
+  /**
+   * `"rows"` (default): an array of row objects. `"columns"`: one array per
+   * column (`{ [column]: values[] }`) — about 4x lighter on the heap.
+   */
+  format?: "rows" | "columns";
+  /**
+   * Refuse (with a catchable `SdvError`) to decode more than this many cells
+   * (rows × leaf columns, summed over the seasons) — checked from the parquet
+   * footers before anything is decoded. Default: scaled to the V8 heap limit
+   * (see `BYTES_PER_CELL`); `Infinity` disables the check.
+   */
+  maxCells?: number;
   /** Download timeout in milliseconds (default {@link RELEASE_TIMEOUT_MS}). */
   timeoutMs?: number;
 }
@@ -57,6 +96,18 @@ export interface ReleaseLoaderOptions {
 export interface SeasonLoaderOptions extends ReleaseLoaderOptions {
   /** One season or a list of seasons. */
   seasons: number | number[];
+}
+
+/** A per-season loader: row objects by default, column arrays with `format: "columns"`. */
+export interface SeasonLoader {
+  (opts: SeasonLoaderOptions & { format: "columns" }): Promise<ReleaseColumns>;
+  (opts: SeasonLoaderOptions): Promise<ReleaseRow[]>;
+}
+
+/** A single-asset loader (no season token in its URL). */
+export interface AssetLoader {
+  (opts: ReleaseLoaderOptions & { format: "columns" }): Promise<ReleaseColumns>;
+  (opts?: ReleaseLoaderOptions): Promise<ReleaseRow[]>;
 }
 
 /**
@@ -79,6 +130,11 @@ export function releaseUrl(template: string, season: number): string {
   );
 }
 
+/** The default cell limit for a format on this process's heap. */
+export function defaultMaxCells(format: "rows" | "columns"): number {
+  return Math.floor(getHeapStatistics().heap_size_limit / BYTES_PER_CELL[format]);
+}
+
 /** Normalise `seasons` to integers and check them against `minSeason` (before any fetch). */
 function seasonList(def: ReleaseLoaderDef, seasons: unknown): number[] {
   if (seasons === undefined || seasons === null) {
@@ -98,29 +154,54 @@ function seasonList(def: ReleaseLoaderDef, seasons: unknown): number[] {
   return list;
 }
 
-/** Bytes from whatever the transport handed back (ArrayBuffer, Buffer, typed array). */
+/** Bytes from whatever the transport handed back; no copy when a view spans its buffer. */
 function toArrayBuffer(data: unknown, url: string): ArrayBuffer {
   if (data instanceof ArrayBuffer) return data;
   if (ArrayBuffer.isView(data)) {
-    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength) as ArrayBuffer;
+    const { buffer, byteOffset, byteLength } = data;
+    if (buffer instanceof ArrayBuffer && byteOffset === 0 && byteLength === buffer.byteLength) {
+      return buffer;
+    }
+    return buffer.slice(byteOffset, byteOffset + byteLength) as ArrayBuffer;
   }
   throw new SdvError(`release download did not return bytes: ${url}`);
 }
 
+/** A downloaded asset whose footer has been read (nothing decoded yet). */
+interface Asset {
+  url: string;
+  file: ArrayBuffer;
+  metadata: FileMetaData;
+  /** Top-level columns to decode, in file order. */
+  names: string[];
+  /** Passed to hyparquet: undefined = every column. */
+  columns?: string[];
+  rows: number;
+  /** Leaf columns under `names` (nested columns count each leaf). */
+  leaves: number;
+}
+
+const decodeError = (def: ReleaseLoaderDef, url: string, err: unknown): SdvError =>
+  new SdvError(`${def.fn}: could not decode the parquet asset ${url}`, { cause: err });
+
+function leafCount(node: SchemaTree): number {
+  return node.children.length ? node.children.reduce((n, c) => n + leafCount(c), 0) : 1;
+}
+
 /**
- * Fetch and decode one release asset. `undefined` when the asset is absent
- * (HTTP 404 → {@link NoDataError}); any failed fetch propagates as
+ * Download one release asset and read its footer. `undefined` when the asset is
+ * absent (HTTP 404 → {@link NoDataError}); any failed fetch propagates as
  * `AssetFetchError` — a failed fetch is never reported as an absent season.
  *
- * ponytail: full download, then decode. hyparquet can range-read column chunks
- * (`asyncBufferFromUrl`) — the later optimisation for `columns` on big assets,
- * once the range requests go through `request()` too.
+ * ponytail: full download, then decode. hyparquet can range-read the footer and
+ * single column chunks (`asyncBufferFromUrl`) — the later optimisation for
+ * `columns` and for the size guard, once range requests go through `request()`.
  */
-async function readAsset(
+async function fetchAsset(
   def: ReleaseLoaderDef,
   url: string,
   opts: ReleaseLoaderOptions
-): Promise<ReleaseRow[] | undefined> {
+): Promise<Asset | undefined> {
   let data: unknown;
   try {
     data = await request(RELEASES_FAMILY, {
@@ -138,47 +219,203 @@ async function readAsset(
     const metadata = parquetMetadata(file);
     // Seasons drift (columns added / dropped over the years): only ask a file
     // for the requested columns it has; the rest are null-filled on concat.
-    const have = new Set(parquetSchema(metadata).children.map((c) => c.element.name));
-    const columns = opts.columns?.filter((c) => have.has(c));
-    return await parquetReadObjects({ file, metadata, columns, compressors });
+    const top = parquetSchema(metadata).children;
+    const picked = opts.columns ? top.filter((c) => opts.columns!.includes(c.element.name)) : top;
+    const names = picked.map((c) => c.element.name);
+    return {
+      url,
+      file,
+      metadata,
+      names,
+      columns: opts.columns ? names : undefined,
+      rows: Number(metadata.num_rows),
+      leaves: picked.reduce((n, c) => n + leafCount(c), 0),
+    };
   } catch (err) {
-    throw new SdvError(`${def.fn}: could not decode the parquet asset ${url}`, { cause: err });
+    throw decodeError(def, url, err);
   }
 }
 
-/**
- * Concatenate per-season frames the way sdv-py's `pl.concat(how="diagonal_relaxed")`
- * does: union of columns (first-seen order), missing ones null-filled.
- */
-function concatRows(label: string, frames: ReleaseRow[][], requested?: string[]): ReleaseRow[] {
-  const cols: string[] = [];
-  const seen = new Set<string>();
-  const add = (c: string): void => {
-    if (!seen.has(c)) {
-      seen.add(c);
-      cols.push(c);
+async function decodeRows(def: ReleaseLoaderDef, a: Asset): Promise<ReleaseRow[]> {
+  try {
+    return await parquetReadObjects({ file: a.file, metadata: a.metadata, columns: a.columns, compressors });
+  } catch (err) {
+    throw decodeError(def, a.url, err);
+  }
+}
+
+/** Column-oriented decode: hyparquet's column chunks, never transposed into row objects. */
+async function decodeColumns(def: ReleaseLoaderDef, a: Asset): Promise<ColumnFrame> {
+  const chunks = new Map<string, Array<{ rowStart: number; data: ArrayLike<unknown> }>>();
+  try {
+    await parquetRead({
+      file: a.file,
+      metadata: a.metadata,
+      columns: a.columns,
+      compressors,
+      onChunk: ({ columnName, columnData, rowStart }) => {
+        let list = chunks.get(columnName);
+        if (!list) chunks.set(columnName, (list = []));
+        list.push({ rowStart, data: columnData });
+      },
+    });
+  } catch (err) {
+    throw decodeError(def, a.url, err);
+  }
+  const cols: ReleaseColumns = {};
+  for (const name of a.names) {
+    const parts = (chunks.get(name) ?? []).sort((x, y) => x.rowStart - y.rowStart);
+    chunks.delete(name);
+    // Append into the first chunk (a plain Array from hyparquet) — no full copy.
+    const first = parts[0]?.data;
+    const out: unknown[] = Array.isArray(first) ? first : Array.from(first ?? []);
+    for (let p = 1; p < parts.length; p++) {
+      const d = parts[p].data;
+      for (let i = 0; i < d.length; i++) out.push(d[i]);
     }
-  };
-  for (const frame of frames) if (frame.length) Object.keys(frame[0]).forEach(add);
+    cols[name] = out;
+  }
+  return { rows: a.rows, cols };
+}
+
+/** One season in column form. */
+interface ColumnFrame {
+  rows: number;
+  cols: ReleaseColumns;
+}
+
+/** Union of column names (first-seen order) + requested-but-absent ones, named once. */
+function unionNames(
+  label: string,
+  perFrame: string[][],
+  requested: string[] | undefined,
+  anyRows: boolean
+): string[] {
+  const names: string[] = [];
+  const seen = new Set<string>();
+  for (const list of perFrame) {
+    for (const c of list) {
+      if (!seen.has(c)) {
+        seen.add(c);
+        names.push(c);
+      }
+    }
+  }
   // Requested columns absent from every season still appear (all null) — and
   // are named, since that is usually a typo.
   const absent = (requested ?? []).filter((c) => !seen.has(c));
-  if (absent.length && frames.some((f) => f.length)) {
+  if (absent.length && anyRows) {
     _warn.emit(`${label}: column(s) ${absent.join(", ")} not in the loaded data (null-filled)`);
   }
-  absent.forEach(add);
-  const out: ReleaseRow[] = [];
-  for (const frame of frames) {
-    const complete = frame.length > 0 && Object.keys(frame[0]).length === cols.length;
-    for (const row of frame) {
-      if (complete) {
-        out.push(row);
-        continue;
-      }
-      const filled: ReleaseRow = {};
-      for (const c of cols) filled[c] = row[c] ?? null;
-      out.push(filled);
+  return names.concat(absent);
+}
+
+type Kind = "string" | "number" | "bigint" | "boolean" | "date" | "other";
+
+function kindOf(v: unknown): Kind | undefined {
+  if (v === null || v === undefined) return undefined;
+  const t = typeof v;
+  if (t === "string" || t === "number" || t === "bigint" || t === "boolean") return t;
+  return v instanceof Date ? "date" : "other";
+}
+
+/**
+ * sdv-py concatenates seasons with polars `diagonal_relaxed`, which casts a
+ * column whose dtype differs between seasons to their supertype. A parquet
+ * column has one type per file, so each season's kind is its first non-null
+ * value's. Anything + string → string; boolean + numeric → number; number +
+ * bigint is left to the INT64 policy; nested / other mixes are left alone.
+ */
+function supertype(kinds: Iterable<Kind | undefined>): "string" | "number" | undefined {
+  const set = new Set<Kind>();
+  for (const k of kinds) if (k) set.add(k);
+  if (set.size < 2 || set.has("other")) return undefined;
+  if (set.has("string")) return "string";
+  return set.has("boolean") && [...set].every((k) => k !== "date") ? "number" : undefined;
+}
+
+/** Cast one value to the supertype — an integer id becomes "123", never "123.0". */
+function castTo(v: unknown, target: "string" | "number"): unknown {
+  if (v === null || v === undefined) return v;
+  if (target === "string") {
+    if (typeof v === "string") return v;
+    return v instanceof Date ? v.toISOString() : String(v);
+  }
+  return typeof v === "boolean" ? Number(v) : v;
+}
+
+function firstNonNull(n: number, get: (i: number) => unknown): unknown {
+  for (let i = 0; i < n; i++) {
+    const v = get(i);
+    if (v !== null && v !== undefined) return v;
+  }
+  return undefined;
+}
+
+/**
+ * Concatenate per-season row frames the way sdv-py's `pl.concat(how="diagonal_relaxed")`
+ * does: union of columns, missing ones null-filled (in place), drifted types
+ * cast to their supertype.
+ */
+function concatRows(label: string, frames: ReleaseRow[][], requested?: string[]): ReleaseRow[] {
+  const keys = frames.map((f) => (f.length ? Object.keys(f[0]) : []));
+  const names = unionNames(label, keys, requested, frames.some((f) => f.length > 0));
+  if (frames.length > 1) {
+    for (const c of names) {
+      const target = supertype(frames.map((f) => kindOf(firstNonNull(f.length, (i) => f[i][c]))));
+      if (target) for (const f of frames) for (const r of f) r[c] = castTo(r[c], target);
     }
+  }
+  const out: ReleaseRow[] = frames[0] ?? [];
+  frames.forEach((f, i) => {
+    if (keys[i].length !== names.length) {
+      for (const r of f) for (const c of names) if (!(c in r)) r[c] = null;
+    }
+    if (i > 0) {
+      for (const r of f) out.push(r);
+      frames[i] = []; // release the season's array once copied
+    }
+  });
+  return out;
+}
+
+/** The column-form twin of {@link concatRows}. */
+function concatColumns(label: string, frames: ColumnFrame[], requested?: string[]): ReleaseColumns {
+  const names = unionNames(
+    label,
+    frames.map((f) => Object.keys(f.cols)),
+    requested,
+    frames.some((f) => f.rows > 0)
+  );
+  const out: ReleaseColumns = {};
+  for (const c of names) {
+    if (frames.length > 1) {
+      const target = supertype(
+        frames.map((f) => {
+          const v = f.cols[c];
+          return v ? kindOf(firstNonNull(v.length, (i) => v[i])) : undefined;
+        })
+      );
+      if (target) {
+        for (const f of frames) {
+          const v = f.cols[c];
+          if (v) for (let i = 0; i < v.length; i++) v[i] = castTo(v[i], target);
+        }
+      }
+    }
+    let col: unknown[] | undefined;
+    for (const f of frames) {
+      const part = f.cols[c];
+      delete f.cols[c]; // release as we go
+      if (!col) {
+        col = part ?? new Array<unknown>(f.rows).fill(null);
+      } else if (part) {
+        for (let i = 0; i < part.length; i++) col.push(part[i]);
+      } else {
+        for (let i = 0; i < f.rows; i++) col.push(null);
+      }
+    }
+    out[c] = col ?? [];
   }
   return out;
 }
@@ -215,111 +452,200 @@ function bigintsToNumbers(v: unknown): unknown {
   return v;
 }
 
+/** One column of either format, read and written by index. */
+interface ColumnAccess {
+  n: number;
+  get(i: number): unknown;
+  set(i: number, v: unknown): void;
+}
+
+const rowColumn = (rows: ReleaseRow[], col: string): ColumnAccess => ({
+  n: rows.length,
+  get: (i) => rows[i][col],
+  set: (i, v) => {
+    rows[i][col] = v;
+  },
+});
+
+const arrayColumn = (values: unknown[]): ColumnAccess => ({
+  n: values.length,
+  get: (i) => values[i],
+  set: (i, v) => {
+    values[i] = v;
+  },
+});
+
 /**
  * sdv-py `_cast_ids_int64`: pin an id column to integers when EVERY non-null
  * value survives exactly — integer numbers, bigints, or canonical in-range
  * integer strings (`"007"`, `"1.5"`, `"abc"` leave the column untouched).
- * Strings become BigInt here; {@link applyInt64Policy} then makes them numbers
- * when safe, exactly like any other INT64 column.
+ * Strings become BigInt here; the INT64 policy then makes them numbers when
+ * safe, exactly like any other INT64 column.
  */
-export function castIdInt64(rows: ReleaseRow[], col: string): void {
-  const ok = rows.every((r) => {
-    const v = r[col];
-    if (v === null || v === undefined || typeof v === "bigint") return true;
-    if (typeof v === "number") return Number.isInteger(v);
-    if (typeof v !== "string" || !CANONICAL_INT.test(v)) return false;
-    const b = BigInt(v);
-    return b >= INT64_MIN && b <= INT64_MAX;
-  });
-  if (!ok) return;
-  for (const r of rows) {
-    const v = r[col];
-    if (typeof v === "string") r[col] = BigInt(v);
+function castIdColumn(c: ColumnAccess): void {
+  for (let i = 0; i < c.n; i++) {
+    const v = c.get(i);
+    if (v === null || v === undefined || typeof v === "bigint") continue;
+    if (typeof v === "number" ? Number.isInteger(v) : typeof v === "string" && CANONICAL_INT.test(v)) {
+      if (typeof v === "string") {
+        const b = BigInt(v);
+        if (b < INT64_MIN || b > INT64_MAX) return;
+      }
+      continue;
+    }
+    return;
+  }
+  for (let i = 0; i < c.n; i++) {
+    const v = c.get(i);
+    if (typeof v === "string") c.set(i, BigInt(v));
   }
 }
 
 /**
- * INT64 policy (owner decision 3): hyparquet decodes INT64 as BigInt. A column
- * whose every value is a safe integer (|v| <= Number.MAX_SAFE_INTEGER) becomes
- * plain `number`; otherwise the column is left BigInt (exact) and ONE warning
- * names it. Applies to every column holding a bigint, nested lists/structs
- * included. Mutates and returns `rows`.
+ * INT64 policy (owner decision 3) for one column: hyparquet decodes INT64 as
+ * BigInt. If every value is a safe integer (|v| <= Number.MAX_SAFE_INTEGER) the
+ * column becomes plain `number`; otherwise it is left BigInt (exact) and ONE
+ * warning names it. Nested lists / structs included.
  */
-export function applyInt64Policy(rows: ReleaseRow[], label: string): ReleaseRow[] {
-  if (!rows.length) return rows;
-  for (const col of Object.keys(rows[0])) {
-    let sawBigint = false;
-    const safe = rows.every((r) =>
-      everyBigint(r[col], (b) => {
-        sawBigint = true;
-        return b >= MIN_SAFE && b <= MAX_SAFE;
-      })
-    );
-    if (!sawBigint) continue;
-    if (safe) {
-      for (const r of rows) r[col] = bigintsToNumbers(r[col]);
-    } else {
-      _warn.emit(
-        `${label}: column "${col}" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt`
-      );
+function int64Column(label: string, col: string, c: ColumnAccess): void {
+  let sawBigint = false;
+  for (let i = 0; i < c.n; i++) {
+    const safe = everyBigint(c.get(i), (b) => {
+      sawBigint = true;
+      return b >= MIN_SAFE && b <= MAX_SAFE;
+    });
+    if (!safe) {
+      _warn.emit(`${label}: column "${col}" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt`);
+      return;
     }
   }
+  if (sawBigint) for (let i = 0; i < c.n; i++) c.set(i, bigintsToNumbers(c.get(i)));
+}
+
+/** {@link castIdColumn} over row objects (exported for tests). */
+export function castIdInt64(rows: ReleaseRow[], col: string): void {
+  castIdColumn(rowColumn(rows, col));
+}
+
+/** The INT64 policy over every column of row objects. Mutates and returns `rows`. */
+export function applyInt64Policy(rows: ReleaseRow[], label: string): ReleaseRow[] {
+  if (rows.length) for (const col of Object.keys(rows[0])) int64Column(label, col, rowColumn(rows, col));
   return rows;
 }
 
-/** Boundary post-processing shared by both loader shapes. */
-function finish(def: ReleaseLoaderDef, rows: ReleaseRow[]): ReleaseRow[] {
-  if (!rows.length) return rows;
-  for (const col of def.idInt64 ?? []) if (col in rows[0]) castIdInt64(rows, col);
-  return applyInt64Policy(rows, def.fn);
+function refuse(
+  def: ReleaseLoaderDef,
+  format: "rows" | "columns",
+  rows: number,
+  leaves: number,
+  cells: number,
+  max: number
+): SdvError {
+  const lighter = format === "rows" ? ', `format: "columns"` (column arrays, ~4x lighter)' : "";
+  return new SdvError(
+    `${def.fn}: ${rows.toLocaleString("en-US")} rows × ${leaves} columns ` +
+      `(${cells.toLocaleString("en-US")} cells) is over the ${max.toLocaleString("en-US")}-cell ` +
+      `limit for format "${format}" on this heap. Pass \`columns\` to read fewer columns${lighter}, ` +
+      `or raise the heap (node --max-old-space-size=8192); \`maxCells: Infinity\` skips this check.`
+  );
 }
 
-/**
- * Load a per-season release dataset: every season is fetched in turn, a season
- * with no published asset (HTTP 404) is skipped with one warning, any other
- * failure raises `AssetFetchError`, and the seasons are concatenated (columns
- * unioned, gaps null-filled). Seasons below `minSeason` raise
- * {@link SeasonNotFoundError} before anything is fetched.
- */
-export async function loadRelease(
+/** The loader body shared by both shapes (`seasons === undefined` = single asset). */
+async function load(
   def: ReleaseLoaderDef,
-  opts: SeasonLoaderOptions
-): Promise<ReleaseRow[]> {
-  const seasons = seasonList(def, opts?.seasons);
-  const frames: ReleaseRow[][] = [];
-  const missing: number[] = [];
-  for (const season of seasons) {
-    const rows = await readAsset(def, releaseUrl(def.url, season), opts);
-    if (rows === undefined) missing.push(season);
-    else frames.push(rows);
+  opts: ReleaseLoaderOptions,
+  seasons: Array<number | undefined>
+): Promise<ReleaseRow[] | ReleaseColumns> {
+  const format = opts.format ?? "rows";
+  if (format !== "rows" && format !== "columns") {
+    throw new TypeError(`${def.fn}: format must be "rows" or "columns", got ${JSON.stringify(format)}`);
   }
-  if (missing.length) {
+  const maxCells = opts.maxCells ?? defaultMaxCells(format);
+
+  // Phase 1: download + read every footer. The size guard runs here, before
+  // anything is decoded (row objects are what exhaust the heap).
+  const assets: Array<Asset | undefined> = [];
+  const missing: number[] = [];
+  let rows = 0;
+  let cells = 0;
+  for (const season of seasons) {
+    const url = season === undefined ? def.url : releaseUrl(def.url, season);
+    const asset = await fetchAsset(def, url, opts);
+    if (!asset) {
+      if (season !== undefined) missing.push(season);
+      continue;
+    }
+    rows += asset.rows;
+    cells += asset.rows * asset.leaves;
+    if (cells > maxCells) throw refuse(def, format, rows, asset.leaves, cells, maxCells);
+    assets.push(asset);
+  }
+  if (seasons[0] === undefined && !assets.length) {
+    _warn.emit(`${def.fn}: no published asset (returning no rows)`);
+  } else if (missing.length) {
     _warn.emit(`${def.fn}: no data for season(s) ${missing.join(", ")} (skipped)`);
   }
-  return finish(def, concatRows(def.fn, frames, opts.columns));
+
+  // Phase 2: decode, dropping each download as soon as it is decoded.
+  if (format === "columns") {
+    const frames: ColumnFrame[] = [];
+    for (let i = 0; i < assets.length; i++) {
+      frames.push(await decodeColumns(def, assets[i]!));
+      assets[i] = undefined;
+    }
+    const out = concatColumns(def.fn, frames, opts.columns);
+    for (const [name, values] of Object.entries(out)) {
+      if (def.idInt64?.includes(name)) castIdColumn(arrayColumn(values));
+      int64Column(def.fn, name, arrayColumn(values));
+    }
+    return out;
+  }
+  const frames: ReleaseRow[][] = [];
+  for (let i = 0; i < assets.length; i++) {
+    frames.push(await decodeRows(def, assets[i]!));
+    assets[i] = undefined;
+  }
+  const out = concatRows(def.fn, frames, opts.columns);
+  if (out.length) {
+    for (const col of def.idInt64 ?? []) if (col in out[0]) castIdInt64(out, col);
+  }
+  return applyInt64Policy(out, def.fn);
 }
 
 /**
- * Load a single-asset release dataset (no season token in its URL). An absent
- * asset returns `[]` with a warning; a failed fetch raises `AssetFetchError`.
+ * A per-season loader: every season is fetched in turn, a season with no
+ * published asset (HTTP 404) is skipped with one warning, any other failure
+ * raises `AssetFetchError`, and the seasons are concatenated (columns unioned,
+ * gaps null-filled, drifted types cast to their supertype). Seasons below
+ * `minSeason` raise {@link SeasonNotFoundError} before anything is fetched.
  */
-export async function loadReleaseAsset(
-  def: ReleaseLoaderDef,
-  opts: ReleaseLoaderOptions = {}
-): Promise<ReleaseRow[]> {
-  const rows = await readAsset(def, def.url, opts);
-  if (rows === undefined) {
-    _warn.emit(`${def.fn}: no published asset (returning no rows)`);
-    return [];
-  }
-  return finish(def, concatRows(def.fn, [rows], opts.columns));
+export function seasonLoader(def: ReleaseLoaderDef): SeasonLoader {
+  // async, so a bad `seasons` rejects like every other loader error.
+  return (async (opts: SeasonLoaderOptions) =>
+    load(def, opts ?? {}, seasonList(def, opts?.seasons))) as SeasonLoader;
+}
+
+/**
+ * A single-asset loader (no season token in its URL). An absent asset returns
+ * no rows with a warning; a failed fetch raises `AssetFetchError`.
+ */
+export function assetLoader(def: ReleaseLoaderDef): AssetLoader {
+  return (async (opts: ReleaseLoaderOptions = {}) => load(def, opts, [undefined])) as AssetLoader;
 }
 
 const deprecationWarned = new Set<string>();
 
-/** One-time `DeprecationWarning` for a loader whose release tag was retired. */
-export function warnDeprecatedLoader(fn: string, replacement: string): void {
-  if (deprecationWarned.has(fn)) return;
-  deprecationWarned.add(fn);
-  process.emitWarning(`${fn} is deprecated; use ${replacement} instead.`, "DeprecationWarning");
+/**
+ * A loader whose release tag was retired: forwards to `target()` (a thunk, so
+ * the replacement may be declared later in the module) with a one-time
+ * `DeprecationWarning`.
+ */
+export function deprecatedLoader<L>(fn: string, replacement: string, target: () => L): L {
+  return ((opts: unknown) => {
+    if (!deprecationWarned.has(fn)) {
+      deprecationWarned.add(fn);
+      process.emitWarning(`${fn} is deprecated; use ${replacement} instead.`, "DeprecationWarning");
+    }
+    return (target() as unknown as (o: unknown) => unknown)(opts);
+  }) as unknown as L;
 }

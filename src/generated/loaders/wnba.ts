@@ -6,12 +6,9 @@
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
-  loadRelease,
-  loadReleaseAsset,
+  assetLoader,
+  seasonLoader,
   type ReleaseLoaderDef,
-  type ReleaseLoaderOptions,
-  type ReleaseRow,
-  type SeasonLoaderOptions,
 } from "../../core/releases.js";
 
 const LOAD_WNBA_PBP: ReleaseLoaderDef = {"fn":"load_wnba_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_pbp/play_by_play_{season}.parquet","minSeason":2002};
@@ -23,14 +20,16 @@ const LOAD_WNBA_PBP: ReleaseLoaderDef = {"fn":"load_wnba_pbp","url":"https://git
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.wnba.loadWnbaPbp({ seasons: 2024 });
+ * @example await sdv.wnba.loadWnbaPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
  */
-export const loadWnbaPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_PBP, opts);
+export const loadWnbaPbp = seasonLoader(LOAD_WNBA_PBP);
 /** snake_case alias of {@link loadWnbaPbp} (py/R parity). */
 export const load_wnba_pbp = loadWnbaPbp;
 
@@ -43,14 +42,16 @@ const LOAD_WNBA_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_player_boxs
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerBoxscore({ seasons: 2024 });
  */
-export const loadWnbaPlayerBoxscore = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_PLAYER_BOXSCORE, opts);
+export const loadWnbaPlayerBoxscore = seasonLoader(LOAD_WNBA_PLAYER_BOXSCORE);
 /** snake_case alias of {@link loadWnbaPlayerBoxscore} (py/R parity). */
 export const load_wnba_player_boxscore = loadWnbaPlayerBoxscore;
 
@@ -63,14 +64,16 @@ const LOAD_WNBA_SCHEDULE: ReleaseLoaderDef = {"fn":"load_wnba_schedule","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
  */
-export const loadWnbaSchedule = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_SCHEDULE, opts);
+export const loadWnbaSchedule = seasonLoader(LOAD_WNBA_SCHEDULE);
 /** snake_case alias of {@link loadWnbaSchedule} (py/R parity). */
 export const load_wnba_schedule = loadWnbaSchedule;
 
@@ -83,14 +86,16 @@ const LOAD_WNBA_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_team_boxscore
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamBoxscore({ seasons: 2024 });
  */
-export const loadWnbaTeamBoxscore = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_TEAM_BOXSCORE, opts);
+export const loadWnbaTeamBoxscore = seasonLoader(LOAD_WNBA_TEAM_BOXSCORE);
 /** snake_case alias of {@link loadWnbaTeamBoxscore} (py/R parity). */
 export const load_wnba_team_boxscore = loadWnbaTeamBoxscore;
 
@@ -103,14 +108,16 @@ const LOAD_WNBA_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_draft","url":"https:/
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaDraft({ seasons: 2026 });
  */
-export const loadWnbaDraft = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_DRAFT, opts);
+export const loadWnbaDraft = seasonLoader(LOAD_WNBA_DRAFT);
 /** snake_case alias of {@link loadWnbaDraft} (py/R parity). */
 export const load_wnba_draft = loadWnbaDraft;
 
@@ -123,14 +130,16 @@ const LOAD_WNBA_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_game_rosters",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGameRosters({ seasons: 2024 });
  */
-export const loadWnbaGameRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_GAME_ROSTERS, opts);
+export const loadWnbaGameRosters = seasonLoader(LOAD_WNBA_GAME_ROSTERS);
 /** snake_case alias of {@link loadWnbaGameRosters} (py/R parity). */
 export const load_wnba_game_rosters = loadWnbaGameRosters;
 
@@ -143,14 +152,16 @@ const LOAD_WNBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_officials","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaOfficials({ seasons: 2024 });
  */
-export const loadWnbaOfficials = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_OFFICIALS, opts);
+export const loadWnbaOfficials = seasonLoader(LOAD_WNBA_OFFICIALS);
 /** snake_case alias of {@link loadWnbaOfficials} (py/R parity). */
 export const load_wnba_officials = loadWnbaOfficials;
 
@@ -163,14 +174,16 @@ const LOAD_WNBA_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_player_
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerSeasonStats({ seasons: 2024 });
  */
-export const loadWnbaPlayerSeasonStats = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_PLAYER_SEASON_STATS, opts);
+export const loadWnbaPlayerSeasonStats = seasonLoader(LOAD_WNBA_PLAYER_SEASON_STATS);
 /** snake_case alias of {@link loadWnbaPlayerSeasonStats} (py/R parity). */
 export const load_wnba_player_season_stats = loadWnbaPlayerSeasonStats;
 
@@ -183,14 +196,16 @@ const LOAD_WNBA_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_rosters","url":"htt
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaRosters({ seasons: 2024 });
  */
-export const loadWnbaRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_ROSTERS, opts);
+export const loadWnbaRosters = seasonLoader(LOAD_WNBA_ROSTERS);
 /** snake_case alias of {@link loadWnbaRosters} (py/R parity). */
 export const load_wnba_rosters = loadWnbaRosters;
 
@@ -203,14 +218,16 @@ const LOAD_WNBA_SHOTS: ReleaseLoaderDef = {"fn":"load_wnba_shots","url":"https:/
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaShots({ seasons: 2024 });
  */
-export const loadWnbaShots = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_SHOTS, opts);
+export const loadWnbaShots = seasonLoader(LOAD_WNBA_SHOTS);
 /** snake_case alias of {@link loadWnbaShots} (py/R parity). */
 export const load_wnba_shots = loadWnbaShots;
 
@@ -223,14 +240,16 @@ const LOAD_WNBA_STANDINGS: ReleaseLoaderDef = {"fn":"load_wnba_standings","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStandings({ seasons: 2024 });
  */
-export const loadWnbaStandings = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STANDINGS, opts);
+export const loadWnbaStandings = seasonLoader(LOAD_WNBA_STANDINGS);
 /** snake_case alias of {@link loadWnbaStandings} (py/R parity). */
 export const load_wnba_standings = loadWnbaStandings;
 
@@ -243,14 +262,16 @@ const LOAD_WNBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_team_seas
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamSeasonStats({ seasons: 2024 });
  */
-export const loadWnbaTeamSeasonStats = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_TEAM_SEASON_STATS, opts);
+export const loadWnbaTeamSeasonStats = seasonLoader(LOAD_WNBA_TEAM_SEASON_STATS);
 /** snake_case alias of {@link loadWnbaTeamSeasonStats} (py/R parity). */
 export const load_wnba_team_season_stats = loadWnbaTeamSeasonStats;
 
@@ -263,14 +284,16 @@ const LOAD_WNBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_player_cro
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerCrosswalk({ seasons: 2026 });
  */
-export const loadWnbaPlayerCrosswalk = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_PLAYER_CROSSWALK, opts);
+export const loadWnbaPlayerCrosswalk = seasonLoader(LOAD_WNBA_PLAYER_CROSSWALK);
 /** snake_case alias of {@link loadWnbaPlayerCrosswalk} (py/R parity). */
 export const load_wnba_player_crosswalk = loadWnbaPlayerCrosswalk;
 
@@ -283,14 +306,16 @@ const LOAD_WNBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_schedule
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaScheduleCrosswalk({ seasons: 2026 });
  */
-export const loadWnbaScheduleCrosswalk = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_SCHEDULE_CROSSWALK, opts);
+export const loadWnbaScheduleCrosswalk = seasonLoader(LOAD_WNBA_SCHEDULE_CROSSWALK);
 /** snake_case alias of {@link loadWnbaScheduleCrosswalk} (py/R parity). */
 export const load_wnba_schedule_crosswalk = loadWnbaScheduleCrosswalk;
 
@@ -303,14 +328,16 @@ const LOAD_WNBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_team_crosswa
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamCrosswalk({ seasons: 2026 });
  */
-export const loadWnbaTeamCrosswalk = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_TEAM_CROSSWALK, opts);
+export const loadWnbaTeamCrosswalk = seasonLoader(LOAD_WNBA_TEAM_CROSSWALK);
 /** snake_case alias of {@link loadWnbaTeamCrosswalk} (py/R parity). */
 export const load_wnba_team_crosswalk = loadWnbaTeamCrosswalk;
 
@@ -323,14 +350,16 @@ const LOAD_WNBA_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_wnba_player_core","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2003.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerCore({ seasons: 2025 });
  */
-export const loadWnbaPlayerCore = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_PLAYER_CORE, opts);
+export const loadWnbaPlayerCore = seasonLoader(LOAD_WNBA_PLAYER_CORE);
 /** snake_case alias of {@link loadWnbaPlayerCore} (py/R parity). */
 export const load_wnba_player_core = loadWnbaPlayerCore;
 
@@ -343,14 +372,16 @@ const LOAD_WNBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_wnba_player_impact
  *
  * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerImpact({ seasons: 2024 });
  */
-export const loadWnbaPlayerImpact = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_PLAYER_IMPACT, opts);
+export const loadWnbaPlayerImpact = seasonLoader(LOAD_WNBA_PLAYER_IMPACT);
 /** snake_case alias of {@link loadWnbaPlayerImpact} (py/R parity). */
 export const load_wnba_player_impact = loadWnbaPlayerImpact;
 
@@ -363,14 +394,16 @@ const LOAD_WNBA_STATS_COACHES: ReleaseLoaderDef = {"fn":"load_wnba_stats_coaches
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsCoaches({ seasons: 2026 });
  */
-export const loadWnbaStatsCoaches = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_COACHES, opts);
+export const loadWnbaStatsCoaches = seasonLoader(LOAD_WNBA_STATS_COACHES);
 /** snake_case alias of {@link loadWnbaStatsCoaches} (py/R parity). */
 export const load_wnba_stats_coaches = loadWnbaStatsCoaches;
 
@@ -383,14 +416,16 @@ const LOAD_WNBA_STATS_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_stats_draft","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsDraft({ seasons: 2025 });
  */
-export const loadWnbaStatsDraft = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_DRAFT, opts);
+export const loadWnbaStatsDraft = seasonLoader(LOAD_WNBA_STATS_DRAFT);
 /** snake_case alias of {@link loadWnbaStatsDraft} (py/R parity). */
 export const load_wnba_stats_draft = loadWnbaStatsDraft;
 
@@ -403,14 +438,16 @@ const LOAD_WNBA_STATS_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsGameRosters({ seasons: 2026 });
  */
-export const loadWnbaStatsGameRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_GAME_ROSTERS, opts);
+export const loadWnbaStatsGameRosters = seasonLoader(LOAD_WNBA_STATS_GAME_ROSTERS);
 /** snake_case alias of {@link loadWnbaStatsGameRosters} (py/R parity). */
 export const load_wnba_stats_game_rosters = loadWnbaStatsGameRosters;
 
@@ -423,14 +460,16 @@ const LOAD_WNBA_STATS_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_stats_offic
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsOfficials({ seasons: 2026 });
  */
-export const loadWnbaStatsOfficials = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_OFFICIALS, opts);
+export const loadWnbaStatsOfficials = seasonLoader(LOAD_WNBA_STATS_OFFICIALS);
 /** snake_case alias of {@link loadWnbaStatsOfficials} (py/R parity). */
 export const load_wnba_stats_officials = loadWnbaStatsOfficials;
 
@@ -443,14 +482,16 @@ const LOAD_WNBA_STATS_PBP: ReleaseLoaderDef = {"fn":"load_wnba_stats_pbp","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.wnba.loadWnbaStatsPbp({ seasons: 2025 });
+ * @example await sdv.wnba.loadWnbaStatsPbp({ seasons: 2025, columns: ['game_id', 'period', 'clock', 'event_type', 'description'] });
  */
-export const loadWnbaStatsPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_PBP, opts);
+export const loadWnbaStatsPbp = seasonLoader(LOAD_WNBA_STATS_PBP);
 /** snake_case alias of {@link loadWnbaStatsPbp} (py/R parity). */
 export const load_wnba_stats_pbp = loadWnbaStatsPbp;
 
@@ -463,14 +504,16 @@ const LOAD_WNBA_STATS_POSSESSIONS: ReleaseLoaderDef = {"fn":"load_wnba_stats_pos
  *
  * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPossessions({ seasons: 2025 });
  */
-export const loadWnbaStatsPossessions = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_POSSESSIONS, opts);
+export const loadWnbaStatsPossessions = seasonLoader(LOAD_WNBA_STATS_POSSESSIONS);
 /** snake_case alias of {@link loadWnbaStatsPossessions} (py/R parity). */
 export const load_wnba_stats_possessions = loadWnbaStatsPossessions;
 
@@ -483,14 +526,16 @@ const LOAD_WNBA_STATS_GAME_LINEUPS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
  *
  * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsGameLineups({ seasons: 2025 });
  */
-export const loadWnbaStatsGameLineups = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_GAME_LINEUPS, opts);
+export const loadWnbaStatsGameLineups = seasonLoader(LOAD_WNBA_STATS_GAME_LINEUPS);
 /** snake_case alias of {@link loadWnbaStatsGameLineups} (py/R parity). */
 export const load_wnba_stats_game_lineups = loadWnbaStatsGameLineups;
 
@@ -503,14 +548,16 @@ const LOAD_WNBA_STATS_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_wnba_stat
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPlayerBoxscores({ seasons: 2026 });
  */
-export const loadWnbaStatsPlayerBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_PLAYER_BOXSCORES, opts);
+export const loadWnbaStatsPlayerBoxscores = seasonLoader(LOAD_WNBA_STATS_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadWnbaStatsPlayerBoxscores} (py/R parity). */
 export const load_wnba_stats_player_boxscores = loadWnbaStatsPlayerBoxscores;
 
@@ -523,14 +570,16 @@ const LOAD_WNBA_STATS_PLAYER_GAME_LOGS: ReleaseLoaderDef = {"fn":"load_wnba_stat
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsPlayerGameLogs({ seasons: 2025 });
  */
-export const loadWnbaStatsPlayerGameLogs = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_PLAYER_GAME_LOGS, opts);
+export const loadWnbaStatsPlayerGameLogs = seasonLoader(LOAD_WNBA_STATS_PLAYER_GAME_LOGS);
 /** snake_case alias of {@link loadWnbaStatsPlayerGameLogs} (py/R parity). */
 export const load_wnba_stats_player_game_logs = loadWnbaStatsPlayerGameLogs;
 
@@ -543,14 +592,16 @@ const LOAD_WNBA_STATS_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_rosters
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsRosters({ seasons: 2026 });
  */
-export const loadWnbaStatsRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_ROSTERS, opts);
+export const loadWnbaStatsRosters = seasonLoader(LOAD_WNBA_STATS_ROSTERS);
 /** snake_case alias of {@link loadWnbaStatsRosters} (py/R parity). */
 export const load_wnba_stats_rosters = loadWnbaStatsRosters;
 
@@ -563,14 +614,16 @@ const LOAD_WNBA_STATS_SCHEDULES: ReleaseLoaderDef = {"fn":"load_wnba_stats_sched
  *
  * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsSchedules({ seasons: 2025 });
  */
-export const loadWnbaStatsSchedules = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_SCHEDULES, opts);
+export const loadWnbaStatsSchedules = seasonLoader(LOAD_WNBA_STATS_SCHEDULES);
 /** snake_case alias of {@link loadWnbaStatsSchedules} (py/R parity). */
 export const load_wnba_stats_schedules = loadWnbaStatsSchedules;
 
@@ -583,14 +636,16 @@ const LOAD_WNBA_STATS_SHOTS: ReleaseLoaderDef = {"fn":"load_wnba_stats_shots","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsShots({ seasons: 2026 });
  */
-export const loadWnbaStatsShots = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_SHOTS, opts);
+export const loadWnbaStatsShots = seasonLoader(LOAD_WNBA_STATS_SHOTS);
 /** snake_case alias of {@link loadWnbaStatsShots} (py/R parity). */
 export const load_wnba_stats_shots = loadWnbaStatsShots;
 
@@ -603,14 +658,16 @@ const LOAD_WNBA_STATS_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_wnba_stats_
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaStatsTeamBoxscores({ seasons: 2026 });
  */
-export const loadWnbaStatsTeamBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_STATS_TEAM_BOXSCORES, opts);
+export const loadWnbaStatsTeamBoxscores = seasonLoader(LOAD_WNBA_STATS_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadWnbaStatsTeamBoxscores} (py/R parity). */
 export const load_wnba_stats_team_boxscores = loadWnbaStatsTeamBoxscores;
 
@@ -625,13 +682,15 @@ const LOAD_WNBA_GROUPS: ReleaseLoaderDef = {"fn":"load_wnba_groups","url":"https
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroups();
  */
-export const loadWnbaGroups = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_WNBA_GROUPS, opts);
+export const loadWnbaGroups = assetLoader(LOAD_WNBA_GROUPS);
 /** snake_case alias of {@link loadWnbaGroups} (py/R parity). */
 export const load_wnba_groups = loadWnbaGroups;
 
@@ -646,13 +705,15 @@ const LOAD_WNBA_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wnba_group_seasons
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroupSeasons();
  */
-export const loadWnbaGroupSeasons = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_WNBA_GROUP_SEASONS, opts);
+export const loadWnbaGroupSeasons = assetLoader(LOAD_WNBA_GROUP_SEASONS);
 /** snake_case alias of {@link loadWnbaGroupSeasons} (py/R parity). */
 export const load_wnba_group_seasons = loadWnbaGroupSeasons;
 
@@ -667,13 +728,15 @@ const LOAD_WNBA_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_wnba_group_aliases
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroupAliases();
  */
-export const loadWnbaGroupAliases = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_WNBA_GROUP_ALIASES, opts);
+export const loadWnbaGroupAliases = assetLoader(LOAD_WNBA_GROUP_ALIASES);
 /** snake_case alias of {@link loadWnbaGroupAliases} (py/R parity). */
 export const load_wnba_group_aliases = loadWnbaGroupAliases;
 
@@ -688,13 +751,15 @@ const LOAD_WNBA_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wnba_team_gro
  *
  * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadWnbaTeamGroupSeasons = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_WNBA_TEAM_GROUP_SEASONS, opts);
+export const loadWnbaTeamGroupSeasons = seasonLoader(LOAD_WNBA_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadWnbaTeamGroupSeasons} (py/R parity). */
 export const load_wnba_team_group_seasons = loadWnbaTeamGroupSeasons;

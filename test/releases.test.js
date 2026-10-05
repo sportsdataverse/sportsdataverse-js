@@ -1,6 +1,9 @@
 import should from 'should';
-import { readFileSync } from 'node:fs';
-import { parse } from 'yaml';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { getHeapStatistics } from 'node:v8';
+import { parse, stringify } from 'yaml';
 import { parquetReadObjects } from 'hyparquet';
 import { compressors } from 'hyparquet-compressors';
 import sdv, {
@@ -16,8 +19,10 @@ import {
   _warn,
   applyInt64Policy,
   castIdInt64,
+  defaultMaxCells,
   releaseUrl,
 } from '../dist/core/releases.js';
+import { loadReleaseLoaders } from '../tools/codegen/render-loaders.mjs';
 
 // No-network tests for the generated release loaders (src/generated/loaders/,
 // runtime src/core/releases.ts) against REAL release assets — see
@@ -78,6 +83,20 @@ describe('release loaders', () => {
     it('is not on the playground (no loader in endpoints.json)', () => {
       const json = readFileSync(new URL('../docs/src/playground/endpoints.json', import.meta.url), 'utf8');
       json.should.not.match(/load_cfb_pbp|releases\/download/);
+    });
+
+    it('codegen fails closed on a stub entry and on a pbp loader without example columns', () => {
+      const dir = mkdtempSync(join(tmpdir(), 'sdv-releases-'));
+      const write = (ld) =>
+        writeFileSync(join(dir, 'releases.yaml'), stringify({ bases: { b: 'https://x/' }, loaders: [ld] }));
+      try {
+        write({ fn: 'load_x_stuff', league: 'x', base: 'b', url: 'a.parquet', tag: 't', stub: true });
+        (() => loadReleaseLoaders(dir)).should.throw(/is a stub/);
+        write({ fn: 'load_x_pbp', league: 'x', base: 'b', url: 'a_{season}.parquet', tag: 't' });
+        (() => loadReleaseLoaders(dir)).should.throw(/needs an EXAMPLE_COLUMNS entry/);
+      } finally {
+        rmSync(dir, { recursive: true, force: true });
+      }
     });
 
     it('fills {season} and {season + N} like sdv-py spec.render_url', () => {
@@ -225,6 +244,113 @@ describe('release loaders', () => {
     });
   });
 
+  describe('release loaders: size guard (maxCells)', () => {
+    // cfb_ratings_2024: 134 rows × 18 leaf columns = 2,412 cells.
+    it('refuses before decoding with a catchable SdvError naming the escape hatches', async () => {
+      const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
+      use(t);
+      const err = await sdv.cfb.loadCfbRatings({ seasons: 2024, maxCells: 1000 }).catch((e) => e);
+      err.should.be.instanceOf(SdvError);
+      (err instanceof AssetFetchError).should.be.false();
+      err.message.should.match(/134 rows × 18 columns \(2,412 cells\)/);
+      err.message.should.match(/`columns`/);
+      err.message.should.match(/format: "columns"/);
+      err.message.should.match(/--max-old-space-size/);
+      err.message.should.match(/maxCells: Infinity/);
+    });
+
+    it('sums cells over the seasons and stops downloading at the one that crosses', async () => {
+      const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
+      use(t);
+      const err = await sdv.cfb
+        .loadCfbRatings({ seasons: [2022, 2023, 2024], maxCells: 2 * 2412 - 1 })
+        .catch((e) => e);
+      err.should.be.instanceOf(SdvError);
+      err.message.should.match(/268 rows × 18 columns \(4,824 cells\)/);
+      t.calls.length.should.equal(2);
+    });
+
+    it('counts only the requested columns; Infinity disables the check', async () => {
+      use(releasesTransport(() => 'cfb_ratings_2024.parquet'));
+      (await sdv.cfb.loadCfbRatings({ seasons: 2024, columns: ['team_id', 'net_rank'], maxCells: 268 })).length.should.equal(134);
+      (await sdv.cfb.loadCfbRatings({ seasons: 2024, maxCells: Infinity })).length.should.equal(134);
+    });
+
+    it('defaults scale with the V8 heap: limit / 100 for rows, / 30 for columns', () => {
+      const limit = getHeapStatistics().heap_size_limit;
+      defaultMaxCells('rows').should.equal(Math.floor(limit / 100));
+      defaultMaxCells('columns').should.equal(Math.floor(limit / 30));
+    });
+
+    it('a format: "columns" read is checked against its own limit', async () => {
+      use(releasesTransport(() => 'cfb_ratings_2024.parquet'));
+      const err = await sdv.cfb.loadCfbRatings({ seasons: 2024, format: 'columns', maxCells: 10 }).catch((e) => e);
+      err.should.be.instanceOf(SdvError);
+      err.message.should.match(/limit for format "columns"/);
+      err.message.should.not.match(/~4x lighter/);
+    });
+  });
+
+  describe('release loaders: format "columns"', () => {
+    it('returns one array per column, with the same id / INT64 handling as rows', async () => {
+      use(releasesTransport(() => 'cfb_ratings_2024.parquet'));
+      const cols = await sdv.cfb.loadCfbRatings({ seasons: 2024, format: 'columns' });
+      Object.keys(cols).length.should.equal(18);
+      Object.values(cols).every((v) => Array.isArray(v) && v.length === 134).should.be.true();
+      cols.team_id.every(Number.isInteger).should.be.true(); // STRING id_int64 -> numbers
+      cols.season.every((s) => s === 2024).should.be.true(); // INT64 -> numbers
+      const rows = await sdv.cfb.loadCfbRatings({ seasons: 2024 });
+      rows.map((r) => r.adj_net).should.eql(cols.adj_net);
+    });
+
+    it('decodes the SNAPPY asset and honours `columns`', async () => {
+      use(releasesTransport(() => 'ftn_charting_2022_head100.parquet'));
+      const cols = await sdv.nfl.loadNflFtnCharting({ seasons: 2022, format: 'columns', columns: ['date_pulled', 'is_rpo'] });
+      Object.keys(cols).should.eql(['is_rpo', 'date_pulled']); // file order
+      cols.date_pulled[0].should.be.instanceOf(Date);
+      cols.is_rpo.length.should.equal(100);
+    });
+
+    it('single asset, absent asset, and drifting seasons', async () => {
+      use(releasesTransport((u) => (u.includes('nhl_groups') ? 'nhl_groups.parquet' : u.includes('_2022.') ? 'ftn_charting_2022_head100.parquet' : u.includes('_2023.') ? 'cfb_ratings_2024.parquet' : 404)));
+      (await sdv.nhl.loadNhlGroups({ format: 'columns' })).league.length.should.equal(21);
+      const drift = await sdv.nfl.loadNflFtnCharting({ seasons: [2022, 2023], format: 'columns' });
+      drift.team_id.length.should.equal(234);
+      should(drift.team_id[0]).be.null();
+      should(drift.nflverse_game_id[233]).be.null();
+      (await sdv.nfl.loadNflFtnCharting({ seasons: 2024, format: 'columns' })).should.eql({});
+    });
+
+    it('rejects an unknown format', async () => {
+      (await sdv.nhl.loadNhlGroups({ format: 'arrow' }).catch((e) => e)).should.be.instanceOf(TypeError);
+    });
+  });
+
+  describe('release loaders: type drift across seasons (diagonal_relaxed supercast)', () => {
+    // cfb_team_portal_2024 ships team_id INT64, cfb_ratings_2024 ships it STRING.
+    // polars: pl.concat([portal, ratings], how="diagonal_relaxed") -> team_id String,
+    // 370 rows, head ['2', '5', '6'], tail ['239', '66'] (fixtures README).
+    const route = (u) => (u.includes('_2023.') ? 'cfb_team_portal_2024.parquet' : 'cfb_ratings_2024.parquet');
+
+    it('int in one season + string in another -> strings for every row, "2" never "2.0"', async () => {
+      use(releasesTransport(route));
+      const rows = await sdv.cfb.loadCfbSchedule({ seasons: [2023, 2024] }); // no id_int64
+      rows.length.should.equal(370);
+      rows.every((r) => typeof r.team_id === 'string').should.be.true();
+      rows.slice(0, 3).map((r) => r.team_id).should.eql(['2', '5', '6']);
+      rows.slice(-2).map((r) => r.team_id).should.eql(['239', '66']);
+      const cols = await sdv.cfb.loadCfbSchedule({ seasons: [2023, 2024], format: 'columns' });
+      cols.team_id.should.eql(rows.map((r) => r.team_id));
+    });
+
+    it('then id_int64 pins it back to integers (py: String supercast, then _cast_ids_int64)', async () => {
+      use(releasesTransport(route));
+      const rows = await sdv.cfb.loadCfbRatings({ seasons: [2023, 2024] });
+      rows.every((r) => Number.isInteger(r.team_id)).should.be.true();
+      rows.slice(0, 3).map((r) => r.team_id).should.eql([2, 5, 6]);
+    });
+  });
+
   describe('release loaders: INT64 policy', () => {
     const raw = async () => {
       const b = fixture('cfb_ratings_2024.parquet');
@@ -241,8 +367,21 @@ describe('release loaders', () => {
       warnings.should.eql([]);
     });
 
+    it('real data: the CFB pbp play `id` (> 2^53) stays BigInt, exact, with one warning', async () => {
+      use(releasesTransport(() => 'cfb_pbp_2024_head20.parquet'));
+      const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024 });
+      rows.length.should.equal(20);
+      Object.keys(rows[0]).length.should.equal(506);
+      rows.every((r) => typeof r.id === 'bigint').should.be.true();
+      rows[0].id.should.equal(401628579101849903n); // pyarrow reads the same value
+      rows[0].game_id.should.equal(401628579); // a safe INT64 in the same file -> number
+      warnings.should.eql([
+        'load_cfb_pbp: column "id" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt',
+      ]);
+    });
+
     it('a column with an unsafe value stays BigInt (exact) with one warning naming it', async () => {
-      // No release carries an id >= 2^53, so the unsafe branch needs one bumped value.
+      // The same branch on the small ratings fixture, with one value bumped.
       const rows = await raw();
       rows[5].games = 2n ** 60n;
       applyInt64Policy(rows, 'load_cfb_ratings');

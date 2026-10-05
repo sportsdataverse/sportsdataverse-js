@@ -6,10 +6,8 @@
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
-  loadRelease,
+  seasonLoader,
   type ReleaseLoaderDef,
-  type ReleaseRow,
-  type SeasonLoaderOptions,
 } from "../../core/releases.js";
 
 const LOAD_PHF_PBP: ReleaseLoaderDef = {"fn":"load_phf_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/phf_pbp/play_by_play_{season}.parquet","minSeason":2016};
@@ -21,14 +19,16 @@ const LOAD_PHF_PBP: ReleaseLoaderDef = {"fn":"load_phf_pbp","url":"https://githu
  *
  * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2016.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.pwhl.loadPhfPbp({ seasons: 2023 });
+ * @example await sdv.pwhl.loadPhfPbp({ seasons: 2023, columns: ['game_id', 'period_id', 'play_type', 'play_description'] });
  */
-export const loadPhfPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PHF_PBP, opts);
+export const loadPhfPbp = seasonLoader(LOAD_PHF_PBP);
 /** snake_case alias of {@link loadPhfPbp} (py/R parity). */
 export const load_phf_pbp = loadPhfPbp;
 
@@ -41,14 +41,16 @@ const LOAD_PHF_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_phf_player_boxsc
  *
  * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2016.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfPlayerBoxscores({ seasons: 2023 });
  */
-export const loadPhfPlayerBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PHF_PLAYER_BOXSCORES, opts);
+export const loadPhfPlayerBoxscores = seasonLoader(LOAD_PHF_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadPhfPlayerBoxscores} (py/R parity). */
 export const load_phf_player_boxscores = loadPhfPlayerBoxscores;
 
@@ -61,14 +63,16 @@ const LOAD_PHF_SCHEDULES: ReleaseLoaderDef = {"fn":"load_phf_schedules","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2016.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfSchedules({ seasons: 2023 });
  */
-export const loadPhfSchedules = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PHF_SCHEDULES, opts);
+export const loadPhfSchedules = seasonLoader(LOAD_PHF_SCHEDULES);
 /** snake_case alias of {@link loadPhfSchedules} (py/R parity). */
 export const load_phf_schedules = loadPhfSchedules;
 
@@ -81,14 +85,16 @@ const LOAD_PHF_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_phf_team_boxscores
  *
  * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2016.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPhfTeamBoxscores({ seasons: 2023 });
  */
-export const loadPhfTeamBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PHF_TEAM_BOXSCORES, opts);
+export const loadPhfTeamBoxscores = seasonLoader(LOAD_PHF_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadPhfTeamBoxscores} (py/R parity). */
 export const load_phf_team_boxscores = loadPhfTeamBoxscores;
 
@@ -101,14 +107,16 @@ const LOAD_PWHL_GAME_INFO: ReleaseLoaderDef = {"fn":"load_pwhl_game_info","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlGameInfo({ seasons: 2024 });
  */
-export const loadPwhlGameInfo = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_GAME_INFO, opts);
+export const loadPwhlGameInfo = seasonLoader(LOAD_PWHL_GAME_INFO);
 /** snake_case alias of {@link loadPwhlGameInfo} (py/R parity). */
 export const load_pwhl_game_info = loadPwhlGameInfo;
 
@@ -121,14 +129,16 @@ const LOAD_PWHL_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_pwhl_game_rosters",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlGameRosters({ seasons: 2024 });
  */
-export const loadPwhlGameRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_GAME_ROSTERS, opts);
+export const loadPwhlGameRosters = seasonLoader(LOAD_PWHL_GAME_ROSTERS);
 /** snake_case alias of {@link loadPwhlGameRosters} (py/R parity). */
 export const load_pwhl_game_rosters = loadPwhlGameRosters;
 
@@ -141,14 +151,16 @@ const LOAD_PWHL_SHIFTS: ReleaseLoaderDef = {"fn":"load_pwhl_shifts","url":"https
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlShifts({ seasons: 2025 });
  */
-export const loadPwhlShifts = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_SHIFTS, opts);
+export const loadPwhlShifts = seasonLoader(LOAD_PWHL_SHIFTS);
 /** snake_case alias of {@link loadPwhlShifts} (py/R parity). */
 export const load_pwhl_shifts = loadPwhlShifts;
 
@@ -161,14 +173,16 @@ const LOAD_PWHL_GOALIE_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_goalie_box
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlGoalieBoxscores({ seasons: 2024 });
  */
-export const loadPwhlGoalieBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_GOALIE_BOXSCORES, opts);
+export const loadPwhlGoalieBoxscores = seasonLoader(LOAD_PWHL_GOALIE_BOXSCORES);
 /** snake_case alias of {@link loadPwhlGoalieBoxscores} (py/R parity). */
 export const load_pwhl_goalie_boxscores = loadPwhlGoalieBoxscores;
 
@@ -181,14 +195,16 @@ const LOAD_PWHL_OFFICIALS: ReleaseLoaderDef = {"fn":"load_pwhl_officials","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlOfficials({ seasons: 2024 });
  */
-export const loadPwhlOfficials = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_OFFICIALS, opts);
+export const loadPwhlOfficials = seasonLoader(LOAD_PWHL_OFFICIALS);
 /** snake_case alias of {@link loadPwhlOfficials} (py/R parity). */
 export const load_pwhl_officials = loadPwhlOfficials;
 
@@ -201,14 +217,16 @@ const LOAD_PWHL_PBP: ReleaseLoaderDef = {"fn":"load_pwhl_pbp","url":"https://git
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.pwhl.loadPwhlPbp({ seasons: 2024 });
+ * @example await sdv.pwhl.loadPwhlPbp({ seasons: 2024, columns: ['game_id', 'period_of_game', 'event', 'event_type', 'strength_state'] });
  */
-export const loadPwhlPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_PBP, opts);
+export const loadPwhlPbp = seasonLoader(LOAD_PWHL_PBP);
 /** snake_case alias of {@link loadPwhlPbp} (py/R parity). */
 export const load_pwhl_pbp = loadPwhlPbp;
 
@@ -221,14 +239,16 @@ const LOAD_PWHL_XG_PBP: ReleaseLoaderDef = {"fn":"load_pwhl_xg_pbp","url":"https
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.pwhl.loadPwhlXgPbp({ seasons: 2025 });
+ * @example await sdv.pwhl.loadPwhlXgPbp({ seasons: 2025, columns: ['game_id', 'period_of_game', 'sec_from_start', 'event_type'] });
  */
-export const loadPwhlXgPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_XG_PBP, opts);
+export const loadPwhlXgPbp = seasonLoader(LOAD_PWHL_XG_PBP);
 /** snake_case alias of {@link loadPwhlXgPbp} (py/R parity). */
 export const load_pwhl_xg_pbp = loadPwhlXgPbp;
 
@@ -241,14 +261,16 @@ const LOAD_PWHL_PENALTY_SUMMARY: ReleaseLoaderDef = {"fn":"load_pwhl_penalty_sum
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlPenaltySummary({ seasons: 2024 });
  */
-export const loadPwhlPenaltySummary = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_PENALTY_SUMMARY, opts);
+export const loadPwhlPenaltySummary = seasonLoader(LOAD_PWHL_PENALTY_SUMMARY);
 /** snake_case alias of {@link loadPwhlPenaltySummary} (py/R parity). */
 export const load_pwhl_penalty_summary = loadPwhlPenaltySummary;
 
@@ -261,14 +283,16 @@ const LOAD_PWHL_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_player_box
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlPlayerBoxscores({ seasons: 2024 });
  */
-export const loadPwhlPlayerBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_PLAYER_BOXSCORES, opts);
+export const loadPwhlPlayerBoxscores = seasonLoader(LOAD_PWHL_PLAYER_BOXSCORES);
 /** snake_case alias of {@link loadPwhlPlayerBoxscores} (py/R parity). */
 export const load_pwhl_player_boxscores = loadPwhlPlayerBoxscores;
 
@@ -281,14 +305,16 @@ const LOAD_PWHL_ROSTERS: ReleaseLoaderDef = {"fn":"load_pwhl_rosters","url":"htt
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlRosters({ seasons: 2024 });
  */
-export const loadPwhlRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_ROSTERS, opts);
+export const loadPwhlRosters = seasonLoader(LOAD_PWHL_ROSTERS);
 /** snake_case alias of {@link loadPwhlRosters} (py/R parity). */
 export const load_pwhl_rosters = loadPwhlRosters;
 
@@ -301,14 +327,16 @@ const LOAD_PWHL_SCHEDULES: ReleaseLoaderDef = {"fn":"load_pwhl_schedules","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlSchedules({ seasons: 2024 });
  */
-export const loadPwhlSchedules = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_SCHEDULES, opts);
+export const loadPwhlSchedules = seasonLoader(LOAD_PWHL_SCHEDULES);
 /** snake_case alias of {@link loadPwhlSchedules} (py/R parity). */
 export const load_pwhl_schedules = loadPwhlSchedules;
 
@@ -321,14 +349,16 @@ const LOAD_PWHL_SCORING_SUMMARY: ReleaseLoaderDef = {"fn":"load_pwhl_scoring_sum
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlScoringSummary({ seasons: 2024 });
  */
-export const loadPwhlScoringSummary = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_SCORING_SUMMARY, opts);
+export const loadPwhlScoringSummary = seasonLoader(LOAD_PWHL_SCORING_SUMMARY);
 /** snake_case alias of {@link loadPwhlScoringSummary} (py/R parity). */
 export const load_pwhl_scoring_summary = loadPwhlScoringSummary;
 
@@ -341,14 +371,16 @@ const LOAD_PWHL_SHOOTOUT: ReleaseLoaderDef = {"fn":"load_pwhl_shootout","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlShootout({ seasons: 2026 });
  */
-export const loadPwhlShootout = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_SHOOTOUT, opts);
+export const loadPwhlShootout = seasonLoader(LOAD_PWHL_SHOOTOUT);
 /** snake_case alias of {@link loadPwhlShootout} (py/R parity). */
 export const load_pwhl_shootout = loadPwhlShootout;
 
@@ -361,14 +393,16 @@ const LOAD_PWHL_SHOTS_BY_PERIOD: ReleaseLoaderDef = {"fn":"load_pwhl_shots_by_pe
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlShotsByPeriod({ seasons: 2024 });
  */
-export const loadPwhlShotsByPeriod = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_SHOTS_BY_PERIOD, opts);
+export const loadPwhlShotsByPeriod = seasonLoader(LOAD_PWHL_SHOTS_BY_PERIOD);
 /** snake_case alias of {@link loadPwhlShotsByPeriod} (py/R parity). */
 export const load_pwhl_shots_by_period = loadPwhlShotsByPeriod;
 
@@ -381,14 +415,16 @@ const LOAD_PWHL_SKATER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_skater_box
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlSkaterBoxscores({ seasons: 2024 });
  */
-export const loadPwhlSkaterBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_SKATER_BOXSCORES, opts);
+export const loadPwhlSkaterBoxscores = seasonLoader(LOAD_PWHL_SKATER_BOXSCORES);
 /** snake_case alias of {@link loadPwhlSkaterBoxscores} (py/R parity). */
 export const load_pwhl_skater_boxscores = loadPwhlSkaterBoxscores;
 
@@ -401,14 +437,16 @@ const LOAD_PWHL_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_pwhl_team_boxscor
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlTeamBoxscores({ seasons: 2024 });
  */
-export const loadPwhlTeamBoxscores = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_TEAM_BOXSCORES, opts);
+export const loadPwhlTeamBoxscores = seasonLoader(LOAD_PWHL_TEAM_BOXSCORES);
 /** snake_case alias of {@link loadPwhlTeamBoxscores} (py/R parity). */
 export const load_pwhl_team_boxscores = loadPwhlTeamBoxscores;
 
@@ -421,13 +459,15 @@ const LOAD_PWHL_THREE_STARS: ReleaseLoaderDef = {"fn":"load_pwhl_three_stars","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.pwhl.loadPwhlThreeStars({ seasons: 2024 });
  */
-export const loadPwhlThreeStars = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_PWHL_THREE_STARS, opts);
+export const loadPwhlThreeStars = seasonLoader(LOAD_PWHL_THREE_STARS);
 /** snake_case alias of {@link loadPwhlThreeStars} (py/R parity). */
 export const load_pwhl_three_stars = loadPwhlThreeStars;

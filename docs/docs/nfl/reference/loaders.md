@@ -9,9 +9,10 @@ sidebar_position: 50
 
 # `sdv.nfl` — dataset loaders
 
-29 loaders reading the published nflverse data releases / sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias, resolves to an array of plain row objects, and accepts `columns` (read only those) and `timeoutMs`.
+29 loaders reading the published nflverse data releases / sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
-- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps.
+- **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding a loader checks rows × columns (summed over the seasons) against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
+- **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning; any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
 - **Integers:** INT64 columns come back as `number` when every value is a safe integer, otherwise as `BigInt` with one warning naming the column.
 - **Runtime:** Node only. Downloads go through the `releases` transport family (see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is downloaded whole, then decoded.
 
@@ -55,10 +56,12 @@ Release: [pbp](https://github.com/nflverse/nflverse-data/releases/tag/pbp) · as
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1999) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.nfl.loadNflPbp({ seasons: 2024 });
+const rows = await sdv.nfl.loadNflPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
 // snake_case alias (py/R parity): sdv.nfl.load_nfl_pbp(...)
 ```
 
@@ -70,10 +73,12 @@ Release: [nfl_model_pbp](https://github.com/sportsdataverse/sportsdataverse-data
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1999) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024 });
+const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id', 'play_id', 'desc', 'epa', 'wp'] });
 // snake_case alias (py/R parity): sdv.nfl.load_nfl_model_pbp(...)
 ```
 
@@ -85,6 +90,8 @@ Release: [nfl_ratings_weekly](https://github.com/sportsdataverse/sportsdataverse
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1999) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -100,6 +107,8 @@ Release: [nfl_ngs_passing](https://github.com/sportsdataverse/sportsdataverse-da
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2009) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -115,6 +124,8 @@ Release: [rosters](https://github.com/nflverse/nflverse-data/releases/tag/roster
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1920) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -130,6 +141,8 @@ Release: [weekly_rosters](https://github.com/nflverse/nflverse-data/releases/tag
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -145,6 +158,8 @@ Release: [depth_charts](https://github.com/nflverse/nflverse-data/releases/tag/d
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2001) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -160,6 +175,8 @@ Release: [injuries](https://github.com/nflverse/nflverse-data/releases/tag/injur
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2009) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -175,6 +192,8 @@ Release: [snap_counts](https://github.com/nflverse/nflverse-data/releases/tag/sn
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2012) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -190,10 +209,12 @@ Release: [pbp_participation](https://github.com/nflverse/nflverse-data/releases/
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
-const rows = await sdv.nfl.loadNflPbpParticipation({ seasons: 2024 });
+const rows = await sdv.nfl.loadNflPbpParticipation({ seasons: 2024, columns: ['nflverse_game_id', 'play_id', 'offense_formation', 'defenders_in_box'] });
 // snake_case alias (py/R parity): sdv.nfl.load_nfl_pbp_participation(...)
 ```
 
@@ -205,6 +226,8 @@ Release: [ftn_charting](https://github.com/nflverse/nflverse-data/releases/tag/f
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2022) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -224,6 +247,8 @@ Release: [espn_nfl_usage_players](https://github.com/sportsdataverse/sportsdatav
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -243,6 +268,8 @@ Built from ESPN play participants, which the NFL feed carries from 2014; earlier
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -262,6 +289,8 @@ Built from ESPN play participants (tackler / assist ids), which the NFL feed car
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -281,6 +310,8 @@ Built from ESPN play participants, which the NFL feed carries from 2014; earlier
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -300,6 +331,8 @@ Published 2002-2026 (2005 is built from ESPN's play-text-less 2005 feed, so it i
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -319,6 +352,8 @@ Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A sea
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -338,6 +373,8 @@ No asset for 2005-2007 (2005 has no play text upstream); a season with no asset 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -357,6 +394,8 @@ No asset for 2005-2007 (2005 has no play text upstream); a season with no asset 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -376,6 +415,8 @@ No asset for 2005-2007 (2005 has no play text upstream); a season with no asset 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -395,6 +436,8 @@ Published from 2007 (no block participants earlier); a season with no asset rais
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -414,6 +457,8 @@ Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A sea
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -433,6 +478,8 @@ Published 2002-2026 (2005 is thin: ESPN's 2005 feed carries no play text). A sea
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -452,6 +499,8 @@ One row per (season, team, head coach). The coach comes from the nflverse schedu
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -470,6 +519,8 @@ One season-less file: every published coach_tendencies season summed per head co
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -488,6 +539,8 @@ One season-less file: one row per group lineage (the league, subdivisions, confe
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -506,6 +559,8 @@ One season-less file: one row per group per season it existed, with its name, sh
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -524,6 +579,8 @@ One season-less file: every name, abbreviation, slug and source id that a source
 | option | type | required | description |
 |---|---|---|---|
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js
@@ -543,6 +600,8 @@ One row per team per season: the SDV subdivision, conference and division group 
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1970) |
 | `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
 | `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
 
 ```js

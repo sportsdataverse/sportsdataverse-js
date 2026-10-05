@@ -6,12 +6,9 @@
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
-  loadRelease,
-  loadReleaseAsset,
+  assetLoader,
+  seasonLoader,
   type ReleaseLoaderDef,
-  type ReleaseLoaderOptions,
-  type ReleaseRow,
-  type SeasonLoaderOptions,
 } from "../../core/releases.js";
 
 const LOAD_MBB_PBP: ReleaseLoaderDef = {"fn":"load_mbb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_pbp/play_by_play_{season}.parquet","minSeason":2002};
@@ -23,14 +20,16 @@ const LOAD_MBB_PBP: ReleaseLoaderDef = {"fn":"load_mbb_pbp","url":"https://githu
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.mbb.loadMbbPbp({ seasons: 2024 });
+ * @example await sdv.mbb.loadMbbPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
  */
-export const loadMbbPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_PBP, opts);
+export const loadMbbPbp = seasonLoader(LOAD_MBB_PBP);
 /** snake_case alias of {@link loadMbbPbp} (py/R parity). */
 export const load_mbb_pbp = loadMbbPbp;
 
@@ -43,14 +42,16 @@ const LOAD_MBB_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_mbb_player_boxsco
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerBoxscore({ seasons: 2024 });
  */
-export const loadMbbPlayerBoxscore = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_PLAYER_BOXSCORE, opts);
+export const loadMbbPlayerBoxscore = seasonLoader(LOAD_MBB_PLAYER_BOXSCORE);
 /** snake_case alias of {@link loadMbbPlayerBoxscore} (py/R parity). */
 export const load_mbb_player_boxscore = loadMbbPlayerBoxscore;
 
@@ -63,14 +64,16 @@ const LOAD_MBB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_mbb_schedule","url":"htt
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbSchedule({ seasons: 2024 });
  */
-export const loadMbbSchedule = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_SCHEDULE, opts);
+export const loadMbbSchedule = seasonLoader(LOAD_MBB_SCHEDULE);
 /** snake_case alias of {@link loadMbbSchedule} (py/R parity). */
 export const load_mbb_schedule = loadMbbSchedule;
 
@@ -83,14 +86,16 @@ const LOAD_MBB_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_mbb_team_boxscore",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbTeamBoxscore({ seasons: 2024 });
  */
-export const loadMbbTeamBoxscore = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_TEAM_BOXSCORE, opts);
+export const loadMbbTeamBoxscore = seasonLoader(LOAD_MBB_TEAM_BOXSCORE);
 /** snake_case alias of {@link loadMbbTeamBoxscore} (py/R parity). */
 export const load_mbb_team_boxscore = loadMbbTeamBoxscore;
 
@@ -103,14 +108,16 @@ const LOAD_MBB_RATINGS: ReleaseLoaderDef = {"fn":"load_mbb_ratings","url":"https
  *
  * @param opts.seasons - a season or a list of seasons (>= 2006); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2006.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbRatings({ seasons: 2025 });
  */
-export const loadMbbRatings = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_RATINGS, opts);
+export const loadMbbRatings = seasonLoader(LOAD_MBB_RATINGS);
 /** snake_case alias of {@link loadMbbRatings} (py/R parity). */
 export const load_mbb_ratings = loadMbbRatings;
 
@@ -123,14 +130,16 @@ const LOAD_MBB_PLAYER_VALUE: ReleaseLoaderDef = {"fn":"load_mbb_player_value","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2006); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2006.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerValue({ seasons: 2025 });
  */
-export const loadMbbPlayerValue = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_PLAYER_VALUE, opts);
+export const loadMbbPlayerValue = seasonLoader(LOAD_MBB_PLAYER_VALUE);
 /** snake_case alias of {@link loadMbbPlayerValue} (py/R parity). */
 export const load_mbb_player_value = loadMbbPlayerValue;
 
@@ -143,14 +152,16 @@ const LOAD_MBB_SHOTS: ReleaseLoaderDef = {"fn":"load_mbb_shots","url":"https://g
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbShots({ seasons: 2025 });
  */
-export const loadMbbShots = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_SHOTS, opts);
+export const loadMbbShots = seasonLoader(LOAD_MBB_SHOTS);
 /** snake_case alias of {@link loadMbbShots} (py/R parity). */
 export const load_mbb_shots = loadMbbShots;
 
@@ -163,14 +174,16 @@ const LOAD_MBB_STANDINGS: ReleaseLoaderDef = {"fn":"load_mbb_standings","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2003.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbStandings({ seasons: 2025 });
  */
-export const loadMbbStandings = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_STANDINGS, opts);
+export const loadMbbStandings = seasonLoader(LOAD_MBB_STANDINGS);
 /** snake_case alias of {@link loadMbbStandings} (py/R parity). */
 export const load_mbb_standings = loadMbbStandings;
 
@@ -183,14 +196,16 @@ const LOAD_MBB_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_mbb_player_se
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerSeasonStats({ seasons: 2025 });
  */
-export const loadMbbPlayerSeasonStats = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_PLAYER_SEASON_STATS, opts);
+export const loadMbbPlayerSeasonStats = seasonLoader(LOAD_MBB_PLAYER_SEASON_STATS);
 /** snake_case alias of {@link loadMbbPlayerSeasonStats} (py/R parity). */
 export const load_mbb_player_season_stats = loadMbbPlayerSeasonStats;
 
@@ -203,14 +218,16 @@ const LOAD_MBB_ROSTERS: ReleaseLoaderDef = {"fn":"load_mbb_rosters","url":"https
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbRosters({ seasons: 2025 });
  */
-export const loadMbbRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_ROSTERS, opts);
+export const loadMbbRosters = seasonLoader(LOAD_MBB_ROSTERS);
 /** snake_case alias of {@link loadMbbRosters} (py/R parity). */
 export const load_mbb_rosters = loadMbbRosters;
 
@@ -223,14 +240,16 @@ const LOAD_MBB_OFFICIALS: ReleaseLoaderDef = {"fn":"load_mbb_officials","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbOfficials({ seasons: 2025 });
  */
-export const loadMbbOfficials = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_OFFICIALS, opts);
+export const loadMbbOfficials = seasonLoader(LOAD_MBB_OFFICIALS);
 /** snake_case alias of {@link loadMbbOfficials} (py/R parity). */
 export const load_mbb_officials = loadMbbOfficials;
 
@@ -243,14 +262,16 @@ const LOAD_MBB_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_mbb_game_rosters","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbGameRosters({ seasons: 2025 });
  */
-export const loadMbbGameRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_GAME_ROSTERS, opts);
+export const loadMbbGameRosters = seasonLoader(LOAD_MBB_GAME_ROSTERS);
 /** snake_case alias of {@link loadMbbGameRosters} (py/R parity). */
 export const load_mbb_game_rosters = loadMbbGameRosters;
 
@@ -263,14 +284,16 @@ const LOAD_MBB_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_mbb_team_season
  *
  * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2003.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbTeamSeasonStats({ seasons: 2025 });
  */
-export const loadMbbTeamSeasonStats = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_TEAM_SEASON_STATS, opts);
+export const loadMbbTeamSeasonStats = seasonLoader(LOAD_MBB_TEAM_SEASON_STATS);
 /** snake_case alias of {@link loadMbbTeamSeasonStats} (py/R parity). */
 export const load_mbb_team_season_stats = loadMbbTeamSeasonStats;
 
@@ -283,14 +306,16 @@ const LOAD_MBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_mbb_player_cross
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerCrosswalk({ seasons: 2026 });
  */
-export const loadMbbPlayerCrosswalk = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_PLAYER_CROSSWALK, opts);
+export const loadMbbPlayerCrosswalk = seasonLoader(LOAD_MBB_PLAYER_CROSSWALK);
 /** snake_case alias of {@link loadMbbPlayerCrosswalk} (py/R parity). */
 export const load_mbb_player_crosswalk = loadMbbPlayerCrosswalk;
 
@@ -303,14 +328,16 @@ const LOAD_MBB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_mbb_schedule_c
  *
  * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbScheduleCrosswalk({ seasons: 2026 });
  */
-export const loadMbbScheduleCrosswalk = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_SCHEDULE_CROSSWALK, opts);
+export const loadMbbScheduleCrosswalk = seasonLoader(LOAD_MBB_SCHEDULE_CROSSWALK);
 /** snake_case alias of {@link loadMbbScheduleCrosswalk} (py/R parity). */
 export const load_mbb_schedule_crosswalk = loadMbbScheduleCrosswalk;
 
@@ -323,14 +350,16 @@ const LOAD_MBB_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_mbb_team_crosswalk
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbTeamCrosswalk({ seasons: 2026 });
  */
-export const loadMbbTeamCrosswalk = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_TEAM_CROSSWALK, opts);
+export const loadMbbTeamCrosswalk = seasonLoader(LOAD_MBB_TEAM_CROSSWALK);
 /** snake_case alias of {@link loadMbbTeamCrosswalk} (py/R parity). */
 export const load_mbb_team_crosswalk = loadMbbTeamCrosswalk;
 
@@ -343,14 +372,16 @@ const LOAD_MBB_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_mbb_player_core","url
  *
  * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2003.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerCore({ seasons: 2025 });
  */
-export const loadMbbPlayerCore = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_PLAYER_CORE, opts);
+export const loadMbbPlayerCore = seasonLoader(LOAD_MBB_PLAYER_CORE);
 /** snake_case alias of {@link loadMbbPlayerCore} (py/R parity). */
 export const load_mbb_player_core = loadMbbPlayerCore;
 
@@ -363,14 +394,16 @@ const LOAD_NCAA_MBB_PBP: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_pbp","url":"htt
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.mbb.loadNcaaMbbPbp({ seasons: 2024 });
+ * @example await sdv.mbb.loadNcaaMbbPbp({ seasons: 2024, columns: ['game_date', 'home', 'away', 'period', 'event_type', 'shot_value'] });
  */
-export const loadNcaaMbbPbp = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_PBP, opts);
+export const loadNcaaMbbPbp = seasonLoader(LOAD_NCAA_MBB_PBP);
 /** snake_case alias of {@link loadNcaaMbbPbp} (py/R parity). */
 export const load_ncaa_mbb_pbp = loadNcaaMbbPbp;
 
@@ -383,14 +416,16 @@ const LOAD_NCAA_MBB_SCHEDULE: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_schedule",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbSchedule({ seasons: 2024 });
  */
-export const loadNcaaMbbSchedule = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_SCHEDULE, opts);
+export const loadNcaaMbbSchedule = seasonLoader(LOAD_NCAA_MBB_SCHEDULE);
 /** snake_case alias of {@link loadNcaaMbbSchedule} (py/R parity). */
 export const load_ncaa_mbb_schedule = loadNcaaMbbSchedule;
 
@@ -403,14 +438,16 @@ const LOAD_NCAA_MBB_PLAYER_BOX: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_player_b
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbPlayerBox({ seasons: 2024 });
  */
-export const loadNcaaMbbPlayerBox = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_PLAYER_BOX, opts);
+export const loadNcaaMbbPlayerBox = seasonLoader(LOAD_NCAA_MBB_PLAYER_BOX);
 /** snake_case alias of {@link loadNcaaMbbPlayerBox} (py/R parity). */
 export const load_ncaa_mbb_player_box = loadNcaaMbbPlayerBox;
 
@@ -423,14 +460,16 @@ const LOAD_NCAA_MBB_TEAM_BOX: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_team_box",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbTeamBox({ seasons: 2024 });
  */
-export const loadNcaaMbbTeamBox = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_TEAM_BOX, opts);
+export const loadNcaaMbbTeamBox = seasonLoader(LOAD_NCAA_MBB_TEAM_BOX);
 /** snake_case alias of {@link loadNcaaMbbTeamBox} (py/R parity). */
 export const load_ncaa_mbb_team_box = loadNcaaMbbTeamBox;
 
@@ -443,14 +482,16 @@ const LOAD_NCAA_MBB_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_rosters","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbRosters({ seasons: 2024 });
  */
-export const loadNcaaMbbRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_ROSTERS, opts);
+export const loadNcaaMbbRosters = seasonLoader(LOAD_NCAA_MBB_ROSTERS);
 /** snake_case alias of {@link loadNcaaMbbRosters} (py/R parity). */
 export const load_ncaa_mbb_rosters = loadNcaaMbbRosters;
 
@@ -463,14 +504,16 @@ const LOAD_NCAA_MBB_TEAM_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_team_r
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbTeamRosters({ seasons: 2024 });
  */
-export const loadNcaaMbbTeamRosters = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_TEAM_ROSTERS, opts);
+export const loadNcaaMbbTeamRosters = seasonLoader(LOAD_NCAA_MBB_TEAM_ROSTERS);
 /** snake_case alias of {@link loadNcaaMbbTeamRosters} (py/R parity). */
 export const load_ncaa_mbb_team_rosters = loadNcaaMbbTeamRosters;
 
@@ -483,14 +526,16 @@ const LOAD_NCAA_MBB_TEAM_IDS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_team_ids",
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbTeamIds({ seasons: 2024 });
  */
-export const loadNcaaMbbTeamIds = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_TEAM_IDS, opts);
+export const loadNcaaMbbTeamIds = seasonLoader(LOAD_NCAA_MBB_TEAM_IDS);
 /** snake_case alias of {@link loadNcaaMbbTeamIds} (py/R parity). */
 export const load_ncaa_mbb_team_ids = loadNcaaMbbTeamIds;
 
@@ -503,14 +548,16 @@ const LOAD_NCAA_MBB_POSSESSIONS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_possess
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
- * @example await sdv.mbb.loadNcaaMbbPossessions({ seasons: 2024 });
+ * @example await sdv.mbb.loadNcaaMbbPossessions({ seasons: 2024, columns: ['game_date', 'home', 'away', 'poss_num', 'poss_team'] });
  */
-export const loadNcaaMbbPossessions = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_POSSESSIONS, opts);
+export const loadNcaaMbbPossessions = seasonLoader(LOAD_NCAA_MBB_POSSESSIONS);
 /** snake_case alias of {@link loadNcaaMbbPossessions} (py/R parity). */
 export const load_ncaa_mbb_possessions = loadNcaaMbbPossessions;
 
@@ -523,14 +570,16 @@ const LOAD_NCAA_MBB_LINEUPS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_lineups","u
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbLineups({ seasons: 2024 });
  */
-export const loadNcaaMbbLineups = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_LINEUPS, opts);
+export const loadNcaaMbbLineups = seasonLoader(LOAD_NCAA_MBB_LINEUPS);
 /** snake_case alias of {@link loadNcaaMbbLineups} (py/R parity). */
 export const load_ncaa_mbb_lineups = loadNcaaMbbLineups;
 
@@ -543,14 +592,16 @@ const LOAD_NCAA_MBB_MATCHUP_STINTS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_matc
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbMatchupStints({ seasons: 2024 });
  */
-export const loadNcaaMbbMatchupStints = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_MATCHUP_STINTS, opts);
+export const loadNcaaMbbMatchupStints = seasonLoader(LOAD_NCAA_MBB_MATCHUP_STINTS);
 /** snake_case alias of {@link loadNcaaMbbMatchupStints} (py/R parity). */
 export const load_ncaa_mbb_matchup_stints = loadNcaaMbbMatchupStints;
 
@@ -563,14 +614,16 @@ const LOAD_NCAA_MBB_SHOTS: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_shots","url":
  *
  * @param opts.seasons - a season or a list of seasons (>= 2019); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2019.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbShots({ seasons: 2024 });
  */
-export const loadNcaaMbbShots = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_SHOTS, opts);
+export const loadNcaaMbbShots = seasonLoader(LOAD_NCAA_MBB_SHOTS);
 /** snake_case alias of {@link loadNcaaMbbShots} (py/R parity). */
 export const load_ncaa_mbb_shots = loadNcaaMbbShots;
 
@@ -583,14 +636,16 @@ const LOAD_NCAA_MBB_RAPM_WITHIN_TEAM: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_ra
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2010.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbRapmWithinTeam({ seasons: 2024 });
  */
-export const loadNcaaMbbRapmWithinTeam = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_RAPM_WITHIN_TEAM, opts);
+export const loadNcaaMbbRapmWithinTeam = seasonLoader(LOAD_NCAA_MBB_RAPM_WITHIN_TEAM);
 /** snake_case alias of {@link loadNcaaMbbRapmWithinTeam} (py/R parity). */
 export const load_ncaa_mbb_rapm_within_team = loadNcaaMbbRapmWithinTeam;
 
@@ -603,14 +658,16 @@ const LOAD_NCAA_MBB_RAPM: ReleaseLoaderDef = {"fn":"load_ncaa_mbb_rapm","url":"h
  *
  * @param opts.seasons - a season or a list of seasons (>= 2011); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2011.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadNcaaMbbRapm({ seasons: 2024 });
  */
-export const loadNcaaMbbRapm = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_NCAA_MBB_RAPM, opts);
+export const loadNcaaMbbRapm = seasonLoader(LOAD_NCAA_MBB_RAPM);
 /** snake_case alias of {@link loadNcaaMbbRapm} (py/R parity). */
 export const load_ncaa_mbb_rapm = loadNcaaMbbRapm;
 
@@ -625,13 +682,15 @@ const LOAD_MBB_GROUPS: ReleaseLoaderDef = {"fn":"load_mbb_groups","url":"https:/
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbGroups();
  */
-export const loadMbbGroups = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_MBB_GROUPS, opts);
+export const loadMbbGroups = assetLoader(LOAD_MBB_GROUPS);
 /** snake_case alias of {@link loadMbbGroups} (py/R parity). */
 export const load_mbb_groups = loadMbbGroups;
 
@@ -646,13 +705,15 @@ const LOAD_MBB_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_mbb_group_seasons",
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbGroupSeasons();
  */
-export const loadMbbGroupSeasons = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_MBB_GROUP_SEASONS, opts);
+export const loadMbbGroupSeasons = assetLoader(LOAD_MBB_GROUP_SEASONS);
 /** snake_case alias of {@link loadMbbGroupSeasons} (py/R parity). */
 export const load_mbb_group_seasons = loadMbbGroupSeasons;
 
@@ -667,13 +728,15 @@ const LOAD_MBB_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_mbb_group_aliases",
  *
  * @param opts - optional `columns` / `timeoutMs`.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns `[]` with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbGroupAliases();
  */
-export const loadMbbGroupAliases = (opts: ReleaseLoaderOptions = {}): Promise<ReleaseRow[]> =>
-  loadReleaseAsset(LOAD_MBB_GROUP_ALIASES, opts);
+export const loadMbbGroupAliases = assetLoader(LOAD_MBB_GROUP_ALIASES);
 /** snake_case alias of {@link loadMbbGroupAliases} (py/R parity). */
 export const load_mbb_group_aliases = loadMbbGroupAliases;
 
@@ -688,13 +751,15 @@ const LOAD_MBB_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_mbb_team_group
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row. INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
  * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbTeamGroupSeasons({ seasons: 2024 });
  */
-export const loadMbbTeamGroupSeasons = (opts: SeasonLoaderOptions): Promise<ReleaseRow[]> =>
-  loadRelease(LOAD_MBB_TEAM_GROUP_SEASONS, opts);
+export const loadMbbTeamGroupSeasons = seasonLoader(LOAD_MBB_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadMbbTeamGroupSeasons} (py/R parity). */
 export const load_mbb_team_group_seasons = loadMbbTeamGroupSeasons;
