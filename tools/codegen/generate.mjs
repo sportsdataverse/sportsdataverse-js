@@ -302,7 +302,7 @@ const STANDALONE_NS_EXAMPLE = {
   fox:
     "// Fox Sports uses a public apikey + api-version query pair\n" +
     "// (both default out of the box — override apikey if you have your own):\n" +
-    "await sdv.fox.fox_scoreboard({ sport: 'cfb' });\n",
+    "await sdv.fox.fox_api_scoreboard({ sport: 'cfb' });\n",
   yahoo:
     "// Yahoo Sports is keyless but rejects requests without browser-y headers —\n" +
     "// pass Origin/Referer via `headers` (two hosts share the `yahoo` namespace):\n" +
@@ -545,7 +545,8 @@ function loadFlatWrappers() {
       : `\`${doc.api}_<endpoint>\``;
     for (const ep of doc.endpoints ?? []) {
       if (ep.legacy_short) FLAT_LEGACY_SHORT.set(`${doc.api}.${ep.short}`, ep.legacy_short);
-      const publicName = names.get(ep.short);
+      // An overlay addition may pin its pre-v4 name (`public_name`, see vendor.yaml).
+      const publicName = ep.public_name ?? names.get(ep.short);
       wrappers.push({
         short: ep.short,
         // sdv-py's public name, when it isn't JS's pre-v4 `<api>_<short>`.

@@ -162,8 +162,11 @@ npm run codegen                 # then regenerate as usual
 - A new param `transform:` upstream fails `npm run codegen` until it is ported to
   `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
   `tools/codegen/param-transforms.mjs`.
-- JS-owned families (`fox`, `odds_api`, `hockeytech`, `yahoo_scores`, `recruiting`)
-  are edited here directly, as before.
+- JS-owned families (`odds_api`, `hockeytech`, `yahoo_scores`, `recruiting`)
+  are edited here directly, as before. (`fox` is vendored from sdv-py's `fox_api`
+  since v4; its JS-only deprecated routes live in `overlay/fox.yaml`.)
+- An overlay addition may set `public_name:` to keep a pre-v4 name instead of the
+  family pattern's (used for the dead Fox routes sdv-py dropped).
 - **Public names are sdv-py's (v4).** `generate.mjs` ports py's emit-time rename
   layer, so never rename by hand: ESPN shorts get py's convention rename
   (`athlete`→`player`, `event`→`game`, …) plus the vendored `espn_rename_map.yaml`;

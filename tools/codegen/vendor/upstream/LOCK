@@ -6,6 +6,7 @@ a39a62f6b5ae5975e055223ba032358df26147b0  endpoints/espn_cdn.yaml
 29ba208cbdb23a9e61353e9b7f828ac97bf7f3e8  endpoints/espn_fitt_v3.yaml
 89ec300e3c60071ebdaea106394de776cc02e959  endpoints/espn_site_v2.yaml
 804fa3ffce99a55a8a94dd6631297ca32cefdabb  endpoints/espn_web_v3.yaml
+2b8ffb3b4c64cf0c64699a4da8320c659db2f65b  endpoints/fox_api.yaml
 956c3191fef514d159cb4e459b89f8ef7802673b  endpoints/kenpom.yaml
 93e04d7ea7ac63fe2b76b1d7983c0154f65ca599  endpoints/leagues.yaml
 7355d9ed54cef6accfbab5f531d181f9953e3cf5  endpoints/mlb_api.yaml
@@ -39,6 +40,7 @@ d328cf7262675469702dbe9374394f3d874ebc6c  py/sportsdataverse/cfb/sports247.py
 81d6eda02e054dfbc8f6846c0a029c79247bd1f1  py/sportsdataverse/football/cfl/cfl_espn_ext.py
 614d3fdd8c0684ad8f34753e2df62c62ecb37ffc  py/sportsdataverse/football/ufl/ufl_espn_ext.py
 6b2207ccd6b053b2be7f3233b2fcf347f10c0231  py/sportsdataverse/football/xfl/xfl_espn_ext.py
+401e5540a572e11ed605df2c23ae402d0571e340  py/sportsdataverse/fox/fox_api.py
 1ceb42733e94e30aed2cacb04455d8ab5c7d6822  py/sportsdataverse/hockey/mch/mch_espn_ext.py
 8189663c213bac6d0aab1bb49f4acb9ee8fedeb6  py/sportsdataverse/hockey/wch/wch_espn_ext.py
 a915210f8977d128222891b1a9c7fe9473bd2e02  py/sportsdataverse/mbb/kenpom.py

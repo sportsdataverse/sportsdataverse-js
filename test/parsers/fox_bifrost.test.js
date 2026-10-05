@@ -233,12 +233,28 @@ describe('fox flat-API family metadata (flat-contract style)', () => {
   });
 
   it('carries the api-version query param (defaulted) on every endpoint the spec declares it', () => {
-    // foxpolls is the lone spec endpoint with no api-version param; all others
-    // pin it (default 1.1) so the bifrost data tier resolves out of the box.
-    for (const w of family().filter((w) => w.short !== 'foxpolls')) {
+    // foxpolls is the lone spec endpoint with no api-version param, and scorechip
+    // 400s when it is sent (sdv-py fox_api probe 2026-10-05); all others pin it
+    // (default 1.1) so the bifrost data tier resolves out of the box.
+    for (const w of family().filter((w) => !['foxpolls', 'scorechip'].includes(w.short))) {
       const apiVersion = w.queryParams.find((q) => q.queryKey === 'api-version');
       should.exist(apiVersion, `api-version missing on ${w.short}`);
       apiVersion.default.should.equal('1.1', `api-version default wrong on ${w.short}`);
+    }
+  });
+
+  it('scorechip sends no api-version (the route 400s with it)', () => {
+    family().find((w) => w.short === 'scorechip').queryParams.map((q) => q.queryKey).should.eql(['apikey']);
+  });
+
+  it('is vendored from sdv-py fox_api: py names, pre-v4 fox_* names as aliases, 5 dead routes deprecated', () => {
+    const rows = family();
+    rows.filter((w) => !w.deprecated).every((w) => w.publicName === `fox_api_${w.short}`).should.be.true();
+    const dead = rows.filter((w) => w.deprecated);
+    dead.map((w) => w.short).sort().should.eql(['explore_favorite', 'fs_feed', 'fs_images', 'fs_layouts', 'fs_videos']);
+    for (const w of dead) {
+      should(w.publicName).be.undefined(); // keeps its pre-v4 fox_<short> name, no new name invented
+      w.deprecated.should.match(/fox_api.yaml/); // points at sdv-py's probe record
     }
   });
 

@@ -12323,6 +12323,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "scoreboard",
+    "publicName": "fox_api_scoreboard",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12354,6 +12355,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "scorechip",
+    "publicName": "fox_api_scorechip",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12372,11 +12374,6 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "name": "apikey",
         "queryKey": "apikey",
         "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
-      },
-      {
-        "name": "api_version",
-        "queryKey": "api-version",
-        "default": "1.1"
       }
     ],
     "parser": "parse_fox_list",
@@ -12384,6 +12381,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "topevents_scoreboard_segment",
+    "publicName": "fox_api_topevents_scoreboard_segment",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12411,6 +12409,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_conferences",
+    "publicName": "fox_api_league_conferences",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12438,6 +12437,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_header",
+    "publicName": "fox_api_league_header",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12465,6 +12465,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_odds",
+    "publicName": "fox_api_league_odds",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12496,6 +12497,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_playernews",
+    "publicName": "fox_api_league_playernews",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12523,6 +12525,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_polls",
+    "publicName": "fox_api_league_polls",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12550,6 +12553,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_schedule",
+    "publicName": "fox_api_league_schedule",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12577,6 +12581,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_scores",
+    "publicName": "fox_api_league_scores",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12604,6 +12609,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_scores_segment",
+    "publicName": "fox_api_league_scores_segment",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12638,6 +12644,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_standings",
+    "publicName": "fox_api_league_standings",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12665,6 +12672,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_stats",
+    "publicName": "fox_api_league_stats",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12692,6 +12700,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_stats_con",
+    "publicName": "fox_api_league_stats_con",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12732,6 +12741,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "league_teamnav",
+    "publicName": "fox_api_league_teamnav",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12759,6 +12769,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_data",
+    "publicName": "fox_api_event_data",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12789,6 +12800,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_matchup",
+    "publicName": "fox_api_event_matchup",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12819,6 +12831,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_odds",
+    "publicName": "fox_api_event_odds",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12849,6 +12862,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_recap",
+    "publicName": "fox_api_event_recap",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12879,6 +12893,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "event_standings",
+    "publicName": "fox_api_event_standings",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12909,6 +12924,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_gamelog",
+    "publicName": "fox_api_team_gamelog",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12939,6 +12955,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_header",
+    "publicName": "fox_api_team_header",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12969,6 +12986,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_roster",
+    "publicName": "fox_api_team_roster",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -12999,6 +13017,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_standings",
+    "publicName": "fox_api_team_standings",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13029,6 +13048,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_stats",
+    "publicName": "fox_api_team_stats",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13059,6 +13079,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "explore_browse",
+    "publicName": "fox_api_explore_browse",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13085,34 +13106,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/fox/explore_browse"
   },
   {
-    "short": "explore_favorite",
-    "flat": true,
-    "api": "fox",
-    "host": "https://api.foxsports.com",
-    "scope": "universal",
-    "path": "/bifrost/v1/explore/favorite/{section}/main",
-    "pathParams": [
-      {
-        "name": "section"
-      }
-    ],
-    "queryParams": [
-      {
-        "name": "apikey",
-        "queryKey": "apikey",
-        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
-      },
-      {
-        "name": "api_version",
-        "queryKey": "api-version",
-        "default": "1.1"
-      }
-    ],
-    "parser": "parse_fox_list",
-    "returnsSchema": "native/fox/explore_favorite"
-  },
-  {
     "short": "explore_odds",
+    "publicName": "fox_api_explore_odds",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13136,6 +13131,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "search_content",
+    "publicName": "fox_api_search_content",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13163,6 +13159,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "search_entities",
+    "publicName": "fox_api_search_entities",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13190,6 +13187,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "search_popular",
+    "publicName": "fox_api_search_popular",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13213,6 +13211,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "trending_articles",
+    "publicName": "fox_api_trending_articles",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13245,6 +13244,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "trending_videos",
+    "publicName": "fox_api_trending_videos",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13278,6 +13278,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "foxpolls",
+    "publicName": "fox_api_foxpolls",
     "flat": true,
     "api": "fox",
     "host": "https://api.foxsports.com",
@@ -13297,11 +13298,40 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "include_answers",
         "queryKey": "includeAnswers",
-        "default": true
+        "default": true,
+        "transform": "bool_str"
       }
     ],
     "parser": "parse_fox_list",
     "returnsSchema": "native/fox/foxpolls"
+  },
+  {
+    "short": "explore_favorite",
+    "flat": true,
+    "api": "fox",
+    "host": "https://api.foxsports.com",
+    "scope": "universal",
+    "path": "/bifrost/v1/explore/favorite/{section}/main",
+    "pathParams": [
+      {
+        "name": "section"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "apikey",
+        "queryKey": "apikey",
+        "default": "jE7yBJVRNAwdDesMgTzTXUUSx1It41Fq"
+      },
+      {
+        "name": "api_version",
+        "queryKey": "api-version",
+        "default": "1.1"
+      }
+    ],
+    "parser": "parse_fox_list",
+    "returnsSchema": "native/fox/explore_favorite",
+    "deprecated": "Fox never returned data for this route (sdv-py probe 2026-10-05: 400 for sports/players, 404 for nfl/cfb/teams, with ids/sections taken from a live explore/browse payload); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml). Use fox_api_explore_browse()."
   },
   {
     "short": "fs_feed",
@@ -13324,7 +13354,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_fox_list",
-    "returnsSchema": "native/fox/fs_feed"
+    "returnsSchema": "native/fox/fs_feed",
+    "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/feed with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
   },
   {
     "short": "fs_images",
@@ -13347,7 +13378,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_fox_list",
-    "returnsSchema": "native/fox/fs_images"
+    "returnsSchema": "native/fox/fs_images",
+    "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/images with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
   },
   {
     "short": "fs_layouts",
@@ -13370,7 +13402,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_fox_list",
-    "returnsSchema": "native/fox/fs_layouts"
+    "returnsSchema": "native/fox/fs_layouts",
+    "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/layouts with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
   },
   {
     "short": "fs_videos",
@@ -13393,7 +13426,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_fox_list",
-    "returnsSchema": "native/fox/fs_videos"
+    "returnsSchema": "native/fox/fs_videos",
+    "deprecated": "Fox answers 404 (fault: Unable to identify proxy for host: secure) for /fs/videos with both the data and the feed key (sdv-py probe 2026-10-05); sdv-py dropped it from fox_api (probe record: tools/codegen/endpoints/fox_api.yaml)."
   },
   {
     "short": "boxscore",

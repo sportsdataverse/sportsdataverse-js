@@ -232,7 +232,8 @@ describe('recruiting (api.247sports.com): deprecated', () => {
     named.length.should.equal(12);
     named.every((n) => sports247.has(n)).should.be.true();
     recruiting.filter((w) => /no sports247 equivalent/.test(w.deprecated)).length.should.equal(13);
-    FLAT_WRAPPERS.filter((w) => w.api !== 'recruiting' && w.deprecated).should.eql([]);
+    // fox: the 5 dead routes sdv-py dropped (test/parsers/fox_bifrost.test.js)
+    FLAT_WRAPPERS.filter((w) => !['recruiting', 'fox'].includes(w.api) && w.deprecated).should.eql([]);
   });
 
   it('emits one DeprecationWarning per method, then still calls through', async () => {
