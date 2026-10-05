@@ -58,7 +58,7 @@ Native providers that aren't a single ESPN league — each gets its own `sdv.<na
 | [cbs](./cbs) | *cross-sport* | CBS Sports | 82 |
 | [fox](./fox) | *cross-sport* | Fox Sports | 38 |
 | [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (scores), Yahoo Sports | 107 |
-| [hockeytech](./hockeytech) | Hockey | HockeyTech / LeagueStat | 10 |
+| [hockeytech](./hockeytech) | Hockey | HockeyTech / LeagueStat | 16 |
 | [torvik](./torvik) | Basketball | BartTorvik (T-Rank) | 5 |
 
 :::tip Same call, every league

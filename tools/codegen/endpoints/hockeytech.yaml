@@ -1,8 +1,9 @@
 # Flat (non-ESPN) API family: HockeyTech / LeagueStat (lscluster.hockeytech.com
 # + cluster.leaguestat.com). Powers the PWHL + the major junior / minor leagues
 # (AHL, OHL, WHL, QMJHL). One feed gateway (`/feed/index.php`) serves every
-# league; the league is selected by a `league` query param (pwhl|ahl|ohl|whl|
-# qmjhl) that the runtime maps to that league's client_code / api_key / site_id
+# league; the league is selected by a `league` query param (any of the 20 registered
+# leagues: pwhl, ahl, ohl, whl, qmjhl, echl, sphl, chl, ushl, bchl, ajhl, sjhl,
+# ojhl, cchl, gojhl, mhl, nojhl, vijhl, kijhl, mjhl) that the runtime maps to that league's client_code / api_key / site_id
 # / base host. Standalone `hockeytech` namespace (NOT an ESPN league).
 #
 # CRITICAL runtime quirks (all handled in src/core/hockeytech_runtime.ts, which
@@ -44,6 +45,9 @@ endpoints:
     extra_params:
       - { name: league, query_key: league }
       - { name: season_id, query_key: season_id }
+      - { name: number_of_days_back, query_key: numberofdaysback, default: 10000 }
+      - { name: number_of_days_ahead, query_key: numberofdaysahead, default: 10000 }
+      - { name: limit, query_key: limit, default: 10000 }
       - { name: feed, query_key: feed, default: modulekit }
       - { name: view, query_key: view, default: scorebar }
     parser: parse_hockeytech_schedule
@@ -86,6 +90,64 @@ endpoints:
       - { name: view, query_key: view, default: gameshifts }
     parser: parse_hockeytech_game_shifts
     returns_schema: native/hockeytech/game_shifts
+  - short: scorebar
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: number_of_days_back, query_key: numberofdaysback, default: 3 }
+      - { name: number_of_days_ahead, query_key: numberofdaysahead, default: 3 }
+      - { name: limit, query_key: limit, default: 100 }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: scorebar }
+    parser: parse_hockeytech_scorebar
+    returns_schema: native/hockeytech/scorebar
+  - short: player_game_log
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: player_id, query_key: player_id }
+      - { name: season_id, query_key: season_id }
+      - { name: category, query_key: category, default: gamebygame }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: player }
+    parser: parse_hockeytech_player_game_log
+    returns_schema: native/hockeytech/player_game_log
+  - short: player_search
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: search_term, query_key: search_term }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: searchplayers }
+    parser: parse_hockeytech_player_search
+    returns_schema: native/hockeytech/player_search
+  - short: stats
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: season_id, query_key: season_id }
+      - { name: type, query_key: type, default: skaters }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: statviewtype }
+    parser: parse_hockeytech_stats
+    returns_schema: native/hockeytech/stats
+  - short: transactions
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: transactions }
+    parser: parse_hockeytech_transactions
+    returns_schema: native/hockeytech/transactions
+  - short: playoff_bracket
+    path: /feed/index.php
+    extra_params:
+      - { name: league, query_key: league }
+      - { name: season_id, query_key: season_id }
+      - { name: feed, query_key: feed, default: modulekit }
+      - { name: view, query_key: view, default: brackets }
+    parser: parse_hockeytech_playoff_bracket
+    returns_schema: native/hockeytech/playoff_bracket
   # statviewfeed feeds ------------------------------------------------------
   - short: standings
     path: /feed/index.php

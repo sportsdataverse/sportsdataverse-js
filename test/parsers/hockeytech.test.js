@@ -13,6 +13,12 @@ import {
   parse_hockeytech_leaders,
   parse_hockeytech_pbp,
   parse_hockeytech_game_summary,
+  parse_hockeytech_scorebar,
+  parse_hockeytech_player_search,
+  parse_hockeytech_stats,
+  parse_hockeytech_transactions,
+  parse_hockeytech_playoff_bracket,
+  parse_hockeytech_player_game_log,
 } from '../../dist/parsers/hockeytech.js';
 import {
   buildHockeytechUrl,
@@ -20,6 +26,7 @@ import {
   resolveApiKey,
   resolveLeague,
   HOCKEYTECH_LEAGUES,
+  resolveSeasonId,
 } from '../../dist/core/hockeytech_runtime.js';
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
 
@@ -44,8 +51,8 @@ function loadFixture(name) {
 // ---------------------------------------------------------------------------
 
 describe('core/hockeytech_runtime: league registry', () => {
-  it('registers the five leagues with their web-client defaults', () => {
-    Object.keys(HOCKEYTECH_LEAGUES).sort().should.eql(['ahl', 'ohl', 'pwhl', 'qmjhl', 'whl']);
+  it('registers the original five leagues with their web-client defaults', () => {
+    ['ahl', 'ohl', 'pwhl', 'qmjhl', 'whl'].forEach((l) => HOCKEYTECH_LEAGUES.should.have.property(l));
     resolveLeague('pwhl').apiKey.should.equal('446521baf8c38984');
     resolveLeague('pwhl').siteId.should.equal(0);
     resolveLeague('qmjhl').clientCode.should.equal('lhjmq'); // NOT "qmjhl"
@@ -271,5 +278,58 @@ describe('parsers/hockeytech: registry wiring', () => {
       (typeof PARSERS[name]).should.equal('function', `missing ${name}`);
       should(parserFor(name)).equal(PARSERS[name]);
     }
+  });
+});
+
+describe('hockeytech: 20-league registry + new views', () => {
+  const NEW = ['echl','sphl','chl','ushl','bchl','ajhl','sjhl','ojhl','cchl','gojhl','mhl','nojhl','vijhl','kijhl','mjhl'];
+  it('registers all 20 leagues with py keys/ids', () => {
+    Object.keys(HOCKEYTECH_LEAGUES).length.should.equal(20);
+    for (const l of NEW) {
+      const c = resolveLeague(l);
+      c.leagueId.should.equal(1); c.siteId.should.equal(0); c.clientCode.should.equal(l);
+      c.apiKey.should.match(/^[0-9a-f]{16}$/);
+      c.baseUrl.should.match(/^https:\/\/lscluster\.hockeytech\.com/);
+    }
+    resolveLeague('echl').apiKey.should.equal('2c2b89ea7345cae8');
+    resolveLeague('mjhl').apiKey.should.equal('f894c324fe5fd8f0');
+    resolveLeague('pwhl').pbpStyle.should.equal('hockeytech_a');
+    resolveLeague('ushl').pbpStyle.should.equal('hockeytech_b');
+  });
+  it('builds URLs and honours env key override for new leagues', () => {
+    const u = buildHockeytechUrl({ league: 'bchl', feed: 'modulekit', view: 'seasons' });
+    u.should.match(/client_code=bchl/); u.should.match(/key=f3ed30007ad2124e/);
+    process.env.SDV_BCHL_API_KEY = 'abc';
+    try { buildHockeytechUrl({ league: 'bchl', view: 'seasons' }).should.match(/key=abc/); }
+    finally { delete process.env.SDV_BCHL_API_KEY; }
+  });
+  it('seasons parser derives season_yr and game_type_label (real PWHL capture)', () => {
+    const rows = parse_hockeytech_seasons(loadFixture('pwhl_seasons.jsonp'));
+    rows.map((r) => [r.season_yr, r.game_type_label]).should.eql([[2027, 'preseason'], [2026, 'playoffs'], [2026, 'regular']]);
+  });
+  it('scorebar / search / stats / transactions / bracket / game log parse real captures', () => {
+    parse_hockeytech_scorebar(loadFixture('pwhl_scorebar.jsonp')).length.should.be.above(0);
+    const s = parse_hockeytech_player_search(loadFixture('pwhl_searchplayers.jsonp'));
+    s.length.should.equal(2); s[0].should.have.property('player_id');
+    const st = parse_hockeytech_stats(loadFixture('pwhl_statviewtype.jsonp'));
+    st.length.should.equal(3); st[0].should.have.property('player_id');
+    const tx = parse_hockeytech_transactions(loadFixture('pwhl_transactions.jsonp'));
+    tx.length.should.equal(3); tx[0].should.have.property('ttype_text');
+    const br = parse_hockeytech_playoff_bracket(loadFixture('pwhl_brackets.jsonp'));
+    br.length.should.equal(3); br[0].should.have.property('round_name');
+    br[0].should.have.property('series_letter');
+    const gl = parse_hockeytech_player_game_log(loadFixture('pwhl_player_gamebygame.jsonp'));
+    gl.length.should.equal(1); gl[0].should.have.property('date_played');
+  });
+  it('new parsers return [] on empty input', () => {
+    for (const f of [parse_hockeytech_scorebar, parse_hockeytech_player_search, parse_hockeytech_stats,
+      parse_hockeytech_transactions, parse_hockeytech_playoff_bracket, parse_hockeytech_player_game_log]) {
+      f({}).should.eql([]); f(null).should.eql([]);
+    }
+  });
+  it('resolveSeasonId short-circuits on seasonId and requires season otherwise', async () => {
+    (await resolveSeasonId('echl', { seasonId: 70 })).should.equal(70);
+    let err; try { await resolveSeasonId('echl', {}); } catch (e) { err = e; }
+    err.message.should.match(/Provide either season/);
   });
 });

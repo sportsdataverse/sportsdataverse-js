@@ -11,7 +11,7 @@ sidebar_position: 36
 
 - **namespace:** `sdv.hockeytech` *(standalone — not an ESPN league)*
 - **families:** HockeyTech / LeagueStat
-- **wrappers:** 10 native
+- **wrappers:** 16 native
 
 `hockeytech` is a Hockey provider namespace (no ESPN `{sport}`/`{league}` nesting). Every method is exposed under BOTH its snake_case name (`<family>_<endpoint>`, py/R parity) and a camelCase canonical name (`<family><Endpoint>`) on `sdv.hockeytech`. Pass `{ parsed: true }` to any endpoint to get tidy rows instead of raw JSON.
 
@@ -33,12 +33,18 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `hockeytech_game_summary` / `hockeytechGameSummary` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `game_id`, `feed`, `view` | `parse_hockeytech_game_summary` | — |
 | `hockeytech_leaders` / `hockeytechLeaders` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `team_id`, `player_types` → `playerTypes`, `skater_stat_types` → `skaterStatTypes`, `active_only` → `activeOnly`, `feed`, `view` | `parse_hockeytech_leaders` | — |
 | `hockeytech_pbp` / `hockeytechPbp` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `game_id`, `feed`, `view` | `parse_hockeytech_pbp` | — |
+| `hockeytech_player_game_log` / `hockeytechPlayerGameLog` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `player_id`, `season_id`, `category`, `feed`, `view` | `parse_hockeytech_player_game_log` | — |
+| `hockeytech_player_search` / `hockeytechPlayerSearch` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `search_term`, `feed`, `view` | `parse_hockeytech_player_search` | — |
 | `hockeytech_player_stats` / `hockeytechPlayerStats` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `player_id`, `category`, `feed`, `view` | `parse_hockeytech_player_stats` | — |
-| `hockeytech_schedule` / `hockeytechSchedule` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `feed`, `view` | `parse_hockeytech_schedule` | — |
+| `hockeytech_playoff_bracket` / `hockeytechPlayoffBracket` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `feed`, `view` | `parse_hockeytech_playoff_bracket` | — |
+| `hockeytech_schedule` / `hockeytechSchedule` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `view` | `parse_hockeytech_schedule` | — |
+| `hockeytech_scorebar` / `hockeytechScorebar` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `number_of_days_back` → `numberofdaysback`, `number_of_days_ahead` → `numberofdaysahead`, `limit`, `feed`, `view` | `parse_hockeytech_scorebar` | — |
 | `hockeytech_seasons` / `hockeytechSeasons` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `feed`, `view` | `parse_hockeytech_seasons` | — |
 | `hockeytech_standings` / `hockeytechStandings` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id` → `season`, `feed`, `view`, `group_teams_by` → `groupTeamsBy`, `context`, `special`, `sort` | `parse_hockeytech_standings` | — |
+| `hockeytech_stats` / `hockeytechStats` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id`, `type`, `feed`, `view` | `parse_hockeytech_stats` | — |
 | `hockeytech_team_roster` / `hockeytechTeamRoster` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `team_id`, `season_id`, `feed`, `view` | `parse_hockeytech_team_roster` | — |
 | `hockeytech_teams` / `hockeytechTeams` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `season_id` → `season`, `feed`, `view` | `parse_hockeytech_teams` | — |
+| `hockeytech_transactions` / `hockeytechTransactions` | `https://lscluster.hockeytech.com/feed/index.php` | — | `league`, `feed`, `view` | `parse_hockeytech_transactions` | — |
 
 ### Returns — `hockeytech_game_shifts` / `hockeytechGameShifts`
 
@@ -182,6 +188,83 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `is_power_play` | logical | Whether the penalty creates a power play. |
 | `is_bench` | logical | Whether it is a bench penalty. |
 
+### Returns — `hockeytech_player_game_log` / `hockeytechPlayerGameLog`
+
+| col_name | type | description |
+|---|---|---|
+| `g_month` | character | HockeyTech `g_month` field. |
+| `id` | character | HockeyTech record id. |
+| `home_team` | character | HockeyTech `home_team` field. |
+| `visiting_team` | character | HockeyTech `visiting_team` field. |
+| `date_played` | character | HockeyTech `date_played` field. |
+| `home` | character | HockeyTech `home` field. |
+| `shots` | character | HockeyTech `shots` field. |
+| `goalie` | character | HockeyTech `goalie` field. |
+| `home_team_code` | character | HockeyTech `home_team_code` field. |
+| `home_team_name` | character | HockeyTech `home_team_name` field. |
+| `home_division` | character | HockeyTech `home_division` field. |
+| `visiting_team_code` | character | HockeyTech `visiting_team_code` field. |
+| `visiting_team_name` | character | HockeyTech `visiting_team_name` field. |
+| `visiting_division` | character | HockeyTech `visiting_division` field. |
+| `goals` | character | HockeyTech `goals` field. |
+| `ice_time_minutes_seconds` | character | HockeyTech `ice_time_minutes_seconds` field. |
+| `hits` | character | HockeyTech `hits` field. |
+| `shots_blocked_by_player` | character | HockeyTech `shots_blocked_by_player` field. |
+| `plusminus` | character | HockeyTech `plusminus` field. |
+| `assists` | character | HockeyTech `assists` field. |
+| `shootout_goals` | character | HockeyTech `shootout_goals` field. |
+| `shootout_attempts` | character | HockeyTech `shootout_attempts` field. |
+| `shootout_goals_win` | character | HockeyTech `shootout_goals_win` field. |
+| `shootout_shots` | character | HockeyTech `shootout_shots` field. |
+| `penalty_minutes` | character | HockeyTech `penalty_minutes` field. |
+| `shooting_percentage` | character | HockeyTech `shooting_percentage` field. |
+| `shootout_shots_percentage` | character | HockeyTech `shootout_shots_percentage` field. |
+| `points` | character | HockeyTech `points` field. |
+| `player_team` | character | HockeyTech `player_team` field. |
+| `plus_minus` | character | HockeyTech `plus_minus` field. |
+| `power_play_goals` | character | HockeyTech `power_play_goals` field. |
+| `short_handed_goals` | character | HockeyTech `short_handed_goals` field. |
+| `empty_net_goals` | character | HockeyTech `empty_net_goals` field. |
+| `insurange_goals` | character | HockeyTech `insurange_goals` field. |
+| `game_winning_goals` | character | HockeyTech `game_winning_goals` field. |
+| `first_goals_scored` | character | HockeyTech `first_goals_scored` field. |
+| `game_tieing_goals` | character | HockeyTech `game_tieing_goals` field. |
+| `faceoffs_taken` | character | HockeyTech `faceoffs_taken` field. |
+| `faceoffs_won` | character | HockeyTech `faceoffs_won` field. |
+
+### Returns — `hockeytech_player_search` / `hockeytechPlayerSearch`
+
+| col_name | type | description |
+|---|---|---|
+| `person_id` | character | HockeyTech `person_id` field. |
+| `player_id` | character | HockeyTech player id. |
+| `active` | character | HockeyTech `active` field. |
+| `first_name` | character | HockeyTech `first_name` field. |
+| `last_name` | character | HockeyTech `last_name` field. |
+| `phonetic_name` | character | HockeyTech `phonetic_name` field. |
+| `shoots` | character | HockeyTech `shoots` field. |
+| `catches` | character | HockeyTech `catches` field. |
+| `height` | character | HockeyTech `height` field. |
+| `weight` | character | HockeyTech `weight` field. |
+| `rawbirthdate` | character | HockeyTech `rawbirthdate` field. |
+| `birthdate` | character | HockeyTech `birthdate` field. |
+| `birthtown` | character | HockeyTech `birthtown` field. |
+| `birthprov` | character | HockeyTech `birthprov` field. |
+| `birthcntry` | character | HockeyTech `birthcntry` field. |
+| `team_id` | character | HockeyTech team id. |
+| `jersey_number` | character | HockeyTech `jersey_number` field. |
+| `role_id` | character | HockeyTech `role_id` field. |
+| `season_id` | character | HockeyTech season id. |
+| `role_name` | character | HockeyTech `role_name` field. |
+| `all_roles` | character | HockeyTech `all_roles` field. |
+| `last_team_name` | character | HockeyTech `last_team_name` field. |
+| `last_team_code` | character | HockeyTech `last_team_code` field. |
+| `division` | character | HockeyTech `division` field. |
+| `position` | character | HockeyTech `position` field. |
+| `profile_image` | character | HockeyTech `profile_image` field. |
+| `score` | character | HockeyTech `score` field. |
+| `last_active_date` | character | HockeyTech `last_active_date` field. |
+
 ### Returns — `hockeytech_player_stats` / `hockeytechPlayerStats`
 
 | col_name | type | description |
@@ -236,6 +319,32 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `ice_time` | character | Total ice time. |
 | `ice_time_minutes_seconds` | character | Ice time (MM:SS). |
 | `shots_blocked_by_player` | character | Shots blocked by the player. |
+
+### Returns — `hockeytech_playoff_bracket` / `hockeytechPlayoffBracket`
+
+| col_name | type | description |
+|---|---|---|
+| `round_number` | character | Round number within the playoffs. |
+| `round_name` | character | HockeyTech `round_name` field. |
+| `round_season_id` | character | HockeyTech `round_season_id` field. |
+| `round_type_id` | character | HockeyTech `round_type_id` field. |
+| `round_type_name` | character | HockeyTech `round_type_name` field. |
+| `series_letter` | character | HockeyTech `series_letter` field. |
+| `series_name` | character | HockeyTech `series_name` field. |
+| `series_logo` | character | HockeyTech `series_logo` field. |
+| `round` | character | HockeyTech `round` field. |
+| `active` | character | HockeyTech `active` field. |
+| `feeder_series1` | character | HockeyTech `feeder_series1` field. |
+| `feeder_series2` | character | HockeyTech `feeder_series2` field. |
+| `team1` | character | HockeyTech `team1` field. |
+| `team2` | character | HockeyTech `team2` field. |
+| `content_en` | character | HockeyTech `content_en` field. |
+| `content_fr` | character | HockeyTech `content_fr` field. |
+| `winner` | character | HockeyTech `winner` field. |
+| `games` | character | HockeyTech `games` field. |
+| `team1_wins` | character | HockeyTech `team1_wins` field. |
+| `team2_wins` | character | HockeyTech `team2_wins` field. |
+| `ties` | character | HockeyTech `ties` field. |
 
 ### Returns — `hockeytech_schedule` / `hockeytechSchedule`
 
@@ -305,6 +414,74 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `flo_hockey_url` | character | FloHockey broadcast URL. |
 | `combined_client_code` | character | Combined client code identifier. |
 
+### Returns — `hockeytech_scorebar` / `hockeytechScorebar`
+
+| col_name | type | description |
+|---|---|---|
+| `id` | character | HockeyTech record id. |
+| `season_id` | character | HockeyTech season id. |
+| `league_id` | character | HockeyTech `league_id` field. |
+| `game_number` | character | HockeyTech `game_number` field. |
+| `game_letter` | character | HockeyTech `game_letter` field. |
+| `game_type` | character | HockeyTech `game_type` field. |
+| `quick_score` | character | HockeyTech `quick_score` field. |
+| `date` | character | HockeyTech `date` field. |
+| `flo_core_event_id` | character | HockeyTech `flo_core_event_id` field. |
+| `flo_live_event_id` | character | HockeyTech `flo_live_event_id` field. |
+| `game_date` | character | HockeyTech `game_date` field. |
+| `game_date_iso8601` | character | HockeyTech `game_date_iso8601` field. |
+| `scheduled_time` | character | HockeyTech `scheduled_time` field. |
+| `scheduled_formatted_time` | character | HockeyTech `scheduled_formatted_time` field. |
+| `timezone` | character | HockeyTech `timezone` field. |
+| `ticket_url` | character | HockeyTech `ticket_url` field. |
+| `home_id` | character | HockeyTech `home_id` field. |
+| `home_code` | character | HockeyTech `home_code` field. |
+| `home_city` | character | HockeyTech `home_city` field. |
+| `home_nickname` | character | HockeyTech `home_nickname` field. |
+| `home_long_name` | character | HockeyTech `home_long_name` field. |
+| `home_division` | character | HockeyTech `home_division` field. |
+| `home_goals` | character | HockeyTech `home_goals` field. |
+| `home_audio_url` | character | HockeyTech `home_audio_url` field. |
+| `home_video_url` | character | HockeyTech `home_video_url` field. |
+| `home_webcast_url` | character | HockeyTech `home_webcast_url` field. |
+| `visitor_id` | character | HockeyTech `visitor_id` field. |
+| `visitor_code` | character | HockeyTech `visitor_code` field. |
+| `visitor_city` | character | HockeyTech `visitor_city` field. |
+| `visitor_nickname` | character | HockeyTech `visitor_nickname` field. |
+| `visitor_long_name` | character | HockeyTech `visitor_long_name` field. |
+| `visiting_division` | character | HockeyTech `visiting_division` field. |
+| `visitor_goals` | character | HockeyTech `visitor_goals` field. |
+| `visitor_audio_url` | character | HockeyTech `visitor_audio_url` field. |
+| `visitor_video_url` | character | HockeyTech `visitor_video_url` field. |
+| `visitor_webcast_url` | character | HockeyTech `visitor_webcast_url` field. |
+| `period` | character | HockeyTech `period` field. |
+| `period_name_short` | character | HockeyTech `period_name_short` field. |
+| `period_name_long` | character | HockeyTech `period_name_long` field. |
+| `game_clock` | character | HockeyTech `game_clock` field. |
+| `game_summary_url` | character | HockeyTech `game_summary_url` field. |
+| `home_wins` | character | HockeyTech `home_wins` field. |
+| `home_regulation_losses` | character | HockeyTech `home_regulation_losses` field. |
+| `home_ot_losses` | character | HockeyTech `home_ot_losses` field. |
+| `home_shootout_losses` | character | HockeyTech `home_shootout_losses` field. |
+| `visitor_wins` | character | HockeyTech `visitor_wins` field. |
+| `visitor_regulation_losses` | character | HockeyTech `visitor_regulation_losses` field. |
+| `visitor_ot_losses` | character | HockeyTech `visitor_ot_losses` field. |
+| `visitor_shootout_losses` | character | HockeyTech `visitor_shootout_losses` field. |
+| `game_status` | character | HockeyTech `game_status` field. |
+| `intermission` | character | HockeyTech `intermission` field. |
+| `game_status_string` | character | HockeyTech `game_status_string` field. |
+| `game_status_string_long` | character | HockeyTech `game_status_string_long` field. |
+| `ord` | character | HockeyTech `ord` field. |
+| `venue_name` | character | HockeyTech `venue_name` field. |
+| `venue_location` | character | HockeyTech `venue_location` field. |
+| `league_name` | character | HockeyTech `league_name` field. |
+| `league_code` | character | HockeyTech `league_code` field. |
+| `timezone_short` | character | HockeyTech `timezone_short` field. |
+| `home_logo` | character | HockeyTech `home_logo` field. |
+| `visitor_logo` | character | HockeyTech `visitor_logo` field. |
+| `flo_hockey_url` | character | HockeyTech `flo_hockey_url` field. |
+| `combined_client_code` | character | HockeyTech `combined_client_code` field. |
+
 ### Returns — `hockeytech_seasons` / `hockeytechSeasons`
 
 | col_name | type | description |
@@ -316,6 +493,8 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `playoff` | character | Playoff-season flag. |
 | `start_date` | character | Season start date. |
 | `end_date` | character | Season end date. |
+| `season_yr` | integer | Season end-year derived from the season name (2025-26 -> 2026). |
+| `game_type_label` | character | regular, playoffs or preseason, derived from the season name. |
 
 ### Returns — `hockeytech_standings` / `hockeytechStandings`
 
@@ -335,6 +514,99 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `games_played` | character | Games played. |
 | `rank` | integer | Standings rank (within the section). |
 | `name` | character | Team name. |
+
+### Returns — `hockeytech_stats` / `hockeytechStats`
+
+| col_name | type | description |
+|---|---|---|
+| `player_id` | character | HockeyTech player id. |
+| `shortname` | character | HockeyTech `shortname` field. |
+| `first_name` | character | HockeyTech `first_name` field. |
+| `last_name` | character | HockeyTech `last_name` field. |
+| `name` | character | HockeyTech `name` field. |
+| `phonetic_name` | character | HockeyTech `phonetic_name` field. |
+| `active` | character | HockeyTech `active` field. |
+| `height` | character | HockeyTech `height` field. |
+| `weight` | character | HockeyTech `weight` field. |
+| `last_years_club` | character | HockeyTech `last_years_club` field. |
+| `age` | character | HockeyTech `age` field. |
+| `shoots` | character | HockeyTech `shoots` field. |
+| `position` | character | HockeyTech `position` field. |
+| `suspension_games_remaining` | character | HockeyTech `suspension_games_remaining` field. |
+| `suspension_indefinite` | character | HockeyTech `suspension_indefinite` field. |
+| `rookie` | character | HockeyTech `rookie` field. |
+| `veteran` | character | HockeyTech `veteran` field. |
+| `draft_eligible` | character | HockeyTech `draft_eligible` field. |
+| `jersey_number` | character | HockeyTech `jersey_number` field. |
+| `team_name` | character | HockeyTech `team_name` field. |
+| `team_code` | character | HockeyTech `team_code` field. |
+| `team_id` | character | HockeyTech team id. |
+| `division` | character | HockeyTech `division` field. |
+| `birthdate` | character | HockeyTech `birthdate` field. |
+| `birthdate_year` | character | HockeyTech `birthdate_year` field. |
+| `hometown` | character | HockeyTech `hometown` field. |
+| `homeprov` | character | HockeyTech `homeprov` field. |
+| `homecntry` | character | HockeyTech `homecntry` field. |
+| `birthtown` | character | HockeyTech `birthtown` field. |
+| `birthprov` | character | HockeyTech `birthprov` field. |
+| `birthcntry` | character | HockeyTech `birthcntry` field. |
+| `hometownprov` | character | HockeyTech `hometownprov` field. |
+| `homeplace` | character | HockeyTech `homeplace` field. |
+| `games_played` | character | HockeyTech `games_played` field. |
+| `game_winning_goals` | character | HockeyTech `game_winning_goals` field. |
+| `game_tieing_goals` | character | HockeyTech `game_tieing_goals` field. |
+| `first_goals` | character | HockeyTech `first_goals` field. |
+| `insurance_goals` | character | HockeyTech `insurance_goals` field. |
+| `unassisted_goals` | character | HockeyTech `unassisted_goals` field. |
+| `empty_net_goals` | character | HockeyTech `empty_net_goals` field. |
+| `overtime_goals` | character | HockeyTech `overtime_goals` field. |
+| `ice_time` | character | HockeyTech `ice_time` field. |
+| `ice_time_avg` | character | HockeyTech `ice_time_avg` field. |
+| `goals` | character | HockeyTech `goals` field. |
+| `shots` | character | HockeyTech `shots` field. |
+| `loose_ball_recoveries` | character | HockeyTech `loose_ball_recoveries` field. |
+| `caused_turnovers` | character | HockeyTech `caused_turnovers` field. |
+| `turnovers` | character | HockeyTech `turnovers` field. |
+| `hits` | character | HockeyTech `hits` field. |
+| `shots_blocked_by_player` | character | HockeyTech `shots_blocked_by_player` field. |
+| `ice_time_minutes_seconds` | character | HockeyTech `ice_time_minutes_seconds` field. |
+| `shooting_percentage` | character | HockeyTech `shooting_percentage` field. |
+| `assists` | character | HockeyTech `assists` field. |
+| `points` | character | HockeyTech `points` field. |
+| `points_per_game` | character | HockeyTech `points_per_game` field. |
+| `plus_minus` | character | HockeyTech `plus_minus` field. |
+| `penalty_minutes` | character | HockeyTech `penalty_minutes` field. |
+| `penalty_minutes_per_game` | character | HockeyTech `penalty_minutes_per_game` field. |
+| `ice_time_per_game_avg` | character | HockeyTech `ice_time_per_game_avg` field. |
+| `hits_per_game_avg` | character | HockeyTech `hits_per_game_avg` field. |
+| `minor_penalties` | character | HockeyTech `minor_penalties` field. |
+| `major_penalties` | character | HockeyTech `major_penalties` field. |
+| `power_play_goals` | character | HockeyTech `power_play_goals` field. |
+| `power_play_assists` | character | HockeyTech `power_play_assists` field. |
+| `power_play_points` | character | HockeyTech `power_play_points` field. |
+| `short_handed_goals` | character | HockeyTech `short_handed_goals` field. |
+| `short_handed_assists` | character | HockeyTech `short_handed_assists` field. |
+| `short_handed_points` | character | HockeyTech `short_handed_points` field. |
+| `shootout_goals` | character | HockeyTech `shootout_goals` field. |
+| `shootout_attempts` | character | HockeyTech `shootout_attempts` field. |
+| `shootout_winning_goals` | character | HockeyTech `shootout_winning_goals` field. |
+| `shootout_games_played` | character | HockeyTech `shootout_games_played` field. |
+| `faceoff_attempts` | character | HockeyTech `faceoff_attempts` field. |
+| `faceoff_wins` | character | HockeyTech `faceoff_wins` field. |
+| `faceoff_pct` | character | HockeyTech `faceoff_pct` field. |
+| `faceoff_wa` | character | HockeyTech `faceoff_wa` field. |
+| `shots_on` | character | HockeyTech `shots_on` field. |
+| `shootout_percentage` | character | HockeyTech `shootout_percentage` field. |
+| `latest_team_id` | character | HockeyTech `latest_team_id` field. |
+| `num_teams` | character | HockeyTech `num_teams` field. |
+| `logo` | character | HockeyTech `logo` field. |
+| `rank` | character | HockeyTech `rank` field. |
+| `team_breakdown` | character | HockeyTech `team_breakdown` field. |
+| `player_page_link` | character | HockeyTech `player_page_link` field. |
+| `is_total` | character | HockeyTech `is_total` field. |
+| `player_image` | character | HockeyTech `player_image` field. |
+| `namelink` | character | HockeyTech `namelink` field. |
+| `teamlink` | character | HockeyTech `teamlink` field. |
 
 ### Returns — `hockeytech_team_roster` / `hockeytechTeamRoster`
 
@@ -400,3 +672,30 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `division_long_name` | character | Division name. |
 | `division_short_name` | character | Short division name. |
 | `team_logo_url` | character | Team logo URL. |
+
+### Returns — `hockeytech_transactions` / `hockeytechTransactions`
+
+| col_name | type | description |
+|---|---|---|
+| `transaction_type` | character | HockeyTech `transaction_type` field. |
+| `title` | character | HockeyTech `title` field. |
+| `ttype` | character | HockeyTech `ttype` field. |
+| `ttype_text` | character | HockeyTech `ttype_text` field. |
+| `transaction_date` | character | HockeyTech `transaction_date` field. |
+| `transaction_time` | character | HockeyTech `transaction_time` field. |
+| `formatted_transaction_date` | character | HockeyTech `formatted_transaction_date` field. |
+| `timezone` | character | HockeyTech `timezone` field. |
+| `player_id` | character | HockeyTech player id. |
+| `response1` | character | HockeyTech `response1` field. |
+| `response2` | character | HockeyTech `response2` field. |
+| `first_name` | character | HockeyTech `first_name` field. |
+| `last_name` | character | HockeyTech `last_name` field. |
+| `player_name` | character | HockeyTech `player_name` field. |
+| `position` | character | HockeyTech `position` field. |
+| `team_id` | character | HockeyTech team id. |
+| `team_city` | character | HockeyTech `team_city` field. |
+| `team_name` | character | HockeyTech `team_name` field. |
+| `team_code` | character | HockeyTech `team_code` field. |
+| `division` | character | HockeyTech `division` field. |
+| `team_logo` | character | HockeyTech `team_logo` field. |
+| `detail` | character | HockeyTech `detail` field. |

@@ -1,0 +1,87 @@
+schema: player_search
+kind: dataframe
+columns:
+- name: person_id
+  type: character
+  description: 'HockeyTech `person_id` field.'
+- name: player_id
+  type: character
+  description: 'HockeyTech player id.'
+- name: active
+  type: character
+  description: 'HockeyTech `active` field.'
+- name: first_name
+  type: character
+  description: 'HockeyTech `first_name` field.'
+- name: last_name
+  type: character
+  description: 'HockeyTech `last_name` field.'
+- name: phonetic_name
+  type: character
+  description: 'HockeyTech `phonetic_name` field.'
+- name: shoots
+  type: character
+  description: 'HockeyTech `shoots` field.'
+- name: catches
+  type: character
+  description: 'HockeyTech `catches` field.'
+- name: height
+  type: character
+  description: 'HockeyTech `height` field.'
+- name: weight
+  type: character
+  description: 'HockeyTech `weight` field.'
+- name: rawbirthdate
+  type: character
+  description: 'HockeyTech `rawbirthdate` field.'
+- name: birthdate
+  type: character
+  description: 'HockeyTech `birthdate` field.'
+- name: birthtown
+  type: character
+  description: 'HockeyTech `birthtown` field.'
+- name: birthprov
+  type: character
+  description: 'HockeyTech `birthprov` field.'
+- name: birthcntry
+  type: character
+  description: 'HockeyTech `birthcntry` field.'
+- name: team_id
+  type: character
+  description: 'HockeyTech team id.'
+- name: jersey_number
+  type: character
+  description: 'HockeyTech `jersey_number` field.'
+- name: role_id
+  type: character
+  description: 'HockeyTech `role_id` field.'
+- name: season_id
+  type: character
+  description: 'HockeyTech season id.'
+- name: role_name
+  type: character
+  description: 'HockeyTech `role_name` field.'
+- name: all_roles
+  type: character
+  description: 'HockeyTech `all_roles` field.'
+- name: last_team_name
+  type: character
+  description: 'HockeyTech `last_team_name` field.'
+- name: last_team_code
+  type: character
+  description: 'HockeyTech `last_team_code` field.'
+- name: division
+  type: character
+  description: 'HockeyTech `division` field.'
+- name: position
+  type: character
+  description: 'HockeyTech `position` field.'
+- name: profile_image
+  type: character
+  description: 'HockeyTech `profile_image` field.'
+- name: score
+  type: character
+  description: 'HockeyTech `score` field.'
+- name: last_active_date
+  type: character
+  description: 'HockeyTech `last_active_date` field.'
