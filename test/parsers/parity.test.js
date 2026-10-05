@@ -223,7 +223,12 @@ for (const [family, fixtures] of Object.entries(manifest)) {
     for (const [path, short] of Object.entries(fixtures)) {
       const ref = verifiable(family, short);
       const ex = ref && exercise(family, short);
-      const tag = ref ? ` [${ex.exercised}/${ex.columns} columns exercised]` : ' (no returns table: parity only)';
+      const framesBy = !ref && docs.get(family)?.get(short);
+      const tag = ref
+        ? ` [${ex.exercised}/${ex.columns} columns exercised]`
+        : framesBy
+          ? ` (frames_by ${schemaDoc(framesBy).frames_by}: unverified, parity only)`
+          : ' (no returns table: parity only)';
       it(`${short} <- ${path}${tag}`, () => {
         const { def, out, error } = runs.get(path);
         should.exist(def, `${family}.${short} is not a wrapper`);
