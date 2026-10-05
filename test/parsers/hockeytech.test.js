@@ -27,8 +27,15 @@ import {
   resolveLeague,
   HOCKEYTECH_LEAGUES,
   resolveSeasonId,
+  hockeytechGet,
+  hockeytechErrorReason,
+  mostRecentHockeytechSeason,
 } from '../../dist/core/hockeytech_runtime.js';
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
+import { configure, resetConfig } from '../../dist/core/config.js';
+import { AssetFetchError, NoDataError } from '../../dist/core/errors.js';
+import * as FLAT from '../../dist/generated/flat/hockeytech.js';
+import sdv from '../../dist/index.js';
 
 // No-network tests for the HockeyTech / LeagueStat flat-API family:
 //   - the runtime URL builder honours the league registry, the `gc`-feed
@@ -262,7 +269,7 @@ describe('parsers/hockeytech: statviewfeed + modulekit shape parsers', () => {
 });
 
 describe('parsers/hockeytech: registry wiring', () => {
-  it('registers all ten hockeytech parsers in PARSERS', () => {
+  it('registers the hockeytech parsers in PARSERS (scorebar alongside schedule)', () => {
     for (const name of [
       'parse_hockeytech_seasons',
       'parse_hockeytech_schedule',
@@ -274,10 +281,18 @@ describe('parsers/hockeytech: registry wiring', () => {
       'parse_hockeytech_leaders',
       'parse_hockeytech_pbp',
       'parse_hockeytech_game_summary',
+      'parse_hockeytech_scorebar',
     ]) {
       (typeof PARSERS[name]).should.equal('function', `missing ${name}`);
       should(parserFor(name)).equal(PARSERS[name]);
     }
+  });
+
+  it('parse_hockeytech_scorebar is the schedule parser under a second name (same SiteKit.Scorebar)', () => {
+    const fx = loadFixture('pwhl_scorebar.jsonp');
+    const rows = parse_hockeytech_scorebar(fx);
+    rows.length.should.be.above(0);
+    rows.should.eql(parse_hockeytech_schedule(fx));
   });
 });
 
@@ -342,5 +357,209 @@ describe('hockeytech: league_id injection', () => {
     buildHockeytechUrl({ league: 'ahl', feed: 'statviewfeed', view: 'teams' }).should.match(/league_id=4/);
     buildHockeytechUrl({ league: 'ahl', view: 'scorebar', league_id: 9 }).should.match(/league_id=9/);
     buildHockeytechUrl({ league: 'ahl', feed: 'modulekit', view: 'seasons' }).should.not.match(/league_id/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Runtime body classification + every hockeytechGet caller (JS-1)
+// ---------------------------------------------------------------------------
+
+const readFix = (name) => readFileSync(join(fixDir, name), 'utf8');
+// Real HTTP-200 bodies: MJHL gc/gamesummary access denied (2026-10-05) and the two error
+// sentinels captured 2026-07-12 (see test/fixtures/hockeytech/README.md).
+const DENIED = () => readFix(join('analytics', 'live-2026-10-05', 'mjhl_summary_7301.txt'));
+const UNDEFINED_TAB = () => readFix('pwhl_streaks_undefined_tab.json');
+const INVALID_VIEW = () => readFix('pwhl_svf_streaks_invalidview.json');
+const SEASONS = () => readFix('pwhl_seasons.jsonp');
+
+/** Route the hockeytech family through a scripted transport; `respond(req)` -> {status, data}. */
+function useTransport(respond, extra = {}) {
+  const calls = [];
+  const t = async (req) => {
+    calls.push(req);
+    return { headers: {}, url: req.url, status: 200, ...respond(req) };
+  };
+  configure({ transport: { hockeytech: t }, retries: 0, ...extra });
+  return calls;
+}
+
+describe('core/hockeytech_runtime: body classification', () => {
+  afterEach(() => resetConfig());
+  const get = () => hockeytechGet('ignored', { params: { league: 'pwhl', feed: 'modulekit', view: 'seasons' } });
+
+  it('valid JSONP -> the parsed payload', async () => {
+    useTransport(() => ({ data: SEASONS() }));
+    (await get()).SiteKit.Seasons.length.should.equal(3);
+  });
+
+  it('the recognised access-denied reply (real MJHL body) -> {} (the source never has it)', async () => {
+    useTransport(() => ({ data: DENIED() }));
+    (await get()).should.eql({});
+    for (const v of ['﻿Feed type access denied.\r\n', '  feed type access denied']) {
+      useTransport(() => ({ data: v }));
+      (await get()).should.eql({});
+    }
+  });
+
+  it('an error sentinel (real Undefined Tab / InvalidView bodies) -> AssetFetchError', async () => {
+    useTransport(() => ({ data: UNDEFINED_TAB() }));
+    await get().should.be.rejectedWith(AssetFetchError, { message: /Undefined Tab streaks/ });
+    useTransport(() => ({ data: INVALID_VIEW() }));
+    await get().should.be.rejectedWith(AssetFetchError, { message: /InvalidView error: streaks/ });
+  });
+
+  it('an unparseable or empty 200 body -> AssetFetchError (never {})', async () => {
+    for (const body of ['<html><body>Service Unavailable</body></html>', 'Feed type access denied. Contact us', '', null]) {
+      useTransport(() => ({ data: body }));
+      const err = await get().should.be.rejectedWith(AssetFetchError);
+      err.status.should.equal(200);
+      err.url.should.equal('https://lscluster.hockeytech.com/feed/index.php'); // no key-bearing query
+    }
+  });
+
+  it('HTTP 404 -> NoDataError; 5xx -> AssetFetchError', async () => {
+    useTransport(() => ({ status: 404, data: '' }));
+    await get().should.be.rejectedWith(NoDataError);
+    useTransport(() => ({ status: 503, data: '' }));
+    await get().should.be.rejectedWith(AssetFetchError);
+  });
+
+  it('a missing / unknown league throws before any request (was a silent {})', async () => {
+    const calls = useTransport(() => ({ data: SEASONS() }));
+    await hockeytechGet('ignored', { params: { view: 'seasons' } }).should.be.rejectedWith(/missing required `league`/);
+    await hockeytechGet('ignored', { params: { league: 'nhl', view: 'seasons' } }).should.be.rejectedWith(/Unknown HockeyTech league/);
+    calls.length.should.equal(0);
+  });
+
+  it('hockeytechErrorReason: null for healthy real payloads', () => {
+    should(hockeytechErrorReason(loadFixture('pwhl_seasons.jsonp'))).be.null();
+    should(hockeytechErrorReason(loadFixture('pwhl_pbp.jsonp'))).be.null();
+    should(hockeytechErrorReason(loadFixture('pwhl_gamesummary.jsonp'))).be.null();
+    hockeytechErrorReason(JSON.parse(UNDEFINED_TAB())).should.equal('Undefined Tab streaks');
+  });
+
+  it('sends the configured User-Agent (no hard-coded +https token)', async () => {
+    let calls = useTransport(() => ({ data: SEASONS() }));
+    await get();
+    calls[0].headers['User-Agent'].should.equal('Mozilla/5.0 (compatible; sportsdataverse-js/3.x)');
+    calls[0].headers.Referer.should.equal('https://www.thepwhl.com/');
+    calls = useTransport(() => ({ data: SEASONS() }), { userAgent: 'my-agent/1.0' });
+    await get();
+    calls[0].headers['User-Agent'].should.equal('my-agent/1.0');
+  });
+});
+
+describe('hockeytech: every hockeytechGet caller under the new classification', () => {
+  afterEach(() => resetConfig());
+  const wrappers = Object.keys(FLAT).filter((k) => /^hockeytech_/.test(k));
+
+  it('all 16 flat wrappers: access denied -> [] parsed / {} raw; error sentinel -> AssetFetchError', async () => {
+    wrappers.length.should.equal(16);
+    for (const name of wrappers) {
+      useTransport(() => ({ data: DENIED() }));
+      (await FLAT[name]({ league: 'mjhl', parsed: true })).should.eql([], name);
+      (await FLAT[name]({ league: 'mjhl' })).should.eql({}, name);
+      useTransport(() => ({ data: UNDEFINED_TAB() }));
+      await FLAT[name]({ league: 'pwhl', parsed: true }).should.be.rejectedWith(AssetFetchError);
+    }
+  });
+
+  it('season helpers: a failed fetch throws instead of reading as "no season"', async () => {
+    useTransport(() => ({ data: '<html>oops</html>' }));
+    await mostRecentHockeytechSeason('ahl').should.be.rejectedWith(AssetFetchError); // was 2026
+    await sdv.hockeytech.hockeytech_season_id('ahl').should.be.rejectedWith(AssetFetchError); // was []
+    useTransport(() => ({ status: 503, data: '' }));
+    await mostRecentHockeytechSeason('ahl').should.be.rejectedWith(AssetFetchError);
+  });
+
+  it('season helpers: real seasons -> max season_yr; an answered-but-empty list -> NoDataError (not py\'s stale 2026)', async () => {
+    useTransport(() => ({ data: SEASONS() }));
+    (await mostRecentHockeytechSeason('pwhl')).should.equal(2027);
+    useTransport(() => ({ data: '{"SiteKit":{"Seasons":[]}}' }));
+    const err = await mostRecentHockeytechSeason('pwhl').should.be.rejectedWith(NoDataError, { message: /lists no season/ });
+    err.should.not.be.instanceOf(AssetFetchError);
+    (await sdv.hockeytech.hockeytech_season_id('pwhl')).should.eql([]); // the list itself stays a list
+  });
+
+  it('analytics feeds: a GC Undefined-Tab sentinel on the game summary -> AssetFetchError (was blank meta)', async () => {
+    // GC-rooted variant of the real SiteKit capture (same sentinel key, gc envelope).
+    const gcSentinel = JSON.stringify({ GC: JSON.parse(UNDEFINED_TAB()).SiteKit });
+    useTransport((req) => ({
+      data:
+        req.query.view === 'gameCenterPlayByPlay'
+          ? readFix('pwhl_pbp.jsonp')
+          : req.query.tab === 'gamesummary'
+            ? gcSentinel
+            : '{"SiteKit":{"Gameshifts":{}}}',
+    }));
+    await sdv.hockeytech.pwhl_pbp(74).should.be.rejectedWith(AssetFetchError, { message: /Undefined Tab/ });
+  });
+});
+
+describe('hockeytech: resolveSeasonId (gameType filter + PWHL fallback)', () => {
+  afterEach(() => resetConfig());
+
+  it('filters the real seasons list by end-year AND gameType (default regular)', async () => {
+    useTransport(() => ({ data: SEASONS() }));
+    (await resolveSeasonId('pwhl', { season: 2026 })).should.equal(8);
+    (await resolveSeasonId('pwhl', { season: 2026, gameType: 'playoffs' })).should.equal(9);
+    (await resolveSeasonId('pwhl', { season: 2027, gameType: 'preseason' })).should.equal(10);
+    await resolveSeasonId('ahl', { season: 2027 }).should.be.rejectedWith(/No ahl season for season=2027, gameType=regular/);
+  });
+
+  it('PWHL falls back to its table when the answered list lacks the season, or the fetch failed', async () => {
+    useTransport(() => ({ data: SEASONS() })); // the live list starts at 2025-26
+    (await resolveSeasonId('pwhl', { season: 2024 })).should.equal(1);
+    (await resolveSeasonId('pwhl', { season: 2024, gameType: 'playoffs' })).should.equal(3);
+    useTransport(() => ({ data: '<html>oops</html>' })); // unparseable -> AssetFetchError -> fallback
+    (await resolveSeasonId('pwhl', { season: 2025 })).should.equal(5);
+    await resolveSeasonId('pwhl', { season: 2019 }).should.be.rejectedWith(/No pwhl season/);
+    await resolveSeasonId('echl', { season: 2025 }).should.be.rejectedWith(AssetFetchError);
+  });
+
+  it('PWHL does not fall back on a non-SdvError (a programming error is rethrown, not masked)', async () => {
+    // request() wraps a throwing transport in AssetFetchError, so raise the TypeError from the
+    // response instead: it escapes the fetch unwrapped.
+    configure({
+      retries: 0,
+      transport: {
+        hockeytech: async (req) => ({
+          status: 200,
+          headers: {},
+          url: req.url,
+          get data() {
+            throw new TypeError('boom');
+          },
+        }),
+      },
+    });
+    const err = await resolveSeasonId('pwhl', { season: 2025 }).should.be.rejectedWith(TypeError, { message: 'boom' });
+    err.should.not.be.instanceOf(AssetFetchError);
+  });
+});
+
+describe('hockeytech: T5 view URL defaults (generated wrappers)', () => {
+  afterEach(() => resetConfig());
+
+  it('each new view sends its feed/view and documented defaults', async () => {
+    const calls = useTransport(() => ({ data: '{"SiteKit":{}}' }));
+    await FLAT.hockeytech_scorebar({ league: 'ahl' });
+    await FLAT.hockeytech_stats({ league: 'pwhl', season_id: 8 });
+    await FLAT.hockeytech_player_game_log({ league: 'pwhl', player_id: 36, season_id: 7 });
+    await FLAT.hockeytech_player_search({ league: 'pwhl', search_term: 'Poulin' });
+    await FLAT.hockeytech_transactions({ league: 'whl' });
+    await FLAT.hockeytech_playoff_bracket({ league: 'qmjhl', season_id: 9 });
+    const q = calls.map((c) => c.query);
+    q[0].should.containEql({ feed: 'modulekit', view: 'scorebar', numberofdaysback: '3', numberofdaysahead: '3', limit: '100', league_id: '4', client_code: 'ahl' });
+    q[1].should.containEql({ feed: 'modulekit', view: 'statviewtype', type: 'skaters', season_id: '8' });
+    q[2].should.containEql({ feed: 'modulekit', view: 'player', category: 'gamebygame', player_id: '36', season_id: '7' });
+    q[3].should.containEql({ feed: 'modulekit', view: 'searchplayers', search_term: 'Poulin' });
+    q[4].should.containEql({ feed: 'modulekit', view: 'transactions', league_id: '7' });
+    q[5].should.containEql({ feed: 'modulekit', view: 'brackets', season_id: '9', league_id: '6', client_code: 'lhjmq' });
+    calls[5].url.should.equal('https://cluster.leaguestat.com/feed/index.php');
+    for (const c of q) {
+      c.should.have.property('lang', 'en');
+      c.should.not.have.property('league'); // the control param never reaches the feed
+    }
   });
 });

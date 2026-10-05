@@ -12,7 +12,7 @@
 // (src/leagues/_make_flat.ts).
 
 import { parse_hockeytech_seasons } from "../parsers/hockeytech.js";
-import { SdvError } from "./errors.js";
+import { AssetFetchError, NoDataError, SdvError } from "./errors.js";
 import { request } from "./request.js";
 
 /** A HockeyTech league's web-client defaults (public, shipped in each site's JS). */
@@ -45,7 +45,8 @@ const LEAGUESTAT = "https://cluster.leaguestat.com/feed/index.php";
  */
 export const HOCKEYTECH_LEAGUES: Record<string, HockeytechLeague> = {
   // ushl: PBP ships goals/penalties/goalie changes only (no coordinates).
-  // mjhl: its public key has NO gamecenter access, so pbp/game_summary come back empty.
+  // mjhl: its public key has no gamecenter access — gc/gamesummary answers `Feed type access
+  // denied.` (-> empty); pbp ships goals/penalties/goalie changes only (live 2026-10-05).
   // New-league pbpStyle defaults to hockeytech_b until a coordinate-range probe says otherwise.
   pwhl: { name: "PWHL", clientCode: "pwhl", apiKey: "446521baf8c38984", leagueId: 1, siteId: 0, baseUrl: LSCLUSTER, pbpStyle: "hockeytech_a", otPeriodLength: 600 },
   ahl: { name: "AHL", clientCode: "ahl", apiKey: "ccb91f29d6744675", leagueId: 4, siteId: 3, baseUrl: LSCLUSTER, pbpStyle: "hockeytech_a", otPeriodLength: 300 },
@@ -85,7 +86,9 @@ const LEAGUE_REFERER: Record<string, string> = {
   qmjhl: "https://www.theqmjhl.ca/",
 };
 
-const UA = "Mozilla/5.0 (compatible; sportsdataverse-js/3.x; +https://js.sportsdataverse.org/)";
+// No family User-Agent: the configured one (`configure({ userAgent })`, default
+// `Mozilla/5.0 (compatible; sportsdataverse-js/3.x)`) is sent. HockeyTech and Statcast both
+// answered 200 to that UA on 2026-10-05; the old hard-coded `+https://` token overrode it.
 
 const LEAGUE_ID_VIEWS = new Set(["scorebar", "transactions", "brackets", "teams"]);
 
@@ -160,8 +163,61 @@ export function buildHockeytechUrl(params: Record<string, any>): string {
 }
 
 /**
- * GET a HockeyTech feed and return parsed JSON (object/array), or `{}` for an
- * unparseable body. A failed fetch throws (NoDataError / AssetFetchError).
+ * HockeyTech's one recognised "the source never has this" reply: HTTP 200 with the PLAIN-TEXT
+ * body `Feed type access denied.` (observed 2026-10-05: MJHL `gc/gamesummary` — that league's
+ * public key has no gamecenter access). It is "nothing here" (py returns an empty frame), not
+ * a failed fetch. JS `\s` also covers a leading BOM (U+FEFF).
+ */
+export const HOCKEYTECH_ACCESS_DENIED = /^\s*Feed type access denied\.?\s*$/i;
+
+const isObj = (v: unknown): v is Record<string, any> => v !== null && typeof v === "object" && !Array.isArray(v);
+
+/**
+ * The reason text when `payload` is a HockeyTech error sentinel (HTTP 200, error in the
+ * body), else `null` — py `_client._invalid_view_reason`. Real shapes (captured 2026-07-12,
+ * sdv-internal-refs `hockeytech/captures/samples/pwhl/{streaks,svf_streaks}.json`):
+ * `{"SiteKit"|"GC": {..., "Undefined": "Undefined Tab <view>"}}` (modulekit / gc) and
+ * `{"error": "InvalidView error: <view>"}` (statviewfeed).
+ */
+export function hockeytechErrorReason(payload: unknown): string | null {
+  if (!isObj(payload)) return null;
+  if (typeof payload.error === "string" && payload.error) return payload.error;
+  for (const root of ["SiteKit", "GC"]) {
+    const node = payload[root];
+    if (isObj(node) && node.Undefined) return String(node.Undefined);
+  }
+  return null;
+}
+
+/**
+ * Fetch a HockeyTech feed and classify its body. Resolves the parsed JSON, or `undefined`
+ * for the recognised access-denied reply ({@link HOCKEYTECH_ACCESS_DENIED}). Throws
+ * `AssetFetchError` for an empty or unparseable body and for an error sentinel
+ * ({@link hockeytechErrorReason}): those are failed fetches whose answer is unknown, never
+ * "no data". HTTP failures throw from `request()` (404 → `NoDataError`, else
+ * `AssetFetchError`); a missing / unknown `league` throws before any request.
+ */
+export async function hockeytechFetch(params: Record<string, unknown>): Promise<unknown> {
+  const text = await hockeytechGetText(params);
+  if (text !== null && HOCKEYTECH_ACCESS_DENIED.test(text)) return undefined;
+  const { league, feed = "modulekit", view } = params as Record<string, any>;
+  const where = `HockeyTech ${league} ${feed}/${view}`;
+  const details = { url: resolveLeague(String(league)).baseUrl, status: 200 };
+  let payload: unknown;
+  try {
+    payload = JSON.parse(stripJsonp(text ?? ""));
+  } catch {
+    throw new AssetFetchError(`${where}: empty or unparseable response body`, details);
+  }
+  const reason = hockeytechErrorReason(payload);
+  if (reason) throw new AssetFetchError(`${where}: upstream error sentinel (${reason})`, details);
+  return payload;
+}
+
+/**
+ * GET a HockeyTech feed and return its parsed JSON (object/array); `{}` only for the
+ * recognised access-denied reply (parsers then give `[]`, py parity). Every other
+ * unusable body throws — see {@link hockeytechFetch}.
  *
  * Signature matches `core/client.ts` `get` so it slots into the flat dispatch's
  * GETTER_OVERRIDES. The `url` arg (the gateway `/feed/index.php` the flat
@@ -173,30 +229,20 @@ export async function hockeytechGet(
   _url: string,
   config?: { params?: Record<string, unknown> }
 ): Promise<any> {
-  const body = await hockeytechGetText(config?.params);
-  if (body === null) return {};
-  try {
-    return JSON.parse(stripJsonp(body));
-  } catch {
-    return {};
-  }
+  const payload = await hockeytechFetch(config?.params ?? {});
+  return payload === undefined ? {} : payload;
 }
 
 /**
- * The raw (still JSONP-wrapped) response text of a HockeyTech feed, or `null` when the
- * params cannot build a URL / the body is empty. A failed fetch throws. Lets callers tell
- * an unparseable body (e.g. the plain-text `Feed type access denied.`) from `{}`.
+ * The raw (still JSONP-wrapped) response text of a HockeyTech feed, or `null` for an empty
+ * body. A failed fetch throws, and so does a missing / unknown `league` (a caller error, not
+ * "no data"). Prefer {@link hockeytechFetch}, which classifies the body.
  */
 export async function hockeytechGetText(params?: Record<string, unknown>): Promise<string | null> {
   const p = (params ?? {}) as Record<string, any>;
-  let target: string;
-  try {
-    target = buildHockeytechUrl(p);
-  } catch {
-    return null;
-  }
+  const target = buildHockeytechUrl(p);
   const referer = p.league ? LEAGUE_REFERER[String(p.league)] : undefined;
-  const headers: Record<string, string> = { "User-Agent": UA, Accept: "application/json" };
+  const headers: Record<string, string> = { Accept: "application/json" };
   if (referer) headers.Referer = referer;
   // Split the key-bearing query off the URL so error messages never carry it.
   const u = new URL(target);
@@ -225,19 +271,34 @@ const PWHL_SEASON_FALLBACK = [
   { season_id: 8, season_yr: 2026, game_type_label: "regular" },
 ];
 
-/** All of a league's seasons (tidy rows incl. `season_yr` + `game_type_label`) — py `<lg>_season_id`. */
+/**
+ * All of a league's seasons (tidy rows incl. `season_yr` + `game_type_label`) — py
+ * `<lg>_season_id`. A failed fetch (HTTP error, unparseable body, error sentinel) throws;
+ * `[]` only when the feed answered with no seasons.
+ */
 export async function hockeytechSeasonId(league: string): Promise<Record<string, any>[]> {
   resolveLeague(league); // throw early on an unknown league
   const raw = await hockeytechGet("", { params: { league, feed: "modulekit", view: "seasons" } });
   return parse_hockeytech_seasons(raw);
 }
 
-/** Most-recent season as an end-year integer (max `season_yr`), or 2026 — py `most_recent_<lg>_season`. */
+/**
+ * Most-recent season as an end-year integer (max `season_yr`) — py `most_recent_<lg>_season`.
+ * A seasons list the feed answered with no usable season is `NoDataError` (py returns a
+ * hard-coded 2026 instead, already stale: PWHL's newest season is 2026-27); a failed fetch
+ * throws `AssetFetchError` / `NoDataError` from the getter.
+ */
 export async function mostRecentHockeytechSeason(league: string): Promise<number> {
   const yrs = (await hockeytechSeasonId(league))
     .map((r) => Number(r.season_yr))
     .filter((n) => Number.isFinite(n));
-  return yrs.length ? Math.max(...yrs) : 2026;
+  if (!yrs.length) {
+    throw new NoDataError(`HockeyTech ${league}: the seasons feed lists no season`, {
+      url: resolveLeague(league).baseUrl,
+      status: 200,
+    });
+  }
+  return Math.max(...yrs);
 }
 
 /**

@@ -40,6 +40,15 @@
     - 7 On3 tables: sdv-py stringifies a bool column that contains a null, while JS keeps booleans.
 - **Parity harness:** 259 more sdv-py captures (124 NBA, 109 WNBA, 26 On3), with `kind: frames` checked frame by frame. Verified endpoints go from 179 to 438.
 
+### Changed (breaking) — HockeyTech hardening (error vocabulary, User-Agent, returns descriptions)
+
+- **BREAKING: a failed HockeyTech fetch is no longer an empty result.** The shared getter behind the 16 `hockeytech_*` wrappers and the season helpers used to turn any HTTP-200 body it could not use into `{}` (so `parsed: true` gave `[]`). It now throws `AssetFetchError` for an empty or unparseable body and for HockeyTech's in-body error sentinels (`{"SiteKit"|"GC": {"Undefined": "Undefined Tab <view>"}}`, `{"error": "InvalidView error: …"}`). The one reply that still reads as empty is the recognised plain-text `Feed type access denied.` (a league key without access to that feed, e.g. MJHL's game summary): `{}` raw, `[]` parsed, as in sdv-py. HTTP 404 stays `NoDataError`. A missing or unknown `league` now throws instead of returning `{}`.
+- **BREAKING:** `most_recent_hockeytech_season` / `hockeytech_season_id` throw on a failed fetch instead of returning 2026 / `[]`. When the feed answers with no seasons, `hockeytech_season_id` returns `[]` and `most_recent_hockeytech_season` throws `NoDataError` (sdv-py returns a hard-coded 2026, already stale: PWHL's newest season is 2026-27). `hockeytech_resolve_season_id` keeps the PWHL fallback table for a failed fetch, but rethrows a non-`SdvError`.
+- The `<lg>_pbp` / `<lg>_game_corsi` analytics now also reject a `GC` error sentinel on the game summary (they used to take it as blank game metadata).
+- HockeyTech requests send the configured User-Agent (`configure({ userAgent })`, default `Mozilla/5.0 (compatible; sportsdataverse-js/3.x)`) instead of a hard-coded one carrying a `+https://` token, which also overrode `configure`. HockeyTech and Baseball Savant both answered 200 to the default UA (live check, 2026-10-05).
+- `parse_hockeytech_scorebar` now shares `parse_hockeytech_schedule`'s implementation (same `SiteKit.Scorebar` payload); both names stay.
+- The `hockeytech_scorebar`, `_stats`, `_player_search`, `_player_game_log`, `_playoff_bracket` and `_transactions` returns tables replace 250 placeholder descriptions ("HockeyTech `x` field.") with real ones: sdv-py's text where the column exists there and the captured data agrees with it, otherwise text written from the captured payloads. `hockeytech_schedule` (the same `SiteKit.Scorebar` frame) now carries the scorebar descriptions, replacing several that were wrong (`date`, `game_letter`, `quick_score`).
+
 ### Fixed — parser / analytics minors (sdv-py parity)
 
 - **Statcast `/gf`:** an empty-string id cell (`batter: ""`) is now `null`, like sdv-py's `to_numeric("")`; it kept the column text before (whitespace still leaves the column as read, as in py).
@@ -246,8 +255,8 @@ retry → classification.
   exhausted) instead of raw axios errors — siblings under `SdvError`;
   `NoESPNDataError` aliases `NoDataError`. The Statcast, BartTorvik and
   HockeyTech getters no longer turn a failed HTTP fetch into `{}` / `""`
-  (HockeyTech still returns `{}` for an unknown league or an unparseable 200
-  body).
+  (HockeyTech's unknown-league and unparseable-200 cases, which still
+  returned `{}` here, throw as of the "HockeyTech hardening" entry above.)
 - Retries network errors and 403 / 408 / 429 / 500 / 502 / 503 / 504 with
   backoff + jitter (honours `Retry-After`; default 3 retries, at most 4 on
   statuses). Auth-gated families drop 403 via

@@ -7,7 +7,7 @@
 // reported as an empty game.
 
 import { AssetFetchError } from "../core/errors.js";
-import { HOCKEYTECH_LEAGUES, hockeytechGetText, stripJsonp } from "../core/hockeytech_runtime.js";
+import { HOCKEYTECH_LEAGUES, hockeytechFetch } from "../core/hockeytech_runtime.js";
 import {
   enrich_pbp,
   game_corsi_rows,
@@ -21,14 +21,6 @@ type GameId = number | string;
 
 const isObj = (v: unknown): v is Record<string, any> => v !== null && typeof v === "object" && !Array.isArray(v);
 
-/**
- * HockeyTech's recognised "this key has no access to this feed" reply: HTTP 200 with the
- * PLAIN-TEXT body `Feed type access denied.` (observed 2026-10-05: MJHL `gc/gamesummary`).
- * A league that never has the data is "nothing here" (py returns empty / blank for it), not a
- * failed fetch.
- */
-const ACCESS_DENIED = /^\s*Feed type access denied\.?\s*$/i; // JS \s also covers a leading BOM (U+FEFF)
-
 interface FeedSpec {
   /** Does the parsed body carry the feed's recognisable envelope? */
   ok: (payload: any) => boolean;
@@ -38,24 +30,17 @@ interface FeedSpec {
 }
 
 /**
- * Fetch a feed and require its recognisable envelope. An unparseable body, an error
- * sentinel or any other structureless 200 is a FAILED fetch (unknown) -> `AssetFetchError`,
- * never "no data". The recognised access-denied reply and a present-but-empty envelope are
- * genuinely empty and give `[]` downstream. (The shared `hockeytechGet` collapses all of
- * these to `{}`, hence the raw-text fetch.)
+ * Fetch a feed and require its recognisable envelope. An unparseable body or an error
+ * sentinel already throws `AssetFetchError` in `hockeytechFetch`; any other 200 without the
+ * envelope is a failed fetch too, never "no data". The recognised access-denied reply and a
+ * present-but-empty envelope are genuinely empty and give `[]` downstream.
  */
 async function feed(league: string, f: string, view: string, gameId: GameId, spec: FeedSpec): Promise<any> {
-  const text = await hockeytechGetText({ league, feed: f, view, game_id: gameId });
-  if (text !== null && ACCESS_DENIED.test(text)) return spec.denied;
-  let payload: any;
-  try {
-    payload = JSON.parse(stripJsonp(text ?? ""));
-  } catch {
-    payload = undefined;
-  }
+  const payload = await hockeytechFetch({ league, feed: f, view, game_id: gameId });
+  if (payload === undefined) return spec.denied;
   if (!spec.ok(payload)) {
     throw new AssetFetchError(
-      `HockeyTech ${league} ${f}/${view} game ${gameId}: response has no ${spec.what} structure (unparseable body or error sentinel)`,
+      `HockeyTech ${league} ${f}/${view} game ${gameId}: response has no ${spec.what} structure`,
       { url: `hockeytech:${league}/${f}/${view}?game_id=${gameId}` }
     );
   }

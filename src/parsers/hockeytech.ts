@@ -217,9 +217,12 @@ export function parse_hockeytech_game_summary(payload: any): Record<string, any>
   return normalize(goals);
 }
 
-/** Parse `hockeytech_scorebar()` — one row per game in the live window (`SiteKit.Scorebar`). */
+/**
+ * Parse `hockeytech_scorebar()` — one row per game in the live window. Same `SiteKit.Scorebar`
+ * payload as the schedule view, so it shares {@link parse_hockeytech_schedule}.
+ */
 export function parse_hockeytech_scorebar(payload: any): Record<string, any>[] {
-  return normalize(siteKitRows(payload));
+  return parse_hockeytech_schedule(payload);
 }
 
 /** Parse `hockeytech_player_search()` — one row per match (`SiteKit.Searchplayers`). */

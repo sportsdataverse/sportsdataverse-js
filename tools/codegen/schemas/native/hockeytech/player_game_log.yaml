@@ -3,118 +3,118 @@ kind: dataframe
 columns:
 - name: g_month
   type: character
-  description: 'HockeyTech `g_month` field.'
+  description: 'Month name of the game date (e.g. ''November'').'
 - name: id
   type: character
-  description: 'HockeyTech record id.'
+  description: 'HockeyTech game id.'
 - name: home_team
   type: character
-  description: 'HockeyTech `home_team` field.'
+  description: 'HockeyTech team id of the home team.'
 - name: visiting_team
   type: character
-  description: 'HockeyTech `visiting_team` field.'
+  description: 'HockeyTech team id of the visiting team.'
 - name: date_played
   type: character
-  description: 'HockeyTech `date_played` field.'
+  description: 'Game date (YYYY-MM-DD).'
 - name: home
   type: character
-  description: 'HockeyTech `home` field.'
+  description: 'Whether the player''s team was home.'
 - name: shots
   type: character
-  description: 'HockeyTech `shots` field.'
+  description: 'Shots on goal.'
 - name: goalie
   type: character
-  description: 'HockeyTech `goalie` field.'
+  description: 'Whether the player appeared as a goalie in this game (''0'' on the captured skater row).'
 - name: home_team_code
   type: character
-  description: 'HockeyTech `home_team_code` field.'
+  description: 'Short team code of the home team (e.g. ''VAN'').'
 - name: home_team_name
   type: character
-  description: 'HockeyTech `home_team_name` field.'
+  description: 'Full name of the home team.'
 - name: home_division
   type: character
-  description: 'HockeyTech `home_division` field.'
+  description: 'Home team division.'
 - name: visiting_team_code
   type: character
-  description: 'HockeyTech `visiting_team_code` field.'
+  description: 'Short team code of the visiting team (e.g. ''SEA'').'
 - name: visiting_team_name
   type: character
-  description: 'HockeyTech `visiting_team_name` field.'
+  description: 'Full name of the visiting team.'
 - name: visiting_division
   type: character
-  description: 'HockeyTech `visiting_division` field.'
+  description: 'Visiting team division.'
 - name: goals
   type: character
-  description: 'HockeyTech `goals` field.'
+  description: 'Goals scored.'
 - name: ice_time_minutes_seconds
   type: character
-  description: 'HockeyTech `ice_time_minutes_seconds` field.'
+  description: 'Ice time in minutes and seconds.'
 - name: hits
   type: character
-  description: 'HockeyTech `hits` field.'
+  description: 'Hits.'
 - name: shots_blocked_by_player
   type: character
-  description: 'HockeyTech `shots_blocked_by_player` field.'
+  description: 'Shots blocked by the player.'
 - name: plusminus
   type: character
-  description: 'HockeyTech `plusminus` field.'
+  description: 'Plus/minus rating (the same value as `plus_minus`).'
 - name: assists
   type: character
-  description: 'HockeyTech `assists` field.'
+  description: 'Assists.'
 - name: shootout_goals
   type: character
-  description: 'HockeyTech `shootout_goals` field.'
+  description: 'Shootout goals.'
 - name: shootout_attempts
   type: character
-  description: 'HockeyTech `shootout_attempts` field.'
+  description: 'Shootout attempts.'
 - name: shootout_goals_win
   type: character
-  description: 'HockeyTech `shootout_goals_win` field.'
+  description: 'Shootout game-winning goals (the feed''s `shootout_goals_win`).'
 - name: shootout_shots
   type: character
-  description: 'HockeyTech `shootout_shots` field.'
+  description: 'Shootout shots taken.'
 - name: penalty_minutes
   type: character
-  description: 'HockeyTech `penalty_minutes` field.'
+  description: 'Penalty minutes.'
 - name: shooting_percentage
   type: character
-  description: 'HockeyTech `shooting_percentage` field.'
+  description: 'Shooting percentage.'
 - name: shootout_shots_percentage
   type: character
-  description: 'HockeyTech `shootout_shots_percentage` field.'
+  description: 'Shootout scoring percentage (shootout goals per shootout shot).'
 - name: points
   type: character
-  description: 'HockeyTech `points` field.'
+  description: 'Total points (goals + assists).'
 - name: player_team
   type: character
-  description: 'HockeyTech `player_team` field.'
+  description: 'HockeyTech team id of the player''s team in this game.'
 - name: plus_minus
   type: character
-  description: 'HockeyTech `plus_minus` field.'
+  description: 'Plus/minus rating.'
 - name: power_play_goals
   type: character
-  description: 'HockeyTech `power_play_goals` field.'
+  description: 'Power-play goals.'
 - name: short_handed_goals
   type: character
-  description: 'HockeyTech `short_handed_goals` field.'
+  description: 'Short-handed goals.'
 - name: empty_net_goals
   type: character
-  description: 'HockeyTech `empty_net_goals` field.'
+  description: 'Empty-net goals.'
 - name: insurange_goals
   type: character
-  description: 'HockeyTech `insurange_goals` field.'
+  description: 'Insurance goals (the feed spells the key `insurange_goals`).'
 - name: game_winning_goals
   type: character
-  description: 'HockeyTech `game_winning_goals` field.'
+  description: 'Game-winning goals.'
 - name: first_goals_scored
   type: character
-  description: 'HockeyTech `first_goals_scored` field.'
+  description: 'First goals of a game (the feed''s `first_goals_scored`).'
 - name: game_tieing_goals
   type: character
-  description: 'HockeyTech `game_tieing_goals` field.'
+  description: 'Game-tying goals.'
 - name: faceoffs_taken
   type: character
-  description: 'HockeyTech `faceoffs_taken` field.'
+  description: 'Faceoff attempts.'
 - name: faceoffs_won
   type: character
-  description: 'HockeyTech `faceoffs_won` field.'
+  description: 'Faceoff wins.'
