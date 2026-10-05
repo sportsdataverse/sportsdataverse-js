@@ -522,7 +522,7 @@ const EDITORIAL_BOXSCORE_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_yahoo_scores_boxscore",
-  "returnsSchema": "native/yahoo/editorial_boxscore"
+  "returnsSchema": "native/yahoo_scores/boxscore"
 };
 
 /**
@@ -576,7 +576,7 @@ const EDITORIAL_SCOREBOARD_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_yahoo_scores_scoreboard",
-  "returnsSchema": "native/yahoo/editorial_scoreboard"
+  "returnsSchema": "native/yahoo_scores/scoreboard"
 };
 
 /**

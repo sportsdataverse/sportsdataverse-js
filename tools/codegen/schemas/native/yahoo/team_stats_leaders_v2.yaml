@@ -1,22 +1,5 @@
-frames:
-- columns: []
-  section: leagues
-- columns:
-  - description: ''
-    name: display_name
-    type: character
-  - description: ''
-    name: full_name
-    type: character
-  - description: ''
-    name: nickname
-    type: character
-  - description: ''
-    name: team_football
-    type: character
-  - description: ''
-    name: individual_football
-    type: character
-  section: teams
-kind: frames
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_stats. The spec ships no typed list item for this query, so columns are not enumerable ahead of a live capture; the parser snake_cases + flattens whatever keys the payload ships.
 schema: team_stats_leaders_v2
+kind: dataframe
+columns: []

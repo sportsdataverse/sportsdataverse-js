@@ -22,7 +22,7 @@ const BASEBALL_PLAYER_META_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_meta_baseball"
+  "returnsSchema": "native/cbs/baseball_player_meta"
 };
 
 /**
@@ -53,7 +53,7 @@ const BOXSCORE_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/game_boxscore"
+  "returnsSchema": "native/cbs/boxscore"
 };
 
 /**
@@ -163,7 +163,7 @@ const CLIENT_CONFIGURATION_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/client_config"
+  "returnsSchema": "native/cbs/client_configuration"
 };
 
 /**
@@ -275,7 +275,7 @@ const DEPTH_CHARTS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_depth_charts"
+  "returnsSchema": "native/cbs/depth_charts"
 };
 
 /**
@@ -500,7 +500,7 @@ const FEATURED_GAME_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_scoreboard",
-  "returnsSchema": "native/cbs/game_featured"
+  "returnsSchema": "native/cbs/featured_game"
 };
 
 /**
@@ -703,7 +703,7 @@ const GAME_HQ_ODDS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_odds",
-  "returnsSchema": "native/cbs/game_odds_hq"
+  "returnsSchema": "native/cbs/game_hq_odds"
 };
 
 /**
@@ -1460,7 +1460,7 @@ const HOCKEY_PLAYER_META_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_hockey_meta"
+  "returnsSchema": "native/cbs/hockey_player_meta"
 };
 
 /**
@@ -1841,7 +1841,7 @@ const PLAYER_GOLF_METADATA_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_meta_golf"
+  "returnsSchema": "native/cbs/player_golf_metadata"
 };
 
 /**
@@ -2236,7 +2236,7 @@ const POSITION_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_position_rankings"
+  "returnsSchema": "native/cbs/position_rankings"
 };
 
 /**
@@ -2277,7 +2277,7 @@ const PROBABLE_PLAYERS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/game_probable_players"
+  "returnsSchema": "native/cbs/probable_players"
 };
 
 /**
@@ -2346,7 +2346,7 @@ const RECRUIT_TEAM_ASSOCIATIONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/player_recruit_associations"
+  "returnsSchema": "native/cbs/recruit_team_associations"
 };
 
 /**
@@ -2378,7 +2378,7 @@ const RUWT_HIGHLIGHTS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/game_ruwt_highlights"
+  "returnsSchema": "native/cbs/ruwt_highlights"
 };
 
 /**
@@ -2556,7 +2556,7 @@ const SPORTS_LINE_TEAM_RANKINGS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/team_rankings_sportsline"
+  "returnsSchema": "native/cbs/sports_line_team_rankings"
 };
 
 /**
@@ -2592,7 +2592,7 @@ const SPORTS_LINE_TEAM_STANDINGS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_standings",
-  "returnsSchema": "native/cbs/team_standings_sportsline"
+  "returnsSchema": "native/cbs/sports_line_team_standings"
 };
 
 /**
@@ -2633,7 +2633,7 @@ const SUB_DIVISIONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/division_subdivisions"
+  "returnsSchema": "native/cbs/sub_divisions"
 };
 
 /**
@@ -3084,7 +3084,7 @@ const WEATHER_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_cbs_list",
-  "returnsSchema": "native/cbs/game_weather"
+  "returnsSchema": "native/cbs/weather"
 };
 
 /**

@@ -12,15 +12,24 @@
 # Never hand-edit a vendored file. JS-only endpoints and JS-side patches go in
 # tools/codegen/overlay/<family>.yaml; new/changed shared endpoints land in
 # sdv-py first. Fetch is GitHub raw by default, or a local sdv-py checkout via
-# env SDV_PY_REPO (read with `git show <ref>:<path>`, never its working tree).
+# env SDV_PY_REPO (read with `git cat-file` at the ref, never its working tree).
 #
 # Per family (key = JS family = output file + `api` stem):
 #   from:     py endpoint stem (default: the key)
 #   names:    py short -> JS short (keeps JS public names; Task 4 flips CBS)
-#   parsers:  py parser name -> JS registry name (src/parsers/_registry.ts)
-#   parser_overrides: JS short -> JS parser (where JS uses a different parser
-#             than the py name maps to; keyed by the post-rename JS short)
+#   parsers:  py parser name -> {js: <JS registry name>, schema_compatible: <bool>}
+#             A py parser with NO entry is the same parser ported to JS under
+#             py's name. `schema_compatible: true` declares the JS parser an
+#             equivalent port, so py's returns schema describes its output.
+#   parser_overrides: JS short -> JS parser (JS deliberately uses a different
+#             parser than py's maps to; keyed by the post-rename JS short)
 #   schemas:  returns-schema path prefix rewrite, py -> JS
+#
+# Returns-schema policy (a returns table must describe what the JS parser
+# returns): a py `returns_schema` is kept only when the endpoint's parser is
+# py's name ported as-is or a `schema_compatible: true` mapping, and no
+# `parser_overrides` entry applies. Otherwise it is dropped, and the family's
+# overlay attaches JS's own schema where JS had one (no table beats a wrong one).
 # A family with an overlay/<family>.yaml gets it merged on top.
 source:
   repo: sportsdataverse/sportsdataverse-py
@@ -34,41 +43,47 @@ families:
   espn_site_v2: {}
   espn_core_v2:
     parsers:
-      # py-only weekly FPI parser; JS falls back to the Core v2 list parser.
-      parse_weekly_powerindex: parse_items
+      # py-only weekly FPI parser (not ported); the Core v2 list parser stands in.
+      parse_weekly_powerindex: {js: parse_items, schema_compatible: false}
   espn_web_v3: {}
   leagues: {}
   mlb_statcast: {}
   nfl_api:
     parsers:
-      # py-only parsers. game_details_* are one-row object flatteners, which is
-      # exactly parse_nfl_team; live_* fall back to the same generic flattener.
-      parse_nfl_game_details_v2: parse_nfl_team
-      parse_nfl_game_details_by_slug: parse_nfl_team
-      parse_nfl_live_team_statistics: parse_nfl_team
-      parse_nfl_live_player_statistics: parse_nfl_team
+      # py-only parsers (not ported): the generic one-row flattener stands in.
+      parse_nfl_game_details_v2: {js: parse_nfl_team, schema_compatible: false}
+      parse_nfl_game_details_by_slug: {js: parse_nfl_team, schema_compatible: false}
+      parse_nfl_live_team_statistics: {js: parse_nfl_team, schema_compatible: false}
+      parse_nfl_live_player_statistics: {js: parse_nfl_team, schema_compatible: false}
   nhl_api_web: {}
   nhl_edge: {}
   nhl_records: {}
   nhl_stats_rest: {}
   mlb:
     from: mlb_api
+    # overlay/mlb.yaml: the 14 JS-only endpoints, JS's schemas for the two
+    # parser_overrides below, and a `pbp` patch for sdv-py@719de79's
+    # `timecode` -> `language` query-key bug. Drop that patch once the pin
+    # includes the upstream sdv-py fix.
     parsers:
-      parse_mlb_api_schedule: parse_mlb_schedule
-      parse_mlb_api_list: parse_mlb_list
-      parse_mlb_api_boxscore: parse_mlb_boxscore
-      parse_mlb_api_linescore: parse_mlb_linescore
-      parse_mlb_api_play_by_play: parse_mlb_play_by_play
-      parse_mlb_api_win_probability: parse_mlb_win_probability
-      parse_mlb_api_team_roster: parse_mlb_team_roster
-      parse_mlb_api_draft_latest: parse_mlb_draft_latest
-      parse_mlb_api_timecodes: parse_mlb_timecodes
+      # src/parsers/mlb.ts is a faithful port of sdv-py's MLB Stats parsers.
+      parse_mlb_api_schedule: {js: parse_mlb_schedule, schema_compatible: true}
+      parse_mlb_api_list: {js: parse_mlb_list, schema_compatible: true}
+      parse_mlb_api_boxscore: {js: parse_mlb_boxscore, schema_compatible: true}
+      parse_mlb_api_linescore: {js: parse_mlb_linescore, schema_compatible: true}
+      parse_mlb_api_play_by_play: {js: parse_mlb_play_by_play, schema_compatible: true}
+      parse_mlb_api_win_probability: {js: parse_mlb_win_probability, schema_compatible: true}
+      parse_mlb_api_team_roster: {js: parse_mlb_team_roster, schema_compatible: true}
+      parse_mlb_api_draft_latest: {js: parse_mlb_draft_latest, schema_compatible: true}
+      parse_mlb_api_timecodes: {js: parse_mlb_timecodes, schema_compatible: true}
     parser_overrides:
       teams_stats: parse_mlb_person_stats
       team_roster_type: parse_mlb_team_roster
     schemas:
       native/mlb_api/: native/mlb/
   torvik:
+    # Both py endpoints use JS's positional parsers, so JS keeps its own schemas
+    # (overlay/torvik.yaml, with the 3 JS-only endpoints).
     parser_overrides:
       ratings: parse_torvik_ratings
       team_factors: parse_torvik_team_factors
@@ -91,11 +106,13 @@ families:
       player_recruit_associations: recruit_team_associations
       team_rankings_sportsline: sports_line_team_rankings
       team_standings_sportsline: sports_line_team_standings
+    # JS's CBS parsers were written independently of sdv-py's, so py's schemas
+    # don't describe them: JS keeps its own (described) schemas via overlay/cbs.yaml.
     parsers:
-      parse_cbs_napi: parse_cbs_list
-      parse_cbs_napi_scoring_drives: parse_cbs_list
-      parse_cbs_napi_scoring_plays: parse_cbs_list
-      parse_cbs_napi_standings: parse_cbs_standings
+      parse_cbs_napi: {js: parse_cbs_list, schema_compatible: false}
+      parse_cbs_napi_scoring_drives: {js: parse_cbs_list, schema_compatible: false}
+      parse_cbs_napi_scoring_plays: {js: parse_cbs_list, schema_compatible: false}
+      parse_cbs_napi_standings: {js: parse_cbs_standings, schema_compatible: false}
     parser_overrides:
       featured_game: parse_cbs_scoreboard
       game_scoring_scoreboard: parse_cbs_scoreboard
@@ -110,10 +127,13 @@ families:
       native/cbs_napi/: native/cbs/
   yahoo:
     from: yahoo_shangrila
+    # JS's Yahoo parsers were written independently of sdv-py's, so JS keeps its
+    # own schemas via overlay/yahoo.yaml (the editorial routes get the
+    # yahoo_scores schemas of the parsers they run through).
     parsers:
-      parse_yahoo_shangrila: parse_yahoo_list
-      parse_yahoo_shangrila_tables: parse_yahoo_stats
-      parse_yahoo_editorial: parse_yahoo_scores_list
+      parse_yahoo_shangrila: {js: parse_yahoo_list, schema_compatible: false}
+      parse_yahoo_shangrila_tables: {js: parse_yahoo_stats, schema_compatible: false}
+      parse_yahoo_editorial: {js: parse_yahoo_scores_list, schema_compatible: false}
     parser_overrides:
       game_stats_leaders: parse_yahoo_stats
       league_stats_by_team: parse_yahoo_stats

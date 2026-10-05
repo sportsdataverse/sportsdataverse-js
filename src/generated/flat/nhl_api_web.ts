@@ -88,7 +88,8 @@ const CLUB_SCHEDULE_SEASON_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     }
   ],
   "queryParams": [],
@@ -160,7 +161,8 @@ const CLUB_STATS_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -382,7 +384,8 @@ const GOALIE_LEADERS_DEF: WrapperDef = {
   "pathParams": [
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -485,7 +488,8 @@ const PLAYER_GAME_LOG_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",
@@ -580,7 +584,8 @@ const PLAYOFF_SERIES_DEF: WrapperDef = {
   "path": "/v1/schedule/playoff-series/{season}/{series_letter}",
   "pathParams": [
     {
-      "name": "season"
+      "name": "season",
+      "transform": "format_nhl_season"
     },
     {
       "name": "series_letter"
@@ -650,7 +655,8 @@ const ROSTER_DEF: WrapperDef = {
     },
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     }
   ],
   "queryParams": [],
@@ -810,7 +816,8 @@ const SKATER_LEADERS_DEF: WrapperDef = {
   "pathParams": [
     {
       "name": "season",
-      "required": false
+      "required": false,
+      "transform": "format_nhl_season"
     },
     {
       "name": "game_type",

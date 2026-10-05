@@ -106,11 +106,11 @@ const GAME_DETAILS_BY_SLUG_DEF: WrapperDef = {
     {
       "name": "include_replays",
       "queryKey": "includeReplays",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     }
   ],
   "parser": "parse_nfl_team",
-  "returnsSchema": "native/nfl_api/game_details_by_slug",
   "auth": true
 };
 
@@ -146,26 +146,29 @@ const GAME_DETAILS_V2_DEF: WrapperDef = {
     {
       "name": "include_drive_chart",
       "queryKey": "includeDriveChart",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_replays",
       "queryKey": "includeReplays",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_standings",
       "queryKey": "includeStandings",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_tagged_videos",
       "queryKey": "includeTaggedVideos",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     }
   ],
   "parser": "parse_nfl_team",
-  "returnsSchema": "native/nfl_api/game_details_v2",
   "auth": true
 };
 
@@ -296,7 +299,6 @@ const LIVE_PLAYER_STATISTICS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_nfl_team",
-  "returnsSchema": "native/nfl_api/live_player_statistics",
   "auth": true
 };
 
@@ -329,7 +331,6 @@ const LIVE_TEAM_STATISTICS_DEF: WrapperDef = {
   ],
   "queryParams": [],
   "parser": "parse_nfl_team",
-  "returnsSchema": "native/nfl_api/live_team_statistics",
   "auth": true
 };
 
@@ -549,22 +550,26 @@ const WEEKLY_GAME_DETAILS_DEF: WrapperDef = {
     {
       "name": "include_drive_chart",
       "queryKey": "includeDriveChart",
-      "default": true
+      "default": true,
+      "transform": "_bool_str"
     },
     {
       "name": "include_replays",
       "queryKey": "includeReplays",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_standings",
       "queryKey": "includeStandings",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     },
     {
       "name": "include_tagged_videos",
       "queryKey": "includeTaggedVideos",
-      "default": false
+      "default": false,
+      "transform": "_bool_str"
     }
   ],
   "parser": "parse_nfl_weekly_game_details",

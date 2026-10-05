@@ -7,7 +7,8 @@
 endpoints:
 # ---------------------------------------------------------------------------
 # Patch: sdv-py@719de79 maps `timecode` to the `language` query key (a py-side
-# bug). The Stats API key is `timecode`. Drop this patch once fixed upstream.
+# bug). The Stats API key is `timecode`. Drop this patch once the vendor pin
+# includes the upstream sdv-py fix.
 # ---------------------------------------------------------------------------
 - short: pbp
   extra_params:
@@ -23,6 +24,15 @@ endpoints:
   - name: fields
     query_key: fields
     type: str
+# ---------------------------------------------------------------------------
+# JS's schemas for the two endpoints vendor.yaml's parser_overrides route
+# through a different parser than sdv-py's (py's schema would describe the
+# wrong output).
+# ---------------------------------------------------------------------------
+- short: teams_stats
+  returns_schema: native/mlb/teams_stats
+- short: team_roster_type
+  returns_schema: native/mlb/team_roster_type
 # ---------------------------------------------------------------------------
 # JS-only endpoints. sdv-py ships these 14 as hand-written wrappers in
 # sportsdataverse/mlb/mlb_api_extra.py (same public names), not as codegen

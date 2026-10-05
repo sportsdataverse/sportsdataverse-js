@@ -1,48 +1,35 @@
-columns:
-- description: ''
-  name: name
-  type: character
-- description: ''
-  name: short_name
-  type: character
-- description: ''
-  name: full_name
-  type: character
-- description: ''
-  name: display_short
-  type: character
-- description: ''
-  name: current_season_phase
-  type: character
-- description: ''
-  name: current_week
-  type: integer
-- description: ''
-  name: current_season
-  type: integer
-- description: ''
-  name: stats_season
-  type: character
-- description: ''
-  name: sport_name
-  type: character
-- description: ''
-  name: league_weeks
-  type: character
-- description: ''
-  name: alias_url
-  type: character
-- description: ''
-  name: alias_navigation_links
-  type: character
-- description: ''
-  name: league_seasons
-  type: character
-- description: ''
-  name: bye_weeks
-  type: character
-- description: ''
-  name: divisions
-  type: character
-kind: dataframe
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
 schema: leagues_season_states
+kind: dataframe
+columns:
+- name: name
+  type: character
+- name: short_name
+  type: character
+- name: full_name
+  type: character
+- name: display_short
+  type: character
+- name: current_season_phase
+  type: character
+- name: current_week
+  type: numeric
+- name: current_season
+  type: numeric
+- name: stats_season
+  type: list
+- name: sport_name
+  type: character
+- name: league_weeks
+  type: list
+- name: alias_url
+  type: character
+- name: alias_navigation_links
+  type: character
+- name: league_seasons
+  type: list
+- name: bye_weeks
+  type: list
+- name: divisions
+  type: list

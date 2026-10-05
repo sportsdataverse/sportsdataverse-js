@@ -562,7 +562,8 @@ const ATHLETES_INDEX_DEF: WrapperDef = {
     {
       "name": "active",
       "queryKey": "active",
-      "default": true
+      "default": true,
+      "transform": "bool_str"
     },
     {
       "name": "limit",

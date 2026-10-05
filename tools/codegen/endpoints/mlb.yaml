@@ -31,7 +31,8 @@ endpoints:
   returns_schema: native/mlb/schedule_postseason
 # ---------------------------------------------------------------------------
 # Patch: sdv-py@719de79 maps `timecode` to the `language` query key (a py-side
-# bug). The Stats API key is `timecode`. Drop this patch once fixed upstream.
+# bug). The Stats API key is `timecode`. Drop this patch once the vendor pin
+# includes the upstream sdv-py fix.
 # ---------------------------------------------------------------------------
 - short: pbp
   returns_schema: native/mlb/pbp
@@ -1172,6 +1173,11 @@ endpoints:
     team_ids: '147'
   parser: parse_mlb_list
   returns_schema: native/mlb/teams_history
+# ---------------------------------------------------------------------------
+# JS's schemas for the two endpoints vendor.yaml's parser_overrides route
+# through a different parser than sdv-py's (py's schema would describe the
+# wrong output).
+# ---------------------------------------------------------------------------
 - short: teams_stats
   summary: View team stats.
   path: /api/v1/teams/stats

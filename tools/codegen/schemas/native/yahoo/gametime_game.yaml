@@ -1,12 +1,11 @@
-columns:
-- description: ''
-  name: game_id
-  type: character
-- description: ''
-  name: gametime_ticket_url
-  type: character
-- description: ''
-  name: game_ticket_price
-  type: character
-kind: dataframe
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
 schema: gametime_game
+kind: dataframe
+columns:
+- name: game_id
+  type: character
+- name: gametime_ticket_url
+  type: character
+- name: game_ticket_price
+  type: character

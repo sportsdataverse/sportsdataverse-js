@@ -122,9 +122,15 @@ drifted since the 2026-06 fork:
   `league=ncaaf` — pass `league` explicitly. **BREAKING** for callers that passed a
   locale or relied on the `league` default.
 - **`sdv.cbs.*`:** host `https://api.cbssports.com/napi` (what sdv-py ships).
-- About 166 more returns-schema files reach the docs (619, up from 453), including
-  NHL Records, NHL EDGE, NHL Stats REST and the ESPN per-league schemas. CBS and
-  Yahoo returns tables now follow sdv-py's schemas.
+- **Param transforms:** `sdv.nhl.nhlEdge*` / `nhlApiWeb*` accept a 4-digit season
+  and send the 8-digit form (`season: 2025` → `20242025`, sdv-py's
+  `format_nhl_season`; an unrecognized season throws). `nflApi*` `include_*` flags and
+  ESPN `athletes_index` `active` are sent as `"true"`/`"false"`. The codegen fails on
+  a transform the runtime doesn't implement.
+- 178 returns-schema files arrive from sdv-py (NHL Records, NHL EDGE, NHL Stats
+  REST, MLB, nfl_api and the ESPN per-league schemas). A py schema is attached only
+  where the JS parser is declared equivalent to sdv-py's; CBS, Yahoo, torvik and
+  the endpoints on a different or fallback parser keep JS's own schema or show none.
 
 ## v3.1.0
 

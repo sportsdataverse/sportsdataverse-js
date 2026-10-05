@@ -777,7 +777,8 @@ export const WRAPPERS: WrapperDef[] = [
       {
         "name": "active",
         "queryKey": "active",
-        "default": true
+        "default": true,
+        "transform": "bool_str"
       },
       {
         "name": "limit",
@@ -5497,7 +5498,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/v1/schedule/playoff-series/{season}/{series_letter}",
     "pathParams": [
       {
-        "name": "season"
+        "name": "season",
+        "transform": "format_nhl_season"
       },
       {
         "name": "series_letter"
@@ -5549,7 +5551,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       }
     ],
     "queryParams": [],
@@ -5609,7 +5612,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5650,7 +5654,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       }
     ],
     "queryParams": [],
@@ -5702,7 +5707,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5736,7 +5742,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "pathParams": [
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5758,7 +5765,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "pathParams": [
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5861,7 +5869,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5886,7 +5895,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5911,7 +5921,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5942,7 +5953,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5966,7 +5978,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -5994,7 +6007,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6018,7 +6032,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6043,7 +6058,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6071,7 +6087,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6101,7 +6118,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6125,7 +6143,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6156,7 +6175,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6177,7 +6197,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "pathParams": [
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6202,7 +6223,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6227,7 +6249,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6252,7 +6275,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6276,7 +6300,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6301,7 +6326,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6326,7 +6352,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6350,7 +6377,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6378,7 +6406,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6399,7 +6428,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "pathParams": [
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6424,7 +6454,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6446,7 +6477,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "pathParams": [
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6471,7 +6503,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6502,7 +6535,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6526,7 +6560,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6551,7 +6586,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6580,7 +6616,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6604,7 +6641,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6612,8 +6650,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 2
       }
     ],
-    "queryParams": [],
-    "returnsSchema": "native/nhl_edge/team_skating_speed_detail"
+    "queryParams": []
   },
   {
     "short": "team_skating_speed_top_10",
@@ -6631,7 +6668,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6655,7 +6693,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6683,7 +6722,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6707,7 +6747,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -6732,7 +6773,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       },
       {
         "name": "season",
-        "required": false
+        "required": false,
+        "transform": "format_nhl_season"
       },
       {
         "name": "game_type",
@@ -7981,22 +8023,26 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "include_drive_chart",
         "queryKey": "includeDriveChart",
-        "default": true
+        "default": true,
+        "transform": "_bool_str"
       },
       {
         "name": "include_replays",
         "queryKey": "includeReplays",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       },
       {
         "name": "include_standings",
         "queryKey": "includeStandings",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       },
       {
         "name": "include_tagged_videos",
         "queryKey": "includeTaggedVideos",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       }
     ],
     "parser": "parse_nfl_weekly_game_details",
@@ -8017,7 +8063,6 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_nfl_team",
-    "returnsSchema": "native/nfl_api/live_team_statistics",
     "auth": true
   },
   {
@@ -8034,7 +8079,6 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_nfl_team",
-    "returnsSchema": "native/nfl_api/live_player_statistics",
     "auth": true
   },
   {
@@ -8053,26 +8097,29 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "include_drive_chart",
         "queryKey": "includeDriveChart",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       },
       {
         "name": "include_replays",
         "queryKey": "includeReplays",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       },
       {
         "name": "include_standings",
         "queryKey": "includeStandings",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       },
       {
         "name": "include_tagged_videos",
         "queryKey": "includeTaggedVideos",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       }
     ],
     "parser": "parse_nfl_team",
-    "returnsSchema": "native/nfl_api/game_details_v2",
     "auth": true
   },
   {
@@ -8091,11 +8138,11 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "include_replays",
         "queryKey": "includeReplays",
-        "default": false
+        "default": false,
+        "transform": "_bool_str"
       }
     ],
     "parser": "parse_nfl_team",
-    "returnsSchema": "native/nfl_api/game_details_by_slug",
     "auth": true
   },
   {
@@ -9310,7 +9357,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/client_config"
+    "returnsSchema": "native/cbs/client_configuration"
   },
   {
     "short": "coach_rankings",
@@ -9372,7 +9419,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/division_subdivisions"
+    "returnsSchema": "native/cbs/sub_divisions"
   },
   {
     "short": "endpoint_registry",
@@ -9530,7 +9577,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/game_boxscore"
+    "returnsSchema": "native/cbs/boxscore"
   },
   {
     "short": "game_content_preview",
@@ -9599,7 +9646,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_scoreboard",
-    "returnsSchema": "native/cbs/game_featured"
+    "returnsSchema": "native/cbs/featured_game"
   },
   {
     "short": "game_lineup",
@@ -9673,7 +9720,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_odds",
-    "returnsSchema": "native/cbs/game_odds_hq"
+    "returnsSchema": "native/cbs/game_hq_odds"
   },
   {
     "short": "game_outcomes",
@@ -9714,7 +9761,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/game_probable_players"
+    "returnsSchema": "native/cbs/probable_players"
   },
   {
     "short": "game_props",
@@ -9783,7 +9830,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/game_ruwt_highlights"
+    "returnsSchema": "native/cbs/ruwt_highlights"
   },
   {
     "short": "game_scoring_boxscores",
@@ -10007,7 +10054,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/game_weather"
+    "returnsSchema": "native/cbs/weather"
   },
   {
     "short": "golf_event_markets",
@@ -10197,7 +10244,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_depth_charts"
+    "returnsSchema": "native/cbs/depth_charts"
   },
   {
     "short": "player_draft_info",
@@ -10312,7 +10359,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_hockey_meta"
+    "returnsSchema": "native/cbs/hockey_player_meta"
   },
   {
     "short": "player_injuries",
@@ -10349,7 +10396,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_meta_baseball"
+    "returnsSchema": "native/cbs/baseball_player_meta"
   },
   {
     "short": "player_golf_metadata",
@@ -10365,7 +10412,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_meta_golf"
+    "returnsSchema": "native/cbs/player_golf_metadata"
   },
   {
     "short": "player_outlook",
@@ -10407,7 +10454,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_position_rankings"
+    "returnsSchema": "native/cbs/position_rankings"
   },
   {
     "short": "player_rankings",
@@ -10465,7 +10512,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/player_recruit_associations"
+    "returnsSchema": "native/cbs/recruit_team_associations"
   },
   {
     "short": "player_standings",
@@ -10840,7 +10887,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     ],
     "queryParams": [],
     "parser": "parse_cbs_list",
-    "returnsSchema": "native/cbs/team_rankings_sportsline"
+    "returnsSchema": "native/cbs/sports_line_team_rankings"
   },
   {
     "short": "team_seasons",
@@ -10927,7 +10974,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_cbs_standings",
-    "returnsSchema": "native/cbs/team_standings_sportsline"
+    "returnsSchema": "native/cbs/sports_line_team_standings"
   },
   {
     "short": "team_stats",
@@ -15767,7 +15814,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_yahoo_scores_boxscore",
-    "returnsSchema": "native/yahoo/editorial_boxscore"
+    "returnsSchema": "native/yahoo_scores/boxscore"
   },
   {
     "short": "editorial_scoreboard",
@@ -15804,7 +15851,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_yahoo_scores_scoreboard",
-    "returnsSchema": "native/yahoo/editorial_scoreboard"
+    "returnsSchema": "native/yahoo_scores/scoreboard"
   },
   {
     "short": "seasons",

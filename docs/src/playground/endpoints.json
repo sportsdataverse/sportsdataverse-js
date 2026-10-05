@@ -1027,7 +1027,8 @@
         {
           "name": "active",
           "queryKey": "active",
-          "default": true
+          "default": true,
+          "transform": "bool_str"
         },
         {
           "name": "limit",
@@ -5780,7 +5781,8 @@
       "path": "/v1/schedule/playoff-series/{season}/{series_letter}",
       "pathParams": [
         {
-          "name": "season"
+          "name": "season",
+          "transform": "format_nhl_season"
         },
         {
           "name": "series_letter"
@@ -5832,7 +5834,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         }
       ],
       "queryParams": [],
@@ -5892,7 +5895,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -5933,7 +5937,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         }
       ],
       "queryParams": [],
@@ -5985,7 +5990,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6019,7 +6025,8 @@
       "pathParams": [
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6041,7 +6048,8 @@
       "pathParams": [
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6144,7 +6152,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6169,7 +6178,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6194,7 +6204,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6225,7 +6236,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6249,7 +6261,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6277,7 +6290,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6301,7 +6315,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6326,7 +6341,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6354,7 +6370,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6384,7 +6401,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6408,7 +6426,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6439,7 +6458,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6460,7 +6480,8 @@
       "pathParams": [
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6485,7 +6506,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6510,7 +6532,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6535,7 +6558,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6559,7 +6583,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6584,7 +6609,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6609,7 +6635,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6633,7 +6660,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6661,7 +6689,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6682,7 +6711,8 @@
       "pathParams": [
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6707,7 +6737,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6729,7 +6760,8 @@
       "pathParams": [
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6754,7 +6786,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6785,7 +6818,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6809,7 +6843,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6834,7 +6869,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6863,7 +6899,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6887,7 +6924,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6895,8 +6933,7 @@
           "default": 2
         }
       ],
-      "queryParams": [],
-      "returnsSchema": "native/nhl_edge/team_skating_speed_detail"
+      "queryParams": []
     },
     {
       "short": "team_skating_speed_top_10",
@@ -6914,7 +6951,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6938,7 +6976,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6966,7 +7005,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -6990,7 +7030,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -7015,7 +7056,8 @@
         },
         {
           "name": "season",
-          "required": false
+          "required": false,
+          "transform": "format_nhl_season"
         },
         {
           "name": "game_type",
@@ -8264,22 +8306,26 @@
         {
           "name": "include_drive_chart",
           "queryKey": "includeDriveChart",
-          "default": true
+          "default": true,
+          "transform": "_bool_str"
         },
         {
           "name": "include_replays",
           "queryKey": "includeReplays",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         },
         {
           "name": "include_standings",
           "queryKey": "includeStandings",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         },
         {
           "name": "include_tagged_videos",
           "queryKey": "includeTaggedVideos",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         }
       ],
       "parser": "parse_nfl_weekly_game_details",
@@ -8300,7 +8346,6 @@
       ],
       "queryParams": [],
       "parser": "parse_nfl_team",
-      "returnsSchema": "native/nfl_api/live_team_statistics",
       "auth": true
     },
     {
@@ -8317,7 +8362,6 @@
       ],
       "queryParams": [],
       "parser": "parse_nfl_team",
-      "returnsSchema": "native/nfl_api/live_player_statistics",
       "auth": true
     },
     {
@@ -8336,26 +8380,29 @@
         {
           "name": "include_drive_chart",
           "queryKey": "includeDriveChart",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         },
         {
           "name": "include_replays",
           "queryKey": "includeReplays",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         },
         {
           "name": "include_standings",
           "queryKey": "includeStandings",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         },
         {
           "name": "include_tagged_videos",
           "queryKey": "includeTaggedVideos",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         }
       ],
       "parser": "parse_nfl_team",
-      "returnsSchema": "native/nfl_api/game_details_v2",
       "auth": true
     },
     {
@@ -8374,11 +8421,11 @@
         {
           "name": "include_replays",
           "queryKey": "includeReplays",
-          "default": false
+          "default": false,
+          "transform": "_bool_str"
         }
       ],
       "parser": "parse_nfl_team",
-      "returnsSchema": "native/nfl_api/game_details_by_slug",
       "auth": true
     },
     {
@@ -9593,7 +9640,7 @@
         }
       ],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/client_config"
+      "returnsSchema": "native/cbs/client_configuration"
     },
     {
       "short": "coach_rankings",
@@ -9655,7 +9702,7 @@
         }
       ],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/division_subdivisions"
+      "returnsSchema": "native/cbs/sub_divisions"
     },
     {
       "short": "endpoint_registry",
@@ -9813,7 +9860,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/game_boxscore"
+      "returnsSchema": "native/cbs/boxscore"
     },
     {
       "short": "game_content_preview",
@@ -9882,7 +9929,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_scoreboard",
-      "returnsSchema": "native/cbs/game_featured"
+      "returnsSchema": "native/cbs/featured_game"
     },
     {
       "short": "game_lineup",
@@ -9956,7 +10003,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_odds",
-      "returnsSchema": "native/cbs/game_odds_hq"
+      "returnsSchema": "native/cbs/game_hq_odds"
     },
     {
       "short": "game_outcomes",
@@ -9997,7 +10044,7 @@
         }
       ],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/game_probable_players"
+      "returnsSchema": "native/cbs/probable_players"
     },
     {
       "short": "game_props",
@@ -10066,7 +10113,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/game_ruwt_highlights"
+      "returnsSchema": "native/cbs/ruwt_highlights"
     },
     {
       "short": "game_scoring_boxscores",
@@ -10290,7 +10337,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/game_weather"
+      "returnsSchema": "native/cbs/weather"
     },
     {
       "short": "golf_event_markets",
@@ -10480,7 +10527,7 @@
         }
       ],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/player_depth_charts"
+      "returnsSchema": "native/cbs/depth_charts"
     },
     {
       "short": "player_draft_info",
@@ -10595,7 +10642,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/player_hockey_meta"
+      "returnsSchema": "native/cbs/hockey_player_meta"
     },
     {
       "short": "player_injuries",
@@ -10632,7 +10679,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/player_meta_baseball"
+      "returnsSchema": "native/cbs/baseball_player_meta"
     },
     {
       "short": "player_golf_metadata",
@@ -10648,7 +10695,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/player_meta_golf"
+      "returnsSchema": "native/cbs/player_golf_metadata"
     },
     {
       "short": "player_outlook",
@@ -10690,7 +10737,7 @@
         }
       ],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/player_position_rankings"
+      "returnsSchema": "native/cbs/position_rankings"
     },
     {
       "short": "player_rankings",
@@ -10748,7 +10795,7 @@
         }
       ],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/player_recruit_associations"
+      "returnsSchema": "native/cbs/recruit_team_associations"
     },
     {
       "short": "player_standings",
@@ -11123,7 +11170,7 @@
       ],
       "queryParams": [],
       "parser": "parse_cbs_list",
-      "returnsSchema": "native/cbs/team_rankings_sportsline"
+      "returnsSchema": "native/cbs/sports_line_team_rankings"
     },
     {
       "short": "team_seasons",
@@ -11210,7 +11257,7 @@
         }
       ],
       "parser": "parse_cbs_standings",
-      "returnsSchema": "native/cbs/team_standings_sportsline"
+      "returnsSchema": "native/cbs/sports_line_team_standings"
     },
     {
       "short": "team_stats",
@@ -16050,7 +16097,7 @@
         }
       ],
       "parser": "parse_yahoo_scores_boxscore",
-      "returnsSchema": "native/yahoo/editorial_boxscore"
+      "returnsSchema": "native/yahoo_scores/boxscore"
     },
     {
       "short": "editorial_scoreboard",
@@ -16087,7 +16134,7 @@
         }
       ],
       "parser": "parse_yahoo_scores_scoreboard",
-      "returnsSchema": "native/yahoo/editorial_scoreboard"
+      "returnsSchema": "native/yahoo_scores/scoreboard"
     },
     {
       "short": "seasons",

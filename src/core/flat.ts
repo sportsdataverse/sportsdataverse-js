@@ -1,4 +1,5 @@
 import { toCamel } from "./espn.js";
+import { applyTransform } from "./transforms.js";
 import type { WrapperDef } from "./types.js";
 
 /**
@@ -31,16 +32,15 @@ function lookup(params: Record<string, any>, name: string): any {
   return undefined;
 }
 
-/** Resolve a single path token: explicit param -> declared `default`. */
+/** Resolve a single path token: explicit param -> declared `default`, then its `transform`. */
 function resolvePathParam(
   def: WrapperDef,
   params: Record<string, any>,
   name: string
 ): any {
-  const v = lookup(params, name);
-  if (v !== undefined && v !== null) return v;
   const pp = (def.pathParams ?? []).find((p) => p.name === name);
-  return pp?.default;
+  const v = lookup(params, name);
+  return applyTransform(pp?.transform, v !== undefined && v !== null ? v : pp?.default);
 }
 
 /** Build the query map from the declared `queryParams` (+ defaults), dropping empties. */
@@ -50,7 +50,7 @@ function cleanQuery(
 ): Record<string, any> {
   const out: Record<string, any> = {};
   for (const qp of def.queryParams ?? []) {
-    const v = lookup(params, qp.name) ?? qp.default;
+    const v = applyTransform(qp.transform, lookup(params, qp.name) ?? qp.default);
     if (v !== undefined && v !== null && v !== "") out[qp.queryKey] = v;
   }
   return out;

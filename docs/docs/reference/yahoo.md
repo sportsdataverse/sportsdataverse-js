@@ -149,32 +149,6 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `yahoo_trending_event_ids` / `yahooTrendingEventIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingEventIds` | — | `count`, `league`, `date_flip_offset` → `dateFlipOffset` | `parse_yahoo_list` | — |
 | `yahoo_trending_game_ids` / `yahooTrendingGameIds` | `https://graphite-secure.sports.yahoo.com/v1/query/shangrila/trendingGameIds` | — | `count`, `league`, `date_flip_offset` → `dateFlipOffset`, `dates` | `parse_yahoo_list` | — |
 
-### Returns — `yahoo_alias` / `yahooAlias`
-
-| col_name | type | description |
-|---|---|---|
-| `page_type` | character |  |
-| `league_short_name` | character |  |
-| `league_display_name` | character |  |
-| `entity_type` | character |  |
-| `subpage_translation` | character |  |
-| `entity_alias` | character |  |
-| `subpage_alias` | character |  |
-| `hotlist_data_desktop_space_id` | character |  |
-| `hotlist_data_tablet_space_id` | character |  |
-| `hotlist_data_mobile_space_id` | character |  |
-| `entity_list_id_desktop_list_id` | character |  |
-| `entity_list_id_mobile_list_id` | character |  |
-| `entity_list_id_tablet_list_id` | character |  |
-| `game` | character |  |
-| `match` | character |  |
-| `race` | character |  |
-| `league` | character |  |
-| `team` | character |  |
-| `golf_tournament` | character |  |
-| `tennis_tournament` | character |  |
-| `player` | character |  |
-
 ### Returns — `yahoo_article_list_card_players` / `yahooArticleListCardPlayers`
 
 | col_name | type | description |
@@ -275,8 +249,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_team_id` | character |  |
 | `home_team_primary_color` | character |  |
 | `home_team_display_name` | character |  |
-| `active_prop_bets` | character |  |
-| `game_props` | character |  |
+| `active_prop_bets` | list |  |
+| `game_props` | list |  |
 
 ### Returns — `yahoo_game_stats_leaders` / `yahooGameStatsLeaders`
 
@@ -296,16 +270,16 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `league_football_team_season_stats9` | character |  |
 | `league_football_team_season_stats10` | character |  |
 | `league_football_team_season_stats11` | character |  |
-| `game_leader_stats0` | character |  |
-| `game_leader_stats1` | character |  |
-| `game_leader_stats2` | character |  |
-| `game_leader_stats3` | character |  |
+| `game_leader_stats0` | list |  |
+| `game_leader_stats1` | list |  |
+| `game_leader_stats2` | list |  |
+| `game_leader_stats3` | list |  |
 | `away_team_game_stats0_stats` | character |  |
 | `away_team_game_stats1_stats` | character |  |
 | `home_team_game_stats0_stats` | character |  |
 | `home_team_game_stats1_stats` | character |  |
-| `home_team_lineup` | character |  |
-| `away_team_lineup` | character |  |
+| `home_team_lineup` | list |  |
+| `away_team_lineup` | list |  |
 | `away_team_id` | character |  |
 | `away_team_full_name` | character |  |
 | `away_team_team_id` | character |  |
@@ -380,15 +354,15 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `end_date` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
-| `player_tournament_stats` | character |  |
+| `player_tournament_stats` | list |  |
 | `purse` | character |  |
 | `major` | logical |  |
 | `venue_display_name` | character |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |
-| `par` | integer |  |
-| `yardage` | integer |  |
+| `par` | numeric |  |
+| `yardage` | numeric |  |
 
 ### Returns — `yahoo_golf_tournaments_basic` / `yahooGolfTournamentsBasic`
 
@@ -398,9 +372,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `end_date` | character |  |
-| `season` | integer |  |
-| `clubs` | character |  |
-| `courses` | character |  |
+| `season` | numeric |  |
+| `clubs` | list |  |
+| `courses` | list |  |
 | `name` | character |  |
 | `status` | character |  |
 | `alias_url` | character |  |
@@ -416,7 +390,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `conferences` | character |  |
+| `conferences` | list |  |
 
 ### Returns — `yahoo_league_filters_data` / `yahooLeagueFiltersData`
 
@@ -427,24 +401,24 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `current_league_day` | character |  |
-| `teams` | character |  |
-| `current_week` | integer |  |
+| `current_league_day` | list |  |
+| `teams` | list |  |
+| `current_week` | numeric |  |
 | `current_season_phase` | character |  |
 | `current_game_season_phase` | character |  |
-| `current_season` | integer |  |
-| `current_league_season` | character |  |
-| `league_seasons` | character |  |
-| `league_weeks` | character |  |
-| `current_season_league_weeks` | character |  |
-| `divisions` | character |  |
-| `conferences` | character |  |
+| `current_season` | numeric |  |
+| `current_league_season` | list |  |
+| `league_seasons` | list |  |
+| `league_weeks` | list |  |
+| `current_season_league_weeks` | list |  |
+| `divisions` | list |  |
+| `conferences` | list |  |
 
 ### Returns — `yahoo_league_future_odds` / `yahooLeagueFutureOdds`
 
 | col_name | type | description |
 |---|---|---|
-| `bets` | character |  |
+| `bets` | list |  |
 | `league` | character |  |
 
 ### Returns — `yahoo_league_game_ids` / `yahooLeagueGameIds`
@@ -453,8 +427,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `alias_url` | character |  |
 | `alias_navigation_links` | character |  |
-| `current_week` | integer |  |
-| `games` | character |  |
+| `current_week` | numeric |  |
+| `games` | list |  |
 
 ### Returns — `yahoo_league_game_ids_by_date` / `yahooLeagueGameIdsByDate`
 
@@ -463,10 +437,10 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `display_short` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `current_week` | integer |  |
+| `current_week` | numeric |  |
 | `current_game_season_phase` | character |  |
-| `current_league_season` | character |  |
-| `games` | character |  |
+| `current_league_season` | list |  |
+| `games` | list |  |
 
 ### Returns — `yahoo_league_info` / `yahooLeagueInfo`
 
@@ -481,30 +455,20 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `team_id` | character |  |
-| `nickname` | character |  |
-| `full_name` | character |  |
-| `location` | character |  |
-| `display_name` | character |  |
-| `primary_color` | character |  |
-| `abbreviation` | character |  |
-| `alias` | character |  |
-| `team_logo_white` | character |  |
-| `team_logo` | character |  |
-| `players` | character |  |
+| `teams` | list |  |
 
 ### Returns — `yahoo_league_names` / `yahooLeagueNames`
 
 | col_name | type | description |
 |---|---|---|
-| `league_id` | integer |  |
+| `league_id` | numeric |  |
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
 | `display_short` | character |  |
 | `display_abbr` | character |  |
-| `current_season` | integer |  |
-| `league_seasons` | character |  |
+| `current_season` | numeric |  |
+| `league_seasons` | list |  |
 | `alias_url` | character |  |
 | `alias_path` | character |  |
 | `alias_subpages` | character |  |
@@ -515,10 +479,10 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `sport_name` | character |  |
 | `current_season_phase` | character |  |
-| `current_league_season` | character |  |
-| `divisions` | character |  |
-| `teams` | character |  |
-| `conferences` | character |  |
+| `current_league_season` | list |  |
+| `divisions` | list |  |
+| `teams` | list |  |
+| `conferences` | list |  |
 
 ### Returns — `yahoo_league_stats_by_team` / `yahooLeagueStatsByTeam`
 
@@ -529,7 +493,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `football_stats` | character |  |
+| `football_stats` | list |  |
 
 ### Returns — `yahoo_league_stats_individual` / `yahooLeagueStatsIndividual`
 
@@ -540,7 +504,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `football_stats` | character |  |
+| `football_stats` | list |  |
 
 ### Returns — `yahoo_league_stats_weekly` / `yahooLeagueStatsWeekly`
 
@@ -551,21 +515,21 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_name` | character |  |
 | `full_name` | character |  |
 | `name` | character |  |
-| `football_stats` | character |  |
+| `football_stats` | list |  |
 
 ### Returns — `yahoo_league_team_ids` / `yahooLeagueTeamIds`
 
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `teams` | character |  |
+| `teams` | list |  |
 
 ### Returns — `yahoo_league_teams` / `yahooLeagueTeams`
 
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `teams` | character |  |
+| `teams` | list |  |
 
 ### Returns — `yahoo_leagues_season_states` / `yahooLeaguesSeasonStates`
 
@@ -576,16 +540,16 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `full_name` | character |  |
 | `display_short` | character |  |
 | `current_season_phase` | character |  |
-| `current_week` | integer |  |
-| `current_season` | integer |  |
-| `stats_season` | character |  |
+| `current_week` | numeric |  |
+| `current_season` | numeric |  |
+| `stats_season` | list |  |
 | `sport_name` | character |  |
-| `league_weeks` | character |  |
+| `league_weeks` | list |  |
 | `alias_url` | character |  |
 | `alias_navigation_links` | character |  |
-| `league_seasons` | character |  |
-| `bye_weeks` | character |  |
-| `divisions` | character |  |
+| `league_seasons` | list |  |
+| `bye_weeks` | list |  |
+| `divisions` | list |  |
 
 ### Returns — `yahoo_module_game` / `yahooModuleGame`
 
@@ -637,14 +601,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_team_standings` | character |  |
 | `home_team_rank_polls` | character |  |
 | `home_team_playoff_seeds` | character |  |
-| `away_score` | integer |  |
-| `home_score` | integer |  |
+| `away_score` | numeric |  |
+| `home_score` | numeric |  |
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `if_necessary` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
-| `season` | integer |  |
+| `season` | numeric |  |
 | `season_phase` | character |  |
 | `time_left` | character |  |
 | `tournament_id` | character |  |
@@ -652,14 +616,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `game_ticket_price` | character |  |
 | `playoff_series` | character |  |
 | `winning_team_id` | character |  |
-| `broadcast_channels` | character |  |
+| `broadcast_channels` | list |  |
 | `news_break_subtext` | character |  |
 | `news_break_title` | character |  |
 | `news_break_url` | character |  |
 | `news_break_uuid` | character |  |
 | `brief` | character |  |
 | `event_extended_display_name` | character |  |
-| `bets` | character |  |
+| `bets` | list |  |
 | `venue_display_name` | character |  |
 | `venue_city` | character |  |
 | `venue_cover_type` | character |  |
@@ -668,18 +632,18 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `venue_country` | character |  |
 | `tv_coverage` | character |  |
 | `weather` | character |  |
-| `away_line_score` | character |  |
+| `away_line_score` | list |  |
 | `current_period_period` | character |  |
 | `field_position` | character |  |
 | `field_position_display_name` | character |  |
-| `home_line_score` | character |  |
-| `home_timeouts_remaining` | integer |  |
-| `away_timeouts_remaining` | integer |  |
-| `last_play` | character |  |
-| `game_stat_leaders` | character |  |
+| `home_line_score` | list |  |
+| `home_timeouts_remaining` | numeric |  |
+| `away_timeouts_remaining` | numeric |  |
+| `last_play` | list |  |
+| `game_stat_leaders` | list |  |
 | `team_possessing_ball` | character |  |
-| `recap_videos` | character |  |
-| `week` | integer |  |
+| `recap_videos` | list |  |
+| `week` | numeric |  |
 
 ### Returns — `yahoo_motorsport_standings` / `yahooMotorsportStandings`
 
@@ -687,14 +651,21 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `name` | character |  |
 | `full_name` | character |  |
-| `current_league_season` | character |  |
+| `current_league_season` | list |  |
 
 ### Returns — `yahoo_nascar_drivers` / `yahooNascarDrivers`
 
 | col_name | type | description |
 |---|---|---|
 | `short_name` | character |  |
-| `players` | character |  |
+| `players` | list |  |
+
+### Returns — `yahoo_nav_dropdown_tray` / `yahooNavDropdownTray`
+
+| col_name | type | description |
+|---|---|---|
+| `short_name` | character |  |
+| `teams` | list |  |
 
 ### Returns — `yahoo_oly_medal_count` / `yahooOlyMedalCount`
 
@@ -704,15 +675,15 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `short_display_name` | character |  |
 | `start_date` | character |  |
 | `end_date` | character |  |
-| `season` | integer |  |
+| `season` | numeric |  |
 | `alias` | character |  |
-| `olympic_team` | character |  |
+| `olympic_team` | list |  |
 
 ### Returns — `yahoo_oly_seasons` / `yahooOlySeasons`
 
 | col_name | type | description |
 |---|---|---|
-| `season` | integer |  |
+| `season` | numeric |  |
 | `display_name` | character |  |
 | `type` | character |  |
 
@@ -720,8 +691,24 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `ncaaf_games` | character |  |
-| `conferences` | character |  |
+| `ncaaf_games` | list |  |
+| `conferences` | list |  |
+
+### Returns — `yahoo_playbook_boxscore` / `yahooPlaybookBoxscore`
+
+| col_name | type | description |
+|---|---|---|
+| `position_id` | character |  |
+| `name` | character |  |
+| `abbreviation` | character |  |
+
+### Returns — `yahoo_playbook_boxscore_poll` / `yahooPlaybookBoxscorePoll`
+
+| col_name | type | description |
+|---|---|---|
+| `position_id` | character |  |
+| `name` | character |  |
+| `abbreviation` | character |  |
 
 ### Returns — `yahoo_playbook_boxscore_social_share` / `yahooPlaybookBoxscoreSocialShare`
 
@@ -789,26 +776,26 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_players` | character |  |
 | `home_team_rank_polls` | character |  |
 | `home_team_playoff_seeds` | character |  |
-| `away_score` | integer |  |
-| `home_score` | integer |  |
+| `away_score` | numeric |  |
+| `home_score` | numeric |  |
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `if_necessary` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
-| `season` | integer |  |
+| `season` | numeric |  |
 | `season_phase` | character |  |
 | `time_left` | character |  |
 | `tournament_id` | character |  |
 | `playoff_series` | character |  |
 | `winning_team_id` | character |  |
-| `broadcast_channels` | character |  |
+| `broadcast_channels` | list |  |
 | `news_break_subtext` | character |  |
 | `news_break_title` | character |  |
 | `news_break_url` | character |  |
 | `news_break_uuid` | character |  |
 | `brief` | character |  |
-| `bets` | character |  |
+| `bets` | list |  |
 | `venue_display_name` | character |  |
 | `venue_city` | character |  |
 | `venue_cover_type` | character |  |
@@ -817,34 +804,34 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `venue_country` | character |  |
 | `tv_coverage` | character |  |
 | `weather` | character |  |
-| `away_line_score` | character |  |
+| `away_line_score` | list |  |
 | `current_period_period` | character |  |
 | `field_position` | character |  |
 | `field_position_display_name` | character |  |
-| `home_line_score` | character |  |
-| `home_timeouts_remaining` | integer |  |
-| `away_timeouts_remaining` | integer |  |
-| `last_play` | character |  |
-| `game_stat_leaders` | character |  |
+| `home_line_score` | list |  |
+| `home_timeouts_remaining` | numeric |  |
+| `away_timeouts_remaining` | numeric |  |
+| `last_play` | list |  |
+| `game_stat_leaders` | list |  |
 | `team_possessing_ball` | character |  |
-| `recap_videos` | character |  |
-| `week` | integer |  |
-| `play_by_play` | character |  |
+| `recap_videos` | list |  |
+| `week` | numeric |  |
+| `play_by_play` | list |  |
 
 ### Returns — `yahoo_playbook_game_odds_poll` / `yahooPlaybookGameOddsPoll`
 
 | col_name | type | description |
 |---|---|---|
 | `game_id` | character |  |
-| `bets` | character |  |
-| `partial_game_bets` | character |  |
+| `bets` | list |  |
+| `partial_game_bets` | list |  |
 
 ### Returns — `yahoo_playbook_league_odds` / `yahooPlaybookLeagueOdds`
 
 | col_name | type | description |
 |---|---|---|
-| `ncaaf_games` | character |  |
-| `conferences` | character |  |
+| `ncaaf_games` | list |  |
+| `conferences` | list |  |
 
 ### Returns — `yahoo_playbook_player` / `yahooPlaybookPlayer`
 
@@ -862,14 +849,14 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `birth_city` | character |  |
 | `birth_country` | character |  |
 | `birth_date` | character |  |
-| `height` | integer |  |
+| `height` | numeric |  |
 | `display_height` | character |  |
-| `weight` | integer |  |
+| `weight` | numeric |  |
 | `status` | character |  |
 | `active` | logical |  |
 | `suggested_headshot` | character |  |
 | `uniform_number` | character |  |
-| `positions` | character |  |
+| `positions` | list |  |
 | `team_id` | character |  |
 | `team_team_id` | character |  |
 | `team_display_name` | character |  |
@@ -880,22 +867,22 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `team_primary_color` | character |  |
 | `team_secondary_color` | character |  |
 | `draft_position` | character |  |
-| `player_seasons` | character |  |
-| `header_stats_passing` | character |  |
-| `season_stats_passing` | character |  |
-| `header_stats_rushing` | character |  |
-| `season_stats_rushing` | character |  |
-| `header_stats_receiving` | character |  |
-| `season_stats_receiving` | character |  |
-| `header_stats_defense` | character |  |
-| `season_stats_defense` | character |  |
-| `header_stats_kicking` | character |  |
-| `season_stats_kicking` | character |  |
-| `header_stats_punting` | character |  |
-| `season_stats_punting` | character |  |
-| `earnings` | character |  |
+| `player_seasons` | list |  |
+| `header_stats_passing` | list |  |
+| `season_stats_passing` | list |  |
+| `header_stats_rushing` | list |  |
+| `season_stats_rushing` | list |  |
+| `header_stats_receiving` | list |  |
+| `season_stats_receiving` | list |  |
+| `header_stats_defense` | list |  |
+| `season_stats_defense` | list |  |
+| `header_stats_kicking` | list |  |
+| `season_stats_kicking` | list |  |
+| `header_stats_punting` | list |  |
+| `season_stats_punting` | list |  |
+| `earnings` | list |  |
 | `first_year` | character |  |
-| `last_year` | integer |  |
+| `last_year` | numeric |  |
 | `injury` | character |  |
 
 ### Returns — `yahoo_playbook_player_social_share` / `yahooPlaybookPlayerSocialShare`
@@ -909,7 +896,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `team_secondary_color` | character |  |
 | `team_league` | character |  |
 
-### Returns — `yahoo_playbook_team_basic` / `yahooPlaybookTeamBasic`
+### Returns — `yahoo_playbook_team` / `yahooPlaybookTeam`
 
 | col_name | type | description |
 |---|---|---|
@@ -919,7 +906,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `league_short_name` | character |  |
 | `league_current_season_phase` | character |  |
 | `team_id` | character |  |
-| `conference_id` | integer |  |
+| `conference_id` | numeric |  |
 | `full_name` | character |  |
 | `display_name` | character |  |
 | `location` | character |  |
@@ -931,8 +918,59 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_navigation_links` | character |  |
 | `alias_url` | character |  |
 | `alias_path` | character |  |
-| `last_games` | character |  |
-| `next_games` | character |  |
+| `last_games` | list |  |
+| `next_games` | list |  |
+| `division_name` | character |  |
+| `division_teams` | character |  |
+| `conference_short_name` | character |  |
+| `conference_name` | character |  |
+| `conference_conference_id` | character |  |
+| `conference_team_standings` | character |  |
+| `conference_abbreviation` | character |  |
+| `team_standings_team` | character |  |
+| `team_standings_conference_id` | character |  |
+| `team_standings_conference` | character |  |
+| `team_standings_display_name` | character |  |
+| `team_standings_full_name` | character |  |
+| `team_standings_position` | character |  |
+| `team_standings_sequence` | character |  |
+| `team_standings_team_record` | character |  |
+| `team_standings_conference_position` | character |  |
+| `team_standings_points_for` | character |  |
+| `team_standings_points_against` | character |  |
+| `team_standings_clinched_playoff` | character |  |
+| `team_standings_clinched_division` | character |  |
+| `team_standings_streak_display` | character |  |
+| `gametime_ticket_url` | character |  |
+| `football_team_season_stats` | list |  |
+| `football_player_season_stats` | list |  |
+| `injured_players` | list |  |
+| `transactions` | list |  |
+
+### Returns — `yahoo_playbook_team_basic` / `yahooPlaybookTeamBasic`
+
+| col_name | type | description |
+|---|---|---|
+| `sport_sport_id` | character |  |
+| `sport_name` | character |  |
+| `league_name` | character |  |
+| `league_short_name` | character |  |
+| `league_current_season_phase` | character |  |
+| `team_id` | character |  |
+| `conference_id` | numeric |  |
+| `full_name` | character |  |
+| `display_name` | character |  |
+| `location` | character |  |
+| `nickname` | character |  |
+| `primary_color` | character |  |
+| `secondary_color` | character |  |
+| `team_logo_white_url` | character |  |
+| `team_logo_url` | character |  |
+| `alias_navigation_links` | character |  |
+| `alias_url` | character |  |
+| `alias_path` | character |  |
+| `last_games` | list |  |
+| `next_games` | list |  |
 | `division_name` | character |  |
 | `conference_short_name` | character |  |
 | `conference_name` | character |  |
@@ -964,14 +1002,32 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `team_logo_url` | character |  |
 | `team_logo_white_url` | character |  |
 
+### Returns — `yahoo_player_basic` / `yahooPlayerBasic`
+
+| col_name | type | description |
+|---|---|---|
+| `alias_path` | character |  |
+| `alias_lang` | character |  |
+| `alias_url` | character |  |
+| `alias_domain` | character |  |
+| `display_name` | character |  |
+| `first_name` | character |  |
+| `last_name` | character |  |
+| `player_id` | character |  |
+| `positions` | list |  |
+| `team_display_name` | character |  |
+| `team_team_id` | character |  |
+| `uniform_number` | character |  |
+| `injury` | character |  |
+
 ### Returns — `yahoo_player_career_stats` / `yahooPlayerCareerStats`
 
 | col_name | type | description |
 |---|---|---|
-| `positions` | character |  |
-| `stats_by_season` | character |  |
-| `total_stats` | character |  |
-| `career_stats` | character |  |
+| `positions` | list |  |
+| `stats_by_season` | list |  |
+| `total_stats` | list |  |
+| `career_stats` | list |  |
 
 ### Returns — `yahoo_player_game_log` / `yahooPlayerGameLog`
 
@@ -979,16 +1035,16 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `player_id` | character |  |
 | `active` | logical |  |
-| `positions` | character |  |
+| `positions` | list |  |
 | `team_id` | character |  |
-| `player_game_stats` | character |  |
-| `player_season_stats` | character |  |
+| `player_game_stats` | list |  |
+| `player_season_stats` | list |  |
 
 ### Returns — `yahoo_player_props` / `yahooPlayerProps`
 
 | col_name | type | description |
 |---|---|---|
-| `games` | character |  |
+| `games` | list |  |
 | `player_id` | character |  |
 | `display_name` | character |  |
 
@@ -996,14 +1052,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `player_id` | character |  |
-| `active` | character |  |
-| `alias` | character |  |
-| `first_name` | character |  |
-| `last_name` | character |  |
-| `display_name` | character |  |
-| `suggested_headshot` | character |  |
-| `team` | character |  |
+| `players` | list |  |
 
 ### Returns — `yahoo_player_season_stats` / `yahooPlayerSeasonStats`
 
@@ -1011,23 +1060,15 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 |---|---|---|
 | `player_id` | character |  |
 | `active` | logical |  |
-| `positions` | character |  |
+| `positions` | list |  |
 | `team_id` | character |  |
-| `player_season_stats` | character |  |
+| `player_season_stats` | list |  |
 
 ### Returns — `yahoo_playoff_bracket` / `yahooPlayoffBracket`
 
 | col_name | type | description |
 |---|---|---|
-| `conference` | character |  |
-| `id` | character |  |
-| `location` | character |  |
-| `playoff_round` | character |  |
-| `display_order` | character |  |
-| `season` | character |  |
-| `max_games` | character |  |
-| `winner_bracket_slot_id` | character |  |
-| `playoff_series` | character |  |
+| `bracket_slots` | list |  |
 
 ### Returns — `yahoo_playoff_series_game` / `yahooPlayoffSeriesGame`
 
@@ -1047,8 +1088,8 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 
 | col_name | type | description |
 |---|---|---|
-| `league_seasons` | character |  |
-| `current_season` | integer |  |
+| `league_seasons` | list |  |
+| `current_season` | numeric |  |
 
 ### Returns — `yahoo_scoreboard_game` / `yahooScoreboardGame`
 
@@ -1063,7 +1104,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `league_sport` | character |  |
 | `league_alias` | character |  |
 | `league_league_logo` | character |  |
-| `partner_url` | character |  |
+| `partner_url` | list |  |
 | `alias_url` | character |  |
 | `away_team_id` | character |  |
 | `away_team_full_name` | character |  |
@@ -1093,22 +1134,22 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `home_team_record` | character |  |
 | `current_period_overtime` | character |  |
 | `current_period_short_display_name` | character |  |
-| `away_score` | integer |  |
-| `home_score` | integer |  |
+| `away_score` | numeric |  |
+| `home_score` | numeric |  |
 | `start_time` | character |  |
 | `start_date` | character |  |
 | `if_necessary` | character |  |
 | `status` | character |  |
 | `status_display_name` | character |  |
 | `full_status_display_name` | character |  |
-| `season` | integer |  |
+| `season` | numeric |  |
 | `season_phase` | character |  |
 | `time_left` | character |  |
 | `tournament_id` | character |  |
 | `display_result` | character |  |
 | `playoff_series` | character |  |
 | `winning_team_id` | character |  |
-| `broadcast_channels` | character |  |
+| `broadcast_channels` | list |  |
 | `news_break_subtext` | character |  |
 | `news_break_title` | character |  |
 | `news_break_url` | character |  |
@@ -1117,19 +1158,190 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `brief` | character |  |
 | `event_extended_display_name` | character |  |
 | `special_event_type` | character |  |
-| `bets` | character |  |
+| `bets` | list |  |
 | `venue_display_name` | character |  |
 | `weather` | character |  |
 | `gametime_ticket_url` | character |  |
 | `game_ticket_price` | character |  |
-| `teams` | character |  |
+| `teams` | list |  |
 | `field_position` | character |  |
 | `field_position_display_name` | character |  |
 | `team_possessing_ball` | character |  |
-| `week` | integer |  |
-| `passing_leader` | character |  |
-| `rushing_leader` | character |  |
-| `receiving_leader` | character |  |
+| `week` | numeric |  |
+| `passing_leader` | list |  |
+| `rushing_leader` | list |  |
+| `receiving_leader` | list |  |
+
+### Returns — `yahoo_season_stats_football_defense_ncaaf` / `yahooSeasonStatsFootballDefenseNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_stats_football_kicking_ncaaf` / `yahooSeasonStatsFootballKickingNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_stats_football_passing_ncaaf` / `yahooSeasonStatsFootballPassingNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_stats_football_punting_ncaaf` / `yahooSeasonStatsFootballPuntingNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_stats_football_receiving_ncaaf` / `yahooSeasonStatsFootballReceivingNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_stats_football_returns_ncaaf` / `yahooSeasonStatsFootballReturnsNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_stats_football_rushing_ncaaf` / `yahooSeasonStatsFootballRushingNcaaf`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_defense` / `yahooSeasonTeamStatsFootballDefense`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_kicking` / `yahooSeasonTeamStatsFootballKicking`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_kickoffs` / `yahooSeasonTeamStatsFootballKickoffs`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_offense` / `yahooSeasonTeamStatsFootballOffense`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_passing` / `yahooSeasonTeamStatsFootballPassing`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_passing_defense` / `yahooSeasonTeamStatsFootballPassingDefense`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_punting` / `yahooSeasonTeamStatsFootballPunting`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_receiving` / `yahooSeasonTeamStatsFootballReceiving`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_receiving_defense` / `yahooSeasonTeamStatsFootballReceivingDefense`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_returns` / `yahooSeasonTeamStatsFootballReturns`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_rushing` / `yahooSeasonTeamStatsFootballRushing`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
+
+### Returns — `yahoo_season_team_stats_football_rushing_defense` / `yahooSeasonTeamStatsFootballRushingDefense`
+
+| col_name | type | description |
+|---|---|---|
+| `stat_id` | character |  |
+| `display_name` | character |  |
+| `abbreviation` | character |  |
+| `sort_order` | character |  |
 
 ### Returns — `yahoo_team_injuries` / `yahooTeamInjuries`
 
@@ -1146,14 +1358,20 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_url` | character |  |
 | `team_logo_white_url` | character |  |
 | `team_logo_url` | character |  |
-| `players` | character |  |
+| `players` | list |  |
+
+### Returns — `yahoo_team_playoff_series` / `yahooTeamPlayoffSeries`
+
+| col_name | type | description |
+|---|---|---|
+| `playoff_series` | list |  |
 
 ### Returns — `yahoo_team_roster` / `yahooTeamRoster`
 
 | col_name | type | description |
 |---|---|---|
 | `league_current_season` | character |  |
-| `roster` | character |  |
+| `roster` | list |  |
 
 ### Returns — `yahoo_team_schedule_by_season` / `yahooTeamScheduleBySeason`
 
@@ -1164,9 +1382,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `primary_color` | character |  |
 | `secondary_color` | character |  |
 | `gametime_ticket_url` | character |  |
-| `bye_weeks` | character |  |
-| `games` | character |  |
-| `leagues` | character |  |
+| `bye_weeks` | list |  |
+| `games` | list |  |
+| `leagues` | list |  |
 | `full_name` | character |  |
 | `abbreviation` | character |  |
 | `nickname` | character |  |
@@ -1209,7 +1427,7 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `alias_domain` | character |  |
 | `team_logo_white_url` | character |  |
 | `team_logo_url` | character |  |
-| `transactions` | character |  |
+| `transactions` | list |  |
 
 ### Returns — `yahoo_teams_basic` / `yahooTeamsBasic`
 
@@ -1238,9 +1456,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `tournament_status` | character |  |
 | `start_time` | character |  |
 | `end_time` | character |  |
-| `events` | character |  |
-| `champions` | character |  |
-| `previous_champions` | character |  |
+| `events` | list |  |
+| `champions` | list |  |
+| `previous_champions` | list |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |
@@ -1253,9 +1471,9 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `tournament_status` | character |  |
 | `start_time` | character |  |
 | `end_time` | character |  |
-| `events` | character |  |
-| `champions` | character |  |
-| `previous_champions` | character |  |
+| `events` | list |  |
+| `champions` | list |  |
+| `previous_champions` | list |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |
@@ -1272,12 +1490,12 @@ Flat (non-ESPN) wrappers for the Yahoo Sports stats API. Host: `https://graphite
 | `start_time` | character |  |
 | `end_time` | character |  |
 | `tournament_status` | character |  |
-| `champions` | character |  |
+| `champions` | list |  |
 | `alias_path` | character |  |
 | `alias_lang` | character |  |
 | `alias_url` | character |  |
 | `alias_domain` | character |  |
-| `previous_champions` | character |  |
+| `previous_champions` | list |  |
 | `venue_country` | character |  |
 | `venue_city` | character |  |
 | `venue_state` | character |  |

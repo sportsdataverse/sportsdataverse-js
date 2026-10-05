@@ -648,7 +648,6 @@ endpoints:
     sort_by: points
   parser: parse_edge_top10
 - short: team_skating_speed_detail
-  returns_schema: native/nhl_edge/team_skating_speed_detail
   summary: Pull EDGE skating-speed detail for a single team.
   path: /v1/edge/team-skating-speed-detail/{team_id}/{season}/{game_type}
   now_variant: /v1/edge/team-skating-speed-detail/{team_id}/now

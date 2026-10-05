@@ -75,9 +75,33 @@ export function schemaFilesFor(ref, available) {
 }
 
 /**
+ * The JS parser a py parser maps to, and whether its output is described by
+ * py's returns schema. A py name with no `parsers` entry is the same parser
+ * ported to JS under py's name (schema-compatible). A mapped name must say so
+ * explicitly: `{js: <name>, schema_compatible: <bool>}`.
+ */
+export function mapParser(cfg, pyParser, where) {
+  const m = (cfg.parsers ?? {})[pyParser];
+  if (m === undefined) return { js: pyParser, compatible: true };
+  if (typeof m?.js !== "string" || typeof m.schema_compatible !== "boolean") {
+    throw new Error(`vendor.yaml ${where}: parsers.${pyParser} must be {js: <name>, schema_compatible: <bool>}`);
+  }
+  return { js: m.js, compatible: m.schema_compatible };
+}
+
+/**
  * Transform one upstream endpoint YAML into the JS family file. Pure: same
- * inputs, same bytes. Throws on a stale manifest entry (a `names` /
- * `parser_overrides` key that matches no endpoint) or a duplicate short.
+ * inputs, same bytes. Returns `{ text, schemaRefs, jsRefs }`: `schemaRefs` are the
+ * py returns-schema refs still attached after the merge (the schemas to copy),
+ * `jsRefs` the JS-owned ones the overlay attaches.
+ *
+ * Returns-schema policy: a py `returns_schema` stays only when the endpoint's JS
+ * parser is the declared equivalent of py's (see `mapParser`) and no
+ * `parser_overrides` entry replaces it; otherwise it is dropped (no table beats
+ * a wrong one) and the overlay may attach a JS-owned schema instead.
+ *
+ * Throws on a stale manifest entry (a `names` / `parser_overrides` key that
+ * matches no vendored endpoint) or a duplicate short.
  */
 export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   const doc = parseDocument(upstreamText);
@@ -93,19 +117,36 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   const seq = doc.get("endpoints");
   const items = seq?.items ?? [];
   const names = cfg.names ?? {};
-  const parsers = cfg.parsers ?? {};
   const overrides = cfg.parser_overrides ?? {};
   const unusedNames = new Set(Object.keys(names));
+  const unusedOverrides = new Set(Object.keys(overrides));
+  const pyRefs = new Map(); // endpoint node -> py returns_schema ref it keeps
   for (const ep of items) {
-    const short = ep.get("short");
+    let short = ep.get("short");
     if (names[short]) {
-      ep.set("short", names[short]);
       unusedNames.delete(short);
+      short = names[short];
+      ep.set("short", short);
     }
-    const parser = ep.get("parser");
-    if (parser && parsers[parser]) ep.set("parser", parsers[parser]);
+    const pyParser = ep.get("parser");
+    let compatible = false;
+    if (pyParser) {
+      const m = mapParser(cfg, pyParser, key);
+      ep.set("parser", m.js);
+      compatible = m.compatible;
+    }
+    if (overrides[short]) {
+      unusedOverrides.delete(short);
+      ep.set("parser", overrides[short]);
+      compatible = false;
+    }
     const rs = ep.get("returns_schema");
-    if (rs) ep.set("returns_schema", rewriteSchema(rs, cfg.schemas));
+    if (rs && compatible) {
+      ep.set("returns_schema", rewriteSchema(rs, cfg.schemas));
+      pyRefs.set(ep, rs);
+    } else if (rs) {
+      ep.delete("returns_schema");
+    }
   }
 
   if (overlayText) {
@@ -124,7 +165,13 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
         continue;
       }
       for (const pair of oep.items) {
-        if (pair.key.value !== "short") target.set(pair.key.value, pair.value);
+        if (pair.key.value === "short") continue;
+        if (pair.key.value === "parser") {
+          // One way to swap a vendored parser, so the schema policy sees it.
+          throw new Error(`overlay/${key}.yaml ${short}: set its parser via vendor.yaml parser_overrides`);
+        }
+        target.set(pair.key.value, pair.value);
+        if (pair.key.value === "returns_schema") pyRefs.delete(target); // JS-owned now
       }
       if (oep.commentBefore) {
         target.commentBefore = [target.commentBefore, oep.commentBefore]
@@ -134,21 +181,23 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
     }
   }
 
-  const shorts = (seq?.items ?? []).map((ep) => ep.get("short"));
-  const unusedOverrides = Object.keys(overrides).filter((s) => !shorts.includes(s));
-  if (unusedNames.size || unusedOverrides.length) {
+  if (unusedNames.size || unusedOverrides.size) {
     throw new Error(
       `vendor.yaml ${key}: stale entries match no endpoint: ` +
         [...unusedNames, ...unusedOverrides].join(", ")
     );
   }
+  const shorts = (seq?.items ?? []).map((ep) => ep.get("short"));
   const dupes = shorts.filter((s, i) => shorts.indexOf(s) !== i);
   if (dupes.length) throw new Error(`${key}: duplicate shorts ${dupes.join(", ")}`);
-  for (const ep of seq?.items ?? []) {
-    const o = overrides[ep.get("short")];
-    if (o) ep.set("parser", o);
-  }
-  return doc.toString({ lineWidth: 0, indentSeq: false });
+  const jsRefs = (seq?.items ?? [])
+    .filter((ep) => ep.get("returns_schema") && !pyRefs.has(ep))
+    .map((ep) => ep.get("returns_schema"));
+  return {
+    text: doc.toString({ lineWidth: 0, indentSeq: false }),
+    schemaRefs: [...new Set(pyRefs.values())],
+    jsRefs: [...new Set(jsRefs)],
+  };
 }
 
 /** Recursively list `*.yaml` under `dir`, as `/`-joined paths relative to it. */
@@ -172,17 +221,24 @@ export function deriveAll(root = CODEGEN_DIR) {
   const up = join(root, UPSTREAM);
   const upSchemas = listYaml(join(up, "schemas"));
   const out = new Map();
+  const jsOwned = new Set(); // schema files overlays attach (never vendored over)
   for (const c of manifest.copy ?? []) out.set(c, read(join(up, c)));
   for (const [key, cfg] of familyEntries(manifest)) {
     const text = read(join(up, upstreamEndpointPath(key, cfg)));
     const ovPath = join(root, "overlay", `${key}.yaml`);
     const overlay = existsSync(ovPath) ? read(ovPath) : null;
-    out.set(`endpoints/${key}.yaml`, transformFamily(key, cfg, text, overlay, manifest.source));
-    for (const ref of schemaRefs(text)) {
+    const fam = transformFamily(key, cfg, text, overlay, manifest.source);
+    out.set(`endpoints/${key}.yaml`, fam.text);
+    for (const ref of fam.jsRefs) jsOwned.add(`schemas/${ref}.yaml`);
+    for (const ref of fam.schemaRefs) {
       for (const f of schemaFilesFor(ref, upSchemas)) {
         out.set(`schemas/${rewriteSchema(f, cfg.schemas)}`, read(join(up, "schemas", f)));
       }
     }
+  }
+  const clash = [...jsOwned].filter((p) => out.has(p));
+  if (clash.length) {
+    throw new Error(`vendored schemas would overwrite JS-owned ones an overlay attaches: ${clash.join(", ")}`);
   }
   return out;
 }

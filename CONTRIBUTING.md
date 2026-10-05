@@ -131,7 +131,17 @@ npm run codegen                 # then regenerate as usual
   endpoints and JS-side patches go in `tools/codegen/overlay/<family>.yaml`: an entry
   with a new `short` is appended, an entry with a vendored `short` replaces those keys.
 - Shared endpoint changes land in **sdv-py first**; the weekly
-  `vendor-sync.yml` workflow opens a PR bumping the pin.
+  `vendor-sync.yml` workflow opens a PR bumping the pin. The workflow itself runs
+  `npm run vendor`, `npm run codegen`, the build and `npm test` before opening the
+  PR (the outcome is in the PR body), but a PR opened with the workflow's
+  `GITHUB_TOKEN` does **not** trigger CI: a maintainer closes and reopens it (or
+  pushes to it) to run the CI checks before merging.
+- A py `returns_schema` is attached only where the JS parser is declared
+  equivalent to py's (`parsers: {<py>: {js: <name>, schema_compatible: true}}`, or
+  the same parser name); otherwise JS's own schema (via the overlay) or none.
+- A new param `transform:` upstream fails `npm run codegen` until it is ported to
+  `src/core/transforms.ts` (+ `docs/src/playground/resolve.mjs`) and listed in
+  `tools/codegen/param-transforms.mjs`.
 - JS-owned families (`fox`, `odds_api`, `hockeytech`, `yahoo_scores`, `recruiting`)
   are edited here directly, as before.
 

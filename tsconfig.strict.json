@@ -11,6 +11,7 @@
     "src/core/transport.ts",
     "src/core/auth.ts",
     "src/core/config.ts",
-    "src/core/request.ts"
+    "src/core/request.ts",
+    "src/core/transforms.ts"
   ]
 }

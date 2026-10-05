@@ -33,7 +33,10 @@ const FLAT_API_NAMESPACES = {
 function minimalParams(def) {
   const params = {};
   for (const p of def.pathParams || []) {
-    if (p.required !== false && p.default === undefined) params[p.name] = 12345;
+    if (p.required !== false && p.default === undefined) {
+      // format_nhl_season (sdv-py transform) rejects a non-season value, as py does.
+      params[p.name] = p.transform === 'format_nhl_season' ? 2025 : 12345;
+    }
   }
   return params;
 }

@@ -26,63 +26,63 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /OlyMedalCount
-  returns_schema: native/yahoo/oly_medal_count
   short: oly_medal_count
   summary: Yahoo shangrila persisted query `OlyMedalCount` -> one row per `olympics` entry
+  returns_schema: native/yahoo/oly_medal_count
 - extra_params:
   - name: seasons
     query_key: seasons
     type: str
   parser: parse_yahoo_list
   path: /OlySeasons
-  returns_schema: native/yahoo/oly_seasons
   short: oly_seasons
   summary: Yahoo shangrila persisted query `OlySeasons` -> one row per `olympics` entry
+  returns_schema: native/yahoo/oly_seasons
 - extra_params:
   - name: alias
     query_key: alias
     type: str
   parser: parse_yahoo_list
   path: /alias
-  returns_schema: native/yahoo/alias
   short: alias
   summary: Yahoo shangrila persisted query `alias` -> one row per `pageMetaData` entry
+  returns_schema: native/yahoo/alias
 - extra_params:
   - name: player_ids
     query_key: playerIds
     type: str
   parser: parse_yahoo_list
   path: /articleListCardPlayers
-  returns_schema: native/yahoo/article_list_card_players
   short: article_list_card_players
   summary: Yahoo shangrila persisted query `articleListCardPlayers` -> one row per `players` entry
+  returns_schema: native/yahoo/article_list_card_players
 - extra_params:
   - name: team_ids
     query_key: teamIds
     type: str
   parser: parse_yahoo_list
   path: /articleListCardTeams
-  returns_schema: native/yahoo/article_list_card_teams
   short: article_list_card_teams
   summary: Yahoo shangrila persisted query `articleListCardTeams` -> one row per `teams` entry
+  returns_schema: native/yahoo/article_list_card_teams
 - extra_params:
   - name: players
     query_key: players
     type: str
   parser: parse_yahoo_list
   path: /basicPlayers
-  returns_schema: native/yahoo/basic_players
   short: basic_players
   summary: Yahoo shangrila persisted query `basicPlayers` -> one row per `players` entry
+  returns_schema: native/yahoo/basic_players
 - extra_params:
   - name: betting_disclaimer_id
     query_key: bettingDisclaimerId
     type: str
   parser: parse_yahoo_list
   path: /bettingDisclaimer
-  returns_schema: native/yahoo/betting_disclaimer
   short: betting_disclaimer
   summary: Yahoo shangrila persisted query `bettingDisclaimer` -> one row per `bettingDisclaimers` entry
+  returns_schema: native/yahoo/betting_disclaimer
 - extra_params:
   - name: event_group_id
     query_key: eventGroupId
@@ -95,9 +95,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /combatEventFights
-  returns_schema: native/yahoo/combat_event_fights
   short: combat_event_fights
   summary: Yahoo shangrila persisted query `combatEventFights` -> one row per `leagues` entry
+  returns_schema: native/yahoo/combat_event_fights
 - extra_params:
   - name: season
     query_key: season
@@ -107,9 +107,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /combatSchedule
-  returns_schema: native/yahoo/combat_schedule
   short: combat_schedule
   summary: Yahoo shangrila persisted query `combatSchedule` -> one row per `leagues` entry
+  returns_schema: native/yahoo/combat_schedule
 - extra_params:
   - name: add_team_logos
     query_key: addTeamLogos
@@ -122,9 +122,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /common/pills
-  returns_schema: native/yahoo/common_pills
   short: common_pills
   summary: Yahoo shangrila persisted query `common/pills` (response body not captured; shape unknown)
+  returns_schema: native/yahoo/common_pills
 - extra_params:
   - name: sport
     query_key: sport
@@ -146,9 +146,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /consensus-rankings.php
-  returns_schema: native/yahoo/consensus_rankings_php
   short: consensus_rankings_php
   summary: Yahoo shangrila persisted query `consensus-rankings.php` (response body not captured; shape unknown)
+  returns_schema: native/yahoo/consensus_rankings_php
 - extra_params:
   - name: league
     query_key: league
@@ -158,9 +158,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /draft
-  returns_schema: native/yahoo/draft
   short: draft
   summary: Yahoo shangrila persisted query `draft` -> one row per `leagues` entry
+  returns_schema: native/yahoo/draft
 - extra_params:
   - name: league
     query_key: league
@@ -176,9 +176,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /draftProspects
-  returns_schema: native/yahoo/draft_prospects
   short: draft_prospects
   summary: Yahoo shangrila persisted query `draftProspects` -> one row per `leagues` entry
+  returns_schema: native/yahoo/draft_prospects
 - extra_params:
   - name: player_id
     query_key: playerId
@@ -188,32 +188,32 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /driverResults
-  returns_schema: native/yahoo/driver_results
   short: driver_results
   summary: Yahoo shangrila persisted query `driverResults` -> one row per `players` entry
+  returns_schema: native/yahoo/driver_results
 - extra_params:
   - name: player_id
     query_key: playerId
     type: str
   parser: parse_yahoo_list
   path: /driverSplits
-  returns_schema: native/yahoo/driver_splits
   short: driver_splits
   summary: Yahoo shangrila persisted query `driverSplits` -> one row per `players` entry
+  returns_schema: native/yahoo/driver_splits
 - parser: parse_yahoo_list
   path: /featuredGameIds
-  returns_schema: native/yahoo/featured_game_ids
   short: featured_game_ids
   summary: Yahoo shangrila persisted query `featuredGameIds` -> one row per `featuredGames` entry
+  returns_schema: native/yahoo/featured_game_ids
 - extra_params:
   - name: game_id
     query_key: gameId
     type: str
   parser: parse_yahoo_list
   path: /gamePropBets
-  returns_schema: native/yahoo/game_prop_bets
   short: game_prop_bets
   summary: Yahoo shangrila persisted query `gamePropBets` -> one row per `games` entry
+  returns_schema: native/yahoo/game_prop_bets
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -694,36 +694,36 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /gameStatsLeaders
-  returns_schema: native/yahoo/game_stats_leaders
   short: game_stats_leaders
   summary: Yahoo shangrila persisted query `gameStatsLeaders` -> one row per `games` entry
+  returns_schema: native/yahoo/game_stats_leaders
 - extra_params:
   - name: game_id
     query_key: gameId
     type: str
   parser: parse_yahoo_list
   path: /gametimeGame
-  returns_schema: native/yahoo/gametime_game
   short: gametime_game
   summary: Yahoo shangrila persisted query `gametimeGame` -> one row per `games` entry
+  returns_schema: native/yahoo/gametime_game
 - extra_params:
   - name: team_id
     query_key: teamId
     type: str
   parser: parse_yahoo_list
   path: /gametimeTeam
-  returns_schema: native/yahoo/gametime_team
   short: gametime_team
   summary: Yahoo shangrila persisted query `gametimeTeam` -> one row per `teams` entry
+  returns_schema: native/yahoo/gametime_team
 - extra_params:
   - name: event_group_id
     query_key: eventGroupId
     type: str
   parser: parse_yahoo_list
   path: /golfTournamentSeasons
-  returns_schema: native/yahoo/golf_tournament_seasons
   short: golf_tournament_seasons
   summary: Yahoo shangrila persisted query `golfTournamentSeasons` (response body not captured; shape unknown)
+  returns_schema: native/yahoo/golf_tournament_seasons
 - extra_params:
   - name: association
     query_key: association
@@ -736,9 +736,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /golfTournaments
-  returns_schema: native/yahoo/golf_tournaments
   short: golf_tournaments
   summary: Yahoo shangrila persisted query `golfTournaments` -> one row per `golfTournaments` entry
+  returns_schema: native/yahoo/golf_tournaments
 - extra_params:
   - name: event_group_id
     query_key: eventGroupId
@@ -751,9 +751,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /golfTournamentsBasic
-  returns_schema: native/yahoo/golf_tournaments_basic
   short: golf_tournaments_basic
   summary: Yahoo shangrila persisted query `golfTournamentsBasic` -> one row per `golfTournaments` entry
+  returns_schema: native/yahoo/golf_tournaments_basic
 - extra_params:
   - name: league
     query_key: league
@@ -763,9 +763,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueConferences
-  returns_schema: native/yahoo/league_conferences
   short: league_conferences
   summary: Yahoo shangrila persisted query `leagueConferences` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_conferences
 - extra_params:
   - name: league
     query_key: league
@@ -781,9 +781,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueFiltersData
-  returns_schema: native/yahoo/league_filters_data
   short: league_filters_data
   summary: Yahoo shangrila persisted query `leagueFiltersData` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_filters_data
 - extra_params:
   - name: league
     query_key: league
@@ -793,9 +793,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueFutureOdds
-  returns_schema: native/yahoo/league_future_odds
   short: league_future_odds
   summary: Yahoo shangrila persisted query `leagueFutureOdds` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_future_odds
 - extra_params:
   - name: count
     query_key: count
@@ -835,9 +835,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueGameIds
-  returns_schema: native/yahoo/league_game_ids
   short: league_game_ids
   summary: Yahoo shangrila persisted query `leagueGameIds` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_game_ids
 - extra_params:
   - name: leagues
     query_key: leagues
@@ -877,9 +877,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueGameIdsByDate
-  returns_schema: native/yahoo/league_game_ids_by_date
   short: league_game_ids_by_date
   summary: Yahoo shangrila persisted query `leagueGameIdsByDate` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_game_ids_by_date
 - extra_params:
   - name: league
     query_key: league
@@ -892,36 +892,36 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueGamesByRound
-  returns_schema: native/yahoo/league_games_by_round
   short: league_games_by_round
   summary: Yahoo shangrila persisted query `leagueGamesByRound` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_games_by_round
 - extra_params:
   - name: league
     query_key: league
     type: str
   parser: parse_yahoo_list
   path: /leagueInfo
-  returns_schema: native/yahoo/league_info
   short: league_info
   summary: Yahoo shangrila persisted query `leagueInfo` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_info
 - extra_params:
   - name: league_id
     query_key: leagueId
     type: str
   parser: parse_yahoo_list
   path: /leagueInjuries
-  returns_schema: native/yahoo/league_injuries
   short: league_injuries
   summary: Yahoo shangrila persisted query `leagueInjuries` -> one row per `leagues.teams` entry
+  returns_schema: native/yahoo/league_injuries
 - extra_params:
   - name: leagues
     query_key: leagues
     type: str
   parser: parse_yahoo_list
   path: /leagueNames
-  returns_schema: native/yahoo/league_names
   short: league_names
   summary: Yahoo shangrila persisted query `leagueNames` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_names
 - extra_params:
   - name: count
     query_key: count
@@ -931,9 +931,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leaguePropOdds
-  returns_schema: native/yahoo/league_prop_odds
   short: league_prop_odds
   summary: Yahoo shangrila persisted query `leaguePropOdds` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_prop_odds
 - extra_params:
   - name: league
     query_key: league
@@ -946,9 +946,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueStandings
-  returns_schema: native/yahoo/league_standings
   short: league_standings
   summary: Yahoo shangrila persisted query `leagueStandings` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_standings
 - extra_params:
   - name: leagues
     query_key: leagues
@@ -976,9 +976,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /leagueStatsByTeam
-  returns_schema: native/yahoo/league_stats_by_team
   short: league_stats_by_team
   summary: Yahoo shangrila persisted query `leagueStatsByTeam` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_stats_by_team
 - extra_params:
   - name: leagues
     query_key: leagues
@@ -1030,9 +1030,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /leagueStatsIndividual
-  returns_schema: native/yahoo/league_stats_individual
   short: league_stats_individual
   summary: Yahoo shangrila persisted query `leagueStatsIndividual` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_stats_individual
 - extra_params:
   - name: leagues
     query_key: leagues
@@ -1066,9 +1066,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /leagueStatsOverview
-  returns_schema: native/yahoo/league_stats_overview
   short: league_stats_overview
   summary: Yahoo shangrila persisted query `leagueStatsOverview` (response body not captured; shape unknown)
+  returns_schema: native/yahoo/league_stats_overview
 - extra_params:
   - name: leagues
     query_key: leagues
@@ -1087,9 +1087,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /leagueStatsWeekly
-  returns_schema: native/yahoo/league_stats_weekly
   short: league_stats_weekly
   summary: Yahoo shangrila persisted query `leagueStatsWeekly` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_stats_weekly
 - extra_params:
   - name: league
     query_key: league
@@ -1102,9 +1102,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueTeamIds
-  returns_schema: native/yahoo/league_team_ids
   short: league_team_ids
   summary: Yahoo shangrila persisted query `leagueTeamIds` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_team_ids
 - extra_params:
   - name: league
     query_key: league
@@ -1120,18 +1120,18 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /leagueTeams
-  returns_schema: native/yahoo/league_teams
   short: league_teams
   summary: Yahoo shangrila persisted query `leagueTeams` -> one row per `leagues` entry
+  returns_schema: native/yahoo/league_teams
 - extra_params:
   - name: leagues
     query_key: leagues
     type: str
   parser: parse_yahoo_list
   path: /leaguesSeasonStates
-  returns_schema: native/yahoo/leagues_season_states
   short: leagues_season_states
   summary: Yahoo shangrila persisted query `leaguesSeasonStates` -> one row per `leagues` entry
+  returns_schema: native/yahoo/leagues_season_states
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1144,9 +1144,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /moduleGame
-  returns_schema: native/yahoo/module_game
   short: module_game
   summary: Yahoo shangrila persisted query `moduleGame` -> one row per `games` entry
+  returns_schema: native/yahoo/module_game
 - extra_params:
   - name: league
     query_key: league
@@ -1156,18 +1156,18 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /motorsportStandings
-  returns_schema: native/yahoo/motorsport_standings
   short: motorsport_standings
   summary: Yahoo shangrila persisted query `motorsportStandings` -> one row per `leagues` entry
+  returns_schema: native/yahoo/motorsport_standings
 - extra_params:
   - name: league
     query_key: league
     type: str
   parser: parse_yahoo_list
   path: /nascarDrivers
-  returns_schema: native/yahoo/nascar_drivers
   short: nascar_drivers
   summary: Yahoo shangrila persisted query `nascarDrivers` -> one row per `leagues` entry
+  returns_schema: native/yahoo/nascar_drivers
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1182,9 +1182,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /navDropdownTray
-  returns_schema: native/yahoo/nav_dropdown_tray
   short: nav_dropdown_tray
   summary: 'Yahoo shangrila persisted query `navDropdownTray` -> tables: nfl, nhl, nba, mlb, wnba, ncaab, ncaaf, ncaaw, sportsbook_legal_states'
+  returns_schema: native/yahoo/nav_dropdown_tray
 - extra_params:
   - name: league
     query_key: league
@@ -1197,9 +1197,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /pickDistribution
-  returns_schema: native/yahoo/pick_distribution
   short: pick_distribution
   summary: Yahoo shangrila persisted query `pickDistribution` -> one row per `leagues` entry
+  returns_schema: native/yahoo/pick_distribution
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1238,9 +1238,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookBoxscore
-  returns_schema: native/yahoo/playbook_boxscore
   short: playbook_boxscore
   summary: 'Yahoo shangrila persisted query `playbookBoxscore` -> tables: football_positions, football_stat_types, games'
+  returns_schema: native/yahoo/playbook_boxscore
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1273,18 +1273,18 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookBoxscorePoll
-  returns_schema: native/yahoo/playbook_boxscore_poll
   short: playbook_boxscore_poll
   summary: 'Yahoo shangrila persisted query `playbookBoxscorePoll` -> tables: football_positions, football_stat_types, games'
+  returns_schema: native/yahoo/playbook_boxscore_poll
 - extra_params:
   - name: game_id
     query_key: gameId
     type: str
   parser: parse_yahoo_list
   path: /playbookBoxscoreSocialShare
-  returns_schema: native/yahoo/playbook_boxscore_social_share
   short: playbook_boxscore_social_share
   summary: Yahoo shangrila persisted query `playbookBoxscoreSocialShare` -> one row per `games` entry
+  returns_schema: native/yahoo/playbook_boxscore_social_share
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1303,9 +1303,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookCombatMatch
-  returns_schema: native/yahoo/playbook_combat_match
   short: playbook_combat_match
   summary: Yahoo shangrila persisted query `playbookCombatMatch` -> one row per `games` entry
+  returns_schema: native/yahoo/playbook_combat_match
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1318,9 +1318,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookGame
-  returns_schema: native/yahoo/playbook_game
   short: playbook_game
   summary: Yahoo shangrila persisted query `playbookGame` -> one row per `games` entry
+  returns_schema: native/yahoo/playbook_game
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1330,9 +1330,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookGameOddsPoll
-  returns_schema: native/yahoo/playbook_game_odds_poll
   short: playbook_game_odds_poll
   summary: Yahoo shangrila persisted query `playbookGameOddsPoll` -> one row per `games` entry
+  returns_schema: native/yahoo/playbook_game_odds_poll
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1351,9 +1351,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookGolfTournament
-  returns_schema: native/yahoo/playbook_golf_tournament
   short: playbook_golf_tournament
   summary: Yahoo shangrila persisted query `playbookGolfTournament` (response body not captured; shape unknown)
+  returns_schema: native/yahoo/playbook_golf_tournament
 - extra_params:
   - name: league
     query_key: league
@@ -1375,9 +1375,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookLeagueOdds
-  returns_schema: native/yahoo/playbook_league_odds
   short: playbook_league_odds
   summary: Yahoo shangrila persisted query `playbookLeagueOdds` -> one row per `leagues` entry
+  returns_schema: native/yahoo/playbook_league_odds
 - extra_params:
   - name: player_id
     query_key: playerId
@@ -1387,18 +1387,18 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookPlayer
-  returns_schema: native/yahoo/playbook_player
   short: playbook_player
   summary: Yahoo shangrila persisted query `playbookPlayer` -> one row per `players` entry
+  returns_schema: native/yahoo/playbook_player
 - extra_params:
   - name: player_id
     query_key: playerId
     type: str
   parser: parse_yahoo_list
   path: /playbookPlayerSocialShare
-  returns_schema: native/yahoo/playbook_player_social_share
   short: playbook_player_social_share
   summary: Yahoo shangrila persisted query `playbookPlayerSocialShare` -> one row per `players` entry
+  returns_schema: native/yahoo/playbook_player_social_share
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1411,9 +1411,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookRace
-  returns_schema: native/yahoo/playbook_race
   short: playbook_race
   summary: Yahoo shangrila persisted query `playbookRace` -> one row per `games` entry
+  returns_schema: native/yahoo/playbook_race
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1437,9 +1437,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookTeam
-  returns_schema: native/yahoo/playbook_team
   short: playbook_team
   summary: 'Yahoo shangrila persisted query `playbookTeam` -> tables: teams, leagues'
+  returns_schema: native/yahoo/playbook_team
 - extra_params:
   - name: team_id
     query_key: teamId
@@ -1452,27 +1452,27 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playbookTeamBasic
-  returns_schema: native/yahoo/playbook_team_basic
   short: playbook_team_basic
   summary: Yahoo shangrila persisted query `playbookTeamBasic` -> one row per `teams` entry
+  returns_schema: native/yahoo/playbook_team_basic
 - extra_params:
   - name: team_id
     query_key: teamId
     type: str
   parser: parse_yahoo_list
   path: /playbookTeamSocialShare
-  returns_schema: native/yahoo/playbook_team_social_share
   short: playbook_team_social_share
   summary: Yahoo shangrila persisted query `playbookTeamSocialShare` -> one row per `teams` entry
+  returns_schema: native/yahoo/playbook_team_social_share
 - extra_params:
   - name: game_id
     query_key: gameId
     type: str
   parser: parse_yahoo_list
   path: /playbookTennisMatch
-  returns_schema: native/yahoo/playbook_tennis_match
   short: playbook_tennis_match
   summary: Yahoo shangrila persisted query `playbookTennisMatch` -> one row per `events` entry
+  returns_schema: native/yahoo/playbook_tennis_match
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1484,9 +1484,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playerBasic
-  returns_schema: native/yahoo/player_basic
   short: player_basic
   summary: 'Yahoo shangrila persisted query `playerBasic` -> tables: players, leagues'
+  returns_schema: native/yahoo/player_basic
 - extra_params:
   - name: player_id
     query_key: playerId
@@ -1511,9 +1511,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playerCareerStats
-  returns_schema: native/yahoo/player_career_stats
   short: player_career_stats
   summary: Yahoo shangrila persisted query `playerCareerStats` -> one row per `players` entry
+  returns_schema: native/yahoo/player_career_stats
 - extra_params:
   - name: player_id
     query_key: playerId
@@ -1544,18 +1544,18 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playerGameLog
-  returns_schema: native/yahoo/player_game_log
   short: player_game_log
   summary: Yahoo shangrila persisted query `playerGameLog` -> one row per `players` entry
+  returns_schema: native/yahoo/player_game_log
 - extra_params:
   - name: player_id
     query_key: playerId
     type: str
   parser: parse_yahoo_list
   path: /playerProps
-  returns_schema: native/yahoo/player_props
   short: player_props
   summary: Yahoo shangrila persisted query `playerProps` -> one row per `players` entry
+  returns_schema: native/yahoo/player_props
 - extra_params:
   - name: league
     query_key: league
@@ -1580,9 +1580,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playerSearch
-  returns_schema: native/yahoo/player_search
   short: player_search
   summary: Yahoo shangrila persisted query `playerSearch` -> one row per `leagues.players` entry
+  returns_schema: native/yahoo/player_search
 - extra_params:
   - name: player_id
     query_key: playerId
@@ -1625,9 +1625,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playerSeasonStats
-  returns_schema: native/yahoo/player_season_stats
   short: player_season_stats
   summary: Yahoo shangrila persisted query `playerSeasonStats` -> one row per `players` entry
+  returns_schema: native/yahoo/player_season_stats
 - extra_params:
   - name: league
     query_key: league
@@ -1646,27 +1646,27 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /playoffBracket
-  returns_schema: native/yahoo/playoff_bracket
   short: playoff_bracket
   summary: Yahoo shangrila persisted query `playoffBracket` -> one row per `leagues.bracketSlots` entry
+  returns_schema: native/yahoo/playoff_bracket
 - extra_params:
   - name: game_id
     query_key: gameId
     type: str
   parser: parse_yahoo_list
   path: /playoffSeriesGame
-  returns_schema: native/yahoo/playoff_series_game
   short: playoff_series_game
   summary: Yahoo shangrila persisted query `playoffSeriesGame` -> one row per `games` entry
+  returns_schema: native/yahoo/playoff_series_game
 - extra_params:
   - name: game_id
     query_key: gameId
     type: str
   parser: parse_yahoo_list
   path: /polymarketGame
-  returns_schema: native/yahoo/polymarket_game
   short: polymarket_game
   summary: Yahoo shangrila persisted query `polymarketGame` -> one row per `games` entry
+  returns_schema: native/yahoo/polymarket_game
 - extra_params:
   - name: league
     query_key: league
@@ -1682,9 +1682,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /racingSchedule
-  returns_schema: native/yahoo/racing_schedule
   short: racing_schedule
   summary: Yahoo shangrila persisted query `racingSchedule` -> one row per `leagues` entry
+  returns_schema: native/yahoo/racing_schedule
 - extra_params:
   - name: game_id
     query_key: gameId
@@ -1706,9 +1706,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /scoreboardGame
-  returns_schema: native/yahoo/scoreboard_game
   short: scoreboard_game
   summary: Yahoo shangrila persisted query `scoreboardGame` -> one row per `games` entry
+  returns_schema: native/yahoo/scoreboard_game
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1729,9 +1729,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballDefenseNcaaf
-  returns_schema: native/yahoo/season_stats_football_defense_ncaaf
   short: season_stats_football_defense_ncaaf
   summary: Legacy player season Defense leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_defense_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1752,9 +1752,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballKickingNcaaf
-  returns_schema: native/yahoo/season_stats_football_kicking_ncaaf
   short: season_stats_football_kicking_ncaaf
   summary: Legacy player season Kicking leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_kicking_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1775,9 +1775,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballPassingNcaaf
-  returns_schema: native/yahoo/season_stats_football_passing_ncaaf
   short: season_stats_football_passing_ncaaf
   summary: Legacy player season Passing leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_passing_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1798,9 +1798,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballPuntingNcaaf
-  returns_schema: native/yahoo/season_stats_football_punting_ncaaf
   short: season_stats_football_punting_ncaaf
   summary: Legacy player season Punting leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_punting_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1821,9 +1821,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballReceivingNcaaf
-  returns_schema: native/yahoo/season_stats_football_receiving_ncaaf
   short: season_stats_football_receiving_ncaaf
   summary: Legacy player season Receiving leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_receiving_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1844,9 +1844,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballReturnsNcaaf
-  returns_schema: native/yahoo/season_stats_football_returns_ncaaf
   short: season_stats_football_returns_ncaaf
   summary: Legacy player season Returns leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_returns_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1867,9 +1867,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonStatsFootballRushingNcaaf
-  returns_schema: native/yahoo/season_stats_football_rushing_ncaaf
   short: season_stats_football_rushing_ncaaf
   summary: Legacy player season Rushing leaders (NCAAF)
+  returns_schema: native/yahoo/season_stats_football_rushing_ncaaf
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1890,9 +1890,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballDefense
-  returns_schema: native/yahoo/season_team_stats_football_defense
   short: season_team_stats_football_defense
   summary: Legacy team season Defense (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_defense
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1913,9 +1913,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballKicking
-  returns_schema: native/yahoo/season_team_stats_football_kicking
   short: season_team_stats_football_kicking
   summary: Legacy team season Kicking (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_kicking
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1936,9 +1936,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballKickoffs
-  returns_schema: native/yahoo/season_team_stats_football_kickoffs
   short: season_team_stats_football_kickoffs
   summary: Legacy team season Kickoffs (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_kickoffs
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1959,9 +1959,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballOffense
-  returns_schema: native/yahoo/season_team_stats_football_offense
   short: season_team_stats_football_offense
   summary: Legacy team season Offense (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_offense
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -1982,9 +1982,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballPassing
-  returns_schema: native/yahoo/season_team_stats_football_passing
   short: season_team_stats_football_passing
   summary: Legacy team season Passing (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_passing
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2005,9 +2005,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballPassingDefense
-  returns_schema: native/yahoo/season_team_stats_football_passing_defense
   short: season_team_stats_football_passing_defense
   summary: Legacy team Passing defense allowed (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_passing_defense
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2028,9 +2028,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballPunting
-  returns_schema: native/yahoo/season_team_stats_football_punting
   short: season_team_stats_football_punting
   summary: Legacy team season Punting (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_punting
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2051,9 +2051,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballReceiving
-  returns_schema: native/yahoo/season_team_stats_football_receiving
   short: season_team_stats_football_receiving
   summary: Legacy team season Receiving (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_receiving
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2074,9 +2074,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballReceivingDefense
-  returns_schema: native/yahoo/season_team_stats_football_receiving_defense
   short: season_team_stats_football_receiving_defense
   summary: Legacy team Receiving defense allowed (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_receiving_defense
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2097,9 +2097,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballReturns
-  returns_schema: native/yahoo/season_team_stats_football_returns
   short: season_team_stats_football_returns
   summary: Legacy team season Returns (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_returns
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2120,9 +2120,9 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballRushing
-  returns_schema: native/yahoo/season_team_stats_football_rushing
   short: season_team_stats_football_rushing
   summary: Legacy team season Rushing (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_rushing
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2143,18 +2143,18 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /seasonTeamStatsFootballRushingDefense
-  returns_schema: native/yahoo/season_team_stats_football_rushing_defense
   short: season_team_stats_football_rushing_defense
   summary: Legacy team Rushing defense allowed (NCAAF)
+  returns_schema: native/yahoo/season_team_stats_football_rushing_defense
 - extra_params:
   - name: team_id
     query_key: teamId
     type: str
   parser: parse_yahoo_list
   path: /teamInjuries
-  returns_schema: native/yahoo/team_injuries
   short: team_injuries
   summary: Yahoo shangrila persisted query `teamInjuries` -> one row per `teams` entry
+  returns_schema: native/yahoo/team_injuries
 - extra_params:
   - name: team_id
     query_key: teamId
@@ -2164,9 +2164,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /teamPlayoffSeries
-  returns_schema: native/yahoo/team_playoff_series
   short: team_playoff_series
   summary: Yahoo shangrila persisted query `teamPlayoffSeries` -> one row per `teams.playoffSeries` entry
+  returns_schema: native/yahoo/team_playoff_series
 - extra_params:
   - name: team_id
     query_key: teamId
@@ -2179,9 +2179,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /teamRoster
-  returns_schema: native/yahoo/team_roster
   short: team_roster
   summary: Yahoo shangrila persisted query `teamRoster` -> one row per `teams` entry
+  returns_schema: native/yahoo/team_roster
 - extra_params:
   - name: season
     query_key: season
@@ -2191,9 +2191,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /teamScheduleBySeason
-  returns_schema: native/yahoo/team_schedule_by_season
   short: team_schedule_by_season
   summary: Yahoo shangrila persisted query `teamScheduleBySeason` -> one row per `teams` entry
+  returns_schema: native/yahoo/team_schedule_by_season
 - extra_params:
   - name: name
     query_key: name
@@ -2206,9 +2206,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /teamSearch
-  returns_schema: native/yahoo/team_search
   short: team_search
   summary: Yahoo shangrila persisted query `teamSearch` -> one row per `teams` entry
+  returns_schema: native/yahoo/team_search
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the payload's ``data`` collections
   extra_params:
@@ -2241,18 +2241,18 @@ endpoints:
     type: str
   parser: parse_yahoo_stats
   path: /teamStatsLeadersV2
-  returns_schema: native/yahoo/team_stats_leaders_v2
   short: team_stats_leaders_v2
   summary: 'Yahoo shangrila persisted query `teamStatsLeadersV2` -> tables: leagues, teams'
+  returns_schema: native/yahoo/team_stats_leaders_v2
 - extra_params:
   - name: team_id
     query_key: teamId
     type: str
   parser: parse_yahoo_list
   path: /teamTransactions
-  returns_schema: native/yahoo/team_transactions
   short: team_transactions
   summary: Yahoo shangrila persisted query `teamTransactions` -> one row per `teams` entry
+  returns_schema: native/yahoo/team_transactions
 - extra_params:
   - name: team_ids
     query_key: teamIds
@@ -2265,9 +2265,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /teamsBasic
-  returns_schema: native/yahoo/teams_basic
   short: teams_basic
   summary: Yahoo shangrila persisted query `teamsBasic` -> one row per `teams` entry
+  returns_schema: native/yahoo/teams_basic
 - extra_params:
   - name: tournament_id
     query_key: tournamentId
@@ -2280,9 +2280,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /tennisMatchesByDate
-  returns_schema: native/yahoo/tennis_matches_by_date
   short: tennis_matches_by_date
   summary: Yahoo shangrila persisted query `tennisMatchesByDate` -> one row per `tennisTournaments` entry
+  returns_schema: native/yahoo/tennis_matches_by_date
 - extra_params:
   - name: tournament_id
     query_key: tournamentId
@@ -2292,9 +2292,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /tennisTournament
-  returns_schema: native/yahoo/tennis_tournament
   short: tennis_tournament
   summary: Yahoo shangrila persisted query `tennisTournament` -> one row per `tennisTournaments` entry
+  returns_schema: native/yahoo/tennis_tournament
 - extra_params:
   - name: league_id
     query_key: leagueId
@@ -2307,9 +2307,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /tennisTournaments
-  returns_schema: native/yahoo/tennis_tournaments
   short: tennis_tournaments
   summary: Yahoo shangrila persisted query `tennisTournaments` -> one row per `tennisTournaments` entry
+  returns_schema: native/yahoo/tennis_tournaments
 - extra_params:
   - name: season
     query_key: season
@@ -2319,9 +2319,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /tennisTournamentsByDate
-  returns_schema: native/yahoo/tennis_tournaments_by_date
   short: tennis_tournaments_by_date
   summary: Yahoo shangrila persisted query `tennisTournamentsByDate` -> one row per `tennisTournaments` entry
+  returns_schema: native/yahoo/tennis_tournaments_by_date
 - extra_params:
   - name: count
     query_key: count
@@ -2334,9 +2334,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /trendingEventIds
-  returns_schema: native/yahoo/trending_event_ids
   short: trending_event_ids
   summary: Yahoo shangrila persisted query `trendingEventIds` -> one row per `trendingEvents` entry
+  returns_schema: native/yahoo/trending_event_ids
 - extra_params:
   - name: count
     query_key: count
@@ -2352,9 +2352,9 @@ endpoints:
     type: str
   parser: parse_yahoo_list
   path: /trendingGameIds
-  returns_schema: native/yahoo/trending_game_ids
   short: trending_game_ids
   summary: Yahoo shangrila persisted query `trendingGameIds` -> one row per `trendingGames` entry
+  returns_schema: native/yahoo/trending_game_ids
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the feed's id-keyed collections
   example_args:
@@ -2373,9 +2373,9 @@ endpoints:
   - name: game_id
     required: true
     type: str
-  returns_schema: native/yahoo/editorial_boxscore
   short: editorial_boxscore
   summary: Full game box score + play-by-play (normalized stat dictionaries)
+  returns_schema: native/yahoo_scores/boxscore
 - docstring:
     parsed_doc: A dict of polars/pandas DataFrames keyed by the feed's id-keyed collections
   extra_params:
@@ -2400,9 +2400,9 @@ endpoints:
   host: https://api-secure.sports.yahoo.com/v1/editorial/s
   parser: parse_yahoo_scores_scoreboard
   path: /scoreboard
-  returns_schema: native/yahoo/editorial_scoreboard
   short: editorial_scoreboard
   summary: 'Scoreboard: games + teams + leagues + odds (fat payload)'
+  returns_schema: native/yahoo_scores/scoreboard
 getter_module: sportsdataverse.yahoo.yahoo_shangrila_runtime
 host: https://graphite-secure.sports.yahoo.com/v1/query/shangrila
 module: yahoo_shangrila

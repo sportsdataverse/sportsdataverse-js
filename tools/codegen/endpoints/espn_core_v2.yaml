@@ -228,7 +228,6 @@ endpoints:
     type: int
     description: Page size for this weekly power-index table; pass a limit large enough to avoid paging (table size varies by sport/league -- CFB's FBS table alone is ~134 rows).
   parser: parse_items
-  returns_schema: weekly_powerindex
   example_args:
     season: 2024
     season_type: 2

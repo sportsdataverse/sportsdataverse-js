@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parse } from "yaml";
+import { checkTransform } from "./param-transforms.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const endpointsDir = join(here, "endpoints");
@@ -189,12 +190,20 @@ function standaloneFlatNamespaces(leagues) {
   return out;
 }
 
+// A param `transform` (sdv-py runtime function name) rides into the def; an
+// unknown name fails the codegen (tools/codegen/param-transforms.mjs).
+const mapTransform = (ep, p) =>
+  p.transform !== undefined
+    ? { transform: checkTransform(p.transform, `${ep.short}.${p.name}`) }
+    : {};
+
 function mapPathParams(ep) {
   return (ep.path_params ?? []).map((p) => ({
     name: p.name,
     ...(p.required === false ? { required: false } : {}),
     ...(p.default !== undefined ? { default: p.default } : {}),
     ...(p.default_from !== undefined ? { defaultFrom: p.default_from } : {}),
+    ...mapTransform(ep, p),
   }));
 }
 
@@ -203,6 +212,7 @@ function mapQueryParams(ep) {
     name: p.name,
     queryKey: p.query_key,
     ...(p.default !== undefined ? { default: p.default } : {}),
+    ...mapTransform(ep, p),
   }));
 }
 

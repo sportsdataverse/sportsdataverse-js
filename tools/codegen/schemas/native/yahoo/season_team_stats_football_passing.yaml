@@ -1,40 +1,13 @@
-frames:
-- columns:
-  - description: ''
-    name: stat_id
-    type: character
-  - description: ''
-    name: display_name
-    type: character
-  - description: ''
-    name: abbreviation
-    type: character
-  - description: ''
-    name: sort_order
-    type: character
-  section: stat_types
-- columns:
-  - description: ''
-    name: player_display_name
-    type: character
-  - description: ''
-    name: player_player_id
-    type: character
-  - description: ''
-    name: player_team
-    type: character
-  - description: ''
-    name: player_positions
-    type: character
-  - description: ''
-    name: player_alias
-    type: character
-  - description: ''
-    name: player_player_cutout
-    type: character
-  - description: ''
-    name: stats
-    type: character
-  section: leagues
-kind: frames
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_stats. Columns derived from the spec's typed nested stat-array item props (deep-flattened with `_`, snake_cased to match the parser output).
 schema: season_team_stats_football_passing
+kind: dataframe
+columns:
+- name: stat_id
+  type: character
+- name: display_name
+  type: character
+- name: abbreviation
+  type: character
+- name: sort_order
+  type: character

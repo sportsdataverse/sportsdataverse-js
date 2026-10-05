@@ -138,8 +138,21 @@ pinned sdv-py commit:
 
 - `tools/codegen/vendor.yaml` — the manifest: `source.ref` (the pin) and, per family,
   `from` (py stem), `names` (py short → JS short; keeps CBS's JS names), `parsers`
-  (py parser → JS registry name), `parser_overrides` (JS short → JS parser),
-  `schemas` (returns-schema path prefix rewrite).
+  (py parser → `{js, schema_compatible}`), `parser_overrides` (JS short → JS
+  parser), `schemas` (returns-schema path prefix rewrite).
+- **Returns-schema policy:** a returns table must describe what the JS parser
+  returns. A py `returns_schema` is kept only when the JS parser is py's ported
+  under the same name or a `schema_compatible: true` mapping, with no
+  `parser_overrides` entry; otherwise it is dropped and the overlay attaches JS's
+  own schema where one exists (CBS, Yahoo, torvik and two MLB endpoints keep JS's).
+  `test/vendor.test.js` enforces it, and `vendor.mjs` refuses to vendor a py schema
+  over a JS-owned one an overlay attaches.
+- **Param transforms:** a vendored param may name an sdv-py runtime function in
+  `transform:` (`format_nhl_season`, `bool_str`, `_bool_str`). They are ported in
+  `src/core/transforms.ts` (+ a copy in `docs/src/playground/resolve.mjs`) and applied
+  by both resolvers to the resolved path/query value; `generate.mjs` fails on a name
+  not in `tools/codegen/param-transforms.mjs`. A new upstream transform = port it,
+  list it there, add tests.
 - `tools/codegen/vendor/upstream/` — the fetched py files, **verbatim**, plus `REF`.
 - `tools/codegen/overlay/<family>.yaml` — JS-owned additions (`mlb`'s 14 and
   `torvik`'s 3 JS-only endpoints) and patches (an entry whose `short` is vendored
@@ -157,8 +170,9 @@ pinned sdv-py commit:
 - New or changed shared endpoints land in **sdv-py first**. A new py parser name
   needs a `parsers` mapping (the flat-contract test fails on an unregistered name);
   a new ESPN short needs an `ESPN_ENDPOINT_PARSERS` entry + `espn_parser_map.yaml`.
-- `_enrich_cbs_napi_schemas.mjs` / `gen-yahoo-schemas.mjs` write into vendored schema
-  dirs — don't run them; enrich upstream in sdv-py instead.
+- CBS and Yahoo schemas (`schemas/native/{cbs,yahoo}/`) stay JS-owned (their parsers
+  aren't py ports), so `_enrich_cbs_napi_schemas.mjs` / `gen-yahoo-schemas.mjs` still
+  apply there.
 - A flat endpoint may carry its own `host` (Yahoo's editorial routes): `generate.mjs`
   uses `ep.host ?? doc.host`, and `flatHosts` stays the family host.
 

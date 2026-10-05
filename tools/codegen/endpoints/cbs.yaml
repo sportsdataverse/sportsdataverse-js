@@ -47,9 +47,9 @@ endpoints:
     type: str
   parser: parse_cbs_list
   path: /resource/bulk
-  returns_schema: native/cbs/bulk
   short: bulk
   summary: Resolve resources in bulk to save HTTP traffic.
+  returns_schema: native/cbs/bulk
 - example_args:
     client_name: cbs
   extra_params:
@@ -76,9 +76,9 @@ endpoints:
     name: client_name
     required: true
     type: str
-  returns_schema: native/cbs/client_config
   short: client_configuration
   summary: Get configuration for how a client should access our APIs, or any additional settings they want supplied to them.
+  returns_schema: native/cbs/client_configuration
 - parser: parse_cbs_list
   path: /resource/coach/rankings/{coach_id}
   path_params:
@@ -86,9 +86,9 @@ endpoints:
     name: coach_id
     required: true
     type: int
-  returns_schema: native/cbs/coach_rankings
   short: coach_rankings
   summary: Get rankings resource for a coach.
+  returns_schema: native/cbs/coach_rankings
 - extra_params:
   - description: 'Specify specific sub-resources to resolve. Defaults to none. Allowed: team.'
     name: resources
@@ -101,9 +101,9 @@ endpoints:
     name: coach_id
     required: true
     type: int
-  returns_schema: native/cbs/coach_team_associations
   short: coach_team_associations
   summary: Get team associations for a particular coach.
+  returns_schema: native/cbs/coach_team_associations
 - extra_params:
   - description: View option for rendering only a certain subdivision
     name: sub_division_id
@@ -120,14 +120,14 @@ endpoints:
     name: division_id
     required: true
     type: int
-  returns_schema: native/cbs/division_subdivisions
   short: sub_divisions
   summary: Get subdivisions for a division from Atlas.
+  returns_schema: native/cbs/sub_divisions
 - parser: parse_cbs_list
   path: /resource/endpoint/registry
-  returns_schema: native/cbs/endpoint_registry
   short: endpoint_registry
   summary: Get the resource endpoint registry
+  returns_schema: native/cbs/endpoint_registry
 - extra_params:
   - description: 'Optional.  Options here: http://momentjs.com/docs/#/displaying/format/'
     name: date_format
@@ -144,9 +144,9 @@ endpoints:
     name: event_id
     required: true
     type: int
-  returns_schema: native/cbs/event
   short: event
   summary: Get an event resource
+  returns_schema: native/cbs/event
 - parser: parse_cbs_list
   path: /resource/event/entrants/{event_id}
   path_params:
@@ -154,9 +154,9 @@ endpoints:
     name: event_id
     required: true
     type: int
-  returns_schema: native/cbs/event_entrants
   short: event_entrants
   summary: Get players entered in a particular event.
+  returns_schema: native/cbs/event_entrants
 - parser: parse_cbs_list
   path: /resource/event/leaderboard/{event_id}
   path_params:
@@ -164,9 +164,9 @@ endpoints:
     name: event_id
     required: true
     type: int
-  returns_schema: native/cbs/event_leaderboard
   short: event_leaderboard
   summary: Get a leaderboard data resource for a particular event.
+  returns_schema: native/cbs/event_leaderboard
 - parser: parse_cbs_list
   path: /resource/event/seasons/{event_id}
   path_params:
@@ -174,9 +174,9 @@ endpoints:
     name: event_id
     required: true
     type: int
-  returns_schema: native/cbs/event_seasons
   short: event_seasons
   summary: Get seasons associated to a particular event.
+  returns_schema: native/cbs/event_seasons
 - parser: parse_cbs_list
   path: /resource/event/venues/{event_id}
   path_params:
@@ -184,9 +184,9 @@ endpoints:
     name: event_id
     required: true
     type: int
-  returns_schema: native/cbs/event_venues
   short: event_venues
   summary: Get venues associated to a particular event.
+  returns_schema: native/cbs/event_venues
 - extra_params:
   - description: 'Optional.  Options here: http://momentjs.com/docs/#/displaying/format/'
     name: date_format
@@ -203,9 +203,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game
   short: game
   summary: Get a game resource
+  returns_schema: native/cbs/game
 - parser: parse_cbs_list
   path: /resource/game/bettingSplits/{game_id}
   path_params:
@@ -213,9 +213,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_betting_splits
   short: game_betting_splits
   summary: Get a BettingSplits resource for a particular game.
+  returns_schema: native/cbs/game_betting_splits
 - parser: parse_cbs_list
   path: /resource/game/boxscore/{game_id}
   path_params:
@@ -223,9 +223,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_boxscore
   short: boxscore
   summary: Get boxscore resource
+  returns_schema: native/cbs/boxscore
 - parser: parse_cbs_list
   path: /resource/game/content/preview/{game_id}
   path_params:
@@ -233,9 +233,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_content_preview
   short: game_content_preview
   summary: Get content for game preview
+  returns_schema: native/cbs/game_content_preview
 - parser: parse_cbs_list
   path: /resource/game/content/recap/{game_id}
   path_params:
@@ -243,9 +243,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_content_recap
   short: game_content_recap
   summary: Get content for game recap
+  returns_schema: native/cbs/game_content_recap
 - extra_params:
   - description: The tags used to retrieve stories
     name: game_ids_story_tags
@@ -258,9 +258,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_content_story
   short: game_content_story
   summary: Get content for game story
+  returns_schema: native/cbs/game_content_story
 - parser: parse_cbs_scoreboard
   path: /resource/game/featured/{game_id}
   path_params:
@@ -268,9 +268,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_featured
   short: featured_game
   summary: Get a FeaturedGame resource.
+  returns_schema: native/cbs/featured_game
 - extra_params:
   - description: 'Specify specific sub-resources to resolve.  Defaults to none. Allowed: playerTeamAssociations, injuries, metaData, playerStats.'
     name: resources
@@ -283,9 +283,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_lineup
   short: game_lineup
   summary: Get a lineup resource for a particular game.
+  returns_schema: native/cbs/game_lineup
 - extra_params:
   - description: This value can be used to specify markets, using the marketIds.
     name: market_ids
@@ -314,9 +314,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_odds
   short: game_odds
   summary: Get an odds resource for a particular game.
+  returns_schema: native/cbs/game_odds
 - parser: parse_cbs_odds
   path: /resource/game/odds/hq/{game_id}
   path_params:
@@ -324,9 +324,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_odds_hq
   short: game_hq_odds
   summary: Get an HQ odds resource for a particular game.
+  returns_schema: native/cbs/game_hq_odds
 - parser: parse_cbs_list
   path: /resource/game/outcomes/{game_id}
   path_params:
@@ -334,9 +334,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_outcomes
   short: game_outcomes
   summary: Get an odds outcome for a particular game.
+  returns_schema: native/cbs/game_outcomes
 - extra_params:
   - description: 'Optional.  Options here: http://momentjs.com/docs/#/displaying/format/'
     name: date_format
@@ -353,9 +353,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_probable_players
   short: probable_players
   summary: Get a list of players who are probably playing in a particular game.
+  returns_schema: native/cbs/probable_players
 - extra_params:
   - description: This value can be used to specify markets, using the marketIds.
     name: market_ids
@@ -384,9 +384,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_props
   short: game_props
   summary: Get game props for a game.
+  returns_schema: native/cbs/game_props
 - parser: parse_cbs_list
   path: /resource/game/rtwp/{game_id}
   path_params:
@@ -394,9 +394,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_rtwp
   short: game_rtwp
   summary: Get a rtwp resource for a particular game.
+  returns_schema: native/cbs/game_rtwp
 - parser: parse_cbs_list
   path: /resource/game/ruwtHighlights/{game_id}
   path_params:
@@ -404,9 +404,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_ruwt_highlights
   short: ruwt_highlights
   summary: Get the RUWT highlights resource for a particular game.
+  returns_schema: native/cbs/ruwt_highlights
 - parser: parse_cbs_list
   path: /resource/game/scoring/boxscores/{game_id}
   path_params:
@@ -414,9 +414,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_boxscores
   short: game_scoring_boxscores
   summary: Get an scoring box scores resource for a particular game.
+  returns_schema: native/cbs/game_scoring_boxscores
 - parser: parse_cbs_list
   path: /resource/game/scoring/drives/{game_id}
   path_params:
@@ -424,9 +424,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_drives
   short: game_scoring_drives
   summary: Get a drives resource for a particular game.
+  returns_schema: native/cbs/game_scoring_drives
 - parser: parse_cbs_list
   path: /resource/game/scoring/leaders/{game_id}
   path_params:
@@ -434,9 +434,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_leaders
   short: game_scoring_leaders
   summary: Get an scoring leaders resource for a particular game.
+  returns_schema: native/cbs/game_scoring_leaders
 - parser: parse_cbs_list
   path: /resource/game/scoring/playerStats/{game_id}
   path_params:
@@ -444,9 +444,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_player_stats
   short: game_scoring_player_stats
   summary: Get an scoring player stats resource for a particular game.
+  returns_schema: native/cbs/game_scoring_player_stats
 - parser: parse_cbs_list
   path: /resource/game/scoring/plays/{game_id}
   path_params:
@@ -454,9 +454,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_plays
   short: game_scoring_plays
   summary: Get an scoring plays resource for a particular game.
+  returns_schema: native/cbs/game_scoring_plays
 - parser: parse_cbs_list
   path: /resource/game/scoring/rosters/{game_id}
   path_params:
@@ -464,9 +464,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_rosters
   short: game_scoring_rosters
   summary: Get an scoring rosters resource for a particular game.
+  returns_schema: native/cbs/game_scoring_rosters
 - parser: parse_cbs_scoreboard
   path: /resource/game/scoring/scoreboard/{game_id}
   path_params:
@@ -474,9 +474,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_scoreboard
   short: game_scoring_scoreboard
   summary: Get an scoring scoreboard resource for a particular game.
+  returns_schema: native/cbs/game_scoring_scoreboard
 - parser: parse_cbs_scoreboard
   path: /resource/game/scoring/scores/{game_id}
   path_params:
@@ -484,9 +484,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_scores
   short: game_scoring_scores
   summary: Get an scoring scores resource for a particular game.
+  returns_schema: native/cbs/game_scoring_scores
 - parser: parse_cbs_list
   path: /resource/game/scoring/teamStats/{game_id}
   path_params:
@@ -494,9 +494,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_team_stats
   short: game_scoring_team_stats
   summary: Get an scoring team stats resource for a particular game.
+  returns_schema: native/cbs/game_scoring_team_stats
 - parser: parse_cbs_list
   path: /resource/game/scoring/winprob/{game_id}
   path_params:
@@ -504,9 +504,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_winprob
   short: game_scoring_winprob
   summary: Get an scoring winprob resource for a particular game.
+  returns_schema: native/cbs/game_scoring_winprob
 - parser: parse_cbs_list
   path: /resource/game/scoring/ytdPlayerStats/{game_id}
   path_params:
@@ -514,9 +514,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_ytd_player_stats
   short: game_scoring_ytd_player_stats
   summary: Get an scoring YTD player stats resource for a particular game.
+  returns_schema: native/cbs/game_scoring_ytd_player_stats
 - parser: parse_cbs_list
   path: /resource/game/scoring/ytdTeamStats/{game_id}
   path_params:
@@ -524,9 +524,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_scoring_ytd_team_stats
   short: game_scoring_ytd_team_stats
   summary: Get an scoring YTD team stats resource for a particular game.
+  returns_schema: native/cbs/game_scoring_ytd_team_stats
 - parser: parse_cbs_list
   path: /resource/game/ticket/{game_id}
   path_params:
@@ -534,9 +534,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_ticket
   short: game_ticket
   summary: Get a ticket resource for a particular game.
+  returns_schema: native/cbs/game_ticket
 - parser: parse_cbs_list
   path: /resource/game/weather/{game_id}
   path_params:
@@ -544,9 +544,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/game_weather
   short: weather
   summary: Get a Weather resource for a particular game.
+  returns_schema: native/cbs/weather
 - parser: parse_cbs_list
   path: /resource/golf/event/markets/{event_id}
   path_params:
@@ -554,9 +554,9 @@ endpoints:
     name: event_id
     required: true
     type: int
-  returns_schema: native/cbs/golf_event_markets
   short: golf_event_markets
   summary: Get markets for an event.
+  returns_schema: native/cbs/golf_event_markets
 - example_args:
     player_id: 1751796
   extra_params:
@@ -571,9 +571,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/golf_player_markets
   short: golf_player_markets
   summary: Get markets for a golfer.
+  returns_schema: native/cbs/golf_player_markets
 - example_args:
     player_id: 1751796
   extra_params:
@@ -592,9 +592,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/golfer_results
   short: golfer_results
   summary: Get golfer tournament results resource for a particular player.
+  returns_schema: native/cbs/golfer_results
 - example_args:
     league_id: 59
   extra_params:
@@ -609,9 +609,9 @@ endpoints:
     name: league_id
     required: true
     type: int
-  returns_schema: native/cbs/league
   short: league
   summary: Get a league resource
+  returns_schema: native/cbs/league
 - example_args:
     league_id: 59
   extra_params:
@@ -626,9 +626,9 @@ endpoints:
     name: league_id
     required: true
     type: int
-  returns_schema: native/cbs/league_teams
   short: league_teams
   summary: Get team resources on a league with optional vendor overlay
+  returns_schema: native/cbs/league_teams
 - parser: parse_cbs_odds
   path: /resource/odds/{game_id}
   path_params:
@@ -636,9 +636,9 @@ endpoints:
     name: game_id
     required: true
     type: int
-  returns_schema: native/cbs/odds
   short: odds
   summary: Get an odds resource for a particular game.
+  returns_schema: native/cbs/odds
 - example_args:
     player_id: 1751796
   extra_params:
@@ -661,9 +661,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player
   short: player
   summary: Get a player resource
+  returns_schema: native/cbs/player
 - example_args:
     player_id: 1751796
   parser: parse_cbs_list
@@ -673,9 +673,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_combine_data
   short: player_combine_data
   summary: Get draft related info for a particular player.
+  returns_schema: native/cbs/player_combine_data
 - example_args:
     player_id: 1751796
   extra_params:
@@ -694,9 +694,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_depth_charts
   short: depth_charts
   summary: Get depth charts for a particular player.
+  returns_schema: native/cbs/depth_charts
 - example_args:
     player_id: 1751796
   extra_params:
@@ -719,9 +719,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_draft_info
   short: player_draft_info
   summary: Get draft info for a particular player.
+  returns_schema: native/cbs/player_draft_info
 - example_args:
     player_id: 1751796
   extra_params:
@@ -740,9 +740,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_encyclopedia
   short: player_encyclopedia
   summary: Get encyclopedia resource for a particular player.
+  returns_schema: native/cbs/player_encyclopedia
 - example_args:
     player_id: 1751796
   parser: parse_cbs_list
@@ -752,9 +752,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_futures
   short: player_futures
   summary: Get futures for a player.
+  returns_schema: native/cbs/player_futures
 - example_args:
     player_id: 1751796
   extra_params:
@@ -777,9 +777,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_game_stats
   short: player_game_stats
   summary: Get game stats for a particular player.
+  returns_schema: native/cbs/player_game_stats
 - example_args:
     player_id: 1751796
   parser: parse_cbs_list
@@ -789,9 +789,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_hockey_meta
   short: hockey_player_meta
   summary: Get the hockey meta data resource for a particular player.
+  returns_schema: native/cbs/hockey_player_meta
 - example_args:
     player_id: 1751796
   extra_params:
@@ -806,9 +806,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_injuries
   short: player_injuries
   summary: Get injuries for a particular player.
+  returns_schema: native/cbs/player_injuries
 - example_args:
     player_id: 1751796
   parser: parse_cbs_list
@@ -818,9 +818,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_meta_baseball
   short: baseball_player_meta
   summary: Get meta data associated to a particular baseball player.
+  returns_schema: native/cbs/baseball_player_meta
 - example_args:
     player_id: 1751796
   parser: parse_cbs_list
@@ -830,9 +830,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_meta_golf
   short: player_golf_metadata
   summary: Get a metadata resource for a particular golf player.
+  returns_schema: native/cbs/player_golf_metadata
 - example_args:
     player_id: 1751796
   extra_params:
@@ -847,9 +847,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_outlook
   short: player_outlook
   summary: Get outlook for a player (context is now)
+  returns_schema: native/cbs/player_outlook
 - example_args:
     player_id: 1751796
   extra_params:
@@ -864,9 +864,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_position_rankings
   short: position_rankings
   summary: Get position rankings for a player
+  returns_schema: native/cbs/position_rankings
 - example_args:
     player_id: 1751796
   extra_params:
@@ -897,9 +897,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_rankings
   short: player_rankings
   summary: Get all rankings for a player.
+  returns_schema: native/cbs/player_rankings
 - example_args:
     player_id: 1751796
   extra_params:
@@ -914,9 +914,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_recruit_associations
   short: recruit_team_associations
   summary: Get recruit associations for a particular player.
+  returns_schema: native/cbs/recruit_team_associations
 - example_args:
     player_id: 1751796
   extra_params:
@@ -947,9 +947,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_standings
   short: player_standings
   summary: Get standings for a particular player
+  returns_schema: native/cbs/player_standings
 - example_args:
     player_id: 1751796
   extra_params:
@@ -988,9 +988,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_stats
   short: player_stats
   summary: Get all statistics for a player.
+  returns_schema: native/cbs/player_stats
 - example_args:
     player_id: 1751796
   extra_params:
@@ -1013,9 +1013,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_team_associations
   short: player_team_associations
   summary: Get team associations for a particular player.
+  returns_schema: native/cbs/player_team_associations
 - example_args:
     player_id: 1751796
   extra_params:
@@ -1046,9 +1046,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/player_transactions
   short: player_transactions
   summary: Get transactions resource for a particular player.
+  returns_schema: native/cbs/player_transactions
 - example_args:
     player_id: 1751796
   parser: parse_cbs_list
@@ -1058,9 +1058,9 @@ endpoints:
     name: player_id
     required: true
     type: int
-  returns_schema: native/cbs/recruit_rankings
   short: recruit_rankings
   summary: Get rankings resource for a recruit.
+  returns_schema: native/cbs/recruit_rankings
 - example_args:
     season_id: 59
   extra_params:
@@ -1079,9 +1079,9 @@ endpoints:
     name: season_id
     required: true
     type: int
-  returns_schema: native/cbs/season
   short: season
   summary: Get a season resource from Atlas.
+  returns_schema: native/cbs/season
 - example_args:
     season_id: 59
   extra_params:
@@ -1096,9 +1096,9 @@ endpoints:
     name: season_id
     required: true
     type: int
-  returns_schema: native/cbs/season_teams
   short: season_teams
   summary: Get team resources associated to a season
+  returns_schema: native/cbs/season_teams
 - example_args:
     sport_id: 1
   extra_params:
@@ -1113,9 +1113,9 @@ endpoints:
     name: sport_id
     required: true
     type: int
-  returns_schema: native/cbs/sport
   short: sport
   summary: Get a sport resource from Atlas.
+  returns_schema: native/cbs/sport
 - example_args:
     sport_id: 1
   parser: parse_cbs_list
@@ -1125,9 +1125,9 @@ endpoints:
     name: sport_id
     required: true
     type: int
-  returns_schema: native/cbs/sport_leagues
   short: sport_leagues
   summary: Get league resources for a sport.
+  returns_schema: native/cbs/sport_leagues
 - example_args:
     team_id: 404
   parser: parse_cbs_list
@@ -1137,9 +1137,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_futures
   short: team_futures
   summary: Get futures for a team.
+  returns_schema: native/cbs/team_futures
 - example_args:
     team_id: 404
   extra_params:
@@ -1154,9 +1154,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_metadata
   short: team_metadata
   summary: Get a team metadata resource
+  returns_schema: native/cbs/team_metadata
 - example_args:
     team_id: 404
   extra_params:
@@ -1171,9 +1171,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_players
   short: team_players
   summary: Get player resources on a team.
+  returns_schema: native/cbs/team_players
 - example_args:
     team_id: 404
   extra_params:
@@ -1192,9 +1192,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_polls
   short: team_polls
   summary: Retrieve team rankings data from our various polls.
+  returns_schema: native/cbs/team_polls
 - example_args:
     team_id: 404
   extra_params:
@@ -1217,9 +1217,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_rankings
   short: team_rankings
   summary: Get rankings for a team (by season)
+  returns_schema: native/cbs/team_rankings
 - example_args:
     team_id: 404
   parser: parse_cbs_list
@@ -1229,9 +1229,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_rankings_sportsline
   short: sports_line_team_rankings
   summary: Get sportsline rankings for a team
+  returns_schema: native/cbs/sports_line_team_rankings
 - example_args:
     team_id: 404
   extra_params:
@@ -1262,9 +1262,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_seasons
   short: team_seasons
   summary: Get a list of Season resources associated to a Team.
+  returns_schema: native/cbs/team_seasons
 - example_args:
     team_id: 404
   extra_params:
@@ -1287,9 +1287,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_standings
   short: team_standings
   summary: Get standings for a particular team.
+  returns_schema: native/cbs/team_standings
 - example_args:
     team_id: 404
   extra_params:
@@ -1304,9 +1304,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_standings_sportsline
   short: sports_line_team_standings
   summary: Get SportsLine standings for a particular team.
+  returns_schema: native/cbs/sports_line_team_standings
 - example_args:
     team_id: 404
   extra_params:
@@ -1333,9 +1333,9 @@ endpoints:
     name: team_id
     required: true
     type: int
-  returns_schema: native/cbs/team_stats
   short: team_stats
   summary: Get all statistics for a team.
+  returns_schema: native/cbs/team_stats
 - extra_params:
   - description: 'Specify specific sub-resources to resolve. Defaults to none. Allowed: metaData.'
     name: resources
@@ -1348,9 +1348,9 @@ endpoints:
     name: venue_id
     required: true
     type: int
-  returns_schema: native/cbs/venue
   short: venue
   summary: Get a venue resource
+  returns_schema: native/cbs/venue
 - parser: parse_cbs_list
   path: /resource/venue/metadata/{venue_id}
   path_params:
@@ -1358,9 +1358,9 @@ endpoints:
     name: venue_id
     required: true
     type: int
-  returns_schema: native/cbs/venue_metadata
   short: venue_metadata
   summary: Get a venues metadata resource
+  returns_schema: native/cbs/venue_metadata
 host: https://api.cbssports.com/napi
 module: cbs_napi
 name_pattern: cbs_{short}

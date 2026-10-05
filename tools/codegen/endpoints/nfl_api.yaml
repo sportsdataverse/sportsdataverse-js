@@ -130,7 +130,6 @@ endpoints:
   summary: "GET /football/v2/stats/live/team-statistics/{game_id} — one row per side (away, home): the live team box score."
   path: /football/v2/stats/live/team-statistics/{game_id}
   parser: parse_nfl_team
-  returns_schema: native/nfl_api/live_team_statistics
   path_params:
   - { name: game_id, type: str, required: true, description: "Shield uuid game id -- the ``id`` column of the week games and weekly game details listings." }
   example_args: { game_id: a9a890ed-4feb-11f1-abca-2c54536568a9 }
@@ -138,7 +137,6 @@ endpoints:
   summary: "GET /football/v2/stats/live/player-statistics/{game_id} — one row per player per side: the live player box score."
   path: /football/v2/stats/live/player-statistics/{game_id}
   parser: parse_nfl_team
-  returns_schema: native/nfl_api/live_player_statistics
   path_params:
   - { name: game_id, type: str, required: true, description: "Shield uuid game id -- the ``id`` column of the week games and weekly game details listings." }
   example_args: { game_id: a9a890ed-4feb-11f1-abca-2c54536568a9 }
@@ -146,7 +144,6 @@ endpoints:
   summary: "GET /experience/v2/gamedetails/{game_id} — one row: the flat v2 game detail (game, summary, optional drive chart / replays / standings)."
   path: /experience/v2/gamedetails/{game_id}
   parser: parse_nfl_team
-  returns_schema: native/nfl_api/game_details_v2
   path_params:
   - { name: game_id, type: str, required: true, description: "Shield uuid game id -- the ``id`` column of the week games and weekly game details listings." }
   extra_params:
@@ -159,7 +156,6 @@ endpoints:
   summary: "GET /experience/v1/gamedetailsbyslug/{slug} — one row: the flat game detail looked up by nfl.com slug."
   path: /experience/v1/gamedetailsbyslug/{slug}
   parser: parse_nfl_team
-  returns_schema: native/nfl_api/game_details_by_slug
   path_params:
   - { name: slug, type: str, required: true, description: "nfl.com game slug, e.g. ``broncos-at-chiefs-2026-reg-1`` -- the last segment of the nfl.com game page URL and the ``slug`` external id." }
   extra_params:

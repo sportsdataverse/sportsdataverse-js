@@ -1,12 +1,11 @@
-columns:
-- description: ''
-  name: season
-  type: integer
-- description: ''
-  name: display_name
-  type: character
-- description: ''
-  name: type
-  type: character
-kind: dataframe
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
 schema: oly_seasons
+kind: dataframe
+columns:
+- name: season
+  type: numeric
+- name: display_name
+  type: character
+- name: type
+  type: character

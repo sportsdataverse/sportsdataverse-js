@@ -1,27 +1,7 @@
-columns:
-- description: ''
-  name: player_id
-  type: character
-- description: ''
-  name: active
-  type: character
-- description: ''
-  name: alias
-  type: character
-- description: ''
-  name: first_name
-  type: character
-- description: ''
-  name: last_name
-  type: character
-- description: ''
-  name: display_name
-  type: character
-- description: ''
-  name: suggested_headshot
-  type: character
-- description: ''
-  name: team
-  type: character
-kind: dataframe
+# Yahoo Sports shangrila — generated returns schema.
+# Parsed by parse_yahoo_list. Columns derived from the spec's typed root-list item props (deep-flattened with `_`, snake_cased to match the parser output).
 schema: player_search
+kind: dataframe
+columns:
+- name: players
+  type: list
