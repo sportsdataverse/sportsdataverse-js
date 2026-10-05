@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { get } from '../core/client.js';
 import { espnNflCdnBoxscore, espnNflCdnPlaybyplay, espnNflCdnSchedule } from '../generated/espn/nfl.js';
 import { cdnDate, warnFootballDate } from './_cdn.js';
 /**
@@ -66,14 +66,12 @@ export default {
      * const result = await sdv.nfl.getSummary(401220403);
      */
     getSummary: async function (id) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
         const params: Record<string, any> = {
             event: id
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return {
             id: parseInt(res.data.header.id),
@@ -102,13 +100,11 @@ export default {
      * const result = await sdv.nfl.getPicks(401220403);
      */
     getPicks: async function (id) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
         const params: Record<string, any> = {
             event: id
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return {
             id: parseInt(res.data.header.id),
             gameInfo: res.data.gameInfo,
@@ -187,7 +183,7 @@ export default {
      * )
      */
     getScoreboard: async function ({ year, month, day, limit = 300 }) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard`;
 
         const params: Record<string, any> = {
             limit
@@ -195,9 +191,7 @@ export default {
         if (year && month && day) {
             params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         }
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
     },
     /**
@@ -223,9 +217,7 @@ export default {
             type: 1,
             level: groupId
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'web_v3' }) };
         return res.data;
     },
     /**
@@ -237,13 +229,11 @@ export default {
      * const result = await sdv.nfl.getTeamList();
      */
     getTeamList: async function () {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/teams';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams';
         const params: Record<string, any> = {
             limit: 1000
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
     },
     /**
@@ -258,8 +248,8 @@ export default {
      * const result = await sdv.nfl.getTeamInfo(teamId);
      */
     getTeamInfo: async function ({ id }) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${id}`;
-        const res = await axios.get(baseUrl);
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${id}`;
+        const res = { data: await get(baseUrl, { family: 'site_v2' }) };
         return res.data;
     },
     /**
@@ -274,13 +264,11 @@ export default {
      * const result = await sdv.nfl.getTeamPlayers(teamId);
      */
     getTeamPlayers: async function ({ id }) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${id}`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
     }
 }

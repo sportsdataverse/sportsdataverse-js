@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { get } from '../core/client.js';
 import { espnCfbCdnBoxscore, espnCfbCdnPlaybyplay, espnCfbCdnRankings, espnCfbCdnSchedule } from '../generated/espn/cfb.js';
 import { cdnDate, warnFootballDate } from './_cdn.js';
 import * as cheerio from 'cheerio';
@@ -70,14 +71,12 @@ export default {
      * const result = await sdv.cfb.getSummary(401256194);
      */
     getSummary: async function (id) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
         const params: Record<string, any> = {
             event: id
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return {
             id: parseInt(res.data.header.id),
@@ -106,14 +105,12 @@ export default {
      * const result = await sdv.cfb.getPicks(401256194);
      */
     getPicks: async function (id) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary';
         const params: Record<string, any> = {
             event: id
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return {
             id: parseInt(res.data.header.id),
@@ -376,7 +373,7 @@ export default {
      */
     getScoreboard: async function ({ year, month, day, groups = 80, seasontype = 2, limit = 300 }) {
 
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard`;
         const params: Record<string, any> = {
             groups: groups,
             seasontype,
@@ -386,9 +383,7 @@ export default {
             params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         }
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return res.data;
     },
@@ -405,15 +400,13 @@ export default {
      * const result = await sdv.cfb.getConferences(year = yr, group = 80);
      */
     getConferences: async function ({ year = new Date().getFullYear(), group = 80 }) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard/conferences';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard/conferences';
 
         const params: Record<string, any> = {
             season: year,
             group: group
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
     },
     /**
@@ -442,9 +435,7 @@ export default {
                 'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,' +
                 'losses:desc,playoffseed:asc,alpha:asc'
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'web_v3' }) };
         return res.data;
     },
     /**
@@ -458,15 +449,13 @@ export default {
      * const result = await sdv.cfb.getTeamList(group=80);
      */
     getTeamList: async function ({ group = 80 }) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/teams';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams';
         const params: Record<string, any> = {
             group,
             limit: 1000
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return res.data;
     },
@@ -482,9 +471,9 @@ export default {
      * const result = await sdv.cfb.getTeamInfo(teamId);
      */
     getTeamInfo: async function (id) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
 
-        const res = await axios.get(baseUrl);
+        const res = { data: await get(baseUrl, { family: 'site_v2' }) };
         return res.data;
     },
     /**
@@ -498,14 +487,12 @@ export default {
      * const result = await sdv.cfb.getTeamPlayers(teamId);
      */
     getTeamPlayers: async function (id) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return res.data;
     }
