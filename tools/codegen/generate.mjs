@@ -951,11 +951,11 @@ const FLAT_PARSER_SECTIONS =
 // The default of a `default: null` parser: every table as a dict (sdv-py's shape); a
 // `resultSet` parser (sdv-py `result_set`) returns a one-table payload's table itself.
 const sectionDefaultDoc = (spec) =>
-  spec.resultSet ? "every table, as a dict (one table: that table)" : "every table, as a dict";
+  spec.resultSet ? "every table, as a dict, or a one-table payload's table itself" : "every table, as a dict";
 // What an unknown `section` does: throw listing the valid names, or (`resultSet`) `[]` as sdv-py.
 const sectionUnknownDoc = (spec) =>
   spec.resultSet
-    ? "an unknown name returns `[]` (sdv-py: a zero-row frame)"
+    ? "an unknown name returns `[]`, sdv-py's zero-row frame"
     : "an unknown name throws, listing the valid ones";
 
 function flatParserCell(wrapper) {
