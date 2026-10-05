@@ -527,12 +527,16 @@ const TEAM_TIMEOUT_TYPES = new Set(["RegularTimeOut", "ShortTimeOut", "Full Time
 const NON_WORD = "[^\\p{Alphabetic}\\p{M}\\p{Nd}\\p{Pc}\\p{Join_Control}]";
 const escapeRe = (s: string): string => s.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
 
-/** `team.id` `cast(pl.Int64, strict=False)`: an unparseable id is null. */
+/**
+ * `team.id` `cast(pl.Int64, strict=False)`: an unparseable id is null. A JS number past 2^53
+ * still throws castInt64's TypeError (it already lost precision; the id rule refuses it).
+ */
 function teamIdOrNull(v: unknown): bigint | null {
   try {
     return castInt64(v);
-  } catch {
-    return null; // ponytail: castInt64's refusals (bad string, unsafe number) all mean null here
+  } catch (e) {
+    if (e instanceof TypeError) throw e;
+    return null;
   }
 }
 

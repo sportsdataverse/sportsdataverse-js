@@ -267,6 +267,25 @@ describe('ESPN basketball pbp: sdv-py #688 fixes on real payloads', () => {
     const stripped = pbpOf('nba', 'nba_summary_260312029.json.gz', (c) => (c.plays.forEach((p) => delete p.team), c));
     stripped.out.timeouts.should.eql(want);
   });
+
+  it('a numeric team.id past 2^53 throws (already rounded), never falls back to the name match', () => {
+    // every team.id a number (a caller that parsed them as numbers): safe ids credit as the strings do
+    const numeric = (c) => (c.plays.forEach((p) => p.team && (p.team.id = Number(p.team.id))), c);
+    const want = pbpOf('nba', 'nba_summary_260312029.json.gz').out.timeouts;
+    pbpOf('nba', 'nba_summary_260312029.json.gz', numeric).out.timeouts.should.eql(want);
+    const unsafe = (c) => {
+      numeric(c).plays.find((p) => p.type.text === 'Full Timeout').team.id = 2 ** 60;
+      return c;
+    };
+    let err;
+    try {
+      pbpOf('nba', 'nba_summary_260312029.json.gz', unsafe);
+    } catch (e) {
+      err = e;
+    }
+    err.should.be.instanceOf(TypeError);
+    err.message.should.match(/lost precision/);
+  });
 });
 
 describe('ESPN basketball pbp league facts', () => {
