@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { get } from '../core/client.js';
 import { espnMbbCdnBoxscore, espnMbbCdnPlaybyplay, espnMbbCdnSchedule } from '../generated/espn/mbb.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, getHtml } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
@@ -141,19 +140,16 @@ export default {
         position = null,
         state = null
     }) {
-        const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
+        const baseUrl = `https://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
         const params: Record<string, any> = {
             InstitutionGroup: group,
             Page: page,
             Position: position,
             State: state
         };
-        const res = await axios.get(baseUrl, {
-            headers: {
+        const res = { data: await getHtml('sports247_html', baseUrl, params, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            },
-            params
-        });
+            }) };
         let $ = cheerio.load(res.data);
         let players = [];
         // Couldn't grab the rank correctly with JQuery so it's manually calculated
@@ -194,15 +190,10 @@ export default {
      * const result = await sdv.mbb.getSchoolRankings({year: 2016});
      */
     getSchoolRankings: async function (year, page = 1) {
-        const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
-        const res = await axios.get(baseUrl, {
-            headers: {
+        const baseUrl = `https://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
+        const res = { data: await getHtml('sports247_html', baseUrl, { Page: page }, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            },
-            params: {
-                Page: page
-            }
-        });
+            }) };
         let $ = cheerio.load(res.data);
         let schools = [];
         $('.rankings-page__list-item').each(function (index) {
@@ -237,12 +228,10 @@ export default {
      * const result = await sdv.mbb.getSchoolCommits({school: 'Clemson', year: 2016});
      */
     getSchoolCommits: async function (school, year) {
-        const baseUrl = `http://${school}.247sports.com/Season/${year}-Basketball/Commits`;
-        const res = await axios.get(baseUrl, {
-            headers: {
+        const baseUrl = `https://${school}.247sports.com/Season/${year}-Basketball/Commits`;
+        const res = { data: await getHtml('sports247_html', baseUrl, undefined, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            }
-        });
+            }) };
         let $ = cheerio.load(res.data);
         let players = [];
         $('.ri-page__list-item').each(function (index) {
