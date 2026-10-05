@@ -259,6 +259,26 @@ NFL.com web token for you. Override it with environment variables —
 (mint with your own client credentials) — or replace it entirely with
 `configure({ auth: { nfl_api: ... } })`.
 
+### Release downloads (`releases`)
+
+The dataset loaders (`sdv.<league>.load*`, e.g. `sdv.cfb.loadCfbPbp({ seasons: 2024 })`)
+download the published release assets (GitHub releases / raw) through the
+keyless `releases` family. It is gateway traffic, so the default retry statuses
+apply — `403` included, as sdv-py retries it for every gateway host. Each download
+gets its own 5-minute timeout (the largest assets are ~55 MB); pass `timeoutMs`
+to a loader to change it. Route the downloads through a proxy or a custom
+transport like any other family:
+
+```js
+import { configure } from 'sportsdataverse';
+
+configure({ transport: { releases: myTransport } });
+```
+
+A season whose asset is absent (HTTP `404`) is skipped with a warning; any other
+failure raises `AssetFetchError`, so a failed download is never mistaken for an
+empty season.
+
 ### 247Sports (`sports247`, `sports247_site_pages`)
 
 Both 247Sports families live on `sdv.sports247` and need no setup beyond the
