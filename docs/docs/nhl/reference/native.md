@@ -13,39 +13,39 @@ Beyond the ESPN surface, `sdv.nhl` also wraps the league's own live APIs. Same `
 
 ## Native API — NHL api-web (game feed)
 
-Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH `nhl_api_web_<endpoint>` (snake_case, py/R parity) and `nhlApiWeb<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH its snake_case name `nhl_<endpoint>` (`nhl_web_<endpoint>` where sdv-py's name is taken) (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `nhl_api_web_boxscore` / `nhlApiWebBoxscore` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/boxscore` | `game_id`\* | — | `parse_nhl_web_boxscore` | — |
-| `nhl_api_web_club_schedule_month` / `nhlApiWebClubScheduleMonth` | `https://api-web.nhle.com/v1/club-schedule/{team}/month/{month}` | `team`\*, `month` | — | `parse_nhl_web_club_schedule` | — |
-| `nhl_api_web_club_schedule_season` / `nhlApiWebClubScheduleSeason` | `https://api-web.nhle.com/v1/club-schedule-season/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_club_schedule` | — |
-| `nhl_api_web_club_schedule_week` / `nhlApiWebClubScheduleWeek` | `https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` | `team`\*, `date` | — | `parse_nhl_web_club_schedule` | — |
-| `nhl_api_web_club_stats` / `nhlApiWebClubStats` | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` | — |
-| `nhl_api_web_club_stats_season` / `nhlApiWebClubStatsSeason` | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` | — |
-| `nhl_api_web_draft_picks` / `nhlApiWebDraftPicks` | `https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` | `year`\*, `round_` | — | `parse_nhl_web_draft_picks` | — |
-| `nhl_api_web_draft_picks_now` / `nhlApiWebDraftPicksNow` | `https://api-web.nhle.com/v1/draft/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
-| `nhl_api_web_draft_rankings` / `nhlApiWebDraftRankings` | `https://api-web.nhle.com/v1/draft/rankings/{year}/{category}` | `year`\*, `category` | — | `parse_nhl_web_draft_rankings` | — |
-| `nhl_api_web_draft_rankings_now` / `nhlApiWebDraftRankingsNow` | `https://api-web.nhle.com/v1/draft/rankings/now` | — | — | `parse_nhl_web_draft_rankings` | — |
-| `nhl_api_web_draft_tracker_picks_now` / `nhlApiWebDraftTrackerPicksNow` | `https://api-web.nhle.com/v1/draft-tracker/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
-| `nhl_api_web_goalie_leaders` / `nhlApiWebGoalieLeaders` | `https://api-web.nhle.com/v1/goalie-stats-leaders/{season}/{game_type}` | `season`, `game_type` | — | `parse_nhl_web_leaders` | — |
-| `nhl_api_web_landing` / `nhlApiWebLanding` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/landing` | `game_id`\* | — | `parse_nhl_web_landing` | — |
-| `nhl_api_web_pbp` / `nhlApiWebPbp` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/play-by-play` | `game_id`\* | — | `parse_nhl_web_pbp` | — |
-| `nhl_api_web_player_game_log` / `nhlApiWebPlayerGameLog` | `https://api-web.nhle.com/v1/player/{player_id}/game-log/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_nhl_web_player_game_log` | — |
-| `nhl_api_web_player_landing` / `nhlApiWebPlayerLanding` | `https://api-web.nhle.com/v1/player/{player_id}/landing` | `player_id`\* | — | `parse_nhl_web_player_landing` | — |
-| `nhl_api_web_player_spotlight` / `nhlApiWebPlayerSpotlight` | `https://api-web.nhle.com/v1/player-spotlight` | — | — | `parse_nhl_web_player_spotlight` | — |
-| `nhl_api_web_playoff_series` / `nhlApiWebPlayoffSeries` | `https://api-web.nhle.com/v1/schedule/playoff-series/{season}/{series_letter}` | `season`\*, `series_letter`\* | — | `parse_nhl_web_playoff_series` | — |
-| `nhl_api_web_right_rail` / `nhlApiWebRightRail` | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` | — |
-| `nhl_api_web_roster` / `nhlApiWebRoster` | `https://api-web.nhle.com/v1/roster/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_roster` | — |
-| `nhl_api_web_roster_season` / `nhlApiWebRosterSeason` | `https://api-web.nhle.com/v1/roster-season/{team}` | `team`\* | — | `parse_nhl_web_roster` | — |
-| `nhl_api_web_schedule` / `nhlApiWebSchedule` | `https://api-web.nhle.com/v1/schedule/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
-| `nhl_api_web_schedule_calendar` / `nhlApiWebScheduleCalendar` | `https://api-web.nhle.com/v1/schedule-calendar/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
-| `nhl_api_web_score` / `nhlApiWebScore` | `https://api-web.nhle.com/v1/score/{date}` | `date` | — | `parse_nhl_web_score` | — |
-| `nhl_api_web_skater_leaders` / `nhlApiWebSkaterLeaders` | `https://api-web.nhle.com/v1/skater-stats-leaders/{season}/{game_type}` | `season`, `game_type` | — | `parse_nhl_web_leaders` | — |
-| `nhl_api_web_standings` / `nhlApiWebStandings` | `https://api-web.nhle.com/v1/standings/{date}` | `date` | — | `parse_nhl_web_standings` | — |
-| `nhl_api_web_standings_season` / `nhlApiWebStandingsSeason` | `https://api-web.nhle.com/v1/standings-season` | — | — | `parse_nhl_web_standings_season` | — |
+| `nhl_boxscore` / `nhlBoxscore` *(was `nhl_api_web_boxscore`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/boxscore` | `game_id`\* | — | `parse_nhl_web_boxscore` | — |
+| `nhl_club_schedule_month` / `nhlClubScheduleMonth` *(was `nhl_api_web_club_schedule_month`)* | `https://api-web.nhle.com/v1/club-schedule/{team}/month/{month}` | `team`\*, `month` | — | `parse_nhl_web_club_schedule` | — |
+| `nhl_club_schedule_season` / `nhlClubScheduleSeason` *(was `nhl_api_web_club_schedule_season`)* | `https://api-web.nhle.com/v1/club-schedule-season/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_club_schedule` | — |
+| `nhl_club_schedule_week` / `nhlClubScheduleWeek` *(was `nhl_api_web_club_schedule_week`)* | `https://api-web.nhle.com/v1/club-schedule/{team}/week/{date}` | `team`\*, `date` | — | `parse_nhl_web_club_schedule` | — |
+| `nhl_club_stats` / `nhlClubStats` *(was `nhl_api_web_club_stats`)* | `https://api-web.nhle.com/v1/club-stats/{team}/{season}/{game_type}` | `team`\*, `season`, `game_type` | — | `parse_nhl_web_club_stats` | — |
+| `nhl_club_stats_season` / `nhlClubStatsSeason` *(was `nhl_api_web_club_stats_season`)* | `https://api-web.nhle.com/v1/club-stats-season/{team}` | `team`\* | — | `parse_nhl_web_club_stats` | — |
+| `nhl_draft_picks` / `nhlDraftPicks` *(was `nhl_api_web_draft_picks`)* | `https://api-web.nhle.com/v1/draft/picks/{year}/{round_}` | `year`\*, `round_` | — | `parse_nhl_web_draft_picks` | — |
+| `nhl_draft_picks_now` / `nhlDraftPicksNow` *(was `nhl_api_web_draft_picks_now`)* | `https://api-web.nhle.com/v1/draft/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
+| `nhl_draft_rankings` / `nhlDraftRankings` *(was `nhl_api_web_draft_rankings`)* | `https://api-web.nhle.com/v1/draft/rankings/{year}/{category}` | `year`\*, `category` | — | `parse_nhl_web_draft_rankings` | — |
+| `nhl_draft_rankings_now` / `nhlDraftRankingsNow` *(was `nhl_api_web_draft_rankings_now`)* | `https://api-web.nhle.com/v1/draft/rankings/now` | — | — | `parse_nhl_web_draft_rankings` | — |
+| `nhl_draft_tracker_picks_now` / `nhlDraftTrackerPicksNow` *(was `nhl_api_web_draft_tracker_picks_now`)* | `https://api-web.nhle.com/v1/draft-tracker/picks/now` | — | — | `parse_nhl_web_draft_picks` | — |
+| `nhl_goalie_leaders` / `nhlGoalieLeaders` *(was `nhl_api_web_goalie_leaders`)* | `https://api-web.nhle.com/v1/goalie-stats-leaders/{season}/{game_type}` | `season`, `game_type` | — | `parse_nhl_web_leaders` | — |
+| `nhl_landing` / `nhlLanding` *(was `nhl_api_web_landing`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/landing` | `game_id`\* | — | `parse_nhl_web_landing` | — |
+| `nhl_web_pbp` / `nhlWebPbp` *(was `nhl_api_web_pbp`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/play-by-play` | `game_id`\* | — | `parse_nhl_web_pbp` | — |
+| `nhl_player_game_log` / `nhlPlayerGameLog` *(was `nhl_api_web_player_game_log`)* | `https://api-web.nhle.com/v1/player/{player_id}/game-log/{season}/{game_type}` | `player_id`\*, `season`, `game_type` | — | `parse_nhl_web_player_game_log` | — |
+| `nhl_player_landing` / `nhlPlayerLanding` *(was `nhl_api_web_player_landing`)* | `https://api-web.nhle.com/v1/player/{player_id}/landing` | `player_id`\* | — | `parse_nhl_web_player_landing` | — |
+| `nhl_player_spotlight` / `nhlPlayerSpotlight` *(was `nhl_api_web_player_spotlight`)* | `https://api-web.nhle.com/v1/player-spotlight` | — | — | `parse_nhl_web_player_spotlight` | — |
+| `nhl_playoff_series` / `nhlPlayoffSeries` *(was `nhl_api_web_playoff_series`)* | `https://api-web.nhle.com/v1/schedule/playoff-series/{season}/{series_letter}` | `season`\*, `series_letter`\* | — | `parse_nhl_web_playoff_series` | — |
+| `nhl_right_rail` / `nhlRightRail` *(was `nhl_api_web_right_rail`)* | `https://api-web.nhle.com/v1/gamecenter/{game_id}/right-rail` | `game_id`\* | — | `parse_nhl_web_right_rail` | — |
+| `nhl_roster` / `nhlRoster` *(was `nhl_api_web_roster`)* | `https://api-web.nhle.com/v1/roster/{team}/{season}` | `team`\*, `season` | — | `parse_nhl_web_roster` | — |
+| `nhl_roster_season` / `nhlRosterSeason` *(was `nhl_api_web_roster_season`)* | `https://api-web.nhle.com/v1/roster-season/{team}` | `team`\* | — | `parse_nhl_web_roster` | — |
+| `nhl_web_schedule` / `nhlWebSchedule` *(was `nhl_api_web_schedule`)* | `https://api-web.nhle.com/v1/schedule/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
+| `nhl_schedule_calendar` / `nhlScheduleCalendar` *(was `nhl_api_web_schedule_calendar`)* | `https://api-web.nhle.com/v1/schedule-calendar/{date}` | `date` | — | `parse_nhl_web_schedule` | — |
+| `nhl_score` / `nhlScore` *(was `nhl_api_web_score`)* | `https://api-web.nhle.com/v1/score/{date}` | `date` | — | `parse_nhl_web_score` | — |
+| `nhl_skater_leaders` / `nhlSkaterLeaders` *(was `nhl_api_web_skater_leaders`)* | `https://api-web.nhle.com/v1/skater-stats-leaders/{season}/{game_type}` | `season`, `game_type` | — | `parse_nhl_web_leaders` | — |
+| `nhl_standings` / `nhlStandings` *(was `nhl_api_web_standings`)* | `https://api-web.nhle.com/v1/standings/{date}` | `date` | — | `parse_nhl_web_standings` | — |
+| `nhl_standings_season` / `nhlStandingsSeason` *(was `nhl_api_web_standings_season`)* | `https://api-web.nhle.com/v1/standings-season` | — | — | `parse_nhl_web_standings_season` | — |
 
-### Returns — `nhl_api_web_boxscore` / `nhlApiWebBoxscore`
+### Returns — `nhl_boxscore` / `nhlBoxscore`
 
 | col_name | type | description |
 |---|---|---|
@@ -86,7 +86,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `name_fi` | character |  |
 | `name_sk` | character |  |
 
-### Returns — `nhl_api_web_club_schedule_season` / `nhlApiWebClubScheduleSeason`
+### Returns — `nhl_club_schedule_season` / `nhlClubScheduleSeason`
 
 | col_name | type | description |
 |---|---|---|
@@ -170,7 +170,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `series_status_bottom_seed_wins` | double |  |
 | `series_status_game_number_of_series` | double |  |
 
-### Returns — `nhl_api_web_draft_picks` / `nhlApiWebDraftPicks`
+### Returns — `nhl_draft_picks` / `nhlDraftPicks`
 
 | col_name | type | description |
 |---|---|---|
@@ -198,7 +198,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `last_name_default` | character |  |
 | `team_common_name_fr` | character |  |
 
-### Returns — `nhl_api_web_draft_picks_now` / `nhlApiWebDraftPicksNow`
+### Returns — `nhl_draft_picks_now` / `nhlDraftPicksNow`
 
 | col_name | type | description |
 |---|---|---|
@@ -225,7 +225,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `first_name_default` | character |  |
 | `last_name_default` | character |  |
 
-### Returns — `nhl_api_web_draft_rankings` / `nhlApiWebDraftRankings`
+### Returns — `nhl_draft_rankings` / `nhlDraftRankings`
 
 | col_name | type | description |
 |---|---|---|
@@ -247,7 +247,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `midterm_rank` | double |  |
 | `final_rank` | double |  |
 
-### Returns — `nhl_api_web_draft_rankings_now` / `nhlApiWebDraftRankingsNow`
+### Returns — `nhl_draft_rankings_now` / `nhlDraftRankingsNow`
 
 | col_name | type | description |
 |---|---|---|
@@ -269,7 +269,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `midterm_rank` | double |  |
 | `final_rank` | double |  |
 
-### Returns — `nhl_api_web_draft_tracker_picks_now` / `nhlApiWebDraftTrackerPicksNow`
+### Returns — `nhl_draft_tracker_picks_now` / `nhlDraftTrackerPicksNow`
 
 | col_name | type | description |
 |---|---|---|
@@ -289,7 +289,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `last_name_default` | character |  |
 | `first_name_default` | character |  |
 
-### Returns — `nhl_api_web_goalie_leaders` / `nhlApiWebGoalieLeaders`
+### Returns — `nhl_goalie_leaders` / `nhlGoalieLeaders`
 
 | col_name | type | description |
 |---|---|---|
@@ -310,7 +310,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `last_name_sk` | character |  |
 | `last_name_fi` | character |  |
 
-### Returns — `nhl_api_web_landing` / `nhlApiWebLanding`
+### Returns — `nhl_landing` / `nhlLanding`
 
 | col_name | type | description |
 |---|---|---|
@@ -364,7 +364,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `clock_running` | logical |  |
 | `clock_in_intermission` | logical |  |
 
-### Returns — `nhl_api_web_pbp` / `nhlApiWebPbp`
+### Returns — `nhl_web_pbp` / `nhlWebPbp`
 
 | col_name | type | description |
 |---|---|---|
@@ -417,7 +417,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `details_highlight_clip_fr` | double |  |
 | `details_secondary_reason` | character |  |
 
-### Returns — `nhl_api_web_player_game_log` / `nhlApiWebPlayerGameLog`
+### Returns — `nhl_player_game_log` / `nhlPlayerGameLog`
 
 | col_name | type | description |
 |---|---|---|
@@ -444,7 +444,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `opponent_common_name_default` | character |  |
 | `opponent_common_name_fr` | character |  |
 
-### Returns — `nhl_api_web_player_landing` / `nhlApiWebPlayerLanding`
+### Returns — `nhl_player_landing` / `nhlPlayerLanding`
 
 | col_name | type | description |
 |---|---|---|
@@ -579,7 +579,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `career_totals_playoffs_shorthanded_points` | integer |  |
 | `career_totals_playoffs_shots` | integer |  |
 
-### Returns — `nhl_api_web_player_spotlight` / `nhlApiWebPlayerSpotlight`
+### Returns — `nhl_player_spotlight` / `nhlPlayerSpotlight`
 
 | col_name | type | description |
 |---|---|---|
@@ -597,7 +597,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `name_fi` | character |  |
 | `name_sk` | character |  |
 
-### Returns — `nhl_api_web_playoff_series` / `nhlApiWebPlayoffSeries`
+### Returns — `nhl_playoff_series` / `nhlPlayoffSeries`
 
 | col_name | type | description |
 |---|---|---|
@@ -646,7 +646,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `game_outcome_ot_periods` | double |  |
 | `away_team_place_name_fr` | character |  |
 
-### Returns — `nhl_api_web_roster` / `nhlApiWebRoster`
+### Returns — `nhl_roster` / `nhlRoster`
 
 | col_name | type | description |
 |---|---|---|
@@ -672,7 +672,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `birth_city_sk` | character |  |
 | `birth_city_sv` | character |  |
 
-### Returns — `nhl_api_web_schedule` / `nhlApiWebSchedule`
+### Returns — `nhl_web_schedule` / `nhlWebSchedule`
 
 | col_name | type | description |
 |---|---|---|
@@ -737,7 +737,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `series_status_bottom_seed_wins` | integer |  |
 | `series_status_game_number_of_series` | integer |  |
 
-### Returns — `nhl_api_web_score` / `nhlApiWebScore`
+### Returns — `nhl_score` / `nhlScore`
 
 | col_name | type | description |
 |---|---|---|
@@ -790,7 +790,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `period_descriptor_max_regulation_periods` | integer |  |
 | `game_outcome_last_period_type` | character |  |
 
-### Returns — `nhl_api_web_skater_leaders` / `nhlApiWebSkaterLeaders`
+### Returns — `nhl_skater_leaders` / `nhlSkaterLeaders`
 
 | col_name | type | description |
 |---|---|---|
@@ -815,7 +815,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `last_name_fi` | character |  |
 | `last_name_sk` | character |  |
 
-### Returns — `nhl_api_web_standings` / `nhlApiWebStandings`
+### Returns — `nhl_standings` / `nhlStandings`
 
 | col_name | type | description |
 |---|---|---|
@@ -904,7 +904,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `place_name_fr` | character |  |
 | `team_common_name_fr` | character |  |
 
-### Returns — `nhl_api_web_standings_season` / `nhlApiWebStandingsSeason`
+### Returns — `nhl_standings_season` / `nhlStandingsSeason`
 
 | col_name | type | description |
 |---|---|---|
@@ -921,7 +921,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 
 ## Native API — NHL EDGE (player tracking)
 
-Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH `nhl_edge_<endpoint>` (snake_case, py/R parity) and `nhlEdge<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-web.nhle.com`. Each method is exposed under BOTH its snake_case name `nhl_edge_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -1951,7 +1951,7 @@ Flat (non-ESPN) wrappers for NHL EDGE player/team tracking. Host: `https://api-w
 
 ## Native API — NHL Stats REST
 
-Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com/stats/rest`. Each method is exposed under BOTH `nhl_stats_rest_<endpoint>` (snake_case, py/R parity) and `nhlStatsRest<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com/stats/rest`. Each method is exposed under BOTH its snake_case name `nhl_stats_rest_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
@@ -2289,7 +2289,7 @@ Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com
 
 ## Native API — NHL Records
 
-Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nhl.com/site/api`. Each method is exposed under BOTH `nhl_records_<endpoint>` (snake_case, py/R parity) and `nhlRecords<Endpoint>` (camelCase canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nhl.com/site/api`. Each method is exposed under BOTH its snake_case name `nhl_records_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nhl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

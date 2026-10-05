@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.ligue1`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLigue1AthleteGamelog`
+## `espnLigue1PlayerGamelog`
 
-LIGUE1 — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+LIGUE1 — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fra.1/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_gamelog` / `espnLigue1AthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ LIGUE1 — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_gamelog(...)
+await sdv.ligue1.espnLigue1PlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_gamelog(...)
 ```
 
-## `espnLigue1AthleteOverview`
+## `espnLigue1PlayerOverview`
 
-LIGUE1 — athlete overview (ESPN site.web.api.espn.com (web v3)).
+LIGUE1 — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fra.1/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_overview` / `espnLigue1AthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ LIGUE1 — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_overview(...)
+await sdv.ligue1.espnLigue1PlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_overview(...)
 ```
 
-## `espnLigue1AthleteSplits`
+## `espnLigue1PlayerSplits`
 
-LIGUE1 — athlete splits (ESPN site.web.api.espn.com (web v3)).
+LIGUE1 — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fra.1/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_splits` / `espnLigue1AthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ LIGUE1 — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_splits(...)
+await sdv.ligue1.espnLigue1PlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_splits(...)
 ```
 
-## `espnLigue1AthleteStats`
+## `espnLigue1PlayerStats`
 
-LIGUE1 — athlete stats (ESPN site.web.api.espn.com (web v3)).
+LIGUE1 — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/fra.1/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_stats` / `espnLigue1AthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ LIGUE1 — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_stats(...)
+await sdv.ligue1.espnLigue1PlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_stats(...)
 ```
 
 ## `espnLigue1Leaders`

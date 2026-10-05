@@ -207,7 +207,7 @@ describe('core/request: retry + classification', () => {
       req.method === 'POST' ? { status: 200, data: { accessToken: 'tok' } } : { status: 403 }
     );
     configure({ transport: { nfl_api: t }, retries: 10 });
-    const err = await sdv.nfl.nflApiInjuries({}).should.be.rejectedWith(AssetFetchError);
+    const err = await sdv.nfl.nflInjuries({}).should.be.rejectedWith(AssetFetchError);
     err.status.should.equal(403);
     t.calls.filter((c) => c.method === 'GET').length.should.equal(1);
     nflClearTokenCache();
@@ -722,12 +722,12 @@ describe('core/nfl_auth: registered nfl_api tokenAuth', () => {
       req.method === 'POST' ? { status: 200, data: { accessToken: token } } : { status: 200, data: req.headers }
     );
     configure({ transport: { nfl_api: t } });
-    const h = await sdv.nfl.nflApiInjuries({});
+    const h = await sdv.nfl.nflInjuries({});
     t.calls[0].url.should.equal('https://api.nfl.com/identity/v3/token');
     h.Authorization.should.equal(`Bearer ${token}`);
     h['X-Domain-Id'].should.equal('100');
     h['User-Agent'].should.match(/Chrome/); // NFL browser UA beats the sdv default
-    await sdv.nfl.nflApiInjuries({});
+    await sdv.nfl.nflInjuries({});
     t.calls.filter((c) => c.method === 'POST').length.should.equal(1); // cached
   });
 
@@ -735,7 +735,7 @@ describe('core/nfl_auth: registered nfl_api tokenAuth', () => {
     process.env.NFL_ACCESS_TOKEN = 'env-token';
     const t = fakeTransport((req) => (req.method === 'POST' ? new Error('should not mint') : { status: 200, data: req.headers }));
     configure({ transport: { nfl_api: t } });
-    (await sdv.nfl.nflApiInjuries({})).Authorization.should.equal('Bearer env-token');
+    (await sdv.nfl.nflInjuries({})).Authorization.should.equal('Bearer env-token');
 
     delete process.env.NFL_ACCESS_TOKEN;
     nflClearTokenCache();
@@ -745,14 +745,14 @@ describe('core/nfl_auth: registered nfl_api tokenAuth', () => {
       return req.headers.Authorization === 'Bearer m1' ? { status: 401 } : { status: 200, data: req.headers };
     });
     configure({ transport: { nfl_api: t2 } });
-    (await sdv.nfl.nflApiInjuries({})).Authorization.should.equal('Bearer m2');
+    (await sdv.nfl.nflInjuries({})).Authorization.should.equal('Bearer m2');
     mints.should.equal(2);
   });
 
   it('caller-supplied Authorization wins (no mint)', async () => {
     const t = fakeTransport((req) => (req.method === 'POST' ? new Error('should not mint') : { status: 200, data: req.headers }));
     configure({ transport: { nfl_api: t } });
-    const h = await sdv.nfl.nflApiInjuries({ headers: { Authorization: 'Bearer mine' } });
+    const h = await sdv.nfl.nflInjuries({ headers: { Authorization: 'Bearer mine' } });
     h.Authorization.should.equal('Bearer mine');
     h.Origin.should.equal('https://www.nfl.com');
   });

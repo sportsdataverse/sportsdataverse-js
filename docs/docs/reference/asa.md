@@ -24,7 +24,7 @@ await sdv.asa.asa_teams({ league_slug: 'mls', parsed: true });
 
 ## Native API — American Soccer Analysis
 
-Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `https://app.americansocceranalysis.com/api/v1`. Each method is exposed under BOTH `asa_<endpoint>` (snake_case, py/R parity) and `asa<Endpoint>` (camelCase canonical) on `sdv.asa`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
+Flat (non-ESPN) wrappers for the American Soccer Analysis public API. Host: `https://app.americansocceranalysis.com/api/v1`. Each method is exposed under BOTH its snake_case name `asa_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.asa`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default sub-frame shown in the Parser column, and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

@@ -24,7 +24,7 @@ await sdv.on3.on3_player_profile({ person_key: 89617, parsed: true });
 
 ## Native API — On3 Recruit Database
 
-Flat (non-ESPN) wrappers for the On3 public Recruit Database (RDB). Host: `https://api.on3.com/public/rdb/v1`. Each method is exposed under BOTH `on3_<endpoint>` (snake_case, py/R parity) and `on3<Endpoint>` (camelCase canonical) on `sdv.on3`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
+Flat (non-ESPN) wrappers for the On3 public Recruit Database (RDB). Host: `https://api.on3.com/public/rdb/v1`. Each method is exposed under BOTH its snake_case name `on3_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.on3`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response.
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|

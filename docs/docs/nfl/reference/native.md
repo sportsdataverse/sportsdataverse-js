@@ -13,27 +13,27 @@ Beyond the ESPN surface, `sdv.nfl` also wraps the league's own live APIs. Same `
 
 ## Native API — NFL.com Shield API
 
-Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.nfl.com`. Each method is exposed under BOTH `nfl_api_<endpoint>` (snake_case, py/R parity) and `nflApi<Endpoint>` (camelCase canonical) on `sdv.nfl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** this family mints a bearer token automatically before each call (no credentials required).
+Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.nfl.com`. Each method is exposed under BOTH its snake_case name `nfl_<endpoint>` (`nfl_api_<endpoint>` where sdv-py's name is taken) (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.nfl`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. **Auth:** this family mints a bearer token automatically before each call (no credentials required).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `nfl_api_combine_profiles` / `nflApiCombineProfiles` | `https://api.nfl.com/football/v2/combine/profiles` | — | `year`, `limit` | `parse_nfl_combine_profiles` | yes |
-| `nfl_api_draft_picks` / `nflApiDraftPicks` | `https://api.nfl.com/football/v2/draft/picks/report` | — | `year`, `limit` | `parse_nfl_draft_picks` | yes |
-| `nfl_api_game_details_by_slug` / `nflApiGameDetailsBySlug` | `https://api.nfl.com/experience/v1/gamedetailsbyslug/{slug}` | `slug`\* | `include_replays` → `includeReplays` | `parse_nfl_team` | yes |
-| `nfl_api_game_details_v2` / `nflApiGameDetailsV2` | `https://api.nfl.com/experience/v2/gamedetails/{game_id}` | `game_id`\* | `include_drive_chart` → `includeDriveChart`, `include_replays` → `includeReplays`, `include_standings` → `includeStandings`, `include_tagged_videos` → `includeTaggedVideos` | `parse_nfl_team` | yes |
-| `nfl_api_game_summaries` / `nflApiGameSummaries` | `https://api.nfl.com/football/v2/stats/live/game-summaries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_game_summaries` | yes |
-| `nfl_api_injuries` / `nflApiInjuries` | `https://api.nfl.com/football/v2/injuries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_injuries` | yes |
-| `nfl_api_live_player_statistics` / `nflApiLivePlayerStatistics` | `https://api.nfl.com/football/v2/stats/live/player-statistics/{game_id}` | `game_id`\* | — | `parse_nfl_team` | yes |
-| `nfl_api_live_team_statistics` / `nflApiLiveTeamStatistics` | `https://api.nfl.com/football/v2/stats/live/team-statistics/{game_id}` | `game_id`\* | — | `parse_nfl_team` | yes |
-| `nfl_api_rosters` / `nflApiRosters` | `https://api.nfl.com/football/v2/rosters` | — | `season`, `limit`, `team_id` → `teamId` | `parse_nfl_rosters` | yes |
-| `nfl_api_standings` / `nflApiStandings` | `https://api.nfl.com/football/v2/standings` | — | `season`, `season_type` → `seasonType`, `week`, `limit` | `parse_nfl_standings` | yes |
-| `nfl_api_team` / `nflApiTeam` | `https://api.nfl.com/football/v2/teams/{team_id}` | `team_id`\* | — | `parse_nfl_team` | yes |
-| `nfl_api_teams_history` / `nflApiTeamsHistory` | `https://api.nfl.com/football/v2/teams/history` | — | `season`, `limit` | `parse_nfl_teams_history` | yes |
-| `nfl_api_weekly_game_details` / `nflApiWeeklyGameDetails` | `https://api.nfl.com/football/v2/experience/weekly-game-details` | — | `season`, `season_type` → `type`, `week`, `include_drive_chart` → `includeDriveChart`, `include_replays` → `includeReplays`, `include_standings` → `includeStandings`, `include_tagged_videos` → `includeTaggedVideos` | `parse_nfl_weekly_game_details` | yes |
-| `nfl_api_weeks` / `nflApiWeeks` | `https://api.nfl.com/football/v2/weeks/season/{season}/seasonType/{season_type}` | `season`, `season_type` | — | `parse_nfl_weeks` | yes |
-| `nfl_api_weeks_by_date` / `nflApiWeeksByDate` | `https://api.nfl.com/football/v2/weeks/date/{date}` | `date`\* | — | `parse_nfl_weeks_by_date` | yes |
+| `nfl_combine_profiles` / `nflCombineProfiles` *(was `nfl_api_combine_profiles`)* | `https://api.nfl.com/football/v2/combine/profiles` | — | `year`, `limit` | `parse_nfl_combine_profiles` | yes |
+| `nfl_draft_picks` / `nflDraftPicks` *(was `nfl_api_draft_picks`)* | `https://api.nfl.com/football/v2/draft/picks/report` | — | `year`, `limit` | `parse_nfl_draft_picks` | yes |
+| `nfl_game_details_by_slug` / `nflGameDetailsBySlug` *(was `nfl_api_game_details_by_slug`)* | `https://api.nfl.com/experience/v1/gamedetailsbyslug/{slug}` | `slug`\* | `include_replays` → `includeReplays` | `parse_nfl_team` | yes |
+| `nfl_game_details_v2` / `nflGameDetailsV2` *(was `nfl_api_game_details_v2`)* | `https://api.nfl.com/experience/v2/gamedetails/{game_id}` | `game_id`\* | `include_drive_chart` → `includeDriveChart`, `include_replays` → `includeReplays`, `include_standings` → `includeStandings`, `include_tagged_videos` → `includeTaggedVideos` | `parse_nfl_team` | yes |
+| `nfl_game_summaries` / `nflGameSummaries` *(was `nfl_api_game_summaries`)* | `https://api.nfl.com/football/v2/stats/live/game-summaries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_game_summaries` | yes |
+| `nfl_injuries` / `nflInjuries` *(was `nfl_api_injuries`)* | `https://api.nfl.com/football/v2/injuries` | — | `season`, `season_type` → `seasonType`, `week` | `parse_nfl_injuries` | yes |
+| `nfl_live_player_statistics` / `nflLivePlayerStatistics` *(was `nfl_api_live_player_statistics`)* | `https://api.nfl.com/football/v2/stats/live/player-statistics/{game_id}` | `game_id`\* | — | `parse_nfl_team` | yes |
+| `nfl_live_team_statistics` / `nflLiveTeamStatistics` *(was `nfl_api_live_team_statistics`)* | `https://api.nfl.com/football/v2/stats/live/team-statistics/{game_id}` | `game_id`\* | — | `parse_nfl_team` | yes |
+| `nfl_rosters` / `nflRosters` *(was `nfl_api_rosters`)* | `https://api.nfl.com/football/v2/rosters` | — | `season`, `limit`, `team_id` → `teamId` | `parse_nfl_rosters` | yes |
+| `nfl_standings` / `nflStandings` *(was `nfl_api_standings`)* | `https://api.nfl.com/football/v2/standings` | — | `season`, `season_type` → `seasonType`, `week`, `limit` | `parse_nfl_standings` | yes |
+| `nfl_team` / `nflTeam` *(was `nfl_api_team`)* | `https://api.nfl.com/football/v2/teams/{team_id}` | `team_id`\* | — | `parse_nfl_team` | yes |
+| `nfl_teams_history` / `nflTeamsHistory` *(was `nfl_api_teams_history`)* | `https://api.nfl.com/football/v2/teams/history` | — | `season`, `limit` | `parse_nfl_teams_history` | yes |
+| `nfl_weekly_game_details` / `nflWeeklyGameDetails` *(was `nfl_api_weekly_game_details`)* | `https://api.nfl.com/football/v2/experience/weekly-game-details` | — | `season`, `season_type` → `type`, `week`, `include_drive_chart` → `includeDriveChart`, `include_replays` → `includeReplays`, `include_standings` → `includeStandings`, `include_tagged_videos` → `includeTaggedVideos` | `parse_nfl_weekly_game_details` | yes |
+| `nfl_weeks` / `nflWeeks` *(was `nfl_api_weeks`)* | `https://api.nfl.com/football/v2/weeks/season/{season}/seasonType/{season_type}` | `season`, `season_type` | — | `parse_nfl_weeks` | yes |
+| `nfl_weeks_by_date` / `nflWeeksByDate` *(was `nfl_api_weeks_by_date`)* | `https://api.nfl.com/football/v2/weeks/date/{date}` | `date`\* | — | `parse_nfl_weeks_by_date` | yes |
 
-### Returns — `nfl_api_combine_profiles` / `nflApiCombineProfiles`
+### Returns — `nfl_combine_profiles` / `nflCombineProfiles`
 
 | col_name | type | description |
 |---|---|---|
@@ -94,7 +94,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `twenty_yard_shuttle_designation` | character | Designation for the 20-yard-shuttle result (OFFICIAL or UNOFFICIAL). |
 | `twenty_yard_shuttle_seconds` | numeric | 20-yard-shuttle time, in seconds. |
 
-### Returns — `nfl_api_draft_picks` / `nflApiDraftPicks`
+### Returns — `nfl_draft_picks` / `nflDraftPicks`
 
 | col_name | type | description |
 |---|---|---|
@@ -109,7 +109,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `tweet_sent` | logical | Whether the announcement tweet has been sent for the pick. |
 | `tweets_sent` | character | JSON-stringified array of per-account tweet-sent status objects. |
 
-### Returns — `nfl_api_game_summaries` / `nflApiGameSummaries`
+### Returns — `nfl_game_summaries` / `nflGameSummaries`
 
 | col_name | type | description |
 |---|---|---|
@@ -148,7 +148,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `home_team_timeouts_remaining` | integer | Home team timeouts remaining at the snapshot. |
 | `home_team_timeouts_used` | integer | Home team timeouts used at the snapshot. |
 
-### Returns — `nfl_api_injuries` / `nflApiInjuries`
+### Returns — `nfl_injuries` / `nflInjuries`
 
 | col_name | type | description |
 |---|---|---|
@@ -172,7 +172,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `practice_status` | character | Most recent practice-participation status (e.g. FULL, LIMITED, DNP). |
 | `position` | character | Player's position abbreviation (e.g. "DE"). |
 
-### Returns — `nfl_api_rosters` / `nflApiRosters`
+### Returns — `nfl_rosters` / `nflRosters`
 
 | col_name | type | description |
 |---|---|---|
@@ -191,7 +191,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `team_venues` | character | JSON-stringified array of the team's venue objects (id, name, etc.). |
 | `persons` | character | JSON-stringified array of roster player objects for the team. |
 
-### Returns — `nfl_api_standings` / `nflApiStandings`
+### Returns — `nfl_standings` / `nflStandings`
 
 | col_name | type | description |
 |---|---|---|
@@ -249,7 +249,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `road_points_for` | integer | Points scored in road games. |
 | `road_points_against` | integer | Points allowed in road games. |
 
-### Returns — `nfl_api_team` / `nflApiTeam`
+### Returns — `nfl_team` / `nflTeam`
 
 | col_name | type | description |
 |---|---|---|
@@ -269,7 +269,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `socials` | character | JSON-stringified array of the team's social-media links (platform, link). |
 | `vll_channel_callsign` | character | Verizon Live League (VLL) channel call sign for the team. |
 
-### Returns — `nfl_api_teams_history` / `nflApiTeamsHistory`
+### Returns — `nfl_teams_history` / `nflTeamsHistory`
 
 | col_name | type | description |
 |---|---|---|
@@ -287,7 +287,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `nick_name` | character | Team nickname. |
 | `venues` | character | JSON-stringified array of the team's venue objects (empty for non-club entries). |
 
-### Returns — `nfl_api_weekly_game_details` / `nflApiWeeklyGameDetails`
+### Returns — `nfl_weekly_game_details` / `nflWeeklyGameDetails`
 
 | col_name | type | description |
 |---|---|---|
@@ -368,7 +368,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `away_team_standings` | character | JSON-stringified away-team standings object (populated only when include_standings=true). |
 | `home_team_standings` | character | JSON-stringified home-team standings object (populated only when include_standings=true). |
 
-### Returns — `nfl_api_weeks` / `nflApiWeeks`
+### Returns — `nfl_weeks` / `nflWeeks`
 
 | col_name | type | description |
 |---|---|---|
@@ -380,7 +380,7 @@ Flat (non-ESPN) wrappers for the NFL.com "Shield" data API. Host: `https://api.n
 | `date_end` | character | End date of the week (YYYY-MM-DD). |
 | `week_type` | character | Week type code (e.g. PRE, REG, WC, DIV, CONF, SB). |
 
-### Returns — `nfl_api_weeks_by_date` / `nflApiWeeksByDate`
+### Returns — `nfl_weeks_by_date` / `nflWeeksByDate`
 
 | col_name | type | description |
 |---|---|---|

@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.soccer`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnSoccerAthleteAwards`
+## `espnSoccerPlayerAwards`
 
-SOCCER — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_awards` / `espnSoccerAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -32,15 +34,17 @@ SOCCER — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_awards(...)
+await sdv.soccer.espnSoccerPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_awards(...)
 ```
 
-## `espnSoccerAthleteCareerStats`
+## `espnSoccerPlayerCareerStats`
 
-SOCCER — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_career_stats` / `espnSoccerAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -58,15 +62,17 @@ SOCCER — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_career_stats(...)
+await sdv.soccer.espnSoccerPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_career_stats(...)
 ```
 
-## `espnSoccerAthleteContracts`
+## `espnSoccerPlayerContracts`
 
-SOCCER — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_contracts` / `espnSoccerAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -83,15 +89,17 @@ SOCCER — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_contracts(...)
+await sdv.soccer.espnSoccerPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_contracts(...)
 ```
 
-## `espnSoccerAthleteCore`
+## `espnSoccerPlayerCore`
 
-SOCCER — athlete core (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_core` / `espnSoccerAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -104,15 +112,17 @@ SOCCER — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_core(...)
+await sdv.soccer.espnSoccerPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_core(...)
 ```
 
-## `espnSoccerAthleteEventlog`
+## `espnSoccerPlayerEventlog`
 
-SOCCER — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_eventlog` / `espnSoccerAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -129,15 +139,17 @@ SOCCER — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_eventlog(...)
+await sdv.soccer.espnSoccerPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_eventlog(...)
 ```
 
-## `espnSoccerAthleteInjuries`
+## `espnSoccerPlayerInjuries`
 
-SOCCER — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_injuries` / `espnSoccerAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -156,16 +168,18 @@ SOCCER — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_injuries(...)
+await sdv.soccer.espnSoccerPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_injuries(...)
 ```
 
-## `espnSoccerAthleteNotes`
+## `espnSoccerPlayerNotes`
 
-SOCCER — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_notes` / `espnSoccerAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -181,16 +195,18 @@ SOCCER — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_notes(...)
+await sdv.soccer.espnSoccerPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_notes(...)
 ```
 
-## `espnSoccerAthleteRecords`
+## `espnSoccerPlayerRecords`
 
-SOCCER — athlete records (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_records` / `espnSoccerAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -206,16 +222,18 @@ SOCCER — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_records(...)
+await sdv.soccer.espnSoccerPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_records(...)
 ```
 
-## `espnSoccerAthleteSeasons`
+## `espnSoccerPlayerSeasons`
 
-SOCCER — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_seasons` / `espnSoccerAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -231,16 +249,18 @@ SOCCER — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_seasons(...)
+await sdv.soccer.espnSoccerPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_seasons(...)
 ```
 
-## `espnSoccerAthleteStatisticslog`
+## `espnSoccerPlayerStatisticslog`
 
-SOCCER — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_statisticslog` / `espnSoccerAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -256,15 +276,17 @@ SOCCER — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_statisticslog(...)
+await sdv.soccer.espnSoccerPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_statisticslog(...)
 ```
 
-## `espnSoccerAthleteVsAthlete`
+## `espnSoccerPlayerVsPlayer`
 
-SOCCER — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athlete_vs_athlete` / `espnSoccerAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -278,15 +300,17 @@ SOCCER — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athlete_vs_athlete(...)
+await sdv.soccer.espnSoccerPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_player_vs_player(...)
 ```
 
-## `espnSoccerAthletesIndex`
+## `espnSoccerPlayersIndex`
 
-SOCCER — athletes index (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_athletes_index` / `espnSoccerAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -305,8 +329,8 @@ SOCCER — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerAthletesIndex({ league: 'eng.1' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_athletes_index(...)
+await sdv.soccer.espnSoccerPlayersIndex({ league: 'eng.1' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_players_index(...)
 ```
 
 ## `espnSoccerAward`
@@ -420,12 +444,14 @@ await sdv.soccer.espnSoccerCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.soccer.espn_soccer_coach_season(...)
 ```
 
-## `espnSoccerEvent`
+## `espnSoccerGame`
 
-SOCCER — event (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event` / `espnSoccerEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -437,16 +463,18 @@ SOCCER — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event(...)
+await sdv.soccer.espnSoccerGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game(...)
 ```
 
-## `espnSoccerEventBroadcasts`
+## `espnSoccerGameBroadcasts`
 
-SOCCER — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_broadcasts` / `espnSoccerEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -463,16 +491,18 @@ SOCCER — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_broadcasts(...)
+await sdv.soccer.espnSoccerGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_broadcasts(...)
 ```
 
-## `espnSoccerEventCompetition`
+## `espnSoccerGameCompetition`
 
-SOCCER — event competition (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competition` / `espnSoccerEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -485,15 +515,17 @@ SOCCER — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competition(...)
+await sdv.soccer.espnSoccerGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_competition(...)
 ```
 
-## `espnSoccerEventCompetitor`
+## `espnSoccerGameTeam`
 
-SOCCER — event competitor (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitor` / `espnSoccerEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -508,15 +540,17 @@ SOCCER — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitor(...)
+await sdv.soccer.espnSoccerGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_team(...)
 ```
 
-## `espnSoccerEventCompetitorLeaders`
+## `espnSoccerGameTeamLeaders`
 
-SOCCER — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitor_leaders` / `espnSoccerEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +569,17 @@ SOCCER — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitor_leaders(...)
+await sdv.soccer.espnSoccerGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_team_leaders(...)
 ```
 
-## `espnSoccerEventCompetitorLinescores`
+## `espnSoccerGameTeamLinescores`
 
-SOCCER — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitor_linescores` / `espnSoccerEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -558,15 +594,17 @@ SOCCER — event competitor linescores (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitor_linescores(...)
+await sdv.soccer.espnSoccerGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_team_linescores(...)
 ```
 
-## `espnSoccerEventCompetitorRecord`
+## `espnSoccerGameTeamRecord`
 
-SOCCER — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitor_record` / `espnSoccerEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -581,15 +619,17 @@ SOCCER — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitor_record(...)
+await sdv.soccer.espnSoccerGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_team_record(...)
 ```
 
-## `espnSoccerEventCompetitorRoster`
+## `espnSoccerGameTeamRoster`
 
-SOCCER — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitor_roster` / `espnSoccerEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -604,15 +644,17 @@ SOCCER — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitor_roster(...)
+await sdv.soccer.espnSoccerGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_team_roster(...)
 ```
 
-## `espnSoccerEventCompetitorStatistics`
+## `espnSoccerGameTeamStatistics`
 
-SOCCER — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitor_statistics` / `espnSoccerEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -637,16 +679,18 @@ SOCCER — event competitor statistics (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitor_statistics(...)
+await sdv.soccer.espnSoccerGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_team_statistics(...)
 ```
 
-## `espnSoccerEventCompetitors`
+## `espnSoccerGameTeams`
 
-SOCCER — event competitors (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_competitors` / `espnSoccerEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -663,16 +707,18 @@ SOCCER — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_competitors(...)
+await sdv.soccer.espnSoccerGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_teams(...)
 ```
 
-## `espnSoccerEventLeaders`
+## `espnSoccerGameLeaders`
 
-SOCCER — event leaders (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_leaders` / `espnSoccerEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -689,16 +735,18 @@ SOCCER — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_leaders(...)
+await sdv.soccer.espnSoccerGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_leaders(...)
 ```
 
-## `espnSoccerEventOdds`
+## `espnSoccerGameOdds`
 
-SOCCER — event odds (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_odds` / `espnSoccerEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -715,15 +763,17 @@ SOCCER — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_odds(...)
+await sdv.soccer.espnSoccerGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_odds(...)
 ```
 
-## `espnSoccerEventOfficialDetail`
+## `espnSoccerGameOfficialDetail`
 
-SOCCER — event official detail (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_official_detail` / `espnSoccerEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -738,15 +788,17 @@ SOCCER — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_official_detail(...)
+await sdv.soccer.espnSoccerGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_official_detail(...)
 ```
 
-## `espnSoccerEventOfficials`
+## `espnSoccerGameOfficials`
 
-SOCCER — event officials (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_officials` / `espnSoccerEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -764,15 +816,17 @@ SOCCER — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_officials(...)
+await sdv.soccer.espnSoccerGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_officials(...)
 ```
 
-## `espnSoccerEventPlay`
+## `espnSoccerGamePlay`
 
-SOCCER — event play (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_play` / `espnSoccerEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -787,15 +841,17 @@ SOCCER — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_play(...)
+await sdv.soccer.espnSoccerGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_play(...)
 ```
 
-## `espnSoccerEventPlayPersonnel`
+## `espnSoccerGamePlayPersonnel`
 
-SOCCER — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_play_personnel` / `espnSoccerEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -814,15 +870,17 @@ SOCCER — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_play_personnel(...)
+await sdv.soccer.espnSoccerGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_play_personnel(...)
 ```
 
-## `espnSoccerEventPlays`
+## `espnSoccerGamePlays`
 
-SOCCER — event plays (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_plays` / `espnSoccerEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -837,16 +895,18 @@ SOCCER — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_plays(...)
+await sdv.soccer.espnSoccerGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_plays(...)
 ```
 
-## `espnSoccerEventPowerindex`
+## `espnSoccerGamePowerindex`
 
-SOCCER — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_powerindex` / `espnSoccerEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -859,16 +919,18 @@ SOCCER — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_powerindex(...)
+await sdv.soccer.espnSoccerGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_powerindex(...)
 ```
 
-## `espnSoccerEventPredictor`
+## `espnSoccerGamePredictor`
 
-SOCCER — event predictor (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_predictor` / `espnSoccerEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -881,15 +943,17 @@ SOCCER — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_predictor(...)
+await sdv.soccer.espnSoccerGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_predictor(...)
 ```
 
-## `espnSoccerEventProbabilities`
+## `espnSoccerGameProbabilities`
 
-SOCCER — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_probabilities` / `espnSoccerEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -908,16 +972,18 @@ SOCCER — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_probabilities(...)
+await sdv.soccer.espnSoccerGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_probabilities(...)
 ```
 
-## `espnSoccerEventPropbets`
+## `espnSoccerGamePropbets`
 
-SOCCER — event propbets (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_propbets` / `espnSoccerEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -934,16 +1000,18 @@ SOCCER — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_propbets(...)
+await sdv.soccer.espnSoccerGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_propbets(...)
 ```
 
-## `espnSoccerEventScoringplays`
+## `espnSoccerGameScoringplays`
 
-SOCCER — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_scoringplays` / `espnSoccerEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -960,16 +1028,18 @@ SOCCER — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_scoringplays(...)
+await sdv.soccer.espnSoccerGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_scoringplays(...)
 ```
 
-## `espnSoccerEventSituation`
+## `espnSoccerGameSituation`
 
-SOCCER — event situation (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_situation` / `espnSoccerEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -982,16 +1052,18 @@ SOCCER — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_situation(...)
+await sdv.soccer.espnSoccerGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_situation(...)
 ```
 
-## `espnSoccerEventStatus`
+## `espnSoccerGameStatus`
 
-SOCCER — event status (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_event_status` / `espnSoccerEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `league` | `league` | no | ESPN league slug override (default `eng.1`) |
@@ -1004,15 +1076,17 @@ SOCCER — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_event_status(...)
+await sdv.soccer.espnSoccerGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_game_status(...)
 ```
 
-## `espnSoccerEvents`
+## `espnSoccerGames`
 
-SOCCER — events (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_events` / `espnSoccerEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1030,8 +1104,8 @@ SOCCER — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerEvents({ league: 'eng.1' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_events(...)
+await sdv.soccer.espnSoccerGames({ league: 'eng.1' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_games(...)
 ```
 
 ## `espnSoccerFranchise`
@@ -1194,11 +1268,13 @@ await sdv.soccer.espnSoccerPositions({ league: 'eng.1' });
 // snake_case alias (py/R parity): sdv.soccer.espn_soccer_positions(...)
 ```
 
-## `espnSoccerSeasonAthletes`
+## `espnSoccerSeasonPlayers`
 
-SOCCER — season athletes (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_season_athletes` / `espnSoccerSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1217,8 +1293,8 @@ SOCCER — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_athletes(...)
+await sdv.soccer.espnSoccerSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_players(...)
 ```
 
 ## `espnSoccerSeasonAwards`
@@ -1734,11 +1810,13 @@ await sdv.soccer.espnSoccerSeasonWeek({ season: '…', season_type: '…', week:
 // snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_week(...)
 ```
 
-## `espnSoccerSeasonWeekEvents`
+## `espnSoccerSeasonWeekGames`
 
-SOCCER — season week events (ESPN sports.core.api.espn.com (core v2)).
+SOCCER — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_soccer_season_week_events` / `espnSoccerSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1758,8 +1836,8 @@ SOCCER — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.soccer.espnSoccerSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_week_events(...)
+await sdv.soccer.espnSoccerSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.soccer.espn_soccer_season_week_games(...)
 ```
 
 ## `espnSoccerSeasonWeekPowerindex`

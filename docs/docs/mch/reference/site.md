@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.mch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMchAthleteBio`
+## `espnMchPlayerBio`
 
-MCH — athlete bio (ESPN site.api.espn.com).
+MCH — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/mens-college-hockey/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_bio` / `espnMchAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ MCH — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_bio(...)
+await sdv.mch.espnMchPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_bio(...)
 ```
 
-## `espnMchAthleteInfo`
+## `espnMchPlayerInfo`
 
-MCH — athlete info (ESPN site.api.espn.com).
+MCH — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/mens-college-hockey/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_info` / `espnMchAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ MCH — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_info(...)
+await sdv.mch.espnMchPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_info(...)
 ```
 
-## `espnMchAthleteNews`
+## `espnMchPlayerNews`
 
-MCH — athlete news (ESPN site.api.espn.com).
+MCH — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/mens-college-hockey/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mch_athlete_news` / `espnMchAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ MCH — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mch.espnMchAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mch.espn_mch_athlete_news(...)
+await sdv.mch.espnMchPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mch.espn_mch_player_news(...)
 ```
 
 ## `espnMchCalendar`

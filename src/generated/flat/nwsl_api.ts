@@ -10,6 +10,7 @@ import type { WrapperDef, WrapperFn } from "../../core/types.js";
 
 const COMPETITIONS_DEF: WrapperDef = {
   "short": "competitions",
+  "publicName": "nwsl_competitions",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -35,14 +36,15 @@ const COMPETITIONS_DEF: WrapperDef = {
  * @param params.locale - query parameter — default `en-US`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiCompetitions({});
+ * @example await sdv.nwsl.nwslCompetitions({});
  */
-export const nwslApiCompetitions: WrapperFn = (params = {}) => callFlat(COMPETITIONS_DEF, params);
-/** snake_case alias of {@link nwslApiCompetitions} (py/R parity). */
-export const nwsl_api_competitions = nwslApiCompetitions;
+export const nwslCompetitions: WrapperFn = (params = {}) => callFlat(COMPETITIONS_DEF, params);
+/** snake_case alias of {@link nwslCompetitions} (py/R parity). */
+export const nwsl_competitions = nwslCompetitions;
 
 const MATCH_LINEUPS_DEF: WrapperDef = {
   "short": "match_lineups",
+  "publicName": "nwsl_match_lineups",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -77,14 +79,15 @@ const MATCH_LINEUPS_DEF: WrapperDef = {
  * @param params.locale - query parameter — default `en-US`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiMatchLineups({ season_id: '…', match_id: '…' });
+ * @example await sdv.nwsl.nwslMatchLineups({ season_id: '…', match_id: '…' });
  */
-export const nwslApiMatchLineups: WrapperFn = (params = {}) => callFlat(MATCH_LINEUPS_DEF, params);
-/** snake_case alias of {@link nwslApiMatchLineups} (py/R parity). */
-export const nwsl_api_match_lineups = nwslApiMatchLineups;
+export const nwslMatchLineups: WrapperFn = (params = {}) => callFlat(MATCH_LINEUPS_DEF, params);
+/** snake_case alias of {@link nwslMatchLineups} (py/R parity). */
+export const nwsl_match_lineups = nwslMatchLineups;
 
 const MATCHDAYS_DEF: WrapperDef = {
   "short": "matchdays",
+  "publicName": "nwsl_matchdays",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -115,14 +118,15 @@ const MATCHDAYS_DEF: WrapperDef = {
  * @param params.locale - query parameter — default `en-US`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiMatchdays({ season_id: '…' });
+ * @example await sdv.nwsl.nwslMatchdays({ season_id: '…' });
  */
-export const nwslApiMatchdays: WrapperFn = (params = {}) => callFlat(MATCHDAYS_DEF, params);
-/** snake_case alias of {@link nwslApiMatchdays} (py/R parity). */
-export const nwsl_api_matchdays = nwslApiMatchdays;
+export const nwslMatchdays: WrapperFn = (params = {}) => callFlat(MATCHDAYS_DEF, params);
+/** snake_case alias of {@link nwslMatchdays} (py/R parity). */
+export const nwsl_matchdays = nwslMatchdays;
 
 const PLAYER_STATS_DEF: WrapperDef = {
   "short": "player_stats",
+  "publicName": "nwsl_player_stats",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -178,14 +182,15 @@ const PLAYER_STATS_DEF: WrapperDef = {
  * @param params.page_num_element - query parameter (`pageNumElement`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiPlayerStats({ season_id: '…' });
+ * @example await sdv.nwsl.nwslPlayerStats({ season_id: '…' });
  */
-export const nwslApiPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER_STATS_DEF, params);
-/** snake_case alias of {@link nwslApiPlayerStats} (py/R parity). */
-export const nwsl_api_player_stats = nwslApiPlayerStats;
+export const nwslPlayerStats: WrapperFn = (params = {}) => callFlat(PLAYER_STATS_DEF, params);
+/** snake_case alias of {@link nwslPlayerStats} (py/R parity). */
+export const nwsl_player_stats = nwslPlayerStats;
 
 const SEASON_MATCHES_DEF: WrapperDef = {
   "short": "season_matches",
+  "publicName": "nwsl_season_matches",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -226,14 +231,15 @@ const SEASON_MATCHES_DEF: WrapperDef = {
  * @param params.end_date - query parameter (`endDate`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiSeasonMatches({});
+ * @example await sdv.nwsl.nwslSeasonMatches({});
  */
-export const nwslApiSeasonMatches: WrapperFn = (params = {}) => callFlat(SEASON_MATCHES_DEF, params);
-/** snake_case alias of {@link nwslApiSeasonMatches} (py/R parity). */
-export const nwsl_api_season_matches = nwslApiSeasonMatches;
+export const nwslSeasonMatches: WrapperFn = (params = {}) => callFlat(SEASON_MATCHES_DEF, params);
+/** snake_case alias of {@link nwslSeasonMatches} (py/R parity). */
+export const nwsl_season_matches = nwslSeasonMatches;
 
 const STAGES_DEF: WrapperDef = {
   "short": "stages",
+  "publicName": "nwsl_stages",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -264,14 +270,15 @@ const STAGES_DEF: WrapperDef = {
  * @param params.locale - query parameter — default `en-US`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiStages({ season_id: '…' });
+ * @example await sdv.nwsl.nwslStages({ season_id: '…' });
  */
-export const nwslApiStages: WrapperFn = (params = {}) => callFlat(STAGES_DEF, params);
-/** snake_case alias of {@link nwslApiStages} (py/R parity). */
-export const nwsl_api_stages = nwslApiStages;
+export const nwslStages: WrapperFn = (params = {}) => callFlat(STAGES_DEF, params);
+/** snake_case alias of {@link nwslStages} (py/R parity). */
+export const nwsl_stages = nwslStages;
 
 const STANDINGS_DEF: WrapperDef = {
   "short": "standings",
+  "publicName": "nwsl_standings",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -312,14 +319,15 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.direction - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiStandings({ season_id: '…' });
+ * @example await sdv.nwsl.nwslStandings({ season_id: '…' });
  */
-export const nwslApiStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
-/** snake_case alias of {@link nwslApiStandings} (py/R parity). */
-export const nwsl_api_standings = nwslApiStandings;
+export const nwslStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
+/** snake_case alias of {@link nwslStandings} (py/R parity). */
+export const nwsl_standings = nwslStandings;
 
 const TEAM_STATS_DEF: WrapperDef = {
   "short": "team_stats",
+  "publicName": "nwsl_team_stats",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -355,14 +363,15 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.category - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiTeamStats({ season_id: '…' });
+ * @example await sdv.nwsl.nwslTeamStats({ season_id: '…' });
  */
-export const nwslApiTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
-/** snake_case alias of {@link nwslApiTeamStats} (py/R parity). */
-export const nwsl_api_team_stats = nwslApiTeamStats;
+export const nwslTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);
+/** snake_case alias of {@link nwslTeamStats} (py/R parity). */
+export const nwsl_team_stats = nwslTeamStats;
 
 const TEAMS_DEF: WrapperDef = {
   "short": "teams",
+  "publicName": "nwsl_teams",
   "flat": true,
   "api": "nwsl_api",
   "host": "https://api-sdp.nwslsoccer.com/v1/nwsl/football",
@@ -393,8 +402,8 @@ const TEAMS_DEF: WrapperDef = {
  * @param params.locale - query parameter — default `en-US`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.nwsl.nwslApiTeams({ season_id: '…' });
+ * @example await sdv.nwsl.nwslTeams({ season_id: '…' });
  */
-export const nwslApiTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
-/** snake_case alias of {@link nwslApiTeams} (py/R parity). */
-export const nwsl_api_teams = nwslApiTeams;
+export const nwslTeams: WrapperFn = (params = {}) => callFlat(TEAMS_DEF, params);
+/** snake_case alias of {@link nwslTeams} (py/R parity). */
+export const nwsl_teams = nwslTeams;

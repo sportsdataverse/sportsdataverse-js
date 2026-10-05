@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.wnba`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWnbaAthleteBio`
+## `espnWnbaPlayerBio`
 
-WNBA — athlete bio (ESPN site.api.espn.com).
+WNBA — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_bio` / `espnWnbaAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ WNBA — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_bio(...)
+await sdv.wnba.espnWnbaPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_bio(...)
 ```
 
-## `espnWnbaAthleteInfo`
+## `espnWnbaPlayerInfo`
 
-WNBA — athlete info (ESPN site.api.espn.com).
+WNBA — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_info` / `espnWnbaAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ WNBA — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_info(...)
+await sdv.wnba.espnWnbaPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_info(...)
 ```
 
-## `espnWnbaAthleteNews`
+## `espnWnbaPlayerNews`
 
-WNBA — athlete news (ESPN site.api.espn.com).
+WNBA — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_athlete_news` / `espnWnbaAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ WNBA — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_athlete_news(...)
+await sdv.wnba.espnWnbaPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_news(...)
 ```
 
 ## `espnWnbaCalendar`
