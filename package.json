@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@tidyjs/tidy": "^2.6.1",
-    "axios": "^1.17.0",
+    "axios": "^1.20.0",
     "cheerio": "^1.2.0",
     "decode-html": "^2.0.0",
     "hyparquet": "^1.31.2",
@@ -53,7 +53,7 @@
     }
   },
   "overrides": {
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.2",
     "serialize-javascript": "^7.0.5",
     "diff": "^8.0.3"
   },
