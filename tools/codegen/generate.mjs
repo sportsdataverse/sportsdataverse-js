@@ -951,6 +951,43 @@ function loadReturnsColumns(returnsSchema) {
   return columns;
 }
 
+/**
+ * A flat endpoint's returns schema for the docs: `{ columns }` (one table),
+ * `{ frames: [{ section, columns }] }` (`kind: frames`, one table per key of the
+ * parser's dict), `{ unverified }` (sdv-py publishes no columns, and says why),
+ * or `null` (no schema file, or no columns). vendor.mjs checkSchemaShape has
+ * already refused any other shape.
+ */
+const _flatSchemaCache = new Map();
+function loadReturnsSchema(returnsSchema) {
+  if (!returnsSchema) return null;
+  if (_flatSchemaCache.has(returnsSchema)) return _flatSchemaCache.get(returnsSchema);
+  const file = join(schemasDir, `${returnsSchema}.yaml`);
+  let out = null;
+  if (existsSync(file)) {
+    const doc = parse(readFileSync(file, "utf8"));
+    if (typeof doc?.unverified === "string") out = { unverified: doc.unverified };
+    else if (doc?.kind === "frames" && doc.frames?.some((f) => f.columns?.length)) out = { frames: doc.frames };
+    else if (Array.isArray(doc?.columns) && doc.columns.length) out = { columns: doc.columns };
+  }
+  _flatSchemaCache.set(returnsSchema, out);
+  return out;
+}
+
+/** Render a flat endpoint's `### Returns` block (one table, one per frame, or the unverified note). */
+function renderFlatReturns(label, schema) {
+  if (schema.columns) return renderReturnsTable(label, schema.columns);
+  if (schema.unverified) {
+    return `\n### Returns — ${label}\n\nNo returns table is published for this endpoint: ${escapeCell(schema.unverified).replace(/[{}<>]/g, (c) => `\\${c}`)}\n`;
+  }
+  let out = `\n### Returns — ${label}\n\nWith \`{ parsed: true }\`: an object of tables, one per key below.\n`;
+  for (const f of schema.frames) {
+    out += `\n**\`${escapeCell(f.section)}\`**${f.columns.length ? "" : " — no columns in the reference capture"}\n\n`;
+    if (f.columns.length) out += renderColumnsTable(f.columns);
+  }
+  return out;
+}
+
 /** Escape `|` (and stray backticks-balance is left as-is) for a markdown table cell. */
 function escapeCell(text) {
   return String(text ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ").trim();
@@ -1041,14 +1078,15 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
     const auth = w.auth ? "yes" : "—";
     body += `| ${method} | ${http} | ${pathParamsCell(w)} | ${queryParamsCell(w)} | ${flatParserCell(w)} | ${auth} |\n`;
   }
-  // Per-wrapper `Returns` tables (one `### Returns — <wrapper>` block per
-  // endpoint whose `returns_schema` resolves to a committed columns file).
+  // Per-wrapper `Returns` blocks (one `### Returns — <wrapper>` per endpoint
+  // whose `returns_schema` resolves to a committed schema: one table, one per
+  // frame of a `kind: frames` schema, or sdv-py's `unverified` reason).
   // Endpoints with no schema (raw-JSON / generic-list passthroughs) emit none.
   for (const w of sorted) {
-    const cols = loadReturnsColumns(w.returnsSchema);
-    if (!cols) continue;
+    const schema = loadReturnsSchema(w.returnsSchema);
+    if (!schema) continue;
     const snake = flatSnake(w);
-    body += renderReturnsTable(`\`${snake}\` / \`${toCamel(snake)}\``, cols);
+    body += renderFlatReturns(`\`${snake}\` / \`${toCamel(snake)}\``, schema);
   }
   // The Statcast family additionally exposes hand-written search / player
   // wrappers (not in the YAML); document their returns frames from autodoc.

@@ -27,6 +27,12 @@ import { same, sameType } from '../helpers/parity.mjs';
 // JSON-encodes it, py keeps a polars List/Struct or stringifies it with str());
 // ids (`id`, `*_id(s)`, `*_pk`, MLBAM id columns) compare strictly.
 //
+// A `kind: frames` schema (sdv-py #683: one table per key of the parser's dict,
+// e.g. a stats.nba.com payload with several result sets) is checked frame by
+// frame: the parser returns an object with exactly those keys, in order, and (1) +
+// (2) hold for each frame. A frame with no rows in the capture cannot show its
+// columns (JS rows carry no schema), so all its columns are unexercised.
+//
 // A schema column that is null in every row of every capture is UNEXERCISED:
 // (2) cannot check its type (py types an all-null column `character`). The
 // committed test/fixtures/py/parity_coverage.json (drift-checked;
@@ -40,10 +46,21 @@ const CODEGEN = join(here, '..', '..', 'tools', 'codegen');
 const text = (p) => (p.endsWith('.gz') ? gunzipSync(readFileSync(p)) : readFileSync(p)).toString('utf8');
 // CSV / HTML bodies reach the parser as text, JSON as the decoded value (callFlat).
 const body = (p) => (/\.(csv|html)(\.gz)?$/.test(p) ? text(p) : JSON.parse(text(p)));
-const schemaColumns = (ref) => {
+/**
+ * A returns schema's tables: `[{ section, columns }]`, one per frame of a
+ * `kind: frames` schema, else one with `section: null`. `[]` when the file is
+ * missing or publishes no columns (an `unverified` schema).
+ */
+const schemaTables = (ref) => {
   const p = join(CODEGEN, 'schemas', `${ref}.yaml`);
-  return existsSync(p) ? parse(text(p)).columns ?? [] : [];
+  if (!existsSync(p)) return [];
+  const doc = parse(text(p));
+  const tables = doc.kind === 'frames' ? doc.frames : [{ section: null, columns: doc.columns ?? [] }];
+  return tables.some((t) => t.columns.length) ? tables : [];
 };
+/** Every schema column as `[section, column]` (section null for one frame). */
+const schemaColumns = (ref) => schemaTables(ref).flatMap((t) => t.columns.map((c) => [t.section, c]));
+const label = ([section, c]) => (section === null ? c.name : `${section}.${c.name}`);
 const nil = (v) => v === null || v === undefined;
 
 /**
@@ -97,7 +114,18 @@ function assertFrame(rows, py, label) {
   // every non-null JS value has the JS type of py's polars dtype for that column
   const bad = [];
   py.columns.forEach((c, k) => {
-    const v = rows.map((r) => r[c]).find((x) => !nil(x) && !sameType(x, py.dtypes[k]));
+    // Known sdv-py divergence (on3): pandas stringifies a bool column that has a
+    // null in it ('True' / 'False', 'nan' for the null), so py's dtype is String;
+    // the JS port keeps booleans. Same values (same() folds case and 'nan'); the
+    // column's py returns type (`character`) is wrong for JS, so vendor.yaml marks
+    // those tables schema_incompatible.
+    const boolText =
+      py.dtypes[k] === 'String' &&
+      py.rows.some((r) => r[c] === 'True' || r[c] === 'False') &&
+      py.rows.every((r) => nil(r[c]) || ['True', 'False', 'nan'].includes(r[c]));
+    const v = rows
+      .map((r) => r[c])
+      .find((x) => !nil(x) && !sameType(x, py.dtypes[k]) && !(boolText && typeof x === 'boolean'));
     if (v !== undefined) bad.push(`${c}: py ${py.dtypes[k]}, JS ${typeof v} ${JSON.stringify(String(v)).slice(0, 40)}`);
   });
   bad.should.eql([], `${label}: JS value types disagree with sdv-py's dtypes`);
@@ -137,13 +165,22 @@ for (const [family, fixtures] of Object.entries(manifest)) {
   }
 }
 
-/** Per documented endpoint with a capture: its schema columns, and those null in every row of every capture. */
+/** The rows of one frame of a parser result (`section` null = the result itself). */
+const frameRows = (out, section) => {
+  const rows = section === null ? out : out?.[section];
+  return Array.isArray(rows) ? rows : [];
+};
+
+/**
+ * Per documented endpoint with a capture: its schema columns, and those null in
+ * every row of every capture (a frames schema's are `<section>.<column>`).
+ */
 function exercise(family, short) {
-  const cols = schemaColumns(docs.get(family).get(short)).map((c) => c.name);
-  const rows = [...runs.values()]
-    .filter((r) => r.family === family && r.short === short && Array.isArray(r.out))
-    .flatMap((r) => r.out);
-  const unexercised = cols.filter((c) => rows.every((r) => nil(r[c])));
+  const cols = schemaColumns(docs.get(family).get(short));
+  const outs = [...runs.values()].filter((r) => r.family === family && r.short === short && r.out).map((r) => r.out);
+  const unexercised = cols
+    .filter(([section, c]) => outs.every((o) => frameRows(o, section).every((r) => nil(r[c.name]))))
+    .map(label);
   return { columns: cols.length, exercised: cols.length - unexercised.length, unexercised_columns: unexercised };
 }
 
@@ -164,20 +201,33 @@ for (const [family, fixtures] of Object.entries(manifest)) {
 
         if (ref) {
           def.returnsSchema.should.equal(ref);
-          Array.isArray(out).should.equal(true, `${def.parser} returned ${typeof out}, not rows`);
-          out.length.should.be.above(0, 'an empty frame verifies nothing');
-          const schema = schemaColumns(ref);
-          // (1) every schema column is present
-          const cols = columnsOf(out);
-          schema.map((c) => c.name).filter((n) => !cols.includes(n)).should.eql([], 'schema columns missing from the rows');
-          // (2) runtime types agree with the schema (nulls allowed; an all-null column is unexercised)
-          const bad = [];
-          for (const { name, type } of schema) {
-            const ok = TYPE_OK[type];
-            if (!ok) throw new Error(`${name}: unknown schema type ${type}`);
-            const v = out.map((r) => r[name]).find((x) => !nil(x) && !ok(x));
-            if (v !== undefined) bad.push(`${name}: ${type}, JS ${typeof v} ${JSON.stringify(String(v)).slice(0, 60)}`);
+          const tables = schemaTables(ref);
+          if (tables[0].section === null) {
+            Array.isArray(out).should.equal(true, `${def.parser} returned ${typeof out}, not rows`);
+            out.length.should.be.above(0, 'an empty frame verifies nothing');
+          } else {
+            // kind: frames -> exactly the documented tables, in order
+            (out !== null && typeof out === 'object' && !Array.isArray(out)).should.equal(true, `${def.parser} returned rows, not frames`);
+            Object.keys(out).should.eql(tables.map((t) => t.section), 'frame names');
           }
+          const missing = [];
+          const bad = [];
+          for (const { section, columns } of tables) {
+            const rows = frameRows(out, section);
+            if (!rows.length) continue; // an empty frame shows no columns: all unexercised
+            const at = section === null ? '' : `${section}.`;
+            // (1) every schema column is present
+            const cols = columnsOf(rows);
+            missing.push(...columns.filter((c) => !cols.includes(c.name)).map((c) => at + c.name));
+            // (2) runtime types agree with the schema (nulls allowed; an all-null column is unexercised)
+            for (const { name, type } of columns) {
+              const ok = TYPE_OK[type];
+              if (!ok) throw new Error(`${at}${name}: unknown schema type ${type}`);
+              const v = rows.map((r) => r[name]).find((x) => !nil(x) && !ok(x));
+              if (v !== undefined) bad.push(`${at}${name}: ${type}, JS ${typeof v} ${JSON.stringify(String(v)).slice(0, 60)}`);
+            }
+          }
+          missing.should.eql([], 'schema columns missing from the rows');
           bad.should.eql([], 'JS runtime types disagree with the schema');
           ex.exercised.should.be.above(0, 'no schema column is exercised by this capture');
         }
@@ -244,7 +294,8 @@ function coverage() {
       '(parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no ' +
       'declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types ' +
       'are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so ' +
-      'its type is unchecked) must be typed unknown.',
+      'its type is unchecked) must be typed unknown. A kind: frames schema counts the columns of every frame, ' +
+      'and lists its unexercised ones as <section>.<column>.',
     source_ref: loadManifest().source.ref,
     totals,
     families,

@@ -12,6 +12,7 @@ const put = (path, body) => {
 };
 import {
   CODEGEN_DIR,
+  checkSchemaShape,
   checkVendor,
   deriveAll,
   fetchWithRetry,
@@ -82,18 +83,48 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     should(statcast.ep('gamefeed').returns_schema).be.undefined();
     statcast.ep('gamefeed').parser.should.equal('parse_mlb_statcast_gamefeed');
     statcast.ep('schedule').returns_schema.should.equal('native/mlb_statcast/schedule');
-    // ... and a family flipped wholesale (the harness disproved its tables) keeps none.
-    family('nba_stats').schemaRefs.should.eql([]);
+    // ... and a family whose parser mapping declares incompatibility keeps none.
+    family('bart_wbb').schemaRefs.should.eql([]);
+    // nba_stats: py's parser-derived tables (sdv-py #683) are attached, but one
+    // the harness disproves on real captures is dropped.
+    family('nba_stats').schemaRefs.length.should.equal(127);
+    should(family('nba_stats').ep('leaguedashptstats').returns_schema).be.undefined();
     // pySchemas says why each py returns_schema is (not) attached.
     const why = (key, short) => family(key).pySchemas.find((e) => e.short === short).status;
     why('nhl_edge', 'skater_detail').should.equal('attached');
     why('mlb', 'teams_stats').should.equal('parser_override');
     why('mlb_statcast', 'gamefeed').should.equal('schema_incompatible');
-    why('nba_stats', 'scheduleleaguev2').should.equal('declared_incompatible');
+    why('nba_stats', 'scheduleleaguev2').should.equal('attached');
+    why('nba_stats', 'leaguedashptstats').should.equal('schema_incompatible');
+    why('bart_wbb', 'ratings').should.equal('declared_incompatible');
     why('espn_site_v2', 'scoreboard').should.equal('undeclared');
     (() => transform('nhl_edge', { schema_compatible: true, schema_incompatible: 'skater_detail' }, edge)).should.throw(
       /schema_incompatible must be a list/
     );
+  });
+
+  it('fails closed on a py returns-schema shape JS does not understand', () => {
+    const col = '- name: a\n  type: integer\n  description: ""\n';
+    // the shapes sdv-py ships: one table, one table per frame, unverified (no columns)
+    checkSchemaShape(`schema: x\nkind: dataframe\ncolumns:\n${col}`, 'x');
+    checkSchemaShape(`schema: x\nkind: frames\nframes:\n- section: S\n  columns:\n  ${col.replace(/\n(?=.)/g, '\n  ')}`, 'x');
+    checkSchemaShape('schema: x\nkind: dataframe\nunverified: no capture with rows\ncolumns: []\n', 'x');
+    const bad = {
+      'derived_by_rule: spec\nkind: dataframe\ncolumns: []\n': /unknown top-level key\(s\) derived_by_rule/,
+      'kind: table\ncolumns: []\n': /unknown kind "table"/,
+      'kind: frames\nframes: []\n': /non-empty frames list/,
+      'kind: frames\nframes:\n- name: S\n  columns: []\n': /each frame must be \{section, columns\}/,
+      'kind: dataframe\nunverified: why\ncolumns:\n- {name: a, type: integer}\n': /must publish no columns/,
+      'kind: dataframe\ncolumns:\n- {name: a, type: integer, nullable: true}\n': /column "a" must be/,
+    };
+    for (const [text, err] of Object.entries(bad)) (() => checkSchemaShape(text, 'x')).should.throw(err);
+    // and the vendor runs the check on every schema it attaches
+    let checked = 0;
+    for (const f of readdirSync(join(CODEGEN_DIR, 'schemas', 'native', 'nba_stats'))) {
+      checkSchemaShape(readFileSync(join(CODEGEN_DIR, 'schemas', 'native', 'nba_stats', f), 'utf8'), f);
+      checked++;
+    }
+    checked.should.equal(127);
   });
 
   it('refuses an overlay that swaps a vendored parser (parser_overrides only)', () => {
@@ -302,14 +333,14 @@ describe('vendor:check (offline drift gate)', function () {
   });
 
   it('flags (and `npm run vendor` deletes) a stale vendored copy, by exact path', () => {
-    // a py schema the declaration does not attach (nba_stats is schema_compatible: false),
-    // left behind byte-identical to its upstream copy
-    const rel = join('schemas', 'native', 'nba_stats', 'leaguedashplayerstats.yaml');
+    // a py schema the declaration does not attach (nba_stats leaguedashptstats is
+    // schema_incompatible), left behind byte-identical to its upstream copy
+    const rel = join('schemas', 'native', 'nba_stats', 'leaguedashptstats.yaml');
     put(join(tmp, rel), readFileSync(join(tmp, 'vendor', 'upstream', rel)));
     checkVendor(tmp).should.eql([
-      `ORPHAN: tools/codegen/schemas/native/nba_stats/leaguedashplayerstats.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
+      `ORPHAN: tools/codegen/schemas/native/nba_stats/leaguedashptstats.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
     ]);
-    writeVendor(tmp).removed.should.eql(['schemas/native/nba_stats/leaguedashplayerstats.yaml']);
+    writeVendor(tmp).removed.should.eql(['schemas/native/nba_stats/leaguedashptstats.yaml']);
     checkVendor(tmp).should.eql([]);
   });
 
@@ -318,7 +349,7 @@ describe('vendor:check (offline drift gate)', function () {
       // a new JS-only schema in a shared directory (vendored py schemas + JS-owned overlay ones)
       [join('schemas', 'native', 'mlb', 'js_only_new.yaml')]: 'schema: js_only_new\ncolumns: []\n',
       // a JS-authored schema at a py schema's path, with its own content
-      [join('schemas', 'native', 'nba_stats', 'leaguegamelog.yaml')]: 'schema: leaguegamelog\ncolumns: []\n',
+      [join('schemas', 'native', 'nba_stats', 'leaguedashptstats.yaml')]: 'schema: leaguedashptstats\ncolumns: []\n',
       // a hand-added file in a fully vendored directory
       [join('schemas', 'native', 'nhl_edge', 'stray.yaml')]: 'schema: stray\ncolumns: []\n',
     };

@@ -1,17 +1,17 @@
 {
-  "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown.",
+  "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown. A kind: frames schema counts the columns of every frame, and lists its unexercised ones as <section>.<column>.",
   "source_ref": "81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f",
   "totals": {
     "py_tables": 916,
-    "documented": 334,
-    "no_schema": 38,
-    "incompatible": 494,
+    "documented": 597,
+    "no_schema": 84,
+    "incompatible": 185,
     "overridden": 25,
     "overlay_schema": 0,
     "undeclared": 25,
-    "verified": 179,
-    "unverified": 155,
-    "unexercised_columns": 117
+    "verified": 438,
+    "unverified": 159,
+    "unexercised_columns": 1819
   },
   "families": {
     "asa": {
@@ -467,15 +467,1510 @@
     },
     "nba_stats": {
       "py_tables": 128,
-      "documented": 0,
-      "no_schema": 0,
-      "incompatible": 128,
+      "documented": 126,
+      "no_schema": 1,
+      "incompatible": 1,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
-      "verified": 0,
+      "verified": 126,
       "unverified": 0,
-      "verified_endpoints": {}
+      "verified_endpoints": {
+        "alltimeleadersgrids": {
+          "columns": 95,
+          "exercised": 95,
+          "unexercised_columns": []
+        },
+        "assistleaders": {
+          "columns": 9,
+          "exercised": 9,
+          "unexercised_columns": []
+        },
+        "assisttracker": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "boxscoreadvancedv3": {
+          "columns": 71,
+          "exercised": 71,
+          "unexercised_columns": []
+        },
+        "boxscoredefensivev2": {
+          "columns": 40,
+          "exercised": 39,
+          "unexercised_columns": [
+            "TeamStats.minutes"
+          ]
+        },
+        "boxscorefourfactorsv3": {
+          "columns": 42,
+          "exercised": 42,
+          "unexercised_columns": []
+        },
+        "boxscorehustlev2": {
+          "columns": 58,
+          "exercised": 58,
+          "unexercised_columns": []
+        },
+        "boxscorematchupsv3": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "boxscoremiscv3": {
+          "columns": 50,
+          "exercised": 50,
+          "unexercised_columns": []
+        },
+        "boxscoreplayertrackv3": {
+          "columns": 65,
+          "exercised": 65,
+          "unexercised_columns": []
+        },
+        "boxscorescoringv3": {
+          "columns": 56,
+          "exercised": 56,
+          "unexercised_columns": []
+        },
+        "boxscoresummaryv2": {
+          "columns": 93,
+          "exercised": 93,
+          "unexercised_columns": []
+        },
+        "boxscoresummaryv3": {
+          "columns": 88,
+          "exercised": 88,
+          "unexercised_columns": []
+        },
+        "boxscoretraditionalv2": {
+          "columns": 79,
+          "exercised": 79,
+          "unexercised_columns": []
+        },
+        "boxscoretraditionalv3": {
+          "columns": 64,
+          "exercised": 64,
+          "unexercised_columns": []
+        },
+        "boxscoreusagev3": {
+          "columns": 62,
+          "exercised": 62,
+          "unexercised_columns": []
+        },
+        "commonallplayers": {
+          "columns": 16,
+          "exercised": 16,
+          "unexercised_columns": []
+        },
+        "commonplayerinfo": {
+          "columns": 41,
+          "exercised": 41,
+          "unexercised_columns": []
+        },
+        "commonplayoffseries": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "commonteamroster": {
+          "columns": 26,
+          "exercised": 25,
+          "unexercised_columns": [
+            "Coaches.sort_sequence"
+          ]
+        },
+        "commonteamyears": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "cumestatsplayer": {
+          "columns": 76,
+          "exercised": 76,
+          "unexercised_columns": []
+        },
+        "cumestatsplayergames": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "cumestatsteam": {
+          "columns": 85,
+          "exercised": 36,
+          "unexercised_columns": [
+            "GameByGameStats.jersey_num",
+            "GameByGameStats.player",
+            "GameByGameStats.person_id",
+            "GameByGameStats.team_id",
+            "GameByGameStats.gp",
+            "GameByGameStats.gs",
+            "GameByGameStats.actual_minutes",
+            "GameByGameStats.actual_seconds",
+            "GameByGameStats.fg",
+            "GameByGameStats.fga",
+            "GameByGameStats.fg_pct",
+            "GameByGameStats.fg3",
+            "GameByGameStats.fg3_a",
+            "GameByGameStats.fg3_pct",
+            "GameByGameStats.ft",
+            "GameByGameStats.fta",
+            "GameByGameStats.ft_pct",
+            "GameByGameStats.off_reb",
+            "GameByGameStats.def_reb",
+            "GameByGameStats.tot_reb",
+            "GameByGameStats.ast",
+            "GameByGameStats.pf",
+            "GameByGameStats.dq",
+            "GameByGameStats.stl",
+            "GameByGameStats.turnovers",
+            "GameByGameStats.blk",
+            "GameByGameStats.pts",
+            "GameByGameStats.max_actual_minutes",
+            "GameByGameStats.max_actual_seconds",
+            "GameByGameStats.max_reb",
+            "GameByGameStats.max_ast",
+            "GameByGameStats.max_stl",
+            "GameByGameStats.max_turnovers",
+            "GameByGameStats.max_blkp",
+            "GameByGameStats.max_pts",
+            "GameByGameStats.avg_actual_minutes",
+            "GameByGameStats.avg_actual_seconds",
+            "GameByGameStats.avg_reb",
+            "GameByGameStats.avg_ast",
+            "GameByGameStats.avg_stl",
+            "GameByGameStats.avg_turnovers",
+            "GameByGameStats.avg_blkp",
+            "GameByGameStats.avg_pts",
+            "GameByGameStats.per_min_reb",
+            "GameByGameStats.per_min_ast",
+            "GameByGameStats.per_min_stl",
+            "GameByGameStats.per_min_turnovers",
+            "GameByGameStats.per_min_blk",
+            "GameByGameStats.per_min_pts"
+          ]
+        },
+        "cumestatsteamgames": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "draftcombinedrillresults": {
+          "columns": 12,
+          "exercised": 11,
+          "unexercised_columns": [
+            "bench_press"
+          ]
+        },
+        "draftcombinenonstationaryshooting": {
+          "columns": 30,
+          "exercised": 12,
+          "unexercised_columns": [
+            "off_drib_fifteen_break_left_made",
+            "off_drib_fifteen_break_left_attempt",
+            "off_drib_fifteen_break_left_pct",
+            "off_drib_fifteen_top_key_made",
+            "off_drib_fifteen_top_key_attempt",
+            "off_drib_fifteen_top_key_pct",
+            "off_drib_fifteen_break_right_made",
+            "off_drib_fifteen_break_right_attempt",
+            "off_drib_fifteen_break_right_pct",
+            "off_drib_college_top_key_made",
+            "off_drib_college_top_key_attempt",
+            "off_drib_college_top_key_pct",
+            "off_drib_college_break_right_made",
+            "off_drib_college_break_right_attempt",
+            "off_drib_college_break_right_pct",
+            "on_move_fifteen_made",
+            "on_move_fifteen_attempt",
+            "on_move_fifteen_pct"
+          ]
+        },
+        "draftcombineplayeranthro": {
+          "columns": 18,
+          "exercised": 15,
+          "unexercised_columns": [
+            "height_w_shoes",
+            "height_w_shoes_ft_in",
+            "body_fat_pct"
+          ]
+        },
+        "draftcombinespotshooting": {
+          "columns": 51,
+          "exercised": 9,
+          "unexercised_columns": [
+            "fifteen_corner_left_made",
+            "fifteen_corner_left_attempt",
+            "fifteen_corner_left_pct",
+            "fifteen_break_left_made",
+            "fifteen_break_left_attempt",
+            "fifteen_break_left_pct",
+            "fifteen_top_key_made",
+            "fifteen_top_key_attempt",
+            "fifteen_top_key_pct",
+            "fifteen_break_right_made",
+            "fifteen_break_right_attempt",
+            "fifteen_break_right_pct",
+            "fifteen_corner_right_made",
+            "fifteen_corner_right_attempt",
+            "fifteen_corner_right_pct",
+            "college_break_left_made",
+            "college_break_left_attempt",
+            "college_break_left_pct",
+            "college_top_key_made",
+            "college_top_key_attempt",
+            "college_top_key_pct",
+            "college_break_right_made",
+            "college_break_right_attempt",
+            "college_break_right_pct",
+            "college_corner_right_made",
+            "college_corner_right_attempt",
+            "college_corner_right_pct",
+            "nba_corner_left_made",
+            "nba_corner_left_attempt",
+            "nba_corner_left_pct",
+            "nba_break_left_made",
+            "nba_break_left_attempt",
+            "nba_break_left_pct",
+            "nba_top_key_made",
+            "nba_top_key_attempt",
+            "nba_top_key_pct",
+            "nba_break_right_made",
+            "nba_break_right_attempt",
+            "nba_break_right_pct",
+            "nba_corner_right_made",
+            "nba_corner_right_attempt",
+            "nba_corner_right_pct"
+          ]
+        },
+        "draftcombinestats": {
+          "columns": 47,
+          "exercised": 23,
+          "unexercised_columns": [
+            "height_w_shoes",
+            "height_w_shoes_ft_in",
+            "body_fat_pct",
+            "bench_press",
+            "spot_fifteen_corner_left",
+            "spot_fifteen_break_left",
+            "spot_fifteen_top_key",
+            "spot_fifteen_break_right",
+            "spot_fifteen_corner_right",
+            "spot_college_break_left",
+            "spot_college_top_key",
+            "spot_college_break_right",
+            "spot_college_corner_right",
+            "spot_nba_corner_left",
+            "spot_nba_break_left",
+            "spot_nba_top_key",
+            "spot_nba_break_right",
+            "spot_nba_corner_right",
+            "off_drib_fifteen_break_left",
+            "off_drib_fifteen_top_key",
+            "off_drib_fifteen_break_right",
+            "off_drib_college_top_key",
+            "off_drib_college_break_right",
+            "on_move_fifteen"
+          ]
+        },
+        "drafthistory": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "fantasywidget": {
+          "columns": 20,
+          "exercised": 20,
+          "unexercised_columns": []
+        },
+        "franchisehistory": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "franchiseleaders": {
+          "columns": 16,
+          "exercised": 16,
+          "unexercised_columns": []
+        },
+        "franchiseleaderswrank": {
+          "columns": 47,
+          "exercised": 47,
+          "unexercised_columns": []
+        },
+        "franchiseplayers": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "gamerotation": {
+          "columns": 24,
+          "exercised": 24,
+          "unexercised_columns": []
+        },
+        "homepageleaders": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "homepagev2": {
+          "columns": 72,
+          "exercised": 72,
+          "unexercised_columns": []
+        },
+        "hustlestatsboxscore": {
+          "columns": 49,
+          "exercised": 49,
+          "unexercised_columns": []
+        },
+        "infographicfanduelplayer": {
+          "columns": 33,
+          "exercised": 33,
+          "unexercised_columns": []
+        },
+        "leaderstiles": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "leaguedashlineups": {
+          "columns": 58,
+          "exercised": 58,
+          "unexercised_columns": []
+        },
+        "leaguedashoppptshot": {
+          "columns": 18,
+          "exercised": 18,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerbiostats": {
+          "columns": 23,
+          "exercised": 23,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerclutch": {
+          "columns": 68,
+          "exercised": 68,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerptshot": {
+          "columns": 20,
+          "exercised": 20,
+          "unexercised_columns": []
+        },
+        "leaguedashplayershotlocations": {
+          "columns": 33,
+          "exercised": 33,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerstats": {
+          "columns": 67,
+          "exercised": 67,
+          "unexercised_columns": []
+        },
+        "leaguedashptdefend": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "leaguedashptteamdefend": {
+          "columns": 11,
+          "exercised": 11,
+          "unexercised_columns": []
+        },
+        "leaguedashteamclutch": {
+          "columns": 54,
+          "exercised": 54,
+          "unexercised_columns": []
+        },
+        "leaguedashteamptshot": {
+          "columns": 18,
+          "exercised": 18,
+          "unexercised_columns": []
+        },
+        "leaguedashteamshotlocations": {
+          "columns": 29,
+          "exercised": 29,
+          "unexercised_columns": []
+        },
+        "leaguedashteamstats": {
+          "columns": 54,
+          "exercised": 54,
+          "unexercised_columns": []
+        },
+        "leaguegamefinder": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "leaguegamelog": {
+          "columns": 29,
+          "exercised": 29,
+          "unexercised_columns": []
+        },
+        "leaguehustlestatsplayer": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "leaguehustlestatsteam": {
+          "columns": 20,
+          "exercised": 20,
+          "unexercised_columns": []
+        },
+        "leagueleaders": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "leaguelineupviz": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "leagueplayerondetails": {
+          "columns": 59,
+          "exercised": 59,
+          "unexercised_columns": []
+        },
+        "leagueseasonmatchups": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "leaguestandings": {
+          "columns": 81,
+          "exercised": 76,
+          "unexercised_columns": [
+            "may",
+            "jun",
+            "jul",
+            "aug",
+            "sep"
+          ]
+        },
+        "leaguestandingsv3": {
+          "columns": 92,
+          "exercised": 87,
+          "unexercised_columns": [
+            "may",
+            "jun",
+            "jul",
+            "aug",
+            "sep"
+          ]
+        },
+        "matchupsrollup": {
+          "columns": 22,
+          "exercised": 22,
+          "unexercised_columns": []
+        },
+        "playerawards": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "playercareerbycollegerollup": {
+          "columns": 96,
+          "exercised": 96,
+          "unexercised_columns": []
+        },
+        "playercareerstats": {
+          "columns": 329,
+          "exercised": 20,
+          "unexercised_columns": [
+            "SeasonTotalsRegularSeason.player_id",
+            "SeasonTotalsRegularSeason.season_id",
+            "SeasonTotalsRegularSeason.league_id",
+            "SeasonTotalsRegularSeason.team_id",
+            "SeasonTotalsRegularSeason.team_abbreviation",
+            "SeasonTotalsRegularSeason.player_age",
+            "SeasonTotalsRegularSeason.gp",
+            "SeasonTotalsRegularSeason.gs",
+            "SeasonTotalsRegularSeason.min",
+            "SeasonTotalsRegularSeason.fgm",
+            "SeasonTotalsRegularSeason.fga",
+            "SeasonTotalsRegularSeason.fg_pct",
+            "SeasonTotalsRegularSeason.fg3_m",
+            "SeasonTotalsRegularSeason.fg3_a",
+            "SeasonTotalsRegularSeason.fg3_pct",
+            "SeasonTotalsRegularSeason.ftm",
+            "SeasonTotalsRegularSeason.fta",
+            "SeasonTotalsRegularSeason.ft_pct",
+            "SeasonTotalsRegularSeason.oreb",
+            "SeasonTotalsRegularSeason.dreb",
+            "SeasonTotalsRegularSeason.reb",
+            "SeasonTotalsRegularSeason.ast",
+            "SeasonTotalsRegularSeason.stl",
+            "SeasonTotalsRegularSeason.blk",
+            "SeasonTotalsRegularSeason.tov",
+            "SeasonTotalsRegularSeason.pf",
+            "SeasonTotalsRegularSeason.pts",
+            "CareerTotalsRegularSeason.player_id",
+            "CareerTotalsRegularSeason.league_id",
+            "CareerTotalsRegularSeason.team_id",
+            "CareerTotalsRegularSeason.gp",
+            "CareerTotalsRegularSeason.gs",
+            "CareerTotalsRegularSeason.min",
+            "CareerTotalsRegularSeason.fgm",
+            "CareerTotalsRegularSeason.fga",
+            "CareerTotalsRegularSeason.fg_pct",
+            "CareerTotalsRegularSeason.fg3_m",
+            "CareerTotalsRegularSeason.fg3_a",
+            "CareerTotalsRegularSeason.fg3_pct",
+            "CareerTotalsRegularSeason.ftm",
+            "CareerTotalsRegularSeason.fta",
+            "CareerTotalsRegularSeason.ft_pct",
+            "CareerTotalsRegularSeason.oreb",
+            "CareerTotalsRegularSeason.dreb",
+            "CareerTotalsRegularSeason.reb",
+            "CareerTotalsRegularSeason.ast",
+            "CareerTotalsRegularSeason.stl",
+            "CareerTotalsRegularSeason.blk",
+            "CareerTotalsRegularSeason.tov",
+            "CareerTotalsRegularSeason.pf",
+            "CareerTotalsRegularSeason.pts",
+            "SeasonTotalsPostSeason.player_id",
+            "SeasonTotalsPostSeason.season_id",
+            "SeasonTotalsPostSeason.league_id",
+            "SeasonTotalsPostSeason.team_id",
+            "SeasonTotalsPostSeason.team_abbreviation",
+            "SeasonTotalsPostSeason.player_age",
+            "SeasonTotalsPostSeason.gp",
+            "SeasonTotalsPostSeason.gs",
+            "SeasonTotalsPostSeason.min",
+            "SeasonTotalsPostSeason.fgm",
+            "SeasonTotalsPostSeason.fga",
+            "SeasonTotalsPostSeason.fg_pct",
+            "SeasonTotalsPostSeason.fg3_m",
+            "SeasonTotalsPostSeason.fg3_a",
+            "SeasonTotalsPostSeason.fg3_pct",
+            "SeasonTotalsPostSeason.ftm",
+            "SeasonTotalsPostSeason.fta",
+            "SeasonTotalsPostSeason.ft_pct",
+            "SeasonTotalsPostSeason.oreb",
+            "SeasonTotalsPostSeason.dreb",
+            "SeasonTotalsPostSeason.reb",
+            "SeasonTotalsPostSeason.ast",
+            "SeasonTotalsPostSeason.stl",
+            "SeasonTotalsPostSeason.blk",
+            "SeasonTotalsPostSeason.tov",
+            "SeasonTotalsPostSeason.pf",
+            "SeasonTotalsPostSeason.pts",
+            "CareerTotalsPostSeason.player_id",
+            "CareerTotalsPostSeason.league_id",
+            "CareerTotalsPostSeason.team_id",
+            "CareerTotalsPostSeason.gp",
+            "CareerTotalsPostSeason.gs",
+            "CareerTotalsPostSeason.min",
+            "CareerTotalsPostSeason.fgm",
+            "CareerTotalsPostSeason.fga",
+            "CareerTotalsPostSeason.fg_pct",
+            "CareerTotalsPostSeason.fg3_m",
+            "CareerTotalsPostSeason.fg3_a",
+            "CareerTotalsPostSeason.fg3_pct",
+            "CareerTotalsPostSeason.ftm",
+            "CareerTotalsPostSeason.fta",
+            "CareerTotalsPostSeason.ft_pct",
+            "CareerTotalsPostSeason.oreb",
+            "CareerTotalsPostSeason.dreb",
+            "CareerTotalsPostSeason.reb",
+            "CareerTotalsPostSeason.ast",
+            "CareerTotalsPostSeason.stl",
+            "CareerTotalsPostSeason.blk",
+            "CareerTotalsPostSeason.tov",
+            "CareerTotalsPostSeason.pf",
+            "CareerTotalsPostSeason.pts",
+            "SeasonTotalsAllStarSeason.player_id",
+            "SeasonTotalsAllStarSeason.season_id",
+            "SeasonTotalsAllStarSeason.league_id",
+            "SeasonTotalsAllStarSeason.team_id",
+            "SeasonTotalsAllStarSeason.team_abbreviation",
+            "SeasonTotalsAllStarSeason.player_age",
+            "SeasonTotalsAllStarSeason.gp",
+            "SeasonTotalsAllStarSeason.gs",
+            "SeasonTotalsAllStarSeason.min",
+            "SeasonTotalsAllStarSeason.fgm",
+            "SeasonTotalsAllStarSeason.fga",
+            "SeasonTotalsAllStarSeason.fg_pct",
+            "SeasonTotalsAllStarSeason.fg3_m",
+            "SeasonTotalsAllStarSeason.fg3_a",
+            "SeasonTotalsAllStarSeason.fg3_pct",
+            "SeasonTotalsAllStarSeason.ftm",
+            "SeasonTotalsAllStarSeason.fta",
+            "SeasonTotalsAllStarSeason.ft_pct",
+            "SeasonTotalsAllStarSeason.oreb",
+            "SeasonTotalsAllStarSeason.dreb",
+            "SeasonTotalsAllStarSeason.reb",
+            "SeasonTotalsAllStarSeason.ast",
+            "SeasonTotalsAllStarSeason.stl",
+            "SeasonTotalsAllStarSeason.blk",
+            "SeasonTotalsAllStarSeason.tov",
+            "SeasonTotalsAllStarSeason.pf",
+            "SeasonTotalsAllStarSeason.pts",
+            "CareerTotalsAllStarSeason.player_id",
+            "CareerTotalsAllStarSeason.league_id",
+            "CareerTotalsAllStarSeason.team_id",
+            "CareerTotalsAllStarSeason.gp",
+            "CareerTotalsAllStarSeason.gs",
+            "CareerTotalsAllStarSeason.min",
+            "CareerTotalsAllStarSeason.fgm",
+            "CareerTotalsAllStarSeason.fga",
+            "CareerTotalsAllStarSeason.fg_pct",
+            "CareerTotalsAllStarSeason.fg3_m",
+            "CareerTotalsAllStarSeason.fg3_a",
+            "CareerTotalsAllStarSeason.fg3_pct",
+            "CareerTotalsAllStarSeason.ftm",
+            "CareerTotalsAllStarSeason.fta",
+            "CareerTotalsAllStarSeason.ft_pct",
+            "CareerTotalsAllStarSeason.oreb",
+            "CareerTotalsAllStarSeason.dreb",
+            "CareerTotalsAllStarSeason.reb",
+            "CareerTotalsAllStarSeason.ast",
+            "CareerTotalsAllStarSeason.stl",
+            "CareerTotalsAllStarSeason.blk",
+            "CareerTotalsAllStarSeason.tov",
+            "CareerTotalsAllStarSeason.pf",
+            "CareerTotalsAllStarSeason.pts",
+            "SeasonTotalsCollegeSeason.player_id",
+            "SeasonTotalsCollegeSeason.season_id",
+            "SeasonTotalsCollegeSeason.league_id",
+            "SeasonTotalsCollegeSeason.organization_id",
+            "SeasonTotalsCollegeSeason.school_name",
+            "SeasonTotalsCollegeSeason.player_age",
+            "SeasonTotalsCollegeSeason.gp",
+            "SeasonTotalsCollegeSeason.gs",
+            "SeasonTotalsCollegeSeason.min",
+            "SeasonTotalsCollegeSeason.fgm",
+            "SeasonTotalsCollegeSeason.fga",
+            "SeasonTotalsCollegeSeason.fg_pct",
+            "SeasonTotalsCollegeSeason.fg3_m",
+            "SeasonTotalsCollegeSeason.fg3_a",
+            "SeasonTotalsCollegeSeason.fg3_pct",
+            "SeasonTotalsCollegeSeason.ftm",
+            "SeasonTotalsCollegeSeason.fta",
+            "SeasonTotalsCollegeSeason.ft_pct",
+            "SeasonTotalsCollegeSeason.oreb",
+            "SeasonTotalsCollegeSeason.dreb",
+            "SeasonTotalsCollegeSeason.reb",
+            "SeasonTotalsCollegeSeason.ast",
+            "SeasonTotalsCollegeSeason.stl",
+            "SeasonTotalsCollegeSeason.blk",
+            "SeasonTotalsCollegeSeason.tov",
+            "SeasonTotalsCollegeSeason.pf",
+            "SeasonTotalsCollegeSeason.pts",
+            "CareerTotalsCollegeSeason.player_id",
+            "CareerTotalsCollegeSeason.league_id",
+            "CareerTotalsCollegeSeason.organization_id",
+            "CareerTotalsCollegeSeason.gp",
+            "CareerTotalsCollegeSeason.gs",
+            "CareerTotalsCollegeSeason.min",
+            "CareerTotalsCollegeSeason.fgm",
+            "CareerTotalsCollegeSeason.fga",
+            "CareerTotalsCollegeSeason.fg_pct",
+            "CareerTotalsCollegeSeason.fg3_m",
+            "CareerTotalsCollegeSeason.fg3_a",
+            "CareerTotalsCollegeSeason.fg3_pct",
+            "CareerTotalsCollegeSeason.ftm",
+            "CareerTotalsCollegeSeason.fta",
+            "CareerTotalsCollegeSeason.ft_pct",
+            "CareerTotalsCollegeSeason.oreb",
+            "CareerTotalsCollegeSeason.dreb",
+            "CareerTotalsCollegeSeason.reb",
+            "CareerTotalsCollegeSeason.ast",
+            "CareerTotalsCollegeSeason.stl",
+            "CareerTotalsCollegeSeason.blk",
+            "CareerTotalsCollegeSeason.tov",
+            "CareerTotalsCollegeSeason.pf",
+            "CareerTotalsCollegeSeason.pts",
+            "SeasonTotalsShowcaseSeason.player_id",
+            "SeasonTotalsShowcaseSeason.season_id",
+            "SeasonTotalsShowcaseSeason.league_id",
+            "SeasonTotalsShowcaseSeason.team_id",
+            "SeasonTotalsShowcaseSeason.team_abbreviation",
+            "SeasonTotalsShowcaseSeason.player_age",
+            "SeasonTotalsShowcaseSeason.gp",
+            "SeasonTotalsShowcaseSeason.gs",
+            "SeasonTotalsShowcaseSeason.min",
+            "SeasonTotalsShowcaseSeason.fgm",
+            "SeasonTotalsShowcaseSeason.fga",
+            "SeasonTotalsShowcaseSeason.fg_pct",
+            "SeasonTotalsShowcaseSeason.fg3_m",
+            "SeasonTotalsShowcaseSeason.fg3_a",
+            "SeasonTotalsShowcaseSeason.fg3_pct",
+            "SeasonTotalsShowcaseSeason.ftm",
+            "SeasonTotalsShowcaseSeason.fta",
+            "SeasonTotalsShowcaseSeason.ft_pct",
+            "SeasonTotalsShowcaseSeason.oreb",
+            "SeasonTotalsShowcaseSeason.dreb",
+            "SeasonTotalsShowcaseSeason.reb",
+            "SeasonTotalsShowcaseSeason.ast",
+            "SeasonTotalsShowcaseSeason.stl",
+            "SeasonTotalsShowcaseSeason.blk",
+            "SeasonTotalsShowcaseSeason.tov",
+            "SeasonTotalsShowcaseSeason.pf",
+            "SeasonTotalsShowcaseSeason.pts",
+            "CareerTotalsShowcaseSeason.player_id",
+            "CareerTotalsShowcaseSeason.league_id",
+            "CareerTotalsShowcaseSeason.team_id",
+            "CareerTotalsShowcaseSeason.gp",
+            "CareerTotalsShowcaseSeason.gs",
+            "CareerTotalsShowcaseSeason.min",
+            "CareerTotalsShowcaseSeason.fgm",
+            "CareerTotalsShowcaseSeason.fga",
+            "CareerTotalsShowcaseSeason.fg_pct",
+            "CareerTotalsShowcaseSeason.fg3_m",
+            "CareerTotalsShowcaseSeason.fg3_a",
+            "CareerTotalsShowcaseSeason.fg3_pct",
+            "CareerTotalsShowcaseSeason.ftm",
+            "CareerTotalsShowcaseSeason.fta",
+            "CareerTotalsShowcaseSeason.ft_pct",
+            "CareerTotalsShowcaseSeason.oreb",
+            "CareerTotalsShowcaseSeason.dreb",
+            "CareerTotalsShowcaseSeason.reb",
+            "CareerTotalsShowcaseSeason.ast",
+            "CareerTotalsShowcaseSeason.stl",
+            "CareerTotalsShowcaseSeason.blk",
+            "CareerTotalsShowcaseSeason.tov",
+            "CareerTotalsShowcaseSeason.pf",
+            "CareerTotalsShowcaseSeason.pts",
+            "SeasonRankingsRegularSeason.player_id",
+            "SeasonRankingsRegularSeason.season_id",
+            "SeasonRankingsRegularSeason.league_id",
+            "SeasonRankingsRegularSeason.team_id",
+            "SeasonRankingsRegularSeason.team_abbreviation",
+            "SeasonRankingsRegularSeason.player_age",
+            "SeasonRankingsRegularSeason.gp",
+            "SeasonRankingsRegularSeason.gs",
+            "SeasonRankingsRegularSeason.rank_pg_min",
+            "SeasonRankingsRegularSeason.rank_pg_fgm",
+            "SeasonRankingsRegularSeason.rank_pg_fga",
+            "SeasonRankingsRegularSeason.rank_fg_pct",
+            "SeasonRankingsRegularSeason.rank_pg_fg3_m",
+            "SeasonRankingsRegularSeason.rank_pg_fg3_a",
+            "SeasonRankingsRegularSeason.rank_fg3_pct",
+            "SeasonRankingsRegularSeason.rank_pg_ftm",
+            "SeasonRankingsRegularSeason.rank_pg_fta",
+            "SeasonRankingsRegularSeason.rank_ft_pct",
+            "SeasonRankingsRegularSeason.rank_pg_oreb",
+            "SeasonRankingsRegularSeason.rank_pg_dreb",
+            "SeasonRankingsRegularSeason.rank_pg_reb",
+            "SeasonRankingsRegularSeason.rank_pg_ast",
+            "SeasonRankingsRegularSeason.rank_pg_stl",
+            "SeasonRankingsRegularSeason.rank_pg_blk",
+            "SeasonRankingsRegularSeason.rank_pg_tov",
+            "SeasonRankingsRegularSeason.rank_pg_pts",
+            "SeasonRankingsRegularSeason.rank_pg_eff",
+            "SeasonRankingsPostSeason.player_id",
+            "SeasonRankingsPostSeason.season_id",
+            "SeasonRankingsPostSeason.league_id",
+            "SeasonRankingsPostSeason.team_id",
+            "SeasonRankingsPostSeason.team_abbreviation",
+            "SeasonRankingsPostSeason.player_age",
+            "SeasonRankingsPostSeason.gp",
+            "SeasonRankingsPostSeason.gs",
+            "SeasonRankingsPostSeason.rank_pg_min",
+            "SeasonRankingsPostSeason.rank_pg_fgm",
+            "SeasonRankingsPostSeason.rank_pg_fga",
+            "SeasonRankingsPostSeason.rank_fg_pct",
+            "SeasonRankingsPostSeason.rank_pg_fg3_m",
+            "SeasonRankingsPostSeason.rank_pg_fg3_a",
+            "SeasonRankingsPostSeason.rank_fg3_pct",
+            "SeasonRankingsPostSeason.rank_pg_ftm",
+            "SeasonRankingsPostSeason.rank_pg_fta",
+            "SeasonRankingsPostSeason.rank_ft_pct",
+            "SeasonRankingsPostSeason.rank_pg_oreb",
+            "SeasonRankingsPostSeason.rank_pg_dreb",
+            "SeasonRankingsPostSeason.rank_pg_reb",
+            "SeasonRankingsPostSeason.rank_pg_ast",
+            "SeasonRankingsPostSeason.rank_pg_stl",
+            "SeasonRankingsPostSeason.rank_pg_blk",
+            "SeasonRankingsPostSeason.rank_pg_tov",
+            "SeasonRankingsPostSeason.rank_pg_pts",
+            "SeasonRankingsPostSeason.rank_pg_eff"
+          ]
+        },
+        "playercompare": {
+          "columns": 48,
+          "exercised": 48,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyclutch": {
+          "columns": 693,
+          "exercised": 693,
+          "unexercised_columns": []
+        },
+        "playerdashboardbygamesplits": {
+          "columns": 315,
+          "exercised": 315,
+          "unexercised_columns": []
+        },
+        "playerdashboardbygeneralsplits": {
+          "columns": 441,
+          "exercised": 441,
+          "unexercised_columns": []
+        },
+        "playerdashboardbylastngames": {
+          "columns": 378,
+          "exercised": 378,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyopponent": {
+          "columns": 252,
+          "exercised": 252,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyshootingsplits": {
+          "columns": 227,
+          "exercised": 227,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyteamperformance": {
+          "columns": 258,
+          "exercised": 258,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyyearoveryear": {
+          "columns": 130,
+          "exercised": 130,
+          "unexercised_columns": []
+        },
+        "playerdashptpass": {
+          "columns": 42,
+          "exercised": 42,
+          "unexercised_columns": []
+        },
+        "playerdashptreb": {
+          "columns": 84,
+          "exercised": 84,
+          "unexercised_columns": []
+        },
+        "playerdashptshotdefend": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "playerdashptshots": {
+          "columns": 133,
+          "exercised": 133,
+          "unexercised_columns": []
+        },
+        "playerestimatedmetrics": {
+          "columns": 32,
+          "exercised": 32,
+          "unexercised_columns": []
+        },
+        "playerfantasyprofile": {
+          "columns": 161,
+          "exercised": 161,
+          "unexercised_columns": []
+        },
+        "playerfantasyprofilebargraph": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "playergamelog": {
+          "columns": 27,
+          "exercised": 27,
+          "unexercised_columns": []
+        },
+        "playergamelogs": {
+          "columns": 70,
+          "exercised": 70,
+          "unexercised_columns": []
+        },
+        "playergamestreakfinder": {
+          "columns": 9,
+          "exercised": 9,
+          "unexercised_columns": []
+        },
+        "playerindex": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "playerprofilev2": {
+          "columns": 343,
+          "exercised": 280,
+          "unexercised_columns": [
+            "SeasonTotalsCollegeSeason.player_id",
+            "SeasonTotalsCollegeSeason.season_id",
+            "SeasonTotalsCollegeSeason.league_id",
+            "SeasonTotalsCollegeSeason.organization_id",
+            "SeasonTotalsCollegeSeason.school_name",
+            "SeasonTotalsCollegeSeason.player_age",
+            "SeasonTotalsCollegeSeason.gp",
+            "SeasonTotalsCollegeSeason.gs",
+            "SeasonTotalsCollegeSeason.min",
+            "SeasonTotalsCollegeSeason.fgm",
+            "SeasonTotalsCollegeSeason.fga",
+            "SeasonTotalsCollegeSeason.fg_pct",
+            "SeasonTotalsCollegeSeason.fg3_m",
+            "SeasonTotalsCollegeSeason.fg3_a",
+            "SeasonTotalsCollegeSeason.fg3_pct",
+            "SeasonTotalsCollegeSeason.ftm",
+            "SeasonTotalsCollegeSeason.fta",
+            "SeasonTotalsCollegeSeason.ft_pct",
+            "SeasonTotalsCollegeSeason.oreb",
+            "SeasonTotalsCollegeSeason.dreb",
+            "SeasonTotalsCollegeSeason.reb",
+            "SeasonTotalsCollegeSeason.ast",
+            "SeasonTotalsCollegeSeason.stl",
+            "SeasonTotalsCollegeSeason.blk",
+            "SeasonTotalsCollegeSeason.tov",
+            "SeasonTotalsCollegeSeason.pf",
+            "SeasonTotalsCollegeSeason.pts",
+            "CareerTotalsCollegeSeason.player_id",
+            "CareerTotalsCollegeSeason.league_id",
+            "CareerTotalsCollegeSeason.organization_id",
+            "CareerTotalsCollegeSeason.gp",
+            "CareerTotalsCollegeSeason.gs",
+            "CareerTotalsCollegeSeason.min",
+            "CareerTotalsCollegeSeason.fgm",
+            "CareerTotalsCollegeSeason.fga",
+            "CareerTotalsCollegeSeason.fg_pct",
+            "CareerTotalsCollegeSeason.fg3_m",
+            "CareerTotalsCollegeSeason.fg3_a",
+            "CareerTotalsCollegeSeason.fg3_pct",
+            "CareerTotalsCollegeSeason.ftm",
+            "CareerTotalsCollegeSeason.fta",
+            "CareerTotalsCollegeSeason.ft_pct",
+            "CareerTotalsCollegeSeason.oreb",
+            "CareerTotalsCollegeSeason.dreb",
+            "CareerTotalsCollegeSeason.reb",
+            "CareerTotalsCollegeSeason.ast",
+            "CareerTotalsCollegeSeason.stl",
+            "CareerTotalsCollegeSeason.blk",
+            "CareerTotalsCollegeSeason.tov",
+            "CareerTotalsCollegeSeason.pf",
+            "CareerTotalsCollegeSeason.pts",
+            "NextGame.game_id",
+            "NextGame.game_date",
+            "NextGame.game_time",
+            "NextGame.location",
+            "NextGame.player_team_id",
+            "NextGame.player_team_city",
+            "NextGame.player_team_nickname",
+            "NextGame.player_team_abbreviation",
+            "NextGame.vs_team_id",
+            "NextGame.vs_team_city",
+            "NextGame.vs_team_nickname",
+            "NextGame.vs_team_abbreviation"
+          ]
+        },
+        "playervsplayer": {
+          "columns": 138,
+          "exercised": 138,
+          "unexercised_columns": []
+        },
+        "playoffpicture": {
+          "columns": 84,
+          "exercised": 82,
+          "unexercised_columns": [
+            "EastConfStandings.sosa_remaining",
+            "WestConfStandings.sosa_remaining"
+          ]
+        },
+        "scheduleleaguev2": {
+          "columns": 52,
+          "exercised": 52,
+          "unexercised_columns": []
+        },
+        "scheduleleaguev2int": {
+          "columns": 52,
+          "exercised": 52,
+          "unexercised_columns": []
+        },
+        "scoreboardv2": {
+          "columns": 109,
+          "exercised": 107,
+          "unexercised_columns": [
+            "TicketLinks.game_id",
+            "TicketLinks.leag_tix"
+          ]
+        },
+        "scoreboardv3": {
+          "columns": 80,
+          "exercised": 78,
+          "unexercised_columns": [
+            "awayteam_inbonus",
+            "hometeam_inbonus"
+          ]
+        },
+        "shotchartdetail": {
+          "columns": 31,
+          "exercised": 7,
+          "unexercised_columns": [
+            "Shot_Chart_Detail.grid_type",
+            "Shot_Chart_Detail.game_id",
+            "Shot_Chart_Detail.game_event_id",
+            "Shot_Chart_Detail.player_id",
+            "Shot_Chart_Detail.player_name",
+            "Shot_Chart_Detail.team_id",
+            "Shot_Chart_Detail.team_name",
+            "Shot_Chart_Detail.period",
+            "Shot_Chart_Detail.minutes_remaining",
+            "Shot_Chart_Detail.seconds_remaining",
+            "Shot_Chart_Detail.event_type",
+            "Shot_Chart_Detail.action_type",
+            "Shot_Chart_Detail.shot_type",
+            "Shot_Chart_Detail.shot_zone_basic",
+            "Shot_Chart_Detail.shot_zone_area",
+            "Shot_Chart_Detail.shot_zone_range",
+            "Shot_Chart_Detail.shot_distance",
+            "Shot_Chart_Detail.loc_x",
+            "Shot_Chart_Detail.loc_y",
+            "Shot_Chart_Detail.shot_attempted_flag",
+            "Shot_Chart_Detail.shot_made_flag",
+            "Shot_Chart_Detail.game_date",
+            "Shot_Chart_Detail.htm",
+            "Shot_Chart_Detail.vtm"
+          ]
+        },
+        "shotchartleaguewide": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "shotchartlineupdetail": {
+          "columns": 33,
+          "exercised": 7,
+          "unexercised_columns": [
+            "ShotChartLineupDetail.grid_type",
+            "ShotChartLineupDetail.game_id",
+            "ShotChartLineupDetail.game_event_id",
+            "ShotChartLineupDetail.group_id",
+            "ShotChartLineupDetail.group_name",
+            "ShotChartLineupDetail.player_id",
+            "ShotChartLineupDetail.player_name",
+            "ShotChartLineupDetail.team_id",
+            "ShotChartLineupDetail.team_name",
+            "ShotChartLineupDetail.period",
+            "ShotChartLineupDetail.minutes_remaining",
+            "ShotChartLineupDetail.seconds_remaining",
+            "ShotChartLineupDetail.event_type",
+            "ShotChartLineupDetail.action_type",
+            "ShotChartLineupDetail.shot_type",
+            "ShotChartLineupDetail.shot_zone_basic",
+            "ShotChartLineupDetail.shot_zone_area",
+            "ShotChartLineupDetail.shot_zone_range",
+            "ShotChartLineupDetail.shot_distance",
+            "ShotChartLineupDetail.loc_x",
+            "ShotChartLineupDetail.loc_y",
+            "ShotChartLineupDetail.shot_attempted_flag",
+            "ShotChartLineupDetail.shot_made_flag",
+            "ShotChartLineupDetail.game_date",
+            "ShotChartLineupDetail.htm",
+            "ShotChartLineupDetail.vtm"
+          ]
+        },
+        "synergyplaytypes": {
+          "columns": 24,
+          "exercised": 24,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyclutch": {
+          "columns": 594,
+          "exercised": 594,
+          "unexercised_columns": []
+        },
+        "teamdashboardbygamesplits": {
+          "columns": 270,
+          "exercised": 270,
+          "unexercised_columns": []
+        },
+        "teamdashboardbygeneralsplits": {
+          "columns": 330,
+          "exercised": 330,
+          "unexercised_columns": []
+        },
+        "teamdashboardbylastngames": {
+          "columns": 324,
+          "exercised": 324,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyopponent": {
+          "columns": 216,
+          "exercised": 216,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyshootingsplits": {
+          "columns": 211,
+          "exercised": 211,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyteamperformance": {
+          "columns": 222,
+          "exercised": 222,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyyearoveryear": {
+          "columns": 108,
+          "exercised": 108,
+          "unexercised_columns": []
+        },
+        "teamdashlineups": {
+          "columns": 113,
+          "exercised": 113,
+          "unexercised_columns": []
+        },
+        "teamdashptpass": {
+          "columns": 36,
+          "exercised": 36,
+          "unexercised_columns": []
+        },
+        "teamdashptreb": {
+          "columns": 84,
+          "exercised": 84,
+          "unexercised_columns": []
+        },
+        "teamdashptshots": {
+          "columns": 108,
+          "exercised": 108,
+          "unexercised_columns": []
+        },
+        "teamdetails": {
+          "columns": 38,
+          "exercised": 33,
+          "unexercised_columns": [
+            "TeamAwardsConf.oppositeteam",
+            "TeamAwardsDiv.oppositeteam",
+            "TeamHof.jersey",
+            "TeamAwardsCommCup.yearawarded",
+            "TeamAwardsCommCup.oppositeteam"
+          ]
+        },
+        "teamestimatedmetrics": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "teamgamelog": {
+          "columns": 27,
+          "exercised": 27,
+          "unexercised_columns": []
+        },
+        "teamgamelogs": {
+          "columns": 57,
+          "exercised": 57,
+          "unexercised_columns": []
+        },
+        "teaminfocommon": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "teamplayerdashboard": {
+          "columns": 121,
+          "exercised": 121,
+          "unexercised_columns": []
+        },
+        "teamplayeronoffdetails": {
+          "columns": 175,
+          "exercised": 57,
+          "unexercised_columns": [
+            "PlayersOnCourtTeamPlayerOnOffDetails.group_set",
+            "PlayersOnCourtTeamPlayerOnOffDetails.team_id",
+            "PlayersOnCourtTeamPlayerOnOffDetails.team_abbreviation",
+            "PlayersOnCourtTeamPlayerOnOffDetails.team_name",
+            "PlayersOnCourtTeamPlayerOnOffDetails.vs_player_id",
+            "PlayersOnCourtTeamPlayerOnOffDetails.vs_player_name",
+            "PlayersOnCourtTeamPlayerOnOffDetails.court_status",
+            "PlayersOnCourtTeamPlayerOnOffDetails.gp",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w",
+            "PlayersOnCourtTeamPlayerOnOffDetails.l",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.min",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fgm",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fga",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_m",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_a",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ftm",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fta",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ft_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.oreb",
+            "PlayersOnCourtTeamPlayerOnOffDetails.dreb",
+            "PlayersOnCourtTeamPlayerOnOffDetails.reb",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ast",
+            "PlayersOnCourtTeamPlayerOnOffDetails.tov",
+            "PlayersOnCourtTeamPlayerOnOffDetails.stl",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blk",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blka",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pf",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pfd",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pts",
+            "PlayersOnCourtTeamPlayerOnOffDetails.plus_minus",
+            "PlayersOnCourtTeamPlayerOnOffDetails.gp_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.l_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.min_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fgm_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fga_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_m_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_a_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ftm_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fta_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ft_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.oreb_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.dreb_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.reb_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ast_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.tov_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.stl_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blk_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blka_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pf_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pfd_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pts_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.plus_minus_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.group_set",
+            "PlayersOffCourtTeamPlayerOnOffDetails.team_id",
+            "PlayersOffCourtTeamPlayerOnOffDetails.team_abbreviation",
+            "PlayersOffCourtTeamPlayerOnOffDetails.team_name",
+            "PlayersOffCourtTeamPlayerOnOffDetails.vs_player_id",
+            "PlayersOffCourtTeamPlayerOnOffDetails.vs_player_name",
+            "PlayersOffCourtTeamPlayerOnOffDetails.court_status",
+            "PlayersOffCourtTeamPlayerOnOffDetails.gp",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w",
+            "PlayersOffCourtTeamPlayerOnOffDetails.l",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.min",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fgm",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fga",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_m",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_a",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ftm",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fta",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ft_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.oreb",
+            "PlayersOffCourtTeamPlayerOnOffDetails.dreb",
+            "PlayersOffCourtTeamPlayerOnOffDetails.reb",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ast",
+            "PlayersOffCourtTeamPlayerOnOffDetails.tov",
+            "PlayersOffCourtTeamPlayerOnOffDetails.stl",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blk",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blka",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pf",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pfd",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pts",
+            "PlayersOffCourtTeamPlayerOnOffDetails.plus_minus",
+            "PlayersOffCourtTeamPlayerOnOffDetails.gp_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.l_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.min_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fgm_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fga_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_m_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_a_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ftm_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fta_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ft_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.oreb_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.dreb_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.reb_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ast_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.tov_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.stl_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blk_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blka_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pf_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pfd_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pts_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.plus_minus_rank"
+          ]
+        },
+        "teamplayeronoffsummary": {
+          "columns": 83,
+          "exercised": 57,
+          "unexercised_columns": [
+            "PlayersOnCourtTeamPlayerOnOffSummary.group_set",
+            "PlayersOnCourtTeamPlayerOnOffSummary.team_id",
+            "PlayersOnCourtTeamPlayerOnOffSummary.team_abbreviation",
+            "PlayersOnCourtTeamPlayerOnOffSummary.team_name",
+            "PlayersOnCourtTeamPlayerOnOffSummary.vs_player_id",
+            "PlayersOnCourtTeamPlayerOnOffSummary.vs_player_name",
+            "PlayersOnCourtTeamPlayerOnOffSummary.court_status",
+            "PlayersOnCourtTeamPlayerOnOffSummary.gp",
+            "PlayersOnCourtTeamPlayerOnOffSummary.min",
+            "PlayersOnCourtTeamPlayerOnOffSummary.plus_minus",
+            "PlayersOnCourtTeamPlayerOnOffSummary.off_rating",
+            "PlayersOnCourtTeamPlayerOnOffSummary.def_rating",
+            "PlayersOnCourtTeamPlayerOnOffSummary.net_rating",
+            "PlayersOffCourtTeamPlayerOnOffSummary.group_set",
+            "PlayersOffCourtTeamPlayerOnOffSummary.team_id",
+            "PlayersOffCourtTeamPlayerOnOffSummary.team_abbreviation",
+            "PlayersOffCourtTeamPlayerOnOffSummary.team_name",
+            "PlayersOffCourtTeamPlayerOnOffSummary.vs_player_id",
+            "PlayersOffCourtTeamPlayerOnOffSummary.vs_player_name",
+            "PlayersOffCourtTeamPlayerOnOffSummary.court_status",
+            "PlayersOffCourtTeamPlayerOnOffSummary.gp",
+            "PlayersOffCourtTeamPlayerOnOffSummary.min",
+            "PlayersOffCourtTeamPlayerOnOffSummary.plus_minus",
+            "PlayersOffCourtTeamPlayerOnOffSummary.off_rating",
+            "PlayersOffCourtTeamPlayerOnOffSummary.def_rating",
+            "PlayersOffCourtTeamPlayerOnOffSummary.net_rating"
+          ]
+        },
+        "teamvsplayer": {
+          "columns": 239,
+          "exercised": 136,
+          "unexercised_columns": [
+            "OnOffCourt.group_set",
+            "OnOffCourt.team_id",
+            "OnOffCourt.team_abbreviation",
+            "OnOffCourt.team_name",
+            "OnOffCourt.vs_player_id",
+            "OnOffCourt.vs_player_name",
+            "OnOffCourt.court_status",
+            "OnOffCourt.gp",
+            "OnOffCourt.w",
+            "OnOffCourt.l",
+            "OnOffCourt.w_pct",
+            "OnOffCourt.min",
+            "OnOffCourt.fgm",
+            "OnOffCourt.fga",
+            "OnOffCourt.fg_pct",
+            "OnOffCourt.fg3_m",
+            "OnOffCourt.fg3_a",
+            "OnOffCourt.fg3_pct",
+            "OnOffCourt.ftm",
+            "OnOffCourt.fta",
+            "OnOffCourt.ft_pct",
+            "OnOffCourt.oreb",
+            "OnOffCourt.dreb",
+            "OnOffCourt.reb",
+            "OnOffCourt.ast",
+            "OnOffCourt.tov",
+            "OnOffCourt.stl",
+            "OnOffCourt.blk",
+            "OnOffCourt.blka",
+            "OnOffCourt.pf",
+            "OnOffCourt.pfd",
+            "OnOffCourt.pts",
+            "OnOffCourt.plus_minus",
+            "OnOffCourt.gp_rank",
+            "OnOffCourt.w_rank",
+            "OnOffCourt.l_rank",
+            "OnOffCourt.w_pct_rank",
+            "OnOffCourt.min_rank",
+            "OnOffCourt.fgm_rank",
+            "OnOffCourt.fga_rank",
+            "OnOffCourt.fg_pct_rank",
+            "OnOffCourt.fg3_m_rank",
+            "OnOffCourt.fg3_a_rank",
+            "OnOffCourt.fg3_pct_rank",
+            "OnOffCourt.ftm_rank",
+            "OnOffCourt.fta_rank",
+            "OnOffCourt.ft_pct_rank",
+            "OnOffCourt.oreb_rank",
+            "OnOffCourt.dreb_rank",
+            "OnOffCourt.reb_rank",
+            "OnOffCourt.ast_rank",
+            "OnOffCourt.tov_rank",
+            "OnOffCourt.stl_rank",
+            "OnOffCourt.blk_rank",
+            "OnOffCourt.blka_rank",
+            "OnOffCourt.pf_rank",
+            "OnOffCourt.pfd_rank",
+            "OnOffCourt.pts_rank",
+            "OnOffCourt.plus_minus_rank",
+            "ShotDistanceOnCourt.group_set",
+            "ShotDistanceOnCourt.team_id",
+            "ShotDistanceOnCourt.team_abbreviation",
+            "ShotDistanceOnCourt.team_name",
+            "ShotDistanceOnCourt.vs_player_id",
+            "ShotDistanceOnCourt.vs_player_name",
+            "ShotDistanceOnCourt.court_status",
+            "ShotDistanceOnCourt.group_value",
+            "ShotDistanceOnCourt.fgm",
+            "ShotDistanceOnCourt.fga",
+            "ShotDistanceOnCourt.fg_pct",
+            "ShotDistanceOffCourt.group_set",
+            "ShotDistanceOffCourt.team_id",
+            "ShotDistanceOffCourt.team_abbreviation",
+            "ShotDistanceOffCourt.team_name",
+            "ShotDistanceOffCourt.vs_player_id",
+            "ShotDistanceOffCourt.vs_player_name",
+            "ShotDistanceOffCourt.court_status",
+            "ShotDistanceOffCourt.group_value",
+            "ShotDistanceOffCourt.fgm",
+            "ShotDistanceOffCourt.fga",
+            "ShotDistanceOffCourt.fg_pct",
+            "ShotAreaOnCourt.group_set",
+            "ShotAreaOnCourt.team_id",
+            "ShotAreaOnCourt.team_abbreviation",
+            "ShotAreaOnCourt.team_name",
+            "ShotAreaOnCourt.vs_player_id",
+            "ShotAreaOnCourt.vs_player_name",
+            "ShotAreaOnCourt.court_status",
+            "ShotAreaOnCourt.group_value",
+            "ShotAreaOnCourt.fgm",
+            "ShotAreaOnCourt.fga",
+            "ShotAreaOnCourt.fg_pct",
+            "ShotAreaOffCourt.group_set",
+            "ShotAreaOffCourt.team_id",
+            "ShotAreaOffCourt.team_abbreviation",
+            "ShotAreaOffCourt.team_name",
+            "ShotAreaOffCourt.vs_player_id",
+            "ShotAreaOffCourt.vs_player_name",
+            "ShotAreaOffCourt.court_status",
+            "ShotAreaOffCourt.group_value",
+            "ShotAreaOffCourt.fgm",
+            "ShotAreaOffCourt.fga",
+            "ShotAreaOffCourt.fg_pct"
+          ]
+        },
+        "teamyearbyyearstats": {
+          "columns": 34,
+          "exercised": 34,
+          "unexercised_columns": []
+        },
+        "videodetailsasset": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "videoevents": {
+          "columns": 29,
+          "exercised": 16,
+          "unexercised_columns": [
+            "videoUrls.dur",
+            "videoUrls.stt",
+            "videoUrls.stp",
+            "videoUrls.sth",
+            "videoUrls.stw",
+            "videoUrls.mtt",
+            "videoUrls.mtp",
+            "videoUrls.mth",
+            "videoUrls.mtw",
+            "videoUrls.ltt",
+            "videoUrls.ltp",
+            "videoUrls.lth",
+            "videoUrls.ltw"
+          ]
+        },
+        "videoeventsasset": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "videostatus": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        }
+      }
     },
     "nfl_api": {
       "py_tables": 15,
@@ -1218,26 +2713,403 @@
     },
     "on3": {
       "py_tables": 78,
-      "documented": 0,
-      "no_schema": 0,
-      "incompatible": 78,
+      "documented": 23,
+      "no_schema": 48,
+      "incompatible": 7,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
-      "verified": 0,
+      "verified": 23,
       "unverified": 0,
-      "verified_endpoints": {}
+      "verified_endpoints": {
+        "collective_groups": {
+          "columns": 94,
+          "exercised": 65,
+          "unexercised_columns": [
+            "tik_tok_handle",
+            "youtube_handle",
+            "linked_in_handle",
+            "annual_goal_amount",
+            "confirmed_raised_amount",
+            "merged_into_group_key",
+            "merged_into_group",
+            "default_asset_domain_override",
+            "default_asset_source_override",
+            "default_asset_description",
+            "default_asset_caption",
+            "default_asset_category",
+            "default_asset_alt_text",
+            "default_asset_thumbnail",
+            "social_asset_domain_override",
+            "social_asset_source_override",
+            "social_asset_description",
+            "social_asset_caption",
+            "social_asset_category",
+            "social_asset_alt_text",
+            "social_asset_thumbnail",
+            "organization_default_asset_domain_override",
+            "organization_default_asset_source_override",
+            "organization_default_asset_description",
+            "organization_default_asset_caption",
+            "organization_default_asset_category",
+            "organization_default_asset_alt_text",
+            "organization_default_asset_thumbnail",
+            "organization_site_keys"
+          ]
+        },
+        "drafts_by_stars": {
+          "columns": 12,
+          "exercised": 12,
+          "unexercised_columns": []
+        },
+        "filters_draft_rounds": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "filters_status": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "nil_100_v2": {
+          "columns": 153,
+          "exercised": 116,
+          "unexercised_columns": [
+            "person_high_school_known_as",
+            "person_high_school_default_asset_domain_override",
+            "person_high_school_default_asset_source_override",
+            "person_high_school_default_asset_description",
+            "person_high_school_default_asset_caption",
+            "person_high_school_default_asset_category",
+            "person_high_school_default_asset_alt_text",
+            "person_high_school_default_asset_thumbnail",
+            "person_high_school_division",
+            "person_high_school_site_keys",
+            "person_default_asset_domain_override",
+            "person_default_asset_source_override",
+            "person_default_asset_description",
+            "person_default_asset_caption",
+            "person_default_asset_category",
+            "person_default_asset_alt_text",
+            "person_default_asset_thumbnail",
+            "person_roster_rating",
+            "person_commit_status_committed_asset",
+            "person_commit_status_committed_asset_res",
+            "person_commit_status_transferred_asset_res",
+            "person_commit_status_committed_organization_asset_domain_override",
+            "person_commit_status_committed_organization_asset_source_override",
+            "person_commit_status_committed_organization_asset_description",
+            "person_commit_status_committed_organization_asset_caption",
+            "person_commit_status_committed_organization_asset_category",
+            "person_commit_status_committed_organization_asset_alt_text",
+            "person_commit_status_committed_organization_asset_thumbnail",
+            "person_commit_status_transfer_entered",
+            "person_commit_status_decommitted_asset",
+            "person_commit_status_withdrawn_transfer_date",
+            "person_nil_value",
+            "person_sport",
+            "valuation_group_name",
+            "valuation_roster_value",
+            "valuation_nil_value",
+            "person_high_school_default_asset"
+          ]
+        },
+        "nil_rankings": {
+          "columns": 143,
+          "exercised": 111,
+          "unexercised_columns": [
+            "person_status_committed_organization_asset_domain_override",
+            "person_status_committed_organization_asset_source_override",
+            "person_status_committed_organization_asset_description",
+            "person_status_committed_organization_asset_caption",
+            "person_status_committed_organization_asset_category",
+            "person_status_committed_organization_asset_alt_text",
+            "person_status_committed_organization_asset_thumbnail",
+            "person_status_transferred_from_organization_asset_url",
+            "person_status_transferred_from_organization_slug",
+            "person_high_school_known_as",
+            "person_high_school_default_asset_domain_override",
+            "person_high_school_default_asset_source_override",
+            "person_high_school_default_asset_description",
+            "person_high_school_default_asset_caption",
+            "person_high_school_default_asset_category",
+            "person_high_school_default_asset_alt_text",
+            "person_high_school_default_asset_thumbnail",
+            "person_high_school_division",
+            "person_high_school_site_keys",
+            "person_default_asset_domain_override",
+            "person_default_asset_source_override",
+            "person_default_asset_description",
+            "person_default_asset_caption",
+            "person_default_asset_category",
+            "person_default_asset_alt_text",
+            "person_default_asset_thumbnail",
+            "valuation_whisper",
+            "valuation_whisper_change",
+            "valuation_group_name",
+            "valuation_roster_value",
+            "valuation_nil_value",
+            "person_status_committed_organization_asset"
+          ]
+        },
+        "organizations_roster_header": {
+          "columns": 72,
+          "exercised": 48,
+          "unexercised_columns": [
+            "talent_rank",
+            "prev_talent_rank",
+            "conference_rank",
+            "prev_conference_rank",
+            "average_rating",
+            "prev_average_rating",
+            "head_coach_known_as_name",
+            "head_coach_default_asset_domain_override",
+            "head_coach_default_asset_source_override",
+            "head_coach_default_asset_description",
+            "head_coach_default_asset_caption",
+            "head_coach_default_asset_category",
+            "head_coach_default_asset_alt_text",
+            "head_coach_default_asset_thumbnail",
+            "head_coach_organization_known_as",
+            "head_coach_organization_default_asset_domain_override",
+            "head_coach_organization_default_asset_source_override",
+            "head_coach_organization_default_asset_description",
+            "head_coach_organization_default_asset_caption",
+            "head_coach_organization_default_asset_category",
+            "head_coach_organization_default_asset_alt_text",
+            "head_coach_organization_default_asset_thumbnail",
+            "head_coach_organization_site_keys",
+            "head_coach_secondary_position"
+          ]
+        },
+        "people_latest_valuation": {
+          "columns": 14,
+          "exercised": 11,
+          "unexercised_columns": [
+            "group_name",
+            "roster_value",
+            "nil_value"
+          ]
+        },
+        "people_measurements": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "people_social": {
+          "columns": 3,
+          "exercised": 3,
+          "unexercised_columns": []
+        },
+        "people_social_post_summary": {
+          "columns": 3,
+          "exercised": 3,
+          "unexercised_columns": []
+        },
+        "people_valuation_growth": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "player_all_rankings": {
+          "columns": 17,
+          "exercised": 14,
+          "unexercised_columns": [
+            "link",
+            "state_rank",
+            "state_abbr"
+          ]
+        },
+        "player_database_updates": {
+          "columns": 11,
+          "exercised": 9,
+          "unexercised_columns": [
+            "sport_key",
+            "organization_key"
+          ]
+        },
+        "player_images": {
+          "columns": 19,
+          "exercised": 12,
+          "unexercised_columns": [
+            "domain_override",
+            "source_override",
+            "description",
+            "caption",
+            "category",
+            "alt_text",
+            "thumbnail"
+          ]
+        },
+        "player_person_rankings": {
+          "columns": 24,
+          "exercised": 24,
+          "unexercised_columns": []
+        },
+        "player_profile": {
+          "columns": 207,
+          "exercised": 158,
+          "unexercised_columns": [
+            "oracle_key",
+            "degree",
+            "bio_pro_prospect",
+            "bio_college_recruit",
+            "prep_school_org_key",
+            "junior_college_org_key",
+            "ncaa_id",
+            "high_school_known_as",
+            "high_school_default_asset_domain_override",
+            "high_school_default_asset_source_override",
+            "high_school_default_asset_description",
+            "high_school_default_asset_caption",
+            "high_school_default_asset_category",
+            "high_school_default_asset_alt_text",
+            "high_school_default_asset_thumbnail",
+            "high_school_division",
+            "high_school_site_keys",
+            "default_asset_domain_override",
+            "default_asset_source_override",
+            "default_asset_description",
+            "default_asset_caption",
+            "default_asset_category",
+            "default_asset_alt_text",
+            "default_asset_thumbnail",
+            "player_status_committed_asset_res_domain_override",
+            "player_status_committed_asset_res_source_override",
+            "player_status_committed_asset_res_description",
+            "player_status_committed_asset_res_caption",
+            "player_status_committed_asset_res_category",
+            "player_status_committed_asset_res_alt_text",
+            "player_status_committed_asset_res_thumbnail",
+            "player_status_transferred_asset_res_domain_override",
+            "player_status_transferred_asset_res_source_override",
+            "player_status_transferred_asset_res_description",
+            "player_status_transferred_asset_res_caption",
+            "player_status_transferred_asset_res_category",
+            "player_status_transferred_asset_res_alt_text",
+            "player_status_transferred_asset_res_thumbnail",
+            "player_status_committed_organization_asset_domain_override",
+            "player_status_committed_organization_asset_source_override",
+            "player_status_committed_organization_asset_description",
+            "player_status_committed_organization_asset_caption",
+            "player_status_committed_organization_asset_category",
+            "player_status_committed_organization_asset_alt_text",
+            "player_status_committed_organization_asset_thumbnail",
+            "player_status_class_rank",
+            "player_status_recruitment_year",
+            "player_status_decommitted_asset",
+            "player_status_withdrawn_transfer_date"
+          ]
+        },
+        "player_videos": {
+          "columns": 12,
+          "exercised": 10,
+          "unexercised_columns": [
+            "person_sport",
+            "featured_order"
+          ]
+        },
+        "players_industry_comparision": {
+          "columns": 72,
+          "exercised": 54,
+          "unexercised_columns": [
+            "person_high_school_known_as",
+            "person_high_school_default_asset_domain_override",
+            "person_high_school_default_asset_source_override",
+            "person_high_school_default_asset_description",
+            "person_high_school_default_asset_caption",
+            "person_high_school_default_asset_category",
+            "person_high_school_default_asset_alt_text",
+            "person_high_school_default_asset_thumbnail",
+            "person_high_school_division",
+            "person_high_school_site_keys",
+            "person_default_asset_domain_override",
+            "person_default_asset_source_override",
+            "person_default_asset_description",
+            "person_default_asset_caption",
+            "person_default_asset_category",
+            "person_default_asset_alt_text",
+            "person_default_asset_thumbnail",
+            "person_recruitment_key"
+          ]
+        },
+        "quotes": {
+          "columns": 17,
+          "exercised": 10,
+          "unexercised_columns": [
+            "person_known_as_name",
+            "person_twitter_handle",
+            "person_instagram_profile",
+            "person_tik_tok_handle",
+            "person_espn_profile",
+            "person_two_four_seven_profile",
+            "person_rivals_profile"
+          ]
+        },
+        "recruitments_profile": {
+          "columns": 91,
+          "exercised": 65,
+          "unexercised_columns": [
+            "committed_status_committed_asset_res_domain_override",
+            "committed_status_committed_asset_res_source_override",
+            "committed_status_committed_asset_res_description",
+            "committed_status_committed_asset_res_caption",
+            "committed_status_committed_asset_res_category",
+            "committed_status_committed_asset_res_alt_text",
+            "committed_status_committed_asset_res_thumbnail",
+            "committed_status_transferred_asset",
+            "committed_status_transferred_asset_res",
+            "committed_status_committed_organization_asset_url",
+            "committed_status_committed_organization_asset",
+            "committed_status_class_rank",
+            "committed_status_transfer_entered",
+            "committed_status_recruitment_year",
+            "committed_status_decommitted_asset",
+            "committed_status_withdrawn_transfer_date",
+            "high_school_org_known_as",
+            "high_school_org_default_asset_domain_override",
+            "high_school_org_default_asset_source_override",
+            "high_school_org_default_asset_description",
+            "high_school_org_default_asset_caption",
+            "high_school_org_default_asset_category",
+            "high_school_org_default_asset_alt_text",
+            "high_school_org_default_asset_thumbnail",
+            "high_school_org_division",
+            "high_school_org_site_keys"
+          ]
+        },
+        "recruitments_rpm_summary": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "team_ranking_team_rankings": {
+          "columns": 50,
+          "exercised": 42,
+          "unexercised_columns": [
+            "deductions_description",
+            "organization_asset_domain_override",
+            "organization_asset_source_override",
+            "organization_asset_description",
+            "organization_asset_caption",
+            "organization_asset_category",
+            "organization_asset_alt_text",
+            "organization_asset_thumbnail"
+          ]
+        }
+      }
     },
     "pff_api": {
       "py_tables": 67,
-      "documented": 44,
-      "no_schema": 23,
+      "documented": 48,
+      "no_schema": 19,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
       "verified": 0,
-      "unverified": 44,
+      "unverified": 48,
       "verified_endpoints": {}
     },
     "sports247": {
@@ -1351,15 +3223,1200 @@
     },
     "wnba_stats": {
       "py_tables": 111,
-      "documented": 0,
-      "no_schema": 0,
-      "incompatible": 111,
+      "documented": 110,
+      "no_schema": 1,
+      "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
-      "verified": 0,
+      "verified": 110,
       "unverified": 0,
-      "verified_endpoints": {}
+      "verified_endpoints": {
+        "alltimeleadersgrids": {
+          "columns": 95,
+          "exercised": 95,
+          "unexercised_columns": []
+        },
+        "assistleaders": {
+          "columns": 9,
+          "exercised": 9,
+          "unexercised_columns": []
+        },
+        "assisttracker": {
+          "columns": 1,
+          "exercised": 1,
+          "unexercised_columns": []
+        },
+        "boxscoreadvancedv2": {
+          "columns": 61,
+          "exercised": 61,
+          "unexercised_columns": []
+        },
+        "boxscoreadvancedv3": {
+          "columns": 71,
+          "exercised": 71,
+          "unexercised_columns": []
+        },
+        "boxscoredefensivev2": {
+          "columns": 40,
+          "exercised": 39,
+          "unexercised_columns": [
+            "TeamStats.minutes"
+          ]
+        },
+        "boxscorefourfactorsv2": {
+          "columns": 32,
+          "exercised": 32,
+          "unexercised_columns": []
+        },
+        "boxscorefourfactorsv3": {
+          "columns": 42,
+          "exercised": 42,
+          "unexercised_columns": []
+        },
+        "boxscorehustlev2": {
+          "columns": 9,
+          "exercised": 4,
+          "unexercised_columns": [
+            "TeamStats.team_city",
+            "TeamStats.team_name",
+            "TeamStats.team_tricode",
+            "TeamStats.team_slug",
+            "TeamStats.statistics"
+          ]
+        },
+        "boxscorematchupsv3": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "boxscoremiscv2": {
+          "columns": 40,
+          "exercised": 40,
+          "unexercised_columns": []
+        },
+        "boxscoremiscv3": {
+          "columns": 50,
+          "exercised": 50,
+          "unexercised_columns": []
+        },
+        "boxscoreplayertrackv3": {
+          "columns": 65,
+          "exercised": 65,
+          "unexercised_columns": []
+        },
+        "boxscorescoringv2": {
+          "columns": 46,
+          "exercised": 46,
+          "unexercised_columns": []
+        },
+        "boxscorescoringv3": {
+          "columns": 56,
+          "exercised": 56,
+          "unexercised_columns": []
+        },
+        "boxscoresummaryv2": {
+          "columns": 93,
+          "exercised": 93,
+          "unexercised_columns": []
+        },
+        "boxscoresummaryv3": {
+          "columns": 88,
+          "exercised": 88,
+          "unexercised_columns": []
+        },
+        "boxscoretraditionalv2": {
+          "columns": 79,
+          "exercised": 79,
+          "unexercised_columns": []
+        },
+        "boxscoretraditionalv3": {
+          "columns": 64,
+          "exercised": 64,
+          "unexercised_columns": []
+        },
+        "boxscoreusagev2": {
+          "columns": 52,
+          "exercised": 52,
+          "unexercised_columns": []
+        },
+        "boxscoreusagev3": {
+          "columns": 62,
+          "exercised": 62,
+          "unexercised_columns": []
+        },
+        "commonallplayers": {
+          "columns": 17,
+          "exercised": 17,
+          "unexercised_columns": []
+        },
+        "commonplayerinfo": {
+          "columns": 41,
+          "exercised": 41,
+          "unexercised_columns": []
+        },
+        "commonplayoffseries": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "commonteamroster": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "commonteamyears": {
+          "columns": 5,
+          "exercised": 5,
+          "unexercised_columns": []
+        },
+        "cumestatsplayer": {
+          "columns": 76,
+          "exercised": 76,
+          "unexercised_columns": []
+        },
+        "cumestatsplayergames": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "cumestatsteam": {
+          "columns": 85,
+          "exercised": 36,
+          "unexercised_columns": [
+            "GameByGameStats.jersey_num",
+            "GameByGameStats.player",
+            "GameByGameStats.person_id",
+            "GameByGameStats.team_id",
+            "GameByGameStats.gp",
+            "GameByGameStats.gs",
+            "GameByGameStats.actual_minutes",
+            "GameByGameStats.actual_seconds",
+            "GameByGameStats.fg",
+            "GameByGameStats.fga",
+            "GameByGameStats.fg_pct",
+            "GameByGameStats.fg3",
+            "GameByGameStats.fg3_a",
+            "GameByGameStats.fg3_pct",
+            "GameByGameStats.ft",
+            "GameByGameStats.fta",
+            "GameByGameStats.ft_pct",
+            "GameByGameStats.off_reb",
+            "GameByGameStats.def_reb",
+            "GameByGameStats.tot_reb",
+            "GameByGameStats.ast",
+            "GameByGameStats.pf",
+            "GameByGameStats.dq",
+            "GameByGameStats.stl",
+            "GameByGameStats.turnovers",
+            "GameByGameStats.blk",
+            "GameByGameStats.pts",
+            "GameByGameStats.max_actual_minutes",
+            "GameByGameStats.max_actual_seconds",
+            "GameByGameStats.max_reb",
+            "GameByGameStats.max_ast",
+            "GameByGameStats.max_stl",
+            "GameByGameStats.max_turnovers",
+            "GameByGameStats.max_blkp",
+            "GameByGameStats.max_pts",
+            "GameByGameStats.avg_actual_minutes",
+            "GameByGameStats.avg_actual_seconds",
+            "GameByGameStats.avg_reb",
+            "GameByGameStats.avg_ast",
+            "GameByGameStats.avg_stl",
+            "GameByGameStats.avg_turnovers",
+            "GameByGameStats.avg_blkp",
+            "GameByGameStats.avg_pts",
+            "GameByGameStats.per_min_reb",
+            "GameByGameStats.per_min_ast",
+            "GameByGameStats.per_min_stl",
+            "GameByGameStats.per_min_turnovers",
+            "GameByGameStats.per_min_blk",
+            "GameByGameStats.per_min_pts"
+          ]
+        },
+        "cumestatsteamgames": {
+          "columns": 2,
+          "exercised": 2,
+          "unexercised_columns": []
+        },
+        "draftcombinestats": {
+          "columns": 47,
+          "exercised": 23,
+          "unexercised_columns": [
+            "height_w_shoes",
+            "height_w_shoes_ft_in",
+            "body_fat_pct",
+            "bench_press",
+            "spot_fifteen_corner_left",
+            "spot_fifteen_break_left",
+            "spot_fifteen_top_key",
+            "spot_fifteen_break_right",
+            "spot_fifteen_corner_right",
+            "spot_college_break_left",
+            "spot_college_top_key",
+            "spot_college_break_right",
+            "spot_college_corner_right",
+            "spot_nba_corner_left",
+            "spot_nba_break_left",
+            "spot_nba_top_key",
+            "spot_nba_break_right",
+            "spot_nba_corner_right",
+            "off_drib_fifteen_break_left",
+            "off_drib_fifteen_top_key",
+            "off_drib_fifteen_break_right",
+            "off_drib_college_top_key",
+            "off_drib_college_break_right",
+            "on_move_fifteen"
+          ]
+        },
+        "drafthistory": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "fantasywidget": {
+          "columns": 20,
+          "exercised": 20,
+          "unexercised_columns": []
+        },
+        "franchisehistory": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "franchiseleaders": {
+          "columns": 16,
+          "exercised": 16,
+          "unexercised_columns": []
+        },
+        "franchiseleaderswrank": {
+          "columns": 47,
+          "exercised": 47,
+          "unexercised_columns": []
+        },
+        "franchiseplayers": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "gamerotation": {
+          "columns": 24,
+          "exercised": 24,
+          "unexercised_columns": []
+        },
+        "homepageleaders": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "homepagev2": {
+          "columns": 40,
+          "exercised": 40,
+          "unexercised_columns": []
+        },
+        "hustlestatsboxscore": {
+          "columns": 49,
+          "exercised": 2,
+          "unexercised_columns": [
+            "PlayerStats.game_id",
+            "PlayerStats.team_id",
+            "PlayerStats.team_abbreviation",
+            "PlayerStats.team_city",
+            "PlayerStats.player_id",
+            "PlayerStats.player_name",
+            "PlayerStats.start_position",
+            "PlayerStats.comment",
+            "PlayerStats.minutes",
+            "PlayerStats.pts",
+            "PlayerStats.contested_shots",
+            "PlayerStats.contested_shots_2_pt",
+            "PlayerStats.contested_shots_3_pt",
+            "PlayerStats.deflections",
+            "PlayerStats.charges_drawn",
+            "PlayerStats.screen_assists",
+            "PlayerStats.screen_ast_pts",
+            "PlayerStats.off_loose_balls_recovered",
+            "PlayerStats.def_loose_balls_recovered",
+            "PlayerStats.loose_balls_recovered",
+            "PlayerStats.off_boxouts",
+            "PlayerStats.def_boxouts",
+            "PlayerStats.box_out_player_team_rebs",
+            "PlayerStats.box_out_player_rebs",
+            "PlayerStats.box_outs",
+            "TeamStats.game_id",
+            "TeamStats.team_id",
+            "TeamStats.team_name",
+            "TeamStats.team_abbreviation",
+            "TeamStats.team_city",
+            "TeamStats.minutes",
+            "TeamStats.pts",
+            "TeamStats.contested_shots",
+            "TeamStats.contested_shots_2_pt",
+            "TeamStats.contested_shots_3_pt",
+            "TeamStats.deflections",
+            "TeamStats.charges_drawn",
+            "TeamStats.screen_assists",
+            "TeamStats.screen_ast_pts",
+            "TeamStats.off_loose_balls_recovered",
+            "TeamStats.def_loose_balls_recovered",
+            "TeamStats.loose_balls_recovered",
+            "TeamStats.off_boxouts",
+            "TeamStats.def_boxouts",
+            "TeamStats.box_out_player_team_rebs",
+            "TeamStats.box_out_player_rebs",
+            "TeamStats.box_outs"
+          ]
+        },
+        "infographicfanduelplayer": {
+          "columns": 33,
+          "exercised": 33,
+          "unexercised_columns": []
+        },
+        "leaderstiles": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "leaguedashlineups": {
+          "columns": 58,
+          "exercised": 58,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerbiostats": {
+          "columns": 23,
+          "exercised": 23,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerclutch": {
+          "columns": 68,
+          "exercised": 68,
+          "unexercised_columns": []
+        },
+        "leaguedashplayershotlocations": {
+          "columns": 33,
+          "exercised": 33,
+          "unexercised_columns": []
+        },
+        "leaguedashplayerstats": {
+          "columns": 67,
+          "exercised": 67,
+          "unexercised_columns": []
+        },
+        "leaguedashptdefend": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        },
+        "leaguedashteamclutch": {
+          "columns": 54,
+          "exercised": 54,
+          "unexercised_columns": []
+        },
+        "leaguedashteamshotlocations": {
+          "columns": 29,
+          "exercised": 29,
+          "unexercised_columns": []
+        },
+        "leaguedashteamstats": {
+          "columns": 54,
+          "exercised": 54,
+          "unexercised_columns": []
+        },
+        "leaguegamefinder": {
+          "columns": 28,
+          "exercised": 28,
+          "unexercised_columns": []
+        },
+        "leaguegamelog": {
+          "columns": 29,
+          "exercised": 29,
+          "unexercised_columns": []
+        },
+        "leagueleaders": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "leaguelineupviz": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "leagueplayerondetails": {
+          "columns": 59,
+          "exercised": 59,
+          "unexercised_columns": []
+        },
+        "leagueseasonmatchups": {
+          "columns": 26,
+          "exercised": 26,
+          "unexercised_columns": []
+        },
+        "leaguestandingsv3": {
+          "columns": 92,
+          "exercised": 82,
+          "unexercised_columns": [
+            "division",
+            "jan",
+            "feb",
+            "mar",
+            "apr",
+            "oct",
+            "nov",
+            "dec",
+            "clinched_post_season",
+            "neutral"
+          ]
+        },
+        "playbyplayv2": {
+          "columns": 35,
+          "exercised": 35,
+          "unexercised_columns": []
+        },
+        "playerawards": {
+          "columns": 14,
+          "exercised": 13,
+          "unexercised_columns": [
+            "month"
+          ]
+        },
+        "playercareerbycollegerollup": {
+          "columns": 96,
+          "exercised": 96,
+          "unexercised_columns": []
+        },
+        "playercareerstats": {
+          "columns": 331,
+          "exercised": 227,
+          "unexercised_columns": [
+            "SeasonTotalsCollegeSeason.player_id",
+            "SeasonTotalsCollegeSeason.season_id",
+            "SeasonTotalsCollegeSeason.league_id",
+            "SeasonTotalsCollegeSeason.organization_id",
+            "SeasonTotalsCollegeSeason.school_name",
+            "SeasonTotalsCollegeSeason.player_age",
+            "SeasonTotalsCollegeSeason.gp",
+            "SeasonTotalsCollegeSeason.gs",
+            "SeasonTotalsCollegeSeason.min",
+            "SeasonTotalsCollegeSeason.fgm",
+            "SeasonTotalsCollegeSeason.fga",
+            "SeasonTotalsCollegeSeason.fg_pct",
+            "SeasonTotalsCollegeSeason.fg3_m",
+            "SeasonTotalsCollegeSeason.fg3_a",
+            "SeasonTotalsCollegeSeason.fg3_pct",
+            "SeasonTotalsCollegeSeason.ftm",
+            "SeasonTotalsCollegeSeason.fta",
+            "SeasonTotalsCollegeSeason.ft_pct",
+            "SeasonTotalsCollegeSeason.oreb",
+            "SeasonTotalsCollegeSeason.dreb",
+            "SeasonTotalsCollegeSeason.reb",
+            "SeasonTotalsCollegeSeason.ast",
+            "SeasonTotalsCollegeSeason.stl",
+            "SeasonTotalsCollegeSeason.blk",
+            "SeasonTotalsCollegeSeason.tov",
+            "SeasonTotalsCollegeSeason.pf",
+            "SeasonTotalsCollegeSeason.pts",
+            "CareerTotalsCollegeSeason.player_id",
+            "CareerTotalsCollegeSeason.league_id",
+            "CareerTotalsCollegeSeason.organization_id",
+            "CareerTotalsCollegeSeason.gp",
+            "CareerTotalsCollegeSeason.gs",
+            "CareerTotalsCollegeSeason.min",
+            "CareerTotalsCollegeSeason.fgm",
+            "CareerTotalsCollegeSeason.fga",
+            "CareerTotalsCollegeSeason.fg_pct",
+            "CareerTotalsCollegeSeason.fg3_m",
+            "CareerTotalsCollegeSeason.fg3_a",
+            "CareerTotalsCollegeSeason.fg3_pct",
+            "CareerTotalsCollegeSeason.ftm",
+            "CareerTotalsCollegeSeason.fta",
+            "CareerTotalsCollegeSeason.ft_pct",
+            "CareerTotalsCollegeSeason.oreb",
+            "CareerTotalsCollegeSeason.dreb",
+            "CareerTotalsCollegeSeason.reb",
+            "CareerTotalsCollegeSeason.ast",
+            "CareerTotalsCollegeSeason.stl",
+            "CareerTotalsCollegeSeason.blk",
+            "CareerTotalsCollegeSeason.tov",
+            "CareerTotalsCollegeSeason.pf",
+            "CareerTotalsCollegeSeason.pts",
+            "SeasonTotalsShowcaseSeason.player_id",
+            "SeasonTotalsShowcaseSeason.season_id",
+            "SeasonTotalsShowcaseSeason.league_id",
+            "SeasonTotalsShowcaseSeason.team_id",
+            "SeasonTotalsShowcaseSeason.team_abbreviation",
+            "SeasonTotalsShowcaseSeason.player_age",
+            "SeasonTotalsShowcaseSeason.gp",
+            "SeasonTotalsShowcaseSeason.gs",
+            "SeasonTotalsShowcaseSeason.min",
+            "SeasonTotalsShowcaseSeason.fgm",
+            "SeasonTotalsShowcaseSeason.fga",
+            "SeasonTotalsShowcaseSeason.fg_pct",
+            "SeasonTotalsShowcaseSeason.fg3_m",
+            "SeasonTotalsShowcaseSeason.fg3_a",
+            "SeasonTotalsShowcaseSeason.fg3_pct",
+            "SeasonTotalsShowcaseSeason.ftm",
+            "SeasonTotalsShowcaseSeason.fta",
+            "SeasonTotalsShowcaseSeason.ft_pct",
+            "SeasonTotalsShowcaseSeason.oreb",
+            "SeasonTotalsShowcaseSeason.dreb",
+            "SeasonTotalsShowcaseSeason.reb",
+            "SeasonTotalsShowcaseSeason.ast",
+            "SeasonTotalsShowcaseSeason.stl",
+            "SeasonTotalsShowcaseSeason.blk",
+            "SeasonTotalsShowcaseSeason.tov",
+            "SeasonTotalsShowcaseSeason.pf",
+            "SeasonTotalsShowcaseSeason.pts",
+            "CareerTotalsShowcaseSeason.player_id",
+            "CareerTotalsShowcaseSeason.league_id",
+            "CareerTotalsShowcaseSeason.team_id",
+            "CareerTotalsShowcaseSeason.gp",
+            "CareerTotalsShowcaseSeason.gs",
+            "CareerTotalsShowcaseSeason.min",
+            "CareerTotalsShowcaseSeason.fgm",
+            "CareerTotalsShowcaseSeason.fga",
+            "CareerTotalsShowcaseSeason.fg_pct",
+            "CareerTotalsShowcaseSeason.fg3_m",
+            "CareerTotalsShowcaseSeason.fg3_a",
+            "CareerTotalsShowcaseSeason.fg3_pct",
+            "CareerTotalsShowcaseSeason.ftm",
+            "CareerTotalsShowcaseSeason.fta",
+            "CareerTotalsShowcaseSeason.ft_pct",
+            "CareerTotalsShowcaseSeason.oreb",
+            "CareerTotalsShowcaseSeason.dreb",
+            "CareerTotalsShowcaseSeason.reb",
+            "CareerTotalsShowcaseSeason.ast",
+            "CareerTotalsShowcaseSeason.stl",
+            "CareerTotalsShowcaseSeason.blk",
+            "CareerTotalsShowcaseSeason.tov",
+            "CareerTotalsShowcaseSeason.pf",
+            "CareerTotalsShowcaseSeason.pts",
+            "SeasonRankingsRegularSeason.rank_fg3_pct",
+            "SeasonRankingsPostSeason.rank_fg3_pct"
+          ]
+        },
+        "playercompare": {
+          "columns": 48,
+          "exercised": 48,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyclutch": {
+          "columns": 693,
+          "exercised": 693,
+          "unexercised_columns": []
+        },
+        "playerdashboardbygamesplits": {
+          "columns": 315,
+          "exercised": 315,
+          "unexercised_columns": []
+        },
+        "playerdashboardbygeneralsplits": {
+          "columns": 441,
+          "exercised": 441,
+          "unexercised_columns": []
+        },
+        "playerdashboardbylastngames": {
+          "columns": 378,
+          "exercised": 378,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyopponent": {
+          "columns": 252,
+          "exercised": 251,
+          "unexercised_columns": [
+            "DivisionPlayerDashboard.group_value"
+          ]
+        },
+        "playerdashboardbyshootingsplits": {
+          "columns": 227,
+          "exercised": 227,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyteamperformance": {
+          "columns": 258,
+          "exercised": 258,
+          "unexercised_columns": []
+        },
+        "playerdashboardbyyearoveryear": {
+          "columns": 132,
+          "exercised": 132,
+          "unexercised_columns": []
+        },
+        "playerdashptshotdefend": {
+          "columns": 10,
+          "exercised": 10,
+          "unexercised_columns": []
+        },
+        "playerestimatedmetrics": {
+          "columns": 32,
+          "exercised": 32,
+          "unexercised_columns": []
+        },
+        "playerfantasyprofile": {
+          "columns": 161,
+          "exercised": 161,
+          "unexercised_columns": []
+        },
+        "playerfantasyprofilebargraph": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "playergamelog": {
+          "columns": 27,
+          "exercised": 27,
+          "unexercised_columns": []
+        },
+        "playergamelogs": {
+          "columns": 70,
+          "exercised": 70,
+          "unexercised_columns": []
+        },
+        "playergamestreakfinder": {
+          "columns": 9,
+          "exercised": 9,
+          "unexercised_columns": []
+        },
+        "playerindex": {
+          "columns": 25,
+          "exercised": 25,
+          "unexercised_columns": []
+        },
+        "playernextngames": {
+          "columns": 13,
+          "exercised": 13,
+          "unexercised_columns": []
+        },
+        "playerprofilev2": {
+          "columns": 343,
+          "exercised": 290,
+          "unexercised_columns": [
+            "SeasonTotalsCollegeSeason.player_id",
+            "SeasonTotalsCollegeSeason.season_id",
+            "SeasonTotalsCollegeSeason.league_id",
+            "SeasonTotalsCollegeSeason.organization_id",
+            "SeasonTotalsCollegeSeason.school_name",
+            "SeasonTotalsCollegeSeason.player_age",
+            "SeasonTotalsCollegeSeason.gp",
+            "SeasonTotalsCollegeSeason.gs",
+            "SeasonTotalsCollegeSeason.min",
+            "SeasonTotalsCollegeSeason.fgm",
+            "SeasonTotalsCollegeSeason.fga",
+            "SeasonTotalsCollegeSeason.fg_pct",
+            "SeasonTotalsCollegeSeason.fg3_m",
+            "SeasonTotalsCollegeSeason.fg3_a",
+            "SeasonTotalsCollegeSeason.fg3_pct",
+            "SeasonTotalsCollegeSeason.ftm",
+            "SeasonTotalsCollegeSeason.fta",
+            "SeasonTotalsCollegeSeason.ft_pct",
+            "SeasonTotalsCollegeSeason.oreb",
+            "SeasonTotalsCollegeSeason.dreb",
+            "SeasonTotalsCollegeSeason.reb",
+            "SeasonTotalsCollegeSeason.ast",
+            "SeasonTotalsCollegeSeason.stl",
+            "SeasonTotalsCollegeSeason.blk",
+            "SeasonTotalsCollegeSeason.tov",
+            "SeasonTotalsCollegeSeason.pf",
+            "SeasonTotalsCollegeSeason.pts",
+            "CareerTotalsCollegeSeason.player_id",
+            "CareerTotalsCollegeSeason.league_id",
+            "CareerTotalsCollegeSeason.organization_id",
+            "CareerTotalsCollegeSeason.gp",
+            "CareerTotalsCollegeSeason.gs",
+            "CareerTotalsCollegeSeason.min",
+            "CareerTotalsCollegeSeason.fgm",
+            "CareerTotalsCollegeSeason.fga",
+            "CareerTotalsCollegeSeason.fg_pct",
+            "CareerTotalsCollegeSeason.fg3_m",
+            "CareerTotalsCollegeSeason.fg3_a",
+            "CareerTotalsCollegeSeason.fg3_pct",
+            "CareerTotalsCollegeSeason.ftm",
+            "CareerTotalsCollegeSeason.fta",
+            "CareerTotalsCollegeSeason.ft_pct",
+            "CareerTotalsCollegeSeason.oreb",
+            "CareerTotalsCollegeSeason.dreb",
+            "CareerTotalsCollegeSeason.reb",
+            "CareerTotalsCollegeSeason.ast",
+            "CareerTotalsCollegeSeason.stl",
+            "CareerTotalsCollegeSeason.blk",
+            "CareerTotalsCollegeSeason.tov",
+            "CareerTotalsCollegeSeason.pf",
+            "CareerTotalsCollegeSeason.pts",
+            "SeasonRankingsRegularSeason.rank_fg3_pct",
+            "SeasonRankingsPostSeason.rank_fg3_pct"
+          ]
+        },
+        "playervsplayer": {
+          "columns": 138,
+          "exercised": 138,
+          "unexercised_columns": []
+        },
+        "scheduleleaguev2": {
+          "columns": 52,
+          "exercised": 52,
+          "unexercised_columns": []
+        },
+        "scheduleleaguev2int": {
+          "columns": 52,
+          "exercised": 52,
+          "unexercised_columns": []
+        },
+        "scoreboardv2": {
+          "columns": 109,
+          "exercised": 107,
+          "unexercised_columns": [
+            "TicketLinks.game_id",
+            "TicketLinks.leag_tix"
+          ]
+        },
+        "scoreboardv3": {
+          "columns": 80,
+          "exercised": 78,
+          "unexercised_columns": [
+            "awayteam_inbonus",
+            "hometeam_inbonus"
+          ]
+        },
+        "shotchartdetail": {
+          "columns": 31,
+          "exercised": 7,
+          "unexercised_columns": [
+            "Shot_Chart_Detail.grid_type",
+            "Shot_Chart_Detail.game_id",
+            "Shot_Chart_Detail.game_event_id",
+            "Shot_Chart_Detail.player_id",
+            "Shot_Chart_Detail.player_name",
+            "Shot_Chart_Detail.team_id",
+            "Shot_Chart_Detail.team_name",
+            "Shot_Chart_Detail.period",
+            "Shot_Chart_Detail.minutes_remaining",
+            "Shot_Chart_Detail.seconds_remaining",
+            "Shot_Chart_Detail.event_type",
+            "Shot_Chart_Detail.action_type",
+            "Shot_Chart_Detail.shot_type",
+            "Shot_Chart_Detail.shot_zone_basic",
+            "Shot_Chart_Detail.shot_zone_area",
+            "Shot_Chart_Detail.shot_zone_range",
+            "Shot_Chart_Detail.shot_distance",
+            "Shot_Chart_Detail.loc_x",
+            "Shot_Chart_Detail.loc_y",
+            "Shot_Chart_Detail.shot_attempted_flag",
+            "Shot_Chart_Detail.shot_made_flag",
+            "Shot_Chart_Detail.game_date",
+            "Shot_Chart_Detail.htm",
+            "Shot_Chart_Detail.vtm"
+          ]
+        },
+        "shotchartleaguewide": {
+          "columns": 7,
+          "exercised": 7,
+          "unexercised_columns": []
+        },
+        "shotchartlineupdetail": {
+          "columns": 33,
+          "exercised": 7,
+          "unexercised_columns": [
+            "ShotChartLineupDetail.grid_type",
+            "ShotChartLineupDetail.game_id",
+            "ShotChartLineupDetail.game_event_id",
+            "ShotChartLineupDetail.group_id",
+            "ShotChartLineupDetail.group_name",
+            "ShotChartLineupDetail.player_id",
+            "ShotChartLineupDetail.player_name",
+            "ShotChartLineupDetail.team_id",
+            "ShotChartLineupDetail.team_name",
+            "ShotChartLineupDetail.period",
+            "ShotChartLineupDetail.minutes_remaining",
+            "ShotChartLineupDetail.seconds_remaining",
+            "ShotChartLineupDetail.event_type",
+            "ShotChartLineupDetail.action_type",
+            "ShotChartLineupDetail.shot_type",
+            "ShotChartLineupDetail.shot_zone_basic",
+            "ShotChartLineupDetail.shot_zone_area",
+            "ShotChartLineupDetail.shot_zone_range",
+            "ShotChartLineupDetail.shot_distance",
+            "ShotChartLineupDetail.loc_x",
+            "ShotChartLineupDetail.loc_y",
+            "ShotChartLineupDetail.shot_attempted_flag",
+            "ShotChartLineupDetail.shot_made_flag",
+            "ShotChartLineupDetail.game_date",
+            "ShotChartLineupDetail.htm",
+            "ShotChartLineupDetail.vtm"
+          ]
+        },
+        "teamdashboardbyclutch": {
+          "columns": 594,
+          "exercised": 594,
+          "unexercised_columns": []
+        },
+        "teamdashboardbygamesplits": {
+          "columns": 270,
+          "exercised": 270,
+          "unexercised_columns": []
+        },
+        "teamdashboardbygeneralsplits": {
+          "columns": 330,
+          "exercised": 330,
+          "unexercised_columns": []
+        },
+        "teamdashboardbylastngames": {
+          "columns": 324,
+          "exercised": 324,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyopponent": {
+          "columns": 216,
+          "exercised": 215,
+          "unexercised_columns": [
+            "DivisionTeamDashboard.group_value"
+          ]
+        },
+        "teamdashboardbyshootingsplits": {
+          "columns": 211,
+          "exercised": 211,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyteamperformance": {
+          "columns": 222,
+          "exercised": 222,
+          "unexercised_columns": []
+        },
+        "teamdashboardbyyearoveryear": {
+          "columns": 108,
+          "exercised": 108,
+          "unexercised_columns": []
+        },
+        "teamdashlineups": {
+          "columns": 113,
+          "exercised": 113,
+          "unexercised_columns": []
+        },
+        "teamdetails": {
+          "columns": 38,
+          "exercised": 24,
+          "unexercised_columns": [
+            "TeamBackground.arenacapacity",
+            "TeamBackground.dleagueaffiliation",
+            "TeamHistory.team_id",
+            "TeamHistory.city",
+            "TeamHistory.nickname",
+            "TeamHistory.yearfounded",
+            "TeamHistory.yearactivetill",
+            "TeamSocialSites.accounttype",
+            "TeamSocialSites.website_link",
+            "TeamAwardsConf.yearawarded",
+            "TeamAwardsConf.oppositeteam",
+            "TeamAwardsDiv.yearawarded",
+            "TeamAwardsDiv.oppositeteam",
+            "TeamHof.jersey"
+          ]
+        },
+        "teamestimatedmetrics": {
+          "columns": 30,
+          "exercised": 30,
+          "unexercised_columns": []
+        },
+        "teamgamelog": {
+          "columns": 27,
+          "exercised": 27,
+          "unexercised_columns": []
+        },
+        "teamgamelogs": {
+          "columns": 57,
+          "exercised": 57,
+          "unexercised_columns": []
+        },
+        "teaminfocommon": {
+          "columns": 28,
+          "exercised": 27,
+          "unexercised_columns": [
+            "TeamInfoCommon.team_division"
+          ]
+        },
+        "teamplayerdashboard": {
+          "columns": 121,
+          "exercised": 121,
+          "unexercised_columns": []
+        },
+        "teamplayeronoffdetails": {
+          "columns": 175,
+          "exercised": 57,
+          "unexercised_columns": [
+            "PlayersOnCourtTeamPlayerOnOffDetails.group_set",
+            "PlayersOnCourtTeamPlayerOnOffDetails.team_id",
+            "PlayersOnCourtTeamPlayerOnOffDetails.team_abbreviation",
+            "PlayersOnCourtTeamPlayerOnOffDetails.team_name",
+            "PlayersOnCourtTeamPlayerOnOffDetails.vs_player_id",
+            "PlayersOnCourtTeamPlayerOnOffDetails.vs_player_name",
+            "PlayersOnCourtTeamPlayerOnOffDetails.court_status",
+            "PlayersOnCourtTeamPlayerOnOffDetails.gp",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w",
+            "PlayersOnCourtTeamPlayerOnOffDetails.l",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.min",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fgm",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fga",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_m",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_a",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ftm",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fta",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ft_pct",
+            "PlayersOnCourtTeamPlayerOnOffDetails.oreb",
+            "PlayersOnCourtTeamPlayerOnOffDetails.dreb",
+            "PlayersOnCourtTeamPlayerOnOffDetails.reb",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ast",
+            "PlayersOnCourtTeamPlayerOnOffDetails.tov",
+            "PlayersOnCourtTeamPlayerOnOffDetails.stl",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blk",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blka",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pf",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pfd",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pts",
+            "PlayersOnCourtTeamPlayerOnOffDetails.plus_minus",
+            "PlayersOnCourtTeamPlayerOnOffDetails.gp_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.l_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.w_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.min_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fgm_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fga_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_m_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_a_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fg3_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ftm_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.fta_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ft_pct_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.oreb_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.dreb_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.reb_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.ast_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.tov_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.stl_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blk_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.blka_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pf_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pfd_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.pts_rank",
+            "PlayersOnCourtTeamPlayerOnOffDetails.plus_minus_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.group_set",
+            "PlayersOffCourtTeamPlayerOnOffDetails.team_id",
+            "PlayersOffCourtTeamPlayerOnOffDetails.team_abbreviation",
+            "PlayersOffCourtTeamPlayerOnOffDetails.team_name",
+            "PlayersOffCourtTeamPlayerOnOffDetails.vs_player_id",
+            "PlayersOffCourtTeamPlayerOnOffDetails.vs_player_name",
+            "PlayersOffCourtTeamPlayerOnOffDetails.court_status",
+            "PlayersOffCourtTeamPlayerOnOffDetails.gp",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w",
+            "PlayersOffCourtTeamPlayerOnOffDetails.l",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.min",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fgm",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fga",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_m",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_a",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ftm",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fta",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ft_pct",
+            "PlayersOffCourtTeamPlayerOnOffDetails.oreb",
+            "PlayersOffCourtTeamPlayerOnOffDetails.dreb",
+            "PlayersOffCourtTeamPlayerOnOffDetails.reb",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ast",
+            "PlayersOffCourtTeamPlayerOnOffDetails.tov",
+            "PlayersOffCourtTeamPlayerOnOffDetails.stl",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blk",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blka",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pf",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pfd",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pts",
+            "PlayersOffCourtTeamPlayerOnOffDetails.plus_minus",
+            "PlayersOffCourtTeamPlayerOnOffDetails.gp_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.l_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.w_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.min_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fgm_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fga_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_m_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_a_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fg3_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ftm_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.fta_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ft_pct_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.oreb_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.dreb_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.reb_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.ast_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.tov_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.stl_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blk_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.blka_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pf_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pfd_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.pts_rank",
+            "PlayersOffCourtTeamPlayerOnOffDetails.plus_minus_rank"
+          ]
+        },
+        "teamplayeronoffsummary": {
+          "columns": 83,
+          "exercised": 57,
+          "unexercised_columns": [
+            "PlayersOnCourtTeamPlayerOnOffSummary.group_set",
+            "PlayersOnCourtTeamPlayerOnOffSummary.team_id",
+            "PlayersOnCourtTeamPlayerOnOffSummary.team_abbreviation",
+            "PlayersOnCourtTeamPlayerOnOffSummary.team_name",
+            "PlayersOnCourtTeamPlayerOnOffSummary.vs_player_id",
+            "PlayersOnCourtTeamPlayerOnOffSummary.vs_player_name",
+            "PlayersOnCourtTeamPlayerOnOffSummary.court_status",
+            "PlayersOnCourtTeamPlayerOnOffSummary.gp",
+            "PlayersOnCourtTeamPlayerOnOffSummary.min",
+            "PlayersOnCourtTeamPlayerOnOffSummary.plus_minus",
+            "PlayersOnCourtTeamPlayerOnOffSummary.off_rating",
+            "PlayersOnCourtTeamPlayerOnOffSummary.def_rating",
+            "PlayersOnCourtTeamPlayerOnOffSummary.net_rating",
+            "PlayersOffCourtTeamPlayerOnOffSummary.group_set",
+            "PlayersOffCourtTeamPlayerOnOffSummary.team_id",
+            "PlayersOffCourtTeamPlayerOnOffSummary.team_abbreviation",
+            "PlayersOffCourtTeamPlayerOnOffSummary.team_name",
+            "PlayersOffCourtTeamPlayerOnOffSummary.vs_player_id",
+            "PlayersOffCourtTeamPlayerOnOffSummary.vs_player_name",
+            "PlayersOffCourtTeamPlayerOnOffSummary.court_status",
+            "PlayersOffCourtTeamPlayerOnOffSummary.gp",
+            "PlayersOffCourtTeamPlayerOnOffSummary.min",
+            "PlayersOffCourtTeamPlayerOnOffSummary.plus_minus",
+            "PlayersOffCourtTeamPlayerOnOffSummary.off_rating",
+            "PlayersOffCourtTeamPlayerOnOffSummary.def_rating",
+            "PlayersOffCourtTeamPlayerOnOffSummary.net_rating"
+          ]
+        },
+        "teamvsplayer": {
+          "columns": 239,
+          "exercised": 136,
+          "unexercised_columns": [
+            "OnOffCourt.group_set",
+            "OnOffCourt.team_id",
+            "OnOffCourt.team_abbreviation",
+            "OnOffCourt.team_name",
+            "OnOffCourt.vs_player_id",
+            "OnOffCourt.vs_player_name",
+            "OnOffCourt.court_status",
+            "OnOffCourt.gp",
+            "OnOffCourt.w",
+            "OnOffCourt.l",
+            "OnOffCourt.w_pct",
+            "OnOffCourt.min",
+            "OnOffCourt.fgm",
+            "OnOffCourt.fga",
+            "OnOffCourt.fg_pct",
+            "OnOffCourt.fg3_m",
+            "OnOffCourt.fg3_a",
+            "OnOffCourt.fg3_pct",
+            "OnOffCourt.ftm",
+            "OnOffCourt.fta",
+            "OnOffCourt.ft_pct",
+            "OnOffCourt.oreb",
+            "OnOffCourt.dreb",
+            "OnOffCourt.reb",
+            "OnOffCourt.ast",
+            "OnOffCourt.tov",
+            "OnOffCourt.stl",
+            "OnOffCourt.blk",
+            "OnOffCourt.blka",
+            "OnOffCourt.pf",
+            "OnOffCourt.pfd",
+            "OnOffCourt.pts",
+            "OnOffCourt.plus_minus",
+            "OnOffCourt.gp_rank",
+            "OnOffCourt.w_rank",
+            "OnOffCourt.l_rank",
+            "OnOffCourt.w_pct_rank",
+            "OnOffCourt.min_rank",
+            "OnOffCourt.fgm_rank",
+            "OnOffCourt.fga_rank",
+            "OnOffCourt.fg_pct_rank",
+            "OnOffCourt.fg3_m_rank",
+            "OnOffCourt.fg3_a_rank",
+            "OnOffCourt.fg3_pct_rank",
+            "OnOffCourt.ftm_rank",
+            "OnOffCourt.fta_rank",
+            "OnOffCourt.ft_pct_rank",
+            "OnOffCourt.oreb_rank",
+            "OnOffCourt.dreb_rank",
+            "OnOffCourt.reb_rank",
+            "OnOffCourt.ast_rank",
+            "OnOffCourt.tov_rank",
+            "OnOffCourt.stl_rank",
+            "OnOffCourt.blk_rank",
+            "OnOffCourt.blka_rank",
+            "OnOffCourt.pf_rank",
+            "OnOffCourt.pfd_rank",
+            "OnOffCourt.pts_rank",
+            "OnOffCourt.plus_minus_rank",
+            "ShotDistanceOnCourt.group_set",
+            "ShotDistanceOnCourt.team_id",
+            "ShotDistanceOnCourt.team_abbreviation",
+            "ShotDistanceOnCourt.team_name",
+            "ShotDistanceOnCourt.vs_player_id",
+            "ShotDistanceOnCourt.vs_player_name",
+            "ShotDistanceOnCourt.court_status",
+            "ShotDistanceOnCourt.group_value",
+            "ShotDistanceOnCourt.fgm",
+            "ShotDistanceOnCourt.fga",
+            "ShotDistanceOnCourt.fg_pct",
+            "ShotDistanceOffCourt.group_set",
+            "ShotDistanceOffCourt.team_id",
+            "ShotDistanceOffCourt.team_abbreviation",
+            "ShotDistanceOffCourt.team_name",
+            "ShotDistanceOffCourt.vs_player_id",
+            "ShotDistanceOffCourt.vs_player_name",
+            "ShotDistanceOffCourt.court_status",
+            "ShotDistanceOffCourt.group_value",
+            "ShotDistanceOffCourt.fgm",
+            "ShotDistanceOffCourt.fga",
+            "ShotDistanceOffCourt.fg_pct",
+            "ShotAreaOnCourt.group_set",
+            "ShotAreaOnCourt.team_id",
+            "ShotAreaOnCourt.team_abbreviation",
+            "ShotAreaOnCourt.team_name",
+            "ShotAreaOnCourt.vs_player_id",
+            "ShotAreaOnCourt.vs_player_name",
+            "ShotAreaOnCourt.court_status",
+            "ShotAreaOnCourt.group_value",
+            "ShotAreaOnCourt.fgm",
+            "ShotAreaOnCourt.fga",
+            "ShotAreaOnCourt.fg_pct",
+            "ShotAreaOffCourt.group_set",
+            "ShotAreaOffCourt.team_id",
+            "ShotAreaOffCourt.team_abbreviation",
+            "ShotAreaOffCourt.team_name",
+            "ShotAreaOffCourt.vs_player_id",
+            "ShotAreaOffCourt.vs_player_name",
+            "ShotAreaOffCourt.court_status",
+            "ShotAreaOffCourt.group_value",
+            "ShotAreaOffCourt.fgm",
+            "ShotAreaOffCourt.fga",
+            "ShotAreaOffCourt.fg_pct"
+          ]
+        },
+        "teamyearbyyearstats": {
+          "columns": 34,
+          "exercised": 33,
+          "unexercised_columns": [
+            "div_count"
+          ]
+        },
+        "videostatus": {
+          "columns": 14,
+          "exercised": 14,
+          "unexercised_columns": []
+        }
+      }
     },
     "yahoo": {
       "py_tables": 107,

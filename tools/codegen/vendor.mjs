@@ -355,6 +355,67 @@ function listYaml(dir, prefix = "") {
   return out.sort();
 }
 
+// The returns-schema shapes the JS generator and the parity harness understand
+// (sdv-py tools/codegen/spec §3.5). Anything else fails the vendor closed.
+const SCHEMA_KEYS = new Set(["schema", "kind", "columns", "frames", "description", "note", "unverified"]);
+const FRAME_KEYS = new Set(["section", "columns"]);
+const COLUMN_KEYS = new Set(["name", "type", "description"]);
+
+/**
+ * Throw unless a vendored py returns schema has a shape JS understands:
+ * `kind: dataframe` with `columns`, or `kind: frames` with `frames:
+ * [{section, columns}]` (one table per key of the parser's dict). Optional
+ * `schema` / `description` / `note`, and `unverified: <reason>`, which must
+ * publish no columns (sdv-py had no capture the parser emits rows for). Each
+ * column is `{name, type, description?}`. An unknown key anywhere fails closed:
+ * an upstream shape JS silently mis-renders is worse than a red vendor.
+ */
+// Schema texts already checked (deriveAll runs once per temp tree in the tests).
+const shapeChecked = new Set();
+
+export function checkSchemaShape(text, where) {
+  if (shapeChecked.has(text)) return;
+  const fail = (msg) => {
+    throw new Error(
+      `${where}: ${msg}. This returns-schema shape is unknown to sdv-js: teach tools/codegen/generate.mjs and ` +
+        `test/parsers/parity.test.js the new shape, then accept it in vendor.mjs checkSchemaShape`
+    );
+  };
+  const doc = parse(text);
+  if (!doc || typeof doc !== "object" || Array.isArray(doc)) fail("not a mapping");
+  const unknown = Object.keys(doc).filter((k) => !SCHEMA_KEYS.has(k));
+  if (unknown.length) fail(`unknown top-level key(s) ${unknown.join(", ")}`);
+  const columns = (list, at) => {
+    if (!Array.isArray(list)) fail(`${at}columns is not a list`);
+    for (const c of list) {
+      const extra = Object.keys(c ?? {}).filter((k) => !COLUMN_KEYS.has(k));
+      // a bare-number name (`2015`) is a YAML number; it is still a column name
+      if (extra.length || !/^(string|number)$/.test(typeof c?.name) || typeof c?.type !== "string") {
+        fail(`${at}column ${JSON.stringify(c?.name)} must be {name, type, description?}`);
+      }
+    }
+  };
+  if (doc.kind === "dataframe") {
+    if (doc.frames !== undefined) fail("kind dataframe carries frames");
+    columns(doc.columns, "");
+  } else if (doc.kind === "frames") {
+    if (doc.columns !== undefined) fail("kind frames carries top-level columns");
+    if (!Array.isArray(doc.frames) || !doc.frames.length) fail("kind frames needs a non-empty frames list");
+    for (const f of doc.frames) {
+      const extra = Object.keys(f ?? {}).filter((k) => !FRAME_KEYS.has(k));
+      if (extra.length || typeof f?.section !== "string") fail("each frame must be {section, columns}");
+      columns(f.columns, `frame ${f.section}: `);
+    }
+  } else {
+    fail(`unknown kind ${JSON.stringify(doc.kind)}`);
+  }
+  if (doc.unverified !== undefined) {
+    if (typeof doc.unverified !== "string" || !doc.unverified.trim()) fail("unverified must be a reason string");
+    if (doc.kind !== "dataframe" || doc.columns.length) fail("an unverified schema must publish no columns");
+  }
+  shapeChecked.add(text);
+}
+
 /**
  * Derive every vendored output (codegen-relative path -> content) from the
  * committed upstream copy + manifest + overlays. Offline and deterministic.
@@ -381,7 +442,9 @@ export function deriveAll(root = CODEGEN_DIR, only = null) {
     for (const ref of fam.jsRefs) jsOwned.add(`schemas/${ref}.yaml`);
     for (const ref of fam.schemaRefs) {
       for (const f of schemaFilesFor(ref, upSchemas)) {
-        out.set(`schemas/${rewriteSchema(f, cfg.schemas)}`, read(join(up, "schemas", f)));
+        const text = read(join(up, "schemas", f));
+        checkSchemaShape(text, `vendor/upstream/schemas/${f} (family ${key})`);
+        out.set(`schemas/${rewriteSchema(f, cfg.schemas)}`, text);
       }
     }
   }

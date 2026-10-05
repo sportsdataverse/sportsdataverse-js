@@ -104,17 +104,28 @@ families:
   on3:
     # src/parsers/on3.ts: faithful port of sdv-py cfb/on3_parsers.py parse_on3_rdb
     # (the 4 deprecated _next/data scrape shims are not in the YAML and not ported).
-    # py's returns tables are NOT attached (fail-closed, wholesale): they are
-    # json_normalize schemas of other captures (a nested object null there is one
-    # `character` column; populated, it flattens to <name>_*), and every real RDB
-    # capture the parser-parity harness (test/parsers/parity.test.js) checks
-    # disproves its table although JS == py cell for cell: player_profile (207
-    # columns parsed vs 47 documented, 8 documented null-object columns flattened,
-    # 4 `character` columns holding numbers/booleans), player_all_rankings
-    # (documented `change` absent), team_ranking_team_rankings (23 of 50 columns
-    # documented). Upstream follow-up: sdv-py regenerates these schemas from parser
-    # output; the pin bump that ships it flips this back, gated by the harness.
-    schema_compatible: false
+    # sdv-py #683 builds these tables from parse_on3_rdb's output on its committed
+    # real captures (30 endpoints; the other 48 are `unverified` with no columns),
+    # so they are attached; the parser-parity harness (test/parsers/parity.test.js)
+    # checks every one with a capture.
+    schema_compatible: true
+    # Parity harness, real sdv-py captures: py's parse_on3_rdb (pandas) stringifies a
+    # bool column that has a null in it ('True' / 'False', 'nan' for the null), so
+    # these tables type such columns `character`; the JS port keeps booleans (the
+    # values agree). Columns: rating_five_star_plus (commits_latest,
+    # transfers_latest), roster_rating_*_plus + status_* (organizations_roster),
+    # current_measurement_verified (people_measurements_averages),
+    # primary_position_sport_is_* (player_verified), pick_correct +
+    # player_rating_five_star_plus (recruitments_latest_rpm_picks),
+    # committed_article_is_premium (transfers_best_available, transfers_latest).
+    schema_incompatible:
+      - commits_latest
+      - organizations_roster
+      - people_measurements_averages
+      - player_verified
+      - recruitments_latest_rpm_picks
+      - transfers_best_available
+      - transfers_latest
   asa:
     # src/parsers/asa.ts: faithful port of sdv-py soccer/asa_parsers.py. The
     # multi-table goals-added parser returns py's documented default sub-frame
@@ -313,24 +324,19 @@ families:
     # src/parsers/nba_stats.ts: "Faithful port of" sdv-py's nba/nba_stats_parsers.py
     # (parse_nba_stats_result_sets: resultSets / resultSet / shot-location grouped
     # headers / scoreboardv3 / scheduleleaguev2 / boxscore *v3 / video envelopes).
-    # py's returns tables are NOT attached (fail-closed, wholesale): sdv-py builds
-    # them from the endpoint catalog (tools/codegen/gen_nba_stats.py), not from the
-    # parser. On sdv-py's real captures the parser-parity harness
-    # (test/parsers/parity.test.js) disproves 11 of the 13 tables it can check
-    # although JS == py cell for cell: catalog `fg3m` / `fg3a` / `leagueid` /
-    # `5-9_ft_fgm` vs parsed `fg3_m` / `fg3_a` / `league_id` / `5_9_ft_fgm`;
-    # PtMeasureType-dependent columns (leaguedashptstats); multi-result-set payloads
-    # parsed to {set: rows}, not the one documented frame. ~69 of the remaining
-    # tables carry the same catalog names. Upstream follow-up: sdv-py regenerates
-    # these schemas from parser output; the pin bump that ships it flips this back,
-    # gated by the harness.
-    schema_compatible: false
+    # sdv-py #683 builds these tables from that parser's output on a trimmed real
+    # capture of every endpoint (`kind: frames` = one table per result set), so
+    # they are attached; the parser-parity harness checks every one against its
+    # capture (test/parsers/parity.test.js).
+    schema_compatible: true
+    # leaguedashptstats: py documents the default PtMeasureType (SpeedDistance)
+    # columns; the 7 other real tracking captures (CatchShoot, Defense, Drives,
+    # Passing, Possessions, PullUpShot, Rebounding) return other columns, so the
+    # table does not describe the endpoint's output.
+    schema_incompatible: [leaguedashptstats]
   wnba_stats:
     # sdv-py's parse_wnba_stats_result_sets is a re-export alias of the NBA parser,
-    # so the WNBA family runs the same ported JS parser. Its py returns tables are
-    # NOT attached, for the reason given under nba_stats: the harness disproves all
-    # 8 it can check (fg3m vs fg3_m; `if_necessary` documented `character` where the
-    # WNBA capture ships booleans; multi-result-set payloads), and ~61 of the rest
-    # carry the same catalog names. Re-enabled with the upstream schema regeneration.
+    # so the WNBA family runs the same ported JS parser, and its parser-derived
+    # tables (sdv-py #683) are attached the same way.
     parsers:
-      parse_wnba_stats_result_sets: {js: parse_nba_stats_result_sets, schema_compatible: false}
+      parse_wnba_stats_result_sets: {js: parse_nba_stats_result_sets, schema_compatible: true}

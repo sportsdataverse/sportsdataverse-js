@@ -1,0 +1,6 @@
+columns:
+- description: ''
+  name: player_measurements
+  type: character
+kind: dataframe
+schema: people_measurements

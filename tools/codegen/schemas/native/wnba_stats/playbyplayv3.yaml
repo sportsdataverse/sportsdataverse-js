@@ -1,0 +1,5 @@
+columns: []
+kind: dataframe
+schema: playbyplayv3
+unverified: parse_nba_stats_result_sets emits no columns for the committed capture
+  tests/fixtures/wnba_stats/endpoints/playbyplayv3.json

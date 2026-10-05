@@ -157,6 +157,11 @@ npm run codegen                 # then regenerate as usual
   only for the verified ones recorded in `test/fixtures/py/parity_coverage.json`
   (rewrite it with `SDV_PARITY_WRITE=1 npx mocha test/parsers/parity.test.js`),
   and a column it lists as unexercised (null in every capture) is typed `unknown`.
+- A vendored returns schema must have a shape JS understands, or `npm run vendor`
+  fails (`checkSchemaShape` in `vendor.mjs`): `kind: dataframe` + `columns`,
+  `kind: frames` + `frames: [{section, columns}]` (one table per key of the parser's
+  dict; the harness checks each frame, the docs render one table per frame), or
+  `unverified: <reason>` with no columns (no table; the docs print the reason).
 - `npm run vendor` deletes (and `vendor:check` flags) only the exact py schema
   copies it wrote and no longer attaches (byte-identical to the upstream copy);
   JS-authored schemas are never touched, wherever they live. Across a pin bump,

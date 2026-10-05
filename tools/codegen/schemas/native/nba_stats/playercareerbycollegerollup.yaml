@@ -1,0 +1,299 @@
+frames:
+- columns:
+  - description: ''
+    name: region
+    type: character
+  - description: ''
+    name: seed
+    type: integer
+  - description: ''
+    name: college
+    type: character
+  - description: ''
+    name: players
+    type: integer
+  - description: ''
+    name: gp
+    type: integer
+  - description: ''
+    name: min
+    type: numeric
+  - description: ''
+    name: fgm
+    type: integer
+  - description: ''
+    name: fga
+    type: integer
+  - description: ''
+    name: fg_pct
+    type: numeric
+  - description: ''
+    name: fg3_m
+    type: integer
+  - description: ''
+    name: fg3_a
+    type: integer
+  - description: ''
+    name: fg3_pct
+    type: numeric
+  - description: ''
+    name: ftm
+    type: integer
+  - description: ''
+    name: fta
+    type: integer
+  - description: ''
+    name: ft_pct
+    type: numeric
+  - description: ''
+    name: oreb
+    type: integer
+  - description: ''
+    name: dreb
+    type: integer
+  - description: ''
+    name: reb
+    type: integer
+  - description: ''
+    name: ast
+    type: integer
+  - description: ''
+    name: stl
+    type: integer
+  - description: ''
+    name: blk
+    type: integer
+  - description: ''
+    name: tov
+    type: integer
+  - description: ''
+    name: pf
+    type: integer
+  - description: ''
+    name: pts
+    type: integer
+  section: East
+- columns:
+  - description: ''
+    name: region
+    type: character
+  - description: ''
+    name: seed
+    type: integer
+  - description: ''
+    name: college
+    type: character
+  - description: ''
+    name: players
+    type: integer
+  - description: ''
+    name: gp
+    type: integer
+  - description: ''
+    name: min
+    type: numeric
+  - description: ''
+    name: fgm
+    type: integer
+  - description: ''
+    name: fga
+    type: integer
+  - description: ''
+    name: fg_pct
+    type: numeric
+  - description: ''
+    name: fg3_m
+    type: integer
+  - description: ''
+    name: fg3_a
+    type: integer
+  - description: ''
+    name: fg3_pct
+    type: numeric
+  - description: ''
+    name: ftm
+    type: integer
+  - description: ''
+    name: fta
+    type: integer
+  - description: ''
+    name: ft_pct
+    type: numeric
+  - description: ''
+    name: oreb
+    type: integer
+  - description: ''
+    name: dreb
+    type: integer
+  - description: ''
+    name: reb
+    type: integer
+  - description: ''
+    name: ast
+    type: integer
+  - description: ''
+    name: stl
+    type: integer
+  - description: ''
+    name: blk
+    type: integer
+  - description: ''
+    name: tov
+    type: integer
+  - description: ''
+    name: pf
+    type: integer
+  - description: ''
+    name: pts
+    type: integer
+  section: South
+- columns:
+  - description: ''
+    name: region
+    type: character
+  - description: ''
+    name: seed
+    type: integer
+  - description: ''
+    name: college
+    type: character
+  - description: ''
+    name: players
+    type: integer
+  - description: ''
+    name: gp
+    type: integer
+  - description: ''
+    name: min
+    type: numeric
+  - description: ''
+    name: fgm
+    type: integer
+  - description: ''
+    name: fga
+    type: integer
+  - description: ''
+    name: fg_pct
+    type: numeric
+  - description: ''
+    name: fg3_m
+    type: integer
+  - description: ''
+    name: fg3_a
+    type: integer
+  - description: ''
+    name: fg3_pct
+    type: numeric
+  - description: ''
+    name: ftm
+    type: integer
+  - description: ''
+    name: fta
+    type: integer
+  - description: ''
+    name: ft_pct
+    type: numeric
+  - description: ''
+    name: oreb
+    type: integer
+  - description: ''
+    name: dreb
+    type: integer
+  - description: ''
+    name: reb
+    type: integer
+  - description: ''
+    name: ast
+    type: integer
+  - description: ''
+    name: stl
+    type: integer
+  - description: ''
+    name: blk
+    type: integer
+  - description: ''
+    name: tov
+    type: integer
+  - description: ''
+    name: pf
+    type: integer
+  - description: ''
+    name: pts
+    type: integer
+  section: Midwest
+- columns:
+  - description: ''
+    name: region
+    type: character
+  - description: ''
+    name: seed
+    type: integer
+  - description: ''
+    name: college
+    type: character
+  - description: ''
+    name: players
+    type: integer
+  - description: ''
+    name: gp
+    type: integer
+  - description: ''
+    name: min
+    type: numeric
+  - description: ''
+    name: fgm
+    type: integer
+  - description: ''
+    name: fga
+    type: integer
+  - description: ''
+    name: fg_pct
+    type: numeric
+  - description: ''
+    name: fg3_m
+    type: integer
+  - description: ''
+    name: fg3_a
+    type: integer
+  - description: ''
+    name: fg3_pct
+    type: numeric
+  - description: ''
+    name: ftm
+    type: integer
+  - description: ''
+    name: fta
+    type: integer
+  - description: ''
+    name: ft_pct
+    type: numeric
+  - description: ''
+    name: oreb
+    type: integer
+  - description: ''
+    name: dreb
+    type: integer
+  - description: ''
+    name: reb
+    type: integer
+  - description: ''
+    name: ast
+    type: integer
+  - description: ''
+    name: stl
+    type: integer
+  - description: ''
+    name: blk
+    type: integer
+  - description: ''
+    name: tov
+    type: integer
+  - description: ''
+    name: pf
+    type: integer
+  - description: ''
+    name: pts
+    type: integer
+  section: West
+kind: frames
+schema: playercareerbycollegerollup

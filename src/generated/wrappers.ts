@@ -21630,7 +21630,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/coaches_history"
   },
   {
     "short": "coaches_profile",
@@ -21645,7 +21646,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/coaches_profile"
   },
   {
     "short": "collective_groups",
@@ -21677,7 +21679,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/collective_groups"
   },
   {
     "short": "collective_groups_deals",
@@ -21701,7 +21704,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/collective_groups_deals"
   },
   {
     "short": "collective_groups_key",
@@ -21716,7 +21720,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/collective_groups_key"
   },
   {
     "short": "commits_latest",
@@ -21755,7 +21760,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/commits_organizations_latest_commits"
   },
   {
     "short": "commits_organizations_org_key",
@@ -21770,7 +21776,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/commits_organizations_org_key"
   },
   {
     "short": "draft_organization_rank",
@@ -21798,7 +21805,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/draft_organization_rank"
   },
   {
     "short": "draft_pick_organization_rank",
@@ -21826,7 +21834,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/draft_pick_organization_rank"
   },
   {
     "short": "drafts",
@@ -21850,7 +21859,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts"
   },
   {
     "short": "drafts_by_stars",
@@ -21874,7 +21884,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "yearSpan"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts_by_stars"
   },
   {
     "short": "drafts_by_stars_summary",
@@ -21894,7 +21905,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts_by_stars_summary"
   },
   {
     "short": "drafts_players",
@@ -21914,7 +21926,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/drafts_players"
   },
   {
     "short": "filters_conferences",
@@ -21934,7 +21947,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportKey"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_conferences"
   },
   {
     "short": "filters_draft_rounds",
@@ -21954,7 +21968,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportKey"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_draft_rounds"
   },
   {
     "short": "filters_positions",
@@ -21974,7 +21989,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "positionType"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_positions"
   },
   {
     "short": "filters_sports",
@@ -21985,7 +22001,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/filters/sports",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_sports"
   },
   {
     "short": "filters_status",
@@ -21996,7 +22013,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/filters/status",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_status"
   },
   {
     "short": "filters_teams",
@@ -22020,7 +22038,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sportKey"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_teams"
   },
   {
     "short": "filters_years",
@@ -22031,7 +22050,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "path": "/filters/years",
     "pathParams": [],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/filters_years"
   },
   {
     "short": "nil_100",
@@ -22047,7 +22067,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_100"
   },
   {
     "short": "nil_100_v2",
@@ -22075,7 +22096,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "page"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_100_v2"
   },
   {
     "short": "nil_compliances_state",
@@ -22091,7 +22113,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "stateKey"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_compliances_state"
   },
   {
     "short": "nil_rankings",
@@ -22127,7 +22150,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "stateAbbr"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/nil_rankings"
   },
   {
     "short": "organizations_draft_class_by_state",
@@ -22151,7 +22175,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_class_by_state"
   },
   {
     "short": "organizations_draft_class_by_year",
@@ -22175,7 +22200,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_class_by_year"
   },
   {
     "short": "organizations_draft_count_by_stars",
@@ -22190,7 +22216,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_count_by_stars"
   },
   {
     "short": "organizations_draft_count_by_year",
@@ -22214,7 +22241,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_count_by_year"
   },
   {
     "short": "organizations_draft_ranking_summary",
@@ -22234,7 +22262,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_draft_ranking_summary"
   },
   {
     "short": "organizations_drafted_players",
@@ -22258,7 +22287,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_drafted_players"
   },
   {
     "short": "organizations_drafts_by_stars_summary",
@@ -22278,7 +22308,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_drafts_by_stars_summary"
   },
   {
     "short": "organizations_roster",
@@ -22334,7 +22365,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "year"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/organizations_roster_header"
   },
   {
     "short": "people_combine_measurements",
@@ -22349,7 +22381,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_combine_measurements"
   },
   {
     "short": "people_latest_valuation",
@@ -22364,7 +22397,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_latest_valuation"
   },
   {
     "short": "people_measurements",
@@ -22379,7 +22413,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_measurements"
   },
   {
     "short": "people_measurements_averages",
@@ -22427,7 +22462,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_person_connections"
   },
   {
     "short": "people_social",
@@ -22442,7 +22478,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_social"
   },
   {
     "short": "people_social_post_summary",
@@ -22457,7 +22494,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_social_post_summary"
   },
   {
     "short": "people_track_and_field_measurements",
@@ -22472,7 +22510,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_track_and_field_measurements"
   },
   {
     "short": "people_valuation_growth",
@@ -22487,7 +22526,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/people_valuation_growth"
   },
   {
     "short": "person_connections_connection_key",
@@ -22502,7 +22542,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_connections_connection_key"
   },
   {
     "short": "person_primary_recruitment_evaluation",
@@ -22517,7 +22558,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_primary_recruitment_evaluation"
   },
   {
     "short": "person_recruitment_evaluations",
@@ -22532,7 +22574,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_recruitment_evaluations"
   },
   {
     "short": "person_sport_profile_recruit",
@@ -22547,7 +22590,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_sport_profile_recruit"
   },
   {
     "short": "person_sport_rankings",
@@ -22575,7 +22619,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/person_sport_rankings"
   },
   {
     "short": "player_all_rankings",
@@ -22590,7 +22635,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_all_rankings"
   },
   {
     "short": "player_database_updates",
@@ -22605,7 +22651,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_database_updates"
   },
   {
     "short": "player_images",
@@ -22620,7 +22667,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_images"
   },
   {
     "short": "player_organizations",
@@ -22635,7 +22683,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_organizations"
   },
   {
     "short": "player_organizations_org_key",
@@ -22653,7 +22702,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_organizations_org_key"
   },
   {
     "short": "player_person_rankings",
@@ -22668,7 +22718,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_person_rankings"
   },
   {
     "short": "player_profile",
@@ -22683,7 +22734,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_profile"
   },
   {
     "short": "player_team_targets",
@@ -22698,7 +22750,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_team_targets"
   },
   {
     "short": "player_verified",
@@ -22737,7 +22790,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_videos"
   },
   {
     "short": "player_visit_center",
@@ -22752,7 +22806,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/player_visit_center"
   },
   {
     "short": "players_industry_comparision",
@@ -22788,7 +22843,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "sortByIndustry"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/players_industry_comparision"
   },
   {
     "short": "players_industry_comparision_list",
@@ -22816,7 +22872,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/players_industry_comparision_list"
   },
   {
     "short": "predictions_user_key",
@@ -22840,7 +22897,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/predictions_user_key"
   },
   {
     "short": "quotes",
@@ -22860,7 +22918,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/quotes"
   },
   {
     "short": "quotes_key",
@@ -22875,7 +22934,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/quotes_key"
   },
   {
     "short": "recruitment_primary_recruitment_evaluation",
@@ -22890,7 +22950,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitment_primary_recruitment_evaluation"
   },
   {
     "short": "recruitment_recruitment_evaluations",
@@ -22905,7 +22966,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitment_recruitment_evaluations"
   },
   {
     "short": "recruitments_latest_rpm_picks",
@@ -22948,7 +23010,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_profile"
   },
   {
     "short": "recruitments_rpm_picks",
@@ -22963,7 +23026,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_rpm_picks"
   },
   {
     "short": "recruitments_rpm_summary",
@@ -22978,7 +23042,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/recruitments_rpm_summary"
   },
   {
     "short": "team_ranking",
@@ -23006,7 +23071,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "queryKey": "pageSize"
       }
     ],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking"
   },
   {
     "short": "team_ranking_bluechips_team_rankings",
@@ -23024,7 +23090,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_bluechips_team_rankings"
   },
   {
     "short": "team_ranking_consensus_team_rankings",
@@ -23042,7 +23109,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_consensus_team_rankings"
   },
   {
     "short": "team_ranking_organizations_summary",
@@ -23057,7 +23125,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_organizations_summary"
   },
   {
     "short": "team_ranking_team_rankings",
@@ -23075,7 +23144,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/team_ranking_team_rankings"
   },
   {
     "short": "transfers_best_available",
@@ -23170,7 +23240,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "queryParams": [],
-    "parser": "parse_on3_rdb"
+    "parser": "parse_on3_rdb",
+    "returnsSchema": "native/on3/videos_video_key"
   },
   {
     "short": "games",
@@ -24272,7 +24343,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/alltimeleadersgrids"
   },
   {
     "short": "assistleaders",
@@ -24309,7 +24381,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/assistleaders"
   },
   {
     "short": "assisttracker",
@@ -24461,7 +24534,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/assisttracker"
   },
   {
     "short": "boxscoreadvancedv3",
@@ -24503,7 +24577,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoreadvancedv3"
   },
   {
     "short": "boxscoredefensivev2",
@@ -24520,7 +24595,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoredefensivev2"
   },
   {
     "short": "boxscorefourfactorsv3",
@@ -24562,7 +24638,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorefourfactorsv3"
   },
   {
     "short": "boxscorehustlev2",
@@ -24579,7 +24656,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0022200021"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorehustlev2"
   },
   {
     "short": "boxscorematchupsv3",
@@ -24596,7 +24674,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorematchupsv3"
   },
   {
     "short": "boxscoremiscv3",
@@ -24638,7 +24717,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoremiscv3"
   },
   {
     "short": "boxscoreplayertrackv3",
@@ -24655,7 +24735,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoreplayertrackv3"
   },
   {
     "short": "boxscorescoringv3",
@@ -24697,7 +24778,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscorescoringv3"
   },
   {
     "short": "boxscoresummaryv2",
@@ -24714,7 +24796,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoresummaryv2"
   },
   {
     "short": "boxscoresummaryv3",
@@ -24731,7 +24814,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoresummaryv3"
   },
   {
     "short": "boxscoretraditionalv2",
@@ -24773,7 +24857,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoretraditionalv2"
   },
   {
     "short": "boxscoretraditionalv3",
@@ -24815,7 +24900,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoretraditionalv3"
   },
   {
     "short": "boxscoreusagev3",
@@ -24857,7 +24943,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/boxscoreusagev3"
   },
   {
     "short": "commonallplayers",
@@ -24884,7 +24971,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonallplayers"
   },
   {
     "short": "commonplayerinfo",
@@ -24906,7 +24994,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonplayerinfo"
   },
   {
     "short": "commonplayoffseries",
@@ -24933,7 +25022,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonplayoffseries"
   },
   {
     "short": "commonteamroster",
@@ -24960,7 +25050,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661317"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonteamroster"
   },
   {
     "short": "commonteamyears",
@@ -24977,7 +25068,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "00"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/commonteamyears"
   },
   {
     "short": "cumestatsplayer",
@@ -25014,7 +25106,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsplayer"
   },
   {
     "short": "cumestatsplayergames",
@@ -25071,7 +25164,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsplayergames"
   },
   {
     "short": "cumestatsteam",
@@ -25108,7 +25202,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661317"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsteam"
   },
   {
     "short": "cumestatsteamgames",
@@ -25170,7 +25265,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/cumestatsteamgames"
   },
   {
     "short": "draftcombinedrillresults",
@@ -25192,7 +25288,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinedrillresults"
   },
   {
     "short": "draftcombinenonstationaryshooting",
@@ -25214,7 +25311,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinenonstationaryshooting"
   },
   {
     "short": "draftcombineplayeranthro",
@@ -25236,7 +25334,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombineplayeranthro"
   },
   {
     "short": "draftcombinespotshooting",
@@ -25258,7 +25357,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinespotshooting"
   },
   {
     "short": "draftcombinestats",
@@ -25280,7 +25380,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/draftcombinestats"
   },
   {
     "short": "drafthistory",
@@ -25332,7 +25433,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/drafthistory"
   },
   {
     "short": "fantasywidget",
@@ -25439,7 +25541,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/fantasywidget"
   },
   {
     "short": "franchisehistory",
@@ -25456,7 +25559,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "00"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchisehistory"
   },
   {
     "short": "franchiseleaders",
@@ -25478,7 +25582,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661324"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchiseleaders"
   },
   {
     "short": "franchiseleaderswrank",
@@ -25510,7 +25615,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661324"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchiseleaderswrank"
   },
   {
     "short": "franchiseplayers",
@@ -25542,7 +25648,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661319"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/franchiseplayers"
   },
   {
     "short": "gamerotation",
@@ -25564,7 +25671,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "00"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/gamerotation"
   },
   {
     "short": "homepageleaders",
@@ -25611,7 +25719,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Points"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/homepageleaders"
   },
   {
     "short": "homepagev2",
@@ -25658,7 +25767,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Traditional"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/homepagev2"
   },
   {
     "short": "hustlestatsboxscore",
@@ -25675,7 +25785,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0022200021"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/hustlestatsboxscore"
   },
   {
     "short": "infographicfanduelplayer",
@@ -25692,7 +25803,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/infographicfanduelplayer"
   },
   {
     "short": "leaderstiles",
@@ -25739,7 +25851,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "PTS"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaderstiles"
   },
   {
     "short": "leaguedashlineups",
@@ -25881,7 +25994,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashlineups"
   },
   {
     "short": "leaguedashoppptshot",
@@ -26023,7 +26137,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashoppptshot"
   },
   {
     "short": "leaguedashplayerbiostats",
@@ -26190,7 +26305,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerbiostats"
   },
   {
     "short": "leaguedashplayerclutch",
@@ -26392,7 +26508,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerclutch"
   },
   {
     "short": "leaguedashplayerptshot",
@@ -26579,7 +26696,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerptshot"
   },
   {
     "short": "leaguedashplayershotlocations",
@@ -26771,7 +26889,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayershotlocations"
   },
   {
     "short": "leaguedashplayerstats",
@@ -26963,7 +27082,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashplayerstats"
   },
   {
     "short": "leaguedashptdefend",
@@ -27130,7 +27250,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashptdefend"
   },
   {
     "short": "leaguedashptstats",
@@ -27409,7 +27530,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashptteamdefend"
   },
   {
     "short": "leaguedashteamclutch",
@@ -27581,7 +27703,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamclutch"
   },
   {
     "short": "leaguedashteamptshot",
@@ -27723,7 +27846,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamptshot"
   },
   {
     "short": "leaguedashteamshotlocations",
@@ -27885,7 +28009,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamshotlocations"
   },
   {
     "short": "leaguedashteamstats",
@@ -28047,7 +28172,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguedashteamstats"
   },
   {
     "short": "leaguegamefinder",
@@ -28499,7 +28625,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguegamefinder"
   },
   {
     "short": "leaguegamelog",
@@ -28556,7 +28683,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "DATE"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguegamelog"
   },
   {
     "short": "leaguehustlestatsplayer",
@@ -28693,7 +28821,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguehustlestatsplayer"
   },
   {
     "short": "leaguehustlestatsteam",
@@ -28830,7 +28959,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguehustlestatsteam"
   },
   {
     "short": "leagueleaders",
@@ -28877,7 +29007,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "PTS"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leagueleaders"
   },
   {
     "short": "leaguelineupviz",
@@ -29024,7 +29155,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguelineupviz"
   },
   {
     "short": "leagueplayerondetails",
@@ -29141,7 +29273,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leagueplayerondetails"
   },
   {
     "short": "leagueseasonmatchups",
@@ -29193,7 +29326,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leagueseasonmatchups"
   },
   {
     "short": "leaguestandings",
@@ -29225,7 +29359,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguestandings"
   },
   {
     "short": "leaguestandingsv3",
@@ -29257,7 +29392,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/leaguestandingsv3"
   },
   {
     "short": "matchupsrollup",
@@ -29309,7 +29445,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/matchupsrollup"
   },
   {
     "short": "playbyplayv3",
@@ -29336,7 +29473,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playbyplayv3"
   },
   {
     "short": "playerawards",
@@ -29353,7 +29491,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerawards"
   },
   {
     "short": "playercareerbycollegerollup",
@@ -29385,7 +29524,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playercareerbycollegerollup"
   },
   {
     "short": "playercareerstats",
@@ -29412,7 +29552,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playercareerstats"
   },
   {
     "short": "playercompare",
@@ -29549,7 +29690,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playercompare"
   },
   {
     "short": "playerdashboardbyclutch",
@@ -29676,7 +29818,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyclutch"
   },
   {
     "short": "playerdashboardbygamesplits",
@@ -29803,7 +29946,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbygamesplits"
   },
   {
     "short": "playerdashboardbygeneralsplits",
@@ -29930,7 +30074,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbygeneralsplits"
   },
   {
     "short": "playerdashboardbylastngames",
@@ -30057,7 +30202,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbylastngames"
   },
   {
     "short": "playerdashboardbyopponent",
@@ -30184,7 +30330,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyopponent"
   },
   {
     "short": "playerdashboardbyshootingsplits",
@@ -30311,7 +30458,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyshootingsplits"
   },
   {
     "short": "playerdashboardbyteamperformance",
@@ -30438,7 +30586,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyteamperformance"
   },
   {
     "short": "playerdashboardbyyearoveryear",
@@ -30565,7 +30714,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashboardbyyearoveryear"
   },
   {
     "short": "playerdashptpass",
@@ -30657,7 +30807,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptpass"
   },
   {
     "short": "playerdashptreb",
@@ -30759,7 +30910,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptreb"
   },
   {
     "short": "playerdashptshotdefend",
@@ -30861,7 +31013,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptshotdefend"
   },
   {
     "short": "playerdashptshots",
@@ -30963,7 +31116,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerdashptshots"
   },
   {
     "short": "playerestimatedmetrics",
@@ -30990,7 +31144,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerestimatedmetrics"
   },
   {
     "short": "playerfantasyprofile",
@@ -31047,7 +31202,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerfantasyprofile"
   },
   {
     "short": "playerfantasyprofilebargraph",
@@ -31079,7 +31235,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerfantasyprofilebargraph"
   },
   {
     "short": "playergamelog",
@@ -31121,7 +31278,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playergamelog"
   },
   {
     "short": "playergamelogs",
@@ -31238,7 +31396,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playergamelogs"
   },
   {
     "short": "playergamestreakfinder",
@@ -31695,7 +31854,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playergamestreakfinder"
   },
   {
     "short": "playerindex",
@@ -31772,7 +31932,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerindex"
   },
   {
     "short": "playerprofilev2",
@@ -31799,7 +31960,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playerprofilev2"
   },
   {
     "short": "playervsplayer",
@@ -31921,7 +32083,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1629488"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playervsplayer"
   },
   {
     "short": "playoffpicture",
@@ -31943,7 +32106,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "22022"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/playoffpicture"
   },
   {
     "short": "scheduleleaguev2",
@@ -31965,7 +32129,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scheduleleaguev2"
   },
   {
     "short": "scheduleleaguev2int",
@@ -31987,7 +32152,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scheduleleaguev2int"
   },
   {
     "short": "scoreboardv2",
@@ -32014,7 +32180,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "00"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scoreboardv2"
   },
   {
     "short": "scoreboardv3",
@@ -32036,7 +32203,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "00"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/scoreboardv3"
   },
   {
     "short": "shotchartdetail",
@@ -32203,7 +32371,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/shotchartdetail"
   },
   {
     "short": "shotchartleaguewide",
@@ -32225,7 +32394,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/shotchartleaguewide"
   },
   {
     "short": "shotchartlineupdetail",
@@ -32337,7 +32507,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/shotchartlineupdetail"
   },
   {
     "short": "synergyplaytypes",
@@ -32384,7 +32555,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Offensive"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/synergyplaytypes"
   },
   {
     "short": "teamdashboardbyclutch",
@@ -32511,7 +32683,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyclutch"
   },
   {
     "short": "teamdashboardbygamesplits",
@@ -32638,7 +32811,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbygamesplits"
   },
   {
     "short": "teamdashboardbygeneralsplits",
@@ -32765,7 +32939,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbygeneralsplits"
   },
   {
     "short": "teamdashboardbylastngames",
@@ -32892,7 +33067,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbylastngames"
   },
   {
     "short": "teamdashboardbyopponent",
@@ -33019,7 +33195,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyopponent"
   },
   {
     "short": "teamdashboardbyshootingsplits",
@@ -33146,7 +33323,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyshootingsplits"
   },
   {
     "short": "teamdashboardbyteamperformance",
@@ -33273,7 +33451,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyteamperformance"
   },
   {
     "short": "teamdashboardbyyearoveryear",
@@ -33400,7 +33579,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashboardbyyearoveryear"
   },
   {
     "short": "teamdashlineups",
@@ -33537,7 +33717,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashlineups"
   },
   {
     "short": "teamdashptpass",
@@ -33624,7 +33805,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashptpass"
   },
   {
     "short": "teamdashptreb",
@@ -33721,7 +33903,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashptreb"
   },
   {
     "short": "teamdashptshots",
@@ -33818,7 +34001,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdashptshots"
   },
   {
     "short": "teamdetails",
@@ -33835,7 +34019,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamdetails"
   },
   {
     "short": "teamestimatedmetrics",
@@ -33862,7 +34047,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamestimatedmetrics"
   },
   {
     "short": "teamgamelog",
@@ -33904,7 +34090,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamgamelog"
   },
   {
     "short": "teamgamelogs",
@@ -34021,7 +34208,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamgamelogs"
   },
   {
     "short": "teaminfocommon",
@@ -34053,7 +34241,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teaminfocommon"
   },
   {
     "short": "teamplayerdashboard",
@@ -34180,7 +34369,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamplayerdashboard"
   },
   {
     "short": "teamplayeronoffdetails",
@@ -34297,7 +34487,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamplayeronoffdetails"
   },
   {
     "short": "teamplayeronoffsummary",
@@ -34414,7 +34605,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamplayeronoffsummary"
   },
   {
     "short": "teamvsplayer",
@@ -34541,7 +34733,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamvsplayer"
   },
   {
     "short": "teamyearbyyearstats",
@@ -34573,7 +34766,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/teamyearbyyearstats"
   },
   {
     "short": "videodetailsasset",
@@ -34735,7 +34929,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videodetailsasset"
   },
   {
     "short": "videoevents",
@@ -34757,7 +34952,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200075"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videoevents"
   },
   {
     "short": "videoeventsasset",
@@ -34779,7 +34975,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": 21700807
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videoeventsasset"
   },
   {
     "short": "videostatus",
@@ -34801,7 +34998,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "00"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/nba_stats/videostatus"
   },
   {
     "short": "alltimeleadersgrids",
@@ -34833,7 +35031,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/alltimeleadersgrids"
   },
   {
     "short": "assistleaders",
@@ -34870,7 +35069,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/assistleaders"
   },
   {
     "short": "assisttracker",
@@ -35022,7 +35222,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/assisttracker"
   },
   {
     "short": "boxscoreadvancedv2",
@@ -35064,7 +35265,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreadvancedv2"
   },
   {
     "short": "boxscoreadvancedv3",
@@ -35106,7 +35308,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreadvancedv3"
   },
   {
     "short": "boxscoredefensivev2",
@@ -35123,7 +35326,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoredefensivev2"
   },
   {
     "short": "boxscorefourfactorsv2",
@@ -35165,7 +35369,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorefourfactorsv2"
   },
   {
     "short": "boxscorefourfactorsv3",
@@ -35207,7 +35412,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorefourfactorsv3"
   },
   {
     "short": "boxscorehustlev2",
@@ -35224,7 +35430,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0022200021"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorehustlev2"
   },
   {
     "short": "boxscorematchupsv3",
@@ -35241,7 +35448,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorematchupsv3"
   },
   {
     "short": "boxscoremiscv2",
@@ -35283,7 +35491,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoremiscv2"
   },
   {
     "short": "boxscoremiscv3",
@@ -35325,7 +35534,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoremiscv3"
   },
   {
     "short": "boxscoreplayertrackv3",
@@ -35342,7 +35552,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreplayertrackv3"
   },
   {
     "short": "boxscorescoringv2",
@@ -35384,7 +35595,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorescoringv2"
   },
   {
     "short": "boxscorescoringv3",
@@ -35426,7 +35638,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscorescoringv3"
   },
   {
     "short": "boxscoresummaryv2",
@@ -35443,7 +35656,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoresummaryv2"
   },
   {
     "short": "boxscoresummaryv3",
@@ -35460,7 +35674,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoresummaryv3"
   },
   {
     "short": "boxscoretraditionalv2",
@@ -35502,7 +35717,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoretraditionalv2"
   },
   {
     "short": "boxscoretraditionalv3",
@@ -35544,7 +35760,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoretraditionalv3"
   },
   {
     "short": "boxscoreusagev2",
@@ -35586,7 +35803,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreusagev2"
   },
   {
     "short": "boxscoreusagev3",
@@ -35628,7 +35846,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/boxscoreusagev3"
   },
   {
     "short": "commonallplayers",
@@ -35655,7 +35874,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonallplayers"
   },
   {
     "short": "commonplayerinfo",
@@ -35677,7 +35897,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonplayerinfo"
   },
   {
     "short": "commonplayoffseries",
@@ -35704,7 +35925,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonplayoffseries"
   },
   {
     "short": "commonteamroster",
@@ -35731,7 +35953,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661317"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonteamroster"
   },
   {
     "short": "commonteamyears",
@@ -35748,7 +35971,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/commonteamyears"
   },
   {
     "short": "cumestatsplayer",
@@ -35785,7 +36009,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsplayer"
   },
   {
     "short": "cumestatsplayergames",
@@ -35842,7 +36067,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsplayergames"
   },
   {
     "short": "cumestatsteam",
@@ -35879,7 +36105,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661317"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsteam"
   },
   {
     "short": "cumestatsteamgames",
@@ -35941,7 +36168,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/cumestatsteamgames"
   },
   {
     "short": "draftcombinestats",
@@ -35963,7 +36191,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/draftcombinestats"
   },
   {
     "short": "drafthistory",
@@ -36015,7 +36244,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/drafthistory"
   },
   {
     "short": "fantasywidget",
@@ -36122,7 +36352,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/fantasywidget"
   },
   {
     "short": "franchisehistory",
@@ -36139,7 +36370,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchisehistory"
   },
   {
     "short": "franchiseleaders",
@@ -36161,7 +36393,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661324"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchiseleaders"
   },
   {
     "short": "franchiseleaderswrank",
@@ -36193,7 +36426,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661324"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchiseleaderswrank"
   },
   {
     "short": "franchiseplayers",
@@ -36225,7 +36459,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661319"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/franchiseplayers"
   },
   {
     "short": "gamerotation",
@@ -36247,7 +36482,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/gamerotation"
   },
   {
     "short": "homepageleaders",
@@ -36294,7 +36530,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Points"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/homepageleaders"
   },
   {
     "short": "homepagev2",
@@ -36341,7 +36578,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Traditional"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/homepagev2"
   },
   {
     "short": "hustlestatsboxscore",
@@ -36358,7 +36596,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0022200021"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/hustlestatsboxscore"
   },
   {
     "short": "infographicfanduelplayer",
@@ -36375,7 +36614,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1022200034"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/infographicfanduelplayer"
   },
   {
     "short": "leaderstiles",
@@ -36422,7 +36662,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "PTS"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaderstiles"
   },
   {
     "short": "leaguedashlineups",
@@ -36564,7 +36805,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashlineups"
   },
   {
     "short": "leaguedashplayerbiostats",
@@ -36731,7 +36973,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayerbiostats"
   },
   {
     "short": "leaguedashplayerclutch",
@@ -36933,7 +37176,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayerclutch"
   },
   {
     "short": "leaguedashplayershotlocations",
@@ -37125,7 +37369,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayershotlocations"
   },
   {
     "short": "leaguedashplayerstats",
@@ -37317,7 +37562,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashplayerstats"
   },
   {
     "short": "leaguedashptdefend",
@@ -37484,7 +37730,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashptdefend"
   },
   {
     "short": "leaguedashteamclutch",
@@ -37656,7 +37903,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashteamclutch"
   },
   {
     "short": "leaguedashteamshotlocations",
@@ -37818,7 +38066,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashteamshotlocations"
   },
   {
     "short": "leaguedashteamstats",
@@ -37980,7 +38229,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguedashteamstats"
   },
   {
     "short": "leaguegamefinder",
@@ -38432,7 +38682,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguegamefinder"
   },
   {
     "short": "leaguegamelog",
@@ -38489,7 +38740,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "DATE"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguegamelog"
   },
   {
     "short": "leagueleaders",
@@ -38536,7 +38788,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "PTS"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leagueleaders"
   },
   {
     "short": "leaguelineupviz",
@@ -38683,7 +38936,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguelineupviz"
   },
   {
     "short": "leagueplayerondetails",
@@ -38800,7 +39054,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leagueplayerondetails"
   },
   {
     "short": "leagueseasonmatchups",
@@ -38852,7 +39107,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leagueseasonmatchups"
   },
   {
     "short": "leaguestandingsv3",
@@ -38884,7 +39140,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/leaguestandingsv3"
   },
   {
     "short": "playbyplayv2",
@@ -38911,7 +39168,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playbyplayv2"
   },
   {
     "short": "playbyplayv3",
@@ -38938,7 +39196,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "0"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playbyplayv3"
   },
   {
     "short": "playerawards",
@@ -38955,7 +39214,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerawards"
   },
   {
     "short": "playercareerbycollegerollup",
@@ -38987,7 +39247,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playercareerbycollegerollup"
   },
   {
     "short": "playercareerstats",
@@ -39014,7 +39275,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playercareerstats"
   },
   {
     "short": "playercompare",
@@ -39151,7 +39413,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playercompare"
   },
   {
     "short": "playerdashboardbyclutch",
@@ -39278,7 +39541,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyclutch"
   },
   {
     "short": "playerdashboardbygamesplits",
@@ -39405,7 +39669,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbygamesplits"
   },
   {
     "short": "playerdashboardbygeneralsplits",
@@ -39532,7 +39797,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbygeneralsplits"
   },
   {
     "short": "playerdashboardbylastngames",
@@ -39659,7 +39925,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbylastngames"
   },
   {
     "short": "playerdashboardbyopponent",
@@ -39786,7 +40053,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyopponent"
   },
   {
     "short": "playerdashboardbyshootingsplits",
@@ -39913,7 +40181,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyshootingsplits"
   },
   {
     "short": "playerdashboardbyteamperformance",
@@ -40040,7 +40309,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyteamperformance"
   },
   {
     "short": "playerdashboardbyyearoveryear",
@@ -40167,7 +40437,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashboardbyyearoveryear"
   },
   {
     "short": "playerdashptshotdefend",
@@ -40269,7 +40540,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerdashptshotdefend"
   },
   {
     "short": "playerestimatedmetrics",
@@ -40296,7 +40568,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerestimatedmetrics"
   },
   {
     "short": "playerfantasyprofile",
@@ -40353,7 +40626,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerfantasyprofile"
   },
   {
     "short": "playerfantasyprofilebargraph",
@@ -40385,7 +40659,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerfantasyprofilebargraph"
   },
   {
     "short": "playergamelog",
@@ -40427,7 +40702,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playergamelog"
   },
   {
     "short": "playergamelogs",
@@ -40544,7 +40820,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playergamelogs"
   },
   {
     "short": "playergamestreakfinder",
@@ -41001,7 +41278,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playergamestreakfinder"
   },
   {
     "short": "playerindex",
@@ -41078,7 +41356,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerindex"
   },
   {
     "short": "playernextngames",
@@ -41115,7 +41394,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playernextngames"
   },
   {
     "short": "playerprofilev2",
@@ -41142,7 +41422,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playerprofilev2"
   },
   {
     "short": "playervsplayer",
@@ -41264,7 +41545,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1629488"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/playervsplayer"
   },
   {
     "short": "scheduleleaguev2",
@@ -41286,7 +41568,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scheduleleaguev2"
   },
   {
     "short": "scheduleleaguev2int",
@@ -41308,7 +41591,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scheduleleaguev2int"
   },
   {
     "short": "scoreboardv2",
@@ -41335,7 +41619,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scoreboardv2"
   },
   {
     "short": "scoreboardv3",
@@ -41357,7 +41642,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/scoreboardv3"
   },
   {
     "short": "shotchartdetail",
@@ -41524,7 +41810,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/shotchartdetail"
   },
   {
     "short": "shotchartleaguewide",
@@ -41546,7 +41833,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": null
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/shotchartleaguewide"
   },
   {
     "short": "shotchartlineupdetail",
@@ -41658,7 +41946,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/shotchartlineupdetail"
   },
   {
     "short": "teamdashboardbyclutch",
@@ -41785,7 +42074,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyclutch"
   },
   {
     "short": "teamdashboardbygamesplits",
@@ -41912,7 +42202,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbygamesplits"
   },
   {
     "short": "teamdashboardbygeneralsplits",
@@ -42039,7 +42330,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbygeneralsplits"
   },
   {
     "short": "teamdashboardbylastngames",
@@ -42166,7 +42458,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbylastngames"
   },
   {
     "short": "teamdashboardbyopponent",
@@ -42293,7 +42586,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyopponent"
   },
   {
     "short": "teamdashboardbyshootingsplits",
@@ -42420,7 +42714,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyshootingsplits"
   },
   {
     "short": "teamdashboardbyteamperformance",
@@ -42547,7 +42842,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyteamperformance"
   },
   {
     "short": "teamdashboardbyyearoveryear",
@@ -42674,7 +42970,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashboardbyyearoveryear"
   },
   {
     "short": "teamdashlineups",
@@ -42811,7 +43108,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdashlineups"
   },
   {
     "short": "teamdetails",
@@ -42828,7 +43126,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamdetails"
   },
   {
     "short": "teamestimatedmetrics",
@@ -42855,7 +43154,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "Regular Season"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamestimatedmetrics"
   },
   {
     "short": "teamgamelog",
@@ -42897,7 +43197,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamgamelog"
   },
   {
     "short": "teamgamelogs",
@@ -43014,7 +43315,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamgamelogs"
   },
   {
     "short": "teaminfocommon",
@@ -43046,7 +43348,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teaminfocommon"
   },
   {
     "short": "teamplayerdashboard",
@@ -43173,7 +43476,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamplayerdashboard"
   },
   {
     "short": "teamplayeronoffdetails",
@@ -43290,7 +43594,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamplayeronoffdetails"
   },
   {
     "short": "teamplayeronoffsummary",
@@ -43407,7 +43712,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": ""
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamplayeronoffsummary"
   },
   {
     "short": "teamvsplayer",
@@ -43534,7 +43840,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1628932"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamvsplayer"
   },
   {
     "short": "teamyearbyyearstats",
@@ -43566,7 +43873,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "1611661328"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/teamyearbyyearstats"
   },
   {
     "short": "videostatus",
@@ -43588,6 +43896,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
         "default": "10"
       }
     ],
-    "parser": "parse_nba_stats_result_sets"
+    "parser": "parse_nba_stats_result_sets",
+    "returnsSchema": "native/wnba_stats/videostatus"
   }
 ];
