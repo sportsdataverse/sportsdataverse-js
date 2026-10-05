@@ -7,7 +7,13 @@
 // `date`: the `dates` these methods used to send is silently ignored and
 // today's page comes back (sdv-py espn_cdn.yaml, probed 2026-10-05).
 
+import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from '../core/config.js';
 import { request } from '../core/request.js';
+
+// The deprecated cfb / mbb 247sports.com HTML scrapers' family (plain transport:
+// the www HTML pages answer one). As for sports247 / sports247_site_pages, a 247
+// 403 is the edge's block, not load, so it is never retried.
+registerFamilyDefaults('sports247_html', { retryStatuses: DEFAULT_RETRY_STATUSES.filter((s) => s !== 403) });
 
 /**
  * GET an HTML page (the deprecated 247sports.com / stats.ncaa.org scrapers)

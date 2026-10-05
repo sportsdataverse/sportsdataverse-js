@@ -72,7 +72,11 @@ export default {
         const baseUrl = `https://ncaa.com/${url}`;
         // the game page's final URL, after ncaa.com's redirects
         const { url: gameUrl } = await requestResponse(NCAA_COM, { method: 'GET', url: baseUrl, responseType: 'text' });
-        const gameId = parseInt(gameUrl.match(/.*\/(.*)\/(.*)$/)[2]);
+        const gameId = parseInt(gameUrl.match(/.*\/(.*)\/(.*)$/)?.[2] ?? '');
+        if (Number.isNaN(gameId)) {
+            // e.g. a custom transport that reports the request URL, not the redirect target
+            throw new AssetFetchError(`${NCAA_COM}: no game id in the final URL ${gameUrl}`, { url: baseUrl });
+        }
         return gameId;
     },
     /**
