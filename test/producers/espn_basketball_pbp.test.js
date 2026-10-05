@@ -262,6 +262,12 @@ describe('ESPN basketball pbp league facts', () => {
     seen.should.eql([]);
   });
 
+  it('a numeric (already-parsed) safe play id is cast exactly to its decimal string', () => {
+    const c = structuredClone(capture('summary_nba.json'));
+    c.plays.forEach((p, i) => (p.id = 4015856074 + i));
+    P._pbpFromSummary('nba', Number(c.header.id), c).plays.map((r) => r.id).slice(0, 2).should.eql(['4015856074', '4015856075']);
+  });
+
   it('lag / lead / row numbers are per game: a concatenated two-game frame never leaks', () => {
     for (const [lg, a, b] of [
       ['mbb', 'summary_mbb.json.gz', 'mbb_summary_401600379.json.gz'],
