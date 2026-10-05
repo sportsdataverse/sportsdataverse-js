@@ -186,14 +186,18 @@ function pinIdColumns(rows: Record<string, any>[]): Record<string, any>[] {
   const uncast: string[] = [];
   for (const col of MLBAM_ID_COLUMNS) {
     if (!rows.some((r) => col in r)) continue;
-    const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== undefined);
+    // pandas `to_numeric("")` -> NaN, so an empty-string cell is null (whitespace is not).
+    const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== undefined && v !== "");
     const asInt = (v: any) =>
       typeof v === "bigint" ? v : typeof v === "number" ? v : typeof v === "string" && CSV_NUMBER.test(v.trim()) ? csvNumber(v) : NaN;
     if (!present.every((v) => typeof v === "bigint" || Number.isInteger(asInt(v)))) {
       uncast.push(col);
       continue;
     }
-    for (const r of rows) if (r[col] !== null && r[col] !== undefined) r[col] = asInt(r[col]);
+    for (const r of rows) {
+      if (r[col] === "") r[col] = null;
+      else if (r[col] !== null && r[col] !== undefined) r[col] = asInt(r[col]);
+    }
   }
   if (uncast.length) {
     warn(
