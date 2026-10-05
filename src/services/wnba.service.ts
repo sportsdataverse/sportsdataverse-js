@@ -201,7 +201,7 @@ export default {
      * @example
      * const result = await sdv.wnba.getTeamList();
      */
-    getTeamList: async function ({ }) {
+    getTeamList: async function () {
         const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams';
         const params: Record<string, any> = {
             limit: 1000

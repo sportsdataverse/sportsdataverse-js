@@ -132,7 +132,7 @@ export default {
             teams: res.data.header.competitions[0].competitors,
             competitions: res.data.header.competitions,
             winProbability: res.data.winprobability,
-            pickcenter: res.data.winprobability,
+            pickcenter: res.data.pickcenter,
             againstTheSpread: res.data.againstTheSpread,
             odds: res.data.odds,
             season: res.data.header.season,

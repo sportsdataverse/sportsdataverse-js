@@ -171,7 +171,14 @@ function pathTokens(path) {
  * (+ `schemes`). Returns { host, basePath, warning? }.
  */
 function resolveHost(spec, override) {
-  if (override) return { host: override.replace(/\/+$/, ""), basePath: "" };
+  if (override) {
+    // Keep the spec's base path (e.g. CBS `/napi`): fold it into the host so a
+    // bare-origin `--host` doesn't silently drop it.
+    const { basePath } = resolveHost(spec, undefined);
+    const o = override.replace(/\/+$/, "");
+    const hasPath = new URL(o).pathname !== "/";
+    return { host: hasPath ? o : o + basePath, basePath: "" };
+  }
 
   // OpenAPI 3 servers[]
   const serverUrl = spec.servers?.[0]?.url;
