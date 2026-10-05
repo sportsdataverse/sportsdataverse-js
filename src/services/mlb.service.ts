@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { get } from '../core/client.js';
 import { espnMlbCdnBoxscore, espnMlbCdnPlaybyplay, espnMlbCdnSchedule } from '../generated/espn/mlb.js';
 import { cdnDate } from './_cdn.js';
 /**
@@ -66,26 +66,25 @@ export default {
    */
   getSummary: async function (id) {
     const baseUrl =
-      "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
+      "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
     const params: Record<string, any> = {
       event: id,
     };
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
     return {
       boxScore: res.data.boxscore,
       gameInfo: res.data.gameInfo,
       header: res.data.header,
-      teams: res.data.gamepackageJSON?.header.competitions[0].competitors,
-      id: res.data.gamepackageJSON?.header.id,
-      plays: res.data.gamepackageJSON?.plays,
+      // site v2 summaries have no gamepackageJSON (that is the CDN page wrapper): read header / top level
+      teams: res.data.header?.competitions[0].competitors,
+      id: res.data.header?.id,
+      plays: res.data.plays,
       winProbability: res.data.winprobability,
       leaders: res.data.leaders,
-      competitions: res.data.gamepackageJSON?.header.competitions,
-      season: res.data.gamepackageJSON?.header.season,
-      seasonSeries: res.data.gamepackageJSON?.seasonseries,
-      standings: res.data.gamepackageJSON?.standings,
+      competitions: res.data.header?.competitions,
+      season: res.data.header?.season,
+      seasonSeries: res.data.seasonseries,
+      standings: res.data.standings,
     };
   },
   /**
@@ -100,13 +99,11 @@ export default {
    */
   getPicks: async function (id) {
     const baseUrl =
-      "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
+      "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/summary";
     const params: Record<string, any> = {
       event: id,
     };
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
     return {
       id: parseInt(res.data.header.id),
       gameInfo: res.data.gameInfo,
@@ -163,16 +160,14 @@ export default {
     day,
     limit = 300,
   }) {
-    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard`;
+    const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard`;
     const params: Record<string, any> = {
       limit,
     };
     if (year && month && day) {
       params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
     }
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
     return res.data;
   },
   /**
@@ -201,9 +196,7 @@ export default {
       type: 1,
       level: groupId,
     };
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    const res = { data: await get(baseUrl, { params, family: 'web_v3' }) };
     return res.data;
   },
   /**
@@ -217,14 +210,12 @@ export default {
    */
   getTeamList: async function () {
     const baseUrl =
-      "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams";
+      "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams";
     const params: Record<string, any> = {
       limit: 1000,
     };
 
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
     return res.data;
   },
@@ -240,9 +231,9 @@ export default {
    * const result = await sdv.mlb.getTeamInfo(teamId);
    */
   getTeamInfo: async function (id) {
-    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
+    const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
 
-    const res = await axios.get(baseUrl);
+    const res = { data: await get(baseUrl, { family: 'site_v2' }) };
     return res.data;
   },
   /**
@@ -257,13 +248,11 @@ export default {
    * const result = await sdv.mlb.getTeamPlayers(teamId);
    */
   getTeamPlayers: async function (id) {
-    const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
+    const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/${id}`;
     const params: Record<string, any> = {
       enable: "roster",
     };
-    const res = await axios.get(baseUrl, {
-      params,
-    });
+    const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
     return res.data;
   },
 };

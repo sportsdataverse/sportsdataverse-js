@@ -23,6 +23,9 @@ A **family** is the stem a wrapper belongs to: the ESPN URL families
 `mlb`, `mlb_statcast`, `nhl_api_web`, `nfl_api`, `odds_api`, `sports247`,
 `sports247_site_pages`, `cbs`, `fox`, `yahoo`, `hockeytech`, `torvik`, and the
 subscription families `pff_api`, `kenpom`, `nfl_pro` (the keys of `FLAT_HOSTS`).
+The hand-written legacy `sdv.<league>.get*` methods use the ESPN families too,
+plus `sports247_html`, `ncaa_com` and `stats_ncaa` for their 247Sports and NCAA
+pages.
 
 ## Errors
 
