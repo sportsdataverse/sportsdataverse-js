@@ -10,6 +10,7 @@ import sdv, {
   NflProAuthError,
   hasKenpomLogin,
   kenpomClearSessionCache,
+  nflProToken,
 } from '../../dist/index.js';
 import { _timer } from '../../dist/core/request.js';
 import { resolveFamily } from '../../dist/core/config.js';
@@ -20,7 +21,11 @@ import {
   nflProBrowserLogin,
   nflProClearTokenCache,
   _playwrightLoader,
+  _loginLimits,
+  _tokenCache,
 } from '../../dist/core/nfl_pro_runtime.js';
+import { accountKey as kenpomAccountKey } from '../../dist/core/kenpom_runtime.js';
+import { createHash } from 'node:crypto';
 import { TransportUnavailableError } from '../../dist/core/errors.js';
 import { inspect } from 'node:util';
 
@@ -455,8 +460,9 @@ describe('nfl_pro runtime (user token + offset paging)', () => {
  * and past the last one the page is signed in. `blobs(email)` is what
  * localStorage holds afterwards. Every launch starts a fresh page.
  */
-function fakePlaywright({ steps, blobs, onFill }) {
+function fakePlaywright({ steps, blobs, onFill, hang = false }) {
   const log = { launched: 0, closed: 0, fills: [] };
+  const ctl = { hang }; // ctl.hang: every page.evaluate never settles (a hung page)
   const chromium = {
     async launch(opts) {
       opts.should.eql({ headless: true });
@@ -472,6 +478,7 @@ function fakePlaywright({ steps, blobs, onFill }) {
             ? 'https://pro.nfl.com/'
             : `https://id.nfl.com/account/${screen() === 'recovery' ? 'account-recovery' : 'sign-in'}`,
         async evaluate(fn) {
+          if (ctl.hang) return new Promise(() => {});
           const src = String(fn);
           if (src.includes('login-button')) {
             at = Math.max(at, 0);
@@ -515,26 +522,33 @@ function fakePlaywright({ steps, blobs, onFill }) {
       };
     },
   };
-  return { chromium, log };
+  return { chromium, log, ctl };
 }
 
 describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
   isolate();
   const page = fixture('nfl_pro', 'players_offense_passing_season.json');
   const PW = 'hunter2-Sekret!';
+  // `exp` is frozen once per test: tokens minted at different moments of one
+  // test must compare equal across a wall-clock second boundary
+  let exp;
   const tokenFor = (email, extra = {}) =>
-    jwt({ exp: inAnHour(), sub: email, plans: [{ plan: 'NFL_PLUS_PREMIUM', status: 'ACTIVE' }], ...extra });
+    jwt({ exp, sub: email, plans: [{ plan: 'NFL_PLUS_PREMIUM', status: 'ACTIVE' }], ...extra });
   const ANON = jwt({ exp: inAnHour(), plans: [] }); // an anonymous / Gigya-UID token: same shape, no plan
   let realLoad;
   let realNow;
+  let realDeadline;
   beforeEach(() => {
+    exp = inAnHour();
     realLoad = _playwrightLoader.load;
     realNow = Date.now;
+    realDeadline = _loginLimits.deadlineMs;
     nflProClearTokenCache();
   });
   afterEach(() => {
     _playwrightLoader.load = realLoad;
     Date.now = realNow;
+    _loginLimits.deadlineMs = realDeadline;
     nflProClearTokenCache();
   });
 
@@ -662,46 +676,159 @@ describe('nfl_pro login (id.nfl.com via an injected Playwright)', () => {
   });
 
   it('SECURITY: a failing login never carries the e-mail, password or a token in the error or its cause chain', async () => {
-    const email = 'secret.person@example.com';
     const leaky = (kind, value) => {
-      // what a browser-automation error can look like: the value echoed in its call log
-      const e = new Error(`locator.fill: Timeout 8000ms exceeded.\nCall log:\n  - fill("${value}") on ${kind}`);
+      // what a browser-automation error can look like: the value echoed in its
+      // call log, raw and URL-encoded (e.g. inside a navigated URL)
+      const e = new Error(
+        `locator.fill: Timeout 8000ms exceeded.\nCall log:\n  - fill("${value}") on ${kind}\n  - navigated to https://id.nfl.com/x?u=${encodeURIComponent(value)}\n  - form field ${encodeURIComponent(value)}`
+      );
       e.stack = `${e.message}\n    at fill (${value})`;
       e.log = [value];
       throw e;
     };
-    const found = tokenFor(email, { plans: [] }); // a non-entitled token sitting in localStorage
-    const cases = [
-      fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'password' && leaky(k, v) }),
-      fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'email' && leaky(k, v) }),
-      fakePlaywright({ steps: ['email', 'password'], blobs: () => [found] }), // signed in, token not entitled
+    // synthetic credentials; `markers` are fragments that must not survive either
+    const creds = [
+      { email: 'secret.person@example.com', password: PW, markers: [] },
+      // a password that CONTAINS the e-mail: removed whole, not e-mail first
+      { email: 'jane.doe@example.com', password: 'jane.doe@example.com#Tail99', markers: ['Tail99'] },
+      // a password redactSecrets would rewrite first (scheme://…?): removed before it runs
+      { email: 'jane.doe@example.com', password: 'https://pw.example/?k=Tail77', markers: ['Tail77', 'pw.example'] },
+      // an e-mail echoed URL-encoded (jane.doe%2Bnfl%40example.com)
+      { email: 'jane.doe+nfl@example.com', password: PW, markers: [] },
     ];
-    for (const pw of cases) {
-      _playwrightLoader.load = async () => pw;
-      const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
-      configure({ transport: { nfl_pro: t } });
-      for (const call of [
-        () => sdv.nfl.nflProPlayersOffensePassingSeason({ email, password: PW }),
-        () => {
-          process.env.NFLPRO_EMAIL = email;
-          process.env.NFLPRO_PW = PW;
-          return sdv.nfl.nflProPlayersOffensePassingSeason();
-        },
-      ]) {
-        const err = await call().then(() => null, (e) => e);
-        err.should.be.instanceOf(NflProAuthError);
-        const dumps = [inspect(err, { depth: Infinity, showHidden: true }), JSON.stringify(err), String(err.stack)];
-        for (let c = err.cause; c; c = c.cause) dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack));
-        for (const d of dumps) {
-          d.should.not.containEql(PW);
-          d.should.not.containEql(email);
-          d.should.not.containEql(found);
+    for (const { email, password, markers } of creds) {
+      const found = tokenFor(email, { plans: [] }); // a non-entitled token sitting in localStorage
+      const forbidden = [password, email, encodeURIComponent(email), encodeURIComponent(password), found, ...markers];
+      const modes = [
+        fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'password' && leaky(k, v) }),
+        fakePlaywright({ steps: ['email', 'password'], blobs: () => [found], onFill: (k, v) => k === 'email' && leaky(k, v) }),
+        fakePlaywright({ steps: ['email', 'password'], blobs: () => [found] }), // signed in, token not entitled
+      ];
+      for (const pw of modes) {
+        _playwrightLoader.load = async () => pw;
+        const t = fakeTransport({ status: 200, data: JSON.stringify(page) });
+        configure({ transport: { nfl_pro: t } });
+        for (const call of [
+          () => sdv.nfl.nflProPlayersOffensePassingSeason({ email, password }),
+          () => {
+            process.env.NFLPRO_EMAIL = email;
+            process.env.NFLPRO_PW = password;
+            return sdv.nfl.nflProPlayersOffensePassingSeason();
+          },
+        ]) {
+          const err = await call().then(() => null, (e) => e);
+          err.should.be.instanceOf(NflProAuthError);
+          const dumps = [inspect(err, { depth: Infinity, showHidden: true }), JSON.stringify(err), String(err.stack)];
+          for (let c = err.cause; c; c = c.cause) dumps.push(inspect(c, { depth: Infinity, showHidden: true }), String(c.stack));
+          for (const d of dumps) for (const f of forbidden) d.should.not.containEql(f);
+          t.calls.length.should.equal(0);
         }
-        t.calls.length.should.equal(0);
+        delete process.env.NFLPRO_EMAIL;
+        delete process.env.NFLPRO_PW;
       }
-      delete process.env.NFLPRO_EMAIL;
-      delete process.env.NFLPRO_PW;
     }
+  });
+
+  it('a hung page cannot block the account: one deadline closes the browser once and rejects every waiter', async () => {
+    _loginLimits.deadlineMs = 50;
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e)], hang: true });
+    _playwrightLoader.load = async () => pw;
+    const creds = { email: 'a@example.com', password: PW };
+    const t0 = Date.now();
+    const [a, b] = await Promise.allSettled([nflProToken(creds), nflProToken(creds)]); // b shares a's login
+    (Date.now() - t0).should.be.below(2000);
+    for (const r of [a, b]) {
+      r.status.should.equal('rejected');
+      r.reason.should.be.instanceOf(NflProAuthError);
+      r.reason.message.should.match(/did not finish within 0\.05 s/);
+    }
+    pw.log.launched.should.equal(1);
+    pw.log.closed.should.equal(1);
+    // the account is not stuck: the next call logs in again
+    pw.ctl.hang = false;
+    (await nflProToken(creds)).should.equal(tokenFor('a@example.com'));
+    pw.log.launched.should.equal(2);
+    pw.log.closed.should.equal(2);
+  });
+
+  it('a 401 on a logged-in token drops it and logs in again exactly once (explicit and env credentials)', async () => {
+    let n = 0;
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e, { jti: ++n })] });
+    _playwrightLoader.load = async () => pw;
+    const ok = { status: 200, data: JSON.stringify(page) };
+    let t = fakeTransport({ status: 401, data: 'expired' }, ok);
+    configure({ transport: { nfl_pro: t } });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW, paginate: false });
+    pw.log.launched.should.equal(2);
+    t.calls.length.should.equal(2);
+    header(t.calls[0], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com', { jti: 1 })}`);
+    header(t.calls[1], 'authorization').should.equal(`Bearer ${tokenFor('a@example.com', { jti: 2 })}`);
+    // the re-minted token is the cached one now
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW, paginate: false });
+    pw.log.launched.should.equal(2);
+    // a fresh login that still 401s is the answer: one re-mint, then AssetFetchError
+    t = fakeTransport({ status: 401, data: 'no plan' });
+    configure({ transport: { nfl_pro: t } });
+    const err = await sdv.nfl.nflProPlayersOffensePassingSeason({ email: 'a@example.com', password: PW }).then(() => null, (e) => e);
+    err.should.be.instanceOf(AssetFetchError);
+    err.status.should.equal(401);
+    pw.log.launched.should.equal(3);
+    t.calls.length.should.equal(2);
+    // env credentials (the family default path) re-mint the same way
+    process.env.NFLPRO_EMAIL = 'env@example.com';
+    process.env.NFLPRO_PW = PW;
+    t = fakeTransport({ status: 401, data: 'expired' }, ok);
+    configure({ transport: { nfl_pro: t } });
+    await sdv.nfl.nflProPlayersOffensePassingSeason({ paginate: false });
+    pw.log.launched.should.equal(5);
+    t.calls.length.should.equal(2);
+    // a SUPPLIED token is never re-minted
+    process.env.NFLPRO_TOKEN = tokenFor('supplied@example.com');
+    t = fakeTransport({ status: 401, data: 'revoked' });
+    configure({ transport: { nfl_pro: t } });
+    (await sdv.nfl.nflProPlayersOffensePassingSeason().then(() => null, (e) => e)).status.should.equal(401);
+    t.calls.length.should.equal(1);
+    pw.log.launched.should.equal(5);
+  });
+
+  it('a plan with status null is not ACTIVE (sdv-py rejects None); an absent status is', () => {
+    nflProTokenEntitled(jwt({ exp, plans: [{ plan: 'NFL_PLUS_PREMIUM', status: null }] })).should.be.false();
+    nflProTokenEntitled(jwt({ exp, plans: [{ plan: 'NFL_PLUS_PREMIUM' }] })).should.be.true();
+  });
+
+  it('cache keys are per-process HMACs (no e-mail, no unsalted hash); expired tokens are dropped on insert', async () => {
+    const pw = fakePlaywright({ steps: ['email', 'password'], blobs: (e) => [tokenFor(e)] });
+    _playwrightLoader.load = async () => pw;
+    await nflProToken({ email: 'a@example.com', password: PW });
+    const sha = createHash('sha256').update(PW).digest('hex');
+    for (const k of _tokenCache.keys()) {
+      k.should.match(/^[0-9a-f]{64}$/);
+      k.should.not.containEql('a@example.com');
+      k.should.not.containEql(sha);
+    }
+    _tokenCache.size.should.equal(1);
+    // a's token expires; b's login prunes it on insert
+    const now = realNow();
+    Date.now = () => now + 2 * 3600 * 1000;
+    exp = Math.floor(Date.now() / 1000) + 3600;
+    await nflProToken({ email: 'b@example.com', password: PW });
+    _tokenCache.size.should.equal(1);
+    [..._tokenCache.values()].should.eql([tokenFor('b@example.com')]);
+  });
+});
+
+describe('kenpom: explicit-session cache key', () => {
+  const PW_KP = 'synthetic-Kp-pass1';
+  it('is a per-process HMAC of e-mail + password: no e-mail, no unsalted hash, unambiguous', () => {
+    const k = kenpomAccountKey({ email: 'a@example.com', password: PW_KP });
+    k.should.match(/^[0-9a-f]{64}$/);
+    k.should.not.containEql('a@example.com');
+    k.should.not.containEql(createHash('sha256').update(PW_KP).digest('hex'));
+    kenpomAccountKey({ email: 'a@example.com', password: PW_KP }).should.equal(k); // stable in-process
+    kenpomAccountKey({ email: 'a@example.com', password: `${PW_KP}x` }).should.not.equal(k);
+    kenpomAccountKey({ email: 'b@example.com', password: PW_KP }).should.not.equal(k);
+    // length-prefixed parts: ("a@x.com", "bc") never collides with ("a@x.comb", "c")
+    kenpomAccountKey({ email: 'a@x.com', password: 'bc' }).should.not.equal(kenpomAccountKey({ email: 'a@x.comb', password: 'c' }));
   });
 });
 

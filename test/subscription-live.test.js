@@ -67,11 +67,20 @@ gate(
   this.timeout(240000);
 
   (hasNflProLogin ? it : it.skip)('logs in to id.nfl.com and gets a token carrying an NFL_PLUS_* plan', async () => {
-    const creds = { email: process.env.NFLPRO_EMAIL, password: process.env.NFLPRO_PW };
-    const token = await nflProToken(creds);
-    const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString('utf8'));
-    claims.plans.some((p) => String(p.plan).startsWith('NFL_PLUS')).should.be.true();
-    (await nflProToken(creds)).should.equal(token); // the same account is served from the cache
+    // NFLPRO_TOKEN would win over the credentials (sdv-py's order): hide it so
+    // this test really logs in
+    const saved = process.env.NFLPRO_TOKEN;
+    delete process.env.NFLPRO_TOKEN;
+    try {
+      const creds = { email: process.env.NFLPRO_EMAIL, password: process.env.NFLPRO_PW };
+      const token = await nflProToken(creds);
+      const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString('utf8'));
+      claims.plans.some((p) => String(p.plan).startsWith('NFL_PLUS')).should.be.true();
+      // never `.should.equal(token)`: a failure would print both bearer tokens
+      ((await nflProToken(creds)) === token).should.be.true(); // the same account is served from the cache
+    } finally {
+      if (saved !== undefined) process.env.NFLPRO_TOKEN = saved;
+    }
   });
 
   it('passing season pages to the envelope total and parses', async () => {
