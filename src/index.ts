@@ -1,4 +1,5 @@
 import cfb from './services/cfb.service.js';
+import { allHockeytechAnalytics, hockeytechEnrichedPbp, hockeytechGameCorsi, hockeytechPlayerToi, hockeytechShiftStints } from './analytics/hockeytech_family.js';
 import { hockeytechSeasonId, mostRecentHockeytechSeason, resolveSeasonId } from './core/hockeytech_runtime.js';
 import mbb from './services/mbb.service.js';
 import mlb from './services/mlb.service.js';
@@ -16,6 +17,7 @@ import { WRITTEN_FLAT } from './generated/flat/index.js';
 import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from './generated/aliases.js';
 import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
+import * as cricketWp from './models/cricket_wp.js';
 import { oddsMath, oddsErrors } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -135,9 +137,46 @@ const hockeytechSeasonExtra = {
   most_recent_hockeytech_season: mostRecentHockeytechSeason,
   hockeytech_resolve_season_id: resolveSeasonId,
 };
+// HockeyTech analytics (py `<lg>_game_shifts` / `<lg>_player_toi` / `<lg>_game_corsi`): every
+// league gets the three callables (`sdv.hockeytech.pwhl_game_shifts(42)`), plus league-parameterised
+// generics. `hockeytech_game_shifts` stays the raw-feed flat wrapper; the py-parity shift stints
+// are `hockeytech_shift_stints`.
+const hockeytechAnalytics = {
+  ...allHockeytechAnalytics(),
+  hockeytech_shift_stints: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechShiftStints(league, game_id),
+  hockeytech_enriched_pbp: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechEnrichedPbp(league, game_id),
+  hockeytech_player_toi: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechPlayerToi(league, game_id),
+  hockeytech_game_corsi: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechGameCorsi(league, game_id),
+};
+// Never silently overwrite an existing sdv.hockeytech key (the flat raw-feed wrappers share the namespace).
+for (const name of Object.keys(hockeytechAnalytics)) {
+  for (const n of [name, toCamel(name)]) {
+    if (n in sdv.hockeytech || n in hockeytechSeasonExtra) throw new Error(`sdv.hockeytech.${n} already exists`);
+  }
+}
+Object.assign(hockeytechSeasonExtra, hockeytechAnalytics);
 for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
   sdv.hockeytech[name] = fn;
   sdv.hockeytech[toCamel(name)] = fn;
+}
+
+// Cricket in-play win probability (pure, offline) merged onto `sdv.cricket`
+// under py's snake_case names and camelCase aliases.
+const cricketWpExports: Record<string, any> = {
+  cricket_match_state: cricketWp.cricket_match_state,
+  cricket_win_probability: cricketWp.cricket_win_probability,
+  cricket_expected_runs: cricketWp.cricket_expected_runs,
+  cricket_wpa: cricketWp.cricket_wpa,
+  cricket_parse_score_string: cricketWp.parse_score_string,
+  cricket_get_format: cricketWp.get_format,
+};
+for (const [name, fn] of Object.entries(cricketWpExports)) {
+  sdv.cricket[name] = fn;
+  sdv.cricket[toCamel(name)] = fn;
 }
 
 // Odds / market math (py wexp.market) merged onto sdv.odds under py + camelCase names.

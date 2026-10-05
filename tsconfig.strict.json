@@ -17,6 +17,8 @@
     "src/parsers/sports247.ts",
     "src/core/deprecation.ts",
     "src/core/nba_stats_runtime.ts",
+    "src/analytics/hockeytech.ts",
+    "src/models/cricket_wp.ts",
     "src/odds/math.ts"
   ]
 }
