@@ -98,10 +98,13 @@ describe('param transforms (ports of the sdv-py runtime functions)', () => {
 
   it('every transform on a generated def is one the runtime implements', () => {
     const named = [...WRAPPERS, ...FLAT_WRAPPERS].flatMap((d) =>
-      [...d.pathParams, ...d.queryParams].map((p) => p.transform).filter(Boolean)
+      [...d.pathParams, ...d.queryParams].filter((p) => p.transform).map((p) => [d, p.transform])
     );
-    named.length.should.equal(54); // 42 format_nhl_season + 9 _bool_str + 3 bool_str (nhl + mls_api + fox foxpolls)
-    for (const t of named) should(TRANSFORMS[t]).be.a.Function();
+    // 42 format_nhl_season + 9 _bool_str + 3 bool_str (nhl + mls_api + fox foxpolls)
+    named.filter(([, t]) => t !== 'season_or_previous').length.should.equal(54);
+    for (const [, t] of named) should(TRANSFORMS[t]).be.a.Function();
+    // season_or_previous (sdv-py's stats runtimes) only on a family that has a previous-season rule
+    for (const [d, t] of named) if (t === 'season_or_previous') ['nba_stats', 'wnba_stats'].should.containEql(d.api);
   });
 });
 
