@@ -137,6 +137,10 @@ import {
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
 } from "./torvik.js";
+import { parse_on3_rdb } from "./on3.js";
+import { parse_asa, parse_asa_goals_added } from "./asa.js";
+import { parse_mls_api, parse_mls_entity, parse_mls_standings, parse_mls_match } from "./mls_api.js";
+import { parse_nwsl_sdp, parse_nwsl_standings, parse_nwsl_stats, parse_nwsl_lineups } from "./nwsl_api.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -278,6 +282,18 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_torvik_game_stats,
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
+  // ---- Keyless providers / league APIs (vendored from sdv-py) ----
+  parse_on3_rdb,
+  parse_asa,
+  parse_asa_goals_added,
+  parse_mls_api,
+  parse_mls_entity,
+  parse_mls_standings,
+  parse_mls_match,
+  parse_nwsl_sdp,
+  parse_nwsl_standings,
+  parse_nwsl_stats,
+  parse_nwsl_lineups,
 };
 
 /**

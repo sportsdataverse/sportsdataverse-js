@@ -27,6 +27,9 @@ const FLAT_API_NAMESPACES = {
   fox: 'fox',
   yahoo_scores: 'yahoo',
   yahoo: 'yahoo',
+  bart_wbb: 'torvik',
+  mls_api: 'mls',
+  nwsl_api: 'nwsl',
 };
 
 /** Fill every required path param so the URL fully resolves. */

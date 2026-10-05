@@ -18,3 +18,7 @@ The positional column-name arrays are ported verbatim from hoopR's
 `R/torvik_*.R` and live in `src/parsers/torvik.ts`. `barttorvik.com` rejects
 default programmatic User-Agents, so the family's getter
 (`src/core/torvik_runtime.ts`) sets a browser UA.
+
+## bart_wbb_ratings_2025_head.csv / py_oracle_bart_wbb.json
+
+Women's T-Rank, `https://barttorvik.com/ncaaw/2025_team_results.csv` (header + 15 rows), copied from sportsdataverse-py@719de79 `tests/fixtures/torvik/ncaaw_2025_team_results_head.csv` (captured 2026-08-07). `py_oracle_bart_wbb.json` is sdv-py `parse_torvik_csv` on it.

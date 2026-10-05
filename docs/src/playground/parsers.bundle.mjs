@@ -2006,6 +2006,293 @@ function parse_torvik_game_schedule(input) {
   return parsePositionalJson(input, GAME_SCHEDULE_COLS);
 }
 
+// src/parsers/_frames.ts
+function pyUnderscore(word) {
+  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
+}
+function pyJson(v) {
+  return JSON.stringify(v).replace(
+    /("(?:[^"\\]|\\.)*")|([,:])/g,
+    (_m, str, sep) => str !== void 0 ? str : `${sep} `
+  ).replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
+}
+function isPlainObject16(v) {
+  return v !== null && typeof v === "object" && !Array.isArray(v);
+}
+function isIdName(name) {
+  return name === "id" || name.endsWith("_id") || name.endsWith("_ids");
+}
+function flatten(obj, prefix, out) {
+  const top = prefix === "";
+  const nested = [];
+  for (const [k, v] of Object.entries(obj)) {
+    const key = top ? k : `${prefix}_${k}`;
+    if (!isPlainObject16(v)) out.push([key, v]);
+    else if (top) nested.push([key, v]);
+    else flatten(v, key, out);
+  }
+  for (const [key, v] of nested) flatten(v, key, out);
+}
+function idString(v) {
+  if (v === null || v === void 0) return null;
+  if (typeof v === "string") return v;
+  if (Array.isArray(v)) return v.map((x) => String(x)).join(",");
+  if (isPlainObject16(v)) return pyJson(v);
+  return String(v);
+}
+function rowsToFrame(rows, opts = {}) {
+  const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === void 0)));
+  if (kept.length === 0) return [];
+  if (!kept.some(isPlainObject16)) return kept.map((r) => ({ value: String(r) }));
+  const records = kept.map((r) => {
+    const pairs = [];
+    flatten(isPlainObject16(r) ? r : { value: r }, "", pairs);
+    return pairs;
+  });
+  const finalName = /* @__PURE__ */ new Map();
+  const used = /* @__PURE__ */ new Map();
+  for (const pairs of records) {
+    for (const [path] of pairs) {
+      if (finalName.has(path)) continue;
+      const base = pyUnderscore(path);
+      const n = (used.get(base) ?? 0) + 1;
+      used.set(base, n);
+      finalName.set(path, n === 1 ? base : `${base}_${n}`);
+    }
+  }
+  const columns = [...finalName.values()];
+  return records.map((pairs) => {
+    const row = {};
+    for (const c of columns) row[c] = null;
+    for (const [path, v] of pairs) {
+      const name = finalName.get(path);
+      let cell = v === void 0 ? null : v;
+      if (opts.ids && isIdName(name)) cell = idString(cell);
+      else if (Array.isArray(cell) || isPlainObject16(cell)) cell = pyJson(cell);
+      row[name] = cell;
+    }
+    return row;
+  });
+}
+function asRows(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (isPlainObject16(raw) && Object.keys(raw).length > 0) return [raw];
+  return [];
+}
+
+// src/parsers/on3.ts
+function parse_on3_rdb(raw) {
+  let rows = [];
+  if (Array.isArray(raw)) rows = raw;
+  else if (isPlainObject16(raw)) {
+    rows = Array.isArray(raw.list) ? raw.list : Object.keys(raw).length ? [raw] : [];
+  }
+  return rowsToFrame(rows);
+}
+
+// src/parsers/asa.ts
+var OPTS = { ids: true, dropNull: true };
+var GOALS_ADDED_KEYS = ["player_id", "team_id", "general_position", "minutes_played", "minutes"];
+function parse_asa(raw) {
+  return rowsToFrame(asRows(raw), OPTS);
+}
+function parse_asa_goals_added_tables(raw) {
+  const rows = asRows(raw).filter(isPlainObject16);
+  const summary = rows.map(({ data: _data, ...rest }) => rest);
+  const actions = [];
+  for (const row of rows) {
+    const keys = {};
+    for (const k of GOALS_ADDED_KEYS) if (k in row) keys[k] = row[k];
+    for (const action of Array.isArray(row.data) ? row.data : []) {
+      if (isPlainObject16(action)) actions.push({ ...keys, ...action });
+    }
+  }
+  return { summary: rowsToFrame(summary, OPTS), actions: rowsToFrame(actions, OPTS) };
+}
+function parse_asa_goals_added(raw) {
+  return parse_asa_goals_added_tables(raw).actions;
+}
+
+// src/parsers/mls_api.ts
+var OPTS2 = { ids: true, dropNull: true };
+var META_KEYS = /* @__PURE__ */ new Set(["meta", "pagination", "next_page_token"]);
+function rowsKey(raw) {
+  for (const [key, value] of Object.entries(raw)) {
+    if (META_KEYS.has(key) || !Array.isArray(value) || value.length === 0) continue;
+    if (value.every(isPlainObject16)) return value;
+  }
+  return void 0;
+}
+function parse_mls_api(raw) {
+  let rows = [];
+  if (Array.isArray(raw)) rows = raw;
+  else if (isPlainObject16(raw) && Object.keys(raw).length) rows = rowsKey(raw) ?? [raw];
+  return rowsToFrame(rows, OPTS2);
+}
+function parse_mls_entity(raw) {
+  let rows = [];
+  if (Array.isArray(raw)) rows = raw;
+  else if (isPlainObject16(raw) && Object.keys(raw).length) rows = [raw];
+  return rowsToFrame(rows, OPTS2);
+}
+function parse_mls_standings_tables(raw) {
+  const rawTables = isPlainObject16(raw) ? raw.tables : Array.isArray(raw) ? raw : null;
+  const tables = (Array.isArray(rawTables) ? rawTables : []).filter(isPlainObject16);
+  const meta = tables.map(({ entries: _entries, ...rest }) => rest);
+  const entries = [];
+  for (const table of tables) {
+    const keys = {};
+    for (const k of ["competition_id", "season_id", "group", "category", "type"]) {
+      if (k in table) keys[k] = table[k];
+    }
+    for (const entry of Array.isArray(table.entries) ? table.entries : []) {
+      if (isPlainObject16(entry)) entries.push({ ...keys, ...entry });
+    }
+  }
+  return { tables: rowsToFrame(meta, OPTS2), entries: rowsToFrame(entries, OPTS2) };
+}
+function parse_mls_standings(raw) {
+  return parse_mls_standings_tables(raw).entries;
+}
+var MATCH_TABLES = [
+  "match_information",
+  "environment",
+  "teams",
+  "players",
+  "staff",
+  "referees",
+  "last_matches"
+];
+function parse_mls_match_tables(raw) {
+  const match = isPlainObject16(raw) ? raw : {};
+  const teams = [];
+  const players = [];
+  const staff = [];
+  for (const side of ["home", "away"]) {
+    const block = match[side];
+    if (!isPlainObject16(block)) continue;
+    const scalars = {};
+    for (const [k, v] of Object.entries(block)) {
+      if (!Array.isArray(v) && !isPlainObject16(v)) scalars[k] = v;
+    }
+    teams.push({ side, ...scalars });
+    const keys = { side, team_id: block.team_id, team_name: block.team_name };
+    for (const person of Array.isArray(block.players) ? block.players : []) {
+      if (isPlainObject16(person)) players.push({ ...keys, ...person });
+    }
+    for (const group of ["trainer_staff", "official_staff"]) {
+      for (const person of Array.isArray(block[group]) ? block[group] : []) {
+        if (isPlainObject16(person)) staff.push({ ...keys, staff_group: group, ...person });
+      }
+    }
+  }
+  const objs = (v) => Array.isArray(v) ? v.filter(isPlainObject16) : [];
+  const blocks = {
+    match_information: isPlainObject16(match.match_information) ? [match.match_information] : [],
+    environment: isPlainObject16(match.environment) ? [match.environment] : [],
+    teams,
+    players,
+    staff,
+    referees: objs(match.referees),
+    last_matches: objs(match.last_matches)
+  };
+  const out = {};
+  for (const name of MATCH_TABLES) out[name] = rowsToFrame(blocks[name], OPTS2);
+  return out;
+}
+function parse_mls_match(raw) {
+  return parse_mls_match_tables(raw).match_information;
+}
+
+// src/parsers/nwsl_api.ts
+var OPTS3 = { ids: true, dropNull: true };
+var ROWS_KEYS = ["matches", "matchdays", "stages", "standings", "players", "teams", "competitions"];
+var META_KEYS2 = /* @__PURE__ */ new Set(["apiCallRequestTime", "competition", "pagination"]);
+function envelopeRows(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (!isPlainObject16(raw)) return [];
+  for (const key of ROWS_KEYS) {
+    const v = raw[key];
+    if (Array.isArray(v) && v.length) return v;
+  }
+  for (const [key, v] of Object.entries(raw)) {
+    if (META_KEYS2.has(key) || !Array.isArray(v) || v.length === 0) continue;
+    if (v.every(isPlainObject16)) return v;
+  }
+  return [];
+}
+var statCells = (row) => (Array.isArray(row.stats) ? row.stats : []).filter(isPlainObject16);
+var withoutStats = ({ stats: _stats, ...rest }) => rest;
+var scalar = (v) => Array.isArray(v) || isPlainObject16(v) ? pyJson(v) : v;
+function parse_nwsl_sdp(raw) {
+  return rowsToFrame(envelopeRows(raw), OPTS3);
+}
+function parse_nwsl_standings(raw) {
+  const splits = isPlainObject16(raw) ? raw.standings : raw;
+  const rows = [];
+  for (const split of Array.isArray(splits) ? splits : []) {
+    if (!isPlainObject16(split)) continue;
+    for (const club of Array.isArray(split.teams) ? split.teams : []) {
+      if (!isPlainObject16(club)) continue;
+      const row = { split_type: split.type, ...withoutStats(club) };
+      for (const cell of statCells(club)) {
+        if (cell.statsId) row[pyUnderscore(String(cell.statsId))] = scalar(cell.statsValue);
+      }
+      rows.push(row);
+    }
+  }
+  return rowsToFrame(rows, OPTS3);
+}
+function parse_nwsl_stats(raw) {
+  const rows = [];
+  for (const entity of envelopeRows(raw)) {
+    if (!isPlainObject16(entity)) continue;
+    const identity = withoutStats(entity);
+    for (const cell of statCells(entity)) {
+      rows.push({ ...identity, ...cell, statsValue: scalar(cell.statsValue) });
+    }
+  }
+  return rowsToFrame(rows, OPTS3).map((r) => {
+    if ("stats_value" in r && r.stats_value !== null && typeof r.stats_value !== "string") {
+      r.stats_value = String(r.stats_value);
+    }
+    return r;
+  });
+}
+function parse_nwsl_lineups_tables(raw) {
+  const body = isPlainObject16(raw) ? raw : {};
+  const matchId = body.matchId;
+  const teams = [];
+  const players = [];
+  const staff = [];
+  for (const side of ["home", "away"]) {
+    const block = body[side];
+    if (!isPlainObject16(block)) continue;
+    const scalars = {};
+    for (const [k, v] of Object.entries(block)) {
+      if (!Array.isArray(v) && !isPlainObject16(v)) scalars[k] = v;
+    }
+    teams.push({ matchId, side, ...scalars });
+    const keys = { matchId, side, teamId: block.teamId };
+    for (const selection of ["fielded", "benched"]) {
+      for (const person of Array.isArray(block[selection]) ? block[selection] : []) {
+        if (isPlainObject16(person)) players.push({ ...keys, selection, ...person });
+      }
+    }
+    for (const person of Array.isArray(block.staff) ? block.staff : []) {
+      if (isPlainObject16(person)) staff.push({ ...keys, ...person });
+    }
+  }
+  return {
+    teams: rowsToFrame(teams, OPTS3),
+    players: rowsToFrame(players, OPTS3),
+    staff: rowsToFrame(staff, OPTS3)
+  };
+}
+function parse_nwsl_lineups(raw) {
+  return parse_nwsl_lineups_tables(raw).players;
+}
+
 // src/parsers/_registry.ts
 var PARSERS = {
   // ---- MLB Stats API ----
@@ -2142,14 +2429,26 @@ var PARSERS = {
   parse_torvik_team_factors,
   parse_torvik_game_stats,
   parse_torvik_player_stats,
-  parse_torvik_game_schedule
+  parse_torvik_game_schedule,
+  // ---- Keyless providers / league APIs (vendored from sdv-py) ----
+  parse_on3_rdb,
+  parse_asa,
+  parse_asa_goals_added,
+  parse_mls_api,
+  parse_mls_entity,
+  parse_mls_standings,
+  parse_mls_match,
+  parse_nwsl_sdp,
+  parse_nwsl_standings,
+  parse_nwsl_stats,
+  parse_nwsl_lineups
 };
 function parserFor(name) {
   return name ? PARSERS[name] : void 0;
 }
 
 // src/parsers/espn.ts
-function isPlainObject16(v) {
+function isPlainObject17(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 function isScalar(v) {
@@ -2551,7 +2850,7 @@ function flattenScalarOneDeep(item) {
   for (const [k, v] of Object.entries(item)) {
     if (isScalar(v)) {
       row[k] = v;
-    } else if (isPlainObject16(v)) {
+    } else if (isPlainObject17(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) row[`${k}_${k2}`] = v2;
       }
@@ -2661,11 +2960,11 @@ function parse_event_plays(payload) {
       if (skip.has(k)) continue;
       if (isScalar(v)) {
         row[k] = v;
-      } else if (isPlainObject16(v)) {
+      } else if (isPlainObject17(v)) {
         for (const [k2, v2] of Object.entries(v)) {
           if (isScalar(v2)) {
             row[`${k}_${k2}`] = v2;
-          } else if (isPlainObject16(v2)) {
+          } else if (isPlainObject17(v2)) {
             for (const [k3, v3] of Object.entries(v2)) {
               if (isScalar(v3)) row[`${k}_${k2}_${k3}`] = v3;
             }
@@ -2684,7 +2983,7 @@ function parse_event_plays(payload) {
 }
 var LIST_PAYLOAD_KEYS = ["items", "entries", "events", "athletes"];
 function parse_items(payload) {
-  if (!payload || !isPlainObject16(payload)) return [];
+  if (!payload || !isPlainObject17(payload)) return [];
   let rows = null;
   for (const key of LIST_PAYLOAD_KEYS) {
     const candidate = payload[key];
@@ -2697,24 +2996,24 @@ function parse_items(payload) {
   return normalize(rows);
 }
 function parse_team_schedule(payload) {
-  if (!payload || !isPlainObject16(payload)) return [];
+  if (!payload || !isPlainObject17(payload)) return [];
   const events = payload.events;
   if (!Array.isArray(events) || !events.length) return [];
   return normalize(events);
 }
 function parse_team_roster(payload) {
-  if (!payload || !isPlainObject16(payload)) return [];
+  if (!payload || !isPlainObject17(payload)) return [];
   const athletes = payload.athletes;
   if (!Array.isArray(athletes) || !athletes.length) return [];
   const first = athletes[0] || {};
-  const isGrouped = isPlainObject16(first) && "position" in first && Array.isArray(first.items);
+  const isGrouped = isPlainObject17(first) && "position" in first && Array.isArray(first.items);
   if (isGrouped) {
     const rows = [];
     for (const group of athletes) {
-      if (!isPlainObject16(group)) continue;
+      if (!isPlainObject17(group)) continue;
       const groupName = group.position;
       for (const player of group.items || []) {
-        if (!isPlainObject16(player)) continue;
+        if (!isPlainObject17(player)) continue;
         rows.push({ position_group: groupName, ...player });
       }
     }
@@ -2724,19 +3023,19 @@ function parse_team_roster(payload) {
   return normalize(athletes);
 }
 function parse_news(payload) {
-  if (!payload || !isPlainObject16(payload)) return [];
+  if (!payload || !isPlainObject17(payload)) return [];
   const articles = payload.articles;
   if (!Array.isArray(articles) || !articles.length) return [];
   return normalize(articles);
 }
 function parse_injuries(payload) {
-  if (!payload || !isPlainObject16(payload)) return [];
+  if (!payload || !isPlainObject17(payload)) return [];
   const teams = payload.injuries;
   if (!Array.isArray(teams) || !teams.length) return [];
   return normalize(teams);
 }
 function singleRow(payloadDict) {
-  if (!isPlainObject16(payloadDict) || Object.keys(payloadDict).length === 0) return [];
+  if (!isPlainObject17(payloadDict) || Object.keys(payloadDict).length === 0) return [];
   return normalize([payloadDict]);
 }
 function rowPerItem(items) {
@@ -2744,7 +3043,7 @@ function rowPerItem(items) {
   return normalize(items);
 }
 function parse_summary_boxscore_player(payload) {
-  if (!isPlainObject16(payload)) return [];
+  if (!isPlainObject17(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.players || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -2785,7 +3084,7 @@ function parse_summary_boxscore_player(payload) {
   return normalize(rows);
 }
 function parse_summary_boxscore_team(payload) {
-  if (!isPlainObject16(payload)) return [];
+  if (!isPlainObject17(payload)) return [];
   const bs = payload.boxscore || {};
   const teams = bs.teams || [];
   if (!Array.isArray(teams) || !teams.length) return [];
@@ -2813,19 +3112,19 @@ function parse_summary_boxscore_team(payload) {
   return normalize(rows);
 }
 function parse_summary_plays(payload) {
-  if (!isPlainObject16(payload)) return [];
+  if (!isPlainObject17(payload)) return [];
   const plays = payload.plays;
   if (!Array.isArray(plays) || !plays.length) return [];
   return normalize(plays);
 }
 function parse_summary_winprobability(payload) {
-  if (!isPlainObject16(payload)) return [];
+  if (!isPlainObject17(payload)) return [];
   const wp = payload.winprobability;
   if (!Array.isArray(wp) || !wp.length) return [];
   return normalize(wp);
 }
 function parse_summary_leaders(payload) {
-  if (!isPlainObject16(payload)) return [];
+  if (!isPlainObject17(payload)) return [];
   const teams = payload.leaders;
   if (!Array.isArray(teams) || !teams.length) return [];
   const rows = [];
@@ -2866,7 +3165,7 @@ function parse_summary_game_info(payload) {
   for (const [k, v] of Object.entries(venue)) {
     if (isScalar(v)) {
       flat[`venue_${k}`] = v;
-    } else if (isPlainObject16(v)) {
+    } else if (isPlainObject17(v)) {
       for (const [k2, v2] of Object.entries(v)) {
         if (isScalar(v2)) flat[`venue_${k}_${k2}`] = v2;
       }
@@ -2879,7 +3178,7 @@ function parse_summary_officials(payload) {
   return rowPerItem(officials);
 }
 function parse_summary_header(payload) {
-  return singleRow(isPlainObject16(payload) ? payload.header : null);
+  return singleRow(isPlainObject17(payload) ? payload.header : null);
 }
 function parse_summary_season_series(payload) {
   return rowPerItem((payload || {}).seasonseries);
@@ -2900,7 +3199,7 @@ function parse_summary_against_the_spread(payload) {
       for (const [k, v] of Object.entries(rec || {})) {
         if (isScalar(v)) {
           row[k] = v;
-        } else if (isPlainObject16(v)) {
+        } else if (isPlainObject17(v)) {
           for (const [k2, v2] of Object.entries(v)) {
             if (isScalar(v2)) row[`${k}_${k2}`] = v2;
           }
@@ -2918,7 +3217,7 @@ function parse_summary_standings(payload) {
   if (!Array.isArray(groups) || !groups.length) return [];
   const rows = [];
   for (const grp of groups) {
-    if (!isPlainObject16(grp)) continue;
+    if (!isPlainObject17(grp)) continue;
     const grpBase = {
       group_header: grp.header,
       conference_header: grp.conferenceHeader,
@@ -2930,7 +3229,7 @@ function parse_summary_standings(payload) {
       row.team_id = entry.id;
       row.team_uid = entry.uid;
       row.team_location = typeof teamField === "string" ? teamField : null;
-      if (isPlainObject16(teamField)) {
+      if (isPlainObject17(teamField)) {
         row.team_abbreviation = teamField.abbreviation;
         row.team_display_name = teamField.displayName;
       }
@@ -2948,7 +3247,7 @@ function parse_summary_broadcasts(payload) {
   return rowPerItem((payload || {}).broadcasts);
 }
 function parse_summary_format(payload) {
-  return singleRow(isPlainObject16(payload) ? payload.format : null);
+  return singleRow(isPlainObject17(payload) ? payload.format : null);
 }
 function parse_summary_pickcenter(payload) {
   return rowPerItem((payload || {}).pickcenter);
@@ -2957,7 +3256,7 @@ function parse_summary_odds(payload) {
   return rowPerItem((payload || {}).odds);
 }
 function parse_summary_article(payload) {
-  return singleRow(isPlainObject16(payload) ? payload.article : null);
+  return singleRow(isPlainObject17(payload) ? payload.article : null);
 }
 function parse_summary_injuries(payload) {
   return rowPerItem((payload || {}).injuries);
@@ -2966,12 +3265,42 @@ function parse_summary_news(payload) {
   const news = (payload || {}).news || {};
   return rowPerItem(news.articles);
 }
+function parse_fpi(payload) {
+  const teams = (payload || {}).teams;
+  if (!Array.isArray(teams) || teams.length === 0) return [];
+  const namesByCat = {};
+  for (const c of (payload || {}).categories || []) namesByCat[c?.name] = c?.names || [];
+  const rows = teams.map((entry) => {
+    const tm = entry?.team || {};
+    const row = {
+      team_id: tm.id,
+      team_uid: tm.uid,
+      team_abbreviation: tm.abbreviation,
+      team_display_name: tm.displayName,
+      team_short_display_name: tm.shortDisplayName,
+      team_nickname: tm.nickname
+    };
+    for (const cat of entry?.categories || []) {
+      const names = cat.names || namesByCat[cat.name] || [];
+      const values = cat.values || [];
+      const n = Math.min(names.length, values.length);
+      for (let i = 0; i < n; i++) {
+        let key = pyUnderscore(String(names[i]));
+        if (key in row) key = `${key}_${pyUnderscore(String(cat.name ?? "x"))}`;
+        row[key] = values[i];
+      }
+    }
+    row.season = payload.requestedSeason;
+    return row;
+  });
+  return normalize(rows);
+}
 function parse_single_entity(payload) {
-  return singleRow(isPlainObject16(payload) ? payload : null);
+  return singleRow(isPlainObject17(payload) ? payload : null);
 }
 function parse_summary_drives(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject16(drives) ? drives.previous : null;
+  const previous = isPlainObject17(drives) ? drives.previous : null;
   return rowPerItem(previous);
 }
 function parse_summary_scoring_plays(payload) {
@@ -2979,15 +3308,15 @@ function parse_summary_scoring_plays(payload) {
 }
 function parse_summary_drive_plays(payload) {
   const drives = (payload || {}).drives || {};
-  const previous = isPlainObject16(drives) ? drives.previous : null;
+  const previous = isPlainObject17(drives) ? drives.previous : null;
   if (!Array.isArray(previous) || !previous.length) return [];
   const rows = [];
   previous.forEach((drive, idx) => {
-    if (!isPlainObject16(drive)) return;
+    if (!isPlainObject17(drive)) return;
     const driveId = drive.id;
     const driveSeq = idx + 1;
     for (const play of drive.plays || []) {
-      if (!isPlainObject16(play)) continue;
+      if (!isPlainObject17(play)) continue;
       rows.push({ drive_id: driveId, drive_sequence: driveSeq, ...play });
     }
   });
@@ -3123,6 +3452,8 @@ var ESPN_ENDPOINT_PARSERS = {
   talentpicks: parse_items,
   // ---- Core v2 list payloads (more) ----
   leaders_core: parse_items,
+  // ESPN fitt-v3 (FPI) team-season table.
+  fpi: parse_fpi,
   season_powerindex: parse_items,
   season_powerindex_leaders: parse_items,
   season_type_corrections: parse_items,
