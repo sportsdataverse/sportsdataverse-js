@@ -43,7 +43,7 @@
 # A family with an overlay/<family>.yaml gets it merged on top.
 source:
   repo: sportsdataverse/sportsdataverse-py
-  ref: 719de79edb685b89c524f8b4c0c146fea0b53855
+  ref: 81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
 
 # Copied verbatim (no transform, not generated here).
 # espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
@@ -166,10 +166,8 @@ families:
     schema_compatible: true
   mlb:
     from: mlb_api
-    # overlay/mlb.yaml: the 14 JS-only endpoints, JS's schemas for the two
-    # parser_overrides below, and a `pbp` patch for sdv-py@719de79's
-    # `timecode` -> `language` query-key bug. Drop that patch once the pin
-    # includes the upstream sdv-py fix.
+    # overlay/mlb.yaml: the 14 JS-only endpoints and JS's schemas for the two
+    # parser_overrides below.
     parsers:
       # src/parsers/mlb.ts: "Faithful port of" sdv-py's MLB Stats parsers (mlb_parsers.py,
       # since renamed mlb_api_parsers.py); every py parser is mapped explicitly.
@@ -202,8 +200,10 @@ families:
     # every attached schema on the real captures, so the flip is guarded.
     schema_compatible: false
   torvik:
-    # Both py endpoints use JS's positional parsers, so JS keeps its own schemas
-    # (overlay/torvik.yaml, with the 3 JS-only endpoints).
+    # ratings + team_factors use JS's positional parsers; game_stats /
+    # player_stats / game_schedule (vendored since sdv-py #678) keep py's parser
+    # names but JS's hoopR ports, which py's tables do not describe (undeclared).
+    # JS keeps its own schemas for all five (overlay/torvik.yaml).
     parser_overrides:
       ratings: parse_torvik_ratings
       team_factors: parse_torvik_team_factors

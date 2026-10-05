@@ -107,14 +107,14 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     );
   });
 
-  it('mlb: overlay appends the 14 JS-only endpoints and patches pbp', () => {
+  it('mlb: overlay appends the 14 JS-only endpoints (pbp timecode now upstream)', () => {
     const { doc, ep } = family('mlb', overlay('mlb'));
     doc.api.should.equal('mlb');
     doc.endpoints.length.should.equal(64 + 14);
     ep('teams').parser.should.equal('parse_mlb_teams');
     ep('attendance').path.should.equal('/api/v1/attendance');
     const timecode = ep('pbp').extra_params.find((p) => p.name === 'timecode');
-    timecode.query_key.should.equal('timecode'); // upstream ships `language`
+    timecode.query_key.should.equal('timecode'); // vendored as-is since sdv-py #679
     ep('pbp').returns_schema.should.equal('native/mlb/pbp');
     ep('teams_stats').parser.should.equal('parse_mlb_person_stats');
   });
@@ -156,15 +156,17 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     );
   });
 
-  it('overlay: a patch upstream has absorbed throws (the pbp timecode fix announces itself)', () => {
-    // Simulate the pin including the sdv-py fix: timecode -> query_key timecode.
+  it('overlay: a patch upstream has absorbed throws (the pbp timecode fix announced itself)', () => {
+    // The pin includes the sdv-py fix (#679: timecode -> query_key timecode), so the
+    // JS patch that carried it is now a no-op and must be removed, not kept.
     const py = upstream('endpoints/mlb_api.yaml');
-    const fixed = py.replace(
-      '  - name: timecode\n    query_key: language\n',
-      '  - name: timecode\n    query_key: timecode\n'
-    );
-    fixed.should.not.equal(py); // the bug is present at the current pin
-    (() => transform('mlb', manifest.families.mlb, fixed, overlay('mlb'))).should.throw(
+    py.should.containEql('  - name: timecode\n    query_key: timecode\n');
+    const oldPatch =
+      'endpoints:\n- short: pbp\n  extra_params:\n' +
+      ['language', 'timecode', 'hydrate', 'fields']
+        .map((n) => `  - name: ${n}\n    query_key: ${n}\n    type: str\n`)
+        .join('');
+    (() => transform('mlb', manifest.families.mlb, py, oldPatch)).should.throw(
       /overlay\/mlb\.yaml pbp\.extra_params: already equal upstream; remove it from this overlay entry/
     );
     // An addition that upstream now ships with the same path is also a no-op.
