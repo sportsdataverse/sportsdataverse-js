@@ -18141,7 +18141,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_report",
-    "returnsSchema": "native/pff/player_seasons",
+    "returnsSchema": "native/pff_api/player_seasons",
     "auth": true
   },
   {
@@ -18171,7 +18171,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_report",
-    "returnsSchema": "native/pff/player_snaps_summary",
+    "returnsSchema": "native/pff_api/player_snaps_summary",
     "auth": true
   },
   {
@@ -18201,7 +18201,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_report",
-    "returnsSchema": "native/pff/player_position_pivot",
+    "returnsSchema": "native/pff_api/player_position_pivot",
     "auth": true
   },
   {
@@ -18235,7 +18235,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_player_detail",
-    "returnsSchema": "native/pff/player_offense_summary",
+    "returnsSchema": "native/pff_api/player_offense_summary",
     "auth": true
   },
   {
@@ -18269,7 +18269,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_player_detail",
-    "returnsSchema": "native/pff/player_offense_blocking",
+    "returnsSchema": "native/pff_api/player_offense_blocking",
     "auth": true
   },
   {
@@ -18371,7 +18371,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_player_detail",
-    "returnsSchema": "native/pff/player_passing_summary",
+    "returnsSchema": "native/pff_api/player_passing_summary",
     "auth": true
   },
   {
@@ -18541,7 +18541,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_player_detail",
-    "returnsSchema": "native/pff/player_rushing_summary",
+    "returnsSchema": "native/pff_api/player_rushing_summary",
     "auth": true
   },
   {
@@ -18609,7 +18609,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_player_detail",
-    "returnsSchema": "native/pff/player_receiving_summary",
+    "returnsSchema": "native/pff_api/player_receiving_summary",
     "auth": true
   },
   {
@@ -18643,7 +18643,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_player_detail",
-    "returnsSchema": "native/pff/player_defense_summary",
+    "returnsSchema": "native/pff_api/player_defense_summary",
     "auth": true
   },
   {
@@ -19269,7 +19269,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_report",
-    "returnsSchema": "native/pff/receiving_coverage_stats",
+    "returnsSchema": "native/pff_api/receiving_coverage_stats",
     "auth": true
   },
   {
@@ -19573,7 +19573,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       }
     ],
     "parser": "parse_pff_report",
-    "returnsSchema": "native/pff/receiving_coverage_stats",
+    "returnsSchema": "native/pff_api/receiving_coverage_stats",
     "auth": true
   },
   {
@@ -24373,7 +24373,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_playoffs",
@@ -24559,7 +24560,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24592,7 +24593,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -24620,7 +24621,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24671,7 +24672,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -24699,7 +24700,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24732,7 +24733,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -24760,7 +24761,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24793,7 +24794,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -24811,7 +24812,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -24839,7 +24840,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24882,7 +24883,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24925,7 +24926,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "range_type",
@@ -24968,7 +24969,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -24991,7 +24993,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25014,7 +25016,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "series_id_nullable",
@@ -25042,12 +25045,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661317"
+        "default": "1610612739"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25083,7 +25087,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_ids",
         "queryKey": "GameIDs",
-        "default": "1022200018"
+        "default": "0022000756"
       },
       {
         "name": "league_id",
@@ -25093,12 +25097,12 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "204319"
+        "default": "1629611"
       },
       {
         "name": "season",
         "queryKey": "Season",
-        "default": "2021-22"
+        "default": "2020-21"
       },
       {
         "name": "season_type_all_star",
@@ -25136,12 +25140,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "204319"
+        "default": "2544"
       },
       {
         "name": "season",
         "queryKey": "Season",
-        "default": "2021-22"
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -25179,7 +25184,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_ids",
         "queryKey": "GameIDs",
-        "default": "1022200018"
+        "default": 22201094
       },
       {
         "name": "league_id",
@@ -25189,7 +25194,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": "2021-22"
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -25199,7 +25205,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661317"
+        "default": "1610612739"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25232,7 +25238,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": "2021-22"
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_id_nullable",
@@ -25247,7 +25254,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661317"
+        "default": "1610612739"
       },
       {
         "name": "vs_conference_nullable",
@@ -25285,7 +25292,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_year",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25308,7 +25316,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_year",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25331,7 +25340,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_year",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25354,7 +25364,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_year",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25377,7 +25388,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_all_time",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25579,7 +25591,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661324"
+        "default": "1610612739"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25612,7 +25624,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661324"
+        "default": "1610612739"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25645,7 +25657,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661319"
+        "default": "1610612739"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25663,7 +25675,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": "0022200021"
       },
       {
         "name": "league_id",
@@ -25800,7 +25812,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": 22201086
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -25961,7 +25973,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -26094,7 +26107,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -26262,7 +26276,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -26465,7 +26480,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -26643,7 +26659,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -26846,7 +26863,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -27034,7 +27052,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -27502,7 +27521,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -28670,7 +28690,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -28788,7 +28809,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -28926,7 +28948,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -29122,7 +29145,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -29245,7 +29269,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -29260,7 +29285,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661313"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -29318,7 +29343,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_playoffs",
@@ -29346,7 +29372,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type",
@@ -29379,7 +29406,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type",
@@ -29437,7 +29465,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_playoffs",
@@ -29465,7 +29494,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200034"
+        "default": 22201086
       },
       {
         "name": "start_period",
@@ -29488,7 +29517,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -29549,7 +29578,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -29642,7 +29671,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id_list",
         "queryKey": "PlayerIDList",
-        "default": null
+        "default": "202681,203078,2544,201567,203954"
       },
       {
         "name": "plus_minus",
@@ -29687,7 +29716,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "vs_player_id_list",
         "queryKey": "VsPlayerIDList",
-        "default": null
+        "default": "201566,201939,201935,201142,203076"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -29775,7 +29804,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -29790,7 +29819,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -29903,7 +29933,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -29918,7 +29948,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -30031,7 +30062,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -30046,7 +30077,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -30159,7 +30191,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -30174,7 +30206,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -30287,7 +30320,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -30302,7 +30335,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -30415,7 +30449,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -30430,7 +30464,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -30543,7 +30578,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -30558,7 +30593,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -30671,7 +30707,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -30779,7 +30815,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -30985,7 +31022,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -31179,7 +31217,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -31222,12 +31260,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star_nullable",
@@ -31265,12 +31304,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -31363,7 +31403,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -31919,7 +31960,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "team_id_nullable",
@@ -31957,7 +31999,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -32040,7 +32082,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "2544"
       },
       {
         "name": "plus_minus",
@@ -32055,7 +32097,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -32080,7 +32123,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "vs_player_id",
         "queryKey": "VsPlayerID",
-        "default": "1629488"
+        "default": "203076"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -32172,7 +32215,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_date",
         "queryKey": "GameDate",
-        "default": "2022-07-20"
+        "default": "2021-07-20"
       },
       {
         "name": "league_id",
@@ -32195,7 +32238,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_date",
         "queryKey": "GameDate",
-        "default": "2022-06-26"
+        "default": "2023-03-26"
       },
       {
         "name": "league_id",
@@ -32303,7 +32346,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "1628932"
+        "default": "202696"
       },
       {
         "name": "player_position_nullable",
@@ -32391,7 +32434,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -32429,7 +32473,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "group_id",
         "queryKey": "GROUP_ID",
-        "default": "-1628899-1629481-1630096-1631019-1642784-"
+        "default": "-202689-203493-203501-1626174-1627827-"
       },
       {
         "name": "game_id_nullable",
@@ -32547,7 +32591,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "type_grouping_nullable",
@@ -32650,7 +32695,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -32670,7 +32716,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference",
@@ -32778,7 +32824,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -32798,7 +32845,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference",
@@ -32906,7 +32953,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -32926,7 +32974,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -33034,7 +33082,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -33054,7 +33103,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference",
@@ -33162,7 +33211,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -33182,7 +33232,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference",
@@ -33290,7 +33340,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -33310,7 +33361,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -33418,7 +33469,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -33438,7 +33490,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference",
@@ -33566,7 +33618,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference",
@@ -33684,7 +33736,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -33704,7 +33757,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -33777,7 +33830,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -33973,7 +34027,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -34016,7 +34071,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -34077,7 +34132,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -34087,7 +34143,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -34175,7 +34231,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -34238,7 +34295,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -34356,7 +34413,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -34459,7 +34516,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -34474,7 +34532,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -34577,7 +34635,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -34592,7 +34651,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -34700,7 +34759,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -34715,7 +34775,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       },
       {
         "name": "vs_conference_nullable",
@@ -34730,7 +34790,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "vs_player_id",
         "queryKey": "VsPlayerID",
-        "default": "1628932"
+        "default": "2544"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -34763,7 +34823,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "team_id",
         "queryKey": "TeamID",
-        "default": "1611661328"
+        "default": "1610612749"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -34811,7 +34871,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": "2022-23"
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -34949,7 +35010,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "1022200075"
+        "default": 21700807
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -34990,7 +35051,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_date",
         "queryKey": "GameDate",
-        "default": "2022-06-10"
+        "default": "2023-03-10"
       },
       {
         "name": "league_id",
@@ -35061,7 +35122,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_playoffs",
@@ -35427,7 +35489,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "0022200021"
+        "default": null
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -35871,7 +35933,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -35917,7 +35980,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "series_id_nullable",
@@ -35945,7 +36009,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "team_id",
@@ -36188,7 +36253,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_all_time",
         "queryKey": "SeasonYear",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -36593,7 +36659,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "game_id",
         "queryKey": "GameID",
-        "default": "0022200021"
+        "default": null
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -36772,7 +36838,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -36930,7 +36997,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -37133,7 +37201,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -37326,7 +37395,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -37514,7 +37584,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -38727,7 +38798,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -38903,7 +38975,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -39026,7 +39099,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -39099,7 +39173,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_playoffs",
@@ -39127,7 +39202,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type",
@@ -39155,7 +39231,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "end_period",
         "queryKey": "EndPeriod",
-        "default": null
+        "default": "0"
       },
       {
         "name": "game_id",
@@ -39165,7 +39241,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "start_period",
         "queryKey": "StartPeriod",
-        "default": null
+        "default": "0"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -39365,7 +39441,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id_list",
         "queryKey": "PlayerIDList",
-        "default": null
+        "default": "100720,202250,204319,1627668,1628931"
       },
       {
         "name": "plus_minus",
@@ -39380,7 +39456,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": "2020-21"
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -39410,7 +39487,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "vs_player_id_list",
         "queryKey": "VsPlayerIDList",
-        "default": null
+        "default": "202252,203399,1631022,1628878,204333"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -39513,7 +39590,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -39641,7 +39719,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -39769,7 +39848,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -39897,7 +39977,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -40025,7 +40106,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -40153,7 +40235,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -40281,7 +40364,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -40507,12 +40591,13 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "player_id",
         "queryKey": "PlayerID",
-        "default": "2544"
+        "default": null
       },
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -40651,7 +40736,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star_nullable",
@@ -40694,7 +40780,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -40787,7 +40874,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -41343,7 +41431,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "team_id_nullable",
@@ -41386,7 +41475,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_all",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -41517,7 +41607,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -41830,7 +41921,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       }
     ],
     "parser": "parse_nba_stats_result_sets",
@@ -42041,7 +42133,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -42169,7 +42262,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -42297,7 +42391,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -42425,7 +42520,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -42553,7 +42649,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -42681,7 +42778,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -42809,7 +42907,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment",
@@ -43075,7 +43174,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -43184,7 +43284,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_type_all_star",
@@ -43282,7 +43383,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season_nullable",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -43566,7 +43668,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -43684,7 +43787,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",
@@ -43807,7 +43911,8 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
       {
         "name": "season",
         "queryKey": "Season",
-        "default": null
+        "default": null,
+        "transform": "season_or_previous"
       },
       {
         "name": "season_segment_nullable",

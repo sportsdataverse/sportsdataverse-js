@@ -105,7 +105,7 @@ const FACET_DEFENSE_COVERAGE_MATCHUP_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_report",
-  "returnsSchema": "native/pff/receiving_coverage_stats",
+  "returnsSchema": "native/pff_api/receiving_coverage_stats",
   "auth": true
 };
 
@@ -123,9 +123,9 @@ const FACET_DEFENSE_COVERAGE_MATCHUP_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
  * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
  * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus`.
  * @example await sdv.nfl.pffApiFacetDefenseCoverageMatchup({});
  */
 export const pffApiFacetDefenseCoverageMatchup: WrapperFn = (params = {}) => callFlat(FACET_DEFENSE_COVERAGE_MATCHUP_DEF, params);
@@ -1283,7 +1283,7 @@ const FACET_RECEIVING_COVERAGE_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_report",
-  "returnsSchema": "native/pff/receiving_coverage_stats",
+  "returnsSchema": "native/pff_api/receiving_coverage_stats",
   "auth": true
 };
 
@@ -1301,9 +1301,9 @@ const FACET_RECEIVING_COVERAGE_DEF: WrapperDef = {
  * @param params.headers - optional headers; an `Authorization` here wins over `api_key` and the environment.
  * @param params.api_key - PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.
  * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
- * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`). Default: every table, as a dict; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `defenders`, `receivers`, `versus`.
  * @example await sdv.nfl.pffApiFacetReceivingCoverage({});
  */
 export const pffApiFacetReceivingCoverage: WrapperFn = (params = {}) => callFlat(FACET_RECEIVING_COVERAGE_DEF, params);
@@ -1775,7 +1775,7 @@ const PLAYER_DEFENSE_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_player_detail",
-  "returnsSchema": "native/pff/player_defense_summary",
+  "returnsSchema": "native/pff_api/player_defense_summary",
   "auth": true
 };
 
@@ -1946,7 +1946,7 @@ const PLAYER_OFFENSE_BLOCKING_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_player_detail",
-  "returnsSchema": "native/pff/player_offense_blocking",
+  "returnsSchema": "native/pff_api/player_offense_blocking",
   "auth": true
 };
 
@@ -2117,7 +2117,7 @@ const PLAYER_OFFENSE_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_player_detail",
-  "returnsSchema": "native/pff/player_offense_summary",
+  "returnsSchema": "native/pff_api/player_offense_summary",
   "auth": true
 };
 
@@ -2345,7 +2345,7 @@ const PLAYER_PASSING_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_player_detail",
-  "returnsSchema": "native/pff/player_passing_summary",
+  "returnsSchema": "native/pff_api/player_passing_summary",
   "auth": true
 };
 
@@ -2398,7 +2398,7 @@ const PLAYER_POSITION_PIVOT_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_report",
-  "returnsSchema": "native/pff/player_position_pivot",
+  "returnsSchema": "native/pff_api/player_position_pivot",
   "auth": true
 };
 
@@ -2568,7 +2568,7 @@ const PLAYER_RECEIVING_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_player_detail",
-  "returnsSchema": "native/pff/player_receiving_summary",
+  "returnsSchema": "native/pff_api/player_receiving_summary",
   "auth": true
 };
 
@@ -2739,7 +2739,7 @@ const PLAYER_RUSHING_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_player_detail",
-  "returnsSchema": "native/pff/player_rushing_summary",
+  "returnsSchema": "native/pff_api/player_rushing_summary",
   "auth": true
 };
 
@@ -2792,7 +2792,7 @@ const PLAYER_SEASONS_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_report",
-  "returnsSchema": "native/pff/player_seasons",
+  "returnsSchema": "native/pff_api/player_seasons",
   "auth": true
 };
 
@@ -2844,7 +2844,7 @@ const PLAYER_SNAPS_SUMMARY_DEF: WrapperDef = {
     }
   ],
   "parser": "parse_pff_report",
-  "returnsSchema": "native/pff/player_snaps_summary",
+  "returnsSchema": "native/pff_api/player_snaps_summary",
   "auth": true
 };
 
@@ -2980,7 +2980,7 @@ const POSITION_REPORT_DEF: WrapperDef = {
  * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `report`).
  * @example await sdv.nfl.pffApiPositionReport({ league: '…', report: '…' });
  */
 export const pffApiPositionReport: WrapperFn = (params = {}) => callFlat(POSITION_REPORT_DEF, params);
@@ -3396,7 +3396,7 @@ const TEAM_LEADERS_DEF: WrapperDef = {
  * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `group`).
  * @example await sdv.nfl.pffApiTeamLeaders({ league: '…', team: '…' });
  */
 export const pffApiTeamLeaders: WrapperFn = (params = {}) => callFlat(TEAM_LEADERS_DEF, params);
@@ -3565,7 +3565,7 @@ const TEAM_REPORT_DEF: WrapperDef = {
  * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `report`).
  * @example await sdv.nfl.pffApiTeamReport({ league: '…', team: '…', report: '…' });
  */
 export const pffApiTeamReport: WrapperFn = (params = {}) => callFlat(TEAM_REPORT_DEF, params);
@@ -3770,7 +3770,7 @@ const TEAM_STATS_DEF: WrapperDef = {
  * @param params.strict - throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: `rows`, `teamTotals`. Default: `rows`; an unknown name throws, listing the valid ones.
- * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
+ * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }` (its columns depend on `category`).
  * @example await sdv.nfl.pffApiTeamStats({ league: '…' });
  */
 export const pffApiTeamStats: WrapperFn = (params = {}) => callFlat(TEAM_STATS_DEF, params);

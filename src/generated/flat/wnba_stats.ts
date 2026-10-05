@@ -87,7 +87,8 @@ const ASSISTLEADERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_playoffs",
@@ -616,7 +617,7 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "0022200021"
+      "default": null
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -628,7 +629,7 @@ const BOXSCOREHUSTLEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.wnba.com/stats/boxscorehustlev2`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
+ * @param params.game_id - query parameter (`GameID`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
@@ -1308,7 +1309,8 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1389,7 +1391,8 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "series_id_nullable",
@@ -1435,7 +1438,8 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "team_id",
@@ -1801,7 +1805,8 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
     {
       "name": "season_all_time",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -2412,7 +2417,7 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "0022200021"
+      "default": null
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -2424,7 +2429,7 @@ const HUSTLESTATSBOXSCORE_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.wnba.com/stats/hustlestatsboxscore`
  *
- * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
+ * @param params.game_id - query parameter (`GameID`) — default `null`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `HustleStatsAvailable`, `PlayerStats`, `TeamStats`.
@@ -2645,7 +2650,8 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -2844,7 +2850,8 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3093,7 +3100,8 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3339,7 +3347,8 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3578,7 +3587,8 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -5128,7 +5138,8 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -5350,7 +5361,8 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -5515,7 +5527,8 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -5624,7 +5637,8 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_playoffs",
@@ -5675,7 +5689,8 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type",
@@ -5722,7 +5737,7 @@ const PLAYBYPLAYV2_DEF: WrapperDef = {
     {
       "name": "end_period",
       "queryKey": "EndPeriod",
-      "default": null
+      "default": "0"
     },
     {
       "name": "game_id",
@@ -5732,7 +5747,7 @@ const PLAYBYPLAYV2_DEF: WrapperDef = {
     {
       "name": "start_period",
       "queryKey": "StartPeriod",
-      "default": null
+      "default": "0"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -5744,9 +5759,9 @@ const PLAYBYPLAYV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.wnba.com/stats/playbyplayv2`
  *
- * @param params.end_period - query parameter (`EndPeriod`) — default `null`.
+ * @param params.end_period - query parameter (`EndPeriod`) — default `0`.
  * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
- * @param params.start_period - query parameter (`StartPeriod`) — default `null`.
+ * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayByPlay`, `AvailableVideo`.
@@ -6021,7 +6036,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
     {
       "name": "player_id_list",
       "queryKey": "PlayerIDList",
-      "default": null
+      "default": "100720,202250,204319,1627668,1628931"
     },
     {
       "name": "plus_minus",
@@ -6036,7 +6051,8 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": "2020-21"
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6066,7 +6082,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
     {
       "name": "vs_player_id_list",
       "queryKey": "VsPlayerIDList",
-      "default": null
+      "default": "202252,203399,1631022,1628878,204333"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -6093,16 +6109,16 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id_list - query parameter (`PlayerIDList`) — default `null`.
+ * @param params.player_id_list - query parameter (`PlayerIDList`) — default `100720,202250,204319,1627668,1628931`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
- * @param params.season - query parameter (`Season`) — default `2020-21`.
+ * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `null`.
+ * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `202252,203399,1631022,1628878,204333`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @param params.section - (with `parsed: true`) the table to return: a result-set name the payload ships (sdv-py's `result_set`). Default: every table, as a dict (one table: that table); an unknown name returns `[]` (sdv-py: a zero-row frame).
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`.
@@ -6209,7 +6225,8 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6375,7 +6392,8 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6541,7 +6559,8 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6707,7 +6726,8 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6873,7 +6893,8 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -7039,7 +7060,8 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7205,7 +7227,8 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7507,12 +7530,13 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "2544"
+      "default": null
     },
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7560,7 +7584,7 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
  * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
  * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `null`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
@@ -7726,7 +7750,8 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star_nullable",
@@ -7788,7 +7813,8 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -7902,7 +7928,8 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -8598,7 +8625,8 @@ const PLAYERINDEX_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "team_id_nullable",
@@ -8669,7 +8697,8 @@ const PLAYERNEXTNGAMES_DEF: WrapperDef = {
     {
       "name": "season_all",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -8838,7 +8867,8 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -9303,7 +9333,8 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -9566,7 +9597,8 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -9732,7 +9764,8 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -9898,7 +9931,8 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -10064,7 +10098,8 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -10230,7 +10265,8 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -10396,7 +10432,8 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -10562,7 +10599,8 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -10904,7 +10942,8 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -11087,7 +11126,8 @@ const TEAMGAMELOG_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -11206,7 +11246,8 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -11583,7 +11624,8 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -11737,7 +11779,8 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -11896,7 +11939,8 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",

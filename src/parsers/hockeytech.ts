@@ -42,39 +42,83 @@ function siteKitRows(payload: any): any[] {
   return [];
 }
 
-/** End-year of a season name ("2025-26 Regular Season" -> 2026, "2026 Playoffs" -> 2026). Port of py `_derive_season_year`. */
+/**
+ * End year of a season name; the first rule that matches wins. Port of py `_derive_season_year`.
+ *
+ * 1. `YYYY-YYYY` / `YYYY-YY` (`-` or `/`, spaces allowed): "2025-2026", "2025/26",
+ *    "2026 - 27" -> 2026, 2026, 2027. A two-digit tail takes the start's century, +100 when
+ *    that falls below the start ("1999-00" -> 2000).
+ * 2. `YY-ZZ` with ZZ = YY + 1: "26-27 Regular Season" -> 2027.
+ * 3. The first standalone 4-digit token: a year in 1950..(this year + 2) is itself; else a
+ *    compact span `YYZZ` with ZZ = YY + 1 is its end year ("CCHL 2425 Special Events" -> 2025).
+ *
+ * A two-digit end year is 20ZZ, or 19ZZ when 20ZZ is past this year + 2. A result outside
+ * 1950..(this year + 2), or a name none of the rules match ("19 Tie Break"), is null.
+ */
 function deriveSeasonYear(name: any): number | null {
+  const latest = new Date().getFullYear() + 2;
+  const twoDigitEnd = (zz: number): number => (2000 + zz <= latest ? 2000 + zz : 1900 + zz);
   const s = String(name ?? "");
-  const m = /(\d{4})-(\d{2})/.exec(s);
+  const m = /(\d{4})\s*[-/]\s*(\d{4}|\d{2})(?!\d)/.exec(s);
+  const short = /(?<!\d)(\d{2})\s*[-/]\s*(\d{2})(?!\d)/.exec(s);
+  const token = /(?<!\d)(\d{4})(?!\d)/.exec(s);
+  let yr: number | null = null;
   if (m) {
     const start = Number(m[1]);
-    let end = Math.floor(start / 100) * 100 + Number(m[2]);
-    if (end < start) end += 100;
-    return end;
+    yr = m[2].length === 4 ? Number(m[2]) : Math.floor(start / 100) * 100 + Number(m[2]);
+    if (yr < start) yr += 100;
+  } else if (short && (Number(short[1]) + 1) % 100 === Number(short[2])) {
+    yr = twoDigitEnd(Number(short[2]));
+  } else if (token) {
+    const t = Number(token[1]);
+    if (t >= 1950 && t <= latest) yr = t;
+    else if ((Math.floor(t / 100) + 1) % 100 === t % 100) yr = twoDigitEnd(t % 100);
   }
-  const m2 = /(\d{4})/.exec(s);
-  return m2 ? Number(m2[1]) : null;
+  return yr !== null && yr >= 1950 && yr <= latest ? yr : null;
 }
 
-/** Game-type label from a season name. Port of py `_game_type_label`. */
+/**
+ * Game type of a season name; the first case-insensitive match wins. Port of py
+ * `_game_type_label`: `pre[- ]?season` -> preseason ("2025-26 Preseason Exhibition" stays a
+ * preseason), `playoff|post` -> playoffs, `exhibition` -> exhibition, anything else regular.
+ */
 function gameTypeLabel(name: any): string {
   const n = String(name ?? "").toLowerCase();
   if (/pre[- ]?season/.test(n)) return "preseason";
   if (/playoff|post/.test(n)) return "playoffs";
+  if (n.includes("exhibition")) return "exhibition";
   return "regular";
 }
 
+/** A name spanning two years ("2025-26", "2025/2026", "2026 - 27", "26-27"); py `TWO_YEAR_NAME_RE`. */
+const TWO_YEAR_NAME_RE = /\d{2}\s*[-/]\s*\d{2}/;
+
 /**
  * Parse `hockeytech_seasons()` — one row per season (`SiteKit.Seasons`), plus
- * derived `season_yr` (end-year) and `game_type_label` (regular / playoffs /
- * preseason) as in sdv-py's `parse_seasons`.
+ * derived `season_yr` (end-year integer or null) and `game_type_label` (regular /
+ * playoffs / preseason / exhibition) as in sdv-py's `parse_seasons`.
+ *
+ * A one-year preseason or exhibition name gives the camp's calendar year: "2026 Pre-season"
+ * starts 2026-08-11 and opens 2026-27, so it is 2027, like "2026-27 MHL Exhibition Season".
+ * It is shifted only when the name spans no two years and the row starts in the year the
+ * name gives; PWHL's "2024 Preseason" started 2023-11-01 and stays 2024, the season it opened.
  */
 export function parse_hockeytech_seasons(payload: any): Record<string, any>[] {
-  const rows = siteKitRows(payload).map((r) =>
-    isPlainObject(r)
-      ? { ...r, season_yr: deriveSeasonYear(r.season_name), game_type_label: gameTypeLabel(r.season_name) }
-      : r
-  );
+  const rows = siteKitRows(payload).map((r) => {
+    if (!isPlainObject(r)) return r;
+    const name = String(r.season_name ?? "");
+    let yr = deriveSeasonYear(r.season_name);
+    const label = gameTypeLabel(r.season_name);
+    if (
+      (label === "preseason" || label === "exhibition") &&
+      yr !== null &&
+      !TWO_YEAR_NAME_RE.test(name) &&
+      String(r.start_date ?? "").slice(0, 4) === String(yr)
+    ) {
+      yr += 1;
+    }
+    return { ...r, season_yr: yr, game_type_label: label };
+  });
   return normalize(rows);
 }
 

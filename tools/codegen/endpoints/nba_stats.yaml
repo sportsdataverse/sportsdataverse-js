@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
+# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
 # tools/codegen/endpoints/nba_stats.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/nba_stats.yaml; shared changes land in sdv-py first.
@@ -33,6 +33,7 @@ endpoints:
   summary: GET /stats/alltimeleadersgrids
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
@@ -47,8 +48,10 @@ endpoints:
     query_key: PlayerOrTeam
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_playoffs
@@ -191,7 +194,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -216,7 +219,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
   example_args: {}
   extra_params:
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -237,7 +240,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -275,7 +278,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
   example_args: {}
   extra_params:
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -296,7 +299,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -321,7 +324,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
   example_args: {}
   extra_params:
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -342,7 +345,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -367,7 +370,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``GameSummary``, ``OtherStats``, ``Officials``, ``InactivePlayers``, ``GameInfo``, ``LineScore``, ``LastMeeting``, ``SeasonSeries``, ``AvailableVideo``)
   example_args: {}
   extra_params:
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -380,7 +383,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``, ``Officials``)
   example_args: {}
   extra_params:
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -401,7 +404,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -434,7 +437,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -467,7 +470,7 @@ endpoints:
     name: end_range
     query_key: EndRange
     type: str
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -490,6 +493,7 @@ endpoints:
   summary: GET /stats/boxscoreusagev3
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '0'
     name: is_only_current_season
@@ -500,8 +504,10 @@ endpoints:
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonallplayers
@@ -517,7 +523,7 @@ endpoints:
     name: league_id
     query_key: LeagueID
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -528,14 +534,17 @@ endpoints:
   summary: GET /stats/commonplayerinfo
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: series_id_nullable
@@ -550,16 +559,19 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``CommonTeamRoster``, ``Coaches``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
-  - default: '1611661317'
+  - default: '1610612739'
     name: team_id
     query_key: TeamID
     type: str
@@ -585,7 +597,7 @@ endpoints:
   example_args:
     league_id: '00'
   extra_params:
-  - default: '1022200018'
+  - default: '0022000756'
     name: game_ids
     query_key: GameIDs
     type: str
@@ -593,11 +605,11 @@ endpoints:
     name: league_id
     query_key: LeagueID
     type: str
-  - default: '204319'
+  - default: '1629611'
     name: player_id
     query_key: PlayerID
     type: str
-  - default: 2021-22
+  - default: 2020-21
     name: season
     query_key: Season
     type: str
@@ -612,6 +624,7 @@ endpoints:
   summary: GET /stats/cumestatsplayer
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
@@ -625,13 +638,15 @@ endpoints:
     name: outcome_nullable
     query_key: Outcome
     type: str
-  - default: '204319'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
-  - default: 2021-22
+  - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -658,8 +673,9 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``GameByGameStats``, ``TotalTeamStats``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
-  - default: '1022200018'
+  - default: 22201094
     name: game_ids
     query_key: GameIDs
     type: str
@@ -667,15 +683,17 @@ endpoints:
     name: league_id
     query_key: LeagueID
     type: str
-  - default: 2021-22
+  - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661317'
+  - default: '1610612739'
     name: team_id
     query_key: TeamID
     type: str
@@ -686,6 +704,7 @@ endpoints:
   summary: GET /stats/cumestatsteam
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
@@ -699,9 +718,11 @@ endpoints:
     name: outcome_nullable
     query_key: Outcome
     type: str
-  - default: 2021-22
+  - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_id_nullable
@@ -711,7 +732,7 @@ endpoints:
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661317'
+  - default: '1610612739'
     name: team_id
     query_key: TeamID
     type: str
@@ -734,14 +755,17 @@ endpoints:
   summary: GET /stats/cumestatsteamgames
 - example_args:
     league_id: '00'
+    season_year: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_year
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombinedrillresults
@@ -750,14 +774,17 @@ endpoints:
   summary: GET /stats/draftcombinedrillresults
 - example_args:
     league_id: '00'
+    season_year: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_year
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombinenonstationaryshooting
@@ -766,14 +793,17 @@ endpoints:
   summary: GET /stats/draftcombinenonstationaryshooting
 - example_args:
     league_id: '00'
+    season_year: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_year
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombineplayeranthro
@@ -782,14 +812,17 @@ endpoints:
   summary: GET /stats/draftcombineplayeranthro
 - example_args:
     league_id: '00'
+    season_year: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_year
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombinespotshooting
@@ -798,14 +831,17 @@ endpoints:
   summary: GET /stats/draftcombinespotshooting
 - example_args:
     league_id: '00'
+    season_all_time: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_all_time
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombinestats
@@ -974,7 +1010,7 @@ endpoints:
     name: league_id
     query_key: LeagueID
     type: str
-  - default: '1611661324'
+  - default: '1610612739'
     name: team_id
     query_key: TeamID
     type: str
@@ -998,7 +1034,7 @@ endpoints:
     name: season_type
     query_key: SeasonType
     type: str
-  - default: '1611661324'
+  - default: '1610612739'
     name: team_id
     query_key: TeamID
     type: str
@@ -1022,7 +1058,7 @@ endpoints:
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661319'
+  - default: '1610612739'
     name: team_id
     query_key: TeamID
     type: str
@@ -1036,7 +1072,7 @@ endpoints:
   example_args:
     league_id: '00'
   extra_params:
-  - default: '1022200034'
+  - default: '0022200021'
     name: game_id
     query_key: GameID
     type: str
@@ -1140,7 +1176,7 @@ endpoints:
   summary: GET /stats/hustlestatsboxscore
 - example_args: {}
   extra_params:
-  - default: '1022200034'
+  - default: 22201086
     name: game_id
     query_key: GameID
     type: str
@@ -1189,6 +1225,7 @@ endpoints:
   summary: GET /stats/leaderstiles
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: conference_nullable
@@ -1267,8 +1304,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1301,6 +1340,7 @@ endpoints:
   summary: GET /stats/leaguedashlineups
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: close_def_dist_range_nullable
@@ -1371,8 +1411,10 @@ endpoints:
     query_key: Period
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1413,6 +1455,7 @@ endpoints:
   summary: GET /stats/leaguedashoppptshot
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: college_nullable
@@ -1503,8 +1546,10 @@ endpoints:
     query_key: PlayerPosition
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1545,6 +1590,7 @@ endpoints:
   summary: GET /stats/leaguedashplayerbiostats
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: Ahead or Behind
     name: ahead_behind
@@ -1663,8 +1709,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1705,6 +1753,7 @@ endpoints:
   summary: GET /stats/leaguedashplayerclutch
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: close_def_dist_range_nullable
@@ -1803,8 +1852,10 @@ endpoints:
     query_key: PlayerPosition
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1853,6 +1904,7 @@ endpoints:
   summary: GET /stats/leaguedashplayerptshot
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: college_nullable
@@ -1963,8 +2015,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -2005,6 +2059,7 @@ endpoints:
   summary: GET /stats/leaguedashplayershotlocations
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: college_nullable
@@ -2111,8 +2166,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -2416,6 +2473,7 @@ endpoints:
   summary: GET /stats/leaguedashptstats
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: conference_nullable
@@ -2478,8 +2536,10 @@ endpoints:
     query_key: Period
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3372,6 +3432,7 @@ endpoints:
   summary: GET /stats/leaguegamefinder
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '0'
     name: counter
@@ -3398,8 +3459,10 @@ endpoints:
     query_key: PlayerOrTeam
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -3416,6 +3479,7 @@ endpoints:
   summary: GET /stats/leaguegamelog
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: college_nullable
@@ -3490,8 +3554,10 @@ endpoints:
     query_key: PlayerPosition
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3524,6 +3590,7 @@ endpoints:
   summary: GET /stats/leaguehustlestatsplayer
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: college_nullable
@@ -3598,8 +3665,10 @@ endpoints:
     query_key: PlayerPosition
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3668,6 +3737,7 @@ endpoints:
   summary: GET /stats/leagueleaders
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: conference_nullable
@@ -3750,8 +3820,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3784,6 +3856,7 @@ endpoints:
   summary: GET /stats/leaguelineupviz
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -3846,8 +3919,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3857,7 +3932,7 @@ endpoints:
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661313'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -3876,6 +3951,7 @@ endpoints:
   summary: GET /stats/leagueplayerondetails
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: def_player_id_nullable
@@ -3902,8 +3978,10 @@ endpoints:
     query_key: PerMode
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_playoffs
@@ -3916,14 +3994,17 @@ endpoints:
   summary: GET /stats/leagueseasonmatchups
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type
@@ -3940,14 +4021,17 @@ endpoints:
   summary: GET /stats/leaguestandings
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type
@@ -3964,6 +4048,7 @@ endpoints:
   summary: GET /stats/leaguestandingsv3
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: def_player_id_nullable
@@ -3990,8 +4075,10 @@ endpoints:
     query_key: PerMode
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_playoffs
@@ -4008,7 +4095,7 @@ endpoints:
     name: end_period
     query_key: EndPeriod
     type: str
-  - default: '1022200034'
+  - default: 22201086
     name: game_id
     query_key: GameID
     type: str
@@ -4023,7 +4110,7 @@ endpoints:
   summary: GET /stats/playbyplayv3
 - example_args: {}
   extra_params:
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4071,7 +4158,7 @@ endpoints:
     name: per_mode36
     query_key: PerMode
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4145,7 +4232,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: null
+  - default: 202681,203078,2544,201567,203954
     name: player_id_list
     query_key: PlayerIDList
     type: str
@@ -4181,7 +4268,7 @@ endpoints:
     name: vs_division_nullable
     query_key: VsDivision
     type: str
-  - default: null
+  - default: 201566,201939,201935,201142,203076
     name: vs_player_id_list
     query_key: VsPlayerIDList
     type: str
@@ -4194,6 +4281,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Last5Min5PointPlayerDashboard``, ``Last3Min5PointPlayerDashboard``, ``Last1Min5PointPlayerDashboard``, ``Last30Sec3PointPlayerDashboard``, ``Last10Sec3PointPlayerDashboard``, ``Last5MinPlusMinus5PointPlayerDashboard``, ``Last3MinPlusMinus5PointPlayerDashboard``, ``Last1MinPlusMinus5PointPlayerDashboard``, ``Last30Sec3Point2PlayerDashboard``, ``Last10Sec3Point2PlayerDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4251,7 +4339,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4264,8 +4352,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4296,6 +4386,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ByHalfPlayerDashboard``, ``ByPeriodPlayerDashboard``, ``ByScoreMarginPlayerDashboard``, ``ByActualMarginPlayerDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4353,7 +4444,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4366,8 +4457,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4398,6 +4491,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``LocationPlayerDashboard``, ``WinsLossesPlayerDashboard``, ``MonthPlayerDashboard``, ``PrePostAllStarPlayerDashboard``, ``StartingPosition``, ``DaysRestPlayerDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4455,7 +4549,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4468,8 +4562,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4500,6 +4596,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Last5PlayerDashboard``, ``Last10PlayerDashboard``, ``Last15PlayerDashboard``, ``Last20PlayerDashboard``, ``GameNumberPlayerDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4557,7 +4654,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4570,8 +4667,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4602,6 +4701,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ConferencePlayerDashboard``, ``DivisionPlayerDashboard``, ``OpponentPlayerDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from
@@ -4659,7 +4759,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4672,8 +4772,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -4704,6 +4806,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Shot5FTPlayerDashboard``, ``Shot8FTPlayerDashboard``, ``ShotAreaPlayerDashboard``, ``AssitedShotPlayerDashboard``, ``ShotTypeSummaryPlayerDashboard``, ``ShotTypePlayerDashboard``, ``AssistedBy``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4761,7 +4864,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4774,8 +4877,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4806,6 +4911,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ScoreDifferentialPlayerDashboard``, ``PointsScoredPlayerDashboard``, ``PontsAgainstPlayerDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4863,7 +4969,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -4876,8 +4982,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4965,7 +5073,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -5010,6 +5118,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PassesMade``, ``PassesReceived``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -5052,8 +5161,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -5164,6 +5275,7 @@ endpoints:
   summary: GET /stats/playerdashptreb
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -5214,8 +5326,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -5365,7 +5479,7 @@ endpoints:
     name: per_mode
     query_key: PerMode
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -5394,18 +5508,21 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``SeasonAvg``, ``LastFiveGamesAvg``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star_nullable
@@ -5418,6 +5535,7 @@ endpoints:
   summary: GET /stats/playerfantasyprofilebargraph
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -5431,13 +5549,15 @@ endpoints:
     name: league_id
     query_key: LeagueID
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -5450,6 +5570,7 @@ endpoints:
   summary: GET /stats/playergamelog
 - example_args:
     league_id: '00'
+    season_nullable: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -5508,8 +5629,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_nullable
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -5906,6 +6029,7 @@ endpoints:
   summary: GET /stats/playergamestreakfinder
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: null
     name: active_nullable
@@ -5948,8 +6072,10 @@ endpoints:
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: '0'
     name: team_id_nullable
@@ -5977,7 +6103,7 @@ endpoints:
     name: per_mode36
     query_key: PerMode
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -5990,6 +6116,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``OnOffCourt``, ``ShotDistanceOverall``, ``ShotDistanceOnCourt``, ``ShotDistanceOffCourt``, ``ShotAreaOverall``, ``ShotAreaOnCourt``, ``ShotAreaOffCourt``, ``PlayerInfo``, ``VsPlayerInfo``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6043,7 +6170,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: player_id
     query_key: PlayerID
     type: str
@@ -6056,8 +6183,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6075,7 +6204,7 @@ endpoints:
     name: vs_division_nullable
     query_key: VsDivision
     type: str
-  - default: '1629488'
+  - default: '203076'
     name: vs_player_id
     query_key: VsPlayerID
     type: str
@@ -6143,7 +6272,7 @@ endpoints:
     name: day_offset
     query_key: DayOffset
     type: str
-  - default: '2022-07-20'
+  - default: '2021-07-20'
     name: game_date
     query_key: GameDate
     type: str
@@ -6159,7 +6288,7 @@ endpoints:
 - example_args:
     league_id: '00'
   extra_params:
-  - default: '2022-06-26'
+  - default: '2023-03-26'
     name: game_date
     query_key: GameDate
     type: str
@@ -6245,7 +6374,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '1628932'
+  - default: '202696'
     name: player_id
     query_key: PlayerID
     type: str
@@ -6308,14 +6437,17 @@ endpoints:
   summary: GET /stats/shotchartdetail
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/shotchartleaguewide
@@ -6343,7 +6475,7 @@ endpoints:
     name: date_to_nullable
     query_key: DateTo
     type: str
-  - default: -1628899-1629481-1630096-1631019-1642784-
+  - default: -202689-203493-203501-1626174-1627827-
     name: group_id
     query_key: GROUP_ID
     type: str
@@ -6414,6 +6546,7 @@ endpoints:
   summary: GET /stats/shotchartlineupdetail
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: '00'
     name: league_id
@@ -6436,8 +6569,10 @@ endpoints:
     query_key: SeasonType
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   - default: Offensive
     name: type_grouping_nullable
@@ -6452,6 +6587,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Last5Min5PointTeamDashboard``, ``Last3Min5PointTeamDashboard``, ``Last1Min5PointTeamDashboard``, ``Last30Sec3PointTeamDashboard``, ``Last10Sec3PointTeamDashboard``, ``Last5MinPlusMinus5PointTeamDashboard``, ``Last3MinPlusMinus5PointTeamDashboard``, ``Last1MinPlusMinus5PointTeamDashboard``, ``Last30Sec3Point2TeamDashboard``, ``Last10Sec3Point2TeamDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from
@@ -6518,8 +6654,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -6533,7 +6671,7 @@ endpoints:
     name: shot_clock_range
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -6554,6 +6692,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ByHalfTeamDashboard``, ``ByPeriodTeamDashboard``, ``ByScoreMarginTeamDashboard``, ``ByActualMarginTeamDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from
@@ -6620,8 +6759,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -6635,7 +6776,7 @@ endpoints:
     name: shot_clock_range
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -6656,6 +6797,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``LocationTeamDashboard``, ``WinsLossesTeamDashboard``, ``MonthTeamDashboard``, ``PrePostAllStarTeamDashboard``, ``DaysRestTeamDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6722,8 +6864,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6737,7 +6881,7 @@ endpoints:
     name: shot_clock_range_nullable
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -6758,6 +6902,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Last5TeamDashboard``, ``Last10TeamDashboard``, ``Last15TeamDashboard``, ``Last20TeamDashboard``, ``GameNumberTeamDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from
@@ -6824,8 +6969,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -6839,7 +6986,7 @@ endpoints:
     name: shot_clock_range
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -6860,6 +7007,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ConferenceTeamDashboard``, ``DivisionTeamDashboard``, ``OpponentTeamDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from
@@ -6926,8 +7074,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -6941,7 +7091,7 @@ endpoints:
     name: shot_clock_range
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -6962,6 +7112,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Shot5FTTeamDashboard``, ``Shot8FTTeamDashboard``, ``ShotAreaTeamDashboard``, ``AssitedShotTeamDashboard``, ``ShotTypeTeamDashboard``, ``AssistedBy``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7028,8 +7179,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -7043,7 +7196,7 @@ endpoints:
     name: shot_clock_range_nullable
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7064,6 +7217,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ScoreDifferentialTeamDashboard``, ``PointsScoredTeamDashboard``, ``PontsAgainstTeamDashboard``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from
@@ -7130,8 +7284,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -7145,7 +7301,7 @@ endpoints:
     name: shot_clock_range
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7247,7 +7403,7 @@ endpoints:
     name: shot_clock_range
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7268,6 +7424,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``Lineups``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7342,8 +7499,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -7357,7 +7516,7 @@ endpoints:
     name: shot_clock_range_nullable
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7378,6 +7537,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PassesMade``, ``PassesReceived``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7416,8 +7576,10 @@ endpoints:
     query_key: PerMode
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -7526,6 +7688,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``GeneralShooting``, ``ShotClockShooting``, ``DribbleShooting``, ``ClosestDefenderShooting``, ``ClosestDefender10ftPlusShooting``, ``TouchTimeShooting``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7572,8 +7735,10 @@ endpoints:
     query_key: Period
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -7604,7 +7769,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``TeamBackground``, ``TeamHistory``, ``TeamSocialSites``, ``TeamAwardsChampionships``, ``TeamAwardsConf``, ``TeamAwardsDiv``, ``TeamHof``, ``TeamRetired``, ``TeamAwardsCommCup``)
   example_args: {}
   extra_params:
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7635,6 +7800,7 @@ endpoints:
   summary: GET /stats/teamestimatedmetrics
 - example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7649,14 +7815,16 @@ endpoints:
     query_key: LeagueID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7667,6 +7835,7 @@ endpoints:
   summary: GET /stats/teamgamelog
 - example_args:
     league_id: '00'
+    season_nullable: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7725,8 +7894,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season_nullable
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -7774,7 +7945,7 @@ endpoints:
     name: season_type_nullable
     query_key: SeasonType
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7868,7 +8039,7 @@ endpoints:
     name: shot_clock_range_nullable
     query_key: ShotClockRange
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7889,6 +8060,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamPlayerOnOffDetails``, ``PlayersOnCourtTeamPlayerOnOffDetails``, ``PlayersOffCourtTeamPlayerOnOffDetails``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -7951,8 +8123,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -7962,7 +8136,7 @@ endpoints:
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -7983,6 +8157,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamPlayerOnOffSummary``, ``PlayersOnCourtTeamPlayerOnOffSummary``, ``PlayersOffCourtTeamPlayerOnOffSummary``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -8045,8 +8220,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -8056,7 +8233,7 @@ endpoints:
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -8077,6 +8254,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``vsPlayerOverall``, ``OnOffCourt``, ``ShotDistanceOverall``, ``ShotDistanceOnCourt``, ``ShotDistanceOffCourt``, ``ShotAreaOverall``, ``ShotAreaOnCourt``, ``ShotAreaOffCourt``)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -8143,8 +8321,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -8154,7 +8334,7 @@ endpoints:
     name: season_type_playoffs
     query_key: SeasonType
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -8166,7 +8346,7 @@ endpoints:
     name: vs_division_nullable
     query_key: VsDivision
     type: str
-  - default: '1628932'
+  - default: '2544'
     name: vs_player_id
     query_key: VsPlayerID
     type: str
@@ -8190,7 +8370,7 @@ endpoints:
     name: season_type_all_star
     query_key: SeasonType
     type: str
-  - default: '1611661328'
+  - default: '1610612749'
     name: team_id
     query_key: TeamID
     type: str
@@ -8203,6 +8383,7 @@ endpoints:
     parsed_doc: A dict of two DataFrames keyed ``videoUrls`` (clip URLs, durations, thumbnails) and ``playlist`` (per-event game metadata)
   example_args:
     league_id: '00'
+    season: 2024-25
   extra_params:
   - default: FGA
     name: context_measure_detailed
@@ -8228,9 +8409,11 @@ endpoints:
     name: player_id
     query_key: PlayerID
     type: str
-  - default: 2022-23
+  - default: null
+    description: Season label, e.g. ``2024-25``. Defaults to the previous season at call time (``2025-26`` from October 2026), the latest one that is sure to have data; stats.nba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -8337,7 +8520,7 @@ endpoints:
     name: game_event_id
     query_key: GameEventID
     type: str
-  - default: '1022200075'
+  - default: 21700807
     name: game_id
     query_key: GameID
     type: str
@@ -8366,7 +8549,7 @@ endpoints:
 - example_args:
     league_id: '00'
   extra_params:
-  - default: '2022-06-10'
+  - default: '2023-03-10'
     name: game_date
     query_key: GameDate
     type: str

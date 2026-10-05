@@ -472,9 +472,10 @@ describe('hockeytech: every hockeytechGet caller under the new classification', 
     await mostRecentHockeytechSeason('ahl').should.be.rejectedWith(AssetFetchError);
   });
 
-  it('season helpers: real seasons -> max season_yr; an answered-but-empty list -> NoDataError (not py\'s stale 2026)', async () => {
+  it('season helpers: real seasons -> newest regular season_yr; an answered-but-empty list -> NoDataError', async () => {
     useTransport(() => ({ data: SEASONS() }));
-    (await mostRecentHockeytechSeason('pwhl')).should.equal(2027);
+    // id 10 is the 2026-27 preseason, listed before its regular season: the default is 2026 (py: pwhl 2026)
+    (await mostRecentHockeytechSeason('pwhl')).should.equal(2026);
     useTransport(() => ({ data: '{"SiteKit":{"Seasons":[]}}' }));
     const err = await mostRecentHockeytechSeason('pwhl').should.be.rejectedWith(NoDataError, { message: /lists no season/ });
     err.should.not.be.instanceOf(AssetFetchError);

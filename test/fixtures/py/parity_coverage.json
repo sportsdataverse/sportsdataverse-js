@@ -1,16 +1,16 @@
 {
   "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown. A kind: frames schema counts the columns of every frame, and lists its unexercised ones as <section>.<column>. One with frames_by (a single table, the frame a request parameter picks) is always unverified: a capture records no request parameter to pick it by.",
-  "source_ref": "81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f",
+  "source_ref": "07390b71c156675080b5de573fccbd5a8076c143",
   "totals": {
     "py_tables": 916,
-    "documented": 597,
-    "no_schema": 84,
+    "documented": 616,
+    "no_schema": 65,
     "incompatible": 185,
     "overridden": 25,
     "overlay_schema": 0,
     "undeclared": 25,
     "verified": 438,
-    "unverified": 159,
+    "unverified": 178,
     "unexercised_columns": 1819
   },
   "families": {
@@ -3102,14 +3102,14 @@
     },
     "pff_api": {
       "py_tables": 67,
-      "documented": 48,
-      "no_schema": 19,
+      "documented": 67,
+      "no_schema": 0,
       "incompatible": 0,
       "overridden": 0,
       "overlay_schema": 0,
       "undeclared": 0,
       "verified": 0,
-      "unverified": 48,
+      "unverified": 67,
       "verified_endpoints": {}
     },
     "sports247": {

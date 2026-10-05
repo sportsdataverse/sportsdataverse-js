@@ -27,6 +27,14 @@ export const LEAGUES: LeagueConfig[] = [
     }
   },
   {
+    "prefix": "nbagl",
+    "sport": "basketball",
+    "league": "nba-development",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
     "prefix": "mbb",
     "sport": "basketball",
     "league": "mens-college-basketball",

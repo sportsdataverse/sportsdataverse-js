@@ -126,7 +126,7 @@ columns:
   description: 'Draft information.'
 - name: name
   type: character
-  description: 'Full player name.'
+  description: 'Player full name, first then last (e.g. ''Megan Keller'').'
 - name: player_image
   type: character
   description: 'Player image URL.'

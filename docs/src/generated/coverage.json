@@ -1,6 +1,6 @@
 {
   "_generated": "tools/codegen/generate.mjs — do not edit by hand",
-  "leagueCount": 29,
+  "leagueCount": 30,
   "sportCount": 6,
   "sports": [
     {
@@ -8,6 +8,7 @@
       "prefixes": [
         "mbb",
         "nba",
+        "nbagl",
         "torvik",
         "wbb",
         "wnba"

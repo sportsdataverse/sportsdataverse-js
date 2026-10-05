@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
+# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
 # tools/codegen/endpoints/wnba_stats.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/wnba_stats.yaml; shared changes land in sdv-py first.
@@ -33,6 +33,7 @@ endpoints:
   summary: GET /stats/alltimeleadersgrids
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '10'
     name: league_id
@@ -47,8 +48,10 @@ endpoints:
     query_key: PlayerOrTeam
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_playoffs
@@ -328,7 +331,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PlayerStats``, ``TeamStats``)
   example_args: {}
   extra_params:
-  - default: '0022200021'
+  - default: null
     name: game_id
     query_key: GameID
     type: str
@@ -655,6 +658,7 @@ endpoints:
   summary: GET /stats/boxscoreusagev3
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '0'
     name: is_only_current_season
@@ -665,8 +669,10 @@ endpoints:
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonallplayers
@@ -693,14 +699,17 @@ endpoints:
   summary: GET /stats/commonplayerinfo
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '10'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: series_id_nullable
@@ -715,14 +724,17 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``CommonTeamRoster``, ``Coaches``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '10'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: '1611661317'
     name: team_id
@@ -899,14 +911,17 @@ endpoints:
   summary: GET /stats/cumestatsteamgames
 - example_args:
     league_id: '10'
+    season_all_time: '2024'
   extra_params:
   - default: '10'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season_all_time
     query_key: SeasonYear
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/draftcombinestats
@@ -1230,7 +1245,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``HustleStatsAvailable``, ``PlayerStats``, ``TeamStats``)
   example_args: {}
   extra_params:
-  - default: '0022200021'
+  - default: null
     name: game_id
     query_key: GameID
     type: str
@@ -1290,6 +1305,7 @@ endpoints:
   summary: GET /stats/leaderstiles
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: conference_nullable
@@ -1368,8 +1384,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1402,6 +1420,7 @@ endpoints:
   summary: GET /stats/leaguedashlineups
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: college_nullable
@@ -1492,8 +1511,10 @@ endpoints:
     query_key: PlayerPosition
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1534,6 +1555,7 @@ endpoints:
   summary: GET /stats/leaguedashplayerbiostats
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: Ahead or Behind
     name: ahead_behind
@@ -1652,8 +1674,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1694,6 +1718,7 @@ endpoints:
   summary: GET /stats/leaguedashplayerclutch
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: college_nullable
@@ -1804,8 +1829,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -1846,6 +1873,7 @@ endpoints:
   summary: GET /stats/leaguedashplayershotlocations
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: college_nullable
@@ -1952,8 +1980,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -2882,6 +2912,7 @@ endpoints:
   summary: GET /stats/leaguegamefinder
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '0'
     name: counter
@@ -2908,8 +2939,10 @@ endpoints:
     query_key: PlayerOrTeam
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -2962,6 +2995,7 @@ endpoints:
   summary: GET /stats/leagueleaders
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: conference_nullable
@@ -3044,8 +3078,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3078,6 +3114,7 @@ endpoints:
   summary: GET /stats/leaguelineupviz
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -3140,8 +3177,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3170,6 +3209,7 @@ endpoints:
   summary: GET /stats/leagueplayerondetails
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: def_player_id_nullable
@@ -3196,8 +3236,10 @@ endpoints:
     query_key: PerMode
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_playoffs
@@ -3210,14 +3252,17 @@ endpoints:
   summary: GET /stats/leagueseasonmatchups
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '10'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type
@@ -3236,7 +3281,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``PlayByPlay``, ``AvailableVideo``)
   example_args: {}
   extra_params:
-  - default: null
+  - default: '0'
     name: end_period
     query_key: EndPeriod
     type: str
@@ -3244,7 +3289,7 @@ endpoints:
     name: game_id
     query_key: GameID
     type: str
-  - default: null
+  - default: '0'
     name: start_period
     query_key: StartPeriod
     type: str
@@ -3335,6 +3380,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallCompare``, ``Individual``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: conference_nullable
@@ -3396,7 +3442,7 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: null
+  - default: 100720,202250,204319,1627668,1628931
     name: player_id_list
     query_key: PlayerIDList
     type: str
@@ -3408,9 +3454,11 @@ endpoints:
     name: rank
     query_key: Rank
     type: str
-  - default: 2020-21
+  - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3432,7 +3480,7 @@ endpoints:
     name: vs_division_nullable
     query_key: VsDivision
     type: str
-  - default: null
+  - default: 202252,203399,1631022,1628878,204333
     name: vs_player_id_list
     query_key: VsPlayerIDList
     type: str
@@ -3445,6 +3493,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Last5Min5PointPlayerDashboard``, ``Last3Min5PointPlayerDashboard``, ``Last1Min5PointPlayerDashboard``, ``Last30Sec3PointPlayerDashboard``, ``Last10Sec3PointPlayerDashboard``, ``Last5MinPlusMinus5PointPlayerDashboard``, ``Last3MinPlusMinus5PointPlayerDashboard``, ``Last1MinPlusMinus5PointPlayerDashboard``, ``Last30Sec3Point2PlayerDashboard``, ``Last10Sec3Point2PlayerDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -3515,8 +3564,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3547,6 +3598,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ByHalfPlayerDashboard``, ``ByPeriodPlayerDashboard``, ``ByScoreMarginPlayerDashboard``, ``ByActualMarginPlayerDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -3617,8 +3669,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3649,6 +3703,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``LocationPlayerDashboard``, ``WinsLossesPlayerDashboard``, ``MonthPlayerDashboard``, ``PrePostAllStarPlayerDashboard``, ``StartingPosition``, ``DaysRestPlayerDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -3719,8 +3774,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3751,6 +3808,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Last5PlayerDashboard``, ``Last10PlayerDashboard``, ``Last15PlayerDashboard``, ``Last20PlayerDashboard``, ``GameNumberPlayerDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -3821,8 +3879,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -3853,6 +3913,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ConferencePlayerDashboard``, ``DivisionPlayerDashboard``, ``OpponentPlayerDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from
@@ -3923,8 +3984,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -3955,6 +4018,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``Shot5FTPlayerDashboard``, ``Shot8FTPlayerDashboard``, ``ShotAreaPlayerDashboard``, ``AssitedShotPlayerDashboard``, ``ShotTypeSummaryPlayerDashboard``, ``ShotTypePlayerDashboard``, ``AssistedBy``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4025,8 +4089,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4057,6 +4123,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallPlayerDashboard``, ``ScoreDifferentialPlayerDashboard``, ``PointsScoredPlayerDashboard``, ``PontsAgainstPlayerDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4127,8 +4194,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4259,6 +4328,7 @@ endpoints:
   summary: GET /stats/playerdashboardbyyearoveryear
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4304,13 +4374,15 @@ endpoints:
     name: period
     query_key: Period
     type: str
-  - default: '2544'
+  - default: null
     name: player_id
     query_key: PlayerID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4407,6 +4479,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``SeasonAvg``, ``LastFiveGamesAvg``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '10'
     name: league_id
@@ -4417,8 +4490,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star_nullable
@@ -4431,6 +4506,7 @@ endpoints:
   summary: GET /stats/playerfantasyprofilebargraph
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4449,8 +4525,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -4463,6 +4541,7 @@ endpoints:
   summary: GET /stats/playergamelog
 - example_args:
     league_id: '10'
+    season_nullable: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -4521,8 +4600,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season_nullable
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -4919,6 +5000,7 @@ endpoints:
   summary: GET /stats/playergamestreakfinder
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: null
     name: active_nullable
@@ -4961,8 +5043,10 @@ endpoints:
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: '0'
     name: team_id_nullable
@@ -4979,6 +5063,7 @@ endpoints:
   summary: GET /stats/playerindex
 - example_args:
     league_id: '10'
+    season_all: '2024'
   extra_params:
   - default: '10'
     name: league_id
@@ -4993,8 +5078,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season_all
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -5031,6 +5118,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``OnOffCourt``, ``ShotDistanceOverall``, ``ShotDistanceOnCourt``, ``ShotDistanceOffCourt``, ``ShotAreaOverall``, ``ShotAreaOnCourt``, ``ShotAreaOffCourt``, ``PlayerInfo``, ``VsPlayerInfo``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -5097,8 +5185,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -5331,14 +5421,17 @@ endpoints:
   summary: GET /stats/shotchartdetail
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: '10'
     name: league_id
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/shotchartleaguewide
@@ -5439,6 +5532,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Last5Min5PointTeamDashboard``, ``Last3Min5PointTeamDashboard``, ``Last1Min5PointTeamDashboard``, ``Last30Sec3PointTeamDashboard``, ``Last10Sec3PointTeamDashboard``, ``Last5MinPlusMinus5PointTeamDashboard``, ``Last3MinPlusMinus5PointTeamDashboard``, ``Last1MinPlusMinus5PointTeamDashboard``, ``Last30Sec3Point2TeamDashboard``, ``Last10Sec3Point2TeamDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from
@@ -5505,8 +5599,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -5541,6 +5637,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ByHalfTeamDashboard``, ``ByPeriodTeamDashboard``, ``ByScoreMarginTeamDashboard``, ``ByActualMarginTeamDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from
@@ -5607,8 +5704,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -5643,6 +5742,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``LocationTeamDashboard``, ``WinsLossesTeamDashboard``, ``MonthTeamDashboard``, ``PrePostAllStarTeamDashboard``, ``DaysRestTeamDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -5709,8 +5809,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -5745,6 +5847,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Last5TeamDashboard``, ``Last10TeamDashboard``, ``Last15TeamDashboard``, ``Last20TeamDashboard``, ``GameNumberTeamDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from
@@ -5811,8 +5914,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -5847,6 +5952,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ConferenceTeamDashboard``, ``DivisionTeamDashboard``, ``OpponentTeamDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from
@@ -5913,8 +6019,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -5949,6 +6057,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``Shot5FTTeamDashboard``, ``Shot8FTTeamDashboard``, ``ShotAreaTeamDashboard``, ``AssitedShotTeamDashboard``, ``ShotTypeTeamDashboard``, ``AssistedBy``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6015,8 +6124,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6051,6 +6162,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamDashboard``, ``ScoreDifferentialTeamDashboard``, ``PointsScoredTeamDashboard``, ``PontsAgainstTeamDashboard``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from
@@ -6117,8 +6229,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment
@@ -6255,6 +6369,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``Lineups``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6329,8 +6444,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6396,6 +6513,7 @@ endpoints:
   summary: GET /stats/teamestimatedmetrics
 - example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6410,8 +6528,10 @@ endpoints:
     query_key: LeagueID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: Regular Season
     name: season_type_all_star
@@ -6428,6 +6548,7 @@ endpoints:
   summary: GET /stats/teamgamelog
 - example_args:
     league_id: '10'
+    season_nullable: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6486,8 +6607,10 @@ endpoints:
     query_key: PlayerID
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season_nullable
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6650,6 +6773,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamPlayerOnOffDetails``, ``PlayersOnCourtTeamPlayerOnOffDetails``, ``PlayersOffCourtTeamPlayerOnOffDetails``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6712,8 +6836,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6744,6 +6870,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``OverallTeamPlayerOnOffSummary``, ``PlayersOnCourtTeamPlayerOnOffSummary``, ``PlayersOffCourtTeamPlayerOnOffSummary``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6806,8 +6933,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
@@ -6838,6 +6967,7 @@ endpoints:
     parsed_doc: A dict of DataFrames keyed by result-set name (``Overall``, ``vsPlayerOverall``, ``OnOffCourt``, ``ShotDistanceOverall``, ``ShotDistanceOnCourt``, ``ShotDistanceOffCourt``, ``ShotAreaOverall``, ``ShotAreaOnCourt``, ``ShotAreaOffCourt``)
   example_args:
     league_id: '10'
+    season: '2024'
   extra_params:
   - default: ''
     name: date_from_nullable
@@ -6904,8 +7034,10 @@ endpoints:
     query_key: Rank
     type: str
   - default: null
+    description: Season year, e.g. ``2024``. Defaults to the previous WNBA season at call time (``2025`` during 2026), as wehoop does; stats.wnba.com answers a request without a season with an empty HTTP 500.
     name: season
     query_key: Season
+    transform: season_or_previous
     type: str
   - default: ''
     name: season_segment_nullable
