@@ -14,8 +14,8 @@
 //   403s) are not wrapped, as in sdv-py.
 // * `sports247_site_pages` is auth-free; its `.json` URLs are sent verbatim.
 //
-// Deltas from sdv-py, by the JS core contract: a failed mint THROWS (sdv-py
-// falls back to an unauthenticated request), and a failed fetch raises
+// As in sdv-py, a failed mint falls back to an unauthenticated request (one
+// warning per process). Delta by the JS core contract: a failed fetch raises
 // NoDataError / AssetFetchError instead of returning `{}`.
 //
 // Importing this module registers both families' defaults (transport, auth,
@@ -24,10 +24,10 @@
 
 import { tokenAuth, type AuthContext, type AuthProvider } from "./auth.js";
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from "./config.js";
-import { AssetFetchError } from "./errors.js";
+import { AssetFetchError, SdvError } from "./errors.js";
 import { jwtExp } from "./nfl_auth.js";
 import { request } from "./request.js";
-import { createImpersonatingTransport, mergeHeaders } from "./transport.js";
+import { createImpersonatingTransport, mergeHeaders, type TransportResponse } from "./transport.js";
 
 /** Site root whose response sets the guest `JWT` cookie. */
 export const SPORTS247_SITE_ROOT = "https://247sports.com/";
@@ -54,17 +54,26 @@ export function guestJwtFromSetCookie(setCookie: string | undefined): string | u
 /**
  * Mint a guest bearer JWT: `GET https://247sports.com/` and read its `JWT`
  * cookie. Single attempt, like sdv-py's `_mint_guest_jwt`; throws
- * AssetFetchError when the root fails or sets no cookie (and passes a
- * TransportUnavailableError through when `impit` is missing).
+ * AssetFetchError when the root fails (network included) or sets no cookie,
+ * and passes a TransportUnavailableError through when `impit` is missing.
  */
 async function mintGuestJwt(ctx: AuthContext): Promise<{ token: string; expiresAt?: number }> {
-  const res = await ctx.transport({
-    method: "GET",
-    url: SPORTS247_SITE_ROOT,
-    headers: { ...SPORTS247_HEADERS },
-    timeoutMs: 30000,
-    responseType: "text",
-  });
+  let res: TransportResponse;
+  try {
+    res = await ctx.transport({
+      method: "GET",
+      url: SPORTS247_SITE_ROOT,
+      headers: { ...SPORTS247_HEADERS },
+      timeoutMs: 30000,
+      responseType: "text",
+    });
+  } catch (err) {
+    if (err instanceof SdvError) throw err;
+    throw new AssetFetchError(`${ctx.family}: guest JWT mint failed (GET ${SPORTS247_SITE_ROOT}: network)`, {
+      url: SPORTS247_SITE_ROOT,
+      cause: err,
+    });
+  }
   const ok = res.status >= 200 && res.status < 300;
   const token = ok ? guestJwtFromSetCookie(res.headers["set-cookie"]) : undefined;
   if (!token) {
@@ -77,10 +86,30 @@ async function mintGuestJwt(ctx: AuthContext): Promise<{ token: string; expiresA
 }
 
 let tokens = tokenAuth({ mint: mintGuestJwt });
+let warnedMintFailure = false;
 
-/** The `sports247` auth provider: a cached, auto-renewed guest bearer JWT. */
+/**
+ * The `sports247` auth provider: a cached, auto-renewed guest bearer JWT. As in
+ * sdv-py, a failed mint does not fail the call: the request goes out WITHOUT a
+ * token (public routes still answer) and one warning per process names the
+ * failure. A route that needs the token then fails loudly — its 401 triggers
+ * one refresh, whose failed mint throws — or with a 403 AssetFetchError.
+ */
 export const sports247Auth: AuthProvider = {
-  apply: (req, ctx) => tokens.apply(req, ctx),
+  async apply(req, ctx) {
+    try {
+      return await tokens.apply(req, ctx);
+    } catch (err) {
+      if (!(err instanceof AssetFetchError)) throw err;
+      if (!warnedMintFailure) {
+        warnedMintFailure = true;
+        process.emitWarning(
+          `${err.message}; continuing without a token (routes that need one will fail).`
+        );
+      }
+      return req;
+    }
+  },
   refresh: (ctx) => tokens.refresh!(ctx),
 };
 

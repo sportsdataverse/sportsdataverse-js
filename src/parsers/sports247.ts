@@ -4,8 +4,9 @@
 // Faithful port of sdv-py `sportsdataverse/cfb/sports247_parsers.py` and
 // `sports247_site_pages_parsers.py` (pin 719de79): same row resolution, same
 // `_`-joined flattening and snake_case columns, same lossless numeric-string
-// casting — so sdv-py's returns schemas describe these outputs (declared
-// `schema_compatible` in tools/codegen/vendor.yaml). JS-wide conventions apply
+// casting. sdv-py's RDB returns schemas describe these outputs (`sports247` is
+// `schema_compatible` in tools/codegen/vendor.yaml); its site-page schemas at
+// the pin are stale on TYPES, so they are not attached. JS-wide conventions apply
 // where pandas has no JS analogue: array cells are JSON.stringify'd (pandas
 // `str()`s them), non-string JSON scalars keep their native type, and a row
 // carries only the keys its payload had (no null-filled union of columns).

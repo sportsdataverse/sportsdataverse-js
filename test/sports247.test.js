@@ -129,13 +129,49 @@ describe('sports247: guest JWT + transport (offline)', () => {
     dataCalls(calls).map((c) => header(c, 'authorization')).should.eql([`Bearer ${stale}`, `Bearer ${fresh}`]);
   });
 
-  it('a failed mint throws AssetFetchError before any data request', async () => {
+  it('a failed mint falls back to no token (sdv-py): a public route still answers; one warning', async () => {
+    const seen = [];
+    const onWarning = (w) => /guest JWT mint failed/.test(w.message) && seen.push(w.message);
+    process.on('warning', onWarning);
     const { transport, calls } = fakeTransport({ jwts: [] }); // root sets no JWT cookie
     configure({ transport: { sports247: transport } });
-    const err = await sdv.sports247.sports247Teams().then(() => null, (e) => e);
+    try {
+      const rows = await sdv.sports247.sports247Teams({ parsed: true });
+      rows.length.should.be.above(100);
+      await sdv.sports247.sports247Teams(); // mints again (nothing cached), warns no more
+      await new Promise((r) => setImmediate(r)); // 'warning' fires on the next tick
+    } finally {
+      process.off('warning', onWarning);
+    }
+    dataCalls(calls).length.should.equal(2);
+    dataCalls(calls).every((c) => header(c, 'authorization') === undefined).should.be.true();
+    seen.length.should.equal(1);
+    seen[0].should.match(/no JWT cookie.*continuing without a token/);
+  });
+
+  it('a failed mint (network error included) still fails a gated route loudly: 401 -> refresh -> throw', async () => {
+    const { transport, calls } = fakeTransport({
+      respond: (req) => (header(req, 'authorization') ? { status: 200, data: [] } : { status: 401, data: '' }),
+    });
+    const offline = async (req) => {
+      if (req.url === 'https://247sports.com/') throw new Error('ECONNRESET');
+      return transport(req);
+    };
+    configure({ transport: { sports247: offline } });
+    const err = await sdv.sports247.sports247Recruits().then(() => null, (e) => e);
     err.should.be.instanceOf(AssetFetchError);
-    err.message.should.match(/guest JWT mint failed/);
-    dataCalls(calls).length.should.equal(0);
+    err.message.should.match(/guest JWT mint failed .*network/);
+    dataCalls(calls).length.should.equal(1); // one unauthenticated try; the refresh mint fails
+  });
+
+  it('a failed mint still fails a gated route that answers 403', async () => {
+    const { transport, calls } = fakeTransport({ jwts: [], respond: () => ({ status: 403, data: '' }) });
+    configure({ transport: { sports247: transport } });
+    const err = await sdv.sports247.sports247Coaches().then(() => null, (e) => e);
+    err.should.be.instanceOf(AssetFetchError);
+    err.status.should.equal(403);
+    dataCalls(calls).length.should.equal(1);
+    should(header(dataCalls(calls)[0], 'authorization')).be.undefined();
   });
 
   it('a 403 is not retried (fingerprint block / logged-in-only route)', async () => {

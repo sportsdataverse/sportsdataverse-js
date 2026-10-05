@@ -272,9 +272,12 @@ npm install impit
 - **Auth (`sports247` only).** The family registers a `tokenAuth`. On first use
   it requests `https://247sports.com/` and reads the free **guest** `JWT` cookie
   (no login, valid about 12 hours). It caches that token and re-mints it a
-  minute before the JWT `exp` and once after a `401`. A failed mint throws
-  `AssetFetchError` before any data request. `sports247ClearTokenCache()` drops
-  the cached token.
+  minute before the JWT `exp` and once after a `401`. If the mint fails, the
+  request goes out **without** a token, as in sdv-py, and one warning is emitted
+  per process. Public routes such as `teams` still answer. A route that needs
+  the token still fails loudly: its `401` triggers one refresh, whose mint fails
+  and throws, or it answers `403` (`AssetFetchError`).
+  `sports247ClearTokenCache()` drops the cached token.
 - **No `403` retries.** A `403` here means the fingerprint block or a
   logged-in-only route, so neither family retries it.
 - Thirteen RDB routes (for example `biggestMovers` and `playerSportRankings`)

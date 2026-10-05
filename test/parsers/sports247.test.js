@@ -16,15 +16,36 @@ import { parserFor } from '../../dist/parsers/_registry.js';
 // copied from sdv-py's tests/fixtures (see the fixture READMEs). The parsers are
 // declared faithful ports (`schema_compatible` in tools/codegen/vendor.yaml), so
 // every capture's parsed columns are checked against the vendored sdv-py returns
-// schema of the endpoint it was captured from.
+// schema of the endpoint it was captured from — names AND types for every schema
+// that is attached (`schema_compatible` in tools/codegen/vendor.yaml).
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..', '..');
 const load = (dir, name) => JSON.parse(readFileSync(join(here, '..', 'fixtures', dir, name), 'utf8'));
-const schemaColumns = (stem) =>
-  parse(readFileSync(join(root, 'tools', 'codegen', 'schemas', `${stem}.yaml`), 'utf8')).columns.map(
-    (c) => c.name
-  );
+const readSchema = (dir, stem) =>
+  parse(readFileSync(join(root, 'tools', 'codegen', ...dir, `${stem}.yaml`), 'utf8')).columns;
+const schemaColumns = (stem) => readSchema(['schemas'], stem).map((c) => c.name);
+// sdv-py's returns-schema type labels -> the JS value kinds that satisfy them.
+const TYPE_OK = {
+  integer: (v) => typeof v === 'bigint' || Number.isInteger(v),
+  double: (v) => typeof v === 'number',
+  numeric: (v) => typeof v === 'number',
+  character: (v) => typeof v === 'string',
+  logical: (v) => typeof v === 'boolean',
+};
+/** `col: schema type vs JS value` for every non-null cell whose type disagrees. */
+function typeMismatches(rows, columns) {
+  const types = Object.fromEntries(columns.map((c) => [c.name, c.type]));
+  const bad = new Set();
+  for (const r of rows) {
+    for (const [col, v] of Object.entries(r)) {
+      if (v === null || v === undefined || !(col in types)) continue;
+      const ok = TYPE_OK[types[col]];
+      if (!ok || !ok(v)) bad.add(`${col}: ${types[col]} vs ${typeof v} ${JSON.stringify(String(v)).slice(0, 20)}`);
+    }
+  }
+  return [...bad];
+}
 const columnsOf = (rows) => [...new Set(rows.flatMap((r) => Object.keys(r)))];
 const def = (api, short) => FLAT_WRAPPERS.find((w) => w.api === api && w.short === short);
 
@@ -187,7 +208,14 @@ describe('parsers/sports247: site pages (parse_sports247_site_page)', () => {
     }
   });
 
-  it("every capture's columns are covered by its endpoint's vendored sdv-py returns schema", () => {
+  it("every capture's column NAMES are covered by sdv-py's (unattached) upstream schema", () => {
+    // sdv-py@719de79's site-page schemas are not attached (their TYPES are stale
+    // upstream — vendor.yaml), so compare names against the verbatim upstream copy.
+    const upstream = Object.fromEntries(
+      parse(
+        readFileSync(join(root, 'tools', 'codegen', 'vendor', 'upstream', 'endpoints', 'sports247_site_pages.yaml'), 'utf8')
+      ).endpoints.map((e) => [e.short, e.returns_schema])
+    );
     const files = readdirSync(join(here, '..', 'fixtures', 'sports247_site_pages')).filter((f) =>
       f.endsWith('.json')
     );
@@ -197,10 +225,52 @@ describe('parsers/sports247: site pages (parse_sports247_site_page)', () => {
       should.exist(d, short);
       const rows = parserFor(d.parser)(load('sports247_site_pages', file));
       rows.length.should.be.above(0, file);
-      const known = new Set([...schemaColumns(d.returnsSchema), ...(PY_SCHEMA_GAPS[file] ?? [])]);
+      const names = readSchema(['vendor', 'upstream', 'schemas'], upstream[short]).map((c) => c.name);
+      const known = new Set([...names, ...(PY_SCHEMA_GAPS[file] ?? [])]);
       columnsOf(rows).filter((c) => !known.has(c)).should.eql([], file);
     }
     // expert_predictions.json is a real empty capture (`[]`)
     parse_sports247_site_page(load('sports247_site_pages', 'expert_predictions.json')).should.eql([]);
+  });
+});
+
+describe('parsers/sports247: attached returns schemas agree in NAMES and TYPES', () => {
+  // Guard for `schema_compatible` in tools/codegen/vendor.yaml: every endpoint of
+  // the two 247 families that carries a vendored schema must describe what the
+  // parser returns on the real captures. If a pin bump flips sports247_site_pages
+  // back to compatible while sdv-py's types are still stale, this goes red.
+  const captures = [
+    ['sports247', RDB_CAPTURES],
+    ['sports247_site_pages', SITE_CAPTURES],
+  ];
+
+  it('sports247 (RDB) carries a schema on every endpoint; site pages carry none (stale upstream types)', () => {
+    FLAT_WRAPPERS.filter((w) => w.api === 'sports247').every((w) => w.returnsSchema).should.be.true();
+    FLAT_WRAPPERS.filter((w) => w.api === 'sports247_site_pages' && w.returnsSchema).should.eql([]);
+  });
+
+  for (const [api, map] of captures) {
+    it(`${api}: parsed column types match each attached schema on the real captures`, () => {
+      let checked = 0;
+      for (const [file, short] of Object.entries(map)) {
+        const d = def(api, short);
+        if (!d.returnsSchema) continue;
+        const rows = parserFor(d.parser)(load(api, file));
+        typeMismatches(rows, readSchema(['schemas'], d.returnsSchema)).should.eql([], `${api}:${short}`);
+        checked++;
+      }
+      if (api === 'sports247') checked.should.equal(12); // every RDB capture is type-checked
+    });
+  }
+
+  it('the type check catches the stale upstream site-page schemas (so a premature flip fails)', () => {
+    const upstream = Object.fromEntries(
+      parse(
+        readFileSync(join(root, 'tools', 'codegen', 'vendor', 'upstream', 'endpoints', 'sports247_site_pages.yaml'), 'utf8')
+      ).endpoints.map((e) => [e.short, e.returns_schema])
+    );
+    const rows = parse_sports247_site_page(load('sports247_site_pages', 'institution.json'));
+    typeMismatches(rows, readSchema(['vendor', 'upstream', 'schemas'], upstream.institution))
+      .some((m) => m.startsWith('latitude: character')).should.be.true();
   });
 });
