@@ -23,6 +23,8 @@ const FLAT_API_NAMESPACES = {
   nfl_api: 'nfl',
   odds_api: 'odds',
   recruiting: 'recruiting',
+  sports247: 'sports247',
+  sports247_site_pages: 'sports247',
   cbs: 'cbs',
   fox: 'fox',
   yahoo_scores: 'yahoo',
@@ -125,9 +127,11 @@ describe('flat-API wrapper metadata invariants', () => {
     for (const w of nfl) w.host.should.equal('https://api.nfl.com');
   });
 
-  it('flags every nfl_api wrapper auth:true (and only nfl_api so far)', () => {
+  it('flags every nfl_api + sports247 wrapper auth:true (and only those so far)', () => {
+    // sports247: the guest JWT minted by src/core/sports247_runtime.ts.
+    const authed = new Set(['nfl_api', 'sports247']);
     for (const w of FLAT_WRAPPERS) {
-      if (w.api === 'nfl_api') w.auth.should.be.true(`auth flag missing on ${w.short}`);
+      if (authed.has(w.api)) w.auth.should.be.true(`auth flag missing on ${w.api}_${w.short}`);
       else should(w.auth).not.be.true(`unexpected auth flag on ${w.api}_${w.short}`);
     }
   });

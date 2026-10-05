@@ -132,7 +132,7 @@ The generator is a pure file-in / file-out renderer — it makes **no network ca
 sdv-py's codegen YAML is the **source of truth** for the shared families:
 `espn_site_v2`, `espn_core_v2`, `espn_web_v3`, `leagues`, `mlb_statcast`, `nfl_api`,
 the four `nhl_*`, `mlb` (py `mlb_api`), `torvik`, `cbs` (py `cbs_napi`), `yahoo`
-(py `yahoo_shangrila`), plus `endpoints/releases.yaml` (verbatim) and every returns
+(py `yahoo_shangrila`), `sports247`, `sports247_site_pages`, plus `endpoints/releases.yaml` (verbatim) and every returns
 schema those families reference. `tools/codegen/vendor.mjs` derives them from a
 pinned sdv-py commit:
 
@@ -244,7 +244,8 @@ getting its own generated reference page:
 | Family | Namespace | Auth |
 |---|---|---|
 | The Odds API (`odds_api`) | `sdv.odds.*` | `apiKey` query param (caller-supplied) |
-| 247Sports (`recruiting`) | `sdv.recruiting.*` | caller-supplied JWT via `headers` |
+| 247Sports (`sports247` + `sports247_site_pages`, vendored) | `sdv.sports247.*` | **guest JWT minted automatically** (`sports247`; `src/core/sports247_runtime.ts`); both need the impersonating transport (`impit`) and stay off the playground |
+| 247Sports, old (`recruiting`, `api.247sports.com`) | `sdv.recruiting.*` | **deprecated** (host answers 500; one `DeprecationWarning` per method, naming its `sports247` replacement) |
 | CBS Sports (`cbs`) | `sdv.cbs.*` | keyless |
 | Fox Sports (`fox`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
 | Yahoo Sports (`yahoo_scores` + `yahoo`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |

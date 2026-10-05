@@ -1,3 +1,10 @@
+# DEPRECATED (kept for back-compat, not deleted): api.247sports.com answers HTTP
+# 500. The supported 247 surface is the vendored `sports247` (ipa.247sports.com
+# RDB, guest JWT minted automatically) + `sports247_site_pages` families on
+# sdv.sports247. Every endpoint below carries `deprecated:` (its sports247
+# replacement, or why there is none — the 13 logged-in-only routes), which the
+# generator turns into an @deprecated tag + one DeprecationWarning per method.
+#
 # Flat (non-ESPN) API family: the 247Sports Recruit Database ("RDB") API
 # (api.247sports.com /rdb/v1). Recruiting rankings, commits, transfers, team
 # rankings, and tag/photo lookups for college recruiting.
@@ -28,6 +35,7 @@ api: recruiting
 host: https://api.247sports.com
 endpoints:
 - short: coaches
+  deprecated: "use sdv.sports247.sports247_coaches() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/coaches
   parser: parse_recruiting_list
   returns_schema: native/recruiting/coaches
@@ -37,6 +45,7 @@ endpoints:
   - {name: page, query_key: page, default: 1}
   - {name: page_size, query_key: pageSize, default: 25}
 - short: rankings_transfer_portal_player_feed
+  deprecated: "use sdv.sports247.sports247_transfer_portal_player_feed() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/rankings/{sport_key}/{year}/transferPortalPlayerfeed
   parser: parse_recruiting_ranking_feed
   returns_schema: native/recruiting/ranking_feed
@@ -46,6 +55,7 @@ endpoints:
   extra_params:
   - {name: page_size, query_key: pageSize, default: 9}
 - short: rankings_composite_team_feed
+  deprecated: "use sdv.sports247.sports247_composite_team_ranking_feed() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/rankings/{sport_key}/{year}/compositeTeamRankingFeed
   parser: parse_recruiting_ranking_feed
   returns_schema: native/recruiting/ranking_feed
@@ -55,6 +65,7 @@ endpoints:
   extra_params:
   - {name: page_size, query_key: pageSize, default: 9}
 - short: rankings_transfer_portal_team_feed
+  deprecated: "use sdv.sports247.sports247_transfer_portal_team_feed() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/rankings/{sport_key}/{year}/transferPortalOnlyTeamFeed
   parser: parse_recruiting_ranking_feed
   returns_schema: native/recruiting/ranking_feed
@@ -64,10 +75,12 @@ endpoints:
   extra_params:
   - {name: page_size, query_key: pageSize, default: 9}
 - short: institution_groups
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/institutionGroups
   parser: parse_recruiting_list
   returns_schema: native/recruiting/institution_groups
 - short: institution_rankings
+  deprecated: "use sdv.sports247.sports247_institution_rankings() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/rankings/{sport_key}/{year}/institutionrankings
   parser: parse_recruiting_institution_rankings
   returns_schema: native/recruiting/institution_rankings
@@ -83,6 +96,7 @@ endpoints:
   - {name: page_size, query_key: pagesize, default: 10}
   - {name: page, query_key: page, default: 1}
 - short: current_target_predictions
+  deprecated: "use sdv.sports247.sports247_target_predictions() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/sites/{site_key}/years/{year}/sports/{sport_key}/currentTargetPredictions
   parser: parse_recruiting_list
   returns_schema: native/recruiting/current_target_predictions
@@ -94,6 +108,7 @@ endpoints:
   - {name: page, query_key: page, default: 1}
   - {name: page_size, query_key: pageSize, default: 10}
 - short: player_sport_rankings
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/playerSportRankings
   parser: parse_recruiting_list
   returns_schema: native/recruiting/player_sport_rankings
@@ -108,6 +123,7 @@ endpoints:
   - {name: page_size, query_key: pagesize}
   - {name: page, query_key: page}
 - short: transfer_player_sport_rankings
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/transferPlayerSportRankings
   parser: parse_recruiting_list
   returns_schema: native/recruiting/transfer_player_sport_rankings
@@ -122,6 +138,7 @@ endpoints:
   - {name: page_size, query_key: pagesize}
   - {name: page, query_key: page}
 - short: unranked_recruits
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/unrankedRecruits
   parser: parse_recruiting_list
   returns_schema: native/recruiting/unranked_recruits
@@ -137,12 +154,14 @@ endpoints:
   - {name: page_size, query_key: pagesize}
   - {name: page, query_key: page}
 - short: players_under_special_evaluation
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/rankings/{ranking_key}/playerSportsUnderSpecialEvaluation
   parser: parse_recruiting_list
   returns_schema: native/recruiting/players_under_special_evaluation
   path_params:
   - {name: ranking_key, required: true}
 - short: biggest_movers
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/rankings/{ranking_key}/biggestMovers
   parser: parse_recruiting_list
   returns_schema: native/recruiting/biggest_movers
@@ -151,6 +170,7 @@ endpoints:
   extra_params:
   - {name: page_size, query_key: pageSize, default: 10}
 - short: positions
+  deprecated: "use sdv.sports247.sports247_positions() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/positions
   parser: parse_recruiting_list
   returns_schema: native/recruiting/positions
@@ -159,6 +179,7 @@ endpoints:
   - {name: sport_key, query_key: sportKey}
   - {name: year, query_key: year}
 - short: rankings
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/rankings
   parser: parse_recruiting_list
   returns_schema: native/recruiting/rankings
@@ -168,6 +189,7 @@ endpoints:
   - {name: ranking_type, query_key: rankingType}
   - {name: ranking_version, query_key: rankingVersion}
 - short: archived_player_rankings
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/rankings/{ranking_key}/archivedPlayerRankings
   parser: parse_recruiting_list
   returns_schema: native/recruiting/archived_player_rankings
@@ -177,12 +199,14 @@ endpoints:
   - {name: page_size, query_key: pagesize, default: 3}
   - {name: page, query_key: page, default: 1}
 - short: year
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/year
   parser: parse_recruiting_list
   returns_schema: native/recruiting/year
   extra_params:
   - {name: ranking_key, query_key: rankingKey}
 - short: recruits
+  deprecated: "use sdv.sports247.sports247_recruits() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/recruits
   parser: parse_recruiting_list
   returns_schema: native/recruiting/recruits
@@ -193,18 +217,21 @@ endpoints:
   - {name: page, query_key: page, default: 1}
   - {name: page_size, query_key: pageSize, default: 25}
 - short: sports
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/sports
   parser: parse_recruiting_list
   returns_schema: native/recruiting/sports
   extra_params:
   - {name: ranking_key, query_key: rankingKey}
 - short: sport_years
+  deprecated: "use sdv.sports247.sports247_sport_years() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/sports/{sport_key}/year
   parser: parse_recruiting_list
   returns_schema: native/recruiting/sport_years
   path_params:
   - {name: sport_key, required: true}
 - short: tags_autocomplete
+  deprecated: "use sdv.sports247.sports247_tags_autocomplete() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/tags/autocomplete
   parser: parse_recruiting_list
   returns_schema: native/recruiting/tags_autocomplete
@@ -212,6 +239,7 @@ endpoints:
   - {name: default_name, query_key: defaultName}
   - {name: items, query_key: items, default: 100}
 - short: tags_photos_by_key
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/tags/{prefixed_key}/photos
   parser: parse_recruiting_paged_list
   returns_schema: native/recruiting/tags_photos
@@ -221,6 +249,7 @@ endpoints:
   - {name: page, query_key: page, default: 1}
   - {name: page_size, query_key: pageSize, default: 25}
 - short: tags_photos_by_type
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/tags/{type}/{key}/photos
   parser: parse_recruiting_paged_list
   returns_schema: native/recruiting/tags_photos
@@ -231,6 +260,7 @@ endpoints:
   - {name: page, query_key: page, default: 1}
   - {name: page_size, query_key: pageSize, default: 25}
 - short: teams
+  deprecated: "use sdv.sports247.sports247_teams() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/teams
   parser: parse_recruiting_list
   returns_schema: native/recruiting/teams
@@ -239,6 +269,7 @@ endpoints:
   - {name: year, query_key: year}
   - {name: institution_type, query_key: institutionType}
 - short: transfers
+  deprecated: "use sdv.sports247.sports247_transfers() instead (api.247sports.com answers HTTP 500)."
   path: /rdb/v1/transfers
   parser: parse_recruiting_list
   returns_schema: native/recruiting/transfers
@@ -254,6 +285,7 @@ endpoints:
   - {name: page_size, query_key: pageSize}
   - {name: page, query_key: page}
 - short: unranked_transfers
+  deprecated: "no sports247 equivalent: this route needs a logged-in 247Sports session (the free guest token is refused) and api.247sports.com answers HTTP 500."
   path: /rdb/v1/transferrankings/{ranking_key}/unrankedtransfers
   parser: parse_recruiting_list
   returns_schema: native/recruiting/unranked_transfers
