@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.ligue1`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLigue1AthleteAwards`
+## `espnLigue1PlayerAwards`
 
-LIGUE1 — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_awards` / `espnLigue1AthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ LIGUE1 — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_awards(...)
+await sdv.ligue1.espnLigue1PlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_awards(...)
 ```
 
-## `espnLigue1AthleteCareerStats`
+## `espnLigue1PlayerCareerStats`
 
-LIGUE1 — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_career_stats` / `espnLigue1AthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ LIGUE1 — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_career_stats(...)
+await sdv.ligue1.espnLigue1PlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_career_stats(...)
 ```
 
-## `espnLigue1AthleteContracts`
+## `espnLigue1PlayerContracts`
 
-LIGUE1 — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_contracts` / `espnLigue1AthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ LIGUE1 — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_contracts(...)
+await sdv.ligue1.espnLigue1PlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_contracts(...)
 ```
 
-## `espnLigue1AthleteCore`
+## `espnLigue1PlayerCore`
 
-LIGUE1 — athlete core (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_core` / `espnLigue1AthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ LIGUE1 — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_core(...)
+await sdv.ligue1.espnLigue1PlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_core(...)
 ```
 
-## `espnLigue1AthleteEventlog`
+## `espnLigue1PlayerEventlog`
 
-LIGUE1 — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_eventlog` / `espnLigue1AthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ LIGUE1 — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_eventlog(...)
+await sdv.ligue1.espnLigue1PlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_eventlog(...)
 ```
 
-## `espnLigue1AthleteInjuries`
+## `espnLigue1PlayerInjuries`
 
-LIGUE1 — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_injuries` / `espnLigue1AthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ LIGUE1 — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_injuries(...)
+await sdv.ligue1.espnLigue1PlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_injuries(...)
 ```
 
-## `espnLigue1AthleteNotes`
+## `espnLigue1PlayerNotes`
 
-LIGUE1 — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_notes` / `espnLigue1AthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ LIGUE1 — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_notes(...)
+await sdv.ligue1.espnLigue1PlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_notes(...)
 ```
 
-## `espnLigue1AthleteRecords`
+## `espnLigue1PlayerRecords`
 
-LIGUE1 — athlete records (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_records` / `espnLigue1AthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ LIGUE1 — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_records(...)
+await sdv.ligue1.espnLigue1PlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_records(...)
 ```
 
-## `espnLigue1AthleteSeasons`
+## `espnLigue1PlayerSeasons`
 
-LIGUE1 — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_seasons` / `espnLigue1AthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ LIGUE1 — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_seasons(...)
+await sdv.ligue1.espnLigue1PlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_seasons(...)
 ```
 
-## `espnLigue1AthleteStatisticslog`
+## `espnLigue1PlayerStatisticslog`
 
-LIGUE1 — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_statisticslog` / `espnLigue1AthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ LIGUE1 — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_statisticslog(...)
+await sdv.ligue1.espnLigue1PlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_statisticslog(...)
 ```
 
-## `espnLigue1AthleteVsAthlete`
+## `espnLigue1PlayerVsPlayer`
 
-LIGUE1 — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athlete_vs_athlete` / `espnLigue1AthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ LIGUE1 — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athlete_vs_athlete(...)
+await sdv.ligue1.espnLigue1PlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_player_vs_player(...)
 ```
 
-## `espnLigue1AthletesIndex`
+## `espnLigue1PlayersIndex`
 
-LIGUE1 — athletes index (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_athletes_index` / `espnLigue1AthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ LIGUE1 — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1AthletesIndex({});
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_athletes_index(...)
+await sdv.ligue1.espnLigue1PlayersIndex({});
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_players_index(...)
 ```
 
 ## `espnLigue1Award`
@@ -403,12 +427,14 @@ await sdv.ligue1.espnLigue1CoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_coach_season(...)
 ```
 
-## `espnLigue1Event`
+## `espnLigue1Game`
 
-LIGUE1 — event (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event` / `espnLigue1Event`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ LIGUE1 — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1Event({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event(...)
+await sdv.ligue1.espnLigue1Game({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game(...)
 ```
 
-## `espnLigue1EventBroadcasts`
+## `espnLigue1GameBroadcasts`
 
-LIGUE1 — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_broadcasts` / `espnLigue1EventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ LIGUE1 — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_broadcasts(...)
+await sdv.ligue1.espnLigue1GameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_broadcasts(...)
 ```
 
-## `espnLigue1EventCompetition`
+## `espnLigue1GameCompetition`
 
-LIGUE1 — event competition (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competition` / `espnLigue1EventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ LIGUE1 — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competition(...)
+await sdv.ligue1.espnLigue1GameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_competition(...)
 ```
 
-## `espnLigue1EventCompetitor`
+## `espnLigue1GameTeam`
 
-LIGUE1 — event competitor (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitor` / `espnLigue1EventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ LIGUE1 — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitor(...)
+await sdv.ligue1.espnLigue1GameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_team(...)
 ```
 
-## `espnLigue1EventCompetitorLeaders`
+## `espnLigue1GameTeamLeaders`
 
-LIGUE1 — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitor_leaders` / `espnLigue1EventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ LIGUE1 — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitor_leaders(...)
+await sdv.ligue1.espnLigue1GameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_team_leaders(...)
 ```
 
-## `espnLigue1EventCompetitorLinescores`
+## `espnLigue1GameTeamLinescores`
 
-LIGUE1 — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitor_linescores` / `espnLigue1EventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ LIGUE1 — event competitor linescores (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitor_linescores(...)
+await sdv.ligue1.espnLigue1GameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_team_linescores(...)
 ```
 
-## `espnLigue1EventCompetitorRecord`
+## `espnLigue1GameTeamRecord`
 
-LIGUE1 — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitor_record` / `espnLigue1EventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ LIGUE1 — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitor_record(...)
+await sdv.ligue1.espnLigue1GameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_team_record(...)
 ```
 
-## `espnLigue1EventCompetitorRoster`
+## `espnLigue1GameTeamRoster`
 
-LIGUE1 — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitor_roster` / `espnLigue1EventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ LIGUE1 — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitor_roster(...)
+await sdv.ligue1.espnLigue1GameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_team_roster(...)
 ```
 
-## `espnLigue1EventCompetitorStatistics`
+## `espnLigue1GameTeamStatistics`
 
-LIGUE1 — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitor_statistics` / `espnLigue1EventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ LIGUE1 — event competitor statistics (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitor_statistics(...)
+await sdv.ligue1.espnLigue1GameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_team_statistics(...)
 ```
 
-## `espnLigue1EventCompetitors`
+## `espnLigue1GameTeams`
 
-LIGUE1 — event competitors (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_competitors` / `espnLigue1EventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ LIGUE1 — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_competitors(...)
+await sdv.ligue1.espnLigue1GameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_teams(...)
 ```
 
-## `espnLigue1EventLeaders`
+## `espnLigue1GameLeaders`
 
-LIGUE1 — event leaders (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_leaders` / `espnLigue1EventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ LIGUE1 — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_leaders(...)
+await sdv.ligue1.espnLigue1GameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_leaders(...)
 ```
 
-## `espnLigue1EventOdds`
+## `espnLigue1GameOdds`
 
-LIGUE1 — event odds (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_odds` / `espnLigue1EventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ LIGUE1 — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_odds(...)
+await sdv.ligue1.espnLigue1GameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_odds(...)
 ```
 
-## `espnLigue1EventOfficialDetail`
+## `espnLigue1GameOfficialDetail`
 
-LIGUE1 — event official detail (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_official_detail` / `espnLigue1EventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ LIGUE1 — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_official_detail(...)
+await sdv.ligue1.espnLigue1GameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_official_detail(...)
 ```
 
-## `espnLigue1EventOfficials`
+## `espnLigue1GameOfficials`
 
-LIGUE1 — event officials (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_officials` / `espnLigue1EventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ LIGUE1 — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_officials(...)
+await sdv.ligue1.espnLigue1GameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_officials(...)
 ```
 
-## `espnLigue1EventPlay`
+## `espnLigue1GamePlay`
 
-LIGUE1 — event play (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_play` / `espnLigue1EventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ LIGUE1 — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_play(...)
+await sdv.ligue1.espnLigue1GamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_play(...)
 ```
 
-## `espnLigue1EventPlayPersonnel`
+## `espnLigue1GamePlayPersonnel`
 
-LIGUE1 — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_play_personnel` / `espnLigue1EventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ LIGUE1 — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_play_personnel(...)
+await sdv.ligue1.espnLigue1GamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_play_personnel(...)
 ```
 
-## `espnLigue1EventPlays`
+## `espnLigue1GamePlays`
 
-LIGUE1 — event plays (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_plays` / `espnLigue1EventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ LIGUE1 — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_plays(...)
+await sdv.ligue1.espnLigue1GamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_plays(...)
 ```
 
-## `espnLigue1EventPowerindex`
+## `espnLigue1GamePowerindex`
 
-LIGUE1 — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_powerindex` / `espnLigue1EventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ LIGUE1 — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_powerindex(...)
+await sdv.ligue1.espnLigue1GamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_powerindex(...)
 ```
 
-## `espnLigue1EventPredictor`
+## `espnLigue1GamePredictor`
 
-LIGUE1 — event predictor (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_predictor` / `espnLigue1EventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ LIGUE1 — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_predictor(...)
+await sdv.ligue1.espnLigue1GamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_predictor(...)
 ```
 
-## `espnLigue1EventProbabilities`
+## `espnLigue1GameProbabilities`
 
-LIGUE1 — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_probabilities` / `espnLigue1EventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ LIGUE1 — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_probabilities(...)
+await sdv.ligue1.espnLigue1GameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_probabilities(...)
 ```
 
-## `espnLigue1EventPropbets`
+## `espnLigue1GamePropbets`
 
-LIGUE1 — event propbets (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_propbets` / `espnLigue1EventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ LIGUE1 — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_propbets(...)
+await sdv.ligue1.espnLigue1GamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_propbets(...)
 ```
 
-## `espnLigue1EventScoringplays`
+## `espnLigue1GameScoringplays`
 
-LIGUE1 — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_scoringplays` / `espnLigue1EventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ LIGUE1 — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_scoringplays(...)
+await sdv.ligue1.espnLigue1GameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_scoringplays(...)
 ```
 
-## `espnLigue1EventSituation`
+## `espnLigue1GameSituation`
 
-LIGUE1 — event situation (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_situation` / `espnLigue1EventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ LIGUE1 — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_situation(...)
+await sdv.ligue1.espnLigue1GameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_situation(...)
 ```
 
-## `espnLigue1EventStatus`
+## `espnLigue1GameStatus`
 
-LIGUE1 — event status (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_event_status` / `espnLigue1EventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ LIGUE1 — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1EventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_event_status(...)
+await sdv.ligue1.espnLigue1GameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_game_status(...)
 ```
 
-## `espnLigue1Events`
+## `espnLigue1Games`
 
-LIGUE1 — events (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_events` / `espnLigue1Events`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ LIGUE1 — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1Events({});
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_events(...)
+await sdv.ligue1.espnLigue1Games({});
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_games(...)
 ```
 
 ## `espnLigue1Franchise`
@@ -1145,11 +1219,13 @@ await sdv.ligue1.espnLigue1Positions({});
 // snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_positions(...)
 ```
 
-## `espnLigue1SeasonAthletes`
+## `espnLigue1SeasonPlayers`
 
-LIGUE1 — season athletes (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_season_athletes` / `espnLigue1SeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ LIGUE1 — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1SeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_athletes(...)
+await sdv.ligue1.espnLigue1SeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_players(...)
 ```
 
 ## `espnLigue1SeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.ligue1.espnLigue1SeasonWeek({ season: '…', season_type: '…', week:
 // snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_week(...)
 ```
 
-## `espnLigue1SeasonWeekEvents`
+## `espnLigue1SeasonWeekGames`
 
-LIGUE1 — season week events (ESPN sports.core.api.espn.com (core v2)).
+LIGUE1 — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fra.1/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligue1_season_week_events` / `espnLigue1SeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ LIGUE1 — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligue1.espnLigue1SeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_week_events(...)
+await sdv.ligue1.espnLigue1SeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.ligue1.espn_ligue1_season_week_games(...)
 ```
 
 ## `espnLigue1SeasonWeekPowerindex`

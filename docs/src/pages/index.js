@@ -89,7 +89,8 @@ const sportLabel = (s) =>
 // namespace itself). Kept tiny + data-derived so a new provider still appears.
 const PROVIDER_LABEL = {
   odds: 'The Odds API',
-  recruiting: '247Sports',
+  recruiting: '247Sports (deprecated)',
+  sports247: '247Sports',
   cbs: 'CBS Sports',
   fox: 'Fox Sports',
   yahoo: 'Yahoo Sports',

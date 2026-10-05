@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.wwc`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWwcAthleteAwards`
+## `espnWwcPlayerAwards`
 
-WWC — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+WWC — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_awards` / `espnWwcAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ WWC — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_awards(...)
+await sdv.wwc.espnWwcPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_awards(...)
 ```
 
-## `espnWwcAthleteCareerStats`
+## `espnWwcPlayerCareerStats`
 
-WWC — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+WWC — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_career_stats` / `espnWwcAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ WWC — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_career_stats(...)
+await sdv.wwc.espnWwcPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_career_stats(...)
 ```
 
-## `espnWwcAthleteContracts`
+## `espnWwcPlayerContracts`
 
-WWC — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+WWC — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_contracts` / `espnWwcAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ WWC — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_contracts(...)
+await sdv.wwc.espnWwcPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_contracts(...)
 ```
 
-## `espnWwcAthleteCore`
+## `espnWwcPlayerCore`
 
-WWC — athlete core (ESPN sports.core.api.espn.com (core v2)).
+WWC — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_core` / `espnWwcAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ WWC — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_core(...)
+await sdv.wwc.espnWwcPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_core(...)
 ```
 
-## `espnWwcAthleteEventlog`
+## `espnWwcPlayerEventlog`
 
-WWC — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+WWC — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_eventlog` / `espnWwcAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ WWC — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_eventlog(...)
+await sdv.wwc.espnWwcPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_eventlog(...)
 ```
 
-## `espnWwcAthleteInjuries`
+## `espnWwcPlayerInjuries`
 
-WWC — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+WWC — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_injuries` / `espnWwcAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ WWC — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_injuries(...)
+await sdv.wwc.espnWwcPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_injuries(...)
 ```
 
-## `espnWwcAthleteNotes`
+## `espnWwcPlayerNotes`
 
-WWC — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+WWC — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_notes` / `espnWwcAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ WWC — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_notes(...)
+await sdv.wwc.espnWwcPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_notes(...)
 ```
 
-## `espnWwcAthleteRecords`
+## `espnWwcPlayerRecords`
 
-WWC — athlete records (ESPN sports.core.api.espn.com (core v2)).
+WWC — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_records` / `espnWwcAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ WWC — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_records(...)
+await sdv.wwc.espnWwcPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_records(...)
 ```
 
-## `espnWwcAthleteSeasons`
+## `espnWwcPlayerSeasons`
 
-WWC — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+WWC — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_seasons` / `espnWwcAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ WWC — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_seasons(...)
+await sdv.wwc.espnWwcPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_seasons(...)
 ```
 
-## `espnWwcAthleteStatisticslog`
+## `espnWwcPlayerStatisticslog`
 
-WWC — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+WWC — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_statisticslog` / `espnWwcAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ WWC — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_statisticslog(...)
+await sdv.wwc.espnWwcPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_statisticslog(...)
 ```
 
-## `espnWwcAthleteVsAthlete`
+## `espnWwcPlayerVsPlayer`
 
-WWC — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+WWC — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athlete_vs_athlete` / `espnWwcAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ WWC — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athlete_vs_athlete(...)
+await sdv.wwc.espnWwcPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_player_vs_player(...)
 ```
 
-## `espnWwcAthletesIndex`
+## `espnWwcPlayersIndex`
 
-WWC — athletes index (ESPN sports.core.api.espn.com (core v2)).
+WWC — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_athletes_index` / `espnWwcAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ WWC — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcAthletesIndex({});
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_athletes_index(...)
+await sdv.wwc.espnWwcPlayersIndex({});
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_players_index(...)
 ```
 
 ## `espnWwcAward`
@@ -403,12 +427,14 @@ await sdv.wwc.espnWwcCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.wwc.espn_wwc_coach_season(...)
 ```
 
-## `espnWwcEvent`
+## `espnWwcGame`
 
-WWC — event (ESPN sports.core.api.espn.com (core v2)).
+WWC — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event` / `espnWwcEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ WWC — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event(...)
+await sdv.wwc.espnWwcGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game(...)
 ```
 
-## `espnWwcEventBroadcasts`
+## `espnWwcGameBroadcasts`
 
-WWC — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+WWC — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_broadcasts` / `espnWwcEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ WWC — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_broadcasts(...)
+await sdv.wwc.espnWwcGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_broadcasts(...)
 ```
 
-## `espnWwcEventCompetition`
+## `espnWwcGameCompetition`
 
-WWC — event competition (ESPN sports.core.api.espn.com (core v2)).
+WWC — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competition` / `espnWwcEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ WWC — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competition(...)
+await sdv.wwc.espnWwcGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_competition(...)
 ```
 
-## `espnWwcEventCompetitor`
+## `espnWwcGameTeam`
 
-WWC — event competitor (ESPN sports.core.api.espn.com (core v2)).
+WWC — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitor` / `espnWwcEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ WWC — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitor(...)
+await sdv.wwc.espnWwcGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_team(...)
 ```
 
-## `espnWwcEventCompetitorLeaders`
+## `espnWwcGameTeamLeaders`
 
-WWC — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+WWC — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitor_leaders` / `espnWwcEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ WWC — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitor_leaders(...)
+await sdv.wwc.espnWwcGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_team_leaders(...)
 ```
 
-## `espnWwcEventCompetitorLinescores`
+## `espnWwcGameTeamLinescores`
 
-WWC — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+WWC — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitor_linescores` / `espnWwcEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ WWC — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitor_linescores(...)
+await sdv.wwc.espnWwcGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_team_linescores(...)
 ```
 
-## `espnWwcEventCompetitorRecord`
+## `espnWwcGameTeamRecord`
 
-WWC — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+WWC — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitor_record` / `espnWwcEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ WWC — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitor_record(...)
+await sdv.wwc.espnWwcGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_team_record(...)
 ```
 
-## `espnWwcEventCompetitorRoster`
+## `espnWwcGameTeamRoster`
 
-WWC — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+WWC — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitor_roster` / `espnWwcEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ WWC — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitor_roster(...)
+await sdv.wwc.espnWwcGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_team_roster(...)
 ```
 
-## `espnWwcEventCompetitorStatistics`
+## `espnWwcGameTeamStatistics`
 
-WWC — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+WWC — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitor_statistics` / `espnWwcEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ WWC — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitor_statistics(...)
+await sdv.wwc.espnWwcGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_team_statistics(...)
 ```
 
-## `espnWwcEventCompetitors`
+## `espnWwcGameTeams`
 
-WWC — event competitors (ESPN sports.core.api.espn.com (core v2)).
+WWC — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_competitors` / `espnWwcEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ WWC — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_competitors(...)
+await sdv.wwc.espnWwcGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_teams(...)
 ```
 
-## `espnWwcEventLeaders`
+## `espnWwcGameLeaders`
 
-WWC — event leaders (ESPN sports.core.api.espn.com (core v2)).
+WWC — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_leaders` / `espnWwcEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ WWC — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_leaders(...)
+await sdv.wwc.espnWwcGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_leaders(...)
 ```
 
-## `espnWwcEventOdds`
+## `espnWwcGameOdds`
 
-WWC — event odds (ESPN sports.core.api.espn.com (core v2)).
+WWC — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_odds` / `espnWwcEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ WWC — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_odds(...)
+await sdv.wwc.espnWwcGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_odds(...)
 ```
 
-## `espnWwcEventOfficialDetail`
+## `espnWwcGameOfficialDetail`
 
-WWC — event official detail (ESPN sports.core.api.espn.com (core v2)).
+WWC — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_official_detail` / `espnWwcEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ WWC — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_official_detail(...)
+await sdv.wwc.espnWwcGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_official_detail(...)
 ```
 
-## `espnWwcEventOfficials`
+## `espnWwcGameOfficials`
 
-WWC — event officials (ESPN sports.core.api.espn.com (core v2)).
+WWC — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_officials` / `espnWwcEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ WWC — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_officials(...)
+await sdv.wwc.espnWwcGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_officials(...)
 ```
 
-## `espnWwcEventPlay`
+## `espnWwcGamePlay`
 
-WWC — event play (ESPN sports.core.api.espn.com (core v2)).
+WWC — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_play` / `espnWwcEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ WWC — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_play(...)
+await sdv.wwc.espnWwcGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_play(...)
 ```
 
-## `espnWwcEventPlayPersonnel`
+## `espnWwcGamePlayPersonnel`
 
-WWC — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+WWC — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_play_personnel` / `espnWwcEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ WWC — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_play_personnel(...)
+await sdv.wwc.espnWwcGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_play_personnel(...)
 ```
 
-## `espnWwcEventPlays`
+## `espnWwcGamePlays`
 
-WWC — event plays (ESPN sports.core.api.espn.com (core v2)).
+WWC — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_plays` / `espnWwcEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ WWC — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_plays(...)
+await sdv.wwc.espnWwcGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_plays(...)
 ```
 
-## `espnWwcEventPowerindex`
+## `espnWwcGamePowerindex`
 
-WWC — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+WWC — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_powerindex` / `espnWwcEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ WWC — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_powerindex(...)
+await sdv.wwc.espnWwcGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_powerindex(...)
 ```
 
-## `espnWwcEventPredictor`
+## `espnWwcGamePredictor`
 
-WWC — event predictor (ESPN sports.core.api.espn.com (core v2)).
+WWC — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_predictor` / `espnWwcEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ WWC — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_predictor(...)
+await sdv.wwc.espnWwcGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_predictor(...)
 ```
 
-## `espnWwcEventProbabilities`
+## `espnWwcGameProbabilities`
 
-WWC — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+WWC — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_probabilities` / `espnWwcEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ WWC — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_probabilities(...)
+await sdv.wwc.espnWwcGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_probabilities(...)
 ```
 
-## `espnWwcEventPropbets`
+## `espnWwcGamePropbets`
 
-WWC — event propbets (ESPN sports.core.api.espn.com (core v2)).
+WWC — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_propbets` / `espnWwcEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ WWC — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_propbets(...)
+await sdv.wwc.espnWwcGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_propbets(...)
 ```
 
-## `espnWwcEventScoringplays`
+## `espnWwcGameScoringplays`
 
-WWC — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+WWC — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_scoringplays` / `espnWwcEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ WWC — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_scoringplays(...)
+await sdv.wwc.espnWwcGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_scoringplays(...)
 ```
 
-## `espnWwcEventSituation`
+## `espnWwcGameSituation`
 
-WWC — event situation (ESPN sports.core.api.espn.com (core v2)).
+WWC — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_situation` / `espnWwcEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ WWC — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_situation(...)
+await sdv.wwc.espnWwcGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_situation(...)
 ```
 
-## `espnWwcEventStatus`
+## `espnWwcGameStatus`
 
-WWC — event status (ESPN sports.core.api.espn.com (core v2)).
+WWC — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_event_status` / `espnWwcEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ WWC — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_event_status(...)
+await sdv.wwc.espnWwcGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_game_status(...)
 ```
 
-## `espnWwcEvents`
+## `espnWwcGames`
 
-WWC — events (ESPN sports.core.api.espn.com (core v2)).
+WWC — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_events` / `espnWwcEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ WWC — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcEvents({});
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_events(...)
+await sdv.wwc.espnWwcGames({});
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_games(...)
 ```
 
 ## `espnWwcFranchise`
@@ -1145,11 +1219,13 @@ await sdv.wwc.espnWwcPositions({});
 // snake_case alias (py/R parity): sdv.wwc.espn_wwc_positions(...)
 ```
 
-## `espnWwcSeasonAthletes`
+## `espnWwcSeasonPlayers`
 
-WWC — season athletes (ESPN sports.core.api.espn.com (core v2)).
+WWC — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_season_athletes` / `espnWwcSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ WWC — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_season_athletes(...)
+await sdv.wwc.espnWwcSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_season_players(...)
 ```
 
 ## `espnWwcSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.wwc.espnWwcSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.wwc.espn_wwc_season_week(...)
 ```
 
-## `espnWwcSeasonWeekEvents`
+## `espnWwcSeasonWeekGames`
 
-WWC — season week events (ESPN sports.core.api.espn.com (core v2)).
+WWC — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/fifa.wwc/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wwc_season_week_events` / `espnWwcSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ WWC — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.wwc.espnWwcSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.wwc.espn_wwc_season_week_events(...)
+await sdv.wwc.espnWwcSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.wwc.espn_wwc_season_week_games(...)
 ```
 
 ## `espnWwcSeasonWeekPowerindex`

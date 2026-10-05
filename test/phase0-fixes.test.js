@@ -11,12 +11,12 @@ describe('phase 0 fixes (offline)', () => {
 
   it('CBS host carries the /napi base', () => {
     FLAT_HOSTS.cbs.should.equal('https://api.cbssports.com/napi');
-    const fn = sdv.cbs.cbsBoxscore;
+    const fn = sdv.cbs.cbsGameBoxscore;
     should(fn).be.a.Function();
   });
 
   it('a CBS wrapper resolves under /napi/resource/', () => {
-    const def = FLAT_WRAPPERS.find((w) => w.api === 'cbs' && w.short === 'boxscore');
+    const def = FLAT_WRAPPERS.find((w) => w.api === 'cbs' && w.short === 'game_boxscore');
     should(def).exist;
     resolveFlat(def, { game_id: '1' }).url.should.startWith('https://api.cbssports.com/napi/resource/');
   });

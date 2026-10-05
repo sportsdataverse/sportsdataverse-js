@@ -1,4 +1,5 @@
 import cfb from './services/cfb.service.js';
+import { allHockeytechAnalytics, hockeytechEnrichedPbp, hockeytechGameCorsi, hockeytechPlayerToi, hockeytechShiftStints } from './analytics/hockeytech_family.js';
 import { hockeytechSeasonId, mostRecentHockeytechSeason, resolveSeasonId } from './core/hockeytech_runtime.js';
 import mbb from './services/mbb.service.js';
 import mlb from './services/mlb.service.js';
@@ -13,7 +14,12 @@ import wnba from './services/wnba.service.js';
 import { LEAGUES } from './generated/leagues.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { WRITTEN_FLAT } from './generated/flat/index.js';
+import { WRITTEN_LOADERS } from './generated/loaders/index.js';
+import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from './generated/aliases.js';
+import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
+import * as cricketWp from './models/cricket_wp.js';
+import { oddsMath, oddsErrors } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
 // documented `export const` wrappers in src/generated/espn/<prefix>.ts, exposed
@@ -32,10 +38,14 @@ const legacy: Record<string, Record<string, any>> = {
 // `espn_<prefix>_*` wrappers, merged onto its legacy service when one exists
 // (and added as a new namespace otherwise — soccer, cricket, ufl, mch, ...).
 // Each league pulls from its written module (WRITTEN_ESPN); makeLeagueModule is
-// only a fallback if a module is somehow missing.
+// only a fallback if a module is somehow missing. v4: wrappers carry sdv-py's
+// names, and every pre-v4 name a rename replaced is added as a deprecated alias
+// (one DeprecationWarning per name per process; src/generated/aliases.ts).
 const sdv: Record<string, Record<string, any>> = { ...legacy };
 for (const cfg of LEAGUES) {
-  const espn = WRITTEN_ESPN[cfg.prefix] ?? makeLeagueModule(cfg);
+  const espn = WRITTEN_ESPN[cfg.prefix]
+    ? withDeprecatedAliases(WRITTEN_ESPN[cfg.prefix], ESPN_DEPRECATED_ALIASES[cfg.prefix])
+    : makeLeagueModule(cfg);
   sdv[cfg.prefix] = { ...(sdv[cfg.prefix] ?? {}), ...espn };
 }
 
@@ -54,10 +64,15 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace (NOT a league), so `prefix` here is its own name: the merge below
   // creates `sdv.odds.*` from scratch (no legacy/ESPN service to merge onto).
   odds_api: 'odds',
-  // 247Sports Recruit Database — second standalone (non-league) provider family.
-  // `recruiting` is a cross-sport namespace; the merge creates `sdv.recruiting.*`
-  // from scratch. Supersedes the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  // 247Sports Recruit Database on api.247sports.com — DEPRECATED (the host
+  // answers HTTP 500; every method warns once). Kept for back-compat.
   recruiting: 'recruiting',
+  // 247Sports, the supported surface: the RDB on ipa.247sports.com (guest JWT
+  // minted automatically) + the 247sports.com `*.json` page models, both on
+  // `sdv.sports247` (browser-impersonating transport — needs `impit`).
+  // Supersedes `recruiting` and the legacy 247 scrapers on sdv.cfb / sdv.mbb.
+  sports247: 'sports247',
+  sports247_site_pages: 'sports247',
   // CBS Sports API — third standalone (non-league) provider family. `cbs` is a
   // cross-sport namespace; the merge creates `sdv.cbs.*` from scratch (no token —
   // the API data resources are anonymously reachable).
@@ -106,6 +121,13 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
 // the same `callFlat` core, so they resolve identically.
 for (const [api, mod] of Object.entries(WRITTEN_FLAT)) {
   const prefix = FLAT_API_NAMESPACES[api] ?? api;
+  sdv[prefix] = { ...(sdv[prefix] ?? {}), ...withDeprecatedAliases(mod, FLAT_DEPRECATED_ALIASES[api]) };
+}
+
+// Release dataset loaders (`load*` + snake alias, generated from the vendored
+// sdv-py releases.yaml) merged onto their league namespace — additive, after
+// ESPN + flat. A loader-only namespace (`pwhl`) is created here.
+for (const [prefix, mod] of Object.entries(WRITTEN_LOADERS)) {
   sdv[prefix] = { ...(sdv[prefix] ?? {}), ...mod };
 }
 
@@ -128,12 +150,54 @@ const hockeytechSeasonExtra = {
   most_recent_hockeytech_season: mostRecentHockeytechSeason,
   hockeytech_resolve_season_id: resolveSeasonId,
 };
+// HockeyTech analytics (py `<lg>_game_shifts` / `<lg>_player_toi` / `<lg>_game_corsi`): every
+// league gets the three callables (`sdv.hockeytech.pwhl_game_shifts(42)`), plus league-parameterised
+// generics. `hockeytech_game_shifts` stays the raw-feed flat wrapper; the py-parity shift stints
+// are `hockeytech_shift_stints`.
+const hockeytechAnalytics = {
+  ...allHockeytechAnalytics(),
+  hockeytech_shift_stints: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechShiftStints(league, game_id),
+  hockeytech_enriched_pbp: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechEnrichedPbp(league, game_id),
+  hockeytech_player_toi: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechPlayerToi(league, game_id),
+  hockeytech_game_corsi: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechGameCorsi(league, game_id),
+};
+// Never silently overwrite an existing sdv.hockeytech key (the flat raw-feed wrappers share the namespace).
+for (const name of Object.keys(hockeytechAnalytics)) {
+  for (const n of [name, toCamel(name)]) {
+    if (n in sdv.hockeytech || n in hockeytechSeasonExtra) throw new Error(`sdv.hockeytech.${n} already exists`);
+  }
+}
+Object.assign(hockeytechSeasonExtra, hockeytechAnalytics);
 for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
   sdv.hockeytech[name] = fn;
   sdv.hockeytech[toCamel(name)] = fn;
 }
 
+// Cricket in-play win probability (pure, offline) merged onto `sdv.cricket`
+// under py's snake_case names and camelCase aliases.
+const cricketWpExports: Record<string, any> = {
+  cricket_match_state: cricketWp.cricket_match_state,
+  cricket_win_probability: cricketWp.cricket_win_probability,
+  cricket_expected_runs: cricketWp.cricket_expected_runs,
+  cricket_wpa: cricketWp.cricket_wpa,
+  cricket_parse_score_string: cricketWp.parse_score_string,
+  cricket_get_format: cricketWp.get_format,
+};
+for (const [name, fn] of Object.entries(cricketWpExports)) {
+  sdv.cricket[name] = fn;
+  sdv.cricket[toCamel(name)] = fn;
+}
+
+// Odds / market math (py wexp.market) merged onto sdv.odds under py + camelCase names.
+sdv.odds = { ...(sdv.odds ?? {}), ...oddsMath, errors: oddsErrors };
+
 export default sdv;
+
+export { OddsValueError, OddsZeroDivisionError, OddsOverflowError, OddsRuntimeError } from './odds/math.js';
 
 // Advanced / tree-shakeable use:
 export { LEAGUES };
@@ -150,6 +214,7 @@ export {
   NFL_API_HOST,
 } from './core/nfl_auth.js';
 export type { NflTokenOptions } from './core/nfl_auth.js';
+export { sports247ClearTokenCache } from './core/sports247_runtime.js';
 // Runtime core: error vocabulary, configuration, transports, auth providers.
 export {
   SdvError,
@@ -179,7 +244,21 @@ export type { ConfigureOptions, SdvConfig, FamilyDefaults } from './core/config.
 export { axiosTransport, createImpersonatingTransport } from './core/transport.js';
 export type { Transport, TransportRequest, TransportResponse } from './core/transport.js';
 export { bearerAuth, headerAuth, queryAuth, tokenAuth, sessionAuth } from './core/auth.js';
+export { RELEASES_FAMILY } from './core/releases.js';
+export type {
+  ReleaseRow,
+  ReleaseColumns,
+  ReleaseLoaderOptions,
+  SeasonLoaderOptions,
+  SeasonLoader,
+  AssetLoader,
+} from './core/releases.js';
 export type { AuthProvider, AuthContext } from './core/auth.js';
+export {
+  listFunctions, functionCount, findTeam, findAthlete, findEvent, clearTeamCache,
+  list_functions, function_count, find_team, find_athlete, find_event, clear_team_cache,
+} from './discover.js';
+export type { ListFunctionsOptions, Namespaces } from './discover.js';
 export { normalize } from './parsers/_normalize.js';
 export { PARSERS, parserFor, NODE_ONLY_PARSERS } from './parsers/_registry.js';
 export type { ParserFn, FlatParserFn, ParsedTables } from './parsers/_registry.js';

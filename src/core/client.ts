@@ -47,7 +47,13 @@ export const FLAT_HOSTS: Record<string, string> = {
   // but there is no public token-minting machinery, so this family is NOT
   // `auth: true`; the caller supplies their own token via the flat `headers`
   // arg (sdv.recruiting.recruiting_rankings({ headers: { Authorization: … } })).
+  // DEPRECATED: api.247sports.com answers HTTP 500 — use `sports247` below.
   recruiting: "https://api.247sports.com",
+  // 247Sports, the supported surface (sdv.sports247.*): the Recruit Database on
+  // `ipa.` (guest JWT minted for free) and the www `*.json` page models. Both
+  // need the browser-impersonating transport (src/core/sports247_runtime.ts).
+  sports247: "https://ipa.247sports.com",
+  sports247_site_pages: "https://247sports.com",
   // CBS Sports API — third cross-sport (non-league) provider family. Merges
   // onto the standalone `cbs` namespace (sdv.cbs.*). The CBS data resources are
   // anonymously reachable (the spec ships no securityScheme), so this family is

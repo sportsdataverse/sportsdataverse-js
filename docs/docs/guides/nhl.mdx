@@ -15,7 +15,7 @@ package — the ESPN wrappers plus **four** NHL-operated APIs:
 | Family | Methods | Host | What it covers |
 |---|---|---|---|
 | ESPN | `espnNhl*` | `site.api.espn.com` | scoreboard, rosters, summary |
-| api-web | `nhlApiWeb*` | `api-web.nhle.com` | play-by-play, boxscores, standings, leaders |
+| api-web | `nhl*` (`nhlWeb*` where sdv-py has a hand-written `nhl_*`) | `api-web.nhle.com` | play-by-play, boxscores, standings, leaders |
 | EDGE | `nhlEdge*` | `api-web.nhle.com` | player/team puck & skating tracking |
 | Stats REST | `nhlStatsRest*` | `api.nhle.com/stats/rest` | franchises, seasons, glossary |
 | Records | `nhlRecords*` | `records.nhl.com` | all-time franchise & player records |
@@ -40,7 +40,7 @@ No parameters needed — the current season's standings, tidied.
 ```js
 import sdv from 'sportsdataverse';
 
-const standings = await sdv.nhl.nhlApiWebStandingsSeason({ parsed: true });
+const standings = await sdv.nhl.nhlStandingsSeason({ parsed: true });
 console.table(standings);
 ```
 
@@ -61,7 +61,7 @@ Live and inline — a native `api-web.nhle.com` request, no params:
 import sdv from 'sportsdataverse';
 
 // 2023030417 = a 2023 Stanley Cup Final game
-const plays = await sdv.nhl.nhlApiWebPbp({ game_id: '2023030417', parsed: true });
+const plays = await sdv.nhl.nhlWebPbp({ game_id: '2023030417', parsed: true });
 console.table(plays.slice(0, 10));
 ```
 
@@ -223,7 +223,7 @@ api-web family — the game feed, parsed to plays right in your browser:
   source={`const sdv = (await import('sportsdataverse')).default;
 
 // 2023030417 = a 2023 Stanley Cup Final game
-const plays = await sdv.nhl.nhlApiWebPbp({ game_id: '2023030417', parsed: true });
+const plays = await sdv.nhl.nhlWebPbp({ game_id: '2023030417', parsed: true });
 
 // first ten parsed play rows
 plays.slice(0, 10);`}
@@ -231,7 +231,7 @@ plays.slice(0, 10);`}
 
 :::note
 RunKit cells install `sportsdataverse` from npm, so the v3 method names above
-(`nhlApiWebPbp`, `nhlEdge*`, the `parsed` option) light up once **v3 is
+(`nhlWebPbp`, `nhlEdge*`, the `parsed` option) light up once **v3 is
 published**. Until then the embed may resolve v2, whose surface differs. Copy any
 snippet into Node to run it against your installed version.
 :::

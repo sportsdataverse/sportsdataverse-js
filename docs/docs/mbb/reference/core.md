@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.mbb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMbbAthleteAwards`
+## `espnMbbPlayerAwards`
 
-MBB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+MBB — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_awards` / `espnMbbAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ MBB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_awards(...)
+await sdv.mbb.espnMbbPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_awards(...)
 ```
 
-## `espnMbbAthleteCareerStats`
+## `espnMbbPlayerCareerStats`
 
-MBB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+MBB — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_career_stats` / `espnMbbAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ MBB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_career_stats(...)
+await sdv.mbb.espnMbbPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_career_stats(...)
 ```
 
-## `espnMbbAthleteContracts`
+## `espnMbbPlayerContracts`
 
-MBB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+MBB — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_contracts` / `espnMbbAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ MBB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_contracts(...)
+await sdv.mbb.espnMbbPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_contracts(...)
 ```
 
-## `espnMbbAthleteCore`
+## `espnMbbPlayerCore`
 
-MBB — athlete core (ESPN sports.core.api.espn.com (core v2)).
+MBB — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_core` / `espnMbbAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ MBB — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_core(...)
+await sdv.mbb.espnMbbPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_core(...)
 ```
 
-## `espnMbbAthleteEventlog`
+## `espnMbbPlayerEventlog`
 
-MBB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+MBB — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_eventlog` / `espnMbbAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ MBB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_eventlog(...)
+await sdv.mbb.espnMbbPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_eventlog(...)
 ```
 
-## `espnMbbAthleteInjuries`
+## `espnMbbPlayerInjuries`
 
-MBB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+MBB — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_injuries` / `espnMbbAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ MBB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_injuries(...)
+await sdv.mbb.espnMbbPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_injuries(...)
 ```
 
-## `espnMbbAthleteNotes`
+## `espnMbbPlayerNotes`
 
-MBB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+MBB — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_notes` / `espnMbbAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ MBB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_notes(...)
+await sdv.mbb.espnMbbPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_notes(...)
 ```
 
-## `espnMbbAthleteRecords`
+## `espnMbbPlayerRecords`
 
-MBB — athlete records (ESPN sports.core.api.espn.com (core v2)).
+MBB — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_records` / `espnMbbAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ MBB — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_records(...)
+await sdv.mbb.espnMbbPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_records(...)
 ```
 
-## `espnMbbAthleteSeasons`
+## `espnMbbPlayerSeasons`
 
-MBB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+MBB — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_seasons` / `espnMbbAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ MBB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_seasons(...)
+await sdv.mbb.espnMbbPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_seasons(...)
 ```
 
-## `espnMbbAthleteStatisticslog`
+## `espnMbbPlayerStatisticslog`
 
-MBB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+MBB — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_statisticslog` / `espnMbbAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ MBB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_statisticslog(...)
+await sdv.mbb.espnMbbPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_statisticslog(...)
 ```
 
-## `espnMbbAthleteVsAthlete`
+## `espnMbbPlayerVsPlayer`
 
-MBB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+MBB — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athlete_vs_athlete` / `espnMbbAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ MBB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athlete_vs_athlete(...)
+await sdv.mbb.espnMbbPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_vs_player(...)
 ```
 
-## `espnMbbAthletesIndex`
+## `espnMbbPlayersIndex`
 
-MBB — athletes index (ESPN sports.core.api.espn.com (core v2)).
+MBB — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_athletes_index` / `espnMbbAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ MBB — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbAthletesIndex({});
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_athletes_index(...)
+await sdv.mbb.espnMbbPlayersIndex({});
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_players_index(...)
 ```
 
 ## `espnMbbAward`
@@ -403,12 +427,14 @@ await sdv.mbb.espnMbbCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.mbb.espn_mbb_coach_season(...)
 ```
 
-## `espnMbbEvent`
+## `espnMbbGame`
 
-MBB — event (ESPN sports.core.api.espn.com (core v2)).
+MBB — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event` / `espnMbbEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ MBB — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event(...)
+await sdv.mbb.espnMbbGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game(...)
 ```
 
-## `espnMbbEventBroadcasts`
+## `espnMbbGameBroadcasts`
 
-MBB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+MBB — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_broadcasts` / `espnMbbEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ MBB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_broadcasts(...)
+await sdv.mbb.espnMbbGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_broadcasts(...)
 ```
 
-## `espnMbbEventCompetition`
+## `espnMbbGameCompetition`
 
-MBB — event competition (ESPN sports.core.api.espn.com (core v2)).
+MBB — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competition` / `espnMbbEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ MBB — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competition(...)
+await sdv.mbb.espnMbbGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_competition(...)
 ```
 
-## `espnMbbEventCompetitor`
+## `espnMbbGameTeam`
 
-MBB — event competitor (ESPN sports.core.api.espn.com (core v2)).
+MBB — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitor` / `espnMbbEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ MBB — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitor(...)
+await sdv.mbb.espnMbbGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_team(...)
 ```
 
-## `espnMbbEventCompetitorLeaders`
+## `espnMbbGameTeamLeaders`
 
-MBB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+MBB — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitor_leaders` / `espnMbbEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ MBB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitor_leaders(...)
+await sdv.mbb.espnMbbGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_team_leaders(...)
 ```
 
-## `espnMbbEventCompetitorLinescores`
+## `espnMbbGameTeamLinescores`
 
-MBB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+MBB — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitor_linescores` / `espnMbbEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ MBB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitor_linescores(...)
+await sdv.mbb.espnMbbGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_team_linescores(...)
 ```
 
-## `espnMbbEventCompetitorRecord`
+## `espnMbbGameTeamRecord`
 
-MBB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+MBB — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitor_record` / `espnMbbEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ MBB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitor_record(...)
+await sdv.mbb.espnMbbGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_team_record(...)
 ```
 
-## `espnMbbEventCompetitorRoster`
+## `espnMbbGameTeamRoster`
 
-MBB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+MBB — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitor_roster` / `espnMbbEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ MBB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitor_roster(...)
+await sdv.mbb.espnMbbGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_team_roster(...)
 ```
 
-## `espnMbbEventCompetitorStatistics`
+## `espnMbbGameTeamStatistics`
 
-MBB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+MBB — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitor_statistics` / `espnMbbEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ MBB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitor_statistics(...)
+await sdv.mbb.espnMbbGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_team_statistics(...)
 ```
 
-## `espnMbbEventCompetitors`
+## `espnMbbGameTeams`
 
-MBB — event competitors (ESPN sports.core.api.espn.com (core v2)).
+MBB — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_competitors` / `espnMbbEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ MBB — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_competitors(...)
+await sdv.mbb.espnMbbGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_teams(...)
 ```
 
-## `espnMbbEventLeaders`
+## `espnMbbGameLeaders`
 
-MBB — event leaders (ESPN sports.core.api.espn.com (core v2)).
+MBB — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_leaders` / `espnMbbEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ MBB — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_leaders(...)
+await sdv.mbb.espnMbbGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_leaders(...)
 ```
 
-## `espnMbbEventOdds`
+## `espnMbbGameOdds`
 
-MBB — event odds (ESPN sports.core.api.espn.com (core v2)).
+MBB — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_odds` / `espnMbbEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ MBB — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_odds(...)
+await sdv.mbb.espnMbbGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_odds(...)
 ```
 
-## `espnMbbEventOfficialDetail`
+## `espnMbbGameOfficialDetail`
 
-MBB — event official detail (ESPN sports.core.api.espn.com (core v2)).
+MBB — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_official_detail` / `espnMbbEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ MBB — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_official_detail(...)
+await sdv.mbb.espnMbbGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_official_detail(...)
 ```
 
-## `espnMbbEventOfficials`
+## `espnMbbGameOfficials`
 
-MBB — event officials (ESPN sports.core.api.espn.com (core v2)).
+MBB — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_officials` / `espnMbbEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ MBB — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_officials(...)
+await sdv.mbb.espnMbbGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_officials(...)
 ```
 
-## `espnMbbEventPlay`
+## `espnMbbGamePlay`
 
-MBB — event play (ESPN sports.core.api.espn.com (core v2)).
+MBB — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_play` / `espnMbbEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ MBB — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_play(...)
+await sdv.mbb.espnMbbGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_play(...)
 ```
 
-## `espnMbbEventPlayPersonnel`
+## `espnMbbGamePlayPersonnel`
 
-MBB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+MBB — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_play_personnel` / `espnMbbEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ MBB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_play_personnel(...)
+await sdv.mbb.espnMbbGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_play_personnel(...)
 ```
 
-## `espnMbbEventPlays`
+## `espnMbbGamePlays`
 
-MBB — event plays (ESPN sports.core.api.espn.com (core v2)).
+MBB — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_plays` / `espnMbbEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ MBB — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_plays(...)
+await sdv.mbb.espnMbbGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_plays(...)
 ```
 
-## `espnMbbEventPowerindex`
+## `espnMbbGamePowerindex`
 
-MBB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+MBB — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_powerindex` / `espnMbbEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ MBB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_powerindex(...)
+await sdv.mbb.espnMbbGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_powerindex(...)
 ```
 
-## `espnMbbEventPredictor`
+## `espnMbbGamePredictor`
 
-MBB — event predictor (ESPN sports.core.api.espn.com (core v2)).
+MBB — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_predictor` / `espnMbbEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ MBB — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_predictor(...)
+await sdv.mbb.espnMbbGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_predictor(...)
 ```
 
-## `espnMbbEventProbabilities`
+## `espnMbbGameProbabilities`
 
-MBB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+MBB — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_probabilities` / `espnMbbEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ MBB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_probabilities(...)
+await sdv.mbb.espnMbbGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_probabilities(...)
 ```
 
-## `espnMbbEventPropbets`
+## `espnMbbGamePropbets`
 
-MBB — event propbets (ESPN sports.core.api.espn.com (core v2)).
+MBB — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_propbets` / `espnMbbEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ MBB — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_propbets(...)
+await sdv.mbb.espnMbbGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_propbets(...)
 ```
 
-## `espnMbbEventScoringplays`
+## `espnMbbGameScoringplays`
 
-MBB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+MBB — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_scoringplays` / `espnMbbEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ MBB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_scoringplays(...)
+await sdv.mbb.espnMbbGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_scoringplays(...)
 ```
 
-## `espnMbbEventSituation`
+## `espnMbbGameSituation`
 
-MBB — event situation (ESPN sports.core.api.espn.com (core v2)).
+MBB — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_situation` / `espnMbbEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ MBB — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_situation(...)
+await sdv.mbb.espnMbbGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_situation(...)
 ```
 
-## `espnMbbEventStatus`
+## `espnMbbGameStatus`
 
-MBB — event status (ESPN sports.core.api.espn.com (core v2)).
+MBB — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_event_status` / `espnMbbEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ MBB — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_event_status(...)
+await sdv.mbb.espnMbbGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_game_status(...)
 ```
 
-## `espnMbbEvents`
+## `espnMbbGames`
 
-MBB — events (ESPN sports.core.api.espn.com (core v2)).
+MBB — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_events` / `espnMbbEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ MBB — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbEvents({});
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_events(...)
+await sdv.mbb.espnMbbGames({});
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_games(...)
 ```
 
 ## `espnMbbFranchise`
@@ -1145,11 +1219,13 @@ await sdv.mbb.espnMbbPositions({});
 // snake_case alias (py/R parity): sdv.mbb.espn_mbb_positions(...)
 ```
 
-## `espnMbbSeasonAthletes`
+## `espnMbbSeasonPlayers`
 
-MBB — season athletes (ESPN sports.core.api.espn.com (core v2)).
+MBB — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_season_athletes` / `espnMbbSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ MBB — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_season_athletes(...)
+await sdv.mbb.espnMbbSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_season_players(...)
 ```
 
 ## `espnMbbSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.mbb.espnMbbSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.mbb.espn_mbb_season_week(...)
 ```
 
-## `espnMbbSeasonWeekEvents`
+## `espnMbbSeasonWeekGames`
 
-MBB — season week events (ESPN sports.core.api.espn.com (core v2)).
+MBB — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_season_week_events` / `espnMbbSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ MBB — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_season_week_events(...)
+await sdv.mbb.espnMbbSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_season_week_games(...)
 ```
 
 ## `espnMbbSeasonWeekPowerindex`

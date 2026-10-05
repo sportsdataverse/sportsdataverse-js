@@ -24,3 +24,6 @@ docs/src/playground/*.mjs  text eol=lf
 # Verbatim sdv-py copies (tools/codegen/vendor.mjs): never EOL-normalize, so each
 # file keeps the exact bytes its LOCK blob sha was taken from.
 tools/codegen/vendor/upstream/** -text
+
+# Parquet fixtures (test/fixtures/releases) are binary.
+*.parquet binary

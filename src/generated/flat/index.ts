@@ -26,6 +26,8 @@ import * as oddsApiFlat from "./odds_api.js";
 import * as on3Flat from "./on3.js";
 import * as pffApiFlat from "./pff_api.js";
 import * as recruitingFlat from "./recruiting.js";
+import * as sports247Flat from "./sports247.js";
+import * as sports247SitePagesFlat from "./sports247_site_pages.js";
 import * as torvikFlat from "./torvik.js";
 import * as wnbaStatsFlat from "./wnba_stats.js";
 import * as yahooFlat from "./yahoo.js";
@@ -53,6 +55,8 @@ export const WRITTEN_FLAT: Record<string, Record<string, WrapperFn>> = {
   on3: on3Flat,
   pff_api: pffApiFlat,
   recruiting: recruitingFlat,
+  sports247: sports247Flat,
+  sports247_site_pages: sports247SitePagesFlat,
   torvik: torvikFlat,
   wnba_stats: wnbaStatsFlat,
   yahoo: yahooFlat,

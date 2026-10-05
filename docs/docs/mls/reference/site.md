@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.mls`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMlsAthleteBio`
+## `espnMlsPlayerBio`
 
-MLS — athlete bio (ESPN site.api.espn.com).
+MLS — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_bio` / `espnMlsAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ MLS — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_bio(...)
+await sdv.mls.espnMlsPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_bio(...)
 ```
 
-## `espnMlsAthleteInfo`
+## `espnMlsPlayerInfo`
 
-MLS — athlete info (ESPN site.api.espn.com).
+MLS — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_info` / `espnMlsAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ MLS — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_info(...)
+await sdv.mls.espnMlsPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_info(...)
 ```
 
-## `espnMlsAthleteNews`
+## `espnMlsPlayerNews`
 
-MLS — athlete news (ESPN site.api.espn.com).
+MLS — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mls_athlete_news` / `espnMlsAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ MLS — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.mls.espnMlsAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mls.espn_mls_athlete_news(...)
+await sdv.mls.espnMlsPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mls.espn_mls_player_news(...)
 ```
 
 ## `espnMlsCalendar`

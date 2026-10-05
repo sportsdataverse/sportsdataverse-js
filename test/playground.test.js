@@ -6,7 +6,7 @@ import { resolveFlat as pkgResolveFlat } from '../dist/core/flat.js';
 import { HOSTS, FLAT_HOSTS } from '../dist/core/client.js';
 // the docs playground's standalone runtime (separate port of the resolver + the
 // serverless proxy) — tested here so it can't drift from the package.
-import { resolveUrl, resolveFlat, resolveFlatUrl } from '../docs/src/playground/resolve.mjs';
+import { resolveUrl, resolveFlat, resolveFlatUrl, findFlatDef } from '../docs/src/playground/resolve.mjs';
 import { nflClearTokenCache } from '../docs/src/playground/nfl_auth.mjs';
 import handler from '../docs/api/run.mjs';
 
@@ -163,6 +163,38 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
     }
     for (const host of ['api.pff.com', 'kenpom.com', 'pro.nfl.com']) {
       Object.values(endpoints.flatHosts).some((u) => new URL(u).host === host).should.be.false(host);
+    }
+  });
+
+  it('findFlatDef resolves a pre-v4 CBS short to its v4 def (share links, RunCell)', () => {
+    const flatApis = FLAT_WRAPPERS;
+    const v4 = findFlatDef(flatApis, 'cbs', 'game_boxscore');
+    v4.short.should.equal('game_boxscore');
+    findFlatDef(flatApis, 'cbs', 'boxscore').should.equal(v4); // legacyShort
+    findFlatDef(flatApis, 'cbs', 'client_configuration').short.should.equal('client_config');
+    should(findFlatDef(flatApis, 'cbs', 'nope')).be.undefined();
+    should(findFlatDef(flatApis, 'mlb', 'boxscore')).not.be.undefined(); // a short stays family-scoped
+    findFlatDef(flatApis, 'mlb', 'boxscore').api.should.equal('mlb');
+  });
+
+  it('dispatches a pre-v4 CBS short to the same upstream URL as its v4 short', async () => {
+    const original = global.fetch;
+    const fetched = [];
+    global.fetch = async (url) => {
+      fetched.push(url);
+      return { ok: true, status: 200, headers: new Map([['content-type', 'application/json']]), text: async () => '{}' };
+    };
+    try {
+      for (const endpoint of ['boxscore', 'game_boxscore']) {
+        const res = mockRes();
+        await handler({ method: 'POST', body: { api: 'cbs', endpoint, params: { game_id: '1' } } }, res);
+        res.statusCode.should.equal(200, `cbs:${endpoint}`);
+      }
+      fetched.length.should.equal(2);
+      fetched[0].should.equal(fetched[1]);
+      fetched[0].should.startWith('https://api.cbssports.com/napi/resource/');
+    } finally {
+      global.fetch = original;
     }
   });
 

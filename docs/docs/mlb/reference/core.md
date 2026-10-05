@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.mlb`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnMlbAthleteAwards`
+## `espnMlbPlayerAwards`
 
-MLB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+MLB — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_awards` / `espnMlbAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ MLB — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_awards(...)
+await sdv.mlb.espnMlbPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_awards(...)
 ```
 
-## `espnMlbAthleteCareerStats`
+## `espnMlbPlayerCareerStats`
 
-MLB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+MLB — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_career_stats` / `espnMlbAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ MLB — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_career_stats(...)
+await sdv.mlb.espnMlbPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_career_stats(...)
 ```
 
-## `espnMlbAthleteContracts`
+## `espnMlbPlayerContracts`
 
-MLB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+MLB — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_contracts` / `espnMlbAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ MLB — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_contracts(...)
+await sdv.mlb.espnMlbPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_contracts(...)
 ```
 
-## `espnMlbAthleteCore`
+## `espnMlbPlayerCore`
 
-MLB — athlete core (ESPN sports.core.api.espn.com (core v2)).
+MLB — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_core` / `espnMlbAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ MLB — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_core(...)
+await sdv.mlb.espnMlbPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_core(...)
 ```
 
-## `espnMlbAthleteEventlog`
+## `espnMlbPlayerEventlog`
 
-MLB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+MLB — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_eventlog` / `espnMlbAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ MLB — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_eventlog(...)
+await sdv.mlb.espnMlbPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_eventlog(...)
 ```
 
-## `espnMlbAthleteInjuries`
+## `espnMlbPlayerInjuries`
 
-MLB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+MLB — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_injuries` / `espnMlbAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ MLB — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_injuries(...)
+await sdv.mlb.espnMlbPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_injuries(...)
 ```
 
-## `espnMlbAthleteNotes`
+## `espnMlbPlayerNotes`
 
-MLB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+MLB — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_notes` / `espnMlbAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ MLB — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_notes(...)
+await sdv.mlb.espnMlbPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_notes(...)
 ```
 
-## `espnMlbAthleteRecords`
+## `espnMlbPlayerRecords`
 
-MLB — athlete records (ESPN sports.core.api.espn.com (core v2)).
+MLB — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_records` / `espnMlbAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ MLB — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_records(...)
+await sdv.mlb.espnMlbPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_records(...)
 ```
 
-## `espnMlbAthleteSeasons`
+## `espnMlbPlayerSeasons`
 
-MLB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+MLB — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_seasons` / `espnMlbAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ MLB — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_seasons(...)
+await sdv.mlb.espnMlbPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_seasons(...)
 ```
 
-## `espnMlbAthleteStatisticslog`
+## `espnMlbPlayerStatisticslog`
 
-MLB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+MLB — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_statisticslog` / `espnMlbAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ MLB — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_statisticslog(...)
+await sdv.mlb.espnMlbPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_statisticslog(...)
 ```
 
-## `espnMlbAthleteVsAthlete`
+## `espnMlbPlayerVsPlayer`
 
-MLB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+MLB — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athlete_vs_athlete` / `espnMlbAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ MLB — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athlete_vs_athlete(...)
+await sdv.mlb.espnMlbPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_player_vs_player(...)
 ```
 
-## `espnMlbAthletesIndex`
+## `espnMlbPlayersIndex`
 
-MLB — athletes index (ESPN sports.core.api.espn.com (core v2)).
+MLB — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_athletes_index` / `espnMlbAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ MLB — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbAthletesIndex({});
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_athletes_index(...)
+await sdv.mlb.espnMlbPlayersIndex({});
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_players_index(...)
 ```
 
 ## `espnMlbAward`
@@ -403,12 +427,14 @@ await sdv.mlb.espnMlbCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.mlb.espn_mlb_coach_season(...)
 ```
 
-## `espnMlbEvent`
+## `espnMlbGame`
 
-MLB — event (ESPN sports.core.api.espn.com (core v2)).
+MLB — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event` / `espnMlbEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ MLB — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event(...)
+await sdv.mlb.espnMlbGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game(...)
 ```
 
-## `espnMlbEventBroadcasts`
+## `espnMlbGameBroadcasts`
 
-MLB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+MLB — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_broadcasts` / `espnMlbEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ MLB — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_broadcasts(...)
+await sdv.mlb.espnMlbGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_broadcasts(...)
 ```
 
-## `espnMlbEventCompetition`
+## `espnMlbGameCompetition`
 
-MLB — event competition (ESPN sports.core.api.espn.com (core v2)).
+MLB — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competition` / `espnMlbEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ MLB — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competition(...)
+await sdv.mlb.espnMlbGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_competition(...)
 ```
 
-## `espnMlbEventCompetitor`
+## `espnMlbGameTeam`
 
-MLB — event competitor (ESPN sports.core.api.espn.com (core v2)).
+MLB — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitor` / `espnMlbEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ MLB — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitor(...)
+await sdv.mlb.espnMlbGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_team(...)
 ```
 
-## `espnMlbEventCompetitorLeaders`
+## `espnMlbGameTeamLeaders`
 
-MLB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+MLB — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitor_leaders` / `espnMlbEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ MLB — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitor_leaders(...)
+await sdv.mlb.espnMlbGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_team_leaders(...)
 ```
 
-## `espnMlbEventCompetitorLinescores`
+## `espnMlbGameTeamLinescores`
 
-MLB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+MLB — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitor_linescores` / `espnMlbEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ MLB — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitor_linescores(...)
+await sdv.mlb.espnMlbGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_team_linescores(...)
 ```
 
-## `espnMlbEventCompetitorRecord`
+## `espnMlbGameTeamRecord`
 
-MLB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+MLB — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitor_record` / `espnMlbEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ MLB — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitor_record(...)
+await sdv.mlb.espnMlbGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_team_record(...)
 ```
 
-## `espnMlbEventCompetitorRoster`
+## `espnMlbGameTeamRoster`
 
-MLB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+MLB — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitor_roster` / `espnMlbEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ MLB — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitor_roster(...)
+await sdv.mlb.espnMlbGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_team_roster(...)
 ```
 
-## `espnMlbEventCompetitorStatistics`
+## `espnMlbGameTeamStatistics`
 
-MLB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+MLB — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitor_statistics` / `espnMlbEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ MLB — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitor_statistics(...)
+await sdv.mlb.espnMlbGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_team_statistics(...)
 ```
 
-## `espnMlbEventCompetitors`
+## `espnMlbGameTeams`
 
-MLB — event competitors (ESPN sports.core.api.espn.com (core v2)).
+MLB — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_competitors` / `espnMlbEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ MLB — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_competitors(...)
+await sdv.mlb.espnMlbGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_teams(...)
 ```
 
-## `espnMlbEventLeaders`
+## `espnMlbGameLeaders`
 
-MLB — event leaders (ESPN sports.core.api.espn.com (core v2)).
+MLB — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_leaders` / `espnMlbEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ MLB — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_leaders(...)
+await sdv.mlb.espnMlbGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_leaders(...)
 ```
 
-## `espnMlbEventOdds`
+## `espnMlbGameOdds`
 
-MLB — event odds (ESPN sports.core.api.espn.com (core v2)).
+MLB — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_odds` / `espnMlbEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ MLB — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_odds(...)
+await sdv.mlb.espnMlbGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_odds(...)
 ```
 
-## `espnMlbEventOfficialDetail`
+## `espnMlbGameOfficialDetail`
 
-MLB — event official detail (ESPN sports.core.api.espn.com (core v2)).
+MLB — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_official_detail` / `espnMlbEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ MLB — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_official_detail(...)
+await sdv.mlb.espnMlbGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_official_detail(...)
 ```
 
-## `espnMlbEventOfficials`
+## `espnMlbGameOfficials`
 
-MLB — event officials (ESPN sports.core.api.espn.com (core v2)).
+MLB — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_officials` / `espnMlbEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ MLB — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_officials(...)
+await sdv.mlb.espnMlbGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_officials(...)
 ```
 
-## `espnMlbEventPlay`
+## `espnMlbGamePlay`
 
-MLB — event play (ESPN sports.core.api.espn.com (core v2)).
+MLB — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_play` / `espnMlbEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ MLB — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_play(...)
+await sdv.mlb.espnMlbGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_play(...)
 ```
 
-## `espnMlbEventPlayPersonnel`
+## `espnMlbGamePlayPersonnel`
 
-MLB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+MLB — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_play_personnel` / `espnMlbEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ MLB — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_play_personnel(...)
+await sdv.mlb.espnMlbGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_play_personnel(...)
 ```
 
-## `espnMlbEventPlays`
+## `espnMlbGamePlays`
 
-MLB — event plays (ESPN sports.core.api.espn.com (core v2)).
+MLB — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_plays` / `espnMlbEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ MLB — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_plays(...)
+await sdv.mlb.espnMlbGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_plays(...)
 ```
 
-## `espnMlbEventPowerindex`
+## `espnMlbGamePowerindex`
 
-MLB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+MLB — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_powerindex` / `espnMlbEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ MLB — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_powerindex(...)
+await sdv.mlb.espnMlbGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_powerindex(...)
 ```
 
-## `espnMlbEventPredictor`
+## `espnMlbGamePredictor`
 
-MLB — event predictor (ESPN sports.core.api.espn.com (core v2)).
+MLB — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_predictor` / `espnMlbEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ MLB — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_predictor(...)
+await sdv.mlb.espnMlbGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_predictor(...)
 ```
 
-## `espnMlbEventProbabilities`
+## `espnMlbGameProbabilities`
 
-MLB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+MLB — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_probabilities` / `espnMlbEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ MLB — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_probabilities(...)
+await sdv.mlb.espnMlbGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_probabilities(...)
 ```
 
-## `espnMlbEventPropbets`
+## `espnMlbGamePropbets`
 
-MLB — event propbets (ESPN sports.core.api.espn.com (core v2)).
+MLB — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_propbets` / `espnMlbEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ MLB — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_propbets(...)
+await sdv.mlb.espnMlbGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_propbets(...)
 ```
 
-## `espnMlbEventScoringplays`
+## `espnMlbGameScoringplays`
 
-MLB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+MLB — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_scoringplays` / `espnMlbEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ MLB — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_scoringplays(...)
+await sdv.mlb.espnMlbGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_scoringplays(...)
 ```
 
-## `espnMlbEventSituation`
+## `espnMlbGameSituation`
 
-MLB — event situation (ESPN sports.core.api.espn.com (core v2)).
+MLB — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_situation` / `espnMlbEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ MLB — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_situation(...)
+await sdv.mlb.espnMlbGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_situation(...)
 ```
 
-## `espnMlbEventStatus`
+## `espnMlbGameStatus`
 
-MLB — event status (ESPN sports.core.api.espn.com (core v2)).
+MLB — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_event_status` / `espnMlbEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ MLB — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_event_status(...)
+await sdv.mlb.espnMlbGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_game_status(...)
 ```
 
-## `espnMlbEvents`
+## `espnMlbGames`
 
-MLB — events (ESPN sports.core.api.espn.com (core v2)).
+MLB — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_events` / `espnMlbEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ MLB — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbEvents({});
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_events(...)
+await sdv.mlb.espnMlbGames({});
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_games(...)
 ```
 
 ## `espnMlbFranchise`
@@ -1145,11 +1219,13 @@ await sdv.mlb.espnMlbPositions({});
 // snake_case alias (py/R parity): sdv.mlb.espn_mlb_positions(...)
 ```
 
-## `espnMlbSeasonAthletes`
+## `espnMlbSeasonPlayers`
 
-MLB — season athletes (ESPN sports.core.api.espn.com (core v2)).
+MLB — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_season_athletes` / `espnMlbSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ MLB — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_season_athletes(...)
+await sdv.mlb.espnMlbSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_season_players(...)
 ```
 
 ## `espnMlbSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.mlb.espnMlbSeasonWeek({ season: '…', season_type: '…', week: '…'
 // snake_case alias (py/R parity): sdv.mlb.espn_mlb_season_week(...)
 ```
 
-## `espnMlbSeasonWeekEvents`
+## `espnMlbSeasonWeekGames`
 
-MLB — season week events (ESPN sports.core.api.espn.com (core v2)).
+MLB — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mlb_season_week_events` / `espnMlbSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ MLB — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.mlb.espnMlbSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.mlb.espn_mlb_season_week_events(...)
+await sdv.mlb.espnMlbSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.mlb.espn_mlb_season_week_games(...)
 ```
 
 ## `espnMlbSeasonWeekPowerindex`

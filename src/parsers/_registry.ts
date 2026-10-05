@@ -90,6 +90,12 @@ import {
   parse_recruiting_ranking_feed,
 } from "./recruiting.js";
 import {
+  parse_sports247_result_set,
+  parse_sports247_teams,
+  parse_sports247_institution_rankings,
+  parse_sports247_site_page,
+} from "./sports247.js";
+import {
   parse_cbs_list,
   parse_cbs_scoreboard,
   parse_cbs_standings,
@@ -246,6 +252,12 @@ export const PARSERS: Record<string, FlatParserFn> = {
   parse_recruiting_paged_list,
   parse_recruiting_institution_rankings,
   parse_recruiting_ranking_feed,
+  // ---- 247Sports RDB (ipa.247sports.com) + site pages (247sports.com *.json) ----
+  // Faithful ports of sdv-py's sports247 / sports247_site_pages parsers.
+  parse_sports247_result_set,
+  parse_sports247_teams,
+  parse_sports247_institution_rankings,
+  parse_sports247_site_page,
   // ---- CBS Sports API (api.cbssports.com/napi) ----
   // Generic list flattener (the default for most endpoints).
   parse_cbs_list,

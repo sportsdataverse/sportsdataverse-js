@@ -13,24 +13,24 @@ Beyond the ESPN surface, `sdv.mls` also wraps the league's own live APIs. Same `
 
 ## Native API — MLS web API
 
-Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https://stats-api.mlssoccer.com`. Each method is exposed under BOTH `mls_api_<endpoint>` (snake_case, py/R parity) and `mlsApi<Endpoint>` (camelCase canonical) on `sdv.mls`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default shown in the Parser column (one sub-frame, or every table as a dict), and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
+Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https://stats-api.mlssoccer.com`. Each method is exposed under BOTH its snake_case name `mls_<endpoint>` (sdv-py's name, py/R parity) and its camelCase form (canonical) on `sdv.mls`. Pass `{ parsed: true }` to run the payload through its tidy.js parser; omit it for the raw response. Endpoints marked **multi-table** parse to several frames in sdv-py; with `parsed: true` they return the default shown in the Parser column (one sub-frame, or every table as a dict), and `section: "<name>"` selects any other (an unknown name throws, listing the valid ones).
 
 | Method | HTTP | Path params | Query params | Parser | Auth |
 |---|---|---|---|---|---|
-| `mls_api_club` / `mlsApiClub` | `https://stats-api.mlssoccer.com/clubs/{club_id}` | `club_id`\* | — | `parse_mls_entity` | — |
-| `mls_api_competition_seasons` / `mlsApiCompetitionSeasons` | `https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons` | `competition_id`\* | — | `parse_mls_api` | — |
-| `mls_api_competitions` / `mlsApiCompetitions` | `https://stats-api.mlssoccer.com/competitions` | — | — | `parse_mls_api` | — |
-| `mls_api_content_season` / `mlsApiContentSeason` | `https://dapi.mlssoccer.com/v2/content/en-us/seasons/{slug}` | `slug`\* | — | `parse_mls_entity` | — |
-| `mls_api_content_seasons` / `mlsApiContentSeasons` | `https://dapi.mlssoccer.com/v2/content/en-us/seasons` | — | `competition_sportec_id` → `fields.competitionSportecId`, `sportec_id` → `fields.sportecId` | `parse_mls_api` | — |
-| `mls_api_match` / `mlsApiMatch` | `https://stats-api.mlssoccer.com/matches/{match_id}` | `match_id`\* | — | `parse_mls_match` — multi-table: `section` = `match_information` (default), `environment`, `teams`, `players`, `staff`, `referees`, `last_matches` | — |
-| `mls_api_season_matches` / `mlsApiSeasonMatches` | `https://stats-api.mlssoccer.com/matches/seasons/{season_id}` | `season_id`\* | `match_date_gte` → `match_date[gte]`, `match_date_lte` → `match_date[lte]`, `competition_id`, `per_page`, `sort`, `series_name` | `parse_mls_api` | — |
-| `mls_api_sportapi_club_players` / `mlsApiSportapiClubPlayers` | `https://sportapi.mlssoccer.com/api/players/byClub/{club_id}` | `club_id`\* | `culture` | `parse_mls_api` | — |
-| `mls_api_sportapi_clubs_by_sportec_ids` / `mlsApiSportapiClubsBySportecIds` | `https://sportapi.mlssoccer.com/api/clubs/bySportecIds/{ids}` | `ids`\* | — | `parse_mls_api` | — |
-| `mls_api_sportapi_match` / `mlsApiSportapiMatch` | `https://sportapi.mlssoccer.com/api/matches/{match_id}` | `match_id`\* | — | `parse_mls_entity` | — |
-| `mls_api_sportapi_matches_by_sportec_ids` / `mlsApiSportapiMatchesBySportecIds` | `https://sportapi.mlssoccer.com/api/matches/bySportecIds/{ids}` | `ids`\* | — | `parse_mls_api` | — |
-| `mls_api_standings` / `mlsApiStandings` | `https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons/{season_id}/standings` | `competition_id`\*, `season_id`\* | `category`, `standings_type` → `type`, `is_live` | `parse_mls_standings` — multi-table: `section` = `tables`, `entries` (default) | — |
+| `mls_club` / `mlsClub` | `https://stats-api.mlssoccer.com/clubs/{club_id}` | `club_id`\* | — | `parse_mls_entity` | — |
+| `mls_competition_seasons` / `mlsCompetitionSeasons` | `https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons` | `competition_id`\* | — | `parse_mls_api` | — |
+| `mls_competitions` / `mlsCompetitions` | `https://stats-api.mlssoccer.com/competitions` | — | — | `parse_mls_api` | — |
+| `mls_content_season` / `mlsContentSeason` | `https://dapi.mlssoccer.com/v2/content/en-us/seasons/{slug}` | `slug`\* | — | `parse_mls_entity` | — |
+| `mls_content_seasons` / `mlsContentSeasons` | `https://dapi.mlssoccer.com/v2/content/en-us/seasons` | — | `competition_sportec_id` → `fields.competitionSportecId`, `sportec_id` → `fields.sportecId` | `parse_mls_api` | — |
+| `mls_match` / `mlsMatch` | `https://stats-api.mlssoccer.com/matches/{match_id}` | `match_id`\* | — | `parse_mls_match` — multi-table: `section` = `match_information` (default), `environment`, `teams`, `players`, `staff`, `referees`, `last_matches` | — |
+| `mls_season_matches` / `mlsSeasonMatches` | `https://stats-api.mlssoccer.com/matches/seasons/{season_id}` | `season_id`\* | `match_date_gte` → `match_date[gte]`, `match_date_lte` → `match_date[lte]`, `competition_id`, `per_page`, `sort`, `series_name` | `parse_mls_api` | — |
+| `mls_sportapi_club_players` / `mlsSportapiClubPlayers` | `https://sportapi.mlssoccer.com/api/players/byClub/{club_id}` | `club_id`\* | `culture` | `parse_mls_api` | — |
+| `mls_sportapi_clubs_by_sportec_ids` / `mlsSportapiClubsBySportecIds` | `https://sportapi.mlssoccer.com/api/clubs/bySportecIds/{ids}` | `ids`\* | — | `parse_mls_api` | — |
+| `mls_sportapi_match` / `mlsSportapiMatch` | `https://sportapi.mlssoccer.com/api/matches/{match_id}` | `match_id`\* | — | `parse_mls_entity` | — |
+| `mls_sportapi_matches_by_sportec_ids` / `mlsSportapiMatchesBySportecIds` | `https://sportapi.mlssoccer.com/api/matches/bySportecIds/{ids}` | `ids`\* | — | `parse_mls_api` | — |
+| `mls_standings` / `mlsStandings` | `https://stats-api.mlssoccer.com/competitions/{competition_id}/seasons/{season_id}/standings` | `competition_id`\*, `season_id`\* | `category`, `standings_type` → `type`, `is_live` | `parse_mls_standings` — multi-table: `section` = `tables`, `entries` (default) | — |
 
-### Returns — `mls_api_club` / `mlsApiClub`
+### Returns — `mls_club` / `mlsClub`
 
 | col_name | type | description |
 |---|---|---|
@@ -71,14 +71,14 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `shirt_three_shirt_number_color` | character | Third-choice kit: shirt-number colour name. |
 | `shirt_three_shirt_number_color_rgb` | character | Third-choice kit: shirt-number colour as an RGB hex string. |
 
-### Returns — `mls_api_competition_seasons` / `mlsApiCompetitionSeasons`
+### Returns — `mls_competition_seasons` / `mlsCompetitionSeasons`
 
 | col_name | type | description |
 |---|---|---|
 | `season_id` | character | Sportec season id |
 | `season` | integer | Season year |
 
-### Returns — `mls_api_competitions` / `mlsApiCompetitions`
+### Returns — `mls_competitions` / `mlsCompetitions`
 
 | col_name | type | description |
 |---|---|---|
@@ -88,7 +88,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `country` | character | Country |
 | `competition_type` | character | `League` or `Tournament` |
 
-### Returns — `mls_api_content_season` / `mlsApiContentSeason`
+### Returns — `mls_content_season` / `mlsContentSeason`
 
 | col_name | type | description |
 |---|---|---|
@@ -125,7 +125,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `fields_playoff_qualified_west_conference` | integer | Season content field: count of Western Conference clubs that have clinched a playoff berth. |
 | `fields_competition_sportec_id_overwrite` | logical | Season content field: competition: whether the season's Sportec id is manually overridden in the CMS. |
 
-### Returns — `mls_api_content_seasons` / `mlsApiContentSeasons`
+### Returns — `mls_content_seasons` / `mlsContentSeasons`
 
 | col_name | type | description |
 |---|---|---|
@@ -156,7 +156,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `fields_playoff_qualified_west_conference` | integer | Season content field: count of Western Conference clubs that have clinched a playoff berth. |
 | `fields_competition_sportec_id_overwrite` | logical | Season content field: competition: whether the season's Sportec id is manually overridden in the CMS. |
 
-### Returns — `mls_api_match` / `mlsApiMatch`
+### Returns — `mls_match` / `mlsMatch`
 
 | col_name | type | description |
 |---|---|---|
@@ -195,7 +195,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `match_status` | character | Status (e.g. `Live`, `FullTime`) |
 | `minute_of_play` | character | Current minute (live) |
 
-### Returns — `mls_api_season_matches` / `mlsApiSeasonMatches`
+### Returns — `mls_season_matches` / `mlsSeasonMatches`
 
 | col_name | type | description |
 |---|---|---|
@@ -241,7 +241,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `stadium_country` | character | Stadium country |
 | `bracket_structure_id` | character | Identifier of the playoff bracket structure. |
 
-### Returns — `mls_api_sportapi_club_players` / `mlsApiSportapiClubPlayers`
+### Returns — `mls_sportapi_club_players` / `mlsSportapiClubPlayers`
 
 | col_name | type | description |
 |---|---|---|
@@ -270,7 +270,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `thumbnail_thumbnail_url` | character | Player thumbnail image: URL of the rendered thumbnail image. |
 | `thumbnail_format` | character | Player thumbnail image: image format of the asset. |
 
-### Returns — `mls_api_sportapi_clubs_by_sportec_ids` / `mlsApiSportapiClubsBySportecIds`
+### Returns — `mls_sportapi_clubs_by_sportec_ids` / `mlsSportapiClubsBySportecIds`
 
 | col_name | type | description |
 |---|---|---|
@@ -287,7 +287,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `crest_color_slug` | character | Asset slug for the full-colour club crest. |
 | `ecal_widget_id` | character | Identifier of the eCal calendar-subscription widget. |
 
-### Returns — `mls_api_sportapi_match` / `mlsApiSportapiMatch`
+### Returns — `mls_sportapi_match` / `mlsSportapiMatch`
 
 | col_name | type | description |
 |---|---|---|
@@ -370,7 +370,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `first_party_tickets_open_in_new_tab` | logical | MLS-operated ticketing link: whether the link opens in a new tab. |
 | `first_party_tickets_is_visible` | logical | MLS-operated ticketing link: whether the link is shown. |
 
-### Returns — `mls_api_sportapi_matches_by_sportec_ids` / `mlsApiSportapiMatchesBySportecIds`
+### Returns — `mls_sportapi_matches_by_sportec_ids` / `mlsSportapiMatchesBySportecIds`
 
 | col_name | type | description |
 |---|---|---|
@@ -451,7 +451,7 @@ Flat (non-ESPN) wrappers for the official mlssoccer.com data APIs. Host: `https:
 | `home_ecal_widget_id` | character | Home club: identifier of the eCal calendar-subscription widget. |
 | `away_ecal_widget_id` | character | Away club: identifier of the eCal calendar-subscription widget. |
 
-### Returns — `mls_api_standings` / `mlsApiStandings`
+### Returns — `mls_standings` / `mlsStandings`
 
 | col_name | type | description |
 |---|---|---|

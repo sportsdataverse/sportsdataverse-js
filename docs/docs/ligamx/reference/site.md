@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.ligamx`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLigamxAthleteBio`
+## `espnLigamxPlayerBio`
 
-LIGAMX — athlete bio (ESPN site.api.espn.com).
+LIGAMX — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_bio` / `espnLigamxAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ LIGAMX — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_bio(...)
+await sdv.ligamx.espnLigamxPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_bio(...)
 ```
 
-## `espnLigamxAthleteInfo`
+## `espnLigamxPlayerInfo`
 
-LIGAMX — athlete info (ESPN site.api.espn.com).
+LIGAMX — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_info` / `espnLigamxAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ LIGAMX — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_info(...)
+await sdv.ligamx.espnLigamxPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_info(...)
 ```
 
-## `espnLigamxAthleteNews`
+## `espnLigamxPlayerNews`
 
-LIGAMX — athlete news (ESPN site.api.espn.com).
+LIGAMX — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/soccer/mex.1/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_news` / `espnLigamxAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ LIGAMX — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_news(...)
+await sdv.ligamx.espnLigamxPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_news(...)
 ```
 
 ## `espnLigamxCalendar`

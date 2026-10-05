@@ -16,7 +16,10 @@
 #
 # Per family (key = JS family = output file + `api` stem):
 #   from:     py endpoint stem (default: the key)
-#   names:    py short -> JS short (keeps JS public names; Task 4 flips CBS)
+#   names:    py short -> JS short. Avoid it: since v4 JS public names ARE
+#             sdv-py's (tools/codegen/generate.mjs ports py's emit-time naming).
+#             A pre-v4 JS name goes in the overlay as `legacy_short:` instead,
+#             which keeps it callable as a deprecated alias.
 #   parsers:  py parser name -> {js: <JS registry name>, schema_compatible: <bool>}
 #             (every entry must match a vendored endpoint's parser). A py parser
 #             with NO entry keeps its name in JS.
@@ -39,8 +42,34 @@ source:
   ref: 719de79edb685b89c524f8b4c0c146fea0b53855
 
 # Copied verbatim (no transform, not generated here).
+# espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
 copy:
   - endpoints/releases.yaml
+  - espn_rename_map.yaml
+
+# sdv-py public names, written by hand in sdv-py at `source.ref`, that its
+# emit-time rename layer treats as taken: py reads them off its own package
+# (generate.py `_handwritten_espn_names` for ESPN, `reserved_names` for a flat
+# family with a `qualifier`); JS can't import py, so they are listed here.
+# generate.mjs then applies py's rule: a convention rename that lands on one of
+# these is version-qualified (`athlete_stats` -> `player_stats_v3`), and a flat
+# `{prefix}_{short}` that lands on one gets the family qualifier
+# (`nhl_pbp` -> `nhl_web_pbp`). Only names that change a JS name belong here.
+# test/naming.test.js compares JS names against sdv-py's generated names at the
+# pin (tools/codegen/py_public_names.json, derived by `npm run vendor` from the
+# verbatim py modules in vendor/upstream/py/); a pin bump that adds a collision
+# fails that test until the name is added here.
+py_reserved:
+  - espn_cfb_player_stats
+  - espn_mbb_player_stats
+  - espn_mlb_player_stats
+  - espn_nba_player_stats
+  - espn_nfl_player_stats
+  - espn_nhl_player_stats
+  - espn_wbb_player_stats
+  - espn_wnba_player_stats
+  - nhl_pbp
+  - nhl_schedule
 
 families:
   # ESPN: no schema_compatible declaration (the JS generator renders ESPN returns
@@ -131,6 +160,20 @@ families:
       team_roster_type: parse_mlb_team_roster
     schemas:
       native/mlb_api/: native/mlb/
+  sports247:
+    # 247Sports RDB (ipa.247sports.com) — the supported 247 surface; supersedes
+    # the JS-owned `recruiting` family (api.247sports.com, HTTP 500).
+    # src/parsers/sports247.ts: "Faithful port of" sdv-py's cfb/sports247_parsers.py
+    schema_compatible: true
+  sports247_site_pages:
+    # 247sports.com `*.json` page models. src/parsers/sports247.ts is a faithful
+    # port of sdv-py's cfb/sports247_site_pages_parsers.py, BUT sdv-py@719de79's
+    # native/sports247_site_pages schemas are stale against that parser (numeric
+    # columns typed `character`, a few strings typed `integer`), so they are NOT
+    # attached (fail-closed). Flip to true on the pin bump that ships the upstream
+    # schema regeneration; test/parsers/sports247.test.js checks column TYPES of
+    # every attached schema on the real captures, so the flip is guarded.
+    schema_compatible: false
   torvik:
     # Both py endpoints use JS's positional parsers, so JS keeps its own schemas
     # (overlay/torvik.yaml, with the 3 JS-only endpoints).
@@ -139,23 +182,9 @@ families:
       team_factors: parse_torvik_team_factors
   cbs:
     from: cbs_napi
-    names:
-      client_config: client_configuration
-      division_subdivisions: sub_divisions
-      game_boxscore: boxscore
-      game_featured: featured_game
-      game_odds_hq: game_hq_odds
-      game_probable_players: probable_players
-      game_ruwt_highlights: ruwt_highlights
-      game_weather: weather
-      player_depth_charts: depth_charts
-      player_hockey_meta: hockey_player_meta
-      player_meta_baseball: baseball_player_meta
-      player_meta_golf: player_golf_metadata
-      player_position_rankings: position_rankings
-      player_recruit_associations: recruit_team_associations
-      team_rankings_sportsline: sports_line_team_rankings
-      team_standings_sportsline: sports_line_team_standings
+    # v4: CBS uses sdv-py's short names. The 16 names JS shipped before
+    # (cbs_boxscore, cbs_client_configuration, ...) are `legacy_short:` entries
+    # in overlay/cbs.yaml and stay callable as deprecated aliases.
     # JS's CBS parsers were written independently of sdv-py's, so py's schemas
     # don't describe them: JS keeps its own (described) schemas via overlay/cbs.yaml.
     parsers:
@@ -164,15 +193,15 @@ families:
       parse_cbs_napi_scoring_plays: {js: parse_cbs_list, schema_compatible: false}
       parse_cbs_napi_standings: {js: parse_cbs_standings, schema_compatible: false}
     parser_overrides:
-      featured_game: parse_cbs_scoreboard
+      game_featured: parse_cbs_scoreboard
       game_scoring_scoreboard: parse_cbs_scoreboard
       game_scoring_scores: parse_cbs_scoreboard
-      game_hq_odds: parse_cbs_odds
+      game_odds_hq: parse_cbs_odds
       game_odds: parse_cbs_odds
       game_props: parse_cbs_odds
       odds: parse_cbs_odds
       player_standings: parse_cbs_standings
-      sports_line_team_standings: parse_cbs_standings
+      team_standings_sportsline: parse_cbs_standings
     schemas:
       native/cbs_napi/: native/cbs/
   yahoo:

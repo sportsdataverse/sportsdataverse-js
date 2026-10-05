@@ -55,6 +55,7 @@ Native providers that aren't a single ESPN league — each gets its own `sdv.<na
 |---|---|---|---:|
 | [odds](./odds) | *cross-sport* | The Odds API | 10 |
 | [recruiting](./recruiting) | *cross-sport* | 247Sports | 25 |
+| [sports247](./sports247) | *cross-sport* | 247Sports RDB, 247Sports site pages | 47 |
 | [cbs](./cbs) | *cross-sport* | CBS Sports | 82 |
 | [fox](./fox) | *cross-sport* | Fox Sports | 38 |
 | [yahoo](./yahoo) | *cross-sport* | Yahoo Sports (scores), Yahoo Sports | 109 |
@@ -74,7 +75,27 @@ await sdv.soccer.espnSoccerScoreboard({ league: 'eng.1' });
 :::tip Native (non-ESPN) APIs
 ```js
 await sdv.mlb.mlbSchedule({ sportId: 1, date: '2024-07-01' });
-await sdv.nhl.nhlApiWebPbp({ gameId: 2023030417, parsed: true });
-await sdv.nfl.nflApiStandings({ season: 2024, seasonType: 'REG', week: 1 });
+await sdv.nhl.nhlWebPbp({ gameId: 2023030417, parsed: true });
+await sdv.nfl.nflStandings({ season: 2024, seasonType: 'REG', week: 1 });
 ```
 :::
+
+:::note v4 names
+Since v4 every wrapper carries sdv-py's name (`athlete` → `player`, `event` → `game`, …). Pre-v4 names still work as deprecated aliases (one `DeprecationWarning` per name) — see [Deprecated names](./deprecations).
+:::
+
+## Dataset loaders
+
+`load*` functions read the published SportsDataverse release assets (parquet) — play-by-play with EPA/WP, schedules, rosters, box scores, ratings, player value — the way sportsdataverse-py's `load_*` functions do. Node only.
+
+| Namespace | loaders |
+|---|---:|
+| [cfb](../cfb/reference/loaders.md) | 71 |
+| [mbb](../mbb/reference/loaders.md) | 34 |
+| [mlb](../mlb/reference/loaders.md) | 32 |
+| [nba](../nba/reference/loaders.md) | 41 |
+| [nfl](../nfl/reference/loaders.md) | 29 |
+| [nhl](../nhl/reference/loaders.md) | 27 |
+| [pwhl](../pwhl/reference/loaders.md) | 21 |
+| [wbb](../wbb/reference/loaders.md) | 34 |
+| [wnba](../wnba/reference/loaders.md) | 34 |

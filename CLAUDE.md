@@ -116,6 +116,7 @@ endpoint YAML in `tools/codegen/endpoints/*.yaml` (plus return schemas under
 | Runtime wrapper / league tables | `src/generated/wrappers.ts`, `src/generated/leagues.ts` | the TS the package imports at runtime |
 | Per-league Markdown reference | `docs/docs/reference/*.md` (+ `_category_.json`) | the docs site reference subtree |
 | Playground metadata | `docs/src/playground/endpoints.json` | the in-browser playground endpoint list |
+| Release dataset loaders | `src/generated/loaders/<league>.ts` (+ `<league>/reference/loaders.md`) | one `load*` per `endpoints/releases.yaml` entry (rendered by `render-loaders.mjs`; runtime `src/core/releases.ts`: hyparquet decode, `releases` transport family, 404-season skip, INT64 policy) |
 
 - `npm run codegen` **writes** those outputs.
 - `npm run codegen:check` (`--check`) is the **drift gate**: it regenerates in-memory
@@ -132,12 +133,12 @@ The generator is a pure file-in / file-out renderer — it makes **no network ca
 sdv-py's codegen YAML is the **source of truth** for the shared families:
 `espn_site_v2`, `espn_core_v2`, `espn_web_v3`, `leagues`, `mlb_statcast`, `nfl_api`,
 the four `nhl_*`, `mlb` (py `mlb_api`), `torvik`, `cbs` (py `cbs_napi`), `yahoo`
-(py `yahoo_shangrila`), plus `endpoints/releases.yaml` (verbatim) and every returns
+(py `yahoo_shangrila`), `sports247`, `sports247_site_pages`, plus `endpoints/releases.yaml` (verbatim) and every returns
 schema those families reference. `tools/codegen/vendor.mjs` derives them from a
 pinned sdv-py commit:
 
 - `tools/codegen/vendor.yaml` — the manifest: `source.ref` (the pin) and, per family,
-  `from` (py stem), `names` (py short → JS short; keeps CBS's JS names), `parsers`
+  `from` (py stem), `names` (py short → JS short; avoid — v4 names are sdv-py's), `parsers`
   (py parser → `{js, schema_compatible}`), family `schema_compatible: true`,
   `parser_overrides` (JS short → JS parser), `schemas` (returns-schema path prefix
   rewrite). A `names`/`parsers`/`parser_overrides` key that matches no vendored
@@ -196,9 +197,22 @@ ESPN endpoints come from three family YAML files — `espn_site_v2.yaml`,
 `(sport, league)` slugs**, wrapped once per URL family.
 
 - **116 distinct short names** are exposed across **29 leagues** (`leagues.yaml`).
-- Each wrapper is registered under BOTH `espn_<prefix>_<short>` (snake, py/R parity)
-  and `espn<Prefix><Short>` (camelCase, idiomatic JS) by `makeLeagueModule`
-  (`src/leagues/_make.ts`) — both resolve to the same function.
+- Each wrapper is registered under BOTH its sdv-py snake_case name (py/R parity)
+  and the camelCase form (idiomatic JS) — both resolve to the same function.
+- **v4 names are sdv-py's.** `tools/codegen/generate.mjs` ports py's emit-time rename
+  layer: ESPN `athlete`→`player`, `event`→`game` (`event_competitor*`→`game_team*`,
+  `event_competition_X`→`game_X`), py's curated `espn_rename_map.yaml` (vendored),
+  `athlete_stats`→`player_stats_v3` where py hand-writes a `player_stats`
+  (`vendor.yaml` `py_reserved`), and flat families named by py's `name_pattern` /
+  `qualifier` (`nhl_boxscore`, `nhl_web_pbp`, `nfl_standings`), never by file stem.
+  Never hand-rename; a new py collision goes in `py_reserved` (test/naming.test.js
+  compares against sdv-py's generated names at the pin: `tools/codegen/py_public_names.json`,
+  derived by `npm run vendor` from the verbatim py modules in `vendor/upstream/py/`).
+- **Pre-v4 names are deprecated aliases.** Every name in the frozen
+  `tools/codegen/pre_v4_names.json` that a rename replaced is registered by
+  `withDeprecatedAliases` (`src/core/deprecation.ts`) from `src/generated/aliases.ts`:
+  it forwards to the v4 wrapper and warns once per name per process. Never edit
+  `pre_v4_names.json`; CBS's pre-v4 shorts are `legacy_short:` in `overlay/cbs.yaml`.
 - Endpoints carry a **scope**: `universal` (every league), `ncaa` (college),
   `football` (NFL / CFB / UFL), `mlb`. Each league gets exactly the endpoints in its
   scope set, so the ESPN contract tests stay invariant.
@@ -219,20 +233,20 @@ families**:
 |---|---|---|---|
 | `mlb` | `sdv.mlb.mlb*` | `statsapi.mlb.com` | keyless |
 | `mlb_statcast` | `sdv.mlb.mlbStatcast*` | `baseballsavant.mlb.com` | keyless (date-chunked search) |
-| `nhl_api_web` | `sdv.nhl.nhlApiWeb*` | `api-web.nhle.com` | keyless |
+| `nhl_api_web` | `sdv.nhl.nhl*` (`nhlWeb*` on collision) | `api-web.nhle.com` | keyless |
 | `nhl_edge` | `sdv.nhl.nhlEdge*` | `api-web.nhle.com/v1/edge` | keyless |
 | `nhl_stats_rest` | `sdv.nhl.nhlStatsRest*` | `api.nhle.com/stats/rest` | keyless |
 | `nhl_records` | `sdv.nhl.nhlRecords*` | `records.nhl.com` | keyless |
-| `nfl_api` | `sdv.nfl.nflApi*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
+| `nfl_api` | `sdv.nfl.nfl*` | `api.nfl.com` | **bearer token minted automatically** (anonymous `WEB_DESKTOP`, cached + auto-renewed; `src/core/nfl_auth.ts`) |
 | `pff_api` | `sdv.nfl.pffApi*` | `api.pff.com` | **caller's PFF Pro key** (`api_key` / `PFF_API_KEY`; `src/core/pff_api_runtime.ts`) |
 | `nfl_pro` | `sdv.nfl.nflPro*` | `pro.nfl.com` | **caller's user-bound NFL+ token** (`token` / `NFLPRO_TOKEN`; offset paging; `src/core/nfl_pro_runtime.ts`) |
 | `kenpom` | `sdv.mbb.kenpom*` | `kenpom.com` | **caller's subscription login** (`KENPOM_EMAIL` / `KENPOM_PW`; impersonating transport, needs `impit`; `src/core/kenpom_runtime.ts`) |
 
 The three subscription families (`pff_api`, `nfl_pro`, `kenpom`) are never on the
-docs playground or its proxy allowlist (`PLAYGROUND_EXCLUDED_FLAT` in
+docs playground or its proxy allowlist (`NO_PLAYGROUND_FAMILIES` in
 `generate.mjs`). KenPom's HTML parser needs cheerio, so it is node-only:
-`src/core/kenpom_runtime.ts` adds it with `registerParser` instead of listing it
-in the browser-safe `_registry.ts` (`NODE_ONLY_PARSERS`).
+`src/parsers/kenpom.ts` registers it with `registerParser` on import instead of
+listing it in the browser-safe `_registry.ts` (`NODE_ONLY_PARSERS`).
 
 **7 cross-sport providers** — standalone `sdv.<ns>.*` namespaces (NOT leagues), each
 getting its own generated reference page:
@@ -240,7 +254,8 @@ getting its own generated reference page:
 | Family | Namespace | Auth |
 |---|---|---|
 | The Odds API (`odds_api`) | `sdv.odds.*` | `apiKey` query param (caller-supplied) |
-| 247Sports (`recruiting`) | `sdv.recruiting.*` | caller-supplied JWT via `headers` |
+| 247Sports (`sports247` + `sports247_site_pages`, vendored) | `sdv.sports247.*` | **guest JWT minted automatically** (`sports247`; `src/core/sports247_runtime.ts`); both need the impersonating transport (`impit`) and stay off the playground |
+| 247Sports, old (`recruiting`, `api.247sports.com`) | `sdv.recruiting.*` | **deprecated** (host answers 500; one `DeprecationWarning` per method, naming its `sports247` replacement) |
 | CBS Sports (`cbs`) | `sdv.cbs.*` | keyless |
 | Fox Sports (`fox`) | `sdv.fox.*` | public `apikey` + `api-version` query (defaulted) |
 | Yahoo Sports (`yahoo_scores` + `yahoo`) | `sdv.yahoo.*` | keyless (browser-y `Origin`/`Referer` headers) |
@@ -419,7 +434,7 @@ tsconfig.json, typedoc.json
 - **Rate-limit live captures, not codegen.** `generate.mjs` makes no network calls.
   When capturing fixtures from ESPN Core v2 / providers, keep parallelism low —
   ESPN Core v2 in particular 403s under load.
-- **NFL.com token is auto-minted.** `sdv.nfl.nflApi*` mints an anonymous
+- **NFL.com token is auto-minted.** `sdv.nfl.nfl*` (the NFL.com family) mints an anonymous
   `WEB_DESKTOP` bearer token (cached + auto-renewed in `src/core/nfl_auth.ts`); don't
   add a credential requirement or re-implement the mint.
 - **The `{ parsed: true }` kwarg must never change the raw default.** Adding a parser

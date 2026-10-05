@@ -84,3 +84,32 @@ run('BartTorvik live smoke (T-Rank)', function () {
     raw.should.match(/rank/); // the CSV header
   });
 });
+
+run('247Sports live smoke (sports247 + sports247_site_pages; needs impit)', function () {
+  this.timeout(60000);
+
+  // Known-positive control first: the RDB teams directory is a public route, so
+  // an empty result below is a real "no data", not a blocked transport.
+  it('control: sports247_teams returns the team directory', async () => {
+    const rows = await sdv.sports247.sports247_teams({ parsed: true });
+    rows.length.should.be.above(100);
+    rows[0].should.have.property('team_id');
+  });
+
+  it('sports247_recruits (guest-JWT route) returns parsed recruits', async () => {
+    const rows = await sdv.sports247.sports247_recruits({ year: 2026, page_size: 3, parsed: true });
+    rows.length.should.be.above(0);
+    rows[0].should.have.property('key');
+  });
+
+  it('sports247_institution_rankings ranks page one from 1', async () => {
+    const rows = await sdv.sports247.sports247_institution_rankings({ year: 2026, page_size: 3, parsed: true });
+    rows[0].rank.should.equal(1);
+  });
+
+  it('sports247_site_pages_institution returns one Institution row', async () => {
+    const rows = await sdv.sports247.sports247_site_pages_institution({ key: 24099, parsed: true });
+    rows.length.should.equal(1);
+    rows[0].latitude.should.be.a.Number();
+  });
+});
