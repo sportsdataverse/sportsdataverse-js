@@ -33,6 +33,7 @@ import {
   transformFamily,
 } from '../tools/codegen/vendor.mjs';
 import { readLock, verifyLockOnline } from '../tools/codegen/vendor-lock-online.mjs';
+import { flatReturnsSchema, renderFlatReturns } from '../tools/codegen/returns-tables.mjs';
 
 // Offline tests over the COMMITTED upstream copies in tools/codegen/vendor/
 // upstream/ (verbatim sdv-py files at the pinned ref) — no network.
@@ -130,6 +131,62 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
       checked++;
     }
     checked.should.equal(127);
+  });
+
+  // sdv-py `frames_by: <request param>` on a `kind: frames` schema: ONE table, the
+  // frame whose section is that param's value (sdv-py generate.py `_returns_dict`).
+  // The fixture is sdv-py's real pff_api team_leaders schema at fbcf17dfaa (verbatim).
+  const LEADERS = readFileSync(new URL('./fixtures/py/schemas/pff_api/team_leaders.yaml', import.meta.url), 'utf8');
+
+  it('accepts frames_by only as a request parameter name on kind frames', () => {
+    const frame = '- section: S\n  columns:\n  - {name: a, type: integer}\n';
+    checkSchemaShape(`kind: frames\nframes_by: report\nframes:\n${frame}`, 'x', [['league', 'report']]);
+    const bad = {
+      [`kind: dataframe\nframes_by: report\ncolumns: []\n`]: /kind dataframe carries frames_by/,
+      [`kind: frames\nframes_by: 3\nframes:\n${frame}`]: /frames_by must be a request parameter name/,
+      [`kind: frames\nframes_by: ''\nframes:\n${frame}`]: /frames_by must be a request parameter name/,
+      [`kind: frames\nframes_by: [a]\nframes:\n${frame}`]: /frames_by must be a request parameter name/,
+    };
+    for (const [text, err] of Object.entries(bad)) (() => checkSchemaShape(text, 'x')).should.throw(err);
+    // every endpoint using the schema must take the param
+    const ok = `kind: frames\nframes_by: report\nframes:\n${frame}`;
+    (() => checkSchemaShape(ok, 'x', [['league', 'report'], ['league']])).should.throw(
+      /frames_by "report" is not a request parameter of every endpoint/
+    );
+    (() => checkSchemaShape(ok, 'x', [])).should.throw(/no endpoint/);
+  });
+
+  it("sdv-py's real frames_by schema: vendored against its endpoint's params, rendered as ONE table", () => {
+    const leaders = family('pff_api').ep('team_leaders');
+    const params = [...leaders.path_params, ...leaders.extra_params].map((p) => p.name);
+    checkSchemaShape(LEADERS, 'team_leaders', [params]);
+    (() => checkSchemaShape(LEADERS, 'team_leaders', [params.filter((p) => p !== 'group')])).should.throw(
+      /frames_by "group"/
+    );
+    // the docs: a single table, one column set per value of `group`, never an object of tables
+    const schema = flatReturnsSchema(parse(LEADERS));
+    schema.framesBy.should.equal('group');
+    const md = renderFlatReturns('`pff_api_team_leaders`', schema);
+    md.should.match(/a single table, whose columns depend on `group`/);
+    md.should.not.match(/object of tables/);
+    for (const g of ['receiving', 'passing', 'rushing', 'defense']) md.should.containEql(`**When \`group\` is \`${g}\`**`);
+    // without frames_by the same frames are an object of tables (sdv-js's existing shape)
+    renderFlatReturns('x', flatReturnsSchema({ ...parse(LEADERS), frames_by: undefined })).should.match(/an object of tables/);
+  });
+
+  it('deriveAll checks frames_by against the endpoints that attach the schema', () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'sdv-vendor-frames-by-'));
+    try {
+      for (const d of ['vendor', 'overlay']) cpSync(join(CODEGEN_DIR, d), join(tmp, d), { recursive: true });
+      cpSync(join(CODEGEN_DIR, 'vendor.yaml'), join(tmp, 'vendor.yaml'));
+      const at = join(tmp, 'vendor', 'upstream', 'schemas', 'native', 'pff_api', 'team_leaders.yaml');
+      writeFileSync(at, LEADERS);
+      deriveAll(tmp, 'pff_api').get('schemas/native/pff_api/team_leaders.yaml').should.equal(LEADERS);
+      writeFileSync(at, LEADERS.replace('frames_by: group', 'frames_by: position_group'));
+      (() => deriveAll(tmp, 'pff_api')).should.throw(/team_leaders\.yaml \(family pff_api\): frames_by "position_group"/);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
   });
 
   it('refuses an overlay that swaps a vendored parser (parser_overrides only)', () => {

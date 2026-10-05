@@ -2,6 +2,10 @@
 
 ## **Unreleased**
 
+### Changed — vendor accepts sdv-py `frames_by` returns schemas
+
+- **Codegen:** sdv-py adds `frames_by` (a request parameter name) to a `kind: frames` returns schema when the function returns ONE table, whose columns are the frame that parameter's value names (the pff_api `/v2` reports: `position_report` and `team_report` by `report`, `team_leaders` by `group`, `team_stats` by `category`). `vendor` accepts the key only on `kind: frames`, only as a non-empty string, and only when every endpoint that attaches the schema takes that parameter; anything else still fails closed. The reference docs render one column table per value ("When `group` is `passing`") under a single-table heading instead of "an object of tables", and the wrapper's `@returns` says the columns depend on the parameter. The parity harness counts every frame's columns but leaves these endpoints unverified (a capture records no request parameter to pick the frame by). The returns-table renderer moved to `tools/codegen/returns-tables.mjs`, so the tests run the real sdv-py schema through it. Unblocks the vendor sync (#88, #95).
+
 ### Changed — tooling, playground and docs cleanup
 
 - **Exports:** `DEPRECATED_NAME_CODE` and `DEPRECATED_ENDPOINT_CODE` are exported from the package entry, so callers can filter the v4 rename and dead-route `DeprecationWarning`s by `w.code` without copying the strings.

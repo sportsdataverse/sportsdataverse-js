@@ -33,6 +33,12 @@ import { same, sameType } from '../helpers/parity.mjs';
 // (2) hold for each frame. A frame with no rows in the capture cannot show its
 // columns (JS rows carry no schema), so all its columns are unexercised.
 //
+// A `kind: frames` schema with `frames_by: <request param>` is ONE table: the
+// frame whose section is that param's value (sdv-py pff_api /v2 reports). Its
+// columns all count, but it is never verified: a manifest capture records no
+// request params to pick its frame by, so it stays unverified (no object of
+// frames is expected of it).
+//
 // A schema column that is null in every row of every capture is UNEXERCISED:
 // (2) cannot check its type (py types an all-null column `character`). The
 // committed test/fixtures/py/parity_coverage.json (drift-checked;
@@ -51,18 +57,19 @@ const body = (p) => (/\.(csv|html)(\.gz)?$/.test(p) ? text(p) : JSON.parse(text(
  * `kind: frames` schema, else one with `section: null`. `[]` when the file is
  * missing or publishes no columns (an `unverified` schema).
  */
-const tablesMemo = new Map(); // ref -> tables (each schema file is parsed once)
-const schemaTables = (ref) => {
-  if (tablesMemo.has(ref)) return tablesMemo.get(ref);
-  const p = join(CODEGEN, 'schemas', `${ref}.yaml`);
-  let tables = [];
-  if (existsSync(p)) {
-    const doc = parse(text(p));
-    const all = doc.kind === 'frames' ? doc.frames : [{ section: null, columns: doc.columns ?? [] }];
-    if (all.some((t) => t.columns.length)) tables = all;
+const docMemo = new Map(); // ref -> parsed schema or null (each schema file is parsed once)
+const schemaDoc = (ref) => {
+  if (!docMemo.has(ref)) {
+    const p = join(CODEGEN, 'schemas', `${ref}.yaml`);
+    docMemo.set(ref, existsSync(p) ? parse(text(p)) : null);
   }
-  tablesMemo.set(ref, tables);
-  return tables;
+  return docMemo.get(ref);
+};
+const schemaTables = (ref) => {
+  const doc = schemaDoc(ref);
+  if (!doc) return [];
+  const all = doc.kind === 'frames' ? doc.frames : [{ section: null, columns: doc.columns ?? [] }];
+  return all.some((t) => t.columns.length) ? all : [];
 };
 /** Every schema column as `[section, column]` (section null for one frame). */
 const schemaColumns = (ref) => schemaTables(ref).flatMap((t) => t.columns.map((c) => [t.section, c]));
@@ -149,11 +156,16 @@ function assertFrame(rows, py, label, parser) {
 
 const manifest = parse(readFileSync(join(FIX, 'py', 'manifest.yaml'), 'utf8'));
 const status = pySchemaStatus();
-// family -> Map(short -> ref) of DOCUMENTED endpoints (attached py table with columns)
+// family -> Map(short -> ref) of VERIFIABLE documented endpoints (attached py table
+// with columns, and not frames_by: no capture says which frame it picks)
 const docs = new Map(
   [...status].map(([f, eps]) => [
     f,
-    new Map(eps.filter((e) => e.status === 'attached' && schemaColumns(e.ref).length).map((e) => [e.short, e.ref])),
+    new Map(
+      eps
+        .filter((e) => e.status === 'attached' && schemaColumns(e.ref).length && !schemaDoc(e.ref).frames_by)
+        .map((e) => [e.short, e.ref])
+    ),
   ])
 );
 
@@ -309,7 +321,8 @@ function coverage() {
       'declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types ' +
       'are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so ' +
       'its type is unchecked) must be typed unknown. A kind: frames schema counts the columns of every frame, ' +
-      'and lists its unexercised ones as <section>.<column>.',
+      'and lists its unexercised ones as <section>.<column>. One with frames_by (a single table, the frame a ' +
+      'request parameter picks) is always unverified: a capture records no request parameter to pick it by.',
     source_ref: loadManifest().source.ref,
     totals,
     families,

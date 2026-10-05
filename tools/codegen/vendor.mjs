@@ -137,15 +137,23 @@ export function rewriteSchema(ref, prefixes = {}) {
 /** The `returns_schema` refs an endpoint YAML text names. */
 // Memoized by text: the YAML parse dominates a check (derive + orphan scan read the
 // same ~1 MB of endpoint files several times), and the result is pure in `text`.
-const refsMemo = new Map();
-export function schemaRefs(text) {
-  let refs = refsMemo.get(text);
-  if (!refs) {
+const epsMemo = new Map();
+function endpointsOf(text) {
+  if (!epsMemo.has(text)) {
     const eps = parse(text)?.endpoints; // espn_parser_map.yaml's is a map, not a list
-    refs = Array.isArray(eps) ? [...new Set(eps.map((e) => e?.returns_schema).filter(Boolean))] : [];
-    refsMemo.set(text, refs);
+    epsMemo.set(text, Array.isArray(eps) ? eps : []);
   }
-  return [...refs];
+  return epsMemo.get(text);
+}
+export function schemaRefs(text) {
+  return [...new Set(endpointsOf(text).map((e) => e?.returns_schema).filter(Boolean))];
+}
+
+/** Per endpoint of a family text using returns schema `ref`: its request (path + extra) param names. */
+function requestParams(text, ref) {
+  return endpointsOf(text)
+    .filter((e) => e?.returns_schema === ref)
+    .map((e) => [...(e.path_params ?? []), ...(e.extra_params ?? [])].map((p) => p?.name));
 }
 
 /**
@@ -421,24 +429,39 @@ function listYaml(dir, prefix = "") {
 
 // The returns-schema shapes the JS generator and the parity harness understand
 // (sdv-py tools/codegen/spec §3.5). Anything else fails the vendor closed.
-const SCHEMA_KEYS = new Set(["schema", "kind", "columns", "frames", "description", "note", "unverified"]);
+const SCHEMA_KEYS = new Set(["schema", "kind", "columns", "frames", "frames_by", "description", "note", "unverified"]);
 const FRAME_KEYS = new Set(["section", "columns"]);
 const COLUMN_KEYS = new Set(["name", "type", "description"]);
 
 /**
  * Throw unless a vendored py returns schema has a shape JS understands:
  * `kind: dataframe` with `columns`, or `kind: frames` with `frames:
- * [{section, columns}]` (one table per key of the parser's dict). Optional
+ * [{section, columns}]` (one table per key of the parser's dict). `kind: frames`
+ * may add `frames_by: <request param>`: then it is ONE table, whose columns are
+ * the frame whose `section` equals that param's value (sdv-py generate.py
+ * `_returns_dict`); `endpointParams` (one request-param-name list per endpoint
+ * using the schema) must each name it. Optional
  * `schema` / `description` / `note`, and `unverified: <reason>`, which must
  * publish no columns (sdv-py had no capture the parser emits rows for). Each
  * column is `{name, type, description?}`. An unknown key anywhere fails closed:
  * an upstream shape JS silently mis-renders is worse than a red vendor.
  */
-// Schema texts already checked (deriveAll runs once per temp tree in the tests).
-const shapeChecked = new Set();
+// Schema text -> its frames_by, for texts already checked (deriveAll runs once per temp tree in the tests).
+const shapeChecked = new Map();
 
-export function checkSchemaShape(text, where) {
-  if (shapeChecked.has(text)) return;
+export function checkSchemaShape(text, where, endpointParams = null) {
+  if (!shapeChecked.has(text)) shapeChecked.set(text, checkShape(text, where));
+  const by = shapeChecked.get(text);
+  if (by !== undefined && endpointParams && (!endpointParams.length || endpointParams.some((ps) => !ps.includes(by)))) {
+    throw new Error(
+      `${where}: frames_by ${JSON.stringify(by)} is not a request parameter of every endpoint using this schema ` +
+        `(${endpointParams.map((ps) => ps.join(", ") || "no params").join(" | ") || "no endpoint"})`
+    );
+  }
+}
+
+/** The shape check of checkSchemaShape; returns the schema's `frames_by` (undefined when absent). */
+function checkShape(text, where) {
   const fail = (msg) => {
     throw new Error(
       `${where}: ${msg}. This returns-schema shape is unknown to sdv-js: teach tools/codegen/generate.mjs and ` +
@@ -461,9 +484,13 @@ export function checkSchemaShape(text, where) {
   };
   if (doc.kind === "dataframe") {
     if (doc.frames !== undefined) fail("kind dataframe carries frames");
+    if (doc.frames_by !== undefined) fail("kind dataframe carries frames_by");
     columns(doc.columns, "");
   } else if (doc.kind === "frames") {
     if (doc.columns !== undefined) fail("kind frames carries top-level columns");
+    if (doc.frames_by !== undefined && (typeof doc.frames_by !== "string" || !doc.frames_by.trim())) {
+      fail("frames_by must be a request parameter name");
+    }
     if (!Array.isArray(doc.frames) || !doc.frames.length) fail("kind frames needs a non-empty frames list");
     for (const f of doc.frames) {
       const extra = Object.keys(f ?? {}).filter((k) => !FRAME_KEYS.has(k));
@@ -477,7 +504,7 @@ export function checkSchemaShape(text, where) {
     if (typeof doc.unverified !== "string" || !doc.unverified.trim()) fail("unverified must be a reason string");
     if (doc.kind !== "dataframe" || doc.columns.length) fail("an unverified schema must publish no columns");
   }
-  shapeChecked.add(text);
+  return doc.frames_by;
 }
 
 /**
@@ -507,7 +534,11 @@ export function deriveAll(root = CODEGEN_DIR, only = null) {
     for (const ref of fam.schemaRefs) {
       for (const f of schemaFilesFor(ref, upSchemas)) {
         const text = readUp(join(up, "schemas", f));
-        checkSchemaShape(text, `vendor/upstream/schemas/${f} (family ${key})`);
+        checkSchemaShape(
+          text,
+          `vendor/upstream/schemas/${f} (family ${key})`,
+          requestParams(fam.text, rewriteSchema(ref, cfg.schemas))
+        );
         out.set(`schemas/${rewriteSchema(f, cfg.schemas)}`, text);
       }
     }
