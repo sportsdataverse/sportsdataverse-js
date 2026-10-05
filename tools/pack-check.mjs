@@ -25,10 +25,10 @@ function run(cmd) {
 
 const dir = mkdtempSync(join(tmpdir(), 'sdv-pack-'));
 try {
-  // Lifecycle output (the `prepare` build) goes to stderr; stdout is the JSON.
-  const [{ filename }] = JSON.parse(
-    execSync(`npm pack --json --pack-destination "${dir}"`, { encoding: 'utf8' }),
-  );
+  // Some npm versions print the `prepare` lifecycle banner on stdout ahead of the
+  // JSON, so parse from the first line that opens the JSON array.
+  const out = execSync(`npm pack --json --pack-destination "${dir}"`, { encoding: 'utf8' });
+  const [{ filename }] = JSON.parse(out.slice(out.search(/^\[/m)));
   const tgz = join(dir, filename);
   run(`npx --no-install attw "${tgz}" --ignore-rules cjs-resolves-to-esm`);
   run(`npx --no-install publint run "${tgz}" --strict`);
