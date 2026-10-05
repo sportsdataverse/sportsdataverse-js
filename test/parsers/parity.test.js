@@ -161,18 +161,18 @@ function assertFrame(rows, py, label, parser) {
 
 const manifest = parse(readFileSync(join(FIX, 'py', 'manifest.yaml'), 'utf8'));
 const status = pySchemaStatus();
-// family -> Map(short -> ref) of VERIFIABLE documented endpoints (attached py table
-// with columns, and not frames_by: no capture says which frame it picks)
+// family -> Map(short -> ref) of DOCUMENTED endpoints (attached py table with columns)
 const docs = new Map(
   [...status].map(([f, eps]) => [
     f,
-    new Map(
-      eps
-        .filter((e) => e.status === 'attached' && schemaColumns(e.ref).length && !schemaDoc(e.ref).frames_by)
-        .map((e) => [e.short, e.ref])
-    ),
+    new Map(eps.filter((e) => e.status === 'attached' && schemaColumns(e.ref).length).map((e) => [e.short, e.ref])),
   ])
 );
+// The documented endpoint a capture can verify: not frames_by (no capture says which frame it picks).
+const verifiable = (family, short) => {
+  const ref = docs.get(family)?.get(short);
+  return ref && !schemaDoc(ref).frames_by ? ref : undefined;
+};
 
 // Every capture parsed once, up front (the coverage summary and the test titles use the results).
 const runs = new Map();
@@ -219,7 +219,7 @@ for (const [family, fixtures] of Object.entries(manifest)) {
   const oracle = JSON.parse(text(join(FIX, 'py', 'oracle', `${family}.json.gz`)));
   describe(`parser parity: ${family} (sdv-py real captures)`, () => {
     for (const [path, short] of Object.entries(fixtures)) {
-      const ref = docs.get(family)?.get(short);
+      const ref = verifiable(family, short);
       const ex = ref && exercise(family, short);
       const tag = ref ? ` [${ex.exercised}/${ex.columns} columns exercised]` : ' (no returns table: parity only)';
       it(`${short} <- ${path}${tag}`, () => {
@@ -305,7 +305,7 @@ function coverage() {
       row[b]++;
     }
     const captured = new Set(Object.values(manifest[key] ?? {}));
-    const verified = [...docs.get(key).keys()].filter((s) => captured.has(s)).sort();
+    const verified = [...docs.get(key).keys()].filter((s) => captured.has(s) && verifiable(key, s)).sort();
     row.verified = verified.length;
     row.unverified = row.documented - verified.length;
     row.verified_endpoints = Object.fromEntries(verified.map((s) => [s, exercise(key, s)]));
