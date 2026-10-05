@@ -165,6 +165,11 @@ describe('v4 naming: deprecated aliases', () => {
   });
 });
 
+// sdv-py hand-writes these in sportsdataverse/<lg>/<lg>_pbp.py (fetch the summary, trim, helper_<lg>_pbp),
+// so py_public_names.json (the <lg>_espn_ext wrapper set) does not list them; JS ports them as-is.
+const PY_PRODUCERS = new Set(['espn_nba_pbp', 'espn_wnba_pbp', 'espn_mbb_pbp', 'espn_wbb_pbp']);
+const isProducer = (k) => PY_PRODUCERS.has(k) || PY_PRODUCERS.has(k.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`));
+
 describe('v4 naming: JS names equal sdv-py names at the vendor pin', () => {
   it('the sdv-py names were read at the vendor pin (`npm run vendor` regenerates them)', () => {
     PY_NAMES.ref.should.equal(VENDOR.source.ref);
@@ -186,7 +191,7 @@ describe('v4 naming: JS names equal sdv-py names at the vendor pin', () => {
       const ns = sdv[league.prefix];
       const js = Object.keys(ns).filter((k) => k.startsWith(`espn_${league.prefix}_`) && !isAlias(ns[k]));
       const pySet = new Set(py);
-      js.filter((n) => !pySet.has(n) && !PY_HANDWRITTEN.has(n)).should.eql([], 'JS names sdv-py does not have');
+      js.filter((n) => !pySet.has(n) && !PY_HANDWRITTEN.has(n) && !PY_PRODUCERS.has(n)).should.eql([], 'JS names sdv-py does not have');
       const jsSet = new Set(js);
       py.filter((n) => !jsSet.has(n)).should.eql([], 'sdv-py names JS lacks');
       for (const n of js) (typeof ns[toCamel(n)]).should.equal('function', `${toCamel(n)} missing`);
@@ -240,7 +245,9 @@ describe('v4 naming: runtime factories match the composed surface', () => {
       const mod = makeLeagueModule(cfg);
       const camelPrefix = toCamel(`espn_${cfg.prefix}`);
       const composed = Object.keys(sdv[cfg.prefix]).filter(
-        (k) => k.startsWith(`espn_${cfg.prefix}_`) || (k.startsWith(camelPrefix) && /[A-Z0-9]/.test(k[camelPrefix.length]))
+        (k) =>
+          !isProducer(k) &&
+          (k.startsWith(`espn_${cfg.prefix}_`) || (k.startsWith(camelPrefix) && /[A-Z0-9]/.test(k[camelPrefix.length])))
       );
       Object.keys(mod).sort().should.eql(composed.sort(), `${cfg.prefix}: factory vs composed names`);
       for (const k of composed) isAlias(mod[k]).should.equal(isAlias(sdv[cfg.prefix][k]), `${cfg.prefix}.${k}`);

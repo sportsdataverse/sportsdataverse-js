@@ -27,6 +27,7 @@
     "src/analytics/hockeytech.ts",
     "src/models/cricket_wp.ts",
     "src/odds/math.ts",
-    "src/producers/espn_basketball_box.ts"
+    "src/producers/espn_basketball_box.ts",
+    "src/producers/espn_basketball_pbp.ts"
   ]
 }
