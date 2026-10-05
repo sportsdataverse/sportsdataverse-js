@@ -14,6 +14,7 @@ import { LEAGUES } from './generated/leagues.js';
 import { makeLeagueModule } from './leagues/_make.js';
 import { WRITTEN_FLAT } from './generated/flat/index.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
+import { oddsMath } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
 // documented `export const` wrappers in src/generated/espn/<prefix>.ts, exposed
@@ -127,6 +128,9 @@ for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
   sdv.hockeytech[name] = fn;
   sdv.hockeytech[toCamel(name)] = fn;
 }
+
+// Odds / market math (py wexp.market) merged onto sdv.odds under py + camelCase names.
+sdv.odds = { ...(sdv.odds ?? {}), ...oddsMath };
 
 export default sdv;
 
