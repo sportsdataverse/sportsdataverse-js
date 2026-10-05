@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@81eb7e7060de58ec79b6bdf8bbc1a797f9eb537f
+# VENDORED from sportsdataverse/sportsdataverse-py@07390b71c156675080b5de573fccbd5a8076c143
 # tools/codegen/endpoints/bart_wbb.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/bart_wbb.yaml; shared changes land in sdv-py first.

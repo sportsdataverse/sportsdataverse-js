@@ -8826,7 +8826,7 @@ With `{ parsed: true }`: an object of tables, one per key below.
 
 | col_name | type | description |
 |---|---|---|
-| `game_id` | integer |  |
+| `game_id` | character |  |
 | `leag_tix` | character |  |
 
 ### Returns — `nba_stats_scoreboardv3` / `nbaStatsScoreboardv3`

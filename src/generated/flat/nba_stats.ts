@@ -86,7 +86,8 @@ const ASSISTLEADERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_playoffs",
@@ -333,7 +334,7 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -362,7 +363,7 @@ const BOXSCOREADVANCEDV3_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -386,7 +387,7 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -398,7 +399,7 @@ const BOXSCOREDEFENSIVEV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoredefensivev2`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoredefensivev2({});
@@ -429,7 +430,7 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -458,7 +459,7 @@ const BOXSCOREFOURFACTORSV3_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -515,7 +516,7 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -527,7 +528,7 @@ const BOXSCOREMATCHUPSV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscorematchupsv3`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscorematchupsv3({});
@@ -558,7 +559,7 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -587,7 +588,7 @@ const BOXSCOREMISCV3_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -611,7 +612,7 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -623,7 +624,7 @@ const BOXSCOREPLAYERTRACKV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoreplayertrackv3`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`.
  * @example await sdv.nba.nbaStatsBoxscoreplayertrackv3({});
@@ -654,7 +655,7 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -683,7 +684,7 @@ const BOXSCORESCORINGV3_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -707,7 +708,7 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -719,7 +720,7 @@ const BOXSCORESUMMARYV2_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoresummaryv2`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameSummary`, `OtherStats`, `Officials`, `InactivePlayers`, `GameInfo`, `LineScore`, `LastMeeting`, `SeasonSeries`, `AvailableVideo`.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv2({});
@@ -740,7 +741,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -752,7 +753,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/boxscoresummaryv3`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `PlayerStats`, `TeamStats`, `Officials`.
  * @example await sdv.nba.nbaStatsBoxscoresummaryv3({});
@@ -783,7 +784,7 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -812,7 +813,7 @@ const BOXSCORETRADITIONALV2_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -846,7 +847,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -875,7 +876,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -909,7 +910,7 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "range_type",
@@ -938,7 +939,7 @@ const BOXSCOREUSAGEV3_DEF: WrapperDef = {
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `14`.
  * @param params.end_range - query parameter (`EndRange`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.range_type - query parameter (`RangeType`) — default `0`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.start_range - query parameter (`StartRange`) — default `0`.
@@ -972,7 +973,8 @@ const COMMONALLPLAYERS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1012,7 +1014,7 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1025,7 +1027,7 @@ const COMMONPLAYERINFO_DEF: WrapperDef = {
  * **Endpoint:** `GET https://stats.nba.com/stats/commonplayerinfo`
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonPlayerInfo`, `PlayerHeadlineStats`, `AvailableSeasons`.
  * @example await sdv.nba.nbaStatsCommonplayerinfo({});
@@ -1051,7 +1053,8 @@ const COMMONPLAYOFFSERIES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "series_id_nullable",
@@ -1096,12 +1099,13 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661317"
+      "default": "1610612739"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1115,7 +1119,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season - query parameter (`Season`) — default `null`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661317`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `CommonTeamRoster`, `Coaches`.
  * @example await sdv.nba.nbaStatsCommonteamroster({});
@@ -1169,7 +1173,7 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
     {
       "name": "game_ids",
       "queryKey": "GameIDs",
-      "default": "1022200018"
+      "default": "0022000756"
     },
     {
       "name": "league_id",
@@ -1179,12 +1183,12 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "204319"
+      "default": "1629611"
     },
     {
       "name": "season",
       "queryKey": "Season",
-      "default": "2021-22"
+      "default": "2020-21"
     },
     {
       "name": "season_type_all_star",
@@ -1201,10 +1205,10 @@ const CUMESTATSPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/cumestatsplayer`
  *
- * @param params.game_ids - query parameter (`GameIDs`) — default `1022200018`.
+ * @param params.game_ids - query parameter (`GameIDs`) — default `0022000756`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `204319`.
- * @param params.season - query parameter (`Season`) — default `2021-22`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `1629611`.
+ * @param params.season - query parameter (`Season`) — default `2020-21`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalPlayerStats`.
@@ -1241,12 +1245,13 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "204319"
+      "default": "2544"
     },
     {
       "name": "season",
       "queryKey": "Season",
-      "default": "2021-22"
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -1281,8 +1286,8 @@ const CUMESTATSPLAYERGAMES_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.location_nullable - query parameter (`Location`) — default ``.
  * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.player_id - query parameter (`PlayerID`) — default `204319`.
- * @param params.season - query parameter (`Season`) — default `2021-22`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
+ * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
@@ -1307,7 +1312,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
     {
       "name": "game_ids",
       "queryKey": "GameIDs",
-      "default": "1022200018"
+      "default": 22201094
     },
     {
       "name": "league_id",
@@ -1317,7 +1322,8 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": "2021-22"
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -1327,7 +1333,7 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661317"
+      "default": "1610612739"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1339,11 +1345,11 @@ const CUMESTATSTEAM_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/cumestatsteam`
  *
- * @param params.game_ids - query parameter (`GameIDs`) — default `1022200018`.
+ * @param params.game_ids - query parameter (`GameIDs`) — default `22201094`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.season - query parameter (`Season`) — default `2021-22`.
+ * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661317`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameByGameStats`, `TotalTeamStats`.
  * @example await sdv.nba.nbaStatsCumestatsteam({});
@@ -1379,7 +1385,8 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": "2021-22"
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_id_nullable",
@@ -1394,7 +1401,7 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661317"
+      "default": "1610612739"
     },
     {
       "name": "vs_conference_nullable",
@@ -1424,10 +1431,10 @@ const CUMESTATSTEAMGAMES_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.location_nullable - query parameter (`Location`) — default ``.
  * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
- * @param params.season - query parameter (`Season`) — default `2021-22`.
+ * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_id_nullable - query parameter (`SeasonID`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661317`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.vs_team_id_nullable - query parameter (`VsTeamID`) — default `0`.
@@ -1456,7 +1463,8 @@ const DRAFTCOMBINEDRILLRESULTS_DEF: WrapperDef = {
     {
       "name": "season_year",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1495,7 +1503,8 @@ const DRAFTCOMBINENONSTATIONARYSHOOTING_DEF: WrapperDef = {
     {
       "name": "season_year",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1534,7 +1543,8 @@ const DRAFTCOMBINEPLAYERANTHRO_DEF: WrapperDef = {
     {
       "name": "season_year",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1573,7 +1583,8 @@ const DRAFTCOMBINESPOTSHOOTING_DEF: WrapperDef = {
     {
       "name": "season_year",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1612,7 +1623,8 @@ const DRAFTCOMBINESTATS_DEF: WrapperDef = {
     {
       "name": "season_all_time",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1900,7 +1912,7 @@ const FRANCHISELEADERS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661324"
+      "default": "1610612739"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1913,7 +1925,7 @@ const FRANCHISELEADERS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://stats.nba.com/stats/franchiseleaders`
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661324`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFranchiseleaders({});
@@ -1949,7 +1961,7 @@ const FRANCHISELEADERSWRANK_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661324"
+      "default": "1610612739"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -1964,7 +1976,7 @@ const FRANCHISELEADERSWRANK_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661324`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFranchiseleaderswrank({});
@@ -2000,7 +2012,7 @@ const FRANCHISEPLAYERS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661319"
+      "default": "1610612739"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -2015,7 +2027,7 @@ const FRANCHISEPLAYERS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661319`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612739`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsFranchiseplayers({});
@@ -2036,7 +2048,7 @@ const GAMEROTATION_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": "0022200021"
     },
     {
       "name": "league_id",
@@ -2053,7 +2065,7 @@ const GAMEROTATION_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/gamerotation`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `0022200021`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `AwayTeam`, `HomeTeam`.
@@ -2246,7 +2258,7 @@ const INFOGRAPHICFANDUELPLAYER_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": 22201086
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -2258,7 +2270,7 @@ const INFOGRAPHICFANDUELPLAYER_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/infographicfanduelplayer`
  *
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `22201086`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsInfographicfanduelplayer({});
@@ -2443,7 +2455,8 @@ const LEAGUEDASHLINEUPS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -2616,7 +2629,8 @@ const LEAGUEDASHOPPPTSHOT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -2824,7 +2838,8 @@ const LEAGUEDASHPLAYERBIOSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3072,7 +3087,8 @@ const LEAGUEDASHPLAYERCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3302,7 +3318,8 @@ const LEAGUEDASHPLAYERPTSHOT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3554,7 +3571,8 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -3792,7 +3810,8 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -4399,7 +4418,8 @@ const LEAGUEDASHPTTEAMDEFEND_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -5878,7 +5898,8 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -6019,7 +6040,8 @@ const LEAGUEHUSTLESTATSPLAYER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6196,7 +6218,8 @@ const LEAGUEHUSTLESTATSTEAM_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6452,7 +6475,8 @@ const LEAGUELINEUPVIZ_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6616,7 +6640,8 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -6631,7 +6656,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661313"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -6671,7 +6696,7 @@ const LEAGUEPLAYERONDETAILS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661313`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -6724,7 +6749,8 @@ const LEAGUESEASONMATCHUPS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_playoffs",
@@ -6774,7 +6800,8 @@ const LEAGUESTANDINGS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type",
@@ -6825,7 +6852,8 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type",
@@ -6901,7 +6929,8 @@ const MATCHUPSROLLUP_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_playoffs",
@@ -6951,7 +6980,7 @@ const PLAYBYPLAYV3_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200034"
+      "default": 22201086
     },
     {
       "name": "start_period",
@@ -6969,7 +6998,7 @@ const PLAYBYPLAYV3_DEF: WrapperDef = {
  * **Endpoint:** `GET https://stats.nba.com/stats/playbyplayv3`
  *
  * @param params.end_period - query parameter (`EndPeriod`) — default `0`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200034`.
+ * @param params.game_id - query parameter (`GameID`) — default `22201086`.
  * @param params.start_period - query parameter (`StartPeriod`) — default `0`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -6991,7 +7020,7 @@ const PLAYERAWARDS_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -7003,7 +7032,7 @@ const PLAYERAWARDS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/playerawards`
  *
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsPlayerawards({});
@@ -7085,7 +7114,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -7099,7 +7128,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsShowcaseSeason`, `CareerTotalsShowcaseSeason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`.
  * @example await sdv.nba.nbaStatsPlayercareerstats({});
@@ -7195,7 +7224,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
     {
       "name": "player_id_list",
       "queryKey": "PlayerIDList",
-      "default": null
+      "default": "202681,203078,2544,201567,203954"
     },
     {
       "name": "plus_minus",
@@ -7240,7 +7269,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
     {
       "name": "vs_player_id_list",
       "queryKey": "VsPlayerIDList",
-      "default": null
+      "default": "201566,201939,201935,201142,203076"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -7267,7 +7296,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id_list - query parameter (`PlayerIDList`) — default `null`.
+ * @param params.player_id_list - query parameter (`PlayerIDList`) — default `202681,203078,2544,201567,203954`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `2020-21`.
@@ -7276,7 +7305,7 @@ const PLAYERCOMPARE_DEF: WrapperDef = {
  * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `null`.
+ * @param params.vs_player_id_list - query parameter (`VsPlayerIDList`) — default `201566,201939,201935,201142,203076`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `OverallCompare`, `Individual`.
  * @example await sdv.nba.nbaStatsPlayercompare({});
@@ -7367,7 +7396,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -7382,7 +7411,8 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7433,7 +7463,7 @@ const PLAYERDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -7532,7 +7562,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -7547,7 +7577,8 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7598,7 +7629,7 @@ const PLAYERDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -7697,7 +7728,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -7712,7 +7743,8 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7763,7 +7795,7 @@ const PLAYERDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -7862,7 +7894,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -7877,7 +7909,8 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -7928,7 +7961,7 @@ const PLAYERDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -8027,7 +8060,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -8042,7 +8075,8 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -8093,7 +8127,7 @@ const PLAYERDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -8192,7 +8226,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -8207,7 +8241,8 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -8258,7 +8293,7 @@ const PLAYERDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -8357,7 +8392,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -8372,7 +8407,8 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -8423,7 +8459,7 @@ const PLAYERDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -8522,7 +8558,7 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -8588,7 +8624,7 @@ const PLAYERDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -8667,7 +8703,8 @@ const PLAYERDASHPTPASS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -8935,7 +8972,8 @@ const PLAYERDASHPTSHOTDEFEND_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -9210,7 +9248,7 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -9246,7 +9284,7 @@ const PLAYERFANTASYPROFILE_DEF: WrapperDef = {
  * @param params.measure_type - query parameter (`MeasureType`) — default `Base`.
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -9276,12 +9314,13 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star_nullable",
@@ -9299,7 +9338,7 @@ const PLAYERFANTASYPROFILEBARGRAPH_DEF: WrapperDef = {
  * **Endpoint:** `GET https://stats.nba.com/stats/playerfantasyprofilebargraph`
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star_nullable - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -9337,12 +9376,13 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -9362,7 +9402,7 @@ const PLAYERGAMELOG_DEF: WrapperDef = {
  * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
  * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
@@ -9455,7 +9495,8 @@ const PLAYERGAMELOGS_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -10149,7 +10190,8 @@ const PLAYERINDEX_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "team_id_nullable",
@@ -10214,7 +10256,7 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10228,7 +10270,7 @@ const PLAYERPROFILEV2_DEF: WrapperDef = {
  *
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.per_mode36 - query parameter (`PerMode`) — default `Totals`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `SeasonTotalsRegularSeason`, `CareerTotalsRegularSeason`, `SeasonTotalsPostSeason`, `CareerTotalsPostSeason`, `SeasonTotalsAllStarSeason`, `CareerTotalsAllStarSeason`, `SeasonTotalsCollegeSeason`, `CareerTotalsCollegeSeason`, `SeasonTotalsPreseason`, `CareerTotalsPreseason`, `SeasonRankingsRegularSeason`, `SeasonRankingsPostSeason`, `SeasonHighs`, `CareerHighs`, `NextGame`.
  * @example await sdv.nba.nbaStatsPlayerprofilev2({});
@@ -10314,7 +10356,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "2544"
     },
     {
       "name": "plus_minus",
@@ -10329,7 +10371,8 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -10354,7 +10397,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
     {
       "name": "vs_player_id",
       "queryKey": "VsPlayerID",
-      "default": "1629488"
+      "default": "203076"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10379,7 +10422,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  * @param params.pace_adjust - query parameter (`PaceAdjust`) — default `N`.
  * @param params.per_mode_detailed - query parameter (`PerMode`) — default `Totals`.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
  * @param params.plus_minus - query parameter (`PlusMinus`) — default `N`.
  * @param params.rank - query parameter (`Rank`) — default `N`.
  * @param params.season - query parameter (`Season`) — default `null`.
@@ -10387,7 +10430,7 @@ const PLAYERVSPLAYER_DEF: WrapperDef = {
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `1629488`.
+ * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `203076`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`, `PlayerInfo`, `VsPlayerInfo`.
  * @example await sdv.nba.nbaStatsPlayervsplayer({});
@@ -10530,7 +10573,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
     {
       "name": "game_date",
       "queryKey": "GameDate",
-      "default": "2022-07-20"
+      "default": "2021-07-20"
     },
     {
       "name": "league_id",
@@ -10548,7 +10591,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
  * **Endpoint:** `GET https://stats.nba.com/stats/scoreboardv2`
  *
  * @param params.day_offset - query parameter (`DayOffset`) — default `0`.
- * @param params.game_date - query parameter (`GameDate`) — default `2022-07-20`.
+ * @param params.game_date - query parameter (`GameDate`) — default `2021-07-20`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `GameHeader`, `LineScore`, `SeriesStandings`, `LastMeeting`, `EastConfStandingsByDay`, `WestConfStandingsByDay`, `Available`, `TeamLeaders`, `TicketLinks`.
@@ -10570,7 +10613,7 @@ const SCOREBOARDV3_DEF: WrapperDef = {
     {
       "name": "game_date",
       "queryKey": "GameDate",
-      "default": "2022-06-26"
+      "default": "2023-03-26"
     },
     {
       "name": "league_id",
@@ -10587,7 +10630,7 @@ const SCOREBOARDV3_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/scoreboardv3`
  *
- * @param params.game_date - query parameter (`GameDate`) — default `2022-06-26`.
+ * @param params.game_date - query parameter (`GameDate`) — default `2023-03-26`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
@@ -10694,7 +10737,7 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
     {
       "name": "player_id",
       "queryKey": "PlayerID",
-      "default": "1628932"
+      "default": "202696"
     },
     {
       "name": "player_position_nullable",
@@ -10788,7 +10831,7 @@ const SHOTCHARTDETAIL_DEF: WrapperDef = {
  * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
  * @param params.outcome_nullable - query parameter (`Outcome`) — default ``.
  * @param params.period - query parameter (`Period`) — default `0`.
- * @param params.player_id - query parameter (`PlayerID`) — default `1628932`.
+ * @param params.player_id - query parameter (`PlayerID`) — default `202696`.
  * @param params.player_position_nullable - query parameter (`PlayerPosition`) — default ``.
  * @param params.point_diff_nullable - query parameter (`PointDiff`) — default `null`.
  * @param params.position_nullable - query parameter (`Position`) — default `null`.
@@ -10827,7 +10870,8 @@ const SHOTCHARTLEAGUEWIDE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -10881,7 +10925,7 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
     {
       "name": "group_id",
       "queryKey": "GROUP_ID",
-      "default": "-1628899-1629481-1630096-1631019-1642784-"
+      "default": "-202689-203493-203501-1626174-1627827-"
     },
     {
       "name": "game_id_nullable",
@@ -10972,7 +11016,7 @@ const SHOTCHARTLINEUPDETAIL_DEF: WrapperDef = {
  * @param params.context_measure_detailed - query parameter (`ContextMeasure`) — default `FGA`.
  * @param params.date_from_nullable - query parameter (`DateFrom`) — default ``.
  * @param params.date_to_nullable - query parameter (`DateTo`) — default ``.
- * @param params.group_id - query parameter (`GROUP_ID`) — default `-1628899-1629481-1630096-1631019-1642784-`.
+ * @param params.group_id - query parameter (`GROUP_ID`) — default `-202689-203493-203501-1626174-1627827-`.
  * @param params.game_id_nullable - query parameter (`GameID`) — default ``.
  * @param params.game_segment_nullable - query parameter (`GameSegment`) — default ``.
  * @param params.last_n_games_nullable - query parameter (`LastNGames`) — default `0`.
@@ -11033,7 +11077,8 @@ const SYNERGYPLAYTYPES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "SeasonYear",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "type_grouping_nullable",
@@ -11157,7 +11202,8 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -11177,7 +11223,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference",
@@ -11219,7 +11265,7 @@ const TEAMDASHBOARDBYCLUTCH_DEF: WrapperDef = {
  * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -11322,7 +11368,8 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -11342,7 +11389,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference",
@@ -11384,7 +11431,7 @@ const TEAMDASHBOARDBYGAMESPLITS_DEF: WrapperDef = {
  * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -11487,7 +11534,8 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -11507,7 +11555,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -11549,7 +11597,7 @@ const TEAMDASHBOARDBYGENERALSPLITS_DEF: WrapperDef = {
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -11652,7 +11700,8 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -11672,7 +11721,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference",
@@ -11714,7 +11763,7 @@ const TEAMDASHBOARDBYLASTNGAMES_DEF: WrapperDef = {
  * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -11817,7 +11866,8 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -11837,7 +11887,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference",
@@ -11879,7 +11929,7 @@ const TEAMDASHBOARDBYOPPONENT_DEF: WrapperDef = {
  * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -11982,7 +12032,8 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -12002,7 +12053,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -12044,7 +12095,7 @@ const TEAMDASHBOARDBYSHOOTINGSPLITS_DEF: WrapperDef = {
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -12147,7 +12198,8 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment",
@@ -12167,7 +12219,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference",
@@ -12209,7 +12261,7 @@ const TEAMDASHBOARDBYTEAMPERFORMANCE_DEF: WrapperDef = {
  * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -12332,7 +12384,7 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference",
@@ -12374,7 +12426,7 @@ const TEAMDASHBOARDBYYEAROVERYEAR_DEF: WrapperDef = {
  * @param params.season_segment - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference - query parameter (`VsConference`) — default ``.
  * @param params.vs_division - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -12487,7 +12539,8 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -12507,7 +12560,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -12551,7 +12604,7 @@ const TEAMDASHLINEUPS_DEF: WrapperDef = {
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -12619,7 +12672,8 @@ const TEAMDASHPTPASS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -12875,7 +12929,8 @@ const TEAMDASHPTSHOTS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -12949,7 +13004,7 @@ const TEAMDETAILS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -12961,7 +13016,7 @@ const TEAMDETAILS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/teamdetails`
  *
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamBackground`, `TeamHistory`, `TeamSocialSites`, `TeamAwardsChampionships`, `TeamAwardsConf`, `TeamAwardsDiv`, `TeamHof`, `TeamRetired`, `TeamAwardsCommCup`.
  * @example await sdv.nba.nbaStatsTeamdetails({});
@@ -13042,7 +13097,8 @@ const TEAMGAMELOG_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -13052,7 +13108,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -13069,7 +13125,7 @@ const TEAMGAMELOG_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsTeamgamelog({});
@@ -13160,7 +13216,8 @@ const TEAMGAMELOGS_DEF: WrapperDef = {
     {
       "name": "season_nullable",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -13258,7 +13315,7 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -13273,7 +13330,7 @@ const TEAMINFOCOMMON_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.season_nullable - query parameter (`Season`) — default `null`.
  * @param params.season_type_nullable - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `TeamInfoCommon`, `TeamSeasonRanks`, `AvailableSeasons`.
  * @example await sdv.nba.nbaStatsTeaminfocommon({});
@@ -13394,7 +13451,7 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -13436,7 +13493,7 @@ const TEAMPLAYERDASHBOARD_DEF: WrapperDef = {
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.shot_clock_range_nullable - query parameter (`ShotClockRange`) — default ``.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -13534,7 +13591,8 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -13549,7 +13607,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -13589,7 +13647,7 @@ const TEAMPLAYERONOFFDETAILS_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -13687,7 +13745,8 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -13702,7 +13761,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -13742,7 +13801,7 @@ const TEAMPLAYERONOFFSUMMARY_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
@@ -13845,7 +13904,8 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": null
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_segment_nullable",
@@ -13860,7 +13920,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     },
     {
       "name": "vs_conference_nullable",
@@ -13875,7 +13935,7 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
     {
       "name": "vs_player_id",
       "queryKey": "VsPlayerID",
-      "default": "1628932"
+      "default": "2544"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -13906,10 +13966,10 @@ const TEAMVSPLAYER_DEF: WrapperDef = {
  * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_segment_nullable - query parameter (`SeasonSegment`) — default ``.
  * @param params.season_type_playoffs - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.vs_conference_nullable - query parameter (`VsConference`) — default ``.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
- * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `1628932`.
+ * @param params.vs_player_id - query parameter (`VsPlayerID`) — default `2544`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `Overall`, `vsPlayerOverall`, `OnOffCourt`, `ShotDistanceOverall`, `ShotDistanceOnCourt`, `ShotDistanceOffCourt`, `ShotAreaOverall`, `ShotAreaOnCourt`, `ShotAreaOffCourt`.
  * @example await sdv.nba.nbaStatsTeamvsplayer({});
@@ -13945,7 +14005,7 @@ const TEAMYEARBYYEARSTATS_DEF: WrapperDef = {
     {
       "name": "team_id",
       "queryKey": "TeamID",
-      "default": "1611661328"
+      "default": "1610612749"
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -13960,7 +14020,7 @@ const TEAMYEARBYYEARSTATS_DEF: WrapperDef = {
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.per_mode_simple - query parameter (`PerMode`) — default `Totals`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
- * @param params.team_id - query parameter (`TeamID`) — default `1611661328`.
+ * @param params.team_id - query parameter (`TeamID`) — default `1610612749`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.nba.nbaStatsTeamyearbyyearstats({});
@@ -14011,7 +14071,8 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
     {
       "name": "season",
       "queryKey": "Season",
-      "default": "2022-23"
+      "default": null,
+      "transform": "season_or_previous"
     },
     {
       "name": "season_type_all_star",
@@ -14144,7 +14205,7 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
  * @param params.opponent_team_id - query parameter (`OpponentTeamID`) — default `0`.
  * @param params.period - query parameter (`Period`) — default `0`.
  * @param params.player_id - query parameter (`PlayerID`) — default `2544`.
- * @param params.season - query parameter (`Season`) — default `2022-23`.
+ * @param params.season - query parameter (`Season`) — default `null`.
  * @param params.season_type_all_star - query parameter (`SeasonType`) — default `Regular Season`.
  * @param params.team_id - query parameter (`TeamID`) — default `1610612747`.
  * @param params.vs_division_nullable - query parameter (`VsDivision`) — default ``.
@@ -14193,7 +14254,7 @@ const VIDEOEVENTS_DEF: WrapperDef = {
     {
       "name": "game_id",
       "queryKey": "GameID",
-      "default": "1022200075"
+      "default": 21700807
     }
   ],
   "parser": "parse_nba_stats_result_sets",
@@ -14206,7 +14267,7 @@ const VIDEOEVENTS_DEF: WrapperDef = {
  * **Endpoint:** `GET https://stats.nba.com/stats/videoevents`
  *
  * @param params.game_event_id - query parameter (`GameEventID`) — default `10`.
- * @param params.game_id - query parameter (`GameID`) — default `1022200075`.
+ * @param params.game_id - query parameter (`GameID`) — default `21700807`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return an object of tables keyed by result set instead of the raw response.
  * @returns The raw response by default; with `{ parsed: true }`, an object of tables (arrays of row objects) keyed by result set: `videoUrls`, `playlist`.
  * @example await sdv.nba.nbaStatsVideoevents({});
@@ -14266,7 +14327,7 @@ const VIDEOSTATUS_DEF: WrapperDef = {
     {
       "name": "game_date",
       "queryKey": "GameDate",
-      "default": "2022-06-10"
+      "default": "2023-03-10"
     },
     {
       "name": "league_id",
@@ -14283,7 +14344,7 @@ const VIDEOSTATUS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://stats.nba.com/stats/videostatus`
  *
- * @param params.game_date - query parameter (`GameDate`) — default `2022-06-10`.
+ * @param params.game_date - query parameter (`GameDate`) — default `2023-03-10`.
  * @param params.league_id - query parameter (`LeagueID`) — default `00`.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.

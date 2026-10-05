@@ -20,6 +20,7 @@ import * as mchEspn from "./mch.js";
 import * as mlbEspn from "./mlb.js";
 import * as mlsEspn from "./mls.js";
 import * as nbaEspn from "./nba.js";
+import * as nbaglEspn from "./nbagl.js";
 import * as nflEspn from "./nfl.js";
 import * as nhlEspn from "./nhl.js";
 import * as nwslEspn from "./nwsl.js";
@@ -51,6 +52,7 @@ export const WRITTEN_ESPN: Record<string, Record<string, WrapperFn>> = {
   mlb: mlbEspn,
   mls: mlsEspn,
   nba: nbaEspn,
+  nbagl: nbaglEspn,
   nfl: nflEspn,
   nhl: nhlEspn,
   nwsl: nwslEspn,
