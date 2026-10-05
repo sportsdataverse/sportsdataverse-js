@@ -28,6 +28,10 @@ in the README of the sdv-py source directory named below.
   only for `verified_endpoints`, and an unexercised column (its type unchecked:
   py types an all-null column `character`) must be typed `unknown`.
 - `test/parsers/parity.test.js` is the harness.
+- `schemas/pff_api/team_leaders.yaml`: sdv-py's `tools/codegen/schemas/native/pff_api/team_leaders.yaml`
+  at `fbcf17dfaaf5ce08e8895edea47f5da6483e4591`, verbatim (blob `72516d42`). A real `frames_by`
+  returns schema; `test/vendor.test.js` runs it through `checkSchemaShape`, `deriveAll` and the
+  docs renderer.
 
 Not vendored: captures whose parse is empty in both languages (nothing to verify:
 `playbyplayv3` in both stats families; On3 `drafts`, `people_combine_measurements`,
