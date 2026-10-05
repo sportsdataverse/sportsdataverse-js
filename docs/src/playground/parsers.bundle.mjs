@@ -444,6 +444,77 @@ var require_papaparse_min = __commonJS({
   }
 });
 
+// src/core/int64.ts
+var MLBAM_ID_COLUMNS = [
+  "batter",
+  "pitcher",
+  "on_1b",
+  "on_2b",
+  "on_3b",
+  ...[2, 3, 4, 5, 6, 7, 8, 9].map((i) => `fielder_${i}`),
+  "game_pk"
+];
+var EXACT_IDS = /* @__PURE__ */ new Set([...MLBAM_ID_COLUMNS, "hid", "vid"]);
+var ID_SEGMENT = /^id$|_ids?$|_id\d+$|_id_(\d+|started|ended)$|^id_(play|drive)$|(team|person|player|matchup)id$|[a-z0-9]Ids?$/;
+function isIdColumn(name) {
+  return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || EXACT_IDS.has(name);
+}
+var INT64_WARNING_CODE = "SDV_INT64";
+function rowCells(rows, col) {
+  return {
+    n: rows.length,
+    get: (i) => rows[i][col],
+    set: (i, v) => {
+      if (col in rows[i]) rows[i][col] = v;
+    }
+  };
+}
+var exactInt = (v) => typeof v === "bigint" || typeof v === "number" && Number.isSafeInteger(v);
+function idsToStrings(c) {
+  let convert = false;
+  const ok = (v) => {
+    if (v === null || v === void 0 || typeof v === "string") return true;
+    if (Array.isArray(v)) return v.every(ok);
+    if (typeof v === "number" && Number.isNaN(v)) return convert = true;
+    if (!exactInt(v)) return false;
+    return convert = true;
+  };
+  let integers = true;
+  for (let i = 0; i < c.n && integers; i++) integers = ok(c.get(i));
+  if (integers && !convert) return "unchanged";
+  const str = (v) => Array.isArray(v) ? v.map(str) : typeof v === "number" && Number.isNaN(v) ? null : integers && (typeof v === "bigint" || typeof v === "number") ? String(v) : v;
+  for (let i = 0; i < c.n; i++) {
+    const v = c.get(i);
+    if (v !== null && v !== void 0 && typeof v !== "string") c.set(i, str(v));
+  }
+  return integers ? "strings" : "not-integers";
+}
+function idColumnsToStrings(rows) {
+  const cols = /* @__PURE__ */ new Set();
+  for (const r of rows) for (const k of Object.keys(r)) if (isIdColumn(k)) cols.add(k);
+  for (const col of cols) idsToStrings(rowCells(rows, col));
+  return rows;
+}
+var warned = /* @__PURE__ */ new Set();
+var once = (key, message) => {
+  if (warned.has(key)) return void 0;
+  warned.add(key);
+  return message;
+};
+function bigintWarning(surface, column) {
+  return once(
+    `bigint\0${surface}\0${column}`,
+    `${surface}: column "${column}" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt`
+  );
+}
+function warnBigint(surface, column) {
+  const message = bigintWarning(surface, column);
+  if (message === void 0) return;
+  const proc = globalThis.process;
+  if (proc?.emitWarning) proc.emitWarning(message, { code: INT64_WARNING_CODE });
+  else console.warn(message);
+}
+
 // src/parsers/_normalize.ts
 function isPlainObject(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v) && !(v instanceof Date);
@@ -468,7 +539,7 @@ function flattenRow(obj, prefix, out) {
 }
 function normalize(rows) {
   if (!Array.isArray(rows) || rows.length === 0) return [];
-  return rows.map((row) => {
+  const flat = rows.map((row) => {
     const out = {};
     if (isPlainObject(row)) {
       flattenRow(row, "", out);
@@ -479,6 +550,7 @@ function normalize(rows) {
     for (const [k, v] of Object.entries(out)) snaked[snakeCase(k)] = v;
     return snaked;
   });
+  return idColumnsToStrings(flat);
 }
 
 // src/parsers/mlb.ts
@@ -959,12 +1031,13 @@ function underscoreKeys(row) {
 }
 function jsonRows(rows) {
   if (!Array.isArray(rows) || rows.length === 0) return [];
-  return rows.map((row) => {
-    const flat = {};
-    if (isPlainObject8(row)) flattenRow2(row, "", flat);
-    else flat.value = Array.isArray(row) ? JSON.stringify(row) : row;
-    return underscoreKeys(flat);
+  const flat = rows.map((row) => {
+    const out = {};
+    if (isPlainObject8(row)) flattenRow2(row, "", out);
+    else out.value = Array.isArray(row) ? JSON.stringify(row) : row;
+    return underscoreKeys(out);
   });
+  return idColumnsToStrings(flat);
 }
 function csvToRowsRaw(text) {
   if (typeof text !== "string" || !text.trim()) return [];
@@ -1017,13 +1090,11 @@ function warn(message) {
   else console.warn(message);
 }
 function inferCsvTypes(rows) {
-  const bigint = [];
   for (const col of rows.length ? Object.keys(rows[0]) : []) {
     const present = rows.map((r) => r[col]).filter((v) => typeof v === "string" && !CSV_NA.has(v));
     let conv = null;
     if (present.length && present.every((v) => CSV_NUMBER.test(v.trim()))) {
       const big = present.every((v) => CSV_INT.test(v.trim())) && present.some((v) => !Number.isSafeInteger(Number(v.trim())));
-      if (big) bigint.push(col);
       conv = big ? (v) => BigInt(v.trim()) : csvNumber;
     } else if (present.length && present.every((v) => CSV_BOOL.has(v))) {
       conv = (v) => CSV_TRUE.has(v);
@@ -1033,33 +1104,29 @@ function inferCsvTypes(rows) {
       r[col] = typeof v !== "string" || CSV_NA.has(v) ? null : conv ? conv(v) : v;
     }
   }
-  if (bigint.length) {
-    warn(`Savant CSV columns [${bigint.join(", ")}] hold integers beyond Number.MAX_SAFE_INTEGER; returned as BigInt.`);
-  }
   return rows;
 }
-var MLBAM_ID_COLUMNS = [
-  "batter",
-  "pitcher",
-  "on_1b",
-  "on_2b",
-  "on_3b",
-  ...[2, 3, 4, 5, 6, 7, 8, 9].map((i) => `fielder_${i}`),
-  "game_pk"
-];
+function mlbamId(v) {
+  if (typeof v === "bigint") return v.toString();
+  if (typeof v === "number") return Number.isSafeInteger(v) ? String(v) : void 0;
+  if (typeof v !== "string") return void 0;
+  const t = v.trim();
+  if (CSV_INT.test(t)) return BigInt(t).toString();
+  const n = CSV_NUMBER.test(t) ? csvNumber(t) : NaN;
+  return Number.isSafeInteger(n) ? String(n) : void 0;
+}
 function pinIdColumns(rows) {
   const uncast = [];
   for (const col of MLBAM_ID_COLUMNS) {
     if (!rows.some((r) => col in r)) continue;
     const present = rows.map((r) => r[col]).filter((v) => v !== null && v !== void 0 && v !== "");
-    const asInt = (v) => typeof v === "bigint" ? v : typeof v === "number" ? v : typeof v === "string" && CSV_NUMBER.test(v.trim()) ? csvNumber(v) : NaN;
-    if (!present.every((v) => typeof v === "bigint" || Number.isInteger(asInt(v)))) {
+    if (!present.every((v) => mlbamId(v) !== void 0)) {
       uncast.push(col);
       continue;
     }
     for (const r of rows) {
       if (r[col] === "") r[col] = null;
-      else if (r[col] !== null && r[col] !== void 0) r[col] = asInt(r[col]);
+      else if (r[col] !== null && r[col] !== void 0) r[col] = mlbamId(r[col]);
     }
   }
   if (uncast.length) {
@@ -1070,7 +1137,11 @@ function pinIdColumns(rows) {
   return rows;
 }
 function typedCsvRows(rows) {
-  return pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row)));
+  const out = idColumnsToStrings(pinIdColumns(inferCsvTypes(rows).map((row) => underscoreKeys(row))));
+  for (const col of out.length ? Object.keys(out[0]) : []) {
+    if (out.some((r) => typeof r[col] === "bigint")) warnBigint("Savant CSV", col);
+  }
+  return out;
 }
 function csvToRows(text) {
   return typedCsvRows(csvToRowsRaw(text));
@@ -1344,12 +1415,6 @@ function parse_sports247_institution_rankings(raw) {
 }
 var INT_RE = /^[+-]?\d+$/;
 var FLOAT_RE = /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/;
-var warnedBigInt = /* @__PURE__ */ new Set();
-function warn2(message) {
-  const proc = globalThis.process;
-  if (proc?.emitWarning) proc.emitWarning(message);
-  else console.warn(message);
-}
 function castNumericStrings(rows) {
   const columns = new Set(rows.flatMap((r) => Object.keys(r)));
   for (const col of columns) {
@@ -1358,14 +1423,13 @@ function castNumericStrings(rows) {
     const values = present.map((r) => r[col]);
     if (values.every((v) => INT_RE.test(v))) {
       const nums = values.map(Number);
-      if (nums.every(Number.isSafeInteger)) {
+      if (isIdColumn(col)) {
+        present.forEach((r, i) => r[col] = BigInt(values[i]).toString());
+      } else if (nums.every(Number.isSafeInteger)) {
         present.forEach((r, i) => r[col] = nums[i]);
       } else {
         present.forEach((r, i) => r[col] = BigInt(values[i]));
-        if (!warnedBigInt.has(col)) {
-          warnedBigInt.add(col);
-          warn2(`sports247_site_pages: column "${col}" holds integers beyond 2^53; kept as BigInt.`);
-        }
+        warnBigint("sports247_site_pages", col);
       }
     } else if (values.every((v) => FLOAT_RE.test(v))) {
       present.forEach((r, i) => r[col] = Number(values[i]));
@@ -2176,9 +2240,6 @@ function pyJson(v) {
 function isPlainObject17(v) {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
-function isIdName(name) {
-  return name === "id" || name.endsWith("_id") || name.endsWith("_ids");
-}
 function flatten(obj, prefix, out) {
   const top = prefix === "";
   const nested = [];
@@ -2218,18 +2279,19 @@ function rowsToFrame(rows, opts = {}) {
     }
   }
   const columns = [...finalName.values()];
-  return records2.map((pairs) => {
+  const out = records2.map((pairs) => {
     const row = {};
     for (const c of columns) row[c] = null;
     for (const [path, v] of pairs) {
       const name = finalName.get(path);
       let cell = v === void 0 ? null : v;
-      if (opts.ids && isIdName(name)) cell = idString(cell);
+      if (opts.ids && isIdColumn(name)) cell = idString(cell);
       else if (Array.isArray(cell) || isPlainObject17(cell)) cell = pyJson(cell);
       row[name] = cell;
     }
     return row;
   });
+  return opts.ids ? out : idColumnsToStrings(out);
 }
 function asRows(raw) {
   if (Array.isArray(raw)) return raw;
@@ -2346,7 +2408,10 @@ function toInt(v) {
   if (v === null || v === void 0) return null;
   if (typeof v === "boolean") return v ? 1 : 0;
   if (typeof v === "number") return Number.isFinite(v) ? Math.trunc(v) : null;
-  if (typeof v === "string" && /^\s*[-+]?\d+\s*$/.test(v)) return Number(v);
+  if (typeof v === "string" && /^\s*[-+]?\d+\s*$/.test(v)) {
+    const n = Number(v);
+    return Number.isSafeInteger(n) ? n : BigInt(v.trim());
+  }
   return null;
 }
 function toFloat(v) {
@@ -2373,7 +2438,7 @@ function frame(rows) {
     if (ID_COLS.has(c) && !isText) for (const r of out) r[c] = toInt(r[c]);
   }
   if (columns.includes("jersey_number")) for (const r of out) r.jersey_number = toStr(r.jersey_number);
-  return out;
+  return idColumnsToStrings(out);
 }
 function isMatrix(v) {
   return isPlainObject(v) && MATRIX_KEYS.every((k) => k in v);
@@ -2503,11 +2568,13 @@ function parse_pff_v2_table(raw, section) {
     }
   }
   const order = [...schema.keys(), ...columns.filter((c) => !schema.has(c))];
-  return out.map((r) => {
-    const o = {};
-    for (const c of order) o[c] = r[c];
-    return o;
-  });
+  return idColumnsToStrings(
+    out.map((r) => {
+      const o = {};
+      for (const c of order) o[c] = r[c];
+      return o;
+    })
+  );
 }
 
 // src/parsers/nfl_pro.ts
@@ -2578,7 +2645,7 @@ function parse_nfl_pro_stats(payload) {
   const stringify = new Set(
     keep.filter(([k]) => flat.some((r) => r[k] !== null && typeof r[k] === "object")).map(([k]) => k)
   );
-  return flat.map((r) => {
+  const rows = flat.map((r) => {
     const o = {};
     for (const [k, name] of keep) {
       const missing = !(k in r);
@@ -2586,6 +2653,7 @@ function parse_nfl_pro_stats(payload) {
     }
     return o;
   });
+  return idColumnsToStrings(rows);
 }
 
 // src/parsers/on3.ts
@@ -2982,7 +3050,7 @@ function toRows(rs) {
     });
     out.push(o);
   }
-  return out;
+  return idColumnsToStrings(out);
 }
 function parse_nba_stats_result_sets(raw, resultSet) {
   if (!isObj(raw)) return [];
@@ -4129,7 +4197,7 @@ function parse_cdn_rankings(payload) {
   if (!rows.length) return [];
   const cols = [...new Set(rows.flatMap((r) => Object.keys(r)))];
   const rest = cols.map(pyUnderscore).filter((c) => !CDN_RANKINGS_LEAD.includes(c));
-  return rows.map((r) => {
+  const tidy = rows.map((r) => {
     const snaked = {};
     for (const c of cols) snaked[pyUnderscore(c)] = r[c] ?? null;
     const url = snaked.team_url;
@@ -4139,6 +4207,7 @@ function parse_cdn_rankings(payload) {
     for (const c of rest) out[c] = snaked[c];
     return out;
   });
+  return idColumnsToStrings(tidy);
 }
 var ESPN_ENDPOINT_PARSERS = {
   // Site v2 (rich nested)

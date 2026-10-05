@@ -27,6 +27,7 @@ import {
 import { accountKey as kenpomAccountKey } from '../../dist/core/kenpom_runtime.js';
 import { createHash } from 'node:crypto';
 import { TransportUnavailableError } from '../../dist/core/errors.js';
+import { pyIdRows } from '../helpers/parity.mjs';
 import { inspect } from 'node:util';
 import { spawnSync } from 'node:child_process';
 
@@ -164,7 +165,7 @@ describe('pff_api runtime', () => {
     process.env.PFF_API_KEY = 'ak_x';
     configure({ transport: { pff_api: fakeTransport({ status: 200, data: fixture('pff_api', 'team_stats.json') }) } });
     const rows = await sdv.nfl.pffApiTeamStats({ league: 'nfl', season: 2022, parsed: true });
-    rows.should.eql(fixture('pff_api', 'team_stats.py.json').rows);
+    rows.should.eql(pyIdRows(fixture('pff_api', 'team_stats.py.json').rows));
   });
 
   const ERR = (code, message) => ({ error: { code, message, request_id: 'req-1', details: { param: 'season' } } });
@@ -1063,10 +1064,10 @@ describe('subscription families: `section` through the wrappers + NFL Pro boolea
     process.env.PFF_API_KEY = 'ak_x';
     configure({ transport: { pff_api: fakeTransport({ status: 200, data: fixture('pff_api', 'team_rushing_direction.json') }) } });
     const totals = await sdv.nfl.pffApiTeamRushingDirection({ league: 'nfl', team: 'x', parsed: true, section: 'teamTotals' });
-    totals.should.eql(fixture('pff_api', 'team_rushing_direction.teamTotals.py.json').rows);
+    totals.should.eql(pyIdRows(fixture('pff_api', 'team_rushing_direction.teamTotals.py.json').rows));
     configure({ transport: { pff_api: fakeTransport({ status: 200, data: fixture('pff_api', 'player_offense_pass_blocking.json') }) } });
     (await sdv.nfl.pffApiPlayerOffensePassBlocking({ league: 'nfl', player_id: 1, parsed: true, section: 'career' }))
-      .should.eql(fixture('pff_api', 'player_offense_pass_blocking.career.py.json').rows);
+      .should.eql(pyIdRows(fixture('pff_api', 'player_offense_pass_blocking.career.py.json').rows));
     configure({ transport: { kenpom: fakeTransport({ status: 200, data: RATINGS }) } });
     const t = await sdv.mbb.kenpomRatings({ year: 2025, headers: { Cookie: 'PHPSESSID=x' }, parsed: true, section: 'ratings_table' });
     t.length.should.equal(8);

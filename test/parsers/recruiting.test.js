@@ -30,7 +30,7 @@ describe('parsers/recruiting: parse_recruiting_list (generic flattener)', () => 
   it('walks the LIST_KEYS envelope (list / rankings / items / …)', () => {
     parse_recruiting_list({ list: [{ teamId: 7, name: 'A' }] })[0].should.have.property(
       'team_id',
-      7
+      '7'
     );
     parse_recruiting_list({ rankings: [{ key: 9 }] })[0].should.have.property('key', 9);
     parse_recruiting_list({ items: [{ id: 'x' }] })[0].should.have.property('id', 'x');

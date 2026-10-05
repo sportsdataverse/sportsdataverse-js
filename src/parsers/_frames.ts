@@ -10,14 +10,18 @@
 //   - array / object cells are JSON-encoded (rows stay rectangular), EXCEPT a
 //     list-valued id cell, which is comma-joined (ASA serialises `team_id` as a
 //     list for a player who featured for several clubs);
-//   - with `ids: true` every `id` / `*_id` / `*_ids` column is pinned to a string
-//     (a whole-number float is stringified as `"123"`, never `"123.0"`);
+//   - with `ids: true` every id column (`isIdColumn`: `id` / `*_id` / `*_ids` /
+//     `*_pk`) is pinned to a string (a whole-number float is stringified as
+//     `"123"`, never `"123.0"`); without it an id column of integers still
+//     becomes decimal strings (the v4 INT64 id rule, src/core/int64.ts);
 //   - a bare scalar array becomes a single `value` column of strings;
 //   - every row carries every column (missing -> null), in first-seen order.
 //
 // Unlike pandas, a JS number stays a number: where Python's object-dtype
 // coercion turns a *mixed-type* column into strings, the JS cell keeps its
 // native value.
+
+import { idColumnsToStrings, isIdColumn } from "../core/int64.js";
 
 /**
  * sdv-py `dl_utils.underscore`, verbatim: split capital runs and camel humps,
@@ -48,11 +52,6 @@ export function isPlainObject(v: any): v is Record<string, any> {
   return v !== null && typeof v === "object" && !Array.isArray(v);
 }
 
-/** `id`, `*_id`, `*_ids`: a join-key column that must stay a string. */
-export function isIdName(name: string): boolean {
-  return name === "id" || name.endsWith("_id") || name.endsWith("_ids");
-}
-
 /**
  * Flatten one record into ordered `[path, value]` pairs (path joined with `_`),
  * ordered like `pandas.json_normalize` (`nested_to_record`): at the TOP level the
@@ -81,7 +80,7 @@ function idString(v: any): any {
 }
 
 export interface RowsToFrameOptions {
-  /** Pin `id` / `*_id` / `*_ids` columns to strings (the soccer providers). */
+  /** Pin every id column to strings, whatever its values (the soccer providers). */
   ids?: boolean;
   /** Drop `null` entries before flattening (the soccer providers); on3 keeps them. */
   dropNull?: boolean;
@@ -114,18 +113,19 @@ export function rowsToFrame(rows: readonly any[] | null | undefined, opts: RowsT
   }
   const columns = [...finalName.values()];
 
-  return records.map((pairs) => {
+  const out = records.map((pairs) => {
     const row: Row = {};
     for (const c of columns) row[c] = null;
     for (const [path, v] of pairs) {
       const name = finalName.get(path)!;
       let cell = v === undefined ? null : v;
-      if (opts.ids && isIdName(name)) cell = idString(cell);
+      if (opts.ids && isIdColumn(name)) cell = idString(cell);
       else if (Array.isArray(cell) || isPlainObject(cell)) cell = pyJson(cell);
       row[name] = cell;
     }
     return row;
   });
+  return opts.ids ? out : idColumnsToStrings(out);
 }
 
 /** A JSON body as a row list: a list as-is, a non-empty object as one row, else `[]`. */

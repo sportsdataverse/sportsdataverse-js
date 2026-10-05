@@ -4,6 +4,7 @@ import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { parse } from 'yaml';
+import { isIdColumn } from '../../dist/core/int64.js';
 import sdv, { configure, resetConfig, LEAGUES, makeLeagueModule } from '../../dist/index.js';
 import {
   ESPN_ENDPOINT_PARSERS,
@@ -25,6 +26,8 @@ const load = (name) =>
 const upstream = (p) => parse(readFileSync(join(root, 'tools', 'codegen', 'vendor', 'upstream', p), 'utf8'));
 const columnsOf = (rows) => [...new Set(rows.flatMap((r) => Object.keys(r)))];
 const JS_TYPE = { integer: 'number', numeric: 'number', character: 'string', logical: 'boolean' };
+/** The JS type of a schema column: an integer id is a decimal string (the v4 INT64 id rule). */
+const jsType = (name, type) => (type === 'integer' && isIdColumn(name) ? 'string' : JS_TYPE[type]);
 
 describe('parsers/espn: CDN page payloads (sdv-py real captures)', () => {
   it('a game page parses like a summary', () => {
@@ -73,14 +76,14 @@ describe('parsers/espn: CDN page payloads (sdv-py real captures)', () => {
     const schema = upstream('schemas/cdn_rankings/cfb.yaml').columns;
     columnsOf(rows).should.eql(schema.map((c) => c.name)); // same names, same order
     for (const { name, type } of schema) {
-      const bad = rows.map((r) => r[name]).find((v) => v !== null && typeof v !== JS_TYPE[type]);
+      const bad = rows.map((r) => r[name]).find((v) => v !== null && typeof v !== jsType(name, type));
       (bad === undefined).should.equal(true, `${name}: ${type}, JS ${typeof bad}`);
     }
     const ranked = rows.filter((r) => r.ranked === true);
     const perPoll = {};
     for (const r of ranked) perPoll[r.poll_name] = (perPoll[r.poll_name] ?? 0) + 1;
     Object.values(perPoll).should.eql([25, 25, 25, 25, 25]);
-    const ap1 = ranked.find((r) => r.poll_id === 1 && r.rank === 1);
+    const ap1 = ranked.find((r) => r.poll_id === '1' && r.rank === 1);
     [ap1.team_display_name, ap1.team_id].should.eql(['Texas', '251']);
     const votes = rows.filter((r) => r.ranked === false);
     votes.length.should.be.above(0);

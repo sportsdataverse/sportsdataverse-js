@@ -11,6 +11,7 @@
 // `str()`s them), non-string JSON scalars keep their native type, and a row
 // carries only the keys its payload had (no null-filled union of columns).
 
+import { isIdColumn, warnBigint } from "../core/int64.js";
 import { normalize } from "./_normalize.js";
 
 type Row = Record<string, any>;
@@ -65,21 +66,14 @@ const INT_RE = /^[+-]?\d+$/;
 // ponytail: plain decimal / exponent forms only; polars also parses "inf"/"nan",
 // which never appear in these payloads — add them if one does.
 const FLOAT_RE = /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/;
-const warnedBigInt = new Set<string>();
-
-/** Browser-safe one-line warning (the parsers also run in the docs playground). */
-function warn(message: string): void {
-  const proc = (globalThis as { process?: { emitWarning?: (m: string) => void } }).process;
-  if (proc?.emitWarning) proc.emitWarning(message);
-  else console.warn(message);
-}
-
 /**
  * sdv-py `_cast_numeric_strings`: a column whose non-null values are all
  * strings is cast to integers when every value parses as one, else to floats
  * when every value parses as one, else left alone (`"6-5"`, `"True"` stay
- * strings). Integer columns stay plain `number`s when every value is a safe
- * integer; otherwise the column becomes `BigInt` (exact) with one warning.
+ * strings). An integer id column (`isIdColumn`; Int64 in sdv-py) is its
+ * canonical decimal strings (`"007"` -> `"7"`, the v4 id rule); any other
+ * integer column stays plain `number`s when every value is a safe integer,
+ * else becomes `BigInt` (exact) with one warning per column per process.
  */
 function castNumericStrings(rows: Row[]): Row[] {
   const columns = new Set(rows.flatMap((r) => Object.keys(r)));
@@ -89,14 +83,13 @@ function castNumericStrings(rows: Row[]): Row[] {
     const values = present.map((r) => (r[col] as string));
     if (values.every((v) => INT_RE.test(v))) {
       const nums = values.map(Number);
-      if (nums.every(Number.isSafeInteger)) {
+      if (isIdColumn(col)) {
+        present.forEach((r, i) => (r[col] = BigInt(values[i]).toString()));
+      } else if (nums.every(Number.isSafeInteger)) {
         present.forEach((r, i) => (r[col] = nums[i]));
       } else {
         present.forEach((r, i) => (r[col] = BigInt(values[i])));
-        if (!warnedBigInt.has(col)) {
-          warnedBigInt.add(col);
-          warn(`sports247_site_pages: column "${col}" holds integers beyond 2^53; kept as BigInt.`);
-        }
+        warnBigint("sports247_site_pages", col);
       }
     } else if (values.every((v) => FLOAT_RE.test(v))) {
       present.forEach((r, i) => (r[col] = Number(values[i])));

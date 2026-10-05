@@ -10,6 +10,7 @@ import {
 } from '../../dist/parsers/pff_api.js';
 import { parse_nfl_pro_stats } from '../../dist/parsers/nfl_pro.js';
 import { parse_kenpom_page, cleanName, flattenHeader, dedupeHeaders } from '../../dist/parsers/kenpom.js';
+import { pyIdRows } from '../helpers/parity.mjs';
 
 // Golden-master parity for the subscription-family parsers: every committed
 // sdv-py fixture is parsed by the JS port and compared to sdv-py's own output on
@@ -19,13 +20,17 @@ import { parse_kenpom_page, cleanName, flattenHeader, dedupeHeaders } from '../.
 const fixture = (dir, name) => new URL(`../fixtures/${dir}/${name}`, import.meta.url);
 const json = (dir, name) => JSON.parse(readFileSync(fixture(dir, name), 'utf8'));
 
-/** Assert `rows` equal py's `{columns, rows}` exactly, including column order. */
+/**
+ * Assert `rows` equal py's `{columns, rows}` exactly, including column order; py's
+ * integer ids are compared as the decimal strings sdv-js v4 returns (the INT64 id rule).
+ */
 function sameAsPy(rows, py) {
   rows.should.be.an.Array();
   rows.length.should.equal(py.rows.length);
+  const want = pyIdRows(py.rows);
   rows.forEach((row, i) => {
     Object.keys(row).should.eql(py.columns, `column order, row ${i}`);
-    row.should.eql(py.rows[i], `row ${i}`);
+    row.should.eql(want[i], `row ${i}`);
   });
 }
 
@@ -48,10 +53,10 @@ describe('pff_api parsers — parity with sdv-py on PFF spec examples', () => {
     });
   }
 
-  it('keeps integer ids integer and the declared /v2 column order', () => {
+  it('keeps integer ids exact (decimal strings, the v4 id rule) and the declared /v2 column order', () => {
     const rows = parse_pff_v2_table(json('pff_api', 'team_stats.json'));
-    rows[0].team_id.should.be.a.Number();
-    Number.isInteger(rows[0].team_id).should.be.true();
+    rows[0].team_id.should.be.a.String();
+    rows[0].team_id.should.match(/^\d+$/);
     Object.keys(rows[0]).should.containEql('conversion_after4_rank'); // py underscore, not snakeCase
   });
 

@@ -23,7 +23,7 @@ const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://githu
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1999.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -46,7 +46,7 @@ const LOAD_NFL_MODEL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_model_pbp","url":"h
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1999.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -69,7 +69,7 @@ const LOAD_NFL_RATINGS_WEEKLY: ReleaseLoaderDef = {"fn":"load_nfl_ratings_weekly
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1999.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -92,7 +92,7 @@ const LOAD_NFL_NGS: ReleaseLoaderDef = {"fn":"load_nfl_ngs","url":"https://githu
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2009.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -115,7 +115,7 @@ const LOAD_NFL_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_rosters","url":"https
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1920.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -138,7 +138,7 @@ const LOAD_NFL_WEEKLY_ROSTERS: ReleaseLoaderDef = {"fn":"load_nfl_weekly_rosters
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -161,7 +161,7 @@ const LOAD_NFL_DEPTH_CHARTS: ReleaseLoaderDef = {"fn":"load_nfl_depth_charts","u
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2001.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -184,7 +184,7 @@ const LOAD_NFL_INJURIES: ReleaseLoaderDef = {"fn":"load_nfl_injuries","url":"htt
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2009.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -207,7 +207,7 @@ const LOAD_NFL_SNAP_COUNTS: ReleaseLoaderDef = {"fn":"load_nfl_snap_counts","url
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2012.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -230,7 +230,7 @@ const LOAD_NFL_PBP_PARTICIPATION: ReleaseLoaderDef = {"fn":"load_nfl_pbp_partici
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2016.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -253,7 +253,7 @@ const LOAD_NFL_FTN_CHARTING: ReleaseLoaderDef = {"fn":"load_nfl_ftn_charting","u
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2022.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -278,7 +278,7 @@ const LOAD_NFL_USAGE_PLAYERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_players",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -303,7 +303,7 @@ const LOAD_NFL_USAGE_POSITION_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_usage_p
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -328,7 +328,7 @@ const LOAD_NFL_USAGE_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_usage_tackles",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -353,7 +353,7 @@ const LOAD_NFL_USAGE_POSITION_GROUP_TACKLES: ReleaseLoaderDef = {"fn":"load_nfl_
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -378,7 +378,7 @@ const LOAD_NFL_USAGE_TEAMS: ReleaseLoaderDef = {"fn":"load_nfl_usage_teams","url
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -403,7 +403,7 @@ const LOAD_NFL_USAGE_DRIVE_SCRIPTING: ReleaseLoaderDef = {"fn":"load_nfl_usage_d
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -428,7 +428,7 @@ const LOAD_NFL_USAGE_ST_KICKERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_kic
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -453,7 +453,7 @@ const LOAD_NFL_USAGE_ST_PUNTERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_pun
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -478,7 +478,7 @@ const LOAD_NFL_USAGE_ST_RETURNERS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_r
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -503,7 +503,7 @@ const LOAD_NFL_USAGE_ST_BLOCKS: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_bloc
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -528,7 +528,7 @@ const LOAD_NFL_USAGE_ST_TEAM: ReleaseLoaderDef = {"fn":"load_nfl_usage_st_team",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -553,7 +553,7 @@ const LOAD_NFL_TEAM_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_team_tendenci
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -578,7 +578,7 @@ const LOAD_NFL_COACH_TENDENCIES: ReleaseLoaderDef = {"fn":"load_nfl_coach_tenden
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
@@ -603,7 +603,7 @@ const LOAD_NFL_COACH_CAREERS: ReleaseLoaderDef = {"fn":"load_nfl_coach_careers",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflCoachCareers();
@@ -626,7 +626,7 @@ const LOAD_NFL_GROUPS: ReleaseLoaderDef = {"fn":"load_nfl_groups","url":"https:/
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroups();
@@ -649,7 +649,7 @@ const LOAD_NFL_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_group_seasons",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroupSeasons();
@@ -672,7 +672,7 @@ const LOAD_NFL_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_nfl_group_aliases",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nfl.loadNflGroupAliases();
@@ -695,7 +695,7 @@ const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1970.
  * @throws NoDataError if a requested season has no published asset (HTTP 404).
  * @throws SdvError if the data is over `maxCells` (checked before decoding).

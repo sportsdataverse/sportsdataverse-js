@@ -186,7 +186,7 @@ function renderLoaderTs(ns, ld) {
   doc.push("@param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.");
   doc.push("@param opts.timeoutMs - download timeout in ms (default 300000).");
   doc.push(
-    "@returns One plain object per row (or column arrays with `format: \"columns\"`). INT64 columns are numbers when every value is a safe integer, else BigInt (with a warning)." +
+    "@returns One plain object per row (or column arrays with `format: \"columns\"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process)." +
       (ld.single ? " An absent asset returns no rows with a warning." : "")
   );
   if (!ld.single && ld.minSeason !== undefined) {
@@ -281,8 +281,15 @@ export function renderLoadersPage(ns, loaders, position) {
     `results union the columns, null-filling gaps, and cast a column whose type changed ` +
     `between seasons to the common type (an integer id that became a string → strings, ` +
     `"123" not "123.0"), as sdv-py's \`diagonal_relaxed\` concat does.\n` +
-    `- **Integers:** INT64 columns come back as \`number\` when every value is a safe ` +
-    `integer, otherwise as \`BigInt\` with one warning naming the column.\n` +
+    `- **Integers:** an id column (\`id\`, \`*_id\`, \`*_ids\`, \`game_pk\`, \`athlete_id_1\`, \`id_play\`, ` +
+    `\`playerId\`, \`homeTeamId\`, \`start.team.id\`, …) of integers comes back as ` +
+    `exact decimal strings in every row and every season, whatever width the release stores it ` +
+    `with (INT32, INT64, or a DOUBLE holding integers: \`"401628579101849903"\`, \`"39"\`, never ` +
+    `\`"39.0"\`), so ids join across seasons and across releases. Code-like id columns ` +
+    `(\`type_id\`, \`status_id\`, …) are strings too. An id column that is not exact integers ` +
+    `(a fraction, a DOUBLE past 2^53) is left as read with one warning. Any other INT64 column ` +
+    `comes back as \`number\` when every value is a safe integer, otherwise as \`BigInt\` with one ` +
+    `warning (code \`SDV_INT64\`) per column per process.\n` +
     `- **Runtime:** Node only. Downloads go through the \`releases\` transport family ` +
     `(see [Transport, auth & errors](../../guides/transport-and-auth.md)); each asset is ` +
     `downloaded whole, then decoded.\n\n` +

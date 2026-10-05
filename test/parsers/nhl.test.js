@@ -39,9 +39,9 @@ describe('parsers/nhl_api_web: parse_nhl_web_pbp', () => {
     };
     const rows = parse_nhl_web_pbp(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('event_id', 8); // eventId -> event_id
+    rows[0].should.have.property('event_id', '8'); // eventId -> event_id
     rows[0].should.have.property('period_descriptor_number', 1); // deep flatten
-    rows[1].should.have.property('details_scoring_player_id', 8478402);
+    rows[1].should.have.property('details_scoring_player_id', '8478402');
   });
 
   it('returns [] for a missing / empty plays block', () => {
@@ -70,7 +70,7 @@ describe('parsers/nhl_api_web: parse_nhl_web_boxscore', () => {
     rows.length.should.equal(4); // 1+1 away, 1+1 home
     rows[0].should.have.property('home_away', 'away');
     rows[0].should.have.property('position_group', 'forwards');
-    rows[0].should.have.property('player_id', 1);
+    rows[0].should.have.property('player_id', '1');
     rows[0].should.have.property('name_default', 'A Fwd'); // deep flatten
     const home = rows.filter((r) => r.home_away === 'home');
     home.length.should.equal(2);
@@ -94,7 +94,7 @@ describe('parsers/nhl_api_web: parse_nhl_web_schedule', () => {
     const rows = parse_nhl_web_schedule(raw);
     rows.length.should.equal(3);
     rows[0].should.have.property('schedule_date', '2024-10-08');
-    rows[0].should.have.property('id', 2024020001);
+    rows[0].should.have.property('id', '2024020001');
     rows[2].should.have.property('schedule_date', '2024-10-09');
   });
 
@@ -116,7 +116,7 @@ describe('parsers/nhl_api_web: parse_nhl_web_roster', () => {
     rows[0].should.have.property('position_group', 'forwards');
     rows[2].should.have.property('position_group', 'defensemen');
     rows[3].should.have.property('position_group', 'goalies');
-    rows[3].should.have.property('id', 4);
+    rows[3].should.have.property('id', '4');
   });
 
   it('returns [] for a non-dict payload', () => {
@@ -133,7 +133,7 @@ describe('parsers/nhl_api_web: parse_nhl_web_leaders', () => {
     const rows = parse_nhl_web_leaders(raw);
     rows.length.should.equal(3);
     rows[0].should.have.property('category', 'points');
-    rows[0].should.have.property('id', 8478402);
+    rows[0].should.have.property('id', '8478402');
     rows[2].should.have.property('category', 'goals');
   });
 
@@ -161,7 +161,7 @@ describe('parsers/nhl_api_web: dispatchers return their primary sub-frame', () =
     };
     const rows = parse_nhl_web_club_stats(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('player_id', 1);
+    rows[0].should.have.property('player_id', '1');
     rows[0].should.have.property('goals', 10);
   });
 });
@@ -171,7 +171,7 @@ describe('parsers/nhl_api_web: parse_nhl_web_player_spotlight (bare array)', () 
     const raw = [{ playerId: 1, fullName: 'X' }, { playerId: 2 }];
     const rows = parse_nhl_web_player_spotlight(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('player_id', 1);
+    rows[0].should.have.property('player_id', '1');
   });
 
   it('returns [] for a non-array payload', () => {
@@ -193,7 +193,7 @@ describe('parsers/nhl_edge: parse_edge_detail (single-row flatten)', () => {
     };
     const rows = parse_edge_detail(raw);
     rows.length.should.equal(1);
-    rows[0].should.have.property('player_id', 8478402);
+    rows[0].should.have.property('player_id', '8478402');
     rows[0].should.have.property('skating_speed_max_speed', 38.1); // deep flatten
     (typeof rows[0].game_log).should.equal('string'); // list stringified
   });
@@ -209,7 +209,7 @@ describe('parsers/nhl_edge: parse_edge_top10 (leaderboard)', () => {
     const raw = { leaderboard: [{ playerId: 1, rank: 1 }, { playerId: 2, rank: 2 }] };
     const rows = parse_edge_top10(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('player_id', 1);
+    rows[0].should.have.property('player_id', '1');
   });
 
   it('falls back to the first list-of-dicts when no known key matches', () => {
@@ -293,7 +293,7 @@ describe('parsers/nhl_stats_rest: parse_nhl_stats_rest', () => {
     };
     const rows = parse_nhl_stats_rest(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('id', 10);
+    rows[0].should.have.property('id', '10');
     rows[0].should.have.property('full_name', 'Toronto Maple Leafs'); // fullName -> full_name
     rows[0].should.have.property('franchise_team_common_name', 'Maple Leafs'); // deep flatten
   });
@@ -316,8 +316,8 @@ describe('parsers/nhl_records: parse_nhl_records', () => {
     };
     const rows = parse_nhl_records(raw);
     rows.length.should.equal(2);
-    rows[0].should.have.property('id', 1);
-    rows[0].should.have.property('most_recent_team_id', 8); // mostRecentTeamId -> most_recent_team_id
+    rows[0].should.have.property('id', '1');
+    rows[0].should.have.property('most_recent_team_id', '8'); // mostRecentTeamId -> most_recent_team_id
   });
 
   it('returns [] for a missing / empty data block', () => {
