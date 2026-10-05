@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { get } from '../core/client.js';
 /**
  * Operations for Tennis.
  *
@@ -27,9 +27,7 @@ export default {
         if (year && month && day) {
             params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         }
-        const res = await axios.get(baseUrl, {
-            params,
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
     }
 };

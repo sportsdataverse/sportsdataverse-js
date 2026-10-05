@@ -1,6 +1,6 @@
-import axios from 'axios';
+import { get } from '../core/client.js';
 import { espnMbbCdnBoxscore, espnMbbCdnPlaybyplay, espnMbbCdnSchedule } from '../generated/espn/mbb.js';
-import { cdnDate } from './_cdn.js';
+import { cdnDate, getHtml } from './_cdn.js';
 import * as cheerio from 'cheerio';
 /**
  * Operations for Men's College Basketball.
@@ -67,14 +67,12 @@ export default {
      * const result = await sdv.mbb.getSummary(401260281);
      */
     getSummary: async function (id) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
         const params: Record<string, any> = {
             event: id
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return {
             boxScore: res.data.boxscore,
@@ -97,14 +95,12 @@ export default {
      * const result = await sdv.mbb.getPicks(401260281);
      */
     getPicks: async function (id) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary';
         const params: Record<string, any> = {
             event: id
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return {
             id: parseInt(res.data.header.id),
@@ -144,19 +140,16 @@ export default {
         position = null,
         state = null
     }) {
-        const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
+        const baseUrl = `https://247sports.com/Season/${year}-Basketball/CompositeRecruitRankings`;
         const params: Record<string, any> = {
             InstitutionGroup: group,
             Page: page,
             Position: position,
             State: state
         };
-        const res = await axios.get(baseUrl, {
-            headers: {
+        const res = { data: await getHtml('sports247_html', baseUrl, params, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            },
-            params
-        });
+            }) };
         let $ = cheerio.load(res.data);
         let players = [];
         // Couldn't grab the rank correctly with JQuery so it's manually calculated
@@ -197,15 +190,10 @@ export default {
      * const result = await sdv.mbb.getSchoolRankings({year: 2016});
      */
     getSchoolRankings: async function (year, page = 1) {
-        const baseUrl = `http://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
-        const res = await axios.get(baseUrl, {
-            headers: {
+        const baseUrl = `https://247sports.com/Season/${year}-Basketball/CompositeTeamRankings`;
+        const res = { data: await getHtml('sports247_html', baseUrl, { Page: page }, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            },
-            params: {
-                Page: page
-            }
-        });
+            }) };
         let $ = cheerio.load(res.data);
         let schools = [];
         $('.rankings-page__list-item').each(function (index) {
@@ -240,12 +228,10 @@ export default {
      * const result = await sdv.mbb.getSchoolCommits({school: 'Clemson', year: 2016});
      */
     getSchoolCommits: async function (school, year) {
-        const baseUrl = `http://${school}.247sports.com/Season/${year}-Basketball/Commits`;
-        const res = await axios.get(baseUrl, {
-            headers: {
+        const baseUrl = `https://${school}.247sports.com/Season/${year}-Basketball/Commits`;
+        const res = { data: await getHtml('sports247_html', baseUrl, undefined, {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-            }
-        });
+            }) };
         let $ = cheerio.load(res.data);
         let players = [];
         $('.ri-page__list-item').each(function (index) {
@@ -323,7 +309,7 @@ export default {
         group = 50,
         seasontype = 2,
         limit = 1000 }) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard`;
         const params: Record<string, any> = {
             groups: group,
             seasontype: seasontype || 2,
@@ -332,9 +318,7 @@ export default {
         if (year && month && day) {
             params.dates = `${year}${parseInt(month) <= 9 ? "0" + parseInt(month) : parseInt(month)}${parseInt(day) <= 9 ? "0" + parseInt(day) : parseInt(day)}`;
         }
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return res.data;
     },
@@ -351,15 +335,13 @@ export default {
      * const result = await sdv.mbb.getConferences(year = yr, group = 50);
      */
     getConferences: async function ({ year = new Date().getFullYear(), group = 50 }) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard/conferences';
 
         const params: Record<string, any> = {
             season: year,
             group: group
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
         return res.data;
     },
 
@@ -389,9 +371,7 @@ export default {
                 'vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,' +
                 'losses:desc,playoffseed:asc,alpha:asc'
         };
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'web_v3' }) };
         return res.data;
     },
     /**
@@ -407,15 +387,13 @@ export default {
     getTeamList: async function ({
         group = 50
     }) {
-        const baseUrl = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams';
+        const baseUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams';
         const params: Record<string, any> = {
             group,
             limit: 1000
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return res.data;
     },
@@ -431,9 +409,9 @@ export default {
      * const result = await sdv.mbb.getTeamInfo(teamId);
      */
     getTeamInfo: async function (id) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
 
-        const res = await axios.get(baseUrl);
+        const res = { data: await get(baseUrl, { family: 'site_v2' }) };
         return res.data;
     },
     /**
@@ -448,14 +426,12 @@ export default {
      * const result = await sdv.mbb.getTeamPlayers(teamId);
      */
     getTeamPlayers: async function (id) {
-        const baseUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
+        const baseUrl = `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/${id}`;
         const params: Record<string, any> = {
             enable: "roster"
         };
 
-        const res = await axios.get(baseUrl, {
-            params
-        });
+        const res = { data: await get(baseUrl, { params, family: 'site_v2' }) };
 
         return res.data;
     }
