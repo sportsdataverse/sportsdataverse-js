@@ -8,7 +8,8 @@ gunzip) to keep the repo small. Capture dates, request URLs and any trimming are
 in the README of the sdv-py source directory named below.
 
 - `manifest.yaml`: capture -> the endpoint it verifies (also lists captures
-  already vendored under `../on3`, `../asa`, `../mls_api`, `../nwsl_api`, `../nba_stats`).
+  already vendored under `../on3`, `../asa`, `../mls_api`, `../nwsl_api`, `../nba_stats`,
+  `../sports247`).
   The fixture-to-endpoint mapping follows sdv-py's `tools/codegen/native_fixture_map.yaml`
   (MLB Stats, NHL api-web / EDGE / Records / Stats REST) and the provenance READMEs
   for the other families.

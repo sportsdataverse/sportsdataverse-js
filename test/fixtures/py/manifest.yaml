@@ -227,3 +227,16 @@ wnba_stats:
   py/wnba_stats/cap_homepagev2_wnba.json: homepagev2
   py/wnba_stats/cap_playbyplayv2_wnba.json.gz: playbyplayv2
   py/wnba_stats/cap_playercareerbycollegerollup_wnba.json: playercareerbycollegerollup
+sports247:
+  sports247/sports247_teams_football.json: teams
+  sports247/sports247_institution_rankings_fb_2026.json: institution_rankings
+  sports247/sports247_recruits_fb_2026.json: recruits
+  sports247/sports247_transfers_fb_2026.json: transfers
+  sports247/sports247_coaches_fb_2026.json: coaches
+  sports247/sports247_transfer_portal_player_feed_fb_2026.json: transfer_portal_player_feed
+  sports247/sports247_composite_team_ranking_feed_fb_2026.json: composite_team_ranking_feed
+  sports247/sports247_transfer_portal_only_team_feed_fb_2026.json: transfer_portal_team_feed
+  sports247/sports247_current_target_predictions_fb_2026.json: target_predictions
+  sports247/sports247_sports_year_fb.json: sport_years
+  sports247/sports247_tags_autocomplete.json: tags_autocomplete
+  sports247/sports247_positions_fb_2026.json: positions
