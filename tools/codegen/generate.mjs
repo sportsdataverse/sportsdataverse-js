@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parse } from "yaml";
 import { checkTransform } from "./param-transforms.mjs";
+import { nowToggle } from "./now-toggle.mjs";
 import {
   loadReleaseLoaders,
   loadersByLeague,
@@ -552,6 +553,9 @@ function loadFlatWrappers() {
         host: ep.host ?? doc.host, // per-endpoint host override (e.g. Yahoo editorial)
         scope: "universal",
         path: ep.path,
+        // sdv-py `now_variant`/`now_toggle`: alternate path used when the
+        // toggle path param is absent (NHL api-web `/now` vs dated paths).
+        ...(ep.now_variant ? { nowVariant: ep.now_variant, nowToggle: nowToggle(ep) } : {}),
         pathParams: mapPathParams(ep),
         queryParams: mapQueryParams(ep),
         ...(ep.parser ? { parser: ep.parser } : {}),
