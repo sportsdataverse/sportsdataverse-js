@@ -1104,8 +1104,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
       "default": "1611661317"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/commonteamroster"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -3597,8 +3596,7 @@ const LEAGUEDASHPLAYERSHOTLOCATIONS_DEF: WrapperDef = {
       "default": ""
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/leaguedashplayershotlocations"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -3840,8 +3838,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
       "default": ""
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/leaguedashplayerstats"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -4266,8 +4263,7 @@ const LEAGUEDASHPTSTATS_DEF: WrapperDef = {
       "default": ""
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/leaguedashptstats"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -5892,8 +5888,7 @@ const LEAGUEGAMELOG_DEF: WrapperDef = {
       "default": "DATE"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/leaguegamelog"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -6839,8 +6834,7 @@ const LEAGUESTANDINGSV3_DEF: WrapperDef = {
       "default": ""
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/leaguestandingsv3"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -7089,8 +7083,7 @@ const PLAYERCAREERSTATS_DEF: WrapperDef = {
       "default": "1628932"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/playercareerstats"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -10539,8 +10532,7 @@ const SCOREBOARDV2_DEF: WrapperDef = {
       "default": "00"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/scoreboardv2"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -14130,8 +14122,7 @@ const VIDEODETAILSASSET_DEF: WrapperDef = {
       "default": ""
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/videodetailsasset"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -14197,8 +14188,7 @@ const VIDEOEVENTS_DEF: WrapperDef = {
       "default": "1022200075"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/videoevents"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -14236,8 +14226,7 @@ const VIDEOEVENTSASSET_DEF: WrapperDef = {
       "default": 21700807
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/nba_stats/videoeventsasset"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**

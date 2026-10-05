@@ -26,8 +26,7 @@ const GAMEFEED_DEF: WrapperDef = {
       "queryKey": "at_bat_number"
     }
   ],
-  "parser": "parse_mlb_statcast_gamefeed",
-  "returnsSchema": "native/mlb_statcast/gamefeed"
+  "parser": "parse_mlb_statcast_gamefeed"
 };
 
 /**
@@ -600,8 +599,7 @@ const LEADERBOARD_CATCHER_STANCE_DEF: WrapperDef = {
       "default": "true"
     }
   ],
-  "parser": "parse_mlb_statcast_leaderboard",
-  "returnsSchema": "native/mlb_statcast/leaderboard_catcher_stance"
+  "parser": "parse_mlb_statcast_leaderboard"
 };
 
 /**

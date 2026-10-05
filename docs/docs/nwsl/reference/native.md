@@ -261,43 +261,6 @@ Flat (non-ESPN) wrappers for the official NWSL StatsPerform SDP API. Host: `http
 | `stage_id` | character | Composite Stage id (`nwsl::Football_Stage::{hex}`). |
 | `name` | character | Stage display name. |
 
-### Returns — `nwsl_api_standings` / `nwslApiStandings`
-
-| col_name | type | description |
-|---|---|---|
-| `split_type` | character |  |
-| `achievement_statuses` | character | Achievement flags (champion, clinched, etc.). |
-| `note` | character | Free-text standings note (null when none). |
-| `team_id` | character | Composite Team id (Utf8 join key). |
-| `provider_id` | character | Underlying StatsPerform/Opta provider id (e.g. `opta:...`). |
-| `short_name` | character | Short team name. |
-| `official_name` | character | Official team name. |
-| `acronym_name` | character | 3-letter team code. |
-| `acronym_name_localized` | character | Localized 3-letter code. |
-| `is_team_fake` | logical | True for placeholder/TBD teams. |
-| `media_name` | character | Media-style display name. |
-| `media_short_name` | character | Short media-style display name. |
-| `country_code` | character | ISO country code. |
-| `team_type` | character | Team type (e.g. `club`). |
-| `overall_summary` | character | Season summary blurb. |
-| `stadium` | character | Home venue: `{id, providerId, name, cityName, country, address, capacity, yearOfConstruction, mapsGeoCodeLatitude, mapsGeoCodeLongitude, imagery}`. |
-| `all_season_imagery` | character | Per-season crest variants. |
-| `rank` | integer |  |
-| `team` | character | Team identity block the player belongs to. |
-| `points` | integer |  |
-| `qualification_qualification_id` | character | Qualification band: identifier of the qualification band. |
-| `qualification_qualification_label` | character | Qualification band: display label of the qualification band. |
-| `qualification` | numeric | Qualification band (e.g. playoff/Final Series). |
-| `matches_played` | integer | Matches played in this split. |
-| `win` | integer | Matches won. |
-| `draw` | integer | Matches drawn. |
-| `lose` | integer | Matches lost. |
-| `goals_for` | integer | Goals scored. |
-| `goals_against` | integer | Goals conceded. |
-| `goal_difference` | integer | Goals scored minus goals conceded. |
-| `movement` | character | Position movement versus the previous matchday. |
-| `form` | character | Recent results sequence, JSON-encoded (the API sends an array). |
-
 ### Returns — `nwsl_api_team_stats` / `nwslApiTeamStats`
 
 | col_name | type | description |

@@ -120,17 +120,19 @@ export function mapParser(cfg, pyParser, where) {
  * `jsRefs` the JS-owned ones the overlay attaches.
  *
  * Returns-schema policy: a py `returns_schema` stays only when the endpoint's JS
- * parser is the declared equivalent of py's (see `mapParser`) and no
- * `parser_overrides` entry replaces it; otherwise it is dropped (no table beats
- * a wrong one) and the overlay may attach a JS-owned schema instead.
+ * parser is the declared equivalent of py's (see `mapParser`), no
+ * `parser_overrides` entry replaces it and the short is not listed in
+ * `schema_incompatible` (py's schema fails the parser-parity harness on a real
+ * capture); otherwise it is dropped (no table beats a wrong one) and the overlay
+ * may attach a JS-owned schema instead.
  *
  * Overlay entries: one whose `short` is vendored patches it (never its `parser`;
  * use `parser_overrides`); one with a new `short` is appended and must carry a
  * `path`. A patched key whose value already equals the vendored one throws, so a
  * patch that upstream has absorbed announces itself.
  *
- * Throws on a stale manifest entry (a `names` / `parsers` / `parser_overrides`
- * key that matches no vendored endpoint) or a duplicate short.
+ * Throws on a stale manifest entry (a `names` / `parsers` / `parser_overrides` /
+ * `schema_incompatible` entry that matches no vendored endpoint) or a duplicate short.
  */
 export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   const doc = parseDocument(upstreamText);
@@ -150,6 +152,10 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
   const unusedNames = new Set(Object.keys(names));
   const unusedOverrides = new Set(Object.keys(overrides));
   const unusedParsers = new Set(Object.keys(cfg.parsers ?? {}));
+  if (cfg.schema_incompatible !== undefined && !Array.isArray(cfg.schema_incompatible)) {
+    throw new Error(`vendor.yaml ${key}: schema_incompatible must be a list of endpoint shorts`);
+  }
+  const unusedIncompatible = new Set(cfg.schema_incompatible ?? []);
   const pyRefs = new Map(); // endpoint node -> py returns_schema ref it keeps
   for (const ep of items) {
     let short = ep.get("short");
@@ -171,6 +177,7 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
       ep.set("parser", overrides[short]);
       compatible = false;
     }
+    if (unusedIncompatible.delete(short)) compatible = false;
     const rs = ep.get("returns_schema");
     if (rs && compatible) {
       ep.set("returns_schema", rewriteSchema(rs, cfg.schemas));
@@ -224,10 +231,10 @@ export function transformFamily(key, cfg, upstreamText, overlayText, source) {
     }
   }
 
-  if (unusedNames.size || unusedOverrides.size || unusedParsers.size) {
+  if (unusedNames.size || unusedOverrides.size || unusedParsers.size || unusedIncompatible.size) {
     throw new Error(
       `vendor.yaml ${key}: stale entries match no endpoint: ` +
-        [...unusedNames, ...unusedParsers, ...unusedOverrides].join(", ")
+        [...unusedNames, ...unusedParsers, ...unusedOverrides, ...unusedIncompatible].join(", ")
     );
   }
   const shorts = (seq?.items ?? []).map((ep) => ep.get("short"));

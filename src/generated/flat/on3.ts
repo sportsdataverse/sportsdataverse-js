@@ -1813,8 +1813,7 @@ const PLAYER_ALL_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb",
-  "returnsSchema": "native/on3/player_all_rankings"
+  "parser": "parse_on3_rdb"
 };
 
 /**
@@ -2003,8 +2002,7 @@ const PLAYER_PROFILE_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb",
-  "returnsSchema": "native/on3/player_profile"
+  "parser": "parse_on3_rdb"
 };
 
 /**
@@ -2736,8 +2734,7 @@ const TEAM_RANKING_TEAM_RANKINGS_DEF: WrapperDef = {
     }
   ],
   "queryParams": [],
-  "parser": "parse_on3_rdb",
-  "returnsSchema": "native/on3/team_ranking_team_rankings"
+  "parser": "parse_on3_rdb"
 };
 
 /**

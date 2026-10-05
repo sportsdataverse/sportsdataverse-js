@@ -62,6 +62,14 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     transform('nhl_edge', {}, edge).schemaRefs.should.eql([]);
     transform('nhl_edge', { schema_compatible: true }, edge).schemaRefs.length.should.be.above(0);
     (() => transform('nhl_edge', { schema_compatible: 'yes' }, edge)).should.throw(/schema_compatible must be a boolean/);
+    // schema_incompatible (a parser-parity harness finding) drops py's schema per endpoint.
+    const nba = family('nba_stats');
+    should(nba.ep('leaguedashplayerstats').returns_schema).be.undefined();
+    nba.ep('leaguedashplayerstats').parser.should.equal('parse_nba_stats_result_sets');
+    nba.ep('scheduleleaguev2').returns_schema.should.equal('native/nba_stats/scheduleleaguev2');
+    (() => transform('nhl_edge', { schema_compatible: true, schema_incompatible: 'skater_detail' }, edge)).should.throw(
+      /schema_incompatible must be a list/
+    );
   });
 
   it('refuses an overlay that swaps a vendored parser (parser_overrides only)', () => {
@@ -105,12 +113,15 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     text.should.startWith(`# VENDORED from ${manifest.source.repo}@${manifest.source.ref}`);
   });
 
-  it('throws on stale manifest entries (names, parsers, parser_overrides)', () => {
+  it('throws on stale manifest entries (names, parsers, parser_overrides, schema_incompatible)', () => {
     const torvik = upstream('endpoints/torvik.yaml');
     (() => transform('torvik', { names: { no_such_short: 'x' } }, torvik)).should.throw(
       /stale entries match no endpoint: no_such_short/
     );
     (() => transform('torvik', { parser_overrides: { no_such_short: 'parse_x' } }, torvik)).should.throw(
+      /stale entries match no endpoint: no_such_short/
+    );
+    (() => transform('torvik', { schema_incompatible: ['no_such_short'] }, torvik)).should.throw(
       /stale entries match no endpoint: no_such_short/
     );
     const parsers = { parse_gone_upstream: { js: 'parse_torvik_ratings', schema_compatible: false } };
@@ -166,8 +177,9 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
   // Policy (a returns table must describe what the JS parser returns), fail-closed:
   // an endpoint may carry a vendored (py) schema only when its parser's
   // compatibility is DECLARED in vendor.yaml (family `schema_compatible: true`
-  // for a kept py name, or a `parsers` entry with schema_compatible: true) and no
-  // parser_overrides entry swaps it. Checked on the committed endpoint files.
+  // for a kept py name, or a `parsers` entry with schema_compatible: true), no
+  // parser_overrides entry swaps it and schema_incompatible does not drop it.
+  // Checked on the committed endpoint files.
   it('a vendored schema is attached only to a declared schema-compatible parser', () => {
     const outputs = [...deriveAll().keys()];
     const vendored = (ref) => outputs.some((p) => p === `schemas/${ref}.yaml` || p.startsWith(`schemas/${ref}/`));
@@ -190,7 +202,9 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
         const declared =
           (m === undefined
             ? cfg.schema_compatible === true && e.parser === p.parser
-            : m.schema_compatible === true && m.js === e.parser) && !(cfg.parser_overrides ?? {})[e.short];
+            : m.schema_compatible === true && m.js === e.parser) &&
+          !(cfg.parser_overrides ?? {})[e.short] &&
+          !(cfg.schema_incompatible ?? []).includes(e.short);
         if (fromPy) {
           attached++;
           declared.should.be.true(`${key}.${e.short} (${e.returns_schema}): parser ${e.parser} is not declared schema-compatible`);

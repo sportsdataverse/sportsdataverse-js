@@ -297,8 +297,7 @@ const STANDINGS_DEF: WrapperDef = {
       "queryKey": "direction"
     }
   ],
-  "parser": "parse_nwsl_standings",
-  "returnsSchema": "native/nwsl_api/standings"
+  "parser": "parse_nwsl_standings"
 };
 
 /**

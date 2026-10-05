@@ -570,24 +570,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `pts_ot10` | integer |  |
 | `pts` | integer |  |
 
-### Returns — `wnba_stats_boxscoresummaryv3` / `wnbaStatsBoxscoresummaryv3`
-
-| col_name | type | description |
-|---|---|---|
-| `dummykey` | character |  |
-| `gameid` | character |  |
-| `inbonus` | character |  |
-| `score` | integer |  |
-| `seed` | integer |  |
-| `teamcity` | character |  |
-| `teamid` | integer |  |
-| `teamlosses` | integer |  |
-| `teamname` | character |  |
-| `teamslug` | character |  |
-| `teamtricode` | character |  |
-| `teamwins` | integer |  |
-| `timeoutsremaining` | integer |  |
-
 ### Returns — `wnba_stats_boxscoretraditionalv2` / `wnbaStatsBoxscoretraditionalv2`
 
 | col_name | type | description |
@@ -621,83 +603,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `pf` | integer |  |
 | `pts` | integer |  |
 | `plus_minus` | integer |  |
-
-### Returns — `wnba_stats_boxscoretraditionalv3` / `wnbaStatsBoxscoretraditionalv3`
-
-| col_name | type | description |
-|---|---|---|
-| `assists` | integer |  |
-| `bench_assists` | integer |  |
-| `bench_blocks` | integer |  |
-| `bench_fieldgoalsattempted` | integer |  |
-| `bench_fieldgoalsmade` | integer |  |
-| `bench_fieldgoalspercentage` | numeric |  |
-| `bench_foulspersonal` | integer |  |
-| `bench_freethrowsattempted` | integer |  |
-| `bench_freethrowsmade` | integer |  |
-| `bench_freethrowspercentage` | numeric |  |
-| `bench_minutes` | character |  |
-| `bench_points` | integer |  |
-| `bench_reboundsdefensive` | integer |  |
-| `bench_reboundsoffensive` | integer |  |
-| `bench_reboundstotal` | integer |  |
-| `bench_steals` | integer |  |
-| `bench_threepointersattempted` | integer |  |
-| `bench_threepointersmade` | integer |  |
-| `bench_threepointerspercentage` | numeric |  |
-| `bench_turnovers` | integer |  |
-| `blocks` | integer |  |
-| `comment` | character |  |
-| `familyname` | character |  |
-| `fieldgoalsattempted` | integer |  |
-| `fieldgoalsmade` | integer |  |
-| `fieldgoalspercentage` | numeric |  |
-| `firstname` | character |  |
-| `foulspersonal` | integer |  |
-| `freethrowsattempted` | integer |  |
-| `freethrowsmade` | integer |  |
-| `freethrowspercentage` | numeric |  |
-| `gameid` | character |  |
-| `jerseynum` | character |  |
-| `minutes` | character |  |
-| `namei` | character |  |
-| `personid` | integer |  |
-| `playerslug` | character |  |
-| `plusminuspoints` | numeric |  |
-| `points` | integer |  |
-| `position` | character |  |
-| `reboundsdefensive` | integer |  |
-| `reboundsoffensive` | integer |  |
-| `reboundstotal` | integer |  |
-| `starters_assists` | integer |  |
-| `starters_blocks` | integer |  |
-| `starters_fieldgoalsattempted` | integer |  |
-| `starters_fieldgoalsmade` | integer |  |
-| `starters_fieldgoalspercentage` | numeric |  |
-| `starters_foulspersonal` | integer |  |
-| `starters_freethrowsattempted` | integer |  |
-| `starters_freethrowsmade` | integer |  |
-| `starters_freethrowspercentage` | numeric |  |
-| `starters_minutes` | character |  |
-| `starters_points` | integer |  |
-| `starters_reboundsdefensive` | integer |  |
-| `starters_reboundsoffensive` | integer |  |
-| `starters_reboundstotal` | integer |  |
-| `starters_steals` | integer |  |
-| `starters_threepointersattempted` | integer |  |
-| `starters_threepointersmade` | integer |  |
-| `starters_threepointerspercentage` | numeric |  |
-| `starters_turnovers` | integer |  |
-| `steals` | integer |  |
-| `teamcity` | character |  |
-| `teamid` | integer |  |
-| `teamname` | character |  |
-| `teamslug` | character |  |
-| `teamtricode` | character |  |
-| `threepointersattempted` | integer |  |
-| `threepointersmade` | integer |  |
-| `threepointerspercentage` | numeric |  |
-| `turnovers` | integer |  |
 
 ### Returns — `wnba_stats_boxscoreusagev2` / `wnbaStatsBoxscoreusagev2`
 
@@ -840,27 +745,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `visitor_team_id` | integer |  |
 | `series_id` | character |  |
 | `game_num` | integer |  |
-
-### Returns — `wnba_stats_commonteamroster` / `wnbaStatsCommonteamroster`
-
-| col_name | type | description |
-|---|---|---|
-| `teamid` | integer |  |
-| `season` | character |  |
-| `leagueid` | character |  |
-| `player` | character |  |
-| `nickname` | character |  |
-| `player_slug` | character |  |
-| `num` | character |  |
-| `position` | character |  |
-| `height` | character |  |
-| `weight` | character |  |
-| `birth_date` | character |  |
-| `age` | numeric |  |
-| `exp` | character |  |
-| `school` | character |  |
-| `player_id` | integer |  |
-| `how_acquired` | character |  |
 
 ### Returns — `wnba_stats_commonteamyears` / `wnbaStatsCommonteamyears`
 
@@ -1246,20 +1130,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `ts_pct` | numeric |  |
 | `pts_per48` | character |  |
 
-### Returns — `wnba_stats_homepagev2` / `wnbaStatsHomepagev2`
-
-| col_name | type | description |
-|---|---|---|
-| `rank` | integer |  |
-| `player_id` | integer |  |
-| `player` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `team_name` | character |  |
-| `jersey_num` | character |  |
-| `player_position` | character |  |
-| `blk` | numeric |  |
-
 ### Returns — `wnba_stats_hustlestatsboxscore` / `wnbaStatsHustlestatsboxscore`
 
 | col_name | type | description |
@@ -1541,78 +1411,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `40+_ft_fgm` | numeric |  |
 | `40+_ft_fga` | numeric |  |
 | `40+_ft_fg_pct` | numeric |  |
-
-### Returns — `wnba_stats_leaguedashplayerstats` / `wnbaStatsLeaguedashplayerstats`
-
-| col_name | type | description |
-|---|---|---|
-| `player_id` | integer |  |
-| `player_name` | character |  |
-| `nickname` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `age` | numeric |  |
-| `gp` | integer |  |
-| `w` | integer |  |
-| `l` | integer |  |
-| `w_pct` | numeric |  |
-| `min` | numeric |  |
-| `fgm` | numeric |  |
-| `fga` | numeric |  |
-| `fg_pct` | numeric |  |
-| `fg3m` | numeric |  |
-| `fg3a` | numeric |  |
-| `fg3_pct` | numeric |  |
-| `ftm` | numeric |  |
-| `fta` | numeric |  |
-| `ft_pct` | numeric |  |
-| `oreb` | numeric |  |
-| `dreb` | numeric |  |
-| `reb` | numeric |  |
-| `ast` | numeric |  |
-| `tov` | numeric |  |
-| `stl` | numeric |  |
-| `blk` | numeric |  |
-| `blka` | numeric |  |
-| `pf` | numeric |  |
-| `pfd` | numeric |  |
-| `pts` | numeric |  |
-| `plus_minus` | numeric |  |
-| `nba_fantasy_pts` | numeric |  |
-| `dd2` | integer |  |
-| `td3` | integer |  |
-| `wnba_fantasy_pts` | numeric |  |
-| `gp_rank` | integer |  |
-| `w_rank` | integer |  |
-| `l_rank` | integer |  |
-| `w_pct_rank` | integer |  |
-| `min_rank` | integer |  |
-| `fgm_rank` | integer |  |
-| `fga_rank` | integer |  |
-| `fg_pct_rank` | integer |  |
-| `fg3m_rank` | integer |  |
-| `fg3a_rank` | integer |  |
-| `fg3_pct_rank` | integer |  |
-| `ftm_rank` | integer |  |
-| `fta_rank` | integer |  |
-| `ft_pct_rank` | integer |  |
-| `oreb_rank` | integer |  |
-| `dreb_rank` | integer |  |
-| `reb_rank` | integer |  |
-| `ast_rank` | integer |  |
-| `tov_rank` | integer |  |
-| `stl_rank` | integer |  |
-| `blk_rank` | integer |  |
-| `blka_rank` | integer |  |
-| `pf_rank` | integer |  |
-| `pfd_rank` | integer |  |
-| `pts_rank` | integer |  |
-| `plus_minus_rank` | integer |  |
-| `nba_fantasy_pts_rank` | integer |  |
-| `dd2_rank` | integer |  |
-| `td3_rank` | integer |  |
-| `wnba_fantasy_pts_rank` | integer |  |
-| `team_count` | integer |  |
 
 ### Returns — `wnba_stats_leaguedashptdefend` / `wnbaStatsLeaguedashptdefend`
 
@@ -2105,45 +1903,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `clinchedpostseason` | integer |  |
 | `neutral` | character |  |
 
-### Returns — `wnba_stats_playbyplayv2` / `wnbaStatsPlaybyplayv2`
-
-| col_name | type | description |
-|---|---|---|
-| `game_id` | character |  |
-| `eventnum` | integer |  |
-| `eventmsgtype` | integer |  |
-| `eventmsgactiontype` | integer |  |
-| `period` | integer |  |
-| `wctimestring` | character |  |
-| `pctimestring` | character |  |
-| `homedescription` | character |  |
-| `neutraldescription` | character |  |
-| `visitordescription` | character |  |
-| `score` | character |  |
-| `scoremargin` | character |  |
-| `person1type` | integer |  |
-| `player1_id` | integer |  |
-| `player1_name` | character |  |
-| `player1_team_id` | integer |  |
-| `player1_team_city` | character |  |
-| `player1_team_nickname` | character |  |
-| `player1_team_abbreviation` | character |  |
-| `person2type` | integer |  |
-| `player2_id` | integer |  |
-| `player2_name` | character |  |
-| `player2_team_id` | integer |  |
-| `player2_team_city` | character |  |
-| `player2_team_nickname` | character |  |
-| `player2_team_abbreviation` | character |  |
-| `person3type` | integer |  |
-| `player3_id` | integer |  |
-| `player3_name` | character |  |
-| `player3_team_id` | integer |  |
-| `player3_team_city` | character |  |
-| `player3_team_nickname` | character |  |
-| `player3_team_abbreviation` | character |  |
-| `video_available_flag` | integer |  |
-
 ### Returns — `wnba_stats_playbyplayv3` / `wnbaStatsPlaybyplayv3`
 
 | col_name | type | description |
@@ -2191,35 +1950,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `subtype1` | character |  |
 | `subtype2` | character |  |
 | `subtype3` | character |  |
-
-### Returns — `wnba_stats_playercareerbycollegerollup` / `wnbaStatsPlayercareerbycollegerollup`
-
-| col_name | type | description |
-|---|---|---|
-| `region` | character |  |
-| `seed` | character |  |
-| `college` | character |  |
-| `players` | character |  |
-| `gp` | integer |  |
-| `min` | integer |  |
-| `fgm` | character |  |
-| `fga` | character |  |
-| `fg_pct` | numeric |  |
-| `fg3m` | character |  |
-| `fg3a` | character |  |
-| `fg3_pct` | numeric |  |
-| `ftm` | character |  |
-| `fta` | character |  |
-| `ft_pct` | numeric |  |
-| `oreb` | character |  |
-| `dreb` | character |  |
-| `reb` | character |  |
-| `ast` | character |  |
-| `stl` | character |  |
-| `blk` | character |  |
-| `tov` | character |  |
-| `pf` | character |  |
-| `pts` | character |  |
 
 ### Returns — `wnba_stats_playercareerstats` / `wnbaStatsPlayercareerstats`
 
@@ -3148,63 +2878,6 @@ Flat (non-ESPN) wrappers for stats.wnba.com (needs a TLS-impersonating transport
 | `pts` | numeric |  |
 | `plus_minus` | numeric |  |
 | `nba_fantasy_pts` | numeric |  |
-
-### Returns — `wnba_stats_scheduleleaguev2` / `wnbaStatsScheduleleaguev2`
-
-| col_name | type | description |
-|---|---|---|
-| `arena_city` | character |  |
-| `arena_name` | character |  |
-| `arena_state` | character |  |
-| `away_team_city` | character |  |
-| `away_team_id` | integer |  |
-| `away_team_losses` | integer |  |
-| `away_team_name` | character |  |
-| `away_team_score` | integer |  |
-| `away_team_seed` | integer |  |
-| `away_team_slug` | character |  |
-| `away_team_time` | character |  |
-| `away_team_tricode` | character |  |
-| `away_team_wins` | integer |  |
-| `branch_link` | character |  |
-| `day` | character |  |
-| `game_code` | character |  |
-| `game_date` | character |  |
-| `game_date_est` | character |  |
-| `game_date_time_est` | character |  |
-| `game_date_time_utc` | character |  |
-| `game_date_utc` | character |  |
-| `game_id` | character |  |
-| `game_label` | character |  |
-| `game_sequence` | integer |  |
-| `game_status` | integer |  |
-| `game_status_text` | character |  |
-| `game_sub_label` | character |  |
-| `game_subtype` | character |  |
-| `game_time_est` | character |  |
-| `game_time_utc` | character |  |
-| `home_team_city` | character |  |
-| `home_team_id` | integer |  |
-| `home_team_losses` | integer |  |
-| `home_team_name` | character |  |
-| `home_team_score` | integer |  |
-| `home_team_seed` | integer |  |
-| `home_team_slug` | character |  |
-| `home_team_time` | character |  |
-| `home_team_tricode` | character |  |
-| `home_team_wins` | integer |  |
-| `if_necessary` | character |  |
-| `is_neutral` | logical |  |
-| `league_id` | character |  |
-| `month_num` | integer |  |
-| `postponed_status` | character |  |
-| `season` | character |  |
-| `season_type_description` | character |  |
-| `season_type_id` | character |  |
-| `series_game_number` | character |  |
-| `series_text` | character |  |
-| `week_name` | character |  |
-| `week_number` | integer |  |
 
 ### Returns — `wnba_stats_scheduleleaguev2int` / `wnbaStatsScheduleleaguev2int`
 

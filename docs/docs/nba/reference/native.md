@@ -708,27 +708,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `series_id` | character |  |
 | `game_num` | integer |  |
 
-### Returns — `nba_stats_commonteamroster` / `nbaStatsCommonteamroster`
-
-| col_name | type | description |
-|---|---|---|
-| `teamid` | integer |  |
-| `season` | character |  |
-| `leagueid` | character |  |
-| `player` | character |  |
-| `nickname` | character |  |
-| `player_slug` | character |  |
-| `num` | character |  |
-| `position` | character |  |
-| `height` | character |  |
-| `weight` | character |  |
-| `birth_date` | character |  |
-| `age` | numeric |  |
-| `exp` | character |  |
-| `school` | character |  |
-| `player_id` | integer |  |
-| `how_acquired` | character |  |
-
 ### Returns — `nba_stats_commonteamyears` / `nbaStatsCommonteamyears`
 
 | col_name | type | description |
@@ -1550,116 +1529,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `fg3a` | numeric |  |
 | `fg3_pct` | numeric |  |
 
-### Returns — `nba_stats_leaguedashplayershotlocations` / `nbaStatsLeaguedashplayershotlocations`
-
-| col_name | type | description |
-|---|---|---|
-| `player_id` | integer |  |
-| `player_name` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `age` | numeric |  |
-| `nickname` | character |  |
-| `less_than_5_ft_fgm` | numeric |  |
-| `less_than_5_ft_fga` | numeric |  |
-| `less_than_5_ft_fg_pct` | numeric |  |
-| `5-9_ft_fgm` | numeric |  |
-| `5-9_ft_fga` | numeric |  |
-| `5-9_ft_fg_pct` | numeric |  |
-| `10-14_ft_fgm` | numeric |  |
-| `10-14_ft_fga` | numeric |  |
-| `10-14_ft_fg_pct` | numeric |  |
-| `15-19_ft_fgm` | numeric |  |
-| `15-19_ft_fga` | numeric |  |
-| `15-19_ft_fg_pct` | numeric |  |
-| `20-24_ft_fgm` | numeric |  |
-| `20-24_ft_fga` | numeric |  |
-| `20-24_ft_fg_pct` | numeric |  |
-| `25-29_ft_fgm` | numeric |  |
-| `25-29_ft_fga` | numeric |  |
-| `25-29_ft_fg_pct` | numeric |  |
-| `30-34_ft_fgm` | numeric |  |
-| `30-34_ft_fga` | numeric |  |
-| `30-34_ft_fg_pct` | numeric |  |
-| `35-39_ft_fgm` | numeric |  |
-| `35-39_ft_fga` | numeric |  |
-| `35-39_ft_fg_pct` | numeric |  |
-| `40+_ft_fgm` | numeric |  |
-| `40+_ft_fga` | numeric |  |
-| `40+_ft_fg_pct` | numeric |  |
-
-### Returns — `nba_stats_leaguedashplayerstats` / `nbaStatsLeaguedashplayerstats`
-
-| col_name | type | description |
-|---|---|---|
-| `player_id` | integer |  |
-| `player_name` | character |  |
-| `nickname` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `age` | numeric |  |
-| `gp` | integer |  |
-| `w` | integer |  |
-| `l` | integer |  |
-| `w_pct` | numeric |  |
-| `min` | numeric |  |
-| `fgm` | numeric |  |
-| `fga` | numeric |  |
-| `fg_pct` | numeric |  |
-| `fg3m` | numeric |  |
-| `fg3a` | numeric |  |
-| `fg3_pct` | numeric |  |
-| `ftm` | numeric |  |
-| `fta` | numeric |  |
-| `ft_pct` | numeric |  |
-| `oreb` | numeric |  |
-| `dreb` | numeric |  |
-| `reb` | numeric |  |
-| `ast` | numeric |  |
-| `tov` | numeric |  |
-| `stl` | numeric |  |
-| `blk` | numeric |  |
-| `blka` | numeric |  |
-| `pf` | numeric |  |
-| `pfd` | numeric |  |
-| `pts` | numeric |  |
-| `plus_minus` | numeric |  |
-| `nba_fantasy_pts` | numeric |  |
-| `dd2` | integer |  |
-| `td3` | integer |  |
-| `wnba_fantasy_pts` | numeric |  |
-| `gp_rank` | integer |  |
-| `w_rank` | integer |  |
-| `l_rank` | integer |  |
-| `w_pct_rank` | integer |  |
-| `min_rank` | integer |  |
-| `fgm_rank` | integer |  |
-| `fga_rank` | integer |  |
-| `fg_pct_rank` | integer |  |
-| `fg3m_rank` | integer |  |
-| `fg3a_rank` | integer |  |
-| `fg3_pct_rank` | integer |  |
-| `ftm_rank` | integer |  |
-| `fta_rank` | integer |  |
-| `ft_pct_rank` | integer |  |
-| `oreb_rank` | integer |  |
-| `dreb_rank` | integer |  |
-| `reb_rank` | integer |  |
-| `ast_rank` | integer |  |
-| `tov_rank` | integer |  |
-| `stl_rank` | integer |  |
-| `blk_rank` | integer |  |
-| `blka_rank` | integer |  |
-| `pf_rank` | integer |  |
-| `pfd_rank` | integer |  |
-| `pts_rank` | integer |  |
-| `plus_minus_rank` | integer |  |
-| `nba_fantasy_pts_rank` | integer |  |
-| `dd2_rank` | integer |  |
-| `td3_rank` | integer |  |
-| `wnba_fantasy_pts_rank` | integer |  |
-| `team_count` | integer |  |
-
 ### Returns — `nba_stats_leaguedashptdefend` / `nbaStatsLeaguedashptdefend`
 
 | col_name | type | description |
@@ -1678,26 +1547,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `d_fg_pct` | numeric |  |
 | `normal_fg_pct` | numeric |  |
 | `pct_plusminus` | numeric |  |
-
-### Returns — `nba_stats_leaguedashptstats` / `nbaStatsLeaguedashptstats`
-
-| col_name | type | description |
-|---|---|---|
-| `player_id` | integer |  |
-| `player_name` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `gp` | integer |  |
-| `w` | integer |  |
-| `l` | integer |  |
-| `min` | numeric |  |
-| `dist_feet` | numeric |  |
-| `dist_miles` | numeric |  |
-| `dist_miles_off` | numeric |  |
-| `dist_miles_def` | numeric |  |
-| `avg_speed` | numeric |  |
-| `avg_speed_off` | numeric |  |
-| `avg_speed_def` | numeric |  |
 
 ### Returns — `nba_stats_leaguedashptteamdefend` / `nbaStatsLeaguedashptteamdefend`
 
@@ -1922,40 +1771,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `tov` | integer |  |
 | `pf` | integer |  |
 | `plus_minus` | numeric |  |
-
-### Returns — `nba_stats_leaguegamelog` / `nbaStatsLeaguegamelog`
-
-| col_name | type | description |
-|---|---|---|
-| `season_id` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `team_name` | character |  |
-| `game_id` | character |  |
-| `game_date` | character |  |
-| `matchup` | character |  |
-| `wl` | character |  |
-| `min` | integer |  |
-| `fgm` | integer |  |
-| `fga` | integer |  |
-| `fg_pct` | numeric |  |
-| `fg3m` | integer |  |
-| `fg3a` | integer |  |
-| `fg3_pct` | numeric |  |
-| `ftm` | integer |  |
-| `fta` | integer |  |
-| `ft_pct` | numeric |  |
-| `oreb` | integer |  |
-| `dreb` | integer |  |
-| `reb` | integer |  |
-| `ast` | integer |  |
-| `stl` | integer |  |
-| `blk` | integer |  |
-| `tov` | integer |  |
-| `pf` | integer |  |
-| `pts` | integer |  |
-| `plus_minus` | integer |  |
-| `video_available` | integer |  |
 
 ### Returns — `nba_stats_leaguehustlestatsplayer` / `nbaStatsLeaguehustlestatsplayer`
 
@@ -2257,103 +2072,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `preas` | character |  |
 | `postas` | character |  |
 
-### Returns — `nba_stats_leaguestandingsv3` / `nbaStatsLeaguestandingsv3`
-
-| col_name | type | description |
-|---|---|---|
-| `leagueid` | character |  |
-| `seasonid` | character |  |
-| `teamid` | integer |  |
-| `teamcity` | character |  |
-| `teamname` | character |  |
-| `teamslug` | character |  |
-| `conference` | character |  |
-| `conferencerecord` | character |  |
-| `playoffrank` | integer |  |
-| `clinchindicator` | character |  |
-| `division` | character |  |
-| `divisionrecord` | character |  |
-| `divisionrank` | integer |  |
-| `wins` | integer |  |
-| `losses` | integer |  |
-| `winpct` | numeric |  |
-| `leaguerank` | integer |  |
-| `record` | character |  |
-| `home` | character |  |
-| `road` | character |  |
-| `l10` | character |  |
-| `last10home` | character |  |
-| `last10road` | character |  |
-| `ot` | character |  |
-| `threeptsorless` | character |  |
-| `tenptsormore` | character |  |
-| `longhomestreak` | integer |  |
-| `strlonghomestreak` | character |  |
-| `longroadstreak` | integer |  |
-| `strlongroadstreak` | character |  |
-| `longwinstreak` | integer |  |
-| `longlossstreak` | integer |  |
-| `currenthomestreak` | integer |  |
-| `strcurrenthomestreak` | character |  |
-| `currentroadstreak` | integer |  |
-| `strcurrentroadstreak` | character |  |
-| `currentstreak` | integer |  |
-| `strcurrentstreak` | character |  |
-| `conferencegamesback` | numeric |  |
-| `divisiongamesback` | numeric |  |
-| `clinchedconferencetitle` | integer |  |
-| `clincheddivisiontitle` | integer |  |
-| `clinchedplayoffbirth` | integer |  |
-| `clinchedplayin` | integer |  |
-| `eliminatedconference` | integer |  |
-| `eliminateddivision` | integer |  |
-| `aheadathalf` | character |  |
-| `behindathalf` | character |  |
-| `tiedathalf` | character |  |
-| `aheadatthird` | character |  |
-| `behindatthird` | character |  |
-| `tiedatthird` | character |  |
-| `score100pts` | character |  |
-| `oppscore100pts` | character |  |
-| `oppover500` | character |  |
-| `leadinfgpct` | character |  |
-| `leadinreb` | character |  |
-| `fewerturnovers` | character |  |
-| `pointspg` | numeric |  |
-| `opppointspg` | numeric |  |
-| `diffpointspg` | numeric |  |
-| `vseast` | character |  |
-| `vsatlantic` | character |  |
-| `vscentral` | character |  |
-| `vssoutheast` | character |  |
-| `vswest` | character |  |
-| `vsnorthwest` | character |  |
-| `vspacific` | character |  |
-| `vssouthwest` | character |  |
-| `jan` | character |  |
-| `feb` | character |  |
-| `mar` | character |  |
-| `apr` | character |  |
-| `may` | character |  |
-| `jun` | character |  |
-| `jul` | character |  |
-| `aug` | character |  |
-| `sep` | character |  |
-| `oct` | character |  |
-| `nov` | character |  |
-| `dec` | character |  |
-| `score_80_plus` | character |  |
-| `opp_score_80_plus` | character |  |
-| `score_below_80` | character |  |
-| `opp_score_below_80` | character |  |
-| `totalpoints` | integer |  |
-| `opptotalpoints` | integer |  |
-| `difftotalpoints` | integer |  |
-| `leaguegamesback` | numeric |  |
-| `playoffseeding` | integer |  |
-| `clinchedpostseason` | integer |  |
-| `neutral` | character |  |
-
 ### Returns — `nba_stats_matchupsrollup` / `nbaStatsMatchupsrollup`
 
 | col_name | type | description |
@@ -2457,38 +2175,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `tov` | character |  |
 | `pf` | character |  |
 | `pts` | character |  |
-
-### Returns — `nba_stats_playercareerstats` / `nbaStatsPlayercareerstats`
-
-| col_name | type | description |
-|---|---|---|
-| `player_id` | integer |  |
-| `season_id` | character |  |
-| `league_id` | character |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `player_age` | numeric |  |
-| `gp` | integer |  |
-| `gs` | integer |  |
-| `min` | numeric |  |
-| `fgm` | numeric |  |
-| `fga` | numeric |  |
-| `fg_pct` | numeric |  |
-| `fg3m` | numeric |  |
-| `fg3a` | numeric |  |
-| `fg3_pct` | numeric |  |
-| `ftm` | numeric |  |
-| `fta` | numeric |  |
-| `ft_pct` | numeric |  |
-| `oreb` | numeric |  |
-| `dreb` | numeric |  |
-| `reb` | numeric |  |
-| `ast` | numeric |  |
-| `stl` | numeric |  |
-| `blk` | numeric |  |
-| `tov` | numeric |  |
-| `pf` | numeric |  |
-| `pts` | numeric |  |
 
 ### Returns — `nba_stats_playercompare` / `nbaStatsPlayercompare`
 
@@ -3583,40 +3269,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `series_text` | character |  |
 | `week_name` | character |  |
 | `week_number` | integer |  |
-
-### Returns — `nba_stats_scoreboardv2` / `nbaStatsScoreboardv2`
-
-| col_name | type | description |
-|---|---|---|
-| `game_date_est` | character |  |
-| `game_sequence` | character |  |
-| `game_id` | integer |  |
-| `team_id` | integer |  |
-| `team_abbreviation` | character |  |
-| `team_city_name` | character |  |
-| `team_name` | character |  |
-| `team_wins_losses` | character |  |
-| `pts_qtr1` | character |  |
-| `pts_qtr2` | character |  |
-| `pts_qtr3` | character |  |
-| `pts_qtr4` | character |  |
-| `pts_ot1` | character |  |
-| `pts_ot2` | character |  |
-| `pts_ot3` | character |  |
-| `pts_ot4` | character |  |
-| `pts_ot5` | character |  |
-| `pts_ot6` | character |  |
-| `pts_ot7` | character |  |
-| `pts_ot8` | character |  |
-| `pts_ot9` | character |  |
-| `pts_ot10` | character |  |
-| `pts` | character |  |
-| `fg_pct` | numeric |  |
-| `ft_pct` | numeric |  |
-| `fg3_pct` | numeric |  |
-| `ast` | character |  |
-| `reb` | character |  |
-| `tov` | character |  |
 
 ### Returns — `nba_stats_scoreboardv3` / `nbaStatsScoreboardv3`
 
@@ -4855,61 +4507,6 @@ Flat (non-ESPN) wrappers for stats.nba.com (needs a TLS-impersonating transport 
 | `blk` | numeric |  |
 | `pts` | numeric |  |
 | `pts_rank` | integer |  |
-
-### Returns — `nba_stats_videodetailsasset` / `nbaStatsVideodetailsasset`
-
-| col_name | type | description |
-|---|---|---|
-| `uuid` | character |  |
-| `sdur` | integer |  |
-| `surl` | character |  |
-| `sth` | character |  |
-| `mdur` | integer |  |
-| `murl` | character |  |
-| `mth` | character |  |
-| `ldur` | integer |  |
-| `lurl` | character |  |
-| `lth` | character |  |
-| `vtt` | character |  |
-| `scc` | character |  |
-| `srt` | character |  |
-
-### Returns — `nba_stats_videoevents` / `nbaStatsVideoevents`
-
-| col_name | type | description |
-|---|---|---|
-| `uuid` | character |  |
-| `dur` | character |  |
-| `stt` | character |  |
-| `stp` | character |  |
-| `sth` | character |  |
-| `stw` | character |  |
-| `mtt` | character |  |
-| `mtp` | character |  |
-| `mth` | character |  |
-| `mtw` | character |  |
-| `ltt` | character |  |
-| `ltp` | character |  |
-| `lth` | character |  |
-| `ltw` | character |  |
-
-### Returns — `nba_stats_videoeventsasset` / `nbaStatsVideoeventsasset`
-
-| col_name | type | description |
-|---|---|---|
-| `uuid` | character |  |
-| `sdur` | integer |  |
-| `surl` | character |  |
-| `sth` | character |  |
-| `mdur` | integer |  |
-| `murl` | character |  |
-| `mth` | character |  |
-| `ldur` | integer |  |
-| `lurl` | character |  |
-| `lth` | character |  |
-| `vtt` | character |  |
-| `scc` | character |  |
-| `srt` | character |  |
 
 ### Returns — `nba_stats_videostatus` / `nbaStatsVideostatus`
 

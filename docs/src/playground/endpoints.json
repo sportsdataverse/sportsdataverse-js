@@ -5403,8 +5403,7 @@
           "default": "true"
         }
       ],
-      "parser": "parse_mlb_statcast_leaderboard",
-      "returnsSchema": "native/mlb_statcast/leaderboard_catcher_stance"
+      "parser": "parse_mlb_statcast_leaderboard"
     },
     {
       "short": "leaderboard_basestealing_run_value",
@@ -5670,8 +5669,7 @@
           "queryKey": "at_bat_number"
         }
       ],
-      "parser": "parse_mlb_statcast_gamefeed",
-      "returnsSchema": "native/mlb_statcast/gamefeed"
+      "parser": "parse_mlb_statcast_gamefeed"
     },
     {
       "short": "schedule",
@@ -17903,8 +17901,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_all_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_database_updates",
@@ -18002,8 +17999,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/player_profile"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "player_team_targets",
@@ -18414,8 +18410,7 @@
         }
       ],
       "queryParams": [],
-      "parser": "parse_on3_rdb",
-      "returnsSchema": "native/on3/team_ranking_team_rankings"
+      "parser": "parse_on3_rdb"
     },
     {
       "short": "transfers_best_available",
@@ -19514,8 +19509,7 @@
           "queryKey": "direction"
         }
       ],
-      "parser": "parse_nwsl_standings",
-      "returnsSchema": "native/nwsl_api/standings"
+      "parser": "parse_nwsl_standings"
     },
     {
       "short": "team_stats",

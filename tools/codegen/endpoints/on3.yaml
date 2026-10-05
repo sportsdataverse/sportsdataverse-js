@@ -679,7 +679,6 @@ endpoints:
   - name: person_key
     required: true
     type: int
-  returns_schema: native/on3/player_all_rankings
   short: player_all_rankings
   summary: GET /rdb/v1/player/{personKey}/all-rankings
 - example_args:
@@ -749,7 +748,6 @@ endpoints:
   - name: person_key
     required: true
     type: int
-  returns_schema: native/on3/player_profile
   short: player_profile
   summary: GET /rdb/v1/player/{personKey}/profile
 - example_args:
@@ -1027,7 +1025,6 @@ endpoints:
   - name: year
     required: true
     type: int
-  returns_schema: native/on3/team_ranking_team_rankings
   short: team_ranking_team_rankings
   summary: GET /rdb/v1/team-ranking/{sport}-{year}/team-rankings
 - extra_params:

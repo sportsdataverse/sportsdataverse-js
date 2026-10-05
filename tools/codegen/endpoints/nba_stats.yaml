@@ -533,7 +533,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonteamroster
-  returns_schema: native/nba_stats/commonteamroster
   short: commonteamroster
   summary: GET /stats/commonteamroster
 - example_args:
@@ -1952,7 +1951,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayershotlocations
-  returns_schema: native/nba_stats/leaguedashplayershotlocations
   short: leaguedashplayershotlocations
   summary: GET /stats/leaguedashplayershotlocations
 - example_args:
@@ -2104,7 +2102,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayerstats
-  returns_schema: native/nba_stats/leaguedashplayerstats
   short: leaguedashplayerstats
   summary: GET /stats/leaguedashplayerstats
 - example_args:
@@ -2364,7 +2361,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashptstats
-  returns_schema: native/nba_stats/leaguedashptstats
   short: leaguedashptstats
   summary: GET /stats/leaguedashptstats
 - example_args:
@@ -3364,7 +3360,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguegamelog
-  returns_schema: native/nba_stats/leaguegamelog
   short: leaguegamelog
   summary: GET /stats/leaguegamelog
 - example_args:
@@ -3912,7 +3907,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguestandingsv3
-  returns_schema: native/nba_stats/leaguestandingsv3
   short: leaguestandingsv3
   summary: GET /stats/leaguestandingsv3
 - example_args:
@@ -4026,7 +4020,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playercareerstats
-  returns_schema: native/nba_stats/playercareerstats
   short: playercareerstats
   summary: GET /stats/playercareerstats
 - example_args:
@@ -6066,7 +6059,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/scoreboardv2
-  returns_schema: native/nba_stats/scoreboardv2
   short: scoreboardv2
   summary: GET /stats/scoreboardv2
 - example_args:
@@ -8199,7 +8191,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/videodetailsasset
-  returns_schema: native/nba_stats/videodetailsasset
   short: videodetailsasset
   summary: GET /stats/videodetailsasset
 - docstring:
@@ -8216,7 +8207,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/videoevents
-  returns_schema: native/nba_stats/videoevents
   short: videoevents
   summary: GET /stats/videoevents
 - docstring:
@@ -8233,7 +8223,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/videoeventsasset
-  returns_schema: native/nba_stats/videoeventsasset
   short: videoeventsasset
   summary: GET /stats/videoeventsasset
 - example_args:

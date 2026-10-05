@@ -772,27 +772,6 @@ Flat (non-ESPN) wrappers for the On3 public Recruit Database (RDB). Host: `https
 | `person` | character |  |
 | `nil_value` | integer |  |
 
-### Returns — `on3_player_all_rankings` / `on3PlayerAllRankings`
-
-| col_name | type | description |
-|---|---|---|
-| `type` | character |  |
-| `link` | character |  |
-| `ranking_key` | integer |  |
-| `ranking_type` | character |  |
-| `rating` | numeric |  |
-| `sport` | character |  |
-| `class_year` | integer |  |
-| `state_rank` | integer |  |
-| `state_abbr` | character |  |
-| `position_rank` | integer |  |
-| `position_abbr` | character |  |
-| `overall_rank` | integer |  |
-| `stars` | integer |  |
-| `five_star_plus` | logical |  |
-| `nearly_five_star_plus` | logical |  |
-| `change` | character |  |
-
 ### Returns — `on3_player_database_updates` / `on3PlayerDatabaseUpdates`
 
 | col_name | type | description |
@@ -875,58 +854,6 @@ Flat (non-ESPN) wrappers for the On3 public Recruit Database (RDB). Host: `https
 | `strength` | integer |  |
 | `five_star_plus` | logical |  |
 | `ranking_type` | character |  |
-
-### Returns — `on3_player_profile` / `on3PlayerProfile`
-
-| col_name | type | description |
-|---|---|---|
-| `key` | integer |  |
-| `class_year_recruitment_key` | character |  |
-| `recruitment_key` | integer |  |
-| `person_can_manage_recruitment` | character |  |
-| `ranking_key` | integer |  |
-| `person_sport_key` | integer |  |
-| `ranking` | character |  |
-| `oracle_key` | character |  |
-| `name` | character |  |
-| `slug` | character |  |
-| `high_school_name` | character |  |
-| `high_school` | character |  |
-| `hometown_name` | character |  |
-| `hometown_state` | character |  |
-| `current_state` | character |  |
-| `default_asset` | character |  |
-| `position_abbreviation` | character |  |
-| `primary_position` | character |  |
-| `class_rank` | character |  |
-| `height` | character |  |
-| `weight` | integer |  |
-| `class_year` | integer |  |
-| `degree` | character |  |
-| `age` | integer |  |
-| `default_sport` | character |  |
-| `sports` | character |  |
-| `description` | character |  |
-| `bio_pro_prospect` | character |  |
-| `bio_college_recruit` | character |  |
-| `organization_level` | character |  |
-| `high_school_org_key` | integer |  |
-| `prep_school_org_key` | character |  |
-| `junior_college_org_key` | character |  |
-| `college_org_key` | character |  |
-| `nil_value` | integer |  |
-| `athlete_verified` | logical |  |
-| `prospect_verified` | logical |  |
-| `player_status` | character |  |
-| `is_coach` | logical |  |
-| `is_athlete` | logical |  |
-| `visibility` | character |  |
-| `tier` | character |  |
-| `review_status` | character |  |
-| `jersey_number` | character |  |
-| `badge` | character |  |
-| `ncaa_id` | character |  |
-| `managed_by_user` | logical |  |
 
 ### Returns — `on3_player_team_targets` / `on3PlayerTeamTargets`
 
@@ -1241,34 +1168,6 @@ Flat (non-ESPN) wrappers for the On3 public Recruit Database (RDB). Host: `https
 | `head_coach` | character |  |
 | `director_personnel` | character |  |
 | `average_nil_value` | numeric |  |
-
-### Returns — `on3_team_ranking_team_rankings` / `on3TeamRankingTeamRankings`
-
-| col_name | type | description |
-|---|---|---|
-| `key` | integer |  |
-| `organization` | character |  |
-| `applied_total_rating` | numeric |  |
-| `applied_total_consensus_rating` | numeric |  |
-| `applied_average_rating` | numeric |  |
-| `applied_average_consensus_rating` | numeric |  |
-| `commits` | integer |  |
-| `applied_commits` | integer |  |
-| `deductions` | numeric |  |
-| `deductions_description` | character |  |
-| `five_stars` | integer |  |
-| `consensus_five_stars` | integer |  |
-| `four_stars` | integer |  |
-| `consensus_four_stars` | integer |  |
-| `three_stars` | integer |  |
-| `consensus_three_stars` | integer |  |
-| `overall_rank` | integer |  |
-| `overall_consensus_rank` | integer |  |
-| `dispay_consensus_score` | numeric |  |
-| `dispay_on3_score` | numeric |  |
-| `average_nil_value` | numeric |  |
-| `conference_rank` | integer |  |
-| `conference_consensus_rank` | integer |  |
 
 ### Returns — `on3_transfers_best_available` / `on3TransfersBestAvailable`
 

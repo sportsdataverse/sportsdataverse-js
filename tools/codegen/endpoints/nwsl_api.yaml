@@ -165,7 +165,6 @@ endpoints:
   - name: season_id
     required: true
     type: str
-  returns_schema: native/nwsl_api/standings
   short: standings
   summary: Overall standings table for a season (table/home/away splits).
 - example_args:

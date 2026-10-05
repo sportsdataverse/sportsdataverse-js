@@ -995,8 +995,7 @@ const BOXSCORESUMMARYV3_DEF: WrapperDef = {
       "default": "1022200034"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/boxscoresummaryv3"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -1116,8 +1115,7 @@ const BOXSCORETRADITIONALV3_DEF: WrapperDef = {
       "default": "0"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/boxscoretraditionalv3"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -1419,8 +1417,7 @@ const COMMONTEAMROSTER_DEF: WrapperDef = {
       "default": "1611661317"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/commonteamroster"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -2336,8 +2333,7 @@ const HOMEPAGEV2_DEF: WrapperDef = {
       "default": "Traditional"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/homepagev2"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -3579,8 +3575,7 @@ const LEAGUEDASHPLAYERSTATS_DEF: WrapperDef = {
       "default": ""
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/leaguedashplayerstats"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -5676,8 +5671,7 @@ const PLAYBYPLAYV2_DEF: WrapperDef = {
       "default": null
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/playbyplayv2"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -5804,8 +5798,7 @@ const PLAYERCAREERBYCOLLEGEROLLUP_DEF: WrapperDef = {
       "default": "Regular Season"
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/playercareerbycollegerollup"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**
@@ -8842,8 +8835,7 @@ const SCHEDULELEAGUEV2_DEF: WrapperDef = {
       "default": null
     }
   ],
-  "parser": "parse_nba_stats_result_sets",
-  "returnsSchema": "native/wnba_stats/scheduleleaguev2"
+  "parser": "parse_nba_stats_result_sets"
 };
 
 /**

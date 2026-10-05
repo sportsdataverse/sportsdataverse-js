@@ -488,7 +488,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoresummaryv3
-  returns_schema: native/wnba_stats/boxscoresummaryv3
   short: boxscoresummaryv3
   summary: GET /stats/boxscoresummaryv3
 - example_args: {}
@@ -550,7 +549,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/boxscoretraditionalv3
-  returns_schema: native/wnba_stats/boxscoretraditionalv3
   short: boxscoretraditionalv3
   summary: GET /stats/boxscoretraditionalv3
 - example_args: {}
@@ -688,7 +686,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/commonteamroster
-  returns_schema: native/wnba_stats/commonteamroster
   short: commonteamroster
   summary: GET /stats/commonteamroster
 - example_args:
@@ -1169,7 +1166,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/homepagev2
-  returns_schema: native/wnba_stats/homepagev2
   short: homepagev2
   summary: GET /stats/homepagev2
 - example_args: {}
@@ -1935,7 +1931,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/leaguedashplayerstats
-  returns_schema: native/wnba_stats/leaguedashplayerstats
   short: leaguedashplayerstats
   summary: GET /stats/leaguedashplayerstats
 - example_args:
@@ -3190,7 +3185,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playbyplayv2
-  returns_schema: native/wnba_stats/playbyplayv2
   short: playbyplayv2
   summary: GET /stats/playbyplayv2
 - example_args: {}
@@ -3244,7 +3238,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/playercareerbycollegerollup
-  returns_schema: native/wnba_stats/playercareerbycollegerollup
   short: playercareerbycollegerollup
   summary: GET /stats/playercareerbycollegerollup
 - example_args:
@@ -5048,7 +5041,6 @@ endpoints:
     type: str
   parser: parse_nba_stats_result_sets
   path: /stats/scheduleleaguev2
-  returns_schema: native/wnba_stats/scheduleleaguev2
   short: scheduleleaguev2
   summary: GET /stats/scheduleleaguev2
 - example_args:
