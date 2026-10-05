@@ -20,7 +20,15 @@ import {
 import { compressors } from "hyparquet-compressors";
 import { DEFAULT_RETRY_STATUSES, registerFamilyDefaults } from "./config.js";
 import { NoDataError, SdvError, SeasonNotFoundError } from "./errors.js";
-import { bigintWarning, idsToStrings, INT64_WARNING_CODE, isIdColumn, rowCells, type Cells } from "./int64.js";
+import {
+  bigintWarning,
+  idsToStrings,
+  INT64_WARNING_CODE,
+  isIdColumn,
+  notIntegerIdWarning,
+  rowCells,
+  type Cells,
+} from "./int64.js";
 import { request } from "./request.js";
 
 /**
@@ -531,22 +539,26 @@ function castIdColumn(c: Cells): void {
 }
 
 /**
- * INT64 policy for one column. hyparquet decodes INT64 as BigInt, so a bigint
- * cell marks the column INT64. An id column (`isIdColumn`: `id`, `*_id`,
- * `*_ids`, `*_pk`, MLBAM ids) becomes exact decimal strings, every value,
- * whatever the magnitude (owner decision 2026-10-05; INT32 / DOUBLE id columns
- * hold no bigint and stay numbers, as sdv-py's Int32 / Float64). Any other
- * column: plain `number` if every value is a safe integer, else left BigInt
- * (exact) with ONE warning per (loader, column) per process. Nested lists /
- * structs included.
+ * The integer policy for one column (owner decision 2026-10-05 12:55). An id
+ * column (`isIdColumn`: `id`, `*_id`, `*_ids`, `*_pk`, MLBAM ids) of integers
+ * becomes exact decimal strings, every value, whatever it was stored as (INT32,
+ * INT64 -> hyparquet bigint, or a DOUBLE holding integers: `39` -> `"39"`) and
+ * whatever the magnitude, so the column has one type in every season and joins
+ * across releases. An id column that is not exact integers (a fraction, a DOUBLE
+ * past 2^53, ...) is NOT stringified (that would be a wrong id): it gets ONE
+ * warning per (loader, column) per process and falls through to the non-id
+ * policy. Any other column: plain `number` if every bigint is a safe integer, else
+ * left BigInt (exact) with ONE warning per (loader, column) per process. Nested
+ * lists / structs included.
  *
- * The loaders run it only on columns some season stores as INT64 (`Asset.int64`),
- * not on every cell of every column: CFB pbp 2024 has 153 INT64 columns of 506.
+ * The loaders run it only on the id columns and the columns some season stores as
+ * INT64 (`Asset.int64`), not on every cell of every column.
  */
 function int64Column(label: string, col: string, c: Cells): void {
   if (isIdColumn(col)) {
-    idsToStrings(c, true);
-    return;
+    if (idsToStrings(c) !== "not-integers") return;
+    const message = notIntegerIdWarning(label, col);
+    if (message !== undefined) _warn.emit(message, INT64_WARNING_CODE);
   }
   let sawBigint = false;
   let safe = true;
@@ -664,12 +676,14 @@ async function load(
     _warn.emit(`${def.fn}: no data for season(s) ${missing.join(", ")} (skipped)`);
   }
 
-  // The INT64 policy runs on the columns some season stores as INT64 (plus the
-  // id_int64 ones), not on every cell of every column.
+  // The integer policy runs on every id column (any width: INT32, INT64, DOUBLE)
+  // and on the columns some season stores as INT64 (plus the id_int64 ones), not
+  // on every cell of every column.
+  const policy = (col: string): boolean => int64.has(col) || isIdColumn(col);
   if (format === "columns") {
     const out = concatColumns(def.fn, colFrames, opts.columns);
     for (const [name, values] of Object.entries(out)) {
-      if (!int64.has(name)) continue;
+      if (!policy(name)) continue;
       if (def.idInt64?.includes(name)) castIdColumn(arrayColumn(values));
       int64Column(def.fn, name, arrayColumn(values));
     }
@@ -678,7 +692,7 @@ async function load(
   const out = concatRows(def.fn, rowFrames, opts.columns);
   if (out.length) {
     for (const col of def.idInt64 ?? []) if (col in out[0]) castIdInt64(out, col);
-    for (const col of Object.keys(out[0])) if (int64.has(col)) int64Column(def.fn, col, rowCells(out, col));
+    for (const col of Object.keys(out[0])) if (policy(col)) int64Column(def.fn, col, rowCells(out, col));
   }
   return out;
 }

@@ -469,25 +469,23 @@ function rowCells(rows, col) {
   };
 }
 var exactInt = (v) => typeof v === "bigint" || typeof v === "number" && Number.isSafeInteger(v);
-function idsToStrings(c, requireBigint = false) {
-  let ints = false;
-  let big = false;
+function idsToStrings(c) {
+  let convert = false;
   const ok = (v) => {
     if (v === null || v === void 0 || typeof v === "string") return true;
     if (Array.isArray(v)) return v.every(ok);
+    if (typeof v === "number" && Number.isNaN(v)) return convert = true;
     if (!exactInt(v)) return false;
-    ints = true;
-    if (typeof v === "bigint") big = true;
-    return true;
+    return convert = true;
   };
-  for (let i = 0; i < c.n; i++) if (!ok(c.get(i))) return false;
-  if (!ints || requireBigint && !big) return false;
-  const str = (v) => Array.isArray(v) ? v.map(str) : typeof v === "bigint" || typeof v === "number" ? String(v) : v;
+  for (let i = 0; i < c.n; i++) if (!ok(c.get(i))) return "not-integers";
+  if (!convert) return "unchanged";
+  const str = (v) => Array.isArray(v) ? v.map(str) : typeof v === "bigint" ? v.toString() : typeof v === "number" ? Number.isNaN(v) ? null : String(v) : v;
   for (let i = 0; i < c.n; i++) {
     const v = c.get(i);
     if (v !== null && v !== void 0 && typeof v !== "string") c.set(i, str(v));
   }
-  return true;
+  return "strings";
 }
 function idColumnsToStrings(rows) {
   const cols = /* @__PURE__ */ new Set();
@@ -496,11 +494,16 @@ function idColumnsToStrings(rows) {
   return rows;
 }
 var warned = /* @__PURE__ */ new Set();
-function bigintWarning(surface, column) {
-  const key = `${surface}\0${column}`;
+var once = (key, message) => {
   if (warned.has(key)) return void 0;
   warned.add(key);
-  return `${surface}: column "${column}" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt`;
+  return message;
+};
+function bigintWarning(surface, column) {
+  return once(
+    `bigint\0${surface}\0${column}`,
+    `${surface}: column "${column}" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt`
+  );
 }
 function warnBigint(surface, column) {
   const message = bigintWarning(surface, column);

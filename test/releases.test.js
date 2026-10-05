@@ -547,6 +547,46 @@ describe('release loaders', () => {
       rows[0].should.eql({ ids: [1, 2], s: { a: 3 }, play_ids: ['401628579101849903', '2'] });
     });
 
+    // Owner decision 12:55: every id column of integers is decimal strings whatever its
+    // width, so the same id joins across releases (an INT32 game_id in one, INT64 in another).
+    it('real data, any width: INT32 (ftn_charting), INT64 (cfb_team_portal) and DOUBLE (pbp_participation) ids are decimal strings', async () => {
+      use(releasesTransport((u) => (u.includes('ftn') ? 'ftn_charting_2022_head100.parquet' : u.includes('pbp_participation') ? 'pbp_participation_2025_head20.parquet' : 'cfb_team_portal_2024.parquet')));
+      const ftn = await sdv.nfl.loadNflFtnCharting({ seasons: 2022, columns: ['ftn_game_id', 'ftn_play_id', 'nflverse_play_id', 'week'] });
+      ftn.every((r) => /^\d+$/.test(r.ftn_game_id) && /^\d+$/.test(r.ftn_play_id) && /^\d+$/.test(r.nflverse_play_id)).should.be.true(); // INT32
+      (typeof ftn[0].week).should.equal('number'); // a non-id INT32 column stays a number
+      const part = await sdv.nfl.loadNflPbpParticipation({ seasons: 2025, columns: ['nflverse_game_id', 'play_id', 'defenders_in_box'] });
+      part.slice(0, 5).map((r) => r.play_id).should.eql(['40', '71', '112', '141', '166']); // DOUBLE 40.0 -> "40", never "40.0"
+      (typeof part[0].defenders_in_box).should.equal('number');
+      const portal = await sdv.cfb.loadCfbTeamPortal({ seasons: 2024, columns: ['team_id'] });
+      portal.every((r) => typeof r.team_id === 'string').should.be.true(); // INT64
+      const cols = await sdv.nfl.loadNflPbpParticipation({ seasons: 2025, format: 'columns', columns: ['play_id'] });
+      cols.play_id.should.eql(part.map((r) => r.play_id));
+      warnings.should.eql([]);
+    });
+
+    it('an id column that is not exact integers is never stringified: one SDV_INT64 warning, then the non-id policy (no silent BigInt)', () => {
+      _int64Warned.clear();
+      const codes = [];
+      _warn.emit = (m, code) => {
+        warnings.push(m);
+        codes.push(code);
+      };
+      for (let call = 0; call < 2; call++) {
+        const rows = [{ play_id: 1.5 }, { play_id: 2n }, { play_id: null }];
+        applyInt64Policy(rows, 'load_x');
+        rows.map((r) => r.play_id).should.eql([1.5, 2, null]); // the safe bigint becomes a number, announced
+        const big = [{ drive_id: 0.5 }, { drive_id: 2n ** 60n }];
+        applyInt64Policy(big, 'load_x');
+        big[1].drive_id.should.equal(2n ** 60n); // exact, with the BigInt warning
+      }
+      warnings.should.eql([
+        'load_x: id column "play_id" holds values that are not exact integers (a fraction, a number beyond Number.MAX_SAFE_INTEGER, a boolean or an object); left as read, not decimal strings',
+        'load_x: id column "drive_id" holds values that are not exact integers (a fraction, a number beyond Number.MAX_SAFE_INTEGER, a boolean or an object); left as read, not decimal strings',
+        'load_x: column "drive_id" holds integers beyond Number.MAX_SAFE_INTEGER; left as BigInt',
+      ]); // two calls, each warning once
+      codes.should.eql(['SDV_INT64', 'SDV_INT64', 'SDV_INT64']);
+    });
+
     it('id_int64 (sdv-py _cast_ids_int64): canonical integer strings convert, anything else is left alone', () => {
       const ok = [{ id: '2306' }, { id: null }, { id: '-7' }];
       castIdInt64(ok, 'id');

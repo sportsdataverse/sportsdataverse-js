@@ -3,6 +3,7 @@ import {
   _int64Warned,
   bigintWarning,
   idColumnsToStrings,
+  notIntegerIdWarning,
   idsToStrings,
   INT64_WARNING_CODE,
   isIdColumn,
@@ -34,29 +35,27 @@ describe('INT64 id rule (src/core/int64.ts)', () => {
       { id: -0 },
       { other: 1 }, // a row without the column stays without it
     ];
-    idsToStrings(rowCells(rows, 'id')).should.be.true();
+    idsToStrings(rowCells(rows, 'id')).should.equal('strings');
     rows.map((r) => r.id).should.eql(['401628579101849903', '332830097002', '7', null, '0', undefined]);
     ('id' in rows[5]).should.be.false();
     const lists = [{ ids: [1n, 2] }, { ids: [] }];
-    idsToStrings(rowCells(lists, 'ids')).should.be.true();
+    idsToStrings(rowCells(lists, 'ids')).should.equal('strings');
     lists.should.eql([{ ids: ['1', '2'] }, { ids: [] }]);
+    idsToStrings(rowCells([{ id: 'a' }, { id: null }], 'id')).should.equal('unchanged');
   });
 
-  it('leaves a column that is not exact integers as read (fraction, boolean, object, number past 2^53)', () => {
-    for (const bad of [1.5, true, { a: 1 }, 2 ** 60, Number.NaN]) {
+  it('any width: INT32 numbers, INT64 bigints and DOUBLE integers alike ("123", never "123.0"); NaN is missing', () => {
+    const mixed = [{ game_id: 401585607 }, { game_id: 401628579n }, { game_id: 39.0 }, { game_id: Number.NaN }];
+    idsToStrings(rowCells(mixed, 'game_id')).should.equal('strings');
+    mixed.map((r) => r.game_id).should.eql(['401585607', '401628579', '39', null]);
+  });
+
+  it('leaves a column that is not exact integers as read (fraction, boolean, object, a double past 2^53)', () => {
+    for (const bad of [1.5, true, { a: 1 }, 2 ** 60, Infinity]) {
       const rows = [{ id: 1 }, { id: bad }];
-      idsToStrings(rowCells(rows, 'id')).should.be.false(String(bad));
+      idsToStrings(rowCells(rows, 'id')).should.equal('not-integers', String(bad));
       rows[0].id.should.equal(1);
     }
-  });
-
-  it('requireBigint: only a column holding a bigint (an INT64 parquet column) converts', () => {
-    const int32 = [{ game_id: 401585607 }];
-    idsToStrings(rowCells(int32, 'game_id'), true).should.be.false();
-    int32[0].game_id.should.equal(401585607);
-    const mixed = [{ game_id: 1 }, { game_id: 2n }]; // INT32 season + INT64 season
-    idsToStrings(rowCells(mixed, 'game_id'), true).should.be.true();
-    mixed.map((r) => r.game_id).should.eql(['1', '2']);
   });
 
   it('idColumnsToStrings: every id column of a parser frame, nothing else', () => {
@@ -76,6 +75,8 @@ describe('INT64 BigInt warning dedupe', () => {
     should(bigintWarning('load_x', 'games')).be.undefined();
     bigintWarning('load_x', 'plays').should.be.a.String(); // another column
     bigintWarning('load_y', 'games').should.be.a.String(); // another surface
+    notIntegerIdWarning('load_x', 'games').should.match(/id column "games" holds values that are not exact integers/);
+    should(notIntegerIdWarning('load_x', 'games')).be.undefined();
   });
 
   it('warnBigint emits a process warning with its own code, once', async () => {

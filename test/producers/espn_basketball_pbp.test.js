@@ -35,9 +35,10 @@ function decode(v) {
   return v;
 }
 
-/** Does a non-null JS value of column `col` have the JS shape of a polars dtype? (An Int64 id is a decimal string: the v4 id rule.) */
+/** Does a non-null JS value of column `col` have the JS shape of a polars dtype? (An integer id, any width, is a decimal string: the v4 id rule.) */
 function dtypeOk(v, dtype, col) {
-  if (dtype === 'Int64') return isIdColumn(col) ? typeof v === 'string' : Number.isInteger(v) || typeof v === 'bigint';
+  if (/^U?Int\d+$/.test(dtype) && isIdColumn(col)) return typeof v === 'string' && /^-?\d+$/.test(v);
+  if (dtype === 'Int64') return Number.isInteger(v) || typeof v === 'bigint';
   if (/^U?Int\d+$/.test(dtype)) return Number.isInteger(v);
   if (dtype === 'Float32') return typeof v === 'number' && (Number.isNaN(v) || Math.fround(v) === v);
   if (dtype === 'Float64') return typeof v === 'number';
@@ -48,13 +49,14 @@ function dtypeOk(v, dtype, col) {
 }
 
 /**
- * The INT64 policy applied to py's column: an id column is exact decimal strings (the v4 id
- * rule, every era); any other column all BigInt when a value is beyond 2^53, else numbers.
+ * py's integer column as JS returns it: an id column (any width: the Int64 play `id`, the
+ * Int32 `game_id`) is exact decimal strings (the v4 id rule, every era); any other Int64
+ * column all BigInt when a value is beyond 2^53, else numbers.
  */
-const int64Column = (vals, col) =>
+const intColumn = (vals, col, dtype) =>
   isIdColumn(col)
     ? vals.map((v) => (v === null ? null : String(v)))
-    : vals.some((v) => typeof v === 'bigint')
+    : dtype === 'Int64' && vals.some((v) => typeof v === 'bigint')
       ? vals.map((v) => (v === null ? null : BigInt(v)))
       : vals;
 
@@ -64,7 +66,7 @@ function expectPlays(rows, want, label) {
   rows.forEach((r, i) => Object.keys(r).should.eql(want.columns, `${label}[${i}]: column names/order`));
   want.columns.forEach((c, k) => {
     let vals = want.rows.map((r) => decode(r[k]));
-    if (want.dtypes[k] === 'Int64') vals = int64Column(vals, c);
+    if (/^U?Int\d+$/.test(want.dtypes[k])) vals = intColumn(vals, c, want.dtypes[k]);
     const bad = rows.find((r) => r[c] !== null && !dtypeOk(r[c], want.dtypes[k], c));
     assert.equal(bad?.[c], undefined, `${label}.${c}: JS value does not fit py dtype ${want.dtypes[k]}`);
     rows.forEach((r, i) => assert.deepStrictEqual(r[c], vals[i], `${label}[${i}].${c}`));
@@ -245,6 +247,7 @@ describe('ESPN basketball pbp league facts', () => {
     // 18-digit (beyond 2^53) college ids: exact strings, the value pyarrow / polars hold
     const mbb = run('mbb', 'summary_mbb.json.gz');
     ids(mbb)[0].should.equal('401638645101799901');
+    mbb.plays.every((r) => r.game_id === '401638645').should.be.true(); // the Int32 game_id too (any width)
     ids(mbb).every((x) => /^\d{18}$/.test(x)).should.be.true();
     timeoutIds(mbb).length.should.be.above(0);
     timeoutIds(mbb).every((x) => typeof x === 'string').should.be.true();
