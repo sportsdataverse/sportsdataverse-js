@@ -18,19 +18,7 @@
 // `parse_mlb_statcast_gamefeed` consumes the JSON object, the HTML-leaderboard
 // parser consumes HTML text).
 
-import axios, { type AxiosRequestConfig } from "axios";
-
-const client = axios.create({
-  timeout: 30000,
-  headers: {
-    "User-Agent":
-      "Mozilla/5.0 (compatible; sportsdataverse-js/3.x; +https://js.sportsdataverse.org/)",
-  },
-  // Always hand back the raw body string — we content-type-branch ourselves so
-  // CSV/HTML payloads aren't silently coerced or dropped by axios.
-  responseType: "text",
-  transformResponse: [(data) => data],
-});
+import { requestResponse } from "./request.js";
 
 /**
  * GET a Baseball Savant URL and return JSON (object) or raw text (string).
@@ -38,28 +26,30 @@ const client = axios.create({
  * Content-type drives the shape: `application/json` is parsed to an object;
  * anything else (`text/csv`, `application/download` for the search export,
  * `text/html` for the embedded-JSON leaderboards) is returned as the raw
- * response text. Returns `{}` when the request yields no usable response (so
- * JSON consumers can chain without a null-check), and `""` only when a body is
+ * response text. Returns `{}` for an empty body, and `""` only when a body is
  * present but unreadable.
  *
  * @param url    Fully-qualified Savant endpoint URL.
- * @param config Axios request config (e.g. `{ params }`); `params` are passed
- *               through verbatim (the caller drops `undefined`/`null`).
+ * @param config `{ params, headers }`; `params` are passed through verbatim
+ *               (the caller drops `undefined`/`null`).
  * @returns Parsed JSON object for JSON responses, raw `string` for CSV/HTML.
+ * @throws NoDataError on 404; AssetFetchError on any other failed fetch.
  */
 export async function statcastGet(
   url: string,
-  config?: AxiosRequestConfig
+  config: { params?: Record<string, unknown>; headers?: Record<string, string> } = {}
 ): Promise<any> {
-  let res;
-  try {
-    res = await client.get(url, config);
-  } catch {
-    // Transport failure / non-2xx — give JSON consumers an empty object.
-    return {};
-  }
-  if (res == null || res.data == null) return {};
-  const ctype = String(res.headers?.["content-type"] ?? "").toLowerCase();
+  // Raw body text — we content-type-branch ourselves so CSV/HTML payloads
+  // aren't silently coerced.
+  const res = await requestResponse("mlb_statcast", {
+    method: "GET",
+    url,
+    query: config.params,
+    headers: config.headers,
+    responseType: "text",
+  });
+  if (res.data == null) return {};
+  const ctype = String(res.headers["content-type"] ?? "").toLowerCase();
   const body = res.data;
   if (ctype.includes("json")) {
     if (typeof body !== "string") return body; // already-parsed object

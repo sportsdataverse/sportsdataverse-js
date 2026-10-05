@@ -1,37 +1,28 @@
 import { get } from "../core/client.js";
 import { resolveFlat } from "../core/flat.js";
 import { toCamel } from "../core/espn.js";
-import { nflHeadersGen } from "../core/nfl_auth.js";
+// Side-effect import: registers the `nfl_api` bearer-token auth provider
+// (registerFamilyDefaults). Auth for every family is applied inside `request()`
+// from the provider registered / configured for the wrapper's `api` stem.
+import "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
 import { torvikGet } from "../core/torvik_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
-/**
- * Auth-header providers for flat-API families that require a bearer token,
- * keyed by the `api` stem. A wrapper marked `auth: true` resolves its request
- * headers through the provider for its `api` (unless the caller supplies
- * `params.headers`). Family-agnostic by design — only `nfl_api` plugs in today,
- * but future authenticated families add one entry here.
- */
-const AUTH_HEADER_PROVIDERS: Record<
-  string,
-  () => Promise<Record<string, string>>
-> = {
-  nfl_api: nflHeadersGen,
-};
-
 /** A flat-API getter: same shape as `core/client.ts` `get`. */
-type GetterFn = (url: string, config?: { params?: any; headers?: any }) => Promise<any>;
+type GetterFn = (
+  url: string,
+  config: { params?: any; headers?: any; family: string }
+) => Promise<any>;
 
 /**
  * Per-family fetch overrides, keyed by the `api` stem. A family whose responses
  * aren't plain JSON (e.g. Baseball Savant's CSV/HTML/JSON mix) registers a
- * content-type-aware getter here; everything else uses the shared no-auth `get`.
- * Family-agnostic by design — only `mlb_statcast` plugs in today. A family can
- * compose this with `auth: true` (the resolved headers are still threaded into
- * the getter's config), though only `mlb_statcast` needs an override so far.
+ * content-type-aware getter here; everything else uses the shared `get`. Every
+ * getter fetches through `request()` under its family stem, so the configured
+ * transport, auth, retry and error vocabulary apply to overrides too.
  */
 const GETTER_OVERRIDES: Record<string, GetterFn> = {
   mlb_statcast: statcastGet,
@@ -49,10 +40,10 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
 /**
  * Make one flat-API call (the flat analogue of `callWrapper`): pick the family
  * getter (content-type / JSONP / UA overrides), resolve the URL + query from the
- * def, thread an auth-bearer header when `def.auth` (caller-supplied or minted),
- * fetch, and route through the parser only when `{ parsed: true }`. Shared by
- * `makeFlatModule` AND the generated written flat modules
- * (`src/generated/flat/<api>.ts`), so both resolve identically.
+ * def, fetch through `request()` (which applies the family's auth provider —
+ * caller-supplied `params.headers` win), and route through the parser only when
+ * `{ parsed: true }`. Shared by `makeFlatModule` AND the generated written flat
+ * modules (`src/generated/flat/<api>.ts`), so both resolve identically.
  */
 export async function callFlat(
   def: WrapperDef,
@@ -60,14 +51,8 @@ export async function callFlat(
 ): Promise<any> {
   const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
   const { url, query } = resolveFlat(def, params);
-  let headers: Record<string, string> | undefined;
-  if (def.auth) {
-    const provider = def.api ? AUTH_HEADER_PROVIDERS[def.api] : undefined;
-    headers =
-      (params.headers as Record<string, string> | undefined) ??
-      (provider ? await provider() : undefined);
-  }
-  const raw = await getter(url, { params: query, headers });
+  // Flat defs always carry their `api` stem (codegen); get() guards it at runtime.
+  const raw = await getter(url, { params: query, headers: params.headers, family: def.api! });
   const parser = params.parsed ? parserFor(def.parser) : undefined;
   return parser ? parser(raw) : raw;
 }

@@ -29,6 +29,48 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 - `hockeytech_seasons` parsed rows gain `season_yr` and `game_type_label`; `hockeytech_schedule` now defaults to the full-history window (`numberofdaysback/ahead/limit` = 10000, as sdv-py).
 - Season ids: `hockeytech_schedule` / `hockeytech_playoff_bracket` take a raw `season_id` (py accepts an end-year `season=`). Resolve first with `hockeytech_resolve_season_id(league, { season })`; brackets need `gameType: 'playoffs'`. The views that sdv-py sends `league_id` on (schedule/scorebar, standings, transactions, brackets) now send the league's registry `leagueId` (overridable via `league_id`).
 
+### Changed (breaking) — error vocabulary, pluggable transport + auth
+
+Every wrapper (ESPN and flat-API) now fetches through one runtime core
+(`src/core/request.ts`): auth provider → transport → retry → classification.
+
+- **BREAKING: wrapper failures raise `NoDataError` / `AssetFetchError` instead of
+  raw axios errors.** `NoDataError` = the fetch worked and there is nothing there
+  (HTTP 404, or an ESPN 200 body `{ code: 404 }`, which used to be returned as
+  data). `AssetFetchError` = the fetch failed (403, 429, 5xx, network, retries
+  exhausted; carries `status`, `url`, `cause`). They are siblings under `SdvError`;
+  `NoESPNDataError` aliases `NoDataError`; `SeasonNotFoundError` and
+  `TransportUnavailableError` are new too.
+- **BREAKING: the Statcast, BartTorvik and HockeyTech getters no longer turn a
+  failed HTTP fetch** into `{}` / `""` — they throw like every other wrapper, so
+  a failed fetch can't be mistaken for an empty table. (Unchanged: HockeyTech
+  still returns `{}` for an unknown league or an unparseable 200 body.)
+- **Retries:** network errors and the family's retry statuses (default
+  `DEFAULT_RETRY_STATUSES` = 403 / 408 / 429 / 500 / 502 / 503 / 504, as
+  sdv-py) are retried with exponential backoff + jitter (0.5s doubling, capped
+  at 4s), honouring `Retry-After` (capped at 120s). The default budget is 3
+  retries, with at most 4 spent on statuses. 403 is retried because ESPN Core v2
+  answers 403 under load. Auth-gated families narrow the set with
+  `registerFamilyDefaults(family, { retryStatuses })`; `nfl_api` never retries a
+  403. A 401 refreshes credentials once.
+- **`configure({ transport, auth, retries, timeoutMs, userAgent })`** +
+  `getConfig()` / `resetConfig()`. Transports and auth are per family
+  (`site_v2`, `core_v2`, `mlb`, `nfl_api`, …) with an optional `default`
+  transport.
+- **Transports:** `axiosTransport` (default) and `createImpersonatingTransport()`
+  — browser TLS fingerprinting via the new **optional peer dependency
+  [`impit`](https://github.com/apify/impit)** (`npm install impit`).
+- **Auth helpers:** `bearerAuth`, `headerAuth`, `queryAuth`, `tokenAuth` (minted +
+  cached tokens), `sessionAuth` (login cookies / headers). NFL.com auth is now a
+  `tokenAuth` registered for `nfl_api` (same `NFL_ACCESS_TOKEN` /
+  `NFL_CLIENT_KEY` / `NFL_CLIENT_SECRET` behaviour).
+- **Fix:** a flat wrapper's `headers` argument is now forwarded for every family
+  whose getter takes headers. It was dropped for non-`auth` families such as
+  247Sports and Yahoo. HockeyTech's getter builds its own headers and still
+  takes params only.
+- New guide: *Transport, auth & errors*. CI adds a `strict: true` type-check of
+  the runtime core (`npm run typecheck:strict`).
+
 ### Changed (breaking) — provider method naming
 
 Dropped internal vendor API codenames (and redundant `_api` stems) from the

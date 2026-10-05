@@ -11,8 +11,9 @@
 // injected, so this family registers `hockeytechGet` in GETTER_OVERRIDES
 // (src/leagues/_make_flat.ts).
 
-import axios, { type AxiosRequestConfig } from "axios";
 import { parse_hockeytech_seasons } from "../parsers/hockeytech.js";
+import { SdvError } from "./errors.js";
+import { request } from "./request.js";
 
 /** A HockeyTech league's web-client defaults (public, shipped in each site's JS). */
 export interface HockeytechLeague {
@@ -158,15 +159,9 @@ export function buildHockeytechUrl(params: Record<string, any>): string {
   return `${cfg.baseUrl}?${sp.toString()}`;
 }
 
-const client = axios.create({
-  timeout: 30000,
-  responseType: "text",
-  transformResponse: [(data) => data], // hand back raw text; we strip + parse ourselves
-});
-
 /**
- * GET a HockeyTech feed and return parsed JSON (object/array), or `{}` on
- * failure so JSON consumers can chain without a null-check.
+ * GET a HockeyTech feed and return parsed JSON (object/array), or `{}` for an
+ * unparseable body. A failed fetch throws (NoDataError / AssetFetchError).
  *
  * Signature matches `core/client.ts` `get` so it slots into the flat dispatch's
  * GETTER_OVERRIDES. The `url` arg (the gateway `/feed/index.php` the flat
@@ -176,7 +171,7 @@ const client = axios.create({
  */
 export async function hockeytechGet(
   _url: string,
-  config?: AxiosRequestConfig
+  config?: { params?: Record<string, unknown> }
 ): Promise<any> {
   const params = (config?.params ?? {}) as Record<string, any>;
   let target: string;
@@ -188,14 +183,17 @@ export async function hockeytechGet(
   const referer = params.league ? LEAGUE_REFERER[String(params.league)] : undefined;
   const headers: Record<string, string> = { "User-Agent": UA, Accept: "application/json" };
   if (referer) headers.Referer = referer;
-  let res;
-  try {
-    res = await client.get(target, { headers });
-  } catch {
-    return {};
-  }
-  if (res == null || res.data == null) return {};
-  const body = typeof res.data === "string" ? res.data : String(res.data);
+  // Split the key-bearing query off the URL so error messages never carry it.
+  const u = new URL(target);
+  const data = await request("hockeytech", {
+    method: "GET",
+    url: `${u.origin}${u.pathname}`,
+    query: Object.fromEntries(u.searchParams),
+    headers,
+    responseType: "text", // raw text; we strip + parse ourselves
+  });
+  if (data == null) return {};
+  const body = typeof data === "string" ? data : String(data);
   try {
     return JSON.parse(stripJsonp(body));
   } catch {
@@ -245,7 +243,14 @@ export async function resolveSeasonId(
   const { season, seasonId, gameType = "regular" } = opts;
   if (seasonId !== undefined && seasonId !== null) return Number(seasonId);
   if (season === undefined || season === null) throw new Error("Provide either season (end-year) or seasonId");
-  const hit = (await hockeytechSeasonId(league)).find(
+  let rows: Record<string, any>[] = [];
+  try {
+    rows = await hockeytechSeasonId(league);
+  } catch (err) {
+    // The feed now throws on a failed fetch; PWHL keeps its documented fallback table.
+    if (league !== "pwhl" || !(err instanceof SdvError)) throw err;
+  }
+  const hit = rows.find(
     (r) => Number(r.season_yr) === Number(season) && r.game_type_label === gameType
   );
   if (hit) return Number(hit.season_id);
