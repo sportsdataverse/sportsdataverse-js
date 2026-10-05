@@ -125,7 +125,7 @@ describe('ESPN basketball box league facts', () => {
   it('ids are decimal strings (py Int32; the v4 id rule), the values the release loaders return', () => {
     const ids = new Set();
     for (const r of [...P.helper_nba_player_box(nba), ...P.helper_nba_team_box(nba)]) {
-      for (const k of Object.keys(r).filter((c) => c.endsWith('_id'))) {
+      for (const k of Object.keys(r).filter(isIdColumn)) {
         r[k].should.be.a.String();
         r[k].should.match(/^\d+$/);
         ids.add(k);

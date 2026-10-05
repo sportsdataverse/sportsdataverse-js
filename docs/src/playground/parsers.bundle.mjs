@@ -455,8 +455,9 @@ var MLBAM_ID_COLUMNS = [
   "game_pk"
 ];
 var MLBAM = new Set(MLBAM_ID_COLUMNS);
+var ID_SEGMENT = /^id$|_(ids?|pk)$|_id\d+$|_id_(\d+|started|ended)$|^id_|[a-z0-9]Ids?$/;
 function isIdColumn(name) {
-  return name === "id" || /_(ids?|pk)$/.test(name) || MLBAM.has(name);
+  return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || MLBAM.has(name);
 }
 var INT64_WARNING_CODE = "SDV_INT64";
 function rowCells(rows, col) {
@@ -478,14 +479,15 @@ function idsToStrings(c) {
     if (!exactInt(v)) return false;
     return convert = true;
   };
-  for (let i = 0; i < c.n; i++) if (!ok(c.get(i))) return "not-integers";
-  if (!convert) return "unchanged";
-  const str = (v) => Array.isArray(v) ? v.map(str) : typeof v === "bigint" ? v.toString() : typeof v === "number" ? Number.isNaN(v) ? null : String(v) : v;
+  let integers = true;
+  for (let i = 0; i < c.n && integers; i++) integers = ok(c.get(i));
+  if (integers && !convert) return "unchanged";
+  const str = (v) => Array.isArray(v) ? v.map(str) : typeof v === "number" && Number.isNaN(v) ? null : integers && (typeof v === "bigint" || typeof v === "number") ? String(v) : v;
   for (let i = 0; i < c.n; i++) {
     const v = c.get(i);
     if (v !== null && v !== void 0 && typeof v !== "string") c.set(i, str(v));
   }
-  return "strings";
+  return integers ? "strings" : "not-integers";
 }
 function idColumnsToStrings(rows) {
   const cols = /* @__PURE__ */ new Set();

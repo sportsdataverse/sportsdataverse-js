@@ -23,7 +23,7 @@ const LOAD_WNBA_PBP: ReleaseLoaderDef = {"fn":"load_wnba_pbp","url":"https://git
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -45,7 +45,7 @@ const LOAD_WNBA_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_player_boxs
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -67,7 +67,7 @@ const LOAD_WNBA_SCHEDULE: ReleaseLoaderDef = {"fn":"load_wnba_schedule","url":"h
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -89,7 +89,7 @@ const LOAD_WNBA_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_team_boxscore
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2002.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -111,7 +111,7 @@ const LOAD_WNBA_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_draft","url":"https:/
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -133,7 +133,7 @@ const LOAD_WNBA_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_game_rosters",
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -155,7 +155,7 @@ const LOAD_WNBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_officials","url":
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -177,7 +177,7 @@ const LOAD_WNBA_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_player_
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -199,7 +199,7 @@ const LOAD_WNBA_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_rosters","url":"htt
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -221,7 +221,7 @@ const LOAD_WNBA_SHOTS: ReleaseLoaderDef = {"fn":"load_wnba_shots","url":"https:/
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -243,7 +243,7 @@ const LOAD_WNBA_STANDINGS: ReleaseLoaderDef = {"fn":"load_wnba_standings","url":
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -265,7 +265,7 @@ const LOAD_WNBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_team_seas
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2024.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -287,7 +287,7 @@ const LOAD_WNBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_player_cro
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -309,7 +309,7 @@ const LOAD_WNBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_schedule
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -331,7 +331,7 @@ const LOAD_WNBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_team_crosswa
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -353,7 +353,7 @@ const LOAD_WNBA_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_wnba_player_core","u
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -375,7 +375,7 @@ const LOAD_WNBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_wnba_player_impact
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -397,7 +397,7 @@ const LOAD_WNBA_STATS_COACHES: ReleaseLoaderDef = {"fn":"load_wnba_stats_coaches
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -419,7 +419,7 @@ const LOAD_WNBA_STATS_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_stats_draft","u
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2025.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -441,7 +441,7 @@ const LOAD_WNBA_STATS_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -463,7 +463,7 @@ const LOAD_WNBA_STATS_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_stats_offic
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -485,7 +485,7 @@ const LOAD_WNBA_STATS_PBP: ReleaseLoaderDef = {"fn":"load_wnba_stats_pbp","url":
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -507,7 +507,7 @@ const LOAD_WNBA_STATS_POSSESSIONS: ReleaseLoaderDef = {"fn":"load_wnba_stats_pos
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -529,7 +529,7 @@ const LOAD_WNBA_STATS_GAME_LINEUPS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -551,7 +551,7 @@ const LOAD_WNBA_STATS_PLAYER_BOXSCORES: ReleaseLoaderDef = {"fn":"load_wnba_stat
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -573,7 +573,7 @@ const LOAD_WNBA_STATS_PLAYER_GAME_LOGS: ReleaseLoaderDef = {"fn":"load_wnba_stat
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2025.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -595,7 +595,7 @@ const LOAD_WNBA_STATS_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_rosters
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -617,7 +617,7 @@ const LOAD_WNBA_STATS_SCHEDULES: ReleaseLoaderDef = {"fn":"load_wnba_stats_sched
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -639,7 +639,7 @@ const LOAD_WNBA_STATS_SHOTS: ReleaseLoaderDef = {"fn":"load_wnba_stats_shots","u
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -661,7 +661,7 @@ const LOAD_WNBA_STATS_TEAM_BOXSCORES: ReleaseLoaderDef = {"fn":"load_wnba_stats_
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 2026.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
@@ -685,7 +685,7 @@ const LOAD_WNBA_GROUPS: ReleaseLoaderDef = {"fn":"load_wnba_groups","url":"https
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroups();
@@ -708,7 +708,7 @@ const LOAD_WNBA_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wnba_group_seasons
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroupSeasons();
@@ -731,7 +731,7 @@ const LOAD_WNBA_GROUP_ALIASES: ReleaseLoaderDef = {"fn":"load_wnba_group_aliases
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaGroupAliases();
@@ -754,7 +754,7 @@ const LOAD_WNBA_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_wnba_team_gro
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
- * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `*_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
  * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).

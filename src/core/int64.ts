@@ -29,9 +29,27 @@ export const MLBAM_ID_COLUMNS: readonly string[] = [
 ];
 const MLBAM = new Set(MLBAM_ID_COLUMNS);
 
-/** A join-key column: `id`, `*_id`, `*_ids`, `*_pk`, or an MLBAM id column (`batter`, `on_1b`, ...). */
+/**
+ * One name segment that marks an id: `id`; `*_id`, `*_ids`, `*_pk`; a numbered id
+ * (`athlete_id_1`, `sack_player_id2`, `team_id_247`); `id_*` (`id_play`,
+ * `id_drive`); `*_id_started` / `*_id_ended` (`drive_play_id_started`); camelCase
+ * `…Id` / `…Ids` (`playerId`, `homeTeamId`). Lower-case `id` must stand alone or
+ * touch `_`, and camelCase needs the capital `I`, so words like valid, paid, void,
+ * idle, Idaho, width, event_idx never match. A word after an infix `_id_` is not an
+ * id unless listed: the release / parser columns `team_id_source` ("espn"),
+ * `*_sportec_id_overwrite` (a flag) and `player_id_list` (a joined list) are not.
+ */
+const ID_SEGMENT = /^id$|_(ids?|pk)$|_id\d+$|_id_(\d+|started|ended)$|^id_|[a-z0-9]Ids?$/;
+
+/**
+ * A join-key column: its last dotted segment marks an id (`id`, `*_id`, `*_ids`,
+ * `*_pk`, `athlete_id_1`, `id_play`, `drive_play_id_started`, `playerId`,
+ * `homeTeamId`; dotted `start.team.id`), or it is an MLBAM id column (`batter`,
+ * `on_1b`, `game_pk`, ...). The one id-name predicate: every surface and the
+ * parity harness use it.
+ */
 export function isIdColumn(name: string): boolean {
-  return name === "id" || /_(ids?|pk)$/.test(name) || MLBAM.has(name);
+  return ID_SEGMENT.test(name.slice(name.lastIndexOf(".") + 1)) || MLBAM.has(name);
 }
 
 /** Warning code of the integer-column warnings (`process.on('warning')` can filter on it). */
@@ -70,9 +88,10 @@ export type IdColumnResult = "strings" | "unchanged" | "not-integers";
  * string, an integer that converts exactly (a bigint, or a safe-integer number:
  * INT32, INT64, or a DOUBLE holding `123` -> `"123"`, never `"123.0"`; `-0` ->
  * `"0"`), a NaN (a missing DOUBLE -> `null`), or a list of those, every integer
- * becomes its decimal string. Otherwise the column is left as read and the result
- * is `"not-integers"`: a fraction, a boolean, an object, or a number past 2^53
- * (a double there is not an exact id, so a string of it would be a wrong id).
+ * becomes its decimal string. Otherwise the column is left as read (a NaN still
+ * becomes `null`) and the result is `"not-integers"`: a fraction, a boolean, an
+ * object, or a number past 2^53 (a double there is not an exact id, so a string
+ * of it would be a wrong id).
  */
 export function idsToStrings(c: Cells): IdColumnResult {
   let convert = false;
@@ -83,23 +102,23 @@ export function idsToStrings(c: Cells): IdColumnResult {
     if (!exactInt(v)) return false;
     return (convert = true);
   };
-  for (let i = 0; i < c.n; i++) if (!ok(c.get(i))) return "not-integers";
-  if (!convert) return "unchanged";
+  let integers = true;
+  for (let i = 0; i < c.n && integers; i++) integers = ok(c.get(i));
+  if (integers && !convert) return "unchanged";
+  // A NaN is a missing value either way; integers become strings only when every cell allows it.
   const str = (v: unknown): unknown =>
     Array.isArray(v)
       ? v.map(str)
-      : typeof v === "bigint"
-        ? v.toString()
-        : typeof v === "number"
-          ? Number.isNaN(v)
-            ? null
-            : String(v)
+      : typeof v === "number" && Number.isNaN(v)
+        ? null
+        : integers && (typeof v === "bigint" || typeof v === "number")
+          ? String(v)
           : v;
   for (let i = 0; i < c.n; i++) {
     const v = c.get(i);
     if (v !== null && v !== undefined && typeof v !== "string") c.set(i, str(v));
   }
-  return "strings";
+  return integers ? "strings" : "not-integers";
 }
 
 /**

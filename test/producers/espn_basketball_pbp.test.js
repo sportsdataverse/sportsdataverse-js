@@ -248,6 +248,12 @@ describe('ESPN basketball pbp league facts', () => {
     const mbb = run('mbb', 'summary_mbb.json.gz');
     ids(mbb)[0].should.equal('401638645101799901');
     mbb.plays.every((r) => r.game_id === '401638645').should.be.true(); // the Int32 game_id too (any width)
+    // homeTeamId / awayTeamId (Int32 on NBA / WNBA, py int on MBB / WBB): strings, every league
+    for (const out of [mbb, run('nba', 'summary_nba.json')]) {
+      out.plays.every((r) => typeof r.homeTeamId === 'string' && /^\d+$/.test(r.homeTeamId)).should.be.true();
+      out.plays.every((r) => typeof r.awayTeamId === 'string' && /^\d+$/.test(r.awayTeamId)).should.be.true();
+      Object.keys(out.timeouts).should.containEql(out.plays[0].homeTeamId); // joins the timeouts keys
+    }
     ids(mbb).every((x) => /^\d{18}$/.test(x)).should.be.true();
     timeoutIds(mbb).length.should.be.above(0);
     timeoutIds(mbb).every((x) => typeof x === 'string').should.be.true();

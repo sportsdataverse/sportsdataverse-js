@@ -17,13 +17,26 @@ import {
 // test/parsers/*); this pins the shared pieces.
 
 describe('INT64 id rule (src/core/int64.ts)', () => {
-  it('names an id: id, *_id, *_ids, *_pk, MLBAM id columns', () => {
-    for (const c of ['id', 'game_id', 'athlete_ids', 'game_pk', 'batter', 'pitcher', 'on_1b', 'on_3b', 'fielder_2', 'fielder_9']) {
-      isIdColumn(c).should.be.true(c);
-    }
-    for (const c of ['ids', 'idx', 'id_type', 'games', 'paid', 'fielder_1', 'fielder_10', 'on_4b', 'pk']) {
-      isIdColumn(c).should.be.false(c);
-    }
+  it('names an id: id, *_id, *_ids, *_pk, numbered, id_*, *_id_started, camelCase, dotted, MLBAM', () => {
+    const ids = [
+      'id', 'game_id', 'athlete_ids', 'game_pk', // the base forms
+      'athlete_id_1', 'athlete_id_3', 'sack_player_id2', 'team_id_247', 'details_team_id_2', // numbered
+      'id_play', 'id_drive', 'id_type', // id_<entity>
+      'drive_play_id_started', 'drive_play_id_ended',
+      'playerId', 'homeTeamId', 'awayTeamId', 'eventId', 'firstHalfKickoffTeamId', 'mediaId', 'teamIds', // camelCase
+      'start.team.id', 'end.pos_team.id', 'pointAfterAttempt.id', 'participants.0.athlete.id', 'end.team_id', // dotted
+      'batter', 'pitcher', 'on_1b', 'on_3b', 'fielder_2', 'fielder_9', // MLBAM
+    ];
+    for (const c of ids) isIdColumn(c).should.be.true(c);
+    // ordinary words and the real non-id columns the enumeration found (f-js6 report)
+    const words = [
+      'valid', 'paid', 'void', 'Idaho', 'idle', 'width', 'avoid', 'hybrid', 'kid', 'rapid', 'liquid', 'android',
+      'humid', 'squid', 'Ideal', 'identity', 'ident', 'idiom', 'guide', 'videos', 'ID', 'pkg', 'ids', 'idx', 'pk',
+      'games', 'event_idx', 'valid_games', 'valid_from', 'video_available', 'mid_pct', 'middle_8', 'team.uid',
+      'team_id_source', 'fields_competition_sportec_id_overwrite', 'parameters_player_id_list',
+      'html_body_table_id_ratings_table', 'fielder_1', 'fielder_10', 'on_4b',
+    ];
+    for (const c of words) isIdColumn(c).should.be.false(c);
   });
 
   it('integers -> exact decimal strings (bigint, safe number, lists); strings and nulls kept', () => {
@@ -56,6 +69,9 @@ describe('INT64 id rule (src/core/int64.ts)', () => {
       idsToStrings(rowCells(rows, 'id')).should.equal('not-integers', String(bad));
       rows[0].id.should.equal(1);
     }
+    const nan = [{ id: 1.5 }, { id: Number.NaN }, { id: 2 }];
+    idsToStrings(rowCells(nan, 'id')).should.equal('not-integers');
+    nan.map((r) => r.id).should.eql([1.5, null, 2]); // left as read, but a NaN is still a missing value
   });
 
   it('idColumnsToStrings: every id column of a parser frame, nothing else', () => {
