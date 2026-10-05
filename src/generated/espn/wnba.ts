@@ -1264,6 +1264,8 @@ const EVENT_OFFICIALS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/events/{event_id}/competitions/{cid}/officials`
  *
+ * Note: sdv-py's `espn_wnba_game_officials` is a hand-written function (its own params, a parsed frame); this is the generated raw ESPN wrapper for the same endpoint, so params and output differ.
+ *
  * @param params.event_id - path parameter.
  * @param params.cid - path parameter *(optional)*.
  * @param params.parsed - when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.

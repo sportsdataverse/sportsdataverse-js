@@ -770,6 +770,8 @@ WBB — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_event_officials` / `espnWbbEventOfficials`
 
+> **Note:** sdv-py's `espn_wbb_game_officials` is a hand-written function (its own params, a parsed frame); this is the generated raw ESPN wrapper for the same endpoint, so params and output differ.
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |

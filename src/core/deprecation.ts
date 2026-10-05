@@ -11,6 +11,9 @@ export interface DeprecatedAlias extends WrapperFn {
   readonly replacement: string;
 }
 
+/** `code` of the DeprecationWarning a pre-v4 name emits. */
+export const DEPRECATED_NAME_CODE = "SDV_DEPRECATED_NAME";
+
 const warned = new Set<string>();
 
 const toCamel = (s: string): string => s.replace(/_([a-z0-9])/g, (_m, c: string) => c.toUpperCase());
@@ -26,12 +29,14 @@ export function deprecatedAlias(target: WrapperFn, name: string, replacement: st
       process.emitWarning(
         `${name}() is deprecated: sportsdataverse v4 adopted sdv-py's names; call ${replacement}() instead. ` +
           "The old name will be removed in a future major release.",
-        "DeprecationWarning"
+        // A stable `code` so callers can filter: `w.code === "SDV_DEPRECATED_NAME"`.
+        { type: "DeprecationWarning", code: DEPRECATED_NAME_CODE }
       );
     }
     return target(params);
   };
   return Object.defineProperties(alias, {
+    name: { value: name }, // stack traces / fn.name show the name the caller used
     deprecatedAliasOf: { value: target },
     replacement: { value: replacement },
   }) as DeprecatedAlias;
