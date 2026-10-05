@@ -1,0 +1,60 @@
+{
+ "columns": [
+  "direction",
+  "attempts",
+  "yards",
+  "ypa",
+  "touchdowns",
+  "first_downs",
+  "explosive",
+  "yards_after_contact",
+  "yco_attempt",
+  "longest",
+  "avoided_tackles",
+  "fumbles"
+ ],
+ "rows": [
+  {
+   "direction": "JS-L",
+   "attempts": 3,
+   "yards": 10,
+   "ypa": 3.3,
+   "touchdowns": 0,
+   "first_downs": 1,
+   "explosive": 1,
+   "yards_after_contact": 9,
+   "yco_attempt": 3.0,
+   "longest": 11,
+   "avoided_tackles": 1,
+   "fumbles": 0
+  },
+  {
+   "direction": "LE",
+   "attempts": 41,
+   "yards": 151,
+   "ypa": 3.7,
+   "touchdowns": 2,
+   "first_downs": 7,
+   "explosive": 4,
+   "yards_after_contact": 126,
+   "yco_attempt": 3.07,
+   "longest": 14,
+   "avoided_tackles": 7,
+   "fumbles": 0
+  },
+  {
+   "direction": "LT",
+   "attempts": 23,
+   "yards": 76,
+   "ypa": 3.3,
+   "touchdowns": 0,
+   "first_downs": 4,
+   "explosive": 1,
+   "yards_after_contact": 47,
+   "yco_attempt": 2.04,
+   "longest": 12,
+   "avoided_tackles": 2,
+   "fumbles": 0
+  }
+ ]
+}

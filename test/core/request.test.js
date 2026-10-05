@@ -231,7 +231,9 @@ describe('core/request: retry + classification', () => {
     const t = fakeTransport(boom);
     configure({ transport: t });
     const err = await request('mlb', GET()).should.be.rejectedWith(AssetFetchError);
-    err.cause.should.equal(boom);
+    // the cause is a sanitized copy (safeCause), never the raw transport error
+    err.cause.should.not.equal(boom);
+    err.cause.message.should.equal('ECONNRESET');
     should(err.status).be.undefined();
     t.calls.length.should.equal(4);
   });

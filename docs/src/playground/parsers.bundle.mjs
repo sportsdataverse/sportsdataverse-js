@@ -451,6 +451,9 @@ function isPlainObject(v) {
 function snakeCase(key) {
   return key.replace(/\./g, "_").replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/[\s-]+/g, "_").replace(/__+/g, "_").replace(/^_+|_+$/g, "").toLowerCase();
 }
+function underscore(word) {
+  return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
+}
 function flattenRow(obj, prefix, out) {
   for (const [k, v] of Object.entries(obj)) {
     const key = prefix ? `${prefix}_${k}` : k;
@@ -530,10 +533,10 @@ function parse_mlb_team_roster(raw) {
 }
 function parse_mlb_standings(raw) {
   if (!isPlainObject2(raw)) return [];
-  const records = raw.records;
-  if (!Array.isArray(records) || records.length === 0) return [];
+  const records2 = raw.records;
+  if (!Array.isArray(records2) || records2.length === 0) return [];
   const rows = [];
-  for (const div of records) {
+  for (const div of records2) {
     if (!isPlainObject2(div)) continue;
     const base = {
       standings_type: div.standingsType,
@@ -886,11 +889,11 @@ function isPlainObject7(v) {
 }
 function parse_nfl_standings(raw) {
   if (!isPlainObject7(raw)) return [];
-  const records = [];
+  const records2 = [];
   for (const wk of raw.weeks ?? []) {
-    for (const s of wk?.standings ?? []) records.push(s);
+    for (const s of wk?.standings ?? []) records2.push(s);
   }
-  return normalize(records);
+  return normalize(records2);
 }
 function parse_nfl_rosters(raw) {
   return normalize(raw?.rosters ?? []);
@@ -931,7 +934,7 @@ function parse_nfl_weekly_game_details(raw) {
 
 // src/parsers/mlb_statcast.ts
 var import_papaparse = __toESM(require_papaparse_min(), 1);
-function underscore(word) {
+function underscore2(word) {
   return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").replace(/\./g, "_").toLowerCase();
 }
 function isPlainObject8(v) {
@@ -951,7 +954,7 @@ function flattenRow2(obj, prefix, out) {
 }
 function underscoreKeys(row) {
   const out = {};
-  for (const [k, v] of Object.entries(row)) out[underscore(String(k))] = v;
+  for (const [k, v] of Object.entries(row)) out[underscore2(String(k))] = v;
   return out;
 }
 function jsonRows(rows) {
@@ -2195,14 +2198,14 @@ function rowsToFrame(rows, opts = {}) {
   const kept = (rows ?? []).filter((r) => !(opts.dropNull && (r === null || r === void 0)));
   if (kept.length === 0) return [];
   if (!kept.some(isPlainObject17)) return kept.map((r) => ({ value: String(r) }));
-  const records = kept.map((r) => {
+  const records2 = kept.map((r) => {
     const pairs = [];
     flatten(isPlainObject17(r) ? r : { value: r }, "", pairs);
     return pairs;
   });
   const finalName = /* @__PURE__ */ new Map();
   const used = /* @__PURE__ */ new Map();
-  for (const pairs of records) {
+  for (const pairs of records2) {
     for (const [path] of pairs) {
       if (finalName.has(path)) continue;
       const base = pyUnderscore(path);
@@ -2212,7 +2215,7 @@ function rowsToFrame(rows, opts = {}) {
     }
   }
   const columns = [...finalName.values()];
-  return records.map((pairs) => {
+  return records2.map((pairs) => {
     const row = {};
     for (const c of columns) row[c] = null;
     for (const [path, v] of pairs) {
@@ -2237,17 +2240,349 @@ var MULTI_TABLE_SECTIONS = {
     default: "match_information",
     sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"]
   },
-  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] }
+  parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
+  // PFF (py's `report` / `career` / `table` arguments) and KenPom (one table per
+  // HTML id). The two dict-default parsers keep sdv-py's return shape.
+  parse_pff_report: {
+    default: null,
+    sections: null,
+    dynamic: "a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`)"
+  },
+  parse_pff_player_detail: { default: "weeks", sections: ["weeks", "career"] },
+  parse_pff_v2_table: { default: "rows", sections: ["rows", "teamTotals"] },
+  parse_kenpom_page: {
+    default: null,
+    sections: null,
+    dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"
+  }
 };
+function sectionError(parser, name, valid, dflt) {
+  return new Error(
+    `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(valid)}` + (dflt === null ? " (default: every table, as a dict)." : ` (default '${dflt}').`)
+  );
+}
 function pickSection(parser, tables, section) {
   const spec = MULTI_TABLE_SECTIONS[parser];
-  const name = section ?? spec.default;
-  if (!Object.prototype.hasOwnProperty.call(tables, name) || !spec.sections.includes(name)) {
-    throw new Error(
-      `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(spec.sections)} (default '${spec.default}').`
-    );
+  const name = section ?? spec.default ?? "";
+  const valid = spec.sections ?? Object.keys(tables);
+  if (!Object.prototype.hasOwnProperty.call(tables, name) || !valid.includes(name)) {
+    throw sectionError(parser, name, valid, spec.default);
   }
   return tables[name];
+}
+
+// src/parsers/pff_api.ts
+var MATRIX_KEYS = ["defenders", "receivers", "versus"];
+var META_KEYS = /* @__PURE__ */ new Set(["restricted"]);
+var V2_TABLES = { rows: "columns", teamTotals: "totalsColumns" };
+var ID_COLS = /* @__PURE__ */ new Set([
+  "player_id",
+  "franchise_id",
+  "league_id",
+  "season_id",
+  "game_id",
+  "away_franchise_id",
+  "home_franchise_id",
+  "player_franchise_id",
+  "coverage_player_id",
+  "defender_player_id",
+  "receiver_player_id",
+  "stadium_id",
+  "id"
+]);
+function envelope(raw) {
+  const out = {};
+  for (const [k, v] of Object.entries(raw)) if (!META_KEYS.has(k)) out[k] = v;
+  return out;
+}
+function pyJsonDumps(value) {
+  const str = (s) => JSON.stringify(s).replace(/[\u007f-￿]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, "0")}`);
+  const enc = (v) => {
+    if (v === null || v === void 0) return "null";
+    if (typeof v === "string") return str(v);
+    if (typeof v === "number") return Number.isFinite(v) ? String(v) : v > 0 ? "Infinity" : v < 0 ? "-Infinity" : "NaN";
+    if (typeof v === "boolean") return v ? "true" : "false";
+    if (Array.isArray(v)) return `[${v.map(enc).join(", ")}]`;
+    if (typeof v === "object") {
+      return `{${Object.keys(v).sort().map((k) => `${str(k)}: ${enc(v[k])}`).join(", ")}}`;
+    }
+    return str(String(v));
+  };
+  return enc(value);
+}
+function truthy(v) {
+  if (Array.isArray(v)) return v.length > 0;
+  if (isPlainObject(v)) return Object.keys(v).length > 0;
+  return Boolean(v);
+}
+function scalarize(value) {
+  return value !== null && typeof value === "object" ? pyJsonDumps(value) : value;
+}
+function rectangular(rows) {
+  const raw = [];
+  const seen = /* @__PURE__ */ new Set();
+  for (const r of rows) {
+    for (const k of Object.keys(r)) {
+      if (!seen.has(k)) {
+        seen.add(k);
+        raw.push(k);
+      }
+    }
+  }
+  const columns = raw.map(underscore);
+  const out = rows.map((r) => {
+    const o = {};
+    raw.forEach((k, i) => {
+      o[columns[i]] = r[k] === void 0 ? null : r[k];
+    });
+    return o;
+  });
+  return { columns, rows: out };
+}
+function toInt(v) {
+  if (v === null || v === void 0) return null;
+  if (typeof v === "boolean") return v ? 1 : 0;
+  if (typeof v === "number") return Number.isFinite(v) ? Math.trunc(v) : null;
+  if (typeof v === "string" && /^\s*[-+]?\d+\s*$/.test(v)) return Number(v);
+  return null;
+}
+function toFloat(v) {
+  if (v === null || v === void 0) return null;
+  if (typeof v === "boolean") return v ? 1 : 0;
+  if (typeof v === "number") return v;
+  if (typeof v === "string" && /^\s*[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?\s*$/.test(v)) return Number(v);
+  return null;
+}
+function toStr(v) {
+  return v === null || v === void 0 ? null : String(v);
+}
+function frame(rows) {
+  if (!Array.isArray(rows) || rows.length === 0) return [];
+  if (!isPlainObject(rows[0])) return rows.map((r) => ({ value: scalarize(r) }));
+  const norm = rows.map((row) => {
+    const o = {};
+    for (const [k, v] of Object.entries(isPlainObject(row) ? row : {})) o[k] = scalarize(v);
+    return o;
+  });
+  const { columns, rows: out } = rectangular(norm);
+  for (const c of columns) {
+    const isText = out.some((r) => typeof r[c] === "string");
+    if (ID_COLS.has(c) && !isText) for (const r of out) r[c] = toInt(r[c]);
+  }
+  if (columns.includes("jersey_number")) for (const r of out) r.jersey_number = toStr(r.jersey_number);
+  return out;
+}
+function isMatrix(v) {
+  return isPlainObject(v) && MATRIX_KEYS.every((k) => k in v);
+}
+function parse_pff_matrix(raw, report) {
+  let obj = {};
+  if (isPlainObject(raw) && Object.keys(raw).length) {
+    if (report !== void 0 && isPlainObject(raw[report])) {
+      obj = raw[report];
+    } else {
+      for (const v of Object.values(raw)) {
+        if (isMatrix(v)) {
+          obj = v;
+          break;
+        }
+      }
+    }
+  }
+  const out = {};
+  for (const name of MATRIX_KEYS) out[name] = frame(truthy(obj[name]) ? obj[name] : []);
+  return out;
+}
+var has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+function parse_pff_report(raw, section) {
+  const all = reportTables(raw);
+  if (section === void 0) return all;
+  let tables = {};
+  if (!Array.isArray(all)) tables = all;
+  else if (isPlainObject(raw)) {
+    const keys = Object.keys(envelope(raw));
+    if (keys.length === 1 && Array.isArray(raw[keys[0]])) tables = { [keys[0]]: all };
+  }
+  if (!Object.keys(tables).length) return [];
+  if (!has(tables, section)) {
+    throw sectionError("parse_pff_report", section, Object.keys(tables), MULTI_TABLE_SECTIONS.parse_pff_report.default);
+  }
+  return tables[section];
+}
+function reportTables(raw) {
+  if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
+  const env = envelope(raw);
+  const keys = Object.keys(env);
+  if (keys.length === 1) {
+    const val = env[keys[0]];
+    if (isMatrix(val)) return parse_pff_matrix(env);
+    if (Array.isArray(val)) return frame(val);
+    return [];
+  }
+  const out = {};
+  for (const [k, v] of Object.entries(env)) if (Array.isArray(v)) out[k] = frame(v);
+  return Object.keys(out).length ? out : [];
+}
+function fixedSection(parser, section) {
+  const spec = MULTI_TABLE_SECTIONS[parser];
+  const name = section ?? spec.default;
+  if (!spec.sections.includes(name)) throw sectionError(parser, name, spec.sections, spec.default);
+  return name;
+}
+function parse_pff_player_detail(raw, section) {
+  const career = fixedSection("parse_pff_player_detail", section) === "career";
+  if (!isPlainObject(raw) || !Object.keys(raw).length) return [];
+  const env = envelope(raw);
+  const keys = Object.keys(env);
+  const obj = keys.length === 1 && isPlainObject(env[keys[0]]) ? env[keys[0]] : env;
+  if (!isPlainObject(obj)) return [];
+  const subject = truthy(obj.subject) ? obj.subject : {};
+  let rows = career ? obj.seasons : obj.weeks;
+  if (!truthy(rows)) rows = truthy(obj.week_totals) ? obj.week_totals : truthy(obj.career) ? obj.career : [];
+  if (isPlainObject(rows)) rows = [rows];
+  const flat = [];
+  for (const row of Array.isArray(rows) ? rows : []) {
+    if (!isPlainObject(row)) continue;
+    const r = { ...row };
+    const game = r.game;
+    delete r.game;
+    if (isPlainObject(game)) for (const [gk, gv] of Object.entries(game)) r[`game_${gk}`] = gv;
+    for (const sk of ["player_id", "league_id", "season"]) if (!(sk in r)) r[sk] = subject[sk] ?? null;
+    flat.push(r);
+  }
+  return frame(flat);
+}
+function inferredKind(values) {
+  const kinds = /* @__PURE__ */ new Set();
+  for (const v of values) {
+    if (v === null || v === void 0) continue;
+    if (typeof v === "number") kinds.add(Number.isInteger(v) ? "int" : "float");
+    else if (typeof v === "boolean") kinds.add("bool");
+    else kinds.add("str");
+  }
+  if (kinds.size === 0) return "null";
+  if (kinds.size === 1) return [...kinds][0];
+  if ([...kinds].every((k) => k === "int" || k === "float")) return "float";
+  return "mixed";
+}
+function parse_pff_v2_table(raw, section) {
+  const table = fixedSection("parse_pff_v2_table", section);
+  const body = isPlainObject(raw) ? raw : {};
+  const declared = (body[V2_TABLES[table] ?? `${table}Columns`] || []).filter(
+    (c) => isPlainObject(c) && c.key
+  );
+  const schema = /* @__PURE__ */ new Map();
+  for (const c of declared) {
+    const name = underscore(String(c.key));
+    const type = ["integer", "number", "boolean", "string"].includes(String(c.type)) ? String(c.type) : "string";
+    schema.set(name, name === "id" || name.endsWith("_id") ? "integer" : type);
+  }
+  const rows = (body[table] || []).filter(isPlainObject);
+  if (!rows.length) return [];
+  const norm = rows.map((r) => {
+    const o = {};
+    for (const [k, v] of Object.entries(r)) o[k] = scalarize(v);
+    return o;
+  });
+  const { columns, rows: out } = rectangular(norm);
+  for (const [c, type] of schema) {
+    if (!columns.includes(c)) {
+      for (const r of out) r[c] = null;
+      continue;
+    }
+    const kind = inferredKind(out.map((r) => r[c]));
+    if (type === "integer") for (const r of out) r[c] = toInt(r[c]);
+    else if (type === "number") for (const r of out) r[c] = toFloat(r[c]);
+    else if (type === "boolean") {
+      if (kind !== "str" && kind !== "mixed") for (const r of out) r[c] = r[c] === null ? null : Boolean(r[c]);
+    } else if (kind !== "null") {
+      for (const r of out) r[c] = toStr(r[c]);
+    }
+  }
+  const order = [...schema.keys(), ...columns.filter((c) => !schema.has(c))];
+  return out.map((r) => {
+    const o = {};
+    for (const c of order) o[c] = r[c];
+    return o;
+  });
+}
+
+// src/parsers/nfl_pro.ts
+var NFL_PRO_COLLECTION_KEYS = [
+  "passers",
+  "rushers",
+  "receivers",
+  "defenders",
+  "offense",
+  "defense",
+  "players"
+];
+function isRecordList(value) {
+  return Array.isArray(value) && (value.length === 0 || value.some(isPlainObject));
+}
+var dicts = (values) => values.filter(isPlainObject);
+function records(payload) {
+  if (Array.isArray(payload)) return isRecordList(payload) ? dicts(payload) : [];
+  if (!isPlainObject(payload)) return [];
+  const body = payload;
+  for (const key of NFL_PRO_COLLECTION_KEYS) if (isRecordList(body[key])) return dicts(body[key]);
+  let best;
+  for (const v of Object.values(body)) if (isRecordList(v) && (!best || v.length > best.length)) best = v;
+  return best ? dicts(best) : [];
+}
+function flatten2(obj, prefix, out) {
+  for (const [k, v] of Object.entries(obj)) {
+    const key = prefix ? `${prefix}_${k}` : k;
+    if (isPlainObject(v)) flatten2(v, key, out);
+    else out[key] = v;
+  }
+}
+function pyStr(v, missing) {
+  if (missing) return "nan";
+  const repr = (x) => {
+    if (x === null || x === void 0) return "None";
+    if (typeof x === "boolean") return x ? "True" : "False";
+    if (typeof x === "number") return Number.isFinite(x) ? String(x) : Number.isNaN(x) ? "nan" : x > 0 ? "inf" : "-inf";
+    if (typeof x === "string") {
+      const quote = x.includes("'") && !x.includes('"') ? '"' : "'";
+      const body = x.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t");
+      return quote + (quote === "'" ? body.replace(/'/g, "\\'") : body) + quote;
+    }
+    if (Array.isArray(x)) return `[${x.map(repr).join(", ")}]`;
+    return `{${Object.entries(x).map(([k, val]) => `${repr(k)}: ${repr(val)}`).join(", ")}}`;
+  };
+  return typeof v === "string" ? v : repr(v);
+}
+function parse_nfl_pro_stats(payload) {
+  const recs = records(payload);
+  if (!recs.length) return [];
+  const flat = recs.map((r) => {
+    const o = {};
+    flatten2(r, "", o);
+    return o;
+  });
+  const raw = [];
+  const seen = /* @__PURE__ */ new Set();
+  for (const r of flat) for (const k of Object.keys(r)) if (!seen.has(k) && seen.add(k)) raw.push(k);
+  const keep = [];
+  const names = /* @__PURE__ */ new Set();
+  for (const k of raw) {
+    const name = underscore(String(k));
+    if (names.has(name)) continue;
+    names.add(name);
+    keep.push([k, name]);
+  }
+  const stringify = new Set(
+    keep.filter(([k]) => flat.some((r) => r[k] !== null && typeof r[k] === "object")).map(([k]) => k)
+  );
+  return flat.map((r) => {
+    const o = {};
+    for (const [k, name] of keep) {
+      const missing = !(k in r);
+      o[name] = stringify.has(k) ? pyStr(r[k], missing) : missing || r[k] === void 0 ? null : r[k];
+    }
+    return o;
+  });
 }
 
 // src/parsers/on3.ts
@@ -2285,10 +2620,10 @@ function parse_asa_goals_added(raw, section) {
 
 // src/parsers/mls_api.ts
 var OPTS2 = { ids: true, dropNull: true };
-var META_KEYS = /* @__PURE__ */ new Set(["meta", "pagination", "next_page_token"]);
+var META_KEYS2 = /* @__PURE__ */ new Set(["meta", "pagination", "next_page_token"]);
 function rowsKey(raw) {
   for (const [key, value] of Object.entries(raw)) {
-    if (META_KEYS.has(key) || !Array.isArray(value) || value.length === 0) continue;
+    if (META_KEYS2.has(key) || !Array.isArray(value) || value.length === 0) continue;
     if (value.every(isPlainObject17)) return value;
   }
   return void 0;
@@ -2377,7 +2712,7 @@ function parse_mls_match(raw, section) {
 // src/parsers/nwsl_api.ts
 var OPTS3 = { ids: true, dropNull: true };
 var ROWS_KEYS = ["matches", "matchdays", "stages", "standings", "players", "teams", "competitions"];
-var META_KEYS2 = /* @__PURE__ */ new Set(["apiCallRequestTime", "competition", "pagination"]);
+var META_KEYS3 = /* @__PURE__ */ new Set(["apiCallRequestTime", "competition", "pagination"]);
 function envelopeRows(raw) {
   if (Array.isArray(raw)) return raw;
   if (!isPlainObject17(raw)) return [];
@@ -2386,7 +2721,7 @@ function envelopeRows(raw) {
     if (Array.isArray(v) && v.length) return v;
   }
   for (const [key, v] of Object.entries(raw)) {
-    if (META_KEYS2.has(key) || !Array.isArray(v) || v.length === 0) continue;
+    if (META_KEYS3.has(key) || !Array.isArray(v) || v.length === 0) continue;
     if (v.every(isPlainObject17)) return v;
   }
   return [];
@@ -2464,7 +2799,7 @@ function parse_nwsl_lineups(raw, section) {
 }
 
 // src/parsers/nba_stats.ts
-function underscore2(word) {
+function underscore3(word) {
   return word.replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2").replace(/([a-z\d])([A-Z])/g, "$1_$2").replace(/-/g, "_").toLowerCase();
 }
 var isObj = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
@@ -2572,13 +2907,13 @@ var SEASON_TYPE_BY_ID = {
   "6": "NBA Cup",
   "9": "International"
 };
-var nestedName = (outer, inner) => `${underscore2(outer)}_${underscore2(inner)}`.replace(/team_team/g, "team");
+var nestedName = (outer, inner) => `${underscore3(outer)}_${underscore3(inner)}`.replace(/team_team/g, "team");
 function leagueScheduleResultSet(ls) {
   const rows = [];
   for (const gd of ls.gameDates) {
     if (!isObj(gd)) continue;
     const day = {};
-    for (const [k, v] of Object.entries(gd)) if (k !== "games" && !isNested(v)) day[underscore2(k)] = v;
+    for (const [k, v] of Object.entries(gd)) if (k !== "games" && !isNested(v)) day[underscore3(k)] = v;
     for (const game of Array.isArray(gd.games) ? gd.games : []) {
       if (!isObj(game)) continue;
       const row = { ...day };
@@ -2586,7 +2921,7 @@ function leagueScheduleResultSet(ls) {
         if (Array.isArray(value)) continue;
         if (isObj(value)) {
           for (const [k, v] of Object.entries(value)) if (!isNested(v)) row[nestedName(key, k)] = v;
-        } else row[underscore2(key)] = value;
+        } else row[underscore3(key)] = value;
       }
       const gid = row.game_id;
       const typeId = gid ? String(gid).slice(2, 3) : null;
@@ -2631,7 +2966,7 @@ function flattenHeaders(headers) {
   return out.concat(flat.slice(idx));
 }
 function toRows(rs) {
-  const headers = flattenHeaders(rs.headers).map((h) => underscore2(String(h)));
+  const headers = flattenHeaders(rs.headers).map((h) => underscore3(String(h)));
   if (!headers.length) return [];
   const rows = Array.isArray(rs.rowSet) ? rs.rowSet : [];
   const out = [];
@@ -2808,6 +3143,17 @@ var PARSERS = {
   parse_torvik_game_stats,
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
+  // ---- PFF Developer API (api.pff.com) ----
+  // /v1 envelopes (one table, or a dict for matrix / multi-key bodies), /v1
+  // player-detail weeks, and the self-describing /v2 tables.
+  // `section` (MULTI_TABLE_SECTIONS) maps to py's report / career / table.
+  parse_pff_report,
+  parse_pff_player_detail,
+  parse_pff_v2_table,
+  // ---- NFL Pro (pro.nfl.com /api/secured/stats/*) ----
+  parse_nfl_pro_stats,
+  // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY; importing
+  // src/parsers/kenpom.ts adds it via registerParser (see NODE_ONLY_PARSERS).
   // ---- Keyless providers / league APIs (vendored from sdv-py) ----
   parse_on3_rdb,
   parse_asa,
@@ -3897,7 +4243,7 @@ function parserForEndpoint(short) {
   return ESPN_ENDPOINT_PARSERS[short];
 }
 
-// src/parsers/index.ts
+// src/parsers/browser.ts
 function parseEndpoint(kind, key, raw, section) {
   if (kind === "espn") {
     const fn2 = parserForEndpoint(key);
@@ -3918,7 +4264,12 @@ export {
   parse_asa_goals_added_tables,
   parse_mls_match_tables,
   parse_mls_standings_tables,
+  parse_nfl_pro_stats,
   parse_nwsl_lineups_tables,
+  parse_pff_matrix,
+  parse_pff_player_detail,
+  parse_pff_report,
+  parse_pff_v2_table,
   parse_summary,
   parserFor,
   parserForEndpoint,

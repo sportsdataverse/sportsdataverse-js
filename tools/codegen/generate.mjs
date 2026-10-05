@@ -57,6 +57,10 @@ const FLAT_API_FILES = [
   "yahoo",
   "hockeytech",
   "torvik",
+  // Subscription families (auth-gated): see NO_PLAYGROUND_FAMILIES.
+  "pff_api",
+  "nfl_pro",
+  "kenpom",
   "bart_wbb",
   "on3",
   "asa",
@@ -97,6 +101,10 @@ const FLAT_API_NAMESPACES = {
   // BartTorvik T-Rank — standalone provider namespace (`sdv.torvik`) for men's
   // college basketball ratings / four-factors / game + player stats / schedule.
   torvik: "torvik",
+  // Subscription families merge onto their league namespace.
+  pff_api: "nfl",
+  nfl_pro: "nfl",
+  kenpom: "mbb",
   // Women's T-Rank (barttorvik.com/ncaaw) shares the `sdv.torvik` namespace.
   bart_wbb: "torvik",
   // On3 Recruit Database + American Soccer Analysis: standalone provider namespaces.
@@ -111,13 +119,18 @@ const FLAT_API_NAMESPACES = {
   wnba_stats: "wnba",
 };
 
-// Flat families excluded from the docs playground (see renderEndpointsJson).
-// (sports247 + sports247_site_pages: 247Sports needs the impersonating transport.)
+// Flat families excluded from the docs playground (see renderEndpointsJson):
+// sports247 + sports247_site_pages (247Sports needs the impersonating transport),
+// stats.nba.com / stats.wnba.com (TLS impersonation + residential IP), and the
+// subscription families, which need the caller's own credentials.
 const NO_PLAYGROUND_FAMILIES = new Set([
   "nba_stats",
   "wnba_stats",
   "sports247",
   "sports247_site_pages",
+  "pff_api",
+  "nfl_pro",
+  "kenpom",
 ]);
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
@@ -207,6 +220,50 @@ const FLAT_API_META = {
     source: "barttorvik.com (T-Rank college basketball analytics)",
     // Sport-specific standalone family: nests under the Basketball sport group.
     sport: "basketball",
+  },
+  // Subscription families: `authNote` replaces the docs' auto-mint auth note,
+  // `controls` documents the per-call auth/control params in the JSDoc.
+  pff_api: {
+    label: "PFF Developer API",
+    source: "the PFF Developer API (api.pff.com; PFF Pro subscription)",
+    authNote:
+      "**Auth:** a PFF API key (PFF Pro) is required — `api_key` on the call, an " +
+      "`Authorization` header in `headers`, or the `SDV_PFF_API_KEY` / `PFF_API_KEY` " +
+      "environment variable. 400/422 throw `InvalidParameterError`; columns PFF " +
+      "withholds by entitlement warn (or throw with `strict: true` / `SDV_PFF_STRICT=1`).",
+    controls: {
+      headers: "optional headers; an `Authorization` here wins over `api_key` and the environment.",
+      api_key: "PFF API key (`ak_live_…`); falls back to `SDV_PFF_API_KEY` then `PFF_API_KEY`.",
+      strict: "throw `AssetFetchError` (instead of warning) when PFF withholds columns; default `SDV_PFF_STRICT`.",
+    },
+  },
+  nfl_pro: {
+    label: "NFL Pro (Next Gen Stats)",
+    source: "NFL Pro's secured Next Gen Stats API (pro.nfl.com; NFL+ Premium)",
+    authNote:
+      "**Auth:** a user-bound NFL Pro bearer token carrying an active NFL+ plan is " +
+      "required — `token` on the call, or the `NFLPRO_TOKEN` environment variable. " +
+      "Responses truncate at the page size, so the getter pages on `offset` until the " +
+      "envelope's `total` is reached.",
+    controls: {
+      headers: "optional headers; an `Authorization` here wins over `token` and `NFLPRO_TOKEN`.",
+      token: "NFL Pro bearer token; falls back to `NFLPRO_TOKEN`.",
+      paginate: "follow `offset` until the envelope's `total` is reached (default `true`).",
+      max_pages: "cap on the pages followed (default `40`); a capped result carries `_truncated: true` and warns.",
+    },
+  },
+  kenpom: {
+    label: "KenPom",
+    source: "kenpom.com (subscription; HTML pages)",
+    authNote:
+      "**Auth:** a KenPom subscription login — `email` / `password` on the call, or the " +
+      "`KENPOM_EMAIL` / `KENPOM_PW` environment variables (hoopR's `KP_USER` / `KP_PW` " +
+      "also work). The session is logged in once and reused. The raw response is the " +
+      "page HTML; `{ parsed: true }` returns every table on the page keyed by its HTML id.",
+    controls: {
+      email: "KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.",
+      password: "KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.",
+    },
   },
   nba_stats: {
     label: "NBA Stats API (stats.nba.com)",
@@ -836,8 +893,12 @@ function flatParserCell(wrapper) {
   if (!wrapper.parser) return "*(raw)*";
   const spec = FLAT_PARSER_SECTIONS[wrapper.parser];
   if (!spec) return `\`${wrapper.parser}\``;
+  // `default: null` = every table as a dict (sdv-py's shape); `sections: null` =
+  // the payload names its tables (`dynamic` says how).
+  const dflt = spec.default === null ? " (default: every table, as a dict)" : "";
+  if (!spec.sections) return `\`${wrapper.parser}\` — multi-table${dflt}: \`section\` = ${spec.dynamic}`;
   const names = spec.sections.map((s) => (s === spec.default ? `\`${s}\` (default)` : `\`${s}\``));
-  return `\`${wrapper.parser}\` — multi-table: \`section\` = ${names.join(", ")}`;
+  return `\`${wrapper.parser}\` — multi-table${dflt}: \`section\` = ${names.join(", ")}`;
 }
 
 // In-process cache so each `returns_schema` YAML is read + parsed at most once.
@@ -927,13 +988,15 @@ function renderNativeFamilySection(api, rows, nsPrefix) {
   if (rows.some((w) => FLAT_PARSER_SECTIONS[w.parser])) {
     body +=
       ` Endpoints marked **multi-table** parse to several frames in sdv-py; with ` +
-      `\`parsed: true\` they return the default sub-frame shown in the Parser column, ` +
+      `\`parsed: true\` they return the default shown in the Parser column (one sub-frame, or every table as a dict), ` +
       `and \`section: "<name>"\` selects any other (an unknown name throws, listing the valid ones).`;
   }
   if (authed) {
     body +=
-      ` **Auth:** this family mints a bearer token automatically before ` +
-      `each call (no credentials required).`;
+      " " +
+      (meta.authNote ??
+        "**Auth:** this family mints a bearer token automatically before " +
+          "each call (no credentials required).");
   }
   if (meta.note) body += ` ${meta.note}`;
   if (meta.deprecated) body += `\n\n:::warning Deprecated\n\n${meta.deprecated}\n\n:::`;
@@ -1798,7 +1861,8 @@ function renderEndpointsJson(wrappers, leagues, hosts, allFlatWrappers) {
   // /api/run proxy (its host allowlist derives from `flatHosts`): their hosts
   // answer only a browser-impersonating TLS client (stats.nba.com /
   // stats.wnba.com also need a residential IP), so a serverless fetch would
-  // only hang or be blocked. Dropped from the playground metadata.
+  // only hang or be blocked; the subscription families (PFF API, KenPom, NFL
+  // Pro) need the caller's own credentials. Dropped from the playground metadata.
   const flatWrappers = allFlatWrappers.filter((w) => !NO_PLAYGROUND_FAMILIES.has(w.api));
   const flatHosts = flatHostsFrom(flatWrappers);
   return (
@@ -2145,9 +2209,19 @@ function renderWrittenFlatModule(api, defs) {
       const d = p.default !== undefined ? ` — default \`${p.default}\`` : "";
       jsdoc += ` * @param params.${p.name} - query parameter${note}${d}.\n`;
     }
-    if (def.auth) jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
+    if (meta.controls) {
+      for (const [name, doc] of Object.entries(meta.controls)) jsdoc += ` * @param params.${name} - ${doc}\n`;
+    } else if (def.auth) {
+      jsdoc += ` * @param params.headers - optional bearer headers (auto-minted if omitted).\n`;
+    }
     if (def.parser) {
       jsdoc += ` * @param params.parsed - when \`true\`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.\n`;
+      const sec = FLAT_PARSER_SECTIONS[def.parser];
+      if (sec) {
+        const names = sec.sections ? sec.sections.map((s) => `\`${s}\``).join(", ") : sec.dynamic;
+        const dflt = sec.default === null ? "every table, as a dict" : `\`${sec.default}\``;
+        jsdoc += ` * @param params.section - (with \`parsed: true\`) the table to return: ${names}. Default: ${dflt}; an unknown name throws, listing the valid ones.\n`;
+      }
       jsdoc += ` * @returns The raw response by default; a tidy array of row objects when \`{ parsed: true }\`.\n`;
     } else {
       jsdoc += ` * @param params.parsed - accepted for symmetry, but this endpoint has no registered parser, so the raw response is always returned.\n`;

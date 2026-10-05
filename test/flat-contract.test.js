@@ -29,12 +29,19 @@ const FLAT_API_NAMESPACES = {
   fox: 'fox',
   yahoo_scores: 'yahoo',
   yahoo: 'yahoo',
+  pff_api: 'nfl',
+  nfl_pro: 'nfl',
+  kenpom: 'mbb',
   bart_wbb: 'torvik',
   mls_api: 'mls',
   nwsl_api: 'nwsl',
   nba_stats: 'nba',
   wnba_stats: 'wnba',
 };
+
+// Families whose every wrapper carries `auth: true` (credentials applied in request()).
+// sports247: the guest JWT minted by src/core/sports247_runtime.ts.
+const AUTH_FAMILIES = new Set(['nfl_api', 'sports247', 'pff_api', 'nfl_pro', 'kenpom']);
 
 /** Fill every required path param so the URL fully resolves. */
 function minimalParams(def) {
@@ -127,12 +134,20 @@ describe('flat-API wrapper metadata invariants', () => {
     for (const w of nfl) w.host.should.equal('https://api.nfl.com');
   });
 
-  it('flags every nfl_api + sports247 wrapper auth:true (and only those so far)', () => {
-    // sports247: the guest JWT minted by src/core/sports247_runtime.ts.
-    const authed = new Set(['nfl_api', 'sports247']);
+  it('flags every wrapper of the auth families auth:true (and no other)', () => {
     for (const w of FLAT_WRAPPERS) {
-      if (authed.has(w.api)) w.auth.should.be.true(`auth flag missing on ${w.api}_${w.short}`);
+      if (AUTH_FAMILIES.has(w.api)) w.auth.should.be.true(`auth flag missing on ${w.api}_${w.short}`);
       else should(w.auth).not.be.true(`unexpected auth flag on ${w.api}_${w.short}`);
+    }
+  });
+
+  it('registers the subscription families (PFF API 68, KenPom 30, NFL Pro 16) on their hosts', () => {
+    const want = { pff_api: [68, 'https://api.pff.com'], kenpom: [30, 'https://kenpom.com'], nfl_pro: [16, 'https://pro.nfl.com'] };
+    for (const [api, [count, host]] of Object.entries(want)) {
+      const defs = FLAT_WRAPPERS.filter((w) => w.api === api);
+      defs.length.should.equal(count, api);
+      FLAT_HOSTS[api].should.equal(host);
+      for (const w of defs) w.host.should.equal(host);
     }
   });
 

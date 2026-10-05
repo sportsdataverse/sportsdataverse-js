@@ -142,7 +142,16 @@ export function asRows(raw: any): any[] {
  * picks any other. Mirrored in tools/codegen/endpoints/flat_parser_sections.yaml
  * (read by codegen for the reference docs; a test keeps the two equal).
  */
-export const MULTI_TABLE_SECTIONS: Record<string, { default: string; sections: string[] }> = {
+export interface SectionSpec {
+  /** The table returned without `section`; `null` = every table, as a dict (sdv-py's own shape). */
+  default: string | null;
+  /** The valid names; `null` when the payload names its own tables (see `dynamic`). */
+  sections: string[] | null;
+  /** For payload-named tables: what the names are (shown in the reference). */
+  dynamic?: string;
+}
+
+export const MULTI_TABLE_SECTIONS: Record<string, SectionSpec> = {
   parse_asa_goals_added: { default: "summary", sections: ["summary", "actions"] },
   parse_mls_standings: { default: "entries", sections: ["tables", "entries"] },
   parse_mls_match: {
@@ -150,20 +159,41 @@ export const MULTI_TABLE_SECTIONS: Record<string, { default: string; sections: s
     sections: ["match_information", "environment", "teams", "players", "staff", "referees", "last_matches"],
   },
   parse_nwsl_lineups: { default: "players", sections: ["teams", "players", "staff"] },
+  // PFF (py's `report` / `career` / `table` arguments) and KenPom (one table per
+  // HTML id). The two dict-default parsers keep sdv-py's return shape.
+  parse_pff_report: {
+    default: null,
+    sections: null,
+    dynamic: "a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`)",
+  },
+  parse_pff_player_detail: { default: "weeks", sections: ["weeks", "career"] },
+  parse_pff_v2_table: { default: "rows", sections: ["rows", "teamTotals"] },
+  parse_kenpom_page: {
+    default: null,
+    sections: null,
+    dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)",
+  },
 };
+
+/** The error for a `section` the parser does not have, listing the valid names. */
+export function sectionError(parser: string, name: string, valid: readonly string[], dflt: string | null): Error {
+  return new Error(
+    `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(valid)}` +
+      (dflt === null ? " (default: every table, as a dict)." : ` (default '${dflt}').`)
+  );
+}
 
 /**
  * Select one sub-frame of a multi-table parse. `section` omitted -> the parser's
- * default. An unknown name throws, listing the valid ones.
+ * default (for a dict-default parser, every table). An unknown name throws,
+ * listing the valid ones.
  */
 export function pickSection(parser: string, tables: Record<string, Row[]>, section?: string): Row[] {
   const spec = MULTI_TABLE_SECTIONS[parser];
-  const name = section ?? spec.default;
-  if (!Object.prototype.hasOwnProperty.call(tables, name) || !spec.sections.includes(name)) {
-    throw new Error(
-      `${parser}: unknown section '${name}'. Choose one of ${JSON.stringify(spec.sections)}` +
-        ` (default '${spec.default}').`
-    );
+  const name = section ?? spec.default ?? "";
+  const valid = spec.sections ?? Object.keys(tables);
+  if (!Object.prototype.hasOwnProperty.call(tables, name) || !valid.includes(name)) {
+    throw sectionError(parser, name, valid, spec.default);
   }
   return tables[name];
 }

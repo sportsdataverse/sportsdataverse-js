@@ -143,6 +143,12 @@ import {
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
 } from "./torvik.js";
+import {
+  parse_pff_report,
+  parse_pff_player_detail,
+  parse_pff_v2_table,
+} from "./pff_api.js";
+import { parse_nfl_pro_stats } from "./nfl_pro.js";
 import { parse_on3_rdb } from "./on3.js";
 import { parse_asa, parse_asa_goals_added } from "./asa.js";
 import { parse_mls_api, parse_mls_entity, parse_mls_standings, parse_mls_match } from "./mls_api.js";
@@ -152,8 +158,17 @@ import { parse_nba_stats_result_sets } from "./nba_stats.js";
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any, section?: string) => Record<string, any>[];
 
+/** Named tables from one payload (a multi-table page, e.g. KenPom or PFF `/v1/teams`). */
+export type ParsedTables = Record<string, Record<string, any>[]>;
+
+/**
+ * A registered flat-API parser: tidy rows, or — for a payload that carries
+ * several tables (sdv-py returns a dict of frames there) — a dict of row arrays.
+ */
+export type FlatParserFn = (raw: any, section?: string) => Record<string, any>[] | ParsedTables;
+
 /** Registered parsers, keyed by the `parser` name on a flat `WrapperDef`. */
-export const PARSERS: Record<string, ParserFn> = {
+export const PARSERS: Record<string, FlatParserFn> = {
   // ---- MLB Stats API ----
   // Generic list flattener (the default for most endpoints).
   parse_mlb_list,
@@ -295,6 +310,17 @@ export const PARSERS: Record<string, ParserFn> = {
   parse_torvik_game_stats,
   parse_torvik_player_stats,
   parse_torvik_game_schedule,
+  // ---- PFF Developer API (api.pff.com) ----
+  // /v1 envelopes (one table, or a dict for matrix / multi-key bodies), /v1
+  // player-detail weeks, and the self-describing /v2 tables.
+  // `section` (MULTI_TABLE_SECTIONS) maps to py's report / career / table.
+  parse_pff_report,
+  parse_pff_player_detail,
+  parse_pff_v2_table,
+  // ---- NFL Pro (pro.nfl.com /api/secured/stats/*) ----
+  parse_nfl_pro_stats,
+  // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY; importing
+  // src/parsers/kenpom.ts adds it via registerParser (see NODE_ONLY_PARSERS).
   // ---- Keyless providers / league APIs (vendored from sdv-py) ----
   parse_on3_rdb,
   parse_asa,
@@ -313,9 +339,26 @@ export const PARSERS: Record<string, ParserFn> = {
 };
 
 /**
+ * Parsers registered at runtime by a node-side family runtime instead of listed
+ * above, because they pull in a heavy dependency the browser parser bundle
+ * (`npm run bundle:parsers`, the docs playground) must not carry — e.g. KenPom's
+ * HTML parser needs cheerio (the bundle would grow ~4x), and the playground
+ * never reaches that family. Importing the package root (or the
+ * `sportsdataverse/parsers` entry, src/parsers/index.ts) registers them; the
+ * browser bundle is built from src/parsers/browser.ts, which leaves them out.
+ */
+export const NODE_ONLY_PARSERS = new Set<string>();
+
+/** Register a node-only parser (see {@link NODE_ONLY_PARSERS}). */
+export function registerParser(name: string, fn: FlatParserFn): void {
+  PARSERS[name] = fn;
+  NODE_ONLY_PARSERS.add(name);
+}
+
+/**
  * Look up a parser by name. Returns `undefined` when `name` is missing or not
  * registered, so the caller falls back to returning the raw payload.
  */
-export function parserFor(name?: string): ParserFn | undefined {
+export function parserFor(name?: string): FlatParserFn | undefined {
   return name ? PARSERS[name] : undefined;
 }

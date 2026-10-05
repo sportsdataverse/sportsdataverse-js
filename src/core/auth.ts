@@ -35,6 +35,11 @@ export interface AuthContext {
   family: string;
   /** The family's transport — use it for login / token calls (it bypasses auth). */
   transport: Transport;
+  /**
+   * On `refresh` only: the request (before auth was applied) whose credentials
+   * failed, so a provider holding several sessions refreshes the one it used.
+   */
+  request?: TransportRequest;
 }
 
 export interface AuthProvider {

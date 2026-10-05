@@ -148,8 +148,11 @@ describe('single-frame parsers return the sub-frame the returns schema documents
       parse_mls_match: parse_mls_match_tables(fx('mls_api', 'statsapi_match_single.json')),
       parse_nwsl_lineups: parse_nwsl_lineups_tables(fx('nwsl_api', 'sdp_match_lineups.json')),
     };
-    for (const [name, spec] of Object.entries(MULTI_TABLE_SECTIONS)) {
-      Object.keys(tables[name]).should.eql(spec.sections, name);
+    // the fixed-name entries of these keyless parsers (the PFF / KenPom entries
+    // are covered in test/parsers/subscription.test.js)
+    for (const [name, frames] of Object.entries(tables)) {
+      const spec = MULTI_TABLE_SECTIONS[name];
+      Object.keys(frames).should.eql(spec.sections, name);
       spec.sections.should.containEql(spec.default);
     }
   });

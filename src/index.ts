@@ -99,6 +99,11 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   // namespace; the merge creates `sdv.torvik.*` from scratch. Keyless but needs
   // a browser User-Agent (set by the family's getter); endpoints mix CSV/JSON.
   torvik: 'torvik',
+  // Subscription families (caller's own credentials; never on the playground
+  // allowlist) merge onto their league namespace.
+  pff_api: 'nfl',
+  nfl_pro: 'nfl',
+  kenpom: 'mbb',
   // Women's T-Rank joins `sdv.torvik`; On3 / ASA are standalone provider
   // namespaces; the MLS / NWSL native APIs merge onto their league namespaces.
   bart_wbb: 'torvik',
@@ -218,7 +223,15 @@ export {
   AssetFetchError,
   SeasonNotFoundError,
   TransportUnavailableError,
+  InvalidParameterError,
 } from './core/errors.js';
+// Subscription families (PFF Developer API, KenPom, NFL Pro): helpers beyond the
+// generated wrappers — credential checks, a pre-flight login, token checks.
+export { resolvePffApiKey } from './core/pff_api_runtime.js';
+export { hasKenpomLogin, kenpomLogin, kenpomClearSessionCache } from './core/kenpom_runtime.js';
+// node-only (cheerio) — not in the browser `sportsdataverse/parsers` barrel
+export { parse_kenpom_page } from './parsers/kenpom.js';
+export { NflProAuthError, nflProToken } from './core/nfl_pro_runtime.js';
 export type { FetchErrorDetails } from './core/errors.js';
 export {
   configure,
@@ -247,8 +260,8 @@ export {
 } from './discover.js';
 export type { ListFunctionsOptions, Namespaces } from './discover.js';
 export { normalize } from './parsers/_normalize.js';
-export { PARSERS, parserFor } from './parsers/_registry.js';
-export type { ParserFn } from './parsers/_registry.js';
+export { PARSERS, parserFor, NODE_ONLY_PARSERS } from './parsers/_registry.js';
+export type { ParserFn, FlatParserFn, ParsedTables } from './parsers/_registry.js';
 // Re-export the tidy.js toolkit so callers can pipe the parsed tidy arrays
 // (from `{ parsed: true }`) through grammar-of-data-manipulation verbs, e.g.
 // `import { tidy } from 'sportsdataverse';

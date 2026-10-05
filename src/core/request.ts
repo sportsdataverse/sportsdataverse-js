@@ -66,7 +66,8 @@ export async function requestResponse(
   family: string,
   req: TransportRequest
 ): Promise<TransportResponse> {
-  const { transport, auth, retries, timeoutMs, userAgent, retryStatuses } = resolveFamily(family);
+  const { transport, auth, retries, timeoutMs, userAgent, retryStatuses, classifyError } =
+    resolveFamily(family);
   // Same accounting as sdv-py: one attempt budget (`retries`), of which at most
   // min(retries, 4) may be spent on retryable statuses.
   const statusBudget = Math.min(retries, MAX_STATUS_RETRIES);
@@ -114,7 +115,7 @@ export async function requestResponse(
     if (status === 401 && auth?.refresh && !refreshed) {
       refreshed = true;
       try {
-        await auth.refresh(ctx);
+        await auth.refresh({ ...ctx, request: base });
       } catch (err) {
         throw authFailed("refresh", err, status);
       }
@@ -138,6 +139,8 @@ export async function requestResponse(
       attempt++;
       continue;
     }
+    const classified = classifyError?.(res, req.url);
+    if (classified) throw classified;
     throw new AssetFetchError(
       `${family}: HTTP ${status} after ${attempt + 1} attempt(s): ${req.url}`,
       { ...where, status }
@@ -157,7 +160,8 @@ export async function requestResponse(
  * `Retry-After`), up to `retries` (default 3) attempts in all, at most 4 of
  * them on statuses. Then: 2xx returns the data; 404 — or an ESPN-family 200
  * body `{ code: 404 }` — throws {@link NoDataError}; anything else (including a
- * 403 that persists) throws {@link AssetFetchError}.
+ * 403 that persists) throws the family's `classifyError` result when it
+ * registered one (`registerFamilyDefaults`), else {@link AssetFetchError}.
  *
  * @param family Family stem (`"site_v2"`, `"mlb"`, `"nfl_api"`, …) — selects transport + auth.
  */

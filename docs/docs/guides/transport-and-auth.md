@@ -21,8 +21,8 @@ Every wrapper — ESPN and flat-API alike — fetches through one runtime core:
 A **family** is the stem a wrapper belongs to: the ESPN URL families
 `site_v2`, `site_v2_alt`, `web_v3`, `core_v2`, or a flat-API stem such as
 `mlb`, `mlb_statcast`, `nhl_api_web`, `nfl_api`, `odds_api`, `sports247`,
-`sports247_site_pages`, `cbs`, `fox`, `yahoo`, `hockeytech`, `torvik` (the keys
-of `FLAT_HOSTS`).
+`sports247_site_pages`, `cbs`, `fox`, `yahoo`, `hockeytech`, `torvik`, and the
+subscription families `pff_api`, `kenpom`, `nfl_pro` (the keys of `FLAT_HOSTS`).
 
 ## Errors
 
@@ -47,6 +47,17 @@ try {
 other — and both extend `SdvError`. `NoESPNDataError` is an alias of
 `NoDataError`. Error messages and `err.url` never include the query string, so
 keys passed as query parameters are not leaked into logs.
+
+`InvalidParameterError` (also an `SdvError`) means the server rejected the
+arguments themselves (a PFF `400` / `422`, NFL Pro's empty `200`): the call can
+never succeed as made, so it is neither "no data" nor a failed fetch.
+
+**No credentials in errors.** An error's `cause` is always a sanitized copy
+of the underlying error: its name, message (URL query strings and
+`user:password@` redacted), stack and `code` / `errno` / `syscall` — never
+the HTTP client's request config, so an `Authorization` header, a cookie or a
+POSTed login form cannot surface in `util.inspect(err)` or a logged error.
+The built-in transports reject with the same sanitized errors.
 
 ## Retries, timeout, User-Agent
 
@@ -75,6 +86,24 @@ registerFamilyDefaults('my_family', {
 ```
 
 `nfl_api` ships registered this way.
+
+A family can also map a final failed response — non-2xx, not `404`, no retry
+left — to its own error with `classifyError`. Return an `SdvError` to throw it
+instead of the default `AssetFetchError`, or `undefined` to keep the default;
+`404` is always `NoDataError` and never reaches the hook. `url` carries no
+query string. The PFF family uses it to turn `400` / `422` into
+`InvalidParameterError` with PFF's own error message:
+
+```js
+import { registerFamilyDefaults, InvalidParameterError, AssetFetchError } from 'sportsdataverse';
+
+registerFamilyDefaults('my_family', {
+  classifyError: (res, url) =>
+    res.status === 400 || res.status === 422
+      ? new InvalidParameterError(`my_family: rejected ${url}`, { url, status: res.status })
+      : undefined,
+});
+```
 
 ## Using a proxy
 
@@ -258,6 +287,106 @@ NFL.com web token for you. Override it with environment variables —
 `NFL_ACCESS_TOKEN` (used verbatim), or `NFL_CLIENT_KEY` / `NFL_CLIENT_SECRET`
 (mint with your own client credentials) — or replace it entirely with
 `configure({ auth: { nfl_api: ... } })`.
+
+### Subscription families: PFF, KenPom, NFL Pro
+
+Three families need **your own paid credentials**. Each registers its own auth,
+never retries a `403` (there it is an entitlement answer, not load), and is
+never reachable from the docs playground. Credentials on the call win over the
+environment; with none anywhere the call throws an `SdvError` naming the
+variables to set, before any request goes out. Keys, tokens and passwords never
+appear in an error message.
+
+**PFF Developer API** (`pff_api`, `sdv.nfl.pffApi*`, 68 wrappers, `api.pff.com`)
+needs a PFF Pro API key (`ak_live_…`, created at
+[pff.com/account/api-keys](https://www.pff.com/account/api-keys)). The key is taken from, in order: an
+`Authorization` header in `headers`, `api_key` on the call, `SDV_PFF_API_KEY`,
+then `PFF_API_KEY`.
+
+```js
+import sdv, { InvalidParameterError } from 'sportsdataverse';
+
+// PFF_API_KEY is set in the environment
+const rows = await sdv.nfl.pffApiFacetPassingSummary({
+  league: 'nfl', season: 2022, week: 1, franchise_id: 7, parsed: true,
+});
+const table = await sdv.nfl.pffApiTeamStats({
+  league: 'nfl', season: 2024, category: 'offense-passing', parsed: true,
+});
+```
+
+- `/v1` query keys are PFF's exact snake_case names (`franchise_id`,
+  `game_id`); PFF silently ignores camelCase there. `/v2` routes take
+  camelCase keys (`weekGroup`, `weekIds`) and the league in the path.
+- A `400` / `422` throws `InvalidParameterError` with PFF's own message (the
+  call can never succeed as made). `404` is `NoDataError`. `401` / `403` /
+  `429` / `5xx` that outlive the retries are `AssetFetchError`, and so is a
+  `200` whose body is not a JSON object.
+- A view-only entitlement answers `200` with some columns **removed** and a
+  `restricted` list naming them. By default you get the partial body plus a
+  `UserWarning`. Pass `strict: true` (or set `SDV_PFF_STRICT=1`) to throw
+  `AssetFetchError` instead — do this in pipelines, where a missing column must
+  never read as a missing stat.
+- The read budget is 100 requests a minute per **account**, shared by every
+  client holding the key.
+- `{ parsed: true }` keeps sdv-py's shapes. `section` picks one table: `/v2`
+  `'rows'` (default) or `'teamTotals'`; player reports `'weeks'` (default) or
+  `'career'`; a `/v1` matrix or multi-key body (a dict by default) by key.
+  An unknown name throws, listing the valid ones.
+
+**KenPom** (`kenpom`, `sdv.mbb.kenpom*`, 30 wrappers, `kenpom.com`) logs in
+with your subscription e-mail and password: `email` / `password` on the call,
+else `KENPOM_EMAIL` / `KENPOM_PW` (also `KENPOM_PASSWORD`, `SDV_KENPOM_EMAIL` /
+`SDV_KENPOM_PW`, and hoopR's `KP_USER` / `KP_PW`). The login runs once and the
+session is reused for 30 minutes. A login that KenPom rejects throws instead of
+quietly scraping the free tables. A `Cookie` in `headers` is used as-is.
+
+```js
+import sdv, { hasKenpomLogin, kenpomLogin } from 'sportsdataverse';
+
+if (hasKenpomLogin()) {
+  await kenpomLogin(); // optional: check the credentials before a long pull
+  const html = await sdv.mbb.kenpomRatings({ year: 2025 });           // raw page HTML
+  const tables = await sdv.mbb.kenpomTeam({ team: 'Duke', year: 2025, parsed: true });
+  // { report_table: [...], schedule_table: [...], player_table: [...], depth_chart: [...] }
+}
+```
+
+kenpom.com sits behind a Cloudflare check that answers `403` to Node's own TLS
+fingerprint, so the family's default transport is the browser-impersonating
+one: install the optional `impit` (`npm install impit`). To add a proxy, set
+the family's transport yourself:
+`configure({ transport: { kenpom: createImpersonatingTransport({ proxyUrl }) } })`.
+`{ parsed: true }` returns every table on the page keyed by its HTML id, with
+the same column names as sportsdataverse-py (and hoopR's KenPom tables);
+add `section: '<table id>'` for one table. A page that comes back as the
+logged-out login form is never returned as data: the session that was used
+is refreshed once and the page re-fetched, then it throws `AssetFetchError`.
+Sessions for explicit credentials are keyed by e-mail plus a hash of the
+password, cached only after a successful login, and capped at 8. Concurrent
+calls for one account share a single login.
+
+**NFL Pro** (`nfl_pro`, `sdv.nfl.nflPro*`, 16 wrappers, `pro.nfl.com`) serves
+the Next Gen Stats tables. Its secured routes need a **user-bound** token
+carrying an active NFL+ Premium plan: an `Authorization` header in `headers`,
+`token` on the call, or `NFLPRO_TOKEN`. The token's plan and expiry are checked
+before any request (`NflProAuthError`). No token is minted for you — an
+anonymous or client-credentials token is not user-bound and is refused on every
+route. sportsdataverse-py can also obtain the token through a headless-browser
+login; to do that in JS, plug your own `tokenAuth({ mint })` in for `nfl_pro`.
+
+```js
+// NFLPRO_TOKEN is set in the environment
+const body = await sdv.nfl.nflProPlayersOffensePassingSeason({ season: 2024, season_type: 'REG' });
+const rows = await sdv.nfl.nflProTeamOffenseOverviewSeason({ season: 2024, parsed: true });
+```
+
+Responses are cut off at the page size without saying so. The wrapper pages
+on `offset` until it holds the envelope's own `total` rows (`paginate: false`
+turns that off, `max_pages` caps it at 40 by default). A capped result carries
+`_truncated: true` and emits a warning. An unsupported query parameter comes
+back as an empty `200`; that throws `InvalidParameterError`. `week` is a path
+scope, not a query parameter.
 
 ### Release downloads (`releases`)
 

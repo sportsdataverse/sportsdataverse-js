@@ -186,6 +186,7 @@ const GOALKEEPERS_GOALS_ADDED_DEF: WrapperDef = {
  * @param params.start_date - query parameter.
  * @param params.end_date - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaGoalkeepersGoalsAdded({ league_slug: '…' });
  */
@@ -402,6 +403,7 @@ const PLAYERS_GOALS_ADDED_DEF: WrapperDef = {
  * @param params.start_date - query parameter.
  * @param params.end_date - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaPlayersGoalsAdded({ league_slug: '…' });
  */
@@ -726,6 +728,7 @@ const TEAMS_GOALS_ADDED_DEF: WrapperDef = {
  * @param params.start_date - query parameter.
  * @param params.end_date - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
+ * @param params.section - (with `parsed: true`) the table to return: `summary`, `actions`. Default: `summary`; an unknown name throws, listing the valid ones.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
  * @example await sdv.asa.asaTeamsGoalsAdded({ league_slug: '…' });
  */

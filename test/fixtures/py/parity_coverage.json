@@ -2,15 +2,15 @@
   "_doc": "Parser-parity coverage of the vendored py returns tables, written by test/parsers/parity.test.js (SDV_PARITY_WRITE=1). py_tables = documented (attached, with columns) + no_schema (attached, missing or empty schema file) + incompatible (schema_compatible: false or schema_incompatible) + overridden (parser_overrides) + overlay_schema (the overlay attaches a JS-owned schema) + undeclared (no declaration). verified = documented endpoints checked on a real sdv-py capture; generated row types are emitted only for verified_endpoints, and each listed unexercised column (null in every capture, so its type is unchecked) must be typed unknown.",
   "source_ref": "719de79edb685b89c524f8b4c0c146fea0b53855",
   "totals": {
-    "py_tables": 825,
-    "documented": 239,
-    "no_schema": 15,
+    "py_tables": 908,
+    "documented": 299,
+    "no_schema": 38,
     "incompatible": 529,
     "overridden": 25,
     "overlay_schema": 0,
     "undeclared": 17,
     "verified": 179,
-    "unverified": 60,
+    "unverified": 120,
     "unexercised_columns": 117
   },
   "families": {
@@ -475,6 +475,18 @@
       "undeclared": 0,
       "verified": 0,
       "unverified": 11,
+      "verified_endpoints": {}
+    },
+    "nfl_pro": {
+      "py_tables": 16,
+      "documented": 16,
+      "no_schema": 0,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
+      "verified": 0,
+      "unverified": 16,
       "verified_endpoints": {}
     },
     "nhl_api_web": {
@@ -1202,6 +1214,18 @@
       "undeclared": 0,
       "verified": 0,
       "unverified": 0,
+      "verified_endpoints": {}
+    },
+    "pff_api": {
+      "py_tables": 67,
+      "documented": 44,
+      "no_schema": 23,
+      "incompatible": 0,
+      "overridden": 0,
+      "overlay_schema": 0,
+      "undeclared": 0,
+      "verified": 0,
+      "unverified": 44,
       "verified_endpoints": {}
     },
     "sports247": {

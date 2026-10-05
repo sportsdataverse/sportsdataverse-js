@@ -19,10 +19,10 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB St
 |---|---|---|---|---:|---:|
 | [nba](../nba/) | `basketball` | `nba` | universal | 112 | 128 |
 | [wnba](../wnba/) | `basketball` | `wnba` | universal | 112 | 111 |
-| [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 118 | — |
+| [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 118 | 30 |
 | [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 118 | — |
 | [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 120 | — |
-| [nfl](../nfl/) | `football` | `nfl` | universal, football | 114 | 15 |
+| [nfl](../nfl/) | `football` | `nfl` | universal, football | 114 | 99 |
 | [mlb](../mlb/) | `baseball` | `mlb` | universal, mlb | 113 | 117 |
 | [nhl](../nhl/) | `hockey` | `nhl` | universal | 112 | 127 |
 | [mch](../mch/) | `hockey` | `mens-college-hockey` | universal, ncaa | 118 | — |

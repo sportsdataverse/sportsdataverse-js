@@ -2,6 +2,11 @@
 
 ## **Unreleased**
 
+
+### Security
+
+- Credentials no longer reach `err.cause`. A raw axios error carries its request config — the `Authorization` header, cookies, and a POSTed login form, password included — and it was attached as-is to `AssetFetchError` (network failures, auth failures), so `util.inspect(err)` or a logged error could expose them. Every `SdvError` now stores its `cause` through `safeCause` (name, message and stack with URL query strings and `user:password@` redacted, plus `code` / `errno` / `syscall` — nothing else). `axiosTransport` and the impersonating (impit) transport reject with the same sanitized errors. This applies to every family; the old behavior predates this PR.
+
 ### Added — release dataset loaders (323 `load*` functions)
 
 - **New:** one loader per entry of sdv-py's `releases.yaml` (vendored verbatim), generated onto its league namespace as camelCase + snake alias, e.g. `await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'text', 'EPA', 'home_wp_before'] })` / `sdv.cfb.load_cfb_pbp(...)`: cfb 71, nba 41, mbb 34, wbb 34, wnba 34, mlb 32, nfl 29, nhl 27, pwhl 21 (new `sdv.pwhl` namespace). They read the published SportsDataverse / nflverse parquet assets — play-by-play with EPA/WP, schedules, rosters, box scores, ratings, player value — and resolve to an array of plain row objects. Options: `seasons` (one or a list; integers or 4-digit year strings, anything else raises `SdvError`), `columns` (read only those), `format` (`"rows"` default, or `"columns"` → `{ [column]: values[] }`, ~4x lighter), `maxCells`, `timeoutMs` (default 5 min).
@@ -78,9 +83,11 @@ the v4 names and register the same aliases.
 - `sdv.wnba.getTeamList()` no longer throws when called with no argument.
 - ESPN site API rejected the default User-Agent (HTTP 403 on every site_v2 wrapper: scoreboard, summary, teams, rosters…); the default UA no longer carries the `+https://…` token.
 
+
 ### Deprecated
 
 - The six stats.ncaa.org scrapers in `sdv.ncaa` (`getSports`, `getSeasons`, `getDivisions`, `getSportDivisionData`, `getPlayerData`, `getTeamData`) are marked `@deprecated` and emit a one-time `DeprecationWarning` (the host 403s plain clients). `ncaa.getScoreboard` only serves historical seasons.
+
 
 ### CI
 
@@ -92,6 +99,21 @@ the v4 names and register the same aliases.
 - `test/fixtures/py/parity_coverage.json` (drift-checked) splits all 825 vendored py returns tables per family into documented / no_schema / incompatible / overridden / overlay_schema / undeclared (asserted to sum), and lists per verified endpoint the schema columns its captures exercise; 117 columns on 25 verified endpoints are null in every capture (unexercised, type unchecked) and must be typed `unknown`. Generated row types key on this file.
 - Returns tables that fail on real captures are dropped (`tools/codegen/vendor.yaml`, evidence inline; the parsers still match sdv-py cell for cell). **`nba_stats`, `wnba_stats` and `on3` wholesale** (`schema_compatible: false`): sdv-py builds the stats.nba.com tables from its endpoint catalog rather than the parser (`fg3m` / `leagueid` vs the parsed `fg3_m` / `league_id`, multi-result-set payloads) and the On3 ones from other captures; every table the harness could check failed (11/13 NBA, 8/8 WNBA, 3/3 On3). They return when sdv-py regenerates those schemas from parser output (a later pin bump, gated by the harness). Per endpoint, via the new `schema_incompatible` key: NWSL `standings`, Statcast `gamefeed` / `leaderboard_catcher_stance`.
 - `npm run vendor` / `vendor:check` delete / flag a py schema copy the vendor wrote and no longer attaches by its exact path (byte-identical to the upstream copy; this removed the copies of the three flipped families and a stale `native/bart_wbb/ratings.yaml`); a JS-authored schema is never touched, wherever it lives. A hand-added file in a vendored directory is no longer flagged.
+
+### Added — subscription families: PFF Developer API, KenPom, NFL Pro
+
+Vendored from sportsdataverse-py (`719de79`). Each needs the caller's own paid credentials, has its own runtime, never retries a `403`, and is left out of the docs playground and its proxy allowlist. See the "Subscription families" section of the Transport & auth guide.
+
+- **PFF Developer API** — `sdv.nfl.pffApi*` (68 wrappers, `api.pff.com`). Bearer key from `headers.Authorization` > `api_key` > `SDV_PFF_API_KEY` > `PFF_API_KEY`. `400` / `422` throw the new `InvalidParameterError` with PFF's message; `404` → `NoDataError`; `401` / `403` / `429` / `5xx` and non-object `200` bodies → `AssetFetchError`. Columns withheld by entitlement (`restricted`) warn, or throw with `strict: true` / `SDV_PFF_STRICT=1`. `/v1` query keys stay snake_case as the spec. Parsers `parse_pff_report` / `parse_pff_player_detail` / `parse_pff_v2_table` are ports of sdv-py's and match its output on PFF's published examples.
+- **KenPom** — `sdv.mbb.kenpom*` (30 wrappers, `kenpom.com`). Password login (`email` / `password`, or `KENPOM_EMAIL` / `KENPOM_PW`, hoopR's `KP_USER` / `KP_PW`), session reused for 30 minutes; a rejected login throws. The default transport for this family is the browser-impersonating one (kenpom.com's Cloudflare check answers `403` to Node's TLS fingerprint), so it needs the optional `impit`. `{ parsed: true }` returns every table on the page keyed by HTML id; the parser ports sdv-py's `parse_kenpom_page` and the `pandas.read_html` header rules it relies on, and matches sdv-py on the committed fixture and on eight live pages. The parser is node-only (cheerio), so it is registered by the runtime rather than in the browser parser bundle (`NODE_ONLY_PARSERS`).
+- **NFL Pro** — `sdv.nfl.nflPro*` (16 wrappers, `pro.nfl.com`). User-bound bearer from `headers.Authorization` > `token` > `NFLPRO_TOKEN`, checked for an active `NFL_PLUS_*` plan and expiry first (`NflProAuthError`). Pages on `offset` until the envelope's `total`; a capped result is flagged `_truncated`. An empty `200` (how the API rejects a parameter) → `InvalidParameterError`. sdv-py's headless-browser login is not ported.
+- Core: `registerFamilyDefaults(family, { classifyError })` lets a family map a final failed response to its own error (404 stays `NoDataError`). New exports: `InvalidParameterError`, `NflProAuthError`, `nflProToken`, `resolvePffApiKey`, `hasKenpomLogin`, `kenpomLogin`, `kenpomClearSessionCache`, `parse_kenpom_page`, `NODE_ONLY_PARSERS`, and the `FlatParserFn` / `ParsedTables` types (a flat parser may return a dict of tables, as for KenPom pages and PFF's multi-table bodies).
+- Live tests: `SDV_PFF_LIVE=1`, `SDV_KENPOM_LIVE=1`, `SDV_NFL_PRO_LIVE=1`, each also skipped without its credentials.
+- `section` (the `MULTI_TABLE_SECTIONS` mechanism, extended): `parse_pff_v2_table` `'rows'` (default) / `'teamTotals'`, `parse_pff_player_detail` `'weeks'` (default) / `'career'`, and for the dict-default `parse_pff_report` / `parse_kenpom_page`, one table by name (a PFF report or dict key, a KenPom table id). An unknown name throws, listing the valid ones. `MULTI_TABLE_SECTIONS` entries may now have `default: null` (sdv-py's dict of tables) and `sections: null` (payload-named tables, described by `dynamic`). The reference docs and JSDoc show `section` for every multi-table wrapper.
+- **Public TS type change:** `PARSERS` / `parserFor` are now typed `FlatParserFn` (`(raw, section?) => rows | ParsedTables`), since a flat parser may return a dict of tables. Code that called `parserFor(...)(raw).map(...)` must narrow the result first.
+- `sportsdataverse/parsers` exports `parse_pff_report` / `parse_pff_player_detail` / `parse_pff_v2_table` / `parse_pff_matrix` / `parse_nfl_pro_stats` and `parse_kenpom_page`. The playground bundle is now built from `src/parsers/browser.ts`, which excludes the node-only KenPom parser.
+- KenPom: explicit-credential sessions are keyed by e-mail plus a SHA-256 of the password, cached only after a successful login, and capped at 8, so a corrected password now works. Concurrent calls for one account share a single login, and a request in flight keeps its session even if a ninth account evicts it from the cache. A page that comes back logged out refreshes the session it used once, then throws `AssetFetchError`; it is never returned as data. A `401` refreshes the session the request actually used (`AuthContext.request` is passed to `refresh`).
+- NFL Pro: boolean query params are sent as sdv-py's `requests` sends them, `"True"` / `"False"` (unverified live).
 
 ### Added — HockeyTech analytics: shifts, time on ice, on-ice tracking, Corsi/Fenwick
 
@@ -117,11 +139,13 @@ Vendored from sdv-py at the existing pin (`719de79`); no key or login for any of
 - Parsers are ports of sdv-py's, checked cell by cell against sdv-py's own output on real captures. Multi-table parsers (ASA goals-added, MLS standings and match, NWSL lineups) return one sub-frame under `parsed: true` — the one sdv-py's returns schema documents (ASA `summary`, MLS `entries` / `match_information`, NWSL `players`) — and `section: "<name>"` selects any other (unknown name throws, listing the valid ones; values are in the generated reference). Every sub-frame at once: `parse_asa_goals_added_tables`, `parse_mls_standings_tables`, `parse_mls_match_tables`, `parse_nwsl_lineups_tables` from `sportsdataverse/parsers`.
 - A 2xx non-JSON body (HTML bot block) from these JSON hosts is an `AssetFetchError`, not an empty result; a genuinely empty `[]` / `{}` is data.
 - Playground proxy: the new hosts (and MLS's per-endpoint `sportapi` / `dapi` hosts) are allowlisted; the proxy supplies the MLS / NWSL `Referer`.
+
 ### Added — stats.nba.com / stats.wnba.com (`nba_stats` 128, `wnba_stats` 111)
 
 - Vendored from sdv-py@719de79 onto `sdv.nba.nba_stats_<slug>` (e.g. `nba_stats_leaguedashplayerstats`, `nba_stats_playercareerstats`) and `sdv.wnba.wnba_stats_<slug>`; `league_id` selects `"00"` NBA, `"20"` G-League, `"15"` Summer League (WNBA `"10"`). `{ parsed: true }` runs the ported `parse_nba_stats_result_sets` (single set -> rows, several -> `{ setName: rows }`, empty/malformed -> `[]`).
 - **Needs a TLS-impersonating transport.** stats.nba.com fingerprint-blocks plain clients (the request hangs instead of failing) and hangs on datacenter/cloud IPs. Both families default to `createImpersonatingTransport({ browser: "chrome" })` (optional peer `impit`: `npm install impit`) with the sdv-py stats headers, and 403 is never retried. Without `impit`, calls reject with `TransportUnavailableError` explaining the install and the datacenter-IP caveat. A timeout, blank body or bare `{}` is a failure (`AssetFetchError`), never "no data".
 - Not on the docs playground proxy. Live tests use their own gate `SDV_NBA_STATS_LIVE=1` (never set in CI).
+
 
 ### Added — HockeyTech: 15 more leagues, season-id helpers, PWHL views
 
@@ -130,6 +154,7 @@ Vendored from sdv-py at the existing pin (`719de79`); no key or login for any of
 - Season helpers on `sdv.hockeytech`: `hockeytech_season_id(league)`, `most_recent_hockeytech_season(league)`, `hockeytech_resolve_season_id(league, {season|seasonId, gameType})` (camelCase too).
 - `hockeytech_seasons` parsed rows gain `season_yr` and `game_type_label`; `hockeytech_schedule` now defaults to the full-history window (`numberofdaysback/ahead/limit` = 10000, as sdv-py).
 - Season ids: `hockeytech_schedule` / `hockeytech_playoff_bracket` take a raw `season_id` (py accepts an end-year `season=`). Resolve first with `hockeytech_resolve_season_id(league, { season })`; brackets need `gameType: 'playoffs'`. The views that sdv-py sends `league_id` on (schedule/scorebar, standings, transactions, brackets) now send the league's registry `leagueId` (overridable via `league_id`).
+
 
 ### Changed (breaking) — error vocabulary, pluggable transport + auth
 
@@ -158,6 +183,7 @@ retry → classification.
   whose getter takes headers (not HockeyTech, which builds its own).
 - New guide: [Transport, auth & errors](/docs/guides/transport-and-auth).
 
+
 ### Changed (breaking) — provider method naming
 
 Dropped internal vendor API codenames (and redundant `_api` stems) from provider
@@ -171,6 +197,7 @@ are unchanged):
 The rename flows through the codegen stems, returns-schema paths, parser names,
 playground ids, and docs. Real upstream URL paths that contain the vendor
 codename (Fox `/bifrost/v1/…`, Yahoo `/v1/query/shangrila/…`) are unchanged.
+
 
 ### Changed — shared endpoint YAML is vendored from sportsdataverse-py
 
@@ -218,6 +245,7 @@ drifted since the 2026-06 fork:
 A minor, additive release: two new flat-API families (no breaking changes), plus
 the docs-site overhaul.
 
+
 ### New flat-API families
 
 Two standalone provider namespaces join the flat-API surface — **532 flat-API
@@ -254,6 +282,7 @@ column-described returns tables.
   the in-browser **playground** — the `/api/run` proxy allowlist derives one host
   per family, so QMJHL calls there hit the primary host. Use the library directly
   for QMJHL.
+
 
 ### Docs
 

@@ -1,0 +1,72 @@
+{
+ "columns": [
+  "player_id",
+  "player",
+  "position",
+  "direction",
+  "attempts",
+  "yards",
+  "ypa",
+  "touchdowns",
+  "first_downs",
+  "explosive",
+  "yards_after_contact",
+  "yco_attempt",
+  "longest",
+  "avoided_tackles",
+  "fumbles"
+ ],
+ "rows": [
+  {
+   "player_id": 11803,
+   "player": "Joe Mixon",
+   "position": "HB",
+   "direction": "LE",
+   "attempts": 24,
+   "yards": 106,
+   "ypa": 4.4,
+   "touchdowns": 2,
+   "first_downs": 6,
+   "explosive": 4,
+   "yards_after_contact": 83,
+   "yco_attempt": 3.46,
+   "longest": 14,
+   "avoided_tackles": 6,
+   "fumbles": 0
+  },
+  {
+   "player_id": 11803,
+   "player": "Joe Mixon",
+   "position": "HB",
+   "direction": "LT",
+   "attempts": 17,
+   "yards": 49,
+   "ypa": 2.9,
+   "touchdowns": 0,
+   "first_downs": 4,
+   "explosive": 1,
+   "yards_after_contact": 33,
+   "yco_attempt": 1.94,
+   "longest": 12,
+   "avoided_tackles": 2,
+   "fumbles": 0
+  },
+  {
+   "player_id": 11803,
+   "player": "Joe Mixon",
+   "position": "HB",
+   "direction": "LG",
+   "attempts": 32,
+   "yards": 98,
+   "ypa": 3.1,
+   "touchdowns": 3,
+   "first_downs": 9,
+   "explosive": 3,
+   "yards_after_contact": 79,
+   "yco_attempt": 2.47,
+   "longest": 16,
+   "avoided_tackles": 4,
+   "fumbles": 0
+  }
+ ]
+}

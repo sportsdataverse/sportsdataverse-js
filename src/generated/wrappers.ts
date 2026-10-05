@@ -17620,6 +17620,3644 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
     "returnsSchema": "native/torvik/game_schedule"
   },
   {
+    "short": "ref_leagues",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/leagues",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/leagues",
+    "auth": true
+  },
+  {
+    "short": "ref_games",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/games",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/games",
+    "auth": true
+  },
+  {
+    "short": "ref_players",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/players",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "id",
+        "queryKey": "id"
+      },
+      {
+        "name": "name",
+        "queryKey": "name"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/players",
+    "auth": true
+  },
+  {
+    "short": "team_list",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/teams",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/franchise_groups",
+    "auth": true
+  },
+  {
+    "short": "team_overview",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/teams/overview",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/team_overview",
+    "auth": true
+  },
+  {
+    "short": "team_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/teams/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff_api/team_summary",
+    "auth": true
+  },
+  {
+    "short": "player_seasons",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/seasons",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/player_seasons",
+    "auth": true
+  },
+  {
+    "short": "player_snaps_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/snaps/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/player_snaps_summary",
+    "auth": true
+  },
+  {
+    "short": "player_position_pivot",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/position/pivot",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/player_position_pivot",
+    "auth": true
+  },
+  {
+    "short": "player_offense_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/offense/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff/player_offense_summary",
+    "auth": true
+  },
+  {
+    "short": "player_offense_blocking",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/offense/blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff/player_offense_blocking",
+    "auth": true
+  },
+  {
+    "short": "player_offense_pass_blocking",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/offense/pass_blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_offense_pass_blocking",
+    "auth": true
+  },
+  {
+    "short": "player_offense_run_blocking",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/offense/run_blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_offense_run_blocking",
+    "auth": true
+  },
+  {
+    "short": "player_passing_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/passing/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff/player_passing_summary",
+    "auth": true
+  },
+  {
+    "short": "player_passing_concept",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/passing/concept",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_concept",
+    "auth": true
+  },
+  {
+    "short": "player_passing_depth",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/passing/depth",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_depth",
+    "auth": true
+  },
+  {
+    "short": "player_passing_pressure",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/passing/pressure",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_pressure",
+    "auth": true
+  },
+  {
+    "short": "player_rushing_direction",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/rushing/direction",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff_api/player_rushing_direction",
+    "auth": true
+  },
+  {
+    "short": "player_rushing_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/rushing/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff/player_rushing_summary",
+    "auth": true
+  },
+  {
+    "short": "player_receiving_depth",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/receiving/depth",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_depth",
+    "auth": true
+  },
+  {
+    "short": "player_receiving_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/receiving/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff/player_receiving_summary",
+    "auth": true
+  },
+  {
+    "short": "player_defense_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/defense/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff/player_defense_summary",
+    "auth": true
+  },
+  {
+    "short": "player_field_goal_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/field_goal/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_field_goal_summary",
+    "auth": true
+  },
+  {
+    "short": "player_kickoff_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/kickoff/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_kickoff_summary",
+    "auth": true
+  },
+  {
+    "short": "player_punting_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/punting/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_punting_summary",
+    "auth": true
+  },
+  {
+    "short": "player_return_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/return/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_return_summary",
+    "auth": true
+  },
+  {
+    "short": "player_special_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/player/special/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "player_id",
+        "queryKey": "player_id"
+      },
+      {
+        "name": "career",
+        "queryKey": "career"
+      }
+    ],
+    "parser": "parse_pff_player_detail",
+    "returnsSchema": "native/pff_api/player_special_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_offense_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/offense/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/offense_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_offense_blocking",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/offense/blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/blocking_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_offense_pass_blocking",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/offense/pass_blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/pass_blocking",
+    "auth": true
+  },
+  {
+    "short": "facet_offense_run_blocking",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/offense/run_blocking",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/run_blocking",
+    "auth": true
+  },
+  {
+    "short": "facet_passing_allowed_pressure",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/passing/allowed_pressure",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_allowed_pressure",
+    "auth": true
+  },
+  {
+    "short": "facet_passing_concept",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/passing/concept",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_concept",
+    "auth": true
+  },
+  {
+    "short": "facet_passing_depth",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/passing/depth",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_depth",
+    "auth": true
+  },
+  {
+    "short": "facet_passing_detail",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/passing/detail",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_detail_stats",
+    "auth": true
+  },
+  {
+    "short": "facet_passing_pressure",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/passing/pressure",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_pressure",
+    "auth": true
+  },
+  {
+    "short": "facet_passing_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/passing/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/passing_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_receiving_concept",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/receiving/concept",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_concept",
+    "auth": true
+  },
+  {
+    "short": "facet_receiving_coverage",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/receiving/coverage",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_coverage_stats",
+    "auth": true
+  },
+  {
+    "short": "facet_receiving_depth",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/receiving/depth",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_depth",
+    "auth": true
+  },
+  {
+    "short": "facet_receiving_scheme",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/receiving/scheme",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_scheme",
+    "auth": true
+  },
+  {
+    "short": "facet_receiving_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/receiving/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_rushing_direction",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/rushing/direction",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/rushing_direction_stats",
+    "auth": true
+  },
+  {
+    "short": "facet_rushing_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/rushing/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/rushing_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_defense_coverage",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/defense/coverage",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/coverage_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_defense_coverage_scheme",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/defense/coverage_scheme",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/coverage_scheme",
+    "auth": true
+  },
+  {
+    "short": "facet_defense_coverage_matchup",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/defense/coverage_matchup",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/receiving_coverage_stats",
+    "auth": true
+  },
+  {
+    "short": "facet_defense_pass_rush",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/defense/pass_rush",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/pass_rush_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_defense_run",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/defense/run",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/run_defense_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_defense_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/defense/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/defense_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_field_goal_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/field_goal/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/field_goal_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_kickoff_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/kickoff/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/kicking_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_punting_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/punting/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/punting_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_return_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/return/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/return_summary",
+    "auth": true
+  },
+  {
+    "short": "facet_special_summary",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/special/summary",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "franchise_id",
+        "queryKey": "franchise_id"
+      },
+      {
+        "name": "game_id",
+        "queryKey": "game_id"
+      },
+      {
+        "name": "division",
+        "queryKey": "division"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/special_teams_summary",
+    "auth": true
+  },
+  {
+    "short": "signature_passing_time_in_pocket",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/signature/passing/time_in_pocket",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/time_in_pockets",
+    "auth": true
+  },
+  {
+    "short": "signature_pass_blocking_efficiency_line",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/signature/pass-blocking/efficiency/line",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/pbes",
+    "auth": true
+  },
+  {
+    "short": "signature_defense_outside_pass_rush",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/signature/defense/outside_pass_rush",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/prps",
+    "auth": true
+  },
+  {
+    "short": "signature_defense_slot_coverage",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/facet/signature/defense/slot_coverage",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "league",
+        "queryKey": "league"
+      },
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      }
+    ],
+    "parser": "parse_pff_report",
+    "returnsSchema": "native/pff/slot_coverages",
+    "auth": true
+  },
+  {
+    "short": "whoami",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v1/auth/whoami",
+    "pathParams": [],
+    "queryParams": [],
+    "auth": true
+  },
+  {
+    "short": "position_report",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/positions/reports/{report}",
+    "pathParams": [
+      {
+        "name": "league"
+      },
+      {
+        "name": "report"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week_group",
+        "queryKey": "weekGroup"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "week_to",
+        "queryKey": "weekTo"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/position_report",
+    "auth": true
+  },
+  {
+    "short": "team_directory",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams",
+    "pathParams": [
+      {
+        "name": "league"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_directory",
+    "auth": true
+  },
+  {
+    "short": "team_stats",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams/stats",
+    "pathParams": [
+      {
+        "name": "league"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week_group",
+        "queryKey": "weekGroup"
+      },
+      {
+        "name": "week_ids",
+        "queryKey": "weekIds"
+      },
+      {
+        "name": "category",
+        "queryKey": "category"
+      },
+      {
+        "name": "scope",
+        "queryKey": "scope"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_stats",
+    "auth": true
+  },
+  {
+    "short": "team_roster",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams/{team}/roster",
+    "pathParams": [
+      {
+        "name": "league"
+      },
+      {
+        "name": "team"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_roster",
+    "auth": true
+  },
+  {
+    "short": "team_schedule",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams/{team}/schedule",
+    "pathParams": [
+      {
+        "name": "league"
+      },
+      {
+        "name": "team"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_schedule",
+    "auth": true
+  },
+  {
+    "short": "team_leaders",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams/{team}/leaders",
+    "pathParams": [
+      {
+        "name": "league"
+      },
+      {
+        "name": "team"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week_group",
+        "queryKey": "weekGroup"
+      },
+      {
+        "name": "group",
+        "queryKey": "group"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_leaders",
+    "auth": true
+  },
+  {
+    "short": "team_rushing_direction",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams/{team}/reports/rushing-direction",
+    "pathParams": [
+      {
+        "name": "league"
+      },
+      {
+        "name": "team"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week_group",
+        "queryKey": "weekGroup"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_rushing_direction",
+    "auth": true
+  },
+  {
+    "short": "team_report",
+    "flat": true,
+    "api": "pff_api",
+    "host": "https://api.pff.com",
+    "scope": "universal",
+    "path": "/v2/{league}/teams/{team}/reports/{report}",
+    "pathParams": [
+      {
+        "name": "league"
+      },
+      {
+        "name": "team"
+      },
+      {
+        "name": "report"
+      }
+    ],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season"
+      },
+      {
+        "name": "week_group",
+        "queryKey": "weekGroup"
+      },
+      {
+        "name": "week",
+        "queryKey": "week"
+      },
+      {
+        "name": "week_to",
+        "queryKey": "weekTo"
+      }
+    ],
+    "parser": "parse_pff_v2_table",
+    "returnsSchema": "native/pff_api/team_report",
+    "auth": true
+  },
+  {
+    "short": "players_offense_passing_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/players-offense/passing/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedPasser",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/players_offense_passing_season",
+    "auth": true
+  },
+  {
+    "short": "players_offense_passing_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/players-offense/passing/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedPasser",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/players_offense_passing_week",
+    "auth": true
+  },
+  {
+    "short": "players_offense_rushing_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/players-offense/rushing/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedRusher",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/players_offense_rushing_season",
+    "auth": true
+  },
+  {
+    "short": "players_offense_rushing_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/players-offense/rushing/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedRusher",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/players_offense_rushing_week",
+    "auth": true
+  },
+  {
+    "short": "players_offense_receiving_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/players-offense/receiving/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedReceiver",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/players_offense_receiving_season",
+    "auth": true
+  },
+  {
+    "short": "players_offense_receiving_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/players-offense/receiving/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedReceiver",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/players_offense_receiving_week",
+    "auth": true
+  },
+  {
+    "short": "defense_overview_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/defense/overview/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedDefender",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/defense_overview_season",
+    "auth": true
+  },
+  {
+    "short": "defense_overview_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/defense/overview/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedDefender",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/defense_overview_week",
+    "auth": true
+  },
+  {
+    "short": "defense_nearest_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/defense/nearest/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedDefender",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/defense_nearest_season",
+    "auth": true
+  },
+  {
+    "short": "defense_nearest_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/defense/nearest/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      },
+      {
+        "name": "qualified",
+        "queryKey": "qualifiedDefender",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/defense_nearest_week",
+    "auth": true
+  },
+  {
+    "short": "team_offense_overview_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/team-offense/overview/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/team_offense_overview_season",
+    "auth": true
+  },
+  {
+    "short": "team_offense_overview_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/team-offense/overview/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/team_offense_overview_week",
+    "auth": true
+  },
+  {
+    "short": "team_defense_overview_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/team-defense/overview/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/team_defense_overview_season",
+    "auth": true
+  },
+  {
+    "short": "team_defense_overview_week",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/team-defense/overview/week",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/team_defense_overview_week",
+    "auth": true
+  },
+  {
+    "short": "fantasy_season",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/fantasy/season",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      },
+      {
+        "name": "position_group",
+        "queryKey": "positionGroup",
+        "default": null
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/fantasy_season",
+    "auth": true
+  },
+  {
+    "short": "fantasy_game",
+    "flat": true,
+    "api": "nfl_pro",
+    "host": "https://pro.nfl.com",
+    "scope": "universal",
+    "path": "/api/secured/stats/fantasy/game",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "season",
+        "queryKey": "season",
+        "default": 2024
+      },
+      {
+        "name": "season_type",
+        "queryKey": "seasonType",
+        "default": "REG"
+      },
+      {
+        "name": "limit",
+        "queryKey": "limit",
+        "default": 500
+      },
+      {
+        "name": "offset",
+        "queryKey": "offset",
+        "default": null
+      },
+      {
+        "name": "nfl_id",
+        "queryKey": "nflId",
+        "default": null
+      },
+      {
+        "name": "position_group",
+        "queryKey": "positionGroup"
+      },
+      {
+        "name": "sort_key",
+        "queryKey": "sortKey",
+        "default": null
+      },
+      {
+        "name": "sort_value",
+        "queryKey": "sortValue",
+        "default": null
+      }
+    ],
+    "parser": "parse_nfl_pro_stats",
+    "returnsSchema": "native/nflpro/fantasy_game",
+    "auth": true
+  },
+  {
+    "short": "ratings",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/index.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "efficiency",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/summary.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "four_factors",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/stats.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "point_distribution",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/pointdist.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "height",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/height.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "foul_trouble",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/foul_trouble.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "team_stats",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/teamstats.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      },
+      {
+        "name": "side",
+        "queryKey": "od"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "player_stats",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/playerstats.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      },
+      {
+        "name": "metric",
+        "queryKey": "s"
+      },
+      {
+        "name": "conf",
+        "queryKey": "f"
+      },
+      {
+        "name": "conf_only",
+        "queryKey": "c"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "kpoy",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/kpoy.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "team",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/team.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "team_players_expanded",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/player-expanded.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "game_plan",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/gameplan.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "opponent_tracker",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/opptracker.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team",
+        "queryKey": "team"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      },
+      {
+        "name": "side",
+        "queryKey": "t"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "player_career",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/player.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "player_id",
+        "queryKey": "p"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "box",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/box.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "g"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "win_probability",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/winprob.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "game_id",
+        "queryKey": "g"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "fan_match",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/fanmatch.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date",
+        "queryKey": "d"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "team_history",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/history.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "team",
+        "queryKey": "t"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "coach_history",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/history.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "coach",
+        "queryKey": "c"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "program_ratings",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/programs.php",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "archive_ratings",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/archive.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "date",
+        "queryKey": "d"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "conference",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/conf.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conf",
+        "queryKey": "c"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "conference_stats",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/confstats.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "conference_history",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/confhistory.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "conf",
+        "queryKey": "c"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "trends",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/trends.php",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "home_court_advantage",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/hca.php",
+    "pathParams": [],
+    "queryParams": [],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "arenas",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/arenas.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "officials",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/officials.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "referee",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/referee.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "referee",
+        "queryKey": "r"
+      },
+      {
+        "name": "year",
+        "queryKey": "y"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
+    "short": "game_attributes",
+    "flat": true,
+    "api": "kenpom",
+    "host": "https://kenpom.com",
+    "scope": "universal",
+    "path": "/game_attrs.php",
+    "pathParams": [],
+    "queryParams": [
+      {
+        "name": "year",
+        "queryKey": "y"
+      },
+      {
+        "name": "attribute",
+        "queryKey": "s"
+      }
+    ],
+    "parser": "parse_kenpom_page",
+    "auth": true
+  },
+  {
     "short": "ratings",
     "flat": true,
     "api": "bart_wbb",

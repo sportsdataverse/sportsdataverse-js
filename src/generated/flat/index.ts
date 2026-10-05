@@ -10,11 +10,13 @@ import * as bartWbbFlat from "./bart_wbb.js";
 import * as cbsFlat from "./cbs.js";
 import * as foxFlat from "./fox.js";
 import * as hockeytechFlat from "./hockeytech.js";
+import * as kenpomFlat from "./kenpom.js";
 import * as mlbFlat from "./mlb.js";
 import * as mlbStatcastFlat from "./mlb_statcast.js";
 import * as mlsApiFlat from "./mls_api.js";
 import * as nbaStatsFlat from "./nba_stats.js";
 import * as nflApiFlat from "./nfl_api.js";
+import * as nflProFlat from "./nfl_pro.js";
 import * as nhlApiWebFlat from "./nhl_api_web.js";
 import * as nhlEdgeFlat from "./nhl_edge.js";
 import * as nhlRecordsFlat from "./nhl_records.js";
@@ -22,6 +24,7 @@ import * as nhlStatsRestFlat from "./nhl_stats_rest.js";
 import * as nwslApiFlat from "./nwsl_api.js";
 import * as oddsApiFlat from "./odds_api.js";
 import * as on3Flat from "./on3.js";
+import * as pffApiFlat from "./pff_api.js";
 import * as recruitingFlat from "./recruiting.js";
 import * as sports247Flat from "./sports247.js";
 import * as sports247SitePagesFlat from "./sports247_site_pages.js";
@@ -36,11 +39,13 @@ export const WRITTEN_FLAT: Record<string, Record<string, WrapperFn>> = {
   cbs: cbsFlat,
   fox: foxFlat,
   hockeytech: hockeytechFlat,
+  kenpom: kenpomFlat,
   mlb: mlbFlat,
   mlb_statcast: mlbStatcastFlat,
   mls_api: mlsApiFlat,
   nba_stats: nbaStatsFlat,
   nfl_api: nflApiFlat,
+  nfl_pro: nflProFlat,
   nhl_api_web: nhlApiWebFlat,
   nhl_edge: nhlEdgeFlat,
   nhl_records: nhlRecordsFlat,
@@ -48,6 +53,7 @@ export const WRITTEN_FLAT: Record<string, Record<string, WrapperFn>> = {
   nwsl_api: nwslApiFlat,
   odds_api: oddsApiFlat,
   on3: on3Flat,
+  pff_api: pffApiFlat,
   recruiting: recruitingFlat,
   sports247: sports247Flat,
   sports247_site_pages: sports247SitePagesFlat,

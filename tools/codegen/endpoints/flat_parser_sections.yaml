@@ -16,3 +16,20 @@ parsers:
   parse_nwsl_lineups:
     default: players
     sections: [teams, players, staff]
+  # PFF (py's report / career / table arguments) and KenPom (one table per HTML
+  # id). `default: null` keeps sdv-py's dict-of-tables shape; `sections: null`
+  # means the payload names its tables (`dynamic` says how).
+  parse_pff_report:
+    default: null
+    sections: null
+    dynamic: "a key of the default dict (a matrix report's `defenders` / `receivers` / `versus`; `/v1/teams`' `franchise_groups` / `games` / `teams`), or a single report's own key (e.g. `passing_summary`)"
+  parse_pff_player_detail:
+    default: weeks
+    sections: [weeks, career]
+  parse_pff_v2_table:
+    default: rows
+    sections: [rows, teamTotals]
+  parse_kenpom_page:
+    default: null
+    sections: null
+    dynamic: "a table id on the page (e.g. `ratings_table`; team.php: `schedule_table`, `player_table`, `depth_chart`)"

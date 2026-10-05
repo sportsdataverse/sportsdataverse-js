@@ -216,10 +216,13 @@ A parser is a function `(raw) => rows[]`:
 - The ESPN `summary` parser is a dispatcher: it returns 21 sub-frames, or one when
   given a `section` arg.
 
-The browser-safe barrel is `src/parsers/index.ts` (the `sportsdataverse/parsers`
-subpath export). It must import only browser-safe code (`_normalize`, sibling
-parsers, `papaparse`) — never node-only HTTP deps. Run `npm run bundle:parsers` after
-editing any parser so the playground bundle stays current.
+The browser-safe barrel is `src/parsers/browser.ts` (what `npm run bundle:parsers`
+builds the playground bundle from). It must import only browser-safe code
+(`_normalize`, sibling parsers, `papaparse`) — never node-only HTTP deps. The
+`sportsdataverse/parsers` subpath export, `src/parsers/index.ts`, is that barrel
+plus node-only parsers (KenPom's cheerio HTML parser, registered via
+`registerParser`). Run `npm run bundle:parsers` after editing any parser so the
+playground bundle stays current.
 
 ## Testing
 

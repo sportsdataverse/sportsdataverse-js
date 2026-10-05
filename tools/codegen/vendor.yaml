@@ -255,6 +255,23 @@ families:
       editorial_scoreboard: parse_yahoo_scores_scoreboard
     schemas:
       native/yahoo_shangrila/: native/yahoo/
+  # Subscription families (auth-gated; never on the docs playground allowlist).
+  pff_api:
+    # src/parsers/pff_api.ts: faithful port of sdv-py's nfl/pff_parsers.py
+    # (parse_pff_report / parse_pff_player_detail / parse_pff_v2_table), so py's
+    # returns schemas describe the JS output. Runtime: src/core/pff_api_runtime.ts.
+    schema_compatible: true
+  kenpom:
+    # src/parsers/kenpom.ts: faithful port of sdv-py's parse_kenpom_page (+ the
+    # pandas.read_html header rules of _html_tables.py). py ships no returns
+    # schemas for this family. Runtime: src/core/kenpom_runtime.ts.
+  nfl_pro:
+    # JS stem `nfl_pro` (py api stem `nflpro`) so the public names match py's
+    # name_pattern nfl_pro_{short} (nfl_pro_players_offense_passing_season).
+    from: nflpro
+    # src/parsers/nfl_pro.ts: faithful port of sdv-py's nfl/nflpro_parsers.py.
+    # Runtime: src/core/nfl_pro_runtime.ts.
+    schema_compatible: true
   nba_stats:
     # src/parsers/nba_stats.ts: "Faithful port of" sdv-py's nba/nba_stats_parsers.py
     # (parse_nba_stats_result_sets: resultSets / resultSet / shot-location grouped

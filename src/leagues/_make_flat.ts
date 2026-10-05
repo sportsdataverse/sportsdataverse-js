@@ -7,6 +7,11 @@ import { toCamel } from "../core/espn.js";
 import "../core/nfl_auth.js";
 import { statcastGet } from "../core/statcast_runtime.js";
 import { hockeytechGet } from "../core/hockeytech_runtime.js";
+// Subscription families: each module registers its auth / retry / error
+// defaults on import and exports the getter the dispatch routes through.
+import { pffApiGet } from "../core/pff_api_runtime.js";
+import { nflProGet } from "../core/nfl_pro_runtime.js";
+import { kenpomGet } from "../core/kenpom_runtime.js";
 import { torvikGet, bartWbbGet } from "../core/torvik_runtime.js";
 import { on3Get, mlsGet, nwslGet } from "../core/keyless_runtime.js";
 // Also registers the 247 families' transport / guest-JWT auth defaults.
@@ -18,10 +23,14 @@ import { FLAT_DEPRECATED_ALIASES } from "../generated/aliases.js";
 import { MULTI_TABLE_SECTIONS } from "../parsers/_frames.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
-/** A flat-API getter: same shape as `core/client.ts` `get`. */
+/**
+ * A flat-API getter: same shape as `core/client.ts` `get`, plus `args` — the
+ * caller's full params, for per-call controls that are not query params
+ * (`api_key`, `strict`, `token`, `email` / `password`, …).
+ */
 type GetterFn = (
   url: string,
-  config: { params?: any; headers?: any; family: string }
+  config: { params?: any; headers?: any; family: string; args?: Record<string, any> }
 ) => Promise<any>;
 
 /**
@@ -42,6 +51,11 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   // and JSON (one JSON endpoint even with a text/html content-type), so this
   // getter sets a browser UA and returns the raw body text for the parser.
   torvik: torvikGet,
+  // Subscription families: bearer key + restricted-column warning (PFF), user
+  // token + offset paging (NFL Pro), password-login session + HTML (KenPom).
+  pff_api: pffApiGet,
+  nfl_pro: nflProGet,
+  kenpom: kenpomGet,
   // 247Sports: browser headers (+ the RDB's trailing slash); the guest JWT and
   // the impersonating transport come from the family defaults.
   sports247: sports247Get,
@@ -82,7 +96,7 @@ export async function callFlat(
   const getter: GetterFn = (def.api ? GETTER_OVERRIDES[def.api] : undefined) ?? get;
   const { url, query } = resolveFlat(def, params);
   // Flat defs always carry their `api` stem (codegen); get() guards it at runtime.
-  const raw = await getter(url, { params: query, headers: params.headers, family: def.api! });
+  const raw = await getter(url, { params: query, headers: params.headers, family: def.api!, args: params });
   const parser = params.parsed ? parserFor(def.parser) : undefined;
   // Multi-table parsers (sdv-py returns a dict of frames) take `section`; the rest
   // keep their one-argument contract.
