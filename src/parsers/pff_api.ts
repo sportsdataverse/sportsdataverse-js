@@ -310,6 +310,7 @@ export function parse_pff_v2_table(raw: any, section?: string): Row[] {
   for (const c of declared) {
     const name = underscore(String(c.key));
     const type = ["integer", "number", "boolean", "string"].includes(String(c.type)) ? String(c.type) : "string";
+    // sdv-py's own /v2 id cast (a faithful port, narrower than isIdColumn); idColumnsToStrings runs on the output.
     schema.set(name, name === "id" || name.endsWith("_id") ? "integer" : type);
   }
   const rows = ((body[table] as any[]) || []).filter(isPlainObject);
