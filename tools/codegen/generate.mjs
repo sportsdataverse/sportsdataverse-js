@@ -49,6 +49,8 @@ const FLAT_API_FILES = [
   "yahoo",
   "hockeytech",
   "torvik",
+  "nba_stats",
+  "wnba_stats",
 ];
 
 // Which namespace each flat-API family is documented on (mirrors
@@ -82,7 +84,20 @@ const FLAT_API_NAMESPACES = {
   // BartTorvik T-Rank — standalone provider namespace (`sdv.torvik`) for men's
   // college basketball ratings / four-factors / game + player stats / schedule.
   torvik: "torvik",
+  // stats.nba.com / stats.wnba.com — merge onto the league namespaces
+  // (sdv.nba.nba_stats_*, sdv.wnba.wnba_stats_*). TLS-impersonation transport.
+  nba_stats: "nba",
+  wnba_stats: "wnba",
 };
+
+// Flat families excluded from the docs playground (see renderEndpointsJson).
+// (sports247 + sports247_site_pages: 247Sports needs the impersonating transport.)
+const NO_PLAYGROUND_FAMILIES = new Set([
+  "nba_stats",
+  "wnba_stats",
+  "sports247",
+  "sports247_site_pages",
+]);
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
 // section heading + intro line on the league reference page.
@@ -162,6 +177,16 @@ const FLAT_API_META = {
     source: "barttorvik.com (T-Rank college basketball analytics)",
     // Sport-specific standalone family: nests under the Basketball sport group.
     sport: "basketball",
+  },
+  nba_stats: {
+    label: "NBA Stats API (stats.nba.com)",
+    source:
+      "stats.nba.com (needs a TLS-impersonating transport and a residential IP)",
+  },
+  wnba_stats: {
+    label: "WNBA Stats API (stats.wnba.com)",
+    source:
+      "stats.wnba.com (needs a TLS-impersonating transport and a residential IP)",
   },
 };
 
@@ -1516,13 +1541,13 @@ function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
 // Playground metadata (consumed by the React component + serverless proxy)
 // ---------------------------------------------------------------------------
 
-// Families kept OFF the docs playground: their hosts answer only a
-// browser-impersonating TLS client, which the serverless proxy's plain fetch is
-// not. Leaving them out of `flatHosts` also keeps them off the proxy allowlist.
-const PLAYGROUND_EXCLUDED = new Set(["sports247", "sports247_site_pages"]);
-
 function renderEndpointsJson(wrappers, leagues, hosts, allFlatWrappers) {
-  const flatWrappers = allFlatWrappers.filter((w) => !PLAYGROUND_EXCLUDED.has(w.api));
+  // Families that must NEVER be reachable through the docs playground's
+  // /api/run proxy (its host allowlist derives from `flatHosts`): their hosts
+  // answer only a browser-impersonating TLS client (stats.nba.com /
+  // stats.wnba.com also need a residential IP), so a serverless fetch would
+  // only hang or be blocked. Dropped from the playground metadata.
+  const flatWrappers = allFlatWrappers.filter((w) => !NO_PLAYGROUND_FAMILIES.has(w.api));
   const flatHosts = flatHostsFrom(flatWrappers);
   return (
     JSON.stringify(
@@ -1540,7 +1565,7 @@ function renderEndpointsJson(wrappers, leagues, hosts, allFlatWrappers) {
         // onto (so the playground can group flat endpoints under their league).
         flatHosts,
         flatLeagues: Object.fromEntries(
-          Object.entries(FLAT_API_NAMESPACES).filter(([api]) => !PLAYGROUND_EXCLUDED.has(api))
+          Object.entries(FLAT_API_NAMESPACES).filter(([api]) => !NO_PLAYGROUND_FAMILIES.has(api))
         ),
         flatApis: flatWrappers,
       },

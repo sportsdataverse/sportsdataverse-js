@@ -176,3 +176,13 @@ families:
       editorial_scoreboard: parse_yahoo_scores_scoreboard
     schemas:
       native/yahoo_shangrila/: native/yahoo/
+  nba_stats:
+    # src/parsers/nba_stats.ts: "Faithful port of" sdv-py's nba/nba_stats_parsers.py
+    # (parse_nba_stats_result_sets: resultSets / resultSet / shot-location grouped
+    # headers / scoreboardv3 / scheduleleaguev2 / boxscore *v3 / video envelopes).
+    schema_compatible: true
+  wnba_stats:
+    # sdv-py's parse_wnba_stats_result_sets is a re-export alias of the NBA parser,
+    # so the WNBA family runs the same ported JS parser.
+    parsers:
+      parse_wnba_stats_result_sets: {js: parse_nba_stats_result_sets, schema_compatible: true}

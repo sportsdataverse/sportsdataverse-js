@@ -84,6 +84,11 @@ export const FLAT_HOSTS: Record<string, string> = {
   // (src/core/torvik_runtime.ts) sets a browser UA + returns the raw body text
   // (the endpoints mix CSV / JSON) — registered in GETTER_OVERRIDES.
   torvik: "https://barttorvik.com",
+  // stats.nba.com / stats.wnba.com — fingerprint-block plain clients (silent
+  // hang), so the families install an impersonating transport by default (see
+  // src/core/nba_stats_runtime.ts).
+  nba_stats: "https://stats.nba.com",
+  wnba_stats: "https://stats.wnba.com",
 };
 
 /**

@@ -10,6 +10,7 @@ import { hockeytechGet } from "../core/hockeytech_runtime.js";
 import { torvikGet } from "../core/torvik_runtime.js";
 // Also registers the 247 families' transport / guest-JWT auth defaults.
 import { sports247Get, sports247SitePagesGet } from "../core/sports247_runtime.js";
+import { nbaStatsGet } from "../core/nba_stats_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
@@ -41,6 +42,10 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   // the impersonating transport come from the family defaults.
   sports247: sports247Get,
   sports247_site_pages: sports247SitePagesGet,
+  // stats.nba.com / stats.wnba.com: browser headers, sorted params, zero-padded
+  // GameID, and a body check so a throttled blank / `{}` reply is a failure.
+  nba_stats: nbaStatsGet,
+  wnba_stats: nbaStatsGet,
 };
 
 const warnedDeprecated = new Set<string>();

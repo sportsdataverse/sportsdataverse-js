@@ -294,3 +294,16 @@ or `configure({ transport: { sports247: myTransport, sports247_site_pages: myTra
 The older `recruiting` family (`api.247sports.com`) is **deprecated**. That host
 answers HTTP 500. Each of its methods emits one `DeprecationWarning` naming its
 `sports247` replacement, or saying that there is none.
+### stats.nba.com / stats.wnba.com (`nba_stats`, `wnba_stats`)
+
+Both families install `createImpersonatingTransport({ browser: 'chrome' })` as
+their default transport, send the stats headers (`x-nba-stats-origin`,
+`x-nba-stats-token`, `Referer` / `Origin` on nba.com or wnba.com) and never retry
+403. Install the optional dependency (`npm install impit`) and run from a
+**residential** connection: these hosts hang (rather than error) on datacenter
+and cloud IPs such as GitHub Actions or AWS. A timeout, blank body or bare `{}`
+rejects with `AssetFetchError`; it is never reported as "no data". Raise
+`configure({ timeoutMs })` for slow historical endpoints, and route through a
+residential proxy with
+`configure({ transport: { nba_stats: createImpersonatingTransport({ proxyUrl }) } })`.
+Live tests: `SDV_NBA_STATS_LIVE=1 npm test` (never set in CI).

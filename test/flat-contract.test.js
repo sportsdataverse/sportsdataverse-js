@@ -29,6 +29,8 @@ const FLAT_API_NAMESPACES = {
   fox: 'fox',
   yahoo_scores: 'yahoo',
   yahoo: 'yahoo',
+  nba_stats: 'nba',
+  wnba_stats: 'wnba',
 };
 
 /** Fill every required path param so the URL fully resolves. */
