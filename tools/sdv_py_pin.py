@@ -8,7 +8,7 @@ HEAD is ``pin`` and it has no local changes. It returns ``(pin, root)``; a gener
 reads sdv-py files (fixtures, model tables) from ``root``. It does not depend on the
 working directory, so ``uv run --project <sdv-py>`` from the sdv-js root works too.
 
-Two pins:
+Three pins:
 
 * ``vendor_pin()`` -- ``tools/codegen/vendor.yaml`` ``source.ref``. The vendored
   parsers' oracle (tools/parity/py_oracle.py) tracks the vendor pin.
@@ -16,6 +16,9 @@ Two pins:
   producers, HockeyTech analytics, cricket win probability, odds math) were ported
   from; their committed oracles were generated there. Moving them to a newer pin is
   a deliberate change: bump ``PORT_PIN``, regenerate, re-check the JS ports.
+* ``BASKETBALL_PBP_PIN`` -- the ESPN basketball pbp producers alone
+  (tools/parity/espn_basketball_pbp_oracle.py), moved ahead of ``PORT_PIN`` to take sdv-py
+  #688 (one-provider and paired pickcenter spreads, team timeouts, MBB overtime seconds).
 """
 
 from __future__ import annotations
@@ -28,6 +31,7 @@ import yaml
 
 JS = Path(__file__).resolve().parents[1]
 PORT_PIN = "719de79edb685b89c524f8b4c0c146fea0b53855"
+BASKETBALL_PBP_PIN = "313587306d1031b0da46f5e1fef85dbaf5728200"
 
 
 def vendor_pin() -> str:
