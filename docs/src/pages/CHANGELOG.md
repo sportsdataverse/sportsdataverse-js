@@ -2,6 +2,42 @@
 
 ## **Unreleased**
 
+_The next release is **4.0.0**: the naming change below is breaking._
+
+### BREAKING — 4.0.0 (Unreleased): public names are sportsdataverse-py's
+
+Every generated wrapper now carries **sdv-py's public name**, so the same endpoint
+has the same name in Python and JavaScript. `tools/codegen/generate.mjs` ports
+sdv-py's emit-time rename layer (`tools/codegen/generate.py` at the vendor pin):
+
+- **ESPN** (all 29 leagues): `athlete` → `player`, `event` → `game` (plurals too) as
+  whole `_`-separated words (`espnNbaAthleteGamelog` → `espnNbaPlayerGamelog`,
+  `espnNflEvents` → `espnNflGames`; `athlete_eventlog` → `player_eventlog`),
+  `event_competitor*` → `game_team*`, `event_competition` → `game_competition`.
+  sdv-py's curated CFB renames apply (`espnCfbSeasonFutures` → `espnCfbFutures`, …,
+  from the now-vendored `espn_rename_map.yaml`). Where sdv-py hand-writes a
+  `player_stats`, the web-v3 stats endpoint is `player_stats_v3`
+  (`espnNbaAthleteStats` → `espnNbaPlayerStatsV3`; cfb, mbb, mlb, nba, nfl, nhl,
+  wbb, wnba), elsewhere plain `player_stats`.
+- **Native APIs** use sdv-py's `name_pattern` / `qualifier`: NHL api-web
+  `nhlApiWeb*` → `nhl*` (`nhlWebPbp` / `nhlWebSchedule` where sdv-py's own
+  `nhl_pbp` / `nhl_schedule` take the plain name); NFL.com `nflApi*` → `nfl*`.
+- **CBS** takes sdv-py's 16 short names (`cbsBoxscore` → `cbsGameBoxscore`,
+  `cbsClientConfiguration` → `cbsClientConfig`, …).
+- Families already named like sdv-py (MLB, Statcast, NHL edge / stats-rest /
+  records, nba_stats, wnba_stats, Torvik, Yahoo) are unchanged.
+
+**Nothing is removed.** All 1,405 renamed pre-v4 names (2,810 counting both
+snake_case and camelCase) stay callable as deprecated aliases: each forwards to the
+new wrapper and emits one `DeprecationWarning` per name per process. The full
+mapping is the new [Deprecated names (v4)](https://js.sportsdataverse.org/docs/reference/deprecations)
+reference page; `test/naming.test.js` asserts every pre-v4 public name (frozen in
+`tools/codegen/pre_v4_names.json`) still resolves, and that the v4 names equal
+sdv-py's generated names at the pin. The raw-JSON default and `{ parsed: true }`
+are unchanged. Wrapper defs gain `publicShort` (ESPN) / `publicName` (flat) and
+`LeagueConfig` gains `publicShorts`; `makeLeagueModule` / `makeFlatModule` build
+the v4 names and register the same aliases.
+
 ### Fixed
 
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.

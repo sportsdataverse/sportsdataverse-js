@@ -80,7 +80,7 @@ export const EXAMPLES = [
     parser: 'parse_nfl_standings',
     target: 'nfl.mdx',
     caption:
-      '`sdv.nfl.nflApiStandings({ season: 2024, parsed: true })` — the native ' +
+      '`sdv.nfl.nflStandings({ season: 2024, parsed: true })` — the native ' +
       'NFL.com Shield standings, one row per team (sample fixture).',
   },
 ];
