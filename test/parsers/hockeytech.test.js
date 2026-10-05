@@ -464,11 +464,13 @@ describe('hockeytech: every hockeytechGet caller under the new classification', 
     await mostRecentHockeytechSeason('ahl').should.be.rejectedWith(AssetFetchError);
   });
 
-  it('season helpers: real seasons -> max season_yr; an answered-but-empty list -> the py default 2026', async () => {
+  it('season helpers: real seasons -> max season_yr; an answered-but-empty list -> NoDataError (not py\'s stale 2026)', async () => {
     useTransport(() => ({ data: SEASONS() }));
     (await mostRecentHockeytechSeason('pwhl')).should.equal(2027);
     useTransport(() => ({ data: '{"SiteKit":{"Seasons":[]}}' }));
-    (await mostRecentHockeytechSeason('pwhl')).should.equal(2026);
+    const err = await mostRecentHockeytechSeason('pwhl').should.be.rejectedWith(NoDataError, { message: /lists no season/ });
+    err.should.not.be.instanceOf(AssetFetchError);
+    (await sdv.hockeytech.hockeytech_season_id('pwhl')).should.eql([]); // the list itself stays a list
   });
 
   it('analytics feeds: a GC Undefined-Tab sentinel on the game summary -> AssetFetchError (was blank meta)', async () => {

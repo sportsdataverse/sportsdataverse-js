@@ -12,7 +12,7 @@
 // (src/leagues/_make_flat.ts).
 
 import { parse_hockeytech_seasons } from "../parsers/hockeytech.js";
-import { AssetFetchError, SdvError } from "./errors.js";
+import { AssetFetchError, NoDataError, SdvError } from "./errors.js";
 import { request } from "./request.js";
 
 /** A HockeyTech league's web-client defaults (public, shipped in each site's JS). */
@@ -284,14 +284,21 @@ export async function hockeytechSeasonId(league: string): Promise<Record<string,
 
 /**
  * Most-recent season as an end-year integer (max `season_yr`) — py `most_recent_<lg>_season`.
- * The py default 2026 is returned only when the feed answered with no seasons; a failed
- * fetch throws (`AssetFetchError` / `NoDataError`) instead of passing for "no season".
+ * A seasons list the feed answered with no usable season is `NoDataError` (py returns a
+ * hard-coded 2026 instead, already stale: PWHL's newest season is 2026-27); a failed fetch
+ * throws `AssetFetchError` / `NoDataError` from the getter.
  */
 export async function mostRecentHockeytechSeason(league: string): Promise<number> {
   const yrs = (await hockeytechSeasonId(league))
     .map((r) => Number(r.season_yr))
     .filter((n) => Number.isFinite(n));
-  return yrs.length ? Math.max(...yrs) : 2026;
+  if (!yrs.length) {
+    throw new NoDataError(`HockeyTech ${league}: the seasons feed lists no season`, {
+      url: resolveLeague(league).baseUrl,
+      status: 200,
+    });
+  }
+  return Math.max(...yrs);
 }
 
 /**
