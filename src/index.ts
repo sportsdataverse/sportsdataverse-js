@@ -1,4 +1,5 @@
 import cfb from './services/cfb.service.js';
+import { allHockeytechAnalytics, hockeytechGameCorsi, hockeytechPlayerToi, hockeytechShiftStints } from './analytics/hockeytech_family.js';
 import { hockeytechSeasonId, mostRecentHockeytechSeason, resolveSeasonId } from './core/hockeytech_runtime.js';
 import mbb from './services/mbb.service.js';
 import mlb from './services/mlb.service.js';
@@ -123,6 +124,18 @@ const hockeytechSeasonExtra = {
   most_recent_hockeytech_season: mostRecentHockeytechSeason,
   hockeytech_resolve_season_id: resolveSeasonId,
 };
+// HockeyTech analytics (py `<lg>_game_shifts` / `<lg>_player_toi` / `<lg>_game_corsi`): every
+// league gets the three callables (`sdv.hockeytech.pwhl_game_shifts(42)`), plus league-parameterised
+// generics. `hockeytech_game_shifts` stays the raw-feed flat wrapper; the py-parity shift stints
+// are `hockeytech_shift_stints`.
+Object.assign(hockeytechSeasonExtra, allHockeytechAnalytics(), {
+  hockeytech_shift_stints: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechShiftStints(league, game_id),
+  hockeytech_player_toi: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechPlayerToi(league, game_id),
+  hockeytech_game_corsi: ({ league, game_id }: { league: string; game_id: number | string }) =>
+    hockeytechGameCorsi(league, game_id),
+});
 for (const [name, fn] of Object.entries(hockeytechSeasonExtra)) {
   sdv.hockeytech[name] = fn;
   sdv.hockeytech[toCamel(name)] = fn;
