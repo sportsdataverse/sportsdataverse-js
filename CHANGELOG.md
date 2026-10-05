@@ -6,9 +6,23 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed — vendor LOCK online integrity check + vendor-sync hardening
+
+- **New:** `npm run vendor:check:online` (CI and the weekly vendor-sync) checks `vendor/upstream/LOCK` against sdv-py's `git/trees/<ref>` at the pinned ref: every blob sha must match, and LOCK's path set must equal exactly what the vendor fetches (computed by the same path-selection helper `npm run vendor` uses), so editing a copy together with its LOCK line, or dropping a LOCK line and hand-editing the vendored copy, both fail. A network failure is a failure to verify, never a pass; 5xx/network errors are retried (3 attempts), 403/404 are not.
+- **vendor-sync:** `GITHUB_TOKEN` is exposed to the vendor step only (codegen runs in its own step without it); a ref/vendor/codegen failure opens or updates a "vendor-sync failed" issue naming the failing step (the run still goes red) instead of only failing.
+- **Pin bumps:** `npm run vendor` (not `vendor:check`) now removes a py schema copy that the new pin renamed or dropped (byte-identical to the old upstream, not referenced by any endpoint; JS-authored files are never touched). It derives the outgoing outputs per family, and names any family whose prune was skipped.
+- The vendor tests no longer flake against their timeout: endpoint-YAML parsing (the slow path, repeated per temp-tree copy) is memoized.
+
+
+### Added — ESPN basketball box producers (NBA / WNBA / MBB / WBB)
+
+- `sdv.<lg>.helper_<lg>_player_box(summary)` and `helper_<lg>_team_box(summary)` (+ camelCase, e.g. `sdv.nba.helperNbaPlayerBox`) for `nba`, `wnba`, `mbb`, `wbb`: one game's ESPN summary payload in, the rows the hoopR / wehoop box-score releases publish out. Pure (no network): fetch with `espn_<lg>_summary({ event_id })` and pass the result in. Ported from sdv-py (pin 719de79) with its per-league facts: NBA/WNBA carry `plus_minus` (a string such as `"+16"`), MBB/WBB do not; MBB/WBB skip a game whose second team ships no athletes, NBA/WNBA publish the first team's rows; MBB orders `active` last. Same columns, order and null handling as sdv-py; Int32 columns are numbers (ids included); `game_date_time` and `game_date` are JS `Date`s, exactly as the release loaders decode the published parquet (the instant, and the New York calendar date at UTC midnight), so producer rows and loaded rows join on the same values. A payload sdv-py skips returns `[]`. Parity: every helper is compared cell by cell with sdv-py's output on 14 real captures (full games in all four leagues, plus archival, one-sided, scheduled and stat-less payloads) and 24 derived gate payloads (`tools/parity/espn_basketball_box_oracle.py`).
 
 ### Security
 
+- Runtime dependencies patched: `axios` `^1.17.0` → `^1.20.0` (22 advisories, 8 high — header injection, prototype-pollution gadgets, ReDoS, HTTP/2 DoS, fetch-adapter redirect SSRF) and `undici` (pulled in by `cheerio`) 7.27.2 → 7.30.0 in the lockfile (21 advisories, 6 high). Both stay within their major version; no API change. `npm audit --omit=dev` is clean. The `undici` bump is lockfile-only: a consumer's install resolves cheerio's `^7.19.0` itself. sdv-js never sends requests through `undici`; it only calls `cheerio.load` on HTML that `axios` fetched, and the KenPom parser imports `cheerio/slim`.
+- Dev-only dependencies patched (never shipped — `files` is `dist/` only): `js-yaml` 4.3.2 (override floor raised from `^4.2.0`), `brace-expansion` 2.1.7 / 5.0.12, `markdown-it` 14.3.2, `linkify-it` 5.0.2, all through `mocha` / `typedoc`. Root `npm audit` is clean.
+- Docs-site dependencies (`docs/package-lock.json`, build-time only, never shipped) refreshed: every `@docusaurus/*` package 3.10.1 → 3.10.2 on one version (including `@docusaurus/faster` and `@docusaurus/types`, which the lockfile refresh would otherwise have left on 3.10.1), plus in-range patches that close 53 of 54 Dependabot advisories (`brace-expansion`, `fast-uri`, `js-yaml`, `joi`, `svgo`, `postcss`, `nanoid`, `image-size`, `browserslist`, `shell-quote`, `http-cache-semantics`, `webpack-dev-server`, `qs`, …). The one left, `braces` (GHSA-vfj7-8cjw-p6xm), has no fixed release and is build-time only; see `SECURITY.md`.
 - Credentials no longer reach `err.cause`. A raw axios error carries its request config — the `Authorization` header, cookies, and a POSTed login form, password included — and it was attached as-is to `AssetFetchError` (network failures, auth failures), so `util.inspect(err)` or a logged error could expose them. Every `SdvError` now stores its `cause` through `safeCause` (name, message and stack with URL query strings and `user:password@` redacted, plus `code` / `errno` / `syscall` — nothing else). `axiosTransport` and the impersonating (impit) transport reject with the same sanitized errors. This applies to every family; the old behavior predates this PR.
 
 ### Added — release dataset loaders (323 `load*` functions)
@@ -82,6 +96,7 @@ the v4 names and register the same aliases.
 
 ### Fixed
 
+- NHL api-web / EDGE / records wrappers now honor sdv-py's `now_variant`: omitting the toggle arg (`season`, `date`, ...) requests the endpoint's `now_variant` route (`/now`, `/current`, or the collection path) instead of a malformed dated URL (`now_variant`/`now_toggle` carried through codegen, `resolveFlat`, and the playground resolver).
 - `sdv.cbs.*`: host is now `https://api.cbssports.com/napi` (every endpoint 404'd without the `/napi` base). `tools/codegen/from-openapi.mjs` no longer drops the spec base path when `--host` is a bare origin.
 - `getPicks` (cfb, mbb, mlb, nba, nfl, nhl): `pickcenter` was populated from `winprobability`; it now returns the real `pickcenter`.
 - `sdv.wnba.getTeamList()` no longer throws when called with no argument.

@@ -93,6 +93,10 @@ export interface WrapperDef {
    */
   includePrefixes?: string[];
   path: string;
+  /** Flat only (sdv-py `now_variant`): path used when the `nowToggle` param is absent. */
+  nowVariant?: string;
+  /** Flat only: the path param whose absence selects `nowVariant`. */
+  nowToggle?: string;
   pathParams: PathParam[];
   queryParams: QueryParam[];
   /**

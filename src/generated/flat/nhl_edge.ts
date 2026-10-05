@@ -15,6 +15,8 @@ const CAT_GOALIE_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/cat/edge/goalie-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/cat/edge/goalie-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -58,6 +60,8 @@ const CAT_SKATER_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/cat/edge/skater-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/cat/edge/skater-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -101,6 +105,8 @@ const GOALIE_5V5_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-5v5-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-5v5-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -144,6 +150,8 @@ const GOALIE_5V5_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-5v5-top-10/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-5v5-top-10/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "sort_by"
@@ -186,6 +194,8 @@ const GOALIE_COMPARISON_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-comparison/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-comparison/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -229,6 +239,8 @@ const GOALIE_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -272,6 +284,8 @@ const GOALIE_EDGE_SAVE_PCTG_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-edge-save-pctg-top-10/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "sort_by"
@@ -314,6 +328,8 @@ const GOALIE_LANDING_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-landing/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-landing/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "season",
@@ -353,6 +369,8 @@ const GOALIE_SAVE_PERCENTAGE_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-save-percentage-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-save-percentage-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -396,6 +414,8 @@ const GOALIE_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-shot-location-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-shot-location-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -439,6 +459,8 @@ const GOALIE_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/goalie-shot-location-top-10/{category}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "category"
@@ -485,6 +507,8 @@ const SKATER_COMPARISON_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-comparison/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-comparison/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -528,6 +552,8 @@ const SKATER_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -571,6 +597,8 @@ const SKATER_DISTANCE_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-distance-top-10/{positions}/{strength}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "positions"
@@ -621,6 +649,8 @@ const SKATER_LANDING_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-landing/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-landing/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "season",
@@ -660,6 +690,8 @@ const SKATER_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-shot-location-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-shot-location-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -703,6 +735,8 @@ const SKATER_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-shot-location-top-10/{position}/{category}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "position"
@@ -753,6 +787,8 @@ const SKATER_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-shot-speed-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-shot-speed-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -796,6 +832,8 @@ const SKATER_SHOT_SPEED_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-shot-speed-top-10/{positions}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "positions"
@@ -842,6 +880,8 @@ const SKATER_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-skating-distance-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-skating-distance-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -885,6 +925,8 @@ const SKATER_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-skating-speed-detail/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-skating-speed-detail/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -928,6 +970,8 @@ const SKATER_SPEED_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-speed-top-10/{positions}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-speed-top-10/{positions}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "positions"
@@ -974,6 +1018,8 @@ const SKATER_ZONE_TIME_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-zone-time/{player_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-zone-time/{player_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "player_id"
@@ -1017,6 +1063,8 @@ const SKATER_ZONE_TIME_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/skater-zone-time-top-10/{positions}/{strength}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "positions"
@@ -1067,6 +1115,8 @@ const TEAM_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-detail/{team_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-detail/{team_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team_id"
@@ -1110,6 +1160,8 @@ const TEAM_LANDING_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-landing/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-landing/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "season",
@@ -1149,6 +1201,8 @@ const TEAM_SHOT_LOCATION_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-shot-location-detail/{team_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-shot-location-detail/{team_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team_id"
@@ -1192,6 +1246,8 @@ const TEAM_SHOT_LOCATION_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-shot-location-top-10/{position}/{category}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "position"
@@ -1242,6 +1298,8 @@ const TEAM_SHOT_SPEED_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-shot-speed-detail/{team_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-shot-speed-detail/{team_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team_id"
@@ -1285,6 +1343,8 @@ const TEAM_SKATING_DISTANCE_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-skating-distance-detail/{team_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-skating-distance-detail/{team_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team_id"
@@ -1326,6 +1386,8 @@ const TEAM_SKATING_DISTANCE_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-skating-distance-top-10/{positions}/{strength}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "positions"
@@ -1376,6 +1438,8 @@ const TEAM_SKATING_SPEED_DETAIL_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-skating-speed-detail/{team_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-skating-speed-detail/{team_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team_id"
@@ -1417,6 +1481,8 @@ const TEAM_SKATING_SPEED_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-skating-speed-top-10/{positions}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "positions"
@@ -1463,6 +1529,8 @@ const TEAM_ZONE_TIME_DETAILS_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-zone-time-details/{team_id}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-zone-time-details/{team_id}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "team_id"
@@ -1506,6 +1574,8 @@ const TEAM_ZONE_TIME_TOP_10_DEF: WrapperDef = {
   "host": "https://api-web.nhle.com",
   "scope": "universal",
   "path": "/v1/edge/team-zone-time-top-10/{strength}/{sort_by}/{season}/{game_type}",
+  "nowVariant": "/v1/edge/team-zone-time-top-10/{strength}/{sort_by}/now",
+  "nowToggle": "season",
   "pathParams": [
     {
       "name": "strength"

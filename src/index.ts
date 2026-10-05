@@ -19,6 +19,7 @@ import { ESPN_DEPRECATED_ALIASES, FLAT_DEPRECATED_ALIASES } from './generated/al
 import { withDeprecatedAliases } from './core/deprecation.js';
 import * as mlbStatcastExtra from './leagues/mlb_statcast_extra.js';
 import * as cricketWp from './models/cricket_wp.js';
+import { BASKETBALL_BOX_PRODUCERS } from './producers/espn_basketball_box.js';
 import { oddsMath, oddsErrors } from './odds/math.js';
 
 // WRITTEN ESPN source modules — every ESPN league is composed from explicit,
@@ -190,6 +191,18 @@ const cricketWpExports: Record<string, any> = {
 for (const [name, fn] of Object.entries(cricketWpExports)) {
   sdv.cricket[name] = fn;
   sdv.cricket[toCamel(name)] = fn;
+}
+
+// ESPN basketball box producers (py `helper_<lg>_player_box` / `helper_<lg>_team_box`; pure:
+// one summary payload in, release rows out) merged onto sdv.nba / wnba / mbb / wbb under py +
+// camelCase names. Never silently overwrite an existing key.
+for (const [lg, fns] of Object.entries(BASKETBALL_BOX_PRODUCERS)) {
+  for (const [name, fn] of Object.entries(fns)) {
+    for (const n of [name, toCamel(name)]) {
+      if (n in sdv[lg]) throw new Error(`sdv.${lg}.${n} already exists`);
+      sdv[lg][n] = fn;
+    }
+  }
 }
 
 // Odds / market math (py wexp.market) merged onto sdv.odds under py + camelCase names.

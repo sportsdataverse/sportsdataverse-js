@@ -156,7 +156,8 @@ export function resolveFlat(def, params = {}, flatHosts = {}) {
   const host = def.host || (def.api && flatHosts[def.api]);
   if (!host) throw new Error(`${def.short}: flat wrapper missing host`);
   const byName = new Map((def.pathParams || []).map((p) => [p.name, p]));
-  const path = def.path.replace(/\{(\w+)\}/g, (_m, name) => {
+  const useNow = def.nowVariant && def.nowToggle && lookup(params, def.nowToggle) === undefined;
+  const path = (useNow ? def.nowVariant : def.path).replace(/\{(\w+)\}/g, (_m, name) => {
     const v = applyTransform(byName.get(name)?.transform, lookup(params, name) ?? byName.get(name)?.default);
     if (v === undefined || v === null || v === '') {
       const pp = byName.get(name);
