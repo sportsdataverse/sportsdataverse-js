@@ -3,28 +3,28 @@ kind: dataframe
 columns:
 - name: id
   type: character
-  description: 'HockeyTech game id.'
+  description: 'HockeyTech game id, the game_id the single-game functions (hockeytech_pbp, hockeytech_game_summary) take.'
 - name: season_id
   type: character
   description: 'HockeyTech season id.'
 - name: league_id
   type: character
-  description: 'HockeyTech league id of the game (the feed''s `league_id`, e.g. ''1'' for PWHL).'
+  description: 'HockeyTech league id of the game within the feed (e.g. ''1''; AHL ''4'', SJHL ''3''); not always the league_id the standings call sends.'
 - name: game_number
   type: character
   description: 'Game number within the schedule.'
 - name: game_letter
   type: character
-  description: 'Letter suffix of the game number; in the captures it is set only on playoff games (letters A-P, one per series) and empty otherwise.'
+  description: 'Playoff-series letter (A, B, C, ... one per series), set on every playoff game and empty on regular-season games.'
 - name: game_type
   type: character
   description: 'Game type the row belongs to.'
 - name: quick_score
   type: character
-  description: 'Quick-score flag string; ''0'' in every captured row (17 leagues), so the non-zero case was not observed.'
+  description: 'Unused by the feed: ''0'' in every captured row (final and scheduled games, 17 leagues), never a score.'
 - name: date
   type: character
-  description: 'Game date (YYYY-MM-DD).'
+  description: 'Game date as YYYY-MM-DD (date only, no time).'
 - name: flo_core_event_id
   type: character
   description: 'FloSports core event identifier linking this game to its FloSports broadcast event record.'
@@ -45,13 +45,13 @@ columns:
   description: 'Human-readable local game start time string formatted for display (e.g., "7:00 PM ET").'
 - name: timezone
   type: character
-  description: 'Time zone of the scheduled start, as a tz database name (e.g. ''Canada/Eastern'').'
+  description: 'Time zone of the scheduled start as a tz database name (e.g. ''Canada/Eastern'').'
 - name: ticket_url
   type: character
   description: 'URL to the official ticketing page where fans can purchase tickets for this game.'
 - name: home_id
   type: character
-  description: 'HockeyTech team identifier for the home team in this game.'
+  description: 'HockeyTech team id of the home team (the id of hockeytech_teams, e.g. PWHL ''1'' = Boston), not an ESPN id.'
 - name: home_code
   type: character
   description: 'Short team code (abbreviation) for the home team (e.g., "BOS", "MIN").'
@@ -69,7 +69,7 @@ columns:
   description: 'Home team division.'
 - name: home_goals
   type: character
-  description: 'Number of goals scored by the home team at the current point in the game.'
+  description: 'Goals scored by the home team in the game so far; the final score once game_status is ''4''.'
 - name: home_audio_url
   type: character
   description: 'URL of the home-team radio or audio broadcast stream for this game.'
@@ -123,34 +123,34 @@ columns:
   description: 'Game clock.'
 - name: game_summary_url
   type: character
-  description: 'Game-summary link target: the bare game id in some leagues (e.g. PWHL ''74'') and a site-relative path in others (e.g. ''/game-center/?game_id=12821'').'
+  description: 'Game-summary link target, not a full URL: the bare game id in some leagues (e.g. PWHL ''74'') and a site-relative path in others (e.g. ''/game-center/?game_id=4896'').'
 - name: home_wins
   type: character
-  description: 'Wins in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Home team''s wins in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: home_regulation_losses
   type: character
-  description: 'Regulation losses in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Home team''s regulation losses in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: home_ot_losses
   type: character
-  description: 'Overtime losses in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Home team''s overtime losses in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: home_shootout_losses
   type: character
-  description: 'Shootout losses in the home team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Home team''s shootout losses in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: visitor_wins
   type: character
-  description: 'Wins in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Visiting team''s wins in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: visitor_regulation_losses
   type: character
-  description: 'Regulation losses in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Visiting team''s regulation losses in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: visitor_ot_losses
   type: character
-  description: 'Overtime losses in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Visiting team''s overtime losses in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: visitor_shootout_losses
   type: character
-  description: 'Shootout losses in the visiting team''s record for this game''s season as the feed currently reports it (season-to-date when fetched, not as of the game date).'
+  description: 'Visiting team''s shootout losses in its record for this game''s season (season_id) as the feed reports it when fetched: the same value on every row of that team-season, not the record as of the game date.'
 - name: game_status
   type: character
-  description: 'Numeric game-status code; ''4'' on every captured final game (`game_status_string` ''Final'').'
+  description: 'Numeric game-status code as text: ''1'' for a scheduled game, ''4'' for a final. The label is in game_status_string (''Final'', or the start time of a scheduled game).'
 - name: intermission
   type: character
   description: 'Flag or string indicating whether the game is currently in an intermission period.'
