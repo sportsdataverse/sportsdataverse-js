@@ -20,8 +20,9 @@ Every wrapper — ESPN and flat-API alike — fetches through one runtime core:
 
 A **family** is the stem a wrapper belongs to: the ESPN URL families
 `site_v2`, `site_v2_alt`, `web_v3`, `core_v2`, or a flat-API stem such as
-`mlb`, `mlb_statcast`, `nhl_api_web`, `nfl_api`, `odds_api`, `recruiting`,
-`cbs`, `fox`, `yahoo`, `hockeytech`, `torvik` (the keys of `FLAT_HOSTS`).
+`mlb`, `mlb_statcast`, `nhl_api_web`, `nfl_api`, `odds_api`, `sports247`,
+`sports247_site_pages`, `cbs`, `fox`, `yahoo`, `hockeytech`, `torvik` (the keys
+of `FLAT_HOSTS`).
 
 ## Errors
 
@@ -172,9 +173,9 @@ if (process.env.ODDS_API_KEY) {
   // A key sent as a query parameter (The Odds API's apiKey).
   auth.odds_api = queryAuth({ apiKey: process.env.ODDS_API_KEY });
 }
-if (process.env.SPORTS247_TOKEN) {
-  // A bearer token (247Sports takes your own JWT). A getter is read per request.
-  auth.recruiting = bearerAuth(() => process.env.SPORTS247_TOKEN);
+if (process.env.MY_TOKEN) {
+  // A bearer token. A getter is read per request.
+  auth.my_bearer_family = bearerAuth(() => process.env.MY_TOKEN);
 }
 if (process.env.MY_KEY) {
   // A key sent as a header.
@@ -258,6 +259,48 @@ NFL.com web token for you. Override it with environment variables —
 (mint with your own client credentials) — or replace it entirely with
 `configure({ auth: { nfl_api: ... } })`.
 
+### 247Sports (`sports247`, `sports247_site_pages`)
+
+Both 247Sports families live on `sdv.sports247` and need no setup beyond the
+optional `impit` dependency:
+
+```bash
+npm install impit
+```
+
+- **Transport.** `ipa.247sports.com` (the Recruit Database) and the
+  `247sports.com/*.json` page models both block plain HTTP clients at the TLS
+  layer. Both families therefore register the browser-impersonating transport
+  as their default. Without `impit`, every call rejects with
+  `TransportUnavailableError`.
+- **Auth (`sports247` only).** The family registers a `tokenAuth`. On first use
+  it requests `https://247sports.com/` and reads the free **guest** `JWT` cookie
+  (no login, valid about 12 hours). It caches that token and re-mints it a
+  minute before the JWT `exp` and once after a `401`. If the mint fails, the
+  request goes out **without** a token, as in sdv-py, and one warning is emitted
+  per process. Public routes such as `teams` still answer. A route that needs
+  the token still fails loudly: its `401` triggers one refresh, whose mint fails
+  and throws, or it answers `403` (`AssetFetchError`).
+  `sports247ClearTokenCache()` drops the cached token.
+- **No `403` retries.** A `403` here means the fingerprint block or a
+  logged-in-only route, so neither family retries it.
+- Thirteen RDB routes (for example `biggestMovers` and `playerSportRankings`)
+  need a logged-in 247Sports session and are not wrapped.
+
+```js
+import sdv from 'sportsdataverse';
+
+const recruits = await sdv.sports247.sports247Recruits({ year: 2026, parsed: true });
+const school = await sdv.sports247.sports247SitePagesInstitution({ key: 24099, parsed: true });
+```
+
+To use your own token or transport, replace either default per family. For
+example, `configure({ auth: { sports247: bearerAuth(() => process.env.MY_247_JWT) } })`,
+or `configure({ transport: { sports247: myTransport, sports247_site_pages: myTransport } })`.
+
+The older `recruiting` family (`api.247sports.com`) is **deprecated**. That host
+answers HTTP 500. Each of its methods emits one `DeprecationWarning` naming its
+`sports247` replacement, or saying that there is none.
 ### stats.nba.com / stats.wnba.com (`nba_stats`, `wnba_stats`)
 
 Both families install `createImpersonatingTransport({ browser: 'chrome' })` as

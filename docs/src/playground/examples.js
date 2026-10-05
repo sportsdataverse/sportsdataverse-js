@@ -276,18 +276,8 @@ export const EXAMPLES = [
     params: { leagues: 'nfl' },
     parsed: true,
   },
-  {
-    id: 'recruiting-rankings',
-    sport: '247',
-    label: '247 — recruiting rankings',
-    blurb:
-      "247Sports' player rankings. Scope with `year` + `sport_key` " +
-      '(e.g. 2025 / football); parsed.',
-    league: 'recruiting',
-    endpoint: 'flat:sports247:rankings',
-    params: { year: 2025, sport_key: 'football' },
-    parsed: true,
-  },
+  // No 247Sports preset: `sdv.sports247` needs a browser-impersonating TLS
+  // client, which the playground proxy is not, and `recruiting` is deprecated.
 ];
 
 /** snake_case -> camelCase, matching the playground's param aliasing. */
