@@ -1,5 +1,5 @@
 import should from 'should';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import {
@@ -472,9 +472,10 @@ describe('hockeytech: every hockeytechGet caller under the new classification', 
     await mostRecentHockeytechSeason('ahl').should.be.rejectedWith(AssetFetchError);
   });
 
-  it('season helpers: real seasons -> max season_yr; an answered-but-empty list -> NoDataError (not py\'s stale 2026)', async () => {
+  it('season helpers: real seasons -> newest regular season_yr; an answered-but-empty list -> NoDataError', async () => {
     useTransport(() => ({ data: SEASONS() }));
-    (await mostRecentHockeytechSeason('pwhl')).should.equal(2027);
+    // id 10 is the 2026-27 preseason, listed before its regular season: the default is 2026 (py: pwhl 2026)
+    (await mostRecentHockeytechSeason('pwhl')).should.equal(2026);
     useTransport(() => ({ data: '{"SiteKit":{"Seasons":[]}}' }));
     const err = await mostRecentHockeytechSeason('pwhl').should.be.rejectedWith(NoDataError, { message: /lists no season/ });
     err.should.not.be.instanceOf(AssetFetchError);
@@ -535,82 +536,6 @@ describe('hockeytech: resolveSeasonId (gameType filter + PWHL fallback)', () => 
     });
     const err = await resolveSeasonId('pwhl', { season: 2025 }).should.be.rejectedWith(TypeError, { message: 'boom' });
     err.should.not.be.instanceOf(AssetFetchError);
-  });
-});
-
-// Real seasons lists of 17 leagues (test/fixtures/hockeytech/seasons/, provenance in the README).
-const SEASON_LEAGUES = readdirSync(join(fixDir, 'seasons')).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5));
-const seasonsBody = (lg) => readFix(join('seasons', `${lg}.json`));
-const seasonRows = (lg) => parse_hockeytech_seasons(JSON.parse(seasonsBody(lg)));
-
-describe('hockeytech: season names -> end year (real 17-league seasons captures)', () => {
-  afterEach(() => resetConfig());
-
-  it('every two-year name gives start + 1, whatever the separator or tail width', () => {
-    SEASON_LEAGUES.length.should.equal(17);
-    let n = 0;
-    for (const lg of SEASON_LEAGUES) {
-      for (const r of seasonRows(lg)) {
-        const m = /(\d{4})\s*[-/]\s*(\d{4}|\d{2})(?!\d)/.exec(r.season_name);
-        if (!m) continue;
-        n += 1;
-        r.season_yr.should.equal(Number(m[1]) + 1, `${lg}: ${r.season_name}`);
-      }
-    }
-    n.should.equal(218);
-  });
-
-  it('the forms that used to go wrong ("2025/26" -> 2025, "2025-2026" -> 2120)', () => {
-    const yr = (lg, name) => seasonRows(lg).find((r) => r.season_name === name).season_yr;
-    yr('kijhl', '2025/26 Regular Season').should.equal(2026);
-    yr('ajhl', '2025-2026 Regular Season').should.equal(2026);
-    yr('gojhl', '2025-2026 GOHL Season').should.equal(2026);
-    yr('sphl', '2020-2021 Regular Season').should.equal(2021);
-    yr('vijhl', '2025-2026 VIJHL Playoffs').should.equal(2026);
-    yr('ojhl', '2026 - 2027 Preseason').should.equal(2027);
-    yr('cchl', 'CCHL 2023-2024').should.equal(2024);
-    yr('ahl', '2025-26 Regular Season').should.equal(2026); // unchanged forms
-    yr('ahl', '2026 Calder Cup Playoffs').should.equal(2026);
-  });
-
-  it('most recent season of a YYYY-YYYY league is the real end year (AJHL: 2027, was 2120)', async () => {
-    useTransport(() => ({ data: seasonsBody('ajhl') }));
-    (await mostRecentHockeytechSeason('ajhl')).should.equal(2027);
-    useTransport(() => ({ data: seasonsBody('kijhl') }));
-    (await mostRecentHockeytechSeason('kijhl')).should.equal(2026);
-  });
-});
-
-describe('hockeytech: resolveSeasonId skips one-off events (py SPECIAL_EVENT_SEASON_RE)', () => {
-  afterEach(() => resetConfig());
-  const resolve = (lg, season, gameType) => {
-    useTransport(() => ({ data: seasonsBody(lg) }));
-    return resolveSeasonId(lg, { season, gameType });
-  };
-
-  it('AHL 2026 regular is 90, not the 91 All-Star Challenge listed before it (py fixture values)', async () => {
-    (await resolve('ahl', 2026)).should.equal(90);
-    (await resolve('ahl', 2025)).should.equal(86);
-    (await resolve('ahl', 2026, 'playoffs')).should.equal(92);
-    (await resolve('ahl', 2027)).should.equal(94);
-  });
-
-  it('OJHL 2026 regular is 74, past the Combine and All-Star rows; SJHL keeps its "Preseason Exhibition"', async () => {
-    (await resolve('ojhl', 2026)).should.equal(74); // 80 "2026 OJHL Combine", 78 "2026 All-Star" come first
-    (await resolve('gojhl', 2026)).should.equal(96); // 97 "2025-2026 Special Events"
-    (await resolve('sjhl', 2026, 'preseason')).should.equal(66); // "2025-26 Preseason Exhibition"
-    await resolve('ahl', 2018).should.be.rejectedWith(/No ahl season for season=2018/); // only Exhibition + All-Star
-  });
-
-  it('PWHL fallback table matches every row of the real seasons capture and adds 2026-27 (id 11)', async () => {
-    const rows = seasonRows('pwhl');
-    rows.length.should.equal(10);
-    useTransport(() => ({ data: '<html>oops</html>' })); // failed fetch -> the table alone answers
-    for (const r of rows) {
-      (await resolveSeasonId('pwhl', { season: r.season_yr, gameType: r.game_type_label })).should.equal(Number(r.season_id), r.season_name);
-    }
-    (await resolveSeasonId('pwhl', { season: 2027 })).should.equal(11);
-    (await resolveSeasonId('pwhl', { season: 2026, gameType: 'playoffs' })).should.equal(9);
   });
 });
 

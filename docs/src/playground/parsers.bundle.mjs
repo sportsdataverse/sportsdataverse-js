@@ -1827,28 +1827,45 @@ function siteKitRows(payload) {
   return [];
 }
 function deriveSeasonYear(name) {
+  const latest = (/* @__PURE__ */ new Date()).getFullYear() + 2;
+  const twoDigitEnd = (zz) => 2e3 + zz <= latest ? 2e3 + zz : 1900 + zz;
   const s = String(name ?? "");
   const m = /(\d{4})\s*[-/]\s*(\d{4}|\d{2})(?!\d)/.exec(s);
+  const short = /(?<!\d)(\d{2})\s*[-/]\s*(\d{2})(?!\d)/.exec(s);
+  const token = /(?<!\d)(\d{4})(?!\d)/.exec(s);
+  let yr = null;
   if (m) {
-    if (m[2].length === 4) return Number(m[2]);
     const start = Number(m[1]);
-    let end = Math.floor(start / 100) * 100 + Number(m[2]);
-    if (end < start) end += 100;
-    return end;
+    yr = m[2].length === 4 ? Number(m[2]) : Math.floor(start / 100) * 100 + Number(m[2]);
+    if (yr < start) yr += 100;
+  } else if (short && (Number(short[1]) + 1) % 100 === Number(short[2])) {
+    yr = twoDigitEnd(Number(short[2]));
+  } else if (token) {
+    const t = Number(token[1]);
+    if (t >= 1950 && t <= latest) yr = t;
+    else if ((Math.floor(t / 100) + 1) % 100 === t % 100) yr = twoDigitEnd(t % 100);
   }
-  const m2 = /(\d{4})/.exec(s);
-  return m2 ? Number(m2[1]) : null;
+  return yr !== null && yr >= 1950 && yr <= latest ? yr : null;
 }
 function gameTypeLabel(name) {
   const n = String(name ?? "").toLowerCase();
   if (/pre[- ]?season/.test(n)) return "preseason";
   if (/playoff|post/.test(n)) return "playoffs";
+  if (n.includes("exhibition")) return "exhibition";
   return "regular";
 }
+var TWO_YEAR_NAME_RE = /\d{2}\s*[-/]\s*\d{2}/;
 function parse_hockeytech_seasons(payload) {
-  const rows = siteKitRows(payload).map(
-    (r) => isPlainObject16(r) ? { ...r, season_yr: deriveSeasonYear(r.season_name), game_type_label: gameTypeLabel(r.season_name) } : r
-  );
+  const rows = siteKitRows(payload).map((r) => {
+    if (!isPlainObject16(r)) return r;
+    const name = String(r.season_name ?? "");
+    let yr = deriveSeasonYear(r.season_name);
+    const label = gameTypeLabel(r.season_name);
+    if ((label === "preseason" || label === "exhibition") && yr !== null && !TWO_YEAR_NAME_RE.test(name) && String(r.start_date ?? "").slice(0, 4) === String(yr)) {
+      yr += 1;
+    }
+    return { ...r, season_yr: yr, game_type_label: label };
+  });
   return normalize(rows);
 }
 function parse_hockeytech_schedule(payload) {

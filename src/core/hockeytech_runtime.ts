@@ -285,10 +285,24 @@ const PWHL_SEASON_FALLBACK = [
 /**
  * Season names that are one-off events, not a league's regular season or playoffs (py
  * `SPECIAL_EVENT_SEASON_RE`): the feed lists them as seasons too ("2026 All-Star Challenge",
- * "2025 Top Prospects", "CCHL Pre-Draft Combine 2026", "2026 Exhibition Season", ...), and the
- * seasons parser labels them "regular" because the name says neither playoff nor preseason.
+ * "2025 Top Prospects", "CCHL Pre-Draft Combine 2026", ...), and the seasons parser labels them
+ * "regular" because the name says neither playoff, preseason nor exhibition.
  */
 const SPECIAL_EVENT_SEASON_RE = /all[- ]?star|showcase|prospect|combine|special event|exhibition|play[- ]?in\b/i;
+
+/** The name says its game type (py `_GAME_TYPE_NAME_RE`): a resolveSeasonId tiebreak. */
+const GAME_TYPE_NAME_RE: Record<string, RegExp> = {
+  regular: /regular season/i,
+  playoffs: /playoff/i,
+  preseason: /pre[- ]?season/i,
+  exhibition: /exhibition/i,
+};
+
+/** A name spanning two years (py `TWO_YEAR_NAME_RE`, also in the seasons parser). */
+const TWO_YEAR_NAME_RE = /\d{2}\s*[-/]\s*\d{2}/;
+
+const isRegularSeason = (r: Record<string, any>): boolean =>
+  r.game_type_label === "regular" && !SPECIAL_EVENT_SEASON_RE.test(String(r.season_name ?? ""));
 
 /**
  * All of a league's seasons (tidy rows incl. `season_yr` + `game_type_label`) — py
@@ -302,15 +316,17 @@ export async function hockeytechSeasonId(league: string): Promise<Record<string,
 }
 
 /**
- * Most-recent season as an end-year integer (max `season_yr`) — py `most_recent_<lg>_season`.
- * A seasons list the feed answered with no usable season is `NoDataError` (py returns a
- * hard-coded 2026 instead, already stale: PWHL's newest season is 2026-27); a failed fetch
- * throws `AssetFetchError` / `NoDataError` from the getter.
+ * Newest regular season as an end-year integer — py `most_recent_<lg>_season`. Only rows
+ * labelled "regular" whose name is not a one-off event count, so a preseason the feed lists
+ * before its regular season ("2026 Preseason", 2027, ahead of "2026-27 Regular Season") is
+ * never a default with no regular season behind it; a feed with no such row falls back to
+ * the newest row of any kind. A seasons list the feed answered with no usable season is
+ * `NoDataError`; a failed fetch throws `AssetFetchError` / `NoDataError` from the getter.
  */
 export async function mostRecentHockeytechSeason(league: string): Promise<number> {
-  const yrs = (await hockeytechSeasonId(league))
-    .map((r) => Number(r.season_yr))
-    .filter((n) => Number.isFinite(n));
+  const rows = (await hockeytechSeasonId(league)).filter((r) => r.season_yr != null);
+  const regular = rows.filter(isRegularSeason);
+  const yrs = (regular.length ? regular : rows).map((r) => Number(r.season_yr));
   if (!yrs.length) {
     throw new NoDataError(`HockeyTech ${league}: the seasons feed lists no season`, {
       url: resolveLeague(league).baseUrl,
@@ -325,10 +341,22 @@ export async function mostRecentHockeytechSeason(league: string): Promise<number
  * — py `resolve_season_id`. An explicit `seasonId` short-circuits. PWHL falls
  * back to a hardcoded table if the live feed is unreachable/empty; anything
  * else unresolved throws.
+ *
+ * Of the rows with that `season_yr` and `game_type_label`, regular and playoff lookups drop
+ * one-off events, then the first row wins in this order: no other registered league's code
+ * in the name ("CCHL 2009/2010" in the OJHL feed ranks last), the name says its game type,
+ * the name spans two years, feed order. Single-year tournaments ("2025 Mowat Cup") rank last
+ * but are not excluded: CHL lists nothing but its Memorial Cups. Divisions listed side by
+ * side for one year with neither marker are not told apart (BCHL 2024 resolves to "2023-24
+ * BC Regular Season" but "2024 AB Playoffs"); pass `seasonId` for the others.
  */
 export async function resolveSeasonId(
   league: string,
-  opts: { season?: number; seasonId?: number; gameType?: "regular" | "playoffs" | "preseason" } = {}
+  opts: {
+    season?: number;
+    seasonId?: number;
+    gameType?: "regular" | "playoffs" | "preseason" | "exhibition";
+  } = {}
 ): Promise<number> {
   const { season, seasonId, gameType = "regular" } = opts;
   if (seasonId !== undefined && seasonId !== null) return Number(seasonId);
@@ -340,14 +368,30 @@ export async function resolveSeasonId(
     // The feed now throws on a failed fetch; PWHL keeps its documented fallback table.
     if (league !== "pwhl" || !(err instanceof SdvError)) throw err;
   }
-  const hit = rows.find(
-    (r) =>
-      Number(r.season_yr) === Number(season) &&
-      r.game_type_label === gameType &&
-      // "2025-26 Preseason Exhibition" is a real preseason; one-off events never resolve
-      // as a regular season or playoffs (AHL 2026: 90, not the 91 All-Star Challenge).
-      (gameType === "preseason" || !SPECIAL_EVENT_SEASON_RE.test(String(r.season_name ?? "")))
+  const otherCodes = new RegExp(
+    `\\b(?:${Object.keys(HOCKEYTECH_LEAGUES)
+      .filter((code) => code !== league)
+      .map((code) => code.toUpperCase())
+      .join("|")})\\b`
   );
+  // An untyped caller's unknown game type matches as a literal, like py's re.escape fallback.
+  const named = GAME_TYPE_NAME_RE[gameType] ?? { test: (n: string) => n.includes(String(gameType)) };
+  // Rank = (own league, named, spans two years) read as bits; the first row with the top rank
+  // wins, which is py's stable descending sort on the three keys.
+  let hit: Record<string, any> | undefined;
+  let best = -1;
+  for (const r of rows) {
+    const name = String(r.season_name ?? "");
+    if (r.season_yr == null || Number(r.season_yr) !== Number(season) || r.game_type_label !== gameType) continue;
+    // "2025-26 Preseason Exhibition" is a preseason; one-off events never resolve as a regular
+    // season or playoffs (AHL 2026: 90, not the 91 All-Star Challenge).
+    if ((gameType === "regular" || gameType === "playoffs") && SPECIAL_EVENT_SEASON_RE.test(name)) continue;
+    const rank = (otherCodes.test(name) ? 0 : 4) + (named.test(name) ? 2 : 0) + (TWO_YEAR_NAME_RE.test(name) ? 1 : 0);
+    if (rank > best) {
+      best = rank;
+      hit = r;
+    }
+  }
   if (hit) return Number(hit.season_id);
   if (league === "pwhl") {
     const fb = PWHL_SEASON_FALLBACK.find((r) => r.season_yr === Number(season) && r.game_type_label === gameType);

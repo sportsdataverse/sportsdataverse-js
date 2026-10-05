@@ -493,8 +493,8 @@ Flat (non-ESPN) wrappers for the HockeyTech / LeagueStat feed (PWHL + junior/min
 | `playoff` | character | Playoff-season flag. |
 | `start_date` | character | Season start date. |
 | `end_date` | character | Season end date. |
-| `season_yr` | integer | Season end-year derived from the season name (2025-26 -> 2026). |
-| `game_type_label` | character | regular, playoffs or preseason, derived from the season name. |
+| `season_yr` | integer | End year of the season the row belongs to, read from its name: "2025-26", "2025/26" and "2025-2026" are 2026, "26-27" is 2027, a compact "2425" is 2025. A preseason or exhibition named with the one year it starts in belongs to the next season ("2026 Pre-season" is 2027). Null when the name holds no year. |
+| `game_type_label` | character | Game type read from the season name, first match wins: "preseason" (pre-season, preseason), "playoffs" (playoff, post), "exhibition", else "regular". One-off events such as all-star games are labelled "regular" too; season resolution skips them. |
 
 ### Returns — `hockeytech_standings` / `hockeytechStandings`
 
