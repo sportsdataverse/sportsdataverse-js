@@ -3,6 +3,15 @@ const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
 module.exports = {
+  // Rspack/SWC build pipeline (@docusaurus/faster), as in sdv-py. The webpack
+  // build of the generated reference tree sits at the 8 GB Vercel container
+  // ceiling and OOM-SIGKILLs as soon as a PR adds pages. Only the one v4 flag
+  // faster's worker-thread SSG requires: all of `v4: true` would also turn MDX
+  // HTML comments in the guides into compile errors.
+  future: {
+    v4: { removeLegacyPostBuildHeadAttribute: true },
+    faster: true,
+  },
   title: 'sportsdataverse',
   tagline: "The SportsDataverse's Node.js Package for Sports Data.",
   url: 'https://js.sportsdataverse.org',
