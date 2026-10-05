@@ -64,6 +64,7 @@ export interface AuthContext {
  * `AssetFetchError("<family>: auth failed (apply|refresh)")`.
  */
 export interface AuthProvider {
+  /** The request with credentials added (values the caller set win). Throws on failure. */
   apply(req: TransportRequest, ctx: AuthContext): Promise<TransportRequest>;
   /**
    * Force new credentials (called once after a 401; `ctx.request` is the
