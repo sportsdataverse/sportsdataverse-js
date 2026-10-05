@@ -85,11 +85,17 @@ function flattenHeaders(raw: unknown): Record<string, string> {
  */
 export const axiosTransport: Transport = async (req) => {
   const responseType = req.responseType ?? "json";
-  // Serialised here, not via axios' paramsSerializer: axios turns an error thrown
-  // there (an invalid Date) into a plain Error, which would be retried as a
-  // network failure. Repeated keys for arrays (axios' default sends `k[]=a`).
-  const url = withQuery(req.url, req.query);
+  // Encoded once up front, so an invalid Date throws an SdvError before any
+  // request (axios rewraps an error thrown inside paramsSerializer as a plain
+  // Error, which would be retried as a network failure). Handed to axios as
+  // `params` + a serializer returning that string, never baked into `url`:
+  // `config.url` stays query-free for any app-level interceptor that logs it
+  // (a caller's apiKey rides in the query). Repeated keys for arrays (axios'
+  // default sends `k[]=a`).
+  const qs = encodeQuery(req.query);
   const config = {
+    params: req.query,
+    paramsSerializer: () => qs,
     headers: req.headers,
     timeout: req.timeoutMs,
     responseType,
@@ -103,8 +109,8 @@ export const axiosTransport: Transport = async (req) => {
   try {
     res =
       req.method === "POST"
-        ? await axios.post(url, req.body, config)
-        : await axios.get(url, config);
+        ? await axios.post(req.url, req.body, config)
+        : await axios.get(req.url, config);
   } catch (err) {
     // An axios error carries the whole request config (headers incl.
     // Authorization / Cookie, a POSTed body incl. a login password): reject with

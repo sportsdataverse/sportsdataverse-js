@@ -1,5 +1,6 @@
 import should from 'should';
 import http from 'node:http';
+import axios from 'axios';
 import sdv, {
   configure,
   getConfig,
@@ -663,6 +664,24 @@ describe('core/transport', () => {
     encodeQuery({ a: 1, b: null, c: undefined, d: 'x:y$z', e: ['1', null, '2'] }).should.equal(
       'a=1&d=x:y$z&e=1&e=2'
     );
+  });
+
+  it('axiosTransport keeps the query out of config.url (an app interceptor logging url never sees an apiKey)', async () => {
+    const seen = [];
+    const id = axios.interceptors.request.use((config) => {
+      seen.push({ url: config.url, uri: axios.getUri(config) });
+      return config;
+    });
+    try {
+      const res = await axiosTransport({ method: 'GET', url: `${base}/q`, query: { apiKey: 'synthetic-key-123', k: ['a', 'b'] } });
+      res.data.path.should.equal('/q?apiKey=synthetic-key-123&k=a&k=b'); // still sent, repeated keys
+      seen.length.should.equal(1);
+      seen[0].url.should.equal(`${base}/q`);
+      seen[0].url.should.not.containEql('synthetic-key-123');
+      seen[0].uri.should.endWith('/q?apiKey=synthetic-key-123&k=a&k=b'); // the serializer is the pre-encoded string
+    } finally {
+      axios.interceptors.request.eject(id);
+    }
   });
 
   it('encodeQuery sends a Date (scalar or in an array) as ISO-8601 UTC', () => {
