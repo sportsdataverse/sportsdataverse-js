@@ -32,7 +32,7 @@ function mdxUnsafeLines(text) {
     if (f) return void (fence = f[1]);
     if (jsx) return void ((t.endsWith('/>') || /^<\/[A-Z]/.test(t)) && (jsx = false));
     if (/^(import|export)\s/.test(t)) return;
-    if (/^<[A-Z]/.test(t)) return void (!t.endsWith('>') && (jsx = true));
+    if (/^<\/?[A-Z]/.test(t)) return void (!t.endsWith('>') && (jsx = true)); // <Tabs>, </Tabs>, <RunCell …
     let s = line;
     if (comment) {
       const end = s.indexOf('-->');
@@ -71,6 +71,7 @@ describe('docs: every page Docusaurus compiles is MDX-safe', () => {
     mdxUnsafeLines('{/* generated */}\n<!-- a {note} -->\n\\{ok\\}').should.eql([]);
     mdxUnsafeLines('<RunCell\n  params={{ year: 2024 }}\n/>\n<RunCell a="b" />\ntext {x}').should.eql(['5: text {x}']);
     mdxUnsafeLines("import X from 'y';\n<a href='u'><img src='v'/></a>").should.eql([]);
+    mdxUnsafeLines('<Tabs>\n\nprose\n\n</Tabs>').should.eql([]);
     mdxUnsafeLines('---\ntitle: {x}\n---\nbody').should.eql([]);
   });
 
