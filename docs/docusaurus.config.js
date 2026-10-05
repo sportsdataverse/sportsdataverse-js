@@ -3,6 +3,13 @@ const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
 module.exports = {
+  // Rspack/SWC build pipeline (@docusaurus/faster), as in sdv-py. The webpack
+  // build of the generated reference tree sits at the 8 GB Vercel container
+  // ceiling and OOM-SIGKILLs as soon as a PR adds pages.
+  future: {
+    v4: true,
+    faster: true,
+  },
   title: 'sportsdataverse',
   tagline: "The SportsDataverse's Node.js Package for Sports Data.",
   url: 'https://js.sportsdataverse.org',
