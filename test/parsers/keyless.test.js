@@ -24,6 +24,7 @@ import { parse_torvik_ratings } from '../../dist/parsers/torvik.js';
 import { FLAT_WRAPPERS, WRAPPERS } from '../../dist/index.js';
 import { PARSERS } from '../../dist/parsers/_registry.js';
 import { resolveFlat } from '../../dist/core/flat.js';
+import { same } from '../helpers/parity.mjs';
 
 // Real captures copied from sdv-py (test/fixtures/{on3,asa,mls_api,nwsl_api}/README.md
 // carry provenance). `py_oracle*.json` is sdv-py's own parser output (polars) on
@@ -31,24 +32,6 @@ import { resolveFlat } from '../../dist/core/flat.js';
 // compared to it cell by cell, so these are parity tests, not shape checks.
 const here = dirname(fileURLToPath(import.meta.url));
 const fx = (...p) => JSON.parse(readFileSync(join(here, '..', 'fixtures', ...p), 'utf8'));
-
-// py frames are polars; object-dtype columns that py stringified compare by
-// string form, everything else numerically.
-function same(a, b, col) {
-  // Id columns are join keys: strict. Same string, same case, no numeric coercion.
-  if (col && (col === 'id' || /_ids?$/.test(col)) && a !== null && a !== undefined && b !== null && b !== undefined) {
-    return typeof a === 'string' && typeof b === 'string' && a === b;
-  }
-  // py stringifies a missing value in a mixed object column to "nan"; JS keeps null.
-  if (b === 'nan' && (a === null || a === undefined)) return true;
-  if (a === null || a === undefined || b === null || b === undefined) {
-    return (a ?? null) === (b ?? null);
-  }
-  // CSV cells arrive as text in JS; py parsed them numerically.
-  if (typeof a === 'string' && typeof b === 'number' && a.trim() !== '' && !Number.isNaN(Number(a))) a = Number(a);
-  if (typeof a === 'number' && typeof b === 'number') return a === b || Math.abs(a - b) < 1e-9;
-  return String(a).toLowerCase() === String(b).toLowerCase();
-}
 
 function assertParity(js, py, label) {
   js.length.should.equal(py.rows.length, `${label}: row count`);

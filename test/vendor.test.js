@@ -1,13 +1,20 @@
 import should from 'should';
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { parse } from 'yaml';
+
+// git does not track empty directories, so a fixture file may land in one a fresh checkout lacks
+const put = (path, body) => {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, body);
+};
 import {
   CODEGEN_DIR,
   checkVendor,
   deriveAll,
+  writeVendor,
   gitBlobSha,
   loadManifest,
   PY_NAMES_FILE,
@@ -27,9 +34,9 @@ const transform = (key, cfg, upstreamText, overlayText = null) =>
   transformFamily(key, cfg, upstreamText, overlayText, manifest.source);
 const family = (key, overlayText = null) => {
   const cfg = manifest.families[key] ?? {};
-  const { text, schemaRefs } = transform(key, cfg, upstream(`endpoints/${cfg.from ?? key}.yaml`), overlayText);
+  const { text, schemaRefs, pySchemas } = transform(key, cfg, upstream(`endpoints/${cfg.from ?? key}.yaml`), overlayText);
   const doc = parse(text);
-  return { text, doc, schemaRefs, ep: (s) => doc.endpoints.find((e) => e.short === s) };
+  return { text, doc, schemaRefs, pySchemas, ep: (s) => doc.endpoints.find((e) => e.short === s) };
 };
 
 describe('vendor: transforms (offline, committed upstream copies)', () => {
@@ -67,6 +74,23 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     transform('nhl_edge', {}, edge).schemaRefs.should.eql([]);
     transform('nhl_edge', { schema_compatible: true }, edge).schemaRefs.length.should.be.above(0);
     (() => transform('nhl_edge', { schema_compatible: 'yes' }, edge)).should.throw(/schema_compatible must be a boolean/);
+    // schema_incompatible (a parser-parity harness finding) drops py's schema per endpoint.
+    const statcast = family('mlb_statcast');
+    should(statcast.ep('gamefeed').returns_schema).be.undefined();
+    statcast.ep('gamefeed').parser.should.equal('parse_mlb_statcast_gamefeed');
+    statcast.ep('schedule').returns_schema.should.equal('native/mlb_statcast/schedule');
+    // ... and a family flipped wholesale (the harness disproved its tables) keeps none.
+    family('nba_stats').schemaRefs.should.eql([]);
+    // pySchemas says why each py returns_schema is (not) attached.
+    const why = (key, short) => family(key).pySchemas.find((e) => e.short === short).status;
+    why('nhl_edge', 'skater_detail').should.equal('attached');
+    why('mlb', 'teams_stats').should.equal('parser_override');
+    why('mlb_statcast', 'gamefeed').should.equal('schema_incompatible');
+    why('nba_stats', 'scheduleleaguev2').should.equal('declared_incompatible');
+    why('espn_site_v2', 'scoreboard').should.equal('undeclared');
+    (() => transform('nhl_edge', { schema_compatible: true, schema_incompatible: 'skater_detail' }, edge)).should.throw(
+      /schema_incompatible must be a list/
+    );
   });
 
   it('refuses an overlay that swaps a vendored parser (parser_overrides only)', () => {
@@ -110,12 +134,15 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
     text.should.startWith(`# VENDORED from ${manifest.source.repo}@${manifest.source.ref}`);
   });
 
-  it('throws on stale manifest entries (names, parsers, parser_overrides)', () => {
+  it('throws on stale manifest entries (names, parsers, parser_overrides, schema_incompatible)', () => {
     const torvik = upstream('endpoints/torvik.yaml');
     (() => transform('torvik', { names: { no_such_short: 'x' } }, torvik)).should.throw(
       /stale entries match no endpoint: no_such_short/
     );
     (() => transform('torvik', { parser_overrides: { no_such_short: 'parse_x' } }, torvik)).should.throw(
+      /stale entries match no endpoint: no_such_short/
+    );
+    (() => transform('torvik', { schema_incompatible: ['no_such_short'] }, torvik)).should.throw(
       /stale entries match no endpoint: no_such_short/
     );
     const parsers = { parse_gone_upstream: { js: 'parse_torvik_ratings', schema_compatible: false } };
@@ -171,8 +198,9 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
   // Policy (a returns table must describe what the JS parser returns), fail-closed:
   // an endpoint may carry a vendored (py) schema only when its parser's
   // compatibility is DECLARED in vendor.yaml (family `schema_compatible: true`
-  // for a kept py name, or a `parsers` entry with schema_compatible: true) and no
-  // parser_overrides entry swaps it. Checked on the committed endpoint files.
+  // for a kept py name, or a `parsers` entry with schema_compatible: true), no
+  // parser_overrides entry swaps it and schema_incompatible does not drop it.
+  // Checked on the committed endpoint files.
   it('a vendored schema is attached only to a declared schema-compatible parser', () => {
     const outputs = [...deriveAll().keys()];
     const vendored = (ref) => outputs.some((p) => p === `schemas/${ref}.yaml` || p.startsWith(`schemas/${ref}/`));
@@ -195,7 +223,9 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
         const declared =
           (m === undefined
             ? cfg.schema_compatible === true && e.parser === p.parser
-            : m.schema_compatible === true && m.js === e.parser) && !(cfg.parser_overrides ?? {})[e.short];
+            : m.schema_compatible === true && m.js === e.parser) &&
+          !(cfg.parser_overrides ?? {})[e.short] &&
+          !(cfg.schema_incompatible ?? []).includes(e.short);
         if (fromPy) {
           attached++;
           declared.should.be.true(`${key}.${e.short} (${e.returns_schema}): parser ${e.parser} is not declared schema-compatible`);
@@ -266,11 +296,43 @@ describe('vendor:check (offline drift gate)', function () {
     ]);
   });
 
-  it('flags a stray schema in a vendored directory', () => {
-    writeFileSync(join(tmp, 'schemas', 'native', 'nhl_edge', 'stray.yaml'), 'schema: stray\ncolumns: []\n');
+  it('flags (and `npm run vendor` deletes) a stale vendored copy, by exact path', () => {
+    // a py schema the declaration does not attach (nba_stats is schema_compatible: false),
+    // left behind byte-identical to its upstream copy
+    const rel = join('schemas', 'native', 'nba_stats', 'leaguedashplayerstats.yaml');
+    put(join(tmp, rel), readFileSync(join(tmp, 'vendor', 'upstream', rel)));
     checkVendor(tmp).should.eql([
-      `ORPHAN: tools/codegen/schemas/native/nhl_edge/stray.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
+      `ORPHAN: tools/codegen/schemas/native/nba_stats/leaguedashplayerstats.yaml is not vendored and not referenced (delete it, or ${REGEN})`,
     ]);
+    writeVendor(tmp).removed.should.eql(['schemas/native/nba_stats/leaguedashplayerstats.yaml']);
+    checkVendor(tmp).should.eql([]);
+  });
+
+  it('never touches a JS-authored schema, even unreferenced or in a directory the vendor writes into', () => {
+    const files = {
+      // a new JS-only schema in a shared directory (vendored py schemas + JS-owned overlay ones)
+      [join('schemas', 'native', 'mlb', 'js_only_new.yaml')]: 'schema: js_only_new\ncolumns: []\n',
+      // a JS-authored schema at a py schema's path, with its own content
+      [join('schemas', 'native', 'nba_stats', 'leaguegamelog.yaml')]: 'schema: leaguegamelog\ncolumns: []\n',
+      // a hand-added file in a fully vendored directory
+      [join('schemas', 'native', 'nhl_edge', 'stray.yaml')]: 'schema: stray\ncolumns: []\n',
+    };
+    for (const [rel, body] of Object.entries(files)) put(join(tmp, rel), body);
+    checkVendor(tmp).should.eql([]);
+    writeVendor(tmp).removed.should.eql([]);
+    for (const [rel, body] of Object.entries(files)) readFileSync(join(tmp, rel), 'utf8').should.equal(body);
+  });
+
+  it('flags every schema a family flipped to schema_compatible: false leaves behind', () => {
+    const f = join(tmp, 'vendor.yaml');
+    const flipped = readFileSync(f, 'utf8').replace(
+      /(\n {2}nhl_edge:\n(?: {4}#.*\n)*) {4}schema_compatible: true\n/,
+      '$1    schema_compatible: false\n'
+    );
+    flipped.should.not.equal(readFileSync(f, 'utf8'));
+    writeFileSync(f, flipped);
+    const orphans = checkVendor(tmp).filter((l) => l.startsWith('ORPHAN: tools/codegen/schemas/native/nhl_edge/'));
+    orphans.length.should.equal(readdirSync(join(tmp, 'schemas', 'native', 'nhl_edge')).length);
   });
 
   it('flags a manifest pin the upstream copy was not fetched at', () => {

@@ -564,7 +564,6 @@ endpoints:
     type: bool
     default: 'true'
   parser: parse_mlb_statcast_leaderboard
-  returns_schema: native/mlb_statcast/leaderboard_catcher_stance
 - short: leaderboard_basestealing_run_value
   summary: "GET /leaderboard/basestealing-run-value — basestealing run-value leaderboard."
   path: /leaderboard/basestealing-run-value
@@ -732,7 +731,6 @@ endpoints:
     query_key: at_bat_number
     type: int
   parser: parse_mlb_statcast_gamefeed
-  returns_schema: native/mlb_statcast/gamefeed
 - short: schedule
   summary: "GET /schedule — Savant schedule feed (one row per game)."
   path: /schedule

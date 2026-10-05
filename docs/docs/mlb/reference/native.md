@@ -1997,78 +1997,6 @@ Flat (non-ESPN) wrappers for Baseball Savant (Statcast). Host: `https://baseball
 | `mlb_statcast_leaderboard_year_to_year` / `mlbStatcastLeaderboardYearToYear` | `https://baseballsavant.mlb.com/leaderboard/statcast-year-to-year` | — | `type`, `year`, `team`, `csv` | `parse_mlb_statcast_leaderboard` | — |
 | `mlb_statcast_schedule` / `mlbStatcastSchedule` | `https://baseballsavant.mlb.com/schedule` | — | `date` | `parse_mlb_statcast_schedule` | — |
 
-### Returns — `mlb_statcast_gamefeed` / `mlbStatcastGamefeed`
-
-| col_name | type | description |
-|---|---|---|
-| `type` | character | Record/pitch type. |
-| `year` | character | Season year. |
-| `sport_id` | character | Sport id. |
-| `play_id` | character | Statcast play UUID. |
-| `inning` | character | Inning. |
-| `half_inning` | character | Half inning. |
-| `ab_number` | character | Ab number. |
-| `cap_index` | character | Cap index. |
-| `outs` | character | Outs. |
-| `batter` | integer | MLBAM id of the batter. |
-| `stand` | character | Batter stance side (R/L). |
-| `batter_name` | character | Batter name. |
-| `pitcher` | integer | MLBAM id of the pitcher. |
-| `p_throws` | character | Pitcher throwing hand (R/L). |
-| `pitcher_name` | character | Pitcher name. |
-| `catcher` | character | Catcher. |
-| `catcher_name` | character | Catcher name. |
-| `team_batting` | character | Team batting. |
-| `team_fielding` | character | Team fielding. |
-| `team_batting_id` | character | Team batting id. |
-| `team_fielding_id` | character | Team fielding id. |
-| `result` | character | Result. |
-| `des` | character | Des. |
-| `events` | character | Events. |
-| `strikes` | character | Strikes. |
-| `balls` | character | Balls. |
-| `pre_strikes` | character | Pre strikes. |
-| `pre_balls` | character | Pre balls. |
-| `call` | character | Call. |
-| `call_name` | character | Call name. |
-| `pitch_type` | character | Pitch type code. |
-| `pitch_name` | character | Pitch type name. |
-| `description` | character | Description. |
-| `result_code` | character | Result code. |
-| `pitch_call` | character | Pitch call. |
-| `is_strike_swinging` | character | Is strike swinging. |
-| `balls_and_strikes` | character | Balls and strikes. |
-| `start_speed` | character | Start speed. |
-| `end_speed` | character | End speed. |
-| `sz_top` | character | Sz top. |
-| `sz_bot` | character | Sz bot. |
-| `extension` | character | Release extension (ft). |
-| `plate_time` | character | Plate time. |
-| `zone` | character | Zone. |
-| `spin_rate` | character | Spin rate (rpm). |
-| `break_x` | character | Break x. |
-| `induced_break_z` | character | Induced break z. |
-| `break_z` | character | Break z. |
-| `px` | character | Px. |
-| `pz` | character | Pz. |
-| `pfx_x` | character | Horizontal movement (in, pitcher perspective). |
-| `pfx_z` | character | Induced vertical movement (in). |
-| `is_bip_out` | character | Is bip out. |
-| `pitch_number` | character | Pitch number. |
-| `plate_x` | character | Plate x. |
-| `plate_z` | character | Plate z. |
-| `hit_speed` | character | Hit speed. |
-| `hit_distance` | character | Hit distance. |
-| `xba` | character | Expected batting average. |
-| `hit_angle` | character | Hit angle. |
-| `is_barrel` | character | Is barrel. |
-| `hc_x` | character | Hc x. |
-| `hc_y` | character | Hc y. |
-| `launch_speed` | character | Exit velocity of the batted ball (mph). |
-| `launch_angle` | character | Launch angle (deg). |
-| `game_total_pitches` | character | Game total pitches. |
-| `game_pk` | integer | MLBAM game id. |
-
 ### Returns — `mlb_statcast_leaderboard_active_spin` / `mlbStatcastLeaderboardActiveSpin`
 
 | col_name | type | description |
@@ -2326,38 +2254,6 @@ Flat (non-ESPN) wrappers for Baseball Savant (Statcast). Host: `https://baseball
 | `pct_18` | numeric | Pct 18. |
 | `rv_19` | integer | Rv 19. |
 | `pct_19` | numeric | Pct 19. |
-
-### Returns — `mlb_statcast_leaderboard_catcher_stance` / `mlbStatcastLeaderboardCatcherStance`
-
-| col_name | type | description |
-|---|---|---|
-| `id` | integer | MLBAM player id. |
-| `name` | character | Player (or entity) name. |
-| `year` | integer | Season year. |
-| `pitches` | integer | Pitches. |
-| `knee_down_pct` | numeric | Share of pitches received in a knee-down stance. |
-| `l_down_r_up_pct` | numeric | L down r up rate. |
-| `r_down_l_up_pct` | numeric | R down l up rate. |
-| `both_down_pct` | numeric | Both down rate. |
-| `both_up_pct` | numeric | Both up rate. |
-| `extended_leg_pct` | numeric | Extended leg rate. |
-| `inside_down_pct` | numeric | Inside down rate. |
-| `outside_down_pct` | numeric | Outside down rate. |
-| `one_knee_framing_rv` | numeric | One knee framing rv. |
-| `other_framing_rv` | integer | Other framing rv. |
-| `one_knee_calledstr_pct` | numeric | One knee calledstr rate. |
-| `other_calledstr_pct` | character | Other calledstr rate. |
-| `one_knee_blocking_rv` | numeric | One knee blocking rv. |
-| `other_blocking_rv` | integer | Other blocking rv. |
-| `one_knee_pbwp100` | numeric | One knee pbwp100. |
-| `other_pbwp100` | character | Other pbwp100. |
-| `one_knee_throwing_rv` | integer | One knee throwing rv. |
-| `other_throwing_rv` | integer | Other throwing rv. |
-| `one_knee_csaa100` | integer | One knee csaa100. |
-| `other_csaa100` | character | Other csaa100. |
-| `catching_rv` | numeric | Catching rv. |
-| `one_knee_pitching_rv` | numeric | One knee pitching rv. |
-| `other_pitching_rv` | numeric | Other pitching rv. |
 
 ### Returns — `mlb_statcast_leaderboard_catcher_throwing` / `mlbStatcastLeaderboardCatcherThrowing`
 
