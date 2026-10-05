@@ -218,8 +218,38 @@ describe('release loaders', () => {
     });
 
     it('seasons must be given, and be integers', async () => {
-      (await sdv.cfb.loadCfbRatings({}).catch((e) => e)).should.be.instanceOf(TypeError);
-      (await sdv.cfb.loadCfbRatings({ seasons: [2024.5] }).catch((e) => e)).should.be.instanceOf(TypeError);
+      const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
+      use(t);
+      const missing = await sdv.cfb.loadCfbRatings({}).catch((e) => e);
+      missing.should.be.instanceOf(SdvError);
+      missing.message.should.match(/`seasons` is required/);
+      (await sdv.cfb.loadCfbRatings({ seasons: [2024.5] }).catch((e) => e)).should.be.instanceOf(SdvError);
+      t.calls.length.should.equal(0);
+    });
+
+    it('rejects values Number() would coerce (null, "", true, …) instead of fetching season 0 / 1', async () => {
+      // Number(null) === 0, Number('') === 0, Number(true) === 1: without the check these
+      // "seasons" passed validation; a loader with no floor would fetch them, 404, and skip.
+      const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
+      use(t);
+      const bad = [[null], '', [''], true, [false], ' 2024', '20x4', '24', [2024, null], NaN, Infinity, 2024n, [{}]];
+      for (const seasons of bad) {
+        const err = await sdv.cfb.loadCfbRatings({ seasons }).catch((e) => e);
+        err.should.be.instanceOf(SdvError);
+        err.message.should.match(/each season must be an integer or a 4-digit year string, got /);
+      }
+      (await sdv.cfb.loadCfbRatings({ seasons: [null] }).catch((e) => e)).message.should.endWith('got null');
+      (await sdv.cfb.loadCfbRatings({ seasons: '' }).catch((e) => e)).message.should.endWith('got ""');
+      (await sdv.cfb.loadCfbRatings({ seasons: 2024n }).catch((e) => e)).message.should.endWith('got 2024n');
+      t.calls.length.should.equal(0); // nothing fetched for any of them
+    });
+
+    it('accepts integers and 4-digit year strings', async () => {
+      const t = releasesTransport(() => 'cfb_ratings_2024.parquet');
+      use(t);
+      (await sdv.cfb.loadCfbRatings({ seasons: '2024' })).length.should.equal(134);
+      (await sdv.cfb.loadCfbRatings({ seasons: [2024, '2024'] })).length.should.equal(268);
+      t.calls.map((c) => c.url.endsWith('cfb_ratings_2024.parquet')).should.eql([true, true, true]);
     });
 
     it('seasons with drifting columns are unioned and null-filled', async () => {
@@ -359,7 +389,7 @@ describe('release loaders', () => {
     });
 
     it('rejects an unknown format', async () => {
-      (await sdv.nhl.loadNhlGroups({ format: 'arrow' }).catch((e) => e)).should.be.instanceOf(TypeError);
+      (await sdv.nhl.loadNhlGroups({ format: 'arrow' }).catch((e) => e)).should.be.instanceOf(SdvError);
     });
   });
 

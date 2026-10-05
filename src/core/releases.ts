@@ -94,7 +94,7 @@ export interface ReleaseLoaderOptions {
 
 /** Options for a per-season loader. */
 export interface SeasonLoaderOptions extends ReleaseLoaderOptions {
-  /** One season or a list of seasons. */
+  /** One season or a list of seasons: integers or 4-digit year strings (`2024`, `"2024"`). */
   seasons: number | number[];
 }
 
@@ -135,15 +135,34 @@ export function defaultMaxCells(format: "rows" | "columns"): number {
   return Math.floor(getHeapStatistics().heap_size_limit / BYTES_PER_CELL[format]);
 }
 
+const YEAR = /^\d{4}$/;
+
+/** A caller's value for an error message (`JSON.stringify` throws on BigInt, drops undefined). */
+function describe(v: unknown): string {
+  if (typeof v === "string") return JSON.stringify(v);
+  return typeof v === "bigint" ? `${v}n` : String(v);
+}
+
 /** Normalise `seasons` to integers and check them against `minSeason` (before any fetch). */
 function seasonList(def: ReleaseLoaderDef, seasons: unknown): number[] {
   if (seasons === undefined || seasons === null) {
-    throw new TypeError(`${def.fn}: \`seasons\` is required (a season or a list of seasons)`);
+    throw new SdvError(`${def.fn}: \`seasons\` is required (a season or a list of seasons)`);
   }
-  const list = (Array.isArray(seasons) ? seasons : [seasons]).map(Number);
-  const bad = list.find((s) => !Number.isInteger(s));
-  if (bad !== undefined) {
-    throw new TypeError(`${def.fn}: seasons must be integers, got ${JSON.stringify(seasons)}`);
+  // Only integers or 4-digit year strings: Number() would turn null / "" /
+  // false into 0 and true into 1, a "season" that then just 404s and is skipped.
+  const raw: unknown[] = Array.isArray(seasons) ? seasons : [seasons];
+  const list = raw.map((s) =>
+    typeof s === "number" && Number.isInteger(s)
+      ? s
+      : typeof s === "string" && YEAR.test(s)
+        ? Number(s)
+        : NaN
+  );
+  const badAt = list.findIndex(Number.isNaN);
+  if (badAt >= 0) {
+    throw new SdvError(
+      `${def.fn}: each season must be an integer or a 4-digit year string, got ${describe(raw[badAt])}`
+    );
   }
   if (def.minSeason !== undefined) {
     const low = list.find((s) => s < def.minSeason!);
@@ -578,7 +597,7 @@ async function load(
 ): Promise<ReleaseRow[] | ReleaseColumns> {
   const format = opts.format ?? "rows";
   if (format !== "rows" && format !== "columns") {
-    throw new TypeError(`${def.fn}: format must be "rows" or "columns", got ${JSON.stringify(format)}`);
+    throw new SdvError(`${def.fn}: format must be "rows" or "columns", got ${describe(format)}`);
   }
   const maxCells = opts.maxCells ?? defaultMaxCells(format);
 
