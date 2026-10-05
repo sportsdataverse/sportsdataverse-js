@@ -16134,9 +16134,28 @@
           "queryKey": "season_id"
         },
         {
+          "name": "number_of_days_back",
+          "queryKey": "numberofdaysback",
+          "default": 10000
+        },
+        {
+          "name": "number_of_days_ahead",
+          "queryKey": "numberofdaysahead",
+          "default": 10000
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 10000
+        },
+        {
           "name": "feed",
           "queryKey": "feed",
           "default": "modulekit"
+        },
+        {
+          "name": "league_id",
+          "queryKey": "league_id"
         },
         {
           "name": "view",
@@ -16281,6 +16300,225 @@
       "returnsSchema": "native/hockeytech/game_shifts"
     },
     {
+      "short": "scorebar",
+      "flat": true,
+      "api": "hockeytech",
+      "host": "https://lscluster.hockeytech.com",
+      "scope": "universal",
+      "path": "/feed/index.php",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "league",
+          "queryKey": "league"
+        },
+        {
+          "name": "number_of_days_back",
+          "queryKey": "numberofdaysback",
+          "default": 3
+        },
+        {
+          "name": "number_of_days_ahead",
+          "queryKey": "numberofdaysahead",
+          "default": 3
+        },
+        {
+          "name": "limit",
+          "queryKey": "limit",
+          "default": 100
+        },
+        {
+          "name": "feed",
+          "queryKey": "feed",
+          "default": "modulekit"
+        },
+        {
+          "name": "league_id",
+          "queryKey": "league_id"
+        },
+        {
+          "name": "view",
+          "queryKey": "view",
+          "default": "scorebar"
+        }
+      ],
+      "parser": "parse_hockeytech_scorebar",
+      "returnsSchema": "native/hockeytech/scorebar"
+    },
+    {
+      "short": "player_game_log",
+      "flat": true,
+      "api": "hockeytech",
+      "host": "https://lscluster.hockeytech.com",
+      "scope": "universal",
+      "path": "/feed/index.php",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "league",
+          "queryKey": "league"
+        },
+        {
+          "name": "player_id",
+          "queryKey": "player_id"
+        },
+        {
+          "name": "season_id",
+          "queryKey": "season_id"
+        },
+        {
+          "name": "category",
+          "queryKey": "category",
+          "default": "gamebygame"
+        },
+        {
+          "name": "feed",
+          "queryKey": "feed",
+          "default": "modulekit"
+        },
+        {
+          "name": "view",
+          "queryKey": "view",
+          "default": "player"
+        }
+      ],
+      "parser": "parse_hockeytech_player_game_log",
+      "returnsSchema": "native/hockeytech/player_game_log"
+    },
+    {
+      "short": "player_search",
+      "flat": true,
+      "api": "hockeytech",
+      "host": "https://lscluster.hockeytech.com",
+      "scope": "universal",
+      "path": "/feed/index.php",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "league",
+          "queryKey": "league"
+        },
+        {
+          "name": "search_term",
+          "queryKey": "search_term"
+        },
+        {
+          "name": "feed",
+          "queryKey": "feed",
+          "default": "modulekit"
+        },
+        {
+          "name": "view",
+          "queryKey": "view",
+          "default": "searchplayers"
+        }
+      ],
+      "parser": "parse_hockeytech_player_search",
+      "returnsSchema": "native/hockeytech/player_search"
+    },
+    {
+      "short": "stats",
+      "flat": true,
+      "api": "hockeytech",
+      "host": "https://lscluster.hockeytech.com",
+      "scope": "universal",
+      "path": "/feed/index.php",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "league",
+          "queryKey": "league"
+        },
+        {
+          "name": "season_id",
+          "queryKey": "season_id"
+        },
+        {
+          "name": "type",
+          "queryKey": "type",
+          "default": "skaters"
+        },
+        {
+          "name": "feed",
+          "queryKey": "feed",
+          "default": "modulekit"
+        },
+        {
+          "name": "view",
+          "queryKey": "view",
+          "default": "statviewtype"
+        }
+      ],
+      "parser": "parse_hockeytech_stats",
+      "returnsSchema": "native/hockeytech/stats"
+    },
+    {
+      "short": "transactions",
+      "flat": true,
+      "api": "hockeytech",
+      "host": "https://lscluster.hockeytech.com",
+      "scope": "universal",
+      "path": "/feed/index.php",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "league",
+          "queryKey": "league"
+        },
+        {
+          "name": "feed",
+          "queryKey": "feed",
+          "default": "modulekit"
+        },
+        {
+          "name": "league_id",
+          "queryKey": "league_id"
+        },
+        {
+          "name": "view",
+          "queryKey": "view",
+          "default": "transactions"
+        }
+      ],
+      "parser": "parse_hockeytech_transactions",
+      "returnsSchema": "native/hockeytech/transactions"
+    },
+    {
+      "short": "playoff_bracket",
+      "flat": true,
+      "api": "hockeytech",
+      "host": "https://lscluster.hockeytech.com",
+      "scope": "universal",
+      "path": "/feed/index.php",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "league",
+          "queryKey": "league"
+        },
+        {
+          "name": "season_id",
+          "queryKey": "season_id"
+        },
+        {
+          "name": "feed",
+          "queryKey": "feed",
+          "default": "modulekit"
+        },
+        {
+          "name": "league_id",
+          "queryKey": "league_id"
+        },
+        {
+          "name": "view",
+          "queryKey": "view",
+          "default": "brackets"
+        }
+      ],
+      "parser": "parse_hockeytech_playoff_bracket",
+      "returnsSchema": "native/hockeytech/playoff_bracket"
+    },
+    {
       "short": "standings",
       "flat": true,
       "api": "hockeytech",
@@ -16301,6 +16539,10 @@
           "name": "feed",
           "queryKey": "feed",
           "default": "statviewfeed"
+        },
+        {
+          "name": "league_id",
+          "queryKey": "league_id"
         },
         {
           "name": "view",

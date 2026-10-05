@@ -16,3 +16,11 @@ envelope so the tests exercise the runtime's JSONP-strip path.
 The captured game is PWHL game `ID=74`. The league registry, the `gc`-feed
 `tab=` quirk, and the PWHL PBP key override all live in
 `src/core/hockeytech_runtime.ts`.
+
+## Added 2026-10-05 (sdv-js T5)
+
+Live PWHL captures (trimmed, JSONP re-wrapped): `pwhl_searchplayers.jsonp`
+(`modulekit/searchplayers`, term Poulin), `pwhl_statviewtype.jsonp`
+(`statviewtype` skaters, season_id 8), `pwhl_transactions.jsonp`,
+`pwhl_brackets.jsonp` (season_id 9, 2026 playoffs), `pwhl_player_gamebygame.jsonp`
+(player 36, season_id 7). Positive control for game log: player 12 / season 8 returns 30 games.

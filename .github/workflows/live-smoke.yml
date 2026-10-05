@@ -1,0 +1,40 @@
+# Weekly live-API drift detector: runs the SDV_LIVE-gated suites against the real
+# providers and keeps ONE open `live-tests:drift` issue current on failure.
+name: Live smoke
+
+on:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444  # v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Live tests
+        run: SDV_LIVE=1 npm test
+      - name: Open or update the drift issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create live-tests:drift --color B60205 --description "Weekly live smoke detected upstream drift" 2>/dev/null || true
+          body="Live smoke failed: $RUN_URL"
+          n=$(gh issue list --label live-tests:drift --state open --json number --jq '.[0].number // empty')
+          if [ -n "$n" ]; then
+            gh issue comment "$n" --body "$body"
+          else
+            gh issue create --label live-tests:drift --title "Live smoke: upstream drift detected" --body "$body"
+          fi

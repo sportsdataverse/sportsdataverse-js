@@ -89,7 +89,7 @@ npm run codegen:check    # 3. confirm there is no drift
 git add src/generated docs/docs/reference docs/src/playground tools/codegen
 ```
 
-`codegen:check` runs in CI and as a pre-commit hook. **A PR that changes endpoint
+`codegen:check` runs in CI (there is no pre-commit hook; run it yourself before pushing). **A PR that changes endpoint
 YAML without committing the regenerated output will fail the drift gate.**
 
 ## Adding an ESPN endpoint

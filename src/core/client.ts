@@ -83,7 +83,7 @@ const client = axios.create({
   timeout: 30000,
   headers: {
     "User-Agent":
-      "Mozilla/5.0 (compatible; sportsdataverse-js/3.x; +https://js.sportsdataverse.org/)",
+      "Mozilla/5.0 (compatible; sportsdataverse-js/3.x)",
   },
 });
 

@@ -15,6 +15,18 @@ function extractSelectList($: any, array: any[], id: string) {
     });
 }
 
+
+const warned = new Set<string>();
+/** One-time DeprecationWarning per stats.ncaa.org scraper (Akamai 403s plain clients). */
+function warnDeprecated(name: string) {
+    if (warned.has(name)) return;
+    warned.add(name);
+    process.emitWarning(
+        `sdv.ncaa.${name}() scrapes stats.ncaa.org, which blocks plain HTTP clients (403 Access Denied); it is deprecated and will be removed.`,
+        'DeprecationWarning'
+    );
+}
+
 /**
  * Operations for NCAA Sports.
  *
@@ -121,6 +133,7 @@ export default {
      * @param {*} year - Year (YYYY)
      * @param {*} month - Month (MM)
      * @param {*} day - Day (DD)
+     * @remarks The casablanca scoreboard only serves historical seasons; current-season dates return 404.
      * @returns json
      * @example
      * const result = await sdv.ncaa.getScoreboard(
@@ -140,8 +153,10 @@ export default {
      * @returns json
      * @example
      * const result = sdv.ncaa.getSports();
+     * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
     getSports: async function () {
+        warnDeprecated('getSports');
         const baseUrl = 'http://stats.ncaa.org/';
 
         const res = await axios.get(baseUrl)
@@ -173,8 +188,10 @@ export default {
      * @returns json
      * @example
      * const result = sdv.ncaa.getSeasons(sport='MBB');
+     * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
     getSeasons: async function (sport) {
+        warnDeprecated('getSeasons');
         if (!sport) {
             return;
         }
@@ -228,8 +245,10 @@ export default {
      * @returns json
      * @example
      * const result = sdv.ncaa.getDivisions(sport='MBB', season='2017');
+     * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
     getDivisions: async function (sport, season) {
+        warnDeprecated('getDivisions');
         if (!sport || !season) {
             return;
         }
@@ -289,8 +308,10 @@ export default {
      * @returns json
      * @example
      * const sportDivisionData = sdv.ncaa.getSportDivisionData(sport='MFB',season='2016',division=12,type='team',gameHigh=true);
+     * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
     getSportDivisionData: async function (sport, season, division, type, gameHigh) {
+        warnDeprecated('getSportDivisionData');
         if (!sport || !season || !division) {
             return;
         }
@@ -360,8 +381,10 @@ export default {
      * @returns json
      * @example
      * const players =  await sdv.ncaa.getPlayerData(sport = 'MFB', year = '2017', division = '11',rankingPeriod = '52', gameHigh='N', category = '20')
+     * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
     getPlayerData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
+        warnDeprecated('getPlayerData');
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
             "sport_code": sport,
@@ -413,8 +436,10 @@ export default {
      * @returns json
      * @example
      * const teams =  await sdv.ncaa.getTeamData(sport = 'MFB', year = '2017', division = '11', rankingPeriod = '52', gameHigh='N', category = '20')
+     * @deprecated stats.ncaa.org blocks plain HTTP clients (Akamai 403); this scraper no longer works.
      */
     getTeamData: async function (sport, season, division, rankingPeriod, gameHigh, category) {
+        warnDeprecated('getTeamData');
         const baseUrl = 'http://stats.ncaa.org/rankings/change_sport_year_div';
         const params: Record<string, any> = {
             "sport_code": sport,

@@ -1,0 +1,69 @@
+schema: transactions
+kind: dataframe
+columns:
+- name: transaction_type
+  type: character
+  description: 'HockeyTech `transaction_type` field.'
+- name: title
+  type: character
+  description: 'HockeyTech `title` field.'
+- name: ttype
+  type: character
+  description: 'HockeyTech `ttype` field.'
+- name: ttype_text
+  type: character
+  description: 'HockeyTech `ttype_text` field.'
+- name: transaction_date
+  type: character
+  description: 'HockeyTech `transaction_date` field.'
+- name: transaction_time
+  type: character
+  description: 'HockeyTech `transaction_time` field.'
+- name: formatted_transaction_date
+  type: character
+  description: 'HockeyTech `formatted_transaction_date` field.'
+- name: timezone
+  type: character
+  description: 'HockeyTech `timezone` field.'
+- name: player_id
+  type: character
+  description: 'HockeyTech player id.'
+- name: response1
+  type: character
+  description: 'HockeyTech `response1` field.'
+- name: response2
+  type: character
+  description: 'HockeyTech `response2` field.'
+- name: first_name
+  type: character
+  description: 'HockeyTech `first_name` field.'
+- name: last_name
+  type: character
+  description: 'HockeyTech `last_name` field.'
+- name: player_name
+  type: character
+  description: 'HockeyTech `player_name` field.'
+- name: position
+  type: character
+  description: 'HockeyTech `position` field.'
+- name: team_id
+  type: character
+  description: 'HockeyTech team id.'
+- name: team_city
+  type: character
+  description: 'HockeyTech `team_city` field.'
+- name: team_name
+  type: character
+  description: 'HockeyTech `team_name` field.'
+- name: team_code
+  type: character
+  description: 'HockeyTech `team_code` field.'
+- name: division
+  type: character
+  description: 'HockeyTech `division` field.'
+- name: team_logo
+  type: character
+  description: 'HockeyTech `team_logo` field.'
+- name: detail
+  type: character
+  description: 'HockeyTech `detail` field.'
