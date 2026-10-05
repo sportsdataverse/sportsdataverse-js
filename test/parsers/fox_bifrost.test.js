@@ -8,7 +8,7 @@ import {
   parse_fox_search,
 } from '../../dist/parsers/fox.js';
 import { parserFor, PARSERS } from '../../dist/parsers/_registry.js';
-import { FLAT_WRAPPERS } from '../../dist/index.js';
+import sdv, { FLAT_WRAPPERS, configure, resetConfig } from '../../dist/index.js';
 import { FLAT_HOSTS } from '../../dist/core/client.js';
 
 // Unit tests for the Fox Sports Bifrost parsers. Inline raw payloads (no
@@ -256,6 +256,34 @@ describe('fox flat-API family metadata (flat-contract style)', () => {
       should(w.publicName).be.undefined(); // keeps its pre-v4 fox_<short> name, no new name invented
       w.deprecated.should.match(/fox_api.yaml/); // points at sdv-py's probe record
     }
+  });
+
+  it('a dead route warns once with code SDV_DEPRECATED_ENDPOINT, then still calls through', async () => {
+    const calls = [];
+    configure({
+      transport: {
+        fox: async (req) => {
+          calls.push(req.url);
+          return { status: 200, headers: {}, url: req.url, data: { ok: true } };
+        },
+      },
+    });
+    const seen = [];
+    const on = (w) => /fox_fs_videos/.test(w.message) && seen.push(w);
+    process.on('warning', on);
+    try {
+      (await sdv.fox.fox_fs_videos()).should.eql({ ok: true });
+      await sdv.fox.foxFsVideos(); // same wrapper: warns once per process
+      await new Promise((r) => setImmediate(r));
+    } finally {
+      process.off('warning', on);
+      resetConfig();
+    }
+    calls.should.eql(['https://api.foxsports.com/fs/videos', 'https://api.foxsports.com/fs/videos']);
+    seen.length.should.equal(1);
+    seen[0].name.should.equal('DeprecationWarning');
+    seen[0].code.should.equal('SDV_DEPRECATED_ENDPOINT');
+    seen[0].message.should.match(/fox_api.yaml/);
   });
 
   it('uses the generic list parser as the default for most endpoints', () => {
