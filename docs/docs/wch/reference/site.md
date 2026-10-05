@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.wch`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnWchAthleteBio`
+## `espnWchPlayerBio`
 
-WCH — athlete bio (ESPN site.api.espn.com).
+WCH — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/womens-college-hockey/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_bio` / `espnWchAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ WCH — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_bio(...)
+await sdv.wch.espnWchPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_bio(...)
 ```
 
-## `espnWchAthleteInfo`
+## `espnWchPlayerInfo`
 
-WCH — athlete info (ESPN site.api.espn.com).
+WCH — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/womens-college-hockey/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_info` / `espnWchAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ WCH — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_info(...)
+await sdv.wch.espnWchPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_info(...)
 ```
 
-## `espnWchAthleteNews`
+## `espnWchPlayerNews`
 
-WCH — athlete news (ESPN site.api.espn.com).
+WCH — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/womens-college-hockey/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wch_athlete_news` / `espnWchAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ WCH — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.wch.espnWchAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.wch.espn_wch_athlete_news(...)
+await sdv.wch.espnWchPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.wch.espn_wch_player_news(...)
 ```
 
 ## `espnWchCalendar`

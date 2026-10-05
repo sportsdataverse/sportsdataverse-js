@@ -34,11 +34,13 @@ await sdv.cfb.espnCfbRankings({});
 // snake_case alias (py/R parity): sdv.cfb.espn_cfb_rankings(...)
 ```
 
-## `espnCfbRecruitingAthletes`
+## `espnCfbRecruitingPlayers`
 
-CFB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
+CFB — recruiting players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/recruiting/{year}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_recruiting_athletes` / `espnCfbRecruitingAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,8 +58,8 @@ CFB — recruiting athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbRecruitingAthletes({ year: '…' });
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_recruiting_athletes(...)
+await sdv.cfb.espnCfbRecruitingPlayers({ year: '…' });
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_recruiting_players(...)
 ```
 
 ## `espnCfbRecruitingRankings`
@@ -107,11 +109,13 @@ await sdv.cfb.espnCfbRecruitingYears({});
 // snake_case alias (py/R parity): sdv.cfb.espn_cfb_recruiting_years(...)
 ```
 
-## `espnCfbSeasonRecruits`
+## `espnCfbRecruits`
 
-CFB — season recruits (ESPN sports.core.api.espn.com (core v2)).
+CFB — recruits (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/seasons/{season}/recruits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_season_recruits` / `espnCfbSeasonRecruits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -129,15 +133,17 @@ CFB — season recruits (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbSeasonRecruits({ season: '…' });
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_season_recruits(...)
+await sdv.cfb.espnCfbRecruits({ season: '…' });
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_recruits(...)
 ```
 
-## `espnCfbSeasonWeekRankings`
+## `espnCfbWeekRankings`
 
-CFB — season week rankings (ESPN sports.core.api.espn.com (core v2)).
+CFB — week rankings (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/seasons/{season}/types/{season_type}/weeks/{week}/rankings`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_season_week_rankings` / `espnCfbSeasonWeekRankings`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -155,6 +161,6 @@ CFB — season week rankings (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbSeasonWeekRankings({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_season_week_rankings(...)
+await sdv.cfb.espnCfbWeekRankings({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_week_rankings(...)
 ```

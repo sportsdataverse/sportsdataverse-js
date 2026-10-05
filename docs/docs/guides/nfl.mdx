@@ -70,7 +70,7 @@ before each call — no credentials required. Scope with `season`, `season_type`
 ```js
 import sdv from 'sportsdataverse';
 
-const standings = await sdv.nfl.nflApiStandings({
+const standings = await sdv.nfl.nflStandings({
   season: 2024,
   season_type: 'REG',
   week: 1,
@@ -102,7 +102,7 @@ reproduces it exactly). Regenerate with `npm run docs:examples`.
 
 <!-- inject:example:nfl_standings -->
 
-`sdv.nfl.nflApiStandings({ season: 2024, parsed: true })` — the native NFL.com Shield standings, one row per team (sample fixture).
+`sdv.nfl.nflStandings({ season: 2024, parsed: true })` — the native NFL.com Shield standings, one row per team (sample fixture).
 
 | team_abbreviation | team_full_name | conference | division | wins | losses |
 | --- | --- | --- | --- | --- | --- |
@@ -121,11 +121,11 @@ _4 rows, 12 cols total — first 6 shown._
 import sdv from 'sportsdataverse';
 
 // every active roster for a season
-const rosters = await sdv.nfl.nflApiRosters({ season: 2024, parsed: true });
+const rosters = await sdv.nfl.nflRosters({ season: 2024, parsed: true });
 console.table(rosters.slice(0, 10));
 
 // rich weekly game details (drive chart, scoring, standings)
-const details = await sdv.nfl.nflApiWeeklyGameDetails({
+const details = await sdv.nfl.nflWeeklyGameDetails({
   season: 2024,
   season_type: 'REG',
   week: 1,

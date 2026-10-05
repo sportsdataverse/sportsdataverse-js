@@ -11,11 +11,13 @@ sidebar_position: 3
 
 5 endpoints on `sdv.laliga`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLaligaAthleteGamelog`
+## `espnLaligaPlayerGamelog`
 
-LALIGA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
+LALIGA — player gamelog (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/esp.1/athletes/{athlete_id}/gamelog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_gamelog` / `espnLaligaAthleteGamelog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -43,15 +45,17 @@ LALIGA — athlete gamelog (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteGamelog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_gamelog(...)
+await sdv.laliga.espnLaligaPlayerGamelog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_gamelog(...)
 ```
 
-## `espnLaligaAthleteOverview`
+## `espnLaligaPlayerOverview`
 
-LALIGA — athlete overview (ESPN site.web.api.espn.com (web v3)).
+LALIGA — player overview (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/esp.1/athletes/{athlete_id}/overview`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_overview` / `espnLaligaAthleteOverview`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -75,15 +79,17 @@ LALIGA — athlete overview (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteOverview({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_overview(...)
+await sdv.laliga.espnLaligaPlayerOverview({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_overview(...)
 ```
 
-## `espnLaligaAthleteSplits`
+## `espnLaligaPlayerSplits`
 
-LALIGA — athlete splits (ESPN site.web.api.espn.com (web v3)).
+LALIGA — player splits (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/esp.1/athletes/{athlete_id}/splits`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_splits` / `espnLaligaAthleteSplits`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -105,15 +111,17 @@ LALIGA — athlete splits (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteSplits({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_splits(...)
+await sdv.laliga.espnLaligaPlayerSplits({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_splits(...)
 ```
 
-## `espnLaligaAthleteStats`
+## `espnLaligaPlayerStats`
 
-LALIGA — athlete stats (ESPN site.web.api.espn.com (web v3)).
+LALIGA — player stats (ESPN site.web.api.espn.com (web v3)).
 
 **Endpoint URL:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/esp.1/athletes/{athlete_id}/stats`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_laliga_athlete_stats` / `espnLaligaAthleteStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +141,8 @@ LALIGA — athlete stats (ESPN site.web.api.espn.com (web v3)).
 **Example:**
 
 ```js
-await sdv.laliga.espnLaligaAthleteStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.laliga.espn_laliga_athlete_stats(...)
+await sdv.laliga.espnLaligaPlayerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.laliga.espn_laliga_player_stats(...)
 ```
 
 ## `espnLaligaLeaders`

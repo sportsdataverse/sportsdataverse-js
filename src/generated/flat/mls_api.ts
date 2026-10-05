@@ -10,6 +10,7 @@ import type { WrapperDef, WrapperFn } from "../../core/types.js";
 
 const CLUB_DEF: WrapperDef = {
   "short": "club",
+  "publicName": "mls_club",
   "flat": true,
   "api": "mls_api",
   "host": "https://stats-api.mlssoccer.com",
@@ -33,14 +34,15 @@ const CLUB_DEF: WrapperDef = {
  * @param params.club_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiClub({ club_id: '…' });
+ * @example await sdv.mls.mlsClub({ club_id: '…' });
  */
-export const mlsApiClub: WrapperFn = (params = {}) => callFlat(CLUB_DEF, params);
-/** snake_case alias of {@link mlsApiClub} (py/R parity). */
-export const mls_api_club = mlsApiClub;
+export const mlsClub: WrapperFn = (params = {}) => callFlat(CLUB_DEF, params);
+/** snake_case alias of {@link mlsClub} (py/R parity). */
+export const mls_club = mlsClub;
 
 const COMPETITION_SEASONS_DEF: WrapperDef = {
   "short": "competition_seasons",
+  "publicName": "mls_competition_seasons",
   "flat": true,
   "api": "mls_api",
   "host": "https://stats-api.mlssoccer.com",
@@ -64,14 +66,15 @@ const COMPETITION_SEASONS_DEF: WrapperDef = {
  * @param params.competition_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiCompetitionSeasons({ competition_id: '…' });
+ * @example await sdv.mls.mlsCompetitionSeasons({ competition_id: '…' });
  */
-export const mlsApiCompetitionSeasons: WrapperFn = (params = {}) => callFlat(COMPETITION_SEASONS_DEF, params);
-/** snake_case alias of {@link mlsApiCompetitionSeasons} (py/R parity). */
-export const mls_api_competition_seasons = mlsApiCompetitionSeasons;
+export const mlsCompetitionSeasons: WrapperFn = (params = {}) => callFlat(COMPETITION_SEASONS_DEF, params);
+/** snake_case alias of {@link mlsCompetitionSeasons} (py/R parity). */
+export const mls_competition_seasons = mlsCompetitionSeasons;
 
 const COMPETITIONS_DEF: WrapperDef = {
   "short": "competitions",
+  "publicName": "mls_competitions",
   "flat": true,
   "api": "mls_api",
   "host": "https://stats-api.mlssoccer.com",
@@ -90,14 +93,15 @@ const COMPETITIONS_DEF: WrapperDef = {
  *
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiCompetitions({});
+ * @example await sdv.mls.mlsCompetitions({});
  */
-export const mlsApiCompetitions: WrapperFn = (params = {}) => callFlat(COMPETITIONS_DEF, params);
-/** snake_case alias of {@link mlsApiCompetitions} (py/R parity). */
-export const mls_api_competitions = mlsApiCompetitions;
+export const mlsCompetitions: WrapperFn = (params = {}) => callFlat(COMPETITIONS_DEF, params);
+/** snake_case alias of {@link mlsCompetitions} (py/R parity). */
+export const mls_competitions = mlsCompetitions;
 
 const CONTENT_SEASON_DEF: WrapperDef = {
   "short": "content_season",
+  "publicName": "mls_content_season",
   "flat": true,
   "api": "mls_api",
   "host": "https://dapi.mlssoccer.com",
@@ -121,14 +125,15 @@ const CONTENT_SEASON_DEF: WrapperDef = {
  * @param params.slug - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiContentSeason({ slug: '…' });
+ * @example await sdv.mls.mlsContentSeason({ slug: '…' });
  */
-export const mlsApiContentSeason: WrapperFn = (params = {}) => callFlat(CONTENT_SEASON_DEF, params);
-/** snake_case alias of {@link mlsApiContentSeason} (py/R parity). */
-export const mls_api_content_season = mlsApiContentSeason;
+export const mlsContentSeason: WrapperFn = (params = {}) => callFlat(CONTENT_SEASON_DEF, params);
+/** snake_case alias of {@link mlsContentSeason} (py/R parity). */
+export const mls_content_season = mlsContentSeason;
 
 const CONTENT_SEASONS_DEF: WrapperDef = {
   "short": "content_seasons",
+  "publicName": "mls_content_seasons",
   "flat": true,
   "api": "mls_api",
   "host": "https://dapi.mlssoccer.com",
@@ -158,14 +163,15 @@ const CONTENT_SEASONS_DEF: WrapperDef = {
  * @param params.sportec_id - query parameter (`fields.sportecId`).
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiContentSeasons({});
+ * @example await sdv.mls.mlsContentSeasons({});
  */
-export const mlsApiContentSeasons: WrapperFn = (params = {}) => callFlat(CONTENT_SEASONS_DEF, params);
-/** snake_case alias of {@link mlsApiContentSeasons} (py/R parity). */
-export const mls_api_content_seasons = mlsApiContentSeasons;
+export const mlsContentSeasons: WrapperFn = (params = {}) => callFlat(CONTENT_SEASONS_DEF, params);
+/** snake_case alias of {@link mlsContentSeasons} (py/R parity). */
+export const mls_content_seasons = mlsContentSeasons;
 
 const MATCH_DEF: WrapperDef = {
   "short": "match",
+  "publicName": "mls_match",
   "flat": true,
   "api": "mls_api",
   "host": "https://stats-api.mlssoccer.com",
@@ -189,14 +195,15 @@ const MATCH_DEF: WrapperDef = {
  * @param params.match_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiMatch({ match_id: '…' });
+ * @example await sdv.mls.mlsMatch({ match_id: '…' });
  */
-export const mlsApiMatch: WrapperFn = (params = {}) => callFlat(MATCH_DEF, params);
-/** snake_case alias of {@link mlsApiMatch} (py/R parity). */
-export const mls_api_match = mlsApiMatch;
+export const mlsMatch: WrapperFn = (params = {}) => callFlat(MATCH_DEF, params);
+/** snake_case alias of {@link mlsMatch} (py/R parity). */
+export const mls_match = mlsMatch;
 
 const SEASON_MATCHES_DEF: WrapperDef = {
   "short": "season_matches",
+  "publicName": "mls_season_matches",
   "flat": true,
   "api": "mls_api",
   "host": "https://stats-api.mlssoccer.com",
@@ -251,14 +258,15 @@ const SEASON_MATCHES_DEF: WrapperDef = {
  * @param params.series_name - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiSeasonMatches({ season_id: '…' });
+ * @example await sdv.mls.mlsSeasonMatches({ season_id: '…' });
  */
-export const mlsApiSeasonMatches: WrapperFn = (params = {}) => callFlat(SEASON_MATCHES_DEF, params);
-/** snake_case alias of {@link mlsApiSeasonMatches} (py/R parity). */
-export const mls_api_season_matches = mlsApiSeasonMatches;
+export const mlsSeasonMatches: WrapperFn = (params = {}) => callFlat(SEASON_MATCHES_DEF, params);
+/** snake_case alias of {@link mlsSeasonMatches} (py/R parity). */
+export const mls_season_matches = mlsSeasonMatches;
 
 const SPORTAPI_CLUB_PLAYERS_DEF: WrapperDef = {
   "short": "sportapi_club_players",
+  "publicName": "mls_sportapi_club_players",
   "flat": true,
   "api": "mls_api",
   "host": "https://sportapi.mlssoccer.com",
@@ -288,14 +296,15 @@ const SPORTAPI_CLUB_PLAYERS_DEF: WrapperDef = {
  * @param params.culture - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiSportapiClubPlayers({ club_id: '…' });
+ * @example await sdv.mls.mlsSportapiClubPlayers({ club_id: '…' });
  */
-export const mlsApiSportapiClubPlayers: WrapperFn = (params = {}) => callFlat(SPORTAPI_CLUB_PLAYERS_DEF, params);
-/** snake_case alias of {@link mlsApiSportapiClubPlayers} (py/R parity). */
-export const mls_api_sportapi_club_players = mlsApiSportapiClubPlayers;
+export const mlsSportapiClubPlayers: WrapperFn = (params = {}) => callFlat(SPORTAPI_CLUB_PLAYERS_DEF, params);
+/** snake_case alias of {@link mlsSportapiClubPlayers} (py/R parity). */
+export const mls_sportapi_club_players = mlsSportapiClubPlayers;
 
 const SPORTAPI_CLUBS_BY_SPORTEC_IDS_DEF: WrapperDef = {
   "short": "sportapi_clubs_by_sportec_ids",
+  "publicName": "mls_sportapi_clubs_by_sportec_ids",
   "flat": true,
   "api": "mls_api",
   "host": "https://sportapi.mlssoccer.com",
@@ -319,14 +328,15 @@ const SPORTAPI_CLUBS_BY_SPORTEC_IDS_DEF: WrapperDef = {
  * @param params.ids - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiSportapiClubsBySportecIds({ ids: '…' });
+ * @example await sdv.mls.mlsSportapiClubsBySportecIds({ ids: '…' });
  */
-export const mlsApiSportapiClubsBySportecIds: WrapperFn = (params = {}) => callFlat(SPORTAPI_CLUBS_BY_SPORTEC_IDS_DEF, params);
-/** snake_case alias of {@link mlsApiSportapiClubsBySportecIds} (py/R parity). */
-export const mls_api_sportapi_clubs_by_sportec_ids = mlsApiSportapiClubsBySportecIds;
+export const mlsSportapiClubsBySportecIds: WrapperFn = (params = {}) => callFlat(SPORTAPI_CLUBS_BY_SPORTEC_IDS_DEF, params);
+/** snake_case alias of {@link mlsSportapiClubsBySportecIds} (py/R parity). */
+export const mls_sportapi_clubs_by_sportec_ids = mlsSportapiClubsBySportecIds;
 
 const SPORTAPI_MATCH_DEF: WrapperDef = {
   "short": "sportapi_match",
+  "publicName": "mls_sportapi_match",
   "flat": true,
   "api": "mls_api",
   "host": "https://sportapi.mlssoccer.com",
@@ -350,14 +360,15 @@ const SPORTAPI_MATCH_DEF: WrapperDef = {
  * @param params.match_id - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiSportapiMatch({ match_id: '…' });
+ * @example await sdv.mls.mlsSportapiMatch({ match_id: '…' });
  */
-export const mlsApiSportapiMatch: WrapperFn = (params = {}) => callFlat(SPORTAPI_MATCH_DEF, params);
-/** snake_case alias of {@link mlsApiSportapiMatch} (py/R parity). */
-export const mls_api_sportapi_match = mlsApiSportapiMatch;
+export const mlsSportapiMatch: WrapperFn = (params = {}) => callFlat(SPORTAPI_MATCH_DEF, params);
+/** snake_case alias of {@link mlsSportapiMatch} (py/R parity). */
+export const mls_sportapi_match = mlsSportapiMatch;
 
 const SPORTAPI_MATCHES_BY_SPORTEC_IDS_DEF: WrapperDef = {
   "short": "sportapi_matches_by_sportec_ids",
+  "publicName": "mls_sportapi_matches_by_sportec_ids",
   "flat": true,
   "api": "mls_api",
   "host": "https://sportapi.mlssoccer.com",
@@ -381,14 +392,15 @@ const SPORTAPI_MATCHES_BY_SPORTEC_IDS_DEF: WrapperDef = {
  * @param params.ids - path parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiSportapiMatchesBySportecIds({ ids: '…' });
+ * @example await sdv.mls.mlsSportapiMatchesBySportecIds({ ids: '…' });
  */
-export const mlsApiSportapiMatchesBySportecIds: WrapperFn = (params = {}) => callFlat(SPORTAPI_MATCHES_BY_SPORTEC_IDS_DEF, params);
-/** snake_case alias of {@link mlsApiSportapiMatchesBySportecIds} (py/R parity). */
-export const mls_api_sportapi_matches_by_sportec_ids = mlsApiSportapiMatchesBySportecIds;
+export const mlsSportapiMatchesBySportecIds: WrapperFn = (params = {}) => callFlat(SPORTAPI_MATCHES_BY_SPORTEC_IDS_DEF, params);
+/** snake_case alias of {@link mlsSportapiMatchesBySportecIds} (py/R parity). */
+export const mls_sportapi_matches_by_sportec_ids = mlsSportapiMatchesBySportecIds;
 
 const STANDINGS_DEF: WrapperDef = {
   "short": "standings",
+  "publicName": "mls_standings",
   "flat": true,
   "api": "mls_api",
   "host": "https://stats-api.mlssoccer.com",
@@ -433,8 +445,8 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.is_live - query parameter.
  * @param params.parsed - when `true`, route the payload through this endpoint's parser and return tidy rows instead of the raw response.
  * @returns The raw response by default; a tidy array of row objects when `{ parsed: true }`.
- * @example await sdv.mls.mlsApiStandings({ competition_id: '…', season_id: '…' });
+ * @example await sdv.mls.mlsStandings({ competition_id: '…', season_id: '…' });
  */
-export const mlsApiStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
-/** snake_case alias of {@link mlsApiStandings} (py/R parity). */
-export const mls_api_standings = mlsApiStandings;
+export const mlsStandings: WrapperFn = (params = {}) => callFlat(STANDINGS_DEF, params);
+/** snake_case alias of {@link mlsStandings} (py/R parity). */
+export const mls_standings = mlsStandings;

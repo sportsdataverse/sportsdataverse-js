@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.nwsl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNwslAthleteAwards`
+## `espnNwslPlayerAwards`
 
-NWSL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_awards` / `espnNwslAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ NWSL — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_awards(...)
+await sdv.nwsl.espnNwslPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_awards(...)
 ```
 
-## `espnNwslAthleteCareerStats`
+## `espnNwslPlayerCareerStats`
 
-NWSL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_career_stats` / `espnNwslAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ NWSL — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_career_stats(...)
+await sdv.nwsl.espnNwslPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_career_stats(...)
 ```
 
-## `espnNwslAthleteContracts`
+## `espnNwslPlayerContracts`
 
-NWSL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_contracts` / `espnNwslAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ NWSL — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_contracts(...)
+await sdv.nwsl.espnNwslPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_contracts(...)
 ```
 
-## `espnNwslAthleteCore`
+## `espnNwslPlayerCore`
 
-NWSL — athlete core (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_core` / `espnNwslAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ NWSL — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_core(...)
+await sdv.nwsl.espnNwslPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_core(...)
 ```
 
-## `espnNwslAthleteEventlog`
+## `espnNwslPlayerEventlog`
 
-NWSL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_eventlog` / `espnNwslAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ NWSL — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_eventlog(...)
+await sdv.nwsl.espnNwslPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_eventlog(...)
 ```
 
-## `espnNwslAthleteInjuries`
+## `espnNwslPlayerInjuries`
 
-NWSL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_injuries` / `espnNwslAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ NWSL — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_injuries(...)
+await sdv.nwsl.espnNwslPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_injuries(...)
 ```
 
-## `espnNwslAthleteNotes`
+## `espnNwslPlayerNotes`
 
-NWSL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_notes` / `espnNwslAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ NWSL — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_notes(...)
+await sdv.nwsl.espnNwslPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_notes(...)
 ```
 
-## `espnNwslAthleteRecords`
+## `espnNwslPlayerRecords`
 
-NWSL — athlete records (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_records` / `espnNwslAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ NWSL — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_records(...)
+await sdv.nwsl.espnNwslPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_records(...)
 ```
 
-## `espnNwslAthleteSeasons`
+## `espnNwslPlayerSeasons`
 
-NWSL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_seasons` / `espnNwslAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ NWSL — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_seasons(...)
+await sdv.nwsl.espnNwslPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_seasons(...)
 ```
 
-## `espnNwslAthleteStatisticslog`
+## `espnNwslPlayerStatisticslog`
 
-NWSL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_statisticslog` / `espnNwslAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ NWSL — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_statisticslog(...)
+await sdv.nwsl.espnNwslPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_statisticslog(...)
 ```
 
-## `espnNwslAthleteVsAthlete`
+## `espnNwslPlayerVsPlayer`
 
-NWSL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+NWSL — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athlete_vs_athlete` / `espnNwslAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ NWSL — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athlete_vs_athlete(...)
+await sdv.nwsl.espnNwslPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_player_vs_player(...)
 ```
 
-## `espnNwslAthletesIndex`
+## `espnNwslPlayersIndex`
 
-NWSL — athletes index (ESPN sports.core.api.espn.com (core v2)).
+NWSL — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_athletes_index` / `espnNwslAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ NWSL — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslAthletesIndex({});
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_athletes_index(...)
+await sdv.nwsl.espnNwslPlayersIndex({});
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_players_index(...)
 ```
 
 ## `espnNwslAward`
@@ -403,12 +427,14 @@ await sdv.nwsl.espnNwslCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_coach_season(...)
 ```
 
-## `espnNwslEvent`
+## `espnNwslGame`
 
-NWSL — event (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event` / `espnNwslEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ NWSL — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event(...)
+await sdv.nwsl.espnNwslGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game(...)
 ```
 
-## `espnNwslEventBroadcasts`
+## `espnNwslGameBroadcasts`
 
-NWSL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_broadcasts` / `espnNwslEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ NWSL — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_broadcasts(...)
+await sdv.nwsl.espnNwslGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_broadcasts(...)
 ```
 
-## `espnNwslEventCompetition`
+## `espnNwslGameCompetition`
 
-NWSL — event competition (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competition` / `espnNwslEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ NWSL — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competition(...)
+await sdv.nwsl.espnNwslGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_competition(...)
 ```
 
-## `espnNwslEventCompetitor`
+## `espnNwslGameTeam`
 
-NWSL — event competitor (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitor` / `espnNwslEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ NWSL — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitor(...)
+await sdv.nwsl.espnNwslGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_team(...)
 ```
 
-## `espnNwslEventCompetitorLeaders`
+## `espnNwslGameTeamLeaders`
 
-NWSL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitor_leaders` / `espnNwslEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ NWSL — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitor_leaders(...)
+await sdv.nwsl.espnNwslGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_team_leaders(...)
 ```
 
-## `espnNwslEventCompetitorLinescores`
+## `espnNwslGameTeamLinescores`
 
-NWSL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitor_linescores` / `espnNwslEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ NWSL — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitor_linescores(...)
+await sdv.nwsl.espnNwslGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_team_linescores(...)
 ```
 
-## `espnNwslEventCompetitorRecord`
+## `espnNwslGameTeamRecord`
 
-NWSL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitor_record` / `espnNwslEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ NWSL — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitor_record(...)
+await sdv.nwsl.espnNwslGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_team_record(...)
 ```
 
-## `espnNwslEventCompetitorRoster`
+## `espnNwslGameTeamRoster`
 
-NWSL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitor_roster` / `espnNwslEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ NWSL — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitor_roster(...)
+await sdv.nwsl.espnNwslGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_team_roster(...)
 ```
 
-## `espnNwslEventCompetitorStatistics`
+## `espnNwslGameTeamStatistics`
 
-NWSL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitor_statistics` / `espnNwslEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ NWSL — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitor_statistics(...)
+await sdv.nwsl.espnNwslGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_team_statistics(...)
 ```
 
-## `espnNwslEventCompetitors`
+## `espnNwslGameTeams`
 
-NWSL — event competitors (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_competitors` / `espnNwslEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ NWSL — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_competitors(...)
+await sdv.nwsl.espnNwslGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_teams(...)
 ```
 
-## `espnNwslEventLeaders`
+## `espnNwslGameLeaders`
 
-NWSL — event leaders (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_leaders` / `espnNwslEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ NWSL — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_leaders(...)
+await sdv.nwsl.espnNwslGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_leaders(...)
 ```
 
-## `espnNwslEventOdds`
+## `espnNwslGameOdds`
 
-NWSL — event odds (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_odds` / `espnNwslEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ NWSL — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_odds(...)
+await sdv.nwsl.espnNwslGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_odds(...)
 ```
 
-## `espnNwslEventOfficialDetail`
+## `espnNwslGameOfficialDetail`
 
-NWSL — event official detail (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_official_detail` / `espnNwslEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ NWSL — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_official_detail(...)
+await sdv.nwsl.espnNwslGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_official_detail(...)
 ```
 
-## `espnNwslEventOfficials`
+## `espnNwslGameOfficials`
 
-NWSL — event officials (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_officials` / `espnNwslEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ NWSL — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_officials(...)
+await sdv.nwsl.espnNwslGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_officials(...)
 ```
 
-## `espnNwslEventPlay`
+## `espnNwslGamePlay`
 
-NWSL — event play (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_play` / `espnNwslEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ NWSL — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_play(...)
+await sdv.nwsl.espnNwslGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_play(...)
 ```
 
-## `espnNwslEventPlayPersonnel`
+## `espnNwslGamePlayPersonnel`
 
-NWSL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_play_personnel` / `espnNwslEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ NWSL — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_play_personnel(...)
+await sdv.nwsl.espnNwslGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_play_personnel(...)
 ```
 
-## `espnNwslEventPlays`
+## `espnNwslGamePlays`
 
-NWSL — event plays (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_plays` / `espnNwslEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ NWSL — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_plays(...)
+await sdv.nwsl.espnNwslGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_plays(...)
 ```
 
-## `espnNwslEventPowerindex`
+## `espnNwslGamePowerindex`
 
-NWSL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_powerindex` / `espnNwslEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ NWSL — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_powerindex(...)
+await sdv.nwsl.espnNwslGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_powerindex(...)
 ```
 
-## `espnNwslEventPredictor`
+## `espnNwslGamePredictor`
 
-NWSL — event predictor (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_predictor` / `espnNwslEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ NWSL — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_predictor(...)
+await sdv.nwsl.espnNwslGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_predictor(...)
 ```
 
-## `espnNwslEventProbabilities`
+## `espnNwslGameProbabilities`
 
-NWSL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_probabilities` / `espnNwslEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ NWSL — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_probabilities(...)
+await sdv.nwsl.espnNwslGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_probabilities(...)
 ```
 
-## `espnNwslEventPropbets`
+## `espnNwslGamePropbets`
 
-NWSL — event propbets (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_propbets` / `espnNwslEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ NWSL — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_propbets(...)
+await sdv.nwsl.espnNwslGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_propbets(...)
 ```
 
-## `espnNwslEventScoringplays`
+## `espnNwslGameScoringplays`
 
-NWSL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_scoringplays` / `espnNwslEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ NWSL — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_scoringplays(...)
+await sdv.nwsl.espnNwslGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_scoringplays(...)
 ```
 
-## `espnNwslEventSituation`
+## `espnNwslGameSituation`
 
-NWSL — event situation (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_situation` / `espnNwslEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ NWSL — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_situation(...)
+await sdv.nwsl.espnNwslGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_situation(...)
 ```
 
-## `espnNwslEventStatus`
+## `espnNwslGameStatus`
 
-NWSL — event status (ESPN sports.core.api.espn.com (core v2)).
+NWSL — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_event_status` / `espnNwslEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ NWSL — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_event_status(...)
+await sdv.nwsl.espnNwslGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_game_status(...)
 ```
 
-## `espnNwslEvents`
+## `espnNwslGames`
 
-NWSL — events (ESPN sports.core.api.espn.com (core v2)).
+NWSL — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_events` / `espnNwslEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ NWSL — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslEvents({});
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_events(...)
+await sdv.nwsl.espnNwslGames({});
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_games(...)
 ```
 
 ## `espnNwslFranchise`
@@ -1145,11 +1219,13 @@ await sdv.nwsl.espnNwslPositions({});
 // snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_positions(...)
 ```
 
-## `espnNwslSeasonAthletes`
+## `espnNwslSeasonPlayers`
 
-NWSL — season athletes (ESPN sports.core.api.espn.com (core v2)).
+NWSL — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_season_athletes` / `espnNwslSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ NWSL — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_season_athletes(...)
+await sdv.nwsl.espnNwslSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_season_players(...)
 ```
 
 ## `espnNwslSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.nwsl.espnNwslSeasonWeek({ season: '…', season_type: '…', week: '�
 // snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_season_week(...)
 ```
 
-## `espnNwslSeasonWeekEvents`
+## `espnNwslSeasonWeekGames`
 
-NWSL — season week events (ESPN sports.core.api.espn.com (core v2)).
+NWSL — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/usa.nwsl/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nwsl_season_week_events` / `espnNwslSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ NWSL — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.nwsl.espnNwslSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_season_week_events(...)
+await sdv.nwsl.espnNwslSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.nwsl.espn_nwsl_season_week_games(...)
 ```
 
 ## `espnNwslSeasonWeekPowerindex`

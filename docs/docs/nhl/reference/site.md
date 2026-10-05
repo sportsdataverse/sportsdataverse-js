@@ -11,12 +11,14 @@ sidebar_position: 1
 
 24 endpoints on `sdv.nhl`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnNhlAthleteBio`
+## `espnNhlPlayerBio`
 
-NHL — athlete bio (ESPN site.api.espn.com).
+NHL — player bio (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/athletes/{athlete_id}/bio`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_bio` / `espnNhlAthleteBio`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -27,16 +29,18 @@ NHL — athlete bio (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteBio({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_bio(...)
+await sdv.nhl.espnNhlPlayerBio({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_bio(...)
 ```
 
-## `espnNhlAthleteInfo`
+## `espnNhlPlayerInfo`
 
-NHL — athlete info (ESPN site.api.espn.com).
+NHL — player info (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/athletes/{athlete_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_info` / `espnNhlAthleteInfo`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -47,15 +51,17 @@ NHL — athlete info (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteInfo({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_info(...)
+await sdv.nhl.espnNhlPlayerInfo({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_info(...)
 ```
 
-## `espnNhlAthleteNews`
+## `espnNhlPlayerNews`
 
-NHL — athlete news (ESPN site.api.espn.com).
+NHL — player news (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/athletes/{athlete_id}/news`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nhl_athlete_news` / `espnNhlAthleteNews`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -87,8 +93,8 @@ NHL — athlete news (ESPN site.api.espn.com).
 **Example:**
 
 ```js
-await sdv.nhl.espnNhlAthleteNews({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.nhl.espn_nhl_athlete_news(...)
+await sdv.nhl.espnNhlPlayerNews({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.nhl.espn_nhl_player_news(...)
 ```
 
 ## `espnNhlCalendar`

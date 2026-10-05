@@ -11,11 +11,13 @@ sidebar_position: 2
 
 82 endpoints on `sdv.ligamx`. Each is exposed under a camelCase canonical name and a snake_case alias (py/R parity), accepts snake_case or camelCase params, and returns raw ESPN JSON by default (`{ parsed: true }` for tidy rows).
 
-## `espnLigamxAthleteAwards`
+## `espnLigamxPlayerAwards`
 
-LIGAMX — athlete awards (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player awards (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/awards`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_awards` / `espnLigamxAthleteAwards`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -31,15 +33,17 @@ LIGAMX — athlete awards (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteAwards({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_awards(...)
+await sdv.ligamx.espnLigamxPlayerAwards({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_awards(...)
 ```
 
-## `espnLigamxAthleteCareerStats`
+## `espnLigamxPlayerCareerStats`
 
-LIGAMX — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player career stats (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/statistics[/{stat_type}]`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_career_stats` / `espnLigamxAthleteCareerStats`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -56,15 +60,17 @@ LIGAMX — athlete career stats (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteCareerStats({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_career_stats(...)
+await sdv.ligamx.espnLigamxPlayerCareerStats({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_career_stats(...)
 ```
 
-## `espnLigamxAthleteContracts`
+## `espnLigamxPlayerContracts`
 
-LIGAMX — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player contracts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/contracts`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_contracts` / `espnLigamxAthleteContracts`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -80,15 +86,17 @@ LIGAMX — athlete contracts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteContracts({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_contracts(...)
+await sdv.ligamx.espnLigamxPlayerContracts({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_contracts(...)
 ```
 
-## `espnLigamxAthleteCore`
+## `espnLigamxPlayerCore`
 
-LIGAMX — athlete core (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player core (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_core` / `espnLigamxAthleteCore`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -100,15 +108,17 @@ LIGAMX — athlete core (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteCore({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_core(...)
+await sdv.ligamx.espnLigamxPlayerCore({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_core(...)
 ```
 
-## `espnLigamxAthleteEventlog`
+## `espnLigamxPlayerEventlog`
 
-LIGAMX — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player eventlog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/eventlog`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_eventlog` / `espnLigamxAthleteEventlog`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -124,15 +134,17 @@ LIGAMX — athlete eventlog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteEventlog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_eventlog(...)
+await sdv.ligamx.espnLigamxPlayerEventlog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_eventlog(...)
 ```
 
-## `espnLigamxAthleteInjuries`
+## `espnLigamxPlayerInjuries`
 
-LIGAMX — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player injuries (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/injuries`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_injuries` / `espnLigamxAthleteInjuries`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -150,16 +162,18 @@ LIGAMX — athlete injuries (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteInjuries({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_injuries(...)
+await sdv.ligamx.espnLigamxPlayerInjuries({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_injuries(...)
 ```
 
-## `espnLigamxAthleteNotes`
+## `espnLigamxPlayerNotes`
 
-LIGAMX — athlete notes (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player notes (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/notes`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_notes` / `espnLigamxAthleteNotes`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -174,16 +188,18 @@ LIGAMX — athlete notes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteNotes({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_notes(...)
+await sdv.ligamx.espnLigamxPlayerNotes({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_notes(...)
 ```
 
-## `espnLigamxAthleteRecords`
+## `espnLigamxPlayerRecords`
 
-LIGAMX — athlete records (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player records (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/records`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_records` / `espnLigamxAthleteRecords`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -198,16 +214,18 @@ LIGAMX — athlete records (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteRecords({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_records(...)
+await sdv.ligamx.espnLigamxPlayerRecords({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_records(...)
 ```
 
-## `espnLigamxAthleteSeasons`
+## `espnLigamxPlayerSeasons`
 
-LIGAMX — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player seasons (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/seasons`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_seasons` / `espnLigamxAthleteSeasons`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -222,16 +240,18 @@ LIGAMX — athlete seasons (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteSeasons({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_seasons(...)
+await sdv.ligamx.espnLigamxPlayerSeasons({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_seasons(...)
 ```
 
-## `espnLigamxAthleteStatisticslog`
+## `espnLigamxPlayerStatisticslog`
 
-LIGAMX — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player statisticslog (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/statisticslog`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_statisticslog` / `espnLigamxAthleteStatisticslog`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{athlete_id}` | `athlete_id` | yes | path parameter |
@@ -246,15 +266,17 @@ LIGAMX — athlete statisticslog (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteStatisticslog({ athlete_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_statisticslog(...)
+await sdv.ligamx.espnLigamxPlayerStatisticslog({ athlete_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_statisticslog(...)
 ```
 
-## `espnLigamxAthleteVsAthlete`
+## `espnLigamxPlayerVsPlayer`
 
-LIGAMX — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — player vs player (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes/{athlete_id}/vsathlete/{opp_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athlete_vs_athlete` / `espnLigamxAthleteVsAthlete`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -267,15 +289,17 @@ LIGAMX — athlete vs athlete (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthleteVsAthlete({ athlete_id: '…', opp_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athlete_vs_athlete(...)
+await sdv.ligamx.espnLigamxPlayerVsPlayer({ athlete_id: '…', opp_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_player_vs_player(...)
 ```
 
-## `espnLigamxAthletesIndex`
+## `espnLigamxPlayersIndex`
 
-LIGAMX — athletes index (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — players index (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_athletes_index` / `espnLigamxAthletesIndex`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -293,8 +317,8 @@ LIGAMX — athletes index (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxAthletesIndex({});
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_athletes_index(...)
+await sdv.ligamx.espnLigamxPlayersIndex({});
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_players_index(...)
 ```
 
 ## `espnLigamxAward`
@@ -403,12 +427,14 @@ await sdv.ligamx.espnLigamxCoachSeason({ coach_id: '…', season: '…' });
 // snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_coach_season(...)
 ```
 
-## `espnLigamxEvent`
+## `espnLigamxGame`
 
-LIGAMX — event (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event` / `espnLigamxEvent`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -419,16 +445,18 @@ LIGAMX — event (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEvent({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event(...)
+await sdv.ligamx.espnLigamxGame({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game(...)
 ```
 
-## `espnLigamxEventBroadcasts`
+## `espnLigamxGameBroadcasts`
 
-LIGAMX — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game broadcasts (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/broadcasts`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_broadcasts` / `espnLigamxEventBroadcasts`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -444,16 +472,18 @@ LIGAMX — event broadcasts (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventBroadcasts({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_broadcasts(...)
+await sdv.ligamx.espnLigamxGameBroadcasts({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_broadcasts(...)
 ```
 
-## `espnLigamxEventCompetition`
+## `espnLigamxGameCompetition`
 
-LIGAMX — event competition (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game competition (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competition` / `espnLigamxEventCompetition`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -465,15 +495,17 @@ LIGAMX — event competition (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetition({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competition(...)
+await sdv.ligamx.espnLigamxGameCompetition({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_competition(...)
 ```
 
-## `espnLigamxEventCompetitor`
+## `espnLigamxGameTeam`
 
-LIGAMX — event competitor (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game team (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitor` / `espnLigamxEventCompetitor`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -487,15 +519,17 @@ LIGAMX — event competitor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitor({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitor(...)
+await sdv.ligamx.espnLigamxGameTeam({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_team(...)
 ```
 
-## `espnLigamxEventCompetitorLeaders`
+## `espnLigamxGameTeamLeaders`
 
-LIGAMX — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game team leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitor_leaders` / `espnLigamxEventCompetitorLeaders`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -513,15 +547,17 @@ LIGAMX — event competitor leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitorLeaders({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitor_leaders(...)
+await sdv.ligamx.espnLigamxGameTeamLeaders({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_team_leaders(...)
 ```
 
-## `espnLigamxEventCompetitorLinescores`
+## `espnLigamxGameTeamLinescores`
 
-LIGAMX — event competitor linescores (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game team linescores (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitor_linescores` / `espnLigamxEventCompetitorLinescores`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -535,15 +571,17 @@ LIGAMX — event competitor linescores (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitorLinescores({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitor_linescores(...)
+await sdv.ligamx.espnLigamxGameTeamLinescores({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_team_linescores(...)
 ```
 
-## `espnLigamxEventCompetitorRecord`
+## `espnLigamxGameTeamRecord`
 
-LIGAMX — event competitor record (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game team record (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/record`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitor_record` / `espnLigamxEventCompetitorRecord`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -557,15 +595,17 @@ LIGAMX — event competitor record (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitorRecord({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitor_record(...)
+await sdv.ligamx.espnLigamxGameTeamRecord({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_team_record(...)
 ```
 
-## `espnLigamxEventCompetitorRoster`
+## `espnLigamxGameTeamRoster`
 
-LIGAMX — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game team roster (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitor_roster` / `espnLigamxEventCompetitorRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -579,15 +619,17 @@ LIGAMX — event competitor roster (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitorRoster({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitor_roster(...)
+await sdv.ligamx.espnLigamxGameTeamRoster({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_team_roster(...)
 ```
 
-## `espnLigamxEventCompetitorStatistics`
+## `espnLigamxGameTeamStatistics`
 
-LIGAMX — event competitor statistics (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game team statistics (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitor_statistics` / `espnLigamxEventCompetitorStatistics`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -611,16 +653,18 @@ LIGAMX — event competitor statistics (ESPN sports.core.api.espn.com (core v2))
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitorStatistics({ event_id: '…', team_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitor_statistics(...)
+await sdv.ligamx.espnLigamxGameTeamStatistics({ event_id: '…', team_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_team_statistics(...)
 ```
 
-## `espnLigamxEventCompetitors`
+## `espnLigamxGameTeams`
 
-LIGAMX — event competitors (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game teams (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/competitors`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_competitors` / `espnLigamxEventCompetitors`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -636,16 +680,18 @@ LIGAMX — event competitors (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventCompetitors({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_competitors(...)
+await sdv.ligamx.espnLigamxGameTeams({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_teams(...)
 ```
 
-## `espnLigamxEventLeaders`
+## `espnLigamxGameLeaders`
 
-LIGAMX — event leaders (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game leaders (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/leaders`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_leaders` / `espnLigamxEventLeaders`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -661,16 +707,18 @@ LIGAMX — event leaders (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventLeaders({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_leaders(...)
+await sdv.ligamx.espnLigamxGameLeaders({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_leaders(...)
 ```
 
-## `espnLigamxEventOdds`
+## `espnLigamxGameOdds`
 
-LIGAMX — event odds (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game odds (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/odds`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_odds` / `espnLigamxEventOdds`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -686,15 +734,17 @@ LIGAMX — event odds (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventOdds({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_odds(...)
+await sdv.ligamx.espnLigamxGameOdds({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_odds(...)
 ```
 
-## `espnLigamxEventOfficialDetail`
+## `espnLigamxGameOfficialDetail`
 
-LIGAMX — event official detail (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game official detail (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/officials/{official_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_official_detail` / `espnLigamxEventOfficialDetail`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -708,15 +758,17 @@ LIGAMX — event official detail (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventOfficialDetail({ event_id: '…', official_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_official_detail(...)
+await sdv.ligamx.espnLigamxGameOfficialDetail({ event_id: '…', official_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_official_detail(...)
 ```
 
-## `espnLigamxEventOfficials`
+## `espnLigamxGameOfficials`
 
-LIGAMX — event officials (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game officials (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/officials`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_officials` / `espnLigamxEventOfficials`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -733,15 +785,17 @@ LIGAMX — event officials (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventOfficials({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_officials(...)
+await sdv.ligamx.espnLigamxGameOfficials({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_officials(...)
 ```
 
-## `espnLigamxEventPlay`
+## `espnLigamxGamePlay`
 
-LIGAMX — event play (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game play (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays/{play_id}`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_play` / `espnLigamxEventPlay`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -755,15 +809,17 @@ LIGAMX — event play (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventPlay({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_play(...)
+await sdv.ligamx.espnLigamxGamePlay({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_play(...)
 ```
 
-## `espnLigamxEventPlayPersonnel`
+## `espnLigamxGamePlayPersonnel`
 
-LIGAMX — event play personnel (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game play personnel (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_play_personnel` / `espnLigamxEventPlayPersonnel`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -781,15 +837,17 @@ LIGAMX — event play personnel (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventPlayPersonnel({ event_id: '…', play_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_play_personnel(...)
+await sdv.ligamx.espnLigamxGamePlayPersonnel({ event_id: '…', play_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_play_personnel(...)
 ```
 
-## `espnLigamxEventPlays`
+## `espnLigamxGamePlays`
 
-LIGAMX — event plays (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game plays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/plays`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_plays` / `espnLigamxEventPlays`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -803,16 +861,18 @@ LIGAMX — event plays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventPlays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_plays(...)
+await sdv.ligamx.espnLigamxGamePlays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_plays(...)
 ```
 
-## `espnLigamxEventPowerindex`
+## `espnLigamxGamePowerindex`
 
-LIGAMX — event powerindex (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game powerindex (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/powerindex`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_powerindex` / `espnLigamxEventPowerindex`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -824,16 +884,18 @@ LIGAMX — event powerindex (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventPowerindex({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_powerindex(...)
+await sdv.ligamx.espnLigamxGamePowerindex({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_powerindex(...)
 ```
 
-## `espnLigamxEventPredictor`
+## `espnLigamxGamePredictor`
 
-LIGAMX — event predictor (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game predictor (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/predictor`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_predictor` / `espnLigamxEventPredictor`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -845,15 +907,17 @@ LIGAMX — event predictor (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventPredictor({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_predictor(...)
+await sdv.ligamx.espnLigamxGamePredictor({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_predictor(...)
 ```
 
-## `espnLigamxEventProbabilities`
+## `espnLigamxGameProbabilities`
 
-LIGAMX — event probabilities (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game probabilities (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/probabilities`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_probabilities` / `espnLigamxEventProbabilities`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -871,16 +935,18 @@ LIGAMX — event probabilities (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventProbabilities({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_probabilities(...)
+await sdv.ligamx.espnLigamxGameProbabilities({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_probabilities(...)
 ```
 
-## `espnLigamxEventPropbets`
+## `espnLigamxGamePropbets`
 
-LIGAMX — event propbets (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game propbets (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/propbets`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_propbets` / `espnLigamxEventPropbets`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -896,16 +962,18 @@ LIGAMX — event propbets (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventPropbets({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_propbets(...)
+await sdv.ligamx.espnLigamxGamePropbets({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_propbets(...)
 ```
 
-## `espnLigamxEventScoringplays`
+## `espnLigamxGameScoringplays`
 
-LIGAMX — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game scoringplays (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/scoringplays`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_scoringplays` / `espnLigamxEventScoringplays`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -921,16 +989,18 @@ LIGAMX — event scoringplays (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventScoringplays({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_scoringplays(...)
+await sdv.ligamx.espnLigamxGameScoringplays({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_scoringplays(...)
 ```
 
-## `espnLigamxEventSituation`
+## `espnLigamxGameSituation`
 
-LIGAMX — event situation (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game situation (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/situation`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_situation` / `espnLigamxEventSituation`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -942,16 +1012,18 @@ LIGAMX — event situation (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventSituation({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_situation(...)
+await sdv.ligamx.espnLigamxGameSituation({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_situation(...)
 ```
 
-## `espnLigamxEventStatus`
+## `espnLigamxGameStatus`
 
-LIGAMX — event status (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — game status (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events/{event_id}/competitions/{cid}/status`
 
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_event_status` / `espnLigamxEventStatus`
+
 | API param | JS | required | description |
 |---|---|---|---|
 | `{event_id}` | `event_id` | yes | path parameter |
@@ -963,15 +1035,17 @@ LIGAMX — event status (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEventStatus({ event_id: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_event_status(...)
+await sdv.ligamx.espnLigamxGameStatus({ event_id: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_game_status(...)
 ```
 
-## `espnLigamxEvents`
+## `espnLigamxGames`
 
-LIGAMX — events (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_events` / `espnLigamxEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -988,8 +1062,8 @@ LIGAMX — events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxEvents({});
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_events(...)
+await sdv.ligamx.espnLigamxGames({});
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_games(...)
 ```
 
 ## `espnLigamxFranchise`
@@ -1145,11 +1219,13 @@ await sdv.ligamx.espnLigamxPositions({});
 // snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_positions(...)
 ```
 
-## `espnLigamxSeasonAthletes`
+## `espnLigamxSeasonPlayers`
 
-LIGAMX — season athletes (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — season players (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/seasons/{season}/athletes`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_season_athletes` / `espnLigamxSeasonAthletes`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1167,8 +1243,8 @@ LIGAMX — season athletes (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxSeasonAthletes({ season: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_season_athletes(...)
+await sdv.ligamx.espnLigamxSeasonPlayers({ season: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_season_players(...)
 ```
 
 ## `espnLigamxSeasonAwards`
@@ -1663,11 +1739,13 @@ await sdv.ligamx.espnLigamxSeasonWeek({ season: '…', season_type: '…', week:
 // snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_season_week(...)
 ```
 
-## `espnLigamxSeasonWeekEvents`
+## `espnLigamxSeasonWeekGames`
 
-LIGAMX — season week events (ESPN sports.core.api.espn.com (core v2)).
+LIGAMX — season week games (ESPN sports.core.api.espn.com (core v2)).
 
 **Endpoint URL:** `GET https://sports.core.api.espn.com/v2/sports/soccer/leagues/mex.1/seasons/{season}/types/{season_type}/weeks/{week}/events`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_ligamx_season_week_events` / `espnLigamxSeasonWeekEvents`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -1686,8 +1764,8 @@ LIGAMX — season week events (ESPN sports.core.api.espn.com (core v2)).
 **Example:**
 
 ```js
-await sdv.ligamx.espnLigamxSeasonWeekEvents({ season: '…', season_type: '…', week: '…' });
-// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_season_week_events(...)
+await sdv.ligamx.espnLigamxSeasonWeekGames({ season: '…', season_type: '…', week: '…' });
+// snake_case alias (py/R parity): sdv.ligamx.espn_ligamx_season_week_games(...)
 ```
 
 ## `espnLigamxSeasonWeekPowerindex`
