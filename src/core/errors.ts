@@ -48,6 +48,21 @@ export class AssetFetchError extends SdvError {
   }
 }
 
+/**
+ * The server rejected the request's parameters (e.g. HTTP 400 / 422 from the PFF
+ * API, or NFL Pro's empty-body 200). Not a fetch failure and not "no data": the
+ * call as made can never succeed — fix the arguments. (sdv-py raises ValueError.)
+ */
+export class InvalidParameterError extends SdvError {
+  readonly url: string;
+  readonly status?: number;
+  constructor(message: string, details: FetchErrorDetails) {
+    super(message, { cause: details.cause });
+    this.url = details.url;
+    this.status = details.status;
+  }
+}
+
 /** A requested season is outside what the source supports. */
 export class SeasonNotFoundError extends SdvError {}
 

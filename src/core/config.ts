@@ -3,7 +3,15 @@
 // with `registerFamilyDefaults`; anything the user passes to `configure` wins.
 
 import type { AuthProvider } from "./auth.js";
-import { axiosTransport, type Transport } from "./transport.js";
+import type { SdvError } from "./errors.js";
+import { axiosTransport, type Transport, type TransportResponse } from "./transport.js";
+
+/**
+ * Per-family classification of a final failed response (non-2xx, not 404, no
+ * retry left). Return the error to throw, or `undefined` for the default
+ * `AssetFetchError`. `url` carries no query string.
+ */
+export type ClassifyError = (res: TransportResponse, url: string) => SdvError | undefined;
 
 export interface ConfigureOptions {
   /** One transport for every family, or a map keyed by family stem with an optional `"default"`. */
@@ -41,6 +49,8 @@ export interface ResolvedFamilyConfig {
   userAgent: string;
   /** HTTP statuses retried for this family (see {@link DEFAULT_RETRY_STATUSES}). */
   retryStatuses: readonly number[];
+  /** The family's error classifier, when it registered one. */
+  classifyError?: ClassifyError;
 }
 
 /** What a family runtime can install with {@link registerFamilyDefaults}. */
@@ -52,6 +62,12 @@ export interface FamilyDefaults {
    * there it is a real forbidden / entitlement, not load.
    */
   retryStatuses?: readonly number[];
+  /**
+   * Map a final failed response to a family-specific error (e.g. PFF's 400 / 422
+   * -> `InvalidParameterError`, with the API's own error message). 404 is
+   * always `NoDataError` and never reaches this hook.
+   */
+  classifyError?: ClassifyError;
 }
 
 /**
@@ -125,5 +141,6 @@ export function resolveFamily(family: string): ResolvedFamilyConfig {
     timeoutMs: user.timeoutMs,
     userAgent: user.userAgent,
     retryStatuses: fam.retryStatuses ?? DEFAULT_RETRY_STATUSES,
+    classifyError: fam.classifyError,
   };
 }
