@@ -3,85 +3,85 @@ kind: dataframe
 columns:
 - name: person_id
   type: character
-  description: 'HockeyTech `person_id` field.'
+  description: 'Unique person identifier.'
 - name: player_id
   type: character
   description: 'HockeyTech player id.'
 - name: active
   type: character
-  description: 'HockeyTech `active` field.'
+  description: 'Whether athlete is currently active.'
 - name: first_name
   type: character
-  description: 'HockeyTech `first_name` field.'
+  description: 'Player first name.'
 - name: last_name
   type: character
-  description: 'HockeyTech `last_name` field.'
+  description: 'Player last name.'
 - name: phonetic_name
   type: character
-  description: 'HockeyTech `phonetic_name` field.'
+  description: 'Phonetic spelling of the player name.'
 - name: shoots
   type: character
-  description: 'HockeyTech `shoots` field.'
+  description: 'Shooting hand.'
 - name: catches
   type: character
-  description: 'HockeyTech `catches` field.'
+  description: 'Catching hand (goalies).'
 - name: height
   type: character
-  description: 'HockeyTech `height` field.'
+  description: 'Player height as feet-and-inches text (e.g. 5''7); empty when not recorded.'
 - name: weight
   type: character
-  description: 'HockeyTech `weight` field.'
+  description: 'Player weight in pounds.'
 - name: rawbirthdate
   type: character
-  description: 'HockeyTech `rawbirthdate` field.'
+  description: 'Player''s birth date as a raw string in the format returned by the HockeyTech API, typically YYYY-MM-DD.'
 - name: birthdate
   type: character
-  description: 'HockeyTech `birthdate` field.'
+  description: 'Date of birth.'
 - name: birthtown
   type: character
-  description: 'HockeyTech `birthtown` field.'
+  description: 'Player birth town.'
 - name: birthprov
   type: character
-  description: 'HockeyTech `birthprov` field.'
+  description: 'Player birth province/state.'
 - name: birthcntry
   type: character
-  description: 'HockeyTech `birthcntry` field.'
+  description: 'Player birth country.'
 - name: team_id
   type: character
   description: 'HockeyTech team id.'
 - name: jersey_number
   type: character
-  description: 'HockeyTech `jersey_number` field.'
+  description: 'Jersey number.'
 - name: role_id
   type: character
-  description: 'HockeyTech `role_id` field.'
+  description: 'Numeric id of the person''s primary role in the HockeyTech person record (see `role_name`; ''1'' = ''Player'' in the captures).'
 - name: season_id
   type: character
   description: 'HockeyTech season id.'
 - name: role_name
   type: character
-  description: 'HockeyTech `role_name` field.'
+  description: 'Label of the person''s primary role in the HockeyTech person record (e.g. ''Player'').'
 - name: all_roles
   type: character
-  description: 'HockeyTech `all_roles` field.'
+  description: 'Pipe- or comma-delimited string listing every positional or roster role associated with the player in the HockeyTech system.'
 - name: last_team_name
   type: character
-  description: 'HockeyTech `last_team_name` field.'
+  description: 'Full name of the team on which the player most recently appeared.'
 - name: last_team_code
   type: character
-  description: 'HockeyTech `last_team_code` field.'
+  description: 'Short abbreviation code for the team on which the player most recently appeared.'
 - name: division
   type: character
-  description: 'HockeyTech `division` field.'
+  description: 'Division name (e.g. ''PWHL'').'
 - name: position
   type: character
-  description: 'HockeyTech `position` field.'
+  description: 'Player position.'
 - name: profile_image
   type: character
-  description: 'HockeyTech `profile_image` field.'
+  description: 'File name of the player''s profile photo, not a full URL (e.g. ''7dea378a91cedc9d5d14b1222802322c.jpg'').'
 - name: score
   type: character
-  description: 'HockeyTech `score` field.'
+  description: 'Search relevance score of the match (e.g. ''5.911529541015625'').'
 - name: last_active_date
   type: character
-  description: 'HockeyTech `last_active_date` field.'
+  description: 'Date (YYYY-MM-DD) the feed reports the person as last active; for the active players captured it equals the capture date.'

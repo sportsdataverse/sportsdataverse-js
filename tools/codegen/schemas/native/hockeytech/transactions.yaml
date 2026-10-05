@@ -3,67 +3,67 @@ kind: dataframe
 columns:
 - name: transaction_type
   type: character
-  description: 'HockeyTech `transaction_type` field.'
+  description: 'Transaction-type code (''2'' on the captured ''Signed'' rows).'
 - name: title
   type: character
-  description: 'HockeyTech `title` field.'
+  description: 'Transaction title (e.g. ''Signed'').'
 - name: ttype
   type: character
-  description: 'HockeyTech `ttype` field.'
+  description: 'Transaction category code (''1'' = ''ADD'' in the capture).'
 - name: ttype_text
   type: character
-  description: 'HockeyTech `ttype_text` field.'
+  description: 'Transaction category label (e.g. ''ADD'').'
 - name: transaction_date
   type: character
-  description: 'HockeyTech `transaction_date` field.'
+  description: 'Transaction date (YYYY-MM-DD).'
 - name: transaction_time
   type: character
-  description: 'HockeyTech `transaction_time` field.'
+  description: 'Transaction time of day (HH:MM:SS) in `timezone`.'
 - name: formatted_transaction_date
   type: character
-  description: 'HockeyTech `formatted_transaction_date` field.'
+  description: 'Transaction date formatted MM/DD/YYYY.'
 - name: timezone
   type: character
-  description: 'HockeyTech `timezone` field.'
+  description: 'Time zone of the transaction.'
 - name: player_id
   type: character
   description: 'HockeyTech player id.'
 - name: response1
   type: character
-  description: 'HockeyTech `response1` field.'
+  description: 'Feed response text field 1 (empty in every captured row).'
 - name: response2
   type: character
-  description: 'HockeyTech `response2` field.'
+  description: 'Feed response text field 2 (empty in every captured row).'
 - name: first_name
   type: character
-  description: 'HockeyTech `first_name` field.'
+  description: 'Player first name.'
 - name: last_name
   type: character
-  description: 'HockeyTech `last_name` field.'
+  description: 'Player last name.'
 - name: player_name
   type: character
-  description: 'HockeyTech `player_name` field.'
+  description: 'Player name with position in parentheses (e.g. ''Neena Brick (F)'').'
 - name: position
   type: character
-  description: 'HockeyTech `position` field.'
+  description: 'Player position.'
 - name: team_id
   type: character
   description: 'HockeyTech team id.'
 - name: team_city
   type: character
-  description: 'HockeyTech `team_city` field.'
+  description: 'Team city.'
 - name: team_name
   type: character
-  description: 'HockeyTech `team_name` field.'
+  description: 'Team name.'
 - name: team_code
   type: character
-  description: 'HockeyTech `team_code` field.'
+  description: 'Team abbreviation.'
 - name: division
   type: character
-  description: 'HockeyTech `division` field.'
+  description: 'Division name (e.g. ''PWHL'').'
 - name: team_logo
   type: character
-  description: 'HockeyTech `team_logo` field.'
+  description: 'URL to the team logo image.'
 - name: detail
   type: character
-  description: 'HockeyTech `detail` field.'
+  description: 'Transaction detail text; may contain HTML fragments (''Signed'' in the capture).'

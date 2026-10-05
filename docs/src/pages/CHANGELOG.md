@@ -14,6 +14,15 @@
 - **`nfl_pro` login:** the error name is scrubbed like the message; the browser-close cap no longer lets the process exit before the login settles.
 - `AuthProvider` documents its failure contract on the interface. Test isolation: an `@internal` `_unregisterFamilyDefaults` seam.
 
+### Changed (breaking) — HockeyTech hardening (error vocabulary, User-Agent, returns descriptions)
+
+- **BREAKING: a failed HockeyTech fetch is no longer an empty result.** The shared getter behind the 16 `hockeytech_*` wrappers and the season helpers used to turn any HTTP-200 body it could not use into `{}` (so `parsed: true` gave `[]`). It now throws `AssetFetchError` for an empty or unparseable body and for HockeyTech's in-body error sentinels (`{"SiteKit"|"GC": {"Undefined": "Undefined Tab <view>"}}`, `{"error": "InvalidView error: …"}`). The one reply that still reads as empty is the recognised plain-text `Feed type access denied.` (a league key without access to that feed, e.g. MJHL's game summary): `{}` raw, `[]` parsed, as in sdv-py. HTTP 404 stays `NoDataError`. A missing or unknown `league` now throws instead of returning `{}`.
+- **BREAKING:** `most_recent_hockeytech_season` / `hockeytech_season_id` throw on a failed fetch instead of returning 2026 / `[]`. When the feed answers with no seasons, `hockeytech_season_id` returns `[]` and `most_recent_hockeytech_season` throws `NoDataError` (sdv-py returns a hard-coded 2026, already stale: PWHL's newest season is 2026-27). `hockeytech_resolve_season_id` keeps the PWHL fallback table for a failed fetch, but rethrows a non-`SdvError`.
+- The `<lg>_pbp` / `<lg>_game_corsi` analytics now also reject a `GC` error sentinel on the game summary (they used to take it as blank game metadata).
+- HockeyTech requests send the configured User-Agent (`configure({ userAgent })`, default `Mozilla/5.0 (compatible; sportsdataverse-js/3.x)`) instead of a hard-coded one carrying a `+https://` token, which also overrode `configure`. HockeyTech and Baseball Savant both answered 200 to the default UA (live check, 2026-10-05).
+- `parse_hockeytech_scorebar` now shares `parse_hockeytech_schedule`'s implementation (same `SiteKit.Scorebar` payload); both names stay.
+- The `hockeytech_scorebar`, `_stats`, `_player_search`, `_player_game_log`, `_playoff_bracket` and `_transactions` returns tables replace 250 placeholder descriptions ("HockeyTech `x` field.") with real ones: sdv-py's text where the column exists there and the captured data agrees with it, otherwise text written from the captured payloads. `hockeytech_schedule` (the same `SiteKit.Scorebar` frame) now carries the scorebar descriptions, replacing several that were wrong (`date`, `game_letter`, `quick_score`).
+
 ### Fixed — parser / analytics minors (sdv-py parity)
 
 - **Statcast `/gf`:** an empty-string id cell (`batter: ""`) is now `null`, like sdv-py's `to_numeric("")`; it kept the column text before (whitespace still leaves the column as read, as in py).
@@ -44,6 +53,10 @@
 - The password is submitted **once**: if id.nfl.com still shows the password field afterwards, the login stops with "did not accept the password" instead of retrying (sdv-py resubmits, which with a wrong `NFLPRO_PW` is repeated failed attempts against a paid account).
 - `playwright` is a new **optional** peer dependency, imported only when a login is actually needed: `npm i playwright && npx playwright install chromium`. Without it, a login throws `TransportUnavailableError` naming that command.
 - New exports `nflProBrowserLogin(email, password, { playwright })` (the login itself; the module is injectable) and `nflProClearTokenCache()`, plus the `PlaywrightLike` type. `nflProToken` (new in this release) is now `async` and takes `{ token, email, password }`. Live test: `SDV_NFLPRO_LIVE=1` (or `SDV_NFL_PRO_LIVE=1`) with `NFLPRO_TOKEN` or `NFLPRO_EMAIL` / `NFLPRO_PW`.
+
+### Added — ESPN basketball PBP producers (NBA / WNBA / MBB / WBB)
+
+- `sdv.<lg>.espn_<lg>_pbp(game_id, { raw })` plus `helper_<lg>_pbp(game_id, pbp_txt)` and its stages `helper_<lg>_pickcenter`, `helper_<lg>_game_data`, `helper_<lg>_pbp_features` (+ camelCase, e.g. `sdv.nba.espnNbaPbp`, `sdv.mbb.helperMbbPbp`) for `nba`, `wnba`, `mbb`, `wbb`, under sdv-py's names. `espn_<lg>_pbp` fetches the summary through `espn_<lg>_summary`, keeps sdv-py's incoming keys (absent ones defaulted as py does) and returns py's cleaned game dict: `plays` rows with py's column names and order (dotted, e.g. `end.half_seconds_remaining`), the `timeouts` map (team id -> `{"1": play ids, "2": play ids}`), and the summary keys passed through; `raw: true` returns the trimmed payload. The helpers are pure. Ported from sdv-py (pin 719de79) with its per-league facts: NBA quarters with the 720 / 1440 / 2160 / 2880 ladder; WNBA and WBB use the format's period count (else the season year: WNBA halves before 2006, WBB before 2016) for the 600-second quarter or 1200-second half ladders; MBB plays halves with its own columns (`half` = period, `start.period_seconds_remaining`, ...) and an Int32 M:SS clock -- a decimal clock such as `"23.4"` throws, as in py, but ESPN's college feeds use whole-second M:SS clocks, so that only happens on a non-MBB payload; OT is 300 seconds everywhere. Seconds-remaining columns round to float32 at every step like polars. `helper_<lg>_pickcenter` / `helper_<lg>_game_data` return a value taken from the pickcenter as a one-element array (py: a numpy array), e.g. `gameSpread: [-8.5]`; a league default stays a scalar. The play `id` column follows the INT64 policy per game: numbers when every id is a safe integer, else BigInt with one warning -- so its type depends on the era: ESPN's college play ids are 13 digits (numbers) for 2006-2013 and 18 digits (BigInt) from 2014-15, with the 2014 season mixing both; NBA / WNBA ids are numbers. The per-column id type is under review for v4. Lag / lead / row numbers never cross a `game_id`. Not ported, deliberately: `<lg>_pbp_disk` (it reads a local JSON path; in JS, `JSON.parse` the file and call `helper_<lg>_pbp`, and `fs` would break browser builds). Parity: every league is compared cell by cell with sdv-py's own `espn_<lg>_pbp` on 19 real captures (5 new live-captured games: WNBA 2003 halves, WBB 2015 halves + OT, WBB 4OT, MBB 2OT, NBA OT with two pickcenter providers) and 25 derived payloads, including the halves cutoffs pinned on both sides (`tools/parity/espn_basketball_pbp_oracle.py`).
 
 ### Added — ESPN basketball box producers (NBA / WNBA / MBB / WBB)
 
@@ -216,8 +229,8 @@ retry → classification.
   exhausted) instead of raw axios errors — siblings under `SdvError`;
   `NoESPNDataError` aliases `NoDataError`. The Statcast, BartTorvik and
   HockeyTech getters no longer turn a failed HTTP fetch into `{}` / `""`
-  (HockeyTech still returns `{}` for an unknown league or an unparseable 200
-  body).
+  (HockeyTech's unknown-league and unparseable-200 cases, which still
+  returned `{}` here, throw as of the "HockeyTech hardening" entry above.)
 - Retries network errors and 403 / 408 / 429 / 500 / 502 / 503 / 504 with
   backoff + jitter (honours `Retry-After`; default 3 retries, at most 4 on
   statuses). Auth-gated families drop 403 via

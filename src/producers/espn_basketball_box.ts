@@ -36,14 +36,14 @@
 export type Row = Record<string, any>;
 
 // ---------------------------------------------------------------------------
-// Python / polars semantics
+// Python / polars semantics (the exported ones are shared with espn_basketball_pbp.ts)
 // ---------------------------------------------------------------------------
 
-const isObj = (v: unknown): v is Record<string, any> =>
+export const isObj = (v: unknown): v is Record<string, any> =>
   v !== null && typeof v === "object" && !Array.isArray(v);
 
 /** Python truthiness for JSON values (NaN is truthy in Python). */
-function truthy(v: unknown): boolean {
+export function truthy(v: unknown): boolean {
   if (v === null || v === undefined || v === false || v === 0 || v === "") return false;
   if (Array.isArray(v)) return v.length > 0;
   if (isObj(v)) return Object.keys(v).length > 0;
@@ -51,11 +51,11 @@ function truthy(v: unknown): boolean {
 }
 
 /** `x or {}` / `x or []`. */
-const or = <T>(v: any, dflt: T): any => (truthy(v) ? v : dflt);
+export const or = <T>(v: any, dflt: T): any => (truthy(v) ? v : dflt);
 
 /** Python `x == False` / `x == True` (0 == False, 1 == True). */
 const pyEqFalse = (v: unknown): boolean => v === false || v === 0;
-const pyEqTrue = (v: unknown): boolean => v === true || v === 1;
+export const pyEqTrue = (v: unknown): boolean => v === true || v === 1;
 
 /** sdv-py `dl_utils.underscore` (identical to `src/parsers/_normalize.ts`). */
 function underscore(word: string): string {
@@ -66,8 +66,8 @@ function underscore(word: string): string {
     .toLowerCase();
 }
 
-const PY_INT = /^[+-]?\d+(?:_\d+)*$/;
-const PY_FLOAT = /^[+-]?(?:(?:\d+(?:_\d+)*)?\.?\d+(?:_\d+)*(?:[eE][+-]?\d+(?:_\d+)*)?|\d+(?:_\d+)*\.(?:[eE][+-]?\d+(?:_\d+)*)?|inf|infinity|nan)$/i;
+export const PY_INT = /^[+-]?\d+(?:_\d+)*$/;
+export const PY_FLOAT = /^[+-]?(?:(?:\d+(?:_\d+)*)?\.?\d+(?:_\d+)*(?:[eE][+-]?\d+(?:_\d+)*)?|\d+(?:_\d+)*\.(?:[eE][+-]?\d+(?:_\d+)*)?|inf|infinity|nan)$/i;
 
 /** Python `float(v)` succeeds (it strips whitespace and allows `_` digit groups). */
 function pyFloatable(v: unknown): boolean {
