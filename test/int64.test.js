@@ -7,6 +7,7 @@ import {
   idsToStrings,
   INT64_WARNING_CODE,
   isIdColumn,
+  MLBAM_ID_COLUMNS,
   rowCells,
   warnBigint,
 } from '../dist/core/int64.js';
@@ -113,5 +114,32 @@ describe('INT64 BigInt warning dedupe', () => {
     seen[0].code.should.equal(INT64_WARNING_CODE);
     INT64_WARNING_CODE.should.equal('SDV_INT64');
     seen[0].message.should.match(/^Savant CSV: column "big" holds integers beyond/);
+  });
+});
+
+describe('one id predicate: codegen type generator == runtime (src/core/id_columns.ts)', () => {
+  it('tools/codegen/id-columns.mjs loads the runtime source, and both classify every schema column alike', async () => {
+    const { readFileSync, readdirSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const gen = await import('../tools/codegen/id-columns.mjs');
+    gen.ID_COLUMNS_SOURCE.pathname.should.match(/\/src\/core\/id_columns\.ts$/);
+    // the generator module holds no id regex of its own
+    readFileSync(new URL('../tools/codegen/id-columns.mjs', import.meta.url), 'utf8').should.not.match(/_id|\bid\$/);
+    gen.MLBAM_ID_COLUMNS.should.eql(MLBAM_ID_COLUMNS);
+    const names = new Set();
+    const walk = (dir) => {
+      for (const e of readdirSync(dir, { withFileTypes: true })) {
+        const p = join(dir, e.name);
+        if (e.isDirectory()) walk(p);
+        else if (e.name.endsWith('.yaml')) {
+          for (const m of readFileSync(p, 'utf8').matchAll(/^\s*-?\s*name: ['"]?([^'"\n]+?)['"]?\s*$/gm)) names.add(m[1]);
+        }
+      }
+    };
+    walk(new URL('../tools/codegen/schemas', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+    names.size.should.be.above(5000);
+    const differ = [...names].filter((n) => gen.isIdColumn(n) !== isIdColumn(n));
+    differ.should.eql([]);
+    [...names].filter((n) => isIdColumn(n)).length.should.be.above(300);
   });
 });
