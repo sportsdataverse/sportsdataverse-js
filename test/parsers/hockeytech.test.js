@@ -339,6 +339,7 @@ describe('hockeytech: league_id injection', () => {
     buildHockeytechUrl({ league: 'ahl', feed: 'modulekit', view: 'scorebar' }).should.match(/league_id=4/);
     buildHockeytechUrl({ league: 'whl', feed: 'modulekit', view: 'transactions' }).should.match(/league_id=7/);
     buildHockeytechUrl({ league: 'qmjhl', feed: 'modulekit', view: 'brackets' }).should.match(/league_id=6/);
+    buildHockeytechUrl({ league: 'ahl', feed: 'statviewfeed', view: 'teams' }).should.match(/league_id=4/);
     buildHockeytechUrl({ league: 'ahl', view: 'scorebar', league_id: 9 }).should.match(/league_id=9/);
     buildHockeytechUrl({ league: 'ahl', feed: 'modulekit', view: 'seasons' }).should.not.match(/league_id/);
   });

@@ -86,7 +86,7 @@ const LEAGUE_REFERER: Record<string, string> = {
 
 const UA = "Mozilla/5.0 (compatible; sportsdataverse-js/3.x; +https://js.sportsdataverse.org/)";
 
-const LEAGUE_ID_VIEWS = new Set(["scorebar", "transactions", "brackets"]);
+const LEAGUE_ID_VIEWS = new Set(["scorebar", "transactions", "brackets", "teams"]);
 
 /** Resolve the league config, honouring an env-var key override. */
 export function resolveLeague(league: string): HockeytechLeague {
@@ -153,7 +153,7 @@ export function buildHockeytechUrl(params: Record<string, any>): string {
     if (v !== undefined && v !== null && v !== "") sp.set(k, String(v));
   }
   // sdv-py sends the registry `league_id` on these views (schedule/scorebar,
-  // transactions, brackets); an explicit `league_id` param wins.
+  // standings, transactions, brackets); an explicit `league_id` param wins.
   if (LEAGUE_ID_VIEWS.has(String(view)) && !sp.has("league_id")) sp.set("league_id", String(cfg.leagueId));
   return `${cfg.baseUrl}?${sp.toString()}`;
 }

@@ -159,6 +159,7 @@ endpoints:
       - { name: league, query_key: league }
       - { name: season_id, query_key: season }
       - { name: feed, query_key: feed, default: statviewfeed }
+      - { name: league_id, query_key: league_id }
       - { name: view, query_key: view, default: teams }
       - { name: group_teams_by, query_key: groupTeamsBy, default: division }
       - { name: context, query_key: context, default: overall }
