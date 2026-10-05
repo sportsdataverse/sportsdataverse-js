@@ -84,6 +84,11 @@ export const FLAT_HOSTS: Record<string, string> = {
   pff_api: "https://api.pff.com",
   nfl_pro: "https://pro.nfl.com",
   kenpom: "https://kenpom.com",
+  // stats.nba.com / stats.wnba.com — fingerprint-block plain clients (silent
+  // hang), so the families install an impersonating transport by default (see
+  // src/core/nba_stats_runtime.ts).
+  nba_stats: "https://stats.nba.com",
+  wnba_stats: "https://stats.wnba.com",
 };
 
 /**

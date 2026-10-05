@@ -348,3 +348,17 @@ turns that off, `max_pages` caps it at 40 by default). A capped result carries
 `_truncated: true` and emits a warning. An unsupported query parameter comes
 back as an empty `200`; that throws `InvalidParameterError`. `week` is a path
 scope, not a query parameter.
+
+### stats.nba.com / stats.wnba.com (`nba_stats`, `wnba_stats`)
+
+Both families install `createImpersonatingTransport({ browser: 'chrome' })` as
+their default transport, send the stats headers (`x-nba-stats-origin`,
+`x-nba-stats-token`, `Referer` / `Origin` on nba.com or wnba.com) and never retry
+403. Install the optional dependency (`npm install impit`) and run from a
+**residential** connection: these hosts hang (rather than error) on datacenter
+and cloud IPs such as GitHub Actions or AWS. A timeout, blank body or bare `{}`
+rejects with `AssetFetchError`; it is never reported as "no data". Raise
+`configure({ timeoutMs })` for slow historical endpoints, and route through a
+residential proxy with
+`configure({ transport: { nba_stats: createImpersonatingTransport({ proxyUrl }) } })`.
+Live tests: `SDV_NBA_STATS_LIVE=1 npm test` (never set in CI).

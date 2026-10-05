@@ -155,7 +155,6 @@ describe('playground proxy (run.mjs) flat dispatch', () => {
     for (const api of ['pff_api', 'kenpom', 'nfl_pro']) {
       FLAT_WRAPPERS.some((w) => w.api === api).should.be.true(); // the package has them…
       should(endpoints.flatHosts[api]).be.undefined(); // …the proxy allowlist does not
-      should(endpoints.flatLeagues[api]).be.undefined();
       endpoints.flatApis.some((w) => w.api === api).should.be.false();
       const short = FLAT_WRAPPERS.find((w) => w.api === api).short;
       const res = mockRes();

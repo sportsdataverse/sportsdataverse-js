@@ -143,6 +143,7 @@ import {
   parse_pff_v2_table,
 } from "./pff_api.js";
 import { parse_nfl_pro_stats } from "./nfl_pro.js";
+import { parse_nba_stats_result_sets } from "./nba_stats.js";
 
 /** A flat-API parser: raw JSON -> tidy rectangular rows. */
 export type ParserFn = (raw: any) => Record<string, any>[];
@@ -303,6 +304,9 @@ export const PARSERS: Record<string, FlatParserFn> = {
   parse_nfl_pro_stats,
   // ---- KenPom (kenpom.com HTML): parse_kenpom_page is NODE-ONLY, added by
   // src/core/kenpom_runtime.ts via registerParser (see NODE_ONLY_PARSERS).
+  // ---- stats.nba.com / stats.wnba.com (resultSets envelope; one generic parser) ----
+  // Multi-set payloads return { [setName]: rows }, hence the cast.
+  parse_nba_stats_result_sets: parse_nba_stats_result_sets as ParserFn,
 };
 
 /**

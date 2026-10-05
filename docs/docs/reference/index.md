@@ -17,8 +17,8 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — the MLB St
 
 | League | sport | ESPN slug | scopes | wrappers | native |
 |---|---|---|---|---:|---:|
-| [nba](../nba/) | `basketball` | `nba` | universal | 111 | — |
-| [wnba](../wnba/) | `basketball` | `wnba` | universal | 111 | — |
+| [nba](../nba/) | `basketball` | `nba` | universal | 111 | 128 |
+| [wnba](../wnba/) | `basketball` | `wnba` | universal | 111 | 111 |
 | [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 117 | 30 |
 | [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 117 | — |
 | [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 119 | — |

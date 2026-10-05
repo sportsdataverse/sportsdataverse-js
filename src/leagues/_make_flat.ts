@@ -13,6 +13,7 @@ import { torvikGet } from "../core/torvik_runtime.js";
 import { pffApiGet } from "../core/pff_api_runtime.js";
 import { nflProGet } from "../core/nfl_pro_runtime.js";
 import { kenpomGet } from "../core/kenpom_runtime.js";
+import { nbaStatsGet } from "../core/nba_stats_runtime.js";
 import { parserFor } from "../parsers/_registry.js";
 import type { WrapperDef, WrapperFn } from "../core/types.js";
 
@@ -49,6 +50,10 @@ const GETTER_OVERRIDES: Record<string, GetterFn> = {
   pff_api: pffApiGet,
   nfl_pro: nflProGet,
   kenpom: kenpomGet,
+  // stats.nba.com / stats.wnba.com: browser headers, sorted params, zero-padded
+  // GameID, and a body check so a throttled blank / `{}` reply is a failure.
+  nba_stats: nbaStatsGet,
+  wnba_stats: nbaStatsGet,
 };
 
 /**

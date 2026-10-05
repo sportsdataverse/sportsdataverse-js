@@ -30,6 +30,8 @@ const FLAT_API_NAMESPACES = {
   pff_api: 'nfl',
   nfl_pro: 'nfl',
   kenpom: 'mbb',
+  nba_stats: 'nba',
+  wnba_stats: 'wnba',
 };
 
 // Families whose every wrapper carries `auth: true` (credentials applied in request()).

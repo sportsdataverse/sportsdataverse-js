@@ -47,17 +47,13 @@ const FLAT_API_FILES = [
   "yahoo",
   "hockeytech",
   "torvik",
-  // Subscription families (auth-gated): see PLAYGROUND_EXCLUDED_FLAT.
+  // Subscription families (auth-gated): see NO_PLAYGROUND_FAMILIES.
   "pff_api",
   "nfl_pro",
   "kenpom",
+  "nba_stats",
+  "wnba_stats",
 ];
-
-// Flat families the docs playground must never reach: they need the caller's
-// own subscription credentials (an API key, a user token, a password login), so
-// they are left out of endpoints.json — and with it the /api/run host allowlist
-// (docs/api/run.mjs derives ALLOWED_FLAT_HOSTS from `flatHosts`).
-const PLAYGROUND_EXCLUDED_FLAT = new Set(["pff_api", "nfl_pro", "kenpom"]);
 
 // Which namespace each flat-API family is documented on (mirrors
 // FLAT_API_NAMESPACES in src/index.ts — keep the two in sync). The runtime
@@ -90,7 +86,16 @@ const FLAT_API_NAMESPACES = {
   pff_api: "nfl",
   nfl_pro: "nfl",
   kenpom: "mbb",
+  // stats.nba.com / stats.wnba.com — merge onto the league namespaces
+  // (sdv.nba.nba_stats_*, sdv.wnba.wnba_stats_*). TLS-impersonation transport.
+  nba_stats: "nba",
+  wnba_stats: "wnba",
 };
+
+// Flat families excluded from the docs playground (see renderEndpointsJson):
+// stats.nba.com / stats.wnba.com (TLS impersonation + residential IP) and the
+// subscription families, which need the caller's own credentials.
+const NO_PLAYGROUND_FAMILIES = new Set(["nba_stats", "wnba_stats", "pff_api", "nfl_pro", "kenpom"]);
 
 // Human-facing label + upstream-source blurb per flat-API family, shown in the
 // section heading + intro line on the league reference page.
@@ -190,6 +195,16 @@ const FLAT_API_META = {
       email: "KenPom account e-mail; falls back to `KENPOM_EMAIL` / `KP_USER` / `SDV_KENPOM_EMAIL`.",
       password: "KenPom password; falls back to `KENPOM_PW` / `KENPOM_PASSWORD` / `KP_PW` / `SDV_KENPOM_PW`.",
     },
+  },
+  nba_stats: {
+    label: "NBA Stats API (stats.nba.com)",
+    source:
+      "stats.nba.com (needs a TLS-impersonating transport and a residential IP)",
+  },
+  wnba_stats: {
+    label: "WNBA Stats API (stats.wnba.com)",
+    source:
+      "stats.wnba.com (needs a TLS-impersonating transport and a residential IP)",
   },
 };
 
@@ -1536,6 +1551,16 @@ function renderCoverageJson(leagues, standaloneNs, flatWrappers) {
 // ---------------------------------------------------------------------------
 
 function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) {
+  // Families that must NEVER be reachable through the docs playground's
+  // /api/run proxy (its host allowlist derives from `flatHosts`): stats.nba.com
+  // / stats.wnba.com need TLS impersonation and a residential IP, so a
+  // serverless fetch would only hang; the subscription families (PFF API,
+  // KenPom, NFL Pro) need the caller's own credentials. Dropped from the
+  // playground metadata.
+  flatWrappers = flatWrappers.filter((w) => !NO_PLAYGROUND_FAMILIES.has(w.api));
+  flatHosts = Object.fromEntries(
+    Object.entries(flatHosts).filter(([api]) => !NO_PLAYGROUND_FAMILIES.has(api))
+  );
   return (
     JSON.stringify(
       {
@@ -1551,9 +1576,7 @@ function renderEndpointsJson(wrappers, leagues, hosts, flatWrappers, flatHosts) 
         // `flatLeagues` maps each family stem to the league prefix it's merged
         // onto (so the playground can group flat endpoints under their league).
         flatHosts,
-        flatLeagues: Object.fromEntries(
-          Object.entries(FLAT_API_NAMESPACES).filter(([api]) => !PLAYGROUND_EXCLUDED_FLAT.has(api))
-        ),
+        flatLeagues: FLAT_API_NAMESPACES,
         flatApis: flatWrappers,
       },
       null,
@@ -1604,10 +1627,8 @@ const outputs = {
     wrappers,
     leagues,
     hosts,
-    flatWrappers.filter((w) => !PLAYGROUND_EXCLUDED_FLAT.has(w.api)),
-    Object.fromEntries(
-      Object.entries(flatHosts).filter(([api]) => !PLAYGROUND_EXCLUDED_FLAT.has(api))
-    )
+    flatWrappers,
+    flatHosts
   ),
 };
 const writtenEspnSet = new Set(WRITTEN_ESPN_LEAGUES);

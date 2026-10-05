@@ -89,6 +89,10 @@ const FLAT_API_NAMESPACES: Record<string, string> = {
   pff_api: 'nfl',
   nfl_pro: 'nfl',
   kenpom: 'mbb',
+  // stats.nba.com / stats.wnba.com (TLS-impersonating transport; see
+  // src/core/nba_stats_runtime.ts) merge onto the league namespaces.
+  nba_stats: 'nba',
+  wnba_stats: 'wnba',
 };
 // Each flat family is composed from WRITTEN source (src/generated/flat/<api>.ts,
 // exposed via the barrel) instead of makeFlatModule(defs) at runtime — both call

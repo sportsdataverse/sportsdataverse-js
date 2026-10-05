@@ -11,6 +11,7 @@ import * as hockeytechFlat from "./hockeytech.js";
 import * as kenpomFlat from "./kenpom.js";
 import * as mlbFlat from "./mlb.js";
 import * as mlbStatcastFlat from "./mlb_statcast.js";
+import * as nbaStatsFlat from "./nba_stats.js";
 import * as nflApiFlat from "./nfl_api.js";
 import * as nflProFlat from "./nfl_pro.js";
 import * as nhlApiWebFlat from "./nhl_api_web.js";
@@ -21,6 +22,7 @@ import * as oddsApiFlat from "./odds_api.js";
 import * as pffApiFlat from "./pff_api.js";
 import * as recruitingFlat from "./recruiting.js";
 import * as torvikFlat from "./torvik.js";
+import * as wnbaStatsFlat from "./wnba_stats.js";
 import * as yahooFlat from "./yahoo.js";
 import * as yahooScoresFlat from "./yahoo_scores.js";
 
@@ -31,6 +33,7 @@ export const WRITTEN_FLAT: Record<string, Record<string, WrapperFn>> = {
   kenpom: kenpomFlat,
   mlb: mlbFlat,
   mlb_statcast: mlbStatcastFlat,
+  nba_stats: nbaStatsFlat,
   nfl_api: nflApiFlat,
   nfl_pro: nflProFlat,
   nhl_api_web: nhlApiWebFlat,
@@ -41,6 +44,7 @@ export const WRITTEN_FLAT: Record<string, Record<string, WrapperFn>> = {
   pff_api: pffApiFlat,
   recruiting: recruitingFlat,
   torvik: torvikFlat,
+  wnba_stats: wnbaStatsFlat,
   yahoo: yahooFlat,
   yahoo_scores: yahooScoresFlat,
 };

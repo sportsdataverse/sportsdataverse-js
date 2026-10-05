@@ -2144,7 +2144,12 @@
     "yahoo_scores": "yahoo",
     "yahoo": "yahoo",
     "hockeytech": "hockeytech",
-    "torvik": "torvik"
+    "torvik": "torvik",
+    "pff_api": "nfl",
+    "nfl_pro": "nfl",
+    "kenpom": "mbb",
+    "nba_stats": "nba",
+    "wnba_stats": "wnba"
   },
   "flatApis": [
     {

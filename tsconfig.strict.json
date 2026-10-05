@@ -18,6 +18,7 @@
     "src/core/kenpom_runtime.ts",
     "src/parsers/pff_api.ts",
     "src/parsers/nfl_pro.ts",
-    "src/parsers/kenpom.ts"
+    "src/parsers/kenpom.ts",
+    "src/core/nba_stats_runtime.ts"
   ]
 }
