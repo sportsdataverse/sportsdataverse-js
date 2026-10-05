@@ -623,6 +623,22 @@ describe('vendor-sync.yml', () => {
     spawnSync('bash', ['--noprofile', '--norc', '-e', '-c', 'false | tail -n 1']).status.should.equal(0);
   });
 
+  it('rewrites parity_coverage.json before testing and commits it', () => {
+    // The staleness test pins the vendored sdv-py ref, so a sync that skipped the
+    // rewrite would fail every time (sync PR #88 did).
+    const i = steps.findIndex((s) => s.name === 'Refresh parity coverage');
+    i.should.be.above(steps.findIndex((s) => s.id === 'codegen'));
+    i.should.be.below(steps.findIndex((s) => s.id === 'test'));
+    steps[i].env.SDV_PARITY_WRITE.should.equal('1');
+    // The parity test imports dist/: a fresh runner has none until this step builds.
+    steps[i].run.should.match(/npm run build\n[^]*test\/parsers\/parity\.test\.js --grep "parity_coverage\.json is current"/);
+    // The --grep must still name the test that writes the file.
+    readFileSync(join(CODEGEN_DIR, '..', '..', 'test', 'parsers', 'parity.test.js'), 'utf8').should.match(
+      /it\('parity_coverage\.json is current/,
+    );
+    steps.find((s) => s.id === 'cpr').with['add-paths'].should.match(/^test\/fixtures\/py\/parity_coverage\.json$/m);
+  });
+
   it('checks out without persisting the job token', () => {
     steps[0].uses.should.startWith('actions/checkout@');
     steps[0].with['persist-credentials'].should.be.false();
