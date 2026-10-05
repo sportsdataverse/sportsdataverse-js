@@ -154,6 +154,7 @@ describe('vendor: transforms (offline, committed upstream copies)', () => {
       /frames_by "report" is not a request parameter of every endpoint/
     );
     (() => checkSchemaShape(ok, 'x', [])).should.throw(/no endpoint/);
+    (() => checkSchemaShape(ok, 'x')).should.throw(/frames_by "report" needs the request params/); // never unchecked
   });
 
   it("sdv-py's real frames_by schema: vendored against its endpoint's params, rendered as ONE table", () => {
