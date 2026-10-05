@@ -167,6 +167,18 @@ export function resolveFlat(def, params = {}, flatHosts = {}) {
   return { url: `${host}${path}`, query: cleanFlatQuery(def, params) };
 }
 
+/**
+ * The flat def for `api` + `short` (endpoints.json `flatApis`), also accepting a
+ * pre-v4 short (`legacyShort`, e.g. CBS `boxscore` -> `game_boxscore`) so old
+ * share links and proxy calls keep resolving. Undefined when neither matches.
+ */
+export function findFlatDef(flatApis, api, short) {
+  return (
+    flatApis.find((e) => e.api === api && e.short === short) ||
+    flatApis.find((e) => e.api === api && e.legacyShort === short)
+  );
+}
+
 /** Full absolute flat URL including the query string (what the proxy fetches). */
 export function resolveFlatUrl(def, params, flatHosts) {
   const { url, query } = resolveFlat(def, params, flatHosts);

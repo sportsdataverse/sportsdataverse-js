@@ -283,8 +283,11 @@ function mapQueryParams(ep) {
 // generated wrapper is emitted under that canonical name, which is py's name.
 const NAMING_MANIFEST = parse(readFileSync(join(here, "vendor.yaml"), "utf8"));
 const PY_RESERVED = new Set(NAMING_MANIFEST.py_reserved ?? []);
-const ESPN_RENAMES =
-  parse(readFileSync(join(here, "espn_rename_map.yaml"), "utf8"))?.rename ?? {};
+const ESPN_RENAME_MAP = parse(readFileSync(join(here, "espn_rename_map.yaml"), "utf8")) ?? {};
+const ESPN_RENAMES = ESPN_RENAME_MAP.rename ?? {};
+// py `drop:` base names (`espn_wbb_event_officials`): JS emits these, under the
+// name py's hand-written sibling holds, and documents that the two differ.
+const ESPN_PY_DROPS = new Set(ESPN_RENAME_MAP.drop ?? []);
 const PRE_V4_NAMES = Object.fromEntries(
   Object.entries(JSON.parse(readFileSync(join(here, "pre_v4_names.json"), "utf8")).namespaces).map(
     ([ns, names]) => [ns, new Set(names)]
@@ -435,6 +438,9 @@ function loadFlatWrappers() {
         short: ep.short,
         // sdv-py's public name, when it isn't JS's pre-v4 `<api>_<short>`.
         ...(publicName !== `${doc.api}_${ep.short}` ? { publicName } : {}),
+        // Pre-v4 short (CBS): lookups by short (playground share links, the
+        // docs proxy) still resolve it to this def.
+        ...(ep.legacy_short ? { legacyShort: ep.legacy_short } : {}),
         flat: true,
         api: doc.api,
         host: ep.host ?? doc.host, // per-endpoint host override (e.g. Yahoo editorial)
@@ -620,6 +626,8 @@ function renderWrittenEspnModule(league, wrappers) {
     // section for the summary dispatcher), @returns, @example.
     let jsdoc = `/**\n * ${summary}\n *\n`;
     jsdoc += ` * **Endpoint:** \`GET ${host}${httpPath}\`\n`;
+    const pyNote = pyHandwrittenNote(league, w);
+    if (pyNote) jsdoc += ` *\n * Note: ${pyNote}\n`;
     if (league.leagueParam) {
       jsdoc +=
         ` *\n * @param params.league - ESPN league slug override ` +
@@ -750,6 +758,17 @@ function deprecatedNote(olds) {
   if (!olds.length) return "";
   const list = olds.map((o) => `\`${o}\` / \`${toCamel(o)}\``).join(", ");
   return `**Deprecated aliases (pre-v4 names, still callable):** ${list}\n\n`;
+}
+/**
+ * One-line note for a wrapper py `drop:`s in favour of a hand-written py
+ * function of the same name ("" otherwise): the names match, the calls don't.
+ */
+function pyHandwrittenNote(league, w) {
+  if (!ESPN_PY_DROPS.has(`espn_${league.prefix}_${w.short}`)) return "";
+  return (
+    `sdv-py's \`${espnSnake(league, w)}\` is a hand-written function (its own params, a parsed frame); ` +
+    `this is the generated raw ESPN wrapper for the same endpoint, so params and output differ.`
+  );
 }
 
 /** Flat wrappers belonging to a given league prefix (via FLAT_API_NAMESPACES). */
@@ -1081,6 +1100,8 @@ function renderFunctionBlock(league, wrapper, parserMap) {
   body += `${summary}\n\n`;
   body += `**Endpoint URL:** \`GET ${host}${httpPath}\`\n\n`;
   body += deprecatedNote(aliasesOf(ALIASES.espn[league.prefix], snake));
+  const pyNote = pyHandwrittenNote(league, wrapper);
+  if (pyNote) body += `> **Note:** ${pyNote}\n\n`;
 
   // Param table: API param | JS | required | description. Path + query params,
   // plus the universal `parsed` control param. The API-param cell is always

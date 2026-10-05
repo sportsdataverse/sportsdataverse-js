@@ -9439,6 +9439,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "client_config",
+    "legacyShort": "client_configuration",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9509,6 +9510,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "division_subdivisions",
+    "legacyShort": "sub_divisions",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9676,6 +9678,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_boxscore",
+    "legacyShort": "boxscore",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9745,6 +9748,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_featured",
+    "legacyShort": "featured_game",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9819,6 +9823,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_odds_hq",
+    "legacyShort": "game_hq_odds",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9851,6 +9856,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_probable_players",
+    "legacyShort": "probable_players",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -9929,6 +9935,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_ruwt_highlights",
+    "legacyShort": "ruwt_highlights",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10153,6 +10160,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "game_weather",
+    "legacyShort": "weather",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10334,6 +10342,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_depth_charts",
+    "legacyShort": "depth_charts",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10458,6 +10467,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_hockey_meta",
+    "legacyShort": "hockey_player_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10495,6 +10505,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_meta_baseball",
+    "legacyShort": "baseball_player_meta",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10511,6 +10522,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_meta_golf",
+    "legacyShort": "player_golf_metadata",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10548,6 +10560,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_position_rankings",
+    "legacyShort": "position_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10606,6 +10619,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "player_recruit_associations",
+    "legacyShort": "recruit_team_associations",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -10986,6 +11000,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_rankings_sportsline",
+    "legacyShort": "sports_line_team_rankings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",
@@ -11068,6 +11083,7 @@ export const FLAT_WRAPPERS: WrapperDef[] = [
   },
   {
     "short": "team_standings_sportsline",
+    "legacyShort": "sports_line_team_standings",
     "flat": true,
     "api": "cbs",
     "host": "https://api.cbssports.com/napi",

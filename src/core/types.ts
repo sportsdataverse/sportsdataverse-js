@@ -74,6 +74,13 @@ export interface WrapperDef {
    */
   publicName?: string;
   /**
+   * Flat only: the short JS used before v4 when it differs from `short` (CBS:
+   * `boxscore` for `game_boxscore`). Lookups by short (playground share links,
+   * the docs proxy) accept it; code matching `FLAT_WRAPPERS[].short` should
+   * match `short` or `legacyShort`.
+   */
+  legacyShort?: string;
+  /**
    * ESPN URL family slug (keys into `HOSTS`). Present on every ESPN wrapper;
    * omitted on flat-API wrappers (`flat: true`), which carry an absolute `host`.
    */

@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import endpoints from '@site/src/playground/endpoints.json';
-import { resolveUrl, resolveFlatUrl } from '@site/src/playground/resolve.mjs';
+import { resolveUrl, resolveFlatUrl, findFlatDef } from '@site/src/playground/resolve.mjs';
 import { parseEndpoint } from '@site/src/playground/parsers.bundle.mjs';
 import { EXAMPLES, examplesBySport } from '@site/src/playground/examples.js';
 import styles from './styles.module.css';
@@ -93,8 +93,8 @@ function selectDef(league, id) {
   if (!id) return null;
   if (id.startsWith('flat:')) {
     const [, api, short] = id.split(':');
-    const def = FLAT_APIS.find((e) => e.api === api && e.short === short);
-    return def ? { kind: 'flat', def, api, short } : null;
+    const def = findFlatDef(FLAT_APIS, api, short); // accepts a pre-v4 short too
+    return def ? { kind: 'flat', def, api, short: def.short } : null;
   }
   const short = id.slice('espn:'.length);
   const def = espnEndpointsFor(league).find((e) => e.short === short);
@@ -133,6 +133,14 @@ function defaultParams(fields) {
 
 const CONTROL_KEYS = new Set(['l', 'e', 'parsed', 'section']);
 
+/** A pre-v4 flat share-link id (`flat:cbs:boxscore`) rewritten to its v4 id, so the picker matches. */
+function canonicalSelId(id) {
+  if (!id || !id.startsWith('flat:')) return id;
+  const [, api, short] = id.split(':');
+  const def = findFlatDef(FLAT_APIS, api, short);
+  return def ? flatId(api, def.short) : id;
+}
+
 /** Read initial state from the URL querystring (?l=&e=&parsed=&section=&<params>). */
 function readUrlState() {
   if (typeof window === 'undefined') return null;
@@ -142,7 +150,7 @@ function readUrlState() {
   for (const [k, v] of q.entries()) if (!CONTROL_KEYS.has(k)) params[k] = v;
   return {
     prefix: q.get('l') || 'nba',
-    selId: q.get('e') || espnId('scoreboard'),
+    selId: canonicalSelId(q.get('e')) || espnId('scoreboard'),
     parsed: q.get('parsed') === '1',
     section: q.get('section') || null,
     params,

@@ -1,7 +1,7 @@
 import React from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import endpoints from '@site/src/playground/endpoints.json';
-import { resolveUrl, resolveFlatUrl } from '@site/src/playground/resolve.mjs';
+import { resolveUrl, resolveFlatUrl, findFlatDef } from '@site/src/playground/resolve.mjs';
 import { parseEndpoint } from '@site/src/playground/parsers.bundle.mjs';
 import styles from './styles.module.css';
 
@@ -78,9 +78,9 @@ function resolveSelection(league, endpoint) {
   if (!endpoint) return { error: 'RunCell: missing `endpoint` prop.' };
   if (endpoint.startsWith('flat:')) {
     const [, api, short] = endpoint.split(':');
-    const def = FLAT_APIS.find((e) => e.api === api && e.short === short);
+    const def = findFlatDef(FLAT_APIS, api, short); // accepts a pre-v4 short too
     if (!def) return { error: `RunCell: unknown flat endpoint "${endpoint}".` };
-    return { kind: 'flat', def, api, short };
+    return { kind: 'flat', def, api, short: def.short };
   }
   const short = endpoint.startsWith('espn:') ? endpoint.slice('espn:'.length) : endpoint;
   const lg = endpoints.leagues.find((l) => l.prefix === league);
